@@ -126,8 +126,8 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String EXO_DOCUMENT = "exo:document";
   private static final String EXO_USER_PREFFERENCES = "exo:userPrefferences";
   private static final String EXO_PREFFERED_EDITOR = "exo:prefferedEditor";
-  private static final String EXO_CURRENT_PROVIDER_PROP = "exo:currentProvider";
-  private static final String EXO_EDITORS_RUNTIME_ID_PROP = "exo:editorsId";
+  private static final String EXO_CURRENT_PROVIDER = "exo:currentProvider";
+  private static final String EXO_EDITORS_RUNTIME_ID = "exo:editorsId";
   public static final String CURRENT_STATE_PROP = "publication:currentState";
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
@@ -683,11 +683,11 @@ public class DocumentServiceImpl implements DocumentService {
           node.addMixin(EXO_DOCUMENT);
         }
         String previousProvider = null;
-        if (node.hasProperty(EXO_CURRENT_PROVIDER_PROP)) {
-          previousProvider = node.getProperty(EXO_CURRENT_PROVIDER_PROP).getString();
+        if (node.hasProperty(EXO_CURRENT_PROVIDER)) {
+          previousProvider = node.getProperty(EXO_CURRENT_PROVIDER).getString();
         }
-        node.setProperty(EXO_CURRENT_PROVIDER_PROP, provider);
-        node.setProperty(EXO_EDITORS_RUNTIME_ID_PROP, editorsRuntimeId);
+        node.setProperty(EXO_CURRENT_PROVIDER, provider);
+        node.setProperty(EXO_EDITORS_RUNTIME_ID, editorsRuntimeId);
         node.save();
         if (previousProvider != null && provider == null) {
           try {
@@ -709,27 +709,24 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
-    Node systemNode = systemSession.getNodeByUUID(uuid);
-    String provider = systemNode.hasProperty(EXO_CURRENT_PROVIDER_PROP) ? systemNode.getProperty(EXO_CURRENT_PROVIDER_PROP)
-                                                                                    .getString()
-                                                                        : null;
-    String currentEditorsId =
-                            systemNode.hasProperty(EXO_EDITORS_RUNTIME_ID_PROP) ? systemNode.getProperty(EXO_EDITORS_RUNTIME_ID_PROP).getString()
-                                                                        : null;
-    if (editorsRuntimeId.equals(currentEditorsId)) {
+    Node node = systemSession.getNodeByUUID(uuid);
+    String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
+    String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
+                                                                       : null;
+    if (editorsRuntimeId.equals(currentRuntumeId)) {
       return provider;
     } else {
-      String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
+      String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
       WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
         Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
         Node tagetNode = session.getNodeByUUID(uuid);
-        invokeWithLockToken(tagetNode, (node) -> {
-          if (node.canAddMixin(EXO_DOCUMENT)) {
-            node.addMixin(EXO_DOCUMENT);
+        invokeWithLockToken(tagetNode, (document) -> {
+          if (document.canAddMixin(EXO_DOCUMENT)) {
+            document.addMixin(EXO_DOCUMENT);
           }
-          node.setProperty(EXO_CURRENT_PROVIDER_PROP, (String) null);
-          node.setProperty(EXO_EDITORS_RUNTIME_ID_PROP, editorsRuntimeId);
-          node.save();
+          document.setProperty(EXO_CURRENT_PROVIDER, (String) null);
+          document.setProperty(EXO_EDITORS_RUNTIME_ID, editorsRuntimeId);
+          document.save();
         });
       });
       return null;
