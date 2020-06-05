@@ -10,6 +10,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.social.plugin.doc.UIDocViewer;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
+import org.exoplatform.social.webui.activity.UILinkActivity;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;

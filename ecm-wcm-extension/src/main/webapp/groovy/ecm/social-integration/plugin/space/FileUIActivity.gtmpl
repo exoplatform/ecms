@@ -42,7 +42,7 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
-import org.exoplatform.wcm.ext.component.activity.UILinkUtil;
+import org.exoplatform.social.webui.activity.UILinkUtil;
 
 
 //ECMS import END

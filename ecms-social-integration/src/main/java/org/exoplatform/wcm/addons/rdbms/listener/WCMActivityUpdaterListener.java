@@ -10,7 +10,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
-import org.exoplatform.wcm.ext.component.activity.UILinkActivity;
+import org.exoplatform.social.webui.activity.UILinkActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 
 public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, String> {

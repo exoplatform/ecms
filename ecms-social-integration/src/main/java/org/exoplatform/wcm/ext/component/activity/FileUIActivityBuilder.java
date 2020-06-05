@@ -33,6 +33,7 @@ import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.storage.ActivityStorageException;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.social.webui.activity.BaseUIActivityBuilder;
+import org.exoplatform.social.webui.activity.UILinkActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,11 +58,11 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
     }
 
     Map<String, String> templateParams = activity.getTemplateParams();
-    fileActivity.setLinkSource(templateParams.get(UILinkActivityComposer.LINK_PARAM));
-    fileActivity.setLinkTitle(templateParams.get(UILinkActivityComposer.TITLE_PARAM));
-    fileActivity.setLinkImage(templateParams.get(UILinkActivityComposer.IMAGE_PARAM));
-    fileActivity.setLinkDescription(templateParams.get(UILinkActivityComposer.DESCRIPTION_PARAM));
-    fileActivity.setEmbedHtml(templateParams.get(UILinkActivityComposer.HTML_PARAM));    ;
+    fileActivity.setLinkSource(templateParams.get(UILinkActivity.LINK_PARAM));
+    fileActivity.setLinkTitle(templateParams.get(UILinkActivity.TITLE_PARAM));
+    fileActivity.setLinkImage(templateParams.get(UILinkActivity.IMAGE_PARAM));
+    fileActivity.setLinkDescription(templateParams.get(UILinkActivity.DESCRIPTION_PARAM));
+    fileActivity.setEmbedHtml(templateParams.get(UILinkActivity.HTML_PARAM));    ;
     patternLink = Pattern.compile(HTML_A_HREF_TAG_PATTERN);
     // set data into the UI component of activity
     if (activity.getTemplateParams() != null) {
@@ -75,8 +76,8 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
     // org.exoplatform.social.plugin.doc.UIDocActivityComposer.docActivityTitle.
     // So we couldn't set activity.getTitle() all the time, see INTEG-486
     if (activity.getTemplateParams() != null
-        && StringUtils.isNotBlank(templateParams.get(UILinkActivityComposer.COMMENT_PARAM))) {
-      fileActivity.setMessage(templateParams.get(UILinkActivityComposer.COMMENT_PARAM));
+        && StringUtils.isNotBlank(templateParams.get(UILinkActivity.COMMENT_PARAM))) {
+      fileActivity.setMessage(templateParams.get(UILinkActivity.COMMENT_PARAM));
     } else if (activity.getTemplateParams() != null
         && StringUtils.isNotBlank(activity.getTemplateParams().get(FileUIActivity.ACTIVITY_STATUS))
         || (!patternLink.matcher(activity.getTitle()).find())) {
@@ -122,16 +123,16 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
       JSONObject jsonObj = new JSONObject(activity.getTitle());
 
       StringBuilder linkTitle = new StringBuilder("Shared a link:");
-      linkTitle.append(" <a href=\"${").append(UILinkActivityComposer.LINK_PARAM).append("}\">${")
-              .append(UILinkActivityComposer.TITLE_PARAM).append("} </a>");
+      linkTitle.append(" <a href=\"${").append(UILinkActivity.LINK_PARAM).append("}\">${")
+              .append(UILinkActivity.TITLE_PARAM).append("} </a>");
       activity.setTitle(linkTitle.toString());
 
       Map<String, String> templateParams = new HashMap<String, String>();
-      templateParams.put(UILinkActivityComposer.LINK_PARAM, jsonObj.getString(UILinkActivityComposer.LINK_PARAM));
-      templateParams.put(UILinkActivityComposer.TITLE_PARAM, jsonObj.getString(UILinkActivityComposer.TITLE_PARAM));
-      templateParams.put(UILinkActivityComposer.IMAGE_PARAM, jsonObj.getString(UILinkActivityComposer.IMAGE_PARAM));
-      templateParams.put(UILinkActivityComposer.DESCRIPTION_PARAM, jsonObj.getString(UILinkActivityComposer.DESCRIPTION_PARAM));
-      templateParams.put(UILinkActivityComposer.COMMENT_PARAM, jsonObj.getString(UILinkActivityComposer.COMMENT_PARAM));
+      templateParams.put(UILinkActivity.LINK_PARAM, jsonObj.getString(UILinkActivity.LINK_PARAM));
+      templateParams.put(UILinkActivity.TITLE_PARAM, jsonObj.getString(UILinkActivity.TITLE_PARAM));
+      templateParams.put(UILinkActivity.IMAGE_PARAM, jsonObj.getString(UILinkActivity.IMAGE_PARAM));
+      templateParams.put(UILinkActivity.DESCRIPTION_PARAM, jsonObj.getString(UILinkActivity.DESCRIPTION_PARAM));
+      templateParams.put(UILinkActivity.COMMENT_PARAM, jsonObj.getString(UILinkActivity.COMMENT_PARAM));
       activity.setTemplateParams(templateParams);
 
       CommonsUtils.getService(ActivityManager.class).saveActivityNoReturn(activity);

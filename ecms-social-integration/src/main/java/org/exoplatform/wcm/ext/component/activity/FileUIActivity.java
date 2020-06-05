@@ -66,6 +66,7 @@ import org.exoplatform.social.core.storage.SpaceStorageException;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.social.webui.activity.UIActivitiesContainer;
+import org.exoplatform.social.webui.activity.UILinkUtil;
 import org.exoplatform.social.webui.composer.PopupContainer;
 import org.exoplatform.web.CacheUserProfileFilter;
 import org.exoplatform.web.application.JavascriptManager;
