@@ -172,15 +172,19 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
-   * The Class EditorsContext.
+   * The Class EditorsContext holds information about current opened editons (cometd subsriptions).
+   * Keeps closed editor timers (created when the last editor closed) that will be executed after the timeout.
    */
   static class EditorsContext {
 
     /** The clients map. The key is session id, the value - client info. */
-    private ConcurrentHashMap<String, ClientInfo>           clients   = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, ClientInfo>           clients            = new ConcurrentHashMap<>();
 
     /** The providers map. The key is fileId, value - Map<Strig provider, Integer count opened editors> */
-    private ConcurrentHashMap<String, Map<String, Integer>> providers = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, Map<String, Integer>> providers          = new ConcurrentHashMap<>();
+
+    /** The closed editors. The key is client info, value - timer with task (setCurrentProvider to null) */
+    private ConcurrentHashMap<ClientInfo, Timer>            closedEditorTimers = new ConcurrentHashMap<>();
 
     /**
      * Adds the client.
@@ -231,6 +235,35 @@ public class CometdDocumentsService implements Startable {
         return providers.get(fileId).get(provider);
       }
       return 0;
+    }
+
+    /**
+     * Cancel closed editor timer.
+     *
+     * @param fileId the file id
+     * @param workspace the workspace
+     * @param provider the provider
+     */
+    public void cancelClosedEditorTimer(String fileId, String workspace, String provider) {
+      ClientInfo clientInfo = new ClientInfo(fileId, workspace, provider);
+      Timer timer = closedEditorTimers.get(clientInfo);
+      if (timer != null) {
+        timer.cancel();
+        closedEditorTimers.remove(clientInfo);
+      }
+    }
+
+    /**
+     * Sets the closed editor timer.
+     *
+     * @param fileId the file id
+     * @param workspace the workspace
+     * @param provider the provider
+     * @param timer the timer
+     */
+    public void saveClosedEditorTimer(String fileId, String workspace, String provider, Timer timer) {
+      ClientInfo clientInfo = new ClientInfo(fileId, workspace, provider);
+      closedEditorTimers.put(clientInfo, timer);
     }
   }
 
@@ -288,6 +321,54 @@ public class CometdDocumentsService implements Startable {
       return fileId;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((fileId == null) ? 0 : fileId.hashCode());
+      result = prime * result + ((provider == null) ? 0 : provider.hashCode());
+      result = prime * result + ((workspace == null) ? 0 : workspace.hashCode());
+      return result;
+    }
+
+    /**
+     * Equals.
+     *
+     * @param obj the obj
+     * @return true, if successful
+     */
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      ClientInfo other = (ClientInfo) obj;
+      if (fileId == null) {
+        if (other.fileId != null)
+          return false;
+      } else if (!fileId.equals(other.fileId))
+        return false;
+      if (provider == null) {
+        if (other.provider != null)
+          return false;
+      } else if (!provider.equals(other.provider))
+        return false;
+      if (workspace == null) {
+        if (other.workspace != null)
+          return false;
+      } else if (!workspace.equals(other.workspace))
+        return false;
+      return true;
+    }
+
   }
 
   /**
@@ -319,6 +400,7 @@ public class CometdDocumentsService implements Startable {
         if (provider != null) {
           String fileId = channelId.substring(channelId.lastIndexOf("/") + 1);
           editorsContext.addClient(sessionId, fileId, provider, workspace);
+          editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
         }
         if (LOG.isDebugEnabled()) {
           LOG.debug(">> Subscribed: provider: " + provider + ", session:" + sessionId + " (" + exoContainerName + "@"
@@ -346,12 +428,14 @@ public class CometdDocumentsService implements Startable {
           if (editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
             try {
               DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-              new Timer().schedule(new TimerTask() {
+              // Postpone reseting current editor provider for specified delay
+              Timer timer = new Timer();
+              timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                   try {
                     String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-                    if (currentProvider != null && editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
+                    if (currentProvider != null) {
                       service.setCurrentDocumentProvider(fileId, workspace, null);
                       service.sendLastEditorClosedEvent(fileId, provider);
                       if (LOG.isDebugEnabled()) {
@@ -360,11 +444,11 @@ public class CometdDocumentsService implements Startable {
                       }
                     }
                   } catch (RepositoryException e) {
-                    LOG.error("Cannot reset current editor provider for fileId: " + fileId + " workspace: " + workspace, e);
-                    return;
+                    LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
                   }
                 }
               }, editorProvider.getEditingFinishedDelay());
+              editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
             } catch (DocumentEditorProviderNotFoundException e) {
               LOG.error("Cannot find {} editor provider. {}", provider, e.getMessage());
             }
