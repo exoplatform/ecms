@@ -140,18 +140,18 @@ public class DocumentServiceImpl implements DocumentService {
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
   private final List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
   private final List<DocumentEditorProvider> unmodifiebleEditorProviders = Collections.unmodifiableList(editorProviders);
-  private ManageDriveService manageDriveService;
-  private Portal portal;
-  private SessionProviderService sessionProviderService;
-  private RepositoryService repoService;
-  private NodeHierarchyCreator nodeHierarchyCreator;
-  private LinkManager linkManager;
-  private PortalContainerInfo portalContainerInfo;
-  private Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
-  private OrganizationService organizationService;
-  private SettingService settingService;
-  private IdentityManager identityManager;
-  private String editorsRuntimeId;
+  private final ManageDriveService manageDriveService;
+  private final Portal portal;
+  private final SessionProviderService sessionProviderService;
+  private final RepositoryService repoService;
+  private final NodeHierarchyCreator nodeHierarchyCreator;
+  private final LinkManager linkManager;
+  private final PortalContainerInfo portalContainerInfo;
+  private final Map<String, DocumentMetadataPlugin> metadataPlugins = new HashMap<>();
+  private final OrganizationService organizationService;
+  private final SettingService settingService;
+  private final IdentityManager identityManager;
+  private final String editorsRuntimeId;
 
   /**
    * Instantiates a new {@link DocumentService} implementation.
