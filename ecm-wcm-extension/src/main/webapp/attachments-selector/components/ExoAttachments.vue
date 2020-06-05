@@ -13,7 +13,7 @@
         <v-progress-linear :active="cloudDriveConnecting" absolute bottom indeterminate></v-progress-linear>
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
-        <div v-show="!showDocumentSelector && privateFilesAttached" class="alert alert-info attachmentsAlert">
+        <div v-show="!showDocumentSelector && privateFilesAttached && isActivityStream" class="alert alert-info attachmentsAlert">
           <span>{{ $t('attachments.alert.personalFiles') }}</span>
           <span>{{ $t('attachments.alert.everyoneAvailable') }}</span>
         </div>
@@ -208,7 +208,8 @@ export default {
       showAttachmentsDrawer: false,
       displayMessageDestinationFolder: true,
       cloudDriveConnecting: false,
-      privateFilesAttached: false
+      privateFilesAttached: false,
+      isActivityStream: true
     };
   },
   watch: {
@@ -303,7 +304,7 @@ export default {
           uploadProgress: 0,
           destinationFolder: this.pathDestinationFolder,
           pathDestinationFolderForFile:'',
-          isPublic: false
+          isPublic: true
         });
       });
 
@@ -480,12 +481,14 @@ export default {
           this.schemaFolder.push(space.displayName);
           this.schemaFolder.push('Activity Stream Documents');
           this.showDestinationPath=true;
+          this.isActivityStream = false;
         });
       }else {
         this.schemaFolder.push(eXo.env.portal.userName);
         this.schemaFolder.push('Public');
         this.schemaFolder.push('Activity Stream Documents');
         this.showDestinationPath=true;
+        this.isActivityStream = true;
       }
     },
     deleteDestinationFolderForFile(fileName){
@@ -493,6 +496,7 @@ export default {
         if(this.value[i].name === fileName){
           this.value[i].showDestinationFolderForFile = '';
           this.value[i].pathDestinationFolderForFile = '';
+          this.value[i].isPublic = true;
           break;
         }
       }
