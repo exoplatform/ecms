@@ -346,15 +346,44 @@
               '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
             '</div>';
         }
-        html += '<div class="showComments-lg">' +
-            '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.commentsLabel}</a>' +
-            '</div>' +
-            '<div class="openBtn">' +
-            '<a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-            '</div>' +
-            '<div class="downloadBtn">' +
-            '<a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-            '</div>';
+        html +='<div class="btn-group">' +
+            '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
+            '    <i class="uiVerticalDots"></i></button>' +
+            '    <ul class="dropdown-menu" role="menu">' +
+            '      <li><div class="openBtn">' +
+            '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
+            '                </div></li>' +
+            '      <li><div class="downloadBtn">' +
+            '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+            '                </div></li>' +
+            '    </ul>' +
+            '  </div>';
+        if (this.settings.showComments) {
+          html += '<div class="showComments">' +
+              '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
+              '</div>';
+        };
+        if(documentPreview.settings.doc && documentPreview.settings.doc.breadCrumb) {
+          var breadCrumbContent = '<div class="ellipsis-reverse-content hidden">...</div><div class="ellipsis-reverse-apply"><div class="ellipsis-reverse-apply-content">';
+          var folderIndex = 0;
+          var breadCrumbContentTooltip = "";
+          for (var folderName in documentPreview.settings.doc.breadCrumb) {
+            if (documentPreview.settings.doc.breadCrumb.hasOwnProperty(folderName)) {
+              var folderPath = documentPreview.settings.doc.breadCrumb[folderName];
+              if(folderIndex > 0) {
+                breadCrumbContent += '&nbsp;<i class="uiIconArrowRight"></i>&nbsp;';
+                breadCrumbContentTooltip += " > ";
+              }
+              breadCrumbContent += '<a href="' + folderPath + '" onclick="event.stopPropagation();window.location.href=this.href">' + XSSUtils.escapeHtml(folderName) + '</a>';
+              breadCrumbContentTooltip += folderName;
+              folderIndex++;
+            }
+          }
+          breadCrumbContent += '</div></div>';
+        }
+        if(breadCrumbContent) {
+          html += '<div class="breadCrumb ellipsis-reverse" data-container="body" rel="tooltip" data-placement="top" title="' + breadCrumbContentTooltip + '">' + breadCrumbContent + '</div>';
+        }
         docPreviewContainer.find(".previewBtn").html(html);
 
       } else {
@@ -483,9 +512,6 @@
                 if (this.settings.showComments) {
                   html += '<div class="showComments">' +
                       '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
-                      '</div>' +
-                      '<div class="showComments-lg">' +
-                      '<a><i class="uiIconComment uiIconWhite hiddenComment"></i>&nbsp;${UIActivity.comment.commentsLabel}</a>' +
                       '</div>';
                 }
         if(documentPreview.settings.doc && documentPreview.settings.doc.breadCrumb) {
@@ -979,15 +1005,6 @@
         });
   
         if(this.settings.showComments) {
-          // Bind expanded/collapsed event
-          var uiDocumentPreview = $('#uiDocumentPreview');
-          $('.showComments-lg', uiDocumentPreview).click(function() {
-            uiDocumentPreview.toggleClass("collapsed");
-            $('.uiIconComment').toggleClass("hiddenComment");
-            $('.fileName').toggleClass("hidden");
-            resizeEventHandler();
-          });
-
           if(this.settings.activity.id != null) {
             // render like link and nb of likes
             this.refreshLikeLink();
@@ -1228,7 +1245,7 @@
 
   // Resize Event
   var resizeEventHandler = function() {
-    var pdfDisplayAreaHeight = window.innerHeight - 50 - ((documentPreview.settings.doc.fileInfo || documentPreview.settings.doc.breadCrumb) ? 55 : 0);
+    var pdfDisplayAreaHeight = window.innerHeight - 70 - ((documentPreview.settings.doc.fileInfo || documentPreview.settings.doc.breadCrumb) ? 55 : 0);
     var $uiDocumentPreview = $('#uiDocumentPreview');
 
     // Show empty preview message
@@ -1242,11 +1259,9 @@
     // Show Next & previous buttons inside resizable div
     if($uiDocumentPreview.find("#NavCommands").length == 0) {
       if(documentPreview.settings.activity.next || documentPreview.settings.activity.previous) {
-        $blockToAppendTo.append('<div id="NavCommands">' +
-             '<div class="arrowPrevious ' + (documentPreview.settings.activity.previous ? '' : 'disabled') + '" onclick="documentPreview.goToPrevious()"  rel="tooltip" data-placement="top" title="${UIActivity.label.Previous}"><span></span></div>' +
-             '<div class="arrowNext ' + (documentPreview.settings.activity.next ? '' : 'disabled') + '" onclick="documentPreview.goToNext()" rel="tooltip" data-placement="top" title="${UIActivity.label.Next}"><span></span></div>' +
-          '</div>'
-        );
+        $blockToAppendTo.find(".fileContent").before('<div id="NavCommands">' +
+            '<div class="arrowPrevious ' + (documentPreview.settings.activity.previous ? '' : 'disabled') + '" onclick="documentPreview.goToPrevious()"  rel="tooltip" data-placement="top" title="${UIActivity.label.Previous}"><span></span></div>').after('<div id="NavCommands">' +
+            '<div class="arrowNext ' + (documentPreview.settings.activity.next ? '' : 'disabled') + '" onclick="documentPreview.goToNext()" rel="tooltip" data-placement="top" title="${UIActivity.label.Next}"><span></span></div>');
       }
     }
     applyReverseEllipsis($uiDocumentPreview);

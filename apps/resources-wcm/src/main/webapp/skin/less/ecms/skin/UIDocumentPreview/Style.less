@@ -453,10 +453,18 @@
                     background: gray;
                 }
                 > .arrowPrevious {
-                    text-align: inherit;
+					text-align: inherit;
+					position: absolute;
+					width: 3%;
+					top: 50%;
+					left: 0%;
                 }
                 > .arrowNext {
                     text-align: end;
+					position: absolute;
+					width: 3%;
+					top: 50%;
+					left: 96%;
                 }
                 > .fileTitle {
                     text-align: center;
@@ -526,6 +534,8 @@
       background: white;
 		}
 		.fileContent {
+			width: 90%;
+			margin: auto;
 			.title {
 			  display:  none;
 			  visibility: hidden;
@@ -659,7 +669,7 @@
 				.btn {
 					background-color: black;
 					border: none;
-					padding-top: 2px;
+					padding-top: 6px;
 					&:focus {
 						outline: none!important;
 					}
@@ -709,6 +719,7 @@
 			}
 			.breadCrumb {
 				float: left;
+				height: 30px;
 			}
 			.showComments {
 				display: none;
