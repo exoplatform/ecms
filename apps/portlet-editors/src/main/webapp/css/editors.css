@@ -50,14 +50,15 @@
 
 .previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle {
   background: none;
-  border-color: gray;
 }
 
-.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle {
+.editorButtonContainer .dropdown-container .dropdown-toggle,
+.editorButtonContainer .dropdown-container .dropdown-toggle:hover i {
   background: none;
+  color: white;
 }
-.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle:focus {
-  background-color: #323232;
+.editorButtonContainer .dropdown-container .dropdown-toggle span {
+  margin: 0 3px;
 }
 
 .previewBtn .editorButtonContainer i {
@@ -136,12 +137,9 @@
 }
 
 #UIActionBar .editorButtonContainer {
-  margin: 8px 3px 0px 3px;
+  margin: 7px 3px 0px 3px;
 }
 
-#UIActionBar i.uiIconEcmsOfficeOnlineOpen {
-  margin-right: 2px;
-}
 #UIActionBar .dropdown-container {
   margin-left: 2px;
 }
@@ -150,18 +148,10 @@
   flex-shrink: 0;
 }
 
-#UIActionBar .editorButtonContainer > .editorButton a {
-  color: white;
-}
-
 #UIActionBar .editorButtonContainer .dropdown-container .dropdown-toggle:focus {
   background: none;
 }
 
 .actionBar .disabledProvider a:hover {
   color: #999999 !important;
-}
-
-#UIActionBar .editorButtonContainer > .editorButton.disabledProvider a {
-  color: #dbdbdb !important;
 }
