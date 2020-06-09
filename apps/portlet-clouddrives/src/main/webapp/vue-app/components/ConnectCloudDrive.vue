@@ -72,8 +72,6 @@ export default {
           title: data.name,
           isSelected: false,
         };
-        // init cloudDrive module after response from getUserDrive
-        cloudDrive.init(data.workspace, data.homePath);
         this.providers = cloudDrive.getProviders();
       } catch (err) {
         notifyError(this.$t(err.message));

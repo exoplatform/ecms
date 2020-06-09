@@ -103,6 +103,9 @@
       <path>/js/clouddrives-app.bundle.js</path>
     </script>
     <depends>
+      <module>cloudDrive</module>
+    </depends>
+    <depends>
       <module>vue</module>
     </depends>
     <depends>
@@ -113,9 +116,6 @@
     </depends>
     <depends>
       <module>extensionRegistry</module>
-    </depends>
-    <depends>
-      <module>cloudDrive</module>
     </depends>
     <depends>
       <module>cloudDriveUtils</module>
