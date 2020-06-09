@@ -104,7 +104,7 @@
             path: this.document.nodePath || this.document.path,
             title: this.document.title,
             downloadUrl: this.document.downloadUrl,
-            openUrl: this.document.url,
+            openUrl: this.document.url || this.document.openUrl,
             breadCrumb: this.document.previewBreadcrumb,
             fileInfo: this.fileInfo()
           },
