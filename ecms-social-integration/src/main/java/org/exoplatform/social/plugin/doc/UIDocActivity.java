@@ -106,6 +106,8 @@ public class UIDocActivity extends BaseUIActivity {
   public static final String DOCUMENT_VERSION   = "docVersion";  
   public static final String DOCUMENT_SUMMARY   = "docSummary";
   public static final String IS_SYMLINK         = "isSymlink";
+  public static final String REPOSITORY_NAME = "repository";
+  public static final String WORKSPACE_NAME = "collaboration";
   
   public String docLink;
   public String message;
@@ -134,8 +136,8 @@ public class UIDocActivity extends BaseUIActivity {
     return new StringBuffer().append("/").append(portalContainerName).
                                append("/").append(restContextName).
                                append("/thumbnailImage/big").
-                               append("/").append(UIDocActivityComposer.REPOSITORY).
-                               append("/").append(UIDocActivityComposer.WORKSPACE).
+                               append("/").append(REPOSITORY_NAME).
+                               append("/").append(WORKSPACE_NAME).
                                append(docPath).toString();
   }
   
