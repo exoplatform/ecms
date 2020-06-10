@@ -243,7 +243,7 @@ public class FileUIActivity extends BaseUIActivity{
     // To get real file name instead
     try {
       contentName = (activityFileAttachment == null
-          || activityFileAttachment.getContentNode() == null) ? null : URLDecoder.decode(activityFileAttachment.getContentNode().getProperty("exo:title").getString(), "UTF-8");
+          || activityFileAttachment.getContentNode() == null) ? null : (activityFileAttachment.getContentNode().hasProperty("exo:title")) ? URLDecoder.decode(activityFileAttachment.getContentNode().getProperty("exo:title").getString(), "UTF-8") : URLDecoder.decode(activityFileAttachment.getContentName(), "UTF-8");
       if (StringUtils.isBlank(contentName)) {
         contentName = URLDecoder.decode(activityFileAttachment.getContentName(), "UTF-8");
       }

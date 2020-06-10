@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 import java.util.*;
 
 import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.jcr.Value;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -148,7 +150,7 @@ public class FileUIActivityTest {
     activityParameters.put("REPOSITORY", "repository");
     activityParameters.put("WORKSPACE", "collaboration");
     activityParameters.put("DOCPATH", "/sites/intranet/web contents/site artifacts/announcements/test1.txt");
-    
+
     NodeLocation nodeLocationWithoutUUID = new NodeLocation("repository", "collaboration","/sites/intranet/web contents/site artifacts/announcements/test1.txt",null );
     NodeLocation nodeLocationWithUUID = new NodeLocation("repository", "collaboration","/sites/intranet/web contents/site artifacts/announcements/test1.txt","c036fb997f0001016364ca764f61b4d1" );
 
@@ -176,9 +178,34 @@ public class FileUIActivityTest {
     Mockito.doReturn(driveData).when(fileUIActivity).getDocDrive(0);
     Mockito.when(trashService.isInTrash(file1)).thenReturn(false);
 
+    Property titleProperty = Mockito.mock(Property.class);
+    Value titleValue = Mockito.mock(Value.class);
+
+    ActivityFileAttachment fileAttachment= new ActivityFileAttachment();
+    fileAttachment.setContentName(file1.getName());
+    fileAttachment.setNodeLocation(nodeLocationWithUUID);
+
+    Node contentNode = NodeLocation.getNodeByLocation(fileAttachment.getNodeLocation());
     fileUIActivity.setUIActivityData(activityParameters);
+    fileUIActivity.setContentNode(contentNode,0);
+    fileUIActivity.setContentName(fileAttachment.getContentName(),0);
 
     assertEquals(1,fileUIActivity.getFilesCount());
-    
+
+    //Test when the file doesn't have an exo:title property
+    when(file1.hasProperty("exo:title")).thenReturn(false);
+
+    assertEquals("test1.txt", fileUIActivity.getContentName(0));
+
+    Mockito.when(titleValue.getString()).thenReturn("text");
+    Mockito.when(titleProperty.getValue()).thenReturn(titleValue);
+
+    //Test when the file has an exo:title property
+    when(file1.hasProperty("exo:title")).thenReturn(true);
+    when(file1.getProperty("exo:title")).thenReturn(titleProperty);
+    when(file1.getProperty("exo:title").getString()).thenReturn("text");
+
+    assertEquals("text", fileUIActivity.getContentName(0));
+
   }
 }
