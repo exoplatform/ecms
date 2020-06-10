@@ -778,11 +778,13 @@
             return null;
         };
 
-        var synchronize = function(nodeWorkspace, nodePath) {
-            currentNode = contextNode;
+        var synchronize = function(nodeWorkspace, nodePath, currentNode, syncProcessFn) {
             var process = $.Deferred();
 
             var initiator = $.Deferred();
+            if (syncProcessFn) {
+                syncProcessFn(process.promise());
+            }
             initiator.done(function() {
                 // sync only if drive connected
                 if (contextDrive.connected) {
@@ -957,15 +959,20 @@
         /**
          * Synchronize documents view.
          */
-        this.synchronize = function(elem, objectId) {
+        this.synchronize = function(elem, objectId, refreshFn, currentNode, syncProcessFn) {
+            if (!currentNode) {
+                currentNode = contextNode;
+            }
             if (contextDrive) {
                 var nodePath = contextDrive.path;
                 var nodeWorkspace = contextDrive.workspace;
                 utils.log("Synchronizing Cloud Drive on " + nodeWorkspace + ":" + nodePath);
-                return synchronize(nodeWorkspace, nodePath);
+                return synchronize(nodeWorkspace, nodePath, currentNode, syncProcessFn);
             } else {
                 utils.log("WARN Nothing to synchronize!");
-                return null;
+                if (refreshFn) {
+                    refreshFn();
+                }
             }
         };
 

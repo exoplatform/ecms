@@ -5,12 +5,8 @@
 	var NODE_NOT_FOUND = "node-not-found";
 
 	function CloudDrivesDms() {
-		var self = this;
-
 		// Node workspace and path currently open in ECMS explorer view
 		var currentNode;
-		
-		var updateProvider;
 
 		/**
 		 * Initialize provider for later operations.
@@ -32,13 +28,7 @@
 		};
 
 		this.synchronize = function(elem, objectId) {
-			const sync = cloudDrives.synchronize(elem, objectId);
-			if (!sync) {
-				// refresh WCM explorer
-				cloudDriveUI.refreshDocuments();
-			} else {
-				return sync;
-			}
+			cloudDrives.synchronize(elem, objectId, cloudDriveUI.refreshDocuments, currentNode, cloudDriveUI.synchronizeProcess);
 		};
 
 		var getDocument = function(workspace, path) {
@@ -233,7 +223,7 @@
 
 		var initContextMenu = function(menu, items, allowedItems) {
 			var menuItems = items.split(",");
-			var drive = cloudDriveDms.getContextDrive();
+			var drive = cloudDrivesDms.getContextDrive();
 			if (drive) {
 				// branded icons in context menu
 				$("i.uiIconEcmsRefreshCloudDrive, i.uiIconEcmsOpenCloudFile, i.uiIconEcmsPushCloudFile").each(function() {
@@ -270,7 +260,7 @@
 					if (!text) {
 						text = $(this).text();
 						$(this).data("cd-action-prefix", text).click(function() {
-							cloudDriveDms.openFile();
+							cloudDrivesDms.openFile();
 							uiFileView.UIFileView.clearCheckboxes();
 						});
 					}
@@ -278,7 +268,7 @@
 					text = text + drive.provider.name;
 					$(this).text(text);
 					$(this).prepend($i);
-					if (cloudDriveDms.isContextUpdating()) {
+					if (cloudDrivesDms.isContextUpdating()) {
 						$(this).addClass("cloudFileDisabled");
 					} else {
 						$(this).removeClass("cloudFileDisabled");
@@ -299,7 +289,7 @@
 					var text = $(this).data("cd-action-prefix");
 					if (!text) {
 						$(this).click(function() {
-							cloudDriveDms.synchronize();
+							cloudDrivesDms.synchronize();
 							uiFileView.UIFileView.clearCheckboxes();
 						});
 						text = $(this).text();
@@ -311,7 +301,7 @@
 					$(this).prepend($i);
 				});
 
-				if (cloudDriveDms.isContextSymlink()) {
+				if (cloudDrivesDms.isContextSymlink()) {
 					allowedItems = allowedItems.concat(ALLOWED_SYMLINK_MENU_ACTIONS);
 				}
 
@@ -348,17 +338,17 @@
 		};
 
 		var initMultiContextMenu = function() {
-			var drive = cloudDriveDms.getContextDrive();
+			var drive = cloudDrivesDms.getContextDrive();
 			if (drive) {
 				// Fix group Context Menu items using CSS
 				var classes;
-				if (cloudDriveDms.isContextFile()) {
+				if (cloudDrivesDms.isContextFile()) {
 					// it's drive's file
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_FILE_ACTION_CLASSES);
-				} else if (cloudDriveDms.isContextDrive()) {
+				} else if (cloudDrivesDms.isContextDrive()) {
 					// it's drive in the context
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES);
-				} else if (cloudDriveDms.isContextLocal()) {
+				} else if (cloudDrivesDms.isContextLocal()) {
 					// it's local node in the drive context
 					classes = ALLOWED_DMS_MENU_LOCAL_FILE_ACTION_CLASSES;
 				} else {
@@ -478,7 +468,7 @@
 					var objectId = decodeString($(this).attr("objectid"));
 					// find all info lines with 1K size and replace the size with real value
           $(this).find("p.fileInfoBottom").each(function() {
-            var file = cloudDrives.getFile(objectId);
+            var file = cloudDrivesDms.getFile(objectId);
             if (file) {
               var orig = $(this).text();
               if(orig.includes("- 1 KB")){
@@ -552,7 +542,7 @@
 								if (paths && paths.length > 0) {
 									// compare remote state's updating with paths stored in the updater
 									// if have difference - cancel the interval and run UI refresh
-									var currentNode = cloudDriveDms.getCurrentNode();
+									var currentNode = cloudDrivesDms.getCurrentNode();
 									if (currentNode) {
 										var currentPath = currentNode.path;
 										var contextPathsNumber = 0;
@@ -598,7 +588,7 @@
 		};
 
 		var initFileViewer = function() {
-			var drive = cloudDriveDms.getContextDrive();
+			var drive = cloudDrivesDms.getContextDrive();
 			var file = cloudDrives.getContextFile();
 			if (drive && file) {
 				var $viewer = $("#CloudFileViewer");
@@ -688,14 +678,14 @@
 		};
 
 		var initDocument = function() {
-			var drive = cloudDriveDms.getContextDrive();
+			var drive = cloudDrivesDms.getContextDrive();
 			if (drive) {
 				// Fix Action Bar items
 				var classes;
-				if (cloudDriveDms.isContextFile()) {
+				if (cloudDrivesDms.isContextFile()) {
 					// it's drive's file
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_FILE_ACTION_CLASSES);
-				} else if (cloudDriveDms.isContextDrive()) {
+				} else if (cloudDrivesDms.isContextDrive()) {
 					// it's drive in the context
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES);
 				} else {
@@ -729,7 +719,7 @@
 							// don't invoke sync if it was less a min ago
 						}
 					}
-					cloudDriveDms.synchronize();
+					cloudDrivesDms.synchronize();
 				});
 
 				// File Viewer
@@ -932,7 +922,7 @@
 					if (jsClick) {
 						var item = findItemInfo(jsClick);
 						if (item) {
-							cloudDriveDms.getDocument(item.workspace, item.path).done(function(file) {
+							cloudDrivesDms.getDocument(item.workspace, item.path).done(function(file) {
 								if (file) {
 									// XXX fix the CSS class (PLF 5.0.0 case)
 									$link.children("i[class*='uiIcon']").each(function(i, elem) {
@@ -1237,7 +1227,7 @@
 					driveMessage(state.drive);
 					setTimeout(function() {
 						// start sync automatically but a bit later
-						cloudDriveDms.synchronize();
+						cloudDrivesDms.synchronize();
 					}, 10000);
 				}, 3000);
 			});
@@ -1295,6 +1285,7 @@
 		 * UI support for synchronization deferred process.
 		 */
 		this.synchronizeProcess = function(process) {
+			console.log("cloudDriveUI sync process");
 			process.done(function(updated, drive) {
 				if (drive.messages.length > 0) {
 					for (var i = 0; i < drive.messages.length; i++) {
@@ -1358,6 +1349,7 @@
 		 */
 		this.refreshDocuments = function(currentNodePath) {
 			refresh();
+			console.log("documents refrsg");
 		};
 
 		/**
@@ -1481,15 +1473,15 @@
 					}
 					cloudDrives.initContext(workspace, path);
 
-					var drive = cloudDriveDms.getContextDrive();
+					var drive = cloudDrivesDms.getContextDrive();
 					if (drive) {
-						if (cloudDriveDms.isContextFile()) {
+						if (cloudDrivesDms.isContextFile()) {
 							// it's drive's file
 							return initContextMenu(menu, params, ALLOWED_FILE_MENU_ACTIONS);
-						} else if (cloudDriveDms.isContextDrive()) {
+						} else if (cloudDrivesDms.isContextDrive()) {
 							// it's drive in the context
 							return initContextMenu(menu, params, ALLOWED_DRIVE_MENU_ACTIONS);
-						} else if (cloudDriveDms.isContextLocal()) {
+						} else if (cloudDrivesDms.isContextLocal()) {
 							// it's local node in the drive context
 							return initContextMenu(menu, params, ALLOWED_LOCAL_FILE_MENU_ACTIONS);
 						}
@@ -1574,7 +1566,7 @@
 				simpleView.showGroundContextMenu_orig = simpleView.showGroundContextMenu;
 				simpleView.showGroundContextMenu = function(event, element) {
 					simpleView.showGroundContextMenu_orig(event, element);
-					if (cloudDriveDms.isContextDrive() || cloudDriveDms.isContextFile()) {
+					if (cloudDrivesDms.isContextDrive() || cloudDrivesDms.isContextFile()) {
 						// hide all not allowed for cloud drive
 						if (initMultiContextMenu() > 0) {
 							// and fix menu position
@@ -1710,7 +1702,7 @@
 		};
     }
 
-    var cloudDriveDms = new CloudDrivesDms();
+    var cloudDrivesDms = new CloudDrivesDms();
     var cloudDriveUI = new CloudDriveUI();
 
     // Load CloudDrive dependencies only in top window (not in iframes of gadgets).
@@ -1732,5 +1724,5 @@
 		}
     }
     
-    return cloudDriveDms;
+    return cloudDrivesDms;
 })($, cloudDriveUtils, cloudDrives, cloudDriveTasks, uiRightClickPopupMenu, uiSimpleView, uiFileView);
