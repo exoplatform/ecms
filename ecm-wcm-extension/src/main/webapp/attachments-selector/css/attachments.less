@@ -816,6 +816,9 @@
                 padding-bottom: 15px;
 
                 &:before {
+                  font-family: 'PLF-FONT-ICONS';
+                  font-size: 18px;
+                  color: #fff;
                   width: 100%;
                   height: 100%;
                   position: absolute;
@@ -829,20 +832,21 @@
                 }
               }
               
+              // TODO: remove after merge platform-ui
               &-gdrive:before {
-                font-family: 'icomoon' !important;
-                speak: none;
-                font-style: normal;
-                font-weight: normal;
-                font-variant: normal;
-                text-transform: none;
-                line-height: 1;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                content: "\e901";
-                color: #fff;
-                font-size: 20px;
+                content: '\e909';
               }
+              &-onedrive:before {
+                content: '\ebef';
+              }
+            }
+
+            // TODO: remove after merge platform-ui
+            .uiIconEcms24x24Drive-gdrive:before {
+              content: '\ebf1';
+            }
+            .uiIconEcms24x24Drive-onedrive:before {
+              content: '\ebf0';
             }
           }
 

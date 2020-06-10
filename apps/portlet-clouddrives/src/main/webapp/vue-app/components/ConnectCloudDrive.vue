@@ -23,7 +23,7 @@
               @click.native="connectToCloudDrive(item.id)"
             >
               <v-list-item-icon class="cloudDriveListItem__icon">
-                <i :class="`uiIconEcmsConnectDialog-${item.id} uiIconEcmsBlue`"></i>
+                <i :class="`uiIcon-${item.id} uiIconEcmsBlue`"></i>
               </v-list-item-icon>
               <v-list-item-content class="cloudDriveListItem__content">
                 <v-list-item-title class="cloudDriveListItem__title"> {{ $t("UIPopupWindow.title.ConnectYour") }} {{ item.name }} </v-list-item-title>
@@ -136,7 +136,7 @@ export default {
           name: title,
           title: title,
           path: folderPath,
-          driveTypeCSSClass: `uiIconEcms24x24Drive${title.replace(" ", "")} uiIconEcms24x24DrivePrivate`,
+          driveTypeCSSClass: `uiIconEcms24x24Drive-${this.connectingProvider}`,
           type: "drive",
           css: "uiIcon16x16FolderDefault uiIcon16x16nt_folder",
           driverType: "Personal Drives",

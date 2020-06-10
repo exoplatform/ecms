@@ -533,7 +533,10 @@ export default {
           }
           for (let j = 0; j < fetchedDrivers.length; j++) {
             const name = fetchedDrivers[j].getAttribute('name');
-            const driveTypeCSSClass = `uiIconEcms24x24Drive${name.replace(/\s/g, '')} ${driverTypeClass}`;
+            const isCloudDrive = fetchedDrivers[j].getAttribute('isCloudDrive') === 'true' ? true : false;
+            const driveTypeCSSClass = isCloudDrive 
+              ? `uiIconEcms24x24Drive-${fetchedDrivers[j].getAttribute('cloudProvider')}`
+              : `${name.replace(/\s/g, '')} ${driverTypeClass}`;
             this.drivers.push({
               name: name,
               title: fetchedDrivers[j].getAttribute('label'),
@@ -542,7 +545,7 @@ export default {
               type: 'drive',
               driveTypeCSSClass: driveTypeCSSClass,
               driverType: driverType,
-              isCloudDrive: fetchedDrivers[j].getAttribute('isCloudDrive') === 'true' ? true : false
+              isCloudDrive: isCloudDrive
             });
           }
         }
