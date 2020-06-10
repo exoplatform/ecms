@@ -121,6 +121,17 @@ public interface DocumentEditor {
    * @param workspace the workspace
    */
   void onLastEditorClosed(String fileId, String workspace);
+  
+  
+  /**
+   * Gets the editing finished delay (ms).
+   * This delay will be taken into consideration when the last editor closed.
+   * After the delay the current provider on the node will be set to null, 
+   * and onLastEditorClosed(String fileId, String workspace) will be called.
+   *
+   * @return the editing finished delay
+   */
+  long getEditingFinishedDelay();
 
   /**
    * Gets the permissions.

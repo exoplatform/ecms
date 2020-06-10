@@ -266,6 +266,16 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public void onLastEditorClosed(String fileId, String workspace) {
     editor.onLastEditorClosed(fileId, workspace);
   }
+  
+  /**
+   * Gets the editing finished delay.
+   *
+   * @return the editing finished delay
+   */
+  @Override
+  public long getEditingFinishedDelay() {
+    return editor.getEditingFinishedDelay();
+  }
 
   /**
    * Gets the stored active.

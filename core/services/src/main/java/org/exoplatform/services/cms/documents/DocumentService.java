@@ -206,7 +206,8 @@ public interface DocumentService {
    * @param provider the current provider or null if the document has been closed.
    * @throws RepositoryException the exception
    */
-  void setCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
+ public void saveCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
+
 
   /**
    * Gets current opened document editor.
@@ -353,4 +354,5 @@ public interface DocumentService {
       this.providerName = providerName;
     }
   }
+
 }

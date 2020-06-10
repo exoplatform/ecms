@@ -281,6 +281,19 @@ public class LockServiceImpl implements LockService, Startable {
     }
     return null;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLockTokenOfUser(Node node, String userId) throws Exception {
+    String key = createLockKey(node, userId);
+    Map<String,String> lockedNodesInfo = getLockInformation(userId);
+    if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
+      return lockedNodesInfo.get(key);
+    }
+    return null;
+  }
 
   /**
    * {@inheritDoc}
