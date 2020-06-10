@@ -34,9 +34,6 @@
       <module>jquery</module>
     </depends>
     <depends>
-      <module>cloudDrive</module>
-    </depends>
-    <depends>
       <module>cloudDriveUtils</module>
     </depends>
   </module>

@@ -72,9 +72,9 @@ export default {
           title: data.name,
           isSelected: false,
         };
-        // init cloudDrive module after response from getUserDrive
-        cloudDrive.init(data.workspace, data.homePath);
-        this.providers = cloudDrive.getProviders();
+        // TODO: don't init cloudDrives second time
+        cloudDrives.init(data.workspace, data.homePath);
+        this.providers = cloudDrives.getProviders();
       } catch (err) {
         notifyError(this.$t(err.message));
       }
@@ -85,7 +85,7 @@ export default {
       this.connectingProvider = providerId;
       this.$emit("updateProgress", { progress: 0 });
       const fullProgress = 100;
-      cloudDrive.connect(providerId).then(
+      cloudDrives.connect(providerId).then(
         data => {
           if (!this.drivesOpened) {
             this.openDriveFolder(data.drive.path, data.drive.title);

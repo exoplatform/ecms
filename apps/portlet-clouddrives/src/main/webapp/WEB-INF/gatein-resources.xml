@@ -69,31 +69,16 @@
     </depends>
   </module>
   <module>
-    <name>cloudDrive</name>
+    <name>cloudDrives</name>
     <load-group>cloudDriveGRP</load-group>
     <script>
-      <path>/js/clouddrive.js</path>
+      <path>/js/clouddrives.js</path>
     </script>
     <depends>
       <module>jquery</module>
     </depends>
     <depends>
       <module>cloudDriveUtils</module>
-    </depends>
-    <depends>
-      <module>cloudDriveTasks</module>
-    </depends>
-    <depends>
-      <module>uiRightClickPopupMenu</module>
-    </depends>
-    <depends>
-      <module>uiListView</module>
-    </depends>
-    <depends>
-      <module>uiSimpleView</module>
-    </depends>
-    <depends>
-      <module>uiFileView</module>
     </depends>
   </module>
   <module>
@@ -106,7 +91,7 @@
       <module>jquery</module>
     </depends>
     <depends>
-      <module>cloudDrive</module>
+      <module>cloudDrives</module>
     </depends>
     <depends>
       <module>cloudDriveUtils</module>
@@ -115,13 +100,13 @@
       <module>uiRightClickPopupMenu</module>
     </depends>
     <depends>
-      <module>uiListView</module>
-    </depends>
-    <depends>
       <module>uiSimpleView</module>
     </depends>
     <depends>
       <module>uiFileView</module>
+    </depends>
+    <depends>
+      <module>cloudDriveTasks</module>
     </depends>
   </module>
   <module>
@@ -130,6 +115,9 @@
       <minify>false</minify>
       <path>/js/clouddrives-app.bundle.js</path>
     </script>
+    <depends>
+      <module>cloudDrives</module>
+    </depends>
     <depends>
       <module>vue</module>
     </depends>
@@ -141,9 +129,6 @@
     </depends>
     <depends>
       <module>extensionRegistry</module>
-    </depends>
-    <depends>
-      <module>cloudDrive</module>
     </depends>
     <depends>
       <module>cloudDriveUtils</module>

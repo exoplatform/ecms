@@ -21,7 +21,7 @@
  * Google Drive support for eXo Cloud Drive.
  * 
  */
-(function($, cloudDrive, utils) {
+(function($, utils) {
 
 	/**
 	 * Google Drive connector class.
@@ -67,4 +67,4 @@
 	}
 
 	return new GoogleDriveClient();
-})($, cloudDrive, cloudDriveUtils);
+})($, cloudDriveUtils);

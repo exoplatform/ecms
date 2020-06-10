@@ -1,4 +1,4 @@
-(function ($, cloudDrive, utils, socketIO) {
+(function ($, cloudDriveDocuments, utils, socketIO) {
 
   function OneDriveClient() {
 
@@ -67,7 +67,7 @@
     // TODO Deprecated
     var renewState = function(process, drive) {
       console.log(">> OneDrive renew state");
-      cloudDrive.getState(drive).done(function(res) {
+      cloudDriveDocuments.getState(drive).done(function(res) {
         drive.state = res;
         // TODO cleanup
         // if (oneDrives.has(drive.state.creatorId)) {
@@ -193,7 +193,7 @@
             var state;
             if (new Date().getTime() >= drive.state.expirationDateTime) {
               // We need renew the state to get fresher changes link in it
-              state = cloudDrive.getState(drive);
+              state = cloudDriveDocuments.getState(drive);
               // close expired listener 
               closeListener();
             } else if (!socket) {
@@ -228,7 +228,7 @@
 
     this.initContext = function (provider) {
       $(function () {
-        var file = cloudDrive.getContextFile();
+        var file = cloudDriveDocuments.getContextFile();
         if (file) {
           /*
             var l = file.previewLink;
@@ -297,4 +297,4 @@
 
   return new OneDriveClient();
 
-})($, cloudDrive, cloudDriveUtils, cloudDriveSocketIO);
+})($, cloudDriveDocuments, cloudDriveUtils, cloudDriveSocketIO);
