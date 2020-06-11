@@ -336,7 +336,7 @@
 
       var cssClasses = '';
       if (this.settings.doc.fileType) {
-        cssClasses = $.map(this.settings.doc.fileType.split(/\s+/g), function(type){return "uiIcon16x16" + type}).join(" ");            
+        cssClasses = $.map(this.settings.doc.fileType.split(/\s+/g), function(type){return "uiIcon16x16" + type}).join(" ");
       }
 
       if($('.commentsLoaded').length) {
@@ -483,7 +483,7 @@
                     '</div>' +
                     '<span class="uiIconResize pull-right uiIconLightGray"></span>' +
                   '</div>' +
-                '<div class="fileName hidden" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
+                '<div class="fileName hidden-title" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
                 '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
                 ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
                 '</div>';
@@ -553,9 +553,9 @@
       editorButtonsLoader.done(function($buttonsContainer) {
         $(".previewBtn").append($buttonsContainer);
       });
-      
+
       $('#documentPreviewContainer #previewLikeLink').tooltip();
-      
+
       $("#uiPreviewErrorMessage").hide();
       $("#uiPreviewErrorMessageIcon").click(function() {
           $("#uiPreviewErrorMessage").hide();
@@ -565,7 +565,7 @@
       });
     },
     showErrorMessage: function(message) {
-      $("#uiPreviewErrorMessageContent").html(message);  
+      $("#uiPreviewErrorMessageContent").html(message);
       $("#uiPreviewErrorMessage").show();
     },
     clearErrorMessage: function() {
@@ -683,7 +683,7 @@
             if(hideSubComments) {
                 commentClass += " hidden";
                 if(subCommentIndex == subCommentSize) {
-                  commentsHtml += 
+                  commentsHtml +=
                   '<li class="clearfix commentItem subCommentBlock subCommentShowAll" id="SubCommentShowAll_' + comment.parentCommentId + '">' +
                       '<p class="cont">' +
                         '<a href="javascript:void(0)" class="subCommentShowAllLink" data-parent-comment="' + comment.parentCommentId + '">' +
@@ -833,7 +833,7 @@
 
     convertDate: function(dateStr) {
       var postedTime = Date.parse(dateStr);
-      
+
       var time = (new Date().getTime() - postedTime) / 1000;
       var value;
       if (time < 60) {
@@ -1003,7 +1003,7 @@
             $(window).off('resize', resizeEventHandler);
           }, 500);
         });
-  
+
         if(this.settings.showComments) {
           if(this.settings.activity.id != null) {
             // render like link and nb of likes
@@ -1034,23 +1034,30 @@
             $('#CancelButton').attr("data-action-initialized", "true");
           }
 
-          if($('.showComments [data-action-initialized]').length == 0) {
-            $('.showComments').on('click', function(event) {
+          if ($('.showComments [data-action-initialized]').length == 0) {
+            $('.showComments').on('click', function (event) {
               var $uiDocumentPreview = $('#uiDocumentPreview');
               var $commentArea = $('.commentArea', $uiDocumentPreview);
               var $commentList = $('.commentList', $commentArea);
-              if($('#cke_commentInput .cke_contents').length > 0) {
+              if ($('#cke_commentInput .cke_contents').length > 0) {
                 $('#cke_commentInput .cke_contents')[0].style.height = "100px";
               }
-              $('#documentPreviewContainer .commentArea')[0].style.display = "block";
-              $('.previewBtn')[0].style.display = "none"
-              $('#documentPreviewContent')[0].style.display = "none";
-              $("#documentPreviewContainer .parentCommentBlock").addClass("hidden");
+              if ($('#documentPreviewContent')[0].style.display === "none") {
+                $('#documentPreviewContainer .commentArea')[0].style.display = "none";
+                $('#documentPreviewContent')[0].style.display = "block";
+                $("#documentPreviewContainer .parentCommentBlock").removeClass("hidden");
+                $("#documentPreviewContainer .uiIconComment").removeClass("hiddenComment");
+              } else {
+                $('#documentPreviewContainer .commentArea')[0].style.display = "block";
+                $('#documentPreviewContent')[0].style.display = "none";
+                $("#documentPreviewContainer .parentCommentBlock").addClass("hidden");
+                $("#documentPreviewContainer .uiIconComment").addClass("hiddenComment");
 
-              self.moveCKEditorInOriginalLocation();
-              self.initCKEditor();
-              self.clearErrorMessage();
-              self.showCommentLink(eXo.social.SocialUtil.checkDevice().isMobile, false, false);
+                self.moveCKEditorInOriginalLocation();
+                self.initCKEditor();
+                self.clearErrorMessage();
+                self.showCommentLink(eXo.social.SocialUtil.checkDevice().isMobile, false, false);
+              }
             });
             $('.showComments').attr("data-action-initialized", "true");
           }
@@ -1170,7 +1177,7 @@
                 } else {
                     $("#CommentButton").prop("disabled", true);
                 }
-                
+
                 if (pureText.length <= MAX_LENGTH) {
                     evt.editor.getCommand('selectImage').enable();
                 } else {
