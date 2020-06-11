@@ -979,7 +979,7 @@
         /**
          * Connect to Cloud Drive.
          */
-        this.connect = function(providerId) {
+        this.connect = function(providerId, connectProcessFn) {
             utils.log("Connecting Cloud Drive...");
 
             var failure = $.Deferred();
@@ -997,6 +997,9 @@
                     excluded = {};
 
                     var process = connectDrive(providerId, authURL);
+                    if (connectProcessFn) {
+                        connectProcessFn(process);
+                    }
                     return process;
                 } else {
                     utils.log("ERROR: Provider has no authURL " + providerId);

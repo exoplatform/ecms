@@ -8,6 +8,20 @@
 		// Node workspace and path currently open in ECMS explorer view
 		var currentNode;
 
+		var getDocument = function(workspace, path) {
+			var request = $.ajax({
+				async : false,
+				type : "GET",
+				url : prefixUrl + "/portal/rest/clouddrive/document/file",
+				dataType : "json",
+				data : {
+					workspace : workspace,
+					path : path
+				}
+			});
+			return cloudDrives.initRequest(request);
+		};
+
 		/**
 		 * Initialize provider for later operations.
 		 */
@@ -31,18 +45,8 @@
 			cloudDrives.synchronize(elem, objectId, cloudDriveUI.refreshDocuments, currentNode, cloudDriveUI.synchronizeProcess);
 		};
 
-		var getDocument = function(workspace, path) {
-			var request = $.ajax({
-				async : false,
-				type : "GET",
-				url : prefixUrl + "/portal/rest/clouddrive/document/file",
-				dataType : "json",
-				data : {
-					workspace : workspace,
-					path : path
-				}
-			});
-			return cloudDrives.initRequest(request);
+		this.connect = function(providerId) {
+			return cloudDrives.connect(providerId, cloudDriveUI.connectProcess);
 		};
 
 		/**
@@ -1285,7 +1289,6 @@
 		 * UI support for synchronization deferred process.
 		 */
 		this.synchronizeProcess = function(process) {
-			console.log("cloudDriveUI sync process");
 			process.done(function(updated, drive) {
 				if (drive.messages.length > 0) {
 					for (var i = 0; i < drive.messages.length; i++) {
@@ -1349,7 +1352,6 @@
 		 */
 		this.refreshDocuments = function(currentNodePath) {
 			refresh();
-			console.log("documents refrsg");
 		};
 
 		/**
@@ -1397,14 +1399,13 @@
 							var formId = $("div.UIForm.ConnectCloudDriveForm").attr("form-id");
 							if (formId) {
 								var submited = false;
-								var process = cloudDrives.connect(providerId);
+								var process = cloudDrivesDms.connect(providerId);
 								process.progress(function() {
 									if (!submited) {
 										submited = true;
 										eXo.webui.UIForm.submitForm(formId, 'Connect', true);
 									}
 								});
-								cloudDriveUI.connectProcess(process);
 								process.fail(function(e) {
 									//eXo.webui.UIForm.submitForm(formId, 'Cancel', true);
 								});
@@ -1421,7 +1422,7 @@
 								var providerId = c[1];
 								$(this).data("cd-connect", true);
 								$(this).parent().parent().click(function() {
-									cloudDrives.connect(providerId);
+									cloudDrivesDms.connect(providerId);
 								});
 							}
 						}
