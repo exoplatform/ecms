@@ -21,6 +21,7 @@ import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -28,10 +29,16 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
-import org.exoplatform.social.plugin.doc.UIDocActivity;
+import org.exoplatform.social.core.manager.ActivityManager;
+import org.exoplatform.social.core.storage.ActivityStorageException;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.social.webui.activity.BaseUIActivityBuilder;
+import org.exoplatform.social.webui.activity.UILinkActivity;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -46,6 +53,16 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
   protected void extendUIActivity(BaseUIActivity uiActivity, ExoSocialActivity activity) {
     String HTML_A_HREF_TAG_PATTERN = "^<a\\s*(?i)href\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]>"+ activity.getTemplateParams().get(FileUIActivity.DOCUMENT_TITLE) +"<\\/a>$))";
     FileUIActivity fileActivity = (FileUIActivity) uiActivity;
+    if (activity.getTemplateParams() == null) {
+      saveToNewDataFormat(activity);
+    }
+
+    Map<String, String> templateParams = activity.getTemplateParams();
+    fileActivity.setLinkSource(templateParams.get(UILinkActivity.LINK_PARAM));
+    fileActivity.setLinkTitle(templateParams.get(UILinkActivity.TITLE_PARAM));
+    fileActivity.setLinkImage(templateParams.get(UILinkActivity.IMAGE_PARAM));
+    fileActivity.setLinkDescription(templateParams.get(UILinkActivity.DESCRIPTION_PARAM));
+    fileActivity.setEmbedHtml(templateParams.get(UILinkActivity.HTML_PARAM));    ;
     patternLink = Pattern.compile(HTML_A_HREF_TAG_PATTERN);
     // set data into the UI component of activity
     if (activity.getTemplateParams() != null) {
@@ -59,8 +76,11 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
     // org.exoplatform.social.plugin.doc.UIDocActivityComposer.docActivityTitle.
     // So we couldn't set activity.getTitle() all the time, see INTEG-486
     if (activity.getTemplateParams() != null
-        && StringUtils.isNotBlank(activity.getTemplateParams().get(FileUIActivity.ACTIVITY_STATUS)) ||
-            ( !patternLink.matcher(activity.getTitle()).find() )){
+        && StringUtils.isNotBlank(templateParams.get(UILinkActivity.COMMENT_PARAM))) {
+      fileActivity.setMessage(templateParams.get(UILinkActivity.COMMENT_PARAM));
+    } else if (activity.getTemplateParams() != null
+        && StringUtils.isNotBlank(activity.getTemplateParams().get(FileUIActivity.ACTIVITY_STATUS))
+        || (!patternLink.matcher(activity.getTitle()).find())) {
       fileActivity.setMessage(activity.getTitle());
     } else {
       fileActivity.setMessage(null);
@@ -96,6 +116,32 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
       } catch (RepositoryException re) {
         LOG.error("Can not get the repository. ", re);
       }
+    }
+  }
+  private void saveToNewDataFormat(ExoSocialActivity activity) {
+    try {
+      JSONObject jsonObj = new JSONObject(activity.getTitle());
+
+      StringBuilder linkTitle = new StringBuilder("Shared a link:");
+      linkTitle.append(" <a href=\"${").append(UILinkActivity.LINK_PARAM).append("}\">${")
+              .append(UILinkActivity.TITLE_PARAM).append("} </a>");
+      activity.setTitle(linkTitle.toString());
+
+      Map<String, String> templateParams = new HashMap<String, String>();
+      templateParams.put(UILinkActivity.LINK_PARAM, jsonObj.getString(UILinkActivity.LINK_PARAM));
+      templateParams.put(UILinkActivity.TITLE_PARAM, jsonObj.getString(UILinkActivity.TITLE_PARAM));
+      templateParams.put(UILinkActivity.IMAGE_PARAM, jsonObj.getString(UILinkActivity.IMAGE_PARAM));
+      templateParams.put(UILinkActivity.DESCRIPTION_PARAM, jsonObj.getString(UILinkActivity.DESCRIPTION_PARAM));
+      templateParams.put(UILinkActivity.COMMENT_PARAM, jsonObj.getString(UILinkActivity.COMMENT_PARAM));
+      activity.setTemplateParams(templateParams);
+
+      CommonsUtils.getService(ActivityManager.class).saveActivityNoReturn(activity);
+    } catch (JSONException je) {
+      LOG.error("Error with activity's title data");
+    } catch (ActivityStorageException ase) {
+      LOG.warn("Could not save new data format for document activity.", ase);
+    } catch (Exception e) {
+      LOG.error("Unknown error  to save document activity.", e);
     }
   }
 }

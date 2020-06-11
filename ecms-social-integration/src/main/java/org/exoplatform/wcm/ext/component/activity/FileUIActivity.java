@@ -66,6 +66,7 @@ import org.exoplatform.social.core.storage.SpaceStorageException;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
 import org.exoplatform.social.webui.activity.UIActivitiesContainer;
+import org.exoplatform.social.webui.activity.UILinkUtil;
 import org.exoplatform.social.webui.composer.PopupContainer;
 import org.exoplatform.web.CacheUserProfileFilter;
 import org.exoplatform.web.application.JavascriptManager;
@@ -176,6 +177,16 @@ public class FileUIActivity extends BaseUIActivity{
   private String                          downloadLink            = null;
 
   private String                          downloadResourceId      = null;
+
+  private String                          linkSource              = "";
+
+  private String                          linkTitle               = "";
+
+  private String                          linkImage               = "";
+
+  private String                          linkDescription         = "";
+
+  private String                          embedHtml               = "";
 
   public FileUIActivity() throws Exception {
     super();
@@ -1617,4 +1628,35 @@ public class FileUIActivity extends BaseUIActivity{
       }
     }
   }
+  public String getLinkDescription() {
+    return UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkDescription));
+  }
+  public void setLinkDescription(String linkDescription) {
+    this.linkDescription = linkDescription;
+  }
+  public String getLinkImage() {
+    return linkImage;
+  }
+  public void setLinkImage(String linkImage) {
+    this.linkImage = linkImage;
+  }
+  public String getLinkSource() {
+    return UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkSource));
+  }
+  public void setLinkSource(String linkSource) {
+    this.linkSource = linkSource;
+  }
+  public String getLinkTitle() {
+    return UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkTitle));
+  }
+  public void setLinkTitle(String linkTitle) {
+    this.linkTitle = linkTitle;
+  }
+  public String getEmbedHtml() {
+    return embedHtml;
+  }
+  public void setEmbedHtml(String embedHtml) {
+    this.embedHtml = embedHtml;
+  }
+
 }

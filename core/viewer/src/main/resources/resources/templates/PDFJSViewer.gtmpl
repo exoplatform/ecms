@@ -50,7 +50,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
 %>
     <link rel="stylesheet" href="/eXoWCMResources/pdf.js/viewer.css" />
 
-    <div id="outerContainer" class="loadingInProgress">
+    <div id="outerContainer" class="loadingInProgress sidebarOpen">
 
         <div id="sidebarContainer">
             <div id="toolbarSidebar">
