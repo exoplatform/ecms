@@ -22,7 +22,7 @@
     <label>
       <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
       <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeTitleFormStringInput>Başlıq</UICategoryNavigationTreeTitleFormStringInput>
   
       <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
       <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>

@@ -2,13 +2,13 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Quick Edit</QuickEdit>
+      <QuickEdit>Mabilis na I-edit</QuickEdit>
     </title>
   </UICNContainer>
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Listahan ng Kategorya ng Configurasyon</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -34,7 +34,7 @@
   
   <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
   <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
-  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Pang-ulo</UICategoryNavigationHeaderFormStringInput>
   <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
@@ -47,7 +47,7 @@
       <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>Save</Save>
+      <Save>I-save</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>

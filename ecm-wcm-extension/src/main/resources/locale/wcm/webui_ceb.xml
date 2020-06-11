@@ -49,7 +49,7 @@
       <admin-view>Admin</admin-view>
       <icon-view>Icons</icon-view>
       <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
+      <list-view>Lista</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Ang mga kategorya</wcm-category-view>
       <file-view>File Management View</file-view>
@@ -141,8 +141,8 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Dugangi</add>
+      <delete>Papasa</delete>
     </label>
     <msg>
       <no-content-found>No content found.</no-content-found>
@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
     <msg>
       <child-not-found>No Content Found</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Dugangi</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -255,7 +255,7 @@
       <title>Title</title>
       <score>Score</score>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
     <title>
       <Select>Pagpili</Select>
@@ -290,8 +290,8 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Usba</Edit>
+        <Delete>Papasa</Delete>
       </title>
     </action>
   </UIPermissionManager>
@@ -301,7 +301,7 @@
       <owner>Permission</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
     <msg>
       <confirm-delete-permission>Sigurado ka nga imung tangtangon ang permiso?</confirm-delete-permission>
@@ -382,11 +382,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
+    <welcome>Abiabi</welcome>
     <login>Login</login>
     <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <language>Usba ang Pinulongan</language>
+    <register>Rehistro</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -400,8 +400,8 @@
       <PersonalDrives>Personal Drives</PersonalDrives>
       <GeneralDrives>General Drives</GeneralDrives>
       <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
-      <Public>Public</Public>
+      <Private>Prebado</Private>
+      <Public>Pampubliko</Public>
       <BackupCenter>Backup Center</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Selektor sa Page</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   

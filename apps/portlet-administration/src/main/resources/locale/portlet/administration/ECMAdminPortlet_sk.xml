@@ -346,7 +346,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
-      <permissions>Permissions</permissions>
+      <permissions>Práva</permissions>
       <views>View</views>
       <action>Action</action>
     </header>
@@ -711,7 +711,7 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
       <AddPath>Add Path</AddPath>
@@ -817,7 +817,7 @@
     </title>
     <header>
       <name>Name</name>
-      <permissions>Permissions</permissions>
+      <permissions>Práva</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
       <action>Action</action>
@@ -887,7 +887,7 @@
       <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>Permissions</friendlyPermission>
+      <friendlyPermission>Práva</friendlyPermission>
       <action>Action</action>
     </header>
     <action>
@@ -921,7 +921,7 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
@@ -990,7 +990,7 @@
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Zdielať</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Vybrať užívateľa</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1304,8 +1304,8 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Vybrať užívateľa</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Vybrať užívateľa</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
@@ -1324,7 +1324,7 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Vybrať skupinu</selectGroup>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
@@ -1366,7 +1366,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>Permissions</permissions>
+      <permissions>Práva</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1386,7 +1386,7 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
+      <Save>Uložiť</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -1411,7 +1411,7 @@
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Pridať oprávnenie</AddDrivePermissionSelector>
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1451,7 +1451,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Vybrať užívateľa</SelectUser>
       <SelectMember>Select Membership</SelectMember>
       <AddAny>Everyone</AddAny>
     </title>
@@ -1463,15 +1463,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Vybrať užívateľa</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Vybrať skupinu</selectGroup>
+      <selectUser>Vybrať užívateľa</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -1888,7 +1888,7 @@
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1927,7 +1927,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <permission>Práva</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>Permissions</permissions>
+      <permissions>Práva</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -2087,17 +2087,17 @@
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2142,7 +2142,7 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Pridať oprávnenie</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2158,16 +2158,16 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Vybrať skupinu</selectGroup>
+      <selectUser>Vybrať užívateľa</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Vybrať skupinu</selectGroup>
+      <selectUser>Vybrať užívateľa</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2192,7 +2192,7 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Vybrať skupinu</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
@@ -2210,8 +2210,8 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Vybrať skupinu</selectGroup>
+      <selectUser>Vybrať užívateľa</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </QueriesPermissionBrowse>
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>Permissions</permissions>
+      <permissions>Práva</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2476,7 +2476,7 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add Permission</title>
+    <title>Pridať oprávnenie</title>
     <action>
       <Save>#{word.save}</Save>
       <Add>Add</Add>
@@ -2491,7 +2491,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Vybrať skupinu</selectGroup>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>

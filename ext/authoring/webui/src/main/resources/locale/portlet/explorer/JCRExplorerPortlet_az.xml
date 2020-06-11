@@ -7,7 +7,7 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
+      <PublicationRequestApproval>Təsdiq edin</PublicationRequestApproval>
       <PublicationApproveContent>Approve Content</PublicationApproveContent>
       <PublicationPublish>Publish</PublicationPublish>
     </tooltip>

@@ -2,13 +2,13 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Kani imong gipili walay sulod. Palihug pagpili lang og usa kabuok.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
       <rename>Usaba ang pangalan</rename>
-      <cancel>Cancel</cancel>
+      <cancel>I-kansela</cancel>
     </label>
     <msg>
       <renaming>Renaming...</renaming>

@@ -2,63 +2,63 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Title:</title>
-      <description>Description:</description>
-      <keywords>Keywords:</keywords>
-      <language>Language:</language>
-      <robots>Robots:</robots>
-      <sitemap>Sitemap:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
-    <isInherited>Inherited from parent page</isInherited>
-      <priority>Priority:</priority>
-      <frequency>Frequency:</frequency>
-      <select-language>Select a language</select-language>
+      <title>Ang Titulo:</title>
+      <description>Ang iyang nawng:</description>
+      <keywords>Mga importanteng mga storya:</keywords>
+      <language>Ang klase sa gistorya:</language>
+      <robots>Mga Robot:</robots>
+      <sitemap>Ang mapa sa site:</sitemap>
+      <sitemapvisible>Makita sa mapa sa site</sitemapvisible>
+    <isInherited>Gimana gikan sa ginikanan na page</isInherited>
+      <priority>Ang Prayoridad:</priority>
+      <frequency>Prekuwensiya:</frequency>
+      <select-language>Pili og usa ka klase nga storya</select-language>
       <option>
-        <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Always>Sige ra</Always>
+        <Hourly>Taga-oras</Hourly>
+        <Daily>Taga-adlaw</Daily>
+        <Weekly>Kada semana</Weekly>
+        <Monthly>Kada buwan</Monthly>
+        <Yearly>Kada tuig</Yearly>
+        <Never>Dili jud</Never>
       </option> 
     </label>
     <tip>
-  <priority>Valid values range from 0.0 to 1.0</priority>
+  <priority>Ang madawat kantidad kay naa ra sa 0.0 taman 1.0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
-      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
+      <repository-exception>Dili maliyan na problema ang niguho samtang nagsave ka sa page sa metadata.</repository-exception>
+      <confirm-delete>Sigurado ba ka nga gusto ni nimo walaon ang kani na SEO na data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>Walaon</seo-delete>
     </title>
   <help> 
-  <priority>Valid values range from 0.0 to 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
-  <keywords>Most important terms in the page separated by a comma.</keywords>  
+  <priority>Ang madawat na kantidad kay naa ra sa 0.0 taman 1.0.</priority>
+  <description>Tabangan ang tig pangita: pahibal-on sila nga ang mga sumusunod na page kay naay link sa unsa ila gipangita.</description>
+  <keywords>Ang mga importante na mga termino sa diri nga page kay gibuwag pamaagi sa comma.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>SEO Management</UISEOForm>
+      <UISEOForm>Ang SEO na Pagdumala</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>SEO Management</seo>
+      <seo>Ang Pagdumala sa SEO</seo>
   </title>
   <label>
-    <seo>SEO</seo>
+    <seo>Ang SEO</seo>
   </label>
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>Ang kantidad sa Prayoridad na uma kay dapat nakanumero ang porma. Unya ang madawat na kantidad kai naggikan sa 0.0 hantod 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

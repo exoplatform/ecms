@@ -8,7 +8,7 @@
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Konfigurasi Senarai Kategori</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -20,12 +20,12 @@
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationRepositoryFormSelectBox>Repositori</UICategoryNavigationRepositoryFormSelectBox>
       <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeTitleFormStringInput>Tajuk</UICategoryNavigationTreeTitleFormStringInput>
   
       <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Templat penonton pokok</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
@@ -36,15 +36,15 @@
   <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
   <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationDynamicNavigationLabel>Dinamik Navigasi</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Pengekodan tidak disokong.</not-support-encoding>
+      <render>Ralat berlaku semasa membuat rendering.</render>
+      <saving-success>Maklumat itu berjaya dikemas kini.</saving-success>
     </msg>
     <action>
       <Save>Simpan</Save>
@@ -52,7 +52,7 @@
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>The category does not exist.</not-existed-category>
+      <not-existed-category>Kategori tidak wujud.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

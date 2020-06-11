@@ -3,9 +3,9 @@
   <PublicationService>
     <AuthoringPublicationPlugin>
       <changeState>
-        <obsoleted>The content is obsolete</obsoleted>
-        <published>The content is published</published>
-<unpublished>The content is unpublished</unpublished>
+        <obsoleted>Ang sulod ani na sulat kay wala na gamita</obsoleted>
+        <published>Ang kani na sulod sa suwat kay na himo na</published>
+<unpublished>Ang kani na sulod sa suwat kay wala pa mahimo</unpublished>
 <archived>The content is archived</archived>
 <staged>The content is staged</staged>
 <approved>The content is approved</approved>

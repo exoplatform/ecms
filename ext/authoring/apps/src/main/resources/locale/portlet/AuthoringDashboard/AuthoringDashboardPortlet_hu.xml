@@ -3,7 +3,7 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
+      <nocontent>Nincs tartalom</nocontent>
       <mydraft>My Draft Content</mydraft>
       <waitingapproval>Waiting For My Approval</waitingapproval>
       <approve>Approve</approve>

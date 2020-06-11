@@ -27,7 +27,7 @@
       <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Template Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
+      <UIFCCTemplateFormSelectBox>템플릿 선택</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
@@ -58,13 +58,13 @@
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
+      <name>이름</name>
+      <description>설명</description>
       <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <action>액션</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>추가</Add>
     </action>
     <msg>
       <empty>No actions</empty>
@@ -101,8 +101,8 @@
       <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>이름</name>
+      <action>액션</action>
     </header>
   </UITreeList>
 

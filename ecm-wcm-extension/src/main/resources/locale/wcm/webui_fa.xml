@@ -36,7 +36,7 @@
     <label>
       <ManagedSites>Site Management</ManagedSites>
       <SharedSite>سایت مشترک</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
+      <PersonalDocuments>فایل‌های شخصی</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
       <Collaboration>همکاری</Collaboration>
       <Trash>سطل آشغال</Trash>

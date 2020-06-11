@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>Ini nama yang tidak dibenarkan.</name-not-allowed>
+      <in-versioning>Sila periksa nod semasa sebelum menambah nod baru.</in-versioning>
+      <cannot-save>Ralat yang berlaku semasa menyimpan nod.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
+      <not-add-folder>Hanya fail boleh berkata untuk folder ini.</not-add-folder>
       <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
       <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
       <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
       <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <get-dialog-path>Ralat yang berlaku semasa mendapatkan dialog jalan.</get-dialog-path>
+      <new-jcr-template>Ralat yang berlaku semasa mewujudkan template baru.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
+      <UIFCCSaveLocationField>Simpan Lokasi</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Pilih Ruang Kerja</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Pilihan Template</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Lokasi untuk Menyelamatkan</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Pilih Template</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Adat Menyelamatkan Butang</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Adat Menyelamatkan Mesej</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <save-successfully>Disimpan untuk portlet pilihan berjaya.</save-successfully>
+      <item-not-found>Jalan ini tidak sah.</item-not-found>
+      <fileType-empty>Silakan pilih yang jenis fail sebelum menyimpan konfigurasi ini.</fileType-empty>
+      <ws-empty>Tolong pilih satu ruang kerja.</ws-empty>
+      <action-empty>Tolong pilih satu folder dengan tindakan.</action-empty>
+      <message-empty>"Adat Menyelamatkan Pesan" bidang diperlukan dalam kasus anda tidak memilih mengarahkan pilihan, atau jalan kosong.</message-empty>
+      <get-template>Ralat yang berlaku semasa mengakses template.</get-template>
+      <set-template-option>Ralat yang berlaku semasa menetapkan template pilihan.</set-template-option>
+      <do-select>Ralat yang berlaku semasa memilih lokasi.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,33 +52,33 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Pilih Jalan</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
+      <name>Nama</name>
+      <description>Keterangan</description>
       <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <action>
       <Add>Add</Add>
     </action>
     <msg>
       <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <remove-popup-first>Anda harus menutup mengedit pop-up sebelum memotong nod ini.</remove-popup-first>
+      <confirm-delete-action>Adakah anda pasti anda mahu untuk memadamkan tindakan ini?</confirm-delete-action>
       <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <template-null>Template adalah nol atau kosong, atau anda tidak memiliki izin untuk mengakses template ini.</template-null>
+      <access-denied>Akses ditolak. Anda tidak memiliki izin untuk melakukan tindakan ini.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Pilih Lokasi</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
@@ -98,11 +98,11 @@
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Nod ini tidak mempunyai apa-apa anak-anak.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Nama</name>
+      <action>Tindakan</action>
     </header>
   </UITreeList>
 
@@ -119,13 +119,13 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
+      <repository-exception>Tidak dapat menyimpan ini tindakan. Itu nama yang diberikan tidak punya indeks sebagai elemen terakhir.</repository-exception>
+      <numberformat-exception>Tidak dapat menyimpan ini tindakan. Itu nama yang diberikan tidak harus mempunyai '[' atau ']'.</numberformat-exception>
       <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
       <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
+      <unable-add>Tidak dapat menambah tindakan ini. Nod ini adalah akar atau anda tidak mempunyai permision.</unable-add>
       <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
+      <no-permission-add>Akses ditolak. Anda tidak punya hak untuk menambah tindakan di sini.</no-permission-add>
       <access-denied>Access denied. You do not have permission to access this template.</access-denied>
     </msg>
     <validator>
@@ -161,7 +161,7 @@
   <UITabPane>
     <title>
       <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UISelectedCategoriesGrid>Dirujuk Kategori</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -185,7 +185,7 @@
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Kategori Pemilih</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

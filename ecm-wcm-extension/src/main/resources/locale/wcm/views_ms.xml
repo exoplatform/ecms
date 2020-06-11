@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Keterangan</description>
       </label>
     </view>
   </WebLink>
@@ -32,10 +32,10 @@
   <SiteMetadata>
     <view>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Tapak Tajuk</title>
+        <description>Tapak Penerangan</description>
+        <keywords>Kunci Laman</keywords>
+        <robots>Carian Tingkah Laku Enjin</robots>
       </label>
       <tooltip>
         <add-edit>Add/Edit Metadata</add-edit>

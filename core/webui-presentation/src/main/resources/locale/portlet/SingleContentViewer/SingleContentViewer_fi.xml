@@ -7,7 +7,7 @@
       <FastPublish>Publish</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
+      <draft>Luonnos</draft>
       <print>Print</print>
     </label>
     <msg>
@@ -18,18 +18,18 @@
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>Sisällön valinta</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>Sinulla ei ole oikeuksia käyttää muokkaustilaa.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>Käytössä</Enable>
+      <Disable>Pois käytöstä</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
@@ -40,9 +40,9 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>Keskeytä</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>Tulosta</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
@@ -51,10 +51,10 @@
       <Edit>Edit</Edit>
       <Preferences>Preferences</Preferences>
       <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowTitleConfigurationCheckBox>Näytä otsikko</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Näytä päivämäärä</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <DisplaySettingBlock>Näyttöasetukset</DisplaySettingBlock>
       <ContentPathBlock>Content Selection</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
@@ -62,7 +62,7 @@
       <ContextCaption>Dynamic Navigation</ContextCaption>
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
       <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
+      <PrintSettingBlock>Tulostusasetukset</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lock</LockStatus>
@@ -81,8 +81,8 @@
     <tab>
       <label>
         <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Näyttöasetukset</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Tulostusasetukset</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>

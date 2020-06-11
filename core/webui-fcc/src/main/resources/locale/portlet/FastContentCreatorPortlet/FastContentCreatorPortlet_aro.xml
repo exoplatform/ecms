@@ -101,7 +101,7 @@
       <child-not-found>هذه العقدة لا تملك فروع بعد.</child-not-found>
     </info>
     <header>
-      <name>الاسم</name>
+      <name>اسم</name>
       <action>اجراء</action>
     </header>
   </UITreeList>

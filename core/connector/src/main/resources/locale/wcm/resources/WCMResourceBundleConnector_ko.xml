@@ -7,8 +7,8 @@
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>이름 바꾸기</rename>
+      <cancel>취소</cancel>
     </label>
     <msg>
       <renaming>Renaming...</renaming>

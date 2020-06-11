@@ -28,7 +28,7 @@
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>You sure say you wan commot this item?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
@@ -69,7 +69,7 @@
       <action>#{word.action}</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>We no see any page.</child-not-found>
     </msg>
     <title>
       <select>Select</select>
@@ -89,7 +89,7 @@
       <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Content Search Form</UIContentSearchForm>
       <UIContentSearchResult>Search Result</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
+      <UIContentViewer>Wetin dey inside</UIContentViewer>
       <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
       <UIPermissionManager>Permission Manager</UIPermissionManager>
@@ -104,7 +104,7 @@
       <Media>Media</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>You never select the node. Abeg check the node before you do wetin you do again.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
@@ -119,34 +119,34 @@
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Oya choose the folder wey you want make the pikin begin show.</LeftColumn>
+      <RightColumn>You fit choose the tin we dey under.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Oya choose the folder wey you want make the pikin begin show.</LeftColumn>
+      <RightColumn>You fit choose the tin we dey under.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>Oya choose the folder wey you want make the pikin begin show.</LeftColumn>
+      <RightColumn>You fit choose the folder now.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
+      <add>Join</add>
       <delete>Delete</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>We no see any tory.</no-content-found>
+      <non-content>You never choose any tory.</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -164,7 +164,7 @@
       <action>Action</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>We no see any tory</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
@@ -175,7 +175,7 @@
       <action>Action</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>We no see any folder</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
@@ -204,18 +204,18 @@
       <SearchWebContent>Search</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>The searching time is too long.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <empty-name>Please enter the name to search</empty-name>
-      <empty-content>Please enter a word or phrase to search</empty-content>
-      <empty-property>Please select a property</empty-property>
-      <empty-property-keyword>Please enter a keyword for the property</empty-property-keyword>
-      <empty-doctype>Please select a document type</empty-doctype>
+      <time-to-late>The time wey i dey use search don dey tey o.</time-to-late>
+      <empty-field>Abeg use correct important words for the search.</empty-field>
+      <empty-name>Abeg type the name wey you dey find</empty-name>
+      <empty-content>Abeg type the word or phrase wey you dey find</empty-content>
+      <empty-property>Abeg choose one property</empty-property>
+      <empty-property-keyword>Abeg type one word for the property</empty-property-keyword>
+      <empty-doctype>Abeg choose one document type</empty-doctype>
       <empty-startDate>"From Date" is required</empty-startDate>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
+      <invalid-format>Date/time format in field no dey correct '{0}'.</invalid-format>
       <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-startDate>"From Date" must not be later than today</invalid-startDate>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
+      <invalid-nodeType>The node type "{0}" no dey correct. Abeg check am again.</invalid-nodeType>
       <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Join</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -262,21 +262,21 @@
       <View>View</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>You no fit look this tory from here. We no get support for the template</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
+      <SaveDraft>Save de draft</SaveDraft>
+      <FastPublish>Publish am fast</FastPublish>
+      <Preferences>Which options you for like</Preferences>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>We never gree you to dey add categories for this document.</access-denied>
+      <exception>One catacata shele as we dey add them categories for this document.</exception>
+      <non-categories>De category wey you choose no dey correct. Abeg choose the better categories.</non-categories>
     </msg>
   </UIContentDialogForm>
 
@@ -305,18 +305,18 @@
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
+      <no-permission-remove>You no get permission.</no-permission-remove>
       <access-denied>Access denied.</access-denied>
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
+      <userOrGroup-required>You must to select one user or group.</userOrGroup-required>
+      <checkbox-require>You just gats to set rights.</checkbox-require>
       <node-checkedin>You must check out first.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Choose User</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Watin go help select user</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -336,7 +336,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Choose Group</selectGroup>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -349,49 +349,49 @@
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>Zero no dey accepted for d field '{0}'.</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <WCMPageConfigs>If you won configure WCM</WCMPageConfigs>
+      <ColumnPageConfigs>If you won configure Column Page</ColumnPageConfigs>
+      <RowPageConfigs>If you won configure Row Page</RowPageConfigs>
+      <TabsPageConfigs>If you won configure Tab Page</TabsPageConfigs>
+      <MixPageConfigs>Dey Mixed</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
+      <SingleContentViewer>Viewer for Single Content</SingleContentViewer>
+      <ContentListViewer>Viewer for Content List</ContentListViewer>
       <Search>Search</Search>
       <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <TwoColumnsLayout>Layout for Two-column</TwoColumnsLayout>
+      <ThreeColumnsLayout>Layout for Three-column</ThreeColumnsLayout>
+      <TwoRowsLayout>Layout for Two-row</TwoRowsLayout>
+      <ThreeRowsLayout>Layout for Three-row</ThreeRowsLayout>
+      <TwoTabsLayout>Layout for Two-tab</TwoTabsLayout>
+      <ThreeTabsLayout>Layout for Three-tab</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Layout for Two-column &amp; One-row</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Layout for One-row &amp; Two-column</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Layout for Three-row &amp; Two-column</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
     <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
+    <login>Log enter</login>
+    <logout>Log comot</logout>
     <language>Change Language</language>
     <register>Register</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>To view category</wcm-category-view>
+<wcm-view>Content view for WCM</wcm-view>
 </label>
   </UIDriveForm>
   
@@ -403,15 +403,15 @@
       <Private>Private</Private>
       <Public>Public</Public>
       <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
+      <CategorizedDocumentsCenter>Documents Center way don get categories</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>
       <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
       <DMSAdministration>DMS Administration</DMSAdministration>
       <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
       <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
+      <PendingDocumentsCenter>Document Center way dey pend</PendingDocumentsCenter>
       <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
+      <SharedUsersSpace>Shared User Space</SharedUsersSpace>
       <Systemfiles>System Files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
       <ManagedSites>Sites Management</ManagedSites>
@@ -421,13 +421,13 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Watin you go use select page</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>Access denied. E fit be say you no get read permission, or dem don comot d node or say dem don change am.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
@@ -438,19 +438,19 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>House</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>House</home>
   </label>  
   </Breadcrumb>
 
   <UIViewMetadataForm>
     <msg>
-      <Invalid-number>Please enter a valid number.</Invalid-number>
+      <Invalid-number>Abeg enter one valid number.</Invalid-number>
     </msg>
   </UIViewMetadataForm>
 </bundle>

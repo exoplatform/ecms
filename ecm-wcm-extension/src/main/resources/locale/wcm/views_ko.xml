@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>설명</description>
       </label>
     </view>
   </WebLink>
@@ -50,7 +50,7 @@
 
   <Category>
     <view>
-      <label>Category</label>
+      <label>카테고리</label>
     </view>
   </Category>
 

@@ -977,7 +977,7 @@
       <watchDocument>Stebėti dokumentą</watchDocument>
       <taggingDocument>Dokumento žyma</taggingDocument>
       <viewMetadatas>Peržiūrėti metaduomenis</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
+      <overloadThumbnail>Perkrovos miniatūros</overloadThumbnail>
       <manageHidden>Slėpti/Rodyti turinį</manageHidden>
       <comment>Komentuoti</comment>
       <vote>Balsuoti</vote>
@@ -990,7 +990,7 @@
       <addSymLink>Pridėti nuorodą</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Bendrinti</shareDocuments>
+      <shareDocuments>Dalintis</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>

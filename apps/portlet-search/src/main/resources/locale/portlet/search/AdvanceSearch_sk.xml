@@ -22,7 +22,7 @@
       <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>of about</ofAboutCaption>
       <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
+      <similar>Stránky, na ktorých sa zobrazuje rovnaký obsah</similar>
       <editor>Editor</editor>
       <date>Date</date>
       <relevancy>Relevance</relevancy>
@@ -42,7 +42,7 @@
       <searchFormSelector>Search Form Template</searchFormSelector>
       <searchResultSelector>Search Result Template</searchResultSelector>
       <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchPageLayoutSelector>Šablóna rozloženia stránky vyhľadávania</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
       <pageMode>Page Mode</pageMode>
       <option>
@@ -63,9 +63,9 @@
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <keyword-not-support>Kľúčové slovo je neplatné. Niektoré znaky nie sú rozpoznané.</keyword-not-support>
      <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-empty>Zadajte kľúčové slovo.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>

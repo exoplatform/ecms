@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
-      <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <keyword>คีย์เวิร์ด</keyword>
+      <portal>ส่วนงาน</portal>
+      <Page>หน้า</Page>
+      <Document>เอกสาร</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>ค้นหา</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
-      <editor>Editor</editor>
-      <date>Date</date>
-      <relevancy>Relevance</relevancy>
-      <title>Title</title>
-      <sortBy>Sort By:</sortBy>
+      <Page>หน้า</Page>
+      <Document>เอกสาร</Document>
+      <DocumentAndPage>เอกสารและหน้า</DocumentAndPage>
+      <documentandpage>เอกสารและหน้า</documentandpage>
+      <results>ผลลัพธ์ {0} ถึง {1} สำหรับ {2}</results>
+      <oneResult>มีผลลัพธ์เดียวสำหรับ {0}</oneResult>
+      <ofAboutCaption>เกี่ยวกับ</ofAboutCaption>
+      <timeUnitCaption>วินาที</timeUnitCaption>
+      <similar>หน้าที่มีเนื้อหาเดียวกัน</similar>
+      <editor>ตัวแก้ไข</editor>
+      <date>วันที่</date>
+      <relevancy>ความเกี่ยวข้อง</relevancy>
+      <title>ชื่อเรื่อง</title>
+      <sortBy>เรียงลำดับตาม:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>แก้ไข</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>การค้นหา {0} ของคุณไม่ตรงกับ {1} ใด ๆ</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>จำนวนต่อหน้า</itemsPerPageSelector>
+      <searchFormSelector>แม่แบบการค้นหา</searchFormSelector>
+      <searchResultSelector>แม่แบบผลการค้นหา</searchResultSelector>
+      <searchPaginatorSelector>แม่แบบหน้าการค้นหา</searchPaginatorSelector>
+      <searchPageLayoutSelector>แม่แบบเค้าโครงหน้าค้นหา</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>เส้นทางหลัก</searchResultBasePathInputSetAction>
+      <pageMode>โหมดหน้า</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>ไม่มี</none>
+        <more>เพิ่มเติม</more>
+        <pagination>แบ่งหน้า</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>เลือกเส้นทางหลัก</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>คีย์เวิร์ดไม่ถูกต้อง อักขระบางตัวไม่รู้จัก</keyword-not-support>
+     <not-checked>กรุณาเลือกประเภทการค้นหา</not-checked>
+     <keyword-not-empty>กรุณาใส่คีย์เวิร์ด</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>ถัด​ไป</next>
+      <previous>ก่อน​หน้า​</previous>
+      <more>เพิ่มเติม</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>แก้ไขด่วน</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>ในหน้า</pageCheckBox>
+      <documentCheckBox>ในเนื้อหา</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>ค้นหาไซต์ทั้งหมด</all>
       </option>  
     </label>  
   </ViewMode>
