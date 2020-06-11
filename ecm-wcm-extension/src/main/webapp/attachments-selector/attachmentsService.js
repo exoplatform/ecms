@@ -15,13 +15,13 @@ export function getSpaceById(id) {
 export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
   return fetch(`/portal/rest/managedocument/getFoldersAndFiles/?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}`,
     {})
-    .then(response => { 
+    .then(response => {
       if (response.ok) { 
         return response.text(); 
       } else { 
-        return response.json().then(error => {
-          log(`Error get data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
-          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        return response.text().then(error => {
+          log(`Error get data: ${error}`);
+          throw new Error(error);
         });
       }})
     .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
@@ -30,7 +30,7 @@ export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
         return xml;
       }
     }).catch(e => {
-      log(`Error get data: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
+      log(`Error get data: ${e.errorMessage ? e.errorMessage : e}`);
       throw new Error(`Error getting folders and files of the current path ${e}`);
     });
 }
@@ -42,9 +42,9 @@ export function getDrivers() {
       if (response.ok) { 
         return response.text(); 
       } else { 
-        return response.json().then(error => {
-          log(`Error get data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
-          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        return response.text().then(error => {
+          log(`Error get data: ${error}`);
+          throw new Error(error);
         });
       }
     })
@@ -54,7 +54,7 @@ export function getDrivers() {
         return xml;
       }
     }).catch(e => {
-      log(`Error get drives data: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
+      log(`Error get drives data: ${e.errorMessage ? e.errorMessage : e}`);
       throw new Error(`Error getting drivers ${e}`);
     });
 }
@@ -65,9 +65,9 @@ export function createFolder(currentDrive, workspace, parentPath, newFolderName)
       if (response.ok) { 
         return response.text(); 
       } else { 
-        return response.json().then(error => {
-          log(`Error post data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
-          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        return response.text().then(error => {
+          log(`Error post data: ${error}`);
+          throw new Error(error);
         });
       }
     })
@@ -77,7 +77,7 @@ export function createFolder(currentDrive, workspace, parentPath, newFolderName)
         return xml;
       }
     }).catch(e => {
-      log(`Error creating folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
+      log(`Error creating folder: ${e.errorMessage ? e.errorMessage : e}`);
       throw new Error(`Error creating a new folder ${e}`);
     });
 }
@@ -88,9 +88,9 @@ export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
       if (response.ok) { 
         return response.text(); 
       } else { 
-        return response.json().then(error => {
-          log(`Error delete data: ${error.errorMessage ? error.errorMessage : error.errorCode}`);
-          throw new Error(error.errorMessage ? error.errorMessage : error.errorCode);
+        return response.text().then(error => {
+          log(`Error delete data: ${error}`);
+          throw new Error(error);
         });
       }
     })
@@ -100,7 +100,7 @@ export function deleteFolderOrFile(currentDrive, workspace, itemPath) {
         return xml;
       }
     }).catch(e => {
-      log(`Error deleting the folder: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
+      log(`Error deleting the folder: ${e.errorMessage ? e.errorMessage : e}`);
       throw new Error(`Error deleting the folder or the file ${e}`);
     });
 }
