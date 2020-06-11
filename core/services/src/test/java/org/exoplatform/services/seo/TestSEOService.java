@@ -23,6 +23,7 @@ import javax.jcr.Node;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
@@ -84,6 +85,7 @@ public class TestSEOService extends BaseWCMTestCase{
     UserNode userNode = Mockito.mock(UserNode.class);
     Mockito.when(uiPortal.getName()).thenReturn(portalName);
     Mockito.when(uiPortal.getSelectedUserNode()).thenReturn(userNode);
+    Mockito.when(uiPortal.getSiteType()).thenReturn(SiteType.PORTAL);
     session = sessionProvider.getSession("collaboration", repository);
     Node rootNode = session.getRootNode(); 
     Node seoNode = rootNode.addNode("SEO");
