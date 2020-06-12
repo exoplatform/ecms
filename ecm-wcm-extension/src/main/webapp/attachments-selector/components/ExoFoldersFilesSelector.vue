@@ -746,7 +746,9 @@ export default {
       }
     },
     addCloudDrive(drive) { // listen clouddrives 'addDrive' event
-      this.drivers.push(drive); // display connecting drive in 'My Drives' section
+      if (!this.drivers.some(({ title }) => title === drive.title)) {
+        this.drivers.push(drive); // display connecting drive in 'My Drives' section
+      }
     },
     changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
       this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection

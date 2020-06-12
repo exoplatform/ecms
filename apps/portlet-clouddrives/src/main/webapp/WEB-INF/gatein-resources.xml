@@ -120,8 +120,5 @@
     <depends>
       <module>cloudDriveUtils</module>
     </depends>
-    <depends>
-      <module>jquery</module>
-    </depends>
   </module>
 </gatein-resources>

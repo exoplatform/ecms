@@ -12,6 +12,11 @@
         <span class="cloudDriveTitle">{{ $t("ConnectDriveDrawer.title.ConnectYourService") }}</span>
         <a class="cloudDriveCloseIcon" @click="toggleCloudDrawer()">×</a>
       </div>
+      <transition name="fade" mode="in-out">
+        <div v-show="showErrorMessage" class="alert cloudDriveAlert alert-error">
+          <i class="uiIconError"></i>{{ errorMessage }}
+        </div>
+      </transition>
       <div class="content">
         <v-list dense class="cloudDriveList ignore-vuetify-classes">
           <v-list-item-group v-if="providers" color="primary">
@@ -38,7 +43,7 @@
 </template>
 
 <script>
-import { getUserDrive, notifyError } from "../cloudDriveService";
+import { getUserDrive } from "../cloudDriveService";
 
 export default {
   model: {
@@ -60,8 +65,18 @@ export default {
       connectingProvider: "",
       showCloudDrawer: false,
       drivesOpened: false,
-      drivesInProgress: {} // contain all drives that are in connecting process, drive name is a key and progress percent is a value
+      drivesInProgress: {}, // contain all drives that are in connecting process, drive name is a key and progress percent is a value
+      errorMessage: "",
+      showErrorMessage: false,
+      MESSAGE_TIMEOUT: 5000
     };
+  },
+  watch: {
+    showErrorMessage: function(newVal) {
+      if (newVal) {
+        setTimeout(() => this.showErrorMessage = false, this.MESSAGE_TIMEOUT);
+      }
+    }
   },
   async created() {
     if (!this.showCloudDrawer) {
@@ -75,7 +90,8 @@ export default {
         cloudDrive.init(data.workspace, data.homePath);
         this.providers = cloudDrive.getProviders();
       } catch (err) {
-        notifyError(this.$t(err.message));
+        this.errorMessage = err.message;
+        this.showErrorMessage = true;
       }
     }
   },
@@ -106,7 +122,12 @@ export default {
           this.showCloudDrawer = false;
           this.drivesOpened = false;
         },
-        () => {
+        (error) => {
+          if (error) {
+            this.errorMessage = error;
+            this.showErrorMessage = true;
+            this.toggleCloudDrawer();
+          }
           this.connectingProvider = "";
           this.drivesOpened = false;
           this.$emit("updateProgress", { progress: null });
