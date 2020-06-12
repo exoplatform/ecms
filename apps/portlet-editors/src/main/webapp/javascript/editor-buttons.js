@@ -156,43 +156,60 @@
             }
           });
         }
-
-        // Add buttons container
-        // var $container = $target.find(".editorButtonContainer");
-        var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
-        // Create pulldown with editor buttons
-        var $dropdownContainer = $("<div class='dropdown-container'></div>");
-
-
-        var $dropdown = $("<ul class='dropdown-menu'></ul>");
-
-        for (var i = 0; i < buttons.length; i++) {
-          var $btn = buttons[i].createButtonFn();
-          let provider = buttons[i].provider;
-          // Save user choice
-          $btn.click(function() {
-            savePreferredProvider(fileId, provider);
-          });
-          $btn.addClass("editorButton");
-          $btn.attr('data-provider', buttons[i].provider);
-          $btn.attr('data-fileId', fileId);
-          // If there is current open editor and it's not this one
-          if (currentProvider && currentProvider != buttons[i].provider) {
-            $btn.addClass("disabledProvider");
-          }
-          $dropdown.append($btn);
-        }
-
         geti18n().done(function(i18n) {
-          var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'><i class='uiIconEcmsOfficeOnlineOpen uiIconEcmsLightGray uiIconEdit'></i><span>" + i18n["editors.buttons.EditorButton"] + "</span>" +
-            "<i class='uiIconArrowDown uiIconLightGray'></i></button>");
-          $dropdownContainer.append($toggle);
-          $dropdownContainer.append($dropdown);
+          // Add buttons container
+          var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
+          if (buttons.length == 1) {
+            // Create editor button
+            var $btn = buttons[0].createButtonFn();
+            $btn.addClass("editorButton");
+            $btn.attr('data-provider', buttons[0].provider);
+            $btn.attr('data-fileId', fileId);
+            // If there is current open editor and it's not this one
+            if (currentProvider && currentProvider != buttons[0].provider) {
+              $btn.addClass("disabledProvider");
+            }
+            $btn.find(".editorLabel").html(i18n["editors.buttons.EditorButton"]);
+            
+            $container.append($btn);
+            let provider = buttons[0].provider;
+            $btn.click(function() {
+              savePreferredProvider(fileId, provider);
+            });
+          } else {
 
-          if (dropclass) {
-            $container.addClass(dropclass);
+            // Create pulldown with editor buttons
+            var $dropdownContainer = $("<div class='dropdown-container'></div>");
+
+
+            var $dropdown = $("<ul class='dropdown-menu'></ul>");
+
+            for (var i = 0; i < buttons.length; i++) {
+              var $btn = buttons[i].createButtonFn();
+              let provider = buttons[i].provider;
+              // Save user choice
+              $btn.click(function() {
+                savePreferredProvider(fileId, provider);
+              });
+              $btn.addClass("editorButton");
+              $btn.attr('data-provider', buttons[i].provider);
+              $btn.attr('data-fileId', fileId);
+              // If there is current open editor and it's not this one
+              if (currentProvider && currentProvider != buttons[i].provider) {
+                $btn.addClass("disabledProvider");
+              }
+              $dropdown.append($btn);
+            }
+            var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'><i class='uiIconEcmsOfficeOnlineOpen uiIconEcmsLightGray uiIconEdit'></i><span>" + i18n["editors.buttons.EditorButton"] + "</span>" +
+              "<i class='uiIconArrowDown uiIconLightGray'></i></button>");
+            $dropdownContainer.append($toggle);
+            $dropdownContainer.append($dropdown);
+
+            if (dropclass) {
+              $container.addClass(dropclass);
+            }
+            $container.append($dropdownContainer);
           }
-          $container.append($dropdownContainer);
           $containerLoader.resolve($container);
         });
       } else {
