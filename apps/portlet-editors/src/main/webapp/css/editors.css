@@ -152,6 +152,15 @@
   background: none;
 }
 
+#UIActionBar .editorButtonContainer > li.hidden-tabletL {
+  display: block;
+  margin: 2px 0px;
+}
+#UIActionBar .editorButtonContainer > li.hidden-tabletL .editorLabel {
+  color: white;
+  margin: 0 3px;
+}
+
 .actionBar .disabledProvider a:hover {
   color: #999999 !important;
 }
