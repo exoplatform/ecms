@@ -13,8 +13,8 @@
         <a class="cloudDriveCloseIcon" @click="toggleCloudDrawer()">×</a>
       </div>
       <transition name="fade" mode="in-out">
-        <div v-show="showErrorMessage" class="alert cloudDriveAlert alert-error">
-          <i class="uiIconError"></i>{{ errorMessage }}
+        <div v-show="showAlertMessage" :class="`alert-${alert.type} cloudDriveAlert--${alert.type}`" class="alert cloudDriveAlert">
+          <i :class="`uiIcon${capitalized(alert.type)}`"></i>{{ alert.message }}
         </div>
       </transition>
       <div class="content">
@@ -66,15 +66,15 @@ export default {
       showCloudDrawer: false,
       drivesOpened: false,
       drivesInProgress: {}, // contain all drives that are in connecting process, drive name is a key and progress percent is a value
-      errorMessage: "",
-      showErrorMessage: false,
+      alert: { message: "", type: "" },
+      showAlertMessage: false,
       MESSAGE_TIMEOUT: 5000
     };
   },
   watch: {
-    showErrorMessage: function(newVal) {
+    showAlertMessage: function(newVal) {
       if (newVal) {
-        setTimeout(() => this.showErrorMessage = false, this.MESSAGE_TIMEOUT);
+        setTimeout(() => this.showAlertMessage = false, this.MESSAGE_TIMEOUT);
       }
     }
   },
@@ -90,8 +90,8 @@ export default {
         cloudDrive.init(data.workspace, data.homePath);
         this.providers = cloudDrive.getProviders();
       } catch (err) {
-        this.errorMessage = err.message;
-        this.showErrorMessage = true;
+        this.alert = { message: err.message, type: "error" };
+        this.showAlertMessage = true;
       }
     }
   },
@@ -124,9 +124,13 @@ export default {
         },
         (error) => {
           if (error) {
-            this.errorMessage = error;
-            this.showErrorMessage = true;
+            this.alert = { message: error, type: "error" };
+            this.showAlertMessage = true;
             this.toggleCloudDrawer();
+          } else {
+            // if error undefined/null action was cancelled
+            this.alert = { message: "Canceled", type: "info" };
+            this.showAlertMessage = true;
           }
           this.connectingProvider = "";
           this.drivesOpened = false;
@@ -167,6 +171,9 @@ export default {
         this.drivesOpened = true;
         this.showCloudDrawer = false;
       }
+    },
+    capitalized(value) {
+      return typeof value !== "string" ? "" :  value.charAt(0).toUpperCase() + value.slice(1);
     }
   },
 };
