@@ -46,6 +46,7 @@
     settings: {},
 
     init: function (docPreviewSettings) {
+      $('.spaceButtomNavigation').addClass('hidden');
       if($('.commentsLoaded').length) {
         $("#documentPreviewContent").html('<div class="loading">' +
             '<i class="uiLoadingIconMedium uiIconLightGray"></i>' +
@@ -482,11 +483,14 @@
                         '</div>' +
                     '</div>' +
                     '<span class="uiIconResize pull-right uiIconLightGray"></span>' +
-                  '</div>' +
-                '<div class="fileName hidden-title" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
-                '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
-                ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
-                '</div>';
+                  '</div>' ;
+                if (this.settings.showComments) {
+                  html += '<div class="fileName hidden-title" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
+                      '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>' +
+                      ((documentPreview.settings.version && documentPreview.settings.version.number) ? ('<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>') : '') +
+                      '</div>';
+                }
+
                 if (!this.settings.showComments) {
                   html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
                       '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>';
@@ -985,6 +989,7 @@
 
         // Bind close event. Return body scroll, turn off keyup
         $(".exitWindow > .uiIconClose", $('#uiDocumentPreview')).click(function() {
+          $('.spaceButtomNavigation').removeClass('hidden');
           $('body').removeClass('modal-open');
           $("#documentPreviewContainer").remove();
           setTimeout(function() {

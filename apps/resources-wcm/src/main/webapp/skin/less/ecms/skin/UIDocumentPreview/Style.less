@@ -696,11 +696,11 @@
 						position: fixed;
 					}
 					.dropdown-menu {
-						top: 46px;
-						right: 12%;
+						top: 50px;
 						left: 40%;
 						position: fixed;
-						bottom: 82%;
+						width: fit-content;
+						height: fit-content;
 					}
 				}
 
@@ -865,18 +865,25 @@
 	}
 
 	.uiDocumentPreview {
+		.fileName {
+			bottom: 30px;
+		}
 		.hidden-title {
-			display: block!important;
+			display: block !important;
 			position: fixed;
-			bottom: 30px;		}
+			bottom: 30px;
+		}
 		.previewBtn {
-          position: absolute;
+			position: absolute;
 
 			.showComments {
 			  display: block !important;
 			  top: 18px;
 			  right: 100px;
 			  position: fixed;
+			  .uiIconComment {
+				font-size: 20px!important;
+			  }
 			}
             .breadCrumb {
               display: none;
@@ -888,6 +895,9 @@
 		#documentPreviewContent, .uiPreviewWebContent, .previewBtn {
 			margin-right: 0;
 		}
+		#documentPreviewContent {
+			padding-top: 20px!important;
+		}
 		.commentArea, .resizeButton {
 			display: none;
 			width: 100%;
@@ -898,7 +908,7 @@
 					border-right: none!important;
 				}
 				.closeIcon {
-					display: block!important;
+					display: none!important;
 				}
 			}
 			.uiContentBox {
