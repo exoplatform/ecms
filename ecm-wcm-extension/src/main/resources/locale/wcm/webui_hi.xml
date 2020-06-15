@@ -34,10 +34,10 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>साइट प्रबंधन</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
-      <PersonalDocuments>Personal Documents</PersonalDocuments>
-      <UserDocuments>{0} Documents</UserDocuments>
+      <PersonalDocuments>व्यक्तिगत दस्तावेज़</PersonalDocuments>
+      <UserDocuments>{0} के दस्तावेज़</UserDocuments>
       <Collaboration>Collaboration</Collaboration>
       <Trash>Trash</Trash>
     </label>
@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>कार्य</action>
     </header>
     <msg>
       <child-not-found>No Content Found</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>कार्य</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -201,7 +201,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>खोजें</SearchWebContent>
     </action>
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
@@ -252,10 +252,10 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
+      <title>शीर्षक</title>
       <score>Score</score>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>कार्य</action>
     </header>
     <title>
       <Select>Select</Select>
@@ -290,7 +290,7 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>संपादित करें</Edit>
         <Delete>Delete</Delete>
       </title>
     </action>
@@ -301,7 +301,7 @@
       <owner>Permission</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
-      <action>Action</action>
+      <action>कार्य</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>उपयोगकर्ता का चयन करें</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
       <RowPageConfigs>Row Page Configurations</RowPageConfigs>
       <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>मिश्रित</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Single Content Viewer</SingleContentViewer>
       <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
+      <Search>खोजें</Search>
       <Sitemap>Site Map</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>

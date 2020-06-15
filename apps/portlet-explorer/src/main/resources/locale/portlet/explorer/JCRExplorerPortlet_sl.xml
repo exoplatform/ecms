@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Izvirnik</original>
       <version>Različica</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>Osnovna različica</baseVersion>
       <addLabel>Dodaj oznako</addLabel>
       <removeLable>Odstrani oznako</removeLable>
       <restoreVersion>Obnovi različico</restoreVersion>

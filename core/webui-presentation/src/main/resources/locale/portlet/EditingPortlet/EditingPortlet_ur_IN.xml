@@ -2,10 +2,10 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Mode:</Editing>
+      <Editing>موڈ:</Editing>
     </label>
     <msg>
-      <not-permission>You don't have permission to do this action.</not-permission>
+      <not-permission>آپکو یہ عمل کرنے کی اجازت نہیں ہے ۔</not-permission>
     </msg>
   </EditingPortlet>
 
@@ -13,7 +13,7 @@
     <label>
       <option>
         <Draft>ترمیم</Draft>
-        <Published>Published</Published>
+        <Published>شائع</Published>
       </option>
     </label>
   </UIEditingForm>

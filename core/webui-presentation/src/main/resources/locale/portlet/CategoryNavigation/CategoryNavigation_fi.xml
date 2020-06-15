@@ -2,7 +2,7 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Quick Edit</QuickEdit>
+      <QuickEdit>Nopea muokkaus</QuickEdit>
     </title>
   </UICNContainer>
 
@@ -29,7 +29,7 @@
       
       <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <DisplaySettingBlock>Näyttöasetukset</DisplaySettingBlock>
       <AdvancedBlock>Advanced</AdvancedBlock>
   
   <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
@@ -47,7 +47,7 @@
       <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Tallenna</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>

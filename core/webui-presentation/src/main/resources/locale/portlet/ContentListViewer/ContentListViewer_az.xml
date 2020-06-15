@@ -9,7 +9,7 @@
     <msg>
       <non-contents>Sorry, no articles are available.</non-contents>
       <item-not-found>Item not found.</item-not-found>
-      <no-permission>You do not have permission to access this node.</no-permission>
+      <no-permission>Bu node daxil olmaq üçün icazəniz yoxdur.</no-permission>
       <category-back>Go to previous</category-back>
     </msg>
   </UICLVContainer>
@@ -28,7 +28,7 @@
     <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Title</exo:title>
+        <exo:title>Başlıq</exo:title>
         <exo:dateCreated>Created Date</exo:dateCreated>
         <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
         <publication:liveDate>Published Date</publication:liveDate>
@@ -71,21 +71,21 @@
     </label>
     <help>
       <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
-      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
+      <ModeSelectionHelp>Məzmunu göstərmək üçün iki rejim mövcuddur. "Qovluqla" seçdiyiniz qovluğun / kateqoriyadan olan bütün məzmunu götürəcəkdir. "İçerik ilə" göstərmək istədiyiniz məzmunu əl ilə seçə bilərsiniz.</ModeSelectionHelp>
+      <FolderPathHelp>Göstərmək istədiyiniz məzmunu seçin. Dynamic Navigation (Dynamic Navigation) funksiyasını aktivləşdirsəniz, default seçimi dinamik şəkildə əvəz olunacaq (aşağıda Ətraflı rejimi bax).</FolderPathHelp>
+      <HeaderOptionHelp>İçindəkilər siyahısının üst hissəsini göstərin. Avtomatik Algılama seçeneğini etkinleştirirseniz, başlığı seçilen seçime göre bulmaya çalışacaktır.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
+      <ContextualHelp>Dinamik naviqasiya seçimini aktivləşdirir. Digərləri məzmunu dinamik olaraq URL parametresine əsasən dəyişə bilər.</ContextualHelp>
       <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
-      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
+      <ShowDetailInPageHelp>Məzmuna basaraq istifadəçi ətraflı səhifəyə yönəldir. İçindəkiləri göstərmək üçün hədəf səhifəsində Dynamic Navigation funksiyasını aktivləşdirən "URL ilə məzmun" portletiniz olmalıdır.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Bu parametr, ətraflı səhifənin linkindəki məzmunun yolunu ehtiva edir. Bu parametr, "URL ilə məzmun" portletində istifadə olunan parametrə uyğun olmalıdır.</DetailParameterHelp>
       <ContentByQueryHelp>You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.</ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
+      <ContentsVisibilityHelp>"Kimlik doğrulaması ilə məhdudlaşdırılır" kimlik doğrulama əsasında məzmunu süzür. Daxil etməsəniz, yalnız ictimai məzmunu görürsünüz. Daxil olursanız, intranet istifadəçilər tərəfindən görünən bütün məzmunu görürsünüz (lakin hamısı birgə). "İstifadəçi Rolu ilə məhdudlaşdığınız" sizin haqqlarınızdan asılı olaraq məzmunu görəcəksiniz. Çox hallarda, bu seçim istifadə edilməməlidir, çünki ümumi performansını azaldır.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>Delete</delete>
+      <delete>Sil</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -147,7 +147,7 @@
     <action>
       <refresh>Refresh</refresh>
       <edit>Edit in Content Explorer</edit>
-      <delete>Delete</delete>
+      <delete>Sil</delete>
       <publish>Publish</publish>
     </action>
     <label>

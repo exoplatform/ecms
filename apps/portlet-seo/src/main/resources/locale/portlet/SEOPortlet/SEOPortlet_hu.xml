@@ -15,11 +15,11 @@
       <select-language>Select a language</select-language>
       <option>
         <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
+        <Hourly>Óránként</Hourly>
         <Daily>Daily</Daily>
         <Weekly>Weekly</Weekly>
         <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
+        <Yearly>Évente</Yearly>
         <Never>Never</Never>
       </option> 
     </label>
@@ -35,7 +35,7 @@
       <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>Törlés</seo-delete>
     </title>
   <help> 
   <priority>Valid values range from 0.0 to 1.0.</priority>
@@ -50,7 +50,7 @@
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>SEO Management</seo>
+      <seo>SEO-menedzsment</seo>
   </title>
   <label>
     <seo>SEO</seo>

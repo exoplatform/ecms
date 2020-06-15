@@ -8,18 +8,18 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
-        <Explorer>Explorer</Explorer>
-        <Repository>Repository</Repository>
-        <Advanced>Advanced</Advanced>
+        <Templates>Templat</Templates>
+        <Explorer>Penjelajah</Explorer>
+        <Repository>Repositori</Repository>
+        <Advanced>Tambahan</Advanced>
       </label>
     </tab>
     <label>
-      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UITaxonomyManagerTrees>Kategori</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadata</UIMetadataManager>
-      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINamespaceManager>Ruang nama</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Documents</UITemplatesManager>
+      <UITemplatesManager>Dokumen</UITemplatesManager>
       <UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
@@ -27,10 +27,10 @@
       <UIActionManager>Actions</UIActionManager>
       <UIScriptManager>Scripts</UIScriptManager>
       <UIUnLockManager>Locks</UIUnLockManager>
-      <UIFolksonomyManager>Tags</UIFolksonomyManager>
+      <UIFolksonomyManager>Label</UIFolksonomyManager>
     </label>
     <msg>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk melaksanakan tindakan ini.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,23 +40,23 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
-      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
-      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
-      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
-      <path-error>An error occurred while removing this category node.</path-error>
+      <referential-integrity>Tidak dapat membaca daripada fail sumber, atau destinasi kategori adalah sub-kategori.</referential-integrity>
+      <no-taxonomy-selected>Anda mesti menyalin atau dipotong sekurang-kurangnya satu kategori.</no-taxonomy-selected>
+      <node-is-cutting>Anda tidak boleh menampal di sini. Nod kategori '{0}' mungkin dipotong.</node-is-cutting>
+      <can-not-paste>Terdapat tiada data di papan klip untuk menampal.</can-not-paste>
+      <reference-exception>Tidak dapat menghapuskan kategori ini kerana ia telah dirujuk oleh kandungan yang pada masa ini.</reference-exception>
+      <path-error>Ralat berlaku semasa mengelurakan nod kategori ini.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
+      <confirm-delete>Adakah anda pasti mahu memadamkan kategori ini?</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
-      <paste>Paste</paste>
-      <cut>Cut</cut>
-      <copy>Copy</copy>
+      <add>Tambah</add>
+      <paste>Tampal</paste>
+      <cut>Potong</cut>
+      <copy>Salin</copy>
       <remove>Padam</remove>
     </title>
   </UITaxonomyManager>
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Nyatakan kategori nama, Ruang kerja dan rumah jalan.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Menetapkan kebenaran untuk pokok kategori.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Menambah tindakan untuk pokok kategori untuk melengkapkan penciptaan atau mengemaskini.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Mengedit pokok taksonomi dengan menambah, menyalin, memotong dan memilih kebenaran.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>The category tree does not exist.</not-exist-tree>
+      <not-exist-tree>Pokok kategori tidak wujud.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
 
@@ -87,28 +87,28 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Menetapkan semula</Reset>
     </action>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
-      <name-emty>The tree name is required.</name-emty>
-      <homePath-emty>The home path is required.</homePath-emty>
-      <targetPath-emty>The target path is required.</targetPath-emty>
-      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
+      <name-not-allowed>Nama Terlarang</name-not-allowed>
+      <name-emty>Nama pokok adalah diperlukan.</name-emty>
+      <homePath-emty>Laluan utama adalah diperlukan.</homePath-emty>
+      <targetPath-emty>Laluan sasaran diperlukan.</targetPath-emty>
+      <taxonomytree-existed>Nama pokok kategori sudah wujud.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Name</TaxoTreeName>
-      <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
+      <TaxoTreeName>Nama</TaxoTreeName>
+      <TaxoTreeWorkspace>Ruang kerja</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Laluan utama</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Tambah laluan</AddPath>
     </title>
   </TaxonomyTreeHomePath>
 
@@ -125,12 +125,12 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <read>Read</read>
+      <usersOrGroups>Pengguna atau Kumpulan</usersOrGroups>
+      <read>Baca</read>
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
       <remove>Remove</remove>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
+      <have-not-any-permission>Sila nyatakan sekurang-kurangnya satu kebenaran untuk nod ini.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
   -->
 
   <UIActionForm>
-    <title>Add an action to the category tree</title>
+    <title>Menambah tindakan untuk pokok kategori</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
-      <path-invalid>The path is invalid.</path-invalid>
-      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
-      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add an action.</no-permission-add>
-      <not-created-tree>The category tree has not yet been created.</not-created-tree>
+      <name-not-allowed>Nama kosong atau watak istimewa tidak dibenarkan dalam nama tindakan.</name-not-allowed>
+      <path-invalid>Jalan tidak sah.</path-invalid>
+      <taxonomy-existed>Pokok kategori sudah wujud.</taxonomy-existed>
+      <taxonomy-node-existed>Nod kategori sudah wujud.</taxonomy-node-existed>
+      <no-permission-add>Anda tidak mempunyai hak untuk menambah tindakan.</no-permission-add>
+      <not-created-tree>Pokok kategori belum dicipta.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -188,7 +188,7 @@
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Register New Namespace</title>
+    <title>Ruang nama yang baru Daftar</title>
     <label>
       <namespace>Namespace Prefix</namespace>
       <uri>URI</uri>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
-      <prefix-null>Please specify the namespace's prefix.</prefix-null>
-      <uri-null>Please specify the namespace's URI.</uri-null>
+      <register-unsuccessfull>Ruang nama atau URI sudah wujud.</register-unsuccessfull>
+      <prefix-null>Sila nyatakan dalam ruang nama awalan.</prefix-null>
+      <uri-null>Sila nyatakan nama ruang URL.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -212,15 +212,15 @@
     <header>
       <prefix>Prefix</prefix>
       <uri>Namespace URI</uri>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <action>
-      <AddNamespace>Register</AddNamespace>
+      <AddNamespace>Daftar</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Register New Namespace</UINamespaceForm>
+      <UINamespaceForm>Ruang nama yang baru Daftar</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -243,17 +243,17 @@
     <header>
       <icon>Icon</icon>
       <name>Metadata</name>
-      <type>Type</type>
+      <type>Jenisnya</type>
       <internalUse>Internal Use</internalUse>
       <action>Actions</action>
     </header>
     <msg>
-      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
-      <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
-      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <confirm-delete>Anda pasti mahu memadamkan medata ini?</confirm-delete>
+      <delete-successful>Template dari '{0}' telah dihapuskan dengan jayanya.</delete-successful>
+      <path-not-found-exception>Metadata ini telah dihapuskan atau diubah. Sila klik butang segar semula.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Add Metadata</Add>
+      <Add>Menambah Metadata</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -264,13 +264,13 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>Edit Templat Metadata</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
     <title>
-      <MetadataPermission>Set Permissions</MetadataPermission>
-      <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
+      <MetadataPermission>Set Kebenaran</MetadataPermission>
+      <QueriesPermissionBrowse>Menambah kebenaran</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -279,7 +279,7 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Mapping Metadata</title>
+    <title>Pemetaan Metadata</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>Apply</Save>
@@ -287,7 +287,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Action</input>
+      <input>Tindakan</input>
     </header>
     <label>
       <dialogTemplate>Dialog Template:</dialogTemplate>
@@ -313,13 +313,13 @@
   <UIMetadataView>
     <header>
       <name>Element Name</name>
-      <type>Type</type>
-      <description>Description</description>
+      <type>Jenisnya</type>
+      <description>Keterangan</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Description</description>
+      <description>Keterangan</description>
     </info>
     <tab>
       <element>Elements</element>
@@ -343,25 +343,25 @@
   <UIDriveList>
     <header>
       <icon>Icon</icon>
-      <name>Name</name>
+      <name>Nama</name>
       <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
+      <homePath>Laluan utama</homePath>
       <permissions>Kebenaran</permissions>
       <views>View</views>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <tooltip>
       <Delete>Padam</Delete>
       <EditInfo>Sunting</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
+      <confirm-delete>Adakah anda pasti anda mahu menghapuskan pemacu ini?</confirm-delete>
     </msg>
     <action>
       <AddDrive>Add Drive</AddDrive>
     </action>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{0} dalam {1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -372,20 +372,20 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>The drive already exists.</drive-exists>
-      <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
-      <drive-views-invalid>Please select a view.</drive-views-invalid>
-      <icon-not-found>Icon not found.</icon-not-found>
-      <permission-null>You must set the permission for this drive.</permission-null>
-      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
-      <name-null>Please enter the drive name.</name-null>
-      <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
+      <drive-exists>Pemacu telah sedia wujud.</drive-exists>
+      <workspace-path-invalid>Laluan ruang kerja yang tidak sah.</workspace-path-invalid>
+      <drive-views-invalid>Sila pilih satu pandangan.</drive-views-invalid>
+      <icon-not-found>Ikon yang tidak dijumpai.</icon-not-found>
+      <permission-null>Anda mesti menetapkan kebenaran untuk pemacu ini.</permission-null>
+      <allowCreateFolders>Anda mesti pilih jenis folder.</allowCreateFolders>
+      <name-null>Sila masukkan nama yang memandu.</name-null>
+      <fileName-invalid>Nama memandu mempunyai sesetengah aksara yang tidak sah.</fileName-invalid>
     </msg>
     <tab>
       <label>
         <DriveInputSet>Drive</DriveInputSet>
         <ViewsInputSet>Apply Views</ViewsInputSet>
-        <PermissionInputSet>Set Permissions</PermissionInputSet>
+        <PermissionInputSet>Set Kebenaran</PermissionInputSet>
       </label>
     </tab>
     <label>
@@ -393,14 +393,14 @@
       <workspace>Workspace:</workspace>
       <homePath>Home Path:</homePath>
       <icon>Workspace Icon:</icon>
-      <viewPreferences>Show Referenced Documents:</viewPreferences>
-      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
+      <viewPreferences>Papar dirujuk dokumen:</viewPreferences>
+      <viewNonDocument>Tunjukkan Bukan dokumen Nod:</viewNonDocument>
       <viewSideBar>Show Sidebar:</viewSideBar>
       <permissions>Permissions:</permissions>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <showHiddenNode>Tayang fail tersembunyi:</showHiddenNode>
+      <allowCreateFolders>Membolehkan penciptaan Folder:</allowCreateFolders>
       <Admin>Admin:</Admin>
-      <Categories>Categories:</Categories>
+      <Categories>Kategori:</Categories>
       <Icons>Icons:</Icons>
       <List>List:</List>
       <Web>Web:</Web>
@@ -421,14 +421,14 @@
       <child-not-found>Child node not found.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Nama</name>
+      <action>Tindakan</action>
     </header>
   </UITreeList>
 
   <UIRepositoryList>
     <titlebar>
-      <label>Manage ECM Main Functions</label>
+      <label>Menguruskan fungsi-fungsi utama ECM</label>
     </titlebar>
   </UIRepositoryList>
 
@@ -441,7 +441,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Action</input>
+      <input>Tindakan</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -461,8 +461,8 @@
       <icon>Icon</icon>
       <nodeType>Node Type</nodeType>
       <mixinType>Mixin Type</mixinType>
-      <orderable>Orderable Child Nodes</orderable>
-      <action>Action</action>
+      <orderable>Orderable Anak Nod</orderable>
+      <action>Tindakan</action>
     </header>
     <action>
       <Export>Export</Export>
@@ -475,7 +475,7 @@
       <Delete>Padam</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
+      <confirm-delete>Adakah anda pasti anda mahu menghapuskan jenis nod ini?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -491,7 +491,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Action</input>
+      <input>Tindakan</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -516,9 +516,9 @@
       <childDefinitions>Child Node Definitions</childDefinitions>
       <namespace>Name Space</namespace>
       <propertyNamespace>Name Space</propertyNamespace>
-      <nodeTypeName>Node Type Name</nodeTypeName>
+      <nodeTypeName>Nama Jenis Node</nodeTypeName>
       <mixinType>Is Mixin Type</mixinType>
-      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
+      <hasOrderableChildNodes>Orderable Anak Nod</hasOrderableChildNodes>
       <primaryItemName>Primary Item Name</primaryItemName>
       <superTypes>Super Types</superTypes>
       <propertyname>Definition Name</propertyname>
@@ -560,16 +560,16 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
-      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
+      <register-successfully>Dalam '{0}' jenis nod telah didaftarkan.</register-successfully>
+      <supertype-is-madatory>Jenis super adalah wajib apabila anda mendaftar sejenis nod yang baru. Sila pilih sekurang-kurangnya satu jenis super.</supertype-is-madatory>
+      <register-failed>Nod jenis pendaftaran adalah tidak berjaya. Ia sama ada sudah wujud atau jenis super yang tidak sah.</register-failed>
       <nodeType-name>The node type name is required.</nodeType-name>
-      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
-      <node-type-exists>The '{0}' node type already exists.</node-type-exists>
-      <node-type-name>The node type name is invalid.</node-type-name>
-      <values-error>Please select only one node type for the default primary type.</values-error>
-      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
-      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
+      <fileName-invalid>Nama fail yang mempunyai sesetengah aksara yang tidak sah.</fileName-invalid>
+      <node-type-exists>Dalam '{0}' jenis nod telah wujud.</node-type-exists>
+      <node-type-name>Nama jenis nod tidak sah.</node-type-name>
+      <values-error>Sila pilih hanya satu jenis nod untuk jenis utama lalai.</values-error>
+      <confirm-delete-child>Adakah anda pasti mahu menghapus nod anak ini?</confirm-delete-child>
+      <confirm-delete-property>Adakah anda pasti anda memadamkan harta ini?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
@@ -580,42 +580,42 @@
       </label>
     </tab>
     <msg>
-      <property-name>The property definition's name was invalid.</property-name>
-      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
+      <property-name>Nama definisi harta adalah tidak sah.</property-name>
+      <not-supported-value-constraints>Perkara ini memerlukan jenis tidak menyokong nilai kekangan.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>The child node name is required.</child-name>
-      <child-invalid>The child node name contains some invalid characters.</child-invalid>
-      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
-      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
-      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
+      <child-name>Nama nod kanak-kanak adalah diperlukan.</child-name>
+      <child-invalid>Nama kanak-kanak nod mengandungi sesetengah aksara yang tidak sah.</child-invalid>
+      <default-node-type-not-found>Jenis nod lalai yang tidak ditemui.</default-node-type-not-found>
+      <requiredPrimaryType>Jenis utama yang diperlukan adalah diperlukan.</requiredPrimaryType>
+      <defaultPrimaryType>Jenis utama lalai adalah diperlukan.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
     <title>
-      <FormdefaultPrimaryTypePopup>Select Default Primary Type</FormdefaultPrimaryTypePopup>
+      <FormdefaultPrimaryTypePopup>Pilih jenis utama lalai</FormdefaultPrimaryTypePopup>
     </title>
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>Select Required Primary Type</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>Pilih jenis primer yang dikehendaki</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Select Super Types</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Pilih jenis Super</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Add/Edit Node Type Definitions</UINodeTypeForm>
+      <UINodeTypeForm>Tambah/Edit nod jenis definisi</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>View Node Type Information</UINodeTypeForm>
+      <UINodeTypeForm>Lihat nod jenis maklumat</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -627,7 +627,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Action</input>
+      <input>Tindakan</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -635,14 +635,14 @@
       <UncheckAll>Uncheck all</UncheckAll>
       <CheckAll>Check all</CheckAll>
     </action>
-    <title>Export Node Types</title>
+    <title>Jenis-jenis nod eksport</title>
     <msg>
-      <item-null>Please select at least one node that you want to export.</item-null>
+      <item-null>Sila pilih sekurang-kurangnya satu nod yang hendak dieksport.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>Export Node Types</UINodeTypeExport>
+      <UINodeTypeExport>Jenis-jenis nod eksport</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -663,13 +663,13 @@
       <Cancel>#{word.cancel}</Cancel>
       <Upload>Upload</Upload>
     </action>
-    <title>Import Node Type From XML File</title>
+    <title>Import jenis nod daripada fail XML</title>
     <msg>
-      <filename-error>Browse a node type file to import.</filename-error>
-      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
-      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
-      <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
-      <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
+      <filename-error>Semak seimbas fail jenis nod untuk diimport.</filename-error>
+      <data-file-error>Hanya fail .xml atau .zip boleh diimport.</data-file-error>
+      <data-invalid>Data tidak sah. Sila semak jenis fail anda dan cuba lagi.</data-invalid>
+      <nodetype-exist>Dalam '{0}' jenis nod telah wujud.</nodetype-exist>
+      <namespace-invalid>Dalam '{0}' ruang nama tidak sah.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -686,17 +686,17 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Action</input>
+      <input>Tindakan</input>
     </header>
     <title>Select Import Node Type</title>
     <msg>
-      <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
-      <nodetype-registered>Registration successful.</nodetype-registered>
+      <no-nodetype-registered>Terdapat jenis-jenis nod yang tidak berdaftar.</no-nodetype-registered>
+      <nodetype-registered>Pendaftaran berjaya.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Import Node Type From XML File</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Import jenis nod daripada fail XML</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -714,7 +714,7 @@
       <AddPermission>Tambah kebenaran</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Tambah laluan</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -725,7 +725,7 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Name</label>
+      <label>Nama</label>
       <action>Actions</action>
     </header>
     <title>
@@ -733,11 +733,11 @@
       <Delete>Padam</Delete>
     </title>
     <action>
-      <AddAction>Add Action Type</AddAction>
+      <AddAction>Menambah jenis tindakan</AddAction>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this action type?</confirm-delete>
-      <cannot-delete>You cannot remove this action type because the system is still using it.</cannot-delete>
+      <confirm-delete>Adakah anda pasti anda mahu menghapuskan jenis tindakan ini?</confirm-delete>
+      <cannot-delete>Anda tidak boleh mengalih keluar jenis tindakan ini kerana sistem sedang menggunakannya.</cannot-delete>
     </msg>
   </UIActionTypeList>
   <!--
@@ -747,11 +747,11 @@
   -->
   <ActionPopup>
     <title>
-      <UIActionTypeForm>Add Action Type</UIActionTypeForm>
+      <UIActionTypeForm>Menambah jenis tindakan</UIActionTypeForm>
     </title>
   </ActionPopup>
   <UIActionTypeForm>
-    <title>Add Action Type</title>
+    <title>Menambah jenis tindakan</title>
     <label>
       <actionType>Extend Action Type:</actionType>
       <name>Name:</name>
@@ -767,11 +767,11 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>The '{0}' action type was added successfully.</action-type-added>
-      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
+      <action-type-added>Dalam '{0}' jenis tindakan berjaya menambah.</action-type-added>
+      <action-type-create-error>Ralat berlaku semasa membuat jenis tindakan.</action-type-create-error>
       <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
-      <action-exist>This action already exists in the ECM system.</action-exist>
-      <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
+      <action-exist>Tindakan ini telah wujud dalam sistem ECM.</action-exist>
+      <fileName-invalid>Nama tindakan mengandungi beberapa watak yang tidak sah.</fileName-invalid>
     </msg>
   </UIActionTypeForm>
   <!--
@@ -788,10 +788,10 @@
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Documents</UITemplateContainer>
+      <UITemplateContainer>Dokumen</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-      <UIActionScriptContainer>Action</UIActionScriptContainer>
+      <UIActionScriptContainer>Tindakan</UIActionScriptContainer>
       <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
       <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
@@ -816,19 +816,19 @@
       <Delete>Padam</Delete>
     </title>
     <header>
-      <name>Name</name>
+      <name>Nama</name>
       <permissions>Kebenaran</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <action>
       <AddView>Add View</AddView>
     </action>
     <msg>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menggunakan fungsi ini.</access-denied>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this view?</confirm-delete>
+      <confirm-delete>Adakah anda pasti mahu memadamkan pandangan ini?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
@@ -839,7 +839,7 @@
   <AddPopup>
     <title>
       <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Add Template</AddPopup>
+      <AddPopup>Tambah Template</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -855,30 +855,30 @@
     </title>
     <header>
       <tabName>Tab</tabName>
-      <localizeButtons>Description</localizeButtons>
+      <localizeButtons>Keterangan</localizeButtons>
       <action>Actions</action>
     </header>
     <action>
       <AddTab>Add</AddTab>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
+      <confirm-delete>Adakah anda pasti mahu memadamkan tab ini?</confirm-delete>
     </msg>
     <grid>
       <msg>
-        <empty>There is no tab on this view</empty>
+        <empty>Tiada tab pada pandangan ini</empty>
       </msg>
     </grid>
   </UITabList>
 
   <UIViewPermissionList>
-    <title>Select Owner with permissions on this view:</title>
+    <title>Pilih Pemilik dengan keizinan pada paparan ini:</title>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{0} dalam {1}</permission>
     </label>
     <msg>
-      <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
-      <permission-cannot-empty>View permission is required and cannot be empty.</permission-cannot-empty>
+      <confirm-delete>Adakah anda pasti mahu memadamkan kebenaran ini?</confirm-delete>
+      <permission-cannot-empty>Lihat kebenaran diperlukan dan tidak boleh kosong.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
@@ -888,7 +888,7 @@
     </title>
     <header>
       <friendlyPermission>Kebenaran</friendlyPermission>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <action>
       <title>
@@ -897,17 +897,17 @@
     </action>
     <grid>
       <msg>
-        <empty>There is no permission on this view</empty>
+        <empty>Tidak ada kebenaran pada pandangan ini</empty>
       </msg>
     </grid>
   </UIViewPermissionList>
 
   <UIViewPermissionForm>
     <action>
-      <Add>Add</Add>
+      <Add>Tambah</Add>
     </action>
     <label>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Pengguna atau Kumpulan</userOrGroup>
     </label>
     <msg>
       <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
@@ -925,48 +925,48 @@
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>The view name is required.</view-name-invalid>
-      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
-      <permission-not-empty>Please select a permission for the view.</permission-not-empty>
+      <view-name-invalid>Nama pandangan diperlukan.</view-name-invalid>
+      <fileName-invalid>Nama paparan mengandungi beberapa aksara yang tidak sah.</fileName-invalid>
+      <permission-not-empty>Tolong pilih satu kebenaran untuk melihat.</permission-not-empty>
       <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
       <mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
-      <view-exist>The view name already exists.</view-exist>
+      <view-exist>Pandangan yang tidak wujud.</view-exist>
     </msg>
     <label>
-      <viewName>Name</viewName>
-      <template>Template</template>
+      <viewName>Nama</viewName>
+      <template>Templat</template>
       <version>Restore Version</version>
-      <enableVersion>Enable Version</enableVersion>
-      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+      <enableVersion>Membolehkan Versi</enableVersion>
+      <hideExplorerPanel>Sembunyikan panel penjelajah di penghalang sisi</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Please select at least one function from the list.</button-select-error>
-      <tab-name-error>The tab name is required.</tab-name-error>
-      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
+      <button-select-error>Sila pilih sekurang-kurangnya satu fungsi dari senarai.</button-select-error>
+      <tab-name-error>Nama tab diperlukan.</tab-name-error>
+      <fileName-invalid>Nama tab mengandungi beberapa aksara yang tidak sah.</fileName-invalid>
     </msg>
     <label>
-      <version>Restore Version</version>
-      <viewName>Name</viewName>
+      <version>Memulihkan Versi</version>
+      <viewName>Nama</viewName>
       <tabName>Tab Name</tabName>
       <permission>Permission</permission>
       <tabs>Tabs</tabs>
-      <template>Templates</template>
-      <enableVersion>Enable Version</enableVersion>
+      <template>Template</template>
+      <enableVersion>Membolehkan Versi</enableVersion>
       <addFolder>Add Folder</addFolder>
       <addDocument>Add Document</addDocument>
       <editDocument>Edit Document</editDocument>
       <upload>Upload</upload>
       <paste>Paste</paste>
-      <search>Search</search>
-      <viewReferences>View References</viewReferences>
-      <viewNodeType>View Node Type</viewNodeType>
-      <viewPermissions>View Permissions</viewPermissions>
-      <viewProperties>View Properties</viewProperties>
-      <manageVersions>Manage Versions</manageVersions>
-      <manageAuditing>Manage Auditing</manageAuditing>
-      <managePublications>Manage Publication</managePublications>
+      <search>Carian</search>
+      <viewReferences>Lihat rujukan</viewReferences>
+      <viewNodeType>Jenis paparan nod</viewNodeType>
+      <viewPermissions>Lihat keizinan</viewPermissions>
+      <viewProperties>Lihat sifat-sifat</viewProperties>
+      <manageVersions>Menguruskan versi</manageVersions>
+      <manageAuditing>Mengurus pengauditan</manageAuditing>
+      <managePublications>Menguruskan penerbitan</managePublications>
       <manageCategories>Manage Categories</manageCategories>
       <manageRelations>Manage Relations</manageRelations>
       <manageActions>Manage Actions</manageActions>
@@ -979,7 +979,7 @@
       <viewMetadatas>View Metadata</viewMetadatas>
       <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Comment</comment>
+      <comment>Komen</comment>
       <vote>Vote</vote>
       <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
@@ -990,10 +990,10 @@
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Kongsi</shareDocuments>
       <openDocument>Remote Edit</openDocument>
-      <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <editProperty>Edit Hartanah Dokumen</editProperty>
+      <uploadNewVersion>Meng-upload versi baru</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1008,14 +1008,14 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Action</UITabContainer>
+        <UITabContainer>Tindakan</UITabContainer>
         <UIViewForm>View</UIViewForm>
         <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
       <Restore>Restore</Restore>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Kebenaran Pemilih</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Pilih pengguna</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1052,19 +1052,19 @@
       <Delete>Padam</Delete>
     </title>
     <header>
-      <name>Name</name>
-      <path>Value</path>
+      <name>Nama</name>
+      <path>Nilai</path>
       <baseVersion>Base Version</baseVersion>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <action>
       <Add>Add</Add>
     </action>
     <msg>
-      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
+      <template-in-use>Tidak dapat menghapuskan {0}. Ia sedang digunakan.</template-in-use>
+      <confirm-delete>Adakah anda pasti anda mahu menghapus template ini?</confirm-delete>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menggunakan fungsi ini.</access-denied>
+      <delete-permission-denied>Awda tidak mempunyai kebenaran untuk menghapuskan '{0}' template.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1079,16 +1079,16 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
       <Restore>Restore</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <role-require>Please select a permission.</role-require>
-      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
-      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
-      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
+      <version-restored>Versi {0} telah dikembalikan berjaya.</version-restored>
+      <role-require>Sila pilih kebenaran.</role-require>
+      <template-name-exist>Nama templat '{0}' sudah wujud.</template-name-exist>
+      <add-permission-denied>Anda tidak mempunyai keizinan untuk menambah template baru.</add-permission-denied>
+      <edit-permission-denied>Awda tidak mempunyai keizinan untuk mengubah suai '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
       <label>
@@ -1165,10 +1165,10 @@
       <AddNew>Add Script</AddNew>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
+      <confirm-delete>Adakah anda pasti anda mahu menghapus skrip ini?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Name</scriptName>
+      <scriptName>Nama</scriptName>
       <path>Script</path>
       <baseVersion>Base Version</baseVersion>
       <action>Actions</action>
@@ -1198,10 +1198,10 @@
       <Change>Change</Change>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <name-null>Please enter the script name.</name-null>
-      <name-exist>The script name '{0}' already exists.</name-exist>
-      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
+      <version-restored>Versi {0} telah dikembalikan berjaya.</version-restored>
+      <name-null>Sila masukkan nama skrip.</name-null>
+      <name-exist>Nama skrip '{0}' sudah wujud.</name-exist>
+      <fileName-invalid>Nama skrip mempunyai sesetengah aksara yang tidak sah.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1218,7 +1218,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Nama</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1233,7 +1233,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Nama</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1248,34 +1248,34 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Category</title>
+    <title>Tambah Kategori</title>
     <label>
       <taxonomyName>Category Name</taxonomyName>
       <parentPath>Parent</parentPath>
     </label>
     <msg>
-      <exist>The "{0}" category already exists.</exist>
-      <name-null>Please specify the category name.</name-null>
-      <name-invalid>The category name has some invalid characters.</name-invalid>
-      <name-too-long>The category name must have less than 30 characters.</name-too-long>
+      <exist>Dalam "{0}" kategori sudah wujud.</exist>
+      <name-null>Sila nyatakan nama kategori.</name-null>
+      <name-invalid>Nama kategori mempunyai sesetengah aksara yang tidak sah.</name-invalid>
+      <name-too-long>Nama kategori mesti mempunyai watak-watak yang kurang daripada 30.</name-too-long>
     </msg>
   </UITaxonomyForm>
 
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Mengedit kategori pokok</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Tambah Kategori pokok</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
 
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Mengedit kategori pokok</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1289,10 +1289,10 @@
       <taxonomyName>Category Name:</taxonomyName>
     </label>
     <msg>
-      <name-null>The category name is empty.</name-null>
+      <name-null>Nama kategori ini kosong.</name-null>
       <name-invalid>The category name is invalid.</name-invalid>
       <name-too-long>The category name must not have more than {0} characters.</name-too-long>
-      <exist>The category name already exists.</exist>
+      <exist>Nama kategori sudah wujud.</exist>
     </msg>
   </UITaxonomyTreeCreateChildForm>
 
@@ -1304,14 +1304,14 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Pilih pengguna</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Pilih pengguna</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Pilih keahlian</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1324,8 +1324,8 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1339,13 +1339,13 @@
       <name>Category Tree</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <action>
-      <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
+      <AddTaxonomyTree>Tambah Kategori pokok</AddTaxonomyTree>
     </action>
     <tooltip>
-      <EditTaxonomyTree>Edit Category Tree</EditTaxonomyTree>
+      <EditTaxonomyTree>Mengedit kategori pokok</EditTaxonomyTree>
       <Delete>Delete Category Tree</Delete>
     </tooltip>
     <title>Browse Category Tree</title>
@@ -1363,7 +1363,7 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Name</name>
+      <name>Nama</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
       <permissions>Kebenaran</permissions>
@@ -1375,7 +1375,7 @@
 
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Pilih</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
@@ -1390,10 +1390,10 @@
       <Reset>Tetapkan semula</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Sila pilih sekurang-kurangnya satu kebenaran.</checkbox-require>
+      <userOrGroup-required>Tolong pilih pengguna atau kumpulan sebelum menyimpan kebenaran.</userOrGroup-required>
+      <not-change-permission>Anda tidak punya hak untuk menambah kebenaran.</not-change-permission>
+      <access-denied>Akses ditolak. Anda tidak dapat membuang kebenaran ini.</access-denied>
     </msg>
   </UIPermissionTreeForm>
 
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Kebenaran Pemilih</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1436,23 +1436,23 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Pengguna atau Kumpulan</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
       <remove>Remove</remove>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Adakah anda pasti mahu mengeluarkan izin ini?</confirm-delete-permission>
       <no-permission-tochange>You do not have the right to remove this permission.</no-permission-tochange>
       <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>Akses dinafikan. Anda tidak boleh mengalih keluar kebenaran ini.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Pilih pengguna</SelectUser>
+      <SelectMember>Pilih keahlian</SelectMember>
       <AddAny>Everyone</AddAny>
     </title>
   </permission>
@@ -1463,15 +1463,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Pilih pengguna</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilih keahlian</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectUser>Pilih pengguna</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -1479,9 +1479,9 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Pilih</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Pengguna atau Kumpulan</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
       <remove>Remove</remove>
@@ -1490,13 +1490,13 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Sila pilih sekurang-kurangnya satu kebenaran.</checkbox-require>
+      <userOrGroup-required>Tolong pilih pengguna atau kumpulan sebelum menyimpan kebenaran.</userOrGroup-required>
+      <not-change-permission>Anda tidak mempunyai hak untuk menambah kebenaran.</not-change-permission>
+      <access-denied>Akses dinafikan. Anda tidak boleh mengalih keluar kebenaran ini.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -1518,55 +1518,55 @@
   -->
   <UITemplateList>
     <header>
-      <name>Type</name>
-      <action>Action</action>
+      <name>Jenisnya</name>
+      <action>Tindakan</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Tambah Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menggunakan fungsi ini.</access-denied>
       <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <template-not-exist>Template yang anda cuba untuk menghilangkan tidak wujud.</template-not-exist>
     </msg>
   </UITemplateList>
 
   <UIActionsTemplateList>
     <header>
-      <name>Type</name>
-      <action>Action</action>
+      <name>Jenisnya</name>
+      <action>Tindakan</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Tambah Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menggunakan fungsi ini.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <template-not-exist>Template yang anda cuba untuk menghilangkan tidak wujud.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
 
   <UIOthersTemplateList>
     <header>
-      <name>Type</name>
+      <name>Jenisnya</name>
       <label>Template</label>
       <icon>Icon</icon>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Tambah Template</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <confirm-delete>Adakah anda benar-benar mahu padamkan?</confirm-delete>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menggunakan fungsi ini.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <template-not-exist>Template yang anda cuba untuk menghilangkan tidak wujud.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1590,27 +1590,27 @@
       <Delete>Padam</Delete>
     </title>
     <header>
-      <title>Name</title>
-      <action>Action</action>
+      <title>Nama</title>
+      <action>Tindakan</action>
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Tambah Template</AddTemplate>
       <Edit>Sunting</Edit>
       <Delete>Padam</Delete>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <confirm-delete>Adakah anda pasti anda mahu menghapus template ini?</confirm-delete>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menggunakan fungsi ini.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <template-not-exist>Template yang anda cuba untuk menghilangkan tidak wujud.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
   <CateTemplateList>
     <header>
-      <title>Name</title>
-      <action>Action</action>
+      <title>Nama</title>
+      <action>Tindakan</action>
       <template>Template</template>
     </header>
     <title>
@@ -1618,7 +1618,7 @@
       <Delete>Padam</Delete>
     </title>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Tambah Template</AddTemplate>
       <Edit>Sunting</Edit>
       <Delete>Padam</Delete>
     </action>
@@ -1626,12 +1626,12 @@
 
   <PageTemplateList>
     <header>
-      <title>Name</title>
-      <action>Action</action>
+      <title>Nama</title>
+      <action>Tindakan</action>
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Tambah Template</AddTemplate>
       <Edit>Sunting</Edit>
       <Delete>Padam</Delete>
     </action>
@@ -1676,11 +1676,11 @@
   <UICLVTemplateForm_ContentTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
+      <title>Nama</title>
       <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1690,11 +1690,11 @@
   <UICLVTemplateForm_PageTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
+      <title>Nama</title>
       <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1704,11 +1704,11 @@
   <UICLVTemplateForm_CateTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
+      <title>Nama</title>
       <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1716,13 +1716,13 @@
   </UICLVTemplateForm_CateTemplateContainer>
   <UICLVTemplateForm>
     <label>
-      <paginators>Paginator</paginators>
+      <paginators>Peminat</paginators>
       <list>Content</list>
       <navigation>Navigation</navigation>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Kebenaran Pemilih</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1766,7 +1766,7 @@
   <DialogForm>
     <label>
       <UITemplateContent>DialogForm</UITemplateContent>
-      <UIPopupWindow>Dialog Permission</UIPopupWindow>
+      <UIPopupWindow>Kebenaran Dialog</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
       <content>Content:</content>
       <name>Name:</name>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Kebenaran Pemilih</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Kebenaran Pemilih</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1830,7 +1830,7 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Name</name>
+      <name>Nama</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -1853,7 +1853,7 @@
   -->
   <UIViewTab>
     <header>
-      <name>Name</name>
+      <name>Nama</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -1884,7 +1884,7 @@
     <msg>
       <name-invalid>The field name must not contain special characters.</name-invalid>
       <roles-invalid>The Permission field is required.</roles-invalid>
-      <version-restored>Version {0} was restored successfully.</version-restored>
+      <version-restored>Versi {0} telah dikembalikan berjaya.</version-restored>
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
@@ -1924,23 +1924,23 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Name</name>
-      <type>Type</type>
+      <name>Nama</name>
+      <type>Jenisnya</type>
       <statement>Statement</statement>
       <permission>Kebenaran</permission>
       <action>Actions</action>
     </header>
     <action>
-      <AddQuery>Add Query</AddQuery>
+      <AddQuery>Tambah Pertanyaan</AddQuery>
     </action>
     <tooltip>
-      <Edit>Edit this Query</Edit>
-      <Delete>Delete this Query</Delete>
+      <Edit>Edit Pertanyaan ini</Edit>
+      <Delete>Padamkan Permintaan ini</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this query?</confirm-delete>
-      <query-not-existed>The query does not exist anymore.</query-not-existed>
-      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
+      <confirm-delete>Adakah anda pasti mahu memadamkan pertanyaan ini?</confirm-delete>
+      <query-not-existed>Pertanyaannya tidak wujud lagi.</query-not-existed>
+      <can-not-remove>Ralat berlaku semasa memadamkan pertanyaan. Sila hubungi pentadbir untuk maklumat.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1966,7 +1966,7 @@
   </UIQueriesForm>
   <AddQueryForm>
     <title>
-      <UIQueriesForm>Add Query</UIQueriesForm>
+      <UIQueriesForm>Tambah Pertanyaan</UIQueriesForm>
     </title>
   </AddQueryForm>
   <EditQueryForm>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Kebenaran Pemilih</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -1986,16 +1986,16 @@
   -->
   <UITagManager>
     <title>
-      <EditStyle>Edit Style</EditStyle>
-      <RemoveStyle>Remove Style</RemoveStyle>
+      <EditStyle>Edit Gaya</EditStyle>
+      <RemoveStyle>Keluarkan Gaya</RemoveStyle>
     </title>
   </UITagManager>
   <UITagStyleList>
     <header>
-      <name>Style Name</name>
+      <name>Nama Gaya</name>
       <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <title>
       <Edit>Sunting</Edit>
@@ -2024,7 +2024,7 @@
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
+      <UITagStyleForm>Edit Konfigurasi Gaya Tag</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
@@ -2050,7 +2050,7 @@
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please enter the value into the field '{0}'.</empty-input>
+      <empty-input>Sila masukkan nilai ke dalam bidang '{0}'.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2072,7 +2072,7 @@
     <label>
       <workspaceName>Workspace:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodePath>Laluan Akar:</rootNodePath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -2082,7 +2082,7 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Adakah anda pasti anda mahu menghapuskan secara kekal?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
@@ -2102,23 +2102,23 @@
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>Add Super Type</AddSuperType>
+      <AddSuperType>Tambahkan Jenis Super</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Add Required Type</AddRequiredType>
-      <AddDefaultType>Add Default Type</AddDefaultType>
+      <AddRequiredType>Tambah jenis yang diperlukan</AddRequiredType>
+      <AddDefaultType>Tambah Jenis lalai</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <AddConstraints>Tambah Kekangan</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>Select</Select>
+      <Select>Pilih</Select>
     </title>
   </authInputSet>
   <!--
@@ -2126,12 +2126,12 @@
   -->
   <UIViewContainer>
     <title>
-      <View>View</View>
+      <View>Paparkan</View>
       <EditInfo>Sunting</EditInfo>
       <Delete>Padam</Delete>
     </title>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{0} dalam {1}</permission>
     </label>
   </UIViewContainer>
   <ECMTemplate>
@@ -2158,17 +2158,17 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectUser>Pilih pengguna</selectUser>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectUser>Pilih pengguna</selectUser>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2192,12 +2192,12 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Pilih Kumpulan</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2210,9 +2210,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectUser>Pilih pengguna</selectUser>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2235,8 +2235,8 @@
 
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The home path is required.</homepath-emty>
-      <targetpath-emty>The target path is required.</targetpath-emty>
+      <homepath-emty>Laluan utama adalah diperlukan.</homepath-emty>
+      <targetpath-emty>Laluan sasaran diperlukan.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
@@ -2253,8 +2253,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Group</group>
-      <searchUser>User</searchUser>
+      <group>Kumpulan</group>
+      <searchUser>Pengguna</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2271,16 +2271,16 @@
   <DriveInputSet>
     <label>
       <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
+      <nt_unstructured>Folder Kandungan</nt_unstructured>
       <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <exo_jsFolder>Javascrip Folder</exo_jsFolder>
+      <exo_linkFolder>Folder Pautan</exo_linkFolder>
+      <exo_webFolder>Folder Kandungan Web</exo_webFolder>
     </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Adakah anda pasti mahu memadamkan kebenaran ini?</confirm-delete-permission>
       <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
     </msg>
   </UIPermissionTreeInfo>
@@ -2314,7 +2314,7 @@
   <UILockHolderList>
     <header>
       <name>Groups or Users</name>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <tooltip>
       <DeleteLock>Delete Group</DeleteLock>
@@ -2325,12 +2325,12 @@
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>Title</name>
+      <name>Tajuk</name>
       <hoderLock>Lock Owner</hoderLock>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Buka kunci</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
@@ -2338,7 +2338,7 @@
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Manage Lock</UIUnLockForm>
+      <UIUnLockForm>Mengurus kunci</UIUnLockForm>
     </title>
   </EditUnLockForm>
   <UITabPane>
@@ -2346,16 +2346,16 @@
       <Close>#{word.close}</Close>
     </action>
     <title>
-      <UILockHolderContainer>Manage Lock</UILockHolderContainer>
-      <UILockNodeList>Locked Node</UILockNodeList>
+      <UILockHolderContainer>Mengurus kunci</UILockHolderContainer>
+      <UILockNodeList>Nod Terkunci</UILockNodeList>
     </title>
   </UITabPane>
 
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Add Tab</AddTabForm>
+      <AddTabForm>Tambah Tab</AddTabForm>
       <AddTab>#{word.save}</AddTab>
-      <BackViewForm>Back</BackViewForm>
+      <BackViewForm>Kembali</BackViewForm>
     </action>
   </UIViewFormTabPane>
 
@@ -2375,10 +2375,10 @@
 
   <UISkinTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
-      <action>Actions</action>
+      <name>Nama</name>
+      <roles>Peranan</roles>
+      <baseVersion>Versi</baseVersion>
+      <action>Tindakan</action>
     </header>
     <msg>
       <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
@@ -2425,14 +2425,14 @@
   </UITaxonomyTreeContainer>
   <UITaxonomyTreeMainForm>
     <action>
-      <NextViewPermission>Next</NextViewPermission>
+      <NextViewPermission>Seterusnya</NextViewPermission>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <NextAddAction>Next</NextAddAction>
+      <NextAddAction>Seterusnya</NextAddAction>
       <Previous>Previous</Previous>
     </action>
   </UIPermissionTreeForm>
@@ -2440,7 +2440,7 @@
   <UIActionForm>
     <action>
       <PreviousViewPermission>Previous</PreviousViewPermission>
-      <NextViewTree>Next</NextViewTree>
+      <NextViewTree>Seterusnya</NextViewTree>
     </action>
     <msg>
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
@@ -2463,8 +2463,8 @@
 
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <action>Action</action>
+      <usersOrGroups>Pengguna atau Kumpulan</usersOrGroups>
+      <action>Tindakan</action>
     </header>
     <action>
       <title>
@@ -2472,7 +2472,7 @@
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Adakah anda pasti mahu memadamkan kebenaran ini?</confirm-delete-permission>
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
@@ -2491,8 +2491,8 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2526,7 +2526,7 @@
 
   <UIWorkspaceWizard>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
+      <name-not-allowed>Nama Terlarang</name-not-allowed>
     </msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>

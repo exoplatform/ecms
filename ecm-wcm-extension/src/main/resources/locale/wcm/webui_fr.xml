@@ -66,7 +66,7 @@
   <UIPageSelectorPanel>
     <header>
       <path>Emplacement</path>
-      <action>#{word.action}</action>
+      <action>Action</action>
     </header>
     <msg>
       <child-not-found>Aucune page trouvée</child-not-found>
@@ -140,7 +140,7 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>#{word.name}</name>
+      <name>Nom</name>
       <add>Ajouter</add>
       <delete>Supprimer</delete>
     </label>
@@ -152,14 +152,14 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>#{word.save}</SaveCategories>
-      <Cancel>#{word.cancel}</Cancel>
+      <SaveCategories>Sauvegarder</SaveCategories>
+      <Cancel>Annuler</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>#{word.name}</name>
+      <name>Nom</name>
       <publicationstate>Etat de Publication</publicationstate>
       <action>Action</action>
     </header>
@@ -170,7 +170,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>#{word.name}</name>
+      <name>Nom</name>
       <publicationstate>Etat de Publication</publicationstate>
       <action>Action</action>
     </header>
@@ -229,7 +229,7 @@
   <UIContentPropertySelector>
     <action>
       <Add>Ajouter</Add>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>Annuler</Cancel>
     </action>
     <label>
       <metadataType>Entrez un nom de requête.</metadataType>
@@ -245,8 +245,8 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>Sauvegarder</Save>
+      <Cancel>Annuler</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -271,7 +271,7 @@
       <SaveDraft>Enregistrer le brouillon</SaveDraft>
       <FastPublish>Publication Rapide</FastPublish>
       <Preferences>Préférences</Preferences>
-      <Close>#{word.close}</Close>
+      <Close>Fermer</Close>
     </action>
     <msg>
       <access-denied>Vous n'avez pas la permission ajouter des catégories pour ce document.</access-denied>
@@ -287,7 +287,7 @@
       <UIEditableCheckboxInput>Droit de modifier</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>Sauvegarder</Save>
       <Clear>Effacer</Clear>
       <title>
         <Edit>Modifier</Edit>

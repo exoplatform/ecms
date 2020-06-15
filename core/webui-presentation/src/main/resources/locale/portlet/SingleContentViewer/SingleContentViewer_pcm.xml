@@ -49,7 +49,7 @@
     <label>
       <Back>Back to previous page</Back>
       <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Which options you for like</Preferences>
       <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
@@ -100,7 +100,7 @@
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Watin you go use select page</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>

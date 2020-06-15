@@ -7,19 +7,19 @@
   -->
   <UICommentForm>
     <label>
-      <name>Name</name>
-      <email>Email</email>
-      <website>Website</website>
-      <comment>Comment</comment>
+      <name>Nimi</name>
+      <email>Sähköpostiosoite</email>
+      <website>Sivusto</website>
+      <comment>Kommentti</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <not-support>Et voi kommentoida tämän asiakirjan tyyppi.</not-support>
+      <not-checkedout>Sinun täytyy tarkistaa asiakirjan ennen kuin kommentoi sitä.</not-checkedout>
+      <content-null>Et voi lähettää tyhjää kommenttia.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -29,15 +29,15 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Poor</normal>
-      <good>Below average</good>
+      <normal>Huono</normal>
+      <good>Keskimääräistä huonompi</good>
       <verygood>Average</verygood>
       <excellent>Above average</excellent>
       <best>Good</best>
-      <no-value>no value yet</no-value>
+      <no-value>arvoa ei vielä</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Oma arvio:</my-rating>
     </label>
     <button>
       <label>
@@ -45,9 +45,9 @@
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-support>Et voi äänestää tämän asiakirjan tyyppi.</not-support>
+      <not-checkedout>Sinun täytyy tarkistaa asiakirjan äänestää.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
+      <refresh-session-success>Istunto päivitetty onnistuneesti.</refresh-session-success>
       <no-node-history>You are at the root folder.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <save-session-success>Kaikki muutokset tallennettu.</save-session-success>
+      <target-path-not-found>Et voi käyttää tätä tietä, joko koska se ei ole enää olemassa tai koska sinulla ei ole käyttöoikeuksia.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relation</Relation>
+      <Relation>Suhteessa</Relation>
       <Explorer>File Explorer</Explorer>
-      <Close>Close Sidebar</Close>
+      <Close>Sulje sivupalkki</Close>
       <TagExplorer>Tag Cloud</TagExplorer>
-      <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <Clipboard>Leikepöytä</Clipboard>
+      <SavedSearches>Tallennetut haut</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>Sulje sivupalkki</Close>
     </title>
   </UISideBar>
   <!--
@@ -92,13 +92,13 @@
     <label>
       <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>Refresh</refesh>
+      <setUpBrowser>Perustaa oman selailu mieltymykset</setUpBrowser>
+      <refesh>Päivitä</refesh>
       <currentDrive>Current Drive</currentDrive>
-      <selectView>Select View</selectView>
-      <showSideBar>Show Sidebar</showSideBar>
-      <more>More</more>
-      <backTo>Back</backTo>
+      <selectView>Valitse näkymä</selectView>
+      <showSideBar>Näytä sivupalkki</showSideBar>
+      <more>Lisää</more>
+      <backTo>Takaisin</backTo>
     </label>
   </UIViewBar>
 
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Henkilökohtaiset asemat</PersonalDrives>
+      <GroupDrives>Ryhmän asemat</GroupDrives>
+      <GeneralDrives>Yleiset asemat</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>Ei näytä saatavilla mukaan teidän käyttöoikeudet ajaa '{0}'.</no-view-found>
+      <access-denied>Pääsy estetty. Sinulla ei ehkä ole lupaa työtilassa ajaa '{0}'.</access-denied>
+      <workspace-not-exist>Aseman '{0}' oli tallennettu yksi tunnistamaton työtila. Ota uudelleen tämän aseman.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -129,10 +129,10 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Tämä elementti oli poistettu tai muutettu. Klikkaa Päivitä painiketta.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -142,9 +142,9 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
+      <languages-list>Käännökset</languages-list>
       <relation-list>Relations</relation-list>
-      <references-list>References</references-list>
+      <references-list>Viitteet</references-list>
       <no-related-document>No Related Document</no-related-document>
       <related-document>Related Documents</related-document>
     </label>
@@ -155,11 +155,11 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>Perustaa oman selailu mieltymykset</title>
     <label>
       <enableStructure>Browse in structure mode:</enableStructure>
       <showSideBar>Show sidebar:</showSideBar>
-      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showHiddenNode>Näytä piilotettuja esineitä:</showHiddenNode>
       <showNonDocument>Show non-document items:</showNonDocument>
       <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Set Up Filter Preferences</title>
+    <title>Määritä Suodatin Asetukset</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -190,9 +190,9 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Uudelleennimeä</title>
     <label>
-      <nameField>Name</nameField>
+      <nameField>Nimi</nameField>
       <titleField>Title</titleField>
     </label>
     <action>
@@ -202,19 +202,19 @@
     </action>
     <msg>
       <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
-      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
-      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
-      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-denied>Pääsy estetty. Et voi nimetä uudelleen tämän kohteen.</rename-denied>
+      <fileName-invalid>Uusi nimi sisältää virheellisiä merkkejä.</fileName-invalid>
+      <newName-same-oldName>Uusi nimi on jo olemassa. Ole hyvä ja tarkista uudelleen.</newName-same-oldName>
+      <version-exception>Tämä asiakirja (tai yksi sen esi-isät) ei ole valittu.</version-exception>
+      <lock-exception>Tämä asiakirja on lukittu. Ota avata se ennen uudelleennimeäminen.</lock-exception>
+      <constraintViolation-exception>Virhe tapahtui kun uudelleennimeäminen '{0}'. Ole hyvä ja tarkista uudelleen.</constraintViolation-exception>
+      <unknown-prefix>Etuliite '{0}' ei ole vielä rekisteröitynyt.</unknown-prefix>
+      <rename-error>Virhe tapahtui kun uudelleennimeäminen. Ole hyvä ja tarkista uudelleen.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
+      <UIRenameForm>Uudelleennimeä</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Upload File</UIUploadManager>
@@ -239,7 +239,7 @@
       <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Comment</UICommentForm>
+      <UICommentForm>Kommentti</UICommentForm>
       <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Manage Publication</UIPublicationManager>
       <UIConfirmMessage>Delete ?</UIConfirmMessage>
@@ -247,10 +247,10 @@
       <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
       <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
+      <UIActivePublication>Ilmoittaudu Julkaisu Elinkaaren</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Asiakirjojen Selailu Mieltymykset</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
@@ -270,9 +270,9 @@
   <UIResourceForm>
     <title>Edit File Content</title>
     <label>
-      <name>Name</name>
+      <name>Nimi</name>
       <textToModify>Text to modify</textToModify>
-      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
+      <fileToUpload>Ladata uutta sisältöä että asiakirjasta (tulee olla sama mime-tyyppi)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -291,20 +291,20 @@
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Vote</Vote>
-      <Comment>Comment</Comment>
+      <Comment>Kommentti</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Publications</ManagePublications>
-      <ManageCategories>Categories</ManageCategories>
+      <ManageCategories>Kategoriat</ManageCategories>
       <ManageRelations>Relations</ManageRelations>
       <ManageActions>Actions</ManageActions>
       <ExportNode>Export</ExportNode>
       <ImportNode>Import</ImportNode>
       <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Show/Hide Content</ManageHidden>
-      <ViewReferences>References</ViewReferences>
+      <ViewReferences>Viitteet</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewPermissions>Käyttöoikeudet</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -314,17 +314,17 @@
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <node-checkedin>Sinun täytyy tarkistaa ensin.</node-checkedin>
       <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
       <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
         <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
-        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
+        <no-publication-lifecycle>Ei julkaisun elinkaari on määritetty.</no-publication-lifecycle>
       </manage-publication>
       <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
+      <not-supported-nodetype>Tämä toiminto on tuettu vain asiakirjoja.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Asiakirja oli tilattu onnistuneesti.</unsubcriber-lifecycle-finish>
+      <access-false>Asiakirja ei ole artikkeli tai tarkastetaan.</access-false>
       <unsupported-action>This action is not supported.</unsupported-action>
       <not-relationable>This document has no relations.</not-relationable>
       <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
@@ -333,24 +333,24 @@
       <not-support>Can't edit the selected item.</not-support>
       <template-null>This document has no form template.</template-null>
       <keyword-null>There are no keywords to search.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Ei tuloksia löytynyt.</not-found>
+      <keyword-not-allow>Tämä avainsana ei ole sallittua.</keyword-not-allow>
       <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
-      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
-      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
-      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
-      <not-supported>This function is supported for the document type only.</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <access-denied>Pääsy estetty. Sinulla ei ole lupaa muokata tämän kohteen.</access-denied>
+      <access-add-denied>Pääsy estetty. Sinulla ei ole lupaa lisätä kohteita täällä.</access-add-denied>
+      <item-existed>Tämä solmu on jo olemassa. Se ei voi olla sama nimi kuin sen sisarus.</item-existed>
+      <removed-hidden-mixin>Olet poistanut piilotettu mixin onnistuneesti.</removed-hidden-mixin>
+      <added-hidden-mixin>Lisätty piilotettu mixin onnistuneesti.</added-hidden-mixin>
+      <not-supported>Tämä toiminto on tuettu asiakirjatyyppi vain.</not-supported>
+      <empty-file-type>Et voi lisätä asiakirjaan.</empty-file-type>
+      <unsupported-watch>Vain asiakirjoja voi katsella.</unsupported-watch>
+      <watch-checkedin>Sinun täytyy tarkistaa asiakirjan ennen katsomassa.</watch-checkedin>
+      <unsupported-tagging>Vain asiakirjat voidaan merkitä.</unsupported-tagging>
+      <tagnode-checkedin>Sinun täytyy tarkistaa asiakirjan ennen kuin koodaus.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
+      <SimpleSearch>Pikahaku</SimpleSearch>
       <AdvanceSearch>Advanced Search</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
@@ -361,36 +361,36 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
-      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <has-not-permission>Pääsy estetty. Sinulla ei ole oikeuksia lisätä tämän kohteen.</has-not-permission>
+      <has-not-edit-permission>Pääsy estetty. Sinulla ei ole lupaa muokata täällä. Ota yhteyttä järjestelmänvalvojaan.</has-not-edit-permission>
+      <cannot-login-node>Et voi käyttää ja liitä kohde.</cannot-login-node>
+      <cannot-paste-nodetype>Et voi liittää tämän kohteen tyyppi täällä.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Sinulla ei ole lupaa avata tämän asiakirjan.</has-not-permission-unlok>
+      <bound-exception>Sinulla ei ole lupaa nimetä tämän kohteen. Ota yhteyttä järjestelmänvalvojaan.</bound-exception>
+      <bound-move-exception>Et voi siirtää kohde itse tai alikansioon.</bound-move-exception>
+      <does-not-support-auditing>Et voi aktivoida tilintarkastus täällä.</does-not-support-auditing>
+      <can-not-rename-node>Sinulla ei ole lupa nimetä tämän kohteen. Ota yhteyttä järjestelmänvalvojaan jotta saat tarvittavat oikeudet.</can-not-rename-node>
+      <can-not-cut-node>Sinulla ei ole lupaa leikata tämän kohteen. Ota yhteyttä järjestelmänvalvojaan.</can-not-cut-node>
+      <can-not-remove-node>Sinulla ei ole lupaa poistaa tämän kohteen. Ota yhteyttä järjestelmänvalvojaan.</can-not-remove-node>
+      <can-not-lock-node>Sinulla ei ole lupaa lukita {0}. Ota yhteyttä järjestelmänvalvojaan.</can-not-lock-node>
+      <can-not-unlock-node>Sinulla ei ole lupaa avata tämän kohteen. Ota yhteyttä järjestelmänvalvojaan.</can-not-unlock-node>
+      <no-node>Valitse ainakin yksi kohde ennen liittämistä.</no-node>
+      <can-not-paste-node>Sinulla ei ole lupaa siirtää tämän kohteen. Ota yhteyttä järjestelmänvalvojaan.</can-not-paste-node>
+      <can-not-move-node>Sinulla ei ole lupaa siirtää tämän kohteen. Ota yhteyttä järjestelmänvalvojaan.</can-not-move-node>
+      <does-not-support-versioning>Sinulla ei ole lupaa liikkua. Ota yhteyttä järjestelmänvalvojaan.</does-not-support-versioning>
+      <path-not-found>Tämä elementti oli poistettu tai muutettu. Klikkaa Päivitä painiketta.</path-not-found>
+      <paste-lock-exception>'{0}' ei voi liittää. Varmista, että se ei ole lukittu, eikä tähän kansioon. Tarkista myös että ei siihen liittyvät asiakirja on lukittu.</paste-lock-exception>
+      <can-not-checkin-node>Et voi tarkistaa tämän kohteen. Tarkista että sinulla on tarvittavat käyttöoikeudet.</can-not-checkin-node>
+      <can-not-checkout-node>Et voi tutustu tämän kohteen. Tarkista että sinulla on tarvittavat käyttöoikeudet.</can-not-checkout-node>
+      <move-constraint-exception>Virhe siirrettäessä tämän kohteen.</move-constraint-exception>
+      <not-lock-owner>Et voi avata tätä asiakirjaa koska et ole lukon omistaja.</not-lock-owner>
+      <is-checked-in>Tutustu tämän asiakirjan ennen uudelleennimeäminen.</is-checked-in>
+      <is-checked-in-lock>Tutustu tämän asiakirjan ennen kuin lukitus.</is-checked-in-lock>
+      <cant-lock>Et voi lukita tämän asiakirjan.</cant-lock>
+      <node-locked>Kohteen polku {0} tai ylempi taso on lukittu.</node-locked>
+      <can-not-delete>Sulje tämä asiakirja ennen kuin poistat.</can-not-delete>
+      <can-not-delete-version>Et voi poistaa tämän asiakirjan. Se on versioitu.</can-not-delete-version>
+      <not-support>Et voi poistaa valitun kohteen. Ole hyvä ja valitse toinen.</not-support>
       <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
       <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
       <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
@@ -468,29 +468,29 @@
       <!-- Delte multiple nodes, not in Trash, have no relations -->
       <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
       <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-folder>Oletko varma että haluat poistaa {0} valittu kansio ja kaikki alikansiot?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Oletko varma että haluat poistaa {0} valittuja kohteita ja tiedostoja?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Oletko varma että haluat poistaa {0} on valittu kohteita, kansioita ja kaikki alikansiot?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Oletko varma että haluat poistaa {0} valitut tiedostot, kansiot ja kaikki alikansiot?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Oletko varma että haluat poistaa {0} valitut kohteet, tiedostoja, kansioita ja kaikki alikansiot?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
-      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>Oletko varma että haluat pysyvästi poistaa {0} valitut kohteet?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Oletko varma että haluat pysyvästi poistaa {0} valitut tiedostot?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Oletko varma että haluat pysyvästi poistaa {0} valittu kansio ja kaikki alikansiot?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Oletko varma että haluat pysyvästi poistaa {0} valittuja kohteita ja tiedostoja?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Oletko varma että haluat pysyvästi poistaa {0} on valittu kohteita, kansioita ja kaikki alikansiot?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Oletko varma että haluat pysyvästi poistaa {0} valitut tiedostot, kansiot ja kaikki alikansiot?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Oletko varma että haluat pysyvästi poistaa {0} valitut kohteet, tiedostoja, kansioita ja kaikki alikansiot?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
-      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Oletko varma että haluat poistaa {0} valitut kohteet ja niiden suosituksia?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Oletko varma että haluat poistaa {0} valitut tiedostot ja niiden suosituksia?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Oletko varma että haluat poistaa {0} valitut kansiot, kaikki alikansiot ja niiden suosituksia?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Oletko varma että haluat poistaa {0} valitut kohteet, tiedostot ja viitteet?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Oletko varma että haluat poistaa {0} valitut kohteet, niiden viitteet, kansiot ja kaikki alikansiot?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Oletko varma että haluat poistaa {0} valitut tiedostot, niiden viitteet, kansiot ja kaikki alikansiot?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Oletko varma että haluat poistaa {0} valitut kohteet, tiedostoja, niiden viitteet, kansiot ja kaikki alikansiot?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
       <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
       <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
@@ -511,10 +511,10 @@
   <UIDocumentWorkspace>
     <label>
       <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children-but-has-hidden>Tämä kansio ei ole tuote, mutta on olemassa joitakin piilotettuja tiedostoja.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <unable-save-node>'{0}' on luotu. Tallenna istunto vahvistaa tätä toimintaa.</unable-save-node>
       <save-node-success>'{0}' has been saved.</save-node-success>
       <node-copied>'{0}' has been copied.</node-copied>
       <node-cut>'{0}' has been cut.</node-cut>
@@ -522,7 +522,7 @@
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
+      <Rename>Uudelleennimeä</Rename>
       <Cut>Cut</Cut>
       <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
@@ -543,7 +543,7 @@
       <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
       <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
       <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Tämä elementti oli poistettu tai muutettu. Klikkaa Päivitä painiketta.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Remove this attachment file</remove-attachment>
@@ -553,9 +553,9 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>Nimi</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Omistaja</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -573,7 +573,7 @@
       <Unlock>UnLock</Unlock>
       <EditDocument>Edit</EditDocument>
       <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
+      <Rename>Uudelleennimeä</Rename>
       <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
@@ -585,7 +585,7 @@
       <Custom>Custom</Custom>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
+      <Upload>Lataa tiedostoja</Upload>
       <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
@@ -596,7 +596,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
       <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
@@ -648,7 +648,7 @@
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
-      <UIContentNameSearch>Search by Name</UIContentNameSearch>
+      <UIContentNameSearch>Hae nimellä</UIContentNameSearch>
       <UINodeInfo>Version Info</UINodeInfo>
       <UINodeProperty>Node Property</UINodeProperty>
       <UIActionListContainer>Available Actions</UIActionListContainer>
@@ -675,13 +675,13 @@
       <delete>Remove this property</delete>
     </title>
     <confirm>
-      <remove-property>Are you sure you want to remove this property?</remove-property>
+      <remove-property>Oletko varma että haluat poistaa tämän ominaisuuden?</remove-property>
     </confirm>
     <header>
-      <name>Name</name>
+      <name>Nimi</name>
       <multiValue>Multi Value</multiValue>
-      <value>Value</value>
-      <action>Action</action>
+      <value>Arvo</value>
+      <action>Toiminto</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -708,7 +708,7 @@
       <name>Name:</name>
       <type>Type:</type>
       <value>Value:</value>
-      <upload>Upload:</upload>
+      <upload>Lataa palvelimelle:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -730,16 +730,16 @@
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <name-invalid>Please enter the property name.</name-invalid>
-      <unable-create>Cannot add properties.</unable-create>
+      <name-invalid>Kirjoita ominaisuuden nimi.</name-invalid>
+      <unable-create>Voi lisätä ominaisuuksia.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>Sinun täytyy tarkistaa tämän kohteen ennen kuin lisäät omaisuutta.</node-checkedin>
+      <can-not-add>Et voi lisätä ominaisuuksia tämän tuotteen. Tämä on ainoa sallittu tyyppi nt:jäsentymätön.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
-      <propertyValu-null>Some values may be null.</propertyValu-null>
+      <propertyValu-null>Joitakin arvoja voi olla nolla.</propertyValu-null>
       <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
-      <number-format-exception>Your input value has the wrong format.</number-format-exception>
+      <number-format-exception>Syöttämäsi arvo on väärässä muodossa.</number-format-exception>
       <property-not-exist>The property {0} doesn't exist.</property-not-exist>
     </msg>
   </UIPropertyForm>
@@ -761,11 +761,11 @@
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Remove</remove>
-      <action>Action</action>
+      <action>Toiminto</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
+      <confirm-delete-permission>Oletko varma että haluat poistaa tämän lupaa?</confirm-delete-permission>
+      <no-permission-tochange>Sinulla ei ole oikeutta poistaa lupaa.</no-permission-tochange>
       <no-permission-remove>You cannot remove the owner.</no-permission-remove>
       <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectMember>Valitse jäsenyys</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Valitse jäsenyys</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -800,7 +800,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Valitse</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>User or Group</userOrGroup>
       <read>Read Right</read>
@@ -815,9 +815,9 @@
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <userOrGroup-required>Valitse käyttäjä tai ryhmä ennen kuin tallennat tämän lupaa.</userOrGroup-required>
+      <not-change-permission>Sinulla ei ole oikeutta lisätä lupaa.</not-change-permission>
+      <access-denied>Pääsy estetty. Et voi poistaa tätä lupaa.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -829,14 +829,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>Nimi</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-name>Nimi</prop-name>
+      <prop-type>Tyyppi</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>Nimi</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -880,7 +880,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Tämä avainsana ei ole sallittua.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
@@ -899,12 +899,12 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Ei tuloksia löytynyt.</not-found>
+      <keyword-not-allow>Tämä avainsana ei ole sallittua.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
-      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
+      <value-save-null>Kirjoita hakusana tai rajoitukset ennen tallentamista tämän kyselyn.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
-      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+      <query-invalid>Kysely on virheellinen. Tarkista teidän rajoitus.</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
@@ -915,28 +915,28 @@
   <UISearchResult>
     <msg>
       <not-support>There is no View template for this document.</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
+      <empty>Ei tuloksia löytynyt.</empty>
+      <access-denied>Et voi avata tämän kansion, joko koska se ei ole enää olemassa tai koska sinulla ei ole oikeutta käyttää sitä.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Toiminto</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Tyyppi</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeDESC>Lajitella asiakirjan tyyppi alenevassa järjestyksessä</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
       <nameASC>Sort by name in ascending order</nameASC>
       <nameDESC>Sort by name in descending order</nameDESC>
       <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <datecreatedDESC>Lajittele luontipäivämäärä alenevassa järjestyksessä</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this item</View>
@@ -946,22 +946,22 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this document</not-support>
-      <empty>No results found.</empty>
+      <empty>Ei tuloksia löytynyt.</empty>
       <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Toiminto</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Tyyppi</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeDESC>Lajitella asiakirjan tyyppi alenevassa järjestyksessä</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
       <nameASC>Sort by name in ascending order</nameASC>
@@ -978,27 +978,27 @@
     <msg>
       <not-support>There is no View template for this item</not-support>
       <empty>No results found</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>Et voi tarkastella tämän kohteen, joko koska tämä malli ei ole tuettu tai koska pääsy on estetty.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Toiminto</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Tyyppi</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeDESC>Lajitella asiakirjan tyyppi alenevassa järjestyksessä</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
       <nameASC>Sort by name in ascending order</nameASC>
       <nameDESC>Sort by name in descending order</nameDESC>
       <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <datecreatedDESC>Lajittele luontipäivämäärä alenevassa järjestyksessä</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this item</View>
@@ -1008,29 +1008,29 @@
   <UIShowAllHiddenResult>
     <msg>
       <not-support>There is no View template for this item.</not-support>
-      <empty>No results found.</empty>
+      <empty>Ei tuloksia löytynyt.</empty>
       <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Toiminto</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Tyyppi</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeDESC>Lajitella asiakirjan tyyppi alenevassa järjestyksessä</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
       <nameASC>Sort by name in ascending order</nameASC>
       <nameDESC>Sort by name in descending order</nameDESC>
       <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <datecreatedDESC>Lajittele luontipäivämäärä alenevassa järjestyksessä</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Item</View>
@@ -1048,21 +1048,21 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Toiminto</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Tyyppi</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
+      <typeASC>Lajitella asiakirjan tyyppi nousevassa järjestyksessä</typeASC>
+      <typeDESC>Lajitella asiakirjan tyyppi alenevassa järjestyksessä</typeDESC>
       <scoreASC>Sort by score in ascending order</scoreASC>
       <scoreDESC>Sort by score in descending order</scoreDESC>
       <nameASC>Sort by name in ascending order</nameASC>
       <nameDESC>Sort by name in descending order</nameDESC>
       <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <datecreatedDESC>Lajittele luontipäivämäärä alenevassa järjestyksessä</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Item</View>
@@ -1087,7 +1087,7 @@
       <properties-required>The Property name is required.</properties-required>
       <value-required>The Value field is required.</value-required>
       <date-invalid>The From date must be earlier than the To date.</date-invalid>
-      <fromDate-required>The From date is required.</fromDate-required>
+      <fromDate-required>Alkaen-päivämäärä on pakollinen.</fromDate-required>
       <must-choose-one>You have to select at least one type.</must-choose-one>
       <properties-null>Select properties first, then filter.</properties-null>
       <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
@@ -1162,11 +1162,11 @@
       <result>Filter</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>Valitse</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Ei tuloksia löytynyt.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1192,7 +1192,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
+      <name>Nimi</name>
       <selectBox>Select Query Style</selectBox>
       <query>Query</query>
     </label>
@@ -1247,7 +1247,7 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
+      <name>Nimi</name>
       <language>Language</language>
       <query>Query</query>
       <action>Actions</action>
@@ -1259,7 +1259,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Toiminto</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1278,10 +1278,10 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
-      <type>Type</type>
+      <name>Nimi</name>
+      <type>Tyyppi</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <permission>Käyttöoikeudet</permission>
       <action>Actions</action>
     </header>
     <tooltip>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Ei tuloksia löytynyt.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1311,7 +1311,7 @@
   -->
   <UIExportNode>
     <label>
-      <format>Format</format>
+      <format>Muoto</format>
       <nodePath>Path to Export</nodePath>
       <zip>Zip</zip>
       <systemView>System View</systemView>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Version</version>
+      <version>Versio</version>
       <baseVersion>current draft</baseVersion>
       <addLabel>Add Label</addLabel>
       <removeLable>Remove Label</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Version</version>
-      <date>Date</date>
+      <version>Versio</version>
+      <date>Päivämäärä</date>
       <author>Modified By</author>
       <summary>Summary</summary>
-      <action>Action</action>
+      <action>Toiminto</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1422,8 +1422,8 @@
     <label>
       <operation>Operation</operation>
       <userName>Username</userName>
-      <date>Date</date>
-      <version>Version</version>
+      <date>Päivämäärä</date>
+      <version>Versio</version>
     </label>
   </UIAuditingInfo>
 
@@ -1450,9 +1450,9 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <LifecycleName>Nimi</LifecycleName>
+      <LifecycleDesc>Kuvaus</LifecycleDesc>
+      <action>Toiminto</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1492,12 +1492,12 @@
       <backTo>Back to version history</backTo>
       <diffTitle>Compare between two versions</diffTitle>
       <noContent>There is no content to compare</noContent>
-      <compareVerion>Version</compareVerion>
+      <compareVerion>Versio</compareVerion>
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
       <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <ComparedWith>Verrattuna</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -1508,7 +1508,7 @@
   -->
   <UIImportNode>
     <label>
-      <format>Format</format>
+      <format>Muoto</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
       <upload>Upload File</upload>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Nimi</nodeName>
       <VersionNumber>Version Number</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
       <VersionDate>Version Date</VersionDate>
@@ -1620,14 +1620,14 @@
     </action>
     <label>
       <category>Category</category>
-      <actions>Action</actions>
+      <actions>Toiminto</actions>
       <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Nimi</name>
+      <action>Toiminto</action>
     </header>
     <info>
       <child-not-found>This item doesn't have any child.</child-not-found>
@@ -1677,7 +1677,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Toiminto</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1747,7 +1747,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Tiedot</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1794,11 +1794,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
+      <description>Kuvaus</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <action>Toiminto</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
@@ -2069,7 +2069,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Sähköpostiosoite ei kelpaa.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Valitse jäsenyys</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2128,11 +2128,11 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
+      <date>Päivämäärä</date>
       <newState>New State</newState>
       <user>User</user>
-      <description>Description</description>
-      <version>Version</version>
+      <description>Kuvaus</description>
+      <version>Versio</version>
       <visibility>Visibility</visibility>
     </header>
     <action>
@@ -2146,7 +2146,7 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
+      <version>Versio</version>
       <state>State</state>
     </header>
   </UIVersionTreeList>
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Valitse jäsenyys</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2250,7 +2250,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>Action</action>
+      <action>Toiminto</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2267,7 +2267,7 @@
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Select Drive</UIDriveSelector>
+      <UIDriveSelector>Valitse asema</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
@@ -2279,7 +2279,7 @@
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Select Drive</SelectDrive>
+      <SelectDrive>Valitse asema</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2630,7 +2630,7 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Oletko varma, että haluat poistaa tämän kommentin?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2680,7 +2680,7 @@
   <UIPreferencesForm>
       <label>
           <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Type</Type>
+          <Type>Tyyppi</Type>
           <CreatedDate>Created Date</CreatedDate>
           <ModifiedDate>Modified Date</ModifiedDate>
           <Ascending>Ascending</Ascending>
@@ -2690,7 +2690,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Tallennetut haut</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2711,7 +2711,7 @@
       <Documents>Document</Documents>
       <Content>Content</Content>
     </label>
-    <title>Set Up Filter Preferences</title>
+    <title>Määritä Suodatin Asetukset</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2721,7 +2721,7 @@
   <UIAllItemsByType>
     <label>
     <ByType>Filter by Type</ByType>
-      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Määritä Suodatin Asetukset</DocumentFilterConfiguration>
     </label>
     <title>
       <ShowVideo>Show all video files</ShowVideo>
@@ -2804,9 +2804,9 @@
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
+      <name>Nimi</name>
       <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <action>Toiminto</action>
     </header>
     <action>
       <title>
@@ -2973,10 +2973,10 @@
     </button>
     <revisions>
       <version>Revisions</version>
-      <date>Date</date>
+      <date>Päivämäärä</date>
       <author>Author</author>
       <status>Status</status>
-      <action>Action</action>
+      <action>Toiminto</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -3014,11 +3014,11 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
+      <date>Päivämäärä</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>Description</description>
+      <description>Kuvaus</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>
@@ -3104,10 +3104,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Pääsy estetty. Sinulla ei ehkä ole lupaa työtilassa ajaa '{0}'.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Aseman '{0}' oli tallennettu yksi tunnistamaton työtila. Ota uudelleen tämän aseman.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3136,7 +3136,7 @@
   <false>False</false>
   <Electronic>Electronic</Electronic>
   <Paper>Paper</Paper>
-  <NONE>None</NONE>
+  <NONE>Ei mitään</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
   <NOCONTRACT>No Contract</NOCONTRACT>
@@ -3187,14 +3187,14 @@
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
     <Error>Error</Error>
-    <or>or</or>
+    <or>tai</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
+    <Canceled>Peruttu</Canceled>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
@@ -3210,8 +3210,8 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
+      <name>Nimi</name>
+      <date>Päivämäärä</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>

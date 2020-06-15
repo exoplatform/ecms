@@ -59,12 +59,12 @@
   <UIFCCActionList>
     <header>
       <name>Name</name>
-      <description>Description</description>
+      <description>Describe Something</description>
       <instanceOf>Instance of</instanceOf>
       <action>Action</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Join</Add>
     </action>
     <msg>
       <empty>No actions</empty>

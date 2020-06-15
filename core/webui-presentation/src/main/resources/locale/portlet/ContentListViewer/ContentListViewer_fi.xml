@@ -37,17 +37,17 @@
         <DESC>Descendant</DESC>
         <ASC>Ascendant</ASC>
       </option>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <DisplaySettingBlock>Näyttöasetukset</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Kohteita sivulla</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>Show Title</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>Show Date</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Näytä otsikko</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Näytä päivämäärä</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
@@ -94,7 +94,7 @@
     <tab>
       <label>
         <clvContentTab>Content Selection</clvContentTab>
-        <clvDisplayTab>Display Settings</clvDisplayTab>
+        <clvDisplayTab>Näyttöasetukset</clvDisplayTab>
         <clvAdvancedTab>Advanced</clvAdvancedTab>
       </label>
     </tab>
@@ -126,8 +126,8 @@
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>Valitse peruspolku</SelectBasePath>
+      <SelectTargetPage>Valitse peruspolku</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
@@ -145,7 +145,7 @@
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>Refresh</refresh>
+      <refresh>Päivitä</refresh>
       <edit>Edit in Content Explorer</edit>
       <delete>Delete</delete>
       <publish>Publish</publish>
@@ -166,8 +166,8 @@
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
     <label>
-      <contextualEnable>Enabled</contextualEnable>
-      <contextualDisable>Disabled</contextualDisable>
+      <contextualEnable>Käytössä</contextualEnable>
+      <contextualDisable>Pois käytöstä</contextualDisable>
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>

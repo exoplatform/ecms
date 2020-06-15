@@ -643,6 +643,9 @@
 				float: right;
 			}
 		}
+		.hidden-title {
+			display: none;
+		}
 		.fileName {
 			text-align: center;
 			position: absolute;
@@ -685,6 +688,22 @@
 						}
 					}
 				}
+
+				@media (max-width: 1024px) {
+					.btn {
+						top: 12px;
+						right: 40px;
+						position: fixed;
+					}
+					.dropdown-menu {
+						top: 50px;
+						left: 40%;
+						position: fixed;
+						width: fit-content;
+						height: fit-content;
+					}
+				}
+
 				@media (min-width: 1024px) {
 					.dropdown-menu {
 						left: -100px;
@@ -703,7 +722,7 @@
 			    float: right;
 			  	padding-left: 15px;
 			}
-			.showComments-lg {
+			.showComments {
 				cursor: pointer;
 				float: right;
 				padding-left: 15px;
@@ -846,13 +865,25 @@
 	}
 
 	.uiDocumentPreview {
+		.fileName {
+			bottom: 30px;
+		}
+		.hidden-title {
+			display: block !important;
+			position: fixed;
+			bottom: 30px;
+		}
 		.previewBtn {
-          position: absolute;
+			position: absolute;
+
 			.showComments {
-              display: block !important;
-			}
-			.showComments-lg {
-              display: none;
+			  display: block !important;
+			  top: 18px;
+			  right: 100px;
+			  position: fixed;
+			  .uiIconComment {
+				font-size: 20px!important;
+			  }
 			}
             .breadCrumb {
               display: none;
@@ -864,11 +895,22 @@
 		#documentPreviewContent, .uiPreviewWebContent, .previewBtn {
 			margin-right: 0;
 		}
+		#documentPreviewContent {
+			padding-top: 20px!important;
+		}
 		.commentArea, .resizeButton {
 			display: none;
 			width: 100%;
 		}
 		.commentArea {
+			.title {
+				.docTitle {
+					border-right: none!important;
+				}
+				.closeIcon {
+					display: none!important;
+				}
+			}
 			.uiContentBox {
 				.actionBar{
 					display: none;
@@ -902,7 +944,7 @@
 	}
 
 	.maskLayer .uiDocumentPreview .fileContent {
-		margin: 0;
+		margin: auto;
         background: white;
         border-radius: 5px;
 	}
@@ -999,7 +1041,7 @@
 			.exitWindow .uiIconClose {
 				//left: 15px;
 				right: 18px;
-				color: @colorIconDefault;
+				color: @white;
 				cursor: pointer;
 				z-index: 10009 !important;
 				top: 20px !important;

@@ -14,10 +14,10 @@
 <UIViewInfoContainer>
 <label>
       <name>نام</name>
-      <title>Title</title>
+      <title>عنوان</title>
       <type>قسم</type>
       <size>مقدار</size>
-      <owner>Owner</owner>
+      <owner>مالک</owner>
       <lastModifier>Last Modifier</lastModifier>
       <created>تشکیل کی تاریخ</created>
       <lastModified>Last Modified Date</lastModified>

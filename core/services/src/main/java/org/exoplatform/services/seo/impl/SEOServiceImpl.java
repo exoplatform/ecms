@@ -47,6 +47,7 @@ import org.exoplatform.management.annotations.ManagedDescription;
 import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
@@ -192,7 +193,7 @@ public class SEOServiceImpl implements SEOService {
       }
     } else {
       node = getNavNode();
-      if (!node.isNodeType("exo:seoMetadata")) {
+      if (node != null && !node.isNodeType("exo:seoMetadata")) {
         node.addMixin("exo:seoMetadata");
       }
     }    
@@ -280,7 +281,7 @@ public class SEOServiceImpl implements SEOService {
       if(metaModel != null) return metaModel.getFullStatus();
       node = getNavNode();
     }
-    if(node.hasNode(LANGUAGES+"/"+language)) {
+    if(node != null && node.hasNode(LANGUAGES+"/"+language)) {
       Node seoNode = node.getNode(LANGUAGES+"/"+language);
       if (seoNode.isNodeType("exo:pageMetadata") && seoNode.hasProperty("exo:metaFully"))
         return seoNode.getProperty("exo:metaFully").getString();  			
@@ -558,7 +559,7 @@ public class SEOServiceImpl implements SEOService {
       siteKey = userNavigation.getKey();
     }    
     Node seoNode = null;
-    if(node.hasNode(LANGUAGES+"/"+language)) 
+    if(node != null && node.hasNode(LANGUAGES+"/"+language)) 
       seoNode = node.getNode(LANGUAGES+"/"+language);
 
     if (seoNode != null) {
@@ -928,7 +929,7 @@ public class SEOServiceImpl implements SEOService {
     LivePortalManagerService livePortalManagerService = WCMCoreUtils
             .getService(LivePortalManagerService.class);
     UIPortal uiPortal = Util.getUIPortal();
-    if (uiPortal == null) {
+    if (uiPortal == null || !SiteType.PORTAL.equals(uiPortal.getSiteType())) {
       return null;
     }
 

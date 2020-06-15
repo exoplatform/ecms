@@ -359,7 +359,7 @@
       <ColumnPageConfigs>列頁面配置</ColumnPageConfigs>
       <RowPageConfigs>行頁面配置</RowPageConfigs>
       <TabsPageConfigs>標籤頁面配置</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>混合頁面配置</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 

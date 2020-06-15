@@ -23,8 +23,8 @@
   <WebLink>
     <view>
       <label>
-        <url>URL</url>
-        <description>Description</description>
+        <url>Webcím</url>
+        <description>Leírás</description>
       </label>
     </view>
   </WebLink>

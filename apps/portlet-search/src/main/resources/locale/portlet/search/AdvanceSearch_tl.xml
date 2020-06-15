@@ -3,52 +3,52 @@
   <UIDefaultSearchForm>
     <label>
       <keyword>Keyword</keyword>
-      <portal>Ang portal</portal>
+      <portal>Lagusan</portal>
       <Page>Pahina</Page>
-      <Document>Ang Dokumento</Document>
+      <Document>Dokumento</Document>
     </label>
     <action>
-      <Search>Pagsasaliksik</Search>
+      <Search>Paghahanap</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
       <Page>Pahina</Page>
-      <Document>Ang Dokumento</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
+      <Document>Dokumento</Document>
+      <DocumentAndPage>Dokumento at Pahina</DocumentAndPage>
+      <documentandpage>Dokumento at Pahina</documentandpage>
+      <results>Ang mga resulta {0} sa {1} para sa {2}</results>
+      <oneResult>Isang resulta lamang para sa {0}</oneResult>
       <ofAboutCaption>tungkol sa</ofAboutCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
-      <editor>Taga-edit</editor>
-      <date>Date</date>
-      <relevancy>Relevance</relevancy>
-      <title>Ang Pamagat</title>
-      <sortBy>Sort By:</sortBy>
+      <timeUnitCaption>mga segundo</timeUnitCaption>
+      <similar>Mga pahina kung saan lumilitaw ang parehong nilalaman</similar>
+      <editor>Patnugot</editor>
+      <date>Petsa</date>
+      <relevancy>Kaugnayan</relevancy>
+      <title>Pamagat</title>
+      <sortBy>Uri ng:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>I-edit</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>Ang iyong paghahanap {0} ay hindi tumutugma sa anumang {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>Mga item sa bawat Pahina</itemsPerPageSelector>
+      <searchFormSelector>Porma ng Suleras ng Paghahanap</searchFormSelector>
+      <searchResultSelector>Template ng Resulta ng Paghahanap</searchResultSelector>
+      <searchPaginatorSelector>Hanapin ang Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Layout Template ng Pahina ng Paghahanap</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base ng Landas</searchResultBasePathInputSetAction>
+      <pageMode>Mode ng Pahina</pageMode>
       <option>
         <none>Wala</none>
         <more>Higit pa</more>
-        <pagination>Pagination</pagination>
+        <pagination>Pagbilang ng pahina</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Piliin ang Landas ng Base</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>Di-wasto ang keyword. Ang ilang mga character ay hindi kinikilala.</keyword-not-support>
+     <not-checked>Mangyaring pumili ng uri ng paghahanap.</not-checked>
+     <keyword-not-empty>Mangyaring magpasok ng isang keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
+      <next>Susunod</next>
+      <previous>Nakaraang</previous>
       <more>Higit pa</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Mabilis na I-edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>sa Mga Pahina</pageCheckBox>
+      <documentCheckBox>sa Nilalaman</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>hanapin ang lahat ng mga site</all>
       </option>  
     </label>  
   </ViewMode>

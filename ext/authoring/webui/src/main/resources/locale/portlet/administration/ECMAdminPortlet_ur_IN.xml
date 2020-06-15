@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
-          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
-          <publicationPublish>Publication &gt; Publish</publicationPublish>
+          <publicationRequestApproval>اشاعت&gt; منظوری کی درخواست</publicationRequestApproval>
+          <publicationApproveContent>اشاعت&gt; مواد منظور کریں</publicationApproveContent>
+          <publicationPublish>اشاعت&gt; شائع</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>

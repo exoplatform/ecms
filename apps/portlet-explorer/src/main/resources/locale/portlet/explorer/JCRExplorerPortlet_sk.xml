@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>Name</name>
-      <email>Email</email>
+      <email>E-mail</email>
       <website>Website</website>
       <comment>Comment</comment>
     </label>
@@ -17,9 +17,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <not-support>Nemôžete komentovať tento typ dokumentu.</not-support>
+      <not-checkedout>Musíte skontrolovať dokument predtým, než sa k tomu vyjadríte.</not-checkedout>
+      <content-null>Nemôžete uverejniť prázdny komentovať.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -45,9 +45,9 @@
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-support>Nemôžete hlasovať pre tento typ dokumentu.</not-support>
+      <not-checkedout>Musíte sa pozrieť na dokument, ktorý chcete hlasovať.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <refresh-session-success>Relácia bola úspešne obnovená.</refresh-session-success>
+      <no-node-history>Nachádzate sa v koreňovom priečinku.</no-node-history>
+      <save-session-success>Všetky zmeny boli uložené.</save-session-success>
+      <target-path-not-found>K tejto ceste nemôžete pristupovať, pretože už neexistuje, alebo preto, že nemáte prístupové oprávnenia.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -92,7 +92,7 @@
     <label>
       <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
+      <setUpBrowser>Nastavte si predvoľby prehliadania</setUpBrowser>
       <refesh>Refresh</refesh>
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
@@ -114,8 +114,8 @@
       <GeneralDrives>General drives</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <no-view-found>Podľa prístupových povolení v jednotke "{0}" nie je dostupný žiadny prístup.</no-view-found>
+      <access-denied>Prístup zamietnutý. Nemusíte mať povolenie na pracovnom priestore jednotky {0}.</access-denied>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
@@ -129,10 +129,10 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Tento prvok bol odstránený alebo zmenený. Kliknite na tlačidlo Obnoviť.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -155,7 +155,7 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>Nastavte si predvoľby prehliadania</title>
     <label>
       <enableStructure>Browse in structure mode:</enableStructure>
       <showSideBar>Show sidebar:</showSideBar>
@@ -202,14 +202,14 @@
     </action>
     <msg>
       <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
-      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
-      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <rename-denied>Prístup zamietnutý. Túto položku nemôžete premenovať.</rename-denied>
+      <fileName-invalid>Nový názov obsahuje niektoré neplatné znaky.</fileName-invalid>
+      <newName-same-oldName>Nový názov už existuje. Znova skontrolujte.</newName-same-oldName>
+      <version-exception>Tento dokument (alebo jeden z jeho predkov) nie je odhlásený.</version-exception>
+      <lock-exception>Tento dokument je uzamknutý. Odblokujte ho pred premenovaním.</lock-exception>
       <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
       <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>Počas premenovania sa vyskytla chyba. Znova skontrolujte.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
@@ -240,17 +240,17 @@
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
       <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UIPreferencesForm>Predvoľby prehliadania dokumentov</UIPreferencesForm>
       <UIPublicationManager>Manage Publication</UIPublicationManager>
       <UIConfirmMessage>Delete ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
       <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
       <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
+      <UIActivePublication>Zapísať sa do životného cyklu publikácie</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Predvoľby prehliadania dokumentov</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
@@ -304,7 +304,7 @@
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewPermissions>Práva</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -313,32 +313,32 @@
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>Túto akciu nemôžete vykonať v koreňovom adresári.</cannot-action-in-rootnode>
+      <node-checkedin>Musíte sa najprv pozrieť.</node-checkedin>
+      <cannot-enable-version-rootnode>Nemožno aktivovať verziu v koreňovom adresári.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Nemožno aktivovať publikáciu v koreňovom adresári.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
-        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
+        <not-supported-nodetype>Môžu byť zverejnené iba dokumenty.</not-supported-nodetype>
+        <no-publication-lifecycle>Nie je nakonfigurovaný žiadny životný cyklus publikácie.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
-      <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
+      <unsubcriber-lifecycle>Dokument bol už zrušený.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Táto operácia je podporovaná iba pre dokumenty.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Dokument bol úspešne zrušený.</unsubcriber-lifecycle-finish>
+      <access-false>Dokument nie je článok ani sa skontroloval.</access-false>
+      <unsupported-action>Táto akcia nie je podporovaná.</unsupported-action>
+      <not-relationable>Tento dokument nemá žiadne vzťahy.</not-relationable>
       <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
       <no-node-selected>Nothing to copy.</no-node-selected>
       <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
-      <keyword-null>There are no keywords to search.</keyword-null>
+      <not-support>Nie je možné upraviť vybranú položku.</not-support>
+      <template-null>Tento dokument nemá šablónu formulára.</template-null>
+      <keyword-null>Neexistujú žiadne kľúčové slová na vyhľadávanie.</keyword-null>
       <not-found>No results found.</not-found>
       <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
       <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
-      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
+      <access-denied>Prístup zamietnutý. Pre túto položku nemáte povolenie na úpravy.</access-denied>
+      <access-add-denied>Prístup zamietnutý. Nemáte povolenie pridať položky tu.</access-add-denied>
+      <item-existed>Tento uzol už existuje. Nemôže mať rovnaký názov ako jeho súrodenec.</item-existed>
       <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
       <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
       <not-supported>This function is supported for the document type only.</not-supported>
@@ -363,47 +363,47 @@
     <msg>
       <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
       <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <cannot-login-node>Tu nemôžete získať prístup a prilepenie položky.</cannot-login-node>
+      <cannot-paste-nodetype>Tu nemôžete prilepiť tento typ položky.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Nemáte povolenie odomknúť tento dokument.</has-not-permission-unlok>
+      <bound-exception>Nemáte povolenie na premenovanie tejto položky. Kontaktujte správcu.</bound-exception>
+      <bound-move-exception>Položku nemôžete presunúť do seba alebo do podpriečinku.</bound-move-exception>
+      <does-not-support-auditing>Tu nie je možné aktivovať audit.</does-not-support-auditing>
+      <can-not-rename-node>Nemáte povolenie na premenovanie tejto položky. Kontaktujte správcu a získajte potrebné práva.</can-not-rename-node>
+      <can-not-cut-node>Nemáte povolenie na odstránenie tejto položky. Kontaktujte správcu.</can-not-cut-node>
+      <can-not-remove-node>Nemáte povolenie na odstránenie tejto položky. Kontaktujte správcu.</can-not-remove-node>
       <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <can-not-unlock-node>Nemáte povolenie na odomknutie tejto položky. Kontaktujte správcu.</can-not-unlock-node>
+      <no-node>Pred vkladaním vyberte aspoň jednu položku.</no-node>
+      <can-not-paste-node>Nemáte povolenie prejsť na túto položku. Kontaktujte správcu.</can-not-paste-node>
+      <can-not-move-node>Nemáte povolenie na presun tejto položky. Kontaktujte správcu.</can-not-move-node>
+      <does-not-support-versioning>Nemáte povolenie na presun. Kontaktujte správcu.</does-not-support-versioning>
+      <path-not-found>Tento prvok bol odstránený alebo zmenený. Kliknite na tlačidlo Obnoviť.</path-not-found>
+      <paste-lock-exception>'{0}' tu nie je možné vložiť. Uistite sa, že nie je zamknutý ani tento priečinok. Skontrolujte tiež, či nie je uzamknutý žiaden súvisiaci dokument.</paste-lock-exception>
+      <can-not-checkin-node>Túto položku nemôžete skontrolovať. Skontrolujte, či máte potrebné povolenia.</can-not-checkin-node>
+      <can-not-checkout-node>Túto položku nemôžete vyskúšať. Skontrolujte, či máte potrebné povolenia.</can-not-checkout-node>
+      <move-constraint-exception>Počas presunu tejto položky sa vyskytla chyba.</move-constraint-exception>
+      <not-lock-owner>Tento dokument nemôžete odomknúť, pretože nie ste vlastníkom zámku.</not-lock-owner>
+      <is-checked-in>Pred premenovaním skontrolujte tento dokument.</is-checked-in>
+      <is-checked-in-lock>Pred uzamknutím skontrolujte tento dokument.</is-checked-in-lock>
+      <cant-lock>Tento dokument nemôžete zamknúť.</cant-lock>
       <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <can-not-delete>Pred odstránením zrušte tento dokument.</can-not-delete>
+      <can-not-delete-version>Tento dokument nemôžete odstrániť. Je verzia.</can-not-delete-version>
+      <not-support>Vybranú položku nemôžete odstrániť. Vyberte si iný.</not-support>
+      <current-node-not-allow-paste>Kopírovanú položku tam nemôžete prilepiť.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Tu nie je možné vložiť skopírovanú položku, pretože je verzia.</copied-node-in-versioning>
       <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
-      <not-exist-categories>The category does not exist.</not-exist-categories>
+      <this-node-locked-by-parent>Túto položku nemôžete odomknúť. Nadradený priečinok je zamknutý.</this-node-locked-by-parent>
+      <paste-node-same-name>Túto položku tu nie je možné prilepiť. Položka s rovnakým názvom už existuje v cieľovej zložke.</paste-node-same-name>
+      <has-not-add-permission>Nemáte povolenie na pridanie tu.</has-not-add-permission>
+      <node-cutting>Položka je prerušená. Tu ju nemôžete prilepiť.</node-cutting>
+      <access-denied>Prístup zamietnutý. Možno nemáte povolenie.</access-denied>
+      <remove-verion-exception>Tento dokument nemôžete odstrániť, pretože ste ho odhlásili.</remove-verion-exception>
+      <remove-referentialIntegrityException>Túto položku nemôžete odstrániť, pretože ju momentálne odkazuje iná.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Povinná vlastnosť jcr: uuid nebola nájdená. Dokument mohol byť odstránený alebo zmenený. Kliknite na tlačidlo Obnoviť.</constraintviolation-exception>
+      <path-not-found-exception>Tento dokument bol odstránený alebo zmenený. Kliknite na tlačidlo Obnoviť.</path-not-found-exception>
+      <not-exist-categories>Táto kategória neexistuje.</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
@@ -490,7 +490,7 @@
       <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
       <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
       <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Naozaj chcete odstrániť {0} vybrané položky, súbory, ich referencie, priečinky a všetky podpriečinky?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
       <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
       <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
@@ -511,14 +511,14 @@
   <UIDocumentWorkspace>
     <label>
       <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children-but-has-hidden>Tento priečinok nemá žiadnu položku, ale existujú niektoré skryté súbory.</no-children-but-has-hidden>
     </label>
     <msg>
       <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
       <save-node-success>'{0}' has been saved.</save-node-success>
       <node-copied>'{0}' has been copied.</node-copied>
       <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
+      <remove-root>Nemôžete odstrániť koreňový priečinok.</remove-root>
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
@@ -539,14 +539,14 @@
   <UIDocumentInfo>
     <msg>
       <access-denied>Access denied. You can't access '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
-      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <null-exception>Položka nebola nájdená. Bol odstránený alebo zmenený, alebo nemáte povolenie na prístup.</null-exception>
+      <confirm-deleteattachment>Naozaj chcete odstrániť tento súbor prílohy?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Naozaj chcete odstrániť tento komentár?</confirm-deleteattcomment>
+      <access-denied-exception>Prístup zamietnutý. Pravdepodobne nemáte oprávnenia na čítanie alebo dokument mohol byť odstránený alebo zmenený.</access-denied-exception>
+      <path-not-found>Tento prvok bol odstránený alebo zmenený. Kliknite na tlačidlo Obnoviť.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Remove this attachment file</remove-attachment>
+      <remove-attachment>Odstráňte tento súbor prílohy</remove-attachment>
       <remove-comment>Remove this comment</remove-comment>
     </tooltip>
   </UIDocumentInfo>
@@ -555,7 +555,7 @@
       <label>
         <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Vlastník</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -596,7 +596,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
       <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
@@ -675,7 +675,7 @@
       <delete>Remove this property</delete>
     </title>
     <confirm>
-      <remove-property>Are you sure you want to remove this property?</remove-property>
+      <remove-property>Naozaj chcete odstrániť túto vlastnosť?</remove-property>
     </confirm>
     <header>
       <name>Name</name>
@@ -730,15 +730,15 @@
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <name-invalid>Please enter the property name.</name-invalid>
-      <unable-create>Cannot add properties.</unable-create>
-      <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <name-invalid>Zadajte prosím názov nehnuteľnosti.</name-invalid>
+      <unable-create>Vlastnosti sa nedajú pridať.</unable-create>
+      <value-invalid>Zadajte hodnotu.</value-invalid>
+      <node-checkedin>Pred pridaním vlastníctva musíte túto položku skontrolovať.</node-checkedin>
+      <can-not-add>Do tejto položky nie je možné pridať vlastnosti. Toto je povolené len pre typ nt: nestrukturovaný.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
-      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
+      <valueFormatEx>Hodnotu s viacerými hodnotami nemôžete priradiť nehnuteľnosti s jednou hodnotou.</valueFormatEx>
       <number-format-exception>Your input value has the wrong format.</number-format-exception>
       <property-not-exist>The property {0} doesn't exist.</property-not-exist>
     </msg>
@@ -772,7 +772,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Vybrať užívateľa</SelectUser>
       <SelectMember>Select Membership</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
@@ -784,7 +784,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Vybrať užívateľa</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
@@ -792,7 +792,7 @@
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>Vybrať užívateľa</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -1281,7 +1281,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <permission>Práva</permission>
       <action>Actions</action>
     </header>
     <tooltip>
@@ -2089,8 +2089,8 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Vybrať skupinu</selectGroup>
+      <selectUser>Vybrať užívateľa</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2209,8 +2209,8 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Vybrať skupinu</selectGroup>
+      <selectUser>Vybrať užívateľa</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2654,7 +2654,7 @@
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Naozaj chcete odstrániť tento súbor prílohy?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
@@ -3104,7 +3104,7 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Prístup zamietnutý. Nemusíte mať povolenie na pracovnom priestore jednotky {0}.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
@@ -3187,14 +3187,14 @@
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
     <Error>Error</Error>
     <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
+    <Canceled>Zrušené</Canceled>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>

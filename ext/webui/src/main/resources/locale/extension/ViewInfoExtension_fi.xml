@@ -2,22 +2,22 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>View Information</UIViewInfoManager>
+<UIViewInfoManager>Näytä tiedot</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Näytä tiedot</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
+      <name>Nimi</name>
       <title>Title</title>
-      <type>Type</type>
+      <type>Tyyppi</type>
       <size>Size</size>
-      <owner>Owner</owner>
+      <owner>Omistaja</owner>
       <lastModifier>Last Modifier</lastModifier>
       <created>Created Date</created>
       <lastModified>Last Modified Date</lastModified>

@@ -193,7 +193,7 @@
     <title>Usba ang Pangalan</title>
     <label>
       <nameField>Ang Pangalan</nameField>
-      <titleField>Title</titleField>
+      <titleField>Ang Titulo</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -361,12 +361,12 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <has-not-permission>Wala tuguti ang pag-akses. Wala kai permiso para makadungag ug mga aytem dinhi.</has-not-permission>
+      <has-not-edit-permission>Wala tuguti ang pag-akses. Wala kai permiso nga mag-edit dinhi. Palihug kontaka ang tigdumala.</has-not-edit-permission>
+      <cannot-login-node>Dili ka maka-akses ug maka-paste ug aytem dinhi.</cannot-login-node>
+      <cannot-paste-nodetype>Dili ka maka-paste og ingun ani nga klase sa aytem dinhi.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Wala kay permiso nga i-unlock kining maong dokumento.</has-not-permission-unlok>
+      <bound-exception>Wala kai permiso nga usabong ang ngalan niining maong aytem. Palihug kontaka ang tigdumala o administrador.</bound-exception>
       <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
       <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
       <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
@@ -526,12 +526,12 @@
       <Cut>Cut</Cut>
       <Copy>Kopyaha</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Delete</RemoveNode>
+      <RemoveNode>Papasa</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Usba</EditDocument>
       <Paste>I-paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
@@ -553,7 +553,7 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>Ngalan</name>
         <versionable>Versionable</versionable>
         <exo_owner>Owner</exo_owner>
         <auditing>Auditing</auditing>
@@ -571,10 +571,10 @@
     <event>
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Usba</EditDocument>
       <Copy>Kopyaha</Copy>
       <Rename>Usaba ang pangalan</Rename>
-      <Delete>Delete</Delete>
+      <Delete>Papasa</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>I-paste</Paste>
@@ -633,7 +633,7 @@
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIPublicationHistory>Kaagi sauna</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
       <UIPropertyTab>Ang mga Property</UIPropertyTab>
@@ -658,7 +658,7 @@
       <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
       <UINonPublishedForm>Estado</UINonPublishedForm>
       <UIPublishedForm>Estado</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
+      <UIPublicationLogList>Kaagi sauna</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
       <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
@@ -678,10 +678,10 @@
       <remove-property>Are you sure you want to remove this property?</remove-property>
     </confirm>
     <header>
-      <name>Name</name>
+      <name>Ngalan</name>
       <multiValue>Multi Value</multiValue>
-      <value>Value</value>
-      <action>Action</action>
+      <value>Bili</value>
+      <action>Aksyon</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -705,7 +705,7 @@
   <UIPropertyForm>
     <title>Add/Edit Property</title>
     <label>
-      <name>Name:</name>
+      <name>Ngalan:</name>
       <type>Type:</type>
       <value>Value:</value>
       <upload>I-upload:</upload>
@@ -727,7 +727,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Ibalik sa kaniadto</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Usba</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -760,8 +760,8 @@
       <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <remove>Tangtanga</remove>
+      <action>Aksyon</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -811,7 +811,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Ibalik sa kaniadto</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -829,13 +829,13 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>Ngalan</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
+      <prop-name>Ngalan</prop-name>
       <prop-type>Ang Klase</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>Ngalan</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -922,7 +922,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Ang Path</path>
-      <action>Action</action>
+      <action>Aksyon</action>
       <shortcutPath>Ang Path</shortcutPath>
       <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
@@ -953,7 +953,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Ang Path</path>
-      <action>Action</action>
+      <action>Aksyon</action>
       <shortcutPath>Ang Path</shortcutPath>
       <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
@@ -984,7 +984,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Ang Path</path>
-      <action>Action</action>
+      <action>Aksyon</action>
       <shortcutPath>Ang Path</shortcutPath>
       <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
@@ -1015,7 +1015,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Ang Path</path>
-      <action>Action</action>
+      <action>Aksyon</action>
       <shortcutPath>Ang Path</shortcutPath>
       <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
@@ -1048,7 +1048,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Ang Path</path>
-      <action>Action</action>
+      <action>Aksyon</action>
       <shortcutPath>Ang Path</shortcutPath>
       <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
@@ -1080,7 +1080,7 @@
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Add</Add>
+      <Add>Dugangi</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Add</label-Add>
+      <label-Add>Dugangi</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Add</Add>
+      <Add>Dugangi</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1171,7 +1171,7 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name:</name>
+      <name>Ngalan:</name>
       <selectBox>Select Query Style:</selectBox>
       <query>Query:</query>
     </label>
@@ -1192,7 +1192,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
+      <name>Ngalan</name>
       <selectBox>Select Query Style</selectBox>
       <query>Query</query>
     </label>
@@ -1212,7 +1212,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Add</Add>
+      <Add>Dugangi</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1236,7 +1236,7 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>Add</Add>
+      <Add>Dugangi</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1247,7 +1247,7 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
+      <name>Ngalan</name>
       <language>Language</language>
       <query>Query</query>
       <action>Actions</action>
@@ -1259,7 +1259,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1278,7 +1278,7 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
+      <name>Ngalan</name>
       <type>Ang Klase</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
@@ -1286,8 +1286,8 @@
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Usba</Edit>
+      <Delete>Papasa</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
@@ -1380,7 +1380,7 @@
       <date>Date</date>
       <author>Modified By</author>
       <summary>Summary</summary>
-      <action>Action</action>
+      <action>Aksyon</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1450,9 +1450,9 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <LifecycleName>Ngalan</LifecycleName>
+      <LifecycleDesc>Hulagway</LifecycleDesc>
+      <action>Aksyon</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1559,7 +1559,7 @@
       <label>Select Label</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>Tangtanga</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Ngalan</nodeName>
       <VersionNumber>Version Number</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
       <VersionDate>Version Date</VersionDate>
@@ -1615,19 +1615,19 @@
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Papasa</Delete>
       </title>
     </action>
     <label>
       <category>Category</category>
-      <actions>Action</actions>
-      <delete>Delete</delete>
+      <actions>Aksyon</actions>
+      <delete>Papasa</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Ngalan</name>
+      <action>Aksyon</action>
     </header>
     <info>
       <child-not-found>This item doesn't have any child.</child-not-found>
@@ -1660,7 +1660,7 @@
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Papasa</Delete>
       </title>
     </action>
     <msg>
@@ -1677,7 +1677,7 @@
     <header>
       <path>Ang Path</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1794,11 +1794,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
+      <description>Hulagway</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
@@ -1810,8 +1810,8 @@
     <action>
       <Close>#{word.close}</Close>
       <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Usba</Edit>
+      <Delete>Papasa</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1914,7 +1914,7 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Add</AddTag>
+      <AddTag>Dugangi</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2031,11 +2031,11 @@
     <label>
       <published>Published</published>
       <non-published>Unpublished</non-published>
-      <public>Public</public>
-      <private>Private</private>
+      <public>Pampubliko</public>
+      <private>Prebado</private>
       <state>Estado</state>
       <visibility>Visibility</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Ngalan:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
       <stateName>State Name</stateName>
     </label>
@@ -2130,8 +2130,8 @@
     <header>
       <date>Date</date>
       <newState>New State</newState>
-      <user>User</user>
-      <description>Description</description>
+      <user>Ang mugamit</user>
+      <description>Hulagway</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
@@ -2229,7 +2229,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>Edit</Edit>
+      <Edit>Usba</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2250,7 +2250,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>Action</action>
+      <action>Aksyon</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2454,12 +2454,12 @@
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
+      <OK>Papasa</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>I-kansela</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2468,7 +2468,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Okey</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
@@ -2788,8 +2788,8 @@
 
    <UITaggingForm>
     <label>
-      <Public>Public</Public>
-      <Private>Private</Private>
+      <Public>Pampubliko</Public>
+      <Private>Prebado</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
@@ -2804,9 +2804,9 @@
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
+      <name>Ngalan</name>
       <relatedDocuments>Ang Kapareho nga mga Dokumento</relatedDocuments>
-      <action>Action</action>
+      <action>Aksyon</action>
     </header>
     <action>
       <title>
@@ -2876,14 +2876,14 @@
     <UIActionForm>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Tangtanga</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Tangtanga</removeReference>
     </title>
   </EditFormAction>
 
@@ -2935,7 +2935,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>Dugangi</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -2976,7 +2976,7 @@
       <date>Date</date>
       <author>Author</author>
       <status>Kahimtang</status>
-      <action>Action</action>
+      <action>Aksyon</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -3018,7 +3018,7 @@
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>Description</description>
+      <description>Hulagway</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>
@@ -3035,7 +3035,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Ibalik sa kaniadto</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3130,8 +3130,8 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
+    <no>Dili</no>
+  <yes>Oo</yes>
   <true>True</true>
   <false>False</false>
   <Electronic>Electronic</Electronic>
@@ -3141,10 +3141,10 @@
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
   <NOCONTRACT>No Contract</NOCONTRACT>
   <one-minute>One Minute</one-minute>
-  <hourly>Hourly</hourly>
-  <daily>Daily</daily>
+  <hourly>Taga-oras</hourly>
+  <daily>Kada-adlaw</daily>
   <quarterly>Quarterly</quarterly>
-  <yearly>Yearly</yearly>
+  <yearly>Kada tuig</yearly>
   <ten-years>Ten Years</ten-years>
   <read>User Action</read>
   <schedule>Scheduler</schedule>
@@ -3210,13 +3210,13 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
+      <name>Ngalan</name>
       <date>Date</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <more>Daghan</more>
     </label>
   </FileView>
   <UIPropertyForm>

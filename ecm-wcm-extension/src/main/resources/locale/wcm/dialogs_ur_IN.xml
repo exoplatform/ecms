@@ -29,7 +29,7 @@
         <Advanced>Advanced</Advanced>
         <Summary>Summary</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
+        <title>عنوان</title>
         <ContentCSS>CSS Data</ContentCSS>
         <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
         <ContentJS>JS Data</ContentJS>
