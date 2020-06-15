@@ -791,6 +791,10 @@
                 overflow: hidden;
                 white-space: nowrap;
                 color: #333;
+
+                &.connectingDriveTitle {
+                  color: #b3b3b3;
+                }
               }
             }
             .newFolderInput {
@@ -804,8 +808,10 @@
               border-radius: 0;
             }
 
-            &.isConnecting {
-              opacity: 0.5;
+            .connectingDriveProgress > svg {
+              .v-progress-circular__underlay {
+                stroke: #e2e9ef;
+              }
             }
 
             .uiIcon {

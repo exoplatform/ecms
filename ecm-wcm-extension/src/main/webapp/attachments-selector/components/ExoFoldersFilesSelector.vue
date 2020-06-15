@@ -110,12 +110,29 @@
                   v-for="driver in group.drives" 
                   :key="driver.name" 
                   :title="driver.title" 
-                  :class="{ 'isConnecting': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100 }" 
                   class="folderSelection"
                   @click="openDrive(driver)">
                   <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
-                    <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
-                    <div class="selectionLabel center">{{ driver.title }}</div>
+                    <i 
+                      v-show="!drivesInProgress[driver.title]"
+                      :class="driver.driveTypeCSSClass"
+                      class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
+                    <div class="text-center ma-12 connectingDrive">
+                      <v-progress-circular
+                        v-show="drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100"
+                        :indeterminate="false"
+                        :rotate="0"
+                        :size="32"
+                        :value="drivesInProgress[driver.title]"
+                        :width="4"
+                        color="var(--allPagesPrimaryColor, #578dc9)"
+                        class="connectingDriveProgress"
+                      >{{ drivesInProgress[driver.title] }}</v-progress-circular>
+                    </div>
+                    <div 
+                      :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
+                      class="selectionLabel center"
+                    >{{ driver.title }}</div>
                   </a>
                 </div>
               </div>
