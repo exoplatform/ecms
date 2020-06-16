@@ -956,6 +956,30 @@
             }
         };
 
+        this.getContextFile = function() {
+			return getContextFile();
+		}
+
+        this.getContextDrive = function() {
+			return contextDrive;
+        };
+        
+        this.isContextFile = function() {
+			return contextNode && contextDrive && contextDrive.files[contextNode.path] != null;
+		};
+
+		this.isContextDrive = function() {
+			return contextNode && contextDrive && contextDrive.path == contextNode.path;
+		};
+
+		this.isContextLocal = function() {
+			return contextNode && contextDrive && contextNode.local;
+		};
+
+		this.isContextUpdating = function() {
+			return contextNode && isUpdating(contextNode.path);
+		};
+
         /**
          * Synchronize documents view.
          */

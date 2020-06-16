@@ -42,7 +42,7 @@
 		};
 
 		this.synchronize = function(elem, objectId) {
-			cloudDrives.synchronize(elem, objectId, cloudDriveUI.refreshDocuments, currentNode, cloudDriveUI.synchronizeProcess);
+			return cloudDrives.synchronize(elem, objectId, cloudDriveUI.refreshDocuments, currentNode, cloudDriveUI.synchronizeProcess);
 		};
 
 		this.connect = function(providerId) {
@@ -96,10 +96,6 @@
 			}
 		};
 
-		this.getContextDrive = function() {
-			return cloudDrives.contextDrive;
-		};
-
 		this.getFile = function(path) {
 			if (cloudDrives.contextDrive) {
 				var file = cloudDrives.contextDrive.files[path];
@@ -125,22 +121,6 @@
 				return file && file.symlink;
 			}
 			return false;
-		};
-
-		this.isContextFile = function() {
-			return cloudDrives.contextNode && cloudDrives.contextDrive && cloudDrives.contextDrive.files[cloudDrives.contextNode.path] != null;
-		};
-
-		this.isContextDrive = function() {
-			return cloudDrives.contextNode && cloudDrives.contextDrive && cloudDrives.contextDrive.path == cloudDrives.contextNode.path;
-		};
-
-		this.isContextLocal = function() {
-			return cloudDrives.contextNode && cloudDrives.contextDrive && cloudDrives.contextNode.local;
-		};
-
-		this.isContextUpdating = function() {
-			return cloudDrives.contextNode && cloudDrives.isUpdating(cloudDrives.contextNode.path);
 		};
 
 		this.openFile = function(elem, objectId) {
@@ -227,7 +207,7 @@
 
 		var initContextMenu = function(menu, items, allowedItems) {
 			var menuItems = items.split(",");
-			var drive = cloudDrivesDms.getContextDrive();
+			var drive = cloudDrives.getContextDrive();
 			if (drive) {
 				// branded icons in context menu
 				$("i.uiIconEcmsRefreshCloudDrive, i.uiIconEcmsOpenCloudFile, i.uiIconEcmsPushCloudFile").each(function() {
@@ -272,7 +252,7 @@
 					text = text + drive.provider.name;
 					$(this).text(text);
 					$(this).prepend($i);
-					if (cloudDrivesDms.isContextUpdating()) {
+					if (cloudDrives.isContextUpdating()) {
 						$(this).addClass("cloudFileDisabled");
 					} else {
 						$(this).removeClass("cloudFileDisabled");
@@ -342,17 +322,17 @@
 		};
 
 		var initMultiContextMenu = function() {
-			var drive = cloudDrivesDms.getContextDrive();
+			var drive = cloudDrives.getContextDrive();
 			if (drive) {
 				// Fix group Context Menu items using CSS
 				var classes;
-				if (cloudDrivesDms.isContextFile()) {
+				if (cloudDrives.isContextFile()) {
 					// it's drive's file
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_FILE_ACTION_CLASSES);
-				} else if (cloudDrivesDms.isContextDrive()) {
+				} else if (cloudDrives.isContextDrive()) {
 					// it's drive in the context
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES);
-				} else if (cloudDrivesDms.isContextLocal()) {
+				} else if (cloudDrives.isContextLocal()) {
 					// it's local node in the drive context
 					classes = ALLOWED_DMS_MENU_LOCAL_FILE_ACTION_CLASSES;
 				} else {
@@ -592,7 +572,7 @@
 		};
 
 		var initFileViewer = function() {
-			var drive = cloudDrivesDms.getContextDrive();
+			var drive = cloudDrives.getContextDrive();
 			var file = cloudDrives.getContextFile();
 			if (drive && file) {
 				var $viewer = $("#CloudFileViewer");
@@ -682,14 +662,14 @@
 		};
 
 		var initDocument = function() {
-			var drive = cloudDrivesDms.getContextDrive();
+			var drive = cloudDrives.getContextDrive();
 			if (drive) {
 				// Fix Action Bar items
 				var classes;
-				if (cloudDrivesDms.isContextFile()) {
+				if (cloudDrives.isContextFile()) {
 					// it's drive's file
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_FILE_ACTION_CLASSES);
-				} else if (cloudDrivesDms.isContextDrive()) {
+				} else if (cloudDrives.isContextDrive()) {
 					// it's drive in the context
 					classes = ALLOWED_DMS_MENU_COMMON_ACTION_CLASSES.concat(ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES);
 				} else {
@@ -1474,15 +1454,15 @@
 					}
 					cloudDrives.initContext(workspace, path);
 
-					var drive = cloudDrivesDms.getContextDrive();
+					var drive = cloudDrives.getContextDrive();
 					if (drive) {
-						if (cloudDrivesDms.isContextFile()) {
+						if (cloudDrives.isContextFile()) {
 							// it's drive's file
 							return initContextMenu(menu, params, ALLOWED_FILE_MENU_ACTIONS);
-						} else if (cloudDrivesDms.isContextDrive()) {
+						} else if (cloudDrives.isContextDrive()) {
 							// it's drive in the context
 							return initContextMenu(menu, params, ALLOWED_DRIVE_MENU_ACTIONS);
-						} else if (cloudDrivesDms.isContextLocal()) {
+						} else if (cloudDrives.isContextLocal()) {
 							// it's local node in the drive context
 							return initContextMenu(menu, params, ALLOWED_LOCAL_FILE_MENU_ACTIONS);
 						}
@@ -1567,7 +1547,7 @@
 				simpleView.showGroundContextMenu_orig = simpleView.showGroundContextMenu;
 				simpleView.showGroundContextMenu = function(event, element) {
 					simpleView.showGroundContextMenu_orig(event, element);
-					if (cloudDrivesDms.isContextDrive() || cloudDrivesDms.isContextFile()) {
+					if (cloudDrives.isContextDrive() || cloudDrives.isContextFile()) {
 						// hide all not allowed for cloud drive
 						if (initMultiContextMenu() > 0) {
 							// and fix menu position
