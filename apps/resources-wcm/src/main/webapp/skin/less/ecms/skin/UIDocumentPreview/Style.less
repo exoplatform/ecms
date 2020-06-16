@@ -13,6 +13,18 @@
 			margin-right: 30px;
 			background : @black;
 		}
+
+		#documentPreviewContent {
+			.detailContainer {
+				.editors-placeholder {
+					display: none!important;
+				}
+
+				button, a {
+					display: none!important;
+				}
+			}
+		}
 		.commentArea {
 			display: none;
 		}
@@ -579,12 +591,6 @@
 							margin-top: 0px;
 							margin-bottom: 20px;
 							text-shadow: none;
-						}
-						button, a {
-							margin: 0 7px 0 0;
-							[class^="uiIcon"] {
-								margin-right: 7px;			
-							}
 						}
 					}
 				}
