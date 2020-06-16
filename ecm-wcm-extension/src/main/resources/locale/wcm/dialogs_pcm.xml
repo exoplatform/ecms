@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Describe Something</description>
       </label>
     </dialog>
   </WebLink>

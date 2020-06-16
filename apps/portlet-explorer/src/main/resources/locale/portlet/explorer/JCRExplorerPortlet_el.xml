@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Έκδοση</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>Βασική έκδοση</baseVersion>
       <addLabel>Προσθήκη ετικέτας</addLabel>
       <removeLable>Αφαίρεση ετικέτας</removeLable>
       <restoreVersion>Επαναφορά Έκδοσης</restoreVersion>

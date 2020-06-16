@@ -310,13 +310,13 @@
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
       <userOrGroup-required>You must select a user or group.</userOrGroup-required>
       <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <node-checkedin>Musíte sa najprv pozrieť.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Vybrať užívateľa</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -336,7 +336,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Vybrať skupinu</selectGroup>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>

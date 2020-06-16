@@ -8,9 +8,9 @@
   <UICommentForm>
     <label>
       <name>Name</name>
-      <email>Email</email>
+      <email>E-mail</email>
       <website>Website</website>
-      <comment>Comment</comment>
+      <comment>Hozzászólás</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -47,7 +47,7 @@
     <msg>
       <not-support>You cannot vote for this document type.</not-support>
       <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <vote-restriction>You cannot vote more than one time.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -93,7 +93,7 @@
       <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
       <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>Refresh</refesh>
+      <refesh>Frissítés</refesh>
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
@@ -109,9 +109,9 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>Személyes tárhelyek</PersonalDrives>
+      <GroupDrives>Csoport tárhelyek</GroupDrives>
+      <GeneralDrives>Általános tárhelyek</GeneralDrives>
     </title>
     <msg>
       <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
@@ -158,12 +158,12 @@
     <title>Set up your browsing preferences</title>
     <label>
       <enableStructure>Browse in structure mode:</enableStructure>
-      <showSideBar>Show sidebar:</showSideBar>
+      <showSideBar>Oldalsáv megjelenítése:</showSideBar>
       <showHiddenNode>Show hidden items:</showHiddenNode>
       <showNonDocument>Show non-document items:</showNonDocument>
       <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Sort order:</sortBy>
+      <sortBy>Rendezés a következő szerint:</sortBy>
       <order>Order by:</order>
       <nodesPerPage>Items per page:</nodesPerPage>
     </label>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Átnevezés</title>
     <label>
       <nameField>Name</nameField>
-      <titleField>Title</titleField>
+      <titleField>Cím</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -214,10 +214,10 @@
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
+      <UIRenameForm>Átnevezés</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>Upload File</UIUploadManager>
+      <UIFolderForm>Új mappa</UIFolderForm>
+      <UIUploadManager>Fájl feltöltés</UIUploadManager>
       <UIReferencesList>References List</UIReferencesList>
       <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
@@ -227,7 +227,7 @@
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>
       <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>Advanced Search</UIECMSearch>
+      <UIECMSearch>Speciális keresés</UIECMSearch>
       <UISavedQuery>Saved Queries List</UISavedQuery>
       <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
       <UIActionManager>Manage Actions</UIActionManager>
@@ -235,12 +235,12 @@
       <UIDocumentFormController>Add New Document</UIDocumentFormController>
       <EditFormController>Edit Document</EditFormController>
       <UIRelationManager>Add Relation</UIRelationManager>
-      <UICategoryManager>Add Category</UICategoryManager>
+      <UICategoryManager>Kategória hozzáadása</UICategoryManager>
       <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UICommentForm>Hozzászólás</UICommentForm>
+      <UIPreferencesForm>Beállítások</UIPreferencesForm>
       <UIPublicationManager>Manage Publication</UIPublicationManager>
       <UIConfirmMessage>Delete ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
@@ -250,11 +250,11 @@
       <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Beállítások</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Dokumentum megnyitása</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -282,29 +282,29 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New Folder</AddFolder>
+      <AddFolder>Új mappa</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Szerkesztés</EditDocument>
       <Upload>Upload</Upload>
-      <Paste>Paste</Paste>
+      <Paste>Beillesztés</Paste>
       <Search>Search</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Vote</Vote>
-      <Comment>Comment</Comment>
+      <Comment>Hozzászólás</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Publications</ManagePublications>
       <ManageCategories>Categories</ManageCategories>
       <ManageRelations>Relations</ManageRelations>
-      <ManageActions>Actions</ManageActions>
+      <ManageActions>Műveletek</ManageActions>
       <ExportNode>Export</ExportNode>
       <ImportNode>Import</ImportNode>
       <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewPermissions>Engedélyek</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -350,8 +350,8 @@
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
-      <AdvanceSearch>Advanced Search</AdvanceSearch>
+      <SimpleSearch>Gyorskeresés</SimpleSearch>
+      <AdvanceSearch>Speciális keresés</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
       <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
@@ -415,7 +415,7 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Folder</Save>
+      <Save>Könyvtár létrehozása</Save>
     </action>
     <label>
       <titleTextBox>Folder Name:</titleTextBox>
@@ -522,17 +522,17 @@
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
-      <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Rename>Átnevezés</Rename>
+      <Cut>Kivágás</Cut>
+      <Copy>Másolás</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Delete</RemoveNode>
-      <Checkin>Checkin</Checkin>
-      <Checkout>Checkout</Checkout>
-      <Lock>Lock</Lock>
-      <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Paste>Paste</Paste>
+      <RemoveNode>Törlés</RemoveNode>
+      <Checkin>CheckIn</Checkin>
+      <Checkout>CheckOut</Checkout>
+      <Lock>Lezárás</Lock>
+      <Unlock>UnLock</Unlock>
+      <EditDocument>Szerkesztés</EditDocument>
+      <Paste>Beillesztés</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
@@ -555,7 +555,7 @@
       <label>
         <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Tulajdonos</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -570,24 +570,24 @@
   <ECMContextMenu>
     <event>
       <Lock>Lock</Lock>
-      <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
-      <Delete>Delete</Delete>
+      <Unlock>Feloldás</Unlock>
+      <EditDocument>Szerkesztés</EditDocument>
+      <Copy>Másolás</Copy>
+      <Rename>Átnevezés</Rename>
+      <Delete>Törlés</Delete>
       <Save>#{word.save}</Save>
-      <Cut>Cut</Cut>
-      <Paste>Paste</Paste>
+      <Cut>Kivágás</Cut>
+      <Paste>Beillesztés</Paste>
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
       <WebDAV>View WebDAV</WebDAV>
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
-      <AddFolder>New Folder</AddFolder>
+      <AddFolder>Új mappa</AddFolder>
       <AddDocument>New Content</AddDocument>
       <Upload>Upload Files</Upload>
       <MoveNode>Move</MoveNode>
-      <UnLock>Unlock</UnLock>
+      <UnLock>UnLock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
       <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
@@ -596,7 +596,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>Download and allow edition</WebDavView>
       <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
@@ -644,11 +644,11 @@
       <UISavedQuery>Saved Query</UISavedQuery>
       <AdvancedSearchResult>Search Results</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>Advanced Search</UISearchContainer>
+      <UISearchContainer>Speciális keresés</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
-      <UIContentNameSearch>Search by Name</UIContentNameSearch>
+      <UIContentNameSearch>Keresés név szerint</UIContentNameSearch>
       <UINodeInfo>Version Info</UINodeInfo>
       <UINodeProperty>Node Property</UINodeProperty>
       <UIActionListContainer>Available Actions</UIActionListContainer>
@@ -681,7 +681,7 @@
       <name>Name</name>
       <multiValue>Multi Value</multiValue>
       <value>Value</value>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Szerkesztés</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -760,8 +760,8 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <remove>Eltávolítás</remove>
+      <action>Művelet</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Felhasználó kiválasztása</SelectUser>
+      <SelectMember>Válassza ki a tagságot</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Felhasználó kiválasztása</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Válassza ki a tagságot</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>Felhasználó kiválasztása</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -833,10 +833,10 @@
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
-      <orderable-children>Orderable Children</orderable-children>
+      <orderable-children>Orderable children</orderable-children>
       <property-def>Node Property Definition</property-def>
       <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-type>Típus</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -922,7 +922,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Művelet</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -940,7 +940,7 @@
     </title>
     <tooltip>
       <View>View this item</View>
-      <OpenFolder>Go to folder</OpenFolder>
+      <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
@@ -953,7 +953,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Művelet</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -984,7 +984,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Művelet</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1015,7 +1015,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Művelet</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1048,7 +1048,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Művelet</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1122,9 +1122,9 @@
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
       <ConstraintOption-From>From</ConstraintOption-From>
-      <ConstraintOption-To>To</ConstraintOption-To>
+      <ConstraintOption-To>-ig</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
-      <Category-label>Category</Category-label>
+      <Category-label>Kategória</Category-label>
       <created>Created</created>
       <modified>Modified</modified>
       <and>And</and>
@@ -1208,7 +1208,7 @@
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>Metadata Type</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1248,9 +1248,9 @@
   <UIECMSearch>
     <header>
       <name>Name</name>
-      <language>Language</language>
+      <language>Nyelv</language>
       <query>Query</query>
-      <action>Actions</action>
+      <action>Műveletek</action>
       <path>Path</path>
     </header>
   </UIECMSearch>
@@ -1259,7 +1259,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1269,7 +1269,7 @@
       <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
     </msg>
     <label>
-      <queryName>Query name</queryName>
+      <queryName>Query Name</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1282,12 +1282,12 @@
       <type>Type</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
-      <action>Actions</action>
+      <action>Műveletek</action>
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Szerkesztés</Edit>
+      <Delete>Törlés</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
@@ -1356,12 +1356,12 @@
       <addLabel>Add Label</addLabel>
       <removeLable>Remove Label</removeLable>
       <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Verzió megtekintése</viewVersion>
       <deleteVersion>Delete Version</deleteVersion>
       <compareVersion>Compare with the  base version</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>The view template is not supported.</have-no-view-template>
+      <have-no-view-template>The View template is not supported.</have-no-view-template>
       <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
       <error-removing-version>An error occurred while deleting this version.</error-removing-version>
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
@@ -1380,7 +1380,7 @@
       <date>Date</date>
       <author>Modified By</author>
       <summary>Summary</summary>
-      <action>Action</action>
+      <action>Művelet</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1400,7 +1400,7 @@
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
       <e_64>Move</e_64>
-      <e_128>Copy</e_128>
+      <e_128>Másolás</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
@@ -1416,13 +1416,13 @@
       <e_1048576>Remove Version Label</e_1048576>
       <e_2097152>Remove Version</e_2097152>
       <e_4194304>Lock</e_4194304>
-      <e_8388608>Unlock</e_8388608>
+      <e_8388608>UnLock</e_8388608>
       <e_16777216>Read</e_16777216>
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>Username</userName>
-      <date>Date</date>
+      <userName>Felhasználónév</userName>
+      <date>Dátum</date>
       <version>Version</version>
     </label>
   </UIAuditingInfo>
@@ -1451,8 +1451,8 @@
   <UIActivePublication>
     <header>
       <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <LifecycleDesc>Leírás</LifecycleDesc>
+      <action>Művelet</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1496,7 +1496,7 @@
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <PreviousAndNextCompare>Változások a {0} {1}</PreviousAndNextCompare>
       <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
@@ -1511,7 +1511,7 @@
       <format>Format</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <upload>Fájl feltöltés</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1559,7 +1559,7 @@
       <label>Select Label</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>Eltávolítás</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1607,7 +1607,7 @@
   <UICategoriesAddedList>
     <header>
       <path>Category</path>
-      <action>Actions</action>
+      <action>Műveletek</action>
     </header>
     <msg>
       <access-denied>Access denied. You don't have access permission.</access-denied>
@@ -1615,19 +1615,19 @@
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Törlés</Delete>
       </title>
     </action>
     <label>
       <category>Category</category>
-      <actions>Action</actions>
-      <delete>Delete</delete>
+      <actions>Műveletek</actions>
+      <delete>Törlés</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
       <name>Name</name>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <info>
       <child-not-found>This item doesn't have any child.</child-not-found>
@@ -1656,11 +1656,11 @@
   <UIRelationsAddedList>
     <header>
       <path>Relations</path>
-      <action>Actions</action>
+      <action>Műveletek</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Törlés</Delete>
       </title>
     </action>
     <msg>
@@ -1677,7 +1677,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1719,7 +1719,7 @@
       <Save>#{word.save}</Save>
       <SaveAndClose>Save &amp; Close</SaveAndClose>
       <ChangeType>Change Content Type</ChangeType>
-      <Fullscreen>Fullscreen</Fullscreen>
+      <Fullscreen>Teljes képernyő</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
@@ -1747,7 +1747,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Információk</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1794,11 +1794,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
+      <description>Leírás</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
@@ -1810,8 +1810,8 @@
     <action>
       <Close>#{word.close}</Close>
       <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Szerkesztés</Edit>
+      <Delete>Törlés</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -2089,9 +2089,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Csoport kiválasztása</selectGroup>
+      <selectUser>Felhasználó kiválasztása</selectUser>
+      <selectMembership>Válassza ki a tagságot</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2130,8 +2130,8 @@
     <header>
       <date>Date</date>
       <newState>New State</newState>
-      <user>User</user>
-      <description>Description</description>
+      <user>Felhasználó</user>
+      <description>Leírás</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
@@ -2189,7 +2189,7 @@
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Set Any Permission</AddAnyPermission>
+      <AddAnyPermission>Set any Permission</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2209,9 +2209,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Csoport kiválasztása</selectGroup>
+      <selectUser>Felhasználó kiválasztása</selectUser>
+      <selectMembership>Válassza ki a tagságot</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2229,7 +2229,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>Edit</Edit>
+      <Edit>Szerkesztés</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2250,7 +2250,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>Action</action>
+      <action>Művelet</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2454,12 +2454,12 @@
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
+      <OK>Törlés</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Mégse</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2544,7 +2544,7 @@
     <obtion>
       <Admin>Admin</Admin>
       <Info>Info</Info>
-      <Actions>Actions</Actions>
+      <Actions>Műveletek</Actions>
       <Collaboration>Collaboration</Collaboration>
       <Search>Search</Search>
     </obtion>
@@ -2630,7 +2630,7 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Biztosan törli ezt a megjegyzést?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2660,7 +2660,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Fájl feltöltés</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
@@ -2668,7 +2668,7 @@
     <label>
       <OwnedByMe>Owned by me</OwnedByMe>
       <Favourites>Favorites</Favourites>
-      <Hidden>Hidden</Hidden>
+      <Hidden>Rejtettek</Hidden>
       <Trash>Trash</Trash>
       <Configuration>Set Up Preferences</Configuration>
     </label>
@@ -2681,8 +2681,8 @@
       <label>
           <Alphabetic>Alphabetical</Alphabetic>
           <Type>Type</Type>
-          <CreatedDate>Created Date</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
+          <CreatedDate>Létrehozás dátuma</CreatedDate>
+          <ModifiedDate>Módosítás dátuma</ModifiedDate>
           <Ascending>Ascending</Ascending>
           <Descending>Descending</Descending>
       </label>
@@ -2806,7 +2806,7 @@
     <header>
       <name>Name</name>
       <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <action>
       <title>
@@ -2876,14 +2876,14 @@
     <UIActionForm>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Eltávolítás</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Eltávolítás</removeReference>
     </title>
   </EditFormAction>
 
@@ -2896,7 +2896,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query language:</queryType>
+            <queryType>Lekérdezés típusa:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2974,9 +2974,9 @@
     <revisions>
       <version>Revisions</version>
       <date>Date</date>
-      <author>Author</author>
-      <status>Status</status>
-      <action>Action</action>
+      <author>Szerző</author>
+      <status>Állapot</status>
+      <action>Művelet</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -2991,7 +2991,7 @@
       <unpublished>Unpublished</unpublished>
       <enrolled>Enrolled</enrolled>
       <draft>Draft</draft>
-      <pending>Pending</pending>
+      <pending>Függőben</pending>
       <approved>Approved</approved>
       <inreview>In Review</inreview>
       <staged>Staged</staged>
@@ -3001,7 +3001,7 @@
     <scheduled>
       <title>Scheduled</title>
       <from>From</from>
-      <to>To</to>
+      <to>-ig</to>
     </scheduled>
     <title>
       <preview>Preview</preview>
@@ -3017,8 +3017,8 @@
       <date>Date</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
-      <user>Author</user>
-      <description>Description</description>
+      <user>Szerző</user>
+      <description>Leírás</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>
@@ -3059,8 +3059,8 @@
   <WCMContentView>
     <header>
       <status>Status</status>
-      <author>Author</author>
-      <date>Created Date</date>
+      <author>Szerző</author>
+      <date>Létrehozás dátuma</date>
       <title>Document Title</title>
       <lastUser>Last User</lastUser>
     </header>
@@ -3130,8 +3130,8 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
+    <no>Nem</no>
+  <yes>Igen</yes>
   <true>True</true>
   <false>False</false>
   <Electronic>Electronic</Electronic>
@@ -3187,14 +3187,14 @@
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
     <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
+    <Error>Hiba</Error>
     <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
+    <Canceled>Törölt</Canceled>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
@@ -3202,7 +3202,7 @@
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
+  <CreatedOn>Létrehozva</CreatedOn>
   <Updated>Updated</Updated>
   <by>by</by>
   <you>you</you>
@@ -3212,7 +3212,7 @@
     <label>
       <name>Name</name>
       <date>Date</date>
-      <size>Size</size>
+      <size>Méret</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>

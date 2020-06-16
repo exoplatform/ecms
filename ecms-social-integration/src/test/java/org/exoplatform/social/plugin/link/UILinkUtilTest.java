@@ -16,7 +16,7 @@
  */
 package org.exoplatform.social.plugin.link;
 
-import org.exoplatform.wcm.ext.component.activity.UILinkUtil;
+import org.exoplatform.social.webui.activity.UILinkUtil;
 
 import junit.framework.TestCase;
 

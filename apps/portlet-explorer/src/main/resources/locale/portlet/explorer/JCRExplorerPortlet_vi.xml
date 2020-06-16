@@ -300,7 +300,7 @@
       <ManageActions>Hành động</ManageActions>
       <ExportNode>Xuất</ExportNode>
       <ImportNode>Nhập</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <OverloadThumbnail>Chèn Hình nhỏ</OverloadThumbnail>
       <ManageHidden>Hiện/Ẩn Nội dung</ManageHidden>
       <ViewReferences>Các Tham chiếu</ViewReferences>
       <ViewNodeType>Xem Kiểu Nút</ViewNodeType>
@@ -1352,11 +1352,11 @@
     <tooltip>
       <original>Original Version</original>
       <version>Phiên bản</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>Phiên bản Cơ sở</baseVersion>
       <addLabel>Thêm Nhãn</addLabel>
       <removeLable>Gỡ bỏ Nhãn</removeLable>
       <restoreVersion>Khôi phục Phiên bản</restoreVersion>
-      <viewVersion>View Version</viewVersion>
+      <viewVersion>Xem Thông tin Phiên bản</viewVersion>
       <deleteVersion>Xóa Phiên bản</deleteVersion>
       <compareVersion>So sánh với phiên bản cơ sở</compareVersion>
     </tooltip>

@@ -49,7 +49,7 @@
       <admin-view>Admin</admin-view>
       <icon-view>Icons</icon-view>
       <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
+      <list-view>Siyahı</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Categories</wcm-category-view>
       <file-view>File Management View</file-view>
@@ -142,7 +142,7 @@
     <label>
       <name>#{word.name}</name>
       <add>Əlavə Et</add>
-      <delete>Delete</delete>
+      <delete>Sil</delete>
     </label>
     <msg>
       <no-content-found>No content found.</no-content-found>
@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <msg>
       <child-not-found>No Content Found</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -186,8 +186,8 @@
       <Fulltext>A word or phrase in context</Fulltext>
       <Property>Property</Property>
       <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
+      <FromDate>Başlanğıc tarixi</FromDate>
+      <ToDate>Bitmə tarixi</ToDate>
       <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
@@ -201,7 +201,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Axtar</SearchWebContent>
     </action>
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
@@ -252,14 +252,14 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
+      <title>Başlıq</title>
       <score>Score</score>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <title>
       <Select>Select</Select>
-      <View>View</View>
+      <View>Göstər</View>
     </title>
     <msg>
     <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
@@ -290,8 +290,8 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Redaktə Et</Edit>
+        <Delete>Sil</Delete>
       </title>
     </action>
   </UIPermissionManager>
@@ -301,7 +301,7 @@
       <owner>Permission</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
@@ -367,8 +367,8 @@
     <label>
       <SingleContentViewer>Single Content Viewer</SingleContentViewer>
       <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
+      <Search>Axtar</Search>
+      <Sitemap>Sayt Xəritəsi</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
       <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
@@ -382,11 +382,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
+    <welcome>Xoş Gəldiniz</welcome>
     <login>Giriş</login>
     <logout>Çıxış</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <language>Dili Dəyiş</language>
+    <register>Qeydiyyat</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -400,8 +400,8 @@
       <PersonalDrives>Personal Drives</PersonalDrives>
       <GeneralDrives>General Drives</GeneralDrives>
       <GroupDrives>Group Drives</GroupDrives>
-      <Private>Private</Private>
-      <Public>Public</Public>
+      <Private>Gizli</Private>
+      <Public>İctimai</Public>
       <BackupCenter>Backup Center</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>
@@ -438,13 +438,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Əsas Səhifə</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Əsas Səhifə</home>
   </label>  
   </Breadcrumb>
 

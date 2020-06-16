@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Cấu hình Trang kiểu Cột</ColumnPageConfigs>
       <RowPageConfigs>Cấu hình Trang kiểu Hàng</RowPageConfigs>
       <TabsPageConfigs>Cấu hình Trang kiểu Tab</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Cấu hình Trang kiểu Hỗn hợp</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 

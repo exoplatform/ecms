@@ -3,10 +3,10 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
+      <nocontent>Ei sisältöä</nocontent>
       <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Waiting For My Approval</waitingapproval>
-      <approve>Approve</approve>
+      <waitingapproval>Odottaa hyväksyntääni</waitingapproval>
+      <approve>Hyväksy</approve>
       <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>

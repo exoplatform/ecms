@@ -7,7 +7,7 @@
   -->
   <UICommentForm>
     <label>
-      <name>Name</name>
+      <name>Ad</name>
       <email>E-poçt</email>
       <website>Website</website>
       <comment>Comment</comment>
@@ -17,8 +17,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <not-support>Sənədin bu növü barədə şərh verə bilməzsiniz.</not-support>
+      <not-checkedout>Sənə şərh verməzdən əvvəl səni gözdən keçirin.</not-checkedout>
       <content-null>You cannot post an empty comment.</content-null>
     </msg>
   </UICommentForm>
@@ -41,13 +41,13 @@
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>Oldu</confirm>
       </label>
     </button>
     <msg>
       <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-checkedout>Sənədin səs verməsini yoxlamaq lazımdır.</not-checkedout>
+      <vote-restriction>Bir dəfədən artıq səs verə bilməzsiniz.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
+      <refresh-session-success>Sessiya uğurla yeniləndi.</refresh-session-success>
       <no-node-history>You are at the root folder.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <target-path-not-found>Bu yola çıxa bilməzsiniz, çünki artıq mövcud deyil və ya sizin icazəniz yoxdur.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -97,7 +97,7 @@
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
-      <more>More</more>
+      <more>Daha çox</more>
       <backTo>Back</backTo>
     </label>
   </UIViewBar>
@@ -114,9 +114,9 @@
       <GeneralDrives>General drives</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>'{0}' sürücüsündəki giriş icazələrinə görə heç bir görünüş yoxdur.</no-view-found>
+      <access-denied>Giriş qadağandır. '{0}' sürücüsünün iş yerində icazə ala bilməzsiniz.</access-denied>
+      <workspace-not-exist>'{0}' sürücüsü bir tanınmayan iş yerində saxlanıldı. Xahiş edirik bu sürücüyü yenidən yapılandırın.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -132,7 +132,7 @@
       <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Bu element silindi və ya dəyişdirildi. Xahiş edirik Yenile düyməsini basın.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -192,8 +192,8 @@
   <UIRenameForm>
     <title>Rename</title>
     <label>
-      <nameField>Name</nameField>
-      <titleField>Title</titleField>
+      <nameField>Ad</nameField>
+      <titleField>Başlıq</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -254,7 +254,7 @@
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Sənədi Açın</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -270,7 +270,7 @@
   <UIResourceForm>
     <title>Edit File Content</title>
     <label>
-      <name>Name</name>
+      <name>Ad</name>
       <textToModify>Text to modify</textToModify>
       <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
     </label>
@@ -284,13 +284,13 @@
     <tooltip>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <EditDocument>Edit</EditDocument>
-      <Upload>Upload</Upload>
+      <EditDocument>Redaktə Et</EditDocument>
+      <Upload>Yüklə</Upload>
       <Paste>Paste</Paste>
-      <Search>Search</Search>
+      <Search>Axtar</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
-      <Vote>Vote</Vote>
+      <Vote>Səs Ver</Vote>
       <Comment>Comment</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
@@ -378,7 +378,7 @@
       <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
       <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
       <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Bu element silindi və ya dəyişdirildi. Xahiş edirik Yenile düyməsini basın.</path-not-found>
       <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
       <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
       <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
@@ -526,12 +526,12 @@
       <Cut>Cut</Cut>
       <Copy>Kopyala</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Delete</RemoveNode>
+      <RemoveNode>Sil</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Redaktə Et</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
@@ -543,7 +543,7 @@
       <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
       <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
       <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Bu element silindi və ya dəyişdirildi. Xahiş edirik Yenile düyməsini basın.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Remove this attachment file</remove-attachment>
@@ -553,7 +553,7 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>Ad</name>
         <versionable>Versionable</versionable>
         <exo_owner>Sahib</exo_owner>
         <auditing>Auditing</auditing>
@@ -571,10 +571,10 @@
     <event>
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Redaktə Et</EditDocument>
       <Copy>Kopyala</Copy>
       <Rename>Rename</Rename>
-      <Delete>Delete</Delete>
+      <Delete>Sil</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>Paste</Paste>
@@ -633,7 +633,7 @@
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIPublicationHistory>Tarixçə</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
       <UIPropertyTab>Properties</UIPropertyTab>
@@ -658,7 +658,7 @@
       <UIAddLanguageContainer>Dil Əlavə Et</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
+      <UIPublicationLogList>Tarixçə</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
       <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
@@ -678,10 +678,10 @@
       <remove-property>Are you sure you want to remove this property?</remove-property>
     </confirm>
     <header>
-      <name>Name</name>
+      <name>Ad</name>
       <multiValue>Multi Value</multiValue>
-      <value>Value</value>
-      <action>Action</action>
+      <value>Dəyər</value>
+      <action>Hərəkət</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -705,8 +705,8 @@
   <UIPropertyForm>
     <title>Add/Edit Property</title>
     <label>
-      <name>Name:</name>
-      <type>Type:</type>
+      <name>Ad:</name>
+      <type>Tip:</type>
       <value>Value:</value>
       <upload>Yüklə:</upload>
       <namespace>Namespace:</namespace>
@@ -727,7 +727,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>Redaktə Et</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -761,7 +761,7 @@
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Sil</remove>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -811,7 +811,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -829,13 +829,13 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>Ad</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
+      <prop-name>Ad</prop-name>
       <prop-type>Type</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>Ad</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -876,7 +876,7 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Axtar</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -886,7 +886,7 @@
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Search</Search>
+      <Search>Axtar</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -922,7 +922,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Hərəkət</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -953,7 +953,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Hərəkət</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -984,7 +984,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Hərəkət</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1015,7 +1015,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Hərəkət</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1048,7 +1048,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Hərəkət</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1121,8 +1121,8 @@
       <containPro-Contain>Contain</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>From</ConstraintOption-From>
-      <ConstraintOption-To>To</ConstraintOption-To>
+      <ConstraintOption-From>Kimdən</ConstraintOption-From>
+      <ConstraintOption-To>Kimə</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
       <created>Created</created>
@@ -1171,14 +1171,14 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name:</name>
+      <name>Ad:</name>
       <selectBox>Select Query Style:</selectBox>
       <query>Query:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Search</Search>
+      <Search>Axtar</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
@@ -1192,7 +1192,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
+      <name>Ad</name>
       <selectBox>Select Query Style</selectBox>
       <query>Query</query>
     </label>
@@ -1247,7 +1247,7 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
+      <name>Ad</name>
       <language>Language</language>
       <query>Query</query>
       <action>Actions</action>
@@ -1259,7 +1259,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1278,7 +1278,7 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
+      <name>Ad</name>
       <type>Type</type>
       <statement>Statement</statement>
       <permission>İcazələr</permission>
@@ -1286,8 +1286,8 @@
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Redaktə Et</Edit>
+      <Delete>Sil</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Version</version>
+      <version>Versiya</version>
       <baseVersion>current draft</baseVersion>
       <addLabel>Add Label</addLabel>
       <removeLable>Remove Label</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Version</version>
+      <version>Versiya</version>
       <date>Date</date>
       <author>Modified By</author>
-      <summary>Summary</summary>
-      <action>Action</action>
+      <summary>Xülasə</summary>
+      <action>Hərəkət</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1404,7 +1404,7 @@
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
-      <e_2048>Update</e_2048>
+      <e_2048>Yenilə</e_2048>
       <e_4096>Import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
@@ -1423,7 +1423,7 @@
       <operation>Operation</operation>
       <userName>İstifadəçi Adı</userName>
       <date>Date</date>
-      <version>Version</version>
+      <version>Versiya</version>
     </label>
   </UIAuditingInfo>
 
@@ -1436,7 +1436,7 @@
     <label>
       <note>Versioning has not been activated for this document.</note>
       <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <button-active>Aktivləşdir</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
@@ -1450,9 +1450,9 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
+      <LifecycleName>Ad</LifecycleName>
       <LifecycleDesc>Açıqlama</LifecycleDesc>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1478,7 +1478,7 @@
       <question>Are you sure you want to activate?</question>
     </label>
     <action>
-      <activate>Activate</activate>
+      <activate>Aktivləşdir</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1492,7 +1492,7 @@
       <backTo>Back to version history</backTo>
       <diffTitle>Compare between two versions</diffTitle>
       <noContent>There is no content to compare</noContent>
-      <compareVerion>Version</compareVerion>
+      <compareVerion>Versiya</compareVerion>
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Ad</nodeName>
       <VersionNumber>Version Number</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
       <VersionDate>Version Date</VersionDate>
@@ -1615,19 +1615,19 @@
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Sil</Delete>
       </title>
     </action>
     <label>
       <category>Category</category>
-      <actions>Action</actions>
-      <delete>Delete</delete>
+      <actions>Hərəkət</actions>
+      <delete>Sil</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Ad</name>
+      <action>Hərəkət</action>
     </header>
     <info>
       <child-not-found>This item doesn't have any child.</child-not-found>
@@ -1660,7 +1660,7 @@
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Sil</Delete>
       </title>
     </action>
     <msg>
@@ -1677,7 +1677,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1747,7 +1747,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>İnformasiya</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1798,7 +1798,7 @@
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
@@ -1809,9 +1809,9 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <View>Göstər</View>
+      <Edit>Redaktə Et</Edit>
+      <Delete>Sil</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -2031,11 +2031,11 @@
     <label>
       <published>Published</published>
       <non-published>Unpublished</non-published>
-      <public>Public</public>
-      <private>Private</private>
+      <public>İctimai</public>
+      <private>Gizli</private>
       <state>State</state>
       <visibility>Visibility</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Ad:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
       <stateName>State Name</stateName>
     </label>
@@ -2132,7 +2132,7 @@
       <newState>New State</newState>
       <user>İstifadəçi</user>
       <description>Açıqlama</description>
-      <version>Version</version>
+      <version>Versiya</version>
       <visibility>Visibility</visibility>
     </header>
     <action>
@@ -2146,7 +2146,7 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
+      <version>Versiya</version>
       <state>State</state>
     </header>
   </UIVersionTreeList>
@@ -2229,7 +2229,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>Edit</Edit>
+      <Edit>Redaktə Et</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2250,7 +2250,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>Action</action>
+      <action>Hərəkət</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2454,11 +2454,11 @@
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
+      <OK>Sil</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
+<ReadOnly>Yalnız oxuyun</ReadOnly>
 <Cancel>Ləğv Et</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
@@ -2468,7 +2468,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Oldu</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
@@ -2546,7 +2546,7 @@
       <Info>Info</Info>
       <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
-      <Search>Search</Search>
+      <Search>Axtar</Search>
     </obtion>
   </UIActionBar>
 
@@ -2630,7 +2630,7 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Bu şərhi silmək istədiyinizə əminsiniz?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2788,8 +2788,8 @@
 
    <UITaggingForm>
     <label>
-      <Public>Public</Public>
-      <Private>Private</Private>
+      <Public>İctimai</Public>
+      <Private>Gizli</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
@@ -2804,9 +2804,9 @@
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
+      <name>Ad</name>
       <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <action>Hərəkət</action>
     </header>
     <action>
       <title>
@@ -2976,7 +2976,7 @@
       <date>Date</date>
       <author>Author</author>
       <status>Status</status>
-      <action>Action</action>
+      <action>Hərəkət</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -3000,11 +3000,11 @@
     </status>
     <scheduled>
       <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
+      <from>Kimdən</from>
+      <to>Kimə</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
+      <preview>Ön Baxış</preview>
       <restore>Restore</restore>
     </title>
     <msg>
@@ -3035,7 +3035,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3104,10 +3104,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Giriş qadağandır. '{0}' sürücüsünün iş yerində icazə ala bilməzsiniz.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>'{0}' sürücüsü bir tanınmayan iş yerində saxlanıldı. Xahiş edirik bu sürücüyü yenidən yapılandırın.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3130,13 +3130,13 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
+    <no>Xeyir</no>
+  <yes>Bəli</yes>
   <true>True</true>
   <false>False</false>
   <Electronic>Electronic</Electronic>
   <Paper>Paper</Paper>
-  <NONE>None</NONE>
+  <NONE>Heç kim</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
   <NOCONTRACT>No Contract</NOCONTRACT>
@@ -3193,8 +3193,8 @@
     <or>və ya</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
+    <Replace>Əvəz etmək</Replace>
+    <Canceled>Ləğv edildi</Canceled>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
@@ -3210,13 +3210,13 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
+      <name>Ad</name>
       <date>Date</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <more>Daha çox</more>
     </label>
   </FileView>
   <UIPropertyForm>

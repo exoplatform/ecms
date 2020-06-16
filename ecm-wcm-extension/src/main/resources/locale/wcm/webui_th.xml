@@ -49,9 +49,9 @@
       <admin-view>Admin</admin-view>
       <icon-view>Icons</icon-view>
       <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
+      <list-view>รายการ</list-view>
       <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
+      <wcm-category-view>หมวดหมู่</wcm-category-view>
       <file-view>File Management View</file-view>
     </label>
   </Views>
@@ -72,7 +72,7 @@
       <child-not-found>No Page Found.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>เลือก</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -88,7 +88,7 @@
       <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
+      <UIContentSearchResult>ผลลัพธ์การค้นหา</UIContentSearchResult>
       <UIContentViewer>Preview Content</UIContentViewer>
       <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
@@ -182,12 +182,12 @@
   <UIContentSearchForm>
     <title>
       <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
+      <SearchByName>ค้นหาตามชื่อ</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
       <Property>Property</Property>
       <Contain>Contain</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
+      <FromDate>จากวัน</FromDate>
+      <ToDate>ถึงวันที่</ToDate>
       <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
@@ -252,13 +252,13 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
+      <title>ชื่อเรื่อง</title>
       <score>Score</score>
       <publicationstate>Publication State</publicationstate>
       <action>Action</action>
     </header>
     <title>
-      <Select>Select</Select>
+      <Select>เลือก</Select>
       <View>View</View>
     </title>
     <msg>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>สิทธิ์การใช้งาน</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
     </label>
@@ -298,13 +298,13 @@
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
+      <owner>สิทธิ์การใช้งาน</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
       <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>คุณแน่ใจว่าต้องการลบสิทธิ์การใช้งานนี้หรือไม่?</confirm-delete-permission>
       <no-permission-remove>You do not have permission.</no-permission-remove>
       <access-denied>Access denied.</access-denied>
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>เลือกผู้ใช้</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>ผู้เลือกผู้ใช้</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -336,8 +336,8 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>เลือก​กลุ่ม</selectGroup>
+      <selectMembership>เลือกสมาชิก</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -382,11 +382,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <welcome>ยินดีต้อนรับ</welcome>
+    <login>เข้าสู่ระบบ</login>
+    <logout>ออกจากระบบ</logout>
+    <language>เปลี่ยนภาษา</language>
+    <register>ลงทะเบียน</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -397,9 +397,9 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
+      <PersonalDrives>ไดรฟ์ส่วนบุคคล</PersonalDrives>
+      <GeneralDrives>ไดรฟ์ทั่วไป</GeneralDrives>
+      <GroupDrives>กลุ่มไดรฟ์</GroupDrives>
       <Private>Private</Private>
       <Public>Public</Public>
       <BackupCenter>Backup Center</BackupCenter>
@@ -421,7 +421,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>ตัวเลือกหน้า</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
@@ -432,19 +432,19 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>ยกเลิก</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>หน้าหลัก</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>หน้าหลัก</home>
   </label>  
   </Breadcrumb>
 

@@ -5,7 +5,7 @@
       <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>You don't have permission to do this action.</not-permission>
+      <not-permission>Anda tidak memiliki izin untuk melakukan tindakan ini.</not-permission>
     </msg>
   </EditingPortlet>
 

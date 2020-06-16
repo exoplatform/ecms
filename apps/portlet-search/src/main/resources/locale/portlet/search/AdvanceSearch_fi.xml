@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
-      <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <keyword>Hakusana</keyword>
+      <portal>Portaali</portal>
+      <Page>Sivu</Page>
+      <Document>Asiakirja</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Hae</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
+      <Page>Sivu</Page>
+      <Document>Asiakirja</Document>
+      <DocumentAndPage>Asiakirja ja sivu</DocumentAndPage>
+      <documentandpage>Asiakirja ja sivu</documentandpage>
       <results>Results {0} to {1} for {2}</results>
       <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>of about</ofAboutCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
+      <timeUnitCaption>sekuntia</timeUnitCaption>
+      <similar>Sivut, joilla sama sisältö esiintyy</similar>
       <editor>Editor</editor>
-      <date>Date</date>
+      <date>Päivämäärä</date>
       <relevancy>Relevance</relevancy>
-      <title>Title</title>
-      <sortBy>Sort By:</sortBy>
+      <title>Otsikko</title>
+      <sortBy>Lajittele (jnkn mukaan):</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Muokkaa</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>Hakusi {0} ei vastaa yhtään {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <itemsPerPageSelector>Kohteita sivulla</itemsPerPageSelector>
       <searchFormSelector>Search Form Template</searchFormSelector>
       <searchResultSelector>Search Result Template</searchResultSelector>
       <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
       <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <searchResultBasePathInputSetAction>Peruspolku</searchResultBasePathInputSetAction>
       <pageMode>Page Mode</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>Ei mitään</none>
+        <more>Lisää</more>
+        <pagination>Sivutus</pagination>
       </option>
     </label>
     <action>
@@ -58,7 +58,7 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Valitse peruspolku</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
@@ -70,14 +70,14 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>Seuraava</next>
+      <previous>Edellinen</previous>
+      <more>Lisää</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Nopea muokkaus</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
@@ -89,7 +89,7 @@
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>hae kaikilta sivustoilta</all>
       </option>  
     </label>  
   </ViewMode>

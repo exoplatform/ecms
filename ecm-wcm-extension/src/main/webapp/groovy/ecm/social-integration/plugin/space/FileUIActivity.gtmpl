@@ -42,64 +42,26 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+import org.exoplatform.social.webui.activity.UILinkUtil;
+
 
 //ECMS import END
 
 import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARAM_COMMENT;
 
-public void getOwnerSpace(String ownerName, String ownerUri, String spaceSourceURI, String spaceID, String spaceName, String spaceImageSource) {
-    %>
-    <div class="ownerName">
-    <a title="$ownerName" href="$ownerUri">$ownerName</a>
-                        </div>
-    <a class="space-avatar spaceName" href="$spaceSourceURI" space-data="$spaceID"><span class="uiIconArrowRightMini uiIconLightGray"></span>
-        <img  class="avatarMini" alt="$spaceName" src="$spaceImageSource"/>&nbsp;$spaceName
-    </a>
-    <%
-}
-
-public void getOwner(String ownerName, String ownerUri) {
-    %>
-    <div class="owner">
-        <a title="$ownerName" href="$ownerUri">$ownerName</a>
-    </div>
-    <%
-}
-
-public void addActivityTimeLine(String ownerName, String ownerUri, String ownerAvatar) {
-    %>
-    <div class="activityTimeLine pull-left">
-        <div class="activityAvatar avatarCircle">
-            <a title="$ownerName" href="$ownerUri">
-                <img alt="$ownerName" src="$ownerAvatar"/>
-            </a>
-        </div>
-    <%
-}
-
     def viewActivityTip = _ctx.appRes("UIActivity.msg.ViewActivity");
-    def deleteActivityTip = _ctx.appRes("UIActivity.msg.DeleteActivity");
-    def labelComment = _ctx.appRes("UIActivity.label.Comment");
-    def labelComments= _ctx.appRes("UIActivity.comment.commentsLabel");
-    def labelLikesActivity = _ctx.appRes("UIActivity.label.likesLabel");
-    def labelLike = _ctx.appRes("UIActivity.label.Like");
     def labelCancel = _ctx.appRes("UIActivity.label.Cancel");
-    def labelViewAllReplies = _ctx.appRes("UIActivity.label.ViewAllReplies");
     def inputWriteAComment = _ctx.appRes("UIActivity.input.Add_your_comment").replace("'", "\\'");
-    def labelShowAllComments = _ctx.appRes("UIActivity.label.Show_All_Comments");
-    def labelHideAllComments = _ctx.appRes("UIActivity.label.Hide_All_Comments");
-    def labelShowPreviousComments = _ctx.appRes("UIActivity.label.Show_Previous_Comments");
     def captionConfirmation=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirmation"));
     def labelConfirmbutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirm_Delete_Activity-Button"));
     def labelClosebutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Cancel_Delete_Activity-Button"));
-    def labelToDeleteThisComment=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.msg.Are_You_Sure_To_Delete_This_Comment"));
     def labelToDeleteThisActivity=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.msg.Are_You_Sure_To_Delete_This_Activity"));
     def labelUpdate = _ctx.appRes("UIActivity.label.Update");
     def labelEdit = _ctx.appRes("UIActivity.label.Edit");
     def labelDelete = _ctx.appRes("UIActivity.label.Delete");
     def activity = uicomponent.getActivity();
-    def streamOwner = activity.getStreamOwner();
     def activityContentTitle = Text.unescapeIllegalJcrChars(activity.title);
+    def linkExistsClassName = uicomponent.getLinkSource() ? "linkExists" : "";
 
     def activityStatus = uicomponent.getActivityStatus();
     def activityDeletable = uicomponent.isActivityDeletable();
@@ -109,20 +71,10 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
 
     def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
 
-    def commentList = uicomponent.getComments();
     def allComments = uicomponent.getAllComments();
-    def commentCount = 0;
-    def commentHidden = 0;
-    def parentCommentsSize = uicomponent.getParentCommentsSize(commentList);
-    if (allComments) {
-        commentCount = uicomponent.getAllCommentSize();
-        commentHidden = commentCount-parentCommentsSize;
-        labelShowAllComments = labelShowAllComments.replace("{0}", commentCount + "");
-        labelHideAllComments = labelHideAllComments.replace("{0}", commentCount + "");
-    }
+
     def displayedIdentityLikes = uicomponent.getDisplayedIdentityLikes();
     def identityLikesNum = 0;
-    def totalLikesNum = uicomponent.getIdentityLikes().length;
 
     def toggleDisplayLikesAction = uicomponent.event("ToggleDisplayLikes");
     def startTag = "<a onclick=\"$toggleDisplayLikesAction\" id=\"ToggleDisplayListPeopleLikes${activity.id}\" href=\"#ToggleDisplayListPeopleLikes\">";
@@ -130,7 +82,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
     if (displayedIdentityLikes != null) {
         identityLikesNum = displayedIdentityLikes.length;
     }
-    def commentListStatus = uicomponent.getCommentListStatus();
     def commentFormDisplayed = uicomponent.isCommentFormDisplayed();
     def spaceURL = uicomponent.getSpaceURL();
     def spaceGroupId = uicomponent.getSpaceGroupId();
@@ -173,12 +124,9 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
 
     //make sures commentFormFocused is set to false to prevent any refresh to focus, only focus after post a comment
     uicomponent.setCommentFormFocused(false);
-    def ownerName, ownerUri = "#", ownerAvatar, activityPostedTime, activityUpdatedTime, absolutePostedTime;
+    def activityPostedTime;
 
     activityPostedTime = uicomponent.getRelativeTimeLabel(_ctx, activity.postedTime);
-    activityUpdatedTime = uicomponent.getRelativeTimeLabel(_ctx, activity.updated.getTime());
-    activityUpdatedTime = _ctx.appRes("UIActivity.label.EditedFrom").replace("{0}", activityUpdatedTime);
-    absolutePostedTime = uicomponent.getAbsolutePostedTime(activity.postedTime);
     def ownerIdentity = uicomponent.ownerIdentity;
     if (uicomponent.isUserActivity()) {
         ownerUri = LinkProvider.getUserProfileUri(ownerIdentity.getRemoteId());
@@ -192,24 +140,6 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
         ownerName = space.displayName;
         if (!ownerAvatar) ownerAvatar = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
     }
-    def spaceSourceURI, spaceName, spaceImageSource, spaceID;
-    if (uicomponent.isUserActivity() && uicomponent.isSpaceStreamOwner() && !uicomponent.isUISpaceActivitiesDisplay()) {
-
-        Space spaceSource = Utils.getSpaceService().getSpaceByPrettyName(streamOwner);
-        spaceID = spaceSource.getId();
-        if (spaceSource != null) {
-            spaceSourceURI = LinkProvider.getSpaceUri(spaceSource.url);
-            spaceName = spaceSource.displayName;
-            spaceImageSource = spaceSource.getAvatarUrl();
-            if (spaceImageSource == null) {
-                spaceImageSource = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
-            }
-        } else {
-            spaceSourceURI = LinkProvider.getActivityUriForSpace(streamOwner, streamOwner);
-            spaceName = StringEscapeUtils.escapeHtml(Utils.getSpaceIdentity(streamOwner, false).profile.fullName);
-            spaceImageSource = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
-        }
-    }
 
     uiform.begin();
     def viewerId = Utils.getViewerIdentity().getId();
@@ -221,23 +151,7 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
                 <div class="heading">
                     <div class="activityHeader">
                     <span class="arrowLeft"></span>
-                     <div class="activityAvatar avatarCircle">
-                        <a title="$ownerName" href="$ownerUri">
-                            <img alt="$ownerName" src="$ownerAvatar"/>
-                        </a>
-                    </div>
-                     <div class="activityAuthorAndDate">
-                    <div class="author">
-    <% if (uicomponent.isUserActivity() && uicomponent.isSpaceStreamOwner() && !uicomponent.isUISpaceActivitiesDisplay()) {
-        getOwnerSpace(ownerName, ownerUri, spaceSourceURI, spaceID, spaceName, spaceImageSource);
-    } else{
-        getOwner(ownerName, ownerUri);
-    } %>
-                    </div>
-        <div class="dataInfor">
-            <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;<a id="EditActivityTime${activity.id}" rel="tooltip" data-placement="bottom" title="$absolutePostedTime" href="<%=uicomponent.getActivityPermalink(activity.id)%>"<% if(activity.postedTime != activity.updated.getTime() ){%>> $activityUpdatedTime <%} else {%> >$activityPostedTime <%}%></a></span>
-        </div>
-    </div><!-- endactivityAuthorAndDate -->
+                      <% _ctx.includeTemplates("UIActivityHeading") %>
             <div id="dropDownEditActivity${activity.id}" class="btn-group uiDropdownWithIcon actLink">
             <div class="dropdown-toggle" data-toggle="dropdown">
             <i class="uiIconActivityAction uiIconLightGray">
@@ -301,12 +215,55 @@ public void addActivityTimeLine(String ownerName, String ownerUri, String ownerA
 <% if(uicomponent.getFilesCount() > 0) { %>
 
   <div class="previews Previews${activity.id}">
-    <div class="fileShare">
-<%
+  <div class="fileShare">
 
-int maxToDisplay = 3;
-int filesToDisplay = uicomponent.getFilesCount() > maxToDisplay ? maxToDisplay : uicomponent.getFilesCount();
-
+  <%
+    int maxToDisplay = 3;
+    int filesToDisplay = uicomponent.getFilesCount() > maxToDisplay ? maxToDisplay : uicomponent.getFilesCount();
+    //if link exists
+    filesToDisplay = uicomponent.getLinkSource() && (filesToDisplay != maxToDisplay) ? filesToDisplay+1 : filesToDisplay;
+    if (uicomponent.getLinkSource()){
+      String linkSource = uicomponent.getLinkSource();
+      String linkTitle = uicomponent.getLinkTitle();
+      if (linkTitle == null || linkTitle.equals("")) {
+        linkTitle = UILinkUtil.simpleEscapeHtml(linkSource);
+      }
+      String linkImage = uicomponent.getLinkImage();
+      String linkDescription = UILinkUtil.simpleEscapeHtml(uicomponent.getLinkDescription());
+      //
+      linkTitle = UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkTitle));
+      linkSource = UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkSource));
+      //
+      def isDefaultPreview = "";
+      if (linkImage == null || linkImage.equals("")) {
+        linkImage = "/eXoSkin/skin/images/system/composer/PostLinks.png";
+        isDefaultPreview = "defaultPreview";
+      }
+      def embedHtml = uicomponent.getEmbedHtml();
+  %>
+  <div class="uiBox roundedBottom introBox linkShare clearfix isPreviewable previewable${filesToDisplay}0 ${linkExistsClassName} ${isDefaultPreview}">
+      <div class="clearfix linkClass">
+      					<% if (embedHtml == null && linkImage.length() != 0) { %>
+                            <div class="linkPreview ${isDefaultPreview}" alt="$linkTitle" style="background-image: url($linkImage);">
+                               <% if (isDefaultPreview) { %>
+                                    <div class="defaultImage" style="background-image: url($linkImage);"></div>
+                               <% } %>
+                               <div class="boxDescription">
+                                 <div class="block">
+                                   <div class="titlePreview"><a target="_blank" href="$linkSource" target="_blank">$linkTitle</a></div>
+                                   <div class="descriptionLink">$linkDescription</div>
+                                   <div class="link" ><a href="$linkSource" target="_blank"><i class="far fa-link"></i> $linkSource</a></div>
+                                 </div>
+                               </div>
+                            </div>
+                            <% } %>
+                            <% if (embedHtml != null) { %>
+      							<div class="EmbedHtml">$embedHtml</div>
+      					<% } %>
+      				</div>
+      				</div><!--end introBox,linkShare-->
+  <%
+  }
 // for each node
 for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     def currentNode = uicomponent.getContentNode(index);
@@ -372,7 +329,10 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     def breadCrumbSize = docFolderBreadCrumb == null ? 0 : docFolderBreadCrumb.size();
 
     def fileInfo = _ctx.appRes("SocialIntegration.messages.updatedOn") + " " + uicomponent.getDocUpdateDate(currentNode) + " " + _ctx.appRes("SocialIntegration.messages.updatedBy") + " " + StringEscapeUtils.escapeHtml(uicomponent.getDocLastModifier(currentNode)) + " " + (StringUtils.isBlank(size) ? "" : (" - " + size));
-
+    def newIndex = uicomponent.getLinkSource() ? index+1 : index;
+    def previousDoc = newIndex == index ? 1 : 2;
+    def nextDoc = newIndex == index ? 1 : 0;
+    def maxFilesToShow = newIndex == index ? 3 : 2;
     def docPreviewUri = "javascript:require(['SHARED/documentPreview'], \
                            function(documentPreview) { \
                                     documentPreview.init({ \
@@ -405,66 +365,67 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                                                                 liked: " + uicomponent.isLiked() + ", \
                                                                 likes: " + identityLikesNum + ", \
                                                                 spaceURL: '" + spaceURL + "',  \
-                                                                next: " + ((index + 1 < uicomponent.getFilesCount()) ? ("'#Preview${activity.id}-" + (index + 1) + "'") : "null") + ",  \
-                                                                previous: " + ((index - 1 >= 0) ? ("'#Preview${activity.id}-" + (index - 1) + "'") : "null") + " \
+                                                                next: " + ((newIndex + nextDoc < uicomponent.getFilesCount()) ? ("'#Preview${activity.id}-" + (newIndex + 1) + "'") : "null") + ",  \
+                                                                previous: " + ((newIndex - previousDoc >= 0) ? ("'#Preview${activity.id}-" + (newIndex - 1) + "'") : "null") + " \
                                                             }, \
                                                             version: { \
                                                                 number : "+ version +" \
                                                             }, \
                                                         }) \
                              })";
+
     // END ECMS
 %>
 
-<div id="Preview${activity.id}-$index" class="clearfix isPreviewable previewable${filesToDisplay}${index}" onclick="$docPreviewUri">
+<div id="Preview${activity.id}-$newIndex" class="clearfix isPreviewable previewable${filesToDisplay}${newIndex} ${linkExistsClassName}" onclick="$docPreviewUri">
 <%
-        if (index >= maxToDisplay) { %>
+        if (newIndex >= maxToDisplay) { %>
          </div>
 <%        continue;
     } else if (mimeType != null && mimeType.length() > 0 && fileSize > 0){
                 if(mimeType.startsWith("image") || mimeType.indexOf("icon") >=0){
 %>
-        <div id="MediaContent${activity.id}-$index" class="mediaContent">
+        <div id="MediaContent${activity.id}-$newIndex" class="mediaContent">
     <%
 			        def encodedPath = URLEncoder.encode(currentNode.getPath(), "utf-8");
 			        encodedPath = encodedPath.replaceAll ("%2F", "/");
 			        String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/origin/" + repository + "/" + preferenceWS + encodedPath;
 			        if(mimeType.indexOf("icon") >=0) thumbnailImage = binarySrc;
     %>
-        <img src="$thumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$index').className += ' NoPreview uiBgdFileImage';document.getElementById('MediaContent${activity.id}-$index').removeChild(this);" />
+        <img src="$thumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$newIndex').className += ' NoPreview uiBgdFileImage';document.getElementById('MediaContent${activity.id}-$newIndex').removeChild(this);" />
     </div>
                                  <%
                 } else if(org.exoplatform.services.cms.impl.Utils.isSupportThumbnailView(mimeType)){%>
-   <div id="MediaContent${activity.id}-$index" class="mediaContent docTypeContent hovereffect">
+   <div id="MediaContent${activity.id}-$newIndex" class="mediaContent docTypeContent hovereffect">
    <%
                     def iconClass = uicomponent.getDefaultIconClass(index);
 	                def encodedPath = URLEncoder.encode(currentNode.getPath(), "utf-8");
 	                encodedPath = encodedPath.replaceAll ("%2F", "/");
 			        String pdfThumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/custom/900x900/" + repository + "/" + preferenceWS + encodedPath+ "?version="+ version+"&lastModified="+ lastModified.hashCode();
    %>
-        <img src="$pdfThumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$index').className += ' NoPreview $iconClass';document.getElementById('MediaContent${activity.id}-$index').removeChild(this);" />
+        <img src="$pdfThumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$newIndex').className += ' NoPreview $iconClass';document.getElementById('MediaContent${activity.id}-$newIndex').removeChild(this);" />
     </div>
     <%
                 } else if(fileComponent != null) { %>
-     <div id="MediaContent${activity.id}-$index" class="mediaContent PlayerContianer">
+     <div id="MediaContent${activity.id}-$newIndex" class="mediaContent PlayerContianer">
         <% uicontentpresentation.renderUIComponent(fileComponent);%>
      </div>
     <%
                 } else { %>
-     <div id="MediaContent${activity.id}-$index" class="mediaContent uiBgdFile NoPreview">
+     <div id="MediaContent${activity.id}-$newIndex" class="mediaContent uiBgdFile NoPreview">
      </div>
     <%
                 }
               }
-			   if (index == 2 && uicomponent.getFilesCount() > 3) { %>
-			             <a id="LoadMore${activity.id}-$index" class="MediaName LoadMore" href="javascript:void(0)">
+			   if (newIndex == 2 && uicomponent.getFilesCount() > maxFilesToShow) { %>
+			             <a id="LoadMore${activity.id}-$newIndex" class="MediaName LoadMore" href="javascript:void(0)">
     			            <%=_ctx.appRes("SocialIntegration.messages.loadMoreFiles").replace("{0}", String.valueOf(uicomponent.getFilesCount() - maxToDisplay + 1))%>
 			             </a>
 			         </div>
 			<%        continue;
 			    } else { %>
 
-		    <div id="MediaName${activity.id}$index" class="MediaName">
+		    <div id="MediaName${activity.id}$newIndex" class="MediaName">
                 <h4 class="fileName">
                     <div class="fileTitle content">
 	                    <div class="fileNameParentLink" data-container="body" rel="tooltip" data-placement="top" data-original-title="$contentName">
@@ -535,245 +496,7 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
               <% _ctx.includeTemplates("UIActivityActionBar-actions") %>
             </div>
 
-                <div id="CommentBlockBound${activity.id}" class="commentBox">
-
-                    <div class="commentList">
-                    <%
-            def commenterFullName, commenterProfileUri, commentMessage, commentPostedTime, commenterAvatarImgSrc, commentAbsolutePostedTime;
-            def first = true, commentContentClass;
-            def commentCounter = 0;
-            def subCommentSize = 0;
-            def subCommentIndex = 0;
-            def subCommentClass = "";
-            def hideSubComments = true;
-            def updatedCommentId = uicomponent.getAndSetUpdatedCommentId(null);
-            def showSubComments = false;
-            def updatedComment;
-            if (updatedCommentId) {
-              updatedComment = Utils.getActivityManager().getActivity(updatedCommentId);
-            }
-            commentList.each({
-              commentCounter++;
-              if (first & !uicomponent.commentListToggleable()) {
-                  commentContentClass = "commentContent";
-                  first = false;
-              } else {
-                  commentContentClass = "";
-              }
-
-              def commentId = Utils.getIdentityManager().getIdentity(it.userId);
-              commenterFullName = StringEscapeUtils.escapeHtml(commentId.profile.fullName);
-              commenterProfileUri = LinkProvider.getUserProfileUri(commentId.getRemoteId());
-              def commentParentClass = it.parentCommentId == null ? "CommentBlock" : (subCommentClass + " subCommentBlock");
-              if(it.parentCommentId == null) {
-                subCommentSize = uicomponent.getSubCommentsSize(commentList, it.id);
-                subCommentIndex = 0;
-                if (updatedCommentId) {
-                  if(updatedComment.parentCommentId == it.id || updatedComment.id == it.id){
-                    showSubComments = true;
-                  } else{
-                    showSubComments = false;
-                  }
-                }
-                hideSubComments = subCommentSize > 2 && (updatedCommentId == null || !showSubComments);
-                if(hideSubComments){
-                  subCommentClass = "hidden";
-                } else{
-                  subCommentClass = "";
-                }
-              } else {
-                   subCommentIndex++;
-                   if(hideSubComments && subCommentIndex == subCommentSize) {
-                       %>
-                      <div class="commentItem clearfix subCommentBlock subCommentShowAll" id="SubCommentShowAll_$it.parentCommentId">
-                        <a href="javascript:void(0)" class="subCommentShowAllLink" data-parent-comment="$it.parentCommentId">
-                            <%=labelViewAllReplies.replace("{0}", String.valueOf(subCommentSize))%>
-                        </a>
-                      </div> 
-                       <%
-                   }
-              }
-
-
-
-              def activityParams = it.getTemplateParams();
-                      def systemComment = uicomponent.getSystemCommentBundle(activityParams);
-                      def systemCommentTitle ;
-                      StringBuffer commentBuffer = new StringBuffer();
-                      if (systemComment!=null) {
-                        systemCommentTitle = uicomponent.getSystemCommentTitle(activityParams);
-                        if (systemComment!=null) {
-                          if (systemComment.length>0) {
-                            for (def count=0; count<systemComment.length; count++) {
-                              commentMessage = _ctx.appRes(systemComment[count]);
-                              if(StringUtils.isBlank(commentMessage)){
-                                commentMessage = systemComment[count];
-                              }
-                              if (systemCommentTitle!=null) {
-                                if (systemCommentTitle.length>count) {
-                                  def titles = systemCommentTitle[count].split(ActivityCommonService.METADATA_VALUE_SEPERATOR);
-                                  for(def i = 0; i<titles.length; i++) {
-                                    commentMessage = commentMessage.replace("{"+i+"}", titles[i]);
-                                    commentMessage = org.exoplatform.wcm.ext.component.activity.listener.Utils.getFirstSummaryLines(commentMessage);
-                                  }
-                                }
-                              }
-                              if (systemComment!=null) {
-                                commentBuffer.append("<p class=\"ContentBlock\">").append(commentMessage).append("</p>");
-    }else {
-        commentBuffer.append("<p class=\"ContentBlock\">").append(commentMessage).append("</p>");
-    }
-}
-}
-commentMessage = commentBuffer.toString();
-}else {
-    commentMessage = it.title;
-}
-} else {
-    commentMessage = it.title;
-}
-
-
-
-
-commentPostedTime = uicomponent.getRelativeTimeLabel(_ctx, it.postedTime);
-commentEditedTime = uicomponent.getRelativeTimeLabel(_ctx, it.updated.getTime());
-commentEditedTime = _ctx.appRes("UIActivity.label.EditedFrom").replace("{0}",commentEditedTime);
-commentAbsolutePostedTime = uicomponent.getAbsolutePostedTime(it.postedTime);
-commenterAvatarImgSrc = commentId.profile.avatarUrl;
-if (!commenterAvatarImgSrc) commenterAvatarImgSrc = LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-def commentActivityId = it.parentCommentId == null ? it.id : it.parentCommentId;
-%>
-<div id="commentContainer${it.id}" data-comment-id="$commentActivityId" data-parent-comment="$it.parentCommentId" class="$commentParentClass">
-<% if (commentCounter == commentList.size()) {%>
-    <div id="CommentBlock${activity.id}${commentCounter}" class="commentItem commentItemLast">
-    <% } else { %>
-    <div id="CommentBlock${it.id}" class="commentItem">
-    <% } %>
-<div class="commmentLeft">
-<a class="avatarXSmall" href="$commenterProfileUri" title="$commenterFullName" >
-<img alt="$commenterFullName" src="$commenterAvatarImgSrc" />
-</a>
-            </div><!--end commentLeft-->
-<div class="commentRight">
-<div class="authorCommentContainer clearfix">
-<div class="author">
-    <a href="$commenterProfileUri">$commenterFullName</a>
-</div>
-              <div class="contentComment">$commentMessage</div>
-              </div>
-                   <div class="desktop-input clearfix">
-                       <div class="blastInputPeople hideEffect">
-                           <div>
-                               <textarea class="textarea hideEffect paddingAction" name="composerEditComment${it.id}" id="composerEditComment${it.id}" rows="10" cols="30"></textarea>
-                           </div>
-                           <div class="uiAction">
-                               <button class="btn pull-left btn-primary" data-edit-comment-id="${it.id}" data-edit-comment-activityid="${activity.id}" data-click="<%= uicomponent.event("EditComment","COMMENTID"); %>" id="EditCommentButton${it.id}">${labelUpdate}</button>&nbsp;
-                               <button href="javascript:void(0)" data-cancel-edit-comment-id="${it.id}" class="btn pull-left" id="DeleteEditCommentButton${it.id}">${labelCancel}</button>
-                           </div>
-                       </div>
-                   </div>
-              <%
-                  _ctx.put(TEMPLATE_PARAM_COMMENT, it);
-                  _ctx.put("authorName", commentId.remoteId);
-                  _ctx.put("authorFullName", commenterFullName);
-                  _ctx.put("activityID", activity.id);
-                  _ctx.put("commentPostedTime", commentPostedTime);
-                  _ctx.put("commentEditedTime", commentEditedTime);
-                  _ctx.put("commentAbsolutePostedTime", commentAbsolutePostedTime);
-                  def templateCommentActions = "war:/groovy/social/webui/activity/UIActivityCommentActions.gtmpl";
-                  _ctx.include(templateCommentActions, uicomponent.getTemplateResourceResolver(_ctx.getRequestContext(), templateCommentActions));
-              %>
-</div><!--end commentRight-->
-<div class="clearfix"></div>
-
-<%
-        def commentEditable = uicomponent.isActivityEditable(it);
-        def commentDeletable = uicomponent.isCommentDeletable(it.userId);
-        if(commentEditable || commentDeletable) {
-    %>
-                       <div id="dropDownEditComment${it.id}" class="btn-group uiDropdownWithIcon actLink">
-                           <div class="dropdown-toggle" data-toggle="dropdown">
-                               <i class="uiIconActivityAction uiIconLightGray">
-                               </i>
-                           </div>
-                           <ul class="dropdown-menu pull-right" role="menu">
-								<% if(commentEditable){%>
-                               <li>
-				                   <a id="CommentActivitylink${it.id}" data-edit-comment="${it.id}" class="" href="javascript:void(0)">${labelEdit}</a>
-				                </li>
-				                <%
-								}
-					                if (commentDeletable) {
-					                String idDeleteComment = "DeleteCommentButton${it.id}";
-				                %>
-                               <li>
-                                   <a href="javascript:void(0)" id="$idDeleteComment" data-confirm="$labelToDeleteThisComment" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%= uicomponent.event("DeleteComment", uicomponent.id, it.id); %>"  class="controllDelete">${labelDelete}</a>
-				                </li>
-                               <% } %>
-
-
-                           </ul>
-                       </div>
-    				<%}%>
-    </div><!--end commentItem-->
-             </div>
-    <% }) %>
-</div> <!--end commentlist-->
-          <div class="inputContainer" id="InputContainer${activity.id}">
-          <%
-            def currentCommenterIdentity = uicomponent.getCommenterIdentity();
-            def currentCommenterUri = LinkProvider.getUserProfileUri(currentCommenterIdentity.getRemoteId());
-            def currentCommenterAvatar = currentCommenterIdentity.profile.avatarUrl;
-            def currentCommenterName = StringEscapeUtils.escapeHtml(currentCommenterIdentity.profile.fullName);
-            if (!currentCommenterAvatar) currentCommenterAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
-                    %>
-                    <% if (commentList.size() == 0) { %>
-                      <div class="commentItem noCommentFormBox" id="CommentFormBlock${activity.id}">
-                    <% } else { %>
-                      <div class="commentItem commentFormBox" id="CommentFormBlock${activity.id}">
-                    <% } %>
-                      <div class="commmentLeft">
-                            <a class="avatarXSmall" title="$currentCommenterName" href="$currentCommenterUri">
-                                <img src="$currentCommenterAvatar" alt="$currentCommenterName"/>
-</a>
-                        </div><!--end commentLeft-->
-<div class="commentRight">
-<div class="commentInputBox ">
-<div class="commentInput"><% uicomponent.renderChild(UIFormTextAreaInput.class); %></div>
-<button class="btn pull-left btn-primary" data-comment-button="${activity.id}" data-click="<%= uicomponent.event("PostComment", "COMMENTID") %>"  rel="tooltip" data-placement="bottom" title="$labelComment" id="CommentButton${activity.id}">$labelComment</button>
-
-<button class="btn visible-phone" id="CancelButton${activity.id}">$labelCancel</button>
-</div>
-                        </div><!--end commentRight-->
-                    <div class="clearfix"></div>
-</div> <!--end commentItem-->
-                    </div><!--end commentlist-->
-                             <% if (uicomponent.commentListToggleable()) {
-                      def showAllCommentsAction = uicomponent.event("SetCommentListStatus", "all");
-                      def hideAllCommentsAction = uicomponent.event("SetCommentListStatus", "none");
-                      def loadPreviousCommentsAction = uicomponent.event("SetCommentListStatus", "all");
-                      %>
-
-                     <% if (commentListStatus.getStatus().equals("none")) {%>
-                  <div class="commentListInfo hideBottomLine">
-                  <% } else {%>
-                    <div class="commentListInfo clearfix">
-                  <% } %>
-                        <% if (commentListStatus.getStatus().equals("latest") || commentListStatus.getStatus().equals("none")) { %>
-                          <a onclick="$showAllCommentsAction" href="#show-all-comments">
-                            $labelShowAllComments
-                          </a>
-            <% } else if (commentListStatus.getStatus().equals("all")) { %>
-            <%   if (commentHidden > 0) { %>
-                <a onclick="$loadPreviousCommentsAction" href="javascript:void(0);">$labelShowPreviousComments</a>
-                  <%   } else { %>
-                         <a onclick="$hideAllCommentsAction" href="javascript:void(0);">$labelHideAllComments</a>
-                <%   } %>
-            <% } %>
-        </div>
-                 <% } %>
-</div><!--end commentBox-->
+                <% _ctx.includeTemplates("UIActivityCommentBox") %>
             </div><!--end #ActivityContextBox${activity.id}-->
 </div> <!--end ContextBox${activity.id}-->
   </div> <!-- #boxContainer-->

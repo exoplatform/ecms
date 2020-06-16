@@ -40,7 +40,7 @@
   <UISCVPreferences>
     <action>
       <Save>حفظ</Save>
-      <Abort>إلغاء</Abort>
+      <Abort>الغاء</Abort>
       <Cancel>إلغاء</Cancel>
       <Print>طباعة</Print>
       <Close>أغلق</Close>
