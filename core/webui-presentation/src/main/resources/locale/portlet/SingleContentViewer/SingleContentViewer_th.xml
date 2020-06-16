@@ -40,7 +40,7 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>ยกเลิก</Abort>
       <Cancel>#{word.cancel}</Cancel>
       <Print>Print</Print>
       <Close>#{word.close}</Close>
@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>เพิ่มเส้นทาง</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -100,7 +100,7 @@
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>ตัวเลือกหน้า</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
@@ -109,7 +109,7 @@
     <unpublished>Unpublished</unpublished>
     <enrolled>Enrolled</enrolled>
     <draft>Draft</draft>
-    <pending>Pending</pending>
+    <pending>กำลังดำเนินการ</pending>
     <approved>Approved</approved>
     <inreview>Under Review</inreview>
     <staged>Staged</staged>

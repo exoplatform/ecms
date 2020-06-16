@@ -27,9 +27,9 @@
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Advanced</Advanced>
-        <Summary>Summary</Summary>
+        <Summary>Összegzés</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
+        <title>Cím</title>
         <ContentCSS>CSS Data</ContentCSS>
         <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
         <ContentJS>JS Data</ContentJS>
@@ -74,8 +74,8 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <url>URL</url>
-        <description>Description</description>
+        <url>Webcím</url>
+        <description>Leírás</description>
       </label>
     </dialog>
   </WebLink>

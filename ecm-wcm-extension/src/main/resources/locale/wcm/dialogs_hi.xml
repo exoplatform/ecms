@@ -29,7 +29,7 @@
         <Advanced>Advanced</Advanced>
         <Summary>Summary</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
+        <title>शीर्षक</title>
         <ContentCSS>CSS Data</ContentCSS>
         <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
         <ContentJS>JS Data</ContentJS>
@@ -40,7 +40,7 @@
         <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
         <illustrationImage>Illustration Image</illustrationImage>
         <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
+        <image>चित्र अपलोड करें</image>
         <imageWidth>Image Width</imageWidth>
         <imageHeight>Image Height</imageHeight>
         <Synchronize>Synchronize with CSS and HTML</Synchronize>

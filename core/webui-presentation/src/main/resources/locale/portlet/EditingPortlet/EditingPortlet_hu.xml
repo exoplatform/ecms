@@ -12,7 +12,7 @@
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Edit</Draft>
+        <Draft>Szerkesztés</Draft>
         <Published>Published</Published>
       </option>
     </label>

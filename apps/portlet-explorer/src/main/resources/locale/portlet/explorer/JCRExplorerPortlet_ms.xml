@@ -7,19 +7,19 @@
   -->
   <UICommentForm>
     <label>
-      <name>Name</name>
-      <email>Email</email>
-      <website>Website</website>
-      <comment>Comment</comment>
+      <name>Nama</name>
+      <email>E-mel</email>
+      <website>Laman web</website>
+      <comment>Komen</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <not-support>Anda tidak dapat berkomentar mengenai jenis dokumen ini.</not-support>
+      <not-checkedout>Anda harus memeriksa dokumen yang keluar sebelum mengulas di atasnya.</not-checkedout>
+      <content-null>Anda tidak dapat jawatan komen kosong.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -29,15 +29,15 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Poor</normal>
-      <good>Below average</good>
-      <verygood>Average</verygood>
-      <excellent>Above average</excellent>
-      <best>Good</best>
-      <no-value>no value yet</no-value>
+      <normal>Miskin</normal>
+      <good>Di bawah rata-rata</good>
+      <verygood>Rata-rata</verygood>
+      <excellent>Di atas rata-rata</excellent>
+      <best>Baik</best>
+      <no-value>tidak ada nilai lagi</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Kedudukan Saya:</my-rating>
     </label>
     <button>
       <label>
@@ -45,9 +45,9 @@
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-support>Anda tidak mengundi untuk jenis dokumen ini.</not-support>
+      <not-checkedout>Anda harus memeriksa dokumen yang keluar untuk mengundi.</not-checkedout>
+      <vote-restriction>Anda tidak boleh mengundi lebih dari sekali.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <refresh-session-success>Sesi telah berjaya disegarkan.</refresh-session-success>
+      <no-node-history>Anda berada di folder akar.</no-node-history>
+      <save-session-success>Semua perubahan yang telah disimpan.</save-session-success>
+      <target-path-not-found>Kau tak boleh akses jalan ini, sama ada kerana ia sudah tak ada lagi atau karena anda tidak memiliki akses kebenaran.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relation</Relation>
+      <Relation>Berhubung</Relation>
       <Explorer>File Explorer</Explorer>
-      <Close>Close Sidebar</Close>
+      <Close>Tutup Sisi</Close>
       <TagExplorer>Tag Cloud</TagExplorer>
       <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <SavedSearches>Carian Disimpan</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>Tutup Sisi</Close>
     </title>
   </UISideBar>
   <!--
@@ -90,14 +90,14 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace:</driveWorkspace>
+      <driveWorkspace>Memandu Ruang Kerja:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
+      <setUpBrowser>Sediakan pilihan pelayaran anda</setUpBrowser>
       <refesh>Refresh</refesh>
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
-      <more>More</more>
+      <more>Lebih lagi</more>
       <backTo>Back</backTo>
     </label>
   </UIViewBar>
@@ -114,8 +114,8 @@
       <GeneralDrives>General drives</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <no-view-found>Tiada pandangan yang tersedia mengikut keizinan akses anda dalam pemacu '{0}'.</no-view-found>
+      <access-denied>Akses dinafikan. Anda mungkin tidak mempunyai kebenaran di ruang kerja memandu '{0}'.</access-denied>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
@@ -132,7 +132,7 @@
       <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Elemen ini telah dipadam atau diubah. Sila klik butang Muat Refresh.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -142,11 +142,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
+      <languages-list>Terjemahan</languages-list>
       <relation-list>Relations</relation-list>
       <references-list>References</references-list>
       <no-related-document>No Related Document</no-related-document>
-      <related-document>Related Documents</related-document>
+      <related-document>Dokumen Yang Berkaitan</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -155,13 +155,13 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>Sediakan pilihan pelayaran anda</title>
     <label>
       <enableStructure>Browse in structure mode:</enableStructure>
       <showSideBar>Show sidebar:</showSideBar>
       <showHiddenNode>Show hidden items:</showHiddenNode>
       <showNonDocument>Show non-document items:</showNonDocument>
-      <showRefDocuments>Show referenced items:</showRefDocuments>
+      <showRefDocuments>Menunjukkan dirujuk item:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Sort order:</sortBy>
       <order>Order by:</order>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Namakan semula</title>
     <label>
-      <nameField>Name</nameField>
-      <titleField>Title</titleField>
+      <nameField>Nama</nameField>
+      <titleField>Tajuk</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -202,19 +202,19 @@
     </action>
     <msg>
       <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
-      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
-      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <rename-denied>Akses dinafikan. Anda tidak boleh menamakan semula item ini.</rename-denied>
+      <fileName-invalid>Nama baru mengandungi beberapa aksara tidak sah.</fileName-invalid>
+      <newName-same-oldName>Nama baru sudah wujud. Sila semak semula.</newName-same-oldName>
+      <version-exception>Dokumen ini (atau salah seorang nenek moyangnya) tidak diperiksa.</version-exception>
+      <lock-exception>Dokumen ini dikunci. Sila buka kunci sebelum ditukar nama.</lock-exception>
+      <constraintViolation-exception>Ralat berlaku semasa menamakan semula '{0}'. Sila semak semula.</constraintViolation-exception>
       <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-error>Ralat berlaku semasa menamakan semula. Sila semak semula.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
+      <UIRenameForm>Namakan semula</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Upload File</UIUploadManager>
@@ -239,22 +239,22 @@
       <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UICommentForm>Komen</UICommentForm>
+      <UIPreferencesForm>Pilihan Pelayaran Dokumen</UIPreferencesForm>
       <UIPublicationManager>Manage Publication</UIPublicationManager>
       <UIConfirmMessage>Delete ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
       <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
       <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
+      <UIActivePublication>Mendaftar ke Siklus Hidup Penerbitan</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Pilihan Pelayaran Dokumen</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIReadOnlyFileConfirmMessage>Dokumen Terbuka</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
@@ -270,9 +270,9 @@
   <UIResourceForm>
     <title>Edit File Content</title>
     <label>
-      <name>Name</name>
+      <name>Nama</name>
       <textToModify>Text to modify</textToModify>
-      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
+      <fileToUpload>Muat naik kandungan baru untuk dokumen itu (mestilah jenis mime yang sama)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -287,15 +287,15 @@
       <EditDocument>Sunting</EditDocument>
       <Upload>Upload</Upload>
       <Paste>Paste</Paste>
-      <Search>Search</Search>
+      <Search>Carian</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Vote</Vote>
-      <Comment>Comment</Comment>
+      <Comment>Komen</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Publications</ManagePublications>
-      <ManageCategories>Categories</ManageCategories>
+      <ManageCategories>Kategori</ManageCategories>
       <ManageRelations>Relations</ManageRelations>
       <ManageActions>Actions</ManageActions>
       <ExportNode>Export</ExportNode>
@@ -308,49 +308,49 @@
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
-      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <ShowJCRStructure>Tunjukkan / Sembunyikan Struktur Kandungan</ShowJCRStructure>
+      <EditProperty>Edit Hartanah Dokumen</EditProperty>
+      <UploadNewVersion>Muat naik versi baharu</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>Anda tidak boleh melakukan tindakan ini pada akar.</cannot-action-in-rootnode>
+      <node-checkedin>Anda mesti menyemak terlebih dahulu.</node-checkedin>
+      <cannot-enable-version-rootnode>Tidak dapat mengaktifkan versi pada akar.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Tidak dapat mengaktifkan penerbitan pada akar.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
-        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
+        <not-supported-nodetype>Hanya dokumen yang boleh diterbitkan.</not-supported-nodetype>
+        <no-publication-lifecycle>Tiada kitaran hayat penerbitan dikonfigurasikan.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
-      <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
+      <unsubcriber-lifecycle>Dokumen tersebut sudah tidak lagi berlangganan.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Operasi ini hanya disokong untuk dokumen.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Dokumen itu berjaya dilanggan.</unsubcriber-lifecycle-finish>
+      <access-false>Dokumen itu bukan artikel atau diperiksa.</access-false>
+      <unsupported-action>Tindakan ini tidak disokong.</unsupported-action>
+      <not-relationable>Dokumen ini tidak mempunyai hubungan.</not-relationable>
       <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
       <no-node-selected>Nothing to copy.</no-node-selected>
       <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
       <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
-      <keyword-null>There are no keywords to search.</keyword-null>
+      <template-null>Dokumen ini tidak mempunyai bentuk templat.</template-null>
+      <keyword-null>Tiada kata kunci untuk dicari.</keyword-null>
       <not-found>No results found.</not-found>
       <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
       <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
-      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
-      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
-      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
-      <not-supported>This function is supported for the document type only.</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <access-denied>Akses dinafikan. Anda tidak mempunyai izin edit untuk item ini.</access-denied>
+      <access-add-denied>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menambah item di sini.</access-add-denied>
+      <item-existed>Node ini sudah wujud. Ia tidak boleh mempunyai nama yang sama dengan adiknya.</item-existed>
+      <removed-hidden-mixin>Anda memadamkan mixin tersembunyi dengan jayanya.</removed-hidden-mixin>
+      <added-hidden-mixin>Anda menambah mixin tersembunyi dengan jayanya.</added-hidden-mixin>
+      <not-supported>Fungsi ini disokong untuk jenis dokumen sahaja.</not-supported>
+      <empty-file-type>Anda tidak boleh menambah dokumen di sini.</empty-file-type>
+      <unsupported-watch>Hanya dokumen yang boleh ditonton.</unsupported-watch>
+      <watch-checkedin>Anda mesti menyemak dokumen sebelum menonton.</watch-checkedin>
       <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <tagnode-checkedin>Anda mesti menyemak dokumen sebelum menandai.</tagnode-checkedin>
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
+      <SimpleSearch>Carian pantas</SimpleSearch>
       <AdvanceSearch>Advanced Search</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
@@ -361,49 +361,49 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <has-not-permission>Akses dinafikan. Anda tidak mempunyai kebenaran untuk menambah item ini.</has-not-permission>
+      <has-not-edit-permission>Akses dinafikan. Anda tidak mempunyai kebenaran edit di sini. Sila hubungi pentadbir.</has-not-edit-permission>
+      <cannot-login-node>Anda tidak boleh mengakses dan tampal item di sini.</cannot-login-node>
+      <cannot-paste-nodetype>Anda tidak dapat menampal jenis item ini di sini.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Anda tidak mempunyai kebenaran membuka kunci dokumen ini.</has-not-permission-unlok>
+      <bound-exception>Anda tidak mempunyai kebenaran untuk menamakan semula item ini. Sila hubungi pentadbir.</bound-exception>
+      <bound-move-exception>Anda tidak boleh memindahkan item kepada dirinya sendiri atau dalam subfolder.</bound-move-exception>
+      <does-not-support-auditing>Anda tidak boleh mengaktifkan pengauditan di sini.</does-not-support-auditing>
+      <can-not-rename-node>Anda tidak mempunyai kebenaran untuk menamakan semula item ini. Sila hubungi pentadbir untuk mendapatkan hak yang diperlukan.</can-not-rename-node>
+      <can-not-cut-node>Anda tidak mempunyai kebenaran untuk memotong item ini. Sila hubungi pentadbir.</can-not-cut-node>
+      <can-not-remove-node>Anda tidak mempunyai kebenaran untuk mengalih keluar item ini. Sila hubungi pentadbir.</can-not-remove-node>
       <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
+      <can-not-unlock-node>Anda tidak mempunyai kebenaran untuk membuka kunci item ini. Sila hubungi pentadbir.</can-not-unlock-node>
+      <no-node>Sila pilih sekurang-kurangnya satu item sebelum menampal.</no-node>
+      <can-not-paste-node>Anda tidak mempunyai kebenaran untuk pindah ke item ini. Sila hubungi pentadbir.</can-not-paste-node>
+      <can-not-move-node>Anda tidak mempunyai kebenaran untuk memindahkan item ini. Sila hubungi pentadbir.</can-not-move-node>
+      <does-not-support-versioning>Anda tidak mempunyai kebenaran untuk bergerak. Sila hubungi pentadbir.</does-not-support-versioning>
+      <path-not-found>Elemen ini telah dipadam atau diubah. Sila klik butang Muat Refresh.</path-not-found>
+      <paste-lock-exception>'{0}' tidak boleh disisipkan di sini. Pastikan ia tidak dikunci atau folder ini. Semak juga bahawa tiada dokumen yang berkaitan dikunci.</paste-lock-exception>
+      <can-not-checkin-node>Anda tidak boleh menyemak perkara ini. Sila semak bahawa anda mempunyai keizinan yang diperlukan.</can-not-checkin-node>
+      <can-not-checkout-node>Anda tidak boleh menyemak perkara ini. Sila semak bahawa anda mempunyai keizinan yang diperlukan.</can-not-checkout-node>
+      <move-constraint-exception>Ralat berlaku semasa memindahkan item ini.</move-constraint-exception>
+      <not-lock-owner>Anda tidak boleh membuka kunci dokumen ini kerana anda bukan pemilik kunci.</not-lock-owner>
+      <is-checked-in>Sila semak dokumen ini sebelum menamakan semula.</is-checked-in>
+      <is-checked-in-lock>Sila semak dokumen ini sebelum mengunci.</is-checked-in-lock>
+      <cant-lock>Anda tidak dapat mengunci dokumen ini.</cant-lock>
       <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <can-not-delete>Sila tutup dokumen ini sebelum memadam.</can-not-delete>
+      <can-not-delete-version>Anda tidak boleh memadamkan dokumen ini. Ia versi.</can-not-delete-version>
+      <not-support>Anda tidak boleh memadamkan item yang dipilih. Sila pilih yang lain.</not-support>
+      <current-node-not-allow-paste>Anda tidak boleh menyekat item yang disalin di sana.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Anda tidak dapat menyisipkan item yang disalin di sini kerana versi itu.</copied-node-in-versioning>
       <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <this-node-locked-by-parent>Anda tidak boleh membuka kunci item ini. Folder induk dikunci.</this-node-locked-by-parent>
+      <paste-node-same-name>Tidak dapat menampal item ini di sini. Item dengan nama yang sama sudah wujud dalam folder tujuan.</paste-node-same-name>
+      <has-not-add-permission>Anda tidak mempunyai kebenaran untuk menambah di sini.</has-not-add-permission>
+      <node-cutting>Item dipotong. Anda tidak boleh menyelitkannya di sini.</node-cutting>
+      <access-denied>Akses dinafikan. Anda mungkin tidak mempunyai kebenaran.</access-denied>
+      <remove-verion-exception>Anda tidak boleh mengalih keluar dokumen ini kerana ia diperiksa.</remove-verion-exception>
+      <remove-referentialIntegrityException>Anda tidak boleh memadamkan item ini kerana ia dirujuk oleh yang lain.</remove-referentialIntegrityException>
       <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
-      <not-exist-categories>The category does not exist.</not-exist-categories>
+      <path-not-found-exception>Dokumen ini telah dipadam atau diubah. Sila klik butang Muat Menyegarkan.</path-not-found-exception>
+      <not-exist-categories>Kategori tidak wujud.</not-exist-categories>
       <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
@@ -511,20 +511,20 @@
   <UIDocumentWorkspace>
     <label>
       <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children-but-has-hidden>Folder ini tidak mempunyai sebarang item, tetapi terdapat beberapa fail tersembunyi.</no-children-but-has-hidden>
     </label>
     <msg>
       <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
       <save-node-success>'{0}' has been saved.</save-node-success>
       <node-copied>'{0}' has been copied.</node-copied>
       <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
+      <remove-root>Anda tidak boleh mengeluarkan folder akar.</remove-root>
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
+      <Rename>Namakan semula</Rename>
       <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Copy>Salinan</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>Padam</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -540,20 +540,20 @@
     <msg>
       <access-denied>Access denied. You can't access '{0}'.</access-denied>
       <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
-      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <confirm-deleteattachment>Adakah anda pasti mahu mengalih keluar fail lampiran ini?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Adakah anda pasti mahu mengalih keluar ulasan ini?</confirm-deleteattcomment>
+      <access-denied-exception>Akses dinafikan. Anda mungkin tidak mempunyai keistimewaan membaca, atau dokumen itu mungkin telah dikeluarkan atau diubah.</access-denied-exception>
+      <path-not-found>Elemen ini telah dipadam atau diubah. Sila klik butang Muat Refresh.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Remove this attachment file</remove-attachment>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-attachment>Keluarkan fail lampiran ini</remove-attachment>
+      <remove-comment>Keluarkan komen ini</remove-comment>
     </tooltip>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>Nama</name>
         <versionable>Versionable</versionable>
         <exo_owner>Pemilik</exo_owner>
         <auditing>Auditing</auditing>
@@ -572,8 +572,8 @@
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
       <EditDocument>Sunting</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
+      <Copy>Salinan</Copy>
+      <Rename>Namakan semula</Rename>
       <Delete>Padam</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
@@ -599,8 +599,8 @@
       <WebDavView>Open in MS Office</WebDavView>
       <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <EditProperty>Edit Hartanah Dokumen</EditProperty>
+      <UploadNewVersion>Muat naik versi baharu</UploadNewVersion>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
@@ -633,7 +633,7 @@
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIPublicationHistory>Sejarah</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
       <UIPropertyTab>Properties</UIPropertyTab>
@@ -658,7 +658,7 @@
       <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
+      <UIPublicationLogList>Sejarah</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
       <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
@@ -675,13 +675,13 @@
       <delete>Remove this property</delete>
     </title>
     <confirm>
-      <remove-property>Are you sure you want to remove this property?</remove-property>
+      <remove-property>Adakah anda pasti mahu mengalih keluar harta ini?</remove-property>
     </confirm>
     <header>
-      <name>Name</name>
+      <name>Nama</name>
       <multiValue>Multi Value</multiValue>
-      <value>Value</value>
-      <action>Action</action>
+      <value>Nilai</value>
+      <action>Tindakan</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -708,7 +708,7 @@
       <name>Name:</name>
       <type>Type:</type>
       <value>Value:</value>
-      <upload>Upload:</upload>
+      <upload>Muat naik:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -727,19 +727,19 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
       <unable-create>Cannot add properties.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>Anda mesti menyemak perkara ini sebelum menambah harta.</node-checkedin>
+      <can-not-add>Anda tidak boleh menambah sifat pada item ini. Ini hanya dibenarkan untuk jenis nt: tidak berstruktur.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
-      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
-      <number-format-exception>Your input value has the wrong format.</number-format-exception>
+      <valueFormatEx>Anda tidak boleh memberikan nilai bernilai banyak kepada harta bernilai tunggal.</valueFormatEx>
+      <number-format-exception>Nilai input anda mempunyai format yang salah.</number-format-exception>
       <property-not-exist>The property {0} doesn't exist.</property-not-exist>
     </msg>
   </UIPropertyForm>
@@ -757,23 +757,23 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Pengguna atau Kumpulan</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Remove</remove>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <confirm-delete-permission>Adakah anda pasti mahu mengeluarkan izin ini?</confirm-delete-permission>
+      <no-permission-tochange>Anda tidak mempunyai hak untuk mengalih keluar kebenaran.</no-permission-tochange>
+      <no-permission-remove>Anda tidak boleh mengalih keluar pemiliknya.</no-permission-remove>
+      <access-denied>Akses dinafikan. Anda tidak boleh mengalih keluar kebenaran ini.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Pilih pengguna</SelectUser>
+      <SelectMember>Pilih keahlian</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>Pilih pengguna</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilih keahlian</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>Pilih pengguna</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -800,9 +800,9 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Pilih</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Pengguna atau Kumpulan</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -811,13 +811,13 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Sila pilih sekurang-kurangnya satu kebenaran.</checkbox-require>
+      <userOrGroup-required>Sila pilih pengguna atau kumpulan sebelum menyimpan kebenaran ini.</userOrGroup-required>
+      <not-change-permission>Anda tidak mempunyai hak untuk menambah kebenaran.</not-change-permission>
+      <access-denied>Akses dinafikan. Anda tidak boleh mengalih keluar kebenaran ini.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -829,14 +829,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>Nama</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-name>Nama</prop-name>
+      <prop-type>Jenisnya</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>Nama</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -876,7 +876,7 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Carian</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -886,7 +886,7 @@
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Search</Search>
+      <Search>Carian</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -901,8 +901,8 @@
       <keyword-null>Please enter your keyword.</keyword-null>
       <not-found>No results found.</not-found>
       <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
-      <value-null>Please enter your keyword or constraints.</value-null>
-      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
+      <value-null>Sila masukkan kata kunci atau kekangan anda.</value-null>
+      <value-save-null>Sila masukkan kata kunci atau kekangan sebelum menyimpan pertanyaan ini.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
       <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
     </msg>
@@ -922,21 +922,21 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Tindakan</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Jenisnya</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Isih mengikut jenis dokumen dalam urutan menaik</typeASC>
+      <typeDESC>Isih mengikut jenis dokumen dalam urutan menurun</typeDESC>
+      <scoreASC>Isih mengikut skor dalam urutan menaik</scoreASC>
+      <scoreDESC>Isih mengikut skor dalam urutan menurun</scoreDESC>
+      <nameASC>Isih mengikut nama dalam urutan menaik</nameASC>
+      <nameDESC>Isih mengikut nama dalam urutan menurun</nameDESC>
+      <datecreatedASC>Isih mengikut tarikh yang dibuat dalam urutan menaik</datecreatedASC>
+      <datecreatedDESC>Isih mengikut tarikh yang dibuat dalam urutan menurun</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this item</View>
@@ -947,25 +947,25 @@
     <msg>
       <not-support>There is no View template for this document</not-support>
       <empty>No results found.</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <access-denied>Anda tidak boleh melihat dokumen ini sama ada kerana template ini tidak disokong atau kerana akses ditolak.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Tindakan</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Jenisnya</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
+      <typeASC>Isih mengikut jenis dokumen dalam urutan menaik</typeASC>
+      <typeDESC>Isih mengikut jenis dokumen dalam urutan menurun</typeDESC>
+      <scoreASC>Isih mengikut skor dalam urutan menaik</scoreASC>
+      <scoreDESC>Isih mengikut skor dalam urutan menurun</scoreDESC>
+      <nameASC>Isih mengikut nama dalam urutan menaik</nameASC>
+      <nameDESC>Isih mengikut nama dalam urutan menurun</nameDESC>
       <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
@@ -984,21 +984,21 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Tindakan</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Jenisnya</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Isih mengikut jenis dokumen dalam urutan menaik</typeASC>
+      <typeDESC>Isih mengikut jenis dokumen dalam urutan menurun</typeDESC>
+      <scoreASC>Isih mengikut skor dalam urutan menaik</scoreASC>
+      <scoreDESC>Isih mengikut skor dalam urutan menurun</scoreDESC>
+      <nameASC>Isih mengikut nama dalam urutan menaik</nameASC>
+      <nameDESC>Isih mengikut nama dalam urutan menurun</nameDESC>
+      <datecreatedASC>Isih mengikut tarikh yang dibuat dalam urutan menaik</datecreatedASC>
+      <datecreatedDESC>Isih mengikut tarikh yang dibuat dalam urutan menurun</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this item</View>
@@ -1015,22 +1015,22 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Tindakan</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Jenisnya</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Isih mengikut jenis dokumen dalam urutan menaik</typeASC>
+      <typeDESC>Isih mengikut jenis dokumen dalam urutan menurun</typeDESC>
+      <scoreASC>Isih mengikut skor dalam urutan menaik</scoreASC>
+      <scoreDESC>Isih mengikut skor dalam urutan menurun</scoreDESC>
+      <nameASC>Isih mengikut nama dalam urutan menaik</nameASC>
+      <nameDESC>Isih mengikut nama dalam urutan menurun</nameDESC>
+      <datecreatedASC>Isih mengikut tarikh yang dibuat dalam urutan menaik</datecreatedASC>
+      <datecreatedDESC>Isih mengikut tarikh yang dibuat dalam urutan menurun</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Item</View>
@@ -1048,21 +1048,21 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>Action</action>
+      <action>Tindakan</action>
       <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <type>Jenisnya</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Isih mengikut jenis dokumen dalam urutan menaik</typeASC>
+      <typeDESC>Isih mengikut jenis dokumen dalam urutan menurun</typeDESC>
+      <scoreASC>Isih mengikut skor dalam urutan menaik</scoreASC>
+      <scoreDESC>Isih mengikut skor dalam urutan menurun</scoreDESC>
+      <nameASC>Isih mengikut nama dalam urutan menaik</nameASC>
+      <nameDESC>Isih mengikut nama dalam urutan menurun</nameDESC>
+      <datecreatedASC>Isih mengikut tarikh yang dibuat dalam urutan menaik</datecreatedASC>
+      <datecreatedDESC>Isih mengikut tarikh yang dibuat dalam urutan menurun</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this Item</View>
@@ -1084,15 +1084,15 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <properties-required>The Property name is required.</properties-required>
-      <value-required>The Value field is required.</value-required>
+      <properties-required>Nama Property diperlukan.</properties-required>
+      <value-required>Bidang Nilai diperlukan.</value-required>
       <date-invalid>The From date must be earlier than the To date.</date-invalid>
       <fromDate-required>The From date is required.</fromDate-required>
-      <must-choose-one>You have to select at least one type.</must-choose-one>
-      <properties-null>Select properties first, then filter.</properties-null>
-      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
-      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
-      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+      <must-choose-one>Anda perlu memilih sekurang-kurangnya satu jenis.</must-choose-one>
+      <properties-null>Pilih sifat dahulu, kemudian penapis.</properties-null>
+      <exactly-require>Anda perlu mengisi Nilai dengan tepat sebelum menyimpan kekangan ini.</exactly-require>
+      <fromDate-invalid>Jenis tidak sah dalam medan 'Dari'. Sila pilih semula atau taipkan dengan betul.</fromDate-invalid>
+      <toDate-invalid>Jenis tidak sah dalam medan 'Ke'. Sila pilih semula atau taipkan dengan betul.</toDate-invalid>
     </msg>
     <button>
       <label-Add>Add</label-Add>
@@ -1162,7 +1162,7 @@
       <result>Filter</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>Pilih</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
@@ -1178,12 +1178,12 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Search</Search>
+      <Search>Carian</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
       <name-invalid>The name is invalid.</name-invalid>
-      <query-added>The query was added successfully.</query-added>
+      <query-added>Pertanyaan tersebut telah berjaya ditambah.</query-added>
       <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
       <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
       <value-save-null>Please enter your query statement.</value-save-null>
@@ -1192,7 +1192,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
+      <name>Nama</name>
       <selectBox>Select Query Style</selectBox>
       <query>Query</query>
     </label>
@@ -1247,7 +1247,7 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
+      <name>Nama</name>
       <language>Language</language>
       <query>Query</query>
       <action>Actions</action>
@@ -1259,7 +1259,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1278,8 +1278,8 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
-      <type>Type</type>
+      <name>Nama</name>
+      <type>Jenisnya</type>
       <statement>Statement</statement>
       <permission>Kebenaran</permission>
       <action>Actions</action>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Kebenaran Pemilih</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1362,13 +1362,13 @@
     </tooltip>
     <msg>
       <have-no-view-template>The view template is not supported.</have-no-view-template>
-      <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
-      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
-      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
-      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
-      <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
-      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
+      <cannot-remove-version>Anda tidak boleh mengeluarkan versi asas.</cannot-remove-version>
+      <error-removing-version>Ralat berlaku semasa memadam versi ini.</error-removing-version>
+      <error-removing-referenced-version>Versi ini dirujuk dan tidak boleh dialih keluar.</error-removing-referenced-version>
+      <confirm-restore>Adakah anda pasti mahu memulihkan versi ini?</confirm-restore>
+      <confirm-delete>Adakah anda pasti mahu mengeluarkan versi ini?</confirm-delete>
+      <not-checked-out>Anda perlu menyemak dokumen ini sebelum memulihkannya.</not-checked-out>
+      <invalid-item-state>Anda tidak boleh memulihkan versi ini, sama ada kerana satu atau lebih item telah dipadam atau dipindahkan oleh sesi lain.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1377,10 +1377,10 @@
     </action>
     <labels>
       <version>Version</version>
-      <date>Date</date>
+      <date>Tarikh</date>
       <author>Modified By</author>
       <summary>Summary</summary>
-      <action>Action</action>
+      <action>Tindakan</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1400,7 +1400,7 @@
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
       <e_64>Move</e_64>
-      <e_128>Copy</e_128>
+      <e_128>Salinan</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
@@ -1422,7 +1422,7 @@
     <label>
       <operation>Operation</operation>
       <userName>Username</userName>
-      <date>Date</date>
+      <date>Tarikh</date>
       <version>Version</version>
     </label>
   </UIAuditingInfo>
@@ -1450,9 +1450,9 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <LifecycleName>Nama</LifecycleName>
+      <LifecycleDesc>Keterangan</LifecycleDesc>
+      <action>Tindakan</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1496,8 +1496,8 @@
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <PreviousAndNextCompare>Perubahan dari {0} untuk {1}</PreviousAndNextCompare>
+      <ComparedWith>Dibandingkan Dengan</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Nama</nodeName>
       <VersionNumber>Version Number</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
       <VersionDate>Version Date</VersionDate>
@@ -1620,14 +1620,14 @@
     </action>
     <label>
       <category>Category</category>
-      <actions>Action</actions>
+      <actions>Tindakan</actions>
       <delete>Padam</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Nama</name>
+      <action>Tindakan</action>
     </header>
     <info>
       <child-not-found>This item doesn't have any child.</child-not-found>
@@ -1677,7 +1677,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1794,11 +1794,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
+      <description>Keterangan</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <action>Tindakan</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
@@ -1870,11 +1870,11 @@
       <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Go</exeButton>
+      <exeButton>Pergi</exeButton>
       <address>Address:</address>
     </label>
     <title>
-      <exeButton>Go</exeButton>
+      <exeButton>Pergi</exeButton>
       <backButton>Back</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Change Node</changeNode>
@@ -2069,7 +2069,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Alamat e-mel tidak sah.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2089,9 +2089,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectUser>Pilih pengguna</selectUser>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2128,10 +2128,10 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
+      <date>Tarikh</date>
       <newState>New State</newState>
-      <user>User</user>
-      <description>Description</description>
+      <user>Pengguna</user>
+      <description>Keterangan</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
@@ -2209,9 +2209,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pilih Kumpulan</selectGroup>
+      <selectUser>Pilih pengguna</selectUser>
+      <selectMembership>Pilih keahlian</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2250,7 +2250,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>Action</action>
+      <action>Tindakan</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2267,7 +2267,7 @@
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Select Drive</UIDriveSelector>
+      <UIDriveSelector>Pilih Drive</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
@@ -2279,7 +2279,7 @@
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Select Drive</SelectDrive>
+      <SelectDrive>Pilih Drive</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2447,7 +2447,7 @@
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>The category name already exists.</ItemExistsException>
+      <ItemExistsException>Nama kategori sudah wujud.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
@@ -2458,7 +2458,7 @@
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
+<ReadOnly>Buka Membaca-satunya</ReadOnly>
 <Cancel>Batal</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
@@ -2546,7 +2546,7 @@
       <Info>Info</Info>
       <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
-      <Search>Search</Search>
+      <Search>Carian</Search>
     </obtion>
   </UIActionBar>
 
@@ -2624,13 +2624,13 @@
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-comment>Keluarkan komen ini</remove-comment>
       <edit-comment>Edit this comment</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Adakah anda pasti hendak menghapuskan komen ini?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2654,7 +2654,7 @@
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Adakah anda pasti mahu mengalih keluar fail lampiran ini?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
@@ -2680,7 +2680,7 @@
   <UIPreferencesForm>
       <label>
           <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Type</Type>
+          <Type>Jenisnya</Type>
           <CreatedDate>Created Date</CreatedDate>
           <ModifiedDate>Modified Date</ModifiedDate>
           <Ascending>Ascending</Ascending>
@@ -2690,7 +2690,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Carian Disimpan</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2804,9 +2804,9 @@
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
-      <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <name>Nama</name>
+      <relatedDocuments>Dokumen Yang Berkaitan</relatedDocuments>
+      <action>Tindakan</action>
     </header>
     <action>
       <title>
@@ -2834,7 +2834,7 @@
     </action>
     <label>
       <tagName>Tag Name:</tagName>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <relatedDocuments>Dokumen Yang Berkaitan</relatedDocuments>
     </label>
   </UITagForm>
 
@@ -2972,11 +2972,11 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
-      <date>Date</date>
+      <version>Semakan</version>
+      <date>Tarikh</date>
       <author>Author</author>
       <status>Status</status>
-      <action>Action</action>
+      <action>Tindakan</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -3014,11 +3014,11 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
+      <date>Tarikh</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>Description</description>
+      <description>Keterangan</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>
@@ -3035,7 +3035,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Tetapkan semula</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3104,7 +3104,7 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Akses dinafikan. Anda mungkin tidak mempunyai kebenaran di ruang kerja memandu '{0}'.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
@@ -3136,7 +3136,7 @@
   <false>False</false>
   <Electronic>Electronic</Electronic>
   <Paper>Paper</Paper>
-  <NONE>None</NONE>
+  <NONE>Tiada</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
   <NOCONTRACT>No Contract</NOCONTRACT>
@@ -3186,7 +3186,7 @@
     <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>in</in>
+    <in>masuk</in>
     <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
     <Error>Error</Error>
@@ -3194,8 +3194,8 @@
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+    <Canceled>Dibatalkan</Canceled>
+      <UploadNewVersion>Muat naik versi baharu</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   </label>
@@ -3210,13 +3210,13 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
+      <name>Nama</name>
+      <date>Tarikh</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <more>Lebih lagi</more>
     </label>
   </FileView>
   <UIPropertyForm>

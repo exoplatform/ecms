@@ -2,63 +2,63 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Mga kagustuhan</Preferences>
-      <AddContent>Add Content</AddContent>
-      <ManageContent>Manage Content</ManageContent>
+      <Preferences>Kagustuhan</Preferences>
+      <AddContent>Magdagdag ng nilalaman</AddContent>
+      <ManageContent>Pamahalaan ang Nilalaman</ManageContent>
     </label>
     <msg>
-      <non-contents>Sorry, no articles are available.</non-contents>
-      <item-not-found>Item not found.</item-not-found>
-      <no-permission>You do not have permission to access this node.</no-permission>
-      <category-back>Go to previous</category-back>
+      <non-contents>Paumanhin, walang mga artikulo ang magagamit.</non-contents>
+      <item-not-found>Hindi nakita ang item.</item-not-found>
+      <no-permission>Wala kang pahintulot upang ma-access ang node na ito.</no-permission>
+      <category-back>Pumunta sa nakaraang</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Content List Preferences</UICLVConfig>
+      <UICLVConfig>Mga Kagustuhan sa Listahan ng Nilalaman</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <Title>Mga Kagustuhan sa Listahan ng Nilalaman</Title>
+      <ContentSelectionBlock>Pinili ng Nilalaman</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Paraan</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
-      <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
-    <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigItemPathFormInputSet>Daanan ng Polder</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Daanan ng Polder</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Iniutos ni</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Ang Pamagat</exo:title>
+        <exo:title>Pamagat</exo:title>
         <exo:dateCreated>Petsa ng paglikha</exo:dateCreated>
         <exo:lastModifiedDate>Binagong Petsa</exo:lastModifiedDate>
-        <publication:liveDate>Published Date</publication:liveDate>
-        <exo:startEvent>Event Date</exo:startEvent>
-        <exo:index>Index</exo:index>
-        <DESC>Descendant</DESC>
+        <publication:liveDate>Nai-publish Petsa</publication:liveDate>
+        <exo:startEvent>Petsa ng Kaganapan</exo:startEvent>
+        <exo:index>Palatuntunan</exo:index>
+        <DESC>Inaanak</DESC>
         <ASC>Ascendant</ASC>
       </option>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Ang Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <DisplaySettingBlock>Mga Setting ng Display</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Pang-ulo</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Suleras</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Ang Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Mga item sa bawat Pahina</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>Show Title</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>Show Date</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Ipakita ang pamagat</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Ipakita ang Petsa</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Adbans</AdvancedBlock>
+      <AdvancedBlock>Masulong</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>sa pamamagitan ng</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in Page</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigshowSCVWithStringInput>may</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Ipakita sa Pahina</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
       <ContentPath>Content Path</ContentPath>
       <Up>Pataas</Up>
@@ -71,13 +71,13 @@
     </label>
     <help>
       <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
-      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
+      <ModeSelectionHelp>Available ang dalawang mga mode upang ipakita ang nilalaman. "Sa pamamagitan ng Folder" ay kukuha ng lahat ng nilalaman na magagamit sa iyong napiling folder / kategorya. "Sa pamamagitan ng Nilalaman" hinahayaan mong piliin nang manu-mano ang nilalaman na nais mong ipakita.</ModeSelectionHelp>
+      <FolderPathHelp>Piliin ang nilalaman na nais mong ipakita. Ang default na seleksyon ay pinalitan ng dynamic na kapag na-activate mo ang opsyon na Dynamic Navigation (tingnan ang Advanced na mode sa ibaba).</FolderPathHelp>
+      <HeaderOptionHelp>Magpakita ng isang header sa tuktok ng listahan ng nilalaman. Kung na-activate mo ang pagpipiliang Awtomatikong Pagtukoy, susubukan mong hanapin ang header batay sa kasalukuyang pinili.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
+      <ContextualHelp>Pinapagana ang opsyon na Dynamic Navigation. Maaaring baguhin ng iba ang nilalaman na batay sa isang parameter ng URL.</ContextualHelp>
+      <ParameterHelp>Ang parameter na ito ay gagamitin upang ma-access ang nilalaman kung na-activate ang Dynamic na Pag-navigate.</ParameterHelp>
+      <ShowDetailInPageHelp>Ang pag-click sa nilalaman ay nagre-redirect sa gumagamit sa isang pahina ng Detalye. Dapat kang magkaroon ng portlet na "Nilalaman ayon sa URL" na pinapagana ang Dynamic na Pag-navigate sa target na pahina upang ipakita ang nilalaman.</ShowDetailInPageHelp>
       <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
       <ContentByQueryHelp>You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
@@ -119,20 +119,20 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Descendant</OrderDesc>
+        <OrderDesc>Inaanak</OrderDesc>
         <OrderAsc>Ascendant</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>Piliin ang Landas ng Base</SelectBasePath>
+      <SelectTargetPage>Piliin ang Landas ng Base</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Tagapili ng Pahina</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>

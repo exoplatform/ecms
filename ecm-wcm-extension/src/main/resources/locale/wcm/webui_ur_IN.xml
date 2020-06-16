@@ -72,7 +72,7 @@
       <child-not-found>No Page Found.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>منتخب کریں</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -252,13 +252,13 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
+      <title>عنوان</title>
       <score>اسکور</score>
       <publicationstate>Publication State</publicationstate>
       <action>عمل</action>
     </header>
     <title>
-      <Select>Select</Select>
+      <Select>منتخب کریں</Select>
       <View>ملاحظہ کریں</View>
     </title>
     <msg>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>صارف منتخب کریں</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -324,7 +324,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>صارف منتخب کرنے والا</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -336,7 +336,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>گروپ منتخب کریں</selectGroup>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -368,7 +368,7 @@
       <SingleContentViewer>Single Content Viewer</SingleContentViewer>
       <ContentListViewer>Content List Viewer</ContentListViewer>
       <Search>تلاش کریں</Search>
-      <Sitemap>Site Map</Sitemap>
+      <Sitemap>سائٹ کا نقشہ</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
       <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
@@ -382,9 +382,9 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
-    <logout>Logout</logout>
+    <welcome>خوش آمدید</welcome>
+    <login>لاگ اِن</login>
+    <logout>لاگ آؤٹ کریں</logout>
     <language>زبان تبدیل کریں</language>
     <register>درج کرنا</register>
   </Signin>

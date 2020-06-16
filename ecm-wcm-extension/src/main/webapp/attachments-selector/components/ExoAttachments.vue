@@ -24,7 +24,7 @@
                 <div class="contentDragAndDrop">
                   <div class="contentDrop">
                     <div class="icon"><i class="uiIconTemplate uiIcon32x32LightGray colorText"></i></div>
-                    <div><span class="dropMsg colorText">{{ $t('attachments.drawer.drop') }}</span></div>
+                    <div><span class="dropMsg colorText">{{ $t('attachments.drawer.dropOrPaste') }}</span></div>
                   </div>
                   <div class="contentUpload">
                     <a :title="$t('attachments.drawer.upload')" class="uploadButton" href="#" rel="tooltip" data-placement="bottom" @click="uploadFile">
@@ -281,6 +281,11 @@ export default {
   methods: {
     toggleAttachmentsDrawer: function() {
       this.showAttachmentsDrawer = !this.showAttachmentsDrawer;
+      if (this.showAttachmentsDrawer){
+        document.addEventListener('paste', this.onPaste, false);
+      } else {
+        document.removeEventListener('paste', this.onPaste, false);
+      }
     },
     uploadFile: function() {
       this.$refs.uploadInput.click();
@@ -499,6 +504,45 @@ export default {
     },
     updateCloudConnecting(status) {
       this.cloudDriveConnecting = status;
+    },
+    onPaste(event) {
+      if (event.clipboardData && event.clipboardData.items) {
+        const items = Array.from(event.clipboardData.items);
+        const textItem = items.filter(item => ~item.type.indexOf('text'))[0] || null;
+        const textItemType = textItem ? textItem.type : '';
+        const imageItem = items.filter(item => ~item.type.indexOf('image'))[0] || null;
+        if (imageItem) {
+          const pastedFile = imageItem.getAsFile();
+          this.getFilename(textItem, textItemType, name => {
+            //needed to create a new file to be able to rename it.
+            const myNewFile = new File([pastedFile], name, {type: pastedFile.type});
+            this.handleFileUpload([myNewFile]);
+          });
+        }
+      }
+    },
+    getFilename (textItem, textItemType, sendFileToServer) {
+      let fileName;
+      const thiss = this;
+      if (textItem) {
+        textItem.getAsString((htmlString) => {
+          if(textItemType === 'text/plain') {
+            fileName = decodeURI(htmlString).split('/').pop();
+          } else if (textItemType === 'text/html') {
+            const img = thiss.parseHTML(htmlString).querySelectorAll('img')[0];
+            fileName = img.src.split('/').pop();
+          }
+          sendFileToServer(fileName);
+        });
+      } else {
+        fileName = `image-${ Date.now() }.png`;
+        sendFileToServer(fileName);
+      }
+    },
+    parseHTML(html) {
+      const t = document.createElement('template');
+      t.innerHTML = html;
+      return t.content.cloneNode(true);
     }
   }
 };

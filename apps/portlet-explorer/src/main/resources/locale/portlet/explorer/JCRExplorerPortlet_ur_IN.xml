@@ -17,9 +17,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <not-support>آپ اس طرح کے دستاویز پر تبصرہ نہیں کرسکتے.</not-support>
+      <not-checkedout>آپکو دستاویز پر تبصرہ کرنے سے پہلے اسکى کی جانچ کرنی چاہیے.</not-checkedout>
+      <content-null>آپ خالى تبصرہ شائع نہیں کرسکتے.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -45,9 +45,9 @@
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-support>آپ اس طرح کے دستاویز کے لیے ووٹ نہیں کر سکتے.</not-support>
+      <not-checkedout>آپ کو ووٹ دینے کے لیے دستاویز کی جانچ کرنی چاہیے.</not-checkedout>
+      <vote-restriction>آپ ایک سے زائد بار ووٹ نہیں دے سکتے.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <refresh-session-success>اجلاس کامیابی کے ساتھ دوبارہ پیش کیا گیا.</refresh-session-success>
+      <no-node-history>آپ بنیادی فولڈر بے ہیں.</no-node-history>
+      <save-session-success>تمام تبدیلیاں محفوظ کی گئی.</save-session-success>
+      <target-path-not-found>آپ اس رستے تک نہیں پہنچ سکتے کیوں کہ یا تو یہ راستہ موجود نہیں ہے یا آپ کو اس تک پهونچھنے کی اجازت نہیں.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relation</Relation>
-      <Explorer>File Explorer</Explorer>
-      <Close>Close Sidebar</Close>
-      <TagExplorer>Tag Cloud</TagExplorer>
-      <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <Relation>تعلق</Relation>
+      <Explorer>فائل ایکسپلورر</Explorer>
+      <Close>سائیڈ بار بند کرو</Close>
+      <TagExplorer>ٹیگ کلاؤڈ</TagExplorer>
+      <Clipboard>کلپ بورڈ</Clipboard>
+      <SavedSearches>محفوظ کردہ تلاش</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>سائیڈ بار بند کرو</Close>
     </title>
   </UISideBar>
   <!--
@@ -90,13 +90,13 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace:</driveWorkspace>
-      <backToJCR>Back to JCR Main Drives</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
+      <driveWorkspace>ڈرائیو ورکسپيس:</driveWorkspace>
+      <backToJCR>JCRکی اصلی ڈرائیو پر واپس جائیں</backToJCR>
+      <setUpBrowser>اپنے براؤزنگ ترجیحات مقرر کریں</setUpBrowser>
       <refesh>تازہ کریں</refesh>
-      <currentDrive>Current Drive</currentDrive>
-      <selectView>Select View</selectView>
-      <showSideBar>Show Sidebar</showSideBar>
+      <currentDrive>حالیہ ڈرائیو</currentDrive>
+      <selectView>منظر کا انتخاب کریں</selectView>
+      <showSideBar>سائیڈ بار دکھائیں</showSideBar>
       <more>مزید</more>
       <backTo>پىچھے</backTo>
     </label>
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>ذاتی ڈرائیوز</PersonalDrives>
+      <GroupDrives>گروپ ڈرائیوز</GroupDrives>
+      <GeneralDrives>عمومی ڈرائیورز</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>ہراسائیں اجازت کے مطابق کوئی بھی منظر آپ کی ڈرائیو {0} میں دستیاب نہیں ہے.</no-view-found>
+      <access-denied>رساىى نہیں دی گئی. آپ کو ڈرائیو {0} کیے کام کرنے کی جگہ تک اجازت نہیں ہو سکتی ہے.</access-denied>
+      <workspace-not-exist>برائیوں '{0} ايک غیر معروف جگہ میں جمع کیا گیا تھا. برائے مہربانی ڈرائیو دوبارہ تشکیل ديں.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -126,10 +126,10 @@
   #############################################################################
   -->
   <UITreeExplorer>
-    <title>Explorer</title>
+    <title>ایکسپلولر</title>
     <label>
-      <Root>Root</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <Root>بنیاد</Root>
+      <webDavView>ایم ایس آفس میں کھولے</webDavView>
     </label>
     <msg>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
@@ -155,7 +155,7 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>اپنے براؤزنگ ترجیحات مقرر کریں</title>
     <label>
       <enableStructure>Browse in structure mode:</enableStructure>
       <showSideBar>Show sidebar:</showSideBar>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>نام تبدیل کریں</title>
     <label>
       <nameField>نام</nameField>
-      <titleField>Title</titleField>
+      <titleField>عنوان</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -214,7 +214,7 @@
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
+      <UIRenameForm>نام تبدیل کریں</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>مسل اپ لوڈ کریں</UIUploadManager>
@@ -304,7 +304,7 @@
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewPermissions>اجازت</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -522,9 +522,9 @@
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
+      <Rename>نام تبدیل کریں</Rename>
       <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Copy>نقل</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>حذف کریں</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -555,7 +555,7 @@
       <label>
         <name>نام</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>مالک</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -572,8 +572,8 @@
       <Lock>بند</Lock>
       <Unlock>UnLock</Unlock>
       <EditDocument>ترمیم</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
+      <Copy>نقل</Copy>
+      <Rename>نام تبدیل کریں</Rename>
       <Delete>حذف کریں</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
@@ -596,7 +596,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
+      <WebDavView>ایم ایس آفس میں کھولے</WebDavView>
       <Download>ڈاؤن لوڈ</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
@@ -772,7 +772,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>صارف منتخب کریں</SelectUser>
       <SelectMember>Select Membership</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
@@ -784,7 +784,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>صارف منتخب کریں</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
@@ -792,7 +792,7 @@
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>صارف منتخب کریں</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -800,7 +800,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>منتخب کریں</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>صارف یا گروپ</userOrGroup>
       <read>Read Right</read>
@@ -1162,7 +1162,7 @@
       <result>فلٹر</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>منتخب کریں</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
@@ -1281,7 +1281,7 @@
       <name>نام</name>
       <type>قسم</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <permission>اجازت</permission>
       <action>اعمال</action>
     </header>
     <tooltip>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>اجازت منتخب کرنے والا</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1400,7 +1400,7 @@
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
       <e_64>منتقل کریں</e_64>
-      <e_128>Copy</e_128>
+      <e_128>نقل</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
@@ -1496,8 +1496,8 @@
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <PreviousAndNextCompare>{0} سے {1} تک تبدیلياں</PreviousAndNextCompare>
+      <ComparedWith>کے ساتھ مقابلے میں</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -2089,8 +2089,8 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>گروپ منتخب کریں</selectGroup>
+      <selectUser>صارف منتخب کریں</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2209,8 +2209,8 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>گروپ منتخب کریں</selectGroup>
+      <selectUser>صارف منتخب کریں</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2690,7 +2690,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>محفوظ کردہ تلاش</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2972,7 +2972,7 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
+      <version>نظرثانی</version>
       <date>تاریخ</date>
       <author>مصنف</author>
       <status>حالت</status>
@@ -3104,10 +3104,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>رساىى نہیں دی گئی. آپ کو ڈرائیو {0} کیے کام کرنے کی جگہ تک اجازت نہیں ہو سکتی ہے.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>برائیوں '{0} ايک غیر معروف جگہ میں جمع کیا گیا تھا. برائے مہربانی ڈرائیو دوبارہ تشکیل ديں.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3186,7 +3186,7 @@
     <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>in</in>
+    <in>اندر</in>
     <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
     <Error>نقص</Error>

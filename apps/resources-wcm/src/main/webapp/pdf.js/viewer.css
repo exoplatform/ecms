@@ -137,6 +137,7 @@ body {
   left: 50%;
     position: absolute;
     top: 54%;
+    display: flex;
     -moz-transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);

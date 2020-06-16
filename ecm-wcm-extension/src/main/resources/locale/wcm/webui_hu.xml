@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Site Management</ManagedSites>
+      <ManagedSites>Webhelyek kezelése</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
       <PersonalDocuments>Personal Documents</PersonalDocuments>
       <UserDocuments>{0} Documents</UserDocuments>
@@ -49,7 +49,7 @@
       <admin-view>Admin</admin-view>
       <icon-view>Icons</icon-view>
       <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
+      <list-view>Lista</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Categories</wcm-category-view>
       <file-view>File Management View</file-view>
@@ -141,8 +141,8 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <add>Hozzáadás</add>
+      <delete>Törlés</delete>
     </label>
     <msg>
       <no-content-found>No content found.</no-content-found>
@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <msg>
       <child-not-found>No Content Found</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -182,7 +182,7 @@
   <UIContentSearchForm>
     <title>
       <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
+      <SearchByName>Keresés név szerint</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
       <Property>Property</Property>
       <Contain>Contain</Contain>
@@ -201,7 +201,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>Keresés</SearchWebContent>
     </action>
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
+      <Add>Hozzáadás</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -252,14 +252,14 @@
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
+      <title>Cím</title>
       <score>Score</score>
       <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <title>
       <Select>Select</Select>
-      <View>View</View>
+      <View>Megtekintés</View>
     </title>
     <msg>
     <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
@@ -290,8 +290,8 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Jogosultságok szerkesztése</Edit>
+        <Delete>Törlés</Delete>
       </title>
     </action>
   </UIPermissionManager>
@@ -301,7 +301,7 @@
       <owner>Permission</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
-      <action>Action</action>
+      <action>Művelet</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
@@ -316,7 +316,7 @@
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Felhasználó kiválasztása</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
@@ -330,14 +330,14 @@
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Csoport választó</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Csoport kiválasztása</selectGroup>
+      <selectMembership>Válassza ki a tagságot</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Single Content Viewer</SingleContentViewer>
       <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
+      <Search>Keresés</Search>
       <Sitemap>Site Map</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
@@ -382,11 +382,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
-    <login>Login</login>
+    <welcome>Üdvözöljük</welcome>
+    <login>Bejelentkezés</login>
     <logout>Logout</logout>
     <language>Change Language</language>
-    <register>Register</register>
+    <register>Regisztráció</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -438,13 +438,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Kezdőlap</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Kezdőlap</home>
   </label>  
   </Breadcrumb>
 

@@ -359,7 +359,7 @@
       <ColumnPageConfigs>Stulpelio puslapio konfigūracija</ColumnPageConfigs>
       <RowPageConfigs>Eilutės puslapio konfigūracija</RowPageConfigs>
       <TabsPageConfigs>Skirtukų puslapio konfigūracija</TabsPageConfigs>
-      <MixPageConfigs>Mixed</MixPageConfigs>
+      <MixPageConfigs>Sumaišyto puslapio konfiguracija</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 

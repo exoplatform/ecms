@@ -2,27 +2,27 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Et ole valinnut yhtään sisältöä. Valitsi ainakin yksi.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Uudelleennimeä</rename>
+      <cancel>Peruuta</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>Nimetään uudelleen...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>Open in Word</word>
-          <excel>Open in Excel</excel>
-          <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>Open on Desktop</desktop>
-          <desktop-app>Open in {0}</desktop-app>
+          <word>Avaa Wordissa</word>
+          <excel>Avaa Exelissä</excel>
+          <powerpoint>Avaa Powerpointissa</powerpoint>
+          <desktop>Avaa työpöydällä</desktop>
+          <desktop-app>Avaa {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>

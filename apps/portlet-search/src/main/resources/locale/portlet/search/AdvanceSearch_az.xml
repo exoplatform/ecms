@@ -8,7 +8,7 @@
       <Document>Document</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Axtar</Search>
     </action>
   </UIDefaultSearchForm>
 
@@ -26,11 +26,11 @@
       <editor>Editor</editor>
       <date>Date</date>
       <relevancy>Relevance</relevancy>
-      <title>Title</title>
+      <title>Başlıq</title>
       <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Redaktə Et</edit>
     </action>
     <msg>
       <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
@@ -46,8 +46,8 @@
       <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
       <pageMode>Page Mode</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
+        <none>Heç kim</none>
+        <more>Daha çox</more>
         <pagination>Pagination</pagination>
       </option>
     </label>
@@ -70,9 +70,9 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
+      <next>Növbəti</next>
       <previous>Previous</previous>
-      <more>More</more>
+      <more>Daha çox</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>

@@ -23,26 +23,26 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Kandungan utama</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Advanced</Advanced>
         <Summary>Summary</Summary>
         <name>#{word.name}</name>
-        <title>Title</title>
+        <title>Tajuk</title>
         <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
+        <hintCSS>Anda boleh menentukan helaian gaya utama untuk kandungan web anda. Gaya ini akan mengatasi helaian gaya yang ditakrifkan di peringkat tapak dan di peringkat yang dikongsi.</hintCSS>
         <ContentJS>JS Data</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
+        <hintJS>Anda boleh menentukan beberapa kod JavaScript yang boleh dilaksanakan sebelum kandungan web anda diberikan.</hintJS>
+        <WebContentHtml>Kandungan utama</WebContentHtml>
+        <Illustration>Ilustrasi</Illustration>
+        <hintIllustration>Anda boleh menentukan gambar yang akan ditunjukkan apabila kandungan web anda dipaparkan dalam senarai. Anda juga boleh menentukan beberapa teks ringkasan untuk pergi dengan gambar ini.</hintIllustration>
+        <confirm-delete>Adakah anda betul mahu memadamkan ilustrasi ini?</confirm-delete>
         <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
+        <imageMimeType>Tipe gambar</imageMimeType>
+        <image>Muat naik gambar</image>
+        <imageWidth>Lebar gambar</imageWidth>
+        <imageHeight>Ketinggian Gambar</imageHeight>
         <Synchronize>Synchronize with CSS and HTML</Synchronize>
       </label>
     </dialog>
@@ -75,7 +75,7 @@
       <label>
         <name>#{word.name}</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Keterangan</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Tapak Tajuk</title>
+        <description>Tapak Penerangan</description>
+        <keywords>Kunci Laman</keywords>
+        <robots>Carian Tingkah Laku Enjin</robots>
       </label>
     </dialog>
   </SiteMetadata>

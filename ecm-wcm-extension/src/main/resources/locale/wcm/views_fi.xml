@@ -24,7 +24,7 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Description</description>
+        <description>Kuvaus</description>
       </label>
     </view>
   </WebLink>

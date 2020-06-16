@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>نسخه</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>نسخه پایه</baseVersion>
       <addLabel>افزودن برچسب</addLabel>
       <removeLable>حذف برچسب</removeLable>
       <restoreVersion>بازیابی نسخه</restoreVersion>

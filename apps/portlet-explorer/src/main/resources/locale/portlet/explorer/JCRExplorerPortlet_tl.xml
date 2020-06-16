@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Ang Bersyon</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>ang kasalukuyang bersyon</baseVersion>
       <addLabel>Magdagdag ng Label</addLabel>
       <removeLable>Tanggalin ang Label</removeLable>
       <restoreVersion>Ibalik sa dati ang Bersyon</restoreVersion>
@@ -2630,7 +2630,7 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Sigurado ka ba na gusto mong i-delete ang komentong ito?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 

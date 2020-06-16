@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>उपयोगकर्ता का चयन करें</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1304,8 +1304,8 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>उपयोगकर्ता का चयन करें</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>उपयोगकर्ता का चयन करें</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
@@ -1383,7 +1383,7 @@
       <set_property>Set Property Right</set_property>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Add a permission to that node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1451,7 +1451,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>उपयोगकर्ता का चयन करें</SelectUser>
       <SelectMember>Select Membership</SelectMember>
       <AddAny>Everyone</AddAny>
     </title>
@@ -1463,7 +1463,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>उपयोगकर्ता का चयन करें</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
@@ -1471,7 +1471,7 @@
   <UIGroupSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -2159,7 +2159,7 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIDrivePermissionSelector>
@@ -2167,7 +2167,7 @@
   <UIPermissionSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2211,7 +2211,7 @@
   <QueriesPermissionBrowse>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </QueriesPermissionBrowse>
@@ -2330,7 +2330,7 @@
       <action>Action</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>अनलॉक</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
