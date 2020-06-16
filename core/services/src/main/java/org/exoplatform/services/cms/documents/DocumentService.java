@@ -206,7 +206,7 @@ public interface DocumentService {
    * @param provider the current provider or null if the document has been closed.
    * @throws RepositoryException the exception
    */
- public void saveCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
+  void saveCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException;
 
 
   /**

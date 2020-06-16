@@ -117,6 +117,7 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String NT_FILE = "nt:file";
   public static final String NT_RESOURCE = "nt:resource";
   public static final String MIX_VERSIONABLE = "mix:versionable";
+  public static final String EXO_SYMLINK = "exo:symlink";
   public static final String JCR_LAST_MODIFIED_PROP = "jcr:lastModified";
   public static final String JCR_CONTENT = "jcr:content";
   public static final String JCR_DATA = "jcr:data";
@@ -674,10 +675,18 @@ public class DocumentServiceImpl implements DocumentService {
   public void saveCurrentDocumentProvider(String uuid, String workspace, String provider) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
     Node systemNode = systemSession.getNodeByUUID(uuid);
+    if (systemNode.isNodeType(EXO_SYMLINK)) {
+      systemNode = linkManager.getTarget(systemNode, true);
+    }
     String userId = systemNode.getProperty(EXO_LAST_MODIFIER_PROP).getString();
     WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
       Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
       Node targetNode = session.getNodeByUUID(uuid);
+      
+      if (targetNode.isNodeType(EXO_SYMLINK)) {
+        targetNode = linkManager.getTarget(targetNode);
+      }
+      
       invokeWithLockToken(targetNode, (node) -> {
         if (node.canAddMixin(EXO_DOCUMENT)) {
           node.addMixin(EXO_DOCUMENT);
@@ -710,6 +719,9 @@ public class DocumentServiceImpl implements DocumentService {
   public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
     Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
     Node node = systemSession.getNodeByUUID(uuid);
+    if (node.isNodeType(EXO_SYMLINK)) {
+      node = linkManager.getTarget(node, true);
+    }
     String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
     String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
                                                                        : null;
@@ -720,6 +732,9 @@ public class DocumentServiceImpl implements DocumentService {
       WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
         Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
         Node tagetNode = session.getNodeByUUID(uuid);
+        if (tagetNode.isNodeType(EXO_SYMLINK)) {
+          tagetNode = linkManager.getTarget(tagetNode);
+        }
         invokeWithLockToken(tagetNode, (document) -> {
           if (document.canAddMixin(EXO_DOCUMENT)) {
             document.addMixin(EXO_DOCUMENT);

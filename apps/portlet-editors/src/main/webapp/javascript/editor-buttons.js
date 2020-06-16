@@ -341,7 +341,7 @@
         var providersLoader = $.Deferred();
         var preferredProvider;
         var currentProvider;
-        data.forEach(function(providerInfo, i, arr) {
+        data.providersInfo.forEach(function(providerInfo, i, arr) {
           loadProviderModule(providerInfo.provider).done(function(module) {
             // The provider's module will call addCreateButtonFn() and 
             // add the button-function to buttonsFns array
@@ -362,7 +362,7 @@
           if (buttonsFns.length) {
             getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, dropclass).done(function($pulldown) {
               buttonsLoader.resolve($pulldown);
-              editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+              editorsupport.addListener(EDITOR_BUTTONS, data.fileId, eventsHandler);
             });
           }
         });
