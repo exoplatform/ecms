@@ -360,7 +360,7 @@
         });
         providersLoader.done(function() {
           if (buttonsFns.length) {
-            getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, dropclass).done(function($pulldown) {
+            getButtonsContainer(data.fileId, buttonsFns, preferredProvider, currentProvider, dropclass).done(function($pulldown) {
               buttonsLoader.resolve($pulldown);
               editorsupport.addListener(EDITOR_BUTTONS, data.fileId, eventsHandler);
             });
