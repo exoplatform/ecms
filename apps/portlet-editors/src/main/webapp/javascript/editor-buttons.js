@@ -196,7 +196,7 @@
               }
               $dropdown.append($btn);
             }
-            var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'><i class='uiIconEcmsOfficeOnlineOpen uiIconEcmsLightGray uiIconEdit'></i><span>" + i18n["editors.buttons.EditorButton"] + "</span>" +
+            var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'><i class='uiIconEcmsLightGray uiIconEdit'></i><span>" + i18n["editors.buttons.EditorButton"] + "</span>" +
               "<i class='uiIconArrowDown uiIconLightGray'></i></button>");
             $dropdownContainer.append($toggle);
             $dropdownContainer.append($dropdown);
