@@ -177,13 +177,9 @@
               savePreferredProvider(fileId, provider);
             });
           } else {
-
             // Create pulldown with editor buttons
             var $dropdownContainer = $("<div class='dropdown-container'></div>");
-
-
             var $dropdown = $("<ul class='dropdown-menu'></ul>");
-
             for (var i = 0; i < buttons.length; i++) {
               var $btn = buttons[i].createButtonFn();
               let provider = buttons[i].provider;
