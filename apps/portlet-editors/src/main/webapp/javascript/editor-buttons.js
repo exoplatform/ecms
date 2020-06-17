@@ -54,6 +54,7 @@
 
 
 
+
   /**
    * Editor core class.
    */
@@ -72,6 +73,18 @@
     const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
     // Current module name
     const EDITOR_BUTTONS = "editorbuttons";
+
+    const lang = (eXo && eXo.env && eXo.env.portal && eXo.env.portal.language) || "en";
+    const localePortlet = "locale.portlet";
+    const resourceBundleName = "EditorsAdmin";
+    const i18nUrl = eXo.env.portal.context + "/" + eXo.env.portal.rest + "/i18n/bundle/" + localePortlet + "." + resourceBundleName + "-" + lang + ".json";
+
+    /**
+     * Gets i18n
+     */
+    var geti18n = function() {
+      return $.get(i18nUrl);
+    };
 
     /**
      * Parses comet message from JSON
@@ -125,74 +138,80 @@
       });
     };
 
+
+
     /**
      * Creates the dropdown with editor buttons
      */
     var getButtonsContainer = function(fileId, buttons, preferredProvider, currentProvider, dropclass) {
-      if (!buttons.length) {
-        return;
-      }
-      // Sort buttons in user prefference order
-      if (preferredProvider != null) {
-        buttons.forEach(function(item, i) {
-          if (item.provider === preferredProvider) {
-            buttons.splice(i, 1);
-            buttons.unshift(item);
-          }
-        });
-      }
+      var $containerLoader = $.Deferred();
 
-      // Add buttons container
-      // var $container = $target.find(".editorButtonContainer");
-      var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
-
-      // Create editor button
-      var $btn = buttons[0].createButtonFn();
-      $btn.addClass("editorButton");
-      $btn.attr('data-provider', buttons[0].provider);
-      $btn.attr('data-fileId', fileId);
-      // If there is current open editor and it's not this one
-      if (currentProvider && currentProvider != buttons[0].provider) {
-        $btn.addClass("disabledProvider");
-      }
-      $container.append($btn);
-      let provider = buttons[0].provider;
-      $btn.click(function() {
-        savePreferredProvider(fileId, provider);
-      });
-
-      // Create pulldown with editor buttons
-      if (buttons.length > 1) {
-        var $dropdownContainer = $("<div class='dropdown-container'></div>");
-        var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'>" +
-          "<i class='uiIconArrowDown uiIconLightGray'></i></span></button>");
-
-        var $dropdown = $("<ul class='dropdown-menu'></ul>");
-
-        for (var i = 1; i < buttons.length; i++) {
-          var $btn = buttons[i].createButtonFn();
-          let provider = buttons[i].provider;
-          // Save user choice
-          $btn.click(function() {
-            savePreferredProvider(fileId, provider);
+      if (buttons.length) {
+        // Sort buttons in user prefference order
+        if (preferredProvider != null) {
+          buttons.forEach(function(item, i) {
+            if (item.provider === preferredProvider) {
+              buttons.splice(i, 1);
+              buttons.unshift(item);
+            }
           });
-          $btn.addClass("editorButton");
-          $btn.attr('data-provider', buttons[i].provider);
-          $btn.attr('data-fileId', fileId);
-          // If there is current open editor and it's not this one
-          if (currentProvider && currentProvider != buttons[i].provider) {
-            $btn.addClass("disabledProvider");
-          }
-          $dropdown.append($btn);
         }
-        $dropdownContainer.append($toggle);
-        $dropdownContainer.append($dropdown);
-        $container.append($dropdownContainer);
+        geti18n().done(function(i18n) {
+          // Add buttons container
+          var $container = $("<div class='editorButtonContainer hidden-tabletL'></div>");
+          if (buttons.length == 1) {
+            // Create editor button
+            var $btn = buttons[0].createButtonFn();
+            $btn.addClass("editorButton");
+            $btn.attr('data-provider', buttons[0].provider);
+            $btn.attr('data-fileId', fileId);
+            // If there is current open editor and it's not this one
+            if (currentProvider && currentProvider != buttons[0].provider) {
+              $btn.addClass("disabledProvider");
+            }
+            $btn.find(".editorLabel").html(i18n["editors.buttons.EditorButton"]);
+            
+            $container.append($btn);
+            let provider = buttons[0].provider;
+            $btn.click(function() {
+              savePreferredProvider(fileId, provider);
+            });
+          } else {
+            // Create pulldown with editor buttons
+            var $dropdownContainer = $("<div class='dropdown-container'></div>");
+            var $dropdown = $("<ul class='dropdown-menu'></ul>");
+            for (var i = 0; i < buttons.length; i++) {
+              var $btn = buttons[i].createButtonFn();
+              let provider = buttons[i].provider;
+              // Save user choice
+              $btn.click(function() {
+                savePreferredProvider(fileId, provider);
+              });
+              $btn.addClass("editorButton");
+              $btn.attr('data-provider', buttons[i].provider);
+              $btn.attr('data-fileId', fileId);
+              // If there is current open editor and it's not this one
+              if (currentProvider && currentProvider != buttons[i].provider) {
+                $btn.addClass("disabledProvider");
+              }
+              $dropdown.append($btn);
+            }
+            var $toggle = $("<button class='btn dropdown-toggle' data-toggle='dropdown'><i class='uiIconEcmsLightGray uiIconEdit'></i><span>" + i18n["editors.buttons.EditorButton"] + "</span>" +
+              "<i class='uiIconArrowDown uiIconLightGray'></i></button>");
+            $dropdownContainer.append($toggle);
+            $dropdownContainer.append($dropdown);
+
+            if (dropclass) {
+              $container.addClass(dropclass);
+            }
+            $container.append($dropdownContainer);
+          }
+          $containerLoader.resolve($container);
+        });
+      } else {
+        $containerLoader.reject();
       }
-      if (dropclass) {
-        $container.addClass(dropclass);
-      }
-      return $container;
+      return $containerLoader.promise();
     };
 
     /**
@@ -270,19 +289,20 @@
       });
       providersLoader.done(function() {
         if (buttonsFns.length) {
-          var $pulldown = getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, 'dropdown');
-          $placeholder.replaceWith($pulldown);
-          if (fileId != explorerFileId) {
-            // We need unsubscribe from previous doc
-            if (explorerFileId) {
-              editorsupport.removeListener(EDITOR_BUTTONS, explorerFileId).done(function() {
+          getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, 'dropdown').done(function($pulldown) {
+            $placeholder.replaceWith($pulldown);
+            if (fileId != explorerFileId) {
+              // We need unsubscribe from previous doc
+              if (explorerFileId) {
+                editorsupport.removeListener(EDITOR_BUTTONS, explorerFileId).done(function() {
+                  editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+                });
+              } else {
                 editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
-              });
-            } else {
-              editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+              }
+              explorerFileId = fileId;
             }
-            explorerFileId = fileId;
-          }
+          });
         }
       });
     };
@@ -298,7 +318,9 @@
         return;
       }
       var $target = $("#activityContainer" + config.activityId).find("div[id^='ActivityContextBox'] > .actionBar .statusAction.pull-left");
-      $target.append(getButtonsContainer(config.fileId, buttons, config.preferredProvider, config.currentProvider, 'dropdown'));
+      getButtonsContainer(config.fileId, buttons, config.preferredProvider, config.currentProvider, 'dropdown').done(function($pulldown) {
+        $target.append($pulldown);
+      });
       editorsupport.addListener(EDITOR_BUTTONS, config.fileId, eventsHandler);
     };
 
@@ -315,7 +337,7 @@
         var providersLoader = $.Deferred();
         var preferredProvider;
         var currentProvider;
-        data.forEach(function(providerInfo, i, arr) {
+        data.providersInfo.forEach(function(providerInfo, i, arr) {
           loadProviderModule(providerInfo.provider).done(function(module) {
             // The provider's module will call addCreateButtonFn() and 
             // add the button-function to buttonsFns array
@@ -334,9 +356,10 @@
         });
         providersLoader.done(function() {
           if (buttonsFns.length) {
-            var $pulldown = getButtonsContainer(fileId, buttonsFns, preferredProvider, currentProvider, dropclass);
-            buttonsLoader.resolve($pulldown);
-            editorsupport.addListener(EDITOR_BUTTONS, fileId, eventsHandler);
+            getButtonsContainer(data.fileId, buttonsFns, preferredProvider, currentProvider, dropclass).done(function($pulldown) {
+              buttonsLoader.resolve($pulldown);
+              editorsupport.addListener(EDITOR_BUTTONS, data.fileId, eventsHandler);
+            });
           }
         });
       }).catch(function(xhr, status, error) {

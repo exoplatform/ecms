@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -43,12 +45,15 @@ import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNo
 import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper.ProviderInfo;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
@@ -60,6 +65,7 @@ import org.exoplatform.wcm.connector.collaboration.editors.DocumentEditorData;
 import org.exoplatform.wcm.connector.collaboration.editors.EditorPermission;
 import org.exoplatform.wcm.connector.collaboration.editors.ErrorMessage;
 import org.exoplatform.wcm.connector.collaboration.editors.HypermediaLink;
+import org.exoplatform.wcm.connector.collaboration.editors.PreviewInfo;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
@@ -70,38 +76,46 @@ import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 @Path("/documents/editors")
 public class DocumentEditorsRESTService implements ResourceContainer {
 
+  private static final String         EXO_SYMLINK                  = "exo:symlink";
+
   /** The Constant PROVIDER_NOT_REGISTERED. */
-  private static final String   PROVIDER_NOT_REGISTERED      = "EditorProviderNotRegistered";
+  private static final String         PROVIDER_NOT_REGISTERED      = "EditorProviderNotRegistered";
 
   /** The Constant EMPTY_REQUEST. */
-  private static final String   EMPTY_REQUEST                = "EmptyRequest";
+  private static final String         EMPTY_REQUEST                = "EmptyRequest";
 
   /** The Constant CANNOT_GET_PROVIDERS. */
-  private static final String   CANNOT_GET_PROVIDERS         = "CannotGetProviders";
+  private static final String         CANNOT_GET_PROVIDERS         = "CannotGetProviders";
 
   /** The Constant PERMISSION_NOT_VALID. */
-  private static final String   PERMISSION_NOT_VALID         = "PermissionNotValid";
+  private static final String         PERMISSION_NOT_VALID         = "PermissionNotValid";
 
   /** The Constant CANNOT_SAVE_PREFERRED_EDITOR. */
-  private static final String   CANNOT_SAVE_PREFERRED_EDITOR = "CannotSavePreferredEditor";
+  private static final String         CANNOT_SAVE_PREFERRED_EDITOR = "CannotSavePreferredEditor";
 
   /** The Constant SELF. */
-  private static final String   SELF                         = "self";
+  private static final String         SELF                         = "self";
 
   /** The Constant LOG. */
-  protected static final Log    LOG                          = ExoLogger.getLogger(DocumentEditorsRESTService.class);
+  protected static final Log          LOG                          = ExoLogger.getLogger(DocumentEditorsRESTService.class);
 
   /** The document service. */
-  protected DocumentService     documentService;
+  protected final DocumentService     documentService;
 
   /** The document service. */
-  protected OrganizationService organization;
+  protected final OrganizationService organization;
 
   /** The document service. */
-  protected SpaceService        spaceService;
+  protected final SpaceService        spaceService;
 
   /** The identity manager. */
-  protected IdentityManager     identityManager;
+  protected final IdentityManager     identityManager;
+
+  /** The repository service. */
+  protected final RepositoryService   repositoryService;
+
+  /** The link manager. */
+  protected final LinkManager         linkManager;
 
   /**
    * Instantiates a new document editors REST service.
@@ -110,15 +124,21 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @param spaceService the space service
    * @param organizationService the organization service
    * @param identityManager the identity manager
+   * @param repositoryService the repository service
+   * @param linkManager the link manager
    */
   public DocumentEditorsRESTService(DocumentService documentService,
                                     SpaceService spaceService,
                                     OrganizationService organizationService,
-                                    IdentityManager identityManager) {
+                                    IdentityManager identityManager,
+                                    RepositoryService repositoryService,
+                                    LinkManager linkManager) {
     this.documentService = documentService;
     this.identityManager = identityManager;
     this.organization = organizationService;
     this.spaceService = spaceService;
+    this.repositoryService = repositoryService;
+    this.linkManager = linkManager;
   }
 
   /**
@@ -218,9 +238,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   @Path("/preferred/{fileId}")
   @RolesAllowed("users")
   public Response preferredEditor(@PathParam("fileId") String fileId,
-                                 @FormParam("userId") String userId,
-                                 @FormParam("provider") String provider,
-                                 @FormParam("workspace") String workspace) {
+                                  @FormParam("userId") String userId,
+                                  @FormParam("provider") String provider,
+                                  @FormParam("workspace") String workspace) {
     try {
       documentService.savePreferredEditor(userId, provider, fileId, workspace);
     } catch (AccessDeniedException e) {
@@ -257,13 +277,41 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
     List<DocumentEditorProvider> providers = documentService.getDocumentEditorProviders();
     List<ProviderInfo> providersInfo = EditorProvidersHelper.getInstance()
-                                                           .initPreview(providers,
-                                                                        identity,
-                                                                        fileId,
-                                                                        workspace,
-                                                                        uriInfo.getRequestUri(),
-                                                                        request.getLocale());
-    return Response.ok().entity(providersInfo).build();
+                                                            .initPreview(providers,
+                                                                         identity,
+                                                                         fileId,
+                                                                         workspace,
+                                                                         uriInfo.getRequestUri(),
+                                                                         request.getLocale());
+
+    String targetFileId = fileId;
+    try {
+      targetFileId = getTargetFileId(fileId, workspace);
+    } catch (RepositoryException e) {
+      LOG.warn("Cannot get fileId from symlink taget.", e.getMessage());
+    }
+    PreviewInfo previewInfo = new PreviewInfo(targetFileId, providersInfo);
+    return Response.ok().entity(previewInfo).build();
+  }
+
+  /**
+   * Gets the symlink target file id.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @return the target file id
+   * @throws RepositoryException the repository exception
+   */
+  protected String getTargetFileId(String fileId, String workspace) throws RepositoryException {
+    Session systemSession = repositoryService.getCurrentRepository().getSystemSession(workspace);
+    Node node = systemSession.getNodeByUUID(fileId);
+    if (node.isNodeType(EXO_SYMLINK)) {
+      node = linkManager.getTarget(node, true);
+      if (node != null) {
+        return node.getUUID();
+      }
+    }
+    return fileId;
   }
 
   /**

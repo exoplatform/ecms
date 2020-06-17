@@ -102,6 +102,15 @@ public interface LockService {
    * @throws Exception
    */
   public String getLockTokenOfUser(Node node) throws Exception;
+  
+  /**
+   * Get lock token of user from a specific node using userId
+   * @param node a specific node
+   * @param userId the userId
+   * @return lock token
+   * @throws Exception
+   */
+  public String getLockTokenOfUser(Node node, String userId) throws Exception;
 
   /**
    * Create Lock key from specific node.

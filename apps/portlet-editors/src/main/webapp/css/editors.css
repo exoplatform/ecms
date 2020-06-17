@@ -12,11 +12,7 @@
 }
 
 .editorButtonContainer .dropdown-container .dropdown-menu {
-  position: absolute;
-  top: 120%; 
-  margin-left: -140px !important;
-  min-width: 140px !important;
-  margin-top: 5px !important;
+  margin-top: 7px !important;
 }
 
 .editorButtonContainer .dropdown-container .dropdown-menu li {
@@ -50,14 +46,15 @@
 
 .previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle {
   background: none;
-  border-color: gray;
 }
 
-.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle {
+.editorButtonContainer .dropdown-container .dropdown-toggle,
+.editorButtonContainer .dropdown-container .dropdown-toggle:hover i {
   background: none;
+  color: white;
 }
-.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle:focus {
-  background-color: #323232;
+.editorButtonContainer .dropdown-container .dropdown-toggle span {
+  margin: 0 3px;
 }
 
 .previewBtn .editorButtonContainer i {
@@ -136,12 +133,9 @@
 }
 
 #UIActionBar .editorButtonContainer {
-  margin: 8px 3px 0px 3px;
+  margin: 7px 3px 0px 3px;
 }
 
-#UIActionBar i.uiIconEcmsOfficeOnlineOpen {
-  margin-right: 2px;
-}
 #UIActionBar .dropdown-container {
   margin-left: 2px;
 }
@@ -150,18 +144,20 @@
   flex-shrink: 0;
 }
 
-#UIActionBar .editorButtonContainer > .editorButton a {
-  color: white;
-}
-
 #UIActionBar .editorButtonContainer .dropdown-container .dropdown-toggle:focus {
   background: none;
 }
 
-.actionBar .disabledProvider a:hover {
-  color: #999999 !important;
+.editorButtonContainer > li.hidden-tabletL {
+  display: block;
+  margin: 2px 3px;
+  font-size: 1.1em;
+}
+.editorButtonContainer > li.hidden-tabletL .editorLabel {
+  color: white;
+  margin: 0 3px;
 }
 
-#UIActionBar .editorButtonContainer > .editorButton.disabledProvider a {
-  color: #dbdbdb !important;
+.actionBar .disabledProvider a:hover {
+  color: #999999 !important;
 }
