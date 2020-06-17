@@ -12,11 +12,7 @@
 }
 
 .editorButtonContainer .dropdown-container .dropdown-menu {
-  position: absolute;
-  top: 120%; 
-  margin-left: -140px !important;
-  min-width: 140px !important;
-  margin-top: 5px !important;
+  margin-top: 7px !important;
 }
 
 .editorButtonContainer .dropdown-container .dropdown-menu li {
