@@ -3,23 +3,11 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -31,7 +19,9 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.search.connector.FileSearchRestServiceConnector;
+import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
+
+import io.swagger.annotations.*;
 
 /**
  * @author Ayoub Zayati
@@ -40,14 +30,14 @@ import org.exoplatform.services.wcm.search.connector.FileSearchRestServiceConnec
 @Api(tags = "search/documents", value = "search/documents", description = "Managing search documents")
 public class FileSearchRestService implements ResourceContainer {
 
-  private FileSearchRestServiceConnector fileSearchRestServiceConnector;
+  private FileSearchServiceConnector fileSearchServiceConnector;
   
   private NodeHierarchyCreator nodeHierarchyCreator; 
 
   private static final int DEFAULT_LIMIT = 20;
 
-  public FileSearchRestService(FileSearchRestServiceConnector fileSearchRestServiceConnector, NodeHierarchyCreator nodeHierarchyCreator) {
-    this.fileSearchRestServiceConnector = fileSearchRestServiceConnector;
+  public FileSearchRestService(FileSearchServiceConnector fileSearchServiceConnector, NodeHierarchyCreator nodeHierarchyCreator) {
+    this.fileSearchServiceConnector = fileSearchServiceConnector;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
   }
 
@@ -61,7 +51,8 @@ public class FileSearchRestService implements ResourceContainer {
       notes = "This returns recent documents")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response searchRecentDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+  public Response searchRecentDocuments(@ApiParam(value = "Query string", required = false) @QueryParam("q") String query,
+                                        @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
@@ -69,7 +60,7 @@ public class FileSearchRestService implements ResourceContainer {
     recentFilters.add(getRecentFilter());
     recentFilters.add(getFileTypesFilter());
     recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
-    Collection<SearchResult> recentDocuments = fileSearchRestServiceConnector.filteredSearch(null, null, recentFilters, null, 0, limit, "date", "desc");
+    Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null, query, recentFilters, null, 0, limit, "date", "desc");
     return Response.ok(recentDocuments).build();
   }
   
@@ -90,7 +81,7 @@ public class FileSearchRestService implements ResourceContainer {
     List<ElasticSearchFilter> recentSpacesFilters = new ArrayList<ElasticSearchFilter>();
     recentSpacesFilters.add(getFileTypesFilter());
     recentSpacesFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH)));
-    Collection<SearchResult> recentSpacesDocuments = fileSearchRestServiceConnector.filteredSearch(null, null, recentSpacesFilters, null, 0, limit, "date", "desc");
+    Collection<SearchResult> recentSpacesDocuments = fileSearchServiceConnector.filteredSearch(null, null, recentSpacesFilters, null, 0, limit, "date", "desc");
     return Response.ok(recentSpacesDocuments).build();
   }
   

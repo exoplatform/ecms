@@ -28,6 +28,7 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -60,8 +61,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
   private DocumentService documentService;
 
-  StringBuffer downloadUrl;
-
   public FileSearchServiceConnector(InitParams initParams, ElasticSearchingClient client, RepositoryService repositoryService, DocumentService documentService) {
     super(initParams, client);
     this.repositoryService = repositoryService;
@@ -79,8 +78,10 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             "author",
             "createdDate",
             "lastUpdatedDate",
+            "lastModifier",
             "fileType",
             "fileSize",
+            "version",
             "activityId");
 
     return fields.stream().map(field -> "\"" + field + "\"").collect(Collectors.joining(","));
@@ -91,12 +92,29 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     SearchResult searchResult = super.buildHit(jsonHit, searchContext);
 
     JSONObject hitSource = (JSONObject) jsonHit.get("_source");
+    String id = (String) jsonHit.get("_id");
     String workspace = (String) hitSource.get("workspace");
     String nodePath = (String) hitSource.get("path");
     String fileType = (String) hitSource.get("fileType");
     String fileSize = (String) hitSource.get("fileSize");
+    String lastEditor = (String) hitSource.get("lastModifier");
+    String version = (String) hitSource.get("version");
     List<String> tags = (List<String>) hitSource.get("tags");
-
+    LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
+    String drive = "";
+    ExtendedSession session = null;
+    try {
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
+      Node node = session.getNodeByIdentifier(id);
+      previewBreadcrumb = documentService.getFilePreviewBreadCrumb(node);
+      drive = Utils.getSearchDocumentDrive(node);
+    } catch (Exception e ) {
+      LOG.error("Error while getting file node " + id, e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
     String driveName = "";
     try {
       DriveData driveOfNode = documentService.getDriveOfNode(nodePath);
@@ -114,20 +132,32 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
         lang = language;
       }
     }
-    String detail = driveName + getFormattedFileSize(fileSize) + " - " + getFormattedDate(searchResult.getDate(), lang);
 
-    SearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
-            getPreviewUrl(jsonHit, searchContext),
+    String downloadUrl = getDownloadUrl(workspace, nodePath);
+
+    String formattedFileSize = getFormattedFileSize(fileSize);
+    EcmsSearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
             searchResult.getTitle(),
-            searchResult.getExcerpt(),
-            detail,
-            getImageUrl(workspace, nodePath),
             searchResult.getDate(),
             searchResult.getRelevancy(),
             fileType,
             nodePath,
-            getBreadcrumb(nodePath),
-            tags);
+            previewBreadcrumb,
+            id,
+            downloadUrl,
+            version,
+            formattedFileSize,
+            drive,
+            lastEditor);
+
+    ecmsSearchResult.setTags(tags);
+    ecmsSearchResult.setImageUrl(getImageUrl(workspace, nodePath));
+    ecmsSearchResult.setPreviewUrl(getPreviewUrl(jsonHit, searchContext, downloadUrl));
+    ecmsSearchResult.setExcerpt(searchResult.getExcerpt());
+
+    String formattedDate = getFormattedDate(searchResult.getDate(), lang);
+    ecmsSearchResult.setDetail(driveName + formattedFileSize + " - " + formattedDate);
+    ecmsSearchResult.setBreadcrumb(getBreadcrumb(nodePath));
 
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
@@ -136,6 +166,18 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       ecmsSearchResult.setUrl(downloadUrl.toString());
     }
     return ecmsSearchResult;
+  }
+
+  private String getDownloadUrl(String workspace, String nodePath) {
+    String restContextName =  WCMCoreUtils.getRestContextName();
+
+    String repositoryName = getRepositoryName();
+
+    StringBuffer downloadUrl = new StringBuffer();
+    downloadUrl.append('/').append(restContextName).append("/jcr/").
+            append(repositoryName).append('/').
+            append(workspace).append(nodePath);
+    return downloadUrl.toString();
   }
 
   protected String getUrl(String nodePath) {
@@ -169,7 +211,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     }
   }
 
-  protected String getPreviewUrl(JSONObject jsonHit, SearchContext context) {
+  protected String getPreviewUrl(JSONObject jsonHit, SearchContext context, String downloadUrl) {
     JSONObject hitSource = (JSONObject) jsonHit.get("_source");
 
     String id = (String) jsonHit.get("_id");
@@ -179,19 +221,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     String nodePath = (String) hitSource.get("path");
     String fileType = (String) hitSource.get("fileType");
     String activityId = (String) hitSource.get("activityId");
-
-    String restContextName =  WCMCoreUtils.getRestContextName();
-    String repositoryName = null;
-    try {
-      repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
-    } catch (RepositoryException e) {
-      LOG.error("Cannot get repository name", e);
-    }
-
-    downloadUrl = new StringBuffer();
-    downloadUrl.append('/').append(restContextName).append("/jcr/").
-            append(repositoryName).append('/').
-            append(workspace).append(nodePath);
 
     StringBuilder url = new StringBuilder("javascript:require(['SHARED/documentPreview'], function(documentPreview) {documentPreview.init({doc:{");
     url.append("id:'").append(id).append("',");
@@ -204,7 +233,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       LOG.error("Cannot get link in document app for node " + nodePath, e);
     }
     url.append("path:'").append(nodePath)
-            .append("', repository:'").append(repositoryName)
+            .append("', repository:'").append(getRepositoryName())
             .append("', workspace:'").append(workspace)
             .append("', downloadUrl:'").append(downloadUrl.toString())
             .append("', openUrl:'").append(linkInDocumentsApp)
@@ -302,4 +331,14 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
     return uris;
   }
+
+  protected String getRepositoryName() {
+    try {
+      return repositoryService.getCurrentRepository().getConfiguration().getName();
+    } catch (RepositoryException e) {
+      LOG.debug("Cannot get repository name", e);
+      return "repository";
+    }
+  }
+
 }
