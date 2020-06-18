@@ -63,12 +63,15 @@
     var cometd, cometdContext;
     var configLoader = $.Deferred();
     var initLoader;
+    var idleTimer;
 
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
     const REFRESH_STATUS = "REFRESH_STATUS";
     const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
+    // 10 minutes only for testing purposes, should be about 30 minutes for prod mode
+    const IDLE_TIMEOUT = 600000;
 
     /**
      * Parses comet message from JSON
@@ -180,6 +183,18 @@
         initLoader.resolve();
       });
     };
+    
+    var showClosePopup = function () {
+      console.log("Time to show closing popup")
+    }
+    
+    var notifyActive = function() {
+      console.log("Editor is active...");
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(showClosePopup, IDLE_TIMEOUT); 
+    }
+    
+    this.notifyActive = notifyActive;
 
     this.init = init;
 
@@ -246,7 +261,7 @@
         listener.subscription = subscription
       });
     };
-
+    
     /**
      * Opens cometd connection and sends DOCUMENT_OPENED event to track the editor.
      * Used as an API for providers.
@@ -279,7 +294,7 @@
         });
 
       });
-
+      notifyActive();
       return $loader.promise();
     };
   }
