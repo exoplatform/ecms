@@ -574,8 +574,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
 
       if (!srcWorkspace.equals(destWorkspace) || !srcPath.equals(destPath)) {
-        // Update thumbnail for the node after pasting
-        thumbnailService.copyThumbnailNode(srcThumbnailNode, destNode);
+        // Remove thumbnail from source folder after moving it
+
+        thumbnailService.processRemoveThumbnail(srcThumbnailNode);
       }
     } catch (ConstraintViolationException ce) {
       LOG.debug("Error pasting document from {} to {}", srcPath, destPath, ce);
