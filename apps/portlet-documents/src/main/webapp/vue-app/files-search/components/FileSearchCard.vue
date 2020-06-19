@@ -1,34 +1,25 @@
 <template>
-  <v-card class="searchApplicationCard d-flex flex-column" outlined>
-    <div class="image mx-auto">
-      <a :target="targetUrl" :href="applicationUrl">
-        <v-img
-          :src="imageUrl"
-          class="appImage"
-          width="148"
-          height="148"/>
-      </a>
+  <v-card class="searchFileCard d-flex flex-column" outlined>
+    <div class="mx-auto flex-grow-1 clickable pa-4" @click="$refs.documentDetail.$el.click()">
+      <ellipsis
+        :title="result.excerpt"
+        :data="result.excerpt"
+        :line-clamp="5"
+        end-char="...">
+      </ellipsis>
     </div>
-    <div class="mx-auto">
-      <a
-        :title="result.title"
-        :target="targetUrl"
-        :href="applicationUrl"
-        class="headline">
-        {{ result.title }}
-      </a>
-    </div>
-    <div
-      :title="result.description"
-      class="mx-auto text-sub-title pt-2 pb-4">
-      {{ result.description }}
+    <div>
+      <exo-document
+        ref="documentDetail"
+        :document="result"
+        hide-time
+        class="light-grey-background flex-grow-0 border-top-color py-0 px-1" />
     </div>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: 'ApplicationSearchCard',
   props: {
     term: {
       type: String,
@@ -37,18 +28,6 @@ export default {
     result: {
       type: Object,
       default: null,
-    },
-  },
-  computed: {
-    imageUrl() {
-      return `${eXo.env.portal.context}/${eXo.env.portal.rest}/app-center/applications/illustration/${this.result.id}`;
-    },
-    applicationUrl() {
-      const computedUrl = this.result.url.replace(/^\.\//, `${eXo.env.portal.context}/${eXo.env.portal.portalName}/`);
-      return computedUrl.replace('@user@', eXo.env.portal.userName);
-    },
-    targetUrl() {
-      return this.applicationUrl.indexOf('/') === 0 ? '_self' : '_blank';
     },
   },
 };

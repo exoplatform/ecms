@@ -17,8 +17,10 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import org.apache.commons.lang.LocaleUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.util.ListHashMap;
+
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.ElasticSearchServiceConnector;
@@ -42,7 +44,9 @@ import org.json.simple.JSONObject;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -54,6 +58,8 @@ import java.util.stream.Collectors;
  * Search connector for files
  */
 public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
+
+  private static final String CHARSET_UTF_8 = "UTF-8";
 
   private static final Log LOG = ExoLogger.getLogger(FileSearchServiceConnector.class.getName());
 
@@ -137,7 +143,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
     String formattedFileSize = getFormattedFileSize(fileSize);
     EcmsSearchResult ecmsSearchResult = new EcmsSearchResult(getUrl(nodePath),
-            searchResult.getTitle(),
+            decode(searchResult.getTitle()),
             searchResult.getDate(),
             searchResult.getRelevancy(),
             fileType,
@@ -150,6 +156,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             drive,
             lastEditor);
 
+    ecmsSearchResult.setExcerpts(searchResult.getExcerpts());
     ecmsSearchResult.setTags(tags);
     ecmsSearchResult.setImageUrl(getImageUrl(workspace, nodePath));
     ecmsSearchResult.setPreviewUrl(getPreviewUrl(jsonHit, searchContext, downloadUrl));
@@ -166,6 +173,15 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       ecmsSearchResult.setUrl(downloadUrl.toString());
     }
     return ecmsSearchResult;
+  }
+
+  private String decode(String message) {
+    try {
+      return URLDecoder.decode(message, CHARSET_UTF_8);
+    } catch (Exception e) {
+      LOG.warn("Error decoding message: {}. return it as it is.", message, e);
+      return message;
+    }
   }
 
   private String getDownloadUrl(String workspace, String nodePath) {

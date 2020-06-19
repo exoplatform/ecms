@@ -6,14 +6,20 @@
       </v-icon>
     </v-list-item-icon>
     <v-list-item-content>
-      <v-list-item-title :title="decoder(document.title)" v-html="document.title"/>
-      <v-list-item-subtitle>
-        <div :title="absoluteDateModified()" class="color-title">
-          {{ relativeDateModified }}
-          <v-icon color="#a8b3c5">
-            mdi-menu-right
-          </v-icon>
-          {{ document.drive }}
+      <v-list-item-title :title="document.title">
+        {{ document.title }}
+      </v-list-item-title>
+      <v-list-item-subtitle v-if="!hideTime || !hideDrive">
+        <div class="color-title">
+          <span v-if="!hideTime" :title="absoluteDateModified()">
+            {{ relativeDateModified }}
+            <v-icon color="#a8b3c5">
+              mdi-menu-right
+            </v-icon>
+          </span>
+          <span v-if="!hideDrive" :title="document.drive">
+            {{ document.drive }}
+          </span>
         </div>
       </v-list-item-subtitle>
     </v-list-item-content>
@@ -25,7 +31,15 @@
       document: {
         type: Object,
         default: () => null,
-      }
+      },
+      hideTime: {
+        type: Boolean,
+        default: false,
+      },
+      hideDrive: {
+        type: Boolean,
+        default: false,
+      },
     },
     computed: {
       documentIcon() {
@@ -89,11 +103,6 @@
       },
       fileInfo() {
         return `${this.$t("documents.preview.updatedOn")} ${this.absoluteDateModified()} ${this.$t("documents.preview.updatedBy")} ${this.document.lastEditor} ${this.document.size}`;
-      },
-      decoder(str) {
-        const text = document.createElement('textarea');
-        text.innerHTML = str;
-        return text.value;
       },
       openPreview() {
         documentPreview.init({
