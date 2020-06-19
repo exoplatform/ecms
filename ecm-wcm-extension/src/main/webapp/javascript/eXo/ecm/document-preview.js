@@ -1072,7 +1072,8 @@
         this.show();
       }
 
-      docContentContainer.load('/rest/private/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + '/' + this.settings.doc.id, function() {
+      docContentContainer.load('portal/rest/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc
+      .workspace + '/' + this.settings.doc.id, function() {
         $('.loading', docContentContainer).hide();
         resizeEventHandler();
       });
