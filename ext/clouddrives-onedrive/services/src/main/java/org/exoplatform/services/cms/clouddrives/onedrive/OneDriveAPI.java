@@ -306,11 +306,16 @@ public class OneDriveAPI {
         if (oneDriveTokenResponse.getToken() != null && !oneDriveTokenResponse.getToken().isEmpty()) {
           return oneDriveTokenResponse;
         } else {
-          LOG.error("Cannot read access token for clientId: {}, token: {}, refresh token: {}, scope: {}",
-                   clientId,
-                   oneDriveTokenResponse.getToken(),
-                   oneDriveTokenResponse.getRefreshToken(),
-                   oneDriveTokenResponse.getScope());
+          LOG.error("Cannot read access token for clientId: {}, token: {}, refresh token: {}, scope: {}," +
+                          " redirect uri: {}, code: {}, grant type: {}, response body: {}",
+                    clientId,
+                    oneDriveTokenResponse.getToken(),
+                    oneDriveTokenResponse.getRefreshToken(),
+                    oneDriveTokenResponse.getScope(),
+                    redirectUrl,
+                    code,
+                    grantType,
+                    responseBody);
         }
       }
     } else {
