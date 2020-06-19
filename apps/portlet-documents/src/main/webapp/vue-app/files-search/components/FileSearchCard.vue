@@ -5,8 +5,7 @@
         :title="result.excerpt"
         :data="result.excerpt"
         :line-clamp="5"
-        end-char="...">
-      </ellipsis>
+        end-char="..."/>
     </div>
     <div>
       <exo-document
