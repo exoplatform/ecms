@@ -1072,7 +1072,7 @@
         this.show();
       }
 
-      docContentContainer.load('portal/rest/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc
+      docContentContainer.load('/portal/rest/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc
       .workspace + '/' + this.settings.doc.id, function() {
         $('.loading', docContentContainer).hide();
         resizeEventHandler();
