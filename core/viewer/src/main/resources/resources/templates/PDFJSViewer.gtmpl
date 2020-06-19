@@ -32,7 +32,7 @@ if (uiParent != null) {
   def title = org.exoplatform.ecm.webui.utils.Utils.getTitle(currentNode);
   def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
   def viewLink = downloadLink;
-  if(!mimeType.toLowerCase().contains("pdf")) {
+  if(mimeType.toLowerCase().contains("pdf")) {
     viewLink = Utils.getPDFViewerLink(originalNode);
   }
 
