@@ -95,6 +95,7 @@ public class Utils {
   private static int    MAX_SUMMARY_LINES_COUNT    = 4;
   private static int    MAX_SUMMARY_CHAR_COUNT     = 430;
   private static String activityType;
+  private static final String RESOURCE_BUNDLE_KEY_CREATED_BY = "SocialIntegration.messages.createdBy";
 
 
   public static String getActivityType() {
@@ -430,6 +431,9 @@ public class Utils {
     if (isSkipRaiseAct != null && Boolean.valueOf(isSkipRaiseAct.toString())) {
       return null;
     }
+    if (RESOURCE_BUNDLE_KEY_CREATED_BY.equals(activityMsgBundleKey)  && !isSystemComment) {
+      return null;
+    }
     ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
     activityType = StringUtils.isNotEmpty(activityType) ? activityType : FILE_SPACES;
     if(! activityManager.isActivityTypeEnabled(activityType)) {
@@ -536,6 +540,7 @@ public class Utils {
         }
         if (exa != null && !commentFlag && isSystemComment) {
           activity.setId(null);
+          updateNotifyMessages(activity, activity.getTemplateParams().get(ContentUIActivity.MESSAGE), activity.getTemplateParams().get(ContentUIActivity.SYSTEM_COMMENT));
           activityManager.saveComment(exa, activity);
           if (activityCommonService.isEditing(node)) {
             commentID = activity.getId();

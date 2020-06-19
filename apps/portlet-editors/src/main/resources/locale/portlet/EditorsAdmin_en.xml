@@ -51,5 +51,8 @@
         <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
+    <buttons>
+      <EditorButton>Edit</EditorButton>
+    </buttons>
   </editors>
 </bundle>

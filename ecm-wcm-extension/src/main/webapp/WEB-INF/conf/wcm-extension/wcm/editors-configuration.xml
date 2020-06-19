@@ -207,6 +207,9 @@
                   <string>/dw/drives.*</string>
                 </value>
                 <value>
+                  <string>/dw/documents.*</string>
+                </value>
+                <value>
                   <string>/g/.*/documents.*</string>
                 </value>
                 <value>
