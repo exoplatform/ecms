@@ -115,8 +115,8 @@
                   <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
                     <i 
                       v-show="!drivesInProgress[driver.title]"
-                      :class="driver.driveTypeCSSClass"
-                      class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
+                      :class="driver.isCloudDrive ? driver.driveTypeCSSClass : `uiIconEcms24x24DriveGroup ${driver.driveTypeCSSClass}`"
+                      class="uiIconEcmsLightGray selectionIcon center"></i>
                     <div class="text-center ma-12 connectingDrive">
                       <v-progress-circular
                         v-show="drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100"
@@ -552,7 +552,7 @@ export default {
             const name = fetchedDrivers[j].getAttribute('name');
             const isCloudDrive = fetchedDrivers[j].getAttribute('isCloudDrive') === 'true' ? true : false;
             const driveTypeCSSClass = isCloudDrive 
-              ? `uiIconEcms24x24Drive-${fetchedDrivers[j].getAttribute('cloudProvider')}`
+              ? `uiIconEcmsDrive-${fetchedDrivers[j].getAttribute('cloudProvider')}`
               : `${name.replace(/\s/g, '')} ${driverTypeClass}`;
             this.drivers.push({
               name: name,
