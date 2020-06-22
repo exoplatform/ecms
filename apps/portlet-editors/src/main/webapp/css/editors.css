@@ -48,8 +48,10 @@
   background: none;
 }
 
-.editorButtonContainer .dropdown-container .dropdown-toggle,
-.editorButtonContainer .dropdown-container .dropdown-toggle:hover i {
+.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle,
+.previewBtn .editorButtonContainer .dropdown-container .dropdown-toggle:hover i,
+#UIActionBar .editorButtonContainer .dropdown-container .dropdown-toggle,
+#UIActionBar .editorButtonContainer .dropdown-container .dropdown-toggle:hover i {
   background: none;
   color: white;
 }
@@ -80,7 +82,7 @@
 .detailContainer .editorButtonContainer {
   display: inline;
   border: 1px solid gray;
-  padding: 12px;
+  padding: 12px 20px;
   border: 1px solid #e1e8ee;
   border-radius: 2px;
   position: relative;
@@ -95,9 +97,6 @@
 .detailContainer .editorButtonContainer button,
 .detailContainer .editorButtonContainer .dropdown-menu a {
  margin: 0 !important;
-}
-.detailContainer .editorButtonContainer button i {
- margin: 3px !important;
 }
 
 .previewBtn .editorButtonContainer .dropdown-container .dropdown-menu {
@@ -148,16 +147,62 @@
   background: none;
 }
 
-.editorButtonContainer > li.hidden-tabletL {
+#UIActionBar .editorButtonContainer > li.hidden-tabletL,
+.previewBtn  .editorButtonContainer > li.hidden-tabletL{
   display: block;
   margin: 2px 3px;
   font-size: 1.1em;
 }
-.editorButtonContainer > li.hidden-tabletL .editorLabel {
+#UIActionBar .editorButtonContainer > li.hidden-tabletL .editorLabel,
+.previewBtn .editorButtonContainer > li.hidden-tabletL .editorLabel {
   color: white;
   margin: 0 3px;
 }
 
-.actionBar .disabledProvider a:hover {
-  color: #999999 !important;
+.editors-placeholder .editorButtonContainer {
+  background: #ffffff;
+}
+
+.editors-placeholder .editorButtonContainer .dropdown-toggle:focus,
+.editors-placeholder .editorButtonContainer .dropdown-toggle:active {
+  box-shadow: none;
+  background: none;
+}
+
+/* The Modal (background) */
+#editorIdleModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+#editorIdleModalContent {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 45%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+#editorIdleModalClose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#editorIdleModalClose:hover,
+#editorIdleModalClose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
