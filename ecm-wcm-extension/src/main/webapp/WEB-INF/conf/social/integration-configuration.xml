@@ -76,7 +76,7 @@
               <string>file</string>
             </field>
             <field name="uri">
-              <string><![CDATA[/portal/rest/search/documents/recent?limit={limit}&q={keyword}]]></string>
+              <string><![CDATA[/portal/rest/search/documents/recent?limit={limit}&q={keyword}&sort=relevancy]]></string>
             </field>
             <field name="enabled">
               <boolean>${exo.search.file.enabled:true}</boolean>

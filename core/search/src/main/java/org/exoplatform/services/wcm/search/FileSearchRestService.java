@@ -11,6 +11,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.ElasticSearchFilter;
 import org.exoplatform.commons.search.es.ElasticSearchFilterType;
@@ -52,15 +54,23 @@ public class FileSearchRestService implements ResourceContainer {
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Request fulfilled") })
   public Response searchRecentDocuments(@ApiParam(value = "Query string", required = false) @QueryParam("q") String query,
+                                        @ApiParam(value = "Sort field", required = false, defaultValue = "date") @QueryParam("sort") String sortField,
+                                        @ApiParam(value = "Sort direction", required = false, defaultValue = "desc") @QueryParam("direction") String sortDirection,
                                         @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
-    List<ElasticSearchFilter> recentFilters = new ArrayList<ElasticSearchFilter>();
+    if (StringUtils.isBlank(sortField)) {
+      sortField = "date";
+    }
+    if (StringUtils.isBlank(sortDirection)) {
+      sortDirection = "desc";
+    }
+    List<ElasticSearchFilter> recentFilters = new ArrayList<>();
     recentFilters.add(getRecentFilter());
     recentFilters.add(getFileTypesFilter());
     recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
-    Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null, query, recentFilters, null, 0, limit, "date", "desc");
+    Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null, query, recentFilters, null, 0, limit, sortField, sortDirection);
     return Response.ok(recentDocuments).build();
   }
   
