@@ -111,7 +111,7 @@
                   :key="driver.name" 
                   :title="driver.title" 
                   class="folderSelection"
-                  @click="openDrive(driver)">
+                  @click="openDrive(driver, name)">
                   <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
                     <i 
                       v-show="!drivesInProgress[driver.title]"
@@ -270,7 +270,8 @@ export default {
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
       drivesInProgress: {},
-      privateDestinationForFile: false
+      privateDestinationForFile: false,
+      fromSpace: {}
     };
   },
   computed: {
@@ -391,10 +392,11 @@ export default {
       this.folderDestinationForFile = folder.title;
       this.privateDestinationForFile = folder.isPublic;
     },
-    openDrive(drive) {
+    openDrive(drive, group) {
       this.currentAbsolutePath = '';
       this.foldersHistory = [];
       this.resetExplorer();
+      this.fromSpace = group === 'My Spaces' ? { title: drive.title, name: drive.name } : {};
       this.currentDrive = {
         name: drive.name,
         title: drive.title,
@@ -456,7 +458,7 @@ export default {
       if (document.getElementById(file.idAttribute).className === 'fileSelection' && this.filesCountLeft > 0) {
         document.getElementById(file.idAttribute).className = 'fileSelection selected';
         if (!this.selectedFiles.find(f => f.id === file.id)) {
-          this.selectedFiles.push(file);
+          this.selectedFiles.push({ ...file, space: this.fromSpace });
         }
       } else {
         document.getElementById(file.idAttribute).className = 'fileSelection';

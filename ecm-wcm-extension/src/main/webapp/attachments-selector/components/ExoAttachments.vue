@@ -13,8 +13,18 @@
         <v-progress-linear :active="cloudDriveConnecting" absolute bottom indeterminate></v-progress-linear>
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
-        <div v-show="!showDocumentSelector && privateFilesAttached && isActivityStream" class="alert alert-info attachmentsAlert">
-          <span>{{ $t('attachments.alert.personalFiles') }}</span>
+        <div
+          v-show="
+            !showDocumentSelector && ((privateFilesAttached && isActivityStream) ||
+            (!isActivityStream && fromAnotherSpaces.length > 0))
+          "
+          class="alert alert-info attachmentsAlert">
+          <span>
+            {{ $t(`attachments.alert.${!isActivityStream ? 'fromSpace' : 'personalFiles'}`) }}
+            <b v-for="file in fromAnotherSpaces" v-show="!isActivityStream && fromAnotherSpaces.length > 0" :key="file.id">
+              {{ file.space.title }}
+            </b>.
+          </span>
           <span>{{ $t('attachments.alert.everyoneAvailable') }}</span>
         </div>
         <div v-show="!showDocumentSelector" class="attachmentsContent">
@@ -209,7 +219,9 @@ export default {
       displayMessageDestinationFolder: true,
       cloudDriveConnecting: false,
       privateFilesAttached: false,
-      isActivityStream: true
+      isActivityStream: true,
+      fromAnotherSpaces: [],
+      spaceGroupId: ''
     };
   },
   watch: {
@@ -248,6 +260,7 @@ export default {
           }
         }
         this.privateFilesAttached = this.value.some(file => file.isPublic === false);
+        this.fromAnotherSpaces = this.value.filter(({ space }) => space && space.name !== this.groupId);
       }
     }
   },
@@ -488,6 +501,7 @@ export default {
           this.schemaFolder.push('Activity Stream Documents');
           this.showDestinationPath=true;
           this.isActivityStream = false;
+          this.spaceGroupId = space.groupId;
         });
       }else {
         this.schemaFolder.push(eXo.env.portal.userName);
