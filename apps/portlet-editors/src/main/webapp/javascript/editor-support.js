@@ -64,14 +64,23 @@
     var configLoader = $.Deferred();
     var initLoader;
     var idleTimer;
+    var closeInterval;
+    var $idleModal;
 
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
     const REFRESH_STATUS = "REFRESH_STATUS";
     const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
-    // 1 minute only for testing purposes, should be about 30 minutes for prod mode
-    const IDLE_TIMEOUT = 60000;
+    // 30 minutes 
+    const IDLE_TIMEOUT = 1800000;
+    
+    var messages = {}; // should be initialized by initConfig
+
+    var message = function(key) {
+      var m = messages[key];
+      return m ? m : key;
+    };
 
     /**
      * Parses comet message from JSON
@@ -166,7 +175,8 @@
       }
       log("Initializing editor support module");
       initLoader = $.Deferred();
-      configLoader.done(function(user, cometdConf) {
+      configLoader.done(function(user, cometdConf, i18n) {
+        messages = i18n;
         cCometD.configure({
           "url": prefixUrl + cometdConf.path,
           "exoId": user,
@@ -184,42 +194,67 @@
       });
     };
 
+    /**
+     * Shows close popup (idle) 
+     */
     var showClosePopup = function() {
       console.log("Time to show closing popup");
-      var $modal = $('#editorIdleModal');
-      if ($modal.length == 0) {
-        $modal = $("<div id='editorIdleModal'><div id='editorIdleModalContent'> <span id='editorIdleModalClose'>&times;</span> <p>Time to close editor..</p> </div> </div>");
-        $("body").prepend($modal);
-        $("#editorIdleModalClose").on("click", function() {
-          $modal.css("display", "none");
-        });
+      $idleModal = $('#editorIdleModal');
+      var title = message("idle.title");
+      var text = message("idle.message");
+      text = text.replace(/%s/g, "<span id='closeCountdown'></span>");
+      if ($idleModal.length == 0) {
+        $idleModal = $("<div id='editorIdleModal'><div id='editorIdleModalContent'> <span id='editorIdleModalClose'>&times;</span> <h3>" + title + "</h3> <p>" + text + "</p> </div> </div>");
+        $("body").prepend($idleModal);
       }
       $("body").blur();
-      $modal.css("display", "block");
-
+      $idleModal.css("display", "block");
+      var countdown = 30;
+      var $closeCountdown = $("#closeCountdown");
+      $closeCountdown.html(countdown);
+      closeInterval = setInterval(function() {
+        countdown--;
+        $closeCountdown.html(countdown);
+        if (countdown == 0) {
+          window.close();
+        }
+      }, 1000);
+      $("#editorIdleModalClose").on("click", function() {
+        $idleModal.css("display", "none");
+        clearInterval(closeInterval);
+        notifyActive();
+      });
       window.onclick = function(event) {
-        if (event.target == $modal.get(0)) {
-          console.log("WINDOW EVENT");
-          $modal.css("display", "none");
+        if (event.target == $idleModal.get(0)) {
+          $idleModal.css("display", "none");
+          clearInterval(closeInterval);
+          notifyActive();
         }
       }
     }
 
-    var notifyEdit = function() {
+    /**
+     * Notifies that the editor is active.
+     */
+    var notifyActive = function() {
       console.log("Editor is active...");
       clearTimeout(idleTimer);
       idleTimer = setTimeout(showClosePopup, IDLE_TIMEOUT);
+      clearInterval(closeInterval);
+      if ($idleModal) {
+        $idleModal.css("display", "none");
+      }
     }
 
-    this.notifyEdit = notifyEdit;
+    this.notifyActive = notifyActive;
 
     this.init = init;
 
     /**
      * Inits configuration
      */
-    this.initConfig = function(user, conf) {
-      configLoader.resolve(user, conf);
+    this.initConfig = function(user, conf, i18n) {
+      configLoader.resolve(user, conf, i18n);
     };
 
     /**
@@ -311,7 +346,7 @@
         });
 
       });
-      notifyEdit();
+      notifyActive();
       return $loader.promise();
     };
   }
