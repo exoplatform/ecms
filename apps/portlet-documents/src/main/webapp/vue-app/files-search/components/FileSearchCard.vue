@@ -4,7 +4,7 @@
       <div
         ref="excerptNode"
         :title="excerptText"
-        class="text-wrap text-break">
+        class="text-wrap text-break caption">
       </div>
     </div>
     <div>
