@@ -1,6 +1,6 @@
 <template>
   <v-card class="searchFileCard d-flex flex-column" outlined>
-    <div class="mx-auto flex-grow-1 clickable pa-4" @click="$refs.documentDetail.$el.click()">
+    <div class="mx-auto flex-grow-1 clickable px-3 pt-3" @click="$refs.documentDetail.$el.click()">
       <div
         ref="excerptNode"
         :title="excerptText"
@@ -18,8 +18,6 @@
 </template>
 
 <script>
-const MAX_EXCERPT_CHARS_LENGTH = 130;
-
 export default {
   props: {
     term: {
@@ -31,7 +29,14 @@ export default {
       default: null,
     },
   },
+  data: () => ({
+    excerptLines: 6,
+    lineHeight: 22,
+  }),
   computed: {
+    maxEllipsisHeight() {
+      return this.lineHeight * this.excerptLines;
+    },
     excerpts() {
       return this.result && this.result.excerpts;
     },
@@ -42,13 +47,13 @@ export default {
       return this.excerpts && this.excerpts['name'] && window.decodeURIComponent(this.excerpts['name'][0]);
     },
     excerptContent() {
-      return this.excerpts && this.excerpts['attachment.content'] && this.excerpts['attachment.content'].join('<br />');
+      return this.excerpts && this.excerpts['attachment.content'] && this.excerpts['attachment.content'].join('<br />...');
     },
     excerptHtml() {
       let excerpt = this.excerptTitle || this.excerptName || '';
       if (this.excerptContent) {
         if (excerpt) {
-          excerpt = `<br />${this.excerptContent}`;
+          excerpt = `<p class="center">${excerpt}</p>${this.excerptContent}`;
         } else {
           excerpt = this.excerptContent;
         }
@@ -73,19 +78,15 @@ export default {
       }
       stNode.innerHTML = this.excerptHtml;
 
-      const lineClamp = 5;
-      const stNodeLineHeight =  22;
-      const maxHeight = stNodeLineHeight * lineClamp;
-
-      let stNodeHeight = stNode.getBoundingClientRect().height || stNodeLineHeight;
-      if (stNodeHeight > maxHeight) {
-        while (stNodeHeight > maxHeight) {
-          const newHtml = this.deleteLastChars(stNode.innerHTML, 10);
+      let stNodeHeight = stNode.getBoundingClientRect().height || this.lineHeight;
+      if (stNodeHeight > this.maxEllipsisHeight) {
+        while (stNodeHeight > this.maxEllipsisHeight) {
+          const newHtml = this.deleteLastChars(stNode.innerHTML.replace(/&[a-z]*;/, ''), 10);
           if (newHtml.length === stNode.innerHTML.length) {
             break;
           }
           stNode.innerHTML = newHtml;
-          stNodeHeight = stNode.getBoundingClientRect().height || stNodeLineHeight;
+          stNodeHeight = stNode.getBoundingClientRect().height || this.lineHeight;
         }
 
         stNode.innerHTML = this.deleteLastChars(stNode.innerHTML, 4);
@@ -97,14 +98,16 @@ export default {
         // Replace empty tags
         html = html.replace(/<[a-zA-Z 0-9 "'=]*><\/[a-zA-Z 0-9]*>$/g, '');
       }
+      html = html.replace(/<br>(\.*)$/g, '');
 
       charsToDelete = charsToDelete || 1;
 
       let newHtml = '';
       if (html.slice(-1) === '>') {
         // Delete last inner html char
+        html = html.replace(/(<br>)*$/g, '');
         newHtml = html.replace(new RegExp(`([^>]{${charsToDelete}})(</)([a-zA-Z 0-9]*)(>)$`), '$2$3');
-        newHtml = $('<div />').html(newHtml).html();
+        newHtml = $('<div />').html(newHtml).html().replace(/&[a-z]*;/, '');
         if (newHtml.length === html.length) {
           newHtml = html.replace(new RegExp(`([^>]*)(</)([a-zA-Z 0-9]*)(>)$`), '$2$3');
         }
