@@ -122,12 +122,12 @@
                         v-show="drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100"
                         :indeterminate="false"
                         :rotate="0"
-                        :size="32"
+                        :size="40"
                         :value="drivesInProgress[driver.title]"
                         :width="4"
                         color="var(--allPagesPrimaryColor, #578dc9)"
                         class="connectingDriveProgress"
-                      >{{ drivesInProgress[driver.title] }}</v-progress-circular>
+                      >{{ drivesInProgress[driver.title] }}<span class="connectingDriveProgressPercent">%</span></v-progress-circular>
                     </div>
                     <div 
                       :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
