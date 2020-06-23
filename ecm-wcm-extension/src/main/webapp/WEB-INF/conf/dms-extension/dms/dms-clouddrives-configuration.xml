@@ -399,6 +399,26 @@
           </object>
         </object-param>
         <object-param>
+          <name>MoveNode</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type">
+              <string>org.exoplatform.ecm.dms.UIWorkingArea</string>
+            </field>
+            <field name="rank">
+              <int>13</int>
+            </field>
+            <field name="name">
+              <string>MoveNode</string>
+            </field>
+            <field name="category">
+              <string>JCRMoveAction</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.services.cms.clouddrives.webui.action.CloudDriveMoveNodeManageComponent</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
           <name>Paste</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
             <field name="type">
