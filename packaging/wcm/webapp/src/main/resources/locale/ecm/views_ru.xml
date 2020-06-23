@@ -55,6 +55,7 @@
         <pdf-max-page>Предварительный просмотр недоступен для содержимого с более чем {0} страниц.</pdf-max-page>
         <using-webDAV>или открыть в MS Office</using-webDAV>
         <open-on-desktop>Открыть на рабочем столе</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Открыть в Документах</open-in-documents>
         <open-in-documents-tooltip>Открыть этот файл в приложении Документы</open-in-documents-tooltip>
         <file-size-too-big>Слишком большой размер содержимого этой страницы. Вам необходимо скачать и открыть в клиенте.</file-size-too-big>

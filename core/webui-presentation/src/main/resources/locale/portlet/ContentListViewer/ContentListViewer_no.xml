@@ -23,6 +23,7 @@
       <Title>Innholdslistens innstillinger</Title>
       <ContentSelectionBlock>Innholdsvalg</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modus</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Mappe sti</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Mappe sti</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Sortert etter</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>To modus tilbys for å vise innhold. "Mapper" vil vise alt innhold som er tilgjengelig i din valgte mappe/kategori. "Innhold" lar deg manuelt velge innholdet som skal vises.</ModeSelectionHelp>
       <FolderPathHelp>Velg innholdet du vil vise. Standardvalget vil bli erstattet dynamisk hvis du aktiverer alternativet Dynamisk navigasjon (se Avansert modus nedenfor).</FolderPathHelp>
       <HeaderOptionHelp>Vis en toppbanner på toppen av innholdslisten. Hvis du aktiverer alternativet Automatisk gjenkjenning, vil den prøve å finne toppbanneret basert på gjeldende valg.</HeaderOptionHelp>

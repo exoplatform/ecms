@@ -23,6 +23,7 @@
       <Title>Preferencias del Listado de Contenido</Title>
       <ContentSelectionBlock>Selección de contenido</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modo</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Ruta de la carpeta</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Ruta de la carpeta</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordenar por</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Compartir contenido entre usuarios</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Hay dos modos disponibles para mostrar contenido. "Por carpeta" tomará todo el contenido disponible en tu carpeta/categoría seleccionada. "Por contenido" le permite seleccionar manualmente el contenido que desee mostrar.</ModeSelectionHelp>
       <FolderPathHelp>Seleccione el contenido que desee mostrar. La selección por defecto será reemplazada dinámicamente si activa la opción de navegación dinámica (Ver el modo avanzado más abajo).</FolderPathHelp>
       <HeaderOptionHelp>Mostrar un encabezado arriba de la lista de contenido. Si activa la opción de detección automática, intentará encontrar el encabezado basado en la selección actual.</HeaderOptionHelp>

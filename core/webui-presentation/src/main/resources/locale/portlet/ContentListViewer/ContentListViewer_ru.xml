@@ -23,6 +23,7 @@
       <Title>Настройки содержания</Title>
       <ContentSelectionBlock>Выбор контента</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Режим</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Путь к папке</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Путь к папке</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Сортировать по</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Для отображения содержимого доступны два режима. "По папке" будет принимать все материалы, доступные в выбранной папке/категории. "По содержимому" позволяет вручную выбрать содержимое, которое вы хотите показать.</ModeSelectionHelp>
       <FolderPathHelp>Выберите контент, который вы хотите показать. Выбор по умолчанию будет заменен в динамическом режиме при активации опции Динамическая Навигация (см. Режим расширенных настроек ниже).</FolderPathHelp>
       <HeaderOptionHelp>Показать заголовок наверху списка содержимого. Если вы активируете опцию автоматического обнаружения, она будет пытаться найти заголовок на основе текущего выделения.</HeaderOptionHelp>

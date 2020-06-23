@@ -23,6 +23,7 @@
       <Title>內容清單偏好設定</Title>
       <ContentSelectionBlock>選擇內容</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>模式</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>資料夾路徑</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>資料夾路徑</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>按順序</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>使用者之間共享內容</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>兩種模式可顯示內容。"按資料夾"將您所選的資料夾類別中可用的所有內容。"按內容"允許您手動選擇你想要顯示的內容。</ModeSelectionHelp>
       <FolderPathHelp>請選擇您想要顯示的內容。如果您啟動動態導航選項，將動態替換此預設內容 （請參閱下面的進階選項）。</FolderPathHelp>
       <HeaderOptionHelp>顯示在內容清單上的標題。如果您啟動自動檢測選項，它將嘗試找尋基於當前選定內容的標題。</HeaderOptionHelp>

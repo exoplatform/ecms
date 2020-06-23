@@ -23,6 +23,7 @@
       <Title>Paramètres</Title>
       <ContentSelectionBlock>Contenus</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Chemin du Dossier</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Affichage</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Classement par</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Partager les contenus entre les utilisateurs</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>"Dossier" affiche de tous les contenus présents dans le dossier (ou catégorie) sélectionné ; "Manuel" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
       <FolderPathHelp>Sélectionnez les contenus que vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique dans les Paramètres Avancés.</FolderPathHelp>
       <HeaderOptionHelp>Afficher un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>

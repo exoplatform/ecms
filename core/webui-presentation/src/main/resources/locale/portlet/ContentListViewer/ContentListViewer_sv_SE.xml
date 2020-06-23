@@ -23,6 +23,7 @@
       <Title>Inställningar för innehållslistan</Title>
       <ContentSelectionBlock>Val av innehåll</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Läge</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Sökväg</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Sökväg</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordna efter</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Dela innehåll mellan användare</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Det finns två lägen att visa innehåll. "Från mapp" visar allt innehåll i vald mapp/kategori. I "Från innehåll" väljs manuellt det innehåll som skall visas.</ModeSelectionHelp>
       <FolderPathHelp>Välj det innehåll som du vill visa. Standardvalet kommer att ersättas dynamiskt om du aktiverar alternativet dynamisk navigering (se Avancerat läge nedan).</FolderPathHelp>
       <HeaderOptionHelp>Visa rubrik på toppen av listan innehåll. Om du aktiverar alternativet Automatisk identifiering, försöker den hitta huvudet baserat på den aktuella markeringen.</HeaderOptionHelp>

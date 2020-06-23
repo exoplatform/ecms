@@ -213,7 +213,7 @@
       <empty-doctype>ドキュメント タイプを選択してください。</empty-doctype>
       <empty-startDate>"開始日"が必要です。</empty-startDate>
       <invalid-format>不正な日時フォーマットです '{0}'</invalid-format>
-      <invalid-date>"終了日は開始日より大きい必要があります"</invalid-date>
+      <invalid-date>終了日は開始日より大きい必要があります</invalid-date>
       <invalid-startDate>「開始日」は、本日より後でなければなりません</invalid-startDate>
       <invalid-nodeType>ノードタイプ "{0}" が不正です。確認してください</invalid-nodeType>
       <invalid-keyword>検索キーワードが無効です。文字列が認識されていません。</invalid-keyword>

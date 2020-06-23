@@ -55,6 +55,7 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>arba atidaryti su MS Office</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Šio failo turinys yra per didelis. Jums reikia atsisiųsti ir atidaryti kliento programoje.</file-size-too-big>

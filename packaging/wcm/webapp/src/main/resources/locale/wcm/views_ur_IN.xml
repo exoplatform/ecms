@@ -23,8 +23,8 @@
   <WebLink>
     <view>
       <label>
-        <url>یو آر ایل</url>
-        <description>تفصیل</description>
+        <url>URL</url>
+        <description>Description</description>
       </label>
     </view>
   </WebLink>
@@ -42,7 +42,7 @@
         <cancel>#{word.cancel}</cancel>
       </tooltip>
       <action>
-        <add-edit>اضافہ کریں/تدوین کریں</add-edit>
+        <add-edit>Add/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
     </view>
@@ -50,13 +50,13 @@
 
   <Category>
     <view>
-      <label>زمرہ</label>
+      <label>Category</label>
     </view>
   </Category>
 
   <Tag>
     <view>
-      <label>ٹیگ</label>
+      <label>Tag</label>
     </view>
   </Tag>
 </bundle>

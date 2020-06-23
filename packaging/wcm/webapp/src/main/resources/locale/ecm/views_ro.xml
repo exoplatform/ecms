@@ -55,6 +55,7 @@
         <pdf-max-page>Vizualizarea nu este disponibilă pentru conținut cu peste {0} pagini.</pdf-max-page>
         <using-webDAV>sau deschide în Office</using-webDAV>
         <open-on-desktop>Deschide pe Desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Deschide în Documente</open-in-documents>
         <open-in-documents-tooltip>Deschide acest fișier în aplicația de documente</open-in-documents-tooltip>
         <file-size-too-big>Conținutul acestui fișier este prea mare. Ar trebui să-l salvați și să-l deschideți pe calculator.</file-size-too-big>

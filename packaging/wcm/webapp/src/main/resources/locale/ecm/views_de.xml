@@ -55,6 +55,7 @@
         <pdf-max-page>Die Vorschau ist nicht für Inhalte mit über {0} Seiten.</pdf-max-page>
         <using-webDAV>oder in MS Office öffnen</using-webDAV>
         <open-on-desktop>Auf Desktop öffnen</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>In den Dokumenten öffnen</open-in-documents>
         <open-in-documents-tooltip>Öffnen Sie diese Datei in der Dokumente-Anwendung</open-in-documents-tooltip>
         <file-size-too-big>Der Inhalt dieser Datei ist zu groß. Sie sollten Sie herunterladen und im Client öffnen.</file-size-too-big>

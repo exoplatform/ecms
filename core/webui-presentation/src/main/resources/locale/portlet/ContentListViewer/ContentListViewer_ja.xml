@@ -23,6 +23,7 @@
       <Title>コンテンツリスト設定</Title>
       <ContentSelectionBlock>コンテンツ選択</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>モード</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>フォルダパス</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>フォルダパス</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>表示順</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>ユーザー間でコンテンツを共有</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>コンテンツの表示には2つのモードがあります。"By folder"は選んだフォルダ/カテゴリ内の全てのコンテンツを取得します。 "By Content"は表示したいコンテンツを手動で選択します。</ModeSelectionHelp>
       <FolderPathHelp>表示したいコンテンツを選択してください。ダイナミックナビゲーション（詳細モード。下記参照）を有効化すると、このデフォルト選択が動的に変化します。</FolderPathHelp>
       <HeaderOptionHelp>コンテンツリストの最上部にヘッダを表示。自動検知を有効化すると、現在の選択に基づき、ヘッダを見つけようとします。</HeaderOptionHelp>

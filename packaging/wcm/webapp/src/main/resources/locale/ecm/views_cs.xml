@@ -55,6 +55,7 @@
         <pdf-max-page>Náhled není dostupný pro obsah s více než {0} stránkami.</pdf-max-page>
         <using-webDAV>nebo otevřete v MS Office</using-webDAV>
         <open-on-desktop>Otevřít na ploše</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Otevřít v Dokumentech</open-in-documents>
         <open-in-documents-tooltip>Otevřít tento soubor v aplikaci Dokumenty</open-in-documents-tooltip>
         <file-size-too-big>Obsah tohoto souboru je příliš velký. Měli byste jej stáhnout a otevřít v klientovi.</file-size-too-big>

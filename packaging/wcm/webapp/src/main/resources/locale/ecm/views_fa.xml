@@ -55,6 +55,7 @@
         <pdf-max-page>پیش نمایش برای محتوای بالای {0} صفحه امکان پذیر نیست.</pdf-max-page>
         <using-webDAV>و یا باز کردن در مایکروسافت آفیس</using-webDAV>
         <open-on-desktop>باز کردن روی میز کار</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>اندازه این فایل بیش از حد بزرگ است. شما باید آنرا دانلود و در سیستم خود باز کنید.</file-size-too-big>

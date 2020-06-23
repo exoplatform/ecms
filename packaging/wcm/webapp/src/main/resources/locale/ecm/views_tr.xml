@@ -55,6 +55,7 @@
         <pdf-max-page>{0} sayfadan daha fazla olan içerikler için ön izleme bulunmamaktadır.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>
         <open-on-desktop>Masaüstü'nde Aç</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Belgeler'de Aç</open-in-documents>
         <open-in-documents-tooltip>Bu dosyayı Belgeler uygulamasında aç</open-in-documents-tooltip>
         <file-size-too-big>Bu içerik çok büyük. İçeriği indirip görüntüleyebilirsiniz.</file-size-too-big>

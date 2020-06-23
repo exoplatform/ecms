@@ -23,6 +23,7 @@
       <Title>Content List Preferences</Title>
       <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
       <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
       <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>

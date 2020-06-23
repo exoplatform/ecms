@@ -23,6 +23,7 @@
       <Title>نمط</Title>
       <ContentSelectionBlock>اختيار المحتوى</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>نمط</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>مسار المجلد</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>مسار المجلد</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>تصنيف بحسب</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>مشاركة المحتوى بين المستخدمين</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>هنالك طريقتان تُمكّنك من إظهار المحتوى. "بواسطة مجلد" ستتخذ كافة المحتويات المتوفرة في المجلد/الفئة المحددة الخاصة بك. "بواسطة المحتوى" تُتيح لك  تحديد المحتوى الذي تريد إظهاره بشكل يدوي .</ModeSelectionHelp>
       <FolderPathHelp>قم بتحديد المحتويات التي ترغب في إظهارها. سيتم ديناميكيّـا استبدال هذا الاختيار الافتراضي إذا قمت بتفعيل خدمة التصقّح الديناميكي ( نمط متطوّر، انظرأدناه).</FolderPathHelp>
       <HeaderOptionHelp>إظهار عنوان رأسي على رأس قائمة المحتويات. إذا قمت بتنشيط خيار "الكشف التلقائي"، فإنه سيحاول العثور على العنوان الرأسي استناداً إلى الخيار الحالي.</HeaderOptionHelp>
@@ -81,8 +83,8 @@
       <ContentsVisibilityHelp>"مقيّدة بتسجيل الدّخول" سيتم تصفية المحتوى استنادا إلى المصادقة. إذا لم تقم بتسجيل الدخول، سترى المحتوى العام فقط. إذا قمت بتسجيل الدخول،سترى كل المحتوى المرئي من قبل مستخدمي الإنترنت. "مقيدة بأدوار المستخدمين" سيتم تصفية المحتوى اعتمادا على صلاحيّاتك. في معظم الحالات، ينبغي عدم استخدام هذا الخيار، لأنه يقلل من الأداء العام.</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
       <delete>حذف</delete>
     </action>
     <msg>

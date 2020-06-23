@@ -213,7 +213,7 @@
       <empty-doctype>Παρακαλώ, επιλέξτε έναν τύπο εγγράφου</empty-doctype>
       <empty-startDate>Η ημερομηνία "Από" είναι απαραίτητη</empty-startDate>
       <invalid-format>Μη έγκυρη μορφή ημερομηνίας/ώρας στο πεδίο '{0}'.</invalid-format>
-      <invalid-date>"Η τελική ημερομηνία πρέπει να είναι μεταγενέστερη της αρχικής"</invalid-date>
+      <invalid-date>Η τελική ημερομηνία πρέπει να είναι μεταγενέστερη της αρχικής</invalid-date>
       <invalid-startDate>Η ημερομηνία "Από" δεν μπορεί να είναι μεταγενέστερη της σημερινής</invalid-startDate>
       <invalid-nodeType>Ο τύπος κόμβου "{0}" δεν είναι έγκυρος. Ελέγξτε και πάλι.</invalid-nodeType>
       <invalid-keyword>Η λέξη-κλειδί δεν είναι έγκυρη. Ορισμένοι χαρακτήρες δεν υποστηρίζονται.</invalid-keyword>

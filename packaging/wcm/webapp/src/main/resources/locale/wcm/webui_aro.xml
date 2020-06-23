@@ -38,8 +38,8 @@
       <SharedSite>المواقع المشتركة</SharedSite>
       <PersonalDocuments>المستندات الشخصية</PersonalDocuments>
       <UserDocuments>المستندات {0}</UserDocuments>
-      <Collaboration>Collaboration</Collaboration>
-      <Trash>Trash</Trash>
+      <Collaboration>تعاون</Collaboration>
+      <Trash>سلّة المهملات</Trash>
     </label>
   </Drives>
 
@@ -110,7 +110,7 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>تصنيف  بحسب</FilterBy>
+      <FilterBy>تصنيف بحسب</FilterBy>
       <WebContent>محتوى الواب</WebContent>
       <DMSDocument>وثائق</DMSDocument>
       <Media>وسائل الاعلام</Media>
@@ -259,7 +259,7 @@
     </header>
     <title>
       <Select>اختيار</Select>
-      <View>عرض</View>
+      <View>رأي</View>
     </title>
     <msg>
     <template-not-support>لا يمكن معاينة هذا المحتوى. القالب غير معتمد</template-not-support>
@@ -368,7 +368,7 @@
       <SingleContentViewer>العارض الموحّد للمحتوى</SingleContentViewer>
       <ContentListViewer>عارض قائمة المحتويات</ContentListViewer>
       <Search>البحث</Search>
-      <Sitemap>خريطة الموقع</Sitemap>
+      <Sitemap>خريطه الموقع</Sitemap>
       <TwoColumnsLayout>تخطيط ذو عمودين</TwoColumnsLayout>
       <ThreeColumnsLayout>تخطيط ذو ثلاثة أعمدة</ThreeColumnsLayout>
       <TwoRowsLayout>تخطيط ذو سطرين</TwoRowsLayout>

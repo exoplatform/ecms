@@ -55,6 +55,7 @@
         <pdf-max-page>العرض المُسبق غير متوفّر لكلّ محتوى عدد صفحاته يفوق الـ {0} صفحة.</pdf-max-page>
         <using-webDAV>أو فتحه بواسطة مايكروسوفت أوفيس</using-webDAV>
         <open-on-desktop>فتح الملفّ على سطح المكتب</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>فتح في خدمة المستندات</open-in-documents>
         <open-in-documents-tooltip>افتح هذا الملف في تطبيق المستندات</open-in-documents-tooltip>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>

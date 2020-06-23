@@ -55,6 +55,7 @@
         <pdf-max-page>Het afdrukvoorbeeld is niet beschikbaar voor inhoud met meer dan {0} pagina's.</pdf-max-page>
         <using-webDAV>of Open in MS Office</using-webDAV>
         <open-on-desktop>Open op bureau</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documenten</open-in-documents>
         <open-in-documents-tooltip>Open dit bestand in Documenten-app</open-in-documents-tooltip>
         <file-size-too-big>De inhoud van dit bestand is te groot. U moet downloaden en openen in de client.</file-size-too-big>

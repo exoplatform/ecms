@@ -23,6 +23,7 @@
       <Title>Ustawienia listy zawartości</Title>
       <ContentSelectionBlock>Wybór treści</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Tryb</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Ścieżka katalogu</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Ścieżka katalogu</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Grupuj według</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Istnieją dwa tryby pokazywania zawartości. "Przez katalog" pokaże całą zawartość wybranego przez Ciebie katalogu/kategorii. "Przez zawartość" pozwoli Ci ręcznie wybrać zawartość, która ma być pokazana.</ModeSelectionHelp>
       <FolderPathHelp>Wybierz zawartość, którą chcesz wyświetlić. Ustawieniem domyślnym zostaną zastąpione, jeśli zaznaczysz opcję dynamicznej nawigacji (patrz poniżej Tryb zaawansowany).</FolderPathHelp>
       <HeaderOptionHelp>Pokaż nagłówek na szczycie listy zawartości. Jeżeli zaznaczysz opcję automatycznego wykrywania, system będzie starał się znaleźć nagłówki, w oparciu o bieżące zaznaczenie.</HeaderOptionHelp>

@@ -7,10 +7,10 @@
   -->
   <UICommentForm>
     <label>
-      <name>نام</name>
-      <email>ای میل</email>
-      <website>ویب سائٹ</website>
-      <comment>تبصرہ</comment>
+      <name>Name</name>
+      <email>Email</email>
+      <website>Website</website>
+      <comment>Comment</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -29,19 +29,19 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>خراب</normal>
-      <good>اوسط سے نيچے</good>
-      <verygood>اوسط</verygood>
-      <excellent>اوسط سے اوپر</excellent>
-      <best>اچھا</best>
-      <no-value>اپهى کويى قدر نہیں</no-value>
+      <normal>Poor</normal>
+      <good>Below average</good>
+      <verygood>Average</verygood>
+      <excellent>Above average</excellent>
+      <best>Good</best>
+      <no-value>no value yet</no-value>
     </title>
     <label>
-      <my-rating>میری شرح کاری:</my-rating>
+      <my-rating>My Rating:</my-rating>
     </label>
     <button>
       <label>
-        <confirm>ٹھیک ہے</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -93,12 +93,12 @@
       <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
       <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>تازہ کریں</refesh>
+      <refesh>Refresh</refesh>
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
-      <more>مزید</more>
-      <backTo>پىچھے</backTo>
+      <more>More</more>
+      <backTo>Back</backTo>
     </label>
   </UIViewBar>
 
@@ -142,7 +142,7 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>ترجمہے</languages-list>
+      <languages-list>Translations</languages-list>
       <relation-list>Relations</relation-list>
       <references-list>References</references-list>
       <no-related-document>No Related Document</no-related-document>
@@ -165,7 +165,7 @@
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Sort order:</sortBy>
       <order>Order by:</order>
-      <nodesPerPage>اشیاءفی صفحہ:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -192,7 +192,7 @@
   <UIRenameForm>
     <title>Rename</title>
     <label>
-      <nameField>نام</nameField>
+      <nameField>Name</nameField>
       <titleField>Title</titleField>
     </label>
     <action>
@@ -217,9 +217,9 @@
       <UIRenameForm>Rename</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>مسل اپ لوڈ کریں</UIUploadManager>
+      <UIUploadManager>Upload File</UIUploadManager>
       <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>برآمد کریں</UIExportNode>
+      <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
       <UIActivateVersion>Activate Versioning</UIActivateVersion>
@@ -227,7 +227,7 @@
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>
       <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>اعلی درجے کی تلاش</UIECMSearch>
+      <UIECMSearch>Advanced Search</UIECMSearch>
       <UISavedQuery>Saved Queries List</UISavedQuery>
       <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
       <UIActionManager>Manage Actions</UIActionManager>
@@ -235,11 +235,11 @@
       <UIDocumentFormController>Add New Document</UIDocumentFormController>
       <EditFormController>Edit Document</EditFormController>
       <UIRelationManager>Add Relation</UIRelationManager>
-      <UICategoryManager>زمرہ کا اضافہ کریں</UICategoryManager>
-      <UIImportNode>درآمد کریں</UIImportNode>
+      <UICategoryManager>Add Category</UICategoryManager>
+      <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>تبصرہ</UICommentForm>
+      <UICommentForm>Comment</UICommentForm>
       <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Manage Publication</UIPublicationManager>
       <UIConfirmMessage>Delete ?</UIConfirmMessage>
@@ -270,7 +270,7 @@
   <UIResourceForm>
     <title>Edit File Content</title>
     <label>
-      <name>نام</name>
+      <name>Name</name>
       <textToModify>Text to modify</textToModify>
       <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
     </label>
@@ -284,22 +284,22 @@
     <tooltip>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <EditDocument>ترمیم</EditDocument>
-      <Upload>اپ لوڈ کریں</Upload>
+      <EditDocument>Edit</EditDocument>
+      <Upload>Upload</Upload>
       <Paste>Paste</Paste>
-      <Search>تلاش کریں</Search>
+      <Search>Search</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
-      <TaggingDocument>ٹیگ</TaggingDocument>
-      <Vote>ووٹ</Vote>
-      <Comment>تبصرہ</Comment>
+      <TaggingDocument>Tag</TaggingDocument>
+      <Vote>Vote</Vote>
+      <Comment>Comment</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Publications</ManagePublications>
-      <ManageCategories>زمرے</ManageCategories>
+      <ManageCategories>Categories</ManageCategories>
       <ManageRelations>Relations</ManageRelations>
-      <ManageActions>اعمال</ManageActions>
-      <ExportNode>برآمد کریں</ExportNode>
-      <ImportNode>درآمد کریں</ImportNode>
+      <ManageActions>Actions</ManageActions>
+      <ExportNode>Export</ExportNode>
+      <ImportNode>Import</ImportNode>
       <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
@@ -350,8 +350,8 @@
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>فوری تلاش</SimpleSearch>
-      <AdvanceSearch>اعلی درجے کی تلاش</AdvanceSearch>
+      <SimpleSearch>Quick Search</SimpleSearch>
+      <AdvanceSearch>Advanced Search</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
       <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
@@ -447,7 +447,7 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>آئکن</Icon>
+      <Icon>Icon</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
@@ -526,12 +526,12 @@
       <Cut>Cut</Cut>
       <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>حذف کریں</RemoveNode>
+      <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
-      <Lock>بند</Lock>
-      <Unlock>کهلا</Unlock>
-      <EditDocument>ترمیم</EditDocument>
+      <Lock>Lock</Lock>
+      <Unlock>Unlock</Unlock>
+      <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
@@ -553,7 +553,7 @@
   <ListView>
     <view>
       <label>
-        <name>نام</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
         <exo_owner>Owner</exo_owner>
         <auditing>Auditing</auditing>
@@ -569,12 +569,12 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>بند</Lock>
+      <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
-      <EditDocument>ترمیم</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Copy>Copy</Copy>
       <Rename>Rename</Rename>
-      <Delete>حذف کریں</Delete>
+      <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>Paste</Paste>
@@ -586,8 +586,8 @@
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
       <Upload>Upload Files</Upload>
-      <MoveNode>منتقل کریں</MoveNode>
-      <UnLock>کهلا</UnLock>
+      <MoveNode>Move</MoveNode>
+      <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
       <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>ڈاؤن لوڈ</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -632,8 +632,8 @@
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>صفہے</UIPublicationPagesContainer>
-      <UIPublicationHistory>تاریخ</UIPublicationHistory>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
       <UIPropertyTab>Properties</UIPropertyTab>
@@ -642,9 +642,9 @@
       <UIUploadContent>Information of uploaded file</UIUploadContent>
       <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
       <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>تلاش کے نتائج</AdvancedSearchResult>
+      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>اعلی درجے کی تلاش</UISearchContainer>
+      <UISearchContainer>Advanced Search</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
@@ -655,13 +655,13 @@
       <UIActionContainer>Add Action</UIActionContainer>
       <UIActionViewContainer>Action Info</UIActionViewContainer>
       <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>زبان کا ا ضافہ کریں</UIAddLanguageContainer>
-      <UINonPublishedForm>حالت</UINonPublishedForm>
-      <UIPublishedForm>حالت</UIPublishedForm>
-      <UIPublicationLogList>تاریخ</UIPublicationLogList>
+      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
+      <UINonPublishedForm>State</UINonPublishedForm>
+      <UIPublishedForm>State</UIPublishedForm>
+      <UIPublicationLogList>History</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
-      <UICategoriesSelectPanel>زمرہ منتخب کریں</UICategoriesSelectPanel>
+      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
@@ -678,10 +678,10 @@
       <remove-property>Are you sure you want to remove this property?</remove-property>
     </confirm>
     <header>
-      <name>نام</name>
+      <name>Name</name>
       <multiValue>Multi Value</multiValue>
-      <value>مالیت</value>
-      <action>عمل</action>
+      <value>Value</value>
+      <action>Action</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -708,7 +708,7 @@
       <name>Name:</name>
       <type>Type:</type>
       <value>Value:</value>
-      <upload>اپ لوڈ کریں:</upload>
+      <upload>Upload:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -727,7 +727,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>پھر سیٹ کریں</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -752,16 +752,16 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>ترمیم</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
     <header>
-      <usersOrGroups>صارف یا گروپ</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>ہٹاؤ</remove>
-      <action>عمل</action>
+      <remove>Remove</remove>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -802,7 +802,7 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>صارف یا گروپ</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -811,7 +811,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>پھر سیٹ کریں</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -829,14 +829,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>نام</name>
+      <name>Name</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>نام</prop-name>
-      <prop-type>قسم</prop-type>
+      <prop-name>Name</prop-name>
+      <prop-type>Type</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>نام</node-def-name>
+      <node-def-name>Name</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -863,7 +863,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>زمرہ منتخب کریں</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
@@ -876,7 +876,7 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>تلاش کریں</Search>
+      <Search>Search</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -886,7 +886,7 @@
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>تلاش کریں</Search>
+      <Search>Search</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -922,11 +922,11 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>عمل</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
-      <type>قسم</type>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
-      <score>اسکور</score>
+      <score>Score</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
@@ -953,11 +953,11 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>عمل</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
-      <type>قسم</type>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
-      <score>اسکور</score>
+      <score>Score</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
@@ -984,11 +984,11 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>عمل</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
-      <type>قسم</type>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
-      <score>اسکور</score>
+      <score>Score</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
@@ -1015,11 +1015,11 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>عمل</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
-      <type>قسم</type>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
-      <score>اسکور</score>
+      <score>Score</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
@@ -1048,11 +1048,11 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>عمل</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
-      <type>قسم</type>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
-      <score>اسکور</score>
+      <score>Score</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
@@ -1080,7 +1080,7 @@
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>ا ضافہ کریں</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>ا ضافہ کریں</label-Add>
+      <label-Add>Add</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>ا ضافہ کریں</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1109,7 +1109,7 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>زمرہ کا اضافہ کریں</AddCategory>
+      <AddCategory>Add Category</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
@@ -1121,13 +1121,13 @@
       <containPro-Contain>Contain</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>سے</ConstraintOption-From>
-      <ConstraintOption-To>کو</ConstraintOption-To>
+      <ConstraintOption-From>From</ConstraintOption-From>
+      <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
-      <Category-label>زمرہ</Category-label>
+      <Category-label>Category</Category-label>
       <created>Created</created>
       <modified>Modified</modified>
-      <and>اور</and>
+      <and>And</and>
       <or>Or</or>
     </label>
   </UIConstraintForm>
@@ -1139,7 +1139,7 @@
   <CategoryPopup>
     <title>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIOneNodePathSelector>زمرہ منتخب کریں</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
@@ -1155,11 +1155,11 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>فلٹر:</filter>
+      <filter>Filter:</filter>
       <result>Results:</result>
     </label>
     <title>
-      <result>فلٹر</result>
+      <result>Filter</result>
     </title>
     <button>
       <label-Select>Select</label-Select>
@@ -1178,7 +1178,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>تلاش کریں</Search>
+      <Search>Search</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
@@ -1192,7 +1192,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>نام</name>
+      <name>Name</name>
       <selectBox>Select Query Style</selectBox>
       <query>Query</query>
     </label>
@@ -1212,7 +1212,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>ا ضافہ کریں</Add>
+      <Add>Add</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1236,7 +1236,7 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>ا ضافہ کریں</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1247,10 +1247,10 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>نام</name>
-      <language>زبان</language>
+      <name>Name</name>
+      <language>Language</language>
       <query>Query</query>
-      <action>اعمال</action>
+      <action>Actions</action>
       <path>Path</path>
     </header>
   </UIECMSearch>
@@ -1259,7 +1259,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1278,16 +1278,16 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>نام</name>
-      <type>قسم</type>
+      <name>Name</name>
+      <type>Type</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
-      <action>اعمال</action>
+      <action>Actions</action>
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>ترمیم</Edit>
-      <Delete>حذف کریں</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>برآمد کریں</Export>
+      <Export>Export</Export>
     </action>
-    <title>برآمد کریں</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1377,10 +1377,10 @@
     </action>
     <labels>
       <version>Version</version>
-      <date>تاریخ</date>
+      <date>Date</date>
       <author>Modified By</author>
       <summary>Summary</summary>
-      <action>عمل</action>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1399,30 +1399,30 @@
       <e_16>Property Changed</e_16>
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>منتقل کریں</e_64>
+      <e_64>Move</e_64>
       <e_128>Copy</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
-      <e_2048>تازہ کاری کریں</e_2048>
-      <e_4096>درآمد کریں</e_4096>
+      <e_2048>Update</e_2048>
+      <e_4096>Import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
-      <e_65536>ملانا</e_65536>
+      <e_65536>Merge</e_65536>
       <e_131072>Cancel Merge</e_131072>
       <e_262144>Done Merge</e_262144>
       <e_524288>Add Version Label</e_524288>
       <e_1048576>Remove Version Label</e_1048576>
       <e_2097152>Remove Version</e_2097152>
-      <e_4194304>بند</e_4194304>
-      <e_8388608>کهلا</e_8388608>
+      <e_4194304>Lock</e_4194304>
+      <e_8388608>Unlock</e_8388608>
       <e_16777216>Read</e_16777216>
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>صارف کا نام</userName>
-      <date>تاریخ</date>
+      <userName>Username</userName>
+      <date>Date</date>
       <version>Version</version>
     </label>
   </UIAuditingInfo>
@@ -1436,7 +1436,7 @@
     <label>
       <note>Versioning has not been activated for this document.</note>
       <question>Are you sure you want to activate it?</question>
-      <button-active>عمل میں لایا</button-active>
+      <button-active>Activate</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
@@ -1450,9 +1450,9 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>نام</LifecycleName>
-      <LifecycleDesc>تفصیل</LifecycleDesc>
-      <action>عمل</action>
+      <LifecycleName>Name</LifecycleName>
+      <LifecycleDesc>Description</LifecycleDesc>
+      <action>Action</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1478,7 +1478,7 @@
       <question>Are you sure you want to activate?</question>
     </label>
     <action>
-      <activate>عمل میں لایا</activate>
+      <activate>Activate</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1511,13 +1511,13 @@
       <format>Format</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
-      <upload>مسل اپ لوڈ کریں</upload>
+      <upload>Upload File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>درآمد کریں</Import>
+      <Import>Import</Import>
     </action>
-    <title>درآمد کریں</title>
+    <title>Import</title>
     <msg>
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
@@ -1559,7 +1559,7 @@
       <label>Select Label</label>
     </label>
     <action>
-      <Remove>ہٹاؤ</Remove>
+      <Remove>Remove</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>نام</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Version Number</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
       <VersionDate>Version Date</VersionDate>
@@ -1600,14 +1600,14 @@
     <tab>
       <label>
         <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>زمرہ منتخب کریں</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>زمرہ</path>
-      <action>اعمال</action>
+      <path>Category</path>
+      <action>Actions</action>
     </header>
     <msg>
       <access-denied>Access denied. You don't have access permission.</access-denied>
@@ -1615,19 +1615,19 @@
     </msg>
     <action>
       <title>
-        <Delete>حذف کریں</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <label>
-      <category>زمرہ</category>
-      <actions>عمل</actions>
-      <delete>حذف کریں</delete>
+      <category>Category</category>
+      <actions>Action</actions>
+      <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>نام</name>
-      <action>عمل</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
     <info>
       <child-not-found>This item doesn't have any child.</child-not-found>
@@ -1656,11 +1656,11 @@
   <UIRelationsAddedList>
     <header>
       <path>Relations</path>
-      <action>اعمال</action>
+      <action>Actions</action>
     </header>
     <action>
       <title>
-        <Delete>حذف کریں</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -1677,7 +1677,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1794,11 +1794,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>تفصیل</description>
+      <description>Description</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
@@ -1809,9 +1809,9 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>ملاحظہ کریں</View>
-      <Edit>ترمیم</Edit>
-      <Delete>حذف کریں</Delete>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1870,12 +1870,12 @@
       <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>جاو</exeButton>
+      <exeButton>Go</exeButton>
       <address>Address:</address>
     </label>
     <title>
-      <exeButton>جاو</exeButton>
-      <backButton>پىچھے</backButton>
+      <exeButton>Go</exeButton>
+      <backButton>Back</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Change Node</changeNode>
     </title>
@@ -1887,7 +1887,7 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>ملاحظہ</Watch>
+      <Watch>Watch</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>Continue</Continue>
       <Unwatch>Unwatch</Unwatch>
@@ -1914,7 +1914,7 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>ا ضافہ کریں</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2031,10 +2031,10 @@
     <label>
       <published>Published</published>
       <non-published>Unpublished</non-published>
-      <public>عوام</public>
-      <private>نجی</private>
-      <state>حالت</state>
-      <visibility>نمائش</visibility>
+      <public>Public</public>
+      <private>Private</private>
+      <state>State</state>
+      <visibility>Visibility</visibility>
       <nodeName>Name:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
       <stateName>State Name</stateName>
@@ -2069,7 +2069,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>ای میل ایڈریس غلط ہے.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2128,12 +2128,12 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>تاریخ</date>
+      <date>Date</date>
       <newState>New State</newState>
-      <user>صارف</user>
-      <description>تفصیل</description>
+      <user>User</user>
+      <description>Description</description>
       <version>Version</version>
-      <visibility>نمائش</visibility>
+      <visibility>Visibility</visibility>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -2147,7 +2147,7 @@
   <UIVersionTreeList>
     <header>
       <version>Version</version>
-      <state>حالت</state>
+      <state>State</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2229,7 +2229,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>ترمیم</Edit>
+      <Edit>Edit</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2250,7 +2250,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>عمل</action>
+      <action>Action</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2267,7 +2267,7 @@
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>ڈرائیو منتخب کریں</UIDriveSelector>
+      <UIDriveSelector>Select Drive</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
@@ -2279,7 +2279,7 @@
 
   <DriveNameInput>
     <title>
-      <SelectDrive>ڈرائیو منتخب کریں</SelectDrive>
+      <SelectDrive>Select Drive</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2422,7 +2422,7 @@
     <tab>
       <label>
         <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>زمرہ منتخب کریں</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2430,7 +2430,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>زمرہ منتخب کریں</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2442,24 +2442,24 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>زمرہ کا اضافہ کریں</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>اس زمر ے کا نام پہلے سے ہی موجود ہے ۔.</ItemExistsException>
+      <ItemExistsException>The category name already exists.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>حذف کریں</OK>
+      <OK>Delete</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>منسوخ</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2468,7 +2468,7 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>ٹھیک ہے</OK>
+      <OK>OK</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
@@ -2543,10 +2543,10 @@
   <UIActionBar>
     <obtion>
       <Admin>Admin</Admin>
-      <Info>معلومات</Info>
-      <Actions>اعمال</Actions>
+      <Info>Info</Info>
+      <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
-      <Search>تلاش کریں</Search>
+      <Search>Search</Search>
     </obtion>
   </UIActionBar>
 
@@ -2630,7 +2630,7 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>کیا آپ واقعی یہ تبصرہ حذف کرنا چاہتے ہیں</confirm-deletecomment>
+      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2660,7 +2660,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>مسل اپ لوڈ کریں</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
@@ -2680,9 +2680,9 @@
   <UIPreferencesForm>
       <label>
           <Alphabetic>Alphabetical</Alphabetic>
-          <Type>قسم</Type>
-          <CreatedDate>تشکیل کی تاریخ</CreatedDate>
-          <ModifiedDate>بدلی ہوئی تاریخ</ModifiedDate>
+          <Type>Type</Type>
+          <CreatedDate>Created Date</CreatedDate>
+          <ModifiedDate>Modified Date</ModifiedDate>
           <Ascending>Ascending</Ascending>
           <Descending>Descending</Descending>
       </label>
@@ -2699,7 +2699,7 @@
        <Video>Video</Video>
        <Music>Music</Music>
        <Documents>Document</Documents>
-       <Content>مواد</Content>
+       <Content>Content</Content>
     </label>
   </DocumentType>
 
@@ -2709,7 +2709,7 @@
       <Video>Video</Video>
       <Music>Music</Music>
       <Documents>Document</Documents>
-      <Content>مواد</Content>
+      <Content>Content</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -2777,19 +2777,19 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>زمرہ کا اضافہ کریں</UICategoryForm>
+      <UICategoryForm>Add Category</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>زمرہ کا اضافہ کریں</AddCategory>
+      <AddCategory>Add Category</AddCategory>
     </tooltip>
    </UIActionBar>
 
    <UITaggingForm>
     <label>
-      <Public>عوام</Public>
-      <Private>نجی</Private>
+      <Public>Public</Public>
+      <Private>Private</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
@@ -2804,15 +2804,15 @@
 
   <UIEditingTagsForm>
     <header>
-      <name>نام</name>
+      <name>Name</name>
       <relatedDocuments>Related Documents</relatedDocuments>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
         <EditTag>Edit Tag</EditTag>
         <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>ٹیگ کا اضافہ کریں</AddTag>
+        <AddTag>Add Tag</AddTag>
       </title>
     </action>
     <msg>
@@ -2840,7 +2840,7 @@
 
   <TagPopup>
     <title>
-      <UITagForm>ٹیگ</UITagForm>
+      <UITagForm>Tag</UITagForm>
     </title>
   </TagPopup>
 
@@ -2863,7 +2863,7 @@
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>ٹیگ مینیجر</UITaggingFormContainer>
+      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
@@ -2876,14 +2876,14 @@
     <UIActionForm>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>ہٹاؤ</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>ہٹاؤ</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </EditFormAction>
 
@@ -2935,7 +2935,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>ا ضافہ کریں</Add>
+      <Add>Add</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -2973,10 +2973,10 @@
     </button>
     <revisions>
       <version>Revisions</version>
-      <date>تاریخ</date>
-      <author>مصنف</author>
-      <status>حالت</status>
-      <action>عمل</action>
+      <date>Date</date>
+      <author>Author</author>
+      <status>Status</status>
+      <action>Action</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -2985,14 +2985,14 @@
     </revisions>
     <status>
       <version>Revision</version>
-      <title>حالت</title>
+      <title>Status</title>
       <archived>Archived</archived>
       <obsolete>Obsolete</obsolete>
       <unpublished>Unpublished</unpublished>
       <enrolled>Enrolled</enrolled>
       <draft>Draft</draft>
       <pending>Pending</pending>
-      <approved>منظور ہوگیا</approved>
+      <approved>Approved</approved>
       <inreview>In Review</inreview>
       <staged>Staged</staged>
       <published>Published</published>
@@ -3000,11 +3000,11 @@
     </status>
     <scheduled>
       <title>Scheduled</title>
-      <from>سے</from>
-      <to>کو</to>
+      <from>From</from>
+      <to>To</to>
     </scheduled>
     <title>
-      <preview>پیش نظارہ</preview>
+      <preview>Preview</preview>
       <restore>Restore</restore>
     </title>
     <msg>
@@ -3014,11 +3014,11 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>تاریخ</date>
+      <date>Date</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
-      <user>مصنف</user>
-      <description>تفصیل</description>
+      <user>Author</user>
+      <description>Description</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>
@@ -3035,7 +3035,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>پھر سیٹ کریں</Reset>
+      <Reset>Reset</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3058,9 +3058,9 @@
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>حالت</status>
-      <author>مصنف</author>
-      <date>تشکیل کی تاریخ</date>
+      <status>Status</status>
+      <author>Author</author>
+      <date>Created Date</date>
       <title>Document Title</title>
       <lastUser>Last User</lastUser>
     </header>
@@ -3077,7 +3077,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>زمرہ منتخب کریں</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManagerSearch>
@@ -3141,10 +3141,10 @@
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
   <NOCONTRACT>No Contract</NOCONTRACT>
   <one-minute>One Minute</one-minute>
-  <hourly>فی گهنٹا</hourly>
-  <daily>روزانا</daily>
+  <hourly>Hourly</hourly>
+  <daily>Daily</daily>
   <quarterly>Quarterly</quarterly>
-  <yearly>سالانہ</yearly>
+  <yearly>Yearly</yearly>
   <ten-years>Ten Years</ten-years>
   <read>User Action</read>
   <schedule>Scheduler</schedule>
@@ -3189,7 +3189,7 @@
     <in>in</in>
     <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
-    <Error>نقص</Error>
+    <Error>Error</Error>
     <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
@@ -3202,21 +3202,21 @@
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>کو بنایا گیا</CreatedOn>
+  <CreatedOn>Created on</CreatedOn>
   <Updated>Updated</Updated>
-  <by>نے</by>
+  <by>by</by>
   <you>you</you>
   </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>نام</name>
-      <date>تاریخ</date>
-      <size>مقدار</size>
+      <name>Name</name>
+      <date>Date</date>
+      <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>
-      <more>مزید</more>
+      <more>More</more>
     </label>
   </FileView>
   <UIPropertyForm>

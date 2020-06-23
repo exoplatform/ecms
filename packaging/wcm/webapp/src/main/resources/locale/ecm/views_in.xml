@@ -55,6 +55,7 @@
         <pdf-max-page>Pratinjaunya tidak tersedia untuk konten dengan lebih dari {0} halaman.</pdf-max-page>
         <using-webDAV>atau Buka di MS Office</using-webDAV>
         <open-on-desktop>Buka di Desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Buka di Dokumen</open-in-documents>
         <open-in-documents-tooltip>Buka berkas ini di aplikasi dokumen</open-in-documents-tooltip>
         <file-size-too-big>Isi dari berkas ini terlalu besar. anda seharusnya mengunduh dan membuka di klien.</file-size-too-big>

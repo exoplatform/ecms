@@ -23,6 +23,7 @@
       <Title>Tùy chọn Thiết lập Danh sách Nội dung</Title>
       <ContentSelectionBlock>Lựa  chọn Nội dung</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Chế độ</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Đường dẫn Thư mục</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Đường dẫn Thư mục</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Sắp xếp theo</UICLVConfigOrderByFormSelectBox>
@@ -69,6 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Chia sẻ nội dung giữa người dùng</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Có hai chế độ để hiện nội dung. "Theo thư mục" sẽ cung cấp nội dung theo thư mục/danh mục đã chọn của bạn. "Theo Nội dung" sẽ cho phép bạn chọn bằng tay nội dung mà bạn muốn hiển thị.</ModeSelectionHelp>
       <FolderPathHelp>Chọn nội dung mà bạn muốn hiển thị. Lựa chọn mặc định sẽ được thay thế tự động nếu bạn kích hoạt tùy chọn Điều hướng Động (xem chế độ Nâng cao ở dưới).</FolderPathHelp>
       <HeaderOptionHelp>Chọn đầu mục ở trên đầu danh sách nội dung. Nếu bạn kích hoạt tùy chọn Tự động Phát hiện, tính năng này sẽ cố tìm kiếm đầu mục dựa theo lựa chọn hiện tại.</HeaderOptionHelp>

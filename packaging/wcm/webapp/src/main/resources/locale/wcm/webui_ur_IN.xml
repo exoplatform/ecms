@@ -51,7 +51,7 @@
       <thumbails-view>Thumbnails</thumbails-view>
       <list-view>List</list-view>
       <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>زمرے</wcm-category-view>
+      <wcm-category-view>Categories</wcm-category-view>
       <file-view>File Management View</file-view>
     </label>
   </Views>
@@ -141,8 +141,8 @@
   <UISelectedContentGrid>
     <label>
       <name>#{word.name}</name>
-      <add>ا ضافہ کریں</add>
-      <delete>حذف کریں</delete>
+      <add>Add</add>
+      <delete>Delete</delete>
     </label>
     <msg>
       <no-content-found>No content found.</no-content-found>
@@ -161,7 +161,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <msg>
       <child-not-found>No Content Found</child-not-found>
@@ -172,7 +172,7 @@
     <header>
       <name>#{word.name}</name>
       <publicationstate>Publication State</publicationstate>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -201,7 +201,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>تلاش کریں</SearchWebContent>
+      <SearchWebContent>Search</SearchWebContent>
     </action>
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
@@ -228,7 +228,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>ا ضافہ کریں</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -239,7 +239,7 @@
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>گھنڈی قسم انتخاب کار</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -253,13 +253,13 @@
   <UIContentSearchResult>
     <header>
       <title>Title</title>
-      <score>اسکور</score>
+      <score>Score</score>
       <publicationstate>Publication State</publicationstate>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <title>
       <Select>Select</Select>
-      <View>ملاحظہ کریں</View>
+      <View>View</View>
     </title>
     <msg>
     <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
@@ -282,7 +282,7 @@
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>اجازت</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
       <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
     </label>
@@ -290,21 +290,21 @@
       <Save>#{word.save}</Save>
       <Clear>Clear</Clear>
       <title>
-        <Edit>ترمیم</Edit>
-        <Delete>حذف کریں</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>اجازت</owner>
+      <owner>Permission</owner>
       <accessible>Accessible</accessible>
       <editable>Editable</editable>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>کیا آپ واقعی یہ اجازت حذف کرنا چاہتے ہیں?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
       <no-permission-remove>You do not have permission.</no-permission-remove>
       <access-denied>Access denied.</access-denied>
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
@@ -330,7 +330,7 @@
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>گروپ منتخب کرنے والا</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
@@ -343,7 +343,7 @@
 
   <UIContentDialogPreference>
     <action>
-      <Back>پىچھے</Back>
+      <Back>Back</Back>
     </action>
   </UIContentDialogPreference>
 
@@ -367,7 +367,7 @@
     <label>
       <SingleContentViewer>Single Content Viewer</SingleContentViewer>
       <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>تلاش کریں</Search>
+      <Search>Search</Search>
       <Sitemap>Site Map</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
@@ -385,8 +385,8 @@
     <welcome>Welcome</welcome>
     <login>Login</login>
     <logout>Logout</logout>
-    <language>زبان تبدیل کریں</language>
-    <register>درج کرنا</register>
+    <language>Change Language</language>
+    <register>Register</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -397,11 +397,11 @@
   
   <ContentSelector>
     <title>
-      <PersonalDrives>ذاتی ڈرائیو</PersonalDrives>
-      <GeneralDrives>عام ڈرائیوز</GeneralDrives>
-      <GroupDrives>گروپ ڈرائیو</GroupDrives>
-      <Private>نجی</Private>
-      <Public>عوام</Public>
+      <PersonalDrives>Personal Drives</PersonalDrives>
+      <GeneralDrives>General Drives</GeneralDrives>
+      <GroupDrives>Group Drives</GroupDrives>
+      <Private>Private</Private>
+      <Public>Public</Public>
       <BackupCenter>Backup Center</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>

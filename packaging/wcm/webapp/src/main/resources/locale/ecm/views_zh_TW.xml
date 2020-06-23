@@ -55,6 +55,7 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>或在 MS Office 中打開</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>此檔的內容太大。您應該在用戶端下載並打開。</file-size-too-big>

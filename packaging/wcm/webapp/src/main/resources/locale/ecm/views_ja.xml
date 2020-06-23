@@ -55,6 +55,7 @@
         <pdf-max-page>プレビューは {0} ページを超えるコンテンツでは使用できません。</pdf-max-page>
         <using-webDAV>または MS Office で開く</using-webDAV>
         <open-on-desktop>デスクトップ上に開く</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>文書で開きます</open-in-documents>
         <open-in-documents-tooltip>文書アプリでこのファイルを開きます。</open-in-documents-tooltip>
         <file-size-too-big>ファイルのコンテンツが大きすぎます。ダウンロードし、クライアント上で開いて下さい。</file-size-too-big>
