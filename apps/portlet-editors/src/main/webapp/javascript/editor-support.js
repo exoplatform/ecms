@@ -200,8 +200,8 @@
     var showClosePopup = function() {
       console.log("Time to show closing popup");
       $idleModal = $('#editorIdleModal');
-      var title = message("idle.title");
-      var text = message("idle.message");
+      var title = message("idlePopup.title");
+      var text = message("idlePopup.message");
       text = text.replace(/%s/g, "<span id='closeCountdown'></span>");
       if ($idleModal.length == 0) {
         $idleModal = $("<div id='editorIdleModal'><div id='editorIdleModalContent'> <span id='editorIdleModalClose'>&times;</span> <h3>" + title + "</h3> <p>" + text + "</p> </div> </div>");
