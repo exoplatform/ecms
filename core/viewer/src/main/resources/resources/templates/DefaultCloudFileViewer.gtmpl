@@ -35,7 +35,7 @@ if (drive) {
 	def serviceName = drive.user.serviceName
 	def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
 	def viewable = uicomponent.isViewable()
-	def previewLink = uicomponent.file.previewLink
+	def previewLink = uicomponent.file.getPreviewLink()
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}"
 		style="height: <%=viewable ? "100%" : "200px"%>;">

@@ -354,7 +354,8 @@ public class OneDriveAPI {
 
   /**
    * Creates a public link to view a file content.
-   *      Currently at 23/08/2019, the business account does not support the 'embed' link type.
+   *      Currently at 23/08/2019, the business account does not support the 'embed' link type (24.06.2020 the same).
+   *      We use short lived embeddable links for business accounts
    *
    * @param itemId the item id
    * @param type must be view or embed
@@ -363,7 +364,7 @@ public class OneDriveAPI {
    */
   public SharingLink createLink(String itemId, String type) throws OneDriveException {
     if (type.equalsIgnoreCase("embed")) {
-      return graphClient.me().drive().items(itemId).createLink("embed", null).buildRequest().post().link;
+      return graphClient.me().drive().items(itemId).createLink("embed", "anonymous").buildRequest().post().link;
     } else if (type.equalsIgnoreCase("view")) {
       return graphClient.me().drive().items(itemId).createLink("view", "anonymous").buildRequest().post().link;
     }
@@ -1203,6 +1204,16 @@ public class OneDriveAPI {
    */
   public Drive getDrive() {
     return graphClient.me().drive().buildRequest().get();
+  }
+
+  /**
+   * Gets short-lived embeddable URLs for an item (currently only for OneDrive business account by documentation).
+   *
+   * @param itemId the item id
+   * @return the preview link
+   */
+  public String getBusinessPreviewLink(String itemId) {
+    return graphClient.me().drive().items(itemId).preview("1", 1.0).buildRequest().post().getUrl;
   }
 
   /**
