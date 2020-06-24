@@ -1139,7 +1139,7 @@
 }
 
 /** Attachments composer plugin **/
-#activityComposerApp {
+.activityComposerApp  {
   .drawer {
     .content {
       .VuetifyApp {
@@ -1185,6 +1185,35 @@
               height: 60px;
               margin: 10px 0 0 10px;
               background-size: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+  //disable attachments drawer in edit activity until US5 - update file activity
+  .editActivity {
+    .composerActions {
+      .attachmentsSelectorAction {
+        cursor: not-allowed;
+
+        .actionItem {
+          pointer-events: none;
+
+          .actionItemIcon {
+            .addFileComposerIcon {
+              filter: grayscale(100%);
+              background: url('/eXoSkin/skin/images/system/composer/addFile.png') no-repeat;
+              width: 60px;
+              height: 60px;
+              margin: 10px 0 0 10px;
+              background-size: 40px;
+            }
+          }
+
+          .actionItemDescription {
+            .actionLabel {
+              color: gray;
             }
           }
         }
