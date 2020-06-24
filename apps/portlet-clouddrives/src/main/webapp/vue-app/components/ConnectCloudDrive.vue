@@ -161,7 +161,7 @@ export default {
           name: title,
           title: title,
           path: folderPath,
-          driveTypeCSSClass: `uiIconEcms24x24Drive-${this.connectingProvider}`,
+          driveTypeCSSClass: `uiIconEcmsDrive-${this.connectingProvider}`,
           type: "drive",
           css: "uiIcon16x16FolderDefault uiIcon16x16nt_folder",
           driverType: "Personal Drives",
