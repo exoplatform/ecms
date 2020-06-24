@@ -51,7 +51,7 @@
             <field name="active">
               <boolean>true</boolean>
             </field>
-            <field name="byDefault">
+            <field name="isMandatory">
               <boolean>false</boolean>
             </field>
           </object>
