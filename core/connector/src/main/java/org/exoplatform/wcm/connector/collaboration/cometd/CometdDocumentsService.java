@@ -1,6 +1,7 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
@@ -39,6 +40,8 @@ import org.eclipse.jetty.util.component.LifeCycle;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
 import org.picocontainer.Startable;
 
+import com.google.api.services.plus.model.Activity.Provider;
+
 import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -52,6 +55,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Authenticator;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.ws.frameworks.json.impl.JsonException;
+import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 /**
  * The Class CometdDocumentsService.
@@ -728,10 +733,12 @@ public class CometdDocumentsService implements Startable {
           void execute(ExoContainer exoContainer) {
             try {
               DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-              boolean allowed = editorProvider.isAvailableForUser(userIdentity(userId));
+              Identity identity = userIdentity(userId);
+              boolean allowed = editorProvider.isAvailableForUser(identity);
+              List<String> availableProviders = service.getAllAvailableProviders(identity);
               String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
               boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
-              service.sendCurrentProviderInfo(fileId, available);
+              service.sendCurrentProviderInfo(fileId, available, availableProviders);
               if (currentProvider == null) {
                 setCurrentDocumentProvider(fileId, workspace, provider);
               }
@@ -741,6 +748,14 @@ public class CometdDocumentsService implements Startable {
           }
         });
       }
+    }
+
+    protected List<String> getAllAvailableProviders(Identity identity) {
+      return documentService.getDocumentEditorProviders()
+                            .stream()
+                            .filter(provider -> provider.isAvailableForUser(identity))
+                            .map(DocumentEditorProvider::getProviderName)
+                            .collect(Collectors.toList());
     }
 
     /**
@@ -822,9 +837,16 @@ public class CometdDocumentsService implements Startable {
      * @param fileId the file id
      * @param available the available
      */
-    protected void sendCurrentProviderInfo(String fileId, boolean available) {
+    protected void sendCurrentProviderInfo(String fileId, boolean available, List<String> availableProviders) {
       ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
       if (channel != null) {
+        String allProviders = null;
+        try {
+          allProviders = new JsonGeneratorImpl().createJsonArray(availableProviders).toString();
+        } catch (JsonException e) {
+          LOG.warn("Cannot serialize all available providers to JSON", e);
+        }
+
         StringBuilder data = new StringBuilder();
         data.append('{');
         data.append("\"type\": \"");
@@ -835,8 +857,11 @@ public class CometdDocumentsService implements Startable {
         data.append("\", ");
         data.append("\"available\": \"");
         data.append(available);
+        data.append("\"allProviders\": \"");
+        data.append(allProviders);
         data.append("\"}");
         channel.publish(localSession, data.toString());
+
       }
     }
 

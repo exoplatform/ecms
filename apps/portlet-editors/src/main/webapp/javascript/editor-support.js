@@ -66,6 +66,7 @@
     var idleTimer;
     var closeInterval;
     var $idleModal;
+    var idleEnabled = false;
 
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
@@ -198,7 +199,6 @@
      * Shows close popup (idle) 
      */
     var showClosePopup = function() {
-      console.log("Time to show closing popup");
       $idleModal = $('#editorIdleModal');
       var title = message("idlePopup.title");
       var text = message("idlePopup.message");
@@ -237,12 +237,13 @@
      * Notifies that the editor is active.
      */
     var notifyActive = function() {
-      console.log("Editor is active...");
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(showClosePopup, IDLE_TIMEOUT);
-      clearInterval(closeInterval);
-      if ($idleModal) {
-        $idleModal.css("display", "none");
+      if (idleEnabled) {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(showClosePopup, IDLE_TIMEOUT);
+        clearInterval(closeInterval);
+        if ($idleModal) {
+          $idleModal.css("display", "none");
+        }
       }
     }
 
@@ -329,6 +330,9 @@
       initLoader.done(function() {
         subscribeDocument(fileId, function(result) {
           if (result.type === CURRENT_PROVIDER_INFO) {
+            if (result.allProviders.length > 1) {
+              idleEnabled = true;
+            }
             if (result.available == "true") {
               $loader.resolve();
             } else {
