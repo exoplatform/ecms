@@ -1,6 +1,9 @@
 <template>
-  <v-card class="searchFileCard d-flex flex-column" outlined>
-    <div class="mx-auto flex-grow-1 clickable px-3 pt-3" @click="$refs.documentDetail.$el.click()">
+  <v-card 
+    class="searchFileCard d-flex flex-column border-radius box-shadow" 
+    flat
+    min-height="227">
+    <div class="mx-auto flex-grow-1 px-3 pt-3">
       <div
         ref="excerptNode"
         :title="excerptText"
@@ -30,13 +33,10 @@ export default {
     },
   },
   data: () => ({
-    excerptLines: 6,
     lineHeight: 22,
+    maxEllipsisHeight: 154,
   }),
   computed: {
-    maxEllipsisHeight() {
-      return this.lineHeight * this.excerptLines;
-    },
     excerpts() {
       return this.result && this.result.excerpts;
     },
@@ -46,25 +46,17 @@ export default {
     excerptName() {
       return this.excerpts && this.excerpts['name'] && window.decodeURIComponent(this.excerpts['name'][0]);
     },
-    excerptContent() {
-      return this.excerpts && this.excerpts['attachment.content'] && this.excerpts['attachment.content'].join('<br />...');
-    },
     excerptHtml() {
-      let excerpt = this.excerptTitle || this.excerptName || '';
-      if (this.excerptContent) {
-        if (excerpt) {
-          excerpt = `<p class="center">${excerpt}</p>${this.excerptContent}`;
-        } else {
-          excerpt = this.excerptContent;
-        }
-      }
-      return excerpt;
+      return this.excerpts && this.excerpts['attachment.content'] && this.excerpts['attachment.content'].join('<br />...');
     },
     excerptText() {
       return $('<div />').html(this.excerptHtml).text();
     },
   },
   mounted() {
+    if (this.result && this.excerptTitle) {
+      this.result.title = this.excerptTitle;
+    }
     this.computeEllipsis();
   },
   methods: {
