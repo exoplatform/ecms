@@ -857,9 +857,10 @@ public class CometdDocumentsService implements Startable {
         data.append("\", ");
         data.append("\"available\": \"");
         data.append(available);
-        data.append("\"allProviders\": \"");
+        data.append("\", ");
+        data.append("\"allProviders\":");
         data.append(allProviders);
-        data.append("\"}");
+        data.append("}");
         channel.publish(localSession, data.toString());
 
       }
