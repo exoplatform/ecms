@@ -22,6 +22,7 @@
 <bundle>
   <editors>
     <admin>
+    <page>Editors Administration</page>
       <error>
         <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
         <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
