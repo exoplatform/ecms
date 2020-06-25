@@ -149,12 +149,18 @@
           v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" 
           :attached-files="value" 
           :space-id="spaceId" 
+          :extension-refs="$refs"
+          :connected-drive="connectedDrive"
+          :drives-in-progress="drivesInProgress"
           @itemsSelected="toggleServerFileSelector"
-          @cancel="toggleServerFileSelector()" 
-          @changeConnectingStatus="updateCloudConnecting"
+          @cancel="toggleServerFileSelector()"
         ></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`">
+          <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
+                     :is="action.component.name" :ref="action.key"></component>
+        </div>
       </div>
       <div v-if="!showDocumentSelector" class="attachmentsFooter footer ignore-vuetify-classes">
         <a class="btn btn-primary ignore-vuetify-classes" @click="toggleAttachmentsDrawer()">{{ $t('attachments.drawer.apply') }}</a>
@@ -167,8 +173,33 @@
 <script>
 import axios from 'axios';
 import * as attachmentsService from '../attachmentsService.js';
+import { getAttachmentsComposerExtensions } from '../extension';
 
 export default {
+  directives: {
+    DynamicEvents: {
+      bind: function (el, binding, vnode) {
+        const allEvents = binding.value;
+        if (allEvents) {
+          allEvents.forEach((event) => {
+            if (vnode.componentInstance) {
+              // register handler in the dynamic component
+              vnode.componentInstance.$on(event.event, (eventData) => {
+                const param = eventData ? eventData : event.listenerParam;
+                // when the event is fired, the eventListener function is going to be called
+                vnode.context[event.listener](param);
+              });
+            }
+          });
+        }
+      },
+      unbind: function (el, binding, vnode) {
+        if (vnode.componentInstance) {
+          vnode.componentInstance.$off();
+        }
+      },
+    }
+  },
   props: {
     value: {
       type: Array,
@@ -218,10 +249,12 @@ export default {
       showAttachmentsDrawer: false,
       displayMessageDestinationFolder: true,
       cloudDriveConnecting: false,
+      connectedDrive: {},
       privateFilesAttached: false,
       isActivityStream: true,
       fromAnotherSpaces: [],
-      spaceGroupId: ''
+      spaceGroupId: '',
+      drivesInProgress: {}
     };
   },
   watch: {
@@ -291,6 +324,7 @@ export default {
   },
   created(){
     this.addDefaultPath();
+    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
     toggleAttachmentsDrawer: function() {
@@ -521,8 +555,8 @@ export default {
         }
       }
     },
-    updateCloudConnecting(status) {
-      this.cloudDriveConnecting = status;
+    setCloudDriveProgress({ progress }) {
+      this.cloudDriveConnecting = progress ? true : false;
     },
     onPaste(event) {
       if (event.clipboardData && event.clipboardData.items) {
@@ -562,7 +596,13 @@ export default {
       const t = document.createElement('template');
       t.innerHTML = html;
       return t.content.cloneNode(true);
-    }
+    },
+    addCloudDrive(drive) {
+      this.connectedDrive = drive;
+    },
+    changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
+      this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
+    },
   }
 };
 </script>

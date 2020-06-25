@@ -46,8 +46,6 @@
           <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
           <i v-else :class="action.iconClass" class="uiActionIcon"></i>
         </div>
-        <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
-                   v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
     </div>
 
@@ -187,30 +185,6 @@ import * as attachmentsService from '../attachmentsService.js';
 import { getAttachmentsComposerExtensions, executeExtensionAction } from '../extension';
 
 export default {
-  directives: {
-    DynamicEvents: {
-      bind: function (el, binding, vnode) {
-        const allEvents = binding.value;
-        if (allEvents) {
-          allEvents.forEach((event) => {
-            if (vnode.componentInstance) {
-              // register handler in the dynamic component
-              vnode.componentInstance.$on(event.event, (eventData) => {
-                const param = eventData ? eventData : event.listenerParam;
-                // when the event is fired, the eventListener function is going to be called
-                vnode.context[event.listener](param);
-              });
-            }
-          });
-        }
-      },
-      unbind: function (el, binding, vnode) {
-        if (vnode.componentInstance) {
-          vnode.componentInstance.$off();
-        }
-      },
-    }
-  },
   props: {
     modeFolderSelectionForFile: {
       type: Boolean,
@@ -227,6 +201,18 @@ export default {
     attachedFiles: {
       type: Array,
       default: () => []
+    },
+    extensionRefs: {
+      type: Array,
+      default: () => []
+    },
+    connectedDrive: {
+      type: Object,
+      default: () => ({})
+    },
+    drivesInProgress: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
@@ -253,7 +239,6 @@ export default {
       schemaFolder: '',
       folderDestinationForFile:'',
       attachmentsComposerActions: [],
-      cloudDriveProgress: null,
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
@@ -269,7 +254,6 @@ export default {
       renameFolderAction:false,
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
-      drivesInProgress: {},
       privateDestinationForFile: false,
       fromSpace: {}
     };
@@ -344,6 +328,11 @@ export default {
     showErrorMessage: function(newVal) {
       if(newVal) {
         setTimeout(() => this.showErrorMessage = false, this.MESSAGE_TIMEOUT);
+      }
+    },
+    connectedDrive: function(drive) {
+      if (!this.drivers.some(({ title }) => title === drive.title)) {
+        this.drivers.push(drive); // display connecting drive in 'My Drives' section
       }
     }
   },
@@ -583,11 +572,7 @@ export default {
       }
     },
     executeAction(action) {
-      executeExtensionAction(action, this.$refs[action.key][0]);
-    },
-    setCloudDriveProgress({ progress }) {
-      this.cloudDriveProgress = progress;
-      this.$emit('changeConnectingStatus', progress ? true : false);
+      executeExtensionAction(action, this.extensionRefs[action.key][0]);
     },
     addNewFolder() {
       if (!this.creatingNewFolder) {
@@ -763,14 +748,6 @@ export default {
       } else {
         this.selectedFolderPath = this.driveRootPath.concat(folder.path);
       }
-    },
-    addCloudDrive(drive) { // listen clouddrives 'addDrive' event
-      if (!this.drivers.some(({ title }) => title === drive.title)) {
-        this.drivers.push(drive); // display connecting drive in 'My Drives' section
-      }
-    },
-    changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
-      this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
     },
     getFolderIcon(folder) {
       return `uiIcon-${folder.cloudProvider}`;
