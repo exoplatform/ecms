@@ -67,14 +67,14 @@
     var closeInterval;
     var $idleModal;
     var idleEnabled = false;
-
+    var idlePopupTimeout;
+    
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
     const REFRESH_STATUS = "REFRESH_STATUS";
     const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
-    // 30 minutes 
-    const IDLE_TIMEOUT = 1800000;
+    
     
     var messages = {}; // should be initialized by initConfig
 
@@ -176,8 +176,9 @@
       }
       log("Initializing editor support module");
       initLoader = $.Deferred();
-      configLoader.done(function(user, cometdConf, i18n) {
+      configLoader.done(function(user, cometdConf, i18n, idleTimeout) {
         messages = i18n;
+        idlePopupTimeout = idleTimeout;
         cCometD.configure({
           "url": prefixUrl + cometdConf.path,
           "exoId": user,
@@ -239,7 +240,7 @@
     var notifyActive = function() {
       if (idleEnabled) {
         clearTimeout(idleTimer);
-        idleTimer = setTimeout(showClosePopup, IDLE_TIMEOUT);
+        idleTimer = setTimeout(showClosePopup, idlePopupTimeout);
         clearInterval(closeInterval);
         if ($idleModal) {
           $idleModal.css("display", "none");
@@ -254,8 +255,8 @@
     /**
      * Inits configuration
      */
-    this.initConfig = function(user, conf, i18n) {
-      configLoader.resolve(user, conf, i18n);
+    this.initConfig = function(user, conf, i18n, idleTimeout) {
+      configLoader.resolve(user, conf, i18n, idleTimeout);
     };
 
     /**

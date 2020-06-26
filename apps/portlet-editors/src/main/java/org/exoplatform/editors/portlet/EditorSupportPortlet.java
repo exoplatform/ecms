@@ -15,6 +15,7 @@ import javax.portlet.RenderResponse;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -25,6 +26,9 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
+/**
+ * The Class EditorSupportPortlet.
+ */
 public class EditorSupportPortlet extends GenericPortlet {
 
   /** The Constant LOG. */
@@ -33,6 +37,14 @@ public class EditorSupportPortlet extends GenericPortlet {
   /** The Constant CLIENT_RESOURCE_PREFIX. */
   private static final String CLIENT_RESOURCE_PREFIX = "editors.";
 
+  /**
+   * Do view.
+   *
+   * @param request the request
+   * @param response the response
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws PortletException the portlet exception
+   */
   @Override
   public void doView(RenderRequest request, RenderResponse response) throws IOException, PortletException {
     try {
@@ -46,8 +58,13 @@ public class EditorSupportPortlet extends GenericPortlet {
       CometdConfig cometdConf = new CometdConfig(cometdService.getCometdServerPath(),
                                                  cometdService.getUserToken(context.getRemoteUser()),
                                                  PortalContainer.getCurrentPortalContainerName());
+      
+      DocumentService documentService = ExoContainerContext.getCurrentContainer()
+          .getComponentInstanceOfType(DocumentService.class);
+      long idleTimeout = documentService.getEditorsIdleTimeout();
       js.require("SHARED/editorsupport", "editorsupport")
-        .addScripts("editorsupport.initConfig('" + context.getRemoteUser() + "' ," + cometdConf.toJSON() + ", " + getI18n(request.getLocale()) +");");
+        .addScripts("editorsupport.initConfig('" + context.getRemoteUser() + "' ," + cometdConf.toJSON() + ", "
+            + getI18n(request.getLocale()) + ", " + idleTimeout + ");");
     } catch (Exception e) {
       LOG.error("Error processing editor support portlet for user " + request.getRemoteUser(), e);
     }

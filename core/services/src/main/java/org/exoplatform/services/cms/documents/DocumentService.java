@@ -228,6 +228,22 @@ public interface DocumentService {
    */
   DocumentEditorProvider getEditorProvider(String provider) throws DocumentEditorProviderNotFoundException;
 
+  
+  /**
+   * Sets the common editor plugin.
+   *
+   * @param plugin the plugin
+   */
+  void setCommonEditorPlugin(ComponentPlugin plugin);
+  
+  /**
+   * Gets the editors idle timeout from common editor plugin
+   * or returns default timeout.
+   *
+   * @return the editors idle timeout
+   */
+  long getEditorsIdleTimeout();
+  
   /**
    * Gets the documents by folder.
    *
