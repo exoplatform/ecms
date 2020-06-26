@@ -41,7 +41,7 @@
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
     <org.exoplatform.social.version>6.0.x-SNAPSHOT</org.exoplatform.social.version>
-    <org.exoplatform.jcr.version>6.0.x-SNAPSHOT</org.exoplatform.jcr.version>
+    <addon.exo.jcr.version>6.0.x-SNAPSHOT</addon.exo.jcr.version>
     <org.exoplatform.platform-ui.version>6.0.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- **************************************** -->
     <!-- Google API -->
@@ -93,7 +93,7 @@
       <dependency>
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>jcr-parent</artifactId>
-        <version>${org.exoplatform.jcr.version}</version>
+        <version>${addon.exo.jcr.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
