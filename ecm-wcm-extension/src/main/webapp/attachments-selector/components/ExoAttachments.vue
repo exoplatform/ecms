@@ -151,7 +151,7 @@
           :space-id="spaceId" 
           :extension-refs="$refs"
           :connected-drive="connectedDrive"
-          :drives-in-progress="drivesInProgress"
+          :cloud-drives-in-progress="drivesInProgress"
           @itemsSelected="toggleServerFileSelector"
           @cancel="toggleServerFileSelector()"
         ></exo-folders-files-selector>
@@ -600,8 +600,8 @@ export default {
     addCloudDrive(drive) {
       this.connectedDrive = drive;
     },
-    changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
-      this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
+    changeCloudDriveProgress(drives) { // listen clouddrives 'updateDrivesInProgress' event
+      this.drivesInProgress = drives; // update progress for connecting drive to display that drive is in connection
     },
   }
 };

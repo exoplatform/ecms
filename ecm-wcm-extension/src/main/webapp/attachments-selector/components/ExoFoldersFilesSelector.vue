@@ -210,7 +210,7 @@ export default {
       type: Object,
       default: () => ({})
     },
-    drivesInProgress: {
+    cloudDrivesInProgress: {
       type: Object,
       default: () => ({})
     }
@@ -319,6 +319,9 @@ export default {
         connectedDrive = this.drivesInProgress[key] >= fullProgress ? key : '';
       }
       return connectedDrive;
+    },
+    drivesInProgress() {
+      return { ...this.cloudDrivesInProgress.drives };
     }
   },
   watch: {
