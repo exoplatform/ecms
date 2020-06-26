@@ -73,7 +73,7 @@ public class OneDriveConnector extends CloudDriveConnector {
 
     OneDriveAPI build() throws CloudDriveException, IOException {
       if (code != null && code.length() > 0) {
-        return new OneDriveAPI(getClientId(), getClientSecret(), code, serverUrl + "/portal/rest/clouddrive/connect/onedrive" );
+        return new OneDriveAPI(getClientId(), getClientSecret(), code, getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive" );
       } else {
         return new OneDriveAPI(getClientId(), getClientSecret(), accessToken, refreshToken, expirationTime, getConnectorSchema() + "://" + getConnectorHost() + "/portal/rest/clouddrive/connect/onedrive");
       }
