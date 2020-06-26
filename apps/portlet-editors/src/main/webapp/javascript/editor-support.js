@@ -63,12 +63,25 @@
     var cometd, cometdContext;
     var configLoader = $.Deferred();
     var initLoader;
-
+    var idleTimer;
+    var closeInterval;
+    var $idleModal;
+    var idleEnabled = false;
+    var idlePopupTimeout;
+    
     const DOCUMENT_OPENED = "DOCUMENT_OPENED";
     const DOCUMENT_CLOSED = "DOCUMENT_CLOSED";
     const LAST_EDITOR_CLOSED = "LAST_EDITOR_CLOSED";
     const REFRESH_STATUS = "REFRESH_STATUS";
     const CURRENT_PROVIDER_INFO = "CURRENT_PROVIDER_INFO";
+    
+    
+    var messages = {}; // should be initialized by initConfig
+
+    var message = function(key) {
+      var m = messages[key];
+      return m ? m : key;
+    };
 
     /**
      * Parses comet message from JSON
@@ -163,7 +176,9 @@
       }
       log("Initializing editor support module");
       initLoader = $.Deferred();
-      configLoader.done(function(user, cometdConf) {
+      configLoader.done(function(user, cometdConf, i18n, idleTimeout) {
+        messages = i18n;
+        idlePopupTimeout = idleTimeout;
         cCometD.configure({
           "url": prefixUrl + cometdConf.path,
           "exoId": user,
@@ -181,13 +196,67 @@
       });
     };
 
+    /**
+     * Shows close popup (idle) 
+     */
+    var showClosePopup = function() {
+      $idleModal = $('#editorIdleModal');
+      var title = message("idlePopup.title");
+      var text = message("idlePopup.message");
+      text = text.replace(/%s/g, "<span id='closeCountdown'></span>");
+      if ($idleModal.length == 0) {
+        $idleModal = $("<div id='editorIdleModal'><div id='editorIdleModalContent'> <span id='editorIdleModalClose'>&times;</span> <h3>" + title + "</h3> <p>" + text + "</p> </div> </div>");
+        $("body").prepend($idleModal);
+      }
+      $("body").blur();
+      $idleModal.css("display", "block");
+      var countdown = 30;
+      var $closeCountdown = $("#closeCountdown");
+      $closeCountdown.html(countdown);
+      closeInterval = setInterval(function() {
+        countdown--;
+        $closeCountdown.html(countdown);
+        if (countdown == 0) {
+          window.close();
+        }
+      }, 1000);
+      $("#editorIdleModalClose").on("click", function() {
+        $idleModal.css("display", "none");
+        clearInterval(closeInterval);
+        notifyActive();
+      });
+      window.onclick = function(event) {
+        if (event.target == $idleModal.get(0)) {
+          $idleModal.css("display", "none");
+          clearInterval(closeInterval);
+          notifyActive();
+        }
+      }
+    }
+
+    /**
+     * Notifies that the editor is active.
+     */
+    var notifyActive = function() {
+      if (idleEnabled) {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(showClosePopup, idlePopupTimeout);
+        clearInterval(closeInterval);
+        if ($idleModal) {
+          $idleModal.css("display", "none");
+        }
+      }
+    }
+
+    this.notifyActive = notifyActive;
+
     this.init = init;
 
     /**
      * Inits configuration
      */
-    this.initConfig = function(user, conf) {
-      configLoader.resolve(user, conf);
+    this.initConfig = function(user, conf, i18n, idleTimeout) {
+      configLoader.resolve(user, conf, i18n, idleTimeout);
     };
 
     /**
@@ -262,6 +331,9 @@
       initLoader.done(function() {
         subscribeDocument(fileId, function(result) {
           if (result.type === CURRENT_PROVIDER_INFO) {
+            if (result.allProviders.length > 1) {
+              idleEnabled = true;
+            }
             if (result.available == "true") {
               $loader.resolve();
             } else {
@@ -279,7 +351,7 @@
         });
 
       });
-
+      notifyActive();
       return $loader.promise();
     };
   }
