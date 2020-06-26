@@ -502,8 +502,6 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
                 </div><!--end fileShare-->
                 </div><!--end previews-->
 <% } %>
-
-            <% _ctx.includeTemplates("UIActivityActionBar-actions-mobile") %>
             <div class="actionsDetailsWrapper">
               <% _ctx.includeTemplates("UIActivityListLiked") %>
               <% _ctx.includeTemplates("UIActivityActionBar-actions") %>
