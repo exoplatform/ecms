@@ -60,6 +60,7 @@ import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.CommonEditorPlugin;
 import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
@@ -135,6 +136,7 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String DOCUMENTS_NODE = "Documents";
   private static final String SHARED_NODE = "Shared";
   private static final String COLLABORATION = "collaboration";
+  private static final long DEFAULT_EDITORS_IDLE_TIMEOUT = 1800000;
   private static final Log LOG = ExoLogger.getLogger(DocumentServiceImpl.class);
   
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
@@ -153,7 +155,8 @@ public class DocumentServiceImpl implements DocumentService {
   private final SettingService settingService;
   private final IdentityManager identityManager;
   private final String editorsRuntimeId;
-
+  private CommonEditorPlugin commonEditorPlugin;
+  
   /**
    * Instantiates a new {@link DocumentService} implementation.
    *
@@ -623,6 +626,25 @@ public class DocumentServiceImpl implements DocumentService {
       LOG.error("The DocumentMetadataPlugin plugin is not an instance of " + pclass.getName());
     }
   }
+  
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setCommonEditorPlugin(ComponentPlugin plugin) {
+    Class<CommonEditorPlugin> pclass = CommonEditorPlugin.class;
+    if (pclass.isAssignableFrom(plugin.getClass())) {
+      CommonEditorPlugin commonPlugin = pclass.cast(plugin);
+      LOG.info("Setting CommonEditorPlugin [{}]", plugin.toString());
+      this.commonEditorPlugin = commonPlugin;
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Registered CommonEditorPlugin instance of {}", plugin.getClass().getName());
+      }
+    } else {
+      LOG.error("The CommonEditorPlugin plugin is not an instance of " + pclass.getName());
+    }
+  }
 
   /**
    * {@inheritDoc}
@@ -757,6 +779,14 @@ public class DocumentServiceImpl implements DocumentService {
                                 .filter(editorProvider -> editorProvider.getProviderName().equals(provider))
                                 .findFirst()
                                 .orElseThrow(DocumentEditorProviderNotFoundException::new);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getEditorsIdleTimeout() {
+    return commonEditorPlugin != null ? commonEditorPlugin.getIdleTimeout() : DEFAULT_EDITORS_IDLE_TIMEOUT;
   }
   
   /**

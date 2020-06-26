@@ -55,5 +55,9 @@
     <buttons>
       <EditorButton>Edit</EditorButton>
     </buttons>
+    <idlePopup>
+      <title>Warning</title>
+      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
+    </idlePopup>
   </editors>
 </bundle>
