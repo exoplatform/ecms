@@ -35,6 +35,38 @@
   </module>
 
   <module>
+    <name>FileSearch</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/filesSearch.bundle.js</path>
+    </script>
+    <depends>
+      <module>commonDocComponents</module>
+    </depends>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+    <depends>
+      <module>documentPreview</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>vueEllipsis</module>
+    </depends>
+  </module>
+
+  <module>
     <name>commonDocComponents</name>
     <script>
       <minify>false</minify>

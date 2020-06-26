@@ -46,18 +46,18 @@
             </properties-param>
         </init-params>
     </component>
-	
-	<component>
-        <key>org.exoplatform.services.wcm.search.connector.FileSearchRestServiceConnector</key>
-        <type>org.exoplatform.services.wcm.search.connector.FileSearchRestServiceConnector</type>
-        <init-params>
-            <properties-param>
-                <name>constructor.params</name>
-				<property name="type" value="file"/>
-				<property name="index" value="file_alias"/>
-				<property name="searchFields" value=""/>
-            </properties-param>
-        </init-params>
+  
+    <component>
+      <type>org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector</type>
+      <init-params>
+        <properties-param>
+          <name>constructor.params</name>
+          <property name="index" value="file_alias" />
+          <property name="type" value="file" />
+          <property name="titleField" value="title" />
+          <property name="searchFields" value="name,title,attachment.content" />
+        </properties-param>
+      </init-params>
     </component>
 
     <component>
