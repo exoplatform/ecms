@@ -186,7 +186,7 @@ public class UIDocViewer extends UIBaseNodePresentation {
   }
 
   public String getRepositoryName() {
-    return UIDocActivityComposer.REPOSITORY;
+    return UIDocActivity.REPOSITORY_NAME;
   }
   
   static  public class DownloadActionListener extends EventListener<UIDocViewer> {

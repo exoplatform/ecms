@@ -7,8 +7,7 @@
     <node>
       <uri>editors</uri>
       <name>editors</name>
-      <label>Editors Administration</label>
-      <visibility>HIDDEN</visibility>
+      <label>#{editors.admin.page}</label>
       <page-reference>group::/platform/administrators::editors</page-reference>
     </node>
   </page-nodes>

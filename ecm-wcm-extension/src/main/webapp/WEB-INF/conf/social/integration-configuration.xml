@@ -61,6 +61,42 @@
   </external-component-plugins>
 
   <external-component-plugins>
+    <target-component>org.exoplatform.social.core.search.SearchService</target-component>
+    <component-plugin>
+      <name>FileSearchConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.social.core.search.SearchConnectorPlugin</type>
+      <description>Files Search connector</description>
+      <init-params>
+        <object-param>
+          <name>FileSearchConnector</name>
+          <description>Files Search connector</description>
+          <object type="org.exoplatform.social.core.search.SearchConnector">
+            <field name="name">
+              <string>file</string>
+            </field>
+            <field name="uri">
+              <string><![CDATA[/portal/rest/search/documents/recent?limit={limit}&q={keyword}&sort=relevancy]]></string>
+            </field>
+            <field name="enabled">
+              <boolean>${exo.search.file.enabled:true}</boolean>
+            </field>
+            <field name="jsModule">
+              <string>SHARED/FileSearch</string>
+            </field>
+            <field name="i18nBundle">
+              <string>locale.portlet.documents</string>
+            </field>
+            <field name="uiComponent">
+              <string>file-search-card</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>
     <component-plugin>
       <name>CmsService.event.postEdit</name>
@@ -91,30 +127,6 @@
             </field>
             <field name="activityBuiderClass">
               <string>org.exoplatform.social.plugin.doc.UIDocActivityBuilder</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-    <component-plugin>
-      <name>add.action</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>Document Composer</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.composer.UIActivityComposer</string>
-            </field>
-            <field name="name">
-              <string>DOC_ACTIVITY</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.social.plugin.doc.UIDocActivityComposer</string>
-            </field>
-            <field name="rank">
-              <int>2</int>
             </field>
           </object>
         </object-param>

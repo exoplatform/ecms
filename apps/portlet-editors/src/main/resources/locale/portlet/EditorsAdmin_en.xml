@@ -22,6 +22,7 @@
 <bundle>
   <editors>
     <admin>
+    <page>Editors Administration</page>
       <error>
         <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
         <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
@@ -54,5 +55,9 @@
     <buttons>
       <EditorButton>Edit</EditorButton>
     </buttons>
+    <idlePopup>
+      <title>Warning</title>
+      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
+    </idlePopup>
   </editors>
 </bundle>
