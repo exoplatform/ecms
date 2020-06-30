@@ -46,6 +46,8 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * PushCloudFile action in working area used to force ignored nodes inside Cloud
@@ -58,7 +60,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
     @EventConfig(listeners = PushCloudFileManagerComponent.PushCloudFileActionListener.class) })
-public class PushCloudFileManagerComponent extends BaseCloudDriveManagerComponent {
+public class PushCloudFileManagerComponent extends UIAbstractManagerComponent {
 
   /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(PushCloudFileManagerComponent.class);
@@ -154,8 +156,13 @@ public class PushCloudFileManagerComponent extends BaseCloudDriveManagerComponen
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      initContext();
+      //initContext();
     }
     return super.renderEventURL(ajax, name, beanId, params);
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
   }
 }

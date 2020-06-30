@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.services.cms.clouddrives.webui;
+package org.exoplatform.ecm.webui;
 
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
 import org.exoplatform.services.cms.clouddrives.CloudProvider;
@@ -26,11 +26,13 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * The Class BaseConnectActionComponent.
  */
-public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
+public abstract class BaseConnectActionComponent extends UIAbstractManagerComponent implements CloudDriveUIMenuAction {
 
   /** The Constant LOG. */
   protected static final Log LOG = ExoLogger.getLogger(BaseConnectActionComponent.class);
@@ -60,7 +62,7 @@ public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerCo
     if (drivesService != null) {
       try {
         CloudProvider provider = drivesService.getProvider(getProviderId());
-        initContext();
+        //initContext();
 
         // XXX do workaround here, need point an id of the provider for this
         // Connect component
@@ -106,5 +108,10 @@ public abstract class BaseConnectActionComponent extends BaseCloudDriveManagerCo
       LOG.error("CloudDriveService not registred in the container.");
     }
     return connectYour + " " + getProviderId();
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
   }
 }

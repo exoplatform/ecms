@@ -17,24 +17,22 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.services.cms.clouddrives.webui.viewer;
-
-import org.exoplatform.webui.config.annotation.ComponentConfig;
+package org.exoplatform.ecm.webui;
 
 /**
- * Viewer showing no preview form. Created by The eXo Platform SAS
+ * Action in ECMS menu action bar for Cloud Drive UI. Created by The eXo
+ * Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
- * @version $Id: LargeFilesViewer.java 00000 Jul 27, 2015 pnedonosko $
+ * @version $Id: CloudDriveUIAction.java 00000 Feb 28, 2014 pnedonosko $
  */
-@ComponentConfig(template = "classpath:groovy/templates/DefaultFileViewer.gtmpl")
-public class NotViewableViewer extends DefaultFileViewer {
+public interface CloudDriveUIMenuAction {
 
   /**
-   * {@inheritDoc}
+   * Action name.
+   * 
+   * @return String
    */
-  @Override
-  public boolean isViewable() {
-    return false;
-  }
+  String getName();
+
 }

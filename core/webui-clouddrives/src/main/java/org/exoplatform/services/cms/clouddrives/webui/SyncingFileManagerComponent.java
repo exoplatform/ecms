@@ -37,6 +37,8 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * SyncingFile hidden action in working area used by Cloud Drive Javascript to
@@ -48,7 +50,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
     @EventConfig(listeners = SyncingFileManagerComponent.SyncingFileActionListener.class) })
-public class SyncingFileManagerComponent extends BaseCloudDriveManagerComponent {
+public class SyncingFileManagerComponent extends UIAbstractManagerComponent {
 
   /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(SyncingFileManagerComponent.class);
@@ -108,8 +110,13 @@ public class SyncingFileManagerComponent extends BaseCloudDriveManagerComponent 
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      initContext();
+      //initContext();
     }
     return super.renderEventURL(ajax, name, beanId, params);
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
   }
 }

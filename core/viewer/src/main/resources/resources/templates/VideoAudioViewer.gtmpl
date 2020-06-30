@@ -44,7 +44,7 @@
         realNodeData.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA)) {
       //add node with name "CCPublished.txt" inside nodedata and get it as caption for published node's caption
       //getRealNodeBySystemSession;
-      Session systemSession = WCMCoreUtils.getSystemSessionProvider().getSession(realNodeData.getSession().getWorkspace().getName(), 
+      Session systemSession = WCMCoreUtils.getSystemSessionProvider().getSession(realNodeData.getSession().getWorkspace().getName(),
                                                                                  WCMCoreUtils.getRepository());
       //add CCPublished.txt as nt:file
       String ccPublished = "CCPublished.txt";
@@ -65,7 +65,7 @@
       //add mix:hiddenable
       ccNode.addMixin(NodetypeConstant.EXO_HIDDENABLE);
       realNodeData.save();
-      captionChild = ccNode;    
+      captionChild = ccNode;
     }
     if (captionChild != null) {
       urlBuf.append(", captionUrl : '").append(Utils.getWebdavURL(captionChild, false)).append("'");
@@ -102,13 +102,13 @@
         plugins: {
           captions: {
             url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.captions-3.2.10.swf',
-    
+
             // pointer to a content plugin (see below)
             captionTarget: 'content'
-          },    	  
-    	  
+          },
+
           /*
-          configure a content plugin so that it 
+          configure a content plugin so that it
           looks good for showing subtitles
           */
           content: {
@@ -119,16 +119,16 @@
             backgroundGradient: 'none',
             border: 0,
                   textDecoration: 'outline',
-            style: { 
-              body: { 
-                fontSize: 14, 
+            style: {
+              body: {
+                fontSize: 14,
                 fontFamily: 'Arial',
                 textAlign: 'center',
                 color: '#ffffff'
-              } 
-            } 
+              }
+            }
           },
-          
+
           controls: {
             url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.controls-3.2.16.swf',
             height: 30,
@@ -142,7 +142,7 @@
             stop: false,
             play: true,
             scrubber: true,
-            time: true, 
+            time: true,
             mute: true,
             volume: true,
             fullscreen: true,
@@ -162,7 +162,7 @@
         }
       });
      }
-     
+
     function timedCount$timeCreated() {
        timemili++;
        if (finFpl == false && timemili < 10) {

@@ -1,7 +1,7 @@
 package org.exoplatform.services.cms.clouddrives.onedrive.ecms;
 
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
-import org.exoplatform.services.cms.clouddrives.webui.BaseConnectActionComponent;
+import org.exoplatform.ecm.webui.BaseConnectActionComponent;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;

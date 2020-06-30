@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.services.cms.clouddrives.webui.viewer;
+package org.exoplatform.ecm.webui.viewer;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -27,15 +27,16 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudFile;
-import org.exoplatform.services.cms.clouddrives.webui.BaseCloudDriveManagerComponent;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Base class for Cloud Drive file viewers.
  */
-public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent implements CloudFileViewer {
+public abstract class AbstractCloudFileViewer extends UIAbstractManagerComponent implements CloudFileViewer {
 
   /** The drive. */
   protected CloudDrive drive;
@@ -51,14 +52,14 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
    *
    * @param viewableMaxSize the viewable max size
    */
-  protected AbstractFileViewer(long viewableMaxSize) {
+  protected AbstractCloudFileViewer(long viewableMaxSize) {
     this.viewableMaxSize = viewableMaxSize;
   }
 
   /**
    * Instantiates a new abstract file viewer.
    */
-  protected AbstractFileViewer() {
+  protected AbstractCloudFileViewer() {
     this(Long.MAX_VALUE);
   }
 
@@ -67,7 +68,7 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
    */
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    initContext();
+    //initContext();
 
     Object obj = context.getAttribute(CloudDrive.class);
     if (obj != null) {
@@ -133,6 +134,11 @@ public abstract class AbstractFileViewer extends BaseCloudDriveManagerComponent 
                                                                             locale,
                                                                             this.getClass().getClassLoader());
     return resourceBundle.getString(key);
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
   }
 
 }

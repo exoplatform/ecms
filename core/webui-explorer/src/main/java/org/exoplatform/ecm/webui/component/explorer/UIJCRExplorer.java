@@ -255,11 +255,17 @@ public class UIJCRExplorer extends UIContainer {
   /**
    * Sets the virtual current path
    */
-  public void setCurrentPath(String  currentPath) {
+  public void setCurrentPath(String currentPath) {
+    WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     if (currentPath_ == null || !currentPath_.equals(currentPath)) {
       isShowDocumentViewForFile_ = true;
     }
     currentPath_ = currentPath;
+    try {
+      ctx.setAttribute("uiJCRExplorerCurrentNode", getCurrentNode());
+    } catch (Exception e) {
+      LOG.warn("Exception while getting the current node for saving in WebuiRequestContext", e);
+    }
   }
 
   /**

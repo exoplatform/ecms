@@ -18,13 +18,14 @@
  */
 package org.exoplatform.services.cms.clouddrives.webui.viewer;
 
+import org.exoplatform.ecm.webui.viewer.AbstractCloudFileViewer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 
 /**
  * Flash video/audio/mp3 files viewer for Cloud Drive.
  */
 @ComponentConfig(template = "classpath:groovy/templates/VideoAudioViewer.gtmpl")
-public class VideoAudioViewer extends AbstractFileViewer {
+public class VideoAudioViewer extends AbstractCloudFileViewer {
 
   /**
    * Instantiates a new video audio viewer.

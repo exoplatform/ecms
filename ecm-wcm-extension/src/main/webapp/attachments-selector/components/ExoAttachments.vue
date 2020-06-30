@@ -21,8 +21,8 @@
           class="alert alert-info attachmentsAlert">
           <span>
             {{ $t(`attachments.alert.${!isActivityStream ? 'fromSpace' : 'personalFiles'}`) }}
-            <b v-for="file in fromAnotherSpaces" v-show="!isActivityStream && fromAnotherSpaces.length > 0" :key="file.id">
-              {{ file.space.title }}
+            <b v-show="!isActivityStream && fromAnotherSpaces.length > 0">
+              {{ fromAnotherSpaces }}
             </b>.
           </span>
           <span>{{ $t('attachments.alert.everyoneAvailable') }}</span>
@@ -252,7 +252,7 @@ export default {
       connectedDrive: {},
       privateFilesAttached: false,
       isActivityStream: true,
-      fromAnotherSpaces: [],
+      fromAnotherSpaces: '',
       spaceGroupId: '',
       drivesInProgress: {}
     };
@@ -293,7 +293,8 @@ export default {
           }
         }
         this.privateFilesAttached = this.value.some(file => file.isPublic === false);
-        this.fromAnotherSpaces = this.value.filter(({ space }) => space && space.name !== this.groupId);
+        this.fromAnotherSpaces = this.value.filter(({ space }) => space && space.name !== this.groupId)
+          .map(({ space }) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
       }
     }
   },

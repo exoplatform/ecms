@@ -356,7 +356,7 @@
               <string>ShowLargeFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.services.cms.clouddrives.webui.viewer.NotViewableViewer</string>
+              <string>org.exoplatform.ecm.webui.viewer.NotViewableCloudViewer</string>
             </field>
             <field name="category">
               <string>FileViewer</string>
@@ -367,7 +367,8 @@
             <field name="extendedFilters">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.services.cms.clouddrives.webui.filters.CloudFileLargerFilter">
+                  <object
+                      type="org.exoplatform.services.cms.clouddrives.webui.filters.CloudFileLargerFilter">
                     <field name="minSize">
                       <long>209715200</long><!-- 200MB -->
                     </field>
@@ -387,7 +388,7 @@
               <string>ShowCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.services.cms.clouddrives.webui.viewer.DefaultFileViewer</string>
+              <string>org.exoplatform.ecm.webui.viewer.DefaultCloudFileViewer</string>
             </field>
             <field name="category">
               <string>FileViewer</string>

@@ -35,6 +35,7 @@ if (drive) {
 	def serviceName = drive.user.serviceName
 	def openOn = uicomponent.appRes("CloudFileViewer.event.OpenOn")
 	def viewable = uicomponent.isViewable()
+	def previewLink = uicomponent.file.getPreviewLink()
 %>
 <div id="CloudFileViewer" file-open-on="${openOn} ${serviceName}"
 		style="height: <%=viewable ? "100%" : "200px"%>;">
@@ -44,14 +45,14 @@ if (drive) {
   	def viewFile = uicomponent.appRes("CloudFileViewer.event.ViewFile")
   	def editFile = uicomponent.appRes("CloudFileViewer.event.EditFile")
 	%>
-	<div style="display: none;" class="file-content">
+	<div class="file-content">
     <a id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
       class="btn pull-right">
       ${editFile}
     </a>
 		<iframe frameborder="0"
 			style="position: absolute; width: 100%; height: 100%;"
-			src="">
+			src="${previewLink}">
 		</iframe>
 	</div>
 <%
