@@ -13,19 +13,23 @@
         <v-progress-linear :active="cloudDriveConnecting" absolute bottom indeterminate></v-progress-linear>
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
-        <div
-          v-show="
-            !showDocumentSelector && ((privateFilesAttached && isActivityStream) ||
-            (!isActivityStream && fromAnotherSpaces.length > 0))
-          "
-          class="alert alert-info attachmentsAlert">
-          <span>
-            {{ $t(`attachments.alert.${!isActivityStream ? 'fromSpace' : 'personalFiles'}`) }}
-            <b v-show="!isActivityStream && fromAnotherSpaces.length > 0">
+        <div v-show="!showDocumentSelector">
+          <div v-show="isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
+            {{ $t('attachments.alert.sharing.attachedFrom') }}
+            {{ $t(`attachments.alert.sharing.${privateFilesAttached && !fromAnotherSpaces.length ? 'personal' : 'space'}`) }}
+            <b v-show="fromAnotherSpaces.length > 0">
               {{ fromAnotherSpaces }}
-            </b>.
-          </span>
-          <span>{{ $t('attachments.alert.everyoneAvailable') }}</span>
+            </b>
+            {{ $t('attachments.alert.sharing.availableFor') }} {{ $t('attachments.alert.sharing.connections') }}
+          </div>
+          <div v-show="!isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
+            {{ $t('attachments.alert.sharing.attachedFrom') }}
+            {{ $t(`attachments.alert.sharing.${privateFilesAttached && !fromAnotherSpaces.length ? 'personal' : 'space'}`) }}
+            <b v-show="fromAnotherSpaces.length > 0">
+              {{ fromAnotherSpaces }}
+            </b>
+            {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ spaceGroupId }}</b> {{ $t('attachments.alert.sharing.members') }}
+          </div>
         </div>
         <div v-show="!showDocumentSelector" class="attachmentsContent">
           <div class="multiploadFilesSelector">
