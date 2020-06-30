@@ -40,9 +40,21 @@
       }
     }
 
+    &Alert {
+      margin: 0 3%;
+      position: absolute;
+
+      &--info {
+        top: 12%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
     &List {
       width: 70%;
       margin: 0 auto;
+      padding-top: 23px;
 
       &Item {
         border: 1px solid @primaryColor;
@@ -57,7 +69,11 @@
         }
 
         &__icon {
-          margin: 5.5px 0;
+          min-width: 0;
+          margin: 5px 0;
+          padding-right: 5px;
+          display: flex;
+          align-items: center;
 
           i:before {
             color: @primaryColor;

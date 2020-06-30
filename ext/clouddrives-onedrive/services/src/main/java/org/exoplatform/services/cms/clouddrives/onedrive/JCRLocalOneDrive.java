@@ -15,10 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
+import javax.jcr.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,15 +28,7 @@ import com.microsoft.graph.models.extensions.ItemReference;
 import com.microsoft.graph.models.extensions.SharingLink;
 import com.microsoft.graph.models.extensions.Subscription;
 
-import org.exoplatform.services.cms.clouddrives.CloudDriveException;
-import org.exoplatform.services.cms.clouddrives.CloudFile;
-import org.exoplatform.services.cms.clouddrives.CloudProviderException;
-import org.exoplatform.services.cms.clouddrives.CloudUser;
-import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
-import org.exoplatform.services.cms.clouddrives.RefreshAccessException;
-import org.exoplatform.services.cms.clouddrives.SkipChangeException;
-import org.exoplatform.services.cms.clouddrives.SkipSyncException;
-import org.exoplatform.services.cms.clouddrives.SyncNotSupportedException;
+import org.exoplatform.services.cms.clouddrives.*;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudFile;
 import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
@@ -422,7 +411,7 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     SharingLink sharingLink = createLink(item);
     if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
       link = "personal=" + sharingLink.webUrl;
-      previewLink = item.webUrl;
+      previewLink = sharingLink.webUrl;
     } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
       link = "business=" + sharingLink.webUrl;
     }
@@ -441,22 +430,23 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
             item.size);
 
 
-    return new JCRLocalCloudFile(fileNode.getPath(),
-            item.id,
-            item.name,
-            link,
-            previewLink,
-            null, // to get thumbnailLink, you need at least one additional request.
-            item.file.mimeType,
-            null, // TODO type mode
-            lastModifiedUserName,
-            createdUserName,
-            item.createdDateTime,
-            item.lastModifiedDateTime,
-            item.size,
-            fileNode,
-            true);
-
+    return new JCRLocalOneDriveFile(fileNode.getPath(),
+                                    item.id,
+                                    item.name,
+                                    link,
+                                    previewLink,
+                                    null, // to get thumbnailLink, you need at least one additional request.
+                                    item.file.mimeType,
+                                    null, // TODO type mode
+                                    lastModifiedUserName,
+                                    createdUserName,
+                                    item.createdDateTime,
+                                    item.lastModifiedDateTime,
+                                    item.size,
+                                    fileNode,
+                                    true,
+                                    getUser().api(),
+                                    accountType);
   }
   private JCRLocalCloudFile createCloudFolder(Node fileNode, DriveItem item) throws RepositoryException {
     String lastModifiedUserName = "";
@@ -1045,5 +1035,46 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
       driveItem.fileSystemInfo.lastModifiedDateTime = modified;
       return driveItem;
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public CloudFile getFile(String path) throws DriveRemovedException,
+                                        NotCloudDriveException,
+                                        NotCloudFileException,
+                                        NotYetCloudFileException,
+                                        RepositoryException {
+    CloudFile cloudFile = super.getFile(path);
+
+    Node driveNode = rootNode(true);
+    // take symlinks in account
+    Item target = finder.findItem(driveNode.getSession(), path);
+
+    Node fileNode = null;
+
+    if (target.isNode()) {
+      fileNode = fileNode((Node) target);
+    }
+
+    return new JCRLocalOneDriveFile(cloudFile.getPath(),
+            cloudFile.getId(),
+            cloudFile.getTitle(),
+            cloudFile.getLink(),
+            cloudFile.getEditLink(),
+            cloudFile.getPreviewLink(),
+            cloudFile.getThumbnailLink(),
+            cloudFile.getType(),
+            cloudFile.getTypeMode(),
+            cloudFile.getLastUser(),
+            cloudFile.getAuthor(),
+            cloudFile.getCreatedDate(),
+            cloudFile.getModifiedDate(),
+            cloudFile.isFolder(),
+            cloudFile.getSize(),
+            fileNode,
+            false,
+            getUser().api(), accountType);
   }
 }

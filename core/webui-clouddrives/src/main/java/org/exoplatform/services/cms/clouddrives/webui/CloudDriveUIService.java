@@ -29,6 +29,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.ecm.webui.CloudDriveUIMenuAction;
 import org.picocontainer.Startable;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;

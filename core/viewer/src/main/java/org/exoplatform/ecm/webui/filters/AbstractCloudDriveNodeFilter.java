@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.exoplatform.services.cms.clouddrives.webui.filters;
+package org.exoplatform.ecm.webui.filters;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,9 +27,6 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
-import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.cms.clouddrives.CloudProvider;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -37,8 +34,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.social.webui.activity.UIActivitiesContainer;
-import org.exoplatform.social.webui.composer.PopupContainer;
+//import org.exoplatform.social.webui.activity.UIActivitiesContainer;
+//import org.exoplatform.social.webui.composer.PopupContainer;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -115,59 +112,38 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
       boolean accepted = false;
       Node contextNode = (Node) context.get(Node.class.getName());
       if (contextNode == null) {
-        UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
-        if (uiExplorer != null) {
-          contextNode = uiExplorer.getCurrentNode();
-        }
-
+        WebuiRequestContext reqContext = WebuiRequestContext.getCurrentInstance();
+        contextNode = (Node) reqContext.getAttribute("uiJCRExplorerCurrentNode");
+        // case of file preview in Social activity stream
         if (contextNode == null) {
-          WebuiRequestContext reqContext = WebuiRequestContext.getCurrentInstance();
-          UIApplication uiApp = reqContext.getUIApplication();
-          UIJcrExplorerContainer jcrExplorerContainer = uiApp.getChild(UIJcrExplorerContainer.class);
-          if (jcrExplorerContainer != null) {
-            UIJCRExplorer jcrExplorer = jcrExplorerContainer.getChild(UIJCRExplorer.class);
-            contextNode = jcrExplorer.getCurrentNode();
-          }
-          // case of file preview in Social activity stream
-          if (contextNode == null) {
-            UIActivitiesContainer uiActivitiesContainer = uiApp.findFirstComponentOfType(UIActivitiesContainer.class);
-            if (uiActivitiesContainer != null) {
-              PopupContainer uiPopupContainer = uiActivitiesContainer.getPopupContainer();
-              if (uiPopupContainer != null) {
-                UIBaseNodePresentation docViewer = uiPopupContainer.findComponentById("UIDocViewer");
-                if (docViewer != null) {
-                  contextNode = docViewer.getNode();
-                }
+          contextNode = (Node) reqContext.getAttribute("UIDocumentPreviewNode");
+        }
+        // case of ContentViewerRESTService (actual for PLF 4.4 and PLF 5.0)
+        if (contextNode == null && PortalRequestContext.class.isAssignableFrom(reqContext.getClass())) {
+          try {
+            PortalRequestContext portalReqContext = PortalRequestContext.class.cast(reqContext);
+            String reqPathInfo = portalReqContext.getControllerContext().getRequest().getPathInfo();
+            if (reqPathInfo.startsWith(CONTENTVIEWER_REST_PATH)) {
+              // It's string of content like:
+              // /contentviewer/repository/collaboration/4e6a36fcc0a8016529a3148700beecec
+              String[] reqParams = reqPathInfo.substring(CONTENTVIEWER_REST_PATH.length()).split("/");
+              if (reqParams.length >= 3) {
+                String repository = reqParams[0];
+                String workspace = reqParams[1];
+                String uuid = reqParams[2];
+                RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+                SessionProvider sp = WCMCoreUtils.getUserSessionProvider();
+                contextNode = sp.getSession(workspace, repositoryService.getRepository(repository)).getNodeByUUID(uuid);
               }
             }
-          }
-          // case of ContentViewerRESTService (actual for PLF 4.4 and PLF 5.0)
-          if (contextNode == null && PortalRequestContext.class.isAssignableFrom(reqContext.getClass())) {
-            try {
-              PortalRequestContext portalReqContext = PortalRequestContext.class.cast(reqContext);
-              String reqPathInfo = portalReqContext.getControllerContext().getRequest().getPathInfo();
-              if (reqPathInfo.startsWith(CONTENTVIEWER_REST_PATH)) {
-                // It's string of content like:
-                // /contentviewer/repository/collaboration/4e6a36fcc0a8016529a3148700beecec
-                String[] reqParams = reqPathInfo.substring(CONTENTVIEWER_REST_PATH.length()).split("/");
-                if (reqParams.length >= 3) {
-                  String repository = reqParams[0];
-                  String workspace = reqParams[1];
-                  String uuid = reqParams[2];
-                  RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-                  SessionProvider sp = WCMCoreUtils.getUserSessionProvider();
-                  contextNode = sp.getSession(workspace, repositoryService.getRepository(repository)).getNodeByUUID(uuid);
-                }
-              }
-            } catch (AccessDeniedException e) {
-              // no access for current user
-            } catch (ItemNotFoundException e) {
-              // such item not found
-            } catch (Throwable e) {
-              // ignore and assume we don't have a context node
-              if (LOG.isDebugEnabled()) {
-                LOG.debug("Cannot find context node in the request: " + e.getMessage());
-              }
+          } catch (AccessDeniedException e) {
+            // no access for current user
+          } catch (ItemNotFoundException e) {
+            // such item not found
+          } catch (Throwable e) {
+            // ignore and assume we don't have a context node
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Cannot find context node in the request: " + e.getMessage());
             }
           }
         }

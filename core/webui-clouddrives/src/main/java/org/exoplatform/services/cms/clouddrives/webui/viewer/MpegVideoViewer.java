@@ -18,13 +18,14 @@
  */
 package org.exoplatform.services.cms.clouddrives.webui.viewer;
 
+import org.exoplatform.ecm.webui.viewer.AbstractCloudFileViewer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 
 /**
  * MPEG files viewer for Cloud Drive.
  */
 @ComponentConfig(template = "classpath:groovy/templates/MpegVideoViewer.gtmpl")
-public class MpegVideoViewer extends AbstractFileViewer {
+public class MpegVideoViewer extends AbstractCloudFileViewer {
 
   /**
    * Instantiates a new mpeg video viewer.

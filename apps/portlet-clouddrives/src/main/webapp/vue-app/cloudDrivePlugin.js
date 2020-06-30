@@ -7,21 +7,12 @@ const CloudDrivePlugin = [{
     name: "connect-cloud-drive",
     events: [
       {
-        "event": "openDriveFolder",
-        // listener must be the name of the method existing in composer, this method will be called on event emit
-        "listener": "openFolder"
-      },
-      {
         "event": "updateProgress",
         "listener": "setCloudDriveProgress"
       },
       {
         "event": "addDrive",
         "listener": "addCloudDrive"
-      },
-      {
-        "event": "openDrives",
-        "listener": "fetchUserDrives"
       },
       {
         "event": "updateDrivesInProgress",

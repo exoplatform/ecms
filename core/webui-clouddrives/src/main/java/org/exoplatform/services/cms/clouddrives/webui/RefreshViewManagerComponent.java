@@ -27,7 +27,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.services.cms.clouddrives.webui.filters.CloudDriveFilter;
-import org.exoplatform.services.cms.clouddrives.webui.filters.CloudFileFilter;
+import org.exoplatform.ecm.webui.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
@@ -38,6 +38,8 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * RefreshView hidden action in working area used by Cloud Drive Javascript to
@@ -49,7 +51,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
     @EventConfig(listeners = RefreshViewManagerComponent.RefreshViewActionListener.class) })
-public class RefreshViewManagerComponent extends BaseCloudDriveManagerComponent {
+public class RefreshViewManagerComponent extends UIAbstractManagerComponent {
 
   /** The Constant LOG. */
   protected static final Log                     LOG        = ExoLogger.getLogger(RefreshViewManagerComponent.class);
@@ -107,8 +109,13 @@ public class RefreshViewManagerComponent extends BaseCloudDriveManagerComponent 
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      initContext();
+      //initContext();
     }
     return super.renderEventURL(ajax, name, beanId, params);
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
   }
 }

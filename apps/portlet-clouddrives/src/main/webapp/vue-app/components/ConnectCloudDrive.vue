@@ -12,6 +12,11 @@
         <span class="cloudDriveTitle">{{ $t("ConnectDriveDrawer.title.ConnectYourService") }}</span>
         <a class="cloudDriveCloseIcon" @click="toggleCloudDrawer()">×</a>
       </div>
+      <transition name="fade" mode="in-out">
+        <div v-show="showAlertMessage" :class="`alert-${alert.type} cloudDriveAlert--${alert.type}`" class="alert cloudDriveAlert">
+          <i :class="`uiIcon${capitalized(alert.type)}`"></i>{{ alert.message }}
+        </div>
+      </transition>
       <div class="content">
         <v-list dense class="cloudDriveList ignore-vuetify-classes">
           <v-list-item-group v-if="providers" color="primary">
@@ -23,7 +28,7 @@
               @click.native="connectToCloudDrive(item.id)"
             >
               <v-list-item-icon class="cloudDriveListItem__icon">
-                <i :class="`uiIconEcmsConnectDialog-${item.id} uiIconEcmsBlue`"></i>
+                <i :class="`uiIcon-${item.id} uiIconEcmsBlue`"></i>
               </v-list-item-icon>
               <v-list-item-content class="cloudDriveListItem__content">
                 <v-list-item-title class="cloudDriveListItem__title"> {{ $t("UIPopupWindow.title.ConnectYour") }} {{ item.name }} </v-list-item-title>
@@ -38,7 +43,7 @@
 </template>
 
 <script>
-import { getUserDrive, notifyError } from "../cloudDriveService";
+import { getUserDrive } from "../cloudDriveService";
 
 export default {
   model: {
@@ -60,8 +65,18 @@ export default {
       connectingProvider: "",
       showCloudDrawer: false,
       drivesOpened: false,
-      drivesInProgress: {} // contain all drives that are in connecting process, drive name is a key and progress percent is a value
+      drivesInProgress: {}, // contain all drives that are in connecting process, drive name is a key and progress percent is a value
+      alert: { message: "", type: "" },
+      showAlertMessage: false,
+      MESSAGE_TIMEOUT: 5000
     };
+  },
+  watch: {
+    showAlertMessage: function(newVal) {
+      if (newVal) {
+        setTimeout(() => this.showAlertMessage = false, this.MESSAGE_TIMEOUT);
+      }
+    }
   },
   async created() {
     if (!this.showCloudDrawer) {
@@ -72,11 +87,11 @@ export default {
           title: data.name,
           isSelected: false,
         };
-        // init cloudDrive module after response from getUserDrive
-        cloudDrive.init(data.workspace, data.homePath);
-        this.providers = cloudDrive.getProviders();
+        cloudDrives.init(data.workspace, data.homePath);
+        this.providers = cloudDrives.getProviders();
       } catch (err) {
-        notifyError(this.$t(err.message));
+        this.alert = { message: err.message, type: "error" };
+        this.showAlertMessage = true;
       }
     }
   },
@@ -85,7 +100,7 @@ export default {
       this.connectingProvider = providerId;
       this.$emit("updateProgress", { progress: 0 });
       const fullProgress = 100;
-      cloudDrive.connect(providerId).then(
+      cloudDrives.connect(providerId).then(
         data => {
           if (!this.drivesOpened) {
             this.openDriveFolder(data.drive.path, data.drive.title);
@@ -107,7 +122,16 @@ export default {
           this.showCloudDrawer = false;
           this.drivesOpened = false;
         },
-        () => {
+        (error) => {
+          if (error) {
+            this.alert = { message: error, type: "error" };
+            this.showAlertMessage = true;
+            this.toggleCloudDrawer();
+          } else {
+            // if error undefined/null action was cancelled
+            this.alert = { message: "Canceled", type: "info" };
+            this.showAlertMessage = true;
+          }
           this.connectingProvider = "";
           this.drivesOpened = false;
           this.$emit("updateProgress", { progress: null });
@@ -137,7 +161,7 @@ export default {
           name: title,
           title: title,
           path: folderPath,
-          driveTypeCSSClass: `uiIconEcms24x24Drive${title.replace(" ", "")} uiIconEcms24x24DrivePrivate`,
+          driveTypeCSSClass: `uiIconEcmsDrive-${this.connectingProvider}`,
           type: "drive",
           css: "uiIcon16x16FolderDefault uiIcon16x16nt_folder",
           driverType: "Personal Drives",
@@ -147,6 +171,9 @@ export default {
         this.drivesOpened = true;
         this.showCloudDrawer = false;
       }
+    },
+    capitalized(value) {
+      return typeof value !== "string" ? "" :  value.charAt(0).toUpperCase() + value.slice(1);
     }
   },
 };

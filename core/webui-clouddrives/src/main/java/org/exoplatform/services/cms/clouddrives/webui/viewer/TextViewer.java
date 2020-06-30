@@ -18,15 +18,22 @@
  */
 package org.exoplatform.services.cms.clouddrives.webui.viewer;
 
+import org.exoplatform.ecm.webui.viewer.AbstractCloudFileViewer;
 import org.exoplatform.services.cms.clouddrives.CloudDriveStorage;
 import org.exoplatform.services.cms.clouddrives.viewer.ContentReader;
+import org.exoplatform.services.cms.clouddrives.webui.filters.CloudDriveFilter;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 
 /**
  * Text files viewer for Cloud Drive.
  */
 @ComponentConfig(template = "classpath:groovy/templates/TextViewer.gtmpl")
-public class TextViewer extends AbstractFileViewer {
+public class TextViewer extends AbstractCloudFileViewer {
+
+  /** The Constant LOG. */
+  protected static final Log LOG = ExoLogger.getLogger(TextViewer.class);
 
   /** The Constant MAX_FILE_SIZE. */
   public static final long MAX_FILE_SIZE = 2 * 1024 * 1024; // 2M

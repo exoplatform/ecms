@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 import javax.ws.rs.core.MediaType;
 
+import org.exoplatform.ecm.webui.viewer.CloudFileViewer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;

@@ -18,6 +18,7 @@
  */
 package org.exoplatform.services.cms.clouddrives.webui;
 
+import org.exoplatform.ecm.webui.CloudDriveUIMenuAction;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -26,13 +27,14 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * The Class ShowConnectCloudDriveActionComponent.
  */
 @ComponentConfig(events = {
     @EventConfig(listeners = ShowConnectCloudDriveActionComponent.ShowConnectCloudDriveActionListener.class) })
-public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerComponent implements CloudDriveUIMenuAction {
+public class ShowConnectCloudDriveActionComponent extends UIAbstractManagerComponent implements CloudDriveUIMenuAction {
 
   /**
    * The listener interface for receiving showConnectCloudDriveAction events.

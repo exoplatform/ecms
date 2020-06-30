@@ -48,6 +48,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -532,9 +533,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("path", path);
       folder.setAttribute("repository", repository);
       folder.setAttribute("workspace", workspace);
-      folder.setAttribute("isCloudDrive",
-                          String.valueOf(cloudDrives.findDrive(driver.getWorkspace(),
-                                                               driver.getHomePath()) != null));
+      CloudDrive cloudDrive = cloudDrives.findDrive(driver.getWorkspace(), driver.getHomePath());
+      folder.setAttribute("isCloudDrive", String.valueOf(cloudDrive != null));
+      if (cloudDrive != null) {
+        folder.setAttribute("cloudProvider", cloudDrive.getUser().getProvider().getId());
+      }
       folder.setAttribute("isUpload", "true");
       folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(driveNode)));
       folder.setAttribute("nodeTypeCssClass", Utils.getNodeTypeIcon(driveNode, "uiIcon16x16"));

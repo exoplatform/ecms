@@ -46,8 +46,6 @@
           <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
           <i v-else :class="action.iconClass" class="uiActionIcon"></i>
         </div>
-        <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
-                   v-model="currentDrive" :is="action.component.name" :ref="action.key"></component>
       </div>
     </div>
 
@@ -110,12 +108,29 @@
                   v-for="driver in group.drives" 
                   :key="driver.name" 
                   :title="driver.title" 
-                  :class="{ 'isConnecting': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100 }" 
                   class="folderSelection"
-                  @click="openDrive(driver)">
+                  @click="openDrive(driver, name)">
                   <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
-                    <i :class="driver.driveTypeCSSClass" class="uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>
-                    <div class="selectionLabel center">{{ driver.title }}</div>
+                    <i 
+                      v-show="!drivesInProgress[driver.title]"
+                      :class="driver.isCloudDrive ? driver.driveTypeCSSClass : `uiIconEcms24x24DriveGroup ${driver.driveTypeCSSClass}`"
+                      class="uiIconEcmsLightGray selectionIcon center"></i>
+                    <div class="text-center ma-12 connectingDrive">
+                      <v-progress-circular
+                        v-show="drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100"
+                        :indeterminate="false"
+                        :rotate="0"
+                        :size="40"
+                        :value="drivesInProgress[driver.title]"
+                        :width="4"
+                        color="var(--allPagesPrimaryColor, #578dc9)"
+                        class="connectingDriveProgress"
+                      >{{ drivesInProgress[driver.title] }}<span class="connectingDriveProgressPercent">%</span></v-progress-circular>
+                    </div>
+                    <div 
+                      :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
+                      class="selectionLabel center"
+                    >{{ driver.title }}</div>
                   </a>
                 </div>
               </div>
@@ -170,30 +185,6 @@ import * as attachmentsService from '../attachmentsService.js';
 import { getAttachmentsComposerExtensions, executeExtensionAction } from '../extension';
 
 export default {
-  directives: {
-    DynamicEvents: {
-      bind: function (el, binding, vnode) {
-        const allEvents = binding.value;
-        if (allEvents) {
-          allEvents.forEach((event) => {
-            if (vnode.componentInstance) {
-              // register handler in the dynamic component
-              vnode.componentInstance.$on(event.event, (eventData) => {
-                const param = eventData ? eventData : event.listenerParam;
-                // when the event is fired, the eventListener function is going to be called
-                vnode.context[event.listener](param);
-              });
-            }
-          });
-        }
-      },
-      unbind: function (el, binding, vnode) {
-        if (vnode.componentInstance) {
-          vnode.componentInstance.$off();
-        }
-      },
-    }
-  },
   props: {
     modeFolderSelectionForFile: {
       type: Boolean,
@@ -210,6 +201,18 @@ export default {
     attachedFiles: {
       type: Array,
       default: () => []
+    },
+    extensionRefs: {
+      type: Array,
+      default: () => []
+    },
+    connectedDrive: {
+      type: Object,
+      default: () => ({})
+    },
+    cloudDrivesInProgress: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
@@ -236,7 +239,6 @@ export default {
       schemaFolder: '',
       folderDestinationForFile:'',
       attachmentsComposerActions: [],
-      cloudDriveProgress: null,
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
@@ -252,8 +254,8 @@ export default {
       renameFolderAction:false,
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
-      drivesInProgress: {},
-      privateDestinationForFile: false
+      privateDestinationForFile: false,
+      fromSpace: {}
     };
   },
   computed: {
@@ -317,6 +319,9 @@ export default {
         connectedDrive = this.drivesInProgress[key] >= fullProgress ? key : '';
       }
       return connectedDrive;
+    },
+    drivesInProgress() {
+      return { ...this.cloudDrivesInProgress.drives };
     }
   },
   watch: {
@@ -326,6 +331,11 @@ export default {
     showErrorMessage: function(newVal) {
       if(newVal) {
         setTimeout(() => this.showErrorMessage = false, this.MESSAGE_TIMEOUT);
+      }
+    },
+    connectedDrive: function(drive) {
+      if (!this.drivers.some(({ title }) => title === drive.title)) {
+        this.drivers.push(drive); // display connecting drive in 'My Drives' section
       }
     }
   },
@@ -374,10 +384,11 @@ export default {
       this.folderDestinationForFile = folder.title;
       this.privateDestinationForFile = folder.isPublic;
     },
-    openDrive(drive) {
+    openDrive(drive, group) {
       this.currentAbsolutePath = '';
       this.foldersHistory = [];
       this.resetExplorer();
+      this.fromSpace = group === 'My Spaces' ? { title: drive.title, name: drive.name } : {};
       this.currentDrive = {
         name: drive.name,
         title: drive.title,
@@ -439,7 +450,7 @@ export default {
       if (document.getElementById(file.idAttribute).className === 'fileSelection' && this.filesCountLeft > 0) {
         document.getElementById(file.idAttribute).className = 'fileSelection selected';
         if (!this.selectedFiles.find(f => f.id === file.id)) {
-          this.selectedFiles.push(file);
+          this.selectedFiles.push({ ...file, space: this.fromSpace });
         }
       } else {
         document.getElementById(file.idAttribute).className = 'fileSelection';
@@ -533,7 +544,10 @@ export default {
           }
           for (let j = 0; j < fetchedDrivers.length; j++) {
             const name = fetchedDrivers[j].getAttribute('name');
-            const driveTypeCSSClass = `uiIconEcms24x24Drive${name.replace(/\s/g, '')} ${driverTypeClass}`;
+            const isCloudDrive = fetchedDrivers[j].getAttribute('isCloudDrive') === 'true' ? true : false;
+            const driveTypeCSSClass = isCloudDrive 
+              ? `uiIconEcmsDrive-${fetchedDrivers[j].getAttribute('cloudProvider')}`
+              : `${name.replace(/\s/g, '')} ${driverTypeClass}`;
             this.drivers.push({
               name: name,
               title: fetchedDrivers[j].getAttribute('label'),
@@ -542,7 +556,7 @@ export default {
               type: 'drive',
               driveTypeCSSClass: driveTypeCSSClass,
               driverType: driverType,
-              isCloudDrive: fetchedDrivers[j].getAttribute('isCloudDrive') === 'true' ? true : false
+              isCloudDrive: isCloudDrive
             });
           }
         }
@@ -561,11 +575,7 @@ export default {
       }
     },
     executeAction(action) {
-      executeExtensionAction(action, this.$refs[action.key][0]);
-    },
-    setCloudDriveProgress({ progress }) {
-      this.cloudDriveProgress = progress;
-      this.$emit('changeConnectingStatus', progress ? true : false);
+      executeExtensionAction(action, this.extensionRefs[action.key][0]);
     },
     addNewFolder() {
       if (!this.creatingNewFolder) {
@@ -741,12 +751,6 @@ export default {
       } else {
         this.selectedFolderPath = this.driveRootPath.concat(folder.path);
       }
-    },
-    addCloudDrive(drive) { // listen clouddrives 'addDrive' event
-      this.drivers.push(drive); // display connecting drive in 'My Drives' section
-    },
-    changeCloudDriveProgress({ drives }) { // listen clouddrives 'updateDrivesInProgress' event
-      this.drivesInProgress = { ...drives }; // update progress for connecting drive to display that drive is in connection
     },
     getFolderIcon(folder) {
       return `uiIcon-${folder.cloudProvider}`;

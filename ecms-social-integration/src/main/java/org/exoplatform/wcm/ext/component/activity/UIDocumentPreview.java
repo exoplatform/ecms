@@ -46,6 +46,9 @@ public class UIDocumentPreview extends UIContainer {
     uiDocViewer.workspace = workspace;
     uiDocViewer.setOriginalNode(docNode);
     uiDocViewer.setNode(docNode);
+    // TODO define in the other place
+    WebuiRequestContext reqContext = WebuiRequestContext.getCurrentInstance();
+    reqContext.setAttribute("UIDocumentPreviewNode", docNode);
   }
 
   public Node getOriginalNode() throws Exception {
