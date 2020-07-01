@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Selecteer lidmaatschap</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Selecteer rol</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Selecte groep</selectGroup>
-      <selectMembership>Selecteer lidmaatschap</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Selecteer de gebruiker</SelectUser>
-      <SelectMember>Selecteer lidmaatschap</SelectMember>
+      <SelectMember>Selecteer rol</SelectMember>
       <AddAny>Iedereen</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Selecteer de gebruiker</UIGroupSelector>
       <UIPermissionSelector>Selecteer lid</UIPermissionSelector>
-      <UIGroupMemberSelector>Selecteer lidmaatschap</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selecteer rol</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Selecteer groep</selectGroup>
       <selectUser>Select user</selectUser>
-      <selectMembership>Select membership</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Selecte groep</selectGroup>
       <selectUser>Selecteer de gebruiker</selectUser>
-      <selectMembership>Selecteer lidmaatschap</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select membership</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Selecte groep</selectGroup>
       <selectUser>Selecteer de gebruiker</selectUser>
-      <selectMembership>Selecteer lidmaatschap</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Toevoegen</Add>
     </action>
     <label>
-      <userOrGroup>Lidmaatschappen:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Dit lidmaatschap bestaat al. Selecteer een andere.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selecteer Groep</selectGroup>
-      <selectMembership>Select membership</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

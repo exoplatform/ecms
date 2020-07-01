@@ -29,7 +29,7 @@
         <hide-comments>Commentaren verbergen</hide-comments>
         <comment-by>Becommentarieerd door</comment-by>
         <email>E-mail</email>
-        <site>Site</site>
+        <site>Site portaal</site>
         <lastComment>Laatste commentaar geplaatst door {user} op {time}</lastComment>
         <Less_Than_A_Minute>minder dan een minuut geleden</Less_Than_A_Minute>
         <About_A_Minute>ongeveer een minuut geleden</About_A_Minute>
@@ -55,6 +55,7 @@
         <pdf-max-page>Het afdrukvoorbeeld is niet beschikbaar voor inhoud met meer dan {0} pagina's.</pdf-max-page>
         <using-webDAV>of Open in MS Office</using-webDAV>
         <open-on-desktop>Open op bureau</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documenten</open-in-documents>
         <open-in-documents-tooltip>Open dit bestand in Documenten-app</open-in-documents-tooltip>
         <file-size-too-big>De inhoud van dit bestand is te groot. U moet downloaden en openen in de client.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Gemiddelde Rating</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Stemmen</subscription>
       </label>
     </view>
@@ -208,7 +209,7 @@
       <label>
         <isDeep>Is diep</isDeep>
         <nodetypes>Node type</nodetypes> 
-        <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
         <nodeTypeName>Node Type namen</nodeTypeName>
       </label> 
     </view>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Audiobeschrijving</Play-audio-description-of-this-video>
-      <Read-more>Verder lezen</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Lees minder</Read-less>
       <Switch-back-to-original-video>Originele video</Switch-back-to-original-video>
       </label>

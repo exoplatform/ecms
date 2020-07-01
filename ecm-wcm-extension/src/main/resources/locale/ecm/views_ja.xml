@@ -28,7 +28,7 @@
         <show-comments>コメントの表示</show-comments>
         <hide-comments>コメントの非表示</hide-comments>
         <comment-by>コメント</comment-by>
-        <email>メール</email>
+        <email>電子メール</email>
         <site>サイト</site>
         <lastComment>{time} に {user} に投稿された最新コメント</lastComment>
         <Less_Than_A_Minute>1 分以内</Less_Than_A_Minute>
@@ -55,6 +55,7 @@
         <pdf-max-page>プレビューは {0} ページを超えるコンテンツでは使用できません。</pdf-max-page>
         <using-webDAV>または MS Office で開く</using-webDAV>
         <open-on-desktop>デスクトップ上に開く</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>文書で開きます</open-in-documents>
         <open-in-documents-tooltip>文書アプリでこのファイルを開きます。</open-in-documents-tooltip>
         <file-size-too-big>ファイルのコンテンツが大きすぎます。ダウンロードし、クライアント上で開いて下さい。</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>平均評価</avg-rating>
+        <avg-rating>評価する</avg-rating>
         <subscription>投票</subscription>
       </label>
     </view>
@@ -99,9 +100,9 @@
     <view>
       <label>
         <name>名前</name>
-        <versionable>バージョン管理可能</versionable>
-        <exo_owner>オーナー</exo_owner>
-        <exo_dateCreated>作成日</exo_dateCreated>
+        <versionable>バージョン可能</versionable>
+        <exo_owner>所有者</exo_owner>
+        <exo_dateCreated>作成された日付</exo_dateCreated>
         <exo_dateModified>変更日</exo_dateModified>
         <auditing>監査</auditing>
       </label>
@@ -116,7 +117,7 @@
       <label>
         <action-name>アクション名</action-name>
         <lifecycle>ライフサイクル</lifecycle>
-        <metadata>メタデータ</metadata>
+        <metadata>メタデータ観覧</metadata>
         <description>説明</description>
       </label>
     </view>
@@ -155,12 +156,12 @@
         <not-avaliable>N/A</not-avaliable>
         <core-elements>コア要素</core-elements>
         <title>タイトル</title>
-        <creator>作成者</creator>
+        <creator>作者</creator>
         <subject>題</subject>
-        <source>ソース</source>
+        <source>参照元</source>
         <contributor>コントリビュータ</contributor>
         <resource-type>リソースタイプ</resource-type>
-        <date>日付</date>
+        <date>日時</date>
         <publisher>公開者</publisher>
         <description>説明</description>
         <rights>権限</rights>

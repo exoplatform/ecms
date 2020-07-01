@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>Jméno</name>
-      <action>Přidat</action>
+      <name>Název</name>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>Potomek nebyl nalezen!</child-not-found>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Vybrat uživatele</UIPermissionUser>
-      <UIPermissionMembership>Vybrat členství</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Vybrat členství</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Vybrat roli</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Vybrat roli</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Vybrat členství</selectUser>
+      <selectUser>Vybrat roli</selectUser>
       <selectGroup>Projít a vybrat skupinu</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Výběr skupiny</selectGroup>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectGroup>Vybrat skupinu</selectGroup>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

@@ -2,7 +2,7 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>แก้ไขด่วน</QuickEdit>
+      <QuickEdit>Quick Edit</QuickEdit>
     </title>
   </UICNContainer>
 
@@ -20,9 +20,9 @@
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>ที่เก็บข้อมูล</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
       <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>ชื่อเรื่อง</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
   
       <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
       <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
@@ -32,13 +32,13 @@
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <AdvancedBlock>Advanced</AdvancedBlock>
   
-  <UICategoryNavigationTreePathFormInputSet>เส้นทางเป้าหมาย</UICategoryNavigationTreePathFormInputSet>
-  <UICategoryNavigationTreePathFormStringInput>เส้นทางเป้าหมาย</UICategoryNavigationTreePathFormStringInput>
-  <UICategoryNavigationHeaderFormStringInput>หัวข้อ</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
   <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
-  <UICategoryNavigationTreepathPopupWindow>เส้นทางเป้าหมาย</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
@@ -47,7 +47,7 @@
       <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>บันทึก</Save>
+      <Save>Save</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>

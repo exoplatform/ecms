@@ -2,24 +2,24 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>Információk megtekintése</UIViewInfoManager>
+<UIViewInfoManager>View Information</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>Információk megtekintése</ViewInfo>
+<ViewInfo>View Information</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
       <name>Name</name>
-      <title>Cím</title>
+      <title>Title</title>
       <type>Type</type>
       <size>Size</size>
       <owner>Owner</owner>
       <lastModifier>Last Modifier</lastModifier>
-      <created>Létrehozás dátuma</created>
+      <created>Created Date</created>
       <lastModified>Last Modified Date</lastModified>
       <publicationState>Publication State</publicationState>
 </label>

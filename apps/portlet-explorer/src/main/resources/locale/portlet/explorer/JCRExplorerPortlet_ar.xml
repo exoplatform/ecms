@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>اختيارمستخدم</SelectUser>
-      <SelectMember>اختيار العضوية</SelectMember>
+      <SelectMember>اختيار العضويّة</SelectMember>
       <AddAny>اختيار الجميع</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>اختيار مستخدم</UIGroupSelector>
       <UIPermissionSelector>اختيار عضو</UIPermissionSelector>
-      <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
+      <UIGroupMemberSelector>اختيار العضويّة</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
       <selectUser>اختيار مستخدم</selectUser>
-      <selectMembership>اختر عضوية</selectMembership>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
       <selectUser>اختيار مستخدم</selectUser>
-      <selectMembership>اختيار عضوية</selectMembership>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

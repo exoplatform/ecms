@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Select</select>
+        <select>選擇</select>
       </title>
     </action>
   </UITreeList>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>選擇使用者</UIPermissionUser>
-      <UIPermissionMembership>選擇成員身份</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>選擇角色</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>選擇角色</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>選擇成員身份</selectUser>
+      <selectUser>選擇角色</selectUser>
       <selectGroup>瀏覽並選擇一個群組</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>選擇群組</selectGroup>
+      <selectMembership>選擇角色</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>頁面選擇器</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>任何權限</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

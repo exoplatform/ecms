@@ -19,12 +19,12 @@
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Dokumentumok</UITemplatesManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
       <UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
-      <UIActionManager>Műveletek</UIActionManager>
+      <UIActionManager>Actions</UIActionManager>
       <UIScriptManager>Scripts</UIScriptManager>
       <UIUnLockManager>Locks</UIUnLockManager>
       <UIFolksonomyManager>Tags</UIFolksonomyManager>
@@ -54,10 +54,10 @@
     </msg>
     <title>
       <add>Add</add>
-      <paste>Beillesztés</paste>
-      <cut>Kivágás</cut>
-      <copy>Másolás</copy>
-      <remove>Törlés</remove>
+      <paste>Paste</paste>
+      <cut>Cut</cut>
+      <copy>Copy</copy>
+      <remove>Delete</remove>
     </title>
   </UITaxonomyManager>
 
@@ -120,8 +120,8 @@
   <UIPermissionTreeInfo>
     <action>
       <title>
-        <Delete>Törlés</Delete>
-        <Edit>Szerkesztés</Edit>
+        <Delete>Delete</Delete>
+        <Edit>Edit</Edit>
       </title>
     </action>
     <header>
@@ -129,8 +129,8 @@
       <read>Read</read>
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
-      <remove>Eltávolítás</remove>
-      <action>Művelet</action>
+      <remove>Remove</remove>
+      <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -174,7 +174,7 @@
   <UITemplatesList>
     <header>
       <name>Template Name</name>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
   </UITemplatesList>
   <!--
@@ -212,7 +212,7 @@
     <header>
       <prefix>Prefix</prefix>
       <uri>Namespace URI</uri>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <AddNamespace>Register</AddNamespace>
@@ -237,15 +237,15 @@
     </label>
     <title>
       <view>View</view>
-      <edit>Szerkesztés</edit>
-      <delete>Törlés</delete>
+      <edit>Edit</edit>
+      <delete>Delete</delete>
     </title>
     <header>
       <icon>Icon</icon>
       <name>Metadata</name>
       <type>Type</type>
       <internalUse>Internal Use</internalUse>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
     <msg>
       <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
@@ -287,7 +287,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Művelet</input>
+      <input>Action</input>
     </header>
     <label>
       <dialogTemplate>Dialog Template:</dialogTemplate>
@@ -295,7 +295,7 @@
       <metadataName>Metadata Name:</metadataName>
       <viewPermission>Permission:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Címke:</metadataLabel>
+      <metadataLabel>Label:</metadataLabel>
     </label>
     <tab>
       <label>
@@ -314,12 +314,12 @@
     <header>
       <name>Element Name</name>
       <type>Type</type>
-      <description>Leírás</description>
+      <description>Description</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Leírás</description>
+      <description>Description</description>
     </info>
     <tab>
       <element>Elements</element>
@@ -348,11 +348,11 @@
       <homePath>Home Path</homePath>
       <permissions>Permissions</permissions>
       <views>View</views>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <tooltip>
-      <Delete>Törlés</Delete>
-      <EditInfo>Szerkesztés</EditInfo>
+      <Delete>Delete</Delete>
+      <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
@@ -422,7 +422,7 @@
     </info>
     <header>
       <name>Name</name>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
   </UITreeList>
 
@@ -441,7 +441,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Művelet</input>
+      <input>Action</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -462,7 +462,7 @@
       <nodeType>Node Type</nodeType>
       <mixinType>Mixin Type</mixinType>
       <orderable>Orderable Child Nodes</orderable>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <Export>Export</Export>
@@ -471,8 +471,8 @@
     </action>
     <tooltip>
       <View>View</View>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
@@ -491,7 +491,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Művelet</input>
+      <input>Action</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -627,7 +627,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Művelet</input>
+      <input>Action</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -657,7 +657,7 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>Fájlnév</upload>
+      <upload>File Name</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -686,7 +686,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Művelet</input>
+      <input>Action</input>
     </header>
     <title>Select Import Node Type</title>
     <msg>
@@ -726,11 +726,11 @@
     <header>
       <name>Script</name>
       <label>Name</label>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
     <title>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddAction>Add Action Type</AddAction>
@@ -788,10 +788,10 @@
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Dokumentumok</UITemplateContainer>
-      <UIActionsTemplateContainer>Műveletek</UIActionsTemplateContainer>
+      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-      <UIActionScriptContainer>Művelet</UIActionScriptContainer>
+      <UIActionScriptContainer>Action</UIActionScriptContainer>
       <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
       <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
@@ -812,15 +812,15 @@
   <UIViewList>
     <title>
       <View>View</View>
-      <EditInfo>Szerkesztés</EditInfo>
-      <Delete>Törlés</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <name>Name</name>
       <permissions>Permissions</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <AddView>Add View</AddView>
@@ -850,13 +850,13 @@
 
   <UITabList>
     <title>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <tabName>Tab</tabName>
-      <localizeButtons>Leírás</localizeButtons>
-      <action>Műveletek</action>
+      <localizeButtons>Description</localizeButtons>
+      <action>Actions</action>
     </header>
     <action>
       <AddTab>Add</AddTab>
@@ -884,15 +884,15 @@
 
   <UIViewPermissionList>
     <title>
-      <Delete>Törlés</Delete>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <friendlyPermission>Permissions</friendlyPermission>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>Törlés</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <grid>
@@ -958,7 +958,7 @@
       <addDocument>Add Document</addDocument>
       <editDocument>Edit Document</editDocument>
       <upload>Upload</upload>
-      <paste>Beillesztés</paste>
+      <paste>Paste</paste>
       <search>Search</search>
       <viewReferences>View References</viewReferences>
       <viewNodeType>View Node Type</viewNodeType>
@@ -979,7 +979,7 @@
       <viewMetadatas>View Metadata</viewMetadatas>
       <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Hozzászólás</comment>
+      <comment>Comment</comment>
       <vote>Vote</vote>
       <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
@@ -990,7 +990,7 @@
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Megosztás</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1008,7 +1008,7 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Művelet</UITabContainer>
+        <UITabContainer>Action</UITabContainer>
         <UIViewForm>View</UIViewForm>
         <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>Felhasználó kiválasztása</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1048,14 +1048,14 @@
   <UIECMTemplateList>
     <title>
       <View>View</View>
-      <EditInfo>Szerkesztés</EditInfo>
-      <Delete>Törlés</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <name>Name</name>
       <path>Value</path>
       <baseVersion>Base Version</baseVersion>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <Add>Add</Add>
@@ -1171,11 +1171,11 @@
       <scriptName>Name</scriptName>
       <path>Script</path>
       <baseVersion>Base Version</baseVersion>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
     <tooltip>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1195,7 +1195,7 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>Csere</Change>
+      <Change>Change</Change>
     </action>
     <msg>
       <version-restored>Version {0} was restored successfully.</version-restored>
@@ -1304,14 +1304,14 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Felhasználó kiválasztása</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Felhasználó kiválasztása</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Válassza ki a tagságot</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1324,8 +1324,8 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Csoport kiválasztása</selectGroup>
-      <selectMembership>Válassza ki a tagságot</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1339,7 +1339,7 @@
       <name>Category Tree</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
@@ -1383,10 +1383,10 @@
       <set_property>Set Property Right</set_property>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Mentés</Save>
+      <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -1431,7 +1431,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Szerkesztés</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -1439,8 +1439,8 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
-      <remove>Eltávolítás</remove>
-      <action>Művelet</action>
+      <remove>Remove</remove>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -1451,9 +1451,9 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Felhasználó kiválasztása</SelectUser>
-      <SelectMember>Válassza ki a tagságot</SelectMember>
-      <AddAny>Mindenki</AddAny>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
+      <AddAny>Everyone</AddAny>
     </title>
   </permission>
   <!--
@@ -1463,15 +1463,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Felhasználó kiválasztása</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Válassza ki a tagságot</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Csoport kiválasztása</selectGroup>
-      <selectUser>Felhasználó kiválasztása</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -1484,7 +1484,7 @@
       <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
-      <remove>Eltávolítás</remove>
+      <remove>Remove</remove>
     </label>
     <title>Add permission to this node</title>
     <action>
@@ -1519,7 +1519,7 @@
   <UITemplateList>
     <header>
       <name>Type</name>
-      <action>Művelet</action>
+      <action>Action</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
@@ -1537,7 +1537,7 @@
   <UIActionsTemplateList>
     <header>
       <name>Type</name>
-      <action>Művelet</action>
+      <action>Action</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
@@ -1557,7 +1557,7 @@
       <name>Type</name>
       <label>Template</label>
       <icon>Icon</icon>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <AddNew>Add Template</AddNew>
@@ -1586,18 +1586,18 @@
 
   <UICLVTemplateList>
     <title>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <title>Name</title>
-      <action>Művelet</action>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <action>
       <AddTemplate>Add Template</AddTemplate>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
@@ -1610,30 +1610,30 @@
   <CateTemplateList>
     <header>
       <title>Name</title>
-      <action>Művelet</action>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <title>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddTemplate>Add Template</AddTemplate>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </CateTemplateList>
 
   <PageTemplateList>
     <header>
       <title>Name</title>
-      <action>Művelet</action>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <action>
       <AddTemplate>Add Template</AddTemplate>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </PageTemplateList>
 
@@ -1797,8 +1797,8 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1833,7 +1833,7 @@
       <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
     <msg>
       <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
@@ -1841,8 +1841,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Szerkesztés</Edit>
-        <Delete>Törlés</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1856,7 +1856,7 @@
       <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
     <msg>
       <undeletable>'{0}' cannot be deleted, it is the default one.</undeletable>
@@ -1864,8 +1864,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Szerkesztés</Edit>
-        <Delete>Törlés</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1928,7 +1928,7 @@
       <type>Type</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
     <action>
       <AddQuery>Add Query</AddQuery>
@@ -1995,12 +1995,12 @@
       <name>Style Name</name>
       <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <title>
-      <Edit>Szerkesztés</Edit>
-      <Delete>Törlés</Delete>
-      <Remove>Eltávolítás</Remove>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+      <Remove>Remove</Remove>
     </title>
     <action>
       <AddStyle>Add Style</AddStyle>
@@ -2127,8 +2127,8 @@
   <UIViewContainer>
     <title>
       <View>View</View>
-      <EditInfo>Szerkesztés</EditInfo>
-      <Delete>Törlés</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <label>
       <permission>{0} in {1}</permission>
@@ -2136,8 +2136,8 @@
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Szerkesztés</EditInfo>
-      <Delete>Törlés</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
   </ECMTemplate>
   <step1>
@@ -2158,17 +2158,17 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Csoport kiválasztása</selectGroup>
-      <selectUser>Felhasználó kiválasztása</selectUser>
-      <selectMembership>Válassza ki a tagságot</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>Csoport kiválasztása</selectGroup>
-      <selectUser>Felhasználó kiválasztása</selectUser>
-      <selectMembership>Válassza ki a tagságot</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2192,12 +2192,12 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>Csoport kiválasztása</selectGroup>
+      <selectGroup>Select Group</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Válassza ki a tagságot</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2210,9 +2210,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Csoport kiválasztása</selectGroup>
-      <selectUser>Felhasználó kiválasztása</selectUser>
-      <selectMembership>Válassza ki a tagságot</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2253,8 +2253,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Csoport</group>
-      <searchUser>Felhasználó</searchUser>
+      <group>Group</group>
+      <searchUser>User</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2314,7 +2314,7 @@
   <UILockHolderList>
     <header>
       <name>Groups or Users</name>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <DeleteLock>Delete Group</DeleteLock>
@@ -2325,12 +2325,12 @@
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>Cím</name>
+      <name>Title</name>
       <hoderLock>Lock Owner</hoderLock>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <tooltip>
-      <UnLock>Feloldás</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
@@ -2378,7 +2378,7 @@
       <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
-      <action>Műveletek</action>
+      <action>Actions</action>
     </header>
     <msg>
       <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
@@ -2386,8 +2386,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Szerkesztés</Edit>
-        <Delete>Törlés</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2409,7 +2409,7 @@
   <UITagManager>
     <action>
       <title>
-        <RemoveStyle>Eltávolítás</RemoveStyle>
+        <RemoveStyle>Remove</RemoveStyle>
         <AddStyle>Add Style</AddStyle>
       </title>
     </action>
@@ -2464,11 +2464,11 @@
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>User or Group</usersOrGroups>
-      <action>Művelet</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>Törlés</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -2482,17 +2482,17 @@
       <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Csoport kiválasztása</selectGroup>
-      <selectMembership>Válassza ki a tagságot</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2509,7 +2509,7 @@
   <UIActionForm>
     <title>
       <ShowComponent>Open Window</ShowComponent>
-      <removeReference>Eltávolítás</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>
@@ -2550,7 +2550,7 @@
   <DriveInputSet>
     <title>
       <ChooseNodeType>Select Node Types</ChooseNodeType>
-      <RemoveNodeType>Eltávolítás</RemoveNodeType>
+      <RemoveNodeType>Remove</RemoveNodeType>
     </title>
   </DriveInputSet>
   <PopupNodeTypeSelector>

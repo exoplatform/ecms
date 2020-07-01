@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectMember>Επιλογή ρόλου</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Έκδοση</version>
-      <baseVersion>Βασική έκδοση</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Προσθήκη ετικέτας</addLabel>
       <removeLable>Αφαίρεση ετικέτας</removeLable>
       <restoreVersion>Επαναφορά Έκδοσης</restoreVersion>

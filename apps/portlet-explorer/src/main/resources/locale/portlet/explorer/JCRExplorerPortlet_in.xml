@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Pilih Pengguna</SelectUser>
-      <SelectMember>Pilih Keanggotaan</SelectMember>
+      <SelectMember>Pilih Peran</SelectMember>
       <AddAny>Pilih Siapa saja</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Pilih Pengguna</UIGroupSelector>
       <UIPermissionSelector>Pilih Anggota</UIPermissionSelector>
-      <UIGroupMemberSelector>Pilih Keanggotaan</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilih Peran</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1353,7 +1353,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>Versi</version>
-      <baseVersion>versi saat ini</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Tambahkan Label</addLabel>
       <removeLable>Hapus Label</removeLable>
       <restoreVersion>Kembalikan Versi</restoreVersion>
@@ -2092,7 +2092,7 @@
     <label>
       <selectGroup>Pilih Grup</selectGroup>
       <selectUser>Pilih Pengguna</selectUser>
-      <selectMembership>Pilih Keanggotaan</selectMembership>
+      <selectMembership>Pilih Peran</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Pilih Kelompok</selectGroup>
       <selectUser>Pilih Pengguna</selectUser>
-      <selectMembership>Pilih Keanggotaan</selectMembership>
+      <selectMembership>Pilih Peran</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

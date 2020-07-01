@@ -28,7 +28,7 @@
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>姓名</name>
+      <name>名称</name>
     <categories>类别</categories>
     </label>
   </UIDocumentForm>
@@ -45,7 +45,7 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>姓名</name>
+        <name>名称</name>
         <content>内容</content>
       </label>
     </dialog>
@@ -73,7 +73,7 @@
       <description>#{word.description}</description>
       <port>端口</port>
       <userName>#{word.userName}</userName>
-      <password>密码</password>
+      <password>密码:</password>
       <link>链接</link>
       <to>发送邮件到</to>
       <actionName>#{word.name}</actionName>
@@ -84,7 +84,7 @@
       <description>#{word.description}</description>
       <port>端口</port>
       <userName>#{word.userName}</userName>
-      <password>密码</password>
+      <password>密码:</password>
       <link>链接</link>
       <to>发送邮件到</to>
       <actionName>#{word.name}</actionName>
@@ -201,7 +201,7 @@
     <dialog>
       <label>
         <start-publication>开始发布</start-publication>
-        <end-publication>最终发布</end-publication>
+        <end-publication>结束发布</end-publication>
       </label>
     </dialog>
   </Published>
@@ -260,7 +260,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>姓名</name>
+        <name>名称</name>
         <autoload>自动加载</autoload>
         <minetype>Mime 类型</minetype>
         <content>内容</content>
@@ -293,9 +293,9 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>姓名</name>
+        <name>名称</name>
         <lifecycle>生命周期</lifecycle>
-        <homePath>生命周期</homePath>
+        <homePath>主路径</homePath>
         <targetWorkspace>目标工作区</targetWorkspace>
         <targetPath>目标路径</targetPath>
       </label>
@@ -313,22 +313,22 @@
   -->
 <no>否</no>
 <yes>是</yes>
-<true>真</true>
-<false>false</false>
+<true>对</true>
+<false>错</false>
 <Electronic>电子</Electronic>
 <Paper>纸</Paper>
 <NONE>无</NONE>
 <CLASSIFIED>分类</CLASSIFIED>
 <UNCLASSIFIED>未分类</UNCLASSIFIED>
 <NOCONTRACT>没有合同</NOCONTRACT>
-<one-minute>就一分钟</one-minute>
+<one-minute>一分钟</one-minute>
 <hourly>每小时</hourly>
-<daily>每天</daily>
+<daily>每日</daily>
 <quarterly>每季度</quarterly>
 <yearly>每年</yearly>
 <ten-years>十年</ten-years>
 <read>用户操作</read>
-  <schedule>计划调度</schedule>
+  <schedule>计划表</schedule>
   <node_added>内容加法</node_added>
   <node_removed>内容删除</node_removed>
   <property_added>属性加法</property_added>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>当前节点不允许您添加的节点类型 '{0}'。</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>出现意外的错误。为了更多详细信息，请与您的管理员联系。</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>您不能保存此文档。提供的名称必须是数值格式。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

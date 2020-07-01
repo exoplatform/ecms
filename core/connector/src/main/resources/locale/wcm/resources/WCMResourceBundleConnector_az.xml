@@ -2,7 +2,7 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>Seçilmiş məzmun yoxdur. Xahiş edirik ən az birini seçin.</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
@@ -29,7 +29,7 @@
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>Yüklənən faylın mimetibi məlum deyil. {0} yeni versiyası yaradılacaq.</WrongMimeType>
+      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

@@ -7,8 +7,8 @@
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Átnevezés</rename>
-      <cancel>Mégse</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
       <renaming>Renaming...</renaming>
@@ -18,9 +18,9 @@
     <label>
       <exo>
         <remote-edit>
-          <word>Nyissa meg a Word programban</word>
-          <excel>Nyissa meg az Excel programban</excel>
-          <powerpoint>Nyissa meg a PowerPoint programban</powerpoint>
+          <word>Open in Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Open in Powerpoint</powerpoint>
           <desktop>Open on Desktop</desktop>
           <desktop-app>Open in {0}</desktop-app>
         </remote-edit>

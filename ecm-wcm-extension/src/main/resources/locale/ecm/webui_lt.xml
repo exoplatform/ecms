@@ -8,14 +8,14 @@
   <UITreeList>
     <header>
       <name>Pavadinimas</name>
-      <action>Pridėti</action>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>Atšaka nerasta!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Select</select>
+        <select>Pasirinkti</select>
       </title>
     </action>
   </UITreeList>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Pasirinkti vartotoją</UIPermissionUser>
-      <UIPermissionMembership>Pasirinkti narystę</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Pasirinkti vaidmenį</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Pasirinkti vaidmenį</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Pasirinkti narystę</selectUser>
+      <selectUser>Pasirinkti vaidmenį</selectUser>
       <selectGroup>Naršyti ir pasirinkti grupę</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Pasirinkti grupę</selectGroup>
+      <selectMembership>Pasirinkti vaidmenį</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Puslapio parinkimas</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Bet kuri teisė</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

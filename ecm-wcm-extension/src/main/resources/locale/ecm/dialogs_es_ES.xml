@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ para mencionar alguien en su comentario</placeholder>
+      <placeholder>Use @ para mencionar a alguien en su comentario</placeholder>
     </label>
   </UICommentForm>
  
@@ -312,7 +312,7 @@
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 <no>No</no>
-<yes>Si</yes>
+<yes>Sí</yes>
 <true>Cierto</true>
 <false>Falso</false>
 <Electronic>Electrónico</Electronic>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>No puede añadir un documento de tipo '{0}' aquí.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Ocurrió un error inesperado. Póngase en contacto con su administrador para obtener más detalles.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>No se puede guardar este documento. El nombre proporcionado debe estar en formato numérico.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

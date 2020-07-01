@@ -62,7 +62,7 @@
         <mimeType>MimeType</mimeType>
         <width>Chiều rộng</width>
         <height>Chiều cao</height>
-        <content>Nội dung</content>
+        <content>#{word.content}</content>
         <re-upload>Tệp tin đã tồn tại. Bạn có thể xóa nó và tải lên tệp tin khác.</re-upload>
       </label>
     </dialog>
@@ -101,7 +101,7 @@
         <name>Tên</name>
         <lifecycle>Chu kỳ</lifecycle>
         <metadata>Siêu dữ liệu</metadata>
-        <description>Mô tả</description>
+        <description>#{word.description}</description>
       </label>
     </dialog>
   </AddMetadata>
@@ -114,14 +114,14 @@
       <label>
         <id>Mã</id>
         <name>Tên</name>
-        <lifecycle>Vòng đời</lifecycle>
+        <lifecycle>Chu kỳ</lifecycle>
         <schedule-type>Lập biểu</schedule-type>
         <start-time>Thời gian bắt đầu</start-time>
         <end-time>Thời gian kết thúc</end-time>
         <repeat-count>Số lần lặp</repeat-count>
         <time-inteval>Khoảng thời gian</time-inteval>
         <cron-expression>Lệnh Cron</cron-expression>
-        <description>Mô tả</description>
+        <description>#{word.description}</description>
       </label>
     </dialog>
   </AutoVersioning>
@@ -133,14 +133,14 @@
       <label>
         <id>Mã</id>
         <name>Tên</name>
-        <lifecycle>Vòng đời</lifecycle>
+        <lifecycle>Chu kỳ</lifecycle>
         <schedule-type>Lập biểu</schedule-type>
         <start-time>Thời gian bắt đầu</start-time>
         <end-time>Thời gian kết thúc</end-time>
         <repeat-count>Số lần lặp</repeat-count>
         <time-inteval>Khoảng thời gian</time-inteval>
         <cron-expression>Cron expression</cron-expression>
-        <description>Mô tả</description>
+        <description>#{word.description}</description>
       </label>
     </dialog>
   </EnableVersioning>
@@ -189,7 +189,7 @@
       <label>
         <destination-workpsace>Không gian lưu trữ Đích</destination-workpsace>
         <destination-path>Đường dẫn đến vùng đích</destination-path>
-        <primary-type>Kiểu Gốc</primary-type>
+        <primary-type>Kiểu chính</primary-type>
         <mixin-types>Kiểu Mixin</mixin-types>
       </label>
     </dialog>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Bắt đầu Xuất bản</start-publication>
-        <end-publication>Kết thúc Xuất bản</end-publication>
+        <start-publication>Bắt đầu xuất bản</start-publication>
+        <end-publication>Kết thúc xuất bản</end-publication>
       </label>
     </dialog>
   </Published>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Lược sử Phiên bản</version-history>
-        <base-version>Phiên bản Cơ sở</base-version>
+        <version-history>Lịch sử phiên bản</version-history>
+        <base-version>Phiên bản cơ sở</base-version>
         <is-checked-out>Đã Check out</is-checked-out>
         <predecessors>Phiên bản trước</predecessors>
         <merge-failed>Không Gộp lại được</merge-failed>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Địa chỉ email không hợp lệ.</Invalid-input>
+      <Invalid-input>Địa chỉ thư không hợp lệ.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -295,7 +295,7 @@
         <id>Mã</id>
         <name>Tên</name>
         <lifecycle>Chu kỳ</lifecycle>
-        <homePath>Đường dẫn Nguồn</homePath>
+        <homePath>Đường dẫn đến Trang chủ</homePath>
         <targetWorkspace>Vùng Đích</targetWorkspace>
         <targetPath>Đường dẫn Đích</targetPath>
       </label>
@@ -317,7 +317,7 @@
 <false>Sai</false>
 <Electronic>Điện tử</Electronic>
 <Paper>Bài báo</Paper>
-<NONE>Không xác định</NONE>
+<NONE>Không</NONE>
 <CLASSIFIED>Đã được phân loại</CLASSIFIED>
 <UNCLASSIFIED>Không được phân loại</UNCLASSIFIED>
 <NOCONTRACT>Không hợp đồng</NOCONTRACT>
@@ -327,20 +327,20 @@
 <quarterly>Hàng quý</quarterly>
 <yearly>Hàng năm</yearly>
 <ten-years>10 năm</ten-years>
-<read>Thao tác của người dùng</read>
+<read>Thao tác ủa người dùng</read>
   <schedule>Biểu thời gian</schedule>
   <node_added>Thêm mới nội dung</node_added>
   <node_removed>Xoá bỏ nội dung</node_removed>
   <property_added>Thêm mới thuộc tính</property_added>
   <property_removed>Xóa bỏ thuộc tính</property_removed>
-  <property_changed>Thay đổi tính chất</property_changed>
+  <property_changed>Sửa đổi thuộc tính</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>Độ sâu</isDeep>
-        <nodetypes>Kiểu nút</nodetypes>
-        <affectedNodeTypeNames>Các kiểu node bị ảnh hưởng</affectedNodeTypeNames>
+        <nodetypes>Kiểu Nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -349,8 +349,8 @@
     <dialog>
       <label>
         <isDeep>Độ sâu</isDeep>
-        <nodetypes>Kiểu nút</nodetypes>
-        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
+        <nodetypes>Kiểu Nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -359,8 +359,8 @@
     <dialog>
       <label>
         <isDeep>Độ sâu</isDeep>
-        <nodetypes>Kiểu node</nodetypes>
-        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
+        <nodetypes>Kiểu Nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -369,8 +369,8 @@
     <dialog>
       <label>
         <isDeep>Độ sâu</isDeep>
-        <nodetypes>Kiểu node</nodetypes>
-        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
+        <nodetypes>Kiểu Nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Nút hiện tại không cho phép bạn thêm kiểu nút '{0}'.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Lỗi đã xảy ra. Vui lòng liên hệ với quản trị viên của bạn để có thêm chi tiết.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Bạn không thể lưu tài liệu này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

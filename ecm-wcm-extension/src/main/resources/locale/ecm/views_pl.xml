@@ -4,8 +4,8 @@
   <View>
     <label>
       <languages>
-        <en>Angielski</en>
-        <fr>Francuski</fr>
+        <en>angielski</en>
+        <fr>francuski</fr>
         <ru>Rosyjski</ru>
         <vi>Wietnamski</vi>
         <nl>Duński</nl>
@@ -55,6 +55,7 @@
         <pdf-max-page>Podgląd jest niedostępny dla treści o zawartości ponad {0} stron.</pdf-max-page>
         <using-webDAV>lub Otwórz w MS Office</using-webDAV>
         <open-on-desktop>Otwórz na Pulpicie</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Otwórz w Dokumentach</open-in-documents>
         <open-in-documents-tooltip>Otwórz ten plik w aplikacji Dokumenty</open-in-documents-tooltip>
         <file-size-too-big>Zawartość tego pliku jest zbyt duża. Należy pobrać i otworzyć inny plik.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Średnia ocena</avg-rating>
+        <avg-rating>Oceń</avg-rating>
         <subscription>Głosy</subscription>
       </label>
     </view>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Opis audio</Play-audio-description-of-this-video>
-      <Read-more>Czytaj więcej</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Czytaj mniej</Read-less>
       <Switch-back-to-original-video>Oryginalny film</Switch-back-to-original-video>
       </label>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <administration>
-    <siteExplorer>Ang content explorer</siteExplorer>
-    <wcmAdmin>Ang sud na suwat sa pagdumala</wcmAdmin>
+    <siteExplorer>Content Explorer</siteExplorer>
+    <wcmAdmin>Content Administration</wcmAdmin>
   </administration>
 </bundle>

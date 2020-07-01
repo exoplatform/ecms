@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Täckning:</coverage>
         <identifier>Identifierare:</identifier>
-        <language>Språk:</language>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -245,7 +245,7 @@
     <dialog>
       <label>
         <version-history>Versionshistorik</version-history>
-        <base-version>Bas version</base-version>
+        <base-version>Bas versionen</base-version>
         <is-checked-out>Utcheckad</is-checked-out>
         <predecessors>Föregångare</predecessors>
         <merge-failed>Det gick inte att koppla dokument</merge-failed>
@@ -325,7 +325,7 @@
 <hourly>Varje timme</hourly>
 <daily>Dagligen</daily>
 <quarterly>Kvartalsvis</quarterly>
-<yearly>Årligen</yearly>
+<yearly>Årligt</yearly>
 <ten-years>Tio år</ten-years>
 <read>Användaråtgärd</read>
   <schedule>Schemaläggaren</schedule>
@@ -338,7 +338,7 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Är för djupt</isDeep>
+        <isDeep>Är djupt</isDeep>
         <nodetypes>Nodtyper</nodetypes>
         <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
@@ -348,7 +348,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Är för djupt</isDeep>
+        <isDeep>Är djupt</isDeep>
         <nodetypes>Nodtyper</nodetypes>
         <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
@@ -358,7 +358,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Är för djupt</isDeep>
+        <isDeep>Är djupt</isDeep>
         <nodetypes>Nodtyper</nodetypes>
         <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
@@ -368,7 +368,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Är för djupt</isDeep>
+        <isDeep>Är djupt</isDeep>
         <nodetypes>Nodtyper</nodetypes>
         <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Ett oväntat fel uppstod. Kontakta administratören för mer information.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Du kan inte spara det här dokumentet. Namnet som anges måste vara i numeriskt format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

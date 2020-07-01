@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Selecciona usuari/a</UIPermissionUser>
-      <UIPermissionMembership>Selecciona l'Afiliació</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Selecciona l'Afiliació</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Selecciona el Rol</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Selecciona el Rol</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Selecciona l'Afiliació</selectUser>
+      <selectUser>Selecciona el Rol</selectUser>
       <selectGroup>Examina i selecciona un grup</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Afegeix carpeta arrel</AddRootNode>
+      <AddRootNode>Afegeix l'Arrel</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--

@@ -3,7 +3,7 @@
   <UISEOForm>
     <label>  
       <title>Title:</title>
-      <description>คำอธิบาย:</description>
+      <description>Description:</description>
       <keywords>Keywords:</keywords>
       <language>Language:</language>
       <robots>Robots:</robots>

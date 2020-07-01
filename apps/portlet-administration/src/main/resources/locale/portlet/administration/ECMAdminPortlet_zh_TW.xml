@@ -977,7 +977,7 @@
       <watchDocument>觀看文件</watchDocument>
       <taggingDocument>標記文件</taggingDocument>
       <viewMetadatas>查看中繼資料</viewMetadatas>
-      <overloadThumbnail>超載的縮圖</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>隱藏/顯示內容</manageHidden>
       <comment>評論</comment>
       <vote>投票</vote>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>選擇成員身份</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>選擇角色</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>選擇群組</selectGroup>
-      <selectMembership>選擇成員身份</selectMembership>
+      <selectMembership>選擇角色</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>選擇使用者</SelectUser>
-      <SelectMember>選擇成員身份</SelectMember>
+      <SelectMember>選擇角色</SelectMember>
       <AddAny>每個人</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>選擇使用者</UIGroupSelector>
       <UIPermissionSelector>選擇成員</UIPermissionSelector>
-      <UIGroupMemberSelector>選擇成員身份</UIGroupMemberSelector>
+      <UIGroupMemberSelector>選擇角色</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>選擇群組</selectGroup>
       <selectUser>選擇使用者</selectUser>
-      <selectMembership>選擇成員身份</selectMembership>
+      <selectMembership>選擇角色</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>選擇群組</selectGroup>
       <selectUser>選擇使用者</selectUser>
-      <selectMembership>選擇成員身份</selectMembership>
+      <selectMembership>選擇角色</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>選擇成員身份</selectMembership>
+      <selectMembership>選擇角色</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>選擇群組</selectGroup>
       <selectUser>選擇使用者</selectUser>
-      <selectMembership>選擇成員身份</selectMembership>
+      <selectMembership>選擇角色</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>新增</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>此成員已存在。請選擇另一個。</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>選擇群組</selectGroup>
-      <selectMembership>選擇成員身份</selectMembership>
+      <selectMembership>選擇角色</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

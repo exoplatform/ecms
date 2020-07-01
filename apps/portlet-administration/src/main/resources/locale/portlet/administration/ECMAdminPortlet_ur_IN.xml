@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>رکنیت منتخب کریں</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>کردار منتخب کریں</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
-      <selectMembership>رکنیت منتخب کریں</selectMembership>
+      <selectMembership>کردار منتخب کریں</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>صارف منتخب کریں</SelectUser>
-      <SelectMember>رکنیت منتخب کریں</SelectMember>
+      <SelectMember>کردار منتخب کریں</SelectMember>
       <AddAny>ہر کوئی</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>صارف منتخب کریں</UIGroupSelector>
       <UIPermissionSelector>رکن منتخب کریں</UIPermissionSelector>
-      <UIGroupMemberSelector>رکنیت منتخب کریں</UIGroupMemberSelector>
+      <UIGroupMemberSelector>کردار منتخب کریں</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
       <selectUser>صارف منتخب کریں</selectUser>
-      <selectMembership>رکنیت منتخب کریں</selectMembership>
+      <selectMembership>کردار منتخب کریں</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
       <selectUser>صارف منتخب کریں</selectUser>
-      <selectMembership>رکنیت منتخب کریں</selectMembership>
+      <selectMembership>کردار منتخب کریں</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>رکنیت منتخب کریں</selectMembership>
+      <selectMembership>کردار منتخب کریں</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
       <selectUser>صارف منتخب کریں</selectUser>
-      <selectMembership>رکنیت منتخب کریں</selectMembership>
+      <selectMembership>کردار منتخب کریں</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2338,7 +2338,7 @@
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>تالے کا انتظام کریں</UIUnLockForm>
+      <UIUnLockForm>Manage Lock</UIUnLockForm>
     </title>
   </EditUnLockForm>
   <UITabPane>
@@ -2482,17 +2482,17 @@
       <Add>ا ضافہ کریں</Add>
     </action>
     <label>
-      <userOrGroup>رکنیت:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>یہ رکنیت پہلے ہی موجود ہے ۔ براہ کرم کوئی دوسرا منتخب کریں ۔.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
-      <selectMembership>رکنیت منتخب کریں</selectMembership>
+      <selectMembership>کردار منتخب کریں</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

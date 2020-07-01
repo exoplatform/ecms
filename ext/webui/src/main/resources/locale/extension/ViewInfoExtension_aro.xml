@@ -17,11 +17,11 @@
       <title>عنوان</title>
       <type>النّوع</type>
       <size>الحجم</size>
-      <owner>صاحب الشيء</owner>
+      <owner>المالك</owner>
       <lastModifier>آخر تعديل</lastModifier>
       <created>تاريخ الانشاء</created>
       <lastModified>تاريخ آخر تعديل</lastModified>
-      <publicationState>حالة النّشر</publicationState>
+      <publicationState>حالة النشر</publicationState>
 </label>
 <value>
       <folder>المجلد</folder>

@@ -2,33 +2,33 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Pilihan</Preferences>
-      <AddContent>Tambah Kandungan</AddContent>
+      <Preferences>Preferences</Preferences>
+      <AddContent>Add Content</AddContent>
       <ManageContent>Manage Content</ManageContent>
     </label>
     <msg>
-      <non-contents>Maaf, tidak ada artikel yang ada.</non-contents>
-      <item-not-found>Item tidak ditemukan.</item-not-found>
-      <no-permission>Anda tidak memiliki izin untuk mengakses nod ini.</no-permission>
-      <category-back>Pergi ke sebelumnya</category-back>
+      <non-contents>Sorry, no articles are available.</non-contents>
+      <item-not-found>Item not found.</item-not-found>
+      <no-permission>You do not have permission to access this node.</no-permission>
+      <category-back>Go to previous</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Senarai Kandungan Pilihan</UICLVConfig>
+      <UICLVConfig>Content List Preferences</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Senarai Kandungan Pilihan</Title>
-      <ContentSelectionBlock>Pemilihan Kandungan</ContentSelectionBlock>
+      <Title>Content List Preferences</Title>
+      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Tajuk</exo:title>
+        <exo:title>Title</exo:title>
         <exo:dateCreated>Created Date</exo:dateCreated>
         <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
         <publication:liveDate>Published Date</publication:liveDate>
@@ -54,7 +54,7 @@
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
       <AdvancedBlock>Advanced</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>Dinamik Navigasi</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
@@ -63,7 +63,7 @@
       <ContentPath>Content Path</ContentPath>
       <Up>Up</Up>
       <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Kandungan Penglihatan</UICLVConfigCacheManagementLabel>
+      <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
@@ -71,16 +71,16 @@
     </label>
     <help>
       <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
-      <ModeSelectionHelp>Dua cara yang ada untuk menunjukkan kandungan. "Oleh Folder" akan mengambil semua kandungan yang ada di folder anda memilih/kategori. "Dengan Kandungan" membolehkan anda pilih secara manual kandungan yang anda ingin menunjukkan.</ModeSelectionHelp>
-      <FolderPathHelp>Pilih kandungan yang anda ingin menunjukkan. Pemilihan lalai akan digantikan dinamik jika kau mengaktifkan Dinamik Navigasi pilihan (melihat Maju mod di bawah).</FolderPathHelp>
-      <HeaderOptionHelp>Menunjukkan kepala di atas kandungan senarai. Jika kau mengaktifkan Pengesanan Automatik pilihan, ia akan cuba untuk mencari kepala di pemilihan.</HeaderOptionHelp>
+      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
+      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
+      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Mengaktifkan Dinamik Navigasi pilihan. Lain-lain boleh menukar kandungan dinamik berdasarkan URL parameter.</ContextualHelp>
-      <ParameterHelp>Parameter ini akan digunakan untuk mengakses kandungan jika Dinamik Navigasi diaktifkan.</ParameterHelp>
-      <ShowDetailInPageHelp>Klik pada kandungan mengarahkan pengguna untuk halaman Terperinci. Anda harus memiliki "Kandungan oleh URL" portlet dengan Navigasi Dinamik diaktifkan pada sasaran halaman untuk menunjukkan kandungan.</ShowDetailInPageHelp>
-      <DetailParameterHelp>Parameter ini akan mengandungi jalan untuk kandungan di link ke halaman Terperinci. Parameter ini mesti perlawanan parameter digunakan dalam "Kandungan oleh URL" portlet halaman.</DetailParameterHelp>
+      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
+      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
+      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
+      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
       <ContentByQueryHelp>You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.</ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Dihadkan oleh Pengesahan" akan menapis kandungan berdasarkan pengesahan. Jika anda tidak masuk, anda melihat kandungan awam hanya. Jika anda masuk, anda melihat semua kandungan dilihat oleh intranet pengguna (tetapi berkongsi dengan semua). "Dihadkan oleh Peranan Pengguna" berarti anda akan melihat kandungan bergantung pada hak-hak anda. Dalam kebanyakan kasus, pilihan ini tidak boleh digunakan, seperti yang ia mengurangkan keseluruhan prestasi.</ContentsVisibilityHelp>
+      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>#{word.save}</Save>
@@ -108,7 +108,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Tambah laluan</AddPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
@@ -184,7 +184,7 @@
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Dihadkan oleh Pengesahan</ENABLE>
+      <ENABLE>Restricted by Authentication</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>

@@ -4,7 +4,7 @@
   <View>
     <label>
       <languages>
-        <en>انقليزية</en>
+        <en>انجليزية</en>
         <fr>فرنسية</fr>
         <ru>روسية</ru>
         <vi>فيتنامية</vi>
@@ -23,15 +23,15 @@
     <view>
       <label>
         <postedBy>تم ارسال آخر تعليق من طرف</postedBy>
-        <at>الى</at>
+        <at>في</at>
         <comments>التعليقات</comments>
         <show-comments>عرض التعليقات</show-comments>
         <hide-comments>اخفاء التعليقات</hide-comments>
         <comment-by>تم التعليق عليها من طرف</comment-by>
-        <email>عنوان البريد الإلكتروني</email>
-        <site>الموقع</site>
+        <email>البريد الإلكتروني</email>
+        <site>موقع</site>
         <lastComment>آخر تعليق تمّ ارساله بواسطة {user} على السّاعة {time}</lastComment>
-        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <Less_Than_A_Minute>منذ أقل من دقيقة</Less_Than_A_Minute>
         <About_A_Minute>منذ نحو دقيقة</About_A_Minute>
         <About_x_Minutes>منذ حوالي {0} دقائق</About_x_Minutes>
         <About_An_Hour>منذ حوالي ساعة</About_An_Hour>
@@ -54,7 +54,8 @@
         <pdf-max-size>العرض المُسبق لهذا الملفّ غير متوفّر لكلّ محتوى حجمه يفوق  {0} ميجابت.</pdf-max-size>
         <pdf-max-page>العرض المُسبق غير متوفّر لكلّ محتوى عدد صفحاته يفوق الـ {0} صفحة.</pdf-max-page>
         <using-webDAV>أو فتحه بواسطة مايكروسوفت أوفيس</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>فتح الملفّ على سطح المكتب</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>فتح في خدمة المستندات</open-in-documents>
         <open-in-documents-tooltip>افتح هذا الملف في تطبيق المستندات</open-in-documents-tooltip>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>تقييم</avg-rating>
+        <avg-rating>المعدل</avg-rating>
         <subscription>الأصوات</subscription>
       </label>
     </view>
@@ -99,9 +100,9 @@
     <view>
       <label>
         <name>الاسم</name>
-        <versionable>قابل (ـة) للإصدار</versionable>
+        <versionable>قابل للإصدار</versionable>
         <exo_owner>المالك</exo_owner>
-        <exo_dateCreated>تاريخ الانشاء</exo_dateCreated>
+        <exo_dateCreated>تاريخ الإضافة</exo_dateCreated>
         <exo_dateModified>تاريخ التعديل</exo_dateModified>
         <auditing>تدقيق</auditing>
       </label>
@@ -154,29 +155,29 @@
       <label>
         <not-avaliable>غير متوفرة</not-avaliable>
         <core-elements>العناصر الأساسية</core-elements>
-        <title>العنوان</title>
-        <creator>الصانع</creator>
+        <title>عنوان</title>
+        <creator>مبدع</creator>
         <subject>الموضوع</subject>
         <source>المصدر</source>
         <contributor>المُساهم</contributor>
         <resource-type>نوع المورد</resource-type>
-        <date>التاريخ</date>
+        <date>تاريخ</date>
         <publisher>الناشر</publisher>
         <description>الوصف</description>
         <rights>الحقوق</rights>
-        <relation>العلاقة</relation>
+        <relation>علاقة</relation>
         <format>الشكل</format>
         <coverage>التغطية</coverage>
         <identifier>المعرف</identifier>
         <languages>اللغات</languages>
       </label>
       <action>
-        <add-edit>الاضافة/التغيير</add-edit>
+        <add-edit>اضافة/تغيير</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>اضافة/تغييرالخاصيات</add-edit>
+        <add-edit>اضافة/تغيير الخاصيّات</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -196,7 +197,7 @@
     <view>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
+        <nodetypes>أنواع العقد</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
         <nodeTypeName>Node type names</nodeTypeName>
       </label> 
@@ -207,9 +208,9 @@
     <view>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes> 
+        <nodetypes>أنواع العقد</nodetypes> 
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-        <nodeTypeName>أسماء أنواع العقدة</nodeTypeName>
+        <nodeTypeName>Node type names</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>وصف المقطع الصوتي</Play-audio-description-of-this-video>
-      <Read-more>اقرأ المزيد</Read-more>
+      <Read-more>قراءة المزيد</Read-more>
       <Read-less>قراءة الأقل</Read-less>
       <Switch-back-to-original-video>الفيديو الأصلي</Switch-back-to-original-video>
       </label>

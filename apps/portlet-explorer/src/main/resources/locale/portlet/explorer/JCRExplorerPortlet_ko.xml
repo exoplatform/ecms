@@ -7,9 +7,9 @@
   -->
   <UICommentForm>
     <label>
-      <name>이름</name>
-      <email>이메일</email>
-      <website>웹사이트</website>
+      <name>Name</name>
+      <email>Email</email>
+      <website>Website</website>
       <comment>Comment</comment>
     </label>
     <action>
@@ -47,7 +47,7 @@
     <msg>
       <not-support>You cannot vote for this document type.</not-support>
       <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You cannot vote more than one time.</vote-restriction>
+      <vote-restriction>You can't vote more than once.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -93,12 +93,12 @@
       <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Back to JCR Main Drives</backToJCR>
       <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>새로 고침</refesh>
+      <refesh>Refresh</refesh>
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
-      <more>더보기</more>
-      <backTo>뒤로</backTo>
+      <more>More</more>
+      <backTo>Back</backTo>
     </label>
   </UIViewBar>
 
@@ -129,7 +129,7 @@
     <title>Explorer</title>
     <label>
       <Root>Root</Root>
-      <webDavView>Download and allow edition</webDavView>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>이름 바꾸기</title>
+    <title>Rename</title>
     <label>
-      <nameField>이름</nameField>
-      <titleField>제목</titleField>
+      <nameField>Name</nameField>
+      <titleField>Title</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -214,10 +214,10 @@
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>이름 바꾸기</UIRenameForm>
+      <UIRenameForm>Rename</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>파일 업로드</UIUploadManager>
+      <UIUploadManager>Upload File</UIUploadManager>
       <UIReferencesList>References List</UIReferencesList>
       <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
@@ -227,7 +227,7 @@
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>
       <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>고급 검색</UIECMSearch>
+      <UIECMSearch>Advanced Search</UIECMSearch>
       <UISavedQuery>Saved Queries List</UISavedQuery>
       <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
       <UIActionManager>Manage Actions</UIActionManager>
@@ -235,7 +235,7 @@
       <UIDocumentFormController>Add New Document</UIDocumentFormController>
       <EditFormController>Edit Document</EditFormController>
       <UIRelationManager>Add Relation</UIRelationManager>
-      <UICategoryManager>카테고리 추가</UICategoryManager>
+      <UICategoryManager>Add Category</UICategoryManager>
       <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
@@ -270,7 +270,7 @@
   <UIResourceForm>
     <title>Edit File Content</title>
     <label>
-      <name>이름</name>
+      <name>Name</name>
       <textToModify>Text to modify</textToModify>
       <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
     </label>
@@ -284,10 +284,10 @@
     <tooltip>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <EditDocument>편집</EditDocument>
-      <Upload>업로드</Upload>
+      <EditDocument>Edit</EditDocument>
+      <Upload>Upload</Upload>
       <Paste>Paste</Paste>
-      <Search>찾기</Search>
+      <Search>Search</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Vote</Vote>
@@ -304,7 +304,7 @@
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>권한</ViewPermissions>
+      <ViewPermissions>Permissions</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -350,8 +350,8 @@
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>빨리찾기</SimpleSearch>
-      <AdvanceSearch>고급 검색</AdvanceSearch>
+      <SimpleSearch>Quick Search</SimpleSearch>
+      <AdvanceSearch>Advanced Search</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
       <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
@@ -447,7 +447,7 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>아이콘</Icon>
+      <Icon>Icon</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
@@ -522,16 +522,16 @@
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>이름 바꾸기</Rename>
+      <Rename>Rename</Rename>
       <Cut>Cut</Cut>
-      <Copy>복사</Copy>
+      <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>삭제</RemoveNode>
+      <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
-      <EditDocument>편집</EditDocument>
+      <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
@@ -553,9 +553,9 @@
   <ListView>
     <view>
       <label>
-        <name>이름</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>소유자</exo_owner>
+        <exo_owner>Owner</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -571,10 +571,10 @@
     <event>
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
-      <EditDocument>편집</EditDocument>
-      <Copy>복사</Copy>
-      <Rename>이름 바꾸기</Rename>
-      <Delete>삭제</Delete>
+      <EditDocument>Edit</EditDocument>
+      <Copy>Copy</Copy>
+      <Rename>Rename</Rename>
+      <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>Paste</Paste>
@@ -596,8 +596,8 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Download and allow edition</WebDavView>
-      <Download>다운로드</Download>
+      <WebDavView>Open in MS Office</WebDavView>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -632,8 +632,8 @@
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>페이지</UIPublicationPagesContainer>
-      <UIPublicationHistory>기록</UIPublicationHistory>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
       <UIPropertyTab>Properties</UIPropertyTab>
@@ -641,10 +641,10 @@
       <UIPropertyForm>Add New Property</UIPropertyForm>
       <UIUploadContent>Information of uploaded file</UIUploadContent>
       <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
-      <UISavedQuery>저장된 검색어</UISavedQuery>
+      <UISavedQuery>Saved Query</UISavedQuery>
       <AdvancedSearchResult>Search Results</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>고급 검색</UISearchContainer>
+      <UISearchContainer>Advanced Search</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
@@ -658,7 +658,7 @@
       <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>기록</UIPublicationLogList>
+      <UIPublicationLogList>History</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
       <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
@@ -678,10 +678,10 @@
       <remove-property>Are you sure you want to remove this property?</remove-property>
     </confirm>
     <header>
-      <name>이름</name>
+      <name>Name</name>
       <multiValue>Multi Value</multiValue>
-      <value>값</value>
-      <action>액션</action>
+      <value>Value</value>
+      <action>Action</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -706,7 +706,7 @@
     <title>Add/Edit Property</title>
     <label>
       <name>Name:</name>
-      <type>유형:</type>
+      <type>Type:</type>
       <value>Value:</value>
       <upload>Upload:</upload>
       <namespace>Namespace:</namespace>
@@ -727,7 +727,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>편집</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -761,7 +761,7 @@
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Remove</remove>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>사용자 선택</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>사용자 선택</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>사용자 선택</selectUser>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -800,7 +800,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>선택</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>User or Group</userOrGroup>
       <read>Read Right</read>
@@ -811,7 +811,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -829,13 +829,13 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>이름</name>
+      <name>Name</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>이름</prop-name>
+      <prop-name>Name</prop-name>
       <prop-type>Type</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>이름</node-def-name>
+      <node-def-name>Name</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -876,7 +876,7 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>찾기</Search>
+      <Search>Search</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -886,7 +886,7 @@
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>찾기</Search>
+      <Search>Search</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -922,7 +922,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>액션</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -953,7 +953,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>액션</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -984,7 +984,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>액션</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1015,7 +1015,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>액션</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1048,7 +1048,7 @@
     <header>
       <name>#{word.name}</name>
       <path>Path</path>
-      <action>액션</action>
+      <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
@@ -1080,7 +1080,7 @@
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>추가</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>추가</label-Add>
+      <label-Add>Add</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>추가</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1109,7 +1109,7 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>카테고리 추가</AddCategory>
+      <AddCategory>Add Category</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
@@ -1121,10 +1121,10 @@
       <containPro-Contain>Contain</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>보낸 사람</ConstraintOption-From>
-      <ConstraintOption-To>받는 사람</ConstraintOption-To>
+      <ConstraintOption-From>From</ConstraintOption-From>
+      <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
-      <Category-label>카테고리</Category-label>
+      <Category-label>Category</Category-label>
       <created>Created</created>
       <modified>Modified</modified>
       <and>And</and>
@@ -1162,7 +1162,7 @@
       <result>Filter</result>
     </title>
     <button>
-      <label-Select>선택</label-Select>
+      <label-Select>Select</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
@@ -1178,7 +1178,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>찾기</Search>
+      <Search>Search</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
@@ -1192,7 +1192,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>이름</name>
+      <name>Name</name>
       <selectBox>Select Query Style</selectBox>
       <query>Query</query>
     </label>
@@ -1212,7 +1212,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>추가</Add>
+      <Add>Add</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1236,7 +1236,7 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>추가</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1247,8 +1247,8 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>이름</name>
-      <language>언어</language>
+      <name>Name</name>
+      <language>Language</language>
       <query>Query</query>
       <action>Actions</action>
       <path>Path</path>
@@ -1259,7 +1259,7 @@
       <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>액션</action>
+      <action>Action</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
@@ -1278,16 +1278,16 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>이름</name>
+      <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>권한</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <tooltip>
       <Execute>Execute</Execute>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <label>
       <no-children>No query is saved.</no-children>
@@ -1311,7 +1311,7 @@
   -->
   <UIExportNode>
     <label>
-      <format>유형</format>
+      <format>Format</format>
       <nodePath>Path to Export</nodePath>
       <zip>Zip</zip>
       <systemView>System View</systemView>
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>퍼미션 선택기</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1377,10 +1377,10 @@
     </action>
     <labels>
       <version>Version</version>
-      <date>날짜</date>
+      <date>Date</date>
       <author>Modified By</author>
-      <summary>요약</summary>
-      <action>액션</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1400,15 +1400,15 @@
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
       <e_64>Move</e_64>
-      <e_128>복사</e_128>
+      <e_128>Copy</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
-      <e_2048>갱신</e_2048>
+      <e_2048>Update</e_2048>
       <e_4096>Import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
-      <e_32768>최소화 복원</e_32768>
+      <e_32768>Restore</e_32768>
       <e_65536>Merge</e_65536>
       <e_131072>Cancel Merge</e_131072>
       <e_262144>Done Merge</e_262144>
@@ -1421,8 +1421,8 @@
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>사용자 이름</userName>
-      <date>날짜</date>
+      <userName>Username</userName>
+      <date>Date</date>
       <version>Version</version>
     </label>
   </UIAuditingInfo>
@@ -1450,9 +1450,9 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>이름</LifecycleName>
-      <LifecycleDesc>설명</LifecycleDesc>
-      <action>액션</action>
+      <LifecycleName>Name</LifecycleName>
+      <LifecycleDesc>Description</LifecycleDesc>
+      <action>Action</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -1508,10 +1508,10 @@
   -->
   <UIImportNode>
     <label>
-      <format>유형</format>
+      <format>Format</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
-      <upload>파일 업로드</upload>
+      <upload>Upload File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1536,7 +1536,7 @@
   -->
   <UILabelForm>
     <label>
-      <label>라벨</label>
+      <label>Label</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Node Type</nodeType>
-      <nodeName>노드 이름</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Version Number</VersionNumber>
       <VersionLabels>Version Labels</VersionLabels>
       <VersionDate>Version Date</VersionDate>
@@ -1606,7 +1606,7 @@
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>카테고리</path>
+      <path>Category</path>
       <action>Actions</action>
     </header>
     <msg>
@@ -1615,19 +1615,19 @@
     </msg>
     <action>
       <title>
-        <Delete>삭제</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <label>
-      <category>카테고리</category>
-      <actions>액션</actions>
-      <delete>삭제</delete>
+      <category>Category</category>
+      <actions>Action</actions>
+      <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>이름</name>
-      <action>액션</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
     <info>
       <child-not-found>This item doesn't have any child.</child-not-found>
@@ -1660,7 +1660,7 @@
     </header>
     <action>
       <title>
-        <Delete>삭제</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -1677,7 +1677,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>
@@ -1747,7 +1747,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>정보</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1794,11 +1794,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>설명</description>
+      <description>Description</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
@@ -1809,9 +1809,9 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>보기</View>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1870,12 +1870,12 @@
       <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>가기</exeButton>
+      <exeButton>Go</exeButton>
       <address>Address:</address>
     </label>
     <title>
-      <exeButton>가기</exeButton>
-      <backButton>뒤로</backButton>
+      <exeButton>Go</exeButton>
+      <backButton>Back</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Change Node</changeNode>
     </title>
@@ -1914,7 +1914,7 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>추가</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2031,11 +2031,11 @@
     <label>
       <published>Published</published>
       <non-published>Unpublished</non-published>
-      <public>공개</public>
-      <private>개인</private>
+      <public>Public</public>
+      <private>Private</private>
       <state>State</state>
       <visibility>Visibility</visibility>
-      <nodeName>노드 이름:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
       <stateName>State Name</stateName>
     </label>
@@ -2089,9 +2089,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectUser>사용자 선택</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2128,10 +2128,10 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>날짜</date>
+      <date>Date</date>
       <newState>New State</newState>
-      <user>사용자</user>
-      <description>설명</description>
+      <user>User</user>
+      <description>Description</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
@@ -2209,9 +2209,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectUser>사용자 선택</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2229,7 +2229,7 @@
   <UIJcrExplorerEditForm>
     <title>Edit File Explorer</title>
     <action>
-      <Edit>편집</Edit>
+      <Edit>Edit</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -2250,7 +2250,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
-      <action>액션</action>
+      <action>Action</action>
       <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
@@ -2442,7 +2442,7 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>카테고리 추가</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2454,12 +2454,12 @@
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>삭제</OK>
+      <OK>Delete</OK>
       <ReplaceData>Replace Data</ReplaceData>
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>취소</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2546,7 +2546,7 @@
       <Info>Info</Info>
       <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
-      <Search>찾기</Search>
+      <Search>Search</Search>
     </obtion>
   </UIActionBar>
 
@@ -2660,14 +2660,14 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>파일 업로드</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
   <UIAllItems>
     <label>
       <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>즐겨찾기</Favourites>
+      <Favourites>Favorites</Favourites>
       <Hidden>Hidden</Hidden>
       <Trash>Trash</Trash>
       <Configuration>Set Up Preferences</Configuration>
@@ -2699,7 +2699,7 @@
        <Video>Video</Video>
        <Music>Music</Music>
        <Documents>Document</Documents>
-       <Content>내용</Content>
+       <Content>Content</Content>
     </label>
   </DocumentType>
 
@@ -2709,7 +2709,7 @@
       <Video>Video</Video>
       <Music>Music</Music>
       <Documents>Document</Documents>
-      <Content>내용</Content>
+      <Content>Content</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -2751,7 +2751,7 @@
   <UIAllItemsPreferenceForm>
     <label>
       <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>즐겨찾기</showFavourites>
+      <showFavourites>Favorites</showFavourites>
       <showHiddens>Hidden</showHiddens>
       <showTrash>Trash</showTrash>
     </label>
@@ -2777,19 +2777,19 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>카테고리 추가</UICategoryForm>
+      <UICategoryForm>Add Category</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>카테고리 추가</AddCategory>
+      <AddCategory>Add Category</AddCategory>
     </tooltip>
    </UIActionBar>
 
    <UITaggingForm>
     <label>
-      <Public>공개</Public>
-      <Private>개인</Private>
+      <Public>Public</Public>
+      <Private>Private</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
@@ -2804,9 +2804,9 @@
 
   <UIEditingTagsForm>
     <header>
-      <name>이름</name>
+      <name>Name</name>
       <relatedDocuments>Related Documents</relatedDocuments>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
@@ -2935,7 +2935,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>추가</Add>
+      <Add>Add</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -2972,11 +2972,11 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>변경</version>
-      <date>날짜</date>
+      <version>Revisions</version>
+      <date>Date</date>
       <author>Author</author>
-      <status>상태</status>
-      <action>액션</action>
+      <status>Status</status>
+      <action>Action</action>
       <label>Revision</label>
       <none>No revisions</none>
       <seeall>See all versions</seeall>
@@ -2985,7 +2985,7 @@
     </revisions>
     <status>
       <version>Revision</version>
-      <title>상태</title>
+      <title>Status</title>
       <archived>Archived</archived>
       <obsolete>Obsolete</obsolete>
       <unpublished>Unpublished</unpublished>
@@ -3000,12 +3000,12 @@
     </status>
     <scheduled>
       <title>Scheduled</title>
-      <from>보낸 사람</from>
-      <to>받는 사람</to>
+      <from>From</from>
+      <to>To</to>
     </scheduled>
     <title>
       <preview>Preview</preview>
-      <restore>최소화 복원</restore>
+      <restore>Restore</restore>
     </title>
     <msg>
       <have-no-view-template>The View template is not supported.</have-no-view-template>
@@ -3014,11 +3014,11 @@
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>날짜</date>
+      <date>Date</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>설명</description>
+      <description>Description</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>
@@ -3035,7 +3035,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3058,7 +3058,7 @@
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>상태</status>
+      <status>Status</status>
       <author>Author</author>
       <date>Created Date</date>
       <title>Document Title</title>
@@ -3130,8 +3130,8 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>아니요</no>
-  <yes>예</yes>
+    <no>No</no>
+  <yes>Yes</yes>
   <true>True</true>
   <false>False</false>
   <Electronic>Electronic</Electronic>
@@ -3186,11 +3186,11 @@
     <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>안</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
+    <in>in</in>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
-    <Error>에러</Error>
-    <or>또는</or>
+    <Error>Error</Error>
+    <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
@@ -3210,13 +3210,13 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>이름</name>
-      <date>날짜</date>
+      <name>Name</name>
+      <date>Date</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>
-      <more>더보기</more>
+      <more>More</more>
     </label>
   </FileView>
   <UIPropertyForm>

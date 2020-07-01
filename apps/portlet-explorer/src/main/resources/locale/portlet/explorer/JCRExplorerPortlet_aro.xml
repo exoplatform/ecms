@@ -193,7 +193,7 @@
     <title>إعادة تسمية</title>
     <label>
       <nameField>الاسم</nameField>
-      <titleField>العنوان</titleField>
+      <titleField>عنوان</titleField>
     </label>
     <action>
       <Cancel>إلغاء</Cancel>
@@ -287,7 +287,7 @@
       <EditDocument>تغيير</EditDocument>
       <Upload>تحميل</Upload>
       <Paste>ألصق</Paste>
-      <Search>بحث</Search>
+      <Search>البحث</Search>
       <WatchDocument>تتبّع/الغاء التتبّع</WatchDocument>
       <TaggingDocument>علامة</TaggingDocument>
       <Vote>تصويت</Vote>
@@ -350,7 +350,7 @@
     </msg>
     <title>
       <select-tab>اختيار تبويبة</select-tab>
-      <SimpleSearch>بحث سريع</SimpleSearch>
+      <SimpleSearch>عملية بحث سريعة</SimpleSearch>
       <AdvanceSearch>بحث متقدم</AdvanceSearch>
       <SavedQueries>الاستبيانات المحفوظة</SavedQueries>
       <ShowAllOwnedByUser>اظهار كافة العناصر الخاصة بي</ShowAllOwnedByUser>
@@ -555,7 +555,7 @@
       <label>
         <name>الاسم</name>
         <versionable>قابل للإصدار</versionable>
-        <exo_owner>مالك</exo_owner>
+        <exo_owner>المالك</exo_owner>
         <auditing>تدقيق</auditing>
         <exo_dateCreated>تاريخ الإضافة</exo_dateCreated>
         <exo_dateModified>تاريخ التغيير</exo_dateModified>
@@ -585,7 +585,7 @@
       <Custom>تخصيص</Custom>
       <AddFolder>مجلد جديد</AddFolder>
       <AddDocument>محتوى جديد</AddDocument>
-      <Upload>تحميل ملفّات</Upload>
+      <Upload>تحميل ملفات</Upload>
       <MoveNode>تحويل</MoveNode>
       <UnLock>الغاء التأمين</UnLock>
       <ViewProperties>عرض الخصائص</ViewProperties>
@@ -633,7 +633,7 @@
       <UIPublicationPanel>تنقيح</UIPublicationPanel>
       <UIPublicationSchedule>مُبرمج</UIPublicationSchedule>
       <UIPublicationPagesContainer>صفحات</UIPublicationPagesContainer>
-      <UIPublicationHistory>تاريخ</UIPublicationHistory>
+      <UIPublicationHistory>السّجل</UIPublicationHistory>
       <UIVersionViewer>عارض الإصدار</UIVersionViewer>
 
       <UIPropertyTab>الخاصيّات</UIPropertyTab>
@@ -680,7 +680,7 @@
     <header>
       <name>الاسم</name>
       <multiValue>متعدد المحتوى</multiValue>
-      <value>قيمة</value>
+      <value>القيمة</value>
       <action>اجراء</action>
     </header>
     <label>
@@ -706,7 +706,7 @@
     <title>اضافة أو تغيير خاصيّة</title>
     <label>
       <name>الاسم:</name>
-      <type>النوع:</type>
+      <type>النوع</type>
       <value>القيمة:</value>
       <upload>تحميل:</upload>
       <namespace>اسم الفضاء:</namespace>
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>اختيارمستخدم</SelectUser>
-      <SelectMember>اختيار العضوية</SelectMember>
+      <SelectUser>اختيار مستخدم</SelectUser>
+      <SelectMember>اختيار العضويّة</SelectMember>
       <AddAny>اختيار الجميع</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>اختيار مستخدم</UIGroupSelector>
       <UIPermissionSelector>اختيار عضو</UIPermissionSelector>
-      <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
+      <UIGroupMemberSelector>اختيار العضويّة</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -876,7 +876,7 @@
       <location>البحث في هذا المستوى:</location>
     </label>
     <action>
-      <Search>بحث</Search>
+      <Search>البحث</Search>
       <Cancel>إلغاء</Cancel>
     </action>
     <msg>
@@ -886,7 +886,7 @@
   <UISimpleSearch>
     <action>
       <MoreConstraints>عرض/إخفاء مشهد الشروط</MoreConstraints>
-      <Search>بحث</Search>
+      <Search>البحث</Search>
       <Save>حفظ</Save>
       <Cancel>إلغاء</Cancel>
     </action>
@@ -922,7 +922,7 @@
     <header>
       <name>#{word.name}</name>
       <path>المسار</path>
-      <action>الاجراء</action>
+      <action>اجراء</action>
       <shortcutPath>المسار</shortcutPath>
       <type>النوع</type>
       <dateCreated>تاريخ الصنع</dateCreated>
@@ -1159,7 +1159,7 @@
       <result>النتائج :</result>
     </label>
     <title>
-      <result>فلتر</result>
+      <result>فلترة</result>
     </title>
     <button>
       <label-Select>اختيار</label-Select>
@@ -1178,7 +1178,7 @@
     <action>
       <Save>حفظ</Save>
       <Cancel>إلغاء</Cancel>
-      <Search>بحث</Search>
+      <Search>البحث</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
@@ -1311,7 +1311,7 @@
   -->
   <UIExportNode>
     <label>
-      <format>شكل</format>
+      <format>الشكل</format>
       <nodePath>المسار الذي سيتم تصديره</nodePath>
       <zip>ضغط</zip>
       <systemView>مشهد النظام</systemView>
@@ -1423,7 +1423,7 @@
       <operation>عمليّة</operation>
       <userName>اسم المستخدم</userName>
       <date>تاريخ</date>
-      <version>اصدار</version>
+      <version>إصدار</version>
     </label>
   </UIAuditingInfo>
 
@@ -1452,7 +1452,7 @@
     <header>
       <LifecycleName>الاسم</LifecycleName>
       <LifecycleDesc>الوصف</LifecycleDesc>
-      <action>إجراء</action>
+      <action>اجراء</action>
     </header>
     <action>
       <Cancel>أغلق</Cancel>
@@ -1747,7 +1747,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>معلومات</UIViewDocumentInfo>
+        <UIViewDocumentInfo>معلومات:</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1794,11 +1794,11 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>وصف</description>
+      <description>الوصف</description>
   <lifecycle>دورة حياة</lifecycle>
   <triggeredaction>اطلاق الاجراء</triggeredaction>
       <instanceOf>نموذج من نوع الاجراء</instanceOf>
-      <action>إجراء</action>
+      <action>اجراء</action>
     </header>
     <msg>
       <remove-popup-first>يجب عليك إغلاق مشهد التغيير قبل حذف هذا العنصر.</remove-popup-first>
@@ -2031,8 +2031,8 @@
     <label>
       <published>تم نشره</published>
       <non-published>غير منشورة</non-published>
-      <public>عمومي</public>
-      <private>شخصي</private>
+      <public>عام</public>
+      <private>خاص</private>
       <state>الحالة</state>
       <visibility>الرؤية</visibility>
       <nodeName>الإسم:</nodeName>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
       <selectUser>اختيار مستخدم</selectUser>
-      <selectMembership>اختر عضوية</selectMembership>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2128,11 +2128,11 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>التاريخ</date>
+      <date>تاريخ</date>
       <newState>حالة جديدة</newState>
       <user>المستخدم</user>
       <description>الوصف</description>
-      <version>الإصدار</version>
+      <version>إصدار</version>
       <visibility>الرؤية</visibility>
     </header>
     <action>
@@ -2146,7 +2146,7 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>الإصدار</version>
+      <version>إصدار</version>
       <state>الحالة</state>
     </header>
   </UIVersionTreeList>
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
       <selectUser>اختيار مستخدم</selectUser>
-      <selectMembership>اختيار عضوية</selectMembership>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2267,7 +2267,7 @@
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>اختيار  قرص</UIDriveSelector>
+      <UIDriveSelector>حدد محرك الأقراص</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
@@ -2279,7 +2279,7 @@
 
   <DriveNameInput>
     <title>
-      <SelectDrive>اختيار  قرص</SelectDrive>
+      <SelectDrive>حدد محرك الأقراص</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2546,7 +2546,7 @@
       <Info>معلومات</Info>
       <Actions>اجراءات</Actions>
       <Collaboration>تعاون</Collaboration>
-      <Search>بحث</Search>
+      <Search>البحث</Search>
     </obtion>
   </UIActionBar>
 
@@ -2788,8 +2788,8 @@
 
    <UITaggingForm>
     <label>
-      <Public>عمومي</Public>
-      <Private>شخصي</Private>
+      <Public>عام</Public>
+      <Private>خاص</Private>
       <tagScopes>نطاقات العلامات</tagScopes>
     </label>
    </UITaggingForm>
@@ -2976,7 +2976,7 @@
       <date>تاريخ</date>
       <author>المؤلف</author>
       <status>الحالة</status>
-      <action>عمل</action>
+      <action>اجراء</action>
       <label>اصدار</label>
       <none>لا توجد اصدارات</none>
       <seeall>مشاهدة جميع الإصدارات</seeall>
@@ -3136,7 +3136,7 @@
   <false>خطأ</false>
   <Electronic>إلكتروني</Electronic>
   <Paper>ورقة</Paper>
-  <NONE>لا شيء</NONE>
+  <NONE>لا شَيْء</NONE>
   <CLASSIFIED>مُصنّف</CLASSIFIED>
   <UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
   <NOCONTRACT>بدون عقد</NOCONTRACT>

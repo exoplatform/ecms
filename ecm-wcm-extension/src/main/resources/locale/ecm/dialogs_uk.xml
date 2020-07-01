@@ -14,8 +14,8 @@
         <time-interval>Інтервал часу</time-interval>
         <query-items>Елементи запросу</query-items>
         <schedule-type>тип розкладу</schedule-type>
-        <remove>Видалити елемент</remove>
-        <add>Додати елемент</add>
+        <remove>Вилучити об'єкт</remove>
+        <add>Додати об'єкт</add>
         <expand>Розгорнути це</expand>
       </label>
     </dialog>
@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Посилання</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Порт</port>
       <userName>#{word.userName}</userName>
       <password>Пароль</password>
-      <link>Посилання</link>
+      <link>Link</link>
       <to>Надіслати пошту</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Порт</port>
       <userName>#{word.userName}</userName>
       <password>Пароль</password>
-      <link>Посилання</link>
+      <link>Link</link>
       <to>Надіслати пошту</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -311,19 +311,19 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>НІ</no>
+<no>Ні</no>
 <yes>Так</yes>
 <true>Вірно</true>
 <false>Невірно</false>
 <Electronic>Електронний</Electronic>
-<Paper>Паперовий</Paper>
+<Paper>Paper</Paper>
 <NONE>Жоден</NONE>
-<CLASSIFIED>Класифікований</CLASSIFIED>
+<CLASSIFIED>Classified</CLASSIFIED>
 <UNCLASSIFIED>Некласифікований</UNCLASSIFIED>
 <NOCONTRACT>Немає контракту</NOCONTRACT>
 <one-minute>Одна хвилина</one-minute>
 <hourly>Погодинно</hourly>
-<daily>Щоденно</daily>
+<daily>Щодня</daily>
 <quarterly>Щоквартально</quarterly>
 <yearly>Щороку</yearly>
 <ten-years>Десять років</ten-years>
@@ -332,8 +332,8 @@
   <node_added>Доповнення вмісту</node_added>
   <node_removed>Вилучення вмісту</node_removed>
   <property_added>Доповнення властивості</property_added>
-  <property_removed>Видалення власності</property_removed>
-  <property_changed>Модифікація власності</property_changed>
+  <property_removed>Видалення властивості</property_removed>
+  <property_changed>Модифікація властивості</property_changed>
 
   <ScriptAction>
     <dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>В поточний вузол не дозволяють додати тип вузла"{0}".</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Сталася неочікувана помилка. Для більш докладної інформації зверніться до адміністратора.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Цю дію не можна зберегти. Надане ім'я має бути в числовому форматі.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

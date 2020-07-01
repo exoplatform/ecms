@@ -2,7 +2,7 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Which options you for like</Preferences>
+      <Preferences>Preferences</Preferences>
       <AddContent>Add Content</AddContent>
       <ManageContent>Manage Content</ManageContent>
     </label>
@@ -132,7 +132,7 @@
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Watin you go use select page</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>

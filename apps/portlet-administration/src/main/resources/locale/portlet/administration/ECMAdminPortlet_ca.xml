@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Selecciona l'Afiliació</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Selecciona el Rol</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Selecciona usuari/a</SelectUser>
-      <SelectMember>Selecciona l'Afiliació</SelectMember>
+      <SelectMember>Selecciona el Rol</SelectMember>
       <AddAny>Tothom</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Selecciona usuari/a</UIGroupSelector>
       <UIPermissionSelector>Selecciona un membre</UIPermissionSelector>
-      <UIGroupMemberSelector>Selecciona l'Afiliació</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selecciona el Rol</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
       <selectUser>Selecciona usuari/a</selectUser>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
       <selectUser>Selecciona usuari/a</selectUser>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
       <selectUser>Selecciona usuari/a</selectUser>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Afegeix</Add>
     </action>
     <label>
-      <userOrGroup>Afiliacions:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>L'afiliació ja existeix. Si us plau, selecciona un altre.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Vybrat členství</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Vybrat roli</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Vybrat uživatele</SelectUser>
-      <SelectMember>Vybrat členství</SelectMember>
+      <SelectMember>Vybrat roli</SelectMember>
       <AddAny>Každý</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Vybrat uživatele</UIGroupSelector>
       <UIPermissionSelector>Vybrat člena</UIPermissionSelector>
-      <UIGroupMemberSelector>Vybrat členství</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Vybrat roli</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Přidat</Add>
     </action>
     <label>
-      <userOrGroup>Členství:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Toto členství již existuje. Vyberte jinou kombinaci.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Izberi uporabnika</UIPermissionUser>
-      <UIPermissionMembership>Izberi članstvo</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Izberi članstvo</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Izberi vlogo</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Izberi vlogo</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Izberi članstvo</selectUser>
-      <selectGroup>Poiščite in izberite skupino</selectGroup>
+      <selectUser>Izberi vlogo</selectUser>
+      <selectGroup>Poišči in izberi skupino</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Izberi skupino</selectGroup>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectGroup>Izberite skupino</selectGroup>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Dodaj korensko vozlišče</AddRootNode>
+      <AddRootNode>Dodajte korensko vozlišče</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--

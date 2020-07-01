@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Seleccionar Usuario</UIPermissionUser>
-      <UIPermissionMembership>Seleccione la afiliación</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Seleccione la afiliación</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Seleccione el rol</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Seleccione el rol</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Seleccione la afiliación</selectUser>
+      <selectUser>Seleccione el rol</selectUser>
       <selectGroup>Navega y selecciona un Grupo</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Seleccionar Grupo</selectGroup>
-      <selectMembership>Seleccione la afiliación</selectMembership>
+      <selectGroup>Seleccionar grupo</selectGroup>
+      <selectMembership>Seleccione el rol</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Selector de página</UIPageSelector>
+      <UIPageSelector>Selector Página</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Añadir Carpeta raíz</AddRootNode>
+      <AddRootNode>Añadir Raíz</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--

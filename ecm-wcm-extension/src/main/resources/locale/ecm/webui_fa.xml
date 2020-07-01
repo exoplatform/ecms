@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>نام</name>
-      <action>افزودن</action>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>فرزند یافت نشد!</child-not-found>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>انتخاب کاربر</UIPermissionUser>
-      <UIPermissionMembership>انتخاب عضویت</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>انتخاب عضویت</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>انتخاب نقش</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>انتخاب نقش</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>انتخاب عضویت</selectUser>
+      <selectUser>انتخاب نقش</selectUser>
       <selectGroup>مرور و انتخاب یک گروه</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

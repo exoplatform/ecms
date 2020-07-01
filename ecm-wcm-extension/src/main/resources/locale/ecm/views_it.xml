@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Ultimo commento postato da</postedBy>
-        <at>il</at>
+        <at>al</at>
         <comments>Commento(i)</comments>
         <show-comments>Mostra commenti</show-comments>
         <hide-comments>Nascondi commenti</hide-comments>
@@ -55,11 +55,12 @@
         <pdf-max-page>L'anteprima non è disponibile per i contenuti con oltre {0} pagine.</pdf-max-page>
         <using-webDAV>o Apri in MS Office</using-webDAV>
         <open-on-desktop>Apri sul desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Apri in Documenti</open-in-documents>
         <open-in-documents-tooltip>Apri questo file nell'app Documenti</open-in-documents-tooltip>
         <file-size-too-big>Il contenuto di questo file è troppo grande. Dovrebbe scaricarlo ed usare un client esterno.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>
-        <download>Scarica questo File</download>
+        <download>Scarica</download>
         <htmlview>Mostra come HTML</htmlview>
         <plaintextview>Mostra come testo semplice</plaintextview>
       </label>
@@ -73,7 +74,7 @@
     <view>
       <label>
         <from>Da:</from>
-        <to>A:</to>
+        <to>Fino a:</to>
         <cc>Cc:</cc>
         <date>Data:</date>
         <subject>Oggetto:</subject>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Valutazione Med.</avg-rating>
+        <avg-rating>Valuta Quesito</avg-rating>
         <subscription>Voti</subscription>
       </label>
     </view>
@@ -101,9 +102,9 @@
         <name>Nome</name>
         <versionable>Versionabile</versionable>
         <exo_owner>Proprietario</exo_owner>
-        <exo_dateCreated>Data Creazione</exo_dateCreated>
+        <exo_dateCreated>Data di Creazione</exo_dateCreated>
         <exo_dateModified>Data Modifica</exo_dateModified>
-        <auditing>Controllo</auditing>
+        <auditing>Revisione</auditing>
       </label>
     </view>
   </ListView>
@@ -140,7 +141,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Nome Azione</action-name>
+        <action-name>Nome</action-name>
         <lifecycle>Ciclo di Vita</lifecycle>
         <description>Descrizione</description>
       </label>
@@ -152,11 +153,11 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/D</not-avaliable>
+        <not-avaliable>N. d.</not-avaliable>
         <core-elements>Elementi fondamentali</core-elements>
         <title>Titolo</title>
         <creator>Creatore</creator>
-        <subject>Oggetto</subject>
+        <subject>Soggetto</subject>
         <source>Sorgente</source>
         <contributor>Contribuente</contributor>
         <resource-type>Tipo Risorsa</resource-type>
@@ -176,7 +177,7 @@
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Proprietà Aggiungi/Modifica</add-edit>
+        <add-edit>Aggiungi/Modifica ProprietÃ </add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -196,7 +197,7 @@
     <view>
       <label>
         <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipo Nodo</nodetypes>
+        <nodetypes>Tipi di nodi</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
         <nodeTypeName>Nomi Tipi Nodo</nodeTypeName>
       </label> 
@@ -207,7 +208,7 @@
     <view>
       <label>
         <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipo Nodo</nodetypes> 
+        <nodetypes>Tipi di nodi</nodetypes> 
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
         <nodeTypeName>Nomi Tipi Nodo</nodeTypeName>
       </label> 
@@ -218,7 +219,7 @@
     <view>
       <label>
         <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipo Nodo</nodetypes>
+        <nodetypes>Tipi di nodi</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
         <nodeTypeName>Nomi Tipi Nodo</nodeTypeName>
       </label> 

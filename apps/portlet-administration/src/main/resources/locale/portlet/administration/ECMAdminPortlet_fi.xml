@@ -15,7 +15,7 @@
       </label>
     </tab>
     <label>
-      <UITaxonomyManagerTrees>Kategoriat</UITaxonomyManagerTrees>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
@@ -30,7 +30,7 @@
       <UIFolksonomyManager>Tags</UIFolksonomyManager>
     </label>
     <msg>
-      <access-denied>Pääsy estetty. Sinulla ei ole lupaa suorittaa tätä toimintoa.</access-denied>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,17 +40,17 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Ei voi lukea lähdetiedoston tai kohde-luokka on aliluokka.</referential-integrity>
-      <no-taxonomy-selected>Sinun täytyy kopioida tai leikata vähintään yksi luokka.</no-taxonomy-selected>
-      <node-is-cutting>Et voi liittää tässä. Luokkasolmu '{0}' voisi leikata.</node-is-cutting>
-      <can-not-paste>Ei ole tietoja leikepöydälle liittää.</can-not-paste>
-      <reference-exception>Ei voi poistaa koska se on tällä hetkellä viittaa siihen sisältöä.</reference-exception>
-      <path-error>Virhe tapahtui kun poistat tämän luokan solmu.</path-error>
+      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
+      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
+      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
+      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <path-error>An error occurred while removing this category node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Oletko varma että haluat poistaa tämän luokan?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
       <add>Add</add>
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Määritä luokan nimi, työtilan ja kodin polku.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Aseta lupa luokan puu.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Lisää toimintaa luokkaan puun täydellinen luoda tai päivittää.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Muokkaa taksonomian puu lisäämällä, kopiointi, leikkaus ja valitsemalla käyttöoikeudet.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>Luokka puu ei ole olemassa.</not-exist-tree>
+      <not-exist-tree>The category tree does not exist.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
 
@@ -91,16 +91,16 @@
     </action>
     <msg>
       <name-not-allowed>Forbidden Name</name-not-allowed>
-      <name-emty>Puun nimi on pakollinen.</name-emty>
+      <name-emty>The tree name is required.</name-emty>
       <homePath-emty>The home path is required.</homePath-emty>
       <targetPath-emty>The target path is required.</targetPath-emty>
-      <taxonomytree-existed>Luokka puun nimi on jo olemassa.</taxonomytree-existed>
+      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Nimi</TaxoTreeName>
+      <TaxoTreeName>Name</TaxoTreeName>
       <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
       <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
     </label>
@@ -130,7 +130,7 @@
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
       <remove>Remove</remove>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Määritä vähintään yksi luvan tämän solmun.</have-not-any-permission>
+      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
   -->
 
   <UIActionForm>
-    <title>Lisää toiminta luokka puu</title>
+    <title>Add an action to the category tree</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Tyhjä nimi tai erikoismerkit eivät ole sallittuja toiminnon nimi.</name-not-allowed>
-      <path-invalid>Polku on virheellinen.</path-invalid>
-      <taxonomy-existed>Luokka puu on jo olemassa.</taxonomy-existed>
-      <taxonomy-node-existed>Luokka-solmu on jo olemassa.</taxonomy-node-existed>
-      <no-permission-add>Sinulla ei ole oikeutta lisätä toimintaa.</no-permission-add>
-      <not-created-tree>Luokka puu ei ole vielä luotu.</not-created-tree>
+      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
+      <path-invalid>The path is invalid.</path-invalid>
+      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
+      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
+      <not-created-tree>The category tree has not yet been created.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,7 +173,7 @@
   -->
   <UITemplatesList>
     <header>
-      <name>Mallin Nimi</name>
+      <name>Template Name</name>
       <action>Actions</action>
     </header>
   </UITemplatesList>
@@ -188,7 +188,7 @@
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Rekisteröi Uusi Nimiavaruus</title>
+    <title>Register New Namespace</title>
     <label>
       <namespace>Namespace Prefix</namespace>
       <uri>URI</uri>
@@ -199,7 +199,7 @@
     </action>
     <msg>
       <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
-      <prefix-null>Ilmoittakaa nimiavaruuden etuliite.</prefix-null>
+      <prefix-null>Please specify the namespace's prefix.</prefix-null>
       <uri-null>Please specify the namespace's URI.</uri-null>
     </msg>
   </UINamespaceForm>
@@ -212,15 +212,15 @@
     <header>
       <prefix>Prefix</prefix>
       <uri>Namespace URI</uri>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <action>
-      <AddNamespace>Rekisteröidy</AddNamespace>
+      <AddNamespace>Register</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Rekisteröi Uusi Nimiavaruus</UINamespaceForm>
+      <UINamespaceForm>Register New Namespace</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -243,14 +243,14 @@
     <header>
       <icon>Icon</icon>
       <name>Metadata</name>
-      <type>Tyyppi</type>
+      <type>Type</type>
       <internalUse>Internal Use</internalUse>
       <action>Actions</action>
     </header>
     <msg>
-      <confirm-delete>Oletko varma että haluat poistaa tämän metadatan?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
       <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
-      <path-not-found-exception>Tämä metadata oli poistettu tai muutettu. Klikkaa Päivitä-painiketta.</path-not-found-exception>
+      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
     </msg>
     <action>
       <Add>Add Metadata</Add>
@@ -264,7 +264,7 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>Muokkaa Metadata-Malli</UIMetadataForm>
+      <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
@@ -287,7 +287,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Toiminto</input>
+      <input>Action</input>
     </header>
     <label>
       <dialogTemplate>Dialog Template:</dialogTemplate>
@@ -313,13 +313,13 @@
   <UIMetadataView>
     <header>
       <name>Element Name</name>
-      <type>Tyyppi</type>
-      <description>Kuvaus</description>
+      <type>Type</type>
+      <description>Description</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Kuvaus</description>
+      <description>Description</description>
     </info>
     <tab>
       <element>Elements</element>
@@ -343,19 +343,19 @@
   <UIDriveList>
     <header>
       <icon>Icon</icon>
-      <name>Nimi</name>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
-      <permissions>Käyttöoikeudet</permissions>
+      <permissions>Permissions</permissions>
       <views>View</views>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <Delete>Delete</Delete>
       <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Oletko varma että haluat poistaa tämän drive?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
     </msg>
     <action>
       <AddDrive>Add Drive</AddDrive>
@@ -372,14 +372,14 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>Asema on jo olemassa.</drive-exists>
-      <workspace-path-invalid>Työtilan polku on virheellinen.</workspace-path-invalid>
-      <drive-views-invalid>Valitse näkymä.</drive-views-invalid>
-      <icon-not-found>Kuvake ei löytynyt.</icon-not-found>
-      <permission-null>Sinun täytyy asettaa luvan tämän aseman.</permission-null>
-      <allowCreateFolders>Sinun täytyy valitse kansion tyyppi.</allowCreateFolders>
-      <name-null>Syötä aseman nimi.</name-null>
-      <fileName-invalid>Aseman nimi on virheellisiä merkkejä.</fileName-invalid>
+      <drive-exists>The drive already exists.</drive-exists>
+      <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
+      <drive-views-invalid>Please select a view.</drive-views-invalid>
+      <icon-not-found>Icon not found.</icon-not-found>
+      <permission-null>You must set the permission for this drive.</permission-null>
+      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
+      <name-null>Please enter the drive name.</name-null>
+      <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
     </msg>
     <tab>
       <label>
@@ -393,14 +393,14 @@
       <workspace>Workspace:</workspace>
       <homePath>Home Path:</homePath>
       <icon>Workspace Icon:</icon>
-      <viewPreferences>Esityksessä Viitatut Asiakirjat:</viewPreferences>
-      <viewNonDocument>Näytä Ei-dokumentin Solmut:</viewNonDocument>
+      <viewPreferences>Show Referenced Documents:</viewPreferences>
+      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
       <viewSideBar>Show Sidebar:</viewSideBar>
       <permissions>Permissions:</permissions>
       <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
       <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
       <Admin>Admin:</Admin>
-      <Categories>Kategoriat:</Categories>
+      <Categories>Categories:</Categories>
       <Icons>Icons:</Icons>
       <List>List:</List>
       <Web>Web:</Web>
@@ -421,8 +421,8 @@
       <child-not-found>Child node not found.</child-not-found>
     </info>
     <header>
-      <name>Nimi</name>
-      <action>Toiminto</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
@@ -441,7 +441,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Toiminto</input>
+      <input>Action</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -460,9 +460,9 @@
     <header>
       <icon>Icon</icon>
       <nodeType>Node Type</nodeType>
-      <mixinType>Mixin tyyppi</mixinType>
-      <orderable>Orderable Lapsi Solmut</orderable>
-      <action>Toiminto</action>
+      <mixinType>Mixin Type</mixinType>
+      <orderable>Orderable Child Nodes</orderable>
+      <action>Action</action>
     </header>
     <action>
       <Export>Export</Export>
@@ -475,7 +475,7 @@
       <Delete>Delete</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Oletko varma että haluat poistaa tämän solmun tyyppi?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -491,7 +491,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Toiminto</input>
+      <input>Action</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -516,9 +516,9 @@
       <childDefinitions>Child Node Definitions</childDefinitions>
       <namespace>Name Space</namespace>
       <propertyNamespace>Name Space</propertyNamespace>
-      <nodeTypeName>Solmu Tyyppi Nimi</nodeTypeName>
+      <nodeTypeName>Node Type Name</nodeTypeName>
       <mixinType>Is Mixin Type</mixinType>
-      <hasOrderableChildNodes>Orderable Lapsi Solmut</hasOrderableChildNodes>
+      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
       <primaryItemName>Primary Item Name</primaryItemName>
       <superTypes>Super Types</superTypes>
       <propertyname>Definition Name</propertyname>
@@ -561,15 +561,15 @@
     </action>
     <msg>
       <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>Super tyyppi on pakollinen, kun rekisteröit uuden solmun tyyppi. Valitse ainakin yksi super tyyppi.</supertype-is-madatory>
-      <register-failed>Solmun tyyppi, rekisteröinti onnistunut. Se joko on jo olemassa tai super tyyppi on virheellinen.</register-failed>
-      <nodeType-name>Solmun tyyppi nimi on pakollinen.</nodeType-name>
-      <fileName-invalid>Tiedoston nimessä on virheellisiä merkkejä.</fileName-invalid>
+      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
+      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
+      <nodeType-name>The node type name is required.</nodeType-name>
+      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
       <node-type-exists>The '{0}' node type already exists.</node-type-exists>
-      <node-type-name>Solmun tyyppi nimi on virheellinen.</node-type-name>
-      <values-error>Valitse vain yksi solmu tyyppi oletus ensisijainen tyyppi.</values-error>
-      <confirm-delete-child>Oletko varma että haluat poistaa tämän lapsi solmu?</confirm-delete-child>
-      <confirm-delete-property>Oletko varma että haluat poistaa tämän ominaisuuden?</confirm-delete-property>
+      <node-type-name>The node type name is invalid.</node-type-name>
+      <values-error>Please select only one node type for the default primary type.</values-error>
+      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
+      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
@@ -580,17 +580,17 @@
       </label>
     </tab>
     <msg>
-      <property-name>Kiinteistön määritelmä nimi oli virheellinen.</property-name>
-      <not-supported-value-constraints>Tämä edellytti tyyppi ei tue arvo rajoitteet.</not-supported-value-constraints>
+      <property-name>The property definition's name was invalid.</property-name>
+      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>Lapsi solmun nimi on pakollinen.</child-name>
-      <child-invalid>Lapsi solmun nimi sisältää virheellisiä merkkejä.</child-invalid>
-      <default-node-type-not-found>Oletuksena solmun tyyppi ei ole löytynyt.</default-node-type-not-found>
-      <requiredPrimaryType>Tarvittava ensisijainen tyyppi on pakollinen.</requiredPrimaryType>
-      <defaultPrimaryType>Oletuksena ensisijainen tyyppi on pakollinen.</defaultPrimaryType>
+      <child-name>The child node name is required.</child-name>
+      <child-invalid>The child node name contains some invalid characters.</child-invalid>
+      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
+      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
+      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
@@ -600,7 +600,7 @@
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>Valitse Pakollinen Ensisijainen Tyyppi</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>Select Required Primary Type</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
@@ -627,7 +627,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Toiminto</input>
+      <input>Action</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -637,7 +637,7 @@
     </action>
     <title>Export Node Types</title>
     <msg>
-      <item-null>Valitse ainakin yksi solmu jonka haluat viedä.</item-null>
+      <item-null>Please select at least one node that you want to export.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
@@ -665,9 +665,9 @@
     </action>
     <title>Import Node Type From XML File</title>
     <msg>
-      <filename-error>Selaa solmu kirjoita tuotava tiedosto.</filename-error>
-      <data-file-error>Vain .xml-tai .zip-tiedostoja voidaan tuoda.</data-file-error>
-      <data-invalid>Tiedot on virheellinen. Tarkista tiedoston tyyppi ja yritä uudelleen.</data-invalid>
+      <filename-error>Browse a node type file to import.</filename-error>
+      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
+      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
       <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
       <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
     </msg>
@@ -686,7 +686,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Toiminto</input>
+      <input>Action</input>
     </header>
     <title>Select Import Node Type</title>
     <msg>
@@ -725,7 +725,7 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Nimi</label>
+      <label>Name</label>
       <action>Actions</action>
     </header>
     <title>
@@ -768,10 +768,10 @@
     </action>
     <msg>
       <action-type-added>The '{0}' action type was added successfully.</action-type-added>
-      <action-type-create-error>Virhe luotaessa toiminnon tyyppi.</action-type-create-error>
+      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
       <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
-      <action-exist>Tätä toimintaa on jo olemassa ECM-järjestelmä.</action-exist>
-      <fileName-invalid>Toiminnan nimi sisältää virheellisiä merkkejä.</fileName-invalid>
+      <action-exist>This action already exists in the ECM system.</action-exist>
+      <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
     </msg>
   </UIActionTypeForm>
   <!--
@@ -791,7 +791,7 @@
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-      <UIActionScriptContainer>Toiminto</UIActionScriptContainer>
+      <UIActionScriptContainer>Action</UIActionScriptContainer>
       <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
       <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
@@ -816,19 +816,19 @@
       <Delete>Delete</Delete>
     </title>
     <header>
-      <name>Nimi</name>
-      <permissions>Käyttöoikeudet</permissions>
+      <name>Name</name>
+      <permissions>Permissions</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <action>
       <AddView>Add View</AddView>
     </action>
     <msg>
-      <access-denied>Pääsy estetty. Sinulla ei ole lupaa käyttää tätä toimintoa.</access-denied>
-      <template-in-use>Ei voi poistaa {0}. Se on tällä hetkellä käytössä.</template-in-use>
-      <confirm-delete>Oletko varma, että haluat poistaa tämän näkemyksen?</confirm-delete>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
+      <confirm-delete>Are you sure you want to delete this view?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
@@ -839,7 +839,7 @@
   <AddPopup>
     <title>
       <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Lisää sivupohja</AddPopup>
+      <AddPopup>Add Template</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -855,24 +855,24 @@
     </title>
     <header>
       <tabName>Tab</tabName>
-      <localizeButtons>Kuvaus</localizeButtons>
+      <localizeButtons>Description</localizeButtons>
       <action>Actions</action>
     </header>
     <action>
       <AddTab>Add</AddTab>
     </action>
     <msg>
-      <confirm-delete>Oletko varma että haluat poistaa tämän välilehden?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
     </msg>
     <grid>
       <msg>
-        <empty>Ei ole-välilehti tässä näkymässä</empty>
+        <empty>There is no tab on this view</empty>
       </msg>
     </grid>
   </UITabList>
 
   <UIViewPermissionList>
-    <title>Valitse Omistaja-käyttöoikeudet tämä näkymä:</title>
+    <title>Select Owner with permissions on this view:</title>
     <label>
       <permission>{0} in {1}</permission>
     </label>
@@ -887,8 +887,8 @@
       <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>Käyttöoikeudet</friendlyPermission>
-      <action>Toiminto</action>
+      <friendlyPermission>Permissions</friendlyPermission>
+      <action>Action</action>
     </header>
     <action>
       <title>
@@ -921,36 +921,36 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Lisää Lupaa</AddPermission>
-      <RemovePermission>Poista Lupaa</RemovePermission>
+      <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>Näkymän nimi on pakollinen.</view-name-invalid>
-      <fileName-invalid>Näkymän nimi sisältää virheellisiä merkkejä.</fileName-invalid>
-      <permission-not-empty>Valitse luvan katsoa.</permission-not-empty>
+      <view-name-invalid>The view name is required.</view-name-invalid>
+      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
+      <permission-not-empty>Please select a permission for the view.</permission-not-empty>
       <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
-      <mustbe-add-permission>Valitse luvan tämän katsoa</mustbe-add-permission>
-      <view-exist>Näkymän nimi on jo olemassa.</view-exist>
+      <mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
+      <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>Nimi</viewName>
+      <viewName>Name</viewName>
       <template>Template</template>
       <version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
-      <hideExplorerPanel>Piilota explorer paneeli sivupalkissa</hideExplorerPanel>
+      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Valitse ainakin yksi toiminto luettelosta.</button-select-error>
-      <tab-name-error>Välilehden nimi on pakollinen.</tab-name-error>
-      <fileName-invalid>Välilehden nimi sisältää virheellisiä merkkejä.</fileName-invalid>
+      <button-select-error>Please select at least one function from the list.</button-select-error>
+      <tab-name-error>The tab name is required.</tab-name-error>
+      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
     </msg>
     <label>
       <version>Restore Version</version>
-      <viewName>Nimi</viewName>
+      <viewName>Name</viewName>
       <tabName>Tab Name</tabName>
-      <permission>Käyttöoikeus</permission>
+      <permission>Permission</permission>
       <tabs>Tabs</tabs>
       <template>Templates</template>
       <enableVersion>Enable Version</enableVersion>
@@ -979,7 +979,7 @@
       <viewMetadatas>View Metadata</viewMetadatas>
       <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Kommentti</comment>
+      <comment>Comment</comment>
       <vote>Vote</vote>
       <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
@@ -990,7 +990,7 @@
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Jaa</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1008,9 +1008,9 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Toiminto</UITabContainer>
+        <UITabContainer>Action</UITabContainer>
         <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>Käyttöoikeus</UIViewPermissionContainer>
+        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1052,19 +1052,19 @@
       <Delete>Delete</Delete>
     </title>
     <header>
-      <name>Nimi</name>
-      <path>Arvo</path>
+      <name>Name</name>
+      <path>Value</path>
       <baseVersion>Base Version</baseVersion>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <action>
       <Add>Add</Add>
     </action>
     <msg>
-      <template-in-use>Ei voi poistaa {0}. Se on tällä hetkellä käytössä.</template-in-use>
-      <confirm-delete>Oletko varma, että haluat poistaa tämän sivupohjan?</confirm-delete>
-      <access-denied>Pääsy estetty. Sinulla ei ole lupaa käyttää tätä toimintoa.</access-denied>
-      <delete-permission-denied>Sinulla ei ole lupaa poistaa '{0}' malli.</delete-permission-denied>
+      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1084,10 +1084,10 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>Versio {0} palautettiin onnistuneesti.</version-restored>
+      <version-restored>Version {0} was restored successfully.</version-restored>
       <role-require>Please select a permission.</role-require>
       <template-name-exist>The template name '{0}' already exists.</template-name-exist>
-      <add-permission-denied>Sinulla ei ole lupaa lisätä uuden mallin.</add-permission-denied>
+      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
       <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
@@ -1104,7 +1104,7 @@
       <dialog>Dialog Content</dialog>
       <view>View Content</view>
       <permission>Permission:</permission>
-      <selectPemistion>Käyttöoikeus</selectPemistion>
+      <selectPemistion>Permission</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1165,10 +1165,10 @@
       <AddNew>Add Script</AddNew>
     </action>
     <msg>
-      <confirm-delete>Oletko varma että haluat poistaa tämän käsikirjoituksen?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Nimi</scriptName>
+      <scriptName>Name</scriptName>
       <path>Script</path>
       <baseVersion>Base Version</baseVersion>
       <action>Actions</action>
@@ -1198,10 +1198,10 @@
       <Change>Change</Change>
     </action>
     <msg>
-      <version-restored>Versio {0} palautettiin onnistuneesti.</version-restored>
+      <version-restored>Version {0} was restored successfully.</version-restored>
       <name-null>Please enter the script name.</name-null>
       <name-exist>The script name '{0}' already exists.</name-exist>
-      <fileName-invalid>Käsikirjoituksen nimi on virheellisiä merkkejä.</fileName-invalid>
+      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1218,7 +1218,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Nimi</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1233,7 +1233,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Nimi</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1256,8 +1256,8 @@
     <msg>
       <exist>The "{0}" category already exists.</exist>
       <name-null>Please specify the category name.</name-null>
-      <name-invalid>Luokan nimessä on virheellisiä merkkejä.</name-invalid>
-      <name-too-long>Luokan nimen tulee olla vähemmän kuin 30 merkkiä.</name-too-long>
+      <name-invalid>The category name has some invalid characters.</name-invalid>
+      <name-too-long>The category name must have less than 30 characters.</name-too-long>
     </msg>
   </UITaxonomyForm>
 
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Valitse jäsenyys</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>Valitse jäsenyys</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1339,7 +1339,7 @@
       <name>Category Tree</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <action>
       <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
@@ -1351,8 +1351,8 @@
     <title>Browse Category Tree</title>
     <msg>
       <no-list>No category trees have been created.</no-list>
-      <confirm-delete>Oletko varma että haluat poistaa luokan puu?</confirm-delete>
-      <is-in-trash>Tämä luokka puu on siirretty Roskakoriin.</is-in-trash>
+      <confirm-delete>Are you sure you want to delete the category tree?</confirm-delete>
+      <is-in-trash>This category tree has been moved to the Trash.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
 
@@ -1363,10 +1363,10 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Nimi</name>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>Käyttöoikeudet</permissions>
+      <permissions>Permissions</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1375,7 +1375,7 @@
 
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>Valitse</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
@@ -1386,14 +1386,14 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Tallenna</Save>
+      <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <checkbox-require>Valitse ainakin yksi lupa.</checkbox-require>
-      <userOrGroup-required>Valitse käyttäjä tai ryhmä ennen tallentamista lupaa.</userOrGroup-required>
-      <not-change-permission>Sinulla ei ole oikeutta lisätä lupaa.</not-change-permission>
-      <access-denied>Pääsy estetty. Et voi poistaa tätä lupaa.</access-denied>
+      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionTreeForm>
 
@@ -1412,7 +1412,7 @@
   <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Valitse käyttöoikeus</UIPermissionSelector>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
 
@@ -1440,20 +1440,20 @@
       <read>Read</read>
       <addNode>Modify Node</addNode>
       <remove>Remove</remove>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Oletko varma että haluat poistaa tämän lupaa?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
       <no-permission-tochange>You do not have the right to remove this permission.</no-permission-tochange>
       <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
-      <access-denied>Pääsy estetty. Et voi poistaa tätä lupaa.</access-denied>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Valitse jäsenyys</SelectMember>
-      <AddAny>Kaikki</AddAny>
+      <SelectMember>Select Role</SelectMember>
+      <AddAny>Everyone</AddAny>
     </title>
   </permission>
   <!--
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Valitse jäsenyys</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1474,19 +1474,19 @@
       <selectUser>Select User</selectUser>
     </label>
     <msg>
-      <not-change-owner>{0} on omistajan tämän solmun ja on täydet lupaa.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Valitse</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
       <remove>Remove</remove>
     </label>
-    <title>Lisää lupaa tämä solmu</title>
+    <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1494,8 +1494,8 @@
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Valitse käyttäjä tai ryhmä ennen tallentamista lupaa.</userOrGroup-required>
-      <not-change-permission>Sinulla ei ole oikeutta lisätä lupaa.</not-change-permission>
+      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
       <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
@@ -1518,55 +1518,55 @@
   -->
   <UITemplateList>
     <header>
-      <name>Tyyppi</name>
-      <action>Toiminto</action>
+      <name>Type</name>
+      <action>Action</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Lisää sivupohja</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Pääsy estetty. Sinulla ei ole lupaa käyttää tätä toimintoa.</access-denied>
-      <editing-template>Pääsy estetty. Et voi poistaa ja muokata mallia samanaikaisesti.</editing-template>
-      <template-not-exist>Malli jota yrität poistaa ei ole olemassa.</template-not-exist>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
 
   <UIActionsTemplateList>
     <header>
-      <name>Tyyppi</name>
-      <action>Toiminto</action>
+      <name>Type</name>
+      <action>Action</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Lisää sivupohja</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Pääsy estetty. Sinulla ei ole lupaa käyttää tätä toimintoa.</access-denied>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>Malli jota yrität poistaa ei ole olemassa.</template-not-exist>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
 
   <UIOthersTemplateList>
     <header>
-      <name>Tyyppi</name>
+      <name>Type</name>
       <label>Template</label>
       <icon>Icon</icon>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <action>
-      <AddNew>Lisää sivupohja</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Pääsy estetty. Sinulla ei ole lupaa käyttää tätä toimintoa.</access-denied>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>Malli jota yrität poistaa ei ole olemassa.</template-not-exist>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1590,27 +1590,27 @@
       <Delete>Delete</Delete>
     </title>
     <header>
-      <title>Nimi</title>
-      <action>Toiminto</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Lisää sivupohja</AddTemplate>
+      <AddTemplate>Add Template</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
     <msg>
-      <confirm-delete>Oletko varma, että haluat poistaa tämän sivupohjan?</confirm-delete>
-      <access-denied>Pääsy estetty. Sinulla ei ole lupaa käyttää tätä toimintoa.</access-denied>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>Malli jota yrität poistaa ei ole olemassa.</template-not-exist>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
   <CateTemplateList>
     <header>
-      <title>Nimi</title>
-      <action>Toiminto</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <title>
@@ -1618,7 +1618,7 @@
       <Delete>Delete</Delete>
     </title>
     <action>
-      <AddTemplate>Lisää sivupohja</AddTemplate>
+      <AddTemplate>Add Template</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1626,12 +1626,12 @@
 
   <PageTemplateList>
     <header>
-      <title>Nimi</title>
-      <action>Toiminto</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Lisää sivupohja</AddTemplate>
+      <AddTemplate>Add Template</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1680,8 +1680,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Nimi</title>
-      <template>Mallin Nimi</template>
+      <title>Name</title>
+      <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
     </label>
@@ -1694,8 +1694,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Nimi</title>
-      <template>Mallin Nimi</template>
+      <title>Name</title>
+      <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
     </label>
@@ -1708,8 +1708,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Nimi</title>
-      <template>Mallin Nimi</template>
+      <title>Name</title>
+      <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
     </label>
@@ -1726,7 +1726,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <template-existing>Tämän mallin nimi on jo olemassa. Ole hyvä ja valitse toinen.</template-existing>
+      <template-existing>This template name already exists. Please select another one.</template-existing>
     </msg>
   </UICLVTemplateForm>
 
@@ -1742,7 +1742,7 @@
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>Valitse käyttöoikeus</UIPermissionSelector>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
@@ -1830,9 +1830,9 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Nimi</name>
+      <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>Versio</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -1853,9 +1853,9 @@
   -->
   <UIViewTab>
     <header>
-      <name>Nimi</name>
+      <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>Versio</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -1884,7 +1884,7 @@
     <msg>
       <name-invalid>The field name must not contain special characters.</name-invalid>
       <roles-invalid>The Permission field is required.</roles-invalid>
-      <version-restored>Versio {0} palautettiin onnistuneesti.</version-restored>
+      <version-restored>Version {0} was restored successfully.</version-restored>
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
@@ -1924,10 +1924,10 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Nimi</name>
-      <type>Tyyppi</type>
+      <name>Name</name>
+      <type>Type</type>
       <statement>Statement</statement>
-      <permission>Käyttöoikeudet</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>Käyttöoikeudet</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1995,7 +1995,7 @@
       <name>Style Name</name>
       <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <title>
       <Edit>Edit</Edit>
@@ -2118,7 +2118,7 @@
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>Valitse</Select>
+      <Select>Select</Select>
     </title>
   </authInputSet>
   <!--
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Valitse jäsenyys</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Valitse jäsenyys</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Valitse jäsenyys</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Valitse jäsenyys</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>Käyttöoikeudet</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2314,7 +2314,7 @@
   <UILockHolderList>
     <header>
       <name>Groups or Users</name>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <DeleteLock>Delete Group</DeleteLock>
@@ -2327,7 +2327,7 @@
     <header>
       <name>Title</name>
       <hoderLock>Lock Owner</hoderLock>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <UnLock>UnLock</UnLock>
@@ -2375,9 +2375,9 @@
 
   <UISkinTab>
     <header>
-      <name>Nimi</name>
+      <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>Versio</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -2464,7 +2464,7 @@
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>User or Group</usersOrGroups>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
@@ -2482,17 +2482,17 @@
       <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>Valitse jäsenyys</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

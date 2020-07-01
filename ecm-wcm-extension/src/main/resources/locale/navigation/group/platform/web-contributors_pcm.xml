@@ -2,6 +2,6 @@
 <bundle>
   <administration>
     <siteExplorer>Content Explorer</siteExplorer>
-    <wcmAdmin>Dey Administer Content</wcmAdmin>
+    <wcmAdmin>Content Administration</wcmAdmin>
   </administration>
 </bundle>

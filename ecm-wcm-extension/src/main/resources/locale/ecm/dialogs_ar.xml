@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>الوصلة</link>
+      <link>الرابط</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -72,9 +72,9 @@
     <label>
       <description>#{word.description}</description>
       <port>المنفذ</port>
-      <userName>الإسم</userName>
-      <password>كلمةالسر</password>
-      <link>الوصلة</link>
+      <userName>#{word.userName}</userName>
+      <password>كلمة السر</password>
+      <link>الرابط</link>
       <to>بعث الرسالة الالكترونية إلى</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -83,9 +83,9 @@
     <label>
       <description>#{word.description}</description>
       <port>المنفذ</port>
-      <userName>الإسم</userName>
+      <userName>#{word.userName}</userName>
       <password>كلمة السر</password>
-      <link>الوصلة</link>
+      <link>الرابط</link>
       <to>بعث الرسالة الالكترونية إلى</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>المعرف الوحيد</id>
+        <id>المعرف</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>المعرف الوحيد</id>
+        <id>المعرف</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>العلاقة</relation>
+        <relation>علاقة</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>العنوان</title>
+        <title>عنوان</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>تاريخ الإصدارات</version-history>
-        <base-version>الاصدار الاساسي</base-version>
+        <version-history>تاريخ الإصدار</version-history>
+        <base-version>الإصدار الرئيسي</base-version>
         <is-checked-out>في حالة انهاء المعالجة</is-checked-out>
         <predecessors>الأسلاف</predecessors>
         <merge-failed>فشل الادماج</merge-failed>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>عنوان البريد الالكتروني غير صحيح</Invalid-input>
+      <Invalid-input>عنوان البريد الالكتروني غير صحيح.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -292,10 +292,10 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>المعرف الوحيد</id>
+        <id>المعرف</id>
         <name>الاسم</name>
         <lifecycle>دورة الحياة</lifecycle>
-        <homePath>مسار الاستقبال</homePath>
+        <homePath>مسار الصفحة الرئيسية</homePath>
         <targetWorkspace>هدف فضاء العمل</targetWorkspace>
         <targetPath>مسار الهدف</targetPath>
       </label>
@@ -317,10 +317,10 @@
 <false>خطأ</false>
 <Electronic>إلكتروني</Electronic>
 <Paper>ورقة</Paper>
-<NONE>لا شيء</NONE>
+<NONE>لا شَيْء</NONE>
 <CLASSIFIED>مُصنّف</CLASSIFIED>
 <UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
-<NOCONTRACT>بدون عَقد</NOCONTRACT>
+<NOCONTRACT>بدون عقد</NOCONTRACT>
 <one-minute>دقيقة واحدة</one-minute>
 <hourly>كل ساعة</hourly>
 <daily>يوميا</daily>
@@ -331,15 +331,15 @@
   <schedule>جدولة</schedule>
   <node_added>إضافة محتوى</node_added>
   <node_removed>إزالة المحتوى</node_removed>
-  <property_added>إضافة خاصية</property_added>
-  <property_removed>إزالة الخاصية</property_removed>
+  <property_added>إضافة خاصيّة</property_added>
+  <property_removed>إزالة الخاصيّة</property_removed>
   <property_changed>تعديل الملكية</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
+        <nodetypes>أنواع العقد</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,7 +349,7 @@
     <dialog>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
+        <nodetypes>أنواع العقد</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -359,7 +359,7 @@
     <dialog>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
+        <nodetypes>أنواع العقد</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -379,7 +379,7 @@
   <dialog>
   <label>
   <captions>التسميات التوضيحية</captions>
-<audioDescription>الوصف الصوتي</audioDescription>
+<audioDescription>وصف المقطع الصوتي</audioDescription>
 <alternativeText>النص البديل</alternativeText>
 </label>
 </dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>لا يمكن إضافة مستند من نوع '{0}' هنا.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>طرأ خطأ غير متوقّع. للمزيد من المعلومات، يُرجى الاتصال بمدير النّظام .</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>لا يمكن حفظ هذه الوثيقة. يجب ادخال اسما ذو صيغة عدديّة.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

@@ -55,6 +55,7 @@
         <pdf-max-page>预览不可用于与内容超过 {0} 页的文件。</pdf-max-page>
         <using-webDAV>或在 MS Office 中打开</using-webDAV>
         <open-on-desktop>在桌面上打开</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>此文件的内容是太大。您应下载和在客户端中打开。</file-size-too-big>
@@ -73,7 +74,7 @@
     <view>
       <label>
         <from>从：</from>
-        <to>到:</to>
+        <to>到：</to>
         <cc>Cc:</cc>
         <date>日期:</date>
         <subject>主题：</subject>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>平均评级</avg-rating>
+        <avg-rating>评分</avg-rating>
         <subscription>票</subscription>
       </label>
     </view>
@@ -98,7 +99,7 @@
   <ListView>
     <view>
       <label>
-        <name>姓名</name>
+        <name>名称</name>
         <versionable>可版本化</versionable>
         <exo_owner>所有者</exo_owner>
         <exo_dateCreated>创建日期</exo_dateCreated>
@@ -140,7 +141,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>姓名</action-name>
+        <action-name>名称</action-name>
         <lifecycle>生命周期</lifecycle>
         <description>说明</description>
       </label>
@@ -152,7 +153,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>不适用</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>核心元素</core-elements>
         <title>标题</title>
         <creator>创建者</creator>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>音频说明</Play-audio-description-of-this-video>
-      <Read-more>阅读更多</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>读取较少</Read-less>
       <Switch-back-to-original-video>原始视频</Switch-back-to-original-video>
       </label>

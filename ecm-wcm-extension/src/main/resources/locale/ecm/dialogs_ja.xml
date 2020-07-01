@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>コメントに誰かをメンションするには@ を使用します。</placeholder>
+      <placeholder>コメントを誰かにメンションするには@を使用します</placeholder>
     </label>
   </UICommentForm>
  
@@ -58,7 +58,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>カテゴリ</categories>
+        <categories>カテゴリー</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <width>幅</width>
         <height>高さ</height>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>メタデータ</metadata>
+        <metadata>メタデータ観覧</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -164,7 +164,7 @@
         <format>#{word.format}</format>
         <coverage>範囲</coverage>
         <identifier>識別子</identifier>
-        <language>言語</language>
+        <language>言語:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>公開開始</start-publication>
-        <end-publication>公開終了</end-publication>
+        <start-publication>公開の開始</start-publication>
+        <end-publication>公開の終了</end-publication>
       </label>
     </dialog>
   </Published>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>メールアドレスが不正です。</Invalid-input>
+      <Invalid-input>メールアドレスが正しくありません、</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>現在のノードは '{0}' ノードタイプを追加することが許されていません。</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>アクセス出来ません！このフォルダに権限を追加できません。</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>このドキュメントを保存できません。与えられた名前はナンバーフォーマットである必要があります。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

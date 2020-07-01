@@ -8,14 +8,14 @@
   <UITreeList>
     <header>
       <name>Nama</name>
-      <action>Tambah</action>
+      <action>Tambahkan</action>
     </header>
     <info>
       <child-not-found>Anak tidak ditemukan!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Memilih</select>
+        <select>Pilih</select>
       </title>
     </action>
   </UITreeList>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Pilih Pengguna</UIPermissionUser>
-      <UIPermissionMembership>Pilih Keanggotaan</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Pilih Keanggotaan</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Pilih Peran</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Pilih Peran</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Pilih Keanggotaan</selectUser>
+      <selectUser>Pilih Peran</selectUser>
       <selectGroup>Jelajahi dan pilih grup</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Pilih Grup</selectGroup>
-      <selectMembership>Pilih Keanggotaan</selectMembership>
+      <selectMembership>Pilih Peran</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Pemilih halaman</UIPageSelector>
+      <UIPageSelector>Memilih halaman</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--

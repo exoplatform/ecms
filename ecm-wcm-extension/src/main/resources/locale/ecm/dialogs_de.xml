@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Verwenden Sie @, um jemanden in Ihrem Kommentar zu erwähnen</placeholder>
+      <placeholder>Woran arbeiten Sie? Verwenden Sie @, um jemanden zu erwähnen</placeholder>
     </label>
   </UICommentForm>
  
@@ -200,7 +200,7 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Veröffentlichungsbeginn</start-publication>
+        <start-publication>Veröffentlichung starten</start-publication>
         <end-publication>Veröffentlichungsende</end-publication>
       </label>
     </dialog>
@@ -244,7 +244,7 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Versionsverlauf</version-history>
+        <version-history>Versionshistorie</version-history>
         <base-version>Basisversion</base-version>
         <is-checked-out>Ist ausgecheckt</is-checked-out>
         <predecessors>Vorgänger</predecessors>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Die E-Mail-Adresse ist ungültig.</Invalid-input>
+      <Invalid-input>Ungültige E-Mail-Adresse.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -313,7 +313,7 @@
   -->
 <no>Nein</no>
 <yes>Ja</yes>
-<true>Richtig</true>
+<true>Wahr</true>
 <false>Falsch</false>
 <Electronic>Elektronisch</Electronic>
 <Paper>Papier</Paper>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Der aktuelle Knoten erlaubt kein Hinzufügen des Knotentyps '{0}'</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Ein unerwarteter Fehler ist aufgetreten. Kontaktieren Sie bitte Ihren Administrator für weitere Informationen.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Sie können dieses Dokument nicht speichern. Der übergebene Name muss nummerischen Formats sein.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

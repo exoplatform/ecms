@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2020 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <editors>
+    <admin>
+    <page>crwdns6940384:0crwdne6940384:0</page>
+      <error>
+        <ProviderNotRegistered>crwdns6940386:0crwdne6940386:0</ProviderNotRegistered>
+        <EmptyRequest>crwdns6940388:0crwdne6940388:0</EmptyRequest>
+        <CannotGetProviders>crwdns6940390:0crwdne6940390:0</CannotGetProviders>
+        <PermissionNotValid>crwdns6940392:0crwdne6940392:0</PermissionNotValid>
+        <CannotLoadIdentities>crwdns6940394:0crwdne6940394:0</CannotLoadIdentities>
+        <CannotSavePreferredEditor>crwdns6940396:0crwdne6940396:0</CannotSavePreferredEditor>
+        <UnableGetData>crwdns6940398:0crwdne6940398:0</UnableGetData>
+        <UnablePostData>crwdns6940400:0crwdne6940400:0</UnablePostData>
+      </error>
+      <title>crwdns6940402:0crwdne6940402:0</title>
+      <table>
+        <Provider>crwdns6940404:0crwdne6940404:0</Provider>
+        <Description>crwdns6940406:0crwdne6940406:0</Description>
+        <Active>crwdns6940408:0crwdne6940408:0</Active>
+        <Permissions>crwdns6940410:0crwdne6940410:0</Permissions>
+      </table>
+      <modal>
+        <title>crwdns6940412:0crwdne6940412:0</title>
+        <SearchLabel>crwdns6940414:0crwdne6940414:0</SearchLabel>
+        <WithPermissions>crwdns6940416:0crwdne6940416:0</WithPermissions>
+        <None>crwdns6940418:0crwdne6940418:0</None>
+        <Everybody>crwdns6940420:0crwdne6940420:0</Everybody>
+      </modal>
+      <buttons>
+        <Save>crwdns6940422:0crwdne6940422:0</Save>
+        <Cancel>crwdns6940424:0crwdne6940424:0</Cancel>
+      </buttons>
+    </admin>
+    <buttons>
+      <EditorButton>crwdns6940426:0crwdne6940426:0</EditorButton>
+    </buttons>
+    <idlePopup>
+      <title>crwdns6940428:0crwdne6940428:0</title>
+      <message>crwdns6940430:0%scrwdne6940430:0</message>
+    </idlePopup>
+  </editors>
+</bundle>

@@ -2,34 +2,34 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>มีไม่มีเนื้อหาที่เลือก โปรดเลือกอย่างน้อยหนึ่ง</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>เปลี่ยนชื่อ</rename>
-      <cancel>ยกเลิก</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
-      <renaming>เปลี่ยนชื่อ...</renaming>
+      <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>เปิดใน Word</word>
-          <excel>เปิดใน Excel</excel>
-          <powerpoint>เปิดใน Powerpoint</powerpoint>
-          <desktop>เปิดบนเดสก์ท็อป</desktop>
-          <desktop-app>เปิดใน {0}</desktop-app>
+          <word>Open in Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Open in Powerpoint</powerpoint>
+          <desktop>Open on Desktop</desktop>
+          <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>ไม่รู้จักประเภท Mimetype ของไฟล์ที่อัพโหลด ไม่มีเวอร์ชั่นใหม่ของ {0} ที่ถูกสร้างขึ้น</WrongMimeType>
+      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

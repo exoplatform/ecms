@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>اس نام کی اجازت نہیں ہے.</name-not-allowed>
-      <in-versioning>نئے نوڈ کو شامل کرنے سے قبل موجودہ نوڈ چیک کریں.</in-versioning>
-      <cannot-save>نوڈ کو بچانے کے دوران ایک خرابی واقع ہوئی.</cannot-save>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <in-versioning>Please check the current node before adding a new node.</in-versioning>
+      <cannot-save>An error occurred while saving the node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>'{0}' کے سانچے لوڈ نہیں کر سکتے ہیں.</not-support>
-      <not-add-folder>اس فولڈر میں صرف فائلوں کو شامل کیا جا سکتا ہے.</not-add-folder>
-      <access-denied>رسائی مسترد کر دی. آپ کو '{0}' میں اجازت شامل نہیں ہے.</access-denied>
-      <path-not-found>راستہ '{0}' کو خارج کر دیا گیا یا غلط تھا.</path-not-found>
-      <node-locked>نوڈ '{0}' بند کر دیا گیا ہے. دستاویزات بنانے سے پہلے اس نوڈ کو غیر مقفل کریں.</node-locked>
-      <node-isExist>یہ نوڈ پہلے ہی '{0}' میں موجود ہے اور اس کے بھائی کے طور پر اسی نام کے ہونے کی اجازت نہیں ہے.</node-isExist>
-      <get-dialog-path>ڈائیلاگ کا راستہ حاصل کرنے میں ایک خرابی واقع ہوئی.</get-dialog-path>
-      <new-jcr-template>کاروائی کی قسم بنانے کے دوران ایک نقص ہو گیا.</new-jcr-template>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-add-folder>Only files can be added to this folder.</not-add-folder>
+      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
+      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
+      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
+      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
+      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
+      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>مقام محفوظ کریں</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>ورکس اسپیس منتخب کریں</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>سانچہ کے اختیارات</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>محفوظ کرنے کا مقام</UIFCCLocationFormInputAction>
+      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
       <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>اپنی مرضی کے مطابق محفوظ کریں بٹن</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>اپنی مرضی کے مطابق پیغام محفوظ کریں</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>پھر سمت:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>پھر سمت راہ:</UIFCCRedirectPathFormStringInput>
+      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>اعمال</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>پورٹٹلیٹ ترجیحات کو کامیابی سے محفوظ کیا گیا.</save-successfully>
-      <item-not-found>یہ راستہ غلط ہے.</item-not-found>
-      <fileType-empty>اس ترتیب کو محفوظ کرنے سے پہلے فائل کی قسم منتخب کریں.</fileType-empty>
-      <ws-empty>ایک کام کی جگہ منتخب کریں ۔</ws-empty>
-      <action-empty>براہ کرم کارروائی کے ساتھ ایک فولڈر منتخب کریں.</action-empty>
-      <message-empty>"اپنی مرضی کے مطابق محفوظ پیغام" فیلڈ کی ضرورت ہوتی ہے، اگر آپ ری ڈائریکٹ اختیار کرنے کا انتخاب نہیں کرتے ہیں، یا راستہ خالی ہے.</message-empty>
-      <get-template>ٹیمپلیٹ تک رسائی کے دوران ایک خرابی واقع ہوئی.</get-template>
-      <set-template-option>ٹیمپلیٹ کے اختیارات کو ترتیب دیتے ہوئے ایک خرابی واقع ہوئی.</set-template-option>
-      <do-select>جگہ کا انتخاب کرتے وقت ایک خرابی واقع ہوئی.</do-select>
+      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
+      <item-not-found>This path is invalid.</item-not-found>
+      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
+      <ws-empty>Please select one workspace.</ws-empty>
+      <action-empty>Please select a folder with an action.</action-empty>
+      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
+      <get-template>An error occurred while accessing the template.</get-template>
+      <set-template-option>An error occurred while setting the template option.</set-template-option>
+      <do-select>An error occurred while selecting the location.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,7 +52,7 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>راستہ منتخب کریں</SelectPath>
+      <SelectPath>Select Path</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
@@ -60,46 +60,45 @@
     <header>
       <name>نام</name>
       <description>تفصیل</description>
-      <instanceOf>کی مثال</instanceOf>
+      <instanceOf>Instance of</instanceOf>
       <action>عمل</action>
     </header>
     <action>
       <Add>ا ضافہ کریں</Add>
     </action>
     <msg>
-      <empty>کوئی کام نہیں</empty>
-      <remove-popup-first>اس نوڈ کو حذف کرنے سے پہلے آپ کو ترمیم پاپ اپ بند کرنا ضروری ہے.</remove-popup-first>
-      <confirm-delete-action>کیا آپ واقعی یہ کارروائی حذف کرنا چاہتے ہیں؟</confirm-delete-action>
-      <template-empty>'{0}' کا سانچے کالعدم یا خالی ہے.</template-empty>
-      <template-null>ٹیمپلیٹ کالعدم یا خالی ہے، یا آپ کو اس ٹیمپلیٹ تک رسائی کی اجازت نہیں ہے.
-.</template-null>
-      <access-denied>رسائی مسترد کر دی. آپ کو یہ کارروائی کرنے کی اجازت نہیں ہے.</access-denied>
+      <empty>No actions</empty>
+      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
+      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <template-empty>The template of '{0}' is null or empty.</template-empty>
+      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>مقام منتخب کریں</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>کام کی جگہ</workspaceName>
-      <rootNodePath>روٹ پاتھ:</rootNodePath>
-      <rootNodeInfo>اصل گرہ</rootNodeInfo>
+      <workspaceName>Workspace:</workspaceName>
+      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>اصل گرہ کا ا ضافہ کریں</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>اس نوڈ میں کوئی بچہ نہیں ہے.</child-not-found>
+      <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
       <name>نام</name>
@@ -109,22 +108,22 @@
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>ایکشن شامل کریں</UIFCCActionContainer>
+      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>ایکشن شامل کریں / ترمیم کریں</title>
+    <title>Add/Edit Action</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>اس عمل کو محفوظ نہیں کر سکتا. فراہم کردہ نام کو اس کے آخری عنصر کے طور پر انڈیکس نہیں ہونا چاہئے.</repository-exception>
-      <numberformat-exception>اس عمل کو محفوظ نہیں کر سکتا. نام فراہم کرنا لازمی نہیں ہے '[' یا ']]'.</numberformat-exception>
-      <existed-action>عمل نام '{0}' پہلے سے ہی موجود ہے. براہ کرم ایک اور نام منتخب کریں.</existed-action>
-      <unable-add-action>اس عمل کا اضافہ نہیں کر سکا.</unable-add-action>
-      <unable-add>اس کارروائی کا إضافا نہیں کر سکے یہ نوڈ جڑ ہے یا آپ کی اجازت نہیں ہے.</unable-add>
+      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
+      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
+      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
+      <unable-add-action>Unable to add this action.</unable-add-action>
+      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
       <not-support>The dialog '{0}' is not supported.</not-support>
       <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
       <access-denied>Access denied. You do not have permission to access this template.</access-denied>

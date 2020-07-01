@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Selecionar usuário</SelectUser>
-      <SelectMember>Selecionar membership</SelectMember>
+      <SelectMember>Selecione a Função</SelectMember>
       <AddAny>Selecionar todos</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Selecionar usuário</UIGroupSelector>
       <UIPermissionSelector>Selecionar membro</UIPermissionSelector>
-      <UIGroupMemberSelector>Selecionar associação de cargo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selecione a Função</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Selecionar grupo</selectGroup>
       <selectUser>Selecionar usuário</selectUser>
-      <selectMembership>Selecionar associação de cargo</selectMembership>
+      <selectMembership>Selecione a Função</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Selecionar grupo</selectGroup>
       <selectUser>Selecionar usuário</selectUser>
-      <selectMembership>Selecionar associação de cargo</selectMembership>
+      <selectMembership>Selecione a Função</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

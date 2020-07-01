@@ -58,10 +58,10 @@
 
   <UIFCCActionList>
     <header>
-      <name>Nimi</name>
-      <description>Kuvaus</description>
+      <name>Name</name>
+      <description>Description</description>
       <instanceOf>Instance of</instanceOf>
-      <action>Toiminto</action>
+      <action>Action</action>
     </header>
     <action>
       <Add>Add</Add>
@@ -101,8 +101,8 @@
       <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Nimi</name>
-      <action>Toiminto</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 

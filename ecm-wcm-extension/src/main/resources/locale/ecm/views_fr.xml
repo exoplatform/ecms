@@ -23,11 +23,11 @@
     <view>
       <label>
         <postedBy>Dernier commentaire posté par</postedBy>
-        <at>à</at>
+        <at>le</at>
         <comments>Commentaire(s)</comments>
         <show-comments>Afficher les commentaires</show-comments>
         <hide-comments>Cacher les commentaires</hide-comments>
-        <comment-by>Commenté par</comment-by>
+        <comment-by>Commentée par</comment-by>
         <email>Email</email>
         <site>Site</site>
         <lastComment>Dernier commentaire posté par {user} à {time}</lastComment>
@@ -55,6 +55,7 @@
         <pdf-max-page>L'aperçu n'est pas disponible pour les contenus avec plus de {0} pages.</pdf-max-page>
         <using-webDAV>ou Ouvrir dans MS Office</using-webDAV>
         <open-on-desktop>Ouvrir à distance</open-on-desktop>
+        <editOnline>Editer en ligne</editOnline>
         <open-in-documents>Ouvrir dans Documents</open-in-documents>
         <open-in-documents-tooltip>Ouvrir ce fichier dans l'application Documents</open-in-documents-tooltip>
         <file-size-too-big>Le contenu de ce fichier est trop important. Veuillez le télécharger pour le consulter.</file-size-too-big>
@@ -72,8 +73,8 @@
   <Mail>
     <view>
       <label>
-        <from>De :</from>
-        <to>À :</to>
+        <from>De</from>
+        <to>A</to>
         <cc>Cc :</cc>
         <date>Date :</date>
         <subject>Sujet :</subject>
@@ -87,8 +88,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Note</avg-rating>
-        <subscription>Nb Vote</subscription>
+        <avg-rating>Noter</avg-rating>
+        <subscription>Votes</subscription>
       </label>
     </view>
   </Vote>
@@ -100,8 +101,8 @@
       <label>
         <name>Nom</name>
         <versionable>Versionnable</versionable>
-        <exo_owner>Propriétaire</exo_owner>
-        <exo_dateCreated>Date de Création</exo_dateCreated>
+        <exo_owner>Utilisateur</exo_owner>
+        <exo_dateCreated>Date de création</exo_dateCreated>
         <exo_dateModified>Date de Modif.</exo_dateModified>
         <auditing>Audit</auditing>
       </label>
@@ -116,7 +117,7 @@
       <label>
         <action-name>Nom de l'action</action-name>
         <lifecycle>Cycle de vie</lifecycle>
-        <metadata>Metadonnée</metadata>
+        <metadata>Métadonnées</metadata>
         <description>Description</description>
       </label>
     </view>
@@ -152,10 +153,10 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable/>
+        <not-avaliable>ND</not-avaliable>
         <core-elements>Dublin Core</core-elements>
         <title>Titre</title>
-        <creator>Créateur</creator>
+        <creator>Auteur</creator>
         <subject>Sujet</subject>
         <source>Source</source>
         <contributor>Contributeur</contributor>
@@ -176,7 +177,7 @@
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Ajouter/Modifier les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les Propriétés</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -196,7 +197,7 @@
     <view>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de noeud</nodetypes>
+        <nodetypes>Types de Noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
         <nodeTypeName>Types de noeuds</nodeTypeName>
       </label> 
@@ -207,9 +208,9 @@
     <view>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de noeud</nodetypes> 
+        <nodetypes>Types de Noeud</nodetypes> 
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-        <nodeTypeName>Types de noeud</nodeTypeName>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -218,9 +219,9 @@
     <view>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de noeud</nodetypes>
+        <nodetypes>Types de Noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-        <nodeTypeName>Types de noeud</nodeTypeName>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
-      <Read-more>Lire la suite</Read-more>
+      <Read-more>Lire la Suite</Read-more>
       <Read-less>Réduire</Read-less>
       <Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
       </label>

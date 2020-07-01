@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>Όνομα</name>
-      <action>Προσθήκη</action>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>Δεν βρέθηκαν θυγατρικοί κόμβοι!</child-not-found>
@@ -49,7 +49,7 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Επιλογή χρήστη</UIPermissionUser>
-      <UIPermissionMembership>Επιλέξτε την ιδιότητα του μέλους</UIPermissionMembership>
+      <UIPermissionMembership>Επιλογή ρόλου</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Επιλογή ρόλου</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>

@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Poslední komentář přidal</postedBy>
-        <at>na</at>
+        <at>jako</at>
         <comments>Komentář(ů)</comments>
         <show-comments>Zobrazit komentáře</show-comments>
         <hide-comments>Skrýt komentáře</hide-comments>
@@ -55,6 +55,7 @@
         <pdf-max-page>Náhled není dostupný pro obsah s více než {0} stránkami.</pdf-max-page>
         <using-webDAV>nebo otevřete v MS Office</using-webDAV>
         <open-on-desktop>Otevřít na ploše</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Otevřít v Dokumentech</open-in-documents>
         <open-in-documents-tooltip>Otevřít tento soubor v aplikaci Dokumenty</open-in-documents-tooltip>
         <file-size-too-big>Obsah tohoto souboru je příliš velký. Měli byste jej stáhnout a otevřít v klientovi.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Prům. Hodnocení</avg-rating>
+        <avg-rating>Hodnodit</avg-rating>
         <subscription>Hlasy</subscription>
       </label>
     </view>
@@ -98,8 +99,8 @@
   <ListView>
     <view>
       <label>
-        <name>Jméno</name>
-        <versionable>Verzování</versionable>
+        <name>Název</name>
+        <versionable>Možné verzování</versionable>
         <exo_owner>Vlastník</exo_owner>
         <exo_dateCreated>Datum vytvoření</exo_dateCreated>
         <exo_dateModified>Datum změny</exo_dateModified>
@@ -140,7 +141,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Jméno</action-name>
+        <action-name>Název</action-name>
         <lifecycle>Cyklus</lifecycle>
         <description>Popis</description>
       </label>
@@ -152,9 +153,9 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>NENÍ K DISPOZICI</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Základní prvky</core-elements>
-        <title>Popisek</title>
+        <title>Nadpis</title>
         <creator>Tvůrce</creator>
         <subject>Předmět š</subject>
         <source>Zdroj</source>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Popis zvuku</Play-audio-description-of-this-video>
-      <Read-more>Přečtěte si více</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Číst méně</Read-less>
       <Switch-back-to-original-video>Původní video</Switch-back-to-original-video>
       </label>

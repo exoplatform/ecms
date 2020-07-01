@@ -55,6 +55,7 @@
         <pdf-max-page>{0} sayfadan daha fazla olan içerikler için ön izleme bulunmamaktadır.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>
         <open-on-desktop>Masaüstü'nde Aç</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Belgeler'de Aç</open-in-documents>
         <open-in-documents-tooltip>Bu dosyayı Belgeler uygulamasında aç</open-in-documents-tooltip>
         <file-size-too-big>Bu içerik çok büyük. İçeriği indirip görüntüleyebilirsiniz.</file-size-too-big>
@@ -72,8 +73,8 @@
   <Mail>
     <view>
       <label>
-        <from>Kimden:</from>
-        <to>Kime:</to>
+        <from>Başlangıç Tarihi:</from>
+        <to>Bitiş Tarihi:</to>
         <cc>Cc:</cc>
         <date>Tarih:</date>
         <subject>Konu:</subject>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Ort. Puan</avg-rating>
+        <avg-rating>Derece</avg-rating>
         <subscription>Oylar</subscription>
       </label>
     </view>
@@ -129,7 +130,7 @@
     <view>
       <label>
         <action-name>Eylem Adı</action-name>
-        <lifecycle>Yaşam döngüsü</lifecycle>
+        <lifecycle>Ömrü</lifecycle>
         <description>Açıklama</description>
       </label>
     </view>
@@ -141,7 +142,7 @@
     <view>
       <label>
         <action-name>Ad</action-name>
-        <lifecycle>Yaşam döngüsü</lifecycle>
+        <lifecycle>Ömrü</lifecycle>
         <description>Açıklama</description>
       </label>
     </view>
@@ -152,7 +153,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Uygulanabilir Değil</not-avaliable>
+        <not-avaliable>YOK</not-avaliable>
         <core-elements>Temel Unsurlar</core-elements>
         <title>Başlık</title>
         <creator>Oluşturan</creator>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Sesli açıklama</Play-audio-description-of-this-video>
-      <Read-more>Daha fazla bilgi edinin</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Daha az oku</Read-less>
       <Switch-back-to-original-video>Orijinal video</Switch-back-to-original-video>
       </label>

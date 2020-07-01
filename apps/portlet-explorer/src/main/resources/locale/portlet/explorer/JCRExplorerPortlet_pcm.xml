@@ -760,7 +760,7 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Comot</remove>
+      <remove>Remove</remove>
       <action>Action</action>
     </header>
     <msg>
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Choose User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Choose User</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Choose User</selectUser>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -1080,7 +1080,7 @@
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Join</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Join</label-Add>
+      <label-Add>Add</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Join</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1212,7 +1212,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Join</Add>
+      <Add>Add</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1236,7 +1236,7 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>Join</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1451,7 +1451,7 @@
   <UIActivePublication>
     <header>
       <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Describe Something</LifecycleDesc>
+      <LifecycleDesc>Description</LifecycleDesc>
       <action>Action</action>
     </header>
     <action>
@@ -1559,7 +1559,7 @@
       <label>Select Label</label>
     </label>
     <action>
-      <Remove>Comot</Remove>
+      <Remove>Remove</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1794,7 +1794,7 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Describe Something</description>
+      <description>Description</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
@@ -1914,7 +1914,7 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Join</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2089,9 +2089,9 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectUser>Choose User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2130,8 +2130,8 @@
     <header>
       <date>Date</date>
       <newState>New State</newState>
-      <user>Person</user>
-      <description>Describe Something</description>
+      <user>User</user>
+      <description>Description</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
@@ -2209,9 +2209,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectUser>Choose User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2876,14 +2876,14 @@
     <UIActionForm>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Comot</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Comot</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </EditFormAction>
 
@@ -2935,7 +2935,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Join</Add>
+      <Add>Add</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -3018,7 +3018,7 @@
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>Describe Something</description>
+      <description>Description</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>

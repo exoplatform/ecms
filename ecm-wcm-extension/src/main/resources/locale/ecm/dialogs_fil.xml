@@ -8,14 +8,14 @@
       <label>
         <end-time>Tapusin ang Oras</end-time>
         <start-time>Umpisa ng Oras</start-time>
-        <lifecycle>Ang Ikot ng Buhay</lifecycle>
+        <lifecycle>Lifecycle</lifecycle>
         <mimeType>Ang Uri ng Mime</mimeType>
         <repeat-count>Ulitin ang Pagbibilang</repeat-count>
         <time-interval>Ang Pagitan sa Oras</time-interval>
         <query-items>Katanungan sa mga Aytem</query-items>
         <schedule-type>Ang Uri ng Iskedyul</schedule-type>
-        <remove>Alisin ang aytem</remove>
-        <add>Magdagdag ng aytem</add>
+        <remove>Tanggalin ang aytem</remove>
+        <add>Dagdagan ng aytem</add>
         <expand>Ang Palawakin Ito</expand>
       </label>
     </dialog>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Ang Link</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Ang pangalan</name>
-    <categories>Mga kategorya</categories>
+      <name>Pangalan</name>
+    <categories>Ang Mga Kategorya</categories>
     </label>
   </UIDocumentForm>
  
@@ -46,7 +46,7 @@
     <dialog>
       <label>
         <name>Pangalan</name>
-        <content>Ang Nilalaman</content>
+        <content>Nilalaman</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,7 +58,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Mga Kategorya</categories>
+        <categories>Ang Mga Kategorya</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <width>Ang Lapad</width>
         <height>Ang Taas</height>
@@ -73,8 +73,8 @@
       <description>#{word.description}</description>
       <port>Ang Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Ang Link</link>
+      <password>Ang Password</password>
+      <link>Link</link>
       <to>Ipadala ang Liham</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -84,8 +84,8 @@
       <description>#{word.description}</description>
       <port>Ang Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Ang Link</link>
+      <password>Ang Password</password>
+      <link>Link</link>
       <to>Ipadala ang Liham</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Ang Pamagat</title>
+        <title>Ang Titulo</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -263,7 +263,7 @@
         <name>Pangalan</name>
         <autoload>I-load ng Awtomatiko</autoload>
         <minetype>Ang Uri ng MIME</minetype>
-        <content>Ang Nilalaman</content>
+        <content>Nilalaman</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Embalido ang email address.</Invalid-input>
+      <Invalid-input>Ang email address ay hindi balido.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -295,7 +295,7 @@
         <id>Ang Id</id>
         <name>Pangalan</name>
         <lifecycle>Lifecycle</lifecycle>
-        <homePath>Landas papunta sa bahay</homePath>
+        <homePath>Ang landas sa bahay</homePath>
         <targetWorkspace>Ang Target sa Workspace</targetWorkspace>
         <targetPath>Target sa Landas</targetPath>
       </label>
@@ -313,7 +313,7 @@
   -->
 <no>Hindi</no>
 <yes>Oo</yes>
-<true>Tunay</true>
+<true>Totoo</true>
 <false>Hindi totoo</false>
 <Electronic>Elektronik</Electronic>
 <Paper>Ang Papel</Paper>
@@ -323,9 +323,9 @@
 <NOCONTRACT>Walang kontrata</NOCONTRACT>
 <one-minute>Isang Minuto</one-minute>
 <hourly>Oras-Oras</hourly>
-<daily>Ang Araw-araw</daily>
+<daily>Araw-araw</daily>
 <quarterly>Kada tatlong buwan</quarterly>
-<yearly>Ang Taon-taon</yearly>
+<yearly>Taon-taon</yearly>
 <ten-years>Mga sampung taon</ten-years>
 <read>Ang Aksyon ang gumagamit</read>
   <schedule>Taga-schedule</schedule>
@@ -339,8 +339,8 @@
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Tipo ng mga node</nodetypes>
-        <affectedNodeTypeNames>Ang mga Apektado na Uri ng Node</affectedNodeTypeNames>
+        <nodetypes>Ang mga uri ng node</nodetypes>
+        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -349,8 +349,8 @@
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Tipo ng mga node</nodetypes>
-        <affectedNodeTypeNames>Ang Apektado na mga Uri ng Node</affectedNodeTypeNames>
+        <nodetypes>Ang mga uri ng node</nodetypes>
+        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -359,8 +359,8 @@
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Tipo ng mga Node</nodetypes>
-        <affectedNodeTypeNames>Mga apektado na uri ng node</affectedNodeTypeNames>
+        <nodetypes>Ang mga uri ng node</nodetypes>
+        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -369,8 +369,8 @@
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang Tipo ng mga Node</nodetypes>
-        <affectedNodeTypeNames>Mga Apektado na Uri ng Node</affectedNodeTypeNames>
+        <nodetypes>Ang mga uri ng node</nodetypes>
+        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -379,7 +379,7 @@
   <dialog>
   <label>
   <captions>Ang Mga Kapsiyon</captions>
-<audioDescription>Ang Paglalarawan sa audio</audioDescription>
+<audioDescription>Ang Paglalarawan ng audio</audioDescription>
 <alternativeText>Ang Alternatibong teksto</alternativeText>
 </label>
 </dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Hindi ka maaaring magdagdag ng isang dokumentong uri ng '{0}' dito.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>May hindi inaasahang pagkakamali na naganap. Mangyari ay tawagan ang iyong administrador para sa karagdagang detalye.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Hindi mo maaaring ma-save ang dokumentong ito. Ang pangalan na ibinigay ay kailangan na nasa numerical na format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

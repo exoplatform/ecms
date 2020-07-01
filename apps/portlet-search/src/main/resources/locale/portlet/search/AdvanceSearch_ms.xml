@@ -8,7 +8,7 @@
       <Document>Document</Document>
     </label>
     <action>
-      <Search>Carian</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
@@ -16,17 +16,17 @@
     <label>
       <Page>Page</Page>
       <Document>Document</Document>
-      <DocumentAndPage>Dokumen dan Halaman</DocumentAndPage>
-      <documentandpage>Dokumen dan Halaman</documentandpage>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
       <results>Results {0} to {1} for {2}</results>
       <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>of about</ofAboutCaption>
       <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Halaman di mana kandungan yang sama muncul</similar>
+      <similar>Pages where the same content appears</similar>
       <editor>Editor</editor>
-      <date>Tarikh</date>
-      <relevancy>Relevan</relevancy>
-      <title>Tajuk</title>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
       <sortBy>Sort By:</sortBy>
     </label>
     <action>
@@ -39,15 +39,15 @@
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Templat Borang Carian</searchFormSelector>
-      <searchResultSelector>Templat hasil carian</searchResultSelector>
-      <searchPaginatorSelector>Cari Templat Paginator</searchPaginatorSelector>
-      <searchPageLayoutSelector>Cari Halaman Atur Template</searchPageLayoutSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
       <pageMode>Page Mode</pageMode>
       <option>
-        <none>Tiada</none>
-        <more>Lebih lagi</more>
+        <none>None</none>
+        <more>More</more>
         <pagination>Pagination</pagination>
       </option>
     </label>
@@ -63,16 +63,16 @@
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Kata kunci yang tidak sah. Beberapa karakter tidak diiktiraf.</keyword-not-support>
-     <not-checked>Sila pilih jenis carian.</not-checked>
-     <keyword-not-empty>Sila masukkan kata kunci.</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Seterusnya</next>
+      <next>Next</next>
       <previous>Previous</previous>
-      <more>Lebih lagi</more>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>

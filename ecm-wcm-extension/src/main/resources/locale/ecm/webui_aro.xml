@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>الاسم</name>
-      <action>إضافة</action>
+      <action>اضافة</action>
     </header>
     <info>
       <child-not-found>الفرع غير موجود!</child-not-found>
@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>اختيار المستخدم</UIPermissionUser>
-      <UIPermissionMembership>اختيارالعضوية</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>اختيار عُضويّة</TaxoSelectUserOrGroup>
+      <UIPermissionUser>اختيار مستخدم</UIPermissionUser>
+      <UIPermissionMembership>اختيار العضويّة</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>اختيار العضويّة</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>اختيار المستخدم</selectUser>
+      <selectUser>اختيار مستخدم</selectUser>
       <selectGroup>تصفح واختر مجموعة</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>اختيار العضوية</selectUser>
+      <selectUser>اختيار العضويّة</selectUser>
       <selectGroup>تصفح واختر مجموعة</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار عُضويّة</selectMembership>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>جميع التصاريح</anyPermission>
+      <anyPermission>صلاحيّة للجميع</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

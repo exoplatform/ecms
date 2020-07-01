@@ -58,10 +58,10 @@
 
   <UIFCCActionList>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <description>Açıqlama</description>
       <instanceOf>Instance of</instanceOf>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <Add>Əlavə Et</Add>
@@ -101,8 +101,8 @@
       <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Ad</name>
-      <action>Hərəkət</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 

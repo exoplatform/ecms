@@ -3,14 +3,14 @@
   <UICLVContainer>
     <label>
       <Preferences>Preferences</Preferences>
-      <AddContent>Tartalom hozzáadása</AddContent>
+      <AddContent>Add Content</AddContent>
       <ManageContent>Manage Content</ManageContent>
     </label>
     <msg>
       <non-contents>Sorry, no articles are available.</non-contents>
-      <item-not-found>Elem nem található.</item-not-found>
-      <no-permission>Nincs jogosultságod a modul eléréséhez.</no-permission>
-      <category-back>Ugrás az előzőre</category-back>
+      <item-not-found>Item not found.</item-not-found>
+      <no-permission>You do not have permission to access this node.</no-permission>
+      <category-back>Go to previous</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
@@ -28,17 +28,17 @@
     <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Cím</exo:title>
-        <exo:dateCreated>Létrehozás dátuma</exo:dateCreated>
-        <exo:lastModifiedDate>Módosítás dátuma</exo:lastModifiedDate>
-        <publication:liveDate>Közététel dátuma</publication:liveDate>
-        <exo:startEvent>Esemény dátuma</exo:startEvent>
+        <exo:title>Title</exo:title>
+        <exo:dateCreated>Created Date</exo:dateCreated>
+        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
+        <publication:liveDate>Published Date</publication:liveDate>
+        <exo:startEvent>Event Date</exo:startEvent>
         <exo:index>Index</exo:index>
         <DESC>Descendant</DESC>
         <ASC>Ascendant</ASC>
       </option>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Fejléc</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
@@ -85,7 +85,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>Törlés</delete>
+      <delete>Delete</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -145,9 +145,9 @@
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>Frissítés</refresh>
+      <refresh>Refresh</refresh>
       <edit>Edit in Content Explorer</edit>
-      <delete>Törlés</delete>
+      <delete>Delete</delete>
       <publish>Publish</publish>
     </action>
     <label>

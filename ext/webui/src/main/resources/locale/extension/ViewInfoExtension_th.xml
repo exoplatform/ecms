@@ -2,22 +2,22 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>ดูข้อมูล</UIViewInfoManager>
+<UIViewInfoManager>View Information</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>ดูข้อมูล</ViewInfo>
+<ViewInfo>View Information</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
       <name>Name</name>
-      <title>ชื่อเรื่อง</title>
-      <type>ชนิด</type>
+      <title>Title</title>
+      <type>Type</type>
       <size>Size</size>
-      <owner>เจ้าของ</owner>
+      <owner>Owner</owner>
       <lastModifier>Last Modifier</lastModifier>
       <created>Created Date</created>
       <lastModified>Last Modified Date</lastModified>

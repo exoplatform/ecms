@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>选择用户</SelectUser>
-      <SelectMember>选择成员</SelectMember>
+      <SelectMember>选择一个角色</SelectMember>
       <AddAny>选择所有人</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>选择用户</UIGroupSelector>
       <UIPermissionSelector>选择成员</UIPermissionSelector>
-      <UIGroupMemberSelector>选择成员</UIGroupMemberSelector>
+      <UIGroupMemberSelector>选择一个角色</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>选择组</selectGroup>
       <selectUser>选择用户</selectUser>
-      <selectMembership>选择成员身份</selectMembership>
+      <selectMembership>选择一个角色</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>选择组</selectGroup>
       <selectUser>选择用户</selectUser>
-      <selectMembership>选择成员身份</selectMembership>
+      <selectMembership>选择一个角色</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

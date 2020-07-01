@@ -15,7 +15,7 @@
         <query-items>Elementele interogării</query-items>
         <schedule-type>Tipul de planificare</schedule-type>
         <remove>Înlătură elementul</remove>
-        <add>Adaugă Element</add>
+        <add>Adăugaţi element</add>
         <expand>Extinde acesta</expand>
       </label>
     </dialog>
@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link-ul</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Parola</password>
-      <link>Link-ul</link>
+      <link>Link</link>
       <to>Trimite Mail la</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Parola</password>
-      <link>Link-ul</link>
+      <link>Link</link>
       <to>Trimite Mail la</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Adresa de e-mail invalidă.</Invalid-input>
+      <Invalid-input>Adresa de e-mail nu este validă.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Modulul curent nu vă permit să adăugaţi modul de tip "{0}".</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Eroare neașteptată. Vă rugăm să contactaţi administratorul pentru mai multe detalii.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Imposibil de salvat acest document. Numele furnizat trebuie să fie în format numeric.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

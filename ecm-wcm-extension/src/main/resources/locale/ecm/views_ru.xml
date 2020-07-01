@@ -55,6 +55,7 @@
         <pdf-max-page>Предварительный просмотр недоступен для содержимого с более чем {0} страниц.</pdf-max-page>
         <using-webDAV>или открыть в MS Office</using-webDAV>
         <open-on-desktop>Открыть на рабочем столе</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Открыть в Документах</open-in-documents>
         <open-in-documents-tooltip>Открыть этот файл в приложении Документы</open-in-documents-tooltip>
         <file-size-too-big>Слишком большой размер содержимого этой страницы. Вам необходимо скачать и открыть в клиенте.</file-size-too-big>
@@ -72,8 +73,8 @@
   <Mail>
     <view>
       <label>
-        <from>От:</from>
-        <to>Кому:</to>
+        <from>С:</from>
+        <to>До:</to>
         <cc>Cc:</cc>
         <date>Дата:</date>
         <subject>Тема:</subject>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Средний рейтинг</avg-rating>
+        <avg-rating>Оценить</avg-rating>
         <subscription>Голоса</subscription>
       </label>
     </view>
@@ -99,7 +100,7 @@
     <view>
       <label>
         <name>Название</name>
-        <versionable>Версионный</versionable>
+        <versionable>Версифицируемый</versionable>
         <exo_owner>Владелец</exo_owner>
         <exo_dateCreated>Дата создания</exo_dateCreated>
         <exo_dateModified>Дата изменения</exo_dateModified>
@@ -152,10 +153,10 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Н/Д</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Основные элементы</core-elements>
         <title>Заголовок</title>
-        <creator>Создатель</creator>
+        <creator>Автор</creator>
         <subject>Тема</subject>
         <source>Источник</source>
         <contributor>Соавтор</contributor>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Аудио описание</Play-audio-description-of-this-video>
-      <Read-more>Подробнее</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Скрыть подробности</Read-less>
       <Switch-back-to-original-video>Оригинальное видео</Switch-back-to-original-video>
       </label>

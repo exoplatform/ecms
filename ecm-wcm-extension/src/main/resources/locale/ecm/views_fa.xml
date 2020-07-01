@@ -55,6 +55,7 @@
         <pdf-max-page>پیش نمایش برای محتوای بالای {0} صفحه امکان پذیر نیست.</pdf-max-page>
         <using-webDAV>و یا باز کردن در مایکروسافت آفیس</using-webDAV>
         <open-on-desktop>باز کردن روی میز کار</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>اندازه این فایل بیش از حد بزرگ است. شما باید آنرا دانلود و در سیستم خود باز کنید.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>امتیاز میانگین</avg-rating>
+        <avg-rating>امتیاز</avg-rating>
         <subscription>رأی ها</subscription>
       </label>
     </view>
@@ -100,7 +101,7 @@
       <label>
         <name>نام</name>
         <versionable>قابل نسخه بندی</versionable>
-        <exo_owner>مالک</exo_owner>
+        <exo_owner>صاحب</exo_owner>
         <exo_dateCreated>تاریخ ایجاد</exo_dateCreated>
         <exo_dateModified>تاریخ اصلاح</exo_dateModified>
         <auditing>ممیزی</auditing>
@@ -117,7 +118,7 @@
         <action-name>نام عمل</action-name>
         <lifecycle>چرخه عمر</lifecycle>
         <metadata>فراداده</metadata>
-        <description>توضیحات</description>
+        <description>شرح</description>
       </label>
     </view>
   </AddMetadata>
@@ -130,7 +131,7 @@
       <label>
         <action-name>نام عمل</action-name>
         <lifecycle>چرخه عمر</lifecycle>
-        <description>توضیحات</description>
+        <description>شرح</description>
       </label>
     </view>
   </AutoVersioning>
@@ -142,7 +143,7 @@
       <label>
         <action-name>نام</action-name>
         <lifecycle>چرخه عمر</lifecycle>
-        <description>توضیحات</description>
+        <description>شرح</description>
       </label>
     </view>
   </EnableVersioning>
@@ -155,14 +156,14 @@
         <not-avaliable>N/A</not-avaliable>
         <core-elements>عناصر اصلی</core-elements>
         <title>عنوان</title>
-        <creator>ایجادکننده</creator>
+        <creator>سازنده</creator>
         <subject>موضوع</subject>
         <source>منبع</source>
         <contributor>مشارکت کننده</contributor>
         <resource-type>نوع منبع</resource-type>
         <date>تاریخ</date>
         <publisher>ناشر</publisher>
-        <description>توضیحات</description>
+        <description>شرح</description>
         <rights>حقوق</rights>
         <relation>ارتباط</relation>
         <format>فرمت</format>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>توضیح صوتی</Play-audio-description-of-this-video>
-      <Read-more>بیشتر</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>کمتر</Read-less>
       <Switch-back-to-original-video>فیلم اصلی</Switch-back-to-original-video>
       </label>

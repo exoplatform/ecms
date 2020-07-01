@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectMember>انتخاب نقش</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>انتخاب کاربر</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>انتخاب عضویت</UIGroupMemberSelector>
+      <UIGroupMemberSelector>انتخاب نقش</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Original Version</original>
       <version>نسخه</version>
-      <baseVersion>نسخه پایه</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>افزودن برچسب</addLabel>
       <removeLable>حذف برچسب</removeLable>
       <restoreVersion>بازیابی نسخه</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

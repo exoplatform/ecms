@@ -15,7 +15,7 @@
         <query-items>Užklausos elementai</query-items>
         <schedule-type>Tvarkaraščio tipas</schedule-type>
         <remove>Pašalinti elementą</remove>
-        <add>Pridėti elementą</add>
+        <add>Įtraukti elementą</add>
         <expand>Išplėsti šį</expand>
       </label>
     </dialog>
@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Nuoroda</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Jungtis</port>
       <userName>#{word.userName}</userName>
       <password>Slaptažodis</password>
-      <link>Nuoroda</link>
+      <link>Link</link>
       <to>Siųsti laišką</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Jungtis</port>
       <userName>#{word.userName}</userName>
       <password>Slaptažodis</password>
-      <link>Nuoroda</link>
+      <link>Link</link>
       <to>Siųsti laišką</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Aprėptis:</coverage>
         <identifier>Identifikatorius:</identifier>
-        <language>Kalba:</language>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Pavadinimas</title>
+        <title>Antraštė</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -260,7 +260,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Vardas</name>
+        <name>Pavadinimas</name>
         <autoload>Automatinis krovimas</autoload>
         <minetype>MIME tipas</minetype>
         <content>Turinys</content>
@@ -293,7 +293,7 @@
     <dialog>
       <label>
         <id>ID</id>
-        <name>Vardas</name>
+        <name>Pavadinimas</name>
         <lifecycle>Gyvenimo ciklas</lifecycle>
         <homePath>Namų kelias</homePath>
         <targetWorkspace>Tikslinė darbo sritis</targetWorkspace>
@@ -316,9 +316,9 @@
 <true>Tiesa</true>
 <false>Netiesa</false>
 <Electronic>Elektroninis</Electronic>
-<Paper>Popierius</Paper>
+<Paper>Paper</Paper>
 <NONE>Nėra</NONE>
-<CLASSIFIED>Klasifikuotas</CLASSIFIED>
+<CLASSIFIED>Classified</CLASSIFIED>
 <UNCLASSIFIED>Neklasifikuotas</UNCLASSIFIED>
 <NOCONTRACT>Nėra sutarties</NOCONTRACT>
 <one-minute>Viena minutė</one-minute>
@@ -330,7 +330,7 @@
 <read>Vartotojo veiksmas</read>
   <schedule>Planuotojas</schedule>
   <node_added>Turinio papildymas</node_added>
-  <node_removed>Turinio pašalinimas</node_removed>
+  <node_removed>Turinio šalinimas</node_removed>
   <property_added>Sąvybių papildymas</property_added>
   <property_removed>Sąvybių pašalinimas</property_removed>
   <property_changed>Sąvybių pakeitimas</property_changed>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Įvyko netikėta klaida. Dėl išsamesnės informacijos kreipkitės į administratorių.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Jūs negalite išsaugoti šio dokumento. Pavadinimas turi būti skaitinio formato.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

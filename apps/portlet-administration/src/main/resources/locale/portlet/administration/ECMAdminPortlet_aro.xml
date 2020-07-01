@@ -441,7 +441,7 @@
     <header>
       <icon>أيقونة</icon>
       <label>إسم العقدة</label>
-      <input>عمل</input>
+      <input>اجراء</input>
     </header>
     <action>
       <Save>حفظ</Save>
@@ -462,7 +462,7 @@
       <nodeType>نوع العقدة</nodeType>
       <mixinType>نوع 'Mixin'</mixinType>
       <orderable>أبناء العقد مرتبة</orderable>
-      <action>عمل</action>
+      <action>اجراء</action>
     </header>
     <action>
       <Export>تصدير</Export>
@@ -470,7 +470,7 @@
       <Add>أضف</Add>
     </action>
     <tooltip>
-      <View>المشهد</View>
+      <View>عرض</View>
       <Edit>تغيير</Edit>
       <Delete>حذف</Delete>
     </tooltip>
@@ -491,7 +491,7 @@
     <header>
       <icon>أيقونة</icon>
       <label>إسم العقدة</label>
-      <input>عمل</input>
+      <input>اجراء</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -668,7 +668,7 @@
       <filename-error>استعراض الملف نوع عقدة للاستيراد</filename-error>
       <data-file-error>معتمدة فقط أكس ملف أو ملف مضغوط لاستيراد.</data-file-error>
       <data-invalid>صيغة هذه البيانات غيرصحيحة. يُرجى التثبّت من نوع الملفّ ثمّ اعادة المحاولة</data-invalid>
-      <nodetype-exist>'{0}' : بيانات غير صالحة : نوع نقطة التقاطع موجودة</nodetype-exist>
+      <nodetype-exist>نوع العقدة '{0}' موجود من قبل</nodetype-exist>
       <namespace-invalid>'{0}': بيانات غير صالحة: مساحة الاسم غير معروف.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
@@ -686,7 +686,7 @@
     <header>
       <icon>أيقونة</icon>
       <label>إسم العقدة</label>
-      <input>عمل</input>
+      <input>اجراء</input>
     </header>
     <title>إختيار نوع عقدة للإستيراد</title>
     <msg>
@@ -714,7 +714,7 @@
       <AddPermission>إضافة صلاحية</AddPermission>
       <RemovePermission>حذف الصلاحية</RemovePermission>
       <AddIcon>إضافة ايقونة</AddIcon>
-      <AddPath>إضافة مسار</AddPath>
+      <AddPath>اضافة مسار</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -1052,7 +1052,7 @@
       <Delete>حذف</Delete>
     </title>
     <header>
-      <name>الإسم</name>
+      <name>الاسم</name>
       <path>القيمة</path>
       <baseVersion>الإصدار الرئيسي</baseVersion>
       <action>اجراء</action>
@@ -1061,9 +1061,9 @@
       <Add>أضف</Add>
     </action>
     <msg>
-      <template-in-use>.لا يمكن الحذف {0} : القالب في حالة إستعمال</template-in-use>
+      <template-in-use>لا يمكن حذف '{0}'. هو الآن بحالة إستخدام.</template-in-use>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>.غير مسموح بالدخول. ليس لديك الصلاحيّة لاستعمال هذه الخدمة.</access-denied>
+      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
       <delete-permission-denied>ليس لديك الصلاحيّات الكافية لحذف '{0}' النموذج.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
@@ -1103,7 +1103,7 @@
       <isDocumentTemplate>هو قالب وثيقة:</isDocumentTemplate>
       <dialog>محتوى واجهة المستخدم</dialog>
       <view>عرض المحتوى</view>
-      <permission>الصلاحية:</permission>
+      <permission>الصلاحيّة</permission>
       <selectPemistion>الصلاحية</selectPemistion>
     </label>
   </UITemplateForm>
@@ -1304,14 +1304,14 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>اختيار المستخدم</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>اختيار المستخدم</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>اختيار مستخدم</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>اختيار مستخدم</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>اختيار العضوية</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>اختيار العضويّة</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1324,8 +1324,8 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>إختيار مجموعة</selectGroup>
-      <selectMembership>إختيار العضوية</selectMembership>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1363,7 +1363,7 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>اسم</name>
+      <name>الاسم</name>
       <workspace>مساحة العمل</workspace>
       <homePath>المسار</homePath>
       <permissions>الصلاحيّات</permissions>
@@ -1411,7 +1411,7 @@
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>إضافة صلاحية</AddDrivePermissionSelector>
       <UIPermissionSelector>اختيار صلاحيّة</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>اختيار مستخدم</SelectUser>
-      <SelectMember>اختيار عضوية</SelectMember>
+      <SelectMember>اختيار العضويّة</SelectMember>
       <AddAny>الجميع</AddAny>
     </title>
   </permission>
@@ -1463,9 +1463,9 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>اختيار المستخدم</UIGroupSelector>
+      <UIGroupSelector>اختيار مستخدم</UIGroupSelector>
       <UIPermissionSelector>اختيار العضوية</UIPermissionSelector>
-      <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
+      <UIGroupMemberSelector>اختيار العضويّة</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1520,7 +1520,7 @@
     <header>
       <name>النوع</name>
       <action>اجراء</action>
-      <label>قالب</label>
+      <label>القالب</label>
       <icon>أيقونة</icon>
     </header>
     <action>
@@ -1528,7 +1528,7 @@
     </action>
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>غير مسموح بالدخول. لم تتحصل على الصلاحية لاستخدام هذه المهمّة.</access-denied>
+      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
       <editing-template>غير مسموح بالدخول. لا يمكنك حذف و تغيير النموذج في نفس الوقت.</editing-template>
       <template-not-exist>النموذج الذي تحاول حذفه لم يعُد موجودًا.</template-not-exist>
     </msg>
@@ -1538,7 +1538,7 @@
     <header>
       <name>النوع</name>
       <action>اجراء</action>
-      <label>قالب</label>
+      <label>القالب</label>
       <icon>أيقونة</icon>
     </header>
     <action>
@@ -1546,7 +1546,7 @@
     </action>
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>غير مسموح بالدّخول. ليس لديك الصلاحيّة الكافية لاستخدام هذه الوظيفة.</access-denied>
+      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
       <editing-template>غير مسموح بالدّخول. لا يمكن القيام بحذف و تغيير النموذج في نفس الوقت.</editing-template>
       <template-not-exist>النموذج الذي أنت بصدد محاولة حذفه لم يعُد موجودا.</template-not-exist>
     </msg>
@@ -1555,7 +1555,7 @@
   <UIOthersTemplateList>
     <header>
       <name>النوع</name>
-      <label>قالب</label>
+      <label>القالب</label>
       <icon>أيقونة</icon>
       <action>اجراء</action>
     </header>
@@ -1564,7 +1564,7 @@
     </action>
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحيات الكافية لاستخدام هذه الوظيفة.</access-denied>
+      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
       <editing-template>غير مسموح بالدّخول. لا يمكن القيام بحذف و تغيير النموذج في نفس الوقت.</editing-template>
       <template-not-exist>النموذج الذي أنت بصدد محاولة حذفه لم يعُد موجودا.</template-not-exist>
     </msg>
@@ -1592,7 +1592,7 @@
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
-      <template>قالب</template>
+      <template>القالب</template>
     </header>
     <action>
       <AddTemplate>إضافة قالب</AddTemplate>
@@ -1601,7 +1601,7 @@
     </action>
     <msg>
       <confirm-delete>هل ترغب حقّــا بحذف هذا القالب؟</confirm-delete>
-      <access-denied>.غير مسموح بالدخول! ليس لديك صلاحية اتسعمال في الوظيفة</access-denied>
+      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
       <editing-template>تمّ رفض الوصول. لا يمكنك حذف و تغيير هذا القالب في آن واحد.</editing-template>
       <template-not-exist>القالب الذي تحاول حذفه غير موجود.</template-not-exist>
     </msg>
@@ -1611,7 +1611,7 @@
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
-      <template>قالب</template>
+      <template>القالب</template>
     </header>
     <title>
       <Edit>تغيير</Edit>
@@ -1628,7 +1628,7 @@
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
-      <template>قالب</template>
+      <template>القالب</template>
     </header>
     <action>
       <AddTemplate>إضافة قالب</AddTemplate>
@@ -1680,7 +1680,7 @@
       <Cancel>إلغاء</Cancel>
     </action>
     <label>
-      <title>اسم</title>
+      <title>الاسم</title>
       <template>اسم النموذج</template>
       <content>المحتوى</content>
       <type>نوع النموذج</type>
@@ -1758,7 +1758,7 @@
       <content>المحتوى:</content>
       <name>الاسم:</name>
       <isDocumentTemplate>هو نموذج لوثيقة</isDocumentTemplate>
-      <viewPermission>الصلاحية:</viewPermission>
+      <viewPermission>الصلاحيّة</viewPermission>
       <enableVersion>تمّ تفعيل عمليّة الاصدار</enableVersion>
     </label>
     <title>اضافة/تغيير العرض</title>
@@ -1771,7 +1771,7 @@
       <content>المحتوى:</content>
       <name>الاسم:</name>
       <isDocumentTemplate>هو نموذج لوثيقة</isDocumentTemplate>
-      <viewPermission>الصلاحية:</viewPermission>
+      <viewPermission>الصلاحيّة</viewPermission>
       <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
     </label>
     <title>اضافة / تغيير واجهة المُــستخدم</title>
@@ -1832,7 +1832,7 @@
     <header>
       <name>الاسم</name>
       <roles>الأدوار</roles>
-      <baseVersion>الاصدار</baseVersion>
+      <baseVersion>إصدار</baseVersion>
       <action>الاجراءات</action>
     </header>
     <msg>
@@ -1855,7 +1855,7 @@
     <header>
       <name>الاسم</name>
       <roles>الأدوار</roles>
-      <baseVersion>الإصدار</baseVersion>
+      <baseVersion>إصدار</baseVersion>
       <action>الاجراءات</action>
     </header>
     <msg>
@@ -1888,7 +1888,7 @@
       <name-exist>الاسم '{0}' موجود مُسبقـا.</name-exist>
     </msg>
     <title>
-      <AddPermission>اضافة صلاحية</AddPermission>
+      <AddPermission>إضافة صلاحية</AddPermission>
       <RemovePermission>حذف الصلاحية</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1927,7 +1927,7 @@
       <name>الاسم</name>
       <type>النوع</type>
       <statement>استبيانات</statement>
-      <permission>الصلاحيات</permission>
+      <permission>الصلاحيّات</permission>
       <action>الاجراءات</action>
     </header>
     <action>
@@ -2159,16 +2159,16 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectUser>اختيارمستخدم</selectUser>
-      <selectMembership>اختيار العضوية</selectMembership>
+      <selectUser>اختيار مستخدم</selectUser>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>إختيار مجموعة</selectGroup>
-      <selectUser>إختيار مستخدم</selectUser>
-      <selectMembership>إختيار العضوية</selectMembership>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectUser>اختيار مستخدم</selectUser>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2192,12 +2192,12 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>اختر مجموعة</selectGroup>
+      <selectGroup>اختيار مجموعة</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>اختر عضوية</selectMembership>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2210,9 +2210,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>إختيار مجموعة</selectGroup>
-      <selectUser>إختيار مستخدم</selectUser>
-      <selectMembership>إختيار العضوية</selectMembership>
+      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectUser>اختيار مستخدم</selectUser>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2235,7 +2235,7 @@
 
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>مسار الصفحة الرئيسية أمر ضروري.</homepath-emty>
+      <homepath-emty>البيت الطريق فارغة</homepath-emty>
       <targetpath-emty>المسار الهدف ضروري</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
@@ -2280,7 +2280,7 @@
   </DriveInputSet>
   <UIPermissionTreeInfo>
     <msg>
-      <confirm-delete-permission>هل حقا تريد حذف هذه الصلاحيّة ؟</confirm-delete-permission>
+      <confirm-delete-permission>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete-permission>
       <no-permission-remove>لا يمكنك إزالة المالك أو المستخدم "النظام"</no-permission-remove>
     </msg>
   </UIPermissionTreeInfo>
@@ -2325,7 +2325,7 @@
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>مسار العقدة</name>
+      <name>عنوان</name>
       <hoderLock>صاحب القفل</hoderLock>
       <action>اجراء</action>
     </header>
@@ -2375,9 +2375,9 @@
 
   <UISkinTab>
     <header>
-      <name>اسم</name>
+      <name>الاسم</name>
       <roles>الأدوار</roles>
-      <baseVersion>الإصدار</baseVersion>
+      <baseVersion>إصدار</baseVersion>
       <action>الإجراءات</action>
     </header>
     <msg>
@@ -2400,7 +2400,7 @@
       <content>المحتوى:</content>
       <name>الاسم:</name>
       <isDocumentTemplate>هو نموذج للوثيقة</isDocumentTemplate>
-      <viewPermission>صلاحيّة:</viewPermission>
+      <viewPermission>الصلاحيّة</viewPermission>
       <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
     </label>
     <title>إضافة / تغيير المظهر</title>
@@ -2476,23 +2476,23 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>أضف صلاحيّة</title>
+    <title>إضافة صلاحية</title>
     <action>
       <Save>حفظ</Save>
       <Add>إضافة</Add>
     </action>
     <label>
-      <userOrGroup>العضوية:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>هذه العضوية موجودة مُسبقا. الرجاء اختيار واحدة أخرى.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار العضوية</selectMembership>
+      <selectMembership>اختيار العضويّة</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

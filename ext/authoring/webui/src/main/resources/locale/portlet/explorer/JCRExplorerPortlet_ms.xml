@@ -7,8 +7,8 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Meminta Kelulusan</PublicationRequestApproval>
-      <PublicationApproveContent>Meluluskan Kandungan</PublicationApproveContent>
+      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
+      <PublicationApproveContent>Approve Content</PublicationApproveContent>
       <PublicationPublish>Publish</PublicationPublish>
     </tooltip>
   </UIActionBar>

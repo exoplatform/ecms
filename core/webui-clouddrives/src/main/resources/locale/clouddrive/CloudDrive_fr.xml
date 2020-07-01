@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  Copyright (C) 2003-2016 eXo Platform SAS.
+ 
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+ 
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+ 
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+  -->
+<bundle>
+  <UITabForm>
+    <label>
+      <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+      <showConnectCloudDrive>Connecter des documents Cloud</showConnectCloudDrive>
+    </label>
+  </UITabForm>
+  <UIPopupWindow>
+    <title>
+      <ConnectCloudDriveForm>Connecter des documents Cloud</ConnectCloudDriveForm>
+      <ConnectYour>Connectez votre</ConnectYour>
+      <UISharingManager>Partage de fichiers dans le cloud</UISharingManager>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <ShowConnectCloudDrive>Connecter des documents Cloud</ShowConnectCloudDrive>
+    </tooltip>
+  </UIActionBar>
+  <ECMContextMenu>
+    <event>
+      <OpenCloudFile>Ouvrir dans</OpenCloudFile>
+      <SyncingFile>Synchronisation du fichier...</SyncingFile>
+      <PushCloudFile>Envoyer vers</PushCloudFile>
+      <RefreshCloudDrive>Synchroniser avec</RefreshCloudDrive>
+      <RefreshView>Actualiser la vue</RefreshView>
+    </event>
+  </ECMContextMenu>
+  <CloudFileViewer>
+    <event>
+      <OpenFileOn>Ouvrir $fileUrl sur $serviceName</OpenFileOn>
+      <OpenOn>Ouvrir dans</OpenOn>
+      <EditFile>Modifier</EditFile>
+      <ViewFile>Vue</ViewFile>
+    </event>
+    <label>
+      <sourceview>Afficher le code source</sourceview>
+      <webview>Voir en tant que page web</webview>
+    </label>
+  </CloudFileViewer>
+  <CloudFile>
+    <msg>
+      <MoveToAnotherDriveNotSupported>Impossible de déplacer le fichier vers un autre répertoire Cloud</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Impossible de déplacer le fichier en dehors de son répertoire Cloud</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Impossible de déplacer le fichier cloud vers un autre espace de travail</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Impossible de copier ou déplacer le dossier du répertoire Cloud</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Impossible d'écrire dans le dossier de destination</DestinationNotWrittable>
+      <DestinationNotDefined>Le dossier de destination n'est pas défini</DestinationNotDefined>
+      <SourceNotDefined>Fichier source non défini</SourceNotDefined>
+      <ErrorMoveToDestination>Erreur lors du déplacement du lien partagé vers la destination</ErrorMoveToDestination>
+      <DestinationItemNameExists>Ce nom d'article existe déjà dans le dossier de destination</DestinationItemNameExists>
+      <LinkCreated>Lien {0} créé</LinkCreated>
+      <FileLinksCreated>Fichier {0} lié dans {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>Lien du fichier {0} partagé dans {1} de l'espace {2}</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>Lien du fichier {0} partagé dans {1} du groupe {2}</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>Lien de fichier {0} partagé avec l'utilisateur {2} dans son dossier {1}</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>Lien de fichier non pris en charge vers cette destination</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Erreur lors de la lecture des lecteurs de documents</ErrorReadingDrives>
+      <CannotFindUser>Impossible de trouver l'utilisateur {0}</CannotFindUser>
+      <ErrorReadingFileLinks>Erreur lors de la lecture des liens vers le fichier</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Erreur lors de la lecture du lecteur d'utilisateur</ErrorReadingUserDrive>
+    </msg>
+  </CloudFile>
+  <ConnectCloudDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConnectCloudDriveForm>
+  <ConnectDriveDrawer>
+    <title>
+      <ConnectYourService>Connectez votre service</ConnectYourService>
+    </title>
+  </ConnectDriveDrawer>
+</bundle>

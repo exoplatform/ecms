@@ -164,7 +164,7 @@
         <format>#{word.format}</format>
         <coverage>Покрытие</coverage>
         <identifier>Идентификатор</identifier>
-        <language>Язык</language>
+        <language>Язык:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -260,7 +260,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Имя</name>
+        <name>Название</name>
         <autoload>Автозагрузка</autoload>
         <minetype>Тип MIME</minetype>
         <content>Содержимое</content>
@@ -293,9 +293,9 @@
     <dialog>
       <label>
         <id>Идентификатор</id>
-        <name>Имя</name>
+        <name>Название</name>
         <lifecycle>Жизненный цикл</lifecycle>
-        <homePath>Маршрут личного каталога</homePath>
+        <homePath>Путь в домашний директорий</homePath>
         <targetWorkspace>Целевая рабочая область</targetWorkspace>
         <targetPath>Целевой путь</targetPath>
       </label>
@@ -316,16 +316,16 @@
 <true>Верно</true>
 <false>Неверно</false>
 <Electronic>Электронный</Electronic>
-<Paper>Бумажный</Paper>
+<Paper>Бумага</Paper>
 <NONE>Нет</NONE>
-<CLASSIFIED>Классифицированные</CLASSIFIED>
+<CLASSIFIED>Классифицируются</CLASSIFIED>
 <UNCLASSIFIED>Неклассифицированные</UNCLASSIFIED>
 <NOCONTRACT>Нет связи</NOCONTRACT>
 <one-minute>Ежеминутно</one-minute>
 <hourly>Каждый час</hourly>
-<daily>Каждый день</daily>
-<quarterly>Каждый квартал</quarterly>
-<yearly>Каждый год</yearly>
+<daily>Ежедневно</daily>
+<quarterly>Ежеквартально</quarterly>
+<yearly>Ежегодно</yearly>
 <ten-years>Каждые десять лет</ten-years>
 <read>Действие пользователя</read>
   <schedule>Планировщик</schedule>
@@ -340,7 +340,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -350,7 +350,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -360,7 +360,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -370,7 +370,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>В текущем узле запрещено добавлять тип узла '{0}'.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Произошла непредвиденная ошибка. Для получения более подробной информации, пожалуйста, обратитесь к администратору.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Невозможно сохранить этот документ. Указанное имя должно быть в цифровом формате.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

@@ -13,8 +13,8 @@
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Ad</name>
-      <title>Başlıq</title>
+      <name>Name</name>
+      <title>Title</title>
       <type>Type</type>
       <size>Size</size>
       <owner>Sahib</owner>

@@ -40,7 +40,7 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>중지</Abort>
+      <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
       <Print>Print</Print>
       <Close>#{word.close}</Close>
@@ -48,7 +48,7 @@
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
-      <Edit>편집</Edit>
+      <Edit>Edit</Edit>
       <Preferences>Preferences</Preferences>
       <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
@@ -100,7 +100,7 @@
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>페이지 선택기</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>

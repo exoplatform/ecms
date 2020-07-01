@@ -23,7 +23,7 @@
       <Title>Inhaltsliste Voreinstellungen</Title>
       <ContentSelectionBlock>Inhaltsauswahl</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modus</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Mehrsprachenunterstützung</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Ordnerpfad</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Ordnerpfad</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Sortieren nach</UICLVConfigOrderByFormSelectBox>
@@ -70,7 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Inhalt zwischen Benutzern teilen</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <TranslationHelp>Wenn Sie diese Option aktivieren, werden nur Inhalte mit der Sprache des Benutzers in der Liste angezeigt. Beispiel: Wenn diese Option aktiviert ist und die Benutzersprache Englisch ist, werden nur Inhalte aufgelistet, die in der englischen Sprache geschrieben sind. Wenn diese Option nicht aktiviert ist, werden alle Inhalte im Ordner aufgelistet.</TranslationHelp>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Es stehen zwei Modi zur Verfügung, um Inhalt anzuzeigen. "Nach Ordner" wird den gesamten Inhalt in Ihrem ausgewählten Ordner/Ihrer ausgewählten Kategorie anzeigen. Bei Wahl von "Nach Inhalt" können Sie den Inhalt manuell wählen, den Sie anzeigen möchten.</ModeSelectionHelp>
       <FolderPathHelp>Wählen Sie den Inhalt, den Sie anzeigen möchten. Die Standardauswahl wird dynamisch ersetzt werden, wenn Sie die dynamische Navigation aktivieren (sehen Sie weiter unten für die Wahl des erweiterten Modus).</FolderPathHelp>
       <HeaderOptionHelp>Eine Kopfzeile am Anfang der Inhaltsliste anzeigen. Wenn Sie die Option "automatische Erkennung" aktivieren, wird versucht die Kopfzeile anhand der aktuellen Auswahl zu finden.</HeaderOptionHelp>

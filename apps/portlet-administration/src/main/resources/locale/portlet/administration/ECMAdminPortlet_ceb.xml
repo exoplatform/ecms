@@ -904,7 +904,7 @@
 
   <UIViewPermissionForm>
     <action>
-      <Add>Dugangi</Add>
+      <Add>Add</Add>
     </action>
     <label>
       <userOrGroup>Ang Nigamit o Grupo</userOrGroup>
@@ -933,7 +933,7 @@
       <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>Ngalan</viewName>
+      <viewName>Name</viewName>
       <template>Ang Template</template>
       <version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
@@ -948,7 +948,7 @@
     </msg>
     <label>
       <version>Restore Version</version>
-      <viewName>Ngalan</viewName>
+      <viewName>Name</viewName>
       <tabName>Tab Name</tabName>
       <permission>Permission</permission>
       <tabs>Tabs</tabs>
@@ -1008,14 +1008,14 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Aksyon</UITabContainer>
+        <UITabContainer>Action</UITabContainer>
         <UIViewForm>View</UIViewForm>
         <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
       <Restore>Restore</Restore>
@@ -1048,17 +1048,17 @@
   <UIECMTemplateList>
     <title>
       <View>View</View>
-      <EditInfo>Usba</EditInfo>
-      <Delete>Papasa</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <name>Ngalan</name>
-      <path>Bili</path>
+      <name>Name</name>
+      <path>Value</path>
       <baseVersion>Ang Bashihan sa Bersyon</baseVersion>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <action>
-      <Add>Dugangi</Add>
+      <Add>Add</Add>
     </action>
     <msg>
       <template-in-use>Dili maka-delete {0}. Gigamit pa kini sa pagkakaron.</template-in-use>
@@ -1079,7 +1079,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
       <Restore>Restore</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
@@ -1098,7 +1098,7 @@
       </label>
     </tab>
     <label>
-      <name>Ngalan:</name>
+      <name>Name:</name>
       <label>Ang Ilhanan:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
       <dialog>Dialog Content</dialog>
@@ -1116,7 +1116,7 @@
     <label>
       <version>Select Version:</version>
       <content>Content:</content>
-      <name>Ngalan:</name>
+      <name>Name:</name>
       <homeTemplate>Template Type:</homeTemplate>
       <enableVersion>Enabled Version:</enableVersion>
     </label>
@@ -1168,14 +1168,14 @@
       <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Ngalan</scriptName>
+      <scriptName>Name</scriptName>
       <path>Ang Skrip</path>
       <baseVersion>Ang Bashihan sa Bersyon</baseVersion>
       <action>Actions</action>
     </header>
     <tooltip>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1218,7 +1218,7 @@
     <label>
       <selectVersion>Ang mga Bersyon</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Ngalan</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Ang Skrip</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1233,7 +1233,7 @@
     <label>
       <selectVersion>Ang mga Bersyon</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Ngalan</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Ang Skrip</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Pilia ang papel</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1339,7 +1339,7 @@
       <name>Category Tree</name>
       <workspace>Ang Workspace</workspace>
       <homePath>Ang Path</homePath>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <action>
       <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
@@ -1363,7 +1363,7 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Ngalan</name>
+      <name>Name</name>
       <workspace>Ang Workspace</workspace>
       <homePath>Ang Path</homePath>
       <permissions>Permissions</permissions>
@@ -1387,7 +1387,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1431,7 +1431,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Usba</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -1439,8 +1439,8 @@
       <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
-      <remove>Tangtanga</remove>
-      <action>Aksyon</action>
+      <remove>Remove</remove>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectMember>Pilia ang papel</SelectMember>
       <AddAny>Ang Tanan</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilia ang papel</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1484,13 +1484,13 @@
       <userOrGroup>Ang Nigamit o Grupo</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
-      <remove>Tangtanga</remove>
+      <remove>Remove</remove>
     </label>
     <title>Add permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1519,7 +1519,7 @@
   <UITemplateList>
     <header>
       <name>Ang Klase</name>
-      <action>Aksyon</action>
+      <action>Action</action>
       <label>Ang Template</label>
       <icon>Ang icon</icon>
     </header>
@@ -1537,7 +1537,7 @@
   <UIActionsTemplateList>
     <header>
       <name>Ang Klase</name>
-      <action>Aksyon</action>
+      <action>Action</action>
       <label>Ang Template</label>
       <icon>Ang icon</icon>
     </header>
@@ -1557,7 +1557,7 @@
       <name>Ang Klase</name>
       <label>Ang Template</label>
       <icon>Ang icon</icon>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <action>
       <AddNew>Magpuno ug Template</AddNew>
@@ -1586,18 +1586,18 @@
 
   <UICLVTemplateList>
     <title>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <title>Ngalan</title>
-      <action>Aksyon</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Ang Template</template>
     </header>
     <action>
       <AddTemplate>Magpuno ug Template</AddTemplate>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
     <msg>
       <confirm-delete>Sigurado baka nga imung deleton kining maong template?</confirm-delete>
@@ -1609,31 +1609,31 @@
 
   <CateTemplateList>
     <header>
-      <title>Ngalan</title>
-      <action>Aksyon</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Ang Template</template>
     </header>
     <title>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddTemplate>Magpuno ug Template</AddTemplate>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </CateTemplateList>
 
   <PageTemplateList>
     <header>
-      <title>Ngalan</title>
-      <action>Aksyon</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Ang Template</template>
     </header>
     <action>
       <AddTemplate>Magpuno ug Template</AddTemplate>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </PageTemplateList>
 
@@ -1676,11 +1676,11 @@
   <UICLVTemplateForm_ContentTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Ngalan</title>
+      <title>Name</title>
       <template>Ang Ngalan sa Template</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1690,11 +1690,11 @@
   <UICLVTemplateForm_PageTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Ngalan</title>
+      <title>Name</title>
       <template>Ang Ngalan sa Template</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1704,11 +1704,11 @@
   <UICLVTemplateForm_CateTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Ngalan</title>
+      <title>Name</title>
       <template>Ang Ngalan sa Template</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1722,7 +1722,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Ibalik sa kaniadto</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1756,7 +1756,7 @@
       <UIPopupWindow>View Permission</UIPopupWindow>
       <selectVersion>Ang mga Bersyon</selectVersion>
       <content>Content:</content>
-      <name>Ngalan:</name>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Ang Pagtugot:</viewPermission>
       <enableVersion>Versioning activated</enableVersion>
@@ -1769,7 +1769,7 @@
       <UIPopupWindow>Dialog Permission</UIPopupWindow>
       <selectVersion>Ang mga Bersyon</selectVersion>
       <content>Content:</content>
-      <name>Ngalan:</name>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Ang Pagtugot:</viewPermission>
       <enableVersion>Enable Versioning</enableVersion>
@@ -1797,8 +1797,8 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1813,7 +1813,7 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Ngalan:</name>
+      <name>Name:</name>
       <label>Ang Ilhanan:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
@@ -1830,7 +1830,7 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Ngalan</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -1841,8 +1841,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Usba</Edit>
-        <Delete>Papasa</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1853,7 +1853,7 @@
   -->
   <UIViewTab>
     <header>
-      <name>Ngalan</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -1864,8 +1864,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Usba</Edit>
-        <Delete>Papasa</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1924,7 +1924,7 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Ngalan</name>
+      <name>Name</name>
       <type>Ang Klase</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
@@ -1995,12 +1995,12 @@
       <name>Style Name</name>
       <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <title>
-      <Edit>Usba</Edit>
-      <Delete>Papasa</Delete>
-      <Remove>Tangtanga</Remove>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+      <Remove>Remove</Remove>
     </title>
     <action>
       <AddStyle>Add Style</AddStyle>
@@ -2127,8 +2127,8 @@
   <UIViewContainer>
     <title>
       <View>View</View>
-      <EditInfo>Usba</EditInfo>
-      <Delete>Papasa</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <label>
       <permission>{0} sa {1}</permission>
@@ -2136,8 +2136,8 @@
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Usba</EditInfo>
-      <Delete>Papasa</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
   </ECMTemplate>
   <step1>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2253,8 +2253,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Grupo</group>
-      <searchUser>Ang mugamit</searchUser>
+      <group>Group</group>
+      <searchUser>User</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2314,7 +2314,7 @@
   <UILockHolderList>
     <header>
       <name>Groups or Users</name>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <DeleteLock>Delete Group</DeleteLock>
@@ -2327,7 +2327,7 @@
     <header>
       <name>Title</name>
       <hoderLock>Lock Owner</hoderLock>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <UnLock>UnLock</UnLock>
@@ -2375,7 +2375,7 @@
 
   <UISkinTab>
     <header>
-      <name>Ngalan</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -2386,8 +2386,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Usba</Edit>
-        <Delete>Papasa</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2398,7 +2398,7 @@
       <UIPopupWindow>Skin Permission</UIPopupWindow>
       <selectVersion>Ang mga Bersyon</selectVersion>
       <content>Content:</content>
-      <name>Ngalan:</name>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Ang Pagtugot:</viewPermission>
       <enableVersion>Enable Versioning</enableVersion>
@@ -2409,7 +2409,7 @@
   <UITagManager>
     <action>
       <title>
-        <RemoveStyle>Tangtanga</RemoveStyle>
+        <RemoveStyle>Remove</RemoveStyle>
         <AddStyle>Add Style</AddStyle>
       </title>
     </action>
@@ -2425,14 +2425,14 @@
   </UITaxonomyTreeContainer>
   <UITaxonomyTreeMainForm>
     <action>
-      <NextViewPermission>Sunod</NextViewPermission>
+      <NextViewPermission>Next</NextViewPermission>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <NextAddAction>Sunod</NextAddAction>
+      <NextAddAction>Next</NextAddAction>
       <Previous>Previous</Previous>
     </action>
   </UIPermissionTreeForm>
@@ -2440,7 +2440,7 @@
   <UIActionForm>
     <action>
       <PreviousViewPermission>Previous</PreviousViewPermission>
-      <NextViewTree>Sunod</NextViewTree>
+      <NextViewTree>Next</NextViewTree>
     </action>
     <msg>
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
@@ -2464,11 +2464,11 @@
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
-      <action>Aksyon</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>Papasa</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -2479,20 +2479,20 @@
     <title>Add Permission</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Dugangi</Add>
+      <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2509,7 +2509,7 @@
   <UIActionForm>
     <title>
       <ShowComponent>Open Window</ShowComponent>
-      <removeReference>Tangtanga</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>
@@ -2550,7 +2550,7 @@
   <DriveInputSet>
     <title>
       <ChooseNodeType>Select Node Types</ChooseNodeType>
-      <RemoveNodeType>Tangtanga</RemoveNodeType>
+      <RemoveNodeType>Remove</RemoveNodeType>
     </title>
   </DriveInputSet>
   <PopupNodeTypeSelector>

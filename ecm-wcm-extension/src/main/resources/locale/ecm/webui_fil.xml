@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>Pangalan</name>
-      <action>Magdagdag</action>
+      <action>Dagdag</action>
     </header>
     <info>
       <child-not-found>Hindi matagpuan ang bata!</child-not-found>
@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Pumili ng gumagamit</UIPermissionUser>
-      <UIPermissionMembership>Pumili ng Pagpapamiyembro</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Pumili ng Pagpapamiyembro</TaxoSelectUserOrGroup>
+      <UIPermissionUser>Pumili ng Gumagamit</UIPermissionUser>
+      <UIPermissionMembership>Pumili ng Papel na Ginagampanan</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Pumili ng Papel na Ginagampanan</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Pumili ng gumagamit</selectUser>
+      <selectUser>Pumili ng Gumagamit</selectUser>
       <selectGroup>Mag-browse at pumili ng pangkat</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Pumili ng Pagpapamiyembro</selectUser>
+      <selectUser>Pumili ng Papel na Ginagampanan</selectUser>
       <selectGroup>Mag-browse at pumili ng pangkat</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Pumili ng pangkat</selectGroup>
-      <selectMembership>Pumili sa Pagiging Kasapi</selectMembership>
+      <selectGroup>Pumili ng grupo</selectGroup>
+      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

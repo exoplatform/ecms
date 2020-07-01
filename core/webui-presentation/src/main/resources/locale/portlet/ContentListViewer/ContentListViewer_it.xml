@@ -23,7 +23,7 @@
       <Title>Preferenze Lista Contenuti</Title>
       <ContentSelectionBlock>Selezione Contenuti</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modo</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Supporto multi-lingua</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Percorso Cartella</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Percorso Cartella</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordina per</UICLVConfigOrderByFormSelectBox>
@@ -70,7 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Condividi contenuti tra utenti</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <TranslationHelp>Se controlli quest'opzione, solo i contenuti con la lingua dell'utente compariranno nell'elenco. Per esempio: quando quest'opzione è verificata e che la lingua dell'utente è Inglese, solo i contenuti scritti in inglese saranno elencati. Quando quest'opzione non è verificata elenchiamo tutti i contenuti nella cartella.</TranslationHelp>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
       <ModeSelectionHelp>Sono disponibili due modalità per visualizzare i contenuti. "Per cartella" avrà tutti i contenuti nella cartella/categoria selezionata. "Per Contenuto" permette di selezionare manualmente il contenuto che si desidera visualizzare.</ModeSelectionHelp>
       <FolderPathHelp>Selezionare il contenuto da visualizzare. Questa selezione di default sarà sostituita dinamicamente se si attiva la navigazione dinamica (vedere la Modalità Avanzata di seguito).</FolderPathHelp>
       <HeaderOptionHelp>Mostra intestazione in cima alla lista dei contenuti. Se si attiva il Rilevamento Automatico, si cercherà di trovare l'intestazione basandosi sulla selezione corrente.</HeaderOptionHelp>

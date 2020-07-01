@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectMember>Vybrat roli</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Vybrat uživatele</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Vybrat členství</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Vybrat roli</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Originální verze</original>
       <version>Verze</version>
-      <baseVersion>Základní verze</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Přidat popisek</addLabel>
       <removeLable>Odebrat popisek</removeLable>
       <restoreVersion>Obnovit verzi</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat členství</selectMembership>
+      <selectMembership>Vybrat roli</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

@@ -7,7 +7,7 @@
         <en>Англійська</en>
         <fr>Французька</fr>
         <ru>Російська</ru>
-        <vi>В’єтнамська</vi>
+        <vi>вʼєтнамська</vi>
         <nl>Голландська</nl>
         <de>Німецька</de>
         <uk>Українська</uk>
@@ -55,6 +55,7 @@
         <pdf-max-page>Попередній перегляд недоступний для вмісту з понад {0} сторінок.</pdf-max-page>
         <using-webDAV>або відкрийте в MS Office</using-webDAV>
         <open-on-desktop>Відкрити на Робочому столі</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Відкрити в Документах</open-in-documents>
         <open-in-documents-tooltip>Відкрийте цей файл в додатку Документи</open-in-documents-tooltip>
         <file-size-too-big>Вміст цього файлу завеликий. Вам необхідно завантажити та відкрити у клієнті.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Середній рейтинг</avg-rating>
+        <avg-rating>Оцінка</avg-rating>
         <subscription>Голоси</subscription>
       </label>
     </view>
@@ -99,7 +100,7 @@
     <view>
       <label>
         <name>Ім’я</name>
-        <versionable>Версійний</versionable>
+        <versionable>Версифікований</versionable>
         <exo_owner>Власник</exo_owner>
         <exo_dateCreated>дата створення</exo_dateCreated>
         <exo_dateModified>Дата змінення</exo_dateModified>
@@ -152,7 +153,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Н/Д</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Основні елементи</core-elements>
         <title>Назва</title>
         <creator>Розробник</creator>
@@ -165,7 +166,7 @@
         <description>Опис</description>
         <rights>Права</rights>
         <relation>Співвідношення</relation>
-        <format>Формати</format>
+        <format>Формат</format>
         <coverage>Покриття</coverage>
         <identifier>Ідентифікатор</identifier>
         <languages>Мови</languages>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Звуковий опис</Play-audio-description-of-this-video>
-      <Read-more>Читати далі</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Приховати деталі</Read-less>
       <Switch-back-to-original-video>Оригінальне відео</Switch-back-to-original-video>
       </label>

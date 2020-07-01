@@ -9,7 +9,7 @@
     <msg>
       <non-contents>Sorry, no articles are available.</non-contents>
       <item-not-found>Item not found.</item-not-found>
-      <no-permission>Nemáte povolenie na prístup do tohto uzla.</no-permission>
+      <no-permission>You do not have permission to access this node.</no-permission>
       <category-back>Go to previous</category-back>
     </msg>
   </UICLVContainer>
@@ -71,16 +71,16 @@
     </label>
     <help>
       <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
-      <ModeSelectionHelp>Dva režimy sú k dispozícii ukázať obsah. "V Priečinku" bude trvať celý obsah je k dispozícii vo vašej vybranej zložke/kategórie. "Obsah" umožňuje manuálne, vyberte obsah, ktorý chcete zobraziť.</ModeSelectionHelp>
-      <FolderPathHelp>Vyberte obsah, ktorý chcete zobraziť. Predvolený výber budú nahradené dynamicky ak chcete aktivovať Dynamická Navigácia možnosť (pozri Pokročilý režim nižšie).</FolderPathHelp>
-      <HeaderOptionHelp>Zobraziť hlavičky v hornej časti obsahu zoznamu. Ak chcete aktivovať Automatickú Detekciu možnosť, bude sa snažiť nájsť hlavičky na základe aktuálneho výberu.</HeaderOptionHelp>
+      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
+      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
+      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Aktivuje Dynamická Navigácia možnosť. Ostatní sa môžu zmeniť obsahu dynamicky na základe parameter adresy URL.</ContextualHelp>
-      <ParameterHelp>Tento parameter sa používa na prístup k obsahu, ak Dynamická Navigácia je aktivovaná.</ParameterHelp>
-      <ShowDetailInPageHelp>Kliknutím na obsah presmeruje používateľa na strane Detail. Musíte mať "Obsah URL" portlet, s Dynamická Navigácia povolené na cieľovej stránky, ak chcete zobraziť obsah.</ShowDetailInPageHelp>
-      <DetailParameterHelp>Tento parameter bude obsahovať cestu k obsahu link na strane Detail. Tento parameter sa musí zhodovať parametre, ktoré sa používajú v "Obsahu URL" portlet stránky.</DetailParameterHelp>
+      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
+      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
+      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
+      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
       <ContentByQueryHelp>You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.</ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Obmedzuje Overovanie" bude filtrovať obsah na základe autentifikácie. Ak sa nechcete prihlásiť, vidíte verejný obsah. Ak ste prihlásený, môžete vidieť celý obsah viditeľné používateľov intranetu (ale zdieľajú všetky). "Obmedzuje Roly Používateľa" znamená, uvidíte obsah v závislosti na vašich práv. Vo väčšine prípadov táto možnosť by nemali byť používané, pretože znižuje celkovú výkonnosť.</ContentsVisibilityHelp>
+      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>#{word.save}</Save>

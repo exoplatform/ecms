@@ -54,7 +54,8 @@
         <pdf-max-size>La visualització prèvia no està disponible per a continguts més grans de {0} MB.</pdf-max-size>
         <pdf-max-page>La visualització prèvia no està disponible per a continguts amb més de {0} pàgines.</pdf-max-page>
         <using-webDAV>o obre en MS Office</using-webDAV>
-        <open-on-desktop>Obre al Escriptori</open-on-desktop>
+        <open-on-desktop>Obre a distància</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Obre en Documents</open-in-documents>
         <open-in-documents-tooltip>Obre aquest fitxer a l'aplicació Documents</open-in-documents-tooltip>
         <file-size-too-big>El contingut d'aquest fitxer és massa gran. Hauria de descarregar-lo i obrir-lo per veure'l.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Valoració</avg-rating>
+        <avg-rating>Valora</avg-rating>
         <subscription>Vots</subscription>
       </label>
     </view>

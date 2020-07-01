@@ -55,6 +55,7 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>或在 MS Office 中打開</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>此檔的內容太大。您應該在用戶端下載並打開。</file-size-too-big>
@@ -87,8 +88,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
-        <subscription>投票</subscription>
+        <avg-rating>比例</avg-rating>
+        <subscription>票</subscription>
       </label>
     </view>
   </Vote>
@@ -99,7 +100,7 @@
     <view>
       <label>
         <name>名稱</name>
-        <versionable>無版本</versionable>
+        <versionable>無</versionable>
         <exo_owner>擁有者</exo_owner>
         <exo_dateCreated>建立日期</exo_dateCreated>
         <exo_dateModified>修改日期</exo_dateModified>
@@ -152,10 +153,10 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>不適用</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>核心元素</core-elements>
         <title>標題</title>
-        <creator>建立者</creator>
+        <creator>建立者:</creator>
         <subject>主題</subject>
         <source>來源</source>
         <contributor>貢獻者</contributor>

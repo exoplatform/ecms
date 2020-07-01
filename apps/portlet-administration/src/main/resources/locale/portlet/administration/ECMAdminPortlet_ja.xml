@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>メンバーシップの選択</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>ロールを選択</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectMembership>メンバーシップの選択</selectMembership>
+      <selectMembership>ロールを選択</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>ユーザーを選択</SelectUser>
-      <SelectMember>メンバーシップの選択</SelectMember>
+      <SelectMember>ロールを選択</SelectMember>
       <AddAny>全てのユーザー</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>ユーザーを選択</UIGroupSelector>
       <UIPermissionSelector>メンバの選択</UIPermissionSelector>
-      <UIGroupMemberSelector>メンバーシップの選択</UIGroupMemberSelector>
+      <UIGroupMemberSelector>ロールを選択</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectUser>ユーザーを選択</selectUser>
-      <selectMembership>メンバシップの選択</selectMembership>
+      <selectMembership>ロールを選択</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectUser>ユーザーを選択</selectUser>
-      <selectMembership>メンバーシップの選択</selectMembership>
+      <selectMembership>ロールを選択</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>メンバーシップの選択</selectMembership>
+      <selectMembership>ロールを選択</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectUser>ユーザーを選択</selectUser>
-      <selectMembership>メンバーシップの選択</selectMembership>
+      <selectMembership>ロールを選択</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>追加</Add>
     </action>
     <label>
-      <userOrGroup>メンバーシップ:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>メンバーシップは既に存在します。別の物を選択してください!</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectMembership>メンバーシップの選択</selectMembership>
+      <selectMembership>ロールを選択</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

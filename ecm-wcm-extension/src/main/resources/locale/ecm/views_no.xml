@@ -23,12 +23,12 @@
     <view>
       <label>
         <postedBy>Siste kommentar postet av</postedBy>
-        <at>hos</at>
+        <at>på</at>
         <comments>Kommentar(er)</comments>
         <show-comments>Vis kommentarer</show-comments>
         <hide-comments>Skjul kommentarer</hide-comments>
         <comment-by>Kommentert av</comment-by>
-        <email>E-post</email>
+        <email>Epost</email>
         <site>Nettsted</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>mindre enn ett minutt siden</Less_Than_A_Minute>
@@ -55,6 +55,7 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>or Open in MS Office</using-webDAV>
         <open-on-desktop>Open on Desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Innholdet i filen er for stor. Du bør laste den ned og åpne den i klienten.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Gi karakter</avg-rating>
         <subscription>Stemmer</subscription>
       </label>
     </view>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Lydbeskrivelse</Play-audio-description-of-this-video>
-      <Read-more>Les mer</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Les mindre</Read-less>
       <Switch-back-to-original-video>Opprinnelige video</Switch-back-to-original-video>
       </label>

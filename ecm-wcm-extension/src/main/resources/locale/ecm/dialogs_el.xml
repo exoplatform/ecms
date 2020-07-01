@@ -14,7 +14,7 @@
         <time-interval>Χρονικό διάστημα</time-interval>
         <query-items>Στοιχεία ερωτήματος</query-items>
         <schedule-type>Τύπος Χρονοδιαγράμματος</schedule-type>
-        <remove>Κατάργηση αντικειμένου</remove>
+        <remove>Αφαίρεση αντικειμένου</remove>
         <add>Προσθήκη αντικειμένου</add>
         <expand>Επέκταση αυτού</expand>
       </label>
@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Σύνδεσμος (link)</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Θύρα</port>
       <userName>#{word.userName}</userName>
       <password>Κωδικός πρόσβασης</password>
-      <link>Σύνδεσμος (link)</link>
+      <link>Link</link>
       <to>Στείλτε μήνυμα</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Θύρα</port>
       <userName>#{word.userName}</userName>
       <password>Κωδικός πρόσβασης</password>
-      <link>Σύνδεσμος (link)</link>
+      <link>Link</link>
       <to>Στείλτε μήνυμα</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -190,7 +190,7 @@
         <destination-workpsace>Χώρος εργασίας προορισμού</destination-workpsace>
         <destination-path>Διαδρομή προορισμού</destination-path>
         <primary-type>Πρωτεύων τύπος</primary-type>
-        <mixin-types>Μεικτός τύπος</mixin-types>
+        <mixin-types>Μεικτοί τύποι</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -316,9 +316,9 @@
 <true>Αληθές</true>
 <false>Ψευδές</false>
 <Electronic>Ηλεκτρονικό</Electronic>
-<Paper>Χαρτί</Paper>
-<NONE>Κανένα</NONE>
-<CLASSIFIED>Ταξινομημένα</CLASSIFIED>
+<Paper>Paper</Paper>
+<NONE>Δεν έχει οριστεί</NONE>
+<CLASSIFIED>Classified</CLASSIFIED>
 <UNCLASSIFIED>Μη ταξινομημένο</UNCLASSIFIED>
 <NOCONTRACT>Καμία σύμβαση</NOCONTRACT>
 <one-minute>Ένα λεπτό</one-minute>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Ο τρέχον κόμβος δεν σας επιτρέπει να προσθέσετε τον τύπο κόμβου '{0}'.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Παρουσιάστηκε μη αναμενόμενο σφάλμα. Επικοινωνήστε με το διαχειριστή σας για περισσότερες λεπτομέρειες.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Δεν μπορείτε να αποθηκεύσετε αυτό το έγγραφο. Το όνομα που παρέχεται πρέπει να είναι σε αριθμητική μορφή.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

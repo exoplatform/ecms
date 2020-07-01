@@ -55,6 +55,7 @@
         <pdf-max-page>Η προεπισκόπηση δεν είναι διαθέσιμη για περιεχόμενο με περισσότερες από {0} σελίδες.</pdf-max-page>
         <using-webDAV>ή άνοιγμα στο Office</using-webDAV>
         <open-on-desktop>Άνοιγμα στην επιφάνεια εργασίας</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Το περιεχόμενο αυτού του αρχείου είναι πολύ μεγάλο. Θα πρέπει να το κατεβάσετε και να το ανοίξετε στη συσκευή σας.</file-size-too-big>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Μέση βαθμολογία</avg-rating>
+        <avg-rating>Αξιολογήστε</avg-rating>
         <subscription>Ψήφοι</subscription>
       </label>
     </view>
@@ -152,7 +153,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Δ/Υ</not-avaliable>
+        <not-avaliable>N/A</not-avaliable>
         <core-elements>Βασικά στοιχεία</core-elements>
         <title>Τίτλος</title>
         <creator>Δημιουργός</creator>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Ηχητική περιγραφή</Play-audio-description-of-this-video>
-      <Read-more>Διαβάστε περισσότερα</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Διαβάστε λιγότερα</Read-less>
       <Switch-back-to-original-video>Πρωτότυπο βίντεο</Switch-back-to-original-video>
       </label>

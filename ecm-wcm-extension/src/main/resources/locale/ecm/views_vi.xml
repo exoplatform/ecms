@@ -23,13 +23,13 @@
     <view>
       <label>
         <postedBy>Bình luận mới nhất được đăng tải bởi</postedBy>
-        <at>lúc</at>
+        <at>tại</at>
         <comments>Bình luận</comments>
         <show-comments>Hiển thị bình luận</show-comments>
         <hide-comments>Ẩn bình luận</hide-comments>
-        <comment-by>Bình luận bởi</comment-by>
+        <comment-by>Nhận xét bởi</comment-by>
         <email>Địa chỉ thư điện tử</email>
-        <site>Trang</site>
+        <site>Trang web</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>chưa đến một phút trước</Less_Than_A_Minute>
         <About_A_Minute>khoảng một phút trước đây</About_A_Minute>
@@ -55,11 +55,12 @@
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>hoặc mở bằng MS Office</using-webDAV>
         <open-on-desktop>Mở trên máy tính</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>Nội dung của tệp tin này quá lớn. Bạn nên tải xuống và mở tại máy khách.</file-size-too-big>
         <webDAV>Hiển thị kiểu WebDAV</webDAV>
-        <download>Tải xuống</download>
+        <download>Tải về</download>
         <htmlview>Xem dưới dạng HTML</htmlview>
         <plaintextview>Xem dưới dạng văn bản Thuần túy</plaintextview>
       </label>
@@ -87,8 +88,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Xếp loại Trung bình</avg-rating>
-        <subscription>Số lượng bình chọn</subscription>
+        <avg-rating>Đánh giá</avg-rating>
+        <subscription>Lượt Bình chọn</subscription>
       </label>
     </view>
   </Vote>
@@ -100,7 +101,7 @@
       <label>
         <name>Tên</name>
         <versionable>Phiên bản</versionable>
-        <exo_owner>Người sở hữu</exo_owner>
+        <exo_owner>Chủ sở hữu</exo_owner>
         <exo_dateCreated>Ngày Tạo</exo_dateCreated>
         <exo_dateModified>Ngày Sửa đổi</exo_dateModified>
         <auditing>Kiểm định</auditing>
@@ -152,7 +153,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Không có sẵn</not-avaliable>
+        <not-avaliable>Không xác định</not-avaliable>
         <core-elements>Thành phần cơ bản</core-elements>
         <title>Tiêu đề</title>
         <creator>Người tạo</creator>
@@ -171,12 +172,12 @@
         <languages>Ngôn ngữ</languages>
       </label>
       <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
+        <add-edit>Thêm/sửa</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
+        <add-edit>Thêm/Xóa các thuộc tính</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -195,8 +196,8 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Tác động sâu</isDeep>
-        <nodetypes>Kiểu Node</nodetypes>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu Nút</nodetypes>
         <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
         <nodeTypeName>Tên kiểu node</nodeTypeName>
       </label> 
@@ -206,10 +207,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Tác động sâu</isDeep>
-        <nodetypes>Kiểu Node</nodetypes> 
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu Nút</nodetypes> 
         <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
+        <nodeTypeName>Tên kiểu node</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -217,10 +218,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Tác động sâu</isDeep>
-        <nodetypes>Kiểu Node</nodetypes>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu Nút</nodetypes>
         <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
+        <nodeTypeName>Tên kiểu node</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Mô tả âm thanh</Play-audio-description-of-this-video>
-      <Read-more>Đọc thêm</Read-more>
+      <Read-more>Đọc thêm</Read-more>
       <Read-less>Thu gọn</Read-less>
       <Switch-back-to-original-video>Video Gốc</Switch-back-to-original-video>
       </label>

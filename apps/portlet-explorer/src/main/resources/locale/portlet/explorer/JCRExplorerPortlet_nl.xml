@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Selecteer gebruiker</SelectUser>
-      <SelectMember>Selecteer lidmaatschap</SelectMember>
+      <SelectMember>Selecteer rol</SelectMember>
       <AddAny>Selecteer iedereen</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Selecteer gebruiker</UIGroupSelector>
       <UIPermissionSelector>Selecteer lid</UIPermissionSelector>
-      <UIGroupMemberSelector>Selecteer lidmaatschap</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selecteer rol</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Originele versie</original>
       <version>Versie</version>
-      <baseVersion>Basis versie</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Label toevoegen</addLabel>
       <removeLable>Label verwijdern</removeLable>
       <restoreVersion>Versie herstellen</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Selecteer groep</selectGroup>
       <selectUser>Selecteer gebruiker</selectUser>
-      <selectMembership>Selecteer lidmaatschap</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Selecteer groep</selectGroup>
       <selectUser>Selecteer gebruiker</selectUser>
-      <selectMembership>Selecteer lidmaatschap</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

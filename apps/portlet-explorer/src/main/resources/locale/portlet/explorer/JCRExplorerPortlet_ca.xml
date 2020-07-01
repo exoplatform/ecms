@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Selecciona usuari/a</SelectUser>
-      <SelectMember>Selecciona la pertinença</SelectMember>
+      <SelectMember>Selecciona el Rol</SelectMember>
       <AddAny>Selecciona tots</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Selecciona usuari/a</UIGroupSelector>
       <UIPermissionSelector>Selecciona un membre</UIPermissionSelector>
-      <UIGroupMemberSelector>Selecciona l'Afiliació</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selecciona el Rol</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Versió original</original>
       <version>Versió</version>
-      <baseVersion>versió actual</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Afegeix una etiqueta</addLabel>
       <removeLable>Elimina l'Etiqueta</removeLable>
       <restoreVersion>Restaurar aquesta Versió</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
       <selectUser>Selecciona usuari/a</selectUser>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Selecciona Grup</selectGroup>
       <selectUser>Selecciona usuari/a</selectUser>
-      <selectMembership>Selecciona l'Afiliació</selectMembership>
+      <selectMembership>Selecciona el Rol</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

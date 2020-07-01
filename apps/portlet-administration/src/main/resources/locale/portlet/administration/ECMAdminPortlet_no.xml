@@ -977,7 +977,7 @@
       <watchDocument>Se dokument</watchDocument>
       <taggingDocument>Tagg dokumentet</taggingDocument>
       <viewMetadatas>Vis metadata</viewMetadatas>
-      <overloadThumbnail>Bytt miniatyrbilde</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Skjul/vis innhold</manageHidden>
       <comment>Kommentar</comment>
       <vote>Stem</vote>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Velg medlemsskap</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Velg rolle</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Velg gruppe</selectGroup>
-      <selectMembership>Velg medlemskap</selectMembership>
+      <selectMembership>Velg rolle</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Velg bruker</SelectUser>
-      <SelectMember>Velg medlemsskap</SelectMember>
+      <SelectMember>Velg rolle</SelectMember>
       <AddAny>Alle</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Velg bruker</UIGroupSelector>
       <UIPermissionSelector>Velg medlem</UIPermissionSelector>
-      <UIGroupMemberSelector>Velg medlemskap</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Velg rolle</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Velg gruppe</selectGroup>
       <selectUser>Velg bruker</selectUser>
-      <selectMembership>Velg medlemsskap</selectMembership>
+      <selectMembership>Velg rolle</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Velg gruppe</selectGroup>
       <selectUser>Velg bruker</selectUser>
-      <selectMembership>Velg medlemsskap</selectMembership>
+      <selectMembership>Velg rolle</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Velg medlemsskap</selectMembership>
+      <selectMembership>Velg rolle</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Velg gruppe</selectGroup>
       <selectUser>Velg bruker</selectUser>
-      <selectMembership>Velg medlemskap</selectMembership>
+      <selectMembership>Velg rolle</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Legg til</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Dette medlemsskapet finnes allerede. Velg et annet.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Velg gruppe</selectGroup>
-      <selectMembership>Velg medlemsskap</selectMembership>
+      <selectMembership>Velg rolle</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

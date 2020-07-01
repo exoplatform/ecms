@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>覆蓋範圍：</coverage>
         <identifier>識別碼：</identifier>
-        <language>語言：</language>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>電子郵件地址不正確。</Invalid-input>
+      <Invalid-input>電子郵件地址是不正確。</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -295,7 +295,7 @@
         <id>Id</id>
         <name>名稱</name>
         <lifecycle>生命週期</lifecycle>
-        <homePath>家路徑</homePath>
+        <homePath>首頁路徑</homePath>
         <targetWorkspace>目標工作區</targetWorkspace>
         <targetPath>目標路徑</targetPath>
       </label>
@@ -313,10 +313,10 @@
   -->
 <no>否</no>
 <yes>是</yes>
-<true>True</true>
-<false>False</false>
+<true>對</true>
+<false>錯</false>
 <Electronic>電子</Electronic>
-<Paper>紙</Paper>
+<Paper>紙張</Paper>
 <NONE>無</NONE>
 <CLASSIFIED>分類</CLASSIFIED>
 <UNCLASSIFIED>未分類</UNCLASSIFIED>
@@ -328,12 +328,12 @@
 <yearly>每年</yearly>
 <ten-years>十年</ten-years>
 <read>使用者操作</read>
-  <schedule>調度</schedule>
-  <node_added>內容增加</node_added>
-  <node_removed>內容刪除</node_removed>
-  <property_added>屬性加法</property_added>
-  <property_removed>屬性刪除</property_removed>
-  <property_changed>屬性修改</property_changed>
+  <schedule>排程</schedule>
+  <node_added>增加內容</node_added>
+  <node_removed>刪除內容</node_removed>
+  <property_added>增加屬性</property_added>
+  <property_removed>刪除屬性</property_removed>
+  <property_changed>修改屬性</property_changed>
 
   <ScriptAction>
     <dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>出現意外的錯誤。更多詳細資訊請與您的管理員聯繫。</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>您不能儲存此文件。提供的名稱必須是數字格式。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

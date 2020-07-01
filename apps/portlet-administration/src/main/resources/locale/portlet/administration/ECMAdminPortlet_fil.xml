@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Pumili ng Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Pumili ng Papel na Ginagampanan</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Pumili ng grupo</selectGroup>
-      <selectMembership>Pumili ng Membership</selectMembership>
+      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Pumili ng user</SelectUser>
-      <SelectMember>Pumili ng Membership</SelectMember>
+      <SelectMember>Pumili ng Papel na Ginagampanan</SelectMember>
       <AddAny>Ang lahat ng Tao</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Pumili ng user</UIGroupSelector>
       <UIPermissionSelector>Pumili ng Miyembro</UIPermissionSelector>
-      <UIGroupMemberSelector>Pumili ng Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pumili ng Papel na Ginagampanan</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Pumili ng pangkat</selectGroup>
       <selectUser>Pumili ng Gumagamit</selectUser>
-      <selectMembership>Pumilli ng pagmimiyembro</selectMembership>
+      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Pumili ng pangkat</selectGroup>
       <selectUser>Pumili ng Gumagamit</selectUser>
-      <selectMembership>Pumili ng pagpapamiyembro</selectMembership>
+      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Pumili ng pagpapamiyembro</selectMembership>
+      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Pumili ng pangkat</selectGroup>
       <selectUser>Piliin ang gumagamit</selectUser>
-      <selectMembership>Pumilli ng pagpapamiyembro</selectMembership>
+      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Magdagdag</Add>
     </action>
     <label>
-      <userOrGroup>Mga pagmimiyembro:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Ang pagpapamiyembro na ito ay umiiral na. Mangyaring pumili ng iba.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Pumili ng pangkat</selectGroup>
-      <selectMembership>Pumili ng pagpapamiyembro</selectMembership>
+      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

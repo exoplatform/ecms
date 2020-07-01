@@ -41,7 +41,7 @@
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Ang Template</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Ang aytems taga page</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
@@ -85,7 +85,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>Papasa</delete>
+      <delete>Delete</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -132,7 +132,7 @@
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Selektor sa Page</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
@@ -147,7 +147,7 @@
     <action>
       <refresh>I-refresh</refresh>
       <edit>Edit in Content Explorer</edit>
-      <delete>Papasa</delete>
+      <delete>Delete</delete>
       <publish>Publish</publish>
     </action>
     <label>

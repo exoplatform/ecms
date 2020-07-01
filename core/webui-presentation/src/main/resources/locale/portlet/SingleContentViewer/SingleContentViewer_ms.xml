@@ -3,7 +3,7 @@
   <UIPresentationContainer>
     <title>
       <QuickEdit>Edit in Content Explorer</QuickEdit>
-      <print>Cetak Halaman Ini</print>
+      <print>Print This Page</print>
       <FastPublish>Publish</FastPublish>
     </title>
     <label>
@@ -11,19 +11,19 @@
       <print>Print</print>
     </label>
     <msg>
-      <no-content>Tidak ada kandungan ditemukan.</no-content>
-      <internal-server-error>Ralat yang berlaku semasa meminta data dari memutuskan.</internal-server-error>
-      <empty-title-error>Sila menentukan tajuk baru.</empty-title-error>
+      <no-content>No contents found.</no-content>
+      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
+      <empty-title-error>Please specify the new title.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Pilih Kandungan</UIContentSelectorOne>
+      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>Anda tidak memiliki izin untuk mengakses Mengedit mod.</AccessControlException>
+      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
@@ -34,23 +34,23 @@
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Kandungan Detail Pilihan</UISCVPreferences>
+      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Batal</Abort>
+      <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
       <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Kandungan Detail Pilihan</title>
+    <title>Content Detail Preferences</title>
     <label>
-      <Back>Kembali ke halaman sebelumnya</Back>
+      <Back>Back to previous page</Back>
       <Edit>Sunting</Edit>
       <Preferences>Preferences</Preferences>
-      <Title>Kandungan Detail Pilihan</Title>
+      <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
       <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
@@ -59,28 +59,28 @@
       <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
       <Advance>Advanced</Advance>
-      <ContextCaption>Dinamik Navigasi</ContextCaption>
-      <UISCVContextualRadioBox>Konteks Kandungan</UISCVContextualRadioBox>
+      <ContextCaption>Dynamic Navigation</ContextCaption>
+      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
       <UISCVParameterInputBox>by</UISCVParameterInputBox>
       <PrintSettingBlock>Print Settings</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lock</LockStatus>
-      <CacheManagement>Kandungan Penglihatan</CacheManagement>
+      <CacheManagement>Content Visibility</CacheManagement>
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Pilih kandungan yang anda ingin menunjukkan. Ini kandungan lalai akan digantikan dinamik jika kau mengaktifkan Dinamik Navigasi pilihan (melihat Maju mod di bawah).</ContentPathBlock>
-      <DisplaySettingBlock>Anda bisa menunjukkan atau menyembunyikan bar Pilihan yang digunakan untuk menunjukkan cetak pautan. Tajuk dan Tarikh juga memaparkan pilihan.</DisplaySettingBlock>
-      <ContextualHelp>Mengaktifkan Dinamik Navigasi. Kandungan yang boleh berubah dinamik dengan yang lain berdasarkan URL parameter.</ContextualHelp>
-      <ParameterHelp>Parameter ini akan digunakan untuk mendapatkan kandungan jika Dinamik Navigasi diaktifkan.</ParameterHelp>
+      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
+      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
+      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>Item jalan yang tidak sah.</not-valid-path>
+      <not-valid-path>The item path is invalid.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Pemilihan Kandungan</UISCVConfigContentFormInputSet>
+        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Tambah laluan</AddPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -117,7 +117,7 @@
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Dihadkan oleh Pengesahan</Enable>
+      <Enable>Restricted by Authentication</Enable>
       <Disable>Restricted by User roles</Disable>
     </label>
   </UISCVCacheRadioBox>

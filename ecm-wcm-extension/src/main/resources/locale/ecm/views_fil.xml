@@ -4,10 +4,10 @@
   <View>
     <label>
       <languages>
-        <en>Ingles</en>
-        <fr>Pranses</fr>
+        <en>Ang Ingles</en>
+        <fr>Ang Pranses</fr>
         <ru>Ruso</ru>
-        <vi>Ang Biyetnames</vi>
+        <vi>Biyetnames</vi>
         <nl>Olandes</nl>
         <de>Aleman</de>
         <uk>Ukranyo</uk>
@@ -28,10 +28,10 @@
         <show-comments>Ipakita ang mga komento</show-comments>
         <hide-comments>Tinago ang mga komento</hide-comments>
         <comment-by>Ang komento ni</comment-by>
-        <email>Email</email>
+        <email>Emeyl</email>
         <site>Ang Site</site>
         <lastComment>Ang Huling komento na nai-post ni {user} sa {time}</lastComment>
-        <Less_Than_A_Minute>wala pang isang minuto ang nakalipas</Less_Than_A_Minute>
+        <Less_Than_A_Minute>mababa pa isang minuto ang nakalipas</Less_Than_A_Minute>
         <About_A_Minute>mga isang minuto ang nakalipas</About_A_Minute>
         <About_x_Minutes>tungkol {0} na minuto ang nakalipas</About_x_Minutes>
         <About_An_Hour>tungkol sa isang oras ang nakalipas</About_An_Hour>
@@ -54,12 +54,13 @@
         <pdf-max-size>Ang preview ay hindi magagamit para sa mga nilalaman na mahigit sa {0} MB.</pdf-max-size>
         <pdf-max-page>Ang preview ay hindi magagamit para sa mga nilalaman na may mahigit sa {0} na mga pahina.</pdf-max-page>
         <using-webDAV>o Buksan sa MS Office</using-webDAV>
-        <open-on-desktop>Buksan sa Desktop</open-on-desktop>
+        <open-on-desktop>Ang Desktop ay buksan</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Buksan ang mga Dokumento</open-in-documents>
         <open-in-documents-tooltip>Buksan ang payl na ito sa app ng mga Dokumento</open-in-documents-tooltip>
         <file-size-too-big>Ang laman ng payl na ito ay masyadong malaki. Kailangan mong mag-download at magbukas sa kliyente.</file-size-too-big>
         <webDAV>WebDAV na View</webDAV>
-        <download>I-download</download>
+        <download>Mag-download</download>
         <htmlview>Tingnan bilang HTML</htmlview>
         <plaintextview>Tingnan bilang Simpleng Teksto</plaintextview>
       </label>
@@ -88,7 +89,7 @@
     <view>
       <label>
         <avg-rating>Rate</avg-rating>
-        <subscription>Ang Mga boto</subscription>
+        <subscription>Mga boto</subscription>
       </label>
     </view>
   </Vote>
@@ -98,9 +99,9 @@
   <ListView>
     <view>
       <label>
-        <name>Ang pangalan</name>
+        <name>Pangalan</name>
         <versionable>Nababago</versionable>
-        <exo_owner>May-ari</exo_owner>
+        <exo_owner>Ang may-ari</exo_owner>
         <exo_dateCreated>Petsa ng Paglikha</exo_dateCreated>
         <exo_dateModified>Ang Petsa ng Pagbago</exo_dateModified>
         <auditing>Mag-odit</auditing>
@@ -117,7 +118,7 @@
         <action-name>Pangalan ng Aksyon</action-name>
         <lifecycle>Lifecycle</lifecycle>
         <metadata>Ang Metadata</metadata>
-        <description>Ang Paglalarawan</description>
+        <description>Paglalarawan</description>
       </label>
     </view>
   </AddMetadata>
@@ -128,9 +129,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Ang Pangalan ng Aksyon</action-name>
+        <action-name>Pangalan ng Aksyon</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>Ang Paglalarawan</description>
+        <description>Paglalarawan</description>
       </label>
     </view>
   </AutoVersioning>
@@ -140,7 +141,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Ang pangalan</action-name>
+        <action-name>Pangalan</action-name>
         <lifecycle>Lifecycle</lifecycle>
         <description>Paglalarawan</description>
       </label>
@@ -154,24 +155,24 @@
       <label>
         <not-avaliable>N/A</not-avaliable>
         <core-elements>Ang Ubod na mga Elemento</core-elements>
-        <title>Titulo</title>
-        <creator>Lumilikha</creator>
-        <subject>Paksa</subject>
-        <source>Pinagmulan</source>
+        <title>Ang Titulo</title>
+        <creator>Ang lumikha</creator>
+        <subject>Ang Paksa</subject>
+        <source>Ang Pinanggalingan</source>
         <contributor>Ang Nag-ambag</contributor>
         <resource-type>Uri ng Resource</resource-type>
-        <date>Ang Petsa</date>
+        <date>Petsa</date>
         <publisher>Ang Tagapaglathala</publisher>
-        <description>Ang Paglalarawan</description>
+        <description>Paglalarawan</description>
         <rights>Ang Mga Karapatan</rights>
         <relation>Ang kaugnayan</relation>
-        <format>Ang Pormat</format>
+        <format>Ang Anyo</format>
         <coverage>Ang Saklob</coverage>
         <identifier>Ang Pagkakakilanlan</identifier>
         <languages>Ang mga Wika</languages>
       </label>
       <action>
-        <add-edit>Magdagdag/Mag-edit</add-edit>
+        <add-edit>Dagdagan/Baguhin</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
@@ -196,7 +197,7 @@
     <view>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang tipo ng mga noda</nodetypes>
+        <nodetypes>Ang mga uri ng node</nodetypes>
         <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
         <nodeTypeName>Ang Mga Pangalan ng Uri ng Noda</nodeTypeName>
       </label> 
@@ -207,7 +208,7 @@
     <view>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang tipo ng mga noda</nodetypes> 
+        <nodetypes>Ang mga uri ng node</nodetypes> 
         <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
         <nodeTypeName>Ang Mga Pangalan ng Uri ng Noda</nodeTypeName>
       </label> 
@@ -218,7 +219,7 @@
     <view>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang tipo ng mga noda</nodetypes>
+        <nodetypes>Ang mga uri ng node</nodetypes>
         <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
         <nodeTypeName>Ang Mga Pangalan ng Uri ng Noda</nodeTypeName>
       </label> 
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Ang Paglalarawan ng audio</Play-audio-description-of-this-video>
-      <Read-more>Magbasa ng higit pa</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Magbasa ng kaunti</Read-less>
       <Switch-back-to-original-video>Orihinal na video</Switch-back-to-original-video>
       </label>

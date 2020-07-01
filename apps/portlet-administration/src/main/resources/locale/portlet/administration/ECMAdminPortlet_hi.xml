@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>उपयोगकर्ता का चयन करें</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1304,14 +1304,14 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>उपयोगकर्ता का चयन करें</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>उपयोगकर्ता का चयन करें</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1383,7 +1383,7 @@
       <set_property>Set Property Right</set_property>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1451,8 +1451,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>उपयोगकर्ता का चयन करें</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Everyone</AddAny>
     </title>
   </permission>
@@ -1463,15 +1463,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>उपयोगकर्ता का चयन करें</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -2159,16 +2159,16 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2211,8 +2211,8 @@
   <QueriesPermissionBrowse>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2330,7 +2330,7 @@
       <action>Action</action>
     </header>
     <tooltip>
-      <UnLock>अनलॉक</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
@@ -2482,17 +2482,17 @@
       <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

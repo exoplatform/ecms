@@ -8,14 +8,14 @@
   <UITreeList>
     <header>
       <name>Namn</name>
-      <action>Lägg till</action>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>underkategori hittades inte!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Select</select>
+        <select>Välj</select>
       </title>
     </action>
   </UITreeList>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Välj användare</UIPermissionUser>
-      <UIPermissionMembership>Välj medlemskap</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Select Membership</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Välj medlemskap</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>Bläddra och välj en grupp</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Sidväljare</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Alla tillstånd</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

@@ -977,7 +977,7 @@
       <watchDocument>Theo dõi Tài liệu</watchDocument>
       <taggingDocument>Gán nhãn Tài liệu</taggingDocument>
       <viewMetadatas>Xem Siêu dữ liệu</viewMetadatas>
-      <overloadThumbnail>Chèn Hình nhỏ</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Ẩn/Hiển thị nội dung</manageHidden>
       <comment>Bình luận</comment>
       <vote>Bình chọn</vote>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Chọn kiểu thành viên</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Chọn Vai trò</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
-      <selectMembership>Chọn kiểu thành viên</selectMembership>
+      <selectMembership>Chọn Vai trò</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Chọn Người dùng</SelectUser>
-      <SelectMember>Chọn Kiểu thành viên</SelectMember>
+      <SelectMember>Chọn Vai trò</SelectMember>
       <AddAny>Tất cả</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Chọn Người dùng</UIGroupSelector>
       <UIPermissionSelector>Chọn Thành viên</UIPermissionSelector>
-      <UIGroupMemberSelector>Chọn kiểu thành viên</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Chọn Vai trò</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
       <selectUser>Chọn Người dùng</selectUser>
-      <selectMembership>Chọn Kiểu thành viên</selectMembership>
+      <selectMembership>Chọn Vai trò</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Chọn Kiểu thành viên</selectMembership>
+      <selectMembership>Chọn Vai trò</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
       <selectUser>Chọn Người dùng</selectUser>
-      <selectMembership>Chọn Kiểu thành viên</selectMembership>
+      <selectMembership>Chọn Vai trò</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Thêm</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Kiểu thành viên đã tồn tại, xin chọn lại kiểu khác.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Chọn Nhóm người dùng</selectGroup>
-      <selectMembership>Chọn Kiểu thành viên</selectMembership>
+      <selectMembership>Chọn Vai trò</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

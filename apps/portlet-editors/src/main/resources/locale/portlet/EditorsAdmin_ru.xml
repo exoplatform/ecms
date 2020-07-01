@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2020 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <editors>
+    <admin>
+    <page>Editors Administration</page>
+      <error>
+        <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
+        <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
+        <CannotGetProviders>Cannot get providers list.</CannotGetProviders>
+        <PermissionNotValid>The specified permission is not valid. Probably the user or group doesn't exist.</PermissionNotValid>
+        <CannotLoadIdentities>Cannot load identites by specified criteria</CannotLoadIdentities>
+        <CannotSavePreferredEditor>Cannot save selected editor as preferred one.</CannotSavePreferredEditor>
+        <UnableGetData>An error occurred during the data reading.</UnableGetData>
+        <UnablePostData>An error occurred during the data saving.</UnablePostData>
+      </error>
+      <title>Document editors</title>
+      <table>
+        <Provider>Провайдер</Provider>
+        <Description>Описание</Description>
+        <Active>Активно</Active>
+        <Permissions>Права доступа</Permissions>
+      </table>
+      <modal>
+        <title>Edit permissions</title>
+        <SearchLabel>Enter user or group name</SearchLabel>
+        <WithPermissions>Who has permission</WithPermissions>
+        <None>Нет</None>
+        <Everybody>Everybody</Everybody>
+      </modal>
+      <buttons>
+        <Save>Сохранить</Save>
+        <Cancel>Отмена</Cancel>
+      </buttons>
+    </admin>
+    <buttons>
+      <EditorButton>Редактировать</EditorButton>
+    </buttons>
+    <idlePopup>
+      <title>Предупреждение</title>
+      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
+    </idlePopup>
+  </editors>
+</bundle>

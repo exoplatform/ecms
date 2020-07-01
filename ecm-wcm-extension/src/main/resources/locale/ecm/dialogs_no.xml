@@ -14,8 +14,8 @@
         <time-interval>Tidsintervall</time-interval>
         <query-items>Spørringselementer</query-items>
         <schedule-type>Tidsplan type</schedule-type>
-        <remove>Fjern element</remove>
-        <add>Legge til element</add>
+        <remove>Fjern elementet</remove>
+        <add>Legg til element</add>
         <expand>Utvid dette</expand>
       </label>
     </dialog>
@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Lenke</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Passord</password>
-      <link>Lenke</link>
+      <link>Link</link>
       <to>Send mail til</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Passord</password>
-      <link>Lenke</link>
+      <link>Link</link>
       <to>Send mail til</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Dekning:</coverage>
         <identifier>Identifikator:</identifier>
-        <language>Språk:</language>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -245,7 +245,7 @@
     <dialog>
       <label>
         <version-history>Versjonshistorikk</version-history>
-        <base-version>Baseversjon</base-version>
+        <base-version>Base versjon</base-version>
         <is-checked-out>Er sjekket ut</is-checked-out>
         <predecessors>Foregående</predecessors>
         <merge-failed>Fletting feilet</merge-failed>
@@ -316,9 +316,9 @@
 <true>Sant</true>
 <false>Usant</false>
 <Electronic>Elektronisk</Electronic>
-<Paper>Papir</Paper>
+<Paper>Paper</Paper>
 <NONE>Ingen</NONE>
-<CLASSIFIED>Klassifisert</CLASSIFIED>
+<CLASSIFIED>Classified</CLASSIFIED>
 <UNCLASSIFIED>Uklassifisert</UNCLASSIFIED>
 <NOCONTRACT>Ingen kontrakt</NOCONTRACT>
 <one-minute>Ett minutt</one-minute>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Det oppstod en uventet feil. Kontakt systemansvarlig for mer informasjon.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Kan ikke lagre dette dokumentet. Navnet må være i numerisk format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

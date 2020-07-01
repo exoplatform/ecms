@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>姓名</name>
-      <action>新增</action>
+      <name>名称</name>
+      <action>添加</action>
     </header>
     <info>
       <child-not-found>找不到的子项 ！</child-not-found>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>选择用户</UIPermissionUser>
-      <UIPermissionMembership>选择成员</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>选择成员</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>选择一个角色</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>选择一个角色</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>选择成员</selectUser>
+      <selectUser>选择一个角色</selectUser>
       <selectGroup>浏览并选择一个组</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>选择组</selectGroup>
-      <selectMembership>选择成员</selectMembership>
+      <selectMembership>选择一个角色</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

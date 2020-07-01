@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Izberi uporabnika</SelectUser>
-      <SelectMember>Izberi članstvo</SelectMember>
+      <SelectMember>Izberi vlogo</SelectMember>
       <AddAny>Izberi vse</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Izberi uporabnika</UIGroupSelector>
       <UIPermissionSelector>Izberi člana</UIPermissionSelector>
-      <UIGroupMemberSelector>Izberi članstvo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Izberi vlogo</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Izvirnik</original>
       <version>Različica</version>
-      <baseVersion>Osnovna različica</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Dodaj oznako</addLabel>
       <removeLable>Odstrani oznako</removeLable>
       <restoreVersion>Obnovi različico</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

@@ -49,7 +49,7 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Chọn Người dùng</UIPermissionUser>
-      <UIPermissionMembership>Chọn Kiểu thành viên</UIPermissionMembership>
+      <UIPermissionMembership>Chọn Vai trò</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Chọn Vai trò</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
@@ -61,7 +61,7 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Chọn Kiểu thành viên</selectUser>
+      <selectUser>Chọn Vai trò</selectUser>
       <selectGroup>Duyệt và chọn nhóm người dùng</selectGroup>
     </label>
   </UIPermissionMembership>

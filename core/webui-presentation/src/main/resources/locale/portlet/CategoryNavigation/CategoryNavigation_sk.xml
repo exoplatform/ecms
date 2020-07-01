@@ -8,7 +8,7 @@
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Konfigurácia zoznamu kategórií</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -36,23 +36,23 @@
   <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
   <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-  <UICategoryNavigationDynamicNavigationLabel>Dynamická navigácia</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
   <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Kódovanie nie je podporované.</not-support-encoding>
-      <render>Pri vykresľovaní sa vyskytla chyba.</render>
-      <saving-success>Informácie sa úspešne aktualizovali.</saving-success>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>Uložiť</Save>
+      <Save>Save</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>Táto kategória neexistuje.</not-existed-category>
+      <not-existed-category>The category does not exist.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

@@ -13,7 +13,7 @@
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Ngalan</name>
+      <name>Name</name>
       <title>Title</title>
       <type>Ang Klase</type>
       <size>Size</size>

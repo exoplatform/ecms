@@ -109,9 +109,9 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>व्यक्तिगत ड्राइव</PersonalDrives>
-      <GroupDrives>सामूहिक ड्राइव</GroupDrives>
-      <GeneralDrives>सामान्य ड्राइव</GeneralDrives>
+      <PersonalDrives>Personal drives</PersonalDrives>
+      <GroupDrives>Group drives</GroupDrives>
+      <GeneralDrives>General drives</GeneralDrives>
     </title>
     <msg>
       <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
@@ -157,15 +157,15 @@
   <UIPreferencesForm>
     <title>Set up your browsing preferences</title>
     <label>
-      <enableStructure>संरचना मोड में ब्राउज़ करें:</enableStructure>
-      <showSideBar>साइडबार दिखाएं:</showSideBar>
-      <showHiddenNode>छुपे आइटम दिखाएं:</showHiddenNode>
-      <showNonDocument>गैर-दस्तावेज़ आइटम दिखाएं:</showNonDocument>
-      <showRefDocuments>संदर्भित आइटम दिखाएं:</showRefDocuments>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>सॉर्ट क्रम:</sortBy>
+      <sortBy>Sort order:</sortBy>
       <order>Order by:</order>
-      <nodesPerPage>आइटम प्रति पृष्ठ:</nodesPerPage>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -216,8 +216,8 @@
     <title>
       <UIRenameForm>Rename</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>New folder</UIFolderForm>
-      <UIUploadManager>फ़ाइल अपलोड करें</UIUploadManager>
+      <UIFolderForm>New Folder</UIFolderForm>
+      <UIUploadManager>Upload File</UIUploadManager>
       <UIReferencesList>References List</UIReferencesList>
       <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
@@ -240,7 +240,7 @@
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
       <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>दस्तावेज़ ब्राउज़िंग प्राथमिकताएं</UIPreferencesForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
       <UIPublicationManager>Manage Publication</UIPublicationManager>
       <UIConfirmMessage>Delete ?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
@@ -250,7 +250,7 @@
       <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>दस्तावेज़ ब्राउज़िंग प्राथमिकताएं</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
@@ -282,7 +282,7 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New folder</AddFolder>
+      <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
       <EditDocument>Edit</EditDocument>
       <Upload>Upload</Upload>
@@ -527,10 +527,10 @@
       <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>Delete</RemoveNode>
-      <Checkin>CheckIn</Checkin>
-      <Checkout>CheckOut</Checkout>
+      <Checkin>Checkin</Checkin>
+      <Checkout>Checkout</Checkout>
       <Lock>Lock</Lock>
-      <Unlock>UnLock</Unlock>
+      <Unlock>Unlock</Unlock>
       <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
@@ -570,7 +570,7 @@
   <ECMContextMenu>
     <event>
       <Lock>Lock</Lock>
-      <Unlock>अनलॉक</Unlock>
+      <Unlock>UnLock</Unlock>
       <EditDocument>Edit</EditDocument>
       <Copy>Copy</Copy>
       <Rename>Rename</Rename>
@@ -578,16 +578,16 @@
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>Paste</Paste>
-      <CheckOut>चेकआउट</CheckOut>
-      <CheckIn>चेकइन</CheckIn>
+      <CheckOut>CheckOut</CheckOut>
+      <CheckIn>CheckIn</CheckIn>
       <WebDAV>View WebDAV</WebDAV>
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
-      <AddFolder>New folder</AddFolder>
+      <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
       <Upload>Upload Files</Upload>
       <MoveNode>Move</MoveNode>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
       <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
@@ -601,7 +601,7 @@
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
-      <CreateNewVersion>नए संस्करण के रूप में सेव करें</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -772,8 +772,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>उपयोगकर्ता का चयन करें</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -784,15 +784,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>उपयोगकर्ता का चयन करें</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
@@ -833,7 +833,7 @@
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
-      <orderable-children>Orderable children</orderable-children>
+      <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
       <prop-name>Name</prop-name>
       <prop-type>Type</prop-type>
@@ -940,7 +940,7 @@
     </title>
     <tooltip>
       <View>View this item</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
@@ -1122,7 +1122,7 @@
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
       <ConstraintOption-From>From</ConstraintOption-From>
-      <ConstraintOption-To>तक</ConstraintOption-To>
+      <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
       <created>Created</created>
@@ -1208,7 +1208,7 @@
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>Metadata type</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1269,7 +1269,7 @@
       <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
     </msg>
     <label>
-      <queryName>Query Name</queryName>
+      <queryName>Query name</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1356,12 +1356,12 @@
       <addLabel>Add Label</addLabel>
       <removeLable>Remove Label</removeLable>
       <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version Info</viewVersion>
+      <viewVersion>View Version</viewVersion>
       <deleteVersion>Delete Version</deleteVersion>
       <compareVersion>Compare with the  base version</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>The View template is not supported.</have-no-view-template>
+      <have-no-view-template>The view template is not supported.</have-no-view-template>
       <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
       <error-removing-version>An error occurred while deleting this version.</error-removing-version>
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
@@ -1416,7 +1416,7 @@
       <e_1048576>Remove Version Label</e_1048576>
       <e_2097152>Remove Version</e_2097152>
       <e_4194304>Lock</e_4194304>
-      <e_8388608>UnLock</e_8388608>
+      <e_8388608>Unlock</e_8388608>
       <e_16777216>Read</e_16777216>
     </eventName>
     <label>
@@ -1511,7 +1511,7 @@
       <format>Format</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
-      <upload>फ़ाइल अपलोड करें</upload>
+      <upload>Upload File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1876,7 +1876,7 @@
     <title>
       <exeButton>Go</exeButton>
       <backButton>Back</backButton>
-      <showHistory>इतिहास दिखाएं</showHistory>
+      <showHistory>Show History</showHistory>
       <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
@@ -2090,8 +2090,8 @@
   <UIPermissionSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2189,7 +2189,7 @@
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Set any Permission</AddAnyPermission>
+      <AddAnyPermission>Set Any Permission</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2210,8 +2210,8 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectUser>उपयोगकर्ता का चयन करें</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2461,7 +2461,7 @@
 <ReadOnly>Open Read-only</ReadOnly>
 <Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
-      <CreateNewVersion>नए संस्करण के रूप में सेव करें</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2660,7 +2660,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>फ़ाइल अपलोड करें</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
@@ -2896,7 +2896,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>क्वेरी भाषा:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3001,7 +3001,7 @@
     <scheduled>
       <title>Scheduled</title>
       <from>From</from>
-      <to>तक</to>
+      <to>To</to>
     </scheduled>
     <title>
       <preview>Preview</preview>

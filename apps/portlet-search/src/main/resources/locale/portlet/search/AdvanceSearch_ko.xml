@@ -3,34 +3,34 @@
   <UIDefaultSearchForm>
     <label>
       <keyword>Keyword</keyword>
-      <portal>포탈</portal>
-      <Page>페이지</Page>
+      <portal>Portal</portal>
+      <Page>Page</Page>
       <Document>Document</Document>
     </label>
     <action>
-      <Search>찾기</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>페이지</Page>
+      <Page>Page</Page>
       <Document>Document</Document>
       <DocumentAndPage>Document and Page</DocumentAndPage>
       <documentandpage>Document and Page</documentandpage>
       <results>Results {0} to {1} for {2}</results>
       <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>of about</ofAboutCaption>
-      <timeUnitCaption>초</timeUnitCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
       <similar>Pages where the same content appears</similar>
-      <editor>편집기</editor>
-      <date>날짜</date>
+      <editor>Editor</editor>
+      <date>Date</date>
       <relevancy>Relevance</relevancy>
-      <title>제목</title>
+      <title>Title</title>
       <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>편집</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
       <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
@@ -47,7 +47,7 @@
       <pageMode>Page Mode</pageMode>
       <option>
         <none>None</none>
-        <more>더보기</more>
+        <more>More</more>
         <pagination>Pagination</pagination>
       </option>
     </label>
@@ -70,9 +70,9 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>다음</next>
-      <previous>이전</previous>
-      <more>더보기</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>

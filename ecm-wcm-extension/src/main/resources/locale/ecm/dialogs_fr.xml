@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Utilisez @ pour mentionner quelqu'un dans votre commentaire</placeholder>
+      <placeholder>Utilisez @ pour identifier quelqu'un dans votre commentaire</placeholder>
     </label>
   </UICommentForm>
  
@@ -73,7 +73,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Mot de Passe</password>
+      <password>Mot de passe</password>
       <link>Lien</link>
       <to>Envoyer un Email à</to>
       <actionName>#{word.name}</actionName>
@@ -84,7 +84,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Mot de Passe</password>
+      <password>Mot de passe</password>
       <link>Lien</link>
       <to>Envoyer un Email à</to>
       <actionName>#{word.name}</actionName>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadonnée</metadata>
+        <metadata>Métadonnées</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -164,7 +164,7 @@
         <format>#{word.format}</format>
         <coverage>Couverture</coverage>
         <identifier>Identifiant</identifier>
-        <language>Langue</language>
+        <language>Langue:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Début de publication</start-publication>
-        <end-publication>Fin de publication</end-publication>
+        <start-publication>Début</start-publication>
+        <end-publication>Fin</end-publication>
       </label>
     </dialog>
   </Published>
@@ -244,7 +244,7 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>L'historique des versions</version-history>
+        <version-history>Historique</version-history>
         <base-version>Version de base</base-version>
         <is-checked-out>Est extrait</is-checked-out>
         <predecessors>Prédécesseurs</predecessors>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>L'adresse Email est invalide.</Invalid-input>
+      <Invalid-input>L'email n'a pas été reconnu comme une adresse valide.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -294,8 +294,8 @@
       <label>
         <id>Id</id>
         <name>Nom</name>
-        <lifecycle>Cycle de Vie</lifecycle>
-        <homePath>Chemin Racine</homePath>
+        <lifecycle>Cycle de vie</lifecycle>
+        <homePath>Chemin racine</homePath>
         <targetWorkspace>Espace de stockage cible</targetWorkspace>
         <targetPath>Chemin Cible</targetPath>
       </label>
@@ -317,12 +317,12 @@
 <false>Faux</false>
 <Electronic>Électronique</Electronic>
 <Paper>Papier</Paper>
-<NONE>Aucun</NONE>
+<NONE>Aucune</NONE>
 <CLASSIFIED>Classé</CLASSIFIED>
 <UNCLASSIFIED>Non classé</UNCLASSIFIED>
 <NOCONTRACT>Aucun contrat</NOCONTRACT>
-<one-minute>Une fois par Minute</one-minute>
-<hourly>Une fois par heure</hourly>
+<one-minute>Une fois par minute</one-minute>
+<hourly>Toutes les heures</hourly>
 <daily>Quotidien</daily>
 <quarterly>Trimestriel</quarterly>
 <yearly>Annuel</yearly>
@@ -339,7 +339,7 @@
     <dialog>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de noeud</nodetypes>
+        <nodetypes>Types de Noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,7 +349,7 @@
     <dialog>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de noeud</nodetypes>
+        <nodetypes>Types de Noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -360,7 +360,7 @@
       <label>
         <isDeep>Récursif</isDeep>
         <nodetypes>Types de Noeud</nodetypes>
-        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -370,7 +370,7 @@
       <label>
         <isDeep>Récursif</isDeep>
         <nodetypes>Types de Noeud</nodetypes>
-        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -393,33 +393,40 @@
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>New Document</NewDocument>
+      <NewDocument>Nouveau document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>Nouveau document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>Nouveau document</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Document</Save>
+      <Save>Créer un document</Save>
     </action>
     <label>
-      <titleTextBox>Document Name:</titleTextBox>
-      <typeSelectBox>Document Type:</typeSelectBox>
+      <titleTextBox>Nom du document :</titleTextBox>
+      <typeSelectBox>Type de document :</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Please enter the document name.</name-invalid>
+      <name-invalid>Veuillez saisir le nom du document.</name-invalid>
       <constraint-violation>Vous ne pouvez pas ajouter de document du type '{0}' ici.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <repository-exception>Une erreur s'est produite. Veuillez contacter votre administrateur pour plus de détails.</repository-exception>
+      <repository-exception-permission>Vous n'avez pas la permission d'ajouter un nouveau document ici.</repository-exception-permission>
+      <numberformat-exception>Enregistrement du document impossible. Vous devez saisir un format numérique.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Impossible d'enregistrer car un autre document du même nom existe déjà dans ce dossier.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

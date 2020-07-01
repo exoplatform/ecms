@@ -8,29 +8,29 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>แม่แบบ</Templates>
+        <Templates>Templates</Templates>
         <Explorer>Explorer</Explorer>
-        <Repository>ที่เก็บข้อมูล</Repository>
-        <Advanced>ขั้นสูง</Advanced>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
     <label>
-      <UITaxonomyManagerTrees>หมวดหมู่</UITaxonomyManagerTrees>
-      <UIMetadataManager>ข้อมูล Meta</UIMetadataManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namespaces</UINamespaceManager>
-      <UINodeTypeManager>ชนิดของ Node</UINodeTypeManager>
-      <UITemplatesManager>เอกสาร</UITemplatesManager>
-      <UICLVTemplatesManager>รายการ</UICLVTemplatesManager>
-      <UIViewManager>มุมมอง</UIViewManager>
-      <UIDriveManager>ไดรฟ์</UIDriveManager>
-      <UIQueriesManager>แบบสอบถาม</UIQueriesManager>
-      <UIActionManager>ดำเนินการ</UIActionManager>
-      <UIScriptManager>สคริปต์</UIScriptManager>
-      <UIUnLockManager>ล็อค</UIUnLockManager>
-      <UIFolksonomyManager>แท็ก</UIFolksonomyManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UICLVTemplatesManager>List</UICLVTemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>
     </label>
     <msg>
-      <access-denied>การเข้าถึงถูกปฏิเสธ คุณไม่มีสิทธิ์ดำเนินการนี้.</access-denied>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,24 +40,24 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>ไม่สามารถอ่านจากไฟล์ต้นทาง หรือปลายทาง หมวดหมู่เป็นหมวดหมู่ย่อยได้</referential-integrity>
-      <no-taxonomy-selected>คุณต้องคัดลอก หรือตัดอย่างน้อยหนึ่งหมวดหมู่</no-taxonomy-selected>
-      <node-is-cutting>คุณไม่สามารถวางที่นี่ ประเภทโหนด '{0}' อาจถูกตัด</node-is-cutting>
-      <can-not-paste>ไม่มีข้อมูลในคลิปบอร์ดไปวาง</can-not-paste>
-      <reference-exception>ไม่สามารถลบประเภทนี้เนื่องจากในปัจจุบันยังมีการอ้างอิง เนื้อหาอยู่</reference-exception>
-      <path-error>เกิดข้อผิดพลาดขณะลบโหนดประเภทนี้</path-error>
+      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
+      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
+      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
+      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <path-error>An error occurred while removing this category node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>คุณแน่ใจไหมที่ต้องการจะลบหมวดหมู่นี้?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
-      <add>เพิ่ม</add>
-      <paste>วาง</paste>
-      <cut>ตัด</cut>
-      <copy>คัดลอก</copy>
-      <remove>ลบ</remove>
+      <add>Add</add>
+      <paste>Paste</paste>
+      <cut>Cut</cut>
+      <copy>Copy</copy>
+      <remove>Delete</remove>
     </title>
   </UITaxonomyManager>
 
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>ระบุชื่อของประเภท, พื้นที่ทำงาน และเส้นทางไปหน้าแรก</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>ตั้งค่าสิทธิ์สำหรับแผนภูมิประเภท</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>เพิ่มแอคชันให้แผนภูมิประเภท เพื่อทำการสร้าง หรือปรับปรุง</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>แก้ไขแผนภูมิ แท็กโซโนมี่ โดยการเพิ่ม คัดลอก ตัด และเลือกสิทธิ์</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>ไม่มีแผนภูมิประเภทนี้อยู่</not-exist-tree>
+      <not-exist-tree>The category tree does not exist.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
 
@@ -87,28 +87,28 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>เริ่มใหม่</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
-      <name-not-allowed>ชื่อต้องห้าม</name-not-allowed>
-      <name-emty>จำเป็นต้องมีชื่อแผนภูมิ</name-emty>
-      <homePath-emty>จำเป็นต้องมีเส้นทางไปหน้าแรก</homePath-emty>
-      <targetPath-emty>จำเป็นต้องมีเส้นทางไปหาเป้าหมาย</targetPath-emty>
-      <taxonomytree-existed>ชื่อแผนภูมิประเภทมีอยู่แล้ว</taxonomytree-existed>
+      <name-not-allowed>Forbidden Name</name-not-allowed>
+      <name-emty>The tree name is required.</name-emty>
+      <homePath-emty>The home path is required.</homePath-emty>
+      <targetPath-emty>The target path is required.</targetPath-emty>
+      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>ชื่อ</TaxoTreeName>
-      <TaxoTreeWorkspace>พื้นที่ทำงาน</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>เส้นทางหลัก</TaxoTreeHomePath>
+      <TaxoTreeName>Name</TaxoTreeName>
+      <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>เพิ่มเส้นทาง</AddPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </TaxonomyTreeHomePath>
 
@@ -120,17 +120,17 @@
   <UIPermissionTreeInfo>
     <action>
       <title>
-        <Delete>ลบ</Delete>
-        <Edit>แก้ไข</Edit>
+        <Delete>Delete</Delete>
+        <Edit>Edit</Edit>
       </title>
     </action>
     <header>
-      <usersOrGroups>ผู้ใช้หรือกลุ่ม</usersOrGroups>
-      <read>อ่าน</read>
-      <addNode>เพิ่มโหนด</addNode>
-      <setProperty>การตั้งค่าคุณสมบัติ</setProperty>
-      <remove>ลบออก</remove>
-      <action>การดำเนินการ</action>
+      <usersOrGroups>User or Group</usersOrGroups>
+      <read>Read</read>
+      <addNode>Add Node</addNode>
+      <setProperty>Set Property</setProperty>
+      <remove>Remove</remove>
+      <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>โปรดระบุอย่างน้อยหนึ่งสิทธิ์สำหรับโหนดนี้</have-not-any-permission>
+      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
   -->
 
   <UIActionForm>
-    <title>เพิ่มการดำเนินการต่อแผนภูมิประเภท</title>
+    <title>Add an action to the category tree</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>ไม่ให้เว้นว่าง หรือมีอักขระพิเศษ สำหรับชื่อการดำเนินการ</name-not-allowed>
-      <path-invalid>เส้นทางไม่ถูกต้อง</path-invalid>
-      <taxonomy-existed>แผนภูมิประเภทนี้มีอยู่แล้ว</taxonomy-existed>
-      <taxonomy-node-existed>โหนดประเภทนี้มีอยู่แล้ว.</taxonomy-node-existed>
-      <no-permission-add>คุณไม่มีสิทธิ์ในการเพิ่มการดำเนินการ</no-permission-add>
-      <not-created-tree>แผนภูมิประเภทยังไม่ถูกสร้าง</not-created-tree>
+      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
+      <path-invalid>The path is invalid.</path-invalid>
+      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
+      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
+      <not-created-tree>The category tree has not yet been created.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,8 +173,8 @@
   -->
   <UITemplatesList>
     <header>
-      <name>ชื่อแม่แบบ</name>
-      <action>ดำเนินการ</action>
+      <name>Template Name</name>
+      <action>Actions</action>
     </header>
   </UITemplatesList>
   <!--
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>แบบฟอร์ม Namespace</UINamespaceForm>
+      <UINamespaceForm>Namespace Form</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>ลงทะเบียน Namespace ใหม่</title>
+    <title>Register New Namespace</title>
     <label>
-      <namespace>คำนำหน้า Namespace</namespace>
+      <namespace>Namespace Prefix</namespace>
       <uri>URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace หรือ URI มีอยู่แล้ว</register-unsuccessfull>
-      <prefix-null>โปรดระบุคำนำหน้า namespace</prefix-null>
-      <uri-null>โปรดระบุ URI ของ namespace</uri-null>
+      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
+      <prefix-null>Please specify the namespace's prefix.</prefix-null>
+      <uri-null>Please specify the namespace's URI.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -210,17 +210,17 @@
   -->
   <UINamespaceList>
     <header>
-      <prefix>คำนำหน้า</prefix>
+      <prefix>Prefix</prefix>
       <uri>Namespace URI</uri>
-      <action>การดำเนินการ</action>
+      <action>Action</action>
     </header>
     <action>
-      <AddNamespace>ลงทะเบียน</AddNamespace>
+      <AddNamespace>Register</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>ลงทะเบียน Namespace ใหม่</UINamespaceForm>
+      <UINamespaceForm>Register New Namespace</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -230,26 +230,26 @@
   -->
   <UIMetadataList>
     <label>
-      <false>ผิดพลาด</false>
-      <true>ถูกต้อง</true>
-      <True>ถูกต้อง</True>
-      <False>ผิดพลาด</False>
+      <false>false</false>
+      <true>true</true>
+      <True>true</True>
+      <False>false</False>
     </label>
     <title>
-      <view>แสดง</view>
-      <edit>แก้ไข</edit>
-      <delete>ลบ</delete>
+      <view>View</view>
+      <edit>Edit</edit>
+      <delete>Delete</delete>
     </title>
     <header>
-      <icon>ไอคอน</icon>
+      <icon>Icon</icon>
       <name>Metadata</name>
-      <type>ชนิด</type>
-      <internalUse>ใช้ภายใน</internalUse>
-      <action>ดำเนินการ</action>
+      <type>Type</type>
+      <internalUse>Internal Use</internalUse>
+      <action>Actions</action>
     </header>
     <msg>
-      <confirm-delete>คุณแน่ใจว่าต้องการลบ metadata นี้หรือไม่</confirm-delete>
-      <delete-successful>แม่ของ '{0}' ถูกลบเรียบร้อย</delete-successful>
+      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
+      <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
       <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
     </msg>
     <action>
@@ -282,26 +282,26 @@
     <title>Mapping Metadata</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>นำไปใช้</Save>
+      <Save>Apply</Save>
     </action>
     <header>
-      <icon>ไอคอน</icon>
-      <label>ชื่อโหนด</label>
-      <input>การดำเนินการ</input>
+      <icon>Icon</icon>
+      <label>Node name</label>
+      <input>Action</input>
     </header>
     <label>
-      <dialogTemplate>แม่แบบการโต้ตอบ:</dialogTemplate>
-      <viewTemplate>ดูแม่แบบ:</viewTemplate>
-      <metadataName>ชื่อเมตาดาต้า:</metadataName>
-      <viewPermission>สิทธิ์การใช้งาน:</viewPermission>
+      <dialogTemplate>Dialog Template:</dialogTemplate>
+      <viewTemplate>View Template:</viewTemplate>
+      <metadataName>Metadata Name:</metadataName>
+      <viewPermission>Permission:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>ป้ายกำกับ:</metadataLabel>
+      <metadataLabel>Label:</metadataLabel>
     </label>
     <tab>
       <label>
-        <metadataTypeTab>ชนิดของข้อมูลเมตา</metadataTypeTab>
-        <dialogTab>แม่แบบกล่องโต้ตอบ</dialogTab>
-        <viewTab>ดูแม่แบบ</viewTab>
+        <metadataTypeTab>Metadata Type</metadataTypeTab>
+        <dialogTab>Dialog Template</dialogTab>
+        <viewTab>View Template</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -312,18 +312,18 @@
   -->
   <UIMetadataView>
     <header>
-      <name>ชื่อองค์ประกอบ</name>
-      <type>ชนิด</type>
-      <description>คำอธิบาย</description>
-      <isMixin>ใช่ชนิด Mixin หรือไม่</isMixin>
-      <orderable>เรียงลำดับได้</orderable>
+      <name>Element Name</name>
+      <type>Type</type>
+      <description>Description</description>
+      <isMixin>Is Mixin Type</isMixin>
+      <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>คำอธิบาย</description>
+      <description>Description</description>
     </info>
     <tab>
-      <element>องค์ประกอบ</element>
-      <metadataView>ข้อมูลเมตาดาต้า</metadataView>
+      <element>Elements</element>
+      <metadataView>Metadata Information</metadataView>
     </tab>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -332,7 +332,7 @@
   </UIMetadataView>
   <ViewMetadataPopup>
     <title>
-      <UIMetadataView>ข้อมูลเมตาดาต้า</UIMetadataView>
+      <UIMetadataView>Metadata Information</UIMetadataView>
     </title>
   </ViewMetadataPopup>
   <!--
@@ -342,26 +342,26 @@
   -->
   <UIDriveList>
     <header>
-      <icon>ไอคอน</icon>
-      <name>ชื่อ</name>
-      <workspace>พื้นที่ทำงาน</workspace>
-      <homePath>เส้นทางหลัก</homePath>
-      <permissions>สิทธิ์การใช้งาน</permissions>
-      <views>แสดง</views>
-      <action>การดำเนินการ</action>
+      <icon>Icon</icon>
+      <name>Name</name>
+      <workspace>Workspace</workspace>
+      <homePath>Home Path</homePath>
+      <permissions>Permissions</permissions>
+      <views>View</views>
+      <action>Action</action>
     </header>
     <tooltip>
-      <Delete>ลบ</Delete>
-      <EditInfo>แก้ไข</EditInfo>
+      <Delete>Delete</Delete>
+      <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>คุณแน่ใจหรือว่าคุณต้องการลบไดร์ฟนี้?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
     </msg>
     <action>
-      <AddDrive>เพิ่มไดรฟ์</AddDrive>
+      <AddDrive>Add Drive</AddDrive>
     </action>
     <label>
-      <permission>{0} ใน {1}</permission>
+      <permission>{0} in {1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -372,26 +372,26 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>ไดรฟ์มีอยู่แล้ว</drive-exists>
-      <workspace-path-invalid>เส้นทางพื้นที่ทำงานไม่ถูกต้อง</workspace-path-invalid>
-      <drive-views-invalid>กรุณาเลือกมุมมอง</drive-views-invalid>
-      <icon-not-found>ไม่พบไอคอน</icon-not-found>
-      <permission-null>คุณต้องตั้งค่าสิทธิ์สำหรับไดรฟ์นี้</permission-null>
-      <allowCreateFolders>คุณต้องเลือกชนิดของโฟลเดอร์</allowCreateFolders>
-      <name-null>โปรดป้อนชื่อไดรฟ์</name-null>
-      <fileName-invalid>ชื่อไดรฟ์มีอักขระบางตัวไม่ถูกต้อง</fileName-invalid>
+      <drive-exists>The drive already exists.</drive-exists>
+      <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
+      <drive-views-invalid>Please select a view.</drive-views-invalid>
+      <icon-not-found>Icon not found.</icon-not-found>
+      <permission-null>You must set the permission for this drive.</permission-null>
+      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
+      <name-null>Please enter the drive name.</name-null>
+      <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
     </msg>
     <tab>
       <label>
-        <DriveInputSet>ไดรฟ์</DriveInputSet>
-        <ViewsInputSet>ใช้มุมมอง</ViewsInputSet>
-        <PermissionInputSet>กำหนดสิทธิ์</PermissionInputSet>
+        <DriveInputSet>Drive</DriveInputSet>
+        <ViewsInputSet>Apply Views</ViewsInputSet>
+        <PermissionInputSet>Set Permissions</PermissionInputSet>
       </label>
     </tab>
     <label>
-      <name>ชื่อ:</name>
-      <workspace>พื้นที่ทำงาน:</workspace>
-      <homePath>เส้นทางหลัก:</homePath>
+      <name>Name:</name>
+      <workspace>Workspace:</workspace>
+      <homePath>Home Path:</homePath>
       <icon>Workspace Icon:</icon>
       <viewPreferences>Show Referenced Documents:</viewPreferences>
       <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
@@ -400,7 +400,7 @@
       <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
       <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
       <Admin>Admin:</Admin>
-      <Categories>หมวดหมู่:</Categories>
+      <Categories>Categories:</Categories>
       <Icons>Icons:</Icons>
       <List>List:</List>
       <Web>Web:</Web>
@@ -408,7 +408,7 @@
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>เพิ่มไดรฟ์</UIDriveForm>
+      <UIDriveForm>Add Drive</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
@@ -460,7 +460,7 @@
     <header>
       <icon>Icon</icon>
       <nodeType>Node Type</nodeType>
-      <mixinType>ชนิดของ Mixin</mixinType>
+      <mixinType>Mixin Type</mixinType>
       <orderable>Orderable Child Nodes</orderable>
       <action>Action</action>
     </header>
@@ -512,45 +512,45 @@
       </label>
     </tab>
     <label>
-      <propertiesDefinitions>คำจำกัดความคุณสมบัติ</propertiesDefinitions>
-      <childDefinitions>กำหนดโหนดลูกข่าย</childDefinitions>
-      <namespace>ชื่อพื้นที่</namespace>
-      <propertyNamespace>ชื่อพื้นที่</propertyNamespace>
-      <nodeTypeName>ชื่อประเภท Node</nodeTypeName>
-      <mixinType>ใช่ชนิด Mixin หรือไม่</mixinType>
-      <hasOrderableChildNodes>โหลดลูกสามารถจัดลำดับได้</hasOrderableChildNodes>
-      <primaryItemName>ชื่อรายการหลัก</primaryItemName>
-      <superTypes>ชนิดซุปเปอร์</superTypes>
-      <propertyname>ชื่อคำนิยาม</propertyname>
-      <requiredType>ชนิดที่จำเป็น</requiredType>
-      <multiple>มีหลายอันหรือไม่</multiple>
-      <mandatory>เป็นข้อบังคับหรือไม่</mandatory>
-      <autoCreated>สร้างขึ้นโดยอัตโนมัติหรือไม่</autoCreated>
-      <parentversion>เวอร์ชั่นหลัก</parentversion>
-      <protected>ได้รับการป้องกัน</protected>
-      <constraints>ค่า</constraints>
+      <propertiesDefinitions>Property Definitions</propertiesDefinitions>
+      <childDefinitions>Child Node Definitions</childDefinitions>
+      <namespace>Name Space</namespace>
+      <propertyNamespace>Name Space</propertyNamespace>
+      <nodeTypeName>Node Type Name</nodeTypeName>
+      <mixinType>Is Mixin Type</mixinType>
+      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
+      <primaryItemName>Primary Item Name</primaryItemName>
+      <superTypes>Super Types</superTypes>
+      <propertyname>Definition Name</propertyname>
+      <requiredType>Required Type</requiredType>
+      <multiple>Is Multiple</multiple>
+      <mandatory>Is Mandatory</mandatory>
+      <autoCreated>Is Auto-created</autoCreated>
+      <parentversion>On parent version</parentversion>
+      <protected>Is Protected</protected>
+      <constraints>Values</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>ชื่อเดียวกันกับ sibling</sameNameSiblings>
-      <childNamespace>ชื่อพื้นที่</childNamespace>
-      <childMandatory>เป็นข้อบังคับหรือไม่</childMandatory>
-      <childAutocreated>สร้างขึ้นโดยอัตโนมัติหรือไม่</childAutocreated>
-      <childParentversion>เวอร์ชั่นหลัก</childParentversion>
-      <childProtected>ได้รับการป้องกัน</childProtected>
-      <childNodename>ชื่อคำนิยาม</childNodename>
-      <requiredPrimaryType>ชนิดหลักที่จำเป็น</requiredPrimaryType>
-      <defaultPrimaryType>ชนิดหลักเริ่มต้น</defaultPrimaryType>
-      <valueconstraints>ข้อจำกัดค่า</valueconstraints>
+      <sameNameSiblings>Is same name sibling</sameNameSiblings>
+      <childNamespace>Name Space</childNamespace>
+      <childMandatory>Is Mandatory</childMandatory>
+      <childAutocreated>Is Auto-created</childAutocreated>
+      <childParentversion>On parent version</childParentversion>
+      <childProtected>Is Protected</childProtected>
+      <childNodename>Definition Name</childNodename>
+      <requiredPrimaryType>Required Primary Type</requiredPrimaryType>
+      <defaultPrimaryType>Default Primary Type</defaultPrimaryType>
+      <valueconstraints>Value Constraints</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>บันทึกเป็นแบบร่าง</SaveDraft>
-      <AddProperty>เพิ่มคุณสมบัติ</AddProperty>
-      <AddChild>เพิ่มลูกข่าย</AddChild>
-      <AddConstraints>เพิ่มข้อจำกัด</AddConstraints>
+      <SaveDraft>Save as Draft</SaveDraft>
+      <AddProperty>Add Property</AddProperty>
+      <AddChild>Add Child</AddChild>
+      <AddConstraints>Add Constraints</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>เพิ่มชนิด</AddType>
-      <AddValue>เพิ่ม</AddValue>
+      <AddType>Add Type</AddType>
+      <AddValue>Add</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -560,62 +560,62 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>ชนิดของโหนด '{0}' ถูกลงทะเบียนเรียบร้อยแล้ว</register-successfully>
+      <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
       <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
-      <register-failed>การลงทะเบียนชนิดของ node ไม่สำเร็จ อาจจะเป็นเพราะมีอยู่แล้ว หรือ super type ไม่ถูกต้อง</register-failed>
-      <nodeType-name>จำเป็นต้องมีชื่อ node type</nodeType-name>
-      <fileName-invalid>ชื่อแฟ้มมีอักขระบางตัวไม่ถูกต้อง</fileName-invalid>
-      <node-type-exists>Node type '{0}' มีอยู่แล้ว</node-type-exists>
-      <node-type-name>ชื่อ node type ไม่ถูกต้อง</node-type-name>
-      <values-error>โปรดเลือก node type เดียวเท่านั้นสำหรับ type หลักเริ่มต้น</values-error>
-      <confirm-delete-child>คุณแน่ใจว่าต้องการลบ node ลูกนี้</confirm-delete-child>
-      <confirm-delete-property>คุณแน่ใจว่าต้องการลบคุณสมบัตินี้หรือไม่?</confirm-delete-property>
+      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
+      <nodeType-name>The node type name is required.</nodeType-name>
+      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
+      <node-type-exists>The '{0}' node type already exists.</node-type-exists>
+      <node-type-name>The node type name is invalid.</node-type-name>
+      <values-error>Please select only one node type for the default primary type.</values-error>
+      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
+      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
     <tab>
       <label>
-        <constraints>ข้อจำกัด</constraints>
-        <UIFormMultiValueInputSet>ข้อจำกัด</UIFormMultiValueInputSet>
+        <constraints>Constraints</constraints>
+        <UIFormMultiValueInputSet>Constraints</UIFormMultiValueInputSet>
       </label>
     </tab>
     <msg>
-      <property-name>ชื่อของคำจำกัดความคุณสมบัติไม่ถูกต้อง</property-name>
-      <not-supported-value-constraints>Type ที่จำเป็นนี้ ไม่สนับสนุนข้อจำกัด</not-supported-value-constraints>
+      <property-name>The property definition's name was invalid.</property-name>
+      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>จำเป็นต้องมีชื่อ node ลูกนี้</child-name>
-      <child-invalid>ชื่อ node ลูก ประกอบด้วยอักขระบางตัวไม่ถูกต้อง</child-invalid>
-      <default-node-type-not-found>ไม่พบnode type เริ่มต้น</default-node-type-not-found>
-      <requiredPrimaryType>จำเป็นจะต้อง type หลักที่ต้องการ</requiredPrimaryType>
-      <defaultPrimaryType>จำเป็นต้องมี type หลักเริ่มต้น</defaultPrimaryType>
+      <child-name>The child node name is required.</child-name>
+      <child-invalid>The child node name contains some invalid characters.</child-invalid>
+      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
+      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
+      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
     <title>
-      <FormdefaultPrimaryTypePopup>เลือก Type หลักเริ่มต้น</FormdefaultPrimaryTypePopup>
+      <FormdefaultPrimaryTypePopup>Select Default Primary Type</FormdefaultPrimaryTypePopup>
     </title>
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>เลือก Type หลักที่จำเป็น</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>Select Required Primary Type</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>เลือก Super Types</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Select Super Types</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>เพิ่ม/แก้ไข ข้อกำหนดของ Node Type</UINodeTypeForm>
+      <UINodeTypeForm>Add/Edit Node Type Definitions</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>ดูข้อมูล Node Type</UINodeTypeForm>
+      <UINodeTypeForm>View Node Type Information</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -625,24 +625,24 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>ไอคอน</icon>
-      <label>ชื่อโหนด</label>
-      <input>การดำเนินการ</input>
+      <icon>Icon</icon>
+      <label>Node name</label>
+      <input>Action</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>ส่งออก</Export>
-      <UncheckAll>ไม่เลือกเลย</UncheckAll>
-      <CheckAll>เลือกทั้งหมด</CheckAll>
+      <Export>Export</Export>
+      <UncheckAll>Uncheck all</UncheckAll>
+      <CheckAll>Check all</CheckAll>
     </action>
-    <title>ส่งออก Node Types</title>
+    <title>Export Node Types</title>
     <msg>
-      <item-null>กรุณาเลือกอย่างน้อยหนึ่ง node ที่คุณต้องการส่งออก</item-null>
+      <item-null>Please select at least one node that you want to export.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>ส่งออก Node Types</UINodeTypeExport>
+      <UINodeTypeExport>Export Node Types</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -657,19 +657,19 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>ชื่อไฟล์</upload>
+      <upload>File Name</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>อัปโหลด</Upload>
+      <Upload>Upload</Upload>
     </action>
-    <title>นำเข้า Node Type จากไฟล์ XML</title>
+    <title>Import Node Type From XML File</title>
     <msg>
-      <filename-error>เรียกดูแฟ้ม node type ที่จะนำเข้า</filename-error>
-      <data-file-error>เฉพาะไฟล์ .xml หรือ .zip เท่านั้นที่สามารถนำเข้า</data-file-error>
-      <data-invalid>ข้อมูลไม่ถูกต้อง โปรดตรวจสอบชนิดของไฟล์ และลองอีกครั้ง</data-invalid>
-      <nodetype-exist>Node type '{0}' มีอยู่แล้ว</nodetype-exist>
-      <namespace-invalid>Namespace '{0}' ไม่ถูกต้อง</namespace-invalid>
+      <filename-error>Browse a node type file to import.</filename-error>
+      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
+      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
+      <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
+      <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -680,23 +680,23 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>นำ​เข้า</Import>
-      <Upload>อัปโหลดอีกครั้ง</Upload>
+      <Import>Import</Import>
+      <Upload>Re-upload</Upload>
     </action>
     <header>
-      <icon>ไอคอน</icon>
-      <label>ชื่อ Node</label>
-      <input>การดำเนินการ</input>
+      <icon>Icon</icon>
+      <label>Node Name</label>
+      <input>Action</input>
     </header>
-    <title>เลือกนำเข้า Node Type</title>
+    <title>Select Import Node Type</title>
     <msg>
-      <no-nodetype-registered>ไม่มี node types ที่ลงทะเบียน</no-nodetype-registered>
-      <nodetype-registered>ลงทะเบียนเสร็จแล้ว.</nodetype-registered>
+      <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
+      <nodetype-registered>Registration successful.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>นำเข้า Node Type จากไฟล์ XML</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Import Node Type From XML File</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -708,13 +708,13 @@
     <label>
       <both>Both</both>
       <folderOnly>Folder</folderOnly>
-      <unstructuredFolder>โฟลเดอร์ไม่มีโครงสร้าง</unstructuredFolder>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
-      <RemovePermission>เอาสิทธิ์ออก</RemovePermission>
-      <AddIcon>เพิ่มไอคอน</AddIcon>
-      <AddPath>เพิ่มเส้นทาง</AddPath>
+      <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
+      <AddIcon>Add Icon</AddIcon>
+      <AddPath>Add Path</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -724,19 +724,19 @@
   -->
   <UIActionTypeList>
     <header>
-      <name>สคริปต์</name>
-      <label>ชื่อ</label>
-      <action>ดำเนินการ</action>
+      <name>Script</name>
+      <label>Name</label>
+      <action>Actions</action>
     </header>
     <title>
-      <Edit>แก้ไข</Edit>
-      <Delete>ลบ</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
-      <AddAction>เพิ่มชนิดการดำเนินการ</AddAction>
+      <AddAction>Add Action Type</AddAction>
     </action>
     <msg>
-      <confirm-delete>คุณแน่ใจว่าต้องการลบชนิดการดำเนินการนี้หรือไม่</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this action type?</confirm-delete>
       <cannot-delete>You cannot remove this action type because the system is still using it.</cannot-delete>
     </msg>
   </UIActionTypeList>
@@ -747,14 +747,14 @@
   -->
   <ActionPopup>
     <title>
-      <UIActionTypeForm>เพิ่มชนิดการดำเนินการ</UIActionTypeForm>
+      <UIActionTypeForm>Add Action Type</UIActionTypeForm>
     </title>
   </ActionPopup>
   <UIActionTypeForm>
-    <title>เพิ่มชนิดการดำเนินการ</title>
+    <title>Add Action Type</title>
     <label>
       <actionType>Extend Action Type:</actionType>
-      <name>ชื่อ:</name>
+      <name>Name:</name>
       <isMove>is Action Move:</isMove>
       <variables>Variables:</variables>
       <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
@@ -783,12 +783,12 @@
     <title>
       <UIViewContainer>Views</UIViewContainer>
       <ECMTemplate>Explorer Templates</ECMTemplate>
-      <UIScriptForm>สคริปต์</UIScriptForm>
+      <UIScriptForm>Scripts</UIScriptForm>
       <UIDialogTab>Dialog</UIDialogTab>
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>เอกสาร</UITemplateContainer>
+      <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
       <UIActionScriptContainer>Action</UIActionScriptContainer>
@@ -817,7 +817,7 @@
     </title>
     <header>
       <name>Name</name>
-      <permissions>สิทธิ์การใช้งาน</permissions>
+      <permissions>Permissions</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
       <action>Action</action>
@@ -839,7 +839,7 @@
   <AddPopup>
     <title>
       <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>เพิ่มแม่แบบ</AddPopup>
+      <AddPopup>Add Template</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -859,58 +859,58 @@
       <action>Actions</action>
     </header>
     <action>
-      <AddTab>เพิ่ม</AddTab>
+      <AddTab>Add</AddTab>
     </action>
     <msg>
-      <confirm-delete>คุณแน่ใจว่าต้องการลบแท็บนี้หรือไม่?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
     </msg>
     <grid>
       <msg>
-        <empty>ไม่มีแท็บในมุมมองนี้</empty>
+        <empty>There is no tab on this view</empty>
       </msg>
     </grid>
   </UITabList>
 
   <UIViewPermissionList>
-    <title>เลือกเจ้าของสิทธิ์ในมุมมองนี้:</title>
+    <title>Select Owner with permissions on this view:</title>
     <label>
-      <permission>{0} ใน {1}</permission>
+      <permission>{0} in {1}</permission>
     </label>
     <msg>
-      <confirm-delete>คุณแน่ใจว่าต้องการลบสิทธิ์การใช้งานนี้หรือไม่?</confirm-delete>
-      <permission-cannot-empty>จำเป็นต้องมีมุมมองสิทธิ์ และต้องไม่ว่างเปล่า</permission-cannot-empty>
+      <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
+      <permission-cannot-empty>View permission is required and cannot be empty.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
   <UIViewPermissionList>
     <title>
-      <Delete>ลบ</Delete>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>สิทธิ์การใช้งาน</friendlyPermission>
-      <action>การดำเนินการ</action>
+      <friendlyPermission>Permissions</friendlyPermission>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>ลบ</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <grid>
       <msg>
-        <empty>ไม่มีสิทธิ์ในมุมมองนี้</empty>
+        <empty>There is no permission on this view</empty>
       </msg>
     </grid>
   </UIViewPermissionList>
 
   <UIViewPermissionForm>
     <action>
-      <Add>เพิ่ม</Add>
+      <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>ผู้ใช้หรือกลุ่ม</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
     </label>
     <msg>
-      <permission-exist>สิทธิ์การอนุญาต '{0}' มีอยู่แล้วในรายการ</permission-exist>
+      <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
     </msg>
   </UIViewPermissionForm>
 
@@ -921,56 +921,56 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
-      <RemovePermission>เอาสิทธิ์ออก</RemovePermission>
+      <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>จำเป็นต้องมีชื่อมุมมอง</view-name-invalid>
-      <fileName-invalid>ชื่อมุมมองประกอบด้วยอักขระบางตัวไม่ถูกต้อง</fileName-invalid>
-      <permission-not-empty>กรุณาเลือกสิทธิ์สำหรับมุมมอง</permission-not-empty>
-      <mustbe-add-tab>กรุณาเพิ่มแท็บ</mustbe-add-tab>
-      <mustbe-add-permission>กรุณาเลือกสิทธิ์สำหรับมุมมองนี้</mustbe-add-permission>
-      <view-exist>ชื่อมุมมองอยู่แล้ว</view-exist>
+      <view-name-invalid>The view name is required.</view-name-invalid>
+      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
+      <permission-not-empty>Please select a permission for the view.</permission-not-empty>
+      <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
+      <mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
+      <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>ชื่อ</viewName>
-      <template>แม่แบบ</template>
-      <version>กู้คืนเวอร์ชั่น</version>
-      <enableVersion>เปิดใช้งานเวอร์ชั่น</enableVersion>
-      <hideExplorerPanel>ซ่อนแผง explorer ในแถบด้านข้าง</hideExplorerPanel>
+      <viewName>Name</viewName>
+      <template>Template</template>
+      <version>Restore Version</version>
+      <enableVersion>Enable Version</enableVersion>
+      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>โปรดเลือกอย่างน้อยหนึ่งฟังก์ชันจากรายการ</button-select-error>
-      <tab-name-error>จำเป็นต้องมีชื่อแท็บ</tab-name-error>
-      <fileName-invalid>ชื่อแท็บประกอบด้วยอักขระบางตัวไม่ถูกต้อง</fileName-invalid>
+      <button-select-error>Please select at least one function from the list.</button-select-error>
+      <tab-name-error>The tab name is required.</tab-name-error>
+      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
     </msg>
     <label>
-      <version>กู้คืนเวอร์ชั่น</version>
-      <viewName>ชื่อ</viewName>
-      <tabName>ชื่อแท็บ</tabName>
-      <permission>สิทธิ์การใช้งาน</permission>
-      <tabs>แท็บ</tabs>
+      <version>Restore Version</version>
+      <viewName>Name</viewName>
+      <tabName>Tab Name</tabName>
+      <permission>Permission</permission>
+      <tabs>Tabs</tabs>
       <template>Templates</template>
-      <enableVersion>เปิดใช้งานเวอร์ชั่น</enableVersion>
-      <addFolder>เพิ่มโฟลเดอร์</addFolder>
-      <addDocument>เพิ่มเอกสาร</addDocument>
-      <editDocument>แก้ไขเอกสาร</editDocument>
-      <upload>อัปโหลด</upload>
-      <paste>วาง</paste>
-      <search>ค้นหา</search>
-      <viewReferences>ดูการอ้างอิง</viewReferences>
-      <viewNodeType>ดู Node Type</viewNodeType>
-      <viewPermissions>ดูสิทธิ์</viewPermissions>
-      <viewProperties>ดูคุณสมบัติ</viewProperties>
-      <manageVersions>จัดการเวอร์ชั่น</manageVersions>
-      <manageAuditing>จัดการการตรวจสอบ</manageAuditing>
-      <managePublications>จัดการงานพิมพ์</managePublications>
-      <manageCategories>จัดการประเภท</manageCategories>
-      <manageRelations>จัดการความสัมพันธ์</manageRelations>
-      <manageActions>จัดการการดำเนินการ</manageActions>
-      <exportNode>ส่งออก Node</exportNode>
+      <enableVersion>Enable Version</enableVersion>
+      <addFolder>Add Folder</addFolder>
+      <addDocument>Add Document</addDocument>
+      <editDocument>Edit Document</editDocument>
+      <upload>Upload</upload>
+      <paste>Paste</paste>
+      <search>Search</search>
+      <viewReferences>View References</viewReferences>
+      <viewNodeType>View Node Type</viewNodeType>
+      <viewPermissions>View Permissions</viewPermissions>
+      <viewProperties>View Properties</viewProperties>
+      <manageVersions>Manage Versions</manageVersions>
+      <manageAuditing>Manage Auditing</manageAuditing>
+      <managePublications>Manage Publication</managePublications>
+      <manageCategories>Manage Categories</manageCategories>
+      <manageRelations>Manage Relations</manageRelations>
+      <manageActions>Manage Actions</manageActions>
+      <exportNode>Export Node</exportNode>
       <importNode>Import Node</importNode>
       <viewRelations>View Relations</viewRelations>
       <showJCRStructure>Show JCR Structure</showJCRStructure>
@@ -979,18 +979,18 @@
       <viewMetadatas>View Metadata</viewMetadatas>
       <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Hide/Show Content</manageHidden>
-      <comment>ความคิดเห็น</comment>
+      <comment>Comment</comment>
       <vote>Vote</vote>
       <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
       <publicationRequestApproval>Request Approval</publicationRequestApproval>
       <publicationApproveContent>Approve Content</publicationApproveContent>
       <publicationPublish>Publish</publicationPublish>
-      <contentNavigation>นำทางเนื้อหา</contentNavigation>
+      <contentNavigation>Content Navigation</contentNavigation>
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>แชร์</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1010,7 +1010,7 @@
       <label>
         <UITabContainer>Action</UITabContainer>
         <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>สิทธิ์การใช้งาน</UIViewPermissionContainer>
+        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>ตัวเลือกสิทธิ์</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>เลือกผู้ใช้</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1062,7 +1062,7 @@
     </action>
     <msg>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>คุณแน่ใจว่าต้องการลบแม่แบบนี้หรือไม่?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1098,13 +1098,13 @@
       </label>
     </tab>
     <label>
-      <name>ชื่อ:</name>
-      <label>ป้ายกำกับ:</label>
+      <name>Name:</name>
+      <label>Label:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
       <dialog>Dialog Content</dialog>
-      <view>ดูเนื้อหา</view>
-      <permission>สิทธิ์การใช้งาน:</permission>
-      <selectPemistion>สิทธิ์การใช้งาน</selectPemistion>
+      <view>View Content</view>
+      <permission>Permission:</permission>
+      <selectPemistion>Permission</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1114,27 +1114,27 @@
   -->
   <ecmTempForm>
     <label>
-      <version>เลือกเวอร์ชัน:</version>
-      <content>เนื้อหา:</content>
-      <name>ชื่อ:</name>
-      <homeTemplate>ชนิดแม่แบบ:</homeTemplate>
-      <enableVersion>เปิดใช้งานเวอร์ชั่น:</enableVersion>
+      <version>Select Version:</version>
+      <content>Content:</content>
+      <name>Name:</name>
+      <homeTemplate>Template Type:</homeTemplate>
+      <enableVersion>Enabled Version:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
     <title>
-      <ecmTempForm>เพิ่มหรือแก้ไขมุมมองแม่แบบ</ecmTempForm>
+      <ecmTempForm>Add/Edit View Template</ecmTempForm>
     </title>
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>เพิ่มแม่แบบ Explorer</ecmTempForm>
-      <ecmTempFormAdd>เพิ่มแม่แบบ Explorer</ecmTempFormAdd>
+      <ecmTempForm>Add Explorer Template</ecmTempForm>
+      <ecmTempFormAdd>Add Explorer Template</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>แก้ไขแม่แบบ Explorer</ecmTempForm>
+      <ecmTempForm>Edit Explorer Template</ecmTempForm>
     </title>
   </ecmTempFormEdit>
 
@@ -1150,7 +1150,7 @@
   -->
   <UIECMFilterForm>
     <label>
-      <selectScript>เลือกประเภท</selectScript>
+      <selectScript>Select Category</selectScript>
     </label>
   </UIECMFilterForm>
   <!--
@@ -1162,20 +1162,20 @@
     <action>
       <Edit>#{word.edit}</Edit>
       <Delete>#{word.delete}</Delete>
-      <AddNew>เพิ่มสคริปต์</AddNew>
+      <AddNew>Add Script</AddNew>
     </action>
     <msg>
-      <confirm-delete>คุณแน่ใจว่าต้องการลบสคริปต์นี้หรือไม่</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
-      <scriptName>ชื่อ</scriptName>
-      <path>สคริปต์</path>
-      <baseVersion>เวอร์ชันพื้นฐาน</baseVersion>
-      <action>ดำเนินการ</action>
+      <scriptName>Name</scriptName>
+      <path>Script</path>
+      <baseVersion>Base Version</baseVersion>
+      <action>Actions</action>
     </header>
     <tooltip>
-      <Edit>แก้ไข</Edit>
-      <Delete>ลบ</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1195,13 +1195,13 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>เปลี่ยนแปลง</Change>
+      <Change>Change</Change>
     </action>
     <msg>
-      <version-restored>เวอร์ชั่น {0} ถูกกู้คืนเสร็จเรียบร้อยแล้ว</version-restored>
-      <name-null>กรุณาพิมพ์ชื่อสคริปต์</name-null>
-      <name-exist>ชื่อสคริปต์ '{0}' มีอยู่แล้ว</name-exist>
-      <fileName-invalid>ชื่อสคริปต์มีอักขระบางตัวไม่ถูกต้อง</fileName-invalid>
+      <version-restored>Version {0} was restored successfully.</version-restored>
+      <name-null>Please enter the script name.</name-null>
+      <name-exist>The script name '{0}' already exists.</name-exist>
+      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1211,16 +1211,16 @@
   -->
   <ScriptContainerPopup>
     <title>
-      <UIScriptForm>เพิ่มหรือแก้ไขสคริปต์</UIScriptForm>
+      <UIScriptForm>Add/Edit Script</UIScriptForm>
     </title>
   </ScriptContainerPopup>
   <UIScriptForm>
     <label>
-      <selectVersion>เวอร์ชั่น</selectVersion>
-      <scriptContent>เนื้อหา</scriptContent>
-      <scriptLabel>ชื่อ</scriptLabel>
-      <scriptName>สคริปต์</scriptName>
-      <enableVersion>เปิดใช้งานเวอร์ชั่น</enableVersion>
+      <selectVersion>Versions</selectVersion>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Script</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1231,11 +1231,11 @@
 
   <ecmScriptForm>
     <label>
-      <selectVersion>เวอร์ชั่น</selectVersion>
-      <scriptContent>เนื้อหา</scriptContent>
-      <scriptLabel>ชื่อ</scriptLabel>
-      <scriptName>สคริปต์</scriptName>
-      <enableVersion>เปิดใช้งานเวอร์ชั่น</enableVersion>
+      <selectVersion>Versions</selectVersion>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Script</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1248,34 +1248,34 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>เพิ่มหมวดหมู่</title>
+    <title>Add Category</title>
     <label>
-      <taxonomyName>ชื่อหมวดหมู่</taxonomyName>
-      <parentPath>หลัก</parentPath>
+      <taxonomyName>Category Name</taxonomyName>
+      <parentPath>Parent</parentPath>
     </label>
     <msg>
-      <exist>หมวดหมู่ "{0}" มีอยู่แล้ว</exist>
-      <name-null>โปรดระบุชื่อหมวดหมู่</name-null>
-      <name-invalid>ชื่อหมวดหมู่มีอักขระบางตัวไม่ถูกต้อง</name-invalid>
-      <name-too-long>ชื่อหมวดหมู่ต้องมีน้อยกว่า 30 ตัวอักษร</name-too-long>
+      <exist>The "{0}" category already exists.</exist>
+      <name-null>Please specify the category name.</name-null>
+      <name-invalid>The category name has some invalid characters.</name-invalid>
+      <name-too-long>The category name must have less than 30 characters.</name-too-long>
     </msg>
   </UITaxonomyForm>
 
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>แก้ไขแผนภูมิหมวดหมู่</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>เพิ่มแผนภูมิหมวดหมู่</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
 
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>แก้ไขแผนภูมิหมวดหมู่</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1285,47 +1285,47 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>หลัก:</parentPath>
-      <taxonomyName>ชื่อหมวดหมู่:</taxonomyName>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
     </label>
     <msg>
-      <name-null>ชื่อหมวดหมู่ว่างเปล่า</name-null>
-      <name-invalid>ชื่อหมวดหมู่ไม่ถูกต้อง</name-invalid>
-      <name-too-long>ชื่อหมวดหมู่ต้องไม่มีมากกว่า {0} ตัวอักษร</name-too-long>
-      <exist>แผนภูมิหมวดหมู่นี้มีอยู่แล้ว.</exist>
+      <name-null>The category name is empty.</name-null>
+      <name-invalid>The category name is invalid.</name-invalid>
+      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
+      <exist>The category name already exists.</exist>
     </msg>
   </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>เลือกเส้นทาง</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupComponent>
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>เลือกผู้ใช้</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>เลือกผู้ใช้</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>เลือกสมาชิก</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
   <TaxoTreeAnyPermission>
     <label>
-      <any>สิทธิ์ใด ๆ</any>
+      <any>Any Permission</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>เลือก​กลุ่ม</selectGroup>
-      <selectMembership>เลือกสมาชิก</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1336,16 +1336,16 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>แผนภูมิหมวดหมู่</name>
+      <name>Category Tree</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
       <action>Action</action>
     </header>
     <action>
-      <AddTaxonomyTree>เพิ่มแผนภูมิหมวดหมู่</AddTaxonomyTree>
+      <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
     </action>
     <tooltip>
-      <EditTaxonomyTree>แก้ไขแผนภูมิหมวดหมู่</EditTaxonomyTree>
+      <EditTaxonomyTree>Edit Category Tree</EditTaxonomyTree>
       <Delete>Delete Category Tree</Delete>
     </tooltip>
     <title>Browse Category Tree</title>
@@ -1366,7 +1366,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>สิทธิ์การใช้งาน</permissions>
+      <permissions>Permissions</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1375,7 +1375,7 @@
 
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>เลือก</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
@@ -1386,7 +1386,7 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>บันทึก</Save>
+      <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -1405,13 +1405,13 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>ตัวเลือกสิทธิ์</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>เพิ่มสิทธิ์การใช้งาน</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1451,9 +1451,9 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>เลือกผู้ใช้</SelectUser>
-      <SelectMember>เลือกสมาชิก</SelectMember>
-      <AddAny>ทุกคน</AddAny>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
+      <AddAny>Everyone</AddAny>
     </title>
   </permission>
   <!--
@@ -1463,15 +1463,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>เลือกผู้ใช้</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>เลือกสมาชิก</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>เลือก​กลุ่ม</selectGroup>
-      <selectUser>เลือกผู้ใช้</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -1479,7 +1479,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>เลือก</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
@@ -1495,20 +1495,20 @@
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
       <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>คุณไม่มีสิทธิ์ในการเพิ่มสิทธิ์</not-change-permission>
-      <access-denied>เข้าถึงถูกปฏิเสธ คุณไม่สามารถลบเอาสิทธิ์นี้ออก</access-denied>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
 
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>เพิ่มหมวดหมู่</UITaxonomyForm>
+      <UITaxonomyForm>Add Category</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
 
   <UITaxonomyManager>
     <title>
-      <permission>การจัดการสิทธิ์</permission>
+      <permission>Permission Management</permission>
     </title>
   </UITaxonomyManager>
   <!--
@@ -1518,16 +1518,16 @@
   -->
   <UITemplateList>
     <header>
-      <name>ชนิด</name>
-      <action>การดำเนินการ</action>
-      <label>แม่แบบ</label>
-      <icon>ไอคอน</icon>
+      <name>Type</name>
+      <action>Action</action>
+      <label>Template</label>
+      <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>เพิ่มแม่แบบ</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
-      <confirm-delete>คุณต้องการลบจริงหรือไม่?</confirm-delete>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
@@ -1536,16 +1536,16 @@
 
   <UIActionsTemplateList>
     <header>
-      <name>ชนิด</name>
+      <name>Type</name>
       <action>Action</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>เพิ่มแม่แบบ</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
-      <confirm-delete>คุณต้องการลบจริงหรือไม่?</confirm-delete>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
@@ -1554,16 +1554,16 @@
 
   <UIOthersTemplateList>
     <header>
-      <name>ชนิด</name>
+      <name>Type</name>
       <label>Template</label>
       <icon>Icon</icon>
       <action>Action</action>
     </header>
     <action>
-      <AddNew>เพิ่มแม่แบบ</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
-      <confirm-delete>คุณต้องการลบจริงหรือไม่?</confirm-delete>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
@@ -1595,12 +1595,12 @@
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>เพิ่มแม่แบบ</AddTemplate>
+      <AddTemplate>Add Template</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
     <msg>
-      <confirm-delete>คุณแน่ใจว่าต้องการลบแม่แบบนี้หรือไม่?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
@@ -1618,7 +1618,7 @@
       <Delete>Delete</Delete>
     </title>
     <action>
-      <AddTemplate>เพิ่มแม่แบบ</AddTemplate>
+      <AddTemplate>Add Template</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1631,7 +1631,7 @@
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>เพิ่มแม่แบบ</AddTemplate>
+      <AddTemplate>Add Template</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1681,7 +1681,7 @@
     </action>
     <label>
       <title>Name</title>
-      <template>ชื่อแม่แบบ</template>
+      <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
     </label>
@@ -1695,7 +1695,7 @@
     </action>
     <label>
       <title>Name</title>
-      <template>ชื่อแม่แบบ</template>
+      <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
     </label>
@@ -1709,7 +1709,7 @@
     </action>
     <label>
       <title>Name</title>
-      <template>ชื่อแม่แบบ</template>
+      <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
     </label>
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>ตัวเลือกสิทธิ์</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1755,10 +1755,10 @@
       <UITemplateContent>ViewForm</UITemplateContent>
       <UIPopupWindow>View Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>เนื้อหา:</content>
-      <name>ชื่อ:</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>สิทธิ์การใช้งาน:</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>Versioning activated</enableVersion>
     </label>
     <title>Add/Edit View</title>
@@ -1768,22 +1768,22 @@
       <UITemplateContent>DialogForm</UITemplateContent>
       <UIPopupWindow>Dialog Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>เนื้อหา:</content>
-      <name>ชื่อ:</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>สิทธิ์การใช้งาน:</viewPermission>
-      <enableVersion>เปิดใช้งานเวอร์ชั่น</enableVersion>
+      <viewPermission>Permission:</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Dialog</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>ตัวเลือกสิทธิ์</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>ตัวเลือกสิทธิ์</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1813,8 +1813,8 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>ชื่อ:</name>
-      <label>ป้ายกำกับ:</label>
+      <name>Name:</name>
+      <label>Label:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
     <action>
@@ -1832,7 +1832,7 @@
     <header>
       <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>เวอร์ชั่น</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -1855,12 +1855,12 @@
     <header>
       <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>เวอร์ชั่น</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
       <undeletable>'{0}' cannot be deleted, it is the default one.</undeletable>
-      <confirm-delete>คุณต้องการลบจริงหรือไม่?</confirm-delete>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1888,7 +1888,7 @@
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1925,9 +1925,9 @@
   <UIQueriesList>
     <header>
       <name>Name</name>
-      <type>ชนิด</type>
+      <type>Type</type>
       <statement>Statement</statement>
-      <permission>สิทธิ์การใช้งาน</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>สิทธิ์การใช้งาน</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>ตัวเลือกสิทธิ์</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2087,17 +2087,17 @@
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2113,12 +2113,12 @@
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>เพิ่มข้อจำกัด</AddConstraints>
+      <AddConstraints>Add Constraints</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>เลือก</Select>
+      <Select>Select</Select>
     </title>
   </authInputSet>
   <!--
@@ -2131,7 +2131,7 @@
       <Delete>Delete</Delete>
     </title>
     <label>
-      <permission>{0} ใน {1}</permission>
+      <permission>{0} in {1}</permission>
     </label>
   </UIViewContainer>
   <ECMTemplate>
@@ -2142,7 +2142,7 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>เพิ่มสิทธิ์การใช้งาน</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2158,17 +2158,17 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>เลือก​กลุ่ม</selectGroup>
-      <selectUser>เลือกผู้ใช้</selectUser>
-      <selectMembership>เลือกสมาชิก</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>เลือก​กลุ่ม</selectGroup>
-      <selectUser>เลือกผู้ใช้</selectUser>
-      <selectMembership>เลือกสมาชิก</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2192,12 +2192,12 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>เลือก​กลุ่ม</selectGroup>
+      <selectGroup>Select Group</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>เลือกสมาชิก</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2210,9 +2210,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>เลือก​กลุ่ม</selectGroup>
-      <selectUser>เลือกผู้ใช้</selectUser>
-      <selectMembership>เลือกสมาชิก</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2235,8 +2235,8 @@
 
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>จำเป็นต้องมีเส้นทางไปหน้าแรก</homepath-emty>
-      <targetpath-emty>จำเป็นต้องมีเส้นทางไปหาเป้าหมาย</targetpath-emty>
+      <homepath-emty>The home path is required.</homepath-emty>
+      <targetpath-emty>The target path is required.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
@@ -2280,7 +2280,7 @@
   </DriveInputSet>
   <UIPermissionTreeInfo>
     <msg>
-      <confirm-delete-permission>คุณแน่ใจว่าต้องการลบสิทธิ์การใช้งานนี้หรือไม่?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
       <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
     </msg>
   </UIPermissionTreeInfo>
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>สิทธิ์การใช้งาน</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2325,7 +2325,7 @@
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>ชื่อเรื่อง</name>
+      <name>Title</name>
       <hoderLock>Lock Owner</hoderLock>
       <action>Action</action>
     </header>
@@ -2377,7 +2377,7 @@
     <header>
       <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>เวอร์ชั่น</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -2397,11 +2397,11 @@
       <UITemplateContent>SkinForm</UITemplateContent>
       <UIPopupWindow>Skin Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>เนื้อหา:</content>
-      <name>ชื่อ:</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>สิทธิ์การใช้งาน:</viewPermission>
-      <enableVersion>เปิดใช้งานเวอร์ชั่น</enableVersion>
+      <viewPermission>Permission:</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Skin</title>
   </SkinForm>
@@ -2472,27 +2472,27 @@
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>คุณแน่ใจว่าต้องการลบสิทธิ์การใช้งานนี้หรือไม่?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>เพิ่มสิทธิ์การใช้งาน</title>
+    <title>Add Permission</title>
     <action>
       <Save>#{word.save}</Save>
       <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>เลือก​กลุ่ม</selectGroup>
-      <selectMembership>เลือกสมาชิก</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2526,7 +2526,7 @@
 
   <UIWorkspaceWizard>
     <msg>
-      <name-not-allowed>ชื่อต้องห้าม</name-not-allowed>
+      <name-not-allowed>Forbidden Name</name-not-allowed>
     </msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>

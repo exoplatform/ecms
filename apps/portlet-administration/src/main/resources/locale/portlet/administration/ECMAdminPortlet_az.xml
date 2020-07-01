@@ -20,7 +20,7 @@
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
       <UITemplatesManager>Sənədlər</UITemplatesManager>
-      <UICLVTemplatesManager>Siyahı</UICLVTemplatesManager>
+      <UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
@@ -50,14 +50,14 @@
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Bu kateqoriyanı silmək istədiyinizə əminsiniz?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
       <add>Əlavə Et</add>
       <paste>Paste</paste>
       <cut>Cut</cut>
       <copy>Kopyala</copy>
-      <remove>Sil</remove>
+      <remove>Delete</remove>
     </title>
   </UITaxonomyManager>
 
@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Forbidden Name</name-not-allowed>
@@ -100,7 +100,7 @@
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Ad</TaxoTreeName>
+      <TaxoTreeName>Name</TaxoTreeName>
       <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
       <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
     </label>
@@ -120,8 +120,8 @@
   <UIPermissionTreeInfo>
     <action>
       <title>
-        <Delete>Sil</Delete>
-        <Edit>Redaktə Et</Edit>
+        <Delete>Delete</Delete>
+        <Edit>Edit</Edit>
       </title>
     </action>
     <header>
@@ -130,7 +130,7 @@
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
       <remove>Sil</remove>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -212,10 +212,10 @@
     <header>
       <prefix>Prefix</prefix>
       <uri>Namespace URI</uri>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
-      <AddNamespace>Qeydiyyat</AddNamespace>
+      <AddNamespace>Register</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
@@ -236,9 +236,9 @@
       <False>false</False>
     </label>
     <title>
-      <view>Göstər</view>
-      <edit>Redaktə Et</edit>
-      <delete>Sil</delete>
+      <view>View</view>
+      <edit>Edit</edit>
+      <delete>Delete</delete>
     </title>
     <header>
       <icon>Icon</icon>
@@ -282,12 +282,12 @@
     <title>Mapping Metadata</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Tətbiq Et</Save>
+      <Save>Apply</Save>
     </action>
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Hərəkət</input>
+      <input>Action</input>
     </header>
     <label>
       <dialogTemplate>Dialog Template:</dialogTemplate>
@@ -343,16 +343,16 @@
   <UIDriveList>
     <header>
       <icon>Icon</icon>
-      <name>Ad</name>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
       <permissions>İcazələr</permissions>
-      <views>Göstər</views>
-      <action>Hərəkət</action>
+      <views>View</views>
+      <action>Action</action>
     </header>
     <tooltip>
-      <Delete>Sil</Delete>
-      <EditInfo>Redaktə Et</EditInfo>
+      <Delete>Delete</Delete>
+      <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
@@ -389,7 +389,7 @@
       </label>
     </tab>
     <label>
-      <name>Ad:</name>
+      <name>Name:</name>
       <workspace>Workspace:</workspace>
       <homePath>Home Path:</homePath>
       <icon>Workspace Icon:</icon>
@@ -400,7 +400,7 @@
       <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
       <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
       <Admin>Admin:</Admin>
-      <Categories>Kateqoriyalar:</Categories>
+      <Categories>Categories:</Categories>
       <Icons>Icons:</Icons>
       <List>List:</List>
       <Web>Web:</Web>
@@ -421,8 +421,8 @@
       <child-not-found>Child node not found.</child-not-found>
     </info>
     <header>
-      <name>Ad</name>
-      <action>Hərəkət</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
@@ -441,7 +441,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Hərəkət</input>
+      <input>Action</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -462,7 +462,7 @@
       <nodeType>Node Type</nodeType>
       <mixinType>Mixin Type</mixinType>
       <orderable>Orderable Child Nodes</orderable>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <Export>Export</Export>
@@ -470,9 +470,9 @@
       <Add>Əlavə Et</Add>
     </action>
     <tooltip>
-      <View>Göstər</View>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
@@ -491,7 +491,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Hərəkət</input>
+      <input>Action</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -627,7 +627,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node name</label>
-      <input>Hərəkət</input>
+      <input>Action</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -661,7 +661,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Yüklə</Upload>
+      <Upload>Upload</Upload>
     </action>
     <title>Import Node Type From XML File</title>
     <msg>
@@ -686,7 +686,7 @@
     <header>
       <icon>Icon</icon>
       <label>Node Name</label>
-      <input>Hərəkət</input>
+      <input>Action</input>
     </header>
     <title>Select Import Node Type</title>
     <msg>
@@ -725,12 +725,12 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Ad</label>
+      <label>Name</label>
       <action>Actions</action>
     </header>
     <title>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddAction>Add Action Type</AddAction>
@@ -754,7 +754,7 @@
     <title>Add Action Type</title>
     <label>
       <actionType>Extend Action Type:</actionType>
-      <name>Ad:</name>
+      <name>Name:</name>
       <isMove>is Action Move:</isMove>
       <variables>Variables:</variables>
       <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
@@ -785,13 +785,13 @@
       <ECMTemplate>Explorer Templates</ECMTemplate>
       <UIScriptForm>Scripts</UIScriptForm>
       <UIDialogTab>Dialog</UIDialogTab>
-      <UIViewTab>Göstər</UIViewTab>
+      <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
       <UITemplateContainer>Sənədlər</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-      <UIActionScriptContainer>Hərəkət</UIActionScriptContainer>
+      <UIActionScriptContainer>Action</UIActionScriptContainer>
       <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
       <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
@@ -811,16 +811,16 @@
   -->
   <UIViewList>
     <title>
-      <View>Göstər</View>
-      <EditInfo>Redaktə Et</EditInfo>
-      <Delete>Sil</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <permissions>İcazələr</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <AddView>Add View</AddView>
@@ -833,7 +833,7 @@
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>Göstər</UIViewFormTabPane>
+      <UIViewFormTabPane>View</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
@@ -850,8 +850,8 @@
 
   <UITabList>
     <title>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <tabName>Tab</tabName>
@@ -884,15 +884,15 @@
 
   <UIViewPermissionList>
     <title>
-      <Delete>Sil</Delete>
+      <Delete>Delete</Delete>
     </title>
     <header>
       <friendlyPermission>İcazələr</friendlyPermission>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>Sil</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <grid>
@@ -933,7 +933,7 @@
       <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>Ad</viewName>
+      <viewName>Name</viewName>
       <template>Template</template>
       <version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
@@ -948,7 +948,7 @@
     </msg>
     <label>
       <version>Restore Version</version>
-      <viewName>Ad</viewName>
+      <viewName>Name</viewName>
       <tabName>Tab Name</tabName>
       <permission>Permission</permission>
       <tabs>Tabs</tabs>
@@ -957,9 +957,9 @@
       <addFolder>Add Folder</addFolder>
       <addDocument>Add Document</addDocument>
       <editDocument>Edit Document</editDocument>
-      <upload>Yüklə</upload>
+      <upload>Upload</upload>
       <paste>Paste</paste>
-      <search>Axtar</search>
+      <search>Search</search>
       <viewReferences>View References</viewReferences>
       <viewNodeType>View Node Type</viewNodeType>
       <viewPermissions>View Permissions</viewPermissions>
@@ -980,13 +980,13 @@
       <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Hide/Show Content</manageHidden>
       <comment>Comment</comment>
-      <vote>Səs Ver</vote>
+      <vote>Vote</vote>
       <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
       <publicationRequestApproval>Request Approval</publicationRequestApproval>
       <publicationApproveContent>Approve Content</publicationApproveContent>
       <publicationPublish>Publish</publicationPublish>
-      <contentNavigation>Məzmun naviqasiyası</contentNavigation>
+      <contentNavigation>Content Navigation</contentNavigation>
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
@@ -1008,14 +1008,14 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Hərəkət</UITabContainer>
-        <UIViewForm>Göstər</UIViewForm>
+        <UITabContainer>Action</UITabContainer>
+        <UIViewForm>View</UIViewForm>
         <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
       <Restore>Restore</Restore>
@@ -1047,15 +1047,15 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>Göstər</View>
-      <EditInfo>Redaktə Et</EditInfo>
-      <Delete>Sil</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <name>Ad</name>
-      <path>Dəyər</path>
+      <name>Name</name>
+      <path>Value</path>
       <baseVersion>Base Version</baseVersion>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <Add>Əlavə Et</Add>
@@ -1079,7 +1079,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
       <Restore>Restore</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
@@ -1094,11 +1094,11 @@
       <label>
         <template>Template</template>
         <defaultDialog>Dialog</defaultDialog>
-        <defaultView>Göstər</defaultView>
+        <defaultView>View</defaultView>
       </label>
     </tab>
     <label>
-      <name>Ad:</name>
+      <name>Name:</name>
       <label>Label:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
       <dialog>Dialog Content</dialog>
@@ -1116,7 +1116,7 @@
     <label>
       <version>Select Version:</version>
       <content>Content:</content>
-      <name>Ad:</name>
+      <name>Name:</name>
       <homeTemplate>Template Type:</homeTemplate>
       <enableVersion>Enabled Version:</enableVersion>
     </label>
@@ -1168,14 +1168,14 @@
       <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Ad</scriptName>
+      <scriptName>Name</scriptName>
       <path>Script</path>
       <baseVersion>Base Version</baseVersion>
       <action>Actions</action>
     </header>
     <tooltip>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1218,7 +1218,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Ad</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1233,7 +1233,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Ad</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Üzvlüyü seç</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Qrupu seç</selectGroup>
-      <selectMembership>Üzvlüyü seç</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1339,7 +1339,7 @@
       <name>Category Tree</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
@@ -1363,7 +1363,7 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Ad</name>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
       <permissions>İcazələr</permissions>
@@ -1387,7 +1387,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Saxla</Save>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1431,7 +1431,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Redaktə Et</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -1440,7 +1440,7 @@
       <read>Read</read>
       <addNode>Modify Node</addNode>
       <remove>Sil</remove>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>İstifadəçini seç</SelectUser>
-      <SelectMember>Üzvlüyü seç</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Hər Kəs</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>İstifadəçini seç</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Üzvlüyü seç</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1490,7 +1490,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1519,7 +1519,7 @@
   <UITemplateList>
     <header>
       <name>Type</name>
-      <action>Hərəkət</action>
+      <action>Action</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
@@ -1537,7 +1537,7 @@
   <UIActionsTemplateList>
     <header>
       <name>Type</name>
-      <action>Hərəkət</action>
+      <action>Action</action>
       <label>Template</label>
       <icon>Icon</icon>
     </header>
@@ -1557,7 +1557,7 @@
       <name>Type</name>
       <label>Template</label>
       <icon>Icon</icon>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <AddNew>Şablon Əlavə Et</AddNew>
@@ -1586,18 +1586,18 @@
 
   <UICLVTemplateList>
     <title>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <title>Ad</title>
-      <action>Hərəkət</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <action>
       <AddTemplate>Şablon Əlavə Et</AddTemplate>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
@@ -1609,31 +1609,31 @@
 
   <CateTemplateList>
     <header>
-      <title>Ad</title>
-      <action>Hərəkət</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <title>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddTemplate>Şablon Əlavə Et</AddTemplate>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </CateTemplateList>
 
   <PageTemplateList>
     <header>
-      <title>Ad</title>
-      <action>Hərəkət</action>
+      <title>Name</title>
+      <action>Action</action>
       <template>Template</template>
     </header>
     <action>
       <AddTemplate>Şablon Əlavə Et</AddTemplate>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </PageTemplateList>
 
@@ -1676,11 +1676,11 @@
   <UICLVTemplateForm_ContentTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Ad</title>
+      <title>Name</title>
       <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1690,11 +1690,11 @@
   <UICLVTemplateForm_PageTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Ad</title>
+      <title>Name</title>
       <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1704,11 +1704,11 @@
   <UICLVTemplateForm_CateTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Ad</title>
+      <title>Name</title>
       <template>Template Name</template>
       <content>Content</content>
       <type>Template Type</type>
@@ -1722,7 +1722,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Sıfırla</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1756,7 +1756,7 @@
       <UIPopupWindow>View Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
       <content>Content:</content>
-      <name>Ad:</name>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
       <enableVersion>Versioning activated</enableVersion>
@@ -1769,7 +1769,7 @@
       <UIPopupWindow>Dialog Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
       <content>Content:</content>
-      <name>Ad:</name>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
       <enableVersion>Enable Versioning</enableVersion>
@@ -1797,8 +1797,8 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1813,7 +1813,7 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Ad:</name>
+      <name>Name:</name>
       <label>Label:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
@@ -1830,9 +1830,9 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>Versiya</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -1841,8 +1841,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Redaktə Et</Edit>
-        <Delete>Sil</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1853,9 +1853,9 @@
   -->
   <UIViewTab>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>Versiya</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -1864,8 +1864,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Redaktə Et</Edit>
-        <Delete>Sil</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1924,7 +1924,7 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
       <permission>İcazələr</permission>
@@ -1995,11 +1995,11 @@
       <name>Style Name</name>
       <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <title>
-      <Edit>Redaktə Et</Edit>
-      <Delete>Sil</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
       <Remove>Sil</Remove>
     </title>
     <action>
@@ -2013,7 +2013,7 @@
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Yenilə</UpdateStyle>
+      <UpdateStyle>Update</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -2126,9 +2126,9 @@
   -->
   <UIViewContainer>
     <title>
-      <View>Göstər</View>
-      <EditInfo>Redaktə Et</EditInfo>
-      <Delete>Sil</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <label>
       <permission>{0} in {1}</permission>
@@ -2136,8 +2136,8 @@
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Redaktə Et</EditInfo>
-      <Delete>Sil</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
   </ECMTemplate>
   <step1>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Qrupu seç</selectGroup>
       <selectUser>İstifadəçini seç</selectUser>
-      <selectMembership>Üzvlüyü seç</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Qrupu seç</selectGroup>
       <selectUser>İstifadəçini seç</selectUser>
-      <selectMembership>Üzvlüyü seç</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Üzvlüyü seç</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Qrupu seç</selectGroup>
       <selectUser>İstifadəçini seç</selectUser>
-      <selectMembership>Üzvlüyü seç</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2314,7 +2314,7 @@
   <UILockHolderList>
     <header>
       <name>Groups or Users</name>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <DeleteLock>Delete Group</DeleteLock>
@@ -2325,9 +2325,9 @@
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>Başlıq</name>
+      <name>Title</name>
       <hoderLock>Lock Owner</hoderLock>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <UnLock>UnLock</UnLock>
@@ -2375,9 +2375,9 @@
 
   <UISkinTab>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <roles>Roles</roles>
-      <baseVersion>Versiya</baseVersion>
+      <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
@@ -2386,8 +2386,8 @@
     </msg>
     <action>
       <title>
-        <Edit>Redaktə Et</Edit>
-        <Delete>Sil</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2398,7 +2398,7 @@
       <UIPopupWindow>Skin Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
       <content>Content:</content>
-      <name>Ad:</name>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
       <enableVersion>Enable Versioning</enableVersion>
@@ -2425,14 +2425,14 @@
   </UITaxonomyTreeContainer>
   <UITaxonomyTreeMainForm>
     <action>
-      <NextViewPermission>Növbəti</NextViewPermission>
+      <NextViewPermission>Next</NextViewPermission>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <NextAddAction>Növbəti</NextAddAction>
+      <NextAddAction>Next</NextAddAction>
       <Previous>Previous</Previous>
     </action>
   </UIPermissionTreeForm>
@@ -2440,7 +2440,7 @@
   <UIActionForm>
     <action>
       <PreviousViewPermission>Previous</PreviousViewPermission>
-      <NextViewTree>Növbəti</NextViewTree>
+      <NextViewTree>Next</NextViewTree>
     </action>
     <msg>
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
@@ -2464,11 +2464,11 @@
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>User or Group</usersOrGroups>
-      <action>Hərəkət</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>Sil</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -2482,17 +2482,17 @@
       <Add>Əlavə Et</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Qrupu seç</selectGroup>
-      <selectMembership>Üzvlüyü seç</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

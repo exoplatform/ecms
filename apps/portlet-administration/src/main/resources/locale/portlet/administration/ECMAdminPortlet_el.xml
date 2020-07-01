@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Επιλέξτε την ιδιότητα του μέλους</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Επιλογή ρόλου</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
-      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Επιλογή χρήστη</SelectUser>
-      <SelectMember>Επιλέξτε την ιδιότητα του μέλους</SelectMember>
+      <SelectMember>Επιλογή ρόλου</SelectMember>
       <AddAny>Όλοι</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Επιλογή χρήστη</UIGroupSelector>
       <UIPermissionSelector>Επιλέξτε μέλος</UIPermissionSelector>
-      <UIGroupMemberSelector>Επιλέξτε την ιδιότητα του μέλους</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Επιλογή ρόλου</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectUser>Επιλογή χρήστη</selectUser>
-      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectUser>Επιλογή χρήστη</selectUser>
-      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectUser>Επιλογή χρήστη</selectUser>
-      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Προσθήκη</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Αυτή η ιδιότητα μέλους υπάρχει ήδη. Παρακαλώ επιλέξτε μια άλλη.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
-      <selectMembership>Επιλέξτε την ιδιότητα του μέλους</selectMembership>
+      <selectMembership>Επιλογή ρόλου</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

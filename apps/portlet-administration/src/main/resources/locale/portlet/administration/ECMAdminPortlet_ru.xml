@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Выбрать членство</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Выбрать роль</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Выбрать группу</selectGroup>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Выбрать пользователя</SelectUser>
-      <SelectMember>Выбрать членство</SelectMember>
+      <SelectMember>Выбрать роль</SelectMember>
       <AddAny>Все</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Выбрать пользователя</UIGroupSelector>
       <UIPermissionSelector>Выбрать члена</UIPermissionSelector>
-      <UIGroupMemberSelector>Выбрать членство</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Выбрать роль</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Добавить</Add>
     </action>
     <label>
-      <userOrGroup>Членства:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Это членство уже существует. Пожалуйста, выберите другое.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Выбрать группу</selectGroup>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Выберите пользователя</SelectUser>
-      <SelectMember>Выбрать членство</SelectMember>
+      <SelectMember>Выбрать роль</SelectMember>
       <AddAny>Выбрать все</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Выбрать пользователя</UIGroupSelector>
       <UIPermissionSelector>Выберите члена</UIPermissionSelector>
-      <UIGroupMemberSelector>Выбрать членство</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Выбрать роль</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Оригинальная версия</original>
       <version>Версия</version>
-      <baseVersion>Базовая версия</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Добавить метку</addLabel>
       <removeLable>Удалить метку</removeLable>
       <restoreVersion>Восстановить версию</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать членство</selectMembership>
+      <selectMembership>Выбрать роль</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

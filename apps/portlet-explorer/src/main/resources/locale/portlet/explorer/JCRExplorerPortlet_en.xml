@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

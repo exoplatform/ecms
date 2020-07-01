@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Benutzer auswählen</SelectUser>
-      <SelectMember>Mitgliedschaft auswählen</SelectMember>
+      <SelectMember>Rolle auswählen</SelectMember>
       <AddAny>Jeder</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Benutzer auswählen</UIGroupSelector>
       <UIPermissionSelector>Mitglied auswählen</UIPermissionSelector>
-      <UIGroupMemberSelector>Mitgliedschaft auswählen</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Rolle auswählen</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2482,10 +2482,10 @@
       <Add>Hinzufügen</Add>
     </action>
     <label>
-      <userOrGroup>Mitgliedschaften:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Diese Rolle ist bereits vorhanden. Bitte wählen Sie eine andere.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 

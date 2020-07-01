@@ -19,7 +19,7 @@
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>문서</UITemplatesManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
       <UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
@@ -53,11 +53,11 @@
       <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
-      <add>추가</add>
+      <add>Add</add>
       <paste>Paste</paste>
       <cut>Cut</cut>
-      <copy>복사</copy>
-      <remove>삭제</remove>
+      <copy>Copy</copy>
+      <remove>Delete</remove>
     </title>
   </UITaxonomyManager>
 
@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Forbidden Name</name-not-allowed>
@@ -100,7 +100,7 @@
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>이름</TaxoTreeName>
+      <TaxoTreeName>Name</TaxoTreeName>
       <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
       <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
     </label>
@@ -120,8 +120,8 @@
   <UIPermissionTreeInfo>
     <action>
       <title>
-        <Delete>삭제</Delete>
-        <Edit>편집</Edit>
+        <Delete>Delete</Delete>
+        <Edit>Edit</Edit>
       </title>
     </action>
     <header>
@@ -130,7 +130,7 @@
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
       <remove>Remove</remove>
-      <action>액션</action>
+      <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -212,10 +212,10 @@
     <header>
       <prefix>Prefix</prefix>
       <uri>Namespace URI</uri>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <action>
-      <AddNamespace>등록</AddNamespace>
+      <AddNamespace>Register</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
@@ -236,12 +236,12 @@
       <False>false</False>
     </label>
     <title>
-      <view>보기</view>
-      <edit>편집</edit>
-      <delete>삭제</delete>
+      <view>View</view>
+      <edit>Edit</edit>
+      <delete>Delete</delete>
     </title>
     <header>
-      <icon>아이콘</icon>
+      <icon>Icon</icon>
       <name>Metadata</name>
       <type>Type</type>
       <internalUse>Internal Use</internalUse>
@@ -282,12 +282,12 @@
     <title>Mapping Metadata</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>적용</Save>
+      <Save>Apply</Save>
     </action>
     <header>
-      <icon>아이콘</icon>
+      <icon>Icon</icon>
       <label>Node name</label>
-      <input>액션</input>
+      <input>Action</input>
     </header>
     <label>
       <dialogTemplate>Dialog Template:</dialogTemplate>
@@ -295,7 +295,7 @@
       <metadataName>Metadata Name:</metadataName>
       <viewPermission>Permission:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>라벨:</metadataLabel>
+      <metadataLabel>Label:</metadataLabel>
     </label>
     <tab>
       <label>
@@ -314,12 +314,12 @@
     <header>
       <name>Element Name</name>
       <type>Type</type>
-      <description>설명</description>
+      <description>Description</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>설명</description>
+      <description>Description</description>
     </info>
     <tab>
       <element>Elements</element>
@@ -342,17 +342,17 @@
   -->
   <UIDriveList>
     <header>
-      <icon>아이콘</icon>
-      <name>이름</name>
+      <icon>Icon</icon>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
-      <permissions>권한</permissions>
-      <views>보기</views>
-      <action>액션</action>
+      <permissions>Permissions</permissions>
+      <views>View</views>
+      <action>Action</action>
     </header>
     <tooltip>
-      <Delete>삭제</Delete>
-      <EditInfo>편집</EditInfo>
+      <Delete>Delete</Delete>
+      <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
@@ -361,7 +361,7 @@
       <AddDrive>Add Drive</AddDrive>
     </action>
     <label>
-      <permission>{1}의 {0}</permission>
+      <permission>{0} in {1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -421,8 +421,8 @@
       <child-not-found>Child node not found.</child-not-found>
     </info>
     <header>
-      <name>이름</name>
-      <action>액션</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
@@ -439,9 +439,9 @@
   -->
   <UINodeTypeManager>
     <header>
-      <icon>아이콘</icon>
-      <label>노드 이름</label>
-      <input>액션</input>
+      <icon>Icon</icon>
+      <label>Node Name</label>
+      <input>Action</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -458,21 +458,21 @@
       <false>False</false>
     </label>
     <header>
-      <icon>아이콘</icon>
+      <icon>Icon</icon>
       <nodeType>Node Type</nodeType>
       <mixinType>Mixin Type</mixinType>
       <orderable>Orderable Child Nodes</orderable>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <action>
       <Export>Export</Export>
       <Import>Import</Import>
-      <Add>추가</Add>
+      <Add>Add</Add>
     </action>
     <tooltip>
-      <View>보기</View>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
@@ -486,12 +486,12 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>추가</Add>
+      <Add>Add</Add>
     </action>
     <header>
-      <icon>아이콘</icon>
-      <label>노드 이름</label>
-      <input>액션</input>
+      <icon>Icon</icon>
+      <label>Node Name</label>
+      <input>Action</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -550,7 +550,7 @@
       <AddConstraints>Add Constraints</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Add Type</AddType>
-      <AddValue>추가</AddValue>
+      <AddValue>Add</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -625,9 +625,9 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>아이콘</icon>
+      <icon>Icon</icon>
       <label>Node name</label>
-      <input>액션</input>
+      <input>Action</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -661,7 +661,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>업로드</Upload>
+      <Upload>Upload</Upload>
     </action>
     <title>Import Node Type From XML File</title>
     <msg>
@@ -684,9 +684,9 @@
       <Upload>Re-upload</Upload>
     </action>
     <header>
-      <icon>아이콘</icon>
-      <label>노드 이름</label>
-      <input>액션</input>
+      <icon>Icon</icon>
+      <label>Node Name</label>
+      <input>Action</input>
     </header>
     <title>Select Import Node Type</title>
     <msg>
@@ -711,7 +711,7 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
       <AddPath>Add Path</AddPath>
@@ -725,12 +725,12 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>이름</label>
+      <label>Name</label>
       <action>Actions</action>
     </header>
     <title>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
       <AddAction>Add Action Type</AddAction>
@@ -785,13 +785,13 @@
       <ECMTemplate>Explorer Templates</ECMTemplate>
       <UIScriptForm>Scripts</UIScriptForm>
       <UIDialogTab>Dialog</UIDialogTab>
-      <UIViewTab>보기</UIViewTab>
-      <UITemplateEditForm>템플릿</UITemplateEditForm>
-      <UITemplateForm>템플릿</UITemplateForm>
-      <UITemplateContainer>문서</UITemplateContainer>
+      <UIViewTab>View</UIViewTab>
+      <UITemplateEditForm>Template</UITemplateEditForm>
+      <UITemplateForm>Template</UITemplateForm>
+      <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-      <UIActionScriptContainer>액션</UIActionScriptContainer>
+      <UIActionScriptContainer>Action</UIActionScriptContainer>
       <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
       <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
@@ -811,16 +811,16 @@
   -->
   <UIViewList>
     <title>
-      <View>보기</View>
-      <EditInfo>편집</EditInfo>
-      <Delete>삭제</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <name>이름</name>
-      <permissions>권한</permissions>
+      <name>Name</name>
+      <permissions>Permissions</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <action>
       <AddView>Add View</AddView>
@@ -833,13 +833,13 @@
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>보기</UIViewFormTabPane>
+      <UIViewFormTabPane>View</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
     <title>
       <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>템플릿 추가</AddPopup>
+      <AddPopup>Add Template</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -850,16 +850,16 @@
 
   <UITabList>
     <title>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <tabName>탭</tabName>
-      <localizeButtons>설명</localizeButtons>
+      <tabName>Tab</tabName>
+      <localizeButtons>Description</localizeButtons>
       <action>Actions</action>
     </header>
     <action>
-      <AddTab>추가</AddTab>
+      <AddTab>Add</AddTab>
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
@@ -874,7 +874,7 @@
   <UIViewPermissionList>
     <title>Select Owner with permissions on this view:</title>
     <label>
-      <permission>{1}의 {0}</permission>
+      <permission>{0} in {1}</permission>
     </label>
     <msg>
       <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
@@ -884,15 +884,15 @@
 
   <UIViewPermissionList>
     <title>
-      <Delete>삭제</Delete>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>권한</friendlyPermission>
-      <action>액션</action>
+      <friendlyPermission>Permissions</friendlyPermission>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>삭제</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <grid>
@@ -904,7 +904,7 @@
 
   <UIViewPermissionForm>
     <action>
-      <Add>추가</Add>
+      <Add>Add</Add>
     </action>
     <label>
       <userOrGroup>User or Group</userOrGroup>
@@ -921,7 +921,7 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
@@ -933,8 +933,8 @@
       <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>이름</viewName>
-      <template>템플릿</template>
+      <viewName>Name</viewName>
+      <template>Template</template>
       <version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
       <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
@@ -948,18 +948,18 @@
     </msg>
     <label>
       <version>Restore Version</version>
-      <viewName>이름</viewName>
+      <viewName>Name</viewName>
       <tabName>Tab Name</tabName>
-      <permission>퍼미션</permission>
+      <permission>Permission</permission>
       <tabs>Tabs</tabs>
       <template>Templates</template>
       <enableVersion>Enable Version</enableVersion>
       <addFolder>Add Folder</addFolder>
       <addDocument>Add Document</addDocument>
       <editDocument>Edit Document</editDocument>
-      <upload>업로드</upload>
+      <upload>Upload</upload>
       <paste>Paste</paste>
-      <search>찾기</search>
+      <search>Search</search>
       <viewReferences>View References</viewReferences>
       <viewNodeType>View Node Type</viewNodeType>
       <viewPermissions>View Permissions</viewPermissions>
@@ -981,7 +981,7 @@
       <manageHidden>Hide/Show Content</manageHidden>
       <comment>Comment</comment>
       <vote>Vote</vote>
-      <addCategory>카테고리 추가</addCategory>
+      <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
       <publicationRequestApproval>Request Approval</publicationRequestApproval>
       <publicationApproveContent>Approve Content</publicationApproveContent>
@@ -990,7 +990,7 @@
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>공유</shareDocuments>
+      <shareDocuments>Share</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1008,22 +1008,22 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>액션</UITabContainer>
-        <UIViewForm>보기</UIViewForm>
-        <UIViewPermissionContainer>퍼미션</UIViewPermissionContainer>
+        <UITabContainer>Action</UITabContainer>
+        <UIViewForm>View</UIViewForm>
+        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
-      <Restore>최소화 복원</Restore>
+      <Restore>Restore</Restore>
     </action>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>퍼미션 선택기</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>사용자 선택</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1047,22 +1047,22 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>보기</View>
-      <EditInfo>편집</EditInfo>
-      <Delete>삭제</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <name>이름</name>
-      <path>값</path>
+      <name>Name</name>
+      <path>Value</path>
       <baseVersion>Base Version</baseVersion>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <action>
-      <Add>추가</Add>
+      <Add>Add</Add>
     </action>
     <msg>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>정말로 이 템플릿을 삭제하시겠습니까?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
@@ -1074,13 +1074,13 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>초기화</Reset>
-      <Restore>최소화 복원</Restore>
+      <Reset>Reset</Reset>
+      <Restore>Restore</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
@@ -1092,19 +1092,19 @@
     </msg>
     <tab>
       <label>
-        <template>템플릿</template>
+        <template>Template</template>
         <defaultDialog>Dialog</defaultDialog>
-        <defaultView>보기</defaultView>
+        <defaultView>View</defaultView>
       </label>
     </tab>
     <label>
       <name>Name:</name>
-      <label>라벨:</label>
+      <label>Label:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
       <dialog>Dialog Content</dialog>
       <view>View Content</view>
       <permission>Permission:</permission>
-      <selectPemistion>퍼미션</selectPemistion>
+      <selectPemistion>Permission</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1168,14 +1168,14 @@
       <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
-      <scriptName>이름</scriptName>
+      <scriptName>Name</scriptName>
       <path>Script</path>
       <baseVersion>Base Version</baseVersion>
       <action>Actions</action>
     </header>
     <tooltip>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1195,7 +1195,7 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>변경</Change>
+      <Change>Change</Change>
     </action>
     <msg>
       <version-restored>Version {0} was restored successfully.</version-restored>
@@ -1217,8 +1217,8 @@
   <UIScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>내용</scriptContent>
-      <scriptLabel>이름</scriptLabel>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1232,8 +1232,8 @@
   <ecmScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>내용</scriptContent>
-      <scriptLabel>이름</scriptLabel>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1248,7 +1248,7 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>카테고리 추가</title>
+    <title>Add Category</title>
     <label>
       <taxonomyName>Category Name</taxonomyName>
       <parentPath>Parent</parentPath>
@@ -1304,14 +1304,14 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>사용자 선택</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>사용자 선택</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1324,8 +1324,8 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1339,7 +1339,7 @@
       <name>Category Tree</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <action>
       <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
@@ -1363,10 +1363,10 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>이름</name>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>권한</permissions>
+      <permissions>Permissions</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1375,7 +1375,7 @@
 
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>선택</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
@@ -1386,8 +1386,8 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>저장</Save>
-      <Reset>초기화</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1405,14 +1405,14 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>퍼미션 선택기</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>퍼미션 추가</AddDrivePermissionSelector>
-      <UIPermissionSelector>퍼미션 선택</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
 
@@ -1431,7 +1431,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>편집</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -1440,7 +1440,7 @@
       <read>Read</read>
       <addNode>Modify Node</addNode>
       <remove>Remove</remove>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -1451,8 +1451,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>사용자 선택</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Everyone</AddAny>
     </title>
   </permission>
@@ -1463,15 +1463,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>사용자 선택</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectUser>사용자 선택</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -1479,7 +1479,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>선택</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
@@ -1490,7 +1490,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1502,7 +1502,7 @@
 
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>카테고리 추가</UITaxonomyForm>
+      <UITaxonomyForm>Add Category</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
 
@@ -1519,12 +1519,12 @@
   <UITemplateList>
     <header>
       <name>Type</name>
-      <action>액션</action>
-      <label>템플릿</label>
-      <icon>아이콘</icon>
+      <action>Action</action>
+      <label>Template</label>
+      <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>템플릿 추가</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1537,12 +1537,12 @@
   <UIActionsTemplateList>
     <header>
       <name>Type</name>
-      <action>액션</action>
-      <label>템플릿</label>
-      <icon>아이콘</icon>
+      <action>Action</action>
+      <label>Template</label>
+      <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>템플릿 추가</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1555,12 +1555,12 @@
   <UIOthersTemplateList>
     <header>
       <name>Type</name>
-      <label>템플릿</label>
-      <icon>아이콘</icon>
-      <action>액션</action>
+      <label>Template</label>
+      <icon>Icon</icon>
+      <action>Action</action>
     </header>
     <action>
-      <AddNew>템플릿 추가</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1578,29 +1578,29 @@
 
   <UITabPane>
     <title>
-      <ContentTemplateContainer>내용</ContentTemplateContainer>
-      <CateTemplateContainer>내비게이션</CateTemplateContainer>
+      <ContentTemplateContainer>Content</ContentTemplateContainer>
+      <CateTemplateContainer>Navigation</CateTemplateContainer>
       <PageTemplateContainer>Paginator</PageTemplateContainer>
     </title>
   </UITabPane>
 
   <UICLVTemplateList>
     <title>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <header>
-      <title>이름</title>
-      <action>액션</action>
-      <template>템플릿</template>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Template</template>
     </header>
     <action>
-      <AddTemplate>템플릿 추가</AddTemplate>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <AddTemplate>Add Template</AddTemplate>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
     <msg>
-      <confirm-delete>정말로 이 템플릿을 삭제하시겠습니까?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
       <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
@@ -1609,31 +1609,31 @@
 
   <CateTemplateList>
     <header>
-      <title>이름</title>
-      <action>액션</action>
-      <template>템플릿</template>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Template</template>
     </header>
     <title>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
     <action>
-      <AddTemplate>템플릿 추가</AddTemplate>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <AddTemplate>Add Template</AddTemplate>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </CateTemplateList>
 
   <PageTemplateList>
     <header>
-      <title>이름</title>
-      <action>액션</action>
-      <template>템플릿</template>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Template</template>
     </header>
     <action>
-      <AddTemplate>템플릿 추가</AddTemplate>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <AddTemplate>Add Template</AddTemplate>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </PageTemplateList>
 
@@ -1676,13 +1676,13 @@
   <UICLVTemplateForm_ContentTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>이름</title>
+      <title>Name</title>
       <template>Template Name</template>
-      <content>내용</content>
+      <content>Content</content>
       <type>Template Type</type>
     </label>
   </UICLVTemplateForm_ContentTemplateContainer>
@@ -1690,13 +1690,13 @@
   <UICLVTemplateForm_PageTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>이름</title>
+      <title>Name</title>
       <template>Template Name</template>
-      <content>내용</content>
+      <content>Content</content>
       <type>Template Type</type>
     </label>
   </UICLVTemplateForm_PageTemplateContainer>
@@ -1704,25 +1704,25 @@
   <UICLVTemplateForm_CateTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>이름</title>
+      <title>Name</title>
       <template>Template Name</template>
-      <content>내용</content>
+      <content>Content</content>
       <type>Template Type</type>
     </label>
   </UICLVTemplateForm_CateTemplateContainer>
   <UICLVTemplateForm>
     <label>
       <paginators>Paginator</paginators>
-      <list>내용</list>
-      <navigation>내비게이션</navigation>
+      <list>Content</list>
+      <navigation>Navigation</navigation>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>초기화</Reset>
+      <Reset>Reset</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1737,12 +1737,12 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>퍼미션 선택기</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>퍼미션 선택</UIPermissionSelector>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
@@ -1753,7 +1753,7 @@
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
-      <UIPopupWindow>퍼미션 보기</UIPopupWindow>
+      <UIPopupWindow>View Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
       <content>Content:</content>
       <name>Name:</name>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>퍼미션 선택기</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>퍼미션 선택기</UIPermissionSelector>
+      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1797,8 +1797,8 @@
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1814,7 +1814,7 @@
   <UITemplateEditForm>
     <label>
       <name>Name:</name>
-      <label>라벨:</label>
+      <label>Label:</label>
       <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
     <action>
@@ -1830,7 +1830,7 @@
   -->
   <UIDialogTab>
     <header>
-      <name>이름</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -1841,8 +1841,8 @@
     </msg>
     <action>
       <title>
-        <Edit>편집</Edit>
-        <Delete>삭제</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1853,7 +1853,7 @@
   -->
   <UIViewTab>
     <header>
-      <name>이름</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -1864,8 +1864,8 @@
     </msg>
     <action>
       <title>
-        <Edit>편집</Edit>
-        <Delete>삭제</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1888,7 +1888,7 @@
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1914,7 +1914,7 @@
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>아이콘 선택</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Icon</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -1924,10 +1924,10 @@
   -->
   <UIQueriesList>
     <header>
-      <name>이름</name>
+      <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>권한</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>권한</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>퍼미션 선택기</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -1995,11 +1995,11 @@
       <name>Style Name</name>
       <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <title>
-      <Edit>편집</Edit>
-      <Delete>삭제</Delete>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
       <Remove>Remove</Remove>
     </title>
     <action>
@@ -2013,7 +2013,7 @@
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
-      <UpdateStyle>갱신</UpdateStyle>
+      <UpdateStyle>Update</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -2087,17 +2087,17 @@
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2118,7 +2118,7 @@
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>선택</Select>
+      <Select>Select</Select>
     </title>
   </authInputSet>
   <!--
@@ -2126,23 +2126,23 @@
   -->
   <UIViewContainer>
     <title>
-      <View>보기</View>
-      <EditInfo>편집</EditInfo>
-      <Delete>삭제</Delete>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
     <label>
-      <permission>{1}의 {0}</permission>
+      <permission>{0} in {1}</permission>
     </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>편집</EditInfo>
-      <Delete>삭제</Delete>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
     </title>
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>퍼미션 추가</AddPermission>
+      <AddPermission>Add Permission</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2158,17 +2158,17 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectUser>사용자 선택</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectUser>사용자 선택</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2192,12 +2192,12 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
+      <selectGroup>Select Group</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2210,9 +2210,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectUser>사용자 선택</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2253,8 +2253,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>그룹</group>
-      <searchUser>사용자</searchUser>
+      <group>Group</group>
+      <searchUser>User</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>권한</permissions>
+      <permissions>Permissions</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2314,7 +2314,7 @@
   <UILockHolderList>
     <header>
       <name>Groups or Users</name>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <DeleteLock>Delete Group</DeleteLock>
@@ -2325,9 +2325,9 @@
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>제목</name>
+      <name>Title</name>
       <hoderLock>Lock Owner</hoderLock>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <tooltip>
       <UnLock>UnLock</UnLock>
@@ -2355,7 +2355,7 @@
     <action>
       <AddTabForm>Add Tab</AddTabForm>
       <AddTab>#{word.save}</AddTab>
-      <BackViewForm>뒤로</BackViewForm>
+      <BackViewForm>Back</BackViewForm>
     </action>
   </UIViewFormTabPane>
 
@@ -2375,7 +2375,7 @@
 
   <UISkinTab>
     <header>
-      <name>이름</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
@@ -2386,8 +2386,8 @@
     </msg>
     <action>
       <title>
-        <Edit>편집</Edit>
-        <Delete>삭제</Delete>
+        <Edit>Edit</Edit>
+        <Delete>Delete</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2425,22 +2425,22 @@
   </UITaxonomyTreeContainer>
   <UITaxonomyTreeMainForm>
     <action>
-      <NextViewPermission>다음</NextViewPermission>
+      <NextViewPermission>Next</NextViewPermission>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <NextAddAction>다음</NextAddAction>
-      <Previous>이전</Previous>
+      <NextAddAction>Next</NextAddAction>
+      <Previous>Previous</Previous>
     </action>
   </UIPermissionTreeForm>
 
   <UIActionForm>
     <action>
-      <PreviousViewPermission>이전</PreviousViewPermission>
-      <NextViewTree>다음</NextViewTree>
+      <PreviousViewPermission>Previous</PreviousViewPermission>
+      <NextViewTree>Next</NextViewTree>
     </action>
     <msg>
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
@@ -2450,7 +2450,7 @@
 
   <UITaxonomyTreeWorkingArea>
     <action>
-      <Previous>이전</Previous>
+      <Previous>Previous</Previous>
     </action>
   </UITaxonomyTreeWorkingArea>
 
@@ -2464,11 +2464,11 @@
   <UITagPermissionInfo>
     <header>
       <usersOrGroups>User or Group</usersOrGroups>
-      <action>액션</action>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <Delete>삭제</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
@@ -2476,23 +2476,23 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>퍼미션 추가</title>
+    <title>Add Permission</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>추가</Add>
+      <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>그룹 선택</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2537,7 +2537,7 @@
 
   <UIViewFormTabPane>
     <label>
-      <addCategory>카테고리 추가</addCategory>
+      <addCategory>Add Category</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
     </label>
   </UIViewFormTabPane>

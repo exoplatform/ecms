@@ -977,7 +977,7 @@
       <watchDocument>Stebėti dokumentą</watchDocument>
       <taggingDocument>Dokumento žyma</taggingDocument>
       <viewMetadatas>Peržiūrėti metaduomenis</viewMetadatas>
-      <overloadThumbnail>Perkrovos miniatūros</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Slėpti/Rodyti turinį</manageHidden>
       <comment>Komentuoti</comment>
       <vote>Balsuoti</vote>
@@ -990,7 +990,7 @@
       <addSymLink>Pridėti nuorodą</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Dalintis</shareDocuments>
+      <shareDocuments>Bendrinti</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a new version</uploadNewVersion>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Pasirinkti narystę</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Pasirinkti vaidmenį</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
-      <selectMembership>Pasirinkti narystę</selectMembership>
+      <selectMembership>Pasirinkti vaidmenį</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Pasirinkti vartotoją</SelectUser>
-      <SelectMember>Pasirinkti narystę</SelectMember>
+      <SelectMember>Pasirinkti vaidmenį</SelectMember>
       <AddAny>Kiekvienas</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Pasirinkti vartotoją</UIGroupSelector>
       <UIPermissionSelector>Pasirinkti narį</UIPermissionSelector>
-      <UIGroupMemberSelector>Pasirinkti narystę</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pasirinkti vaidmenį</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectUser>Pasirinkti vartotoją</selectUser>
-      <selectMembership>Pasirinkti narystę</selectMembership>
+      <selectMembership>Pasirinkti vaidmenį</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectUser>Pasirinkti vartotoją</selectUser>
-      <selectMembership>Pasirinkti narystę</selectMembership>
+      <selectMembership>Pasirinkti vaidmenį</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Pasirinkti narystę</selectMembership>
+      <selectMembership>Pasirinkti vaidmenį</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectUser>Pasirinkti vartotoją</selectUser>
-      <selectMembership>Pasirinkti narystę</selectMembership>
+      <selectMembership>Pasirinkti vaidmenį</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Pridėti</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Ši narystė jau egzistuoja. Prašome pasirinkti kitą.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
-      <selectMembership>Pasirinkti narystę</selectMembership>
+      <selectMembership>Pasirinkti vaidmenį</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

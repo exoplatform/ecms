@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Izberi članstvo</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Izberi vlogo</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Izberi uporabnika</SelectUser>
-      <SelectMember>Izberi članstvo</SelectMember>
+      <SelectMember>Izberi vlogo</SelectMember>
       <AddAny>Kdorkoli</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Izberi uporabnika</UIGroupSelector>
       <UIPermissionSelector>Izberi člana</UIPermissionSelector>
-      <UIGroupMemberSelector>Izberi članstvo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Izberi vlogo</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Dodaj</Add>
     </action>
     <label>
-      <userOrGroup>Članstva:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>To članstvo že obstaja. Izberite drugo.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
-      <selectMembership>Izberi članstvo</selectMembership>
+      <selectMembership>Izberi vlogo</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Select User</UIPermissionUser>
-      <UIPermissionMembership>Pumili ng Pagpapa-miyembro</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Pumili ng Pagpapa-miyembro</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Pumili ng tungkulin</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Pumili ng tungkulin</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Pumili ng Pagpapa-miyembro</selectUser>
+      <selectUser>Pumili ng tungkulin</selectUser>
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>Pumili ng Pagpapa-miyembro</selectMembership>
+      <selectMembership>Pumili ng tungkulin</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

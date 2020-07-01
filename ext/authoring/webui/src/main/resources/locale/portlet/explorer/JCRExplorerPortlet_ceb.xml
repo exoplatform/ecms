@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Mangayug katahuran nga dawaton</PublicationRequestApproval>
-      <PublicationApproveContent>Nadawat nga sulod</PublicationApproveContent>
-      <PublicationPublish>Namantala</PublicationPublish>
+      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
+      <PublicationApproveContent>Approve Content</PublicationApproveContent>
+      <PublicationPublish>Publish</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Selezionare</select>
+        <select>Seleziona</select>
       </title>
     </action>
   </UITreeList>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Seleziona Utente</UIPermissionUser>
-      <UIPermissionMembership>Seleziona Membership</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Seleziona Membership</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Seleziona ruolo</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Seleziona ruolo</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Seleziona Membership</selectUser>
+      <selectUser>Seleziona ruolo</selectUser>
       <selectGroup>Sfoglia e scegli un gruppo</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Seleziona il Gruppo</selectGroup>
-      <selectMembership>Seleziona Membership</selectMembership>
+      <selectMembership>Seleziona ruolo</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

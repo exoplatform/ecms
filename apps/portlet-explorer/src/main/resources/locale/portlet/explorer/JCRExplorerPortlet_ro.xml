@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Selectaţi utilizatorul</SelectUser>
-      <SelectMember>Selectaţi statutul de membru</SelectMember>
+      <SelectMember>Selectaţi rolul</SelectMember>
       <AddAny>Selectaţi toată lumea</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Selectaţi utilizator</UIGroupSelector>
       <UIPermissionSelector>Selectaţi membru</UIPermissionSelector>
-      <UIGroupMemberSelector>Selectaţi statutul de membru</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selectaţi rolul</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1350,9 +1350,9 @@
       <empty>Faceți clic aici pentru a adăuga un rezumat</empty>
     </summary>
     <tooltip>
-      <original>Versiunea Originală</original>
+      <original>Original Version</original>
       <version>Versiune</version>
-      <baseVersion>Versiunea de bază</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Adaugă eticheta</addLabel>
       <removeLable>Eliminaţi eticheta</removeLable>
       <restoreVersion>Restabilire versiune</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Selectare grup</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi statutul de membru</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi statutul de membru</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

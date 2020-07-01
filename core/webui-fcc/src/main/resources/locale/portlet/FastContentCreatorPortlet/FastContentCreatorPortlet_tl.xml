@@ -11,9 +11,9 @@
       <access-denied>Ang access ay hindi tinatanggap. Wala kang pahintulot sa '{0}'.</access-denied>
       <path-not-found>Ang path '{0}' na ito ay tinanggal na o hindi wasto.</path-not-found>
       <node-locked>Ang node '{0}' ay naka-lock. Mangyaring ang node ay i-unlock bago gumawa ng mga dokumento.</node-locked>
-      <node-isExist>Ang node na ito ay nandito na sa '{0}' at hindi pinahihintulutan na maging pareho ang pangalan sa kapatid nito.</node-isExist>
-      <get-dialog-path>May naganap na problema habang kumukuha ng landas ng dialogo.</get-dialog-path>
-      <new-jcr-template>Naganap ang isang problema habang lumilikha ng bagong template.</new-jcr-template>
+      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
+      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
+      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>I-save ang lokasyon</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Pumili ng workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Opsyon para sa template</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Lokasyon sa pag-save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Pumili ng template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Pasadyang pindutan ng save</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Pasadyang save ng mensahe</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Pag-redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Pag-redirect ng landas:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Ang mga pagkilos</UIFCCActionField>
+      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Pumili ng Template</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Actions</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Nagtagumpay ang pag-save sa mga kagustuhan sa portlet.</save-successfully>
-      <item-not-found>Ang landas na ito ay hindi wasto.</item-not-found>
-      <fileType-empty>Mangyaring pumili ng isang uri na file bago ang pagsasaayos nito ay i-save.</fileType-empty>
-      <ws-empty>Mangyaring pumili ka ng isang workspace.</ws-empty>
-      <action-empty>Mangyaring pumili ng folder na may pagkilos.</action-empty>
-      <message-empty>Ang patlang ng "Pasadyang I-save ang Mensahe" ay kinakailangan kung ayaw mong piliin ang opsyun na pag-redirect, o ang landas ay walang laman.</message-empty>
-      <get-template>May naganap na problema habang ina-access ang template.</get-template>
-      <set-template-option>May naganap na problema habang tinatakda ang opsyon ng template.</set-template-option>
-      <do-select>May naganap na problema habang pinipili ang lokasyon.</do-select>
+      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
+      <item-not-found>This path is invalid.</item-not-found>
+      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
+      <ws-empty>Please select one workspace.</ws-empty>
+      <action-empty>Please select a folder with an action.</action-empty>
+      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
+      <get-template>An error occurred while accessing the template.</get-template>
+      <set-template-option>An error occurred while setting the template option.</set-template-option>
+      <do-select>An error occurred while selecting the location.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,57 +52,57 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Piliin ang landas</SelectPath>
+      <SelectPath>Pumili ng Path</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Ang Pangalan</name>
-      <description>Ang Paglalarawan</description>
-      <instanceOf>Halimbawa ng</instanceOf>
-      <action>Ang kilos</action>
+      <name>Name</name>
+      <description>Description</description>
+      <instanceOf>Instance of</instanceOf>
+      <action>Action</action>
     </header>
     <action>
-      <Add>Ang Magdagdag</Add>
+      <Add>Add</Add>
     </action>
     <msg>
-      <empty>Walang mga kilos</empty>
-      <remove-popup-first>Dapat munang isara ang pag-edit ng pop-up bago tanggalin ang node na ito.</remove-popup-first>
-      <confirm-delete-action>Sigurado ka bang gusto mong burahin ang kilos na ito?</confirm-delete-action>
-      <template-empty>Ang template na '{0}' ay wala o walang laman.</template-empty>
-      <template-null>Ang template ay wala o walang laman, o ikaw ay walang pahintulot upang ma-access ang template na ito.</template-null>
-      <access-denied>Hindi pinahintulutan. Ikaw ay walang pahintulot upang maisagawa ang pagkilos na ito.</access-denied>
+      <empty>No actions</empty>
+      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
+      <confirm-delete-action>Sigurado kaba na gusto mong i-delete ang aksyong ito?</confirm-delete-action>
+      <template-empty>The template of '{0}' is null or empty.</template-empty>
+      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
+      <access-denied>Ang pag-akses ay hindi pinahintulotan. Wala kang permisong i-perform ang aksyong ito.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Piliin ang Lokasyon</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
       <workspaceName>Ang Workspace:</workspaceName>
-      <rootNodePath>Ang landas ng Ugat:</rootNodePath>
-      <rootNodeInfo>Ang Node ng Ugat</rootNodeInfo>
+      <rootNodePath>Ang Root Path:</rootNodePath>
+      <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Magdagdag ng Node ng Ugat</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>Ang node na ito ay walang mga bata.</child-not-found>
+      <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Ang Pangalan</name>
-      <action>Ang kilos</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
@@ -113,54 +113,54 @@
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Magdagdag/Mag-edit ng kilos</title>
+    <title>Magdagdag/Mag-edit ng Aksyon</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Hindi mai-save ang aksyon na ito. Ang pangalan na ibinigay ay hindi dapat magkaroon ng indeks bilang huling elemento nito.</repository-exception>
-      <numberformat-exception>Hindi mai-save ang aksyon na ito. Ang pangalan na ibinigay ay hindi dapat magkaroon ng '[' o ']'.</numberformat-exception>
-      <existed-action>Ang pangalan ng kilos '{0}' ay umiiral na. Mangyari pumili ng ibang pangalan.</existed-action>
-      <unable-add-action>Hindi maidagdag ang aksyon na ito.</unable-add-action>
-      <unable-add>Ang kilos na ito ay hindi maidagdag. Ang node na ito ay ugat o wala kang pahintulot.</unable-add>
-      <not-support>Ang dialog na '{0}' ay hindi suportado.</not-support>
-      <no-permission-add>Walang kang pahintulot. Ikaw ay walang karapatan na magdagdag ng isang kilos dito.</no-permission-add>
-      <access-denied>Walang kang pahintulot. Ikaw ay walang pahintulot upang ma-access ang template na ito.</access-denied>
+      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
+      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
+      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
+      <unable-add-action>Unable to add this action.</unable-add-action>
+      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
+      <not-support>The dialog '{0}' is not supported.</not-support>
+      <no-permission-add>Hindi tinanggap ang pag-akses. Wala kang pahintulot na magdagdag ng aksyon dito.</no-permission-add>
+      <access-denied>Hindi tinanggap ang pag-akses. Wala kang permiso na mag-akses sa template na ito.</access-denied>
     </msg>
     <validator>
       <validator>Ang Validator</validator>
-      <destPath>Sa Landas</destPath>
+      <destPath>Mayroong Path</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Lumikha ng isang Aksyon na Uri</actionType>
+      <actionType>Create an Action of Type</actionType>
     </label>
     <msg>
       <not-support>Hindi mai-load ang template ng '{0}'.</not-support>
-      <do-not-permission>Ikaw ay walang pahintulot na i-load ang template ng '{0}'.</do-not-permission>
+      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Pumili ng lokasyon</UIOneNodePathSelector>
-      <UIPermissionSelector>Pahintulot na Browser</UIPermissionSelector>
-      <UICategoriesSelector>Magdagdag ng Mga Kategorya</UICategoriesSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIPermissionSelector>Ang Browser sa Permiso</UIPermissionSelector>
+      <UICategoriesSelector>Magdagdag ng mga Kategorya</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Ang patlang na '{0}' kasama ang halaga na '{1}' ay di-wasto.</Invalid-input>
+      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Piliin ang Mga Kategorya</UICategoriesSelectPanel>
+      <UICategoriesSelectPanel>Pumili ng mga Kategorya</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Ang Reperensiyang mga Kategorya</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
@@ -173,19 +173,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Magdagdag ng Mga Kategorya</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Magdagdag ng mga Kategorya</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Kahoy ng Kategorya</taxonomyTree>
+      <taxonomyTree>Ang Category Tree</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Tagapili ng Kategorya</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

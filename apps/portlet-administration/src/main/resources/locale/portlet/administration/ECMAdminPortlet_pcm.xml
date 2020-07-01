@@ -53,7 +53,7 @@
       <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
-      <add>Join</add>
+      <add>Add</add>
       <paste>Paste</paste>
       <cut>Cut</cut>
       <copy>Copy</copy>
@@ -129,7 +129,7 @@
       <read>Read</read>
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
-      <remove>Comot</remove>
+      <remove>Remove</remove>
       <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
@@ -314,12 +314,12 @@
     <header>
       <name>Element Name</name>
       <type>Type</type>
-      <description>Describe Something</description>
+      <description>Description</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Describe Something</description>
+      <description>Description</description>
     </info>
     <tab>
       <element>Elements</element>
@@ -467,7 +467,7 @@
     <action>
       <Export>Export</Export>
       <Import>Import</Import>
-      <Add>Join</Add>
+      <Add>Add</Add>
     </action>
     <tooltip>
       <View>View</View>
@@ -486,7 +486,7 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Join</Add>
+      <Add>Add</Add>
     </action>
     <header>
       <icon>Icon</icon>
@@ -550,7 +550,7 @@
       <AddConstraints>Add Constraints</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Add Type</AddType>
-      <AddValue>Join</AddValue>
+      <AddValue>Add</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -855,11 +855,11 @@
     </title>
     <header>
       <tabName>Tab</tabName>
-      <localizeButtons>Describe Something</localizeButtons>
+      <localizeButtons>Description</localizeButtons>
       <action>Actions</action>
     </header>
     <action>
-      <AddTab>Join</AddTab>
+      <AddTab>Add</AddTab>
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
@@ -904,7 +904,7 @@
 
   <UIViewPermissionForm>
     <action>
-      <Add>Join</Add>
+      <Add>Add</Add>
     </action>
     <label>
       <userOrGroup>User or Group</userOrGroup>
@@ -986,7 +986,7 @@
       <publicationRequestApproval>Request Approval</publicationRequestApproval>
       <publicationApproveContent>Approve Content</publicationApproveContent>
       <publicationPublish>Publish</publicationPublish>
-      <contentNavigation>To dey navigate content</contentNavigation>
+      <contentNavigation>Content Navigation</contentNavigation>
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>Choose User</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1058,7 +1058,7 @@
       <action>Action</action>
     </header>
     <action>
-      <Add>Join</Add>
+      <Add>Add</Add>
     </action>
     <msg>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
@@ -1304,14 +1304,14 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Choose User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Choose User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1324,8 +1324,8 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1439,7 +1439,7 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
-      <remove>Comot</remove>
+      <remove>Remove</remove>
       <action>Action</action>
     </header>
     <msg>
@@ -1451,8 +1451,8 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Choose User</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Everyone</AddAny>
     </title>
   </permission>
@@ -1463,15 +1463,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Choose User</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectUser>Choose User</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
@@ -1484,7 +1484,7 @@
       <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
-      <remove>Comot</remove>
+      <remove>Remove</remove>
     </label>
     <title>Add permission to this node</title>
     <action>
@@ -2000,7 +2000,7 @@
     <title>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
-      <Remove>Comot</Remove>
+      <Remove>Remove</Remove>
     </title>
     <action>
       <AddStyle>Add Style</AddStyle>
@@ -2158,17 +2158,17 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectUser>Choose User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectUser>Choose User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2192,12 +2192,12 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>Choose Group</selectGroup>
+      <selectGroup>Select Group</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select Membership</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2210,9 +2210,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectUser>Choose User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2254,7 +2254,7 @@
         <email>#{word.email}</email>
       </option>
       <group>Group</group>
-      <searchUser>Person</searchUser>
+      <searchUser>User</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2409,7 +2409,7 @@
   <UITagManager>
     <action>
       <title>
-        <RemoveStyle>Comot</RemoveStyle>
+        <RemoveStyle>Remove</RemoveStyle>
         <AddStyle>Add Style</AddStyle>
       </title>
     </action>
@@ -2479,20 +2479,20 @@
     <title>Add Permission</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Join</Add>
+      <Add>Add</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Choose Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2509,7 +2509,7 @@
   <UIActionForm>
     <title>
       <ShowComponent>Open Window</ShowComponent>
-      <removeReference>Comot</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>
@@ -2550,7 +2550,7 @@
   <DriveInputSet>
     <title>
       <ChooseNodeType>Select Node Types</ChooseNodeType>
-      <RemoveNodeType>Comot</RemoveNodeType>
+      <RemoveNodeType>Remove</RemoveNodeType>
     </title>
   </DriveInputSet>
   <PopupNodeTypeSelector>

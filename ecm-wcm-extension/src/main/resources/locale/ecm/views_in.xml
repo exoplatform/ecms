@@ -5,7 +5,7 @@
     <label>
       <languages>
         <en>Inggris</en>
-        <fr>Perancis</fr>
+        <fr>Prancis</fr>
         <ru>Rusia</ru>
         <vi>Vietnam</vi>
         <nl>Belanda</nl>
@@ -23,11 +23,11 @@
     <view>
       <label>
         <postedBy>Komentar terakhir dikirim oleh</postedBy>
-        <at>pada</at>
+        <at>di</at>
         <comments>Komentar(s)</comments>
         <show-comments>Tampilkan komentar</show-comments>
         <hide-comments>Sembunyikan komentar</hide-comments>
-        <comment-by>Dikomentari oleh</comment-by>
+        <comment-by>Di komentari oleh</comment-by>
         <email>Email</email>
         <site>Situs</site>
         <lastComment>Komentar terakhir dikirim oleh {user} di {time}</lastComment>
@@ -54,12 +54,13 @@
         <pdf-max-size>Pratinjau tidak tersedia untuk konten yang lebih besar dari {0} MB.</pdf-max-size>
         <pdf-max-page>Pratinjaunya tidak tersedia untuk konten dengan lebih dari {0} halaman.</pdf-max-page>
         <using-webDAV>atau Buka di MS Office</using-webDAV>
-        <open-on-desktop>Buka di Desktop</open-on-desktop>
+        <open-on-desktop>Buka pada Desktop</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Buka di Dokumen</open-in-documents>
         <open-in-documents-tooltip>Buka berkas ini di aplikasi dokumen</open-in-documents-tooltip>
         <file-size-too-big>Isi dari berkas ini terlalu besar. anda seharusnya mengunduh dan membuka di klien.</file-size-too-big>
         <webDAV>Tampilan WebDAV</webDAV>
-        <download>Unduh</download>
+        <download>unggah</download>
         <htmlview>Tampilkan sebagai HTML</htmlview>
         <plaintextview>Tampilkan sebagai teks biasa</plaintextview>
       </label>
@@ -72,8 +73,8 @@
   <Mail>
     <view>
       <label>
-        <from>Dari:</from>
-        <to>Untuk:</to>
+        <from>Diri:</from>
+        <to>Ke:</to>
         <cc>Cc:</cc>
         <date>Tanggal:</date>
         <subject>Subyek:</subject>
@@ -87,7 +88,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Menilai</avg-rating>
+        <avg-rating>Nilai</avg-rating>
         <subscription>Suara</subscription>
       </label>
     </view>
@@ -101,7 +102,7 @@
         <name>Nama</name>
         <versionable>Dapat dihitung</versionable>
         <exo_owner>Pemilik</exo_owner>
-        <exo_dateCreated>Tanggal Pembuatan</exo_dateCreated>
+        <exo_dateCreated>Tanggal Diciptakan</exo_dateCreated>
         <exo_dateModified>Tanggal Modifikasi</exo_dateModified>
         <auditing>Memeriksa</auditing>
       </label>
@@ -128,7 +129,7 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Nama Aksi</action-name>
+        <action-name>Nama tindakan</action-name>
         <lifecycle>Lingkaran kehidupan</lifecycle>
         <description>Deskripsi</description>
       </label>
@@ -164,19 +165,19 @@
         <publisher>Penerbit</publisher>
         <description>Deskripsi</description>
         <rights>Hak</rights>
-        <relation>Hubungan</relation>
+        <relation>Relasi</relation>
         <format>Format</format>
         <coverage>Cakupan</coverage>
         <identifier>Pengenal</identifier>
         <languages>Bahasa</languages>
       </label>
       <action>
-        <add-edit>Tambah/Ubah</add-edit>
+        <add-edit>Tambahkan/Ubah</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Tambah / Ubah Properti</add-edit>
+        <add-edit>Tambahkan/Ubah Properti</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -196,7 +197,7 @@
     <view>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
+        <nodetypes>Jenis node</nodetypes>
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
         <nodeTypeName>Nama Jenis simpul</nodeTypeName>
       </label> 
@@ -207,7 +208,7 @@
     <view>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes> 
+        <nodetypes>Jenis node</nodetypes> 
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
         <nodeTypeName>Nama Jenis simpul</nodeTypeName>
       </label> 
@@ -218,7 +219,7 @@
     <view>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
+        <nodetypes>Jenis node</nodetypes>
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
         <nodeTypeName>Nama Jenis simpul</nodeTypeName>
       </label> 
@@ -229,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Deskripsi suara</Play-audio-description-of-this-video>
-      <Read-more>Baca lebih banyak</Read-more>
+      <Read-more>Read more</Read-more>
       <Read-less>Kurang Baca</Read-less>
       <Switch-back-to-original-video>Video asli</Switch-back-to-original-video>
       </label>

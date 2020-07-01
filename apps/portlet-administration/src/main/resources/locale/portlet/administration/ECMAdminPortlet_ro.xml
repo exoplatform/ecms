@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Selectaţi statutul de membru</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Selectaţi rolul</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
-      <selectMembership>Selectaţi statutul de membru</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Selectaţi utilizator</SelectUser>
-      <SelectMember>Selectaţi statutul de membru</SelectMember>
+      <SelectMember>Selectaţi rolul</SelectMember>
       <AddAny>Toată lumea</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Selectaţi utilizator</UIGroupSelector>
       <UIPermissionSelector>Selectaţi membru</UIPermissionSelector>
-      <UIGroupMemberSelector>Selectaţi statutul de membru</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selectaţi rolul</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi statutul de membru</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizatorul</selectUser>
-      <selectMembership>Selectaţi statutul de membru</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Selectaţi statutul de membru</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi statutul de membru</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Adaugă</Add>
     </action>
     <label>
-      <userOrGroup>Membrii:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Apartenența există deja. Vă rugăm să selectaţi alta.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
-      <selectMembership>Selectați apartenența</selectMembership>
+      <selectMembership>Selectaţi rolul</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

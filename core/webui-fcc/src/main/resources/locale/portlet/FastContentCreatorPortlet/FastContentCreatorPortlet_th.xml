@@ -2,8 +2,8 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>ชื่อนี้จะไม่ได้รับอนุญาต.</name-not-allowed>
-      <in-versioning>กรุณาตรวจสอบปมก่อนที่จะเพิ่มโหนใหม่</in-versioning>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <in-versioning>Please check the current node before adding a new node.</in-versioning>
       <cannot-save>An error occurred while saving the node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Cannot load the template of '{0}'.</not-support>
@@ -27,7 +27,7 @@
       <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Template Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>เลือกแม่แบบ</UIFCCTemplateFormSelectBox>
+      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>

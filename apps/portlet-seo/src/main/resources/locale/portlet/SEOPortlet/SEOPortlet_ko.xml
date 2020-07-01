@@ -3,7 +3,7 @@
   <UISEOForm>
     <label>  
       <title>Title:</title>
-      <description>설명:</description>
+      <description>Description:</description>
       <keywords>Keywords:</keywords>
       <language>Language:</language>
       <robots>Robots:</robots>
@@ -12,15 +12,15 @@
     <isInherited>Inherited from parent page</isInherited>
       <priority>Priority:</priority>
       <frequency>Frequency:</frequency>
-      <select-language>언어 선택</select-language>
+      <select-language>Select a language</select-language>
       <option>
-        <Always>항상</Always>
+        <Always>Always</Always>
         <Hourly>Hourly</Hourly>
         <Daily>Daily</Daily>
         <Weekly>Weekly</Weekly>
         <Monthly>Monthly</Monthly>
         <Yearly>Yearly</Yearly>
-        <Never>사용안함</Never>
+        <Never>Never</Never>
       </option> 
     </label>
     <tip>
@@ -35,7 +35,7 @@
       <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>삭제</seo-delete>
+    <seo-delete>Delete</seo-delete>
     </title>
   <help> 
   <priority>Valid values range from 0.0 to 1.0.</priority>
@@ -45,12 +45,12 @@
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>SEO 관리</UISEOForm>
+      <UISEOForm>SEO Management</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>SEO 관리</seo>
+      <seo>SEO Management</seo>
   </title>
   <label>
     <seo>SEO</seo>

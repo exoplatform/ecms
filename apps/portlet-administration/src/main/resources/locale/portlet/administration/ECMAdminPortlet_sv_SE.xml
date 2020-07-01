@@ -977,7 +977,7 @@
       <watchDocument>Titta på dokumentet</watchDocument>
       <taggingDocument>Tag dokument</taggingDocument>
       <viewMetadatas>Visa Metadata</viewMetadatas>
-      <overloadThumbnail>Lägg till miniatyrbild</overloadThumbnail>
+      <overloadThumbnail>Change Icon Image</overloadThumbnail>
       <manageHidden>Visa/Dölj innehåll</manageHidden>
       <comment>Kommentar</comment>
       <vote>Rösta</vote>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Välj medlemskap</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Välj grupp</selectGroup>
-      <selectMembership>Välj medlemskap</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Välj användare</SelectUser>
-      <SelectMember>Välj medlemskap</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Alla</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Välj användare</UIGroupSelector>
       <UIPermissionSelector>Välj medlem</UIPermissionSelector>
-      <UIGroupMemberSelector>Välj medlemskap</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Välj grupp</selectGroup>
       <selectUser>Välj användare</selectUser>
-      <selectMembership>Välj medlemskap</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Välj grupp</selectGroup>
       <selectUser>Välj användare</selectUser>
-      <selectMembership>Välj medlemskap</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Välj medlemskap</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Välj grupp</selectGroup>
       <selectUser>Välj användare</selectUser>
-      <selectMembership>Välj medlemskap</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Lägg till</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Detta medlemskap finns redan. Välj en annan.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Välj grupp</selectGroup>
-      <selectMembership>Välj medlemskap</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

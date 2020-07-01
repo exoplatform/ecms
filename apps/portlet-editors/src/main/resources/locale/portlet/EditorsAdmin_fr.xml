@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2020 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <editors>
+    <admin>
+    <page>Administration des éditeurs</page>
+      <error>
+        <ProviderNotRegistered>Le fournisseur de l'éditeur n'est pas enregistré.</ProviderNotRegistered>
+        <EmptyRequest>La demande doit contenir au moins un formulaire param (actif/permissions).</EmptyRequest>
+        <CannotGetProviders>Impossible d'obtenir la liste des fournisseurs.</CannotGetProviders>
+        <PermissionNotValid>L'autorisation spécifiée n'est pas valable. Il est probable que l'utilisateur ou le groupe n'existe pas.</PermissionNotValid>
+        <CannotLoadIdentities>Impossible de charger les identités selon des critères spécifiés</CannotLoadIdentities>
+        <CannotSavePreferredEditor>Impossible de sauvegarder l'éditeur sélectionné comme éditeur préféré.</CannotSavePreferredEditor>
+        <UnableGetData>Une erreur s'est produite lors de la lecture des données.</UnableGetData>
+        <UnablePostData>Une erreur s'est produite lors de la sauvegarde des données.</UnablePostData>
+      </error>
+      <title>Éditeurs de documents</title>
+      <table>
+        <Provider>Connecteur</Provider>
+        <Description>Description</Description>
+        <Active>Activé</Active>
+        <Permissions>Permissions</Permissions>
+      </table>
+      <modal>
+        <title>Autorisations d'édition</title>
+        <SearchLabel>Entrez un nom d'utilisateur ou d'un groupe</SearchLabel>
+        <WithPermissions>Qui a la permission</WithPermissions>
+        <None>Aucune</None>
+        <Everybody>Tout le monde</Everybody>
+      </modal>
+      <buttons>
+        <Save>Enregistrer</Save>
+        <Cancel>Annuler</Cancel>
+      </buttons>
+    </admin>
+    <buttons>
+      <EditorButton>Modifier</EditorButton>
+    </buttons>
+    <idlePopup>
+      <title>Attention</title>
+      <message>Il semble que vous n'êtes pas actif depuis un moment. La page de l'éditeur sera fermée dans %s secondes.</message>
+    </idlePopup>
+  </editors>
+</bundle>

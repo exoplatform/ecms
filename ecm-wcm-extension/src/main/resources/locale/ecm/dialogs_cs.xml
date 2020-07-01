@@ -24,11 +24,11 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Odkaz</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Jméno</name>
+      <name>Název</name>
     <categories>Kategorie</categories>
     </label>
   </UIDocumentForm>
@@ -45,7 +45,7 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Jméno</name>
+        <name>Název</name>
         <content>Obsah</content>
       </label>
     </dialog>
@@ -74,7 +74,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Heslo</password>
-      <link>Odkaz</link>
+      <link>Link</link>
       <to>Poslat E-mail</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Heslo</password>
-      <link>Odkaz</link>
+      <link>Link</link>
       <to>Poslat E-mail</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Popisek</title>
+        <title>Nadpis</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -260,7 +260,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Jméno</name>
+        <name>Název</name>
         <autoload>Automatické načtění</autoload>
         <minetype>MIME typ</minetype>
         <content>Obsah</content>
@@ -293,7 +293,7 @@
     <dialog>
       <label>
         <id>ID</id>
-        <name>Jméno</name>
+        <name>Název</name>
         <lifecycle>Cyklus</lifecycle>
         <homePath>Cesta domů</homePath>
         <targetWorkspace>Cílová pracovní plocha</targetWorkspace>
@@ -316,9 +316,9 @@
 <true>Pravda</true>
 <false>Nepravda</false>
 <Electronic>Elektronický</Electronic>
-<Paper>Papír</Paper>
+<Paper>Paper</Paper>
 <NONE>Žádný</NONE>
-<CLASSIFIED>Zařazené</CLASSIFIED>
+<CLASSIFIED>Classified</CLASSIFIED>
 <UNCLASSIFIED>Nezařazené</UNCLASSIFIED>
 <NOCONTRACT>Žádná smlouva</NOCONTRACT>
 <one-minute>Minuta</one-minute>
@@ -338,7 +338,7 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Je hluboké</isDeep>
+        <isDeep>Je hluboký</isDeep>
         <nodetypes>Typy uzlů</nodetypes>
         <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
       </label>
@@ -348,7 +348,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Je hluboké</isDeep>
+        <isDeep>Je hluboký</isDeep>
         <nodetypes>Typy uzlů</nodetypes>
         <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
       </label>
@@ -358,7 +358,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Je hluboké</isDeep>
+        <isDeep>Je hluboký</isDeep>
         <nodetypes>Typy uzlů</nodetypes>
         <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
       </label>
@@ -368,7 +368,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Je hluboké</isDeep>
+        <isDeep>Je hluboký</isDeep>
         <nodetypes>Typy uzlů</nodetypes>
         <affectedNodeTypeNames>Ovlivněné typy uzlů</affectedNodeTypeNames>
       </label>
@@ -379,7 +379,7 @@
   <dialog>
   <label>
   <captions>Titulky</captions>
-<audioDescription>Popis audia</audioDescription>
+<audioDescription>Popis zvuku</audioDescription>
 <alternativeText>Alternativní text</alternativeText>
 </label>
 </dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Aktuální uzel nepovoluje přidat typ uzlu {0}.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Došlo k neočekávané chybě. Pro další podrobnosti kontaktujte správce.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Tento dokument nelze uložit. Zadaný název musí být v číselném formátu.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

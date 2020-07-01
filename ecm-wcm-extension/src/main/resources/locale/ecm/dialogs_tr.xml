@@ -190,7 +190,7 @@
         <destination-workpsace>Hedef Çalışma Alanı</destination-workpsace>
         <destination-path>Hedef Yolu</destination-path>
         <primary-type>Birincil Türü</primary-type>
-        <mixin-types>Mixin Türleri</mixin-types>
+        <mixin-types>Mixin Türü</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Sürüm geçmişi</version-history>
-        <base-version>Temel sürüm</base-version>
+        <version-history>Sürüm Geçmişi</version-history>
+        <base-version>Temel Sürüm</base-version>
         <is-checked-out>Kullanıma alındı</is-checked-out>
         <predecessors>Öncel</predecessors>
         <merge-failed>Birleştirme başarısız oldu</merge-failed>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>E-posta adresi geçersiz.</Invalid-input>
+      <Invalid-input>E-posta adresi geçerli değil.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -316,15 +316,15 @@
 <true>Doğru</true>
 <false>Yanlış</false>
 <Electronic>Elektronik</Electronic>
-<Paper>Kağıt</Paper>
+<Paper>Evrak</Paper>
 <NONE>Hiçbiri</NONE>
-<CLASSIFIED>Gizli Bilgidir</CLASSIFIED>
-<UNCLASSIFIED>Gizli Bilgi Değildir</UNCLASSIFIED>
-<NOCONTRACT>Sözleşme yok</NOCONTRACT>
+<CLASSIFIED>Gizli (Bilgi)</CLASSIFIED>
+<UNCLASSIFIED>Sınıflandırılmamış</UNCLASSIFIED>
+<NOCONTRACT>Sözleşme Yok</NOCONTRACT>
 <one-minute>Bir Dakika</one-minute>
 <hourly>Saatlik</hourly>
 <daily>Günlük</daily>
-<quarterly>Üç Aylik</quarterly>
+<quarterly>Üç Aylık</quarterly>
 <yearly>Yıllık</yearly>
 <ten-years>On Yıllık</ten-years>
 <read>Kullanıcı Eylemi</read>
@@ -339,7 +339,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türüleri</nodetypes>
+        <nodetypes>Düğüm Türleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,7 +349,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türüleri</nodetypes>
+        <nodetypes>Düğüm Türleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -359,7 +359,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türüleri</nodetypes>
+        <nodetypes>Düğüm Türleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -369,7 +369,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türüleri</nodetypes>
+        <nodetypes>Düğüm Türleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Geçerli düğüm '{0}' düğüm türünü eklemenize izin vermez.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Beklenmeyen bir hata oluştu. Daha fazla ayrıntı için yöneticinize başvurun.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

@@ -21,7 +21,7 @@
           <word>Open in Word</word>
           <excel>Open in Excel</excel>
           <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>डेस्कटॉप पर खोलें</desktop>
+          <desktop>Open on Desktop</desktop>
           <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>

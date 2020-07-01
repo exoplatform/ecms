@@ -4,7 +4,7 @@
     <label>
       <keyword>Keyword</keyword>
       <portal>Portal</portal>
-      <Page>Oldal</Page>
+      <Page>Page</Page>
       <Document>Document</Document>
     </label>
     <action>
@@ -14,23 +14,23 @@
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Oldal</Page>
+      <Page>Page</Page>
       <Document>Document</Document>
       <DocumentAndPage>Document and Page</DocumentAndPage>
       <documentandpage>Document and Page</documentandpage>
       <results>Results {0} to {1} for {2}</results>
-      <oneResult>Csak egy eredmény {0}</oneResult>
+      <oneResult>Only one result for {0}</oneResult>
       <ofAboutCaption>of about</ofAboutCaption>
       <timeUnitCaption>seconds</timeUnitCaption>
       <similar>Pages where the same content appears</similar>
       <editor>Editor</editor>
       <date>Date</date>
-      <relevancy>Relevancia</relevancy>
-      <title>Cím</title>
-      <sortBy>Rendezés</sortBy>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Szerkesztés</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
       <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>

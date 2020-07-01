@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>انتخاب عضویت</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>انتخاب نقش</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>انتخاب کاربر</SelectUser>
-      <SelectMember>انتخاب عضویت</SelectMember>
+      <SelectMember>انتخاب نقش</SelectMember>
       <AddAny>همه</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>انتخاب کاربر</UIGroupSelector>
       <UIPermissionSelector>انتخاب عضو</UIPermissionSelector>
-      <UIGroupMemberSelector>انتخاب عضویت</UIGroupMemberSelector>
+      <UIGroupMemberSelector>انتخاب نقش</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>افزودن</Add>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>این عضویت در حال حاضر وجود دارد. لطفاً عضویت دیگری را انتخاب کنید.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
-      <selectMembership>انتخاب عضویت</selectMembership>
+      <selectMembership>انتخاب نقش</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

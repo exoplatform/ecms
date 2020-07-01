@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Tautan</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -46,7 +46,7 @@
     <dialog>
       <label>
         <name>Nama</name>
-        <content>Isi</content>
+        <content>Konten</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -74,7 +74,7 @@
       <port>Pelabuhan</port>
       <userName>#{word.userName}</userName>
       <password>Kata Sandi</password>
-      <link>Tautan</link>
+      <link>Link</link>
       <to>Kirim Surat ke</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Pelabuhan</port>
       <userName>#{word.userName}</userName>
       <password>Kata Sandi</password>
-      <link>Tautan</link>
+      <link>Link</link>
       <to>Kirim Surat ke</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Cakupan:</coverage>
         <identifier>Pengenal:</identifier>
-        <language>Language:</language>
+        <language>Bahasa:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -189,7 +189,7 @@
       <label>
         <destination-workpsace>Tujuan kerja</destination-workpsace>
         <destination-path>Jalur Tujuan</destination-path>
-        <primary-type>Tipe utama</primary-type>
+        <primary-type>Jenis utama</primary-type>
         <mixin-types>Jenis Campuran</mixin-types>
       </label>
     </dialog>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Hubungan</relation>
+        <relation>Relasi</relation>
       </label>
     </dialog>
   </Relationable>
@@ -244,7 +244,7 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Sejarah Versi</version-history>
+        <version-history>Versi Sejarah</version-history>
         <base-version>Versi dasar</base-version>
         <is-checked-out>Apakah periksa</is-checked-out>
         <predecessors>Pendahulu</predecessors>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Alamat emailnya tidak valid.</Invalid-input>
+      <Invalid-input>Alamat email tidak valid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -312,34 +312,34 @@
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 <no>Tidak</no>
-<yes>iya nih</yes>
+<yes>Ya</yes>
 <true>Benar</true>
 <false>Salah</false>
 <Electronic>Elektronik</Electronic>
 <Paper>Kertas</Paper>
-<NONE>Tak satupun</NONE>
+<NONE>Tidak ada</NONE>
 <CLASSIFIED>Rahasia</CLASSIFIED>
-<UNCLASSIFIED>Tidak diklasifikasikan</UNCLASSIFIED>
+<UNCLASSIFIED>Tidak dirahasiakan</UNCLASSIFIED>
 <NOCONTRACT>Tidak ada kontrak</NOCONTRACT>
 <one-minute>Satu menit</one-minute>
-<hourly>Sejam</hourly>
+<hourly>Per jam</hourly>
 <daily>Harian</daily>
-<quarterly>Triwulanan</quarterly>
+<quarterly>Kuartalan</quarterly>
 <yearly>Tahunan</yearly>
 <ten-years>Sepuluh tahun</ten-years>
-<read>Aksi Pengguna</read>
-  <schedule>Penjadwal</schedule>
+<read>Tindakan pengguna</read>
+  <schedule>Penjadwalan</schedule>
   <node_added>Penambahan konten</node_added>
   <node_removed>Penghapusan Konten</node_removed>
   <property_added>Penambahan Properti</property_added>
   <property_removed>Penghapusan Properti</property_removed>
-  <property_changed>Modifikasi Properti</property_changed>
+  <property_changed>Modifikasi properti</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
+        <nodetypes>Jenis node</nodetypes>
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,8 +349,8 @@
     <dialog>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
-        <affectedNodeTypeNames>Dipengaruhi jenis simpul</affectedNodeTypeNames>
+        <nodetypes>Jenis node</nodetypes>
+        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -359,7 +359,7 @@
     <dialog>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
+        <nodetypes>Jenis node</nodetypes>
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -369,7 +369,7 @@
     <dialog>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
+        <nodetypes>Jenis node</nodetypes>
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Anda tidak dapat menambahkan dokumen tipe ini '{0}' di sini.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Terjadi kesalahan tak terduga. Silahkan hubungi administrtor anda untuk informasi lebih lanjut.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Kamu tidak bisa menyimpan dokumen ini. Nama yang disediakan harus dalam format numerik.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

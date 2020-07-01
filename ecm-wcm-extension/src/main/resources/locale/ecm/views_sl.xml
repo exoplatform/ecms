@@ -29,7 +29,7 @@
         <hide-comments>Skrij komentarje</hide-comments>
         <comment-by>Komentirali</comment-by>
         <email>E-pošta</email>
-        <site>Stran</site>
+        <site>Spletno mesto</site>
         <lastComment>Zadnji je komentiral {user} ob {time}</lastComment>
         <Less_Than_A_Minute>pred manj kot eno minuto</Less_Than_A_Minute>
         <About_A_Minute>pred približno eno minuto</About_A_Minute>
@@ -55,6 +55,7 @@
         <pdf-max-page>Predogled ni na voljo za vsebine z več kot {0} strani.</pdf-max-page>
         <using-webDAV>ali Odpri v MS Office</using-webDAV>
         <open-on-desktop>Odpri na namizju</open-on-desktop>
+        <editOnline>Edit Online</editOnline>
         <open-in-documents>Odpri v Dokumentih</open-in-documents>
         <open-in-documents-tooltip>Odprite to datoteko v aplikaciji Dokumenti</open-in-documents-tooltip>
         <file-size-too-big>Vsebina datoteke je prevelika. Prenesite jo in odprite v odjemalcu.</file-size-too-big>
@@ -73,7 +74,7 @@
     <view>
       <label>
         <from>Od:</from>
-        <to>do:</to>
+        <to>Za:</to>
         <cc>Kp:</cc>
         <date>Datum:</date>
         <subject>Zadeva:</subject>
@@ -87,8 +88,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Povprečna ocena</avg-rating>
-        <subscription>Glasov</subscription>
+        <avg-rating>Ocena</avg-rating>
+        <subscription>Glasovi</subscription>
       </label>
     </view>
   </Vote>
@@ -155,7 +156,7 @@
         <not-avaliable>Ni na voljo</not-avaliable>
         <core-elements>Ključni elementi</core-elements>
         <title>Naslov</title>
-        <creator>Avtor</creator>
+        <creator>Ustvaril(a)</creator>
         <subject>Zadeva</subject>
         <source>Vir</source>
         <contributor>Sodelavec</contributor>
@@ -195,7 +196,7 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Podrobneje</isDeep>
+        <isDeep>Je globoko</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
         <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
@@ -206,7 +207,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Podrobneje</isDeep>
+        <isDeep>Je globoko</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes> 
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
         <nodeTypeName>Imena vrst vozlišč</nodeTypeName>
@@ -217,7 +218,7 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Podrobneje</isDeep>
+        <isDeep>Je globoko</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
         <nodeTypeName>Imena vrst vozlišč</nodeTypeName>

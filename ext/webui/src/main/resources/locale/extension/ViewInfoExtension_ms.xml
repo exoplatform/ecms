@@ -2,20 +2,20 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>Liatlah maklumat</UIViewInfoManager>
+<UIViewInfoManager>View Information</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>Liatlah maklumat</ViewInfo>
+<ViewInfo>View Information</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Nama</name>
-      <title>Tajuk</title>
-      <type>Jenisnya</type>
+      <name>Name</name>
+      <title>Title</title>
+      <type>Type</type>
       <size>Size</size>
       <owner>Pemilik</owner>
       <lastModifier>Last Modifier</lastModifier>

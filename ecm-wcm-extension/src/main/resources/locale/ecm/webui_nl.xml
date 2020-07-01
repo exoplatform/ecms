@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Selecteer gebruiker</UIPermissionUser>
-      <UIPermissionMembership>Selecteer lidmaatschap</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Select membership</TaxoSelectUserOrGroup>
+      <UIPermissionUser>Selecteer Gebruiker</UIPermissionUser>
+      <UIPermissionMembership>Selecteer rol</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Selecteer rol</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Selecteer gebruiker</selectUser>
+      <selectUser>Selecteer Gebruiker</selectUser>
       <selectGroup>Navigeer en selecteer een groep</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Selecteer lidmaatschap</selectUser>
-      <selectGroup>Bladeren en selecteer een groep</selectGroup>
+      <selectUser>Selecteer rol</selectUser>
+      <selectGroup>Navigeer en selecteer een groep</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Selecteer Groep</selectGroup>
-      <selectMembership>Select membership</selectMembership>
+      <selectMembership>Selecteer rol</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

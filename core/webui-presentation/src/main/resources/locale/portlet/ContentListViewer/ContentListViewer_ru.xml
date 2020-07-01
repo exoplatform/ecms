@@ -23,7 +23,7 @@
       <Title>Настройки содержания</Title>
       <ContentSelectionBlock>Выбор контента</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Режим</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Поддержка нескольких языков</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Путь к папке</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Путь к папке</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Сортировать по</UICLVConfigOrderByFormSelectBox>

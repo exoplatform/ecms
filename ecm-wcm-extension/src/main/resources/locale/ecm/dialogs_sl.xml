@@ -100,7 +100,7 @@
         <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metapodatki</metadata>
+        <metadata>Meta podatki</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Odnos</relation>
+        <relation>Povezave</relation>
       </label>
     </dialog>
   </Relationable>
@@ -315,11 +315,11 @@
 <yes>Da</yes>
 <true>Pravilno</true>
 <false>Napačno</false>
-<Electronic>Elektronska</Electronic>
+<Electronic>Elektronsko</Electronic>
 <Paper>Papir</Paper>
 <NONE>Brez</NONE>
-<CLASSIFIED>Razvrščeni</CLASSIFIED>
-<UNCLASSIFIED>Nerazvrščeni</UNCLASSIFIED>
+<CLASSIFIED>Razvrščeno</CLASSIFIED>
+<UNCLASSIFIED>Nerazvrščeno</UNCLASSIFIED>
 <NOCONTRACT>Ni pogodbe</NOCONTRACT>
 <one-minute>Ena minuta</one-minute>
 <hourly>Vsako uro</hourly>
@@ -338,7 +338,7 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
+        <isDeep>Je globoko</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
@@ -348,7 +348,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
+        <isDeep>Je globoko</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
@@ -358,7 +358,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
+        <isDeep>Je globoko</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
@@ -368,7 +368,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
+        <isDeep>Je globoko</isDeep>
         <nodetypes>Vrste vozlišč</nodetypes>
         <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
       </label>
@@ -379,7 +379,7 @@
   <dialog>
   <label>
   <captions>Napisi</captions>
-<audioDescription>Avdio opis</audioDescription>
+<audioDescription>Zvočni opis</audioDescription>
 <alternativeText>Nadomestno besedilo</alternativeText>
 </label>
 </dialog>
@@ -396,6 +396,13 @@
       <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
@@ -415,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>Trenutno vozlišče ne omogoča dodajanje vozlišča tipa '{0}'.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Prišlo je do nepričakovane napake. Obrnite se na skrbnika.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Tega dokumenta ni mogoče shraniti. Ime mora biti v številski obliki.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

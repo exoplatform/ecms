@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Seleziona Utente</SelectUser>
-      <SelectMember>Seleziona Membership</SelectMember>
+      <SelectMember>Seleziona ruolo</SelectMember>
       <AddAny>Seleziona Tutti</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Seleziona Utente</UIGroupSelector>
       <UIPermissionSelector>Seleziona Membro</UIPermissionSelector>
-      <UIGroupMemberSelector>Seleziona Membership</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Seleziona ruolo</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Versione originale</original>
       <version>Versione</version>
-      <baseVersion>versione corrente</baseVersion>
+      <baseVersion>current draft</baseVersion>
       <addLabel>Aggiungi Etichetta</addLabel>
       <removeLable>Rimuovi Etichetta</removeLable>
       <restoreVersion>Ripristina Versione</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Seleziona Gruppo</selectGroup>
       <selectUser>Seleziona Utente</selectUser>
-      <selectMembership>Seleziona Membership</selectMembership>
+      <selectMembership>Seleziona ruolo</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Seleziona Gruppo</selectGroup>
       <selectUser>Seleziona Utente</selectUser>
-      <selectMembership>Seleziona Membership</selectMembership>
+      <selectMembership>Seleziona ruolo</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

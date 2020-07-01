@@ -2,25 +2,25 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>शीर्षक</title>
+      <title>Title:</title>
       <description>Description:</description>
-      <keywords>खोजशब्द:</keywords>
+      <keywords>Keywords:</keywords>
       <language>Language:</language>
-      <robots>रोबोट्स:</robots>
-      <sitemap>साइटमैप:</sitemap>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
       <sitemapvisible>Visible in Sitemap</sitemapvisible>
     <isInherited>Inherited from parent page</isInherited>
       <priority>Priority:</priority>
-      <frequency>फ्रीक्वेंसी</frequency>
+      <frequency>Frequency:</frequency>
       <select-language>Select a language</select-language>
       <option>
         <Always>Always</Always>
-        <Hourly>प्रति घंटा</Hourly>
-        <Daily>रोज़</Daily>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
         <Weekly>Weekly</Weekly>
         <Monthly>Monthly</Monthly>
-        <Yearly>वार्षिक</Yearly>
-        <Never>कभी नहीं</Never>
+        <Yearly>Yearly</Yearly>
+        <Never>Never</Never>
       </option> 
     </label>
     <tip>
@@ -50,7 +50,7 @@
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>एसईओ प्रबंधन</seo>
+      <seo>SEO Management</seo>
   </title>
   <label>
     <seo>SEO</seo>

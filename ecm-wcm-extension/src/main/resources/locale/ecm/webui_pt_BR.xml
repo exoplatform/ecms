@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Selecionar Usuário</UIPermissionUser>
-      <UIPermissionMembership>Selecionar associação</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Selecione Associação</TaxoSelectUserOrGroup>
+      <UIPermissionUser>Selecionar usuário</UIPermissionUser>
+      <UIPermissionMembership>Selecione a Função</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Selecione a Função</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Selecionar Usuário</selectUser>
+      <selectUser>Selecionar usuário</selectUser>
       <selectGroup>Selecionar grupo</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Selecionar associação</selectUser>
+      <selectUser>Selecione a Função</selectUser>
       <selectGroup>Selecionar grupo</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Selecionar Grupo</selectGroup>
-      <selectMembership>Selecione Associação</selectMembership>
+      <selectMembership>Selecione a Função</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
