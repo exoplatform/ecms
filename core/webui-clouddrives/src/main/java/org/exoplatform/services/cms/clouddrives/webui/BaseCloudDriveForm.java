@@ -18,6 +18,7 @@
  */
 package org.exoplatform.services.cms.clouddrives.webui;
 
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.core.UIPopupComponent;

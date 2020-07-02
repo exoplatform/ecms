@@ -37,7 +37,7 @@ import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudDriveManager;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
-import org.exoplatform.services.cms.clouddrives.webui.CloudDriveContext;
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;

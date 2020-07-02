@@ -26,7 +26,7 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.exoplatform.services.cms.clouddrives.webui.CloudDriveContext;
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;

@@ -21,6 +21,7 @@ package org.exoplatform.services.cms.clouddrives.webui;
 import java.util.Arrays;
 import java.util.List;
 
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.ecm.webui.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -67,7 +68,7 @@ public class OpenCloudFileManagerComponent extends UIAbstractManagerComponent {
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      //initContext();
+      CloudDriveContext.init(this);
       return "javascript:void(0);//objectId";
     }
     return super.renderEventURL(ajax, name, beanId, params);
