@@ -69,6 +69,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.portlet.PortletPreferences;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
 import java.security.AccessControlException;
 import java.util.*;
 
@@ -683,11 +684,10 @@ public class UIJCRExplorer extends UIContainer {
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class) ;
     UISideBar uiSideBar = findFirstComponentOfType(UISideBar.class);
     UITreeExplorer uiTreeExplorer = findFirstComponentOfType(UITreeExplorer.class);
-
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
-                                                                       Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
+                                                                       Text.unescapeIllegalJcrChars(filterPath(URLDecoder.decode(URLDecoder.decode(currentPath_))))) ;
     uiAddressBar.getUIInput(UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(
-	    filterPath(currentPath_)) ;
+	    filterPath(URLDecoder.decode(URLDecoder.decode(currentPath_)))) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
     UIPageIterator contentPageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
     int currentPage = contentPageIterator.getCurrentPage();
