@@ -31,6 +31,7 @@
   <import>war:/conf/dms-extension/dms/jcr-component-plugins-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-system-configuration.xml</import>  
   <import>war:/conf/dms-extension/dms/cms-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/jcr-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-templates-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-scripts-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-actions-configuration.xml</import>
