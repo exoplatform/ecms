@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.form;
 
 import java.io.InputStream;
 import java.io.Writer;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1252,7 +1253,7 @@ public class UIDialogForm extends UIForm {
           uiInput.setValue(i18nNodePath.substring(i18nNodePath.lastIndexOf("/") + 1));
         } else {
           String nameValue =  node.getPath().substring(node.getPath().lastIndexOf("/") + 1);
-          uiInput.setValue(nameValue);
+          uiInput.setValue(URLDecoder.decode(URLDecoder.decode(nameValue)));
         }
       } else if(node.hasProperty(propertyName)) {
         uiInput.setValue(node.getProperty(propertyName).getValue().getString());
