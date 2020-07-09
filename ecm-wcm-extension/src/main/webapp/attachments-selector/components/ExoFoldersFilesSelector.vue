@@ -10,7 +10,7 @@
           <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom"
              data-original-title="Documents">{{ $t('attachments.drawer.drives') }}</p>
         </div>
-        <div v-if="currentDrive.title" class="currentDrive" @click="openDrive(currentDrive)">
+        <div v-if="currentDrive" class="currentDrive" @click="openDrive(currentDrive)">
           <span class="uiIconArrowRight"></span>
           <a :title="currentDrive.title" :class="currentDrive.isSelected? 'active' : ''" class="currentDriveTitle" data-toggle="tooltip" rel="tooltip"
              data-placement="bottom">
@@ -39,9 +39,9 @@
       <div :class="showSearchInput? 'visible' : ''" class="selectorActions">
         <input id="searchServerAttachments" ref="searchServerAttachments" v-model="searchFilesFolders" type="text" class="searchInput">
         <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconFilter'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
-        <a v-if="modeFolderSelectionForFile || modeFolderSelection" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
+        <a v-if="(modeFolderSelectionForFile || modeFolderSelection) && currentDrive" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
       </div>
-      <div v-for="action in attachmentsComposerActions" v-show="!currentDrive.name || currentDrive.name === 'Personal Documents'" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
+      <div v-for="action in attachmentsComposerActions" v-show="showDriveAction" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
         <div v-if="!modeFolderSelection" class="actionBoxLogo" @click="executeAction(action)">
           <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
           <i v-else :class="action.iconClass" class="uiActionIcon"></i>
@@ -55,7 +55,7 @@
       </div>
     </transition>
     <div class="contentBody">
-      <div v-if="currentDrive.title" class="selectionBox">
+      <div v-if="currentDrive" class="selectionBox">
         <div v-if="loadingFolders" class="VuetifyApp loader">
           <v-app class="VuetifyApp">
             <v-progress-circular
@@ -140,7 +140,7 @@
       </div>
     </div>
     <div class="attachActions">
-      <div v-if="!modeFolderSelection && currentDrive.name" class="limitMessage">
+      <div v-if="!modeFolderSelection && currentDrive" class="limitMessage">
         <span :class="filesCountClass" class="countLimit">
           {{ $t('attachments.drawer.maxFileCountLeft').replace('{0}', filesCountLeft) }}
         </span>
@@ -149,7 +149,7 @@
         <button class="btn btn-primary attach ignore-vuetify-classes btnSelect" type="button" @click="selectDestination()">{{ $t('attachments.drawer.select') }}</button>
         <button class="btn btnCancel" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
       </div>
-      <div v-if="!modeFolderSelection && currentDrive.name" class="buttonActions">
+      <div v-if="!modeFolderSelection && currentDrive" class="buttonActions">
         <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
         <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes" type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}</button>
       </div>
@@ -218,11 +218,7 @@ export default {
   data() {
     return {
       workspace: 'collaboration',
-      currentDrive: {
-        name: '',
-        title: '',
-        isSelected: false
-      },
+      currentDrive: null,
       driveRootPath: '',
       drivers: [],
       folders: [],
@@ -259,6 +255,9 @@ export default {
     };
   },
   computed: {
+    showDriveAction(){
+      return this.currentDrive ? this.currentDrive.name === 'Personal Documents': true;
+    },
     filteredFolders() {
       let folders = this.folders.slice();
       if (this.searchFilesFolders && this.searchFilesFolders.trim().length){
@@ -354,7 +353,7 @@ export default {
         };
         self.fetchChildrenContents('');
       } else {
-        self.currentDrive = {};
+        self.currentDrive = null;
         this.fetchUserDrives();
       }
     }).catch(() => {
@@ -417,7 +416,7 @@ export default {
     fetchUserDrives() {
       this.resetExplorer();
       this.loadingFolders = true;
-      this.currentDrive = {};
+      this.currentDrive = null;
       this.foldersHistory = [];
       const self = this;
       attachmentsService.getDrivers().then(xml => {
