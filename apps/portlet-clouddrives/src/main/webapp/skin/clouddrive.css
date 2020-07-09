@@ -79,6 +79,58 @@
 	text-align: left !important;
 }
 
+.mediaContent .cloudfilePreviewBox {
+	width: 100%;
+	background-color: #e2e9ef;
+	height: auto;
+}
+
+.mediaContent .cloudfilePreviewBox .clouddriveIframeBox {
+	margin-left: 21px;
+	margin-right: 21px;
+	margin-top: 21px;
+	position: relative;
+	height: 100%;
+}
+
+.mediaContent .cloudfilePreviewBox .clouddriveIframeBox .cloudfilePreview {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.mediaContent .cloudfilePreviewBox .cloudfileDescript {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: white;
+}
+
+.mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileNameBox {
+	margin-left: 7%;
+	text-align: left;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileNameBox .cloudfileName {
+	margin-left: 10px;
+	font-size: medium;
+}
+
+.mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileUpdatedBox {
+	text-align: left;
+	margin-left: 7%;
+}
+
+.mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileUpdatedBox .cloudfileUpdated {
+	color: #9a9a9a;
+	font-size: smaller;
+}
+
 #ViewerSwitch {
 	position: relative;
 	/*padding-left: 7px;
