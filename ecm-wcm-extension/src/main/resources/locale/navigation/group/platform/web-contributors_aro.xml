@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <administration>
-    <siteExplorer>مُـستكشف المحتوى</siteExplorer>
-    <wcmAdmin>إدارة المحتوى</wcmAdmin>
+    <siteExplorer>المستكشف</siteExplorer>
+    <wcmAdmin>CMS Settings</wcmAdmin>
   </administration>
 </bundle>

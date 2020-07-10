@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <administration>
-    <siteExplorer>Content Explorer</siteExplorer>
-    <wcmAdmin>Správa obsahu</wcmAdmin>
+    <siteExplorer>Průzkumník</siteExplorer>
+    <wcmAdmin>CMS Settings</wcmAdmin>
   </administration>
 </bundle>

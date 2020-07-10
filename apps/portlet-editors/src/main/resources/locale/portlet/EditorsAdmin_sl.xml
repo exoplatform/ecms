@@ -26,12 +26,12 @@
       <error>
         <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
         <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
-        <CannotGetProviders>Cannot get providers list.</CannotGetProviders>
-        <PermissionNotValid>The specified permission is not valid. Probably the user or group doesn't exist.</PermissionNotValid>
-        <CannotLoadIdentities>Cannot load identites by specified criteria</CannotLoadIdentities>
-        <CannotSavePreferredEditor>Cannot save selected editor as preferred one.</CannotSavePreferredEditor>
-        <UnableGetData>An error occurred during the data reading.</UnableGetData>
-        <UnablePostData>An error occurred during the data saving.</UnablePostData>
+        <CannotGetProviders>Can't get providers list.</CannotGetProviders>
+        <PermissionNotValid>The specified permission is not valid. Maybe the user or group doesn't exist.</PermissionNotValid>
+        <CannotLoadIdentities>Can't load identities by specified criteria</CannotLoadIdentities>
+        <CannotSavePreferredEditor>Can't save selected editor as preferred one.</CannotSavePreferredEditor>
+        <UnableGetData>An error occurred while reading the data.</UnableGetData>
+        <UnablePostData>An error occurred while saving the data.</UnablePostData>
       </error>
       <title>Document editors</title>
       <table>
