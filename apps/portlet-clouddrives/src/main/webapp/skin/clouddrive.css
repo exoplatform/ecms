@@ -107,6 +107,7 @@
 	bottom: 0;
 	width: 100%;
 	background-color: white;
+	padding: 10px 0;
 }
 
 .mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileNameBox {
@@ -114,21 +115,28 @@
 	text-align: left;
 	margin-bottom: 5px;
 	margin-top: 5px;
+	display: flex;
+	align-items: flex-end;
+}
+
+.mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileNameBox i {
+	font-size: 22px;
 }
 
 .mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileNameBox .cloudfileName {
 	margin-left: 10px;
-	font-size: medium;
+	font-size: 17px;
 }
 
 .mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileUpdatedBox {
 	text-align: left;
 	margin-left: 7%;
+	margin-top: 10px;
 }
 
 .mediaContent .cloudfilePreviewBox .cloudfileDescript .cloudfileUpdatedBox .cloudfileUpdated {
 	color: #9a9a9a;
-	font-size: smaller;
+	font-size: 14px;
 }
 
 #ViewerSwitch {
@@ -292,3 +300,95 @@
 	text-align: left;
 	margin-right: 1px;
 }
+
+#connectCloudApp .cloudDriveHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#connectCloudApp .cloudDriveHeader .backButton {
+	width: 0;
+}
+
+#connectCloudApp .cloudDriveHeader .backButton .uiIconBack {
+	color: grey;
+	background: none;
+	margin: 0;
+	padding: 15px 15px 15px 0;
+	position: absolute;
+	float: left;
+	font-size: 15px;
+	cursor: pointer;
+	top: 10px;
+}
+
+#connectCloudApp .cloudDriveHeader .cloudDriveTitle {
+	font-size: 18px;
+	font-weight: bold;
+	width: 100%;
+	text-align: left;
+	padding-left: 35px;
+}
+
+#connectCloudApp .cloudDriveHeader .cloudDriveCloseIcon {
+	color: #dee4f2;
+	font-size: 32px;
+	line-height: 20px;
+	float: right;
+	cursor: pointer;
+}
+
+#connectCloudApp .cloudDriveAlert {
+	margin: 0 3%;
+	position: absolute;
+}
+
+#connectCloudApp .cloudDriveAlert--info {
+	top: 12%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#connectCloudApp .cloudDriveList {
+	width: 70%;
+	margin: 0 auto;
+	padding-top: 23px;
+}
+
+#connectCloudApp .cloudDriveListItem {
+	border: 1px solid #578dc9;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	justify-content: center;
+	min-height: 35px;
+	height: 35px;
+}
+
+#connectCloudApp .cloudDriveListItem:hover {
+	background-color: rgba(179, 212, 252, 0.4);
+}
+
+#connectCloudApp .cloudDriveListItem__icon {
+	min-width: 0;
+	margin: 5px 0;
+	padding-right: 5px;
+	display: flex;
+	align-items: center;
+}
+
+#connectCloudApp .cloudDriveListItem__icon i:before {
+	color: #578dc9;
+}
+
+#connectCloudApp .cloudDriveListItem__content {
+	max-width: fit-content;
+	color: #578dc9;
+	min-width: 157px;
+	text-align: center;
+}
+
+#connectCloudApp .cloudDriveListItem__title {
+	font-size: 14px;
+}
+  
