@@ -79,7 +79,6 @@
                 <include>ecms/portlets/presentation/ecms-presentation-singlecontentviewer.less</include>
                 <include>ecms/portlets/editors/editors-admin.less</include>
 				        <include>ecms/portlets/documents/documents.less</include>
-                <include>ecms/portlets/clouddrives/cloud-drives.less</include>
               </includes>
             </configuration>
             <goals>

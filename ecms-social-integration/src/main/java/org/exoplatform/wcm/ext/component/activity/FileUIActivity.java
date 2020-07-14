@@ -19,6 +19,7 @@ package org.exoplatform.wcm.ext.component.activity;
 import java.net.URLDecoder;
 import java.text.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
@@ -42,6 +43,10 @@ import org.exoplatform.download.DownloadResource;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.clouddrives.CloudDrive;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
+import org.exoplatform.services.cms.clouddrives.CloudFile;
+import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
 import org.exoplatform.services.cms.documents.*;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
@@ -152,6 +157,14 @@ public class FileUIActivity extends BaseUIActivity{
   
   public static final String                  STREAM_CONTEXT = "stream";
 
+  public static final String  ONE_DRIVE_PROVIDER_ID    = "onedrive";
+
+  public static final String  GOOGLE_DRIVE_PROVIDER_ID = "gdrive";
+  
+  public static final String  ONE_DRIVE_ICON           = "uiIcon-onedrive";
+
+  public static final String  GOOGLE_DRIVE_ICON        = "uiIcon-gdrive";
+
   private String              message;
 
   private LinkedHashMap<String, String>[] folderPathWithLinks;
@@ -171,6 +184,9 @@ public class FileUIActivity extends BaseUIActivity{
   private OrganizationService organizationService;
 
   private TrashService         trashService;
+
+  /** The cloud drives. */
+  private CloudDriveService   cloudDrivesService;
 
   private List<ActivityFileAttachment> activityFileAttachments = new ArrayList<>();
 
@@ -630,6 +646,24 @@ public class FileUIActivity extends BaseUIActivity{
       LOG.error("Cannot get document updated date : " + e.getMessage(), e);
     }
     return docUpdatedDate;
+  }
+
+  protected String getCloudfileUpdateDate(CloudFile cloudFile) {
+    String cloudfileUpdatedDate = "";
+
+    if (cloudFile != null) {
+      java.util.Calendar modifiedDate = cloudFile.getModifiedDate();
+
+      if (modifiedDate == null) {
+        return cloudfileUpdatedDate;
+      }
+      TimeZone tz = modifiedDate.getTimeZone();
+      ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
+      LocalDateTime localDateTime = LocalDateTime.ofInstant(modifiedDate.toInstant(), zid);
+
+      cloudfileUpdatedDate = localDateTime.format(getDateTimeFormatter());
+    }
+    return cloudfileUpdatedDate;
   }
 
   /**
@@ -1657,6 +1691,65 @@ public class FileUIActivity extends BaseUIActivity{
   }
   public void setEmbedHtml(String embedHtml) {
     this.embedHtml = embedHtml;
+  }
+
+  private CloudDriveService getCloudDrivesService() {
+    if (cloudDrivesService == null) {
+      cloudDrivesService = getApplicationComponent(CloudDriveService.class);
+    }
+    return cloudDrivesService;
+  }
+
+  public CloudDrive getCloudDrive(Node node) {
+    CloudDrive cloudDrive = null;
+    try {
+      cloudDrive = getCloudDrivesService().findDrive(node);
+    } catch (RepositoryException e) {
+      LOG.warn("Exception while getting clouddrive", e);
+    }
+    return cloudDrive;
+  }
+
+  public boolean isCloudFile(CloudDrive cloudDrive) {
+    boolean isCloudFile = false;
+
+    try {
+      if (cloudDrive != null && cloudDrive.isConnected()) {
+        isCloudFile = true;
+      }
+    } catch (Exception e) {
+      LOG.warn("Exception while checking node as cloudfile", e);
+    }
+    return isCloudFile;
+  }
+
+  public CloudFile getCloudFile(Node node) throws RepositoryException, DriveRemovedException {
+    CloudDrive cloudDrive = getCloudDrive(node);
+    CloudFile cloudFile = null;
+    try {
+      if (cloudDrive != null && cloudDrive.isConnected()) {
+        if (!cloudDrive.isDrive(node)) {
+          cloudFile = cloudDrive.getFile(node.getPath());
+        }
+      }
+    } catch (Exception e) {
+      LOG.warn("Exception while checking node as cloudfile", e);
+    }
+    return cloudFile;
+  }
+
+  public String getCloudFileIcon(CloudDrive cloudDrive) {
+    String cloudFileIcon = "";
+    String providerId = cloudDrive.getUser().getProvider().getId();
+    switch (providerId) {
+    case ONE_DRIVE_PROVIDER_ID:
+      cloudFileIcon = ONE_DRIVE_ICON;
+      break;
+    case GOOGLE_DRIVE_PROVIDER_ID:
+      cloudFileIcon = GOOGLE_DRIVE_ICON;
+      break;
+    }
+    return cloudFileIcon;
   }
 
 }

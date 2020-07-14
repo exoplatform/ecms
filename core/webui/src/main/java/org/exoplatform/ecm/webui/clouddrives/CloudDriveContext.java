@@ -17,7 +17,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.exoplatform.services.cms.clouddrives.webui;
+package org.exoplatform.ecm.webui.clouddrives;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -29,7 +29,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 
 import org.json.JSONObject;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudDriveException;
@@ -67,17 +66,17 @@ public class CloudDriveContext {
    */
   public static void init(UIComponent uiComponent) throws Exception {
     Node contextNode;
-    UIJCRExplorer uiExplorer = uiComponent.getAncestorOfType(UIJCRExplorer.class);
-    if (uiExplorer != null) {
-      // when in document explorer
-      contextNode = uiExplorer.getCurrentNode();
-    } else if (uiComponent.getParent() instanceof UIBaseNodePresentation) {
+
+    // when in document explorer
+    WebuiRequestContext reqContext = WebuiRequestContext.getCurrentInstance();
+    contextNode = (Node) reqContext.getAttribute("uiJCRExplorerCurrentNode");
+
+    if (contextNode == null && uiComponent.getParent() instanceof UIBaseNodePresentation) {
       // when in social activity stream (file view)
       UIBaseNodePresentation docViewer = uiComponent.getParent();
       contextNode = docViewer.getNode();
-    } else {
-      contextNode = null;
     }
+
     if (contextNode != null) {
       // we store current node in the context
       init(WebuiRequestContext.getCurrentInstance(), contextNode.getSession().getWorkspace().getName(), contextNode.getPath());

@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 import javax.ws.rs.core.MediaType;
 
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
@@ -68,7 +69,7 @@ public abstract class AbstractCloudFileViewer extends UIAbstractManagerComponent
    */
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    //initContext();
+    CloudDriveContext.init(this);
 
     Object obj = context.getAttribute(CloudDrive.class);
     if (obj != null) {
