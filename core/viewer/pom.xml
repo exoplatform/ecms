@@ -50,5 +50,9 @@
       <groupId>org.icepdf.os</groupId>
       <artifactId>icepdf-core</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-webui</artifactId>
+    </dependency>
   </dependencies>
 </project>
