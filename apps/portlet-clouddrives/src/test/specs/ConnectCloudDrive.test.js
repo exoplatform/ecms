@@ -54,7 +54,7 @@ describe("ConnectCloudDrive.test.js", () => {
   it("should emit update progress event after connect button click", done => {
     const wrapper = mountWrapper();
     const cmp = wrapper.vm;
-    const providers = cloudDrive.getProviders();
+    const providers = cloudDrives.getProviders();
     wrapper.setData({ providers: providers });
     const connectToCloudDrive = jest.spyOn(cmp, "connectToCloudDrive");
 
@@ -81,11 +81,12 @@ describe("ConnectCloudDrive.test.js", () => {
     const mockFetchPromise = Promise.reject(new Error("somethind went wrong"));
     global.fetch = jest.fn().mockResolvedValue(mockFetchPromise);
     const wrapper = mountWrapper();
-    const notifyError = jest.spyOn($, "pnotify");
+    const cmp = wrapper.vm;
 
     process.nextTick(() => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
-      expect(notifyError).toHaveBeenCalled();
+      expect(cmp.showAlertMessage).toBeTruthy();
+      expect(cmp.alert).toEqual(expect.objectContaining({ type: "error" }));
       global.fetch.mockClear();
       wrapper.destroy();
       done();
