@@ -376,10 +376,10 @@ export default {
         folder.isSelected = true;
         this.fetchChildrenContents(folder.path);
         this.getFolderPath(folder);
-        this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
+        this.schemaFolder = this.currentDrive.title.concat('/', folder.path);
         this.folderDestinationForFile = folder.name;
       }
-      this.schemaFolder = this.currentDrive.name.concat('/', folder.path);
+      this.schemaFolder = this.currentDrive.title.concat('/', folder.path);
       this.folderDestinationForFile = folder.title;
       this.privateDestinationForFile = folder.isPublic;
     },
@@ -564,8 +564,8 @@ export default {
     selectDestination() {
       if (!this.selectedFolderPath) {
         this.selectedFolderPath = this.driveRootPath;
-        this.schemaFolder = this.currentDrive.name;
-        this.folderDestinationForFile = this.currentDrive.name;
+        this.schemaFolder = this.currentDrive.title;
+        this.folderDestinationForFile = this.currentDrive.title;
       }
       if (this.modeFolderSelectionForFile) {
         this.$emit('itemsSelected', this.selectedFolderPath, this.folderDestinationForFile, this.privateDestinationForFile);
