@@ -66,7 +66,9 @@
   Dedicated ECMS menu action for Google Drive.
   Note that Google Drive will be added automatically to Connect Cloud Documents dialog
   -->
-  <external-component-plugins>
+  <!-- PLF 6.1 Task 26787.
+  Hide connect google drive from explorer by commenting ShowConnectCloudDrive -->
+  <!--<external-component-plugins>
     <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
     <component-plugin>
       <name>Add CloudDrive Actions</name>
@@ -96,7 +98,7 @@
         </object-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
+  </external-component-plugins>-->
 
   <!--
   ResourceBundleService with texts for Google Drive UI support.

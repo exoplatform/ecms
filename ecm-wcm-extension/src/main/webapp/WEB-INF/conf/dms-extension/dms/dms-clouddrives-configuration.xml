@@ -171,7 +171,9 @@
       <set-method>registerUIExtensionPlugin</set-method>
       <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
       <init-params>
-        <object-param>
+        <!-- PLF 6.1 Task 26787.
+         Hide connect cloud drive from explorer by commenting ShowConnectCloudDrive -->
+        <!--<object-param>
           <name>ShowConnectCloudDrive</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
             <field name="type">
@@ -191,7 +193,7 @@
               </collection>
             </field>
           </object>
-        </object-param>
+        </object-param>-->
         <!-- Override ECMS actions that require special handling for Cloud Drive files: ManagePublications, ManageVersions -->
         <object-param>
           <name>ManagePublications</name>
