@@ -16,16 +16,13 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.*;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.imageio.ImageIO;
 import javax.jcr.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -33,10 +30,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.metadata.Directory;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.ExifIFD0Directory;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -52,10 +45,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.connector.ImageOrientation;
-
-import static org.exoplatform.wcm.connector.ImageOrientation.readImageInformation;
-import static org.exoplatform.wcm.connector.ImageOrientation.transformImage;
 
 /**
  * Returns a responding data as a thumbnail image.
@@ -247,20 +236,6 @@ public class ThumbnailRESTService implements ResourceContainer {
           ThumbnailPlugin thumbnailPlugin = (ThumbnailPlugin) plugin;
           if (thumbnailPlugin.getMimeTypes().contains(mimeType)) {
             InputStream inputStream = content.getProperty("jcr:data").getStream();
-            if (mimeType.equals("image/jpeg")){
-                  ImageOrientation imageOrientation=readImageInformation(inputStream);
-                  AffineTransform affineTransform = ImageOrientation.getExifTransformation(imageOrientation);
-                  BufferedImage pictureBuffer = ImageIO.read(content.getProperty("jcr:data").getStream());
-                  if (pictureBuffer == null) {
-                    LOG.warn("The picture buffer parsed is null.");
-                  }
-                  pictureBuffer = transformImage(pictureBuffer, affineTransform);
-                  ByteArrayOutputStream os = new ByteArrayOutputStream();
-                  ImageIO.write(pictureBuffer, "jpeg", os);
-                  InputStream is = new ByteArrayInputStream(os.toByteArray());
-                  inputStream = content.setProperty("jcr:data", new BufferedInputStream(is)).getStream();
-              }
-
             return Response.ok(inputStream, "image").header(LAST_MODIFIED_PROPERTY,
                                                             dateFormat.format(new Date())).build();
           }
