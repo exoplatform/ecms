@@ -556,6 +556,7 @@ export default {
           this.value[i].showDestinationFolderForFile = '';
           this.value[i].pathDestinationFolderForFile = '';
           this.value[i].isPublic = true;
+          this.value[i].destinationFolder = '';
           break;
         }
       }
