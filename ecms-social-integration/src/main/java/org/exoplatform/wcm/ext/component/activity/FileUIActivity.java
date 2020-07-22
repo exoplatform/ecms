@@ -40,23 +40,36 @@ import org.exoplatform.container.*;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadResource;
 import org.exoplatform.download.DownloadService;
+import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.clouddrives.CloudDrive;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
+import org.exoplatform.services.cms.clouddrives.CloudFile;
+import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
 import org.exoplatform.services.cms.documents.*;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.*;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
@@ -916,12 +929,24 @@ public class FileUIActivity extends BaseUIActivity{
     if (nodeLocation != null) {
       try {
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
-        activityFileAttachment.setDocDrive(documentService.getDriveOfNode(nodeLocation.getPath(), "placeholder_user_name", Utils.getMemberships()));
+        activityFileAttachment.setDocDrive(getDocumentService().getDriveOfNode(nodeLocation.getPath(), "placeholder_user_name", Utils.getMemberships()));
       } catch (Exception e) {
-        LOG.error("Cannot get drive of node " + nodeLocation.getPath() + " : " + e.getMessage(), e);
+        LOG.error("Cannot get drive of node " + nodeLocation.getPath() + " by attachment node location : " + e.getMessage(), e);
       }
     }
     return activityFileAttachment.getDocDrive();
+  }
+  
+  protected DriveData getDocDrive(NodeLocation nodeLocation) {
+    DriveData driveData = null;
+    if (nodeLocation != null) {
+      try {
+        driveData = getDocumentService().getDriveOfNode(nodeLocation.getPath(), "placeholder_user_name", Utils.getMemberships());
+      } catch (Exception e) {
+        LOG.error("Cannot get drive of node " + nodeLocation.getPath() + " by shared attachment node location : " + e.getMessage(), e);
+      }
+    }
+    return driveData;
   }
 
   public String getDefaultIconClass(int i) {
@@ -982,8 +1007,14 @@ public class FileUIActivity extends BaseUIActivity{
     if(folderPathWithLinks[i] == null) {
       folderPathWithLinks[i] = new LinkedHashMap<>();
       LinkedHashMap<String, String> reversedFolderPathWithLinks = new LinkedHashMap<>();
-
-      DriveData drive = getDocDrive(i);
+      
+      DriveData drive;
+      Node sharedNode = getSharedNode(i);
+      if (sharedNode != null) {
+        drive = getDocDrive(NodeLocation.getNodeLocationByNode(sharedNode));
+      } else {
+        drive = getDocDrive(i);
+      }
       if (drive != null) {
         try {
           Map<String, String> parameters = drive.getParameters();
@@ -1032,7 +1063,12 @@ public class FileUIActivity extends BaseUIActivity{
           }
 
           // calculate the relative path to the drive by browsing up the content node path
-          Node parentContentNode = getContentNode(i);
+          Node parentContentNode;
+          if (sharedNode != null) {
+            parentContentNode = sharedNode;
+          } else {
+            parentContentNode = getContentNode(i);
+          }
           while (parentContentNode != null) {
             String parentPath = parentContentNode.getPath();
             // exit condition is check here instead of in the while condition to avoid
@@ -1152,20 +1188,147 @@ public class FileUIActivity extends BaseUIActivity{
 
   public String getDocOpenUri(String nodePath, int i) {
     String uri = "";
+    DriveData driveData = null;
 
-    if(nodePath != null) {
+    if (nodePath != null) {
       try {
+        Space space = getSpace();
+
+        if (space != null) {
+          ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
+          Node node = activityFileAttachment.getContentNode();
+          String[] permissions = new String[] { PermissionType.READ };
+          String organizationalIdentity;
+
+          Collection<Membership> memberships = null;
+          String currentUserId = ConversationState.getCurrent().getIdentity().getUserId();
+          try {
+            memberships = getOrganizationService().getMembershipHandler()
+                                                  .findMembershipsByUserAndGroup(currentUserId, space.getGroupId());
+          } catch (Exception e) {
+            LOG.warn("Error getting memberships by user (" + currentUserId + ") and group (" + space.getGroupId() + ")", e);
+          }
+
+          try {
+            for (Membership membership : memberships) {
+              organizationalIdentity = new MembershipEntry(membership.getGroupId(), membership.getMembershipType()).toString();
+
+              if (PermissionUtil.hasPermissions(node, organizationalIdentity, permissions)) {
+                Node sharedNode = getSharedNode(i);
+
+                if (sharedNode != null) {
+                  driveData = getDocDrive(NodeLocation.getNodeLocationByNode(sharedNode));
+
+                  if (driveData != null) {
+                    nodePath = sharedNode.getPath();
+                  }
+                  break;
+                }
+              }
+            }
+          } catch (Exception e) {
+            LOG.warn("Error while getting node path and drive data of shared node " + nodePath + " : " + e.getMessage(), e);
+          }
+        }
+
+        if (driveData == null) {
+          driveData = getDocDrive(i);
+        }
+
         if (nodePath.endsWith("/")) {
           nodePath = nodePath.replaceAll("/$", "");
         }
-        uri = getDocumentService().getLinkInDocumentsApp(nodePath, getDocDrive(i));
-      } catch(Exception e) {
+        uri = getDocumentService().getLinkInDocumentsApp(nodePath, driveData);
+      } catch (Exception e) {
         LOG.error("Cannot get document open URI of node " + nodePath + " : " + e.getMessage(), e);
         uri = "";
       }
     }
 
     return uri;
+  }
+
+  /**
+   * Gets shared node.
+   *
+   * @param i the activity file attachments index
+   * @return the shared node
+   */
+  protected Node getSharedNode(int i) {
+    Node sharedNode = null;
+    Space space = getSpace();
+
+    if (space != null) {
+      ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
+      if (activityFileAttachment != null) {
+        Node node = activityFileAttachment.getContentNode();
+        String nodePath = null;
+
+        try {
+          nodePath = node.getPath();
+          Node spaceSharedFolder = getSpaceSharedFolder(space.getGroupId());
+          if (spaceSharedFolder != null && spaceSharedFolder.hasNode(node.getName())) {
+            sharedNode = spaceSharedFolder.getNode(node.getName());
+          }
+        } catch (PathNotFoundException e) {
+          LOG.info("Node with path " + nodePath + " isn't found in space shared folder");
+        } catch (Exception e) {
+          LOG.info("Error while getting shared node for " + nodePath + " : " + e.getMessage(), e);
+        }
+      }
+    }
+
+    return sharedNode;
+  }
+
+  /**
+   * Gets space shared folder.
+   *
+   * @param spaceGroupId the space group id
+   * @return the space shared folder
+   */
+  protected Node getSpaceSharedFolder(String spaceGroupId) {
+    Node rootSpace = null;
+    Node shared = null;
+
+    if (!(spaceGroupId == null || spaceGroupId.isEmpty())) {
+      NodeHierarchyCreator nodeCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      nodeCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
+      try {
+        SessionProvider sessionProvider = WCMCoreUtils.getService(SessionProviderService.class).getSystemSessionProvider(null);
+        ManageableRepository repository = WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository();
+        Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+
+        rootSpace = (Node) session.getItem(nodeCreator.getJcrPath(BasePath.CMS_GROUPS_PATH) + spaceGroupId);
+        if (rootSpace.hasNode("Documents")) {
+          rootSpace = rootSpace.getNode("Documents");
+          if (rootSpace.hasNode("Shared")) {
+            shared = rootSpace.getNode("Shared");
+          }
+        }
+      } catch (RepositoryException e) {
+        LOG.error("Error while getting space " + spaceGroupId + " shared folder node", e);
+      }
+    }
+
+    return shared;
+  }
+
+  /**
+   * Gets space.
+   *
+   * @return the space
+   */
+  protected Space getSpace() {
+    Space space = null;
+    ExoSocialActivity activity = getActivity();
+
+    if (activity != null) {
+      String streamOwner = activity.getStreamOwner();
+      space = getSpaceService().getSpaceByPrettyName(streamOwner);
+    }
+
+    return space;
   }
 
   public String getEditLink(int i) {

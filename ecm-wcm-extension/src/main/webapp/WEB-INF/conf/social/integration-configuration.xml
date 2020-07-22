@@ -196,6 +196,17 @@
         </value-param>
       </init-params>
     </component-plugin>
+    <component-plugin>
+      <name>ActivityListener</name>
+      <set-method>addActivityEventListener</set-method>
+      <type>org.exoplatform.wcm.ext.component.activity.listener.ActivityListener</type>
+      <init-params>
+        <value-param>
+          <name>personal.drive.name</name>
+          <value>Personal Documents</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>

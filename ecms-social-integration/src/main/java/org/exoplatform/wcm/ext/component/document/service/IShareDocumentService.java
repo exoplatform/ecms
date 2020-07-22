@@ -43,6 +43,22 @@ public interface IShareDocumentService {
   public String publishDocumentToSpace(String space, Node node, String comment, String perm);
 
   /**
+   * Share a document to a space, permission of space's user also apply to this
+   * document.
+   * <p>
+   * There is a symbolic link of origin document will create at Documents/Shared
+   * folder of destination space.
+   *
+   * @param space destination space will share file in
+   * @param node file will be shared
+   * @param comment message attach with share activity
+   * @param perm permission of destination space's member on origin node
+   * @param postActivity define post activity after sharing to a space or not
+   * @return return false if have issue
+   */
+  public String publishDocumentToSpace(String space, Node node, String comment, String perm, Boolean postActivity);
+
+  /**
    * Share a document to a user
    * <p>
    * There is a symbolic link of origin document will be created

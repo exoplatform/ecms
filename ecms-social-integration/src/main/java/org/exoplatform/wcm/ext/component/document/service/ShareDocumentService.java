@@ -45,9 +45,12 @@ import org.exoplatform.wcm.ext.component.activity.listener.Utils;
  * Nov 19, 2014  
  */
 public class ShareDocumentService implements IShareDocumentService, Startable{
-  private static final Log    LOG                 = ExoLogger.getLogger(ShareDocumentService.class);
+  private static final Log       LOG               = ExoLogger.getLogger(ShareDocumentService.class);
 
-  public static final String MIX_PRIVILEGEABLE          = "exo:privilegeable";
+  public static final String     MIX_PRIVILEGEABLE = "exo:privilegeable";
+
+  private static final boolean   POST_ACTIVITY     = true;
+  
   private RepositoryService repoService;
   private SessionProviderService sessionProviderService;
   private LinkManager linkManager;
@@ -61,38 +64,49 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
 
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.component.explorer.popup.service.IShareDocumentService#publishDocumentToSpace(java.lang.String, javax.jcr.Node, java.lang.String, java.lang.String)
+  /*
+   * {@inheritDoc}
    */
   @Override
-  public String publishDocumentToSpace(String space, Node currentNode, String comment,String perm) {
+  public String publishDocumentToSpace(String space, Node currentNode, String comment, String perm) {
+    return publishDocumentToSpace(space, currentNode, comment, perm, POST_ACTIVITY);
+  }
+
+  /*
+   * {@inheritDoc}
+   */
+  @Override
+  public String publishDocumentToSpace(String space, Node currentNode, String comment, String perm, Boolean postActivity) {
     Node rootSpace = null;
     Node shared = null;
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
-      //add symlink to destination space
+      // add symlink to destination space
       NodeHierarchyCreator nodeCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
       nodeCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
 
       rootSpace = (Node) session.getItem(nodeCreator.getJcrPath(BasePath.CMS_GROUPS_PATH) + space);
       rootSpace = rootSpace.getNode("Documents");
-      if(!rootSpace.hasNode("Shared")){
+      if (!rootSpace.hasNode("Shared")) {
         shared = rootSpace.addNode("Shared");
-      }else{
+      } else {
         shared = rootSpace.getNode("Shared");
       }
-      if(currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) currentNode = linkManager.getTarget(currentNode);
-      //Update permission
-      String tempPerms = perm.toString();//Avoid ref back to UIFormSelectBox options
-      if(!tempPerms.equals(PermissionType.READ)) tempPerms = PermissionType.READ+","+PermissionType.ADD_NODE+","+PermissionType.SET_PROPERTY+","+PermissionType.REMOVE;
-      if(PermissionUtil.canChangePermission(currentNode)){
+      if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK))
+        currentNode = linkManager.getTarget(currentNode);
+      // Update permission
+      String tempPerms = perm.toString();// Avoid ref back to UIFormSelectBox options
+      if (!tempPerms.equals(PermissionType.READ))
+        tempPerms = PermissionType.READ + "," + PermissionType.ADD_NODE + "," + PermissionType.SET_PROPERTY + ","
+            + PermissionType.REMOVE;
+      if (PermissionUtil.canChangePermission(currentNode)) {
         setSpacePermission(currentNode, space, tempPerms.split(","));
-      }else if(PermissionUtil.canRead(currentNode)){
+      } else if (PermissionUtil.canRead(currentNode)) {
         SessionProvider systemSessionProvider = SessionProvider.createSystemProvider();
         Session systemSession = systemSessionProvider.getSession(session.getWorkspace().getName(), repository);
-        Node _node= (Node)systemSession.getItem(currentNode.getPath());
+        Node _node = (Node) systemSession.getItem(currentNode.getPath());
         setSpacePermission(_node, space, tempPerms.split(","));
       }
       currentNode.getSession().save();
@@ -101,25 +115,27 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       link.addMixin(NodetypeConstant.MIX_FILE_TYPE);
       link.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
       rootSpace.save();
-      //Share activity
-      try {
-        ExoSocialActivity activity = null;
-        if(currentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)){
-          activity = Utils.createShareActivity(link, "", Utils.SHARE_FILE, comment, perm);
-        }else{
-          activity = Utils.createShareActivity(link,"", Utils.SHARE_CONTENT,comment, perm);
+      // Share activity
+      if (postActivity) {
+        try {
+          ExoSocialActivity activity = null;
+          if (currentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+            activity = Utils.createShareActivity(link, "", Utils.SHARE_FILE, comment, perm);
+          } else {
+            activity = Utils.createShareActivity(link, "", Utils.SHARE_CONTENT, comment, perm);
+          }
+          link.save();
+          return activity.getId();
+        } catch (Exception e1) {
+          if (LOG.isErrorEnabled())
+            LOG.error(e1.getMessage(), e1);
         }
-        link.save();
-        return activity.getId();
-      } catch (Exception e1) {
-        if(LOG.isErrorEnabled())
-          LOG.error(e1.getMessage(), e1);
       }
     } catch (RepositoryException e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     } catch (Exception e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     }
     return "";
