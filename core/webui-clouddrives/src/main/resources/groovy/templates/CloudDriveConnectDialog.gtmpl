@@ -23,7 +23,7 @@
 */
 import org.exoplatform.services.cms.clouddrives.CloudDriveService
 import org.exoplatform.services.cms.clouddrives.CloudProvider
-import org.exoplatform.services.cms.clouddrives.webui.CloudDriveContext
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer
 import org.exoplatform.services.wcm.utils.WCMCoreUtils
 import org.exoplatform.web.application.JavascriptManager

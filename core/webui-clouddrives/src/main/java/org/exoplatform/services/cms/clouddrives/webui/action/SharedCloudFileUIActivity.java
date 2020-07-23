@@ -39,7 +39,7 @@ import org.exoplatform.services.cms.clouddrives.DriveRemovedException;
 import org.exoplatform.services.cms.clouddrives.NotCloudDriveException;
 import org.exoplatform.services.cms.clouddrives.NotCloudFileException;
 import org.exoplatform.services.cms.clouddrives.NotYetCloudFileException;
-import org.exoplatform.services.cms.clouddrives.webui.CloudDriveContext;
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;

@@ -18,6 +18,7 @@
  */
 package org.exoplatform.ecm.webui;
 
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
 import org.exoplatform.services.cms.clouddrives.CloudProvider;
 import org.exoplatform.services.cms.clouddrives.ProviderNotAvailableException;
@@ -62,7 +63,7 @@ public abstract class BaseConnectActionComponent extends UIAbstractManagerCompon
     if (drivesService != null) {
       try {
         CloudProvider provider = drivesService.getProvider(getProviderId());
-        //initContext();
+        CloudDriveContext.init(this);
 
         // XXX do workaround here, need point an id of the provider for this
         // Connect component
