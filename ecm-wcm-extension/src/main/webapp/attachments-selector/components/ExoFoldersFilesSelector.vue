@@ -154,27 +154,14 @@
         <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes" type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}</button>
       </div>
     </div>
-    <!-- The following bloc is needed in order to display the warning popup -->
-    <!--begin -->
-    <!-- Commented as it is't work and unable to close, should be uncommented before merge -->
-    <!-- <exo-modal
-      ref="exoModal"
-      :ok-label="$t('attachments.filesFoldersSelector.popup.button.ok')"
-      :title="$t('attachments.filesFoldersSelector.popup.title')">
-      <div class="modal-body">
-        <p>{{ popupBodyMessage }}</p>
-      </div>
-    </exo-modal> -->
-    <!--end -->
-
     <!-- The following bloc is needed in order to display the confirmation popup -->
     <!--begin -->
     <exo-confirm-dialog
       ref="confirmDialog"
-      :title="$t('attachments.filesFoldersSelector.action.delete.popup.title')"
+      :title="titleLabel"
       :message="popupBodyMessage"
-      :ok-label="$t('attachments.filesFoldersSelector.action.delete.popup.button.ok')"
-      :cancel-label="$t('attachments.filesFoldersSelector.action.delete.popup.button.cancel')"
+      :ok-label="okLabel"
+      :cancel-label="cancelLabel"
       @ok="okConfirmDialog"/>
       <!--end -->
   </div>
@@ -251,7 +238,11 @@ export default {
       newName:'',
       MESSAGES_DISPLAY_TIME: 5000,
       privateDestinationForFile: false,
-      fromSpace: {}
+      fromSpace: {},
+      okLabel: '',
+      cancelLabel: '',
+      titleLabel: '',
+      okAction: false
     };
   },
   computed: {
@@ -595,7 +586,9 @@ export default {
         if (this.newFolderName) {
           const folderNameExists = this.folders.some(folder => folder.title === this.newFolderName);
           if (folderNameExists) {
-            this.$refs.exoModal.open();
+            this.$refs.confirmDialog.open();
+            this.titleLabel = this.$t('attachments.filesFoldersSelector.popup.title');
+            this.okLabel = this.$t('attachments.filesFoldersSelector.popup.button.ok');
             this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.popup.folderNameExists')}`;
           } else {
             const self = this;
@@ -628,7 +621,9 @@ export default {
             });
           }
         } else {
-          this.$refs.exoModal.open();
+          this.$refs.confirmDialog.open();
+          this.titleLabel = this.$t('attachments.filesFoldersSelector.popup.title');
+          this.okLabel = this.$t('attachments.filesFoldersSelector.popup.button.ok');
           this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.popup.emptyFolderName')}`;
         }
       }
@@ -669,16 +664,24 @@ export default {
     deleteFolder() {
       if(this.selectedFolder.canRemove) {
         this.$refs.confirmDialog.open();
+        this.titleLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.title');
+        this.okLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.ok');
+        this.cancelLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.cancel');
+        this.okAction = true;
         this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.action.delete.popup.bodyMessage')}`;
       }
     },
     okConfirmDialog() {
-      attachmentsService.deleteFolderOrFile(this.currentDrive.name, this.workspace,this.selectedFolder.path).then(() => {
-        this.reloadCurrentPath();
-      }).catch(() => {
-        this.errorMessage= `${this.$t('attachments.deleteFolderOrFile.error')}`;
-        this.showErrorMessage = true;
-      });
+      if (this.okAction){
+        attachmentsService.deleteFolderOrFile(this.currentDrive.name, this.workspace,this.selectedFolder.path).then(() => {
+          this.reloadCurrentPath();
+        }).catch(() => {
+          this.errorMessage= `${this.$t('attachments.deleteFolderOrFile.error')}`;
+          this.showErrorMessage = true;
+        });
+      }else {
+        return;
+      }
     },
     reloadCurrentPath(){
       this.resetExplorer();
@@ -702,7 +705,9 @@ export default {
       if (this.newName !== this.selectedFolder.title && this.newName !== '') {
         const folderNameExists = this.folders.some(folder => folder.title === this.newName);
         if (folderNameExists) {
-          this.$refs.exoModal.open();
+          this.$refs.confirmDialog.open();
+          this.titleLabel = this.$t('attachments.filesFoldersSelector.popup.title');
+          this.okLabel = this.$t('attachments.filesFoldersSelector.popup.button.ok');
           this.popupBodyMessage = `${this.$t('attachments.renameFolder.error')}`;
           this.cancelRenameNewFolder();
         } else {
