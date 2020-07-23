@@ -362,11 +362,36 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     def breadCrumbContent = uicomponent.getDocFileBreadCrumb(index);
     def breadCrumbSize = docFolderBreadCrumb == null ? 0 : docFolderBreadCrumb.size();
 
-    def fileInfo = _ctx.appRes("SocialIntegration.messages.updatedOn") + " " + uicomponent.getDocUpdateDate(currentNode) + " " + _ctx.appRes("SocialIntegration.messages.updatedBy") + " " + StringEscapeUtils.escapeHtml(uicomponent.getDocLastModifier(currentNode)) + " " + (StringUtils.isBlank(size) ? "" : (" - " + size));
     def newIndex = uicomponent.getLinkSource() ? index+1 : index;
     def previousDoc = newIndex == index ? 1 : 2;
     def nextDoc = newIndex == index ? 1 : 0;
     def maxFilesToShow = newIndex == index ? 3 : 2;
+
+    def cloudDrive;
+    def isCloudFile = false;
+    def cloudFileIcon;
+    def cloudFile;
+
+    if (newIndex < maxToDisplay) {
+        cloudDrive = uicomponent.getCloudDrive(currentNode);
+        isCloudFile = uicomponent.isCloudFile(cloudDrive);
+
+        if (isCloudFile) {
+            cloudFileIcon = uicomponent.getCloudFileIcon(cloudDrive);
+            cloudFile = uicomponent.getCloudFile(currentNode);
+            size = cloudFile.getSize();
+        }
+    }
+
+    def fileInfo;
+
+    if (!isCloudFile) {
+        fileInfo = _ctx.appRes("SocialIntegration.messages.updatedOn") + " " + uicomponent.getDocUpdateDate(currentNode) + " " + _ctx.appRes("SocialIntegration.messages.updatedBy") + " " + StringEscapeUtils.escapeHtml(uicomponent.getDocLastModifier(currentNode)) + " " + (StringUtils.isBlank(size) ? "" : (" - " + size));
+    } else {
+        fileInfo = _ctx.appRes("SocialIntegration.messages.updatedOn") + " " + uicomponent.getCloudfileUpdateDate(cloudFile);
+    }
+
+
     def docPreviewUri = "javascript:require(['SHARED/documentPreview'], \
                            function(documentPreview) { \
                                     documentPreview.init({ \
@@ -416,7 +441,7 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
         if (newIndex >= maxToDisplay) { %>
          </div>
 <%        continue;
-    } else if (mimeType != null && mimeType.length() > 0 && fileSize > 0){
+    } else if (mimeType != null && mimeType.length() > 0 && fileSize > 0 && !isCloudFile){
                 if(mimeType.startsWith("image") || mimeType.indexOf("icon") >=0){
 %>
         <div id="MediaContent${activity.id}-$newIndex" class="mediaContent">
@@ -450,6 +475,31 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
      </div>
     <%
                 }
+              } else if (isCloudFile) { %>
+
+                <div id="MediaContent${activity.id}-$newIndex" class="mediaContent CloudfileContainer">
+                    <div class="cloudfilePreviewBox">
+                        <div class="clouddriveIframeBox">
+                          <iframe class="cloudfilePreview"
+                                  src="${cloudFile.getPreviewLink()}">
+                          </iframe>
+                        </div>
+                        <div class="cloudfileDescript">
+                          <div class="cloudfileNameBox">
+                            <i class="${cloudFileIcon} uiIconEcmsBlue"></i>
+                            <span class="cloudfileName">
+                              ${cloudFile.getTitle()}
+                            </span>
+                          </div>
+                          <div class="cloudfileUpdatedBox">
+                            <span class="cloudfileUpdated">
+                                ${fileInfo}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+    <%
               }
 			   if (newIndex == 2 && uicomponent.getFilesCount() > maxFilesToShow) { %>
 			             <a id="LoadMore${activity.id}-$newIndex" class="MediaName LoadMore" href="javascript:void(0)">

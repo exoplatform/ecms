@@ -1419,26 +1419,6 @@
 			// init activity stream
 			initActivity();
 
-			// init menus below
-
-			// XXX using deprecated DOMNodeInserted and the explorer panes selector
-			// choose better selector to get less events here for DOM, now it's tens of events
-			// reloading during the navigation
-			// var ieVersion = getIEVersion();
-			// var domEvent = ieVersion > 0 && ieVersion < 9.0 ? "onpropertychange" : "DOMNodeInserted";
-			// DOMSubtreeModified
-			// $(".PORTLET-FRAGMENT").on(domEvent, ".LeftCotainer, .RightCotainer", function(event) {// #UIJCRExplorerPortlet
-			// 	if (!initLock) {
-			// 		initLock = setTimeout(function() {
-			// 			initDocument();
-			// 			setTimeout(function() {
-			// 				initLock = null;
-			// 			}, 1000);
-			// 		}, 200);
-			// 	}
-			// 	return true;
-			// });
-
 			function filterActions(objId, menu, params) {
 				if (params) {
 					var i = objId.indexOf(":");
@@ -1693,7 +1673,6 @@
 			utils.loadStyle("/clouddrives/skin/jquery-ui.css");
 			utils.loadStyle("/clouddrives/skin/jquery.pnotify.default.css");
 			utils.loadStyle("/clouddrives/skin/jquery.pnotify.default.icons.css");
-			utils.loadStyle("/clouddrives/skin/clouddrive.css");
 
 			// configure Pnotify
 			// use jQuery UI css

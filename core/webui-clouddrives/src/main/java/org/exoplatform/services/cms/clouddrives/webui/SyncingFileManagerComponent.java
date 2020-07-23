@@ -21,6 +21,7 @@ package org.exoplatform.services.cms.clouddrives.webui;
 import java.util.Arrays;
 import java.util.List;
 
+import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -110,7 +111,7 @@ public class SyncingFileManagerComponent extends UIAbstractManagerComponent {
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      //initContext();
+      CloudDriveContext.init(this);
     }
     return super.renderEventURL(ajax, name, beanId, params);
   }
