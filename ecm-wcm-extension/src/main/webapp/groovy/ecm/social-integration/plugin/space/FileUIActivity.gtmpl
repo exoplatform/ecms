@@ -105,6 +105,7 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
     //params for init UIActivity javascript object
     def params = """ {
       activityId: '${activity.id}',
+      activityBody: `${activity.title}`,
       placeholderComment: '${placeholder}',
       inputWriteAComment: '$inputWriteAComment',
       commentMinCharactersAllowed: '${uicomponent.getCommentMinCharactersAllowed()}',
@@ -117,22 +118,10 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
       labels: $labels
     } """
 
-    String ckEditorType = new StringBuilder("editActivity").append(activity.id);
-    //params for init edit composer component
-    def composerParams = """ {
-      activityId: '${activity.id}',
-      composerAction: 'update',
-      ckEditorType: '${ckEditorType}',
-      activityBody: `${activity.title}`
-    } """
-
     def jsManager = Util.getPortalRequestContext().getJavascriptManager();
     jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
     jsManager.require("SHARED/social-ui-activity","activity").addScripts("activity.onLoad($params);");
-    jsManager.require("SHARED/wcm-utils", "wcmutil")
-    .require("SHARED/ActivityComposer", "activityComposer").addScripts("activityComposer.init($composerParams);");
-
-
+    jsManager.require("SHARED/wcm-utils", "wcmutil");
 
     //make sures commentFormFocused is set to false to prevent any refresh to focus, only focus after post a comment
     uicomponent.setCommentFormFocused(false);
@@ -156,7 +145,7 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
     uiform.begin();
     def viewerId = Utils.getViewerIdentity().getId();
 %>
-    <div id="activityComposer"></div>
+    <div id="activityComposer${activity.id}"></div>
     <div class="activityStream uiActivityStreamWrapper uiContentActivity fileActivity multiFilesActivity" id="activityContainer${activity.id}">
     <div class="boxContainer" id="boxContainer">
         <div id="ContextBox${activity.id}"class="uiBox contentBox">
