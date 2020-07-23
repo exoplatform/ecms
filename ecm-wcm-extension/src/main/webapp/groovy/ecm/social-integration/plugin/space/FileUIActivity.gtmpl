@@ -170,23 +170,22 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
             <i class="uiIconActivityAction uiIconLightGray">
             </i>
                                     </div>
-            <ul class="dropdown-menu pull-right" role="menu">
-            <li>
-            <a id="Permalink${activity.id}"  rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>">$viewActivityTip</a>
-                                        </li>
+            <ul class="dropdown-menu actLink-items pull-right" role="menu">
+            <li class="actLink-item">
+                <a id="Permalink${activity.id}"  rel="tooltip" data-placement="bottom" title="$viewActivityTip" href="<%=uicomponent.getActivityPermalink(activity.id)%>">
+                    <i class="uiIcon uiIconOpenActivity actLink-icon"></i>
+                    <span class="actLink-label">$viewActivityTip</span>
+                </a>
+            </li>
             <% if(activityEditable) {%>
-            <li class="hidden-tabletL">
-            <a id="EditActivitylink${activity.id}" data-edit-activity="${activity.id}" data-placement="bottom" href="javascript:void(0)">${labelEdit}</a>
-                                        </li>
+            <li class="actLink-item hidden-tabletL">
+                <a id="EditActivitylink${activity.id}" data-edit-activity="${activity.id}" data-placement="bottom" href="javascript:void(0)">
+                    <i class="uiIcon uiIconEdit actLink-icon"></i>
+                    <span class="actLink-label">${labelEdit}</span>
+                </a>
+            </li>
             <%
             }
-            if (activityDeletable) {
-            %>
-            <li>
-            <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>" class="controllDelete" id="DeleteActivityButton${activity.id}">${labelDelete}</a>
-
-                                        </li>
-            <%}
             if(uicomponent.getFilesCount() == 1){
             def currentNode = uicomponent.getContentNode(0);
             if(uicomponent.canEditDocument(currentNode)) {
@@ -199,15 +198,37 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
             jsManager.require("SHARED/openDocumentInOffice", "od")
             .addScripts("gj(document).ready(function(){od.OpenDocumentInOffice.updateLabel('" + preferenceWS + ":" + currentNode.getPath().replaceAll("'", "\\\\'") + "', '" + activity.id + "'); }); ");
             %>
-            <li class="hidden-tabletL" style="display:none;" ><a href="<%=uicomponent.event("OpenFile")%>"><i class="uiIcon16x16FileDefault uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;$remoteEditTitle</a></li>
-                                            <%  } %>
-                                            <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.download");%></a></li>
-                                        <% } else if(uicomponent.getFilesCount() > 1) { %>
-                                            <li><a href="$downloadAllUrl"><%=_ctx.appRes("SocialIntegration.downloadAll");%></a></li>
-                                        <% } %>
-
-                                    </ul>
-            </div><!-- end three dots link-->
+            <li class="actLink-item hidden-tabletL" style="display:none;" >
+                <a href="<%=uicomponent.event("OpenFile")%>">
+                    <i class="uiIcon16x16FileDefault actLink-icon uiIconEcmsOpenDocument_$activity.id $remoteEditClass" ></i>&nbsp;
+                    <span>$remoteEditTitle</span>
+                </a>
+            </li>
+            <%  } %>
+            <li class="actLink-item">
+                 <a href="$downloadAllUrl">
+                    <i class="uiIcon uiIconDownload actLink-icon"></i>
+                    <span class="actLink-label"><%=_ctx.appRes("SocialIntegration.download");%></span>
+                 </a>
+            </li>
+            <% } else if(uicomponent.getFilesCount() > 1) { %>
+            <li class="actLink-item">
+                <a href="$downloadAllUrl">
+                    <i class="uiIcon uiIconDownload actLink-icon"></i>
+                    <span><%=_ctx.appRes("SocialIntegration.downloadAll");%></span>
+                </a>
+            </li>
+             <% }
+            if (activityDeletable) {%>
+            <li class="actLink-item">
+                <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>" class="controllDelete" id="DeleteActivityButton${activity.id}">
+                    <i class="uiIcon uiIconTrashActivity actLink-icon"></i>
+                    <span class="actLink-label">${labelDelete}</span>
+                </a>
+            </li>
+            <%}%>
+        </ul>
+      </div><!-- end three dots link-->
     </div><!-- end activityHeader -->
     </div><!--end heading-->
     <% if (activityStatus != null) { %>
