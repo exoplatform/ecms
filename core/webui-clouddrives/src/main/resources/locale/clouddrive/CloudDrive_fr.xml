@@ -71,7 +71,7 @@
       <ErrorMoveToDestination>Erreur lors du déplacement du lien partagé vers la destination</ErrorMoveToDestination>
       <DestinationItemNameExists>Ce nom d'article existe déjà dans le dossier de destination</DestinationItemNameExists>
       <LinkCreated>Lien {0} créé</LinkCreated>
-      <FileLinksCreated>Fichier {0} lié dans {1}</FileLinksCreated>
+      <FileLinksCreated>Fichier {0} lié à {1}</FileLinksCreated>
       <FileLinksSharedInSpace>Lien du fichier {0} partagé dans {1} de l'espace {2}</FileLinksSharedInSpace>
       <FileLinksSharedInGroup>Lien du fichier {0} partagé dans {1} du groupe {2}</FileLinksSharedInGroup>
       <FileLinksSharedWithUser>Lien de fichier {0} partagé avec l'utilisateur {2} dans son dossier {1}</FileLinksSharedWithUser>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <administration>
-    <siteExplorer>Explorador de Contenido</siteExplorer>
-    <wcmAdmin>Administración de contenido</wcmAdmin>
+    <siteExplorer>Backoffice</siteExplorer>
+    <wcmAdmin>Ajustes de CMS</wcmAdmin>
   </administration>
 </bundle>

@@ -56,25 +56,25 @@
     </event>
     <label>
       <sourceview>View source code</sourceview>
-      <webview>View as Web page</webview>
+      <webview>View as web page</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>Cannot move file to another cloud drive</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>Cannot move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>Cannot move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>Cannot copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>Cannot write in destination folder</DestinationNotWrittable>
+      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
       <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
       <SourceNotDefined>Source file not defined</SourceNotDefined>
       <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
       <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
-      <LinkCreated>Link{0} created</LinkCreated>
-      <FileLinksCreated>File{0} linked in {1}</FileLinksCreated>
-      <FileLinksSharedInSpace>File link{0} shared in {1} of {2} space</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>File link{0} shared in {1} of {2} group</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>File link{0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
+      <LinkCreated>Link {0} created</LinkCreated>
+      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
       <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
       <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
       <CannotFindUser>Cannot find user {0}</CannotFindUser>

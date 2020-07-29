@@ -55,7 +55,7 @@
         <pdf-max-page>La vista previa no está disponible para contenidos de más de {0} páginas.</pdf-max-page>
         <using-webDAV>o abrir en MS Office</using-webDAV>
         <open-on-desktop>Abrir en el Escritorio</open-on-desktop>
-        <editOnline>Edit Online</editOnline>
+        <editOnline>Editar en línea</editOnline>
         <open-in-documents>Abrir en Documentos</open-in-documents>
         <open-in-documents-tooltip>Abrir este fichero en la aplicación Documentos</open-in-documents-tooltip>
         <file-size-too-big>El contenido de este archivo es demasiado grande. Debe descargar y abrir en el cliente.</file-size-too-big>
@@ -75,7 +75,7 @@
       <label>
         <from>De:</from>
         <to>Para:</to>
-        <cc>Cc:</cc>
+        <cc>Para:</cc>
         <date>Fecha:</date>
         <subject>Asunto:</subject>
         <attachment>Archivos adjuntos:</attachment>

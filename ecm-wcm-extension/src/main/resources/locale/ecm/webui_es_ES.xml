@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Seleccionar Usuario</UIPermissionUser>
-      <UIPermissionMembership>Seleccione el rol</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Seleccione el rol</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Seleccionar rol</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Seleccionar rol</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Seleccione el rol</selectUser>
+      <selectUser>Seleccionar rol</selectUser>
       <selectGroup>Navega y selecciona un Grupo</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

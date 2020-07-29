@@ -2660,7 +2660,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Uploader un fichier</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Charger un fichier</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
