@@ -23,63 +23,63 @@
   <UITabForm>
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
-      <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
+      <showConnectCloudDrive>Conectar documentos en la nube</showConnectCloudDrive>
     </label>
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
-      <ConnectYour>Connect your</ConnectYour>
-      <UISharingManager>Cloud file sharing</UISharingManager>
+      <ConnectCloudDriveForm>Conectar documentos en la nube</ConnectCloudDriveForm>
+      <ConnectYour>Conecta tu</ConnectYour>
+      <UISharingManager>Compartir archivos en la nube</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Conectar documentos en la nube</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
     <event>
-      <OpenCloudFile>Open on</OpenCloudFile>
-      <SyncingFile>Synchronizing file...</SyncingFile>
-      <PushCloudFile>Push to</PushCloudFile>
-      <RefreshCloudDrive>Sync with</RefreshCloudDrive>
-      <RefreshView>Refresh view</RefreshView>
+      <OpenCloudFile>Abrir en</OpenCloudFile>
+      <SyncingFile>Sincronizando archivo...</SyncingFile>
+      <PushCloudFile>Llevar a</PushCloudFile>
+      <RefreshCloudDrive>Sincronizar con</RefreshCloudDrive>
+      <RefreshView>Actualizar vista</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
-      <OpenOn>Open on</OpenOn>
+      <OpenFileOn>Abrir $fileUrl en $serviceName</OpenFileOn>
+      <OpenOn>Abrir en</OpenOn>
       <EditFile>Editar</EditFile>
       <ViewFile>Ajuste</ViewFile>
     </event>
     <label>
-      <sourceview>View source code</sourceview>
-      <webview>View as web page</webview>
+      <sourceview>Ver código fuente</sourceview>
+      <webview>Ver como página web</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
-      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
-      <SourceNotDefined>Source file not defined</SourceNotDefined>
-      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
-      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
-      <LinkCreated>Link {0} created</LinkCreated>
-      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
-      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
-      <CannotFindUser>Cannot find user {0}</CannotFindUser>
-      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
+      <MoveToAnotherDriveNotSupported>Error al mover el archivo a otra unidad en la nube</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Error al extraer el archivo de su unidad en la nube</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Error al mover el archivo en la nube a otro espacio de trabajo</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Error al copiar o mover la carpeta de la unidad en la nube</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Error al escribir en la carpeta de destino</DestinationNotWrittable>
+      <DestinationNotDefined>La carpeta de destino no está definida</DestinationNotDefined>
+      <SourceNotDefined>El archivo de origen no está definido</SourceNotDefined>
+      <ErrorMoveToDestination>Error al mover el enlace compartido al destino</ErrorMoveToDestination>
+      <DestinationItemNameExists>Ya existe un elemento con ese nombre en el destino</DestinationItemNameExists>
+      <LinkCreated>Se ha creado el enlace {0}</LinkCreated>
+      <FileLinksCreated>Archivo {0} vinculado en {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>Enlace del archivo {0} compartido en {1} del espacio {2}</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>Enlace del archivo {0} compartido en {1} del grupo {2}</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>Enlace del archivo {0} compartido con {2} en su carpeta {1}</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>Error al vincular el archivo a este destino</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Error al leer unidades de documentos</ErrorReadingDrives>
+      <CannotFindUser>No se ha encontrado el usuario {0}</CannotFindUser>
+      <ErrorReadingFileLinks>Error al leer enlaces del archivo</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Error al leer la unidad del usuario</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
@@ -89,7 +89,7 @@
   </ConnectCloudDriveForm>
   <ConnectDriveDrawer>
     <title>
-      <ConnectYourService>Connect your service</ConnectYourService>
+      <ConnectYourService>Conecta tu servicio</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
 </bundle>

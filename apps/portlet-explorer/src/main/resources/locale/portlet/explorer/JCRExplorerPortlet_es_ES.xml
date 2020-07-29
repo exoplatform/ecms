@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Seleccionar Usuario</SelectUser>
-      <SelectMember>Seleccione el rol</SelectMember>
+      <SelectMember>Seleccionar rol</SelectMember>
       <AddAny>Seleccionar a todos</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Seleccionar Usuario</UIGroupSelector>
       <UIPermissionSelector>Seleccionar miembro</UIPermissionSelector>
-      <UIGroupMemberSelector>Seleccione el rol</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Seleccionar rol</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

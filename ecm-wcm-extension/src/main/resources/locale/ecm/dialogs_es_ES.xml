@@ -139,7 +139,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
+        <cron-expression>Expresión cron</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -413,20 +413,20 @@
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Document</Save>
+      <Save>Crear documento</Save>
     </action>
     <label>
-      <titleTextBox>Document Name:</titleTextBox>
-      <typeSelectBox>Document Type:</typeSelectBox>
+      <titleTextBox>Nombre del documento:</titleTextBox>
+      <typeSelectBox>Tipo de documento:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Please enter the document name.</name-invalid>
+      <name-invalid>Introduce el nombre del documento.</name-invalid>
       <constraint-violation>No puede añadir un documento de tipo '{0}' aquí.</constraint-violation>
       <repository-exception>Ocurrió un error inesperado. Póngase en contacto con su administrador para obtener más detalles.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <repository-exception-permission>No tienes permiso para añadir nuevos documentos aquí.</repository-exception-permission>
       <numberformat-exception>No se puede guardar este documento. El nombre proporcionado debe estar en formato numérico.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>No puedes guardar el documento. Ya existe un elemento con el mismo nombre.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

@@ -1085,7 +1085,7 @@
     </action>
     <msg>
       <version-restored>Versión {0} fue restaurada con éxito.</version-restored>
-      <role-require>Por favor, seleccione un permiso.</role-require>
+      <role-require>Por favor, selecciona un permiso.</role-require>
       <template-name-exist>El nombre de la plantilla '{0}' ya existe.</template-name-exist>
       <add-permission-denied>No tiene permiso para añadir una nueva plantilla.</add-permission-denied>
       <edit-permission-denied>No tiene permiso para modificar la '{0}' plantilla.</edit-permission-denied>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Seleccione el rol</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Seleccione rol</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Seleccionar Usuario</SelectUser>
-      <SelectMember>Seleccione el rol</SelectMember>
+      <SelectMember>Seleccionar rol</SelectMember>
       <AddAny>Todos</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Seleccionar Usuario</UIGroupSelector>
       <UIPermissionSelector>Seleccionar miembro</UIPermissionSelector>
-      <UIGroupMemberSelector>Seleccione el rol</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Seleccionar rol</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Seleccionar Grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2485,14 +2485,14 @@
       <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Este rol ya existe. Elige otro.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
-      <selectMembership>Seleccione el rol</selectMembership>
+      <selectMembership>Seleccionar rol</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
