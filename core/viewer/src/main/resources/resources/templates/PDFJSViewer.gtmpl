@@ -31,10 +31,7 @@ if (uiParent != null) {
   def mimeType = contentNode.getProperty("jcr:mimeType").getString();
   def title = org.exoplatform.ecm.webui.utils.Utils.getTitle(currentNode);
   def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
-  def viewLink = downloadLink;
-  if(mimeType.toLowerCase().contains("pdf")) {
-    viewLink = Utils.getPDFViewerLink(originalNode);
-  }
+  def viewLink = Utils.getPDFViewerLink(originalNode);
 
   def rqcontext = _ctx.getRequestContext();
   def maximumPage = uicomponent.getMaximumOfPage();
