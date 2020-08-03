@@ -16,11 +16,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.ElasticSearchFilter;
 import org.exoplatform.commons.search.es.ElasticSearchFilterType;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 
 import io.swagger.annotations.*;
@@ -34,7 +37,7 @@ public class FileSearchRestService implements ResourceContainer {
 
   private FileSearchServiceConnector fileSearchServiceConnector;
   
-  private NodeHierarchyCreator nodeHierarchyCreator; 
+  private NodeHierarchyCreator nodeHierarchyCreator;
 
   private static final int DEFAULT_LIMIT = 20;
 
@@ -69,7 +72,11 @@ public class FileSearchRestService implements ResourceContainer {
     List<ElasticSearchFilter> recentFilters = new ArrayList<>();
     recentFilters.add(getRecentFilter());
     recentFilters.add(getFileTypesFilter());
-    recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
+    Identity currentIdentity = ConversationState.getCurrent().getIdentity();
+    UserACL userACL = PortalContainer.getInstance().getComponentInstanceOfType(UserACL.class);
+    if (!currentIdentity.isMemberOf(userACL.getAdminGroups(), "*")) {
+      recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
+    }
     Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null, query, recentFilters, null, 0, limit, sortField, sortDirection);
     return Response.ok(recentDocuments).build();
   }
