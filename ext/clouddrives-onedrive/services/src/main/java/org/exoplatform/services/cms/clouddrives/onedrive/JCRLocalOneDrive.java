@@ -389,11 +389,10 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
     SharingLink sharingLink = createLink(item);
     if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
-      link = "personal=" + sharingLink.webUrl;
       previewLink = item.webUrl;
-    } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
-      link = "business=" + sharingLink.webUrl;
     }
+    link = sharingLink.webUrl;
+    
     return new DriveItemInfo(link, previewLink, lastModifiedUserName, createdUserName);
   }
 
@@ -410,11 +409,9 @@ public class JCRLocalOneDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
     SharingLink sharingLink = createLink(item);
     if (sharingLink.type.equalsIgnoreCase("embed")) { // personal account
-      link = "personal=" + sharingLink.webUrl;
       previewLink = sharingLink.webUrl;
-    } else if (sharingLink.type.equalsIgnoreCase("view")) { // business account
-      link = "business=" + sharingLink.webUrl;
     }
+    link = sharingLink.webUrl;
 
     initFile(fileNode,
             item.id,
