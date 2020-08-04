@@ -27,6 +27,24 @@ public class JCRLocalOneDriveFile extends JCRLocalCloudFile {
    */
   protected final String        accountType;
 
+  // FYI transient fields will not appear in serialized forms like JSON object
+  // (we don't need to convert it to JSON)
+  // on client side
+  /** The created date. */
+  private transient Calendar    createdDate;
+
+  /** The modified date. */
+  private transient Calendar    modifiedDate;
+
+  /** The local modified date. */
+  private transient Calendar    localModifiedDate;
+
+  /** The node. */
+  private transient Node        node;
+
+  /** The changed. */
+  private transient boolean     changed;
+
   /**
    * Local cloud file or folder (full internal constructor).
    * 
