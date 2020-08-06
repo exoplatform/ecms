@@ -53,7 +53,6 @@ import org.exoplatform.services.cms.documents.*;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -138,8 +137,6 @@ public class FileUIActivity extends BaseUIActivity{
 
   public static final String  ACTIVITY_STATUS     = "MESSAGE";
 
-  public static final String  CONTENT_NAME        = "contentName";
-
   public static final String  IMAGE_PATH          = "imagePath";
 
   public static final String  MIME_TYPE           = "mimeType";
@@ -163,8 +160,6 @@ public class FileUIActivity extends BaseUIActivity{
   public static final String  IS_SYSTEM_COMMENT   = "isSystemComment";
 
   public static final String  SYSTEM_COMMENT      = "systemComment";
-  
-  public static final String                  STREAM_CONTEXT = "stream";
 
   public static final String  ONE_DRIVE_PROVIDER_ID    = "onedrive";
 
@@ -263,20 +258,31 @@ public class FileUIActivity extends BaseUIActivity{
       return null;
     }
     ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
-    String contentName = null;
     // Retrieve name from JCR Node instead of activity parameter
     // To get real file name instead
+    if (activityFileAttachment == null
+            || activityFileAttachment.getContentNode() == null) {
+      return null;
+    }
+    String activityContentName = activityFileAttachment.getContentName();
+    Node contentNode = activityFileAttachment.getContentNode();
     try {
-      contentName = (activityFileAttachment == null
-          || activityFileAttachment.getContentNode() == null) ? null : (activityFileAttachment.getContentNode().hasProperty("exo:title")) ? URLDecoder.decode(activityFileAttachment.getContentNode().getProperty("exo:title").getString(), "UTF-8") : URLDecoder.decode(activityFileAttachment.getContentName(), "UTF-8");
-      if (StringUtils.isBlank(contentName)) {
-        contentName = URLDecoder.decode(activityFileAttachment.getContentName(), "UTF-8");
-      }
-      return URLDecoder.decode(contentName, "UTF-8");
+      return getContentName(contentNode, activityContentName);
     } catch (Exception e) {
       LOG.debug("Can't retrieve file name of attachment with path " + activityFileAttachment.getDocPath(), e);
-      return contentName;
+      return null;
     }
+  }
+
+  public String getContentName(Node contentNode, String activityContentName) throws Exception{
+    activityContentName = activityContentName == null ? contentNode.getName() : URLDecoder.decode(activityContentName, "UTF-8");
+    String contentName = contentNode.hasProperty("exo:title") ?
+            URLDecoder.decode(contentNode.getProperty("exo:title").getString(), "UTF-8")
+            : activityContentName;
+    if (StringUtils.isBlank(contentName)) {
+      contentName = URLDecoder.decode(activityContentName, "UTF-8");
+    }
+    return URLDecoder.decode(contentName, "UTF-8");
   }
 
   public void setContentName(String contentName, int i) {
@@ -811,7 +817,6 @@ public class FileUIActivity extends BaseUIActivity{
     String[] author = getParameterValues(activityParams, FileUIActivity.AUTHOR);
     String[] dateCreated =  getParameterValues(activityParams, FileUIActivity.DATE_CREATED);
     String[] lastModified =  getParameterValues(activityParams, FileUIActivity.LAST_MODIFIED);
-    String[] contentName =  getParameterValues(activityParams, FileUIActivity.CONTENT_NAME);
     String[] mimeType =  getParameterValues(activityParams, FileUIActivity.MIME_TYPE);
     String[] imagePath =  getParameterValues(activityParams, FileUIActivity.IMAGE_PATH);
     String[] docTypeName =  getParameterValues(activityParams, FileUIActivity.DOCUMENT_TYPE_LABEL);
@@ -842,12 +847,10 @@ public class FileUIActivity extends BaseUIActivity{
         ManageableRepository repository = WCMCoreUtils.getRepository();
         workspaceName =  repository == null ? null : repository.getConfiguration().getDefaultWorkspaceName();
       }
-
       fileAttachment.setNodeUUID(nodeUUIDs[i])
                     .setRepository(repositoryName)
                     .setWorkspace(workspaceName)
                     .setContentLink((String) getValueFromArray(i, contentLink))
-                    .setContentName(getValueFromArray(i, contentName))
                     .setState((String) getValueFromArray(i, state))
                     .setAuthor(getValueFromArray(i, author))
                     .setDateCreated(getValueFromArray(i, dateCreated))
@@ -865,9 +868,10 @@ public class FileUIActivity extends BaseUIActivity{
       if (contentNode != null) {
         try {
           if (!getTrashService().isInTrash(contentNode)) {
+            fileAttachment.setContentName(getContentName(contentNode, fileAttachment.getContentName()));
             activityFileAttachments.add(fileAttachment);
           }
-        } catch (RepositoryException e) {
+        } catch (Exception e) {
           LOG.error("Error while testing if the content is in trash", e);
         }
       }
