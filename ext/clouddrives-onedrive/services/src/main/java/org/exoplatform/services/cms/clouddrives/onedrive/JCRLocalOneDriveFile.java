@@ -8,14 +8,14 @@ import java.util.Calendar;
 public class JCRLocalOneDriveFile extends JCRLocalCloudFile {
 
   /**
-   * The constant PERSONAL.
-   */
-  protected static final String PERSONAL = "personal";
-
-  /**
    * The constant BUSINESS.
    */
-  protected static final String BUSINESS = "business";
+  protected static final String BUSINESS     = "business";
+
+  /**
+   * The constant EMPTY_STRING.
+   */
+  protected static final String EMPTY_STRING = "";
 
   /**
    * The one drive api.
@@ -267,14 +267,18 @@ public class JCRLocalOneDriveFile extends JCRLocalCloudFile {
    */
   @Override
   public String getPreviewLink() {
-    String previewLink = "";
+    String previewLink;
 
     if (BUSINESS.equals(accountType)) {
       previewLink = api.getBusinessPreviewLink(this.getId());
-    }
+    } else {
+      // we try to get the personal onedrive file preview link
+      previewLink = super.getPreviewLink();
 
-    if (PERSONAL.equals(accountType)) {
-      previewLink = super.getPreviewLink();;
+      // if it's empty we get the business onedrive file preview link
+      if (previewLink == null || EMPTY_STRING.equals(previewLink)) {
+        previewLink = api.getBusinessPreviewLink(this.getId());
+      }
     }
 
     return previewLink;
