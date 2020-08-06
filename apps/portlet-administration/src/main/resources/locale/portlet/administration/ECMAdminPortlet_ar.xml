@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>اختيار العضويّة</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>اختيار العضوية</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>إختيار مجموعة</selectGroup>
-      <selectMembership>اختيار العضويّة</selectMembership>
+      <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>اختيار مستخدم</SelectUser>
-      <SelectMember>اختيار العضويّة</SelectMember>
+      <SelectMember>اختيار عضوية</SelectMember>
       <AddAny>الجميع</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>اختيار المستخدم</UIGroupSelector>
       <UIPermissionSelector>اختيار العضوية</UIPermissionSelector>
-      <UIGroupMemberSelector>اختيار العضويّة</UIGroupMemberSelector>
+      <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
       <selectUser>اختيارمستخدم</selectUser>
-      <selectMembership>اختيار العضويّة</selectMembership>
+      <selectMembership>اختيار العضوية</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>إختيار مجموعة</selectGroup>
       <selectUser>إختيار مستخدم</selectUser>
-      <selectMembership>اختيار العضويّة</selectMembership>
+      <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>اختيار العضويّة</selectMembership>
+      <selectMembership>اختر عضوية</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>إختيار مجموعة</selectGroup>
       <selectUser>إختيار مستخدم</selectUser>
-      <selectMembership>اختيار العضويّة</selectMembership>
+      <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2485,14 +2485,14 @@
       <userOrGroup>Roles:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>هذه العضوية موجودة مُسبقا. الرجاء اختيار واحدة أخرى.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار العضويّة</selectMembership>
+      <selectMembership>اختيار العضوية</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
