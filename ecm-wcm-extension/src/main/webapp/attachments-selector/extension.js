@@ -1,8 +1,14 @@
+// configuration here uses configuretion file (in case of cloudDrive - cloudDrivePlugin.js) from another vue app,
+// extensions are registered there
+// (extensionRegistry.registerExtension("AttachmentsComposer", "attachments-composer-action", extension))
+// if composer name or extension type changes it should be changed here and in configuration file
+
 let attachmentsComposerActions = null;
 
 export function getAttachmentsComposerExtensions() {
   if(attachmentsComposerActions == null) {
     const allExtensions = getExtensionsByType('attachments-composer-action');
+    // if some extension registered but has flag 'enabled' set to false, we don't add this extension
     attachmentsComposerActions = allExtensions.filter(extension => isExtensionEnabled(extension));
   }
 
@@ -11,7 +17,7 @@ export function getAttachmentsComposerExtensions() {
 
 export function executeExtensionAction(extension, component) {
   if(extension.hasOwnProperty('onExecute') && isFunction(extension.onExecute)) {
-    extension.onExecute(component);
+    extension.onExecute(component); // it will execute code inside onExecute() defined in configuration file
   }
 }
 
