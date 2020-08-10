@@ -41,12 +41,14 @@
         <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconFilter'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
         <a v-if="(modeFolderSelectionForFile || modeFolderSelection) && currentDrive" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
       </div>
+      <!-- Action buttons for extensionRegistry extensions -->
       <div v-for="action in attachmentsComposerActions" v-show="showDriveAction" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
         <div v-if="!modeFolderSelection" class="actionBoxLogo" @click="executeAction(action)">
           <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
           <i v-else :class="action.iconClass" class="uiActionIcon"></i>
         </div>
       </div>
+      <!-- end of action buttons block -->
     </div>
 
     <transition name="fade" mode="in-out">
@@ -103,6 +105,7 @@
               <template v-slot:activator>
                 <v-list-item-content class="categoryContent">{{ name }}</v-list-item-content>
               </template>
+              <!-- Drives block -->
               <div class="selectionBox">
                 <div 
                   v-for="driver in group.drives" 
@@ -116,6 +119,7 @@
                       :class="driver.isCloudDrive ? driver.driveTypeCSSClass : `uiIconEcms24x24DriveGroup ${driver.driveTypeCSSClass}`"
                       class="uiIconEcmsLightGray selectionIcon center"></i>
                     <div class="text-center ma-12 connectingDrive">
+                      <!-- show circular progress if cloud drive is connecting -->
                       <v-progress-circular
                         v-show="drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100"
                         :indeterminate="false"
@@ -126,6 +130,7 @@
                         color="var(--allPagesPrimaryColor, #578dc9)"
                         class="connectingDriveProgress"
                       >{{ drivesInProgress[driver.title] }}<span class="connectingDriveProgressPercent">%</span></v-progress-circular>
+                      <!-- end of progress block -->
                     </div>
                     <div 
                       :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
@@ -134,6 +139,7 @@
                   </a>
                 </div>
               </div>
+              <!-- end of drives -->
             </v-list-group>
           </v-list-group>
         </v-list>
@@ -189,15 +195,15 @@ export default {
       type: Array,
       default: () => []
     },
-    extensionRefs: {
+    extensionRefs: { // references to extension dynamic components
       type: Array,
       default: () => []
     },
-    connectedDrive: {
+    connectedDrive: { // cloud drive that is in connecting progress recieved from parent
       type: Object,
       default: () => ({})
     },
-    cloudDrivesInProgress: {
+    cloudDrivesInProgress: { // all cloud drives that is in progress with their progress values recieved from parent
       type: Object,
       default: () => ({})
     }
@@ -221,7 +227,7 @@ export default {
       selectedFolderPath : '',
       schemaFolder: '',
       folderDestinationForFile:'',
-      attachmentsComposerActions: [],
+      attachmentsComposerActions: [], // extensions from extensionRegistry
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
@@ -246,7 +252,7 @@ export default {
     };
   },
   computed: {
-    showDriveAction(){
+    showDriveAction(){ // show drivers extension buttons only if it's root path
       return this.currentDrive ? this.currentDrive.name === 'Personal Documents': true;
     },
     filteredFolders() {
@@ -281,6 +287,7 @@ export default {
         'My Spaces': { drives: [] }, 
         'Others': { drives: [] } 
       };
+      // map through founded drives and fill in drivesByTypes
       drivers.map(drive => { 
         if (drive.driverType === 'Personal Drives') {
           drivesByTypes['My Drives'].drives.push(drive);
@@ -302,7 +309,7 @@ export default {
     emptyFolderForSelectDestination(){
       return this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
     },
-    connectedMessage() {
+    connectedMessage() { // returns name of the drive which finished connecting
       let connectedDrive;
       for (const key in this.drivesInProgress) {
         const fullProgress = 100;
@@ -310,7 +317,7 @@ export default {
       }
       return connectedDrive;
     },
-    drivesInProgress() {
+    drivesInProgress() { // returns the copy of cloudDrivesInProgress.drives
       return { ...this.cloudDrivesInProgress.drives };
     }
   },
@@ -564,7 +571,7 @@ export default {
         this.$emit('itemsSelected', this.selectedFolderPath, this.schemaFolder);
       }
     },
-    executeAction(action) {
+    executeAction(action) { // will execute code inside 'onExecute' extension method
       executeExtensionAction(action, this.extensionRefs[action.key][0]);
     },
     addNewFolder() {

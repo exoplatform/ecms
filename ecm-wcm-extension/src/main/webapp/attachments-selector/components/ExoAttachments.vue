@@ -161,10 +161,12 @@
         ></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <!-- Block below represents adding extensions registered with extensionRegistry -->
         <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`">
           <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
                      :is="action.component.name" :ref="action.key"></component>
         </div>
+        <!-- extensions block ends -->
       </div>
       <div v-if="!showDocumentSelector" class="attachmentsFooter footer ignore-vuetify-classes">
         <a class="btn btn-primary ignore-vuetify-classes" @click="toggleAttachmentsDrawer()">{{ $t('attachments.drawer.apply') }}</a>
@@ -252,13 +254,14 @@ export default {
       modeFolderSelectionForFile: false,
       showAttachmentsDrawer: false,
       displayMessageDestinationFolder: true,
-      cloudDriveConnecting: false,
+      cloudDriveConnecting: false, // display progress line at the top if some cloud drive in connecting progress
+      // connecting cloud drive that should be displayed in drives, this passed as a prop to ExoFoldersFilesSelector
       connectedDrive: {},
       privateFilesAttached: false,
-      isActivityStream: true,
-      fromAnotherSpaces: '',
-      spaceGroupId: '',
-      drivesInProgress: {}
+      isActivityStream: true, // if composer is opened from activity stream or from space
+      fromAnotherSpaces: '', // if composer is opened from space this shows that attachments added by user is from another spaces
+      spaceGroupId: '', // id of current space
+      drivesInProgress: {} // contains cloud drives which are connecting
     };
   },
   watch: {
@@ -296,7 +299,9 @@ export default {
             }
           }
         }
+        // if attached files has at least one non-public file show info alert about sharing private files
         this.privateFilesAttached = this.value.some(file => file.isPublic === false);
+        // set to space names separated with comma if attachments are added from space, which is not current space
         this.fromAnotherSpaces = this.value.filter(({ space }) => space && space.name !== this.groupId)
           .map(({ space }) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
       }
@@ -329,7 +334,7 @@ export default {
   },
   created(){
     this.addDefaultPath();
-    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
+    this.attachmentsComposerActions = getAttachmentsComposerExtensions(); // get extensionRegistry extensions
   },
   methods: {
     toggleAttachmentsDrawer: function() {
@@ -603,8 +608,8 @@ export default {
       t.innerHTML = html;
       return t.content.cloneNode(true);
     },
-    addCloudDrive(drive) {
-      this.connectedDrive = drive;
+    addCloudDrive(drive) { // listen 'addDrive' event
+      this.connectedDrive = drive; // set connectedDrive causes connectedDrive property changing in ExoFoldersFilesSelector.vue
     },
     changeCloudDriveProgress(drives) { // listen clouddrives 'updateDrivesInProgress' event
       this.drivesInProgress = drives; // update progress for connecting drive to display that drive is in connection
