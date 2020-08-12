@@ -393,40 +393,40 @@
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>New Document</NewDocument>
+      <NewDocument>مستند جديد</NewDocument>
     </tooltip>
   </UIActionBar>
   
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>New Document</newDocument>
+      <newDocument>مستند جديد</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>مستند جديد</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Document</Save>
+      <Save>إنشاء مستند</Save>
     </action>
     <label>
-      <titleTextBox>Document Name:</titleTextBox>
-      <typeSelectBox>Document Type:</typeSelectBox>
+      <titleTextBox>اسم المستند:</titleTextBox>
+      <typeSelectBox>نوع المستند:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Please enter the document name.</name-invalid>
+      <name-invalid>الرجاء إدخال إسم المستند.</name-invalid>
       <constraint-violation>لا يمكن إضافة مستند من نوع '{0}' هنا.</constraint-violation>
       <repository-exception>طرأ خطأ غير متوقّع. للمزيد من المعلومات، يُرجى الاتصال بمدير النّظام .</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <repository-exception-permission>ليس لديك الإذن لإضافة مستند جديد هنا.</repository-exception-permission>
       <numberformat-exception>لا يمكن حفظ هذه الوثيقة. يجب ادخال اسما ذو صيغة عدديّة.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>لا يمكنك حفظ المستند. يوجد بالفعل عنصر بنفس الاسم.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

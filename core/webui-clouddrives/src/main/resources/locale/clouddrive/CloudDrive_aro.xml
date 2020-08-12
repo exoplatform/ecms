@@ -49,13 +49,13 @@
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
+      <OpenFileOn>فتح $fileUrl على $serviceName</OpenFileOn>
       <OpenOn>فتح بواسطة</OpenOn>
       <EditFile>تغيير</EditFile>
       <ViewFile>عرض</ViewFile>
     </event>
     <label>
-      <sourceview>View source code</sourceview>
+      <sourceview>أكشف نص البرمجة</sourceview>
       <webview>عرض كصفحة ويب</webview>
     </label>
   </CloudFileViewer>
