@@ -53,10 +53,13 @@ import org.exoplatform.webui.core.UIComponent;
 public class CloudDriveContext {
 
   /** The Constant JAVASCRIPT. */
-  protected static final String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
+  protected static final String JAVASCRIPT                 = "CloudDriveContext_Javascript".intern();
 
   /** The Constant LOG. */
-  protected static final Log    LOG        = ExoLogger.getLogger(CloudDriveContext.class);
+  protected static final Log    LOG                        = ExoLogger.getLogger(CloudDriveContext.class);
+
+  /** The constant UIJCREXPLORER_CONTEXT_NODE. */
+  public static final String    UIJCREXPLORER_CONTEXT_NODE = "UIJCRExplorer.contextNode";
 
   /**
    * Initialize request with Cloud Drive support from given WebUI component.
@@ -69,7 +72,7 @@ public class CloudDriveContext {
 
     // when in document explorer
     WebuiRequestContext reqContext = WebuiRequestContext.getCurrentInstance();
-    contextNode = (Node) reqContext.getAttribute("uiJCRExplorerCurrentNode");
+    contextNode = (Node) reqContext.getAttribute(UIJCREXPLORER_CONTEXT_NODE);
 
     if (contextNode == null && uiComponent.getParent() instanceof UIBaseNodePresentation) {
       // when in social activity stream (file view)

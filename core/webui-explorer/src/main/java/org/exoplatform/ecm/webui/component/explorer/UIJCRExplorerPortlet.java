@@ -224,6 +224,13 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       explorerContainer.initExplorer();
       editContainer.getChild(UIJcrExplorerEditForm.class).setFlagSelectRender(false);
     }
+    UIJCRExplorer uiExplorer = explorerContainer.getChild(UIJCRExplorer.class);
+    if (uiExplorer != null) {
+      // Init UIJCRExplorer.contextNode attribute for explorer navigation and the file refreshing
+      // (when open a file in explorer or space documents;
+      // when refresh the session (refresh button) for current file in explorer or space documents)
+      uiExplorer.initContext();
+    }
   }
 
   public String getPreferenceRepository() {
@@ -474,6 +481,10 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiActionbar.setRendered(isShowActionBar);
     uiExplorer.clearNodeHistory(addressPath);
     uiExplorer.setSelectNode(driveData.getWorkspace(), addressPath, homePath);
+    // Init UIJCRExplorer.contextNode attribute for the file refreshing and opening by link
+    // (when refresh the file current page (update browser page) in explorer or space documents;
+    // when open a file by link)
+    uiExplorer.initContext();
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     uiDocWorkspace.setRenderedChild(UIDocumentContainer.class);
     uiDocWorkspace.setRendered(true);

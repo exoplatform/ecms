@@ -54,6 +54,9 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
   /** The Constant CONTENTVIEWER_REST_PATH. */
   protected static final String CONTENTVIEWER_REST_PATH = "/contentviewer/";
 
+  /** The constant UIJCREXPLORER_CONTEXT_NODE. */
+  public static final String UIJCREXPLORER_CONTEXT_NODE = "UIJCRExplorer.contextNode";
+
   /** The min size. */
   protected long                minSize;
 
@@ -113,7 +116,7 @@ public abstract class AbstractCloudDriveNodeFilter implements UIExtensionFilter 
       Node contextNode = (Node) context.get(Node.class.getName());
       if (contextNode == null) {
         WebuiRequestContext reqContext = WebuiRequestContext.getCurrentInstance();
-        contextNode = (Node) reqContext.getAttribute("uiJCRExplorerCurrentNode");
+        contextNode = (Node) reqContext.getAttribute(UIJCREXPLORER_CONTEXT_NODE);
         // case of file preview in Social activity stream
         if (contextNode == null) {
           contextNode = (Node) reqContext.getAttribute("UIDocumentPreviewNode");
