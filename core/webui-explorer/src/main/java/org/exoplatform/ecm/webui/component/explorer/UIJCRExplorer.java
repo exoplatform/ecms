@@ -89,6 +89,11 @@ public class UIJCRExplorer extends UIContainer {
    */
   private static final Log LOG  = ExoLogger.getLogger(UIJCRExplorer.class.getName());
 
+  /**
+   * The constant CONTEXT_NODE.
+   */
+  public static final String CONTEXT_NODE = "UIJCRExplorer.contextNode";
+
   private LinkedList<String> nodesHistory_ = new LinkedList<String>() ;
   private LinkedList<String> wsHistory_ = new LinkedList<String>();
   private PortletPreferences pref_ ;
@@ -262,8 +267,16 @@ public class UIJCRExplorer extends UIContainer {
       isShowDocumentViewForFile_ = true;
     }
     currentPath_ = currentPath;
+  }
+
+  /**
+   * Init UIJCRExplorer.contextNode attribute in order to use it for clouddrives.
+   * It allows to exclude cycle dependencies on webui-explorer
+   */
+  public void initContext() {
+    WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     try {
-      ctx.setAttribute("uiJCRExplorerCurrentNode", getCurrentNode());
+      ctx.setAttribute(CONTEXT_NODE, getCurrentNode());
     } catch (Exception e) {
       LOG.warn("Exception while getting the current node for saving in WebuiRequestContext", e);
     }
