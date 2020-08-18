@@ -16,8 +16,16 @@
  */
 package org.exoplatform.ecm.webui.viewer;
 
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
+
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 /**
  * Created by The eXo Platform SARL
@@ -30,7 +38,22 @@ import org.exoplatform.webui.core.UIComponent;
     template = "classpath:resources/templates/TextViewer.gtmpl"
 )
 public class TextViewer extends UIComponent {
+  private String sharedResourcesBundleNames[];
+  private ResourceBundle sharedResourceBundle=null;
 
   public TextViewer() throws Exception {
+  }
+
+  public String getResource(String key) {
+    try {
+      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+      ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+      sharedResourcesBundleNames = resourceBundleService.getSharedResourceBundleNames();
+      sharedResourceBundle = resourceBundleService.getResourceBundle(sharedResourcesBundleNames, locale);
+
+      return sharedResourceBundle.getString(key);
+    } catch (MissingResourceException e) {
+      return key;
+    }
   }
 }
