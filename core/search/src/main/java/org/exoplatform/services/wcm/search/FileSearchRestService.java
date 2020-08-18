@@ -114,6 +114,9 @@ public class FileSearchRestService implements ResourceContainer {
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.oasis.opendocument.text\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/msword\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\" }\n }");
+    fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/jpeg\" }\n }");
+    fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/png\" }\n }");
+    fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/gif\" }\n }");
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "fileType", fileTypesFilter.toString());
   }
   
