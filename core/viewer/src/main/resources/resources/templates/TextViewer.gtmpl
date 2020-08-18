@@ -80,7 +80,7 @@
       } else {
    %>
         <div class="center">
-			    <%=_ctx.appRes("File.view.label.file-size-too-big")%>
+			    <%=uicomponent.getResource("File.view.label.file-size-too-big")%>
 			  </div>
    <%
       }
