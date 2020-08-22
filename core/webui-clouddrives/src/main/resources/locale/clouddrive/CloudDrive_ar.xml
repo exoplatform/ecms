@@ -23,63 +23,63 @@
   <UITabForm>
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
-      <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
+      <showConnectCloudDrive>توصيل المستندات السحابية</showConnectCloudDrive>
     </label>
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
-      <ConnectYour>Connect your</ConnectYour>
-      <UISharingManager>Cloud file sharing</UISharingManager>
+      <ConnectCloudDriveForm>توصيل المستندات السحابية</ConnectCloudDriveForm>
+      <ConnectYour>الاتصال الآن</ConnectYour>
+      <UISharingManager>مشاركة الملفات السحابية</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>توصيل المستندات السحابية</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
     <event>
-      <OpenCloudFile>Open on</OpenCloudFile>
-      <SyncingFile>Synchronizing file...</SyncingFile>
-      <PushCloudFile>Push to</PushCloudFile>
-      <RefreshCloudDrive>Sync with</RefreshCloudDrive>
-      <RefreshView>Refresh view</RefreshView>
+      <OpenCloudFile>فتح بواسطة</OpenCloudFile>
+      <SyncingFile>جاري المزامنة...</SyncingFile>
+      <PushCloudFile>الدفع إلى</PushCloudFile>
+      <RefreshCloudDrive>مزامنة مع</RefreshCloudDrive>
+      <RefreshView>تحديث العرض</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
-      <OpenOn>Open on</OpenOn>
+      <OpenFileOn>فتح $fileUrl على $serviceName</OpenFileOn>
+      <OpenOn>فتح بواسطة</OpenOn>
       <EditFile>تغيير</EditFile>
       <ViewFile>الاعدادات</ViewFile>
     </event>
     <label>
-      <sourceview>View source code</sourceview>
-      <webview>View as web page</webview>
+      <sourceview>أكشف نص البرمجة</sourceview>
+      <webview>عرض كصفحة ويب</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
-      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
-      <SourceNotDefined>Source file not defined</SourceNotDefined>
-      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
-      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
-      <LinkCreated>Link {0} created</LinkCreated>
-      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
-      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
-      <CannotFindUser>Cannot find user {0}</CannotFindUser>
-      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
+      <MoveToAnotherDriveNotSupported>لا يمكن نقل الملف إلى محرك قرص سحابي آخر</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>لا يمكن نقل الملف إلى خارج محرك الأقراص السحابي</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>لا يمكن نقل الملف السحابي إلى فضاء عمل مختلف</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>لا يمكن نسخ أو نقل مجلد محرك الأقراص السحابي</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>لا يمكن الكتابة في مجلد الوجهة</DestinationNotWrittable>
+      <DestinationNotDefined>مجلد الوجهة غير معرف</DestinationNotDefined>
+      <SourceNotDefined>لم يُعثر على الملف المصدر.</SourceNotDefined>
+      <ErrorMoveToDestination>خطأ في نقل الرابط المشترك إلى الوجهة</ErrorMoveToDestination>
+      <DestinationItemNameExists>اسم هذا العنصر موجود بالفعل في الوجهة</DestinationItemNameExists>
+      <LinkCreated>تم إنشاء الرابط {0}</LinkCreated>
+      <FileLinksCreated>الملف {0} مرتبط في {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>رابط الملف {0} مشترك في {1} من مساحة {2}</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>رابط الملف {0} مشترك في {1} من مجموعة {2}</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>رابط الملف {0} شارك مع المستخدم {2} في مجلد {1}</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>ربط الملف غير مدعوم لهذه الوجهة</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>خطأ في قراءة محركات الأقراص المستندية</ErrorReadingDrives>
+      <CannotFindUser>لا يمكن العثور على المستخدم {0}</CannotFindUser>
+      <ErrorReadingFileLinks>خطأ في قراءة الملف</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>خطأ في قراءة محرك أقراص المستخدم</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
@@ -89,7 +89,7 @@
   </ConnectCloudDriveForm>
   <ConnectDriveDrawer>
     <title>
-      <ConnectYourService>Connect your service</ConnectYourService>
+      <ConnectYourService>قم بتوصيل خدمتك</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
 </bundle>
