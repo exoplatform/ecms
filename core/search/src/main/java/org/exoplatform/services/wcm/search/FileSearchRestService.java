@@ -70,7 +70,6 @@ public class FileSearchRestService implements ResourceContainer {
       sortDirection = "desc";
     }
     List<ElasticSearchFilter> recentFilters = new ArrayList<>();
-    recentFilters.add(getRecentFilter());
     recentFilters.add(getFileTypesFilter());
     Identity currentIdentity = ConversationState.getCurrent().getIdentity();
     UserACL userACL = PortalContainer.getInstance().getComponentInstanceOfType(UserACL.class);
@@ -131,14 +130,6 @@ public class FileSearchRestService implements ResourceContainer {
       }
     }
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "path", pathsFilter.toString());
-  }
-  
-  private ElasticSearchFilter getRecentFilter() {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    StringBuilder recentFilter = new StringBuilder();
-    recentFilter.append("{\n \"term\" : { \"author\" : \"" + userId + "\" }\n }");
-    recentFilter.append(",{\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }");
-    return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "", recentFilter.toString());
   }
   
   private Node getUserPrivateNode() throws Exception {
