@@ -57,6 +57,7 @@ public class FileSearchRestService implements ResourceContainer {
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Request fulfilled") })
   public Response searchRecentDocuments(@ApiParam(value = "Query string", required = false) @QueryParam("q") String query,
+                                        @ApiParam(value = "My work", required = false, defaultValue = "false") @QueryParam("myWork") boolean myWork,
                                         @ApiParam(value = "Sort field", required = false, defaultValue = "date") @QueryParam("sort") String sortField,
                                         @ApiParam(value = "Sort direction", required = false, defaultValue = "desc") @QueryParam("direction") String sortDirection,
                                         @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
@@ -70,6 +71,9 @@ public class FileSearchRestService implements ResourceContainer {
       sortDirection = "desc";
     }
     List<ElasticSearchFilter> recentFilters = new ArrayList<>();
+    if (myWork) {
+      recentFilters.add(filterMyWorkingDocuments());
+    }
     recentFilters.add(getFileTypesFilter());
     Identity currentIdentity = ConversationState.getCurrent().getIdentity();
     UserACL userACL = PortalContainer.getInstance().getComponentInstanceOfType(UserACL.class);
@@ -131,7 +135,15 @@ public class FileSearchRestService implements ResourceContainer {
     }
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "path", pathsFilter.toString());
   }
-  
+
+  private ElasticSearchFilter filterMyWorkingDocuments() {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    StringBuilder recentFilter = new StringBuilder();
+    recentFilter.append("{\n \"term\" : { \"author\" : \"" + userId + "\" }\n }");
+    recentFilter.append(",{\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }");
+    return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "", recentFilter.toString());
+  }
+
   private Node getUserPrivateNode() throws Exception {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
