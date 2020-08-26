@@ -2,6 +2,6 @@
 <bundle>
   <administration>
     <siteExplorer>Backoffice</siteExplorer>
-    <wcmAdmin>CMS Settings</wcmAdmin>
+    <wcmAdmin>Impostazioni CMS</wcmAdmin>
   </administration>
 </bundle>
