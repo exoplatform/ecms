@@ -22,7 +22,7 @@ export function getDocumentsByFolder(folder, limit) {
 }
 
 export function getRecentDocuments(limit) {
-  const url = `/portal/rest/search/documents/recent?limit=${limit}`;
+  const url = `/portal/rest/search/documents/recent?myWork=true&limit=${limit}`;
   return getDocuments(url);
 }
 
