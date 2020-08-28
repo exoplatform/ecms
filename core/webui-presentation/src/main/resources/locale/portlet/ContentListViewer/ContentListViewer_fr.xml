@@ -23,7 +23,7 @@
       <Title>Paramètres</Title>
       <ContentSelectionBlock>Contenus</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Prise en charge multi-langues</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Chemin du Dossier</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Affichage</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Classement par</UICLVConfigOrderByFormSelectBox>
@@ -70,7 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Partager les contenus entre les utilisateurs</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. for example: when this option is checked, If the user language is English, only contents written in English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
+      <TranslationHelp>Si vous cochez cette option, seul le contenu de la langue de l'utilisateur apparaîtra dans la liste. par exemple : lorsque cette option est cochée et que la langue de l'utilisateur est l'anglais, seuls les contenus écrits en langue anglaise seront listés. Tandis que lorsque cette option n'est pas cochée, nous listons tous les contenus dans le dossier.</TranslationHelp>
       <ModeSelectionHelp>"Dossier" affiche de tous les contenus présents dans le dossier (ou catégorie) sélectionné ; "Manuel" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
       <FolderPathHelp>Sélectionnez les contenus que vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique dans les Paramètres Avancés.</FolderPathHelp>
       <HeaderOptionHelp>Afficher un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
