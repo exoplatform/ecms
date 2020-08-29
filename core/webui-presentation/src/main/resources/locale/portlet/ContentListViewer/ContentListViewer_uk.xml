@@ -23,7 +23,7 @@
       <Title>Налаштування вмісту списку</Title>
       <ContentSelectionBlock>Вибір контенту</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Режим</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Підтримка декількох мов</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Шлях до папки</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Шлях до папки</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Сортувати по</UICLVConfigOrderByFormSelectBox>
@@ -70,7 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
+      <TranslationHelp>Якщо ви відмітите цю опцію, у списку буде показано лише вміст мовою користувача. наприклад: якщо цю опцію відмічено і якщо мова користувача англійська, то вміст буде показано лише англійською мовою. Коли цю опцію не відмічено, ми відобразимо весь вміст всередині папки.</TranslationHelp>
       <ModeSelectionHelp>Доступні два режими відображення вмісту. «За папкою" прийме всі матеріали, доступні у вибраній папка/категорія. "За змістом" дає вам змогу вручну вибрати вміст, який ви хочете показати.</ModeSelectionHelp>
       <FolderPathHelp>Виберіть вміст, який ви хочете показати. Вибір за замовчуванням буде замінено динамічно , якщо активувати опцію Динамічні навігації (див. нижче режим Розширених налаштувань).</FolderPathHelp>
       <HeaderOptionHelp>Відображати заголовок на вершині списку вмісту. Якщо активувати параметр автоматичного виявлення, він спробує знайти заголовок на основі поточного виділення.</HeaderOptionHelp>

@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Seleziona ruolo</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Seleziona Membership</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Seleziona Gruppo</selectGroup>
-      <selectMembership>Seleziona ruolo</selectMembership>
+      <selectMembership>Seleziona Membership</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Selezioan Utente</SelectUser>
-      <SelectMember>Seleziona ruolo</SelectMember>
+      <SelectMember>Seleziona Membership</SelectMember>
       <AddAny>Tutti</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Seleziona Utente</UIGroupSelector>
       <UIPermissionSelector>Seleziona Membro</UIPermissionSelector>
-      <UIGroupMemberSelector>Seleziona ruolo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Seleziona Membership</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Seleziona il Gruppo</selectGroup>
       <selectUser>Seleziona Utente</selectUser>
-      <selectMembership>Seleziona ruolo</selectMembership>
+      <selectMembership>Seleziona Membership</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Seleziona Gruppo</selectGroup>
       <selectUser>Seleziona Utente</selectUser>
-      <selectMembership>Seleziona ruolo</selectMembership>
+      <selectMembership>Seleziona Membership</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Seleziona ruolo</selectMembership>
+      <selectMembership>Seleziona Membership</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Seleziona Gruppo</selectGroup>
       <selectUser>Seleziona Utente</selectUser>
-      <selectMembership>Seleziona ruolo</selectMembership>
+      <selectMembership>Seleziona Membership</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Aggiungere</Add>
     </action>
     <label>
-      <userOrGroup>Roles:</userOrGroup>
+      <userOrGroup>Appartenenza:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>La membership esiste già. Selezionane un'altra.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Seleziona Gruppo</selectGroup>
-      <selectMembership>Seleziona ruolo</selectMembership>
+      <selectMembership>Seleziona Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

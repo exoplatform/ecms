@@ -55,7 +55,7 @@
         <pdf-max-page>L'anteprima non è disponibile per i contenuti con oltre {0} pagine.</pdf-max-page>
         <using-webDAV>o Apri in MS Office</using-webDAV>
         <open-on-desktop>Apri sul desktop</open-on-desktop>
-        <editOnline>Edit Online</editOnline>
+        <editOnline>Modifica Online</editOnline>
         <open-in-documents>Apri in Documenti</open-in-documents>
         <open-in-documents-tooltip>Apri questo file nell'app Documenti</open-in-documents-tooltip>
         <file-size-too-big>Il contenuto di questo file è troppo grande. Dovrebbe scaricarlo ed usare un client esterno.</file-size-too-big>

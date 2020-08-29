@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Посилання</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Порт</port>
       <userName>#{word.userName}</userName>
       <password>Пароль</password>
-      <link>Link</link>
+      <link>Посилання</link>
       <to>Надіслати пошту</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Порт</port>
       <userName>#{word.userName}</userName>
       <password>Пароль</password>
-      <link>Link</link>
+      <link>Посилання</link>
       <to>Надіслати пошту</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -139,7 +139,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
+        <cron-expression>Команда Cron</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -393,40 +393,40 @@
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>New Document</NewDocument>
+      <NewDocument>Новий Документ</NewDocument>
     </tooltip>
   </UIActionBar>
   
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>New Document</newDocument>
+      <newDocument>Новий Документ</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>Новий Документ</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Document</Save>
+      <Save>Створити Документ</Save>
     </action>
     <label>
-      <titleTextBox>Document Name:</titleTextBox>
-      <typeSelectBox>Document Type:</typeSelectBox>
+      <titleTextBox>Назва Документа:</titleTextBox>
+      <typeSelectBox>Тип Документа:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Please enter the document name.</name-invalid>
+      <name-invalid>Будь ласка, введіть назву документа.</name-invalid>
       <constraint-violation>В поточний вузол не дозволяють додати тип вузла"{0}".</constraint-violation>
       <repository-exception>Сталася неочікувана помилка. Для більш докладної інформації зверніться до адміністратора.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <repository-exception-permission>У вас немає дозволу на додавання тут нового документа.</repository-exception-permission>
       <numberformat-exception>Цю дію не можна зберегти. Надане ім'я має бути в числовому форматі.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Ви не можете зберегти документ. Елемент з такою ж назвою вже існує.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

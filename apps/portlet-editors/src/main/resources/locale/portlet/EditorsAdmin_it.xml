@@ -22,18 +22,18 @@
 <bundle>
   <editors>
     <admin>
-    <page>Editors Administration</page>
+    <page>Amministrazione degli Editor</page>
       <error>
-        <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
-        <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
-        <CannotGetProviders>Can't get providers list.</CannotGetProviders>
-        <PermissionNotValid>The specified permission is not valid. Maybe the user or group doesn't exist.</PermissionNotValid>
-        <CannotLoadIdentities>Can't load identities by specified criteria</CannotLoadIdentities>
-        <CannotSavePreferredEditor>Can't save selected editor as preferred one.</CannotSavePreferredEditor>
-        <UnableGetData>An error occurred while reading the data.</UnableGetData>
-        <UnablePostData>An error occurred while saving the data.</UnablePostData>
+        <ProviderNotRegistered>Il fornitore dell'editor non è registrato.</ProviderNotRegistered>
+        <EmptyRequest>La richiesta dovrebbe contenere almeno 1 modulo param (attivo/permessi).</EmptyRequest>
+        <CannotGetProviders>Impossibile ottenere l'elenco dei fornitori.</CannotGetProviders>
+        <PermissionNotValid>Il permesso specificato non è valido. Forse l'utente o il gruppo non esistono.</PermissionNotValid>
+        <CannotLoadIdentities>Impossibile caricare le identità dai criteri specificati</CannotLoadIdentities>
+        <CannotSavePreferredEditor>Impossibile salvare l'editor selezionato come quello preferito.</CannotSavePreferredEditor>
+        <UnableGetData>Si è verificato un errore durante la lettura dei dati.</UnableGetData>
+        <UnablePostData>Si è verificato un errore durante il salvataggio dei dati.</UnablePostData>
       </error>
-      <title>Document editors</title>
+      <title>Editor dei documenti</title>
       <table>
         <Provider>Fornitore</Provider>
         <Description>Descrizione</Description>
@@ -41,11 +41,11 @@
         <Permissions>Vedi Permessi</Permissions>
       </table>
       <modal>
-        <title>Edit permissions</title>
-        <SearchLabel>Enter user or group name</SearchLabel>
-        <WithPermissions>Who has permission</WithPermissions>
+        <title>Modifica permessi</title>
+        <SearchLabel>Inserisci nome utente o gruppo</SearchLabel>
+        <WithPermissions>Chi ha il permesso</WithPermissions>
         <None>Nessuno</None>
-        <Everybody>Everybody</Everybody>
+        <Everybody>Tutti</Everybody>
       </modal>
       <buttons>
         <Save>Salva</Save>
@@ -57,7 +57,7 @@
     </buttons>
     <idlePopup>
       <title>Avvertenza</title>
-      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
+      <message>Sembra che tu non sia stato attivo per un bel po' di tempo. La pagina dell'editor sarà chiusa in %s secondi.</message>
     </idlePopup>
   </editors>
 </bundle>

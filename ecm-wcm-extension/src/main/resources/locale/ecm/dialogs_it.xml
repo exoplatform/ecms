@@ -139,7 +139,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
+        <cron-expression>Espressione Cron</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -393,40 +393,40 @@
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>New Document</NewDocument>
+      <NewDocument>Nuovo Documento</NewDocument>
     </tooltip>
   </UIActionBar>
   
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>New Document</newDocument>
+      <newDocument>Nuovo Documento</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>Nuovo Documento</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Document</Save>
+      <Save>Crea Documento</Save>
     </action>
     <label>
-      <titleTextBox>Document Name:</titleTextBox>
-      <typeSelectBox>Document Type:</typeSelectBox>
+      <titleTextBox>Nome del Documento:</titleTextBox>
+      <typeSelectBox>Tipo di Documento:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Please enter the document name.</name-invalid>
+      <name-invalid>Sei pregato di inserire il nome del documento.</name-invalid>
       <constraint-violation>Il nodo non consente di aggiungere il tipo di nodo '{0}'.</constraint-violation>
       <repository-exception>Errore sconosciuto. Contatta l'amministratore per maggiori dettagli.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <repository-exception-permission>Non hai il permesso di aggiungere qui un nuovo documento.</repository-exception-permission>
       <numberformat-exception>Impossible salvare questo documento. Il nome fornito deve essere in formato numerico.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Non puoi salvare il documento. Un elemento con lo stesso nome esiste già.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   
