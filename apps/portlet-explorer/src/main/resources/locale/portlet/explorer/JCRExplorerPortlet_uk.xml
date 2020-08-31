@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Вибрати роль</SelectMember>
+      <SelectMember>Select Membership</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Вибрати користувача</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Вибрати роль</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Виберіть Членство</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Оригінальна версія</original>
       <version>Версія</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>Базова версія</baseVersion>
       <addLabel>Додати мітку</addLabel>
       <removeLable>Видалити мітку</removeLable>
       <restoreVersion>Відновити версію</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Вибрати групу</selectGroup>
       <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Вибрати групу</selectGroup>
       <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

@@ -22,18 +22,18 @@
 <bundle>
   <editors>
     <admin>
-    <page>Editors Administration</page>
+    <page>Адміністрування редакторів</page>
       <error>
-        <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
-        <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
-        <CannotGetProviders>Can't get providers list.</CannotGetProviders>
-        <PermissionNotValid>The specified permission is not valid. Maybe the user or group doesn't exist.</PermissionNotValid>
-        <CannotLoadIdentities>Can't load identities by specified criteria</CannotLoadIdentities>
-        <CannotSavePreferredEditor>Can't save selected editor as preferred one.</CannotSavePreferredEditor>
-        <UnableGetData>An error occurred while reading the data.</UnableGetData>
-        <UnablePostData>An error occurred while saving the data.</UnablePostData>
+        <ProviderNotRegistered>Провайдер редактора не зареєстрований.</ProviderNotRegistered>
+        <EmptyRequest>Запит повинен містити принаймні 1 параметр форми (активний / дозволи).</EmptyRequest>
+        <CannotGetProviders>Неможливо отримати список провайдерів.</CannotGetProviders>
+        <PermissionNotValid>Вказаний дозвіл недійсний. Можливо, користувач чи група не існує.</PermissionNotValid>
+        <CannotLoadIdentities>Не вдається завантажити ідентифікації за вказаними критеріями</CannotLoadIdentities>
+        <CannotSavePreferredEditor>Неможливо зберегти вибраний редактор в якості бажаного.</CannotSavePreferredEditor>
+        <UnableGetData>Під час читання даних сталась помилка.</UnableGetData>
+        <UnablePostData>Сталася помилка під час збереження даних.</UnablePostData>
       </error>
-      <title>Document editors</title>
+      <title>Редактори документу</title>
       <table>
         <Provider>Постачальник</Provider>
         <Description>Опис</Description>
@@ -41,11 +41,11 @@
         <Permissions>Права доступу</Permissions>
       </table>
       <modal>
-        <title>Edit permissions</title>
-        <SearchLabel>Enter user or group name</SearchLabel>
-        <WithPermissions>Who has permission</WithPermissions>
+        <title>Редагувати права доступу</title>
+        <SearchLabel>Введіть користувача або назву групи</SearchLabel>
+        <WithPermissions>Хто має дозвіл</WithPermissions>
         <None>Жоден</None>
-        <Everybody>Everybody</Everybody>
+        <Everybody>Усі</Everybody>
       </modal>
       <buttons>
         <Save>Зберегти</Save>
@@ -57,7 +57,7 @@
     </buttons>
     <idlePopup>
       <title>Попередження</title>
-      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
+      <message>Здається, ви давно не активні. Сторінка редактора буде закрита через %s секунд.</message>
     </idlePopup>
   </editors>
 </bundle>

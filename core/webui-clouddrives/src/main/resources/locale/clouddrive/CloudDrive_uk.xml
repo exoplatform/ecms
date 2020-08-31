@@ -23,63 +23,63 @@
   <UITabForm>
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
-      <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
+      <showConnectCloudDrive>Підключити документи з хмари</showConnectCloudDrive>
     </label>
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
-      <ConnectYour>Connect your</ConnectYour>
-      <UISharingManager>Cloud file sharing</UISharingManager>
+      <ConnectCloudDriveForm>Підключити документи з хмари</ConnectCloudDriveForm>
+      <ConnectYour>Підключіть ваш</ConnectYour>
+      <UISharingManager>Відкриття спільного доступу до файлу у хмарі</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Підключити документи з хмари</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
     <event>
-      <OpenCloudFile>Open on</OpenCloudFile>
-      <SyncingFile>Synchronizing file...</SyncingFile>
-      <PushCloudFile>Push to</PushCloudFile>
-      <RefreshCloudDrive>Sync with</RefreshCloudDrive>
-      <RefreshView>Refresh view</RefreshView>
+      <OpenCloudFile>Відкрити у</OpenCloudFile>
+      <SyncingFile>Синхронізація файлу...</SyncingFile>
+      <PushCloudFile>Відправити до</PushCloudFile>
+      <RefreshCloudDrive>Синхронізувати з</RefreshCloudDrive>
+      <RefreshView>Оновити вигляд</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
-      <OpenOn>Open on</OpenOn>
+      <OpenFileOn>Відкрити $fileUrl в $serviceName</OpenFileOn>
+      <OpenOn>Відкрити у</OpenOn>
       <EditFile>Редагувати</EditFile>
       <ViewFile>Перегляд</ViewFile>
     </event>
     <label>
-      <sourceview>View source code</sourceview>
-      <webview>View as web page</webview>
+      <sourceview>Переглянути вихідний код</sourceview>
+      <webview>Переглянути як веб-сторінку</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
-      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
-      <SourceNotDefined>Source file not defined</SourceNotDefined>
-      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
-      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
-      <LinkCreated>Link {0} created</LinkCreated>
-      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
-      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
-      <CannotFindUser>Cannot find user {0}</CannotFindUser>
-      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
+      <MoveToAnotherDriveNotSupported>Не вдалося перемістити файл до іншого хмарного сховища</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Не вдалося перемістити файл за межі хмарного диску</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Не вдалося перемістити файл з хмари в інше робоче середовище</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Не вдалося скопіювати або перемістити папку з хмарного диску</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Не вдається записати в папку</DestinationNotWrittable>
+      <DestinationNotDefined>Папка призначення не визначена</DestinationNotDefined>
+      <SourceNotDefined>Вихідний файл не визначено</SourceNotDefined>
+      <ErrorMoveToDestination>Помилка при переміщенні спільного посилання до місця призначення</ErrorMoveToDestination>
+      <DestinationItemNameExists>Таке ім'я вже існує в точці призначення</DestinationItemNameExists>
+      <LinkCreated>Посилання {0} створено</LinkCreated>
+      <FileLinksCreated>На файл {0} зроблено посилання в {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>Посилання на файл {0}, спільне у {1} ​області {2}</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>Посилання на файл {0} спільне в {1} групи {2}</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>Посилання на файл {0} спільне з користувачем {2} в його папці {1}</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>Посилання на файл не підтримується цим напрямком</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Помилка читання дисків документа</ErrorReadingDrives>
+      <CannotFindUser>Не вдалося знайти користувача {0}</CannotFindUser>
+      <ErrorReadingFileLinks>Помилка читання посилань на файл</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Помилка читання користувацького диска</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
@@ -89,7 +89,7 @@
   </ConnectCloudDriveForm>
   <ConnectDriveDrawer>
     <title>
-      <ConnectYourService>Connect your service</ConnectYourService>
+      <ConnectYourService>Підключити вашу службу</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
 </bundle>

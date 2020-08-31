@@ -1002,7 +1002,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>UIPermissionForm</permission>
+      <permission>Дозволи</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Вибрати роль</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Виберіть Членство</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Вибрати групу</selectGroup>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Вибрати користувача</SelectUser>
-      <SelectMember>Вибрати роль</SelectMember>
+      <SelectMember>Виберіть Членство</SelectMember>
       <AddAny>Кожний</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Вибрати користувача</UIGroupSelector>
       <UIPermissionSelector>Вибрати члена</UIPermissionSelector>
-      <UIGroupMemberSelector>Вибрати роль</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Виберіть Членство</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Вибрати групу</selectGroup>
       <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Вибрати групу</selectGroup>
       <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Вибрати групу</selectGroup>
       <selectUser>Вибрати користувача</selectUser>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Додати</Add>
     </action>
     <label>
-      <userOrGroup>Roles:</userOrGroup>
+      <userOrGroup>Членство:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Це членство вже існує. Будь ласка, виберіть інше.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Вибрати групу</selectGroup>
-      <selectMembership>Вибрати роль</selectMembership>
+      <selectMembership>Виберіть Членство</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
