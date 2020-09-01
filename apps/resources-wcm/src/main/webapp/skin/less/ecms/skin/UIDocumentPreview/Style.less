@@ -480,7 +480,7 @@
 					position: absolute;
 					width: 3%;
 					top: 50%;
-					left: 96%;
+					right: -13px;
                 }
                 > .fileTitle {
                     text-align: center;
@@ -1115,6 +1115,30 @@
       }
 
   }
+}
+
+@media (min-width: 320px) and (max-width: 549px) {
+	.maskLayer .uiDocumentPreview {
+		#documentPreviewContent #NavCommands {
+			> .arrowNext {
+				right: 12px;
+			}
+			> .arrowPrevious{
+				left: -6px;
+				z-index: 9999;
+			}
+		}
+	}
+}
+@media (min-width: 550px) and (max-width: 650px) {
+	.maskLayer .uiDocumentPreview {
+		#documentPreviewContent #NavCommands {
+			> .arrowPrevious{
+				left: 0px;
+				z-index: 9999;
+			}
+		}
+	}
 }
 
 @media (max-width: 480px) {
