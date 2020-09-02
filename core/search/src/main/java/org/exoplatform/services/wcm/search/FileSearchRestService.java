@@ -74,16 +74,15 @@ public class FileSearchRestService implements ResourceContainer {
     if (myWork) {
       recentFilters.add(filterMyWorkingDocuments());
     }
-    recentFilters.add(getFileTypesFilter());
-    Identity currentIdentity = ConversationState.getCurrent().getIdentity();
+    recentFilters.add(getFileTypesFilter(myWork));
     UserACL userACL = PortalContainer.getInstance().getComponentInstanceOfType(UserACL.class);
-    if (!currentIdentity.isMemberOf(userACL.getAdminGroups(), "*")) {
+    if (!userACL.isSuperUser() && !userACL.isUserInGroup(userACL.getAdminGroups())) {
       recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
     }
     Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null, query, recentFilters, null, 0, limit, sortField, sortDirection);
     return Response.ok(recentDocuments).build();
   }
-  
+
   @GET
   @Path("/recentSpaces")
   @RolesAllowed("users")
@@ -104,8 +103,8 @@ public class FileSearchRestService implements ResourceContainer {
     Collection<SearchResult> recentSpacesDocuments = fileSearchServiceConnector.filteredSearch(null, null, recentSpacesFilters, null, 0, limit, "date", "desc");
     return Response.ok(recentSpacesDocuments).build();
   }
-  
-  private ElasticSearchFilter getFileTypesFilter() {
+
+  private ElasticSearchFilter getFileTypesFilter(boolean myWork) {
     StringBuilder fileTypesFilter = new StringBuilder();
     fileTypesFilter.append("{\n \"term\" : { \"fileType\" : \"application/pdf\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\" }\n }");
@@ -117,10 +116,16 @@ public class FileSearchRestService implements ResourceContainer {
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.oasis.opendocument.text\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/msword\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\" }\n }");
-    fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/jpeg\" }\n }");
-    fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/png\" }\n }");
-    fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/gif\" }\n }");
+    if (!myWork) {
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/jpeg\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/png\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/gif\" }\n }");
+    }
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "fileType", fileTypesFilter.toString());
+  }
+
+  private ElasticSearchFilter getFileTypesFilter() {
+    return getFileTypesFilter(false);
   }
   
   private ElasticSearchFilter getPathsFilter(List<String> paths) {
