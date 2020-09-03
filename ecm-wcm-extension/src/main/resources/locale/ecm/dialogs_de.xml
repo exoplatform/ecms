@@ -393,40 +393,40 @@
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>New Document</NewDocument>
+      <NewDocument>Neues Dokument</NewDocument>
     </tooltip>
   </UIActionBar>
   
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>New Document</newDocument>
+      <newDocument>Neues Dokument</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>Neues Dokument</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Document</Save>
+      <Save>Dokument erstellen</Save>
     </action>
     <label>
-      <titleTextBox>Document Name:</titleTextBox>
-      <typeSelectBox>Document Type:</typeSelectBox>
+      <titleTextBox>Name des Dokuments:</titleTextBox>
+      <typeSelectBox>Dokumententyp:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Please enter the document name.</name-invalid>
+      <name-invalid>Bitte geben Sie den Dokumentennamen ein</name-invalid>
       <constraint-violation>Der aktuelle Knoten erlaubt kein Hinzufügen des Knotentyps '{0}'</constraint-violation>
       <repository-exception>Ein unerwarteter Fehler ist aufgetreten. Kontaktieren Sie bitte Ihren Administrator für weitere Informationen.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <repository-exception-permission>Sie haben hier nicht die Berechtigung, ein neues Dokument hinzuzufügen.</repository-exception-permission>
       <numberformat-exception>Sie können dieses Dokument nicht speichern. Der übergebene Name muss nummerischen Formats sein.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Sie können das Dokument nicht speichern. Ein gleichnamiges Element ist bereits vorhanden.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

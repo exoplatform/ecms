@@ -23,63 +23,63 @@
   <UITabForm>
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
-      <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
+      <showConnectCloudDrive>Bulut Belgelerini Bağlayın</showConnectCloudDrive>
     </label>
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
-      <ConnectYour>Connect your</ConnectYour>
-      <UISharingManager>Cloud file sharing</UISharingManager>
+      <ConnectCloudDriveForm>Bulut Belgelerini Bağlayın</ConnectCloudDriveForm>
+      <ConnectYour>Şunu bağlayın</ConnectYour>
+      <UISharingManager>Bulut dosya paylaşımı</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Bulut Belgelerini Bağlayın</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
     <event>
-      <OpenCloudFile>Open on</OpenCloudFile>
-      <SyncingFile>Synchronizing file...</SyncingFile>
-      <PushCloudFile>Push to</PushCloudFile>
-      <RefreshCloudDrive>Sync with</RefreshCloudDrive>
-      <RefreshView>Refresh view</RefreshView>
+      <OpenCloudFile>Şurada aç</OpenCloudFile>
+      <SyncingFile>Dosya eşitleniyor...</SyncingFile>
+      <PushCloudFile>Şuraya gönder</PushCloudFile>
+      <RefreshCloudDrive>Şununla eşitle</RefreshCloudDrive>
+      <RefreshView>Görünümü yenile</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
-      <OpenOn>Open on</OpenOn>
+      <OpenFileOn>$serviceName üzerinde $fileUrl dosyasını açın</OpenFileOn>
+      <OpenOn>Şurada aç</OpenOn>
       <EditFile>Düzenle</EditFile>
       <ViewFile>Görünüm</ViewFile>
     </event>
     <label>
-      <sourceview>View source code</sourceview>
-      <webview>View as web page</webview>
+      <sourceview>Kaynak kodunu görüntüle</sourceview>
+      <webview>Web sayfası olarak görüntüle</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
-      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
-      <SourceNotDefined>Source file not defined</SourceNotDefined>
-      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
-      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
-      <LinkCreated>Link {0} created</LinkCreated>
-      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
-      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
-      <CannotFindUser>Cannot find user {0}</CannotFindUser>
-      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
+      <MoveToAnotherDriveNotSupported>Dosya başka bir bulut sürücüsüne taşınamıyor</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Dosya kendi bulut sürücüsünün dışına taşınamıyor</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Bulut dosyası farklı çalışma alanına taşınamıyor</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Bulut sürücüsü klasörü kopyalanamıyor veya taşınamıyor</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Hedef klasöre yazılamıyor</DestinationNotWrittable>
+      <DestinationNotDefined>Hedef klasör tanımlanmadı</DestinationNotDefined>
+      <SourceNotDefined>Kaynak dosya tanımlanmadı</SourceNotDefined>
+      <ErrorMoveToDestination>Paylaşılan bağlantı hedefe taşınırken hata oluştu</ErrorMoveToDestination>
+      <DestinationItemNameExists>Bu öğe adı hedef konumda zaten var</DestinationItemNameExists>
+      <LinkCreated>{0} bağlantısı oluşturuldu</LinkCreated>
+      <FileLinksCreated>{0} dosyası {1} ile bağlantılı</FileLinksCreated>
+      <FileLinksSharedInSpace>Dosya bağlantısı {0}, {1} / {2} alanda paylaşıldı</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>Dosya bağlantısı {0}, {1} / {2} grupta paylaşıldı</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>Dosya bağlantısı {0}, {2} kullanıcısıyla {1} klasöründe paylaşıldı</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>Bu hedefe dosya bağlama desteklenmiyor</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Belge sürücülerini okuma hatası</ErrorReadingDrives>
+      <CannotFindUser>{0} kullanıcısı bulunamıyor</CannotFindUser>
+      <ErrorReadingFileLinks>Dosya bağlantılarını okuma hatası</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Kullanıcı sürücüsünü okuma hatası</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
@@ -89,7 +89,7 @@
   </ConnectCloudDriveForm>
   <ConnectDriveDrawer>
     <title>
-      <ConnectYourService>Connect your service</ConnectYourService>
+      <ConnectYourService>Servisinizi bağlayın</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
 </bundle>
