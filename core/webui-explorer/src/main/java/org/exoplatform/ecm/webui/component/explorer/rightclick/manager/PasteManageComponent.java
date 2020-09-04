@@ -573,7 +573,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         destNode = (Node) destSession.getItem(destPath);
       }
 
-      if (!srcWorkspace.equals(destWorkspace) || !srcPath.equals(destPath)) {
+      if (!srcWorkspace.equals(destWorkspace) || !srcPath.equals(destPath) && srcThumbnailNode != null) {
         // Remove thumbnail from source folder after moving it
 
         thumbnailService.processRemoveThumbnail(srcThumbnailNode);
