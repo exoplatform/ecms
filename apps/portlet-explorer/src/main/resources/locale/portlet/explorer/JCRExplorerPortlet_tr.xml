@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Kullanıcı Seçin</SelectUser>
-      <SelectMember>Rolü Seçin</SelectMember>
+      <SelectMember>Üyelik seçin</SelectMember>
       <AddAny>Herkesi seç</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Kullanıcı Seçin</UIGroupSelector>
       <UIPermissionSelector>Üye Seç</UIPermissionSelector>
-      <UIGroupMemberSelector>Rolü Seçin</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Üyelik Seçin</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1352,7 +1352,7 @@
     <tooltip>
       <original>Orijinal Versiyon</original>
       <version>Sürüm</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>geçerli sürüm</baseVersion>
       <addLabel>Etiket Ekle</addLabel>
       <removeLable>Etiketi Kaldır</removeLable>
       <restoreVersion>Sürümü geri yükle</restoreVersion>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Grup Seçin</selectGroup>
       <selectUser>Kullanıcı Seçin</selectUser>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Grup Seçin</selectGroup>
       <selectUser>Kullanıcı Seçin</selectUser>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

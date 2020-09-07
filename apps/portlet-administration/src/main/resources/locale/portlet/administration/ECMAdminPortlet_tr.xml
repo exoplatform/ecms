@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Rolü Seçin</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Üyelik Seçin</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Grup Seçin</selectGroup>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Kullanıcı Seçin</SelectUser>
-      <SelectMember>Rolü Seçin</SelectMember>
+      <SelectMember>Üyelik Seçin</SelectMember>
       <AddAny>Herkes</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Kullanıcı Seçin</UIGroupSelector>
       <UIPermissionSelector>Üye Seçin</UIPermissionSelector>
-      <UIGroupMemberSelector>Rolü Seçin</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Üyelik Seçin</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Grup Seçin</selectGroup>
       <selectUser>Kullanıcı Seçin</selectUser>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Grup Seçin</selectGroup>
       <selectUser>Kullanıcı Seçin</selectUser>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Grup Seçin</selectGroup>
       <selectUser>Kullanıcı Seçin</selectUser>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Ekle</Add>
     </action>
     <label>
-      <userOrGroup>Roles:</userOrGroup>
+      <userOrGroup>Üyelikler:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Bu üyelik zaten var. Lütfen başka bir tane seçin.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Grup Seçin</selectGroup>
-      <selectMembership>Rolü Seçin</selectMembership>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

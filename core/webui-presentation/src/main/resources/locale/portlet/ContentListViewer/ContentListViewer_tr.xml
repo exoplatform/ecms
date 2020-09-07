@@ -23,7 +23,7 @@
       <Title>İçerik Listesi Tercihleri</Title>
       <ContentSelectionBlock>İçerik Seçimi</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modu</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Çoklu dil desteği</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Klasör Yolu</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Klasör Yolu</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Sıralama</UICLVConfigOrderByFormSelectBox>
@@ -70,7 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
+      <TranslationHelp>Bu seçeneği işaretlerseniz listede yalnızca kullanıcının diline sahip içerik görünecektir. Örneğin bu seçenek işaretlendiğinde ve kullanıcı dili İngilizce olduğunda, yalnızca İngilizce dilinde yazılmış içerikler listelenecektir. Ancak bu seçenek işaretlenmezse klasörün içindeki tüm içerik listelenecektir.</TranslationHelp>
       <ModeSelectionHelp>İçerik göstermek için iki mod kullanılabilir. "Klasör tarafından" seçilen klasör/kategori içinde kullanılabilen tüm içerik alacak. "Içerik" göstermek istediğiniz içeriği el ile seçmenizi sağlar.</ModeSelectionHelp>
       <FolderPathHelp>Göstermek istediğiniz içeriği seçin. Dinamik navigasyon seçeneğini etkinleştirirseniz bu varsayılan içerik dinamik olarak değiştirilir (Gelişmiş mod için aşağıya bakınız).</FolderPathHelp>
       <HeaderOptionHelp>Bir başlık üzerine içerik listesi göster. Otomatik algılama seçeneği ile etkinleştirirseniz, geçerli seçime göre başlık bulmak için çalışacağız.</HeaderOptionHelp>

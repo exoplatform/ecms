@@ -55,7 +55,7 @@
         <pdf-max-page>{0} sayfadan daha fazla olan içerikler için ön izleme bulunmamaktadır.</pdf-max-page>
         <using-webDAV>veya MS Office ile Açın</using-webDAV>
         <open-on-desktop>Masaüstü'nde Aç</open-on-desktop>
-        <editOnline>Edit Online</editOnline>
+        <editOnline>Çevrimiçi Düzenle</editOnline>
         <open-in-documents>Belgeler'de Aç</open-in-documents>
         <open-in-documents-tooltip>Bu dosyayı Belgeler uygulamasında aç</open-in-documents-tooltip>
         <file-size-too-big>Bu içerik çok büyük. İçeriği indirip görüntüleyebilirsiniz.</file-size-too-big>
@@ -75,7 +75,7 @@
       <label>
         <from>Başlangıç Tarihi:</from>
         <to>Bitiş Tarihi:</to>
-        <cc>Cc:</cc>
+        <cc>Bilgi:</cc>
         <date>Tarih:</date>
         <subject>Konu:</subject>
         <attachment>Ekler:</attachment>
@@ -230,7 +230,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Sesli açıklama</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Devamını oku</Read-more>
       <Read-less>Daha az oku</Read-less>
       <Switch-back-to-original-video>Orijinal video</Switch-back-to-original-video>
       </label>
