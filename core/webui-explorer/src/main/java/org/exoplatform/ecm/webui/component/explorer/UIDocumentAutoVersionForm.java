@@ -27,12 +27,7 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.ItemExistsException;
-import javax.jcr.LoginException;
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.jcr.Workspace;
+import javax.jcr.*;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
@@ -137,6 +132,8 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       Session srcSession = uiExplorer.getSessionByWorkspace(autoVersionComponent.getSourceWorkspace());
       Node sourceNode = uiExplorer.getNodeByPath(autoVersionComponent.getSourcePath(), srcSession);
       String destPath = autoVersionComponent.getDestPath();
+      Node destNode = uiExplorer.getNodeByPath(destPath, srcSession);
+      boolean isFolder = destNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER);
 
       if (destPath != null) {
         Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(destPath);
@@ -154,6 +151,19 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
             PasteManageComponent.pasteByCut(autoVersionComponent.getCurrentClipboard(), uiExplorer, destSession, autoVersionComponent.getCurrentClipboard().getWorkspace(),
                     sourceNode.getPath(), destPath, WCMCoreUtils.getService(ActionServiceContainer.class), false,false, false);
           }else {
+            // nt:folder Does not support SNS
+            if (isFolder) {
+              Node existNode = uiExplorer.getNodeByPath(destPath, srcSession);
+              int i = 1;
+              String newDestPath = "";
+              while (existNode != null) {
+                int lastDotIndex = destPath.lastIndexOf('.');
+                newDestPath = destPath.substring(0, lastDotIndex) + i + destPath.substring(lastDotIndex);
+                existNode = uiExplorer.getNodeByPath(newDestPath, srcSession);
+                i++;
+              }
+              destPath = newDestPath;
+            }
             copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
                     autoVersionComponent.getSourcePath(), destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
           }
@@ -165,7 +175,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
           return;
         }
       }
-      Node destNode = (Node)destSession.getItem(destPath);
+      destNode = (Node)destSession.getItem(destPath);
       Map<String, Boolean> remember = new HashMap<>();
       if(destNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE) && chkRem){
         remember.put("keepboth", true);
