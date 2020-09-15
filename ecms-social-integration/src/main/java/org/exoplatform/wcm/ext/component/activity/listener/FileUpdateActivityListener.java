@@ -46,7 +46,7 @@ public class FileUpdateActivityListener extends Listener<Context, String> {
   private static final Log LOG = ExoLogger.getLogger(FileUpdateActivityListener.class);
 
   private String[]  editedField     = {"exo:title", "exo:summary", "exo:language", "dc:title", "dc:description", "dc:creator", "dc:source", "jcr:data"};
-  private String[]  bundleMessage   = {"SocialIntegration.messages.editName",
+  private String[]  bundleMessage   = {"SocialIntegration.messages.rename",
                                        "SocialIntegration.messages.editSummary",
                                        "SocialIntegration.messages.editLanguage",
                                        "SocialIntegration.messages.editTitle",
