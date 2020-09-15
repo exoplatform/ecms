@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
@@ -27,6 +29,7 @@ import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.core.manager.ActivityManager;
 
 public class TagActivityListener extends Listener<Node, String>{
   
@@ -34,13 +37,15 @@ public class TagActivityListener extends Listener<Node, String>{
   private static String TAG_REMOVED_BUNDLE      = "SocialIntegration.messages.tagRemoved";
   private static String TAGS_ADDED_BUNDLE       = "SocialIntegration.messages.tagsAdded";
   private static String TAGS_REMOVED_BUNDLE     = "SocialIntegration.messages.tagsRemoved";
-  private static String DOCUMENT_TAG_REMOVED     = "Document.event.TagRemoved";
-  private static String DOCUMENT_TAG_ADDED     = "Document.event.TagAdded";
+  private static String DOCUMENT_TAG_REMOVED    = "Document.event.TagRemoved";
+  private static String DOCUMENT_TAG_ADDED      = "Document.event.TagAdded";
+  private static final String TAG_ACTION_COMMENT = "files:spaces.TAG_ACTION_COMMENT";
 
   @Override
   public void onEvent(Event<Node, String> event) throws Exception {
+    ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
     String eventName = event.getEventName();
-    if(! (eventName.equals(DOCUMENT_TAG_ADDED) || eventName.equals(DOCUMENT_TAG_REMOVED)) ){
+    if (! (eventName.equals(DOCUMENT_TAG_ADDED) || eventName.equals(DOCUMENT_TAG_REMOVED)) || !activityManager.isActivityTypeEnabled(TAG_ACTION_COMMENT)) {
       return;
     }
     Node currentNode = event.getSource();
