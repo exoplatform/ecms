@@ -95,7 +95,12 @@ public class Utils {
   private static int    MAX_SUMMARY_LINES_COUNT    = 4;
   private static int    MAX_SUMMARY_CHAR_COUNT     = 430;
   private static String activityType;
+  private static final String CREATION_MESSAGE = "files:spaces.CREATION_COMMENT";
+  private static final String RENAME_COMMENT   = "files:spaces.RENAME_COMMENT";
+  private static final String MOVE_COMMENT  = "files:spaces.MOVE_COMMENT";
   private static final String RESOURCE_BUNDLE_KEY_CREATED_BY = "SocialIntegration.messages.createdBy";
+  private static final String RESOURCE_BUNDLE_KEY_FILE_RENAMED    = "SocialIntegration.messages.rename";
+  private static final String RESOURCE_BUNDLE_KEY_FILE_MOVED  = "SocialIntegration.messages.fileMoved";
 
 
   public static String getActivityType() {
@@ -431,14 +436,20 @@ public class Utils {
     if (isSkipRaiseAct != null && Boolean.valueOf(isSkipRaiseAct.toString())) {
       return null;
     }
-    if (RESOURCE_BUNDLE_KEY_CREATED_BY.equals(activityMsgBundleKey)  && !isSystemComment) {
-      return null;
-    }
     ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
     activityType = StringUtils.isNotEmpty(activityType) ? activityType : FILE_SPACES;
     if(! activityManager.isActivityTypeEnabled(activityType)) {
       return null;
     }
+      if (RESOURCE_BUNDLE_KEY_CREATED_BY.equals(activityMsgBundleKey)  && !isSystemComment && ! activityManager.isActivityTypeEnabled(CREATION_MESSAGE)) {
+          return null;
+      }
+      if (RESOURCE_BUNDLE_KEY_FILE_RENAMED .equals(activityMsgBundleKey) && ! activityManager.isActivityTypeEnabled(RENAME_COMMENT)) {
+          return null;
+      }
+      if (RESOURCE_BUNDLE_KEY_FILE_MOVED.equals(activityMsgBundleKey) && ! activityManager.isActivityTypeEnabled(MOVE_COMMENT)) {
+          return null;
+      }
     // get services
     IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
     ActivityCommonService activityCommonService = CommonsUtils.getService(ActivityCommonService.class);
