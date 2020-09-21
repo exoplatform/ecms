@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>5.3.5</version>
+    <version>5.3.5-patched</version>
   </parent>
   <artifactId>ecms-core-viewer</artifactId>
   <name>eXo PLF:: DMS Document Viewer</name>

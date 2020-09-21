@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>5.3.5</version>
+  <version>5.3.5-patched</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
