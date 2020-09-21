@@ -6,10 +6,12 @@ import org.exoplatform.commons.search.domain.Document;
 import org.exoplatform.commons.search.index.impl.ElasticIndexingServiceConnector;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
@@ -34,17 +36,37 @@ import java.util.stream.Collectors;
 public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
   private static final Log LOGGER = ExoLogger.getExoLogger(FileindexingConnector.class);
+  
+  private static final int     DEFAULT_MAX_FILE_SIZE_TO_INDEX = 10;
 
   public static final String TYPE = "file";
 
   private RepositoryService repositoryService;
 
   private TrashService trashService;
+  
+  private List<String>         supportedContentIndexingMimetypes;
+
+  private long                 contentMaxSizeToIndexInBytes;
 
   public FileindexingConnector(InitParams initParams) {
     super(initParams);
     this.repositoryService = CommonsUtils.getService(RepositoryService.class);
     this.trashService = CommonsUtils.getService(TrashService.class);
+    if (initParams.containsKey("documents.content.indexing.mimetypes")) {
+      String supportedMimetypes = initParams.getValueParam("documents.content.indexing.mimetypes").getValue();
+      supportedContentIndexingMimetypes = Arrays.stream(StringUtils.split(supportedMimetypes, ","))
+                                                .map(String::trim)
+                                                .collect(Collectors.toList());
+    } else {
+      supportedContentIndexingMimetypes = Collections.emptyList();
+    }
+    if (initParams.containsKey("documents.content.max.size.mb")) {
+      String contentMaxSizeToIndex = initParams.getValueParam("documents.content.max.size.mb").getValue();
+      this.contentMaxSizeToIndexInBytes = Long.parseLong(contentMaxSizeToIndex) * 1024 * 1024;
+    } else {
+      this.contentMaxSizeToIndexInBytes = DEFAULT_MAX_FILE_SIZE_TO_INDEX * 1024 * 1024;
+    }
   }
 
   @Override
@@ -156,14 +178,26 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
       Node contentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
       if(contentNode != null) {
+      	boolean canIndexContent = false;
         if (contentNode.hasProperty(NodetypeConstant.JCR_MIMETYPE)) {
-          fields.put("fileType", contentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString());
+          String mimeType = contentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString();
+          canIndexContent = supportedContentIndexingMimetypes.stream()
+                                                             .anyMatch(supportedMimeType -> mimeType.matches(supportedMimeType));
+          fields.put("fileType", mimeType);
         }
-        InputStream fileStream = contentNode.getProperty(NodetypeConstant.JCR_DATA).getStream();
-        byte[] fileBytes = IOUtils.toByteArray(fileStream);
-        fields.put("file", Base64.getEncoder().encodeToString(fileBytes));
+        Property dataProperty = contentNode.getProperty(NodetypeConstant.JCR_DATA);
+        long fileSize = dataProperty.getLength();
+        canIndexContent = canIndexContent && fileSize < this.contentMaxSizeToIndexInBytes;
 
-        fields.put("fileSize", String.valueOf(fileBytes.length));
+        if (canIndexContent) {
+          InputStream fileStream = dataProperty.getStream();
+          byte[] fileBytes = IOUtils.toByteArray(fileStream);
+          fields.put("file", Base64.getEncoder().encodeToString(fileBytes));
+          fields.put("fileSize", String.valueOf(fileBytes.length));
+        } else {
+          fields.put("file", "");
+          fields.put("fileSize", String.valueOf(fileSize));
+        }
 
         // Dublin Core metadata
         Map<String, String> dublinCoreMetadata = extractDublinCoreMetadata(contentNode);
