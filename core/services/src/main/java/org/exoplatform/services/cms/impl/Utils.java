@@ -694,7 +694,7 @@ public class Utils {
 
   public static String cleanName(String oldName) {
     if (StringUtils.isEmpty(oldName)) return oldName;
-    String specialChar = "[]/'\":;";
+    String specialChar = "&#*@'\"\t\r\n$\\><:;[]/%|.";
     StringBuilder ret = new StringBuilder();
     for (int i = 0; i < oldName.length(); i++) {
       char currentChar = oldName.charAt(i);
