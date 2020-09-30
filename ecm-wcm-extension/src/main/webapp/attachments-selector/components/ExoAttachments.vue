@@ -14,7 +14,7 @@
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
         <div v-show="!showDocumentSelector">
-          <div v-show="isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
+          <div v-show="!displayTimeOut && isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
             {{ $t('attachments.alert.sharing.attachedFrom') }}
             {{ $t(`attachments.alert.sharing.${privateFilesAttached && !fromAnotherSpaces.length ? 'personal' : 'space'}`) }}
             <b v-show="fromAnotherSpaces.length > 0">
@@ -22,7 +22,7 @@
             </b>
             {{ $t('attachments.alert.sharing.availableFor') }} {{ $t('attachments.alert.sharing.connections') }}
           </div>
-          <div v-show="!isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
+          <div v-show="!displayTimeOut && !isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
             {{ $t('attachments.alert.sharing.attachedFrom') }}
             {{ $t(`attachments.alert.sharing.${privateFilesAttached && !fromAnotherSpaces.length ? 'personal' : 'space'}`) }}
             <b v-show="fromAnotherSpaces.length > 0">
@@ -161,12 +161,10 @@
         ></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
         <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
-        <!-- Block below represents adding extensions registered with extensionRegistry -->
         <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`">
           <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
                      :is="action.component.name" :ref="action.key"></component>
         </div>
-        <!-- extensions block ends -->
       </div>
       <div v-if="!showDocumentSelector" class="attachmentsFooter footer ignore-vuetify-classes">
         <a class="btn btn-primary ignore-vuetify-classes" @click="toggleAttachmentsDrawer()">{{ $t('attachments.drawer.apply') }}</a>
@@ -254,14 +252,14 @@ export default {
       modeFolderSelectionForFile: false,
       showAttachmentsDrawer: false,
       displayMessageDestinationFolder: true,
-      cloudDriveConnecting: false, // display progress line at the top if some cloud drive in connecting progress
-      // connecting cloud drive that should be displayed in drives, this passed as a prop to ExoFoldersFilesSelector
+      cloudDriveConnecting: false,
       connectedDrive: {},
       privateFilesAttached: false,
-      isActivityStream: true, // if composer is opened from activity stream or from space
-      fromAnotherSpaces: '', // if composer is opened from space this shows that attachments added by user is from another spaces
-      spaceGroupId: '', // id of current space
-      drivesInProgress: {} // contains cloud drives which are connecting
+      isActivityStream: true,
+      fromAnotherSpaces: '',
+      spaceGroupId: '',
+      drivesInProgress: {},
+      displayTimeOut: false
     };
   },
   watch: {
@@ -299,9 +297,7 @@ export default {
             }
           }
         }
-        // if attached files has at least one non-public file show info alert about sharing private files
         this.privateFilesAttached = this.value.some(file => file.isPublic === false);
-        // set to space names separated with comma if attachments are added from space, which is not current space
         this.fromAnotherSpaces = this.value.filter(({ space }) => space && space.name !== this.groupId)
           .map(({ space }) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
       }
@@ -334,7 +330,9 @@ export default {
   },
   created(){
     this.addDefaultPath();
-    this.attachmentsComposerActions = getAttachmentsComposerExtensions(); // get extensionRegistry extensions
+    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
+    const timeout = 10000;
+    setTimeout(() => this.displayTimeOut = true, timeout);
   },
   methods: {
     toggleAttachmentsDrawer: function() {
@@ -561,7 +559,6 @@ export default {
           this.value[i].showDestinationFolderForFile = '';
           this.value[i].pathDestinationFolderForFile = '';
           this.value[i].isPublic = true;
-          this.value[i].destinationFolder = '';
           break;
         }
       }
@@ -608,8 +605,8 @@ export default {
       t.innerHTML = html;
       return t.content.cloneNode(true);
     },
-    addCloudDrive(drive) { // listen 'addDrive' event
-      this.connectedDrive = drive; // set connectedDrive causes connectedDrive property changing in ExoFoldersFilesSelector.vue
+    addCloudDrive(drive) {
+      this.connectedDrive = drive;
     },
     changeCloudDriveProgress(drives) { // listen clouddrives 'updateDrivesInProgress' event
       this.drivesInProgress = drives; // update progress for connecting drive to display that drive is in connection
