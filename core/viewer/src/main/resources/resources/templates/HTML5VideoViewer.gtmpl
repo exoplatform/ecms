@@ -8,6 +8,8 @@
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.services.jcr.RepositoryService;
   import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.services.cms.link.LinkManager;
 
 
 	UIComponent uiParent = uicomponent.getParent();
@@ -30,6 +32,10 @@
 
   def originalNode = uiParent.getOriginalNode();
   def currentNode = getFileLangNode(uiParent.getNode()) ;
+  LinkManager linkManager = uicomponent.getApplicationComponent(LinkManager.class);
+  if (linkManager.isLink(currentNode)) {
+	currentNode = linkManager.getTarget(currentNode);
+  }
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
