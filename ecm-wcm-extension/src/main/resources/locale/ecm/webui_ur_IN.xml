@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>نام</name>
-      <action>ا ضافہ کریں</action>
+      <name>Name</name>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>Child not found!</child-not-found>
@@ -26,7 +26,7 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>زمرے کا نام</categoryName>
+      <categoryName>Category name</categoryName>
       <categoryPath>Category path</categoryPath>
       <action>#{word.action}</action>
     </header>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Select User</UIPermissionUser>
-      <UIPermissionMembership>کردار منتخب کریں</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>کردار منتخب کریں</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>کردار منتخب کریں</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Select Group</selectGroup>
-      <selectMembership>کردار منتخب کریں</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

@@ -23,13 +23,13 @@
     <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
     <UITabForm>
         <label>
-            <connectOneDrive>توصيل OneDrive</connectOneDrive>
+            <connectOneDrive>Connect OneDrive</connectOneDrive>
         </label>
     </UITabForm>
     <!-- For menu caption in Action Bar -->
     <UIActionBar>
         <tooltip>
-            <ConnectOneDrive>ربط OneDrive الخاص بك</ConnectOneDrive>
+            <ConnectOneDrive>Connect your OneDrive</ConnectOneDrive>
         </tooltip>
     </UIActionBar>
 </bundle>

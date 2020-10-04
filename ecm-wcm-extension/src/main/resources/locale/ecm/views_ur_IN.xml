@@ -4,10 +4,10 @@
   <View>
     <label>
       <languages>
-        <en>انگریزی</en>
-        <fr>فرانسیسی</fr>
+        <en>English</en>
+        <fr>French</fr>
         <ru>Russian</ru>
-        <vi>ويتناميز</vi>
+        <vi>Vietnamese</vi>
         <nl>Dutch</nl>
         <de>German</de>
         <uk>Ukrainian</uk>
@@ -23,23 +23,23 @@
     <view>
       <label>
         <postedBy>Last comment posted by</postedBy>
-        <at>پر</at>
+        <at>at</at>
         <comments>Comment(s)</comments>
         <show-comments>Show comments</show-comments>
         <hide-comments>Hide comments</hide-comments>
-        <comment-by>نے تبصرہ کیا</comment-by>
-        <email>ای میل</email>
-        <site>سائٹ</site>
+        <comment-by>Commented by</comment-by>
+        <email>Email</email>
+        <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
-        <Less_Than_A_Minute>ایک منٹ سے بھی کم پہلے</Less_Than_A_Minute>
-        <About_A_Minute>تقریبا ایک منٹ پہلے</About_A_Minute>
-        <About_x_Minutes>تقریبا {0} منٹ پہلے</About_x_Minutes>
-        <About_An_Hour>تقریبا ایک گھنٹہ پہلے پہلے</About_An_Hour>
-        <About_x_Hours>تقریبآ{0} گھنٹے پہلے</About_x_Hours>
-        <About_A_Day>تقریبا ایک دن پہلے</About_A_Day>
-        <About_x_Days>تقریبا 0} دن پہلے</About_x_Days>
-        <About_A_Month>تقریبا ایک مہینہ پہلے</About_A_Month>
-        <About_x_Months>تقریبا} 0} مہینے پہلے</About_x_Months>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <About_A_Minute>about a minute ago</About_A_Minute>
+        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
+        <About_An_Hour>about an hour ago</About_An_Hour>
+        <About_x_Hours>about {0} hours ago</About_x_Hours>
+        <About_A_Day>about a day ago</About_A_Day>
+        <About_x_Days>about {0} days ago</About_x_Days>
+        <About_A_Month>about a month ago</About_A_Month>
+        <About_x_Months>about {0} months ago</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -60,7 +60,7 @@
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
-        <download>ڈاؤن لوڈ</download>
+        <download>Download</download>
         <htmlview>View as HTML</htmlview>
         <plaintextview>View as Plain text</plaintextview>
       </label>
@@ -73,8 +73,8 @@
   <Mail>
     <view>
       <label>
-        <from>سے:</from>
-        <to>طرف:</to>
+        <from>From:</from>
+        <to>To:</to>
         <cc>Cc:</cc>
         <date>Date:</date>
         <subject>Subject:</subject>
@@ -88,8 +88,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>شرح</avg-rating>
-        <subscription>ووٹ</subscription>
+        <avg-rating>Rate</avg-rating>
+        <subscription>Votes</subscription>
       </label>
     </view>
   </Vote>
@@ -99,7 +99,7 @@
   <ListView>
     <view>
       <label>
-        <name>نام</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
         <exo_owner>Owner</exo_owner>
         <exo_dateCreated>Date Created</exo_dateCreated>
@@ -118,7 +118,7 @@
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
         <metadata>Metadata</metadata>
-        <description>تفصیل</description>
+        <description>Description</description>
       </label>
     </view>
   </AddMetadata>
@@ -131,7 +131,7 @@
       <label>
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>تفصیل</description>
+        <description>Description</description>
       </label>
     </view>
   </AutoVersioning>
@@ -141,9 +141,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>نام</action-name>
+        <action-name>Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>تفصیل</description>
+        <description>Description</description>
       </label>
     </view>
   </EnableVersioning>
@@ -157,22 +157,22 @@
         <core-elements>Core Elements</core-elements>
         <title>Title</title>
         <creator>Creator</creator>
-        <subject>موضوع</subject>
-        <source>ذریعہ</source>
+        <subject>Subject</subject>
+        <source>Source</source>
         <contributor>Contributor</contributor>
         <resource-type>Resource Type</resource-type>
-        <date>تاریخ</date>
+        <date>Date</date>
         <publisher>Publisher</publisher>
-        <description>تفصیل</description>
+        <description>Description</description>
         <rights>Rights</rights>
         <relation>Relation</relation>
         <format>Format</format>
         <coverage>Coverage</coverage>
         <identifier>Identifier</identifier>
-        <languages>زبانیں</languages>
+        <languages>Languages</languages>
       </label>
       <action>
-        <add-edit>اضافہ کریں/تدوین کریں</add-edit>
+        <add-edit>Add/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
@@ -197,7 +197,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>گرہ کی اقسام</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
@@ -208,7 +208,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>گرہ کی اقسام</nodetypes> 
+        <nodetypes>Node Types</nodetypes> 
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
@@ -219,7 +219,7 @@
     <view>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>گرہ کی اقسام</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 

@@ -23,13 +23,13 @@
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <connectGDrive>ربط حساب جوجل</connectGDrive>
+      <connectGDrive>Connect Google Drive</connectGDrive>
     </label>
   </UITabForm>
   <!-- For menu caption in Action Bar -->
   <UIActionBar>
     <tooltip>
-      <ConnectGDrive>ربط حساب جوجل الخاص بك</ConnectGDrive>
+      <ConnectGDrive>Connect your Google Drive</ConnectGDrive>
     </tooltip>
   </UIActionBar>
 </bundle>
