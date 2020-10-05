@@ -18,8 +18,10 @@ package org.exoplatform.wcm.ext.component.activity.listener;
 
 import javax.jcr.Node;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
+import org.exoplatform.social.core.manager.ActivityManager;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -28,7 +30,9 @@ import org.exoplatform.services.listener.Listener;
 public class FileCreateActivityListener extends Listener<Object, Node> {
   
   private static final String RESOURCE_BUNDLE_KEY_CREATED_BY = "SocialIntegration.messages.createdBy";
-  
+  private static final String FILES_SPACES = "files:spaces";
+  private static final String CREATION_COMMENT = "files:spaces.CREATION_COMMENT";
+
   /**
    * Instantiates a new post create content event listener.
    */
@@ -38,6 +42,9 @@ public class FileCreateActivityListener extends Listener<Object, Node> {
   @Override
   public void onEvent(Event<Object, Node> event) throws Exception {
     Node currentNode = event.getData();
-    Utils.postFileActivity(currentNode, RESOURCE_BUNDLE_KEY_CREATED_BY, true, false, "", "");
+    ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
+    if(activityManager.isActivityTypeEnabled(FILES_SPACES) && activityManager.isActivityTypeEnabled(CREATION_COMMENT)) {
+      Utils.postFileActivity(currentNode, RESOURCE_BUNDLE_KEY_CREATED_BY, true, true, "", "");
+    }
   }
 }

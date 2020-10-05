@@ -18,12 +18,14 @@ package org.exoplatform.wcm.ext.component.activity.listener;
 
 import javax.jcr.*;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
@@ -34,6 +36,7 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 public class FileAddPropertyActivityListener extends Listener<Node, String> {
 
   private static final Log LOG = ExoLogger.getExoLogger(FileAddPropertyActivityListener.class);
+  private static final String ADD_PROPERTY = "files:spaces.ADD_PROPERTY";
 
   private String[]  editedField     = {"dc:title", "dc:description", "dc:creator", "dc:source"};
   private String[]  bundleMessage   = {"SocialIntegration.messages.editTitle",
@@ -51,6 +54,11 @@ public class FileAddPropertyActivityListener extends Listener<Node, String> {
 
   @Override
   public void onEvent(Event<Node, String> event) throws Exception {
+  	ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
+	if(!activityManager.isActivityTypeEnabled(ADD_PROPERTY)) {
+		return;
+	}
+
     Node currentNode = event.getSource();
     String propertyName = event.getData();
     StringBuilder newValueBuilder = new StringBuilder();

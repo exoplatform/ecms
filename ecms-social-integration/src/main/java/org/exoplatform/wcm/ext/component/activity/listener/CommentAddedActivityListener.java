@@ -57,7 +57,7 @@ public class CommentAddedActivityListener extends Listener<Node, Node> {
     commentContent = commentContent.replaceAll("&#64;","@");
     ExoSocialActivity commentActivity;
     if(currentNode.isNodeType(NodetypeConstant.NT_FILE)) {
-      commentActivity = Utils.postFileActivity(currentNode, commentContent, false, false, null, null);
+      commentActivity = Utils.postFileActivity(currentNode, commentContent, false, true, null, null);
     }else{
       commentActivity= Utils.postActivity(currentNode, commentContent, false, false, null, null);
     }
