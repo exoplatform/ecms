@@ -122,7 +122,7 @@ public class Utils {
   }
   public static Map<String, String> populateActivityData(Node node,
                                                          String activityOwnerId, String activityMsgBundleKey, 
-                                                         boolean isSystemComment, String systemComment, String perm) throws Exception {
+                                                         boolean isComment, String systemComment, String perm) throws Exception {
     /** The date formatter. */
     DateFormat dateFormatter = null;
     dateFormatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
@@ -176,8 +176,8 @@ public class Utils {
     activityParams.put(ContentUIActivity.MIME_TYPE, getMimeType(linkManager.isLink(node)?linkManager.getTarget(node, true):node));
     activityParams.put(ContentUIActivity.IMAGE_PATH, illustrationImg);
     activityParams.put(ContentUIActivity.IMAGE_PATH, illustrationImg);
-    if (isSystemComment) {
-      activityParams.put(ContentUIActivity.IS_SYSTEM_COMMENT, String.valueOf(isSystemComment));
+    if (isComment && StringUtils.isNotBlank(systemComment)) {
+      activityParams.put(ContentUIActivity.IS_SYSTEM_COMMENT, String.valueOf(isComment));
     	activityParams.put(ContentUIActivity.SYSTEM_COMMENT, systemComment);
     }else{
       activityParams.put(ContentUIActivity.IS_SYSTEM_COMMENT, String.valueOf(false));
@@ -419,13 +419,13 @@ public class Utils {
    * 
    * @param node : activity raised from this source
    * @param activityMsgBundleKey
-   * @param isSystemComment
+   * @param isComment
    * @param systemComment the new value of System Posted activity, 
    *        if (isSystemComment) systemComment can not be set to null, set to empty string instead of.
    * @throws Exception
    */
   public static ExoSocialActivity postFileActivity(Node node, String activityMsgBundleKey, boolean needUpdate, 
-                                  boolean isSystemComment, String systemComment, String perm) throws Exception {
+                                  boolean isComment, String systemComment, String perm) throws Exception {
     Object isSkipRaiseAct = DocumentContext.getCurrent()
                                            .getAttributes()
                                            .get(DocumentContext.IS_SKIP_RAISE_ACT);
@@ -451,7 +451,7 @@ public class Utils {
     // get owner
     String activityOwnerId = getActivityOwnerId(node);
     String nodeActivityID;
-    ExoSocialActivity exa =null;    
+    ExoSocialActivity exa =null;
     if (node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
       try {
         nodeActivityID = node.getProperty(ActivityTypeUtils.EXO_ACTIVITY_ID).getString();
@@ -472,11 +472,11 @@ public class Utils {
     }
     if (activity==null) {
       activity = createActivity(identityManager, activityOwnerId,
-                                node, activityMsgBundleKey, activityType, isSystemComment, systemComment, perm);
+                                node, activityMsgBundleKey, activityType, isComment, systemComment, perm);
       setActivityType(null);
     }
     
-    if (exa!=null) {
+    if (exa != null) {
       if (commentFlag) {
         Map<String, String> paramsMap = activity.getTemplateParams();
         String paramMessage = paramsMap.get(ContentUIActivity.MESSAGE);
@@ -539,7 +539,7 @@ public class Utils {
         } catch (Exception e) {
           LOG.info("No activity is deleted, return no related activity");
         }
-        if (exa != null && !commentFlag && isSystemComment) {
+        if (exa != null && !commentFlag && isComment) {
           activity.setId(null);
           updateNotifyMessages(activity, activity.getTemplateParams().get(ContentUIActivity.MESSAGE), activity.getTemplateParams().get(ContentUIActivity.SYSTEM_COMMENT));
           activityManager.saveComment(exa, activity);

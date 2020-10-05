@@ -18,9 +18,11 @@ package org.exoplatform.wcm.ext.component.activity.listener;
 
 import javax.jcr.Node;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.social.core.manager.ActivityManager;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -36,6 +38,7 @@ public class FileRemovePropertyActivityListener extends Listener<Node, String> {
                                        "SocialIntegration.messages.removeSource"};
   private boolean[] needUpdate       = {true, true, false, false, false};
   private int consideredFieldCount   = removedField.length;
+  private static final String REMOVE_PROPERTY = "files:spaces.REMOVE_PROPERTY";
   /**
    * Instantiates a new post edit content event listener.
    */
@@ -45,6 +48,10 @@ public class FileRemovePropertyActivityListener extends Listener<Node, String> {
 
   @Override
   public void onEvent(Event<Node, String> event) throws Exception {
+    ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
+    if(!activityManager.isActivityTypeEnabled(REMOVE_PROPERTY)) {
+      return;
+    }
     Node currentNode = event.getSource();
     String propertyName = event.getData();
     
