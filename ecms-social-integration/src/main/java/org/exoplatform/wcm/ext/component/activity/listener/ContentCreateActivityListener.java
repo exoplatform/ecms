@@ -42,6 +42,6 @@ public class ContentCreateActivityListener extends Listener<Object, Node> {
     if(!currentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE))
       Utils.postActivity(currentNode, RESOURCE_BUNDLE_KEY_CREATED_BY, true, false, "", "");
     else
-    	Utils.postFileActivity(currentNode, RESOURCE_BUNDLE_KEY_CREATED_BY, true, false, "", "");
+    	Utils.postFileActivity(currentNode, RESOURCE_BUNDLE_KEY_CREATED_BY, true, true, "", "");
   }
 }

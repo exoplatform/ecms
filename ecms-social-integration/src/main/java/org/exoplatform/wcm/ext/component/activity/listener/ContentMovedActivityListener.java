@@ -18,9 +18,12 @@ package org.exoplatform.wcm.ext.component.activity.listener;
 
 import javax.jcr.Node;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.social.core.manager.ActivityManager;
+
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen The Vinh From ECM Of eXoPlatform
@@ -31,8 +34,14 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 public class ContentMovedActivityListener extends Listener<Node, String>{
   private static final String CONTENT_MOVED_BUNDLE = "SocialIntegration.messages.contentMoved";
   private static final String FILE_MOVED_BUNDLE    = "SocialIntegration.messages.fileMoved";
+  private static final String MOVE_CONTENT = "files:spaces.MOVE_COMMENT";
+
   @Override
   public void onEvent(Event<Node, String> event) throws Exception {
+    ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
+    if(!activityManager.isActivityTypeEnabled(MOVE_CONTENT)) {
+      return;
+    }
     Node currentNode = event.getSource();
     String target = event.getData();
     if(!currentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE))

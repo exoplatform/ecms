@@ -23,6 +23,7 @@ import javax.jcr.*;
 
 import org.apache.commons.chain.Context;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.jcr.dataflow.persistent.PersistedPropertyData;
@@ -33,6 +34,7 @@ import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
@@ -44,6 +46,7 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 public class FileUpdateActivityListener extends Listener<Context, String> {
 
   private static final Log LOG = ExoLogger.getLogger(FileUpdateActivityListener.class);
+  private static final String UPDATE_COMMENT = "files:spaces.UPDATE_COMMENT";
 
   private String[]  editedField     = {"exo:title", "exo:summary", "exo:language", "dc:title", "dc:description", "dc:creator", "dc:source", "jcr:data"};
   private String[]  bundleMessage   = {"SocialIntegration.messages.rename",
@@ -74,6 +77,10 @@ public class FileUpdateActivityListener extends Listener<Context, String> {
 
   @Override
   public void onEvent(Event<Context, String> event) throws Exception {
+	ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
+	if(!activityManager.isActivityTypeEnabled(UPDATE_COMMENT)) {
+	  return;
+	}
     Context context = event.getSource();
     Property currentProperty = (Property) context.get(InvocationContext.CURRENT_ITEM);
     Property previousProperty = (Property) context.get(InvocationContext.PREVIOUS_ITEM);
