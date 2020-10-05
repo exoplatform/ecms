@@ -9,7 +9,7 @@ public class UtilsTest extends TestCase {
     String title1 = "test | test";
     String title2 = "test % test";
     String title3 = "test & test";
-    String title4 = "test . test";
+    String title4 = "test @ test";
     String title5 = "test $ test";
     String title6 = "test / test";
     String title7 = "test [ test";
@@ -25,7 +25,6 @@ public class UtilsTest extends TestCase {
     String title17 = "test < test";
     String title18 = "test # test";
     String title19 = "test * test";
-    String title20 = "test @ test";
 
     // When
     String titleClean1 = Utils.cleanName(title1);
@@ -47,10 +46,8 @@ public class UtilsTest extends TestCase {
     String titleClean17 = Utils.cleanName(title17);
     String titleClean18 = Utils.cleanName(title18);
     String titleClean19 = Utils.cleanName(title19);
-    String titleClean20 = Utils.cleanName(title20);
 
     // Then
-    assertEquals(titleClean20,"test-test");
     assertEquals(titleClean1,"test-test");
     assertEquals(titleClean2,"test-test");
     assertEquals(titleClean3,"test-test");
