@@ -21,7 +21,7 @@
       <system>the system</system>
       <readmore>...Read More.</readmore>
       <editTitle>Title has been updated to: {0}</editTitle>
-      <editName>Name has been updated to: {0}</editName>
+      <rename>Name has been updated to: {0}</rename>
       <editDescription>Description has been updated to: {0}</editDescription>
       <singleCreator>Creator is {0}</singleCreator>
       <multiCreator>Creators are {0}</multiCreator>
