@@ -442,15 +442,6 @@ public class Utils {
     if(! activityManager.isActivityTypeEnabled(activityType)) {
       return null;
     }
-      if (RESOURCE_BUNDLE_KEY_CREATED_BY.equals(activityMsgBundleKey)  && !isSystemComment && ! activityManager.isActivityTypeEnabled(CREATION_MESSAGE)) {
-          return null;
-      }
-      if (RESOURCE_BUNDLE_KEY_FILE_RENAMED .equals(activityMsgBundleKey) && ! activityManager.isActivityTypeEnabled(RENAME_COMMENT)) {
-          return null;
-      }
-      if (RESOURCE_BUNDLE_KEY_FILE_MOVED.equals(activityMsgBundleKey) && ! activityManager.isActivityTypeEnabled(MOVE_COMMENT)) {
-          return null;
-      }
     // get services
     IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
     ActivityCommonService activityCommonService = CommonsUtils.getService(ActivityCommonService.class);
