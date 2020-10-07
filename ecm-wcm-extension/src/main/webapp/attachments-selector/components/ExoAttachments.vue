@@ -14,7 +14,7 @@
       </div>
       <div :class="showDocumentSelector? 'serverFiles' : 'attachments'" class="content">
         <div v-show="!showDocumentSelector">
-          <div v-show="!displayTimeOut && isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
+          <div v-show="attachmentInfo && isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
             {{ $t('attachments.alert.sharing.attachedFrom') }}
             {{ $t(`attachments.alert.sharing.${privateFilesAttached && !fromAnotherSpaces.length ? 'personal' : 'space'}`) }}
             <b v-show="fromAnotherSpaces.length > 0">
@@ -22,7 +22,7 @@
             </b>
             {{ $t('attachments.alert.sharing.availableFor') }} {{ $t('attachments.alert.sharing.connections') }}
           </div>
-          <div v-show="!displayTimeOut && !isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
+          <div v-show="attachmentInfo && !isActivityStream && (privateFilesAttached || fromAnotherSpaces.length > 0)" class="alert alert-info attachmentsAlert">
             {{ $t('attachments.alert.sharing.attachedFrom') }}
             {{ $t(`attachments.alert.sharing.${privateFilesAttached && !fromAnotherSpaces.length ? 'personal' : 'space'}`) }}
             <b v-show="fromAnotherSpaces.length > 0">
@@ -259,7 +259,7 @@ export default {
       fromAnotherSpaces: '',
       spaceGroupId: '',
       drivesInProgress: {},
-      displayTimeOut: false
+      attachmentInfo: false
     };
   },
   watch: {
@@ -276,6 +276,11 @@ export default {
     sameFileError: function () {
       if (this.sameFileError) {
         setTimeout(() => this.sameFileError = false, this.MESSAGES_DISPLAY_TIME);
+      }
+    },
+    attachmentInfo: function () {
+      if (this.attachmentInfo) {
+        setTimeout(() => this.attachmentInfo = false, this.MESSAGES_DISPLAY_TIME);
       }
     },
     value: {
@@ -331,8 +336,6 @@ export default {
   created(){
     this.addDefaultPath();
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
-    const timeout = 10000;
-    setTimeout(() => this.displayTimeOut = true, timeout);
   },
   methods: {
     toggleAttachmentsDrawer: function() {
@@ -514,6 +517,7 @@ export default {
     toggleServerFileSelector(selectedFiles){
       if (selectedFiles) {
         this.value = selectedFiles;
+        this.attachmentInfo = true;
         this.$emit('input', this.value);
         this.$emit('attachmentsChanged', this.value);
       }
