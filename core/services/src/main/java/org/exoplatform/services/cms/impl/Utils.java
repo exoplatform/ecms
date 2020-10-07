@@ -918,6 +918,9 @@ public class Utils {
     long size = 0;
     try {
       size = node.getProperty("jcr:content/jcr:data").getLength();
+    } catch (PathNotFoundException pne) {
+      LOG.error("Unable to read binary content from disk for node " + node.getPath() + ". The binary content is not "
+                              + "accessible, it was removed, or may have been quarantined by an antivirus.",pne);
     } catch (Exception e) {
       LOG.error("Can not get file size", e);
     }

@@ -6,6 +6,12 @@
 	import org.exoplatform.webui.core.UIPopupWindow;
 	import org.exoplatform.web.application.Parameter;
 	import org.exoplatform.services.jcr.RepositoryService;
+  import javax.jcr.RepositoryException;
+  import org.exoplatform.services.resources.ResourceBundleService;
+  import org.exoplatform.commons.utils.CommonsUtils;
+
+
+
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();	
 	
@@ -39,6 +45,9 @@
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
+
+  def accessibleBinaryContent = true;
+
 %>
 <div $resizeBlock>
 	<style>
@@ -48,6 +57,14 @@
 	  <%
 	    if(mimeType.equals("application/rss+xml")) mimeType="text/html"; 
 	    def fileComponent = uicomponent.getUIComponent(mimeType);
+      try {
+        contentNode.getProperty("jcr:data");
+      } catch (RepositoryException e) {
+        fileComponent=null;
+        accessibleBinaryContent=false;
+
+      }
+
 	    if(fileComponent != null) {
 	      uicomponent.renderUIComponent(fileComponent);
 	    } else {
@@ -57,7 +74,20 @@
 				<div class="Content">
 			  	<div class="TextContent">
 						<div style="text-align:center; font-style:italic">
+<%
+				      if (accessibleBinaryContent) {
+%>
 						  <%=_ctx.appRes("File.view.label.not-viewable")%>
+<%
+            } else {
+              ResourceBundleService resourceBundleService = CommonsUtils.getService(ResourceBundleService.class);
+              def ecmViewRb = resourceBundleService.getResourceBundle("locale.ecm.views", _ctx.getRequestContext().getLocale());
+              String binaryNotAvailable = ecmViewRb.getString("File.view.label.binary-not-available");
+%>
+              <h4><%=binaryNotAvailable%></h4>
+<%
+            }
+%>
 						</div>
 					</div>
 				</div>

@@ -353,11 +353,14 @@
             '    <ul class="dropdown-menu" role="menu">' +
             '      <li><div class="openBtn">' +
             '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-            '                </div></li>' +
-            '      <li><div class="downloadBtn">' +
+            '                </div></li>';
+
+        if (!this.settings.doc.size == "") {
+            html += '      <li><div class="downloadBtn">' +
             '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-            '                </div></li>' +
-            '    </ul>' +
+            '                </div></li>';
+        }
+        html +='    </ul>' +
             '  </div>';
         if (this.settings.showComments) {
           html += '<div class="showComments">' +
@@ -507,11 +510,13 @@
                     '    <ul class="dropdown-menu" role="menu">' +
                     '      <li><div class="openBtn">' +
                     '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-                    '                </div></li>' +
-                    '      <li><div class="downloadBtn">' +
+                    '                </div></li>';
+                if (!this.settings.doc.size == "") {
+                  html +='      <li><div class="downloadBtn">' +
                     '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                    '                </div></li>' +
-                    '    </ul>' +
+                    '                </div></li>';
+                }
+                html +='    </ul>' +
                     '  </div>';
                 if (this.settings.showComments) {
                   html += '<div class="showComments">' +
