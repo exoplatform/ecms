@@ -16,11 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.rightclick.viewinfor;
 
+import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
+import javax.jcr.*;
 import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.ecm.utils.text.Text;
@@ -123,10 +123,10 @@ public class UIViewInfoContainer extends UIContainer {
     Node selectedNode = getSelectedNode();
 
     //get name
-    inforMap.put(NAME, selectedNode.getName());
+    inforMap.put(NAME, getName(selectedNode));
 
     //get title
-    inforMap.put(TITLE, getTitle(selectedNode));
+    inforMap.put(TITLE, Utils.getTitle(selectedNode));
 
     //get Type
     inforMap.put(TYPE, getType(selectedNode));
@@ -223,6 +223,38 @@ public class UIViewInfoContainer extends UIContainer {
       title = node.getName();
     }
     return Text.unescapeIllegalJcrChars(title);
+  }
+
+  /**
+   * get name of node
+   * @param node
+   * @return
+   * @throws Exception
+   */
+  private String getName(Node node) throws Exception {
+    String name;
+    name = node.getProperty("exo:name").getValue().getString();
+    try {
+      name = node.getProperty("exo:name").getValue().getString();
+    } catch (PathNotFoundException pnf1) {
+      try {
+        Value[] values = node.getNode("jcr:content").getProperty("dc:title").getValues();
+        if (values.length != 0) {
+          name = values[0].getString();
+        }
+      } catch (PathNotFoundException pnf2) {
+        name = null;
+      }
+    } catch (ValueFormatException e) {
+      name = null;
+    } catch (IllegalStateException e) {
+      name = null;
+    } catch (RepositoryException e) {
+      name = null;
+    }
+    // double decode name for cyrillic chars
+    name = URLDecoder.decode(URLDecoder.decode(name, "UTF-8"), "UTF-8");
+    return name;
   }
 
   /**
