@@ -16,11 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.rightclick.viewinfor;
 
+import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
+import javax.jcr.*;
 import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.ecm.utils.text.Text;
@@ -123,10 +123,14 @@ public class UIViewInfoContainer extends UIContainer {
     Node selectedNode = getSelectedNode();
 
     //get name
-    inforMap.put(NAME, selectedNode.getName());
+    String name = Utils.getName(selectedNode);
+    
+    // decode name for cyrillic chars
+    name = URLDecoder.decode(name, "UTF-8");
+    inforMap.put(NAME, name);
 
     //get title
-    inforMap.put(TITLE, getTitle(selectedNode));
+    inforMap.put(TITLE, Utils.getTitle(selectedNode));
 
     //get Type
     inforMap.put(TYPE, getType(selectedNode));
@@ -197,32 +201,6 @@ public class UIViewInfoContainer extends UIContainer {
       strType = strNodeTypeName;
     }
     return strType;
-  }
-
-  /**
-   * get title of node
-   * @param node
-   * @return
-   * @throws Exception
-   */
-  private String getTitle(Node node) throws Exception {
-    String title = null;
-    if (node.hasNode(Utils.JCR_CONTENT)) {
-      Node content = node.getNode(Utils.JCR_CONTENT);
-      if (content.hasProperty(DC_TITLE)) {
-        try {
-          title = content.getProperty(DC_TITLE).getValues()[0].getString();
-        } catch(Exception ex) {
-          title = null;
-        }
-      }
-    } else if (node.hasProperty(Utils.EXO_TITLE)) {
-      title = node.getProperty(Utils.EXO_TITLE).getValue().getString();
-    }
-    if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
-      title = node.getName();
-    }
-    return Text.unescapeIllegalJcrChars(title);
   }
 
   /**
