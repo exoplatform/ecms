@@ -222,68 +222,21 @@ public class CloudDriveUIService implements Startable {
    * string builder.
    *
    * @param node {@link Node}
-   * @param buttons {@link String}
-   * @param actionsStr {@link StringBuilder}
+   * @return String The list of buttons
    * @throws RepositoryException the repository exception
    */
-  protected void readViewActions(Node node, String buttons, StringBuilder actionsStr) throws RepositoryException {
-    if (node.hasProperty(buttons)) {
-      String[] actions = node.getProperty(buttons).getString().split(";");
+  protected String readViewActions(Node node, String propertyName) throws RepositoryException {
+    List<String> actionList = new ArrayList<>();
+    if (node.hasProperty(propertyName)) {
+      String[] actions = node.getProperty(propertyName).getString().split(";");
       for (int i = 0; i < actions.length; i++) {
         String a = actions[i].trim();
-        if (actionsStr.indexOf(a) < 0) { // add only if not already exists
-          if (actionsStr.length() > 0) {
-            actionsStr.append(';');
-            actionsStr.append(' ');
-          }
-          actionsStr.append(a);
+        if (!actionList.contains(a)) { // add only if not already exists
+          actionList.add(a);
         }
       }
     }
-  }
-
-  /**
-   * Split buttons actions on Cloud Drive's and other from given node, in
-   * buttons property, to given string builder.
-   *
-   * @param node {@link Node}
-   * @param buttons {@link String}
-   * @param cdActions the cd actions
-   * @param otherActions the other actions
-   * @throws RepositoryException the repository exception
-   */
-  protected void splitViewActions(Node node,
-                                  String buttons,
-                                  StringBuilder cdActions,
-                                  StringBuilder otherActions) throws RepositoryException {
-    if (node.hasProperty(buttons)) {
-      String[] actions = node.getProperty(buttons).getString().split(";");
-      for (int i = 0; i < actions.length; i++) {
-        String a = actions[i].trim();
-        String aname = capitalize(a);
-        UIExtension ae = uiExtensions.getUIExtension(ManageViewService.EXTENSION_TYPE, aname);
-        if (ae != null) {
-          if (CloudDriveUIMenuAction.class.isAssignableFrom(ae.getComponent())) {
-            if (cdActions.indexOf(a) < 0) { // add only if not already exists
-              if (cdActions.length() > 0) {
-                cdActions.append(';');
-                cdActions.append(' ');
-              }
-              cdActions.append(a);
-            }
-          } else if (otherActions.indexOf(a) < 0) { // add only if not already
-                                                    // exists
-            if (otherActions.length() > 0) {
-              otherActions.append(';');
-              otherActions.append(' ');
-            }
-            otherActions.append(a);
-          }
-        } else {
-          LOG.warn("Cannot find UIExtension for action " + aname);
-        }
-      }
-    }
+    return String.join(";",actionList);
   }
 
   /**
@@ -303,11 +256,11 @@ public class CloudDriveUIService implements Startable {
         Node viewNode = manageView.getViewByName(view, jcrSessions);
         // read all already existing ECMS actions
         StringBuilder newActions = new StringBuilder();
-        readViewActions(viewNode, EXO_BUTTONS, newActions);
+        newActions.append(readViewActions(viewNode, EXO_BUTTONS));
         int menuLength = newActions.length();
         // read all actions saved for CD
         StringBuilder cdActions = new StringBuilder();
-        readViewActions(viewNode, ECD_BUTTONS, cdActions);
+        cdActions.append(readViewActions(viewNode, ECD_BUTTONS));
 
         // merge others with CD for real action bar set
         if (cdActions.length() > 0) {
@@ -348,7 +301,7 @@ public class CloudDriveUIService implements Startable {
           // check if we don't have new defaults in configuration (actual for
           // upgrades since 1.3.0)
           StringBuilder defaultSavedActions = new StringBuilder();
-          readViewActions(viewNode, ECD_DEFAULT_BUTTONS, defaultSavedActions);
+          defaultSavedActions.append(readViewActions(viewNode, ECD_DEFAULT_BUTTONS));
 
           Set<String> addDefaultActions = new LinkedHashSet<String>();
           for (String cda : defaultConfiguredActions) {
@@ -404,16 +357,39 @@ public class CloudDriveUIService implements Startable {
       Session session = jcrSessions.getSession(DMS_SYSTEM_WORKSPACE, jcrService.getCurrentRepository());
       for (String view : VIEWS) {
         Node viewNode = manageView.getViewByName(view, jcrSessions);
-        StringBuilder newActions = new StringBuilder();
-        StringBuilder cdActions = new StringBuilder();
+        String newActions = "";
+        String cdActions = "";
         // split current actions, including customized by user, to Cloud Drive's
         // and others
-        splitViewActions(viewNode, EXO_BUTTONS, cdActions, newActions);
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Stored user buttons: " + cdActions.toString());
+        if (viewNode.hasProperty(EXO_BUTTONS)) {
+          String[] actions = viewNode.getProperty(EXO_BUTTONS).getString().split(";");
+          List<String> cloudDriveActions = new ArrayList<>();
+          List<String> defaultActions = new ArrayList<>();
+          for (String action : actions) {
+            String a = action.trim();
+            String aname = capitalize(a);
+            UIExtension ae = uiExtensions.getUIExtension(ManageViewService.EXTENSION_TYPE, aname);
+            if (ae != null) {
+              if (CloudDriveUIMenuAction.class.isAssignableFrom(ae.getComponent())) {
+                if (!cloudDriveActions.contains(a)) { // add only if not already exists
+                  cloudDriveActions.add(a);
+                }
+              } else if (!defaultActions.contains(a)) { // add only if not already
+                defaultActions.add(a);
+              }
+            } else {
+              LOG.warn("Cannot find UIExtension for action " + aname);
+            }
+          }
+          newActions = String.join(";", defaultActions);
+          cdActions = String.join(";", cloudDriveActions);
         }
-        viewNode.setProperty(EXO_BUTTONS, newActions.toString());
-        viewNode.setProperty(ECD_BUTTONS, cdActions.toString());
+
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Stored user buttons: " + cdActions);
+        }
+        viewNode.setProperty(EXO_BUTTONS, newActions);
+        viewNode.setProperty(ECD_BUTTONS, cdActions);
       }
       session.save();
     } finally {
