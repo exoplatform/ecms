@@ -63,6 +63,7 @@
         <download>ファイルをダウンロード</download>
         <htmlview>HTMLで見る</htmlview>
         <plaintextview>テキストで見る</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>

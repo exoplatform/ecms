@@ -63,6 +63,7 @@
         <download>Tải về</download>
         <htmlview>Xem dưới dạng HTML</htmlview>
         <plaintextview>Xem dưới dạng văn bản Thuần túy</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>

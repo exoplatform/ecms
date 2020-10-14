@@ -63,6 +63,7 @@
         <download>unggah</download>
         <htmlview>Tampilkan sebagai HTML</htmlview>
         <plaintextview>Tampilkan sebagai teks biasa</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>

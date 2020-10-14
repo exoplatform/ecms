@@ -63,6 +63,7 @@
         <download>Descarrega</download>
         <htmlview>Visualitza en HTML</htmlview>
         <plaintextview>Mostra com a text</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>

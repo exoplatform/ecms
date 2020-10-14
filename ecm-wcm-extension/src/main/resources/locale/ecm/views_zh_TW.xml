@@ -63,6 +63,7 @@
         <download>下載</download>
         <htmlview>作為 HTML 視圖</htmlview>
         <plaintextview>以純文字格式查看</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>

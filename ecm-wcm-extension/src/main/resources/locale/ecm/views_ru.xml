@@ -63,6 +63,7 @@
         <download>Загрузить</download>
         <htmlview>Показать как HTML</htmlview>
         <plaintextview>Показать как статический текст</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>

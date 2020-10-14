@@ -63,6 +63,7 @@
         <download>Downloaden</download>
         <htmlview>Bekijken als HTML</htmlview>
         <plaintextview>Weergeven als tekst zonder opmaak</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>

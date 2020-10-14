@@ -63,6 +63,7 @@
         <download>Prenesi</download>
         <htmlview>Prikaži kot HTML</htmlview>
         <plaintextview>Prikaži kot navadno besedilo</plaintextview>
+        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
   </File>
