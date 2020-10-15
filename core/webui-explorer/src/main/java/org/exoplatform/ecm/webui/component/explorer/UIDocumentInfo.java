@@ -1143,9 +1143,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         uiExplorer.updateAjax(event) ;
         event.broadcast();
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("Error Refreshing selected node", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1221,9 +1219,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
         return ;
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("An error occurred while accessing repository", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1263,9 +1259,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
         uiExplorer.updateAjax(event) ;
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("An error occurred while accessing repository", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1287,9 +1281,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         uiExplorer.setLanguage(selectedLanguage) ;
         uiExplorer.updateAjax(event) ;
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("An error occurred while accessing repository", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1311,9 +1303,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         VotingService votingService = uiComp.getApplicationComponent(VotingService.class) ;
         votingService.vote(uiComp.getCurrentNode(), objId, userName, uiComp.getLanguage()) ;
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("An error occurred while accessing repository", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1334,9 +1324,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
         requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + downloadLink + "');");
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("An error occurred while accessing repository", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1383,9 +1371,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
         return;
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("An error occurred while accessing repository", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1557,9 +1543,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         extendedPageIterator.setCurrentPage(page);
         event.getRequestContext().addUIComponentToUpdateByAjax(explorer);
       } catch(RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository cannot be found");
-        }
+        LOG.error("An error occurred while accessing repository", e);
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
