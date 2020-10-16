@@ -18,6 +18,7 @@
 package org.exoplatform.services.cms.mimetype;
 
 import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -34,6 +35,7 @@ import java.util.Properties;
  */
 public class DMSMimeTypeResolver {
 
+  private static final String MIMETYPES_FILE_PATH = "exo.files.mimetypes.path";
   private Properties dmsmimeTypes       = new Properties();
 
   private static MimeTypeResolver mimeTypes       = new MimeTypeResolver();
@@ -41,15 +43,31 @@ public class DMSMimeTypeResolver {
   private static DMSMimeTypeResolver dmsMimeTypeResolver;
 
 
-  private DMSMimeTypeResolver() throws Exception {
+  private DMSMimeTypeResolver() {
     ConfigurationManager configurationService = WCMCoreUtils.getService(ConfigurationManager.class);
-    URL filePath = configurationService.getURL("war:/conf/wcm-core/mimetype/mimetypes.properties");
-    if (filePath != null) {
-      URLConnection connection = filePath.openConnection();
-      dmsmimeTypes.load(connection.getInputStream());
-    } else {
-      //load the default mimetypes.properties
-      dmsmimeTypes.load(getClass().getResourceAsStream("/conf/mimetype/mimetypes.properties"));
+    try {
+      // exo.files.mimetypes.path points to a file in the file system, we need to add file:// for URL protocol
+      URL filePath = configurationService.getURL("file://" + PropertyManager.getProperty(MIMETYPES_FILE_PATH));
+      if (filePath != null) {
+          URLConnection connection = filePath.openConnection();
+          dmsmimeTypes.load(connection.getInputStream());
+      }
+    } catch (Exception e) {
+      // Can not load the properties from File system, let's try from war file
+    }
+    if(dmsmimeTypes.isEmpty()) {
+      try {
+        URL filePath = configurationService.getURL("war:/conf/wcm-core/mimetype/mimetypes.properties");
+        if (filePath != null) {
+          URLConnection connection = filePath.openConnection();
+          dmsmimeTypes.load(connection.getInputStream());
+        } else {
+          dmsmimeTypes.load(getClass().getResourceAsStream("/conf/mimetype/mimetypes.properties"));
+        }
+      } catch (Exception e) {
+        // This should never happen since
+        // We have loaded the default mimetypes.properties
+      }
     }
   }
 
