@@ -139,33 +139,6 @@
     </component>
 
     <component>
-        <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
-        <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
-        <init-params>
-            <value-param>
-                <name>smallSize</name>
-                <value>32x32</value>
-            </value-param>
-            <value-param>
-                <name>mediumSize</name>
-                <value>116x116</value>
-            </value-param>
-            <value-param>
-                <name>bigSize</name>
-                <value>300x300</value>
-            </value-param>
-            <value-param>
-                <name>enable</name>
-                <value>false</value>
-            </value-param>
-            <value-param>
-                <name>mimetypes</name>
-                <value>image/jpeg;image/png;image/gif;image/bmp</value>
-            </value-param>
-        </init-params>
-    </component>
-
-    <component>
         <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
         <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
     </component>

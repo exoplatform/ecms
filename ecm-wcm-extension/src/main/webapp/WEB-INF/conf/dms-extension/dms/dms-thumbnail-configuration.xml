@@ -23,7 +23,7 @@
       </value-param>
       <value-param>
       	<name>enable</name>
-	      <value>true</value>
+	      <value>${exo.ecms.document.thumbnails.enabled:true}</value>
       </value-param>
       <value-param>
         <name>mimetypes</name>
