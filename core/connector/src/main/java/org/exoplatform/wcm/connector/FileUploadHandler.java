@@ -16,37 +16,11 @@
  */
 package org.exoplatform.wcm.connector;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javax.jcr.ItemExistsException;
-import javax.jcr.Node;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
-
-import com.ibm.icu.text.Transliterator;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
@@ -65,6 +39,23 @@ import org.exoplatform.upload.UploadService.UploadLimit;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import javax.jcr.ItemExistsException;
+import javax.jcr.Node;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SAS
@@ -448,7 +439,7 @@ public class FileUploadHandler {
       Node file = null;
       Node jcrContent=null;
       boolean fileCreated = false;
-      String exoTitle = fileName;
+      String exoTitle = URLDecoder.decode(fileName, "UTF-8");
       
       fileName = Utils.cleanNameWithAccents(fileName);
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();

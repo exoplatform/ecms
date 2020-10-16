@@ -997,17 +997,40 @@ public class Utils {
       } catch (PathNotFoundException pnf2) {
         title = null;
       }
-    } catch (ValueFormatException e) {
-      title = null;
-    } catch (IllegalStateException e) {
-      title = null;
-    } catch (RepositoryException e) {
+    } catch (IllegalStateException | RepositoryException e) {
       title = null;
     }
     if (StringUtils.isBlank(title)) {
       title = node.getName();
     }
     return URLDecoder.decode(title,"UTF-8");
+  }
+
+  /**
+   * Gets the name.
+   *
+   * @param node the node
+   * @return the name
+   * @throws Exception the exception
+   */
+  public static String getName(Node node) throws Exception {
+    String name = null;
+    try {
+      name = node.getProperty("exo:name").getValue().getString();
+    } catch (PathNotFoundException pnf1) {
+      try {
+        Value[] values = node.getNode("jcr:content").getProperty("dc:name").getValues();
+        if (values.length != 0) {
+          name = values[0].getString();
+        }
+      } catch (PathNotFoundException pnf2) {
+        name = null;
+      }
+    } catch (IllegalStateException | RepositoryException e) {
+      name = null;
+    }
+    
+    return URLDecoder.decode(name, "UTF-8");
   }
 
   /**

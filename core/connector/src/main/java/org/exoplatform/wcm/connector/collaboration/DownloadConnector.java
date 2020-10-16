@@ -1,8 +1,11 @@
 package org.exoplatform.wcm.connector.collaboration;
 
-import java.io.InputStream;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
@@ -14,13 +17,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.io.InputStream;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
  * Enables downloading the content of _nt\:file_.
@@ -66,6 +65,8 @@ public class DownloadConnector implements ResourceContainer{
       if (node.hasProperty("exo:title")){
         fileName = node.getProperty("exo:title").getString();
       }
+      // decode the fileName in case the fileName is already encoded, for the old uploaded files.
+      fileName = URLDecoder.decode(fileName, "UTF-8");
       fileName = Text.unescapeIllegalJcrChars(fileName);
       fileName = URLEncoder.encode(fileName, "utf-8").replace("+", "%20");
       // In case version is specified, get file from version history
