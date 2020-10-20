@@ -140,6 +140,10 @@
             <type>org.exoplatform.services.wcm.search.connector.FileindexingConnector</type>
             <description>File ElasticSearch Indexing Connector</description>
             <init-params>
+                <value-param>
+                  <name>documents.content.indexing.mimetypes</name>
+                  <value>${exo.unified-search.indexing.supportedMimeTypes: text/.*, application/ms.* , application/vnd.* , application/xml , application/excel , application/powerpoint , application/xls, application/ppt , application/pdf , application/xhtml+xml , application/javascript , application/x-javascript , application/x-jaxrs+groovy , script/groovy}</value>
+                </value-param>
                 <properties-param>
                     <name>constructor.params</name>
                     <property name="index_alias" value="file_alias"/>
