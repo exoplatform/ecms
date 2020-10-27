@@ -1,5 +1,5 @@
 <template>
-  <v-app class="VuetifyApp" flat>
+  <v-app flat>
     <exo-documents :documents="documents"/>
     <div v-if="!loading && documents.length === 0" class="noDocuments">
       <div class="noDocumentsContent">
@@ -35,6 +35,13 @@
         documents: [],
         loading: true
       }
+    },
+    watch: {
+      loading() {
+        if (!this.loading) {
+          this.$nextTick().then(() => this.$root.$emit('application-loaded'));
+        }
+      },
     },
     created(){
       if (this.query != null && this.query !== 'null') {
