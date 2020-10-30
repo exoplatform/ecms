@@ -11,7 +11,7 @@
 		id="<%=appId%>" app-id="<%=appId%>" flat="">
     <v-cacheable-dom-app cache-id="<%=appId%>"></v-cacheable-dom-app>
 		<script>
-			require(['SHARED/documentsBundle'],
+			require(['PORTLET/documents/DocumentsPortlet'],
 				app => app.init("<%=appId%>", "<%=query%>", "<%=folder%>", "<%=type%>", "<%=limit%>")
 			);
 		</script>
