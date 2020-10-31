@@ -27,7 +27,6 @@
     <name>CloudDrivePortlet</name>
     <module>
       <script>
-        <minify>false</minify>
         <path>/vue-app/cloudDrivePlugin.js</path>
       </script>
       <depends>
