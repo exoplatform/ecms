@@ -23,12 +23,20 @@
                   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
                   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
-  <javascript>
-    <param>
-      <js-module>cloudDrivePlugin</js-module>
-      <js-path>/vue-app/cloudDrivePlugin.js</js-path>
-    </param>
-  </javascript>
+  <portlet>
+    <name>CloudDrivePortlet</name>
+    <module>
+      <script>
+        <path>/vue-app/cloudDrivePlugin.js</path>
+      </script>
+      <depends>
+        <module>extensionRegistry</module>
+      </depends>
+      <depends>
+        <module>cloudDriveApp</module>
+      </depends>
+    </module>
+  </portlet>
 
   <!-- Javascript for Cloud Drive UI support in WCM -->
   <module>

@@ -26,11 +26,13 @@ export function init(appId, query, folder, type, limit) {
 //getting locale ressources
 exoi18n.loadLanguageAsync(lang, url)
   .then(i18n => {
-    // init Vue app when locale ressources are ready
+    const appElement = document.createElement('div');
+    appElement.id = appId;
+
     new Vue({
-      template: `<documents app-id="${appId}" id="${appId}" query="${query}" folder="${folder}" type="${type}" limit="${limit}"></documents>`,
+      template: `<documents app-id="${appId}" id="${appId}" v-cacheable query="${query}" folder="${folder}" type="${type}" limit="${limit}"></documents>`,
       i18n,
       vuetify,
-    }).$mount(`#${appId}`);
+    }).$mount(appElement);
   });
 }

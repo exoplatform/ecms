@@ -3,36 +3,29 @@
   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
   <portlet>
-    <name>documents</name>
+    <name>DocumentsPortlet</name>
     <module>
+      <script>
+        <minify>false</minify>
+        <path>/js/documents.bundle.js</path>
+      </script>
       <depends>
-        <module>documentsBundle</module>
+        <module>commonDocComponents</module>
+      </depends>
+      <depends>
+        <module>vue</module>
+      </depends>
+      <depends>
+        <module>vuetify</module>
+      </depends>
+      <depends>
+        <module>eXoVueI18n</module>
+      </depends>
+      <depends>
+        <module>extensionRegistry</module>
       </depends>
     </module>
   </portlet>
-
-  <module>
-    <name>documentsBundle</name>
-    <script>
-      <minify>false</minify>
-      <path>/js/documents.bundle.js</path>
-    </script>
-    <depends>
-      <module>commonDocComponents</module>
-    </depends>
-    <depends>
-      <module>vue</module>
-    </depends>
-    <depends>
-      <module>vuetify</module>
-    </depends>
-    <depends>
-      <module>eXoVueI18n</module>
-    </depends>
-    <depends>
-      <module>extensionRegistry</module>
-    </depends>
-  </module>
 
   <module>
     <name>FileSearch</name>
