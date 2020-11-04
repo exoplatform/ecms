@@ -79,6 +79,12 @@ public class FileSearchRestService implements ResourceContainer {
     if (!userACL.isSuperUser() && !userACL.isUserInGroup(userACL.getAdminGroups())) {
       recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
     }
+    if (StringUtils.isNotBlank(query)) {
+      query = query.replace("#", " ")
+                   .replace("$", " ")
+                   .replace("_", " ")
+                   .replace(".", " ");
+    }
     Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null, query, recentFilters, null, 0, limit, sortField, sortDirection);
     return Response.ok(recentDocuments).build();
   }
