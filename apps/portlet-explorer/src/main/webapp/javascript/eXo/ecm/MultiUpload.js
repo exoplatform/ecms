@@ -1214,7 +1214,7 @@
 
 	MultiUpload.prototype.updateNotice = function(fileName){
 		eXo.ecm.MultiUpload.notice="createVersion";
-		eXo.ecm.MultiUpload.noticeMsg="A new version of the document <span style=\"font-weight:bold;\"> "+fileName+"</span> has been created successfully.";
+		eXo.ecm.MultiUpload.noticeMsg="A new version of the document <span style=\"font-weight:bold;\"> "+decodeURIComponent(decodeURIComponent(fileName))+"</span> has been created successfully.";
 	}
 	eXo.ecm.MultiUpload = new MultiUpload();
 	
