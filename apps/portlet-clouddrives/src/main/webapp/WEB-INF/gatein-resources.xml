@@ -142,6 +142,25 @@
       <module>cloudDriveUtils</module>
     </depends>
   </module>
+  <module>
+    <name>cloudStorage</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/cloudStorage.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+  </module>
 
   <portlet-skin>
     <application-name>clouddrives</application-name>

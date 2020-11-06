@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { getUserDrive } from "../cloudDriveService";
+import { getUserDrive } from "../../cloudDriveService";
 
 export default {
   model: {

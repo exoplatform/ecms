@@ -152,15 +152,16 @@
         <exo-folders-files-selector 
           v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" 
           :attached-files="value" 
-          :space-id="spaceId" 
+          :space-id="spaceId"
+          :is-cloud-enabled="isCloudDriveEnabled"
           :extension-refs="$refs"
           :connected-drive="connectedDrive"
           :cloud-drives-in-progress="drivesInProgress"
           @itemsSelected="toggleServerFileSelector"
           @cancel="toggleServerFileSelector()"
         ></exo-folders-files-selector>
-        <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
-        <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolder && !showDestinationFolderForFile" :is-cloud-enabled="isCloudDriveEnabled" :mode-folder-selection="showDestinationFolder" @itemsSelected="addDestinationFolder" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
+        <exo-folders-files-selector v-if="showDocumentSelector && showDestinationFolderForFile" :is-cloud-enabled="isCloudDriveEnabled" :mode-folder-selection="showDestinationFolderForFile" :mode-folder-selection-for-file="modeFolderSelectionForFile" @itemsSelected="addDestinationFolderForFile" @cancel="toggleServerFileSelector()"></exo-folders-files-selector>
         <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`">
           <component v-dynamic-events="action.component.events" v-if="action.component" v-bind="action.component.props ? action.component.props : {}"
                      :is="action.component.name" :ref="action.key"></component>
@@ -259,7 +260,8 @@ export default {
       fromAnotherSpaces: '',
       spaceGroupId: '',
       drivesInProgress: {},
-      attachmentInfo: false
+      attachmentInfo: false,
+      isCloudDriveEnabled : false,
     };
   },
   watch: {
@@ -335,6 +337,7 @@ export default {
   },
   created(){
     this.addDefaultPath();
+    this.getCloudDriveStatus();
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
@@ -614,6 +617,11 @@ export default {
     },
     changeCloudDriveProgress(drives) { // listen clouddrives 'updateDrivesInProgress' event
       this.drivesInProgress = drives; // update progress for connecting drive to display that drive is in connection
+    },
+    getCloudDriveStatus() {
+      attachmentsService.isCloudDriveEnabled().then(data => {
+        this.isCloudDriveEnabled = data.result === 'true';
+      });
     },
   }
 };

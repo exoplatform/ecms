@@ -1,0 +1,48 @@
+@import "../../../variables.less";
+
+#cloudStorageApp {
+  .Title {
+    color: @darkGrey;
+    font-size: 24px;
+    height: 23px;
+    position: relative;
+    overflow: hidden;
+
+    &:after {
+      border-bottom: 1px solid @uiSwitcherBackground;
+      height: 11px;
+      content: "";
+      position: absolute;
+      width: 100%;
+      margin-left: 10px;
+    }
+  }
+
+  .providersTable {
+    border-left: 0;
+
+    &Row {
+      th,
+      td {
+        height: 20px;
+        padding: 5px 15px;
+      }
+
+      &:nth-child(even):hover > td,
+      &:nth-child(even) > td {
+        background: @tableThBackground !important;
+      }
+
+      &:nth-child(odd):hover > td,
+      &:nth-child(odd) > td {
+        background: @baseBackground !important;
+      }
+    }
+  }
+
+  .providersSwitcher {
+    padding: 0;
+    margin: 0;
+    height: 25px;
+  }
+}

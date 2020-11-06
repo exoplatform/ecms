@@ -18,4 +18,26 @@
       <keywords>clouddrives</keywords>
     </portlet-info>
   </portlet>
+
+  <portlet>
+    <portlet-name>cloudStoragePortlet</portlet-name>
+    <display-name xml:lang="EN">Cloud storage portlet</display-name>
+    <portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+    <init-param>
+      <name>portlet-view-dispatched-file-path</name>
+      <value>/cloudStorage.jsp</value>
+    </init-param>
+    <expiration-cache>-1</expiration-cache>
+    <cache-scope>PUBLIC</cache-scope>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <resource-bundle>locale.clouddrive.CloudDrive</resource-bundle>
+    <portlet-info>
+      <title>Cloud storage portlet for eXo Platform</title>
+      <short-title>Cloud Storage</short-title>
+      <keywords>cloudStorage</keywords>
+    </portlet-info>
+  </portlet>
+
 </portlet-app>

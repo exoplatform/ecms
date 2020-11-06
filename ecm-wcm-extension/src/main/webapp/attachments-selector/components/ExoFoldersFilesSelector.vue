@@ -187,6 +187,10 @@ export default {
       type: Boolean,
       default:false,
     },
+    isCloudEnabled: {
+      type: Boolean,
+      default:false,
+    },
     spaceId: {
       type: String,
       default: ''
@@ -253,7 +257,7 @@ export default {
   },
   computed: {
     showDriveAction(){ // show drivers extension buttons only if it's root path
-      return this.currentDrive ? this.currentDrive.name === 'Personal Documents': true;
+      return this.isCloudEnabled && (this.currentDrive ? this.currentDrive.name === 'Personal Documents' : true);
     },
     filteredFolders() {
       let folders = this.folders.slice();

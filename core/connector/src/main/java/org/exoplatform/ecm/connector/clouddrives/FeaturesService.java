@@ -21,16 +21,17 @@ package org.exoplatform.ecm.connector.clouddrives;
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.LoginException;
 import javax.jcr.RepositoryException;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import io.swagger.jaxrs.PATCH;
+import org.exoplatform.commons.api.settings.SettingService;
+import org.exoplatform.commons.api.settings.SettingValue;
+import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.services.cms.clouddrives.CannotCreateDriveException;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
@@ -70,6 +71,18 @@ public class FeaturesService implements ResourceContainer {
   /** The session providers. */
   protected final SessionProviderService sessionProviders;
 
+  /** The setting service. */
+  private SettingService settingService;
+  
+  /** The cloud drive setting context. */
+  private static final org.exoplatform.commons.api.settings.data.Context CLOUD_DRIVE_CONTEXT = org.exoplatform.commons.api.settings.data.Context.GLOBAL.id("CLOUD_DRIVE");
+  
+  /** The cloud drive setting scope. */
+  private static final Scope CLOUD_DRIVE_SCOPE = Scope.GLOBAL.id("CLOUD_DRIVE");
+  
+  /** The cloud drive setting. */
+  private static final String IS_CLOUD_DRIVE_ENABLED = "isCloudDriveEnabled";
+
   /**
    * Instantiates a new features service.
    *
@@ -81,12 +94,14 @@ public class FeaturesService implements ResourceContainer {
   public FeaturesService(CloudDriveService cloudDrives,
                          CloudDriveFeatures features,
                          RepositoryService jcrService,
-                         SessionProviderService sessionProviders) {
+                         SessionProviderService sessionProviders,
+                         SettingService settingService) {
     this.cloudDrives = cloudDrives;
     this.features = features;
 
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
+    this.settingService = settingService;
   }
 
   /**
@@ -181,4 +196,33 @@ public class FeaturesService implements ResourceContainer {
     }
   }
 
+  /**
+   * Checks if cloud drive is enabled.
+   *
+   * @param uriInfo the uri info
+   * @return the response
+   */
+  @GET
+  @Path("/status/enabled")
+  @RolesAllowed("users")
+  public Response isCloudDriveEnabled(@Context UriInfo uriInfo) {
+    SettingValue<?> isCloudDriveEnabled = settingService.get(CLOUD_DRIVE_CONTEXT, CLOUD_DRIVE_SCOPE, IS_CLOUD_DRIVE_ENABLED);
+    boolean enabled = isCloudDriveEnabled != null ? Boolean.valueOf(isCloudDriveEnabled.getValue().toString()) : true;
+    return Response.ok().entity("{\"result\":\"" + enabled + "\"}").build();
+  }
+
+  /**
+   * Enable/disable cloud Drive status.
+   *
+   * @param uriInfo the uri info
+   * @return the response
+   */
+  @PATCH
+  @Path("/status/enabled")
+  @RolesAllowed("administrators")
+  public Response setCloudDriveStatus(@Context UriInfo uriInfo) {
+    SettingValue<?> isCloudDriveEnabled = settingService.get(CLOUD_DRIVE_CONTEXT, CLOUD_DRIVE_SCOPE, IS_CLOUD_DRIVE_ENABLED);
+    settingService.set(CLOUD_DRIVE_CONTEXT, CLOUD_DRIVE_SCOPE, IS_CLOUD_DRIVE_ENABLED, SettingValue.create(isCloudDriveEnabled != null ? !Boolean.valueOf(isCloudDriveEnabled.getValue().toString()) : false));
+    return Response.ok().entity("{\"result\":\"" + !(Boolean) isCloudDriveEnabled.getValue() + "\"}").build();
+  }
 }
