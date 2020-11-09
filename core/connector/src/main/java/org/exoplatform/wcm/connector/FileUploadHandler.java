@@ -21,6 +21,7 @@ import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
@@ -275,6 +276,7 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
+    fileName = Text.escapeIllegalJcrChars(fileName);
     fileName = Utils.cleanNameWithAccents(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
