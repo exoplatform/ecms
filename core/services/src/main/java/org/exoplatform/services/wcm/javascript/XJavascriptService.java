@@ -84,6 +84,8 @@ public class XJavascriptService implements Startable {
 
   private ExoCache<String, Object> jsCache_;
 
+  private long                     jsLastModifiedDate   = System.currentTimeMillis();
+
   /**
    * Instantiates a new x javascript service.
    *
@@ -189,6 +191,7 @@ public class XJavascriptService implements Startable {
 //                          10, portalNode.getName()));
     }
     jsCache_.clearCache();
+    jsLastModifiedDate = System.currentTimeMillis();
   }
 
   /**
@@ -205,6 +208,7 @@ public class XJavascriptService implements Startable {
         loadedSharedJSModule.add(moduleName);
       }
       jsCache_.clearCache();
+      jsLastModifiedDate = System.currentTimeMillis();
     }
   }
 
@@ -252,4 +256,7 @@ public class XJavascriptService implements Startable {
   public void stop() {
   }
 
+  public long getJsLastModifiedDate() {
+    return jsLastModifiedDate;
+  }
 }
