@@ -92,4 +92,14 @@
       <ConnectYourService>Connect your service</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
+  <cloudStorage>
+    <label>
+      <title>Cloud Storage</title>
+      <cloudDrives>Cloud Drives</cloudDrives>
+      <provider>Operador</provider>
+      <description>Descrição</description>
+      <active>Ativo</active>
+      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+    </label>
+  </cloudStorage>
 </bundle>

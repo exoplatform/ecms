@@ -92,4 +92,14 @@
       <ConnectYourService>Connect your service</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
+  <cloudStorage>
+    <label>
+      <title>Cloud Storage</title>
+      <cloudDrives>Cloud Drives</cloudDrives>
+      <provider>Provider</provider>
+      <description>说明</description>
+      <active>活动</active>
+      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+    </label>
+  </cloudStorage>
 </bundle>

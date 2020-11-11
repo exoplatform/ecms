@@ -92,4 +92,14 @@
       <ConnectYourService>crwdns6940366:0crwdne6940366:0</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
+  <cloudStorage>
+    <label>
+      <title>crwdns6966718:0crwdne6966718:0</title>
+      <cloudDrives>crwdns6966720:0crwdne6966720:0</cloudDrives>
+      <provider>crwdns6966722:0crwdne6966722:0</provider>
+      <description>crwdns6966724:0crwdne6966724:0</description>
+      <active>crwdns6966726:0crwdne6966726:0</active>
+      <ConnectionToCloud>crwdns6966728:0crwdne6966728:0</ConnectionToCloud>
+    </label>
+  </cloudStorage>
 </bundle>

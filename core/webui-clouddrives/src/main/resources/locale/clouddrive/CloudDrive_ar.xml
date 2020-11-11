@@ -92,4 +92,14 @@
       <ConnectYourService>قم بتوصيل خدمتك</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
+  <cloudStorage>
+    <label>
+      <title>التخزين السحابي</title>
+      <cloudDrives>الأقراص السحابية</cloudDrives>
+      <provider>مزود الخدمة</provider>
+      <description>الوصف</description>
+      <active>ناشط</active>
+      <ConnectionToCloud>الاتصال بالأقراص السحابية</ConnectionToCloud>
+    </label>
+  </cloudStorage>
 </bundle>

@@ -92,4 +92,14 @@
       <ConnectYourService>Connect your service</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
+  <cloudStorage>
+    <label>
+      <title>Cloud Storage</title>
+      <cloudDrives>Cloud Drives</cloudDrives>
+      <provider>プロバイダー</provider>
+      <description>説明</description>
+      <active>アクティブ</active>
+      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+    </label>
+  </cloudStorage>
 </bundle>

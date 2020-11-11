@@ -92,4 +92,14 @@
       <ConnectYourService>Connect your service</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
+  <cloudStorage>
+    <label>
+      <title>Cloud Storage</title>
+      <cloudDrives>Cloud Drives</cloudDrives>
+      <provider>Anga tagapaghatid</provider>
+      <description>Paglalarawan</description>
+      <active>Gawing aktibo</active>
+      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+    </label>
+  </cloudStorage>
 </bundle>

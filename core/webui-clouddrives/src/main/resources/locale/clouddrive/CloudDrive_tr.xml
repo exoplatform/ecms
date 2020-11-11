@@ -92,4 +92,14 @@
       <ConnectYourService>Servisinizi bağlayın</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
+  <cloudStorage>
+    <label>
+      <title>Cloud Storage</title>
+      <cloudDrives>Cloud Drives</cloudDrives>
+      <provider>Sağlaycı</provider>
+      <description>Açıklama</description>
+      <active>Etkin</active>
+      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+    </label>
+  </cloudStorage>
 </bundle>
