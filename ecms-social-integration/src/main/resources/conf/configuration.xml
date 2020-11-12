@@ -51,6 +51,9 @@
                     <string>documents</string>
                  </value>
                  <value>
+                    <string>transfer-rules</string>
+                 </value>
+                 <value>
                     <string>authoring-apps</string>
                  </value>
                  <value>

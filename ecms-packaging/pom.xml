@@ -242,6 +242,13 @@
       <type>war</type>
       <scope>provided</scope>
     </dependency>
+	<dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-apps-portlet-transferrules</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-apps-resources-wcm</artifactId>

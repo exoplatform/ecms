@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd
+   http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+  <portlet>
+    <portlet-name>transferRulesPortlet</portlet-name>
+    <display-name xml:lang="EN">Transfer Rules portlet</display-name>
+    <portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+    <init-param>
+      <name>portlet-view-dispatched-file-path</name>
+      <value>/transferRules.html</value>
+    </init-param>
+    <init-param>
+      <description>List of profiles that can be used to enable this portlet</description>
+      <name>exo.profiles</name>
+      <value>ecms</value>
+    </init-param>
+    <expiration-cache>-1</expiration-cache>
+    <cache-scope>PUBLIC</cache-scope>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <portlet-info>
+      <title>Transfer Rules portlet for eXo Platform</title>
+      <short-title>Transfer Rules</short-title>
+      <keywords>transfer-rules</keywords>
+    </portlet-info>
+  </portlet>
+  
+</portlet-app>
