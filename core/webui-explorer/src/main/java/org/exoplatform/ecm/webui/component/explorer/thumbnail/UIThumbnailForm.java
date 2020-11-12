@@ -253,11 +253,6 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
         uiForm.setCurrentUploadImage(null);
         uiForm.setCurrentUploadResource(null);
       }
-
-      // New upload input
-      uiForm.removeChild(UIUploadInput.class);
-      UIUploadInput uiInput = new UIUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD) ;
-      uiForm.addUIFormInput(uiInput) ;
     }
   }
 
