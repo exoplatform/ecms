@@ -243,7 +243,20 @@ public interface DocumentService {
    * @return the editors idle timeout
    */
   long getEditorsIdleTimeout();
-  
+
+  /**
+   * Sets the transfer rules status.
+   *
+   */
+  void setTransferRulesStatus();
+
+  /**
+   * Gets the transfer rules status.
+   *
+   * @return the transfer rules status
+   */
+  Boolean getTransferRulesStatus();
+
   /**
    * Gets the documents by folder.
    *

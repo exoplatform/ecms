@@ -14,9 +14,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
+import io.swagger.jaxrs.PATCH;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
@@ -114,6 +117,34 @@ public class DocumentRestService implements ResourceContainer {
     }
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     return Response.ok(documentService.getSharedDocuments(userId, limit)).build();
+  }
+
+  /**
+   * Get transfer rules status.
+   *
+   * @param uriInfo the uri info
+   * @return the response
+   */
+  @GET
+  @Path("/transferRules/enabled")
+  @RolesAllowed("users")
+  public Response getTransferRulesStatus(@Context UriInfo uriInfo) {
+    boolean isTransferRulesEnabled = documentService.getTransferRulesStatus();
+    return Response.ok().entity("{\"result\":\"" + isTransferRulesEnabled + "\"}").build();
+  }
+
+  /**
+   * Enable/disable transfer rules status.
+   *
+   * @param uriInfo the uri info
+   * @return the response
+   */
+  @PATCH
+  @Path("/transferRules/enabled")
+  @RolesAllowed("administrators")
+  public Response setTransferRulesStatus(@Context UriInfo uriInfo) {
+    documentService.setTransferRulesStatus();
+    return Response.ok().build();
   }
 
 //  @GET

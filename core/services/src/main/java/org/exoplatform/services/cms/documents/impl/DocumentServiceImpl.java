@@ -42,6 +42,9 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.exoplatform.commons.api.settings.SettingValue;
+import org.exoplatform.commons.api.settings.data.Context;
+import org.exoplatform.commons.api.settings.data.Scope;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -137,6 +140,10 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String SHARED_NODE = "Shared";
   private static final String COLLABORATION = "collaboration";
   private static final long DEFAULT_EDITORS_IDLE_TIMEOUT = 1800000;
+  private static final org.exoplatform.commons.api.settings.data.Context DOCUMENTS_CONTEXT = org.exoplatform.commons.api.settings.data.Context.GLOBAL.id("DOCUMENTS");
+  private static final Scope DOCUMENTS_SCOPE = Scope.GLOBAL.id("DOCUMENTS");
+  private static final String IS_TRANSFER_RULES_ENABLED = "isTransferRulesEnabled";
+
   private static final Log LOG = ExoLogger.getLogger(DocumentServiceImpl.class);
   
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
@@ -156,7 +163,7 @@ public class DocumentServiceImpl implements DocumentService {
   private final IdentityManager identityManager;
   private final String editorsRuntimeId;
   private CommonEditorPlugin commonEditorPlugin;
-  
+
   /**
    * Instantiates a new {@link DocumentService} implementation.
    *
@@ -788,7 +795,23 @@ public class DocumentServiceImpl implements DocumentService {
   public long getEditorsIdleTimeout() {
     return commonEditorPlugin != null ? commonEditorPlugin.getIdleTimeout() : DEFAULT_EDITORS_IDLE_TIMEOUT;
   }
-  
+
+  @Override
+  public void setTransferRulesStatus() {
+    SettingValue<?> isTransferRulesEnabled = settingService.get(DOCUMENTS_CONTEXT, DOCUMENTS_SCOPE, IS_TRANSFER_RULES_ENABLED);
+    settingService.set(Context.GLOBAL,
+            DOCUMENTS_SCOPE,
+            IS_TRANSFER_RULES_ENABLED,
+            SettingValue.create(isTransferRulesEnabled != null && !Boolean.valueOf(isTransferRulesEnabled.getValue().toString())));
+
+  }
+
+  @Override
+  public Boolean getTransferRulesStatus() {
+    SettingValue<?> isTransferRulesEnabled = settingService.get(DOCUMENTS_CONTEXT, DOCUMENTS_SCOPE, IS_TRANSFER_RULES_ENABLED);
+    return isTransferRulesEnabled != null ? Boolean.valueOf(isTransferRulesEnabled.getValue().toString()) : true;
+  }
+
   /**
   * {@inheritDoc}
   */

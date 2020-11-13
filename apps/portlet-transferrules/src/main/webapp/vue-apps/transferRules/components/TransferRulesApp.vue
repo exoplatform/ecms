@@ -23,7 +23,7 @@
           <v-list-item-action>
             <v-switch
               v-model="active"
-              @change="save"/>
+              @change="updateStatus"/>
           </v-list-item-action>
         </v-list-item>
       </v-list>
@@ -32,14 +32,26 @@
 </template>
 
 <script>
+import {setTransferRulesStatus, getTransferRulesStatus} from '../TransferRulesAPI';
+
 export default {
-  data () {
+  data() {
     return {
       active: true,
     };
   },
+  created() {
+    getTransferRulesStatus().then(data => {
+      this.active = data.result === 'true';
+    });
+  },
   mounted() {
     this.$nextTick().then(() => this.$root.$emit('application-loaded'));
+  },
+  methods: {
+    updateStatus() {
+      setTransferRulesStatus();
+    }
   }
 };
 </script>
