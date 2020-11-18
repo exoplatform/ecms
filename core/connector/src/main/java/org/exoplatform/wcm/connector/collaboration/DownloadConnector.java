@@ -4,6 +4,8 @@ import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -31,6 +33,7 @@ import java.net.URLEncoder;
 @Path("/contents/")
 public class DownloadConnector implements ResourceContainer{
 
+  private static final Log LOG = ExoLogger.getLogger(DownloadConnector.class.getName());
   /**
    * Returns to browser a stream got from _jcr\:content_/_jcr\:data_ for downloading the content of the node.
    *
@@ -66,7 +69,11 @@ public class DownloadConnector implements ResourceContainer{
         fileName = node.getProperty("exo:title").getString();
       }
       // decode the fileName in case the fileName is already encoded, for the old uploaded files.
-      fileName = URLDecoder.decode(fileName, "UTF-8");
+      try {
+        fileName = URLDecoder.decode(fileName, "UTF-8");
+      }catch (Exception e){
+        LOG.debug("The fileName is already decoded");
+      }
       fileName = Text.unescapeIllegalJcrChars(fileName);
       fileName = URLEncoder.encode(fileName, "utf-8").replace("+", "%20");
       // In case version is specified, get file from version history

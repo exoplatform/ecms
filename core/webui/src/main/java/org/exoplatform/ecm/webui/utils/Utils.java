@@ -1003,7 +1003,21 @@ public class Utils {
     if (StringUtils.isBlank(title)) {
       title = node.getName();
     }
-    return URLDecoder.decode(title,"UTF-8");
+    int index = node.getIndex();
+    StringBuilder buffer = new StringBuilder(128);
+    if (index > 1) {
+      buffer.append(title);
+      buffer.append('[');
+      buffer.append(index);
+      buffer.append(']');
+      title = buffer.toString();
+    }
+    try {
+      return URLDecoder.decode(title, "UTF-8");
+    }catch (Exception e){
+      return title;
+    }
+
   }
 
   /**
