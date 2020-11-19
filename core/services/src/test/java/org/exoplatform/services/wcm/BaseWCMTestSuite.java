@@ -116,7 +116,8 @@ import org.junit.runners.Suite.SuiteClasses;
   TestPDFViewerService.class,
   TestDocumentsAppRedirectService.class,
   TestDocumentService.class,
-  TestCustomizeViewService.class
+  TestCustomizeViewService.class,
+  TestXSkinService.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
