@@ -24,21 +24,21 @@
   <page>
     <name>drives</name>
     <title>Drives</title>
-    <access-permissions>*:/platform/users</access-permissions>
+    <access-permissions>*:/platform/users;*:/platform/externals</access-permissions>
     <edit-permission>*:/platform/administrators</edit-permission>
     <container id="top-agenda-container" template="system:/groovy/portal/webui/container/UIAddOnContainer.gtmpl">
       <name>top-drives-container</name>
-      <access-permissions>*:/platform/users</access-permissions>
+      <access-permissions>*:/platform/users;*:/platform/externals</access-permissions>
       <factory-id>addonContainer</factory-id>
     </container>
     <container id="agenda-container" template="system:/groovy/portal/webui/container/UIAddOnContainer.gtmpl">
       <name>drives-container</name>
-      <access-permissions>*:/platform/users</access-permissions>
+      <access-permissions>*:/platform/users;*:/platform/externals</access-permissions>
       <factory-id>addonContainer</factory-id>
     </container>
     <container id="bottom-agenda-container" template="system:/groovy/portal/webui/container/UIAddOnContainer.gtmpl">
       <name>bottom-drives-container</name>
-      <access-permissions>*:/platform/users</access-permissions>
+      <access-permissions>*:/platform/users;*:/platform/externals</access-permissions>
       <factory-id>addonContainer</factory-id>
     </container>
   </page>

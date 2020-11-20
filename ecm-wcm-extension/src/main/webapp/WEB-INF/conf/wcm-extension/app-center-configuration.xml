@@ -48,6 +48,16 @@
             <field name="description">
               <string>Drives application</string>
             </field>
+            <field name="permissions">
+              <collection type="java.util.ArrayList" item-type="java.lang.String">
+                <value>
+                  <string>*:/platform/users</string>
+                </value>
+				<value>
+                  <string>*:/platform/externals</string>
+                </value>
+              </collection>
+            </field>
             <field name="active">
               <boolean>true</boolean>
             </field>
