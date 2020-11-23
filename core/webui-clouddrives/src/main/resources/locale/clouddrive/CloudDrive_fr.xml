@@ -99,7 +99,7 @@
       <provider>Connecteur</provider>
       <description>Description</description>
       <active>Activé</active>
-      <ConnectionToCloud>Connexion aux lecteurs cloud</ConnectionToCloud>
+      <ConnectionToCloud>Connexion aux lecteurs de stockage en ligne</ConnectionToCloud>
     </label>
   </cloudStorage>
 </bundle>

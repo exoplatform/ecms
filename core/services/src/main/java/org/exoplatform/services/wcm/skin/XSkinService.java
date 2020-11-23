@@ -68,8 +68,10 @@ public class XSkinService implements Startable {
   /** The Constant SKIN_PATH_REGEXP. */
   public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/"+MODULE_NAME_REGEXP+"/(.*)/(.*).css";
 
+  private static final String     DEFAULT_SKIN_NAME   = "Default";
+
   /** The Constant SKIN_PATH_PATTERN. */
-  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/{moduleName}/(.*)/Stylesheet.css";  
+  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/{moduleName}/(.*)/Stylesheet-{lastModifiedDate}.css";  
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(XSkinService.class.getName());
@@ -82,6 +84,8 @@ public class XSkinService implements Startable {
 
   /** The servlet context. */
   private ServletContext servletContext;
+
+  private long jsLastModifiedDate  = System.currentTimeMillis();
 
   /**
    * Instantiates a new extended skin service to manage skin for web content.
@@ -117,6 +121,10 @@ public class XSkinService implements Startable {
    */
   public void updatePortalSkinOnModify(Node portal, Node cssFile) throws Exception {
     String sharedPortalName = configurationService.getSharedPortalName();
+
+    // Update CSS path with new Update date
+    jsLastModifiedDate = System.currentTimeMillis();
+
     if (sharedPortalName.equals(portal.getName())) {
       addSharedPortalSkin(portal);
     } else {
@@ -145,19 +153,28 @@ public class XSkinService implements Startable {
    */
   private void addPortalSkin(Node portalNode) throws Exception {
     String moduleName = createModuleName(portalNode.getName());
-    String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "{moduleName}",moduleName)
-                                 .replaceFirst("\\{docBase\\}",
-                                               servletContext.getServletContextName());
+    // Build previously cached CSS path
+    String skinPath = getSkinPath(moduleName);
     Iterator<String> iterator = skinService.getAvailableSkinNames().iterator();
-    if (iterator.hasNext() == false) {
-      skinPath = StringUtils.replaceOnce(skinPath,"(.*)", "Default");
-      skinService.invalidateCachedSkin(skinPath);
-      skinService.addSkin(moduleName, "Default", skinPath);
+    if (!iterator.hasNext()) {
+      skinPath = StringUtils.replaceOnce(skinPath,"(.*)", DEFAULT_SKIN_NAME);
+
+      // Invalidate previously cached CSS path
+      skinService.removeSkin(moduleName, DEFAULT_SKIN_NAME);
+      skinService.addSkin(moduleName, DEFAULT_SKIN_NAME, skinPath);
     } else {
       while (iterator.hasNext()) {
         String skinName = iterator.next();
         skinPath = StringUtils.replaceOnce(skinPath,"(.*)",skinName);
-        skinService.invalidateCachedSkin(skinPath);        
+
+        // Invalidate previously cached CSS path
+        skinService.removeSkin(moduleName, skinName);
+
+        // Update CSS path with new Update date
+        jsLastModifiedDate = System.currentTimeMillis();
+        skinPath = getSkinPath(moduleName);
+        skinPath = StringUtils.replaceOnce(skinPath,"(.*)",skinName);
+
         skinService.addSkin(moduleName, skinName, skinPath);
       }
     }
@@ -172,13 +189,14 @@ public class XSkinService implements Startable {
    */
   private void addSharedPortalSkin(Node portalNode) throws Exception {
     String moduleName = createModuleName(portalNode.getName());
-    String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "{moduleName}", moduleName)
-                                 .replaceFirst("\\{docBase\\}",
-                                               servletContext.getServletContextName());
+
+    String skinPath = getSkinPath(moduleName);
     for (Iterator<String> iterator = skinService.getAvailableSkinNames().iterator(); iterator.hasNext();) {
       String skinName = iterator.next();
       skinPath = StringUtils.replaceOnce(skinPath, "(.*)", skinName);
-      skinService.invalidateCachedSkin(skinPath);
+
+      // Invalidate previously cached CSS path
+      skinService.removePortalSkin(moduleName, skinName);
       skinService.addPortalSkin(moduleName, skinName, skinPath);
     }
   }
@@ -259,6 +277,12 @@ public class XSkinService implements Startable {
     params.put(CONTEXT_PARAM, context);    
     return params;  
   }
-  
+
+  private String getSkinPath(String moduleName) {
+    return StringUtils.replaceOnce(SKIN_PATH_PATTERN, "{moduleName}",moduleName)
+                                 .replaceFirst("\\{lastModifiedDate\\}", String.valueOf(jsLastModifiedDate))
+                                 .replaceFirst("\\{docBase\\}",
+                                               servletContext.getServletContextName());
+  }
   
 }

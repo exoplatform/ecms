@@ -46,7 +46,10 @@
             <field name="permissions">
               <collection type="java.util.ArrayList">
                 <value>
-                <string>*:/platform/users</string>
+                  <string>*:/platform/users</string>
+                </value>
+                <value>
+                  <string>*:/platform/externals</string>
                 </value>
               </collection>
             </field>
