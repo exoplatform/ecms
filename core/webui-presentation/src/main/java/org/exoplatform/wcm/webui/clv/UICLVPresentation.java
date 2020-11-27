@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -489,7 +491,7 @@ public class UICLVPresentation extends UIContainer {
           + workspace + node.getPath();
     }
 
-    return friendlyService.getFriendlyUri(link);
+    return encodeURI(friendlyService.getFriendlyUri(link));
 
   }
 
@@ -886,5 +888,27 @@ public class UICLVPresentation extends UIContainer {
       event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
       
     }
+  }
+  public String encodeURLComponent(String s) {
+    String result = null;
+    try {
+      result = URLEncoder.encode(s, "UTF-8")
+              .replaceAll("\\+", "%20")
+              .replaceAll("\\%21", "!")
+              .replaceAll("\\%28", "(")
+              .replaceAll("\\%29", ")")
+              .replaceAll("\\%7E", "~");
+    } catch (UnsupportedEncodingException e) {
+      result = s;
+    }
+    return result;
+  }
+  public String encodeURI(String url) {
+    return encodeURLComponent(url)
+            .replaceAll("%3A", ":")
+            .replaceAll("%2F", "/")
+            .replaceAll("%3F", "?")
+            .replaceAll("%3D", "=")
+            .replaceAll("%26", "&");
   }
 }
