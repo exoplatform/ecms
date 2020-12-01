@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>El correo electrónico es inválido.</Invalid-input>
+      <Invalid-input>El email no es válido.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -282,7 +282,7 @@
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>El campo '{0}' es inválido.</Invalid-number>
+      <Invalid-number>El campo «{0}» no es válido.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--

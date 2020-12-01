@@ -755,7 +755,7 @@
     <label>
       <actionType>Extender el Tipo de Acción:</actionType>
       <name>Nombre:</name>
-      <isMove>Acción con Movimiento:</isMove>
+      <isMove>es la acción con movimiento:</isMove>
       <variables>Variables:</variables>
       <exo_businessProcessAction>Procesos de Negocio:</exo_businessProcessAction>
       <exo_scriptAction>Guiones Groovy:</exo_scriptAction>
@@ -926,7 +926,7 @@
     </title>
     <msg>
       <view-name-invalid>Se requiere el nombre de la vista.</view-name-invalid>
-      <fileName-invalid>El nuevo nombre contiene algunos caracteres inválidos.</fileName-invalid>
+      <fileName-invalid>El nuevo nombre contiene algunos caracteres no válidos.</fileName-invalid>
       <permission-not-empty>Por favor, seleccione un permiso para la vista.</permission-not-empty>
       <mustbe-add-tab>Por favor, añade una etiqueta.</mustbe-add-tab>
       <mustbe-add-permission>Por favor seleccione el permiso para esta vista</mustbe-add-permission>
@@ -2017,7 +2017,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>El rango es inválido. El formato debe ser: a..b, entre los que a, b son números enteros positivos. Puede utilizar * en lugar de b para indicar que el alcance es ilimitado.</range-validator>
+      <range-validator>El rango no es válido. El formato debe ser: a..b, entre los que a, b son números enteros positivos. Puedes utilizar * en lugar de b para indicar que el alcance es ilimitado.</range-validator>
       <error-update>Error al actualizar. Su información no es válida.</error-update>
       <item-not-existing>No puede guardar cambios a esta etiqueta que ya no existe en la base de datos.</item-not-existing>
     </msg>

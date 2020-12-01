@@ -203,7 +203,7 @@
     <msg>
       <rename-successfull>'{0}' fue renombrado exitosamente a '{1}'.</rename-successfull>
       <rename-denied>Acceso denegado. No puede cambiar el nombre de este elemento.</rename-denied>
-      <fileName-invalid>El nuevo nombre contiene algunos caracteres inválidos.</fileName-invalid>
+      <fileName-invalid>El nuevo nombre contiene algunos caracteres no válidos.</fileName-invalid>
       <newName-same-oldName>El nuevo nombre ya existe. Por favor, compruebe de nuevo.</newName-same-oldName>
       <version-exception>Este documento (o una de sus revisiones) no está desprotegido.</version-exception>
       <lock-exception>Este documento está bloqueado. Por favor, desbloquéelo antes de cambiarle el nombre.</lock-exception>
@@ -903,7 +903,7 @@
       <keyword-not-allow>Esta palabra clave no está permitida.</keyword-not-allow>
       <value-null>Favor de verificar su palabra clave o restricciones.</value-null>
       <value-save-null>Favor de escribir una palabra clave o restricciones antes de guardar esta pregunta.</value-save-null>
-      <inputSearch-invalid>Hay caracteres inválidos en la entrada de búsqueda.</inputSearch-invalid>
+      <inputSearch-invalid>Hay caracteres no válidos en la entrada de búsqueda.</inputSearch-invalid>
       <query-invalid>La consulta no es válida. Por favor verifique su restricción.</query-invalid>
     </msg>
   </UISimpleSearch>
@@ -917,7 +917,7 @@
       <not-support>No hay plantilla de Visualización para este documento.</not-support>
       <empty>No se encontraron resultados.</empty>
       <access-denied>No puede abrir esta carpeta porque ya no existe o no tiene derecho a acceder a ella.</access-denied>
-      <query-invalid>La consulta es inválida.</query-invalid>
+      <query-invalid>La consulta no es válida.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -948,7 +948,7 @@
       <not-support>No hay plantilla de visualización para este documento</not-support>
       <empty>No se encontraron resultados.</empty>
       <access-denied>No puede ver este documento porque esta plantilla no es compatible o porque el acceso se le ha denegado.</access-denied>
-      <query-invalid>La consulta es inválida</query-invalid>
+      <query-invalid>La consulta no es válida</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -1974,7 +1974,7 @@
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
-      <Invalid-char>El campo '{0}' contiene algunos caracteres inválidos. Por favor, introduzca otro valor.</Invalid-char>
+      <Invalid-char>El campo «{0}» contiene algunos caracteres no válidos. Introduce otro valor.</Invalid-char>
       <empty-input>El valor del campo '{0}' es nulo o vacío.</empty-input>
     </msg>
   </ECMNameValidator>
@@ -1984,7 +1984,7 @@
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Su expresión de cron es inválida. Compruebe la sintaxis de la expresión de cron.</invalid-input>
+    <invalid-input>Tu expresión de cron no es válida. Comprueba la sintaxis de la expresión de cron.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
@@ -2069,7 +2069,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>El correo electrónico es inválido.</Invalid-input>
+      <Invalid-input>El email no es válido.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2102,7 +2102,7 @@
   <ECMStandardPropertyNameValidator>
     <msg>
       <empty-input>El valor del campo '{0}' es nulo o vacío.</empty-input>
-      <Invalid-char>El campo '{0}' contiene algunos caracteres inválidos.  Por favor, introduzca otro valor.</Invalid-char>
+      <Invalid-char>El campo «{0}» contiene algunos caracteres no válidos. Introduce otro valor.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2496,7 +2496,7 @@
     </label>
     <msg>
       <history-invalid-type>Tipo de archivo no válido en el historial de versiones. Sólo los archivos .zip son compatibles.</history-invalid-type>
-      <history-invalid-content>Contenido inválido en los datos de la historia de la versión. Por favor, seleccione un tipo de archivo compatible para importar.</history-invalid-content>
+      <history-invalid-content>Contenido no válido en los datos de la historia de la versión. Selecciona un tipo de archivo compatible para importar.</history-invalid-content>
     </msg>
   </UIImportNode>
 

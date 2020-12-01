@@ -39,7 +39,7 @@
         <About_A_Day>hace un día</About_A_Day>
         <About_x_Days>hace {0} días</About_x_Days>
         <About_A_Month>hace un mes</About_A_Month>
-        <About_x_Months>hace alrededor de {0} meses</About_x_Months>
+        <About_x_Months>hace {0} meses</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -75,7 +75,7 @@
     <view>
       <label>
         <from>De:</from>
-        <to>Para:</to>
+        <to>A:</to>
         <cc>Para:</cc>
         <date>Fecha:</date>
         <subject>Asunto:</subject>

@@ -63,7 +63,7 @@
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>La palabra clave es inválida. Algunos carácteres no son conocidos.</keyword-not-support>
+     <keyword-not-support>La palabra clave no es válida. Algunos caracteres no se reconocen.</keyword-not-support>
      <not-checked>Por favor seleccione un tipo de búsqueda.</not-checked>
      <keyword-not-empty>Por favor introduzca una palabra clave.</keyword-not-empty>
    </message>
