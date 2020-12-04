@@ -1,6 +1,9 @@
 <%
 import org.exoplatform.wcm.webui.reader.ContentReader;
 import java.util.regex.Matcher;
+import org.apache.commons.lang.StringUtils;
+import java.net.URLDecoder;
+import java.lang.*;
 %>
 <div class="UIForm $uiform.id">
   <%
@@ -9,7 +12,15 @@ import java.util.regex.Matcher;
   String[] msgArguments = uiform.getArguments();
   if(msgArguments.length > 0) {
     for(i in 0..msgArguments.length-1){
-  msgValue = msgValue.replaceAll("\\{" + i + "\\}", "<span style='font-weight:bold;'>"+Matcher.quoteReplacement(msgArguments[i])+"</span>");
+    def msg = msgArguments[i];
+    if (StringUtils.isNotBlank(msg)){
+      try{
+        msg = URLDecoder.decode(URLDecoder.decode(msg, "UTF-8"), "UTF-8");
+      } catch (Exception e){
+          // Nothing to do
+        }
+    }
+    msgValue = msgValue.replaceAll("\\{" + i + "\\}", "<span style='font-weight:bold;'>"+Matcher.quoteReplacement(msg)+"</span>");
     }
   }
   %>
