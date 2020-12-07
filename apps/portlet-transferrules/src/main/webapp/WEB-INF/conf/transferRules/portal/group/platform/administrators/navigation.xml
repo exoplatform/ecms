@@ -4,11 +4,12 @@
         xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_3">
   <priority>1</priority>
   <page-nodes>
-    <node>
+    <!-- Hide the transfer rules page -->
+    <!-- <node>
       <uri>transferRules</uri>
       <name>transferRules</name>
       <label>#{administration.transferRules.label}</label>
       <page-reference>group::/platform/administrators::transferRules</page-reference>
-    </node>
+    </node>-->
   </page-nodes>
 </node-navigation>
