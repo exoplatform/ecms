@@ -16,35 +16,6 @@
  */
 package org.exoplatform.services.cms.webdav;
 
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
-import javax.jcr.Item;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.HEAD;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.common.util.HierarchicalProperty;
@@ -53,6 +24,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
@@ -67,25 +39,24 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.ExtHttpHeaders;
-import org.exoplatform.services.rest.ext.webdav.method.ACL;
-import org.exoplatform.services.rest.ext.webdav.method.CHECKIN;
-import org.exoplatform.services.rest.ext.webdav.method.CHECKOUT;
-import org.exoplatform.services.rest.ext.webdav.method.COPY;
-import org.exoplatform.services.rest.ext.webdav.method.LOCK;
-import org.exoplatform.services.rest.ext.webdav.method.MKCOL;
-import org.exoplatform.services.rest.ext.webdav.method.MOVE;
 import org.exoplatform.services.rest.ext.webdav.method.OPTIONS;
-import org.exoplatform.services.rest.ext.webdav.method.ORDERPATCH;
-import org.exoplatform.services.rest.ext.webdav.method.PROPFIND;
-import org.exoplatform.services.rest.ext.webdav.method.PROPPATCH;
-import org.exoplatform.services.rest.ext.webdav.method.REPORT;
-import org.exoplatform.services.rest.ext.webdav.method.SEARCH;
-import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
-import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
-import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
+import org.exoplatform.services.rest.ext.webdav.method.*;
 import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * This class is used to override the default WebDavServiceImpl in order to support symlinks
@@ -282,8 +253,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @QueryParam("version") String version,
                       @Context UriInfo uriInfo) {
 
+    String fileName;
+     boolean isFile;
     try {
       repoPath = convertRepoPath(repoPath, true);
+      Session session = nodeFinder.getItem(workspaceName(repoPath),LinkUtils.getParentPath(path(normalizePath(repoPath))),true).getSession();
+      Node currentNode = (Node) session.getItem(path(repoPath));
+      fileName = decodeValue(currentNode.getName());
+      isFile = currentNode.isNodeType(VersionHistoryUtils.NT_FILE);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -295,8 +272,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       return Response.serverError().build();
     }
     Response response = super.get(repoName, repoPath, rangeHeader, ifModifiedSince, ifNoneMatch, version, uriInfo);
-    if(HTTPStatus.OK == response.getStatus()) {
-      return Response.fromResponse(response)
+    if (HTTPStatus.OK == response.getStatus()) {
+      Response.ResponseBuilder responseBuilder = Response.fromResponse(response);
+      if (isFile) {
+        responseBuilder.header("Content-Disposition", "attachment; filename=\"" + fileName + "\"; filename*=UTF-8''" + fileName);
+      }
+      return responseBuilder
               .header("Access-Control-Allow-Origin", uriInfo.getRequestUri().getHost())
               .header("Access-Control-Allow-Credentials", true)
               .header("Access-Control-Allow-Methods", "ACL, CANCELUPLOAD, CHECKIN, CHECKOUT, COPY, DELETE, GET, HEAD, LOCK, MKCALENDAR, MKCOL, " +
@@ -923,6 +904,20 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
     }
     return true;
+  }
+
+  public String decodeValue(String value) {
+    String currentValue;
+    do {
+      currentValue = value;
+      try {
+        value = URLDecoder.decode(value, "UTF-8");
+      } catch (UnsupportedEncodingException e) {
+        LOG.warn("Unable to decode value: ", e.getMessage());
+        return value;
+      }
+    } while (!StringUtils.equals(currentValue, value));
+    return value;
   }
 
 }
