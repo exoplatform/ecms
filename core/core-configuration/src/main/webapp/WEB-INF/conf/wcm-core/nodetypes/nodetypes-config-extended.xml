@@ -506,6 +506,9 @@
   <nodeType name="exo:favoriteFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   </nodeType>
 
+  <nodeType name="exo:recordingsFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+
   <nodeType name="exo:thumbnails" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
 	<supertypes>
       <supertype>nt:hierarchyNode</supertype>
