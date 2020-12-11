@@ -6,12 +6,11 @@
 let attachmentsComposerActions = null;
 
 export function getAttachmentsComposerExtensions() {
-  if(attachmentsComposerActions == null) {
+  if(attachmentsComposerActions == null || attachmentsComposerActions.length === 0) {
     const allExtensions = getExtensionsByType('attachments-composer-action');
     // if some extension registered but has flag 'enabled' set to false, we don't add this extension
     attachmentsComposerActions = allExtensions.filter(extension => isExtensionEnabled(extension));
   }
-
   return attachmentsComposerActions;
 }
 

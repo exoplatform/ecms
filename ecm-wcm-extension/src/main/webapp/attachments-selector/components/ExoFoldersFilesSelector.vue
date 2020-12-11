@@ -230,8 +230,7 @@ export default {
       filesCountClass: '',
       selectedFolderPath : '',
       schemaFolder: '',
-      folderDestinationForFile:'',
-      attachmentsComposerActions: [], // extensions from extensionRegistry
+      folderDestinationForFile:'',// extensions from extensionRegistry
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
@@ -256,6 +255,9 @@ export default {
     };
   },
   computed: {
+    attachmentsComposerActions(){
+      return getAttachmentsComposerExtensions();
+    },
     showDriveAction(){ // show drivers extension buttons only if it's root path
       return this.isCloudEnabled && (this.currentDrive ? this.currentDrive.name === 'Personal Documents' : true);
     },
@@ -362,7 +364,6 @@ export default {
       this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
       this.showErrorMessage = true;
     });
-    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
     openFolder: function (folder) {
