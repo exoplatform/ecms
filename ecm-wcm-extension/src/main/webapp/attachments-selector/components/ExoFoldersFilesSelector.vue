@@ -362,7 +362,6 @@ export default {
       this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
       this.showErrorMessage = true;
     });
-    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
     openFolder: function (folder) {
@@ -425,6 +424,7 @@ export default {
         const drivers = xml.childNodes[0].childNodes;
         self.setDrivers(drivers);
         this.loadingFolders = false;
+        self.attachmentsComposerActions = getAttachmentsComposerExtensions();
       }).catch(() => {
         this.loadingFolders = false;
         this.errorMessage= `${this.$t('attachments.getDrivers.error')}`;
