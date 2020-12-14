@@ -362,7 +362,6 @@ export default {
       this.errorMessage= `${this.$t('attachments.fetchFoldersAndFiles.error')}`;
       this.showErrorMessage = true;
     });
-    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
     openFolder: function (folder) {
@@ -429,6 +428,8 @@ export default {
         this.loadingFolders = false;
         this.errorMessage= `${this.$t('attachments.getDrivers.error')}`;
         this.showErrorMessage = true;
+      }).finally(() => {
+        this.attachmentsComposerActions = getAttachmentsComposerExtensions();
       });
     },
     resetExplorer() {
