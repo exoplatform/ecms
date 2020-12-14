@@ -424,6 +424,7 @@ export default {
         const drivers = xml.childNodes[0].childNodes;
         self.setDrivers(drivers);
         this.loadingFolders = false;
+        self.attachmentsComposerActions = getAttachmentsComposerExtensions();
       }).catch(() => {
         this.loadingFolders = false;
         this.errorMessage= `${this.$t('attachments.getDrivers.error')}`;
