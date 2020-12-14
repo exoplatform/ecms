@@ -122,7 +122,7 @@
       </value-param>
     </init-params>
   </component>
-
+  
   <external-component-plugins>
     <target-component>org.exoplatform.services.ecm.fckconfig.FCKConfigService</target-component>
     <component-plugin>
@@ -130,6 +130,61 @@
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.ecm.webui.core.fckconfig.FCKDynamicSkinPlugin</type>
       <description>Add Dynamic Skin Plugins into FCK editor </description>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <!-- #################################################### DLP #################################################### -->
+  
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
+    <component-plugin>
+      <name>addActions</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
+      <description>add actions plugin</description>
+      <init-params>
+        <object-param>
+          <name>actions</name>
+          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
+            <field name="actions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="workspace"><string>collaboration</string></field>
+                    <field name="eventTypes"><string>addNode,addProperty,changeProperty,removeProperty</string></field>
+                    <field name="nodeTypes"><string>nt:file</string></field>
+                    <field name="path"><string>/</string></field>
+                    <field name="isDeep"><boolean>true</boolean></field>
+                    <field name="actionClassName"><string>org.exoplatform.ecm.connector.dlp.FileDLPAction</string></field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.dlp.processor.DlpOperationProcessor</target-component>
+    <component-plugin>
+      <name>FileDlpConnector</name>
+      <set-method>addConnector</set-method>
+      <type>org.exoplatform.ecm.connector.dlp.FileDlpConnector</type>
+      <description>File Dlp Connector</description>
+      <init-params>
+        <value-param>
+          <name>dlp.keywords</name>
+          <value>${exo.dlp.keywords:}</value>
+        </value-param>
+        <properties-param>
+          <name>constructor.params</name>
+          <property name="enable" value="true"/>
+          <property name="displayName" value="file"/>
+          <property name="type" value="file"/>
+        </properties-param>
+      </init-params>
     </component-plugin>
   </external-component-plugins>
 
