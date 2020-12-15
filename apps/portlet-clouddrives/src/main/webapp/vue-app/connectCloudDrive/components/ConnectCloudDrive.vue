@@ -169,6 +169,9 @@ export default {
     toggleCloudDrawer: function() {
       this.showCloudDrawer = !this.showCloudDrawer;
     },
+    openDrawer() {
+      this.showCloudDrawer = true;
+    },
     openDriveFolder: function(path, title) {
       // createdDrive should consist of the same properties as drives in exoAttachments as it will be added to existing drives array
       const createdDrive = {
