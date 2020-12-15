@@ -1,5 +1,6 @@
 export async function getUserDrive() {
   try {
+    console.log("getuserdrive");
     const response = await fetch(`${cloudDriveUtils.pageBaseUrl()}/portal/rest/clouddrive/document/drive/personal`, {
       headers: {
         "Content-Type": "application/json",
