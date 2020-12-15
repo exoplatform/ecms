@@ -44,6 +44,7 @@
     onExecute(cloudDriveComponent) {
       // click on action button will open cloud drive drawer with list of cloud drives available to connection
       cloudDriveComponent.showCloudDrawer = true;
+      console.log(cloudDriveComponent.showCloudDrawer);
     }
   }];
 

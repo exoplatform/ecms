@@ -92,6 +92,7 @@ export default {
     }
   },
   async created() {
+    console.log("drive",this.showCloudDrawer);
     if (!this.showCloudDrawer) {
       try {
         // get user drive only once when component created
