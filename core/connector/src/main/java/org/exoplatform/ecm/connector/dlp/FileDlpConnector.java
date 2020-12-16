@@ -4,7 +4,6 @@ import javax.jcr.Node;
 
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -22,17 +21,15 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   public static final String  TYPE                 = "file";
 
-  private static final String DLP_KEYWORD_PROPERTY = "exo.dlp.keywords";
-
   private static final String COLLABORATION_WS     = "collaboration";
-  
-  private static final String DLP_KEYWORDS_PARAM     = "dlp.keywords";
+
+  private static final String DLP_KEYWORDS_PARAM   = "dlp.keywords";
 
   private TrashService        trashService;
 
   private RepositoryService   repositoryService;
-  
-  private String   dlpKeywords;
+
+  private String              dlpKeywords;
 
   public FileDlpConnector(InitParams initParams, TrashService trashService, RepositoryService repositoryService) {
     super(initParams);
@@ -66,10 +63,10 @@ public class FileDlpConnector extends DlpServiceConnector {
   private void treatItem(String entityId) {
     ExtendedSession session = null;
     try {
-      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS,
-                                                                                     repositoryService.getCurrentRepository());
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(entityId);
       trashService.moveToTrash(node, WCMCoreUtils.getSystemSessionProvider());
+      LOGGER.info("Entity with id: {} and connector: {} has been moved to trash", entityId, TYPE);
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
     }
