@@ -151,7 +151,7 @@
                 <value>
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field name="workspace"><string>collaboration</string></field>
-                    <field name="eventTypes"><string>addNode,addProperty,changeProperty,removeProperty</string></field>
+                    <field name="eventTypes"><string>addNode,addProperty,changeProperty</string></field>
                     <field name="nodeTypes"><string>nt:file</string></field>
                     <field name="path"><string>/</string></field>
                     <field name="isDeep"><boolean>true</boolean></field>

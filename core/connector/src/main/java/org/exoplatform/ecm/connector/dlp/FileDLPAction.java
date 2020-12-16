@@ -54,7 +54,6 @@ public class FileDLPAction implements AdvancedAction {
         break;
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
-      case Event.PROPERTY_REMOVED:
         PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
         if(property != null) {
           node = property.getParent();
