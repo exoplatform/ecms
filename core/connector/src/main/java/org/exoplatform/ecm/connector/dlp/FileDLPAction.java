@@ -5,6 +5,7 @@ import javax.jcr.observation.Event;
 import org.apache.commons.chain.Context;
 
 import org.exoplatform.commons.api.settings.ExoFeatureService;
+import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -23,8 +24,6 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 public class FileDLPAction implements AdvancedAction {
   private static final Log LOGGER = ExoLogger.getExoLogger(FileDLPAction.class);
   
-  private static final String DLP_FEATURE = "dlp";
-
   private TrashService     trashService;
 
   private QueueDlpService queueDlpService;
@@ -39,7 +38,7 @@ public class FileDLPAction implements AdvancedAction {
 
   @Override
   public boolean execute(Context context) throws Exception {
-    if (!featureService.isActiveFeature(DLP_FEATURE)) {
+    if (!featureService.isActiveFeature(DlpOperationProcessor.DLP_FEATURE)) {
       return false;
     }
     int eventType = (Integer) context.get(InvocationContext.EVENT);
