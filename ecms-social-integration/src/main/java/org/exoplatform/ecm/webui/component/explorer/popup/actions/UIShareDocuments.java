@@ -49,6 +49,7 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.document.service.IShareDocumentService;
 import org.exoplatform.wcm.notification.plugin.ShareFileToSpacePlugin;
@@ -580,6 +581,7 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
     StringBuilder builder = new StringBuilder();
     builder.append("/").append(PortalContainer.getCurrentRestContextName()).append("/social/people/suggest.json?");
     builder.append("currentUser=").append(RequestContext.getCurrentInstance().getRemoteUser());
+    builder.append("&spaceURL=").append(SpaceUtils.getSpaceUrlByContext());
     builder.append("&typeOfRelation=").append("share_document");
     return builder.toString();
   }
