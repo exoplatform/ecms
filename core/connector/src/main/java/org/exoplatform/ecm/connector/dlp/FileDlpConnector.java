@@ -67,15 +67,17 @@ public class FileDlpConnector extends DlpServiceConnector {
       long startTime = System.currentTimeMillis();
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(entityId);
-      String fileName = node.getName();
-      trashService.moveToTrash(node, WCMCoreUtils.getSystemSessionProvider());
-      long endTime = System.currentTimeMillis();
-      long totalTime = endTime - startTime;
-      LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
-               DlpOperationProcessor.DLP_FEATURE,
-               DLP_POSITIVE_DETECTION,
-               fileName,
-               totalTime);
+      if (!trashService.isInTrash(node)) {
+        String fileName = node.getName();
+        trashService.moveToTrash(node, WCMCoreUtils.getSystemSessionProvider());
+        long endTime = System.currentTimeMillis();
+        long totalTime = endTime - startTime;
+        LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
+                 DlpOperationProcessor.DLP_FEATURE,
+                 DLP_POSITIVE_DETECTION,
+                 fileName,
+                 totalTime);
+      }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
     }
