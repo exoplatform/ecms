@@ -3,6 +3,7 @@ package org.exoplatform.ecm.connector.dlp;
 import javax.jcr.Node;
 
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
+import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -71,7 +72,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       long endTime = System.currentTimeMillis();
       long totalTime = endTime - startTime;
       LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
-               DLP_FEATURE,
+               DlpOperationProcessor.DLP_FEATURE,
                DLP_POSITIVE_DETECTION,
                fileName,
                totalTime);
