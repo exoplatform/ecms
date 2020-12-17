@@ -25,7 +25,7 @@
   <parent>
     <artifactId>ecms-apps</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.2.x-SNAPSHOT</version>
+    <version>6.2.x-maintenance-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-apps-portlet-editors</artifactId>
   <packaging>war</packaging>
