@@ -27,39 +27,12 @@
     <groupId>org.exoplatform.ecms</groupId>
     <version>6.2.x-maintenance-SNAPSHOT</version>
   </parent>
-  <artifactId>ecms-apps-portlet-editors</artifactId>
+  <artifactId>ecms-apps-portlet-dlp-quarantine</artifactId>
   <packaging>war</packaging>
-  <name>eXo PLF:: Online Editors Admin Portlet</name>
-  <description>eXo DMS Portlet Java Content: Online Editors Admin</description>
-  <dependencies>
-    <dependency>
-      <groupId>javax.portlet</groupId>
-      <artifactId>portlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.webui.portlet</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-services</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-connector</artifactId>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+  <name>eXo PLF:: Dlp Quarantine Admin Portlet</name>
+  <description>eXo DMS Portlet Java Content: Dlp Quarantine Admin</description>
   <build>
-    <finalName>editors</finalName>
+    <finalName>dlp-quarantine</finalName>
     <plugins>
       <plugin>
         <groupId>com.github.eirslett</groupId>
