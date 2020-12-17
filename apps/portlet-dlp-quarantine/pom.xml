@@ -27,16 +27,52 @@
     <groupId>org.exoplatform.ecms</groupId>
     <version>6.2.x-maintenance-SNAPSHOT</version>
   </parent>
-  <artifactId>ecms-apps-portlet-transferrules</artifactId>
+  <artifactId>ecms-apps-portlet-dlp-quarantine</artifactId>
   <packaging>war</packaging>
-  <name>eXo PLF:: Transfer Rules Admin Portlet</name>
-  <description>eXo DMS Portlet Java Content: Transfer Rules Admin</description>
+  <name>eXo PLF:: Dlp Quarantine Admin Portlet</name>
+  <description>eXo DMS Portlet Java Content: Dlp Quarantine Admin</description>
   <build>
-    <finalName>transfer-rules</finalName>
+    <finalName>dlp-quarantine</finalName>
     <plugins>
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
+        <configuration>
+          <installDirectory>target</installDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <nodeVersion>${node.version}</nodeVersion>
+              <npmVersion>${npm.version}</npmVersion>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm run build</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <arguments>run build</arguments>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
