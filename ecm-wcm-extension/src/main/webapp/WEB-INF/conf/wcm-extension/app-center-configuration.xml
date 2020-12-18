@@ -35,6 +35,10 @@
           <name>override</name>
           <value>${exo.app-center.drives.override:false}</value>
         </value-param>
+        <value-param>
+          <name>override-mode</name>
+          <value>${exo.app-center.drives.override-mode:merge}</value>
+        </value-param>
         <object-param>
           <name>application</name>
           <description>description</description>
