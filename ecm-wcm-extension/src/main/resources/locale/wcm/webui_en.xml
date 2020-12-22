@@ -40,6 +40,7 @@
       <UserDocuments>{0} Documents</UserDocuments>
       <Collaboration>Collaboration</Collaboration>
       <Trash>Trash</Trash>
+      <Security>Security</Security>
     </label>
   </Drives>
 
