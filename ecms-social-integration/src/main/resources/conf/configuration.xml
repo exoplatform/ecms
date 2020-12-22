@@ -54,6 +54,9 @@
                     <string>transfer-rules</string>
                  </value>
                  <value>
+                    <string>dlp-quarantine</string>
+                 </value>
+                 <value>
                     <string>authoring-apps</string>
                  </value>
                  <value>
