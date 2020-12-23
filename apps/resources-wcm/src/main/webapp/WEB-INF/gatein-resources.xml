@@ -122,6 +122,15 @@
     <overwrite>true</overwrite>
   </portlet-skin>
 
+  <!-- QuarantinePortlet skins -->
+  <portlet-skin>
+    <application-name>dlp-quarantine</application-name>
+    <portlet-name>dlpQuarantinePortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/dlpQuarantine/dlp-quarantine.css</css-path>
+    <overwrite>true</overwrite>
+  </portlet-skin>
+  
   <!-- Bootstrap Javascripts -->
   <!-- Twitter Bootstrap bootstrap-typeahead plugin -->
   <module>
