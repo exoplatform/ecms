@@ -3,11 +3,11 @@
   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
   <module>
-    <name>dlp-quarantine</name>
+    <name>dlpQuarantine</name>
     <script>
       <minify>false</minify>
       <path>/javascript/dlpQuarantine.bundle.js</path>
-    </script>Q
+    </script>
     <depends>
       <module>vue</module>
     </depends>
