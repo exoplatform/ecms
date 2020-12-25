@@ -42,6 +42,10 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.localization.LocaleContextInfoUtils;
+import org.exoplatform.services.resources.LocaleContextInfo;
+import org.exoplatform.services.resources.LocalePolicy;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -574,7 +578,8 @@ public class DocumentServiceImpl implements DocumentService {
       DocumentMetadataPlugin metadataPlugin = metadataPlugins.get(template.getExtension());
       if(metadataPlugin != null && metadataPlugin.isExtensionSupported(template.getExtension())) {
         try {
-          data = metadataPlugin.updateMetadata(template.getExtension(), data, new Date(), getCurrentUserDisplayName());
+          String userId = ConversationState.getCurrent().getIdentity().getUserId();
+          data = metadataPlugin.updateMetadata(context, template.getExtension(), data, new Date(), getCurrentUserDisplayName(userId), getCurrentUserLanguage(userId));
         } catch (DocumentExtensionNotSupportedException e) {
           LOG.error("Document extension is not supported by metadata plugin.", e);
         } catch (IOException e) {
@@ -946,13 +951,32 @@ public class DocumentServiceImpl implements DocumentService {
    * 
    * @return the display name
    */
-  protected String getCurrentUserDisplayName() {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+  protected String getCurrentUserDisplayName(String userId) {
     try {
       return organizationService.getUserHandler().findUserByName(userId).getDisplayName();
     } catch (Exception e) {
       LOG.error("Error searching user " + userId, e);
       return userId;
+    }
+  }
+  /**
+   * Gets platform language of current user. In case of any errors return null.
+   *
+   * @return the platform language
+   */
+  protected String getCurrentUserLanguage(String userId) {
+    try {
+      LocaleContextInfo localeCtx = LocaleContextInfoUtils.buildLocaleContextInfo(userId);
+      LocalePolicy localePolicy = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LocalePolicy.class);
+      String lang = null;
+      if(localePolicy != null) {
+        Locale locale = localePolicy.determineLocale(localeCtx);
+        lang = locale.toString();
+      }
+      return lang;
+    } catch (Exception e) {
+      LOG.error("Error searching user " + userId, e);
+      return null;
     }
   }
   
