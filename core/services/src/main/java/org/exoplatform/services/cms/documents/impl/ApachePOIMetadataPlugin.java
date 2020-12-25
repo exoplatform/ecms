@@ -7,12 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.POIXMLProperties;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
@@ -24,6 +21,7 @@ import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * The Class DocumentMetadataPlugin is an implementation of DocumentMetadataPlugin
@@ -64,21 +62,45 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
    * {@inheritDoc}
    */
   @Override
-  public InputStream updateMetadata(String extension,
+  public InputStream updateMetadata(WebuiRequestContext context,
+                                    String extension,
                                     InputStream source,
                                     Date created,
-                                    String creator) throws IOException, DocumentExtensionNotSupportedException {
+                                    String creator,
+                                    String language) throws IOException, DocumentExtensionNotSupportedException {
     File tempFile = File.createTempFile("editor-document", ".tmp");
     try (POIXMLDocument document = getDocument(source, extension);
          FileOutputStream fos = new FileOutputStream(tempFile))
     {
+      updateDocLanguage(context, document, extension, language);
       POIXMLProperties props = document.getProperties();
       POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
       coreProps.setCreator(creator);
+      coreProps.getUnderlyingProperties().setLanguageProperty(language);
       coreProps.setCreated(metadataFormat.format(created));
       document.write(fos);
     }
     return new DeleteOnCloseFileInputStream(tempFile);
+  }
+
+  private void updateDocLanguage(WebuiRequestContext context, POIXMLDocument document, String extension, String language) {
+    if(StringUtils.equals(extension, ".docx")) {
+      //Change the document editing language with the user's platform language
+      ((XWPFDocument) document).getStyles().getStyle("Normal").getCTStyle().getRPr().getLang().setVal(language);
+    } else if (StringUtils.equals(extension, ".xlsx")) {
+      //Rename every sheet created with a new name translated with the user's platform language
+      ResourceBundle resourceBundle = context.getApplicationResourceBundle();
+      String newSheetLabel = resourceBundle.getString("UINewDocumentForm.label.option.MicrosoftOfficeNewSheet");
+              ((XSSFWorkbook) document).getCTWorkbook().getSheets().getSheetList().stream().forEach(sheet -> {
+        sheet.setName(newSheetLabel+sheet.getSheetId());
+      });
+    } else if (StringUtils.equals(extension, ".pptx")) {
+      //Change the language of each element found in the first slide (only one created in the template) to the user's language of the platform.
+      ((XMLSlideShow) document).getSlides().get(0).getXmlObject().getCSld().getSpTree().getSpList().forEach(splist-> {
+        if(splist.getTxBody() != null) {
+          splist.getTxBody().getPArray(0).getEndParaRPr().setLang(language);
+        }
+      });    }
   }
 
   /**
