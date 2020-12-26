@@ -158,7 +158,11 @@ public class FileSearchRestService implements ResourceContainer {
   private Node getUserPrivateNode() throws Exception {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    return (Node) userNode.getNode(Utils.PRIVATE);
+    try {
+      Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+      return (Node) userNode.getNode(Utils.PRIVATE);
+    } finally {
+      sessionProvider.close();
+    }
   }
 }

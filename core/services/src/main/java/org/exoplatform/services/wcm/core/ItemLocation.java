@@ -245,6 +245,10 @@ public class ItemLocation {
       return null;
     } catch (Exception e) {
       return null;
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 
