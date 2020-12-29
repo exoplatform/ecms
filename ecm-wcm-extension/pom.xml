@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.1.x-SNAPSHOT</version>
+    <version>6.1.0-RC02</version>
   </parent>
   <artifactId>ecm-wcm-extension</artifactId>
   <packaging>war</packaging>
