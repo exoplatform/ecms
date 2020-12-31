@@ -51,8 +51,8 @@
     <event>
       <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
       <OpenOn>Open on</OpenOn>
-      <EditFile>ترمیم</EditFile>
-      <ViewFile>ملاحظہ کریں</ViewFile>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
       <sourceview>View source code</sourceview>
@@ -97,8 +97,8 @@
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
       <provider>Provider</provider>
-      <description>تفصیل</description>
-      <active>زیر عمل</active>
+      <description>Description</description>
+      <active>Active</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>

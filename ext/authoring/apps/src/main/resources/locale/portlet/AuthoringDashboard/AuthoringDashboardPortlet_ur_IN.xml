@@ -6,7 +6,7 @@
       <nocontent>No Content</nocontent>
       <mydraft>My Draft Content</mydraft>
       <waitingapproval>Waiting For My Approval</waitingapproval>
-      <approve>منظور</approve>
+      <approve>Approve</approve>
       <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>

@@ -1193,8 +1193,7 @@
   <EditQueryForm>
     <label>
       <name>Nama</name>
-      <selectBox>Pilih Gaya Queri
- </selectBox>
+      <selectBox>Pilih Gaya Queri  </selectBox>
       <query>Kueri</query>
     </label>
     <action>
@@ -2332,8 +2331,7 @@
     <label>
       <symLinkName>Nama Symlink</symLinkName>
       <pathNode>Dokumen Path:</pathNode>
-      <note>Pilih dokumen lain yang akan diterjemahkan
- </note>
+      <note>Pilih dokumen lain yang akan diterjemahkan  </note>
     </label>
     <action>
       <Save>#{word.save}</Save>
