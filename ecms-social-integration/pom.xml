@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms</artifactId>
-    <version>6.2.x-SNAPSHOT</version>
+    <version>6.2.0-05012021</version>
   </parent>
   <artifactId>ecms-social-integration</artifactId>
   <packaging>jar</packaging>
