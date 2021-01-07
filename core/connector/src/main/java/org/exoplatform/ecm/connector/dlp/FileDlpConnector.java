@@ -1,12 +1,16 @@
 package org.exoplatform.ecm.connector.dlp;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Workspace;
 
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
+import org.exoplatform.commons.dlp.domain.DlpFileEntity;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
+import org.exoplatform.commons.dlp.service.DlpFileService;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.commons.search.index.impl.QueueIndexingService;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -14,6 +18,8 @@ import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import java.util.Calendar;
 
 /**
  * Dlp Connector for Files
@@ -84,9 +90,21 @@ public class FileDlpConnector extends DlpServiceConnector {
                  DLP_POSITIVE_DETECTION,
                  fileName,
                  totalTime);
+        saveDlpFile(node);
       }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
     }
+  }
+
+  private void saveDlpFile(Node node) throws RepositoryException {
+    DlpFileService dlpFileService = CommonsUtils.getService(DlpFileService.class);
+    DlpFileEntity dlpFileEntity = new DlpFileEntity();
+    dlpFileEntity.setUuid(node.getUUID());
+    dlpFileEntity.setDetectionDate(Calendar.getInstance());
+    // to be updated with detected keyword
+    dlpFileEntity.setKeywords(dlpKeywords);
+    dlpFileService.addDlpFile(dlpFileEntity);
+
   }
 }
