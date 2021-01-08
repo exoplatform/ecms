@@ -100,7 +100,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());
-    dlpPositiveItemEntity.setType(node.getPrimaryNodeType().getName());
+    dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
     // to be updated with detected keyword
     dlpPositiveItemEntity.setKeywords(dlpKeywords);
