@@ -6,7 +6,7 @@
       </v-icon>
     </v-list-item-icon>
     <v-list-item-content>
-      <v-list-item-title :title="document.title" v-html="document.title"/>
+      <v-list-item-title :title="document.title" class="text-truncate" v-html="document.title"/>
       <v-list-item-subtitle v-if="!hideTime || !hideDrive">
         <div class="color-title">
           <span v-if="!hideTime" :title="absoluteDateModified()">
