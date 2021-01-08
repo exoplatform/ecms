@@ -5,11 +5,10 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Workspace;
 
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
-import org.exoplatform.commons.dlp.domain.DlpFileEntity;
+import org.exoplatform.commons.dlp.domain.DlpPositiveItemEntity;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
-import org.exoplatform.commons.dlp.service.DlpFileService;
+import org.exoplatform.commons.dlp.service.DlpPositiveItemService;
 import org.exoplatform.commons.search.index.IndexingService;
-import org.exoplatform.commons.search.index.impl.QueueIndexingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
@@ -90,21 +89,21 @@ public class FileDlpConnector extends DlpServiceConnector {
                  DLP_POSITIVE_DETECTION,
                  fileName,
                  totalTime);
-        saveDlpFile(node);
+        saveDlpItem(node);
       }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
     }
   }
 
-  private void saveDlpFile(Node node) throws RepositoryException {
-    DlpFileService dlpFileService = CommonsUtils.getService(DlpFileService.class);
-    DlpFileEntity dlpFileEntity = new DlpFileEntity();
-    dlpFileEntity.setUuid(node.getUUID());
-    dlpFileEntity.setDetectionDate(Calendar.getInstance());
+  private void saveDlpItem(Node node) throws RepositoryException {
+    DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
+    DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
+    dlpPositiveItemEntity.setUuid(node.getUUID());
+    dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
     // to be updated with detected keyword
-    dlpFileEntity.setKeywords(dlpKeywords);
-    dlpFileService.addDlpFile(dlpFileEntity);
+    dlpPositiveItemEntity.setKeywords(dlpKeywords);
+    dlpPositiveItemService.addDlpItem(dlpPositiveItemEntity);
 
   }
 }
