@@ -363,6 +363,12 @@
           <name>templatePath</name>
           <value><![CDATA[war:/wcm-notification/templates/notification/FileActivityChildPlugin.gtmpl]]></value>
         </value-param>
+        <values-param>
+          <name>parentIds</name>
+          <description>The list parent plugin' id</description>
+          <value>PostActivitySpaceStreamPlugin</value>
+          <value>PostActivityPlugin</value>
+        </values-param>
         <object-param>
           <name>template.FileActivityChildPlugin</name>
           <description>The template of FileActivityChildPlugin</description>

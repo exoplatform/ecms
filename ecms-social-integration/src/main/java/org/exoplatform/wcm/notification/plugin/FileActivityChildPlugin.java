@@ -43,6 +43,7 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.manager.ActivityManager;
+import org.exoplatform.social.notification.LinkProviderUtils;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 import org.exoplatform.webui.cssfile.*;
@@ -58,16 +59,16 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
   public static final String REPOSITORY                   = "REPOSITORY";
   public static final String WORKSPACE                    = "WORKSPACE";
   public static final String DOCLINK                      = "DOCLINK";
-  public static final String NODE_UUID                    = "nodeId";
+  public static final String NODE_UUID                    = "id";
   public static final String AUTHOR                       = "author";
   public static final String MIME_TYPE                    = "mimeType";
-  public static final String DOCUMENT_TITLE               = "documentTitle";
+  public static final String DOCUMENT_TITLE               = "docTitle";
   public static final String CONTENT_NAME                 = "contentName";
   public static final String DOCUMENT_SUMMARY             = "docSummary";
   public static final String EXO_RESOURCES_URI            = "/eXoSkin/skin/images/themes/default/Icons/TypeIcons/EmailNotificationIcons/";
-  public static final String DOCNAME                      = "documentName";
+  public static final String DOCNAME                      = "DOCNAME";
   public static final String ICON_FILE_EXTENSION          = ".png";
-  public static final String CONTENT_LINK                 = "contenLink";
+  public static final String CONTENT_LINK                 = "contentLink";
 
   private String[]             mimeType;
   private String[]             nodeUUID;
@@ -130,7 +131,7 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
         }
       }
 
-      templateContext.put("ACTIVITY_URL", this.contentLink);
+      templateContext.put("ACTIVITY_URL", LinkProviderUtils.getOpenLink(activity));
       templateContext.put("DOCUMENT_TITLE", this.documentTitle);
       templateContext.put("SUMMARY", summaries);
       templateContext.put("SIZE", sizes);
