@@ -41,8 +41,8 @@ import org.exoplatform.wcm.notification.plugin.WebTemplateProvider;
  */
 @TemplateConfigs (
   templates = {
-    @TemplateConfig(pluginId = ShareFileToUserPlugin.ID, template = "war:/groovy/ecm/social-integration/plugin/notification/push-notifications/ShareDocumentToUser.gtmpl"),
-    @TemplateConfig(pluginId = ShareFileToSpacePlugin.ID, template = "war:/groovy/ecm/social-integration/plugin/notification/push-notifications/ShareDocumentToSpace.gtmpl")
+    @TemplateConfig(pluginId = ShareFileToUserPlugin.ID, template = "war:/wcm-notification/templates/notification/push-notifications/ShareDocumentToUser.gtmpl"),
+    @TemplateConfig(pluginId = ShareFileToSpacePlugin.ID, template = "war:/wcm-notification/templates/notification/push-notifications/ShareDocumentToSpace.gtmpl")
   }
 )
 public class SharePushTemplateProvider extends WebTemplateProvider {
