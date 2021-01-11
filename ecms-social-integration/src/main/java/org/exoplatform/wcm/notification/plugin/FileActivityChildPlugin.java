@@ -131,7 +131,7 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
         }
       }
 
-      templateContext.put("ACTIVITY_URL", LinkProviderUtils.getOpenLink(activity));
+      templateContext.put("ACTIVITY_URL", this.contentLink);
       templateContext.put("DOCUMENT_TITLE", this.docName);
       templateContext.put("SUMMARY", summaries);
       templateContext.put("SIZE", sizes);
