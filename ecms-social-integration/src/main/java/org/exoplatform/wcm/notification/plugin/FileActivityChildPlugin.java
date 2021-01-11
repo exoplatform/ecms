@@ -52,13 +52,14 @@ import org.exoplatform.webui.cssfile.*;
 public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
   private static final Log   LOG                          = ExoLogger.getLogger(FileActivityChildPlugin.class);
   public final static ArgumentLiteral<String> ACTIVITY_ID = new ArgumentLiteral<String>(String.class, "activityId");
-  public final static String PRIVATE_FOLDER_PATH          = "/Private/";
+  public final static String PRIVATE_FOLDER_PATH          = "/private/rest";
+  public final static String PORTAL                       = "/portal";
+  public final static String DOCUMENT_VIEW                = "/documents/view/";
   public final static String ACTIVITY_URL                 = "view_full_activity";
   public static final String ID                           = "files:spaces";
   public static final String MESSAGE                      = "MESSAGE";
-  public static final String REPOSITORY                   = "REPOSITORY";
+  public static final String DOCPATH                      = "DOCPATH";
   public static final String WORKSPACE                    = "WORKSPACE";
-  public static final String DOCLINK                      = "DOCLINK";
   public static final String NODE_UUID                    = "id";
   public static final String AUTHOR                       = "author";
   public static final String MIME_TYPE                    = "mimeType";
@@ -68,7 +69,6 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
   public static final String EXO_RESOURCES_URI            = "/eXoSkin/skin/images/themes/default/Icons/TypeIcons/EmailNotificationIcons/";
   public static final String DOCNAME                      = "DOCNAME";
   public static final String ICON_FILE_EXTENSION          = ".png";
-  public static final String CONTENT_LINK                 = "contentLink";
 
   private String[]             mimeType;
   private String[]             nodeUUID;
@@ -127,12 +127,12 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
         sizes[i] = getSize(currentNode);
         versions[i] = getVersion(currentNode);
         if(this.contentLink != null && this.contentLink.length > i) {
-          this.contentLink[i] = CommonsUtils.getCurrentDomain() + this.contentLink[i];
+          this.contentLink[i] = this.contentLink[i];
         }
       }
 
       templateContext.put("ACTIVITY_URL", LinkProviderUtils.getOpenLink(activity));
-      templateContext.put("DOCUMENT_TITLE", this.documentTitle);
+      templateContext.put("DOCUMENT_TITLE", this.docName);
       templateContext.put("SUMMARY", summaries);
       templateContext.put("SIZE", sizes);
       templateContext.put("VERSION", versions);
@@ -163,8 +163,8 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
     this.nodeUUID = getParameterValues(templateParams, NODE_UUID);
     this.filesCount = this.nodeUUID.length;
     this.mimeType = getParameterValues(templateParams, MIME_TYPE);
-    this.docName = getParameterValues(templateParams, DOCNAME);
-    this.contentLink = getParameterValues(templateParams, CONTENT_LINK);
+    this.docName = getTitlesFromPath(templateParams, DOCPATH);
+    this.contentLink = getDocLinkbyNodeId(templateParams, NODE_UUID);
 
     this.contentNode = new Node[this.filesCount];
     this.nodeLocation = new NodeLocation[this.filesCount];
@@ -264,5 +264,50 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
     }
     return values;
   }
+  private String[] getTitlesFromPath(Map<String, String> activityParams, String paramName) {
+    String[] values = null;
+    String value = activityParams.get(paramName);
+    if(value != null) {
+      values = value.split(FileUIActivity.SEPARATOR_REGEX);
 
+      for(int i =0 ; i<values.length; i++){
+        String str = values[i];
+        values[i] = str.substring(str.lastIndexOf('/')+1);
+      }
+
+    }   if (LOG.isDebugEnabled()) {
+      if(this.filesCount != 0 && (values == null || values.length != this.filesCount)) {
+        LOG.debug("Parameter '{}' hasn't same length as other activity parmameters", paramName);
+      }
+    }
+    return values;
+  }
+  private String[] getDocLinkbyNodeId(Map<String, String> activityParams, String paramName) {
+    String[] values = null;
+    String value = activityParams.get(paramName);
+    String workspace = activityParams.get(WORKSPACE);
+    if(value != null) {
+      values = value.split(FileUIActivity.SEPARATOR_REGEX);
+
+      for(int i =0 ; i<values.length; i++){
+        String str = values[i];
+        values[i] = this.getBasePrivateRestUrl(workspace,str);
+      }
+    }
+
+    if (LOG.isDebugEnabled()) {
+      if(this.filesCount != 0 && (values == null || values.length != this.filesCount)) {
+        LOG.debug("Parameter '{}' hasn't same length as other activity parmameters", paramName);
+      }
+    }
+    return values;
+  }
+  public static String getBasePrivateRestUrl(String workspace,String id) {
+    return new StringBuffer(CommonsUtils.getCurrentDomain())
+            .append(PORTAL).append(PRIVATE_FOLDER_PATH)
+            .append(DOCUMENT_VIEW)
+            .append(workspace)
+            .append("/")
+            .append(id).toString();
+  }
 }
