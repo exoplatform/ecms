@@ -134,11 +134,18 @@ public class FileDlpConnector extends DlpServiceConnector {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());
+    dlpPositiveItemEntity.setTitle(node.getName());
+    if (node.hasProperty("exo:owner")) {
+      String author = node.getProperty("exo:owner").getString();
+      if ("__system".equals(author)) {
+        return;
+      }
+      dlpPositiveItemEntity.setAuthor(author);
+    }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
     // to be updated with detected keyword
     dlpPositiveItemEntity.setKeywords(dlpKeywords);
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
-
   }
 }
