@@ -10,8 +10,10 @@
               </v-col>
               <v-col class="col-4">
                 <v-switch
-                  v-model="active"
-                  dense/>
+                  v-if="dlpFeatureStatusLoaded"
+                  v-model="dlpFeatureEnabled"
+                  dense
+                  @change="saveDlpFeatureStatus(dlpFeatureEnabled)"/>
               </v-col>
             </v-row>
           </v-list-item-title>
@@ -55,6 +57,7 @@
 </template>
 
 <script>
+import * as dlpAdministrationServices from '../dlpAdministrationServices';
 export default {
   data () {
     return {
@@ -100,11 +103,27 @@ export default {
           author: 'test User2',
         },
       ],
-      totalSize : 5
+      totalSize : 5,
+      dlpFeatureEnabled: null,
+      dlpFeatureStatusLoaded: false,
     };
   },
   mounted() {
     this.$nextTick().then(() => this.$root.$emit('application-loaded'));
+  },
+  created() {
+    this.getDlpFeatureStatus();
+  },
+  methods: {
+    saveDlpFeatureStatus(status) {
+      dlpAdministrationServices.saveDlpFeatureStatus(status);
+    },
+    getDlpFeatureStatus() {
+      dlpAdministrationServices.isDlpFeatureActive().then(status => {
+        this.dlpFeatureEnabled = status.value;
+        this.dlpFeatureStatusLoaded = true;
+      });
+    }
   },
 };
 </script>
