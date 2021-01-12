@@ -21,6 +21,5 @@
     <module>portlet-documents</module>
     <module>portlet-clouddrives</module>
     <module>portlet-transferrules</module>
-    <module>portlet-dlp-quarantine</module>
   </modules>
 </project>

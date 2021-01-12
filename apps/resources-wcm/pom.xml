@@ -79,7 +79,6 @@
                 <include>ecms/portlets/presentation/ecms-presentation-singlecontentviewer.less</include>
                 <include>ecms/portlets/editors/editors-admin.less</include>
                 <include>ecms/portlets/cloudStorage/cloud-storage.less</include>
-                <include>ecms/portlets/dlpQuarantine/dlp-quarantine.less</include>
                 <include>ecms/portlets/documents/documents.less</include>
               </includes>
             </configuration>
