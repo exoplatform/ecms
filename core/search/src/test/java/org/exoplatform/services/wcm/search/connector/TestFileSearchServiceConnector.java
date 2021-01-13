@@ -37,6 +37,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -45,12 +46,15 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(WCMCoreUtils.class)
+@PowerMockIgnore({"javax.management.*","jdk.internal.reflect.*"})
 public class TestFileSearchServiceConnector {
 
   public static final String ES_RESPONSE_EMPTY = "{ \"hits\": { \"hits\": [] } }";
@@ -157,6 +161,19 @@ public class TestFileSearchServiceConnector {
           "          }\n" +
           "        ]\n" +
           "      } }";
+  
+  public static final String ES_RESPONSE_IS_INDEXED = "{\"took\":250,\"timed_out\":false,\"_shards\":{\"total\":5,"
+      + "\"successful\":5,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":1,\"max_score\":1.0,"
+      + "\"hits\":[{\"_index\":\"file_v2\",\"_type\":\"file\",\"_id\":\"fb48c6ad7f0000017be4f0e70309e014\",\"_score\":1.0,"
+      + "\"_source\":{\"workspace\":\"collaboration\",\"author\":\"root\",\"lastModifier\":\"root\","
+      + "\"repository\":\"repository\",\"title\":\"test6.txt\",\"version\":\"0\",\"tags\":[],"
+      + "\"path\":\"/Users/r___/ro___/roo___/root/Private/Documents/test6.txt\",\"lastUpdatedDate\":\"1610533619474\","
+      + "\"createdDate\":\"1610533619375\",\"attachment\":{\"content\":\"bb\"},\"fileSize\":\"3\",\"permissions\":[\"root\"],"
+      + "\"name\":\"test6.txt\",\"exo:internalUse\":\"false\",\"fileType\":\"text/plain\"}}]}}";
+  
+  public static final String ES_RESPONSE_IS_NOT_INDEXED = "{\"took\":2,\"timed_out\":false,\"_shards\":{\"total\":5,"
+      + "\"successful\":5,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":0,\"max_score\":null,\"hits\":[]}}";
+  
 
   @Mock
   ElasticSearchingClient elasticSearchingClient;
@@ -272,6 +289,40 @@ public class TestFileSearchServiceConnector {
     assertEquals("exo-tag-doc-john", ((EcmsSearchResult) searchResult).getTags().get(0));
     assertEquals(1505312333066L, searchResult.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult.getImageUrl());
+  }
+  
+  @Test
+  public void shouldReturnIsIndexedInES() throws Exception {
+    // Given
+    startSessionAs("john");
+    InitParams initParams = buildInitParams();
+    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_IS_INDEXED);
+    
+    FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
+    
+    String uuid="123456789";
+    // When
+    boolean isIndexed = fileSearchServiceConnector.isIndexed(new SearchContext(new Router(new ControllerDescriptor()), ""),uuid);
+    
+    // Then
+    assertTrue(isIndexed);
+  }
+  
+  @Test
+  public void shouldReturnIsNotIndexedInES() throws Exception {
+    // Given
+    startSessionAs("john");
+    InitParams initParams = buildInitParams();
+    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_IS_NOT_INDEXED);
+    
+    FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
+    
+    String uuid="123456789";
+    // When
+    boolean isIndexed = fileSearchServiceConnector.isIndexed(new SearchContext(new Router(new ControllerDescriptor()), ""),uuid);
+    
+    // Then
+    assertFalse(isIndexed);
   }
 
   /**

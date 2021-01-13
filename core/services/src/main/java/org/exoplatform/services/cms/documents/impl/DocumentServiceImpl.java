@@ -304,7 +304,7 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public String getLinkInDocumentsApp(String nodePath) throws Exception {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    String userId = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
     boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
     if(nodePath == null || isAnonymous) {
       return null;
@@ -402,6 +402,9 @@ public class DocumentServiceImpl implements DocumentService {
 
   @Override
   public DriveData getDriveOfNode(String nodePath) throws Exception {
+    if (ConversationState.getCurrent()==null) {
+      return null;
+    }
     return getDriveOfNode(nodePath, ConversationState.getCurrent().getIdentity().getUserId(), Utils.getMemberships());
   }
 

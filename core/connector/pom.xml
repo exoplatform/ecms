@@ -57,6 +57,10 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-search</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-services</artifactId>
     </dependency>
     <dependency>
@@ -198,6 +202,16 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
       <scope>test</scope>
     </dependency>
     <!-- "unused declared" by analyze but still use for test -->
