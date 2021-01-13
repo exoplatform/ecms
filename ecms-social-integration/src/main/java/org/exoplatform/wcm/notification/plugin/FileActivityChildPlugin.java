@@ -33,6 +33,7 @@ import org.exoplatform.commons.notification.NotificationUtils;
 import org.exoplatform.commons.notification.template.TemplateUtils;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -42,8 +43,11 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
-import org.exoplatform.social.notification.LinkProviderUtils;
+import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 import org.exoplatform.webui.cssfile.*;
@@ -52,9 +56,7 @@ import org.exoplatform.webui.cssfile.*;
 public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
   private static final Log   LOG                          = ExoLogger.getLogger(FileActivityChildPlugin.class);
   public final static ArgumentLiteral<String> ACTIVITY_ID = new ArgumentLiteral<String>(String.class, "activityId");
-  public final static String PRIVATE_FOLDER_PATH          = "/private/rest";
-  public final static String PORTAL                       = "/portal";
-  public final static String DOCUMENT_VIEW                = "/documents/view/";
+
   public final static String ACTIVITY_URL                 = "view_full_activity";
   public static final String ID                           = "files:spaces";
   public static final String MESSAGE                      = "MESSAGE";
@@ -105,7 +107,7 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
       //
 
       Map<String, String> templateParams = activity.getTemplateParams();
-      getAndSetFileInfo(templateParams);
+      getAndSetFileInfo(templateParams,activity);
 
       //
       
@@ -159,16 +161,18 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
     return false;
   }
   
-  private void getAndSetFileInfo(Map<String, String> templateParams) {
+  private void getAndSetFileInfo(Map<String, String> templateParams, ExoSocialActivity activity) throws Exception {
+    DocumentService docService = CommonsUtils.getService(DocumentService.class);
+    IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
+    Identity spaceIdentity = identityManager.getOrCreateIdentity(SpaceIdentityProvider.NAME, activity.getStreamOwner());
+    String spaceId = CommonsUtils.getService(SpaceService.class).getSpaceByPrettyName(spaceIdentity.getRemoteId()).getGroupId();
     this.nodeUUID = getParameterValues(templateParams, NODE_UUID);
     this.filesCount = this.nodeUUID.length;
     this.mimeType = getParameterValues(templateParams, MIME_TYPE);
     this.docName = getTitlesFromPath(templateParams, DOCPATH);
-    this.contentLink = getDocLinkbyNodeId(templateParams, NODE_UUID);
-
     this.contentNode = new Node[this.filesCount];
     this.nodeLocation = new NodeLocation[this.filesCount];
-
+    this.contentLink = new String[this.filesCount];
     String[] documentTitle = getParameterValues(templateParams, DOCUMENT_TITLE);
     if (documentTitle != null) {
       this.documentTitle = documentTitle;
@@ -187,6 +191,7 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
           try {
             this.contentNode[i] = sessionProvider.getSession(ws, manageRepo).getNodeByUUID(this.nodeUUID[i]);
             this.nodeLocation[i] = NodeLocation.getNodeLocationByNode(contentNode[i]);
+            this.contentLink[i] = docService.getDocumentUrlInSpaceDocuments(this.contentNode[i],spaceId);
           } catch (RepositoryException e) {
             continue;
           }
@@ -196,7 +201,6 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
       LOG.error("Can not get the repository. ", re);
     }
 
-    
     //
     this.baseURI = CommonsUtils.getCurrentDomain();
   }
@@ -282,32 +286,5 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
     }
     return values;
   }
-  private String[] getDocLinkbyNodeId(Map<String, String> activityParams, String paramName) {
-    String[] values = null;
-    String value = activityParams.get(paramName);
-    String workspace = activityParams.get(WORKSPACE);
-    if(value != null) {
-      values = value.split(FileUIActivity.SEPARATOR_REGEX);
 
-      for(int i =0 ; i<values.length; i++){
-        String str = values[i];
-        values[i] = this.getBasePrivateRestUrl(workspace,str);
-      }
-    }
-
-    if (LOG.isDebugEnabled()) {
-      if(this.filesCount != 0 && (values == null || values.length != this.filesCount)) {
-        LOG.debug("Parameter '{}' hasn't same length as other activity parmameters", paramName);
-      }
-    }
-    return values;
-  }
-  public static String getBasePrivateRestUrl(String workspace,String id) {
-    return new StringBuffer(CommonsUtils.getCurrentDomain())
-            .append(PORTAL).append(PRIVATE_FOLDER_PATH)
-            .append(DOCUMENT_VIEW)
-            .append(workspace)
-            .append("/")
-            .append(id).toString();
-  }
 }
