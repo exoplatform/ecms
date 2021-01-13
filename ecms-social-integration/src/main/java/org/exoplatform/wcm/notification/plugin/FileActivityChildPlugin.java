@@ -279,9 +279,10 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
         values[i] = str.substring(str.lastIndexOf('/')+1);
       }
 
-    }   if (LOG.isDebugEnabled()) {
+    }
+    if (LOG.isDebugEnabled()) {
       if(this.filesCount != 0 && (values == null || values.length != this.filesCount)) {
-        LOG.debug("Parameter '{}' hasn't same length as other activity parmameters", paramName);
+        LOG.debug("Parameter '{}' hasn't same length as other activity parameters", paramName);
       }
     }
     return values;
