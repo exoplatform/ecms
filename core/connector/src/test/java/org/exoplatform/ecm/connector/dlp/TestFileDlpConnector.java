@@ -110,7 +110,6 @@ public class TestFileDlpConnector {
     Mockito.verify(fileDlpConnectorSpy,Mockito.times(1)).treatItem(uuid);
     Mockito.verify(workspace, Mockito.times(1)).move(path,"/"+fileDlpConnector.DLP_SECURITY_FOLDER+"/"+nodeName);
     Mockito.verify(indexingService,Mockito.times(1)).unindex(fileDlpConnector.TYPE,uuid);
-    Mockito.verify(queueDlpService,Mockito.times(1)).removeAllItemFromQueue(uuid);
   }
   
   @Test

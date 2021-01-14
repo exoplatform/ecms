@@ -116,7 +116,6 @@ public class FileDlpConnector extends DlpServiceConnector {
       if (!node.getPath().startsWith("/"+DLP_SECURITY_FOLDER+"/")) {
         workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
-        queueDlpService.removeAllItemFromQueue(entityId);
         long endTime = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
