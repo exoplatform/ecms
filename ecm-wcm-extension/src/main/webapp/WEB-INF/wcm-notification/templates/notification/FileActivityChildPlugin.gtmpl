@@ -59,7 +59,7 @@
 										</td>
 										<td align="left" bgcolor="#f9f9f9" width="90%" align="top"
 											style="width: 90%; background-color: #f9f9f9; padding: 0 0; vertical-align: top;">
-											<a href="<%=ACTIVITY_URL[i]%>" style="display: inline-block; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px; font-weight: bold; text-decoration: none; margin: 0 0 5px;"><%=DOCUMENT_TITLE[i]%></a>
+											<a href="<%=ACTIVITY_URL[i]%>" style="position: relative;top:12px; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px; font-weight: bold; text-decoration: none; margin: 0 0 5px;"><%=DOCUMENT_TITLE[i]%></a>
 											<% if (SUMMARY != null && SUMMARY.length > 0 && SUMMARY[i] != null) { %>
 												<p>
 												<%=SUMMARY[i]%>
