@@ -323,14 +323,16 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
           if (StringUtils.equals(portalName, portalConfigService.getGlobalPortal())) {
             continue;
           }
-
+          SessionProvider sessionProvider = SessionProvider.createSystemProvider();
           try {
-            Node livePortal = getLivePortal(SessionProvider.createSystemProvider(), portalName);
+            Node livePortal = getLivePortal(sessionProvider, portalName);
             if (livePortal !=null) {
               continue;
             }
           } catch (Exception e) {
             // Expected when portal node doesn't exist
+          } finally {
+            sessionProvider.close();
           }
           PortalConfig portalConfig = dataStorage.getPortalConfig(portalName);
           if (portalConfig == null) {

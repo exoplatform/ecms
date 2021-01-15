@@ -670,21 +670,29 @@ public class CloudFileActionService implements Startable {
    * @throws RepositoryException the repository exception
    */
   protected void listenFileLinks() throws RepositoryException {
-    ObservationManager observation = systemSession().getWorkspace().getObservationManager();
-    observation.addEventListener(new LinkTrashListener(),
-                                 Event.NODE_ADDED,
-                                 null,
-                                 false,
-                                 null,
-                                 new String[] { EXO_TRASHFOLDER },
-                                 false);
-    observation.addEventListener(new LinkRemoveListener(),
-                                 Event.PROPERTY_REMOVED,
-                                 null,
-                                 false,
-                                 null,
-                                 new String[] { ECD_CLOUDFILELINK },
-                                 false);
+    Session session = null;
+    try {
+      session = systemSession();
+      ObservationManager observation = session.getWorkspace().getObservationManager();
+      observation.addEventListener(new LinkTrashListener(),
+              Event.NODE_ADDED,
+              null,
+              false,
+              null,
+              new String[]{EXO_TRASHFOLDER},
+              false);
+      observation.addEventListener(new LinkRemoveListener(),
+              Event.PROPERTY_REMOVED,
+              null,
+              false,
+              null,
+              new String[]{ECD_CLOUDFILELINK},
+              false);
+    } finally {
+      if(session != null) {
+        session.logout();
+      }
+    }
   }
 
   /**
