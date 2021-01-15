@@ -204,31 +204,34 @@ public class DocumentServiceImpl implements DocumentService {
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     ManageableRepository manageRepo = repositoryService.getCurrentRepository();
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    try {
+      String ws = documentId.split(":/")[0];
+      String uuid = documentId.split(":/")[1];
 
-    String ws = documentId.split(":/")[0];
-    String uuid = documentId.split(":/")[1];
-
-    Node node = sessionProvider.getSession(ws, manageRepo).getNodeByUUID(uuid);
-    // Create Document
-    String title = node.hasProperty(EXO_TITLE_PROP) ? node.getProperty(EXO_TITLE_PROP).getString() : "";
-    String id = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : "";
-    String state = node.hasProperty(CURRENT_STATE_PROP) ? node.getProperty(CURRENT_STATE_PROP).getValue().getString() : "";
-    String author = node.hasProperty(EXO_OWNER_PROP) ? node.getProperty(EXO_OWNER_PROP).getString() : "";
-    Calendar lastModified = (node.hasNode(JCR_CONTENT) ? node.getNode(JCR_CONTENT)
-                                                             .getProperty(JCR_LAST_MODIFIED_PROP)
-                                                             .getValue()
-                                                             .getDate() : null);
-    Calendar dateCreated = (node.hasProperty(EXO_DATE_CREATED_PROP) ? node.getProperty(EXO_DATE_CREATED_PROP)
-                                                                          .getValue()
-                                                                          .getDate()
-                                                                   : null);
-    String lastEditor = (node.hasProperty(EXO_LAST_MODIFIER_PROP) ? node.getProperty(EXO_LAST_MODIFIER_PROP)
-                                                                        .getValue()
-                                                                        .getString()
-                                                                 : "");
-    Document doc = new Document(id, node.getName(), title, node.getPath(), 
-                                ws, state, author, lastEditor, lastModified, dateCreated);
-    return doc;
+      Node node = sessionProvider.getSession(ws, manageRepo).getNodeByUUID(uuid);
+      // Create Document
+      String title = node.hasProperty(EXO_TITLE_PROP) ? node.getProperty(EXO_TITLE_PROP).getString() : "";
+      String id = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : "";
+      String state = node.hasProperty(CURRENT_STATE_PROP) ? node.getProperty(CURRENT_STATE_PROP).getValue().getString() : "";
+      String author = node.hasProperty(EXO_OWNER_PROP) ? node.getProperty(EXO_OWNER_PROP).getString() : "";
+      Calendar lastModified = (node.hasNode(JCR_CONTENT) ? node.getNode(JCR_CONTENT)
+              .getProperty(JCR_LAST_MODIFIED_PROP)
+              .getValue()
+              .getDate() : null);
+      Calendar dateCreated = (node.hasProperty(EXO_DATE_CREATED_PROP) ? node.getProperty(EXO_DATE_CREATED_PROP)
+              .getValue()
+              .getDate()
+              : null);
+      String lastEditor = (node.hasProperty(EXO_LAST_MODIFIER_PROP) ? node.getProperty(EXO_LAST_MODIFIER_PROP)
+              .getValue()
+              .getString()
+              : "");
+      Document doc = new Document(id, node.getName(), title, node.getPath(),
+              ws, state, author, lastEditor, lastModified, dateCreated);
+      return doc;
+    } finally {
+      sessionProvider.close();
+    }
   }
 
   /**
@@ -237,8 +240,8 @@ public class DocumentServiceImpl implements DocumentService {
    */
   public String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
     Node rootNode = null;
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     try {
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
       //add symlink to user folder destination
@@ -249,6 +252,8 @@ public class DocumentServiceImpl implements DocumentService {
     } catch (Exception e) {
       LOG.error(e.getMessage(), e);
       return "";
+    } finally {
+      sessionProvider.close();
     }
   }
 
@@ -739,34 +744,45 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public String getCurrentDocumentProvider(String uuid, String workspace) throws RepositoryException {
-    Session systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
-    Node node = systemSession.getNodeByUUID(uuid);
-    if (node.isNodeType(EXO_SYMLINK)) {
-      node = linkManager.getTarget(node, true);
-    }
-    String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
-    String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
-                                                                       : null;
-    if (editorsRuntimeId.equals(currentRuntumeId)) {
-      return provider;
-    } else {
-      String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
-      WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
-        Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
-        Node tagetNode = session.getNodeByUUID(uuid);
-        if (tagetNode.isNodeType(EXO_SYMLINK)) {
-          tagetNode = linkManager.getTarget(tagetNode);
-        }
-        invokeWithLockToken(tagetNode, (document) -> {
-          if (document.canAddMixin(EXO_DOCUMENT)) {
-            document.addMixin(EXO_DOCUMENT);
+    Session systemSession = null;
+    try {
+      systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
+      Node node = systemSession.getNodeByUUID(uuid);
+      if (node.isNodeType(EXO_SYMLINK)) {
+        node = linkManager.getTarget(node, true);
+      }
+      String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
+      String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
+              : null;
+      if (editorsRuntimeId.equals(currentRuntumeId)) {
+        return provider;
+      } else {
+        String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
+        WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
+          try {
+            Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
+            Node tagetNode = session.getNodeByUUID(uuid);
+            if (tagetNode.isNodeType(EXO_SYMLINK)) {
+              tagetNode = linkManager.getTarget(tagetNode);
+            }
+            invokeWithLockToken(tagetNode, (document) -> {
+              if (document.canAddMixin(EXO_DOCUMENT)) {
+                document.addMixin(EXO_DOCUMENT);
+              }
+              document.setProperty(EXO_CURRENT_PROVIDER, (String) null);
+              document.setProperty(EXO_EDITORS_RUNTIME_ID, editorsRuntimeId);
+              document.save();
+            });
+          } finally {
+            sessionProvider.close();
           }
-          document.setProperty(EXO_CURRENT_PROVIDER, (String) null);
-          document.setProperty(EXO_EDITORS_RUNTIME_ID, editorsRuntimeId);
-          document.save();
         });
-      });
-      return null;
+        return null;
+      }
+    } finally {
+      if(systemSession != null) {
+        systemSession.logout();
+      }
     }
   }
 
@@ -868,13 +884,17 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
-    String favoriteFolder = null;
-    if (userPrivateNode.hasNode(NodetypeConstant.FAVORITE)) {
-      favoriteFolder = ((Node) userPrivateNode.getNode(NodetypeConstant.FAVORITE)).getPath();
+    try {
+      Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+      Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
+      String favoriteFolder = null;
+      if (userPrivateNode.hasNode(NodetypeConstant.FAVORITE)) {
+        favoriteFolder = ((Node) userPrivateNode.getNode(NodetypeConstant.FAVORITE)).getPath();
+      }
+      return getDocumentsByFolder(favoriteFolder, null, limit);
+    } finally {
+      sessionProvider.close();
     }
-    return getDocumentsByFolder(favoriteFolder, null, limit);
   }
 
   /**
@@ -883,14 +903,18 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public List<Document> getSharedDocuments(String userId, int limit) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
-    Node userDocumentsNode = (Node) userPrivateNode.getNode(NodetypeConstant.DOCUMENTS);
-    String sharedFolder = null;
-    if (userDocumentsNode.hasNode(NodetypeConstant.SHARED)) {
-      sharedFolder = ((Node) userDocumentsNode.getNode(NodetypeConstant.SHARED)).getPath();
+    try {
+      Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+      Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
+      Node userDocumentsNode = (Node) userPrivateNode.getNode(NodetypeConstant.DOCUMENTS);
+      String sharedFolder = null;
+      if (userDocumentsNode.hasNode(NodetypeConstant.SHARED)) {
+        sharedFolder = ((Node) userDocumentsNode.getNode(NodetypeConstant.SHARED)).getPath();
+      }
+      return getDocumentsByFolder(sharedFolder, null, limit);
+    } finally {
+      sessionProvider.close();
     }
-    return getDocumentsByFolder(sharedFolder, null, limit);
   }
   
   // TODO consider do we need this in this API level service
