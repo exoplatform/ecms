@@ -44,7 +44,11 @@ public class FileDlpConnector extends DlpServiceConnector {
   private static final String COLLABORATION_WS     = "collaboration";
 
   private static final String DLP_KEYWORDS_PARAM   = "dlp.keywords";
-  
+
+  private static final String TITLE                = "exo:title";
+
+  private static final String OWNER                = "exo:owner";
+
   private RepositoryService   repositoryService;
   
   private IndexingService indexingService;
@@ -134,11 +138,18 @@ public class FileDlpConnector extends DlpServiceConnector {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());
+    if (node.hasProperty(TITLE)) {
+      String title = node.getProperty(TITLE).getString();
+      dlpPositiveItemEntity.setTitle(title);
+    }
+    if (node.hasProperty(OWNER)) {
+      String author = node.getProperty(OWNER).getString();
+      dlpPositiveItemEntity.setAuthor(author);
+    }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
     // to be updated with detected keyword
     dlpPositiveItemEntity.setKeywords(dlpKeywords);
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
-
   }
 }
