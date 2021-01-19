@@ -134,7 +134,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
   }
 
-  private void saveDlpPositiveItem(Node node) throws RepositoryException {
+  private void saveDlpPositiveItem(Node node) throws Exception {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());
@@ -150,6 +150,8 @@ public class FileDlpConnector extends DlpServiceConnector {
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
     // to be updated with detected keyword
     dlpPositiveItemEntity.setKeywords(dlpKeywords);
+    dlpPositiveItemEntity.setDownloadUrl(Utils.getDownloadRestServiceLink(node));
+
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
 }
