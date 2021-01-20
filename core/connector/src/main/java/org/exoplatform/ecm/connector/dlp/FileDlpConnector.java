@@ -5,7 +5,9 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Workspace;
 
 import com.google.common.annotations.VisibleForTesting;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchContext;
+import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
 import org.exoplatform.commons.dlp.domain.DlpPositiveItemEntity;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
@@ -26,9 +28,9 @@ import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 import org.exoplatform.web.controller.router.RouterConfigException;
 
-import java.util.Collections;
-
-import java.util.Calendar;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Dlp Connector for Files
@@ -54,6 +56,8 @@ public class FileDlpConnector extends DlpServiceConnector {
   private IndexingService indexingService;
 
   private String              dlpKeywords;
+  
+  private Collection<SearchResult> searchResults;
   
   private FileSearchServiceConnector fileSearchServiceConnector;
   
@@ -98,9 +102,10 @@ public class FileDlpConnector extends DlpServiceConnector {
     SearchContext searchContext = null;
     try {
       searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
+      searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
       return dlpKeywords != null
-          && !dlpKeywords.isEmpty()
-          && fileSearchServiceConnector.dlpSearch(searchContext,dlpKeywords,entityId).size()>0;
+              && !dlpKeywords.isEmpty()
+              && searchResults.size() > 0;
     } catch (Exception ex) {
       LOGGER.error("Can not create SearchContext", ex);
     }
@@ -148,8 +153,26 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
-    // to be updated with detected keyword
-    dlpPositiveItemEntity.setKeywords(dlpKeywords);
+    dlpPositiveItemEntity.setKeywords(getDetectedKeywords());
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
+  }
+
+  private String getDetectedKeywords() {
+    List<String> excerptsList = new ArrayList<>();
+    for (SearchResult searchResult : searchResults) {
+      Map<String, List<String>> excerpts = searchResult.getExcerpts();
+      for (List<String> excerptValue : excerpts.values()) {
+        if (excerptValue != null && !excerptValue.isEmpty()) {
+          Pattern pattern = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
+          Matcher matcher = pattern.matcher(excerptValue.get(0).toString());
+          while (matcher.find()) {
+            if (!excerptsList.contains(matcher.group(1))) {
+              excerptsList.add(matcher.group(1));
+            }
+          }
+        }
+      }
+    }
+    return StringUtils.join(excerptsList, ", ");
   }
 }
