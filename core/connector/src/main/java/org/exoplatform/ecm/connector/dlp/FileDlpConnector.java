@@ -5,7 +5,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Workspace;
 
 import com.google.common.annotations.VisibleForTesting;
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
@@ -15,7 +14,6 @@ import org.exoplatform.commons.dlp.service.DlpPositiveItemService;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
-import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -26,11 +24,11 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
-import org.exoplatform.web.controller.router.RouterConfigException;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Dlp Connector for Files
@@ -50,6 +48,8 @@ public class FileDlpConnector extends DlpServiceConnector {
   private static final String TITLE                = "exo:title";
 
   private static final String OWNER                = "exo:owner";
+
+  private static final Pattern PATTERN             = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
 
   private RepositoryService   repositoryService;
   
@@ -158,21 +158,23 @@ public class FileDlpConnector extends DlpServiceConnector {
   }
 
   private String getDetectedKeywords(Collection<SearchResult> searchResults) {
-    List<String> excerptsList = new ArrayList<>();
-    for (SearchResult searchResult : searchResults) {
-      Map<String, List<String>> excerpts = searchResult.getExcerpts();
-      for (List<String> excerptValue : excerpts.values()) {
-        if (excerptValue != null && !excerptValue.isEmpty()) {
-          Pattern pattern = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
-          Matcher matcher = pattern.matcher(excerptValue.get(0).toString());
-          while (matcher.find()) {
-            if (!excerptsList.contains(matcher.group(1))) {
-              excerptsList.add(matcher.group(1));
-            }
-          }
+    List<String> detectedKeywords = new ArrayList<>();
+
+    Map<String, List<String>> excerpts = searchResults.iterator().next().getExcerpts();
+    List<String> excerptsList = excerpts
+            .values().stream()
+            .filter(excerptValue -> excerptValue != null && !excerptValue.isEmpty())
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
+
+    for (String e : excerptsList) {
+      Matcher matcher = PATTERN.matcher(e);
+      while (matcher.find()) {
+        if (!detectedKeywords.contains(matcher.group(1))) {
+          detectedKeywords.add(matcher.group(1));
         }
       }
     }
-    return StringUtils.join(excerptsList, ", ");
+    return detectedKeywords.stream().collect(Collectors.joining(", "));
   }
 }
