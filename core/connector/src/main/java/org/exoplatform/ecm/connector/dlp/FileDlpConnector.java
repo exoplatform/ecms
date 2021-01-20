@@ -153,14 +153,15 @@ public class FileDlpConnector extends DlpServiceConnector {
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
 
-  public void removePositiveItemNode(String nodeReference) {
+  @Override
+  public void removePositiveItem(String itemReference) {
     ExtendedSession session = null;
     try {
       session =
           (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
                                         .getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Node dlpSecurityNode = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
-      Node node = session.getNodeByIdentifier(nodeReference);
+      Node node = session.getNodeByIdentifier(itemReference);
 
       if (node != null && dlpSecurityNode != null) {
         node.remove();
