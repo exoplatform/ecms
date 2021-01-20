@@ -153,11 +153,11 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
-    dlpPositiveItemEntity.setKeywords(getDetectedKeywords());
+    dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults));
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
 
-  private String getDetectedKeywords() {
+  private String getDetectedKeywords(Collection<SearchResult> searchResults) {
     List<String> excerptsList = new ArrayList<>();
     for (SearchResult searchResult : searchResults) {
       Map<String, List<String>> excerpts = searchResult.getExcerpts();

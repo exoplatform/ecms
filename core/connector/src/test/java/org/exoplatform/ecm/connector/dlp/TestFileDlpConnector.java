@@ -3,6 +3,7 @@ package org.exoplatform.ecm.connector.dlp;
 import javax.jcr.Node;
 import javax.jcr.Workspace;
 
+import com.google.api.client.util.ArrayMap;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -26,9 +27,13 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -161,5 +166,58 @@ public class TestFileDlpConnector {
     
     // Then
     Mockito.verify(fileDlpConnectorSpy,Mockito.times(0)).treatItem(uuid);
+  }
+  
+  @Test
+  public void testGetDetectedKeywords() throws Exception {
+    // Given
+    InitParams initParams = new InitParams();
+    ValueParam dlpKeywordsParam = new ValueParam();
+    dlpKeywordsParam.setName("dlp.keywords");
+    dlpKeywordsParam.setValue("keyword1,keyword2");
+    initParams.addParameter(dlpKeywordsParam);
+    PropertiesParam constructorParams = new PropertiesParam();
+    constructorParams.setName("constructor.params");
+    constructorParams.setProperty("enable", "true");
+    constructorParams.setProperty("displayName", "file");
+    constructorParams.setProperty("type", "file");
+    initParams.addParameter(constructorParams);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService);
+    Method getDetectedKeywords = fileDlpConnector.getClass().getDeclaredMethod("getDetectedKeywords", Collection.class);
+    getDetectedKeywords.setAccessible(true);
+
+    // When
+    ArrayList<SearchResult> searchResults = new ArrayList<>();
+    searchResults.add(new SearchResult("url", "title", "excerpt", "detail", "imageUrl", 5, 4));
+
+    ArrayMap<String, List<String>> excerpts = new ArrayMap<>();
+    List<String> strings = new ArrayList<>();
+    strings.add("<em>one</em> <em>one</em>");
+
+    List<String> strings1 = new ArrayList<>();
+    strings1.add("<em>one</em> <em>two</em>");
+
+    excerpts.add("test", strings);
+    excerpts.add("test1", strings1);
+    searchResults.get(0).setExcerpts(excerpts);
+
+    // then
+    String result = (String) getDetectedKeywords.invoke(fileDlpConnector, searchResults);
+    assertEquals("one, two", result);
+    
+    // when
+    List<String> strings2 = new ArrayList<>();
+    strings2.add("<em>one</em> <em>two</em> <em>two</em> <em>three</em>");  
+    
+    List<String> strings3 = new ArrayList<>();
+    strings3.add("<em>three</em> <em>three</em> <em>three</em>");
+
+    excerpts.add("test", strings2);
+    excerpts.add("test1", strings3);
+    searchResults.get(0).setExcerpts(excerpts);
+
+    // then
+    String result1 = (String) getDetectedKeywords.invoke(fileDlpConnector, searchResults);
+    assertEquals("one, two, three", result1);
   }
 }
