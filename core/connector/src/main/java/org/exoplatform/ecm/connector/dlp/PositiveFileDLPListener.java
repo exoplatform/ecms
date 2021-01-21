@@ -17,7 +17,7 @@ public class PositiveFileDLPListener extends Listener<DlpPositiveItemService, St
 
   public void onEvent(Event<DlpPositiveItemService, String> event) throws Exception {
     DlpServiceConnector fileConnector = (DlpServiceConnector) dlpOperationProcessor.getConnectors().get(FileDlpConnector.TYPE);
-    fileConnector.removePositiveItemNode(event.getData());
+    fileConnector.removePositiveItem(event.getData());
   }
 
 }
