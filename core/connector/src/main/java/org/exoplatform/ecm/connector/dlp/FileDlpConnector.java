@@ -25,6 +25,7 @@ import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -153,7 +154,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
-    dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults));
+    dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults, dlpKeywords));
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
   
@@ -175,9 +176,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       LOGGER.error("Error while deleting dlp file item", e);
     }
   }
-  
-  private String getDetectedKeywords(Collection<SearchResult> searchResults) {
-  List<String> detectedKeywords = new ArrayList<>();
+
+  private String getDetectedKeywords(Collection<SearchResult> searchResults, String dlpKeywords) {
+    List<String> detectedKeywords = new ArrayList<>();
+    List<String> dlpKeywordsList = Arrays.asList(dlpKeywords.split(" "));
     searchResults.stream()
                  .map(searchResult -> searchResult.getExcerpts())
                  .map(stringListMap -> stringListMap.values())
@@ -187,8 +189,9 @@ public class FileDlpConnector extends DlpServiceConnector {
                  .forEach(s -> {
                    Matcher matcher = PATTERN.matcher(s);
                    while (matcher.find()) {
-                     if (!detectedKeywords.contains(matcher.group(1))) {
-                       detectedKeywords.add(matcher.group(1));
+                     String keyword = dlpKeywordsList.stream().filter(key -> matcher.group(1).contains(key)).findFirst().orElse(null);
+                     if (keyword != null && !detectedKeywords.contains(keyword)) {
+                       detectedKeywords.add(keyword);
                      }
                    }
                  });

@@ -183,10 +183,11 @@ public class TestFileDlpConnector {
     constructorParams.setProperty("type", "file");
     initParams.addParameter(constructorParams);
     fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService);
-    Method getDetectedKeywords = fileDlpConnector.getClass().getDeclaredMethod("getDetectedKeywords", Collection.class);
+    Method getDetectedKeywords = fileDlpConnector.getClass().getDeclaredMethod("getDetectedKeywords", Collection.class, String.class);
     getDetectedKeywords.setAccessible(true);
 
     // When
+    String dlpKeywords = "one two three";
     ArrayList<SearchResult> searchResults = new ArrayList<>();
     searchResults.add(new SearchResult("url", "title", "excerpt", "detail", "imageUrl", 5, 4));
 
@@ -202,22 +203,22 @@ public class TestFileDlpConnector {
     searchResults.get(0).setExcerpts(excerpts);
 
     // then
-    String result = (String) getDetectedKeywords.invoke(fileDlpConnector, searchResults);
+    String result = (String) getDetectedKeywords.invoke(fileDlpConnector, searchResults, dlpKeywords);
     assertEquals("one, two", result);
     
     // when
     List<String> strings2 = new ArrayList<>();
-    strings2.add("<em>one</em> <em>two</em> <em>two</em> <em>three</em>");  
+    strings2.add("<em>one</em> <em>two</em> <em>two</em> <em>thRee</em>");  
     
     List<String> strings3 = new ArrayList<>();
-    strings3.add("<em>three</em> <em>three</em> <em>three</em>");
+    strings3.add("<em>Three</em> <em>Three</em> <em>threes</em>");
 
     excerpts.add("test", strings2);
     excerpts.add("test1", strings3);
     searchResults.get(0).setExcerpts(excerpts);
 
     // then
-    String result1 = (String) getDetectedKeywords.invoke(fileDlpConnector, searchResults);
+    String result1 = (String) getDetectedKeywords.invoke(fileDlpConnector, searchResults, dlpKeywords);
     assertEquals("one, two, three", result1);
   }
 }
