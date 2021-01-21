@@ -160,21 +160,20 @@ public class FileDlpConnector extends DlpServiceConnector {
   private String getDetectedKeywords(Collection<SearchResult> searchResults) {
     List<String> detectedKeywords = new ArrayList<>();
 
-    Map<String, List<String>> excerpts = searchResults.iterator().next().getExcerpts();
-    List<String> excerptsList = excerpts
-            .values().stream()
-            .filter(excerptValue -> excerptValue != null && !excerptValue.isEmpty())
-            .flatMap(Collection::stream)
-            .collect(Collectors.toList());
-
-    for (String e : excerptsList) {
-      Matcher matcher = PATTERN.matcher(e);
-      while (matcher.find()) {
-        if (!detectedKeywords.contains(matcher.group(1))) {
-          detectedKeywords.add(matcher.group(1));
-        }
-      }
-    }
+    searchResults.stream()
+                 .map(searchResult -> searchResult.getExcerpts())
+                 .map(stringListMap -> stringListMap.values())
+                 .filter(excerptValue -> excerptValue != null && !excerptValue.isEmpty())
+                 .flatMap(lists -> lists.stream())
+                 .flatMap(strings -> strings.stream())
+                 .forEach(s -> {
+                   Matcher matcher = PATTERN.matcher(s);
+                   while (matcher.find()) {
+                     if (!detectedKeywords.contains(matcher.group(1))) {
+                       detectedKeywords.add(matcher.group(1));
+                     }
+                   }
+                 });
     return detectedKeywords.stream().collect(Collectors.joining(", "));
   }
 }
