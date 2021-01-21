@@ -156,10 +156,28 @@ public class FileDlpConnector extends DlpServiceConnector {
     dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults));
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
+  
+  @Override
+  public void removePositiveItem(String itemReference) {
+    ExtendedSession session = null;
+    try {
+      session =
+          (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
+                                        .getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      Node dlpSecurityNode = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
+      Node node = session.getNodeByIdentifier(itemReference);
 
+      if (node != null && dlpSecurityNode != null) {
+        node.remove();
+        dlpSecurityNode.save();
+      }
+    } catch (Exception e) {
+      LOGGER.error("Error while deleting dlp file item", e);
+    }
+  }
+  
   private String getDetectedKeywords(Collection<SearchResult> searchResults) {
-    List<String> detectedKeywords = new ArrayList<>();
-
+  List<String> detectedKeywords = new ArrayList<>();
     searchResults.stream()
                  .map(searchResult -> searchResult.getExcerpts())
                  .map(stringListMap -> stringListMap.values())
