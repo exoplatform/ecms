@@ -316,6 +316,12 @@
     <external-component-plugins>
         <target-component>org.exoplatform.services.listener.ListenerService</target-component>
         <component-plugin>
+            <name>dlp.listener.event.restore.item</name>
+            <set-method>addListener</set-method>
+            <type>org.exoplatform.ecm.connector.dlp.RestoreFileDLPListener</type>
+            <description>Restore Positive Dlp item Event Listener</description>
+        </component-plugin>
+        <component-plugin>
             <name>dlp.listener.event.delete.document</name>
             <set-method>addListener</set-method>
             <type>org.exoplatform.ecm.connector.dlp.PositiveFileDLPListener</type>

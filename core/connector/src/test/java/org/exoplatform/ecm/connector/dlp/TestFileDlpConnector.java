@@ -5,6 +5,7 @@ import javax.jcr.Workspace;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
+import org.exoplatform.commons.dlp.service.RestoredDlpItemService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -46,6 +47,9 @@ public class TestFileDlpConnector {
   
   @Mock
   private FileSearchServiceConnector fileSearchServiceConnector;
+
+  @Mock
+  private RestoredDlpItemService restoredDlpItemService;
   
   @Mock
   private QueueDlpService queueDlpService;
@@ -77,7 +81,7 @@ public class TestFileDlpConnector {
     results.add(new SearchResult("url","title","excerpt","detail", "imageUrl",5,4));
     when(fileSearchServiceConnector.dlpSearch(Mockito.any(),Mockito.eq("keyword1 keyword2"),Mockito.eq(uuid))).thenReturn(results);
   
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService,queueDlpService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService,queueDlpService,restoredDlpItemService);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
   
     Workspace workspace = mock(Workspace.class);
@@ -130,7 +134,7 @@ public class TestFileDlpConnector {
     // When
     when(fileSearchServiceConnector.isIndexed(Mockito.any(),Mockito.eq(uuid))).thenReturn(false);
     
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService,queueDlpService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService,queueDlpService,restoredDlpItemService);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
  
     Workspace workspace = mock(Workspace.class);
@@ -173,7 +177,7 @@ public class TestFileDlpConnector {
     constructorParams.setProperty("displayName", "file");
     constructorParams.setProperty("type", "file");
     initParams.addParameter(constructorParams);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService,restoredDlpItemService);
     Method getDetectedKeywords = fileDlpConnector.getClass().getDeclaredMethod("getDetectedKeywords", Collection.class, String.class);
     getDetectedKeywords.setAccessible(true);
 
