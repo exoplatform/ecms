@@ -57,8 +57,6 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private String              dlpKeywords;
   
-  private Collection<SearchResult> searchResults;
-  
   private FileSearchServiceConnector fileSearchServiceConnector;
   
   private QueueDlpService queueDlpService;
@@ -81,8 +79,8 @@ public class FileDlpConnector extends DlpServiceConnector {
   public boolean processItem(String entityId) {
     if (!isIndexedByEs(entityId)) {
       return false;
-    } else if (matchKeyword(entityId)) {
-      treatItem(entityId);
+    } else {
+      checkMatchKeywordAndTreatItem(entityId);
     }
     return true;
   }
@@ -98,22 +96,24 @@ public class FileDlpConnector extends DlpServiceConnector {
     return false;
   }
 
-  private boolean matchKeyword(String entityId) {
+  private void checkMatchKeywordAndTreatItem(String entityId) {
     SearchContext searchContext = null;
-    try {
-      searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
-      searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
-      return dlpKeywords != null
-              && !dlpKeywords.isEmpty()
-              && searchResults.size() > 0;
-    } catch (Exception ex) {
-      LOGGER.error("Can not create SearchContext", ex);
+    if (dlpKeywords != null
+        && !dlpKeywords.isEmpty()) {
+      try {
+        searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
+        Collection<SearchResult> searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
+        if (searchResults.size()>0) {
+          treatItem(entityId,searchResults);
+        }
+      } catch (Exception ex) {
+        LOGGER.error("Can not create SearchContext", ex);
+      }
     }
-    return false;
   }
   
   @VisibleForTesting
-  protected void treatItem(String entityId) {
+  protected void treatItem(String entityId, Collection<SearchResult> searchResults) {
     ExtendedSession session = null;
     try {
       long startTime = System.currentTimeMillis();
@@ -125,6 +125,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       if (!node.getPath().startsWith("/"+DLP_SECURITY_FOLDER+"/")) {
         workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
+        saveDlpPositiveItem(node,searchResults);
         long endTime = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
@@ -132,14 +133,13 @@ public class FileDlpConnector extends DlpServiceConnector {
                  DLP_POSITIVE_DETECTION,
                  fileName,
                  totalTime);
-        saveDlpPositiveItem(node);
       }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
     }
   }
 
-  private void saveDlpPositiveItem(Node node) throws RepositoryException {
+  private void saveDlpPositiveItem(Node node, Collection<SearchResult> searchResults) throws RepositoryException {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());

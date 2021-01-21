@@ -112,7 +112,7 @@ public class TestFileDlpConnector {
     fileDlpConnectorSpy.processItem(uuid);
   
     // Then
-    Mockito.verify(fileDlpConnectorSpy,Mockito.times(1)).treatItem(uuid);
+    Mockito.verify(fileDlpConnectorSpy,Mockito.times(1)).treatItem(Mockito.eq(uuid),Mockito.any());
     Mockito.verify(workspace, Mockito.times(1)).move(path,"/"+fileDlpConnector.DLP_SECURITY_FOLDER+"/"+nodeName);
     Mockito.verify(indexingService,Mockito.times(1)).unindex(fileDlpConnector.TYPE,uuid);
   }
@@ -165,7 +165,7 @@ public class TestFileDlpConnector {
     fileDlpConnectorSpy.processItem(uuid);
     
     // Then
-    Mockito.verify(fileDlpConnectorSpy,Mockito.times(0)).treatItem(uuid);
+    Mockito.verify(fileDlpConnectorSpy,Mockito.times(0)).treatItem(Mockito.eq(uuid), Mockito.any());
   }
   
   @Test
