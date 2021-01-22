@@ -25,7 +25,6 @@ import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
