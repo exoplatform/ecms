@@ -3,7 +3,6 @@ package org.exoplatform.ecm.connector.dlp;
 import javax.jcr.Node;
 import javax.jcr.Workspace;
 
-import com.google.api.client.util.ArrayMap;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -12,12 +11,10 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.junit.Test;
 
-import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.container.xml.ValueParam;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -28,10 +25,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -43,9 +37,6 @@ import static org.mockito.Mockito.when;
 public class TestFileDlpConnector {
 
   private FileDlpConnector     fileDlpConnector;
-  
-  @Mock
-  private ManageableRepository manageableRepository;
   
   @Mock
   private RepositoryService repositoryService;
@@ -191,15 +182,14 @@ public class TestFileDlpConnector {
     ArrayList<SearchResult> searchResults = new ArrayList<>();
     searchResults.add(new SearchResult("url", "title", "excerpt", "detail", "imageUrl", 5, 4));
 
-    ArrayMap<String, List<String>> excerpts = new ArrayMap<>();
+    Map<String, List<String>> excerpts = new HashMap<>();
     List<String> strings = new ArrayList<>();
     strings.add("<em>one</em> <em>one</em>");
 
     List<String> strings1 = new ArrayList<>();
     strings1.add("<em>one</em> <em>two</em>");
-
-    excerpts.add("test", strings);
-    excerpts.add("test1", strings1);
+    excerpts.put("test", strings);
+    excerpts.put("test1", strings1);
     searchResults.get(0).setExcerpts(excerpts);
 
     // then
@@ -213,8 +203,8 @@ public class TestFileDlpConnector {
     List<String> strings3 = new ArrayList<>();
     strings3.add("<em>Three</em> <em>Three</em> <em>threes</em>");
 
-    excerpts.add("test", strings2);
-    excerpts.add("test1", strings3);
+    excerpts.put("test", strings2);
+    excerpts.put("test1", strings3);
     searchResults.get(0).setExcerpts(excerpts);
 
     // then
