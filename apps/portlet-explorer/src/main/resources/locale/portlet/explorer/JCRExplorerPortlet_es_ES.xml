@@ -466,31 +466,31 @@
       <confirm-delete-folder-has-relations>¿Está seguro que desea eliminar la carpeta '{0}' y sus referencias?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>¿Está seguro que desea eliminar los elementos {0} seleccionado?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-generic>¿Seguro que quieres eliminar los {0} elementos seleccionado?</confirm-delete-multi-nodes-generic>  
       <confirm-delete-multi-nodes-file>¿Está seguro que desea eliminar los {0} archivos seleccionados?</confirm-delete-multi-nodes-file>
       <confirm-delete-multi-nodes-folder>¿Está seguro que desea eliminar las {0} carpetas seleccionada y todas las subcarpetas?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>¿Está seguro que desea eliminar los {0} artículos y archivos seleccionados?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>¿Está seguro que desea eliminar los {0} elementos, carpetas y todas las subcarpetas seleccionadas?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file>¿Seguro que quieres eliminar los {0} artículos y archivos seleccionados?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>¿Seguro que quieres eliminar los {0} elementos, carpetas y todas las subcarpetas seleccionadas?</confirm-delete-multi-nodes-generic-and-folder>
       <confirm-delete-multi-nodes-file-and-folder>¿Está seguro que desea eliminar los {0} archivos, carpetas y todas las subcarpetas seleccionadas?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>¿Está seguro que desea eliminar los elementos {0} seleccionados, archivos, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>¿Seguro que quieres eliminar los {0} elementos, archivos, carpetas y todas las subcarpetas seleccionadas?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>¿Está seguro que desea eliminar definitivamente los{0} artículos seleccionados?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-generic-permanently>¿Seguro que quieres eliminar definitivamente los {0} artículos seleccionados?</confirm-delete-multi-nodes-generic-permanently>  
       <confirm-delete-multi-nodes-file-permanently>¿Está seguro que desea eliminar definitivamente los{0} expedientes seleccionados?</confirm-delete-multi-nodes-file-permanently>
       <confirm-delete-multi-nodes-folder-permanently>¿Está seguro que desea eliminar definitivamente las{0} carpetas  seleccionadas y todas las subcarpetas?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>¿Está seguro que desea eliminar definitivamente los {0} artículos   seleccionados y expedientes?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>¿Está seguro que desea eliminar definitivamente los {0} artículos   seleccionados, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>¿Seguro que quieres eliminar definitivamente los {0} artículos y expedientes seleccionados?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>¿Seguro que quieres eliminar definitivamente los {0} artículos, carpetas y todas las subcarpetas seleccionadas?</confirm-delete-multi-nodes-generic-and-folder-permanently>
       <confirm-delete-multi-nodes-file-and-folder-permanently>¿Está seguro que desea eliminar definitivamente los {0} expedientes   seleccionados, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>¿Está seguro que desea eliminar definitivamente los {0} artículos   seleccionados, expedientes, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>¿Seguro que quieres eliminar definitivamente los {0} artículos, expedientes, carpetas y todas las subcarpetas seleccionadas?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>¿Está seguro que desea eliminar los elementos {0} seleccionados y sus referencias?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-generic-have-relations>¿Seguro que quieres eliminar los {0} elementos seleccionados y sus referencias?</confirm-delete-multi-nodes-generic-have-relations>  
       <confirm-delete-multi-nodes-file-have-relations>¿Está seguro que desea eliminar los archivos {0} seleccionados y sus referencias?</confirm-delete-multi-nodes-file-have-relations>
       <confirm-delete-multi-nodes-folder-have-relations>¿Está seguro que desea eliminar las carpetas {0} seleccionadas, todas las subcarpetas y sus referencias?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>¿Está seguro que desea eliminar los elementos {0} seleccionados y sus referencias?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>¿Está seguro que desea eliminar los elementos {0} seleccionados, sus referencias, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>¿Seguro que quieres eliminar los {0} elementos y archivos seleccionados y sus referencias?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>¿Seguro que quieres eliminar los {0} elementos seleccionados, sus referencias, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
       <confirm-delete-multi-nodes-file-and-folder-have-relations>¿Está seguro que desea eliminar los archivos {0} seleccionados, sus referencias, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>¿Está seguro que desea eliminar los elementos {0} seleccionados, sus referencias, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>¿Seguro que quieres eliminar los {0} elementos y archivos seleccionados, sus referencias, carpetas y todas las subcarpetas?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
       <feedback-delete>'{0}' fue eliminado con éxito.</feedback-delete>
       <feedback-delete-multi>{0} artículos fueron eliminado con éxito.</feedback-delete-multi>      
