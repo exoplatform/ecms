@@ -22,6 +22,9 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 import org.exoplatform.web.controller.router.RouterConfigException;
@@ -145,6 +148,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     if (node.hasProperty(OWNER)) {
       String author = node.getProperty(OWNER).getString();
       dlpPositiveItemEntity.setAuthor(author);
+      dlpPositiveItemEntity.setIsExternal(checkExternal(author));
     }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
@@ -170,5 +174,11 @@ public class FileDlpConnector extends DlpServiceConnector {
     } catch (Exception e) {
       LOGGER.error("Error while deleting dlp file item", e);
     }
+  }
+
+  private boolean checkExternal(String userId) {
+    IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
+    Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
+    return identity.getProfile().getProperty("external") != null &&  identity.getProfile().getProperty("external").equals("true");
   }
 }
