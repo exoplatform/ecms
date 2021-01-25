@@ -7,6 +7,10 @@ import javax.jcr.Workspace;
 import com.google.common.annotations.VisibleForTesting;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.commons.api.settings.SettingService;
+import org.exoplatform.commons.api.settings.SettingValue;
+import org.exoplatform.commons.api.settings.data.Context;
+import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
 import org.exoplatform.commons.dlp.domain.DlpPositiveItemEntity;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
@@ -101,6 +105,11 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private void checkMatchKeywordAndTreatItem(String entityId) {
     SearchContext searchContext = null;
+    SettingService settingService = CommonsUtils.getService(SettingService.class);
+    SettingValue<?> settingValue = settingService.get(Context.GLOBAL, Scope.GLOBAL.id("DlpKeywords"), "exo:dlpKeywords");
+    if (settingValue != null) {
+      dlpKeywords = settingValue.getValue().toString().replace(",", " ");
+    }
     if (dlpKeywords != null
         && !dlpKeywords.isEmpty()) {
       try {
@@ -205,16 +214,16 @@ public class FileDlpConnector extends DlpServiceConnector {
     List<String> detectedKeywords = new ArrayList<>();
     List<String> dlpKeywordsList = Arrays.asList(dlpKeywords.split(" "));
     searchResults.stream()
-                 .map(searchResult -> searchResult.getExcerpts())
-                 .map(stringListMap -> stringListMap.values())
-                 .filter(excerptValue -> excerptValue != null && !excerptValue.isEmpty())
-                 .flatMap(lists -> lists.stream())
-                 .flatMap(strings -> strings.stream())
+                 .map(SearchResult::getExcerpts)
+                 .map(Map::values)
+                 .filter(excerptValue -> !excerptValue.isEmpty())
+                 .flatMap(Collection::stream)
+                 .flatMap(Collection::stream)
                  .forEach(s -> {
                    Matcher matcher = PATTERN.matcher(s);
                    while (matcher.find()) {
                      String keyword = dlpKeywordsList.stream().filter(key -> matcher.group(1).contains(key)).findFirst().orElse(null);
-                     if (keyword != null && !detectedKeywords.contains(keyword)) {
+                     if (keyword != null && !keyword.isEmpty() && !detectedKeywords.contains(keyword)) {
                        detectedKeywords.add(keyword);
                      }
                    }
