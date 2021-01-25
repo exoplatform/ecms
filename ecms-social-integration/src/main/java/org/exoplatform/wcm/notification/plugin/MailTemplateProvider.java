@@ -30,8 +30,8 @@ import org.exoplatform.social.notification.Utils;
  * Created by exo on 9/9/16.
  */
 @TemplateConfigs(templates = {
-    @TemplateConfig(pluginId = ShareFileToUserPlugin.ID, template = "war:/groovy/ecm/social-integration/plugin/notification/ShareDocumentToUser.gtmpl"),
-    @TemplateConfig(pluginId = ShareFileToSpacePlugin.ID, template = "war:/groovy/ecm/social-integration/plugin/notification/ShareDocumentToSpace.gtmpl")
+    @TemplateConfig(pluginId = ShareFileToUserPlugin.ID, template = "war:/wcm-notification/templates/notification/ShareDocumentToUser.gtmpl"),
+    @TemplateConfig(pluginId = ShareFileToSpacePlugin.ID, template = "war:/wcm-notification/templates/notification/ShareDocumentToSpace.gtmpl")
 })
 
 public class MailTemplateProvider extends TemplateProvider {
