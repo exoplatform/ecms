@@ -39,7 +39,6 @@ import java.util.ResourceBundle;
  */
 
 @Path("/office/")
-@RolesAllowed("users")
 public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
   private Log log = ExoLogger.getExoLogger(OpenInOfficeConnector.class);
@@ -74,6 +73,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
    * @throws Exception
    */
   @GET
+  @RolesAllowed("users")
   @Path("/updateDocumentTitle")
   public Response updateDocumentTitle(
           @Context Request request,
@@ -186,6 +186,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
    * @throws Exception
    */
   @GET
+  @RolesAllowed("users")
   @Path("/checkout")
   public Response checkout(@Context Request request,
                            @QueryParam("filePath") String filePath,
@@ -216,6 +217,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
    */
   @GET
   @Path("/{linkFilePath}/")
+  @RolesAllowed("users")
   @Produces("application/internet-shortcut")
   public Response createShortcut(@Context HttpServletRequest httpServletRequest,
                            @PathParam("linkFilePath") String linkFilePath,
