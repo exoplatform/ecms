@@ -624,7 +624,7 @@
 			}			
 			for(var i = 0; i < list.length; i++) {      
 				var url 			= list[i].getAttribute("url");
-				url = encodeURIComponent(url);
+				url = encodeURI(url);
 				var path 			= list[i].getAttribute("path");
 				var nodeType	= list[i].getAttribute("nodeType");
 				var nodeTypeIcon = nodeType.replace(":", "_") + "48x48Icon default16x16Icon";
@@ -633,20 +633,21 @@
 				var size = 	list[i].getAttribute("size");
 				if(size == 0) size = "";
 				else size += '&nbsp;kb';
-	      
-				if(viewType=="list") {	        
+
+				if(viewType=="list") {
 					var clazz = 'OddItem';
 					var tblRWS  = gj(rightWS).find("table")[0];
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 					var newRow = tblRWS.tBodies[0].insertRow(i);
 					newRow.className = clazz;
-					gj(newRow.insertCell(0)).html('<a class="Item" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
+					gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
 					gj(newRow.insertCell(1)).html('<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>');
 					gj(newRow.insertCell(2)).html('<div class="Item">'+ size +'</div>');
-				} else {				  
+				} else {
+
 					var randomId = Math.random();
-					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;        
-					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'"><div class="nodeLabel"><div class="thumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="actionIconLabel" style="width: auto;"><a class="actionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
+					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;
+					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'"><div class="nodeLabel"><div class="thumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="actionIconLabel" style="width: auto;"><a class="actionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
 				}
 				var isVersion = list[i].getAttribute("isVersioned");
 				var isVersionSupport = list[i].getAttribute("isVersionSupport");
@@ -656,34 +657,34 @@
 			if(container) {
 				gj(container).html(strViewContent);
 				container.style.display = "";
-			}			
-		}	
+			}
+		}
 		if(viewType=="list") {
 			if(i > 9) {
-				var numberRecords = 9;		
-				var viewType = eXo.ecm.ECS.viewType; 
+				var numberRecords = 9;
+				var viewType = eXo.ecm.ECS.viewType;
 				eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-				eXo.ecm.Pager.init(); 
+				eXo.ecm.Pager.init();
 				eXo.ecm.Pager.showPageNav('pageNavPosition');
-				eXo.ecm.Pager.showPage(1);	
+				eXo.ecm.Pager.showPage(1);
 			} else {
 				gj("#pageNavPosition").html("");
 			}
 		}
 		else {
 			if(i > 8) {
-				var numberRecords = 8;		
-				var viewType = eXo.ecm.ECS.viewType; 
+				var numberRecords = 8;
+				var viewType = eXo.ecm.ECS.viewType;
 				eXo.ecm.Pager = new Pager("ActionIconsContainer", numberRecords);
-				eXo.ecm.Pager.init(); 
+				eXo.ecm.Pager.init();
 				eXo.ecm.Pager.showPageNav('pageNavPosition');
-				eXo.ecm.Pager.showPage(1);	
+				eXo.ecm.Pager.showPage(1);
 			} else {
 				gj("#pageNavPosition").html("");
 			}
-		}	
+		}
 	};
-	
+
 	EcmContentSelector.prototype.updateHTML = function(viewType) {
 	  var strViewPresent = "";
 		if(viewType=="list") {
@@ -696,14 +697,14 @@
 		} else {
 			strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
 		}
-		var rightWS = document.getElementById('RightWorkspace');  
+		var rightWS = document.getElementById('RightWorkspace');
 	  if(rightWS) {
 			gj(rightWS).html("");
 			strViewPresent += "<div class=\"PageIterator\" id=\"pageNavPosition\"></div><div style=\"clear: left;\"><span></span></div>";
 			gj(rightWS).html(strViewPresent);
 		}
 	}
-	
+
 	EcmContentSelector.prototype.listFolders = function(list) {
 		var rightWS = document.getElementById('RightWorkspace');
 		var tblRWS  = gj(rightWS).find("table")[0];
@@ -712,7 +713,7 @@
 			for(var i = 0; i < rowsRWS.length; i++) {
 				if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
 			}
-		} 
+		}
 		if(!list || list.length <= 0) {
 			var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
 			gj(tdNoContent).html("There is no content");
@@ -732,20 +733,20 @@
 			if (!label) label = node;
 			var newRow = tblRWS.tBodies[0].insertRow(i);
 			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+'<i class="'+nodeTypeCssClass+'"></i>&nbsp;'+decodeURIComponent(label)+'</a>');
-					
+
 		}
-		
+
 		if(i > 9) {
 			var numberRecords = 9;
 			eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-			eXo.ecm.Pager.init(); 
+			eXo.ecm.Pager.init();
 			eXo.ecm.Pager.showPageNav('pageNavPosition');
-			eXo.ecm.Pager.showPage(1);	
+			eXo.ecm.Pager.showPage(1);
 		} else {
 			gj("#pageNavPosition").html("");
 		}
 	};
-	
+
 	EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var rightWS = document.getElementById('RightWorkspace');
 		var tblRWS  = gj(rightWS).find("table")[0];
@@ -754,7 +755,7 @@
 			for(var i = 0; i < rowsRWS.length; i++) {
 				if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
 			}
-		} 
+		}
 		if(!list || list.length <= 0) {
 			var rowTmp = tblRWS.tBodies[0].insertRow(0);
 			var tdNoContent = rowTmp.insertCell(0);
@@ -776,29 +777,29 @@
 			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+'<i class="'+clazzItem+'"></i>&nbsp;'+decodeURIComponent(node)+'</a>');
 
 		}
-		
+
 		if(i > 9) {
 			var numberRecords = 9;
 	    eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-			eXo.ecm.Pager.init(); 
+			eXo.ecm.Pager.init();
 			eXo.ecm.Pager.showPageNav('pageNavPosition');
-			eXo.ecm.Pager.showPage(1);	
+			eXo.ecm.Pager.showPage(1);
 		} else {
 			gj("#pageNavPosition").html("");
 		}
 	};
-	
+
 	EcmContentSelector.prototype.getClazzIcon = function(nodeType) {
 		var strClassIcon = '';
 		if(!nodeType) {
-			strClassIcon = "uiIcon16x16 uiIcon16x16FilePage";	
-			return strClassIcon;	
+			strClassIcon = "uiIcon16x16 uiIcon16x16FilePage";
+			return strClassIcon;
 		}
 		strClassIcon = "uiIcon16x16 uiIcon16x16" + nodeType.replace("/", "").replace(":", "_");
 		return strClassIcon;
-		
+
 	};
-	
+
 	function Pager(objTable, itemsPerPage) {
 		  this.tableName = objTable;
 	    this.itemsPerPage = itemsPerPage;
@@ -806,14 +807,14 @@
 	    this.pages = 0;
 	    this.inited = false;
 	}
-	
+
 	Pager.prototype.setHeightRightWS = function(list) {
 		var leftWorkSpace = document.getElementById("LeftWorkspace");
 		var rightWorkSpace = document.getElementById("RightWorkspace");
 		if(leftWorkSpace) rightWorkSpace.style.height = leftWorkSpace.offsetHeight - 30 + "px";
 	};
-	
-	Pager.prototype.init = function() { 
+
+	Pager.prototype.init = function() {
 		this.setHeightRightWS();
 		var len = 0;
 	  if(eXo.ecm.ECS.viewType=="list") {
@@ -833,17 +834,17 @@
 				len = rows.length;
 			}
 		} else {
-			var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-	    icons =  gj(icon_container).find("div.actionIconBox");    
-	    len = icons.length;		
+			var icon_container = document.getElementById(eXo.ecm.Pager.tableName);
+	    icons =  gj(icon_container).find("div.actionIconBox");
+	    len = icons.length;
 		}
-	  var records = len; 
+	  var records = len;
 	  this.pages = Math.ceil(records / eXo.ecm.Pager.itemsPerPage);
 		if(this.pages < 0) this.page =1;
 	    this.inited = true;
 	};
-	
-	Pager.prototype.showRecords = function(from, to) {  
+
+	Pager.prototype.showRecords = function(from, to) {
 	  if(eXo.ecm.ECS.viewType=="list") {
 			var rows = null;
 			var table = document.getElementById(eXo.ecm.Pager.tableName);
@@ -856,7 +857,7 @@
 			} else {
 				rows = gj(tHead).children("tr");
 			}
-			len = rows.length - 1;		  
+			len = rows.length - 1;
 			for (var i = 0; i < len + 1  ; i++) {  //starts from 1 to skip table header row
 				if (i < from - 1 || i > to - 1 )  {
 					  rows[i].style.display = 'none';
@@ -865,10 +866,10 @@
 				}
 			}
 		} else {
-			var icons = null;   
+			var icons = null;
 	    var icon_container = document.getElementById(eXo.ecm.Pager.tableName);
-	    icons =  gj(icon_container).find("div.actionIconBox");    
-	    len = icons.length;		
+	    icons =  gj(icon_container).find("div.actionIconBox");
+	    len = icons.length;
 			for (var i = 0; i < len; i++) {
 				if (i < from-1 || i > to-1)  {   //from starts at 1 and icons table starts at 0. Need to shift 1
 					  icons[i].style.display = 'none';
@@ -877,13 +878,13 @@
 					  var thumnailImg = document.getElementById("thumbnail"+icons[i].id);
 					  if(thumnailImg.src || thumnailImg.src == '') {
 						  thumnailImg.src = thumnailImg.longDesc;
-					  }					  
+					  }
 				}
-			}    
+			}
 		}
 		if(len <= 8) { gj("#pageNavPosition").html(""); return;}
 	};
-	
+
 	Pager.prototype.showPage = function(pageNumber) {
 		if (! this.inited) {
 			alert("not inited");
@@ -894,7 +895,7 @@
 	    var pageNavPosition = gj("#pageNavPosition");
 	    var prev = gj(pageNavPosition).find('.Previous:first')[0];
 	    var next = gj(pageNavPosition).find('.Next:first')[0];
-	    if(pageNumber == 1) { 
+	    if(pageNumber == 1) {
 			prev.parentNode.className = 'disabled';
 			next.parentNode.className = '';
 		} else if(pageNumber == this.pages) {
@@ -909,28 +910,28 @@
 			var oldPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
 			if(oldPageAnchor) oldPageAnchor.className = '';
 		}
-	    
-	    
+
+
 	    if(document.getElementById('pg'+eXo.ecm.Pager.currentPage)) {
 			var newPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
 			if(newPageAnchor)  newPageAnchor.className = 'active';
 		}
-	    
+
 	    var from = (pageNumber - 1) * eXo.ecm.Pager.itemsPerPage + 1;
 	    var to = from +  eXo.ecm.Pager.itemsPerPage - 1;
 	    eXo.ecm.Pager.showRecords(from, to);
-	     
-	    
+
+
 	};
-	
+
 	Pager.prototype.previousPage = function() {
 		if (this.currentPage > 1)  eXo.ecm.Pager.showPage(this.currentPage - 1);
 	};
-	
+
 	Pager.prototype.nextPage = function() {
 		if (this.currentPage < this.pages) eXo.ecm.Pager.showPage(this.currentPage + 1);
 	};
-	
+
 	Pager.prototype.showPageNav = function(positionId) {
 		if (! this.inited) {
 			alert("not inited");
@@ -938,11 +939,11 @@
 		}
 		var element = document.getElementById(positionId);
 		var pagerHtml = '';
-		
+
 		var min = 1;
 	    var max = this.pages;
 	    var dot1 = dot2 = -1;
-	    
+
 	    if (this.pages > 5) {
 			if (this.currentPage < 4) {
 			   max = 3;
@@ -955,35 +956,35 @@
 			   max = this.currentPage + 1;
 			   dot1 = 2;
 			   dot2 = this.pages - 1;
-			}		
+			}
 		}
-		
-		pagerHtml += '<div class="pagination uiPageIterator clearfix"><ul class="pull-right">';		
+
+		pagerHtml += '<div class="pagination uiPageIterator clearfix"><ul class="pull-right">';
 		pagerHtml += '<li><a onclick="eXo.ecm.Pager.previousPage();" class="Previous Page" rel="tooltip" data-placement="bottom" data-original-title="Previous Page"><i class="uiIconPrevArrow"></i></a></li>';
-		
-		for(var i = 1 ; i <= this.pages; i++) { 		
-			if (i == 1 && min > 1) 
+
+		for(var i = 1 ; i <= this.pages; i++) {
+			if (i == 1 && min > 1)
 			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + i + ');" id="pg' + i + '" >' + i + '</a></li>';
 			else if (i == min) {
 			   for (j = min; j <= max; j++) {
-				 pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + j + ');" id="pg' + j + '" >' + j + '</a></li>';      
+				 pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + j + ');" id="pg' + j + '" >' + j + '</a></li>';
 			   }
 			} else if (i == dot1 || i == dot2) {
-					pagerHtml += '<li class="disabled"><a href="#">...</a></li>';	   
-			} else if (i == this.pages && max < this.pages) 
-			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + this.pages + ');" id="pg' + this.pages + '">' + this.pages + '</a></li>';      
+					pagerHtml += '<li class="disabled"><a href="#">...</a></li>';
+			} else if (i == this.pages && max < this.pages)
+			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + this.pages + ');" id="pg' + this.pages + '">' + this.pages + '</a></li>';
 	    }
-		
-		
-		pagerHtml += '<li><a onclick="eXo.ecm.Pager.nextPage();" class="Next Page" rel="tooltip" data-placement="bottom" data-original-title="Next Page"><i class="uiIconNextArrow"></i></a></li>';		
+
+
+		pagerHtml += '<li><a onclick="eXo.ecm.Pager.nextPage();" class="Next Page" rel="tooltip" data-placement="bottom" data-original-title="Next Page"><i class="uiIconNextArrow"></i></a></li>';
 		pagerHtml += '</ul><p class="pull-right"><span>Total pages:</span> <span class="pagesTotalNumber">'+this.pages+'</span></p></div>';
-		
-			 
-		          
+
+
+
 	    gj(element).html(pagerHtml);
 	};
-	
-	EcmContentSelector.prototype.insertContent = function(objNode) {  
+
+	EcmContentSelector.prototype.insertContent = function(objNode) {
 		if(!objNode) return;
 		var rws = document.getElementById("RightWorkspace");
 		if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
@@ -996,7 +997,7 @@
 			  temp = temp.replace("%27","%2527");
 			  index = temp.indexOf("%27");
 			}
-			action = temp;			
+			action = temp;
 			eval(action);
 		} else {
 			var hostName = eXo.ecm.ECS.hostName;
@@ -1009,28 +1010,28 @@
 		 		index = temp.indexOf("%27");
 		  }
 	    url = encodeURIComponent(temp);
-	    url = decodeURIComponent(url);    
+	    url = decodeURIComponent(url);
 	 	  var name 	= encodeURIComponent(objNode.title);
 	 	  if (name == "") name = objNode.innerHTML;
 	 	  name = decodeURIComponent(name);
-			var strHTML = '';	
-			var editor = eXo.ecm.ECS.currentEditor ;    
+			var strHTML = '';
+			var editor = eXo.ecm.ECS.currentEditor ;
 	    if(eXo.ecm.ECS.components=="") {
-				if(window.opener.document.getElementById(eXp.getParameterValueByName("browserType"))){		
-					strHTML += url;		
+				if(window.opener.document.getElementById(eXp.getParameterValueByName("browserType"))){
+					strHTML += url;
 					window.opener.document.getElementById(eXp.getParameterValueByName("browserType")).value=strHTML;
 				} else {
 					if(nodeType.indexOf("image") >=0) {
 						name = escape(name);
 						strHTML += "<img src=\""+url+"\" name=\""+name+"\" alt=\""+name+"\"/>";
 					} else {
-						strHTML += "<a href=\"" + url+"\">"+name+"</a>";		
-					}		    		    
+						strHTML += "<a href=\"" + url+"\">"+name+"</a>";
+					}
 					editor.insertHtml(strHTML);
 					localStorage.setItem(eXo.ecm.ECS.rememberedLocation, eXo.ecm.ECS.currentFolder);
 					localStorage.setItem(eXo.ecm.ECS.rememberedDriveName, eXo.ecm.ECS.driverName);
 					window.close();
-					editor.OnAfterSetHTML = window.close();				
+					editor.OnAfterSetHTML = window.close();
 				}
      } else {
        var newImg = new Image();
@@ -1076,7 +1077,7 @@
      }
    }
   };
-	
+
 	EcmContentSelector.prototype.insertMultiContent = function(operation, currentpath,operationType,dpath) {
 		var rws = document.getElementById("RightWorkspace");
 		var tblContent = document.getElementById("ListFilesContent");
@@ -1104,25 +1105,25 @@
 			if (actionSaveTemp) {
 				if(dpath!=null){
 					currentPath=dpath;
-					additionParam = "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath)  + '&oper=' + oper + '&path=' + dpath 
+					additionParam = "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath)  + '&oper=' + oper + '&path=' + dpath
 				}
 				else
 			  additionParam = "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath)  + '&oper=' + oper + '&path=' + path
 		  	  action = eXo.ecm.WCMUtils.addParamIntoAjaxEventRequest(actionSaveTemp, additionParam);
-			}else return;      
+			}else return;
 		}else if(action){
 			action = action.substring(0, action.length - 2);
 			action += '&objectId=' + "" + '\')';
-		} else return;	
-		eval(action);  
+		} else return;
+		eval(action);
 	};
-	
-	EcmContentSelector.prototype.addFile2ListContent = function(objNode) {  
+
+	EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 		var tblListFilesContent = document.getElementById("ListFilesContent");
 		var rowsContent = gj(tblListFilesContent).find("tr");
 		var tdNoContent = gj(tblListFilesContent).find("td.noContent:first")[0];
 		if(tdNoContent) tblListFilesContent.deleteRow(tdNoContent.parentNode.rowIndex);
-		var url = objNode.getAttribute("url");  
+		var url = objNode.getAttribute("url");
 		var nodeType	= objNode.getAttribute("nodeType");
 		var path = objNode.getAttribute("path");
 		var title = objNode.getAttribute("title");
@@ -1145,10 +1146,10 @@
 		actionCell.className = "center";
 		this.insertMultiContent("SaveTemporary", path,"add",null);
 	};
-	
+
 	EcmContentSelector.prototype.addFileSearchListSearch = function() {
 	};
-	
+
 	EcmContentSelector.prototype.loadListContent = function(strArray, strTargetArray) {
 		if(!strArray) return;
 		if (!strTargetArray) return;
@@ -1173,23 +1174,23 @@
 			}
 		}
 	};
-	
+
 	EcmContentSelector.prototype.removeContent = function(objNode) {
 		var confirmDelete = confirm(this.deleteConfirmationMsg);
 		if (confirmDelete != true) {
 			return;
 		}
-		var tblListFilesContent = document.getElementById("ListFilesContent"); 
+		var tblListFilesContent = document.getElementById("ListFilesContent");
 		var objRow = gj(objNode).parents("tr:first")[0];
-		tblListFilesContent.deleteRow(objRow.rowIndex);	
+		tblListFilesContent.deleteRow(objRow.rowIndex);
 		eXo.ecm.ECS.pathContent = false;
 		var aItem = objRow.getElementsByTagName('a')[0];
 		var dpath =  aItem.getAttribute("path");
 		this.insertMultiContent("SaveTemporary", this.initPathExpanded,"delete",dpath);
 	}
-	
+
 	EcmContentSelector.prototype.changeFilter = function() {
-		var rightWS = document.getElementById('RightWorkspace');	
+		var rightWS = document.getElementById('RightWorkspace');
 	  if(eXo.ecm.ECS.viewType=="list") {
 			var tblRWS	= gj(rightWS).find("table")[0];
 			var rowsRWS = gj(tblRWS).find("tr");
@@ -1197,18 +1198,18 @@
 				for(var i = 0; i < rowsRWS.length; i++) {
 					if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
 				}
-			} 
+			}
 		} else {
 			var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 				gj(container).html("");
 		}
-		
-		
+
+
 		if(eXo.ecm.ECS.currentNode)	 eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
 	};
-	
-	EcmContentSelector.prototype.changeViewType = function(viewType) {  
-	  eXo.ecm.ECS.viewType = viewType;  
+
+	EcmContentSelector.prototype.changeViewType = function(viewType) {
+	  eXo.ecm.ECS.viewType = viewType;
 	  if(viewType=="list") {
 		  gj("#enableListViewBtn").attr('class', 'btn active'); gj('#enableThumbnailViewBtn').attr('class', 'btn');
 	  }
@@ -1216,7 +1217,7 @@
 		  gj("#enableThumbnailViewBtn").attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');
 	  }
 
-	  eXo.ecm.ECS.switchView = true;	   
+	  eXo.ecm.ECS.switchView = true;
 		if(eXo.ecm.ECS.currentNode) eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
 	  else {
 			var strViewPresent = "";
@@ -1229,7 +1230,7 @@
 			} else {
 				strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 			}
-			var rightWS = document.getElementById('RightWorkspace');  
+			var rightWS = document.getElementById('RightWorkspace');
 			if(rightWS) {
 				gj(rightWS).html("");
 				strViewPresent += "<div class=\"PageIterator\" id=\"pageNavPosition\"></div><div style=\"clear: left;\"><span></span></div>";
@@ -1241,11 +1242,11 @@
 		var action = filter.getAttribute("action");
 		if(action) {
 			action = action.substring(0, action.length - 2);
-			action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';    
+			action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';
 			eval(action);
-		}	
+		}
 	};
-	
+
 	EcmContentSelector.prototype.generateIdDriver = function(objNode) {
 		if(!objNode) return;
 		var id = '';
@@ -1256,7 +1257,7 @@
 		}
 		return id;
 	};
-	
+
 	EcmContentSelector.prototype.generateIdNodes = function(objNode, idNode) {
 		if(!objNode && !idNode) return;
 		var id = '';
@@ -1267,11 +1268,11 @@
 		}
 		return id;
 	};
-	
+
 	EcmContentSelector.prototype.fixHeightTrees = function() {
 		var leftWS = document.getElementById('LeftWorkspace');
 		if (!leftWS) return;
-		var rightWS = document.getElementById('RightWorkspace'); 
+		var rightWS = document.getElementById('RightWorkspace');
 		var windowHeight = gj(window).height();
 		var root = gj(leftWS).parents(".UIHomePageDT:first")[0];
 		var titleBar = gj(root).find("h6.TitleBar:first")[0];
@@ -1285,32 +1286,32 @@
 		if(rightWS)
 		  rightWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
 	};
-	
+
 	EcmContentSelector.prototype.isShowFilter = function() {
 		var selectFilter = document.getElementById("Filter");
 		var filterContainer = gj(selectFilter).parents(".actionBar:first")[0];
 		if(eXo.ecm.ECS.typeObj == "folder") {
 			filterContainer.style.display = "none";
-		} 
+		}
 	};
-	
+
 	EcmContentSelector.prototype.showUpload = function() {
 		var upload = document.getElementById("UploadItem");
 		if(!upload) return;
 		upload.style.display = 'block';
 	};
-	
+
 	EcmContentSelector.prototype.hideUpload = function() {
 		var upload = document.getElementById("UploadItem");
 		if(!upload) return;
 		upload.style.display = 'none';
 	};
-	
+
 
 	EcmContentSelector.prototype.initPath = function(initDrive, initPath, componentId) {
 		setTimeout("eXo.ecm.ECS.waitAndInitPath(\"" + initDrive + "\",\"" + initPath + "\",\"" + componentId +"\")", 1000);
 	}
-	
+
 	EcmContentSelector.prototype.waitAndInitPath = function(initDrive, initPath, componentId) {
 		initDrive = initDrive.replace(/ /g, "");
 		initPath = initPath.replace(/ /g, "");
@@ -1329,7 +1330,7 @@
 					var nodeLink = nodeADriveType.firstChild.firstChild;
 					eXo.ecm.ECS.renderBreadcrumbs(nodeLink);
 					eXo.ecm.ECS.listRootFolder(nodeLink);
-					eXo.ecm.ECS.actionColExp(nodeADriveType);				
+					eXo.ecm.ECS.actionColExp(nodeADriveType);
 					var event = false;
 					if (initPath && initPath != "" && initPath != "/")
 					  eXo.ecm.ECS.getDir(tagADrives[i], event);
@@ -1340,9 +1341,9 @@
 			}
 		}
 	};
-	
-	EcmContentSelector.prototype.expandTree = function(preStr, path, nodeParent) { 
-		var nextElt = gj(nodeParent).nextAll("div:first")[0];	
+
+	EcmContentSelector.prototype.expandTree = function(preStr, path, nodeParent) {
+		var nextElt = gj(nodeParent).nextAll("div:first")[0];
 		if(!nextElt || nextElt.className != "ChildrenContainer" || !path || path == "") {
 			return;
 		}
@@ -1362,7 +1363,7 @@
 					height += 27;
 				}
 			}
-			var leftWS = document.getElementById("LeftWorkspace");		
+			var leftWS = document.getElementById("LeftWorkspace");
 			leftWS.scrollTop = height;
 			return;
 		}
@@ -1372,7 +1373,7 @@
 				var id = tagADrives[i].getAttribute("id");
 				if (id && (id.indexOf(preStr) >= 0)) {
 					nodeParent = gj(tagADrives[i]).parents(".node:first")[0];
-					var event = false;				
+					var event = false;
 					eXo.ecm.ECS.getDir(tagADrives[i], event);
 					//eXo.ecm.ECS.actionColExp(nodeParent);
 					eXo.ecm.ECS.expandTree(preStr, path, nodeParent);
@@ -1388,11 +1389,11 @@
 	        s_ = useWordBoundary && toLong ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
 	        return  toLong ? s_ +'...' : s_;
 	};
-	
+
 	EcmContentSelector.prototype.safe_tags_regex = function(str) {
 	  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 	 }
-	
+
 	eXo.ecm.ECS = new EcmContentSelector();
 	window.onresize = eXo.ecm.ECS.fixHeightTrees;
 	return {
