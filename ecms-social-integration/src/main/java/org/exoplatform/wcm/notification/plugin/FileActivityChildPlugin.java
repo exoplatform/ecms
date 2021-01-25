@@ -46,12 +46,9 @@ import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
-<<<<<<< HEAD
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.spi.SpaceService;
-=======
 import org.exoplatform.social.notification.LinkProviderUtils;
->>>>>>> develop
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 import org.exoplatform.webui.cssfile.*;
