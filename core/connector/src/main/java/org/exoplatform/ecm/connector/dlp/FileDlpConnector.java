@@ -6,6 +6,7 @@ import javax.jcr.Workspace;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.exoplatform.commons.api.search.data.SearchContext;
+import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
 import org.exoplatform.commons.dlp.domain.DlpPositiveItemEntity;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
@@ -13,7 +14,6 @@ import org.exoplatform.commons.dlp.service.DlpPositiveItemService;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
-import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -24,11 +24,11 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
-import org.exoplatform.web.controller.router.RouterConfigException;
 
-import java.util.Collections;
-
-import java.util.Calendar;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Dlp Connector for Files
@@ -50,6 +50,10 @@ public class FileDlpConnector extends DlpServiceConnector {
   private static final String OWNER = "exo:owner";
 
   private RepositoryService repositoryService;
+
+  private static final Pattern PATTERN             = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
+
+  private RepositoryService   repositoryService;
 
   private IndexingService indexingService;
 
@@ -77,8 +81,8 @@ public class FileDlpConnector extends DlpServiceConnector {
   public boolean processItem(String entityId) {
     if (!isIndexedByEs(entityId)) {
       return false;
-    } else if (matchKeyword(entityId)) {
-      treatItem(entityId);
+    } else {
+      checkMatchKeywordAndTreatItem(entityId);
     }
     return true;
   }
@@ -94,21 +98,24 @@ public class FileDlpConnector extends DlpServiceConnector {
     return false;
   }
 
-  private boolean matchKeyword(String entityId) {
+  private void checkMatchKeywordAndTreatItem(String entityId) {
     SearchContext searchContext = null;
-    try {
-      searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
-      return dlpKeywords != null
-          && !dlpKeywords.isEmpty()
-          && fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId).size() > 0;
-    } catch (Exception ex) {
-      LOGGER.error("Can not create SearchContext", ex);
+    if (dlpKeywords != null
+        && !dlpKeywords.isEmpty()) {
+      try {
+        searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
+        Collection<SearchResult> searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
+        if (searchResults.size()>0) {
+          treatItem(entityId,searchResults);
+        }
+      } catch (Exception ex) {
+        LOGGER.error("Can not create SearchContext", ex);
+      }
     }
-    return false;
   }
 
   @VisibleForTesting
-  protected void treatItem(String entityId) {
+  protected void treatItem(String entityId, Collection<SearchResult> searchResults) {
     ExtendedSession session = null;
     try {
       long startTime = System.currentTimeMillis();
@@ -120,21 +127,21 @@ public class FileDlpConnector extends DlpServiceConnector {
       if (!node.getPath().startsWith("/" + DLP_SECURITY_FOLDER + "/")) {
         workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
+        saveDlpPositiveItem(node,searchResults);
         long endTime = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
-                    DlpOperationProcessor.DLP_FEATURE,
-                    DLP_POSITIVE_DETECTION,
-                    fileName,
-                    totalTime);
-        saveDlpPositiveItem(node);
+                 DlpOperationProcessor.DLP_FEATURE,
+                 DLP_POSITIVE_DETECTION,
+                 fileName,
+                 totalTime);
       }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
     }
   }
 
-  private void saveDlpPositiveItem(Node node) throws RepositoryException {
+  private void saveDlpPositiveItem(Node node, Collection<SearchResult> searchResults) throws RepositoryException {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());
@@ -148,11 +155,10 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
-    // to be updated with detected keyword
-    dlpPositiveItemEntity.setKeywords(dlpKeywords);
+    dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults, dlpKeywords));
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
-
+  
   @Override
   public void removePositiveItem(String itemReference) {
     ExtendedSession session = null;
@@ -185,5 +191,26 @@ public class FileDlpConnector extends DlpServiceConnector {
       LOGGER.error("Error while deleting dlp file item", e);
     }
     return null;
+  }
+
+  private String getDetectedKeywords(Collection<SearchResult> searchResults, String dlpKeywords) {
+    List<String> detectedKeywords = new ArrayList<>();
+    List<String> dlpKeywordsList = Arrays.asList(dlpKeywords.split(" "));
+    searchResults.stream()
+                 .map(searchResult -> searchResult.getExcerpts())
+                 .map(stringListMap -> stringListMap.values())
+                 .filter(excerptValue -> excerptValue != null && !excerptValue.isEmpty())
+                 .flatMap(lists -> lists.stream())
+                 .flatMap(strings -> strings.stream())
+                 .forEach(s -> {
+                   Matcher matcher = PATTERN.matcher(s);
+                   while (matcher.find()) {
+                     String keyword = dlpKeywordsList.stream().filter(key -> matcher.group(1).contains(key)).findFirst().orElse(null);
+                     if (keyword != null && !detectedKeywords.contains(keyword)) {
+                       detectedKeywords.add(keyword);
+                     }
+                   }
+                 });
+    return detectedKeywords.stream().collect(Collectors.joining(", "));
   }
 }
