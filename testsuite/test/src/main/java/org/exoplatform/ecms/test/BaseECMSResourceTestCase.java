@@ -68,7 +68,7 @@ public abstract class BaseECMSResourceTestCase extends BaseECMSTestCase {
     }
 
     EnvironmentContext envctx = new EnvironmentContext();
-    HttpServletRequest httpRequest = new MockHttpServletRequest("", in, in != null ? in.available() : 0, method, headers);
+    HttpServletRequest httpRequest = new MockHttpServletRequest(requestURI, in, in != null ? in.available() : 0, method, headers);
     envctx.put(HttpServletRequest.class, httpRequest);
     EnvironmentContext.setCurrent(envctx);
     ContainerRequest request = new ContainerRequest(method,
