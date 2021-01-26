@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -74,6 +75,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
    * @anchor CommentConnector.addComment
    */
   @POST
+  @RolesAllowed("users")
   @Path("/add")
   public Response addComment(
           @FormParam("jcrPath") String jcrPath,
@@ -99,6 +101,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
    * @anchor CommentConnector.getComments
    */
   @GET
+  @RolesAllowed("users")
   @Path("/all")
   public Response getComments(
           @QueryParam("jcrPath") String jcrPath
@@ -169,6 +172,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
    * @anchor CommentConnector.deleteComment
    */
   @DELETE
+  @RolesAllowed("users")
   @Path("/delete")
   public Response deleteComment(
           @QueryParam("jcrPath") String jcrPath,
