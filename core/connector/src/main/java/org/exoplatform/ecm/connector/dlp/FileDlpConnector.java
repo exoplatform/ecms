@@ -40,7 +40,7 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   public static final String TYPE = "file";
 
-  public static final String DLP_SECURITY_FOLDER = "Security";
+  public static final String DLP_QUARANTINE_FOLDER = "Quarantine";
 
   private static final Log LOGGER = ExoLogger.getExoLogger(FileDlpConnector.class);
 
@@ -123,10 +123,9 @@ public class FileDlpConnector extends DlpServiceConnector {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Workspace workspace = session.getWorkspace();
       Node node = session.getNodeByIdentifier(entityId);
-      Node dlpSecurityNode = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
       String fileName = node.getName();
-      if (!node.getPath().startsWith("/" + DLP_SECURITY_FOLDER + "/")) {
-        workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
+      if (!node.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/")) {
+        workspace.move(node.getPath(), "/" + DLP_QUARANTINE_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
         saveDlpPositiveItem(node,searchResults);
         long endTime = System.currentTimeMillis();
@@ -167,12 +166,12 @@ public class FileDlpConnector extends DlpServiceConnector {
       session =
           (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
                                         .getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
-      Node dlpSecurityNode = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
+      Node dlpQuarantineNode = (Node) session.getItem("/" + DLP_QUARANTINE_FOLDER);
       Node node = session.getNodeByIdentifier(itemReference);
 
-      if (node != null && dlpSecurityNode != null) {
+      if (node != null && dlpQuarantineNode != null) {
         node.remove();
-        dlpSecurityNode.save();
+        dlpQuarantineNode.save();
       }
     } catch (Exception e) {
       LOGGER.error("Error while deleting dlp file item", e);
