@@ -53,8 +53,6 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private static final Pattern PATTERN             = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
 
-  private RepositoryService   repositoryService;
-
   private IndexingService indexingService;
 
   private String dlpKeywords;
