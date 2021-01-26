@@ -13,6 +13,8 @@ import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.rest.api.RestUtils;
+
 import org.json.JSONObject;
 import org.picocontainer.Startable;
 
@@ -137,6 +139,10 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
       nodePath = node.getPath();
       isFile = node.isNodeType(NodetypeConstant.NT_FILE);
     } catch (PathNotFoundException | AccessDeniedException e) {
+      if (log.isDebugEnabled()) {
+        String currentUser = RestUtils.getCurrentUser();
+        log.debug("User {} can't access document {}:{}", currentUser, workspace, filePath, e);
+      }
       return Response.status(Status.NOT_FOUND).build();
     } catch(RepositoryException ex){
       if(log.isErrorEnabled()){log.error("Exception when get node with path: "+filePath, ex);}
@@ -218,6 +224,10 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
 
       return Response.ok(String.valueOf(node.isCheckedOut()), MediaType.TEXT_PLAIN).build();
     } catch (PathNotFoundException | AccessDeniedException e) {
+      if (log.isDebugEnabled()) {
+        String currentUser = RestUtils.getCurrentUser();
+        log.debug("User {} can't access document {}:{}", currentUser, workspace, filePath, e);
+      }
       return Response.status(Status.NOT_FOUND).build();
     } catch (Exception e) {
       log.warn("Error checking out document {}:{}", workspace, filePath, e);
@@ -261,6 +271,10 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
                      .header("Content-type", "application/internet-shortcut")
                      .build();
     } catch (PathNotFoundException | AccessDeniedException e) {
+      if (log.isDebugEnabled()) {
+        String currentUser = RestUtils.getCurrentUser();
+        log.debug("User {} can't access document {}:{}", currentUser, workspace, filePath, e);
+      }
       return Response.status(Status.NOT_FOUND).build();
     } catch (Exception e) {
       log.warn("Error getting shortcut of document {}:{}", workspace, filePath, e);
