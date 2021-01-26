@@ -17,13 +17,16 @@ import org.json.JSONObject;
 import org.picocontainer.Startable;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.version.VersionException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import javax.ws.rs.core.Response.Status;
+
 import java.net.URLDecoder;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -74,6 +77,7 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
    * @throws Exception
    */
   @GET
+  @RolesAllowed("users")
   @Path("/updateDocumentTitle")
   public Response updateDocumentTitle(
           @Context Request request,
@@ -132,7 +136,9 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
       if (linkManager.isLink(node)) node = linkManager.getTarget(node);
       nodePath = node.getPath();
       isFile = node.isNodeType(NodetypeConstant.NT_FILE);
-    }catch(RepositoryException ex){
+    } catch (PathNotFoundException | AccessDeniedException e) {
+      return Response.status(Status.NOT_FOUND).build();
+    } catch(RepositoryException ex){
       if(log.isErrorEnabled()){log.error("Exception when get node with path: "+filePath, ex);}
     }
 
@@ -183,28 +189,40 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
    * @param request
    * @param filePath
    * @return
-   * @throws Exception
    */
   @GET
+  @RolesAllowed("users")
   @Path("/checkout")
   public Response checkout(@Context Request request,
                            @QueryParam("filePath") String filePath,
                            @QueryParam("workspace") String workspace
-  ) throws Exception {
-    Session session = WCMCoreUtils.getSystemSessionProvider().
-        getSession(workspace, WCMCoreUtils.getRepository());
-    Node node = (Node)session.getItem(filePath);
+  ) {
+    try {
+      Node node = null;
+      try {
+        node = (Node) nodeFinder.getItem(workspace, filePath);
+      } catch (PathNotFoundException e) {
+        node = (Node) nodeFinder.getItem(workspace, Text.unescapeIllegalJcrChars(filePath));
+      }
 
-    if(node.canAddMixin(VERSION_MIXIN)){
-      node.addMixin(VERSION_MIXIN);
-      node.save();
-      node.checkin();
-      node.checkout();
+      if (node.canAddMixin(VERSION_MIXIN)) {
+        node.addMixin(VERSION_MIXIN);
+        node.save();
+        node.checkin();
+        node.checkout();
+      }
+
+      if (!node.isCheckedOut()) {
+        node.checkout();
+      }
+
+      return Response.ok(String.valueOf(node.isCheckedOut()), MediaType.TEXT_PLAIN).build();
+    } catch (PathNotFoundException | AccessDeniedException e) {
+      return Response.status(Status.NOT_FOUND).build();
+    } catch (Exception e) {
+      log.warn("Error checking out document {}:{}", workspace, filePath, e);
+      return Response.serverError().build();
     }
-
-    if(!node.isCheckedOut()) node.checkout();
-
-    return Response.ok(String.valueOf(node.isCheckedOut()), MediaType.TEXT_PLAIN).build();
   }
 
   /**
@@ -216,26 +234,38 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
    */
   @GET
   @Path("/{linkFilePath}/")
+  @RolesAllowed("users")
   @Produces("application/internet-shortcut")
   public Response createShortcut(@Context HttpServletRequest httpServletRequest,
                            @PathParam("linkFilePath") String linkFilePath,
                            @QueryParam("filePath") String filePath,
                            @QueryParam("workspace") String workspace
   ) throws Exception {
-    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
-    Node node = (Node)session.getItem(filePath);
-    String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
+    try {
+      Node node = null;
+      try {
+        node = (Node) nodeFinder.getItem(workspace, filePath);
+      } catch (PathNotFoundException e) {
+        node = (Node) nodeFinder.getItem(workspace, Text.unescapeIllegalJcrChars(filePath));
+      }
+      String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
 
-    String obsPath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
-            +httpServletRequest.getServerPort() + "/"
-            + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + workspace + node.getPath();
+      String obsPath = httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":"
+          + httpServletRequest.getServerPort() + "/"
+          + WCMCoreUtils.getRestContextName() + "/private/jcr/" + repo + "/" + workspace + node.getPath();
 
-    String shortCutContent = "[InternetShortcut]\n";
-    shortCutContent+="URL="+obsPath+"\n";
-    return Response.ok(IOUtils.toInputStream(shortCutContent), MediaType.APPLICATION_OCTET_STREAM)
-            .header("Content-Disposition","attachment; filename="+node.getName()+".url")
-            .header("Content-type", "application/internet-shortcut")
-            .build();
+      String shortCutContent = "[InternetShortcut]\n";
+      shortCutContent += "URL=" + obsPath + "\n";
+      return Response.ok(IOUtils.toInputStream(shortCutContent), MediaType.APPLICATION_OCTET_STREAM)
+                     .header("Content-Disposition", "attachment; filename=" + node.getName() + ".url")
+                     .header("Content-type", "application/internet-shortcut")
+                     .build();
+    } catch (PathNotFoundException | AccessDeniedException e) {
+      return Response.status(Status.NOT_FOUND).build();
+    } catch (Exception e) {
+      log.warn("Error getting shortcut of document {}:{}", workspace, filePath, e);
+      return Response.serverError().build();
+    }
   }
 
   @Override
