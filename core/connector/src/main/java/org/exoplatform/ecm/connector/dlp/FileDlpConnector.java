@@ -153,7 +153,6 @@ public class FileDlpConnector extends DlpServiceConnector {
     if (node.hasProperty(OWNER)) {
       String author = node.getProperty(OWNER).getString();
       dlpPositiveItemEntity.setAuthor(author);
-      dlpPositiveItemEntity.setIsExternal(checkExternal(author));
     }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
@@ -180,7 +179,8 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
   }
 
-  private boolean checkExternal(String userId) {
+  @Override
+  public boolean checkExternal(String userId) {
     IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
     Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
     return identity.getProfile().getProperty("external") != null &&  identity.getProfile().getProperty("external").equals("true");
