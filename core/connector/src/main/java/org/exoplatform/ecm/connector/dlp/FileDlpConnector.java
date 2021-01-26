@@ -22,6 +22,9 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 
@@ -176,6 +179,13 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
   }
 
+  @Override
+  public boolean checkExternal(String userId) {
+    IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
+    Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
+    return identity.getProfile().getProperty("external") != null &&  identity.getProfile().getProperty("external").equals("true");
+  }
+  
   @Override
   public String getItemUrl(String itemReference) {
     ExtendedSession session = null;
