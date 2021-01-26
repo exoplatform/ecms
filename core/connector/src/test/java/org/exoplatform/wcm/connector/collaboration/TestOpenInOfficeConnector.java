@@ -55,6 +55,100 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
     this.binder.addResource(openInOfficeConnector, null);
   }
 
+  public void testCreateShortcut() throws Exception {
+    String parentPath = "sites1";
+    String restPath = "http://localhost:8080/office/test.doc?workspace=collaboration&filePath=/" + parentPath + "/test.doc";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode(parentPath);
+    sites.addNode("test.doc");
+    rootNode.save();
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    assertEquals("application/internet-shortcut", response.getHttpHeaders().get("Content-type").get(0));
+    assertEquals("attachment; filename=test.doc.url", response.getHttpHeaders().get("Content-Disposition").get(0));
+  }
+
+  public void testCreateShortcutWithNoPermission() throws Exception {
+    String parentPath = "sites1";
+    String restPath = "http://localhost:8080/office/test.doc?workspace=collaboration&filePath=/" + parentPath + "/test.doc";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode(parentPath);
+    sites.addNode("test.doc");
+    rootNode.save();
+
+    applyUserSession("demo", "gtn", "collaboration");
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+  }
+
+  public void testCheckout() throws Exception {
+    String parentPath = "sites1";
+    String restPath = "/office/checkout?workspace=collaboration&filePath=/" + parentPath + "/test.doc";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode(parentPath);
+    sites.addNode("test.doc");
+    rootNode.save();
+
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    assertEquals("true", response.getResponse().getEntity().toString());
+  }
+
+  public void testCheckoutWithNoPermission() throws Exception {
+    String parentPath = "sites1";
+    String restPath = "/office/checkout?workspace=collaboration&filePath=/" + parentPath + "/test.doc";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode(parentPath);
+    sites.addNode("test.doc");
+    rootNode.save();
+
+    applyUserSession("demo", "gtn", "collaboration");
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+  }
+
+  public void testUpdateDocumentTitleWithNoPermission() throws Exception {
+    String parentPath = "sites1";
+    String restPath = "/office/updateDocumentTitle?objId=collaboration:/" + parentPath + "/test.doc&lang=en";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode(parentPath);
+    sites.addNode("test.doc");
+    rootNode.save();
+
+    applyUserSession("demo", "gtn", "collaboration");
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+  }
+
+  public void testUpdateDocumentTitleWithIncorrectObjId() throws Exception {
+    String parentPath = "sites2";
+    String restPath = "/office/updateDocumentTitle?objId=/" + parentPath + "/test.doc&lang=en";
+    applyUserSession("john", "gtn", "collaboration");
+    manageableRepository = repositoryService.getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
+    Node rootNode = session.getRootNode();
+    Node sites = rootNode.addNode(parentPath);
+    sites.addNode("test.doc");
+    rootNode.save();
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
+    assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+  }
+
   public void testUpdateDocumentTitle() throws Exception{
     String parentPath = "sites1";
     String restPath = "/office/updateDocumentTitle?objId=collaboration:/" + parentPath + "/test.doc&lang=en";
@@ -67,20 +161,6 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
     rootNode.save();
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-  }
-
-  public void testUpdateDocumentTitleWithIncorrectObjId() throws Exception{
-    String parentPath = "sites2";
-    String restPath = "/office/updateDocumentTitle?objId=/" + parentPath + "/test.doc&lang=en";
-    applyUserSession("john", "gtn", "collaboration");
-    manageableRepository = repositoryService.getCurrentRepository();
-    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);
-    Node rootNode = session.getRootNode();
-    Node sites = rootNode.addNode(parentPath);
-    sites.addNode("test.doc");
-    rootNode.save();
-    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
-    assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
   }
 
   public void testUpdateDocumentTitleWithDocumentNamedWithColon() throws Exception{
