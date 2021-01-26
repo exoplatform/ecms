@@ -34,31 +34,31 @@ import java.util.stream.Collectors;
  * Dlp Connector for Files
  */
 public class FileDlpConnector extends DlpServiceConnector {
-  
-  public static final String  TYPE                 = "file";
-  
-  public static final String DLP_SECURITY_FOLDER   = "Security";
 
-  private static final Log    LOGGER               = ExoLogger.getExoLogger(FileDlpConnector.class);
+  public static final String TYPE = "file";
 
-  private static final String COLLABORATION_WS     = "collaboration";
+  public static final String DLP_SECURITY_FOLDER = "Security";
 
-  private static final String DLP_KEYWORDS_PARAM   = "dlp.keywords";
+  private static final Log LOGGER = ExoLogger.getExoLogger(FileDlpConnector.class);
 
-  private static final String TITLE                = "exo:title";
+  private static final String COLLABORATION_WS = "collaboration";
 
-  private static final String OWNER                = "exo:owner";
+  private static final String DLP_KEYWORDS_PARAM = "dlp.keywords";
+
+  private static final String TITLE = "exo:title";
+
+  private static final String OWNER = "exo:owner";
+
+  private RepositoryService repositoryService;
 
   private static final Pattern PATTERN             = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
 
-  private RepositoryService   repositoryService;
-  
   private IndexingService indexingService;
 
-  private String              dlpKeywords;
-  
+  private String dlpKeywords;
+
   private FileSearchServiceConnector fileSearchServiceConnector;
-  
+
   private QueueDlpService queueDlpService;
 
   public FileDlpConnector(InitParams initParams, FileSearchServiceConnector fileSearchServiceConnector,
@@ -67,12 +67,12 @@ public class FileDlpConnector extends DlpServiceConnector {
     ValueParam dlpKeywordsParam = initParams.getValueParam(DLP_KEYWORDS_PARAM);
     this.dlpKeywords = dlpKeywordsParam.getValue();
     if (dlpKeywords != null) {
-      dlpKeywords=dlpKeywords.replace(","," ");
+      dlpKeywords = dlpKeywords.replace(",", " ");
     }
     this.repositoryService = repositoryService;
     this.indexingService = indexingService;
-    this.fileSearchServiceConnector=fileSearchServiceConnector;
-    this.queueDlpService=queueDlpService;
+    this.fileSearchServiceConnector = fileSearchServiceConnector;
+    this.queueDlpService = queueDlpService;
   }
 
   @Override
@@ -111,7 +111,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       }
     }
   }
-  
+
   @VisibleForTesting
   protected void treatItem(String entityId, Collection<SearchResult> searchResults) {
     ExtendedSession session = null;
@@ -122,7 +122,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       Node node = session.getNodeByIdentifier(entityId);
       Node dlpSecurityNode = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
       String fileName = node.getName();
-      if (!node.getPath().startsWith("/"+DLP_SECURITY_FOLDER+"/")) {
+      if (!node.getPath().startsWith("/" + DLP_SECURITY_FOLDER + "/")) {
         workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
         saveDlpPositiveItem(node,searchResults);
@@ -174,6 +174,21 @@ public class FileDlpConnector extends DlpServiceConnector {
     } catch (Exception e) {
       LOGGER.error("Error while deleting dlp file item", e);
     }
+  }
+
+  @Override
+  public String getItemUrl(String itemReference) {
+    ExtendedSession session = null;
+    try {
+      session =
+          (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
+                                        .getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      Node node = session.getNodeByIdentifier(itemReference);
+      return WCMCoreUtils.getLinkInDocumentsApplication(node.getPath());
+    } catch (Exception e) {
+      LOGGER.error("Error while getting dlp item url", e);
+    }
+    return null;
   }
 
   private String getDetectedKeywords(Collection<SearchResult> searchResults, String dlpKeywords) {
