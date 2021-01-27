@@ -7,10 +7,6 @@ import javax.jcr.Workspace;
 import com.google.common.annotations.VisibleForTesting;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.commons.api.settings.SettingService;
-import org.exoplatform.commons.api.settings.SettingValue;
-import org.exoplatform.commons.api.settings.data.Context;
-import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
 import org.exoplatform.commons.dlp.domain.DlpPositiveItemEntity;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
@@ -105,10 +101,9 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private void checkMatchKeywordAndTreatItem(String entityId) {
     SearchContext searchContext = null;
-    SettingService settingService = CommonsUtils.getService(SettingService.class);
-    SettingValue<?> settingValue = settingService.get(Context.GLOBAL, Scope.GLOBAL.id("DlpKeywords"), "exo:dlpKeywords");
-    if (settingValue != null) {
-      dlpKeywords = settingValue.getValue().toString().replace(",", " ");
+    String keywordsSettingValue = getKeywords();
+    if (keywordsSettingValue != null) {
+      dlpKeywords = keywordsSettingValue.replace(",", " ");
     }
     if (dlpKeywords != null
         && !dlpKeywords.isEmpty()) {
