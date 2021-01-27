@@ -7,10 +7,6 @@
 
 
   <component>
-    <type>org.exoplatform.ecm.connector.fckeditor.FCKCoreRESTConnector</type>
-  </component>
-
-  <component>
     <type>org.exoplatform.ecm.webui.core.fckconfig.FCKConfigService</type>
   </component>
 
