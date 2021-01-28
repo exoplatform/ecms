@@ -15,7 +15,6 @@ import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
@@ -45,9 +44,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   private static final Log LOGGER = ExoLogger.getExoLogger(FileDlpConnector.class);
 
   private static final String COLLABORATION_WS = "collaboration";
-
-  private static final String DLP_KEYWORDS_PARAM = "dlp.keywords";
-
+  
   private static final String TITLE = "exo:title";
 
   private static final String OWNER = "exo:owner";
@@ -58,24 +55,20 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private IndexingService indexingService;
 
-  private String dlpKeywords;
-
   private FileSearchServiceConnector fileSearchServiceConnector;
 
   private QueueDlpService queueDlpService;
+  
+  private DlpOperationProcessor dlpOperationProcessor;
 
   public FileDlpConnector(InitParams initParams, FileSearchServiceConnector fileSearchServiceConnector,
-                          RepositoryService repositoryService, IndexingService indexingService, QueueDlpService queueDlpService) {
+                          RepositoryService repositoryService, IndexingService indexingService, QueueDlpService queueDlpService, DlpOperationProcessor dlpOperationProcessor) {
     super(initParams);
-    ValueParam dlpKeywordsParam = initParams.getValueParam(DLP_KEYWORDS_PARAM);
-    this.dlpKeywords = dlpKeywordsParam.getValue();
-    if (dlpKeywords != null) {
-      dlpKeywords = dlpKeywords.replace(",", " ");
-    }
     this.repositoryService = repositoryService;
     this.indexingService = indexingService;
     this.fileSearchServiceConnector = fileSearchServiceConnector;
     this.queueDlpService = queueDlpService;
+    this.dlpOperationProcessor = dlpOperationProcessor;
   }
 
   @Override
@@ -101,17 +94,14 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private void checkMatchKeywordAndTreatItem(String entityId) {
     SearchContext searchContext = null;
-    String keywordsSettingValue = getKeywords();
-    if (keywordsSettingValue != null) {
-      dlpKeywords = keywordsSettingValue.replace(",", " ");
-    }
-    if (dlpKeywords != null
-        && !dlpKeywords.isEmpty()) {
+    String dlpKeywords = dlpOperationProcessor.getKeywords();
+    if (dlpKeywords != null && !dlpKeywords.isEmpty()) {
       try {
+        dlpKeywords = dlpKeywords.replace(",", " ");
         searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
         Collection<SearchResult> searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
-        if (searchResults.size()>0) {
-          treatItem(entityId,searchResults);
+        if (searchResults.size() > 0) {
+          treatItem(entityId, searchResults);
         }
       } catch (Exception ex) {
         LOGGER.error("Can not create SearchContext", ex);
@@ -160,7 +150,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
     dlpPositiveItemEntity.setType(TYPE);
     dlpPositiveItemEntity.setDetectionDate(Calendar.getInstance());
-    dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults, dlpKeywords));
+    dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults, dlpOperationProcessor.getKeywords()));
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
   
@@ -207,7 +197,7 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private String getDetectedKeywords(Collection<SearchResult> searchResults, String dlpKeywords) {
     List<String> detectedKeywords = new ArrayList<>();
-    List<String> dlpKeywordsList = Arrays.asList(dlpKeywords.split(" "));
+    List<String> dlpKeywordsList = Arrays.asList(dlpKeywords.split(","));
     searchResults.stream()
                  .map(SearchResult::getExcerpts)
                  .map(Map::values)
