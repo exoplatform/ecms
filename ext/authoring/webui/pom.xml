@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-ext-authoring</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.1.x-SNAPSHOT</version>
+    <version>6.1.0-RC05</version>
   </parent>
   <artifactId>ecms-ext-authoring-webui</artifactId>
   <packaging>jar</packaging>
