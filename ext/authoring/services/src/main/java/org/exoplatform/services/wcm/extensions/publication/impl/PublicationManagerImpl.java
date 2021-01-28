@@ -162,8 +162,10 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_EDIT);
     filters.put(WCMComposer.FILTER_LANGUAGE, lang);
+
+    String fromstateEscaped = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(fromstate);
     StringBuffer query = new StringBuffer("select * from nt:base where publication:currentState='"
-        + fromstate + "'");
+        + fromstateEscaped + "'");
 
     if (tostate!=null) {
       List<Lifecycle> lifecycles = this.getLifecyclesFromUser(user, tostate);
@@ -180,7 +182,8 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
         query.append(" and publication:lifecycle='_no_lifecycle'");
       }
     } else if (user!=null) {
-      query.append(" and publication:lastUser='"+user+"'");
+      String userEscaped = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(user);
+      query.append(" and publication:lastUser='" + userEscaped + "'");
     }
 
     if (date!=null) {
