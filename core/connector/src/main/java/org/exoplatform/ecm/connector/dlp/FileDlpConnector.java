@@ -20,6 +20,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -150,8 +151,8 @@ public class FileDlpConnector extends DlpServiceConnector {
       String title = node.getProperty(TITLE).getString();
       dlpPositiveItemEntity.setTitle(title);
     }
-    if (node.hasProperty(OWNER)) {
-      String author = node.getProperty(OWNER).getString();
+    if (node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIER)) {
+      String author = node.getProperty(NodetypeConstant.EXO_LAST_MODIFIER).getString();
       dlpPositiveItemEntity.setAuthor(author);
     }
     dlpPositiveItemEntity.setType(TYPE);
