@@ -4,6 +4,7 @@ import javax.jcr.Node;
 import javax.jcr.Workspace;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
@@ -49,6 +50,9 @@ public class TestFileDlpConnector {
   
   @Mock
   private QueueDlpService queueDlpService;
+
+  @Mock
+  private DlpOperationProcessor dlpOperationProcessor;
   
   @Test
   public void testProcessItemWhenIsIndexed() throws Exception {
@@ -73,11 +77,13 @@ public class TestFileDlpConnector {
     
     when(fileSearchServiceConnector.isIndexed(Mockito.any(),Mockito.eq(uuid))).thenReturn(true);
     
+    when(dlpOperationProcessor.getKeywords()).thenReturn("keyword1,keyword2");
+    
     List<SearchResult> results = new ArrayList<>();
     results.add(new SearchResult("url","title","excerpt","detail", "imageUrl",5,4));
     when(fileSearchServiceConnector.dlpSearch(Mockito.any(),Mockito.eq("keyword1 keyword2"),Mockito.eq(uuid))).thenReturn(results);
-  
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService,queueDlpService);
+
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService, dlpOperationProcessor);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
   
     Workspace workspace = mock(Workspace.class);
@@ -129,8 +135,8 @@ public class TestFileDlpConnector {
     
     // When
     when(fileSearchServiceConnector.isIndexed(Mockito.any(),Mockito.eq(uuid))).thenReturn(false);
-    
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService,queueDlpService);
+
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService, dlpOperationProcessor);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
  
     Workspace workspace = mock(Workspace.class);
@@ -173,12 +179,12 @@ public class TestFileDlpConnector {
     constructorParams.setProperty("displayName", "file");
     constructorParams.setProperty("type", "file");
     initParams.addParameter(constructorParams);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService, dlpOperationProcessor);
     Method getDetectedKeywords = fileDlpConnector.getClass().getDeclaredMethod("getDetectedKeywords", Collection.class, String.class);
     getDetectedKeywords.setAccessible(true);
 
     // When
-    String dlpKeywords = "one two three";
+    String dlpKeywords = "one,two,three";
     ArrayList<SearchResult> searchResults = new ArrayList<>();
     searchResults.add(new SearchResult("url", "title", "excerpt", "detail", "imageUrl", 5, 4));
 
