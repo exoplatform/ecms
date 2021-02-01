@@ -5,6 +5,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Workspace;
 
 import com.google.common.annotations.VisibleForTesting;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
@@ -28,6 +29,7 @@ import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 
+import java.text.Normalizer;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -208,12 +210,20 @@ public class FileDlpConnector extends DlpServiceConnector {
                  .forEach(s -> {
                    Matcher matcher = PATTERN.matcher(s);
                    while (matcher.find()) {
-                     String keyword = dlpKeywordsList.stream().filter(key -> matcher.group(1).contains(key)).findFirst().orElse(null);
+                     String keyword = dlpKeywordsList.stream().filter(key -> removeAccents(matcher.group(1)).contains(removeAccents(key))).findFirst().orElse(null);
                      if (keyword != null && !keyword.isEmpty() && !detectedKeywords.contains(keyword)) {
                        detectedKeywords.add(keyword);
                      }
                    }
                  });
     return detectedKeywords.stream().collect(Collectors.joining(", "));
+  }
+
+  private String removeAccents(String string) {
+    if (StringUtils.isNotBlank(string)) {
+      string = Normalizer.normalize(string, Normalizer.Form.NFD);
+      string = string.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+    }
+    return string.toLowerCase();
   }
 }
