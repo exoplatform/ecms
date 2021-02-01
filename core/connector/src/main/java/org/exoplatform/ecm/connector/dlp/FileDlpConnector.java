@@ -208,7 +208,7 @@ public class FileDlpConnector extends DlpServiceConnector {
                  .forEach(s -> {
                    Matcher matcher = PATTERN.matcher(s);
                    while (matcher.find()) {
-                     String keyword = dlpKeywordsList.stream().filter(key -> matcher.group(1).contains(key)).findFirst().orElse(null);
+                     String keyword = dlpKeywordsList.stream().filter(key -> matcher.group(1).toLowerCase().contains(key.toLowerCase())).findFirst().orElse(null);
                      if (keyword != null && !keyword.isEmpty() && !detectedKeywords.contains(keyword)) {
                        detectedKeywords.add(keyword);
                      }
