@@ -54,7 +54,7 @@ public class FileDLPAction implements AdvancedAction {
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
         PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
-        if(property != null) {
+        if(property != null && property.getType() != 1) {
           node = property.getParent();
           if (node != null && !trashService.isInTrash(node)) {
             if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
