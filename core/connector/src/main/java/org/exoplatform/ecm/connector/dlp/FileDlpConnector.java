@@ -75,7 +75,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   private DlpOperationProcessor dlpOperationProcessor;
 
   public FileDlpConnector(InitParams initParams, FileSearchServiceConnector fileSearchServiceConnector,
-                          RepositoryService repositoryService, IndexingService indexingService, QueueDlpService queueDlpService, DlpOperationProcessor dlpOperationProcessor, QueueDlpService queueDlpService, RestoredDlpItemService restoredDlpItemService) {
+                          RepositoryService repositoryService, IndexingService indexingService, QueueDlpService queueDlpService, DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService) {
     super(initParams);
     this.repositoryService = repositoryService;
     this.indexingService = indexingService;
