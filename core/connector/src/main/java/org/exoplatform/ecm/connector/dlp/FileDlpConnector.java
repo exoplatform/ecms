@@ -1,8 +1,6 @@
 package org.exoplatform.ecm.connector.dlp;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Workspace;
+import javax.jcr.*;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.lang.StringUtils;
@@ -10,14 +8,19 @@ import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.connector.DlpServiceConnector;
 import org.exoplatform.commons.dlp.domain.DlpPositiveItemEntity;
+import org.exoplatform.commons.dlp.domain.RestoredDlpItemEntity;
+import org.exoplatform.commons.dlp.dto.RestoredDlpItem;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.service.DlpPositiveItemService;
+import org.exoplatform.commons.dlp.service.RestoredDlpItemService;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -34,6 +37,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.Calendar;
 
 /**
  * Dlp Connector for Files
@@ -47,30 +51,37 @@ public class FileDlpConnector extends DlpServiceConnector {
   private static final Log LOGGER = ExoLogger.getExoLogger(FileDlpConnector.class);
 
   private static final String COLLABORATION_WS = "collaboration";
-  
-  private static final String TITLE = "exo:title";
 
-  private static final String OWNER = "exo:owner";
+  private static final String DLP_KEYWORDS_PARAM = "dlp.keywords";
 
   private RepositoryService repositoryService;
 
   private static final Pattern PATTERN             = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
 
+  final static public String EXO_RESTORE_LOCATION = "exo:restoreLocation";
+
+  final static public String RESTORE_PATH = "exo:restorePath";
+
+  final static public String RESTORE_WORKSPACE = "exo:restoreWorkspace";
+
   private IndexingService indexingService;
 
   private FileSearchServiceConnector fileSearchServiceConnector;
+
+  private RestoredDlpItemService restoredDlpItemService;
 
   private QueueDlpService queueDlpService;
   
   private DlpOperationProcessor dlpOperationProcessor;
 
   public FileDlpConnector(InitParams initParams, FileSearchServiceConnector fileSearchServiceConnector,
-                          RepositoryService repositoryService, IndexingService indexingService, QueueDlpService queueDlpService, DlpOperationProcessor dlpOperationProcessor) {
+                          RepositoryService repositoryService, IndexingService indexingService, QueueDlpService queueDlpService, DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService) {
     super(initParams);
     this.repositoryService = repositoryService;
     this.indexingService = indexingService;
     this.fileSearchServiceConnector = fileSearchServiceConnector;
     this.queueDlpService = queueDlpService;
+    this.restoredDlpItemService = restoredDlpItemService;
     this.dlpOperationProcessor = dlpOperationProcessor;
   }
 
@@ -82,6 +93,29 @@ public class FileDlpConnector extends DlpServiceConnector {
       checkMatchKeywordAndTreatItem(entityId);
     }
     return true;
+  }
+
+  @Override
+  public void restorePositiveItem(String itemReference) {
+    ExtendedSession session = null;
+    try {
+      long startTime = System.currentTimeMillis();
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      Node node = session.getNodeByIdentifier(itemReference);
+      String fileName = node.getName();
+      restoreFromQuarantine("/" + DLP_SECURITY_FOLDER+ "/" + fileName, WCMCoreUtils.getUserSessionProvider());
+      indexingService.reindex(TYPE, itemReference);
+      saveRestoredDlpItem(node.getUUID());
+      long endTime = System.currentTimeMillis();
+      long totalTime = endTime - startTime;
+      LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
+                  DlpOperationProcessor.DLP_FEATURE,
+                  "restoreDLPItem",
+                  fileName,
+                  totalTime);
+    } catch (Exception e) {
+      LOGGER.error("Error while treating file dlp connector item", e);
+    }
   }
 
   private boolean isIndexedByEs(String entityId) {
@@ -120,12 +154,14 @@ public class FileDlpConnector extends DlpServiceConnector {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Workspace workspace = session.getWorkspace();
       Node node = session.getNodeByIdentifier(entityId);
-      Node dlpSecurityNode = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
       String fileName = node.getName();
-      if (!node.getPath().startsWith("/" + DLP_SECURITY_FOLDER + "/")) {
+      String restorePath = fixRestorePath(node.getPath());
+      RestoredDlpItem restoredDlpItem = findRestoredDlpItem(node.getUUID());
+      if (!node.getPath().startsWith("/"+DLP_SECURITY_FOLDER+"/") && (restoredDlpItem == null ||  getNodeLastModifiedDate(node) > restoredDlpItem.getDetectionDate())) {
         workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
         saveDlpPositiveItem(node,searchResults);
+        addRestorePathInfo(node.getName(), restorePath, workspace.getName());
         long endTime = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
@@ -139,12 +175,19 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
   }
 
+  private Long getNodeLastModifiedDate(Node node) throws Exception {
+    Calendar calendar = node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) ?
+                        node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate() :
+                        node.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate();
+    return calendar.getTimeInMillis();
+  }
+
   private void saveDlpPositiveItem(Node node, Collection<SearchResult> searchResults) throws RepositoryException {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());
-    if (node.hasProperty(TITLE)) {
-      String title = node.getProperty(TITLE).getString();
+    if (node.hasProperty(NodetypeConstant.EXO_TITLE)) {
+      String title = node.getProperty(NodetypeConstant.EXO_TITLE).getString();
       dlpPositiveItemEntity.setTitle(title);
     }
     if (node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIER)) {
@@ -219,6 +262,84 @@ public class FileDlpConnector extends DlpServiceConnector {
     return detectedKeywords.stream().collect(Collectors.joining(", "));
   }
 
+  private void saveRestoredDlpItem(String nodeUID) {
+    RestoredDlpItemEntity restoredDlpItemEntity = new RestoredDlpItemEntity();
+    restoredDlpItemEntity.setReference(nodeUID);
+    restoredDlpItemEntity.setDetectionDate(Calendar.getInstance());
+    restoredDlpItemService.addRestoredDlpItem(restoredDlpItemEntity);
+  }
+
+  private RestoredDlpItem findRestoredDlpItem(String nodeUID) throws Exception {
+    return restoredDlpItemService.getRestoredDlpItemByReference(nodeUID);
+  }
+
+  private void addRestorePathInfo(String nodeName, String restorePath, String nodeWorkspace) throws Exception {
+    NodeIterator nodes = this.getSecurityHomeNode().getNodes(nodeName);
+    Node node = null;
+    while (nodes.hasNext()) {
+      Node currentNode = nodes.nextNode();
+      if (node == null) {
+        node = currentNode;
+      } else {
+        if (node.getIndex() < currentNode.getIndex()) {
+          node = currentNode;
+        }
+      }
+    }
+    if (node != null) {
+      node.addMixin(EXO_RESTORE_LOCATION);
+      node.setProperty(RESTORE_PATH, restorePath);
+      node.setProperty(RESTORE_WORKSPACE, nodeWorkspace);
+      node.save();
+    }
+  }
+
+  private Node getSecurityHomeNode() {
+    try {
+      Session session = WCMCoreUtils.getSystemSessionProvider()
+                                    .getSession(COLLABORATION_WS,
+                                                repositoryService.getCurrentRepository());
+      return (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
+    } catch (Exception e) {
+      return null;
+    }
+
+  }
+
+  private String fixRestorePath(String path) {
+    int leftBracket = path.lastIndexOf('[');
+    int rightBracket = path.lastIndexOf(']');
+    if (leftBracket == -1 || rightBracket == -1 ||
+        (leftBracket >= rightBracket)) return path;
+
+    try {
+      Integer.parseInt(path.substring(leftBracket+1, rightBracket));
+    } catch (Exception ex) {
+      return path;
+    }
+    return path.substring(0, leftBracket);
+  }
+
+  private void restoreFromQuarantine(String SecurityNodePath,
+                                SessionProvider sessionProvider) throws Exception {
+
+    Node securityHomeNode = this.getSecurityHomeNode();
+    Session securityNodeSession = securityHomeNode.getSession();
+    Node securityNode = (Node)securityNodeSession.getItem(SecurityNodePath);
+    String securityWorkspace = securityNodeSession.getWorkspace().getName();
+    String restoreWorkspace = securityNode.getProperty(RESTORE_WORKSPACE).getString();
+    String restorePath = securityNode.getProperty(RESTORE_PATH).getString();
+
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session restoreSession = sessionProvider.getSession(restoreWorkspace,  manageableRepository);
+
+    if (restoreWorkspace.equals(securityWorkspace)) {
+      securityNodeSession.getWorkspace().move(SecurityNodePath, restorePath);
+    }
+    securityHomeNode.save();
+    restoreSession.save();
+  }
+  
   private String removeAccents(String string) {
     if (StringUtils.isNotBlank(string)) {
       string = Normalizer.normalize(string, Normalizer.Form.NFD);
