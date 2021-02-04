@@ -69,9 +69,6 @@
     <type>org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService</type>
   </component>
   <component>
-    <type>org.exoplatform.wcm.connector.authoring.LifecycleConnector</type>
-  </component>
-  <component>
     <type>org.exoplatform.wcm.connector.collaboration.RESTImagesRendererService</type>
   </component>
   <component>
