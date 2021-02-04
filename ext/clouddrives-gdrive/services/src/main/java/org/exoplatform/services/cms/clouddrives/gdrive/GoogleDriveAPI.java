@@ -100,8 +100,6 @@ class GoogleDriveAPI implements DataStoreFactory {
   public static final List<String> SCOPES             = Arrays.asList(DriveScopes.DRIVE,
                                                                       DriveScopes.DRIVE_FILE,
                                                                       DriveScopes.DRIVE_APPDATA,
-                                                                      DriveScopes.DRIVE_SCRIPTS,
-                                                                      DriveScopes.DRIVE_APPS_READONLY,
                                                                       Oauth2Scopes.USERINFO_EMAIL,
                                                                       Oauth2Scopes.USERINFO_PROFILE);
 
