@@ -8,7 +8,7 @@ import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 
-public class RestoreFileDLPListener extends Listener<DlpPositiveItemService, Object> {
+public class RestoreFileDLPListener extends Listener<DlpPositiveItemService, DlpPositiveItemEntity> {
 
   private DlpOperationProcessor dlpOperationProcessor;
 
@@ -16,8 +16,8 @@ public class RestoreFileDLPListener extends Listener<DlpPositiveItemService, Obj
     dlpOperationProcessor = CommonsUtils.getService(DlpOperationProcessor.class);
   }
 
-  public void onEvent(Event<DlpPositiveItemService, Object> event) throws Exception {
+  public void onEvent(Event<DlpPositiveItemService, DlpPositiveItemEntity> event) throws Exception {
     DlpServiceConnector fileConnector = (DlpServiceConnector) dlpOperationProcessor.getConnectors().get(FileDlpConnector.TYPE);
-    fileConnector.restorePositiveItem(((DlpPositiveItemEntity) event.getData()).getReference());
+    fileConnector.restorePositiveItem(event.getData().getReference());
   }
 }
