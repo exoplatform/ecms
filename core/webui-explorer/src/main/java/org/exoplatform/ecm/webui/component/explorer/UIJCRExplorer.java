@@ -38,6 +38,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterat
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -863,12 +864,20 @@ public class UIJCRExplorer extends UIContainer {
                                               ApplicationMessage.WARNING));
       return false;
     }
+    TrashService trashService = getApplicationComponent(TrashService.class) ;
     if (testedNode.isNodeType(Utils.EXO_RESTORELOCATION)) {
-      UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
-      uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
-                                              null,
-                                              ApplicationMessage.WARNING));
-      return false;
+      //if testedNode is not in trash, then testedNode is in quarantine folder
+      //we allow access only if the user read the node from the real location (quarantine folder)
+      //else it is an user which read a link to the node in quarantine, so we should not display it
+      if (trashService.isInTrash(testedNode) || !uri.equals(testedNode.getPath())) {
+        UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        return false;
+      } else {
+          return true;
+      }
     }
     return true;
   }
