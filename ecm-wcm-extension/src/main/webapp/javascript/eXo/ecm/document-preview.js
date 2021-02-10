@@ -1072,12 +1072,12 @@
             $('.showComments').attr("data-action-initialized", "true");
           }
         }
-  
+
         $('.loading', docContentContainer).show();
         this.show();
       }
 
-      docContentContainer.load('/portal/rest/private/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + '/' + this.settings.doc.id, function() {
+      docContentContainer.load(eXo.env.portal.context + '/' + eXo.env.portal.rest + '/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + '/' + this.settings.doc.id, function() {
         $('.loading', docContentContainer).hide();
         resizeEventHandler();
       });
