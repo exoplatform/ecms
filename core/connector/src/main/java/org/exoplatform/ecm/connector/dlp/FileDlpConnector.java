@@ -320,12 +320,12 @@ public class FileDlpConnector extends DlpServiceConnector {
     return path.substring(0, leftBracket);
   }
 
-  private void restoreFromQuarantine(String SecurityNodePath,
+  private void restoreFromQuarantine(String securityNodePath,
                                 SessionProvider sessionProvider) throws Exception {
 
     Node securityHomeNode = this.getSecurityHomeNode();
     Session securityNodeSession = securityHomeNode.getSession();
-    Node securityNode = (Node)securityNodeSession.getItem(SecurityNodePath);
+    Node securityNode = (Node)securityNodeSession.getItem(securityNodePath);
     String securityWorkspace = securityNodeSession.getWorkspace().getName();
     String restoreWorkspace = securityNode.getProperty(RESTORE_WORKSPACE).getString();
     String restorePath = securityNode.getProperty(RESTORE_PATH).getString();
@@ -334,10 +334,23 @@ public class FileDlpConnector extends DlpServiceConnector {
     Session restoreSession = sessionProvider.getSession(restoreWorkspace,  manageableRepository);
 
     if (restoreWorkspace.equals(securityWorkspace)) {
-      securityNodeSession.getWorkspace().move(SecurityNodePath, restorePath);
+      securityNodeSession.getWorkspace().move(securityNodePath, restorePath);
     }
+    removeRestorePathInfo(restoreSession,restorePath);
     securityHomeNode.save();
     restoreSession.save();
+  }
+  
+  private void removeRestorePathInfo(Session session, String restorePath) throws Exception {
+    Node sameNameNode = ((Node) session.getItem(restorePath));
+    Node parent = sameNameNode.getParent();
+    String name = sameNameNode.getName();
+    NodeIterator nodeIter = parent.getNodes(name);
+    while (nodeIter.hasNext()) {
+      Node node = nodeIter.nextNode();
+      if (node.isNodeType(EXO_RESTORE_LOCATION))
+        node.removeMixin(EXO_RESTORE_LOCATION);
+    }
   }
   
   private String removeAccents(String string) {

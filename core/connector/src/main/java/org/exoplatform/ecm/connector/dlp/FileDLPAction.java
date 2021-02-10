@@ -8,7 +8,9 @@ import org.exoplatform.commons.api.settings.ExoFeatureService;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.documents.impl.DocumentServiceImpl;
 import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.PropertyImpl;
@@ -29,7 +31,9 @@ public class FileDLPAction implements AdvancedAction {
   private QueueDlpService queueDlpService;
   
   private ExoFeatureService featureService;
-
+  
+  private static final String EXO_EDITORS_RUNTIME_ID = "exo:editorsId";
+ 
   public FileDLPAction() {
     this.trashService = CommonsUtils.getService(TrashService.class);
     this.queueDlpService = CommonsUtils.getService(QueueDlpService.class);
@@ -47,6 +51,9 @@ public class FileDLPAction implements AdvancedAction {
       case Event.NODE_ADDED:
         node = (NodeImpl) context.get(InvocationContext.CURRENT_ITEM);
         if(node != null && !trashService.isInTrash(node)) {
+          if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
+            node = node.getParent();
+          }
           String entityId = node.getInternalIdentifier();
           queueDlpService.addToQueue(FileDlpConnector.TYPE, entityId);
         }
@@ -54,7 +61,7 @@ public class FileDLPAction implements AdvancedAction {
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
         PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
-        if(property != null && property.getType() != 1) {
+        if(property != null && !property.getName().equals(EXO_EDITORS_RUNTIME_ID) && !property.getName().equals(FileDlpConnector.RESTORE_WORKSPACE) && !property.getName().equals(FileDlpConnector.RESTORE_PATH)) {
           node = property.getParent();
           if (node != null && !trashService.isInTrash(node)) {
             if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
