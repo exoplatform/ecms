@@ -322,7 +322,7 @@
             <description>Restore Positive Dlp item Event Listener</description>
         </component-plugin>
         <component-plugin>
-            <name>dlp.listener.event.delete.document</name>
+            <name>dlp.listener.event.delete.item</name>
             <set-method>addListener</set-method>
             <type>org.exoplatform.ecm.connector.dlp.PositiveFileDLPListener</type>
             <description>Delete Positive Dlp Document Event Listener</description>
