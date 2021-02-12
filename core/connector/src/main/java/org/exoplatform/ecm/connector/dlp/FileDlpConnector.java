@@ -109,7 +109,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(itemReference);
       String fileName = node.getName();
-      restoreFromQuarantine("/" + DLP_SECURITY_FOLDER+ "/" + fileName, WCMCoreUtils.getUserSessionProvider());
+      restoreFromQuarantine(node.getPath(), WCMCoreUtils.getUserSessionProvider());
       indexingService.reindex(TYPE, itemReference);
       saveRestoredDlpItem(node.getUUID());
       long endTime = System.currentTimeMillis();
