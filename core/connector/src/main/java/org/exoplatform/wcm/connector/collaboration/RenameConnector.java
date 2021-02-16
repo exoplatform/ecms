@@ -110,7 +110,7 @@ public class RenameConnector implements ResourceContainer {
       }
       String newExoTitle = newTitle;
       // Clarify new name & check to add extension
-      String newName = Text.escapeIllegalJcrChars(newTitle);
+      String newName = Text.escapeIllegalJcrChars(Utils.cleanString(newTitle));
       
       // Set default name if new title contain no valid character
       newName = (StringUtils.isEmpty(newName)) ? DEFAULT_NAME : newName;
