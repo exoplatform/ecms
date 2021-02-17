@@ -31,9 +31,7 @@ public class FileDLPAction implements AdvancedAction {
   private ExoFeatureService featureService;
   
   private static final String EXO_EDITORS_RUNTIME_ID = "exo:editorsId";
-
-  private static final String EXO_CURRENT_PROVIDER   = "exo:currentProvider";
-
+ 
   public FileDLPAction() {
     this.trashService = CommonsUtils.getService(TrashService.class);
     this.queueDlpService = CommonsUtils.getService(QueueDlpService.class);
@@ -61,7 +59,7 @@ public class FileDLPAction implements AdvancedAction {
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
         PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
-        if (property != null && !property.getName().equals(EXO_EDITORS_RUNTIME_ID) && !property.getName().equals(EXO_CURRENT_PROVIDER) && !property.getName().equals(FileDlpConnector.RESTORE_WORKSPACE) && !property.getName().equals(FileDlpConnector.RESTORE_PATH)) {
+        if (property != null && !property.getName().equals(EXO_EDITORS_RUNTIME_ID) && !property.getName().equals(FileDlpConnector.EXO_CURRENT_PROVIDER) && !property.getName().equals(FileDlpConnector.RESTORE_WORKSPACE) && !property.getName().equals(FileDlpConnector.RESTORE_PATH)) {
           node = property.getParent();
           if (node != null && !trashService.isInTrash(node)) {
             if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
