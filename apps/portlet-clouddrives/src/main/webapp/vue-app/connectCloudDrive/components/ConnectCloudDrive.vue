@@ -52,7 +52,8 @@
 </template>
 
 <script>
-import { getUserDrive } from "../../cloudDriveService";
+import { getUserDrive } from "../js/cloudDriveService";
+import { CloudDrivePlugin } from "../js/cloudDrivePlugin";
 
 export default {
   model: {
@@ -91,25 +92,33 @@ export default {
       if (this.showCloudDrawer) { this.showCloudDrawer = false; }
     }
   },
-  async created() {
-    if (!this.showCloudDrawer) {
-      try {
-        // get user drive only once when component created
-        const data = await getUserDrive();
-        this.userDrive = {
-          name: data.name,
-          title: data.name,
-          isSelected: false,
-          workspace: data.workspace,
-          homePath: data.homePath,
-        };
-        // get providers from cloudDrives module, note that providers should already exist in module at this stage
-        this.providers = cloudDrives.getProviders();
-      } catch (err) {
-        this.alert = { message: err.message, type: "error" };
-        this.showAlertMessage = true;
-      }
+  created() {
+    for (const extension of CloudDrivePlugin) {
+      // connect extension to AttachmentsComposer, "attachments-composer-action" is extension type
+      // composer and extension type should be the same as in extension.js inside ecm-wcm-extension
+      extensionRegistry.registerExtension("AttachmentsComposer", "attachments-composer-action", extension);
     }
+
+    if (!this.showCloudDrawer) {
+      // get user drive only once when component created
+      getUserDrive()
+        .then(data => {
+          this.userDrive = {
+            name: data.name,
+            title: data.name,
+            isSelected: false,
+            workspace: data.workspace,
+            homePath: data.homePath,
+          };
+          // get providers from cloudDrives module, note that providers should already exist in module at this stage
+          this.providers = cloudDrives.getProviders();
+        }).catch(err => {
+          this.alert = { message: err.message, type: "error" };
+          this.showAlertMessage = true;
+        });
+    }
+    this.$root.$on("cloud-drive-drawer-open", this.showCloudDrawer = true);
+    this.$root.$on("cloud-drive-drawer-close", this.showCloudDrawer = false);
   },
   methods: {
     connectToCloudDrive: function(providerId) {
