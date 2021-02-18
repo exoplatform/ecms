@@ -36,10 +36,10 @@ public class FileDLPAction implements AdvancedAction {
   
   private static final String EXO_EDITORS_RUNTIME_ID = "exo:editorsId";
 
-  private static final List<String> EXCLUDED_PROPERTY_NAMES   = Collections.unmodifiableList(Arrays.asList(EXO_EDITORS_RUNTIME_ID,
-                                                                                                           FileDlpConnector.EXO_CURRENT_PROVIDER,
-                                                                                                           FileDlpConnector.RESTORE_PATH,
-                                                                                                           FileDlpConnector.RESTORE_WORKSPACE));
+  private static final List<String> excludedPropertyNames = Collections.unmodifiableList(Arrays.asList(EXO_EDITORS_RUNTIME_ID,
+                                                                                                       FileDlpConnector.EXO_CURRENT_PROVIDER,
+                                                                                                       FileDlpConnector.RESTORE_PATH,
+                                                                                                       FileDlpConnector.RESTORE_WORKSPACE));
  
   public FileDLPAction() {
     this.trashService = CommonsUtils.getService(TrashService.class);
@@ -68,7 +68,7 @@ public class FileDLPAction implements AdvancedAction {
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
         PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
-        if (property != null && !EXCLUDED_PROPERTY_NAMES.contains(property.getName())) {
+        if (property != null && !excludedPropertyNames.contains(property.getName())) {
           node = property.getParent();
           if (node != null && !trashService.isInTrash(node)) {
             if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
