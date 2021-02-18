@@ -867,7 +867,7 @@ public class FileUIActivity extends BaseUIActivity{
       Node contentNode = NodeLocation.getNodeByLocation(fileAttachment.getNodeLocation());
       if (contentNode != null) {
         try {
-          if (!getTrashService().isInTrash(contentNode)) {
+          if (!getTrashService().isInTrash(contentNode) && !isQuarantinedItem(contentNode)) {
             fileAttachment.setContentName(getContentName(contentNode, fileAttachment.getContentName()));
             activityFileAttachments.add(fileAttachment);
           }
@@ -881,6 +881,10 @@ public class FileUIActivity extends BaseUIActivity{
 
   private <T> T getValueFromArray(int index, T... valuesArray) {
     return (valuesArray == null || index > (valuesArray.length - 1)) ? null : valuesArray[index];
+  }
+
+  private boolean isQuarantinedItem(Node node) throws RepositoryException {
+    return node.getPath().startsWith("/Security");
   }
 
   private String[] getParameterValues(Map<String, String> activityParams, String paramName) {
