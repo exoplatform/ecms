@@ -366,7 +366,17 @@ public class FileUploadHandler {
     return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, existenceAction,false);
   }
   /**
-   * Save as nt file.
+   * Save already uploaded file (identified by uploadId) as nt file.
+   * 
+   * 'synchronized' is used to avoid JCR index corruption when uploading massively files.
+   * The JCR index (that uses a very old version of Apache lucene)
+   * gets corrupted when doing massive modifications on the same parent node.
+   * 
+   * Thus here we have made this central method as synchronized to avoid corruption
+   * and ensure Data consistency in favor of performances. The upload itself is not synchronized,
+   * we still be able to upload concurrently using org.exoplatform.web.handler.UploadHandler
+   * but the commit of uploaded file to be stored on JCR is made using this method, thus this critical
+   * operation has been made synchronized.
    *
    * @param parent the parent
    * @param uploadId the upload id
@@ -377,7 +387,7 @@ public class FileUploadHandler {
    *
    * @throws Exception the exception
    */
-  public Response saveAsNTFile(Node parent,
+  public synchronized Response saveAsNTFile(Node parent,
                                String uploadId,
                                String fileName,
                                String language,
