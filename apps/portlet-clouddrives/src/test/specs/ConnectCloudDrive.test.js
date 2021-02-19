@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import ConnectCloudDrive from "../../main/webapp/vue-app/components/ConnectCloudDrive.vue";
+import ConnectCloudDrive from "../../main/webapp/vue-app/connectCloudDrive/components/ConnectCloudDrive.vue";
 import Vuetify from "vuetify";
 import Vue from "vue";
 
@@ -43,7 +43,13 @@ describe("ConnectCloudDrive.test.js", () => {
 
     process.nextTick(() => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
-      expect(cmp.userDrive).toEqual({ name: "Personal Documents", title: "Personal Documents", isSelected: false });
+      expect(cmp.userDrive).toEqual({
+        name: "Personal Documents",
+        title: "Personal Documents",
+        isSelected: false,
+        homePath: "/Personal__Documents",
+        workspace: "collaboration",
+      });
       expect(wrapper.findAll(".cloudDriveListItem")).toHaveLength(2);
       global.fetch.mockClear();
       wrapper.destroy();
