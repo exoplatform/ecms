@@ -10,7 +10,8 @@ const exoServerPath = "/exo-server";
 
 let config = merge(webpackCommonConfig, {
   output: {
-    path: path.resolve(`${exoServerPath}/webapps/${app}/`)
+    path: path.resolve(`${exoServerPath}/webapps/${app}/`),
+    filename: 'js/[name].bundle.js'
   },
   devtool: "inline-source-map"
 });
