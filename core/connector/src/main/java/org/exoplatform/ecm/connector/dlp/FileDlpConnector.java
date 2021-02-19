@@ -51,6 +51,8 @@ public class FileDlpConnector extends DlpServiceConnector {
   public static final String TYPE = "file";
 
   public static final String DLP_SECURITY_FOLDER = "Security";
+  
+  public static final String EXO_CURRENT_PROVIDER = "exo:currentProvider";
 
   private static final Log LOGGER = ExoLogger.getExoLogger(FileDlpConnector.class);
 
@@ -93,7 +95,7 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   @Override
   public boolean processItem(String entityId) {
-    if (!isIndexedByEs(entityId)) {
+    if (!isIndexedByEs(entityId) || editorOpened(entityId)) {
       return false;
     } else {
       checkMatchKeywordAndTreatItem(entityId);
@@ -388,6 +390,18 @@ public class FileDlpConnector extends DlpServiceConnector {
       if (node.isNodeType(EXO_RESTORE_LOCATION))
         node.removeMixin(EXO_RESTORE_LOCATION);
     }
+  }
+
+  private boolean editorOpened(String entityId) {
+    Node node = null;
+    try {
+      ExtendedSession session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      node = session.getNodeByIdentifier(entityId);
+      return node.hasProperty(EXO_CURRENT_PROVIDER);
+    } catch (RepositoryException e) {
+      LOGGER.error("Error while checking editor status", e);
+    }
+    return false;
   }
   
   private String removeAccents(String string) {
