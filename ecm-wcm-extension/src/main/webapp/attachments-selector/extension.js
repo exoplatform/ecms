@@ -6,7 +6,7 @@
 let attachmentsComposerActions = null;
 
 export function getAttachmentsComposerExtensions() {
-  if(attachmentsComposerActions == null) {
+  if(attachmentsComposerActions == null || !attachmentsComposerActions.length) {
     const allExtensions = getExtensionsByType('attachments-composer-action');
     // if some extension registered but has flag 'enabled' set to false, we don't add this extension
     attachmentsComposerActions = allExtensions.filter(extension => isExtensionEnabled(extension));
@@ -17,7 +17,7 @@ export function getAttachmentsComposerExtensions() {
 
 export function executeExtensionAction(extension, component) {
   if(extension.hasOwnProperty('onExecute') && isFunction(extension.onExecute)) {
-    extension.onExecute(component); // it will execute code inside onExecute() defined in configuration file
+    extension.onExecute.apply(component, [component]); // it will execute code inside onExecute() defined in configuration file
   }
 }
 
