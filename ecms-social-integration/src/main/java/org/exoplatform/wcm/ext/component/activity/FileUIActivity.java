@@ -41,6 +41,7 @@ import org.exoplatform.container.*;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadResource;
 import org.exoplatform.download.DownloadService;
+import org.exoplatform.ecm.connector.dlp.FileDlpConnector;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -867,7 +868,7 @@ public class FileUIActivity extends BaseUIActivity{
       Node contentNode = NodeLocation.getNodeByLocation(fileAttachment.getNodeLocation());
       if (contentNode != null) {
         try {
-          if (!getTrashService().isInTrash(contentNode)) {
+          if (!getTrashService().isInTrash(contentNode) && !isQuarantinedItem(contentNode)) {
             fileAttachment.setContentName(getContentName(contentNode, fileAttachment.getContentName()));
             activityFileAttachments.add(fileAttachment);
           }
@@ -881,6 +882,10 @@ public class FileUIActivity extends BaseUIActivity{
 
   private <T> T getValueFromArray(int index, T... valuesArray) {
     return (valuesArray == null || index > (valuesArray.length - 1)) ? null : valuesArray[index];
+  }
+
+  private boolean isQuarantinedItem(Node node) throws RepositoryException {
+    return node.getPath().startsWith("/" + FileDlpConnector.DLP_SECURITY_FOLDER + "/");
   }
 
   private String[] getParameterValues(Map<String, String> activityParams, String paramName) {
