@@ -111,10 +111,9 @@ public class RenameConnector implements ResourceContainer {
       }
       String newExoTitle = newTitle;
       // Clarify new name & check to add extension
-
       String newName  = Text.escapeIllegalJcrChars(newTitle);
       newName = URLDecoder.decode(newName,"UTF-8");
-
+      
       // Set default name if new title contain no valid character
       newName = (StringUtils.isEmpty(newName)) ? DEFAULT_NAME : newName;
 
