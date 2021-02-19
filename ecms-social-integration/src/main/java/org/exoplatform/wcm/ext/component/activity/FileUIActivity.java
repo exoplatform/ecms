@@ -41,6 +41,7 @@ import org.exoplatform.container.*;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadResource;
 import org.exoplatform.download.DownloadService;
+import org.exoplatform.ecm.connector.dlp.FileDlpConnector;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -884,7 +885,7 @@ public class FileUIActivity extends BaseUIActivity{
   }
 
   private boolean isQuarantinedItem(Node node) throws RepositoryException {
-    return node.getPath().startsWith("/Security");
+    return node.getPath().startsWith("/" + FileDlpConnector.DLP_SECURITY_FOLDER + "/");
   }
 
   private String[] getParameterValues(Map<String, String> activityParams, String paramName) {
