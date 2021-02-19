@@ -8,9 +8,7 @@ import org.exoplatform.commons.api.settings.ExoFeatureService;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.documents.impl.DocumentServiceImpl;
 import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.PropertyImpl;
@@ -19,6 +17,10 @@ import org.exoplatform.services.jcr.impl.ext.action.AdvancedActionException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * JCR action which listens on all nodes events to validate them
@@ -33,6 +35,11 @@ public class FileDLPAction implements AdvancedAction {
   private ExoFeatureService featureService;
   
   private static final String EXO_EDITORS_RUNTIME_ID = "exo:editorsId";
+
+  private static final List<String> excludedPropertyNames = Collections.unmodifiableList(Arrays.asList(EXO_EDITORS_RUNTIME_ID,
+                                                                                                       FileDlpConnector.EXO_CURRENT_PROVIDER,
+                                                                                                       FileDlpConnector.RESTORE_PATH,
+                                                                                                       FileDlpConnector.RESTORE_WORKSPACE));
  
   public FileDLPAction() {
     this.trashService = CommonsUtils.getService(TrashService.class);
@@ -61,7 +68,7 @@ public class FileDLPAction implements AdvancedAction {
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
         PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
-        if(property != null && !property.getName().equals(EXO_EDITORS_RUNTIME_ID) && !property.getName().equals(FileDlpConnector.RESTORE_WORKSPACE) && !property.getName().equals(FileDlpConnector.RESTORE_PATH)) {
+        if (property != null && !excludedPropertyNames.contains(property.getName())) {
           node = property.getParent();
           if (node != null && !trashService.isInTrash(node)) {
             if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
