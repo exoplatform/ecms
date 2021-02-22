@@ -277,6 +277,7 @@ public class FileUploadHandler {
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
     fileName = Text.escapeIllegalJcrChars(fileName);
+    fileName = URLDecoder.decode(URLDecoder.decode(fileName,"UTF-8"),"UTF-8");
     fileName = Utils.cleanNameWithAccents(fileName);
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
