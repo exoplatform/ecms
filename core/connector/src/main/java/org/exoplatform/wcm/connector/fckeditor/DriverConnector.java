@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -465,6 +466,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
         fileName = Text.escapeIllegalJcrChars(fileName);
+        fileName = URLDecoder.decode(fileName, "UTF-8");
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
                                            currentPortal,
