@@ -7,6 +7,8 @@ import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.commons.dlp.service.RestoredDlpItemService;
+import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -57,6 +59,12 @@ public class TestFileDlpConnector {
 
   @Mock
   private DlpOperationProcessor dlpOperationProcessor;
+
+  @Mock
+  private LinkManager linkManager;
+
+  @Mock
+  private TrashService trashService;
   
   @Test
   public void testProcessItemWhenIsIndexed() throws Exception {
@@ -107,10 +115,12 @@ public class TestFileDlpConnector {
     SessionProvider sessionProvider = mock(SessionProvider.class);
     when(sessionProvider.getSession(Mockito.any(), Mockito.any())).thenReturn(session);
     when(WCMCoreUtils.getSystemSessionProvider()).thenReturn(sessionProvider);
-  
-  
+    when(WCMCoreUtils.getService(LinkManager.class)).thenReturn(linkManager);
+    when(WCMCoreUtils.getService(TrashService.class)).thenReturn(trashService);
+
+
     fileDlpConnectorSpy.processItem(uuid);
-  
+
     // Then
     Mockito.verify(fileDlpConnectorSpy,Mockito.times(1)).treatItem(Mockito.eq(uuid),Mockito.any());
     Mockito.verify(workspace, Mockito.times(1)).move(path,"/"+fileDlpConnector.DLP_SECURITY_FOLDER+"/"+nodeName);
@@ -159,7 +169,9 @@ public class TestFileDlpConnector {
     SessionProvider sessionProvider = mock(SessionProvider.class);
     when(sessionProvider.getSession(Mockito.any(), Mockito.any())).thenReturn(session);
     when(WCMCoreUtils.getSystemSessionProvider()).thenReturn(sessionProvider);
-    
+    when(WCMCoreUtils.getService(LinkManager.class)).thenReturn(linkManager);
+    when(WCMCoreUtils.getService(TrashService.class)).thenReturn(trashService);
+
     
     fileDlpConnectorSpy.processItem(uuid);
     

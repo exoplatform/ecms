@@ -19,6 +19,7 @@ import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -163,6 +164,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       if (!node.getPath().startsWith("/"+DLP_SECURITY_FOLDER+"/") && (restoredDlpItem == null ||  getNodeLastModifiedDate(node) > restoredDlpItem.getDetectionDate())) {
         workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
+        Utils.removeDeadSymlinks(node);
         saveDlpPositiveItem(node,searchResults);
         addRestorePathInfo(node.getName(), restorePath, workspace.getName());
         long endTime = System.currentTimeMillis();
