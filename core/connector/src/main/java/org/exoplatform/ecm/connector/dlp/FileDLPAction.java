@@ -38,8 +38,7 @@ public class FileDLPAction implements AdvancedAction {
 
   private static final List<String> excludedPropertyNames = Collections.unmodifiableList(Arrays.asList(EXO_EDITORS_RUNTIME_ID,
                                                                                                        FileDlpConnector.EXO_CURRENT_PROVIDER,
-                                                                                                       FileDlpConnector.RESTORE_PATH,
-                                                                                                       FileDlpConnector.RESTORE_WORKSPACE));
+                                                                                                       FileDlpConnector.RESTORE_PATH));
  
   public FileDLPAction() {
     this.trashService = CommonsUtils.getService(TrashService.class);
