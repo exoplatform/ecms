@@ -23,7 +23,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -58,8 +57,6 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private static final String COLLABORATION_WS = "collaboration";
 
-  private static final String DLP_KEYWORDS_PARAM = "dlp.keywords";
-
   private static final String ADMINISTRATORS_GROUP = "/platform/administrators";
 
   private RepositoryService repositoryService;
@@ -69,8 +66,6 @@ public class FileDlpConnector extends DlpServiceConnector {
   final static public String EXO_RESTORE_LOCATION = "exo:restoreLocation";
 
   final static public String RESTORE_PATH = "exo:restorePath";
-
-  final static public String RESTORE_WORKSPACE = "exo:restoreWorkspace";
 
   private IndexingService indexingService;
 
@@ -328,7 +323,6 @@ public class FileDlpConnector extends DlpServiceConnector {
     if (node != null) {
       node.addMixin(EXO_RESTORE_LOCATION);
       node.setProperty(RESTORE_PATH, restorePath);
-      node.setProperty(RESTORE_WORKSPACE, nodeWorkspace);
       node.save();
     }
   }
@@ -363,19 +357,12 @@ public class FileDlpConnector extends DlpServiceConnector {
                                 SessionProvider sessionProvider) throws Exception {
 
     Node securityHomeNode = this.getSecurityHomeNode();
-    Session securityNodeSession = securityHomeNode.getSession();
-    Node securityNode = (Node)securityNodeSession.getItem(securityNodePath);
-    String securityWorkspace = securityNodeSession.getWorkspace().getName();
-    String restoreWorkspace = securityNode.getProperty(RESTORE_WORKSPACE).getString();
+    Session restoreSession = securityHomeNode.getSession();
+    Node securityNode = (Node) restoreSession.getItem(securityNodePath);
     String restorePath = securityNode.getProperty(RESTORE_PATH).getString();
 
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session restoreSession = sessionProvider.getSession(restoreWorkspace,  manageableRepository);
-
-    if (restoreWorkspace.equals(securityWorkspace)) {
-      securityNodeSession.getWorkspace().move(securityNodePath, restorePath);
-    }
-    removeRestorePathInfo(restoreSession,restorePath);
+    restoreSession.getWorkspace().move(securityNodePath, restorePath);
+    removeRestorePathInfo(restoreSession, restorePath);
     securityHomeNode.save();
     restoreSession.save();
   }
