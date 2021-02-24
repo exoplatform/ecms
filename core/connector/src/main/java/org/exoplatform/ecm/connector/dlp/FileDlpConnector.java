@@ -108,7 +108,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       String fileName = node.getName();
       restoreFromQuarantine(node.getPath(), WCMCoreUtils.getUserSessionProvider());
       indexingService.reindex(TYPE, itemReference);
-      saveRestoredDlpItem(node.getUUID());
+      saveRestoredDlpItem(node);
       long endTime = System.currentTimeMillis();
       long totalTime = endTime - startTime;
       LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
@@ -296,9 +296,10 @@ public class FileDlpConnector extends DlpServiceConnector {
     return detectedKeywords.stream().collect(Collectors.joining(", "));
   }
 
-  private void saveRestoredDlpItem(String nodeUID) {
+  private void saveRestoredDlpItem(Node node) throws Exception{
     RestoredDlpItemEntity restoredDlpItemEntity = new RestoredDlpItemEntity();
-    restoredDlpItemEntity.setReference(nodeUID);
+    restoredDlpItemEntity.setReference(node.getUUID());
+    restoredDlpItemEntity.setRestoredUrl(WCMCoreUtils.getLinkInDocumentsApplication(node.getPath()));
     restoredDlpItemEntity.setDetectionDate(Calendar.getInstance());
     restoredDlpItemService.addRestoredDlpItem(restoredDlpItemEntity);
   }
