@@ -137,7 +137,6 @@ public class FileDlpConnector extends DlpServiceConnector {
     String dlpKeywords = dlpOperationProcessor.getKeywords();
     if (dlpKeywords != null && !dlpKeywords.isEmpty()) {
       try {
-        dlpKeywords = dlpKeywords.replace(",", " ");
         searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
         Collection<SearchResult> searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
         if (searchResults.size() > 0) {
@@ -285,18 +284,26 @@ public class FileDlpConnector extends DlpServiceConnector {
                  .flatMap(Collection::stream)
                  .flatMap(Collection::stream)
                  .forEach(s -> {
-                   Matcher matcher = PATTERN.matcher(s);
-                   while (matcher.find()) {
-                     String keyword = dlpKeywordsList.stream().filter(key -> removeAccents(matcher.group(1)).contains(removeAccents(key))).findFirst().orElse(null);
-                     if (keyword != null && !keyword.isEmpty() && !detectedKeywords.contains(keyword)) {
-                       detectedKeywords.add(keyword);
+                   dlpKeywordsList.stream().filter(key -> removeAccents(s).contains(escapeSpecialCharacters(removeAccents(key)))).forEach(key -> {
+                     if (!key.isEmpty() && !detectedKeywords.contains(key)) {
+                       detectedKeywords.add(key);
                      }
-                   }
+                   });
                  });
     return detectedKeywords.stream().collect(Collectors.joining(", "));
   }
+  
+  private String escapeSpecialCharacters(String keyword) {
+    List<String> keywordParts = Arrays.stream(keyword.split("[+\\-=&|><!(){}\\[\\]^\"*?:/ @$]+"))
+                                      .distinct()
+                                      .collect(Collectors.toList());
+    for (String s : keywordParts) {
+      keyword = keyword.replace(s, "<em>" + s + "</em>");
+    }
+    return keyword;
+  }
 
-  private void saveRestoredDlpItem(Node node) throws Exception{
+  private void saveRestoredDlpItem(Node node) throws Exception {
     RestoredDlpItemEntity restoredDlpItemEntity = new RestoredDlpItemEntity();
     restoredDlpItemEntity.setReference(node.getUUID());
     restoredDlpItemEntity.setRestoredUrl(WCMCoreUtils.getLinkInDocumentsApplication(node.getPath()));
