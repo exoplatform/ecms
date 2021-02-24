@@ -6403,21 +6403,26 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     // delete special character
     if (cleanedStr.length() == 1) {
       char c = cleanedStr.charAt(0);
-      if (c == '.' || c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|') {
+      if (c == '.' || c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|' || c == 'ʿ' || c == 'ˇ') {
         // any -> _<NEXNUM OF c>
         cleanedStr.deleteCharAt(0);
         cleanedStr.append('_');
         cleanedStr.append(Integer.toHexString(c).toUpperCase());
       }
     } else {
-      for (int i = 0; i < cleanedStr.length(); i++) {
+      int strLength = cleanedStr.length();
+      int i = 0;
+      while (i < strLength) {
         char c = cleanedStr.charAt(i);
-        if (c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|') {
+        if (c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|' || c == 'ʿ' || c == 'ˇ') {
           cleanedStr.deleteCharAt(i);
           cleanedStr.insert(i, '_');
         } else if (!(Character.isLetterOrDigit(c) || Character.isWhitespace(c) || c == '.' || c == '-' || c == '_')) {
-          cleanedStr.deleteCharAt(i--);
+          cleanedStr.deleteCharAt(i);
+          strLength = cleanedStr.length();
+          continue;
         }
+        i++;
       }
     }
     return cleanedStr.toString().trim(); // finally trim also
