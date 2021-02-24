@@ -655,23 +655,19 @@ public class Utils {
     //the character ? seems to not be changed to d by the transliterate function
     StringBuffer cleanedStr = new StringBuffer(str.trim());
     // delete special character
-    for(int i = 0; i < cleanedStr.length(); i++) {
+    int strLength = cleanedStr.length();
+    int i = 0;
+    while (i < strLength) {
       char c = cleanedStr.charAt(i);
-      if(c == ' ') {
-        if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
-          cleanedStr.deleteCharAt(i--);
-        } else {
-          c = '-';
-          cleanedStr.setCharAt(i, c);
-        }
+      if (c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|' || c == 'ʿ' || c == 'ˇ') {
+        cleanedStr.deleteCharAt(i);
+        cleanedStr.insert(i, '_');
+      } else if (!(Character.isLetterOrDigit(c) || Character.isWhitespace(c) || c == '.' || c == '-' || c == '_')) {
+        cleanedStr.deleteCharAt(i);
+        strLength = cleanedStr.length();
         continue;
       }
-      if(i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
-        cleanedStr.deleteCharAt(i--);
-        continue;
-      }
-      if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
-        cleanedStr.deleteCharAt(i--);
+      i++;
     }
     while (StringUtils.isNotEmpty(cleanedStr.toString()) && !Character.isLetterOrDigit(cleanedStr.charAt(0))) {
       cleanedStr.deleteCharAt(0);
