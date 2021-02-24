@@ -284,7 +284,7 @@ public class FileDlpConnector extends DlpServiceConnector {
                  .flatMap(Collection::stream)
                  .flatMap(Collection::stream)
                  .forEach(s -> {
-                   dlpKeywordsList.stream().filter(key -> removeAccents(s).contains(escapeSpecialCharacters(key))).forEach(key -> {
+                   dlpKeywordsList.stream().filter(key -> removeAccents(s).contains(escapeSpecialCharacters(removeAccents(key)))).forEach(key -> {
                      if (!key.isEmpty() && !detectedKeywords.contains(key)) {
                        detectedKeywords.add(key);
                      }
@@ -294,7 +294,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   }
 
   private String escapeSpecialCharacters(String keyword) {
-    List<String> keywordParts = Arrays.stream(removeAccents(keyword).split("[+\\-=&|><!(){}\\[\\]^\"*?:/ @$]+"))
+    List<String> keywordParts = Arrays.stream(keyword.split("[+\\-=&|><!(){}\\[\\]^\"*?:/ @$]+"))
                                       .distinct()
                                       .collect(Collectors.toList());
     for (String s : keywordParts) {
