@@ -35,9 +35,9 @@ import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 
+import java.net.URLDecoder;
 import java.text.Normalizer;
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.Calendar;
@@ -184,13 +184,13 @@ public class FileDlpConnector extends DlpServiceConnector {
     return calendar.getTimeInMillis();
   }
 
-  private void saveDlpPositiveItem(Node node, Collection<SearchResult> searchResults) throws RepositoryException {
+  private void saveDlpPositiveItem(Node node, Collection<SearchResult> searchResults) throws Exception {
     DlpPositiveItemService dlpPositiveItemService = CommonsUtils.getService(DlpPositiveItemService.class);
     DlpPositiveItemEntity dlpPositiveItemEntity = new DlpPositiveItemEntity();
     dlpPositiveItemEntity.setReference(node.getUUID());
     if (node.hasProperty(NodetypeConstant.EXO_TITLE)) {
       String title = node.getProperty(NodetypeConstant.EXO_TITLE).getString();
-      dlpPositiveItemEntity.setTitle(title);
+      dlpPositiveItemEntity.setTitle(URLDecoder.decode(title,"UTF-8"));
     }
     if (node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIER)) {
       String author = node.getProperty(NodetypeConstant.EXO_LAST_MODIFIER).getString();
@@ -294,13 +294,13 @@ public class FileDlpConnector extends DlpServiceConnector {
   }
 
   private String escapeSpecialCharacters(String keyword) {
-    List<String> keywordParts = Arrays.stream(keyword.split("[+\\-=&|><!(){}\\[\\]^\"*?:/ @$]+"))
+    List<String> keywordParts = Arrays.stream(keyword.split("[+\\-=&|><!(){}\\[\\]^\"*?:/ @$#]+"))
                                       .distinct()
                                       .collect(Collectors.toList());
     for (String s : keywordParts) {
       keyword = keyword.replace(s, "<em>" + s + "</em>");
     }
-    return keyword;
+    return keyword.replaceAll("'","’");
   }
 
   private void saveRestoredDlpItem(String nodeUID) {
@@ -403,6 +403,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       string = Normalizer.normalize(string, Normalizer.Form.NFD);
       string = string.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
     }
-    return string.toLowerCase();
+    try {
+      return URLDecoder.decode(string.toLowerCase(), "UTF-8");
+    } catch (Exception e) {
+      return string.toLowerCase();
+    }
   }
 }
