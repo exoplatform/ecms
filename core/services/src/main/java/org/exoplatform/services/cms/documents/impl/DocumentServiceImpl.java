@@ -828,6 +828,7 @@ public class DocumentServiceImpl implements DocumentService {
          + "or exo:fileType like '%odt%' "
          + "or exo:fileType like '%officedocument%' "
          + "or exo:fileType like '%ms%') "
+         + "and not (jcr:mixinTypes like '%exo:exoDlpItem%' )"
          + (condition != null ? condition : "")
          + " order by exo:dateModified DESC";
      return getDocumentsByQuery(query, limit);
