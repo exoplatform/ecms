@@ -5,7 +5,6 @@ import javax.jcr.Workspace;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
-import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.commons.dlp.service.RestoredDlpItemService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
@@ -53,9 +52,6 @@ public class TestFileDlpConnector {
   private RestoredDlpItemService restoredDlpItemService;
   
   @Mock
-  private QueueDlpService queueDlpService;
-
-  @Mock
   private DlpOperationProcessor dlpOperationProcessor;
   
   @Test
@@ -86,7 +82,7 @@ public class TestFileDlpConnector {
     List<SearchResult> results = new ArrayList<>();
     results.add(new SearchResult("url","title","excerpt","detail", "imageUrl",5,4));
     when(fileSearchServiceConnector.dlpSearch(Mockito.any(),Mockito.eq("keyword1,keyword2"),Mockito.eq(uuid))).thenReturn(results);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService, dlpOperationProcessor, restoredDlpItemService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
   
     Workspace workspace = mock(Workspace.class);
@@ -101,7 +97,7 @@ public class TestFileDlpConnector {
     ExtendedSession session = mock(ExtendedSession.class);
     when(session.getWorkspace()).thenReturn(workspace);
     when(session.getNodeByIdentifier(uuid)).thenReturn(node);
-    when(session.getItem("/"+fileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
+    when(session.getItem("/" + FileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
     
     PowerMockito.mockStatic(WCMCoreUtils.class);
     SessionProvider sessionProvider = mock(SessionProvider.class);
@@ -113,8 +109,8 @@ public class TestFileDlpConnector {
   
     // Then
     Mockito.verify(fileDlpConnectorSpy,Mockito.times(1)).treatItem(Mockito.eq(uuid),Mockito.any());
-    Mockito.verify(workspace, Mockito.times(1)).move(path,"/"+fileDlpConnector.DLP_SECURITY_FOLDER+"/"+nodeName);
-    Mockito.verify(indexingService,Mockito.times(1)).unindex(fileDlpConnector.TYPE,uuid);
+    Mockito.verify(workspace, Mockito.times(1)).move(path, "/" + FileDlpConnector.DLP_SECURITY_FOLDER + "/" + nodeName);
+    Mockito.verify(indexingService,Mockito.times(1)).unindex(FileDlpConnector.TYPE, uuid);
   }
   
   @Test
@@ -138,7 +134,7 @@ public class TestFileDlpConnector {
     
     // When
     when(fileSearchServiceConnector.isIndexed(Mockito.any(),Mockito.eq(uuid))).thenReturn(false);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService, dlpOperationProcessor, restoredDlpItemService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
  
     Workspace workspace = mock(Workspace.class);
@@ -153,7 +149,7 @@ public class TestFileDlpConnector {
     ExtendedSession session = mock(ExtendedSession.class);
     when(session.getWorkspace()).thenReturn(workspace);
     when(session.getNodeByIdentifier(uuid)).thenReturn(node);
-    when(session.getItem("/"+fileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
+    when(session.getItem("/" + FileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
     
     PowerMockito.mockStatic(WCMCoreUtils.class);
     SessionProvider sessionProvider = mock(SessionProvider.class);
@@ -181,7 +177,7 @@ public class TestFileDlpConnector {
     constructorParams.setProperty("displayName", "file");
     constructorParams.setProperty("type", "file");
     initParams.addParameter(constructorParams);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, queueDlpService, dlpOperationProcessor, restoredDlpItemService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService);
 
     Method getDetectedKeywords = fileDlpConnector.getClass().getDeclaredMethod("getDetectedKeywords", Collection.class, String.class);
     getDetectedKeywords.setAccessible(true);

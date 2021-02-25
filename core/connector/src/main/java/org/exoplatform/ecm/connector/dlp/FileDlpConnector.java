@@ -57,11 +57,7 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private static final String COLLABORATION_WS = "collaboration";
 
-  private static final String ADMINISTRATORS_GROUP = "/platform/administrators";
-
   private RepositoryService repositoryService;
-
-  private static final Pattern PATTERN             = Pattern.compile("<em>(.*?)</em>", Pattern.DOTALL);
 
   final static public String EXO_RESTORE_LOCATION = "exo:restoreLocation";
 
@@ -73,17 +69,14 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private RestoredDlpItemService restoredDlpItemService;
 
-  private QueueDlpService queueDlpService;
-  
   private DlpOperationProcessor dlpOperationProcessor;
 
   public FileDlpConnector(InitParams initParams, FileSearchServiceConnector fileSearchServiceConnector,
-                          RepositoryService repositoryService, IndexingService indexingService, QueueDlpService queueDlpService, DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService) {
+                          RepositoryService repositoryService, IndexingService indexingService, DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService) {
     super(initParams);
     this.repositoryService = repositoryService;
     this.indexingService = indexingService;
     this.fileSearchServiceConnector = fileSearchServiceConnector;
-    this.queueDlpService = queueDlpService;
     this.restoredDlpItemService = restoredDlpItemService;
     this.dlpOperationProcessor = dlpOperationProcessor;
   }
@@ -241,37 +234,6 @@ public class FileDlpConnector extends DlpServiceConnector {
       LOGGER.error("Error while getting dlp item url", e);
     }
     return null;
-  }
-
-  @Override
-  public void addDriveAndFolderSecurityPermissions(String dlpGroups) throws Exception {
-    ManageDriveService manageDriveService = CommonsUtils.getService(ManageDriveService.class);
-    List<String> dlpGroupsList = Arrays.asList(dlpGroups.split(","));
-
-    ExtendedSession session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
-
-    Map<String, String[]> dlpSecurityFolderPermissions = new HashMap<String, String[]>();
-    dlpSecurityFolderPermissions.put("*:".concat(ADMINISTRATORS_GROUP), PermissionType.ALL);
-    StringBuilder dlpSecurityDrivePermissions = new StringBuilder();
-    dlpSecurityDrivePermissions.append("*:".concat(ADMINISTRATORS_GROUP));
-    for(String dlpGroup : dlpGroupsList) {
-      if(!dlpGroup.isEmpty() && !dlpGroup.equals(ADMINISTRATORS_GROUP)) {//Admin group to be removed from permissions suggestor
-        dlpSecurityDrivePermissions.append(",").append("*:").append(dlpGroup);
-        dlpSecurityFolderPermissions.put("*:".concat(dlpGroup), PermissionType.ALL);
-      }
-    }
-    Node dlpSecurityFolder = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
-    ((ExtendedNode)dlpSecurityFolder).setPermissions(dlpSecurityFolderPermissions);
-    dlpSecurityFolder.save();
-    
-    DriveData driveData = manageDriveService.getDriveByName(DLP_SECURITY_FOLDER);
-    driveData.setPermissions(dlpSecurityDrivePermissions.toString());
-    
-    String views = driveData.getViews();
-    if(!views.contains("List")){
-      views += ", List";
-    }
-    manageDriveService.addDrive(driveData.getName(), driveData.getWorkspace(), driveData.getPermissions(), driveData.getHomePath(), views, driveData.getIcon(), driveData.getViewPreferences(), driveData.getViewNonDocument(), driveData.getViewSideBar(), driveData.getShowHiddenNode(), driveData.getAllowCreateFolders(), driveData.getAllowNodeTypesOnTree());
   }
 
   private String getDetectedKeywords(Collection<SearchResult> searchResults, String dlpKeywords) {
