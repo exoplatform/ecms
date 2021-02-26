@@ -300,6 +300,8 @@ public class FileDlpConnector extends DlpServiceConnector {
     for (String s : keywordParts) {
       keyword = keyword.replace(s, "<em>" + s + "</em>");
     }
+    // ES replace any occurrence of single quote (') with an apostrophe (’), 
+    // so we need to do the same to get the detected keywords.
     return keyword.replaceAll("'","’");
   }
 
