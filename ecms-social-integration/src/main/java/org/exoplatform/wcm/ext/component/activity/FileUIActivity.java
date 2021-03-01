@@ -885,7 +885,7 @@ public class FileUIActivity extends BaseUIActivity{
   }
 
   private boolean isQuarantinedItem(Node node) throws RepositoryException {
-    return node.getPath().startsWith("/" + FileDlpConnector.DLP_SECURITY_FOLDER + "/");
+    return node.getPath().startsWith("/" + FileDlpConnector.DLP_QUARANTINE_FOLDER + "/");
   }
 
   private String[] getParameterValues(Map<String, String> activityParams, String paramName) {

@@ -277,7 +277,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   }
 
   private void addRestorePathInfo(String nodeName, String restorePath, String nodeWorkspace) throws Exception {
-    NodeIterator nodes = this.getSecurityHomeNode().getNodes(nodeName);
+    NodeIterator nodes = this.getQuarantineHomeNode().getNodes(nodeName);
     Node node = null;
     while (nodes.hasNext()) {
       Node currentNode = nodes.nextNode();
@@ -296,12 +296,12 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
   }
 
-  private Node getSecurityHomeNode() {
+  private Node getQuarantineHomeNode() {
     try {
       Session session = WCMCoreUtils.getSystemSessionProvider()
                                     .getSession(COLLABORATION_WS,
                                                 repositoryService.getCurrentRepository());
-      return (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
+      return (Node) session.getItem("/" + DLP_QUARANTINE_FOLDER);
     } catch (Exception e) {
       return null;
     }
@@ -325,7 +325,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   private void restoreFromQuarantine(String securityNodePath,
                                 SessionProvider sessionProvider) throws Exception {
 
-    Node securityHomeNode = this.getSecurityHomeNode();
+    Node securityHomeNode = this.getQuarantineHomeNode();
     Session restoreSession = securityHomeNode.getSession();
     Node securityNode = (Node) restoreSession.getItem(securityNodePath);
     String restorePath = securityNode.getProperty(RESTORE_PATH).getString();
