@@ -15,20 +15,17 @@ import org.exoplatform.commons.dlp.service.DlpPositiveItemService;
 import org.exoplatform.commons.dlp.service.RestoredDlpItemService;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.commons.dlp.queue.QueueDlpService;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -37,8 +34,6 @@ import org.exoplatform.web.controller.router.Router;
 
 import java.text.Normalizer;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.Calendar;
 
@@ -50,7 +45,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   public static final String TYPE = "file";
 
   public static final String DLP_QUARANTINE_FOLDER = "Quarantine";
-  
+
   public static final String EXO_CURRENT_PROVIDER = "exo:currentProvider";
 
   private static final Log LOGGER = ExoLogger.getExoLogger(FileDlpConnector.class);
@@ -63,6 +58,8 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   final static public String RESTORE_PATH = "exo:restorePath";
 
+  public static final String EXO_DLP_ITEM_MIXIN = "exo:exoDlpItem";
+
   private IndexingService indexingService;
 
   private FileSearchServiceConnector fileSearchServiceConnector;
@@ -71,14 +68,17 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private DlpOperationProcessor dlpOperationProcessor;
 
+  private LinkManager linkManager;
+
   public FileDlpConnector(InitParams initParams, FileSearchServiceConnector fileSearchServiceConnector,
-                          RepositoryService repositoryService, IndexingService indexingService, DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService) {
+                          RepositoryService repositoryService, IndexingService indexingService, DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService, LinkManager linkManager) {
     super(initParams);
     this.repositoryService = repositoryService;
     this.indexingService = indexingService;
     this.fileSearchServiceConnector = fileSearchServiceConnector;
     this.restoredDlpItemService = restoredDlpItemService;
     this.dlpOperationProcessor = dlpOperationProcessor;
+    this.linkManager = linkManager;
   }
 
   @Override
@@ -99,6 +99,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(itemReference);
       String fileName = node.getName();
+      removeMixinForRestoredItemSymlinks(node);
       restoreFromQuarantine(node.getPath(), WCMCoreUtils.getUserSessionProvider());
       indexingService.reindex(TYPE, itemReference);
       saveRestoredDlpItem(node.getUUID());
@@ -153,6 +154,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       String restorePath = fixRestorePath(node.getPath());
       RestoredDlpItem restoredDlpItem = findRestoredDlpItem(node.getUUID());
       if (!node.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/") && (restoredDlpItem == null ||  getNodeLastModifiedDate(node) > restoredDlpItem.getDetectionDate())) {
+        addMixinForRestoredItemSymlinks(node);
         workspace.move(node.getPath(), "/" + DLP_QUARANTINE_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
         saveDlpPositiveItem(node,searchResults);
@@ -160,10 +162,10 @@ public class FileDlpConnector extends DlpServiceConnector {
         long endTime = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         LOGGER.info("service={} operation={} parameters=\"fileName:{}\" status=ok " + "duration_ms={}",
-                 DlpOperationProcessor.DLP_FEATURE,
-                 DLP_POSITIVE_DETECTION,
-                 fileName,
-                 totalTime);
+                    DlpOperationProcessor.DLP_FEATURE,
+                    DLP_POSITIVE_DETECTION,
+                    fileName,
+                    totalTime);
       }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
@@ -194,7 +196,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     dlpPositiveItemEntity.setKeywords(getDetectedKeywords(searchResults, dlpOperationProcessor.getKeywords()));
     dlpPositiveItemService.addDlpPositiveItem(dlpPositiveItemEntity);
   }
-  
+
   @Override
   public void removePositiveItem(String itemReference) {
     ExtendedSession session = null;
@@ -206,6 +208,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       Node node = session.getNodeByIdentifier(itemReference);
 
       if (node != null && dlpQuarantineNode != null) {
+        Utils.removeDeadSymlinks(node);
         node.remove();
         dlpQuarantineNode.save();
       }
@@ -220,7 +223,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userId);
     return identity.getProfile().getProperty("external") != null &&  identity.getProfile().getProperty("external").equals("true");
   }
-  
+
   @Override
   public String getItemUrl(String itemReference) {
     ExtendedSession session = null;
@@ -323,7 +326,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   }
 
   private void restoreFromQuarantine(String securityNodePath,
-                                SessionProvider sessionProvider) throws Exception {
+                                     SessionProvider sessionProvider) throws Exception {
 
     Node securityHomeNode = this.getQuarantineHomeNode();
     Session restoreSession = securityHomeNode.getSession();
@@ -335,7 +338,7 @@ public class FileDlpConnector extends DlpServiceConnector {
     securityHomeNode.save();
     restoreSession.save();
   }
-  
+
   private void removeRestorePathInfo(Session session, String restorePath) throws Exception {
     Node sameNameNode = ((Node) session.getItem(restorePath));
     Node parent = sameNameNode.getParent();
@@ -359,12 +362,32 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
     return false;
   }
-  
+
   private String removeAccents(String string) {
     if (StringUtils.isNotBlank(string)) {
       string = Normalizer.normalize(string, Normalizer.Form.NFD);
       string = string.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
     }
     return string.toLowerCase();
+  }
+
+  private void addMixinForRestoredItemSymlinks (Node node) throws Exception {
+    List<Node> itemLinks = linkManager.getAllLinks(node, NodetypeConstant.EXO_SYMLINK,  WCMCoreUtils.getSystemSessionProvider());
+    if(itemLinks != null && !itemLinks.isEmpty()) {
+      for (Node nodeLink : itemLinks) {
+        nodeLink.addMixin(EXO_DLP_ITEM_MIXIN);
+        nodeLink.save();
+      }
+    }
+  }
+
+  private void removeMixinForRestoredItemSymlinks (Node node) throws Exception {
+    List<Node> itemLinks = linkManager.getAllLinks(node, NodetypeConstant.EXO_SYMLINK,  WCMCoreUtils.getSystemSessionProvider());
+    if(itemLinks != null && !itemLinks.isEmpty()) {
+      for (Node nodeLink : itemLinks) {
+        nodeLink.removeMixin(EXO_DLP_ITEM_MIXIN);
+        nodeLink.save();
+      }
+    }
   }
 }
