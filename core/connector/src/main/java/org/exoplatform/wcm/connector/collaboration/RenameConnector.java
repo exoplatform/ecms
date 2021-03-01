@@ -45,6 +45,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -110,8 +111,8 @@ public class RenameConnector implements ResourceContainer {
       }
       String newExoTitle = newTitle;
       // Clarify new name & check to add extension
-      String newName = Text.escapeIllegalJcrChars(newTitle);
-      
+      String newName  = Text.escapeIllegalJcrChars(newTitle);
+      newName = URLDecoder.decode(newName,"UTF-8");
       // Set default name if new title contain no valid character
       newName = (StringUtils.isEmpty(newName)) ? DEFAULT_NAME : newName;
 

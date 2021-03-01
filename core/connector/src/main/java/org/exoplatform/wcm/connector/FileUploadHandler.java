@@ -277,7 +277,7 @@ public class FileUploadHandler {
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
     fileName = Text.escapeIllegalJcrChars(fileName);
-    fileName = Utils.cleanNameWithAccents(fileName);
+    fileName = URLDecoder.decode(URLDecoder.decode(fileName,"UTF-8"),"UTF-8");
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
     if(parent.hasNode(fileName)){
@@ -442,8 +442,6 @@ public class FileUploadHandler {
       Node jcrContent=null;
       boolean fileCreated = false;
       String exoTitle = URLDecoder.decode(fileName, "UTF-8");
-      
-      fileName = Utils.cleanNameWithAccents(fileName);
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
       String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
       String nodeName = fileName;
