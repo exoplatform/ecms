@@ -456,6 +456,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
         fileName = Text.escapeIllegalJcrChars(fileName);
+        fileName = URLDecoder.decode(fileName, "UTF-8");
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
                                            currentPortal,
