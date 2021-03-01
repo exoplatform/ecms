@@ -6,6 +6,7 @@ import javax.jcr.Workspace;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.service.RestoredDlpItemService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -38,22 +39,25 @@ import static org.mockito.Mockito.when;
 public class TestFileDlpConnector {
 
   private FileDlpConnector     fileDlpConnector;
-  
+
   @Mock
   private RepositoryService repositoryService;
-  
+
   @Mock
   private IndexingService      indexingService;
-  
+
   @Mock
   private FileSearchServiceConnector fileSearchServiceConnector;
 
   @Mock
+  private LinkManager linkManager;
+
+  @Mock
   private RestoredDlpItemService restoredDlpItemService;
-  
+
   @Mock
   private DlpOperationProcessor dlpOperationProcessor;
-  
+
   @Test
   public void testProcessItemWhenIsIndexed() throws Exception {
 
@@ -72,50 +76,50 @@ public class TestFileDlpConnector {
     String uuid = "123456789";
     String nodeName="nodeName";
     String path = "/folder1/folder2/"+nodeName;
-  
+
     // When
-    
+
     when(fileSearchServiceConnector.isIndexed(Mockito.any(),Mockito.eq(uuid))).thenReturn(true);
-    
+
     when(dlpOperationProcessor.getKeywords()).thenReturn("keyword1,keyword2");
-    
+
     List<SearchResult> results = new ArrayList<>();
     results.add(new SearchResult("url","title","excerpt","detail", "imageUrl",5,4));
     when(fileSearchServiceConnector.dlpSearch(Mockito.any(),Mockito.eq("keyword1,keyword2"),Mockito.eq(uuid))).thenReturn(results);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService, linkManager);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
-  
+
     Workspace workspace = mock(Workspace.class);
-    
+
     Node node = mock(Node.class);
     when(node.getName()).thenReturn(nodeName);
     when(node.getPath()).thenReturn(path);
-    
+
     Node dlpSecurityNode=mock(Node.class);
     when(dlpSecurityNode.hasNode(nodeName)).thenReturn(false);
-    
+
     ExtendedSession session = mock(ExtendedSession.class);
     when(session.getWorkspace()).thenReturn(workspace);
     when(session.getNodeByIdentifier(uuid)).thenReturn(node);
     when(session.getItem("/" + FileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
-    
+
     PowerMockito.mockStatic(WCMCoreUtils.class);
     SessionProvider sessionProvider = mock(SessionProvider.class);
     when(sessionProvider.getSession(Mockito.any(), Mockito.any())).thenReturn(session);
     when(WCMCoreUtils.getSystemSessionProvider()).thenReturn(sessionProvider);
-  
-  
+
+
     fileDlpConnectorSpy.processItem(uuid);
-  
+
     // Then
     Mockito.verify(fileDlpConnectorSpy,Mockito.times(1)).treatItem(Mockito.eq(uuid),Mockito.any());
     Mockito.verify(workspace, Mockito.times(1)).move(path, "/" + FileDlpConnector.DLP_SECURITY_FOLDER + "/" + nodeName);
     Mockito.verify(indexingService,Mockito.times(1)).unindex(FileDlpConnector.TYPE, uuid);
   }
-  
+
   @Test
   public void testProcessItemWhenNotIndexed() throws Exception {
-    
+
     // Given
     InitParams initParams = new InitParams();
     ValueParam dlpKeywordsParam = new ValueParam();
@@ -131,38 +135,38 @@ public class TestFileDlpConnector {
     String uuid = "123456789";
     String nodeName="nodeName";
     String path = "/folder1/folder2/"+nodeName;
-    
+
     // When
     when(fileSearchServiceConnector.isIndexed(Mockito.any(),Mockito.eq(uuid))).thenReturn(false);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService, linkManager);
     FileDlpConnector fileDlpConnectorSpy = Mockito.spy(fileDlpConnector);
- 
+
     Workspace workspace = mock(Workspace.class);
-    
+
     Node node = mock(Node.class);
     when(node.getName()).thenReturn(nodeName);
     when(node.getPath()).thenReturn(path);
-    
+
     Node dlpSecurityNode=mock(Node.class);
     when(dlpSecurityNode.hasNode(nodeName)).thenReturn(false);
-    
+
     ExtendedSession session = mock(ExtendedSession.class);
     when(session.getWorkspace()).thenReturn(workspace);
     when(session.getNodeByIdentifier(uuid)).thenReturn(node);
     when(session.getItem("/" + FileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
-    
+
     PowerMockito.mockStatic(WCMCoreUtils.class);
     SessionProvider sessionProvider = mock(SessionProvider.class);
     when(sessionProvider.getSession(Mockito.any(), Mockito.any())).thenReturn(session);
     when(WCMCoreUtils.getSystemSessionProvider()).thenReturn(sessionProvider);
-    
-    
+
+
     fileDlpConnectorSpy.processItem(uuid);
-    
+
     // Then
     Mockito.verify(fileDlpConnectorSpy,Mockito.times(0)).treatItem(Mockito.eq(uuid), Mockito.any());
   }
-  
+
   @Test
   public void testGetDetectedKeywords() throws Exception {
     // Given
@@ -177,7 +181,7 @@ public class TestFileDlpConnector {
     constructorParams.setProperty("displayName", "file");
     constructorParams.setProperty("type", "file");
     initParams.addParameter(constructorParams);
-    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService);
+    fileDlpConnector = new FileDlpConnector(initParams, fileSearchServiceConnector, repositoryService, indexingService, dlpOperationProcessor, restoredDlpItemService, linkManager);
 
     Method getDetectedKeywords = fileDlpConnector.getClass().getDeclaredMethod("getDetectedKeywords", Collection.class, String.class);
     getDetectedKeywords.setAccessible(true);
@@ -200,11 +204,11 @@ public class TestFileDlpConnector {
     // then
     String result = (String) getDetectedKeywords.invoke(fileDlpConnector, searchResults, dlpKeywords);
     assertEquals("one, two", result);
-    
+
     // when
     List<String> strings2 = new ArrayList<>();
-    strings2.add("<em>one</em> <em>two</em> <em>two</em> <em>thRee</em>");  
-    
+    strings2.add("<em>one</em> <em>two</em> <em>two</em> <em>thRee</em>");
+
     List<String> strings3 = new ArrayList<>();
     strings3.add("<em>Three</em> <em>Three</em> <em>threes</em>");
 

@@ -626,6 +626,9 @@
   <nodeType name="exo:trashFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   </nodeType>
 
+  <nodeType name="exo:exoDlpItem" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+
   <nodeType name="exo:folksonomyFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   </nodeType>
 
