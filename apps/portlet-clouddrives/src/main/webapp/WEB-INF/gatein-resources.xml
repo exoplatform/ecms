@@ -27,13 +27,26 @@
     <name>CloudDrivePortlet</name>
     <module>
       <script>
-        <path>/vue-app/cloudDrivePlugin.js</path>
+        <minify>false</minify>
+        <path>/js/clouddrives-app.bundle.js</path>
       </script>
+      <depends>
+        <module>cloudDrives</module>
+      </depends>
+      <depends>
+        <module>vue</module>
+      </depends>
+      <depends>
+        <module>eXoVueI18n</module>
+      </depends>
+      <depends>
+        <module>vuetify</module>
+      </depends>
       <depends>
         <module>extensionRegistry</module>
       </depends>
       <depends>
-        <module>cloudDriveApp</module>
+        <module>cloudDriveUtils</module>
       </depends>
     </module>
   </portlet>
@@ -117,31 +130,7 @@
       <module>cloudDriveTasks</module>
     </depends>
   </module>
-  <module>
-    <name>cloudDriveApp</name>
-    <script>
-      <minify>false</minify>
-      <path>/js/clouddrives-app.bundle.js</path>
-    </script>
-    <depends>
-      <module>cloudDrives</module>
-    </depends>
-    <depends>
-      <module>vue</module>
-    </depends>
-    <depends>
-      <module>eXoVueI18n</module>
-    </depends>
-    <depends>
-      <module>vuetify</module>
-    </depends>
-    <depends>
-      <module>extensionRegistry</module>
-    </depends>
-    <depends>
-      <module>cloudDriveUtils</module>
-    </depends>
-  </module>
+
   <module>
     <name>cloudStorage</name>
     <script>

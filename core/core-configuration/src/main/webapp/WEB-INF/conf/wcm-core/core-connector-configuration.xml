@@ -7,10 +7,6 @@
 
 
   <component>
-    <type>org.exoplatform.ecm.connector.fckeditor.FCKCoreRESTConnector</type>
-  </component>
-
-  <component>
     <type>org.exoplatform.ecm.webui.core.fckconfig.FCKConfigService</type>
   </component>
 
@@ -67,9 +63,6 @@
   </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.authoring.LifecycleConnector</type>
   </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.RESTImagesRendererService</type>
@@ -152,7 +145,7 @@
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field name="workspace"><string>collaboration</string></field>
                     <field name="eventTypes"><string>addNode,addProperty,changeProperty</string></field>
-                    <field name="nodeTypes"><string>nt:file</string></field>
+                    <field name="nodeTypes"><string>nt:file,nt:resource</string></field>
                     <field name="path"><string>/</string></field>
                     <field name="isDeep"><boolean>true</boolean></field>
                     <field name="actionClassName"><string>org.exoplatform.ecm.connector.dlp.FileDLPAction</string></field>

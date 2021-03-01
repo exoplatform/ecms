@@ -338,6 +338,7 @@ export default {
   created(){
     this.addDefaultPath();
     this.getCloudDriveStatus();
+    document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {

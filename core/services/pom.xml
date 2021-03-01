@@ -200,10 +200,6 @@
       <artifactId>picocontainer</artifactId>
       <exclusions>
         <exclusion>
-          <artifactId>xstream</artifactId>
-          <groupId>xstream</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>jmock</artifactId>
           <groupId>jmock</groupId>
         </exclusion>
@@ -217,12 +213,6 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <!-- To replace the excluded old version -->
-      <groupId>com.thoughtworks.xstream</groupId>
-      <artifactId>xstream</artifactId>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>javax.transaction</groupId>

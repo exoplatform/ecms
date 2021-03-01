@@ -105,7 +105,7 @@
     fetchUserInformation: function(callback) {
       var self = this;
       return $.ajax({
-        url: "/rest/v1/social/users/" + eXo.env.portal.userName,
+        url: "/portal/rest/v1/social/users/" + eXo.env.portal.userName,
         cache: false
       }).done(function (data) {
         if (data.fullname != null) {
@@ -129,7 +129,7 @@
     fetchAuthorInformation: function(callback) {
       var self = this;
       return $.ajax({
-        url: "/rest/v1/social/users/" + self.settings.author.username,
+        url: "/portal/rest/v1/social/users/" + self.settings.author.username,
         cache: false
       }).done(function (data) {
         if (data.fullname != null) {
@@ -153,7 +153,7 @@
     fetchLikes: function() {
       var self = this;
       return $.ajax({
-        url: '/rest/v1/social/activities/' + this.settings.activity.id + '/likes'
+        url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes'
       }).done(function (data) {
         if (data.likes != null) {
           self.settings.activity.likes = data.likes.length;
@@ -168,7 +168,7 @@
     like: function(like) {
       var self = this;
       if(like) {
-        return $.post('/rest/v1/social/activities/' + this.settings.activity.id + '/likes', {liker: eXo.env.portal.userName})
+        return $.post('/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes', {liker: eXo.env.portal.userName})
           .done(function (data) {
             self.settings.activity.liked = true;
             self.settings.activity.likes++;
@@ -182,7 +182,7 @@
       } else {
         return $.ajax({
             type: 'DELETE',
-            url: '/rest/v1/social/activities/' + this.settings.activity.id + '/likes/' + eXo.env.portal.userName
+            url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes/' + eXo.env.portal.userName
           }).done(function (data) {
             self.settings.activity.liked = false;
             self.settings.activity.likes--;
@@ -248,7 +248,7 @@
       var comment = this.findComment(commentId);
 
       if(!comment.liked) {
-        return $.post('/rest/v1/social/comments/' + commentId + '/likes', {liker: eXo.env.portal.userName})
+        return $.post('/portal/rest/v1/social/comments/' + commentId + '/likes', {liker: eXo.env.portal.userName})
           .done(function (data) {
             comment.liked = true;
             comment.nbOfLikes++;
@@ -277,7 +277,7 @@
       } else {
         return $.ajax({
           type: 'DELETE',
-          url: '/rest/v1/social/comments/' + commentId + '/likes/' + eXo.env.portal.userName
+          url: '/portal/rest/v1/social/comments/' + commentId + '/likes/' + eXo.env.portal.userName
         }).done(function (data) {
           comment.liked = false;
           comment.nbOfLikes--;
@@ -586,7 +586,7 @@
       if(this.settings.activity.id != null) {
         // load comments activity
         $.ajax({
-          url: '/rest/v1/social/activities/' + this.settings.activity.id + '/comments?expand=identity,likes,subComments',
+          url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/comments?expand=identity,likes,subComments',
           cache: false
         }).done(function(data) {
           self.clearErrorMessage();
@@ -607,7 +607,7 @@
       } else {
         // load document comments
         $.ajax({
-          url: '/rest/contents/comment/all',
+          url: '/portal/rest/contents/comment/all',
           data: {jcrPath: '/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + this.settings.doc.path},
           dataType: 'xml',
           cache: false
@@ -640,7 +640,7 @@
           for(var key in commentorsUsernames) {
             if (commentorsUsernames.hasOwnProperty(key)) {
               promises.push($.ajax({
-                url: '/rest/v1/social/users/' + key
+                url: '/portal/rest/v1/social/users/' + key
               }).done(function (data) {
                 commentors[data.username] = data;
               }));
@@ -895,7 +895,7 @@
           // post comment on the activity
           return $.ajax({
             type: 'POST',
-            url: '/rest/v1/social/activities/' + this.settings.activity.id + '/comments',
+            url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/comments',
             data: JSON.stringify(postData),
             contentType: 'application/json'
           }).done(function (data) {
@@ -911,7 +911,7 @@
           // post comment on the document
           return $.ajax({
             type: 'POST',
-            url: '/rest/contents/comment/add',
+            url: '/portal/rest/contents/comment/add',
             data: {
               jcrPath: '/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + this.settings.doc.path,
               comment: commentContent
@@ -936,7 +936,7 @@
       if(this.settings.activity.id != null) {
         return $.ajax({
           type: 'DELETE',
-          url: '/rest/v1/social/comments/' + commentId
+          url: '/portal/rest/v1/social/comments/' + commentId
         }).done(function (data) {
           self.loadComments();
           self.clearErrorMessage();
@@ -947,7 +947,7 @@
       } else {
         return $.ajax({
           type: 'DELETE',
-          url: '/rest/contents/comment/delete/?jcrPath=/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + this.settings.doc.path + '&commentId=' + commentId
+          url: '/portal/rest/contents/comment/delete/?jcrPath=/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + this.settings.doc.path + '&commentId=' + commentId
         }).done(function (data) {
           self.loadComments();
           self.clearErrorMessage();
@@ -1072,12 +1072,12 @@
             $('.showComments').attr("data-action-initialized", "true");
           }
         }
-  
+
         $('.loading', docContentContainer).show();
         this.show();
       }
 
-      docContentContainer.load('/rest/private/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + '/' + this.settings.doc.id, function() {
+      docContentContainer.load(eXo.env.portal.context + '/' + eXo.env.portal.rest + '/contentviewer/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + '/' + this.settings.doc.id, function() {
         $('.loading', docContentContainer).hide();
         resizeEventHandler();
       });

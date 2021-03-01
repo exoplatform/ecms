@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { isCloudDriveEnabled } from "../../cloudDriveService";
+import { isCloudDriveEnabled } from "../js/cloudDriveService";
 
 export default {
   data: function() {

@@ -18,6 +18,10 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * JCR action which listens on all nodes events to validate them
  */
@@ -29,7 +33,13 @@ public class FileDLPAction implements AdvancedAction {
   private QueueDlpService queueDlpService;
   
   private ExoFeatureService featureService;
+  
+  private static final String EXO_EDITORS_RUNTIME_ID = "exo:editorsId";
 
+  private static final List<String> excludedPropertyNames = Collections.unmodifiableList(Arrays.asList(EXO_EDITORS_RUNTIME_ID,
+                                                                                                       FileDlpConnector.EXO_CURRENT_PROVIDER,
+                                                                                                       FileDlpConnector.RESTORE_PATH));
+ 
   public FileDLPAction() {
     this.trashService = CommonsUtils.getService(TrashService.class);
     this.queueDlpService = CommonsUtils.getService(QueueDlpService.class);
@@ -47,6 +57,9 @@ public class FileDLPAction implements AdvancedAction {
       case Event.NODE_ADDED:
         node = (NodeImpl) context.get(InvocationContext.CURRENT_ITEM);
         if(node != null && !trashService.isInTrash(node)) {
+          if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
+            node = node.getParent();
+          }
           String entityId = node.getInternalIdentifier();
           queueDlpService.addToQueue(FileDlpConnector.TYPE, entityId);
         }
@@ -54,7 +67,7 @@ public class FileDLPAction implements AdvancedAction {
       case Event.PROPERTY_ADDED:
       case Event.PROPERTY_CHANGED:
         PropertyImpl property = (PropertyImpl) context.get(InvocationContext.CURRENT_ITEM);
-        if(property != null) {
+        if (property != null && !excludedPropertyNames.contains(property.getName())) {
           node = property.getParent();
           if (node != null && !trashService.isInTrash(node)) {
             if (node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
