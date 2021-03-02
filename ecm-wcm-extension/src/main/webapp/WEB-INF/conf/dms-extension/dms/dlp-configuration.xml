@@ -46,7 +46,7 @@
                           <object
                             type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
                             <field name="identity">
-                              <string>*:/platform/administrators</string>
+                              <string>*:/platform/dlp</string>
                             </field>
                             <field name="read">
                               <string>true</string>
@@ -95,7 +95,7 @@
               <string>collaboration</string>
             </field>
             <field name="permissions">
-              <string>*:/platform/administrators</string>
+              <string>*:/platform/dlp</string>
             </field>
             <field name="homePath">
               <string>/Quarantine</string>
