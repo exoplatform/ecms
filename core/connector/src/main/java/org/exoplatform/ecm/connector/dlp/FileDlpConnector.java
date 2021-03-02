@@ -356,12 +356,17 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   private boolean editorOpened(String entityId) {
     Node node = null;
+    ExtendedSession session = null;
     try {
-      ExtendedSession session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       node = session.getNodeByIdentifier(entityId);
       return node.hasProperty(EXO_CURRENT_PROVIDER);
     } catch (RepositoryException e) {
       LOGGER.error("Error while checking editor status", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
     return false;
   }
