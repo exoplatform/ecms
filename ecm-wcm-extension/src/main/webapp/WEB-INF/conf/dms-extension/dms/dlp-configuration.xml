@@ -104,7 +104,7 @@
               <string></string>
             </field>
             <field name="views">
-              <string>Admin, List</string>
+              <string>List</string>
             </field>
             <field name="viewPreferences">
               <boolean>true</boolean>
