@@ -45,7 +45,7 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   public static final String TYPE = "file";
 
-  public static final String DLP_SECURITY_FOLDER = "Security";
+  public static final String DLP_QUARANTINE_FOLDER = "Quarantine";
 
   public static final String EXO_CURRENT_PROVIDER = "exo:currentProvider";
 
@@ -154,9 +154,9 @@ public class FileDlpConnector extends DlpServiceConnector {
       String fileName = node.getName();
       String restorePath = fixRestorePath(node.getPath());
       RestoredDlpItem restoredDlpItem = findRestoredDlpItem(node.getUUID());
-      if (!node.getPath().startsWith("/"+DLP_SECURITY_FOLDER+"/") && (restoredDlpItem == null ||  getNodeLastModifiedDate(node) > restoredDlpItem.getDetectionDate())) {
+      if (!node.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/") && (restoredDlpItem == null ||  getNodeLastModifiedDate(node) > restoredDlpItem.getDetectionDate())) {
         addMixinForRestoredItemSymlinks(node);
-        workspace.move(node.getPath(), "/" + DLP_SECURITY_FOLDER + "/" + fileName);
+        workspace.move(node.getPath(), "/" + DLP_QUARANTINE_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
         saveDlpPositiveItem(node,searchResults);
         addRestorePathInfo(node.getName(), restorePath, workspace.getName());
@@ -205,13 +205,13 @@ public class FileDlpConnector extends DlpServiceConnector {
       session =
           (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
                                         .getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
-      Node dlpSecurityNode = (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
+      Node dlpQuarantineNode = (Node) session.getItem("/" + DLP_QUARANTINE_FOLDER);
       Node node = session.getNodeByIdentifier(itemReference);
 
-      if (node != null && dlpSecurityNode != null) {
+      if (node != null && dlpQuarantineNode != null) {
         Utils.removeDeadSymlinks(node);
         node.remove();
-        dlpSecurityNode.save();
+        dlpQuarantineNode.save();
       }
     } catch (Exception e) {
       LOGGER.error("Error while deleting dlp file item", e);
@@ -283,7 +283,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   }
 
   private void addRestorePathInfo(String nodeName, String restorePath, String nodeWorkspace) throws Exception {
-    NodeIterator nodes = this.getSecurityHomeNode().getNodes(nodeName);
+    NodeIterator nodes = this.getQuarantineHomeNode().getNodes(nodeName);
     Node node = null;
     while (nodes.hasNext()) {
       Node currentNode = nodes.nextNode();
@@ -302,12 +302,12 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
   }
 
-  private Node getSecurityHomeNode() {
+  private Node getQuarantineHomeNode() {
     try {
       Session session = WCMCoreUtils.getSystemSessionProvider()
                                     .getSession(COLLABORATION_WS,
                                                 repositoryService.getCurrentRepository());
-      return (Node) session.getItem("/" + DLP_SECURITY_FOLDER);
+      return (Node) session.getItem("/" + DLP_QUARANTINE_FOLDER);
     } catch (Exception e) {
       return null;
     }
@@ -331,7 +331,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   private void restoreFromQuarantine(String securityNodePath,
                                      SessionProvider sessionProvider) throws Exception {
 
-    Node securityHomeNode = this.getSecurityHomeNode();
+    Node securityHomeNode = this.getQuarantineHomeNode();
     Session restoreSession = securityHomeNode.getSession();
     Node securityNode = (Node) restoreSession.getItem(securityNodePath);
     String restorePath = securityNode.getProperty(RESTORE_PATH).getString();

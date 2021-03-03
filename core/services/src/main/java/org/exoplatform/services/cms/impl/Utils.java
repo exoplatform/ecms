@@ -96,6 +96,8 @@ public class Utils {
 
   public static final String PUBLIC = "Public";
   
+  public static final String QUARANTINE = "Quarantine";
+  
   public static final String SPACES_NODE_PATH = "/Groups/spaces";
   
   final static public String SPACE_GROUP = "/spaces";
@@ -779,7 +781,7 @@ public class Utils {
       nodeType = NodetypeConstant.EXO_FAVOURITE_FOLDER;
     }
     else if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
-      if (PRIVATE.equals(node.getName()) || PUBLIC.equals(node.getName())) {
+      if (PRIVATE.equals(node.getName()) || PUBLIC.equals(node.getName()) || QUARANTINE.equals(node.getName())) {
           nodeType = String.format("exo:%sFolder", node.getName().toLowerCase());
       } else {
         for (String specificFolder : NodetypeConstant.SPECIFIC_FOLDERS) {

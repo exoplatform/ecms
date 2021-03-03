@@ -12,7 +12,7 @@
       <init-params>
         <object-param>
           <name>cms.configuration</name>
-          <description>configuration for Dlp Security folder</description>
+          <description>configuration for Dlp Quarantine folder</description>
           <object
             type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
             <field name="workspaces">
@@ -28,10 +28,10 @@
                   <object
                     type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
                     <field name="alias">
-                      <string>dlpSecurityPath</string>
+                      <string>dlpQuarantinePath</string>
                     </field>
                     <field name="path">
-                      <string>/Security</string>
+                      <string>/Quarantine</string>
                     </field>
                     <field name="mixinTypes">
                       <collection type="java.util.ArrayList">
@@ -46,7 +46,7 @@
                           <object
                             type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
                             <field name="identity">
-                              <string>*:/platform/administrators</string>
+                              <string>*:/platform/dlp</string>
                             </field>
                             <field name="read">
                               <string>true</string>
@@ -81,30 +81,30 @@
       <name>manage.drive.plugin</name>
       <set-method>setManageDrivePlugin</set-method>
       <type>org.exoplatform.services.cms.drives.impl.ManageDrivePlugin</type>
-      <description>configuration for Dlp Security drive</description>
+      <description>configuration for Dlp Quarantine drive</description>
       <init-params>
 
         <object-param>
-          <name>Dlp Security</name>
-          <description>Dlp Security drive</description>
+          <name>Dlp Quarantine</name>
+          <description>Dlp Quarantine drive</description>
           <object type="org.exoplatform.services.cms.drives.DriveData">
             <field name="name">
-              <string>Security</string>
+              <string>Quarantine</string>
             </field>
             <field name="workspace">
               <string>collaboration</string>
             </field>
             <field name="permissions">
-              <string>*:/platform/administrators</string>
+              <string>*:/platform/dlp</string>
             </field>
             <field name="homePath">
-              <string>/Security</string>
+              <string>/Quarantine</string>
             </field>
             <field name="icon">
               <string></string>
             </field>
             <field name="views">
-              <string>Admin, List</string>
+              <string>List</string>
             </field>
             <field name="viewPreferences">
               <boolean>true</boolean>

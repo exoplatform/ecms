@@ -95,13 +95,13 @@ public class TestFileDlpConnector {
     when(node.getName()).thenReturn(nodeName);
     when(node.getPath()).thenReturn(path);
 
-    Node dlpSecurityNode=mock(Node.class);
-    when(dlpSecurityNode.hasNode(nodeName)).thenReturn(false);
-
+    Node dlpQuarantineNode = mock(Node.class);
+    when(dlpQuarantineNode.hasNode(nodeName)).thenReturn(false);
+    
     ExtendedSession session = mock(ExtendedSession.class);
     when(session.getWorkspace()).thenReturn(workspace);
     when(session.getNodeByIdentifier(uuid)).thenReturn(node);
-    when(session.getItem("/" + FileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
+    when(session.getItem("/" + FileDlpConnector.DLP_QUARANTINE_FOLDER)).thenReturn(dlpQuarantineNode);
 
     PowerMockito.mockStatic(WCMCoreUtils.class);
     SessionProvider sessionProvider = mock(SessionProvider.class);
@@ -113,8 +113,8 @@ public class TestFileDlpConnector {
 
     // Then
     Mockito.verify(fileDlpConnectorSpy,Mockito.times(1)).treatItem(Mockito.eq(uuid),Mockito.any());
-    Mockito.verify(workspace, Mockito.times(1)).move(path, "/" + FileDlpConnector.DLP_SECURITY_FOLDER + "/" + nodeName);
-    Mockito.verify(indexingService,Mockito.times(1)).unindex(FileDlpConnector.TYPE, uuid);
+    Mockito.verify(workspace, Mockito.times(1)).move(path, "/" + fileDlpConnector.DLP_QUARANTINE_FOLDER + "/" + nodeName);
+    Mockito.verify(indexingService,Mockito.times(1)).unindex(fileDlpConnector.TYPE,uuid);
   }
 
   @Test
@@ -147,13 +147,13 @@ public class TestFileDlpConnector {
     when(node.getName()).thenReturn(nodeName);
     when(node.getPath()).thenReturn(path);
 
-    Node dlpSecurityNode=mock(Node.class);
-    when(dlpSecurityNode.hasNode(nodeName)).thenReturn(false);
-
+    Node dlpQuarantineNode = mock(Node.class);
+    when(dlpQuarantineNode.hasNode(nodeName)).thenReturn(false);
+    
     ExtendedSession session = mock(ExtendedSession.class);
     when(session.getWorkspace()).thenReturn(workspace);
     when(session.getNodeByIdentifier(uuid)).thenReturn(node);
-    when(session.getItem("/" + FileDlpConnector.DLP_SECURITY_FOLDER)).thenReturn(dlpSecurityNode);
+    when(session.getItem("/" + FileDlpConnector.DLP_QUARANTINE_FOLDER)).thenReturn(dlpQuarantineNode);
 
     PowerMockito.mockStatic(WCMCoreUtils.class);
     SessionProvider sessionProvider = mock(SessionProvider.class);
