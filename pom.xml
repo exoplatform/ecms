@@ -40,9 +40,9 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.1.x-SNAPSHOT</org.exoplatform.social.version>
-    <addon.exo.jcr.version>6.1.x-SNAPSHOT</addon.exo.jcr.version>
-    <org.exoplatform.platform-ui.version>6.1.x-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.social.version>6.1.0</org.exoplatform.social.version>
+    <addon.exo.jcr.version>6.1.0</addon.exo.jcr.version>
+    <org.exoplatform.platform-ui.version>6.1.0</org.exoplatform.platform-ui.version>
     <!-- **************************************** -->
     <!-- Google API -->
     <!-- **************************************** -->
