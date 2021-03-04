@@ -166,6 +166,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
     String userId = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
     boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
+    ecmsSearchResult.setBreadcrumb(isAnonymous ? null : getBreadcrumb(nodePath));
     if (isAnonymous) {
       ecmsSearchResult.setPreviewUrl(downloadUrl.toString());
       ecmsSearchResult.setUrl(downloadUrl.toString());
