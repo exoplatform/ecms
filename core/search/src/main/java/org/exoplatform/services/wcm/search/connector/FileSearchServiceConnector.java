@@ -162,7 +162,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
     String formattedDate = getFormattedDate(searchResult.getDate(), lang);
     ecmsSearchResult.setDetail(driveName + formattedFileSize + " - " + formattedDate);
-    ecmsSearchResult.setBreadcrumb(getBreadcrumb(nodePath));
 
     String userId = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
     boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
