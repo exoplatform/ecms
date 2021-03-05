@@ -95,12 +95,8 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
         sheet.setName(newSheetLabel+sheet.getSheetId());
       });
     } else if (StringUtils.equals(extension, ".pptx")) {
-      //Change the language of each element found in the first slide (only one created in the template) to the user's language of the platform.
-      ((XMLSlideShow) document).getSlides().get(0).getXmlObject().getCSld().getSpTree().getSpList().forEach(splist-> {
-        if(splist.getTxBody() != null) {
-          splist.getTxBody().getPArray(0).getEndParaRPr().setLang(language);
-        }
-      });    }
+      ((XMLSlideShow) document).getCTPresentation().getDefaultTextStyle().getDefPPr().getDefRPr().setLang(language);
+    }
   }
 
   /**
