@@ -6,7 +6,8 @@ requireJs.require("SHARED/share-content", "shareContent");
 requireJs.addScripts("eXo.ecm.ShareContent.init();");
 String addAction = uicomponent.event("Add") + "; return false;";
 String restUrl = uicomponent.getRestURL();
-//String value = uicomponent.getValue();
+String value = uicomponent.getValue();
+Map<String, String> initialValues = ((value != null) && (!value.isEmpty())) ? uicomponent.getInitialValues(value) : null;
 String placeholder = _ctx.appRes("UIShareDocuments.label.invite.placeholder");
 placeholder = placeholder?.replace("'", "\\'").replace("&#39;", "\\&#39;");
 
@@ -69,9 +70,13 @@ String SHARE_PERMISSION_MODIFY      = "modify";
           <% } %>
           </div>
         </div>
-        <%
-        requireJs.require("SHARED/userInvitation", "invite");
-        requireJs.addScripts("invite.build('userSuggester', '$restUrl', '$placeholder');");
+        <% if(value) {
+            requireJs.require("SHARED/userInvitation", "invite");
+            requireJs.addScripts("invite.buildInitialized('userSuggester', '$restUrl', '$placeholder', '$initialValues');");
+          } else {
+            requireJs.require("SHARED/userInvitation", "invite");
+            requireJs.addScripts("invite.build('userSuggester', '$restUrl', '$placeholder');");
+          }
         %>
 	</div>
   </div>
