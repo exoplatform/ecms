@@ -394,6 +394,8 @@ public class FileUploadHandler {
                                String userId,
                                String existenceAction,
                                boolean isNewVersion) throws Exception {
+    String exoTitle = fileName;
+    fileName = Utils.cleanName(fileName);
     try {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
@@ -451,7 +453,6 @@ public class FileUploadHandler {
       Node file = null;
       Node jcrContent=null;
       boolean fileCreated = false;
-      String exoTitle = URLDecoder.decode(fileName, "UTF-8");
       DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
       String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
       String nodeName = fileName;
