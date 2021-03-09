@@ -748,6 +748,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public void clearGroupCache(String userId) {
     drivesCache.remove(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
     drivesCache.remove(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
+    drivesCache.remove(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE);
   }
 
   /**
