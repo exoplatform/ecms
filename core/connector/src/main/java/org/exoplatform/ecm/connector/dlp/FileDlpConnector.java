@@ -134,7 +134,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       try {
         searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
         Collection<SearchResult> searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
-        if (searchResults.size() > 0) {
+        if (!getDetectedKeywords(searchResults, dlpOperationProcessor.getKeywords()).isEmpty()) {
           treatItem(entityId, searchResults);
         }
       } catch (Exception ex) {
@@ -250,7 +250,7 @@ public class FileDlpConnector extends DlpServiceConnector {
                  .flatMap(Collection::stream)
                  .flatMap(Collection::stream)
                  .forEach(s -> {
-                   dlpKeywordsList.stream().filter(key -> removeAccents(s).contains(escapeSpecialCharacters(removeAccents(key)))).forEach(key -> {
+                   dlpKeywordsList.stream().filter(key -> removeAccents(s).contains(escapeSpecialCharacters(removeAccents(key))) || removeAccents(s).contains(key)).forEach(key -> {
                      if (!key.isEmpty() && !detectedKeywords.contains(key)) {
                        detectedKeywords.add(key);
                      }
