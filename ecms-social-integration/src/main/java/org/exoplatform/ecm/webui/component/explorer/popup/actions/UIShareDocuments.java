@@ -25,8 +25,10 @@ import java.util.stream.Collectors;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.commons.api.notification.NotificationContext;
+import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.commons.api.notification.model.PluginKey;
 import org.exoplatform.commons.notification.impl.NotificationContextImpl;
 import org.exoplatform.commons.utils.CommonsUtils;
@@ -605,6 +607,33 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
   private String getMimeType(Node node) throws Exception {
     return DMSMimeTypeResolver.getInstance().getMimeType(node.getName());
   }
+
+  public Map<String, String> getInitialValues(String invitees) {
+    Map<String, String> inviteeNames = new HashMap<>();
+    if (StringUtils.isNotBlank(invitees)) {
+      SpaceService spaceService = CommonsUtils.getService(SpaceService.class);
+      IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
+      String[] invitedList = invitees.split(",");
+      String userId = ConversationState.getCurrent().getIdentity().getUserId();
+      for (String invited : invitedList) {
+        if (invited.equals(userId)) {
+          continue;
+        }
+        if ( invited.contains("space::")) {
+          Space space = spaceService.getSpaceByPrettyName(invited.split("::")[1]);
+          inviteeNames.putIfAbsent(SPACE_PREFIX1 + space.getPrettyName(), invited);
+        } else {
+          org.exoplatform.social.core.identity.model.Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, invited);
+          if (identity != null) {
+            Profile profile = identity.getProfile();
+            inviteeNames.putIfAbsent(invited, profile.getFullName());
+          }
+        }
+      }
+    }
+    return inviteeNames;
+  }
+
 
   @Override
   public void activate() {  }
