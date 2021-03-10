@@ -433,7 +433,7 @@
 		//add file name div
 		var info = eXo.ecm.MultiUpload.document.createElement("div");
 		info.id = "file" + fileID;
-		info.innerHTML = decodeURIComponent(cleanName(file.name));
+		info.innerHTML = file.name;
 		info.className = "fileName pull-left";
 		if (eXo.ecm.MultiUpload.pathMap[fileID] != undefined) {
 			info.title = eXo.ecm.MultiUpload.IN + " " + eXo.ecm.MultiUpload.driveTitle + (eXo.ecm.MultiUpload.pathMap[fileID].indexOf("/") == 0 ? "" : "/") + 
@@ -908,7 +908,7 @@
 		    "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		    "&userId=" + eXo.ecm.MultiUpload.userId +
 		    "&uploadId=" + progressID +
-		    "&fileName=" + cleanName(file.name) + 
+		    "&fileName=" + encodeURIComponent(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
 		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID] +
 			"&action=save";
@@ -959,7 +959,7 @@
 		  	  //change uploaded files value
 		  	  eXo.ecm.MultiUpload.changeStatusValue(eXo.ecm.MultiUpload.UPLOADED, 1);
 		  	  //load image thumbnail
-			  var fileName = cleanName(file.name);
+			  var fileName = encodeURIComponent(file.name);
 			  var uri = eXo.ecm.MultiUpload.restContext + "/wcmDriver/uploadFile/cleanName?" + "fileName=" + fileName;
 			  gj.ajax({url: uri, 
 			    async: false, //blocks window close
@@ -1157,7 +1157,7 @@
 		formUpload.action = uri;
 		  //formUpload.submit();
 		  eXo.ecm.MultiUpload.formUpload = formUpload;
-		  var file = {name:decodeURIComponent(cleanName(input.value.substring(input.value.lastIndexOf('\\') + 1))),type: " ", size:0};
+		  var file = {name:input.value.substring(input.value.lastIndexOf('\\') + 1),type: " ", size:0};
 		  eXo.ecm.MultiUpload.pathMap[progressId] = eXo.ecm.MultiUpload.path;
 		  eXo.ecm.MultiUpload.connectionFailed[progressId] = 0;
 	//	eXo.ecm.MultiUpload.insertFileNameWithMessage(eXo.ecm.MultiUpload.WAIT, file, progressId, eXo.ecm.MultiUpload.WAITING_TXT);

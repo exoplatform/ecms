@@ -750,7 +750,7 @@ public class ManageDocumentService implements ResourceContainer {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, org.exoplatform.services.cms.impl.Utils.cleanName(fileName), language, siteName, userId, existenceAction);
+      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
     }
     return fileUploadHandler.control(uploadId, action);
   }
