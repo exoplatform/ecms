@@ -235,7 +235,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       Node node = session.getNodeByIdentifier(itemReference);
       return WCMCoreUtils.getLinkInDocumentsApplication(node.getPath());
     } catch (Exception e) {
-      LOGGER.error("Error while getting dlp item url", e);
+      LOGGER.error("Error while getting dlp item url, itemId={}", itemReference, e);
     }
     return null;
   }
