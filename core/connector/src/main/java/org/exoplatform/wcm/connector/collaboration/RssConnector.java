@@ -151,7 +151,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     contextRss.put(RSS_VERSION, "rss_2.0");
     contextRss.put(FEED_TITLE, title);
     if (desc == null)
-      desc = "Powered by eXo WCM-" + WCMCoreUtils.getProjectVersion();
+      desc = "Powered by eXo Platform";
     contextRss.put(DESCRIPTION, desc);
 
     contextRss.put(LINK, server);
