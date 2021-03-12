@@ -619,8 +619,8 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
         if (invited.equals(userId)) {
           continue;
         }
-        Space space = spaceService.getSpaceByDisplayName(invited);
-        if (space != null) {
+        if ( invited.contains("space::")) {
+          Space space = spaceService.getSpaceByPrettyName(invited.split("::")[1]);
           inviteeNames.putIfAbsent(SPACE_PREFIX1 + space.getPrettyName(), invited);
         } else {
           org.exoplatform.social.core.identity.model.Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, invited);
