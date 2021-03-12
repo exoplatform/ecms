@@ -1,4 +1,5 @@
 <%
+import org.json.JSONObject;
 def rcontext = _ctx.getRequestContext();
 def jsManager = rcontext.getJavascriptManager();
 def requireJs = jsManager.getRequireJS();
@@ -71,8 +72,9 @@ String SHARE_PERMISSION_MODIFY      = "modify";
           </div>
         </div>
         <% if(value) {
+            JSONObject object = new JSONObject(initialValues);
             requireJs.require("SHARED/userInvitation", "invite");
-            requireJs.addScripts("invite.buildInitialized('userSuggester', '$restUrl', '$placeholder', '$initialValues');");
+            requireJs.addScripts("invite.buildInitialized('userSuggester', '$restUrl', '$placeholder', '$object');");
           } else {
             requireJs.require("SHARED/userInvitation", "invite");
             requireJs.addScripts("invite.build('userSuggester', '$restUrl', '$placeholder');");
