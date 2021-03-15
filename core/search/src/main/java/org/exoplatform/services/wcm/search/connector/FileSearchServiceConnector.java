@@ -58,6 +58,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
   private static final String CHARSET_UTF_8 = "UTF-8";
+  private static final String DECODE_REGEX = "%(?![0-9a-fA-F]{2})";
+
 
   private static final Log LOG = ExoLogger.getLogger(FileSearchServiceConnector.class.getName());
 
@@ -175,7 +177,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
   private String decode(String message) {
     try {
-      return URLDecoder.decode(message, CHARSET_UTF_8);
+      return URLDecoder.decode(message.replaceAll(DECODE_REGEX, "%25"), CHARSET_UTF_8);
     } catch (Exception e) {
       LOG.warn("Error decoding message: {}. return it as it is.", message, e);
       return message;
