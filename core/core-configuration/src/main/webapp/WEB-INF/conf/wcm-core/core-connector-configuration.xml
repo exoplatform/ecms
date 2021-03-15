@@ -181,14 +181,14 @@
     </component-plugin>
   </external-component-plugins>
   
-<!-- Malware Detection Service Connector -->
+<!-- Malware Detection Jcr Connector -->
   <external-component-plugins>
     <target-component>org.exoplatform.social.service.malwareDetection.MalwareDetectionService</target-component>
     <component-plugin>
-      <name>MalwareDetectionServiceConnector</name>
+      <name>MalwareDetectionJcrConnector</name>
       <set-method>addConnector</set-method>
-      <type>org.exoplatform.ecm.connector.malwareDetection.JcrMalwareDetectionServiceConnector</type>
-      <description>Jcr Malware Detection Service Connector</description>
+      <type>org.exoplatform.ecm.connector.malwareDetection.MalwareDetectionJcrConnector</type>
+      <description>Malware Detection JCR Connector</description>
       <init-params>
         <properties-param>
           <name>constructor.params</name>
@@ -198,6 +198,6 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-<!-- Malware Detection Service Connector -->  
+<!-- Malware Detection Jcr Connector -->  
 
 </configuration>
