@@ -11,6 +11,7 @@
   <description>eXo CMS Service</description>
   <properties>
     <exo.test.coverage.ratio>0.34</exo.test.coverage.ratio>
+    <org.lombok.version>1.18.2</org.lombok.version>
   </properties>
   <dependencies>
     <dependency>
@@ -294,6 +295,12 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${org.lombok.version}</version>
+      <scope>provided</scope>
     </dependency>
     <!-- for tests -->
     <!-- dependency>
