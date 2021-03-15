@@ -108,6 +108,7 @@ public class FileUploadHandler {
 
   private final String CONNECTOR_BUNDLE_LOCATION                 = "locale.wcm.resources.WCMResourceBundleConnector";
   private final String AUTOVERSION_ERROR_MIME_TYPE                  = "DocumentAutoVersion.msg.WrongMimeType";
+  private static final String FILE_DECODE_REGEX = "%(?![0-9a-fA-F]{2})";
 
   /** The upload service. */
   private UploadService uploadService;
@@ -277,7 +278,8 @@ public class FileUploadHandler {
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
     fileName = Text.escapeIllegalJcrChars(fileName);
-    fileName = URLDecoder.decode(URLDecoder.decode(fileName,"UTF-8"),"UTF-8");
+    fileName = fileName.replaceAll(FILE_DECODE_REGEX, "%25");
+    fileName = URLDecoder.decode(fileName,"UTF-8");
     Element rootElement = fileExistence.createElement(
                               parent.hasNode(fileName) ? "Existed" : "NotExisted");
     if(parent.hasNode(fileName)){
