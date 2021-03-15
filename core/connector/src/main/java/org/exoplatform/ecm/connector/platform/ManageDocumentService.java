@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
@@ -31,11 +32,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -46,7 +43,20 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.EnumUtils;
+import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.attachments.model.AttachmentsEntityType;
+import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
+import org.exoplatform.services.attachments.rest.model.AttachmentsContext;
+import org.exoplatform.services.attachments.service.AttachmentsService;
+import org.exoplatform.services.attachments.utils.EntityBuilder;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -116,6 +126,12 @@ public class ManageDocumentService implements ResourceContainer {
   /** The file upload handler. */
   protected FileUploadHandler   fileUploadHandler;
 
+  /** The attachments service. */
+  protected AttachmentsService attachmentsService;
+
+  /** The identity manager. */
+  protected IdentityManager identityManager;
+
   private enum DriveType {
     GENERAL, GROUP, PERSONAL
   }
@@ -160,12 +176,16 @@ public class ManageDocumentService implements ResourceContainer {
    */
   public ManageDocumentService(ManageDriveService manageDriveService,
                                LinkManager linkManager,
-                               CloudDriveService cloudDrives, 
+                               CloudDriveService cloudDrives,
+                               AttachmentsService attachmentsService,
+                               IdentityManager identityManager,
                                InitParams params) {
     this.manageDriveService = manageDriveService;
     this.linkManager = linkManager;
     this.cloudDrives = cloudDrives;
     this.fileUploadHandler = new FileUploadHandler();
+    this.attachmentsService = attachmentsService;
+    this.identityManager = identityManager;
     this.cc = new CacheControl();
     this.cc.setNoCache(true);
     this.cc.setNoStore(true);
@@ -459,6 +479,102 @@ public class ManageDocumentService implements ResourceContainer {
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+  }
+
+  /**
+   * Link an existing attachments to an entity (Event, Task, Wiki,...)
+   *
+   * @param attachmentsContext The attachments context.
+   * @return The response.
+   * @throws Exception The exception
+   * @anchor ManageDocumentService.linkAttachmentsToContext
+   */
+  @POST
+  @Path("attachmentsContext/")
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @ApiOperation(value = "Link an existing attachments to an entity (Event, Task, Wiki,...)", httpMethod = "POST", response = Response.class, consumes = "application/json", notes = "returns empty response")
+  @ApiResponses(value = {
+          @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
+          @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
+          @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
+          @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
+  })
+  public Response linkAttachmentsToContext(
+          @ApiParam(value = "AttachmentsContext object to be created", required = true) AttachmentsContext attachmentsContext) throws Exception {
+
+    if (attachmentsContext.getEntityId() <= 0) {
+      return Response.status(Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
+    }
+
+    if (StringUtils.isEmpty(attachmentsContext.getAttachmentsEntityType().toString())) {
+      return Response.status(Status.BAD_REQUEST).entity("Entity type is mandatory").build();
+    }
+
+    if (attachmentsContext.getAttachmentIds().isEmpty()) {
+      return Response.status(Status.BAD_REQUEST).entity("You must link at least one attachment to the entity").build();
+    }
+
+    try {
+      attachmentsService.linkAttachmentsToContext(attachmentsContext);
+    } catch (Exception e) {
+      LOG.error("Error when trying to link attachments to a context: ", e);
+    }
+    return Response.ok().build();
+  }
+
+  /**
+   * Get the list of attachments linked to an entity
+   *
+   * @param entityId the entity id.
+   * @param entityType the entity type.
+   * @return The response containing attachments list if found.
+   * @throws Exception The exception
+   * @anchor ManageDocumentService.getAttachmentsByEntity
+   */
+  @GET
+  @Path("attachments/{entityType}/{entityId}/")
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @ApiOperation(value = "Get the list of attachments linked to an entity", httpMethod = "POST", response = Response.class, consumes = "application/json", notes = "returns empty response")
+  @ApiResponses(value = {
+          @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
+          @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
+          @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
+          @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
+  })
+  public Response getAttachmentsByEntity(
+          @ApiParam(value = "Entity technical identifier", required = true) @PathParam(
+                  "entityId"
+          ) long entityId,
+          @ApiParam(value = "Entity type", required = true) @PathParam(
+                  "entityType"
+          ) String entityType
+  ) throws Exception {
+
+    if (entityId <= 0) {
+      return Response.status(Status.BAD_REQUEST).entity("Entity identifier must be a positive integer").build();
+    }
+    if (StringUtils.isEmpty(entityType)) {
+      return Response.status(Status.BAD_REQUEST).entity("Entity type must not be empty").build();
+    }
+
+    if (!EnumUtils.isValidEnum(AttachmentsEntityType.class, entityType.toUpperCase())) {
+      return Response.status(Status.BAD_REQUEST).entity("Entity type must be an existing one").build();
+    }
+
+    List<Attachment> attachments = attachmentsService.getAttachmentsByEntity(entityId, entityType);
+    List<AttachmentEntity> attachmentsEntities = new ArrayList<>();
+    if (!attachments.isEmpty()) {
+      attachmentsEntities = attachments.stream()
+              .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
+              .collect(Collectors.toList());
+    }
+    return Response.ok(attachmentsEntities).build();
+  }
+
+  public static final String getCurrentUser() {
+    return ConversationState.getCurrent().getIdentity().getUserId();
   }
 
   private Response buildXMLResponseForChildren(Node node,
