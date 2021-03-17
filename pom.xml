@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>6.2.x-SNAPSHOT</version>
+  <version>6.2.x-ux-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -40,9 +40,9 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.2.x-SNAPSHOT</org.exoplatform.social.version>
+    <org.exoplatform.social.version>6.2.x-ux-SNAPSHOT</org.exoplatform.social.version>
     <addon.exo.jcr.version>6.2.x-SNAPSHOT</addon.exo.jcr.version>
-    <org.exoplatform.platform-ui.version>6.2.x-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.platform-ui.version>6.2.x-ux-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- **************************************** -->
     <!-- Google API -->
     <!-- **************************************** -->
