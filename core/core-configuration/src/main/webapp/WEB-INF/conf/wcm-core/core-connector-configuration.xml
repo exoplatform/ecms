@@ -186,7 +186,7 @@
     <target-component>org.exoplatform.social.service.malwareDetection.MalwareDetectionService</target-component>
     <component-plugin>
       <name>MalwareDetectionJcrConnector</name>
-      <set-method>addConnector</set-method>
+      <set-method>addMalwareDetectionItemConnector</set-method>
       <type>org.exoplatform.ecm.connector.malwareDetection.MalwareDetectionJcrConnector</type>
       <description>Malware Detection JCR Connector</description>
       <init-params>
