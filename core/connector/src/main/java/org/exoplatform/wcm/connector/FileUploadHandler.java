@@ -280,8 +280,9 @@ public class FileUploadHandler {
     fileName = Text.escapeIllegalJcrChars(fileName);
     fileName = fileName.replaceAll(FILE_DECODE_REGEX, "%25");
     fileName = URLDecoder.decode(fileName,"UTF-8");
+    fileName = fileName.replaceAll(FILE_DECODE_REGEX, "-");
     Element rootElement = fileExistence.createElement(
-                              parent.hasNode(fileName.replaceAll(FILE_DECODE_REGEX, "-")) ? "Existed" : "NotExisted");
+                              parent.hasNode(fileName) ? "Existed" : "NotExisted");
     if(parent.hasNode(fileName)){
       Node existNode = parent.getNode(fileName);
       if(existNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
