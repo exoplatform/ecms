@@ -304,7 +304,7 @@ public class Utils {
       return null;
     }
     ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
-    activityType = StringUtils.isNotEmpty(activityType) ? activityType : FILE_SPACES;
+    activityType = StringUtils.isNotEmpty(activityType) ? activityType : CONTENT_SPACES;
     if(! activityManager.isActivityTypeEnabled(activityType)) {
       return null;
     }
