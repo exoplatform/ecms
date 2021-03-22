@@ -80,18 +80,6 @@
     <type>org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTService</type>
   </component>
   <component>
-    <type>org.exoplatform.services.attachments.dao.AttachmentsDAO</type>
-  </component>
-  <component>
-    <key>org.exoplatform.services.attachments.service.AttachmentsService</key>
-    <type>org.exoplatform.services.attachments.service.AttachmentsServiceImpl</type>
-  </component>
-  <component>
-    <key>org.exoplatform.services.attachments.storage.AttachmentsStorage</key>
-    <type>org.exoplatform.services.attachments.storage.AttachmentsStorageImpl</type>
-  </component>
-  
-  <component>
     <type>org.exoplatform.wcm.connector.fckeditor.DriverConnector</type>
     <init-params>
       <value-param>
@@ -211,20 +199,5 @@
   </external-component-plugins>
 <!-- Malware Detection Jcr Connector -->  
 
-  <external-component-plugins>
-    <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>
-    <component-plugin>
-      <name>AttachmentsContextRDBMSChangeLogsPlugin</name>
-      <set-method>addChangeLogsPlugin</set-method>
-      <type>org.exoplatform.commons.persistence.impl.ChangeLogsPlugin</type>
-      <init-params>
-        <values-param>
-          <name>changelogs</name>
-          <description>Change logs of Attachments Context RDBMS</description>
-          <value>db/changelog/attachments-context-rdbms.db.changelog.xml</value>
-        </values-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
 
 </configuration>

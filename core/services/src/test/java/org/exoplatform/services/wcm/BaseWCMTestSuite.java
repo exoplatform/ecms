@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm;
 
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
+import org.exoplatform.services.attachments.service.AttachmentsServiceTest;
 import org.exoplatform.services.cms.clipboard.TestClipboardService;
 import org.exoplatform.services.cms.documents.TestCustomizeViewService;
 import org.exoplatform.services.cms.documents.TestDocumentService;
@@ -117,7 +118,8 @@ import org.junit.runners.Suite.SuiteClasses;
   TestDocumentsAppRedirectService.class,
   TestDocumentService.class,
   TestCustomizeViewService.class,
-  TestXSkinService.class
+  TestXSkinService.class,
+  AttachmentsServiceTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
