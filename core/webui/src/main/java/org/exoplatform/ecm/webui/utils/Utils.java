@@ -1012,7 +1012,12 @@ public class Utils {
       buffer.append(']');
       title = buffer.toString();
     }
-    return URLDecoder.decode(title, "UTF-8");
+    try {
+      return URLDecoder.decode(title, "UTF-8");
+    }catch (Exception e){
+      return title;
+    }
+
   }
 
   /**
