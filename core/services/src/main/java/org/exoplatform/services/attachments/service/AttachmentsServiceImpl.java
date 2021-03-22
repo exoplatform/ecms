@@ -9,6 +9,7 @@ import org.exoplatform.services.attachments.storage.AttachmentsStorage;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -23,12 +24,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AttachmentsServiceImpl implements AttachmentsService {
+
   private static final Log LOG = ExoLogger.getLogger(AttachmentsServiceImpl.class.getName());
+
+  private RepositoryService repositoryService;
+
+  private SessionProviderService sessionProviderService;
 
   AttachmentsStorage attachmentsStorage;
 
-  public AttachmentsServiceImpl(AttachmentsStorage attachmentsStorage) {
+  public AttachmentsServiceImpl(AttachmentsStorage attachmentsStorage,
+                                RepositoryService repositoryService,
+                                SessionProviderService sessionProviderService) {
+
     this.attachmentsStorage = attachmentsStorage;
+    this.repositoryService = repositoryService;
+    this.sessionProviderService = sessionProviderService;
   }
 
   @Override
@@ -48,11 +59,12 @@ public class AttachmentsServiceImpl implements AttachmentsService {
     if (attachmentsContext.getAttachmentsEntityType() == null) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
+
     long entityId = attachmentsContext.getEntityId();
     String entityType = attachmentsContext.getAttachmentsEntityType().toString();
     AttachmentsContextEntity attachmentsContextEntity = attachmentsStorage.getAttachmentContextByEntity(entityId, entityType);
 
-    if(attachmentsContextEntity == null) {
+    if (attachmentsContextEntity == null) {
       attachmentsContextEntity = new AttachmentsContextEntity();
     }
 
@@ -79,8 +91,12 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       List<String> attachmentsIds = new ArrayList<>(Arrays.asList(
               attachmentsContext.getAttachmentIds().split(",")
       ));
-      String currentWorkspaceName = getCurrentWorkspaceName();
-      Session session = getSession(currentWorkspaceName);
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      Session session = sessionProvider.getSession(
+              repositoryService.getCurrentRepository()
+                      .getConfiguration()
+                      .getDefaultWorkspaceName(),
+              repositoryService.getCurrentRepository());
       attachmentsIds.forEach(attachmentId -> {
         try {
           Node attachmentNode = session.getNodeByUUID(attachmentId);
@@ -127,22 +143,6 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       });
     }
     return attachments;
-  }
-
-  private String getCurrentWorkspaceName() throws RepositoryException {
-    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    return repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
-  }
-
-  private Session getSession(String workspaceName) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-    ManageableRepository manageableRepository = getCurrentRepository();
-    return sessionProvider.getSession(workspaceName, manageableRepository);
-  }
-
-  private ManageableRepository getCurrentRepository() throws RepositoryException {
-    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    return repositoryService.getCurrentRepository();
   }
 
   private String getStringProperty(Node node, String propertyName) throws RepositoryException {

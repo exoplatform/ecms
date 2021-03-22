@@ -2,6 +2,7 @@ package org.exoplatform.services.attachments.model;
 
 import org.exoplatform.commons.api.persistence.ExoEntity;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name = "AttachmentsContext")
 @ExoEntity
@@ -14,7 +15,9 @@ import javax.persistence.*;
     )
   }
 )
-public class AttachmentsContextEntity {
+public class AttachmentsContextEntity implements Serializable {
+
+  private static final long         serialVersionUID = -6445215481619188461L;
 
   @Id
   @SequenceGenerator(name = "SEQ_ATTACHMENTS_CONTEXT_ID", sequenceName = "SEQ_ATTACHMENTS_CONTEXT_ID")
