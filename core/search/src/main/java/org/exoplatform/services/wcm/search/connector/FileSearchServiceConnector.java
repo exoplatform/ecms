@@ -53,7 +53,7 @@ import java.util.stream.Collectors;
  * Search connector for files
  */
 public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
-  
+
   private static final Log LOG = ExoLogger.getLogger(FileSearchServiceConnector.class.getName());
 
   private RepositoryService repositoryService;
