@@ -10,7 +10,7 @@
     "start": "webpack --config webpack.dev.js --mode development",
     "dev": "webpack-dev-server --config webpack.dev.js --mode development --hot",
     "watch": "webpack --config webpack.dev.js --progress --colors --watch -d",
-    "lint": "eslint --fix ./src/main/webapp/attachments-selector/components/*.vue ./src/main/webapp/attachments-selector/attachmentsService.js",
+    "lint": "eslint --fix ./src/main/webapp/attachments-selector/components/*.vue ./src/main/webapp/attachments-selector/*.js ./src/main/webapp/attachments-app/components/*.vue ./src/main/webapp/attachments-app/*.js",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "webpack --config webpack.prod.js --mode production"
@@ -46,6 +46,7 @@
     "vue": "^2.5.16",
     "vue-loader": "^14.2.3",
     "vue-template-compiler": "^2.5.16",
+    "vuetify": "^2.1.7",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.4",

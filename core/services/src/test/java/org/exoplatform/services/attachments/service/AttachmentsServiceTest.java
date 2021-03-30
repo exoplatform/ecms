@@ -33,6 +33,7 @@ import javax.jcr.Property;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -80,7 +81,8 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
 
   @Test
   public void testLinkAttachmentsToContext() throws Exception { // NOSONAR
-
+    int[] list = {-9,2,5,14,98};
+    ;
     try {
       attachmentsService.linkAttachmentsToContext(null);
       fail();

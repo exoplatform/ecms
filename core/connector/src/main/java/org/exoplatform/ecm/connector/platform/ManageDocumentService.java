@@ -787,7 +787,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return file;
   }
-  
+
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
     Session session = getSession(workspaceName);
     String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();

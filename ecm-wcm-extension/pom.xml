@@ -159,7 +159,7 @@
               <outputDirectory>${project.build.directory}/src/main/webapp/skin/less</outputDirectory>
               <resources>
                 <resource>
-                  <directory>src/main/webapp/attachments-selector/css</directory>
+                  <directory>src/main/webapp/attachments-app/css</directory>
                 </resource>
               </resources>
               <overwrite>true</overwrite>
@@ -195,6 +195,7 @@
               <compress>false</compress>
               <includes>
                 <include>attachments.less</include>
+                <include>attachmentsApp.less</include>
               </includes>
             </configuration>
             <goals>
