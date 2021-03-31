@@ -4,6 +4,7 @@ import javax.jcr.observation.Event;
 
 import org.apache.commons.chain.Context;
 
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.api.settings.ExoFeatureService;
 import org.exoplatform.commons.dlp.processor.DlpOperationProcessor;
 import org.exoplatform.commons.dlp.queue.QueueDlpService;
@@ -33,6 +34,7 @@ public class FileDLPAction implements AdvancedAction {
   private QueueDlpService queueDlpService;
   
   private ExoFeatureService featureService;
+  private DlpOperationProcessor dlpOperationProcessor;
   
   private static final String EXO_EDITORS_RUNTIME_ID = "exo:editorsId";
 
@@ -44,11 +46,13 @@ public class FileDLPAction implements AdvancedAction {
     this.trashService = CommonsUtils.getService(TrashService.class);
     this.queueDlpService = CommonsUtils.getService(QueueDlpService.class);
     this.featureService = CommonsUtils.getService(ExoFeatureService.class);
+    this.dlpOperationProcessor = CommonsUtils.getService(DlpOperationProcessor.class);
   }
 
   @Override
   public boolean execute(Context context) throws Exception {
-    if (!featureService.isActiveFeature(DlpOperationProcessor.DLP_FEATURE)) {
+    if (!featureService.isActiveFeature(DlpOperationProcessor.DLP_FEATURE) ||
+        StringUtils.isBlank(dlpOperationProcessor.getKeywords())) {
       return false;
     }
     int eventType = (Integer) context.get(InvocationContext.EVENT);
