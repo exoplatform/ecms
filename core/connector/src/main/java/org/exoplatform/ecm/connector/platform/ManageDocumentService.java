@@ -160,7 +160,7 @@ public class ManageDocumentService implements ResourceContainer {
    */
   public ManageDocumentService(ManageDriveService manageDriveService,
                                LinkManager linkManager,
-                               CloudDriveService cloudDrives, 
+                               CloudDriveService cloudDrives,
                                InitParams params) {
     this.manageDriveService = manageDriveService;
     this.linkManager = linkManager;
@@ -671,7 +671,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return file;
   }
-  
+
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
     Session session = getSession(workspaceName);
     String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();
