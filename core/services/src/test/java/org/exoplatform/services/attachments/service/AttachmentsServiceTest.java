@@ -82,7 +82,6 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
   @Test
   public void testLinkAttachmentsToContext() throws Exception { // NOSONAR
     int[] list = {-9,2,5,14,98};
-    ;
     try {
       attachmentsService.linkAttachmentsToContext(null);
       fail();

@@ -38,13 +38,13 @@ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     <external-component-plugins>
         <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>
         <component-plugin>
-            <name>GamificationManagementChangeLogsPlugin</name>
+            <name>AttachmentsManagementChangeLogsPlugin</name>
             <set-method>addChangeLogsPlugin</set-method>
             <type>org.exoplatform.commons.persistence.impl.ChangeLogsPlugin</type>
             <init-params>
                 <values-param>
                     <name>changelogs</name>
-                    <description>Change logs of Gamification</description>
+                    <description>Change logs of Attachments</description>
                     <value>changelog/attachments-context-rdbms.db.changelog.xml</value>
                 </values-param>
             </init-params>

@@ -154,7 +154,7 @@
   </module>
 
   <module>
-    <name>text</name>PowerMockRunner
+    <name>text</name>
     <script>
       <path>/js/text.js</path>
     </script>

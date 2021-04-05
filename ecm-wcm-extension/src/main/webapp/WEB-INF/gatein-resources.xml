@@ -31,13 +31,6 @@
     </param>
   </javascript>
 
-  <javascript>
-    <param>
-      <js-module>attachmentsComposerPluginn</js-module>
-      <js-path>/attachments-app/attachmentsComposerPluginn.js</js-path>
-    </param>
-  </javascript>
-
   <module>
     <name>documentPreview</name>
     <supported-locale>de</supported-locale>
