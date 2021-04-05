@@ -1,7 +1,7 @@
 <template>
   <div class="attachment">
     <v-list-item-avatar class="rounded-lg">
-      <div v-if="file.uploadProgress && file.uploadProgress !== 100" class="fileProgress">
+      <div v-if="file.uploadProgress !== 100" class="fileProgress">
         <v-progress-circular
           :rotate="-90"
           :size="40"

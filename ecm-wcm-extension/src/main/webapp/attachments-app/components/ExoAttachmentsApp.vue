@@ -3,7 +3,11 @@
     <template v-if="$slots.attachmentsButton" @click="openAttachmentsAppDrawer()">
       <slot name="attachmentsButton"></slot>
     </template>
-    <exo-attachments-drawer></exo-attachments-drawer>
+    <exo-attachments-drawer/>
+    <attachments-notification-alerts
+      class="tesssssssssssst"
+      style="z-index:1035;"
+    />
   </v-app>
 </template>
 

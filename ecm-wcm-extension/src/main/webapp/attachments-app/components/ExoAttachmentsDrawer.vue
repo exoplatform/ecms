@@ -167,9 +167,10 @@
         <div class="d-flex justify-space-between">
           <div class="limitMessage d-flex align-center grey--text">
             <i class="uiIconWarning pr-2 grey--text"></i>
-            <span class="pr-1 sizeLimit">{{ $t('attachments.drawer.maxFileSize').replace('{0}', maxFileSize) }}</span>
-            <span>-</span>
-            <span class="pl-1 countLimit">{{ $t('attachments.drawer.maxFileCount').replace('{0}', maxFilesCount) }}</span>
+            <div class="d-flex flex-column caption align-start warningMessages">
+              <span class="sizeLimit">{{ $t('attachments.drawer.maxFileSize').replace('{0}', maxFileSize) }}</span>
+              <span class="countLimit">{{ $t('attachments.drawer.maxFileCount').replace('{0}', maxFilesCount) }}</span>
+            </div>
           </div>
           <a class="btn ignore-vuetify-classes"
              @click="closeAttachmentsAppDrawer()">{{ $t('attachments.drawer.cancel') }}</a>
@@ -301,6 +302,10 @@ export default {
     uploadingCount() {
       if(this.uploadMode === 'save' && this.uploadingCount === 0) {
         this.closeAttachmentsAppDrawer();
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.$t('attachments.upload.success'),
+          type: 'success',
+        });
         this.value = [];
         this.$refs.attachmentsAppDrawer.endLoading();
       }
@@ -502,8 +507,13 @@ export default {
         this.uploadingCount--;
         this.$emit('uploadingCountChanged', this.uploadingCount);
         this.processNextQueuedUpload();
+      }).catch(() => {
+        this.$refs.attachmentsAppDrawer.endLoading();
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.$t('attachments.upload.failed').replace('{0}', file.name),
+          type: 'error',
+        });
       });
-
     },
     removeAttachedFile: function(file) {
       if(!file.id) {
