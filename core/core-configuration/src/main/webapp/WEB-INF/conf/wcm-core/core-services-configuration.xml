@@ -274,6 +274,10 @@
     <type>org.exoplatform.services.rest.DocumentsAppRedirectService</type>
   </component>
 
+  <component>
+    <type>org.exoplatform.services.rest.AttachmentsRestService</type>
+  </component>
+
     <external-component-plugins>
         <target-component>org.exoplatform.services.cms.watch.WatchDocumentService</target-component>
         <component-plugin>

@@ -79,7 +79,7 @@
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTService</type>
   </component>
-  
+
   <component>
     <type>org.exoplatform.wcm.connector.fckeditor.DriverConnector</type>
     <init-params>
