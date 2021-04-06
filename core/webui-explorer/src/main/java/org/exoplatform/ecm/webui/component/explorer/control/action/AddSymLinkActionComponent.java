@@ -183,7 +183,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
           } else {
         UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
         UISymLinkManager uiSymLinkManager = event.getSource().createUIComponent(UISymLinkManager.class, null, null);
-        uiSymLinkManager.useWorkspaceSelector();
+        uiSymLinkManager.useDriveSelector();
         UIPopupContainer.activate(uiSymLinkManager, 600, 190);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
           }
