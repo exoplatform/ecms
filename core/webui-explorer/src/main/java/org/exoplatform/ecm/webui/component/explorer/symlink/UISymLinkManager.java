@@ -87,4 +87,10 @@ public class UISymLinkManager extends UIContainer implements UIPopupComponent {
       child.useWorkspaceSelector();
     }
   }
+   public void useDriveSelector() {
+    UISymLinkForm child = getChild(UISymLinkForm.class);
+    if (child!=null)  {
+      child.useDriveSelector();
+    }
+  }
 }
