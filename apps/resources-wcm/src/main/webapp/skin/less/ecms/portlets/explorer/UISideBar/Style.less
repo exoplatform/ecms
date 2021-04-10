@@ -6,7 +6,7 @@
 
 	.uiTreeExplorer {
 		padding: 0px;
-		margin: -10px -10px 0px -10px;
+		margin: -10px -10px 0px;
 	}
 
 	#UIAllItems {
@@ -17,7 +17,8 @@
 
 		.sideGeneratal{
 			cursor: pointer;
-			float: right;
+			float: right ~'; /** orientation=lt */ ';
+			float: left ~'; /** orientation=rt */ ';
 			height:16px;
 			width:16px;
 			display: block;
@@ -38,9 +39,10 @@
 
 		.normalItem {
 			cursor: pointer;
-			padding: 8px 8px 0px 8px;
+			padding: 8px 8px 0px;
 			.size(23px,14px);
-			float: left;
+			float: left ~'; /** orientation=lt */ ';
+			float: right ~'; /** orientation=rt */ ';
 			margin-top: -1px;
 
 			&:hover [class^="uiIconEcms"] {
@@ -54,10 +56,11 @@
 
 		.selectedItem {
 			cursor: pointer;
-			padding: 8px 8px 0px 8px;
+			padding: 8px 8px 0px;
 			.size(23px,14px);
 			background: @baseBackground;
-			float: left;
+			float: left ~'; /** orientation=lt */ ';
+			float: right ~'; /** orientation=rt */ ';
 			border-left: 1px solid @borderColor;
 			border-right: 1px solid @borderColor;
 			margin-top: -1px;
@@ -76,7 +79,8 @@
 			line-height: 26px;
 			cursor: pointer;
 			padding: 8px;
-			float: left;
+			float: left ~'; /** orientation=lt */ ';
+			float: right ~'; /** orientation=rt */ ';
 			width: 14px;
 			margin-top: -1px;
 		}
@@ -115,7 +119,8 @@
 	.DriversButton {
 		//background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png') no-repeat left center;
 		cursor: pointer;
-		float: right;
+		float: right ~'; /** orientation=lt */ ';
+		float: left ~'; /** orientation=rt */ ';
 		height:20px;
 		margin-top:2px;
 		width:33px;
@@ -123,7 +128,8 @@
 
 	.SideGeneratal {
 		cursor: pointer;
-		float: right;
+		float: right ~'; /** orientation=lt */ ';
+		float: left ~'; /** orientation=rt */ ';
 		height:17px;
 		margin-top:4px;
 		width:17px;
@@ -153,7 +159,8 @@
 /*############################## -- UITagExplorer   -- ##############################*/
 
 .uiSideBar .UITagExplorer {
-	text-align: left;
+	text-align: left ~'; /** orientation=lt */ ';
+	text-align: right ~'; /** orientation=rt */ ';
 	line-height: 22px;
 
 	.title .actionIcon {

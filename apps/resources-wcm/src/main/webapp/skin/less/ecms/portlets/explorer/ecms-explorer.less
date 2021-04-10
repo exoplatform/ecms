@@ -64,7 +64,8 @@
 
 	.uiViewBarContainer {
 		position: absolute;
-		right: 0;
+		right: 0 ~'; /** orientation=lt */ ';
+		left: 0 ~'; /** orientation=rt */ ';
 		top: 4px;
 		padding: 0 10px;
     	background-color: @primaryBackground;
@@ -75,7 +76,8 @@
 		}
 
 		.actionIcon {
-			margin-left: 2px;
+			margin-left: 2px ~'; /** orientation=lt */ ';
+			margin-right: 2px ~'; /** orientation=rt */ ';
 		}
 
 		.showDrivesButton {
@@ -102,7 +104,8 @@
 
 .uiTabGrayInPage .tab-content .nav-pills {
 	> li.dropdown  {
-		margin-right: 200px;
+		margin-right: 200px ~'; /** orientation=lt */ ';
+		margin-left: 200px ~'; /** orientation=rt */ ';
 	}
 }
 
@@ -110,7 +113,8 @@
 
 .uiItemList {
 	li {
-		padding: 2px 0px 2px 15px;
+		padding: 2px 0px 2px 15px ~'; /** orientation=lt */ ';
+		padding: 2px 15px 2px 0px ~'; /** orientation=rt */ ';
 		font-size: 12px;
 
 		> a {
@@ -126,8 +130,10 @@
 		}
 
 		> [class^="uiIcon"] {
-			float: left;
-			margin: 2px 0px 0px -21px;
+			float: left ~'; /** orientation=lt */ ';
+			float: right ~'; /** orientation=rt */ ';
+			margin: 2px 0px 0px -21px ~'; /** orientation=lt */ ';
+			margin: 2px -21px 0px 0px ~'; /** orientation=rt */ ';
 		}
 	}
 }
@@ -138,7 +144,8 @@
 	width: 100%;
     display: flex;
 	.leftContainer {
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 		width: 240px;
 		overflow: hidden;
         min-width: 240px;
@@ -179,7 +186,8 @@
 	}*/
 
 	.UIDocumentWorkspace {
-                margin-left: 0px;
+                margin-left: 0px ~'; /** orientation=lt */ ';
+                margin-right: 0px ~'; /** orientation=rt */ ';
                 overflow: auto;
 		background: @baseBackground;
 		border: 1px solid @borderColor;
@@ -194,19 +202,23 @@
 		}
 		.UITabContent ul {
 		    padding: 0;
-			margin: 0 0 10px 25px;
+			margin: 0 0 10px 25px ~'; /** orientation=lt */ ';
+			margin: 0 25px 10px 0 ~'; /** orientation=rt */ ';
 		}
 
 		.UITabContent ol {
 		    padding: 0;
-			margin: 0 0 10px 25px;
+			margin: 0 0 10px 25px ~'; /** orientation=lt */ ';
+			margin: 0 25px 10px 0 ~'; /** orientation=rt */ ';
 		}
 
 		blockquote {
 			background: none;
-		 	border-left: 5px solid #999;
+		 	border-left: 5px solid #999 ~'; /** orientation=lt */ ';
+		 	border-right: 5px solid #999 ~'; /** orientation=rt */ ';
 		    	margin: 0 0 20px;
-		    	padding: 0 0 0 15px;
+		    	padding: 0 0 0 15px ~'; /** orientation=lt */ ';
+		    	padding: 0 15px 0 0 ~'; /** orientation=rt */ ';
 		    	width: auto;
 		}
 		blockquote:after {
@@ -229,7 +241,7 @@
 			line-height: 20px;
 			padding: 8px 20px;
 			word-wrap: break-word;
-			margin: -20px -20px 20px -20px;
+			margin: -20px -20px 20px;
 		}
 	}
 }
@@ -255,10 +267,12 @@
 	}
 
 	.lineLeft {
-		border-left: 1px solid @borderColor;
+		border-left: 1px solid @borderColor ~'; /** orientation=lt */ ';
+		border-right: 1px solid @borderColor ~'; /** orientation=rt */ ';
 		width: 2px;
 		height: 34px;
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 		cursor: col-resize;
 	}
 	.columnName{
@@ -294,11 +308,13 @@
 	.columndateModified,
 	.columndateCreated,
 	.column {
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 		height: 20px;
 		overflow: hidden;
 		white-space: nowrap;
-		padding: 7px 7px 7px 12px;
+		padding: 7px 7px 7px 12px ~'; /** orientation=lt */ ';
+		padding: 7px 12px 7px 7px ~'; /** orientation=rt */ ';
 		color: @textColor;
 	}
 
@@ -315,10 +331,12 @@
 		cursor: col-resize;
 		width: 1px;
 		height: 190px; /* default height */
-		border-right: 1px dashed @baseColor;
+		border-right: 1px dashed @baseColor ~'; /** orientation=lt */ ';
+		border-left: 1px dashed @baseColor ~'; /** orientation=rt */ ';
 		position: absolute;
 		top: 0;
-		left: 0;
+		left: 0 ~'; /** orientation=lt */ ';
+		right: 0 ~'; /** orientation=rt */ ';
 	}
 
 	.rowView {
@@ -334,7 +352,8 @@
 		.columnIcon,.columnName,.columnAuditing,.columnVersion,
 		.columndateModified,.columnDatetime,.columndateCreated,
 		.columnOwner,.columnModified,.columnCreated {
-			padding: 7px 7px 7px 12px;
+			padding: 7px 7px 7px 12px ~'; /** orientation=lt */ ';
+			padding: 7px 12px 7px 7px ~'; /** orientation=rt */ ';
 		}
 
 		.columnIcon {
@@ -345,8 +364,10 @@
 		.lineLeftItem {
 			width: 2px;
 			height: 34px;
-			float: left;
-			border-left: 1px solid @borderColor;
+			float: left ~'; /** orientation=lt */ ';
+			float: right ~'; /** orientation=rt */ ';
+			border-left: 1px solid @borderColor ~'; /** orientation=lt */ ';
+			border-right: 1px solid @borderColor ~'; /** orientation=rt */ ';
 		}
 
 		.ResizeColumn .NodeLabel {
@@ -367,7 +388,8 @@
 
 		.actionIconBox {
 			.size(200px, 148px);
-			float: left;
+			float: left ~'; /** orientation=lt */ ';
+			float: right ~'; /** orientation=rt */ ';
 			margin: 10px;
 			padding: 0px !important;
 			overflow: hidden;
@@ -424,9 +446,11 @@
               background: url("@{images-path}/Loading/loading32x32Light.png") no-repeat center center;
               .size(32px,32px);
               position: absolute;
-              left: 50%;
+              left: 50% ~'; /** orientation=lt */ ';
+              right: 50% ~'; /** orientation=rt */ ';
               top: 50%;
-              margin: -16px 0 0 -16px;
+              margin: -16px 0 0 -16px ~'; /** orientation=lt */ ';
+              margin: -16px -16px 0 0 ~'; /** orientation=rt */ ';
               content: "";
               .loading-action;
             }
@@ -448,7 +472,7 @@
 		.actionIcon {
 			width: 50px;
 			height: 50px;
-			margin: 9px auto 0px auto;
+			margin: 9px auto 0px;
 		}
 
 		.thumbnailImage {
@@ -524,7 +548,8 @@
 
 	.drive {
 		margin: 5px;
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 		width: 150px;
 		line-height: 19px;
 		height: 50px;
@@ -532,7 +557,8 @@
 
 	.driveLabel {
 		color: @textColor;
-		padding-left: 33px;
+		padding-left: 33px ~'; /** orientation=lt */ ';
+		padding-right: 33px ~'; /** orientation=rt */ ';
 		word-wrap: break-word;
 		display: block;
 
@@ -546,19 +572,23 @@
 	}
 
 	.driveIcon {
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 	}
 
 	[class^="uiIconEcms24x24"] {
-		margin: 0px 0px 0px -33px;
-		float: left;
+		margin: 0px 0px 0px -33px ~'; /** orientation=lt */ ';
+		margin: 0px -33px 0px 0 ~'; /** orientation=rt */ ';
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 	}
 }
 
 
 /***** ResizeBar *****/
 .uiWorkingArea .resizeBar {
-	float: left;
+	float: left ~'; /** orientation=lt */ ';
+	float: right ~'; /** orientation=rt */ ';
 	width: 20px;
 
 	.resizeBarContent {
@@ -568,7 +598,8 @@
 		position: relative;
 
 		&:hover {
-			border-right: solid 1px @borderColor;
+			border-right: solid 1px @borderColor ~'; /** orientation=lt */ ';
+			border-left: solid 1px @borderColor ~'; /** orientation=rt */ ';
 
 			.resizeButton {
 				display: block;
@@ -580,21 +611,25 @@
 		#gradient .vertical(@baseBackground, @primaryBackground);
 		.border-radius(@borderRadiusSmall 0px 0px @borderRadiusSmall);
 		.size(24px,16px);
-		float:right;
+		float:right ~'; /** orientation=lt */ ';
+		float:left ~'; /** orientation=rt */ ';
 		margin : auto;
 		cursor : pointer;
 		border: 1px solid @borderColor;
-		border-right: none;
+		border-right: none ~'; /** orientation=lt */ ';
+		border-left: none ~'; /** orientation=rt */ ';
 		display: none;
 		position: absolute;
 		top: 7px;
-		right: 0px;
+		right: 0px ~'; /** orientation=lt */ ';
+		left: 0px ~'; /** orientation=rt */ ';
 	  	padding-top: 3px;
 
 			[class^="uiIcon"] {
 				width: 11px;
 				margin-top: 2px;
-			  	margin-left: 3px;
+			  	margin-left: 3px ~'; /** orientation=lt */ ';
+			  	margin-right: 3px ~'; /** orientation=rt */ ';
 			}
 	}
 
@@ -602,7 +637,8 @@
 
 .uiWorkingArea .resizeBarDisplay {
 	.resizeBarContent {
-		border-right: solid 1px @borderColor;
+		border-right: solid 1px @borderColor ~'; /** orientation=lt */ ';
+		border-left: solid 1px @borderColor ~'; /** orientation=rt */ ';
 		cursor:col-resize;
 	}
 	.resizeButton {
@@ -625,15 +661,19 @@
 		border: 1px solid @borderColor;
 		.border-radius(0px @borderRadiusSmall @borderRadiusSmall 0px);
 		display: block;
-		right: 8px;
-		border-left: none;
+		right: 8px ~'; /** orientation=lt */ ';
+		left: 8px ~'; /** orientation=rt */ ';
+		border-left: none ~'; /** orientation=lt */ ';
+		border-right: none ~'; /** orientation=rt */ ';
 	}
 }
 
 .UIBrowseContentPortlet .TagmapHolder .Icon {
-	float: left;
-	width: 19px; height: 16px;
-	margin: 2px 5px 0px 5px;
+	float: left ~'; /** orientation=lt */ ';
+	float: right ~'; /** orientation=rt */ ';
+	width: 19px;
+	height: 16px;
+	margin: 2px 5px 0px;
 	//background: url('DefaultSkin/background/TagMapIcon19x16.gif') no-repeat; 
 }
 
@@ -649,7 +689,8 @@
 			width: 120px;
 		}
 		.controls {
-			margin-left: 135px;
+			margin-left: 135px ~'; /** orientation=lt */ ';
+			margin-right: 135px ~'; /** orientation=rt */ ';
 
 			.textInfo {
 				line-height: 18px;
@@ -679,18 +720,23 @@
 
 			> div > span {
 				width: 100% !important;
-				margin-right: 5px;
+				margin-right: 5px ~'; /** orientation=lt */ ';
+				margin-left: 5px ~'; /** orientation=rt */ ';
 			}
             > div.clearfix {
-              float: left;
-              margin-right: 5px;
+              float: left ~'; /** orientation=lt */ ';
+              float: right ~'; /** orientation=lt */ ';
+              margin-right: 5px ~'; /** orientation=lt */ ';
+              margin-left: 5px ~'; /** orientation=rt */ ';
               width: 90%;
             }
 
 			.uiUploadInput {
 				width: 90%;
-				float: left;
-				margin-right: 5px;
+				float: left ~'; /** orientation=lt */ ';
+				float: right ~'; /** orientation=rt */ ';
+				margin-right: 5px ~'; /** orientation=lt */ ';
+				margin-left: 5px ~'; /** orientation=rt */ ';
 			}
 		}
 	}
@@ -700,18 +746,22 @@
 		background: @primaryBackground;
 		border: 1px solid @borderColor;
 		color: @baseColorDark;
-		padding: 15px 15px 15px 40px;
+		padding: 15px 15px 15px 40px ~'; /** orientation=lt */ ';
+		padding: 15px 40px 15px 15px ~'; /** orientation=rt */ ';
 		.border-radius(5px);
 		width: 155px;
-		margin-left: 10px;
+		margin-left: 10px ~'; /** orientation=lt */ ';
+		margin-right: 10px ~'; /** orientation=rt */ ';
 
 		.uiIconHelp {
             &:before {
                 content: "\e767";
                 color: @infoColor;
             }
-			margin: 3px 0px 0px -25px;
-			float: left;
+			margin: 3px 0px 0px -25px ~'; /** orientation=lt */ ';
+			margin: 3px -25px 0px 0px ~'; /** orientation=rt */ ';
+			float: left ~'; /** orientation=lt */ ';
+			float: right ~'; /** orientation=rt */ ';
 		}
 		.form-horizontal .textarea {
 			vertical-align: top;
@@ -794,11 +844,13 @@
 		margin: -4px 0px;
 
 		.btn {
-			margin-left: 10px;
+			margin-left: 10px ~'; /** orientation=lt */ ';
+			margin-right: 10px ~'; /** orientation=rt */ ';
 		}
 
 		.actionIcon {
-			margin: 0px 0px 0px 10px !important;
+			margin: 0px 0px 0px 10px ~'!important; /** orientation=lt */ ';
+			margin: 0px 10px 0px 0px ~'!important; /** orientation=rt */ ';
 			cursor: pointer;
 		}
 	}
@@ -816,12 +868,14 @@
 		.border-radius(3px);
 		color: @primaryColor;
 		border: 1px solid @primaryColorLighter;
-		padding: 1px 0px 1px 5px;
-		margin: 5px 0px 0px 0px;
+		padding: 1px 0px 1px 5px ~'; /** orientation=lt */ ';
+		padding: 1px 5px 1px 0px ~'; /** orientation=rt */ ';
+		margin: 5px 0px 0px;
 		display: inline-block;
 	}
 	.uiMention {
-		margin: 3px 5px 2px 0;
+		margin: 3px 5px 2px 0 ~'; /** orientation=lt */ ';
+		margin: 3px 0 2px 5px ~'; /** orientation=rt */ ';
 		.uiIconClose{
 			top: -1px;
 		}
@@ -841,14 +895,16 @@
 
 	.control-group {
 		margin-bottom: 15px;
-		padding-left: 10px;
+		padding-left: 10px ~'; /** orientation=lt */ ';
+		padding-right: 10px ~'; /** orientation=rt */ ';
 	}
 
 	.sortByContent {
 		margin-top: 5px;
 		.uiSelectbox {
 			width: 146px;
-			margin-left: 15px;
+			margin-left: 15px ~'; /** orientation=lt */ ';
+			margin-right: 15px ~'; /** orientation=rt */ ';
 			vertical-align: middle;
 
 			.selectbox {
@@ -861,10 +917,12 @@
 		width: 180px;
 
 		.uiCheckbox {
-			margin: 2px 0px 0px 10px;
+			margin: 2px 0px 0px 10px ~'; /** orientation=lt */ ';
+			margin: 2px 10px 0px 0px ~'; /** orientation=rt */ ';
 		}
 		.control-label {
-		    float: left;
+		    float: left ~'; /** orientation=lt */ ';
+		    float: right ~'; /** orientation=rt */ ';
 		    max-width: 150px;
 		}
 	}
@@ -880,11 +938,13 @@
 	}
 
 	.nodesContent {
-		margin-left: 10px;
+		margin-left: 10px ~'; /** orientation=lt */ ';
+		margin-right: 10px ~'; /** orientation=rt */ ';
 
 		.uiSelectbox {
 			width: 60px;
-			margin-left: 10px;
+			margin-left: 10px ~'; /** orientation=lt */ ';
+			margin-right: 10px ~'; /** orientation=rt */ ';
 			vertical-align: middle;
 
 			.selectbox {
@@ -900,7 +960,8 @@
 
 	.advanceContent {
 		.row-fluid {
-			margin: 0px 0px 10px 10px;
+			margin: 0px 0px 10px 10px ~'; /** orientation=lt */ ';
+			margin: 0px 10px 10px 0px ~'; /** orientation=rt */ ';
 
 			.span6 .control-label {
 				width: 200px;
@@ -908,7 +969,8 @@
 
 			.span12 .uiSelectbox {
 				width: 80px;
-				margin-left: 10px;
+				margin-left: 10px ~'; /** orientation=lt */ ';
+				margin-right: 10px ~'; /** orientation=rt */ ';
 				vertical-align: middle;
 
 				.selectbox {
@@ -962,7 +1024,8 @@
                 vertical-align: middle;
             }
 			.editable-clear-x {
-				margin-right: -56px;
+				margin-right: -56px ~'; /** orientation=lt */ ';
+				margin-left: -56px ~'; /** orientation=rt */ ';
 				opacity: 6;
 				cursor: pointer;
 			}
@@ -1033,7 +1096,7 @@
 /******** UIVersionInfo **************/
 .uiVersionInfo {
 	.fileContent, .mediaContent {
-    padding: 0px 0px 15px 0px;
+    padding: 0px 0px 15px;
 	}
 }
 
@@ -1085,7 +1148,8 @@
 
 		.uiSelectbox {
 			width: 140px;
-			float: right;
+			float: right ~'; /** orientation=lt */ ';
+			float: left ~'; /** orientation=rt */ ';
 
 			.selectbox {
 				width: 143px;
@@ -1097,7 +1161,8 @@
 		}
 		.control-label{
 			width: 200px;
-			text-align: left;
+			text-align: left ~'; /** orientation=lt */ ';
+			text-align: right ~'; /** orientation=rt */ ';
 			padding: 0px;
 		}
 	}
@@ -1113,7 +1178,8 @@
 		border-bottom: 1px solid @tableBorder;
 
 		td:first-child,th:first-child {
-			border-left: none;
+			border-left: none ~'; /** orientation=lt */ ';
+			border-right: none ~'; /** orientation=rt */ ';
 		}
 	}
 
@@ -1127,7 +1193,8 @@
 .uiPermissionForm {
 	.permission {
 		.form-inline .checkbox {
-			margin-right: 15px;
+			margin-right: 15px ~'; /** orientation=lt */ ';
+			margin-left: 15px ~'; /** orientation=rt */ ';
 		}
 
 		.controls {
@@ -1138,11 +1205,13 @@
 			}
 
 			.actionIcon {
-				margin-left: 5px;
+				margin-left: 5px ~'; /** orientation=lt */ ';
+				margin-right: 5px ~'; /** orientation=rt */ ';
 			}
 
 			.btn {
-				margin-left: 10px;
+				margin-left: 10px ~'; /** orientation=lt */ ';
+				margin-right: 10px ~'; /** orientation=rt */ ';
 			}
 		}
 	}
@@ -1160,19 +1229,21 @@
 .selectTemplateTitle {
 	background-color: @primaryBackground;
 	border: 1px solid @borderColor;
-	border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0 ~'; /** orientation=lt */ ';
+	border-radius: 4px 0 0 4px ~'; /** orientation=rt */ ';
 	line-height: 20px;
 	margin: 0;
 	padding: 5px 20px;
 	word-wrap: break-word;
 
 	.templateTitle {
-		margin: 4px 130px 0px 0px;
+		margin: 4px 130px 0px 0px ~'; /** orientation=lt */ ';
+		margin: 4px 0px 0px 130px ~'; /** orientation=rt */ ';
 	}
 
 	.btn-group {
 		.btn {
-			padding: 5px 8px 4px 8px;
+			padding: 5px 8px 4px;
 		}
 
 		.active [class^="uiIconEcms"] {
@@ -1181,17 +1252,22 @@
 	}
 
 	.btn-group:nth-child(2n+2) .btn{
-		border-bottom-right-radius: 3px;
-		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px ~'; /** orientation=lt */ ';
+		border-top-right-radius: 3px ~'; /** orientation=lt */ ';
+		border-bottom-left-radius: 3px ~'; /** orientation=rt */ ';
+		border-top-left-radius: 3px ~'; /** orientation=rt */ ';
 	}
 
 	.btn-group > .btn:first-child:hover{
-		border-radius: 3px 0 0 3px;
-		margin-right: -1px;
+		border-radius: 3px 0 0 3px ~'; /** orientation=lt */ ';
+		border-radius: 3px 3px 0 0 ~'; /** orientation=rt */ ';
+		margin-right: -1px ~'; /** orientation=lt */ ';
+		margin-right: -1px ~'; /** orientation=rt */ ';
 	}
 
 	.uiIconClose {
-		margin: 7px 0px 0px 10px;
+		margin: 7px 0px 0px 10px ~'; /** orientation=lt */ ';
+		margin: 7px 10px 0px 0px ~'; /** orientation=rt */ ';
 		cursor: pointer;
 	}
 }
@@ -1199,14 +1275,16 @@
 .selectTemplateArea{
 	overflow-x:hidden;
 	overflow-y:auto;
-	margin: -19px -19px 0px -19px;
+	margin: -19px -19px 0px;
 
 	.templateBox {
 		height: auto;
 		width: 120px;
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 		overflow: hidden;
-		border-right: 1px solid @borderColor;
+		border-right: 1px solid @borderColor ~'; /** orientation=lt */ ';
+		border-left: 1px solid @borderColor ~'; /** orientation=rt */ ';
 		border-bottom: 1px solid @borderColor;
 		cursor: pointer;
 
@@ -1242,7 +1320,8 @@
 		cursor: pointer;
 
 		> a {
-			margin-left: 15px;
+			margin-left: 15px ~'; /** orientation=lt */ ';
+			margin-right: 15px ~'; /** orientation=rt */ ';
 			color: @textColor;
 			vertical-align: middle;
 		}
@@ -1262,7 +1341,8 @@
 	}
 
 	button {
-		margin-left: 5px;
+		margin-left: 5px ~'; /** orientation=lt */ ';
+		margin-right: 5px ~'; /** orientation=rt */ ';
 	}
 }
 
@@ -1276,7 +1356,8 @@
 
 			.control-label {
 				width: auto;
-				margin-right: 10px;
+				margin-right: 10px ~'; /** orientation=lt */ ';
+				margin-left: 10px ~'; /** orientation=rt */ ';
 			}
 
 			.controls {
@@ -1289,7 +1370,8 @@
 		}
 
 		.btn {
-			margin-left: 5px;
+			margin-left: 5px ~'; /** orientation=lt */ ';
+			margin-right: 5px ~'; /** orientation=rt */ ';
 		}
 	}
 }
@@ -1298,7 +1380,8 @@
 	margin: 0 10px;
 	.alert.alert-warning {
 		width: 35%;
-		margin-left: 30%;
+		margin-left: 30% ~'; /** orientation=lt */ ';
+		margin-right: 30% ~'; /** orientation=rt */ ';
 		text-align: center;
 	}
 	.contentEmpty {
@@ -1387,9 +1470,11 @@
         text-shadow: none;
       }
       button, .btn {
-        margin: 0 7px 0 0;
+        margin: 0 7px 0 0 ~'; /** orientation=lt */ ';
+        margin: 0 0 0 7px ~'; /** orientation=rt */ ';
         [class^="uiIcon"] {
-          margin-right: 7px;
+          margin-right: 7px ~'; /** orientation=lt */ ';
+          margin-left: 7px ~'; /** orientation=rt */ ';
         }
       }
     }
@@ -1414,7 +1499,7 @@
 	.title {
 		font-weight: normal;
 		color: @baseColorDark;
-		margin: 0px 0px 5px 0px;
+		margin: 0px 0px 5px;
 	}
 
 	.text {
@@ -1455,14 +1540,16 @@
 /******** uiAddTranslationForm **************/
 .uiAddTranslationForm {
 	.titleLabel {
-		margin: 0 0 15px 45px;
+		margin: 0 0 15px 45px ~'; /** orientation=lt */ ';
+		margin: 0 45px 15px 0 ~'; /** orientation=rt */ ';
 	}
 	.control-label {
 		width: 140px;
 	}
 
 	.controls {
-		margin-left: 160px;
+		margin-left: 160px ~'; /** orientation=lt */ ';
+		margin-right: 160px ~'; /** orientation=rt */ ';
 		.input-append input {
 			width: 200px;
 		}
@@ -1489,7 +1576,8 @@
 			width: 170px;
 		}
 		.controls {
-			margin-left: 190px;
+			margin-left: 190px ~'; /** orientation=lt */ ';
+			margin-right: 190px ~'; /** orientation=rt */ ';
 		}
 	}
 	.constrainLink {
@@ -1506,10 +1594,11 @@
 		}
 	}
 	.constraintsForm {
-		padding: 20px 0px 10px 0px;
+		padding: 20px 0px 10px;
 
 		.constraintOption:first-child {
-			margin-left: 31px;
+			margin-left: 31px ~'; /** orientation=lt */ ';
+			margin-right: 31px ~'; /** orientation=rt */ ';
 		}
 
 		.constraintOption {
@@ -1531,8 +1620,10 @@
 
 			.label-inline {
 				width: 100px;
-				text-align: right;
-				padding-right: 10px;
+				text-align: right ~'; /** orientation=lt */ ';
+				text-align: left ~'; /** orientation=rt */ ';
+				padding-right: 10px ~'; /** orientation=lt */ ';
+				padding-left: 10px ~'; /** orientation=rt */ ';
 			}
 
 			.uiCheckbox input {
@@ -1553,7 +1644,8 @@
 	}
 
 	.controls {
-		margin-left: 140px;
+		margin-left: 140px ~'; /** orientation=lt */ ';
+		margin-right: 140px ~'; /** orientation=rt */ ';
 
 		input, select {
 			width: 200px;
@@ -1605,7 +1697,8 @@
 	}
 
 	.allDocument {
-		text-align: right;
+		text-align: right ~'; /** orientation=lt */ ';
+		text-align: left ~'; /** orientation=rt */ ';
 		margin-bottom: 15px;
 	}
 }
@@ -1627,7 +1720,8 @@
 			background: url("@{images-path}/ecms/portlets/explorer/arrows.png") no-repeat scroll -21px 0;
 			display: block;
 			height: 16px;
-			left: -8px;
+			left: -8px ~'; /** orientation=lt */ ';
+			right: -8px ~'; /** orientation=rt */ ';
 			position: absolute;
 			top: 17px;
 			width: 8px;
@@ -1640,12 +1734,14 @@
 		}
 
 		.viewLabel {
-			margin-right: 140px;
+			margin-right: 140px ~'; /** orientation=lt */ ';
+			margin-left: 140px ~'; /** orientation=rt */ ';
 			font-weight: bold;
 		}
 
 		.LabelPostedComment {
-			margin-right: 140px;
+			margin-right: 140px ~'; /** orientation=lt */ ';
+			margin-left: 140px ~'; /** orientation=rt */ ';
 		}
 		.commentList {
 			margin-top: 35px;
@@ -1667,15 +1763,18 @@
 		.commentInfo {
 			margin-bottom: 5px;
 			.dateTime {
-				margin-left: 10px;
+				margin-left: 10px ~'; /** orientation=lt */ ';
+				margin-right: 10px ~'; /** orientation=rt */ ';
 				opacity: 0.5;
 			}
 		}
 		.commentContent {
-			margin-left: 45px;
+			margin-left: 45px ~'; /** orientation=lt */ ';
+			margin-right: 45px ~'; /** orientation=rt */ ';
 		}
 		.avatarBox {
-			padding-right: 10px;
+			padding-right: 10px ~'; /** orientation=lt */ ';
+			padding-left: 10px ~'; /** orientation=rt */ ';
 		}
 	}
 }
@@ -1686,7 +1785,8 @@
     width: 200px;
   }
   .controls {
-    margin-left: 220px;
+    margin-left: 220px ~'; /** orientation=lt */ ';
+    margin-right: 220px ~'; /** orientation=rt */ ';
   }
 }
 
@@ -1747,14 +1847,17 @@
     font-style: normal;
     font-size: @sizeIcon12x12;
     position: absolute;
-    left: 6px;
+    left: 6px ~'; /** orientation=lt */ ';
+    right: 6px ~'; /** orientation=rt */ ';
     top: -2px;
 }
 
 .iconLinkSmall {
     bottom: -2px;
-    left: auto;
-    right: -2px;
+    left: auto ~'; /** orientation=lt */ ';
+    right: auto ~'; /** orientation=rt */ ';
+    right: -2px ~'; /** orientation=lt */ ';
+    left: -2px ~'; /** orientation=rt */ ';
     top: auto;
 }
 .iconLinkSmall{
@@ -1823,7 +1926,8 @@
             padding: 5px 0;
           }
           .nav {
-            margin: 0 10px 0 0;
+            margin: 0 10px 0 0 ~'; /** orientation=lt */ ';
+            margin: 0 0 0 10px ~'; /** orientation=rt */ ';
             padding: 0;
           }
           .nav-tabs ,.pagination ul,.breadcrumb{
@@ -1831,7 +1935,8 @@
             padding: 0;
           }
           ul,ol,dl {
-            padding: 0 0 0 40px;
+            padding: 0 0 0 40px ~'; /** orientation=lt */ ';
+            padding: 0 40px 0 0 ~'; /** orientation=rt */ ';
             margin: 15px 0;
             ul,ol,dl {margin: 0;}
             li {
@@ -1861,7 +1966,8 @@
     padding: 5px 0;
   }
   .nav {
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 0 ~'; /** orientation=lt */ ';
+    margin: 0 0 0 10px ~'; /** orientation=rt */ ';
     padding: 0;
   }
   .nav-tabs ,.pagination ul,.breadcrumb{
@@ -1869,7 +1975,8 @@
     padding: 0;
   }
   ul,ol,dl {
-    padding: 0 0 0 40px;
+    padding: 0 0 0 40px ~'; /** orientation=lt */ ';
+    padding: 0 40px 0 0 ~'; /** orientation=rt */ ';
     margin: 15px 0;
     ul,ol,dl {margin: 0;}
     li {
@@ -1886,10 +1993,11 @@
 
 /******************/
 .UIWCMDashboardPortlet {
-  padding: 0px 10px 25px 10px;
+  padding: 0px 10px 25px;
   	.UIDashboardDraft{
 		.uiIconEcmsDottedArrow  {
-			margin:8px 8px 0 0;
+			margin:8px 8px 0 0 ~'; /** orientation=lt */ ';
+			margin:8px 0 0 8px ~'; /** orientation=rt */ ';
 		} 
   	}
 	.uiAuthoringDashboard {
@@ -1912,14 +2020,17 @@
 		}
 		@media (min-width: 980px) {
             .alignLeft {
-                float: left;
+                float: left ~'; /** orientation=lt */ ';
+                float: right ~'; /** orientation=rt */ ';
                 width: 30%;
-                margin: 0 0 15px 20px;
+                margin: 0 0 15px 20px ~'; /** orientation=lt */ ';
+                margin: 0 20px 15px 0 ~'; /** orientation=rt */ ';
                 min-width: 225px;
             }
         }
 		.elements {
-			text-align: left;
+			text-align: left ~'; /** orientation=lt */ ';
+			text-align: right ~'; /** orientation=rt */ ';
 			padding: 10px;
 			overflow: hidden;
 			font-size:12px;
@@ -1931,7 +2042,8 @@
 			color: @linkColor;
 			font-weight: bold;
 			line-height: 18px;
-			margin: 3px 0px 0px 5px;
+			margin: 3px 0px 0px 5px ~'; /** orientation=lt */ ';
+			margin: 3px 5px 0px 0px ~'; /** orientation=rt */ ';
 			min-width: 30px;
 			text-align: center;
 			display: inline-block;
@@ -1942,13 +2054,14 @@
 		}
 		
 		.uiPageIterator {
-			margin: 10px -10px 0px -10px;
-			padding: 10px 10px 0px 10px;
+			margin: 10px -10px 0px;
+			padding: 10px 10px 0px;
 			border-top: 1px solid @borderColor;
 		}
 		
 		.refresh {
-			margin-left: 20px;
+			margin-left: 20px ~'; /** orientation=lt */ ';
+			margin-right: 20px ~'; /** orientation=rt */ ';
 			 text-transform: capitalize;
 		}
 	}
@@ -2035,7 +2148,8 @@
 			padding: 0;
 			.uiSelectbox {
 				width: 100%;
-				margin-left: 0;
+				margin-left: 0 ~'; /** orientation=lt */ ';
+				margin-right: 0 ~'; /** orientation=rt */ ';
 				.selectbox {
 					width: 100%;  
 					margin-top: 10px;
@@ -2043,7 +2157,8 @@
 			}
 		}
 		.checkBoxContent{
-			text-align: right;
+			text-align: right ~'; /** orientation=lt */ ';
+			text-align: left ~'; /** orientation=rt */ ';
 			float: none;
 			width: 175px;
 
@@ -2052,10 +2167,6 @@
 				margin: 0;
 			}
 	}
-}
-
-.uiThumbnailsView {
-
 }
 
 .UIDocumentInfo {
@@ -2087,7 +2198,8 @@
             font-size: @sizeIconDefault - 2;
             color: @warningColor;
             bottom: -4px;
-            right: 0px;
+            right: 0px ~'; /** orientation=lt */ ';
+            left: 0px ~'; /** orientation=rt */ ';
             position: absolute;
         }
         .LinkSmall:before {
@@ -2116,7 +2228,8 @@
             margin: auto;
             position: relative;
             .Link {
-                right: 34px;
+                right: 34px ~'; /** orientation=lt */ ';
+                left: 34px ~'; /** orientation=rt */ ';
                 &:before {font-size: @sizeIcon24x24;}
             }
 
@@ -2124,7 +2237,8 @@
 
         .Link,.IconLocked {
             position: absolute!important;
-            right: 25px;
+            right: 25px ~'; /** orientation=lt */ ';
+            left: 25px ~'; /** orientation=rt */ ';
             bottom: 0!important;
             top: auto!important;
         }
@@ -2141,12 +2255,14 @@
     .thumbnailImage {
         .loadingProgressIcon {
             .IconLocked,.Link {
-                right: -4px;
+                right: -4px ~'; /** orientation=lt */ ';
+                left: -4px ~'; /** orientation=rt */ ';
             }
         }
         .IconLocked,.Link {
             position: absolute ;
-            right: 26px ;
+            right: 26px ~'; /** orientation=lt */ ';
+            left: 26px ~'; /** orientation=rt */ ';
             top: 12px ;
         }
         .Link {

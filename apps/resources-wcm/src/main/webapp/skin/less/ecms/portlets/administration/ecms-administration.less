@@ -7,7 +7,8 @@
 	.uiResizableBlock{
         @media (min-width: 980px){
             .ShowSideBar{
-                margin-left: 256px;
+                margin-left: 256px ~'; /** orientation=lt */ ';
+                margin-right: 256px ~'; /** orientation=rt */ ';
             }
         }
 	}
@@ -18,8 +19,10 @@
         margin: 15px;
         @media (min-width: 980px){
             width: 233px;
-            float: left;
-            padding: 24px 13px 0px 10px;
+            float: left ~'; /** orientation=lt */ ';
+            float: right ~'; /** orientation=rt */ ';
+            padding: 24px 13px 0px 10px ~'; /** orientation=lt */ ';
+            padding: 24px 10px 0px 13px ~'; /** orientation=rt */ ';
             margin: 0;
         }
 	}
@@ -33,7 +36,7 @@
 	.uiECMAdminWorkingArea{
 		margin: 24px 10px 10px;
 		.pagination{
-			margin: 0px 0px 9px 0px;
+			margin: 0px 0px 9px;
 		}
 		.uiPopup{
 			.control-group{
@@ -58,12 +61,14 @@
 		}
 		.tabActions{
 			 width:240px; 
-			 float:left;
+			 float:left ~'; /** orientation=lt */ ';
+			 float:right ~'; /** orientation=rt */ ';
 			 margin: 0px;
 		}
 		.uiOneNodePathSelector{
 			.uiTreeList{
-				margin-left: 250px;
+				margin-left: 250px ~'; /** orientation=lt */ ';
+				margin-right: 250px ~'; /** orientation=rt */ ';
 			}
 			.breadcrumb{
 				background-color: @formActionsBackground;
@@ -76,7 +81,8 @@
 				width: 84px;
 			}
 			.form-horizontal .controls{
-				margin-left: 100px;
+				margin-left: 100px ~'; /** orientation=lt */ ';
+				margin-right: 100px ~'; /** orientation=rt */ ';
 			}
 		}
 		.anyPermission .form-horizontal{
@@ -94,7 +100,8 @@
 	
 	.uiNodeTypeUpload{
 		.form-horizontal .controls{
-				margin-left: 148px;
+				margin-left: 148px ~'; /** orientation=rt */ ';
+				margin-right: 148px ~'; /** orientation=lt */ ';
 			}
 	}
 	.UITagManager{
@@ -106,7 +113,8 @@
 		.RequiredTypeTab, .DefaultTypeTab{
 			.form-horizontal{
 				.controls{
-					margin-left: 0px;
+					margin-left: 0px ~'; /** orientation=lt */ ';
+					margin-right: 0px ~'; /** orientation=rt */ ';
 				}
 			}
 		}
@@ -115,7 +123,8 @@
 		.form-horizontal {
 			.control-group{
 				.controls-full{
-					margin-left: 180px;
+					margin-left: 180px ~'; /** orientation=lt */ ';
+					margin-right: 180px ~'; /** orientation=rt */ ';
 				}
 			}
 		}
@@ -154,7 +163,8 @@ a:hover .uiIconEcmsUnLockManager{
 
 .MultiValueContainer{
 	.multiFieldAction{
-		margin-left: 4px;
+		margin-left: 4px ~'; /** orientation=lt */ ';
+		margin-right: 4px ~'; /** orientation=rt */ ';
 	}
 }
 
@@ -164,7 +174,7 @@ a:hover .uiIconEcmsUnLockManager{
 		border: 1px solid @primaryBackgroundHover;
 		background: @primaryBackgroundLight;
 		border-radius: 0px;
-		margin: 0 0 16px 0;
+		margin: 0 0 16px;
 		padding: 4px;
 	}
 	.uiTreeList{
@@ -244,7 +254,8 @@ a:hover .uiIconEcmsUnLockManager{
 .permission {
 		
 	.form-inline .checkbox {
-		margin-right: 15px;
+		margin-right: 15px ~'; /** orientation=lt */ ';
+		margin-left: 15px ~'; /** orientation=rt */ ';
 	}
 	
 	.controls {
@@ -255,7 +266,8 @@ a:hover .uiIconEcmsUnLockManager{
 		}
 		
 		.btn {
-			margin-left: 10px;
+			margin-left: 10px ~'; /** orientation=lt */ ';
+			margin-right: 10px ~'; /** orientation=rt */ ';
 		}
 	}
 }

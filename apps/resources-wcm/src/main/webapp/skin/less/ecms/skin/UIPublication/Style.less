@@ -10,7 +10,8 @@
 .uiPublicationPanel {
 	.statusAction {
 		padding: 0px;
-		margin: 0px 0px 15px 30px;
+		margin: 0px 0px 15px 30px ~'; /** orientation=lt */ ';
+		margin: 0px 30px 15px 0px ~'; /** orientation=rt */ ';
 		white-space: nowrap;
 
 		.activeStatus,
@@ -21,7 +22,8 @@
 			width: 101px;
 			text-align: center;
 			position: relative;
-			margin-right: -4px;
+			margin-right: -4px ~'; /** orientation=lt */ ';
+			margin-left: -4px ~'; /** orientation=rt */ ';
 
 			p {
 				font-size: 13px;
@@ -56,7 +58,8 @@
 			background: url("@{images-path}/ecms/skin/Publication/lineGray.png") no-repeat left top;
 			content: "";
 			height: 13px;
-			left: -31px;
+			left: -31px ~'; /** orientation=lt */ ';
+			right: -31px ~'; /** orientation=rt */ ';
 			position: absolute;
 			top: 17px;
 			width: 60px;
@@ -92,13 +95,16 @@
 	}
 
 	.btn {
-		margin: 0px 5px 0 0;
+		margin: 0px 5px 0 0 ~'; /** orientation=lt */ ';
+		margin: 0px 0 0 5px ~'; /** orientation=rt */ ';
 	}
 	.label-title {
-		margin-right: 10px;
+		margin-right: 10px ~'; /** orientation=lt */ ';
+		margin-left: 10px ~'; /** orientation=rt */ ';
 	}
 	.form-inline input {
 		width: 160px;
-		margin-right: 10px;
+		margin-right: 10px ~'; /** orientation=lt */ ';
+		margin-left: 10px ~'; /** orientation=rt */ ';
 	}
 }

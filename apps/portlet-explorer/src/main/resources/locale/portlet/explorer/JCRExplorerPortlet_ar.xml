@@ -1911,7 +1911,6 @@
     <label>
       <names>العلامات:</names>
       <linked>العلامات الموصولة</linked>
-      <tagSet>واجهة نموذج الدالة</tagSet>
     </label>
     <action>
       <AddTag>اضافة</AddTag>
