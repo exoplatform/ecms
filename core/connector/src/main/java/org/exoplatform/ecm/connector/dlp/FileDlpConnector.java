@@ -84,6 +84,7 @@ public class FileDlpConnector extends DlpServiceConnector {
 
   @Override
   public boolean processItem(String entityId) {
+    LOGGER.debug("Process item {}",entityId);
     if (!isIndexedByEs(entityId) || editorOpened(entityId)) {
       return false;
     } else {
@@ -120,7 +121,9 @@ public class FileDlpConnector extends DlpServiceConnector {
     SearchContext searchContext = null;
     try {
       searchContext = new SearchContext(new Router(new ControllerDescriptor()), "");
-      return fileSearchServiceConnector.isIndexed(searchContext, entityId);
+      boolean result = fileSearchServiceConnector.isIndexed(searchContext, entityId);
+      LOGGER.debug("Item {} isindexedByEs={}",entityId,result);
+      return result;
     } catch (Exception ex) {
       LOGGER.error("Can not create SearchContext", ex);
     }
@@ -136,6 +139,8 @@ public class FileDlpConnector extends DlpServiceConnector {
         Collection<SearchResult> searchResults = fileSearchServiceConnector.dlpSearch(searchContext, dlpKeywords, entityId);
         if (!getDetectedKeywords(searchResults, dlpOperationProcessor.getKeywords()).isEmpty()) {
           treatItem(entityId, searchResults);
+        } else {
+          LOGGER.debug("Item {} does not match keywords", entityId);
         }
       } catch (Exception ex) {
         LOGGER.error("Can not create SearchContext", ex);
@@ -155,6 +160,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       String restorePath = fixRestorePath(node.getPath());
       RestoredDlpItem restoredDlpItem = findRestoredDlpItem(node.getUUID());
       if (!node.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/") && (restoredDlpItem == null ||  getNodeLastModifiedDate(node) > restoredDlpItem.getDetectionDate())) {
+        LOGGER.debug("Item {} is put in DLP quarantine", entityId);
         addMixinForRestoredItemSymlinks(node);
         workspace.move(node.getPath(), "/" + DLP_QUARANTINE_FOLDER + "/" + fileName);
         indexingService.unindex(TYPE, entityId);
@@ -360,7 +366,9 @@ public class FileDlpConnector extends DlpServiceConnector {
     try {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       node = session.getNodeByIdentifier(entityId);
-      return node.hasProperty(EXO_CURRENT_PROVIDER);
+      boolean result =  node.hasProperty(EXO_CURRENT_PROVIDER);
+      LOGGER.debug("Item {} isEditorOpened={}", entityId, result);
+      return result;
     } catch (RepositoryException e) {
       LOGGER.error("Error while checking editor status", e);
     } finally {
