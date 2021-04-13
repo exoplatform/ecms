@@ -31,7 +31,8 @@
 
 		.advance .searchBtn {
 			position: absolute;
-			right: 5px;
+			right: 5px ~'; /** orientation=lt */ ';
+			left: 5px ~'; /** orientation=rt */ ';
 			top: 4px;
 		}
 	}
@@ -42,7 +43,8 @@
 			width: 18px;
 			height: 18px;
 			position: absolute;
-			right: 5px;
+			right: 5px ~'; /** orientation=lt */ ';
+			left: 5px ~'; /** orientation=rt */ ';
 			top: 3px;
 
 			.uiIconArrowDown {
@@ -60,7 +62,8 @@
 		}
 
 		.inputContainer {
-			margin: 0 4px 0 0;
+			margin: 0 4px 0 0 ~'; /** orientation=lt */ ';
+			margin: 0 0 0 4px ~'; /** orientation=rt */ ';
 		}
 
 		.inputContainer input {
@@ -84,7 +87,8 @@
 		width: 100%;
 		overflow: auto;
 		background: @baseBackground;
-		left: -1px;
+		left: -1px ~'; /** orientation=lt */ ';
+		right: -1px ~'; /** orientation=rt */ ';
 		display: none;
 
 		.addressItem {
@@ -105,7 +109,8 @@
 	}
 	.detailViewIcon{
 		.btn-group .btn{
-			margin-left: -1px;
+			margin-left: -1px ~'; /** orientation=lt */ ';
+			margin-right: -1px ~'; /** orientation=rt */ ';
 			padding: 2px 6px ;
 		}
 		.btn-group .btn:nth-last-child(2):hover{
@@ -131,7 +136,8 @@
 	}
 
 	.backAndRefreshBlock {
-		margin-left: 3px;
+		margin-left: 3px ~'; /** orientation=lt */ ';
+		margin-right: 3px ~'; /** orientation=rt */ ';
 		width: 55px;
 	}
 }
@@ -155,13 +161,16 @@
 	}
 
 	.ExtendedView {
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 		position: relative;
 	}
 
 	.HomeLabel {
-		float: left;
-		margin: 0px 0px 0px 4px;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
+		margin: 0px 0px 0px 4px ~'; /** orientation=lt */ ';
+		margin: 0px 4px 0px 0px ~'; /** orientation=rt */ ';
 		color: @textColor;
 	}
 }

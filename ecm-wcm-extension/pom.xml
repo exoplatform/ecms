@@ -212,7 +212,7 @@
         <executions>
           <execution>
             <id>install node and npm</id>
-            <phase>compile</phase>
+            <phase>package-prepare</phase>
             <goals>
               <goal>install-node-and-npm</goal>
             </goals>
@@ -223,7 +223,7 @@
           </execution>
           <execution>
             <id>npm install</id>
-            <phase>compile</phase>
+            <phase>package-prepare</phase>
             <goals>
               <goal>npm</goal>
             </goals>
@@ -232,18 +232,8 @@
             </configuration>
           </execution>
           <execution>
-            <id>npm run test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <configuration>
-              <arguments>test</arguments>
-            </configuration>
-          </execution>
-          <execution>
             <id>npm run build</id>
-            <phase>compile</phase>
+            <phase>package-prepare</phase>
             <goals>
               <goal>npm</goal>
             </goals>

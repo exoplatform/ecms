@@ -4,7 +4,8 @@
 	position: fixed;
 	font-size: 12px;
 	bottom: 0;
-	right: 27px;
+	right: 27px ~'; /** orientation=lt */ ';
+	left: 27px ~'; /** orientation=rt */ ';
   z-index: 999;
 
 	a {
@@ -16,7 +17,8 @@
 		position: absolute;
 		background: rgba(235, 235, 235, 0.8);
 		border: 4px dashed @borderColor;
-		right: 0px;
+		right: 0px ~'; /** orientation=lt */ ';
+		left: 0px ~'; /** orientation=rt */ ';
 		top: 0px;
 		width: 644px;
 		height: 99%;
@@ -41,12 +43,14 @@
     @media (min-width: 1265px) {
         .uiBox {
             width: 680px;
-            float: right;
+            float: right ~'; /** orientation=lt */ ';
+            float: left ~'; /** orientation=rt */ ';
         }
     }
 
 	.uploadIconContainer {
-		float: left;
+		float: left ~'; /** orientation=lt */ ';
+		float: right ~'; /** orientation=rt */ ';
 		width: 30px;
 
 		img {
@@ -56,7 +60,8 @@
 	}
 
 	.multiUploadAbortAll  {
-		margin-left: 8px;
+		margin-left: 8px ~'; /** orientation=lt */ ';
+		margin-right: 8px ~'; /** orientation=rt */ ';
 		.action {
 			cursor:pointer;
 			color: @textColor;
@@ -86,16 +91,18 @@
 
 		.fileSize {
 			width: 100px;
-			text-align: right;
+			text-align: end;
 			font-weight: bold;
 			font-style: normal;
 		}
 		.warningContainer {
-			margin-right: 10px;
+			margin-right: 10px ~'; /** orientation=lt */ ';
+			margin-left: 10px ~'; /** orientation=rt */ ';
 		}
 
 		.action {
-			margin-left: 5px;
+			margin-left: 5px ~'; /** orientation=lt */ ';
+			margin-right: 5px ~'; /** orientation=rt */ ';
 		}
 
 		.loaddingPercent {
@@ -120,7 +127,8 @@
 			position: absolute;
 			z-index: 10;
 			top: -3px;
-			left: 40%;
+			left: 40% ~'; /** orientation=lt */ ';
+			right: 40% ~'; /** orientation=rt */ ';
 		}
 
 		.progress {
@@ -129,7 +137,8 @@
 			margin: 0;
 			.border-radius(3px);
 			.textPercent {
-			    left: 5px;
+			    left: 5px ~'; /** orientation=lt */ ';
+			    right: 5px ~'; /** orientation=rt */ ';
 			    position: absolute;
 			    top: 0;
                 color: @baseBackground;
@@ -137,7 +146,8 @@
 			}
 		}
 		.actionIcon {
-		    margin-left: 10px;
+		    margin-left: 10px ~'; /** orientation=lt */ ';
+		    margin-right: 10px ~'; /** orientation=rt */ ';
     		margin-top: -2px;
 		}
 		.uiIconRemove {
@@ -164,7 +174,8 @@
 
 	.multiUploadFilesShortInfo {
 		[class^="uiIcon"] {
-			margin: 2px 0px 0px 8px;
+			margin: 2px 0px 0px 8px ~'; /** orientation=lt */ ';
+			margin: 2px 8px 0px 0px ~'; /** orientation=rt */ ';
 		}
 	}
 

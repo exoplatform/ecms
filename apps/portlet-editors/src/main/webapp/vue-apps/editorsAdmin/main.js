@@ -2,10 +2,7 @@ import adminApp from "./components/AdminApp.vue";
 
 Vue.use(Vuetify);
 
-const vuetify = new Vuetify({
-  dark: true,
-  iconfont: ""
-});
+const vuetify = new Vuetify(eXo.env.portal.vuetifyPreset);
 
 // getting language of user
 const lang = (eXo && eXo.env && eXo.env.portal && eXo.env.portal.language) || "en";

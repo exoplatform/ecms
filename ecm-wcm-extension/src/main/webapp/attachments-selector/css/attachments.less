@@ -83,8 +83,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    text-align: left;
-    margin-left: 5%;
+    text-align: left ~'; /** orientation=lt */ ';
+    text-align: right ~'; /** orientation=rt */ ';
+    margin-left: 5% ~'; /** orientation=lt */ ';
+    margin-right: 5% ~'; /** orientation=rt */ ';
 
     .fileDetails1 {
       display: flex;
@@ -149,7 +151,8 @@
         margin: 0;
         padding: 15px 15px 15px 0;
         position: absolute;
-        float: left;
+        float: left ~'; /** orientation=lt */ ';
+        float: right ~'; /** orientation=rt */ ';
         font-size: 15px;
         cursor: pointer;
         top: 10px;
@@ -164,15 +167,18 @@
       font-size: 18px;
       font-weight: bold;
       width: 100%;
-      text-align: left;
-      padding-left: 35px;
+      text-align: left ~'; /** orientation=lt */ ';
+      text-align: right ~'; /** orientation=rt */ ';
+      padding-left: 35px ~'; /** orientation=lt */ ';
+      padding-right: 35px ~'; /** orientation=rt */ ';
     }
 
     .attachmentsCloseIcon {
       color: #dee4f2;
       font-size: 32px;
       line-height: 20px;
-      float: right;
+      float: right ~'; /** orientation=lt */ ';
+      float: left ~'; /** orientation=rt */ ';
       cursor: pointer;
     }
   }
@@ -194,7 +200,8 @@
       margin-bottom: 13px;
       .showFile{
         width: 97%;
-        margin-left:12px;
+        margin-left: 12px ~'; /** orientation=lt */ ';
+        margin-right: 12px ~'; /** orientation=rt */ ';
       }
     }
 
@@ -202,7 +209,8 @@
       flex: 0 0 34px;
       width: 50px;
       margin-top: 5px;
-      margin-right: -7px;
+      margin-right: -7px ~'; /** orientation=lt */ ';
+      margin-left: -7px ~'; /** orientation=rt */ ';
 
       .uiIcon {
         color: #A8B3C5;
@@ -217,7 +225,8 @@
     .destinationFolder {
       display: flex;
       flex-direction: row;
-      margin-left: 15px;
+      margin-left: 15px ~'; /** orientation=lt */ ';
+      margin-right: 15px ~'; /** orientation=rt */ ';
       color: #a8b3c5;
       border-bottom: 1px solid  #a8b3c5;
       margin-top: -14px;
@@ -230,7 +239,8 @@
         flex-direction: row;
       }
       .btnTrash{
-        margin-left: 10px;
+        margin-left: 10px ~'; /** orientation=lt */ ';
+        margin-right: 10px ~'; /** orientation=rt */ ';
         margin-bottom: 8px;
         cursor: pointer;
         margin-top: -1px;
@@ -249,11 +259,12 @@
         white-space: nowrap;
         cursor: pointer;
         margin-bottom: 0px;
-        margin-right: 5px;
-
+        margin-right: 5px ~'; /** orientation=lt */ ';
+        margin-left: 5px ~'; /** orientation=rt */ ';
       }
       .folderName{
-        margin-right: 5px;
+        margin-right: 5px ~'; /** orientation=lt */ ';
+        margin-left: 5px ~'; /** orientation=rt */ ';
         cursor: pointer
       }
       .colorIcon{
@@ -309,7 +320,7 @@
   }
 
   .fileAlreadyExists, .sizeExceeded, .countExceeded {
-    position: absolute;
+    position: absolute !important;
     left: 50%;
     z-index: 100;
     transform: translateX(-50%);
@@ -340,25 +351,29 @@
     .sizeLimit:before {
       font-family: "PLF-FONT-ICONS";
       content: "\e771";
-      padding-right: 5px;
+      padding-right: 5px ~'; /** orientation=lt */ ';
+      padding-left: 5px ~'; /** orientation=rt */ ';
     }
 
     .countLimit:before {
       font-family: "PLF-FONT-ICONS";
       content: "\e767";
-      padding-right: 5px;
+      padding-right: 5px ~'; /** orientation=lt */ ';
+      padding-left: 5px ~'; /** orientation=rt */ ';
     }
   }
 
   .selectFolder {
     display: inline-block;
     margin: auto;
-    padding-right: 5px;
+    padding-right: 5px ~'; /** orientation=lt */ ';
+    padding-left: 5px ~'; /** orientation=rt */ ';
     line-height: 20px;
 
     .uiIconClose {
       top: 0;
-      left: 5px;
+      left: 5px ~'; /** orientation=lt */ ';
+      right: 5px ~'; /** orientation=rt */ ';
     }
   }
 
@@ -426,7 +441,8 @@
           flex-direction: row;
           .leftLine{
             width: 30%;
-            margin-left: 112%;
+            margin-left: 112% ~'; /** orientation=lt */ ';
+            margin-right: 112% ~'; /** orientation=rt */ ';
           }
           .colorText{
             color: #e6e6e6;
@@ -440,7 +456,8 @@
           }
           .rightLine{
             width: 30%;
-            margin-left: -43%;
+            margin-left: -43% ~'; /** orientation=lt */ ';
+            margin-right: -43% ~'; /** orientation=rt */ ';
           }
         }
         .colorText{
@@ -464,12 +481,14 @@
 
             .iconCloud {
               position: absolute;
-              left: 5px;
+              left: 5px ~'; /** orientation=lt */ ';
+              right: 5px ~'; /** orientation=rt */ ';
               top: 6px;
             }
           }
           .text{
-            padding-left: 6px;
+            padding-left: 6px ~'; /** orientation=lt */ ';
+            padding-right: 6px ~'; /** orientation=rt */ ';
           }
         }
       }
@@ -487,13 +506,15 @@
 
   .attachmentsFooter {
     .btn {
-      float: right;
+      float: right ~'; /** orientation=lt */ ';
+      float: left ~'; /** orientation=rt */ ';
     }
   }
 
   .uiPopup.documentSelector {
     top: 12%;
-    left: 21%;
+    left: 21% ~'; /** orientation=lt */ ';
+    right: 21% ~'; /** orientation=rt */ ';
   }
 
   .content.serverFiles {
@@ -514,7 +535,8 @@
         .currentDirectory {
           display: flex;
           align-items: center;
-          margin-right: 10px;
+          margin-right: 10px ~'; /** orientation=lt */ ';
+          margin-left: 10px ~'; /** orientation=rt */ ';
           flex: 1;
           min-width: 0;
 
@@ -524,7 +546,8 @@
             align-items: center;
 
             .uiIconFolder {
-              margin-right: 5px;
+              margin-right: 5px ~'; /** orientation=lt */ ';
+              margin-left: 5px ~'; /** orientation=rt */ ';
               color: @headingColor;
             }
 
@@ -600,7 +623,8 @@
           display: inline-flex;
           align-items: center;
           a:first-of-type {
-            margin-right: 5px;
+            margin-right: 5px ~'; /** orientation=lt */ ';
+            margin-left: 5px ~'; /** orientation=rt */ ';
           }
 
           &.visible {
@@ -608,7 +632,8 @@
 
             .searchInput {
               border-radius: 5px 0 0 5px;
-              border-right: 0;
+              border-right: 0 ~'; /** orientation=lt */ ';
+              border-left: 0 ~'; /** orientation=rt */ ';
             }
 
             .uiIconCloseServerAttachments {
@@ -616,8 +641,10 @@
               padding: 10px 15px 13px 15px;
               margin-bottom: 12px;
               border: 1px solid #b3b3b3;
-              border-left: 0;
-              border-radius: 0 5px 5px 0;
+              border-left: 0 ~'; /** orientation=lt */ ';
+              border-right: 0 ~'; /** orientation=rt */ ';
+              border-radius: 0 5px 5px 0 ~'; /** orientation=lt */ ';
+              border-radius: 0 0 5px 5px ~'; /** orientation=rt */ ';
               cursor: pointer;
 
               &::before {
@@ -649,7 +676,8 @@
         .actionBox {
           display: inline-flex;
           align-items: center;
-          margin-left: 5px;
+          margin-left: 5px ~'; /** orientation=lt */ ';
+          margin-right: 5px ~'; /** orientation=rt */ ';
 
           &Logo {
             position: relative;
@@ -666,7 +694,8 @@
                 content: '+';
                 position: absolute;
                 color: #fff;
-                left: 0;
+                left: 0 ~'; /** orientation=lt */ ';
+                right: 0 ~'; /** orientation=rt */ ';
                 top: 26%;
                 width: 100%;
                 font-weight: bold;
@@ -765,7 +794,8 @@
             .closeIcon {
               margin-top: -9px;
               padding: 3px;
-              margin-left: 80%;
+              margin-left: 80% ~'; /** orientation=lt */ ';
+              margin-right: 80% ~'; /** orientation=rt */ ';
               > p {
                 margin-bottom: 0px;
                 margin-top:-5px;
@@ -897,14 +927,16 @@
               margin: 0;
               cursor: pointer;
               display: block;
-              text-align: left;
+              text-align: left ~'; /** orientation=lt */ ';
+              text-align: right ~'; /** orientation=rt */ ';
               padding: 10px;
 
               &:last-child {
                 border-bottom: none;
               }
               i {
-                margin-right: 5px;
+                margin-right: 5px ~'; /** orientation=lt */ ';
+                margin-left: 5px ~'; /** orientation=rt */ ';
                 width: 20px;
               }
               &:hover {
@@ -951,8 +983,10 @@
                 display: inline-block;
                 vertical-align: middle;
                 width: 100%;
-                margin-right: -100%;
-                margin-left: 10px;
+                margin-right: -100% ~'; /** orientation=lt */ ';
+                margin-left: 10px ~'; /** orientation=lt */ ';
+                margin-left: -100% ~'; /** orientation=rt */ ';
+                margin-right: 10px ~'; /** orientation=rt */ ';
                 border-top: 1px solid #efefef;
               }
             }
@@ -993,14 +1027,17 @@
 
 
 .btnActions{
-  float:right;
-  margin-right: 10%;
+  float:right ~'; /** orientation=lt */ ';
+  float:left ~'; /** orientation=rt */ ';
+  margin-right: 10% ~'; /** orientation=lt */ ';
+  margin-left: 10% ~'; /** orientation=rt */ ';
   margin-top: -20%;
 }
 .btnCancel{
   border: 1px solid #568cc9 !important;
   color: #568cc9 !important;
-  margin-right: 4px;
+  margin-right: 4px ~'; /** orientation=lt */ ';
+  margin-left: 4px ~'; /** orientation=rt */ ';
   text-transform: uppercase !important;
   font-size: 13px;
 }
@@ -1013,7 +1050,8 @@
 .destinationFolder {
   display: flex;
   flex-direction: row;
-  margin-left: 15px;
+  margin-left: 15px ~'; /** orientation=lt */ ';
+  margin-left: 15px ~'; /** orientation=rt */ ';
   color: #a8b3c5;
   margin-bottom: 10%;
 
@@ -1148,7 +1186,8 @@
           align-items: center;
 
           .attachedFiles {
-            margin-left: 3%;
+            margin-left: 3% ~'; /** orientation=lt */ ';
+            margin-right: 3% ~'; /** orientation=rt */ ';
           }
 
           .uiIconAttach {

@@ -1,14 +1,16 @@
 <template>
-  <v-app id="editors-admin" class="VuetifyApp">
-    <v-container style="width: 95%" class="v-application--is-ltr">
+  <v-app id="editors-admin">
+    <v-container style="width: 95%">
       <div v-show="error" class="alert alert-error">
         {{ i18n.te(`${errorResourceBase}.${error}`) ? $t(`${errorResourceBase}.${error}`) : error }}
       </div>
-      <v-row class="white">
-        <v-col xs12 px-3>
-          <h4 class="editorsTitle">
-            {{ $t("editors.admin.title") }}
-          </h4>
+      <v-row>
+        <v-col xs12 px-3 class="pb-0">
+          <h3 class="editorsTitle">
+            <span class="me-3">
+              {{ $t("editors.admin.title") }}
+            </span>
+          </h3>
         </v-col>
       </v-row>
       <v-row>
@@ -17,10 +19,10 @@
             <template v-slot:default>
               <thead>
                 <tr class="providersTableRow">
-                  <th class="text-left">{{ $t("editors.admin.table.Provider") }}</th>
-                  <th class="text-left">{{ $t("editors.admin.table.Description") }}</th>
-                  <th class="text-left" style="width: 5%">{{ $t("editors.admin.table.Active") }}</th>
-                  <th class="text-left" style="width: 5%">{{ $t("editors.admin.table.Permissions") }}</th>
+                  <th class="text-start">{{ $t("editors.admin.table.Provider") }}</th>
+                  <th class="text-start">{{ $t("editors.admin.table.Description") }}</th>
+                  <th class="text-start" style="width: 5%">{{ $t("editors.admin.table.Active") }}</th>
+                  <th class="text-start" style="width: 5%">{{ $t("editors.admin.table.Permissions") }}</th>
                 </tr>
               </thead>
               <tbody v-if="providers.length > 0">

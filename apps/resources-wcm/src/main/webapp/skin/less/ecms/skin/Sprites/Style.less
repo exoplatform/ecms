@@ -617,8 +617,12 @@ a:hover [class^="uiIconEcms"],
 	content: "\e796";
 }
 
-.uiIconEcmsGoBack:before {
-	content: "\e760";
+.uiIconEcmsGoBack {
+  transform: rotate(180deg) ~'; /** orientation=rt */ ';
+
+  &:before {
+  	content: "\e760";
+  }
 }
 
 .uiIconEcmsGotoFolder:before {
@@ -719,11 +723,13 @@ a:hover [class^="uiIconEcms"],
 }
 
 .uiIconEcmsDottedArrow {
-	font-size: 6px;
+  transform: rotate(180deg) ~'; /** orientation=rt */ ';
+  font-size: 6px;
 }
 
 .uiItemList li > [class^="uiIcon"] {
-    margin: 5px 0 0 -15px!important;
+    margin: 5px 0 0 -15px ~'!important; /** orientation=lt */ ';
+    margin: 5px -15px 0 0 ~'!important; /** orientation=rt */ ';
 }
 .uiIconEcmsViewAdmin {
   	position: relative; // Adding a position relative to correct the feeling of icons not being aligned

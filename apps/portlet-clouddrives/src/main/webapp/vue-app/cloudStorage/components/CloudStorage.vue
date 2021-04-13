@@ -1,10 +1,12 @@
 <template>
-  <v-app id="cloudStorageApp" class="VuetifyApp">
-    <v-container style="width: 95%" class="v-application--is-ltr">
-      <v-row class="white">
+  <v-app id="cloudStorageApp">
+    <v-container style="width: 95%">
+      <v-row>
         <v-col xs12 px-3>
           <h4 class="Title">
-            {{ $t("cloudStorage.label.title") }}
+            <span class="me-3">
+              {{ $t("cloudStorage.label.title") }}
+            </span>
           </h4>
         </v-col>
       </v-row>
