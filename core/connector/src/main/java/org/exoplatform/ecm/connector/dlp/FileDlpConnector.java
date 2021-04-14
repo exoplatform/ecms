@@ -110,7 +110,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(entityId);
       boolean result = trashService.isInTrash(node);
-      LOGGER.debug("Item {} isEditorOpened={}", entityId, result);
+      LOGGER.debug("Item {} isInTrash={}", entityId, result);
       return result;
     } catch (Exception e) {
       LOGGER.error("Error when check if node {} is in trash", entityId, e);
