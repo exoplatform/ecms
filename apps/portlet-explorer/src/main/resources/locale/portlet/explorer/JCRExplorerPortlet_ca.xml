@@ -1911,7 +1911,6 @@
     <label>
       <names>Etiquetes:</names>
       <linked>Etiquetes enllaçades:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Afegeix</AddTag>

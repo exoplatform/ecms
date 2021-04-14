@@ -1911,7 +1911,6 @@
     <label>
       <names>Nombres de etiqueta</names>
       <linked>Etiquetas conectadas</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Añadir Etiquetas</AddTag>
