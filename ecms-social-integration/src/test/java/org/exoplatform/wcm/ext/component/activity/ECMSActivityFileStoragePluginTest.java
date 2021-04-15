@@ -2,6 +2,7 @@ package org.exoplatform.wcm.ext.component.activity;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -67,6 +68,8 @@ public class ECMSActivityFileStoragePluginTest {
   @Mock
   Session session;
 
+  @Mock
+  AutoVersionService autoVersionService;
 
   @Test
   public void storeAttachments() throws Exception {
@@ -81,7 +84,7 @@ public class ECMSActivityFileStoragePluginTest {
     priority.setValue("1");
     initParams.addParameter(datasource);
     initParams.addParameter(priority);
-    ECMSActivityFileStoragePlugin ecmsActivityFileStoragePlugin = new ECMSActivityFileStoragePlugin(spaceService,nodeHierarchyCreator,repositoryService,uploadService,sessionProviderService,initParams);
+    ECMSActivityFileStoragePlugin ecmsActivityFileStoragePlugin = new ECMSActivityFileStoragePlugin(spaceService,nodeHierarchyCreator,repositoryService,uploadService,sessionProviderService,initParams,autoVersionService);
     ExoSocialActivity activity = new ExoSocialActivityImpl();
     activity.setTitle("test");
     activity.setStreamOwner("root");
@@ -124,6 +127,7 @@ public class ECMSActivityFileStoragePluginTest {
     when(resourceNode.getProperty(any())).thenReturn(property);
     when(property.getString()).thenReturn("testProperty");
     when(node.isNodeType(any())).thenReturn(false);
+    when(autoVersionService.autoVersion(node)).thenReturn(any());
 
     // when
     ecmsActivityFileStoragePlugin.storeAttachments(activity,streamOwner,activityFile);
@@ -132,5 +136,6 @@ public class ECMSActivityFileStoragePluginTest {
     verify(uploadService, times(1)).removeUploadResource(any());
     verify(uploadService, times(1)).getUploadResource(any());
     verify(session, times(1)).save();
+    verify(autoVersionService, times(1)).autoVersion(any());
   }
 }
