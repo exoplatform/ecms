@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>نهاية التوقيت</end-time>
+        <start-time>بداية التوقيت</start-time>
+        <lifecycle>دورة الحياة</lifecycle>
+        <mimeType>نوع التوصيلة</mimeType>
+        <repeat-count>تكرار العدّ</repeat-count>
+        <time-interval>الفترة الزمنية</time-interval>
+        <query-items>عناصر الاستبيان</query-items>
+        <schedule-type>نوع التخطيط</schedule-type>
+        <remove>إزالة العنصر</remove>
+        <add>إضافة عنصر</add>
+        <expand>قُم بتمديد هذا</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,18 +24,18 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>الرابط</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>الاسم</name>
+    <categories>الفئات</categories>
     </label>
   </UIDocumentForm>
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>استخدم  الرمز @  للإشارة إلى شخص ما في التعليق الخاص بك</placeholder>
     </label>
   </UICommentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>الاسم</name>
+        <content>المحتوى</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>الفئات</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>عرض</width>
+        <height>ارتفاع</height>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>ملف موجود مسبقا. يمكنك استبدال من قبل حذفه وتحميل ملف آخر من هنا.</re-upload>
       </label>
     </dialog>
   </File>
@@ -71,22 +71,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>المنفذ</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>كلمة السر</password>
+      <link>الرابط</link>
+      <to>بعث الرسالة الالكترونية إلى</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>المنفذ</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>كلمة السر</password>
+      <link>الرابط</link>
+      <to>بعث الرسالة الالكترونية إلى</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -97,10 +97,10 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>المعرف</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>قالب المعلومات القياسية</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>المعرف</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>عبارة كرون</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>المعرف</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -139,7 +139,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron Expression</cron-expression>
+        <cron-expression>عبارة كرون</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -150,21 +150,21 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}:</title>
-        <creator>Creator:</creator>
-        <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
-        <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
-        <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
-        <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <title>#{word.title}</title>
+        <creator>الصانع</creator>
+        <subject>#{word.subject}</subject>
+        <source>المصدر</source>
+        <contributor>المساهم</contributor>
+        <resource-type>نوع المورد</resource-type>
+        <date>#{word.date}</date>
+        <publisher>الناشر</publisher>
+        <description>#{word.description}</description>
+        <rights>الحقوق</rights>
+        <relation>العلاقة</relation>
+        <format>#{word.format}</format>
+        <coverage>التغطية</coverage>
+        <identifier>المعرف الوحيد:</identifier>
+        <language>اللغة:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>النوع الرئيسي</primary-type>
+        <mixin-types>انواع الميكسين</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>فضاء العمل المقصود</destination-workpsace>
+        <destination-path>المسارالمقصود</destination-path>
+        <primary-type>النوع الرئيسي</primary-type>
+        <mixin-types>انواع الميكسين</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>بداية النشر</start-publication>
+        <end-publication>نهاية النشر</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>علاقة</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>عنوان</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,11 +244,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>تاريخ الإصدار</version-history>
+        <base-version>الإصدار الرئيسي</base-version>
+        <is-checked-out>في حالة انهاء المعالجة</is-checked-out>
+        <predecessors>الأسلاف</predecessors>
+        <merge-failed>فشل الادماج</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <name>الاسم</name>
+        <autoload>التحميل الالي</autoload>
+        <minetype>نوع الـMIME</minetype>
+        <content>المحتوى</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>عنوان البريد الالكتروني غير صحيح.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>المجال '{0}' مطلوب. الرجاء ادخال القيمة</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>المجال '{0}' غير صحيح</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -292,18 +292,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <id>المعرف</id>
+        <name>الاسم</name>
+        <lifecycle>دورة الحياة</lifecycle>
+        <homePath>مسار الصفحة الرئيسية</homePath>
+        <targetWorkspace>هدف فضاء العمل</targetWorkspace>
+        <targetPath>مسار الهدف</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>لا يمكن حفظ هذا الملفّ. رُبّما توجد مشكلة في عمليّة استباق الحفظ الخاصّة بالمُعترض</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -311,36 +311,36 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<no>لا</no>
+<yes>نعم</yes>
+<true>صحيح</true>
+<false>خطأ</false>
+<Electronic>إلكتروني</Electronic>
+<Paper>ورقة</Paper>
+<NONE>لا شَيْء</NONE>
+<CLASSIFIED>مُصنّف</CLASSIFIED>
+<UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
+<NOCONTRACT>بدون عقد</NOCONTRACT>
+<one-minute>دقيقة واحدة</one-minute>
+<hourly>كل ساعة</hourly>
+<daily>يوميا</daily>
+<quarterly>فصليا (كُل ثلاثَة أشْهُر)</quarterly>
+<yearly>سنويا</yearly>
+<ten-years>عشر سنوات</ten-years>
+<read>إجراء المستخدم</read>
+  <schedule>جدولة</schedule>
+  <node_added>إضافة محتوى</node_added>
+  <node_removed>إزالة المحتوى</node_removed>
+  <property_added>إضافة خاصيّة</property_added>
+  <property_removed>إزالة الخاصيّة</property_removed>
+  <property_changed>تعديل الملكية</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>عميق</isDeep>
+        <nodetypes>أنواع العقد</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -348,9 +348,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>عميق</isDeep>
+        <nodetypes>أنواع العقد</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -358,9 +358,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>عميق</isDeep>
+        <nodetypes>أنواع العقد</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -368,9 +368,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>عميق</isDeep>
+        <nodetypes>أنواع العقد</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -378,55 +378,55 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>التسميات التوضيحية</captions>
+<audioDescription>وصف المقطع الصوتي</audioDescription>
+<alternativeText>النص البديل</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>ينبغي للتّسميات التّوضيحيّة تقديم نص الحوار والأصوات الهامة</CaptionsHelp>
+<AudioDescriptionHelp>الوصف الصّوتي هو بمثابة السرد و التّعليق للفيديو</AudioDescriptionHelp>
+<AlternativeTextHelp>يرجى توفير وسيلة بديلة  قصد تقديم معلومات سهلة المنال</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
 
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>New Document</NewDocument>
+      <NewDocument>مستند جديد</NewDocument>
     </tooltip>
   </UIActionBar>
   
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>New Document</newDocument>
+      <newDocument>مستند جديد</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>مستند جديد</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Document</Save>
+      <Save>إنشاء مستند</Save>
     </action>
     <label>
-      <titleTextBox>Document Name:</titleTextBox>
-      <typeSelectBox>Document Type:</typeSelectBox>
+      <titleTextBox>اسم المستند:</titleTextBox>
+      <typeSelectBox>نوع المستند:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <name-invalid>الرجاء إدخال إسم المستند.</name-invalid>
+      <constraint-violation>لا يمكن إضافة مستند من نوع '{0}' هنا.</constraint-violation>
+      <repository-exception>طرأ خطأ غير متوقّع. للمزيد من المعلومات، يُرجى الاتصال بمدير النّظام .</repository-exception>
+      <repository-exception-permission>ليس لديك الإذن لإضافة مستند جديد هنا.</repository-exception-permission>
+      <numberformat-exception>لا يمكن حفظ هذه الوثيقة. يجب ادخال اسما ذو صيغة عدديّة.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>لا يمكنك حفظ المستند. يوجد بالفعل عنصر بنفس الاسم.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

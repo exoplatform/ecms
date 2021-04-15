@@ -2,63 +2,63 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Title:</title>
-      <description>Description:</description>
-      <keywords>Keywords:</keywords>
-      <language>Language:</language>
-      <robots>Robots:</robots>
-      <sitemap>Sitemap:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
-    <isInherited>Inherited from parent page</isInherited>
-      <priority>Priority:</priority>
-      <frequency>Frequency:</frequency>
-      <select-language>Select a language</select-language>
+      <title>العنوان:</title>
+      <description>الوصف:</description>
+      <keywords>الكلمات المفاتيح:</keywords>
+      <language>اللغة:</language>
+      <robots>الروبوتات:</robots>
+      <sitemap>خريطة الموقع:</sitemap>
+      <sitemapvisible>تظهر في خريطة الموقع</sitemapvisible>
+    <isInherited>الموروثة من الصفحة الأم</isInherited>
+      <priority>الأولوية:</priority>
+      <frequency>التردد:</frequency>
+      <select-language>اختيار اللغة</select-language>
       <option>
-        <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Always>دائما</Always>
+        <Hourly>كل ساعة</Hourly>
+        <Daily>يوميا</Daily>
+        <Weekly>أسبوعي</Weekly>
+        <Monthly>كل شهر</Monthly>
+        <Yearly>سنويا</Yearly>
+        <Never>أبدا</Never>
       </option> 
     </label>
     <tip>
-  <priority>Valid values range from 0.0 to 1.0</priority>
+  <priority>نطاق القيم الصالحة من 0.0 إلى 1.0</priority>
   </tip>   
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
-      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
+      <repository-exception>حدث خطأ غير متوقع أثناء حفظ صفحة بيانات التعريف.</repository-exception>
+      <confirm-delete>هل أنت متأكد من أنك تريد حذف هذه البيانات من تحسين محرك البحث (SEO)؟</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>حذف</seo-delete>
     </title>
   <help> 
-  <priority>Valid values range from 0.0 to 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
-  <keywords>Most important terms in the page separated by a comma.</keywords>  
+  <priority>نطاق القيم الصالحة من 0.0 إلى 1.0.</priority>
+  <description>مساعدة الباحثين: فليعلموا أن الصفحة التالية لديها الرابط الذي يبحثون عنه.</description>
+  <keywords>أهم المصطلحات في الصفحة مفصولة بفاصلة.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>SEO Management</UISEOForm>
+      <UISEOForm>إدارة تحسين محرك البحث (SEO)</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>SEO Management</seo>
+      <seo>إدارة تحسين محرك البحث (SEO)</seo>
   </title>
   <label>
-    <seo>SEO</seo>
+    <seo>إدارة تحسين محرك البحث (SEO)</seo>
   </label>
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>قيمة حقل الأولوية يجب أن تكون في شكل رقمي. نطاق القيم الصالحة هو 0،0-1،0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   
