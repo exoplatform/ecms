@@ -1,5 +1,5 @@
 <template>
-  <div class="serverFiles">
+  <div class="serverFiles" @click="closeFolderActionsMenu">
     <div v-show="connectedMessage" class="alert alert-info attachmentsAlert">
       <b>{{ $t('attachments.alert.connected') }} {{ connectedMessage }}!</b>{{ $t('attachments.alert.pleaseNote') }}
     </div>
@@ -295,7 +295,7 @@ export default {
       okLabel: '',
       cancelLabel: '',
       titleLabel: '',
-      okAction: false
+      okAction: false,
     };
   },
   computed: {
@@ -735,31 +735,21 @@ export default {
       this.newName = this.selectedFolder.title;
     },
     openFolderActionsMenu(folder, event) {
-      this.selectedFolder = folder;
-      this.showFolderActionsMenu = true;
-      Vue.nextTick(function () {
-        this.$refs.folderActionsMenu.$el.focus();
-        this.setFolderActionsMenu(event.y, event.x);
-      }.bind(this));
       event.preventDefault();
-    },
-    setFolderActionsMenu: function (top, left) {
-      const largestHeight = window.innerHeight - this.$refs.folderActionsMenu.$el.offsetHeight - this.windowPositionLimit;
-      const largestWidth = window.innerWidth - this.$refs.folderActionsMenu.$el.offsetWidth - this.windowPositionLimit;
-      if (top > largestHeight) {
-        top = largestHeight;
-      }
-      if (left > largestWidth) {
-        left = largestWidth;
-      }
-      this.folderActionsMenuTop = `${top}px`;
-      this.folderActionsMenuLeft = `${left}px`;
+      this.selectedFolder = folder;
+      this.folderActionsMenuTop = event.clientY;
+      this.folderActionsMenuLeft = event.clientX;
+      this.showFolderActionsMenu = false;
+      this.$nextTick(() => {
+        this.showFolderActionsMenu = true;
+      });
     },
     closeFolderActionsMenu: function () {
       this.showFolderActionsMenu = false;
     },
     deleteFolder() {
       if (this.selectedFolder.canRemove) {
+        this.closeFolderActionsMenu();
         this.$refs.confirmDialog.open();
         this.titleLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.title');
         this.okLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.ok');

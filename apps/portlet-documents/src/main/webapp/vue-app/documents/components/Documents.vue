@@ -45,7 +45,28 @@
     },
     created(){
       this.retrieveDocuments();
-      document.addEventListener('attachments-upload-finished', () => this.retrieveDocuments());
+      document.addEventListener('attachments-upload-finished', () =>  {
+        const newlyUploadedDocuments = JSON.parse(localStorage.getItem('newlyUploadedAttachments'));
+        if (newlyUploadedDocuments) {
+          newlyUploadedDocuments.forEach(document => {
+            document.fileType = document.mimetype;
+            document.date = new Date();
+            document.path = document.destinationFolder;
+            document.drive = document.fileDrive.title;
+            document.title = document.name;
+            document.downloadUrl = '';
+            document.openUrl = '';
+            document.breadCrumb = '';
+            document.id = '';
+            this.documents.unshift(document);
+            this.documents.pop();
+          });
+          localStorage.removeItem('newlyUploadedAttachments');
+          window.setTimeout(() => {
+            this.retrieveDocuments();
+          }, 5000);
+        }
+      });
     },
     methods: {
       retrieveDocuments() {

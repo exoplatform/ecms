@@ -83,9 +83,9 @@
               <span>{{ $t('no.attachments') }}</span>
             </div>
             <div v-if="value.length > 0" class="destinationFolder mb-4 ml-5">
+              <div :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}
+              </div>
               <div v-if="showDestinationPath && !displayMessageDestinationFolder" class="folderLocation">
-                <div :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}
-                </div>
                 <div v-if="schemaFolder.length > 1" class="folder">
                   <div><span class="uiIconArrowRight colorIcon"></span></div>
                   <div :title="schemaFolder[1]" :class="schemaFolder.length === 2 ? 'active' : '' " class="folderName"
@@ -301,8 +301,12 @@ export default {
       }
     },
     uploadingCount(newValue) {
-      if (this.uploadMode === 'save' && this.uploadFinished && newValue === 0) {
-        this.closeAndResetAttachmentsDrawer();
+      if (this.uploadMode === 'save' && newValue === 0) {
+        if (this.uploadFinished) {
+          this.closeAndResetAttachmentsDrawer();
+        } else {
+          this.$refs.attachmentsAppDrawer.endLoading();
+        }
       }
     }
   },
@@ -529,7 +533,8 @@ export default {
         }
         this.processNextQueuedUpload();
       }).catch(() => {
-        this.$refs.attachmentsAppDrawer.endLoading();
+        this.uploadingCount--;
+        this.$emit('uploadingCountChanged', this.uploadingCount);
         this.$root.$emit('attachments-notification-alert', {
           message: this.$t('attachments.upload.failed').replace('{0}', file.name),
           type: 'error',
@@ -639,6 +644,7 @@ export default {
         if (this.value[i].name === fileName) {
           this.value[i].showDestinationFolderForFile = '';
           this.value[i].pathDestinationFolderForFile = '';
+          this.value[i].fileDrive = this.currentDrive;
           this.value[i].destinationFolder = this.pathDestinationFolder;
           this.value[i].isPublic = true;
           break;
@@ -725,6 +731,7 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
+      localStorage.setItem('newlyUploadedAttachments', JSON.stringify(this.value));
       this.value = [];
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished'));
