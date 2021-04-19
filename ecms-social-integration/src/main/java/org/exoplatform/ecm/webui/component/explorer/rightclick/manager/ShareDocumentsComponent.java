@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.ShareDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIShareDocuments;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -71,7 +72,7 @@ public class ShareDocumentsComponent extends UIAbstractManagerComponent{
   }
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
-          new IsDocumentFilter()
+          new IsDocumentFilter(), new ShareDocumentFilter()
   });
 
   @UIExtensionFilters

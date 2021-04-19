@@ -113,6 +113,15 @@
     <overwrite>true</overwrite>
   </portlet-skin>
 
+  <!-- TransferRulesPortlet skins -->
+  <portlet-skin>
+    <application-name>transfer-rules</application-name>
+    <portlet-name>transferRulesPortlet</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/transferRules/transfer-rules.css</css-path>
+    <overwrite>true</overwrite>
+  </portlet-skin>
+
   <!-- CloudStoragePortlet skins -->
   <portlet-skin>
     <application-name>clouddrives</application-name>
