@@ -14,8 +14,8 @@
         <time-interval>Intervalo de tiempo</time-interval>
         <query-items>Elementos de Consulta</query-items>
         <schedule-type>Tipo de Programa</schedule-type>
-        <remove>Eliminar Item</remove>
-        <add>Añadir Item</add>
+        <remove>Eliminar elemento</remove>
+        <add>Añadir elemento</add>
         <expand>Extender este</expand>
       </label>
     </dialog>
