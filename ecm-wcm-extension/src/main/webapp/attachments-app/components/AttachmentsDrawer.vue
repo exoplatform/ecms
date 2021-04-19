@@ -537,6 +537,7 @@ export default {
         }
         this.processNextQueuedUpload();
       }).catch(() => {
+        file.uploadId = '';
         this.uploadingCount--;
         this.$emit('uploadingCountChanged', this.uploadingCount);
         this.$root.$emit('attachments-notification-alert', {
@@ -735,6 +736,7 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
+      localStorage.setItem('newlyUploadedAttachments', JSON.stringify(this.value));
       this.value = [];
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail' : {'list' : Object.values(this.uploadedFiles)}}));
