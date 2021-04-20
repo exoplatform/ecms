@@ -159,9 +159,9 @@
     <label>
       <enableStructure>Modo estructura:</enableStructure>
       <showSideBar>Mostrar barra lateral</showSideBar>
-      <showHiddenNode>Mostrar documentos ocultos:</showHiddenNode>
-      <showNonDocument>Mostrar ficheros de sistema:</showNonDocument>
-      <showRefDocuments>Mostrar documentos referenciados:</showRefDocuments>
+      <showHiddenNode>Mostrar elementos ocultos:</showHiddenNode>
+      <showNonDocument>Mostrar elementos que no son documentos:</showNonDocument>
+      <showRefDocuments>Mostrar elementos referenciados:</showRefDocuments>
       <enableDragAndDrop>Activar el Arrastrar y Soltar</enableDragAndDrop>
       <sortBy>Ordenar por:</sortBy>
       <order>Ordenar por</order>
@@ -202,7 +202,7 @@
     </action>
     <msg>
       <rename-successfull>'{0}' fue renombrado exitosamente a '{1}'.</rename-successfull>
-      <rename-denied>Acceso denegado. No puede cambiar el nombre de este elemento.</rename-denied>
+      <rename-denied>Acceso denegado. No puedes cambiar el nombre de este elemento.</rename-denied>
       <fileName-invalid>El nuevo nombre contiene algunos caracteres no válidos.</fileName-invalid>
       <newName-same-oldName>El nuevo nombre ya existe. Por favor, compruebe de nuevo.</newName-same-oldName>
       <version-exception>Este documento (o una de sus revisiones) no está desprotegido.</version-exception>
@@ -245,7 +245,7 @@
       <UIConfirmMessage>Confirmar eliminación</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>¿Borrar archivo ?</UIDeleteFileConfirmMessage>
       <UIDeleteFolderConfirmMessage>¿Borrar Carpeta?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>¿Borrar elementos?</UIDeleteItemsConfirmMessage>
+      <UIDeleteItemsConfirmMessage>¿Eliminar elementos?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Confirmar restauración</UIRestoreConfirmMessage>
       <UIActivePublication>Inscribirse a la publicación del ciclo de vida</UIActivePublication>
       <UITaggingForm>Etiquetar este documento</UITaggingForm>
@@ -330,13 +330,13 @@
       <node-pasted>'{0}' ha sido pegado en la ubicación '{1}'. Esta operación ya ha sido guardada.</node-pasted>
       <no-node-selected>Nada que copiar.</no-node-selected>
       <unable-edit>No está soportado la edición de documentos de tipo '{1}' como '{0}'.</unable-edit>
-      <not-support>No puede editar el elemento seleccionado.</not-support>
+      <not-support>No puedes editar el elemento seleccionado.</not-support>
       <template-null>Este documento no tiene plantilla de formulario.</template-null>
       <keyword-null>No hay ninguna palabra clave para la búsqueda.</keyword-null>
       <not-found>No se encontraron resultados.</not-found>
       <keyword-not-allow>No se permite esta palabra clave.</keyword-not-allow>
       <is-not-referenable>'{0}' no puede ser referenciable.</is-not-referenable>
-      <access-denied>Acceso denegado. No tiene permisos de edición para este elemento.</access-denied>
+      <access-denied>Acceso denegado. No tienes permiso para editar este elemento.</access-denied>
       <access-add-denied>Acceso denegado. No tiene permisos para añadir elementos aquí.</access-add-denied>
       <item-existed>El nodo ya existe y no puede tener el mismo nombre que su hermano.</item-existed>
       <removed-hidden-mixin>Ha removido el mixin oculto exitosamente.</removed-hidden-mixin>
@@ -356,7 +356,7 @@
       <ShowAllOwnedByUser>Mostrar todos mis artículos</ShowAllOwnedByUser>
       <ShowAllFavourite>Mostrar todos los elementos favoritos</ShowAllFavourite>
       <ShowAllHidden>Mostrar todos los elementos ocultos</ShowAllHidden>
-      <ShowAllFromTrash>Mostrar todos los artículos de la basura</ShowAllFromTrash>
+      <ShowAllFromTrash>Mostrar todos los artículos de la papelera</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
@@ -366,10 +366,10 @@
       <cannot-login-node>No puede acceder y pegar el elemento aquí.</cannot-login-node>
       <cannot-paste-nodetype>No se puede pegar este tipo de elemento aquí.</cannot-paste-nodetype>
       <has-not-permission-unlok>No tiene permisos para desbloquear este documento.</has-not-permission-unlok>
-      <bound-exception>No tiene permiso para cambiar el nombre de este elemento. Por favor, póngase en contacto con el administrador.</bound-exception>
+      <bound-exception>No tienes permiso para cambiar el nombre de este elemento. Ponte en contacto con el administrador.</bound-exception>
       <bound-move-exception>No puede mover un elemento sobre sí mismo o en una subcarpeta.</bound-move-exception>
       <does-not-support-auditing>No puede activar la auditoría aquí.</does-not-support-auditing>
-      <can-not-rename-node>No tiene permiso para cambiar el nombre de este elemento. Por favor, contacte con el administrador para conseguir los permisos correctos.</can-not-rename-node>
+      <can-not-rename-node>No tienes permiso para cambiar el nombre de este elemento. Ponte en contacto con el administrador para obtener el permiso necesario.</can-not-rename-node>
       <can-not-cut-node>No tiene permiso para cortar este elemento. Por favor, contacte con el administrador.</can-not-cut-node>
       <can-not-remove-node>No tiene permiso para eliminar de este elemento. Por favor, contacte con el administrador.</can-not-remove-node>
       <can-not-lock-node>No tiene permiso para bloquear {0}. Por favor, contacte con el administrador.</can-not-lock-node>
@@ -395,7 +395,7 @@
       <copied-node-in-versioning>No se puede pegar el elemento copiado aquí porque está versionado.</copied-node-in-versioning>
       <parent-node-locked>No tienes permisos para desbloquear '{0}'.</parent-node-locked>
       <this-node-locked-by-parent>No puede desbloquear este elemento. La carpeta que lo contiene está bloqueada.</this-node-locked-by-parent>
-      <paste-node-same-name>No puede pegar este elemento aquí. Otro elemento con el mismo nombre ya existe en la carpeta de destino.</paste-node-same-name>
+      <paste-node-same-name>No puedes pegar este elemento aquí. Ya existe otro elemento con el mismo nombre en la carpeta de destino.</paste-node-same-name>
       <has-not-add-permission>No tiene permisos suficientes para añadir documentos aquí.</has-not-add-permission>
       <node-cutting>El elemento está siendo cortado. No lo puede pegar aquí.</node-cutting>
       <access-denied>Acceso denegado. Tal vez, no tiene permisos suficientes.</access-denied>
@@ -500,7 +500,7 @@
       <feedback-restore>'{0}' fue restaurado con éxito.</feedback-restore>
       <feedback-restore-multi>{0} artículos fueron exitosamente restaurado.</feedback-restore-multi>
       
-      <confirm-restore>Un elemento de tipo '{0}' ya existe en la ubicación anterior. ¿Está seguro que desea restaurarlo?</confirm-restore>
+      <confirm-restore>Ya existe un elemento «{0}» en la ubicación anterior. ¿Seguro que quieres restaurarlo?</confirm-restore>
       <confirm-move>¿Está seguro de querer mover?</confirm-move>
       <node-cut>'{0}' ha sido cortado.</node-cut>
       <execute-successfully>La acción personalizada '{0}' ha sido ejecutada.</execute-successfully>
@@ -830,7 +830,7 @@
     <label>
       <node-type>Tipo de Nodo</node-type>
       <name>Nombre</name>
-      <item>Nombre del item primario</item>
+      <item>Nombre del elemento principal</item>
       <super-types>Tipos de Padres</super-types>
       <mixin>Tipo de Nodo Mixin</mixin>
       <orderable-children>Subnodos ordenables</orderable-children>
@@ -1368,7 +1368,7 @@
       <confirm-restore>Seguro que desea restaurar esta versión?</confirm-restore>
       <confirm-delete>¿Está seguro de eliminar esta versión?</confirm-delete>
       <not-checked-out>Tiene que desproteger este documento antes de restablecerlo.</not-checked-out>
-      <invalid-item-state>No puede restaurar esta versión o bien, porque uno o más elementos fueron eliminados o bien movidos por otra sesión.</invalid-item-state>
+      <invalid-item-state>No puedes restaurar esta versión porque uno o más elementos han sido eliminados o movidos por otra sesión.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
@@ -1526,7 +1526,7 @@
       <mimetype-invalid>Sólo los archivos .xml o .zip son compatibles para importar.</mimetype-invalid>
       <access-denied>Acceso denegado. No le está permitido importar allí.</access-denied>
       <constraint-violation-exception>Es imposible importar datos. El tipo '{0}' no está permitido en este lugar.</constraint-violation-exception>
-      <item-exists-exception>Un elemento entrante tiene el mismo UUID que uno preexistente en el área de trabajo.</item-exists-exception>
+      <item-exists-exception>Un elemento entrante tiene el mismo UUID que uno existente en el espacio de trabajo.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -2004,7 +2004,7 @@
     <msg>Error en la acción. Todavía hay algunos elementos de referencia en el área de trabajo.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>¡Este ítem ya existe!</msg>
+    <msg>¡Este elemento ya existe!</msg>
   </ItemExistsException>
   <AccessControlException>
     <msg>Acceso denegado. No tienes permiso para realizar esta acción.</msg>
@@ -2672,7 +2672,7 @@
       <Configuration>Configurar preferencias</Configuration>
     </label>
     <title>
-      <allItems>Todos los items</allItems>
+      <allItems>Todos los elementos</allItems>
     </title>
   </UIAllItems>
 
@@ -3158,7 +3158,7 @@
   <msg>
 <can-not-remove-locked-node>{0} está bloqueado. No puede moverlo a la Papelera.</can-not-remove-locked-node>
 <can-not-remove-checked-in-node>{0} o la carpeta que lo contiene está protegido. No puede moverlo a la Papelera.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Acceso denegado. No puede mover {0} a la Papelera.</access-denied-to-delete>
+<access-denied-to-delete>Acceso denegado. No se puede mover {0} a la papelera.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>

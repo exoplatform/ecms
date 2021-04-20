@@ -312,7 +312,7 @@
   -->
   <UIMetadataView>
     <header>
-      <name>Nombre del Elemento</name>
+      <name>Nombre del elemento</name>
       <type>Tipo</type>
       <description>Descripción</description>
       <isMixin>Es el tipo Mixin</isMixin>
@@ -519,7 +519,7 @@
       <nodeTypeName>Nombre del Tipo de Nodo</nodeTypeName>
       <mixinType>Es el tipo Mixin</mixinType>
       <hasOrderableChildNodes>Subnodos ordenables</hasOrderableChildNodes>
-      <primaryItemName>Nombre del item primario</primaryItemName>
+      <primaryItemName>Nombre del elemento principal</primaryItemName>
       <superTypes>Super tipos</superTypes>
       <propertyname>Nombre de la Definición</propertyname>
       <requiredType>Tipo requerido</requiredType>
@@ -1352,7 +1352,7 @@
     <msg>
       <no-list>No se han creado árboles de categoría.</no-list>
       <confirm-delete>¿Está seguro de querer eliminar este árbol de categoría?</confirm-delete>
-      <is-in-trash>Este árbol de categoría ha sido trasladado a la basura.</is-in-trash>
+      <is-in-trash>Este árbol de categoría se ha enviado a la papelera.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
 
