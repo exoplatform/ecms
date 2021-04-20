@@ -537,7 +537,6 @@ export default {
         }
         this.processNextQueuedUpload();
       }).catch(() => {
-        file.uploadId = '';
         this.uploadingCount--;
         this.$emit('uploadingCountChanged', this.uploadingCount);
         this.$root.$emit('attachments-notification-alert', {
