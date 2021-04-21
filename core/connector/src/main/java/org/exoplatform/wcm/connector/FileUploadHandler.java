@@ -23,10 +23,12 @@ import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.documents.AutoVersionService;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -43,6 +45,7 @@ import org.w3c.dom.Element;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
@@ -110,6 +113,12 @@ public class FileUploadHandler {
   private final String AUTOVERSION_ERROR_MIME_TYPE                  = "DocumentAutoVersion.msg.WrongMimeType";
   private static final String FILE_DECODE_REGEX = "%(?![0-9a-fA-F]{2})";
 
+  /** The document service. */
+  private DocumentService documentService;
+
+  /** The repository service. */
+  private RepositoryService repositoryService;
+
   /** The upload service. */
   private UploadService uploadService;
   
@@ -134,6 +143,8 @@ public class FileUploadHandler {
     uploadService = WCMCoreUtils.getService(UploadService.class);
     listenerService = WCMCoreUtils.getService(ListenerService.class);
     activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+    documentService = WCMCoreUtils.getService(DocumentService.class);
+    repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     fckMessage = new FCKMessage();
     uploadIdTimeMap = new Hashtable<String, Long>();
     UPLOAD_LIFE_TIME = System.getProperty("MULTI_UPLOAD_LIFE_TIME") == null ? 600 ://10 minutes
@@ -337,13 +348,14 @@ public class FileUploadHandler {
    *
    * @throws Exception the exception
    */
-  public Response saveAsNTFile(Node parent,
+  public Response saveAsNTFile(String workspaceName,
+                               Node parent,
                                String uploadId,
                                String fileName,
                                String language,
                                String siteName,
                                String userId) throws Exception {
-    return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, KEEP_BOTH); 
+    return saveAsNTFile(workspaceName, parent, uploadId, fileName, language, siteName, userId, KEEP_BOTH);
   }
   
   /**
@@ -358,14 +370,15 @@ public class FileUploadHandler {
    *
    * @throws Exception the exception
    */
-  public Response saveAsNTFile(Node parent,
+  public Response saveAsNTFile(String workspaceName,
+                               Node parent,
                                String uploadId,
                                String fileName,
                                String language,
                                String siteName,
                                String userId,
                                String existenceAction) throws Exception {
-    return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, existenceAction,false);
+    return saveAsNTFile(workspaceName, parent, uploadId, fileName, language, siteName, userId, existenceAction,false);
   }
   /**
    * Save already uploaded file (identified by uploadId) as nt file.
@@ -389,7 +402,8 @@ public class FileUploadHandler {
    *
    * @throws Exception the exception
    */
-  public synchronized Response saveAsNTFile(Node parent,
+  public synchronized Response saveAsNTFile(String workspaceName,
+                               Node parent,
                                String uploadId,
                                String fileName,
                                String language,
@@ -530,13 +544,80 @@ public class FileUploadHandler {
         listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
       }
       file.save();
-      return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
+
+      // return uploaded file
+      Document doc = getUploadedFile(workspaceName, file, mimetype);
+      return Response.ok(new DOMSource(doc), MediaType.TEXT_XML)
           .cacheControl(cacheControl)
           .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
           .build();
     } catch (Exception exc) {
       LOG.error(exc.getMessage(), exc);
       return Response.serverError().entity(exc.getMessage()).build();
+    }
+  }
+
+  private Document getUploadedFile(String workspaceName, Node file, String mimetype) throws Exception {
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.newDocument();
+    Element rootElement = doc.createElement("file");
+
+    LinkedHashMap<String, String> previewBreadcrumb;
+    previewBreadcrumb = documentService.getFilePreviewBreadCrumb(file);
+    String downloadUrl = getDownloadUrl(workspaceName, file.getPath());
+    String url = getUrl(file.getPath());
+    String lastEditor = getStringProperty(file, "exo:lastModifier");
+    String date = getStringProperty(file, "exo:dateModified");
+
+    rootElement.setAttribute("id", file.getUUID());
+    rootElement.setAttribute("title", file.getName());
+    rootElement.setAttribute("path", file.getPath());
+    rootElement.setAttribute("mimetype", mimetype);
+    rootElement.setAttribute("previewBreadcrumb", String.valueOf(previewBreadcrumb));
+    rootElement.setAttribute("downloadUrl", downloadUrl);
+    rootElement.setAttribute("url", url);
+    rootElement.setAttribute("lastEditor", lastEditor);
+    rootElement.setAttribute("date", date);
+    doc.appendChild(rootElement);
+    return doc;
+  }
+
+  private String getStringProperty(Node node, String propertyName) throws RepositoryException {
+    if (node.hasProperty(propertyName)) {
+      return node.getProperty(propertyName).getString();
+    }
+    return "";
+  }
+
+  protected String getUrl(String nodePath) {
+    String url = "";
+    try {
+      url = documentService.getLinkInDocumentsApp(nodePath);
+    } catch (Exception e) {
+      LOG.error("Cannot get url of document " + nodePath, e);
+    }
+    return url;
+  }
+
+  private String getDownloadUrl(String workspace, String nodePath) {
+    String restContextName =  WCMCoreUtils.getRestContextName();
+
+    String repositoryName = getRepositoryName();
+
+    StringBuffer downloadUrl = new StringBuffer();
+    downloadUrl.append('/').append(restContextName).append("/jcr/").
+      append(repositoryName).append('/').
+      append(workspace).append(nodePath);
+    return downloadUrl.toString();
+  }
+
+  protected String getRepositoryName() {
+    try {
+      return repositoryService.getCurrentRepository().getConfiguration().getName();
+    } catch (RepositoryException e) {
+      LOG.debug("Cannot get repository name", e);
+      return "repository";
     }
   }
   

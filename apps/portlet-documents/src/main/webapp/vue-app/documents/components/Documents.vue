@@ -50,14 +50,8 @@
         if (newlyUploadedDocuments) {
           newlyUploadedDocuments.forEach(document => {
             document.fileType = document.mimetype;
-            document.date = new Date();
-            document.path = document.destinationFolder;
-            document.drive = document.fileDrive.title;
-            document.title = document.name;
-            document.downloadUrl = '';
-            document.openUrl = '';
-            document.breadCrumb = '';
-            document.id = '';
+            //document.drive = document.fileDrive.title;
+            document.id = document.UUID;
             this.documents.unshift(document);
             this.documents.pop();
           });

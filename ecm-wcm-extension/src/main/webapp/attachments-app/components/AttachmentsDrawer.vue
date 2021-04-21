@@ -256,6 +256,7 @@ export default {
       uploadMode: '',
       dragAndDropEventListenerInitialized: false,
       currentDrive: {},
+      uploadedFiles: [],
     };
   },
   computed: {
@@ -525,8 +526,9 @@ export default {
         eXo.env.portal.language,
         'keep',
         'save'
-      ).then((result) => {
-        if (result) {
+      ).then((uploadedFile) => {
+        if (uploadedFile) {
+          this.uploadedFiles.push(this.$attachmentsService.convertXmlToJson(uploadedFile));
           file.uploadId = '';
           this.uploadingCount--;
           this.$emit('uploadingCountChanged', this.uploadingCount);
@@ -731,7 +733,7 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
-      localStorage.setItem('newlyUploadedAttachments', JSON.stringify(this.value));
+      localStorage.setItem('newlyUploadedAttachments', JSON.stringify(this.uploadedFiles));
       this.value = [];
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished'));

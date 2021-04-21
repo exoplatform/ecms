@@ -982,11 +982,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
-      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
+      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
     }else if(FileUploadHandler.SAVE_NEW_VERSION_ACTION.equals(action)){
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
-      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction,true);
+      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction,true);
     }
     return fileUploadHandler.control(uploadId, action);
   }

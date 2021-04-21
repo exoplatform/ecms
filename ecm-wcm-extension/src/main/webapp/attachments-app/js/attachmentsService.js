@@ -188,3 +188,43 @@ export function uploadAttachment(workspaceName, driveName, currentFolder, curren
       }
     });
 }
+
+export function convertXmlToJson(xml) {
+  // Create the return object
+  let obj = {}, i, j, attribute, item, nodeName, old;
+
+  if (xml.nodeType === 1) { // element
+    // do attributes
+    if (xml.attributes.length > 0) {
+      obj = {};
+      for (j = 0; j < xml.attributes.length; j = j + 1) {
+        attribute = xml.attributes.item(j);
+        obj[attribute.nodeName] = attribute.nodeValue;
+      }
+    }
+    // eslint-disable-next-line no-magic-numbers
+  } else if (xml.nodeType === 3) { // text
+    obj = xml.nodeValue;
+  }
+
+  // do children
+  if (xml.hasChildNodes()) {
+    for (i = 0; i < xml.childNodes.length; i = i + 1) {
+      item = xml.childNodes.item(i);
+      nodeName = item.nodeName;
+      // eslint-disable-next-line no-undefined
+      if (obj[nodeName] === undefined) {
+        obj = convertXmlToJson(item);
+      } else {
+        // eslint-disable-next-line no-undefined
+        if (obj[nodeName].push === undefined) {
+          old = obj[nodeName];
+          obj[nodeName] = [];
+          obj[nodeName].push(old);
+        }
+        obj[nodeName].push(convertXmlToJson(item));
+      }
+    }
+  }
+  return obj;
+}
