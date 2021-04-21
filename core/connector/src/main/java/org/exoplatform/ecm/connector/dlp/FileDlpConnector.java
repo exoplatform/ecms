@@ -91,7 +91,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   @Override
   public boolean processItem(String entityId) {
     LOGGER.debug("Process item {}",entityId);
-    if (isInTrash(entityId)) {
+    if (!itemExist(entityId) || isInTrash(entityId)) {
       //if a document is in trash, we cannot check it because it is not indexed.
       //so we return true to remove it from the queue
       return true;
@@ -102,6 +102,23 @@ public class FileDlpConnector extends DlpServiceConnector {
       checkMatchKeywordAndTreatItem(entityId);
     }
     return true;
+  }
+  
+  private boolean itemExist(String entityId) {
+    ExtendedSession session;
+    boolean result = false;
+    try {
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      result = session.itemExists(entityId);
+      if (result) {
+        LOGGER.debug("Item {} exists, path={}", entityId, session.getItem(entityId).getPath());
+      } else {
+        LOGGER.debug("Item {} not exists", entityId);
+      }
+    } catch (RepositoryException e) {
+      LOGGER.error("Error when reading repository",e);
+    }
+    return result;
   }
   
   private boolean isInTrash(String entityId) {
