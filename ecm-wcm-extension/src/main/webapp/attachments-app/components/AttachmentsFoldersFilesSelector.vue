@@ -392,7 +392,7 @@ export default {
   methods: {
     initDestinationFolderPath: function () {
       //if default drive exist
-      if (this.defaultDrive.name) {
+      if (this.defaultDrive && this.defaultDrive.name) {
         const self = this;
         //open it to generate the path
         this.openDrive(this.defaultDrive).then(() => {
@@ -475,6 +475,8 @@ export default {
       this.foldersHistory = [];
       this.resetExplorer();
       this.fromSpace = group === 'My Spaces' ? {title: drive.title, name: drive.name} : {};
+      const driveTitle = drive.title.replace('.', '').replace(' ', '');
+      drive.title = this.$t(`Drives.label.${driveTitle}`);
       this.currentDrive = {
         name: drive.name,
         title: drive.title,

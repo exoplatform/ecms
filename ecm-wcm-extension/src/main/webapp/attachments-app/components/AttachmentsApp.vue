@@ -1,8 +1,8 @@
 <template>
-  <div class="attachments-application border-box-sizing transparent">
-    <template v-if="$slots.attachmentsButton" @click="openAttachmentsAppDrawer()">
+  <div id="attachmentsApp" class="attachments-application border-box-sizing transparent">
+    <div v-if="$slots.attachmentsButton" @click="openAttachmentsAppDrawer()">
       <slot name="attachmentsButton"></slot>
-    </template>
+    </div>
     <attachments-drawer
       :entity-id="entityId"
       :entity-type="entityType"
@@ -45,7 +45,7 @@ export default {
       this.$root.$emit('open-attachments-app-drawer');
     },
     initDefaultDrive() {
-      if (!this.defaultDrive.name) {
+      if (!this.defaultDrive && !this.defaultDrive.name) {
         const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
           `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
             this.spaceId;

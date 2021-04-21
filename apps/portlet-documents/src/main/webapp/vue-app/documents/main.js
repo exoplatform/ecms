@@ -22,15 +22,14 @@ const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en'
 const resourceBundleName = 'locale.portlet.documents';
 const url = `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/${resourceBundleName}-${lang}.json`;
 
-export function init(appId, query, folder, type, limit) {
+export function init(appId, query, folder, type, limit, cacheRecentDocuments) {
 //getting locale ressources
 exoi18n.loadLanguageAsync(lang, url)
   .then(i18n => {
     const appElement = document.createElement('div');
     appElement.id = appId;
-
     new Vue({
-      template: `<documents app-id="${appId}" id="${appId}" v-cacheable query="${query}" folder="${folder}" type="${type}" limit="${limit}"></documents>`,
+      template: `<documents app-id="${appId}" id="${appId}" v-cacheable query="${query}" folder="${folder}" type="${type}" limit="${limit}" cache-recent-documents="${cacheRecentDocuments === 'true'}"></documents>`,
       i18n,
       vuetify,
     }).$mount(appElement);

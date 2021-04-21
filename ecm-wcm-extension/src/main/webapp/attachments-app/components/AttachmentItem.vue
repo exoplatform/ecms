@@ -1,6 +1,6 @@
 <template>
   <div class="attachment">
-    <v-list-item-avatar class="rounded-lg mr-3">
+    <v-list-item-avatar class="rounded-lg me-3">
       <div v-if="file.uploadProgress < 100" class="fileProgress">
         <v-progress-circular
           :rotate="-90"

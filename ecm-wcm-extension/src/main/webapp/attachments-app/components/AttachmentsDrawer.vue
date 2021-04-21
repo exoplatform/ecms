@@ -528,7 +528,9 @@ export default {
         'save'
       ).then((uploadedFile) => {
         if (uploadedFile) {
-          this.uploadedFiles.push(this.$attachmentsService.convertXmlToJson(uploadedFile));
+          uploadedFile = this.$attachmentsService.convertXmlToJson(uploadedFile);
+          uploadedFile.drive = file.fileDrive.title;
+          this.uploadedFiles.push(uploadedFile);
           file.uploadId = '';
           this.uploadingCount--;
           this.$emit('uploadingCountChanged', this.uploadingCount);
@@ -733,10 +735,10 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
-      localStorage.setItem('newlyUploadedAttachments', JSON.stringify(this.uploadedFiles));
       this.value = [];
       this.$refs.attachmentsAppDrawer.endLoading();
-      document.dispatchEvent(new CustomEvent('attachments-upload-finished'));
+      document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail' : {'list' : Object.values(this.uploadedFiles)}}));
+      this.uploadedFiles = [];
     },
   }
 };

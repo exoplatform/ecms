@@ -10,7 +10,7 @@
   </v-app>
 </template>
 <script>
-  import * as documentsService from '../../common/js/DocumentsService.js'; 
+  import * as documentsService from '../../common/js/DocumentsService.js';
   export default {
     props: {
       query: {
@@ -29,6 +29,10 @@
         type: String,
         default: null,
       },
+      cacheRecentDocuments: {
+        type: Boolean,
+        default: false,
+      }
     },
     data() {
       return {
@@ -45,20 +49,9 @@
     },
     created(){
       this.retrieveDocuments();
-      document.addEventListener('attachments-upload-finished', () =>  {
-        const newlyUploadedDocuments = JSON.parse(localStorage.getItem('newlyUploadedAttachments'));
-        if (newlyUploadedDocuments) {
-          newlyUploadedDocuments.forEach(document => {
-            document.fileType = document.mimetype;
-            //document.drive = document.fileDrive.title;
-            document.id = document.UUID;
-            this.documents.unshift(document);
-            this.documents.pop();
-          });
-          localStorage.removeItem('newlyUploadedAttachments');
-          window.setTimeout(() => {
-            this.retrieveDocuments();
-          }, 5000);
+      document.addEventListener('attachments-upload-finished', event => {
+        if (event && event.detail && this.type === 'recent') {
+          this.cacheRecentUploadedDocuments(event.detail.list);
         }
       });
     },
@@ -83,6 +76,11 @@
             documentsService.getRecentDocuments(this.limit).then(
               documents => {
                 this.documents = documents;
+                if (!documents.length) {
+                  localStorage.setItem('newlyUploadedAttachments', JSON.stringify({}));
+                } else {
+                  this.manageCachedRecentDocuments(documents);
+                }
               }
             ).finally(() => this.loading = false);
           }
@@ -108,6 +106,38 @@
             ).finally(() => this.loading = false);
           }
         }
+      },
+      cacheRecentUploadedDocuments(newlyUploadedDocuments) {
+        newlyUploadedDocuments.forEach(document => {
+          document.fileType = document.mimetype;
+          document.id = document.UUID;
+          document.date = new Date(document.date).getTime();
+          this.documents.unshift(document);
+          this.documents.pop();
+        });
+        if (this.cacheRecentDocuments) {
+          const docMimetype = ['pdf', 'presentation', 'sheet', 'word', 'plain'];
+          newlyUploadedDocuments = newlyUploadedDocuments.filter(document => {
+            if (new RegExp(docMimetype.join("|")).test(document.fileType)) {
+              return document;
+            }
+          });
+          console.warn('newlyUploadedDocuments', newlyUploadedDocuments)
+          localStorage.setItem('newlyUploadedAttachments', JSON.stringify(newlyUploadedDocuments));
+        }
+        this.retrieveDocuments();
+      },
+      manageCachedRecentDocuments(documents) {
+        let newlyUploadedDocuments = JSON.parse(localStorage.getItem('newlyUploadedAttachments'));
+        newlyUploadedDocuments = newlyUploadedDocuments.filter(document => {
+          if (!documents.some(doc => document.id === doc.id)) {
+            return document;
+          }
+        });
+        this.documents.push(...newlyUploadedDocuments);
+        this.documents.sort((doc1, doc2) => doc2.date - doc1.date);
+        this.documents = this.documents.slice(0, parseInt(this.limit));
+        localStorage.setItem('newlyUploadedAttachments', JSON.stringify(newlyUploadedDocuments));
       }
     }
   }

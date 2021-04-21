@@ -3,6 +3,7 @@
 	String query = ((String[])request.getAttribute("query"))[0];
 	String folder = ((String[])request.getAttribute("folder"))[0];
 	String type = ((String[])request.getAttribute("type"))[0];
+	String cacheRecentDocuments = ((String[])request.getAttribute("cacheRecentDocuments"))[0];
 	String limit = System.getProperty("exo.dw.page.snapshot.itemsLimit", "10");
 %>
 <div class="VuetifyApp documents">
@@ -12,7 +13,7 @@
     <v-cacheable-dom-app cache-id="<%=appId%>"></v-cacheable-dom-app>
 		<script>
 			require(['PORTLET/documents/DocumentsPortlet'],
-				app => app.init("<%=appId%>", "<%=query%>", "<%=folder%>", "<%=type%>", "<%=limit%>")
+				app => app.init("<%=appId%>", "<%=query%>", "<%=folder%>", "<%=type%>", "<%=limit%>", "<%=cacheRecentDocuments%>")
 			);
 		</script>
 	</div>
