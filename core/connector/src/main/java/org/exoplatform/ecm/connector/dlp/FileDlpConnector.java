@@ -105,7 +105,7 @@ public class FileDlpConnector extends DlpServiceConnector {
   }
   
   private boolean itemExist(String entityId) {
-    ExtendedSession session;
+    ExtendedSession session = null;
     boolean result = false;
     try {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
@@ -117,6 +117,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       }
     } catch (RepositoryException e) {
       LOGGER.error("Error when reading repository",e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
     return result;
   }
@@ -131,6 +135,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       return result;
     } catch (Exception e) {
       LOGGER.error("Error when check if node {} is in trash", entityId, e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
     return false;
   }
@@ -156,6 +164,10 @@ public class FileDlpConnector extends DlpServiceConnector {
                   totalTime);
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 
@@ -218,6 +230,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 
@@ -263,6 +279,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       }
     } catch (Exception e) {
       LOGGER.error("Error while deleting dlp file item", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 
@@ -284,6 +304,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       return WCMCoreUtils.getLinkInDocumentsApplication(node.getPath());
     } catch (Exception e) {
       LOGGER.error("Error while getting dlp item url, itemId={}", itemReference, e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
     return null;
   }
