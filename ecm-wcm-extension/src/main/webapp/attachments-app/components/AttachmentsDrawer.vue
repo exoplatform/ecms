@@ -735,7 +735,6 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
-      localStorage.setItem('newlyUploadedAttachments', JSON.stringify(this.uploadedFiles));
       this.value = [];
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail' : {'list' : Object.values(this.uploadedFiles)}}));
