@@ -13,6 +13,7 @@ import javax.jcr.Session;
 import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -49,18 +50,22 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
 
   private SessionProviderService sessionProviderService;
 
+  private AutoVersionService autoVersionService;
+
   public ECMSActivityFileStoragePlugin(SpaceService spaceService,
                                        NodeHierarchyCreator nodeHierarchyCreator,
                                        RepositoryService repositoryService,
                                        UploadService uploadService,
                                        SessionProviderService sessionProviderService,
-                                       InitParams initParams) {
+                                       InitParams initParams,
+                                       AutoVersionService autoVersionService) {
     super(initParams);
     this.spaceService = spaceService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.repositoryService = repositoryService;
     this.uploadService = uploadService;
     this.sessionProviderService = sessionProviderService;
+    this.autoVersionService = autoVersionService;
   }
 
   @Override
@@ -144,7 +149,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
         session.save();
         node = (Node) session.getItem(node.getPath());
       }
-
+      autoVersionService.autoVersion(node);
       if (activity.getTemplateParams() == null) {
         activity.setTemplateParams(new HashMap<>());
       }
