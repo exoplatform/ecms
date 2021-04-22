@@ -570,7 +570,7 @@ public class FileUploadHandler {
     String lastEditor = getStringProperty(file, "exo:lastModifier");
     String date = getStringProperty(file, "exo:dateModified");
 
-    rootElement.setAttribute("id", file.getUUID());
+    rootElement.setAttribute("UUID", file.getUUID());
     rootElement.setAttribute("title", file.getName());
     rootElement.setAttribute("path", file.getPath());
     rootElement.setAttribute("mimetype", mimetype);

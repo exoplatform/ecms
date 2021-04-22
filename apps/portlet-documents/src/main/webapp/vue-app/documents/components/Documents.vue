@@ -122,7 +122,6 @@
               return document;
             }
           });
-          console.warn('newlyUploadedDocuments', newlyUploadedDocuments)
           localStorage.setItem('newlyUploadedAttachments', JSON.stringify(newlyUploadedDocuments));
         }
         this.retrieveDocuments();

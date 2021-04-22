@@ -476,7 +476,7 @@ export default {
       this.resetExplorer();
       this.fromSpace = group === 'My Spaces' ? {title: drive.title, name: drive.name} : {};
       const driveTitle = drive.title.replace('.', '').replace(' ', '');
-      drive.title = this.$t(`Drives.label.${driveTitle}`);
+      drive.title = drive.name.includes('space') ? drive.title : this.$t(`Drives.label.${driveTitle}`);
       this.currentDrive = {
         name: drive.name,
         title: drive.title,
