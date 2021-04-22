@@ -21,6 +21,10 @@ if (extensionRegistry) {
   }
 }
 
+exoi18n.loadLanguageAsync(lang, url).then(i18n => {
+  Vue.prototype.$i18n = i18n;
+});
+
 const appId = 'attachmentsApp';
 let attachmentsApp;
 export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId) {
@@ -31,7 +35,7 @@ export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId)
       data: () => ({
         entityId: entityId || '',
         entityType: entityType || '',
-        defaultDrive: defaultDrive || {},
+        defaultDrive: defaultDrive || null,
         defaultFolder: defaultFolder || '',
         spaceId: spaceId || '',
       }),
