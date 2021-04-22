@@ -1,9 +1,10 @@
 <template>
   <div id="attachmentsApp" class="attachments-application border-box-sizing transparent">
     <div v-if="$slots.attachmentsButton" @click="openAttachmentsAppDrawer()">
-      <slot name="attachmentsButton"></slot>
+      <slot name="attachmentsButton" :attachments="attachments"></slot>
     </div>
     <attachments-drawer
+      :attachments="attachments"
       :entity-id="entityId"
       :entity-type="entityType"
       :default-drive="defaultDrive"
@@ -37,15 +38,31 @@ export default {
       default: ''
     },
   },
+  data () {
+    return {
+      attachments: []
+    };
+  },
   created() {
     this.initDefaultDrive();
+    if (this.entityType && this.entityId) {
+      this.initEntityAttachmentsList();
+    }
   },
   methods: {
     openAttachmentsAppDrawer() {
       this.$root.$emit('open-attachments-app-drawer');
     },
+    initEntityAttachmentsList() {
+      this.$attachmentsService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
+        attachments.forEach(attachments => {
+          attachments.name =  attachments.title;
+        });
+        this.attachments = attachments;
+      });
+    },
     initDefaultDrive() {
-      if (!this.defaultDrive && !this.defaultDrive.name) {
+      if (!this.defaultDrive) {
         const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
           `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
             this.spaceId;
@@ -60,7 +77,7 @@ export default {
               };
             }
           });
-        } else if(this.entityId && this.entityType){
+        } else if (this.entityId && this.entityType){
           this.defaultDrive = {
             isSelected: true,
             name: 'Personal Documents',

@@ -63,7 +63,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
     }
 
     attachmentsContextEntity.setEntityId(entityId);
-    attachmentsContextEntity.setEntityType(AttachmentsEntityType.valueOf(entityType).ordinal());
+    attachmentsContextEntity.setEntityType(AttachmentsEntityType.valueOf(entityType.toUpperCase()).ordinal());
     attachmentsContextEntity.setAttachmentIds(attachmentIds.stream().map(Object::toString).collect(Collectors.joining(",")));
 
     attachmentsStorage.linkAttachmentsToEntity(attachmentsContextEntity);

@@ -189,6 +189,36 @@ export function uploadAttachment(workspaceName, driveName, currentFolder, curren
     });
 }
 
+export function linkUploadedAttachmentsToEntity(entityId, entityType, attachmentIds) {
+  let params = {};
+  if (attachmentIds) {
+    params.attachmentIds = attachmentIds;
+  }
+  params = $.param(params, true);
+
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}?${params}`, {
+    credentials: 'include',
+    method: 'POST',
+  }).then((resp) => {
+    if (!resp || !resp.ok) {
+      throw new Error('Error linking attachments to the entity');
+    }
+  });
+}
+
+export function getEntityAttachments(entityType, entityId) {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
+    credentials: 'include',
+    method: 'GET',
+  }).then((resp) => {
+    if (resp || resp.ok) {
+      return resp.json();
+    } else {
+      throw new Error('Error getting attachments task');
+    }
+  });
+}
+
 export function convertXmlToJson(xml) {
   // Create the return object
   let obj = {}, i, j, attribute, item, nodeName, old;

@@ -71,19 +71,19 @@
 
           <div class="uploadedFiles">
             <div class="attachments-list d-flex align-center">
-              <v-subheader class="text-sub-title pl-0 d-flex">{{ $t('attachments.drawer.title') }} ({{ value.length }})
+              <v-subheader class="text-sub-title pl-0 d-flex">{{ $t('attachments.drawer.title') }} ({{ attachments.length }})
               </v-subheader>
               <v-divider></v-divider>
             </div>
-            <div v-if="value.length === 0" class="no-files-attached d-flex flex-column align-center text-sub-title">
+            <div v-if="attachments.length === 0" class="no-files-attached d-flex flex-column align-center text-sub-title">
               <div class="d-flex pl-6 not-files-icon">
                 <i class="uiIconAttach uiIcon64x64"></i>
                 <i class="uiIconCloseCircled uiIcon32x32"></i>
               </div>
               <span>{{ $t('no.attachments') }}</span>
             </div>
-            <div v-if="value.length > 0" class="destinationFolder mb-4 ml-5">
-              <div :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}
+            <div v-if="attachments.length > 0" class="destinationFolder mb-4 ml-5">
+              <div v-if="!displayMessageDestinationFolder" :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">{{ schemaFolder[0] }}
               </div>
               <div v-if="showDestinationPath && !displayMessageDestinationFolder" class="folderLocation">
                 <div v-if="schemaFolder.length > 1" class="folder">
@@ -120,18 +120,18 @@
                       @click="toggleSelectDestinationFolder()">
                 <i
                   :title="!displayMessageDestinationFolder ? $t('attachments.drawer.destination.attachment') : $t('attachments.drawer.destination.attachment.access') "
-                  :class="displayMessageDestinationFolder ? 'disabled' : ''" class="uiIconFolder " rel="tooltip"
+                  :class="displayMessageDestinationFolder ? 'disabled not-allowed' : ''" class="uiIconFolder " rel="tooltip"
                   data-placement="top"></i>
               </button>
             </div>
             <div class="uploadedFilesItems ml-5">
               <transition-group name="list-complete" tag="div" class="d-flex flex-column">
                 <span
-                  v-for="attachedFile in value"
-                  :key="attachedFile"
+                  v-for="attachment in attachments"
+                  :key="attachment"
                   class="list-complete-item"
                 >
-                  <attachment-item :file="attachedFile"></attachment-item>
+                  <attachment-item :file="attachment"></attachment-item>
                 </span>
               </transition-group>
             </div>
@@ -165,7 +165,7 @@
             <v-btn class="btn mr-3"
                    @click="closeAttachmentsAppDrawer()">{{ $t('attachments.drawer.cancel') }}
             </v-btn>
-            <v-btn :disabled="!value.length"
+            <v-btn :disabled="!attachments.length"
                    class="btn btn-primary"
                    @click="uploadAddedAttachments()">{{ $t('attachments.upload') }}
             </v-btn>
@@ -182,10 +182,6 @@ import {getAttachmentsComposerExtensions} from '../js/extension';
 
 export default {
   props: {
-    value: {
-      type: Array,
-      default: () => []
-    },
     maxFilesCount: {
       type: Number,
       required: false,
@@ -215,6 +211,10 @@ export default {
     defaultFolder: {
       type: String,
       default: ''
+    },
+    attachments: {
+      type: Array,
+      default: () => []
     },
   },
   data() {
@@ -261,7 +261,7 @@ export default {
   },
   computed: {
     uploadFinished() {
-      return this.value.some(file => !file.uploadId);
+      return this.attachments.some(file => !file.uploadId);
     }
   },
   watch: {
@@ -285,26 +285,32 @@ export default {
         setTimeout(() => this.attachmentInfo = false, this.MESSAGES_DISPLAY_TIME);
       }
     },
-    value: {
+    attachments: {
       deep: true,
       handler() {
-        this.$emit('attachmentsChanged', this.value);
-        this.displayMessageDestinationFolder = !this.value.some(val => val.uploadId != null && val.uploadId !== '');
-        if (this.value.length === 0) {
+        this.$emit('attachmentsChanged', this.attachments);
+        this.displayMessageDestinationFolder = !this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
+        if (this.attachments.length === 0) {
           this.pathDestinationFolder = this.defaultDestinationFolderPath;
           this.schemaFolder = this.defaultSchemaFolder;
           this.displayMessageDestinationFolder = true;
           this.showDestinationPath = true;
         }
-        this.privateFilesAttached = this.value.some(file => file.isPublic === false);
-        this.fromAnotherSpaces = this.value.filter(({space}) => space && space.name !== this.groupId)
+        this.privateFilesAttached = this.attachments.some(file => file.isPublic === false);
+        this.fromAnotherSpaces = this.attachments.filter(({space}) => space && space.name !== this.groupId)
           .map(({space}) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
       }
     },
     uploadingCount(newValue) {
       if (this.uploadMode === 'save' && newValue === 0) {
         if (this.uploadFinished) {
-          this.closeAndResetAttachmentsDrawer();
+          if(this.entityId && this.entityType) {
+            this.linkUploadedAttachmentsToEntity().then(() => {
+              this.closeAndResetAttachmentsDrawer();
+            });
+          } else {
+            this.closeAndResetAttachmentsDrawer();
+          }
         } else {
           this.$refs.attachmentsAppDrawer.endLoading();
         }
@@ -417,7 +423,7 @@ export default {
       newAttachedFiles.forEach(newFile => {
         this.queueUpload(newFile);
       });
-      this.$refs.uploadInput.value = '';
+      this.$refs.uploadInput.attachments = '';
     },
     getFormattedFileSize(fileSize) {
       const formattedSizePrecision = 2;
@@ -430,7 +436,7 @@ export default {
     },
     queueUpload: function (file) {
       if (this.uploadMode === 'temp') {
-        if (this.value.length >= this.maxFilesCount) {
+        if (this.attachments.length >= this.maxFilesCount) {
           this.filesCountLimitError = true;
           return;
         }
@@ -440,14 +446,14 @@ export default {
           this.fileSizeLimitError = true;
           return;
         }
-        const fileExists = this.value.some(f => f.name === file.name);
+        const fileExists = this.attachments.some(f => f.name === file.name);
         if (fileExists) {
           this.sameFileErrorMessage = this.sameFileErrorMessage.replace('{0}', file.name);
           this.sameFileError = true;
           return;
         }
 
-        this.value.push(file);
+        this.attachments.push(file);
       }
       if (this.uploadingCount < this.maxUploadInProgressCount) {
         if (this.uploadMode === 'temp') {
@@ -547,16 +553,16 @@ export default {
     },
     removeAttachedFile: function (file) {
       if (!file.id) {
-        this.value = this.value && this.value.filter(attachedFile => attachedFile.uploadId !== file.uploadId);
+        this.attachments = this.attachments && this.attachments.filter(attachedFile => attachedFile.uploadId !== file.uploadId);
         if (file.uploadProgress !== this.maxProgress) {
           this.uploadingCount--;
           this.$emit('uploadingCountChanged', this.uploadingCount);
           this.processNextQueuedUpload();
         }
       } else {
-        this.value = this.value.filter(attachedFile => attachedFile.id !== file.id);
+        this.attachments = this.attachments.filter(attachedFile => attachedFile.id !== file.id);
       }
-      this.$emit('input', this.value);
+      this.$emit('input', this.attachments);
     },
     addDestinationFolderForAll(pathDestinationFolder, folder, currentDrive) {
       this.currentDrive = currentDrive;
@@ -566,10 +572,10 @@ export default {
       } else {
         this.showDestinationPath = true;
       }
-      for (let i = 0; i < this.value.length; i++) {
-        if (!this.value[i].destinationFolder || this.value[i].destinationFolder === this.defaultDestinationFolderPath) {
-          this.value[i].destinationFolder = this.pathDestinationFolder;
-          this.value[i].fileDrive = this.currentDrive;
+      for (let i = 0; i < this.attachments.length; i++) {
+        if (!this.attachments[i].destinationFolder || this.attachments[i].destinationFolder === this.defaultDestinationFolderPath) {
+          this.attachments[i].destinationFolder = this.pathDestinationFolder;
+          this.attachments[i].fileDrive = this.currentDrive;
         }
       }
       this.schemaFolder = [];
@@ -584,13 +590,13 @@ export default {
       }
     },
     addDestinationFolderForFile(pathDestinationFolder, folder, isPublic, currentDrive) {
-      for (let i = 0; i < this.value.length; i++) {
-        if (this.value[i].name === this.destinationFileName) {
-          this.value[i].pathDestinationFolderForFile = folder;
-          this.value[i].destinationFolder = pathDestinationFolder.startsWith('/') ? pathDestinationFolder.substring(1) : pathDestinationFolder;
-          this.value[i].fileDrive = currentDrive;
+      for (let i = 0; i < this.attachments.length; i++) {
+        if (this.attachments[i].name === this.destinationFileName) {
+          this.attachments[i].pathDestinationFolderForFile = folder;
+          this.attachments[i].destinationFolder = pathDestinationFolder.startsWith('/') ? pathDestinationFolder.substring(1) : pathDestinationFolder;
+          this.attachments[i].fileDrive = currentDrive;
           // TODO: get 'isPublic' property of file from rest, now 'isPublic' assigned to 'isPublic' property of destination folder
-          this.value[i].isPublic = isPublic;
+          this.attachments[i].isPublic = isPublic;
         }
       }
       this.showDocumentSelector = !this.showDocumentSelector;
@@ -602,10 +608,10 @@ export default {
     },
     toggleServerFileSelector(selectedFiles) {
       if (selectedFiles) {
-        this.value = selectedFiles;
+        this.attachments = selectedFiles;
         this.attachmentInfo = true;
-        this.$emit('input', this.value);
-        this.$emit('attachmentsChanged', this.value);
+        this.$emit('input', this.attachments);
+        this.$emit('attachmentsChanged', this.attachments);
       }
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector ? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.upload.document')}`;
@@ -644,13 +650,13 @@ export default {
       }
     },
     deleteDestinationPathForFile(fileName) {
-      for (let i = 0; i < this.value.length; i++) {
-        if (this.value[i].name === fileName) {
-          this.value[i].showDestinationFolderForFile = '';
-          this.value[i].pathDestinationFolderForFile = '';
-          this.value[i].fileDrive = this.currentDrive;
-          this.value[i].destinationFolder = this.pathDestinationFolder;
-          this.value[i].isPublic = true;
+      for (let i = 0; i < this.attachments.length; i++) {
+        if (this.attachments[i].name === fileName) {
+          this.attachments[i].showDestinationFolderForFile = '';
+          this.attachments[i].pathDestinationFolderForFile = '';
+          this.attachments[i].fileDrive = this.currentDrive;
+          this.attachments[i].destinationFolder = this.pathDestinationFolder;
+          this.attachments[i].isPublic = true;
           break;
         }
       }
@@ -711,7 +717,7 @@ export default {
     uploadAddedAttachments() {
       this.uploadMode = 'save';
       this.$refs.attachmentsAppDrawer.startLoading();
-      this.value.forEach(file => {
+      this.attachments.filter(attachment => attachment.uploadId).forEach(file => {
         this.queueUpload(file);
       });
     },
@@ -735,11 +741,16 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
-      this.value = [];
+      this.attachments = [];
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail' : {'list' : Object.values(this.uploadedFiles)}}));
       this.uploadedFiles = [];
     },
+    linkUploadedAttachmentsToEntity() {
+      const attachmentIds = this.uploadedFiles.map(attachment => attachment.UUID);
+      attachmentIds.push(...this.attachments.map(attachment => attachment.id).filter(id => id));
+      return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId,this.entityType, attachmentIds);
+    }
   }
 };
 </script>

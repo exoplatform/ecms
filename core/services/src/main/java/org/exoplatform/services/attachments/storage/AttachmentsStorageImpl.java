@@ -23,7 +23,7 @@ public class AttachmentsStorageImpl implements AttachmentsStorage {
 
   @Override
   public AttachmentsContextEntity getAttachmentByEntity(long entityId, String entityType) {
-    return attachmentsDAO.getAttachmentContextByEntity(entityId, AttachmentsEntityType.valueOf(entityType).ordinal());
+    return attachmentsDAO.getAttachmentContextByEntity(entityId, AttachmentsEntityType.valueOf(entityType.toUpperCase()).ordinal());
   }
 
   @Override

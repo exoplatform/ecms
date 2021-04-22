@@ -417,7 +417,7 @@ export default {
               });
             } else {
               self.openFolder(defaultFolder).then(() => {
-                defaultFolder = self.folders.find(folder => folder.title === self.entityId);
+                defaultFolder = self.folders.find(folder => parseInt(folder.title) === self.entityId);
                 if (!defaultFolder) {
                   self.newFolderName = self.entityId;
                   self.creatingNewFolder = true;
