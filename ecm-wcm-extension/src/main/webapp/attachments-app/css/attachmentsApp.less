@@ -3,33 +3,24 @@
 #attachmentsApp {
 
   .attachment {
-    display: flex;
-    overflow: hidden;
-    width: 100%;
-    font-size: 18px;
-
     .uploadedFileTitle {
       color: @darkGrey;
-      font-size: 14px;
     }
-
-    .uploadedFileSubTitle {
-      font-size: 12px;
+    .uploadedFileSubTitle{
+      font-size: 12px !important;
     }
 
     .attachment-location {
       background-color: @primaryColorLighterDefault !important;
       border: 1px solid @primaryDarkerColorGradientEnd !important;
       color: @primaryDarkerColorGradientEnd !important;
+
       .mdi-close-circle {
         color: @primaryDarkerColorGradientEnd !important;
       }
     }
 
     .fileType {
-      flex: 0 0 41px;
-      width: 41px;
-
       i {
         font-size: 41px;
       }
@@ -100,404 +91,36 @@
   }
 
   .attachmentsAppDrawer {
-    .v-navigation-drawer {
-      z-index: 20;
-    }
-
-    .attachmentsDrawerHeader {
-      .backButton {
-        .uiIconBack {
-          color: grey;
-          background: none;
-          font-size: 15px;
-          cursor: pointer;
+  .drawerContent {
+    .uploadedFiles {
+      .no-files-attached {
+        .uiIconCloseCircled {
+          color: @greyColorDefault !important;
+          background-color: white;
+          border-radius: 50%;
+          height: 100%;
+          left: -36px;
+          top: 31px;
         }
-      }
 
-      .attachmentsTitle {
-        font-size: 18px;
-        font-weight: bold;
-        width: 100%;
-        text-align: left;
-        padding-left: 35px;
-      }
-
-      .attachmentsCloseIcon {
-        color: #dee4f2;
-        font-size: 32px;
-        line-height: 20px;
-        float: right;
-        cursor: pointer;
+        .uiIconAttach {
+          color: @greyColorDefault !important;
+        }
       }
     }
 
-    .drawerContent {
-      padding: 20px;
-      padding-top: 0;
-
-      .uploadedFiles {
-        .no-files-attached {
-          .uiIconCloseCircled {
-            color: @greyColorDefault !important;
-            background-color: white;
-            border-radius: 50%;
-            height: 100%;
-            left: -36px;
-            top: 31px;
-          }
-
-          .uiIconAttach {
-            color: @greyColorDefault !important;
-          }
-        }
-      }
-
-      .uploadedFilesItem, .fileSelection {
-        display: flex;
-        font-size: 18px;
-        flex-direction: column;
-
-        .showDestination {
-          display: flex;
-          margin-bottom: 13px;
-
-          .showFile {
-            width: 97%;
-            margin-left: 12px;
-          }
-        }
-
-        .removeFile {
-          flex: 0 0 34px;
-          width: 50px;
-          margin-top: 5px;
-          margin-right: -7px;
-
-          .uiIcon {
-            color: #A8B3C5;
-            font-size: 24px;
-            width: 24px;
-
-            &:before {
-              content: "\e9d0";
-            }
-          }
-        }
-
-        .destinationFolder {
-          display: flex;
-          flex-direction: row;
-          margin-left: 15px;
-          color: #a8b3c5;
-          border-bottom: 1px solid #a8b3c5;
-          margin-top: -14px;
-
-          .emptyMessage {
-            width: 100%
-          }
-
-          .box {
-            display: flex;
-            flex-direction: row;
-          }
-
-          .btnTrash {
-            margin-left: 10px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            margin-top: -1px;
-          }
-
-          .folderLocation {
-            display: flex;
-            flex-direction: row;
-            border-bottom: 0px;
+    .connectCloudDriveAction {
+      #connectCloudApp {
+        .connect-cloud {
+          &.drawer.open {
             width: 100%;
-
-          }
-
-          .folder {
-            overflow: hidden;
-            white-space: nowrap;
-            cursor: pointer;
-            margin-bottom: 0px;
-            margin-right: 5px;
-
-          }
-
-          .folderName {
-            margin-right: 5px;
-            cursor: pointer
-          }
-
-          .colorIcon {
-            color: #a8b3c5;
-          }
-
-          .colorIconStop {
-            color: #bc4343;
-            cursor: pointer;
-          }
-
-          .folders {
-            flex-direction: row;
-            display: flex;
-          }
-
-          .folderName {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            width: 95%;
-            margin-bottom: 0px;
-
-          }
-
-          .selectFile {
-            width: 100%;
-            border-bottom: 0px;
-
-            > p {
-              margin-bottom: 1px;
-            }
-          }
-
-          .uiIconFolder {
-            cursor: pointer;
-          }
-        }
-
-      }
-
-      .messageDestination {
-        border-bottom: 1px solid #a8b3c5;
-        width: 100%;
-
-        > p {
-          margin-bottom: 0px;
-        }
-      }
-
-      .buttonSelect {
-        padding: 0px;
-      }
-
-      .fileAlreadyExists {
-        margin-top: -50px;
-      }
-
-      .fileAlreadyExists, .sizeExceeded, .countExceeded {
-        position: absolute;
-        left: 50%;
-        z-index: 100;
-        transform: translateX(-50%);
-        white-space: nowrap;
-      }
-
-      .limitMessage {
-        height: 20px;
-        padding: 12px 23px;
-        color: #555;
-        display: flex;
-        justify-content: space-between;
-
-        .sizeLimit, .countLimit {
-          line-height: 16px;
-          font-weight: initial;
-          box-sizing: border-box;
-          transition: font-weight 2s ease-in-out;
-        }
-
-        .countLimit {
-          &.noFilesLeft {
-            color: red;
-          }
-
-        }
-
-        .sizeLimit:before {
-          font-family: "PLF-FONT-ICONS";
-          content: "\e771";
-          padding-right: 5px;
-        }
-
-        .countLimit:before {
-          font-family: "PLF-FONT-ICONS";
-          content: "\e767";
-          padding-right: 5px;
-        }
-      }
-
-      .selectFolder {
-        display: inline-block;
-        margin: auto;
-        padding-right: 5px;
-        line-height: 20px;
-
-        .uiIconClose {
-          top: 0;
-          left: 5px;
-        }
-      }
-
-      .multiploadFilesSelector {
-        width: 100%;
-        text-align: center;
-
-        .dragEntered {
-          background: #ccc;
-        }
-
-        .dropFileBox {
-          border-radius: 5px;
-          padding: 10% 0;
-          border: 3px dashed #a8b3c5;
-          line-height: 25px;
-          font-size: 18px;
-          margin-left: 5%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-
-          .mobileText {
-            display: none;
-          }
-
-          .contentAttachments {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-
-            .contentDragAndDrop {
-              display: flex;
-              flex-direction: row;
-              height: 70%;
-
-              .contentDrop {
-                display: flex;
-                flex-direction: column;
-                width: unset;
-
-                .icon {
-                  padding: 5px;
-                }
-              }
-            }
-
-            .contentUpload {
-              display: flex;
-              flex-direction: column;
-              width: 50%;
-
-              .uploadButton {
-                display: flex;
-                flex-direction: column;
-
-                .colorIcon {
-                  color: #578cc9;
-                  cursor: pointer;
-                  padding: 7px;
-                }
-              }
-            }
-
-            .contentOR {
-              text-transform: uppercase;
-              height: 41%;
-              display: flex;
-              flex-direction: row;
-
-              .leftLine {
-                width: 30%;
-                margin-left: 112%;
-              }
-
-              .colorText {
-                color: #e6e6e6;
-              }
-
-              .item {
-                width: 33%;
-              }
-
-              .itemOR {
-                width: 33%;
-                padding: 3%;
-              }
-
-              .rightLine {
-                width: 30%;
-                margin-left: -43%;
-              }
-            }
-
-            .colorText {
-              color: #a8b3c5;
-            }
-
-            .lastContent {
-              height: 33%;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-
-              a {
-                display: flex;
-                align-items: baseline;
-                position: relative;
-
-                .uiIcon32x32FolderDefault {
-                  font-size: 22px;
-                  top: 0;
-                }
-
-                .iconCloud {
-                  position: absolute;
-                  left: 5px;
-                  top: 6px;
-                }
-              }
-
-              .text {
-                padding-left: 6px;
-              }
-            }
-          }
-
-        }
-
-        .fade-leave-active {
-          transition: opacity .6s;
-        }
-
-        .fade-leave-to {
-          opacity: 0;
-        }
-      }
-      .connectCloudDriveAction {
-        #connectCloudApp {
-          .connect-cloud {
-            &.drawer.open {
-              width: 100%;
-            }
           }
         }
       }
     }
-
-    .drawerFooter {
-      .btn {
-        float: right;
-      }
-    }
-
-    .uiPopup.documentSelector {
-      top: 12%;
-      left: 21%;
-    }
-
+  }
+}
+  .driveExplorerDrawer {
     .serverFiles {
       height: 77%;
       .contentHeader {
@@ -959,16 +582,10 @@
         }
       }
     }
-
   }
 
 
   .destinationFolder {
-    display: flex;
-    flex-direction: row;
-    margin-left: 15px;
-    color: #a8b3c5;
-    margin-bottom: 10%;
     border-bottom: 1px solid #a8b3c5;;
 
     .folderLocation {

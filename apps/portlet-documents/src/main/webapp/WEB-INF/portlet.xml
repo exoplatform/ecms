@@ -44,7 +44,7 @@
       </preference>
       <preference>
         <name>cacheRecentDocuments</name>
-        <value></value>
+        <value>false</value>
         <read-only>false</read-only>
     </preference>
     </portlet-preferences>

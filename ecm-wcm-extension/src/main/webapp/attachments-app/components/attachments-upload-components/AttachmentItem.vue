@@ -1,5 +1,5 @@
 <template>
-  <div class="attachment">
+  <div class="attachment d-flex">
     <v-list-item-avatar class="rounded-lg me-3">
       <div v-if="file.uploadProgress < 100" class="fileProgress">
         <v-progress-circular
@@ -94,6 +94,7 @@ export default {
     },
     openSelectDestinationFolderForFile(file) {
       this.$root.$emit('change-attachment-destination-path', file);
+
     }
   }
 };
