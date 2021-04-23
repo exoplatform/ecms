@@ -1911,7 +1911,6 @@
     <label>
       <names>Navn på tagg:</names>
       <linked>Koblede Tagger:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Legg til</AddTag>

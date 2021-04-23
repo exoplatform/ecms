@@ -1911,7 +1911,6 @@
     <label>
       <names>Tag namen</names>
       <linked>gelinkte tags</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Tags toevoegen</AddTag>

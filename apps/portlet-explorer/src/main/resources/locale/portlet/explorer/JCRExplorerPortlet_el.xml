@@ -1911,7 +1911,6 @@
     <label>
       <names>Ονόματα ετικετών:</names>
       <linked>Συνδεδεμένες ετικέτες:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Προσθήκη</AddTag>

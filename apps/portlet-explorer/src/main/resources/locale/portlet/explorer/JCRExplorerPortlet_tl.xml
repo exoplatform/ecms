@@ -1911,7 +1911,6 @@
     <label>
       <names>Ang mga Pangalang Nai-tag:</names>
       <linked>Ang mga Tags na Nai-link:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Magdagdag</AddTag>

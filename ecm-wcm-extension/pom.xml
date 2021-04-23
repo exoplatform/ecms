@@ -159,6 +159,9 @@
               <outputDirectory>${project.build.directory}/src/main/webapp/skin/less</outputDirectory>
               <resources>
                 <resource>
+                  <directory>src/main/webapp/attachments-app/css</directory>
+                </resource>
+                <resource>
                   <directory>src/main/webapp/attachments-selector/css</directory>
                 </resource>
               </resources>
@@ -195,6 +198,7 @@
               <compress>false</compress>
               <includes>
                 <include>attachments.less</include>
+                <include>attachmentsApp.less</include>
               </includes>
             </configuration>
             <goals>
@@ -212,7 +216,7 @@
         <executions>
           <execution>
             <id>install node and npm</id>
-            <phase>package-prepare</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>install-node-and-npm</goal>
             </goals>
@@ -223,7 +227,7 @@
           </execution>
           <execution>
             <id>npm install</id>
-            <phase>package-prepare</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>npm</goal>
             </goals>
@@ -233,7 +237,7 @@
           </execution>
           <execution>
             <id>npm run build</id>
-            <phase>package-prepare</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>npm</goal>
             </goals>

@@ -1911,7 +1911,6 @@
     <label>
       <names>Nazwy tagów:</names>
       <linked>Powiązane Tagi:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Dodaj</AddTag>

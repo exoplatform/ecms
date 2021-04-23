@@ -1911,7 +1911,6 @@
     <label>
       <names>Etiket Adları:</names>
       <linked>Bağlantılı Etiketler:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Ekle</AddTag>

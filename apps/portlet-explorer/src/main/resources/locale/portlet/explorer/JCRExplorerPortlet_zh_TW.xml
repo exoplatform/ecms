@@ -1911,7 +1911,6 @@
     <label>
       <names>標籤名稱：</names>
       <linked>連結的標籤：</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>新增</AddTag>

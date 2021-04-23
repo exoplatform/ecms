@@ -16,6 +16,8 @@ import org.exoplatform.commons.dlp.service.RestoredDlpItemService;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.documents.impl.TrashServiceImpl;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -68,11 +70,14 @@ public class FileDlpConnector extends DlpServiceConnector {
   private RestoredDlpItemService restoredDlpItemService;
 
   private DlpOperationProcessor dlpOperationProcessor;
+  private TrashService          trashService;
 
   private LinkManager linkManager;
 
   public FileDlpConnector(InitParams initParams, FileSearchServiceConnector fileSearchServiceConnector,
-                          RepositoryService repositoryService, IndexingService indexingService, DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService, LinkManager linkManager) {
+                          RepositoryService repositoryService, IndexingService indexingService,
+                          DlpOperationProcessor dlpOperationProcessor, RestoredDlpItemService restoredDlpItemService, LinkManager linkManager,
+                          TrashService trashService) {
     super(initParams);
     this.repositoryService = repositoryService;
     this.indexingService = indexingService;
@@ -80,11 +85,17 @@ public class FileDlpConnector extends DlpServiceConnector {
     this.restoredDlpItemService = restoredDlpItemService;
     this.dlpOperationProcessor = dlpOperationProcessor;
     this.linkManager = linkManager;
+    this.trashService=trashService;
   }
 
   @Override
   public boolean processItem(String entityId) {
     LOGGER.debug("Process item {}",entityId);
+    if (!itemExist(entityId) || isInTrash(entityId)) {
+      //if a document is in trash, we cannot check it because it is not indexed.
+      //so we return true to remove it from the queue
+      return true;
+    }
     if (!isIndexedByEs(entityId) || editorOpened(entityId)) {
       return false;
     } else {
@@ -92,7 +103,46 @@ public class FileDlpConnector extends DlpServiceConnector {
     }
     return true;
   }
-
+  
+  private boolean itemExist(String entityId) {
+    ExtendedSession session = null;
+    boolean result = false;
+    try {
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      result = session.itemExists(entityId);
+      if (result) {
+        LOGGER.debug("Item {} exists, path={}", entityId, session.getItem(entityId).getPath());
+      } else {
+        LOGGER.debug("Item {} not exists", entityId);
+      }
+    } catch (RepositoryException e) {
+      LOGGER.error("Error when reading repository",e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+    return result;
+  }
+  
+  private boolean isInTrash(String entityId) {
+    ExtendedSession session = null;
+    try {
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      Node node = session.getNodeByIdentifier(entityId);
+      boolean result = trashService.isInTrash(node);
+      LOGGER.debug("Item {} isInTrash={}", entityId, result);
+      return result;
+    } catch (Exception e) {
+      LOGGER.error("Error when check if node {} is in trash", entityId, e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+    return false;
+  }
+  
   @Override
   public void restorePositiveItem(String itemReference) {
     ExtendedSession session = null;
@@ -114,6 +164,10 @@ public class FileDlpConnector extends DlpServiceConnector {
                   totalTime);
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 
@@ -176,6 +230,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       }
     } catch (Exception e) {
       LOGGER.error("Error while treating file dlp connector item", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 
@@ -221,6 +279,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       }
     } catch (Exception e) {
       LOGGER.error("Error while deleting dlp file item", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 
@@ -242,6 +304,10 @@ public class FileDlpConnector extends DlpServiceConnector {
       return WCMCoreUtils.getLinkInDocumentsApplication(node.getPath());
     } catch (Exception e) {
       LOGGER.error("Error while getting dlp item url, itemId={}", itemReference, e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
     return null;
   }

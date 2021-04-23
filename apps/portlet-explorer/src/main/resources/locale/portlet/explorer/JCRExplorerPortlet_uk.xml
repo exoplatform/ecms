@@ -1911,7 +1911,6 @@
     <label>
       <names>Імена тегів:</names>
       <linked>Пов'язані Теги:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Додати</AddTag>

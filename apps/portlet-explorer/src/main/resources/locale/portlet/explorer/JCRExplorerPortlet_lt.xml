@@ -1911,7 +1911,6 @@
     <label>
       <names>Žymos pavadinimai:</names>
       <linked>Susietos žymės:</linked>
-      <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
       <AddTag>Pridėti</AddTag>

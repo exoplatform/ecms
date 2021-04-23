@@ -44,48 +44,54 @@
       },
     },
     created(){
-      if (this.query != null && this.query !== 'null') {
-        documentsService.getDocumentsByQuery(this.query, this.limit).then(
-          documents => { 
-            this.documents = documents;
+      this.retrieveDocuments();
+      document.addEventListener('attachments-upload-finished', () => this.retrieveDocuments());
+    },
+    methods: {
+      retrieveDocuments() {
+        if (this.query != null && this.query !== 'null') {
+          documentsService.getDocumentsByQuery(this.query, this.limit).then(
+            documents => {
+              this.documents = documents;
+            }
+          ).finally(() => this.loading = false);
+        }
+        else if (this.folder != null && this.folder !== 'null') {
+          documentsService.getDocumentsByFolder(this.folder, this.limit).then(
+            documents => {
+              this.documents = documents;
+            }
+          ).finally(() => this.loading = false);
+        }
+        else if (this.type != null) {
+          if (this.type === 'recent') {
+            documentsService.getRecentDocuments(this.limit).then(
+              documents => {
+                this.documents = documents;
+              }
+            ).finally(() => this.loading = false);
           }
-        ).finally(() => this.loading = false);
-      }
-      else if (this.folder != null && this.folder !== 'null') {
-        documentsService.getDocumentsByFolder(this.folder, this.limit).then(
-          documents => { 
-            this.documents = documents;
+          if (this.type === 'recentSpaces') {
+            documentsService.getRecentSpacesDocuments(this.limit).then(
+              documents => {
+                this.documents = documents;
+              }
+            ).finally(() => this.loading = false);
           }
-        ).finally(() => this.loading = false);
-      }
-      else if (this.type != null) {
-        if (this.type === 'recent') {
-          documentsService.getRecentDocuments(this.limit).then(
-            documents => { 
-              this.documents = documents;
-            }
-          ).finally(() => this.loading = false);
-        }
-        if (this.type === 'recentSpaces') {
-          documentsService.getRecentSpacesDocuments(this.limit).then(
-            documents => { 
-              this.documents = documents;
-            }
-          ).finally(() => this.loading = false);
-        }
-        if (this.type === 'favorite') {
-          documentsService.getFavoriteDocuments(this.limit).then(
-            documents => { 
-              this.documents = documents;
-            }
-          ).finally(() => this.loading = false);
-        }
-        if (this.type === 'shared') {
-          documentsService.getSharedDocuments(this.limit).then(
-            documents => { 
-              this.documents = documents;
-            }
-          ).finally(() => this.loading = false);
+          if (this.type === 'favorite') {
+            documentsService.getFavoriteDocuments(this.limit).then(
+              documents => {
+                this.documents = documents;
+              }
+            ).finally(() => this.loading = false);
+          }
+          if (this.type === 'shared') {
+            documentsService.getSharedDocuments(this.limit).then(
+              documents => {
+                this.documents = documents;
+              }
+            ).finally(() => this.loading = false);
+          }
         }
       }
     }
