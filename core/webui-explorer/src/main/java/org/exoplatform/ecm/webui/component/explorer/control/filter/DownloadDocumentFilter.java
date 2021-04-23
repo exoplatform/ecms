@@ -27,26 +27,26 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
 import java.util.Map;
 
-public class ShareDocumentFilter extends UIExtensionAbstractFilter {
+public class DownloadDocumentFilter extends UIExtensionAbstractFilter {
 
-  public ShareDocumentFilter() {
-    this("UIPopupMenu.msg.share-document");
+  public DownloadDocumentFilter() {
+    this("UIPopupMenu.msg.download-document");
   }
 
-  public ShareDocumentFilter(String messageKey) {
+  public DownloadDocumentFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
 
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     SettingService settingService = CommonsUtils.getService(SettingService.class);
-    SettingValue<?> settingValue = settingService.get(Context.GLOBAL.id("sharedDocumentStatus"),
-                                                      Scope.APPLICATION.id("sharedDocumentStatus"), "exo:sharedDocumentStatus");
-    return !(settingValue != null && !settingValue.getValue().toString().isEmpty() ? Boolean.valueOf(settingValue.getValue().toString()) : false);
+    SettingValue<?> settingValue = settingService.get(Context.GLOBAL.id("downloadDocumentStatus"),
+                                                      Scope.APPLICATION.id("downloadDocumentStatus"), "exo:downloadDocumentStatus");
+    return !(settingValue != null && !settingValue.getValue().toString().isEmpty() ? Boolean.valueOf(settingValue.getValue().toString()) : true);
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
-    createUIPopupMessages(context, "UIPopupMenu.msg.share-document");
+    createUIPopupMessages(context, "UIPopupMenu.msg.download-document");
   }
 
 }

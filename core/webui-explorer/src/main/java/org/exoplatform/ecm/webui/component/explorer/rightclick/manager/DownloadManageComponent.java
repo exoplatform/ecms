@@ -1,6 +1,7 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.DownloadDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -33,7 +34,7 @@ public class DownloadManageComponent extends UIAbstractManagerComponent {
   private static final Log LOG = ExoLogger.getLogger(DownloadManageComponent.class.getName());
 
   private static final List<UIExtensionFilter> FILTERS
-          = Arrays.asList(new UIExtensionFilter[]{new IsNtFileFilter(),
+          = Arrays.asList(new UIExtensionFilter[]{new IsNtFileFilter(), new DownloadDocumentFilter()
   });
 
   @UIExtensionFilters

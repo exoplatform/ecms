@@ -21,6 +21,7 @@ package org.exoplatform.ecm.webui.component.explorer.documents;
 import java.util.Arrays;
 import java.util.List;
 
+import org.exoplatform.ecm.webui.component.explorer.control.filter.DownloadDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -42,7 +43,7 @@ public class EditorsOpenManageComponent extends UIAbstractManagerComponent {
 
   /** The Constant FILTERS. */
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
-      new IsAvailableDocumentProviderPresentFilter() });
+      new IsAvailableDocumentProviderPresentFilter(), new DownloadDocumentFilter() });
 
   /**
    * The listener interface for receiving onlyofficeOpenAction events. The class

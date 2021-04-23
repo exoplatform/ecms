@@ -2,19 +2,24 @@
 
 #transferRules {
 
+  .textSize {
+    font-size: 14px;
+  }
+  .transfertRulesTitle {
+    font-size: 18px;
+  }
+
   /* switch */
   label.uiSwitchBtn {
       height: 30px;
   }
-  .uiSwitchBtn span.deactivated {
-      text-align: left;
-  }
+
   .switch {
       position: relative;
       display: inline-block;
       width: 53px;
       height: 32px;
-      top: 0.4rem;
+      bottom: 7px;
   }
 
   .switch input {
@@ -26,12 +31,12 @@
       cursor: pointer;
       overflow: hidden;
       top: 5px;
-      left: 0;
-      right: 0;
+      left: 0 ~'; /** orientation=lt */ ';
+      right: 0 ~'; /** orientation=rt */ ';
       bottom: 0;
       width: 60px;
       height: 20px;
-      background-color: #f2f2f2;
+      background-color: @lightGrey;
       -webkit-transition: .4s;
       transition: .4s;
   }
@@ -44,7 +49,7 @@
       width: 14px;
       left: 5px;
       bottom: 3px;
-      background-color: #4d5466;
+      background-color: @darkGrey;
       -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
       -webkit-transition: .4s;
@@ -58,7 +63,7 @@
     -ms-transform: translateX(-190px);
     transform: translateX(-190px);
     left: 3px;
-    color: #fff;
+    color: @white;
     text-align: right;
     font-size: 12px;
     width: calc(100% - 50px);
@@ -74,7 +79,7 @@
     z-index: 15;
     position: absolute;
     left: 3px;
-    color: #fff;
+    color: @white;
     text-align: right;
     font-size: 12px;
     width: calc(100% - 50px);
@@ -95,17 +100,17 @@
     width: 95px;
     height: 26px !important;
     color: #f9f9f9;
-    background-color: #477ab3;
-    background-image: -moz-linear-gradient(top, #578dc9, #2f5e92);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#578dc9), to(#2f5e92));
-    background-image: -webkit-linear-gradient(top, #578dc9, #2f5e92);
-    background-image: -o-linear-gradient(top, #578dc9, #2f5e92);
-    background-image: linear-gradient(to bottom, #578dc9, #2f5e92);
+    background-color: @tableBackgroundAccent;
+    background-image: -moz-linear-gradient(top, @primaryColorDefault, #2f5e92);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@primaryColorDefault), to(#2f5e92));
+    background-image: -webkit-linear-gradient(top, @primaryColorDefault, #2f5e92);
+    background-image: -o-linear-gradient(top, @primaryColorDefault, #2f5e92);
+    background-image: linear-gradient(to bottom, @primaryColorDefault, #2f5e92);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff578dc9', endColorstr='#ff2f5e92', GradientType=0);
-    -webkit-box-shadow: inset 0px 3px 5px #224469;
-    -moz-box-shadow: inset 0px 3px 5px #224469;
-    box-shadow: inset 0px 3px 5px #224469;
+    -webkit-box-shadow: inset 0px 3px 5px @primaryDarkerColor;
+    -moz-box-shadow: inset 0px 3px 5px @primaryDarkerColor;
+    box-shadow: inset 0px 3px 5px @primaryDarkerColor;
     -webkit-border-top-left-radius: 9px;
     -moz-border-radius-topleft: 9px;
     border-top-left-radius: 9px;
@@ -114,7 +119,7 @@
     border-bottom-left-radius: 9px;
     height: 57px;
     border-radius: 100px;
-    background-color: #578dc9;
+    background-color: @primaryColorDefault;
     -webkit-transform: translateX(-190px);
     -ms-transform: translateX(-190px);
     transform: translateX(-190px);
@@ -129,7 +134,7 @@
   }
 
   input:checked+.slider:before {
-    background-color: #fff;
+    background-color: @white;
     -webkit-transform: translateX(38px);
     -ms-transform: translateX(38px);
     transform: translateX(38px);
@@ -141,20 +146,15 @@
     transform: translateX(38px);
   }
 
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 100px;
-  }
-
-  .slider.round:before {
+  .slider:before {
     border-radius: 50%;
   }
 
   .absolute-deactivated {
     position: absolute;
-    left: 8px;
-    color: #4d5466;
-    text-align: right;
+    color: @darkGrey;
+    text-align: right ;
+    left: 4px;
     font-size: 12px;
     width: calc(100% - 30px);
     line-height: 30px;

@@ -1,5 +1,5 @@
-export function getSharedDocumentStatus() {
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/transferRules/getSharedDocumentStatus`, {
+export function getTransfertRulesDocumentStatus() {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/transferRules/getTransfertRulesDocumentStatus`, {
     method: 'GET',
     credentials: 'include',
   }).then((resp) => {
@@ -12,11 +12,11 @@ export function getSharedDocumentStatus() {
   });
 }
 
-export function saveSharedDocumentStatus(TransferRulesStatusModel) {
+export function saveSharedDocumentStatus(saveSharedDocumentStatus) {
   return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/transferRules/saveSharedDocumentStatus`, {
     method: 'PUT',
     credentials: 'include',
-    body: JSON.stringify(TransferRulesStatusModel),
+    body: JSON.stringify(saveSharedDocumentStatus),
     headers: {
       'Content-Type': 'application/json'
     }
@@ -26,6 +26,24 @@ export function saveSharedDocumentStatus(TransferRulesStatusModel) {
     }
     else {
       throw new Error ('Error when saving shared documents status');
+    }
+  });
+}
+
+export function saveDownloadDocumentStatus(downloadDocumentStatus) {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/transferRules/saveDownloadDocumentStatus`, {
+    method: 'PUT',
+    credentials: 'include',
+    body: JSON.stringify(downloadDocumentStatus),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((resp) => {
+    if(resp && resp.ok) {
+      return resp.json();
+    }
+    else {
+      throw new Error ('Error when saving download documents status');
     }
   });
 }

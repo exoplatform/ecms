@@ -1,10 +1,6 @@
-/**
- *
- */
 package org.exoplatform.services.rest.transferRules;
 
 import io.swagger.annotations.*;
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
@@ -27,42 +23,63 @@ public class TransferRulesRestService implements ResourceContainer {
   }
 
   @GET
-  @Path("/getSharedDocumentStatus")
+  @Path("/getTransfertRulesDocumentStatus")
   @RolesAllowed("administrators")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets shared documents",
+  @ApiOperation(value = "Gets the status of the transfert rules documents",
       httpMethod = "GET",
       response = Response.class,
-      notes = "This returns shared documents")
+      notes = "This returns the status of the transfert rules documents")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response getSharedDocumentStatus() {
-    SettingValue<?> settingValue = settingService.get(Context.GLOBAL.id("sharedDocumentStatus"),
+      @ApiResponse(code = 200, message = "Request fulfilled"),
+      @ApiResponse (code = 500, message = "Internal server error due to data encoding")})
+  public Response getTransfertRulesDocumentStatus() {
+    SettingValue<?> sharedDocumentSettingValue = settingService.get(Context.GLOBAL.id("sharedDocumentStatus"),
                                                       Scope.APPLICATION.id("sharedDocumentStatus"),
                                                       "exo:sharedDocumentStatus");
-    boolean isSharedDocumentActivated = settingValue != null && !settingValue.getValue().toString().isEmpty() ? Boolean.valueOf(settingValue.getValue().toString()) : true;
-    return Response.ok().entity("{\"isSharedDocumentActivated\":\"" + isSharedDocumentActivated + "\"}").build();
+    SettingValue<?> downloadDocumentsettingValue = settingService.get(Context.GLOBAL.id("downloadDocumentStatus"),
+                                                      Scope.APPLICATION.id("downloadDocumentStatus"),
+                                                      "exo:downloadDocumentStatus");
+    boolean isSharedDocumentActivated = sharedDocumentSettingValue != null && !sharedDocumentSettingValue.getValue().toString().isEmpty() ? Boolean.valueOf(sharedDocumentSettingValue.getValue().toString()) : false;
+    boolean isDownloadDocumentActivated = downloadDocumentsettingValue != null && !downloadDocumentsettingValue.getValue().toString().isEmpty() ? Boolean.valueOf(downloadDocumentsettingValue.getValue().toString()) : false;
+    return Response.ok().entity(new TransferRulesStatusModel(Boolean.toString(isSharedDocumentActivated), Boolean.toString(isDownloadDocumentActivated))).build();
   }
 
   @PUT
   @Path("/saveSharedDocumentStatus")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("administrators")
-  @ApiOperation(value = "Updates the share document status",
+  @ApiOperation(value = "Updates the shared document status",
       httpMethod = "PUT",
       response = Response.class,
-      notes = "Updates the share document status.")
+      notes = "Updates the shared document status.")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Request fulfilled"),
-      @ApiResponse(code = 400, message = "Invalid query input") })
-  public Response saveSharedDocumentStatus(TransferRulesStatusModel transferRulesStatusModel) {
-    if (StringUtils.isBlank(transferRulesStatusModel.getSharedDocumentStatus())) {
-      return Response.status(Response.Status.BAD_REQUEST).entity("Status must not be null or blank").build();
-    }
-    settingService.set(Context.GLOBAL.id("sharedDocumentStatus"),
-                       Scope.APPLICATION.id("sharedDocumentStatus"),
+      @ApiResponse(code = 400, message = "Invalid query input"),
+      @ApiResponse (code = 500, message = "Internal server error due to data encoding")})
+  public Response saveSharedDocumentStatus(String sharedDocumentStatus) {
+    settingService.set(Context.GLOBAL.id("sharedDocumentStatus"), Scope.APPLICATION.id("sharedDocumentStatus"),
                        "exo:sharedDocumentStatus",
-                       SettingValue.create(transferRulesStatusModel.getSharedDocumentStatus()));
-    return Response.ok(transferRulesStatusModel.getSharedDocumentStatus()).build();
+                       SettingValue.create(sharedDocumentStatus));
+    return Response.ok(sharedDocumentStatus).build();
+  }
+
+  @PUT
+  @Path("/saveDownloadDocumentStatus")
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("administrators")
+  @ApiOperation(value = "Updates the download document status",
+      httpMethod = "PUT",
+      response = Response.class,
+      notes = "Updates the download document status.")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Request fulfilled"),
+      @ApiResponse(code = 400, message = "Invalid query input"),
+      @ApiResponse (code = 500, message = "Internal server error due to data encoding")})
+  public Response saveDownloadDocumentStatus(String downloadDocumentStatus) {
+    settingService.set(Context.GLOBAL.id("downloadDocumentStatus"), Scope.APPLICATION.id("downloadDocumentStatus"),
+                       "exo:downloadDocumentStatus",
+                       SettingValue.create(downloadDocumentStatus));
+    return Response.ok(downloadDocumentStatus).build();
   }
 }

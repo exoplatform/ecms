@@ -7,16 +7,15 @@ public class TransferRulesStatusModel {
 
   private String sharedDocumentStatus;
 
-  private String uploadDocumentStatus;
-
   private String downloadDocumentStatus;
 
-  public String getUploadDocumentStatus() {
-    return uploadDocumentStatus;
+  public TransferRulesStatusModel(String sharedDocumentStatus, String downloadDocumentStatus) {
+    this.sharedDocumentStatus = sharedDocumentStatus;
+    this.downloadDocumentStatus = downloadDocumentStatus;
   }
 
-  public void setUploadDocumentStatus(String uploadDocumentStatus) {
-    this.uploadDocumentStatus = uploadDocumentStatus;
+  public TransferRulesStatusModel(String sharedDocumentStatus) {
+    this.sharedDocumentStatus = sharedDocumentStatus;
   }
 
   public String getDownloadDocumentStatus() {

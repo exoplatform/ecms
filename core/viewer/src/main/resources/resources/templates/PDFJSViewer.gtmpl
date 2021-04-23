@@ -286,7 +286,9 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
       <div class="detailContainer">
         <h4>$errorMessage</h4>
         <div class="editors-placeholder" data-fileId="$fileId" data-workspace="$workspace"></div>
+        <% if(Utils.isDownloadDocumentActivated()) { %>
         <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
+        <%}%>
         <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
             <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument">
             </i>$remoteEditTitle
