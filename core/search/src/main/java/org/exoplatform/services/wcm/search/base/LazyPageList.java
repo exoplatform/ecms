@@ -16,22 +16,20 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.RowIterator;
-
-import org.exoplatform.commons.utils.PageList;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
-import org.exoplatform.services.jcr.impl.core.query.lucene.QueryResultImpl;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class works as a page list but only load 1 page data at a time.
@@ -86,8 +84,8 @@ public class LazyPageList<E> extends PageList{
   protected void populateCurrentPage(int page) throws Exception {
     currentListPage_ = new ArrayList<E>();
     if (queryData_.getQueryStatement() != null) {
+      SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
       try {
-        SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
         Session session = provider.getSession(queryData_.getWorkSpace(), WCMCoreUtils.getRepository());
         Query query = session.getWorkspace().getQueryManager().
         createQuery(queryData_.getQueryStatement(), queryData_.getLanguage_());
@@ -108,6 +106,8 @@ public class LazyPageList<E> extends PageList{
         if (LOG.isErrorEnabled()) {
           LOG.error("Can not execute the query: " + queryData_.getQueryStatement(), e);
         }
+      } finally {
+        provider.close();
       }
     }
   }
