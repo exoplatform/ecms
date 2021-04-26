@@ -44,10 +44,10 @@
     },
     computed: {
       displayedDocuments() {
-        return [...this.documents, ...this.cachedDocuments].slice(0, parseInt(this.limit));
+        return [...this.cachedDocuments, ...this.documents].slice(0, parseInt(this.limit));
       },
       documentMimeTypeRegex() {
-        return this.type === 'recent' && /pdf|presentation|sheet|word|plain/ || /image/;
+        return this.type === 'recent' && /pdf|presentation|sheet|word|plain/ || /pdf|presentation|sheet|word|plain|image/;
       },
     },
     watch: {
@@ -115,7 +115,7 @@
           cachedDocuments.forEach(cachedDocument => {
             if (!cachedDocument.timestamp || (Date.now() - cachedDocument.timestamp) > this.twoMinInMS) {
               this.removeDocumentFromCache(cachedDocument.id);
-            } else if (this.documents.some(doc => document.id === doc.id)) {
+            } else if (this.documents.some(doc => (doc.id || doc.UUID) === cachedDocument.id)) {
               this.removeDocumentFromCache(cachedDocument.id);
             } else {
               this.cachedDocuments.push(cachedDocument);
@@ -131,6 +131,7 @@
           document.timestamp = Date.now();
           this.addDocumentToCache(document);
         });
+        this.retrieveCachedDocuments();
       },
       getCachedDocuments() {
         const cachedDocumentsString = localStorage.getItem('newlyUploadedAttachments')
