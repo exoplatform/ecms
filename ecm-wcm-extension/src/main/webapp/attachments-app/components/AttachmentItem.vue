@@ -1,6 +1,6 @@
 <template>
   <div class="attachment">
-    <v-list-item-avatar class="rounded-lg">
+    <v-list-item-avatar class="rounded-lg me-3">
       <div v-if="file.uploadProgress < 100" class="fileProgress">
         <v-progress-circular
           :rotate="-90"
@@ -23,7 +23,7 @@
           v-if="file.pathDestinationFolderForFile"
           close
           small
-          class="attachment-location "
+          class="attachment-location px-2"
           @click:close="$root.$emit('remove-destination-for-file', file.name)"
           @click="openSelectDestinationFolderForFile(file)"
         >

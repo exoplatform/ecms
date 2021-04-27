@@ -499,6 +499,7 @@
     }
 
     .serverFiles {
+      height: 77%;
       .contentHeader {
         display: flex;
         justify-content: space-between;
@@ -890,53 +891,6 @@
               background-color: #E1E8EE;
             }
           }
-
-          #folderActionsMenu {
-            background: #FFF;
-            display: block;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: fixed;
-            min-width: auto;
-            border: none;
-            box-shadow: 1px 1px 5px 1px #d2d2d2;
-
-            &:focus {
-              outline: none;
-            }
-
-            .folderActionsMenuItem {
-              border-bottom: 1px solid #E0E0E0;
-              margin: 0;
-              cursor: pointer;
-              display: block;
-              text-align: left;
-              padding: 10px;
-
-              &:last-child {
-                border-bottom: none;
-              }
-
-              i {
-                margin-right: 5px;
-                width: 20px;
-              }
-
-              &:hover {
-                background: #578dc9;
-                color: #fff;
-
-                i {
-                  color: #fff;
-                }
-              }
-
-              &.disabled {
-                cursor: not-allowed;
-              }
-            }
-          }
         }
 
         .categorizedDrives {
@@ -1015,12 +969,12 @@
     margin-left: 15px;
     color: #a8b3c5;
     margin-bottom: 10%;
+    border-bottom: 1px solid #a8b3c5;;
 
     .folderLocation {
       width: 100%;
       display: flex;
       flex-direction: row;
-      border-bottom: 1px solid #a8b3c5;;
 
       > p {
         margin-bottom: 0px;
@@ -1029,12 +983,7 @@
     }
 
     .drive {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      cursor: pointer;
-      margin-bottom: 0px;
-
+      flex: 1 0 auto;
     }
 
     .colorIcon {

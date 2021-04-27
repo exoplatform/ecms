@@ -1,16 +1,29 @@
 <template>
-  <ul v-show="showDropdownMenu" id="folderActionsMenu"
-      :style="{top:folderActionsMenuTop, left:folderActionsMenuLeft}"
-      class="dropdown-menu" tabindex="-1" @blur="closeMenu">
-    <li :class="!selectedFolder.canRemove ? 'disabled' : ''" class="folderActionsMenuItem btn delete"
-        @click="deleteFolder()"><i class="uiIconTrash"></i>{{ $t('attachments.filesFoldersSelector.action.delete') }}
-    </li>
-    <li :class="!selectedFolder.canRemove ? 'disabled' : ''" class="folderActionsMenuItem btn rename" @click="renameFolder()"><i
-      class="uiIconEdit"></i>{{ $t('attachments.filesFoldersSelector.action.rename') }}
-    </li>
-  </ul>
-</template>
+  <v-menu
+    v-model="showDropdownMenu"
+    :position-x="folderActionsMenuLeft"
+    :position-y="folderActionsMenuTop"
+    :close-on-content-click="false"
+    absolute
+    offset-y
+  >
+    <v-list class="attachments-folder-action-menu pa-0">
+      <v-list-item :class="!selectedFolder.canRemove ? 'not-allowed' : 'clickable'" class="pa-0">
+        <v-list-item-title class="folder-actions-menu-item no-border px-3 border-bottom-color delete"
+                           @click="deleteFolder()">
+          <i class="uiIconTrash pr-2"></i>{{ $t('attachments.filesFoldersSelector.action.delete') }}
+        </v-list-item-title>
+      </v-list-item>
 
+      <v-list-item :class="!selectedFolder.canRemove ? 'not-allowed' : 'clickable'" class="pa-0">
+        <v-list-item-title class="folder-actions-menu-item no-border px-3 rename"
+                           @click="renameFolder()">
+          <i class="uiIconEdit pr-2"></i>{{ $t('attachments.filesFoldersSelector.action.rename') }}
+        </v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-menu>
+</template>
 <script>
 export default {
   props: {
@@ -41,7 +54,7 @@ export default {
     closeMenu() {
       this.$emit('closeMenu');
     },
-    renameFolder(){
+    renameFolder() {
       this.$emit('renameFolder');
     }
   }
