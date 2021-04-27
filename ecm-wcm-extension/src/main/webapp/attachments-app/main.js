@@ -22,7 +22,9 @@ if (extensionRegistry) {
 }
 
 exoi18n.loadLanguageAsync(lang, url).then(i18n => {
-  Vue.prototype.$i18n = i18n;
+  if(Vue.prototype.$i18n) {
+    Vue.prototype.$i18n = i18n;
+  }
 });
 
 const appId = 'attachmentsApp';
