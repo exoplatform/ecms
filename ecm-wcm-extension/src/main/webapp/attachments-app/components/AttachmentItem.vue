@@ -18,7 +18,7 @@
     </v-list-item-avatar>
     <v-list-item-content>
       <v-list-item-title class="uploadedFileTitle">{{ file.name }}</v-list-item-title>
-      <v-list-item-subtitle class="d-flex uploadedFileSubTitle">
+      <v-list-item-subtitle v-if="file.uploadId" class="d-flex uploadedFileSubTitle">
         <v-chip
           v-if="file.pathDestinationFolderForFile"
           close

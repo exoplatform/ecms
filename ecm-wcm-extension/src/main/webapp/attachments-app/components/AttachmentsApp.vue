@@ -1,7 +1,16 @@
 <template>
   <div id="attachmentsApp" class="attachments-application border-box-sizing transparent">
-    <div v-if="$slots.attachmentsButton" @click="openAttachmentsAppDrawer()">
-      <slot name="attachmentsButton" :attachments="attachments"></slot>
+    <div v-if="$scopedSlots.attachmentsButton || $scopedSlots.attachmentsList" class="d-flex attachmentsIntegrationSlot">
+      <div class="openAttachmentsButton me-2" @click="openAttachmentsAppDrawer()">
+        <slot name="attachmentsButton"></slot>
+      </div>
+      <div class="attachedFilesList">
+        <slot :attachments="attachments" name="attachedFilesList"></slot>
+      </div>
+    </div>
+    <div v-else>
+      <i class="uiIconAttach" @click="openAttachmentsAppDrawer()"></i>
+      <span class="ms-2">View all attachments ({{ attachments && attachments.length }})</span>
     </div>
     <attachments-drawer
       :attachments="attachments"

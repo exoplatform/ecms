@@ -262,6 +262,9 @@ export default {
   computed: {
     uploadFinished() {
       return this.attachments.some(file => !file.uploadId);
+    },
+    entityHasAttachments() {
+      return this.attachments.some(attachment => attachment.id);
     }
   },
   watch: {
@@ -741,7 +744,7 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
-      this.attachments = [];
+      this.attachments = this.entityType && this.entityId ? this.attachments : [];
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail' : {'list' : Object.values(this.uploadedFiles)}}));
       this.uploadedFiles = [];
@@ -749,7 +752,11 @@ export default {
     linkUploadedAttachmentsToEntity() {
       const attachmentIds = this.uploadedFiles.map(attachment => attachment.UUID);
       attachmentIds.push(...this.attachments.map(attachment => attachment.id).filter(id => id));
-      return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId,this.entityType, attachmentIds);
+      if (this.entityHasAttachments) {
+        return this.$attachmentsService.updateLinkedAttachmentsToEntity(this.entityId,this.entityType, attachmentIds);
+      } else {
+        return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId,this.entityType, attachmentIds);
+      }
     }
   }
 };

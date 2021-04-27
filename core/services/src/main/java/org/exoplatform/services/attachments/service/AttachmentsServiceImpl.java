@@ -6,6 +6,7 @@ import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentsContextEntity;
 import org.exoplatform.services.attachments.storage.AttachmentsStorage;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -133,7 +134,8 @@ public class AttachmentsServiceImpl implements AttachmentsService {
           Node attachmentNode = session.getNodeByUUID(attachmentId);
           Attachment attachment = new Attachment();
           attachment.setId(attachmentNode.getUUID());
-          attachment.setTitle(getStringProperty(attachmentNode, "exo:title"));
+          String attachmentsTitle = getStringProperty(attachmentNode, "exo:title");
+          attachment.setTitle(attachmentsTitle);
           attachment.setPath(attachmentNode.getPath());
           attachment.setCreated(getStringProperty(attachmentNode, "exo:dateCreated"));
           //attachment.setCreatorId(Long.parseLong(getStringProperty(attachmentNode, "exo:owner")));
@@ -147,7 +149,9 @@ public class AttachmentsServiceImpl implements AttachmentsService {
           } else {
             attachment.setUpdater(null);
           }
-          attachment.setMimetype(getStringProperty(attachmentNode, "jcr:primaryType"));
+          DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
+          String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
+          attachment.setMimetype(mimetype);
 
           boolean canRemove = true;
           try {

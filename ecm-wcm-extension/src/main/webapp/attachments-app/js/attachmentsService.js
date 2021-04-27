@@ -206,6 +206,23 @@ export function linkUploadedAttachmentsToEntity(entityId, entityType, attachment
   });
 }
 
+export function updateLinkedAttachmentsToEntity(entityId, entityType, attachmentIds) {
+  let params = {};
+  if (attachmentIds) {
+    params.attachmentIds = attachmentIds;
+  }
+  params = $.param(params, true);
+
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}?${params}`, {
+    credentials: 'include',
+    method: 'PUT',
+  }).then((resp) => {
+    if (!resp || !resp.ok) {
+      throw new Error('Error linking attachments to the entity');
+    }
+  });
+}
+
 export function getEntityAttachments(entityType, entityId) {
   return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
     credentials: 'include',
