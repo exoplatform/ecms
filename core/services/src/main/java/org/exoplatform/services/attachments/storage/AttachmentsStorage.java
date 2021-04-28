@@ -8,4 +8,5 @@ public interface AttachmentsStorage {
   AttachmentsContextEntity getAttachmentByEntity(long entityId, String entityType);
 
   void deleteEntityAttachments(AttachmentsContextEntity attachmentsContextEntity);
+
 }

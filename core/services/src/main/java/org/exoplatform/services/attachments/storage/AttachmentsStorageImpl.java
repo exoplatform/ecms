@@ -30,5 +30,4 @@ public class AttachmentsStorageImpl implements AttachmentsStorage {
   public void deleteEntityAttachments(AttachmentsContextEntity attachmentsContextEntity) {
     attachmentsDAO.delete(attachmentsContextEntity);
   }
-
 }

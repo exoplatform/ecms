@@ -6,6 +6,7 @@ package org.exoplatform.services.rest;
 import io.swagger.annotations.*;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.attachments.service.AttachmentsService;
@@ -246,10 +247,11 @@ public class AttachmentsRestService implements ResourceContainer {
 
     try {
       attachmentsService.deleteEntityAttachments(entityId, entityType);
-    } catch (Exception e) {
-      LOG.error("Error when trying to link attachments to a context: ", e);
+      return Response.noContent().build();
+    } catch (ObjectNotFoundException e) {
+      LOG.error("Error when trying to delete all attachments from entity from entity with id '{}' ", entityId, e);
+      return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
     }
-    return Response.ok().build();
   }
 
   /**
@@ -261,7 +263,7 @@ public class AttachmentsRestService implements ResourceContainer {
    * @anchor ManageDocumentService.getAttachmentsByEntity
    */
   @DELETE
-  @Path("{entityType}/{entityId}/attachmentId")
+  @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
   @ApiOperation(value = "Delete an attachment linked to the given entity", httpMethod = "DELETE", response = Response.class, consumes = "application/json", notes = "returns empty response")
@@ -271,13 +273,16 @@ public class AttachmentsRestService implements ResourceContainer {
           @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
           @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
   })
-  public Response DeleteAttachmentIdByEntity(
+  public Response DeleteEntityAttachment(
           @ApiParam(value = "Entity technical identifier", required = true) @PathParam(
                   "entityId"
           ) long entityId,
           @ApiParam(value = "Entity type", required = true) @PathParam(
                   "entityType"
-          ) String entityType
+          ) String entityType,
+          @ApiParam(value = "Attachment id", required = true) @PathParam(
+                  "attachmentId"
+          ) String attachmentId
   ) throws Exception {
 
     if (entityId <= 0) {
@@ -289,11 +294,12 @@ public class AttachmentsRestService implements ResourceContainer {
     }
 
     try {
-      attachmentsService.deleteEntityAttachments(entityId, entityType);
-    } catch (Exception e) {
-      LOG.error("Error when trying to link attachments to a context: ", e);
+      attachmentsService.deleteEntityAttachment(entityId, entityType, attachmentId);
+      return Response.noContent().build();
+    } catch (ObjectNotFoundException e) {
+      LOG.error("Error when trying to delete the attachment with id '{}' from entity with id '{}'", attachmentId, entityId, e);
+      return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
     }
-    return Response.ok().build();
   }
 
 

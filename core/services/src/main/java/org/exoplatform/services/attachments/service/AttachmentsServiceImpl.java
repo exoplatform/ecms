@@ -1,6 +1,7 @@
 package org.exoplatform.services.attachments.service;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.AttachmentsEntityType;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.model.Attachment;
@@ -90,7 +91,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
   }
 
   @Override
-  public void deleteEntityAttachments(long entityId, String entityType) {
+  public void deleteEntityAttachments(long entityId, String entityType) throws ObjectNotFoundException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -102,10 +103,30 @@ public class AttachmentsServiceImpl implements AttachmentsService {
     AttachmentsContextEntity attachmentsContextEntity = attachmentsStorage.getAttachmentByEntity(entityId, entityType);
 
     if (attachmentsContextEntity == null) {
-      throw new IllegalArgumentException("Entity with id " + entityId + " and type" + entityType + " not found");
+      throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " not found");
     }
 
     attachmentsStorage.deleteEntityAttachments(attachmentsContextEntity);
+  }
+
+  @Override
+  public void deleteEntityAttachment(long entityId, String entityType, String attachmentId) throws ObjectNotFoundException {
+    if (entityId <= 0) {
+      throw new IllegalArgumentException("Entity Id must be positive");
+    }
+
+    if (entityType == null) {
+      throw new IllegalArgumentException("Entity type is mandatory");
+    }
+
+    AttachmentsContextEntity attachmentsContextEntity = attachmentsStorage.getAttachmentByEntity(entityId, entityType);
+    if (attachmentsContextEntity == null) {
+      throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " not found");
+    }
+
+    List<String> attachmentsIds = new ArrayList<>(Arrays.asList(attachmentsContextEntity.getAttachmentIds().split(",")));
+    attachmentsIds.remove(attachmentId);
+    updateEntityAttachments(entityId, entityType, attachmentsIds);
   }
 
   @Override

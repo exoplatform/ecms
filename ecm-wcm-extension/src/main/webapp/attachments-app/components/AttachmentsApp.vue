@@ -4,13 +4,13 @@
       <div class="openAttachmentsButton me-2" @click="openAttachmentsAppDrawer()">
         <slot name="attachmentsButton"></slot>
       </div>
-      <div class="attachedFilesList">
+      <div class="attachedFilesList" @click="openAttachmentsDrawerList()">
         <slot :attachments="attachments" name="attachedFilesList"></slot>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="entityId && entityType">
       <i class="uiIconAttach" @click="openAttachmentsAppDrawer()"></i>
-      <span class="ms-2">View all attachments ({{ attachments && attachments.length }})</span>
+      <a class="ms-2">View all attachments ({{ attachments && attachments.length }})</a>
     </div>
     <attachments-drawer
       :attachments="attachments"
