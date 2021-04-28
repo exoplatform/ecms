@@ -17,16 +17,21 @@
         <slot :attachments="attachments" name="attachedFilesList"></slot>
       </div>
       <div v-else-if="entityId && entityType">
-        <a class="ms-2" @click="openAttachmentsDrawerList()">View all attachments ({{ attachments && attachments.length }})</a>
-        <v-list v-if="!$scopedSlots.attachmentsList" dense>
-          <v-list-item-group>
-            <attachment-item
-              v-for="(attachment, i) in attachments.slice(0, 2)"
-              :key="i"
-              :file="attachment"
-              :allow-to-remove="false"/>
-          </v-list-item-group>
-        </v-list>
+        <div v-if="attachments.length" class="attachmentsList">
+          <a class="ms-2" @click="openAttachmentsDrawerList()">{{ $t('attachments.view.all') }} ({{ attachments && attachments.length }})</a>
+          <v-list v-if="!$scopedSlots.attachmentsList" dense>
+            <v-list-item-group>
+              <attachment-item
+                v-for="attachment in attachments.slice(0, 2)"
+                :key="attachment.id"
+                :file="attachment"
+                :allow-to-remove="false"/>
+            </v-list-item-group>
+          </v-list>
+        </div>
+        <div v-else class="emptyList">
+          <span class="noAttachementLabel">{{ $t('attachments.list.empty') }}</span>
+        </div>
       </div>
     </div>
 
@@ -77,6 +82,7 @@ export default {
     if (this.entityType && this.entityId) {
       this.initEntityAttachmentsList();
     }
+    this.$root.$on('entity-attachments-updated', () => this.initEntityAttachmentsList());
   },
   methods: {
     openAttachmentsAppDrawer() {
