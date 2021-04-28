@@ -10,12 +10,10 @@ import org.exoplatform.services.attachments.storage.AttachmentsStorage;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -159,7 +157,6 @@ public class AttachmentsServiceImpl implements AttachmentsService {
           attachment.setTitle(attachmentsTitle);
           attachment.setPath(attachmentNode.getPath());
           attachment.setCreated(getStringProperty(attachmentNode, "exo:dateCreated"));
-          //attachment.setCreatorId(Long.parseLong(getStringProperty(attachmentNode, "exo:owner")));
           if (attachmentNode.hasProperty("exo:dateModified")) {
             attachment.setUpdated(getStringProperty(attachmentNode, "exo:dateModified"));
           } else {

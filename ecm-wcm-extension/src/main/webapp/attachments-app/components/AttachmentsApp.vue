@@ -1,17 +1,35 @@
 <template>
   <div id="attachmentsApp" class="attachments-application border-box-sizing transparent">
-    <div v-if="$scopedSlots.attachmentsButton || $scopedSlots.attachmentsList" class="d-flex attachmentsIntegrationSlot">
-      <div class="openAttachmentsButton me-2" @click="openAttachmentsAppDrawer()">
+    <div class="d-flex attachmentsIntegrationSlot">
+      <div v-if="$scopedSlots.attachmentsButton" class="openAttachmentsButton me-2" @click="openAttachmentsAppDrawer()">
         <slot name="attachmentsButton"></slot>
       </div>
-      <div class="attachedFilesList" @click="openAttachmentsDrawerList()">
+      <v-btn
+        v-else-if="entityId && entityType"
+        class="pb-4"
+        icon
+        color="grey"
+        @click="openAttachmentsAppDrawer()"
+      >
+        <i class="uiIconAttach" ></i>
+      </v-btn>
+      <div v-if="$scopedSlots.attachmentsList" class="attachedFilesList" @click="openAttachmentsDrawerList()">
         <slot :attachments="attachments" name="attachedFilesList"></slot>
       </div>
+      <div v-else-if="entityId && entityType">
+        <a class="ms-2" @click="openAttachmentsDrawerList()">View all attachments ({{ attachments && attachments.length }})</a>
+        <v-list v-if="!$scopedSlots.attachmentsList" dense>
+          <v-list-item-group>
+            <attachment-item
+              v-for="(attachment, i) in attachments.slice(0, 2)"
+              :key="i"
+              :file="attachment"
+              :allow-to-remove="false"/>
+          </v-list-item-group>
+        </v-list>
+      </div>
     </div>
-    <div v-else-if="entityId && entityType">
-      <i class="uiIconAttach" @click="openAttachmentsAppDrawer()"></i>
-      <a class="ms-2">View all attachments ({{ attachments && attachments.length }})</a>
-    </div>
+
     <attachments-drawer
       :attachments="attachments"
       :entity-id="entityId"
@@ -19,6 +37,8 @@
       :default-drive="defaultDrive"
       :default-folder="defaultFolder"
     />
+    <attachments-list-drawer
+      :attachments="attachments"/>
     <attachments-notification-alerts style="z-index:1035;"/>
   </div>
 </template>
@@ -100,6 +120,9 @@ export default {
       if (urlParams.has(paramName)) {
         return urlParams.get(paramName);
       }
+    },
+    openAttachmentsDrawerList() {
+      this.$root.$emit('open-attachments-list-drawer');
     }
   }
 };

@@ -37,7 +37,7 @@
     </v-list-item-content>
     <v-list-item-action>
       <v-btn
-        v-if="file.uploadProgress && file.uploadProgress !== 100"
+        v-if="file.uploadProgress && file.uploadProgress !== 100 && allowToRemove"
         class="d-flex flex-column pb-3 pa-0 align-end"
         outlined
         height="18"
@@ -46,7 +46,7 @@
         <i class="uiIconCloseCircled error--text"></i>
       </v-btn>
       <v-btn
-        v-else
+        v-else-if="allowToRemove"
         class="d-flex flex-column pb-3 pa-0 align-end"
         outlined
         height="24"
@@ -63,6 +63,10 @@ export default {
     file: {
       type: Object,
       default: () => null
+    },
+    allowToRemove: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
