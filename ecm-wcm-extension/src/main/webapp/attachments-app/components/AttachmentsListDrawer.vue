@@ -24,15 +24,22 @@
 
     </template>
     <template slot="content">
-      <v-list v-if="!$scopedSlots.attachmentsList" dense>
+      <v-list v-if="attachments.length" dense>
         <v-list-item-group>
           <attachment-item
-            v-for="(attachment, i) in attachments"
-            :key="i"
+            v-for="attachment in attachments"
+            :key="attachment.id"
             :file="attachment">
           </attachment-item>
         </v-list-item-group>
       </v-list>
+      <div v-else class="no-files-attached d-flex flex-column align-center text-sub-title">
+        <div class="d-flex pl-6 not-files-icon">
+          <i class="uiIconAttach uiIcon64x64"></i>
+          <i class="uiIconCloseCircled uiIcon32x32"></i>
+        </div>
+        <span>{{ $t('no.attachments') }}</span>
+      </div>
     </template>
     <template slot="header"></template>
   </exo-drawer>

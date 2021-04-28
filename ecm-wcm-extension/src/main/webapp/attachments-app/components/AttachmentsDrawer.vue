@@ -570,8 +570,9 @@ export default {
       } else {
         this.$refs.attachmentsAppDrawer.startLoading();
         this.$attachmentsService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
-          this.attachments = this.attachments.filter(attachedFile => attachedFile.id !== file.id);
           this.$refs.attachmentsAppDrawer.endLoading();
+          this.attachments = this.attachments.filter(attachedFile => attachedFile.id !== file.id);
+          this.$root.$emit('entity-attachments-updated');
         });
       }
     },
@@ -765,9 +766,13 @@ export default {
       const attachmentIds = this.uploadedFiles.map(attachment => attachment.UUID);
       attachmentIds.push(...this.attachments.map(attachment => attachment.id).filter(id => id));
       if (this.entityHasAttachments) {
-        return this.$attachmentsService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds);
+        return this.$attachmentsService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(()=> {
+          this.$root.$emit('entity-attachments-updated');
+        });
       } else {
-        return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds);
+        return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(()=> {
+          this.$root.$emit('entity-attachments-updated');
+        });
       }
     }
   }
