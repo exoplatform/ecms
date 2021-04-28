@@ -1,5 +1,6 @@
 package org.exoplatform.services.attachments.service;
 
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
 
 import java.util.List;
@@ -12,5 +13,7 @@ public interface AttachmentsService {
 
   void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds);
 
-  void deleteEntityAttachments(long entityId, String entityType);
+  void deleteEntityAttachments(long entityId, String entityType) throws ObjectNotFoundException;
+
+  void deleteEntityAttachment(long entityId, String entityType, String attachmentId) throws ObjectNotFoundException;
 }
