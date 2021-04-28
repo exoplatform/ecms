@@ -48,6 +48,28 @@
         </values-param>
       </init-params>
     </component-plugin>
+    <component-plugin>
+      <!-- The name of the plugin -->
+      <name>Documents ResourceBundle Plugin</name>
+      <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
+      <set-method>addResourceBundle</set-method>
+      <!-- The full qualified name of the BaseResourceBundlePlugin -->
+      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+      <init-params>
+        <values-param>
+          <name>init.resources</name>
+          <description>Store the following resources into the db for the first launch</description>
+          <value>locale.documents.documents</value>
+        </values-param>
+        <values-param>
+          <name>portal.resource.names</name>
+          <description>The properties files of the portal , those file will be merged
+            into one Resource Bundle properties
+          </description>
+          <value>locale.documents.documents</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>
