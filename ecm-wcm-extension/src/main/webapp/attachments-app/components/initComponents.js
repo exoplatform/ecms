@@ -6,6 +6,7 @@ import AttachmentsApp from './AttachmentsApp.vue';
 import AttachmentsFileItem from './AttachmentsFileItem.vue';
 import AttachmentsNotificationAlert from './snackbar/AttachmentsNotificationAlert.vue';
 import AttachmentsNotificationAlerts from './snackbar/AttachmentsNotificationAlerts.vue';
+import AttachmentsListDrawer from './AttachmentsListDrawer.vue';
 
 Vue.component('attachments-drawer', AttachmentsDrawer);
 Vue.component('attachments-app', AttachmentsApp);
@@ -15,6 +16,7 @@ Vue.component('exo-dropdown-menu', ExoDropdownMenu);
 Vue.component('attachments-file-item', AttachmentsFileItem);
 Vue.component('attachments-notification-alert', AttachmentsNotificationAlert);
 Vue.component('attachments-notification-alerts', AttachmentsNotificationAlerts);
+Vue.component('attachments-list-drawer', AttachmentsListDrawer);
 
 import * as attachmentsService from '../js/attachmentsService.js';
 
