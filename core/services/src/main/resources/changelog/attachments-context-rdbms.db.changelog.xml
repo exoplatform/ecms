@@ -37,11 +37,18 @@
       </column>
       <column name="ATTACHMENT_IDS" type="NVARCHAR(1000)"/>
       <column name="ENTITY_ID" type="BIGINT" />
-      <column name="ENTITY_TYPE" type="NVARCHAR(35)" />
+      <column name="ENTITY_TYPE" type="BIGINT" />
     </createTable>
     <modifySql dbms="mysql">
       <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci" />
     </modifySql>
+  </changeSet>
+
+  <changeSet author="exo-gamification" id="1.0.0-2">
+    <modifyDataType tableName="EXO_ATTACHMENTS_CONTEXT"
+                    columnName="ENTITY_TYPE"
+                    newDataType="BIGINT"
+    />
   </changeSet>
 
 </databaseChangeLog>
