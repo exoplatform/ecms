@@ -13,7 +13,7 @@
       <v-row>
         <v-col xs12>
           <v-simple-table :dense="true" class="uiGrid table table-hover table-striped providersTable">
-            <template v-slot:default>
+            <template #default>
               <thead>
                 <tr class="providersTableRow">
                   <th class="text-left" style="width: 27%">{{ $t("cloudStorage.label.provider") }}</th>
@@ -38,7 +38,7 @@
                         :ripple="false"
                         color="#568dc9"
                         class="providersSwitcher"
-                        @change="setCloudDriveStatus()"/>
+                        @change="setCloudDriveStatus()" />
                     </div>
                   </td>
                 </tr>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { isCloudDriveEnabled } from "../js/cloudDriveService";
+import { isCloudDriveEnabled } from '../js/cloudDriveService';
 
 export default {
   data: function() {
@@ -62,15 +62,15 @@ export default {
   },
   created() {
     isCloudDriveEnabled().then(data => {
-      this.status = data.result === "true";
+      this.status = data.result === 'true';
     });
   },
   methods: {
     setCloudDriveStatus() {
       try {
         fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/features/status/enabled`, {
-          method: "PATCH",
-          credentials: "include",
+          method: 'PATCH',
+          credentials: 'include',
         })
           .then(resp => resp && resp.ok && resp.json());
       } catch (err) {

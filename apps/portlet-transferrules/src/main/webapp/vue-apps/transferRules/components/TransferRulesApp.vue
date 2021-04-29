@@ -23,7 +23,7 @@
           <v-list-item-action>
             <v-switch
               v-model="active"
-              @change="save"/>
+              @change="save" />
           </v-list-item-action>
         </v-list-item>
       </v-list>

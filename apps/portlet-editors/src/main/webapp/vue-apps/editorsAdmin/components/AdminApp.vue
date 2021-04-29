@@ -5,7 +5,10 @@
         {{ i18n.te(`${errorResourceBase}.${error}`) ? $t(`${errorResourceBase}.${error}`) : error }}
       </div>
       <v-row>
-        <v-col xs12 px-3 class="pb-0">
+        <v-col
+          xs12
+          px-3
+          class="pb-0">
           <h3 class="editorsTitle">
             <span class="me-3">
               {{ $t("editors.admin.title") }}
@@ -16,7 +19,7 @@
       <v-row>
         <v-col xs12>
           <v-simple-table :dense="true" class="uiGrid table table-hover table-striped providersTable">
-            <template v-slot:default>
+            <template #default>
               <thead>
                 <tr class="providersTableRow">
                   <th class="text-start">{{ $t("editors.admin.table.Provider") }}</th>
@@ -74,8 +77,8 @@
 </template>
 
 <script>
-import { postData, getData } from "../EditorsAdminAPI";
-import EditDialog from "./EditDialog.vue";
+import { postData, getData } from '../EditorsAdminAPI';
+import EditDialog from './EditDialog.vue';
 
 export default {
   components: {
@@ -134,7 +137,7 @@ export default {
     async changeActive(provider) {
       // getting rest for updating provider status
       try {
-        const data = await postData(provider.links.self.href, { active: !provider.active });
+        await postData(provider.links.self.href, { active: !provider.active });
         this.error = null;
         this.providers.map(p => {
           if (p.provider === provider.provider) {

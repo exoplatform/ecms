@@ -1,12 +1,12 @@
-import ConnectCloudDrive from "./components/ConnectCloudDrive.vue";
+import ConnectCloudDrive from './components/ConnectCloudDrive.vue';
 
 Vue.use(Vuetify);
-Vue.component("connect-cloud-drive", ConnectCloudDrive);
+Vue.component('ConnectCloudDrive', ConnectCloudDrive);
 
 const vuetify = new Vuetify(eXo.env.portal.vuetifyPreset);
 
 // getting language of the PLF
-const lang = typeof eXo !== "undefined" ? eXo.env.portal.language : "en";
+const lang = typeof eXo !== 'undefined' ? eXo.env.portal.language : 'en';
 
 // should expose the locale resources as REST API
 const url = `/portal/rest/i18n/bundle/locale.clouddrive.CloudDrive-${lang}.json`;
@@ -20,5 +20,5 @@ exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     },
     i18n,
     vuetify
-  }).$mount("#connectCloudApp");
+  }).$mount('#connectCloudApp');
 });
