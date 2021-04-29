@@ -1,14 +1,14 @@
 function getDocuments(url) {
   return fetch(url, {
     method: 'GET',
-	credentials: 'include',
+    credentials: 'include',
   }).then((resp) => {
-    if(resp && resp.ok) {
+    if (resp && resp.ok) {
       return resp.json();
-	} else {
-      throw new Error (`Error when getting documents`);
-	}
-  })
+    } else {
+      throw new Error ('Error when getting documents');
+    }
+  });
 }
 
 export function getDocumentsByQuery(query, limit) {

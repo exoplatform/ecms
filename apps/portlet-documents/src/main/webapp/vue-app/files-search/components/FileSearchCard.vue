@@ -54,9 +54,6 @@ export default {
     },
   },
   mounted() {
-    if (this.result && this.excerptTitle) {
-      this.result.title = this.excerptTitle;
-    }
     this.computeEllipsis();
   },
   methods: {
@@ -101,7 +98,7 @@ export default {
         newHtml = html.replace(new RegExp(`([^>]{${charsToDelete}})(</)([a-zA-Z 0-9]*)(>)$`), '$2$3');
         newHtml = $('<div />').html(newHtml).html().replace(/&[a-z]*;/, '');
         if (newHtml.length === html.length) {
-          newHtml = html.replace(new RegExp(`([^>]*)(</)([a-zA-Z 0-9]*)(>)$`), '$2$3');
+          newHtml = html.replace(new RegExp('([^>]*)(</)([a-zA-Z 0-9]*)(>)$'), '$2$3');
         }
       } else {
         newHtml = html.substring(0, html.trimRight().length - charsToDelete);

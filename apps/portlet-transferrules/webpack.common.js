@@ -1,5 +1,4 @@
 const path = require("path");
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 let config = {
   context: path.resolve(__dirname, "."),
