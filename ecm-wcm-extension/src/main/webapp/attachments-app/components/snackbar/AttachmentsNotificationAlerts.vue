@@ -3,8 +3,8 @@
     :value="displayAlerts"
     color="transparent"
     elevation="0"
-    fixed
-    app
+    absolute
+    bottom
     left>
     <attachments-notification-alert
       v-for="alert in alerts"

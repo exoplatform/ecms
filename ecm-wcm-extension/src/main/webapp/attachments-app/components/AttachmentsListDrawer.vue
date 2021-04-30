@@ -16,10 +16,10 @@
       </div>
       <v-btn
         icon
-        color="grey"
+        color="primary"
         @click="openAttachmentsAppDrawer()"
       >
-        <i class="uiIconAttach" ></i>
+        <v-icon size="16">fa-plus</v-icon>
       </v-btn>
 
     </template>

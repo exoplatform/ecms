@@ -14,13 +14,13 @@
     </div>
     <div v-if="attachments.length > 0" class="destinationFolder d-flex justify-space-between mb-4 ms-5">
       <div v-if="!displayMessageDestinationFolder && schemaFolder.length" class="destinationFolderBreadcrumb d-flex">
-        <div :title="schemaFolder[0]" class="drive" rel="tooltip" data-placement="top">
+        <div :title="schemaFolder[0]" class="drive text-sub-title" rel="tooltip" data-placement="top">
           {{ schemaFolder[0] }}
         </div>
         <div class="folderLocation">
           <div v-if="schemaFolder.length > 1" class="folder">
             <div><span class="uiIconArrowRight colorIcon"></span></div>
-            <div :title="schemaFolder[1]" :class="schemaFolder.length === 2 ? 'active' : '' " class="folderName"
+            <div :title="schemaFolder[1]" :class="schemaFolder.length === 2 ? 'active' : 'text-sub-title' " class="folderName"
                  rel="tooltip" data-placement="top">{{ schemaFolder[1] }}
             </div>
           </div>
@@ -46,8 +46,12 @@
         </div>
       </div>
       <div v-if="displayMessageDestinationFolder" class="messageDestination">
-        <p :title="$t('attachments.drawer.destination.attachment.message')" rel="tooltip" data-placement="top">
-          {{ $t('attachments.drawer.destination.attachment.message') }}</p>
+        <span
+          :title="$t('attachments.drawer.destination.attachment.message')"
+          class="text-sub-title"
+          rel="tooltip"
+          data-placement="top">
+          {{ $t('attachments.drawer.destination.attachment.message') }}</span>
       </div>
       <button :disabled="displayMessageDestinationFolder" class="buttonSelect d-flex pl-1 flex-column-reverse"
               @click="openSelectDestinationFolderDrawer()">

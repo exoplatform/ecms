@@ -90,7 +90,7 @@
     }
   }
 
-  .attachmentsAppDrawer {
+.attachmentsAppDrawer {
   .drawerContent {
     .uploadedFiles {
       .no-files-attached {
@@ -107,6 +107,10 @@
           color: @greyColorDefault !important;
         }
       }
+    }
+    .dropFileBox {
+      border-radius: 5px;
+      border: 3px dashed #a8b3c5;
     }
 
     .connectCloudDriveAction {
@@ -858,3 +862,31 @@
     }
   }
 }
+
+//No files Icon
+.no-files-attached {
+  .uiIconCloseCircled {
+    color: @greyColorDefault !important;
+    background-color: white;
+    border-radius: 50%;
+    height: 100%;
+    left: -36px;
+    top: 31px;
+  }
+
+  .uiIconAttach {
+    color: @greyColorDefault !important;
+  }
+}
+
+.make-icons-size(@size: 60, @decrement: 4) when (@size > 0) {
+  .make-icons-size(@size - @decrement);
+
+  @size-px: ~"@{size}px !important";
+
+  .uiIcon@{size}x@{size} {
+    font-size: @size-px;
+  }
+}
+
+.make-icons-size();
