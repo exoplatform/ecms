@@ -5,7 +5,7 @@
     width="500" 
     style="overflow-x: hidden"
     @click:outside="showDialog = false">
-    <template v-slot:activator="{ on }">
+    <template #activator="{ on }">
       <a 
         data-placement="bottom" 
         rel="tooltip" 
@@ -19,7 +19,7 @@
     <v-card class="provider uiPopup">
       <div v-show="error" class="alert alert-error">{{ $t(error) }}</div>
       <v-card-title class="headline popupHeader justify-space-between providerHeader mb-0">
-        <span class="PopupTitle popupTitle providerHeaderTitle">{{ this.$t("editors.admin.modal.title") }}</span>
+        <span class="PopupTitle popupTitle providerHeaderTitle">{{ $t("editors.admin.modal.title") }}</span>
         <i class="uiIconClose providerHeaderClose" @click="closeDialog"></i>
       </v-card-title>
       <v-card-text class="popupContent providerContent pa-4">
@@ -29,7 +29,7 @@
           </v-row>
           <v-row class="search">
             <v-col>
-              <label class="searchLabel">{{ this.$t("editors.admin.modal.SearchLabel") }}</label>
+              <label class="searchLabel">{{ $t("editors.admin.modal.SearchLabel") }}</label>
               <v-autocomplete
                 v-model="selectedItems"
                 :loading="searchLoading"
@@ -70,7 +70,7 @@
                   class="permissionsItem">
                   <v-list-tile-avatar><img :src="item.avatarUrl" class="permissionsItemAvatar"></v-list-tile-avatar>
                   <v-list-tile-content class="permissionsItemName">
-                    <v-list-tile-title v-html="parent.genFilteredText(item.displayName)" />
+                    <v-list-tile-title v-sanitized-html="parent.genFilteredText(item.displayName)" />
                   </v-list-tile-content>
                 </template>
               </v-autocomplete>
@@ -79,7 +79,7 @@
           <v-row>
             <v-col class="permissionsContainer">
               <div class="d-flex justify-space-between">
-                <label class="searchLabel ma-0">{{ this.$t("editors.admin.modal.WithPermissions") }}</label>
+                <label class="searchLabel ma-0">{{ $t("editors.admin.modal.WithPermissions") }}</label>
                 <div class="d-flex align-center">
                   <v-checkbox
                     v-model="accessibleToAll"
@@ -88,7 +88,7 @@
                     dense
                     class="ma-0"
                     data-test="everybodyCheckbox" />
-                  <label style="color: #333">{{ this.$t("editors.admin.modal.Everybody") }}</label>
+                  <label style="color: #333">{{ $t("editors.admin.modal.Everybody") }}</label>
                 </div>
               </div>
               <v-row v-if="!accessibleToAll">
@@ -102,7 +102,7 @@
                         'permissionsItem--large',
                         permission.className === 'removed' ? 'permissionsItem--removed' : '']">
                       <v-tooltip bottom>
-                        <template v-slot:activator="{ on }">
+                        <template #activator="{ on }">
                           <div v-on="on">
                             <img :src="permission.avatarUrl" class="permissionsItemAvatar permissionsItemAvatar--large">
                             <span class="permissionsItemName">{{ permission.displayName }}</span>
@@ -122,7 +122,7 @@
                   v-else 
                   cols="12" 
                   md="8">
-                  <label>{{ this.$t("editors.admin.modal.None") }}</label>
+                  <label>{{ $t("editors.admin.modal.None") }}</label>
                 </v-col>
               </v-row>
             </v-col>
@@ -135,14 +135,14 @@
           text 
           data-test="saveButton" 
           @click.native="saveChanges">
-          {{ this.$t("editors.admin.buttons.Save") }}
+          {{ $t("editors.admin.buttons.Save") }}
         </v-btn>
         <v-btn 
           class="btn dialogFooterBtn" 
           text 
           data-test="cancelButton" 
           @click.native="closeDialog">
-          {{ this.$t("editors.admin.buttons.Cancel") }}
+          {{ $t("editors.admin.buttons.Cancel") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -150,7 +150,7 @@
 </template>
 
 <script>
-import { postData, getData } from "../EditorsAdminAPI";
+import { postData, getData } from '../EditorsAdminAPI';
 
 export default {
   props: {
@@ -192,10 +192,10 @@ export default {
       if (val) {
         try {
           const data = await getData(this.providerLink);
-          this.accessibleToAll = data.permissions.some(({ id }) => id === "*");
+          this.accessibleToAll = data.permissions.some(({ id }) => id === '*');
           this.existingPermissions = data.permissions
             .filter(({ displayName }) => displayName !== null)
-            .map(obj => ({ ...obj, className: "" }));
+            .map(obj => ({ ...obj, className: '' }));
         } catch (err) {
           this.error = err.message;
         }
@@ -209,7 +209,7 @@ export default {
       try {
         const data = await getData(`${this.searchUrl}/${v}`);
         this.searchResults = data.identities.filter(
-          ({ displayName }) => (displayName || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1
+          ({ displayName }) => (displayName || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
         ).filter(el => !this.existingPermissions.map(item => item.id).includes(el.id));
         this.searchLoading = false;
       } catch (err) {
@@ -227,10 +227,10 @@ export default {
       }
       // form array with permission names before sending request
       const newPermissions = this.accessibleToAll 
-        ? [{ id: "*" }] 
+        ? [{ id: '*' }] 
         : editedPermissions.filter(({ id }) => id.length > 0).map(({ id }) => ({ id: id}));
       try {
-        const data = await postData(this.providerLink, { permissions: newPermissions });
+        await postData(this.providerLink, { permissions: newPermissions });
         this.error = null;
         // saving new permissions before closing
         this.closeDialog();
@@ -247,13 +247,13 @@ export default {
     // removing permission from list and also from selection
     removePermission(item) {
       this.permissionChanges.push(item);
-      item.className = "removed";
+      item.className = 'removed';
       if (this.selectedItems) {
         this.selectedItems = this.selectedItems.filter(({ id }) => id !== item.id);
       }
     },
     selectionChange(selection) {
-      this.search = "";
+      this.search = '';
       // if everyone permission enabled, it will be automatically disabled in case of some another permission selected
       if (selection.length > 0 && this.accessibleToAll) {
         this.accessibleToAll = false;

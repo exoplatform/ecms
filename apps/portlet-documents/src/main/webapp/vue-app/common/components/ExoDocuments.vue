@@ -5,18 +5,18 @@
         <exo-document
           v-for="(document,i) in documents"
           :key="i"
-          :document="document"/>
+          :document="document" />
       </v-list-item-group>
     </v-list>
   </v-flex>
 </template>
 <script>
-  export default {
-    props: {
-      documents: {
-        type: Array,
-        default: () => [],
-      }
+export default {
+  props: {
+    documents: {
+      type: Array,
+      default: () => [],
     }
   }
+};
 </script>

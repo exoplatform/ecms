@@ -5,6 +5,7 @@
   <module>
     <name>editorbuttons</name>
     <script>
+      <minify>false</minify>
       <path>/javascript/editor-buttons.js</path>
     </script>
     <depends>
@@ -18,6 +19,7 @@
   <module>
     <name>editorsupport</name>
     <script>
+      <minify>false</minify>
       <path>/javascript/editor-support.js</path>
     </script>
     <depends>
@@ -31,6 +33,7 @@
   <module>
     <name>editorsadmin</name>
     <script>
+      <minify>false</minify>
       <path>/javascript/editorsAdmin.bundle.js</path>
     </script>
     <depends>
