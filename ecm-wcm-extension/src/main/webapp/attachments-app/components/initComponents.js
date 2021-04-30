@@ -15,7 +15,7 @@ Vue.component('attachments-app', AttachmentsApp);
 Vue.component('attachment-item', AttachmentItem);
 Vue.component('attachments-drive-explorer-drawer', AttachmentsDriveExplorerDrawer);
 Vue.component('attachments-drive-explorer-file-item', AttachmentsDriveExplorerFileItem);
-Vue.component('Attachments-folder-actions-menu.vue', AttachmentsFolderActionsMenu);
+Vue.component('attachments-folder-actions-menu', AttachmentsFolderActionsMenu);
 Vue.component('attachments-notification-alert', AttachmentsNotificationAlert);
 Vue.component('attachments-notification-alerts', AttachmentsNotificationAlerts);
 Vue.component('attachments-list-drawer', AttachmentsListDrawer);

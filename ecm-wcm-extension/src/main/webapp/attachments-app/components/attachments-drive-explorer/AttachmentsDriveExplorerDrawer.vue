@@ -121,12 +121,14 @@
                 </a>
               </div>
             </div>
-            <exo-dropdown-menu ref="folderActionsMenu" :folder-actions-menu-left="folderActionsMenuLeft"
-                               :folder-actions-menu-top="folderActionsMenuTop"
-                               :show-dropdown-menu="showFolderActionsMenu"
-                               :selected-folder="selectedFolder" @renameFolder="renameFolder()"
-                               @deleteFolder="deleteFolder"
-                               @closeMenu="closeFolderActionsMenu"></exo-dropdown-menu>
+            <attachments-folder-actions-menu
+              ref="folderActionsMenu"
+              :folder-actions-menu-left="folderActionsMenuLeft"
+              :folder-actions-menu-top="folderActionsMenuTop"
+              :show-dropdown-menu="showFolderActionsMenu"
+              :selected-folder="selectedFolder" @renameFolder="renameFolder()"
+              @deleteFolder="deleteFolder"
+              @closeMenu="closeFolderActionsMenu"></attachments-folder-actions-menu>
             <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder">
               <i class="uiIconEmptyFolder"></i>
               <p>{{ $t('attachments.drawer.destination.folder.empty') }}</p>

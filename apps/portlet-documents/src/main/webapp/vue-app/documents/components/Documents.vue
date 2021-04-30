@@ -113,14 +113,16 @@ export default {
       const cachedDocuments = this.getCachedDocuments();
       if (cachedDocuments && cachedDocuments.length) {
         cachedDocuments.forEach(cachedDocument => {
-          if (!cachedDocument.timestamp || (Date.now() - cachedDocument.timestamp) > this.twoMinInMS) {
+          const docExistInESDocs = this.documents.some(doc => (doc.id || doc.UUID) === cachedDocument.id);
+          if (!cachedDocument.timestamp || (Date.now() - cachedDocument.timestamp) > this.twoMinInMS && docExistInESDocs) {
             this.removeDocumentFromCache(cachedDocument.id);
-          } else if (this.documents.some(doc => (doc.id || doc.UUID) === cachedDocument.id)) {
+          } else if (docExistInESDocs) {
             this.removeDocumentFromCache(cachedDocument.id);
           } else {
             this.cachedDocuments.push(cachedDocument);
           }
         });
+        this.cachedDocuments.sort((doc1, doc2) => doc2.date - doc1.date);
       }
     },
     cacheRecentUploadedDocuments(newlyUploadedDocuments) {
