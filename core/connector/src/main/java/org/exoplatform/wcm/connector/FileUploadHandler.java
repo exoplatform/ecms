@@ -29,6 +29,7 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -46,6 +47,7 @@ import org.w3c.dom.Element;
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
@@ -563,8 +565,20 @@ public class FileUploadHandler {
     Document doc = builder.newDocument();
     Element rootElement = doc.createElement("file");
 
-    LinkedHashMap<String, String> previewBreadcrumb;
-    previewBreadcrumb = documentService.getFilePreviewBreadCrumb(file);
+    LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
+    ExtendedSession session = null;
+    try {
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
+      Node node = session.getNodeByIdentifier(file.getUUID());
+      previewBreadcrumb = documentService.getFilePreviewBreadCrumb(node);
+    } catch (Exception e ) {
+      LOG.error("Error while getting file node " + file.getUUID(), e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+
     String downloadUrl = getDownloadUrl(workspaceName, file.getPath());
     String url = getUrl(file.getPath());
     String lastEditor = getStringProperty(file, "exo:lastModifier");
