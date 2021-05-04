@@ -1,16 +1,16 @@
 <template>
-  <div id="attachmentsApp" class="attachments-application border-box-sizing transparent">
+  <div id="attachmentsApp" :class="entityType && entityId ? 'v-card__text pl-0' : ''" class="attachments-application border-box-sizing transparent">
     <div class="d-flex attachmentsIntegrationSlot">
       <div v-if="$scopedSlots.attachmentsButton" class="openAttachmentsButton me-2" @click="openAttachmentsAppDrawer()">
         <slot name="attachmentsButton"></slot>
       </div>
-      <div v-else-if="entityId && entityType" :class="!attachmentsToDisplay.length ? 'd-flex align-center' : ''">
+      <div v-else-if="entityId && entityType" :class="!attachmentsToDisplay.length ? 'v-main align-center' : ''">
         <v-icon size="18" color="primary">fa-paperclip</v-icon>
         <div
           v-if="!attachmentsToDisplay.length"
-          class="addAttachments d-flex align-center"
+          class="addAttachments d-flex align-center ms-4"
           @click="openAttachmentsAppDrawer()">
-          <a class="ms-4 addAttachementLabel">{{ $t('attachments.add') }}</a>
+          <a class="addAttachementLabel primary--text font-weight-bold text-decoration-underline">{{ $t('attachments.add') }}</a>
           <v-btn
             icon
             color="primary"
@@ -22,9 +22,11 @@
       <div v-if="$scopedSlots.attachmentsList" class="attachedFilesList" @click="openAttachmentsDrawerList()">
         <slot :attachments="attachmentsToDisplay" name="attachedFilesList"></slot>
       </div>
-      <div v-else-if="entityId && entityType">
+      <div v-else-if="entityId && entityType" class="attachmentsPreview v-card__text ms-4 pa-0">
         <div v-if="attachmentsToDisplay.length" class="attachmentsList">
-          <a class="ms-2" @click="openAttachmentsDrawerList()">{{ $t('attachments.view.all') }} ({{ attachmentsToDisplay && attachmentsToDisplay.length }})</a>
+          <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentsDrawerList()">
+            {{ $t('attachments.view.all') }} ({{ attachmentsToDisplay && attachmentsToDisplay.length }})
+          </a>
           <v-list v-if="!$scopedSlots.attachmentsList" dense>
             <v-list-item-group>
               <attachment-item
@@ -85,11 +87,24 @@ export default {
       return this.attachments.filter(attachment => attachment.id);
     }
   },
-  created() {
-    this.initDefaultDrive();
-    if (this.entityType && this.entityId) {
+  watch: {
+    spaceId() {
+      this.initDefaultDrive();
+    },
+    entityType() {
+      this.initDefaultDrive();
       this.initEntityAttachmentsList();
+    },
+    entityId() {
+      this.initDefaultDrive();
+      this.initEntityAttachmentsList();
+    },
+  },
+  created() {
+    if (!this.defaultDrive) {
+      this.initDefaultDrive();
     }
+    this.initEntityAttachmentsList();
     this.$root.$on('entity-attachments-updated', () => this.initEntityAttachmentsList());
   },
   methods: {
@@ -97,36 +112,36 @@ export default {
       this.$root.$emit('open-attachments-app-drawer');
     },
     initEntityAttachmentsList() {
-      this.$attachmentsService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
-        attachments.forEach(attachments => {
-          attachments.name =  attachments.title;
+      if (this.entityType && this.entityId) {
+        this.$attachmentsService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
+          attachments.forEach(attachments => {
+            attachments.name = attachments.title;
+          });
+          this.attachments = attachments;
         });
-        this.attachments = attachments;
-      });
+      }
     },
     initDefaultDrive() {
-      if (!this.defaultDrive) {
-        const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
-          `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
-            this.spaceId;
-        if (spaceId) {
-          this.$attachmentsService.getSpaceById(spaceId).then(space => {
-            if(space) {
-              const spaceGroupId = space.groupId.split('/spaces/')[1];
-              this.defaultDrive = {
-                name: `.spaces.${spaceGroupId}`,
-                title: spaceGroupId,
-                isSelected: true
-              };
-            }
-          });
-        } else if (this.entityId && this.entityType){
-          this.defaultDrive = {
-            isSelected: true,
-            name: 'Personal Documents',
-            title: 'Personal Documents'
-          };
-        }
+      const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
+        `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
+          this.spaceId;
+      if (spaceId) {
+        this.$attachmentsService.getSpaceById(spaceId).then(space => {
+          if (space) {
+            const spaceGroupId = space.groupId.split('/spaces/')[1];
+            this.defaultDrive = {
+              name: `.spaces.${spaceGroupId}`,
+              title: spaceGroupId,
+              isSelected: true
+            };
+          }
+        });
+      } else if (this.entityId && this.entityType) {
+        this.defaultDrive = {
+          isSelected: true,
+          name: 'Personal Documents',
+          title: 'Personal Documents'
+        };
       }
     },
     getURLQueryParam(paramName) {

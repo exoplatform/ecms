@@ -24,7 +24,7 @@
 
     </template>
     <template slot="content">
-      <v-list v-if="attachments.length" dense>
+      <!--      <v-list v-if="attachments.length" dense>
         <v-list-item-group>
           <attachment-item
             v-for="attachment in attachments"
@@ -32,7 +32,18 @@
             :file="attachment">
           </attachment-item>
         </v-list-item-group>
-      </v-list>
+      </v-list>-->
+      <div v-if="attachments.length" class="uploadedFilesItems ml-5">
+        <transition-group name="list-complete" tag="div" class="d-flex flex-column">
+          <span
+            v-for="attachment in attachments"
+            :key="attachment"
+            class="list-complete-item"
+          >
+            <attachment-item :file="attachment"></attachment-item>
+          </span>
+        </transition-group>
+      </div>
       <div v-else class="no-files-attached d-flex flex-column align-center text-sub-title">
         <div class="d-flex pl-6 not-files-icon">
           <i class="uiIconAttach uiIcon64x64"></i>
