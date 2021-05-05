@@ -182,7 +182,9 @@
 <div class="fileContent document-preview-content-file">
     <div class="title clearfix">
       <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
+       <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
         <div class="pull-right"><a class="btn" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a> </div>
+       <%}%>
         <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
     </div>
     <div class="content uiContentBox">

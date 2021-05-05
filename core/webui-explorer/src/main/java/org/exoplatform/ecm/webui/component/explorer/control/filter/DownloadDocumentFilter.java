@@ -42,7 +42,7 @@ public class DownloadDocumentFilter extends UIExtensionAbstractFilter {
     SettingService settingService = CommonsUtils.getService(SettingService.class);
     SettingValue<?> settingValue = settingService.get(Context.GLOBAL.id("downloadDocumentStatus"),
                                                       Scope.APPLICATION.id("downloadDocumentStatus"), "exo:downloadDocumentStatus");
-    return !(settingValue != null && !settingValue.getValue().toString().isEmpty() ? Boolean.valueOf(settingValue.getValue().toString()) : true);
+    return !(settingValue != null && !settingValue.getValue().toString().isEmpty() ? Boolean.valueOf(settingValue.getValue().toString()) : false);
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
