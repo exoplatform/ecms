@@ -59,10 +59,6 @@
     <!-- Apache Chemistry (OpencCMIS) API -->
     <!-- **************************************** -->
     <org.apache.chemistry.opencmis.version>1.1.0</org.apache.chemistry.opencmis.version>
-    <!-- Maven Plugin for JS and CSS bundling and Unit Test execution -->
-    <com.github.eirslett.frontend.version>1.10.0</com.github.eirslett.frontend.version>
-    <node.version>v12.16.3</node.version>
-    <npm.version>6.14.5</npm.version>
     <!-- **************************************** -->
     <!-- for tests -->
     <!-- **************************************** -->
@@ -488,12 +484,6 @@
             <!-- Don't include libraries into Web Archives -->
             <packagingExcludes>WEB-INF/lib/*.jar,**/less/**</packagingExcludes>
           </configuration>
-        </plugin>
-        <plugin>
-          <!-- Maven Plugin for JS and CSS bundling and Unit Test execution -->
-          <groupId>com.github.eirslett</groupId>
-          <artifactId>frontend-maven-plugin</artifactId>
-          <version>${com.github.eirslett.frontend.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
