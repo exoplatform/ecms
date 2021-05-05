@@ -132,7 +132,7 @@ export default {
       cloudDrives.connect(providerId).then(
         data => {
           this.openDriveFolder(data.drive.path, data.drive.title); // display drive in composer
-          this.drivesInProgress = { ...this.drivesInProgress, [data.drive.title]: fullProgress };
+          this.drivesInProgress = Object.assign({}, this.drivesInProgress, {[data.drive.title]: fullProgress });
           this.$emit('updateDrivesInProgress', { drives: this.drivesInProgress }); // drives update in parent component
 
           this.$emit('updateProgress', { progress: fullProgress });
@@ -163,7 +163,7 @@ export default {
         },
         progressData => {
           if (progressData.drive.title) {
-            this.drivesInProgress = { ...this.drivesInProgress, [progressData.drive.title]: progressData.progress };
+            this.drivesInProgress = Object.assign({}, this.drivesInProgress, {[progressData.drive.title]: progressData.progress });
             // update drivesInProgress in attachmentsComposer, so display drive actual progress at every time progress updates
             this.$emit('updateDrivesInProgress', { drives: this.drivesInProgress }); // drives update in parent component
             this.openDriveFolder(progressData.drive.path, progressData.drive.title); // display drive in composer
