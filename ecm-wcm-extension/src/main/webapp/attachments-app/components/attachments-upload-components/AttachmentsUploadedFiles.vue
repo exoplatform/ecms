@@ -68,7 +68,10 @@
           :key="attachment"
           class="list-complete-item"
         >
-          <attachment-item :file="attachment"></attachment-item>
+          <attachment-item
+            :attachment="attachment"
+            :allow-to-remove="true">
+          </attachment-item>
         </span>
       </transition-group>
     </div>

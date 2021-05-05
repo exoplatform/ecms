@@ -280,6 +280,10 @@ export default {
         this.$attachmentsService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
           this.$refs.attachmentsAppDrawer.endLoading();
           this.attachments = this.attachments.filter(attachedFile => attachedFile.id !== file.id);
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.$t('attachments.delete.success'),
+            type: 'success',
+          });
           this.$root.$emit('entity-attachments-updated');
         });
       }

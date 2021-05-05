@@ -7,6 +7,7 @@ import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentsContextEntity;
 import org.exoplatform.services.attachments.storage.AttachmentsStorage;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -14,13 +15,12 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AttachmentsServiceImpl implements AttachmentsService {
@@ -33,13 +33,17 @@ public class AttachmentsServiceImpl implements AttachmentsService {
 
   AttachmentsStorage attachmentsStorage;
 
+  private DocumentService documentService;
+
   public AttachmentsServiceImpl(AttachmentsStorage attachmentsStorage,
                                 RepositoryService repositoryService,
-                                SessionProviderService sessionProviderService) {
+                                SessionProviderService sessionProviderService,
+                                DocumentService documentService) {
 
     this.attachmentsStorage = attachmentsStorage;
     this.repositoryService = repositoryService;
     this.sessionProviderService = sessionProviderService;
+    this.documentService = documentService;
   }
 
   @Override
@@ -143,57 +147,79 @@ public class AttachmentsServiceImpl implements AttachmentsService {
               attachmentsContext.getAttachmentIds().split(",")
       ));
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-      Session session = sessionProvider.getSession(
-              repositoryService.getCurrentRepository()
-                      .getConfiguration()
-                      .getDefaultWorkspaceName(),
-              repositoryService.getCurrentRepository());
-      attachmentsIds.forEach(attachmentId -> {
-        try {
-          Node attachmentNode = session.getNodeByUUID(attachmentId);
-          Attachment attachment = new Attachment();
-          attachment.setId(attachmentNode.getUUID());
-          String attachmentsTitle = getStringProperty(attachmentNode, "exo:title");
-          attachment.setTitle(attachmentsTitle);
-          attachment.setPath(attachmentNode.getPath());
-          attachment.setCreated(getStringProperty(attachmentNode, "exo:dateCreated"));
-          if (attachmentNode.hasProperty("exo:dateModified")) {
-            attachment.setUpdated(getStringProperty(attachmentNode, "exo:dateModified"));
-          } else {
-            attachment.setUpdated(null);
-          }
-          if (attachmentNode.hasProperty("exo:lastModifier")) {
-            attachment.setUpdater(getStringProperty(attachmentNode, "exo:lastModifier"));
-          } else {
-            attachment.setUpdater(null);
-          }
-          DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
-          String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
-          attachment.setMimetype(mimetype);
-
-          boolean canRemove = true;
+      String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+      Session session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());
+      try {
+        attachmentsIds.forEach(attachmentId -> {
           try {
-            session.checkPermission(attachmentNode.getPath(), PermissionType.REMOVE);
-          } catch (Exception e) {
-            canRemove = false;
-          }
+            Node attachmentNode = session.getNodeByUUID(attachmentId);
+            Attachment attachment = new Attachment();
+            attachment.setId(attachmentNode.getUUID());
+            String attachmentsTitle = getStringProperty(attachmentNode, "exo:title");
+            attachment.setTitle(attachmentsTitle);
+            String attachmentsPath = attachmentNode.getPath();
+            attachment.setPath(attachmentsPath);
+            attachment.setCreated(getStringProperty(attachmentNode, "exo:dateCreated"));
+            if (attachmentNode.hasProperty("exo:dateModified")) {
+              attachment.setUpdated(getStringProperty(attachmentNode, "exo:dateModified"));
+            } else {
+              attachment.setUpdated(null);
+            }
+            if (attachmentNode.hasProperty("exo:lastModifier")) {
+              attachment.setUpdater(getStringProperty(attachmentNode, "exo:lastModifier"));
+            } else {
+              attachment.setUpdater(null);
+            }
+            DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
+            String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
+            attachment.setMimetype(mimetype);
 
-          boolean canEdit = true;
-          try {
-            session.checkPermission(attachmentNode.getPath(), PermissionType.SET_PROPERTY);
-          } catch (Exception e) {
-            canEdit = false;
-          }
+            boolean canRemove = true;
+            try {
+              session.checkPermission(attachmentsPath, PermissionType.REMOVE);
+            } catch (Exception e) {
+              canRemove = false;
+            }
 
-          Permission permission = new Permission(canEdit, canRemove);
-          attachment.setAcl(permission);
-          long size = attachmentNode.getNode("jcr:content").getProperty("jcr:data").getLength();
-          attachment.setSize(size);
-          attachments.add(attachment);
-        } catch (Exception e) {
-          LOG.error("Cannot get attachment with id " + attachmentId + " of entity " + entityType + " with id " + entityId, e);
+            boolean canEdit = true;
+            try {
+              session.checkPermission(attachmentsPath, PermissionType.SET_PROPERTY);
+            } catch (Exception e) {
+              canEdit = false;
+            }
+
+            Permission permission = new Permission(canEdit, canRemove);
+            attachment.setAcl(permission);
+
+            long size = attachmentNode.getNode("jcr:content").getProperty("jcr:data").getLength();
+            attachment.setSize(size);
+
+            String downloadUrl = getDownloadUrl(workspace, attachmentsPath);
+            attachment.setDownloadUrl(downloadUrl);
+
+            attachment.setOpenUrl(downloadUrl);
+
+            String attachmentsVersion = getStringProperty(attachmentNode, "exo:baseVersion");
+            attachment.setVersion(attachmentsVersion);
+
+            LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
+            try {
+              previewBreadcrumb = documentService.getFilePreviewBreadCrumb(attachmentNode);
+            } catch (Exception e) {
+              LOG.error("Error while getting file preview breadcrumb " + attachmentNode.getUUID(), e);
+            }
+            attachment.setPreviewBreadcrumb(previewBreadcrumb);
+
+            attachments.add(attachment);
+          } catch (Exception e) {
+            LOG.error("Cannot get attachment with id " + attachmentId + " of entity " + entityType + " with id " + entityId, e);
+          }
+        });
+      } finally {
+        if (session != null) {
+          session.logout();
         }
-      });
+      }
     }
     return attachments;
   }
@@ -203,6 +229,28 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       return node.getProperty(propertyName).getString();
     }
     return "";
+  }
+
+
+  private String getDownloadUrl(String workspace, String nodePath) {
+    String restContextName =  WCMCoreUtils.getRestContextName();
+
+    String repositoryName = getRepositoryName();
+
+    StringBuffer downloadUrl = new StringBuffer();
+    downloadUrl.append('/').append(restContextName).append("/jcr/").
+      append(repositoryName).append('/').
+      append(workspace).append(nodePath);
+    return downloadUrl.toString();
+  }
+
+  protected String getRepositoryName() {
+    try {
+      return repositoryService.getCurrentRepository().getConfiguration().getName();
+    } catch (RepositoryException e) {
+      LOG.debug("Cannot get repository name", e);
+      return "repository";
+    }
   }
 
 }

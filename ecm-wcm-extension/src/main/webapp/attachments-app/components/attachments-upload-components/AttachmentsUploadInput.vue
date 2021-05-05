@@ -5,7 +5,7 @@
       <v-divider></v-divider>
     </div>
     <div class="multiUploadFilesSelector d-flex flex-column">
-      <div id="DropFileBox" ref="dropFileBox" class="dropFileBox py-10 mx-5 d-flex flex-column align-center theme--light" aria-controls @click="uploadFile">
+      <div id="DropFileBox" ref="dropFileBox" class="dropFileBox py-10 ml-5 d-flex flex-column align-center theme--light" aria-controls @click="uploadFile">
         <i class="uiIconEcmsUploadVersion uiIcon32x32"></i>
         <v-subheader class="text-sub-title ml-3 d-none d-sm-flex" href="#" rel="tooltip" data-placement="bottom">
           {{ $t('attachments.drawer.uploadOrDrop') }}

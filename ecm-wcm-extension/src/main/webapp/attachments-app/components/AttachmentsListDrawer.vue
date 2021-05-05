@@ -19,20 +19,11 @@
         color="primary"
         @click="openAttachmentsAppDrawer()"
       >
-        <v-icon size="16">fa-plus</v-icon>
+        <v-icon size="20">fa-plus</v-icon>
       </v-btn>
 
     </template>
     <template slot="content">
-      <!--      <v-list v-if="attachments.length" dense>
-        <v-list-item-group>
-          <attachment-item
-            v-for="attachment in attachments"
-            :key="attachment.id"
-            :file="attachment">
-          </attachment-item>
-        </v-list-item-group>
-      </v-list>-->
       <div v-if="attachments.length" class="uploadedFilesItems ml-5">
         <transition-group name="list-complete" tag="div" class="d-flex flex-column">
           <span
@@ -40,7 +31,10 @@
             :key="attachment"
             class="list-complete-item"
           >
-            <attachment-item :file="attachment"></attachment-item>
+            <attachment-item
+              :attachment="attachment"
+              :allow-to-preview="true">
+            </attachment-item>
           </span>
         </transition-group>
       </div>

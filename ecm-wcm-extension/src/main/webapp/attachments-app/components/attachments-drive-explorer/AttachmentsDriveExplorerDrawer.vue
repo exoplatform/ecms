@@ -724,7 +724,7 @@ export default {
           if (folderNameExists) {
             this.$refs.confirmDialog.open();
             this.titleLabel = this.$t('attachments.filesFoldersSelector.popup.title');
-            this.okLabel = this.$t('attachments.filesFoldersSelector.popup.button.ok');
+            this.okLabel = this.$t('attachments.ok');
             this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.popup.folderNameExists')}`;
           } else {
             const self = this;
@@ -760,7 +760,7 @@ export default {
         } else {
           this.$refs.confirmDialog.open();
           this.titleLabel = this.$t('attachments.filesFoldersSelector.popup.title');
-          this.okLabel = this.$t('attachments.filesFoldersSelector.popup.button.ok');
+          this.okLabel = this.$t('attachments.ok');
           this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.popup.emptyFolderName')}`;
         }
       }
@@ -793,7 +793,7 @@ export default {
         this.$refs.confirmDialog.open();
         this.titleLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.title');
         this.okLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.ok');
-        this.cancelLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.cancel');
+        this.cancelLabel = this.$t('attachments.cancel');
         this.okAction = true;
         this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.action.delete.popup.bodyMessage')}`;
       }
@@ -836,7 +836,7 @@ export default {
         if (folderNameExists) {
           this.$refs.confirmDialog.open();
           this.titleLabel = this.$t('attachments.filesFoldersSelector.popup.title');
-          this.okLabel = this.$t('attachments.filesFoldersSelector.popup.button.ok');
+          this.okLabel = this.$t('attachments.ok');
           this.popupBodyMessage = `${this.$t('attachments.renameFolder.error')}`;
           this.cancelRenameNewFolder();
         } else {

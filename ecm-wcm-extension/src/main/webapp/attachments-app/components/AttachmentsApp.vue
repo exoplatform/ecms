@@ -1,14 +1,14 @@
 <template>
-  <div id="attachmentsApp" :class="entityType && entityId ? 'v-card__text pl-0' : ''" class="attachments-application border-box-sizing transparent">
+  <div id="attachmentsApp" :class="entityType && entityId && 'v-card__text pl-0'" class="attachments-application border-box-sizing transparent">
     <div class="d-flex attachmentsIntegrationSlot">
       <div v-if="$scopedSlots.attachmentsButton" class="openAttachmentsButton me-2" @click="openAttachmentsAppDrawer()">
         <slot name="attachmentsButton"></slot>
       </div>
-      <div v-else-if="entityId && entityType" :class="!attachmentsToDisplay.length ? 'v-main align-center' : ''">
+      <div v-else-if="entityId && entityType" :class="!attachmentsToDisplay.length && 'v-main align-center'">
         <v-icon size="18" color="primary">fa-paperclip</v-icon>
         <div
           v-if="!attachmentsToDisplay.length"
-          class="addAttachments d-flex align-center ms-4"
+          class="addAttachments d-flex align-center ms-3"
           @click="openAttachmentsAppDrawer()">
           <a class="addAttachementLabel primary--text font-weight-bold text-decoration-underline">{{ $t('attachments.add') }}</a>
           <v-btn
@@ -22,7 +22,7 @@
       <div v-if="$scopedSlots.attachmentsList" class="attachedFilesList" @click="openAttachmentsDrawerList()">
         <slot :attachments="attachmentsToDisplay" name="attachedFilesList"></slot>
       </div>
-      <div v-else-if="entityId && entityType" class="attachmentsPreview v-card__text ms-4 pa-0">
+      <div v-else-if="entityId && entityType" class="attachmentsPreview v-card__text ms-3 pa-0">
         <div v-if="attachmentsToDisplay.length" class="attachmentsList">
           <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentsDrawerList()">
             {{ $t('attachments.view.all') }} ({{ attachmentsToDisplay && attachmentsToDisplay.length }})
@@ -32,8 +32,9 @@
               <attachment-item
                 v-for="attachment in attachmentsToDisplay.slice(0, 2)"
                 :key="attachment.id"
-                :file="attachment"
-                :allow-to-remove="false"/>
+                :attachment="attachment"
+                :allow-to-remove="false"
+                :allow-to-preview="true"/>
             </v-list-item-group>
           </v-list>
         </div>
@@ -152,7 +153,7 @@ export default {
     },
     openAttachmentsDrawerList() {
       this.$root.$emit('open-attachments-list-drawer');
-    }
+    },
   }
 };
 </script>

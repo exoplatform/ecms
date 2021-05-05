@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.LinkedHashMap;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +21,10 @@ public class Attachment implements Cloneable {
   private String created;
   private String updater;
   private String updated;
+  private String downloadUrl;
+  private String openUrl;
+  private LinkedHashMap<String, String> previewBreadcrumb;
+  private String version;
 
   @Override
   public Attachment clone() { // NOSONAR
@@ -32,6 +38,10 @@ public class Attachment implements Cloneable {
             creatorId,
             created,
             updater,
-            updated);
+            updated,
+            downloadUrl,
+            openUrl,
+            previewBreadcrumb,
+            version);
   }
 }

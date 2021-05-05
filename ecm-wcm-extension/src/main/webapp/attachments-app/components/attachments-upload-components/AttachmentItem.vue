@@ -1,72 +1,85 @@
 <template>
-  <div class="attachment d-flex">
-    <v-list-item-avatar class="rounded-lg me-3">
-      <div v-if="file.uploadProgress < 100" class="fileProgress">
+  <div :class="allowToPreview && 'clickable'" class="attachment d-flex">
+    <v-list-item-avatar class="rounded-lg me-3" @click="openPreview()">
+      <div v-if="attachment.uploadProgress < 100" class="fileProgress">
         <v-progress-circular
           :rotate="-90"
           :size="40"
           :width="4"
-          :value="file.uploadProgress"
+          :value="attachment.uploadProgress"
           color="primary"
         >
-          {{ file.uploadProgress }}
+          {{ attachment.uploadProgress }}
         </v-progress-circular>
       </div>
       <div v-else class="fileType">
-        <i :class="getIconClassFromFileMimeType(file.mimetype)"></i>
+        <i :class="getIconClassFromFileMimeType(attachment.mimetype)"></i>
       </div>
     </v-list-item-avatar>
-    <v-list-item-content>
-      <v-list-item-title class="uploadedFileTitle">{{ file.name }}</v-list-item-title>
-      <v-list-item-subtitle v-if="file.uploadId" class="d-flex uploadedFileSubTitle">
+    <v-list-item-content @click="openPreview()">
+      <v-list-item-title class="uploadedFileTitle">{{ attachment.name }}</v-list-item-title>
+      <v-list-item-subtitle v-if="attachment.uploadId" class="d-flex uploadedFileSubTitle">
         <v-chip
-          v-if="file.pathDestinationFolderForFile"
+          v-if="attachment.pathDestinationFolderForFile"
           close
           small
           class="attachment-location px-2"
-          @click:close="$root.$emit('remove-destination-for-file', file.name)"
-          @click="openSelectDestinationFolderForFile(file)"
+          @click:close="$root.$emit('remove-destination-for-file', attachment.name)"
+          @click="openSelectDestinationFolderForFile(attachment)"
         >
-          {{ file.pathDestinationFolderForFile }}
+          {{ attachment.pathDestinationFolderForFile }}
         </v-chip>
-        <a v-if="!file.pathDestinationFolderForFile"
+        <a v-if="!attachment.pathDestinationFolderForFile"
            :title="$t('attachments.drawer.destination.folder')"
            rel="tooltip" data-placement="top" class="attachmentDestinationPath primary--text"
-           @click="openSelectDestinationFolderForFile(file)">Choose Location</a>
+           @click="openSelectDestinationFolderForFile(attachment)">Choose Location</a>
       </v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action>
       <v-btn
-        v-if="file.uploadProgress && file.uploadProgress !== 100 && allowToRemove"
-        class="d-flex flex-column pb-3 pa-0 align-end"
+        v-if="attachment.uploadProgress && attachment.uploadProgress !== 100 && allowToRemove"
+        class="d-flex flex-column pb-3 align-end"
         outlined
+        x-small
         height="18"
         width="18"
-        @click="removeItem(file)">
+        @click="confirmDeleteAttachment(attachment)">
         <i class="uiIconCloseCircled error--text"></i>
       </v-btn>
       <v-btn
         v-else-if="allowToRemove"
-        class="d-flex flex-column pb-3 pa-0 align-end"
+        class="d-flex flex-column pb-3 align-end"
         outlined
+        x-small
         height="24"
         width="24"
-        @click="removeItem(file)">
+        @click="deleteAttachment(attachment)">
         <i class="uiIconTrash uiIcon24x24 error--text"></i>
       </v-btn>
     </v-list-item-action>
+    <exo-confirm-dialog
+      ref="deleteConfirmDialog"
+      :message="$t('attachments.message.confirmDeleteAttachment')"
+      :title="$t('attachments.title.confirmDeleteAttachment')"
+      :ok-label="$t('attachments.yes')"
+      :cancel-label="$t('attachments.no')"
+      @ok="confirmDeleteAttachment" />
   </div>
 </template>
 <script>
 export default {
   props: {
-    file: {
+    attachment: {
       type: Object,
       default: () => null
     },
     allowToRemove: {
       type: Boolean,
       default: true
+    },
+    allowToPreview: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -82,19 +95,54 @@ export default {
     getIconClassFromFileMimeType: function (fileMimeType) {
       if (fileMimeType) {
         const fileMimeTypeClass = fileMimeType.replace(/\./g, '').replace('/', '').replace('\\', '');
-        return this.file.isCloudFile
+        return this.attachment.isCloudFile
           ? `uiIcon32x32${fileMimeType.replace(/[/.]/g, '')}`
           : `uiIconFileType${fileMimeTypeClass} uiIconFileTypeDefault`;
       } else {
         return 'uiIconFileTypeDefault';
       }
     },
-    removeItem(file) {
-      this.$root.$emit('remove-attachment-item', file);
+    deleteAttachment() {
+      this.$refs.deleteConfirmDialog.open();
     },
-    openSelectDestinationFolderForFile(file) {
-      this.$root.$emit('change-attachment-destination-path', file);
+    confirmDeleteAttachment() {
+      this.$root.$emit('remove-attachment-item', this.attachment);
+    },
+    openSelectDestinationFolderForFile(attachment) {
+      this.allowToRemove = false;
+      this.$root.$emit('change-attachment-destination-path', attachment);
 
+    },
+    absoluteDateModified(options) {
+      const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
+      return new Date(this.attachment.date).toLocaleString(lang, options).split('/').join('-');
+    },
+    fileInfo() {
+      return `${this.$t('documents.preview.updatedOn')} ${this.absoluteDateModified()} ${this.$t('documents.preview.updatedBy')} ${this.attachment.lastEditor} ${this.attachment.size}`;
+    },
+    openPreview() {
+      if (this.allowToPreview) {
+        const self = this;
+        window.require(['SHARED/documentPreview'], function (documentPreview) {
+          documentPreview.init({
+            doc: {
+              id: self.attachment.id,
+              repository: 'repository',
+              workspace: 'collaboration',
+              path: self.attachment.nodePath || self.attachment.path,
+              title: self.attachment.title,
+              downloadUrl: self.attachment.downloadUrl,
+              openUrl: self.attachment.url || self.attachment.openUrl,
+              breadCrumb: self.attachment.previewBreadcrumb,
+              fileInfo: self.fileInfo()
+            },
+            version: {
+              number: self.attachment.version
+            },
+            showComments: false
+          });
+        });
+      }
     }
   }
 };

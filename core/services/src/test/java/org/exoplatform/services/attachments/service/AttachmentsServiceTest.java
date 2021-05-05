@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentsEntityType;
 import org.exoplatform.services.attachments.storage.AttachmentsStorage;
+import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -63,13 +64,16 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
   SessionProvider sessionProvider;
 
   @Mock
+  DocumentService documentService;
+
+  @Mock
   Session session;
 
   @Before
   public void setUp() throws Exception {
     begin();
     attachmentsStorage = CommonsUtils.getService(AttachmentsStorage.class);
-    attachmentsService = new AttachmentsServiceImpl(attachmentsStorage, repositoryService, sessionProviderService);
+    attachmentsService = new AttachmentsServiceImpl(attachmentsStorage, repositoryService, sessionProviderService, documentService);
   }
 
   @After
@@ -79,7 +83,7 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
   }
 
   @Test
-  public void testlinkAttachmentsToEntity() throws Exception { // NOSONAR
+  public void testLinkAttachmentsToEntity() throws Exception { // NOSONAR
     int[] list = {-9,2,5,14,98};
     try {
       attachmentsService.linkAttachmentsToEntity(0,"", null);
