@@ -190,6 +190,8 @@ export default {
           if(this.entityId && this.entityType) {
             this.linkUploadedAttachmentsToEntity().then(() => {
               this.closeAndResetAttachmentsDrawer();
+            }).catch(() => {
+              this.$refs.attachmentsAppDrawer.endLoading();
             });
           } else {
             this.closeAndResetAttachmentsDrawer();
