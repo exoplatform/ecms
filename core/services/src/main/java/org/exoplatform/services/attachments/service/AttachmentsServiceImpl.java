@@ -197,7 +197,8 @@ public class AttachmentsServiceImpl implements AttachmentsService {
             String downloadUrl = getDownloadUrl(workspace, attachmentsPath);
             attachment.setDownloadUrl(downloadUrl);
 
-            attachment.setOpenUrl(downloadUrl);
+            String openUrl = getUrl(attachmentsPath);
+            attachment.setOpenUrl(openUrl);
 
             String attachmentsVersion = getStringProperty(attachmentNode, "exo:baseVersion");
             attachment.setVersion(attachmentsVersion);
@@ -242,6 +243,16 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       append(repositoryName).append('/').
       append(workspace).append(nodePath);
     return downloadUrl.toString();
+  }
+
+  protected String getUrl(String nodePath) {
+    String url = "";
+    try {
+      url = documentService.getLinkInDocumentsApp(nodePath);
+    } catch (Exception e) {
+      LOG.error("Cannot get url of document " + nodePath, e);
+    }
+    return url;
   }
 
   protected String getRepositoryName() {

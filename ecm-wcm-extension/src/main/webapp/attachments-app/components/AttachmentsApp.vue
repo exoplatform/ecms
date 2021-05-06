@@ -143,6 +143,7 @@ export default {
           name: 'Personal Documents',
           title: 'Personal Documents'
         };
+        this.defaultFolder = 'Public';
       }
     },
     getURLQueryParam(paramName) {

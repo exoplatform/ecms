@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.social.rest.entity.IdentityEntity;
 
+import java.util.LinkedHashMap;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +23,10 @@ public class AttachmentEntity {
   private String created;
   private IdentityEntity updater;
   private String updated;
+  private String downloadUrl;
+  private String openUrl;
+  private LinkedHashMap<String, String> previewBreadcrumb;
+  private String version;
 
   @Override
   public AttachmentEntity clone() { // NOSONAR
@@ -34,7 +40,11 @@ public class AttachmentEntity {
             creator,
             created,
             updater,
-            updated);
+            updated,
+            downloadUrl,
+            openUrl,
+            previewBreadcrumb,
+            version);
   }
 
 }

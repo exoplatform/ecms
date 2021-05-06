@@ -24,7 +24,12 @@ public class EntityBuilder {
             null,
             attachment.getCreated(),
             getIdentityEntity(identityManager, attachment.getUpdater()),
-            attachment.getUpdated()
+            attachment.getUpdated(),
+            attachment.getDownloadUrl(),
+            attachment.getOpenUrl(),
+            attachment.getPreviewBreadcrumb(),
+            attachment.getVersion()
+
     );
   }
 

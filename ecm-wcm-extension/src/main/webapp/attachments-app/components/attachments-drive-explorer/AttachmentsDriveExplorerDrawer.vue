@@ -433,42 +433,14 @@ export default {
         const self = this;
         //open it to generate the path
         this.openDrive(this.defaultDrive).then(() => {
-          let defaultFolder = self.folders.find(folder => folder.title === self.defaultFolder);
+          const defaultFolder = self.folders.find(folder => folder.title === self.defaultFolder);
           if (self.entityType && self.entityId) {
-            defaultFolder = self.folders.find(folder => folder.title === self.entityType);
-            if (!defaultFolder) {
-              self.newFolderName = self.entityType;
-              self.creatingNewFolder = true;
-              self.createNewFolder().then((newFolder) => {
-                self.openFolder(newFolder).then(() => {
-                  self.newFolderName = self.entityId;
-                  self.creatingNewFolder = true;
-                  self.createNewFolder().then((newFolder) => {
-                    self.openFolder(newFolder).then(() => {
-                      self.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), self.schemaFolder);
-                    });
-                  });
-                });
-              }).finally(() => {
-                self.creatingNewFolder = false;
+            if (defaultFolder) {
+              this.openFolder(defaultFolder).then(() => {
+                this.createEntityTypeAndIdFolders(defaultFolder);
               });
             } else {
-              self.openFolder(defaultFolder).then(() => {
-                defaultFolder = self.folders.find(folder => parseInt(folder.title) === self.entityId);
-                if (!defaultFolder) {
-                  self.newFolderName = self.entityId;
-                  self.creatingNewFolder = true;
-                  self.createNewFolder().then((newFolder) => {
-                    self.openFolder(newFolder).then(() => {
-                      self.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), self.schemaFolder);
-                    });
-                  });
-                } else {
-                  self.openFolder(defaultFolder).then(() => {
-                    self.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), self.schemaFolder);
-                  });
-                }
-              });
+              this.createEntityTypeAndIdFolders(defaultFolder);
             }
           }
           //if both default drive and default folder exist
@@ -874,6 +846,44 @@ export default {
     },
     getFolderIcon(folder) {
       return `uiIcon-${folder.cloudProvider}`;
+    },
+    createEntityTypeAndIdFolders(defaultFolder) {
+      defaultFolder = this.folders.find(folder => folder.title === this.entityType);
+      //if entityType (tasks, event, ..) folder not found
+      if (!defaultFolder) {
+        this.newFolderName = this.entityType;
+        this.creatingNewFolder = true;
+        this.createNewFolder().then((newFolder) => {
+          this.openFolder(newFolder).then(() => {
+            this.newFolderName = this.entityId;
+            this.creatingNewFolder = true;
+            this.createNewFolder().then((newFolder) => {
+              this.openFolder(newFolder).then(() => {
+                this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(this.selectedFolderPath), this.schemaFolder);
+              });
+            });
+          });
+        }).finally(() => {
+          this.creatingNewFolder = false;
+        });
+      } else { //if entityType (tasks, event, ..) folder exist, we create directly entityId folder
+        this.openFolder(defaultFolder).then(() => {
+          defaultFolder = this.folders.find(folder => parseInt(folder.title) === this.entityId);
+          if (!defaultFolder) {
+            this.newFolderName = this.entityId;
+            this.creatingNewFolder = true;
+            this.createNewFolder().then((newFolder) => {
+              this.openFolder(newFolder).then(() => {
+                this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(this.selectedFolderPath), this.schemaFolder);
+              });
+            });
+          } else {
+            this.openFolder(defaultFolder).then(() => {
+              this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(this.selectedFolderPath), this.schemaFolder);
+            });
+          }
+        });
+      }
     }
   }
 };
