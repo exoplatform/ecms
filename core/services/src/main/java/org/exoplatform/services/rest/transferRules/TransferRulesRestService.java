@@ -24,7 +24,7 @@ public class TransferRulesRestService implements ResourceContainer {
 
   @GET
   @Path("/getTransfertRulesDocumentStatus")
-  @RolesAllowed("administrators")
+  @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
   @ApiOperation(value = "Gets the status of the transfert rules documents",
       httpMethod = "GET",

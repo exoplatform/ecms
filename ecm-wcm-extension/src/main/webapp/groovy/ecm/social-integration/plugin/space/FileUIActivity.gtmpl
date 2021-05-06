@@ -194,13 +194,17 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
                 </a>
             </li>
             <%  } %>
+
+            <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
             <li class="actLink-item">
                  <a href="$downloadAllUrl">
                     <i class="uiIcon uiIconDownload actLink-icon"></i>
                     <span class="actLink-label"><%=_ctx.appRes("SocialIntegration.download");%></span>
                  </a>
             </li>
-            <% } else if(uicomponent.getFilesCount() > 1) { %>
+            <% }
+            } else if(uicomponent.getFilesCount() > 1) {
+               if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
             <li class="actLink-item">
                 <a href="$downloadAllUrl">
                     <i class="uiIcon uiIconDownload actLink-icon"></i>
@@ -208,6 +212,7 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
                 </a>
             </li>
              <% }
+             }
             if (activityDeletable) {%>
             <li class="actLink-item">
                 <a href="javascript:void(0)" data-confirm="$labelToDeleteThisActivity" data-caption="$captionConfirmation" data-close="$labelClosebutton" data-ok="$labelConfirmbutton"  data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>" class="controllDelete" id="DeleteActivityButton${activity.id}">

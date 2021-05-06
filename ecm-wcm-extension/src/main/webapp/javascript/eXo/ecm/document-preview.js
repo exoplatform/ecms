@@ -574,11 +574,12 @@
             '</div>'
         );
       }
-
-      var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
-      editorButtonsLoader.done(function($buttonsContainer) {
-        $(".previewBtn").append($buttonsContainer);
-      });
+      if(!this.isDownloadStatusActivated) {
+        var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
+        editorButtonsLoader.done(function ($buttonsContainer) {
+          $(".previewBtn").append($buttonsContainer);
+        });
+      }
 
       $('#documentPreviewContainer #previewLikeLink').tooltip();
 

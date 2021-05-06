@@ -153,6 +153,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
                             </input>
                             <span id="numPages" class="toolbarLabel"></span>
                         </div>
+                        <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
                         <div id="toolbarViewerRight" class="pull-right">
                             <a id="secondaryDownload" class="actionIcon hidden" data-placement="bottom" rel="tooltip" data-original-title="Download" href="<%=downloadLink%>" tabindex="12" data-l10n-id="download">
                                 <i class="uiIconDownload uiIconLightGray"></i>
@@ -166,6 +167,8 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
                                 <i class="uiIconMoreAction uiIconLightGray"></i>
                             </a>
                         </div>
+                         <%}%>
+
                         <div class="outerCenter">
                             <div class="innerCenter clearfix" id="toolbarViewerMiddle">
 
@@ -286,7 +289,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
       <div class="detailContainer">
         <h4>$errorMessage</h4>
         <div class="editors-placeholder" data-fileId="$fileId" data-workspace="$workspace"></div>
-        <% if(Utils.isDownloadDocumentActivated()) { %>
+        <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
         <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
         <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
