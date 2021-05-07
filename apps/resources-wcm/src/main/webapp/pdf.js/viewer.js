@@ -7373,8 +7373,10 @@ function webViewerInitialized() {
     PDFViewerApplication.pdfViewer.currentScaleValue = this.value;
   });
 
-  document.getElementById('presentationMode').addEventListener('click',
-    SecondaryToolbar.presentationModeClick.bind(SecondaryToolbar));
+  if (document.getElementById('presentationMode') !== null) {
+    document.getElementById('presentationMode').addEventListener('click',
+        SecondaryToolbar.presentationModeClick.bind(SecondaryToolbar));
+  }
 
   /*document.getElementById('openFile').addEventListener('click',
     SecondaryToolbar.openFileClick.bind(SecondaryToolbar));
