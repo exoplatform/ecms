@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 eXo Platform SAS.
+ * Copyright (C) 2021 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -29,9 +29,9 @@ public class Permission implements Cloneable, Serializable {
 
   private static final long serialVersionUID = 3495355054244658657L;
 
-  private boolean canEdit;
+  private boolean           canEdit;
 
-  private boolean canRemove;
+  private boolean           canRemove;
 
   @Override
   public Permission clone() { // NOSONAR

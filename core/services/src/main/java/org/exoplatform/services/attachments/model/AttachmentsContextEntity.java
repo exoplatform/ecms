@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 eXo Platform SAS.
+ * Copyright (C) 2021 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -37,16 +37,16 @@ public class AttachmentsContextEntity implements Serializable {
   @SequenceGenerator(name = "SEQ_ATTACHMENTS_CONTEXT_ID", sequenceName = "SEQ_ATTACHMENTS_CONTEXT_ID")
   @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_ATTACHMENTS_CONTEXT_ID")
   @Column(name = "ATTACHMENTS_CONTEXT_ID")
-  private Long id;
+  private Long              id;
 
   @Column(name = "ATTACHMENT_IDS")
-  private String attachmentId;
+  private String            attachmentId;
 
   @Column(name = "ENTITY_ID")
-  private Long entityId;
+  private Long              entityId;
 
   @Column(name = "ENTITY_TYPE")
-  private int entityType;
+  private int               entityType;
 
   public Long getId() {
     return id;

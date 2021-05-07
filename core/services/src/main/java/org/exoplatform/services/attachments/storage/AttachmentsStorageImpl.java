@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 eXo Platform SAS.
+ * Copyright (C) 2021 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -46,9 +46,12 @@ public class AttachmentsStorageImpl implements AttachmentsStorage {
   public List<String> getAttachmentsIdsByEntity(long entityId, String entityType) {
     return attachmentsDAO.getAttachmentsIdsByEntity(entityId, AttachmentsEntityType.valueOf(entityType.toUpperCase()).ordinal());
   }
+
   @Override
   public AttachmentsContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) {
-    return attachmentsDAO.getAttachmentItemByEntity(entityId, AttachmentsEntityType.valueOf(entityType.toUpperCase()).ordinal(), attachmentId);
+    return attachmentsDAO.getAttachmentItemByEntity(entityId,
+                                                    AttachmentsEntityType.valueOf(entityType.toUpperCase()).ordinal(),
+                                                    attachmentId);
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 eXo Platform SAS.
+ * Copyright (C) 2021 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -37,7 +37,8 @@ public class AttachmentsDAO extends GenericDAOJPAImpl<AttachmentsContextEntity, 
 
   public AttachmentsContextEntity getAttachmentItemByEntity(long entityId, int entityType, String attachmentId) {
     TypedQuery<AttachmentsContextEntity> query =
-                             getEntityManager().createNamedQuery("AttachmentsContext.getAttachmentItemByEntity", AttachmentsContextEntity.class);
+                                               getEntityManager().createNamedQuery("AttachmentsContext.getAttachmentItemByEntity",
+                                                                                   AttachmentsContextEntity.class);
     query.setParameter("entityId", entityId);
     query.setParameter("entityType", entityType);
     query.setParameter("attachmentId", attachmentId);

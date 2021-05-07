@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 eXo Platform SAS.
+ * Copyright (C) 2021 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -28,39 +28,53 @@ import java.util.LinkedHashMap;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AttachmentEntity {
-  private String id;
-  private String title;
-  private long size;
-  private String mimetype;
-  private String path;
-  private Boolean isPublic;
-  private Permission acl;
-  private IdentityEntity creator;
-  private String created;
-  private IdentityEntity updater;
-  private String updated;
-  private String downloadUrl;
-  private String openUrl;
+  private String                        id;
+
+  private String                        title;
+
+  private long                          size;
+
+  private String                        mimetype;
+
+  private String                        path;
+
+  private Boolean                       isPublic;
+
+  private Permission                    acl;
+
+  private IdentityEntity                creator;
+
+  private String                        created;
+
+  private IdentityEntity                updater;
+
+  private String                        updated;
+
+  private String                        downloadUrl;
+
+  private String                        openUrl;
+
   private LinkedHashMap<String, String> previewBreadcrumb;
-  private String version;
+
+  private String                        version;
 
   @Override
   public AttachmentEntity clone() { // NOSONAR
     return new AttachmentEntity(id,
-            title,
-            size,
-            mimetype,
-            path,
-            isPublic,
-            acl,
-            creator,
-            created,
-            updater,
-            updated,
-            downloadUrl,
-            openUrl,
-            previewBreadcrumb,
-            version);
+                                title,
+                                size,
+                                mimetype,
+                                path,
+                                isPublic,
+                                acl,
+                                creator,
+                                created,
+                                updater,
+                                updated,
+                                downloadUrl,
+                                openUrl,
+                                previewBreadcrumb,
+                                version);
   }
 
 }

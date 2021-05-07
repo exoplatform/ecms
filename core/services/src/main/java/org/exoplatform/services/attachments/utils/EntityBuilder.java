@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 eXo Platform SAS.
+ * Copyright (C) 2021 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -38,28 +38,28 @@ import java.util.LinkedHashMap;
 
 public class EntityBuilder {
 
-  private static final Log LOG = ExoLogger.getLogger(EntityBuilder.class);
+  private static final Log    LOG                  = ExoLogger.getLogger(EntityBuilder.class);
 
-  private static final String IDENTITIES_REST_PATH = "/v1/social/identities"; // NOSONAR
+  private static final String IDENTITIES_REST_PATH = "/v1/social/identities";                 // NOSONAR
 
-  private static final String IDENTITIES_EXPAND = "all";
+  private static final String IDENTITIES_EXPAND    = "all";
 
   public static final AttachmentEntity fromAttachment(IdentityManager identityManager, Attachment attachment) {
     return new AttachmentEntity(attachment.getId(),
-            attachment.getTitle(),
-            attachment.getSize(),
-            attachment.getMimetype(),
-            attachment.getPath(),
-            attachment.getIsPublic(),
-            attachment.getAcl(),
-            null,
-            attachment.getCreated(),
-            getIdentityEntity(identityManager, attachment.getUpdater()),
-            attachment.getUpdated(),
-            attachment.getDownloadUrl(),
-            attachment.getOpenUrl(),
-            attachment.getPreviewBreadcrumb(),
-            attachment.getVersion()
+                                attachment.getTitle(),
+                                attachment.getSize(),
+                                attachment.getMimetype(),
+                                attachment.getPath(),
+                                attachment.getIsPublic(),
+                                attachment.getAcl(),
+                                null,
+                                attachment.getCreated(),
+                                getIdentityEntity(identityManager, attachment.getUpdater()),
+                                attachment.getUpdated(),
+                                attachment.getDownloadUrl(),
+                                attachment.getOpenUrl(),
+                                attachment.getPreviewBreadcrumb(),
+                                attachment.getVersion()
 
     );
   }
