@@ -439,16 +439,9 @@ export default {
     },
     linkUploadedAttachmentsToEntity() {
       const attachmentIds = this.uploadedFiles.map(attachment => attachment.UUID);
-      attachmentIds.push(...this.attachments.map(attachment => attachment.id).filter(id => id));
-      if (this.entityHasAttachments) {
-        return this.$attachmentsService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(()=> {
-          this.$root.$emit('entity-attachments-updated');
-        });
-      } else {
-        return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(()=> {
-          this.$root.$emit('entity-attachments-updated');
-        });
-      }
+      return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
+        this.$root.$emit('entity-attachments-updated');
+      });
     }
   }
 };

@@ -1,5 +1,18 @@
-/**
+/*
+ * Copyright (C) 2020 eXo Platform SAS.
  *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.services.rest;
 
@@ -39,16 +52,6 @@ public class AttachmentsRestService implements ResourceContainer {
     this.identityManager = identityManager;
   }
 
-  /**
-   * Link an existing attachments to the given entity (Event, Task, Wiki,...)
-   *
-   * @param entityId the entity id.
-   * @param entityType the entity type.
-   * @param attachmentIds the list of attachments uuid to be linked.
-   * @return The response.
-   * @throws Exception The exception
-   * @anchor ManageDocumentService.linkAttachmentsToEntity
-   */
   @POST
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -98,16 +101,6 @@ public class AttachmentsRestService implements ResourceContainer {
     return Response.ok().build();
   }
 
-  /**
-   * Update existing attachments linked to an entity (Event, Task, Wiki,...)
-   *
-   * @param entityId the entity id.
-   * @param entityType the entity type.
-   * @param attachmentIds the list of attachments uuid to be linked.
-   * @return The response.
-   * @throws Exception The exception
-   * @anchor ManageDocumentService.linkAttachmentsToEntity
-   */
   @PUT
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -157,15 +150,6 @@ public class AttachmentsRestService implements ResourceContainer {
     return Response.ok().build();
   }
 
-  /**
-   * Get the list of attachments linked to the given entity
-   *
-   * @param entityId the entity id.
-   * @param entityType the entity type.
-   * @return The response containing attachments list if found.
-   * @throws Exception The exception
-   * @anchor ManageDocumentService.getAttachmentsByEntity
-   */
   @GET
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -206,14 +190,6 @@ public class AttachmentsRestService implements ResourceContainer {
     return Response.ok(attachmentsEntities).build();
   }
 
-  /**
-   * Delete the list of attachments linked to the given entity
-   *
-   * @param entityId the entity id.
-   * @param entityType the entity type.
-   * @throws Exception The exception
-   * @anchor ManageDocumentService.getAttachmentsByEntity
-   */
   @DELETE
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -246,7 +222,7 @@ public class AttachmentsRestService implements ResourceContainer {
     }
 
     try {
-      attachmentsService.deleteEntityAttachments(entityId, entityType);
+      attachmentsService.deleteAllEntityAttachments(entityId, entityType);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
       LOG.error("Error when trying to delete all attachments from entity from entity with id '{}' ", entityId, e);
@@ -254,14 +230,6 @@ public class AttachmentsRestService implements ResourceContainer {
     }
   }
 
-  /**
-   * Delete an attachment linked to the given entity
-   *
-   * @param entityId the entity id.
-   * @param entityType the entity type.
-   * @throws Exception The exception
-   * @anchor ManageDocumentService.getAttachmentsByEntity
-   */
   @DELETE
   @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -294,7 +262,7 @@ public class AttachmentsRestService implements ResourceContainer {
     }
 
     try {
-      attachmentsService.deleteEntityAttachment(entityId, entityType, attachmentId);
+      attachmentsService.deleteAttachmentItemById(entityId, entityType, attachmentId);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
       LOG.error("Error when trying to delete the attachment with id '{}' from entity with id '{}'", attachmentId, entityId, e);
