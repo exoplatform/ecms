@@ -3,7 +3,7 @@ export function getTransfertRulesDocumentStatus() {
     method: 'GET',
     credentials: 'include',
   }).then((resp) => {
-    if(resp && resp.ok) {
+    if (resp && resp.ok) {
       return resp.json();
     }
     else {
@@ -21,7 +21,7 @@ export function saveSharedDocumentStatus(saveSharedDocumentStatus) {
       'Content-Type': 'application/json'
     }
   }).then((resp) => {
-    if(resp && resp.ok) {
+    if (resp && resp.ok) {
       return resp.json();
     }
     else {
@@ -39,7 +39,7 @@ export function saveDownloadDocumentStatus(downloadDocumentStatus) {
       'Content-Type': 'application/json'
     }
   }).then((resp) => {
-    if(resp && resp.ok) {
+    if (resp && resp.ok) {
       return resp.json();
     }
     else {
