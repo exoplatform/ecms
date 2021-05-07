@@ -21,13 +21,14 @@
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
-            <label class="switch">
+            <label class="switch d-inline-block">
               <input
                 v-model="downloadDocumentStatus"
                 type="checkbox"
+                class="d-none"
                 @click="changeDownloadDocumentStatus(!downloadDocumentStatus)">
-              <div class="slider rounded-pill"><span class="absolute-activate">{{ $t(`documents.transferRules.button.yes`) }}</span></div>
-              <span class="absolute-deactivated">{{ $t(`documents.transferRules.button.no`) }}</span>
+              <div class="slider text-left rounded-pill"><span class="absolute-activate">{{ $t(`documents.transferRules.button.yes`) }}</span></div>
+              <span class="absolute-deactivated text-right">{{ $t(`documents.transferRules.button.no`) }}</span>
             </label>
           </v-list-item-action>
         </v-list-item>
@@ -43,13 +44,14 @@
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
-            <label class="switch">
+            <label class="switch d-inline-block">
               <input
                 v-model="sharedDocumentStatus"
                 type="checkbox"
+                class="d-none"
                 @click="changeSharedDocumentStatus(!sharedDocumentStatus)">
-              <div class="slider rounded-pill"><span class="absolute-activate">{{ $t(`documents.transferRules.button.yes`) }}</span></div>
-              <span class="absolute-deactivated">{{ $t(`documents.transferRules.button.no`) }}</span>
+              <div class="slider text-left rounded-pill"><span class="absolute-activate">{{ $t(`documents.transferRules.button.yes`) }}</span></div>
+              <span class="absolute-deactivated text-right">{{ $t(`documents.transferRules.button.no`) }}</span>
             </label>
           </v-list-item-action>
         </v-list-item>
