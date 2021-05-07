@@ -17,14 +17,14 @@
 package org.exoplatform.services.attachments.dao;
 
 import org.exoplatform.commons.persistence.impl.GenericDAOJPAImpl;
-import org.exoplatform.services.attachments.model.AttachmentsContextEntity;
+import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.Collections;
 import java.util.List;
 
-public class AttachmentsDAO extends GenericDAOJPAImpl<AttachmentsContextEntity, Long> {
+public class AttachmentDAO extends GenericDAOJPAImpl<AttachmentContextEntity, Long> {
 
   public List<String> getAttachmentsIdsByEntity(long entityId, int entityType) {
     TypedQuery<String> query =
@@ -35,10 +35,10 @@ public class AttachmentsDAO extends GenericDAOJPAImpl<AttachmentsContextEntity, 
     return resultList == null ? Collections.emptyList() : resultList;
   }
 
-  public AttachmentsContextEntity getAttachmentItemByEntity(long entityId, int entityType, String attachmentId) {
-    TypedQuery<AttachmentsContextEntity> query =
+  public AttachmentContextEntity getAttachmentItemByEntity(long entityId, int entityType, String attachmentId) {
+    TypedQuery<AttachmentContextEntity> query =
                                                getEntityManager().createNamedQuery("AttachmentsContext.getAttachmentItemByEntity",
-                                                                                   AttachmentsContextEntity.class);
+                                                                                   AttachmentContextEntity.class);
     query.setParameter("entityId", entityId);
     query.setParameter("entityType", entityType);
     query.setParameter("attachmentId", attachmentId);

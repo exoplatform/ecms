@@ -22,10 +22,10 @@ Vue.component('attachments-list-drawer', AttachmentsListDrawer);
 Vue.component('attachments-uploaded-files', AttachmentsUploadedFiles);
 Vue.component('attachments-upload-input', AttachmentsUploadInput);
 
-import * as attachmentsService from '../js/attachmentsService.js';
+import * as attachmentService from '../js/attachmentService.js';
 
-if (!Vue.prototype.$attachmentsService) {
-  window.Object.defineProperty(Vue.prototype, '$attachmentsService', {
-    value: attachmentsService,
+if (!Vue.prototype.$attachmentService) {
+  window.Object.defineProperty(Vue.prototype, '$attachmentService', {
+    value: attachmentService,
   });
 }

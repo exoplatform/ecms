@@ -12,8 +12,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.exoplatform.services.attachments.model.Attachment;
-import org.exoplatform.services.attachments.model.AttachmentsEntityType;
-import org.exoplatform.services.attachments.storage.AttachmentsStorage;
+import org.exoplatform.services.attachments.model.AttachmentEntityType;
+import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -42,11 +42,11 @@ import java.util.List;
         @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
         @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/attachments/attachments-test-configuration.xml")})
 @RunWith(MockitoJUnitRunner.class)
-public class AttachmentsServiceTest extends BaseExoTestCase {
+public class AttachmentServiceTest extends BaseExoTestCase {
 
-  protected AttachmentsService attachmentsService;
+  protected AttachmentService attachmentService;
 
-  AttachmentsStorage attachmentsStorage;
+  AttachmentStorage attachmentStorage;
 
   @Mock
   RepositoryService repositoryService;
@@ -72,8 +72,8 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
   @Before
   public void setUp() throws Exception {
     begin();
-    attachmentsStorage = CommonsUtils.getService(AttachmentsStorage.class);
-    attachmentsService = new AttachmentsServiceImpl(attachmentsStorage, repositoryService, sessionProviderService, documentService);
+    attachmentStorage = CommonsUtils.getService(AttachmentStorage.class);
+    attachmentService = new AttachmentServiceImpl(attachmentStorage, repositoryService, sessionProviderService, documentService);
   }
 
   @After
@@ -86,7 +86,7 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
   public void testLinkAttachmentsToEntity() throws Exception { // NOSONAR
     int[] list = {-9,2,5,14,98};
     try {
-      attachmentsService.linkAttachmentsToEntity(0,"", null);
+      attachmentService.linkAttachmentsToEntity(0,"", null);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -94,7 +94,7 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
 
     try {
       List<String> attachmentsIds = new ArrayList<>();
-      attachmentsService.linkAttachmentsToEntity(1,"", attachmentsIds);
+      attachmentService.linkAttachmentsToEntity(1,"", attachmentsIds);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -105,7 +105,7 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
       attachmentsIds.add("1");
       attachmentsIds.add("2");
       attachmentsIds.add("3");
-      attachmentsService.linkAttachmentsToEntity(5,"", attachmentsIds);
+      attachmentService.linkAttachmentsToEntity(5,"", attachmentsIds);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -167,10 +167,10 @@ public class AttachmentsServiceTest extends BaseExoTestCase {
     attachmentsIds.add("3");
 
     //when
-    attachmentsService.linkAttachmentsToEntity(5, "EVENT", attachmentsIds);
+    attachmentService.linkAttachmentsToEntity(5, "EVENT", attachmentsIds);
 
     //then
-    List<Attachment> attachmentsEntityStored = attachmentsService.getAttachmentsByEntity(5, String.valueOf(AttachmentsEntityType.EVENT));
+    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(5, String.valueOf(AttachmentEntityType.EVENT));
     assertNotNull(attachmentsEntityStored);
     assertEquals(3, attachmentsEntityStored.size());
   }

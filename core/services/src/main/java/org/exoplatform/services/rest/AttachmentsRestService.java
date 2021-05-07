@@ -22,7 +22,7 @@ import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
-import org.exoplatform.services.attachments.service.AttachmentsService;
+import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -42,12 +42,12 @@ import java.util.stream.Collectors;
 public class AttachmentsRestService implements ResourceContainer {
   private static final Log     LOG = ExoLogger.getLogger(AttachmentsRestService.class.getName());
 
-  protected AttachmentsService attachmentsService;
+  protected AttachmentService attachmentService;
 
   protected IdentityManager    identityManager;
 
-  public AttachmentsRestService(AttachmentsService attachmentsService, IdentityManager identityManager) {
-    this.attachmentsService = attachmentsService;
+  public AttachmentsRestService(AttachmentService attachmentService, IdentityManager identityManager) {
+    this.attachmentService = attachmentService;
     this.identityManager = identityManager;
   }
 
@@ -77,7 +77,7 @@ public class AttachmentsRestService implements ResourceContainer {
     }
 
     try {
-      attachmentsService.linkAttachmentsToEntity(entityId, entityType, attachmentIds);
+      attachmentService.linkAttachmentsToEntity(entityId, entityType, attachmentIds);
     } catch (Exception e) {
       LOG.error("Error when trying to link attachments to a context: ", e);
     }
@@ -110,7 +110,7 @@ public class AttachmentsRestService implements ResourceContainer {
     }
 
     try {
-      attachmentsService.updateEntityAttachments(entityId, entityType, attachmentIds);
+      attachmentService.updateEntityAttachments(entityId, entityType, attachmentIds);
     } catch (Exception e) {
       LOG.error("Error when trying to link attachments to a context: ", e);
     }
@@ -136,7 +136,7 @@ public class AttachmentsRestService implements ResourceContainer {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type must not be empty").build();
     }
 
-    List<Attachment> attachments = attachmentsService.getAttachmentsByEntity(entityId, entityType);
+    List<Attachment> attachments = attachmentService.getAttachmentsByEntity(entityId, entityType);
     List<AttachmentEntity> attachmentsEntities = new ArrayList<>();
     if (!attachments.isEmpty()) {
       attachmentsEntities = attachments.stream()
@@ -167,7 +167,7 @@ public class AttachmentsRestService implements ResourceContainer {
     }
 
     try {
-      attachmentsService.deleteAllEntityAttachments(entityId, entityType);
+      attachmentService.deleteAllEntityAttachments(entityId, entityType);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
       LOG.error("Error when trying to delete all attachments from entity from entity with id '{}' ", entityId, e);
@@ -197,7 +197,7 @@ public class AttachmentsRestService implements ResourceContainer {
     }
 
     try {
-      attachmentsService.deleteAttachmentItemById(entityId, entityType, attachmentId);
+      attachmentService.deleteAttachmentItemById(entityId, entityType, attachmentId);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
       LOG.error("Error when trying to delete the attachment with id '{}' from entity with id '{}'", attachmentId, entityId, e);

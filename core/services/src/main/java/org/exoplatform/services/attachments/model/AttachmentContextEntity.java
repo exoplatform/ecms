@@ -29,7 +29,7 @@ import java.io.Serializable;
         + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType"),
     @NamedQuery(name = "AttachmentsContext.getAttachmentItemByEntity", query = "SELECT ac FROM AttachmentsContext ac "
         + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType AND ac.attachmentId = :attachmentId") })
-public class AttachmentsContextEntity implements Serializable {
+public class AttachmentContextEntity implements Serializable {
 
   private static final long serialVersionUID = -6445215481619188461L;
 

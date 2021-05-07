@@ -19,8 +19,8 @@ package org.exoplatform.services.attachments.service;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
-import org.exoplatform.services.attachments.model.AttachmentsContextEntity;
-import org.exoplatform.services.attachments.storage.AttachmentsStorage;
+import org.exoplatform.services.attachments.model.AttachmentContextEntity;
+import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -31,24 +31,24 @@ import org.exoplatform.services.log.Log;
 import javax.jcr.Session;
 import java.util.*;
 
-public class AttachmentsServiceImpl implements AttachmentsService {
+public class AttachmentServiceImpl implements AttachmentService {
 
-  private static final Log       LOG = ExoLogger.getLogger(AttachmentsServiceImpl.class.getName());
+  private static final Log       LOG = ExoLogger.getLogger(AttachmentServiceImpl.class.getName());
 
   private RepositoryService      repositoryService;
 
   private SessionProviderService sessionProviderService;
 
-  AttachmentsStorage             attachmentsStorage;
+  AttachmentStorage              attachmentStorage;
 
   private DocumentService        documentService;
 
-  public AttachmentsServiceImpl(AttachmentsStorage attachmentsStorage,
-                                RepositoryService repositoryService,
-                                SessionProviderService sessionProviderService,
-                                DocumentService documentService) {
+  public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
+                               RepositoryService repositoryService,
+                               SessionProviderService sessionProviderService,
+                               DocumentService documentService) {
 
-    this.attachmentsStorage = attachmentsStorage;
+    this.attachmentStorage = attachmentStorage;
     this.repositoryService = repositoryService;
     this.sessionProviderService = sessionProviderService;
     this.documentService = documentService;
@@ -68,7 +68,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       throw new IllegalArgumentException("attachmentsIds must not be empty");
     }
 
-    attachmentsStorage.linkAttachmentsToEntity(entityId, entityType, attachmentsIds);
+    attachmentStorage.linkAttachmentsToEntity(entityId, entityType, attachmentsIds);
   }
 
   @Override
@@ -81,7 +81,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    List<String> existingAttachmentsIds = attachmentsStorage.getAttachmentsIdsByEntity(entityId, entityType);
+    List<String> existingAttachmentsIds = attachmentStorage.getAttachmentsIdsByEntity(entityId, entityType);
 
     // delete removed attachments
     existingAttachmentsIds.stream().filter(attachmentId -> !attachmentIds.contains(attachmentId)).forEach(attachmentId -> {
@@ -108,7 +108,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    List<String> attachmentsIds = attachmentsStorage.getAttachmentsIdsByEntity(entityId, entityType);
+    List<String> attachmentsIds = attachmentStorage.getAttachmentsIdsByEntity(entityId, entityType);
 
     if (attachmentsIds.isEmpty()) {
       throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " has no attachment linked");
@@ -132,14 +132,14 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    AttachmentsContextEntity attachmentsContextEntity = attachmentsStorage.getAttachmentItemByEntity(entityId,
-                                                                                                     entityType,
-                                                                                                     attachmentId);
-    if (attachmentsContextEntity == null) {
+    AttachmentContextEntity attachmentContextEntity = attachmentStorage.getAttachmentItemByEntity(entityId,
+                                                                                                    entityType,
+                                                                                                    attachmentId);
+    if (attachmentContextEntity == null) {
       throw new ObjectNotFoundException("Attachment with id" + attachmentId + " linked to entity with id " + entityId
           + " and type" + entityType + " not found");
     }
-    attachmentsStorage.deleteAttachmentItemById(attachmentsContextEntity);
+    attachmentStorage.deleteAttachmentItemById(attachmentContextEntity);
   }
 
   @Override
@@ -151,7 +151,7 @@ public class AttachmentsServiceImpl implements AttachmentsService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    List<String> attachmentsIds = attachmentsStorage.getAttachmentsIdsByEntity(entityId, entityType);
+    List<String> attachmentsIds = attachmentStorage.getAttachmentsIdsByEntity(entityId, entityType);
     List<Attachment> attachments = new ArrayList<>();
     if (attachmentsIds.size() > 0) {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);

@@ -22,15 +22,15 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
-    <type>org.exoplatform.services.attachments.dao.AttachmentsDAO</type>
+    <type>org.exoplatform.services.attachments.dao.AttachmentDAO</type>
   </component>
   <component>
-    <key>org.exoplatform.services.attachments.service.AttachmentsService</key>
-    <type>org.exoplatform.services.attachments.service.AttachmentsServiceImpl</type>
+    <key>org.exoplatform.services.attachments.service.AttachmentService</key>
+    <type>org.exoplatform.services.attachments.service.AttachmentServiceImpl</type>
   </component>
   <component>
-    <key>org.exoplatform.services.attachments.storage.AttachmentsStorage</key>
-    <type>org.exoplatform.services.attachments.storage.AttachmentsStorageImpl</type>
+    <key>org.exoplatform.services.attachments.storage.AttachmentStorage</key>
+    <type>org.exoplatform.services.attachments.storage.AttachmentStorageImpl</type>
   </component>
 
   <external-component-plugins>

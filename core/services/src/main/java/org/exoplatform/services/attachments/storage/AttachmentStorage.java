@@ -16,19 +16,19 @@
  */
 package org.exoplatform.services.attachments.storage;
 
-import org.exoplatform.services.attachments.model.AttachmentsContextEntity;
+import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 
 import java.util.List;
 
-public interface AttachmentsStorage {
+public interface AttachmentStorage {
   void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentsIds);
 
   List<String> getAttachmentsIdsByEntity(long entityId, String entityType);
 
-  AttachmentsContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId);
+  AttachmentContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId);
 
-  void deleteAllEntityAttachments(AttachmentsContextEntity attachmentsContextEntity);
+  void deleteAllEntityAttachments(AttachmentContextEntity attachmentContextEntity);
 
-  void deleteAttachmentItemById(AttachmentsContextEntity attachmentsContextEntity);
+  void deleteAttachmentItemById(AttachmentContextEntity attachmentContextEntity);
 
 }

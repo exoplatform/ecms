@@ -496,7 +496,7 @@ export default {
     fetchChildrenContents: function (parentPath) {
       this.loadingFolders = true;
       const self = this;
-      return this.$attachmentsService.fetchFoldersAndFiles(this.currentDrive.name, this.workspace, parentPath).then(xml => {
+      return this.$attachmentService.fetchFoldersAndFiles(this.currentDrive.name, this.workspace, parentPath).then(xml => {
         const rootFolder = xml.childNodes[0];
         if (rootFolder.getAttribute('path') === '/') {
           self.driveRootPath = `${rootFolder.getAttribute('path')}`;
@@ -517,7 +517,7 @@ export default {
       this.currentDrive = null;
       this.foldersHistory = [];
       const self = this;
-      this.$attachmentsService.getDrivers().then(xml => {
+      this.$attachmentService.getDrivers().then(xml => {
         const drivers = xml.childNodes[0].childNodes;
         self.setDrivers(drivers);
         this.loadingFolders = false;
@@ -700,7 +700,7 @@ export default {
             this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.popup.folderNameExists')}`;
           } else {
             const self = this;
-            return this.$attachmentsService.createFolder(this.currentDrive.name, this.workspace, this.currentAbsolutePath, this.newFolderName).then(xml => {
+            return this.$attachmentService.createFolder(this.currentDrive.name, this.workspace, this.currentAbsolutePath, this.newFolderName).then(xml => {
               const createdNewFolder = xml.childNodes[0];
               if (createdNewFolder) {
                 const folderType = createdNewFolder.getAttribute('nodeType');
@@ -772,7 +772,7 @@ export default {
     },
     okConfirmDialog() {
       if (this.okAction) {
-        this.$attachmentsService.deleteFolderOrFile(this.currentDrive.name, this.workspace, this.selectedFolder.path).then(() => {
+        this.$attachmentService.deleteFolderOrFile(this.currentDrive.name, this.workspace, this.selectedFolder.path).then(() => {
           this.reloadCurrentPath();
         }).catch(() => {
           this.errorMessage = `${this.$t('attachments.deleteFolderOrFile.error')}`;
@@ -814,7 +814,7 @@ export default {
         } else {
           this.selectedFolderPath = this.driveRootPath.concat(this.selectedFolder.path);
           const path = encodeURIComponent(this.workspace.concat(':', this.selectedFolderPath));
-          this.$attachmentsService.renameFolder(path, this.newName).then(response => {
+          this.$attachmentService.renameFolder(path, this.newName).then(response => {
             if (response) {
               this.renameFolderAction = false;
               this.folders.find(folder => {

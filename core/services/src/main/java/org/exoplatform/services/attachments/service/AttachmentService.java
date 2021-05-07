@@ -21,7 +21,7 @@ import org.exoplatform.services.attachments.model.Attachment;
 
 import java.util.List;
 
-public interface AttachmentsService {
+public interface AttachmentService {
 
   List<Attachment> getAttachmentsByEntity(long entityId, String entityType) throws Exception;
 

@@ -11,7 +11,6 @@
   <description>eXo CMS Service</description>
   <properties>
     <exo.test.coverage.ratio>0.34</exo.test.coverage.ratio>
-    <org.lombok.version>1.18.2</org.lombok.version>
   </properties>
   <dependencies>
     <dependency>

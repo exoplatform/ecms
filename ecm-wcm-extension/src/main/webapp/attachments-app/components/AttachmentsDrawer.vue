@@ -240,7 +240,7 @@ export default {
     uploadFileToDestinationPath: function (file) {
       this.uploadingCount++;
       this.$emit('uploadingCountChanged', this.uploadingCount);
-      this.$attachmentsService.uploadAttachment(
+      this.$attachmentService.uploadAttachment(
         this.workspace,
         file.fileDrive.name,
         file.destinationFolder,
@@ -252,7 +252,7 @@ export default {
         'save'
       ).then((uploadedFile) => {
         if (uploadedFile) {
-          uploadedFile = this.$attachmentsService.convertXmlToJson(uploadedFile);
+          uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
           uploadedFile.drive = file.fileDrive.title;
           this.uploadedFiles.push(uploadedFile);
           file.uploadId = '';
@@ -279,7 +279,7 @@ export default {
         }
       } else {
         this.$refs.attachmentsAppDrawer.startLoading();
-        this.$attachmentsService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
+        this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
           this.$refs.attachmentsAppDrawer.endLoading();
           this.attachments = this.attachments.filter(attachedFile => attachedFile.id !== file.id);
           this.$root.$emit('attachments-notification-alert', {
@@ -386,7 +386,7 @@ export default {
       this.drivesInProgress = drives; // update progress for connecting drive to display that drive is in connection
     },
     getCloudDriveStatus() {
-      this.$attachmentsService.isCloudDriveEnabled().then(data => {
+      this.$attachmentService.isCloudDriveEnabled().then(data => {
         this.isCloudDriveEnabled = data.result === 'true';
       });
     },
@@ -439,7 +439,7 @@ export default {
     },
     linkUploadedAttachmentsToEntity() {
       const attachmentIds = this.uploadedFiles.map(attachment => attachment.UUID);
-      return this.$attachmentsService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
+      return this.$attachmentService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
       });
     }

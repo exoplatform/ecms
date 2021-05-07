@@ -16,6 +16,6 @@
  */
 package org.exoplatform.services.attachments.model;
 
-public enum AttachmentsEntityType {
+public enum AttachmentEntityType {
   WIKI, EVENT, TASK;
 }

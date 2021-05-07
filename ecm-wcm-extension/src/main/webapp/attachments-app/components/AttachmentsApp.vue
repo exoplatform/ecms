@@ -114,7 +114,7 @@ export default {
     },
     initEntityAttachmentsList() {
       if (this.entityType && this.entityId) {
-        this.$attachmentsService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
+        this.$attachmentService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
           attachments.forEach(attachments => {
             attachments.name = attachments.title;
           });
@@ -127,7 +127,7 @@ export default {
         `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
           this.spaceId;
       if (spaceId) {
-        this.$attachmentsService.getSpaceById(spaceId).then(space => {
+        this.$attachmentService.getSpaceById(spaceId).then(space => {
           if (space) {
             const spaceGroupId = space.groupId.split('/spaces/')[1];
             this.defaultDrive = {
