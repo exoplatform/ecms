@@ -39,14 +39,14 @@ public class AttachmentContextEntity implements Serializable {
   @Column(name = "ATTACHMENTS_CONTEXT_ID")
   private Long              id;
 
-  @Column(name = "ATTACHMENT_IDS")
+  @Column(name = "ATTACHMENT_ID")
   private String            attachmentId;
 
   @Column(name = "ENTITY_ID")
   private Long              entityId;
 
   @Column(name = "ENTITY_TYPE")
-  private int               entityType;
+  private String               entityType;
 
   public Long getId() {
     return id;
@@ -72,11 +72,11 @@ public class AttachmentContextEntity implements Serializable {
     this.entityId = entityId;
   }
 
-  public int getEntityType() {
+  public String getEntityType() {
     return entityType;
   }
 
-  public void setEntityType(int entityType) {
+  public void setEntityType(String entityType) {
     this.entityType = entityType;
   }
 }

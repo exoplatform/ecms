@@ -298,7 +298,6 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>${org.lombok.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

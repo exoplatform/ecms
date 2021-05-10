@@ -66,3 +66,5 @@ export function destroy() {
     attachmentsApp.$destroy();
   }
 }
+
+document.dispatchEvent(new CustomEvent('exo-attachment-app-refresh'));

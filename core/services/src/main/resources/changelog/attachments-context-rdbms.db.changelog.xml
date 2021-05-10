@@ -35,9 +35,9 @@
       <column name="ATTACHMENTS_CONTEXT_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
         <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ATTACHMENTS_CONTEXT" />
       </column>
-      <column name="ATTACHMENT_IDS" type="NVARCHAR(200)"/>
+      <column name="ATTACHMENT_ID" type="NVARCHAR(200)"/>
       <column name="ENTITY_ID" type="BIGINT" />
-      <column name="ENTITY_TYPE" type="BIGINT" />
+      <column name="ENTITY_TYPE" type="NVARCHAR(200)" />
     </createTable>
     <modifySql dbms="mysql">
       <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci" />

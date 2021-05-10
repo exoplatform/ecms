@@ -26,7 +26,7 @@ import java.util.List;
 
 public class AttachmentDAO extends GenericDAOJPAImpl<AttachmentContextEntity, Long> {
 
-  public List<String> getAttachmentsIdsByEntity(long entityId, int entityType) {
+  public List<String> getAttachmentsIdsByEntity(long entityId, String entityType) {
     TypedQuery<String> query =
                              getEntityManager().createNamedQuery("AttachmentsContext.getAttachmentContextByEntity", String.class);
     query.setParameter("entityId", entityId);
@@ -35,7 +35,7 @@ public class AttachmentDAO extends GenericDAOJPAImpl<AttachmentContextEntity, Lo
     return resultList == null ? Collections.emptyList() : resultList;
   }
 
-  public AttachmentContextEntity getAttachmentItemByEntity(long entityId, int entityType, String attachmentId) {
+  public AttachmentContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) {
     TypedQuery<AttachmentContextEntity> query =
                                                getEntityManager().createNamedQuery("AttachmentsContext.getAttachmentItemByEntity",
                                                                                    AttachmentContextEntity.class);

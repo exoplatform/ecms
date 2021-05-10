@@ -29,3 +29,10 @@ if (!Vue.prototype.$attachmentService) {
     value: attachmentService,
   });
 }
+if (extensionRegistry) {
+  extensionRegistry.registerExtension(
+    'attachment-app','attachment-app', {
+      vueComponent: AttachmentsApp,
+    },
+  );
+}

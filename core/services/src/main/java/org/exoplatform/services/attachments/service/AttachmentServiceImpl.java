@@ -133,8 +133,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     AttachmentContextEntity attachmentContextEntity = attachmentStorage.getAttachmentItemByEntity(entityId,
-                                                                                                    entityType,
-                                                                                                    attachmentId);
+                                                                                                  entityType,
+                                                                                                  attachmentId);
     if (attachmentContextEntity == null) {
       throw new ObjectNotFoundException("Attachment with id" + attachmentId + " linked to entity with id " + entityId
           + " and type" + entityType + " not found");

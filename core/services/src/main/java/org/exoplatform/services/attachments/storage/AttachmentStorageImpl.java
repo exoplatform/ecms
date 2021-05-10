@@ -18,7 +18,6 @@ package org.exoplatform.services.attachments.storage;
 
 import org.exoplatform.services.attachments.dao.AttachmentDAO;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
-import org.exoplatform.services.attachments.model.AttachmentEntityType;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class AttachmentStorageImpl implements AttachmentStorage {
     attachmentsIds.forEach(attachmentId -> {
       AttachmentContextEntity attachmentContextEntity = new AttachmentContextEntity();
       attachmentContextEntity.setEntityId(entityId);
-      attachmentContextEntity.setEntityType(AttachmentEntityType.valueOf(entityType.toUpperCase()).ordinal());
+      attachmentContextEntity.setEntityType(entityType.toUpperCase());
       attachmentContextEntity.setAttachmentId(attachmentId);
       attachmentDAO.create(attachmentContextEntity);
     });
@@ -44,14 +43,12 @@ public class AttachmentStorageImpl implements AttachmentStorage {
 
   @Override
   public List<String> getAttachmentsIdsByEntity(long entityId, String entityType) {
-    return attachmentDAO.getAttachmentsIdsByEntity(entityId, AttachmentEntityType.valueOf(entityType.toUpperCase()).ordinal());
+    return attachmentDAO.getAttachmentsIdsByEntity(entityId, entityType.toUpperCase());
   }
 
   @Override
   public AttachmentContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) {
-    return attachmentDAO.getAttachmentItemByEntity(entityId,
-                                                    AttachmentEntityType.valueOf(entityType.toUpperCase()).ordinal(),
-                                                    attachmentId);
+    return attachmentDAO.getAttachmentItemByEntity(entityId, entityType.toUpperCase(), attachmentId);
   }
 
   @Override
