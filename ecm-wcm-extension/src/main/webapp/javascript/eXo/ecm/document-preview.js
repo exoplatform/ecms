@@ -44,6 +44,7 @@
       comments: null
     },
     settings: {},
+    isDownloadStatusActivated: true,
 
     init: function (docPreviewSettings) {
       $('.spaceButtomNavigation').addClass('hidden');
@@ -86,6 +87,8 @@
           ES6Promise.polyfill();
         }
 
+       promises.push(this.checkDownloadDocumentStatus());
+
         // wait for all users info fetches to be complete before rendering the component
         Promise.all(promises).then(function() {
           self.render();
@@ -124,6 +127,20 @@
           callback();
         }
       });
+    },
+
+
+    checkDownloadDocumentStatus: function(callback) {
+      var self = this;
+      return $.ajax({
+       type: 'GET',
+       url: '/portal/rest/transferRules/getTransfertRulesDocumentStatus'
+       }).done(function (data) {
+          self.isDownloadStatusActivated = data.downloadDocumentStatus == 'true';
+          self.clearErrorMessage();
+       }).fail(function () {
+          self.showErrorMessage("Error when getting documents transfer rules status");
+       });
     },
 
     fetchAuthorInformation: function(callback) {
@@ -355,7 +372,7 @@
             '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
             '                </div></li>';
 
-        if (!this.settings.doc.size == "") {
+        if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
             html += '      <li><div class="downloadBtn">' +
             '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
             '                </div></li>';
@@ -511,7 +528,7 @@
                     '      <li><div class="openBtn">' +
                     '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
                     '                </div></li>';
-                if (!this.settings.doc.size == "") {
+                if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
                   html +='      <li><div class="downloadBtn">' +
                     '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
                     '                </div></li>';
@@ -557,11 +574,12 @@
             '</div>'
         );
       }
-
-      var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
-      editorButtonsLoader.done(function($buttonsContainer) {
-        $(".previewBtn").append($buttonsContainer);
-      });
+      if(!this.isDownloadStatusActivated) {
+        var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
+        editorButtonsLoader.done(function ($buttonsContainer) {
+          $(".previewBtn").append($buttonsContainer);
+        });
+      }
 
       $('#documentPreviewContainer #previewLikeLink').tooltip();
 

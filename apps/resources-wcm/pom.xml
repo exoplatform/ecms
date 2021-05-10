@@ -78,6 +78,7 @@
                 <include>ecms/portlets/presentation/ecms-presentation-contentlistviewerportlet.less</include>
                 <include>ecms/portlets/presentation/ecms-presentation-singlecontentviewer.less</include>
                 <include>ecms/portlets/editors/editors-admin.less</include>
+                <include>ecms/portlets/transferRules/transfer-rules.less</include>
                 <include>ecms/portlets/cloudStorage/cloud-storage.less</include>
                 <include>ecms/portlets/documents/documents.less</include>
               </includes>

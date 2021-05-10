@@ -38,6 +38,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
+import org.exoplatform.commons.api.settings.SettingService;
+import org.exoplatform.commons.api.settings.SettingValue;
+import org.exoplatform.commons.api.settings.data.Context;
+import org.exoplatform.commons.api.settings.data.Scope;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -1418,5 +1423,17 @@ public class Utils {
       LOG.warn("Cannot mount webdav path {} You don't have read permission access", parent.getPath());
       throw new AccessControlException("You don't have read permission access to " + parent.getPath());
     }
+  }
+
+  /**
+   * Check the status of download action
+   * @return
+   */
+  public static boolean isDownloadDocumentActivated() {
+    SettingService settingService = CommonsUtils.getService(SettingService.class);
+    SettingValue<?> settingValue = settingService.get(Context.GLOBAL.id("downloadDocumentStatus"),
+                                                      Scope.APPLICATION.id("downloadDocumentStatus"),
+                                                      "exo:downloadDocumentStatus");
+    return !(settingValue != null && !settingValue.getValue().toString().isEmpty() ? Boolean.valueOf(settingValue.getValue().toString()) : false);
   }
 }
