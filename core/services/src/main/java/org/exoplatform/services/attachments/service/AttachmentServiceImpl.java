@@ -60,7 +60,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
 
-    if (entityType == null) {
+    if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
@@ -77,7 +77,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
 
-    if (entityType == null) {
+    if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
@@ -104,7 +104,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
 
-    if (entityType == null) {
+    if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
@@ -128,7 +128,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
 
-    if (entityType == null) {
+    if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
