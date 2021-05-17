@@ -7,8 +7,7 @@
           :size="40"
           :width="4"
           :value="attachment.uploadProgress"
-          color="primary"
-        >
+          color="primary">
           {{ attachment.uploadProgress }}
         </v-progress-circular>
       </div>
@@ -17,22 +16,26 @@
       </div>
     </v-list-item-avatar>
     <v-list-item-content @click="openPreview()">
-      <v-list-item-title class="uploadedFileTitle">{{ attachment.name }}</v-list-item-title>
-      <v-list-item-subtitle v-if="attachment.uploadId" class="d-flex uploadedFileSubTitle">
+      <v-list-item-title class="uploadedFileTitle">
+        {{ attachment.name }}
+      </v-list-item-title>
+      <v-list-item-subtitle v-if="attachment.uploadId" class="d-flex v-messages uploadedFileSubTitle">
         <v-chip
           v-if="attachment.pathDestinationFolderForFile"
           close
           small
           class="attachment-location px-2"
           @click:close="$root.$emit('remove-destination-for-file', attachment.name)"
-          @click="openSelectDestinationFolderForFile(attachment)"
-        >
+          @click="openSelectDestinationFolderForFile(attachment)">
           {{ attachment.pathDestinationFolderForFile }}
         </v-chip>
-        <a v-if="!attachment.pathDestinationFolderForFile"
-           :title="$t('attachments.drawer.destination.folder')"
-           rel="tooltip" data-placement="top" class="attachmentDestinationPath primary--text"
-           @click="openSelectDestinationFolderForFile(attachment)">Choose Location</a>
+        <a
+          v-if="!attachment.pathDestinationFolderForFile"
+          :title="$t('attachments.drawer.destination.folder')"
+          rel="tooltip"
+          data-placement="top"
+          class="attachmentDestinationPath primary--text"
+          @click="openSelectDestinationFolderForFile(attachment)">Choose Location</a>
       </v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action>
@@ -109,7 +112,6 @@ export default {
       this.$root.$emit('remove-attachment-item', this.attachment);
     },
     openSelectDestinationFolderForFile(attachment) {
-      this.allowToRemove = false;
       this.$root.$emit('change-attachment-destination-path', attachment);
 
     },

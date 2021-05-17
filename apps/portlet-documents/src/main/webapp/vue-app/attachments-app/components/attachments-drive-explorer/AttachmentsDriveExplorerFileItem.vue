@@ -7,7 +7,9 @@
     </v-list-item-avatar>
 
     <v-list-item-content class="serverFileContent align-center">
-      <v-list-item-title class="serverFileTitle'">{{ file.name }}</v-list-item-title>
+      <v-list-item-title class="serverFileTitle'">
+        {{ file.name }}
+      </v-list-item-title>
     </v-list-item-content>
   </div>
 </template>

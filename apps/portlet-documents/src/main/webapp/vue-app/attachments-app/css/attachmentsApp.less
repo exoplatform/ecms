@@ -6,9 +6,6 @@
     .uploadedFileTitle {
       color: @darkGrey;
     }
-    .uploadedFileSubTitle{
-      font-size: 12px !important;
-    }
 
     .attachment-location {
       background-color: @primaryColorLighterDefault !important;
@@ -124,56 +121,21 @@
     }
   }
 }
+
   .driveExplorerDrawer {
     .serverFiles {
-      height: 77%;
       .contentHeader {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 3%;
-        border-bottom: 1px solid #efefef;
-        position: relative;
-
         .currentDirectory {
-          display: flex;
-          align-items: center;
-          margin-right: 10px;
           flex: 1;
           min-width: 0;
 
-          .documents {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-
-            .uiIconFolder {
-              margin-right: 5px;
-              color: @headingColor;
-            }
-
-            p {
-              margin-bottom: 0;
-              color: @headingColor
-            }
+          .documents > *{
+            color: @headingColor;
           }
 
           .currentDrive {
-            cursor: pointer;
-            display: flex;
             min-width: 0;
             flex: 0 1 auto;
-            align-items: center;
-
-            .currentDriveTitle {
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
-
-              &.active {
-                font-weight: bold;
-              }
-            }
           }
 
           .uiIconArrowRight {
@@ -182,64 +144,30 @@
           }
 
           .foldersHistory {
-            display: flex;
-            flex: 0 1 auto;
+            flex: 1 1 42%;
             min-width: 0;
-
-            .longFolderHistory {
-              display: flex;
-              align-items: center;
-
-              .dropdown-toggle {
-                border: none;
-                font-size: initial;
-              }
-            }
-
-            .folderHistory {
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
-              display: flex;
-              align-items: center;
-
-              .currentSpaceDirectory {
-                cursor: pointer;
-
-                &.active {
-                  font-weight: bold;
-                }
-              }
-
-              a {
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-              }
-            }
+          }
+          .folders-menu{
+            width: fit-content;
           }
         }
 
         .selectorActions {
-          display: inline-flex;
-          align-items: center;
-
-          a:first-of-type {
-            margin-right: 5px;
-          }
-
           &.visible {
             width: 100%;
 
             .searchInput {
               border-radius: 5px 0 0 5px;
               border-right: 0;
+              margin-top: 2px !important;
+              &:focus {
+                box-shadow: none;
+              }
             }
 
             .uiIconCloseServerAttachments {
               font-size: 14px;
               padding: 10px 15px 13px 15px;
-              margin-bottom: 12px;
               border: 1px solid #b3b3b3;
               border-left: 0;
               border-radius: 0 5px 5px 0;
@@ -257,7 +185,6 @@
           .searchInput {
             width: 100%;
             border: 1px solid #b3b3b3;
-            margin: 0 0 10px;
             display: none;
           }
 
@@ -265,27 +192,20 @@
             border: 1px solid #b3b3b3;
             padding: 10px;
             border-radius: 15%;
-            margin-bottom: 10px;
             color: @headingColor;
-            cursor: pointer;
           }
         }
 
         .actionBox {
           display: inline-flex;
-          align-items: center;
-          margin-left: 5px;
 
           &Logo {
             position: relative;
 
             .uiActionIcon {
               border: 1px solid #b3b3b3;
-              padding: 7px;
               border-radius: 15%;
-              margin-bottom: 10px;
               color: #4d5466;
-              cursor: pointer;
 
               &:before {
                 content: '+';
@@ -303,10 +223,6 @@
         }
       }
 
-      .foldersFilesSelectorAlert {
-        margin: 0 3%;
-      }
-
       .fade-enter-active,
       .fade-leave-active {
         transition: opacity 1s
@@ -317,44 +233,10 @@
         opacity: 0
       }
 
-      .contentBody::-webkit-scrollbar-thumb  {
-        background: #578dc9;
-        border-radius: 3px;
-      }
-
-      .contentBody::-webkit-scrollbar-thumb  {
-        background: #578dc9;
-        border-radius: 3px;
-      }
-
-      .contentBody::-webkit-scrollbar-track  {
-        background: #ced2d5;
-      }
-
-      .contentBody::-webkit-scrollbar-track  {
-        background: #ced2d5;
-      }
-
-      .contentBody::-webkit-scrollbar {
-        width: 5px;
-      }
 
       .contentBody {
-        @sectionHeight: 130px;
-        min-height: calc(@sectionHeight * 3);
-        height: 86%;
-        overflow-y: auto;
-        overflow-x: hidden;
-
         .selectionBox {
-          display: flex;
-          flex-wrap: wrap;
-          padding: 0 3%;
-
           .emptyFolder {
-            margin: 20% auto;
-            text-align: center;
-
             .uiIconEmptyFolder::before {
               content: "\ea7b";
               font-size: 34pt;
@@ -363,64 +245,25 @@
             }
           }
 
-          .loader {
-            margin: auto;
-          }
-
           .boxOfFolder {
             background-color: @greyColorDefault;
             border-radius: 5px;
-            display: flex;
-            flex-direction: column;
           }
 
           .folderSelection {
             width: 20%;
-            margin: 7px;
-            padding: 10px 2px 5px;
-            cursor: pointer;
 
             .boxNewFolder {
               border-radius: 5px;
               background-color: @greyColorDefault;
-              padding: 0px 9px 0px;
             }
 
-            .boxOfTitle {
-              padding: 0px 3px 0px;
-            }
-
-            .closeIcon {
-              margin-top: -9px;
-              padding: 3px;
-              margin-left: 80%;
-
-              > p {
-                margin-bottom: 0px;
-                margin-top: -5px;
-              }
-            }
-
-            a {
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-              font-size: 12px;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
-              position: relative;
-
+            .folderTitle{
               i {
                 font-size: 41px;
               }
 
               .selectionLabel {
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                color: #333;
-
                 &.connectingDriveTitle {
                   color: #b3b3b3;
                 }
@@ -585,6 +428,28 @@
           }
         }
       }
+    }
+
+    .drawerContent::-webkit-scrollbar-thumb  {
+      background: #578dc9;
+      border-radius: 3px;
+    }
+
+    .drawerContent::-webkit-scrollbar-thumb  {
+      background: #578dc9;
+      border-radius: 3px;
+    }
+
+    .drawerContent::-webkit-scrollbar-track  {
+      background: #ced2d5;
+    }
+
+    .drawerContent::-webkit-scrollbar-track  {
+      background: #ced2d5;
+    }
+
+    .drawerContent::-webkit-scrollbar {
+      width: 5px;
     }
   }
 

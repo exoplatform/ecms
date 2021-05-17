@@ -8,8 +8,7 @@
         <v-btn
           icon
           color="grey"
-          @click="closeAttachmentsListDrawer()"
-        >
+          @click="closeAttachmentsListDrawer()">
           <v-icon>mdi-keyboard-backspace</v-icon>
         </v-btn>
         <span>{{ $t('attachments.list') }}</span>
@@ -17,24 +16,25 @@
       <v-btn
         icon
         color="primary"
-        @click="openAttachmentsAppDrawer()"
-      >
-        <v-icon size="20">fa-plus</v-icon>
+        @click="openAttachmentsAppDrawer()">
+        <v-icon size="20">
+          fa-plus
+        </v-icon>
       </v-btn>
-
     </template>
     <template slot="content">
       <div v-if="attachments.length" class="uploadedFilesItems ml-5">
-        <transition-group name="list-complete" tag="div" class="d-flex flex-column">
+        <transition-group
+          name="list-complete"
+          tag="div"
+          class="d-flex flex-column">
           <span
             v-for="attachment in attachments"
             :key="attachment"
-            class="list-complete-item"
-          >
+            class="list-complete-item">
             <attachment-item
               :attachment="attachment"
-              :allow-to-preview="true">
-            </attachment-item>
+              :allow-to-preview="true" />
           </span>
         </transition-group>
       </div>
@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  props:{
+  props: {
     attachments: {
       type: Array,
       default: () => []
@@ -61,7 +61,7 @@ export default {
   created() {
     this.$root.$on('open-attachments-list-drawer', () => this.openAttachmentsListDrawer());
   },
-  methods:{
+  methods: {
     openAttachmentsListDrawer() {
       this.$refs.attachmentsListDrawer.open();
     },

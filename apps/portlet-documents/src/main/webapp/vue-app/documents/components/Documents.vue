@@ -4,7 +4,9 @@
     <div v-if="!loading && displayedDocuments.length === 0" class="noDocuments">
       <div class="noDocumentsContent">
         <i class="uiNoDocumentsIcon"></i>
-        <div class="noDocumentsTitle">{{ $t('documents.label.noDocument') }}</div>
+        <div class="noDocumentsTitle">
+          {{ $t('documents.label.noDocument') }}
+        </div>
       </div>
     </div>
   </v-app>
@@ -114,7 +116,7 @@ export default {
       if (cachedDocuments && cachedDocuments.length) {
         cachedDocuments.forEach(cachedDocument => {
           const docExistInESDocs = this.documents.some(doc => (doc.id || doc.UUID) === cachedDocument.id);
-          if (!cachedDocument.timestamp || (Date.now() - cachedDocument.timestamp) > this.twoMinInMS && docExistInESDocs) {
+          if (!cachedDocument.timestamp || Date.now() - cachedDocument.timestamp > this.twoMinInMS && docExistInESDocs) {
             this.removeDocumentFromCache(cachedDocument.id);
           } else if (docExistInESDocs) {
             this.removeDocumentFromCache(cachedDocument.id);

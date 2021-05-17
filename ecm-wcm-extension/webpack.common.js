@@ -5,8 +5,7 @@ let config = {
   // set the entry point of the application
   // can use multiple entry
   entry: {
-    attachmentsSelector: './src/main/webapp/attachments-selector/main.js',
-    attachmentsApp: './src/main/webapp/attachments-app/main.js'
+    attachmentsSelector: './src/main/webapp/attachments-selector/main.js'
   },
   module: {
     rules: [

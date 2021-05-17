@@ -16,12 +16,10 @@
             :max-files-count="maxFilesCount"
             :max-files-size="maxFileSize"
             :current-drive="currentDrive"
-            :path-destination-folder="pathDestinationFolder"
-          ></attachments-upload-input>
+            :path-destination-folder="pathDestinationFolder" />
           <attachments-uploaded-files
             :attachments="attachments"
-            :schema-folder="schemaFolder"
-          ></attachments-uploaded-files>
+            :schema-folder="schemaFolder" />
 
           <!-- Select From Drives Disabled for the moment -->
           <!--<div class="d-flex align-center">
@@ -36,7 +34,6 @@
               <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
             </a>
           </div>-->
-
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
@@ -46,11 +43,17 @@
           :entity-type="entityType"
           :default-drive="defaultDrive"
           :default-folder="defaultFolder"
-          @cancel="toggleServerFileSelector()"></attachments-drive-explorer-drawer>
-        <div v-for="action in attachmentsComposerActions" :key="action.key" :class="`${action.appClass}Action`">
-          <component v-dynamic-events="action.component.events" v-if="action.component"
-                     v-bind="action.component.props ? action.component.props : {}"
-                     :is="action.component.name" :ref="action.key"></component>
+          @cancel="toggleServerFileSelector()" />
+        <div
+          v-for="action in attachmentsComposerActions"
+          :key="action.key"
+          :class="`${action.appClass}Action`">
+          <component
+            v-bind="action.component.props ? action.component.props : {}"
+            :is="action.component.name"
+            v-if="action.component"
+            :ref="action.key"
+            v-dynamic-events="action.component.events" />
         </div>
       </template>
       <template slot="footer">
@@ -63,12 +66,16 @@
             </div>
           </div>
           <div class="attachmentDrawerButtons d-flex">
-            <v-btn class="btn mr-3"
-                   @click="closeAttachmentsAppDrawer()">{{ $t('attachments.drawer.cancel') }}
+            <v-btn
+              class="btn mr-3"
+              @click="closeAttachmentsAppDrawer()">
+              {{ $t('attachments.drawer.cancel') }}
             </v-btn>
-            <v-btn :disabled="!attachments.length && !attachmentsChanged"
-                   class="btn btn-primary"
-                   @click="uploadAddedAttachments()">{{ $t('attachments.upload') }}
+            <v-btn
+              :disabled="!attachments.length && !attachmentsChanged"
+              class="btn btn-primary"
+              @click="uploadAddedAttachments()">
+              {{ $t('attachments.upload') }}
             </v-btn>
           </div>
         </div>
@@ -187,7 +194,7 @@ export default {
     uploadingCount(newValue) {
       if (this.uploadMode === 'save' && newValue === 0) {
         if (this.uploadFinished) {
-          if(this.entityId && this.entityType) {
+          if (this.entityId && this.entityType) {
             this.linkUploadedAttachmentsToEntity().then(() => {
               this.closeAndResetAttachmentsDrawer();
             }).catch(() => {
@@ -204,9 +211,6 @@ export default {
   },
   created() {
     document.addEventListener('paste', this.onPaste, false);
-    this.$root.$on('remove-attachment-item', attachment => {
-      this.removeAttachedFile(attachment);
-    });
     this.$root.$on('change-attachment-destination-path', attachment => {
       this.openSelectDestinationFolderForFile(attachment);
     });
@@ -268,27 +272,6 @@ export default {
           type: 'error',
         });
       });
-    },
-    removeAttachedFile: function (file) {
-      if (!file.id) {
-        this.attachments = this.attachments && this.attachments.filter(attachedFile => attachedFile.uploadId !== file.uploadId);
-        if (file.uploadProgress !== this.maxProgress) {
-          this.uploadingCount--;
-          this.$emit('uploadingCountChanged', this.uploadingCount);
-          this.processNextQueuedUpload();
-        }
-      } else {
-        this.$refs.attachmentsAppDrawer.startLoading();
-        this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
-          this.$refs.attachmentsAppDrawer.endLoading();
-          this.attachments = this.attachments.filter(attachedFile => attachedFile.id !== file.id);
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.delete.success'),
-            type: 'success',
-          });
-          this.$root.$emit('entity-attachments-updated');
-        });
-      }
     },
     addDestinationFolderForAll(pathDestinationFolder, folder, currentDrive) {
       this.currentDrive = currentDrive;
@@ -434,7 +417,7 @@ export default {
       });
       this.attachments = this.entityType && this.entityId ? this.attachments : [];
       this.$refs.attachmentsAppDrawer.endLoading();
-      document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail' : {'list' : Object.values(this.uploadedFiles)}}));
+      document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(this.uploadedFiles)}}));
       this.uploadedFiles = [];
     },
     linkUploadedAttachmentsToEntity() {

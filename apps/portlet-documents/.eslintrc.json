@@ -4,5 +4,11 @@
   ],
   "globals": {
     "documentPreview": true
+  },
+  "rules": {
+    "vue/no-mutating-props": [
+      "off"
+    ],
+    "no-restricted-imports": ["warn", "axios"]
   }
 }

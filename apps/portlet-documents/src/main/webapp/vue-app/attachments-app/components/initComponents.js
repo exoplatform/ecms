@@ -10,17 +10,17 @@ import AttachmentsUploadInput from './attachments-upload-components/AttachmentsU
 import AttachmentsUploadedFiles from './attachments-upload-components/AttachmentsUploadedFiles.vue';
 import AttachmentsDriveExplorerDrawer from './attachments-drive-explorer/AttachmentsDriveExplorerDrawer.vue';
 
-Vue.component('attachments-drawer', AttachmentsDrawer);
-Vue.component('attachments-app', AttachmentsApp);
-Vue.component('attachment-item', AttachmentItem);
-Vue.component('attachments-drive-explorer-drawer', AttachmentsDriveExplorerDrawer);
-Vue.component('attachments-drive-explorer-file-item', AttachmentsDriveExplorerFileItem);
-Vue.component('attachments-folder-actions-menu', AttachmentsFolderActionsMenu);
-Vue.component('attachments-notification-alert', AttachmentsNotificationAlert);
-Vue.component('attachments-notification-alerts', AttachmentsNotificationAlerts);
-Vue.component('attachments-list-drawer', AttachmentsListDrawer);
-Vue.component('attachments-uploaded-files', AttachmentsUploadedFiles);
-Vue.component('attachments-upload-input', AttachmentsUploadInput);
+Vue.component('AttachmentsDrawer', AttachmentsDrawer);
+Vue.component('AttachmentsApp', AttachmentsApp);
+Vue.component('AttachmentItem', AttachmentItem);
+Vue.component('AttachmentsDriveExplorerDrawer', AttachmentsDriveExplorerDrawer);
+Vue.component('AttachmentsDriveExplorerFileItem', AttachmentsDriveExplorerFileItem);
+Vue.component('AttachmentsFolderActionsMenu', AttachmentsFolderActionsMenu);
+Vue.component('AttachmentsNotificationAlert', AttachmentsNotificationAlert);
+Vue.component('AttachmentsNotificationAlerts', AttachmentsNotificationAlerts);
+Vue.component('AttachmentsListDrawer', AttachmentsListDrawer);
+Vue.component('AttachmentsUploadedFiles', AttachmentsUploadedFiles);
+Vue.component('AttachmentsUploadInput', AttachmentsUploadInput);
 
 import * as attachmentService from '../js/attachmentService.js';
 

@@ -1,19 +1,36 @@
 <template>
   <div class="attachmentsUploadBlock">
     <div class="d-flex align-center">
-      <v-subheader class="text-sub-title pl-0 d-flex">{{ $t('attachments.upload') }}</v-subheader>
-      <v-divider></v-divider>
+      <v-subheader class="text-sub-title pl-0 d-flex">
+        {{ $t('attachments.upload') }}
+      </v-subheader>
+      <v-divider />
     </div>
     <div class="multiUploadFilesSelector d-flex flex-column">
-      <div id="DropFileBox" ref="dropFileBox" class="dropFileBox py-10 ml-5 d-flex flex-column align-center theme--light" aria-controls @click="uploadFile">
+      <div
+        id="DropFileBox"
+        ref="dropFileBox"
+        class="dropFileBox py-10 ml-5 d-flex flex-column align-center theme--light"
+        aria-controls
+        @click="uploadFile">
         <i class="uiIconEcmsUploadVersion uiIcon32x32"></i>
-        <v-subheader class="text-sub-title ml-3 d-none d-sm-flex" href="#" rel="tooltip" data-placement="bottom">
+        <v-subheader
+          class="text-sub-title ml-3 d-none d-sm-flex"
+          href="#"
+          rel="tooltip"
+          data-placement="bottom">
           {{ $t('attachments.drawer.uploadOrDrop') }}
         </v-subheader>
       </div>
       <div class="fileHidden d-none">
-        <input ref="uploadInput" class="file" name="file" type="file" multiple="multiple" style="display:none"
-               @change="handleFileUpload($refs.uploadInput.files)">
+        <input
+          ref="uploadInput"
+          class="file"
+          name="file"
+          type="file"
+          multiple="multiple"
+          style="display:none"
+          @change="handleFileUpload($refs.uploadInput.files)">
       </div>
       <div class="uploadErrorMessages">
         <transition name="fade">
@@ -104,7 +121,7 @@ export default {
   methods: {
     initDragAndDropEvents() {
       this.$nextTick(() => {
-        if(!this.dragAndDropEventListenerInitialized){
+        if (!this.dragAndDropEventListenerInitialized){
           ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function (evt) {
 
             /*
@@ -197,7 +214,8 @@ export default {
           return;
         }
 
-        this.attachments.push(file);
+        this.$root.$emit('add-new-uploaded-file',file);
+
       }
       if (this.uploadingCount < this.maxUploadInProgressCount) {
         if (this.uploadMode === 'temp') {

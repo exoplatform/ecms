@@ -23,7 +23,7 @@ if (extensionRegistry) {
 }
 
 exoi18n.loadLanguageAsync(lang, url).then(i18n => {
-  if(Vue.prototype.$i18n) {
+  if (Vue.prototype.$i18n) {
     Vue.prototype.$i18n = i18n;
   }
 });
@@ -56,13 +56,13 @@ export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId)
 }
 
 export function openAttachmentsDrawer() {
-  if(attachmentsApp) {
+  if (attachmentsApp) {
     attachmentsApp.$root.$emit('open-attachments-app-drawer');
   }
 }
 
 export function destroy() {
-  if(attachmentsApp) {
+  if (attachmentsApp) {
     attachmentsApp.$destroy();
   }
 }
