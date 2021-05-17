@@ -95,7 +95,7 @@
               :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')"
               rel="tooltip"
               data-placement="bottom"
-                class="uiIconLightGray uiIconAddFolder"
+              class="uiIconLightGray uiIconAddFolder"
               @click="addNewFolder()"></a>
           </div>
           <!-- Action buttons for extensionRegistry extensions -->

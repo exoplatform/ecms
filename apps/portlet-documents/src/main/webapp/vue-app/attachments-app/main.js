@@ -23,9 +23,7 @@ if (extensionRegistry) {
 }
 
 exoi18n.loadLanguageAsync(lang, url).then(i18n => {
-  if (Vue.prototype.$i18n) {
-    Vue.prototype.$i18n = i18n;
-  }
+  new Vue({i18n});
 });
 
 const appId = 'attachmentsApp';
@@ -66,5 +64,3 @@ export function destroy() {
     attachmentsApp.$destroy();
   }
 }
-
-document.dispatchEvent(new CustomEvent('exo-attachment-app-refresh'));

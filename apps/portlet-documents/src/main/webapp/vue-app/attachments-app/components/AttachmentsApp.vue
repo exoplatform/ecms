@@ -54,6 +54,7 @@
     </div>
 
     <attachments-drawer
+      ref="attachmentsAppDrawer"
       :attachments="attachments"
       :entity-id="entityId"
       :entity-type="entityType"
@@ -181,9 +182,8 @@ export default {
           this.processNextQueuedUpload();
         }
       } else {
-        this.$refs.attachmentsAppDrawer.startLoading();
+        this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.startLoading();
         this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
-          this.$refs.attachmentsAppDrawer.endLoading();
           const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id );
           this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
           this.$root.$emit('attachments-notification-alert', {
@@ -191,6 +191,7 @@ export default {
             type: 'success',
           });
           this.$root.$emit('entity-attachments-updated');
+          this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.endLoading();
         });
       }
     },

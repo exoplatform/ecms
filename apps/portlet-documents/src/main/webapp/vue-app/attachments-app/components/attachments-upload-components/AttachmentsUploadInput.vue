@@ -285,8 +285,8 @@ export default {
       const maxUploadId = 100000;
       return Math.floor(Math.random() * maxUploadId);
     },
-    removeAttachedFile() {
-      this.$root.$emit('remove-attachment-item');
+    removeAttachedFile(file) {
+      this.$root.$emit('remove-attachment-item', file);
     }
   }
 };
