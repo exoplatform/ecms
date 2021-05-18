@@ -158,7 +158,10 @@ public class UIAddressBar extends UIForm {
           uiExplorer.setIsViewTag(false) ;
           uiExplorer.setSelectNode(uiExplorer.getCurrentStatePath()) ;
         } else {
-          String previousNodePath = uiExplorer.rewind() ;
+          // Retrieve previous node path by refactoring current path and adding the RootPath
+          String CurrentPath =  Text.escapeIllegalJcrChars(uiAddressBar.getUIStringInput(FIELD_ADDRESS).getValue());
+          String RootPath = uiExplorer.getRootPath();
+          String previousNodePath = RootPath + CurrentPath.substring(0,CurrentPath.lastIndexOf('/')) ;
           String previousWs = uiExplorer.previousWsName();
           uiExplorer.setBackNodePath(previousWs, previousNodePath);
           if (uiExplorer.hasPaginator(previousNodePath, previousWs)) {
