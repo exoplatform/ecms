@@ -19,7 +19,7 @@
           <b>{{ $t('attachments.alert.connected') }} {{ connectedMessage }}!</b>{{ $t('attachments.alert.pleaseNote') }}
         </div>
         <div class="contentHeader border-bottom-color d-flex align-center pb-2 ma-3">
-          <div v-if="!showSearchInput" class="currentDirectory  d-flex align-center mr-2">
+          <div v-if="!showSearchInput" class="currentDirectory d-flex align-center mr-2">
             <div class="documents clickable d-flex align-center" @click="fetchUserDrives()">
               <i class="uiIconFolder mr-1"></i>
               <span
@@ -191,7 +191,7 @@
                     @blur="saveNewNameFolder()"
                     @keyup.enter="$event.target.blur()"
                     @keyup.esc="cancelRenameNewFolder($event)">
-                  <div v-else class="selectionLabel text-truncate black--text center">{{ folder.title }}</div>
+                  <div v-else class="selectionLabel text-truncate info center">{{ folder.title }}</div>
                 </a>
               </div>
             </div>
@@ -243,21 +243,22 @@
                     </v-list-item-content>
                   </template>
                   <!-- Drives block -->
-                  <div class="selectionBox">
+                  <div class="selectionBox px-5 d-flex flex-wrap">
                     <div
                       v-for="driver in group.drives"
                       :key="driver.name"
                       :title="driver.title"
-                      class="folderSelection"
+                      class="folderSelection ma-2 d-flex flex-column"
                       @click="openDrive(driver, name)">
                       <a
                         :data-original-title="driver.title"
                         rel="tooltip"
+                        class="driveTitle d-flex flex-column v-messages"
                         data-placement="bottom">
                         <i
                           v-show="!drivesInProgress[driver.title]"
                           :class="driver.isCloudDrive ? driver.driveTypeCSSClass : `uiIconEcms24x24DriveGroup ${driver.driveTypeCSSClass}`"
-                          class="uiIconEcmsLightGray selectionIcon center"></i>
+                          class="uiIconEcmsLightGray drive-icon selectionIcon center"></i>
                         <div class="text-center connectingDrive">
                           <!-- show circular progress if cloud drive is connecting -->
                           <v-progress-circular
@@ -274,7 +275,7 @@
                         </div>
                         <div
                           :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
-                          class="selectionLabel center">{{ driver.title }}
+                          class="selectionLabel text-truncate info center">{{ driver.title }}
                         </div>
                       </a>
                     </div>
@@ -330,7 +331,7 @@
 </template>
 
 <script>
-import {getAttachmentsComposerExtensions, executeExtensionAction} from '../../js/extension';
+import {getAttachmentsComposerExtensions, executeExtensionAction} from '../../../../js/extension';
 
 export default {
   props: {
@@ -508,6 +509,10 @@ export default {
       if (!this.drivers.some(({title}) => title === drive.title)) {
         this.drivers.push(drive); // display connecting drive in 'My Drives' section
       }
+    },
+    entityId() {
+      console.warn(this.entityId);
+      this.initDestinationFolderPath();
     }
   },
   created() {

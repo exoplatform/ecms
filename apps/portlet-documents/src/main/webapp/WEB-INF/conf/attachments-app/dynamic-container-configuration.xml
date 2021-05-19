@@ -41,7 +41,7 @@
           <description></description>
           <object type="org.exoplatform.commons.addons.PortletModel">
             <field name="contentId">
-              <string>documents/AttachmentsApp</string>
+              <string>documents/AttachmentApp</string>
             </field>
             <field name="permissions">
               <collection type="java.util.ArrayList">

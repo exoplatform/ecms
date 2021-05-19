@@ -1,8 +1,8 @@
 <template>
   <div
-    id="attachmentsApp"
+    id="attachmentIntegration"
     :class="entityType && entityId && 'v-card__text pl-0'"
-    class="attachments-application border-box-sizing transparent">
+    class="attachment-application border-box-sizing transparent">
     <div class="d-flex attachmentsIntegrationSlot">
       <div
         v-if="$scopedSlots.attachmentsButton"
@@ -18,7 +18,9 @@
           v-if="!attachmentsToDisplay.length"
           class="addAttachments d-flex align-center ms-3"
           @click="openAttachmentsAppDrawer()">
-          <a class="addAttachementLabel primary--text font-weight-bold text-decoration-underline">{{ $t('attachments.add') }}</a>
+          <a class="addAttachmentLabel primary--text font-weight-bold text-decoration-underline">{{
+            $t('attachments.add')
+          }}</a>
           <v-btn
             icon
             color="primary">
@@ -36,7 +38,9 @@
       </div>
       <div v-else-if="entityId && entityType" class="attachmentsPreview v-card__text ms-3 pa-0">
         <div v-if="attachmentsToDisplay.length" class="attachmentsList">
-          <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentsDrawerList()">
+          <a
+            class="viewAllAttachments primary--text font-weight-bold text-decoration-underline"
+            @click="openAttachmentsDrawerList()">
             {{ $t('attachments.view.all') }} ({{ attachmentsToDisplay && attachmentsToDisplay.length }})
           </a>
           <v-list v-if="!$scopedSlots.attachmentsList" dense>
@@ -52,16 +56,6 @@
         </div>
       </div>
     </div>
-
-    <attachments-drawer
-      ref="attachmentsAppDrawer"
-      :attachments="attachments"
-      :entity-id="entityId"
-      :entity-type="entityType"
-      :default-drive="defaultDrive"
-      :default-folder="defaultFolder" />
-    <attachments-list-drawer
-      :attachments="attachmentsToDisplay" />
     <attachments-notification-alerts style="z-index:1035;" />
   </div>
 </template>
@@ -90,7 +84,7 @@ export default {
       default: ''
     },
   },
-  data () {
+  data() {
     return {
       attachments: []
     };
@@ -98,6 +92,15 @@ export default {
   computed: {
     attachmentsToDisplay() {
       return this.attachments.filter(attachment => attachment.id);
+    },
+    attachmentAppConfiguration() {
+      return {
+        'entityId': this.entityId,
+        'entityType': this.entityType,
+        'defaultDrive': this.defaultDrive,
+        'defaultFolder': this.defaultFolder,
+        'spaceId': this.spaceId
+      };
     }
   },
   watch: {
@@ -105,29 +108,25 @@ export default {
       this.initDefaultDrive();
     },
     entityType() {
-      this.initDefaultDrive();
       this.initEntityAttachmentsList();
     },
     entityId() {
-      this.initDefaultDrive();
       this.initEntityAttachmentsList();
     },
   },
   created() {
-    if (!this.defaultDrive) {
-      this.initDefaultDrive();
-    }
     this.initEntityAttachmentsList();
-    this.$root.$on('entity-attachments-updated', () => this.initEntityAttachmentsList());
-    this.$root.$on('remove-attachment-item', attachment => {
-      this.removeAttachedFile(attachment);
-    });this.$root.$on('add-new-uploaded-file', file => {
-      this.attachments.push(file);
+    this.initDefaultDrive();
+    document.addEventListener('entity-attachments-updated', () => {
+      this.initEntityAttachmentsList();
     });
   },
   methods: {
     openAttachmentsAppDrawer() {
-      this.$root.$emit('open-attachments-app-drawer');
+      document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
+    },
+    openAttachmentsDrawerList() {
+      document.dispatchEvent(new CustomEvent('open-attachments-list-drawer', {detail: this.attachmentAppConfiguration}));
     },
     initEntityAttachmentsList() {
       if (this.entityType && this.entityId) {
@@ -142,57 +141,31 @@ export default {
     initDefaultDrive() {
       const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
         `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
-          this.spaceId;
+          this.attachmentAppConfiguration.spaceId;
       if (spaceId) {
         this.$attachmentService.getSpaceById(spaceId).then(space => {
           if (space) {
             const spaceGroupId = space.groupId.split('/spaces/')[1];
-            this.defaultDrive = {
+            this.attachmentAppConfiguration.defaultDrive = {
               name: `.spaces.${spaceGroupId}`,
               title: spaceGroupId,
               isSelected: true
             };
           }
         });
-      } else if (this.entityId && this.entityType) {
-        this.defaultDrive = {
+      } else if (this.attachmentAppConfiguration.entityId && this.attachmentAppConfiguration.entityType) {
+        this.attachmentAppConfiguration.defaultDrive = {
           isSelected: true,
           name: 'Personal Documents',
           title: 'Personal Documents'
         };
-        this.defaultFolder = 'Public';
+        this.attachmentAppConfiguration.defaultFolder = 'Public';
       }
     },
     getURLQueryParam(paramName) {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has(paramName)) {
         return urlParams.get(paramName);
-      }
-    },
-    openAttachmentsDrawerList() {
-      this.$root.$emit('open-attachments-list-drawer');
-    },
-    removeAttachedFile: function (file) {
-      if (!file.id) {
-        const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.uploadId === file.uploadId );
-        this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
-        if (file.uploadProgress !== this.maxProgress) {
-          this.uploadingCount--;
-          this.$emit('uploadingCountChanged', this.uploadingCount);
-          this.processNextQueuedUpload();
-        }
-      } else {
-        this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.startLoading();
-        this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
-          const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id );
-          this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.delete.success'),
-            type: 'success',
-          });
-          this.$root.$emit('entity-attachments-updated');
-          this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.endLoading();
-        });
       }
     },
   }

@@ -4,23 +4,25 @@
     class="attachmentsListDrawer"
     right>
     <template slot="title">
-      <div class="drawerTitle">
+      <div class="drawerHeader d-flex align-center justify-space-between">
+        <div class="drawerTitle">
+          <v-btn
+            icon
+            color="grey"
+            @click="closeAttachmentsListDrawer()">
+            <v-icon>mdi-keyboard-backspace</v-icon>
+          </v-btn>
+          <span>{{ $t('attachments.list') }}</span>
+        </div>
         <v-btn
           icon
-          color="grey"
-          @click="closeAttachmentsListDrawer()">
-          <v-icon>mdi-keyboard-backspace</v-icon>
+          color="primary"
+          @click="openAttachmentsAppDrawer()">
+          <v-icon size="20">
+            fa-plus
+          </v-icon>
         </v-btn>
-        <span>{{ $t('attachments.list') }}</span>
       </div>
-      <v-btn
-        icon
-        color="primary"
-        @click="openAttachmentsAppDrawer()">
-        <v-icon size="20">
-          fa-plus
-        </v-icon>
-      </v-btn>
     </template>
     <template slot="content">
       <div v-if="attachments.length" class="uploadedFilesItems ml-5">

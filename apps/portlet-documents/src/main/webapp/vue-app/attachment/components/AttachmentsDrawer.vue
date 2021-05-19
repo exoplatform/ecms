@@ -21,7 +21,7 @@
             :attachments="attachments"
             :schema-folder="schemaFolder" />
 
-          <!-- Select From Drives Disabled for the moment -->
+          <!-- TODO move to an other component for select from drives -->
           <!--<div class="d-flex align-center">
             <v-subheader class="text-sub-title pl-0 d-flex">Platform Documents</v-subheader>
             <v-divider></v-divider>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import {getAttachmentsComposerExtensions} from '../js/extension';
+import {getAttachmentsComposerExtensions} from '../../../js/extension';
 
 export default {
   props: {
@@ -220,7 +220,7 @@ export default {
     this.$root.$on('attachments-default-folder-path-initialized', (defaultDestinationFolderPath, folderName) => {
       this.initDefaultDestinationFolderPath(defaultDestinationFolderPath, folderName);
     });
-    this.$root.$on('remove-destination-for-file', folderName => {
+    this.$root.$on('remove-destination-for-file', (folderName) => {
       this.deleteDestinationPathForFile(folderName);
     });
     this.$root.$on('select-destination-path-for-file', (pathDestinationFolder, folder, isPublic, currentDrive) => {
@@ -277,48 +277,28 @@ export default {
       this.currentDrive = currentDrive;
       this.pathDestinationFolder = pathDestinationFolder;
       this.schemaFolder = folder.split('/');
-      for (let i = 0; i < this.attachments.length; i++) {
-        if (!this.attachments[i].destinationFolder || this.attachments[i].destinationFolder === this.defaultDestinationFolderPath) {
-          this.attachments[i].destinationFolder = this.pathDestinationFolder;
-          this.attachments[i].fileDrive = this.currentDrive;
-        }
-      }
+      this.$root.$emit('add-destination-path-for-all', this.defaultDestinationFolderPath, this.pathDestinationFolder, this.currentDrive);
     },
     addDestinationFolderForFile(pathDestinationFolder, folder, isPublic, currentDrive) {
-      for (let i = 0; i < this.attachments.length; i++) {
-        if (this.attachments[i].name === this.destinationFileName) {
-          this.attachments[i].pathDestinationFolderForFile = folder;
-          this.attachments[i].destinationFolder = pathDestinationFolder.startsWith('/') ? pathDestinationFolder.substring(1) : pathDestinationFolder;
-          this.attachments[i].fileDrive = currentDrive;
-          // TODO: get 'isPublic' property of file from rest, now 'isPublic' assigned to 'isPublic' property of destination folder
-          this.attachments[i].isPublic = isPublic;
-        }
-      }
+      this.$root.$emit('add-destination-path-for-file', this.destinationFileName, pathDestinationFolder, folder, isPublic, currentDrive);
       this.modeFolderSelectionForFile = false;
     },
-    toggleServerFileSelector(selectedFiles) {
+    deleteDestinationPathForFile(folderName) {
+      this.$root.$emit('remove-destination-path-for-file', folderName, this.currentDrive);
+    },
+    /** TODO move to an other component for select from drives **/
+    /*toggleServerFileSelector(selectedFiles) {
       if (selectedFiles) {
         this.attachments = selectedFiles;
         this.attachmentInfo = true;
         this.$emit('input', this.attachments);
         this.$emit('attachmentsChanged', this.attachments);
       }
-    },
+    },*/
     openSelectDestinationFolderForFile(file) {
       this.modeFolderSelectionForFile = true;
       this.destinationFileName = file.name;
       this.$root.$emit('open-drive-explorer-drawer');
-    },
-    deleteDestinationPathForFile(fileName) {
-      for (let i = 0; i < this.attachments.length; i++) {
-        if (this.attachments[i].name === fileName) {
-          this.attachments[i].pathDestinationFolderForFile = '';
-          this.attachments[i].fileDrive = this.currentDrive;
-          this.attachments[i].destinationFolder = this.pathDestinationFolder;
-          this.attachments[i].isPublic = true;
-          break;
-        }
-      }
     },
     setCloudDriveProgress({progress}) {
       this.cloudDriveConnecting = progress ? true : false;
@@ -415,7 +395,9 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
-      this.attachments = this.entityType && this.entityId ? this.attachments : [];
+      if ( this.entityType && this.entityId ) {
+        this.$root.$emit('reset-attachment-list');
+      }
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(this.uploadedFiles)}}));
       this.uploadedFiles = [];
@@ -424,6 +406,8 @@ export default {
       const attachmentIds = this.uploadedFiles.map(attachment => attachment.UUID);
       return this.$attachmentService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
+        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+
       });
     }
   }

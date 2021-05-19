@@ -14,7 +14,7 @@ const url = [`/portal/rest/i18n/bundle/locale.attachmentsSelector.attachments-${
 
 // get overridden components if exist
 if (extensionRegistry) {
-  const components = extensionRegistry.loadComponents('attachmentsApp');
+  const components = extensionRegistry.loadComponents('attachmentIntegration');
   if (components && components.length > 0) {
     components.forEach(cmp => {
       Vue.component(cmp.componentName, cmp.componentOptions);
@@ -26,13 +26,13 @@ exoi18n.loadLanguageAsync(lang, url).then(i18n => {
   new Vue({i18n});
 });
 
-const appId = 'attachmentsApp';
-let attachmentsApp;
+const appId = 'attachmentIntegration';
+let attachmentIntegration;
 export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId) {
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready
-    attachmentsApp = new Vue({
+    attachmentIntegration = new Vue({
       data: () => ({
         entityId: entityId || '',
         entityType: entityType || '',
@@ -40,7 +40,7 @@ export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId)
         defaultFolder: defaultFolder || '',
         spaceId: spaceId || '',
       }),
-      template: `<attachments-app
+      template: `<attachment-app
                   :entity-id=entityId
                   :entity-type=entityType
                   :default-drive=defaultDrive
@@ -54,13 +54,13 @@ export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId)
 }
 
 export function openAttachmentsDrawer() {
-  if (attachmentsApp) {
-    attachmentsApp.$root.$emit('open-attachments-app-drawer');
+  if (attachmentIntegration) {
+    attachmentIntegration.$root.$emit('open-attachments-app-drawer');
   }
 }
 
 export function destroy() {
-  if (attachmentsApp) {
-    attachmentsApp.$destroy();
+  if (attachmentIntegration) {
+    attachmentIntegration.$destroy();
   }
 }

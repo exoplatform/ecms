@@ -90,11 +90,11 @@
   </module>
 
   <portlet>
-    <name>AttachmentsApp</name>
+    <name>AttachmentApp</name>
     <module>
       <script>
         <minify>false</minify>
-        <path>/js/attachmentsApp.bundle.js</path>
+        <path>/js/attachmentApp.bundle.js</path>
       </script>
       <depends>
         <module>vue</module>
@@ -115,8 +115,38 @@
       <depends>
         <module>commonVueComponents</module>
       </depends>
+      <depends>
+        <module>AttachmentIntegration</module>
+      </depends>
     </module>
   </portlet>
+
+  <module>
+    <name>AttachmentIntegration</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/attachmentIntegration.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+      <as>$</as>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+    <depends>
+      <module>commonVueComponents</module>
+    </depends>
+  </module>
 
   <portal-skin>
     <skin-name>Enterprise</skin-name>
