@@ -104,9 +104,6 @@ export default {
     }
   },
   watch: {
-    spaceId() {
-      this.initDefaultDrive();
-    },
     entityType() {
       this.initEntityAttachmentsList();
     },
@@ -116,7 +113,6 @@ export default {
   },
   created() {
     this.initEntityAttachmentsList();
-    this.initDefaultDrive();
     document.addEventListener('entity-attachments-updated', () => {
       this.initEntityAttachmentsList();
     });
@@ -136,36 +132,6 @@ export default {
           });
           this.attachments = attachments;
         });
-      }
-    },
-    initDefaultDrive() {
-      const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
-        `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
-          this.attachmentAppConfiguration.spaceId;
-      if (spaceId) {
-        this.$attachmentService.getSpaceById(spaceId).then(space => {
-          if (space) {
-            const spaceGroupId = space.groupId.split('/spaces/')[1];
-            this.attachmentAppConfiguration.defaultDrive = {
-              name: `.spaces.${spaceGroupId}`,
-              title: spaceGroupId,
-              isSelected: true
-            };
-          }
-        });
-      } else if (this.attachmentAppConfiguration.entityId && this.attachmentAppConfiguration.entityType) {
-        this.attachmentAppConfiguration.defaultDrive = {
-          isSelected: true,
-          name: 'Personal Documents',
-          title: 'Personal Documents'
-        };
-        this.attachmentAppConfiguration.defaultFolder = 'Public';
-      }
-    },
-    getURLQueryParam(paramName) {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has(paramName)) {
-        return urlParams.get(paramName);
       }
     },
   }

@@ -511,9 +511,20 @@ export default {
       }
     },
     entityId() {
-      console.warn(this.entityId);
       this.initDestinationFolderPath();
-    }
+    },
+    entityType() {
+      this.initDestinationFolderPath();
+    },
+    spaceId() {
+      this.initDestinationFolderPath();
+    },
+    defaultDrive() {
+      this.initDestinationFolderPath();
+    },
+    defaultFolder() {
+      this.initDestinationFolderPath();
+    },
   },
   created() {
     this.selectedFiles = this.attachedFiles.slice();

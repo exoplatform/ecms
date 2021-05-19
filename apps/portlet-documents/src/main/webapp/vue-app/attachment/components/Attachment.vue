@@ -53,7 +53,6 @@ export default {
     this.$root.$on('add-new-uploaded-file', file => {
       this.attachments.push(file);
     });
-
     this.$root.$on('remove-destination-path-for-file', (folderName, currentDrive) => {
       this.deleteDestinationPathForFile(folderName, currentDrive);
     });
@@ -70,9 +69,11 @@ export default {
       this.attachmentAppConfiguration = event.detail;
       if (this.entityType && this.entityId) {
         this.initEntityAttachmentsList().then(() => {
+          this.initDefaultDrive();
           this.openAttachmentsAppDrawer();
         });
       } else {
+        this.initDefaultDrive();
         this.openAttachmentsAppDrawer();
       }
     });
@@ -80,9 +81,11 @@ export default {
       this.attachmentAppConfiguration = event.detail;
       if (this.entityType && this.entityId) {
         this.initEntityAttachmentsList().then(() => {
+          this.initDefaultDrive();
           this.openAttachmentsDrawerList();
         });
       } else {
+        this.initDefaultDrive();
         this.openAttachmentsDrawerList();
       }
     });
@@ -92,7 +95,6 @@ export default {
       this.$root.$emit('open-attachments-app-drawer');
     },
     initEntityAttachmentsList() {
-      //TODO add loading drawer
       if (this.entityType && this.entityId) {
         return this.$attachmentService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
           attachments.forEach(attachments => {
@@ -100,36 +102,6 @@ export default {
           });
           this.attachments = attachments;
         });
-      }
-    },
-    initDefaultDrive() {
-      const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
-        `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
-          this.spaceId;
-      if (spaceId) {
-        return this.$attachmentService.getSpaceById(spaceId).then(space => {
-          if (space) {
-            const spaceGroupId = space.groupId.split('/spaces/')[1];
-            this.defaultDrive = {
-              name: `.spaces.${spaceGroupId}`,
-              title: spaceGroupId,
-              isSelected: true
-            };
-          }
-        });
-      } else if (this.entityId && this.entityType) {
-        this.defaultDrive = {
-          isSelected: true,
-          name: 'Personal Documents',
-          title: 'Personal Documents'
-        };
-        this.defaultFolder = 'Public';
-      }
-    },
-    getURLQueryParam(paramName) {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has(paramName)) {
-        return urlParams.get(paramName);
       }
     },
     openAttachmentsDrawerList() {
@@ -186,6 +158,36 @@ export default {
           this.attachments[i].destinationFolder = pathDestinationFolder;
           this.attachments[i].fileDrive = currentDrive;
         }
+      }
+    },
+    initDefaultDrive() {
+      const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
+        `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
+          this.attachmentAppConfiguration.spaceId;
+      if (spaceId) {
+        this.$attachmentService.getSpaceById(spaceId).then(space => {
+          if (space) {
+            const spaceGroupId = space.groupId.split('/spaces/')[1];
+            this.attachmentAppConfiguration.defaultDrive = {
+              name: `.spaces.${spaceGroupId}`,
+              title: spaceGroupId,
+              isSelected: true
+            };
+          }
+        });
+      } else if (this.attachmentAppConfiguration.entityId && this.attachmentAppConfiguration.entityType) {
+        this.attachmentAppConfiguration.defaultDrive = {
+          isSelected: true,
+          name: 'Personal Documents',
+          title: 'Personal Documents'
+        };
+        this.attachmentAppConfiguration.defaultFolder = 'Public';
+      }
+    },
+    getURLQueryParam(paramName) {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has(paramName)) {
+        return urlParams.get(paramName);
       }
     },
   }
