@@ -85,16 +85,16 @@ public class Utils {
   public  static final String SHARE_CONTENT        = "sharecontents:spaces";
 
   /** the publication:currentState property name */
-  private static final String CURRENT_STATE_PROP  = "publication:currentState";
+  public static final String  CURRENT_STATE_PROP  = "publication:currentState";
 
   public static final String EXO_RESOURCES_URI            = "/eXoSkin/skin/images/themes/default/Icons/TypeIcons/EmailNotificationIcons/";
   public static final String ICON_FILE_EXTENSION          = ".png";
   public static final String DEFAULT_AVATAR          = "/eXoSkin/skin/images/themes/default/social/skin/ShareImages/UserAvtDefault.png";
-
+  public static int    MAX_SUMMARY_LINES_COUNT    = 4;
+  
   private static String MIX_COMMENT                = "exo:activityComment";
   private static String MIX_COMMENT_ID             = "exo:activityCommentID";
-  private static int    MAX_SUMMARY_LINES_COUNT    = 4;
-  private static int    MAX_SUMMARY_CHAR_COUNT     = 430;
+  public static int    MAX_SUMMARY_CHAR_COUNT     = 430;
   private static String activityType;
   private static final String CREATION_MESSAGE = "files:spaces.CREATION_COMMENT";
   private static final String RENAME_COMMENT   = "files:spaces.RENAME_COMMENT";

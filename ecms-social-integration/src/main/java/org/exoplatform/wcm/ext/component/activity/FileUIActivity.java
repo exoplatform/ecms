@@ -1919,5 +1919,12 @@ public class FileUIActivity extends BaseUIActivity{
     }
     return cloudFileIcon;
   }
-
+  
+  public boolean isActivityShareable() {
+    return true;
+  }
+  
+  public String getOriginalActivityType() {
+    return SharedFileUIActivity.ACTIVITY_TYPE;
+  }
 }

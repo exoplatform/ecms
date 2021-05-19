@@ -11,7 +11,10 @@
     <type>org.exoplatform.wcm.ext.component.document.service.ShareDocumentService</type>
   </component>
   <component>
-    <type>org.exoplatform.wcm.ext.component.document.service.ContentViewerRESTService</type>
+    <type>org.exoplatform.wcm.ext.component.document.service.rest.ShareDocumentRestService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.ext.component.document.service.rest.ContentViewerRESTService</type>
   </component>
   <component>
     <type>org.exoplatform.social.ckeditor.HTMLUploadImageProcessor</type>
@@ -282,6 +285,46 @@
             </field>
           </object>
         </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin profiles="all">
+      <name>add.action</name>
+      <set-method>registerUIExtensionPlugin</set-method>
+      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+      <init-params>
+        <object-param>
+          <name>Shared File Activity</name>
+          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
+            <field name="type">
+              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
+            </field>
+            <field name="name">
+              <string>SHARED_FILE_ACTIVITY</string>
+            </field>
+            <field name="component">
+              <string>org.exoplatform.wcm.ext.component.activity.SharedFileUIActivity</string>
+            </field>
+            <field name="activityBuiderClass">
+              <string>org.exoplatform.wcm.ext.component.activity.FileUIActivityBuilder</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <external-component-plugins>
+    <target-component>org.exoplatform.groovyscript.text.TemplateService</target-component>
+    <component-plugin>
+      <name>FileUIActivityAttachments</name>
+      <set-method>addTemplateExtension</set-method>
+      <type>org.exoplatform.groovyscript.text.TemplateExtensionPlugin</type>
+      <init-params>
+        <values-param>
+          <name>templates</name>
+          <description>The attachements template to include in file activity template</description>
+          <value>war:/groovy/ecm/social-integration/plugin/space/UIFileUIActivityAttachments.gtmpl</value>
+        </values-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>

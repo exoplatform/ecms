@@ -1,0 +1,391 @@
+
+<%
+/*
+<!--
+
+    Copyright (C) 2003-2021 eXo Platform SAS.
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Affero General Public License
+    as published by the Free Software Foundation; either version 3
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, see<http://www.gnu.org/licenses/>.
+
+-->
+*/
+%>
+<%
+
+  import org.exoplatform.services.jcr.core.ManageableRepository;
+  import org.exoplatform.wcm.ext.component.activity.ContentPresentation;
+  import org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.social.core.service.LinkProvider;
+  import org.exoplatform.social.webui.Utils;
+  import org.apache.commons.lang.StringEscapeUtils;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  import org.apache.commons.lang.StringUtils;
+  import org.exoplatform.social.core.space.model.Space;
+
+  def activity = uicomponent.getActivity();
+
+  if(uicomponent.getFilesCount() > 0) { 
+      def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
+	  def ownerIdentity = uicomponent.ownerIdentity;
+	  if (uicomponent.isUserActivity()) {
+		ownerUri = LinkProvider.getUserProfileUri(ownerIdentity.getRemoteId());
+		ownerAvatar = ownerIdentity.profile.avatarUrl;
+		ownerName = StringEscapeUtils.escapeHtml(ownerIdentity.profile.fullName);
+		if (!ownerAvatar) ownerAvatar= LinkProvider.PROFILE_DEFAULT_AVATAR_URL;
+	  } else {
+		Space space = Utils.getSpaceService().getSpaceByPrettyName(ownerIdentity.remoteId);
+		ownerUri = Utils.getSpaceHomeURL(space);
+		ownerAvatar = space.avatarUrl;
+		ownerName = space.displayName;
+		if (!ownerAvatar) ownerAvatar = LinkProvider.SPACE_DEFAULT_AVATAR_URL;
+	  }
+	  def activityPostedTime = uicomponent.getRelativeTimeLabel(_ctx, activity.postedTime);  
+	  def activityStatus = uicomponent.getActivityStatus();
+	  def displayedIdentityLikes = uicomponent.getDisplayedIdentityLikes();
+	  def identityLikesNum = 0;
+
+	  if (displayedIdentityLikes != null) {
+		identityLikesNum = displayedIdentityLikes.length;
+	  }
+	  def linkExistsClassName = uicomponent.getLinkSource() ? "linkExists" : "";
+	  
+	  def spaceURL = uicomponent.getSpaceURL();
+  %>
+
+  <div class="previews Previews${activity.id}">
+  <div class="fileShare">
+
+  <%
+    int maxToDisplay = 3;
+    int filesToDisplay = uicomponent.getFilesCount() > maxToDisplay ? maxToDisplay : uicomponent.getFilesCount();
+    //if link exists
+    filesToDisplay = uicomponent.getLinkSource() && (filesToDisplay != maxToDisplay) ? filesToDisplay+1 : filesToDisplay;
+    if (uicomponent.getLinkSource()){
+      String linkSource = uicomponent.getLinkSource();
+      String linkTitle = uicomponent.getLinkTitle();
+      if (linkTitle == null || linkTitle.equals("")) {
+        linkTitle = UILinkUtil.simpleEscapeHtml(linkSource);
+      }
+      String linkImage = uicomponent.getLinkImage();
+      String linkDescription = UILinkUtil.simpleEscapeHtml(uicomponent.getLinkDescription());
+      //
+      linkTitle = UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkTitle));
+      linkSource = UILinkUtil.simpleEscapeHtml(org.exoplatform.social.service.rest.Util.getDecodeQueryURL(linkSource));
+      //
+      def isDefaultPreview = "";
+      if (linkImage == null || linkImage.equals("")) {
+        linkImage = "/eXoSkin/skin/images/system/composer/PostLinks.png";
+        isDefaultPreview = "defaultPreview";
+      }
+      def embedHtml = uicomponent.getEmbedHtml();
+  %>
+  <div class="uiBox roundedBottom introBox linkShare clearfix isPreviewable previewable${filesToDisplay}0 ${linkExistsClassName} ${isDefaultPreview}">
+      <div class="clearfix linkClass">
+      					<% if (embedHtml == null && linkImage.length() != 0) { %>
+                            <div class="linkPreview ${isDefaultPreview}" alt="$linkTitle" style="background-image: url($linkImage);">
+                               <% if (isDefaultPreview) { %>
+                                    <div class="defaultImage" style="background-image: url($linkImage);"></div>
+                               <% } %>
+                               <div class="boxDescription">
+                                 <div class="block">
+                                   <div class="titlePreview"><a target="_blank" href="$linkSource" target="_blank">$linkTitle</a></div>
+                                   <div class="descriptionLink">$linkDescription</div>
+                                   <div class="link" ><a href="$linkSource" target="_blank"><i class="far fa-link"></i> $linkSource</a></div>
+                                 </div>
+                               </div>
+                            </div>
+                            <% } %>
+                            <% if (embedHtml != null) { %>
+      							<div class="EmbedHtml">$embedHtml</div>
+      					<% } %>
+      				</div>
+      				</div><!--end introBox,linkShare-->
+  <%
+  }
+// for each node
+for(def index = 0; index < uicomponent.getFilesCount(); index++) {
+    def currentNode = uicomponent.getContentNode(index);
+    def contentName = uicomponent.getContentName(index);
+    def mimeType = uicomponent.getMimeType(index);
+    def classIconName = uicomponent.getCssClassIconFile(contentName, mimeType, index);
+
+    if (currentNode == null) {
+      continue;
+    }
+
+    //ECMS declare variables - BEGIN
+    if (uicomponent.isSymlink(index)) {
+        activityContentTitle = uicomponent.getDocTitle(index);
+    } else {
+        activityContentTitle = uicomponent.getTitle(currentNode);
+    }
+
+    def uicontentpresentation = uicomponent.addChild(ContentPresentation.class, null, null);
+    uicontentpresentation.setNode(currentNode);
+    def binarySrc = uicomponent.getWebdavURL(index);
+    def summary =  uicomponent.getSummary(currentNode);
+    String repository = ((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName();
+    def preferenceWS  = currentNode.getSession().getWorkspace().getName();
+    def fileComponent = uicontentpresentation.getUIComponent(mimeType);
+
+    def ilBinarySrc = uicomponent.getImagePath(index);
+
+    def state = uicomponent.getState(index);
+    def author = uicomponent.getAuthor(index);
+    def lastModified = uicomponent.getLastModified(index) == null ?  "" : uicomponent.getLastModified(index);
+    def dateCreated = uicomponent.getDateCreated(index);
+    def version = uicomponent.getVersion(currentNode);
+
+    String portalName = uicomponent.getContainerName();
+
+    String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+    if(mimeType.equals("application/rss+xml")) mimeType="text/html";
+    //ECMS declare variables - END
+    def docTypeName = uicomponent.getDocTypeName(index);
+    def docSummary = uicomponent.getDocSummary(index);
+    def docDownloadUrl = uicomponent.event("DownloadDocument", "" + index);
+    def remoteEditURL = uicomponent.event("OpenFile", "" + index);
+    def docOpenUri = uicomponent.getCurrentDocOpenUri(index);
+    def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
+    def remoteEditClass=_documentInfos[1];
+    def remoteEditTitle=_ctx.appRes(_documentInfos[0]).replace("'", "\\'");;
+    def fileType = org.exoplatform.services.cms.impl.Utils.getFileType(currentNode).replace("uiIcon", "uiBgd");
+    def escapedOwnerName = ownerName.replace("'", "\\'").replace("&#39;", "\\&#39;");
+    def escapedActivityPostedTime = activityPostedTime.replace("'", "\\'").replace("&#39;", "\\&#39;");
+    def escapedActivityStatus = activityStatus != null ? StringEscapeUtils.escapeHtml(activityStatus.replace("'", "\\'").replace("&#39;", "\\&#39;").replace("\n", "").replace("\r", "")) : "";
+    def size = uicomponent.getSize(currentNode);
+    def docFolderRelativePath = uicomponent.getDocFolderRelativePath(index);
+    docFolderRelativePath = docFolderRelativePath.replaceAll("/", " > ");
+    docFolderRelativePath = docFolderRelativePath.replaceAll("%27", "'");
+    def docFolderBreadCrumb = uicomponent.getDocFolderRelativePathWithLinks(index);
+    def fileSize = uicomponent.getFileSize(currentNode);
+    def description = ContentReader.simpleEscapeHtml(uicomponent.getSummary(currentNode));
+    def filePath = uicomponent.getDocFilePath(index);
+
+    def folderIndex = 0;
+    def breadCrumbContent = uicomponent.getDocFileBreadCrumb(index);
+    def breadCrumbSize = docFolderBreadCrumb == null ? 0 : docFolderBreadCrumb.size();
+
+    def newIndex = uicomponent.getLinkSource() ? index+1 : index;
+    def previousDoc = newIndex == index ? 1 : 2;
+    def nextDoc = newIndex == index ? 1 : 0;
+    def maxFilesToShow = newIndex == index ? 3 : 2;
+
+    def cloudDrive;
+    def isCloudFile = false;
+    def cloudFileIcon;
+    def cloudFile;
+
+    if (newIndex < maxToDisplay) {
+        cloudDrive = uicomponent.getCloudDrive(currentNode);
+        isCloudFile = uicomponent.isCloudFile(cloudDrive);
+
+        if (isCloudFile) {
+            cloudFileIcon = uicomponent.getCloudFileIcon(cloudDrive);
+            cloudFile = uicomponent.getCloudFile(currentNode);
+            size = cloudFile.getSize();
+        }
+    }
+
+    def fileInfo;
+
+    if (!isCloudFile) {
+        fileInfo = _ctx.appRes("SocialIntegration.messages.updatedOn") + " " + uicomponent.getDocUpdateDate(currentNode) + " " + _ctx.appRes("SocialIntegration.messages.updatedBy") + " " + StringEscapeUtils.escapeHtml(uicomponent.getDocLastModifier(currentNode)) + " " + (StringUtils.isBlank(size) ? "" : (" - " + size));
+    } else {
+        fileInfo = _ctx.appRes("SocialIntegration.messages.updatedOn") + " " + uicomponent.getCloudfileUpdateDate(cloudFile);
+    }
+
+
+    def docPreviewUri = "javascript:require(['SHARED/documentPreview'], \
+                           function(documentPreview) { \
+                                    documentPreview.init({ \
+                                                            doc: { \
+                                                                id:'" + currentNode.getUUID() + "', \
+                                                                repository:'" + repository + "', \
+                                                                workspace:'" + preferenceWS + "', \
+                                                                path:'" + currentNode.getPath().replace("'", "\\'") + "', \
+                                                                title:'" + activityContentTitle.replace("'", "\\'") + "', \
+                                                                openUrl: '" + docOpenUri + "', \
+                                                                downloadUrl:'" + docDownloadUrl.replaceAll("'", "\\\\'") + "', \
+                                                                remoteEditURL:'" + remoteEditURL.replaceAll("'", "\\\\'") + "', \
+                                                                remoteEditTitle :'" + remoteEditTitle + "', \
+                                                                remoteEditClass :'" + remoteEditClass + "', \
+                                                                size:'" + size + "', \
+                                                                cssIcon : '" + classIconName + "' , \
+                                                                fileInfo : '" + fileInfo + "' , \
+                                                                breadCrumb : { " + breadCrumbContent + " } \
+                                                            }, \
+                                                            author: { \
+                                                                username:'" + ownerIdentity.getRemoteId() + "', \
+                                                                fullname:'" + escapedOwnerName + "', \
+                                                                avatarUrl:'" + ownerAvatar + "', \
+                                                                profileUrl:'" + ownerUri + "' \
+                                                            }, \
+                                                            activity: { \
+                                                                id: '" + activity.id + "', \
+                                                                postTime:'" + escapedActivityPostedTime + "', \
+                                                                status: '" + escapedActivityStatus + "', \
+                                                                liked: " + uicomponent.isLiked() + ", \
+                                                                likes: " + identityLikesNum + ", \
+                                                                spaceURL: '" + spaceURL + "',  \
+                                                                next: " + ((newIndex + nextDoc < uicomponent.getFilesCount()) ? ("'#Preview${activity.id}-" + (newIndex + 1) + "'") : "null") + ",  \
+                                                                previous: " + ((newIndex - previousDoc >= 0) ? ("'#Preview${activity.id}-" + (newIndex - 1) + "'") : "null") + " \
+                                                            }, \
+                                                            version: { \
+                                                                number : "+ version +" \
+                                                            }, \
+                                                        }) \
+                             })";
+
+    // END ECMS
+%>
+
+<div id="Preview${activity.id}-$newIndex" class="clearfix isPreviewable previewable${filesToDisplay}${newIndex} ${linkExistsClassName}" onclick="$docPreviewUri">
+<%
+        if (newIndex >= maxToDisplay) { %>
+         </div>
+<%        continue;
+    } else if (mimeType != null && mimeType.length() > 0 && fileSize > 0 && !isCloudFile){
+                if(mimeType.startsWith("image") || mimeType.indexOf("icon") >=0){
+%>
+        <div id="MediaContent${activity.id}-$newIndex" class="mediaContent">
+    <%
+			        def encodedPath = URLEncoder.encode(currentNode.getPath(), "utf-8");
+			        encodedPath = encodedPath.replaceAll ("%2F", "/");
+			        String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/origin/" + repository + "/" + preferenceWS + encodedPath;
+			        if(mimeType.indexOf("icon") >=0) thumbnailImage = binarySrc;
+    %>
+        <img src="$thumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$newIndex').className += ' NoPreview uiBgdFileImage';document.getElementById('MediaContent${activity.id}-$newIndex').removeChild(this);" />
+    </div>
+                                 <%
+                } else if(org.exoplatform.services.cms.impl.Utils.isSupportThumbnailView(mimeType)){%>
+   <div id="MediaContent${activity.id}-$newIndex" class="mediaContent docTypeContent hovereffect">
+   <%
+                    def iconClass = uicomponent.getDefaultIconClass(index);
+	                def encodedPath = URLEncoder.encode(currentNode.getPath(), "utf-8");
+	                encodedPath = encodedPath.replaceAll ("%2F", "/");
+			        String pdfThumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/custom/900x900/" + repository + "/" + preferenceWS + encodedPath+ "?version="+ version+"&lastModified="+ lastModified.hashCode();
+   %>
+        <img src="$pdfThumbnailImage" onerror="document.getElementById('MediaContent${activity.id}-$newIndex').className += ' NoPreview $iconClass';document.getElementById('MediaContent${activity.id}-$newIndex').removeChild(this);" />
+    </div>
+    <%
+                } else if(fileComponent != null) { %>
+     <div id="MediaContent${activity.id}-$newIndex" class="mediaContent PlayerContianer">
+        <% uicontentpresentation.renderUIComponent(fileComponent);%>
+     </div>
+    <%
+                } else { %>
+     <div id="MediaContent${activity.id}-$newIndex" class="mediaContent uiBgdFile NoPreview">
+     </div>
+    <%
+                }
+              } else if (isCloudFile) { %>
+
+                <div id="MediaContent${activity.id}-$newIndex" class="mediaContent CloudfileContainer">
+                    <div class="cloudfilePreviewBox">
+                        <div class="clouddriveIframeBox">
+                          <iframe class="cloudfilePreview"
+                                  src="${cloudFile.getPreviewLink()}">
+                          </iframe>
+                        </div>
+                        <div class="cloudfileDescript">
+                          <div class="cloudfileNameBox">
+                            <i class="${cloudFileIcon} uiIconEcmsBlue"></i>
+                            <span class="cloudfileName">
+                              ${cloudFile.getTitle()}
+                            </span>
+                          </div>
+                          <div class="cloudfileUpdatedBox">
+                            <span class="cloudfileUpdated">
+                                ${fileInfo}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+    <%
+              }
+			   if (newIndex == 2 && uicomponent.getFilesCount() > maxFilesToShow) { %>
+			             <a id="LoadMore${activity.id}-$newIndex" class="MediaName LoadMore" href="javascript:void(0)">
+    			            <%=_ctx.appRes("SocialIntegration.messages.loadMoreFiles").replace("{0}", String.valueOf(uicomponent.getFilesCount() - maxToDisplay + 1))%>
+			             </a>
+			         </div>
+			<%        continue;
+			    } else { %>
+
+		    <div id="MediaName${activity.id}$newIndex" class="MediaName">
+                <h4 class="fileName">
+                    <div class="fileTitle content">
+	                    <div class="fileNameParentLink" data-container="body" rel="tooltip" data-placement="top" data-original-title="$contentName">
+	                       <a href="$filePath" class="ellipsis"
+                              onclick="event.stopPropagation();window.location.href=this.href">
+	                           $contentName
+	                       </a>
+	                    </div>
+	                    <% if(version > 0) {
+	                        def fileVersionURL = filePath + "&versions=true"
+	                        %>
+                            <div class="label primary fileVersion" onclick="event.stopPropagation();window.location.href='$fileVersionURL'">V$version</div>
+	                    <% } %>
+                    </div>
+                    <div class="borderTop"></div>
+                </h4>
+	            <div class="fileBreadCrumbContent ellipsis-reverse">
+	                <div class="ellipsis-reverse-content hidden">...</div>
+	                <div class="ellipsis-reverse-apply" title="$docFolderRelativePath" data-container="body" rel="tooltip" data-placement="top">
+		                <div class="fileBreadCrumbWrapper ellipsis-reverse-apply-content">
+		                    <%
+		                        if(docFolderBreadCrumb != null) {
+							        folderIndex = 0;
+							        for (String folderName : docFolderBreadCrumb.keySet()) {
+							            // Last element is path of file name
+						                if(folderIndex == (breadCrumbSize - 1)) {
+						                    continue;
+						                }
+	                                    if(folderIndex > 0) { %>
+	                                       <i class="uiIconArrowRight"></i>
+	                                 <% }
+								        def folderPath = docFolderBreadCrumb.get(folderName);
+								        folderName = folderName.replaceAll("_" + (breadCrumbSize - folderIndex - 1) + "\$", "");
+	                                    folderName = folderName.replace("%27", "'"); %>
+			                            <a href="$folderPath"
+			                               onclick="event.stopPropagation();window.location.href=this.href">
+			                               $folderName
+			                            </a>
+		                            <%
+			                            folderIndex++;
+				                    }
+                                }
+                            %>
+			            </div>
+			        </div>
+	            </div>
+	            <div class="infoFile">
+	                <div class="borderTop"></div>
+	                <span title="$fileInfo" class="ellipsis content" data-container="body" rel="tooltip" data-placement="top">
+	                   $fileInfo
+	                </span>
+	            </div>
+		    </div>
+
+            <% } %>
+</div> <!-- End isPreviewable -->
+
+
+          <% } /* End for each node */ %>
+
+                </div><!--end fileShare-->
+                </div><!--end previews-->
+<% } %>

@@ -131,6 +131,11 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
             LOG.error(e1.getMessage(), e1);
         }
       }
+      if(link.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){
+        link.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
+        link.save();
+        return link.getUUID();
+      }
     } catch (RepositoryException e) {
       if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
