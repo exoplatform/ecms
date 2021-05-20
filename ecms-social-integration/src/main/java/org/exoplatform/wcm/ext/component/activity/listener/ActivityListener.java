@@ -35,6 +35,10 @@ public class ActivityListener extends ActivityListenerPlugin {
 
   /** The constant POST_ACTIVITY. */
   private static final Boolean         POST_ACTIVITY = false;
+  /** The constant ACTIVITY PARAMS. */
+  private static final String          SEPARATOR_REGEX     = "\\|@\\|";
+  private static final String          NODE_UUID_PARAM     =  "id";
+
 
   private final SpaceService           spaceService;
 
@@ -66,6 +70,7 @@ public class ActivityListener extends ActivityListenerPlugin {
   private void shareActivityFilesToSpace(ActivityLifeCycleEvent activityLifeCycleEvent) {
     ExoSocialActivity activity = activityLifeCycleEvent.getActivity();
     List<ActivityFile> filesToShare = activity.getFiles();
+    String[] uuidNodes = activity.getTemplateParams().get(NODE_UUID_PARAM).split(SEPARATOR_REGEX);
 
     String streamOwner = activity.getStreamOwner();
     Space targetSpace = spaceService.getSpaceByPrettyName(streamOwner);
@@ -84,9 +89,6 @@ public class ActivityListener extends ActivityListenerPlugin {
         currentRepository = repositoryService.getCurrentRepository();
         workspaceName = currentRepository.getConfiguration().getDefaultWorkspaceName();
         session = sessionProvider.getSession(workspaceName, currentRepository);
-      } catch (RepositoryException e) {
-        LOG.warn("Error while getting session for sharing files to the space: " + targetSpace.getGroupId(), e);
-      }
 
       if (session != null) {
         Collection<Membership> memberships = null;
@@ -98,9 +100,9 @@ public class ActivityListener extends ActivityListenerPlugin {
           LOG.warn("Error getting memberships by user (" + currentUserId + ") and group (" + targetSpace.getGroupId() + ")", e);
         }
         if (memberships != null) {
-          for (ActivityFile fileToShare : filesToShare) {
+          for (String nodeUuid : uuidNodes) {
             try {
-              node = session.getNodeByUUID(fileToShare.getId());
+              node = session.getNodeByUUID(nodeUuid);
 
               for (Membership membership : memberships) {
                 organizationalIdentity = new MembershipEntry(membership.getGroupId(), membership.getMembershipType()).toString();
@@ -116,10 +118,15 @@ public class ActivityListener extends ActivityListenerPlugin {
                 }
               }
             } catch (RepositoryException e) {
-              LOG.warn("Error while sharing document to space. Node uuid: " + fileToShare.getId(), e);
+              LOG.error("Error while sharing document to space. Node uuid: " + nodeUuid, e);
             }
           }
         }
+      }
+      } catch (RepositoryException e) {
+        LOG.warn("Error while getting session for sharing files to the space: " + targetSpace.getGroupId(), e);
+      } finally {
+        sessionProvider.close();
       }
     }
   }
