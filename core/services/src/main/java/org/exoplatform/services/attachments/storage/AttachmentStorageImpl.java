@@ -19,6 +19,8 @@ package org.exoplatform.services.attachments.storage;
 import org.exoplatform.services.attachments.dao.AttachmentDAO;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class AttachmentStorageImpl implements AttachmentStorage {
@@ -36,14 +38,15 @@ public class AttachmentStorageImpl implements AttachmentStorage {
       attachmentContextEntity.setEntityId(entityId);
       attachmentContextEntity.setEntityType(entityType.toUpperCase());
       attachmentContextEntity.setAttachmentId(attachmentId);
+      attachmentContextEntity.setAttachedDate(System.currentTimeMillis());
       attachmentDAO.create(attachmentContextEntity);
     });
 
   }
 
   @Override
-  public List<String> getAttachmentsIdsByEntity(long entityId, String entityType) {
-    return attachmentDAO.getAttachmentsIdsByEntity(entityId, entityType.toUpperCase());
+  public List<AttachmentContextEntity> getAttachmentContextByEntity(long entityId, String entityType) {
+    return attachmentDAO.getAttachmentContextByEntity(entityId, entityType.toUpperCase());
   }
 
   @Override

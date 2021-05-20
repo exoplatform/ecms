@@ -23,7 +23,7 @@ import java.util.List;
 public interface AttachmentStorage {
   void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentsIds);
 
-  List<String> getAttachmentsIdsByEntity(long entityId, String entityType);
+  List<AttachmentContextEntity> getAttachmentContextByEntity(long entityId, String entityType);
 
   AttachmentContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId);
 

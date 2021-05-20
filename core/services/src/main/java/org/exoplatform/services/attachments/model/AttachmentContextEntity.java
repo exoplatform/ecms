@@ -20,12 +20,13 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity(name = "AttachmentsContext")
 @ExoEntity
 @Table(name = "EXO_ATTACHMENTS_CONTEXT")
 @NamedQueries({
-    @NamedQuery(name = "AttachmentsContext.getAttachmentContextByEntity", query = "SELECT ac.attachmentId FROM AttachmentsContext ac "
+    @NamedQuery(name = "AttachmentsContext.getAttachmentContextByEntity", query = "SELECT ac FROM AttachmentsContext ac "
         + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType"),
     @NamedQuery(name = "AttachmentsContext.getAttachmentItemByEntity", query = "SELECT ac FROM AttachmentsContext ac "
         + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType AND ac.attachmentId = :attachmentId") })
@@ -46,7 +47,10 @@ public class AttachmentContextEntity implements Serializable {
   private Long              entityId;
 
   @Column(name = "ENTITY_TYPE")
-  private String               entityType;
+  private String            entityType;
+
+  @Column(name = "ATTACHED_DATE")
+  private Long              attachedDate;
 
   public Long getId() {
     return id;
@@ -78,5 +82,13 @@ public class AttachmentContextEntity implements Serializable {
 
   public void setEntityType(String entityType) {
     this.entityType = entityType;
+  }
+
+  public Long getAttachedDate() {
+    return attachedDate;
+  }
+
+  public void setAttachedDate(Long attachedDate) {
+    this.attachedDate = attachedDate;
   }
 }

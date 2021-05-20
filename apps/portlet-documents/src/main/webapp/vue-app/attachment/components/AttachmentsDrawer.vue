@@ -239,6 +239,7 @@ export default {
     },
     closeAttachmentsAppDrawer() {
       document.removeEventListener('paste', this.onPaste, false);
+      this.$root.$emit('reset-attachment-list');
       this.$refs.attachmentsAppDrawer.close();
     },
     uploadFileToDestinationPath: function (file) {
@@ -284,7 +285,7 @@ export default {
       this.modeFolderSelectionForFile = false;
     },
     deleteDestinationPathForFile(folderName) {
-      this.$root.$emit('remove-destination-path-for-file', folderName, this.currentDrive);
+      this.$root.$emit('remove-destination-path-for-file', folderName, this.currentDrive, this.pathDestinationFolder);
     },
     /** TODO move to an other component for select from drives **/
     /*toggleServerFileSelector(selectedFiles) {
@@ -395,9 +396,6 @@ export default {
         message: this.$t('attachments.upload.success'),
         type: 'success',
       });
-      if ( this.entityType && this.entityId ) {
-        this.$root.$emit('reset-attachment-list');
-      }
       this.$refs.attachmentsAppDrawer.endLoading();
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(this.uploadedFiles)}}));
       this.uploadedFiles = [];

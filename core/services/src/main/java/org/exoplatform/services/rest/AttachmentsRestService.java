@@ -40,11 +40,11 @@ import java.util.stream.Collectors;
 @Path("/attachments")
 @Api(value = "/attachments", description = "Managing attachments")
 public class AttachmentsRestService implements ResourceContainer {
-  private static final Log     LOG = ExoLogger.getLogger(AttachmentsRestService.class.getName());
+  private static final Log    LOG = ExoLogger.getLogger(AttachmentsRestService.class.getName());
 
   protected AttachmentService attachmentService;
 
-  protected IdentityManager    identityManager;
+  protected IdentityManager   identityManager;
 
   public AttachmentsRestService(AttachmentService attachmentService, IdentityManager identityManager) {
     this.attachmentService = attachmentService;

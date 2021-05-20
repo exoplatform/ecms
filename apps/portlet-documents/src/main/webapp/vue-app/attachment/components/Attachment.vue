@@ -53,8 +53,8 @@ export default {
     this.$root.$on('add-new-uploaded-file', file => {
       this.attachments.push(file);
     });
-    this.$root.$on('remove-destination-path-for-file', (folderName, currentDrive) => {
-      this.deleteDestinationPathForFile(folderName, currentDrive);
+    this.$root.$on('remove-destination-path-for-file', (folderName, currentDrive, pathDestinationFolder) => {
+      this.deleteDestinationPathForFile(folderName, currentDrive, pathDestinationFolder);
     });
     this.$root.$on('add-destination-path-for-file', (destinationFileName, pathDestinationFolder, folder, isPublic, currentDrive) => {
       this.addDestinationFolderForFile(destinationFileName, pathDestinationFolder, folder, isPublic, currentDrive);
@@ -130,12 +130,12 @@ export default {
         });
       }
     },
-    deleteDestinationPathForFile(fileName, currentDrive) {
+    deleteDestinationPathForFile(fileName, currentDrive, pathDestinationFolder) {
       for (let i = 0; i < this.attachments.length; i++) {
         if (this.attachments[i].name === fileName) {
           this.attachments[i].pathDestinationFolderForFile = '';
           this.attachments[i].fileDrive = currentDrive;
-          this.attachments[i].destinationFolder = currentDrive;
+          this.attachments[i].destinationFolder = pathDestinationFolder;
           this.attachments[i].isPublic = true;
           break;
         }

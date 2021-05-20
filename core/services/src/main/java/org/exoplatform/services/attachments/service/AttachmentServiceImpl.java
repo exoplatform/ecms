@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.attachments.service;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
@@ -81,8 +82,8 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    List<String> existingAttachmentsIds = attachmentStorage.getAttachmentsIdsByEntity(entityId, entityType);
-
+    List<AttachmentContextEntity> existingAttachmentsContext = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
+    List<String> existingAttachmentsIds = (List<String>) existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId);
     // delete removed attachments
     existingAttachmentsIds.stream().filter(attachmentId -> !attachmentIds.contains(attachmentId)).forEach(attachmentId -> {
       try {
@@ -107,8 +108,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
-
-    List<String> attachmentsIds = attachmentStorage.getAttachmentsIdsByEntity(entityId, entityType);
+    List<AttachmentContextEntity> existingAttachmentsContext = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
+    List<String> attachmentsIds = (List<String>) existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId);
 
     if (attachmentsIds.isEmpty()) {
       throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " has no attachment linked");
@@ -151,23 +152,24 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    List<String> attachmentsIds = attachmentStorage.getAttachmentsIdsByEntity(entityId, entityType);
+    List<AttachmentContextEntity> attachmentsContextEntity = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
+    sortAttachments(attachmentsContextEntity);
     List<Attachment> attachments = new ArrayList<>();
-    if (attachmentsIds.size() > 0) {
+    if (attachmentsContextEntity.size() > 0) {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());
       try {
-        attachmentsIds.forEach(attachmentId -> {
+        attachmentsContextEntity.forEach(attachmentContextEntity -> {
           try {
             Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                                      documentService,
                                                                      workspace,
                                                                      session,
-                                                                     attachmentId);
+                                                                     attachmentContextEntity);
             attachments.add(attachment);
           } catch (Exception e) {
-            LOG.error("Cannot get attachment with id " + attachmentId + " of entity " + entityType + " with id " + entityId, e);
+            LOG.error("Cannot get attachment with id " + attachmentContextEntity.getAttachmentId() + " of entity " + entityType + " with id " + entityId, e);
           }
         });
       } finally {
@@ -177,6 +179,10 @@ public class AttachmentServiceImpl implements AttachmentService {
       }
     }
     return attachments;
+  }
+
+  private void sortAttachments(List<AttachmentContextEntity> attachments) {
+    attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(), attachment1.getAttachedDate()));
   }
 
 }

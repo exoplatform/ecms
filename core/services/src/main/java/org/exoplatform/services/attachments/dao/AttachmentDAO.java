@@ -26,12 +26,12 @@ import java.util.List;
 
 public class AttachmentDAO extends GenericDAOJPAImpl<AttachmentContextEntity, Long> {
 
-  public List<String> getAttachmentsIdsByEntity(long entityId, String entityType) {
-    TypedQuery<String> query =
-                             getEntityManager().createNamedQuery("AttachmentsContext.getAttachmentContextByEntity", String.class);
+  public List<AttachmentContextEntity> getAttachmentContextByEntity(long entityId, String entityType) {
+    TypedQuery<AttachmentContextEntity> query =
+                             getEntityManager().createNamedQuery("AttachmentsContext.getAttachmentContextByEntity", AttachmentContextEntity.class);
     query.setParameter("entityId", entityId);
     query.setParameter("entityType", entityType);
-    List<String> resultList = query.getResultList();
+    List<AttachmentContextEntity> resultList = query.getResultList();
     return resultList == null ? Collections.emptyList() : resultList;
   }
 

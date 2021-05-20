@@ -38,6 +38,7 @@
       <column name="ATTACHMENT_ID" type="NVARCHAR(200)"/>
       <column name="ENTITY_ID" type="BIGINT" />
       <column name="ENTITY_TYPE" type="NVARCHAR(200)" />
+      <column name="ATTACHED_DATE" type="BIGINT" />
     </createTable>
     <modifySql dbms="mysql">
       <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci" />

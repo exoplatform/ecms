@@ -17,6 +17,7 @@
 package org.exoplatform.services.attachments.utils;
 
 import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -68,8 +69,8 @@ public class EntityBuilder {
                                                     DocumentService documentService,
                                                     String workspace,
                                                     Session session,
-                                                    String attachmentId) throws Exception {
-    Node attachmentNode = session.getNodeByUUID(attachmentId);
+                                                    AttachmentContextEntity attachmentContextEntity) throws Exception {
+    Node attachmentNode = session.getNodeByUUID(attachmentContextEntity.getAttachmentId());
     Attachment attachment = new Attachment();
     attachment.setId(attachmentNode.getUUID());
     String attachmentsTitle = getStringProperty(attachmentNode, "exo:title");
