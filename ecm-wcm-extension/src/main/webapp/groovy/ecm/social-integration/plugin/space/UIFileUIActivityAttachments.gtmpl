@@ -143,7 +143,6 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     def ilBinarySrc = uicomponent.getImagePath(index);
 
     def state = uicomponent.getState(index);
-    def author = uicomponent.getAuthor(index);
     def lastModified = uicomponent.getLastModified(index) == null ?  "" : uicomponent.getLastModified(index);
     def dateCreated = uicomponent.getDateCreated(index);
     def version = uicomponent.getVersion(currentNode);

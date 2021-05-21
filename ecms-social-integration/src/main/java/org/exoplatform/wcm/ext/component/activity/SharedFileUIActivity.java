@@ -17,6 +17,9 @@
 package org.exoplatform.wcm.ext.component.activity;
 
 import java.util.Map;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -24,6 +27,7 @@ import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvide
 import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.webui.Utils;
 import org.exoplatform.social.webui.activity.BaseUIActivity;
+import org.exoplatform.social.webui.activity.UILinkActivity;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -86,8 +90,18 @@ public class SharedFileUIActivity extends FileUIActivity {
   protected boolean isOriginalActivitySpaceStreamOwner() {
     return getOriginalActivity().getActivityStream().getType().name().equalsIgnoreCase(SpaceIdentityProvider.NAME);
   }
-
-  public boolean isActivityShareable() {
-    return false;
+  
+  public String getOriginalActivityStatus() {
+    Map<String, String> originalActivityTemplateParams = getOriginalActivity().getTemplateParams();
+    String HTML_A_HREF_TAG_PATTERN = "^<a\\s*(?i)href\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]>"+ originalActivityTemplateParams.get(FileUIActivity.DOCUMENT_TITLE) +"<\\/a>$))";
+    Pattern patternLink = Pattern.compile(HTML_A_HREF_TAG_PATTERN);
+    if (StringUtils.isNotBlank(originalActivityTemplateParams.get(UILinkActivity.COMMENT_PARAM))) {
+      return originalActivityTemplateParams.get(UILinkActivity.COMMENT_PARAM);
+    } else if (StringUtils.isNotBlank(originalActivityTemplateParams.get(FileUIActivity.ACTIVITY_STATUS))
+        || (!patternLink.matcher(getOriginalActivity().getTitle()).find())) {
+      return getOriginalActivity().getTitle();
+    } else {
+      return originalActivityTemplateParams.get(FileUIActivity.ACTIVITY_STATUS);
+    }
   }
 }

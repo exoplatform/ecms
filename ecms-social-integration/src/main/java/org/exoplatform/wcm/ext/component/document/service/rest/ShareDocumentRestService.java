@@ -45,13 +45,17 @@ import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -75,19 +79,22 @@ import org.exoplatform.wcm.ext.component.document.service.IShareDocumentService;
 @Path("/document/activities")
 public class ShareDocumentRestService implements ResourceContainer {
 
-  private static final Log      LOG             = ExoLogger.getLogger(ShareDocumentRestService.class.getName());
+  private static final Log      LOG                       = ExoLogger.getLogger(ShareDocumentRestService.class.getName());
 
   private SpaceService          spaceService;
+
+  private RepositoryService     repositoryService;
 
   private ActivityManager       activityManager;
 
   private IdentityManager       identityManager;
 
   private IShareDocumentService shareDocumentService;
-  
-  private static final String TEMPLATE_PARAMS_SEPARATOR = "|@|";
 
-  public ShareDocumentRestService(SpaceService spaceService,
+  private static final String   TEMPLATE_PARAMS_SEPARATOR = "|@|";
+
+  public ShareDocumentRestService(RepositoryService repositoryService,
+                                  SpaceService spaceService,
                                   ActivityManager activityManager,
                                   IdentityManager identityManager,
                                   IShareDocumentService shareDocumentService) throws Exception {
@@ -95,6 +102,7 @@ public class ShareDocumentRestService implements ResourceContainer {
     this.activityManager = activityManager;
     this.shareDocumentService = shareDocumentService;
     this.identityManager = identityManager;
+    this.repositoryService = repositoryService;
   }
 
   @POST
@@ -131,47 +139,49 @@ public class ShareDocumentRestService implements ResourceContainer {
           || (spaceService.isMember(targetSpace, authenticatedUser) && SpaceUtils.isRedactor(authenticatedUser,
                                                                                              targetSpace.getGroupId()))) {
         Map<String, String> originalActivityTemplateParams = activityManager.getActivity(activityId).getTemplateParams();
-        String[] originalActivityFilesRepositories = getParameterValues(originalActivityTemplateParams, UIDocActivity.REPOSITORY);
         String[] originalActivityFilesWorkspaces = getParameterValues(originalActivityTemplateParams, UIDocActivity.WORKSPACE);
-        String[] originalActivityFilesPaths = getParameterValues(originalActivityTemplateParams, UIDocActivity.DOCPATH);
+        String[] originalActivityFilesIds = getParameterValues(originalActivityTemplateParams, FileUIActivity.ID);
         Map<String, String> templateParams = new HashMap<>();
         concatenateParam(templateParams, "originalActivityId", activityId);
-        if (originalActivityFilesPaths != null && originalActivityFilesPaths.length > 0) {
-          for (int i = 0; i < originalActivityFilesPaths.length; i++)  {
-            String originalActivityFileRepository = "repository";
-            if (originalActivityFilesRepositories != null && originalActivityFilesRepositories.length == originalActivityFilesPaths.length && StringUtils.isNotBlank(originalActivityFilesRepositories[i])) {
-              originalActivityFileRepository = originalActivityFilesRepositories[i];
-            }
+        if (originalActivityFilesIds != null && originalActivityFilesIds.length > 0) {
+          for (int i = 0; i < originalActivityFilesIds.length; i++) {
             String originalActivityFileWorkspace = "collaboration";
-            if (originalActivityFilesWorkspaces != null && originalActivityFilesWorkspaces.length == originalActivityFilesPaths.length && StringUtils.isNotBlank(originalActivityFilesWorkspaces[i])) {
+            if (originalActivityFilesWorkspaces != null
+                && originalActivityFilesWorkspaces.length == originalActivityFilesIds.length
+                && StringUtils.isNotBlank(originalActivityFilesWorkspaces[i])) {
               originalActivityFileWorkspace = originalActivityFilesWorkspaces[i];
             }
-            String originalActivityFilePath = originalActivityFilesPaths[i];
 
-            NodeLocation originalActivityFileNodeLocation = new NodeLocation(originalActivityFileRepository, originalActivityFileWorkspace, originalActivityFilePath);
-            Node originalActivityFileNode = NodeLocation.getNodeByLocation(originalActivityFileNodeLocation);
+            ExtendedSession originalActivityFileNodeSession = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
+                                                                    .getSession(originalActivityFileWorkspace,
+                                                                                repositoryService.getCurrentRepository());
+            Node originalActivityFileNode = originalActivityFileNodeSession.getNodeByIdentifier(originalActivityFilesIds[i]);
+
             String targetSpaceFileNodeUUID = shareDocumentService.publishDocumentToSpace(targetSpace.getGroupId(),
-                                                        originalActivityFileNode,
-                                                        "",
-                                                        PermissionType.READ,
-                                                        false);
+                                                                                         originalActivityFileNode,
+                                                                                         "",
+                                                                                         PermissionType.READ,
+                                                                                         false);
             Node targetSpaceFileNode = originalActivityFileNode.getSession().getNodeByUUID(targetSpaceFileNodeUUID);
             concatenateParam(templateParams, FileUIActivity.ID, targetSpaceFileNodeUUID);
-            concatenateParam(templateParams, UIDocActivity.REPOSITORY, "repository");
-            concatenateParam(templateParams, UIDocActivity.WORKSPACE, "collaboration");
-            
+            String repository = ((ManageableRepository) targetSpaceFileNode.getSession().getRepository()).getConfiguration()
+                                                                                                         .getName();
+            concatenateParam(templateParams, UIDocActivity.REPOSITORY, repository);
+            String workspace = targetSpaceFileNode.getSession().getWorkspace().getName();
+            concatenateParam(templateParams, UIDocActivity.WORKSPACE, workspace);
+
             concatenateParam(templateParams, FileUIActivity.CONTENT_LINK, Utils.getContentLink(targetSpaceFileNode));
             String state;
             try {
               state = targetSpaceFileNode.hasProperty(Utils.CURRENT_STATE_PROP) ? targetSpaceFileNode.getProperty(Utils.CURRENT_STATE_PROP)
-                  .getValue()
-                  .getString() : "";
+                                                                                                     .getValue()
+                                                                                                     .getString()
+                                                                               : "";
             } catch (Exception e) {
-              state="";
+              state = "";
             }
             concatenateParam(templateParams, FileUIActivity.STATE, state);
-            concatenateParam(templateParams, FileUIActivity.AUTHOR, "");//TODO
-            
+
             /** The date formatter. */
             DateFormat dateFormatter = null;
             dateFormatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
@@ -198,13 +208,18 @@ public class ShareDocumentRestService implements ResourceContainer {
             try {
               nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(targetSpaceFileNode);
             } catch (Exception e1) {
-              nodeTitle ="";
+              nodeTitle = "";
             }
             concatenateParam(templateParams, FileUIActivity.DOCUMENT_TITLE, nodeTitle);
             concatenateParam(templateParams, FileUIActivity.DOCUMENT_VERSION, "");
-            concatenateParam(templateParams, FileUIActivity.DOCUMENT_SUMMARY, Utils.getFirstSummaryLines(Utils.getSummary(targetSpaceFileNode), Utils.MAX_SUMMARY_CHAR_COUNT));
+            concatenateParam(templateParams,
+                             FileUIActivity.DOCUMENT_SUMMARY,
+                             Utils.getFirstSummaryLines(Utils.getSummary(targetSpaceFileNode), Utils.MAX_SUMMARY_CHAR_COUNT));
             concatenateParam(templateParams, UIDocActivity.DOCPATH, targetSpaceFileNode.getPath());
-            concatenateParam(templateParams, UILinkActivity.LINK_PARAM, "");//to check if necessary
+            concatenateParam(templateParams, UILinkActivity.LINK_PARAM, "");// to
+                                                                            // check
+                                                                            // if
+                                                                            // necessary
             concatenateParam(templateParams, UIDocActivity.IS_SYMLINK, "true");
           }
         }
@@ -242,7 +257,7 @@ public class ShareDocumentRestService implements ResourceContainer {
     }
     return values;
   }
-  
+
   private void concatenateParam(Map<String, String> activityParams, String paramName, String paramValue) {
     String oldParamValue = activityParams.get(paramName);
     if (StringUtils.isBlank(oldParamValue)) {

@@ -308,9 +308,11 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
    */
   private void setSpacePermission(Node currentNode, String memberShip, String[] permissions) throws Exception{
     ExtendedNode node = (ExtendedNode) currentNode;
-    if(node.canAddMixin(MIX_PRIVILEGEABLE))node.addMixin(MIX_PRIVILEGEABLE);
-    node.setPermission("*:" + memberShip, permissions);
-    node.save();
+    if (node.getACL().getPermissions("*:" + memberShip) == null || node.getACL().getPermissions("*:" + memberShip).size() == 0) {
+      if(node.canAddMixin(MIX_PRIVILEGEABLE))node.addMixin(MIX_PRIVILEGEABLE);
+      node.setPermission("*:" + memberShip, permissions);
+      node.save();
+    }
   }
 
   /**
