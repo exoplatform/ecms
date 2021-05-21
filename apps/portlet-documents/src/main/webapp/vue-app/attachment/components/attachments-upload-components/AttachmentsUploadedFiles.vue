@@ -92,7 +92,7 @@
           data-placement="top"></i>
       </button>
     </div>
-    <div class="uploadedFilesItems ml-5">
+    <div v-if="attachments.length" class="uploadedFilesItems ml-5">
       <transition-group
         name="list-complete"
         tag="div"
@@ -103,7 +103,7 @@
           class="list-complete-item">
           <attachment-item
             :attachment="attachment"
-            :allow-to-remove="true" />
+            :allow-to-preview="true" />
         </span>
       </transition-group>
     </div>

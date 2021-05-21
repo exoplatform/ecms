@@ -11,7 +11,8 @@
         :default-drive="defaultDrive"
         :default-folder="defaultFolder" />
       <attachments-list-drawer
-        :attachments="attachmentsToDisplay" />
+        ref="attachmentsListDrawer"
+        :attachments="attachments" />
       <attachments-notification-alerts style="z-index:1035;" />
     </div>
   </v-app>
@@ -26,9 +27,6 @@ export default {
     };
   },
   computed: {
-    attachmentsToDisplay() {
-      return this.attachments.filter(attachment => attachment.id);
-    },
     defaultDrive() {
       return this.attachmentAppConfiguration && this.attachmentAppConfiguration.defaultDrive;
     },
@@ -67,26 +65,32 @@ export default {
     });
     document.addEventListener('open-attachments-app-drawer', (event) => {
       this.attachmentAppConfiguration = event.detail;
+      this.attachments = [];
+      this.openAttachmentsAppDrawer();
       if (this.entityType && this.entityId) {
+        this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.startLoading();
         this.initEntityAttachmentsList().then(() => {
           this.initDefaultDrive();
-          this.openAttachmentsAppDrawer();
+        }).finally(() => {
+          this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.endLoading();
         });
       } else {
         this.initDefaultDrive();
-        this.openAttachmentsAppDrawer();
       }
     });
     document.addEventListener('open-attachments-list-drawer', (event) => {
       this.attachmentAppConfiguration = event.detail;
+      this.attachments = [];
+      this.openAttachmentsDrawerList();
       if (this.entityType && this.entityId) {
+        this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.startLoading();
         this.initEntityAttachmentsList().then(() => {
           this.initDefaultDrive();
-          this.openAttachmentsDrawerList();
+        }).finally(() => {
+          this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.endLoading();
         });
       } else {
         this.initDefaultDrive();
-        this.openAttachmentsDrawerList();
       }
     });
   },

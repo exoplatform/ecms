@@ -239,7 +239,6 @@ export default {
     },
     closeAttachmentsAppDrawer() {
       document.removeEventListener('paste', this.onPaste, false);
-      this.$root.$emit('reset-attachment-list');
       this.$refs.attachmentsAppDrawer.close();
     },
     uploadFileToDestinationPath: function (file) {
