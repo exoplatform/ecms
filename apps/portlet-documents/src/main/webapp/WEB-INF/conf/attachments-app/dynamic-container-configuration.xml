@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2020 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.addons.AddOnService</target-component>
+    <component-plugin>
+      <name>addPlugin</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.commons.addons.AddOnPluginImpl</type>
+      <description>add application Config</description>
+      <init-params>
+        <value-param>
+          <name>priority</name>
+          <value>10</value>
+        </value-param>
+        <value-param>
+          <name>containerName</name>
+          <value>bottom-all-container</value>
+        </value-param>
+        <object-param>
+          <name>attachment-app-portlet</name>
+          <description></description>
+          <object type="org.exoplatform.commons.addons.PortletModel">
+            <field name="contentId">
+              <string>documents/AttachmentApp</string>
+            </field>
+            <field name="permissions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>*:/platform/users</string>
+                </value>
+                <value>
+                  <string>*:/platform/externals</string>
+                </value>
+              </collection>
+            </field>
+            <field name="title">
+              <string>>Attachments App Portlet</string>
+            </field>
+            <field name="showInfoBar">
+              <boolean>false</boolean>
+            </field>
+            <field name="showApplicationState">
+              <boolean>false</boolean>
+            </field>
+            <field name="showApplicationMode">
+              <boolean>false</boolean>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+</configuration>

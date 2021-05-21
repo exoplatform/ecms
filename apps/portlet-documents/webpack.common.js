@@ -7,7 +7,9 @@ let config = {
   entry: {
     commonDocComponents: './src/main/webapp/vue-app/common/main.js',  
     documents: './src/main/webapp/vue-app/documents/main.js',
-    filesSearch: './src/main/webapp/vue-app/files-search/main.js'
+    filesSearch: './src/main/webapp/vue-app/files-search/main.js',
+    attachmentApp: './src/main/webapp/vue-app/attachment/main.js',
+    attachmentIntegration: './src/main/webapp/vue-app/attachment-integration/main.js'
   },
   output: {
     filename: 'js/[name].bundle.js',

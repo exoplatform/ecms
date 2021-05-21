@@ -4,5 +4,8 @@
   ],
   "globals": {
     "documentPreview": true
+  },
+  "rules": {
+    "no-restricted-imports": ["warn", "axios"]
   }
 }

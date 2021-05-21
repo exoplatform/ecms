@@ -166,33 +166,6 @@
     </depends>
   </module>
 
-  <module>
-    <name>AttachmentsApp</name>
-    <script>
-      <minify>false</minify>
-      <path>/js/attachmentsApp.bundle.js</path>
-    </script>
-    <depends>
-      <module>vue</module>
-    </depends>
-    <depends>
-      <module>eXoVueI18n</module>
-    </depends>
-    <depends>
-      <module>vuetify</module>
-    </depends>
-    <depends>
-      <module>jquery</module>
-      <as>$</as>
-    </depends>
-    <depends>
-      <module>extensionRegistry</module>
-    </depends>
-    <depends>
-      <module>commonVueComponents</module>
-    </depends>
-  </module>
-  
   <portal-skin>
     <skin-name>Enterprise</skin-name>
     <skin-module>customModuleAttachments</skin-module>
@@ -200,12 +173,6 @@
     <css-priority>11</css-priority>
   </portal-skin>
 
-  <portal-skin>
-    <skin-name>Enterprise</skin-name>
-    <skin-module>customModuleAttachmentsApp</skin-module>
-    <css-path>/skin/css/attachmentsApp.css</css-path>
-    <css-priority>10</css-priority>
-  </portal-skin>
 
 </gatein-resources>
 

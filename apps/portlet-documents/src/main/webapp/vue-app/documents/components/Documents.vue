@@ -4,7 +4,9 @@
     <div v-if="!loading && displayedDocuments.length === 0" class="noDocuments">
       <div class="noDocumentsContent">
         <i class="uiNoDocumentsIcon"></i>
-        <div class="noDocumentsTitle">{{ $t('documents.label.noDocument') }}</div>
+        <div class="noDocumentsTitle">
+          {{ $t('documents.label.noDocument') }}
+        </div>
       </div>
     </div>
   </v-app>
@@ -112,15 +114,18 @@ export default {
       this.cachedDocuments = [];
       const cachedDocuments = this.getCachedDocuments();
       if (cachedDocuments && cachedDocuments.length) {
-        cachedDocuments.forEach(cachedDocument => {
-          if (!cachedDocument.timestamp || (Date.now() - cachedDocument.timestamp) > this.twoMinInMS) {
-            this.removeDocumentFromCache(cachedDocument.id);
-          } else if (this.documents.some(doc => (doc.id || doc.UUID) === cachedDocument.id)) {
-            this.removeDocumentFromCache(cachedDocument.id);
-          } else {
-            this.cachedDocuments.push(cachedDocument);
-          }
-        });
+        cachedDocuments.sort((doc1, doc2) => doc2.date - doc1.date)
+          .slice(0, parseInt(this.limit)).forEach(cachedDocument => {
+            const docExistInESDocs = this.documents.some(doc => (doc.id || doc.UUID) === cachedDocument.id);
+            if (!cachedDocument.timestamp || Date.now() - cachedDocument.timestamp > this.twoMinInMS && docExistInESDocs) {
+              this.removeDocumentFromCache(cachedDocument.id);
+            } else if (docExistInESDocs) {
+              this.removeDocumentFromCache(cachedDocument.id);
+            } else {
+              this.cachedDocuments.push(cachedDocument);
+            }
+          });
+        this.cachedDocuments.sort((doc1, doc2) => doc2.date - doc1.date);
       }
     },
     cacheRecentUploadedDocuments(newlyUploadedDocuments) {

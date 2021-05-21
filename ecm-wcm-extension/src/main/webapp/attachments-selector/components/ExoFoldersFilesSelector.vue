@@ -70,7 +70,7 @@
         </div>
         <div v-if="emptyFolder" class="emptyFolder">
           <i class="uiIconEmptyFolder"></i>
-          <p>This folder is empty</p>
+          <p>{{ $t('attachments.drawer.destination.subfolder.empty') }}</p>
         </div>
         <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" :class="folder.type === 'new_folder' ? 'boxOfFolder':''"
              class="folderSelection" @click="openFolder(folder)" @contextmenu="openFolderActionsMenu(folder, $event)">
@@ -92,7 +92,7 @@
         <exo-dropdown-menu ref="folderActionsMenu" :folder-actions-menu-left="folderActionsMenuLeft" :folder-actions-menu-top="folderActionsMenuTop" :show-dropdown-menu="showFolderActionsMenu" :selected-folder="selectedFolder" @renameFolder="renameFolder()" @deleteFolder="deleteFolder" @closeMenu="closeFolderActionsMenu"></exo-dropdown-menu>
         <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder">
           <i class="uiIconEmptyFolder"></i>
-          <p>{{ $t('attachments.drawer.destination.folder.empty') }}</p>
+          <p>{{ $t('attachments.drawer.destination.subfolder.empty') }}</p>
         </div>
         <div v-for="file in filteredFiles" v-show="!modeFolderSelection" :key="file.id" :id="file.idAttribute" :title="file.idAttribute" :class="file.selected? 'selected' : ''" class="fileSelection" @click="selectFile(file)">
           <exo-attachment-item :file="file"></exo-attachment-item>

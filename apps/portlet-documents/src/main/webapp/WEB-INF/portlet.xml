@@ -44,9 +44,30 @@
       </preference>
       <preference>
         <name>cacheRecentDocuments</name>
-        <value></value>
+        <value>false</value>
         <read-only>false</read-only>
     </preference>
+    </portlet-preferences>
+  </portlet>
+
+  <portlet>
+    <portlet-name>AttachmentApp</portlet-name>
+    <portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+    <init-param>
+      <name>portlet-view-dispatched-file-path</name>
+      <value>/html/attachment.html</value>
+    </init-param>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <portlet-info>
+      <title>Attachments Application</title>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+        <name>jsModule</name>
+        <value>PORTLET/documents/attachmentApp</value>
+      </preference>
     </portlet-preferences>
   </portlet>
 </portlet-app>

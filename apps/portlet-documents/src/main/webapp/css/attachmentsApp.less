@@ -1,0 +1,757 @@
+@import "variables.less";
+@import "mixins.less";
+
+.attachment {
+  .uploadedFileTitle {
+    color: @darkGrey;
+  }
+
+  .attachment-location {
+    background-color: @primaryColorLighterDefault !important;
+    border: 1px solid @primaryDarkerColorGradientEnd !important;
+    color: @primaryDarkerColorGradientEnd !important;
+
+    .mdi-close-circle {
+      color: @primaryDarkerColorGradientEnd !important;
+    }
+  }
+
+  .fileType {
+    i {
+      font-size: 41px;
+    }
+
+    .uiIconFileTypeDefault:before {
+      content: "\e71c";
+    }
+
+    .uiIconFileTypeapplicationvndopenxmlformats-officedocumentwordprocessingmldocument:before {
+      content: "\e712";
+      color: #578DC9;
+    }
+
+    .uiIconFileTypeapplicationvndopenxmlformats-officedocumentspreadsheetmlsheet:before {
+      content: "\e6f9";
+      color: #2EB58C;
+    }
+
+    .uiIconFileTypeapplicationvndopenxmlformats-officedocumentpresentationmlpresentation:before {
+      content: "\e703";
+      color: #D07B7B;
+    }
+
+    .uiIconFileTypeapplicationvndoasisopendocumenttext:before {
+      content: "\e710";
+      color: #578DC9;
+    }
+
+    .uiIconFileTypeapplicationvndoasisopendocumentspreadsheet:before {
+      content: "\e710";
+      color: #2EB58C;
+    }
+
+    .uiIconFileTypeapplicationvndoasisopendocumentpresentation:before {
+      content: "\e710";
+      color: #D07B7B;
+    }
+
+    .uiIconFileTypeapplicationpdf:before {
+      content: "\e70b";
+      color: #BC4343;
+    }
+
+    .uiIconFileTypeimagepng:before {
+      content: "\e6f0";
+      color: #FFB441;
+    }
+
+    .uiIconFileTypeimagejpeg:before {
+      content: "\e6e9";
+      color: #FFB441;
+    }
+
+    .uiIconFileTypevideomp4:before {
+      content: "\e715";
+      color: #FFB441;
+    }
+
+    .uiIconFileTypeapplicationzip:before {
+      content: "\e71a";
+      color: #FFB441;
+    }
+  }
+
+  .attachmentDestinationPath {
+    border-bottom: 1px solid @primaryColor;
+  }
+}
+
+.attachmentsAppDrawer {
+  .drawerContent {
+    .uploadedFiles {
+      .no-files-attached {
+        .uiIconCloseCircled {
+          color: @greyColorDefault !important;
+          background-color: white;
+          border-radius: 50%;
+          height: 100%;
+          left: -36px;
+          top: 31px;
+        }
+
+        .uiIconAttach {
+          color: @greyColorDefault !important;
+        }
+      }
+    }
+
+    .dropFileBox {
+      border-radius: 5px;
+      border: 3px dashed #a8b3c5;
+    }
+
+    .connectCloudDriveAction {
+      #connectCloudApp {
+        .connect-cloud {
+          &.drawer.open {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.driveExplorerDrawer {
+  .serverFiles {
+    .contentHeader {
+      .currentDirectory {
+        flex: 1;
+        min-width: 0;
+
+        .documents > * {
+          color: @headingColor;
+        }
+
+        .currentDrive {
+          min-width: 0;
+          flex: 0 1 auto;
+        }
+
+        .uiIconArrowRight {
+          color: @headingColor;
+          margin: 0 2px;
+        }
+
+        .foldersHistory {
+          flex: 1 1 42%;
+          min-width: 0;
+        }
+
+        .folders-menu {
+          width: fit-content;
+        }
+      }
+
+      .selectorActions {
+        &.visible {
+          width: 100%;
+
+          .searchInput {
+            border-radius: 5px 0 0 5px;
+            border-right: 0;
+            margin-top: 2px !important;
+
+            &:focus {
+              box-shadow: none;
+            }
+          }
+
+          .uiIconCloseServerAttachments {
+            font-size: 14px;
+            padding: 10px 15px 13px 15px;
+            border: 1px solid #b3b3b3;
+            border-left: 0;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+
+            &::before {
+              color: #578dc9;
+              content: "\f12a";
+              font-family: 'IONIC-FONT';
+              font-size: 12px;
+            }
+          }
+        }
+
+        .searchInput {
+          width: 100%;
+          border: 1px solid #b3b3b3;
+          display: none;
+        }
+
+        .uiIconFilter, .uiIconAddFolder {
+          border: 1px solid #b3b3b3;
+          padding: 10px;
+          border-radius: 15%;
+          color: @headingColor;
+        }
+      }
+
+      .actionBox {
+        display: inline-flex;
+
+        &Logo {
+          position: relative;
+
+          .uiActionIcon {
+            border: 1px solid #b3b3b3;
+            border-radius: 15%;
+            color: #4d5466;
+
+            &:before {
+              content: '+';
+              position: absolute;
+              color: #fff;
+              left: 0;
+              top: 26%;
+              width: 100%;
+              font-weight: bold;
+              font-size: 15px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 1s
+    }
+
+    .fade-enter,
+    .fade-leave-active {
+      opacity: 0
+    }
+
+
+    .contentBody {
+      .selectionBox {
+        .emptyFolder {
+          .uiIconEmptyFolder::before {
+            content: "\ea7b";
+            font-size: 34pt;
+            font-weight: normal;
+            color: @baseColorDark;
+          }
+        }
+
+        .boxOfFolder {
+          background-color: @greyColorDefault;
+          border-radius: 5px;
+        }
+
+        .folderSelection {
+          width: 20%;
+
+          .boxNewFolder {
+            border-radius: 5px;
+            background-color: @greyColorDefault;
+          }
+
+            i {
+              font-size: 41px;
+            }
+
+            .selectionLabel {
+              &.connectingDriveTitle {
+                color: #b3b3b3;
+              }
+            }
+
+          .newFolderInput {
+            width: auto;
+            height: 16px;
+            margin-top: 3px;
+            min-height: 15px;
+            background-color: #578dc9;
+            color: #FFF;
+            border: none;
+            border-radius: 0;
+          }
+
+          .connectingDriveProgress {
+            svg {
+              .v-progress-circular__underlay {
+                stroke: #e2e9ef;
+              }
+            }
+
+            &Percent {
+              font-size: 10px;
+              padding-top: 2px;
+            }
+          }
+
+          .uiIcon {
+            &-clouddrive {
+              position: absolute;
+              width: 100%;
+              height: 40px;
+              padding-bottom: 15px;
+
+              &:before {
+                font-family: 'PLF-FONT-ICONS';
+                font-size: 18px;
+                color: #fff;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                right: 0;
+                left: 0;
+                top: -2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+          }
+        }
+
+        .fileSelection {
+          width: 20%;
+          margin: 7px;
+          cursor: pointer;
+          height: fit-content;
+
+          .attachment {
+            flex-direction: column;
+            align-items: center;
+
+            .v-avatar {
+              margin-right: 0;
+            }
+
+            .serverFileContent {
+              width: 100%;
+              align-items: center;
+            }
+
+            .serverFileTitle {
+              font-size: 12px;
+            }
+
+            .fileDetails {
+              margin: 0;
+
+              .fileSize {
+                display: none;
+              }
+
+              .fileNameLabel {
+                font-size: 12px;
+                text-align: center;
+              }
+            }
+          }
+
+          &.selected {
+            border-radius: 5px;
+            background-color: #E1E8EE;
+          }
+        }
+      }
+
+      .categorizedDrives {
+        .drivesList {
+          padding: 0;
+
+          .categories > .v-list-group__header {
+            display: none;
+          }
+        }
+
+        .category {
+          .v-list-group__header__prepend-icon {
+            margin: 0;
+            align-self: center;
+
+            .v-icon {
+              color: #c3cad6 !important;
+              transform: rotate(270deg);
+            }
+          }
+
+          &Content {
+            padding: 0;
+            color: #c3cad6;
+
+            &:after {
+              content: '';
+              display: inline-block;
+              vertical-align: middle;
+              width: 100%;
+              margin-right: -100%;
+              margin-left: 10px;
+              border-top: 1px solid #efefef;
+            }
+          }
+
+          &Active {
+            &::before, :hover::before {
+              display: none;
+            }
+
+            .v-list-group__header__prepend-icon > .v-icon {
+              transform: rotate(0);
+            }
+          }
+        }
+      }
+    }
+
+    .attachActions {
+      bottom: 10px;
+      position: absolute;
+      border-top: 1px solid #efefef;
+      right: 0;
+      left: 0;
+
+      .buttonActions {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 10px 10px 0 0;
+
+        button {
+          margin: 0 5px;
+        }
+      }
+    }
+  }
+
+  .drawerContent::-webkit-scrollbar-thumb  {
+    background: #578dc9;
+    border-radius: 3px;
+  }
+
+  .drawerContent::-webkit-scrollbar-thumb  {
+    background: #578dc9;
+    border-radius: 3px;
+  }
+
+  .drawerContent::-webkit-scrollbar-track  {
+    background: #ced2d5;
+  }
+
+  .drawerContent::-webkit-scrollbar-track  {
+    background: #ced2d5;
+  }
+
+  .drawerContent::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+
+.destinationFolder {
+  border-bottom: 1px solid #a8b3c5;;
+
+  .folderLocation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    > p {
+      margin-bottom: 0px;
+    }
+
+  }
+
+  .drive {
+    flex: 1 0 auto;
+  }
+
+  .colorIcon {
+    color: #a8b3c5;
+  }
+
+  .folder {
+    flex-direction: row;
+    display: flex;
+
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+
+  .folderName {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 95%;
+    margin-bottom: 0px;
+
+  }
+
+  .active {
+    color: #578cc9;
+    font-weight: bold;
+    width: min-content;
+  }
+
+  .path {
+    color: #578cc9;
+    font-weight: bold;
+    width: 90%;
+  }
+
+  .selectFile {
+    width: 100%;
+    border-bottom: 1px solid #a8b3c5;
+
+    > p {
+      margin-bottom: 0px;
+    }
+  }
+
+  .uiIconFolder {
+    cursor: pointer;
+  }
+
+  .disabled {
+    cursor: pointer;
+    color: #a8b3c5;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  #exoAttachmentsApp {
+    .dropFileBox {
+      height: 150px;
+
+      .contentOR {
+        display: none;
+      }
+
+      .contentDrop {
+        padding: 35px 1px 1px;
+      }
+
+      .contentDrop {
+        display: none;
+      }
+
+      .contentUpload {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .uploadButton {
+          display: inline-block;
+          width: 100%;
+
+          .colorIcon {
+            padding-top: 0;
+          }
+
+          .text {
+            padding: 8px;
+          }
+        }
+      }
+
+      .lastContent a {
+        align-items: flex-end;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 959px) {
+  .attachments .content.serverFiles .serverFiles .contentBody {
+    min-height: 259px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .attachments .content.serverFiles .serverFiles .contentBody .selectionBox .folderSelection {
+    margin: 0 7px;
+  }
+}
+
+/** Attachments composer plugin **/
+
+.activityComposerApp {
+  .drawer {
+    .content {
+      .VuetifyApp {
+        .attachmentsList {
+          display: flex;
+          align-items: center;
+
+          .attachedFiles {
+            margin-left: 3%;
+          }
+
+          .uiIconAttach {
+            top: -1px;
+            color: #333;
+          }
+
+          .v-progress-circular {
+            svg {
+              color: transparent;
+
+              circle {
+                color: #FFF;
+              }
+            }
+
+            &.uploading {
+              svg {
+                circle {
+                  color: #578dc9;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .composerActions {
+        .actionItem {
+          .actionItemIcon {
+            .addFileComposerIcon {
+              background: url('/eXoSkin/skin/images/system/composer/addFile.png') no-repeat;
+              width: 60px;
+              height: 60px;
+              margin: 10px 0 0 10px;
+              background-size: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //disable attachments drawer in edit activity until US5 - update file activity
+  .editActivity {
+    .composerActions {
+      .attachmentsSelectorAction {
+        cursor: not-allowed;
+
+        .actionItem {
+          pointer-events: none;
+
+          .actionItemIcon {
+            .addFileComposerIcon {
+              filter: grayscale(100%);
+              background: url('/eXoSkin/skin/images/system/composer/addFile.png') no-repeat;
+              width: 60px;
+              height: 60px;
+              margin: 10px 0 0 10px;
+              background-size: 40px;
+            }
+          }
+
+          .actionItemDescription {
+            .actionLabel {
+              color: gray;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.attachmentsAlert {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  font-size: 15px;
+  background: #abc6e4;
+  border-radius: 10px;
+  max-width: 82%;
+}
+
+
+.list-complete-item {
+  transition: all 1s;
+  display: inline-block;
+}
+
+.list-complete-enter, .list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-complete-leave-active {
+  position: absolute;
+}
+
+.attachments-animation-enter-active, .attachments-animation-leave-active {
+  transition: opacity .5s;
+}
+
+.attachments-animation-enter, .attachments-animation-leave-to
+  /* .attachments-animation-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.dropFileBox.dragStart {
+  animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  border: 3px dashed @primaryColor !important;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+
+//No files Icon
+.no-files-attached {
+  .uiIconCloseCircled {
+    color: @greyColorDefault !important;
+    background-color: white;
+    border-radius: 50%;
+    height: 100%;
+    left: -36px;
+    top: 31px;
+  }
+
+  .uiIconAttach {
+    color: @greyColorDefault !important;
+  }
+}
+
+.make-icons-size(@size: 60, @decrement: 4) when (@size > 0) {
+  .make-icons-size(@size - @decrement);
+
+  @size-px: ~"@{size}px !important";
+
+  .uiIcon@{size}x@{size} {
+    font-size: @size-px;
+  }
+}
+
+.make-icons-size();
