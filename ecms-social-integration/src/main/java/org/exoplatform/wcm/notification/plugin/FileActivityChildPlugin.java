@@ -48,7 +48,7 @@ import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.spi.SpaceService;
-import org.exoplatform.social.notification.LinkProviderUtils;
+import org.exoplatform.social.core.utils.MentionUtils;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 import org.exoplatform.webui.cssfile.*;
@@ -73,6 +73,7 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
   public static final String DOCNAME                      = "DOCNAME";
   public static final String ICON_FILE_EXTENSION          = ".png";
   public static final String CONTENT_LINK                 = "contentLink";
+
 
   private String[]             mimeType;
   private String[]             nodeUUID;
@@ -115,7 +116,8 @@ public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
       
       // File uploaded to Content Explorer hasn't MESSAGE field
       String message = templateParams.get(MESSAGE) != null ? NotificationUtils.processLinkTitle(templateParams.get(MESSAGE)) : "";
-
+      String portalOwner = CommonsUtils.getCurrentPortalOwner();
+      message = MentionUtils.substituteUsernames(portalOwner, message);
       templateContext.put("ACTIVITY_TITLE", message);
 
       boolean[] isVideo = new boolean[this.filesCount];
