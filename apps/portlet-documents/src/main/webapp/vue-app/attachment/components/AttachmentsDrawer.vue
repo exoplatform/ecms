@@ -11,6 +11,14 @@
       </template>
       <template slot="content">
         <div class="attachmentsContent pt-0 pa-5">
+          <div v-show="showSelectedAttachmentsFromOtherDriveInfo" class="alert alert-info attachmentsAlert">
+            {{ $t('attachments.alert.sharing.attachedFrom') }}
+            {{ selectedFromOtherDriveLabel }}
+            <b v-show="fromAnotherSpacesAttachments">
+              {{ fromAnotherSpacesAttachments }}
+            </b>
+            {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
+          </div>
           <attachments-upload-input
             :attachments="attachments"
             :max-files-count="maxFilesCount"
@@ -113,6 +121,10 @@ export default {
       type: Boolean,
       default: false
     },
+    currentSpace: {
+      type: {},
+      default: () => null
+    },
   },
   data() {
     return {
@@ -131,8 +143,7 @@ export default {
       modeFolderSelectionForFile: false,
       cloudDriveConnecting: false,
       connectedDrive: {},
-      fromAnotherSpaces: '',
-      spaceGroupId: '',
+      isActivityStream: true,
       drivesInProgress: {},
       attachmentInfo: false,
       isCloudDriveEnabled: false,
@@ -152,6 +163,22 @@ export default {
     },
     entityHasNewAttachments() {
       return this.attachments.some(attachment => attachment.uploadId);
+    },
+    fromAnotherSpacesAttachments() {
+      return this.attachments.filter(({ space }) => space && space.name !== this.groupId)
+        .map(({ space }) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
+    },
+    privateFilesAttached() {
+      return this.attachments.some(file => file.isPublic === false);
+    },
+    showSelectedAttachmentsFromOtherDriveInfo() {
+      return this.attachmentInfo && (this.privateFilesAttached || this.fromAnotherSpacesAttachments);
+    },
+    selectedFromOtherDriveLabel() {
+      return this.$t(`attachments.alert.sharing.${this.privateFilesAttached && !this.fromAnotherSpacesAttachments.length ? 'personal' : 'space'}`);
+    },
+    currentSpaceDisplayName() {
+      return this.currentSpace && this.currentSpace.displayName;
     }
   },
   watch: {
@@ -178,21 +205,15 @@ export default {
             if (this.entityHasAttachments) {
               this.updateLinkedAttachmentsToEntity().then(() => {
                 this.closeAndResetAttachmentsDrawer();
-              }).catch(() => {
-                this.$refs.attachmentsAppDrawer.endLoading();
               });
             } else {
               this.linkUploadedAttachmentsToEntity().then(() => {
                 this.closeAndResetAttachmentsDrawer();
-              }).catch(() => {
-                this.$refs.attachmentsAppDrawer.endLoading();
               });
             }
           } else {
             this.closeAndResetAttachmentsDrawer();
           }
-        } else {
-          this.$refs.attachmentsAppDrawer.endLoading();
         }
       }
     }
@@ -220,6 +241,7 @@ export default {
     this.$root.$on('select-destination-path-for-all', (pathDestinationFolder, folderName, currentDrive) => {
       this.addDestinationFolderForAll(pathDestinationFolder, folderName, currentDrive);
     });
+    this.$root.$on('attachments-drive-explorer-drawer-closed', () => this.attachmentInfo = true);
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -234,6 +256,7 @@ export default {
     },
     uploadFileToDestinationPath: function (file) {
       this.uploadingCount++;
+      this.$refs.attachmentsAppDrawer.startLoading();
       this.$attachmentService.uploadAttachment(
         this.workspace,
         file.fileDrive.name,
@@ -249,9 +272,11 @@ export default {
           this.addNewUploadedFileToAttachments(file, uploadedFile);
           this.uploadingCount--;
         }
+        this.$refs.attachmentsAppDrawer.endLoading();
         this.processNextQueuedUpload();
       }).catch(() => {
         this.uploadingCount--;
+        this.$refs.attachmentsAppDrawer.endLoading();
         this.$emit('uploadingCountChanged', this.uploadingCount);
         this.$root.$emit('attachments-notification-alert', {
           message: this.$t('attachments.upload.failed').replace('{0}', file.name),
@@ -377,17 +402,25 @@ export default {
       this.uploadedFiles = [];
     },
     linkUploadedAttachmentsToEntity() {
+      this.$refs.attachmentsAppDrawer.startLoading();
       const attachmentIds = this.attachments.map(attachment => attachment.id);
       return this.$attachmentService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+        this.$refs.attachmentsAppDrawer.endLoading();
+      }).catch(() => {
+        this.$refs.attachmentsAppDrawer.endLoading();
       });
     },
     updateLinkedAttachmentsToEntity() {
+      this.$refs.attachmentsAppDrawer.startLoading();
       const attachmentIds = this.attachments.map(attachment => attachment.id);
       return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+        this.$refs.attachmentsAppDrawer.endLoading();
+      }).catch(() => {
+        this.$refs.attachmentsAppDrawer.endLoading();
       });
     },
     openSelectFromDrivesDrawer() {

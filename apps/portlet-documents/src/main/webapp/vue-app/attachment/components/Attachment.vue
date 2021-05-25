@@ -10,7 +10,8 @@
         :entity-id="entityId"
         :entity-type="entityType"
         :default-drive="defaultDrive"
-        :default-folder="defaultFolder" />
+        :default-folder="defaultFolder"
+        :current-space="currentSpace" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
         :attachments="attachments" />
@@ -25,7 +26,7 @@ export default {
     return {
       attachments: [],
       attachmentAppConfiguration: {},
-      entityHasAttachments: false,
+      currentSpace: {},
     };
   },
   computed: {
@@ -43,6 +44,9 @@ export default {
     },
     entityId() {
       return this.attachmentAppConfiguration && this.attachmentAppConfiguration.entityId;
+    },
+    entityHasAttachments() {
+      return this.attachments && this.attachments.length;
     }
   },
   created() {
@@ -110,7 +114,6 @@ export default {
             attachments.name = attachments.title;
           });
           this.attachments = attachments;
-          this.entityHasAttachments = this.attachments.length;
         });
       }
     },
@@ -175,6 +178,7 @@ export default {
       if (spaceId) {
         this.$attachmentService.getSpaceById(spaceId).then(space => {
           if (space) {
+            this.currentSpace = space;
             const spaceGroupId = space.groupId.split('/spaces/')[1];
             this.attachmentAppConfiguration.defaultDrive = {
               name: `.spaces.${spaceGroupId}`,
