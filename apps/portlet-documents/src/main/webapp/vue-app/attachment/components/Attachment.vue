@@ -6,6 +6,7 @@
       <attachments-drawer
         ref="attachmentsAppDrawer"
         :attachments="attachments"
+        :entity-has-attachments="entityHasAttachments"
         :entity-id="entityId"
         :entity-type="entityType"
         :default-drive="defaultDrive"
@@ -24,6 +25,7 @@ export default {
     return {
       attachments: [],
       attachmentAppConfiguration: {},
+      entityHasAttachments: false,
     };
   },
   computed: {
@@ -50,6 +52,9 @@ export default {
     });
     this.$root.$on('add-new-uploaded-file', file => {
       this.attachments.push(file);
+    });
+    this.$root.$on('attachments-changed-from-drives', attachments => {
+      this.attachments = attachments;
     });
     this.$root.$on('remove-destination-path-for-file', (folderName, currentDrive, pathDestinationFolder) => {
       this.deleteDestinationPathForFile(folderName, currentDrive, pathDestinationFolder);
@@ -105,6 +110,7 @@ export default {
             attachments.name = attachments.title;
           });
           this.attachments = attachments;
+          this.entityHasAttachments = this.attachments.length;
         });
       }
     },
@@ -117,8 +123,6 @@ export default {
         this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
         if (file.uploadProgress !== this.maxProgress) {
           this.uploadingCount--;
-          this.$emit('uploadingCountChanged', this.uploadingCount);
-          this.processNextQueuedUpload();
         }
       } else {
         this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.startLoading();

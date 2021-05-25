@@ -17,33 +17,19 @@
             :max-files-size="maxFileSize"
             :current-drive="currentDrive"
             :path-destination-folder="pathDestinationFolder" />
+          <attachments-select-from-drive v-if="entityId && entityType" />
           <attachments-uploaded-files
             :attachments="attachments"
             :schema-folder="schemaFolder" />
-
-          <!-- TODO move to an other component for select from drives -->
-          <!--<div class="d-flex align-center">
-            <v-subheader class="text-sub-title pl-0 d-flex">Platform Documents</v-subheader>
-            <v-divider></v-divider>
-          </div>
-          <div class="lastContent d-flex align-center justify-center">
-            <a title="Select on server" class="uploadButton d-flex align-center" href="#" rel="tooltip" data-placement="bottom"
-               @click="toggleServerFileSelector()">
-              <i class="uiIcon32x32FolderDefault uiIcon32x32LightGray"></i>
-              <v-icon color="#fff" x-small class="iconCloud">cloud</v-icon>
-              <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
-            </a>
-          </div>-->
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
-          :mode-folder-selection="true"
           :mode-folder-selection-for-file="modeFolderSelectionForFile"
           :entity-id="entityId"
           :entity-type="entityType"
           :default-drive="defaultDrive"
           :default-folder="defaultFolder"
-          @cancel="toggleServerFileSelector()" />
+          :attached-files="attachments" />
         <div
           v-for="action in attachmentsComposerActions"
           :key="action.key"
@@ -72,7 +58,7 @@
               {{ $t('attachments.drawer.cancel') }}
             </v-btn>
             <v-btn
-              :disabled="!attachments.length && !attachmentsChanged"
+              :disabled="!attachmentsChanged || attachments.length === 0"
               class="btn btn-primary"
               @click="uploadAddedAttachments()">
               {{ $t('attachments.upload') }}
@@ -123,6 +109,10 @@ export default {
       type: Array,
       default: () => []
     },
+    entityHasAttachments: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -139,11 +129,8 @@ export default {
       schemaFolder: [],
       destinationFileName: '',
       modeFolderSelectionForFile: false,
-      showAttachmentsDrawer: false,
       cloudDriveConnecting: false,
       connectedDrive: {},
-      privateFilesAttached: false,
-      isActivityStream: true,
       fromAnotherSpaces: '',
       spaceGroupId: '',
       drivesInProgress: {},
@@ -163,9 +150,6 @@ export default {
     uploadFinished() {
       return this.attachments.some(file => !file.uploadId);
     },
-    entityHasAttachments() {
-      return this.attachments.some(attachment => attachment.id);
-    },
     entityHasNewAttachments() {
       return this.attachments.some(attachment => attachment.uploadId);
     }
@@ -179,27 +163,31 @@ export default {
     attachments: {
       deep: true,
       handler() {
-        this.$emit('attachmentsChanged', this.attachments);
         this.attachmentsChanged = true;
         this.displayMessageDestinationFolder = !this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
         if (this.attachments.length === 0) {
           this.pathDestinationFolder = this.defaultDestinationFolderPath;
           this.schemaFolder = this.defaultSchemaFolder;
         }
-        this.privateFilesAttached = this.attachments.some(file => file.isPublic === false);
-        this.fromAnotherSpaces = this.attachments.filter(({space}) => space && space.name !== this.groupId)
-          .map(({space}) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
       }
     },
     uploadingCount(newValue) {
       if (this.uploadMode === 'save' && newValue === 0) {
         if (this.uploadFinished) {
           if (this.entityId && this.entityType) {
-            this.linkUploadedAttachmentsToEntity().then(() => {
-              this.closeAndResetAttachmentsDrawer();
-            }).catch(() => {
-              this.$refs.attachmentsAppDrawer.endLoading();
-            });
+            if (this.entityHasAttachments) {
+              this.updateLinkedAttachmentsToEntity().then(() => {
+                this.closeAndResetAttachmentsDrawer();
+              }).catch(() => {
+                this.$refs.attachmentsAppDrawer.endLoading();
+              });
+            } else {
+              this.linkUploadedAttachmentsToEntity().then(() => {
+                this.closeAndResetAttachmentsDrawer();
+              }).catch(() => {
+                this.$refs.attachmentsAppDrawer.endLoading();
+              });
+            }
           } else {
             this.closeAndResetAttachmentsDrawer();
           }
@@ -211,10 +199,13 @@ export default {
   },
   created() {
     document.addEventListener('paste', this.onPaste, false);
-    this.$root.$on('change-attachment-destination-path', attachment => {
+    this.$root.$on('open-select-from-drives', () => {
+      this.openSelectFromDrivesDrawer();
+    });this.$root.$on('change-attachment-destination-path', attachment => {
       this.openSelectDestinationFolderForFile(attachment);
     });
     this.$root.$on('open-attachments-app-drawer', () => {
+      this.attachmentsChanged = false;
       this.openAttachmentsAppDrawer();
     });
     this.$root.$on('attachments-default-folder-path-initialized', (defaultDestinationFolderPath, folderName) => {
@@ -243,7 +234,6 @@ export default {
     },
     uploadFileToDestinationPath: function (file) {
       this.uploadingCount++;
-      this.$emit('uploadingCountChanged', this.uploadingCount);
       this.$attachmentService.uploadAttachment(
         this.workspace,
         file.fileDrive.name,
@@ -256,12 +246,8 @@ export default {
         'save'
       ).then((uploadedFile) => {
         if (uploadedFile) {
-          uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
-          uploadedFile.drive = file.fileDrive.title;
-          this.uploadedFiles.push(uploadedFile);
-          file.uploadId = '';
+          this.addNewUploadedFileToAttachments(file, uploadedFile);
           this.uploadingCount--;
-          this.$emit('uploadingCountChanged', this.uploadingCount);
         }
         this.processNextQueuedUpload();
       }).catch(() => {
@@ -286,15 +272,6 @@ export default {
     deleteDestinationPathForFile(folderName) {
       this.$root.$emit('remove-destination-path-for-file', folderName, this.currentDrive, this.pathDestinationFolder);
     },
-    /** TODO move to an other component for select from drives **/
-    /*toggleServerFileSelector(selectedFiles) {
-      if (selectedFiles) {
-        this.attachments = selectedFiles;
-        this.attachmentInfo = true;
-        this.$emit('input', this.attachments);
-        this.$emit('attachmentsChanged', this.attachments);
-      }
-    },*/
     openSelectDestinationFolderForFile(file) {
       this.modeFolderSelectionForFile = true;
       this.destinationFileName = file.name;
@@ -356,12 +333,12 @@ export default {
     uploadAddedAttachments() {
       this.uploadMode = 'save';
       this.$refs.attachmentsAppDrawer.startLoading();
-      if (this.entityHasNewAttachments) {
+      if (this.entityHasNewAttachments) { //added new uploaded files
         this.attachments.filter(attachment => attachment.uploadId).forEach(file => {
           this.queueUpload(file);
         });
-      } else if (this.attachmentsChanged){
-        this.closeAndResetAttachmentsDrawer();
+      } else if (this.attachmentsChanged) { //updated from drives
+        this.updateLinkedAttachmentsToEntity().then(() => this.closeAndResetAttachmentsDrawer());
       }
     },
     queueUpload(file) {
@@ -400,12 +377,31 @@ export default {
       this.uploadedFiles = [];
     },
     linkUploadedAttachmentsToEntity() {
-      const attachmentIds = this.uploadedFiles.map(attachment => attachment.UUID);
+      const attachmentIds = this.attachments.map(attachment => attachment.id);
       return this.$attachmentService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
-
       });
+    },
+    updateLinkedAttachmentsToEntity() {
+      const attachmentIds = this.attachments.map(attachment => attachment.id);
+      return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
+        this.$root.$emit('entity-attachments-updated');
+        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+      });
+    },
+    openSelectFromDrivesDrawer() {
+      this.$root.$emit('open-select-from-drives-drawer');
+    },
+    addNewUploadedFileToAttachments(file, uploadedFile) {
+      //remove attached file with uploadId from attachments list.
+      this.$root.$emit('remove-attachment-item', file);
+      //add new uploadedFile
+      uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
+      uploadedFile.drive = file.fileDrive.title;
+      uploadedFile.id = uploadedFile.UUID;
+
+      this.$root.$emit('add-new-uploaded-file', uploadedFile);
     }
   }
 };

@@ -10,7 +10,7 @@
             mdi-keyboard-backspace
           </v-icon>
         </v-btn>
-        <span>{{ $t('attachments.drawer.destination.folder') }}</span>
+        <span>{{ driveExplorerDrawerTitle }}</span>
       </div>
     </template>
     <template slot="content">
@@ -191,7 +191,7 @@
                     @blur="saveNewNameFolder()"
                     @keyup.enter="$event.target.blur()"
                     @keyup.esc="cancelRenameNewFolder($event)">
-                  <div v-else class="selectionLabel text-truncate info center">{{ folder.title }}</div>
+                  <div v-else class="selectionLabel text-truncate text-color center">{{ folder.title }}</div>
                 </a>
               </div>
             </div>
@@ -213,7 +213,7 @@
               :id="file.idAttribute"
               :key="file.id"
               :title="file.idAttribute"
-              :class="file.selected? 'selected' : ''"
+              :class="file.isSelected? 'selected' : ''"
               class="fileSelection"
               @click="selectFile(file)">
               <attachments-drive-explorer-file-item :file="file" />
@@ -275,7 +275,7 @@
                         </div>
                         <div
                           :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
-                          class="selectionLabel text-truncate info center">{{ driver.title }}
+                          class="selectionLabel text-truncate text-color center">{{ driver.title }}
                         </div>
                       </a>
                     </div>
@@ -286,13 +286,6 @@
             </v-list>
           </div>
         </div>
-        <!-- select from drives buttons-->
-        <!-- <div v-if="!modeFolderSelection && currentDrive" class="buttonActions">
-            <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
-            <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes"
-                    type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}
-            </button>
-          </div>-->
       </div>
       <!-- The following bloc is needed in order to display the confirmation popup -->
       <!--begin -->
@@ -307,6 +300,12 @@
     </template>
     <template slot="footer">
       <div class="d-flex">
+        <span
+          v-if="!modeFolderSelection"
+          :class="filesCountClass"
+          class="countLimit">
+          {{ $t('attachments.drawer.maxFileCountLeft').replace('{0}', filesCountLeft) }}
+        </span>
         <v-spacer />
         <v-btn
           class="btn mr-3"
@@ -315,17 +314,10 @@
         </v-btn>
         <v-btn
           class="btn btn-primary"
-          @click="selectDestination()">
+          @click="selectActionDriveExplorerDrawer()">
           {{ $t('attachments.drawer.select') }}
         </v-btn>
       </div>
-      <!-- select from drives buttons-->
-      <!-- <div v-if="!modeFolderSelection && currentDrive" class="buttonActions">
-        <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
-        <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes"
-                type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}
-        </button>
-      </div>-->
     </template>
   </exo-drawer>
 </template>
@@ -338,10 +330,6 @@ export default {
     modeFolderSelectionForFile: {
       type: Boolean,
       default: false
-    },
-    modeFolderSelection: {
-      type: Boolean,
-      default: false,
     },
     isCloudEnabled: {
       type: Boolean,
@@ -424,6 +412,7 @@ export default {
       cancelLabel: '',
       titleLabel: '',
       okAction: false,
+      modeFolderSelection: true,
     };
   },
   computed: {
@@ -494,6 +483,9 @@ export default {
     },
     drivesInProgress() { // returns the copy of cloudDrivesInProgress.drives
       return {...this.cloudDrivesInProgress.drives};
+    },
+    driveExplorerDrawerTitle() {
+      return this.modeFolderSelection ? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.existingUploads');
     }
   },
   watch: {
@@ -532,9 +524,11 @@ export default {
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
     this.$root.$on('open-drive-explorer-drawer', () => this.openAttachmentsDriveExplorerDrawer());
+    this.$root.$on('open-select-from-drives-drawer', () => this.openSelectFromDrivesDrawer());
   },
   methods: {
     openAttachmentsDriveExplorerDrawer() {
+      this.modeFolderSelection = true;
       this.$refs.driveExplorerDrawer.open();
     },
     closeAttachmentsDriveExplorerDrawer() {
@@ -657,14 +651,14 @@ export default {
       }
     },
     selectFile(file) {
-      if (document.getElementById(file.idAttribute).className === 'fileSelection' && this.filesCountLeft > 0) {
-        document.getElementById(file.idAttribute).className = 'fileSelection selected';
+      if (!file.isSelected && this.filesCountLeft > 0) {
+        file.isSelected = true;
         if (!this.selectedFiles.find(f => f.id === file.id)) {
           this.selectedFiles.push({...file, space: this.fromSpace});
         }
       } else {
-        document.getElementById(file.idAttribute).className = 'fileSelection';
         const index = this.selectedFiles.findIndex(f => f.id === file.id);
+        file.isSelected = false;
         if (index !== -1) {
           this.selectedFiles.splice(index, 1);
         }
@@ -689,7 +683,7 @@ export default {
       this.foldersHistory.find(f => f.name === folder.name).isSelected = true;
     },
     addSelectedFiles() {
-      this.$emit('itemsSelected', this.selectedFiles);
+      this.$root.$emit('attachments-changed-from-drives', this.selectedFiles);
     },
     showSearchDocumentInput() {
       this.showSearchInput = !this.showSearchInput;
@@ -724,7 +718,7 @@ export default {
           for (let j = 0; j < fetchedFiles.length; j++) {
             const idAttribute = fetchedFiles[j].getAttribute('path').split('/').pop();
             const id = fetchedFiles[j].getAttribute('id');
-            const selected = this.attachedFiles.some(f => f.id === id);
+            const isSelected = this.attachedFiles.some(f => f.id === id);
             this.files.push({
               id: id,
               name: fetchedFiles[j].getAttribute('name'),
@@ -732,7 +726,7 @@ export default {
               path: this.getRelativePath(fetchedFiles[j].getAttribute('path')),
               size: fetchedFiles[j].getAttribute('size'),
               idAttribute: idAttribute,
-              selected: selected,
+              isSelected: isSelected,
               mimetype: fetchedFiles[j].getAttribute('nodeType'),
               isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') === 'true' ? true : false,
               isPublic: fetchedFiles[j].getAttribute('isPublic') === 'true' ? true : false
@@ -772,17 +766,22 @@ export default {
         }
       }
     },
-    selectDestination() {
-      if (!this.selectedFolderPath) {
-        this.selectedFolderPath = this.driveRootPath;
-        this.schemaFolder = this.currentDrive.title;
-        this.folderDestinationForFile = this.currentDrive.title;
-      }
-      if (this.modeFolderSelectionForFile) {
-        this.$root.$emit('select-destination-path-for-file', this.getRelativePath(this.selectedFolderPath), this.folderDestinationForFile, this.privateDestinationForFile, this.currentDrive);
+    selectActionDriveExplorerDrawer() {
+      if (this.modeFolderSelection) {
+        if (!this.selectedFolderPath) {
+          this.selectedFolderPath = this.driveRootPath;
+          this.schemaFolder = this.currentDrive.title;
+          this.folderDestinationForFile = this.currentDrive.title;
+        }
+        if (this.modeFolderSelectionForFile) {
+          this.$root.$emit('select-destination-path-for-file', this.getRelativePath(this.selectedFolderPath), this.folderDestinationForFile, this.privateDestinationForFile, this.currentDrive);
+        } else {
+          this.$root.$emit('select-destination-path-for-all', this.getRelativePath(this.selectedFolderPath), this.schemaFolder, this.currentDrive);
+        }
       } else {
-        this.$root.$emit('select-destination-path-for-all', this.getRelativePath(this.selectedFolderPath), this.schemaFolder, this.currentDrive);
+        this.addSelectedFiles();
       }
+
       this.closeAttachmentsDriveExplorerDrawer();
     },
     executeAction(action) { // will execute code inside 'onExecute' extension method
@@ -996,6 +995,11 @@ export default {
           }
         });
       }
+    },
+    openSelectFromDrivesDrawer() {
+      this.selectedFiles = this.attachedFiles.slice();
+      this.modeFolderSelection = false;
+      this.$refs.driveExplorerDrawer.open();
     }
   }
 };

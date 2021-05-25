@@ -31,6 +31,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import javax.jcr.Session;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AttachmentServiceImpl implements AttachmentService {
 
@@ -73,7 +74,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds) {
+  public void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -83,15 +84,19 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     List<AttachmentContextEntity> existingAttachmentsContext = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
-    List<String> existingAttachmentsIds = (List<String>) existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId);
+    List<String> existingAttachmentsIds = existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId).collect(Collectors.toList());
     // delete removed attachments
-    existingAttachmentsIds.stream().filter(attachmentId -> !attachmentIds.contains(attachmentId)).forEach(attachmentId -> {
-      try {
-        deleteAttachmentItemById(entityId, entityType, attachmentId);
-      } catch (ObjectNotFoundException e) {
-        e.printStackTrace();
-      }
-    });
+    if ( attachmentIds == null || attachmentIds.isEmpty()) {
+      deleteAllEntityAttachments(entityId, entityType);
+    } else {
+      existingAttachmentsIds.stream().filter(attachmentId -> !attachmentIds.contains(attachmentId)).forEach(attachmentId -> {
+        try {
+          deleteAttachmentItemById(entityId, entityType, attachmentId);
+        } catch (ObjectNotFoundException e) {
+          e.printStackTrace();
+        }
+      });
+    }
 
     // attach new added files
     attachmentIds.stream().filter(attachmentId -> !existingAttachmentsIds.contains(attachmentId)).forEach(attachmentId -> {
@@ -109,7 +114,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
     List<AttachmentContextEntity> existingAttachmentsContext = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
-    List<String> attachmentsIds = (List<String>) existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId);
+    List<String> attachmentsIds = existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId).collect(Collectors.toList());
 
     if (attachmentsIds.isEmpty()) {
       throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " has no attachment linked");
