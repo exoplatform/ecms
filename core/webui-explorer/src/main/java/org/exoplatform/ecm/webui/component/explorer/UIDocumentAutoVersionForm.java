@@ -152,20 +152,24 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
                     sourceNode.getPath(), destPath, WCMCoreUtils.getService(ActionServiceContainer.class), false,false, false);
           }else {
             // nt:folder Does not support SNS
+            int fileIndex = 0;
+            String copyTitle = null;
             if (isFolder) {
               Node existNode = uiExplorer.getNodeByPath(destPath, srcSession);
-              int i = 1;
+              fileIndex = 1;
               String newDestPath = "";
+              int lastDotIndex = destPath.lastIndexOf('.');
               while (existNode != null) {
-                int lastDotIndex = destPath.lastIndexOf('.');
-                newDestPath = destPath.substring(0, lastDotIndex) + i + destPath.substring(lastDotIndex);
+                newDestPath = destPath.substring(0, lastDotIndex) + "-" + (fileIndex + 1 ) + destPath.substring(lastDotIndex);
                 existNode = uiExplorer.getNodeByPath(newDestPath, srcSession);
-                i++;
+                fileIndex ++;
               }
               destPath = newDestPath;
+              copyTitle = destPath.substring(destPath.lastIndexOf("/") + 1, lastDotIndex) + "(" + (fileIndex + 1 ) + ")" + destPath.substring(lastDotIndex);
+
             }
             copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
-                    autoVersionComponent.getSourcePath(), destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY);
+                    autoVersionComponent.getSourcePath(), destPath, uiApp, uiExplorer, event, ClipboardCommand.COPY, copyTitle);
           }
         } catch (ItemExistsException iee) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
@@ -520,15 +524,18 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
    * @param srcWorkspaceName source
    * @param srcPath
    * @param destPath
+   * @param copyTitle title of the copied file with its index
    * @throws Exception
    */
   public static void copyNode(Session session, String srcWorkspaceName, String srcPath, String destPath,
-                              UIApplication uiApp, UIJCRExplorer uiExplorer, Event<?> event, String type) throws Exception {
+                              UIApplication uiApp, UIJCRExplorer uiExplorer, Event<?> event, String type, String copyTitle) throws Exception {
     Workspace workspace = session.getWorkspace();
     if (workspace.getName().equals(srcWorkspaceName)) {
       try {
         workspace.copy(srcPath, destPath);
         Node destNode = (Node) session.getItem(destPath);
+        if(copyTitle != null)
+          destNode.setProperty("exo:title", copyTitle);
         Utils.removeReferences(destNode);
       }catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
@@ -599,7 +606,10 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
       }
     }
   }
-
+  public static void copyNode(Session session, String srcWorkspaceName, String srcPath, String destPath,
+                              UIApplication uiApp, UIJCRExplorer uiExplorer, Event<?> event, String type) throws Exception {
+    copyNode(session, srcWorkspaceName, srcPath, destPath,uiApp, uiExplorer, event, type, null);
+  }
   public Set<ClipboardCommand> getClipboardCommands() {
     return clipboardCommands;
   }
