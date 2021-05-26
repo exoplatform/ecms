@@ -106,7 +106,7 @@ export default {
       }
     },
     deleteAttachment() {
-      if (!this.attachment.id) {
+      if (!this.attachment.id || this.attachment.isSelectedFromDrives) {
         this.confirmDeleteAttachment();
       } else {
         this.$refs.deleteConfirmDialog.open();
