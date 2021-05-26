@@ -4,12 +4,12 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>23-M15</version>
+    <version>23-microservices-SNAPSHOT</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>6.2.x-SNAPSHOT</version>
+  <version>6.2.x-microservices-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -40,9 +40,9 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.2.x-SNAPSHOT</org.exoplatform.social.version>
-    <addon.exo.jcr.version>6.2.x-SNAPSHOT</addon.exo.jcr.version>
-    <org.exoplatform.platform-ui.version>6.2.x-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.social.version>6.2.x-microservices-SNAPSHOT</org.exoplatform.social.version>
+    <addon.exo.jcr.version>6.2.x-microservices-SNAPSHOT</addon.exo.jcr.version>
+    <org.exoplatform.platform-ui.version>6.2.x-microservices-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- **************************************** -->
     <!-- Google API -->
     <!-- **************************************** -->
