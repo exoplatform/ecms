@@ -172,21 +172,28 @@ export default {
       return this.attachments.some(file => file.isPublic === false);
     },
     showSelectedAttachmentsFromOtherDriveInfo() {
-      return this.attachmentInfo && (this.privateFilesAttached || this.fromAnotherSpacesAttachments);
+      return this.privateFilesAttached || this.fromAnotherSpacesAttachments;
     },
     selectedFromOtherDriveLabel() {
       return this.$t(`attachments.alert.sharing.${this.privateFilesAttached && !this.fromAnotherSpacesAttachments.length ? 'personal' : 'space'}`);
     },
     currentSpaceDisplayName() {
       return this.currentSpace && this.currentSpace.displayName;
+    },
+    attachedFromOtherDrivesLabel() {
+      return `${this.$t('attachments.alert.sharing.attachedFrom')} ${this.selectedFromOtherDriveLabel}
+      ${this.fromAnotherSpacesAttachments}`;
+    },
+    attachmentsWillBeDisplayedForLabel() {
+      return `${this.$t('attachments.alert.sharing.availableFor')}
+      ${this.currentSpaceDisplayName}
+      ${this.$t('attachments.alert.sharing.members')}`;
+    },
+    attachmentPrivacyLabel() {
+      return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     }
   },
   watch: {
-    attachmentInfo: function () {
-      if (this.attachmentInfo) {
-        setTimeout(() => this.attachmentInfo = false, this.MESSAGES_DISPLAY_TIME);
-      }
-    },
     attachments: {
       deep: true,
       handler() {
@@ -241,7 +248,6 @@ export default {
     this.$root.$on('select-destination-path-for-all', (pathDestinationFolder, folderName, currentDrive) => {
       this.addDestinationFolderForAll(pathDestinationFolder, folderName, currentDrive);
     });
-    this.$root.$on('attachments-drive-explorer-drawer-closed', () => this.attachmentInfo = true);
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -433,7 +439,7 @@ export default {
       uploadedFile.id = uploadedFile.UUID;
 
       this.$root.$emit('add-new-uploaded-file', uploadedFile);
-    }
+    },
   }
 };
 </script>

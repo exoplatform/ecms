@@ -8,9 +8,8 @@
     dismissible
     colored-border
     outlined>
-    <span class="text-color">
-      {{ alertMessage }}
-    </span>
+    <span v-sanitized-html="alertMessage" class="text-color"></span>
+
     <v-btn
       v-if="alert.click"
       class="primary--text"
