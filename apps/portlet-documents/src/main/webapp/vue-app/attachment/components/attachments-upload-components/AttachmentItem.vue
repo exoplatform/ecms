@@ -35,7 +35,7 @@
           rel="tooltip"
           data-placement="top"
           class="attachmentDestinationPath primary--text"
-          @click="openSelectDestinationFolderForFile(attachment)">Choose Location</a>
+          @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChooseLocation') }}</a>
       </v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action>
@@ -106,7 +106,11 @@ export default {
       }
     },
     deleteAttachment() {
-      this.$refs.deleteConfirmDialog.open();
+      if (!this.attachment.id) {
+        this.confirmDeleteAttachment();
+      } else {
+        this.$refs.deleteConfirmDialog.open();
+      }
     },
     confirmDeleteAttachment() {
       this.$root.$emit('remove-attachment-item', this.attachment);
@@ -123,7 +127,7 @@ export default {
       return `${this.$t('documents.preview.updatedOn')} ${this.absoluteDateModified()} ${this.$t('documents.preview.updatedBy')} ${this.attachment.lastEditor} ${this.attachment.size}`;
     },
     openPreview() {
-      if (this.allowToPreview) {
+      if (this.allowToPreview && this.attachment.id) {
         const self = this;
         window.require(['SHARED/documentPreview'], function (documentPreview) {
           documentPreview.init({
