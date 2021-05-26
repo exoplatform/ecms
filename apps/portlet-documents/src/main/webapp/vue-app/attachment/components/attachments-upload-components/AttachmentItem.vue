@@ -1,6 +1,6 @@
 <template>
   <div :class="allowToPreview && 'clickable'" class="attachment d-flex">
-    <v-list-item-avatar class="rounded-lg me-3" @click="openPreview()">
+    <v-list-item-avatar :class="smallAttachmentIcon ? 'me-0' :'me-3'" class="rounded-lg" @click="openPreview()">
       <div v-if="attachment.uploadProgress < 100" class="fileProgress">
         <v-progress-circular
           :rotate="-90"
@@ -11,7 +11,7 @@
           {{ attachment.uploadProgress }}
         </v-progress-circular>
       </div>
-      <div v-else class="fileType">
+      <div v-else :class="smallAttachmentIcon && 'smallAttachmentIcon'" class="fileType">
         <i :class="getIconClassFromFileMimeType(attachment.mimetype)"></i>
       </div>
     </v-list-item-avatar>
@@ -81,6 +81,10 @@ export default {
       default: true
     },
     allowToPreview: {
+      type: Boolean,
+      default: false
+    },
+    smallAttachmentIcon: {
       type: Boolean,
       default: false
     }
