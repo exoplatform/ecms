@@ -106,15 +106,18 @@ public class FileDlpConnector extends DlpServiceConnector {
   
   private boolean itemExist(String entityId) {
     ExtendedSession session = null;
-    boolean result = false;
     try {
-      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
-      result = session.itemExists(entityId);
-      if (result) {
-        LOGGER.debug("Item {} exists, path={}", entityId, session.getItem(entityId).getPath());
-      } else {
-        LOGGER.debug("Item {} not exists", entityId);
-      }
+      session =
+          (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
+                                        .getSession(COLLABORATION_WS, repositoryService.getCurrentRepository());
+      Item item = session.getNodeByIdentifier(entityId);
+      LOGGER.debug("Item {} exists, path={}", entityId, item.getPath());
+      return true;
+  
+    } catch (ItemNotFoundException e) {
+      LOGGER.debug("Item {} not exists", entityId);
+      return false;
+      
     } catch (RepositoryException e) {
       LOGGER.error("Error when reading repository",e);
     } finally {
@@ -122,7 +125,7 @@ public class FileDlpConnector extends DlpServiceConnector {
         session.logout();
       }
     }
-    return result;
+    return false;
   }
   
   private boolean isInTrash(String entityId) {
