@@ -654,12 +654,14 @@ export default {
     selectFile(file) {
       if (!file.isSelected && this.filesCountLeft > 0) {
         file.isSelected = true;
+        file.isSelectedFromDrives = true;
         if (!this.selectedFiles.find(f => f.id === file.id)) {
           this.selectedFiles.push({...file, space: this.fromSpace});
         }
       } else {
         const index = this.selectedFiles.findIndex(f => f.id === file.id);
         file.isSelected = false;
+        file.isSelectedFromDrives = false;
         if (index !== -1) {
           this.selectedFiles.splice(index, 1);
         }
