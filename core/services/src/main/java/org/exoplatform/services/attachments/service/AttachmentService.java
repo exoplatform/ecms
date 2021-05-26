@@ -27,7 +27,7 @@ public interface AttachmentService {
 
   void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentIds);
 
-  void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds);
+  void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException;
 
   void deleteAllEntityAttachments(long entityId, String entityType) throws ObjectNotFoundException;
 

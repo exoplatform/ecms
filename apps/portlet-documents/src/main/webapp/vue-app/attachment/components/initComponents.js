@@ -9,11 +9,13 @@ import AttachmentsListDrawer from './AttachmentsListDrawer.vue';
 import AttachmentsUploadInput from './attachments-upload-components/AttachmentsUploadInput.vue';
 import AttachmentsUploadedFiles from './attachments-upload-components/AttachmentsUploadedFiles.vue';
 import AttachmentsDriveExplorerDrawer from './attachments-drive-explorer/AttachmentsDriveExplorerDrawer.vue';
+import AttachmentsSelectFromDrive from './attachments-drive-explorer/AttachmentsSelectFromDrive.vue';
 
 Vue.component('AttachmentsDrawer', AttachmentsDrawer);
 Vue.component('Attachment', Attachment);
 Vue.component('AttachmentItem', AttachmentItem);
 Vue.component('AttachmentsDriveExplorerDrawer', AttachmentsDriveExplorerDrawer);
+Vue.component('AttachmentsSelectFromDrive', AttachmentsSelectFromDrive);
 Vue.component('AttachmentsDriveExplorerFileItem', AttachmentsDriveExplorerFileItem);
 Vue.component('AttachmentsFolderActionsMenu', AttachmentsFolderActionsMenu);
 Vue.component('AttachmentsNotificationAlert', AttachmentsNotificationAlert);
