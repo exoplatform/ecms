@@ -330,6 +330,22 @@
   </external-component-plugins>
 
   <external-component-plugins>
+    <target-component>org.exoplatform.groovyscript.text.TemplateService</target-component>
+    <component-plugin>
+      <name>UIFileActivityActionBar-actions</name>
+      <set-method>addTemplateExtension</set-method>
+      <type>org.exoplatform.groovyscript.text.TemplateExtensionPlugin</type>
+      <init-params>
+        <values-param>
+          <name>templates</name>
+          <description>The actionBar news activity template to include in all activity templates</description>
+          <value>war:/groovy/ecm/social-integration/commons/UIFileActivityActionBar.gtmpl</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
     <!-- The full qualified name of the ResourceBundleService -->
     <target-component>
       org.exoplatform.services.resources.ResourceBundleService

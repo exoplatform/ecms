@@ -180,8 +180,9 @@
 					<%
                 	}
                 	%>
+                    <!-- preview file -->
 					<% _ctx.includeTemplates("FileUIActivityAttachments") %>
-					<!--end description-->
+					<!--end preview file-->
 				</div>
 				<!--end description-->
 				<div class="desktop-input clearfix">
