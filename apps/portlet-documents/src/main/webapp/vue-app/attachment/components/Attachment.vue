@@ -6,10 +6,12 @@
       <attachments-drawer
         ref="attachmentsAppDrawer"
         :attachments="attachments"
+        :entity-has-attachments="entityHasAttachments"
         :entity-id="entityId"
         :entity-type="entityType"
         :default-drive="defaultDrive"
-        :default-folder="defaultFolder" />
+        :default-folder="defaultFolder"
+        :current-space="currentSpace" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
         :attachments="attachments" />
@@ -24,6 +26,7 @@ export default {
     return {
       attachments: [],
       attachmentAppConfiguration: {},
+      currentSpace: {},
     };
   },
   computed: {
@@ -41,6 +44,9 @@ export default {
     },
     entityId() {
       return this.attachmentAppConfiguration && this.attachmentAppConfiguration.entityId;
+    },
+    entityHasAttachments() {
+      return this.attachments && this.attachments.length;
     }
   },
   created() {
@@ -50,6 +56,9 @@ export default {
     });
     this.$root.$on('add-new-uploaded-file', file => {
       this.attachments.push(file);
+    });
+    this.$root.$on('attachments-changed-from-drives', attachments => {
+      this.attachments = attachments;
     });
     this.$root.$on('remove-destination-path-for-file', (folderName, currentDrive, pathDestinationFolder) => {
       this.deleteDestinationPathForFile(folderName, currentDrive, pathDestinationFolder);
@@ -117,8 +126,6 @@ export default {
         this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
         if (file.uploadProgress !== this.maxProgress) {
           this.uploadingCount--;
-          this.$emit('uploadingCountChanged', this.uploadingCount);
-          this.processNextQueuedUpload();
         }
       } else {
         this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.startLoading();
@@ -171,6 +178,7 @@ export default {
       if (spaceId) {
         this.$attachmentService.getSpaceById(spaceId).then(space => {
           if (space) {
+            this.currentSpace = space;
             const spaceGroupId = space.groupId.split('/spaces/')[1];
             this.attachmentAppConfiguration.defaultDrive = {
               name: `.spaces.${spaceGroupId}`,

@@ -105,10 +105,6 @@ public class AttachmentsRestService implements ResourceContainer {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type is mandatory").build();
     }
 
-    if (attachmentIds.isEmpty()) {
-      return Response.status(Response.Status.BAD_REQUEST).entity("You must link at least one attachment to the entity").build();
-    }
-
     try {
       attachmentService.updateEntityAttachments(entityId, entityType, attachmentIds);
     } catch (Exception e) {

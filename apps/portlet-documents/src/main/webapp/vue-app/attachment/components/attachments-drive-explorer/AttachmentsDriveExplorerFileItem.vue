@@ -1,16 +1,15 @@
 <template>
   <div class="attachment">
-    <v-list-item-avatar class="rounded-lg">
-      <div class="fileType">
+    <a
+      :title="file.name"
+      rel="tooltip"
+      class="fileTitle d-flex flex-column v-messages"
+      data-placement="bottom">
+      <div class="fileType center">
         <i :class="getIconClassFromFileMimeType(file.mimetype)"></i>
       </div>
-    </v-list-item-avatar>
-
-    <v-list-item-content class="serverFileContent align-center">
-      <v-list-item-title class="serverFileTitle'">
-        {{ file.name }}
-      </v-list-item-title>
-    </v-list-item-content>
+      <div class="selectionLabel text-truncate text-color center">{{ file.name }}</div>
+    </a>
   </div>
 </template>
 
