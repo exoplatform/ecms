@@ -407,8 +407,7 @@ export default {
       return this.$attachmentService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
-        this.$refs.attachmentsAppDrawer.endLoading();
-      }).catch(() => {
+      }).finally(() => {
         this.$refs.attachmentsAppDrawer.endLoading();
       });
     },
@@ -418,8 +417,7 @@ export default {
       return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
-        this.$refs.attachmentsAppDrawer.endLoading();
-      }).catch(() => {
+      }).finally(() => {
         this.$refs.attachmentsAppDrawer.endLoading();
       });
     },
