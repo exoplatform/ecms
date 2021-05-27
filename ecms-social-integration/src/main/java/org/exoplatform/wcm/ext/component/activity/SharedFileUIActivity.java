@@ -104,4 +104,23 @@ public class SharedFileUIActivity extends FileUIActivity {
       return originalActivityTemplateParams.get(FileUIActivity.ACTIVITY_STATUS);
     }
   }
+
+  public String getOriginalFileSize(int index) {
+    Map<String, String> activityTemplateParams = this.getActivity().getTemplateParams();
+    if (activityTemplateParams == null || activityTemplateParams.get("originalFileSize") == null) {
+      return null;
+    }
+    String[] templateParams = activityTemplateParams.get("originalFileSize").split(SEPARATOR_REGEX);
+    return templateParams[index];
+  }
+
+  public String getOriginalFileDownloadUrl(int index) {
+    Map<String, String> activityTemplateParams = this.getActivity().getTemplateParams();
+    if (activityTemplateParams == null || activityTemplateParams.get("originalFileDownloadUrl") == null) {
+      return null;
+    }
+    String[] templateParams = activityTemplateParams.get("originalFileDownloadUrl").split(SEPARATOR_REGEX);
+    return templateParams[index];
+  }
+
 }

@@ -154,7 +154,6 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     //ECMS declare variables - END
     def docTypeName = uicomponent.getDocTypeName(index);
     def docSummary = uicomponent.getDocSummary(index);
-    def docDownloadUrl = uicomponent.event("DownloadDocument", "" + index);
     def remoteEditURL = uicomponent.event("OpenFile", "" + index);
     def docOpenUri = uicomponent.getCurrentDocOpenUri(index);
     def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
@@ -164,7 +163,8 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
     def escapedOwnerName = ownerName.replace("'", "\\'").replace("&#39;", "\\&#39;");
     def escapedActivityPostedTime = activityPostedTime.replace("'", "\\'").replace("&#39;", "\\&#39;");
     def escapedActivityStatus = activityStatus != null ? StringEscapeUtils.escapeHtml(activityStatus.replace("'", "\\'").replace("&#39;", "\\&#39;").replace("\n", "").replace("\r", "")) : "";
-    def size = uicomponent.getSize(currentNode);
+    def size = uicomponent.getOriginalFileSize(index);
+    def docDownloadUrl = uicomponent.getOriginalFileDownloadUrl(index);
     def docFolderRelativePath = uicomponent.getDocFolderRelativePath(index);
     docFolderRelativePath = docFolderRelativePath.replaceAll("/", " > ");
     docFolderRelativePath = docFolderRelativePath.replaceAll("%27", "'");

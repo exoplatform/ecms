@@ -2,7 +2,7 @@
   <v-app :id="id">
     <share-activity-drawer
       ref="shareDocumentDrawer"
-      class="shareDocumentDrawer"
+      class="activityDrawer"
       @share-activity="shareDocument" />
     <exo-news-notification-alerts />
   </v-app>

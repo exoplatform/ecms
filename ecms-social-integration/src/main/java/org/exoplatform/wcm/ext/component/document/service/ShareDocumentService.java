@@ -26,7 +26,9 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.picocontainer.Startable;
 
@@ -398,6 +400,8 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
                                                                           // if
                                                                           // necessary
           concatenateParam(templateParams, UIDocActivity.IS_SYMLINK, "true");
+          concatenateParam(templateParams, "originalFileSize", getSize(originalActivityFileNode));
+          concatenateParam(templateParams, "originalFileDownloadUrl", org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(originalActivityFileNode));
         }
       }
 
@@ -513,5 +517,28 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
     } else {
       activityParams.put(paramName, oldParamValue + TEMPLATE_PARAMS_SEPARATOR + paramValue);
     }
+  }
+
+  private String getSize(Node node) {
+    double size = 0;
+    try {
+      if (node.hasNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT)) {
+        Node contentNode = node.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT);
+        if (contentNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA)) {
+          size = contentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA).getLength();
+        }
+
+        return FileUtils.byteCountToDisplaySize((long) size);
+      }
+    } catch (PathNotFoundException e) {
+      return StringUtils.EMPTY;
+    } catch (ValueFormatException e) {
+      return StringUtils.EMPTY;
+    } catch (RepositoryException e) {
+      return StringUtils.EMPTY;
+    } catch (NullPointerException e) {
+      return StringUtils.EMPTY;
+    }
+    return StringUtils.EMPTY;
   }
 }
