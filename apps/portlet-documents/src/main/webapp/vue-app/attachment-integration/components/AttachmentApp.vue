@@ -50,7 +50,8 @@
                 :key="attachment.id"
                 :attachment="attachment"
                 :allow-to-remove="false"
-                :allow-to-preview="true" />
+                allow-to-preview
+                small-attachment-icon />
             </v-list-item-group>
           </v-list>
         </div>
