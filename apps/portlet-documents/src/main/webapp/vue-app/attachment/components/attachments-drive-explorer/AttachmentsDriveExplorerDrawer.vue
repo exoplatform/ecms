@@ -381,7 +381,6 @@ export default {
       files: [],
       space: {},
       currentDrive: {},
-      selectedFiles: [],
       maxFilesCount: 20,
       foldersHistory: [],
       showSearchInput: false,
@@ -438,6 +437,9 @@ export default {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
         files = this.files.filter(file => file.name.toLowerCase().indexOf(searchTerm) >= 0);
       }
+      files.forEach(file => {
+        file.isSelected = this.attachedFiles.some(f => f.id === file.id);
+      });
       return files;
     },
     filteredDrivers() {
@@ -486,6 +488,9 @@ export default {
     },
     driveExplorerDrawerTitle() {
       return this.modeFolderSelection ? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.existingUploads');
+    },
+    selectedFiles() {
+      return this.attachedFiles.slice();
     }
   },
   watch: {
@@ -519,7 +524,6 @@ export default {
     },
   },
   created() {
-    this.selectedFiles = this.attachedFiles.slice();
     this.initDestinationFolderPath();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -1000,7 +1004,6 @@ export default {
       }
     },
     openSelectFromDrivesDrawer() {
-      this.selectedFiles = this.attachedFiles.slice();
       this.modeFolderSelection = false;
       this.$refs.driveExplorerDrawer.open();
     }
