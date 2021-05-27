@@ -438,6 +438,9 @@ export default {
         const searchTerm = this.searchFilesFolders.trim().toLowerCase();
         files = this.files.filter(file => file.name.toLowerCase().indexOf(searchTerm) >= 0);
       }
+      files.forEach(file => {
+        file.isSelected = this.attachedFiles.some(f => f.id === file.id);
+      });
       return files;
     },
     filteredDrivers() {
@@ -516,6 +519,9 @@ export default {
     },
     defaultFolder() {
       this.initDestinationFolderPath();
+    },
+    attachedFiles() {
+      this.selectedFiles = this.attachedFiles.slice();
     },
   },
   created() {
@@ -1000,7 +1006,6 @@ export default {
       }
     },
     openSelectFromDrivesDrawer() {
-      this.selectedFiles = this.attachedFiles.slice();
       this.modeFolderSelection = false;
       this.$refs.driveExplorerDrawer.open();
     }
