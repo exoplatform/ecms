@@ -381,6 +381,7 @@ export default {
       files: [],
       space: {},
       currentDrive: {},
+      selectedFiles: [],
       maxFilesCount: 20,
       foldersHistory: [],
       showSearchInput: false,
@@ -488,9 +489,6 @@ export default {
     },
     driveExplorerDrawerTitle() {
       return this.modeFolderSelection ? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.existingUploads');
-    },
-    selectedFiles() {
-      return this.attachedFiles.slice();
     }
   },
   watch: {
@@ -522,8 +520,12 @@ export default {
     defaultFolder() {
       this.initDestinationFolderPath();
     },
+    attachedFiles() {
+      this.selectedFiles = this.attachedFiles.slice();
+    },
   },
   created() {
+    this.selectedFiles = this.attachedFiles.slice();
     this.initDestinationFolderPath();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
