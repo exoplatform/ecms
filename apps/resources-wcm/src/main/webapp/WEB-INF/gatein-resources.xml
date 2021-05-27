@@ -113,6 +113,15 @@
     <overwrite>true</overwrite>
   </portlet-skin>
 
+  <!-- AttachmentsPortlet skins -->
+  <portlet-skin>
+    <application-name>documents</application-name>
+    <portlet-name>AttachmentApp</portlet-name>
+    <skin-name>Enterprise</skin-name>
+    <css-path>/skin/css/ecms/portlets/attachments/attachmentsApp.css</css-path>
+    <overwrite>true</overwrite>
+  </portlet-skin>
+
   <!-- TransferRulesPortlet skins -->
   <portlet-skin>
     <application-name>transfer-rules</application-name>

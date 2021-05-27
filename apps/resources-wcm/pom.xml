@@ -81,6 +81,7 @@
                 <include>ecms/portlets/transferRules/transfer-rules.less</include>
                 <include>ecms/portlets/cloudStorage/cloud-storage.less</include>
                 <include>ecms/portlets/documents/documents.less</include>
+                <include>ecms/portlets/attachments/attachmentsApp.less</include>
               </includes>
             </configuration>
             <goals>

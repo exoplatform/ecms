@@ -148,11 +148,4 @@
     </depends>
   </module>
 
-  <portal-skin>
-    <skin-name>Enterprise</skin-name>
-    <skin-module>customModuleAttachmentsApp</skin-module>
-    <css-path>/skin/css/attachmentsApp.css</css-path>
-    <css-priority>10</css-priority>
-  </portal-skin>
-
 </gatein-resources>
