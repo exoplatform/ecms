@@ -7,12 +7,13 @@ String perm = PERMISSION.equals("read") ? _ctx.appRes("Notification.label.view")
     <div class="avatarXSmall pull-left">
       <img src="$AVATAR" alt="<%=_ctx.escapeHTML(USER)%>" />
     </div>
-    <div class="media-body" onclick="javascript:location.href='$DOCUMENT_URL'">
+    <div class="media-body">
       <%
         String profileUrl = "<a class=\"user-name text-bold\" href=\"javascript:void(0)\">" + _ctx.escapeHTML(USER) + "</a>";
         String permission = "<span class=\"text-bold\">" + perm + "</span>";
         String space = "<span class=\"text-bold\">" + _ctx.escapeHTML(SPACE) + "</span>";
       %>
+      <div class="contentSmall" data-link="$DOCUMENT_URL">
       <div class="status"><%=_ctx.appRes("Notification.intranet.message.ShareFileToSpacePlugin", profileUrl, permission, space)%></div>
       <div class="content">
         <a href=$DOCUMENT_URL>
@@ -24,6 +25,7 @@ String perm = PERMISSION.equals("read") ? _ctx.appRes("Notification.label.view")
       </div>
       <div class="share-comment" style="display:none;">$MESSAGE</div>
       <div class="lastUpdatedTime">$LAST_UPDATED_TIME</div>
+      </div>
     </div>
   </div>
   <span class="remove-item" data-rest=""><i class="uiIconClose uiIconLightGray"></i></span>
