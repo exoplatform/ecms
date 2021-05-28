@@ -32,26 +32,6 @@
           style="display:none"
           @change="handleFileUpload($refs.uploadInput.files)">
       </div>
-      <div class="uploadErrorMessages">
-        <transition name="fade">
-          <div v-show="fileSizeLimitError" class="sizeExceeded alert alert-error">
-            <i class="uiIconError"></i>
-            {{ $t('attachments.drawer.maxFileSize.error').replace('{0}', maxFileSize) }}
-          </div>
-        </transition>
-        <transition name="fade">
-          <div v-show="filesCountLimitError" class="countExceeded alert alert-error">
-            <i class="uiIconError"></i>
-            {{ $t('attachments.drawer.maxFileCount.error').replace('{0}', maxFilesCount) }}
-          </div>
-        </transition>
-        <transition name="fade">
-          <div v-show="sameFileError" class="sameFile ms-2 alert alert-error">
-            <i class="uiIconError"></i>
-            {{ sameFileErrorMessage }}
-          </div>
-        </transition>
-      </div>
     </div>
   </div>
 </template>
@@ -84,10 +64,6 @@ export default {
   },
   data() {
     return {
-      fileSizeLimitError: false,
-      filesCountLimitError: false,
-      sameFileError: false,
-      sameFileErrorMessage: `${this.$t('attachments.drawer.sameFile.error')}`,
       MESSAGES_DISPLAY_TIME: 5000,
       BYTES_IN_MB: 1048576,
       maxUploadInProgressCount: 2,
@@ -96,21 +72,12 @@ export default {
       maxProgress: 100,
     };
   },
-  watch: {
-    fileSizeLimitError: function () {
-      if (this.fileSizeLimitError) {
-        setTimeout(() => this.fileSizeLimitError = false, this.MESSAGES_DISPLAY_TIME);
-      }
+  computed: {
+    maxFileCountErrorLabel: function () {
+      return this.$t('attachments.drawer.maxFileCount.error').replace('{0}', `<b> ${this.maxFilesCount} </b>`);
     },
-    filesCountLimitError: function () {
-      if (this.filesCountLimitError) {
-        setTimeout(() => this.filesCountLimitError = false, this.MESSAGES_DISPLAY_TIME);
-      }
-    },
-    sameFileError: function () {
-      if (this.sameFileError) {
-        setTimeout(() => this.sameFileError = false, this.MESSAGES_DISPLAY_TIME);
-      }
+    maxFileSizeErrorLabel: function () {
+      return this. $t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
   },
   created() {
@@ -198,19 +165,28 @@ export default {
     queueUpload: function (file) {
       if (this.uploadMode === 'temp') {
         if (this.attachments.length >= this.maxFilesCount) {
-          this.filesCountLimitError = true;
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.maxFileCountErrorLabel,
+            type: 'error',
+          });
           return;
         }
 
         const fileSizeInMb = file.size / this.BYTES_IN_MB;
         if (fileSizeInMb > this.maxFileSize) {
-          this.fileSizeLimitError = true;
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.maxFileSizeErrorLabel,
+            type: 'error',
+          });
           return;
         }
         const fileExists = this.attachments.some(f => f.name === file.name);
         if (fileExists) {
-          this.sameFileErrorMessage = this.sameFileErrorMessage.replace('{0}', file.name);
-          this.sameFileError = true;
+          const sameFileErrorMessage = this. $t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
+          this.$root.$emit('attachments-notification-alert', {
+            message: sameFileErrorMessage,
+            type: 'error',
+          });
           return;
         }
 
