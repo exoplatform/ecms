@@ -539,7 +539,6 @@ export default {
     },
     closeAttachmentsDriveExplorerDrawer() {
       this.$refs.driveExplorerDrawer.close();
-      this.$root.$emit('attachments-drive-explorer-drawer-closed');
     },
     initDestinationFolderPath: function () {
       //if default drive exist
