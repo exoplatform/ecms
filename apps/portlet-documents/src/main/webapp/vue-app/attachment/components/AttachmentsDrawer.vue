@@ -172,7 +172,7 @@ export default {
       return this.attachments.some(file => file.isPublic === false);
     },
     showSelectedAttachmentsFromOtherDriveInfo() {
-      return this.privateFilesAttached || this.fromAnotherSpacesAttachments;
+      return this.attachmentInfo && (this.privateFilesAttached || this.fromAnotherSpacesAttachments);
     },
     selectedFromOtherDriveLabel() {
       return this.$t(`attachments.alert.sharing.${this.privateFilesAttached && !this.fromAnotherSpacesAttachments.length ? 'personal' : 'space'}`);

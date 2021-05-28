@@ -74,10 +74,10 @@ export default {
   },
   computed: {
     maxFileCountErrorLabel: function () {
-      return this.$t('attachments.drawer.maxFileCount.error').replace('{0}', this.maxFilesCount);
+      return this.$t('attachments.drawer.maxFileCount.error').replace('{0}', `<b> ${this.maxFilesCount} </b>`);
     },
     maxFileSizeErrorLabel: function () {
-      return this. $t('attachments.drawer.maxFileSize.error').replace('{0}', this.maxFileSize);
+      return this. $t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
   },
   created() {
@@ -182,7 +182,7 @@ export default {
         }
         const fileExists = this.attachments.some(f => f.name === file.name);
         if (fileExists) {
-          const sameFileErrorMessage = this. $t('attachments.drawer.sameFile.error').replace('{0}', file.name);
+          const sameFileErrorMessage = this. $t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
           this.$root.$emit('attachments-notification-alert', {
             message: sameFileErrorMessage,
             type: 'error',
