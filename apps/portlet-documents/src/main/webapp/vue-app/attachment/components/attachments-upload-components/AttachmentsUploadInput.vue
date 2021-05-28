@@ -160,7 +160,7 @@ export default {
       newAttachedFiles.forEach(newFile => {
         this.queueUpload(newFile);
       });
-      this.$refs.uploadInput.attachments = '';
+      this.$refs.uploadInput.value = null;
     },
     queueUpload: function (file) {
       if (this.uploadMode === 'temp') {
