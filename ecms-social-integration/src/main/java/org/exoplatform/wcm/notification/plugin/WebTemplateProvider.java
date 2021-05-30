@@ -58,7 +58,11 @@ public class WebTemplateProvider extends TemplateProvider {
       templateContext.put("READ", Boolean.valueOf(notification.getValueOwnerParameter(NotificationMessageUtils.READ_PORPERTY.getKey())) ? "read" : "unread");
       templateContext.put("NOTIFICATION_ID", notification.getId());
       templateContext.put("LAST_UPDATED_TIME", TimeConvertUtils.convertXTimeAgoByTimeServer(cal.getTime(), "EE, dd yyyy", new Locale(language), TimeConvertUtils.YEAR));
-      templateContext.put("USER", profile.getFullName());
+      String fullName = profile.getFullName();
+      if(isExternalUser(identity)) {
+        fullName += " " + "(" + LinkProvider.getResourceBundleLabel(new Locale(LinkProvider.getCurrentUserLanguage(identity.getRemoteId())), "external.label.tag") + ")";
+      }
+      templateContext.put("USER", fullName);
       templateContext.put("AVATAR", profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL);
       templateContext.put("DOCUMENT", notification.getValueOwnerParameter(ShareFileToUserPlugin.DOCUMENT_NAME));
       templateContext.put("DOCUMENT_URL", notification.getValueOwnerParameter(ShareFileToUserPlugin.DOCUMENT_URL));
@@ -102,7 +106,11 @@ public class WebTemplateProvider extends TemplateProvider {
       templateContext.put("READ", Boolean.valueOf(notification.getValueOwnerParameter(NotificationMessageUtils.READ_PORPERTY.getKey())) ? "read" : "unread");
       templateContext.put("NOTIFICATION_ID", notification.getId());
       templateContext.put("LAST_UPDATED_TIME", TimeConvertUtils.convertXTimeAgoByTimeServer(cal.getTime(), "EE, dd yyyy", new Locale(language), TimeConvertUtils.YEAR));
-      templateContext.put("USER", profile.getFullName());
+      String fullName = profile.getFullName();
+      if(isExternalUser(identity)) {
+        fullName += " " + "(" + LinkProvider.getResourceBundleLabel(new Locale(LinkProvider.getCurrentUserLanguage(identity.getRemoteId())), "external.label.tag") + ")";
+      }
+      templateContext.put("USER", fullName);
       templateContext.put("AVATAR", profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL);
       templateContext.put("DOCUMENT", notification.getValueOwnerParameter(ShareFileToSpacePlugin.DOCUMENT_NAME));
       templateContext.put("DOCUMENT_URL", notification.getValueOwnerParameter(ShareFileToSpacePlugin.DOCUMENT_URL));
@@ -125,5 +133,9 @@ public class WebTemplateProvider extends TemplateProvider {
 
 
   };
+
+  private boolean isExternalUser(Identity identity) {
+    return identity.getProfile() != null && identity.getProfile().getProperty("external") != null && identity.getProfile().getProperty("external").equals("true");
+  }
 
 }
