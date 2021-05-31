@@ -58,11 +58,8 @@ public class MailTemplateProvider extends TemplateProvider {
 
       Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME, notification.getFrom(), true);
       TemplateContext templateContext = new TemplateContext(notification.getKey().getId(), language);
-      String fullName = identity.getProfile().getFullName();
-      if(isExternalUser(identity)) {
-        fullName += " " + "(" + LinkProvider.getResourceBundleLabel(new Locale(LinkProvider.getCurrentUserLanguage(identity.getRemoteId())), "external.label.tag") + ")";
-      }
-      templateContext.put("USER", fullName);
+
+      templateContext.put("USER", Utils.addExternalFlag(identity));
 
       templateContext.put("DOCUMENT", notification.getValueOwnerParameter(ShareFileToUserPlugin.DOCUMENT_NAME));
 
@@ -148,14 +145,10 @@ public class MailTemplateProvider extends TemplateProvider {
     }
 
     protected String buildUserUrl(Identity identity) {
-      String fullName = identity.getProfile().getFullName();
-      if(isExternalUser(identity)) {
-        fullName += " " + "(" + LinkProvider.getResourceBundleLabel(new Locale(LinkProvider.getCurrentUserLanguage(identity.getRemoteId())), "external.label.tag") + ")";
-      }
       StringBuilder sb = new StringBuilder();
       sb.append("<a target=\"_blank\" style=\"text-decoration: none; font-weight: bold; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px;\"");
       sb.append("href=\"" + LinkProviderUtils.getRedirectUrl("user", identity.getRemoteId()) + "\">");
-      sb.append(fullName);
+      sb.append(Utils.addExternalFlag(identity));
       sb.append("</a>");
       return sb.toString();
     }
@@ -175,11 +168,8 @@ public class MailTemplateProvider extends TemplateProvider {
 
       Identity identity = Utils.getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME, notification.getFrom(), true);
       TemplateContext templateContext = new TemplateContext(notification.getKey().getId(), language);
-      String fullName = identity.getProfile().getFullName();
-      if(isExternalUser(identity)) {
-        fullName += " " + "(" + LinkProvider.getResourceBundleLabel(new Locale(LinkProvider.getCurrentUserLanguage(identity.getRemoteId())), "external.label.tag") + ")";
-      }
-      templateContext.put("USER", fullName);
+
+      templateContext.put("USER", Utils.addExternalFlag(identity));
 
       templateContext.put("DOCUMENT", notification.getValueOwnerParameter(ShareFileToSpacePlugin.DOCUMENT_NAME));
 
@@ -268,14 +258,10 @@ public class MailTemplateProvider extends TemplateProvider {
     }
 
     protected String buildUserUrl(Identity identity) {
-      String fullName = identity.getProfile().getFullName();
-      if(isExternalUser(identity)) {
-        fullName += " " + "(" + LinkProvider.getResourceBundleLabel(new Locale(LinkProvider.getCurrentUserLanguage(identity.getRemoteId())), "external.label.tag") + ")";
-      }
       StringBuilder sb = new StringBuilder();
       sb.append("<a target=\"_blank\" style=\"text-decoration: none; font-weight: bold; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px;\"");
       sb.append("href=\"" + LinkProviderUtils.getRedirectUrl("user", identity.getRemoteId()) + "\">");
-      sb.append(fullName);
+      sb.append(Utils.addExternalFlag(identity));
       sb.append("</a>");
       return sb.toString();
     }
