@@ -191,6 +191,9 @@ export default {
     },
     attachmentPrivacyLabel() {
       return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
+    },
+    filesUploadedSuccessLabel() {
+      return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');
     }
   },
   watch: {
@@ -400,11 +403,14 @@ export default {
     closeAndResetAttachmentsDrawer() {
       this.closeAttachmentsAppDrawer();
       this.$root.$emit('attachments-notification-alert', {
-        message: this.$t('attachments.upload.success'),
+        message: this.filesUploadedSuccessLabel,
         type: 'success',
       });
       this.$refs.attachmentsAppDrawer.endLoading();
-      document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(this.uploadedFiles)}}));
+
+      //get the last 10 uploaded files to be sent within the custom event
+      const lastUploadedFiles = this.uploadedFiles.sort((doc1, doc2) => doc2.date - doc1.date).slice(-10);
+      document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(lastUploadedFiles)}}));
       this.uploadedFiles = [];
     },
     linkUploadedAttachmentsToEntity() {
@@ -437,6 +443,7 @@ export default {
       uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
       uploadedFile.drive = file.fileDrive.title;
       uploadedFile.id = uploadedFile.UUID;
+      this.uploadedFiles.push(uploadedFile);
 
       this.$root.$emit('add-new-uploaded-file', uploadedFile);
     },
