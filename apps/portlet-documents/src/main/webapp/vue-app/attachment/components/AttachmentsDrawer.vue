@@ -402,15 +402,14 @@ export default {
       this.$root.$emit('open-select-from-drives-drawer');
     },
     addNewUploadedFileToAttachments(file, uploadedFile) {
-      //remove attached file with uploadId from attachments list.
-      this.$root.$emit('remove-attachment-item', file);
-      //add new uploadedFile
       uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
+      file.drive = file.fileDrive.title;
+      file.id = uploadedFile.UUID;
+      file.uploadId = '';
+
       uploadedFile.drive = file.fileDrive.title;
       uploadedFile.id = uploadedFile.UUID;
       this.uploadedFiles.push(uploadedFile);
-
-      this.$root.$emit('add-new-uploaded-file', uploadedFile);
     },
   }
 };
