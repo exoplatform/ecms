@@ -29,7 +29,8 @@
           <attachments-uploaded-files
             :attachments="attachments"
             :schema-folder="schemaFolder"
-            :max-files-count="maxFilesCount" />
+            :max-files-count="maxFilesCount"
+            :current-space="currentSpace" />
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
@@ -155,34 +156,6 @@ export default {
     },
     entityHasNewAttachments() {
       return this.attachments.some(attachment => attachment.uploadId);
-    },
-    fromAnotherSpacesAttachments() {
-      return this.attachments.filter(({ space }) => space && space.name !== this.groupId)
-        .map(({ space }) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
-    },
-    privateFilesAttached() {
-      return this.attachments.some(file => file.isPublic === false);
-    },
-    showSelectedAttachmentsFromOtherDriveInfo() {
-      return this.attachmentInfo && (this.privateFilesAttached || this.fromAnotherSpacesAttachments);
-    },
-    selectedFromOtherDriveLabel() {
-      return this.$t(`attachments.alert.sharing.${this.privateFilesAttached && !this.fromAnotherSpacesAttachments.length ? 'personal' : 'space'}`);
-    },
-    currentSpaceDisplayName() {
-      return this.currentSpace && this.currentSpace.displayName;
-    },
-    attachedFromOtherDrivesLabel() {
-      return `${this.$t('attachments.alert.sharing.attachedFrom')} ${this.selectedFromOtherDriveLabel}
-      ${this.fromAnotherSpacesAttachments}`;
-    },
-    attachmentsWillBeDisplayedForLabel() {
-      return `${this.$t('attachments.alert.sharing.availableFor')}
-      ${this.currentSpaceDisplayName}
-      ${this.$t('attachments.alert.sharing.members')}`;
-    },
-    attachmentPrivacyLabel() {
-      return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     },
     filesUploadedSuccessLabel() {
       return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');

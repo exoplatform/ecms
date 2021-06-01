@@ -1,6 +1,9 @@
 <template>
   <div :class="allowToPreview && 'clickable'" class="attachment d-flex">
-    <v-list-item-avatar :class="smallAttachmentIcon ? 'me-0' :'me-3'" class="rounded-lg" @click="openPreview()">
+    <v-list-item-avatar
+      :class="smallAttachmentIcon ? 'me-0' :'me-3'"
+      class="border-radius"
+      @click="openPreview()">
       <div v-if="attachment.uploadProgress < 100" class="fileProgress">
         <v-progress-circular
           :rotate="-90"
@@ -11,7 +14,10 @@
           {{ attachment.uploadProgress }}
         </v-progress-circular>
       </div>
-      <div v-else :class="smallAttachmentIcon && 'smallAttachmentIcon'" class="fileType">
+      <div
+        v-else
+        :class="smallAttachmentIcon && 'smallAttachmentIcon'"
+        class="fileType">
         <i :class="getIconClassFromFileMimeType(attachment.mimetype)"></i>
       </div>
     </v-list-item-avatar>
@@ -38,7 +44,15 @@
           @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChooseLocation') }}</a>
       </v-list-item-subtitle>
     </v-list-item-content>
-    <v-list-item-action>
+    <v-list-item-action class="d-flex flex-row align-center">
+      <v-icon
+        v-if="attachment.isSelectedFromDrives && privateFilesAttached && fromAnotherSpaceAttachment"
+        :title="attachmentPrivacyLabel"
+        size="14"
+        color="primary"
+        depressed>
+        fa-info-circle
+      </v-icon>
       <v-btn
         v-if="attachment.uploadProgress && attachment.uploadProgress !== 100 && allowToRemove"
         class="d-flex flex-column pb-3 align-end"
@@ -87,6 +101,10 @@ export default {
     smallAttachmentIcon: {
       type: Boolean,
       default: false
+    },
+    currentSpace: {
+      type: {},
+      default: () => null
     }
   },
   data() {
@@ -97,6 +115,35 @@ export default {
       MB_IN_GB: 10,
       measure: 'bytes'
     };
+  },
+  computed: {
+    fromAnotherSpaceAttachment() {
+      return this.attachmentSpaceId && this.attachmentSpaceId !== this.currentSpaceId && this.attachmentSpaceId || false;
+    },
+    privateFilesAttached() {
+      return this.attachment && !this.attachment.isPublic && !this.attachmentSpaceDisplayName;
+    },
+    selectedFromOtherDriveLabel() {
+      return this.$t(`attachments.alert.sharing.${this.privateFilesAttached && !this.fromAnotherSpaceAttachment ? 'personal' : 'space'}`);
+    },
+    attachmentSpaceDisplayName() {
+      return this.attachment && this.attachment.space && this.attachment.space.title;
+    },
+    currentSpaceId() {
+      return this.currentSpace && this.currentSpace.groupId && this.currentSpace.groupId.split('/spaces/')[1];
+    },
+    attachmentSpaceId() {
+      return this.attachment && this.attachment.space && this.attachment.space.name && this.attachment.space.name.split('.spaces.')[1];
+    },
+    attachedFromOtherDrivesLabel() {
+      return `${this.$t('attachments.alert.sharing.attachedFrom')} ${this.selectedFromOtherDriveLabel} ${this.fromAnotherSpaceAttachment && this.attachmentSpaceDisplayName || ''}.`;
+    },
+    attachmentsWillBeDisplayedForLabel() {
+      return this.$t('attachments.alert.sharing.availableFor');
+    },
+    attachmentPrivacyLabel() {
+      return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
+    },
   },
   methods: {
     getIconClassFromFileMimeType: function (fileMimeType) {
