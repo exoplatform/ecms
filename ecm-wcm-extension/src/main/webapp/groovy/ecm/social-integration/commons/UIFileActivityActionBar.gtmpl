@@ -1,0 +1,61 @@
+<%
+  def activity = uicomponent.getActivity();
+  def likeActivityAction = uicomponent.event("LikeActivity", "true");
+  def unlikeActivityAction = uicomponent.event("LikeActivity", "false");
+  def labelLike = _ctx.appRes("UIActivity.label.Like");
+  def labelShare = _ctx.appRes("UIActivity.share.share");
+  def labelComment = _ctx.appRes("UIActivity.label.Comment");
+  def totalLikesNum = uicomponent.getIdentityLikes().length;
+  int allCommentSize = uicomponent.getAllCommentSize();
+  def isActivityShareable = uicomponent.isActivityShareable();
+  def params;
+  def activityType = uicomponent.getOriginalActivityType();
+  params = """ {
+		activityId: '${activity.id}',
+		activityType: '$activityType'
+  } """;
+ 
+%>
+<div class="actionBar clearfix "><% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
+     def commentLink = "";
+  %>
+	<ul class="pull-right statusAction"><% if (uicomponent.isLiked()) { %>
+		<li>
+			<a onclick="$unlikeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.UnlikeActivity"); %>" id="UnLikeLink${activity.id}" href="javascript:void(0);">
+				<i class="uiIconThumbUp uiIconBlue"></i>
+				<span class="LikeLabel reactionLabel uiIconBlue">$labelLike</span>
+			</a>
+		</li><% } else { %>
+		<li>
+			<a onclick="$likeActivityAction" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActivity.msg.LikeActivity"); %>" id="LikeLink${activity.id}" href="javascript:void(0);">
+				<i class="uiIconThumbUp uiIconLightGray"></i>
+				<span class="LikeLabel reactionLabel">$labelLike</span>
+			</a>
+		</li><% }%>
+		<li>
+			<a class="$commentLink" id="CommentLink${activity.id}" data-activity="${activity.id}" href="javascript:void(0);">
+				<i class="uiIconComment uiIconLightGray"></i>
+				<span class="CommentLabel reactionLabel">$labelComment</span>
+			</a>
+		</li>
+		<% _ctx.includeTemplates("UIActivityActionBar-actions-after") %>
+		<li class="share-link" onclick="javascript:openDocumentDrawer($params);">
+			<i class="uiIconShare uiIcon16x16"></i>
+			<span class="share-text">$labelShare</span>
+		</li>
+	</ul>
+	<div class="VuetifyApp">
+		<div id="shareDocumentActivity-${activity.id}">
+			<script type="text/javascript">
+        require(["SHARED/ShareDocumentActivity"], shareDocumentActivity => shareDocumentActivity.init($params));
+      </script>
+		</div>
+	</div>
+	<script type="text/javascript">
+    function openDocumentDrawer(params) {
+      require(["SHARED/ShareDocumentActivity"], shareDocumentActivity => shareDocumentActivity.openShareDocumentActivityDrawer(params));
+    }
+  </script>
+</div>
+<!--end actionBar-->
+

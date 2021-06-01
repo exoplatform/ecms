@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2014 eXo Platform SAS.
+ * Copyright (C) 2003-2021 eXo Platform SAS.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +19,7 @@ package org.exoplatform.wcm.ext.component.document.service;
 import javax.jcr.Node;
 
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 
 /**
  * Created by The eXo Platform SAS
@@ -92,4 +93,15 @@ public interface IShareDocumentService {
    * @param  node file will be shared
    */
   void unpublishDocumentToSpace(String space, ExtendedNode node);
+  
+  /**
+   * Share a document activity to a space
+   *
+   * @param space destination space will share activity in
+   * @param activityId id of the activity to be shared
+   * @param title title of the shared activity
+   * @param type type of the shared activity
+   * @return return the shared ExoSocialActivity
+   */
+  public ExoSocialActivity shareDocumentActivityToSpace(String space, String activityId, String title, String type) throws Exception;
 }
