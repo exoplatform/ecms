@@ -28,7 +28,8 @@
           <attachments-select-from-drive v-if="entityId && entityType" />
           <attachments-uploaded-files
             :attachments="attachments"
-            :schema-folder="schemaFolder" />
+            :schema-folder="schemaFolder"
+            :max-files-count="maxFilesCount" />
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
@@ -51,27 +52,18 @@
         </div>
       </template>
       <template slot="footer">
-        <div class="d-flex align-center justify-space-between">
-          <div class="limitMessage d-flex align-center grey--text">
-            <i class="uiIconWarning my-auto pr-2 grey--text"></i>
-            <div class="d-flex flex-column caption align-start warningMessages">
-              <span class="sizeLimit">{{ $t('attachments.drawer.maxFileSize').replace('{0}', maxFileSize) }}</span>
-              <span class="countLimit">{{ $t('attachments.drawer.maxFileCount').replace('{0}', maxFilesCount) }}</span>
-            </div>
-          </div>
-          <div class="attachmentDrawerButtons d-flex">
-            <v-btn
-              class="btn mr-3"
-              @click="closeAttachmentsAppDrawer()">
-              {{ $t('attachments.drawer.cancel') }}
-            </v-btn>
-            <v-btn
-              :disabled="!attachmentsChanged || attachments.length === 0"
-              class="btn btn-primary"
-              @click="uploadAddedAttachments()">
-              {{ $t('attachments.upload') }}
-            </v-btn>
-          </div>
+        <div class="d-flex justify-end">
+          <v-btn
+            class="btn mr-3"
+            @click="closeAttachmentsAppDrawer()">
+            {{ $t('attachments.drawer.cancel') }}
+          </v-btn>
+          <v-btn
+            :disabled="!attachmentsChanged || attachments.length === 0"
+            class="btn btn-primary"
+            @click="uploadAddedAttachments()">
+            {{ $t('attachments.upload') }}
+          </v-btn>
         </div>
       </template>
     </exo-drawer>
