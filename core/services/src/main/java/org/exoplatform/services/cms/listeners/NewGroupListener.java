@@ -28,6 +28,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -94,10 +95,16 @@ public class NewGroupListener extends GroupEventListener
       String systemWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
       Session session = manageableRepository.getSystemSession(systemWorkspace);
       Node groupNode = (Node)session.getItem(groupsPath_ + groupId);
-      groupNode.remove();
-      session.save();
-      session.logout();
-   }
+      try {
+        Utils.removeDeadSymlinks(groupNode);
+        groupNode.remove();
+        session.save();
+      } catch (Exception e) {
+        LOG.error("Error while deleting group node", e);
+      } finally {
+        session.logout();
+      }
+    }
 
    @SuppressWarnings("unchecked")
    private void buildGroupStructure(Group group) throws Exception
