@@ -15,11 +15,9 @@
         @click="uploadFile">
         <i class="uiIconEcmsUploadVersion uiIcon32x32"></i>
         <v-subheader
-          class="text-sub-title ml-3 d-none d-sm-flex"
-          href="#"
-          rel="tooltip"
-          data-placement="bottom">
-          {{ $t('attachments.drawer.uploadOrDrop') }}
+          class="upload-drag-drop-label text-sub-title mt-3 d-flex flex-column">
+          <span>{{ $t('attachments.drawer.uploadOrDrop') }}</span>
+          <span>({{ $t('attachments.drawer.maxFileSize').replace('{0}', maxFileSize) }})</span>
         </v-subheader>
       </div>
       <div class="fileHidden d-none">
