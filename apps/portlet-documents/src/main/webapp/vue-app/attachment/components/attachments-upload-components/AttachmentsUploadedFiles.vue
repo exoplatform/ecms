@@ -103,7 +103,8 @@
           class="list-complete-item">
           <attachment-item
             :attachment="attachment"
-            :allow-to-preview="true" />
+            :allow-to-preview="true"
+            :current-space="currentSpace" />
         </span>
       </transition-group>
     </div>
@@ -124,6 +125,10 @@ export default {
     maxFilesCount: {
       type: Number,
       default: null
+    },
+    currentSpace: {
+      type: {},
+      default: () => null
     },
   },
   computed: {
