@@ -46,7 +46,7 @@
     </v-list-item-content>
     <v-list-item-action class="d-flex flex-row align-center">
       <v-icon
-        v-if="attachment.isSelectedFromDrives && privateFilesAttached && fromAnotherSpaceAttachment"
+        v-if="attachment.isSelectedFromDrives && privateFilesAttached || fromAnotherSpaceAttachment"
         :title="attachmentPrivacyLabel"
         size="14"
         color="primary"
