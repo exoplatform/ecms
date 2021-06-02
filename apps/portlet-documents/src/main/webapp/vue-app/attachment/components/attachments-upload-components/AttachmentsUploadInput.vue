@@ -35,8 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   props: {
     attachments: {
@@ -140,6 +138,8 @@ export default {
 
       const newAttachedFiles = [];
       newFilesArray.forEach(file => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         newAttachedFiles.push({
           originalFileObject: file,
           fileDrive: this.currentDrive,
@@ -150,7 +150,8 @@ export default {
           uploadProgress: 0,
           destinationFolder: this.pathDestinationFolder,
           pathDestinationFolderForFile: '',
-          isPublic: true
+          isPublic: true,
+          signal: signal
         });
       });
 
@@ -201,50 +202,40 @@ export default {
         this.uploadingFilesQueue.push(file);
       }
     },
-    sendFileToServer: function (file) {
+    sendFileToServer(file){
       this.uploadingCount++;
       this.$emit('uploadingCountChanged', this.uploadingCount);
-
-      const formData = new FormData();
-      formData.append('file', file.originalFileObject);
-
-      const uploadUrl = `${eXo.env.server.context}/upload?action=upload&uploadId=${file.uploadId}`;
-      // Had to use axios here since progress observation is still not supported by fetch
-      axios.request({
-        method: 'POST',
-        url: uploadUrl,
-        credentials: 'include',
-        data: formData,
-        onUploadProgress: (progress) => {
-          file.uploadProgress = Math.round(progress.loaded * this.maxProgress / progress.total);
-        }
-      }).then(() => {
-
-        // Check if the file has correctly been uploaded (progress=100) before refreshing the upload list
-        const progressUrl = `${eXo.env.server.context}/upload?action=progress&uploadId=${file.uploadId}`;
-        fetch(progressUrl)
-          .then(response => response.text())
-          .then(responseText => {
-            // TODO fix malformed json from upload service
-            let responseObject;
-            try {
-              // trick to parse malformed json
-              eval(`responseObject = ${responseText}`); // eslint-disable-line no-eval
-            } catch (err) {
-              return;
-            }
-
-            if (!responseObject.upload[file.uploadId] || !responseObject.upload[file.uploadId].percent ||
-              responseObject.upload[file.uploadId].percent !== this.maxProgress.toString()) {
-              this.removeAttachedFile(file);
-            } else {
-              file.uploadProgress = this.maxProgress;
-            }
+      this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
+        .catch(error => {
+          this.$root.$emit('attachments-notification-alert', {
+            message: error,
+            type: 'error',
           });
-        this.uploadingCount--;
-        this.$emit('uploadingCountChanged', this.uploadingCount);
-        this.processNextQueuedUpload();
-      });
+          this.removeAttachedFile(file);
+        });
+      this.controlUpload(file);
+    },
+    controlUpload(file){
+      window.setTimeout(() => {
+        this.$uploadService.getUploadProgress(file.uploadId)
+          .then(percent => {
+            file.uploadProgress = Number(percent);
+            if (file.uploadProgress < 100) {
+              this.controlUpload(file);
+            } else {
+              this.uploadingCount--;
+              this.$emit('uploadingCountChanged', this.uploadingCount);
+              this.processNextQueuedUpload();
+            }
+          })
+          .catch(error => {
+            this.removeAttachedFile(file);
+            this.$root.$emit('attachments-notification-alert', {
+              message: error,
+              type: 'error',
+            });
+          });
+      }, 200);
     },
     processNextQueuedUpload: function () {
       if (this.uploadingFilesQueue.length > 0) {
