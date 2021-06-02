@@ -8,7 +8,7 @@
         <a v-if="!showDocumentSelector" class="backButton" @click="toggleAttachmentsDrawer()">
           <i class="uiIconBack"> </i>
         </a>
-        <span class="attachmentsTitle">{{ drawerTitle }}</span>
+        <span class="attachmentsTitle">{{ drawerTitle || $t('attachments.drawer.header') }}</span>
         <a class="attachmentsCloseIcon" @click="toggleAttachmentsDrawer()">×</a>
         <v-progress-linear :active="cloudDriveConnecting" absolute bottom indeterminate></v-progress-linear>
       </div>
@@ -254,7 +254,7 @@ export default {
       sameFileErrorMessage: `${this.$t('attachments.drawer.sameFile.error')}`,
       BYTES_IN_MB: 1048576,
       MESSAGES_DISPLAY_TIME: 5000,
-      drawerTitle: `${this.$t('attachments.drawer.header')}`,
+      drawerTitle: null,
       pathDestinationFolder : '',
       showDestinationPath: false,
       schemaFolder: [],
@@ -506,7 +506,7 @@ export default {
         this.schemaFolder[i] = namesOfFolders[i];
       }
       this.showDocumentSelector = !this.showDocumentSelector;
-      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
+      this.drawerTitle = this.showDocumentSelector? this.$t('attachments.drawer.existingUploads') : this.$t('attachments.drawer.header');
       if (!this.showDocumentSelector) {
         this.showDestinationFolder = false;
       }
@@ -522,7 +522,7 @@ export default {
       }
       this.pathDestinationFolder = '';
       this.showDocumentSelector = !this.showDocumentSelector;
-      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
+      this.drawerTitle = this.showDocumentSelector? this.$t('attachments.drawer.existingUploads') : this.$t('attachments.drawer.header');
       if (!this.showDocumentSelector) {
         this.showDestinationFolderForFile = false;
       }
@@ -536,7 +536,7 @@ export default {
         this.$emit('attachmentsChanged', this.value);
       }
       this.showDocumentSelector = !this.showDocumentSelector;
-      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.existingUploads')}` : `${this.$t('attachments.drawer.header')}`;
+      this.drawerTitle = this.showDocumentSelector? this.$t('attachments.drawer.existingUploads') : this.$t('attachments.drawer.header');
       if (!this.showDocumentSelector){
         this.showDestinationFolder = false;
         this.showDestinationFolderForFile = false;
@@ -545,14 +545,14 @@ export default {
     toggleSelectDestinationFolder(){
       this.showDestinationFolder = true ;
       this.showDocumentSelector = !this.showDocumentSelector;
-      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.destination.folder')}` : `${this.$t('attachments.drawer.header')}`;
+      this.drawerTitle = this.showDocumentSelector? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.header');
     },
     openSelectDestinationFolderForFile(file){
       this.modeFolderSelectionForFile = true;
       this.destinationFileName = file.name;
       this.showDestinationFolderForFile = true;
       this.showDocumentSelector = !this.showDocumentSelector;
-      this.drawerTitle = this.showDocumentSelector? `${this.$t('attachments.drawer.destination.folder')}` : `${this.$t('attachments.drawer.header')}`;
+      this.drawerTitle = this.showDocumentSelector? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.header');
     },
     addDefaultPath(){
       if(eXo.env.portal.spaceId){
