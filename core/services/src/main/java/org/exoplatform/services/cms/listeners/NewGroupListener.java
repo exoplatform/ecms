@@ -96,7 +96,7 @@ public class NewGroupListener extends GroupEventListener
       Session session = manageableRepository.getSystemSession(systemWorkspace);
       Node groupNode = (Node)session.getItem(groupsPath_ + groupId);
       try {
-        Utils.removeDeadSymlinks(groupNode);
+        Utils.removeDeadSymlinks(groupNode, false);
         groupNode.remove();
         session.save();
       } catch (Exception e) {
