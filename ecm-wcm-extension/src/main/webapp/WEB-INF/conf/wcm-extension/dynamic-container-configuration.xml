@@ -238,6 +238,53 @@
         </object-param>
       </init-params>
     </component-plugin>
+    <component-plugin>
+      <name>addPlugin</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.commons.addons.AddOnPluginImpl</type>
+      <description>add application Config</description>
+      <init-params>
+        <value-param>
+          <name>priority</name>
+          <value>10</value>
+        </value-param>
+        <value-param>
+          <name>containerName</name>
+          <value>bottom-all-container</value>
+        </value-param>
+        <object-param>
+          <name>attachment-app-portlet</name>
+          <description></description>
+          <object type="org.exoplatform.commons.addons.PortletModel">
+            <field name="contentId">
+              <string>documents/AttachmentApp</string>
+            </field>
+            <field name="permissions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>*:/platform/users</string>
+                </value>
+                <value>
+                  <string>*:/platform/externals</string>
+                </value>
+              </collection>
+            </field>
+            <field name="title">
+              <string>>Attachments App Portlet</string>
+            </field>
+            <field name="showInfoBar">
+              <boolean>false</boolean>
+            </field>
+            <field name="showApplicationState">
+              <boolean>false</boolean>
+            </field>
+            <field name="showApplicationMode">
+              <boolean>false</boolean>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
 </configuration>

@@ -18,6 +18,8 @@
     <supports>
       <mime-type>text/html</mime-type>
     </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.documents</resource-bundle>
     <portlet-info>
       <title>Documents</title>
     </portlet-info>
@@ -60,6 +62,8 @@
     <supports>
       <mime-type>text/html</mime-type>
     </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.attachments</resource-bundle>
     <portlet-info>
       <title>Attachments Application</title>
     </portlet-info>

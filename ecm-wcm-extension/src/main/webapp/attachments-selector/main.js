@@ -9,7 +9,7 @@ const lang = typeof eXo !== 'undefined' ? eXo.env.portal.language : 'en';
 
 // should expose the locale resources as REST API
 
-const url = `/portal/rest/i18n/bundle/locale.attachmentsSelector.attachments-${lang}.json`;
+const url = `/portal/rest/i18n/bundle/locale.portlet.attachments-${lang}.json`;
 
 // get overridden components if exist
 if (extensionRegistry) {
