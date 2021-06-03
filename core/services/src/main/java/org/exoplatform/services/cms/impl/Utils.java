@@ -33,6 +33,7 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
@@ -464,11 +465,15 @@ public class Utils {
               synchronized (symlink) {
                 if (keepInTrash) {
                   trashService.moveToTrash(symlink, sessionProvider, 1);
-                }else {
+                } else {
+                  if (symlink.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO) && node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)) {
+                    ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+                    listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, symlink);
+                  }
+                  Session nodeSession = symlink.getSession();
                   symlink.remove();
+                  nodeSession.save();
                 }
-                ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-                listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, symlink);
               }
             }
           } catch (Exception e) {
