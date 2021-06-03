@@ -444,4 +444,31 @@ public class LinkManagerImpl implements LinkManager {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Node> getNodeSymlinksUnderFolder(String contentUUID, String folderPath, String workspace) {
+    List<Node> nodeSymlinks =  new ArrayList<Node>();
+    ManageableRepository repository = WCMCoreUtils.getRepository();
+    SessionProviderService sessionProviderService = CommonsUtils.getService(SessionProviderService.class);
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    try {
+      Session session = sessionProvider.getSession(workspace, repository);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      String queryString = new StringBuilder("select * from exo:symlink ").append(" where exo:uuid = '").
+              append(contentUUID).append("' AND jcr:path like '%").
+              append(folderPath).append("/%' order by exo:dateCreated DESC").toString();
+      Query query = queryManager.createQuery(queryString, Query.SQL);
+      QueryResult queryResult = query.execute();
+      NodeIterator iterator = queryResult.getNodes();
+      while (iterator.hasNext()) {
+        nodeSymlinks.add(iterator.nextNode());
+      }
+      return nodeSymlinks;
+    } catch (Exception e) {
+      LOG.error("Error while trying to get the Node Link", e);
+      return null;
+    }
+  }
 }
