@@ -138,6 +138,7 @@ public class DocumentServiceImpl implements DocumentService {
   public static final String DOCUMENTS_APP_NAVIGATION_NODE_NAME = "documents";
   public static final String DOCUMENT_NOT_FOUND = "?path=doc-not-found";
   private static final String DOCUMENTS_NODE = "Documents";
+  private static final String  ACTIVITY_STREAM_NODE = "Activity Stream Documents";
   private static final String SHARED_NODE = "Shared";
   private static final String COLLABORATION = "collaboration";
   private static final long DEFAULT_EDITORS_IDLE_TIMEOUT = 1800000;
@@ -500,22 +501,14 @@ public class DocumentServiceImpl implements DocumentService {
       if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         currentNode = linkManager.getTarget(currentNode);
       }
-      List<String> path = new ArrayList<>();
-      Node targetNode = null;
-      boolean existingSymlink = false;
-      for (NodeIterator it = shared.getNodes(); it.hasNext(); ) {
-        Node node = it.nextNode();
-        path.add(((NodeImpl) node).getInternalPath().getAsString());
-        if (path.contains(((NodeImpl) shared).getInternalPath().getAsString() + "[]" + currentNode.getName() + ":1")) {
-          existingSymlink = true;
-          targetNode = node;
-          break;
-        }
+      List<Node> nodes = new ArrayList<Node>();
+      String CurrentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
+      nodes = linkManager.getNodeSymlinksUnderFolder(currentNode.getUUID(), shared.getPath(), CurrentNodeWorkspaceName);
+      if (nodes.size() != 0) {
+        link = nodes.get(0);
       }
-      if (existingSymlink) {
-        link = targetNode;
-      } else {
-        link = linkManager.createLink(shared, currentNode);
+      if (link == null && currentNode.isNodeType(NodetypeConstant.NT_FILE)) {
+        link = currentNode;
       }
       return CommonsUtils.getCurrentDomain() + getShortLinkInDocumentsApp(link.getSession().getWorkspace().getName(), ((NodeImpl) link).getInternalIdentifier());
     } catch (Exception e) {
@@ -523,7 +516,7 @@ public class DocumentServiceImpl implements DocumentService {
       return "";
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
