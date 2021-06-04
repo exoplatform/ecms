@@ -159,6 +159,9 @@
               <outputDirectory>${project.build.directory}/src/main/webapp/skin/less</outputDirectory>
               <resources>
                 <resource>
+                  <directory>src/main/webapp/share-activity-document/css</directory>
+                </resource>
+                <resource>
                   <directory>src/main/webapp/attachments-selector/css</directory>
                 </resource>
               </resources>
@@ -195,7 +198,7 @@
               <compress>false</compress>
               <includes>
                 <include>attachments.less</include>
-                <include>attachmentsApp.less</include>
+                <include>shareDocuments.less</include>
               </includes>
             </configuration>
             <goals>

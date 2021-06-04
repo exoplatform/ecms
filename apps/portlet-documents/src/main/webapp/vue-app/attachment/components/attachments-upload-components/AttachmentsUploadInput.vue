@@ -15,11 +15,9 @@
         @click="uploadFile">
         <i class="uiIconEcmsUploadVersion uiIcon32x32"></i>
         <v-subheader
-          class="text-sub-title ml-3 d-none d-sm-flex"
-          href="#"
-          rel="tooltip"
-          data-placement="bottom">
-          {{ $t('attachments.drawer.uploadOrDrop') }}
+          class="upload-drag-drop-label text-sub-title mt-3 d-flex flex-column">
+          <span>{{ $t('attachments.drawer.uploadOrDrop') }}</span>
+          <span>({{ $t('attachments.drawer.maxFileSize').replace('{0}', maxFileSize) }})</span>
         </v-subheader>
       </div>
       <div class="fileHidden d-none">
@@ -32,33 +30,11 @@
           style="display:none"
           @change="handleFileUpload($refs.uploadInput.files)">
       </div>
-      <div class="uploadErrorMessages">
-        <transition name="fade">
-          <div v-show="fileSizeLimitError" class="sizeExceeded alert alert-error">
-            <i class="uiIconError"></i>
-            {{ $t('attachments.drawer.maxFileSize.error').replace('{0}', maxFileSize) }}
-          </div>
-        </transition>
-        <transition name="fade">
-          <div v-show="filesCountLimitError" class="countExceeded alert alert-error">
-            <i class="uiIconError"></i>
-            {{ $t('attachments.drawer.maxFileCount.error').replace('{0}', maxFilesCount) }}
-          </div>
-        </transition>
-        <transition name="fade">
-          <div v-show="sameFileError" class="sameFile ms-2 alert alert-error">
-            <i class="uiIconError"></i>
-            {{ sameFileErrorMessage }}
-          </div>
-        </transition>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   props: {
     attachments: {
@@ -84,10 +60,6 @@ export default {
   },
   data() {
     return {
-      fileSizeLimitError: false,
-      filesCountLimitError: false,
-      sameFileError: false,
-      sameFileErrorMessage: `${this.$t('attachments.drawer.sameFile.error')}`,
       MESSAGES_DISPLAY_TIME: 5000,
       BYTES_IN_MB: 1048576,
       maxUploadInProgressCount: 2,
@@ -96,21 +68,12 @@ export default {
       maxProgress: 100,
     };
   },
-  watch: {
-    fileSizeLimitError: function () {
-      if (this.fileSizeLimitError) {
-        setTimeout(() => this.fileSizeLimitError = false, this.MESSAGES_DISPLAY_TIME);
-      }
+  computed: {
+    maxFileCountErrorLabel: function () {
+      return this.$t('attachments.drawer.maxFileCount.error').replace('{0}', `<b> ${this.maxFilesCount} </b>`);
     },
-    filesCountLimitError: function () {
-      if (this.filesCountLimitError) {
-        setTimeout(() => this.filesCountLimitError = false, this.MESSAGES_DISPLAY_TIME);
-      }
-    },
-    sameFileError: function () {
-      if (this.sameFileError) {
-        setTimeout(() => this.sameFileError = false, this.MESSAGES_DISPLAY_TIME);
-      }
+    maxFileSizeErrorLabel: function () {
+      return this. $t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
   },
   created() {
@@ -175,6 +138,8 @@ export default {
 
       const newAttachedFiles = [];
       newFilesArray.forEach(file => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         newAttachedFiles.push({
           originalFileObject: file,
           fileDrive: this.currentDrive,
@@ -185,7 +150,8 @@ export default {
           uploadProgress: 0,
           destinationFolder: this.pathDestinationFolder,
           pathDestinationFolderForFile: '',
-          isPublic: true
+          isPublic: true,
+          signal: signal
         });
       });
 
@@ -193,24 +159,33 @@ export default {
       newAttachedFiles.forEach(newFile => {
         this.queueUpload(newFile);
       });
-      this.$refs.uploadInput.attachments = '';
+      this.$refs.uploadInput.value = null;
     },
     queueUpload: function (file) {
       if (this.uploadMode === 'temp') {
         if (this.attachments.length >= this.maxFilesCount) {
-          this.filesCountLimitError = true;
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.maxFileCountErrorLabel,
+            type: 'error',
+          });
           return;
         }
 
         const fileSizeInMb = file.size / this.BYTES_IN_MB;
         if (fileSizeInMb > this.maxFileSize) {
-          this.fileSizeLimitError = true;
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.maxFileSizeErrorLabel,
+            type: 'error',
+          });
           return;
         }
         const fileExists = this.attachments.some(f => f.name === file.name);
         if (fileExists) {
-          this.sameFileErrorMessage = this.sameFileErrorMessage.replace('{0}', file.name);
-          this.sameFileError = true;
+          const sameFileErrorMessage = this. $t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
+          this.$root.$emit('attachments-notification-alert', {
+            message: sameFileErrorMessage,
+            type: 'error',
+          });
           return;
         }
 
@@ -227,50 +202,40 @@ export default {
         this.uploadingFilesQueue.push(file);
       }
     },
-    sendFileToServer: function (file) {
+    sendFileToServer(file){
       this.uploadingCount++;
       this.$emit('uploadingCountChanged', this.uploadingCount);
-
-      const formData = new FormData();
-      formData.append('file', file.originalFileObject);
-
-      const uploadUrl = `${eXo.env.server.context}/upload?action=upload&uploadId=${file.uploadId}`;
-      // Had to use axios here since progress observation is still not supported by fetch
-      axios.request({
-        method: 'POST',
-        url: uploadUrl,
-        credentials: 'include',
-        data: formData,
-        onUploadProgress: (progress) => {
-          file.uploadProgress = Math.round(progress.loaded * this.maxProgress / progress.total);
-        }
-      }).then(() => {
-
-        // Check if the file has correctly been uploaded (progress=100) before refreshing the upload list
-        const progressUrl = `${eXo.env.server.context}/upload?action=progress&uploadId=${file.uploadId}`;
-        fetch(progressUrl)
-          .then(response => response.text())
-          .then(responseText => {
-            // TODO fix malformed json from upload service
-            let responseObject;
-            try {
-              // trick to parse malformed json
-              eval(`responseObject = ${responseText}`); // eslint-disable-line no-eval
-            } catch (err) {
-              return;
-            }
-
-            if (!responseObject.upload[file.uploadId] || !responseObject.upload[file.uploadId].percent ||
-              responseObject.upload[file.uploadId].percent !== this.maxProgress.toString()) {
-              this.removeAttachedFile(file);
-            } else {
-              file.uploadProgress = this.maxProgress;
-            }
+      this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
+        .catch(error => {
+          this.$root.$emit('attachments-notification-alert', {
+            message: error,
+            type: 'error',
           });
-        this.uploadingCount--;
-        this.$emit('uploadingCountChanged', this.uploadingCount);
-        this.processNextQueuedUpload();
-      });
+          this.removeAttachedFile(file);
+        });
+      this.controlUpload(file);
+    },
+    controlUpload(file){
+      window.setTimeout(() => {
+        this.$uploadService.getUploadProgress(file.uploadId)
+          .then(percent => {
+            file.uploadProgress = Number(percent);
+            if (file.uploadProgress < 100) {
+              this.controlUpload(file);
+            } else {
+              this.uploadingCount--;
+              this.$emit('uploadingCountChanged', this.uploadingCount);
+              this.processNextQueuedUpload();
+            }
+          })
+          .catch(error => {
+            this.removeAttachedFile(file);
+            this.$root.$emit('attachments-notification-alert', {
+              message: error,
+              type: 'error',
+            });
+          });
+      }, 200);
     },
     processNextQueuedUpload: function () {
       if (this.uploadingFilesQueue.length > 0) {

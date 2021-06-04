@@ -569,7 +569,7 @@ for(def index = 0; index < uicomponent.getFilesCount(); index++) {
 <% } %>
             <div class="actionsDetailsWrapper">
               <% _ctx.includeTemplates("UIActivityListLiked") %>
-              <% _ctx.includeTemplates("UIActivityActionBar-actions") %>
+              <% _ctx.includeTemplates("UIFileActivityActionBar-actions") %>
             </div>
 
                 <% _ctx.includeTemplates("UIActivityCommentBox") %>

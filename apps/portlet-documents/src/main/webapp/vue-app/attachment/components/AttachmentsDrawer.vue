@@ -28,7 +28,8 @@
           <attachments-select-from-drive v-if="entityId && entityType" />
           <attachments-uploaded-files
             :attachments="attachments"
-            :schema-folder="schemaFolder" />
+            :schema-folder="schemaFolder"
+            :max-files-count="maxFilesCount" />
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
@@ -51,27 +52,18 @@
         </div>
       </template>
       <template slot="footer">
-        <div class="d-flex align-center justify-space-between">
-          <div class="limitMessage d-flex align-center grey--text">
-            <i class="uiIconWarning my-auto pr-2 grey--text"></i>
-            <div class="d-flex flex-column caption align-start warningMessages">
-              <span class="sizeLimit">{{ $t('attachments.drawer.maxFileSize').replace('{0}', maxFileSize) }}</span>
-              <span class="countLimit">{{ $t('attachments.drawer.maxFileCount').replace('{0}', maxFilesCount) }}</span>
-            </div>
-          </div>
-          <div class="attachmentDrawerButtons d-flex">
-            <v-btn
-              class="btn mr-3"
-              @click="closeAttachmentsAppDrawer()">
-              {{ $t('attachments.drawer.cancel') }}
-            </v-btn>
-            <v-btn
-              :disabled="!attachmentsChanged || attachments.length === 0"
-              class="btn btn-primary"
-              @click="uploadAddedAttachments()">
-              {{ $t('attachments.upload') }}
-            </v-btn>
-          </div>
+        <div class="d-flex justify-end">
+          <v-btn
+            class="btn mr-3"
+            @click="closeAttachmentsAppDrawer()">
+            {{ $t('attachments.drawer.cancel') }}
+          </v-btn>
+          <v-btn
+            :disabled="!attachmentsChanged || attachments.length === 0"
+            class="btn btn-primary"
+            @click="uploadAddedAttachments()">
+            {{ $t('attachments.upload') }}
+          </v-btn>
         </div>
       </template>
     </exo-drawer>
@@ -179,14 +171,24 @@ export default {
     },
     currentSpaceDisplayName() {
       return this.currentSpace && this.currentSpace.displayName;
+    },
+    attachedFromOtherDrivesLabel() {
+      return `${this.$t('attachments.alert.sharing.attachedFrom')} ${this.selectedFromOtherDriveLabel}
+      ${this.fromAnotherSpacesAttachments}`;
+    },
+    attachmentsWillBeDisplayedForLabel() {
+      return `${this.$t('attachments.alert.sharing.availableFor')}
+      ${this.currentSpaceDisplayName}
+      ${this.$t('attachments.alert.sharing.members')}`;
+    },
+    attachmentPrivacyLabel() {
+      return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
+    },
+    filesUploadedSuccessLabel() {
+      return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');
     }
   },
   watch: {
-    attachmentInfo: function () {
-      if (this.attachmentInfo) {
-        setTimeout(() => this.attachmentInfo = false, this.MESSAGES_DISPLAY_TIME);
-      }
-    },
     attachments: {
       deep: true,
       handler() {
@@ -241,7 +243,6 @@ export default {
     this.$root.$on('select-destination-path-for-all', (pathDestinationFolder, folderName, currentDrive) => {
       this.addDestinationFolderForAll(pathDestinationFolder, folderName, currentDrive);
     });
-    this.$root.$on('attachments-drive-explorer-drawer-closed', () => this.attachmentInfo = true);
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -394,11 +395,14 @@ export default {
     closeAndResetAttachmentsDrawer() {
       this.closeAttachmentsAppDrawer();
       this.$root.$emit('attachments-notification-alert', {
-        message: this.$t('attachments.upload.success'),
+        message: this.filesUploadedSuccessLabel,
         type: 'success',
       });
       this.$refs.attachmentsAppDrawer.endLoading();
-      document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(this.uploadedFiles)}}));
+
+      //get the last 10 uploaded files to be sent within the custom event
+      const lastUploadedFiles = this.uploadedFiles.sort((doc1, doc2) => doc2.date - doc1.date).slice(-10);
+      document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(lastUploadedFiles)}}));
       this.uploadedFiles = [];
     },
     linkUploadedAttachmentsToEntity() {
@@ -425,15 +429,15 @@ export default {
       this.$root.$emit('open-select-from-drives-drawer');
     },
     addNewUploadedFileToAttachments(file, uploadedFile) {
-      //remove attached file with uploadId from attachments list.
-      this.$root.$emit('remove-attachment-item', file);
-      //add new uploadedFile
       uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
+      file.drive = file.fileDrive.title;
+      file.id = uploadedFile.UUID;
+      file.uploadId = '';
+
       uploadedFile.drive = file.fileDrive.title;
       uploadedFile.id = uploadedFile.UUID;
-
-      this.$root.$emit('add-new-uploaded-file', uploadedFile);
-    }
+      this.uploadedFiles.push(uploadedFile);
+    },
   }
 };
 </script>

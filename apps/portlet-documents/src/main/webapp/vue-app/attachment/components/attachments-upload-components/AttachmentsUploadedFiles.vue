@@ -2,7 +2,7 @@
   <div class="uploadedFiles">
     <div class="attachments-list d-flex align-center">
       <v-subheader class="text-sub-title pl-0 d-flex">
-        {{ $t('attachments.drawer.title') }} ({{ attachments.length }})
+        {{ $t('attachments.drawer.title') }} ({{ attachments.length }}/{{ maxFilesCount }})
       </v-subheader>
       <v-divider />
     </div>
@@ -120,6 +120,10 @@ export default {
     schemaFolder: {
       type: Object,
       default: () => null
+    },
+    maxFilesCount: {
+      type: Number,
+      default: null
     },
   },
   computed: {

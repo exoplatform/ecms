@@ -1,0 +1,226 @@
+
+<%
+/*
+<!--
+
+    Copyright (C) 2003-2021 eXo Platform SAS.
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Affero General Public License
+    as published by the Free Software Foundation; either version 3
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, see<http://www.gnu.org/licenses/>.
+
+-->
+*/
+%>
+<%
+  import org.apache.commons.lang.ArrayUtils;
+  import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.webui.form.UIFormTextAreaInput;
+  import org.exoplatform.social.core.service.LinkProvider;
+  import org.exoplatform.social.core.space.model.Space;
+  import org.exoplatform.social.webui.Utils;
+
+  import org.apache.commons.lang.StringEscapeUtils;
+
+  import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARAM_COMMENT;
+
+  def pcontext = Util.getPortalRequestContext();
+  def labelActivityHasBeenDeleted = _ctx.appRes("UIActivity.label.Activity_Has_Been_Deleted");
+  def activity = uicomponent.getActivity();
+  def activityDeletable = uicomponent.isActivityDeletable();
+  def activityEditable = uicomponent.isActivityEditable(activity);
+  def activityCommentAndLikable = uicomponent.isActivityCommentAndLikable();
+  def streamOwner = activity.getStreamOwner();
+%>
+
+<% if (activity) { //process if not null
+
+  def jsManager = pcontext.getJavascriptManager().require("SHARED/uiForm");
+
+  def labelCancel = _ctx.appRes("UIActivity.label.Cancel");
+  def labelLikesActivity = _ctx.appRes("UIActivity.label.likesLabel");
+  def labelUpdate = _ctx.appRes("UIActivity.label.Update");
+  def labelEdit = _ctx.appRes("UIActivity.label.Edit");
+  def labelDelete = _ctx.appRes("UIActivity.label.Delete");
+  def labelUnlike = _ctx.appRes("UIActivity.label.Unlike");
+  def labelSource = _ctx.appRes("UIActivity.label.Source");
+  def inputWriteAComment = _ctx.appRes("UIActivity.input.Add_your_comment").replace("'", "\\'");
+  def labelHideAllComments = _ctx.appRes("UIActivity.label.Hide_All_Comments");
+
+  def captionConfirmation=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirmation"));
+  def labelToDeleteThisActivity=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.msg.Are_You_Sure_To_Delete_This_Activity"));
+  def labelConfirmbutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Confirm_Delete_Activity-Button"));
+  def labelClosebutton=StringEscapeUtils.escapeHtml(_ctx.appRes("UIActivity.label.Cancel_Delete_Activity-Button"));
+
+  int allCommentSize = uicomponent.getAllCommentSize();
+
+  def commentFormDisplayed = uicomponent.isCommentFormDisplayed();
+  def spaceURL = uicomponent.getSpaceURL();
+  def spaceGroupId = uicomponent.getSpaceGroupId();
+
+  def placeholder = _ctx.appRes("UIActivity.comment.placeholder").replace("'", "\\'");
+
+  // labels
+  def LikePopupTitleLabel = _ctx.appRes("UIActivity.title.PopupCommentLikers");
+  def IgnoreLabel = _ctx.appRes("UserProfilePopup.label.Ignore");
+  def ConnectLabel = _ctx.appRes("UserProfilePopup.label.Connect");
+  def ConfirmLabel = _ctx.appRes("UserProfilePopup.label.Confirm");
+  def CancelRequestLabel = _ctx.appRes("UserProfilePopup.label.CancelRequest");
+  def RemoveConnectionLabel = _ctx.appRes("UserProfilePopup.label.RemoveConnection");
+  def labels = """ {
+    LikePopupTitle: '$LikePopupTitleLabel',
+    Connect: '$ConnectLabel',
+    Confirm: '$ConfirmLabel',
+    CancelRequest: '$CancelRequestLabel',
+    RemoveConnection: '$RemoveConnectionLabel',
+    Ignore: '$IgnoreLabel'
+  }"""
+
+  //params for init UIActivity javascript object
+  def params = """ {
+    activityId: '${activity.id}',
+    activityBody: `${activity.title}`,
+    placeholderComment: '${placeholder}',
+    inputWriteAComment: '$inputWriteAComment',
+    commentMinCharactersAllowed: '${uicomponent.getCommentMinCharactersAllowed()}',
+    commentMaxCharactersAllowed: '${uicomponent.getCommentMaxCharactersAllowed()}',
+    commentFormDisplayed: '$commentFormDisplayed',
+    spaceURL:'$spaceURL',
+    spaceGroupId: '$spaceGroupId',
+    allCommentSize: '${allCommentSize}',
+    commentFormFocused: '${uicomponent.isCommentFormFocused()}',
+    labels: $labels
+  } """
+
+  jsManager.require("SHARED/jquery", "jq")
+           .require("SHARED/bts_tooltip").addScripts("jq('*[rel=\"tooltip\"]').tooltip();")
+           .require("SHARED/social-ui-activity", "activity").addScripts("activity.onLoad($params);");
+
+  //make sures commentFormFocused is set to false to prevent any refresh to focus, only focus after post a comment
+  uicomponent.setCommentFormFocused(false);
+
+  def currentTime = System.currentTimeMillis();
+
+  def viewerId = Utils.getViewerIdentity().getId();
+  def originalActivity = uicomponent.getOriginalActivity();   
+
+%>
+<div class="activityStream uiActivityStreamWrapper uiDefaultActivity uiContentActivity fileActivity multiFilesActivity"
+	id="activityContainer${activity.id}">
+	<% uiform.begin() %>
+	<div class="boxContainer" id="boxContainer">
+		<div id="ContextBox${activity.id}" class="uiBox contentBox">
+			<div id="ActivityContextBox${activity.id}">
+				<div class="heading">
+					<div class="activityHeader">
+						<% _ctx.includeTemplates("UIActivityHeading") %>
+						<!-- three dots activity menu -->
+						<%
+                        if(activityEditable || activityDeletable ){
+                        %>
+						<div id="activityComposer${activity.id}"></div>
+						<div id="dropDownEditActivity${activity.id}"
+							class="btn-group uiDropdownWithIcon actLink ">
+							<div class="dropdown-toggle" data-toggle="dropdown">
+								<i class="uiIconActivityAction uiIconLightGray"> </i>
+							</div>
+							<ul class="dropdown-menu actLink-items pull-right" role="menu">
+								<% if(activityEditable) {%>
+								<li class="actLink-item"><a
+									id="EditActivitylink${activity.id}" class=""
+									data-edit-activity="${activity.id}" data-placement="bottom"
+									href="javascript:void(0)"> <i
+										class="uiIcon uiIconEdit actLink-icon"></i> <span
+										class="actLink-label">${labelEdit}</span>
+								</a></li>
+								<%
+                                }
+                                if (activityDeletable) {
+                                %>
+								<li class="actLink-item"><a href="javascript:void(0)"
+									data-confirm="$labelToDeleteThisActivity"
+									data-caption="$captionConfirmation"
+									data-close="$labelClosebutton" data-ok="$labelConfirmbutton"
+									data-delete="<%=uicomponent.event("DeleteActivity", uicomponent.getId(), "");%>"
+									class="controllDelete" id="DeleteActivityButton${activity.id}">
+										<i class="uiIcon uiIconTrashActivity actLink-icon"></i> <span
+										class="actLink-label">${labelDelete}</span>
+								</a></li>
+								<%}%>
+							</ul>
+						</div>
+						<%
+                      }
+                      %>
+					</div>
+					<!--end activityHeader-->
+				</div>
+				<!--end heading-->
+				<div class="description">$activity.title</div>
+				<div class="shareActivityContainer">
+					<%
+                	if (originalActivity) { %>
+					<div class="heading">
+						<div class="activityHeader">
+							<% _ctx.includeTemplates("UISharedActivityHeading") %>
+						</div>
+						<!--end activityHeader-->
+					</div>
+					<!--end heading-->
+					<div class="description">$originalActivity.title</div>
+					<%
+                	}
+                	%>
+                    <!-- preview file -->
+					<% _ctx.includeTemplates("FileUIActivityAttachments") %>
+					<!--end preview file-->
+				</div>
+				<!--end description-->
+				<div class="desktop-input clearfix">
+					<div class="blastInputPeople hideEffect">
+						<div>
+							<% uicomponent.renderChild(uicomponent.COMPOSER_TEXT_AREA_EDIT_INPUT+activity.id); %>
+							<div class="uiAction paddingAction">
+								<button class="btn pull-left btn-primary"
+									onclick="<%=uicomponent.event("EditActivity")%>"
+									id="EditActivityButton${activity.id}">${labelUpdate}</button>
+								&nbsp;
+								<button href="javascript:void(0)"
+									data-cancel-edit-comment-id="${activity.id}"
+									class="btn pull-left"
+									id="DeleteEditCommentButton${activity.id}">${labelCancel}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="actionsDetailsWrapper">
+					<% _ctx.includeTemplates("UIActivityListLiked") %>
+					<% _ctx.includeTemplates("UIActivityActionBar-actions") %>
+				</div>
+				<!--end actionBar and list like people wrapper-->
+				<% _ctx.includeTemplates("UIActivityCommentBox") %>
+			</div>
+			<!--end #ActivityContextBox${activity.id}-->
+		</div>
+		<!--end ContextBox${activity.id}-->
+	</div>
+	<!-- #boxContainer-->
+	<% uiform.end() %>
+</div>
+<!--activityStream-->
+<% } else { %>
+<!-- activity deleted -->
+<% uiform.begin() %>
+<div class="activityStream deleted">$labelActivityHasBeenDeleted</div>
+<% uiform.end() %>
+<% } %>

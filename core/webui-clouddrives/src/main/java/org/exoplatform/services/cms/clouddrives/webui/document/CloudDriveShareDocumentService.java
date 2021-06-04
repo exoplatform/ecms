@@ -43,6 +43,7 @@ import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.document.service.ShareDocumentService;
 
 /**
@@ -105,8 +106,9 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
                                         NodeHierarchyCreator hierarchyCreator,
                                         IdentityManager identityManager,
                                         CloudDriveService cloudDrives,
-                                        CloudFileActionService cloudFileActions) {
-    super(repoService, linkManager, sessionProviderService);
+                                        CloudFileActionService cloudFileActions,
+                                        SpaceService spaceService) {
+    super(repoService, linkManager, identityManager, activityManager, spaceService, sessionProviderService);
     this.activityManager = activityManager;
     this.linkManager = linkManager;
     this.hierarchyCreator = hierarchyCreator;
