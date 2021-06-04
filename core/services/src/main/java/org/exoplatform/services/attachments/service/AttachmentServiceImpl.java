@@ -19,8 +19,10 @@ package org.exoplatform.services.attachments.service;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
+import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
+import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -29,21 +31,25 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.Identity;
+
 import javax.jcr.Session;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AttachmentServiceImpl implements AttachmentService {
 
-  private static final Log       LOG = ExoLogger.getLogger(AttachmentServiceImpl.class.getName());
+  private static final Log                 LOG        = ExoLogger.getLogger(AttachmentServiceImpl.class.getName());
 
-  private RepositoryService      repositoryService;
+  private RepositoryService                repositoryService;
 
-  private SessionProviderService sessionProviderService;
+  private SessionProviderService           sessionProviderService;
 
-  AttachmentStorage              attachmentStorage;
+  private AttachmentStorage                attachmentStorage;
 
-  private DocumentService        documentService;
+  private DocumentService                  documentService;
+
+  private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
 
   public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
                                RepositoryService repositoryService,
@@ -74,7 +80,9 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException {
+  public void updateEntityAttachments(long entityId,
+                                      String entityType,
+                                      List<String> attachmentIds) throws ObjectNotFoundException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -83,10 +91,13 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    List<AttachmentContextEntity> existingAttachmentsContext = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
-    List<String> existingAttachmentsIds = existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId).collect(Collectors.toList());
+    List<AttachmentContextEntity> existingAttachmentsContext =
+                                                             attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
+    List<String> existingAttachmentsIds = existingAttachmentsContext.stream()
+                                                                    .map(AttachmentContextEntity::getAttachmentId)
+                                                                    .collect(Collectors.toList());
     // delete removed attachments
-    if ( attachmentIds == null || attachmentIds.isEmpty()) {
+    if (attachmentIds == null || attachmentIds.isEmpty()) {
       deleteAllEntityAttachments(entityId, entityType);
     } else {
       existingAttachmentsIds.stream().filter(attachmentId -> !attachmentIds.contains(attachmentId)).forEach(attachmentId -> {
@@ -113,8 +124,11 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
-    List<AttachmentContextEntity> existingAttachmentsContext = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
-    List<String> attachmentsIds = existingAttachmentsContext.stream().map(AttachmentContextEntity::getAttachmentId).collect(Collectors.toList());
+    List<AttachmentContextEntity> existingAttachmentsContext =
+                                                             attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
+    List<String> attachmentsIds = existingAttachmentsContext.stream()
+                                                            .map(AttachmentContextEntity::getAttachmentId)
+                                                            .collect(Collectors.toList());
 
     if (attachmentsIds.isEmpty()) {
       throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " has no attachment linked");
@@ -149,7 +163,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public List<Attachment> getAttachmentsByEntity(long entityId, String entityType) throws Exception {
+  public List<Attachment> getAttachmentsByEntity(Identity userIdentity, long entityId, String entityType) throws Exception {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id should be positive");
     }
@@ -172,9 +186,14 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                                      workspace,
                                                                      session,
                                                                      attachmentContextEntity);
+            Boolean canView = canView(userIdentity, entityType, entityId);
+            Boolean canDelete = canDelete(userIdentity, entityType, entityId);
+            Permission attachmentACL = new Permission(canView, canDelete);
+            attachment.setAcl(attachmentACL);
             attachments.add(attachment);
           } catch (Exception e) {
-            LOG.error("Cannot get attachment with id " + attachmentContextEntity.getAttachmentId() + " of entity " + entityType + " with id " + entityId, e);
+            LOG.error("Cannot get attachment with id " + attachmentContextEntity.getAttachmentId() + " of entity " + entityType
+                + " with id " + entityId, e);
           }
         });
       } finally {
@@ -186,8 +205,31 @@ public class AttachmentServiceImpl implements AttachmentService {
     return attachments;
   }
 
+  public void addACLPlugin(AttachmentACLPlugin aclPlugin) {
+    this.aclPlugins.put(aclPlugin.getEntityType(), aclPlugin);
+  }
+
+  @Override
+  public boolean canView(Identity identity, String entityType, long entityId) {
+    AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
+    if (attachmentACLPlugin == null) {
+      return false;
+    }
+    return attachmentACLPlugin.canView(identity, entityType, String.valueOf(entityId));
+  }
+
+  @Override
+  public boolean canDelete(Identity identity, String entityType, long entityId) {
+    AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
+    if (attachmentACLPlugin == null) {
+      return false;
+    }
+    return attachmentACLPlugin.canDelete(identity, entityType, String.valueOf(entityId));
+  }
+
   private void sortAttachments(List<AttachmentContextEntity> attachments) {
-    attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(), attachment1.getAttachedDate()));
+    attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(),
+                                                                       attachment1.getAttachedDate()));
   }
 
 }

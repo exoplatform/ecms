@@ -12,7 +12,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.exoplatform.services.attachments.model.Attachment;
-import org.exoplatform.services.attachments.model.AttachmentEntityType;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -20,6 +19,7 @@ import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.Identity;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -166,11 +166,13 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     attachmentsIds.add("2");
     attachmentsIds.add("3");
 
+    Identity currentIdentity = new Identity("test");
+
     //when
     attachmentService.linkAttachmentsToEntity(5, "EVENT", attachmentsIds);
 
     //then
-    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(5, String.valueOf(AttachmentEntityType.EVENT));
+    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentity,5, "EVENT");
     assertNotNull(attachmentsEntityStored);
     assertEquals(3, attachmentsEntityStored.size());
   }

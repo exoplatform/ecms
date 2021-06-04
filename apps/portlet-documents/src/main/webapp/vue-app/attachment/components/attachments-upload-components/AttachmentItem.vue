@@ -63,16 +63,25 @@
         @click="confirmDeleteAttachment(attachment)">
         <i class="uiIconCloseCircled error--text"></i>
       </v-btn>
-      <v-btn
+      <div
         v-else-if="allowToRemove"
-        class="d-flex flex-column pb-3 align-end"
-        outlined
-        x-small
-        height="24"
-        width="24"
-        @click="deleteAttachment(attachment)">
-        <i class="uiIconTrash uiIcon24x24 error--text"></i>
-      </v-btn>
+        :class="!canRemoveAttachment && 'not-allowed'"
+        :title="!canRemoveAttachment && $t('attachments.remove.notAuthorize')"
+        class="remove-button">
+        <v-btn
+          :disabled="!canRemoveAttachment"
+          class="d-flex flex-column pb-3 align-end"
+          outlined
+          x-small
+          height="24"
+          width="24"
+          @click="deleteAttachment(attachment)">
+          <i
+            :class="!canRemoveAttachment && 'grey--text' || 'error--text'"
+            class="uiIconTrash uiIcon24x24">
+          </i>
+        </v-btn>
+      </div>
     </v-list-item-action>
     <exo-confirm-dialog
       ref="deleteConfirmDialog"
@@ -144,6 +153,9 @@ export default {
     attachmentPrivacyLabel() {
       return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     },
+    canRemoveAttachment() {
+      return this.attachment && this.attachment.acl && this.attachment.acl.canRemove || !this.attachment.id;
+    },
   },
   methods: {
     getIconClassFromFileMimeType: function (fileMimeType) {
@@ -159,12 +171,14 @@ export default {
     deleteAttachment() {
       if (!this.attachment.id || this.attachment.isSelectedFromDrives) {
         this.confirmDeleteAttachment();
-      } else {
+      } else if (this.canRemoveAttachment) {
         this.$refs.deleteConfirmDialog.open();
       }
     },
     confirmDeleteAttachment() {
-      this.$root.$emit('remove-attachment-item', this.attachment);
+      if (this.canRemoveAttachment) {
+        this.$root.$emit('remove-attachment-item', this.attachment);
+      }
     },
     openSelectDestinationFolderForFile(attachment) {
       this.$root.$emit('change-attachment-destination-path', attachment);
