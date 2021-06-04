@@ -327,24 +327,6 @@
   </module>
 
   <module>
-    <name>document-preview</name>
-    <as>document_preview</as>
-    <script>
-      <path>/javascript/eXo/wcm/backoffice/private/DocumentPreview.js</path>
-    </script>
-    <depends>
-      <module>bts_modal</module>
-    </depends>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>base</module>
-    </depends>
-  </module>
-
-  <module>
     <name>openDocumentInOffice</name>
     <as>openDocumentInOffice</as>
     <script>
