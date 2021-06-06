@@ -192,5 +192,16 @@ public interface LinkManager {
    * @throws Exception
    */
   public void updateSymlink(Node link) throws Exception;
-  
+
+  /**
+   * get the link of the document inside the folder
+   *
+   * @param contentUUID Jcr uuid of the file
+   * @param folderPath path of the target folder
+   * @param workspace target workspace
+   */
+  default List<Node> getNodeSymlinksUnderFolder(String contentUUID, String folderPath, String workspace) {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
 }
