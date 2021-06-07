@@ -76,8 +76,8 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
     // org.exoplatform.social.plugin.doc.UIDocActivityComposer.docActivityTitle.
     // So we couldn't set activity.getTitle() all the time, see INTEG-486
     if (activity.getTemplateParams() != null
-        && StringUtils.isNotBlank(templateParams.get(UILinkActivity.COMMENT_PARAM))) {
-      fileActivity.setMessage(templateParams.get(UILinkActivity.COMMENT_PARAM));
+        && StringUtils.isNotBlank(templateParams.get(FileUIActivity.MESSAGE))) {
+      fileActivity.setMessage(templateParams.get(FileUIActivity.MESSAGE));
     } else if (activity.getTemplateParams() != null
         && StringUtils.isNotBlank(activity.getTemplateParams().get(FileUIActivity.ACTIVITY_STATUS))
         || (!patternLink.matcher(activity.getTitle()).find())) {
