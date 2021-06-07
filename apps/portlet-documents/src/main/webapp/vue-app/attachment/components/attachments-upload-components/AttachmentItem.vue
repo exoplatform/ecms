@@ -154,7 +154,7 @@ export default {
       return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     },
     canRemoveAttachment() {
-      return this.attachment && this.attachment.acl && this.attachment.acl.canRemove || !this.attachment.id;
+      return this.attachment && this.attachment.acl && this.attachment.acl.canDelete || !this.attachment.id || this.attachment.isSelectedFromDrives;
     },
   },
   methods: {

@@ -68,7 +68,10 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public void linkAttachmentsToEntity(long userIdentityId, long entityId, String entityType, List<String> attachmentsIds) throws IllegalAccessException {
+  public void linkAttachmentsToEntity(long userIdentityId,
+                                      long entityId,
+                                      String entityType,
+                                      List<String> attachmentsIds) throws IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -118,29 +121,26 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (attachmentIds == null || attachmentIds.isEmpty()) {
       deleteAllEntityAttachments(userIdentityId, entityId, entityType);
     } else {
-      existingAttachmentsIds.stream().filter(attachmentId -> !attachmentIds.contains(attachmentId)).forEach(attachmentId -> {
-        try {
+      for (String attachmentId : existingAttachmentsIds) {
+        if (!attachmentIds.contains(attachmentId)) {
           deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
-        } catch (ObjectNotFoundException | IllegalAccessException e) {
-          LOG.error("Cannot delete attachment with id " + attachmentId + " of entity " + entityType
-            + " with id " + entityId, e);
         }
-      });
+      }
     }
 
     // attach new added files
-    attachmentIds.stream().filter(attachmentId -> !existingAttachmentsIds.contains(attachmentId)).forEach(attachmentId -> {
-      try {
-        linkAttachmentsToEntity(userIdentityId, entityId, entityType, Collections.singletonList(attachmentId));
-      } catch (IllegalAccessException e) {
-        LOG.error("Cannot link attachment with id " + attachmentId + " with entity " + entityType
-          + " with id " + entityId, e);
+    if (attachmentIds != null && !attachmentIds.isEmpty()) {
+      for (String attachmentId : attachmentIds) {
+        if (!existingAttachmentsIds.contains(attachmentId)) {
+          linkAttachmentsToEntity(userIdentityId, entityId, entityType, Collections.singletonList(attachmentId));
+        }
       }
-    });
+    }
   }
 
   @Override
-  public void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException {
+  public void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException,
+                                                                                                IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -168,18 +168,17 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (attachmentsIds.isEmpty()) {
       throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " has no attachment linked");
     }
-    attachmentsIds.forEach(attachmentId -> {
-      try {
-        deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
-      } catch (ObjectNotFoundException | IllegalAccessException e) {
-        LOG.error("Cannot delete attachment with id " + attachmentId + " of entity " + entityType
-          + " with id " + entityId, e);
-      }
-    });
+
+    for (String attachmentId : attachmentsIds) {
+      deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
+    }
   }
 
   @Override
-  public void deleteAttachmentItemById(long userIdentityId, long entityId, String entityType, String attachmentId) throws ObjectNotFoundException, IllegalAccessException  {
+  public void deleteAttachmentItemById(long userIdentityId,
+                                       long entityId,
+                                       String entityType,
+                                       String attachmentId) throws ObjectNotFoundException, IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -197,6 +196,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (userIdentity == null || !canDelete) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
+
     AttachmentContextEntity attachmentContextEntity = attachmentStorage.getAttachmentItemByEntity(entityId,
                                                                                                   entityType,
                                                                                                   attachmentId);
@@ -223,7 +223,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     List<AttachmentContextEntity> attachmentsContextEntity = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
     sortAttachments(attachmentsContextEntity);
     List<Attachment> attachments = new ArrayList<>();
-    if (attachmentsContextEntity.size() > 0) {
+    if (!attachmentsContextEntity.isEmpty()) {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());

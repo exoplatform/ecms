@@ -82,7 +82,8 @@ public class AttachmentsRestService implements ResourceContainer {
     try {
       attachmentService.linkAttachmentsToEntity(userIdentityId, entityId, entityType, attachmentIds);
     } catch (Exception e) {
-      LOG.error("Error when trying to link attachments to a context: ", e);
+      LOG.error("Error when trying to link attachments to entity with type {} and id {}: ", entityType, entityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
     }
     return Response.ok().build();
   }
@@ -110,8 +111,11 @@ public class AttachmentsRestService implements ResourceContainer {
     long userIdentityId = getCurrentUserIdentityId();
     try {
       attachmentService.updateEntityAttachments(userIdentityId, entityId, entityType, attachmentIds);
+    } catch (IllegalAccessException e) {
+      return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
     } catch (Exception e) {
-      LOG.error("Error when trying to link attachments to a context: ", e);
+      LOG.error("Error when trying to update attachments of entity type {} with id {}: ", entityType, entityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
     }
     return Response.ok().build();
   }
@@ -135,16 +139,22 @@ public class AttachmentsRestService implements ResourceContainer {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type must not be empty").build();
     }
     long userIdentityId = getCurrentUserIdentityId();
-
-    List<Attachment> attachments = attachmentService.getAttachmentsByEntity(userIdentityId, entityId, entityType);
-    List<AttachmentEntity> attachmentsEntities = new ArrayList<>();
-    if (!attachments.isEmpty()) {
-      attachmentsEntities = attachments.stream()
-                                       .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
-                                       .filter(attachmentEntity -> attachmentEntity.getAcl().isCanView())
-                                       .collect(Collectors.toList());
+    try {
+      List<Attachment> attachments = attachmentService.getAttachmentsByEntity(userIdentityId, entityId, entityType);
+      List<AttachmentEntity> attachmentsEntities = new ArrayList<>();
+      if (!attachments.isEmpty()) {
+        attachmentsEntities = attachments.stream()
+          .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
+          .filter(attachmentEntity -> attachmentEntity.getAcl().isCanView())
+          .collect(Collectors.toList());
+      }
+      return Response.ok(attachmentsEntities).build();
+    } catch (IllegalAccessException e) {
+      return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+    } catch (Exception e) {
+      LOG.error("Error when trying to get attachments of entity type {} with id {}: ", entityType, entityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
     }
-    return Response.ok(attachmentsEntities).build();
   }
 
   @DELETE
@@ -171,7 +181,7 @@ public class AttachmentsRestService implements ResourceContainer {
       attachmentService.deleteAllEntityAttachments(userIdentityId, entityId, entityType);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
-      LOG.error("Error when trying to delete all attachments from entity from entity with id '{}' ", entityId, e);
+      LOG.error("Error when trying to delete all attachments from entity with type {} and with id '{}' ", entityType, entityId, e);
       return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
     } catch (IllegalAccessException e) {
       LOG.error("User '{}' attempts to delete a non authorized {} entity with id {}", userIdentityId, entityType, entityId);
@@ -204,7 +214,7 @@ public class AttachmentsRestService implements ResourceContainer {
       attachmentService.deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
-      LOG.error("Error when trying to delete the attachment with id '{}' from entity with id '{}'", attachmentId, entityId, e);
+      LOG.error("Error when trying to delete the attachment with id '{}' from entity with type {} and id '{}'", attachmentId, entityType, entityId, e);
       return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
     } catch (IllegalAccessException e) {
       LOG.error("User '{}' attempts to delete a non authorized {} entity with id {}", userIdentityId, entityType, entityId);
