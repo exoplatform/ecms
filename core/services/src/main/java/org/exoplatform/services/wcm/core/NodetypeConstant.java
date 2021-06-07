@@ -243,6 +243,7 @@ public class NodetypeConstant {
   public static final String EXO_NAME = "exo:name";
   
   public static final String JCR_UUID = "jcr:uuid";
+  public static final String EXO_UUID = "exo:uuid";
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
   
