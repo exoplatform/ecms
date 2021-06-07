@@ -19,7 +19,9 @@ import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.security.Identity;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +67,9 @@ public class AttachmentServiceTest extends BaseExoTestCase {
 
   @Mock
   DocumentService documentService;
+  
+  @Mock
+  IdentityManager identityManager;
 
   @Mock
   Session session;
@@ -73,7 +78,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   public void setUp() throws Exception {
     begin();
     attachmentStorage = CommonsUtils.getService(AttachmentStorage.class);
-    attachmentService = new AttachmentServiceImpl(attachmentStorage, repositoryService, sessionProviderService, documentService);
+    attachmentService = new AttachmentServiceImpl(attachmentStorage, repositoryService, sessionProviderService, documentService, identityManager);
   }
 
   @After
@@ -86,7 +91,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   public void testLinkAttachmentsToEntity() throws Exception { // NOSONAR
     int[] list = {-9,2,5,14,98};
     try {
-      attachmentService.linkAttachmentsToEntity(0,"", null);
+      attachmentService.linkAttachmentsToEntity(1, 0,"", null);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -94,7 +99,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
 
     try {
       List<String> attachmentsIds = new ArrayList<>();
-      attachmentService.linkAttachmentsToEntity(1,"", attachmentsIds);
+      attachmentService.linkAttachmentsToEntity(1, 1,"", attachmentsIds);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -105,9 +110,20 @@ public class AttachmentServiceTest extends BaseExoTestCase {
       attachmentsIds.add("1");
       attachmentsIds.add("2");
       attachmentsIds.add("3");
-      attachmentService.linkAttachmentsToEntity(5,"", attachmentsIds);
+      attachmentService.linkAttachmentsToEntity(1, 5,"", attachmentsIds);
       fail();
     } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      List<String> attachmentsIds = new ArrayList<>();
+      attachmentsIds.add("1");
+      attachmentsIds.add("2");
+      attachmentsIds.add("3");
+      attachmentService.linkAttachmentsToEntity(0, 5,"task", attachmentsIds);
+      fail();
+    } catch (IllegalAccessException e) {
       // Expected
     }
 
@@ -161,18 +177,22 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     when(property3.getLong()).thenReturn((long) 3);
     Mockito.when(session.getNodeByUUID(String.valueOf(3))).thenReturn(node3);
 
+    String username = "testuser";
+    long currentIdentityId = 2;
+    Identity currentIdentity = new Identity(OrganizationIdentityProvider.NAME, username);
+    currentIdentity.setId(String.valueOf(currentIdentityId));
+    Mockito.when(identityManager.getIdentity("2")).thenReturn(currentIdentity);
+
     List<String> attachmentsIds = new ArrayList<>();
     attachmentsIds.add("1");
     attachmentsIds.add("2");
     attachmentsIds.add("3");
 
-    Identity currentIdentity = new Identity("test");
-
-    //when
-    attachmentService.linkAttachmentsToEntity(5, "EVENT", attachmentsIds);
+    // when
+    attachmentService.linkAttachmentsToEntity(currentIdentityId, 5, "EVENT", attachmentsIds);
 
     //then
-    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentity,5, "EVENT");
+    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentityId,5, "EVENT");
     assertNotNull(attachmentsEntityStored);
     assertEquals(3, attachmentsEntityStored.size());
   }

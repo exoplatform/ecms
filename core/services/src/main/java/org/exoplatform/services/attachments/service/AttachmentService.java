@@ -18,23 +18,18 @@ package org.exoplatform.services.attachments.service;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
-import org.exoplatform.services.security.Identity;
 
 import java.util.List;
 
 public interface AttachmentService {
 
-  List<Attachment> getAttachmentsByEntity(Identity userIdentity, long entityId, String entityType) throws Exception;
+  List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws Exception;
 
-  void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentIds);
+  void linkAttachmentsToEntity(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws IllegalAccessException;
 
-  void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException;
+  void updateEntityAttachments(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException, IllegalAccessException;
 
-  void deleteAllEntityAttachments(long entityId, String entityType) throws ObjectNotFoundException;
+  void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException;
 
-  void deleteAttachmentItemById(long entityId, String entityType, String attachmentId) throws ObjectNotFoundException;
-
-  boolean canDelete(Identity identity, String entityType, long entityId);
-
-  boolean canView(Identity identity, String entityType, long entityId);
+  void deleteAttachmentItemById(long userIdentityId, long entityId, String entityType, String attachmentId) throws ObjectNotFoundException, IllegalAccessException;
 }

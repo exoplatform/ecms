@@ -31,7 +31,8 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.Identity;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.manager.IdentityManager;
 
 import javax.jcr.Session;
 import java.util.*;
@@ -49,21 +50,25 @@ public class AttachmentServiceImpl implements AttachmentService {
 
   private DocumentService                  documentService;
 
+  private IdentityManager                  identityManager;
+
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
 
   public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
                                RepositoryService repositoryService,
                                SessionProviderService sessionProviderService,
-                               DocumentService documentService) {
+                               DocumentService documentService,
+                               IdentityManager identityManager) {
 
     this.attachmentStorage = attachmentStorage;
     this.repositoryService = repositoryService;
     this.sessionProviderService = sessionProviderService;
     this.documentService = documentService;
+    this.identityManager = identityManager;
   }
 
   @Override
-  public void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentsIds) {
+  public void linkAttachmentsToEntity(long userIdentityId, long entityId, String entityType, List<String> attachmentsIds) throws IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -76,19 +81,32 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("attachmentsIds must not be empty");
     }
 
+    if (userIdentityId <= 0) {
+      throw new IllegalAccessException("User identity must be positive");
+    }
+
+    Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+    if (userIdentity == null) {
+      throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
+    }
     attachmentStorage.linkAttachmentsToEntity(entityId, entityType, attachmentsIds);
   }
 
   @Override
-  public void updateEntityAttachments(long entityId,
+  public void updateEntityAttachments(long userIdentityId,
+                                      long entityId,
                                       String entityType,
-                                      List<String> attachmentIds) throws ObjectNotFoundException {
+                                      List<String> attachmentIds) throws ObjectNotFoundException, IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
 
     if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
+    }
+
+    if (userIdentityId <= 0) {
+      throw new IllegalAccessException("User identity must be positive");
     }
 
     List<AttachmentContextEntity> existingAttachmentsContext =
@@ -98,25 +116,31 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                                     .collect(Collectors.toList());
     // delete removed attachments
     if (attachmentIds == null || attachmentIds.isEmpty()) {
-      deleteAllEntityAttachments(entityId, entityType);
+      deleteAllEntityAttachments(userIdentityId, entityId, entityType);
     } else {
       existingAttachmentsIds.stream().filter(attachmentId -> !attachmentIds.contains(attachmentId)).forEach(attachmentId -> {
         try {
-          deleteAttachmentItemById(entityId, entityType, attachmentId);
-        } catch (ObjectNotFoundException e) {
-          e.printStackTrace();
+          deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
+        } catch (ObjectNotFoundException | IllegalAccessException e) {
+          LOG.error("Cannot delete attachment with id " + attachmentId + " of entity " + entityType
+            + " with id " + entityId, e);
         }
       });
     }
 
     // attach new added files
     attachmentIds.stream().filter(attachmentId -> !existingAttachmentsIds.contains(attachmentId)).forEach(attachmentId -> {
-      linkAttachmentsToEntity(entityId, entityType, Collections.singletonList(attachmentId));
+      try {
+        linkAttachmentsToEntity(userIdentityId, entityId, entityType, Collections.singletonList(attachmentId));
+      } catch (IllegalAccessException e) {
+        LOG.error("Cannot link attachment with id " + attachmentId + " with entity " + entityType
+          + " with id " + entityId, e);
+      }
     });
   }
 
   @Override
-  public void deleteAllEntityAttachments(long entityId, String entityType) throws ObjectNotFoundException {
+  public void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -124,6 +148,17 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
+
+    if (userIdentityId <= 0) {
+      throw new IllegalAccessException("User identity must be positive");
+    }
+
+    Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+    boolean canDelete = canDelete(userIdentityId, entityType, entityId);
+    if (userIdentity == null || !canDelete) {
+      throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
+    }
+
     List<AttachmentContextEntity> existingAttachmentsContext =
                                                              attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
     List<String> attachmentsIds = existingAttachmentsContext.stream()
@@ -135,15 +170,16 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
     attachmentsIds.forEach(attachmentId -> {
       try {
-        deleteAttachmentItemById(entityId, entityType, attachmentId);
-      } catch (ObjectNotFoundException e) {
-        e.printStackTrace();
+        deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
+      } catch (ObjectNotFoundException | IllegalAccessException e) {
+        LOG.error("Cannot delete attachment with id " + attachmentId + " of entity " + entityType
+          + " with id " + entityId, e);
       }
     });
   }
 
   @Override
-  public void deleteAttachmentItemById(long entityId, String entityType, String attachmentId) throws ObjectNotFoundException {
+  public void deleteAttachmentItemById(long userIdentityId, long entityId, String entityType, String attachmentId) throws ObjectNotFoundException, IllegalAccessException  {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -152,6 +188,15 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
+    if (userIdentityId <= 0) {
+      throw new IllegalAccessException("User identity must be positive");
+    }
+
+    Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+    boolean canDelete = canDelete(userIdentityId, entityType, entityId);
+    if (userIdentity == null || !canDelete) {
+      throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
+    }
     AttachmentContextEntity attachmentContextEntity = attachmentStorage.getAttachmentItemByEntity(entityId,
                                                                                                   entityType,
                                                                                                   attachmentId);
@@ -163,12 +208,16 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public List<Attachment> getAttachmentsByEntity(Identity userIdentity, long entityId, String entityType) throws Exception {
+  public List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws Exception {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id should be positive");
     }
     if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
+    }
+
+    if (userIdentityId <= 0) {
+      throw new IllegalAccessException("User identity must be positive");
     }
 
     List<AttachmentContextEntity> attachmentsContextEntity = attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
@@ -186,8 +235,8 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                                      workspace,
                                                                      session,
                                                                      attachmentContextEntity);
-            Boolean canView = canView(userIdentity, entityType, entityId);
-            Boolean canDelete = canDelete(userIdentity, entityType, entityId);
+            boolean canView = canView(userIdentityId, entityType, entityId);
+            boolean canDelete = canDelete(userIdentityId, entityType, entityId);
             Permission attachmentACL = new Permission(canView, canDelete);
             attachment.setAcl(attachmentACL);
             attachments.add(attachment);
@@ -209,22 +258,20 @@ public class AttachmentServiceImpl implements AttachmentService {
     this.aclPlugins.put(aclPlugin.getEntityType(), aclPlugin);
   }
 
-  @Override
-  public boolean canView(Identity identity, String entityType, long entityId) {
+  public boolean canView(long userIdentityId, String entityType, long entityId) {
     AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
     if (attachmentACLPlugin == null) {
       return false;
     }
-    return attachmentACLPlugin.canView(identity, entityType, String.valueOf(entityId));
+    return attachmentACLPlugin.canView(userIdentityId, entityType, String.valueOf(entityId));
   }
 
-  @Override
-  public boolean canDelete(Identity identity, String entityType, long entityId) {
+  public boolean canDelete(long userIdentityId, String entityType, long entityId) {
     AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
     if (attachmentACLPlugin == null) {
       return false;
     }
-    return attachmentACLPlugin.canDelete(identity, entityType, String.valueOf(entityId));
+    return attachmentACLPlugin.canDelete(userIdentityId, entityType, String.valueOf(entityId));
   }
 
   private void sortAttachments(List<AttachmentContextEntity> attachments) {

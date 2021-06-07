@@ -32,21 +32,21 @@ public abstract class AttachmentACLPlugin extends BaseComponentPlugin {
   /**
    * Checks whether the user has access to a given entity
    *
-   * @param identity user {@link Identity} model
+   * @param identityId user technical {@link Identity} identifier
    * @param entityType entity type where the attachment has been added
    * @param entityId entity identifier on which the attachment has been added
    * @return true if the user can view the attachments of entity, else false.
    */
-  public abstract boolean canView(Identity identity, String entityType, String entityId);
+  public abstract boolean canView(long identityId, String entityType, String entityId);
 
   /**
    * Checks whether the user can delete a given entity
    *
-   * @param identity user {@link Identity} model
+   * @param identityId user technical {@link Identity} identifier
    * @param entityType entity type where the attachment has been added
    * @param entityId entity identifier on which the attachment has been added
    * @return true if the user can delete the attachment from entity, else false.
    */
-  public abstract boolean canDelete(Identity identity, String entityType, String entityId);
+  public abstract boolean canDelete(long identityId, String entityType, String entityId);
 
 }
