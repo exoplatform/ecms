@@ -285,6 +285,7 @@
 		if (!oldName || oldName==null ||oldName==undefined) return oldName;
 		specialChar = "[]/'\":;";
 		var ret = "";
+		oldName=oldName.normalize();
 		for (var i = 0; i < oldName.length; i++) {
 			if (specialChar.indexOf(oldName[i]) > -1) {
 				ret += "-";
