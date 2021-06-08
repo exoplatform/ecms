@@ -104,7 +104,8 @@
           <attachment-item
             :attachment="attachment"
             :allow-to-preview="true"
-            :current-space="currentSpace" />
+            :current-space="currentSpace"
+            :current-drive="currentDrive" />
         </span>
       </transition-group>
     </div>
@@ -127,6 +128,10 @@ export default {
       default: null
     },
     currentSpace: {
+      type: {},
+      default: () => null
+    },
+    currentDrive: {
       type: {},
       default: () => null
     },
