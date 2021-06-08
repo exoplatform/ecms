@@ -144,7 +144,13 @@
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
-    
+    <dependency>
+      <groupId>org.exoplatform.gatein.portal</groupId>
+      <artifactId>exo.portal.component.identity</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
     <!-- eXo -->
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>

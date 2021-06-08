@@ -235,7 +235,6 @@ xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
           <name>autoCreatedInNewRepository</name>
           <description>Node types configuration file</description>
           <value>jar:/conf/ext-nodetypes-config.xml</value>
-          <value>jar:/conf/organization-nodetypes.xml</value>
           <value>classpath:/conf/standalone/jcr/ecms-test-nodetypes-config.xml</value>
           <value>classpath:/conf/standalone/jcr/ecms-test-publication-nodetypes-config.xml</value>
         </values-param>

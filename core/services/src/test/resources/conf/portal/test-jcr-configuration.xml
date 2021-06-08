@@ -96,18 +96,6 @@
         <init-params>
           <values-param>
             <name>autoCreatedInNewRepository</name>
-            <description>Node types configuration file</description>
-            <value>jar:/conf/organization-nodetypes.xml</value>
-          </values-param>
-        </init-params>
-      </component-plugin>
-      <component-plugin>
-        <name>add.nodeType</name>
-        <set-method>addPlugin</set-method>
-        <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
-        <init-params>
-          <values-param>
-            <name>autoCreatedInNewRepository</name>
             <description>Cloud Drive node types configuration file</description>
             <value>jar:/conf/portal/jcr/clouddrive-nodetypes.xml</value>
           </values-param>
@@ -144,18 +132,6 @@
 
   <component>
     <type>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.organization.OrganizationService</key>
-    <type>org.exoplatform.services.jcr.ext.organization.JCROrganizationServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>storage-workspace</name>
-        <description>Workspace in default repository where organization storage will be created</description>
-        <value>${gatein.jcr.workspace.system}</value>
-      </value-param>
-    </init-params>
   </component>
 
   <!-- HSQLDB Configuration -->
