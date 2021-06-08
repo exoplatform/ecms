@@ -30,7 +30,8 @@
             :attachments="attachments"
             :schema-folder="schemaFolder"
             :max-files-count="maxFilesCount"
-            :current-space="currentSpace" />
+            :current-space="currentSpace"
+            :current-drive="currentDrive" />
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
