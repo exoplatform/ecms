@@ -27,6 +27,9 @@ import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 import javax.annotation.security.RolesAllowed;
@@ -75,11 +78,12 @@ public class AttachmentsRestService implements ResourceContainer {
     if (attachmentIds.isEmpty()) {
       return Response.status(Response.Status.BAD_REQUEST).entity("You must link at least one attachment to the entity").build();
     }
-
+    long userIdentityId = getCurrentUserIdentityId();
     try {
-      attachmentService.linkAttachmentsToEntity(entityId, entityType, attachmentIds);
+      attachmentService.linkAttachmentsToEntity(userIdentityId, entityId, entityType, attachmentIds);
     } catch (Exception e) {
-      LOG.error("Error when trying to link attachments to a context: ", e);
+      LOG.error("Error when trying to link attachments to entity with type {} and id {}: ", entityType, entityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
     }
     return Response.ok().build();
   }
@@ -104,11 +108,14 @@ public class AttachmentsRestService implements ResourceContainer {
     if (StringUtils.isEmpty(entityType)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type is mandatory").build();
     }
-
+    long userIdentityId = getCurrentUserIdentityId();
     try {
-      attachmentService.updateEntityAttachments(entityId, entityType, attachmentIds);
+      attachmentService.updateEntityAttachments(userIdentityId, entityId, entityType, attachmentIds);
+    } catch (IllegalAccessException e) {
+      return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
     } catch (Exception e) {
-      LOG.error("Error when trying to link attachments to a context: ", e);
+      LOG.error("Error when trying to update attachments of entity type {} with id {}: ", entityType, entityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
     }
     return Response.ok().build();
   }
@@ -131,15 +138,23 @@ public class AttachmentsRestService implements ResourceContainer {
     if (StringUtils.isEmpty(entityType)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type must not be empty").build();
     }
-
-    List<Attachment> attachments = attachmentService.getAttachmentsByEntity(entityId, entityType);
-    List<AttachmentEntity> attachmentsEntities = new ArrayList<>();
-    if (!attachments.isEmpty()) {
-      attachmentsEntities = attachments.stream()
-                                       .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
-                                       .collect(Collectors.toList());
+    long userIdentityId = getCurrentUserIdentityId();
+    try {
+      List<Attachment> attachments = attachmentService.getAttachmentsByEntity(userIdentityId, entityId, entityType);
+      List<AttachmentEntity> attachmentsEntities = new ArrayList<>();
+      if (!attachments.isEmpty()) {
+        attachmentsEntities = attachments.stream()
+          .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
+          .filter(attachmentEntity -> attachmentEntity.getAcl().isCanView())
+          .collect(Collectors.toList());
+      }
+      return Response.ok(attachmentsEntities).build();
+    } catch (IllegalAccessException e) {
+      return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+    } catch (Exception e) {
+      LOG.error("Error when trying to get attachments of entity type {} with id {}: ", entityType, entityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
     }
-    return Response.ok(attachmentsEntities).build();
   }
 
   @DELETE
@@ -161,13 +176,16 @@ public class AttachmentsRestService implements ResourceContainer {
     if (StringUtils.isEmpty(entityType)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type is mandatory").build();
     }
-
+    long userIdentityId = getCurrentUserIdentityId();
     try {
-      attachmentService.deleteAllEntityAttachments(entityId, entityType);
+      attachmentService.deleteAllEntityAttachments(userIdentityId, entityId, entityType);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
-      LOG.error("Error when trying to delete all attachments from entity from entity with id '{}' ", entityId, e);
+      LOG.error("Error when trying to delete all attachments from entity with type {} and with id '{}' ", entityType, entityId, e);
       return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
+    } catch (IllegalAccessException e) {
+      LOG.error("User '{}' attempts to delete a non authorized {} entity with id {}", userIdentityId, entityType, entityId);
+      return Response.status(Response.Status.UNAUTHORIZED).build();
     }
   }
 
@@ -191,14 +209,28 @@ public class AttachmentsRestService implements ResourceContainer {
     if (StringUtils.isEmpty(entityType)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type is mandatory").build();
     }
-
+    long userIdentityId = getCurrentUserIdentityId();
     try {
-      attachmentService.deleteAttachmentItemById(entityId, entityType, attachmentId);
+      attachmentService.deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
       return Response.noContent().build();
     } catch (ObjectNotFoundException e) {
-      LOG.error("Error when trying to delete the attachment with id '{}' from entity with id '{}'", attachmentId, entityId, e);
+      LOG.error("Error when trying to delete the attachment with id '{}' from entity with type {} and id '{}'", attachmentId, entityType, entityId, e);
       return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
+    } catch (IllegalAccessException e) {
+      LOG.error("User '{}' attempts to delete a non authorized {} entity with id {}", userIdentityId, entityType, entityId);
+      return Response.status(Response.Status.UNAUTHORIZED).build();
     }
   }
 
+  public Identity getCurrentUserIdentity() {
+    return ConversationState.getCurrent().getIdentity();
+  }
+
+  public long getCurrentUserIdentityId() {
+    String currentUser = getCurrentUserIdentity().getUserId();
+    org.exoplatform.social.core.identity.model.Identity identity =
+                                                                 identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME,
+                                                                                                     currentUser);
+    return identity == null ? 0 : Long.parseLong(identity.getId());
+  }
 }
