@@ -3,14 +3,6 @@
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-  <!-- <component> <key>org.exoplatform.services.organization.OrganizationService</key> 
-    <type>org.exoplatform.services.jcr.ext.organization.JCROrganizationServiceImpl</type> 
-    <init-params> <value-param> <name>storage-workspace</name> <description>Workspace 
-    in default repository where organization storage will be created</description> 
-    <value>collaboration</value> </value-param> <value-param> <name>trash-workspace</name> 
-    <description>Workspace in default repository where organization storage will 
-    be created</description> <value>TrashWorkspace</value> </value-param> </init-params> 
-    </component> -->
   <component>
     <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
     <init-params>
