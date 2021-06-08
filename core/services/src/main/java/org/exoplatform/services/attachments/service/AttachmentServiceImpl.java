@@ -241,8 +241,7 @@ public class AttachmentServiceImpl implements AttachmentService {
             attachment.setAcl(attachmentACL);
             attachments.add(attachment);
           } catch (Exception e) {
-            LOG.error("Cannot get attachment with id " + attachmentContextEntity.getAttachmentId() + " of entity " + entityType
-                + " with id " + entityId, e);
+            LOG.error("Cannot get attachment with id {} of entity {} with id {}", attachmentContextEntity.getAttachmentId(), entityType, entityId, e);
           }
         });
       } finally {
