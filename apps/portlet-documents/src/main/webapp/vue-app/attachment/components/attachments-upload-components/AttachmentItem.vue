@@ -46,7 +46,7 @@
     </v-list-item-content>
     <v-list-item-action class="d-flex flex-row align-center">
       <v-icon
-        v-if="attachment.isSelectedFromDrives && privateFilesAttached || fromAnotherSpaceAttachment"
+        v-if="attachment.isSelectedFromDrives && privateFilesAttached || fromAnotherSpaceAttachment || fromAnotherDriveAttachment"
         :title="attachmentPrivacyLabel"
         size="14"
         color="primary"
@@ -114,7 +114,11 @@ export default {
     currentSpace: {
       type: {},
       default: () => null
-    }
+    },
+    currentDrive: {
+      type: {},
+      default: () => null
+    },
   },
   data() {
     return {
@@ -129,23 +133,35 @@ export default {
     fromAnotherSpaceAttachment() {
       return this.attachmentSpaceId && this.attachmentSpaceId !== this.currentSpaceId && this.attachmentSpaceId || false;
     },
+    fromAnotherDriveAttachment() {
+      return this.attachmentCurrentDriveName && this.currentDriveName !== this.attachmentCurrentDriveName && !this.attachmentSpaceId || false;
+    },
     privateFilesAttached() {
-      return this.attachment && !this.attachment.isPublic && !this.attachmentSpaceDisplayName;
+      return this.attachment && !this.attachment.isPublic && this.attachmentCurrentDriveName === 'Personal Documents';
     },
     selectedFromOtherDriveLabel() {
-      return this.$t(`attachments.alert.sharing.${this.privateFilesAttached && !this.fromAnotherSpaceAttachment ? 'personal' : 'space'}`);
+      return this.$t(`attachments.alert.sharing.${this.otherDriveType}`);
+    },
+    otherDriveType() {
+      return this.privateFilesAttached ? 'personal' : this.fromAnotherSpaceAttachment ? 'space' : this.fromAnotherDriveAttachment ? 'otherDrive' : '';
     },
     attachmentSpaceDisplayName() {
       return this.attachment && this.attachment.space && this.attachment.space.title;
     },
+    attachmentCurrentDriveName() {
+      return this.attachment && this.attachment.fileDrive && this.attachment.fileDrive.title;
+    },
     currentSpaceId() {
       return this.currentSpace && this.currentSpace.groupId && this.currentSpace.groupId.split('/spaces/')[1];
+    },
+    currentDriveName() {
+      return this.currentDrive && this.currentDrive.title;
     },
     attachmentSpaceId() {
       return this.attachment && this.attachment.space && this.attachment.space.name && this.attachment.space.name.split('.spaces.')[1];
     },
     attachedFromOtherDrivesLabel() {
-      return `${this.$t('attachments.alert.sharing.attachedFrom')} ${this.selectedFromOtherDriveLabel} ${this.fromAnotherSpaceAttachment && this.attachmentSpaceDisplayName || ''}.`;
+      return `${this.$t('attachments.alert.sharing.attachedFrom')} ${this.selectedFromOtherDriveLabel} ${this.fromAnotherSpaceAttachment && this.attachmentSpaceDisplayName || this.fromAnotherDriveAttachment && this.attachmentCurrentDriveName || ''}.`;
     },
     attachmentsWillBeDisplayedForLabel() {
       return this.$t('attachments.alert.sharing.availableFor');
