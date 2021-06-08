@@ -23,13 +23,13 @@ import java.util.List;
 
 public interface AttachmentService {
 
-  List<Attachment> getAttachmentsByEntity(long entityId, String entityType) throws Exception;
+  List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws Exception;
 
-  void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentIds);
+  void linkAttachmentsToEntity(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws IllegalAccessException;
 
-  void updateEntityAttachments(long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException;
+  void updateEntityAttachments(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException, IllegalAccessException;
 
-  void deleteAllEntityAttachments(long entityId, String entityType) throws ObjectNotFoundException;
+  void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException;
 
-  void deleteAttachmentItemById(long entityId, String entityType, String attachmentId) throws ObjectNotFoundException;
+  void deleteAttachmentItemById(long userIdentityId, long entityId, String entityType, String attachmentId) throws ObjectNotFoundException, IllegalAccessException;
 }
