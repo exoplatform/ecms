@@ -47,9 +47,9 @@ public class FileUIActivityTest {
     activity.setTemplateParams(activityParameters);
     activityBuilder.extendUIActivity(fileUIActivity, activity);
 
-    assertTrue(StringUtils.isBlank(fileUIActivity.getMessage()));
+    assertTrue(StringUtils.isNotBlank(fileUIActivity.getMessage()));
 
-    activityParameters.put(FileUIActivity.ACTIVITY_STATUS, activityTitle);
+    activityParameters.put(FileUIActivity.MESSAGE, activityTitle);
     activityBuilder.extendUIActivity(fileUIActivity, activity);
 
     assertEquals(activityTitle, fileUIActivity.getMessage());
