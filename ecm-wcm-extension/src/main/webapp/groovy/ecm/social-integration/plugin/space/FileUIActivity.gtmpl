@@ -60,6 +60,7 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
     def labelEdit = _ctx.appRes("UIActivity.label.Edit");
     def labelDelete = _ctx.appRes("UIActivity.label.Delete");
     def activity = uicomponent.getActivity();
+    def activityMessage = uicomponent.getMessage();
     def activityContentTitle = Text.unescapeIllegalJcrChars(activity.title);
     def linkExistsClassName = uicomponent.getLinkSource() ? "linkExists" : "";
 
@@ -105,7 +106,7 @@ import static org.exoplatform.social.webui.activity.BaseUIActivity.TEMPLATE_PARA
     //params for init UIActivity javascript object
     def params = """ {
       activityId: '${activity.id}',
-      activityBody: `${activity.title}`,
+      activityBody: `${activityMessage}`,
       placeholderComment: '${placeholder}',
       inputWriteAComment: '$inputWriteAComment',
       commentMinCharactersAllowed: '${uicomponent.getCommentMinCharactersAllowed()}',

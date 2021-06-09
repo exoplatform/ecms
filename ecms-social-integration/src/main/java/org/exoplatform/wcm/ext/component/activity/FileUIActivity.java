@@ -134,9 +134,9 @@ public class FileUIActivity extends BaseUIActivity{
 
   public static final String  CONTENT_LINK        = "contenLink";
 
-  public static final String  MESSAGE             = "message";
+  public static final String  MESSAGE             = "MESSAGE";
 
-  public static final String  ACTIVITY_STATUS     = "MESSAGE";
+  public static final String  ACTIVITY_STATUS     = "description";
 
   public static final String  IMAGE_PATH          = "imagePath";
 
