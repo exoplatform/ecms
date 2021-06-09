@@ -46,7 +46,7 @@
     </v-list-item-content>
     <v-list-item-action class="d-flex flex-row align-center">
       <v-icon
-        v-if="attachment.isSelectedFromDrives && privateFilesAttached || fromAnotherSpaceAttachment || fromAnotherDriveAttachment"
+        v-if="attachment.isSelectedFromDrives && fromAnotherSpaceAttachment || fromAnotherDriveAttachment"
         :title="attachmentPrivacyLabel"
         size="14"
         color="primary"
@@ -136,14 +136,11 @@ export default {
     fromAnotherDriveAttachment() {
       return this.attachmentCurrentDriveName && this.currentDriveName !== this.attachmentCurrentDriveName && !this.attachmentSpaceId || false;
     },
-    privateFilesAttached() {
-      return this.attachment && !this.attachment.isPublic && this.attachmentCurrentDriveName === 'Personal Documents';
-    },
     selectedFromOtherDriveLabel() {
       return this.$t(`attachments.alert.sharing.${this.otherDriveType}`);
     },
     otherDriveType() {
-      return this.privateFilesAttached ? 'personal' : this.fromAnotherSpaceAttachment ? 'space' : this.fromAnotherDriveAttachment ? 'otherDrive' : '';
+      return this.fromAnotherSpaceAttachment ? 'space' : this.fromAnotherDriveAttachment ? 'otherDrive' : '';
     },
     attachmentSpaceDisplayName() {
       return this.attachment && this.attachment.space && this.attachment.space.title;
