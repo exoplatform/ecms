@@ -737,7 +737,8 @@ export default {
               isSelected: isSelected,
               mimetype: fetchedFiles[j].getAttribute('nodeType'),
               isCloudFile: fetchedFiles[j].getAttribute('isCloudFile') === 'true' ? true : false,
-              isPublic: fetchedFiles[j].getAttribute('isPublic') === 'true' ? true : false
+              isPublic: fetchedFiles[j].getAttribute('isPublic') === 'true' ? true : false,
+              fileDrive: this.currentDrive
             });
           }
         }
