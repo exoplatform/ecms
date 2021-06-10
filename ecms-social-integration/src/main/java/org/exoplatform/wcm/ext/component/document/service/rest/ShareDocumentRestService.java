@@ -35,11 +35,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.rest.api.EntityBuilder;
 import org.exoplatform.social.rest.api.RestUtils;
 import org.exoplatform.social.rest.entity.ActivityEntity;
@@ -87,11 +93,15 @@ public class ShareDocumentRestService implements ResourceContainer {
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
+    String authenticatedUser = ConversationState.getCurrent().getIdentity().getUserId();
+    IdentityManager identityManager = ExoContainerContext.getService(IdentityManager.class);
+    Identity currentUser = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, authenticatedUser);
+
     List<ActivityEntity> sharedActivitiesEntities = new ArrayList<ActivityEntity>();
     for (String targetSpaceName : sharedActivityRestIn.getTargetSpaces()) {
       ExoSocialActivity sharedActivity = shareDocumentService.shareDocumentActivityToSpace(targetSpaceName, activityId, sharedActivityRestIn.getTitle(), sharedActivityRestIn.getType());
       if (sharedActivity != null) {
-        ActivityEntity sharedActivityEntity = EntityBuilder.buildEntityFromActivity(sharedActivity, uriInfo.getPath(), expand);
+        ActivityEntity sharedActivityEntity = EntityBuilder.buildEntityFromActivity(sharedActivity, currentUser, uriInfo.getPath(), expand);
         sharedActivitiesEntities.add(sharedActivityEntity);
         LOG.info("service=activity operation=share parameters=\"activity_type:{},activity_id:{},space_name:{},user_id:{}\"",
                      sharedActivity.getType(),
