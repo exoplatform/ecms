@@ -377,7 +377,7 @@ public class Utils {
   }
 
   public static String formatNodeName(String text) {
-    return text.replaceAll("'", "\\\\'");
+    return text.replaceAll("('|\")", "\\\\'");
   }
 
   public static boolean isVersionable(Node node) throws RepositoryException {
