@@ -1,5 +1,5 @@
 import './initComponents.js';
-import './extensions.js';
+import {installExtensions} from './extensions.js';
 
 Vue.use(Vuetify);
 
@@ -29,6 +29,8 @@ exoi18n.loadLanguageAsync(lang, url).then(i18n => {
 const appId = 'attachment';
 let attachmentApp;
 export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId) {
+  installExtensions();
+
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready

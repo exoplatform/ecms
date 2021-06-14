@@ -113,6 +113,9 @@
         <module>extensionRegistry</module>
       </depends>
       <depends>
+        <module>documentPreview</module>
+      </depends>
+      <depends>
         <module>commonVueComponents</module>
       </depends>
       <depends>

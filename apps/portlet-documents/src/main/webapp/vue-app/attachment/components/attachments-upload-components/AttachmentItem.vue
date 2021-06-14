@@ -207,24 +207,22 @@ export default {
     openPreview() {
       if (this.allowToPreview && this.attachment.id) {
         const self = this;
-        window.require(['SHARED/documentPreview'], function (documentPreview) {
-          documentPreview.init({
-            doc: {
-              id: self.attachment.id,
-              repository: 'repository',
-              workspace: 'collaboration',
-              path: self.attachment.nodePath || self.attachment.path,
-              title: self.attachment.title,
-              downloadUrl: self.attachment.downloadUrl,
-              openUrl: self.attachment.url || self.attachment.openUrl,
-              breadCrumb: self.attachment.previewBreadcrumb,
-              fileInfo: self.fileInfo()
-            },
-            version: {
-              number: self.attachment.version
-            },
-            showComments: false
-          });
+        documentPreview.init({
+          doc: {
+            id: self.attachment.id,
+            repository: 'repository',
+            workspace: 'collaboration',
+            path: self.attachment.nodePath || self.attachment.path,
+            title: self.attachment.title,
+            downloadUrl: self.attachment.downloadUrl,
+            openUrl: self.attachment.url || self.attachment.openUrl,
+            breadCrumb: self.attachment.previewBreadcrumb,
+            fileInfo: self.fileInfo()
+          },
+          version: {
+            number: self.attachment.version
+          },
+          showComments: false
         });
       }
     }
