@@ -29,12 +29,12 @@ public class Permission implements Cloneable, Serializable {
 
   private static final long serialVersionUID = 3495355054244658657L;
 
-  private boolean           canEdit;
+  private boolean           canView;
 
-  private boolean           canRemove;
+  private boolean           canDelete;
 
   @Override
   public Permission clone() { // NOSONAR
-    return new Permission(canEdit, canRemove);
+    return new Permission(canView, canDelete);
   }
 }
