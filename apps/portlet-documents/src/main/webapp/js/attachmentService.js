@@ -247,6 +247,19 @@ export function getEntityAttachments(entityType, entityId) {
   });
 }
 
+export function getAttachmentById(attachmentId) {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${attachmentId}`, {
+    credentials: 'include',
+    method: 'GET',
+  }).then((resp) => {
+    if (resp || resp.ok) {
+      return resp.json();
+    } else {
+      throw new Error('Error getting attachments task');
+    }
+  });
+}
+
 export function convertXmlToJson(xml) {
   // Create the return object
   let obj = {}, i, j, attribute, item, nodeName, old;

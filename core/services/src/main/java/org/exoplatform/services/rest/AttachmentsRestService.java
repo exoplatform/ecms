@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
@@ -29,6 +30,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
@@ -49,7 +51,8 @@ public class AttachmentsRestService implements ResourceContainer {
 
   protected IdentityManager   identityManager;
 
-  public AttachmentsRestService(AttachmentService attachmentService, IdentityManager identityManager) {
+  public AttachmentsRestService(AttachmentService attachmentService,
+                                IdentityManager identityManager) {
     this.attachmentService = attachmentService;
     this.identityManager = identityManager;
   }
@@ -124,11 +127,13 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, consumes = "application/json")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
+  @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, produces = "application/json")
+  @ApiResponses(value = {
+      @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
+      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
+  })
   public Response getAttachmentsByEntity(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                          @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
 
@@ -154,6 +159,30 @@ public class AttachmentsRestService implements ResourceContainer {
     } catch (Exception e) {
       LOG.error("Error when trying to get attachments of entity type {} with id {}: ", entityType, entityId, e);
       return Response.serverError().entity(e.getMessage()).build();
+    }
+  }
+
+  @GET
+  @Path("{attachmentId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, produces = "application/json")
+  @ApiResponses(value = {
+      @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
+      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
+      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
+      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
+  })
+  public Response getAttachmentById(@ApiParam(value = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId) throws Exception {
+    if (StringUtils.isBlank(attachmentId)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("Attachment identifier is mandatory").build();
+    }
+    try {
+      Attachment attachment = attachmentService.getAttachmentById(attachmentId, WCMCoreUtils.getUserSessionProvider());
+      return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+    } catch (Exception e) {
+      LOG.error("Error when trying to get attachment with id {}: ", attachmentId, e);
+      return Response.serverError().build();
     }
   }
 

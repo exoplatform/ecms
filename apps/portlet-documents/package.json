@@ -1,6 +1,6 @@
 {
   "name": "documents",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "eXo Documents",
   "repository": {
     "type": "git",
@@ -21,15 +21,14 @@
     "eslint-config-meedsio": "^1.0.3",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-jest": "^24.3.6",
-    "eslint-plugin-vue": "^7.9.0",
+    "eslint-plugin-vue": "^5.0.0",
     "jest": "^26.6.3",
     "vue": "^2.6.10",
-    "vue-i18n": "^8.15.0",
     "vue-loader": "^14.2.3",
     "vue-template-compiler": "^2.6.10",
-    "vuetify": "^2.1.7",
-    "webpack": "^4.25.0",
-    "webpack-cli": "^3.1.2",
-    "webpack-merge": "^4.1.4"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^4.1.3"
   }
 }

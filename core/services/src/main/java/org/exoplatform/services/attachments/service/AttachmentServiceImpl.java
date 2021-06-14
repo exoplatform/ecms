@@ -234,7 +234,7 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                                      documentService,
                                                                      workspace,
                                                                      session,
-                                                                     attachmentContextEntity);
+                                                                     attachmentContextEntity.getAttachmentId());
             boolean canView = canView(userIdentityId, entityType, entityId);
             boolean canDelete = canDelete(userIdentityId, entityType, entityId);
             Permission attachmentACL = new Permission(canView, canDelete);
@@ -251,6 +251,27 @@ public class AttachmentServiceImpl implements AttachmentService {
       }
     }
     return attachments;
+  }
+
+  @Override
+  public Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) {
+    Session session = null;
+    try {
+      String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+      session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());
+      return EntityBuilder.fromAttachmentNode(repositoryService,
+                                              documentService,
+                                              workspace,
+                                              session,
+                                              attachmentId);
+    } catch (Exception e) {
+      LOG.error("Cannot get attachment with id {}", attachmentId, e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+    return null;
   }
 
   public void addACLPlugin(AttachmentACLPlugin aclPlugin) {

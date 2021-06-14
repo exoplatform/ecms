@@ -10,6 +10,8 @@ import AttachmentsUploadInput from './components/attachments-upload-components/A
 import AttachmentsUploadedFiles from './components/attachments-upload-components/AttachmentsUploadedFiles.vue';
 import AttachmentsDriveExplorerDrawer from './components/attachments-drive-explorer/AttachmentsDriveExplorerDrawer.vue';
 import AttachmentsSelectFromDrive from './components/attachments-drive-explorer/AttachmentsSelectFromDrive.vue';
+import ActivityAttachments from './components/activity/ActivityAttachments.vue';
+import ActivityAttachment from './components/activity/ActivityAttachment.vue';
 
 Vue.component('AttachmentsDrawer', AttachmentsDrawer);
 Vue.component('Attachment', Attachment);
@@ -23,6 +25,9 @@ Vue.component('AttachmentsNotificationAlerts', AttachmentsNotificationAlerts);
 Vue.component('AttachmentsListDrawer', AttachmentsListDrawer);
 Vue.component('AttachmentsUploadedFiles', AttachmentsUploadedFiles);
 Vue.component('AttachmentsUploadInput', AttachmentsUploadInput);
+
+Vue.component('activity-attachments', ActivityAttachments);
+Vue.component('activity-attachment', ActivityAttachment);
 
 import * as attachmentService from '../../js/attachmentService.js';
 
