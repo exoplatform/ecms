@@ -69,8 +69,8 @@ public class EntityBuilder {
                                                     DocumentService documentService,
                                                     String workspace,
                                                     Session session,
-                                                    AttachmentContextEntity attachmentContextEntity) throws Exception {
-    Node attachmentNode = session.getNodeByUUID(attachmentContextEntity.getAttachmentId());
+                                                    String attachmentId) throws Exception {
+    Node attachmentNode = session.getNodeByUUID(attachmentId);
     Attachment attachment = new Attachment();
     attachment.setId(attachmentNode.getUUID());
     String attachmentsTitle = getStringProperty(attachmentNode, "exo:title");
