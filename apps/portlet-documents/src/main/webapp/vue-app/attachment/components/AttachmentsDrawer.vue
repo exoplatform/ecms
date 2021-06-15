@@ -2,6 +2,8 @@
   <div class="attachments-drawer">
     <exo-drawer
       ref="attachmentsAppDrawer"
+      :confirm-close="newUploadedFilesInProgress"
+      :confirm-close-labels="confirmAbortUploadLabels"
       class="attachmentsAppDrawer"
       right
       @closed="resetAttachmentsDrawer">
@@ -148,7 +150,18 @@ export default {
     },
     filesUploadedSuccessLabel() {
       return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');
-    }
+    },
+    newUploadedFilesInProgress() {
+      return this.newUploadedFiles && this.newUploadedFiles.some(file => file.uploadProgress < 100);
+    },
+    confirmAbortUploadLabels() {
+      return {
+        title: this.$t('attachment.cancel.upload'),
+        message: this.$t('attachment.abort.upload'),
+        ok: this.$t('attachments.yes'),
+        cancel: this.$t('attachments.no'),
+      };
+    },
   },
   watch: {
     attachments: {
@@ -359,6 +372,7 @@ export default {
       this.currentDrive = this.defaultDrive;
     },
     resetAttachmentsDrawer() {
+      this.abortUploadingFiles();
       this.newUploadedFiles = [];
       this.$refs.attachmentsAppDrawer.endLoading();
 
@@ -407,6 +421,17 @@ export default {
       uploadedFile.drive = file.fileDrive.title;
       uploadedFile.id = uploadedFile.UUID;
       this.uploadedFiles.push(uploadedFile);
+    },
+    abortUploadingFiles() {
+      if (this.newUploadedFilesInProgress) {
+        this.newUploadedFiles.forEach(file => {
+          if (file.uploadProgress < 100) {
+            this.$uploadService.abortUpload(file.uploadId);
+          } else {
+            this.$uploadService.deleteUpload(file.uploadId);
+          }
+        });
+      }
     },
   }
 };
