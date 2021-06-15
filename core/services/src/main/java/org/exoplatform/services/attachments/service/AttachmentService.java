@@ -18,12 +18,15 @@ package org.exoplatform.services.attachments.service;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 import java.util.List;
 
 public interface AttachmentService {
 
   List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws Exception;
+
+  Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider);
 
   void linkAttachmentsToEntity(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws IllegalAccessException;
 
@@ -32,4 +35,5 @@ public interface AttachmentService {
   void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException;
 
   void deleteAttachmentItemById(long userIdentityId, long entityId, String entityType, String attachmentId) throws ObjectNotFoundException, IllegalAccessException;
+
 }
