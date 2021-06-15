@@ -46,11 +46,11 @@
           :key="action.key"
           :class="`${action.appClass}Action`">
           <component
-            v-bind="action.component.props ? action.component.props : {}"
             :is="action.component.name"
             v-if="action.component"
             :ref="action.key"
-            v-dynamic-events="action.component.events" />
+            v-dynamic-events="action.component.events"
+            v-bind="action.component.props ? action.component.props : {}" />
         </div>
       </template>
       <template slot="footer">
