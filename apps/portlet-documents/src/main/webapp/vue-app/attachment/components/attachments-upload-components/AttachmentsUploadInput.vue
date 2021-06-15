@@ -66,6 +66,7 @@ export default {
       uploadingFilesQueue: [],
       uploadingCount: 0,
       maxProgress: 100,
+      newUploadedFiles: [],
     };
   },
   computed: {
@@ -75,6 +76,14 @@ export default {
     maxFileSizeErrorLabel: function () {
       return this. $t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
+  },
+  watch: {
+    uploadingCount(newValue) {
+      if (newValue === 0) {
+        this.$root.$emit('link-new-added-attachments',this.newUploadedFiles);
+        this.newUploadedFiles = [];
+      }
+    }
   },
   created() {
     this.initDragAndDropEvents();
@@ -189,14 +198,12 @@ export default {
           return;
         }
 
-        this.$root.$emit('add-new-uploaded-file',file);
-
+        this.$root.$emit('add-new-uploaded-file', file);
+        this.newUploadedFiles.push(file);
       }
       if (this.uploadingCount < this.maxUploadInProgressCount) {
         if (this.uploadMode === 'temp') {
           this.sendFileToServer(file);
-        } else {
-          this.uploadFileToDestinationPath(file);
         }
       } else {
         this.uploadingFilesQueue.push(file);
@@ -204,7 +211,6 @@ export default {
     },
     sendFileToServer(file){
       this.uploadingCount++;
-      this.$emit('uploadingCountChanged', this.uploadingCount);
       this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
         .catch(error => {
           this.$root.$emit('attachments-notification-alert', {
@@ -224,7 +230,6 @@ export default {
               this.controlUpload(file);
             } else {
               this.uploadingCount--;
-              this.$emit('uploadingCountChanged', this.uploadingCount);
               this.processNextQueuedUpload();
             }
           })
@@ -241,8 +246,6 @@ export default {
       if (this.uploadingFilesQueue.length > 0) {
         if (this.uploadMode === 'temp') {
           this.sendFileToServer(this.uploadingFilesQueue.shift());
-        } else {
-          this.uploadFileToDestinationPath(this.uploadingFilesQueue.shift());
         }
       }
     },

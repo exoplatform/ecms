@@ -103,9 +103,10 @@
           class="list-complete-item">
           <attachment-item
             :attachment="attachment"
-            :allow-to-preview="true"
+            :allow-to-remove="false"
             :current-space="currentSpace"
-            :current-drive="currentDrive" />
+            :current-drive="currentDrive"
+            allow-to-preview />
         </span>
       </transition-group>
     </div>
@@ -135,14 +136,18 @@ export default {
       type: {},
       default: () => null
     },
+    newUploadedFiles: {
+      type: {},
+      default: () => null
+    },
   },
   computed: {
     displayMessageDestinationFolder() {
       return !this.attachments.length || !this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
     },
-    attachmentsToDisplay(){
-      return this.attachments.filter(attachment => !attachment.id || attachment.isSelectedFromDrives);
-    }
+    attachmentsToDisplay() {
+      return this.newUploadedFiles.filter(newFile => this.attachments.find(file => newFile.id === file.id));
+    },
   },
   methods: {
     openSelectDestinationFolderDrawer() {
