@@ -3,7 +3,8 @@
     <exo-drawer
       ref="attachmentsAppDrawer"
       class="attachmentsAppDrawer"
-      right>
+      right
+      @closed="resetAttachmentsDrawer">
       <template slot="title">
         <div class="attachmentsDrawerHeader">
           <span>{{ drawerTitle }}</span>
@@ -28,6 +29,7 @@
           <attachments-select-from-drive v-if="entityId && entityType" />
           <attachments-uploaded-files
             :attachments="attachments"
+            :new-uploaded-files="newUploadedFiles"
             :schema-folder="schemaFolder"
             :max-files-count="maxFilesCount"
             :current-space="currentSpace"
@@ -51,21 +53,6 @@
             :ref="action.key"
             v-dynamic-events="action.component.events"
             v-bind="action.component.props ? action.component.props : {}" />
-        </div>
-      </template>
-      <template slot="footer">
-        <div class="d-flex justify-end">
-          <v-btn
-            class="btn mr-3"
-            @click="closeAttachmentsAppDrawer()">
-            {{ $t('attachments.drawer.cancel') }}
-          </v-btn>
-          <v-btn
-            :disabled="!attachmentsChanged || attachments.length === 0"
-            class="btn btn-primary"
-            @click="uploadAddedAttachments()">
-            {{ $t('attachments.upload') }}
-          </v-btn>
         </div>
       </template>
     </exo-drawer>
@@ -149,6 +136,7 @@ export default {
       currentDrive: {},
       uploadedFiles: [],
       attachmentsChanged: false,
+      newUploadedFiles: []
     };
   },
   computed: {
@@ -179,16 +167,10 @@ export default {
         if (this.uploadFinished) {
           if (this.entityId && this.entityType) {
             if (this.entityHasAttachments) {
-              this.updateLinkedAttachmentsToEntity().then(() => {
-                this.closeAndResetAttachmentsDrawer();
-              });
+              this.updateLinkedAttachmentsToEntity();
             } else {
-              this.linkUploadedAttachmentsToEntity().then(() => {
-                this.closeAndResetAttachmentsDrawer();
-              });
+              this.linkUploadedAttachmentsToEntity();
             }
-          } else {
-            this.closeAndResetAttachmentsDrawer();
           }
         }
       }
@@ -198,7 +180,8 @@ export default {
     document.addEventListener('paste', this.onPaste, false);
     this.$root.$on('open-select-from-drives', () => {
       this.openSelectFromDrivesDrawer();
-    });this.$root.$on('change-attachment-destination-path', attachment => {
+    });
+    this.$root.$on('change-attachment-destination-path', attachment => {
       this.openSelectDestinationFolderForFile(attachment);
     });
     this.$root.$on('open-attachments-app-drawer', () => {
@@ -216,6 +199,16 @@ export default {
     });
     this.$root.$on('select-destination-path-for-all', (pathDestinationFolder, folderName, currentDrive) => {
       this.addDestinationFolderForAll(pathDestinationFolder, folderName, currentDrive);
+    });
+    this.$root.$on('link-new-added-attachments', () => {
+      this.uploadAddedAttachments();
+    });
+    this.$root.$on('add-new-uploaded-file', file => {
+      this.newUploadedFiles.push(file);
+    });
+    this.$root.$on('attachments-changed-from-drives', selectedFromDrives => {
+      this.newUploadedFiles.push(...selectedFromDrives);
+      this.uploadAddedAttachments();
     });
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
@@ -332,13 +325,12 @@ export default {
     },
     uploadAddedAttachments() {
       this.uploadMode = 'save';
-      this.$refs.attachmentsAppDrawer.startLoading();
       if (this.entityHasNewAttachments) { //added new uploaded files
         this.attachments.filter(attachment => attachment.uploadId).forEach(file => {
           this.queueUpload(file);
         });
       } else if (this.attachmentsChanged) { //updated from drives
-        this.updateLinkedAttachmentsToEntity().then(() => this.closeAndResetAttachmentsDrawer());
+        this.updateLinkedAttachmentsToEntity();
       }
     },
     queueUpload(file) {
@@ -366,12 +358,8 @@ export default {
       this.schemaFolder = this.defaultSchemaFolder;
       this.currentDrive = this.defaultDrive;
     },
-    closeAndResetAttachmentsDrawer() {
-      this.closeAttachmentsAppDrawer();
-      this.$root.$emit('attachments-notification-alert', {
-        message: this.filesUploadedSuccessLabel,
-        type: 'success',
-      });
+    resetAttachmentsDrawer() {
+      this.newUploadedFiles = [];
       this.$refs.attachmentsAppDrawer.endLoading();
 
       //get the last 10 uploaded files to be sent within the custom event
@@ -386,6 +374,7 @@ export default {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
       }).finally(() => {
+        this.displaySuccessMessage();
         this.$refs.attachmentsAppDrawer.endLoading();
       });
     },
@@ -396,7 +385,14 @@ export default {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
       }).finally(() => {
+        this.displaySuccessMessage();
         this.$refs.attachmentsAppDrawer.endLoading();
+      });
+    },
+    displaySuccessMessage() {
+      this.$root.$emit('attachments-notification-alert', {
+        message: this.filesUploadedSuccessLabel,
+        type: 'success',
       });
     },
     openSelectFromDrivesDrawer() {
