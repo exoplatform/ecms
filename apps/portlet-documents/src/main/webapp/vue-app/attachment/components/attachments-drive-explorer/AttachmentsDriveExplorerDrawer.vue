@@ -382,6 +382,7 @@ export default {
       space: {},
       currentDrive: {},
       selectedFiles: [],
+      removedFiles: [],
       maxFilesCount: 20,
       foldersHistory: [],
       showSearchInput: false,
@@ -520,12 +521,8 @@ export default {
     defaultFolder() {
       this.initDestinationFolderPath();
     },
-    attachedFiles() {
-      this.selectedFiles = this.attachedFiles.slice();
-    },
   },
   created() {
-    this.selectedFiles = this.attachedFiles.slice();
     this.initDestinationFolderPath();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -660,15 +657,15 @@ export default {
       if (!file.isSelected && this.filesCountLeft > 0) {
         file.isSelected = true;
         file.isSelectedFromDrives = true;
-        if (!this.selectedFiles.find(f => f.id === file.id)) {
+        if (!this.attachedFiles.find(f => f.id === file.id)) {
           this.selectedFiles.push({...file, space: this.fromSpace});
         }
       } else {
-        const index = this.selectedFiles.findIndex(f => f.id === file.id);
+        const index = this.attachedFiles.findIndex(f => f.id === file.id);
         file.isSelected = false;
         file.isSelectedFromDrives = false;
         if (index !== -1) {
-          this.selectedFiles.splice(index, 1);
+          this.removedFiles.push(file);
         }
       }
     },
@@ -691,7 +688,9 @@ export default {
       this.foldersHistory.find(f => f.name === folder.name).isSelected = true;
     },
     addSelectedFiles() {
-      this.$root.$emit('attachments-changed-from-drives', this.selectedFiles);
+      this.$root.$emit('attachments-changed-from-drives', this.selectedFiles, this.removedFiles);
+      this.selectedFiles = [];
+      this.removedFiles = [];
     },
     showSearchDocumentInput() {
       this.showSearchInput = !this.showSearchInput;
