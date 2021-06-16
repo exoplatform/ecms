@@ -98,7 +98,7 @@
         tag="div"
         class="d-flex flex-column">
         <span
-          v-for="attachment in attachments"
+          v-for="attachment in attachmentsToDisplay"
           :key="attachment"
           class="list-complete-item">
           <attachment-item
@@ -139,6 +139,9 @@ export default {
   computed: {
     displayMessageDestinationFolder() {
       return !this.attachments.length || !this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
+    },
+    attachmentsToDisplay(){
+      return this.attachments.filter(attachment => !attachment.id || attachment.isSelectedFromDrives);
     }
   },
   methods: {
