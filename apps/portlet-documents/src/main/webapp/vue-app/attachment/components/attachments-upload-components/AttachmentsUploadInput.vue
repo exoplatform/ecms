@@ -76,16 +76,11 @@ export default {
     maxFileSizeErrorLabel: function () {
       return this.$t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
-    uploadFinished() {
-      return this.newUploadedFiles.every(file => file.uploadProgress && file.uploadProgress === 100);
-    },
   },
   watch: {
     uploadingCount(newValue) {
       if (newValue === 0) {
-        if (this.uploadFinished) {
-          this.$root.$emit('link-new-added-attachments',this.newUploadedFiles);
-        }
+        this.$root.$emit('link-new-added-attachments', this.newUploadedFiles);
         this.newUploadedFiles = [];
       }
     }
