@@ -468,8 +468,11 @@ export default {
       });
       return drivesByTypes;
     },
+    selectedFilesCount() {
+      return (this.attachedFiles.length + this.selectedFiles.length) - this.removedFiles.length ;
+    },
     filesCountLeft() {
-      return this.maxFilesCount - this.selectedFiles.length;
+      return this.maxFilesCount - this.selectedFilesCount;
     },
     emptyFolder() {
       return this.files.length === 0 && this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
