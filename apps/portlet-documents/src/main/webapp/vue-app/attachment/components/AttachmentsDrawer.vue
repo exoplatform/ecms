@@ -184,6 +184,8 @@ export default {
             } else {
               this.linkUploadedAttachmentsToEntity();
             }
+          } else {
+            this.displaySuccessMessage();
           }
         }
       }
@@ -220,6 +222,7 @@ export default {
       this.newUploadedFiles.push(file);
     });
     this.$root.$on('attachments-changed-from-drives', selectedFromDrives => {
+      this.attachmentsChanged = true;
       this.newUploadedFiles.push(...selectedFromDrives);
       this.uploadAddedAttachments();
     });
