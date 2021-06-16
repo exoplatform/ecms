@@ -23,7 +23,7 @@
       <Title>Nastavitve seznama vsebine</Title>
       <ContentSelectionBlock>Izbira vsebine</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Način</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Večjezikovna podpora</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Pot do mape</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Pot do mape</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Razvrsti po</UICLVConfigOrderByFormSelectBox>
