@@ -77,13 +77,15 @@ export default {
       return this.$t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
     uploadFinished() {
-      return this.newUploadedFiles.every(file => file.uploadProgress === 100);
+      return this.newUploadedFiles.every(file => file.uploadProgress && file.uploadProgress === 100);
     },
   },
   watch: {
     uploadingCount(newValue) {
-      if (newValue === 0 && this.uploadFinished) {
-        this.$root.$emit('link-new-added-attachments',this.newUploadedFiles);
+      if (newValue === 0) {
+        if (this.uploadFinished) {
+          this.$root.$emit('link-new-added-attachments',this.newUploadedFiles);
+        }
         this.newUploadedFiles = [];
       }
     }
