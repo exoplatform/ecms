@@ -376,20 +376,22 @@ public class ThumbnailRESTService implements ResourceContainer {
 
   private Node getShowingNode(String workspaceName, String nodePath) throws Exception {
     Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, SessionProviderService.getRepository());
-    Node showingNode = null;
     if(nodePath.equals("/")) {
-      showingNode = session.getRootNode();
+      return session.getRootNode();
     } else {
       if (!nodePath.startsWith("/")) {
         nodePath = "/" + nodePath;
       }
       try {
-        showingNode = (Node) nodeFinder_.getItem(session, nodePath);
+        return (Node) nodeFinder_.getItem(session, nodePath);
       } catch (PathNotFoundException e) {
-        showingNode = (Node) nodeFinder_.getItem(session, getNodePath(nodePath));
+        try {
+          return (Node) nodeFinder_.getItem(session, getNodePath(nodePath));
+        } catch (PathNotFoundException e1) {
+          return null;
+        }
       }
     }
-    return showingNode;
   }
 
 }

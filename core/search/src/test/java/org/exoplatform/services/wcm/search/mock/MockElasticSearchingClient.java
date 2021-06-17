@@ -11,7 +11,7 @@ public class MockElasticSearchingClient extends ElasticSearchingClient {
   }
 
   @Override
-  public String sendRequest(String esQuery, String index, String type) {
+  public String sendRequest(String esQuery, String index) {
     return "{ \"hits\" : { \"hits\" : [] } }";
   }
 

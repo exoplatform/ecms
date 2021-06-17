@@ -1,22 +1,28 @@
 package org.exoplatform.services.wcm.search.connector;
 
+import java.io.InputStream;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import javax.jcr.*;
+import javax.jcr.nodetype.NodeTypeManager;
+import javax.jcr.nodetype.PropertyDefinition;
+import javax.jcr.query.*;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.commons.search.domain.Document;
 import org.exoplatform.commons.search.index.impl.ElasticIndexingServiceConnector;
 import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.documents.VersionHistoryUtils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
-import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.core.ExtendedSession;
-import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.core.*;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
@@ -24,29 +30,20 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-import javax.jcr.*;
-import javax.jcr.nodetype.NodeTypeManager;
-import javax.jcr.nodetype.PropertyDefinition;
-import javax.jcr.query.*;
-
-import java.io.InputStream;
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * Indexing Connector for Files
  */
 public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
+  public static final String   TYPE                           = "file";
+
   private static final int     DEFAULT_MAX_FILE_SIZE_TO_INDEX = 10;
 
-  private static final Log LOGGER = ExoLogger.getExoLogger(FileindexingConnector.class);
+  private static final Log     LOGGER                         = ExoLogger.getExoLogger(FileindexingConnector.class);
 
-  public static final String TYPE = "file";
+  private RepositoryService    repositoryService;
 
-  private RepositoryService repositoryService;
-
-  private TrashService trashService;
+  private TrashService         trashService;
 
   private NewFolksonomyService newFolksonomyService;
 
@@ -71,7 +68,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       String contentMaxSizeToIndex = initParams.getValueParam("documents.content.max.size.mb").getValue();
       this.contentMaxSizeToIndexInBytes = Long.parseLong(contentMaxSizeToIndex) * 1024 * 1024;
     } else {
-      this.contentMaxSizeToIndexInBytes = DEFAULT_MAX_FILE_SIZE_TO_INDEX * 1024 * 1024;
+      this.contentMaxSizeToIndexInBytes = DEFAULT_MAX_FILE_SIZE_TO_INDEX * 1024l * 1024l;
     }
   }
 
@@ -86,43 +83,48 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
   }
 
   @Override
+  public String getConnectorName() {
+    return TYPE;
+  }
+
+  @Override
   public String getMapping() {
     StringBuilder mapping = new StringBuilder()
-            .append("{")
-            .append("  \"properties\" : {\n")
-            .append("    \"repository\" : {\"type\" : \"keyword\"},\n")
-            .append("    \"workspace\" : {\"type\" : \"keyword\"},\n")
-            .append("    \"path\" : {\"type\" : \"keyword\"},\n")
-            .append("    \"author\" : {\"type\" : \"keyword\"},\n")
-            .append("    \"permissions\" : {\"type\" : \"keyword\"},\n")
-            .append("    \"createdDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
-            .append("    \"activityId\" : {\"type\" : \"text\"},\n")
-            .append("    \"lastUpdatedDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
-            .append("    \"lastModifier\" : {\"type\" : \"text\"},\n")
-            .append("    \"fileType\" : {\"type\" : \"keyword\"},\n")
-            .append("    \"fileSize\" : {\"type\" : \"long\"},\n")
-            .append("    \"drive\" : {\"type\" : \"text\"},\n")
-            .append("    \"version\" : {\"type\" : \"long\"},\n")
-            .append("    \"name\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
-            .append("    \"title\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
-            .append("    \"tags\" : {\"type\" : \"keyword\"},\n")
-            .append("    \"dc:title\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:creator\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:subject\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:description\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:publisher\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:contributor\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:date\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
-            .append("    \"dc:resourceType\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:format\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:identifier\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:source\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:language\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:relation\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:coverage\" : {\"type\" : \"text\"},\n")
-            .append("    \"dc:rights\" : {\"type\" : \"text\"}\n")
-            .append("  }\n")
-            .append("}");
+                                               .append("{")
+                                               .append("  \"properties\" : {\n")
+                                               .append("    \"repository\" : {\"type\" : \"keyword\"},\n")
+                                               .append("    \"workspace\" : {\"type\" : \"keyword\"},\n")
+                                               .append("    \"path\" : {\"type\" : \"keyword\"},\n")
+                                               .append("    \"author\" : {\"type\" : \"keyword\"},\n")
+                                               .append("    \"permissions\" : {\"type\" : \"keyword\"},\n")
+                                               .append("    \"createdDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
+                                               .append("    \"activityId\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"lastUpdatedDate\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
+                                               .append("    \"lastModifier\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"fileType\" : {\"type\" : \"keyword\"},\n")
+                                               .append("    \"fileSize\" : {\"type\" : \"long\"},\n")
+                                               .append("    \"drive\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"version\" : {\"type\" : \"long\"},\n")
+                                               .append("    \"name\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
+                                               .append("    \"title\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
+                                               .append("    \"tags\" : {\"type\" : \"keyword\"},\n")
+                                               .append("    \"dc:title\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:creator\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:subject\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:description\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:publisher\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:contributor\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:date\" : {\"type\" : \"date\", \"format\": \"epoch_millis\"},\n")
+                                               .append("    \"dc:resourceType\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:format\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:identifier\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:source\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:language\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:relation\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:coverage\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"dc:rights\" : {\"type\" : \"text\"}\n")
+                                               .append("  }\n")
+                                               .append("}");
 
     return mapping.toString();
   }
@@ -130,37 +132,38 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
   @Override
   public String getAttachmentProcessor() {
     StringBuilder processors = new StringBuilder()
-            .append("{")
-            .append("  \"description\" : \"File processor\",\n")
-            .append("  \"processors\" : [{\n")
-            .append("    \"attachment\" : {\n")
-            .append("      \"field\" : \"file\",\n")
-            .append("      \"indexed_chars\" : -1,\n")
-            .append("      \"properties\" : [\"content\"]\n")
-            .append("    }\n")
-            .append("  },{\n")
-            .append("    \"remove\" : {\n")
-            .append("      \"field\" : \"file\"\n")
-            .append("    }\n")
-            .append("  }]\n")
-            .append("}");
+                                                  .append("{")
+                                                  .append("  \"description\" : \"File processor\",\n")
+                                                  .append("  \"processors\" : [{\n")
+                                                  .append("    \"attachment\" : {\n")
+                                                  .append("      \"field\" : \"file\",\n")
+                                                  .append("      \"indexed_chars\" : -1,\n")
+                                                  .append("      \"properties\" : [\"content\"]\n")
+                                                  .append("    }\n")
+                                                  .append("  },{\n")
+                                                  .append("    \"remove\" : {\n")
+                                                  .append("      \"field\" : \"file\"\n")
+                                                  .append("    }\n")
+                                                  .append("  }]\n")
+                                                  .append("}");
 
     return processors.toString();
   }
 
   @Override
   public Document create(String id) {
-    if(StringUtils.isEmpty(id)) {
+    if (StringUtils.isEmpty(id)) {
       return null;
     }
     ExtendedSession session = null;
     try {
-      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
-      
+      session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
+                                              .getSession("collaboration", repositoryService.getCurrentRepository());
+
       Node node;
-      try {
+      try {// NOSONAR : no need to extract this block to a method
         node = session.getNodeByIdentifier(id);
-      } catch(ItemNotFoundException e) {
+      } catch (ItemNotFoundException e) {
         // If node not found we don't index it
         return null;
       }
@@ -192,18 +195,17 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       } else {
         fields.put("lastUpdatedDate", fields.get("createdDate"));
       }
-      if (node.hasProperty("exo:activityId")){
+      if (node.hasProperty("exo:activityId")) {
         fields.put("activityId", node.getProperty("exo:activityId").getString());
       }
-      fields.put("version", String .valueOf(VersionHistoryUtils.getVersion(node)));
-      
+      fields.put("version", String.valueOf(VersionHistoryUtils.getVersion(node)));
+
       Node contentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
       if (contentNode != null) {
         boolean canIndexContent = false;
         if (contentNode.hasProperty(NodetypeConstant.JCR_MIMETYPE)) {
           String mimeType = contentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString();
-          canIndexContent = supportedContentIndexingMimetypes.stream()
-                                                             .anyMatch(supportedMimeType -> mimeType.matches(supportedMimeType));
+          canIndexContent = supportedContentIndexingMimetypes.stream().anyMatch(mimeType::matches);
           fields.put("fileType", mimeType);
         }
 
@@ -229,8 +231,13 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
 
       LOGGER.info("ES document generated for file with id={} path=\"{}\"", id, node.getPath());
-      return new Document(TYPE, id, null, new Date(), computePermissions(node), getTags(node,session.getWorkspace().getName()), fields);
-    } catch (Exception e ) {
+      return new Document(id,
+                          null,
+                          new Date(),
+                          computePermissions(node),
+                          getTags(node, session.getWorkspace().getName()),
+                          fields);
+    } catch (Exception e) {
       LOGGER.error("Error while indexing file " + id, e);
     } finally {
       if (session != null) {
@@ -242,17 +249,17 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
   protected boolean isInContentFolder(Node node) {
     try {
-      return
-              (  (node.isNodeType("exo:htmlFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent())) ||
-                 (node.isNodeType("exo:cssFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
-                 (node.isNodeType("exo:jsFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
-                 (node.isNodeType("nt:file") && (node.getPath().contains("/medias/images")||node.getPath().contains("/medias/videos")||node.getPath().contains("/medias/audio")) && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent().getParent()))
-              );
+      return ((node.isNodeType("exo:htmlFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent())) ||
+          (node.isNodeType("exo:cssFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
+          (node.isNodeType("exo:jsFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
+          (node.isNodeType("nt:file")
+              && (node.getPath().contains("/medias/images") || node.getPath().contains("/medias/videos")
+                  || node.getPath().contains("/medias/audio"))
+              && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent().getParent())));
     } catch (Exception e) {
       return false;
     }
   }
-
 
   @Override
   public Document update(String id) {
@@ -263,7 +270,8 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
   public List<String> getAllIds(int offset, int limit) {
     List<String> allIds = new ArrayList<>();
     try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
+      Session session = WCMCoreUtils.getSystemSessionProvider()
+                                    .getSession("collaboration", repositoryService.getCurrentRepository());
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery("select * from " + NodetypeConstant.NT_FILE, Query.SQL);
       QueryImpl queryImpl = (QueryImpl) query;
@@ -271,17 +279,17 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       queryImpl.setLimit(limit);
       QueryResult result = queryImpl.execute();
       NodeIterator nodeIterator = result.getNodes();
-      while(nodeIterator.hasNext()) {
+      while (nodeIterator.hasNext()) {
         NodeImpl node = (NodeImpl) nodeIterator.nextNode();
         // use node internal identifier to be sure to have an id for all nodes
         allIds.add(node.getInternalIdentifier());
       }
     } catch (RepositoryException e) {
-     throw new RuntimeException("Error while fetching all nt:file nodes", e);
+      throw new IllegalStateException("Error while fetching all nt:file nodes", e);
     }
 
-    if(Thread.currentThread().isInterrupted()) {
-      throw new RuntimeException("Indexing queue processing interrupted");
+    if (Thread.currentThread().isInterrupted()) {
+      throw new IllegalStateException("Indexing queue processing interrupted");
     }
 
     LOGGER.info("Fetched {} files to push in indexing queue (offset={}, limit={})", allIds.size(), offset, limit);
@@ -293,16 +301,17 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     if (contentNode.isNodeType(NodetypeConstant.DC_ELEMENT_SET)) {
       dcFields = new HashMap<>();
       NodeTypeManager nodeTypeManager = repositoryService.getCurrentRepository().getNodeTypeManager();
-      PropertyDefinition[] dcPropertyDefinitions = nodeTypeManager.getNodeType(NodetypeConstant.DC_ELEMENT_SET).getPropertyDefinitions();
+      PropertyDefinition[] dcPropertyDefinitions = nodeTypeManager.getNodeType(NodetypeConstant.DC_ELEMENT_SET)
+                                                                  .getPropertyDefinitions();
       for (PropertyDefinition propertyDefinition : dcPropertyDefinitions) {
         String propertyName = propertyDefinition.getName();
         if (contentNode.hasProperty(propertyName)) {
           Property property = contentNode.getProperty(propertyName);
-          if(property != null) {
+          if (property != null) {
             String strValue = null;
             if (propertyDefinition.isMultiple()) {
               Value[] values = property.getValues();
-              if(values != null && values.length > 0) {
+              if (values != null && values.length > 0) {
                 Value value = values[0];
                 if (property.getType() == PropertyType.DATE) {
                   strValue = String.valueOf(value.getDate().toInstant().toEpochMilli());
@@ -317,7 +326,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
                 strValue = property.getString();
               }
             }
-            if(strValue != null) {
+            if (strValue != null) {
               dcFields.put(propertyName, strValue);
             }
           }
@@ -331,23 +340,26 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     Set<String> permissions = new HashSet<>();
 
     AccessControlList acl = ((ExtendedNode) node).getACL();
-    //Add the owner
+    // Add the owner
     permissions.add(acl.getOwner());
-    //Add permissions
+    // Add permissions
     if (acl.getPermissionEntries() != null) {
-      permissions.addAll(acl.getPermissionEntries().stream().map(permission -> permission.getIdentity()).collect(Collectors.toSet()));
+      permissions.addAll(acl.getPermissionEntries()
+                            .stream()
+                            .map(AccessControlEntry::getIdentity)
+                            .collect(Collectors.toSet()));
     }
 
     return permissions;
   }
 
-  //Get tags of document
-  private  List<String> getTags(Node node, String workspace) throws Exception {
+  // Get tags of document
+  private List<String> getTags(Node node, String workspace) throws Exception {
     List<String> tags = new ArrayList<>();
     List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocument(node, workspace);
-    for (Node nodeTag : tagList ) {
+    for (Node nodeTag : tagList) {
       tags.add(nodeTag.getName());
-     }
+    }
     return tags;
   }
 }
