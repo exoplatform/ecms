@@ -276,7 +276,7 @@ public class FileDlpConnector extends DlpServiceConnector {
       Node node = session.getNodeByIdentifier(itemReference);
 
       if (node != null && dlpQuarantineNode != null) {
-        Utils.removeDeadSymlinks(node);
+        Utils.removeDeadSymlinks(node,false);
         node.remove();
         dlpQuarantineNode.save();
       }
