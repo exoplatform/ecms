@@ -77,7 +77,7 @@ public class FileUIActivityBuilder extends BaseUIActivityBuilder {
     // So we couldn't set activity.getTitle() all the time, see INTEG-486
     if (activity.getTemplateParams() != null
         && StringUtils.isNotBlank(templateParams.get(FileUIActivity.MESSAGE))) {
-      fileActivity.setMessage(templateParams.get(FileUIActivity.MESSAGE));
+      fileActivity.setMessage(templateParams.get(FileUIActivity.MESSAGE).split("<oembed>")[0]);
     } else if (activity.getTemplateParams() != null
         && StringUtils.isNotBlank(activity.getTemplateParams().get(FileUIActivity.ACTIVITY_STATUS))
         || (!patternLink.matcher(activity.getTitle()).find())) {
