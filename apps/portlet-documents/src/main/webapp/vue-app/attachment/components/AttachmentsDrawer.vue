@@ -222,9 +222,7 @@ export default {
       this.newUploadedFiles.push(file);
     });
     this.$root.$on('attachments-changed-from-drives', selectedFromDrives => {
-      this.attachmentsChanged = true;
-      this.newUploadedFiles.push(...selectedFromDrives);
-      this.uploadAddedAttachments();
+      this.manageFilesFromDrives(selectedFromDrives);
     });
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
@@ -436,6 +434,13 @@ export default {
         });
       }
     },
+    manageFilesFromDrives(selectedFromDrives) {
+      if (selectedFromDrives && selectedFromDrives.length > 0) {
+        this.attachmentsChanged = true;
+        this.newUploadedFiles.push(...selectedFromDrives);
+        this.uploadAddedAttachments();
+      }
+    }
   }
 };
 </script>
