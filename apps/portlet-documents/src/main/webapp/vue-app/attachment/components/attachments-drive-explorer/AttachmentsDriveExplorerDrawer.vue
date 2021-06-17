@@ -314,6 +314,7 @@
         </v-btn>
         <v-btn
           class="btn btn-primary"
+          :disabled="!selectFromDrivesEnabled"
           @click="selectActionDriveExplorerDrawer()">
           {{ $t('attachments.drawer.select') }}
         </v-btn>
@@ -493,6 +494,9 @@ export default {
     },
     driveExplorerDrawerTitle() {
       return this.modeFolderSelection ? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.existingUploads');
+    },
+    selectFromDrivesEnabled() {
+      return this.selectedFiles && !!this.selectedFiles.length || this.removedFiles && !!this.removedFiles.length;
     }
   },
   watch: {
