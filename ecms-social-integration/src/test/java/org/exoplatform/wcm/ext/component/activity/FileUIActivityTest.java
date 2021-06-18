@@ -42,16 +42,15 @@ public class FileUIActivityTest {
     activity.setTitle(activityTitle);
 
     Map<String, String> activityParameters = new HashMap<>();
-    activityParameters.put(FileUIActivity.MESSAGE, "message test");
+    activityParameters.put(FileUIActivity.MESSAGE, "message test<oembed>link</oembed>");
 
     activity.setTemplateParams(activityParameters);
     activityBuilder.extendUIActivity(fileUIActivity, activity);
 
     assertTrue(StringUtils.isNotBlank(fileUIActivity.getMessage()));
-
+    assertEquals("message test", fileUIActivity.getMessage());
     activityParameters.put(FileUIActivity.MESSAGE, activityTitle);
     activityBuilder.extendUIActivity(fileUIActivity, activity);
-
     assertEquals(activityTitle, fileUIActivity.getMessage());
   }
 
