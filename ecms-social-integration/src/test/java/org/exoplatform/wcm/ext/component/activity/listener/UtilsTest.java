@@ -9,6 +9,8 @@ import javax.jcr.Node;
 
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
+import org.exoplatform.social.core.identity.model.Identity;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -42,15 +44,15 @@ public class UtilsTest {
     ActivityCommonService activityCommonService = mock(ActivityCommonService.class);
     SpaceService spaceService = mock(SpaceService.class);
     PowerMockito.mockStatic(CommonsUtils.class);
-    when(activityManager.isActivityTypeEnabled(anyString())).thenReturn(true);
+    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
     when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
     when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
     when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
     when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(anyString())).thenReturn(null);
+    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
 
     PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), anyString(), anyBoolean(), anyBoolean(), anyString(), anyString())).thenCallRealMethod();
+    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
 
     Utils spy = PowerMockito.spy(new Utils());
     PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
@@ -68,7 +70,7 @@ public class UtilsTest {
                                            boolean.class,
                                            String.class,
                                            String.class))
-                .withArguments(any(), anyString(), any(), anyString(), anyString(), anyBoolean(), anyString(), anyString())
+                .withArguments(any(), nullable(String.class), any(), nullable(String.class), nullable(String.class), anyBoolean(), nullable(String.class), nullable(String.class))
                 .thenReturn(new ExoSocialActivityImpl());
 
     ExtendedNode node = mock(ExtendedNode.class);
@@ -80,7 +82,7 @@ public class UtilsTest {
     Utils.postFileActivity(node, null, false, false, "", "");
 
     // Then
-    verify(activityManager, times(1)).saveActivityNoReturn(any(), any(ExoSocialActivity.class));
+    verify(activityManager, times(1)).saveActivityNoReturn(nullable(Identity.class), any(ExoSocialActivity.class));
   }
 
   @Test
@@ -92,14 +94,14 @@ public class UtilsTest {
     SpaceService spaceService = mock(SpaceService.class);
     PowerMockito.mockStatic(CommonsUtils.class);
     when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
-    when(activityManager.isActivityTypeEnabled(anyString())).thenReturn(true);
+    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
     when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
     when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
     when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(anyString())).thenReturn(null);
+    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
 
     PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), anyString(), anyBoolean(), anyBoolean(), anyString(), anyString())).thenCallRealMethod();
+    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
 
     Utils spy = PowerMockito.spy(new Utils());
     PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
@@ -129,11 +131,11 @@ public class UtilsTest {
     when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
     when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
     when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(anyString())).thenReturn(null);
+    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
 
     PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), anyString(), anyBoolean(), anyBoolean(), anyString(), anyString())).thenCallRealMethod();
-    when(Utils.postActivity(any(), anyString(), anyBoolean(), anyBoolean(), anyString(), anyString())).thenCallRealMethod();
+    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
+    when(Utils.postActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
 
     Utils spy = PowerMockito.spy(new Utils());
     PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
@@ -151,7 +153,7 @@ public class UtilsTest {
                                            boolean.class,
                                            String.class,
                                            String.class))
-                .withArguments(any(), anyString(), any(), anyString(), anyString(), anyBoolean(), anyString(), anyString())
+                .withArguments(any(), nullable(String.class), any(), nullable(String.class), nullable(String.class), anyBoolean(), nullable(String.class), nullable(String.class))
                 .thenReturn(new ExoSocialActivityImpl());
 
     ExtendedNode node = mock(ExtendedNode.class);
@@ -161,7 +163,7 @@ public class UtilsTest {
 
     //Enable activity type
     ActivityManager activityManager = mock(ActivityManager.class);
-    when(activityManager.isActivityTypeEnabled(anyString())).thenReturn(true);
+    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
     when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
 
     // Check File activity when it is disabled
@@ -169,16 +171,16 @@ public class UtilsTest {
     Utils.postFileActivity(node, null, false, false, "", "");
 
     // Then
-    verify(activityManager, times(1)).saveActivityNoReturn(any(), any(ExoSocialActivity.class));
+    verify(activityManager, times(1)).saveActivityNoReturn(nullable(Identity.class), any(ExoSocialActivity.class));
 
     // Check Content activity when it is disabled
     // When
     reset(activityManager);
-    when(activityManager.isActivityTypeEnabled(anyString())).thenReturn(true);
+    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
     Utils.postActivity(node, null, false, false, "", "");
 
     // Then
-    verify(activityManager, times(1)).saveActivityNoReturn(any(), any(ExoSocialActivity.class));
+    verify(activityManager, times(1)).saveActivityNoReturn(nullable(Identity.class), any(ExoSocialActivity.class));
   }
   @Test
   public void checkPostActivityIfActivityTypeIsDisabled() throws Exception {
@@ -190,11 +192,11 @@ public class UtilsTest {
     when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
     when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
     when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(anyString())).thenReturn(null);
+    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
 
     PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), anyString(), anyBoolean(), anyBoolean(), anyString(), anyString())).thenCallRealMethod();
-    when(Utils.postActivity(any(), anyString(), anyBoolean(), anyBoolean(), anyString(), anyString())).thenCallRealMethod();
+    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
+    when(Utils.postActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
 
     Utils spy = PowerMockito.spy(new Utils());
     PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
@@ -212,7 +214,7 @@ public class UtilsTest {
                     boolean.class,
                     String.class,
                     String.class))
-            .withArguments(any(), anyString(), any(), anyString(), anyString(), anyBoolean(), anyString(), anyString())
+            .withArguments(any(), nullable(String.class), any(), nullable(String.class), nullable(String.class), anyBoolean(), nullable(String.class), nullable(String.class))
             .thenReturn(new ExoSocialActivityImpl());
 
     ExtendedNode node = mock(ExtendedNode.class);
@@ -222,7 +224,7 @@ public class UtilsTest {
 
     //Disable activity type
     ActivityManager activityManager = mock(ActivityManager.class);
-    when(activityManager.isActivityTypeEnabled(anyString())).thenReturn(false);
+    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(false);
     when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
 
     // Check File activity when it is disabled

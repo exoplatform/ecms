@@ -45,12 +45,8 @@ import javax.jcr.RepositoryException;
 import java.util.Collection;
 import java.util.Iterator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(WCMCoreUtils.class)
@@ -207,7 +203,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_EMPTY);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_EMPTY);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -224,7 +220,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_ONE_DOC);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -246,7 +242,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_TWO_DOCS);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_TWO_DOCS);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -274,7 +270,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_ONE_DOC);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -296,7 +292,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_IS_INDEXED);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_IS_INDEXED);
     
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
     
@@ -313,7 +309,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(anyString(), anyString(), anyString())).thenReturn(ES_RESPONSE_IS_NOT_INDEXED);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_IS_NOT_INDEXED);
     
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
     

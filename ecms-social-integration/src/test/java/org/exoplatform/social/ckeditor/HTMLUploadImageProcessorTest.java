@@ -1,11 +1,8 @@
 package org.exoplatform.social.ckeditor;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -90,7 +87,7 @@ public class HTMLUploadImageProcessorTest {
     Workspace workspace = mock(Workspace.class);
     when(session.getWorkspace()).thenReturn(workspace);
     when(workspace.getName()).thenReturn("collaboration");
-    when(node.getPath()).thenReturn("/path/to/image.png");
+    lenient().when(node.getPath()).thenReturn("/path/to/image.png");
 
     // When
     String processedContent = imageProcessor.processImages(content, node, null);

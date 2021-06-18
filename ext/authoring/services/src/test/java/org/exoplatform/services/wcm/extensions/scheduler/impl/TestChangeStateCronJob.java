@@ -28,6 +28,7 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.quartz.*;
@@ -39,6 +40,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import static org.powermock.api.mockito.PowerMockito.*;
 
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore("javax.management.*")
 @PrepareForTest(value = { ChangeStateCronJobImpl.class, SessionProvider.class, WCMCoreUtils.class })
 public class TestChangeStateCronJob {
 
@@ -121,8 +123,8 @@ public class TestChangeStateCronJob {
       @Override
       public Object answer(InvocationOnMock invocation) throws Throwable {
         String methodName = invocation.getMethod().getName();
-        if (StringUtils.equals(methodName, "getService") && invocation.getArgumentAt(0, Class.class) != null) {
-          Class<?> serviceClass = invocation.getArgumentAt(0, Class.class);
+        if (StringUtils.equals(methodName, "getService") && invocation.getArgument(0, Class.class) != null) {
+          Class<?> serviceClass = invocation.getArgument(0, Class.class);
           if (serviceClass.equals(TrashService.class)) {
             return new TrashService() {
               @Override
