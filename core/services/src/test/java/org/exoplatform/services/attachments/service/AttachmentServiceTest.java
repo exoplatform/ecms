@@ -1,16 +1,21 @@
 package org.exoplatform.services.attachments.service;
 
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
+import java.util.*;
+
+import javax.jcr.*;
+
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import org.exoplatform.commons.testing.BaseExoTestCase;
 import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.component.test.ConfigurationUnit;
-import org.exoplatform.component.test.ConfiguredBy;
-import org.exoplatform.component.test.ContainerScope;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
+import org.exoplatform.component.test.*;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -22,21 +27,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import javax.jcr.Node;
-import javax.jcr.Property;
-import javax.jcr.Session;
-import javax.jcr.Workspace;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 @ConfiguredBy({
         @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
@@ -129,52 +119,52 @@ public class AttachmentServiceTest extends BaseExoTestCase {
 
     //when
     when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
-    when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
+    lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
     when(repositoryEntry.getDefaultWorkspaceName()).thenReturn("collaboration");
     when(sessionProvider.getSession(any(), any())).thenReturn(session);
 
     ManageableRepository manageableRepository = repositoryService.getRepository("repository");
-    Mockito.when(repositoryService.getRepository(Mockito.anyString())).thenReturn(manageableRepository);
+    lenient().when(repositoryService.getRepository(Mockito.anyString())).thenReturn(manageableRepository);
     Node node1 = mock(Node.class);
     Node nodeContent1 = mock(Node.class);
     Property property = mock(Property.class);
     when(session.getNodeByUUID(anyString())).thenReturn(node1);
     Workspace workSpace = mock(Workspace.class);
     when(session.getWorkspace()).thenReturn(workSpace);
-    when(node1.getSession()).thenReturn(session);
-    when(node1.getProperty(anyString())).thenReturn(property);
-    when(node1.getNode(anyString())).thenReturn(nodeContent1);
-    when(nodeContent1.getProperty(anyString())).thenReturn(property);
-    when(property.getDate()).thenReturn(Calendar.getInstance());
-    when(property.getLong()).thenReturn((long) 1);
-    Mockito.when(session.getNodeByUUID(String.valueOf(1))).thenReturn(node1);
+    lenient().when(node1.getSession()).thenReturn(session);
+    lenient().when(node1.getProperty(anyString())).thenReturn(property);
+    lenient().when(node1.getNode(anyString())).thenReturn(nodeContent1);
+    lenient().when(nodeContent1.getProperty(anyString())).thenReturn(property);
+    lenient().when(property.getDate()).thenReturn(Calendar.getInstance());
+    lenient().when(property.getLong()).thenReturn((long) 1);
+    lenient().when(session.getNodeByUUID(String.valueOf(1))).thenReturn(node1);
 
     Node node2 = mock(Node.class);
     Node nodeContent2 = mock(Node.class);
     Property property2 = mock(Property.class);
     when(session.getNodeByUUID(anyString())).thenReturn(node2);
     when(session.getWorkspace()).thenReturn(workSpace);
-    when(node2.getSession()).thenReturn(session);
-    when(node2.getProperty(anyString())).thenReturn(property);
-    when(node2.getNode(anyString())).thenReturn(nodeContent2);
-    when(nodeContent2.getProperty(anyString())).thenReturn(property);
-    when(property2.getDate()).thenReturn(Calendar.getInstance());
-    when(property2.getLong()).thenReturn((long) 2);
-    Mockito.when(session.getNodeByUUID(String.valueOf(2))).thenReturn(node2);
+    lenient().when(node2.getSession()).thenReturn(session);
+    lenient().when(node2.getProperty(anyString())).thenReturn(property);
+    lenient().when(node2.getNode(anyString())).thenReturn(nodeContent2);
+    lenient().when(nodeContent2.getProperty(anyString())).thenReturn(property);
+    lenient().when(property2.getDate()).thenReturn(Calendar.getInstance());
+    lenient().when(property2.getLong()).thenReturn((long) 2);
+    lenient().when(session.getNodeByUUID(String.valueOf(2))).thenReturn(node2);
 
     Node node3 = mock(Node.class);
     Node nodeContent3 = mock(Node.class);
     Property property3 = mock(Property.class);
     when(session.getNodeByUUID(anyString())).thenReturn(node3);
-    when(session.getWorkspace()).thenReturn(workSpace);
-    when(node3.getSession()).thenReturn(session);
-    when(node3.getProperty(anyString())).thenReturn(property);
+    lenient().when(session.getWorkspace()).thenReturn(workSpace);
+    lenient().when(node3.getSession()).thenReturn(session);
+    lenient().when(node3.getProperty(anyString())).thenReturn(property);
     when(node3.getNode(anyString())).thenReturn(nodeContent3);
     when(nodeContent3.getProperty(anyString())).thenReturn(property);
-    when(property3.getDate()).thenReturn(Calendar.getInstance());
-    when(property3.getLong()).thenReturn((long) 3);
+    lenient().when(property3.getDate()).thenReturn(Calendar.getInstance());
+    lenient().when(property3.getLong()).thenReturn((long) 3);
     Mockito.when(session.getNodeByUUID(String.valueOf(3))).thenReturn(node3);
 
     String username = "testuser";

@@ -316,21 +316,21 @@ public class OneDriveFileAPITest {
     }
 
 
-    private class DriveItemArgumentMatcher extends ArgumentMatcher<DriveItem> {
+    private class DriveItemArgumentMatcher implements ArgumentMatcher<DriveItem> {
         DriveItem driveItem;
         public  DriveItemArgumentMatcher(DriveItem driveItem){
             this.driveItem =  driveItem;
         }
         @Override
-        public boolean matches(Object o) {
-            if(driveItem==o) return true;
-            DriveItem item = (DriveItem) o;
-            return driveItem.id.equals(item.id) &&
-                    driveItem.name.equals(item.name) &&
+        public boolean matches(DriveItem item) {
+          if (driveItem == item) {
+            return true;
+          }
+          return driveItem.id.equals(item.id) &&
+              driveItem.name.equals(item.name) &&
 
-                    driveItem.parentReference.id.equals(item.parentReference.id) &&
-                    driveItem.fileSystemInfo.lastModifiedDateTime.equals(item.fileSystemInfo.lastModifiedDateTime);
-
+              driveItem.parentReference.id.equals(item.parentReference.id) &&
+              driveItem.fileSystemInfo.lastModifiedDateTime.equals(item.fileSystemInfo.lastModifiedDateTime);
 
         }
     }
