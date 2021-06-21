@@ -55,7 +55,7 @@ export default {
     },
     pathDestinationFolder: {
       type: Object,
-      default: () =>  null
+      default: () => null
     },
   },
   data() {
@@ -76,10 +76,13 @@ export default {
     maxFileSizeErrorLabel: function () {
       return this.$t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
+    uploadFinished() {
+      return this.newUploadedFiles.every(file => file.uploadProgress && file.uploadProgress === 100);
+    },
   },
   watch: {
-    uploadingCount(newValue) {
-      if (newValue === 0) {
+    uploadFinished() {
+      if (this.uploadFinished && this.uploadingCount === 0) {
         this.$root.$emit('link-new-added-attachments', this.newUploadedFiles);
         this.newUploadedFiles = [];
       }
@@ -93,7 +96,7 @@ export default {
   methods: {
     initDragAndDropEvents() {
       this.$nextTick(() => {
-        if (!this.dragAndDropEventListenerInitialized){
+        if (!this.dragAndDropEventListenerInitialized) {
           ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function (evt) {
 
             /*
@@ -164,52 +167,48 @@ export default {
         });
       });
 
-      this.uploadMode = 'temp';
       newAttachedFiles.forEach(newFile => {
         this.queueUpload(newFile);
       });
       this.$refs.uploadInput.value = null;
     },
     queueUpload: function (file) {
-      if (this.uploadMode === 'temp') {
-        if (this.attachments.length >= this.maxFilesCount) {
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.maxFileCountErrorLabel,
-            type: 'error',
-          });
-          return;
-        }
-
-        const fileSizeInMb = file.size / this.BYTES_IN_MB;
-        if (fileSizeInMb > this.maxFileSize) {
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.maxFileSizeErrorLabel,
-            type: 'error',
-          });
-          return;
-        }
-        const fileExists = this.attachments.some(f => f.name === file.name);
-        if (fileExists) {
-          const sameFileErrorMessage = this. $t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
-          this.$root.$emit('attachments-notification-alert', {
-            message: sameFileErrorMessage,
-            type: 'error',
-          });
-          return;
-        }
-
-        this.$root.$emit('add-new-uploaded-file', file);
-        this.newUploadedFiles.push(file);
+      if (this.attachments.length >= this.maxFilesCount) {
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.maxFileCountErrorLabel,
+          type: 'error',
+        });
+        return;
       }
+
+      const fileSizeInMb = file.size / this.BYTES_IN_MB;
+      if (fileSizeInMb > this.maxFileSize) {
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.maxFileSizeErrorLabel,
+          type: 'error',
+        });
+        return;
+      }
+      const fileExists = this.attachments.some(f => f.name === file.name);
+      if (fileExists) {
+        const sameFileErrorMessage = this.$t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
+        this.$root.$emit('attachments-notification-alert', {
+          message: sameFileErrorMessage,
+          type: 'error',
+        });
+        return;
+      }
+
+      this.$root.$emit('add-new-uploaded-file', file);
+      this.newUploadedFiles.push(file);
+
       if (this.uploadingCount < this.maxUploadInProgressCount) {
-        if (this.uploadMode === 'temp') {
-          this.sendFileToServer(file);
-        }
+        this.sendFileToServer(file);
       } else {
         this.uploadingFilesQueue.push(file);
       }
     },
-    sendFileToServer(file){
+    sendFileToServer(file) {
       this.uploadingCount++;
       this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
         .catch(error => {
@@ -221,7 +220,7 @@ export default {
         });
       this.controlUpload(file);
     },
-    controlUpload(file){
+    controlUpload(file) {
       window.setTimeout(() => {
         this.$uploadService.getUploadProgress(file.uploadId)
           .then(percent => {
@@ -244,9 +243,7 @@ export default {
     },
     processNextQueuedUpload: function () {
       if (this.uploadingFilesQueue.length > 0) {
-        if (this.uploadMode === 'temp') {
-          this.sendFileToServer(this.uploadingFilesQueue.shift());
-        }
+        this.sendFileToServer(this.uploadingFilesQueue.shift());
       }
     },
     getNewUploadId: function () {
