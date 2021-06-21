@@ -45,4 +45,23 @@
     </modifySql>
   </changeSet>
 
+  <changeSet author="attachments" id="1.0.0-2">
+    <customChange class="org.exoplatform.services.attachments.liquibase.DropDuplicateAndNullAttachmentIds">
+      <param name="tableName">EXO_ATTACHMENTS_CONTEXT</param>
+    </customChange>
+  </changeSet>
+
+  <changeSet author="attachments" id="1.0.0-3">
+    <addNotNullConstraint columnName="ATTACHMENT_ID"
+                          constraintName="ATTACHMENTS_CONTEXT_ID_NON_NULL"
+                          columnDataType="NVARCHAR(200)"
+                          tableName="EXO_ATTACHMENTS_CONTEXT"/>
+  </changeSet>
+
+  <changeSet author="attachments" id="1.0.0-4">
+    <addUniqueConstraint constraintName="UNIQUE_ATTACHMENT_ID"
+                         tableName="EXO_ATTACHMENTS_CONTEXT"
+                         columnNames="ATTACHMENT_ID, ENTITY_ID, ENTITY_TYPE"/>
+  </changeSet>
+
 </databaseChangeLog>
