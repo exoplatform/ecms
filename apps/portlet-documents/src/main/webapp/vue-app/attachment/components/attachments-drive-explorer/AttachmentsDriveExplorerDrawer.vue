@@ -314,6 +314,7 @@
         </v-btn>
         <v-btn
           class="btn btn-primary"
+          :disabled="!selectFromDrivesEnabled"
           @click="selectActionDriveExplorerDrawer()">
           {{ $t('attachments.drawer.select') }}
         </v-btn>
@@ -468,8 +469,11 @@ export default {
       });
       return drivesByTypes;
     },
+    selectedFilesCount() {
+      return (this.attachedFiles.length + this.selectedFiles.length) - this.removedFiles.length ;
+    },
     filesCountLeft() {
-      return this.maxFilesCount - this.selectedFiles.length;
+      return this.maxFilesCount - this.selectedFilesCount;
     },
     emptyFolder() {
       return this.files.length === 0 && this.folders.length === 0 && this.drivers.length === 0 && !this.loadingFolders;
@@ -490,6 +494,9 @@ export default {
     },
     driveExplorerDrawerTitle() {
       return this.modeFolderSelection ? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.existingUploads');
+    },
+    selectFromDrivesEnabled() {
+      return this.selectedFiles && !!this.selectedFiles.length || this.removedFiles && !!this.removedFiles.length;
     }
   },
   watch: {

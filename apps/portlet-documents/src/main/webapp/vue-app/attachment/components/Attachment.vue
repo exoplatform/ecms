@@ -206,10 +206,10 @@ export default {
       }
     },
     updateAttachmentsFromDrives(selectedFromDrives, removedFilesFromDrive) {
-      if (selectedFromDrives) {
+      if (selectedFromDrives.length) {
         this.attachments.push(...selectedFromDrives);
       }
-      if (removedFilesFromDrive) {
+      if (removedFilesFromDrive.length) {
         removedFilesFromDrive.forEach(attachment => {
           const attachmentIndex = this.attachments.findIndex(file => file.id === attachment.id);
           if (attachmentIndex !== -1) {

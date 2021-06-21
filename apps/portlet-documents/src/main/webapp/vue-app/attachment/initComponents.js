@@ -26,14 +26,13 @@ const components = {
   'attachments-list-drawer': AttachmentsListDrawer,
   'attachments-uploaded-files': AttachmentsUploadedFiles,
   'attachments-upload-input': AttachmentsUploadInput,
+  'activity-attachments': ActivityAttachments,
+  'activity-attachment': ActivityAttachment,
 };
 
 for (const key in components) {
   Vue.component(key, components[key]);
 }
-
-Vue.component('activity-attachments', ActivityAttachments);
-Vue.component('activity-attachment', ActivityAttachment);
 
 import * as attachmentService from '../../js/attachmentService.js';
 

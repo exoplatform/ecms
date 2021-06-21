@@ -92,7 +92,9 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (userIdentity == null) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
-    attachmentStorage.linkAttachmentsToEntity(entityId, entityType, attachmentsIds);
+
+    List<String> attachmentIds = attachmentsIds.stream().filter(StringUtils::isNotEmpty).collect(Collectors.toList());
+    attachmentStorage.linkAttachmentsToEntity(entityId, entityType, attachmentIds);
   }
 
   @Override
@@ -122,7 +124,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       deleteAllEntityAttachments(userIdentityId, entityId, entityType);
     } else {
       for (String attachmentId : existingAttachmentsIds) {
-        if (!attachmentIds.contains(attachmentId)) {
+        if (!attachmentIds.contains(attachmentId) || StringUtils.isEmpty(attachmentId)) {
           deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
         }
       }
@@ -131,7 +133,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     // attach new added files
     if (attachmentIds != null && !attachmentIds.isEmpty()) {
       for (String attachmentId : attachmentIds) {
-        if (!existingAttachmentsIds.contains(attachmentId)) {
+        if (!existingAttachmentsIds.contains(attachmentId) && StringUtils.isNotEmpty(attachmentId)) {
           linkAttachmentsToEntity(userIdentityId, entityId, entityType, Collections.singletonList(attachmentId));
         }
       }
