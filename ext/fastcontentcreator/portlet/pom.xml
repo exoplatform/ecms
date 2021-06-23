@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-ext-fastcontentcreator</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.2.x-SNAPSHOT</version>
+    <version>6.2.0-20210623</version>
   </parent>
   <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
   <packaging>war</packaging>
