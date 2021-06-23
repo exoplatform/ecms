@@ -16,12 +16,21 @@
  */
 package org.exoplatform.services.rest;
 
-import io.swagger.annotations.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
-import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
@@ -34,16 +43,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import io.swagger.annotations.*;
 
 @Path("/attachments")
-@Api(value = "/attachments", description = "Managing attachments")
+@Api(value = "/attachments", description = "Managing attachments") // NOSONAR deprecated attribute
 public class AttachmentsRestService implements ResourceContainer {
   private static final Log    LOG = ExoLogger.getLogger(AttachmentsRestService.class.getName());
 
@@ -68,7 +71,7 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response linkAttachmentsToEntity(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                           @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                          @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @QueryParam("attachmentIds") List<String> attachmentIds) throws Exception {
+                                          @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @QueryParam("attachmentIds") List<String> attachmentIds) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -102,7 +105,7 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response updateAttachmentsLinkedToContext(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                                    @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                                   @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @QueryParam("attachmentIds") List<String> attachmentIds) throws Exception {
+                                                   @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @QueryParam("attachmentIds") List<String> attachmentIds) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -179,7 +182,11 @@ public class AttachmentsRestService implements ResourceContainer {
     }
     try {
       Attachment attachment = attachmentService.getAttachmentById(attachmentId, WCMCoreUtils.getUserSessionProvider());
-      return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+      if (attachment == null) {
+        return Response.status(Status.NOT_FOUND).build();
+      } else {
+        return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+      }
     } catch (Exception e) {
       LOG.error("Error when trying to get attachment with id {}: ", attachmentId, e);
       return Response.serverError().build();
@@ -195,8 +202,8 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response DeleteAttachmentsByEntity(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                            @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
+  public Response deleteAttachmentsByEntity(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                            @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -227,9 +234,9 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response DeleteEntityAttachment(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+  public Response deleteEntityAttachment(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                          @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType,
-                                         @ApiParam(value = "Attachment id", required = true) @PathParam("attachmentId") String attachmentId) throws Exception {
+                                         @ApiParam(value = "Attachment id", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
