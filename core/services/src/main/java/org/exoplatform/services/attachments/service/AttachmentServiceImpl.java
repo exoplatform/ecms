@@ -16,31 +16,27 @@
  */
 package org.exoplatform.services.attachments.service;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import javax.jcr.Session;
+
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.commons.exception.ObjectNotFoundException;
+import org.exoplatform.services.attachments.model.*;
 import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
-import org.exoplatform.services.attachments.model.Attachment;
-import org.exoplatform.services.attachments.model.AttachmentContextEntity;
-import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
 
-import javax.jcr.Session;
-import java.util.*;
-import java.util.stream.Collectors;
-
 public class AttachmentServiceImpl implements AttachmentService {
-
-  private static final Log                 LOG        = ExoLogger.getLogger(AttachmentServiceImpl.class.getName());
 
   private RepositoryService                repositoryService;
 
@@ -247,22 +243,18 @@ public class AttachmentServiceImpl implements AttachmentService {
       String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       Session session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());
       try {
-        attachmentsContextEntity.forEach(attachmentContextEntity -> {
-          try {
-            Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
-                                                                     documentService,
-                                                                     workspace,
-                                                                     session,
-                                                                     attachmentContextEntity.getAttachmentId());
-            boolean canView = canView(userIdentityId, entityType, entityId);
-            boolean canDelete = canDelete(userIdentityId, entityType, entityId);
-            Permission attachmentACL = new Permission(canView, canDelete);
-            attachment.setAcl(attachmentACL);
-            attachments.add(attachment);
-          } catch (Exception e) {
-            LOG.error("Cannot get attachment with id {} of entity {} with id {}", attachmentContextEntity.getAttachmentId(), entityType, entityId, e);
-          }
-        });
+        for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
+          Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
+                                                                   documentService,
+                                                                   workspace,
+                                                                   session,
+                                                                   attachmentContextEntity.getAttachmentId());
+          boolean canView = canView(userIdentityId, entityType, entityId);
+          boolean canDelete = canDelete(userIdentityId, entityType, entityId);
+          Permission attachmentACL = new Permission(canView, canDelete);
+          attachment.setAcl(attachmentACL);
+          attachments.add(attachment);
+        }
       } finally {
         if (session != null) {
           session.logout();
@@ -273,11 +265,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) throws IllegalAccessException {
-    if (StringUtils.isBlank(attachmentId)) {
-      throw new IllegalAccessException("AttachmentId must not be empty");
-    }
-
+  public Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) throws Exception {
     Session session = null;
     try {
       String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
@@ -287,14 +275,11 @@ public class AttachmentServiceImpl implements AttachmentService {
                                               workspace,
                                               session,
                                               attachmentId);
-    } catch (Exception e) {
-      LOG.error("Cannot get attachment with id {}", attachmentId, e);
     } finally {
       if (session != null) {
         session.logout();
       }
     }
-    return null;
   }
 
   public void addACLPlugin(AttachmentACLPlugin aclPlugin) {

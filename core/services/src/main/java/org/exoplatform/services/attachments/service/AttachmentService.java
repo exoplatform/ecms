@@ -26,7 +26,7 @@ public interface AttachmentService {
 
   List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws Exception;
 
-  Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) throws IllegalAccessException;
+  Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) throws Exception;
 
   void linkAttachmentsToEntity(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws IllegalAccessException;
 

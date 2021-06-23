@@ -21,12 +21,15 @@ export default {
   },
   computed: {
     attachments() {
-      if (!this.activity) {
+      if (!this.activity || !this.activity.templateParams) {
         return [];
       }
-      const repositories = this.splitParam('REPOSITORY');
-      const workspaces = this.splitParam('WORKSPACE');
-      const docPaths = this.splitParam('DOCPATH');
+      const repositories = this.activity.templateParams.REPOSITORY && this.splitParam('REPOSITORY')
+                        || (this.activity.templateParams.repository && [this.activity.templateParams.repository]);
+      const workspaces = this.activity.templateParams.WORKSPACE && this.splitParam('WORKSPACE')
+                        || (this.activity.templateParams.workspace && [this.activity.templateParams.workspace]);
+      const docPaths = this.activity.templateParams.DOCPATH && this.splitParam('DOCPATH')
+                        || (this.activity.templateParams.nodePath && [this.activity.templateParams.nodePath]);
       const ids = this.splitParam('id');
       const mimeTypes = this.splitParam('mimeType');
 
