@@ -25,12 +25,12 @@ export function installExtensions() {
       attachmentsComponent.toggleAttachmentsDrawer();
     }
   });
-  
+
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
     id: 'attachments',
     isEnabled: (params) => {
       const activity = params && params.activity;
-      return activity && activity.templateParams && activity.templateParams.DOCPATH;
+      return activity && activity.templateParams && (activity.templateParams.DOCPATH || activity.templateParams.nodePath);
     },
     vueComponent: Vue.options.components['activity-attachments'],
     rank: 10,
