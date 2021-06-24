@@ -394,8 +394,14 @@ export default {
       return this.$attachmentService.linkUploadedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
-      }).finally(() => {
         this.displaySuccessMessage();
+      }).catch(e => {
+        console.error(e);
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.$t('attachments.link.failed'),
+          type: 'error',
+        });
+      }).finally(() => {
         this.$refs.attachmentsAppDrawer.endLoading();
       });
     },
@@ -405,8 +411,14 @@ export default {
       return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
-      }).finally(() => {
         this.displaySuccessMessage();
+      }).catch(e => {
+        console.error(e);
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.$t('attachments.link.failed'),
+          type: 'error',
+        });
+      }).finally(() => {
         this.$refs.attachmentsAppDrawer.endLoading();
       });
     },

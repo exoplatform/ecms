@@ -141,6 +141,12 @@ export default {
           });
           this.$root.$emit('entity-attachments-updated');
           this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.endLoading();
+        }).catch(e => {
+          console.error(e);
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.$t('attachments.delete.failed').replace('{0}', file.name),
+            type: 'error',
+          });
         });
       }
     },

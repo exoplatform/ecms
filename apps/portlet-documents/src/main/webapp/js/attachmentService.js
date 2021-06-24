@@ -190,6 +190,11 @@ export function uploadAttachment(workspaceName, driveName, currentFolder, curren
 }
 
 export function linkUploadedAttachmentsToEntity(entityId, entityType, attachmentIds) {
+  attachmentIds.forEach(attachmentId => {
+    if (!attachmentId) {
+      throw new Error('Attachment Id can\'t be empty');
+    }
+  });
   let params = {};
   if (attachmentIds) {
     params.attachmentIds = attachmentIds;
@@ -207,6 +212,11 @@ export function linkUploadedAttachmentsToEntity(entityId, entityType, attachment
 }
 
 export function updateLinkedAttachmentsToEntity(entityId, entityType, attachmentIds) {
+  attachmentIds.forEach(attachmentId => {
+    if (!attachmentId) {
+      throw new Error('Attachment Id can\'t be empty');
+    }
+  });
   let params = {};
   if (attachmentIds) {
     params.attachmentIds = attachmentIds;
@@ -224,6 +234,9 @@ export function updateLinkedAttachmentsToEntity(entityId, entityType, attachment
 }
 
 export function removeEntityAttachment(entityId, entityType, attachmentId) {
+  if (!attachmentId) {
+    throw new Error('Attachment Id can\'t be empty');
+  }
   return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}/${attachmentId}`, {
     credentials: 'include',
     method: 'DELETE',
@@ -248,6 +261,9 @@ export function getEntityAttachments(entityType, entityId) {
 }
 
 export function getAttachmentById(attachmentId) {
+  if (!attachmentId) {
+    throw new Error('Attachment Id can\'t be empty');
+  }
   return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${attachmentId}`, {
     credentials: 'include',
     method: 'GET',
