@@ -495,8 +495,14 @@ export default {
     driveExplorerDrawerTitle() {
       return this.modeFolderSelection ? this.$t('attachments.drawer.destination.folder') : this.$t('attachments.drawer.existingUploads');
     },
+    isSelectedFromDrivesFiles() {
+      return this.selectedFiles && !!this.selectedFiles.length;
+    },
+    isRemovedFromDrivesFiles() {
+      return this.removedFiles && !!this.removedFiles.length;
+    },
     selectFromDrivesEnabled() {
-      return this.selectedFiles && !!this.selectedFiles.length || this.removedFiles && !!this.removedFiles.length;
+      return this.isSelectedFromDrivesFiles || this.isRemovedFromDrivesFiles;
     }
   },
   watch: {
@@ -542,6 +548,7 @@ export default {
       this.$refs.driveExplorerDrawer.open();
     },
     closeAttachmentsDriveExplorerDrawer() {
+      this.resetDriveExplorer();
       this.$refs.driveExplorerDrawer.close();
     },
     initDestinationFolderPath: function () {
@@ -661,18 +668,26 @@ export default {
       }
     },
     selectFile(file) {
-      if (!file.isSelected && this.filesCountLeft > 0) {
-        file.isSelected = true;
-        file.isSelectedFromDrives = true;
-        if (!this.attachedFiles.find(f => f.id === file.id)) {
-          this.selectedFiles.push({...file, space: this.fromSpace});
-        }
-      } else {
-        const index = this.attachedFiles.findIndex(f => f.id === file.id);
+      if (file.isSelected) {
         file.isSelected = false;
         file.isSelectedFromDrives = false;
-        if (index !== -1) {
+        const existingFileIndex = this.attachedFiles.findIndex(f => f.id === file.id);
+        const newlyAddedIndex = this.selectedFiles.findIndex(f => f.id === file.id);
+        if (existingFileIndex !== -1) {
           this.removedFiles.push(file);
+        } else if (newlyAddedIndex !== -1) {
+          this.selectedFiles.splice(newlyAddedIndex, 1);
+        }
+      } else if (this.filesCountLeft > 0) {
+        file.isSelected = true;
+        file.isSelectedFromDrives = true;
+        const alreadyAttachedFile = this.attachedFiles.find(f => f.id === file.id);
+        if (!alreadyAttachedFile) {
+          this.selectedFiles.push({...file, space: this.fromSpace});
+        }
+        const alreadyRemovedFileIndex = this.removedFiles.findIndex(f => f.id === file.id);
+        if (alreadyRemovedFileIndex !== -1) {
+          this.removedFiles.splice(alreadyRemovedFileIndex, 1);
         }
       }
     },
@@ -696,8 +711,7 @@ export default {
     },
     addSelectedFiles() {
       this.$root.$emit('attachments-changed-from-drives', this.selectedFiles, this.removedFiles);
-      this.selectedFiles = [];
-      this.removedFiles = [];
+      this.resetDriveExplorer();
     },
     showSearchDocumentInput() {
       this.showSearchInput = !this.showSearchInput;
@@ -1014,6 +1028,10 @@ export default {
     openSelectFromDrivesDrawer() {
       this.modeFolderSelection = false;
       this.$refs.driveExplorerDrawer.open();
+    },
+    resetDriveExplorer() {
+      this.selectedFiles = [];
+      this.removedFiles = [];
     }
   }
 };
