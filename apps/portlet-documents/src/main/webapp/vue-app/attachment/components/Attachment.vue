@@ -57,8 +57,8 @@ export default {
     this.$root.$on('add-new-uploaded-file', file => {
       this.attachments.push(file);
     });
-    this.$root.$on('attachments-changed-from-drives', attachments => {
-      this.attachments = attachments;
+    this.$root.$on('attachments-changed-from-drives', (selectedFromDrives, removedFilesFromDrive) => {
+      this.updateAttachmentsFromDrives(selectedFromDrives, removedFilesFromDrive);
     });
     this.$root.$on('remove-destination-path-for-file', (folderName, currentDrive, pathDestinationFolder) => {
       this.deleteDestinationPathForFile(folderName, currentDrive, pathDestinationFolder);
@@ -141,6 +141,12 @@ export default {
           });
           this.$root.$emit('entity-attachments-updated');
           this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.endLoading();
+        }).catch(e => {
+          console.error(e);
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.$t('attachments.delete.failed').replace('{0}', file.name),
+            type: 'error',
+          });
         });
       }
     },
@@ -205,6 +211,19 @@ export default {
         return urlParams.get(paramName);
       }
     },
+    updateAttachmentsFromDrives(selectedFromDrives, removedFilesFromDrive) {
+      if (selectedFromDrives.length) {
+        this.attachments.push(...selectedFromDrives);
+      }
+      if (removedFilesFromDrive.length) {
+        removedFilesFromDrive.forEach(attachment => {
+          const attachmentIndex = this.attachments.findIndex(file => file.id === attachment.id);
+          if (attachmentIndex !== -1) {
+            this.attachments.splice(attachmentIndex, 1);
+          }
+        });
+      }
+    }
   }
 };
 </script>

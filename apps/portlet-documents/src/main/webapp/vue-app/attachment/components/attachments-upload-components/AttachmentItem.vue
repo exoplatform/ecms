@@ -25,7 +25,7 @@
       <v-list-item-title class="uploadedFileTitle">
         {{ attachment.name }}
       </v-list-item-title>
-      <v-list-item-subtitle v-if="attachment.uploadId" class="d-flex v-messages uploadedFileSubTitle">
+      <v-list-item-subtitle v-if="attachment.uploadId && allowToRemove" class="d-flex v-messages uploadedFileSubTitle">
         <v-chip
           v-if="attachment.pathDestinationFolderForFile"
           close

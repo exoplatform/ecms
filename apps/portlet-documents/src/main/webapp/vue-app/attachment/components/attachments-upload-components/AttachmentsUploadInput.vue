@@ -55,7 +55,7 @@ export default {
     },
     pathDestinationFolder: {
       type: Object,
-      default: () =>  null
+      default: () => null
     },
   },
   data() {
@@ -66,6 +66,7 @@ export default {
       uploadingFilesQueue: [],
       uploadingCount: 0,
       maxProgress: 100,
+      newUploadedFiles: [],
     };
   },
   computed: {
@@ -73,18 +74,33 @@ export default {
       return this.$t('attachments.drawer.maxFileCount.error').replace('{0}', `<b> ${this.maxFilesCount} </b>`);
     },
     maxFileSizeErrorLabel: function () {
-      return this. $t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
+      return this.$t('attachments.drawer.maxFileSize.error').replace('{0}', `<b> ${this.maxFileSize} </b>`);
     },
+    isNewUploadedFilesEmpty() {
+      return this.newUploadedFiles && this.newUploadedFiles.length === 0;
+    },
+    uploadFinished() {
+      return !this.isNewUploadedFilesEmpty && this.newUploadedFiles.every(file => file.uploadProgress && file.uploadProgress === 100);
+    },
+  },
+  watch: {
+    uploadFinished() {
+      if (this.uploadFinished && this.uploadingCount === 0) {
+        this.$root.$emit('link-new-added-attachments');
+        this.newUploadedFiles = [];
+      }
+    }
   },
   created() {
     this.initDragAndDropEvents();
     this.$root.$on('handle-pasted-files-from-clipboard',
       pastedFiles => this.handleFileUpload(pastedFiles));
+    this.$root.$on('reset-attachments-upload-input', () => this.newUploadedFiles = []);
   },
   methods: {
     initDragAndDropEvents() {
       this.$nextTick(() => {
-        if (!this.dragAndDropEventListenerInitialized){
+        if (!this.dragAndDropEventListenerInitialized) {
           ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function (evt) {
 
             /*
@@ -136,6 +152,7 @@ export default {
         return file1.size - file2.size;
       });
 
+      this.newUploadedFiles = [];
       const newAttachedFiles = [];
       newFilesArray.forEach(file => {
         const controller = new AbortController();
@@ -155,56 +172,49 @@ export default {
         });
       });
 
-      this.uploadMode = 'temp';
       newAttachedFiles.forEach(newFile => {
         this.queueUpload(newFile);
       });
       this.$refs.uploadInput.value = null;
     },
     queueUpload: function (file) {
-      if (this.uploadMode === 'temp') {
-        if (this.attachments.length >= this.maxFilesCount) {
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.maxFileCountErrorLabel,
-            type: 'error',
-          });
-          return;
-        }
-
-        const fileSizeInMb = file.size / this.BYTES_IN_MB;
-        if (fileSizeInMb > this.maxFileSize) {
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.maxFileSizeErrorLabel,
-            type: 'error',
-          });
-          return;
-        }
-        const fileExists = this.attachments.some(f => f.name === file.name);
-        if (fileExists) {
-          const sameFileErrorMessage = this. $t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
-          this.$root.$emit('attachments-notification-alert', {
-            message: sameFileErrorMessage,
-            type: 'error',
-          });
-          return;
-        }
-
-        this.$root.$emit('add-new-uploaded-file',file);
-
+      if (this.attachments.length >= this.maxFilesCount) {
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.maxFileCountErrorLabel,
+          type: 'error',
+        });
+        return;
       }
+
+      const fileSizeInMb = file.size / this.BYTES_IN_MB;
+      if (fileSizeInMb > this.maxFileSize) {
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.maxFileSizeErrorLabel,
+          type: 'error',
+        });
+        return;
+      }
+      const fileExists = this.attachments.some(f => f.name === file.name);
+      if (fileExists) {
+        const sameFileErrorMessage = this.$t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
+        this.$root.$emit('attachments-notification-alert', {
+          message: sameFileErrorMessage,
+          type: 'error',
+        });
+        return;
+      }
+
+      this.$root.$emit('add-new-uploaded-file', file);
+      this.newUploadedFiles.push(file);
+
       if (this.uploadingCount < this.maxUploadInProgressCount) {
-        if (this.uploadMode === 'temp') {
-          this.sendFileToServer(file);
-        } else {
-          this.uploadFileToDestinationPath(file);
-        }
+        this.sendFileToServer(file);
       } else {
         this.uploadingFilesQueue.push(file);
       }
     },
-    sendFileToServer(file){
+    sendFileToServer(file) {
       this.uploadingCount++;
-      this.$emit('uploadingCountChanged', this.uploadingCount);
       this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
         .catch(error => {
           this.$root.$emit('attachments-notification-alert', {
@@ -215,16 +225,15 @@ export default {
         });
       this.controlUpload(file);
     },
-    controlUpload(file){
+    controlUpload(file) {
       window.setTimeout(() => {
         this.$uploadService.getUploadProgress(file.uploadId)
           .then(percent => {
             file.uploadProgress = Number(percent);
-            if (file.uploadProgress < 100) {
+            if (!file.uploadProgress || file.uploadProgress < 100) {
               this.controlUpload(file);
             } else {
               this.uploadingCount--;
-              this.$emit('uploadingCountChanged', this.uploadingCount);
               this.processNextQueuedUpload();
             }
           })
@@ -239,11 +248,7 @@ export default {
     },
     processNextQueuedUpload: function () {
       if (this.uploadingFilesQueue.length > 0) {
-        if (this.uploadMode === 'temp') {
-          this.sendFileToServer(this.uploadingFilesQueue.shift());
-        } else {
-          this.uploadFileToDestinationPath(this.uploadingFilesQueue.shift());
-        }
+        this.sendFileToServer(this.uploadingFilesQueue.shift());
       }
     },
     getNewUploadId: function () {

@@ -84,6 +84,12 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("attachmentsIds must not be empty");
     }
 
+    attachmentsIds.forEach(attachmentId -> {
+      if (StringUtils.isBlank(attachmentId)) {
+        throw new IllegalArgumentException("attachmentId must not be empty");
+      }
+    });
+
     if (userIdentityId <= 0) {
       throw new IllegalAccessException("User identity must be positive");
     }
@@ -92,7 +98,9 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (userIdentity == null) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
-    attachmentStorage.linkAttachmentsToEntity(entityId, entityType, attachmentsIds);
+
+    List<String> attachmentIds = attachmentsIds.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList());
+    attachmentStorage.linkAttachmentsToEntity(entityId, entityType, attachmentIds);
   }
 
   @Override
@@ -112,6 +120,12 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User identity must be positive");
     }
 
+    attachmentIds.forEach(attachmentId -> {
+      if (StringUtils.isBlank(attachmentId)) {
+        throw new IllegalArgumentException("attachmentId must not be empty");
+      }
+    });
+
     List<AttachmentContextEntity> existingAttachmentsContext =
                                                              attachmentStorage.getAttachmentContextByEntity(entityId, entityType);
     List<String> existingAttachmentsIds = existingAttachmentsContext.stream()
@@ -122,7 +136,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       deleteAllEntityAttachments(userIdentityId, entityId, entityType);
     } else {
       for (String attachmentId : existingAttachmentsIds) {
-        if (!attachmentIds.contains(attachmentId)) {
+        if (!attachmentIds.contains(attachmentId) || StringUtils.isEmpty(attachmentId)) {
           deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
         }
       }
@@ -131,7 +145,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     // attach new added files
     if (attachmentIds != null && !attachmentIds.isEmpty()) {
       for (String attachmentId : attachmentIds) {
-        if (!existingAttachmentsIds.contains(attachmentId)) {
+        if (!existingAttachmentsIds.contains(attachmentId) && StringUtils.isNotEmpty(attachmentId)) {
           linkAttachmentsToEntity(userIdentityId, entityId, entityType, Collections.singletonList(attachmentId));
         }
       }
@@ -191,6 +205,10 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User identity must be positive");
     }
 
+    if (StringUtils.isBlank(attachmentId)) {
+      throw new IllegalAccessException("AttachmentId must not be empty");
+    }
+
     Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
     boolean canDelete = canDelete(userIdentityId, entityType, entityId);
     if (userIdentity == null || !canDelete) {
@@ -212,6 +230,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id should be positive");
     }
+
     if (StringUtils.isEmpty(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
@@ -254,7 +273,11 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) {
+  public Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) throws IllegalAccessException {
+    if (StringUtils.isBlank(attachmentId)) {
+      throw new IllegalAccessException("AttachmentId must not be empty");
+    }
+
     Session session = null;
     try {
       String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
