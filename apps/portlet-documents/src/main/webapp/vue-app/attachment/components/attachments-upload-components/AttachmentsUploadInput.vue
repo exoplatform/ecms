@@ -94,10 +94,14 @@ export default {
   },
   created() {
     this.initDragAndDropEvents();
-    this.$root.$on('handle-pasted-files-from-clipboard',
-      pastedFiles => this.handleFileUpload(pastedFiles));
+    this.$root.$on('handle-pasted-files-from-clipboard', this.handleFileUpload);
     this.$root.$on('reset-attachments-upload-input', () => this.resetUploadInput());
     this.$root.$on('abort-attachments-new-upload', () => this.abortUploadingNewAttachments());
+  },
+  beforeDestroy() {
+    this.$root.$off('handle-pasted-files-from-clipboard', this.handleFileUpload);
+    this.$root.$off('reset-attachments-upload-input', this.resetUploadInput);
+    this.$root.$off('abort-attachments-new-upload', this.abortUploadingNewAttachments);
   },
   methods: {
     initDragAndDropEvents() {
