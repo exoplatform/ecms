@@ -67,6 +67,7 @@ export default {
       uploadingCount: 0,
       maxProgress: 100,
       newUploadedFiles: [],
+      abortUploading: false,
     };
   },
   computed: {
@@ -93,9 +94,14 @@ export default {
   },
   created() {
     this.initDragAndDropEvents();
-    this.$root.$on('handle-pasted-files-from-clipboard',
-      pastedFiles => this.handleFileUpload(pastedFiles));
-    this.$root.$on('reset-attachments-upload-input', () => this.newUploadedFiles = []);
+    this.$root.$on('handle-pasted-files-from-clipboard', this.handleFileUpload);
+    this.$root.$on('reset-attachments-upload-input', () => this.resetUploadInput());
+    this.$root.$on('abort-attachments-new-upload', () => this.abortUploadingNewAttachments());
+  },
+  beforeDestroy() {
+    this.$root.$off('handle-pasted-files-from-clipboard', this.handleFileUpload);
+    this.$root.$off('reset-attachments-upload-input', this.resetUploadInput);
+    this.$root.$off('abort-attachments-new-upload', this.abortUploadingNewAttachments);
   },
   methods: {
     initDragAndDropEvents() {
@@ -146,6 +152,7 @@ export default {
       this.$refs.uploadInput.click();
     },
     handleFileUpload: function (files) {
+      this.abortUploading = false;
       const newFilesArray = Array.from(files);
 
       newFilesArray.sort(function (file1, file2) {
@@ -229,12 +236,16 @@ export default {
       window.setTimeout(() => {
         this.$uploadService.getUploadProgress(file.uploadId)
           .then(percent => {
-            file.uploadProgress = Number(percent);
-            if (!file.uploadProgress || file.uploadProgress < 100) {
-              this.controlUpload(file);
+            if (this.abortUploading) {
+              return;
             } else {
-              this.uploadingCount--;
-              this.processNextQueuedUpload();
+              file.uploadProgress = Number(percent);
+              if (!file.uploadProgress || file.uploadProgress < 100) {
+                this.controlUpload(file);
+              } else {
+                this.uploadingCount--;
+                this.processNextQueuedUpload();
+              }
             }
           })
           .catch(error => {
@@ -257,6 +268,14 @@ export default {
     },
     removeAttachedFile(file) {
       this.$root.$emit('remove-attachment-item', file);
+    },
+    resetUploadInput() {
+      this.newUploadedFiles = [];
+      this.uploadingCount = 0;
+    },
+    abortUploadingNewAttachments() {
+      this.resetUploadInput();
+      this.abortUploading = true;
     }
   }
 };
