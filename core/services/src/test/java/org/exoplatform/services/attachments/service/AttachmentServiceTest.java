@@ -7,6 +7,9 @@ import java.util.*;
 
 import javax.jcr.*;
 
+import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -28,47 +31,62 @@ import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
-@ConfiguredBy({
-        @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/attachments/attachments-test-configuration.xml")})
+@ConfiguredBy({ @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/attachments/attachments-test-configuration.xml") })
 @RunWith(MockitoJUnitRunner.class)
 public class AttachmentServiceTest extends BaseExoTestCase {
 
   protected AttachmentService attachmentService;
 
-  AttachmentStorage attachmentStorage;
+  AttachmentStorage           attachmentStorage;
 
   @Mock
-  RepositoryService repositoryService;
+  RepositoryService           repositoryService;
 
   @Mock
-  SessionProviderService sessionProviderService;
+  SessionProviderService      sessionProviderService;
 
   @Mock
-  ManageableRepository repository;
+  ManageableRepository        repository;
 
   @Mock
-  RepositoryEntry repositoryEntry;
+  RepositoryEntry             repositoryEntry;
 
   @Mock
-  SessionProvider sessionProvider;
+  SessionProvider             sessionProvider;
 
   @Mock
-  DocumentService documentService;
-  
-  @Mock
-  IdentityManager identityManager;
+  DocumentService             documentService;
 
   @Mock
-  Session session;
+  IdentityManager             identityManager;
+
+  @Mock
+  ManageDriveService          manageDriveService;
+
+  @Mock
+  NodeHierarchyCreator        nodeHierarchyCreator;
+
+  @Mock
+  NodeFinder                  nodeFinder;
+
+  @Mock
+  Session                     session;
 
   @Before
   public void setUp() throws Exception {
     begin();
     attachmentStorage = CommonsUtils.getService(AttachmentStorage.class);
-    attachmentService = new AttachmentServiceImpl(attachmentStorage, repositoryService, sessionProviderService, documentService, identityManager);
+    attachmentService = new AttachmentServiceImpl(attachmentStorage,
+                                                  repositoryService,
+                                                  sessionProviderService,
+                                                  documentService,
+                                                  identityManager,
+                                                  manageDriveService,
+                                                  nodeHierarchyCreator,
+                                                  nodeFinder);
   }
 
   @After
@@ -79,9 +97,9 @@ public class AttachmentServiceTest extends BaseExoTestCase {
 
   @Test
   public void testLinkAttachmentsToEntity() throws Exception { // NOSONAR
-    int[] list = {-9,2,5,14,98};
+    int[] list = { -9, 2, 5, 14, 98 };
     try {
-      attachmentService.linkAttachmentsToEntity(1, 0,"", null);
+      attachmentService.linkAttachmentsToEntity(1, 0, "", null);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -89,18 +107,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
 
     try {
       List<String> attachmentsIds = new ArrayList<>();
-      attachmentService.linkAttachmentsToEntity(1, 1,"", attachmentsIds);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // Expected
-    }
-
-    try {
-      List<String> attachmentsIds = new ArrayList<>();
-      attachmentsIds.add("1");
-      attachmentsIds.add("2");
-      attachmentsIds.add("3");
-      attachmentService.linkAttachmentsToEntity(1, 5,"", attachmentsIds);
+      attachmentService.linkAttachmentsToEntity(1, 1, "", attachmentsIds);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -111,13 +118,24 @@ public class AttachmentServiceTest extends BaseExoTestCase {
       attachmentsIds.add("1");
       attachmentsIds.add("2");
       attachmentsIds.add("3");
-      attachmentService.linkAttachmentsToEntity(0, 5,"task", attachmentsIds);
+      attachmentService.linkAttachmentsToEntity(1, 5, "", attachmentsIds);
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      List<String> attachmentsIds = new ArrayList<>();
+      attachmentsIds.add("1");
+      attachmentsIds.add("2");
+      attachmentsIds.add("3");
+      attachmentService.linkAttachmentsToEntity(0, 5, "task", attachmentsIds);
       fail();
     } catch (IllegalAccessException e) {
       // Expected
     }
 
-    //when
+    // when
     when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
     lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
@@ -181,8 +199,8 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     // when
     attachmentService.linkAttachmentsToEntity(currentIdentityId, 5, "EVENT", attachmentsIds);
 
-    //then
-    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentityId,5, "EVENT");
+    // then
+    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentityId, 5, "EVENT");
     assertNotNull(attachmentsEntityStored);
     assertEquals(3, attachmentsEntityStored.size());
   }

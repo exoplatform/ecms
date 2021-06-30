@@ -19,6 +19,8 @@ package org.exoplatform.services.attachments.service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
 import javax.jcr.Session;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -29,14 +31,27 @@ import org.exoplatform.services.attachments.model.*;
 import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
+import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.clouddrives.NotFoundException;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 public class AttachmentServiceImpl implements AttachmentService {
+
+  private static final Log                 LOG        = ExoLogger.getLogger(AttachmentServiceImpl.class);
 
   private RepositoryService                repositoryService;
 
@@ -48,19 +63,31 @@ public class AttachmentServiceImpl implements AttachmentService {
 
   private IdentityManager                  identityManager;
 
+  private ManageDriveService               manageDriveService;
+
+  private NodeHierarchyCreator             nodeHierarchyCreator;
+
+  private NodeFinder                       nodeFinder;
+
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
 
   public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
                                RepositoryService repositoryService,
                                SessionProviderService sessionProviderService,
                                DocumentService documentService,
-                               IdentityManager identityManager) {
+                               IdentityManager identityManager,
+                               ManageDriveService manageDriveService,
+                               NodeHierarchyCreator nodeHierarchyCreator,
+                               NodeFinder nodeFinder) {
 
     this.attachmentStorage = attachmentStorage;
     this.repositoryService = repositoryService;
     this.sessionProviderService = sessionProviderService;
     this.documentService = documentService;
     this.identityManager = identityManager;
+    this.manageDriveService = manageDriveService;
+    this.nodeHierarchyCreator = nodeHierarchyCreator;
+    this.nodeFinder = nodeFinder;
   }
 
   @Override
@@ -255,7 +282,9 @@ public class AttachmentServiceImpl implements AttachmentService {
           attachment.setAcl(attachmentACL);
           attachments.add(attachment);
         }
-      } finally {
+      } catch (Exception e) {
+        throw new NotFoundException("Can't convert attachment JCR node to entity", e);
+      } finally{
         if (session != null) {
           session.logout();
         }
@@ -275,6 +304,41 @@ public class AttachmentServiceImpl implements AttachmentService {
                                               workspace,
                                               session,
                                               attachmentId);
+    } catch (NotFoundException e) {
+      throw new NotFoundException("Can't convert attachment JCR node with id " + attachmentId + " to entity", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+  }
+
+  @Override
+  public void moveAttachmentToNewPath(long userIdentityId,
+                                      String attachmentId,
+                                      String newPathDrive,
+                                      String newPath) throws Exception {
+    if (userIdentityId <= 0) {
+      throw new IllegalAccessException("User identity must be positive");
+    }
+    if (StringUtils.isEmpty(attachmentId)) {
+      throw new IllegalArgumentException("Attachment id is mandatory");
+    }
+    if (StringUtils.isEmpty(newPathDrive)) {
+      throw new IllegalArgumentException("New destination path's drive must not be empty");
+    }
+
+    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+    String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+    Session session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());
+    try {
+      Node attachmentNode = session.getNodeByUUID(attachmentId);
+      Node destNode = getParentFolderNode(session, newPathDrive, newPath);
+      String destPath = destNode.getPath().concat("/").concat(attachmentNode.getName());
+      session.move(attachmentNode.getPath(), destPath);
+      session.save();
+    } catch (Exception e) {
+      throw new ItemNotFoundException("Error while trying to move attachment node with id " + attachmentId + " to the new path " + newPath);
     } finally {
       if (session != null) {
         session.logout();
@@ -305,6 +369,43 @@ public class AttachmentServiceImpl implements AttachmentService {
   private void sortAttachments(List<AttachmentContextEntity> attachments) {
     attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(),
                                                                        attachment1.getAttachedDate()));
+  }
+
+
+  /**
+   * Gets the parent folder node.
+   *
+   * @param workspaceName the workspace name
+   * @param session jcr session
+   * @param driverName the driver name
+   * @param currentFolder the current folder
+   *
+   * @return the parent folder node
+   *
+   * @throws Exception the exception
+   */
+  private Node getParentFolderNode(Session session, String driverName, String currentFolder) throws Exception {
+    DriveData driveData = manageDriveService.getDriveByName(driverName);
+    StringBuilder parentPath = new StringBuilder("");
+    if (driveData != null) {
+      parentPath.append(driveData.getHomePath());
+
+      if (driveData.getHomePath().startsWith(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}")) {
+        parentPath.setLength(0);
+        parentPath.append(Utils.getPersonalDrivePath(driveData.getHomePath(),
+                                                     ConversationState.getCurrent().getIdentity().getUserId()));
+      }
+    }
+
+    if (StringUtils.isNotBlank(currentFolder)) {
+      parentPath.append("/").append(currentFolder);
+    }
+    String parentPathStr = parentPath.toString().replace("//", "/");
+    return getTargetNode(session, parentPathStr);
+  }
+
+  private Node getTargetNode(Session session, String path) throws Exception {
+    return (Node) nodeFinder.getItem(session, path, true);
   }
 
 }

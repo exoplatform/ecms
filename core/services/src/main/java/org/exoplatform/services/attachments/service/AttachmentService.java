@@ -28,12 +28,26 @@ public interface AttachmentService {
 
   Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) throws Exception;
 
-  void linkAttachmentsToEntity(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws IllegalAccessException;
+  void linkAttachmentsToEntity(long userIdentityId,
+                               long entityId,
+                               String entityType,
+                               List<String> attachmentIds) throws IllegalAccessException;
 
-  void updateEntityAttachments(long userIdentityId, long entityId, String entityType, List<String> attachmentIds) throws ObjectNotFoundException, IllegalAccessException;
+  void updateEntityAttachments(long userIdentityId,
+                               long entityId,
+                               String entityType,
+                               List<String> attachmentIds) throws ObjectNotFoundException, IllegalAccessException;
 
-  void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException;
+  void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException,
+                                                                                         IllegalAccessException;
 
-  void deleteAttachmentItemById(long userIdentityId, long entityId, String entityType, String attachmentId) throws ObjectNotFoundException, IllegalAccessException;
+  void deleteAttachmentItemById(long userIdentityId,
+                                long entityId,
+                                String entityType,
+                                String attachmentId) throws ObjectNotFoundException, IllegalAccessException;
 
+  void moveAttachmentToNewPath(long userIdentityId,
+                               String attachmentId,
+                               String newPathDrive,
+                               String newPath) throws Exception;
 }

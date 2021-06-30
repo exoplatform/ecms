@@ -328,10 +328,6 @@ import {getAttachmentsComposerExtensions, executeExtensionAction} from '../../..
 
 export default {
   props: {
-    modeFolderSelectionForFile: {
-      type: Boolean,
-      default: false
-    },
     isCloudEnabled: {
       type: Boolean,
       default: false,
@@ -415,6 +411,8 @@ export default {
       titleLabel: '',
       okAction: false,
       modeFolderSelection: true,
+      modeFolderSelectionForFile: false,
+      movedFile: {},
     };
   },
   computed: {
@@ -502,7 +500,7 @@ export default {
       return this.removedFiles && !!this.removedFiles.length;
     },
     selectFromDrivesEnabled() {
-      return this.isSelectedFromDrivesFiles || this.isRemovedFromDrivesFiles;
+      return this.isSelectedFromDrivesFiles || this.isRemovedFromDrivesFiles || this.modeFolderSelectionForFile || this.modeFolderSelection;
     }
   },
   watch: {
@@ -541,11 +539,17 @@ export default {
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
     this.$root.$on('open-drive-explorer-drawer', () => this.openAttachmentsDriveExplorerDrawer());
     this.$root.$on('open-select-from-drives-drawer', () => this.openSelectFromDrivesDrawer());
+    this.$root.$on('change-attachment-destination-path', this.openSelectDestinationFolderForFile);
   },
   methods: {
     openAttachmentsDriveExplorerDrawer() {
       this.modeFolderSelection = true;
       this.$refs.driveExplorerDrawer.open();
+    },
+    openSelectDestinationFolderForFile(file) {
+      this.modeFolderSelectionForFile = true;
+      this.movedFile = file;
+      this.openAttachmentsDriveExplorerDrawer();
     },
     closeAttachmentsDriveExplorerDrawer() {
       this.resetDriveExplorer();
@@ -803,9 +807,10 @@ export default {
           this.folderDestinationForFile = this.currentDrive.title;
         }
         if (this.modeFolderSelectionForFile) {
-          this.$root.$emit('select-destination-path-for-file', this.getRelativePath(this.selectedFolderPath), this.folderDestinationForFile, this.privateDestinationForFile, this.currentDrive);
+          this.$root.$emit('add-destination-path-for-file', this.movedFile, this.getRelativePath(this.selectedFolderPath), this.folderDestinationForFile, this.currentDrive);
+          this.modeFolderSelectionForFile = false;
         } else {
-          this.$root.$emit('select-destination-path-for-all', this.getRelativePath(this.selectedFolderPath), this.schemaFolder, this.currentDrive);
+          this.$root.$emit('select-destination-path-for-all', this.selectedFolderPath, this.schemaFolder, this.currentDrive);
         }
       } else {
         this.addSelectedFiles();

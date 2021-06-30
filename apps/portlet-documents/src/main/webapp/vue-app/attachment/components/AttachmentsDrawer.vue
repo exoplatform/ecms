@@ -39,7 +39,6 @@
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
-          :mode-folder-selection-for-file="modeFolderSelectionForFile"
           :entity-id="entityId"
           :entity-type="entityType"
           :default-drive="defaultDrive"
@@ -122,8 +121,6 @@ export default {
       pathDestinationFolder: '',
       showDestinationPath: false,
       schemaFolder: [],
-      destinationFileName: '',
-      modeFolderSelectionForFile: false,
       cloudDriveConnecting: false,
       connectedDrive: {},
       isActivityStream: true,
@@ -196,9 +193,6 @@ export default {
     this.$root.$on('open-select-from-drives', () => {
       this.openSelectFromDrivesDrawer();
     });
-    this.$root.$on('change-attachment-destination-path', attachment => {
-      this.openSelectDestinationFolderForFile(attachment);
-    });
     this.$root.$on('open-attachments-app-drawer', () => {
       this.attachmentsChanged = false;
       this.openAttachmentsAppDrawer();
@@ -206,11 +200,8 @@ export default {
     this.$root.$on('attachments-default-folder-path-initialized', (defaultDestinationFolderPath, folderName) => {
       this.initDefaultDestinationFolderPath(defaultDestinationFolderPath, folderName);
     });
-    this.$root.$on('remove-destination-for-file', (folderName) => {
-      this.deleteDestinationPathForFile(folderName);
-    });
-    this.$root.$on('select-destination-path-for-file', (pathDestinationFolder, folder, isPublic, currentDrive) => {
-      this.addDestinationFolderForFile(pathDestinationFolder, folder, isPublic, currentDrive);
+    this.$root.$on('remove-destination-for-file', (folderId) => {
+      this.deleteDestinationPathForFile(folderId);
     });
     this.$root.$on('select-destination-path-for-all', (pathDestinationFolder, folderName, currentDrive) => {
       this.addDestinationFolderForAll(pathDestinationFolder, folderName, currentDrive);
@@ -223,6 +214,10 @@ export default {
     });
     this.$root.$on('attachments-changed-from-drives', (selectedFromDrives, removedFilesFromDrive) => {
       this.manageFilesFromDrives(selectedFromDrives, removedFilesFromDrive);
+    });
+
+    this.$root.$on('add-destination-path-for-file', (movedFile, pathDestinationFolder, folder, currentDrive) => {
+      this.moveFileToNewDestinationFile(movedFile, pathDestinationFolder, folder, currentDrive);
     });
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
@@ -276,17 +271,25 @@ export default {
       this.schemaFolder = folder.split('/');
       this.$root.$emit('add-destination-path-for-all', this.defaultDestinationFolderPath, this.pathDestinationFolder, this.currentDrive);
     },
-    addDestinationFolderForFile(pathDestinationFolder, folder, isPublic, currentDrive) {
-      this.$root.$emit('add-destination-path-for-file', this.destinationFileName, pathDestinationFolder, folder, isPublic, currentDrive);
-      this.modeFolderSelectionForFile = false;
+    moveFileToNewDestinationFile(movedFile, pathDestinationFolder, folder, newDestinationPathDrive) {
+      this.$attachmentService.moveAttachmentToNewPath(
+        newDestinationPathDrive.name,
+        pathDestinationFolder,
+        movedFile.id).then(() => {
+        this.newUploadedFiles.filter(file => file.id === movedFile.id).map(file => {
+          file.pathDestinationFolderForFile = folder;
+          file.fileDrive = newDestinationPathDrive;
+          file.pathDestinationFolderForFile = folder;
+        });
+      });
     },
-    deleteDestinationPathForFile(folderName) {
-      this.$root.$emit('remove-destination-path-for-file', folderName, this.currentDrive, this.pathDestinationFolder);
-    },
-    openSelectDestinationFolderForFile(file) {
-      this.modeFolderSelectionForFile = true;
-      this.destinationFileName = file.name;
-      this.$root.$emit('open-drive-explorer-drawer');
+    deleteDestinationPathForFile(folderId) {
+      this.$attachmentService.moveAttachmentToNewPath(
+        this.currentDrive.name,
+        this.pathDestinationFolder,
+        folderId).then(() => {
+        this.newUploadedFiles.filter(file => file.id === folderId).map(file => file.pathDestinationFolderForFile = '');
+      });
     },
     setCloudDriveProgress({progress}) {
       this.cloudDriveConnecting = progress ? true : false;

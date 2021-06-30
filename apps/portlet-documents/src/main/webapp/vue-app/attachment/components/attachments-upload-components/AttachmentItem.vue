@@ -25,23 +25,23 @@
       <v-list-item-title class="uploadedFileTitle">
         {{ attachment.name }}
       </v-list-item-title>
-      <v-list-item-subtitle v-if="attachment.uploadId && allowToRemove" class="d-flex v-messages uploadedFileSubTitle">
+      <v-list-item-subtitle v-if="!attachment.isSelectedFromDrives" class="d-flex v-messages uploadedFileSubTitle">
         <v-chip
           v-if="attachment.pathDestinationFolderForFile"
           close
           small
           class="attachment-location px-2"
-          @click:close="$root.$emit('remove-destination-for-file', attachment.name)"
+          @click:close="$root.$emit('remove-destination-for-file', attachment.id)"
           @click="openSelectDestinationFolderForFile(attachment)">
           {{ attachment.pathDestinationFolderForFile }}
         </v-chip>
         <a
           v-if="!attachment.pathDestinationFolderForFile"
-          :title="$t('attachments.drawer.destination.folder')"
+          :title="$t('attachments.ChangeLocation')"
           rel="tooltip"
           data-placement="top"
           class="attachmentDestinationPath primary--text"
-          @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChooseLocation') }}</a>
+          @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChangeLocation') }}</a>
       </v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action class="d-flex flex-row align-center">
@@ -195,7 +195,6 @@ export default {
     },
     openSelectDestinationFolderForFile(attachment) {
       this.$root.$emit('change-attachment-destination-path', attachment);
-
     },
     absoluteDateModified(options) {
       const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';

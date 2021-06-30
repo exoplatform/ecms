@@ -270,26 +270,12 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("/downloadByPath")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(
-      value = "Downloads a list of attachments by it paths",
-      httpMethod = "POST",
-      response = Response.class,
-      consumes = "application/x-www-form-urlencoded",
-      notes = "redirects to download URL of binary that contains the list of attachments in a Zip file if multiple, else the selected file"
-  )
-  @ApiResponses(
-      value = {
-          @ApiResponse(code = HTTPStatus.SEE_OTHER, message = "Request Redirect"),
-          @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-          @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
-      }
-  )
-  public Response downloadActivityAttachments(
-                                              @ApiParam(value = "Filename to use for download", required = true)
-                                              @QueryParam("fileName")
-                                              String fileName,
-                                              @ApiParam(value = "List of file attachments to download", required = true)
-                                              List<ActivityFileAttachment> activityFileAttachments) throws URISyntaxException {
+  @ApiOperation(value = "Downloads a list of attachments by it paths", httpMethod = "POST", response = Response.class, consumes = "application/x-www-form-urlencoded", notes = "redirects to download URL of binary that contains the list of attachments in a Zip file if multiple, else the selected file")
+  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.SEE_OTHER, message = "Request Redirect"),
+      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
+      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
+  public Response downloadActivityAttachments(@ApiParam(value = "Filename to use for download", required = true) @QueryParam("fileName") String fileName,
+                                              @ApiParam(value = "List of file attachments to download", required = true) List<ActivityFileAttachment> activityFileAttachments) throws URISyntaxException {
     if (activityFileAttachments == null || activityFileAttachments.isEmpty()) {
       return Response.status(Status.BAD_REQUEST).entity("attachments param is mandatory").build();
     }
@@ -300,6 +286,37 @@ public class AttachmentsRestService implements ResourceContainer {
     String downloadLink = getDownloadLink(activityFileAttachments, fileName);
     URI location = new URI(downloadLink);
     return Response.seeOther(location).build();
+  }
+
+  @POST
+  @Path("/{attachmentId}/move")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @ApiOperation(value = "Move an attachment to a destination path", httpMethod = "POST", response = Response.class, consumes = "application/json", notes = "returns empty response")
+  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
+      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
+      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
+      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
+  public Response moveAttachmentToNewPath(@ApiParam(value = "New path", required = true) @QueryParam("newPath") String newPath,
+                                          @ApiParam(value = "New destination path's drive", required = true) @QueryParam("newPathDrive") String newPathDrive,
+                                          @ApiParam(value = "Attachment id", required = true) @PathParam("attachmentId") String attachmentId) {
+
+    if (StringUtils.isEmpty(newPathDrive)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("New destination path's drive is mandatory").build();
+    }
+
+    if (StringUtils.isEmpty(attachmentId)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("Attachment id is mandatory").build();
+    }
+
+    long userIdentityId = getCurrentUserIdentityId();
+    try {
+      attachmentService.moveAttachmentToNewPath(userIdentityId, attachmentId, newPathDrive, newPath);
+    } catch (Exception e) {
+      LOG.error("Error when trying to move attachment with id {} to new destination path {} ", attachmentId, newPath, e);
+      return Response.serverError().entity(e.getMessage()).build();
+    }
+    return Response.noContent().build();
   }
 
   public Identity getCurrentUserIdentity() {

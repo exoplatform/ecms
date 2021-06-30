@@ -104,9 +104,9 @@
           <attachment-item
             :attachment="attachment"
             :allow-to-remove="false"
+            :allow-to-preview="false"
             :current-space="currentSpace"
-            :current-drive="currentDrive"
-            allow-to-preview />
+            :current-drive="currentDrive" />
         </span>
       </transition-group>
     </div>
