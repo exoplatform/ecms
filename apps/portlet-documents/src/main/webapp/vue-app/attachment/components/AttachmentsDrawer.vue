@@ -443,6 +443,7 @@ export default {
     },
     abortUploadingFiles() {
       if (this.newUploadedFilesInProgress) {
+        this.$root.$emit('abort-attachments-new-upload');
         this.newUploadedFiles.forEach(file => {
           if (file.uploadProgress < 100) {
             this.$uploadService.abortUpload(file.uploadId);
