@@ -767,7 +767,7 @@ public class FileUIActivity extends BaseUIActivity{
     if (message == null) {
       return activityStatus;
     } else {
-      return message;
+      return getActivity().getTitle();
     }
   }
 
