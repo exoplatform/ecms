@@ -315,3 +315,29 @@ export function convertXmlToJson(xml) {
   }
   return obj;
 }
+
+export function downloadFiles(attachments, fileName) {
+  const fileNameEncoded = fileName && window.encodeURIComponent(fileName) || '';
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/downloadByPath?fileName=${fileNameEncoded}`, {
+    credentials: 'include',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(attachments),
+  }).then(resp => {
+    if (resp && resp.ok) {
+      return resp.blob();
+    } else {
+      throw new Error(`Error downloading file '${fileName}' from server`);
+    }
+  }).then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName.replace(/\[[0-9]*\]$/g, '');
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+}

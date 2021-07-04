@@ -1,4 +1,4 @@
-package org.exoplatform.wcm.ext.component.activity;
+package org.exoplatform.services.attachments.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -20,6 +20,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import org.exoplatform.services.attachments.model.ActivityFilesDownloadResource;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
