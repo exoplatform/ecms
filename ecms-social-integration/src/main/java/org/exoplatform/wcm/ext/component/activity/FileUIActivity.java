@@ -45,6 +45,8 @@ import org.exoplatform.ecm.connector.dlp.FileDlpConnector;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.attachments.model.ActivityFileAttachment;
+import org.exoplatform.services.attachments.model.ActivityFilesDownloadResource;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;

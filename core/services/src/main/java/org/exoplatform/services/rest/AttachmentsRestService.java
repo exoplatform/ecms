@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.rest;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +32,8 @@ import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
-import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.download.DownloadService;
+import org.exoplatform.services.attachments.model.*;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
@@ -39,6 +42,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -54,10 +58,14 @@ public class AttachmentsRestService implements ResourceContainer {
 
   protected IdentityManager   identityManager;
 
+  protected DownloadService   downloadService;
+
   public AttachmentsRestService(AttachmentService attachmentService,
-                                IdentityManager identityManager) {
+                                IdentityManager identityManager,
+                                DownloadService downloadService) {
     this.attachmentService = attachmentService;
     this.identityManager = identityManager;
+    this.downloadService = downloadService;
   }
 
   @POST
@@ -258,6 +266,42 @@ public class AttachmentsRestService implements ResourceContainer {
     }
   }
 
+  @POST
+  @Path("/downloadByPath")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @ApiOperation(
+      value = "Downloads a list of attachments by it paths",
+      httpMethod = "POST",
+      response = Response.class,
+      consumes = "application/x-www-form-urlencoded",
+      notes = "redirects to download URL of binary that contains the list of attachments in a Zip file if multiple, else the selected file"
+  )
+  @ApiResponses(
+      value = {
+          @ApiResponse(code = HTTPStatus.SEE_OTHER, message = "Request Redirect"),
+          @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
+          @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
+      }
+  )
+  public Response downloadActivityAttachments(
+                                              @ApiParam(value = "Filename to use for download", required = true)
+                                              @QueryParam("fileName")
+                                              String fileName,
+                                              @ApiParam(value = "List of file attachments to download", required = true)
+                                              List<ActivityFileAttachment> activityFileAttachments) throws URISyntaxException {
+    if (activityFileAttachments == null || activityFileAttachments.isEmpty()) {
+      return Response.status(Status.BAD_REQUEST).entity("attachments param is mandatory").build();
+    }
+    if (StringUtils.isBlank(fileName)) {
+      return Response.status(Status.BAD_REQUEST).entity("fileName param is mandatory").build();
+    }
+
+    String downloadLink = getDownloadLink(activityFileAttachments, fileName);
+    URI location = new URI(downloadLink);
+    return Response.seeOther(location).build();
+  }
+
   public Identity getCurrentUserIdentity() {
     return ConversationState.getCurrent().getIdentity();
   }
@@ -269,4 +313,16 @@ public class AttachmentsRestService implements ResourceContainer {
                                                                                                      currentUser);
     return identity == null ? 0 : Long.parseLong(identity.getId());
   }
+
+  public String getDownloadLink(List<ActivityFileAttachment> activityFileAttachments, String fileName) {
+    NodeLocation[] nodeLocations = new NodeLocation[activityFileAttachments.size()];
+    for (int i = 0; i < activityFileAttachments.size(); i++) {
+      nodeLocations[i] = activityFileAttachments.get(i).getNodeLocation();
+    }
+    ActivityFilesDownloadResource dresource = new ActivityFilesDownloadResource(nodeLocations);
+    dresource.setDownloadName(fileName);
+    String downloadResource = downloadService.addDownloadResource(dresource);
+    return downloadService.getDownloadLink(downloadResource);
+  }
+
 }

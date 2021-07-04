@@ -19,6 +19,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import org.exoplatform.services.attachments.model.ActivityFileAttachment;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
