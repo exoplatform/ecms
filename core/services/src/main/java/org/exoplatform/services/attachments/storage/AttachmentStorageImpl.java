@@ -32,16 +32,13 @@ public class AttachmentStorageImpl implements AttachmentStorage {
   }
 
   @Override
-  public void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentsIds) {
-    attachmentsIds.forEach(attachmentId -> {
+  public void linkAttachmentToEntity(long entityId, String entityType, String attachmentId) {
       AttachmentContextEntity attachmentContextEntity = new AttachmentContextEntity();
       attachmentContextEntity.setEntityId(entityId);
       attachmentContextEntity.setEntityType(entityType.toUpperCase());
       attachmentContextEntity.setAttachmentId(attachmentId);
       attachmentContextEntity.setAttachedDate(System.currentTimeMillis());
       attachmentDAO.create(attachmentContextEntity);
-    });
-
   }
 
   @Override

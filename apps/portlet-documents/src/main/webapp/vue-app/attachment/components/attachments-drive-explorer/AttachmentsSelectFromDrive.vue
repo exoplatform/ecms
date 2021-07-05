@@ -1,7 +1,7 @@
 <template>
   <div class="select-from-drives">
     <div class="d-flex align-center">
-      <v-subheader class="text-sub-title pl-0 d-flex">Platform Documents</v-subheader>
+      <v-subheader class="text-sub-title pl-0 d-flex">{{ $t('attachments.platformDocuments') }}</v-subheader>
       <v-divider />
     </div>
     <div class="lastContent d-flex align-center justify-center">

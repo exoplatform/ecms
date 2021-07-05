@@ -1032,6 +1032,7 @@ export default {
     },
     openSelectFromDrivesDrawer() {
       this.modeFolderSelection = false;
+      this.reloadCurrentPath();
       this.$refs.driveExplorerDrawer.open();
     },
     resetDriveExplorer() {

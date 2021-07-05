@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -45,7 +46,6 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
 
@@ -88,30 +88,25 @@ public class AttachmentServiceImpl implements AttachmentService {
     this.manageDriveService = manageDriveService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.nodeFinder = nodeFinder;
+
   }
 
   @Override
-  public void linkAttachmentsToEntity(long userIdentityId,
-                                      long entityId,
-                                      String entityType,
-                                      List<String> attachmentsIds) throws IllegalAccessException {
+  public Attachment linkAttachmentToEntity(long userIdentityId,
+                                            long entityId,
+                                            String entityType,
+                                            String attachmentId) throws Exception {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
 
-    if (StringUtils.isEmpty(entityType)) {
+    if (StringUtils.isBlank(entityType)) {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    if (attachmentsIds == null || attachmentsIds.isEmpty()) {
-      throw new IllegalArgumentException("attachmentsIds must not be empty");
+    if (StringUtils.isBlank(attachmentId)) {
+      throw new IllegalArgumentException("attachments Id must not be empty");
     }
-
-    attachmentsIds.forEach(attachmentId -> {
-      if (StringUtils.isBlank(attachmentId)) {
-        throw new IllegalArgumentException("attachmentId must not be empty");
-      }
-    });
 
     if (userIdentityId <= 0) {
       throw new IllegalAccessException("User identity must be positive");
@@ -122,8 +117,8 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
-    List<String> attachmentIds = attachmentsIds.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList());
-    attachmentStorage.linkAttachmentsToEntity(entityId, entityType, attachmentIds);
+    attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachmentId);
+    return getAttachmentById(entityType, entityId, attachmentId, userIdentityId);
   }
 
   @Override
@@ -169,7 +164,12 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (attachmentIds != null && !attachmentIds.isEmpty()) {
       for (String attachmentId : attachmentIds) {
         if (!existingAttachmentsIds.contains(attachmentId) && StringUtils.isNotEmpty(attachmentId)) {
-          linkAttachmentsToEntity(userIdentityId, entityId, entityType, Collections.singletonList(attachmentId));
+          try {
+            linkAttachmentToEntity(userIdentityId, entityId, entityType, attachmentId);
+          } catch (Exception e) {
+            throw new ObjectNotFoundException("Can't link attachment with id " + attachmentId + " to entity type " + entityType
+                + " with id " + entityId);
+          }
         }
       }
     }
@@ -266,19 +266,18 @@ public class AttachmentServiceImpl implements AttachmentService {
     sortAttachments(attachmentsContextEntity);
     List<Attachment> attachments = new ArrayList<>();
     if (!attachmentsContextEntity.isEmpty()) {
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-      String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
-      Session session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());
+      Session session = getSession();
       try {
         for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
           Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                                    documentService,
-                                                                   workspace,
+                                                                   getCurrentWorkspace(),
                                                                    session,
                                                                    attachmentContextEntity.getAttachmentId());
           boolean canView = canView(userIdentityId, entityType, entityId);
           boolean canDelete = canDelete(userIdentityId, entityType, entityId);
-          Permission attachmentACL = new Permission(canView, canDelete);
+          boolean canEdit = canEdit(userIdentityId, entityType, entityId);
+          Permission attachmentACL = new Permission(canView, canDelete, canEdit);
           attachment.setAcl(attachmentACL);
           attachments.add(attachment);
         }
@@ -294,16 +293,25 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String attachmentId, SessionProvider sessionProvider) throws Exception {
-    Session session = null;
+  public Attachment getAttachmentById(String entityType,
+                                      long entityId,
+                                      String attachmentId,
+                                      long userIdentityId) throws Exception {
+    Attachment attachment = new Attachment();
+    Session session = getSession();
     try {
-      String workspace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
-      session = sessionProvider.getSession(workspace, repositoryService.getCurrentRepository());
-      return EntityBuilder.fromAttachmentNode(repositoryService,
-                                              documentService,
-                                              workspace,
-                                              session,
-                                              attachmentId);
+      attachment = EntityBuilder.fromAttachmentNode(repositoryService,
+                                                    documentService,
+                                                    getCurrentWorkspace(),
+                                                    session,
+                                                    attachmentId);
+
+      boolean canView = canView(userIdentityId, entityType, entityId);
+      boolean canDelete = canDelete(userIdentityId, entityType, entityId);
+      boolean canEdit = canEdit(userIdentityId, entityType, entityId);
+      Permission attachmentACL = new Permission(canView, canDelete, canEdit);
+
+      attachment.setAcl(attachmentACL);
     } catch (NotFoundException e) {
       throw new NotFoundException("Can't convert attachment JCR node with id " + attachmentId + " to entity", e);
     } finally {
@@ -311,13 +319,16 @@ public class AttachmentServiceImpl implements AttachmentService {
         session.logout();
       }
     }
+    return attachment;
   }
 
   @Override
   public void moveAttachmentToNewPath(long userIdentityId,
                                       String attachmentId,
                                       String newPathDrive,
-                                      String newPath) throws Exception {
+                                      String newPath,
+                                      String entityType,
+                                      long entityId) throws Exception {
     if (userIdentityId <= 0) {
       throw new IllegalAccessException("User identity must be positive");
     }
@@ -326,6 +337,9 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
     if (StringUtils.isEmpty(newPathDrive)) {
       throw new IllegalArgumentException("New destination path's drive must not be empty");
+    }
+    if (!canEdit(userIdentityId, entityType, entityId)) {
+      throw new IllegalAccessException("User with identity id" + userIdentityId + "is not allowed to move attachment with id" + attachmentId);
     }
 
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
@@ -366,16 +380,22 @@ public class AttachmentServiceImpl implements AttachmentService {
     return attachmentACLPlugin.canDelete(userIdentityId, entityType, String.valueOf(entityId));
   }
 
+  public boolean canEdit(long userIdentityId, String entityType, long entityId) {
+    AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
+    if (attachmentACLPlugin == null) {
+      return false;
+    }
+    return attachmentACLPlugin.canEdit(userIdentityId, entityType, String.valueOf(entityId));
+  }
+
   private void sortAttachments(List<AttachmentContextEntity> attachments) {
     attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(),
                                                                        attachment1.getAttachedDate()));
   }
 
-
   /**
    * Gets the parent folder node.
    *
-   * @param workspaceName the workspace name
    * @param session jcr session
    * @param driverName the driver name
    * @param currentFolder the current folder
@@ -408,4 +428,11 @@ public class AttachmentServiceImpl implements AttachmentService {
     return (Node) nodeFinder.getItem(session, path, true);
   }
 
+  private Session getSession() throws RepositoryException {
+    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+    return sessionProvider.getSession(getCurrentWorkspace(), repositoryService.getCurrentRepository());
+  }
+  private String getCurrentWorkspace() throws RepositoryException {
+    return repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+  }
 }

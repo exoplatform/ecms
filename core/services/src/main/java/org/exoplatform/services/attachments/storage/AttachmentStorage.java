@@ -21,7 +21,7 @@ import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 import java.util.List;
 
 public interface AttachmentStorage {
-  void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentsIds);
+  void linkAttachmentToEntity(long entityId, String entityType, String attachmentsId);
 
   List<AttachmentContextEntity> getAttachmentContextByEntity(long entityId, String entityType);
 

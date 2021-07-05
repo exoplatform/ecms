@@ -96,29 +96,17 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   }
 
   @Test
-  public void testLinkAttachmentsToEntity() throws Exception { // NOSONAR
+  public void testlinkAttachmentToEntity() throws Exception { // NOSONAR
     int[] list = { -9, 2, 5, 14, 98 };
     try {
-      attachmentService.linkAttachmentsToEntity(1, 0, "", null);
+      attachmentService.linkAttachmentToEntity(1, 0, "", null);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
     }
 
     try {
-      List<String> attachmentsIds = new ArrayList<>();
-      attachmentService.linkAttachmentsToEntity(1, 1, "", attachmentsIds);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // Expected
-    }
-
-    try {
-      List<String> attachmentsIds = new ArrayList<>();
-      attachmentsIds.add("1");
-      attachmentsIds.add("2");
-      attachmentsIds.add("3");
-      attachmentService.linkAttachmentsToEntity(1, 5, "", attachmentsIds);
+      attachmentService.linkAttachmentToEntity(1, 1, "", "");
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -129,7 +117,14 @@ public class AttachmentServiceTest extends BaseExoTestCase {
       attachmentsIds.add("1");
       attachmentsIds.add("2");
       attachmentsIds.add("3");
-      attachmentService.linkAttachmentsToEntity(0, 5, "task", attachmentsIds);
+      attachmentService.linkAttachmentToEntity(1, 5, "", "1");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      attachmentService.linkAttachmentToEntity(0, 5, "task", "1");
       fail();
     } catch (IllegalAccessException e) {
       // Expected
@@ -191,13 +186,10 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     currentIdentity.setId(String.valueOf(currentIdentityId));
     Mockito.when(identityManager.getIdentity("2")).thenReturn(currentIdentity);
 
-    List<String> attachmentsIds = new ArrayList<>();
-    attachmentsIds.add("1");
-    attachmentsIds.add("2");
-    attachmentsIds.add("3");
-
     // when
-    attachmentService.linkAttachmentsToEntity(currentIdentityId, 5, "EVENT", attachmentsIds);
+    attachmentService.linkAttachmentToEntity(currentIdentityId, 5, "EVENT", "1");
+    attachmentService.linkAttachmentToEntity(currentIdentityId, 5, "EVENT", "2");
+    attachmentService.linkAttachmentToEntity(currentIdentityId, 5, "EVENT", "3");
 
     // then
     List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentityId, 5, "EVENT");

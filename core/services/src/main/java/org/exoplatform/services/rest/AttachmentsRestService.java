@@ -69,17 +69,17 @@ public class AttachmentsRestService implements ResourceContainer {
   }
 
   @POST
-  @Path("{entityType}/{entityId}")
+  @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Link an existing attachments to the given entity (Event, Task, Wiki,...)", httpMethod = "POST", response = Response.class, consumes = "application/json")
+  @ApiOperation(value = "Link an existing attachment to the given entity (Event, Task, Wiki,...)", httpMethod = "POST", response = Response.class, consumes = "application/json")
   @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response linkAttachmentsToEntity(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
+  public Response linkAttachmentToEntity(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                           @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                          @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @QueryParam("attachmentIds") List<String> attachmentIds) {
+                                          @ApiParam(value = "file uuid stored in jcr to be attached to the provided entity", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -89,17 +89,19 @@ public class AttachmentsRestService implements ResourceContainer {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity type is mandatory").build();
     }
 
-    if (attachmentIds.isEmpty()) {
-      return Response.status(Response.Status.BAD_REQUEST).entity("You must link at least one attachment to the entity").build();
+    if (StringUtils.isEmpty(attachmentId)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("Attachment id must not be empty").build();
     }
+
     long userIdentityId = getCurrentUserIdentityId();
+    Attachment attachment = new Attachment();
     try {
-      attachmentService.linkAttachmentsToEntity(userIdentityId, entityId, entityType, attachmentIds);
+      attachment = attachmentService.linkAttachmentToEntity(userIdentityId, entityId, entityType, attachmentId);
     } catch (Exception e) {
       LOG.error("Error when trying to link attachments to entity with type {} and id {}: ", entityType, entityId, e);
       return Response.serverError().entity(e.getMessage()).build();
     }
-    return Response.ok().build();
+    return Response.ok(attachment).build();
   }
 
   @PUT
@@ -174,7 +176,7 @@ public class AttachmentsRestService implements ResourceContainer {
   }
 
   @GET
-  @Path("{attachmentId}")
+  @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
   @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, produces = "application/json")
@@ -184,16 +186,25 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
   })
-  public Response getAttachmentById(@ApiParam(value = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId) throws Exception {
+  public Response getAttachmentByIdByEntity(@ApiParam(value = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId,
+                                    @ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                    @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
     if (StringUtils.isBlank(attachmentId)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Attachment identifier is mandatory").build();
     }
+    if (entityId <= 0) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("Entity identifier must be a positive integer").build();
+    }
+    if (StringUtils.isEmpty(entityType)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("Entity type must not be empty").build();
+    }
+    long userIdentityId = getCurrentUserIdentityId();
     try {
-      Attachment attachment = attachmentService.getAttachmentById(attachmentId, WCMCoreUtils.getUserSessionProvider());
+      Attachment attachment = attachmentService.getAttachmentById(entityType, entityId, attachmentId, userIdentityId);
       if (attachment == null) {
         return Response.status(Status.NOT_FOUND).build();
       } else {
-        return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+        return Response.ok(attachment).build();
       }
     } catch (Exception e) {
       LOG.error("Error when trying to get attachment with id {}: ", attachmentId, e);
@@ -299,7 +310,9 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response moveAttachmentToNewPath(@ApiParam(value = "New path", required = true) @QueryParam("newPath") String newPath,
                                           @ApiParam(value = "New destination path's drive", required = true) @QueryParam("newPathDrive") String newPathDrive,
-                                          @ApiParam(value = "Attachment id", required = true) @PathParam("attachmentId") String attachmentId) {
+                                          @ApiParam(value = "New destination path's drive", required = true) @QueryParam("entityType") String entityType,
+                                          @ApiParam(value = "Entity technical identifier", required = true) @QueryParam("entityId") long entityId,
+                                          @ApiParam(value = "Entity type", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (StringUtils.isEmpty(newPathDrive)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("New destination path's drive is mandatory").build();
@@ -311,7 +324,7 @@ public class AttachmentsRestService implements ResourceContainer {
 
     long userIdentityId = getCurrentUserIdentityId();
     try {
-      attachmentService.moveAttachmentToNewPath(userIdentityId, attachmentId, newPathDrive, newPath);
+      attachmentService.moveAttachmentToNewPath(userIdentityId, attachmentId, newPathDrive, newPath, entityType, entityId);
     } catch (Exception e) {
       LOG.error("Error when trying to move attachment with id {} to new destination path {} ", attachmentId, newPath, e);
       return Response.serverError().entity(e.getMessage()).build();

@@ -25,7 +25,7 @@
       <v-list-item-title class="uploadedFileTitle">
         {{ attachment.name }}
       </v-list-item-title>
-      <v-list-item-subtitle v-if="!attachment.isSelectedFromDrives" class="d-flex v-messages uploadedFileSubTitle">
+      <v-list-item-subtitle v-if="canMoveAttachment" class="d-flex v-messages uploadedFileSubTitle">
         <v-chip
           v-if="attachment.pathDestinationFolderForFile"
           close
@@ -103,7 +103,15 @@ export default {
       type: Boolean,
       default: true
     },
+    allowToEdit: {
+      type: Boolean,
+      default: true
+    },
     allowToPreview: {
+      type: Boolean,
+      default: false
+    },
+    canEdit: {
       type: Boolean,
       default: false
     },
@@ -168,6 +176,9 @@ export default {
     },
     canRemoveAttachment() {
       return this.attachment && this.attachment.acl && this.attachment.acl.canDelete || !this.attachment.id || this.attachment.isSelectedFromDrives;
+    },
+    canMoveAttachment() {
+      return this.canEdit && this.allowToEdit && !this.attachment.isSelectedFromDrives;
     },
   },
   methods: {

@@ -50,6 +50,7 @@
                 :key="attachment.id"
                 :attachment="attachment"
                 :allow-to-remove="false"
+                :allow-to-edit="false"
                 allow-to-preview
                 small-attachment-icon />
             </v-list-item-group>

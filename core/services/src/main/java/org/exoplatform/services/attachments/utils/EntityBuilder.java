@@ -106,23 +106,6 @@ public class EntityBuilder {
     String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
     attachment.setMimetype(mimetype);
 
-    boolean canRemove = true;
-    try {
-      session.checkPermission(attachmentsPath, PermissionType.REMOVE);
-    } catch (Exception e) {
-      canRemove = false;
-    }
-
-    boolean canEdit = true;
-    try {
-      session.checkPermission(attachmentsPath, PermissionType.SET_PROPERTY);
-    } catch (Exception e) {
-      canEdit = false;
-    }
-
-    Permission permission = new Permission(canEdit, canRemove);
-    attachment.setAcl(permission);
-
     long size = attachmentNode.getNode("jcr:content").getProperty("jcr:data").getLength();
     attachment.setSize(size);
 

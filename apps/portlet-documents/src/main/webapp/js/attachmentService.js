@@ -189,24 +189,19 @@ export function uploadAttachment(workspaceName, driveName, currentFolder, curren
     });
 }
 
-export function linkUploadedAttachmentsToEntity(entityId, entityType, attachmentIds) {
-  attachmentIds.forEach(attachmentId => {
-    if (!attachmentId) {
-      throw new Error('Attachment Id can\'t be empty');
-    }
-  });
-  let params = {};
-  if (attachmentIds) {
-    params.attachmentIds = attachmentIds;
+export function linkUploadedAttachmentToEntity(entityId, entityType, attachmentId) {
+  if (!attachmentId) {
+    throw new Error('Attachment Id can\'t be empty');
   }
-  params = $.param(params, true);
 
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}?${params}`, {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}/${attachmentId}`, {
     credentials: 'include',
     method: 'POST',
   }).then((resp) => {
     if (!resp || !resp.ok) {
       throw new Error('Error linking attachments to the entity');
+    } else {
+      return resp.json();
     }
   });
 }
@@ -276,7 +271,7 @@ export function getAttachmentById(attachmentId) {
   });
 }
 
-export function moveAttachmentToNewPath(newPathDrive, newPath, attachmentId) {
+export function moveAttachmentToNewPath(newPathDrive, newPath, attachmentId, entityType, entityId) {
   if (!attachmentId) {
     throw new Error('Attachment Id can\'t be empty');
   }
@@ -284,6 +279,12 @@ export function moveAttachmentToNewPath(newPathDrive, newPath, attachmentId) {
   params.newPath = newPath? newPath: '';
   if (newPathDrive) {
     params.newPathDrive = newPathDrive;
+  }
+  if (entityType) {
+    params.entityType = entityType;
+  }
+  if (entityId) {
+    params.entityId = entityId;
   }
   params = $.param(params, true);
 
