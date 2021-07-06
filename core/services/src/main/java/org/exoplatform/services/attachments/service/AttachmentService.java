@@ -18,35 +18,36 @@ package org.exoplatform.services.attachments.service;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.cms.clouddrives.NotFoundException;
 
+import javax.jcr.ItemNotFoundException;
 import java.util.List;
 
 public interface AttachmentService {
 
   List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws Exception;
 
-  Attachment getAttachmentById(String entityType,
-                               long entityId,
-                               String attachmentId,
-                               long userIdentityId) throws Exception;
+  Attachment getAttachmentById(String entityType, long entityId, String attachmentId, long userIdentityId) throws Exception;
 
-  Attachment linkAttachmentToEntity(long userIdentityId,
-                                     long entityId,
-                                     String entityType,
-                                     String attachmentId) throws Exception;
+  Attachment linkAttachmentToEntity(long userIdentityId, long entityId, String entityType, String attachmentId) throws Exception;
 
   void updateEntityAttachments(long userIdentityId,
                                long entityId,
                                String entityType,
-                               List<String> attachmentIds) throws ObjectNotFoundException, IllegalAccessException;
+                               List<String> attachmentIds) throws ObjectNotFoundException,
+                                                           IllegalAccessException,
+                                                           ItemNotFoundException,
+                                                           NotFoundException;
 
   void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException,
-                                                                                         IllegalAccessException;
+                                                                                         IllegalAccessException,
+                                                                                         ItemNotFoundException,
+                                                                                         NotFoundException;
 
   void deleteAttachmentItemById(long userIdentityId,
                                 long entityId,
                                 String entityType,
-                                String attachmentId) throws ObjectNotFoundException, IllegalAccessException;
+                                String attachmentId) throws ObjectNotFoundException, IllegalAccessException, NotFoundException;
 
   void moveAttachmentToNewPath(long userIdentityId,
                                String attachmentId,

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
+import javax.jcr.ItemNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,13 +38,13 @@ import org.exoplatform.services.attachments.model.*;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
+import org.exoplatform.services.cms.clouddrives.NotFoundException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
@@ -69,7 +70,7 @@ public class AttachmentsRestService implements ResourceContainer {
   }
 
   @POST
-  @Path("{entityType}/{entityId}/{attachmentId}")
+  @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
   @ApiOperation(value = "Link an existing attachment to the given entity (Event, Task, Wiki,...)", httpMethod = "POST", response = Response.class, consumes = "application/json")
@@ -78,8 +79,8 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response linkAttachmentToEntity(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                          @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                          @ApiParam(value = "file uuid stored in jcr to be attached to the provided entity", required = true) @PathParam("attachmentId") String attachmentId) {
+                                         @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
+                                         @ApiParam(value = "file uuid stored in jcr to be attached to the provided entity", required = true) String attachmentId) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -141,12 +142,10 @@ public class AttachmentsRestService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
   @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, produces = "application/json")
-  @ApiResponses(value = {
-      @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
+  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
-  })
+      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response getAttachmentsByEntity(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                          @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
 
@@ -162,9 +161,9 @@ public class AttachmentsRestService implements ResourceContainer {
       List<AttachmentEntity> attachmentsEntities = new ArrayList<>();
       if (!attachments.isEmpty()) {
         attachmentsEntities = attachments.stream()
-          .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
-          .filter(attachmentEntity -> attachmentEntity.getAcl().isCanView())
-          .collect(Collectors.toList());
+                                         .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
+                                         .filter(attachmentEntity -> attachmentEntity.getAcl().isCanView())
+                                         .collect(Collectors.toList());
       }
       return Response.ok(attachmentsEntities).build();
     } catch (IllegalAccessException e) {
@@ -180,15 +179,13 @@ public class AttachmentsRestService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
   @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, produces = "application/json")
-  @ApiResponses(value = {
-      @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
+  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error")
-  })
+      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response getAttachmentByIdByEntity(@ApiParam(value = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId,
-                                    @ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                    @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
+                                            @ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                            @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
     if (StringUtils.isBlank(attachmentId)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Attachment identifier is mandatory").build();
     }
@@ -204,7 +201,7 @@ public class AttachmentsRestService implements ResourceContainer {
       if (attachment == null) {
         return Response.status(Status.NOT_FOUND).build();
       } else {
-        return Response.ok(attachment).build();
+        return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
       }
     } catch (Exception e) {
       LOG.error("Error when trying to get attachment with id {}: ", attachmentId, e);
@@ -235,8 +232,11 @@ public class AttachmentsRestService implements ResourceContainer {
     try {
       attachmentService.deleteAllEntityAttachments(userIdentityId, entityId, entityType);
       return Response.noContent().build();
-    } catch (ObjectNotFoundException e) {
-      LOG.error("Error when trying to delete all attachments from entity with type {} and with id '{}' ", entityType, entityId, e);
+    } catch (ObjectNotFoundException | NotFoundException | ItemNotFoundException e) {
+      LOG.error("Error when trying to delete all attachments from entity with type {} and with id '{}' ",
+                entityType,
+                entityId,
+                e);
       return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
     } catch (IllegalAccessException e) {
       LOG.error("User '{}' attempts to delete a non authorized {} entity with id {}", userIdentityId, entityType, entityId);
@@ -268,8 +268,12 @@ public class AttachmentsRestService implements ResourceContainer {
     try {
       attachmentService.deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
       return Response.noContent().build();
-    } catch (ObjectNotFoundException e) {
-      LOG.error("Error when trying to delete the attachment with id '{}' from entity with type {} and id '{}'", attachmentId, entityType, entityId, e);
+    } catch (ObjectNotFoundException | NotFoundException e) {
+      LOG.error("Error when trying to delete the attachment with id '{}' from entity with type {} and id '{}'",
+                attachmentId,
+                entityType,
+                entityId,
+                e);
       return Response.status(Response.Status.NOT_FOUND).entity("AttachmentContext not found").build();
     } catch (IllegalAccessException e) {
       LOG.error("User '{}' attempts to delete a non authorized {} entity with id {}", userIdentityId, entityType, entityId);

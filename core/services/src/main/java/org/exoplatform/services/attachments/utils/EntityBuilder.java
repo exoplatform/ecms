@@ -70,6 +70,7 @@ public class EntityBuilder {
 
   public static final Attachment fromAttachmentNode(RepositoryService repositoryService,
                                                     DocumentService documentService,
+                                                    LinkManager linkManager,
                                                     String workspace,
                                                     Session session,
                                                     String attachmentId) throws Exception {
@@ -78,13 +79,13 @@ public class EntityBuilder {
       throw new PathNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
 
-    LinkManager linkManager = ExoContainerContext.getService(LinkManager.class);
     if (linkManager.isLink(attachmentNode)) {
       attachmentNode = linkManager.getTarget(attachmentNode);
       if (attachmentNode == null) {
         throw new PathNotFoundException("Target Node with of symlink " + attachmentId + " wasn't found");
       }
     }
+
     Attachment attachment = new Attachment();
     attachment.setId(attachmentNode.getUUID());
     String attachmentsTitle = getStringProperty(attachmentNode, "exo:title");

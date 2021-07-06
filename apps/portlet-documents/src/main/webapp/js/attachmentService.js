@@ -194,9 +194,13 @@ export function linkUploadedAttachmentToEntity(entityId, entityType, attachmentI
     throw new Error('Attachment Id can\'t be empty');
   }
 
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}/${attachmentId}`, {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
     credentials: 'include',
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: attachmentId,
   }).then((resp) => {
     if (!resp || !resp.ok) {
       throw new Error('Error linking attachments to the entity');

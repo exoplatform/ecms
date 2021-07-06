@@ -7,7 +7,10 @@ import java.util.*;
 
 import javax.jcr.*;
 
+import org.exoplatform.services.attachments.dao.AttachmentDAO;
+import org.exoplatform.services.attachments.storage.AttachmentStorageImpl;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.junit.*;
@@ -39,6 +42,8 @@ import org.exoplatform.social.core.manager.IdentityManager;
 public class AttachmentServiceTest extends BaseExoTestCase {
 
   protected AttachmentService attachmentService;
+
+  AttachmentDAO               attachmentDAO;
 
   AttachmentStorage           attachmentStorage;
 
@@ -73,12 +78,16 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   NodeFinder                  nodeFinder;
 
   @Mock
+  LinkManager                 linkManager;
+
+  @Mock
   Session                     session;
 
   @Before
   public void setUp() throws Exception {
     begin();
-    attachmentStorage = CommonsUtils.getService(AttachmentStorage.class);
+    attachmentDAO = CommonsUtils.getService(AttachmentDAO.class);
+    attachmentStorage = new AttachmentStorageImpl(attachmentDAO, repositoryService, sessionProviderService, documentService,linkManager);
     attachmentService = new AttachmentServiceImpl(attachmentStorage,
                                                   repositoryService,
                                                   sessionProviderService,
@@ -86,7 +95,8 @@ public class AttachmentServiceTest extends BaseExoTestCase {
                                                   identityManager,
                                                   manageDriveService,
                                                   nodeHierarchyCreator,
-                                                  nodeFinder);
+                                                  nodeFinder,
+                                                  linkManager);
   }
 
   @After
@@ -131,7 +141,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     }
 
     // when
-    when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
+    lenient().when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
     lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
