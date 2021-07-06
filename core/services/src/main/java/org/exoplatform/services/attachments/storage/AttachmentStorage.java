@@ -16,21 +16,17 @@
  */
 package org.exoplatform.services.attachments.storage;
 
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
-import org.exoplatform.services.cms.clouddrives.NotFoundException;
-
-import javax.jcr.RepositoryException;
 import java.util.List;
 
 public interface AttachmentStorage {
   void linkAttachmentToEntity(long entityId, String entityType, String attachmentsId);
 
-  List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws RepositoryException,
-                                                                                                 NotFoundException;
+  List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException;
 
-  Attachment getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) throws RepositoryException,
-                                                                                              NotFoundException;
+  Attachment getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) throws ObjectNotFoundException;
 
   void deleteAllEntityAttachments(AttachmentContextEntity attachmentContextEntity);
 

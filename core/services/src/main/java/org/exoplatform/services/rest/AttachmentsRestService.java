@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
-import javax.jcr.ItemNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -38,7 +37,6 @@ import org.exoplatform.services.attachments.model.*;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
-import org.exoplatform.services.cms.clouddrives.NotFoundException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -232,7 +230,7 @@ public class AttachmentsRestService implements ResourceContainer {
     try {
       attachmentService.deleteAllEntityAttachments(userIdentityId, entityId, entityType);
       return Response.noContent().build();
-    } catch (ObjectNotFoundException | NotFoundException | ItemNotFoundException e) {
+    } catch (ObjectNotFoundException e) {
       LOG.error("Error when trying to delete all attachments from entity with type {} and with id '{}' ",
                 entityType,
                 entityId,
@@ -268,7 +266,7 @@ public class AttachmentsRestService implements ResourceContainer {
     try {
       attachmentService.deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
       return Response.noContent().build();
-    } catch (ObjectNotFoundException | NotFoundException e) {
+    } catch (ObjectNotFoundException e) {
       LOG.error("Error when trying to delete the attachment with id '{}' from entity with type {} and id '{}'",
                 attachmentId,
                 entityType,

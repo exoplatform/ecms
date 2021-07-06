@@ -16,16 +16,13 @@
  */
 package org.exoplatform.services.attachments.utils;
 
-import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
-import org.exoplatform.services.attachments.model.AttachmentContextEntity;
-import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -33,8 +30,6 @@ import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.rest.entity.IdentityEntity;
-
-import com.sun.star.lang.IllegalAccessException;
 
 import java.util.LinkedHashMap;
 
@@ -76,13 +71,13 @@ public class EntityBuilder {
                                                     String attachmentId) throws Exception {
     Node attachmentNode = session.getNodeByUUID(attachmentId);
     if (attachmentNode == null) {
-      throw new PathNotFoundException("Node with id " + attachmentId + " wasn't found");
+      throw new ObjectNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
 
     if (linkManager.isLink(attachmentNode)) {
       attachmentNode = linkManager.getTarget(attachmentNode);
       if (attachmentNode == null) {
-        throw new PathNotFoundException("Target Node with of symlink " + attachmentId + " wasn't found");
+        throw new ObjectNotFoundException("Target Node with of symlink " + attachmentId + " wasn't found");
       }
     }
 
