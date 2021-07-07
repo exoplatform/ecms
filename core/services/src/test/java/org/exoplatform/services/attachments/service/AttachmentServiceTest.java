@@ -7,6 +7,12 @@ import java.util.*;
 
 import javax.jcr.*;
 
+import org.exoplatform.services.attachments.dao.AttachmentDAO;
+import org.exoplatform.services.attachments.storage.AttachmentStorageImpl;
+import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -28,47 +34,69 @@ import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
-@ConfiguredBy({
-        @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
-        @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/attachments/attachments-test-configuration.xml")})
+@ConfiguredBy({ @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
+    @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/attachments/attachments-test-configuration.xml") })
 @RunWith(MockitoJUnitRunner.class)
 public class AttachmentServiceTest extends BaseExoTestCase {
 
   protected AttachmentService attachmentService;
 
-  AttachmentStorage attachmentStorage;
+  AttachmentDAO               attachmentDAO;
+
+  AttachmentStorage           attachmentStorage;
 
   @Mock
-  RepositoryService repositoryService;
+  RepositoryService           repositoryService;
 
   @Mock
-  SessionProviderService sessionProviderService;
+  SessionProviderService      sessionProviderService;
 
   @Mock
-  ManageableRepository repository;
+  ManageableRepository        repository;
 
   @Mock
-  RepositoryEntry repositoryEntry;
+  RepositoryEntry             repositoryEntry;
 
   @Mock
-  SessionProvider sessionProvider;
+  SessionProvider             sessionProvider;
 
   @Mock
-  DocumentService documentService;
-  
-  @Mock
-  IdentityManager identityManager;
+  DocumentService             documentService;
 
   @Mock
-  Session session;
+  IdentityManager             identityManager;
+
+  @Mock
+  ManageDriveService          manageDriveService;
+
+  @Mock
+  NodeHierarchyCreator        nodeHierarchyCreator;
+
+  @Mock
+  NodeFinder                  nodeFinder;
+
+  @Mock
+  LinkManager                 linkManager;
+
+  @Mock
+  Session                     session;
 
   @Before
   public void setUp() throws Exception {
     begin();
-    attachmentStorage = CommonsUtils.getService(AttachmentStorage.class);
-    attachmentService = new AttachmentServiceImpl(attachmentStorage, repositoryService, sessionProviderService, documentService, identityManager);
+    attachmentDAO = CommonsUtils.getService(AttachmentDAO.class);
+    attachmentStorage = new AttachmentStorageImpl(attachmentDAO, repositoryService, sessionProviderService, documentService,linkManager);
+    attachmentService = new AttachmentServiceImpl(attachmentStorage,
+                                                  repositoryService,
+                                                  sessionProviderService,
+                                                  documentService,
+                                                  identityManager,
+                                                  manageDriveService,
+                                                  nodeHierarchyCreator,
+                                                  nodeFinder,
+                                                  linkManager);
   }
 
   @After
@@ -78,29 +106,17 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   }
 
   @Test
-  public void testLinkAttachmentsToEntity() throws Exception { // NOSONAR
-    int[] list = {-9,2,5,14,98};
+  public void testlinkAttachmentToEntity() throws Exception { // NOSONAR
+    int[] list = { -9, 2, 5, 14, 98 };
     try {
-      attachmentService.linkAttachmentsToEntity(1, 0,"", null);
+      attachmentService.linkAttachmentToEntity(1, 0, "", null);
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
     }
 
     try {
-      List<String> attachmentsIds = new ArrayList<>();
-      attachmentService.linkAttachmentsToEntity(1, 1,"", attachmentsIds);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // Expected
-    }
-
-    try {
-      List<String> attachmentsIds = new ArrayList<>();
-      attachmentsIds.add("1");
-      attachmentsIds.add("2");
-      attachmentsIds.add("3");
-      attachmentService.linkAttachmentsToEntity(1, 5,"", attachmentsIds);
+      attachmentService.linkAttachmentToEntity(1, 1, "", "");
       fail();
     } catch (IllegalArgumentException e) {
       // Expected
@@ -111,14 +127,20 @@ public class AttachmentServiceTest extends BaseExoTestCase {
       attachmentsIds.add("1");
       attachmentsIds.add("2");
       attachmentsIds.add("3");
-      attachmentService.linkAttachmentsToEntity(0, 5,"task", attachmentsIds);
+      attachmentService.linkAttachmentToEntity(1, 5, "", "1");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      attachmentService.linkAttachmentToEntity(0, 5, "task", "1");
       fail();
     } catch (IllegalAccessException e) {
       // Expected
     }
 
-    //when
-    when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
+    // when
     lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
@@ -173,16 +195,13 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     currentIdentity.setId(String.valueOf(currentIdentityId));
     Mockito.when(identityManager.getIdentity("2")).thenReturn(currentIdentity);
 
-    List<String> attachmentsIds = new ArrayList<>();
-    attachmentsIds.add("1");
-    attachmentsIds.add("2");
-    attachmentsIds.add("3");
-
     // when
-    attachmentService.linkAttachmentsToEntity(currentIdentityId, 5, "EVENT", attachmentsIds);
+    attachmentService.linkAttachmentToEntity(currentIdentityId, 5, "EVENT", "1");
+    attachmentService.linkAttachmentToEntity(currentIdentityId, 5, "EVENT", "2");
+    attachmentService.linkAttachmentToEntity(currentIdentityId, 5, "EVENT", "3");
 
-    //then
-    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentityId,5, "EVENT");
+    // then
+    List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentityId, 5, "EVENT");
     assertNotNull(attachmentsEntityStored);
     assertEquals(3, attachmentsEntityStored.size());
   }
