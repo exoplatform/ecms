@@ -98,15 +98,17 @@
         tag="div"
         class="d-flex flex-column">
         <span
-          v-for="attachment in attachmentsToDisplay"
-          :key="attachment"
+          v-for="attachment in newUploadedFiles"
+          :key="attachment.name"
           class="list-complete-item">
           <attachment-item
             :attachment="attachment"
+            :can-edit="attachment.acl && attachment.acl.canEdit"
             :allow-to-remove="false"
+            :allow-to-preview="false"
             :current-space="currentSpace"
             :current-drive="currentDrive"
-            allow-to-preview />
+            allow-to-edit />
         </span>
       </transition-group>
     </div>
@@ -144,9 +146,6 @@ export default {
   computed: {
     displayMessageDestinationFolder() {
       return !this.attachments.length || !this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
-    },
-    attachmentsToDisplay() {
-      return this.newUploadedFiles.filter(newFile => this.attachments.find(file => newFile.id === file.id));
     },
   },
   methods: {

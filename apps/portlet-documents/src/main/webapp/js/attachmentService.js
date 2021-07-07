@@ -189,24 +189,19 @@ export function uploadAttachment(workspaceName, driveName, currentFolder, curren
     });
 }
 
-export function linkUploadedAttachmentsToEntity(entityId, entityType, attachmentIds) {
-  attachmentIds.forEach(attachmentId => {
-    if (!attachmentId) {
-      throw new Error('Attachment Id can\'t be empty');
-    }
-  });
-  let params = {};
-  if (attachmentIds) {
-    params.attachmentIds = attachmentIds;
+export function linkUploadedAttachmentToEntity(entityId, entityType, attachmentId) {
+  if (!attachmentId) {
+    throw new Error('Attachment Id can\'t be empty');
   }
-  params = $.param(params, true);
 
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}?${params}`, {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}/${attachmentId}`, {
     credentials: 'include',
-    method: 'POST',
+    method: 'POST'
   }).then((resp) => {
     if (!resp || !resp.ok) {
       throw new Error('Error linking attachments to the entity');
+    } else {
+      return resp.json();
     }
   });
 }
@@ -217,18 +212,24 @@ export function updateLinkedAttachmentsToEntity(entityId, entityType, attachment
       throw new Error('Attachment Id can\'t be empty');
     }
   });
-  let params = {};
-  if (attachmentIds) {
-    params.attachmentIds = attachmentIds;
-  }
-  params = $.param(params, true);
 
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}?${params}`, {
+  const formData = new FormData();
+  if (attachmentIds) {
+    Object.keys(attachmentIds).forEach(attachmentId => {
+      formData.append('attachmentId', attachmentIds[attachmentId]);
+    });
+  }
+
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
     credentials: 'include',
     method: 'PUT',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams(formData).toString(),
   }).then((resp) => {
     if (!resp || !resp.ok) {
-      throw new Error('Error linking attachments to the entity');
+      throw new Error('Error updating entity\'s linked attachments list');
     }
   });
 }
@@ -242,7 +243,7 @@ export function removeEntityAttachment(entityId, entityType, attachmentId) {
     method: 'DELETE',
   }).then((resp) => {
     if (!resp || !resp.ok) {
-      throw new Error('Error linking attachments to the entity');
+      throw new Error('Error removing entity\'s linked attachment');
     }
   });
 }
@@ -255,7 +256,7 @@ export function getEntityAttachments(entityType, entityId) {
     if (resp || resp.ok) {
       return resp.json();
     } else {
-      throw new Error('Error getting attachments task');
+      throw new Error('Error getting entity\'s linked attachments');
     }
   });
 }
@@ -271,7 +272,38 @@ export function getAttachmentById(attachmentId) {
     if (resp || resp.ok) {
       return resp.json();
     } else {
-      throw new Error('Error getting attachments task');
+      throw new Error('Error getting entity\'s linked attachment');
+    }
+  });
+}
+
+export function moveAttachmentToNewPath(newPathDrive, newPath, attachmentId, entityType, entityId) {
+  if (!attachmentId) {
+    throw new Error('Attachment Id can\'t be empty');
+  }
+  const formData = new FormData();
+
+  formData.append('newPath', newPath ? newPath : '');
+  if (newPathDrive) {
+    formData.append('newPathDrive', newPathDrive);
+  }
+  if (entityType) {
+    formData.append('entityType', entityType);
+  }
+  if (entityId) {
+    formData.append('entityId', entityId);
+  }
+
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${attachmentId}/move`, {
+    credentials: 'include',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams(formData).toString(),
+  }).then((resp) => {
+    if (!resp || !resp.ok) {
+      throw new Error('Error moving attachment to the new destination path');
     }
   });
 }

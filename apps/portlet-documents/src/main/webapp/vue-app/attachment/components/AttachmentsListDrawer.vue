@@ -35,8 +35,9 @@
             :key="attachment"
             class="list-complete-item">
             <attachment-item
+              :allow-to-edit="false"
               :attachment="attachment"
-              :allow-to-preview="true" />
+              allow-to-preview />
           </span>
         </transition-group>
       </div>

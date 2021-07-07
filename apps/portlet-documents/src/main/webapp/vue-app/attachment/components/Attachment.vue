@@ -60,12 +60,6 @@ export default {
     this.$root.$on('attachments-changed-from-drives', (selectedFromDrives, removedFilesFromDrive) => {
       this.updateAttachmentsFromDrives(selectedFromDrives, removedFilesFromDrive);
     });
-    this.$root.$on('remove-destination-path-for-file', (folderName, currentDrive, pathDestinationFolder) => {
-      this.deleteDestinationPathForFile(folderName, currentDrive, pathDestinationFolder);
-    });
-    this.$root.$on('add-destination-path-for-file', (destinationFileName, pathDestinationFolder, folder, isPublic, currentDrive) => {
-      this.addDestinationFolderForFile(destinationFileName, pathDestinationFolder, folder, isPublic, currentDrive);
-    });
     this.$root.$on('add-destination-path-for-all', (defaultDestinationFolderPath, pathDestinationFolder, currentDrive) => {
       this.addDestinationFolderForAll(defaultDestinationFolderPath, pathDestinationFolder, currentDrive);
     });
@@ -148,28 +142,6 @@ export default {
             type: 'error',
           });
         });
-      }
-    },
-    deleteDestinationPathForFile(fileName, currentDrive, pathDestinationFolder) {
-      for (let i = 0; i < this.attachments.length; i++) {
-        if (this.attachments[i].name === fileName) {
-          this.attachments[i].pathDestinationFolderForFile = '';
-          this.attachments[i].fileDrive = currentDrive;
-          this.attachments[i].destinationFolder = pathDestinationFolder;
-          this.attachments[i].isPublic = true;
-          break;
-        }
-      }
-    },
-    addDestinationFolderForFile(destinationFileName, pathDestinationFolder, folder, isPublic, currentDrive) {
-      for (let i = 0; i < this.attachments.length; i++) {
-        if (this.attachments[i].name === destinationFileName) {
-          this.attachments[i].pathDestinationFolderForFile = folder;
-          this.attachments[i].destinationFolder = pathDestinationFolder.startsWith('/') ? pathDestinationFolder.substring(1) : pathDestinationFolder;
-          this.attachments[i].fileDrive = currentDrive;
-          // TODO: get 'isPublic' property of file from rest, now 'isPublic' assigned to 'isPublic' property of destination folder
-          this.attachments[i].isPublic = isPublic;
-        }
       }
     },
     addDestinationFolderForAll(defaultDestinationFolderPath, pathDestinationFolder, currentDrive) {
