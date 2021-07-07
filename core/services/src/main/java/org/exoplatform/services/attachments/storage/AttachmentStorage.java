@@ -16,17 +16,22 @@
  */
 package org.exoplatform.services.attachments.storage;
 
-import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
+
+import javax.jcr.Session;
 import java.util.List;
 
 public interface AttachmentStorage {
   void linkAttachmentToEntity(long entityId, String entityType, String attachmentsId);
 
-  List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException;
+  List<Attachment> getAttachmentsByEntity(Session session, String workspace, long entityId, String entityType) throws Exception;
 
-  Attachment getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) throws ObjectNotFoundException;
+  Attachment getAttachmentItemByEntity(Session session,
+                                       String workspace,
+                                       long entityId,
+                                       String entityType,
+                                       String attachmentId) throws Exception;
 
   void deleteAllEntityAttachments(AttachmentContextEntity attachmentContextEntity);
 

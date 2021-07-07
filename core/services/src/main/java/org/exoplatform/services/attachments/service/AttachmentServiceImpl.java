@@ -20,7 +20,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.apache.commons.lang.StringUtils;
@@ -89,7 +88,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   public Attachment linkAttachmentToEntity(long userIdentityId,
                                            long entityId,
                                            String entityType,
-                                           String attachmentId) throws IllegalAccessException, ObjectNotFoundException {
+                                           String attachmentId) throws IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -119,7 +118,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   public void updateEntityAttachments(long userIdentityId,
                                       long entityId,
                                       String entityType,
-                                      List<String> attachmentIds) throws ObjectNotFoundException, IllegalAccessException {
+                                      List<String> attachmentIds) throws IllegalAccessException, ObjectNotFoundException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -138,11 +137,24 @@ public class AttachmentServiceImpl implements AttachmentService {
       }
     });
 
-    List<Attachment> existingEntityAttachments = null;
-    existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(userIdentityId, entityId, entityType);
+    List<Attachment> existingEntityAttachments;
+    Session session = null;
+    try {
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+                                                                           Utils.getCurrentWorkspace(repositoryService),
+                                                                           entityId,
+                                                                           entityType);
+    } catch (Exception e) {
+      throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
     List<String> existingAttachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
     // delete removed attachments
-    if (attachmentIds == null || attachmentIds.isEmpty()) {
+    if (attachmentIds.isEmpty()) {
       deleteAllEntityAttachments(userIdentityId, entityId, entityType);
     } else {
       for (String attachmentId : existingAttachmentsIds) {
@@ -156,19 +168,15 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (attachmentIds != null && !attachmentIds.isEmpty()) {
       for (String attachmentId : attachmentIds) {
         if (!existingAttachmentsIds.contains(attachmentId) && StringUtils.isNotEmpty(attachmentId)) {
-          try {
-            linkAttachmentToEntity(userIdentityId, entityId, entityType, attachmentId);
-          } catch (Exception e) {
-            throw new ObjectNotFoundException("Can't link attachment with id " + attachmentId + " to entity type " + entityType
-                + " with id " + entityId);
-          }
+          linkAttachmentToEntity(userIdentityId, entityId, entityType, attachmentId);
         }
       }
     }
   }
 
   @Override
-  public void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException {
+  public void deleteAllEntityAttachments(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException,
+                                                                                                IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -187,12 +195,20 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
-    List<Attachment> existingEntityAttachments = null;
+    List<Attachment> existingEntityAttachments;
+    Session session = null;
     try {
-      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(userIdentityId, entityId, entityType);
-    } catch (ObjectNotFoundException e) {
-      throw new ObjectNotFoundException("Error while trying to get attachments of the entity with type" + entityType + "and id"
-          + entityId);
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+                                                                           Utils.getCurrentWorkspace(repositoryService),
+                                                                           entityId,
+                                                                           entityType);
+    } catch (Exception e) {
+      throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
     List<String> attachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
 
@@ -209,7 +225,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   public void deleteAttachmentItemById(long userIdentityId,
                                        long entityId,
                                        String entityType,
-                                       String attachmentId) throws ObjectNotFoundException, IllegalAccessException  {
+                                       String attachmentId) throws ObjectNotFoundException, IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -232,13 +248,24 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
-    Attachment attachmentEntity = null;
+    Attachment attachment;
+    Session session = null;
     try {
-      attachmentEntity = attachmentStorage.getAttachmentItemByEntity(entityId, entityType, attachmentId);
-    } catch (ObjectNotFoundException e) {
-      throw new ObjectNotFoundException("Can't convert attachment JCR node to Attachment DTO");
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      attachment = attachmentStorage.getAttachmentItemByEntity(session,
+                                                               Utils.getCurrentWorkspace(repositoryService),
+                                                               entityId,
+                                                               entityType,
+                                                               attachmentId);
+    } catch (Exception e) {
+      throw new IllegalStateException("Can't get attachment with jcr uuid " + attachmentId + " of entity with type " + entityType + " and id " + entityId);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
-    if (attachmentEntity == null) {
+
+    if (attachment == null) {
       throw new ObjectNotFoundException("Attachment with id" + attachmentId + " linked to entity with id " + entityId
           + " and type" + entityType + " not found");
     }
@@ -247,7 +274,9 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public List<Attachment> getAttachmentsByEntity(long userIdentityId, long entityId, String entityType) throws ObjectNotFoundException, IllegalAccessException {
+  public List<Attachment> getAttachmentsByEntity(long userIdentityId,
+                                                 long entityId,
+                                                 String entityType) throws IllegalAccessException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id should be positive");
     }
@@ -260,7 +289,22 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User identity must be positive");
     }
 
-    List<Attachment> entityAttachments = attachmentStorage.getAttachmentsByEntity(userIdentityId, entityId, entityType);
+    List<Attachment> entityAttachments;
+    Session session = null;
+    try {
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      entityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+                                                                   Utils.getCurrentWorkspace(repositoryService),
+                                                                   entityId,
+                                                                   entityType);
+    } catch (Exception e) {
+      throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+
     if (!entityAttachments.isEmpty()) {
       boolean canView = canView(userIdentityId, entityType, entityId);
       boolean canDelete = canDelete(userIdentityId, entityType, entityId);
@@ -272,10 +316,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String entityType,
-                                      long entityId,
-                                      String attachmentId,
-                                      long userIdentityId) throws ObjectNotFoundException {
+  public Attachment getAttachmentById(String entityType, long entityId, String attachmentId, long userIdentityId) {
     Attachment attachment = new Attachment();
     Session session = null;
     try {
@@ -294,7 +335,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
       attachment.setAcl(attachmentACL);
     } catch (Exception e) {
-      throw new ObjectNotFoundException("Can't convert attachment JCR node with id " + attachmentId + " to entity");
+      throw new IllegalStateException("Can't convert attachment JCR node with id " + attachmentId + " to entity");
     } finally {
       if (session != null) {
         session.logout();
@@ -309,9 +350,9 @@ public class AttachmentServiceImpl implements AttachmentService {
                                       String newPathDrive,
                                       String newPath,
                                       String entityType,
-                                      long entityId) throws ObjectNotFoundException, IllegalAccessException {
+                                      long entityId) throws IllegalAccessException {
     if (userIdentityId <= 0) {
-      throw new IllegalAccessException("User identity must be positive");
+      throw new IllegalArgumentException("User identity must be positive");
     }
     if (StringUtils.isEmpty(attachmentId)) {
       throw new IllegalArgumentException("Attachment id is mandatory");
@@ -338,7 +379,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       session.move(attachmentNode.getPath(), destPath);
       session.save();
     } catch (Exception e) {
-      throw new ObjectNotFoundException("Error while trying to move attachment node with id " + attachmentId + " to the new path "
+      throw new IllegalStateException("Error while trying to move attachment node with id " + attachmentId + " to the new path "
           + newPath);
     } finally {
       if (session != null) {

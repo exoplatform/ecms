@@ -194,13 +194,9 @@ export function linkUploadedAttachmentToEntity(entityId, entityType, attachmentI
     throw new Error('Attachment Id can\'t be empty');
   }
 
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}/${attachmentId}`, {
     credentials: 'include',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: attachmentId,
+    method: 'POST'
   }).then((resp) => {
     if (!resp || !resp.ok) {
       throw new Error('Error linking attachments to the entity');
@@ -216,15 +212,21 @@ export function updateLinkedAttachmentsToEntity(entityId, entityType, attachment
       throw new Error('Attachment Id can\'t be empty');
     }
   });
-  let params = {};
-  if (attachmentIds) {
-    params.attachmentIds = attachmentIds;
-  }
-  params = $.param(params, true);
 
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}?${params}`, {
+  const formData = new FormData();
+  if (attachmentIds) {
+    Object.keys(attachmentIds).forEach(attachmentId => {
+      formData.append('attachmentId', attachmentIds[attachmentId]);
+    });
+  }
+
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
     credentials: 'include',
     method: 'PUT',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams(formData).toString(),
   }).then((resp) => {
     if (!resp || !resp.ok) {
       throw new Error('Error updating entity\'s linked attachments list');
@@ -279,22 +281,26 @@ export function moveAttachmentToNewPath(newPathDrive, newPath, attachmentId, ent
   if (!attachmentId) {
     throw new Error('Attachment Id can\'t be empty');
   }
-  let params = {};
-  params.newPath = newPath? newPath: '';
+  const formData = new FormData();
+
+  formData.append('newPath', newPath ? newPath : '');
   if (newPathDrive) {
-    params.newPathDrive = newPathDrive;
+    formData.append('newPathDrive', newPathDrive);
   }
   if (entityType) {
-    params.entityType = entityType;
+    formData.append('entityType', entityType);
   }
   if (entityId) {
-    params.entityId = entityId;
+    formData.append('entityId', entityId);
   }
-  params = $.param(params, true);
 
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${attachmentId}/move?${params}`, {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${attachmentId}/move`, {
     credentials: 'include',
-    method: 'POST'
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams(formData).toString(),
   }).then((resp) => {
     if (!resp || !resp.ok) {
       throw new Error('Error moving attachment to the new destination path');

@@ -141,7 +141,6 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     }
 
     // when
-    lenient().when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
     lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);

@@ -68,7 +68,7 @@ public class AttachmentsRestService implements ResourceContainer {
   }
 
   @POST
-  @Path("{entityType}/{entityId}")
+  @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
   @ApiOperation(value = "Link an existing attachment to the given entity (Event, Task, Wiki,...)", httpMethod = "POST", response = Response.class, consumes = "application/json")
@@ -78,7 +78,7 @@ public class AttachmentsRestService implements ResourceContainer {
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response linkAttachmentToEntity(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                          @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                         @ApiParam(value = "file uuid stored in jcr to be attached to the provided entity", required = true) String attachmentId) {
+                                         @ApiParam(value = "file uuid stored in jcr to be attached to the provided entity", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -105,16 +105,16 @@ public class AttachmentsRestService implements ResourceContainer {
 
   @PUT
   @Path("{entityType}/{entityId}")
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes("application/x-www-form-urlencoded")
   @RolesAllowed("users")
-  @ApiOperation(value = "Update entity's attachments list", httpMethod = "PUT", response = Response.class, consumes = "application/json")
+  @ApiOperation(value = "Update entity's attachments list", httpMethod = "PUT", response = Response.class, consumes = "application/x-www-form-urlencoded")
   @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
   public Response updateAttachmentsLinkedToContext(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                                    @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                                   @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @QueryParam("attachmentIds") List<String> attachmentIds) {
+                                                   @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @FormParam("attachmentId") List<String> attachmentIds) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -303,17 +303,17 @@ public class AttachmentsRestService implements ResourceContainer {
 
   @POST
   @Path("/{attachmentId}/move")
-  @Consumes(MediaType.APPLICATION_JSON)
+  @Consumes("application/x-www-form-urlencoded")
   @RolesAllowed("users")
-  @ApiOperation(value = "Move an attachment to a destination path", httpMethod = "POST", response = Response.class, consumes = "application/json", notes = "returns empty response")
+  @ApiOperation(value = "Move an attachment to a destination path", httpMethod = "POST", response = Response.class, consumes = "application/x-www-form-urlencoded", notes = "returns empty response")
   @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response moveAttachmentToNewPath(@ApiParam(value = "New path", required = true) @QueryParam("newPath") String newPath,
-                                          @ApiParam(value = "New destination path's drive", required = true) @QueryParam("newPathDrive") String newPathDrive,
-                                          @ApiParam(value = "New destination path's drive", required = true) @QueryParam("entityType") String entityType,
-                                          @ApiParam(value = "Entity technical identifier", required = true) @QueryParam("entityId") long entityId,
+  public Response moveAttachmentToNewPath(@ApiParam(value = "New path", required = true) @FormParam("newPath") String newPath,
+                                          @ApiParam(value = "New destination path's drive", required = true) @FormParam("newPathDrive") String newPathDrive,
+                                          @ApiParam(value = "New destination path's drive", required = true) @FormParam("entityType") String entityType,
+                                          @ApiParam(value = "Entity technical identifier", required = true) @FormParam("entityId") long entityId,
                                           @ApiParam(value = "Entity type", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (StringUtils.isEmpty(newPathDrive)) {
@@ -329,7 +329,7 @@ public class AttachmentsRestService implements ResourceContainer {
       attachmentService.moveAttachmentToNewPath(userIdentityId, attachmentId, newPathDrive, newPath, entityType, entityId);
     } catch (Exception e) {
       LOG.error("Error when trying to move attachment with id {} to new destination path {} ", attachmentId, newPath, e);
-      return Response.serverError().entity(e.getMessage()).build();
+      return Response.serverError().entity("Error when trying to move attachment with id " + attachmentId + " to new destination path {} " + newPath).build();
     }
     return Response.noContent().build();
   }

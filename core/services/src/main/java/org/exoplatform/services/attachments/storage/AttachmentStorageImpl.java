@@ -66,62 +66,44 @@ public class AttachmentStorageImpl implements AttachmentStorage {
   }
 
   @Override
-  public List<Attachment> getAttachmentsByEntity(long userIdentityId,
+  public List<Attachment> getAttachmentsByEntity(Session session,
+                                                 String workspace,
                                                  long entityId,
-                                                 String entityType) throws ObjectNotFoundException {
+                                                 String entityType) throws Exception {
     List<AttachmentContextEntity> attachmentsContextEntity = attachmentDAO.getAttachmentContextByEntity(entityId,
                                                                                                         entityType.toUpperCase());
     Utils.sortAttachmentsByDate(attachmentsContextEntity);
     List<Attachment> attachments = new ArrayList<>();
     if (!attachmentsContextEntity.isEmpty()) {
-      Session session = null;
-      try {
-        session = Utils.getSession(sessionProviderService, repositoryService);
-        for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
-          Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
-                                                                   documentService,
-                                                                   linkManager,
-                                                                   Utils.getCurrentWorkspace(repositoryService),
-                                                                   session,
-                                                                   attachmentContextEntity.getAttachmentId());
-          attachments.add(attachment);
-        }
-      } catch (Exception e) {
-        throw new ObjectNotFoundException("Can't convert attachment JCR node to Attachment DTO");
-      } finally {
-        if (session != null) {
-          session.logout();
-        }
+      for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
+        Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
+                                                                 documentService,
+                                                                 linkManager,
+                                                                 workspace,
+                                                                 session,
+                                                                 attachmentContextEntity.getAttachmentId());
+        attachments.add(attachment);
       }
     }
     return attachments;
   }
 
   @Override
-  public Attachment getAttachmentItemByEntity(long entityId,
+  public Attachment getAttachmentItemByEntity(Session session,
+                                              String workspace,
+                                              long entityId,
                                               String entityType,
-                                              String attachmentId) throws ObjectNotFoundException {
+                                              String attachmentId) throws Exception {
     AttachmentContextEntity attachmentEntity = attachmentDAO.getAttachmentItemByEntity(entityId,
                                                                                        entityType.toUpperCase(),
                                                                                        attachmentId);
-    Attachment attachment = null;
-    Session session = null;
-    try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
-      attachment = EntityBuilder.fromAttachmentNode(repositoryService,
-                                                    documentService,
-                                                    linkManager,
-                                                    Utils.getCurrentWorkspace(repositoryService),
-                                                    session,
-                                                    attachmentEntity.getAttachmentId());
-    } catch (Exception e) {
-      throw new ObjectNotFoundException("Can't convert attachment JCR node to Attachment DTO");
-    } finally {
-      if (session != null) {
-        session.logout();
-      }
-    }
-    return attachment;
+
+    return EntityBuilder.fromAttachmentNode(repositoryService,
+                                            documentService,
+                                            linkManager,
+                                            workspace,
+                                            session,
+                                            attachmentEntity.getAttachmentId());
   }
 
   @Override
