@@ -16,19 +16,25 @@
  */
 package org.exoplatform.services.attachments.storage;
 
+import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 
+import javax.jcr.Session;
 import java.util.List;
 
 public interface AttachmentStorage {
-  void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentsIds);
+  void linkAttachmentToEntity(long entityId, String entityType, String attachmentsId);
 
-  List<AttachmentContextEntity> getAttachmentContextByEntity(long entityId, String entityType);
+  List<Attachment> getAttachmentsByEntity(Session session, String workspace, long entityId, String entityType) throws Exception;
 
-  AttachmentContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId);
+  Attachment getAttachmentItemByEntity(Session session,
+                                       String workspace,
+                                       long entityId,
+                                       String entityType,
+                                       String attachmentId) throws Exception;
 
   void deleteAllEntityAttachments(AttachmentContextEntity attachmentContextEntity);
 
-  void deleteAttachmentItemById(AttachmentContextEntity attachmentContextEntity);
+  void deleteAttachmentItemByIdByEntity(long entityId, String entityType, String attachmentId);
 
 }

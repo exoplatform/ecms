@@ -16,42 +16,94 @@
  */
 package org.exoplatform.services.attachments.storage;
 
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.dao.AttachmentDAO;
+import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
+import org.exoplatform.services.attachments.utils.EntityBuilder;
+import org.exoplatform.services.attachments.utils.Utils;
+import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import javax.jcr.Session;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AttachmentStorageImpl implements AttachmentStorage {
 
-  AttachmentDAO attachmentDAO;
+  AttachmentDAO                  attachmentDAO;
 
-  public AttachmentStorageImpl(AttachmentDAO attachmentDAO) {
+  private RepositoryService      repositoryService;
+
+  private SessionProviderService sessionProviderService;
+
+  private DocumentService        documentService;
+
+  private LinkManager            linkManager;
+
+  public AttachmentStorageImpl(AttachmentDAO attachmentDAO,
+                               RepositoryService repositoryService,
+                               SessionProviderService sessionProviderService,
+                               DocumentService documentService,
+                               LinkManager linkManager) {
     this.attachmentDAO = attachmentDAO;
+    this.repositoryService = repositoryService;
+    this.sessionProviderService = sessionProviderService;
+    this.documentService = documentService;
+    this.linkManager = linkManager;
   }
 
   @Override
-  public void linkAttachmentsToEntity(long entityId, String entityType, List<String> attachmentsIds) {
-    attachmentsIds.forEach(attachmentId -> {
-      AttachmentContextEntity attachmentContextEntity = new AttachmentContextEntity();
-      attachmentContextEntity.setEntityId(entityId);
-      attachmentContextEntity.setEntityType(entityType.toUpperCase());
-      attachmentContextEntity.setAttachmentId(attachmentId);
-      attachmentContextEntity.setAttachedDate(System.currentTimeMillis());
-      attachmentDAO.create(attachmentContextEntity);
-    });
-
+  public void linkAttachmentToEntity(long entityId, String entityType, String attachmentId) {
+    AttachmentContextEntity attachmentContextEntity = new AttachmentContextEntity();
+    attachmentContextEntity.setEntityId(entityId);
+    attachmentContextEntity.setEntityType(entityType.toUpperCase());
+    attachmentContextEntity.setAttachmentId(attachmentId);
+    attachmentContextEntity.setAttachedDate(System.currentTimeMillis());
+    attachmentDAO.create(attachmentContextEntity);
   }
 
   @Override
-  public List<AttachmentContextEntity> getAttachmentContextByEntity(long entityId, String entityType) {
-    return attachmentDAO.getAttachmentContextByEntity(entityId, entityType.toUpperCase());
+  public List<Attachment> getAttachmentsByEntity(Session session,
+                                                 String workspace,
+                                                 long entityId,
+                                                 String entityType) throws Exception {
+    List<AttachmentContextEntity> attachmentsContextEntity = attachmentDAO.getAttachmentContextByEntity(entityId,
+                                                                                                        entityType.toUpperCase());
+    Utils.sortAttachmentsByDate(attachmentsContextEntity);
+    List<Attachment> attachments = new ArrayList<>();
+    if (!attachmentsContextEntity.isEmpty()) {
+      for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
+        Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
+                                                                 documentService,
+                                                                 linkManager,
+                                                                 workspace,
+                                                                 session,
+                                                                 attachmentContextEntity.getAttachmentId());
+        attachments.add(attachment);
+      }
+    }
+    return attachments;
   }
 
   @Override
-  public AttachmentContextEntity getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) {
-    return attachmentDAO.getAttachmentItemByEntity(entityId, entityType.toUpperCase(), attachmentId);
+  public Attachment getAttachmentItemByEntity(Session session,
+                                              String workspace,
+                                              long entityId,
+                                              String entityType,
+                                              String attachmentId) throws Exception {
+    AttachmentContextEntity attachmentEntity = attachmentDAO.getAttachmentItemByEntity(entityId,
+                                                                                       entityType.toUpperCase(),
+                                                                                       attachmentId);
+
+    return EntityBuilder.fromAttachmentNode(repositoryService,
+                                            documentService,
+                                            linkManager,
+                                            workspace,
+                                            session,
+                                            attachmentEntity.getAttachmentId());
   }
 
   @Override
@@ -60,7 +112,10 @@ public class AttachmentStorageImpl implements AttachmentStorage {
   }
 
   @Override
-  public void deleteAttachmentItemById(AttachmentContextEntity attachmentContextEntity) {
-    attachmentDAO.delete(attachmentContextEntity);
+  public void deleteAttachmentItemByIdByEntity(long entityId, String entityType, String attachmentId) {
+    AttachmentContextEntity attachmentEntity = attachmentDAO.getAttachmentItemByEntity(entityId,
+                                                                                       entityType.toUpperCase(),
+                                                                                       attachmentId);
+    attachmentDAO.delete(attachmentEntity);
   }
 }
