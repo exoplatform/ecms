@@ -70,36 +70,27 @@ export default {
       this.attachmentAppConfiguration = event.detail;
       this.attachments = [];
       this.openAttachmentsAppDrawer();
-      if (this.entityType && this.entityId) {
-        this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.startLoading();
-        this.initEntityAttachmentsList().then(() => {
-          this.initDefaultDrive();
-        }).finally(() => {
-          this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.endLoading();
-        });
-      } else {
-        this.initDefaultDrive();
-      }
+      this.initAttachmentEnvironment();
     });
     document.addEventListener('open-attachments-list-drawer', (event) => {
       this.attachmentAppConfiguration = event.detail;
       this.attachments = [];
       this.openAttachmentsDrawerList();
-      if (this.entityType && this.entityId) {
-        this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.startLoading();
-        this.initEntityAttachmentsList().then(() => {
-          this.initDefaultDrive();
-        }).finally(() => {
-          this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.endLoading();
-        });
-      } else {
-        this.initDefaultDrive();
-      }
+      this.initAttachmentEnvironment();
     });
   },
   methods: {
     openAttachmentsAppDrawer() {
       this.$root.$emit('open-attachments-app-drawer');
+    },
+    initAttachmentEnvironment() {
+      this.initDefaultDrive();
+      if (this.entityType && this.entityId) {
+        this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.startLoading();
+        this.initEntityAttachmentsList().then(() => {
+          this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.endLoading();
+        });
+      }
     },
     initEntityAttachmentsList() {
       if (this.entityType && this.entityId) {
