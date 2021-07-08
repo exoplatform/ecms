@@ -195,7 +195,33 @@ public class AttachmentsRestService implements ResourceContainer {
     }
     long userIdentityId = getCurrentUserIdentityId();
     try {
-      Attachment attachment = attachmentService.getAttachmentById(entityType, entityId, attachmentId, userIdentityId);
+      Attachment attachment = attachmentService.getAttachmentByIdByEntity(entityType, entityId, attachmentId, userIdentityId);
+      if (attachment == null) {
+        return Response.status(Status.NOT_FOUND).build();
+      } else {
+        return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+      }
+    } catch (Exception e) {
+      LOG.error("Error when trying to get attachment with id {}: ", attachmentId, e);
+      return Response.serverError().build();
+    }
+  }
+
+  @GET
+  @Path("{attachmentId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @ApiOperation(value = "Get an attachment with its jcr uuid", httpMethod = "GET", response = Response.class, produces = "application/json")
+  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
+      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
+      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
+      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
+  public Response getAttachmentById(@ApiParam(value = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId) throws Exception {
+    if (StringUtils.isBlank(attachmentId)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("Attachment identifier is mandatory").build();
+    }
+    try {
+      Attachment attachment = attachmentService.getAttachmentById(attachmentId);
       if (attachment == null) {
         return Response.status(Status.NOT_FOUND).build();
       } else {
