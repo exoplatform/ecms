@@ -47,10 +47,18 @@ public interface AttachmentService {
    * @return the {@link Attachment} linked to the given entity
    * @throws IllegalStateException when user is not allowed to access the entity
    */
-  Attachment getAttachmentById(String entityType,
-                               long entityId,
-                               String attachmentId,
-                               long userIdentityId) throws IllegalStateException;
+  Attachment getAttachmentByIdByEntity(String entityType,
+                                       long entityId,
+                                       String attachmentId,
+                                       long userIdentityId) throws IllegalStateException;
+
+  /**
+   * Get an attachment with its jcr uuid
+   * 
+   * @param attachmentId attachment jcr uuid
+   * @return {@link Attachment}
+   */
+  Attachment getAttachmentById(String attachmentId);
 
   /**
    * link an attachment with its jcr uuid to a given entity.
