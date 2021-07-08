@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>6.2.0-20210706</version>
+  <version>6.2.x-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -25,7 +25,7 @@
   <scm>
     <connection>scm:git:git://github.com/exoplatform/ecms.git</connection>
     <developerConnection>scm:git:git@github.com:exoplatform/ecms.git</developerConnection>
-    <tag>6.2.0-20210706</tag>
+    <tag>HEAD</tag>
     <url>https://fisheye.exoplatform.com/browse/ecms</url>
   </scm>
   <properties>
@@ -40,9 +40,9 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.2.0-20210706</org.exoplatform.social.version>
-    <addon.exo.jcr.version>6.2.0-20210706</addon.exo.jcr.version>
-    <org.exoplatform.platform-ui.version>6.2.0-20210706</org.exoplatform.platform-ui.version>
+    <org.exoplatform.social.version>6.2.x-SNAPSHOT</org.exoplatform.social.version>
+    <addon.exo.jcr.version>6.2.x-SNAPSHOT</addon.exo.jcr.version>
+    <org.exoplatform.platform-ui.version>6.2.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- **************************************** -->
     <!-- Google API -->
     <!-- **************************************** -->
