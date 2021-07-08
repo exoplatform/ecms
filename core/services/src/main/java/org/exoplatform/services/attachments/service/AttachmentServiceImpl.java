@@ -111,7 +111,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachmentId);
-    return getAttachmentById(entityType, entityId, attachmentId, userIdentityId);
+    return getAttachmentByIdByEntity(entityType, entityId, attachmentId, userIdentityId);
   }
 
   @Override
@@ -316,7 +316,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String entityType, long entityId, String attachmentId, long userIdentityId) {
+  public Attachment getAttachmentByIdByEntity(String entityType, long entityId, String attachmentId, long userIdentityId) {
     Attachment attachment = new Attachment();
     Session session = null;
     try {
@@ -335,13 +335,33 @@ public class AttachmentServiceImpl implements AttachmentService {
 
       attachment.setAcl(attachmentACL);
     } catch (Exception e) {
-      throw new IllegalStateException("Can't convert attachment JCR node with id " + attachmentId + " to entity");
+      throw new IllegalStateException("Can't convert attachment JCR node with id " + attachmentId + " to entity", e);
     } finally {
       if (session != null) {
         session.logout();
       }
     }
     return attachment;
+  }
+
+  @Override
+  public Attachment getAttachmentById(String attachmentId) {
+    Session session = null;
+    try {
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      return EntityBuilder.fromAttachmentNode(repositoryService,
+                                              documentService,
+                                              linkManager,
+                                              Utils.getCurrentWorkspace(repositoryService),
+                                              session,
+                                              attachmentId);
+    } catch (Exception e) {
+      throw new IllegalStateException("Can't convert attachment JCR node with id " + attachmentId + " to entity", e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
   }
 
   @Override
