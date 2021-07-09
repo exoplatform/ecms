@@ -104,10 +104,10 @@
           <attachment-item
             :attachment="attachment"
             :can-edit="attachment.acl && attachment.acl.canEdit"
-            :allow-to-remove="false"
             :allow-to-preview="false"
             :current-space="currentSpace"
             :current-drive="currentDrive"
+            allow-to-remove
             allow-to-edit />
         </span>
       </transition-group>

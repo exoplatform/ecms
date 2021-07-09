@@ -97,11 +97,13 @@ export default {
     this.$root.$on('handle-pasted-files-from-clipboard', this.handleFileUpload);
     this.$root.$on('reset-attachments-upload-input', () => this.resetUploadInput());
     this.$root.$on('abort-attachments-new-upload', () => this.abortUploadingNewAttachments());
+    this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
   },
   beforeDestroy() {
     this.$root.$off('handle-pasted-files-from-clipboard', this.handleFileUpload);
     this.$root.$off('reset-attachments-upload-input', this.resetUploadInput);
     this.$root.$off('abort-attachments-new-upload', this.abortUploadingNewAttachments);
+    this.$root.$off('abort-uploading-new-file', this.abortUploadingNewFile);
   },
   methods: {
     initDragAndDropEvents() {
@@ -221,41 +223,50 @@ export default {
       }
     },
     sendFileToServer(file) {
-      this.uploadingCount++;
-      this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
-        .catch(error => {
-          this.$root.$emit('attachments-notification-alert', {
-            message: error,
-            type: 'error',
-          });
-          this.removeAttachedFile(file);
-        });
-      this.controlUpload(file);
-    },
-    controlUpload(file) {
-      window.setTimeout(() => {
-        this.$uploadService.getUploadProgress(file.uploadId)
-          .then(percent => {
-            if (this.abortUploading) {
-              return;
-            } else {
-              file.uploadProgress = Number(percent);
-              if (!file.uploadProgress || file.uploadProgress < 100) {
-                this.controlUpload(file);
-              } else {
-                this.uploadingCount--;
-                this.processNextQueuedUpload();
-              }
-            }
-          })
+      if (!file.aborted) {
+        this.uploadingCount++;
+        this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
           .catch(error => {
-            this.removeAttachedFile(file);
             this.$root.$emit('attachments-notification-alert', {
               message: error,
               type: 'error',
             });
+            this.removeAttachedFile(file);
           });
-      }, 200);
+        this.controlUpload(file);
+      } else {
+        this.processNextQueuedUpload();
+      }
+    },
+    controlUpload(file) {
+      if (file.aborted) {
+        this.uploadingCount--;
+        this.processNextQueuedUpload();
+      } else {
+        window.setTimeout(() => {
+          this.$uploadService.getUploadProgress(file.uploadId)
+            .then(percent => {
+              if (this.abortUploading) {
+                return;
+              } else {
+                file.uploadProgress = Number(percent);
+                if (!file.uploadProgress || file.uploadProgress < 100) {
+                  this.controlUpload(file);
+                } else {
+                  this.uploadingCount--;
+                  this.processNextQueuedUpload();
+                }
+              }
+            })
+            .catch(error => {
+              this.removeAttachedFile(file);
+              this.$root.$emit('attachments-notification-alert', {
+                message: error,
+                type: 'error',
+              });
+            });
+        }, 200);
+      }
     },
     processNextQueuedUpload: function () {
       if (this.uploadingFilesQueue.length > 0) {
@@ -276,6 +287,14 @@ export default {
     abortUploadingNewAttachments() {
       this.resetUploadInput();
       this.abortUploading = true;
+    },
+    abortUploadingNewFile(file) {
+      if (file && file.uploadId) {
+        const fileIndex = this.newUploadedFiles.findIndex(f => f.uploadId === file.uploadId);
+        this.newUploadedFiles.splice(fileIndex, 1);
+      }
+      file.aborted = true;
+      this.$uploadService.abortUpload(file.uploadId);
     }
   }
 };
