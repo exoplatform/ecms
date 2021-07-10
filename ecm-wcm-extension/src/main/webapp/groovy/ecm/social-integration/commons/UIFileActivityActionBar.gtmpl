@@ -7,14 +7,6 @@
   def labelComment = _ctx.appRes("UIActivity.label.Comment");
   def totalLikesNum = uicomponent.getIdentityLikes().length;
   int allCommentSize = uicomponent.getAllCommentSize();
-  def isActivityShareable = uicomponent.isActivityShareable();
-  def params;
-  def activityType = uicomponent.getOriginalActivityType();
-  params = """ {
-		activityId: '${activity.id}',
-		activityType: '$activityType'
-  } """;
- 
 %>
 <div class="actionBar clearfix "><% def toggleDisplayCommentAction = uicomponent.event('ToggleDisplayCommentForm', null, false);
      def commentLink = "";
@@ -39,23 +31,7 @@
 			</a>
 		</li>
 		<% _ctx.includeTemplates("UIActivityActionBar-actions-after") %>
-		<li class="share-link" onclick="javascript:openDocumentDrawer($params);">
-			<i class="uiIconShare uiIcon16x16"></i>
-			<span class="share-text">$labelShare</span>
-		</li>
 	</ul>
-	<div class="VuetifyApp">
-		<div id="shareDocumentActivity-${activity.id}">
-			<script type="text/javascript">
-        require(["SHARED/ShareDocumentActivity"], shareDocumentActivity => shareDocumentActivity.init($params));
-      </script>
-		</div>
-	</div>
-	<script type="text/javascript">
-    function openDocumentDrawer(params) {
-      require(["SHARED/ShareDocumentActivity"], shareDocumentActivity => shareDocumentActivity.openShareDocumentActivityDrawer(params));
-    }
-  </script>
 </div>
 <!--end actionBar-->
 
