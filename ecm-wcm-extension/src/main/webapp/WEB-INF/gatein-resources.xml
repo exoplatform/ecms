@@ -158,44 +158,11 @@
     </depends>
   </module>
 
-  <module>
-    <name>ShareDocumentActivity</name>
-    <script>
-      <minify>false</minify>
-      <path>/js/shareDocumentActivity.bundle.js</path>
-    </script>
-    <depends>
-      <module>ShareActivityDrawer</module>
-    </depends>
-    <depends>
-      <module>snackbarComponent</module>
-    </depends>
-    <depends>
-      <module>vue</module>
-    </depends>
-    <depends>
-      <module>eXoVueI18n</module>
-    </depends>
-    <depends>
-      <module>extensionRegistry</module>
-    </depends>
-    <depends>
-      <module>vuetify</module>
-    </depends>
-  </module>
-
   <portal-skin>
     <skin-name>Enterprise</skin-name>
     <skin-module>customModuleAttachments</skin-module>
     <css-path>/skin/css/attachments.css</css-path>
     <css-priority>11</css-priority>
-  </portal-skin>
-
-  <portal-skin>
-    <skin-name>Enterprise</skin-name>
-    <skin-module>customModuleShareDocuments</skin-module>
-    <css-path>/skin/css/shareDocuments.css</css-path>
-    <css-priority>10</css-priority>
   </portal-skin>
 
 
