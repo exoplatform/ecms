@@ -11,9 +11,6 @@
     <type>org.exoplatform.wcm.ext.component.document.service.ShareDocumentService</type>
   </component>
   <component>
-    <type>org.exoplatform.wcm.ext.component.document.service.rest.ShareDocumentRestService</type>
-  </component>
-  <component>
     <type>org.exoplatform.wcm.ext.component.document.service.rest.ContentViewerRESTService</type>
   </component>
   <component>

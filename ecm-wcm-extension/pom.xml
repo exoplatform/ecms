@@ -198,7 +198,6 @@
               <compress>false</compress>
               <includes>
                 <include>attachments.less</include>
-                <include>shareDocuments.less</include>
               </includes>
             </configuration>
             <goals>

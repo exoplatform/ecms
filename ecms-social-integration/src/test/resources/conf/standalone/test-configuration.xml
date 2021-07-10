@@ -221,6 +221,10 @@
   </component>
 
   <component>
+    <type>org.exoplatform.social.core.jpa.storage.dao.ActivityShareActionDAO</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.social.core.jpa.storage.dao.StreamItemDAO</key>
     <type>org.exoplatform.social.core.jpa.storage.dao.jpa.StreamItemDAOImpl</type>
   </component>
