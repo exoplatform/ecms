@@ -1,6 +1,5 @@
 <template>
   <v-list-item
-    v-if="!invalid"
     :id="id"
     class="py-1"
     @click="openPreview">
@@ -17,6 +16,25 @@
           class="text-color ma-0 text-wrap" />
       </v-list-item-title>
     </v-list-item-content>
+    <v-list-item-action
+      v-if="invalid || loading"
+      class="my-auto">
+      <v-progress-circular
+        v-if="loading"
+        color="primary"
+        indeterminate />
+      <v-tooltip v-else bottom>
+        <template #activator="{ on, attrs }">
+          <v-icon
+            color="error"
+            v-bind="attrs"
+            v-on="on">
+            fa-exclamation-circle
+          </v-icon>
+        </template>
+        {{ $t('attachments.alert.unableToAccessFile') }}
+      </v-tooltip>
+    </v-list-item-action>
   </v-list-item>
 </template>
 
@@ -41,6 +59,7 @@ export default {
     },
   },
   data: () => ({
+    loading: false,
     invalid: false,
     dateFormat: {
       year: 'numeric',
@@ -100,15 +119,9 @@ export default {
       return this.activity && this.activity.activityStream && this.activity.activityStream.space && this.activity.activityStream.space.groupId.replace('/spaces/', '');
     },
   },
-  watch: {
-    invalid() {
-      if (this.invalid) {
-        this.$emit('delete-invald-attachment');
-      }
-    },
-  },
   methods: {
     openPreview() {
+      this.loading = true;
       this.$attachmentService.getAttachmentById(this.attachment.id)
         .then(attachment => {
           const updaterFullName = attachment && attachment.updater && attachment.updater.profile && attachment.updater.profile.fullname || '';
@@ -148,7 +161,8 @@ export default {
         .catch(e => {
           console.error(e);
           this.invalid = true;
-        });
+        })
+        .finally(() => this.loading = false);
     },
   },
 };
