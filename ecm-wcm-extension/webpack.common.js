@@ -5,7 +5,6 @@ let config = {
   // set the entry point of the application
   // can use multiple entry
   entry: {
-    shareDocumentActivity: './src/main/webapp/share-activity-document/main.js',
     attachmentsSelector: './src/main/webapp/attachments-selector/main.js',
   },
   module: {
