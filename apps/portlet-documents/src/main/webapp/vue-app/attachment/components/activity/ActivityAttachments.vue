@@ -1,14 +1,21 @@
 <template>
-  <v-list dense class="pa-0">
-    <activity-attachment
+  <v-carousel
+    :continuous="false"
+    height="250px"
+    light
+    hide-delimiters>
+    <v-carousel-item
       v-for="(attachment, index) in attachments"
       :key="attachment.id"
-      :activity="activity"
-      :index="index"
-      :count="attachmentsCount"
-      :attachment="attachment"
-      @delete-invald-attachment="deleteAttachment(attachment)" />
-  </v-list>
+      class="my-auto">
+      <activity-attachment
+        :activity="activity"
+        :index="index"
+        :count="attachmentsCount"
+        :attachment="attachment"
+        @delete-invald-attachment="deleteAttachment(attachment)" />
+    </v-carousel-item>
+  </v-carousel>
 </template>
 
 <script>
@@ -35,24 +42,28 @@ export default {
       const mimeTypes = this.splitParam('mimeType');
 
       const attachments = [];
-      docPaths.forEach((docPath, index) => {
+      docPaths.forEach((path, index) => {
         const mimeType = this.getParamValue(mimeTypes, index);
         const icon = mimeType && `primary--text uiIconFileType${mimeType.replaceAll(/[/.\\]/g, '')}` || '';
-        let name = docTitles && docTitles.length > index && docTitles[index] || docPath.replaceAll(/(.*)\//g, '');
+        let name = docTitles && docTitles.length > index && docTitles[index] || path.replaceAll(/(.*)\//g, '');
         try {
           name = decodeURIComponent(name.replace(/%25/g, '%').replace(/%([^2][^5])/g, '%25$1'));
         } catch (e) {
           // could happen, but ignore it
         }
+        const repository = this.getParamValue(repositories, index);
+        const workspace = this.getParamValue(workspaces, index);
+        const imageURL = mimeType.includes('image/') && `${eXo.env.portal.context}/${eXo.env.portal.rest}/jcr/${repository}/${workspace}${path}` || null;
 
         attachments.push({
           id: this.getParamValue(ids, index),
           name,
-          path: docPath,
+          mimeType,
+          image: imageURL,
+          path,
+          repository,
+          workspace,
           icon: `uiIconPLFFont ${icon} uiIconFileTypeDefault`,
-          repository: this.getParamValue(repositories, index),
-          workspace: this.getParamValue(workspaces, index),
-          mimeType: this.getParamValue(mimeTypes, index),
         });
       });
       return attachments;
