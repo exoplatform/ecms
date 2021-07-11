@@ -139,7 +139,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
         nodeName = getFileName(parentUploadNode, nodeName, nodeName, 1);
         node = parentUploadNode.addNode(nodeName, NodetypeConstant.NT_FILE);
       }
-      node.setProperty("exo:title", nodeName);
+      node.setProperty("exo:title", uploadedResource.getFileName());
       Node resourceNode = node.addNode("jcr:content", "nt:resource");
       resourceNode.setProperty("jcr:mimeType", uploadedResource.getMimeType());
       resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
@@ -156,6 +156,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
       concatenateParam(activity.getTemplateParams(), "REPOSITORY", "repository");
       concatenateParam(activity.getTemplateParams(), "WORKSPACE", "collaboration");
       concatenateParam(activity.getTemplateParams(), "DOCPATH", node.getPath());
+      concatenateParam(activity.getTemplateParams(), "docTitle", uploadedResource.getFileName());
       concatenateParam(activity.getTemplateParams(), "mimeType", resourceNode.getProperty("jcr:mimeType").getString());
       concatenateParam(activity.getTemplateParams(), "id", node.isNodeType("mix:referenceable") ? node.getUUID() : "");
 
@@ -178,9 +179,17 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
     if (activity.getTemplateParams() == null) {
       activity.setTemplateParams(new HashMap<>());
     }
+    String nodeTitle;
+    try {
+      nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(attachmentNode);
+    } catch (Exception e1) {
+      nodeTitle = attachmentNode.getName();
+    }
+
     concatenateParam(activity.getTemplateParams(), "REPOSITORY", "repository");
     concatenateParam(activity.getTemplateParams(), "WORKSPACE", "collaboration");
     concatenateParam(activity.getTemplateParams(), "DOCPATH", attachmentNode.getPath());
+    concatenateParam(activity.getTemplateParams(), "docTitle", nodeTitle);
     concatenateParam(activity.getTemplateParams(), "mimeType", resourceNode.getProperty("jcr:mimeType").getString());
     concatenateParam(activity.getTemplateParams(), "id", attachmentNode.isNodeType("mix:referenceable") ? attachmentNode.getUUID() : "");
   }

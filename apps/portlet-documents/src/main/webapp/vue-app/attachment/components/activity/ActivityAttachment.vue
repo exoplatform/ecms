@@ -20,7 +20,7 @@
         :data="attachment.name"
         :line-clamp="2"
         end-char="..."
-        class="text-color text-wrap mx-0 my-auto" />
+        class="text-color text-wrap text-break mx-0 my-auto" />
     </v-card-text>
     <v-expand-transition>
       <v-card
