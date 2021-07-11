@@ -6,10 +6,19 @@
     width="250px"
     max-width="100%"
     elevation="0"
-    class="activity-attachment mx-auto border-color d-flex flex-column"
+    class="activity-attachment overflow-hidden mx-2 border-color d-flex flex-column"
     @click="openPreview">
-    <v-card-text class="activity-attachment-thumbnail d-flex flex-grow-1">
+    <v-card-text class="activity-attachment-thumbnail d-flex flex-grow-1 pa-0">
+      <v-img
+        v-if="image"
+        :src="attachment.image"
+        max-height="152px"
+        max-width="250px"
+        contain
+        eager
+        @error="image = null" />
       <v-icon
+        v-else
         :class="attachment.icon"
         class="ma-auto d-flex"
         size="80px" />
@@ -73,6 +82,7 @@ export default {
   data: () => ({
     loading: false,
     invalid: false,
+    image: false,
     dateFormat: {
       year: 'numeric',
       month: 'long',
@@ -130,6 +140,9 @@ export default {
     spaceURL() {
       return this.activity && this.activity.activityStream && this.activity.activityStream.space && this.activity.activityStream.space.groupId.replace('/spaces/', '');
     },
+  },
+  created() {
+    this.image = this.attachment && this.attachment.image;
   },
   methods: {
     closeErrorBox(event) {
