@@ -1,21 +1,14 @@
 <template>
-  <v-carousel
-    :continuous="false"
-    height="250px"
-    light
-    hide-delimiters>
-    <v-carousel-item
+  <card-carousel parent-class="activity-files-parent">
+    <activity-attachment
       v-for="(attachment, index) in attachments"
       :key="attachment.id"
-      class="my-auto">
-      <activity-attachment
-        :activity="activity"
-        :index="index"
-        :count="attachmentsCount"
-        :attachment="attachment"
-        @delete-invald-attachment="deleteAttachment(attachment)" />
-    </v-carousel-item>
-  </v-carousel>
+      :activity="activity"
+      :index="index"
+      :count="attachmentsCount"
+      :attachment="attachment"
+      class="activity-file-item" />
+  </card-carousel>
 </template>
 
 <script>
@@ -53,7 +46,7 @@ export default {
         }
         const repository = this.getParamValue(repositories, index);
         const workspace = this.getParamValue(workspaces, index);
-        const imageURL = mimeType.includes('image/') && `${eXo.env.portal.context}/${eXo.env.portal.rest}/jcr/${repository}/${workspace}${path}` || null;
+        const imageURL = mimeType.includes('image/') && `${eXo.env.portal.context}/${eXo.env.portal.rest}/jcr/${repository}/${workspace}${path.replace(/\[/g, '%5b').replace(/\]/g, '%5d').replace(/\+/g, '%2b')}` || null;
 
         attachments.push({
           id: this.getParamValue(ids, index),
@@ -84,13 +77,6 @@ export default {
         return arr[index];
       }
       return null;
-    },
-    deleteAttachment(attachment) {
-      const index = this.attachments.findIndex(att => att === attachment);
-      if (index >= 0) {
-        this.attachments.splice(index, 1);
-        this.$forceUpdate();
-      }
     },
   },
 };

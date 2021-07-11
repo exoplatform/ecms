@@ -1,62 +1,65 @@
 <template>
-  <v-card
-    :loading="loading"
-    height="210px"
-    max-height="210px"
-    width="250px"
-    max-width="100%"
-    elevation="0"
-    class="activity-attachment overflow-hidden mx-2 border-color d-flex flex-column"
-    @click="openPreview">
-    <v-card-text class="activity-attachment-thumbnail d-flex flex-grow-1 pa-0">
-      <v-img
-        v-if="image"
-        :src="attachment.image"
-        max-height="152px"
-        max-width="250px"
-        contain
-        eager
-        @error="image = null" />
-      <v-icon
-        v-else
-        :class="attachment.icon"
-        class="ma-auto d-flex"
-        size="80px" />
-    </v-card-text>
-    <v-card-text class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
-      <ellipsis
-        :title="attachment.name"
-        :data="attachment.name"
-        :line-clamp="2"
-        end-char="..."
-        class="text-color text-wrap text-break mx-0 my-auto" />
-    </v-card-text>
-    <v-expand-transition>
-      <v-card
-        v-if="invalid"
-        class="d-flex flex-column transition-fast-in-fast-out v-card--reveal"
-        elevation="0"
-        style="height: 100%;">
-        <v-card-text class="pb-0 d-flex flex-row">
-          <v-icon color="error">fa-exclamation-circle</v-icon>
-          <p class="my-auto ms-2 font-weight-bold">
-            {{ $t('attachments.errorAccessingFile') }}
-          </p>
-        </v-card-text>
-        <v-card-text class="flex-grow-1">
-          <p>{{ $t('attachments.alert.unableToAccessFile') }}</p>
-        </v-card-text>
-        <v-card-actions class="pt-0">
-          <v-btn
-            text
-            color="primary"
-            @click="closeErrorBox">
-            {{ $t('attachments.close') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-expand-transition>
-  </v-card>
+  <v-hover v-slot="{hover}">
+    <v-card
+      :elevation="hover ? 4 : 0"
+      :class="{ 'border-color': !hover }"
+      :loading="loading"
+      height="210px"
+      max-height="210px"
+      width="252px"
+      max-width="100%"
+      class="activity-attachment overflow-hidden mx-2 d-flex flex-column border-box-sizing"
+      @click="openPreview">
+      <v-card-text class="activity-attachment-thumbnail d-flex flex-grow-1 pa-0">
+        <v-img
+          v-if="image"
+          :src="attachment.image"
+          max-height="152px"
+          max-width="250px"
+          contain
+          eager
+          @error="image = null" />
+        <v-icon
+          v-else
+          :class="attachment.icon"
+          class="ma-auto d-flex"
+          size="80px" />
+      </v-card-text>
+      <v-card-text class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
+        <ellipsis
+          :title="attachment.name"
+          :data="attachment.name"
+          :line-clamp="2"
+          end-char="..."
+          class="text-color text-wrap text-break mx-0 my-auto" />
+      </v-card-text>
+      <v-expand-transition>
+        <v-card
+          v-if="invalid"
+          class="d-flex flex-column transition-fast-in-fast-out v-card--reveal"
+          elevation="0"
+          style="height: 100%;">
+          <v-card-text class="pb-0 d-flex flex-row">
+            <v-icon color="error">fa-exclamation-circle</v-icon>
+            <p class="my-auto ms-2 font-weight-bold">
+              {{ $t('attachments.errorAccessingFile') }}
+            </p>
+          </v-card-text>
+          <v-card-text class="flex-grow-1">
+            <p>{{ $t('attachments.alert.unableToAccessFile') }}</p>
+          </v-card-text>
+          <v-card-actions class="pt-0">
+            <v-btn
+              text
+              color="primary"
+              @click="closeErrorBox">
+              {{ $t('attachments.close') }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-expand-transition>
+    </v-card>
+  </v-hover>
 </template>
 
 <script>
