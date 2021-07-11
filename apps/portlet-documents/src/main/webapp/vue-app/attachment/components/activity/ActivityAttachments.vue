@@ -30,14 +30,20 @@ export default {
                         || (this.activity.templateParams.workspace && [this.activity.templateParams.workspace]);
       const docPaths = this.activity.templateParams.DOCPATH && this.splitParam('DOCPATH')
                         || (this.activity.templateParams.nodePath && [this.activity.templateParams.nodePath]);
+      const docTitles = this.activity.templateParams.docTitle && this.splitParam('docTitle');
       const ids = this.splitParam('id');
       const mimeTypes = this.splitParam('mimeType');
 
       const attachments = [];
       docPaths.forEach((docPath, index) => {
-        const name = docPath.replaceAll(/(.*)\//g, '');
         const mimeType = this.getParamValue(mimeTypes, index);
         const icon = mimeType && `primary--text uiIconFileType${mimeType.replaceAll(/[/.\\]/g, '')}` || '';
+        let name = docTitles && docTitles.length > index && docTitles[index] || docPath.replaceAll(/(.*)\//g, '');
+        try {
+          name = decodeURIComponent(name.replace(/%25/g, '%').replace(/%([^2][^5])/g, '%25$1'));
+        } catch (e) {
+          // could happen, but ignore it
+        }
 
         attachments.push({
           id: this.getParamValue(ids, index),
