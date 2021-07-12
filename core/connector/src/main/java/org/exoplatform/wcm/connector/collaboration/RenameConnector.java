@@ -113,6 +113,10 @@ public class RenameConnector implements ResourceContainer {
       // Clarify new name & check to add extension
 
       String newName  = Text.escapeIllegalJcrChars(newTitle);
+
+      //clean node name
+      newName = Utils.cleanName(newName);
+
       newName = URLDecoder.decode(newName,"UTF-8");
 
       // Set default name if new title contain no valid character

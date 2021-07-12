@@ -29,6 +29,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.Status;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -87,6 +88,11 @@ public class OpenInOfficeConnector implements ResourceContainer, Startable {
           @QueryParam("lang") String language) throws Exception {
 
     //find from cached
+    try {
+      objId = URLDecoder.decode(objId, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      log.debug("Error while decoding file name", e);
+    }
     int indexColon = objId.indexOf(":/");
     if(indexColon < 0) {
       return Response.status(Response.Status.BAD_REQUEST)
