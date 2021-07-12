@@ -301,6 +301,8 @@ export default {
         movedFile.id,
         this.entityType,
         this.entityId).then(() => {
+        this.$root.$emit('entity-attachments-updated');
+        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.newUploadedFiles.filter(file => file.id === movedFile.id).map(file => {
           file.pathDestinationFolderForFile = folder;
           file.fileDrive = newDestinationPathDrive;
@@ -315,7 +317,10 @@ export default {
         folderId,
         this.entityType,
         this.entityId).then(() => {
-        this.newUploadedFiles.filter(file => file.id === folderId).map(file => file.pathDestinationFolderForFile = '');
+        this.newUploadedFiles.filter(file => file.id === folderId).map(file => {
+          file.pathDestinationFolderForFile = '';
+          file.fileDrive = this.currentDrive;
+        });
       });
     },
     setCloudDriveProgress({progress}) {

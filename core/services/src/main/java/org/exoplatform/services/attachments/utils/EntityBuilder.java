@@ -18,6 +18,7 @@ package org.exoplatform.services.attachments.utils;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -63,13 +64,23 @@ public class EntityBuilder {
     );
   }
 
-  public static final Attachment fromAttachmentNode(RepositoryService repositoryService,
+  public static final Attachment  fromAttachmentNode(RepositoryService repositoryService,
                                                     DocumentService documentService,
                                                     LinkManager linkManager,
                                                     String workspace,
                                                     Session session,
                                                     String attachmentId) throws Exception {
-    Node attachmentNode = session.getNodeByUUID(attachmentId);
+    Node attachmentNode = null;
+    Permission acl = new Permission();
+    try {
+      attachmentNode = session.getNodeByUUID(attachmentId);
+    } catch (AccessDeniedException e) {
+      Attachment privateAttachment = new Attachment();
+      acl.setCanAccess(false);
+      privateAttachment.setAcl(acl);
+      return privateAttachment;
+    }
+
     if (attachmentNode == null) {
       throw new ObjectNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
@@ -121,6 +132,10 @@ public class EntityBuilder {
       LOG.error("Error while getting file preview breadcrumb " + attachmentNode.getUUID(), e);
     }
     attachment.setPreviewBreadcrumb(previewBreadcrumb);
+
+    acl.setCanAccess(true);
+    attachment.setAcl(acl);
+
     return attachment;
   }
 
