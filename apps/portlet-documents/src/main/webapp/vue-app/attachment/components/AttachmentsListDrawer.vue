@@ -37,6 +37,7 @@
             <attachment-item
               :allow-to-edit="false"
               :attachment="attachment"
+              :can-access="attachment.acl && attachment.acl.canAccess"
               allow-to-preview />
           </span>
         </transition-group>

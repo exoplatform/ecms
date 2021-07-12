@@ -301,6 +301,8 @@ export default {
         movedFile.id,
         this.entityType,
         this.entityId).then(() => {
+        this.$root.$emit('entity-attachments-updated');
+        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.newUploadedFiles.filter(file => file.id === movedFile.id).map(file => {
           file.pathDestinationFolderForFile = folder;
           file.fileDrive = newDestinationPathDrive;
