@@ -151,4 +151,31 @@
     </depends>
   </module>
 
+  <module>
+    <name>ExoAttachmentsApp</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/attachmentsSelector.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+      <as>$</as>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+    <depends>
+      <module>commonVueComponents</module>
+    </depends>
+  </module>
+
 </gatein-resources>

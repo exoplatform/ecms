@@ -9,7 +9,8 @@ let config = {
     documents: './src/main/webapp/vue-app/documents/main.js',
     filesSearch: './src/main/webapp/vue-app/files-search/main.js',
     attachmentApp: './src/main/webapp/vue-app/attachment/main.js',
-    attachmentIntegration: './src/main/webapp/vue-app/attachment-integration/main.js'
+    attachmentIntegration: './src/main/webapp/vue-app/attachment-integration/main.js',
+    attachmentsSelector: './src/main/webapp/vue-app/attachments-selector/main.js',
   },
   output: {
     filename: 'js/[name].bundle.js',

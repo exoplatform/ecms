@@ -98,6 +98,11 @@ export default {
     this.$root.$on('reset-attachments-upload-input', () => this.resetUploadInput());
     this.$root.$on('abort-attachments-new-upload', () => this.abortUploadingNewAttachments());
   },
+  mounted() {
+    window.setTimeout(() => {
+      this.initDragAndDropEvents();
+    }, 500);
+  },
   beforeDestroy() {
     this.$root.$off('handle-pasted-files-from-clipboard', this.handleFileUpload);
     this.$root.$off('reset-attachments-upload-input', this.resetUploadInput);
@@ -121,24 +126,32 @@ export default {
           }.bind(this));
 
           document.addEventListener('dragover', function () {
-            this.$refs.dropFileBox.classList.add('dragStart');
+            if (this.$refs.dropFileBox) {
+              this.$refs.dropFileBox.classList.add('dragStart');
+            }
           }.bind(this));
 
           /*
             Capture the files from the drop event and add them to our local files
             array.
           */
-          this.$refs.dropFileBox.addEventListener('drop', function (e) {
-            this.$refs.dropFileBox.classList.remove('dragStart');
-            this.handleFileUpload(e.dataTransfer.files);
-          }.bind(this));
+          if (this.$refs.dropFileBox) {
+            this.$refs.dropFileBox.addEventListener('drop', function (e) {
+              this.$refs.dropFileBox.classList.remove('dragStart');
+              this.handleFileUpload(e.dataTransfer.files);
+            }.bind(this));
+          }
 
           document.addEventListener('dragleave', function () {
-            this.$refs.dropFileBox.classList.remove('dragStart');
+            if (this.$refs.dropFileBox) {
+              this.$refs.dropFileBox.classList.remove('dragStart');
+            }
           }.bind(this));
 
           document.addEventListener('drop', function () {
-            this.$refs.dropFileBox.classList.remove('dragStart');
+            if (this.$refs.dropFileBox) {
+              this.$refs.dropFileBox.classList.remove('dragStart');
+            }
           }.bind(this));
 
           window.require(['SHARED/jquery'], function ($) {
