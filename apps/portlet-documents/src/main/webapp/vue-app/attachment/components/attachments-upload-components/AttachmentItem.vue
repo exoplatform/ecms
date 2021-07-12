@@ -23,7 +23,7 @@
     </v-list-item-avatar>
     <v-list-item-content @click="openPreview()">
       <v-list-item-title class="uploadedFileTitle">
-        {{ attachment.name }}
+        {{ attachment.name || notAccessibleAttachmentTitle }}
       </v-list-item-title>
       <v-list-item-subtitle v-if="canMoveAttachment" class="d-flex v-messages uploadedFileSubTitle">
         <v-chip
@@ -53,6 +53,14 @@
         depressed>
         fa-info-circle
       </v-icon>
+      <v-icon
+        v-if="!canAccess"
+        :title="notAccessibleAttachmentTooltip"
+        size="14"
+        color="primary"
+        depressed>
+        fa-info-circle
+      </v-icon>
       <v-btn
         v-if="attachment.uploadProgress && attachment.uploadProgress !== 100 && allowToRemove"
         class="d-flex flex-column pb-3 align-end"
@@ -64,7 +72,7 @@
         <i class="uiIconCloseCircled error--text"></i>
       </v-btn>
       <div
-        v-else-if="allowToRemove"
+        v-else-if="allowToRemove && canAccess"
         :class="!canRemoveAttachment && 'not-allowed'"
         :title="!canRemoveAttachment && $t('attachments.remove.notAuthorize')"
         class="remove-button">
@@ -114,6 +122,10 @@ export default {
     canEdit: {
       type: Boolean,
       default: false
+    },
+    canAccess: {
+      type: Boolean,
+      default: true
     },
     smallAttachmentIcon: {
       type: Boolean,
@@ -175,10 +187,19 @@ export default {
       return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     },
     canRemoveAttachment() {
-      return this.attachment && this.attachment.acl && this.attachment.acl.canDelete || !this.attachment.id || this.attachment.isSelectedFromDrives;
+      return this.attachmentHasPermission && this.attachmentHasPermission.canDelete || !this.attachment.id || this.attachment.isSelectedFromDrives;
     },
     canMoveAttachment() {
       return this.canEdit && this.allowToEdit && !this.attachment.isSelectedFromDrives;
+    },
+    attachmentHasPermission() {
+      return this.attachment && this.attachment.acl;
+    },
+    notAccessibleAttachmentTitle() {
+      return !this.canAccess && this.$t('attachment.notAccessible.title') || '';
+    },
+    notAccessibleAttachmentTooltip() {
+      return this.$t('attachment.notAccessible.tooltip');
     },
   },
   methods: {

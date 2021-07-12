@@ -258,7 +258,8 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                                entityType,
                                                                attachmentId);
     } catch (Exception e) {
-      throw new IllegalStateException("Can't get attachment with jcr uuid " + attachmentId + " of entity with type " + entityType + " and id " + entityId);
+      throw new IllegalStateException("Can't get attachment with jcr uuid " + attachmentId + " of entity with type " + entityType
+          + " and id " + entityId);
     } finally {
       if (session != null) {
         session.logout();
@@ -309,8 +310,10 @@ public class AttachmentServiceImpl implements AttachmentService {
       boolean canView = canView(userIdentityId, entityType, entityId);
       boolean canDelete = canDelete(userIdentityId, entityType, entityId);
       boolean canEdit = canEdit(userIdentityId, entityType, entityId);
-      Permission attachmentACL = new Permission(canView, canDelete, canEdit);
-      entityAttachments.forEach(attachment -> attachment.setAcl(attachmentACL));
+      entityAttachments.forEach(attachment -> {
+        Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDelete, canEdit);
+        attachment.setAcl(attachmentACL);
+      });
     }
     return entityAttachments;
   }
@@ -331,7 +334,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       boolean canView = canView(userIdentityId, entityType, entityId);
       boolean canDelete = canDelete(userIdentityId, entityType, entityId);
       boolean canEdit = canEdit(userIdentityId, entityType, entityId);
-      Permission attachmentACL = new Permission(canView, canDelete, canEdit);
+      Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDelete, canEdit);
 
       attachment.setAcl(attachmentACL);
     } catch (Exception e) {
