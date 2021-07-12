@@ -203,7 +203,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_EMPTY);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_EMPTY);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -220,7 +220,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -242,7 +242,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_TWO_DOCS);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_TWO_DOCS);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -270,7 +270,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -292,7 +292,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_IS_INDEXED);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_IS_INDEXED);
     
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
     
@@ -309,7 +309,7 @@ public class TestFileSearchServiceConnector {
     // Given
     startSessionAs("john");
     InitParams initParams = buildInitParams();
-    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_IS_NOT_INDEXED);
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_IS_NOT_INDEXED);
     
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
     
@@ -332,6 +332,7 @@ public class TestFileSearchServiceConnector {
     propertiesParam.setProperty("displayName", "Files");
     propertiesParam.setProperty("searchFields", "name,tag,title,attachment.content");
     initParams.put("constructor.params", propertiesParam);
+    propertiesParam.setProperty("index_current", "index_name");
     return initParams;
   }
 
