@@ -317,7 +317,10 @@ export default {
         folderId,
         this.entityType,
         this.entityId).then(() => {
-        this.newUploadedFiles.filter(file => file.id === folderId).map(file => file.pathDestinationFolderForFile = '');
+        this.newUploadedFiles.filter(file => file.id === folderId).map(file => {
+          file.pathDestinationFolderForFile = '';
+          file.fileDrive = this.currentDrive;
+        });
       });
     },
     setCloudDriveProgress({progress}) {
