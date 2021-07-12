@@ -10,12 +10,12 @@
         @click="openAttachmentsAppDrawer()">
         <slot name="attachmentsButton"></slot>
       </div>
-      <div v-else-if="entityId && entityType" :class="!attachmentsToDisplay.length && 'v-main align-center'">
+      <div v-else-if="entityId && entityType" :class="!attachments.length && 'v-main align-center'">
         <v-icon size="18" color="primary">
           fa-paperclip
         </v-icon>
         <div
-          v-if="!attachmentsToDisplay.length"
+          v-if="!attachments.length"
           class="addAttachments d-flex align-center ms-3"
           @click="openAttachmentsAppDrawer()">
           <a class="addAttachmentLabel primary--text font-weight-bold text-decoration-underline">{{
@@ -34,21 +34,22 @@
         v-if="$scopedSlots.attachmentsList"
         class="attachedFilesList"
         @click="openAttachmentsDrawerList()">
-        <slot :attachments="attachmentsToDisplay" name="attachedFilesList"></slot>
+        <slot :attachments="attachments" name="attachedFilesList"></slot>
       </div>
       <div v-else-if="entityId && entityType" class="attachmentsPreview v-card__text ms-3 pa-0">
-        <div v-if="attachmentsToDisplay.length" class="attachmentsList">
+        <div v-if="attachments.length" class="attachmentsList">
           <a
             class="viewAllAttachments primary--text font-weight-bold text-decoration-underline"
             @click="openAttachmentsDrawerList()">
-            {{ $t('attachments.view.all') }} ({{ attachmentsToDisplay && attachmentsToDisplay.length }})
+            {{ $t('attachments.view.all') }} ({{ attachments && attachments.length }})
           </a>
           <v-list v-if="!$scopedSlots.attachmentsList" dense>
             <v-list-item-group>
               <attachment-item
-                v-for="attachment in attachmentsToDisplay.slice(0, 2)"
+                v-for="attachment in attachments.slice(0, 2)"
                 :key="attachment.id"
                 :attachment="attachment"
+                :can-access="attachment.acl && attachment.acl.canAccess"
                 :allow-to-remove="false"
                 :allow-to-edit="false"
                 allow-to-preview
@@ -92,9 +93,6 @@ export default {
     };
   },
   computed: {
-    attachmentsToDisplay() {
-      return this.attachments.filter(attachment => attachment.id);
-    },
     attachmentAppConfiguration() {
       return {
         'entityId': this.entityId,
