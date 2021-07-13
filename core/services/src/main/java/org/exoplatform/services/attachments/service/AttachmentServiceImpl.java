@@ -16,10 +16,12 @@
  */
 package org.exoplatform.services.attachments.service;
 
+import java.security.AccessControlException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.apache.commons.lang.StringUtils;
@@ -36,6 +38,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -190,13 +193,14 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
-    boolean canDelete = canDelete(userIdentityId, entityType, entityId);
+    boolean canDelete = canDelete(userIdentityId, entityType, entityId, "");
     if (userIdentity == null || !canDelete) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
     List<Attachment> existingEntityAttachments;
     Session session = null;
+
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
       existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
@@ -243,7 +247,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
-    boolean canDelete = canDelete(userIdentityId, entityType, entityId);
+    boolean canDelete = canDelete(userIdentityId, entityType, entityId, attachmentId);
     if (userIdentity == null || !canDelete) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
@@ -307,10 +311,10 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     if (!entityAttachments.isEmpty()) {
-      boolean canView = canView(userIdentityId, entityType, entityId);
-      boolean canDelete = canDelete(userIdentityId, entityType, entityId);
-      boolean canEdit = canEdit(userIdentityId, entityType, entityId);
       entityAttachments.forEach(attachment -> {
+        boolean canView = canView(userIdentityId, entityType, entityId, attachment.getId());
+        boolean canEdit = canEdit(userIdentityId, entityType, entityId, attachment.getId());
+        boolean canDelete = canDelete(userIdentityId, entityType, entityId, attachment.getId());
         Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDelete, canEdit);
         attachment.setAcl(attachmentACL);
       });
@@ -331,9 +335,9 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                     session,
                                                     attachmentId);
 
-      boolean canView = canView(userIdentityId, entityType, entityId);
-      boolean canDelete = canDelete(userIdentityId, entityType, entityId);
-      boolean canEdit = canEdit(userIdentityId, entityType, entityId);
+      boolean canView = canView(userIdentityId, entityType, entityId, attachment.getId());
+      boolean canDelete = canDelete(userIdentityId, entityType, entityId, attachment.getId());
+      boolean canEdit = canEdit(userIdentityId, entityType, entityId, attachment.getId());
       Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDelete, canEdit);
 
       attachment.setAcl(attachmentACL);
@@ -383,7 +387,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (StringUtils.isEmpty(newPathDrive)) {
       throw new IllegalArgumentException("New destination path's drive must not be empty");
     }
-    if (!canEdit(userIdentityId, entityType, entityId)) {
+    if (!canEdit(userIdentityId, entityType, entityId, attachmentId)) {
       throw new IllegalAccessException("User with identity id" + userIdentityId + "is not allowed to move attachment with id"
           + attachmentId);
     }
@@ -415,27 +419,59 @@ public class AttachmentServiceImpl implements AttachmentService {
     this.aclPlugins.put(aclPlugin.getEntityType(), aclPlugin);
   }
 
-  public boolean canView(long userIdentityId, String entityType, long entityId) {
+  public boolean canView(long userIdentityId, String entityType, long entityId, String attachmentId) {
     AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
-    if (attachmentACLPlugin == null) {
-      return false;
+    boolean jcrViewPermission = true;
+    if (!StringUtils.isBlank(attachmentId)) {
+      jcrViewPermission = checkAttachmentJCRPermission(attachmentId, PermissionType.READ);
     }
-    return attachmentACLPlugin.canView(userIdentityId, entityType, String.valueOf(entityId));
+    if (attachmentACLPlugin == null) {
+      return jcrViewPermission;
+    }
+    return jcrViewPermission && attachmentACLPlugin.canView(userIdentityId, entityType, String.valueOf(entityId));
   }
 
-  public boolean canDelete(long userIdentityId, String entityType, long entityId) {
+  public boolean canDelete(long userIdentityId, String entityType, long entityId, String attachmentId) {
     AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
-    if (attachmentACLPlugin == null) {
-      return false;
+    boolean jcrDeletePermission = true;
+    if (!StringUtils.isBlank(attachmentId)) {
+      jcrDeletePermission = checkAttachmentJCRPermission(attachmentId, PermissionType.REMOVE);
     }
-    return attachmentACLPlugin.canDelete(userIdentityId, entityType, String.valueOf(entityId));
+
+    if (attachmentACLPlugin == null) {
+      return jcrDeletePermission;
+    }
+
+    return jcrDeletePermission && attachmentACLPlugin.canDelete(userIdentityId, entityType, String.valueOf(entityId));
   }
 
-  public boolean canEdit(long userIdentityId, String entityType, long entityId) {
+  public boolean canEdit(long userIdentityId, String entityType, long entityId, String attachmentId) {
     AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
-    if (attachmentACLPlugin == null) {
-      return false;
+    boolean jcrEditPermission = true;
+    if (!StringUtils.isBlank(attachmentId)) {
+      jcrEditPermission = checkAttachmentJCRPermission(attachmentId, PermissionType.SET_PROPERTY);
     }
-    return attachmentACLPlugin.canEdit(userIdentityId, entityType, String.valueOf(entityId));
+    if (attachmentACLPlugin == null) {
+      return jcrEditPermission;
+    }
+    return jcrEditPermission && attachmentACLPlugin.canEdit(userIdentityId, entityType, String.valueOf(entityId));
   }
+
+  private boolean checkAttachmentJCRPermission(String attachmentId, String permissionType) {
+    Session session;
+    boolean attachmentPermission = true;
+    Node attachmentNode;
+    try {
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      attachmentNode = session.getNodeByUUID(attachmentId);
+      session.checkPermission(attachmentNode.getPath(), permissionType);
+    } catch (RepositoryException e) {
+      throw new IllegalStateException("Can't get attachment node with id" + attachmentId, e);
+    } catch (AccessControlException e) {
+      attachmentPermission = false;
+    }
+
+    return attachmentPermission;
+  }
+
 }
