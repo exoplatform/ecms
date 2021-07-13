@@ -1,6 +1,7 @@
 <template>
   <v-hover v-slot="{hover}">
     <v-card
+      :id="id"
       :elevation="hover ? 4 : 0"
       :class="{ 'border-color': !hover }"
       :loading="loading"
