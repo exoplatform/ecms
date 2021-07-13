@@ -272,8 +272,8 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Delete an attachment linked to the given entity", httpMethod = "DELETE", response = Response.class, consumes = "application/json", notes = "returns empty response")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
+  @ApiOperation(value = "Delete an attachment linked to the given entity", httpMethod = "DELETE", response = Response.class, consumes = "application/json", notes = "returns deleted attachment")
+  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
       @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
       @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
       @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
@@ -290,8 +290,15 @@ public class AttachmentsRestService implements ResourceContainer {
     }
     long userIdentityId = getCurrentUserIdentityId();
     try {
+      AttachmentEntity attachmentEntity =
+                                        EntityBuilder.fromAttachment(identityManager,
+                                                                     attachmentService.getAttachmentByIdByEntity(entityType,
+                                                                                                                 entityId,
+                                                                                                                 attachmentId,
+                                                                                                                 userIdentityId));
+
       attachmentService.deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
-      return Response.noContent().build();
+      return Response.ok(attachmentEntity).build();
     } catch (ObjectNotFoundException e) {
       LOG.error("Error when trying to delete the attachment with id '{}' from entity with type {} and id '{}'",
                 attachmentId,
