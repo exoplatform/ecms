@@ -18,15 +18,9 @@ package org.exoplatform.wcm.ext.component.document.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.ValueFormatException;
+import javax.jcr.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -38,22 +32,16 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.core.ExtendedSession;
-import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.core.*;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
-import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
 import org.exoplatform.social.core.identity.model.Identity;
-import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
-import org.exoplatform.social.core.identity.provider.SpaceIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
@@ -62,7 +50,6 @@ import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
 import org.exoplatform.social.webui.activity.UILinkActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
-import org.exoplatform.wcm.ext.component.activity.SharedFileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 
 
@@ -73,12 +60,28 @@ import org.exoplatform.wcm.ext.component.activity.listener.Utils;
  * Nov 19, 2014  
  */
 public class ShareDocumentService implements IShareDocumentService, Startable{
+  private static final String SHARED_TEMPLATE_PARAMS_PREFIX = "Shared_";
+
   private static final Log       LOG               = ExoLogger.getLogger(ShareDocumentService.class);
 
   public static final String     MIX_PRIVILEGEABLE = "exo:privilegeable";
 
   private static final boolean   POST_ACTIVITY     = true;
-  
+
+  public static final String     ID                        = "id";
+
+  public static final String     REPOSITORY                = "REPOSITORY";
+
+  public static final String     WORKSPACE                 = "WORKSPACE";
+
+  public static final String     DOCPATH                   = "DOCPATH";
+
+  public static final String     NODEPATH_NAME             = "nodePath";
+
+  public static final String     REPOSITORY_NAME           = "repository";
+
+  public static final String     WORKSPACE_NAME            = "collaboration";
+
   private SessionProviderService sessionProviderService;
 
   private LinkManager            linkManager;
@@ -305,23 +308,40 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
         LOG.error(e.getMessage(), e);
     }
   }
-  
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.wcm.ext.component.document.service.IShareDocumentService#shareDocumentActivityToSpace(java.lang.String, java.lang.String)
-   */
   @Override
-  public ExoSocialActivity shareDocumentActivityToSpace(String space, String activityId, String title, String type) throws Exception {
-    Space targetSpace = spaceService.getSpaceByPrettyName(space);
-    String authenticatedUser = ConversationState.getCurrent().getIdentity().getUserId();
-    Identity targetSpaceIdentity = identityManager.getOrCreateIdentity(SpaceIdentityProvider.NAME, space);
-    if (targetSpaceIdentity != null && SpaceUtils.isSpaceManagerOrSuperManager(authenticatedUser, targetSpace.getGroupId())
-        || (spaceService.isMember(targetSpace, authenticatedUser) && SpaceUtils.isRedactor(authenticatedUser, targetSpace.getGroupId()))) {
-      Map<String, String> originalActivityTemplateParams = activityManager.getActivity(activityId).getTemplateParams();
-      String[] originalActivityFilesWorkspaces = getParameterValues(originalActivityTemplateParams, UIDocActivity.WORKSPACE);
-      String[] originalActivityFilesIds = getParameterValues(originalActivityTemplateParams, FileUIActivity.ID);
+  public void shareDocumentActivityToSpace(ExoSocialActivity sharedActivity) throws Exception {
+    if (sharedActivity == null) {
+      throw new IllegalArgumentException("activity is mandarory");
+    }
+    if (sharedActivity.isComment() || sharedActivity.getActivityStream() == null) {
+      throw new IllegalArgumentException("comment is not allowed");
+    }
+    String sharedActivityId = sharedActivity.getId();
+    String originalActivityId = sharedActivity.getTemplateParams().get("originalActivityId");
+    String spacePrettyName = sharedActivity.getActivityStream().getPrettyId();
+    Space targetSpace = spaceService.getSpaceByPrettyName(spacePrettyName);
+    Identity targetSpaceIdentity = identityManager.getOrCreateSpaceIdentity(spacePrettyName);
+    Identity posterIdentity = identityManager.getIdentity(sharedActivity.getPosterId());
+    String posterUsername = posterIdentity.getRemoteId();
+    if (targetSpaceIdentity != null && SpaceUtils.isSpaceManagerOrSuperManager(posterUsername, targetSpace.getGroupId())
+        || (spaceService.isMember(targetSpace, posterUsername) && SpaceUtils.isRedactor(posterUsername, targetSpace.getGroupId()))) {
+      Map<String, String> originalActivityTemplateParams = activityManager.getActivity(originalActivityId).getTemplateParams();
+      String[] originalActivityFilesWorkspaces = getParameterValues(originalActivityTemplateParams, WORKSPACE);
+      if (originalActivityFilesWorkspaces == null) {
+        originalActivityFilesWorkspaces = getParameterValues(originalActivityTemplateParams, WORKSPACE_NAME);
+      }
+      if (originalActivityFilesWorkspaces == null || originalActivityFilesWorkspaces.length == 0) {
+        LOG.warn("Can't share document of activity {} to space of activity {}, because param {} is empty", originalActivityId, sharedActivityId, WORKSPACE);
+        return;
+      }
+      String[] originalActivityFilesIds = getParameterValues(originalActivityTemplateParams, ID);
+      if (originalActivityFilesIds == null || originalActivityFilesIds.length == 0) {
+        LOG.warn("Can't share document of activity {} to space of activity {}, because param {} is empty", originalActivityId, sharedActivityId, ID);
+        return;
+      }
       Map<String, String> templateParams = new HashMap<>();
-      concatenateParam(templateParams, "originalActivityId", activityId);
+      concatenateParam(templateParams, "originalActivityId", originalActivityId);
       if (originalActivityFilesIds != null && originalActivityFilesIds.length > 0) {
         for (int i = 0; i < originalActivityFilesIds.length; i++) {
           String originalActivityFileWorkspace = "collaboration";
@@ -342,14 +362,14 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
                                                                                        PermissionType.READ,
                                                                                        false);
           Node targetSpaceFileNode = originalActivityFileNode.getSession().getNodeByUUID(targetSpaceFileNodeUUID);
-          concatenateParam(templateParams, FileUIActivity.ID, targetSpaceFileNodeUUID);
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.ID, targetSpaceFileNodeUUID);
           String repository = ((ManageableRepository) targetSpaceFileNode.getSession().getRepository()).getConfiguration()
                                                                                                        .getName();
-          concatenateParam(templateParams, UIDocActivity.REPOSITORY, repository);
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.REPOSITORY, repository);
           String workspace = targetSpaceFileNode.getSession().getWorkspace().getName();
-          concatenateParam(templateParams, UIDocActivity.WORKSPACE, workspace);
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.WORKSPACE, workspace);
 
-          concatenateParam(templateParams, FileUIActivity.CONTENT_LINK, Utils.getContentLink(targetSpaceFileNode));
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.CONTENT_LINK, Utils.getContentLink(targetSpaceFileNode));
           String state;
           try {
             state = targetSpaceFileNode.hasProperty(Utils.CURRENT_STATE_PROP) ? targetSpaceFileNode.getProperty(Utils.CURRENT_STATE_PROP)
@@ -359,7 +379,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
           } catch (Exception e) {
             state = "";
           }
-          concatenateParam(templateParams, FileUIActivity.STATE, state);
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.STATE, state);
 
           /** The date formatter. */
           DateFormat dateFormatter = null;
@@ -368,7 +388,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
           if (targetSpaceFileNode.hasProperty(NodetypeConstant.EXO_DATE_CREATED)) {
             Calendar dateCreated = targetSpaceFileNode.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate();
             strDateCreated = dateFormatter.format(dateCreated.getTime());
-            concatenateParam(templateParams, FileUIActivity.DATE_CREATED, strDateCreated);
+            concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.DATE_CREATED, strDateCreated);
           }
           String strLastModified = "";
           if (targetSpaceFileNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
@@ -377,47 +397,39 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
               Calendar lastModified = contentNode.getProperty(NodetypeConstant.JCR_LAST_MODIFIED)
                                                  .getDate();
               strLastModified = dateFormatter.format(lastModified.getTime());
-              concatenateParam(templateParams, FileUIActivity.LAST_MODIFIED, strLastModified);
+              concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.LAST_MODIFIED, strLastModified);
             }
           }
 
-          concatenateParam(templateParams, FileUIActivity.MIME_TYPE, Utils.getMimeType(originalActivityFileNode));
-          concatenateParam(templateParams, FileUIActivity.IMAGE_PATH, Utils.getIllustrativeImage(targetSpaceFileNode));
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.MIME_TYPE, Utils.getMimeType(originalActivityFileNode));
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.IMAGE_PATH, Utils.getIllustrativeImage(targetSpaceFileNode));
           String nodeTitle;
           try {
             nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(targetSpaceFileNode);
           } catch (Exception e1) {
             nodeTitle = "";
           }
-          concatenateParam(templateParams, FileUIActivity.DOCUMENT_TITLE, nodeTitle);
-          concatenateParam(templateParams, FileUIActivity.DOCUMENT_VERSION, "");
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.DOCUMENT_TITLE, nodeTitle);
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.DOCUMENT_VERSION, "");
           concatenateParam(templateParams,
-                           FileUIActivity.DOCUMENT_SUMMARY,
+                           SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.DOCUMENT_SUMMARY,
                            Utils.getFirstSummaryLines(Utils.getSummary(targetSpaceFileNode), Utils.MAX_SUMMARY_CHAR_COUNT));
-          concatenateParam(templateParams, UIDocActivity.DOCPATH, targetSpaceFileNode.getPath());
-          concatenateParam(templateParams, UILinkActivity.LINK_PARAM, "");// to
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.DOCPATH, targetSpaceFileNode.getPath());
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UILinkActivity.LINK_PARAM, "");// to
                                                                           // check
                                                                           // if
                                                                           // necessary
-          concatenateParam(templateParams, UIDocActivity.IS_SYMLINK, "true");
-          concatenateParam(templateParams, "originalFileSize", getSize(originalActivityFileNode));
-          concatenateParam(templateParams, "originalFileDownloadUrl", org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(originalActivityFileNode));
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.IS_SYMLINK, "true");
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + "originalFileSize", getSize(originalActivityFileNode));
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + "originalFileDownloadUrl", org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(originalActivityFileNode));
         }
       }
 
       // create activity
-      ExoSocialActivity sharedActivity = new ExoSocialActivityImpl();
-      sharedActivity.setTitle(title);
-      sharedActivity.setType(SharedFileUIActivity.ACTIVITY_TYPE);
-      Identity authenticatedUserIdentity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, authenticatedUser);
-      sharedActivity.setUserId(authenticatedUserIdentity.getId());
       sharedActivity.setTemplateParams(templateParams);
-      activityManager.saveActivityNoReturn(targetSpaceIdentity, sharedActivity);
-      return sharedActivity;
+      activityManager.updateActivity(sharedActivity);
     }
-    return null;
   }
-  
 
   @Override
   public void start() {
