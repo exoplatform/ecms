@@ -110,7 +110,7 @@ export default {
         const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.uploadId === file.uploadId);
         this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
         if (file.uploadProgress !== this.maxProgress) {
-          this.uploadingCount--;
+          this.$root.$emit('abort-uploading-new-file', file);
         }
       } else if (file.isSelectedFromDrives) {
         const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
@@ -118,13 +118,15 @@ export default {
       } else {
         this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.startLoading();
         this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
+          this.$root.$emit('remove-attached-file', file);
           const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
           this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
           this.$root.$emit('attachments-notification-alert', {
             message: this.$t('attachments.delete.success'),
             type: 'success',
           });
-          this.$root.$emit('entity-attachments-updated');
+          this.initEntityAttachmentsList();
+          document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
           this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.endLoading();
         }).catch(e => {
           console.error(e);

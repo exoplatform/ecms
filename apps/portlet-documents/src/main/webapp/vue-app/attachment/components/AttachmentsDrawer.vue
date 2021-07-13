@@ -145,7 +145,7 @@ export default {
       return this.uploadedFiles.length > 0;
     },
     newUploadedFilesAdded() {
-      return this.attachments.some(attachment => attachment.uploadId);
+      return this.newUploadedFiles && this.newUploadedFiles.length > 0;
     },
     filesUploadedSuccessLabel() {
       return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');
@@ -214,6 +214,8 @@ export default {
     this.$root.$on('add-destination-path-for-file', (movedFile, pathDestinationFolder, folder, currentDrive) => {
       this.moveFileToNewDestinationFile(movedFile, pathDestinationFolder, folder, currentDrive);
     });
+    this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
+    this.$root.$on('remove-attached-file', this.removeAttachedFile);
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -462,6 +464,18 @@ export default {
         this.attachmentsChanged = true;
         this.newUploadedFiles.push(...selectedFromDrives);
         this.uploadAddedAttachments();
+      }
+    },
+    abortUploadingNewFile(file) {
+      if (file && file.uploadId) {
+        const fileIndex = this.newUploadedFiles.findIndex(f => f.uploadId === file.uploadId);
+        this.newUploadedFiles.splice(fileIndex, 1);
+      }
+    },
+    removeAttachedFile(file) {
+      if (file && file.id) {
+        const fileIndex = this.newUploadedFiles.findIndex(f => f.id === file.id);
+        this.newUploadedFiles.splice(fileIndex, 1);
       }
     }
   }
