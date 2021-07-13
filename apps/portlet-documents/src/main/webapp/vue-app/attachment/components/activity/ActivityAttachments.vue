@@ -20,17 +20,31 @@ export default {
     },
   },
   computed: {
+    templateParams() {
+      if (this.activity && this.activity.parentActivity) {
+        const templateParams = this.activity.parentActivity
+                               && this.activity.parentActivity.templateParams;
+        if (templateParams) {
+          const sharedTemplateParams = {};
+          Object.keys(templateParams).forEach(param => {
+            sharedTemplateParams[param.replace('Shared_', '')] = templateParams[param];
+          });
+          return sharedTemplateParams;
+        }
+      }
+      return this.activity && this.activity.templateParams;
+    },
     attachments() {
-      if (!this.activity || !this.activity.templateParams) {
+      if (!this.templateParams) {
         return [];
       }
-      const repositories = this.activity.templateParams.REPOSITORY && this.splitParam('REPOSITORY')
-                        || (this.activity.templateParams.repository && [this.activity.templateParams.repository]);
-      const workspaces = this.activity.templateParams.WORKSPACE && this.splitParam('WORKSPACE')
-                        || (this.activity.templateParams.workspace && [this.activity.templateParams.workspace]);
-      const docPaths = this.activity.templateParams.DOCPATH && this.splitParam('DOCPATH')
-                        || (this.activity.templateParams.nodePath && [this.activity.templateParams.nodePath]);
-      const docTitles = this.activity.templateParams.docTitle && this.splitParam('docTitle');
+      const repositories = this.templateParams.REPOSITORY && this.splitParam('REPOSITORY')
+                        || (this.templateParams.repository && [this.templateParams.repository]);
+      const workspaces = this.templateParams.WORKSPACE && this.splitParam('WORKSPACE')
+                        || (this.templateParams.workspace && [this.templateParams.workspace]);
+      const docPaths = this.templateParams.DOCPATH && this.splitParam('DOCPATH')
+                        || (this.templateParams.nodePath && [this.templateParams.nodePath]);
+      const docTitles = this.templateParams.docTitle && this.splitParam('docTitle');
       const ids = this.splitParam('id');
       const mimeTypes = this.splitParam('mimeType');
 
@@ -67,8 +81,8 @@ export default {
   },
   methods: {
     splitParam(value) {
-      if (this.activity && this.activity.templateParams && this.activity.templateParams[value]) {
-        return this.activity.templateParams[value].split('|@|');
+      if (this.activity && this.templateParams && this.templateParams[value]) {
+        return this.templateParams[value].split('|@|');
       }
       return [];
     },

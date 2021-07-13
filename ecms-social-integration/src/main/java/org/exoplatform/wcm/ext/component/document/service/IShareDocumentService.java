@@ -95,13 +95,10 @@ public interface IShareDocumentService {
   void unpublishDocumentToSpace(String space, ExtendedNode node);
   
   /**
-   * Share a document activity to a space
+   * Share documents of an activity to a space
    *
-   * @param space destination space will share activity in
-   * @param activityId id of the activity to be shared
-   * @param title title of the shared activity
-   * @param type type of the shared activity
-   * @return return the shared ExoSocialActivity
+   * @param sharedActivity shared activity
+   * @throws Exception when an error occurred while sharing document to space
    */
-  public ExoSocialActivity shareDocumentActivityToSpace(String space, String activityId, String title, String type) throws Exception;
+  void shareDocumentActivityToSpace(ExoSocialActivity sharedActivity) throws Exception;
 }

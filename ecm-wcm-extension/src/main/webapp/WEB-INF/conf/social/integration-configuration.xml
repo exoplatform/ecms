@@ -186,6 +186,11 @@
   <external-component-plugins>
     <target-component>org.exoplatform.social.core.manager.ActivityManager</target-component>
     <component-plugin>
+      <name>FileActivityListener</name>
+      <set-method>addActivityEventListener</set-method>
+      <type>org.exoplatform.ecms.activity.listener.FileActivityListener</type>
+    </component-plugin>
+    <component-plugin>
       <name>ActivityImageLinkUpdateListener</name>
       <set-method>addActivityEventListener</set-method>
       <type>org.exoplatform.social.ckeditor.listener.ActivityImageLinkUpdateListener</type>
