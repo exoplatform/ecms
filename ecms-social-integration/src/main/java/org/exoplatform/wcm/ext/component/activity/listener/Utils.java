@@ -184,7 +184,7 @@ public class Utils {
     if (isComment && StringUtils.isNotBlank(systemComment)) {
       activityParams.put(ContentUIActivity.IS_SYSTEM_COMMENT, String.valueOf(isComment));
     	activityParams.put(ContentUIActivity.SYSTEM_COMMENT, systemComment);
-    }else{
+    } else {
       activityParams.put(ContentUIActivity.IS_SYSTEM_COMMENT, String.valueOf(false));
       activityParams.put(ContentUIActivity.SYSTEM_COMMENT, "");
     }
@@ -192,6 +192,13 @@ public class Utils {
     activityParams.put(ContentUIActivity.COMMENT, systemComment);
     activityParams.put(ContentUIActivity.THUMBNAIL, getThumbnailUrl(node, repository, workspace) != null ? getThumbnailUrl(node, repository, workspace) : getDefaultThumbnailUrl(node));
     activityParams.put(ContentUIActivity.NODE_PATH, node.getPath());
+    String nodeTitle = node.getName();
+    try {
+      nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(node);
+    } catch (Exception e) {
+      // Nothing to do
+    }
+    activityParams.put(ContentUIActivity.DOCUMENT_TITLE, nodeTitle);
     return activityParams;
   }
 
