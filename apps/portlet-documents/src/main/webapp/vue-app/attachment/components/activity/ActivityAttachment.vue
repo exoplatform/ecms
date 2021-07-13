@@ -26,12 +26,10 @@
           size="80px" />
       </v-card-text>
       <v-card-text class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
-        <ellipsis
+        <div
           :title="attachment.name"
-          :data="attachment.name"
-          :line-clamp="2"
-          end-char="..."
-          class="text-color text-wrap text-break mx-0 my-auto" />
+          v-text="attachment.name"
+          class="text-color text-wrap text-break mx-0 my-auto text-truncate-2"></div>
       </v-card-text>
       <v-expand-transition>
         <v-card
