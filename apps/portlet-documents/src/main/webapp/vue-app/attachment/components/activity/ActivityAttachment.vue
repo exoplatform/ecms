@@ -28,8 +28,8 @@
       <v-card-text class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
         <div
           :title="attachment.name"
-          v-text="attachment.name"
-          class="text-color text-wrap text-break mx-0 my-auto text-truncate-2"></div>
+          class="text-color text-wrap text-break mx-0 my-auto text-truncate-2"
+          v-text="attachment.name"></div>
       </v-card-text>
       <v-expand-transition>
         <v-card
