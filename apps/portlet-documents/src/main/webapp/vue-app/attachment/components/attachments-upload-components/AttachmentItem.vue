@@ -63,7 +63,7 @@
       </v-icon>
       <v-btn
         v-if="attachment.uploadProgress && attachment.uploadProgress !== 100 && allowToRemove"
-        class="d-flex flex-column pb-3 align-end"
+        class="d-flex align-end"
         outlined
         x-small
         height="18"
@@ -78,16 +78,15 @@
         class="remove-button">
         <v-btn
           :disabled="!canRemoveAttachment"
-          class="d-flex flex-column pb-3 align-end"
+          class="d-flex align-end"
           outlined
           x-small
           height="24"
           width="24"
           @click="deleteAttachment(attachment)">
-          <i
+          <v-icon
             :class="!canRemoveAttachment && 'grey--text' || 'error--text'"
-            class="uiIconTrash uiIcon24x24">
-          </i>
+            class="uiIconTrash uiIcon24x24" />
         </v-btn>
       </div>
     </v-list-item-action>

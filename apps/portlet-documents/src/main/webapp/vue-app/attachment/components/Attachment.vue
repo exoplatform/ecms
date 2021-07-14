@@ -112,9 +112,6 @@ export default {
         if (file.uploadProgress !== this.maxProgress) {
           this.$root.$emit('abort-uploading-new-file', file);
         }
-      } else if (file.isSelectedFromDrives) {
-        const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
-        this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
       } else {
         this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.startLoading();
         this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
