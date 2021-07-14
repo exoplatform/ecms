@@ -41,6 +41,7 @@ import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.upload.UploadService.UploadLimit;
 import org.json.JSONObject;
+import org.json.simple.JSONValue;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -588,7 +589,7 @@ public class FileUploadHandler {
     rootElement.setAttribute("title", file.getName());
     rootElement.setAttribute("path", file.getPath());
     rootElement.setAttribute("mimetype", mimetype);
-    rootElement.setAttribute("previewBreadcrumb", String.valueOf(previewBreadcrumb));
+    rootElement.setAttribute("previewBreadcrumb", JSONValue.toJSONString(previewBreadcrumb));
     rootElement.setAttribute("downloadUrl", downloadUrl);
     rootElement.setAttribute("url", url);
     rootElement.setAttribute("lastEditor", lastEditor);

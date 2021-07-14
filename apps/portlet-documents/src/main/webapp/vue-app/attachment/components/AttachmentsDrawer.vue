@@ -445,6 +445,7 @@ export default {
       file.id = uploadedFile.UUID;
       uploadedFile.drive = file.fileDrive.title;
       uploadedFile.id = uploadedFile.UUID;
+      uploadedFile.previewBreadcrumb = JSON.parse(uploadedFile.previewBreadcrumb);
       this.uploadedFiles.push(uploadedFile);
     },
     abortUploadingFiles() {
