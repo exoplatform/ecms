@@ -48,7 +48,6 @@ import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
-import org.exoplatform.social.webui.activity.UILinkActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 
@@ -415,7 +414,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
                            SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.DOCUMENT_SUMMARY,
                            Utils.getFirstSummaryLines(Utils.getSummary(targetSpaceFileNode), Utils.MAX_SUMMARY_CHAR_COUNT));
           concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.DOCPATH, targetSpaceFileNode.getPath());
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UILinkActivity.LINK_PARAM, "");// to
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.LINK_PARAM, "");// to
                                                                           // check
                                                                           // if
                                                                           // necessary
