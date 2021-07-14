@@ -145,7 +145,7 @@ export default {
       return this.uploadedFiles.length > 0;
     },
     newUploadedFilesAdded() {
-      return this.newUploadedFiles && this.newUploadedFiles.length > 0;
+      return this.newUploadedFiles && this.newUploadedFiles.some(file => file.uploadId);
     },
     filesUploadedSuccessLabel() {
       return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');
