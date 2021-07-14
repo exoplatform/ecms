@@ -134,7 +134,9 @@ export default {
         document.id = document.UUID || document.id;
         document.date = new Date(document.date).getTime();
         document.timestamp = Date.now();
-        this.addDocumentToCache(document);
+        if (document.fileType.match(this.documentMimeTypeRegex)) {
+          this.addDocumentToCache(document);
+        }
       });
       this.retrieveCachedDocuments();
     },
