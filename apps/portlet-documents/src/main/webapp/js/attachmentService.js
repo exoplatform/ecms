@@ -248,6 +248,17 @@ export function removeEntityAttachment(entityId, entityType, attachmentId) {
   });
 }
 
+export function removeAllAttachmentsFromEntity(entityId, entityType) {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
+    credentials: 'include',
+    method: 'DELETE',
+  }).then((resp) => {
+    if (!resp || !resp.ok) {
+      throw new Error('Error removing entity\'s linked attachment');
+    }
+  });
+}
+
 export function getEntityAttachments(entityType, entityId) {
   return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}`, {
     credentials: 'include',
