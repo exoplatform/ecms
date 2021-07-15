@@ -50,7 +50,7 @@
                 :key="attachment.id"
                 :attachment="attachment"
                 :can-access="attachment.acl && attachment.acl.canAccess"
-                :allow-to-remove="false"
+                :allow-to-detach="false"
                 :allow-to-edit="false"
                 allow-to-preview
                 small-attachment-icon />
