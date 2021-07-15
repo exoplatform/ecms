@@ -107,7 +107,7 @@
             :allow-to-preview="false"
             :current-space="currentSpace"
             :current-drive="currentDrive"
-            allow-to-remove
+            :allow-to-detach="allowToDetach"
             allow-to-edit />
         </span>
       </transition-group>
@@ -142,10 +142,21 @@ export default {
       type: {},
       default: () => null
     },
+    entityId: {
+      type: String,
+      default: ''
+    },
+    entityType: {
+      type: String,
+      default: ''
+    },
   },
   computed: {
     displayMessageDestinationFolder() {
       return !this.attachments.length || !this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
+    },
+    allowToDetach() {
+      return !!this.entityId && !!this.entityType;
     },
   },
   methods: {

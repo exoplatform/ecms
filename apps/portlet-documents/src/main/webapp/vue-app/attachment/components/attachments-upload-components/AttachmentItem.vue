@@ -44,7 +44,7 @@
           @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChangeLocation') }}</a>
       </v-list-item-subtitle>
     </v-list-item-content>
-    <v-list-item-action class="d-flex flex-row align-center">
+    <v-list-item-action class="d-flex flex-row pe-2 align-center">
       <v-icon
         v-if="attachment.isSelectedFromDrives && fromAnotherSpaceAttachment || fromAnotherDriveAttachment"
         :title="attachmentPrivacyLabel"
@@ -62,23 +62,23 @@
         fa-info-circle
       </v-icon>
       <v-btn
-        v-if="attachment.uploadProgress && attachment.uploadProgress !== 100 && allowToRemove"
+        v-if="attachment.uploadProgress && attachment.uploadProgress !== 100 && allowToDetach"
         class="d-flex align-end"
         outlined
         x-small
         height="18"
         width="18"
-        @click="confirmDeleteAttachment(attachment)">
+        @click="deleteAttachment(attachment)">
         <i class="uiIconCloseCircled error--text"></i>
       </v-btn>
       <div
-        v-else-if="allowToRemove && canAccess"
+        v-else-if="allowToDetach && canAccess"
         :class="!canRemoveAttachment && 'not-allowed'"
-        :title="!canRemoveAttachment && $t('attachments.remove.notAuthorize')"
+        :title="!canRemoveAttachment && $t('attachments.remove.notAuthorize') || $t('attachment.detach')"
         class="remove-button">
         <v-btn
           :disabled="!canRemoveAttachment"
-          class="d-flex align-end"
+          class="d-flex"
           outlined
           x-small
           height="24"
@@ -86,17 +86,11 @@
           @click="deleteAttachment(attachment)">
           <v-icon
             :class="!canRemoveAttachment && 'grey--text' || 'error--text'"
-            class="uiIconTrash uiIcon24x24" />
+            small
+            class="fas fa-unlink" />
         </v-btn>
       </div>
     </v-list-item-action>
-    <exo-confirm-dialog
-      ref="deleteConfirmDialog"
-      :message="$t('attachments.message.confirmDeleteAttachment')"
-      :title="$t('attachments.title.confirmDeleteAttachment')"
-      :ok-label="$t('attachments.yes')"
-      :cancel-label="$t('attachments.no')"
-      @ok="confirmDeleteAttachment" />
   </div>
 </template>
 <script>
@@ -106,7 +100,7 @@ export default {
       type: Object,
       default: () => null
     },
-    allowToRemove: {
+    allowToDetach: {
       type: Boolean,
       default: true
     },
@@ -213,13 +207,6 @@ export default {
       }
     },
     deleteAttachment() {
-      if (!this.attachment.id || this.attachment.isSelectedFromDrives) {
-        this.confirmDeleteAttachment();
-      } else if (this.canRemoveAttachment) {
-        this.$refs.deleteConfirmDialog.open();
-      }
-    },
-    confirmDeleteAttachment() {
       if (this.canRemoveAttachment) {
         this.$root.$emit('remove-attachment-item', this.attachment);
       }
