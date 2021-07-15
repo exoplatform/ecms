@@ -35,7 +35,9 @@
             :schema-folder="schemaFolder"
             :max-files-count="maxFilesCount"
             :current-space="currentSpace"
-            :current-drive="currentDrive" />
+            :current-drive="currentDrive"
+            :entity-id="entityId"
+            :entity-type="entityType" />
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
