@@ -10,11 +10,11 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.plugin.doc.UIDocActivity;
-import org.exoplatform.social.webui.activity.UILinkActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 
 public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, String> {
   private static final Log LOG = ExoLogger.getLogger(WCMActivityUpdaterListener.class);
+  public static final String LINK_ACTIVITY_TYPE     = "LINK_ACTIVITY";
 
   public WCMActivityUpdaterListener() {
   }
@@ -24,7 +24,7 @@ public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, Stri
     ExoSocialActivity oldActivity = event.getSource();
     String type = (oldActivity.getType() == null) ? "" : oldActivity.getType();
     switch (type) {
-    case UILinkActivity.ACTIVITY_TYPE:
+    case LINK_ACTIVITY_TYPE:
       migrationLinkActivity(oldActivity, event.getData());
       break;
     case Utils.CONTENT_SPACES:

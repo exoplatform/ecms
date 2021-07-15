@@ -1,4 +1,4 @@
-(function ($, UIActivity, XSSUtils, editorbuttons) {
+(function ($, XSSUtils, editorbuttons) {
   MAX_LENGTH = 2000,
   documentPreview = {
     defaultSettings: {
@@ -1418,4 +1418,4 @@
   }
 
   return documentPreview;
-})($, UIActivity, XSSUtils, editorbuttons);
+})($, XSSUtils, editorbuttons);

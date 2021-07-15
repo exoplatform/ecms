@@ -1,7 +1,5 @@
 package org.exoplatform.social.addons.rdbms.listener;
 
-import static org.exoplatform.social.plugin.doc.UIDocActivityBuilder.ACTIVITY_TYPE;
-
 import javax.jcr.*;
 
 import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
@@ -15,6 +13,8 @@ import org.exoplatform.social.plugin.doc.UIDocActivity;
 
 public class DocActivityUpdaterListener extends Listener<ExoSocialActivity, String> {
   private static final Log LOG = ExoLogger.getLogger(DocActivityUpdaterListener.class);
+
+  public static final String ACTIVITY_TYPE = "DOC_ACTIVITY";
 
   @Override
   public void onEvent(Event<ExoSocialActivity, String> event) throws Exception {

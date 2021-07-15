@@ -595,34 +595,6 @@
   </external-component-plugins>
 
   <external-component-plugins>
-    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-    <component-plugin>
-      <name>add.action</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>Document Activity</name>
-          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
-            </field>
-            <field name="name">
-              <string>DOC_ACTIVITY</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.social.plugin.doc.UIDocActivity</string>
-            </field>
-            <field name="activityBuiderClass">
-              <string>org.exoplatform.social.plugin.doc.UIDocActivityBuilder</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
     <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
     <component-plugin>
       <name>Document Composer Plugin Resource Bundle</name>
@@ -713,63 +685,6 @@
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.documents.DocumentService</target-component>
-  </external-component-plugins>
-
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-    <component-plugin profiles="all">
-      <name>add.action</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>Content Activity</name>
-          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
-            </field>
-            <field name="name">
-              <string>contents:spaces</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.wcm.ext.component.activity.ContentUIActivity</string>
-            </field>
-            <field name="activityBuiderClass">
-              <string>org.exoplatform.wcm.ext.component.activity.ContentUIActivityBuilder</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-    <component-plugin profiles="all">
-      <name>add.action</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>File Activity</name>
-          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
-            </field>
-            <field name="name">
-              <string>files:spaces</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.wcm.ext.component.activity.FileUIActivity</string>
-            </field>
-            <field name="activityBuiderClass">
-              <string>org.exoplatform.wcm.ext.component.activity.FileUIActivityBuilder</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>
@@ -953,33 +868,6 @@
     </component-plugin>
   </external-component-plugins>
   <external-component-plugins>
-    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-    <component-plugin profiles="all">
-      <name>add.action</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>Share File Activity</name>
-          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
-            </field>
-            <field name="name">
-              <string>sharefiles:spaces</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.wcm.ext.component.activity.FileUIActivity</string>
-            </field>
-            <field name="activityBuiderClass">
-              <string>org.exoplatform.wcm.ext.component.activity.UISharedFileBuilder</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  <external-component-plugins>
     <target-component>org.exoplatform.commons.api.notification.service.setting.PluginContainer</target-component>
     <component-plugin>
       <name>notification.plugins</name>
@@ -1080,34 +968,6 @@
           <name>channel-id</name>
           <value>WEB_CHANNEL</value>
         </value-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-    <component-plugin profiles="all">
-      <name>add.action</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>Share Content Activity</name>
-          <object type="org.exoplatform.social.webui.activity.UIActivityExtension">
-            <field name="type">
-              <string>org.exoplatform.social.webui.activity.BaseUIActivity</string>
-            </field>
-            <field name="name">
-              <string>sharecontents:spaces</string>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.wcm.ext.component.activity.SharedContentUIActivity</string>
-            </field>
-            <field name="activityBuiderClass">
-              <string>org.exoplatform.wcm.ext.component.activity.UISharedContentBuilder</string>
-            </field>
-          </object>
-        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>

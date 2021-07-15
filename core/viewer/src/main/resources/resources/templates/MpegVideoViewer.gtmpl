@@ -38,10 +38,6 @@
   def binarySrc = Utils.getWebdavURL(currentNode);
   def width = "400";
   def height = "300";
-  if (uicomponent.getAncestorOfType(org.exoplatform.social.webui.activity.BaseUIActivity.class) != null) {
-    width = "330";
-    height = "200";
-  }
 %>
 
 <object id="MediaPlayer1" class="object-mkv-mpeg" CLASSID="CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701"
