@@ -418,7 +418,25 @@ export default {
     },
     updateLinkedAttachmentsToEntity() {
       const attachmentIds = this.attachments.map(attachment => attachment.id);
-      return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
+      if (attachmentIds.length === 0) {
+        return this.removeAllAttachmentsFromEntity(this.entityId, this.entityType);
+      } else {
+        return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
+          this.$root.$emit('entity-attachments-updated');
+          document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+          this.displaySuccessMessage();
+        }).catch(e => {
+          console.error(e);
+          this.$refs.attachmentsAppDrawer.endLoading();
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.$t('attachments.link.failed'),
+            type: 'error',
+          });
+        });
+      }
+    },
+    removeAllAttachmentsFromEntity(entityId, entityType) {
+      return this.$attachmentService.removeAllAttachmentsFromEntity(entityId, entityType).then(() => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.displaySuccessMessage();
