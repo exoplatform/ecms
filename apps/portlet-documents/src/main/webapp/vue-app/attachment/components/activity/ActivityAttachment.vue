@@ -1,5 +1,5 @@
 <template>
-  <v-hover v-slot="{hover}">
+  <v-hover v-slot="{hover}" :class="marginClass">
     <v-card
       :id="id"
       :elevation="hover ? 4 : 0"
@@ -9,7 +9,7 @@
       max-height="210px"
       width="252px"
       max-width="100%"
-      class="activity-attachment overflow-hidden mx-2 d-flex flex-column border-box-sizing"
+      class="activity-attachment overflow-hidden d-flex flex-column border-box-sizing"
       @click="openPreview">
       <v-card-text class="activity-attachment-thumbnail d-flex flex-grow-1 pa-0">
         <v-img
@@ -103,6 +103,13 @@ export default {
     },
     previousId() {
       return this.index && `#PreviewAttachment_${this.activity.id}_${this.index - 1}` || '';
+    },
+    marginClass() {
+      if (this.count === 1) {
+        return 'mx-auto';
+      }
+      const lastIndex = (this.count - 1) === this.index;
+      return this.index && (lastIndex && 'ms-2' || 'mx-2') || 'me-2';
     },
     username() {
       return this.activity && this.activity.identity.profile && this.activity.identity.profile.username || '';
