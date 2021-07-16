@@ -44,7 +44,7 @@
           @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChangeLocation') }}</a>
       </v-list-item-subtitle>
     </v-list-item-content>
-    <v-list-item-action class="d-flex flex-row pe-2 align-center">
+    <v-list-item-action class="d-flex flex-row align-center">
       <v-icon
         v-if="attachment.isSelectedFromDrives && fromAnotherSpaceAttachment || fromAnotherDriveAttachment"
         :title="attachmentPrivacyLabel"
@@ -68,24 +68,24 @@
         x-small
         height="18"
         width="18"
-        @click="deleteAttachment(attachment)">
+        @click="detachFile(attachment)">
         <i class="uiIconCloseCircled error--text"></i>
       </v-btn>
       <div
         v-else-if="allowToDetach && canAccess"
-        :class="!canRemoveAttachment && 'not-allowed'"
-        :title="!canRemoveAttachment && $t('attachments.remove.notAuthorize') || $t('attachment.detach')"
+        :class="!canDetachAttachment && 'not-allowed'"
+        :title="!canDetachAttachment && $t('attachments.remove.notAuthorize') || $t('attachment.detach')"
         class="remove-button">
         <v-btn
-          :disabled="!canRemoveAttachment"
+          :disabled="!canDetachAttachment"
           class="d-flex"
           outlined
           x-small
           height="24"
           width="24"
-          @click="deleteAttachment(attachment)">
+          @click="detachFile(attachment)">
           <v-icon
-            :class="!canRemoveAttachment && 'grey--text' || 'error--text'"
+            :class="!canDetachAttachment && 'grey--text' || 'error--text'"
             small
             class="fas fa-unlink" />
         </v-btn>
@@ -179,8 +179,8 @@ export default {
     attachmentPrivacyLabel() {
       return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     },
-    canRemoveAttachment() {
-      return this.attachmentHasPermission && this.attachmentHasPermission.canDelete || !this.attachment.id || this.attachment.isSelectedFromDrives;
+    canDetachAttachment() {
+      return this.attachmentHasPermission && this.attachmentHasPermission.canDetach || !this.attachment.id || this.attachment.isSelectedFromDrives;
     },
     canMoveAttachment() {
       return this.canEdit && this.allowToEdit && !this.attachment.isSelectedFromDrives;
@@ -206,8 +206,8 @@ export default {
         return 'uiIconFileTypeDefault';
       }
     },
-    deleteAttachment() {
-      if (this.canRemoveAttachment) {
+    detachFile() {
+      if (this.canDetachAttachment) {
         this.$root.$emit('remove-attachment-item', this.attachment);
       }
     },

@@ -33,12 +33,12 @@ public class Permission implements Cloneable, Serializable {
 
   private boolean           canView;
 
-  private boolean           canDelete;
+  private boolean           canDetach;
 
   private boolean           canEdit;
 
   @Override
   public Permission clone() { // NOSONAR
-    return new Permission(canAccess, canView, canDelete, canEdit);
+    return new Permission(canAccess, canView, canDetach, canEdit);
   }
 }

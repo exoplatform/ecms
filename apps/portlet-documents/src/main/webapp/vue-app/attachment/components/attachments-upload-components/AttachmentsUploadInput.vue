@@ -226,9 +226,9 @@ export default {
       if (!file.aborted) {
         this.uploadingCount++;
         this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
-          .catch(error => {
+          .catch(() => {
             this.$root.$emit('attachments-notification-alert', {
-              message: error,
+              message: this.$t('attachments.link.failed'),
               type: 'error',
             });
             this.removeAttachedFile(file);
@@ -258,10 +258,10 @@ export default {
                 }
               }
             })
-            .catch(error => {
+            .catch(() => {
               this.removeAttachedFile(file);
               this.$root.$emit('attachments-notification-alert', {
-                message: error,
+                message: this.$t('attachments.link.failed'),
                 type: 'error',
               });
             });
