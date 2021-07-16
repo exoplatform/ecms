@@ -419,7 +419,7 @@ export default {
       });
     },
     updateLinkedAttachmentsToEntity() {
-      const attachmentIds = this.attachments.map(attachment => attachment.id);
+      const attachmentIds = this.attachments.filter(attachment => attachment.id).map(attachment => attachment.id);
       if (attachmentIds.length === 0) {
         return this.removeAllAttachmentsFromEntity(this.entityId, this.entityType);
       } else {
