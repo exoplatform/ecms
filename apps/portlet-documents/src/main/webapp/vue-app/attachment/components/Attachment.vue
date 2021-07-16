@@ -119,7 +119,7 @@ export default {
           const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
           this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
           this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.delete.success'),
+            message: this.$t('attachments.detach.success'),
             type: 'success',
           });
           this.initEntityAttachmentsList();

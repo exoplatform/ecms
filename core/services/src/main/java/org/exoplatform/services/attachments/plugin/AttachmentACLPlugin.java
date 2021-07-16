@@ -40,7 +40,7 @@ public abstract class AttachmentACLPlugin extends BaseComponentPlugin {
   public abstract boolean canView(long identityId, String entityType, String entityId);
 
   /**
-   * Checks whether the user can edit a given entity
+   * Checks whether the user can edit an attachment from the given entity
    *
    * @param identityId user technical {@link Identity} identifier
    * @param entityType entity type where the attachment has been added
@@ -50,13 +50,13 @@ public abstract class AttachmentACLPlugin extends BaseComponentPlugin {
   public abstract boolean canEdit(long identityId, String entityType, String entityId);
 
   /**
-   * Checks whether the user can delete a given entity
+   * Checks whether the user can detach an attachment from the given entity
    *
    * @param identityId user technical {@link Identity} identifier
    * @param entityType entity type where the attachment has been added
    * @param entityId entity identifier on which the attachment has been added
    * @return true if the user can delete the attachment from entity, else false.
    */
-  public abstract boolean canDelete(long identityId, String entityType, String entityId);
+  public abstract boolean canDetach(long identityId, String entityType, String entityId);
 
 }

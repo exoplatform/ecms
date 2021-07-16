@@ -39,6 +39,7 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -161,7 +162,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       deleteAllEntityAttachments(userIdentityId, entityId, entityType);
     } else {
       for (String attachmentId : existingAttachmentsIds) {
-        if (!attachmentIds.contains(attachmentId) || StringUtils.isEmpty(attachmentId)) {
+        if (!attachmentIds.contains(attachmentId) && attachmentId != null) {
           deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
         }
       }
@@ -193,8 +194,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
-    boolean canDelete = canDelete(userIdentityId, entityType, entityId, "");
-    if (userIdentity == null || !canDelete) {
+    boolean canDetach = canDetach(userIdentityId, entityType, entityId, "");
+    if (userIdentity == null || !canDetach) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
@@ -247,8 +248,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
-    boolean canDelete = canDelete(userIdentityId, entityType, entityId, attachmentId);
-    if (userIdentity == null || !canDelete) {
+    boolean canDetach = canDetach(userIdentityId, entityType, entityId, attachmentId);
+    if (userIdentity == null || !canDetach) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
@@ -314,8 +315,8 @@ public class AttachmentServiceImpl implements AttachmentService {
       entityAttachments.forEach(attachment -> {
         boolean canView = canView(userIdentityId, entityType, entityId, attachment.getId());
         boolean canEdit = canEdit(userIdentityId, entityType, entityId, attachment.getId());
-        boolean canDelete = canDelete(userIdentityId, entityType, entityId, attachment.getId());
-        Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDelete, canEdit);
+        boolean canDetach = canDetach(userIdentityId, entityType, entityId, attachment.getId());
+        Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDetach, canEdit);
         attachment.setAcl(attachmentACL);
       });
     }
@@ -336,9 +337,9 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                     attachmentId);
 
       boolean canView = canView(userIdentityId, entityType, entityId, attachment.getId());
-      boolean canDelete = canDelete(userIdentityId, entityType, entityId, attachment.getId());
+      boolean canDetach = canDetach(userIdentityId, entityType, entityId, attachment.getId());
       boolean canEdit = canEdit(userIdentityId, entityType, entityId, attachment.getId());
-      Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDelete, canEdit);
+      Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDetach, canEdit);
 
       attachment.setAcl(attachmentACL);
     } catch (Exception e) {
@@ -431,7 +432,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     return jcrViewPermission && attachmentACLPlugin.canView(userIdentityId, entityType, String.valueOf(entityId));
   }
 
-  public boolean canDelete(long userIdentityId, String entityType, long entityId, String attachmentId) {
+  public boolean canDetach(long userIdentityId, String entityType, long entityId, String attachmentId) {
     AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
     boolean jcrDeletePermission = true;
     if (!StringUtils.isBlank(attachmentId)) {
@@ -442,7 +443,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       return jcrDeletePermission;
     }
 
-    return jcrDeletePermission && attachmentACLPlugin.canDelete(userIdentityId, entityType, String.valueOf(entityId));
+    return attachmentACLPlugin.canDetach(userIdentityId, entityType, String.valueOf(entityId));
   }
 
   public boolean canEdit(long userIdentityId, String entityType, long entityId, String attachmentId) {
