@@ -382,7 +382,12 @@ public class AttachmentsRestService implements ResourceContainer {
   public String getDownloadLink(List<ActivityFileAttachment> activityFileAttachments, String fileName) {
     NodeLocation[] nodeLocations = new NodeLocation[activityFileAttachments.size()];
     for (int i = 0; i < activityFileAttachments.size(); i++) {
-      nodeLocations[i] = activityFileAttachments.get(i).getNodeLocation();
+      ActivityFileAttachment activityFileAttachment = activityFileAttachments.get(i);
+      nodeLocations[i] = new NodeLocation(activityFileAttachment.getRepository(),
+                                          activityFileAttachment.getWorkspace(),
+                                          activityFileAttachment.getDocPath(),
+                                          activityFileAttachment.getId(),
+                                          false);
     }
     ActivityFilesDownloadResource dresource = new ActivityFilesDownloadResource(nodeLocations);
     dresource.setDownloadName(fileName);
