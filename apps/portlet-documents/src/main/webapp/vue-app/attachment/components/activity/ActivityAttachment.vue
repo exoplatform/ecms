@@ -96,13 +96,13 @@ export default {
   }),
   computed: {
     id() {
-      return `PreviewAttachment_${this.activity.id}_${this.index}`;
+      return `PreviewAttachment_${this.previewActivity.id}_${this.index}`;
     },
     nextId() {
-      return (this.index + 1) < this.count && `#PreviewAttachment_${this.activity.id}_${this.index + 1}` || '';
+      return (this.index + 1) < this.count && `#PreviewAttachment_${this.previewActivity.id}_${this.index + 1}` || '';
     },
     previousId() {
-      return this.index && `#PreviewAttachment_${this.activity.id}_${this.index - 1}` || '';
+      return this.index && `#PreviewAttachment_${this.previewActivity.id}_${this.index - 1}` || '';
     },
     marginClass() {
       if (this.count === 1) {
@@ -112,13 +112,13 @@ export default {
       return this.index && (lastIndex && 'ms-2' || 'mx-2') || 'me-2';
     },
     username() {
-      return this.activity && this.activity.identity.profile && this.activity.identity.profile.username || '';
+      return this.previewActivity && this.previewActivity.identity.profile && this.previewActivity.identity.profile.username || '';
     },
     fullname() {
-      return this.activity && this.activity.identity.profile && this.activity.identity.profile.fullname || '';
+      return this.previewActivity && this.previewActivity.identity.profile && this.previewActivity.identity.profile.fullname || '';
     },
     avatarUrl() {
-      return this.activity && this.activity.identity.profile && this.activity.identity.profile.avatar || '';
+      return this.previewActivity && this.previewActivity.identity.profile && this.previewActivity.identity.profile.avatar || '';
     },
     profileUrl() {
       return `${eXo.env.portal.context}/${eXo.env.portal.portalName}/profile/${this.username}`;
@@ -134,8 +134,11 @@ export default {
     icon() {
       return this.attachment.icon;
     },
+    previewActivity() {
+      return this.activity && this.activity.parentActivity || this.activity;
+    },
     activityDate() {
-      return this.activity && this.activity.createDate && new Date(this.activity.createDate);
+      return this.previewActivity && this.previewActivity.createDate && new Date(this.previewActivity.createDate);
     },
     relativePostTimeLabel() {
       return this.activityDate && this.$dateUtil.getRelativeTimeLabelKey(this.activityDate) || '';
@@ -147,7 +150,7 @@ export default {
       return this.activityDate && this.$t(this.relativePostTimeLabel, {0: this.relativePostTimeDate}) || '';
     },
     spaceURL() {
-      return this.activity && this.activity.activityStream && this.activity.activityStream.space && this.activity.activityStream.space.groupId.replace('/spaces/', '');
+      return this.previewActivity && this.previewActivity.activityStream && this.previewActivity.activityStream.space && this.previewActivity.activityStream.space.groupId.replace('/spaces/', '');
     },
   },
   created() {
@@ -190,10 +193,10 @@ export default {
             },
             author: this.author,
             activity: {
-              id: this.activity.id,
-              liked: !!this.activity.length,
-              likes: this.activity.length,
-              status: this.activity.title,
+              id: this.previewActivity.id,
+              liked: !!this.previewActivity.likes.length,
+              likes: this.previewActivity.likes.length,
+              status: this.previewActivity.title,
               postTime: this.relativePostTime,
               spaceURL: this.spaceURL,
               next: this.nextId,
