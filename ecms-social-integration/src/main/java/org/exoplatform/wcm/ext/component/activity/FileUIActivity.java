@@ -56,6 +56,8 @@ public class FileUIActivity {
 
   public static final String   SYSTEM_COMMENT           = "systemComment";
 
+  public static final String   NODE_PATH                = "nodePath";
+
   public static final String   ONE_DRIVE_PROVIDER_ID    = "onedrive";
 
   public static final String   GOOGLE_DRIVE_PROVIDER_ID = "gdrive";
