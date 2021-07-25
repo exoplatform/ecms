@@ -36,7 +36,7 @@ export default {
           // could happen, but ignore it
         }
         const repository = attachment.repository;
-        const workspace = attachment.workspaces;
+        const workspace = attachment.workspace;
         const imageURL = mimeType.includes('image/') && `${eXo.env.portal.context}/${eXo.env.portal.rest}/jcr/${repository}/${workspace}${attachment.docPath.replace(/\[/g, '%5b').replace(/\]/g, '%5d').replace(/\+/g, '%2b')}` || null;
 
         attachments.push({
