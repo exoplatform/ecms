@@ -1,0 +1,8 @@
+<%
+  import org.exoplatform.services.wcm.javascript.XJavascriptService;
+
+  def pcontext = _ctx.getRequestContext();
+  XJavascriptService jsService = uicomponent.getApplicationComponent(XJavascriptService.class);
+  def scriptPath = pcontext.getRequestContextPath() + "/javascript/" + pcontext.getPortalOwner() + ".js?v=" + jsService.getJsLastModifiedDate();
+%>
+<link rel="preload" href= "$scriptPath" as="script" type="text/javascript" />
