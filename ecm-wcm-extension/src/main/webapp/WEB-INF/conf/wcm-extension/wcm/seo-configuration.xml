@@ -1,44 +1,63 @@
-<configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-   
-   <component>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <component>
     <key>org.exoplatform.services.seo.SEOService</key>
     <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
     <init-params>
-	  <object-param>
-	    <name>seo.config</name>
-		<object type="org.exoplatform.services.seo.SEOConfig">
-		  <field name="robotsindex">
-		    <collection type="java.util.ArrayList">
-			  <value><string>INDEX</string></value>	
-			  <value><string>NOINDEX</string></value>
-			</collection>	  
-		  </field>
-		  <field name="robotsfollow">
-		    <collection type="java.util.ArrayList">
-			  <value><string>FOLLOW</string></value>	
-			  <value><string>NOFOLLOW</string></value>
-			</collection>	  
-		  </field>	  
-		  <field name="frequency">
-		    <collection type="java.util.ArrayList">
-			  <value><string>Always</string></value>
-			  <value><string>Hourly</string></value>
-			  <value><string>Daily</string></value>
-			  <value><string>Weekly</string></value>
-			  <value><string>Monthly</string></value>
-			  <value><string>Yearly</string></value>
-			  <value><string>Never</string></value>						
-			</collection>
-		  </field>
-        </object>  	    
-	  </object-param>	  	
+      <object-param>
+        <name>seo.config</name>
+        <object type="org.exoplatform.services.seo.SEOConfig">
+          <field name="robotsindex">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>INDEX</string>
+              </value>
+              <value>
+                <string>NOINDEX</string>
+              </value>
+            </collection>
+          </field>
+          <field name="robotsfollow">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>FOLLOW</string>
+              </value>
+              <value>
+                <string>NOFOLLOW</string>
+              </value>
+            </collection>
+          </field>
+          <field name="frequency">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>Always</string>
+              </value>
+              <value>
+                <string>Hourly</string>
+              </value>
+              <value>
+                <string>Daily</string>
+              </value>
+              <value>
+                <string>Weekly</string>
+              </value>
+              <value>
+                <string>Monthly</string>
+              </value>
+              <value>
+                <string>Yearly</string>
+              </value>
+              <value>
+                <string>Never</string>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
     </init-params>
   </component>
-	
-	<external-component-plugins>
+
+  <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
     <!-- standalone configuration for seo cache  -->
     <component-plugin>
@@ -76,11 +95,21 @@
           <name>ecms.seo</name>
           <description>The cache configuration for SEO in clustering mode</description>
           <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-            <field name="name"><string>ecms.seo</string></field>
-            <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.seoservice.strategy:LIRS}</string></field>
-            <field name="maxSize"><int>${exo.cache.ecms.seoservice.MaxNode:1000}</int></field>
-            <field name="liveTime"><long>${exo.cache.ecms.seoservice.TimeToLive:86400}</long></field>
-            <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.seoservice.cacheMode:replication}</string></field>
+            <field name="name">
+              <string>ecms.seo</string>
+            </field>
+            <field name="strategy" profiles="cluster">
+              <string>${exo.cache.ecms.seoservice.strategy:LIRS}</string>
+            </field>
+            <field name="maxSize">
+              <int>${exo.cache.ecms.seoservice.MaxNode:1000}</int>
+            </field>
+            <field name="liveTime">
+              <long>${exo.cache.ecms.seoservice.TimeToLive:86400}</long>
+            </field>
+            <field name="cacheMode" profiles="cluster">
+              <string>${exo.cache.ecms.seoservice.cacheMode:replication}</string>
+            </field>
           </object>
         </object-param>
       </init-params>
@@ -98,6 +127,18 @@
 
   <external-component-plugins>
     <target-component>org.exoplatform.groovyscript.text.TemplateService</target-component>
+    <component-plugin>
+      <name>UIPortalApplication-Start-head</name>
+      <set-method>addTemplateExtension</set-method>
+      <type>org.exoplatform.groovyscript.text.TemplateExtensionPlugin</type>
+      <init-params>
+        <values-param>
+          <name>templates</name>
+          <description>A template that will be imported in head of pages to preload resources and Manifest definition</description>
+          <value>war:/groovy/portal/webui/workspace/UIECMSPortalApplicationPreloadHead.gtmpl</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
     <component-plugin>
       <name>UIPortalApplication-head</name>
       <set-method>addTemplateExtension</set-method>
