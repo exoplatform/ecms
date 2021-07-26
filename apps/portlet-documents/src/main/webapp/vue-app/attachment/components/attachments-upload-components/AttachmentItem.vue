@@ -237,7 +237,8 @@ export default {
             downloadUrl: self.attachment.downloadUrl,
             openUrl: self.attachment.url || self.attachment.openUrl,
             breadCrumb: self.attachment.previewBreadcrumb,
-            fileInfo: self.fileInfo()
+            fileInfo: self.fileInfo(),
+            size: self.attachment.size
           },
           version: {
             number: self.attachment.version
