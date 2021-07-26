@@ -52,7 +52,7 @@
       <OpenFileOn>فتح $fileUrl على $serviceName</OpenFileOn>
       <OpenOn>فتح بواسطة</OpenOn>
       <EditFile>تغيير</EditFile>
-      <ViewFile>عرض</ViewFile>
+      <ViewFile>الاعدادات</ViewFile>
     </event>
     <label>
       <sourceview>أكشف نص البرمجة</sourceview>

@@ -32,7 +32,7 @@
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>اعمال</UIFCCActionField>
+      <UIFCCActionField>Actions</UIFCCActionField>
     </label>
     <msg>
       <save-successfully>Saved to portlet preferences successfully.</save-successfully>
@@ -58,13 +58,13 @@
 
   <UIFCCActionList>
     <header>
-      <name>نام</name>
-      <description>تفصیل</description>
+      <name>Name</name>
+      <description>Description</description>
       <instanceOf>Instance of</instanceOf>
-      <action>عمل</action>
+      <action>Action</action>
     </header>
     <action>
-      <Add>ا ضافہ کریں</Add>
+      <Add>Add</Add>
     </action>
     <msg>
       <empty>No actions</empty>
@@ -101,8 +101,8 @@
       <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>نام</name>
-      <action>عمل</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
@@ -160,7 +160,7 @@
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>زمرہ منتخب کریں</UICategoriesSelectPanel>
+      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
     </title>
   </UITabPane>

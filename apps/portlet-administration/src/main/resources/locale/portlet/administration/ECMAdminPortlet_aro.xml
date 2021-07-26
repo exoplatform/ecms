@@ -17,7 +17,7 @@
     <label>
       <UITaxonomyManagerTrees>فئات</UITaxonomyManagerTrees>
       <UIMetadataManager>دليل المعلومات القياسيّة</UIMetadataManager>
-      <UINamespaceManager>أسماء المساحات</UINamespaceManager>
+      <UINamespaceManager>أسماء الفضاءات</UINamespaceManager>
       <UINodeTypeManager>أنواع العقد</UINodeTypeManager>
       <UITemplatesManager>وثائق</UITemplatesManager>
       <UICLVTemplatesManager>قائمة</UICLVTemplatesManager>
@@ -127,10 +127,10 @@
     <header>
       <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
       <read>قراءة</read>
-      <addNode>إضافة جزئية</addNode>
+      <addNode>إضافة العقدة</addNode>
       <setProperty>تعيين الخاصية</setProperty>
-      <remove>حذف</remove>
-      <action>إجراء</action>
+      <remove>قراءة</remove>
+      <action>العمل</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>يُرجى تحديد على الأقلّ صلاحية واحدة لهذه الجزئية.</have-not-any-permission>
+      <have-not-any-permission>يُرجى تحديد على الأقلّ صلاحية لهذه العقدة</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,15 +152,15 @@
   -->
 
   <UIActionForm>
-    <title>إضافة اجراء إلى شجرة الفئات</title>
+    <title>إضافة اجراء إلى فئة الشّجرة</title>
     <action>
       <Save>حفظ</Save>
     </action>
     <msg>
-      <name-not-allowed>الاسم فارغ أو الأحرف الخاصة محظورة.</name-not-allowed>
+      <name-not-allowed>اسم محظور</name-not-allowed>
       <path-invalid>مسار غير صالح</path-invalid>
       <taxonomy-existed>شجرة الفئات موجودة مُسبقا</taxonomy-existed>
-      <taxonomy-node-existed>جزئية الفئة موجودة مُسبقا.</taxonomy-node-existed>
+      <taxonomy-node-existed>فئة العقدة موجودة مُسبقا</taxonomy-node-existed>
       <no-permission-add>ليس لديك الحق في إضافة إجراء.</no-permission-add>
       <not-created-tree>لم يتمّ بعد انشاء شجرة الفئات</not-created-tree>
     </msg>
@@ -174,7 +174,7 @@
   <UITemplatesList>
     <header>
       <name>إسم القالب</name>
-      <action>المهام</action>
+      <action>الأعمال</action>
     </header>
   </UITemplatesList>
   <!--
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>شكل إسم المساحة</UINamespaceForm>
+      <UINamespaceForm>شكل إسم الفضاء</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>تسجيل إسم المساحة جديد</title>
+    <title>تسجيل إسم الفضاء جديد</title>
     <label>
-      <namespace>بادئة إسم المساحة</namespace>
+      <namespace>بادئة إسم الفضاء</namespace>
       <uri>عنوان الـ URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>إلغاء</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>إسم مساحة او 'URI' موجود مُسبقا !</register-unsuccessfull>
-      <prefix-null>يُرجى ادخال بادئة لاسم المساحة</prefix-null>
-      <uri-null>يُرجى تحديد الـURI الخاص باسم المساحة.</uri-null>
+      <register-unsuccessfull>إسم فضاء او 'URI' موجود مُسبقا !</register-unsuccessfull>
+      <prefix-null>يُرجى ادخال بادئة لاسم الفضاء</prefix-null>
+      <uri-null>يُرجى تحديد الـURI الخاص باسم الفضاء</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -211,7 +211,7 @@
   <UINamespaceList>
     <header>
       <prefix>بادئة</prefix>
-      <uri>اسم المساحة الخاص بالـ URI</uri>
+      <uri>اسم الفضاء الخاص بالـ URI</uri>
       <action>اجراء</action>
     </header>
     <action>
@@ -220,7 +220,7 @@
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>حفظ إسم مساحة جديد</UINamespaceForm>
+      <UINamespaceForm>حفظ إسم فضاء جديد</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -236,16 +236,16 @@
       <False>خطأ</False>
     </label>
     <title>
-      <view>عرض</view>
-      <edit>تعديل</edit>
+      <view>المشهد</view>
+      <edit>اجراء</edit>
       <delete>حذف</delete>
     </title>
     <header>
       <icon>أيقونة</icon>
-      <name>بيانات التعريف</name>
+      <name>دليل المعلومات</name>
       <type>نوع</type>
       <internalUse>استعمال داخلي</internalUse>
-      <action>المـُهمات</action>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete>هل تؤكّد عمليّة الحذف؟</confirm-delete>
@@ -264,7 +264,7 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>تحرير القالب لبيانات التعريف</UIMetadataForm>
+      <UIMetadataForm>تغيير نموذج لدليل المعلومات</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
@@ -279,10 +279,10 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>تعيين بيانات التعريف</title>
+    <title>تخطيط دليل المعلومات</title>
     <action>
       <Cancel>إلغاء</Cancel>
-      <Save>تطبيق</Save>
+      <Save>طبق</Save>
     </action>
     <header>
       <icon>أيقونة</icon>
@@ -291,8 +291,8 @@
     </header>
     <label>
       <dialogTemplate>قالب واجهة المستخدم</dialogTemplate>
-      <viewTemplate>عرض القالب:</viewTemplate>
-      <metadataName>اسم بيانات التعريف:</metadataName>
+      <viewTemplate>نموذج العرض</viewTemplate>
+      <metadataName>إسم دليل المعلومات</metadataName>
       <viewPermission>الصلاحيّة</viewPermission>
       <permission>UIMetadataForm</permission>
       <metadataLabel>الرمز:</metadataLabel>
@@ -392,7 +392,7 @@
       <name>الاسم</name>
       <workspace>فضاء العمل</workspace>
       <homePath>مسار الصّفحة الرئيسية:</homePath>
-      <icon>أيقونة مساحة العمل:</icon>
+      <icon>أيقونة فضاء العمل</icon>
       <viewPreferences>مشاهدة الوثائق ذات صلة</viewPreferences>
       <viewNonDocument>مشاهدة اللاوثائق</viewNonDocument>
       <viewSideBar>إضهار الشريط الجانبي</viewSideBar>
@@ -403,12 +403,12 @@
       <Categories>الفئات:</Categories>
       <Icons>الأيقونات:</Icons>
       <List>قائمة:</List>
-      <Web>ويب:</Web>
+      <Web>واب:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>إضافة وحدة تخزين</UIDriveForm>
+      <UIDriveForm>إضافة قرص</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
@@ -441,7 +441,7 @@
     <header>
       <icon>أيقونة</icon>
       <label>إسم العقدة</label>
-      <input>اجراء</input>
+      <input>عمل</input>
     </header>
     <action>
       <Save>حفظ</Save>
@@ -462,7 +462,7 @@
       <nodeType>نوع العقدة</nodeType>
       <mixinType>نوع 'Mixin'</mixinType>
       <orderable>أبناء العقد مرتبة</orderable>
-      <action>اجراء</action>
+      <action>عمل</action>
     </header>
     <action>
       <Export>تصدير</Export>
@@ -470,7 +470,7 @@
       <Add>أضف</Add>
     </action>
     <tooltip>
-      <View>عرض</View>
+      <View>المشهد</View>
       <Edit>تغيير</Edit>
       <Delete>حذف</Delete>
     </tooltip>
@@ -491,7 +491,7 @@
     <header>
       <icon>أيقونة</icon>
       <label>إسم العقدة</label>
-      <input>اجراء</input>
+      <input>عمل</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -514,7 +514,7 @@
     <label>
       <propertiesDefinitions>تعريف الخاصيات</propertiesDefinitions>
       <childDefinitions>تعريف العقد الفروع</childDefinitions>
-      <namespace>اسم المساحة</namespace>
+      <namespace>اسم الفضاء</namespace>
       <propertyNamespace>اسم الفضاء</propertyNamespace>
       <nodeTypeName>اسم نوع العقدة</nodeTypeName>
       <mixinType>نوعه 'Mixin'</mixinType>
@@ -531,7 +531,7 @@
       <constraints>قيم</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
       <sameNameSiblings>اسم وحيد للفرع</sameNameSiblings>
-      <childNamespace>اسم المساحة</childNamespace>
+      <childNamespace>اسم الفضاء</childNamespace>
       <childMandatory>إجباري</childMandatory>
       <childAutocreated>انشاء الي</childAutocreated>
       <childParentversion>توريث الاصدار</childParentversion>
@@ -668,8 +668,8 @@
       <filename-error>استعراض الملف نوع عقدة للاستيراد</filename-error>
       <data-file-error>معتمدة فقط أكس ملف أو ملف مضغوط لاستيراد.</data-file-error>
       <data-invalid>صيغة هذه البيانات غيرصحيحة. يُرجى التثبّت من نوع الملفّ ثمّ اعادة المحاولة</data-invalid>
-      <nodetype-exist>نوع العقدة '{0}' موجود من قبل</nodetype-exist>
-      <namespace-invalid>'{0}': بيانات غير صالحة: مساحة الاسم غير معروف.</namespace-invalid>
+      <nodetype-exist>'{0}' : بيانات غير صالحة : نوع نقطة التقاطع موجودة</nodetype-exist>
+      <namespace-invalid>'{0}' : بيانات غير صالحة : مساحة الاسم غير معروف :</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -686,7 +686,7 @@
     <header>
       <icon>أيقونة</icon>
       <label>إسم العقدة</label>
-      <input>اجراء</input>
+      <input>عمل</input>
     </header>
     <title>إختيار نوع عقدة للإستيراد</title>
     <msg>
@@ -714,7 +714,7 @@
       <AddPermission>إضافة صلاحية</AddPermission>
       <RemovePermission>حذف الصلاحية</RemovePermission>
       <AddIcon>إضافة ايقونة</AddIcon>
-      <AddPath>اضافة مسار</AddPath>
+      <AddPath>إضافة مسار</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -1002,7 +1002,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>إذن نموذج واجهة المستخدم</permission>
+      <permission>UIPermissionForm</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1052,7 +1052,7 @@
       <Delete>حذف</Delete>
     </title>
     <header>
-      <name>الاسم</name>
+      <name>الإسم</name>
       <path>القيمة</path>
       <baseVersion>الإصدار الرئيسي</baseVersion>
       <action>اجراء</action>
@@ -1061,9 +1061,9 @@
       <Add>أضف</Add>
     </action>
     <msg>
-      <template-in-use>لا يمكن حذف '{0}'. هو الآن بحالة إستخدام.</template-in-use>
+      <template-in-use>.لا يمكن الحذف {0} : القالب في حالة إستعمال</template-in-use>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <access-denied>.غير مسموح بالدخول. ليس لديك الصلاحيّة لاستعمال هذه الخدمة.</access-denied>
       <delete-permission-denied>ليس لديك الصلاحيّات الكافية لحذف '{0}' النموذج.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
@@ -1103,7 +1103,7 @@
       <isDocumentTemplate>هو قالب وثيقة:</isDocumentTemplate>
       <dialog>محتوى واجهة المستخدم</dialog>
       <view>عرض المحتوى</view>
-      <permission>الصلاحيّة</permission>
+      <permission>الصلاحية:</permission>
       <selectPemistion>الصلاحية</selectPemistion>
     </label>
   </UITemplateForm>
@@ -1304,8 +1304,8 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>اختيار مستخدم</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>اختيار مستخدم</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>اختيار المستخدم</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>اختيار المستخدم</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
@@ -1324,7 +1324,7 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectGroup>إختيار مجموعة</selectGroup>
       <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
@@ -1337,7 +1337,7 @@
   <UITaxonomyTreeList>
     <header>
       <name>شجرة الفئات</name>
-      <workspace>مساحة عمل</workspace>
+      <workspace>فضاء عمل</workspace>
       <homePath>المسار</homePath>
       <action>اجراء</action>
     </header>
@@ -1363,8 +1363,8 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>الاسم</name>
-      <workspace>مساحة العمل</workspace>
+      <name>اسم</name>
+      <workspace>فضاء العمل</workspace>
       <homePath>المسار</homePath>
       <permissions>الصلاحيّات</permissions>
     </label>
@@ -1411,7 +1411,7 @@
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>إضافة صلاحية</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
       <UIPermissionSelector>اختيار صلاحيّة</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1463,7 +1463,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>اختيار مستخدم</UIGroupSelector>
+      <UIGroupSelector>اختيار المستخدم</UIGroupSelector>
       <UIPermissionSelector>اختيار العضوية</UIPermissionSelector>
       <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
     </title>
@@ -1520,7 +1520,7 @@
     <header>
       <name>النوع</name>
       <action>اجراء</action>
-      <label>القالب</label>
+      <label>قالب</label>
       <icon>أيقونة</icon>
     </header>
     <action>
@@ -1528,7 +1528,7 @@
     </action>
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <access-denied>غير مسموح بالدخول. لم تتحصل على الصلاحية لاستخدام هذه المهمّة.</access-denied>
       <editing-template>غير مسموح بالدخول. لا يمكنك حذف و تغيير النموذج في نفس الوقت.</editing-template>
       <template-not-exist>النموذج الذي تحاول حذفه لم يعُد موجودًا.</template-not-exist>
     </msg>
@@ -1538,7 +1538,7 @@
     <header>
       <name>النوع</name>
       <action>اجراء</action>
-      <label>القالب</label>
+      <label>قالب</label>
       <icon>أيقونة</icon>
     </header>
     <action>
@@ -1546,7 +1546,7 @@
     </action>
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <access-denied>غير مسموح بالدّخول. ليس لديك الصلاحيّة الكافية لاستخدام هذه الوظيفة.</access-denied>
       <editing-template>غير مسموح بالدّخول. لا يمكن القيام بحذف و تغيير النموذج في نفس الوقت.</editing-template>
       <template-not-exist>النموذج الذي أنت بصدد محاولة حذفه لم يعُد موجودا.</template-not-exist>
     </msg>
@@ -1555,7 +1555,7 @@
   <UIOthersTemplateList>
     <header>
       <name>النوع</name>
-      <label>القالب</label>
+      <label>قالب</label>
       <icon>أيقونة</icon>
       <action>اجراء</action>
     </header>
@@ -1564,7 +1564,7 @@
     </action>
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <access-denied>غير مسموح بالدخول. ليس لديك الصلاحيات الكافية لاستخدام هذه الوظيفة.</access-denied>
       <editing-template>غير مسموح بالدّخول. لا يمكن القيام بحذف و تغيير النموذج في نفس الوقت.</editing-template>
       <template-not-exist>النموذج الذي أنت بصدد محاولة حذفه لم يعُد موجودا.</template-not-exist>
     </msg>
@@ -1592,7 +1592,7 @@
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
-      <template>القالب</template>
+      <template>قالب</template>
     </header>
     <action>
       <AddTemplate>إضافة قالب</AddTemplate>
@@ -1601,7 +1601,7 @@
     </action>
     <msg>
       <confirm-delete>هل ترغب حقّــا بحذف هذا القالب؟</confirm-delete>
-      <access-denied>.غير مسموح بالدخول!  ليس لديك الصلاحيّات الكافية لاستخدام هذه المُهمّة.</access-denied>
+      <access-denied>.غير مسموح بالدخول! ليس لديك صلاحية اتسعمال في الوظيفة</access-denied>
       <editing-template>تمّ رفض الوصول. لا يمكنك حذف و تغيير هذا القالب في آن واحد.</editing-template>
       <template-not-exist>القالب الذي تحاول حذفه غير موجود.</template-not-exist>
     </msg>
@@ -1611,7 +1611,7 @@
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
-      <template>القالب</template>
+      <template>قالب</template>
     </header>
     <title>
       <Edit>تغيير</Edit>
@@ -1628,7 +1628,7 @@
     <header>
       <title>الاسم</title>
       <action>اجراء</action>
-      <template>القالب</template>
+      <template>قالب</template>
     </header>
     <action>
       <AddTemplate>إضافة قالب</AddTemplate>
@@ -1680,7 +1680,7 @@
       <Cancel>إلغاء</Cancel>
     </action>
     <label>
-      <title>الاسم</title>
+      <title>اسم</title>
       <template>اسم النموذج</template>
       <content>المحتوى</content>
       <type>نوع النموذج</type>
@@ -1758,7 +1758,7 @@
       <content>المحتوى:</content>
       <name>الاسم:</name>
       <isDocumentTemplate>هو نموذج لوثيقة</isDocumentTemplate>
-      <viewPermission>الصلاحيّة</viewPermission>
+      <viewPermission>الصلاحية:</viewPermission>
       <enableVersion>تمّ تفعيل عمليّة الاصدار</enableVersion>
     </label>
     <title>اضافة/تغيير العرض</title>
@@ -1771,7 +1771,7 @@
       <content>المحتوى:</content>
       <name>الاسم:</name>
       <isDocumentTemplate>هو نموذج لوثيقة</isDocumentTemplate>
-      <viewPermission>الصلاحيّة</viewPermission>
+      <viewPermission>الصلاحية:</viewPermission>
       <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
     </label>
     <title>اضافة / تغيير واجهة المُــستخدم</title>
@@ -1832,7 +1832,7 @@
     <header>
       <name>الاسم</name>
       <roles>الأدوار</roles>
-      <baseVersion>إصدار</baseVersion>
+      <baseVersion>الاصدار</baseVersion>
       <action>الاجراءات</action>
     </header>
     <msg>
@@ -1855,7 +1855,7 @@
     <header>
       <name>الاسم</name>
       <roles>الأدوار</roles>
-      <baseVersion>إصدار</baseVersion>
+      <baseVersion>الإصدار</baseVersion>
       <action>الاجراءات</action>
     </header>
     <msg>
@@ -1888,7 +1888,7 @@
       <name-exist>الاسم '{0}' موجود مُسبقـا.</name-exist>
     </msg>
     <title>
-      <AddPermission>إضافة صلاحية</AddPermission>
+      <AddPermission>اضافة صلاحية</AddPermission>
       <RemovePermission>حذف الصلاحية</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1927,7 +1927,7 @@
       <name>الاسم</name>
       <type>النوع</type>
       <statement>استبيانات</statement>
-      <permission>الصلاحيّات</permission>
+      <permission>الصلاحيات</permission>
       <action>الاجراءات</action>
     </header>
     <action>
@@ -2070,7 +2070,7 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>مساحة العمل:</workspaceName>
+      <workspaceName>فضاء العمل:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
       <rootNodePath>مسار الجذر:</rootNodePath>
     </label>
@@ -2159,15 +2159,15 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectUser>اختيار مستخدم</selectUser>
+      <selectUser>اختيارمستخدم</selectUser>
       <selectMembership>اختيار العضوية</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>اختيار مجموعة</selectGroup>
-      <selectUser>اختيار مستخدم</selectUser>
+      <selectGroup>إختيار مجموعة</selectGroup>
+      <selectUser>إختيار مستخدم</selectUser>
       <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2192,7 +2192,7 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>اختيار مجموعة</selectGroup>
+      <selectGroup>اختر مجموعة</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
@@ -2210,8 +2210,8 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>اختيار مجموعة</selectGroup>
-      <selectUser>اختيار مستخدم</selectUser>
+      <selectGroup>إختيار مجموعة</selectGroup>
+      <selectUser>إختيار مستخدم</selectUser>
       <selectMembership>إختيار العضوية</selectMembership>
     </label>
   </QueriesPermissionBrowse>
@@ -2235,7 +2235,7 @@
 
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>البيت الطريق فارغة</homepath-emty>
+      <homepath-emty>مسار الصفحة الرئيسية أمر ضروري.</homepath-emty>
       <targetpath-emty>المسار الهدف ضروري</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
@@ -2280,7 +2280,7 @@
   </DriveInputSet>
   <UIPermissionTreeInfo>
     <msg>
-      <confirm-delete-permission>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete-permission>
+      <confirm-delete-permission>هل حقا تريد حذف هذه الصلاحيّة ؟</confirm-delete-permission>
       <no-permission-remove>لا يمكنك إزالة المالك أو المستخدم "النظام"</no-permission-remove>
     </msg>
   </UIPermissionTreeInfo>
@@ -2325,7 +2325,7 @@
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>عنوان</name>
+      <name>مسار العقدة</name>
       <hoderLock>صاحب القفل</hoderLock>
       <action>اجراء</action>
     </header>
@@ -2375,9 +2375,9 @@
 
   <UISkinTab>
     <header>
-      <name>الاسم</name>
+      <name>اسم</name>
       <roles>الأدوار</roles>
-      <baseVersion>إصدار</baseVersion>
+      <baseVersion>الإصدار</baseVersion>
       <action>الإجراءات</action>
     </header>
     <msg>
@@ -2400,7 +2400,7 @@
       <content>المحتوى:</content>
       <name>الاسم:</name>
       <isDocumentTemplate>هو نموذج للوثيقة</isDocumentTemplate>
-      <viewPermission>الصلاحيّة</viewPermission>
+      <viewPermission>صلاحيّة:</viewPermission>
       <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
     </label>
     <title>إضافة / تغيير المظهر</title>
@@ -2476,7 +2476,7 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>إضافة صلاحية</title>
+    <title>أضف صلاحيّة</title>
     <action>
       <Save>حفظ</Save>
       <Add>إضافة</Add>
@@ -2591,7 +2591,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>ليس لديك الإذن بفتح هذه العقدة. الرجاء الاتصال بالمسؤول للحصول على حق الصحيح.</can-not-unlock-node>
+      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

@@ -180,8 +180,8 @@
   <UIAllItemsPreferenceForm>
     <title>تعيين خيارات عمليّة الفلترة</title>
     <action>
-      <Cancel>إلغاء</Cancel>
-      <Save>حفظ</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UIAllItemsPreferenceForm>
   <!--

@@ -533,8 +533,7 @@
       <sameNameSiblings>Adalah nama yang sama dengan saudara kandung</sameNameSiblings>
       <childNamespace>Ruang nama</childNamespace>
       <childMandatory>Wajib</childMandatory>
-      <childAutocreated>Dibuat secara otomatis
- </childAutocreated>
+      <childAutocreated>Dibuat secara otomatis  </childAutocreated>
       <childParentversion>Pada versi induk</childParentversion>
       <childProtected>Terlindungi</childProtected>
       <childNodename>Definisi Nama</childNodename>
@@ -1087,8 +1086,7 @@
     <msg>
       <version-restored>Versi {0} telah berhasil dipulihkan.</version-restored>
       <role-require>Silahkan pilih sebuah izin.</role-require>
-      <template-name-exist>Nama template '{0}' sudah ada.
- .</template-name-exist>
+      <template-name-exist>Nama template '{0}' sudah ada.  .</template-name-exist>
       <add-permission-denied>Anda tidak memiliki izin untuk menambahkan sebuah template yang baru.</add-permission-denied>
       <edit-permission-denied>Kamu tidak memiliki izin untuk memodifikasi template {0}.</edit-permission-denied>
     </msg>
