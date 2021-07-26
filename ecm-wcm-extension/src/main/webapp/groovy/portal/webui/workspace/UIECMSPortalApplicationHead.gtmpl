@@ -27,8 +27,6 @@
   } catch(Exception ex) {
   }
   // Left Navigation State
-  def collapseClass = "collapse-left-bar";
-  def expandClass = "expand-left-bar";
   if(hasMetadata) {
     if(keywords != null && keywords.length() >0) {
     %>
@@ -43,6 +41,7 @@
       <meta name="robots" content="<%=robots%>" />
     <% }
   }
+  def scriptPath = pcontext.getRequestContextPath() + "/javascript/" + pcontext.getPortalOwner() + ".js?v=" + jsService.getJsLastModifiedDate();
   %>
     <script type="text/javascript">
       if (!window.eXo) {
@@ -52,4 +51,4 @@
         window.eXo.ecm = {};
       }
     </script>
-    <script type="text/javascript" src="<%=pcontext.getRequestContextPath()%>/javascript/<%=pcontext.getPortalOwner()%>.js?v=<%=jsService.getJsLastModifiedDate()%>"></script>
+    <script type="text/javascript" src="$scriptPath"></script>
