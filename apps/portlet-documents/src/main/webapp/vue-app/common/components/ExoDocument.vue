@@ -116,7 +116,8 @@ export default {
           downloadUrl: this.document.downloadUrl,
           openUrl: this.document.url || this.document.openUrl,
           breadCrumb: this.document.previewBreadcrumb,
-          fileInfo: this.fileInfo()
+          fileInfo: this.fileInfo(),
+          size: this.document.size,
         },
         version: {                                                                 
           number: this.document.version 

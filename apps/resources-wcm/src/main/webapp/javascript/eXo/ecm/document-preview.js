@@ -56,8 +56,8 @@
 
       this.settings = $.extend(this.defaultSettings, docPreviewSettings);
 
+      var promises = [];
       if(this.settings.showComments) {
-        var promises = [];
 
         // if we miss author information, let's fetch them
         if(this.settings.author.username != null
@@ -80,29 +80,24 @@
         if(this.settings.activity.id != null && (this.settings.activity.postTime == null || this.settings.activity.status == null)) {
           promises.push(this.fetchActivity());
         }
-
-        var self = this;
-
-        if(ES6Promise && !window.Promise ) {
-          ES6Promise.polyfill();
-        }
-
-       promises.push(this.checkDownloadDocumentStatus());
-
-        // wait for all users info fetches to be complete before rendering the component
-        Promise.all(promises).then(function() {
-          self.render();
-          self.show();
-          if(!$('.commentsLoaded').length) {
-            self.loadComments();
-          }
-        }, function(err) {
-          // error occurred
-        });
-      } else {
-        this.render();
-        this.show();
       }
+
+      if(ES6Promise && !window.Promise ) {
+        ES6Promise.polyfill();
+      }
+      var self = this;
+      promises.push(this.checkDownloadDocumentStatus());
+
+      // wait for all users info fetches to be complete before rendering the component
+      Promise.all(promises).then(function() {
+        self.render();
+        self.show();
+        if(!$('.commentsLoaded').length && self.settings.showComments) {
+          self.loadComments();
+        }
+      }, function(err) {
+        console.error('An error occurred when trying to load document preview details: ',err);
+      });
     },
 
     fetchUserInformation: function(callback) {
