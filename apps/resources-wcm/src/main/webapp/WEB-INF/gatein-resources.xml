@@ -467,5 +467,29 @@
     </depends>
   </module>
 
+  <module>
+    <name>jQueryUI12</name>
+    <as>jqueryUI</as>
+    <script>
+      <minify>false</minify>
+      <path>/javascript/jquery-ui.min.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>jQuery</as>
+    </depends>
+  </module>
+
+  <module>
+    <name>jQueryPnotify12</name>
+    <script>
+      <path>/javascript/jquery.pnotify.min.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>jQuery</as>
+    </depends>
+  </module>
+
 </gatein-resources>
 
