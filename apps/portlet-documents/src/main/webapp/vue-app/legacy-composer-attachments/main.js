@@ -1,4 +1,4 @@
-import './components/initComponents.js';
+import './initComponents.js';
 
 Vue.use(Vuetify);
 
@@ -36,7 +36,7 @@ export function init() {
 }
 
 export function destroy() {
-  if(exoAttachmentsApp) {
+  if (exoAttachmentsApp) {
     exoAttachmentsApp.$destroy();
   }
 }

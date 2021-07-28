@@ -121,6 +121,9 @@
       <depends>
         <module>AttachmentIntegration</module>
       </depends>
+      <depends>
+        <module>LegacyComposerAttachments</module>
+      </depends>
     </module>
   </portlet>
 
@@ -129,6 +132,33 @@
     <script>
       <minify>false</minify>
       <path>/js/attachmentIntegration.bundle.js</path>
+    </script>
+    <depends>
+      <module>vue</module>
+    </depends>
+    <depends>
+      <module>eXoVueI18n</module>
+    </depends>
+    <depends>
+      <module>vuetify</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+      <as>$</as>
+    </depends>
+    <depends>
+      <module>extensionRegistry</module>
+    </depends>
+    <depends>
+      <module>commonVueComponents</module>
+    </depends>
+  </module>
+
+  <module>
+    <name>LegacyComposerAttachments</name>
+    <script>
+      <minify>false</minify>
+      <path>/js/legacyComposerAttachments.bundle.js</path>
     </script>
     <depends>
       <module>vue</module>

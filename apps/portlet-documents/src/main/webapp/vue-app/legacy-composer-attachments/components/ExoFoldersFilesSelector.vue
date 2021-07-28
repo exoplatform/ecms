@@ -7,13 +7,27 @@
       <div v-if="!showSearchInput" class="currentDirectory">
         <div class="documents" @click="fetchUserDrives()">
           <i class="uiIconFolder"></i>
-          <p class="documents" data-toggle="tooltip" rel="tooltip" data-placement="bottom"
-             data-original-title="Documents">{{ $t('attachments.drawer.drives') }}</p>
+          <p
+            class="documents"
+            data-toggle="tooltip"
+            rel="tooltip"
+            data-placement="bottom"
+            data-original-title="Documents">
+            {{ $t('attachments.drawer.drives') }}
+          </p>
         </div>
-        <div v-if="currentDrive" class="currentDrive" @click="openDrive(currentDrive)">
+        <div
+          v-if="currentDrive"
+          class="currentDrive"
+          @click="openDrive(currentDrive)">
           <span class="uiIconArrowRight"></span>
-          <a :title="currentDrive.title" :class="currentDrive.isSelected? 'active' : ''" class="currentDriveTitle" data-toggle="tooltip" rel="tooltip"
-             data-placement="bottom">
+          <a
+            :title="currentDrive.title"
+            :class="currentDrive.isSelected? 'active' : ''"
+            class="currentDriveTitle"
+            data-toggle="tooltip"
+            rel="tooltip"
+            data-placement="bottom">
             {{ currentDrive.title }}
           </a>
         </div>
@@ -27,25 +41,59 @@
               </ul>
             </div>
           </div>
-          <div v-for="folderHis in foldersHistory.slice(foldersHistory.length-2,foldersHistory.length)" :key="folderHis" class="folderHistory">
+          <div
+            v-for="folderHis in foldersHistory.slice(foldersHistory.length-2,foldersHistory.length)"
+            :key="folderHis"
+            class="folderHistory">
             <span class="uiIconArrowRight"></span>
-            <a :title="folderHis.title" :class="folderHis.isSelected? 'active' : ''" class="currentSpaceDirectory" data-toggle="tooltip" rel="tooltip"
-               data-placement="bottom" @click="openFolder(folderHis)">
+            <a
+              :title="folderHis.title"
+              :class="folderHis.isSelected? 'active' : ''"
+              class="currentSpaceDirectory"
+              data-toggle="tooltip"
+              rel="tooltip"
+              data-placement="bottom"
+              @click="openFolder(folderHis)">
               {{ folderHis.title }}
             </a>
           </div>
         </div>
       </div>
       <div :class="showSearchInput? 'visible' : ''" class="selectorActions">
-        <input id="searchServerAttachments" ref="searchServerAttachments" v-model="searchFilesFolders" type="text" class="searchInput">
-        <a :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconFilter'" class="uiIconLightGray" @click="showSearchDocumentInput()"></a>
-        <a v-if="(modeFolderSelectionForFile || modeFolderSelection) && currentDrive" :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')" rel="tooltip" data-placement="bottom" class="uiIconLightGray uiIconAddFolder" @click="addNewFolder()"></a>
+        <input
+          id="searchServerAttachments"
+          ref="searchServerAttachments"
+          v-model="searchFilesFolders"
+          type="text"
+          class="searchInput">
+        <a
+          :class="showSearchInput ? 'uiIconCloseServerAttachments' : 'uiIconFilter'"
+          class="uiIconLightGray"
+          @click="showSearchDocumentInput()"></a>
+        <a
+          v-if="(modeFolderSelectionForFile || modeFolderSelection) && currentDrive"
+          :title="$t('attachments.filesFoldersSelector.button.addNewFOlder.tooltip')"
+          rel="tooltip"
+          data-placement="bottom"
+          class="uiIconLightGray uiIconAddFolder"
+          @click="addNewFolder()"></a>
       </div>
       <!-- Action buttons for extensionRegistry extensions -->
-      <div v-for="action in attachmentsComposerActions" v-show="showDriveAction" :key="action.key" :class="`${action.appClass}Action`" class="actionBox">
-        <div v-if="!modeFolderSelection" class="actionBoxLogo" @click="executeAction(action)">
-          <v-icon v-if="action.iconName" class="uiActionIcon" >{{ action.iconName }}</v-icon>
-          <i v-else :class="action.iconClass" class="uiActionIcon"></i>
+      <div
+        v-for="action in attachmentsComposerActions"
+        v-show="showDriveAction"
+        :key="action.key"
+        :class="`${action.appClass}Action`"
+        class="actionBox">
+        <div
+          v-if="!modeFolderSelection"
+          class="actionBoxLogo"
+          @click="executeAction(action)">
+          <v-icon v-if="action.iconName" class="uiActionIcon">{{ action.iconName }}</v-icon>
+          <i
+            v-else
+            :class="action.iconClass"
+            class="uiActionIcon"></i>
         </div>
       </div>
       <!-- end of action buttons block -->
@@ -72,36 +120,101 @@
           <i class="uiIconEmptyFolder"></i>
           <p>{{ $t('attachments.drawer.destination.subfolder.empty') }}</p>
         </div>
-        <div v-for="folder in filteredFolders" :key="folder.id" :id="folder.id" :title="folder.name" :class="folder.type === 'new_folder' ? 'boxOfFolder':''"
-             class="folderSelection" @click="openFolder(folder)" @contextmenu="openFolderActionsMenu(folder, $event)">
-          <a v-if="folder.type === 'new_folder'" href="javascript:void(0);" class="closeIcon" @mousedown="cancelCreatingNewFolder($event)">
+        <div
+          v-for="folder in filteredFolders"
+          :id="folder.id"
+          :key="folder.id"
+          :title="folder.name"
+          :class="folder.type === 'new_folder' ? 'boxOfFolder':''"
+          class="folderSelection"
+          @click="openFolder(folder)"
+          @contextmenu="openFolderActionsMenu(folder, $event)">
+          <a
+            v-if="folder.type === 'new_folder'"
+            href="javascript:void(0);"
+            class="closeIcon"
+            @mousedown="cancelCreatingNewFolder($event)">
             <p>
               x
             </p>
           </a>
           <div :class="folder.type === 'new_folder' ? 'boxOfTitle' :''">
-            <a :title="folder.title" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
+            <a
+              :title="folder.title"
+              href="javascript:void(0);"
+              rel="tooltip"
+              data-placement="bottom">
               <i :class="folder.folderTypeCSSClass" class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
-              <i v-show="folder.isCloudDrive" :class="getFolderIcon(folder)" class="uiIcon-clouddrive"></i>
-              <input v-if="folder.type === 'new_folder'" :ref="folder.ref" v-model="newFolderName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="createNewFolder($event)" @keyup.enter="$event.target.blur()" @keyup.esc="cancelCreatingNewFolder($event)">
-              <input v-else-if="renameFolderAction && folder.id === selectedFolder.id" ref="rename" :id="folder.id" v-model="newName" type="text" class="newFolderInput  ignore-vuetify-classes" @blur="saveNewNameFolder()" @keyup.enter="$event.target.blur()" @keyup.esc="cancelRenameNewFolder($event)">
+              <i
+                v-show="folder.isCloudDrive"
+                :class="getFolderIcon(folder)"
+                class="uiIcon-clouddrive"></i>
+              <input
+                v-if="folder.type === 'new_folder'"
+                :ref="folder.ref"
+                v-model="newFolderName"
+                type="text"
+                class="newFolderInput  ignore-vuetify-classes"
+                @blur="createNewFolder($event)"
+                @keyup.enter="$event.target.blur()"
+                @keyup.esc="cancelCreatingNewFolder($event)">
+              <input
+                v-else-if="renameFolderAction && folder.id === selectedFolder.id"
+                :id="folder.id"
+                ref="rename"
+                v-model="newName"
+                type="text"
+                class="newFolderInput  ignore-vuetify-classes"
+                @blur="saveNewNameFolder()"
+                @keyup.enter="$event.target.blur()"
+                @keyup.esc="cancelRenameNewFolder($event)">
               <div v-else class="selectionLabel center">{{ folder.title }}</div>
             </a>
           </div>
         </div>
-        <exo-dropdown-menu ref="folderActionsMenu" :folder-actions-menu-left="folderActionsMenuLeft" :folder-actions-menu-top="folderActionsMenuTop" :show-dropdown-menu="showFolderActionsMenu" :selected-folder="selectedFolder" @renameFolder="renameFolder()" @deleteFolder="deleteFolder" @closeMenu="closeFolderActionsMenu"></exo-dropdown-menu>
+        <exo-dropdown-menu
+          ref="folderActionsMenu"
+          :folder-actions-menu-left="folderActionsMenuLeft"
+          :folder-actions-menu-top="folderActionsMenuTop"
+          :show-dropdown-menu="showFolderActionsMenu"
+          :selected-folder="selectedFolder"
+          @renameFolder="renameFolder()"
+          @deleteFolder="deleteFolder"
+          @closeMenu="closeFolderActionsMenu" />
         <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder">
           <i class="uiIconEmptyFolder"></i>
           <p>{{ $t('attachments.drawer.destination.subfolder.empty') }}</p>
         </div>
-        <div v-for="file in filteredFiles" v-show="!modeFolderSelection" :key="file.id" :id="file.idAttribute" :title="file.idAttribute" :class="file.selected? 'selected' : ''" class="fileSelection" @click="selectFile(file)">
-          <exo-attachment-item :file="file"></exo-attachment-item>
+        <div
+          v-for="file in filteredFiles"
+          v-show="!modeFolderSelection"
+          :id="file.idAttribute"
+          :key="file.id"
+          :title="file.idAttribute"
+          :class="file.selected? 'selected' : ''"
+          class="fileSelection"
+          @click="selectFile(file)">
+          <exo-attachment-item :file="file" />
         </div>
       </div>
       <div v-else class="categorizedDrives">
-        <v-list dense flat class="drivesList">
-          <v-list-group value="true" class="categories" eager>
-            <v-list-group v-for="(group, name) in filteredDrivers" :key="name" :ripple="false" sub-group no-action value="true" class="category" active-class="categoryActive">
+        <v-list
+          dense
+          flat
+          class="drivesList">
+          <v-list-group
+            value="true"
+            class="categories"
+            eager>
+            <v-list-group
+              v-for="(group, name) in filteredDrivers"
+              :key="name"
+              :ripple="false"
+              sub-group
+              no-action
+              value="true"
+              class="category"
+              active-class="categoryActive">
               <template v-slot:activator>
                 <v-list-item-content class="categoryContent">{{ name }}</v-list-item-content>
               </template>
@@ -113,7 +226,10 @@
                   :title="driver.title" 
                   class="folderSelection"
                   @click="openDrive(driver, name)">
-                  <a :data-original-title="driver.title" rel="tooltip" data-placement="bottom">
+                  <a
+                    :data-original-title="driver.title"
+                    rel="tooltip"
+                    data-placement="bottom">
                     <i 
                       v-show="!drivesInProgress[driver.title]"
                       :class="driver.isCloudDrive ? driver.driveTypeCSSClass : `uiIconEcms24x24DriveGroup ${driver.driveTypeCSSClass}`"
@@ -128,14 +244,12 @@
                         :value="drivesInProgress[driver.title]"
                         :width="4"
                         color="var(--allPagesPrimaryColor, #578dc9)"
-                        class="connectingDriveProgress"
-                      >{{ drivesInProgress[driver.title] }}<span class="connectingDriveProgressPercent">%</span></v-progress-circular>
+                        class="connectingDriveProgress">{{ drivesInProgress[driver.title] }}<span class="connectingDriveProgressPercent">%</span></v-progress-circular>
                       <!-- end of progress block -->
                     </div>
                     <div 
                       :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
-                      class="selectionLabel center"
-                    >{{ driver.title }}</div>
+                      class="selectionLabel center">{{ driver.title }}</div>
                   </a>
                 </div>
               </div>
@@ -152,12 +266,33 @@
         </span>
       </div>
       <div v-if="modeFolderSelection" class="buttonActions btnActions">
-        <button class="btn btn-primary attach ignore-vuetify-classes btnSelect" type="button" @click="selectDestination()">{{ $t('attachments.drawer.select') }}</button>
-        <button class="btn btnCancel" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
+        <button
+          class="btn btn-primary attach ignore-vuetify-classes btnSelect"
+          type="button"
+          @click="selectDestination()">
+          {{ $t('attachments.drawer.select') }}
+        </button>
+        <button
+          class="btn btnCancel"
+          type="button"
+          @click="$emit('cancel')">
+          {{ $t('attachments.drawer.cancel') }}
+        </button>
       </div>
       <div v-if="!modeFolderSelection && currentDrive" class="buttonActions">
-        <button class="btn" type="button" @click="$emit('cancel')">{{ $t('attachments.drawer.cancel') }}</button>
-        <button :disabled="selectedFiles.length === 0" class="btn btn-primary attach ignore-vuetify-classes" type="button" @click="addSelectedFiles()">{{ $t('attachments.drawer.select') }}</button>
+        <button
+          class="btn"
+          type="button"
+          @click="$emit('cancel')">
+          {{ $t('attachments.drawer.cancel') }}
+        </button>
+        <button
+          :disabled="selectedFiles.length === 0"
+          class="btn btn-primary attach ignore-vuetify-classes"
+          type="button"
+          @click="addSelectedFiles()">
+          {{ $t('attachments.drawer.select') }}
+        </button>
       </div>
     </div>
     <!-- The following bloc is needed in order to display the confirmation popup -->
@@ -168,7 +303,7 @@
       :message="popupBodyMessage"
       :ok-label="okLabel"
       :cancel-label="cancelLabel"
-      @ok="okConfirmDialog"/>
+      @ok="okConfirmDialog" />
       <!--end -->
   </div>
 </template>
@@ -185,11 +320,11 @@ export default {
     },
     modeFolderSelection: {
       type: Boolean,
-      default:false,
+      default: false,
     },
     isCloudEnabled: {
       type: Boolean,
-      default:false,
+      default: false,
     },
     spaceId: {
       type: String,
@@ -228,9 +363,9 @@ export default {
       searchFilesFolders: '',
       loadingFolders: true,
       filesCountClass: '',
-      selectedFolderPath : '',
+      selectedFolderPath: '',
       schemaFolder: '',
-      folderDestinationForFile:'',
+      folderDestinationForFile: '',
       attachmentsComposerActions: [], // extensions from extensionRegistry
       creatingNewFolder: false,
       newFolderName: '',
@@ -244,8 +379,8 @@ export default {
       MESSAGE_TIMEOUT: 5000,
       showErrorMessage: false,
       errorMessage: '',
-      renameFolderAction:false,
-      newName:'',
+      renameFolderAction: false,
+      newName: '',
       MESSAGES_DISPLAY_TIME: 5000,
       privateDestinationForFile: false,
       fromSpace: {},
@@ -330,7 +465,7 @@ export default {
       this.filesCountClass = this.filesCountLeft === 0 ? 'noFilesLeft' : '';
     },
     showErrorMessage: function(newVal) {
-      if(newVal) {
+      if (newVal) {
         setTimeout(() => this.showErrorMessage = false, this.MESSAGE_TIMEOUT);
       }
     },
@@ -345,7 +480,7 @@ export default {
     const self = this;
     const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') : `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` : this.spaceId;
     attachmentsService.getSpaceById(spaceId).then( space => {
-      if(space.id) {
+      if (space.id) {
         self.space = space;
         const spaceGroupId = space.groupId.split('/spaces/')[1];
         self.currentDrive = {
@@ -674,7 +809,7 @@ export default {
       this.showFolderActionsMenu = false;
     },
     deleteFolder() {
-      if(this.selectedFolder.canRemove) {
+      if (this.selectedFolder.canRemove) {
         this.$refs.confirmDialog.open();
         this.titleLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.title');
         this.okLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.ok');
@@ -691,13 +826,13 @@ export default {
           this.errorMessage= `${this.$t('attachments.deleteFolderOrFile.error')}`;
           this.showErrorMessage = true;
         });
-      }else {
+      } else {
         return;
       }
     },
     reloadCurrentPath(){
       this.resetExplorer();
-      if(this.currentAbsolutePath) {
+      if (this.currentAbsolutePath) {
         this.fetchChildrenContents(this.currentAbsolutePath);
       } else {
         this.fetchChildrenContents('');
@@ -750,7 +885,7 @@ export default {
             }
           });
         }
-      }else {
+      } else {
         this.selectedFolder = {};
       }
       this.selectedFolderPath = '';
