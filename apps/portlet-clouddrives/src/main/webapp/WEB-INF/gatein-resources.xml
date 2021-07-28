@@ -48,21 +48,16 @@
       <depends>
         <module>cloudDriveUtils</module>
       </depends>
+      <depends>
+        <module>cloudDrive_gdrive</module>
+      </depends>
+      <depends>
+        <module>cloudDrive_onedrive</module>
+      </depends>
     </module>
   </portlet>
 
   <!-- Javascript for Cloud Drive UI support in WCM -->
-  <module>
-    <name>cloudDriveJqueryPnotify</name>
-    <load-group>cloudDriveGRP</load-group>
-    <script>
-      <path>/js/jquery.pnotify.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>jQuery</as>
-    </depends>
-  </module>
   <module>
     <name>cloudDriveUtils</name>
     <load-group>cloudDriveGRP</load-group>
@@ -73,7 +68,11 @@
       <module>jquery</module>
     </depends>
     <depends>
-      <module>cloudDriveJqueryPnotify</module>
+      <module>jQueryUI12</module>
+      <as>jqueryUI</as>
+    </depends>
+    <depends>
+      <module>jQueryPnotify12</module>
     </depends>
   </module>
   <module>
