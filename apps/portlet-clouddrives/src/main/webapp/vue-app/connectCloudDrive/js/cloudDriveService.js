@@ -1,9 +1,7 @@
 export async function getUserDrive() {
   try {
     const response = await fetch(`${cloudDriveUtils.pageBaseUrl()}/portal/rest/clouddrive/document/drive/personal`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      credentials: 'include',
       method: 'GET',
     });
     if (response.ok) {
