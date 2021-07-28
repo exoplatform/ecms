@@ -15,6 +15,14 @@
       <name>exo.profiles</name>
       <value>ecms</value>
     </init-param>
+    <init-param>
+      <name>preload.resource.bundles</name>
+      <value>locale.portlet.documents</value>
+    </init-param>
+    <init-param>
+      <name>preload.resource.rest</name>
+      <value><![CDATA[/portal/rest/search/documents/recent?myWork=true&limit=10]]></value>
+    </init-param>
     <supports>
       <mime-type>text/html</mime-type>
     </supports>
@@ -58,6 +66,10 @@
     <init-param>
       <name>portlet-view-dispatched-file-path</name>
       <value>/html/attachment.html</value>
+    </init-param>
+    <init-param>
+      <name>preload.resource.bundles</name>
+      <value>locale.portlet.attachments</value>
     </init-param>
     <supports>
       <mime-type>text/html</mime-type>
