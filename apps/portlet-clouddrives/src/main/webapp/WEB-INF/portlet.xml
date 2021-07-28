@@ -8,6 +8,18 @@
     <portlet-name>CloudDrivePortlet</portlet-name>
     <display-name xml:lang="EN">Cloud Drive portlet</display-name>
     <portlet-class>org.exoplatform.services.cms.clouddrives.portlet.CloudDrivePortlet</portlet-class>
+    <init-param>
+      <name>preload.resource.bundles</name>
+      <value>locale.clouddrive.CloudDrive</value>
+    </init-param>
+    <init-param>
+      <name>preload.resource.stylesheet</name>
+      <value><![CDATA[/clouddrives-onedrive/skin/clouddrive.css|/clouddrives-onedrive/skin/clouddrive-enterprise.css|/clouddrives-gdrive/skin/clouddrive.css|/clouddrives-gdrive/skin/clouddrive-enterprise.css]]></value>
+    </init-param>
+    <init-param>
+      <name>preload.resource.rest</name>
+      <value><![CDATA[/portal/rest/clouddrive/features/status/enabled|/portal/rest/clouddrive/document/drive/personal]]></value>
+    </init-param>
     <supports>
       <mime-type>text/html</mime-type>
     </supports>

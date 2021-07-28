@@ -1669,11 +1669,6 @@
     // Load CloudDrive dependencies only in top window (not in iframes of gadgets).
 	if (window == top) {
 		try {
-			// load required styles
-			utils.loadStyle("/clouddrives/skin/jquery-ui.css");
-			utils.loadStyle("/clouddrives/skin/jquery.pnotify.default.css");
-			utils.loadStyle("/clouddrives/skin/jquery.pnotify.default.icons.css");
-
 			// configure Pnotify
 			// use jQuery UI css
 			$.pnotify.defaults.styling = "jqueryui";
