@@ -68,6 +68,10 @@
       <value>/html/attachment.html</value>
     </init-param>
     <init-param>
+      <name>prefetch.resources</name>
+      <value>true</value>
+    </init-param>
+    <init-param>
       <name>preload.resource.bundles</name>
       <value>locale.portlet.attachments</value>
     </init-param>
