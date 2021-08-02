@@ -245,7 +245,7 @@ public class DocumentServiceImpl implements DocumentService {
    */
   public String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
     Node rootNode = null;
-    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
@@ -501,7 +501,7 @@ public class DocumentServiceImpl implements DocumentService {
       List<Node> nodes = new ArrayList<Node>();
       String CurrentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
       nodes = linkManager.getNodeSymlinksUnderFolder(currentNode.getUUID(), shared.getPath(), CurrentNodeWorkspaceName);
-      if (nodes.size() != 0) {
+      if (nodes != null && nodes.size() != 0) {
         link = nodes.get(0);
       }
       if (link == null && currentNode.isNodeType(NodetypeConstant.NT_FILE)) {
