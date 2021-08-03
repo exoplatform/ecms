@@ -14,15 +14,17 @@
           </v-btn>
           <span>{{ $t('attachments.list') }}</span>
         </div>
-        <v-btn
-          icon
-          color="primary"
-          @click="openAttachmentsAppDrawer()">
-          <v-icon size="20">
-            fa-plus
-          </v-icon>
-        </v-btn>
       </div>
+    </template>
+    <template slot="titleIcons">
+      <v-btn
+        icon
+        color="primary"
+        @click="openAttachmentsAppDrawer()">
+        <v-icon size="20">
+          fa-plus
+        </v-icon>
+      </v-btn>
     </template>
     <template slot="content">
       <div v-if="attachments.length" class="uploadedFilesItems ml-5">
