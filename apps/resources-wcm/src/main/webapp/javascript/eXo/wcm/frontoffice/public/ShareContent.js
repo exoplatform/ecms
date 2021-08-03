@@ -123,6 +123,7 @@
       gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
       gj("#shareActionBtn").trigger("click");
     });
+    location.reload(true);
   }
 
   /**
