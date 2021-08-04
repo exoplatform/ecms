@@ -7,6 +7,8 @@
       :index="index"
       :count="attachmentsCount"
       :attachment="attachment"
+      :preview-width="previewWidth"
+      :preview-height="previewHeight"
       class="activity-file-item" />
   </card-carousel>
 </template>
@@ -17,6 +19,14 @@ export default {
     activity: {
       type: Object,
       default: null,
+    },
+    previewHeight: {
+      type: String,
+      default: () => '152px',
+    },
+    previewWidth: {
+      type: Number,
+      default: () => '250px',
     },
   },
   computed: {

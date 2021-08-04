@@ -12,14 +12,12 @@
       class="activity-attachment overflow-hidden d-flex flex-column border-box-sizing"
       @click="openPreview">
       <v-card-text class="activity-attachment-thumbnail d-flex flex-grow-1 pa-0">
-        <v-img
+        <img
           v-if="image"
           :src="attachment.image"
-          max-height="152px"
-          max-width="250px"
-          contain
-          eager
-          @error="image = null" />
+          :style="{maxHeight: previewHeight, maxWidth: previewWidth, height: 'fit-content'}"
+          class="ma-auto"
+          @error="image = null">
         <v-icon
           v-else
           :class="attachment.icon"
@@ -79,6 +77,14 @@ export default {
     count: {
       type: Number,
       default: 0,
+    },
+    previewHeight: {
+      type: String,
+      default: () => '152px',
+    },
+    previewWidth: {
+      type: Number,
+      default: () => '250px',
     },
   },
   data: () => ({
