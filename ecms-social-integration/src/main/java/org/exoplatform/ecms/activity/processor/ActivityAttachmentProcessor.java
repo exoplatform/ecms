@@ -94,7 +94,7 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
         fileAttachment.setMimeType(mimeType);
         activity.getFiles().add(fileAttachment);
 
-        NodeLocation nodeLocation = new NodeLocation(repository, workspace, docPath, nodeUUID);
+        NodeLocation nodeLocation = new NodeLocation(repository, workspace, docPath, nodeUUID, true);
         Node contentNode = NodeLocation.getNodeByLocation(nodeLocation);
         if (contentNode == null || !contentNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
           fileAttachment.setDeleted(true);
