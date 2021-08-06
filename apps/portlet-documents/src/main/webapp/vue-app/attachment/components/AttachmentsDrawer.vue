@@ -9,7 +9,7 @@
       @closed="resetAttachmentsDrawer">
       <template slot="title">
         <div class="attachmentsDrawerHeader">
-          <span>{{ drawerTitle }}</span>
+          <span>{{ $t('attachments.upload.document') }}</span>
         </div>
       </template>
       <template slot="content">
@@ -119,7 +119,6 @@ export default {
       maxUploadInProgressCount: 2,
       uploadingFilesQueue: [],
       MESSAGES_DISPLAY_TIME: 5000,
-      drawerTitle: `${this.$t('attachments.upload.document')}`,
       pathDestinationFolder: '',
       showDestinationPath: false,
       schemaFolder: [],
