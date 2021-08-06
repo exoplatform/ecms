@@ -12,10 +12,8 @@ if (extensionRegistry) {
 
 Vue.use(Vuetify);
 
-const vuetify = new Vuetify({
-  dark: true,
-  iconfont: '',
-});
+const vuetify = new Vuetify(eXo.env.portal.vuetifyPreset);
+
 //getting language of user
 const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
 
@@ -29,10 +27,10 @@ export function init(appId, query, folder, type, limit, cacheRecentDocuments) {
     .then(i18n => {
       const appElement = document.createElement('div');
       appElement.id = appId;
-      new Vue({
+      Vue.createApp({
         template: `<documents app-id="${appId}" id="${appId}" v-cacheable query="${query}" folder="${folder}" type="${type}" limit="${limit}" :cache-recent-documents="${cacheRecentDocuments}"></documents>`,
         i18n,
         vuetify,
-      }).$mount(appElement);
+      }, appElement, 'Recent Documents');
     });
 }
