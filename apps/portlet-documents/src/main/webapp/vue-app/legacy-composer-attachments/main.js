@@ -26,12 +26,11 @@ export function init() {
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready
-    exoAttachmentsApp = new Vue({
-      el: '#exoAttachmentsApp',
+    exoAttachmentsApp = Vue.createApp({
       template: '<exo-attachments></exo-attachments>',
       i18n,
       vuetify
-    });
+    }, '#exoAttachmentsApp', 'Legacy Attachments Drawer');
   });
 }
 

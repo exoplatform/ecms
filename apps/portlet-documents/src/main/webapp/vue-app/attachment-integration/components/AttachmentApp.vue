@@ -112,7 +112,8 @@ export default {
     },
   },
   created() {
-    this.initEntityAttachmentsList();
+    Promise.resolve(this.initEntityAttachmentsList())
+      .finally(() => this.$root.$applicationLoaded());
     document.addEventListener('entity-attachments-updated', () => {
       this.initEntityAttachmentsList();
     });
