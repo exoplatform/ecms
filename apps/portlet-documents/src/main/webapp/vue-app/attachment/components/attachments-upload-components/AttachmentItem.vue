@@ -22,8 +22,8 @@
       </div>
     </v-list-item-avatar>
     <v-list-item-content @click="openPreview()">
-      <v-list-item-title class="uploadedFileTitle">
-        {{ attachment.name || notAccessibleAttachmentTitle }}
+      <v-list-item-title class="uploadedFileTitle" :title="attachmentTitle">
+        {{ attachmentTitle || notAccessibleAttachmentTitle }}
       </v-list-item-title>
       <v-list-item-subtitle v-if="canMoveAttachment" class="d-flex v-messages uploadedFileSubTitle">
         <v-chip
@@ -196,6 +196,9 @@ export default {
     },
     attachmentInProgress() {
       return this.attachment.uploadProgress < 100;
+    },
+    attachmentTitle() {
+      return this.attachment && this.attachment.name && unescape(this.attachment.name);
     },
   },
   methods: {
