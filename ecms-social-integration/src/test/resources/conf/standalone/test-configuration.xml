@@ -548,7 +548,8 @@
     <type>org.exoplatform.wcm.ext.component.document.service.ContentViewerRESTService</type>
   </component>
   <component>
-    <type>org.exoplatform.social.ckeditor.HTMLUploadImageProcessor</type>
+    <key>org.exoplatform.social.common.service.HTMLUploadImageProcessor</key>
+    <type>org.exoplatform.ecms.uploads.HTMLUploadImageProcessorImpl</type>
   </component>
   <component>
     <type>org.exoplatform.social.ckeditor.rest.ComposerImageControllerRest</type>
@@ -649,21 +650,6 @@
       <name>SOC_ACTIVITY_MIGRATION</name>
       <set-method>addEventListener</set-method>
       <type>org.exoplatform.social.addons.rdbms.listener.DocActivityUpdaterListener</type>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.social.core.manager.ActivityManager</target-component>
-    <component-plugin>
-      <name>ActivityImageLinkUpdateListener</name>
-      <set-method>addActivityEventListener</set-method>
-      <type>org.exoplatform.social.ckeditor.listener.ActivityImageLinkUpdateListener</type>
-      <init-params>
-        <value-param>
-          <name>personal.drive.name</name>
-          <value>Personal Documents</value>
-        </value-param>
-      </init-params>
     </component-plugin>
   </external-component-plugins>
 
@@ -1096,17 +1082,6 @@
         <value-param>
           <name>priority</name>
           <value>1</value>
-        </value-param>
-      </init-params>
-    </component-plugin>
-    <component-plugin>
-      <name>ActivityImageLinkUpdateListener</name>
-      <set-method>addActivityEventListener</set-method>
-      <type>org.exoplatform.social.ckeditor.listener.ActivityImageLinkUpdateListener</type>
-      <init-params>
-        <value-param>
-          <name>personal.drive.name</name>
-          <value>Personal Documents</value>
         </value-param>
       </init-params>
     </component-plugin>

@@ -14,7 +14,8 @@
     <type>org.exoplatform.wcm.ext.component.document.service.rest.ContentViewerRESTService</type>
   </component>
   <component>
-    <type>org.exoplatform.social.ckeditor.HTMLUploadImageProcessor</type>
+    <key>org.exoplatform.social.common.service.HTMLUploadImageProcessor</key>
+    <type>org.exoplatform.ecms.uploads.HTMLUploadImageProcessorImpl</type>
   </component>
   <component>
     <type>org.exoplatform.social.ckeditor.rest.ComposerImageControllerRest</type>
@@ -161,17 +162,6 @@
       <name>FileActivityListener</name>
       <set-method>addActivityEventListener</set-method>
       <type>org.exoplatform.ecms.activity.listener.FileActivityListener</type>
-    </component-plugin>
-    <component-plugin>
-      <name>ActivityImageLinkUpdateListener</name>
-      <set-method>addActivityEventListener</set-method>
-      <type>org.exoplatform.social.ckeditor.listener.ActivityImageLinkUpdateListener</type>
-      <init-params>
-        <value-param>
-          <name>personal.drive.name</name>
-          <value>Personal Documents</value>
-        </value-param>
-      </init-params>
     </component-plugin>
     <component-plugin>
       <name>ActivityListener</name>
