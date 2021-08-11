@@ -471,7 +471,6 @@ export default {
     window.require(['SHARED/jquery'], function($) {
       $('#exoAttachmentsApp *[rel="tooltip"]').tooltip();
     });
-    this.$root.$applicationLoaded();
   },
   created(){
     this.addDefaultPath();
