@@ -33,7 +33,10 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -60,6 +63,8 @@ public class UINodeTreeBuilder extends UIContainer {
   private String[] acceptedNodeTypes = {};
 
   private String[] defaultExceptedNodeTypes = {};
+
+  private SpaceService spaceService ;
 
   /** The root tree node. */
   protected NodeLocation rootTreeNode;
@@ -238,6 +243,8 @@ public class UINodeTreeBuilder extends UIContainer {
   }
 
   private List<Node> filfer(final NodeIterator iterator) throws Exception{
+    SpaceService spaceService = getSpaceService();
+    String currentUser = getCurrentUserName();
     List<Node> list = new ArrayList<Node>();
     if (acceptedNodeTypes.length > 0) {
       for(;iterator.hasNext();) {
@@ -245,7 +252,10 @@ public class UINodeTreeBuilder extends UIContainer {
         if(sibbling.isNodeType("exo:hiddenable")) continue;
         for(String nodetype: acceptedNodeTypes) {
           if(sibbling.isNodeType(nodetype)) {
-            list.add(sibbling);
+            Space space = spaceService.getSpaceByDisplayName(sibbling.getName());
+           if ((space == null) || (space!=null) && (spaceService.isMember(space,currentUser))) {
+              list.add(sibbling);
+            }
             break;
           }
         }
@@ -267,7 +277,16 @@ public class UINodeTreeBuilder extends UIContainer {
     for (Node node : list) addNodePublish(listNodeCheck, node, publicationService_);
     return listNodeCheck;
   }
-
+  private SpaceService getSpaceService() {
+    if (spaceService == null) {
+      spaceService = getApplicationComponent(SpaceService.class);
+    }
+    return spaceService;
+  }
+  private String getCurrentUserName() {
+    ConversationState state = ConversationState.getCurrent();
+    return state == null || state.getIdentity() == null ? null : state.getIdentity().getUserId();
+  }
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#processRender(org.exoplatform.webui.application.WebuiRequestContext)
    */
