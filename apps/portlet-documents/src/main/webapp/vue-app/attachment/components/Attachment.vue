@@ -79,6 +79,9 @@ export default {
       this.initAttachmentEnvironment();
     });
   },
+  mounted() {
+    this.$root.$applicationLoaded();
+  },
   methods: {
     openAttachmentsAppDrawer() {
       this.$root.$emit('open-attachments-app-drawer');
