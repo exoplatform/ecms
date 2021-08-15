@@ -310,7 +310,7 @@
       <ViewRelations>関連の表示/隠す</ViewRelations>
       <ShowJCRStructure>Show/Hide Like JCR Structure</ShowJCRStructure>
       <EditProperty>文書のプロパティを編集</EditProperty>
-      <UploadNewVersion>新しいバージョンをアップロード</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>ルートノードでアクションできません。</cannot-action-in-rootnode>

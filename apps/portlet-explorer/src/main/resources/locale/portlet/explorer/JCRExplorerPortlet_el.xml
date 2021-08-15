@@ -310,7 +310,7 @@
       <ViewRelations>Εμφάνιση/απόκρυψη σχέσεων</ViewRelations>
       <ShowJCRStructure>Εμφάνιση/απόκρυψη δομής</ShowJCRStructure>
       <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Δεν μπορείτε να πραγματοποιήσετε αυτήν την ενέργεια στον κόμβο ρίζας.</cannot-action-in-rootnode>

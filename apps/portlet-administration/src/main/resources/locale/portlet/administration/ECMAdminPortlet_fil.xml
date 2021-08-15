@@ -993,7 +993,7 @@
       <shareDocuments>Ibahagi</shareDocuments>
       <openDocument>Ang remote na Pag-edit</openDocument>
       <editProperty>Baguhin ang mga Katangian ng Dokumento</editProperty>
-      <uploadNewVersion>Mag-upload ng bagong bersyon</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

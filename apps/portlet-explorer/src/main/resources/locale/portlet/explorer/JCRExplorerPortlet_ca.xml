@@ -310,7 +310,7 @@
       <ViewRelations>Mostra/Amaga les relacions</ViewRelations>
       <ShowJCRStructure>Mostra/Amaga estructura</ShowJCRStructure>
       <EditProperty>Propietats del document</EditProperty>
-      <UploadNewVersion>Puja una versió nova</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>No pot realitzar aquesta acció a l'arrel.</cannot-action-in-rootnode>

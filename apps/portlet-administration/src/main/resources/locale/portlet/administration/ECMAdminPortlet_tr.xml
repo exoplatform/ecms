@@ -993,7 +993,7 @@
       <shareDocuments>Paylaş</shareDocuments>
       <openDocument>Uzaktan Düzenle</openDocument>
       <editProperty>Dosya Özelliklerini Düzenle</editProperty>
-      <uploadNewVersion>Yeni bir sürümünü yükle</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

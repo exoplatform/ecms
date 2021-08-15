@@ -310,7 +310,7 @@
       <ViewRelations>Zobrazit/skrýt vztahy</ViewRelations>
       <ShowJCRStructure>Zobrazit/skrýt strukturu obsahu</ShowJCRStructure>
       <EditProperty>Upravit vlastnosti dokumentu</EditProperty>
-      <UploadNewVersion>Nahrát novou verzi</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Tuto akci nelze provést v kořenovém uzlu.</cannot-action-in-rootnode>

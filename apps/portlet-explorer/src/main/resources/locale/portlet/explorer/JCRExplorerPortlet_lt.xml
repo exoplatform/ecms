@@ -310,7 +310,7 @@
       <ViewRelations>Rodyti/slėpti ryšius</ViewRelations>
       <ShowJCRStructure>Rodyti/slėpti turinio struktūrą</ShowJCRStructure>
       <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>

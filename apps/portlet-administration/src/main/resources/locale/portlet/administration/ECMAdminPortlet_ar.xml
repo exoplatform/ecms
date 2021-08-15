@@ -993,7 +993,7 @@
       <shareDocuments>مشاركة</shareDocuments>
       <openDocument>تغيير عن بعد</openDocument>
       <editProperty>تغيير خصائص الملف</editProperty>
-      <uploadNewVersion>تحميل نسخة جديدة</uploadNewVersion>
+      <uploadNewVersion>تحميل إصدار</uploadNewVersion>
     </label>
     <action>
       <Save>حفظ</Save>

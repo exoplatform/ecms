@@ -310,7 +310,7 @@
       <ViewRelations>Tampilkan/Sembunyikan hubungan</ViewRelations>
       <ShowJCRStructure>Tampilkan/Sembunyikan struktur konten</ShowJCRStructure>
       <EditProperty>Ubah properti dokumen</EditProperty>
-      <UploadNewVersion>Mengunggah versi baru</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Kamu tidak dapat melakukan tindakan pada akar ini.</cannot-action-in-rootnode>

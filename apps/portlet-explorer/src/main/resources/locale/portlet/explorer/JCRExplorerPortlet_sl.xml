@@ -310,7 +310,7 @@
       <ViewRelations>Pokaži/Skrij povezave</ViewRelations>
       <ShowJCRStructure>Pokaži/Skrij strukturo vsebine</ShowJCRStructure>
       <EditProperty>Urejanje lastnosti dokumenta</EditProperty>
-      <UploadNewVersion>Naloži novo različico</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Tega dejanja ni mogoče izvesti v korenskem vozlišču.</cannot-action-in-rootnode>

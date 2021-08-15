@@ -993,7 +993,7 @@
       <shareDocuments>Μοιραστείτε</shareDocuments>
       <openDocument>Απομακρυσμένη επεξεργασία</openDocument>
       <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Upload a new version</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

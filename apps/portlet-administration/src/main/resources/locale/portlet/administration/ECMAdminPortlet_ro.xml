@@ -993,7 +993,7 @@
       <shareDocuments>Distribuie</shareDocuments>
       <openDocument>Modifică de la distanță</openDocument>
       <editProperty>Modifică proprietățile documentului</editProperty>
-      <uploadNewVersion>Încarcă o nouă versiune</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

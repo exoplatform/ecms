@@ -310,7 +310,7 @@
       <ViewRelations>إخفاء/عرض العلاقات</ViewRelations>
       <ShowJCRStructure>إخفاء/عرض شكل المحتوى</ShowJCRStructure>
       <EditProperty>تغيير خصائص الملف</EditProperty>
-      <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
+      <UploadNewVersion>تحميل إصدار</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>لا يمكنك تنفيذ هذا الإجراء في الجذر.</cannot-action-in-rootnode>

@@ -993,7 +993,7 @@
       <shareDocuments>بانٹیں</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>دستاویزی خصوصیات میں ترمیم کریں</editProperty>
-      <uploadNewVersion>ایک نیا ورژن اپ لوڈ کریں</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

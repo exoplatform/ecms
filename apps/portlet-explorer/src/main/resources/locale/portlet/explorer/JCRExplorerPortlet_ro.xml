@@ -310,7 +310,7 @@
       <ViewRelations>Afișare/Ascundere relaţiile</ViewRelations>
       <ShowJCRStructure>Afișează/Ascunde structura conținutului</ShowJCRStructure>
       <EditProperty>Modifică proprietățile documentului</EditProperty>
-      <UploadNewVersion>Încarcă o versiune nouă</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Nu poți efectua această acțiune în folderul root.</cannot-action-in-rootnode>

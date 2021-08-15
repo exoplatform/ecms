@@ -310,7 +310,7 @@
       <ViewRelations>Показать/скрыть отношения</ViewRelations>
       <ShowJCRStructure>Показать/скрыть структуру содержимого</ShowJCRStructure>
       <EditProperty>Редактировать свойства документа</EditProperty>
-      <UploadNewVersion>Загрузить новую версию</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Это действие нельзя выполнить в корневом узле.</cannot-action-in-rootnode>

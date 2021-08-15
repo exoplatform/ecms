@@ -310,7 +310,7 @@
       <ViewRelations>Pokaż/Ukryj relacje</ViewRelations>
       <ShowJCRStructure>Pokaż/Ukryj strukturę treści</ShowJCRStructure>
       <EditProperty>Edytuj właściwości dokumentu</EditProperty>
-      <UploadNewVersion>Przekaż nową wersję</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Nie można wykonać tej operacji w węźle głównym.</cannot-action-in-rootnode>

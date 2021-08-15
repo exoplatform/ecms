@@ -993,7 +993,7 @@
       <shareDocuments>Compartir</shareDocuments>
       <openDocument>Edició remota</openDocument>
       <editProperty>Propietats del document</editProperty>
-      <uploadNewVersion>Puja una versió nova</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

@@ -993,7 +993,7 @@
       <shareDocuments>Chia sẻ</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
-      <uploadNewVersion>Tải một phiên bản mới</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

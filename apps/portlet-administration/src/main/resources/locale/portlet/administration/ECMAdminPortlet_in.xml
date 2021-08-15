@@ -994,7 +994,7 @@
       <shareDocuments>Bagikan</shareDocuments>
       <openDocument>Ubah jarak jauh</openDocument>
       <editProperty>Mengubah properti dokumen</editProperty>
-      <uploadNewVersion>Mengunggah versi baru</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
