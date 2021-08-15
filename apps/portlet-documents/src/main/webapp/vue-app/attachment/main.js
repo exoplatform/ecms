@@ -34,14 +34,14 @@ export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId)
   // getting locale resources
   exoi18n.loadLanguageAsync(lang, url).then(i18n => {
     // init Vue app when locale resources are ready
-    attachmentApp = new Vue({
-      data: () => ({
+    attachmentApp = Vue.createApp({
+      data: {
         entityId: entityId || '',
         entityType: entityType || '',
         defaultDrive: defaultDrive || null,
         defaultFolder: defaultFolder || '',
         spaceId: spaceId || '',
-      }),
+      },
       template: `<attachment
                   :entity-id=entityId
                   :entity-type=entityType
@@ -51,7 +51,7 @@ export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId)
                   id="${appId}" />`,
       vuetify,
       i18n
-    }).$mount(`#${appId}`);
+    }, `#${appId}`, 'Attachment Drawer');
   });
 }
 
