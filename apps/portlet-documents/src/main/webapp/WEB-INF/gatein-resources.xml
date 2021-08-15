@@ -13,6 +13,9 @@
         <module>commonDocComponents</module>
       </depends>
       <depends>
+        <module>commonVueComponents</module>
+      </depends>
+      <depends>
         <module>vue</module>
       </depends>
       <depends>
@@ -35,6 +38,9 @@
     </script>
     <depends>
       <module>commonDocComponents</module>
+    </depends>
+    <depends>
+      <module>commonVueComponents</module>
     </depends>
     <depends>
       <module>vue</module>
@@ -73,6 +79,9 @@
     </depends>
     <depends>
       <module>vueEllipsis</module>
+    </depends>
+    <depends>
+      <module>commonVueComponents</module>
     </depends>
     <depends>
       <module>eXoVueI18n</module>
