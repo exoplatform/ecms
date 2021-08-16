@@ -310,7 +310,7 @@
       <ViewRelations>Relaties tonen/verbergen</ViewRelations>
       <ShowJCRStructure>Als JCR Structure Add/Edit</ShowJCRStructure>
       <EditProperty>Documenteigenschappen bewerken</EditProperty>
-      <UploadNewVersion>Een nieuwe versie uploaden</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>U kan geen acties uitvoeren in root node</cannot-action-in-rootnode>

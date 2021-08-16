@@ -310,7 +310,7 @@
       <ViewRelations>Hiện/Ẩn Quan hệ</ViewRelations>
       <ShowJCRStructure>Hiện/Ẩn Cấu trúc Nội dung</ShowJCRStructure>
       <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Tải một phiên bản mới</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Bạn không thể thực hiện hành động này ở nút gốc.</cannot-action-in-rootnode>

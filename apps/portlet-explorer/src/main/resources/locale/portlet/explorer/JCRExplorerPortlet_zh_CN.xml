@@ -310,7 +310,7 @@
       <ViewRelations>显示/隐藏关系</ViewRelations>
       <ShowJCRStructure>显示/隐藏内容结构</ShowJCRStructure>
       <EditProperty>编辑文档属性</EditProperty>
-      <UploadNewVersion>上传一个新的版本</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>您不能在根节点中执行此操作。</cannot-action-in-rootnode>

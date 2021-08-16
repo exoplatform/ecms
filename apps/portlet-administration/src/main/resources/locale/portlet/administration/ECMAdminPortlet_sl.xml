@@ -993,7 +993,7 @@
       <shareDocuments>Skupna raba</shareDocuments>
       <openDocument>Oddaljeno urejanje</openDocument>
       <editProperty>Urejanje lastnosti dokumenta</editProperty>
-      <uploadNewVersion>Nalaganje nove različice</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

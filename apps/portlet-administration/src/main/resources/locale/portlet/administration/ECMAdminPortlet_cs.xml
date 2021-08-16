@@ -993,7 +993,7 @@
       <shareDocuments>Sdílet</shareDocuments>
       <openDocument>Vzdálená úprava</openDocument>
       <editProperty>Upravit vlastnosti dokumentu</editProperty>
-      <uploadNewVersion>Nahrát novou verzi</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

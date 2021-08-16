@@ -310,7 +310,7 @@
       <ViewRelations>Ipakita/Itago ang mga Relasyon</ViewRelations>
       <ShowJCRStructure>Ipakita/Itago ang Sulod sa Struktura</ShowJCRStructure>
       <EditProperty>I-edit ang mga Property sa Dokumento</EditProperty>
-      <UploadNewVersion>Pag-upload ug bag-o nga bersyon</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Dili pa makabuhat niiining maong aksyon sa root.</cannot-action-in-rootnode>

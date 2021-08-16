@@ -310,7 +310,7 @@
       <ViewRelations>Beziehungen anzeigen/ausblenden</ViewRelations>
       <ShowJCRStructure>Inhaltsstruktur anzeigen/ausblenden</ShowJCRStructure>
       <EditProperty>Dokumenteigenschaften bearbeiten</EditProperty>
-      <UploadNewVersion>Eine neue Version hochladen</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Diese Aktion kann nicht im Quellknoten ausgeführt werden.</cannot-action-in-rootnode>

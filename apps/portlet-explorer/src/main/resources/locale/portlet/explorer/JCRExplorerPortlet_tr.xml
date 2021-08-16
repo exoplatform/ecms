@@ -310,7 +310,7 @@
       <ViewRelations>İlişkileri Göster/Gizle</ViewRelations>
       <ShowJCRStructure>İçerik Yapısını Göster/Gizle</ShowJCRStructure>
       <EditProperty>Dosya Özelliklerini Düzenle</EditProperty>
-      <UploadNewVersion>Yeni bir sürümünü yükle</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Kök düğümde bu eylemi gerçekleştiremezsiniz.</cannot-action-in-rootnode>

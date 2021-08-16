@@ -993,7 +993,7 @@
       <shareDocuments>Поділитися</shareDocuments>
       <openDocument>Віддалене редагування</openDocument>
       <editProperty>Змінити властивості документа</editProperty>
-      <uploadNewVersion>Завантажити нову версію</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

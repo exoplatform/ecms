@@ -993,7 +993,7 @@
       <shareDocuments>分享</shareDocuments>
       <openDocument>远程编辑</openDocument>
       <editProperty>编辑文档属性</editProperty>
-      <uploadNewVersion>上传新版本</uploadNewVersion>
+      <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

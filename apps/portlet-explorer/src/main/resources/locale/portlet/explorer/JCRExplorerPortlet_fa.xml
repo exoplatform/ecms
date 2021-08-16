@@ -310,7 +310,7 @@
       <ViewRelations>نمایش/پنهان کردن ارتباطات</ViewRelations>
       <ShowJCRStructure>نمایش/پنهان کردن ساختار محتوا</ShowJCRStructure>
       <EditProperty>Edit Document Properties</EditProperty>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>قادر به انجام این اقدام در گره ریشه نیستید.</cannot-action-in-rootnode>
