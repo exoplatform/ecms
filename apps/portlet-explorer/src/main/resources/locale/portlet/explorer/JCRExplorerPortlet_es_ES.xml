@@ -310,7 +310,7 @@
       <ViewRelations>Mostrar/Esconder Relaciones</ViewRelations>
       <ShowJCRStructure>Mostrar/Ocultar estructura</ShowJCRStructure>
       <EditProperty>Propiedades del documento</EditProperty>
-      <UploadNewVersion>Upload a version</UploadNewVersion>
+      <UploadNewVersion>Subir una versión</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>No puede realizar esta acción en la carpeta raíz.</cannot-action-in-rootnode>
