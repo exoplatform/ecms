@@ -49,6 +49,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
@@ -61,6 +62,7 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
@@ -216,14 +218,14 @@ public class UITreeExplorer extends UIContainer {
               return cloudDrives.getTitle();
             } else {
               try {
-                RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
-                Node groupNode = (Node) WCMCoreUtils.getSystemSessionProvider()
-                                                    .getSession(repoService.getCurrentRepository()
-                                                                           .getConfiguration()
-                                                                           .getDefaultWorkspaceName(),
-                                                                repoService.getCurrentRepository())
-                                                    .getItem(path);
-                return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
+                RepositoryService repoService = CommonsUtils.getService(RepositoryService.class);
+                NodeHierarchyCreator nodeHierarchyCreator = CommonsUtils.getService(NodeHierarchyCreator.class);
+                String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
+                Node groupNode = (Node) WCMCoreUtils.getSystemSessionProvider().getSession(
+                        repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                        repoService.getCurrentRepository()).getItem(
+                        groupPath + driveData.getName().replace(".", "/"));
+                return groupNode.getParent().getName() + " / " + groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
               } catch (Exception e) {
                 return id.replace(".", " / ");
               }
