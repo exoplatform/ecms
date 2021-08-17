@@ -306,7 +306,7 @@ public class Utils {
   }
 
   public static String getPersonalDrivePath(String parameterizedDrivePath, String userId) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     return StringUtils.replaceOnce(parameterizedDrivePath,
