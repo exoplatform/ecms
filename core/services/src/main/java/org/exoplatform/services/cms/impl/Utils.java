@@ -303,12 +303,16 @@ public class Utils {
   }
 
   public static String getPersonalDrivePath(String parameterizedDrivePath, String userId) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    return StringUtils.replaceOnce(parameterizedDrivePath,
-                                   nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}",
-                                   userNode.getPath());
+    try{
+      Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+      return StringUtils.replaceOnce(parameterizedDrivePath,
+        nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}",
+        userNode.getPath());
+    } finally {
+      sessionProvider.close();
+    }
   }
 
   public static List<PropertyDefinition> getProperties(Node node) throws Exception {
