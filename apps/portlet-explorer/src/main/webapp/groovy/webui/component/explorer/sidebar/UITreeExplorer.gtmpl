@@ -75,7 +75,7 @@
 	    String iconType = "expand";
 	    String actionLink  ;
 	    String expandLink ;
-	    if(treeNode.isExpanded()) {
+	    if(treeNode.isExpanded() || uicomponent.isShowChildren(treeNode)) {
 	      mode = "Collapse" ;
 	      iconType = "collapse";
 	    }
@@ -165,7 +165,7 @@
 			println "<i class=\"iconLinkSmall\"></i>";
 	    }		
 		println " </i> <span class='nodeName'>$treeNodeName</span></a>" ;
-	    println "    </div>" ; 
+	    println "    </div>" ;
 	    println "  </div>" ; 
 	    if(uicomponent.isShowChildren(treeNode)) {
 	      println "<ul class=\"nodeGroup\">" ;
