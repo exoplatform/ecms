@@ -127,96 +127,96 @@
           </div>
         </transition>
         <div class="contentBody">
-          <div v-if="currentDrive" class="selectionBox px-5 d-flex flex-wrap">
-            <div v-if="loadingFolders" class="VuetifyApp loader ma-auto">
-              <v-app class="VuetifyApp">
-                <v-progress-circular
-                  :size="30"
-                  :width="3"
-                  indeterminate
-                  class="loadingRing"
-                  color="#578dc9" />
-              </v-app>
+          <div v-if="currentDrive" class="selectionBox">
+            <div v-if="loadingFolders || driveExplorerInitializing" class="loader flex-column d-flex align-center">
+              <v-progress-circular
+                :size="30"
+                :width="3"
+                indeterminate
+                class="loadingRing"
+                color="#578dc9" />
             </div>
-            <div v-if="emptyFolder" class="emptyFolder my-10 mx-auto mx-auto flex-column d-flex align-center">
-              <i class="uiIconEmptyFolder"></i>
-              <p>{{ $t('attachments.drawer.destination.folder.empty') }}</p>
-            </div>
-            <div
-              v-for="folder in filteredFolders"
-              :id="folder.id"
-              :key="folder.id"
-              :title="folder.name"
-              :class="folder.type === 'new_folder' ? 'boxOfFolder d-flex flex-column' : ''"
-              class="folderSelection ma-2"
-              @click="openFolder(folder)"
-              @contextmenu="openFolderActionsMenu(folder, $event)">
-              <a
-                v-if="folder.type === 'new_folder'"
-                href="javascript:void(0);"
-                class="closeIcon pt-1 pr-1 align-self-end"
-                @mousedown="cancelCreatingNewFolder($event)">
-                <span>x</span>
-              </a>
-              <div :class="folder.type === 'new_folder' ? 'boxOfTitle px-1' :''">
-                <a
-                  :title="folder.title"
-                  href="javascript:void(0);"
-                  rel="tooltip"
-                  class="folderTitle d-flex flex-column v-messages"
-                  data-placement="bottom">
-                  <i
-                    :class="folder.folderTypeCSSClass"
-                    class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
-                  <i
-                    v-show="folder.isCloudDrive"
-                    :class="getFolderIcon(folder)"
-                    class="uiIcon-clouddrive"></i>
-                  <input
-                    v-if="folder.type === 'new_folder'"
-                    :ref="folder.ref"
-                    v-model="newFolderName"
-                    type="text"
-                    class="newFolderInput  ignore-vuetify-classes"
-                    @blur="createNewFolder($event)"
-                    @keyup.enter="$event.target.blur()"
-                    @keyup.esc="cancelCreatingNewFolder($event)">
-                  <input
-                    v-else-if="renameFolderAction && folder.id === selectedFolder.id"
-                    :id="folder.id"
-                    ref="rename"
-                    v-model="newName"
-                    type="text"
-                    class="newFolderInput  ignore-vuetify-classes"
-                    @blur="saveNewNameFolder()"
-                    @keyup.enter="$event.target.blur()"
-                    @keyup.esc="cancelRenameNewFolder($event)">
-                  <div v-else class="selectionLabel text-truncate text-color center">{{ folder.title }}</div>
-                </a>
+            <div v-else class="content-explorer px-5 d-flex flex-wrap">
+              <div v-if="emptyFolder" class="emptyFolder my-10 mx-auto flex-column d-flex align-center">
+                <i class="uiIconEmptyFolder"></i>
+                <p>{{ $t('attachments.drawer.destination.folder.empty') }}</p>
               </div>
-            </div>
-            <attachments-folder-actions-menu
-              ref="folderActionsMenu"
-              :folder-actions-menu-left="folderActionsMenuLeft"
-              :folder-actions-menu-top="folderActionsMenuTop"
-              :selected-folder="selectedFolder"
-              @renameFolder="renameFolder()"
-              @deleteFolder="deleteFolder"
-              @closeMenu="closeFolderActionsMenu" />
-            <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder d-flex flex-column align-center mx-auto mt-10">
-              <i class="uiIconEmptyFolder"></i>
-              <p>{{ $t('attachments.drawer.destination.subfolder.empty') }}</p>
-            </div>
-            <div
-              v-for="file in filteredFiles"
-              v-show="!modeFolderSelection"
-              :id="file.idAttribute"
-              :key="file.id"
-              :title="file.idAttribute"
-              :class="file.isSelected? 'selected' : ''"
-              class="fileSelection"
-              @click="selectFile(file)">
-              <attachments-drive-explorer-file-item :file="file" />
+              <div
+                v-for="folder in filteredFolders"
+                :id="folder.id"
+                :key="folder.id"
+                :title="folder.name"
+                :class="folder.type === 'new_folder' ? 'boxOfFolder d-flex flex-column' : ''"
+                class="folderSelection ma-2"
+                @click="openFolder(folder)"
+                @contextmenu="openFolderActionsMenu(folder, $event)">
+                <a
+                  v-if="folder.type === 'new_folder'"
+                  href="javascript:void(0);"
+                  class="closeIcon pt-1 pr-1 align-self-end"
+                  @mousedown="cancelCreatingNewFolder($event)">
+                  <span>x</span>
+                </a>
+                <div :class="folder.type === 'new_folder' ? 'boxOfTitle px-1' :''">
+                  <a
+                    :title="folder.title"
+                    href="javascript:void(0);"
+                    rel="tooltip"
+                    class="folderTitle d-flex flex-column v-messages"
+                    data-placement="bottom">
+                    <i
+                      :class="folder.folderTypeCSSClass"
+                      class="uiIcon24x24FolderDefault uiIconEcmsLightGray selectionIcon center"></i>
+                    <i
+                      v-show="folder.isCloudDrive"
+                      :class="getFolderIcon(folder)"
+                      class="uiIcon-clouddrive"></i>
+                    <input
+                      v-if="folder.type === 'new_folder'"
+                      :ref="folder.ref"
+                      v-model="newFolderName"
+                      type="text"
+                      class="newFolderInput  ignore-vuetify-classes"
+                      @blur="createNewFolder($event)"
+                      @keyup.enter="$event.target.blur()"
+                      @keyup.esc="cancelCreatingNewFolder($event)">
+                    <input
+                      v-else-if="renameFolderAction && folder.id === selectedFolder.id"
+                      :id="folder.id"
+                      ref="rename"
+                      v-model="newName"
+                      type="text"
+                      class="newFolderInput  ignore-vuetify-classes"
+                      @blur="saveNewNameFolder()"
+                      @keyup.enter="$event.target.blur()"
+                      @keyup.esc="cancelRenameNewFolder($event)">
+                    <div v-else class="selectionLabel text-truncate text-color center">{{ folder.title }}</div>
+                  </a>
+                </div>
+              </div>
+              <attachments-folder-actions-menu
+                ref="folderActionsMenu"
+                :folder-actions-menu-left="folderActionsMenuLeft"
+                :folder-actions-menu-top="folderActionsMenuTop"
+                :selected-folder="selectedFolder"
+                @renameFolder="renameFolder()"
+                @deleteFolder="deleteFolder"
+                @closeMenu="closeFolderActionsMenu" />
+              <div v-if="emptyFolderForSelectDestination && modeFolderSelection && !emptyFolder" class="emptyFolder d-flex flex-column align-center mx-auto mt-10">
+                <i class="uiIconEmptyFolder"></i>
+                <p>{{ $t('attachments.drawer.destination.subfolder.empty') }}</p>
+              </div>
+              <div
+                v-for="file in filteredFiles"
+                v-show="!modeFolderSelection"
+                :id="file.idAttribute"
+                :key="file.id"
+                :title="file.idAttribute"
+                :class="file.isSelected? 'selected' : ''"
+                class="fileSelection"
+                @click="selectFile(file)">
+                <attachments-drive-explorer-file-item :file="file" />
+              </div>
             </div>
           </div>
           <div v-else class="categorizedDrives">
@@ -413,6 +413,7 @@ export default {
       modeFolderSelection: true,
       modeFolderSelectionForFile: false,
       movedFile: {},
+      driveExplorerInitializing: false,
     };
   },
   computed: {
@@ -559,6 +560,7 @@ export default {
       //if default drive exist
       if (this.defaultDrive && this.defaultDrive.name) {
         const self = this;
+        this.driveExplorerInitializing = true;
         //open it to generate the path
         this.openDrive(this.defaultDrive).then(() => {
           const defaultFolder = self.folders.find(folder => folder.title === self.defaultFolder);
@@ -575,6 +577,7 @@ export default {
           if (defaultFolder) {
             this.openFolder(defaultFolder).then(() => {
               this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
+              this.driveExplorerInitializing = false;
             });
             //else if no default folder
           } else {
@@ -1005,11 +1008,11 @@ export default {
             this.createNewFolder().then((newFolder) => {
               this.openFolder(newFolder).then(() => {
                 this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(this.selectedFolderPath), this.schemaFolder);
+              }).finally(() => {
+                this.driveExplorerInitializing = false;
               });
             });
           });
-        }).finally(() => {
-          this.creatingNewFolder = false;
         });
       } else { //if entityType (tasks, event, ..) folder exist, we create directly entityId folder
         this.openFolder(defaultFolder).then(() => {
@@ -1020,11 +1023,15 @@ export default {
             this.createNewFolder().then((newFolder) => {
               this.openFolder(newFolder).then(() => {
                 this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(this.selectedFolderPath), this.schemaFolder);
+              }).finally(() => {
+                this.driveExplorerInitializing = false;
               });
             });
           } else {
             this.openFolder(defaultFolder).then(() => {
               this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(this.selectedFolderPath), this.schemaFolder);
+            }).finally(() => {
+              this.driveExplorerInitializing = false;
             });
           }
         });
