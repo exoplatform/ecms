@@ -338,15 +338,17 @@ public class ManageDocumentService implements ResourceContainer {
   public Response createFolder(@QueryParam("driveName") String driveName,
                                @QueryParam("workspaceName") String workspaceName,
                                @QueryParam("currentFolder") String currentFolder,
-                               @QueryParam("folderName") String folderName) throws Exception {
+                               @QueryParam("folderName") String folderName,
+                               @QueryParam("folderNodeType") @DefaultValue("nt:folder") String folderNodeType) throws Exception {
     try {
       Node node = getNode(driveName, workspaceName, currentFolder);
       // The name automatically determined from the title according to the current algorithm.
       String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folderName));
       // Set default name if new title contain no valid character
       name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
-      Node newNode = node.addNode(name,
-                                  NodetypeConstant.NT_UNSTRUCTURED);
+
+      Node newNode = node.addNode(name, folderNodeType);
+
       if (!newNode.hasProperty("exo:title")) {
         newNode.addMixin("exo:rss-enable");
       }
