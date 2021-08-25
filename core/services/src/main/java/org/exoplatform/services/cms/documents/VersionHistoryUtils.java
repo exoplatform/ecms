@@ -39,6 +39,7 @@ public class VersionHistoryUtils {
 
   public static final String NT_FILE          = "nt:file";
   public static final String MIX_VERSIONABLE  = "mix:versionable";
+  public static final String WEB_CONTENT      = "exo:webContent";
 
   //Mixin used to store display version Name added after remove base version
   public static  final String MIX_DISPLAY_VERSION_NAME = "mix:versionDisplayName";
@@ -74,7 +75,7 @@ public class VersionHistoryUtils {
    * @param nodeVersioning
    */
   public static Version createVersion(Node nodeVersioning) throws Exception {
-    if(!nodeVersioning.isNodeType(NT_FILE)) {
+    if(!nodeVersioning.isNodeType(NT_FILE) && !nodeVersioning.isNodeType(WEB_CONTENT)) {
       if(log.isDebugEnabled()){
         log.debug("Version history is not impact with non-nt:file documents, there'is not any version created.");
       }
