@@ -8,16 +8,18 @@
     @blur="closeMenu">
     <li
       :class="!selectedFolder.canRemove ? 'disabled' : ''"
-      class="folderActionsMenuItem btn delete"
+      class="folderActionsMenuItem  delete"
       @click="deleteFolder()">
-      <i class="uiIconTrash"></i>{{ $t('attachments.filesFoldersSelector.action.delete') }}
+      <i class="uiIconTrash"></i>
+      <span>{{ $t('attachments.filesFoldersSelector.action.delete') }}</span>
     </li>
     <li
       :class="!selectedFolder.canRemove ? 'disabled' : ''"
-      class="folderActionsMenuItem btn rename"
+      class="folderActionsMenuItem  rename"
       @click="renameFolder()">
       <i
-        class="uiIconEdit"></i>{{ $t('attachments.filesFoldersSelector.action.rename') }}
+        class="uiIconEdit"></i>
+      <span>{{ $t('attachments.filesFoldersSelector.action.rename') }}</span>
     </li>
   </ul>
 </template>
