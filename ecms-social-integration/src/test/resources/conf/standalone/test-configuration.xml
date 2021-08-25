@@ -626,7 +626,7 @@
       <init-params>
         <value-param>
           <name>templatePath</name>
-          <value><![CDATA[war:/groovy/social/plugin/doc/notification/DocumentActivity.gtmpl]]></value>
+          <value><![CDATA[war:/wcm-notification/templates/notification/DocumentActivity.gtmpl]]></value>
         </value-param>
         <object-param>
           <name>template.DocActivityChildPlugin</name>
