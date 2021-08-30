@@ -150,9 +150,9 @@ public class FileSearchRestService implements ResourceContainer {
   private ElasticSearchFilter filterMyWorkingDocuments() {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     StringBuilder recentFilter = new StringBuilder();
-    recentFilter.append("{\n \"term\" : { \"author\" : \"" + userId + "\" }\n }");
-    recentFilter.append(",{\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }");
-    return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "", recentFilter.toString());
+    recentFilter.append("\"should\" : {\n \"term\" : { \"author\" : \"" + userId + "\" }\n },\n");
+    recentFilter.append("\"must\" : {\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }");
+    return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MY_WORK_DOCS, "", recentFilter.toString());
   }
 
   private Node getUserPrivateNode() throws Exception {
