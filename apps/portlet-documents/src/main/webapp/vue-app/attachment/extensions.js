@@ -54,30 +54,35 @@ export function installExtensions() {
     },
   };
 
-  extensionRegistry.registerExtension('activity', 'action', Object.assign({
-    id: 'download',
-    labelKey: 'documents.label.download',
-    isEnabled: activity => {
-      if (activity.templateParams) {
-        const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')
-                          || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
-        return docPaths && docPaths.length === 1;
-      }
-    },
-    rank: 0,
-  }, downloadHandlerExtension));
+  Vue.prototype.$transferRulesService.getTransfertRulesDownloadDocumentStatus()
+    .then(data => {
+      if (data && data.downloadDocumentStatus !== 'true') {
+        extensionRegistry.registerExtension('activity', 'action', Object.assign({
+          id: 'download',
+          labelKey: 'documents.label.download',
+          isEnabled: activity => {
+            if (activity.templateParams) {
+              const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')
+          || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
+              return docPaths && docPaths.length === 1;
+            }
+          },
+          rank: 0,
+        }, downloadHandlerExtension));
 
-  extensionRegistry.registerExtension('activity', 'action', Object.assign({
-    id: 'downloadAll',
-    labelKey: 'documents.label.downloadAll',
-    isEnabled: activity => {
-      if (activity.templateParams) {
-        const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')
-                          || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
-        return docPaths && docPaths.length > 1;
+        extensionRegistry.registerExtension('activity', 'action', Object.assign({
+          id: 'downloadAll',
+          labelKey: 'documents.label.downloadAll',
+          isEnabled: activity => {
+            if (activity.templateParams) {
+              const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')
+          || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
+              return docPaths && docPaths.length > 1;
+            }
+          },
+          rank: 0,
+        }, downloadHandlerExtension));
       }
-    },
-    rank: 0,
-  }, downloadHandlerExtension));
+    });
 
 }
