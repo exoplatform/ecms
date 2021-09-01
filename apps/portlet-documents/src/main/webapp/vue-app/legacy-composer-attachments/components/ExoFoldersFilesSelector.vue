@@ -234,7 +234,7 @@
                       v-show="!drivesInProgress[driver.title]"
                       :class="driver.isCloudDrive ? driver.driveTypeCSSClass : `uiIconEcms24x24DriveGroup ${driver.driveTypeCSSClass}`"
                       class="uiIconEcmsLightGray selectionIcon center"></i>
-                    <div class="text-center ma-12 connectingDrive">
+                    <div class="text-center connectingDrive">
                       <!-- show circular progress if cloud drive is connecting -->
                       <v-progress-circular
                         v-show="drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100"
