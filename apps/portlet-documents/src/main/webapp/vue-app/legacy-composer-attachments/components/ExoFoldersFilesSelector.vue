@@ -813,7 +813,7 @@ export default {
         this.$refs.confirmDialog.open();
         this.titleLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.title');
         this.okLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.ok');
-        this.cancelLabel = this.$t('attachments.filesFoldersSelector.action.delete.popup.button.cancel');
+        this.cancelLabel = this.$t('attachments.cancel');
         this.okAction = true;
         this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.action.delete.popup.bodyMessage')}`;
       }
