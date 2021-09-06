@@ -438,6 +438,7 @@ public class UITreeExplorer extends UIContainer {
                                                                                           emptySet, 
                                                                                           emptySet, 
                                                                                           new TreeNodeDataCreater());
+        temp.setExpanded(isExpand);
         addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath.toString(), path);
       } else temp.setChildren(jcrExplorer.getChildrenList(subPath.toString(), false));
     }
