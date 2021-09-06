@@ -9,5 +9,10 @@ export function getTransfertRulesDownloadDocumentStatus() {
     else {
       throw new Error ('Error when getting transfer rules download documents status');
     }
+  }).then(data => {
+    if (data) {
+      const downloadStatusPromise =  data.downloadDocumentStatus !== 'true';
+      return Promise.resolve(downloadStatusPromise);
+    }
   });
 }

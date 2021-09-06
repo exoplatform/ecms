@@ -56,7 +56,7 @@ export function installExtensions() {
 
   Vue.prototype.$transferRulesService.getTransfertRulesDownloadDocumentStatus()
     .then(data => {
-      if (data && data.downloadDocumentStatus !== 'true') {
+      if (data) {
         extensionRegistry.registerExtension('activity', 'action', Object.assign({
           id: 'download',
           labelKey: 'documents.label.download',
