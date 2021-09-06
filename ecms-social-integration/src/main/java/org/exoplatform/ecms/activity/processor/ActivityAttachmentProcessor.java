@@ -52,7 +52,8 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
   @Override
   public void processActivity(ExoSocialActivity activity) {
     Map<String, String> activityParams = activity.getTemplateParams();
-    if (activityParams == null || activityParams.isEmpty() || !activityParams.containsKey(WORKSPACE)) {
+    if (activityParams == null || activityParams.isEmpty() ||
+            (!activityParams.containsKey(WORKSPACE) && !activityParams.containsKey(WORKSPACE.toLowerCase()))) {
       return;
     }
 
