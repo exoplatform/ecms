@@ -41,7 +41,7 @@
             <b v-show="fromAnotherSpaces.length > 0">
               {{ fromAnotherSpaces }}
             </b>
-            {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ spaceGroupId }}</b> {{ $t('attachments.alert.sharing.members') }}
+            {{ $t('attachments.alert.sharing.filesAvailableFor') }} <b>{{ spaceGroupId }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
           <div v-show="attachmentConfirmInfo" class="alert alert-info attachmentsAlert">
             <span>{{ $t('attachments.alert.sharing.attachedFrom') }} <b>{{ selectedFolder }}</b> {{ $t('attachment.alert.drive.confirm') }}</span>
