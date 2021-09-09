@@ -153,7 +153,7 @@ export default {
   },
   computed: {
     displayMessageDestinationFolder() {
-      return !this.attachments.length || !this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
+      return !this.attachments.length || this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
     },
     allowToDetach() {
       return !!this.entityId && !!this.entityType;
