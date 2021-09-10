@@ -41,8 +41,7 @@
             <b v-show="fromAnotherSpaces.length > 0">
               {{ fromAnotherSpaces }}
             </b>
-            {{ $t(`attachments.alert.sharing.${attachmentSeveralFiles ? 'filesAvailableFor' : 'fileAvailableFor'}`) }} <b>{{ spaceDisplayName }}</b>
-            {{ $t(`attachments.alert.sharing.${attachmentSeveralFiles ? 'members' : 'fileMembers'}`) }}
+            {{ attachmentsFileAvailableFor }} <b>{{ spaceDisplayName }}</b> {{ attachmentsFileMembers }}
           </div>
           <div v-show="attachmentConfirmInfo" class="alert alert-info attachmentsAlert">
             <span>{{ $t('attachments.alert.sharing.attachedFrom') }} <b>{{ selectedFolder }}</b> {{ $t('attachment.alert.drive.confirm') }}</span>
@@ -408,6 +407,22 @@ export default {
       attachmentConfirmInfo: false,
       isCloudDriveEnabled: false,
     };
+  },
+  computed: {
+    attachmentsFileAvailableFor() {
+      if (this.attachmentSeveralFiles) {
+        return this.$t('attachments.alert.sharing.filesAvailableFor');
+      } else {
+        return this.$t('attachments.alert.sharing.fileAvailableFor');
+      }
+    },
+    attachmentsFileMembers() {
+      if (this.attachmentSeveralFiles) {
+        return this.$t('attachments.alert.sharing.members');
+      } else {
+        return this.$t('attachments.alert.sharing.fileMembers');
+      }
+    }
   },
   watch: {
     fileSizeLimitError: function () {
