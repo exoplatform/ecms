@@ -41,7 +41,8 @@
             <b v-show="fromAnotherSpaces.length > 0">
               {{ fromAnotherSpaces }}
             </b>
-            {{ $t('attachments.alert.sharing.filesAvailableFor') }} <b>{{ spaceGroupId }}</b> {{ $t('attachments.alert.sharing.members') }}
+            {{ $t(`attachments.alert.sharing.${attachmentSeveralFiles ? 'filesAvailableFor' : 'fileAvailableFor'}`) }} <b>{{ spaceDisplayName }}</b>
+            {{ $t(`attachments.alert.sharing.${attachmentSeveralFiles ? 'members' : 'fileMembers'}`) }}
           </div>
           <div v-show="attachmentConfirmInfo" class="alert alert-info attachmentsAlert">
             <span>{{ $t('attachments.alert.sharing.attachedFrom') }} <b>{{ selectedFolder }}</b> {{ $t('attachment.alert.drive.confirm') }}</span>
@@ -400,6 +401,8 @@ export default {
       isActivityStream: true,
       fromAnotherSpaces: '',
       spaceGroupId: '',
+      spaceDisplayName: '',
+      attachmentSeveralFiles: false,
       drivesInProgress: {},
       attachmentInfo: false,
       attachmentConfirmInfo: false,
@@ -673,6 +676,9 @@ export default {
         this.attachmentInfo = true;
         this.$emit('input', this.value);
         this.$emit('attachmentsChanged', this.value);
+        if (selectedFiles.length >1) {
+          this.attachmentSeveralFiles = true;
+        }
       }
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector? this.$t('attachments.drawer.existingUploads') : this.$t('attachments.drawer.header');
@@ -701,6 +707,7 @@ export default {
           this.showDestinationPath=true;
           this.isActivityStream = false;
           this.spaceGroupId = space.groupId;
+          this.spaceDisplayName = space.displayName;
         });
       } else {
         this.schemaFolder.push(eXo.env.portal.userName);
