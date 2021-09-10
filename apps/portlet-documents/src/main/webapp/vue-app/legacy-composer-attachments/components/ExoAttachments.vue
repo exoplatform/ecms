@@ -43,6 +43,9 @@
             </b>
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ spaceGroupId }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
+          <div v-show="attachmentConfirmInfo" class="alert alert-info attachmentsAlert">
+            <span>{{ $t('attachments.alert.sharing.attachedFrom') }} <b>{{ selectedFolder }}</b> {{ $t('attachment.alert.drive.confirm') }}</span>
+          </div>
         </div>
         <div v-show="!showDocumentSelector" class="attachmentsContent">
           <div class="multiploadFilesSelector">
@@ -370,6 +373,7 @@ export default {
     return {
       showDestinationFolder: false,
       message: '',
+      selectedFolder: '',
       uploadingFilesQueue: [],
       uploadingCount: 0,
       maxUploadInProgressCount: 2,
@@ -398,6 +402,7 @@ export default {
       spaceGroupId: '',
       drivesInProgress: {},
       attachmentInfo: false,
+      attachmentConfirmInfo: false,
       isCloudDriveEnabled: false,
     };
   },
@@ -420,6 +425,11 @@ export default {
     attachmentInfo: function () {
       if (this.attachmentInfo) {
         setTimeout(() => this.attachmentInfo = false, this.MESSAGES_DISPLAY_TIME);
+      }
+    },
+    attachmentConfirmInfo: function () {
+      if (this.attachmentConfirmInfo) {
+        setTimeout(() => this.attachmentConfirmInfo = false, this.MESSAGES_DISPLAY_TIME);
       }
     },
     value: {
@@ -654,6 +664,8 @@ export default {
         this.showDestinationFolderForFile = false;
       }
       this.modeFolderSelectionForFile = false;
+      this.attachmentConfirmInfo = true;
+      this.selectedFolder = folder;
     },
     toggleServerFileSelector(selectedFiles){
       if (selectedFiles) {
