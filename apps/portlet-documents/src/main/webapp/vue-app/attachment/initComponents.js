@@ -41,3 +41,11 @@ if (!Vue.prototype.$attachmentService) {
     value: attachmentService,
   });
 }
+
+import * as transferRulesService from '../../js//transferRulesService.js';
+
+if (!Vue.prototype.$transferRulesService) {
+  window.Object.defineProperty(Vue.prototype, '$transferRulesService', {
+    value: transferRulesService,
+  });
+}
