@@ -11,8 +11,7 @@ export function getTransfertRulesDownloadDocumentStatus() {
     }
   }).then(data => {
     if (data) {
-      const downloadStatusPromise =  data.downloadDocumentStatus !== 'true';
-      return Promise.resolve(downloadStatusPromise);
+      return data.downloadDocumentStatus !== 'true';
     }
   });
 }

@@ -63,7 +63,7 @@ export function installExtensions() {
           isEnabled: activity => {
             if (activity.templateParams) {
               const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')
-          || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
+                              || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
               return docPaths && docPaths.length === 1;
             }
           },
@@ -76,7 +76,7 @@ export function installExtensions() {
           isEnabled: activity => {
             if (activity.templateParams) {
               const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')
-          || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
+                              || (activity.templateParams.nodePath && [activity.templateParams.nodePath]);
               return docPaths && docPaths.length > 1;
             }
           },
