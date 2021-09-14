@@ -32,7 +32,7 @@
     def rcontext = _ctx.getRequestContext() ;
     def jm = rcontext.getJavascriptManager();
 
-    jm.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.initUserProfilePopup({});");
+    jm.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.initUserProfilePopup();");
 %>
 <div class="uiDiff">
   <div class="headTitle">
