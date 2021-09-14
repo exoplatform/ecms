@@ -31,23 +31,8 @@ import org.exoplatform.web.application.Parameter ;
     }
     lastCommentLabel = lastCommentLabel.replace("{user}",user);
     lastCommentLabel = lastCommentLabel.replace("{time}",timeComment);
-	  String statusTitle = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Loading"));
-	  String connectLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Connect"));
-	  String confirmLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Confirm"));
-	  String cancelRequestLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.CancelRequest"));
-	  String removeConnectionLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.RemoveConnection"));
-	  String ignoreLabel = StringEscapeUtils.escapeJavaScript(_ctx.appRes("UserProfilePopup.label.Ignore"));
 
-	  String labels = """ {
-      StatusTitle: '${statusTitle}',
-      Connect: '${connectLabel}',
-      Confirm: '${confirmLabel}',
-      CancelRequest: '${cancelRequestLabel}',
-      RemoveConnection: '${removeConnectionLabel}',
-      Ignore: '${ignoreLabel}'
-    } """;
-
-	  jsManager.require("SHARED/uiCommentForm", "commentForm").addScripts("eXo.ecm.CommentForm.initUserProfilePopup($labels);");
+	  jsManager.require("SHARED/uiCommentForm", "commentForm").addScripts("eXo.ecm.CommentForm.initUserProfilePopup();");
 %>
   <style>
 		<% _ctx.include(uicomponent.getTemplateSkin("exo:comments", "Stylesheet")); %>
