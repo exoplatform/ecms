@@ -337,6 +337,7 @@ public class AttachmentsRestService implements ResourceContainer {
   @POST
   @Path("/{attachmentId}/move")
   @Consumes("application/x-www-form-urlencoded")
+  @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
   @ApiOperation(value = "Move an attachment to a destination path", httpMethod = "POST", response = Response.class, consumes = "application/x-www-form-urlencoded", notes = "returns empty response")
   @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
@@ -359,12 +360,20 @@ public class AttachmentsRestService implements ResourceContainer {
 
     long userIdentityId = getCurrentUserIdentityId();
     try {
-      attachmentService.moveAttachmentToNewPath(userIdentityId, attachmentId, newPathDrive, newPath, entityType, entityId);
+      Attachment attachment = attachmentService.moveAttachmentToNewPath(userIdentityId,
+                                                                        attachmentId,
+                                                                        newPathDrive,
+                                                                        newPath,
+                                                                        entityType,
+                                                                        entityId);
+      return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
     } catch (Exception e) {
       LOG.error("Error when trying to move attachment with id {} to new destination path {} ", attachmentId, newPath, e);
-      return Response.serverError().entity("Error when trying to move attachment with id " + attachmentId + " to new destination path {} " + newPath).build();
+      return Response.serverError()
+                     .entity("Error when trying to move attachment with id " + attachmentId + " to new destination path {} "
+                         + newPath)
+                     .build();
     }
-    return Response.noContent().build();
   }
 
   public Identity getCurrentUserIdentity() {

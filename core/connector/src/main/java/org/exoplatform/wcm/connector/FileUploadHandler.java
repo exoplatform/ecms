@@ -29,7 +29,10 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -40,6 +43,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.upload.UploadService.UploadLimit;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.JSONValue;
 import org.w3c.dom.Document;
@@ -63,6 +67,7 @@ import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by The eXo Platform SAS
@@ -594,8 +599,23 @@ public class FileUploadHandler {
     rootElement.setAttribute("url", url);
     rootElement.setAttribute("lastEditor", lastEditor);
     rootElement.setAttribute("date", date);
+
+    List<AccessControlEntry> permissions = ((NodeImpl) file).getACL().getPermissionEntries();
+    rootElement.setAttribute("acl", JSONValue.toJSONString(getFileACL(permissions)));
+
     doc.appendChild(rootElement);
     return doc;
+  }
+
+  private JSONObject getFileACL(List<AccessControlEntry> permissions) throws JSONException {
+    Boolean canRead = permissions.stream().anyMatch(perm -> perm.getPermission().equals(PermissionType.READ));
+    Boolean canEdit = permissions.stream().anyMatch(perm -> perm.getPermission().equals(PermissionType.SET_PROPERTY));
+    Boolean canRemove = permissions.stream().anyMatch(perm -> perm.getPermission().equals(PermissionType.REMOVE));
+    JSONObject acl = new JSONObject();
+    acl.put("canEdit", canEdit);
+    acl.put("canRead", canRead);
+    acl.put("canRemove", canRemove);
+    return acl;
   }
 
   private String getStringProperty(Node node, String propertyName) throws RepositoryException {
