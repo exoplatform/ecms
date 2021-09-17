@@ -18,6 +18,8 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -200,10 +202,11 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       Session session = sessionProvider.getSession("collaboration",
               repositoryService.getCurrentRepository());
       Node groupNode = session.getRootNode().getNode("Groups");
+      String newSpaceGroupId=spaceGroupId;
       if(spaceGroupId.startsWith("/")){
-        spaceGroupId = spaceGroupId.substring(1);
+        newSpaceGroupId = spaceGroupId.substring(1);
       }
-      Node parentNode = groupNode.getNode(spaceGroupId);
+      Node parentNode = groupNode.getNode(newSpaceGroupId);
       Set<String> processedUploads = new HashSet<>();
       Map<String, String> urlToReplaces = new HashMap<>();
       Matcher matcher = UPLOAD_ID_PATTERN.matcher(content);
@@ -224,6 +227,8 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
           }
           if (imagesFolderNode.hasNode(folder)) {
             imagesFolderNode = imagesFolderNode.getNode(folder);
+            imagesFolderNode.addMixin("exo:privilegeable");
+            ((ExtendedNode)imagesFolderNode).setPermission(new StringBuilder("*:").append(spaceGroupId).toString(), PermissionType.ALL);
             if (imagesFolderNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
               imagesFolderNode = linkManager.getTarget(imagesFolderNode);
             }
