@@ -315,6 +315,8 @@ export function moveAttachmentToNewPath(newPathDrive, newPath, attachmentId, ent
   }).then((resp) => {
     if (!resp || !resp.ok) {
       throw new Error('Error moving attachment to the new destination path');
+    } else {
+      return resp.json();
     }
   });
 }
