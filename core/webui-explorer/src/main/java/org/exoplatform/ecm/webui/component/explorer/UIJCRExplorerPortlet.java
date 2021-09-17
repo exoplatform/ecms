@@ -209,7 +209,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       .addScripts("multiUpload.setLocation('" + 
                uiExplorer.getWorkspaceName()  + "','" + 
                uiExplorer.getDriveData().getName()  + "','" +
-               uiTreeExplorer.getLabel()  + "','" +
+               uiTreeExplorer.getLabel().replaceAll("\'", "") + "','" +
                Text.escapeIllegalJcrChars(uiExplorer.getCurrentPath()) + "','" +
                org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
                ConversationState.getCurrent().getIdentity().getUserId())+ "', '"+
