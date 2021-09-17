@@ -276,6 +276,7 @@ export default {
               this.linkUploadedAttachmentToEntity(file);
             } else {
               file.uploadId = '';
+              file.acl = uploadedFile.acl;
               this.uploadingCount--;
               this.processNextQueuedUpload();
             }
@@ -303,14 +304,20 @@ export default {
         pathDestinationFolder,
         movedFile.id,
         this.entityType,
-        this.entityId).then(() => {
+        this.entityId).then((updatedMovedFile) => {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+
         this.newUploadedFiles.filter(file => file.id === movedFile.id).map(file => {
           file.pathDestinationFolderForFile = folder;
           file.fileDrive = newDestinationPathDrive;
           file.pathDestinationFolderForFile = folder;
         });
+
+        const movedFileIndex = this.uploadedFiles.findIndex(file => file.id === movedFile.id);
+        this.uploadedFiles[movedFileIndex] = updatedMovedFile;
+        this.uploadedFiles[movedFileIndex].drive = folder;
+        this.uploadedFiles[movedFileIndex].date = updatedMovedFile.created;
       });
     },
     deleteDestinationPathForFile(folderId) {
@@ -466,6 +473,7 @@ export default {
       uploadedFile.id = uploadedFile.UUID;
       uploadedFile.size = file.size;
       uploadedFile.previewBreadcrumb = JSON.parse(uploadedFile.previewBreadcrumb);
+      uploadedFile.acl = JSON.parse(uploadedFile.acl);
       this.uploadedFiles.push(uploadedFile);
     },
     abortUploadingFiles() {
