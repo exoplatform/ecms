@@ -222,7 +222,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       Node imagesFolderNode = parentNode;
 
       if(StringUtils.isNotEmpty(imagesSubLocationPath)) {
-
         for (String folder : imagesSubLocationPath.split("/")) {
           if (imagesFolderNode.canAddMixin("exo:privilegeable")) {
             imagesFolderNode.addMixin("exo:privilegeable");
