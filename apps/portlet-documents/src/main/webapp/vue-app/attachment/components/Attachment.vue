@@ -15,7 +15,7 @@
       <attachments-list-drawer
         ref="attachmentsListDrawer"
         :attachments="attachments" />
-      <attachments-notification-alerts style="z-index:1035;" />
+      <attachments-notification-alerts />
     </div>
   </v-app>
 </template>
