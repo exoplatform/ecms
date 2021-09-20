@@ -49,7 +49,7 @@
             <div v-if="foldersHistory.length > 2" class="longFolderHistory d-flex align-center">
               <span class="uiIconArrowRight"></span>
               <div class="btn-group">
-                <button class="btn dropdown-toggle btn px-2 py-1" data-toggle="dropdown">
+                <button class="dropdown-toggle px-2 py-1" data-toggle="dropdown">
                   ...
                 </button>
                 <ul class="dropdown-menu folders-menu">
