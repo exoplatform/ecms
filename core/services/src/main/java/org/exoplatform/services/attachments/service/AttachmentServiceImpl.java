@@ -373,12 +373,12 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public void moveAttachmentToNewPath(long userIdentityId,
-                                      String attachmentId,
-                                      String newPathDrive,
-                                      String newPath,
-                                      String entityType,
-                                      long entityId) throws IllegalAccessException {
+  public Attachment moveAttachmentToNewPath(long userIdentityId,
+                                            String attachmentId,
+                                            String newPathDrive,
+                                            String newPath,
+                                            String entityType,
+                                            long entityId) throws IllegalAccessException {
     if (userIdentityId <= 0) {
       throw new IllegalArgumentException("User identity must be positive");
     }
@@ -406,6 +406,12 @@ public class AttachmentServiceImpl implements AttachmentService {
       String destPath = destNode.getPath().concat("/").concat(attachmentNode.getName());
       session.move(attachmentNode.getPath(), destPath);
       session.save();
+      return EntityBuilder.fromAttachmentNode(repositoryService,
+                                              documentService,
+                                              linkManager,
+                                              Utils.getCurrentWorkspace(repositoryService),
+                                              session,
+                                              attachmentId);
     } catch (Exception e) {
       throw new IllegalStateException("Error while trying to move attachment node with id " + attachmentId + " to the new path "
           + newPath);

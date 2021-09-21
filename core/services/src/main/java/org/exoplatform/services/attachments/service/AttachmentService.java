@@ -141,7 +141,7 @@ public interface AttachmentService {
    * @param entityId entity id
    * @throws IllegalAccessException when user is not allowed to access the entity
    */
-  void moveAttachmentToNewPath(long userIdentityId,
+  Attachment moveAttachmentToNewPath(long userIdentityId,
                                String attachmentId,
                                String newPathDrive,
                                String newPath,
