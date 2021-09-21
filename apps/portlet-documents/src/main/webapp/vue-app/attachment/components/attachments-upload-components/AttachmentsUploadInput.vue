@@ -181,7 +181,18 @@ export default {
         });
       });
 
-      newAttachedFiles.forEach(newFile => {
+      const existingAttachedFiles = newAttachedFiles.filter(file => this.attachments.some(f => f.name === file.name));
+      if (existingAttachedFiles.length > 0) {
+        const existingFiles = existingAttachedFiles.length === 1 ? existingAttachedFiles.map(file => file.name) : existingAttachedFiles.length;
+        let sameFileErrorMessage = existingAttachedFiles.length === 1 ? this.$t('attachments.drawer.sameFile.error') : this.$t('attachments.drawer.sameFiles.error');
+        sameFileErrorMessage = sameFileErrorMessage.replace('{0}', `<b> ${existingFiles} </b>`);
+        this.$root.$emit('attachments-notification-alert', {
+          message: sameFileErrorMessage,
+          type: 'error',
+        });
+      }
+
+      newAttachedFiles.filter(file => !this.attachments.some(f => f.name === file.name)).forEach(newFile => {
         this.queueUpload(newFile);
       });
       this.$refs.uploadInput.value = null;
@@ -199,15 +210,6 @@ export default {
       if (fileSizeInMb > this.maxFileSize) {
         this.$root.$emit('attachments-notification-alert', {
           message: this.maxFileSizeErrorLabel,
-          type: 'error',
-        });
-        return;
-      }
-      const fileExists = this.attachments.some(f => f.name === file.name);
-      if (fileExists) {
-        const sameFileErrorMessage = this.$t('attachments.drawer.sameFile.error').replace('{0}', `<b> ${file.name} </b>`);
-        this.$root.$emit('attachments-notification-alert', {
-          message: sameFileErrorMessage,
           type: 'error',
         });
         return;

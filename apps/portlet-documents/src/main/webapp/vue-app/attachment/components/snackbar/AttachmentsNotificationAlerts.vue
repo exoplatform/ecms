@@ -3,7 +3,7 @@
     :value="displayAlerts"
     color="transparent"
     elevation="0"
-    absolute
+    app
     bottom
     left>
     <attachments-notification-alert
