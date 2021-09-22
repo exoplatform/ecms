@@ -615,8 +615,6 @@ export default {
       this.foldersHistory = [];
       this.resetExplorer();
       this.fromSpace = group === 'My Spaces' ? {title: drive.title, name: drive.name} : {};
-      const driveTitle = drive.title.replace('.', '').replace(' ', '');
-      drive.title = drive.name.includes('space') ? drive.title : this.$t(`Drives.label.${driveTitle}`);
       this.currentDrive = {
         name: drive.name,
         title: drive.title,
@@ -788,9 +786,11 @@ export default {
             const driveTypeCSSClass = isCloudDrive
               ? `uiIconEcmsDrive-${fetchedDrivers[j].getAttribute('cloudProvider')}`
               : `${name.replace(/\s/g, '')} ${driverTypeClass}`;
+            const driveLabel = fetchedDrivers[j].getAttribute('label')
+              .replace('.', '').replace(' ', '');
             this.drivers.push({
               name: name,
-              title: fetchedDrivers[j].getAttribute('label'),
+              title: name.includes('space') ? driveLabel : this.$t(`Drives.label.${driveLabel}`),
               path: fetchedDrivers[j].getAttribute('path'),
               css: fetchedDrivers[j].getAttribute('nodeTypeCssClass'),
               type: 'drive',
