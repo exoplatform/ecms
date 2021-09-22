@@ -161,6 +161,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(nodeContent1.getProperty(anyString())).thenReturn(property);
     lenient().when(property.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property.getLong()).thenReturn((long) 1);
+    lenient().when(node1.getPath()).thenReturn("/collaboration/");
     lenient().when(session.getNodeByUUID(String.valueOf(1))).thenReturn(node1);
 
     Node node2 = mock(Node.class);
@@ -169,11 +170,12 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     when(session.getNodeByUUID(anyString())).thenReturn(node2);
     when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node2.getSession()).thenReturn(session);
-    lenient().when(node2.getProperty(anyString())).thenReturn(property);
+    lenient().when(node2.getProperty(anyString())).thenReturn(property2);
     lenient().when(node2.getNode(anyString())).thenReturn(nodeContent2);
-    lenient().when(nodeContent2.getProperty(anyString())).thenReturn(property);
+    lenient().when(nodeContent2.getProperty(anyString())).thenReturn(property2);
     lenient().when(property2.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property2.getLong()).thenReturn((long) 2);
+    lenient().when(node2.getPath()).thenReturn("/collaboration/");
     lenient().when(session.getNodeByUUID(String.valueOf(2))).thenReturn(node2);
 
     Node node3 = mock(Node.class);
@@ -182,11 +184,12 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     when(session.getNodeByUUID(anyString())).thenReturn(node3);
     lenient().when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node3.getSession()).thenReturn(session);
-    lenient().when(node3.getProperty(anyString())).thenReturn(property);
+    lenient().when(node3.getProperty(anyString())).thenReturn(property3);
     when(node3.getNode(anyString())).thenReturn(nodeContent3);
-    when(nodeContent3.getProperty(anyString())).thenReturn(property);
+    when(nodeContent3.getProperty(anyString())).thenReturn(property3);
     lenient().when(property3.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property3.getLong()).thenReturn((long) 3);
+    lenient().when(node3.getPath()).thenReturn("/collaboration/");
     Mockito.when(session.getNodeByUUID(String.valueOf(3))).thenReturn(node3);
 
     String username = "testuser";
