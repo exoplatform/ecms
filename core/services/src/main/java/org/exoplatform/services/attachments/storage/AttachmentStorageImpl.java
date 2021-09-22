@@ -16,7 +16,6 @@
  */
 package org.exoplatform.services.attachments.storage;
 
-import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.dao.AttachmentDAO;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
@@ -30,8 +29,11 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import javax.jcr.Session;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AttachmentStorageImpl implements AttachmentStorage {
+
+  private static final String    DLP_QUARANTINE_FOLDER = "Quarantine";
 
   AttachmentDAO                  attachmentDAO;
 
@@ -85,7 +87,9 @@ public class AttachmentStorageImpl implements AttachmentStorage {
         attachments.add(attachment);
       }
     }
-    return attachments;
+    return attachments.stream()
+                      .filter((var attachment) -> !attachment.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/"))
+                      .collect(Collectors.toList());
   }
 
   @Override
