@@ -16,14 +16,15 @@
  */
 package org.exoplatform.services.wcm.core;
 
-import javax.jcr.Item;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
+
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -34,6 +35,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * 5 Jul. 2011
  */
 public class ItemLocation {
+  private static final Log LOG = ExoLogger.getLogger(ItemLocation.class);
   
   /** The repository. */
   protected String repository;
@@ -231,20 +233,49 @@ public class ItemLocation {
    */
   public static final Item getItemByLocation(final ItemLocation itemLocation) {
     Session session = null;
+    SessionProvider createdSessionProvider = null;
     try {
       ManageableRepository repository = WCMCoreUtils.getRepository();
-      session = (itemLocation.isSystemSession ? 
-                        WCMCoreUtils.getSystemSessionProvider() : WCMCoreUtils.getUserSessionProvider())
-                                    .getSession(itemLocation.getWorkspace(), repository);
-      if (itemLocation.getUUID() != null)
-        return session.getNodeByUUID(itemLocation.getUUID());
-      else {
-        return WCMCoreUtils.getService(NodeFinder.class).getItem(session, itemLocation.getPath());
+      if (itemLocation.isSystemSession) {
+        SessionProvider sharedSessionProvider = WCMCoreUtils.getSystemSessionProvider();
+        if (sharedSessionProvider == null) {
+          createdSessionProvider = SessionProvider.createSystemProvider();
+          session = createdSessionProvider.getSession(itemLocation.getWorkspace(), repository);
+        } else {
+          try {
+            session = sharedSessionProvider.getSession(itemLocation.getWorkspace(), repository);
+          } catch (Exception e) {
+            createdSessionProvider = SessionProvider.createSystemProvider();
+            session = createdSessionProvider.getSession(itemLocation.getWorkspace(), repository);
+          }
+        }
+      } else {
+        session = WCMCoreUtils.getUserSessionProvider().getSession(itemLocation.getWorkspace(), repository);
       }
+      if (itemLocation.getUUID() != null) {
+        try {
+          return session.getNodeByUUID(itemLocation.getUUID());
+        } catch (RepositoryException e) {
+          // throw the exception only if we can't attempt to retrieve the node
+          // by path, else give it a try with the path
+          if (StringUtils.isBlank(itemLocation.getPath())) {
+            throw e;
+          }
+        }
+      }
+      return WCMCoreUtils.getService(NodeFinder.class).getItem(session, itemLocation.getPath());
     } catch(PathNotFoundException pne) {
       return null;
     } catch (Exception e) {
       return null;
+    } finally {
+      if (createdSessionProvider != null) {
+        LOG.warn(new IllegalStateException("The shared System session provider seems to be closed Manually. "
+            + "Please avoid calling 'sessionProvider.close()' when using "
+            + "WCMCoreUtils.getSystemSessionProvider() "
+            + "or sessionProviderService.getSystemSessionProvider(null). "
+            + "A dirty solution will be used to create a temporary SessionProvider that will still open which can make a memory leak !"));
+      }
     }
   }
 
