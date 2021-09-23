@@ -113,6 +113,12 @@
               </div>
             </transition>
             <transition name="fade">
+              <div v-show="fileSizeNullError" class="sizeExceeded alert alert-error">
+                <i class="uiIconError"></i>
+                {{ $t('attachments.drawer.nullFileSize.error') }}
+              </div>
+            </transition>
+            <transition name="fade">
               <div v-show="filesCountLimitError" class="countExceeded alert alert-error">
                 <i class="uiIconError"></i>
                 {{ $t('attachments.drawer.maxFileCount.error').replace('{0}', maxFilesCount) }}
@@ -380,6 +386,7 @@ export default {
       maxProgress: 100,
       showDocumentSelector: false,
       fileSizeLimitError: false,
+      fileSizeNullError: false,
       filesCountLimitError: false,
       sameFileError: false,
       sameFileErrorMessage: `${this.$t('attachments.drawer.sameFile.error')}`,
@@ -565,6 +572,13 @@ export default {
         this.fileSizeLimitError = true;
         return;
       }
+
+      if (fileSizeInMb === 0) {
+        this.fileSizeNullError = true;
+        window.setTimeout(() => this.fileSizeNullError = false, 2000);
+        return;
+      }
+
       const fileExists = this.value.some(f => f.name === file.name);
       if (fileExists) {
         this.sameFileErrorMessage = this.sameFileErrorMessage.replace('{0}', file.name);
