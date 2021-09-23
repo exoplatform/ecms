@@ -15,9 +15,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -25,6 +28,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.common.service.HTMLUploadImageProcessor;
+import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 
@@ -219,6 +223,13 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
       if(StringUtils.isNotEmpty(imagesSubLocationPath)) {
         for (String folder : imagesSubLocationPath.split("/")) {
+          if (imagesFolderNode.canAddMixin("exo:privilegeable")) {
+            imagesFolderNode.addMixin("exo:privilegeable");
+          }
+          Map<String, String[]> permissions = new HashMap<>();
+          permissions.put("*:" + "/" + spaceGroupId, PermissionType.ALL);
+          ((ExtendedNode) imagesFolderNode).setPermissions(permissions);
+
           if (StringUtils.isBlank(folder)) {
             continue;
           }
