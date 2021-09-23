@@ -10,7 +10,10 @@ const lang = typeof eXo !== 'undefined' ? eXo.env.portal.language : 'en';
 
 // should expose the locale resources as REST API
 
-const url = `/portal/rest/i18n/bundle/locale.portlet.attachments-${lang}.json`;
+const urls = [
+  `/portal/rest/i18n/bundle/locale.portlet.attachments-${lang}.json`,
+  `/portal/rest/i18n/bundle/locale.portlet.documents-${lang}.json`
+];
 
 // get overridden components if exist
 if (extensionRegistry) {
@@ -22,7 +25,7 @@ if (extensionRegistry) {
   }
 }
 
-exoi18n.loadLanguageAsync(lang, url).then(i18n => {
+exoi18n.loadLanguageAsync(lang, urls).then(i18n => {
   new Vue({i18n});
 });
 
@@ -32,7 +35,7 @@ export function init(entityId, entityType, defaultDrive, defaultFolder, spaceId)
   installExtensions();
 
   // getting locale resources
-  exoi18n.loadLanguageAsync(lang, url).then(i18n => {
+  exoi18n.loadLanguageAsync(lang, urls).then(i18n => {
     // init Vue app when locale resources are ready
     attachmentApp = Vue.createApp({
       data: {
