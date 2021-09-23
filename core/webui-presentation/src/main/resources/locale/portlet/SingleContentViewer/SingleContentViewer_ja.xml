@@ -61,7 +61,7 @@
       <Advance>詳細</Advance>
       <ContextCaption>ダイナミックナビゲーション</ContextCaption>
       <UISCVContextualRadioBox>コンテクスチュアルコンテント</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>作成者</UISCVParameterInputBox>
+      <UISCVParameterInputBox>作成者:</UISCVParameterInputBox>
       <PrintSettingBlock>印刷設定</PrintSettingBlock>
       <UISCVPrintPageParameter>を</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>ページに表示</UISCVConfigPrintPageFormInputSet>
