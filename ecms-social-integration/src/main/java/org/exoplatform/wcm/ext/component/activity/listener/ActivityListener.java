@@ -125,8 +125,6 @@ public class ActivityListener extends ActivityListenerPlugin {
       }
       } catch (RepositoryException e) {
         LOG.warn("Error while getting session for sharing files to the space: " + targetSpace.getGroupId(), e);
-      } finally {
-        sessionProvider.close();
       }
     }
   }
