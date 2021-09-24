@@ -29,6 +29,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import javax.jcr.Session;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AttachmentStorageImpl implements AttachmentStorage {
@@ -71,7 +72,8 @@ public class AttachmentStorageImpl implements AttachmentStorage {
   public List<Attachment> getAttachmentsByEntity(Session session,
                                                  String workspace,
                                                  long entityId,
-                                                 String entityType) throws Exception {
+                                                 String entityType,
+                                                 String UserIdentityId) throws Exception {
     List<AttachmentContextEntity> attachmentsContextEntity = attachmentDAO.getAttachmentContextByEntity(entityId,
                                                                                                         entityType.toUpperCase());
     Utils.sortAttachmentsByDate(attachmentsContextEntity);
@@ -83,12 +85,13 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                                                  linkManager,
                                                                  workspace,
                                                                  session,
-                                                                 attachmentContextEntity.getAttachmentId());
+                                                                 attachmentContextEntity.getAttachmentId(),
+                                                                 UserIdentityId);
         attachments.add(attachment);
       }
     }
     return attachments.stream()
-                      .filter((var attachment) -> !attachment.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/"))
+                      .filter(Objects::nonNull)
                       .collect(Collectors.toList());
   }
 
@@ -97,7 +100,8 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                               String workspace,
                                               long entityId,
                                               String entityType,
-                                              String attachmentId) throws Exception {
+                                              String attachmentId,
+                                              String UserIdentityId) throws Exception {
     AttachmentContextEntity attachmentEntity = attachmentDAO.getAttachmentItemByEntity(entityId,
                                                                                        entityType.toUpperCase(),
                                                                                        attachmentId);
@@ -107,7 +111,8 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                             linkManager,
                                             workspace,
                                             session,
-                                            attachmentEntity.getAttachmentId());
+                                            attachmentEntity.getAttachmentId(),
+                                            UserIdentityId);
   }
 
   @Override

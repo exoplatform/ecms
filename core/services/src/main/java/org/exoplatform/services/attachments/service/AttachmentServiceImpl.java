@@ -39,7 +39,6 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -145,10 +144,13 @@ public class AttachmentServiceImpl implements AttachmentService {
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
+      Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+
       existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
                                                                            Utils.getCurrentWorkspace(repositoryService),
                                                                            entityId,
-                                                                           entityType);
+                                                                           entityType,
+                                                                           userIdentity.getRemoteId());
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
@@ -207,7 +209,8 @@ public class AttachmentServiceImpl implements AttachmentService {
       existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
                                                                            Utils.getCurrentWorkspace(repositoryService),
                                                                            entityId,
-                                                                           entityType);
+                                                                           entityType,
+                                                                           userIdentity.getRemoteId());
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
@@ -257,11 +260,13 @@ public class AttachmentServiceImpl implements AttachmentService {
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
+
       attachment = attachmentStorage.getAttachmentItemByEntity(session,
                                                                Utils.getCurrentWorkspace(repositoryService),
                                                                entityId,
                                                                entityType,
-                                                               attachmentId);
+                                                               attachmentId,
+                                                               userIdentity.getRemoteId());
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachment with jcr uuid " + attachmentId + " of entity with type " + entityType
           + " and id " + entityId);
@@ -295,14 +300,16 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User identity must be positive");
     }
 
+    Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
     List<Attachment> entityAttachments;
     Session session = null;
     try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
+      session = Utils.getSystemSession(sessionProviderService, repositoryService);
       entityAttachments = attachmentStorage.getAttachmentsByEntity(session,
                                                                    Utils.getCurrentWorkspace(repositoryService),
                                                                    entityId,
-                                                                   entityType);
+                                                                   entityType,
+                                                                   userIdentity.getRemoteId());
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
@@ -329,12 +336,15 @@ public class AttachmentServiceImpl implements AttachmentService {
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
+      Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+
       attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                     documentService,
                                                     linkManager,
                                                     Utils.getCurrentWorkspace(repositoryService),
                                                     session,
-                                                    attachmentId);
+                                                    attachmentId,
+                                                    userIdentity.getRemoteId());
 
       boolean canView = canView(userIdentityId, entityType, entityId, attachment.getId());
       boolean canDetach = canDetach(userIdentityId, entityType, entityId, attachment.getId());
@@ -353,16 +363,19 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String attachmentId) {
+  public Attachment getAttachmentById(String attachmentId, long userIdentityId) {
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
+      Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+
       return EntityBuilder.fromAttachmentNode(repositoryService,
                                               documentService,
                                               linkManager,
                                               Utils.getCurrentWorkspace(repositoryService),
                                               session,
-                                              attachmentId);
+                                              attachmentId,
+                                              userIdentity.getRemoteId());
     } catch (Exception e) {
       throw new IllegalStateException("Can't convert attachment JCR node with id " + attachmentId + " to entity", e);
     } finally {
@@ -396,6 +409,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
+      Identity userIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+
       Node attachmentNode = session.getNodeByUUID(attachmentId);
       Node destNode = Utils.getParentFolderNode(session,
                                                 manageDriveService,
@@ -411,7 +426,8 @@ public class AttachmentServiceImpl implements AttachmentService {
                                               linkManager,
                                               Utils.getCurrentWorkspace(repositoryService),
                                               session,
-                                              attachmentId);
+                                              attachmentId,
+                                              userIdentity.getRemoteId());
     } catch (Exception e) {
       throw new IllegalStateException("Error while trying to move attachment node with id " + attachmentId + " to the new path "
           + newPath);

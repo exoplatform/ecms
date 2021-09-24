@@ -220,8 +220,10 @@ public class AttachmentsRestService implements ResourceContainer {
     if (StringUtils.isBlank(attachmentId)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Attachment identifier is mandatory").build();
     }
+    long userIdentityId = getCurrentUserIdentityId();
+
     try {
-      Attachment attachment = attachmentService.getAttachmentById(attachmentId);
+      Attachment attachment = attachmentService.getAttachmentById(attachmentId, userIdentityId);
       if (attachment == null) {
         return Response.status(Status.NOT_FOUND).build();
       } else {

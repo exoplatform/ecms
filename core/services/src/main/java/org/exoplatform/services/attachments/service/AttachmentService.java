@@ -56,9 +56,10 @@ public interface AttachmentService {
    * Get an attachment with its jcr uuid
    * 
    * @param attachmentId attachment jcr uuid
+   * @param userIdentityId user identity id
    * @return {@link Attachment}
    */
-  Attachment getAttachmentById(String attachmentId);
+  Attachment getAttachmentById(String attachmentId, long userIdentityId);
 
   /**
    * link an attachment with its jcr uuid to a given entity.

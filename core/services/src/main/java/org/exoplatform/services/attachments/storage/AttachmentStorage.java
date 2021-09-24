@@ -25,13 +25,14 @@ import java.util.List;
 public interface AttachmentStorage {
   void linkAttachmentToEntity(long entityId, String entityType, String attachmentsId);
 
-  List<Attachment> getAttachmentsByEntity(Session session, String workspace, long entityId, String entityType) throws Exception;
+  List<Attachment> getAttachmentsByEntity(Session session, String workspace, long entityId, String entityType, String UserIdentityId) throws Exception;
 
   Attachment getAttachmentItemByEntity(Session session,
                                        String workspace,
                                        long entityId,
                                        String entityType,
-                                       String attachmentId) throws Exception;
+                                       String attachmentId,
+                                       String UserIdentityId) throws Exception;
 
   void deleteAllEntityAttachments(AttachmentContextEntity attachmentContextEntity);
 

@@ -74,6 +74,12 @@ public class Utils {
     return sessionProvider.getSession(getCurrentWorkspace(repositoryService), repositoryService.getCurrentRepository());
   }
 
+  public static Session getSystemSession(SessionProviderService sessionProviderService,
+                                   RepositoryService repositoryService) throws RepositoryException {
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    return sessionProvider.getSession(getCurrentWorkspace(repositoryService), repositoryService.getCurrentRepository());
+  }
+
   public static String getCurrentWorkspace(RepositoryService repositoryService) throws RepositoryException {
     return repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
   }

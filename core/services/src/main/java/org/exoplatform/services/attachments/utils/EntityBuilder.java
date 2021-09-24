@@ -17,6 +17,7 @@
 package org.exoplatform.services.attachments.utils;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
@@ -24,6 +25,7 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -38,11 +40,13 @@ import javax.jcr.*;
 
 public class EntityBuilder {
 
-  private static final Log    LOG                  = ExoLogger.getLogger(EntityBuilder.class);
+  private static final Log    LOG                   = ExoLogger.getLogger(EntityBuilder.class);
 
-  private static final String IDENTITIES_REST_PATH = "/v1/social/identities";                 // NOSONAR
+  private static final String IDENTITIES_REST_PATH  = "/v1/social/identities";                 // NOSONAR
 
-  private static final String IDENTITIES_EXPAND    = "all";
+  private static final String IDENTITIES_EXPAND     = "all";
+
+  private static final String DLP_QUARANTINE_FOLDER = "Quarantine";
 
   public static final AttachmentEntity fromAttachment(IdentityManager identityManager, Attachment attachment) {
     return new AttachmentEntity(attachment.getId(),
@@ -64,17 +68,24 @@ public class EntityBuilder {
     );
   }
 
-  public static final Attachment  fromAttachmentNode(RepositoryService repositoryService,
+  public static final Attachment fromAttachmentNode(RepositoryService repositoryService,
                                                     DocumentService documentService,
                                                     LinkManager linkManager,
                                                     String workspace,
                                                     Session session,
-                                                    String attachmentId) throws Exception {
+                                                    String attachmentId,
+                                                    String UserIdentityId) throws Exception {
     Node attachmentNode = null;
     Permission acl = new Permission();
-    try {
-      attachmentNode = session.getNodeByUUID(attachmentId);
-    } catch (AccessDeniedException e) {
+    String[] permissions = new String[] { PermissionType.READ };
+
+    attachmentNode = session.getNodeByUUID(attachmentId);
+    boolean canRead = PermissionUtil.hasPermissions(attachmentNode, UserIdentityId, permissions);
+
+    if (isQuarantinedItem(attachmentNode)) {
+      return null;
+    }
+    if (!canRead) {
       Attachment privateAttachment = new Attachment();
       acl.setCanAccess(false);
       privateAttachment.setAcl(acl);
@@ -191,5 +202,9 @@ public class EntityBuilder {
       LOG.debug("Cannot get repository name", e);
       return "repository";
     }
+  }
+
+  private static boolean isQuarantinedItem(Node node) throws RepositoryException {
+    return node.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/");
   }
 }
