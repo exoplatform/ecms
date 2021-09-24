@@ -26,7 +26,6 @@ import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
@@ -258,7 +257,7 @@ public class LockServiceImpl implements LockService, Startable {
         }
         lockedNode.save();
       }
-    } catch(RepositoryException re) {
+    } catch(Exception re) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Error while unlocking the locked nodes", re);
       }
