@@ -29,11 +29,10 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import javax.jcr.Session;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AttachmentStorageImpl implements AttachmentStorage {
-
-  private static final String    DLP_QUARANTINE_FOLDER = "Quarantine";
 
   AttachmentDAO                  attachmentDAO;
 
@@ -68,27 +67,33 @@ public class AttachmentStorageImpl implements AttachmentStorage {
   }
 
   @Override
-  public List<Attachment> getAttachmentsByEntity(Session session,
+  public List<Attachment> getAttachmentsByEntity(Session systemSession,
+                                                 Session userSession,
                                                  String workspace,
                                                  long entityId,
                                                  String entityType) throws Exception {
     List<AttachmentContextEntity> attachmentsContextEntity = attachmentDAO.getAttachmentContextByEntity(entityId,
                                                                                                         entityType.toUpperCase());
+
     Utils.sortAttachmentsByDate(attachmentsContextEntity);
     List<Attachment> attachments = new ArrayList<>();
     if (!attachmentsContextEntity.isEmpty()) {
       for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
+        String attachmentId = attachmentContextEntity.getAttachmentId();
+        if (Utils.isQuarantinedItem(systemSession, attachmentId)) {
+          continue;
+        }
         Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                                  documentService,
                                                                  linkManager,
                                                                  workspace,
-                                                                 session,
-                                                                 attachmentContextEntity.getAttachmentId());
+                                                                 userSession,
+                                                                 attachmentId);
         attachments.add(attachment);
       }
     }
     return attachments.stream()
-                      .filter((var attachment) -> !attachment.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/"))
+                      .filter(Objects::nonNull)
                       .collect(Collectors.toList());
   }
 

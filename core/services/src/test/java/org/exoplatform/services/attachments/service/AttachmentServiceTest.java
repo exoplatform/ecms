@@ -141,6 +141,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     }
 
     // when
+    lenient().when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
     lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
@@ -185,8 +186,8 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node3.getSession()).thenReturn(session);
     lenient().when(node3.getProperty(anyString())).thenReturn(property3);
-    when(node3.getNode(anyString())).thenReturn(nodeContent3);
-    when(nodeContent3.getProperty(anyString())).thenReturn(property3);
+    lenient().when(node3.getNode(anyString())).thenReturn(nodeContent3);
+    lenient().when(nodeContent3.getProperty(anyString())).thenReturn(property3);
     lenient().when(property3.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property3.getLong()).thenReturn((long) 3);
     lenient().when(node3.getPath()).thenReturn("/collaboration/");
