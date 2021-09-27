@@ -26,6 +26,9 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +83,9 @@ public class AttachmentStorageImpl implements AttachmentStorage {
     if (!attachmentsContextEntity.isEmpty()) {
       for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
         String attachmentId = attachmentContextEntity.getAttachmentId();
+        if (!checkAttachmentNodeExistence(systemSession, attachmentId)) {
+          continue;
+        }
         if (Utils.isQuarantinedItem(systemSession, attachmentId)) {
           continue;
         }
@@ -126,5 +132,14 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                                                                        entityType.toUpperCase(),
                                                                                        attachmentId);
     attachmentDAO.delete(attachmentEntity);
+  }
+
+  private boolean checkAttachmentNodeExistence(Session session, String attachmentId) throws RepositoryException {
+    try {
+      session.getNodeByUUID(attachmentId);
+    } catch (ItemNotFoundException | AccessDeniedException e) {
+      return false;
+    }
+    return true;
   }
 }
