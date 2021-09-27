@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-    <attachments-notification-alerts style="z-index:1035;" />
+    <attachments-notification-alerts />
   </div>
 </template>
 

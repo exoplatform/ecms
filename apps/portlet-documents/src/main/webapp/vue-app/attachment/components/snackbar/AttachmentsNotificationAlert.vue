@@ -3,7 +3,7 @@
     v-model="displayAlert"
     :type="alertType"
     border="left"
-    class="white"
+    class="white position-relative"
     elevation="2"
     dismissible
     colored-border
