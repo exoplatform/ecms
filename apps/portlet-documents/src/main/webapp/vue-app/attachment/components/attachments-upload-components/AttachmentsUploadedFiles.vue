@@ -17,7 +17,7 @@
       <div v-if="!displayMessageDestinationFolder && schemaFolder.length" class="destinationFolderBreadcrumb d-flex">
         <div
           :title="schemaFolder[0]"
-          class="drive text-sub-title"
+          class="drive text-sub-title flex-shrink-0"
           rel="tooltip"
           data-placement="top">
           {{ schemaFolder[0] }}
