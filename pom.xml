@@ -48,7 +48,7 @@
     <!-- **************************************** -->
     <com.google.api.client.version>1.29.3</com.google.api.client.version>
     <com.google.http.client.version>1.29.2</com.google.http.client.version>
-    <com.google.oauth.client.version>1.29.2</com.google.oauth.client.version>
+    <com.google.oauth.client.version>1.32.1</com.google.oauth.client.version>
     <com.google.api.services.drive.version>v2-rev388-1.25.0</com.google.api.services.drive.version>
     <com.google.api.services.oauth2.version>v2-rev151-1.25.0</com.google.api.services.oauth2.version>
     <!-- **************************************** -->
