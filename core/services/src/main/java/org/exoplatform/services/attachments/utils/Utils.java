@@ -20,6 +20,8 @@ import java.util.List;
 
 public class Utils {
 
+  private static final String DLP_QUARANTINE_FOLDER = "Quarantine";
+
   public static void sortAttachmentsByDate(List<AttachmentContextEntity> attachments) {
     attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(),
                                                                        attachment1.getAttachedDate()));
@@ -74,7 +76,18 @@ public class Utils {
     return sessionProvider.getSession(getCurrentWorkspace(repositoryService), repositoryService.getCurrentRepository());
   }
 
+  public static Session getSystemSession(SessionProviderService sessionProviderService,
+                                   RepositoryService repositoryService) throws RepositoryException {
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    return sessionProvider.getSession(getCurrentWorkspace(repositoryService), repositoryService.getCurrentRepository());
+  }
+
   public static String getCurrentWorkspace(RepositoryService repositoryService) throws RepositoryException {
     return repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+  }
+
+  public static boolean isQuarantinedItem(Session systemSession, String attachmentId) throws RepositoryException {
+    Node attachmentNode = systemSession.getNodeByUUID(attachmentId);
+    return attachmentNode.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/");
   }
 }

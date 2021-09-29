@@ -16,7 +16,6 @@
  */
 package org.exoplatform.services.attachments.storage;
 
-import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.dao.AttachmentDAO;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
@@ -27,9 +26,14 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AttachmentStorageImpl implements AttachmentStorage {
 
@@ -66,26 +70,37 @@ public class AttachmentStorageImpl implements AttachmentStorage {
   }
 
   @Override
-  public List<Attachment> getAttachmentsByEntity(Session session,
+  public List<Attachment> getAttachmentsByEntity(Session systemSession,
+                                                 Session userSession,
                                                  String workspace,
                                                  long entityId,
                                                  String entityType) throws Exception {
     List<AttachmentContextEntity> attachmentsContextEntity = attachmentDAO.getAttachmentContextByEntity(entityId,
                                                                                                         entityType.toUpperCase());
+
     Utils.sortAttachmentsByDate(attachmentsContextEntity);
     List<Attachment> attachments = new ArrayList<>();
     if (!attachmentsContextEntity.isEmpty()) {
       for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
+        String attachmentId = attachmentContextEntity.getAttachmentId();
+        if (!checkAttachmentNodeExistence(systemSession, attachmentId)) {
+          continue;
+        }
+        if (Utils.isQuarantinedItem(systemSession, attachmentId)) {
+          continue;
+        }
         Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                                  documentService,
                                                                  linkManager,
                                                                  workspace,
-                                                                 session,
-                                                                 attachmentContextEntity.getAttachmentId());
+                                                                 userSession,
+                                                                 attachmentId);
         attachments.add(attachment);
       }
     }
-    return attachments;
+    return attachments.stream()
+                      .filter(Objects::nonNull)
+                      .collect(Collectors.toList());
   }
 
   @Override
@@ -117,5 +132,14 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                                                                        entityType.toUpperCase(),
                                                                                        attachmentId);
     attachmentDAO.delete(attachmentEntity);
+  }
+
+  private boolean checkAttachmentNodeExistence(Session session, String attachmentId) throws RepositoryException {
+    try {
+      session.getNodeByUUID(attachmentId);
+    } catch (ItemNotFoundException | AccessDeniedException e) {
+      return false;
+    }
+    return true;
   }
 }

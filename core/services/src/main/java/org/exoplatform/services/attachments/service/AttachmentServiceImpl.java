@@ -39,7 +39,6 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -142,18 +141,24 @@ public class AttachmentServiceImpl implements AttachmentService {
     });
 
     List<Attachment> existingEntityAttachments;
-    Session session = null;
+    Session systemSession = null,userSession = null;
     try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
-      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+      systemSession = Utils.getSystemSession(sessionProviderService, repositoryService);
+      userSession = Utils.getSession(sessionProviderService, repositoryService);
+
+      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(systemSession,
+                                                                           userSession,
                                                                            Utils.getCurrentWorkspace(repositoryService),
                                                                            entityId,
                                                                            entityType);
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
-      if (session != null) {
-        session.logout();
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+      if (userSession != null) {
+        userSession.logout();
       }
     }
     List<String> existingAttachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
@@ -200,19 +205,25 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     List<Attachment> existingEntityAttachments;
-    Session session = null;
+
+    Session systemSession = null,userSession = null;
 
     try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
-      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+      systemSession = Utils.getSystemSession(sessionProviderService, repositoryService);
+      userSession = Utils.getSession(sessionProviderService, repositoryService);
+      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(systemSession,
+                                                                           userSession,
                                                                            Utils.getCurrentWorkspace(repositoryService),
                                                                            entityId,
                                                                            entityType);
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
-      if (session != null) {
-        session.logout();
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+      if (userSession != null) {
+        userSession.logout();
       }
     }
     List<String> attachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
@@ -296,18 +307,23 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     List<Attachment> entityAttachments;
-    Session session = null;
+    Session systemSession = null,userSession = null;
     try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
-      entityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+      systemSession = Utils.getSystemSession(sessionProviderService, repositoryService);
+      userSession = Utils.getSession(sessionProviderService, repositoryService);
+      entityAttachments = attachmentStorage.getAttachmentsByEntity(systemSession,
+                                                                   userSession,
                                                                    Utils.getCurrentWorkspace(repositoryService),
                                                                    entityId,
                                                                    entityType);
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
-      if (session != null) {
-        session.logout();
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+      if (userSession != null) {
+        userSession.logout();
       }
     }
 
@@ -325,10 +341,11 @@ public class AttachmentServiceImpl implements AttachmentService {
 
   @Override
   public Attachment getAttachmentByIdByEntity(String entityType, long entityId, String attachmentId, long userIdentityId) {
-    Attachment attachment = new Attachment();
+    Attachment attachment;
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
+
       attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                     documentService,
                                                     linkManager,
