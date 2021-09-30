@@ -518,9 +518,12 @@ export default {
       this.showAttachmentsDrawer = !this.showAttachmentsDrawer;
       if (this.showAttachmentsDrawer){
         document.addEventListener('paste', this.onPaste, false);
+        $('.spaceButtomNavigation').addClass('hidden');
       } else {
         document.removeEventListener('paste', this.onPaste, false);
+        $('.spaceButtomNavigation').removeClass('hidden');
       }
+      this.$emit('HideAttachmentsDrawer', this.uploadingCount);
     },
     uploadFile: function() {
       this.$refs.uploadInput.click();
