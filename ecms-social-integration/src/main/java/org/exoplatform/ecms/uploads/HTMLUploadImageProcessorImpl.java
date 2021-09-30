@@ -1,8 +1,6 @@
 package org.exoplatform.ecms.uploads;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,6 +9,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.container.PortalContainer;
@@ -24,77 +23,118 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.social.common.service.HTMLUploadImageProcessor;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 
 /**
- * Service to parse an HTML content, extract temporary uploaded files, store them in a permanent location
- * and replace URLs in the HTML content with the permanent URLs
+ * Service to parse an HTML content, extract temporary uploaded files, store
+ * them in a permanent location and replace URLs in the HTML content with the
+ * permanent URLs
  */
 public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
-  private static final Log LOG = ExoLogger.getLogger(HTMLUploadImageProcessorImpl.class);
+  public static final String           IP_REGEX                     =
+                                                "(((((25[0-5])|(2[0-4][0-9])|([01]?[0-9]?[0-9]))\\.){3}((25[0-4])|(2[0-4][0-9])|((1?[1-9]?[1-9])|([1-9]0))))|(0\\.){3}0)";
 
-  private static final Pattern UPLOAD_ID_PATTERN = Pattern.compile("uploadId=(([0-9]|[a-f]|[A-F])*)");
+  public static final String           URL_OR_URI_REGEX             = "^(((ht|f)tp(s?)://)" + "(\\w+(:\\w+)?@)?" + "(" + IP_REGEX
+      + "|([0-9a-z_!~*'()-]+\\.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\\.[a-z]{2,6}" + "|([a-zA-Z][-a-zA-Z0-9]+))"
+      + "(:[0-9]{1,5})?)?" + "((/?)|(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
 
-  public static final String IP_REGEX = "(((((25[0-5])|(2[0-4][0-9])|([01]?[0-9]?[0-9]))\\.){3}((25[0-4])|(2[0-4][0-9])|((1?[1-9]?[1-9])|([1-9]0))))|(0\\.){3}0)";
+  private static final Log             LOG                          = ExoLogger.getLogger(HTMLUploadImageProcessorImpl.class);
 
-  public static final String URL_OR_URI_REGEX = "^(((ht|f)tp(s?)://)"
-          + "(\\w+(:\\w+)?@)?"
-          + "(" + IP_REGEX
-          + "|([0-9a-z_!~*'()-]+\\.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\\.[a-z]{2,6}"
-          + "|([a-zA-Z][-a-zA-Z0-9]+))"
-          + "(:[0-9]{1,5})?)?"
-          + "((/?)|(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+  private static final Pattern         UPLOAD_ID_PATTERN            = Pattern.compile("uploadId=(([0-9]|[a-f]|[A-F])*)");
 
-  private static final Pattern UPLOAD_URL_PATTERN = Pattern.compile(URL_OR_URI_REGEX);
+  private static final Pattern         UPLOAD_URL_PATTERN           = Pattern.compile(URL_OR_URI_REGEX);
 
-  private PortalContainer portalContainer;
+  private static final String          PROPERTY_MIME_TYPE           = "jcr:mimeType";
 
-  private UploadService uploadService;
+  private static final String          DEFAULT_MIME_TYPE            = "image/jpg";
 
-  private RepositoryService repositoryService;
+  private static final String          CREATED_FILR_PREFIX          = "EXP_";
 
-  private String repositoryName;
+  private static final String          CREATED_FILR_SUFFIX          = ".jpeg";
 
-  private LinkManager linkManager;
+  private static final String          IMAGE_URL_REPLACEMENT_PREFIX = "//-";
 
-  private SessionProviderService sessionProviderService;
+  private static final String          IMAGE_URL_REPLACEMENT_SUFFIX = "-//";
 
-  private NodeHierarchyCreator nodeHierarchyCreator;
+  private final PortalContainer        portalContainer;
 
-  public HTMLUploadImageProcessorImpl(PortalContainer portalContainer, UploadService uploadService,
-                                      RepositoryService repositoryService, LinkManager linkManager, SessionProviderService sessionProviderService, NodeHierarchyCreator nodeHierarchyCreator) {
+  private final UploadService          uploadService;
+
+  private final RepositoryService      repositoryService;
+  private final LinkManager            linkManager;
+  private final SessionProviderService sessionProviderService;
+  private final NodeHierarchyCreator   nodeHierarchyCreator;
+  private final WCMService             wcmService;
+  private String                       repositoryName;
+
+  public HTMLUploadImageProcessorImpl(PortalContainer portalContainer,
+                                      UploadService uploadService,
+                                      RepositoryService repositoryService,
+                                      LinkManager linkManager,
+                                      SessionProviderService sessionProviderService,
+                                      NodeHierarchyCreator nodeHierarchyCreator,
+                                      WCMService wcmService) {
     this.portalContainer = portalContainer;
     this.uploadService = uploadService;
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;
     this.sessionProviderService = sessionProviderService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
+    this.wcmService = wcmService;
+  }
+
+  private static String getURLToReplace(String body, String uploadId, int uploadIdIndex) {
+    int srcBeginIndex = body.lastIndexOf("\"", uploadIdIndex);
+    int srcEndIndex = -1;
+    if (srcBeginIndex < 0) {
+      srcBeginIndex = body.lastIndexOf("'", uploadIdIndex);
+      if (srcBeginIndex < 0) {
+        LOG.warn("Cannot find src start delimiter in URL for uploadId " + uploadId + " ignore URL replacing");
+      } else {
+        srcEndIndex = body.indexOf("'", srcBeginIndex + 1);
+      }
+    } else {
+      srcEndIndex = body.indexOf("\"", srcBeginIndex + 1);
+    }
+    String urlToReplace = null;
+    if (srcEndIndex < 0) {
+      LOG.warn("Cannot find src end delimiter in URL for uploadId " + uploadId + " ignore URL replacing");
+    } else {
+      urlToReplace = body.substring(srcBeginIndex + 1, srcEndIndex);
+    }
+    return urlToReplace;
   }
 
   /**
-   * Process the given HTML content, extract temporary uploaded files, store them in a permanent location
-   * and replace URLs in the HTML content with the permanent URLs
+   * Process the given HTML content, extract temporary uploaded files, store them
+   * in a permanent location and replace URLs in the HTML content with the
+   * permanent URLs
+   * 
    * @param content The HTML content
-   * @param parentNodeId The parent node to store the images. This node must exist.
-   * @param imagesSubFolderPath The subpath of the folder under parentNode to store the images. If the nodes of this
-   *                            path do not exist, they are automatically created, only if there are images to store.
+   * @param parentNodeId The parent node to store the images. This node must
+   *          exist.
+   * @param imagesSubFolderPath The subpath of the folder under parentNode to
+   *          store the images. If the nodes of this path do not exist, they are
+   *          automatically created, only if there are images to store.
    * @return The updated HTML content with the permanent images URLs
-   * @throws IllegalArgumentException When Content location cannot be found or File cannot be created
+   * @throws IllegalArgumentException When Content location cannot be found or
+   *           File cannot be created
    */
   public String processImages(String content, String parentNodeId, String imagesSubFolderPath) throws IllegalArgumentException {
-    if(StringUtils.isBlank(content)) {
+    if (StringUtils.isBlank(content)) {
       return content;
     }
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Session session = sessionProvider.getSession(
-              repositoryService.getCurrentRepository()
-                      .getConfiguration()
-                      .getDefaultWorkspaceName(),
-              repositoryService.getCurrentRepository());
+                                                   repositoryService.getCurrentRepository()
+                                                                    .getConfiguration()
+                                                                    .getDefaultWorkspaceName(),
+                                                   repositoryService.getCurrentRepository());
 
       Node parentNode = session.getNodeByUUID(parentNodeId);
 
@@ -107,7 +147,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
       Node imagesFolderNode = parentNode;
 
-      if(StringUtils.isNotEmpty(imagesSubFolderPath)) {
+      if (StringUtils.isNotEmpty(imagesSubFolderPath)) {
         for (String folder : imagesSubFolderPath.split("/")) {
           if (StringUtils.isBlank(folder)) {
             continue;
@@ -157,7 +197,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
           resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
 
           String fileDiskLocation = uploadedResource.getStoreLocation();
-          try(InputStream inputStream = new FileInputStream(fileDiskLocation)) {
+          try (InputStream inputStream = new FileInputStream(fileDiskLocation)) {
             resourceNode.setProperty("jcr:data", inputStream);
             resourceNode.getSession().save();
             parentNode.getSession().save();
@@ -184,23 +224,24 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
       return processedContent;
     } catch (RepositoryException e) {
-      throw new IllegalArgumentException("Cannot find File location, content will not be changed",e);
+      throw new IllegalArgumentException("Cannot find File location, content will not be changed", e);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Cannot create the image, content will not be changed",e);
+      throw new IllegalArgumentException("Cannot create the image, content will not be changed", e);
     }
   }
 
   @Override
-  public String processSpaceImages(String content, String spaceGroupId, String imagesSubLocationPath) throws IllegalArgumentException {
-    if(StringUtils.isBlank(content)) {
+  public String processSpaceImages(String content,
+                                   String spaceGroupId,
+                                   String imagesSubLocationPath) throws IllegalArgumentException {
+    if (StringUtils.isBlank(content)) {
       return content;
     }
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-      Session session = sessionProvider.getSession("collaboration",
-              repositoryService.getCurrentRepository());
+      Session session = sessionProvider.getSession("collaboration", repositoryService.getCurrentRepository());
       Node groupNode = session.getRootNode().getNode("Groups");
-      if(spaceGroupId.startsWith("/")){
+      if (spaceGroupId.startsWith("/")) {
         spaceGroupId = spaceGroupId.substring(1);
       }
       Node parentNode = groupNode.getNode(spaceGroupId);
@@ -211,13 +252,13 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
         return content;
       }
 
-      if(parentNode == null) {
+      if (parentNode == null) {
         throw new IllegalArgumentException("Container node for uploaded processed images in HTML content must not be null");
       }
 
       Node imagesFolderNode = parentNode;
 
-      if(StringUtils.isNotEmpty(imagesSubLocationPath)) {
+      if (StringUtils.isNotEmpty(imagesSubLocationPath)) {
         for (String folder : imagesSubLocationPath.split("/")) {
           if (StringUtils.isBlank(folder)) {
             continue;
@@ -267,7 +308,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
           resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
 
           String fileDiskLocation = uploadedResource.getStoreLocation();
-          try(InputStream inputStream = new FileInputStream(fileDiskLocation)) {
+          try (InputStream inputStream = new FileInputStream(fileDiskLocation)) {
             resourceNode.setProperty("jcr:data", inputStream);
             resourceNode.getSession().save();
             parentNode.getSession().save();
@@ -294,20 +335,20 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
       return processedContent;
     } catch (RepositoryException e) {
-      throw new IllegalArgumentException("Cannot find File location",e);
+      throw new IllegalArgumentException("Cannot find File location", e);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Cannot create the image",e);
+      throw new IllegalArgumentException("Cannot create the image", e);
     }
   }
 
   @Override
   public String processUserImages(String content, String userId, String imagesSubLocationPath) throws IllegalArgumentException {
-    if(StringUtils.isBlank(content)) {
+    if (StringUtils.isBlank(content)) {
       return content;
     }
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-      Node parentNode =  nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+      Node parentNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
       Set<String> processedUploads = new HashSet<>();
       Map<String, String> urlToReplaces = new HashMap<>();
       Matcher matcher = UPLOAD_ID_PATTERN.matcher(content);
@@ -316,7 +357,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       }
       Node imagesFolderNode = parentNode;
 
-      if(StringUtils.isNotEmpty(imagesSubLocationPath)) {
+      if (StringUtils.isNotEmpty(imagesSubLocationPath)) {
         for (String folder : imagesSubLocationPath.split("/")) {
           if (StringUtils.isBlank(folder)) {
             continue;
@@ -366,7 +407,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
           resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
 
           String fileDiskLocation = uploadedResource.getStoreLocation();
-          try(InputStream inputStream = new FileInputStream(fileDiskLocation)) {
+          try (InputStream inputStream = new FileInputStream(fileDiskLocation)) {
             resourceNode.setProperty("jcr:data", inputStream);
             resourceNode.getSession().save();
             parentNode.getSession().save();
@@ -393,10 +434,48 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
       return processedContent;
     } catch (IOException e) {
-      throw new IllegalArgumentException("Cannot create the image",e);
-    }catch (Exception e) {
-      throw new IllegalArgumentException("Cannot find user data location",e);
+      throw new IllegalArgumentException("Cannot create the image", e);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Cannot find user data location", e);
     }
+  }
+
+  /**
+   * Process the given HTML content, export Files and replace URLs in the HTML
+   * content with files name
+   * 
+   * @param content The HTML content
+   * @return The updated HTML content with the images names
+   */
+
+  @Override
+  public String processImagesForExport(String content) throws IllegalArgumentException {
+    try {
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      String restUploadUrl = "/" + portalContainer.getName() + "/" + portalContainer.getRestContextName() + "/images/"
+          + getRepositoryName() + "/";
+      while (content.contains(restUploadUrl)) {
+        String workspace = content.split(restUploadUrl)[1].split("\"")[0];
+        String nodeIdentifier = workspace.split("/")[1];
+        workspace = workspace.split("/")[0];
+        String urlToReplace = restUploadUrl + workspace + "/" + nodeIdentifier;
+        Node node = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
+        Node dataNode = node;
+        Node jcrContentNode = dataNode.getNode("jcr:content");
+        InputStream jcrData = jcrContentNode.getProperty("jcr:data").getStream();
+        File tempFile = File.createTempFile(CREATED_FILR_PREFIX, CREATED_FILR_SUFFIX);
+        try (OutputStream outputStream = new FileOutputStream(tempFile)) {
+          IOUtils.copy(jcrData, outputStream);
+        } catch (Exception e) {
+          throw new IllegalArgumentException("Cannot create the image", e);
+        }
+        content = content.replace(urlToReplace, IMAGE_URL_REPLACEMENT_PREFIX + tempFile.getName() + IMAGE_URL_REPLACEMENT_SUFFIX);
+      }
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Cannot process the content", e);
+    }
+
+    return content;
   }
 
   private String replaceUrl(String body, Map<String, String> urlToReplaces) {
@@ -409,33 +488,11 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
   }
 
   private String getJcrURI(Node imageNode) throws RepositoryException {
-    if(!imageNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+    if (!imageNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
       imageNode.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
     }
     return "/" + portalContainer.getName() + "/" + portalContainer.getRestContextName() + "/images/" + getRepositoryName() + "/"
-            + imageNode.getSession().getWorkspace().getName() + "/" + imageNode.getUUID();
-  }
-
-  private static String getURLToReplace(String body, String uploadId, int uploadIdIndex) {
-    int srcBeginIndex = body.lastIndexOf("\"", uploadIdIndex);
-    int srcEndIndex = -1;
-    if (srcBeginIndex < 0) {
-      srcBeginIndex = body.lastIndexOf("'", uploadIdIndex);
-      if (srcBeginIndex < 0) {
-        LOG.warn("Cannot find src start delimiter in URL for uploadId " + uploadId + " ignore URL replacing");
-      } else {
-        srcEndIndex = body.indexOf("'", srcBeginIndex + 1);
-      }
-    } else {
-      srcEndIndex = body.indexOf("\"", srcBeginIndex + 1);
-    }
-    String urlToReplace = null;
-    if (srcEndIndex < 0) {
-      LOG.warn("Cannot find src end delimiter in URL for uploadId " + uploadId + " ignore URL replacing");
-    } else {
-      urlToReplace = body.substring(srcBeginIndex + 1, srcEndIndex);
-    }
-    return urlToReplace;
+        + imageNode.getSession().getWorkspace().getName() + "/" + imageNode.getUUID();
   }
 
   public String getRepositoryName() {
