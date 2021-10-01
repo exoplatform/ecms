@@ -349,18 +349,21 @@ public class UIVersionInfo extends UIContainer  {
       } catch(JCRInvalidItemStateException invalid) {
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
+        LOG.error("Unable to restore version",invalid);
 
         return ;
       } catch(NullPointerException nuException){
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
 
+        LOG.error("Unable to restore version",nuException);
         return;
       } catch(Exception e) {
         //JCRExceptionManager.process(uiApp, e);
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
 
+        LOG.error("Unable to restore version",e);
         return;
       }
       uiVersionInfo.activate();
