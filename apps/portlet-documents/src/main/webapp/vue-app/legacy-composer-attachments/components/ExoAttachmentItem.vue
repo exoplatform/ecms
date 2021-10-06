@@ -7,7 +7,7 @@
       <div class="fileDetails1">
         <div
           v-sanitized-html="file.name"
-          class="fileNameLabel"
+          class="fileNameLabel text-truncate"
           data-toggle="tooltip"
           rel="tooltip"
           data-placement="top"></div>

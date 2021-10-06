@@ -475,11 +475,6 @@
       .contentOR {
         display: none;
       }
-
-      .contentDrop {
-        padding: 35px 1px 1px;
-      }
-
       .contentDrop {
         display: none;
       }
@@ -497,9 +492,6 @@
             padding-top: 0;
           }
 
-          .text {
-            padding: 8px;
-          }
         }
       }
 
@@ -519,6 +511,12 @@
 @media screen and (max-width: 1024px) {
   .attachments .content.serverFiles .serverFiles .contentBody .selectionBox .folderSelection {
     margin: 0 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropFileBox .dropMsg {
+    display: initial !important;
   }
 }
 
