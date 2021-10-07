@@ -34,6 +34,8 @@ import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.NewDocumentTemplate;
+import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -437,6 +439,71 @@ public class AttachmentServiceImpl implements AttachmentService {
         session.logout();
       }
     }
+  }
+
+  @Override
+  public Attachment createNewDocument(org.exoplatform.services.security.Identity userIdentity,
+                                      String title,
+                                      String path,
+                                      String pathDrive,
+                                      String templateName) throws Exception {
+    if (userIdentity == null) {
+      throw new IllegalArgumentException("User identity is mandatory");
+    }
+    if (StringUtils.isEmpty(title)) {
+      throw new IllegalArgumentException("New document title is mandatory");
+    }
+    if (StringUtils.isEmpty(path)) {
+      throw new IllegalArgumentException("new document path is mandatory");
+    }
+    if (StringUtils.isEmpty(pathDrive)) {
+      throw new IllegalArgumentException("new document path's drive is mandatory");
+    }
+    if (StringUtils.isEmpty(templateName)) {
+      throw new IllegalArgumentException("template name is mandatory");
+    }
+
+    Session session = null;
+
+    try {
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      Node currentNode =
+                       Utils.getParentFolderNode(session, manageDriveService, nodeHierarchyCreator, nodeFinder, pathDrive, path);
+      List<NewDocumentTemplate> documentTemplates = getDocumentTemplateList(userIdentity);
+      NewDocumentTemplate documentTemplate = documentTemplates.stream()
+                                                              .filter(template -> template.getName().equals(templateName))
+                                                              .findFirst()
+                                                              .orElse(null);
+      if (documentTemplate != null) {
+        Node createdDocument = documentService.createDocumentFromTemplate(currentNode, title, documentTemplate);
+        session.save();
+        return EntityBuilder.fromAttachmentNode(repositoryService,
+                                                documentService,
+                                                linkManager,
+                                                Utils.getCurrentWorkspace(repositoryService),
+                                                session,
+                                                createdDocument.getUUID());
+      } else {
+        throw new IllegalStateException("Document template not available with " + templateName + " as a name");
+      }
+    } catch (Exception e) {
+      throw new IllegalStateException("Error while trying to create a new document"+ e);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+  }
+
+  private List<NewDocumentTemplate> getDocumentTemplateList(org.exoplatform.services.security.Identity identity) {
+    List<NewDocumentTemplate> options = new ArrayList<>();
+    List<NewDocumentTemplateProvider> templateProviders = documentService.getNewDocumentTemplateProviders();
+    templateProviders.forEach(provider -> {
+      if (provider.getEditor().isAvailableForUser(identity)) {
+        options.addAll(provider.getTemplates());
+      }
+    });
+    return options;
   }
 
   public void addACLPlugin(AttachmentACLPlugin aclPlugin) {

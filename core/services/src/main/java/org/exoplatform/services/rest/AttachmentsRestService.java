@@ -377,6 +377,47 @@ public class AttachmentsRestService implements ResourceContainer {
     }
   }
 
+
+  @POST
+  @Path("/newDoc")
+  @RolesAllowed("users")
+  @Produces(MediaType.APPLICATION_JSON)
+  @ApiOperation(value = "create new document",
+    httpMethod = "POST",
+    response = Response.class,
+    notes = "This returns a new created document")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Request fulfilled") })
+  public Response createNewDocument(@ApiParam(value = "title", required = false, defaultValue = "20") @FormParam("title") String title,
+                                    @ApiParam(value = "path of new document", required = true) @FormParam("path") String path,
+                                    @ApiParam(value = "New destination path's drive", required = true) @FormParam("pathDrive") String pathDrive,
+                                    @ApiParam(value = "template name of new document", required = false, defaultValue = "20") @FormParam("templateName") String templateName) throws Exception {
+    if (StringUtils.isEmpty(title)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("New document title is mandatory").build();
+    }
+    if (StringUtils.isEmpty(templateName)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("New document template name is mandatory").build();
+    }
+    if (StringUtils.isEmpty(path)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("New document path is mandatory").build();
+    }
+    if (StringUtils.isEmpty(pathDrive)) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("New destination path's drive is mandatory").build();
+    }
+
+    try {
+      Identity userIdentity = getCurrentUserIdentity();
+      Attachment attachment = attachmentService.createNewDocument(userIdentity, title, path, pathDrive, templateName);
+      return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+    } catch (Exception e) {
+      LOG.error("Error when trying to a new document with type ", templateName, e);
+      return Response.serverError()
+              .entity("Error when trying to a new document with type "
+                      + templateName)
+              .build();
+    }
+  }
+
   public Identity getCurrentUserIdentity() {
     return ConversationState.getCurrent().getIdentity();
   }
