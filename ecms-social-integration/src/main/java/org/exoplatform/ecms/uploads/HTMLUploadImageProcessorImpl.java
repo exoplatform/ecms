@@ -503,7 +503,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       if (!processedUploads.contains(fileName)) {
 
         File file = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
-        if (file == null) {
+        if (!file.exists()) {
           continue;
         }
         fileName = file.getName();
