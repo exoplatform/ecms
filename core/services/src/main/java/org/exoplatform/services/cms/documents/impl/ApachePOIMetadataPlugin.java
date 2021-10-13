@@ -21,6 +21,7 @@ import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
@@ -50,10 +51,13 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
   /** The Constant LOG. */
   private static final Log          LOG                  = ExoLogger.getLogger(ApachePOIMetadataPlugin.class);
 
+  private ResourceBundleService     resourceBundleService;
+
   /**
    * Instantiates a new document metadata plugin impl.
    */
-  public ApachePOIMetadataPlugin() {
+  public ApachePOIMetadataPlugin(ResourceBundleService resourceBundleService) {
+    this.resourceBundleService = resourceBundleService;
     // We should use UTC timezone instead of user's one to set correct dates using POI
     metadataFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
   }
@@ -62,8 +66,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
    * {@inheritDoc}
    */
   @Override
-  public InputStream updateMetadata(WebuiRequestContext context,
-                                    String extension,
+  public InputStream updateMetadata(String extension,
                                     InputStream source,
                                     Date created,
                                     String creator,
@@ -72,7 +75,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
     try (POIXMLDocument document = getDocument(source, extension);
          FileOutputStream fos = new FileOutputStream(tempFile))
     {
-      updateDocLanguage(context, document, extension, language);
+      updateDocLanguage(document, extension, language);
       POIXMLProperties props = document.getProperties();
       POIXMLProperties.CoreProperties coreProps = props.getCoreProperties();
       coreProps.setCreator(creator);
@@ -83,24 +86,36 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
     return new DeleteOnCloseFileInputStream(tempFile);
   }
 
-  private void updateDocLanguage(WebuiRequestContext context, POIXMLDocument document, String extension, String language) {
-    if(StringUtils.equals(extension, ".docx")) {
-      //Change the document editing language with the user's platform language
+  private void updateDocLanguage(POIXMLDocument document, String extension, String language) {
+    if (StringUtils.equals(extension, ".docx")) {
+      // Change the document editing language with the user's platform language
       ((XWPFDocument) document).getStyles().getStyle("Normal").getCTStyle().getRPr().getLang().setVal(language);
     } else if (StringUtils.equals(extension, ".xlsx")) {
-      //Rename every sheet created with a new name translated with the user's platform language
-      ResourceBundle resourceBundle = context.getApplicationResourceBundle();
-      String newSheetLabel = resourceBundle.getString("UINewDocumentForm.label.option.MicrosoftOfficeNewSheet");
-              ((XSSFWorkbook) document).getCTWorkbook().getSheets().getSheetList().stream().forEach(sheet -> {
-        sheet.setName(newSheetLabel+sheet.getSheetId());
-      });
+      // Rename every sheet created with a new name translated with the user's
+      // platform language
+      ResourceBundle resourceBundle = this.resourceBundleService.getResourceBundle("locale.onlyoffice.Onlyoffice",
+                                                                                   new Locale(language));
+      String newSheetLabel = null;
+      if (resourceBundle != null) {
+        newSheetLabel = resourceBundle.getString("UINewDocumentForm.label.option.MicrosoftOfficeNewSheet");
+      }
+      updateSheetName(document, newSheetLabel);
     } else if (StringUtils.equals(extension, ".pptx")) {
       ((XMLSlideShow) document).getCTPresentation().getDefaultTextStyle().getDefPPr().getDefRPr().setLang(language);
-      //Change the language of each element found in the first slide to the user's language of the platform.
-      ((XMLSlideShow) document).getSlides().get(0).getXmlObject().getCSld().getSpTree().getSpList().forEach(splist-> {
-        if(splist.getTxBody() != null) {
+      // Change the language of each element found in the first slide to the
+      // user's language of the platform.
+      ((XMLSlideShow) document).getSlides().get(0).getXmlObject().getCSld().getSpTree().getSpList().forEach(splist -> {
+        if (splist.getTxBody() != null) {
           splist.getTxBody().getPArray(0).getEndParaRPr().setLang(language);
         }
+      });
+    }
+  }
+
+  private void updateSheetName(POIXMLDocument document, String newSheetLabel) {
+    if (newSheetLabel != null) {
+      ((XSSFWorkbook) document).getCTWorkbook().getSheets().getSheetList().stream().forEach(sheet -> {
+        sheet.setName(newSheetLabel + sheet.getSheetId());
       });
     }
   }
