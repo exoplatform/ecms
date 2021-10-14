@@ -101,6 +101,7 @@ export default {
       this.$root.$emit('start-loading-attachment-drawer');
       this.$attachmentService.createNewDoc(this.NewDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder).then((doc) => {
         this.$root.$emit('end-loading-attachment-drawer');
+        this.$root.$emit('add-new-created-document', doc);
         this.resetNewDocInput();
         window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
       });
