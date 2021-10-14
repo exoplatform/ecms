@@ -12,6 +12,7 @@ import AttachmentsDriveExplorerDrawer from './components/attachments-drive-explo
 import AttachmentsSelectFromDrive from './components/attachments-drive-explorer/AttachmentsSelectFromDrive.vue';
 import ActivityAttachments from './components/activity/ActivityAttachments.vue';
 import ActivityAttachment from './components/activity/ActivityAttachment.vue';
+import AttachmentCreateDocumentInput from './components/attachment-document-creator/AttachmentCreateDocumentInput.vue';
 
 const components = {
   'attachments-drawer': AttachmentsDrawer,
@@ -28,6 +29,7 @@ const components = {
   'attachments-upload-input': AttachmentsUploadInput,
   'activity-attachments': ActivityAttachments,
   'activity-attachment': ActivityAttachment,
+  'attachment-create-document-input': AttachmentCreateDocumentInput,
 };
 
 for (const key in components) {
