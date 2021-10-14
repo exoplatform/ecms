@@ -22,10 +22,12 @@
         v-model="newDocTitleInput"
         outlined
         dense
+        autofocus
         placeholder="Untitled document" 
-        class="pt-2">
+        class="pt-2"
+        @keyup.enter="createNewDoc()">
         <div slot="append" class="d-flex mt-1">
-          <span>{{ selectedDocType.extension }}</span>
+          <span class="me-2">{{ selectedDocType.extension }}</span>
           <v-icon
             class="clickable px-1"
             color="primary"
@@ -82,6 +84,8 @@ export default {
     },
   },
   created() {
+    this.$root.$on(`${this.extensionApp}-${this.newDocumentActionExtension}-updated`, this.refreshNewDocumentsActions);
+    this.$root.$on('hide-create-new-document-input', this.resetNewDocInput);
     this.refreshNewDocumentsActions();
   },
   methods: {
