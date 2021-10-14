@@ -99,7 +99,7 @@
         class="d-flex flex-column">
         <span
           v-for="attachment in newUploadedFiles"
-          :key="attachment.name"
+          :key="attachment.title"
           class="list-complete-item">
           <attachment-item
             :attachment="attachment"
