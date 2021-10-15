@@ -22,6 +22,13 @@
             </b>
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
+          <attachment-create-document-input
+            v-if="!entityType && ! entityId"
+            :attachments="attachments"
+            :max-files-count="maxFilesCount"
+            :max-files-size="maxFileSize"
+            :current-drive="currentDrive"
+            :path-destination-folder="pathDestinationFolder" />
           <attachments-upload-input
             :attachments="attachments"
             :max-files-count="maxFilesCount"
@@ -217,6 +224,8 @@ export default {
     });
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
+    this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
+    this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -408,6 +417,7 @@ export default {
       const lastUploadedFiles = this.uploadedFiles.sort((doc1, doc2) => doc2.date - doc1.date).slice(-10);
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(lastUploadedFiles)}}));
       this.uploadedFiles = [];
+      this.$root.$emit('hide-create-new-document-input');
     },
     linkUploadedAttachmentToEntity(file) {
       return this.$attachmentService.linkUploadedAttachmentToEntity(this.entityId, this.entityType, file.id).then((linkedAttachment) => {

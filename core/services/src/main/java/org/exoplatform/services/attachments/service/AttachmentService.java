@@ -18,6 +18,8 @@ package org.exoplatform.services.attachments.service;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.security.Identity;
+
 import java.util.List;
 
 public interface AttachmentService {
@@ -147,4 +149,17 @@ public interface AttachmentService {
                                String newPath,
                                String entityType,
                                long entityId) throws IllegalAccessException;
+
+  /**
+   * Creates a new document.
+   *
+   * @param userIdentity connected user identity
+   * @param title the title of the new document
+   * @param path the path of the new document
+   * @param pathDrive the drive of the path
+   * @param templateName the template name
+   * @return the attachment created
+   * @throws Exception the exception
+   */
+  Attachment createNewDocument(Identity userIdentity, String title, String path, String pathDrive, String templateName) throws Exception;
 }

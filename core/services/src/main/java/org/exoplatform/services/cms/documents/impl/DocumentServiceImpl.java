@@ -16,36 +16,17 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.portal.localization.LocaleContextInfoUtils;
-import org.exoplatform.services.resources.LocaleContextInfo;
-import org.exoplatform.services.resources.LocalePolicy;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -53,26 +34,19 @@ import org.gatein.api.site.SiteId;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
+import org.exoplatform.portal.localization.LocaleContextInfoUtils;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserPortalContext;
-import org.exoplatform.resolver.ApplicationResourceResolver;
-import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.cms.documents.CommonEditorPlugin;
-import org.exoplatform.services.cms.documents.DocumentEditor;
-import org.exoplatform.services.cms.documents.DocumentEditorProvider;
-import org.exoplatform.services.cms.documents.DocumentMetadataPlugin;
-import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.NewDocumentTemplate;
-import org.exoplatform.services.cms.documents.NewDocumentTemplatePlugin;
-import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
-import org.exoplatform.services.cms.documents.VersionHistoryUtils;
+import org.exoplatform.services.cms.documents.*;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
 import org.exoplatform.services.cms.documents.model.Document;
@@ -93,12 +67,10 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.organization.User;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.organization.*;
+import org.exoplatform.services.resources.LocaleContextInfo;
+import org.exoplatform.services.resources.LocalePolicy;
+import org.exoplatform.services.security.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.RepositoryConsumer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -107,7 +79,6 @@ import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.web.CacheUserProfileFilter;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -159,6 +130,7 @@ public class DocumentServiceImpl implements DocumentService {
   private final OrganizationService organizationService;
   private final SettingService settingService;
   private final IdentityManager identityManager;
+  private final ConfigurationManager configurationManager;
   private final String editorsRuntimeId;
   private CommonEditorPlugin commonEditorPlugin;
   
@@ -178,6 +150,7 @@ public class DocumentServiceImpl implements DocumentService {
    * @param idGenerator the id generator
    */
   public DocumentServiceImpl(ManageDriveService manageDriveService,
+                             ConfigurationManager configurationManager,
                              Portal portal,
                              SessionProviderService sessionProviderService,
                              RepositoryService repoService,
@@ -188,6 +161,7 @@ public class DocumentServiceImpl implements DocumentService {
                              SettingService settingService,
                              IdentityManager identityManager,
                              IDGeneratorService idGenerator) {
+    this.configurationManager = configurationManager;
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
     this.repoService = repoService;
@@ -564,15 +538,12 @@ public class DocumentServiceImpl implements DocumentService {
   public Node createDocumentFromTemplate(Node currentNode, String title, NewDocumentTemplate template) throws Exception {
     InputStream data = new ByteArrayInputStream(new byte[0]);
     if (template.getPath() != null && !template.getPath().trim().isEmpty()) {
-      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
-      ApplicationResourceResolver appResolver = context.getApplication().getResourceResolver();
-      ResourceResolver resolver = appResolver.getResourceResolver(template.getPath());
-      data = resolver.getInputStream(template.getPath());
+      data = configurationManager.getInputStream(template.getPath());
       DocumentMetadataPlugin metadataPlugin = metadataPlugins.get(template.getExtension());
       if(metadataPlugin != null && metadataPlugin.isExtensionSupported(template.getExtension())) {
         try {
           String userId = ConversationState.getCurrent().getIdentity().getUserId();
-          data = metadataPlugin.updateMetadata(context, template.getExtension(), data, new Date(), getCurrentUserDisplayName(userId), getCurrentUserLanguage(userId));
+          data = metadataPlugin.updateMetadata(template.getExtension(), data, new Date(), getCurrentUserDisplayName(userId), getCurrentUserLanguage(userId));
         } catch (DocumentExtensionNotSupportedException e) {
           LOG.error("Document extension is not supported by metadata plugin.", e);
         } catch (IOException e) {

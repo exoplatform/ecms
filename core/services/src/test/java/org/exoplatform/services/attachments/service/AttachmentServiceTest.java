@@ -9,10 +9,13 @@ import javax.jcr.*;
 
 import org.exoplatform.services.attachments.dao.AttachmentDAO;
 import org.exoplatform.services.attachments.storage.AttachmentStorageImpl;
+import org.exoplatform.services.attachments.utils.Utils;
+import org.exoplatform.services.cms.documents.*;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.MembershipEntry;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -24,7 +27,6 @@ import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.component.test.*;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
-import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -208,6 +210,116 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     List<Attachment> attachmentsEntityStored = attachmentService.getAttachmentsByEntity(currentIdentityId, 5, "EVENT");
     assertNotNull(attachmentsEntityStored);
     assertEquals(3, attachmentsEntityStored.size());
+  }
+
+  @Test
+  public void testCreateNewDoc() throws Exception { // NOSONAR
+    try {
+      attachmentService.createNewDocument(null, "title.docx", "", "", "");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    org.exoplatform.services.security.Identity userIdentity = new org.exoplatform.services.security.Identity("john", Collections.singletonList(new MembershipEntry("/platform/users", "manager")));
+    try {
+      attachmentService.createNewDocument(userIdentity, "", "", "", "");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      attachmentService.createNewDocument(userIdentity, "title.docx", "", "", "");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      attachmentService.createNewDocument(userIdentity, "title.docx", "/docs", "", "");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      attachmentService.createNewDocument(userIdentity, "title.docx", "/docs", "Collaboration", "");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
+    try {
+      attachmentService.createNewDocument(userIdentity, "title.docx", "/docs", "Collaboration", "notExist");
+      fail();
+    } catch (IllegalStateException e) {
+      // Expected
+    }
+
+    String docTitle = "test.docx";
+    String docPath = "Documents";
+    String pathDrive = "Personal Documents";
+    String templateName = "MicrosoftOfficeDocument";
+    String username = "testUser";
+    String createdDocUUID = "1";
+
+    long currentIdentityId = 2;
+    Identity currentIdentity = new Identity(OrganizationIdentityProvider.NAME, username);
+    currentIdentity.setId(String.valueOf(currentIdentityId));
+
+
+    NewDocumentTemplateConfig documentTemplateConfig = new NewDocumentTemplateConfig();
+    documentTemplateConfig.setExtension(".docx");
+    documentTemplateConfig.setPath("classpath:files/template.docx");
+    documentTemplateConfig.setName("MicrosoftOfficeDocument");
+    documentTemplateConfig.setMimeType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+    NewDocumentTemplate documentTemplate = new NewDocumentTemplate(documentTemplateConfig);
+    NewDocumentTemplateProvider documentTemplateProvider = mock(NewDocumentTemplateProvider.class);
+    DocumentEditorProvider documentEditorProvider = mock(DocumentEditorProvider.class);
+
+    lenient().when(documentTemplateProvider.getTemplates()).thenReturn(Collections.<NewDocumentTemplate>singletonList(documentTemplate));
+    lenient().when(documentTemplateProvider.getEditor()).thenReturn(documentEditorProvider);
+    lenient().when(documentEditorProvider.isAvailableForUser(userIdentity)).thenReturn(true);
+
+    // when
+    lenient().when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
+    lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
+    when(repositoryService.getCurrentRepository()).thenReturn(repository);
+    when(repository.getConfiguration()).thenReturn(repositoryEntry);
+    when(repositoryEntry.getDefaultWorkspaceName()).thenReturn("collaboration");
+    when(sessionProvider.getSession(any(), any())).thenReturn(session);
+
+    ManageableRepository manageableRepository = repositoryService.getRepository("repository");
+    lenient().when(repositoryService.getRepository(Mockito.anyString())).thenReturn(manageableRepository);
+    Node parentNode = mock(Node.class);
+    when(session.getNodeByUUID(anyString())).thenReturn(parentNode);
+    Node node1 = mock(Node.class);
+    Node nodeContent1 = mock(Node.class);
+    Property property = mock(Property.class);
+    lenient().when(node1.getSession()).thenReturn(session);
+    lenient().when(node1.getProperty(anyString())).thenReturn(property);
+    lenient().when(node1.getNode(anyString())).thenReturn(nodeContent1);
+    lenient().when(nodeContent1.getProperty(anyString())).thenReturn(property);
+    lenient().when(node1.hasProperty("exo:title")).thenReturn(true);
+    lenient().when(node1.getProperty("exo:title").getString()).thenReturn(docTitle);
+    lenient().when(property.getDate()).thenReturn(Calendar.getInstance());
+    lenient().when(property.getLong()).thenReturn((long) 1);
+    lenient().when(node1.getPath()).thenReturn("/collaboration/");
+    lenient().when(node1.getName()).thenReturn(docTitle);
+    lenient().when(node1.getUUID()).thenReturn(createdDocUUID);
+    lenient().when(session.getNodeByUUID(createdDocUUID)).thenReturn(node1);
+    lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, pathDrive, docPath)).thenReturn(parentNode);
+    lenient().when(documentService.createDocumentFromTemplate(parentNode, docTitle, documentTemplate)).thenReturn(node1);
+    lenient().when(documentService.getNewDocumentTemplateProviders()).thenReturn(Collections.singletonList(documentTemplateProvider));
+    // when
+    attachmentService.createNewDocument(userIdentity, docTitle, docPath, pathDrive, templateName);
+
+    // then
+    Attachment newCreatedDocument = attachmentService.getAttachmentById(createdDocUUID);
+    assertNotNull(newCreatedDocument);
+    assertEquals("1", newCreatedDocument.getId());
+    assertEquals(docTitle, newCreatedDocument.getTitle());
   }
 
 }
