@@ -20,17 +20,19 @@
       <v-text-field 
         v-if="!NewDocInputHidden"
         v-model="newDocTitleInput"
+        :rules="documentTitleRules"
+        :placeholder="$t('documents.untitledDocument')"
+        class="pt-2"
         outlined
         dense
         autofocus
-        placeholder="Untitled document" 
-        class="pt-2"
         @keyup.enter="createNewDoc()">
         <div slot="append" class="d-flex mt-1">
-          <span class="me-2">{{ selectedDocType.extension }}</span>
+          <span class="text-color me-2">{{ selectedDocType.extension }}</span>
           <v-icon
-            class="clickable px-1"
-            color="primary"
+            :class="documentTitleMaxLengthReached && 'not-allowed' || 'clickable'"
+            :color="documentTitleMaxLengthReached && 'grey--text' || 'primary'"
+            class="px-1"
             small
             @click="createNewDoc()">
             fa-check
@@ -81,17 +83,28 @@ export default {
       extensionApp: 'attachment',
       newDocumentActionExtension: 'new-document-action',
       newDocumentActions: {},
+      MAX_DOCUMENT_TITLE_LENGTH: 510,
+      documentTitleRules: [title => title.length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
     };
   },
   computed: {
     NewDocumentTitle() {
       return this.newDocTitleInput && `${this.newDocTitleInput}${this.selectedDocType.extension}` || this.untitledNewDoc;
     },
+    documentTitleMaxLengthReached() {
+      return this.NewDocumentTitle && this.NewDocumentTitle.length > this.MAX_DOCUMENT_TITLE_LENGTH;
+    },
     untitledNewDoc() {
       return `${this.$t('documents.untitledDocument')}${this.selectedDocType.extension}`;
     },
-    maxFileCountErrorLabel: function () {
+    maxFileCountErrorLabel() {
       return this.$t('attachments.drawer.maxFileCount.error').replace('{0}', `<b> ${this.maxFilesCount} </b>`);
+    },
+    newDocCreationFailedLabel() {
+      return this.$t('attachment.new.document.failed');
+    },
+    newDocTitleMaxLengthLabel() {
+      return this.$t('attachment.new.document.title.max.length');
     },
   },
   created() {
@@ -109,9 +122,19 @@ export default {
       });
     },
     createNewDoc() {
+      if (this.documentTitleMaxLengthReached) {
+        return;
+      }
       this.$root.$emit('start-loading-attachment-drawer');
       this.$attachmentService.createNewDoc(this.NewDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder)
-        .then((doc) =>this.manageNewCreatedDocument(doc));
+        .then((doc) => this.manageNewCreatedDocument(doc))
+        .catch(() => {
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.newDocCreationFailedLabel,
+            type: 'error',
+          });
+          this.$root.$emit('end-loading-attachment-drawer');
+        });
     },
     showNewDocInput(doc) {
       if (this.attachments.length >= this.maxFilesCount) {
