@@ -522,7 +522,6 @@ export default {
     addNewCreatedDocument(file) {
       if (file && file.id) {
         this.newUploadedFiles.push(file);
-        file.date = file.created;
         this.uploadedFiles.push(file);
       }
     }
