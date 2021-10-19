@@ -1,6 +1,7 @@
 package org.exoplatform.ecms.uploads;
 
 import java.io.*;
+import java.net.URLConnection;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -28,7 +28,6 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.social.common.service.HTMLUploadImageProcessor;
-import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 
@@ -50,15 +49,9 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
   private static final Pattern         UPLOAD_ID_PATTERN            = Pattern.compile("uploadId=(([0-9]|[a-f]|[A-F])*)");
 
+  private static final Pattern         IMPORT_PATTERN               = Pattern.compile("[//]|.*?|[-//]");
+
   private static final Pattern         UPLOAD_URL_PATTERN           = Pattern.compile(URL_OR_URI_REGEX);
-
-  private static final String          PROPERTY_MIME_TYPE           = "jcr:mimeType";
-
-  private static final String          DEFAULT_MIME_TYPE            = "image/jpg";
-
-  private static final String          CREATED_FILR_PREFIX          = "EXP_";
-
-  private static final String          CREATED_FILR_SUFFIX          = ".jpeg";
 
   private static final String          IMAGE_URL_REPLACEMENT_PREFIX = "//-";
 
@@ -69,10 +62,15 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
   private final UploadService          uploadService;
 
   private final RepositoryService      repositoryService;
+
   private final LinkManager            linkManager;
+
   private final SessionProviderService sessionProviderService;
+
   private final NodeHierarchyCreator   nodeHierarchyCreator;
+
   private final WCMService             wcmService;
+
   private String                       repositoryName;
 
   public HTMLUploadImageProcessorImpl(PortalContainer portalContainer,
@@ -241,6 +239,8 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     if (StringUtils.isBlank(content)) {
       return content;
     }
+    boolean uploadMode = false;
+    boolean importMode = false;
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Session session = sessionProvider.getSession("collaboration", repositoryService.getCurrentRepository());
@@ -249,13 +249,19 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
         spaceGroupId = spaceGroupId.substring(1);
       }
       Node parentNode = groupNode.getNode(spaceGroupId);
-      Set<String> processedUploads = new HashSet<>();
-      Map<String, String> urlToReplaces = new HashMap<>();
+
       Matcher matcher = UPLOAD_ID_PATTERN.matcher(content);
-      if (!matcher.find()) {
+      Matcher matcherImport = IMPORT_PATTERN.matcher(content);
+      if (matcher.find()) {
+        uploadMode = true;
+      } else {
+        if (matcherImport.find()) {
+          importMode = true;
+        }
+      }
+      if (!uploadMode && !importMode) {
         return content;
       }
-
       if (parentNode == null) {
         throw new IllegalArgumentException("Container node for uploaded processed images in HTML content must not be null");
       }
@@ -286,65 +292,13 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
           }
         }
       }
-
-      String processedContent = content;
-      do {
-        String uploadId = matcher.group(matcher.groupCount() - 1);
-        if (!processedUploads.contains(uploadId)) {
-
-          UploadResource uploadedResource = uploadService.getUploadResource(uploadId);
-          if (uploadedResource == null) {
-            continue;
-          }
-          String fileName = uploadedResource.getFileName();
-
-          int i = 1;
-          String originalFileName = fileName;
-          while (imagesFolderNode.hasNode(fileName)) {
-            if (originalFileName.contains(".")) {
-              int indexOfPoint = originalFileName.indexOf(".");
-              fileName = originalFileName.substring(0, indexOfPoint) + "(" + i + ")" + originalFileName.substring(indexOfPoint);
-            } else {
-              fileName = originalFileName + "(" + i + ")";
-            }
-            i++;
-          }
-
-          fileName = Text.escapeIllegalJcrChars(fileName);
-          fileName = Utils.cleanName(fileName);
-
-          Node imageNode = imagesFolderNode.addNode(fileName, "nt:file");
-          Node resourceNode = imageNode.addNode("jcr:content", "nt:resource");
-          resourceNode.setProperty("jcr:mimeType", uploadedResource.getMimeType());
-          resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
-
-          String fileDiskLocation = uploadedResource.getStoreLocation();
-          try (InputStream inputStream = new FileInputStream(fileDiskLocation)) {
-            resourceNode.setProperty("jcr:data", inputStream);
-            resourceNode.getSession().save();
-            parentNode.getSession().save();
-          }
-
-          uploadService.removeUploadResource(uploadId);
-
-          int uploadIdIndex = matcher.start();
-          String urlToReplace = getURLToReplace(processedContent, uploadId, uploadIdIndex);
-          if (!UPLOAD_URL_PATTERN.matcher(urlToReplace).matches()) {
-            LOG.warn("Unrecognized URL to replace in activity body {}", urlToReplace);
-            continue;
-          }
-
-          String fileURI = getJcrURI(imageNode);
-          if (StringUtils.isNotBlank(urlToReplace)) {
-            urlToReplaces.put(urlToReplace, fileURI);
-            processedUploads.add(uploadId);
-          }
-        }
-      } while (matcher.find());
-
-      processedContent = replaceUrl(content, urlToReplaces);
-
-      return processedContent;
+      if (uploadMode) {
+        content = createImagesfromUpload(content, imagesFolderNode, parentNode);
+      }
+      if (importMode) {
+        content = createImagesfromImport(content, imagesFolderNode, parentNode);
+      }
+      return content;
     } catch (RepositoryException e) {
       throw new IllegalArgumentException("Cannot find File location", e);
     } catch (IOException e) {
@@ -357,17 +311,25 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     if (StringUtils.isBlank(content)) {
       return content;
     }
+    boolean uploadMode = false;
+    boolean importMode = false;
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Node parentNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-      Set<String> processedUploads = new HashSet<>();
-      Map<String, String> urlToReplaces = new HashMap<>();
+
+      Node imagesFolderNode = parentNode;
       Matcher matcher = UPLOAD_ID_PATTERN.matcher(content);
-      if (!matcher.find()) {
+      Matcher matcherImport = IMPORT_PATTERN.matcher(content);
+      if (matcher.find()) {
+        uploadMode = true;
+      } else {
+        if (matcherImport.find()) {
+          importMode = true;
+        }
+      }
+      if (!uploadMode && !importMode) {
         return content;
       }
-      Node imagesFolderNode = parentNode;
-
       if (StringUtils.isNotEmpty(imagesSubLocationPath)) {
         for (String folder : imagesSubLocationPath.split("/")) {
           if (StringUtils.isBlank(folder)) {
@@ -385,65 +347,13 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
           }
         }
       }
-
-      String processedContent = content;
-      do {
-        String uploadId = matcher.group(matcher.groupCount() - 1);
-        if (!processedUploads.contains(uploadId)) {
-
-          UploadResource uploadedResource = uploadService.getUploadResource(uploadId);
-          if (uploadedResource == null) {
-            continue;
-          }
-          String fileName = uploadedResource.getFileName();
-
-          int i = 1;
-          String originalFileName = fileName;
-          while (imagesFolderNode.hasNode(fileName)) {
-            if (originalFileName.contains(".")) {
-              int indexOfPoint = originalFileName.indexOf(".");
-              fileName = originalFileName.substring(0, indexOfPoint) + "(" + i + ")" + originalFileName.substring(indexOfPoint);
-            } else {
-              fileName = originalFileName + "(" + i + ")";
-            }
-            i++;
-          }
-
-          fileName = Text.escapeIllegalJcrChars(fileName);
-          fileName = Utils.cleanName(fileName);
-
-          Node imageNode = imagesFolderNode.addNode(fileName, "nt:file");
-          Node resourceNode = imageNode.addNode("jcr:content", "nt:resource");
-          resourceNode.setProperty("jcr:mimeType", uploadedResource.getMimeType());
-          resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
-
-          String fileDiskLocation = uploadedResource.getStoreLocation();
-          try (InputStream inputStream = new FileInputStream(fileDiskLocation)) {
-            resourceNode.setProperty("jcr:data", inputStream);
-            resourceNode.getSession().save();
-            parentNode.getSession().save();
-          }
-
-          uploadService.removeUploadResource(uploadId);
-
-          int uploadIdIndex = matcher.start();
-          String urlToReplace = getURLToReplace(processedContent, uploadId, uploadIdIndex);
-          if (!UPLOAD_URL_PATTERN.matcher(urlToReplace).matches()) {
-            LOG.warn("Unrecognized URL to replace in activity body {}", urlToReplace);
-            continue;
-          }
-
-          String fileURI = getJcrURI(imageNode);
-          if (StringUtils.isNotBlank(urlToReplace)) {
-            urlToReplaces.put(urlToReplace, fileURI);
-            processedUploads.add(uploadId);
-          }
-        }
-      } while (matcher.find());
-
-      processedContent = replaceUrl(content, urlToReplaces);
-
-      return processedContent;
+      if (uploadMode) {
+        content = createImagesfromUpload(content, imagesFolderNode, parentNode);
+      }
+      if (importMode) {
+        content = createImagesfromImport(content, imagesFolderNode, parentNode);
+      }
+      return content;
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot create the image", e);
     } catch (Exception e) {
@@ -470,11 +380,11 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
         String nodeIdentifier = workspace.split("/")[1];
         workspace = workspace.split("/")[0];
         String urlToReplace = restUploadUrl + workspace + "/" + nodeIdentifier;
-        Node node = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
-        Node dataNode = node;
+        Node dataNode = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
+        String fileName = dataNode.getName();
         Node jcrContentNode = dataNode.getNode("jcr:content");
         InputStream jcrData = jcrContentNode.getProperty("jcr:data").getStream();
-        File tempFile = File.createTempFile(CREATED_FILR_PREFIX, CREATED_FILR_SUFFIX);
+        File tempFile = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
         try (OutputStream outputStream = new FileOutputStream(tempFile)) {
           IOUtils.copy(jcrData, outputStream);
         } catch (Exception e) {
@@ -515,5 +425,120 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       }
     }
     return repositoryName;
+  }
+
+  private String createImagesfromUpload(String content, Node imagesFolderNode, Node parentNode) throws RepositoryException,
+                                                                                                IOException {
+    Set<String> processedUploads = new HashSet<>();
+    Map<String, String> urlToReplaces = new HashMap<>();
+    String processedContent = content;
+    Matcher matcher = UPLOAD_ID_PATTERN.matcher(content);
+    matcher.find();
+    do {
+      String uploadId = matcher.group(matcher.groupCount() - 1);
+      if (!processedUploads.contains(uploadId)) {
+
+        UploadResource uploadedResource = uploadService.getUploadResource(uploadId);
+        if (uploadedResource == null) {
+          continue;
+        }
+        String fileName = uploadedResource.getFileName();
+
+        int i = 1;
+        String originalFileName = fileName;
+        while (imagesFolderNode.hasNode(fileName)) {
+          if (originalFileName.contains(".")) {
+            int indexOfPoint = originalFileName.indexOf(".");
+            fileName = originalFileName.substring(0, indexOfPoint) + "(" + i + ")" + originalFileName.substring(indexOfPoint);
+          } else {
+            fileName = originalFileName + "(" + i + ")";
+          }
+          i++;
+        }
+
+        fileName = Text.escapeIllegalJcrChars(fileName);
+        fileName = Utils.cleanName(fileName);
+
+        Node imageNode = imagesFolderNode.addNode(fileName, "nt:file");
+        Node resourceNode = imageNode.addNode("jcr:content", "nt:resource");
+        resourceNode.setProperty("jcr:mimeType", uploadedResource.getMimeType());
+        resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
+
+        String fileDiskLocation = uploadedResource.getStoreLocation();
+        try (InputStream inputStream = new FileInputStream(fileDiskLocation)) {
+          resourceNode.setProperty("jcr:data", inputStream);
+          resourceNode.getSession().save();
+          parentNode.getSession().save();
+        }
+
+        uploadService.removeUploadResource(uploadId);
+
+        int uploadIdIndex = matcher.start();
+        String urlToReplace = getURLToReplace(processedContent, uploadId, uploadIdIndex);
+        if (!UPLOAD_URL_PATTERN.matcher(urlToReplace).matches()) {
+          LOG.warn("Unrecognized URL to replace in activity body {}", urlToReplace);
+          continue;
+        }
+
+        String fileURI = getJcrURI(imageNode);
+        if (StringUtils.isNotBlank(urlToReplace)) {
+          urlToReplaces.put(urlToReplace, fileURI);
+          processedUploads.add(uploadId);
+        }
+      }
+
+    } while (matcher.find());
+    return replaceUrl(content, urlToReplaces);
+  }
+
+  private String createImagesfromImport(String content, Node imagesFolderNode, Node parentNode) throws RepositoryException,
+                                                                                                IOException {
+    Set<String> processedUploads = new HashSet<>();
+    String processedContent = content;
+    while (processedContent.contains("src=\"" + IMAGE_URL_REPLACEMENT_PREFIX)) {
+      String fileName = processedContent.split("src=\"//-")[1].split("-//")[0];
+
+      if (!processedUploads.contains(fileName)) {
+
+        File file = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
+        if (!file.exists()) {
+          continue;
+        }
+        fileName = file.getName();
+        int i = 1;
+        String originalFileName = fileName;
+        while (imagesFolderNode.hasNode(fileName)) {
+          if (originalFileName.contains(".")) {
+            int indexOfPoint = originalFileName.indexOf(".");
+            fileName = originalFileName.substring(0, indexOfPoint) + "(" + i + ")" + originalFileName.substring(indexOfPoint);
+          } else {
+            fileName = originalFileName + "(" + i + ")";
+          }
+          i++;
+        }
+
+        fileName = Text.escapeIllegalJcrChars(fileName);
+        fileName = Utils.cleanName(fileName);
+
+        Node imageNode = imagesFolderNode.addNode(fileName, "nt:file");
+        Node resourceNode = imageNode.addNode("jcr:content", "nt:resource");
+        resourceNode.setProperty("jcr:mimeType", URLConnection.guessContentTypeFromName(file.getName()));
+        resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
+
+        try (InputStream inputStream = new FileInputStream(file)) {
+          resourceNode.setProperty("jcr:data", inputStream);
+          resourceNode.getSession().save();
+          parentNode.getSession().save();
+        }
+        String urlToReplace = IMAGE_URL_REPLACEMENT_PREFIX + file.getName() + IMAGE_URL_REPLACEMENT_SUFFIX;
+        String fileURI = getJcrURI(imageNode);
+        if (StringUtils.isNotBlank(urlToReplace)) {
+          processedContent = processedContent.replaceAll(urlToReplace, fileURI);
+        }
+        file.delete();
+      }
+
+    }
+    return processedContent;
   }
 }
