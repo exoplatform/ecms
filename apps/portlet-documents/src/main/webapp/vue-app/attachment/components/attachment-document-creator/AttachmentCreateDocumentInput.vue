@@ -63,6 +63,14 @@ export default {
       type: Object,
       default: () => null
     },
+    maxFilesCount: {
+      type: Number,
+      default: parseInt(`${eXo.env.portal.maxToUpload}`)
+    },
+    maxFileSize: {
+      type: Number,
+      default: parseInt(`${eXo.env.portal.maxFileSize}`)
+    },
   },
   data() {
     return {
@@ -82,6 +90,9 @@ export default {
     untitledNewDoc() {
       return `${this.$t('documents.untitledDocument')}${this.selectedDocType.extension}`;
     },
+    maxFileCountErrorLabel: function () {
+      return this.$t('attachments.drawer.maxFileCount.error').replace('{0}', `<b> ${this.maxFilesCount} </b>`);
+    },
   },
   created() {
     this.$root.$on(`${this.extensionApp}-${this.newDocumentActionExtension}-updated`, this.refreshNewDocumentsActions);
@@ -99,19 +110,31 @@ export default {
     },
     createNewDoc() {
       this.$root.$emit('start-loading-attachment-drawer');
-      this.$attachmentService.createNewDoc(this.NewDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder).then((doc) => {
-        this.$root.$emit('end-loading-attachment-drawer');
-        this.resetNewDocInput();
-        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
-      });
+      this.$attachmentService.createNewDoc(this.NewDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder)
+        .then((doc) =>this.manageNewCreatedDocument(doc));
     },
     showNewDocInput(doc) {
+      if (this.attachments.length >= this.maxFilesCount) {
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.maxFileCountErrorLabel,
+          type: 'error',
+        });
+        return;
+      }
       this.NewDocInputHidden = false;
       this.selectedDocType = doc;
     },
     resetNewDocInput() {
       this.NewDocInputHidden = true;
       this.newDocTitleInput = '';
+    },
+    manageNewCreatedDocument(doc) {
+      doc.drive = this.currentDrive.title;
+      doc.date = doc.created;
+      this.$root.$emit('add-new-created-document', doc);
+      this.$root.$emit('end-loading-attachment-drawer');
+      this.resetNewDocInput();
+      window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
     }
   }
 };

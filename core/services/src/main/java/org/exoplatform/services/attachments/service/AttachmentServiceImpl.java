@@ -44,6 +44,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 public class AttachmentServiceImpl implements AttachmentService {
@@ -477,12 +478,20 @@ public class AttachmentServiceImpl implements AttachmentService {
       if (documentTemplate != null) {
         Node createdDocument = documentService.createDocumentFromTemplate(currentNode, title, documentTemplate);
         session.save();
-        return EntityBuilder.fromAttachmentNode(repositoryService,
+        Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                 documentService,
                                                 linkManager,
                                                 Utils.getCurrentWorkspace(repositoryService),
                                                 session,
                                                 createdDocument.getUUID());
+
+        boolean canView = checkAttachmentJCRPermission(attachment.getId(), PermissionType.READ);
+        boolean canDetach = checkAttachmentJCRPermission(attachment.getId(), PermissionType.REMOVE);
+        boolean canEdit = checkAttachmentJCRPermission(attachment.getId(), PermissionType.SET_PROPERTY);
+        Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDetach, canEdit);
+
+        attachment.setAcl(attachmentACL);
+        return attachment;
       } else {
         throw new IllegalStateException("Document template not available with " + templateName + " as a name");
       }

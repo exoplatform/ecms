@@ -226,6 +226,7 @@ export default {
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
     this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
     this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
+    this.$root.$on('add-new-created-document', this.addNewCreatedDocument);
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -273,7 +274,7 @@ export default {
           file.destinationFolder,
           eXo.env.portal.portalName,
           file.uploadId,
-          file.name,
+          file.title,
           eXo.env.portal.language,
           'keep',
           'save'
@@ -295,7 +296,7 @@ export default {
           this.processNextQueuedUpload();
           this.$emit('uploadingCountChanged', this.uploadingCount);
           this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.upload.failed').replace('{0}', file.name),
+            message: this.$t('attachments.upload.failed').replace('{0}', file.title),
             type: 'error',
           });
         });
@@ -317,16 +318,17 @@ export default {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
 
-        this.newUploadedFiles.filter(file => file.id === movedFile.id).map(file => {
-          file.pathDestinationFolderForFile = folder;
-          file.fileDrive = newDestinationPathDrive;
-          file.pathDestinationFolderForFile = folder;
-        });
+        const movedAttachmentIndex = this.newUploadedFiles.findIndex(file => file.id === movedFile.id);
+        const movedAttachment = Object.assign({}, this.newUploadedFiles[movedAttachmentIndex]);
+        movedAttachment.pathDestinationFolderForFile = folder;
+        movedAttachment.fileDrive = newDestinationPathDrive;
+        this.newUploadedFiles.splice(movedAttachmentIndex, 1, movedAttachment);
 
         const movedFileIndex = this.uploadedFiles.findIndex(file => file.id === movedFile.id);
-        this.uploadedFiles[movedFileIndex] = updatedMovedFile;
-        this.uploadedFiles[movedFileIndex].drive = folder;
-        this.uploadedFiles[movedFileIndex].date = updatedMovedFile.created;
+        updatedMovedFile.drive = folder;
+        updatedMovedFile.date = updatedMovedFile.created;
+        this.uploadedFiles.splice(movedFileIndex, 1, updatedMovedFile);
+
       });
     },
     deleteDestinationPathForFile(folderId) {
@@ -515,6 +517,12 @@ export default {
       if (file && file.id) {
         const fileIndex = this.newUploadedFiles.findIndex(f => f.id === file.id);
         this.newUploadedFiles.splice(fileIndex, 1);
+      }
+    },
+    addNewCreatedDocument(file) {
+      if (file && file.id) {
+        this.newUploadedFiles.push(file);
+        this.uploadedFiles.push(file);
       }
     }
   }
