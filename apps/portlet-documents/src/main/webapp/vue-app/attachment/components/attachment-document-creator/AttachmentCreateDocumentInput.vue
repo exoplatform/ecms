@@ -84,15 +84,18 @@ export default {
       newDocumentActionExtension: 'new-document-action',
       newDocumentActions: {},
       MAX_DOCUMENT_TITLE_LENGTH: 510,
-      documentTitleRules: [title => title.length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
+      documentTitleRules: [title => title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
     };
   },
   computed: {
-    NewDocumentTitle() {
-      return this.newDocTitleInput && `${this.newDocTitleInput}${this.selectedDocType.extension}` || this.untitledNewDoc;
+    cleanedNewDocumentTitle() {
+      return this.newDocTitleInput && this.newDocTitleInput.trim();
+    },
+    newDocumentTitle() {
+      return this.cleanedNewDocumentTitle && `${this.cleanedNewDocumentTitle}${this.selectedDocType.extension}` || this.untitledNewDoc;
     },
     documentTitleMaxLengthReached() {
-      return this.NewDocumentTitle && this.NewDocumentTitle.length > this.MAX_DOCUMENT_TITLE_LENGTH;
+      return this.newDocumentTitle && this.newDocumentTitle.length > this.MAX_DOCUMENT_TITLE_LENGTH;
     },
     untitledNewDoc() {
       return `${this.$t('documents.untitledDocument')}${this.selectedDocType.extension}`;
@@ -126,7 +129,7 @@ export default {
         return;
       }
       this.$root.$emit('start-loading-attachment-drawer');
-      this.$attachmentService.createNewDoc(this.NewDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder)
+      this.$attachmentService.createNewDoc(this.newDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder)
         .then((doc) => this.manageNewCreatedDocument(doc))
         .catch(() => {
           this.$root.$emit('attachments-notification-alert', {
