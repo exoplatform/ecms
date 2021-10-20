@@ -17,6 +17,7 @@
 package org.exoplatform.services.attachments.service;
 
 import java.security.AccessControlException;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -43,11 +44,16 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 public class AttachmentServiceImpl implements AttachmentService {
+
+  private static final Log LOG = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
 
   private RepositoryService                repositoryService;
 
@@ -67,7 +73,13 @@ public class AttachmentServiceImpl implements AttachmentService {
 
   private LinkManager                      linkManager;
 
+  private ListenerService                  listenerService;
+
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
+
+  public static final String ATTACHMENT_ITEM_DELETED        = "exo.{0}.attachment.deleted";
+
+  public static final String ATTACHMENT_ITEM_ADDED          = "exo.{0}.attachment.added";
 
   public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
                                RepositoryService repositoryService,
@@ -77,7 +89,8 @@ public class AttachmentServiceImpl implements AttachmentService {
                                ManageDriveService manageDriveService,
                                NodeHierarchyCreator nodeHierarchyCreator,
                                NodeFinder nodeFinder,
-                               LinkManager linkManager) {
+                               LinkManager linkManager,
+                               ListenerService listenerService) {
 
     this.attachmentStorage = attachmentStorage;
     this.repositoryService = repositoryService;
@@ -88,6 +101,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.nodeFinder = nodeFinder;
     this.linkManager = linkManager;
+    this.listenerService = listenerService;
   }
 
   @Override
@@ -117,7 +131,13 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachmentId);
-    return getAttachmentByIdByEntity(entityType, entityId, attachmentId, userIdentityId);
+    Attachment attachment = getAttachmentByIdByEntity(entityType, entityId, attachmentId, userIdentityId);
+    try {
+      listenerService.broadcast(MessageFormat.format(ATTACHMENT_ITEM_ADDED, entityType), entityId, attachment);
+    } catch (Exception e) {
+      LOG.warn("Error while broadcasting add attachment event", e);
+    }
+    return attachment;
   }
 
   @Override
@@ -291,6 +311,11 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     attachmentStorage.deleteAttachmentItemByIdByEntity(entityId, entityType, attachmentId);
+    try {
+      listenerService.broadcast(MessageFormat.format(ATTACHMENT_ITEM_DELETED, entityType), entityId, attachment);
+    } catch (Exception e) {
+      LOG.warn("Error while broadcasting delete attachment event", e);
+    }
   }
 
   @Override
