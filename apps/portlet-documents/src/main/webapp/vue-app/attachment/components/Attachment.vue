@@ -54,6 +54,9 @@ export default {
     this.$root.$on('remove-attachment-item', attachment => {
       this.removeAttachedFile(attachment);
     });
+    this.$root.$on('add-new-created-document', file => {
+      this.attachments.push(file);
+    });
     this.$root.$on('add-new-uploaded-file', file => {
       this.attachments.push(file);
     });
@@ -131,7 +134,7 @@ export default {
         }).catch(e => {
           console.error(e);
           this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.delete.failed').replace('{0}', file.name),
+            message: this.$t('attachments.delete.failed').replace('{0}', file.title),
             type: 'error',
           });
         });
