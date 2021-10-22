@@ -20,6 +20,7 @@ import java.security.AccessControlException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -43,6 +44,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -68,6 +71,8 @@ public class AttachmentServiceImpl implements AttachmentService {
   private LinkManager                      linkManager;
 
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
+
+  private static final Log LOG = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
 
   public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
                                RepositoryService repositoryService,
@@ -470,6 +475,9 @@ public class AttachmentServiceImpl implements AttachmentService {
       session = Utils.getSession(sessionProviderService, repositoryService);
       Node currentNode =
                        Utils.getParentFolderNode(session, manageDriveService, nodeHierarchyCreator, nodeFinder, pathDrive, path);
+      if(currentNode.hasNode(title)) {
+        throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");
+      }
       List<NewDocumentTemplate> documentTemplates = getDocumentTemplateList(userIdentity);
       NewDocumentTemplate documentTemplate = documentTemplates.stream()
                                                               .filter(template -> template.getName().equals(templateName))
@@ -496,7 +504,8 @@ public class AttachmentServiceImpl implements AttachmentService {
         throw new IllegalStateException("Document template not available with " + templateName + " as a name");
       }
     } catch (Exception e) {
-      throw new IllegalStateException("Error while trying to create a new document"+ e);
+      LOG.error("Error while trying to create a new document", e);
+      throw e;
     } finally {
       if (session != null) {
         session.logout();
