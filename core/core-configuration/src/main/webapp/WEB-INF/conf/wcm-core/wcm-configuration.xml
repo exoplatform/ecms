@@ -119,7 +119,19 @@
       </properties-param>
     </init-params>
   </component>		
-		
+
+  <component>
+    <key>NewDocumentsFeatureProperties</key>
+    <type>org.exoplatform.container.ExtendedPropertyConfigurator</type>
+    <init-params>
+      <properties-param>
+        <name>NewDocumentsFeatureProperties</name>
+        <description>New Documents Feature enablement flag</description>
+        <property name="exo.feature.NewDocuments.enabled" value="${exo.feature.NewDocuments.enabled:false}" />
+      </properties-param>
+    </init-params>
+  </component>
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
     <component-plugin>
