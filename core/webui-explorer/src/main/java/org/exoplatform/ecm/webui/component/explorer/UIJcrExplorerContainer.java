@@ -16,16 +16,24 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
+import java.util.*;
+
+import javax.jcr.*;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
+
 import org.apache.commons.lang.StringUtils;
+
+import org.exoplatform.commons.api.settings.*;
+import org.exoplatform.commons.api.settings.data.Context;
+import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.ecm.jcr.model.Preference;
-import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
-import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
-import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
+import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer.SwitchDocumentsActionListener;
+import org.exoplatform.ecm.webui.component.explorer.control.*;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -33,33 +41,32 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIRightClickPopupMenu;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.*;
 import org.exoplatform.webui.core.model.SelectItemOption;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 /**
  * Created by The eXo Platform SARL
  */
 @ComponentConfig(
+  events = {
+     @EventConfig(listeners = SwitchDocumentsActionListener.class)
+  },
   template = "app:/groovy/webui/component/explorer/UIJCRExplorerContainer.gtmpl"
 )
 public class UIJcrExplorerContainer extends UIContainer {
   private static final Log LOG  = ExoLogger.getLogger(UIJcrExplorerContainer.class.getName());
+
+  private ExoFeatureService featureService;
+
+  private SettingService    settingService;
+
   public UIJcrExplorerContainer() throws Exception {
     addChild(UIJCRExplorer.class, null, null);
     addChild(UIMultiUpload.class, null, null);
@@ -209,11 +216,63 @@ public class UIJcrExplorerContainer extends UIContainer {
       }
     }
   }
-  
-  @Override
-  public void processRender(WebuiRequestContext context) throws Exception
-  {
-    super.processRender(context);
+
+  public boolean isNewDocumentsFeatureEnabled() {
+    if (!SpaceUtils.isSpaceContext()) {
+      return false;
+    }
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    return getFeatureService().isFeatureActiveForUser("NewDocuments", userId);
+  }
+
+  public boolean isDisplayNewDocumentsForUser() {
+    if (!isNewDocumentsFeatureEnabled()) {
+      return false;
+    }
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    SettingValue<?> settingValue = getSettingService().get(Context.USER.id(userId),
+                                                           Scope.APPLICATION.id("NewDocumentsFeature"),
+                                                           "enabled");
+    return settingValue != null && settingValue.getValue() != null
+        && StringUtils.equals(settingValue.getValue().toString(), "true");
+  }
+
+  public void switchDocumentsFeatureForUser() {
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    boolean isActive = isDisplayNewDocumentsForUser();
+    if (isActive) {
+      getSettingService().remove(Context.USER.id(userId),
+                                 Scope.APPLICATION.id("NewDocumentsFeature"),
+                                 "enabled");
+    } else {
+      getSettingService().set(Context.USER.id(userId),
+                              Scope.APPLICATION.id("NewDocumentsFeature"),
+                              "enabled",
+                              SettingValue.create("true"));
+    }
+  }
+
+  public ExoFeatureService getFeatureService() {
+    if (featureService == null) {
+      featureService = getApplicationComponent(ExoFeatureService.class);
+    }
+    return featureService;
+  }
+
+  public SettingService getSettingService() {
+    if (settingService == null) {
+      settingService = getApplicationComponent(SettingService.class);
+    }
+    return settingService;
+  }
+
+  public static class SwitchDocumentsActionListener extends EventListener<UIJcrExplorerContainer> {
+    @Override
+    public void execute(Event<UIJcrExplorerContainer> event) throws Exception {
+      UIJcrExplorerContainer jcrExplorerContainer = event.getSource();
+      jcrExplorerContainer.switchDocumentsFeatureForUser();
+      event.getRequestContext().addUIComponentToUpdateByAjax(jcrExplorerContainer);
+    }
   }
 
 }
