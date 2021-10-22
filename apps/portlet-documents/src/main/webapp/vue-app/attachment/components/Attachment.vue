@@ -71,6 +71,27 @@ export default {
     });
     document.addEventListener('open-attachments-app-drawer', (event) => {
       this.attachmentAppConfiguration = event.detail;
+      if (!this.attachmentAppConfiguration) {
+        if (eXo.env.portal.spaceDisplayName) {
+          this.attachmentAppConfiguration = {
+            'defaultDrive': {
+              isSelected: true,
+              name: `.spaces.${eXo.env.portal.spaceGroup}`,
+              title: eXo.env.portal.spaceDisplayName,
+            },
+            'defaultFolder': 'Documents',
+          };
+        } else {
+          this.attachmentAppConfiguration = {
+            'defaultDrive': {
+              isSelected: true,
+              name: 'Personal Documents',
+              title: 'Personal Documents'
+            },
+            'defaultFolder': 'Documents',
+          };
+        }
+      }
       this.attachments = [];
       this.openAttachmentsAppDrawer();
       this.initAttachmentEnvironment();
