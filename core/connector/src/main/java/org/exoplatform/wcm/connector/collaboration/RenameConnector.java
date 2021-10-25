@@ -112,7 +112,7 @@ public class RenameConnector implements ResourceContainer {
       String newExoTitle = newTitle;
       // Clarify new name & check to add extension
 
-      String newName  = Text.escapeIllegalJcrChars(newTitle);
+      String newName = Text.escapeIllegalJcrChars(Utils.cleanString(newTitle));
 
       //clean node name
       newName = Utils.cleanName(newName);
