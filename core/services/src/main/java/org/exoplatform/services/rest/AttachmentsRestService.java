@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
+import javax.jcr.ItemExistsException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -409,6 +410,8 @@ public class AttachmentsRestService implements ResourceContainer {
       Identity userIdentity = getCurrentUserIdentity();
       Attachment attachment = attachmentService.createNewDocument(userIdentity, title, path, pathDrive, templateName);
       return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+    } catch (ItemExistsException e) {
+      return Response.status(Status.CONFLICT).entity("Document with the same name already exist in this current path").build();
     } catch (Exception e) {
       LOG.error("Error when trying to a new document with type ", templateName, e);
       return Response.serverError()
