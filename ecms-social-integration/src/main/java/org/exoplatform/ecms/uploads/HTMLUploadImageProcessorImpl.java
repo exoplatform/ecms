@@ -502,6 +502,8 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
         File file = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
         if (!file.exists()) {
+          String urlToReplace = IMAGE_URL_REPLACEMENT_PREFIX + fileName + IMAGE_URL_REPLACEMENT_SUFFIX;
+          processedContent = processedContent.replace(urlToReplace, "");
           continue;
         }
         fileName = file.getName();
@@ -533,7 +535,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
         String urlToReplace = IMAGE_URL_REPLACEMENT_PREFIX + file.getName() + IMAGE_URL_REPLACEMENT_SUFFIX;
         String fileURI = getJcrURI(imageNode);
         if (StringUtils.isNotBlank(urlToReplace)) {
-          processedContent = processedContent.replaceAll(urlToReplace, fileURI);
+          processedContent = processedContent.replace(urlToReplace, fileURI);
         }
         file.delete();
       }
