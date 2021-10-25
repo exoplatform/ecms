@@ -130,6 +130,17 @@ export default {
       }
       this.$root.$emit('start-loading-attachment-drawer');
       this.$attachmentService.createNewDoc(this.newDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder)
+        .then((resp) => {
+          if (resp && resp.status && resp.status === 409) {
+            this.$root.$emit('attachments-notification-alert', {
+              message: 'File with the same name already exists',
+              type: 'error',
+            });
+            this.$root.$emit('end-loading-attachment-drawer');
+          } else {
+            return resp;
+          }
+        })
         .then((doc) => this.manageNewCreatedDocument(doc))
         .catch(() => {
           this.$root.$emit('attachments-notification-alert', {
@@ -155,12 +166,14 @@ export default {
       this.newDocTitleInput = '';
     },
     manageNewCreatedDocument(doc) {
-      doc.drive = this.currentDrive.title;
-      doc.date = doc.created;
-      this.$root.$emit('add-new-created-document', doc);
-      this.$root.$emit('end-loading-attachment-drawer');
-      this.resetNewDocInput();
-      window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
+      if (doc && doc.id) {
+        doc.drive = this.currentDrive.title;
+        doc.date = doc.created;
+        this.$root.$emit('add-new-created-document', doc);
+        this.$root.$emit('end-loading-attachment-drawer');
+        this.resetNewDocInput();
+        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
+      }
     }
   }
 };
