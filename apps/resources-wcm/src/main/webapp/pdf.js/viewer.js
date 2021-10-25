@@ -7741,7 +7741,7 @@ window.addEventListener('click', function click(evt) {
 }, false);
 
 window.addEventListener('keydown', function keydown(evt) {
-  if (OverlayManager.active) {
+  if (OverlayManager.active || evt.target.isContentEditable) {
     return;
   }
 
