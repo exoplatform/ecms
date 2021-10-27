@@ -345,6 +345,9 @@ export function createNewDoc(title, templateName, pathDrive, path) {
     body: new URLSearchParams(formData).toString(),
   }).then((resp) => {
     if (!resp || !resp.ok) {
+      if (resp.status === 409) {
+        return resp;
+      }
       throw new Error('Error creating new document');
     } else {
       return resp.json();

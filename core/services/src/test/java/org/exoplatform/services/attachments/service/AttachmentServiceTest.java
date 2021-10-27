@@ -250,24 +250,11 @@ public class AttachmentServiceTest extends BaseExoTestCase {
       // Expected
     }
 
-    try {
-      attachmentService.createNewDocument(userIdentity, "title.docx", "/docs", "Collaboration", "notExist");
-      fail();
-    } catch (IllegalStateException e) {
-      // Expected
-    }
-
     String docTitle = "test.docx";
     String docPath = "Documents";
     String pathDrive = "Personal Documents";
     String templateName = "MicrosoftOfficeDocument";
-    String username = "testUser";
     String createdDocUUID = "1";
-
-    long currentIdentityId = 2;
-    Identity currentIdentity = new Identity(OrganizationIdentityProvider.NAME, username);
-    currentIdentity.setId(String.valueOf(currentIdentityId));
-
 
     NewDocumentTemplateConfig documentTemplateConfig = new NewDocumentTemplateConfig();
     documentTemplateConfig.setExtension(".docx");
