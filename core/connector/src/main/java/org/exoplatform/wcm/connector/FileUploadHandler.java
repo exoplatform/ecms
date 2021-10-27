@@ -603,6 +603,9 @@ public class FileUploadHandler {
     List<AccessControlEntry> permissions = ((NodeImpl) file).getACL().getPermissionEntries();
     rootElement.setAttribute("acl", JSONValue.toJSONString(getFileACL(permissions)));
 
+    long size = file.getNode("jcr:content").getProperty("jcr:data").getLength();
+    rootElement.setAttribute("size", String.valueOf(size));
+
     doc.appendChild(rootElement);
     return doc;
   }

@@ -281,6 +281,7 @@ export default {
         ).then((uploadedFile) => {
           if (uploadedFile) {
             uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
+            this.sendDocumentAnalytics(uploadedFile);
             this.addNewUploadedFileToAttachments(file, uploadedFile);
             if (this.entityType && this.entityId) {
               this.linkUploadedAttachmentToEntity(file);
@@ -521,8 +522,33 @@ export default {
     },
     addNewCreatedDocument(file) {
       if (file && file.id) {
+        this.sendDocumentAnalytics(file);
         this.newUploadedFiles.push(file);
         this.uploadedFiles.push(file);
+      }
+    },
+    sendDocumentAnalytics(file) {
+      if (file && file.UUID || file.id) {
+        const operationOrigin = this.entityType || eXo.env.portal.selectedNodeUri;
+        const documentId = file.UUID || file.id;
+        const fileExtension = file.title.split('.').pop();
+        const fileAnalytics = {
+          'module': 'Drive',
+          'subModule': 'attachment-drawer',
+          'parameters': {
+            'documentId': documentId,
+            'origin': operationOrigin.toLowerCase(),
+            'documentSize': file.size,
+            'documentName': file.title,
+            'documentExtension': fileExtension
+          },
+          'userId': eXo.env.portal.userIdentityId,
+          'spaceId': eXo.env.portal.spaceId,
+          'userName': eXo.env.portal.userName,
+          'operation': 'fileCreated',
+          'timestamp': Date.now()
+        };
+        document.dispatchEvent(new CustomEvent('exo-statistic-message', {detail: fileAnalytics}));
       }
     }
   }
