@@ -79,9 +79,7 @@ public class EntityBuilder {
       acl.setCanAccess(false);
       privateAttachment.setAcl(acl);
       return privateAttachment;
-    }
-
-    if (attachmentNode == null) {
+    } catch (ItemNotFoundException e) {
       throw new ObjectNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
 

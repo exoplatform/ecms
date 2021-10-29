@@ -378,7 +378,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String attachmentId) {
+  public Attachment getAttachmentById(String attachmentId) throws ObjectNotFoundException {
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
@@ -388,6 +388,8 @@ public class AttachmentServiceImpl implements AttachmentService {
                                               Utils.getCurrentWorkspace(repositoryService),
                                               session,
                                               attachmentId);
+    } catch (ObjectNotFoundException e) {
+      throw e;
     } catch (Exception e) {
       throw new IllegalStateException("Can't convert attachment JCR node with id " + attachmentId + " to entity", e);
     } finally {

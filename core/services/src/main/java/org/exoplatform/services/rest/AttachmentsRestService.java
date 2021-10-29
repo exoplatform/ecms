@@ -229,6 +229,8 @@ public class AttachmentsRestService implements ResourceContainer {
       } else {
         return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
       }
+    } catch (ObjectNotFoundException e) {
+      return Response.status(Status.NOT_FOUND).build();
     } catch (Exception e) {
       LOG.error("Error when trying to get attachment with id {}: ", attachmentId, e);
       return Response.serverError().build();
