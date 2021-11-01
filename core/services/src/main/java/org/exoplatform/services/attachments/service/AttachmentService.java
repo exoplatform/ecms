@@ -60,7 +60,7 @@ public interface AttachmentService {
    * @param attachmentId attachment jcr uuid
    * @return {@link Attachment}
    */
-  Attachment getAttachmentById(String attachmentId);
+  Attachment getAttachmentById(String attachmentId) throws ObjectNotFoundException;
 
   /**
    * link an attachment with its jcr uuid to a given entity.
