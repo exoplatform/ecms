@@ -1,7 +1,9 @@
 <%
   import org.exoplatform.web.application.JavascriptManager;
   import java.util.HashMap;
-  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;  
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
+  import org.gatein.common.text.EntityEncoder;
+  import org.exoplatform.commons.utils.HTMLEntityEncoder;
   def rcontext = _ctx.getRequestContext();
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   JavascriptManager jsmanager = rcontext.getJavascriptManager();
@@ -97,9 +99,11 @@
 						<% uicomponent.renderChild(2); %>
 						<div class="uiSelectContent">
 							<%
+							EntityEncoder entityEncoder = HTMLEntityEncoder.getInstance();
 							for(entry in uicomponent.getFullHistory()) {
-								String actionLink = uicomponent.event("History", entry.workspace + ":" + entry.path);
-								println "<div class=\"addressItem\" onmouseout=\"this.className = 'addressItem'\" onmouseover=\"this.className = 'selectedAddressItem'\" onblur=\"this.className = 'addressItem'\" onfocus=\"this.className = 'selectedAddressItem'\" onclick=\"$actionLink\">$entry.path</div>" ;
+							    String entryPath = entityEncoder.encode(entry.path);
+								String actionLink = uicomponent.event("History", entry.workspace + ":" + entryPath);
+								println "<div class=\"addressItem\" onmouseout=\"this.className = 'addressItem'\" onmouseover=\"this.className = 'selectedAddressItem'\" onblur=\"this.className = 'addressItem'\" onfocus=\"this.className = 'selectedAddressItem'\" onclick=\"$actionLink\">$entryPath</div>" ;
 							}
 							%>
 						</div>
