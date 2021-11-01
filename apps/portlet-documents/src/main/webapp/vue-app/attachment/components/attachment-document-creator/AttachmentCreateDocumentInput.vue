@@ -109,6 +109,9 @@ export default {
     newDocTitleMaxLengthLabel() {
       return this.$t('attachment.new.document.title.max.length');
     },
+    newDocTitleExistLabel() {
+      return this.$t('attachment.document.title.exist');
+    },
   },
   created() {
     this.$root.$on(`${this.extensionApp}-${this.newDocumentActionExtension}-updated`, this.refreshNewDocumentsActions);
@@ -133,7 +136,7 @@ export default {
         .then((resp) => {
           if (resp && resp.status && resp.status === 409) {
             this.$root.$emit('attachments-notification-alert', {
-              message: 'File with the same name already exists',
+              message: this.newDocTitleExistLabel,
               type: 'error',
             });
             this.$root.$emit('end-loading-attachment-drawer');
