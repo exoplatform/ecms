@@ -17,8 +17,9 @@
           <span class="mt-3">{{ $t(doc.label) }}</span>
         </div>
       </div>
-      <v-text-field 
-        v-if="!NewDocInputHidden"
+      <v-text-field
+        v-show="!NewDocInputHidden"
+        ref="NewDocInputHidden"
         v-model="newDocTitleInput"
         :rules="documentTitleRules"
         :placeholder="$t('documents.untitledDocument')"
@@ -161,6 +162,7 @@ export default {
         });
         return;
       }
+      this.$refs.NewDocInputHidden.focus();
       this.NewDocInputHidden = false;
       this.selectedDocType = doc;
     },
