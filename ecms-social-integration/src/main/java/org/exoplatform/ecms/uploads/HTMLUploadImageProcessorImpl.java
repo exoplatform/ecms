@@ -365,44 +365,63 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
    * Process the given HTML content, export Files and replace URLs in the HTML
    * content with files name
    * 
-   * @param content The HTML content
+   * @param content_ The HTML content
    * @return The updated HTML content with the images names
    */
 
   @Override
-  public String processImagesForExport(String content) throws IllegalArgumentException {
+  public String processImagesForExport(String content_) throws IllegalArgumentException {
     try {
+      Map<String, String> urlToReplaces = new HashMap<>();
+      String content = content_;
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       String restUploadUrl = "/" + portalContainer.getName() + "/" + portalContainer.getRestContextName() + "/images/"
           + getRepositoryName() + "/";
       while (content.contains(restUploadUrl)) {
+        String check_content = content;
         String workspace = content.split(restUploadUrl)[1].split("\"")[0];
-        String nodeIdentifier = workspace.split("/")[1];
+        String nodeIdentifier = workspace.split("/")[1].split("\\?")[0];
         workspace = workspace.split("/")[0];
         String urlToReplace = restUploadUrl + workspace + "/" + nodeIdentifier;
-        Node dataNode = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
-        String fileName = dataNode.getName();
-        Node jcrContentNode = dataNode.getNode("jcr:content");
-        InputStream jcrData = jcrContentNode.getProperty("jcr:data").getStream();
-        File tempFile = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
-        try (OutputStream outputStream = new FileOutputStream(tempFile)) {
-          IOUtils.copy(jcrData, outputStream);
+        try {
+          Node dataNode = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
+          if(dataNode!=null){
+            String fileName = dataNode.getName();
+            Node jcrContentNode = dataNode.getNode("jcr:content");
+            InputStream jcrData = jcrContentNode.getProperty("jcr:data").getStream();
+            File tempFile = new File(System.getProperty("java.io.tmpdir") + File.separator + fileName);
+            try (OutputStream outputStream = new FileOutputStream(tempFile)) {
+              IOUtils.copy(jcrData, outputStream);
+            } catch (Exception e) {
+              throw new IllegalArgumentException("Cannot create the image", e);
+            }
+            urlToReplaces.put(urlToReplace, IMAGE_URL_REPLACEMENT_PREFIX + tempFile.getName() + IMAGE_URL_REPLACEMENT_SUFFIX);
+          }
+          content = content.replace(urlToReplace, "");
         } catch (Exception e) {
-          throw new IllegalArgumentException("Cannot create the image", e);
+          throw new IllegalArgumentException("Cannot create the image from workspace: "+workspace+" node id "+nodeIdentifier,e);
         }
-        content = content.replace(urlToReplace, IMAGE_URL_REPLACEMENT_PREFIX + tempFile.getName() + IMAGE_URL_REPLACEMENT_SUFFIX);
+        if(check_content.equals(content)){
+          break;
+        }
+      }
+      if (!urlToReplaces.isEmpty()) {
+        content_ = replaceUrl(content_, urlToReplaces);
       }
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot process the content", e);
     }
-
-    return content;
+    return content_;
   }
 
   private String replaceUrl(String body, Map<String, String> urlToReplaces) {
     for (String url : urlToReplaces.keySet()) {
       while (body.contains(url)) {
+        String check_content = body;
         body = body.replace(url, urlToReplaces.get(url));
+        if(body.equals(check_content)){
+          break;
+        }
       }
     }
     return body;
@@ -496,6 +515,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     Set<String> processedUploads = new HashSet<>();
     String processedContent = content;
     while (processedContent.contains("src=\"" + IMAGE_URL_REPLACEMENT_PREFIX)) {
+      String check_content = processedContent;
       String fileName = processedContent.split("src=\"//-")[1].split("-//")[0];
 
       if (!processedUploads.contains(fileName)) {
@@ -539,7 +559,9 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
         }
         file.delete();
       }
-
+     if(processedContent.equals(check_content)){
+       break;
+     }
     }
     return processedContent;
   }
