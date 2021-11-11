@@ -34,6 +34,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -97,6 +98,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     String nodeMimeType = Utils.getFileType(node);
     favoriteNode.addMixin(NodetypeConstant.MIX_FILE_TYPE);
     favoriteNode.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
+    if (favoriteNode.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      ((NodeImpl) favoriteNode).getACL().addPermissions(userName, new String[]{PermissionType.REMOVE});
+      favoriteNode.save();
+    }
     userFavoriteNode.save();
     userFavoriteNode.getSession().save();
   }
