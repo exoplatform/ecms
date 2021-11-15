@@ -100,6 +100,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
                                               new IsNotTrashHomeNodeFilter());
 
   private static final String RELATION_PROP = "exo:relation";
+  private static final String SYSTEM = "__system";
 
   private static boolean isRefresh = true;
   private static Map<String, Boolean> versionedRemember = new HashMap<>();
@@ -643,7 +644,12 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       destNodeSystem.save();
       destNode.refresh(true);
     }
+    if (destNodeSystem.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      destNodeSystem.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+    }
+
     if (destNodeSystem.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      ((NodeImpl) destNodeSystem).setPermission(SYSTEM, PermissionType.ALL);
       ((NodeImpl) destNodeSystem).setPermission(userID, PermissionType.ALL);
       destNodeSystem.save();
       destNode.refresh(true);
