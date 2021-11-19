@@ -99,7 +99,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     favoriteNode.addMixin(NodetypeConstant.MIX_FILE_TYPE);
     favoriteNode.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
     if (favoriteNode.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
-      ((NodeImpl) favoriteNode).getACL().addPermissions(userName, new String[]{PermissionType.REMOVE});
+      ((NodeImpl) favoriteNode).setPermission(userName, PermissionType.ALL);
       favoriteNode.save();
     }
     userFavoriteNode.save();
