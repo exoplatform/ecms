@@ -38,11 +38,11 @@ import javax.jcr.*;
 
 public class EntityBuilder {
 
-  private static final Log    LOG                  = ExoLogger.getLogger(EntityBuilder.class);
+  private static final Log    LOG                   = ExoLogger.getLogger(EntityBuilder.class);
 
-  private static final String IDENTITIES_REST_PATH = "/v1/social/identities";                 // NOSONAR
+  private static final String IDENTITIES_REST_PATH  = "/v1/social/identities";                 // NOSONAR
 
-  private static final String IDENTITIES_EXPAND    = "all";
+  private static final String IDENTITIES_EXPAND     = "all";
 
   public static final AttachmentEntity fromAttachment(IdentityManager identityManager, Attachment attachment) {
     return new AttachmentEntity(attachment.getId(),
@@ -64,7 +64,7 @@ public class EntityBuilder {
     );
   }
 
-  public static final Attachment  fromAttachmentNode(RepositoryService repositoryService,
+  public static final Attachment fromAttachmentNode(RepositoryService repositoryService,
                                                     DocumentService documentService,
                                                     LinkManager linkManager,
                                                     String workspace,
@@ -79,9 +79,7 @@ public class EntityBuilder {
       acl.setCanAccess(false);
       privateAttachment.setAcl(acl);
       return privateAttachment;
-    }
-
-    if (attachmentNode == null) {
+    } catch (ItemNotFoundException e) {
       throw new ObjectNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
 

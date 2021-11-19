@@ -198,7 +198,7 @@ export default {
       return this.attachment.uploadProgress < 100;
     },
     attachmentTitle() {
-      return this.attachment && this.attachment.name && unescape(this.attachment.name);
+      return this.attachment && this.attachment.title && unescape(this.attachment.title);
     },
   },
   methods: {

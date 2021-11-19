@@ -12,6 +12,7 @@ import AttachmentsDriveExplorerDrawer from './components/attachments-drive-explo
 import AttachmentsSelectFromDrive from './components/attachments-drive-explorer/AttachmentsSelectFromDrive.vue';
 import ActivityAttachments from './components/activity/ActivityAttachments.vue';
 import ActivityAttachment from './components/activity/ActivityAttachment.vue';
+import AttachmentCreateDocumentInput from './components/attachment-document-creator/AttachmentCreateDocumentInput.vue';
 
 const components = {
   'attachments-drawer': AttachmentsDrawer,
@@ -28,6 +29,7 @@ const components = {
   'attachments-upload-input': AttachmentsUploadInput,
   'activity-attachments': ActivityAttachments,
   'activity-attachment': ActivityAttachment,
+  'attachment-create-document-input': AttachmentCreateDocumentInput,
 };
 
 for (const key in components) {
@@ -39,5 +41,13 @@ import * as attachmentService from '../../js/attachmentService.js';
 if (!Vue.prototype.$attachmentService) {
   window.Object.defineProperty(Vue.prototype, '$attachmentService', {
     value: attachmentService,
+  });
+}
+
+import * as transferRulesService from '../../js//transferRulesService.js';
+
+if (!Vue.prototype.$transferRulesService) {
+  window.Object.defineProperty(Vue.prototype, '$transferRulesService', {
+    value: transferRulesService,
   });
 }

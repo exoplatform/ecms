@@ -17,7 +17,7 @@
       <div v-if="!displayMessageDestinationFolder && schemaFolder.length" class="destinationFolderBreadcrumb d-flex">
         <div
           :title="schemaFolder[0]"
-          class="drive text-sub-title"
+          class="drive text-sub-title flex-shrink-0"
           rel="tooltip"
           data-placement="top">
           {{ schemaFolder[0] }}
@@ -99,7 +99,7 @@
         class="d-flex flex-column">
         <span
           v-for="attachment in newUploadedFiles"
-          :key="attachment.name"
+          :key="attachment.title"
           class="list-complete-item">
           <attachment-item
             :attachment="attachment"

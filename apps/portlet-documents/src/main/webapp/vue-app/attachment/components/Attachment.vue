@@ -54,6 +54,9 @@ export default {
     this.$root.$on('remove-attachment-item', attachment => {
       this.removeAttachedFile(attachment);
     });
+    this.$root.$on('add-new-created-document', file => {
+      this.attachments.push(file);
+    });
     this.$root.$on('add-new-uploaded-file', file => {
       this.attachments.push(file);
     });
@@ -68,6 +71,27 @@ export default {
     });
     document.addEventListener('open-attachments-app-drawer', (event) => {
       this.attachmentAppConfiguration = event.detail;
+      if (!this.attachmentAppConfiguration) {
+        if (eXo.env.portal.spaceDisplayName) {
+          this.attachmentAppConfiguration = {
+            'defaultDrive': {
+              isSelected: true,
+              name: `.spaces.${eXo.env.portal.spaceGroup}`,
+              title: eXo.env.portal.spaceDisplayName,
+            },
+            'defaultFolder': 'Documents',
+          };
+        } else {
+          this.attachmentAppConfiguration = {
+            'defaultDrive': {
+              isSelected: true,
+              name: 'Personal Documents',
+              title: 'Personal Documents'
+            },
+            'defaultFolder': 'Documents',
+          };
+        }
+      }
       this.attachments = [];
       this.openAttachmentsAppDrawer();
       this.initAttachmentEnvironment();
@@ -131,7 +155,7 @@ export default {
         }).catch(e => {
           console.error(e);
           this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.delete.failed').replace('{0}', file.name),
+            message: this.$t('attachments.delete.failed').replace('{0}', file.title),
             type: 'error',
           });
         });

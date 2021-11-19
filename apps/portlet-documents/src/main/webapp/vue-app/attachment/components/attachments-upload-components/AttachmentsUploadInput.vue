@@ -169,7 +169,7 @@ export default {
         newAttachedFiles.push({
           originalFileObject: file,
           fileDrive: this.currentDrive,
-          name: file.name,
+          title: file.name,
           size: file.size,
           mimetype: file.type,
           uploadId: this.getNewUploadId(),
@@ -181,9 +181,9 @@ export default {
         });
       });
 
-      const existingAttachedFiles = newAttachedFiles.filter(file => this.attachments.some(f => f.name === file.name));
+      const existingAttachedFiles = newAttachedFiles.filter(file => this.attachments.some(f => f.title === file.title));
       if (existingAttachedFiles.length > 0) {
-        const existingFiles = existingAttachedFiles.length === 1 ? existingAttachedFiles.map(file => file.name) : existingAttachedFiles.length;
+        const existingFiles = existingAttachedFiles.length === 1 ? existingAttachedFiles.map(file => file.title) : existingAttachedFiles.length;
         let sameFileErrorMessage = existingAttachedFiles.length === 1 ? this.$t('attachments.drawer.sameFile.error') : this.$t('attachments.drawer.sameFiles.error');
         sameFileErrorMessage = sameFileErrorMessage.replace('{0}', `<b> ${existingFiles} </b>`);
         this.$root.$emit('attachments-notification-alert', {
@@ -192,7 +192,7 @@ export default {
         });
       }
 
-      newAttachedFiles.filter(file => !this.attachments.some(f => f.name === file.name)).forEach(newFile => {
+      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).forEach(newFile => {
         this.queueUpload(newFile);
       });
       this.$refs.uploadInput.value = null;

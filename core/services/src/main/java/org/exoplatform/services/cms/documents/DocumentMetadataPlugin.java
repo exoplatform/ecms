@@ -24,8 +24,7 @@ public interface DocumentMetadataPlugin {
    * @throws IOException the IOException
    * @throws DocumentExtensionNotSupportedException the DocumentExtensionNotSupportedException
    */
-  InputStream updateMetadata(WebuiRequestContext context,
-                             String extension,
+  InputStream updateMetadata(String extension,
                              InputStream source,
                              Date created,
                              String creator,

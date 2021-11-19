@@ -20,6 +20,7 @@ import java.security.AccessControlException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -34,15 +35,19 @@ import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.NewDocumentTemplate;
+import org.exoplatform.services.cms.documents.NewDocumentTemplateProvider;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 public class AttachmentServiceImpl implements AttachmentService {
@@ -66,6 +71,8 @@ public class AttachmentServiceImpl implements AttachmentService {
   private LinkManager                      linkManager;
 
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
+
+  private static final Log LOG = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
 
   public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
                                RepositoryService repositoryService,
@@ -142,18 +149,24 @@ public class AttachmentServiceImpl implements AttachmentService {
     });
 
     List<Attachment> existingEntityAttachments;
-    Session session = null;
+    Session systemSession = null,userSession = null;
     try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
-      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+      systemSession = Utils.getSystemSession(sessionProviderService, repositoryService);
+      userSession = Utils.getSession(sessionProviderService, repositoryService);
+
+      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(systemSession,
+                                                                           userSession,
                                                                            Utils.getCurrentWorkspace(repositoryService),
                                                                            entityId,
                                                                            entityType);
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
-      if (session != null) {
-        session.logout();
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+      if (userSession != null) {
+        userSession.logout();
       }
     }
     List<String> existingAttachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
@@ -200,19 +213,25 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     List<Attachment> existingEntityAttachments;
-    Session session = null;
+
+    Session systemSession = null,userSession = null;
 
     try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
-      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+      systemSession = Utils.getSystemSession(sessionProviderService, repositoryService);
+      userSession = Utils.getSession(sessionProviderService, repositoryService);
+      existingEntityAttachments = attachmentStorage.getAttachmentsByEntity(systemSession,
+                                                                           userSession,
                                                                            Utils.getCurrentWorkspace(repositoryService),
                                                                            entityId,
                                                                            entityType);
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
-      if (session != null) {
-        session.logout();
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+      if (userSession != null) {
+        userSession.logout();
       }
     }
     List<String> attachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
@@ -296,18 +315,23 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     List<Attachment> entityAttachments;
-    Session session = null;
+    Session systemSession = null,userSession = null;
     try {
-      session = Utils.getSession(sessionProviderService, repositoryService);
-      entityAttachments = attachmentStorage.getAttachmentsByEntity(session,
+      systemSession = Utils.getSystemSession(sessionProviderService, repositoryService);
+      userSession = Utils.getSession(sessionProviderService, repositoryService);
+      entityAttachments = attachmentStorage.getAttachmentsByEntity(systemSession,
+                                                                   userSession,
                                                                    Utils.getCurrentWorkspace(repositoryService),
                                                                    entityId,
                                                                    entityType);
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     } finally {
-      if (session != null) {
-        session.logout();
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+      if (userSession != null) {
+        userSession.logout();
       }
     }
 
@@ -325,10 +349,11 @@ public class AttachmentServiceImpl implements AttachmentService {
 
   @Override
   public Attachment getAttachmentByIdByEntity(String entityType, long entityId, String attachmentId, long userIdentityId) {
-    Attachment attachment = new Attachment();
+    Attachment attachment;
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
+
       attachment = EntityBuilder.fromAttachmentNode(repositoryService,
                                                     documentService,
                                                     linkManager,
@@ -353,7 +378,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   @Override
-  public Attachment getAttachmentById(String attachmentId) {
+  public Attachment getAttachmentById(String attachmentId) throws ObjectNotFoundException {
     Session session = null;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
@@ -363,6 +388,8 @@ public class AttachmentServiceImpl implements AttachmentService {
                                               Utils.getCurrentWorkspace(repositoryService),
                                               session,
                                               attachmentId);
+    } catch (ObjectNotFoundException e) {
+      throw e;
     } catch (Exception e) {
       throw new IllegalStateException("Can't convert attachment JCR node with id " + attachmentId + " to entity", e);
     } finally {
@@ -420,6 +447,83 @@ public class AttachmentServiceImpl implements AttachmentService {
         session.logout();
       }
     }
+  }
+
+  @Override
+  public Attachment createNewDocument(org.exoplatform.services.security.Identity userIdentity,
+                                      String title,
+                                      String path,
+                                      String pathDrive,
+                                      String templateName) throws Exception {
+    if (userIdentity == null) {
+      throw new IllegalArgumentException("User identity is mandatory");
+    }
+    if (StringUtils.isEmpty(title)) {
+      throw new IllegalArgumentException("New document title is mandatory");
+    }
+    if (StringUtils.isEmpty(path)) {
+      throw new IllegalArgumentException("new document path is mandatory");
+    }
+    if (StringUtils.isEmpty(pathDrive)) {
+      throw new IllegalArgumentException("new document path's drive is mandatory");
+    }
+    if (StringUtils.isEmpty(templateName)) {
+      throw new IllegalArgumentException("template name is mandatory");
+    }
+
+    Session session = null;
+
+    try {
+      session = Utils.getSession(sessionProviderService, repositoryService);
+      Node currentNode =
+                       Utils.getParentFolderNode(session, manageDriveService, nodeHierarchyCreator, nodeFinder, pathDrive, path);
+      if(currentNode.hasNode(title)) {
+        throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");
+      }
+      List<NewDocumentTemplate> documentTemplates = getDocumentTemplateList(userIdentity);
+      NewDocumentTemplate documentTemplate = documentTemplates.stream()
+                                                              .filter(template -> template.getName().equals(templateName))
+                                                              .findFirst()
+                                                              .orElse(null);
+      if (documentTemplate != null) {
+        Node createdDocument = documentService.createDocumentFromTemplate(currentNode, title, documentTemplate);
+        session.save();
+        Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
+                                                documentService,
+                                                linkManager,
+                                                Utils.getCurrentWorkspace(repositoryService),
+                                                session,
+                                                createdDocument.getUUID());
+
+        boolean canView = checkAttachmentJCRPermission(attachment.getId(), PermissionType.READ);
+        boolean canDetach = checkAttachmentJCRPermission(attachment.getId(), PermissionType.REMOVE);
+        boolean canEdit = checkAttachmentJCRPermission(attachment.getId(), PermissionType.SET_PROPERTY);
+        Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDetach, canEdit);
+
+        attachment.setAcl(attachmentACL);
+        return attachment;
+      } else {
+        throw new IllegalStateException("Document template not available with " + templateName + " as a name");
+      }
+    } catch (Exception e) {
+      LOG.error("Error while trying to create a new document", e);
+      throw e;
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
+  }
+
+  private List<NewDocumentTemplate> getDocumentTemplateList(org.exoplatform.services.security.Identity identity) {
+    List<NewDocumentTemplate> options = new ArrayList<>();
+    List<NewDocumentTemplateProvider> templateProviders = documentService.getNewDocumentTemplateProviders();
+    templateProviders.forEach(provider -> {
+      if (provider.getEditor().isAvailableForUser(identity)) {
+        options.addAll(provider.getTemplates());
+      }
+    });
+    return options;
   }
 
   public void addACLPlugin(AttachmentACLPlugin aclPlugin) {

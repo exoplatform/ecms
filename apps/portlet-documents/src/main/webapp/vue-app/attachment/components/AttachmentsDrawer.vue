@@ -22,6 +22,13 @@
             </b>
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
+          <attachment-create-document-input
+            v-if="!entityType && ! entityId"
+            :attachments="attachments"
+            :max-files-count="maxFilesCount"
+            :max-files-size="maxFileSize"
+            :current-drive="currentDrive"
+            :path-destination-folder="pathDestinationFolder" />
           <attachments-upload-input
             :attachments="attachments"
             :max-files-count="maxFilesCount"
@@ -217,6 +224,9 @@ export default {
     });
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
+    this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
+    this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
+    this.$root.$on('add-new-created-document', this.addNewCreatedDocument);
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -264,13 +274,14 @@ export default {
           file.destinationFolder,
           eXo.env.portal.portalName,
           file.uploadId,
-          file.name,
+          file.title,
           eXo.env.portal.language,
           'keep',
           'save'
         ).then((uploadedFile) => {
           if (uploadedFile) {
             uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
+            this.sendDocumentAnalytics(uploadedFile);
             this.addNewUploadedFileToAttachments(file, uploadedFile);
             if (this.entityType && this.entityId) {
               this.linkUploadedAttachmentToEntity(file);
@@ -286,7 +297,7 @@ export default {
           this.processNextQueuedUpload();
           this.$emit('uploadingCountChanged', this.uploadingCount);
           this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.upload.failed').replace('{0}', file.name),
+            message: this.$t('attachments.upload.failed').replace('{0}', file.title),
             type: 'error',
           });
         });
@@ -308,16 +319,17 @@ export default {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
 
-        this.newUploadedFiles.filter(file => file.id === movedFile.id).map(file => {
-          file.pathDestinationFolderForFile = folder;
-          file.fileDrive = newDestinationPathDrive;
-          file.pathDestinationFolderForFile = folder;
-        });
+        const movedAttachmentIndex = this.newUploadedFiles.findIndex(file => file.id === movedFile.id);
+        const movedAttachment = Object.assign({}, this.newUploadedFiles[movedAttachmentIndex]);
+        movedAttachment.pathDestinationFolderForFile = folder;
+        movedAttachment.fileDrive = newDestinationPathDrive;
+        this.newUploadedFiles.splice(movedAttachmentIndex, 1, movedAttachment);
 
         const movedFileIndex = this.uploadedFiles.findIndex(file => file.id === movedFile.id);
-        this.uploadedFiles[movedFileIndex] = updatedMovedFile;
-        this.uploadedFiles[movedFileIndex].drive = folder;
-        this.uploadedFiles[movedFileIndex].date = updatedMovedFile.created;
+        updatedMovedFile.drive = folder;
+        updatedMovedFile.date = updatedMovedFile.created;
+        this.uploadedFiles.splice(movedFileIndex, 1, updatedMovedFile);
+
       });
     },
     deleteDestinationPathForFile(folderId) {
@@ -408,6 +420,7 @@ export default {
       const lastUploadedFiles = this.uploadedFiles.sort((doc1, doc2) => doc2.date - doc1.date).slice(-10);
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(lastUploadedFiles)}}));
       this.uploadedFiles = [];
+      this.$root.$emit('hide-create-new-document-input');
     },
     linkUploadedAttachmentToEntity(file) {
       return this.$attachmentService.linkUploadedAttachmentToEntity(this.entityId, this.entityType, file.id).then((linkedAttachment) => {
@@ -505,6 +518,37 @@ export default {
       if (file && file.id) {
         const fileIndex = this.newUploadedFiles.findIndex(f => f.id === file.id);
         this.newUploadedFiles.splice(fileIndex, 1);
+      }
+    },
+    addNewCreatedDocument(file) {
+      if (file && file.id) {
+        this.sendDocumentAnalytics(file);
+        this.newUploadedFiles.push(file);
+        this.uploadedFiles.push(file);
+      }
+    },
+    sendDocumentAnalytics(file) {
+      if (file && file.UUID || file.id) {
+        const operationOrigin = this.entityType || eXo.env.portal.selectedNodeUri;
+        const documentId = file.UUID || file.id;
+        const fileExtension = file.title.split('.').pop();
+        const fileAnalytics = {
+          'module': 'Drive',
+          'subModule': 'attachment-drawer',
+          'parameters': {
+            'documentId': documentId,
+            'origin': operationOrigin.toLowerCase(),
+            'documentSize': file.size,
+            'documentName': file.title,
+            'documentExtension': fileExtension
+          },
+          'userId': eXo.env.portal.userIdentityId,
+          'spaceId': eXo.env.portal.spaceId,
+          'userName': eXo.env.portal.userName,
+          'operation': 'fileCreated',
+          'timestamp': Date.now()
+        };
+        document.dispatchEvent(new CustomEvent('exo-statistic-message', {detail: fileAnalytics}));
       }
     }
   }

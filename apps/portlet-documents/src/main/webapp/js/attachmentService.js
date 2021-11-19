@@ -320,6 +320,40 @@ export function moveAttachmentToNewPath(newPathDrive, newPath, attachmentId, ent
     }
   });
 }
+export function createNewDoc(title, templateName, pathDrive, path) {
+  const formData = new FormData();
+
+  if (title) {
+    formData.append('title', title);
+  }
+  if (templateName) {
+    formData.append('templateName', templateName);
+  }
+  if (pathDrive) {
+    formData.append('pathDrive', pathDrive);
+  }
+  if (path) {
+    formData.append('path', path);
+  }
+
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/newDoc`, {
+    credentials: 'include',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams(formData).toString(),
+  }).then((resp) => {
+    if (!resp || !resp.ok) {
+      if (resp.status === 409) {
+        return resp;
+      }
+      throw new Error('Error creating new document');
+    } else {
+      return resp.json();
+    }
+  });
+}
 
 export function convertXmlToJson(xml) {
   // Create the return object
