@@ -829,7 +829,7 @@ public class DocumentServiceImpl implements DocumentService {
                                          Utils.getFileType(originalDocumentNode),
                                          Utils.getDate(documentNode).getTime().getTime(),
                                          getFilePreviewBreadCrumb(documentNode),
-                                         getLinkInDocumentsApp(originalDocumentNode.getPath()),
+                                         getLinkInDocumentsApp(documentNode.getPath()),
                                          getDownloadUri(originalDocumentNode),
                                          VersionHistoryUtils.getVersion(originalDocumentNode),
                                          Utils.fileSize(originalDocumentNode),
