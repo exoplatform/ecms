@@ -22,7 +22,7 @@
   <Comment>
     <view>
       <label>
-        <postedBy>Dernier commentaire posté par</postedBy>
+        <postedBy>Dernier commentaire par</postedBy>
         <at>le</at>
         <comments>Commentaires</comments>
         <show-comments>Afficher les commentaires</show-comments>
@@ -30,7 +30,7 @@
         <comment-by>Commentée par</comment-by>
         <email>Email</email>
         <site>Site</site>
-        <lastComment>Dernier commentaire posté par {user} à {time}</lastComment>
+        <lastComment>Dernier commentaire par {user} à {time}</lastComment>
         <Less_Than_A_Minute>il y a moins d'une minute</Less_Than_A_Minute>
         <About_A_Minute>il y a une minute</About_A_Minute>
         <About_x_Minutes>il y a environ {0} minutes</About_x_Minutes>
