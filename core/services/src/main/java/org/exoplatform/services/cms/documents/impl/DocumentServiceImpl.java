@@ -755,13 +755,13 @@ public class DocumentServiceImpl implements DocumentService {
       String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
       String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
               : null;
-      if (editorsRuntimeId.equals(currentRuntumeId)) {
+      if (currentRuntumeId != null && editorsRuntimeId.equals(currentRuntumeId)) {
         return provider;
       } else {
         String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
+        Session session = systemSession;
         WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
           try {
-            Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
             Node tagetNode = session.getNodeByUUID(uuid);
             if (tagetNode.isNodeType(EXO_SYMLINK)) {
               tagetNode = linkManager.getTarget(tagetNode);
