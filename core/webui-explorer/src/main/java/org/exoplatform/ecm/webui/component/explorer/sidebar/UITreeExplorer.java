@@ -94,9 +94,9 @@ import org.exoplatform.services.wcm.search.base.LazyPageList;
 @ComponentConfig(
                  template =  "app:/groovy/webui/component/explorer/sidebar/UITreeExplorer.gtmpl",
                  events = {
-                     @EventConfig(listeners = UITreeExplorer.ExpandActionListener.class),
-                     @EventConfig(listeners = UITreeExplorer.CollapseActionListener.class),
-                     @EventConfig(listeners = UITreeExplorer.ExpandTreeActionListener.class)
+                     @EventConfig(listeners = UITreeExplorer.ExpandActionListener.class, csrfCheck = false),
+                     @EventConfig(listeners = UITreeExplorer.CollapseActionListener.class, csrfCheck = false),
+                     @EventConfig(listeners = UITreeExplorer.ExpandTreeActionListener.class, csrfCheck = false)
                  }
     )
 
