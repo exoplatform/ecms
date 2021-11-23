@@ -54,7 +54,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/sidebar/UISideBar.gtmpl",
     events = {
-        @EventConfig(listeners = UISideBar.CloseActionListener.class)
+        @EventConfig(listeners = UISideBar.CloseActionListener.class, csrfCheck = false)
     }
 )
 public class UISideBar extends UIContainer {

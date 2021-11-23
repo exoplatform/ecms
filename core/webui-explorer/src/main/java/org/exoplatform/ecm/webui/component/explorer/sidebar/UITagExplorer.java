@@ -64,7 +64,7 @@ import java.util.Map.Entry;
 @ComponentConfigs( {
 @ComponentConfig(template = "app:/groovy/webui/component/explorer/sidebar/UITagExplorer.gtmpl",
                  events = {
-    @EventConfig(listeners = UITagExplorer.ViewTagActionListener.class),
+    @EventConfig(listeners = UITagExplorer.ViewTagActionListener.class, csrfCheck = false),
     @EventConfig(listeners = UITagExplorer.EditTagsActionListener.class) }),
 @ComponentConfig(type = UIPageIterator.class, id = "PublicTagPageIterator",
                  template = "app:/groovy/webui/component/explorer/sidebar/UITagPageIterator.gtmpl",
