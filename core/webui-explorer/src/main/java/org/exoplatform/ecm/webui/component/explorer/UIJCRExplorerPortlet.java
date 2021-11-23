@@ -31,6 +31,8 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.services.cms.documents.AutoVersionService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -53,6 +55,7 @@ import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
+import org.exoplatform.webui.exception.CSRFException;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 
 import javax.jcr.*;
@@ -567,5 +570,19 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       }
     return true;
   }
+
+  @Override
+  public void processAction(WebuiRequestContext context) throws Exception {
+    try {
+      super.processAction(context);
+    } catch (CSRFException e) {
+      UIPortalApplication portalApplication = Util.getUIPortalApplication();
+      PortalRequestContext portalRequestContext = (PortalRequestContext) context.getParentAppRequestContext();
+      UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
+      portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS);
+      portalRequestContext.ignoreAJAXUpdateOnPortlets(true);
+    }
+  }
+
 }
 
