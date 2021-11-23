@@ -68,12 +68,12 @@ import org.exoplatform.webui.form.UIFormStringInput;
     lifecycle = UIFormLifecycle.class,
     template =  "app:/groovy/webui/component/explorer/control/UIAddressBar.gtmpl",
     events = {
-      @EventConfig(listeners = UIAddressBar.ChangeNodeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIAddressBar.BackActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIAddressBar.HistoryActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIAddressBar.ChangeViewActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIAddressBar.SimpleSearchActionListener.class),
-      @EventConfig(listeners = UIAddressBar.RefreshSessionActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UIAddressBar.ChangeNodeActionListener.class, phase = Phase.DECODE, csrfCheck = false),
+      @EventConfig(listeners = UIAddressBar.BackActionListener.class, phase = Phase.DECODE, csrfCheck = false),
+      @EventConfig(listeners = UIAddressBar.HistoryActionListener.class, phase = Phase.DECODE, csrfCheck = false),
+      @EventConfig(listeners = UIAddressBar.ChangeViewActionListener.class, phase = Phase.DECODE, csrfCheck = false),
+      @EventConfig(listeners = UIAddressBar.SimpleSearchActionListener.class, csrfCheck = false),
+      @EventConfig(listeners = UIAddressBar.RefreshSessionActionListener.class, phase = Phase.DECODE, csrfCheck = false)
     }
 )
 

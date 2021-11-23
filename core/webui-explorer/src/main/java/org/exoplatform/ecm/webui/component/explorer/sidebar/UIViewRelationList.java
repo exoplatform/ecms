@@ -50,7 +50,7 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/sidebar/UIViewRelationList.gtmpl",
-    events = {@EventConfig(listeners = UIViewRelationList.ChangeNodeActionListener.class)}
+    events = {@EventConfig(listeners = UIViewRelationList.ChangeNodeActionListener.class, csrfCheck = false)}
 )
 
 public class UIViewRelationList extends UIContainer{
