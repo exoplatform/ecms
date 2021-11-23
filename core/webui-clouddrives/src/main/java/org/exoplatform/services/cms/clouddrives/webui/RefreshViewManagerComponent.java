@@ -51,7 +51,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  *          pnedonosko $
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
-    @EventConfig(listeners = RefreshViewManagerComponent.RefreshViewActionListener.class) })
+    @EventConfig(listeners = RefreshViewManagerComponent.RefreshViewActionListener.class, csrfCheck = false) })
 public class RefreshViewManagerComponent extends UIAbstractManagerComponent {
 
   /** The Constant LOG. */

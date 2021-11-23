@@ -44,7 +44,7 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
     template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(listeners = UIDocumentFilterForm.SaveActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIDocumentFilterForm.CancelActionListener.class)
+      @EventConfig(phase = Phase.DECODE, listeners = UIDocumentFilterForm.CancelActionListener.class, csrfCheck = false)
     }
 )
 
