@@ -37,7 +37,7 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/sidebar/UITreeNodePageIterator.gtmpl",
-    events = @EventConfig(listeners = UITreeNodePageIterator.ShowPageActionListener.class )
+    events = @EventConfig(listeners = UITreeNodePageIterator.ShowPageActionListener.class, csrfCheck = false )
 )
 public class UITreeNodePageIterator extends UIPageIterator {
   private String selectedPath_ ;
