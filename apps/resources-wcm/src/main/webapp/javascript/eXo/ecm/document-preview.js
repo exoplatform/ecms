@@ -19,6 +19,7 @@
         isWebContent: false
       },
       showComments: true,
+      showOpenInFolderButton: true,
       user: {
         username: null,
         fullname: null,
@@ -362,10 +363,12 @@
         html +='<div class="btn-group">' +
             '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
             '    <i class="uiVerticalDots"></i></button>' +
-            '    <ul class="dropdown-menu" role="menu">' +
-            '      <li><div class="openBtn">' +
+            '    <ul class="dropdown-menu" role="menu">';
+        if (this.settings.showOpenInFolderButton) {
+          html+='      <li><div class="openBtn">' +
             '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
             '                </div></li>';
+        }
 
         if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
             if (this.settings.doc.downloadUrl.includes('javascript:')) {
@@ -525,10 +528,12 @@
                     '<div class="btn-group">' +
                     '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
                     '    <i class="uiVerticalDots"></i></button>' +
-                    '    <ul class="dropdown-menu" role="menu">' +
-                    '      <li><div class="openBtn">' +
+                    '    <ul class="dropdown-menu" role="menu">';
+                if (this.settings.showOpenInFolderButton) {
+                  html+='      <li><div class="openBtn">' +
                     '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
                     '                </div></li>';
+                }
                 if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
                   if (this.settings.doc.downloadUrl.includes('javascript:')) {
                     html +='      <li><div class="downloadBtn">' +
