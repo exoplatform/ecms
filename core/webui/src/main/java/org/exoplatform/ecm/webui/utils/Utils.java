@@ -1060,53 +1060,28 @@ public class Utils {
   public static String getTitleWithSymlink(Node node) throws Exception {
     String title = null;
     Node nProcessNode = node;
-    if (title == null) {
-      nProcessNode = node;
-      if (nProcessNode.hasProperty("exo:title")) {
-        title = nProcessNode.getProperty("exo:title").getValue().getString();
-      }
-      if (nProcessNode.hasNode("jcr:content")) {
-        Node content = nProcessNode.getNode("jcr:content");
-        if (content.hasProperty("dc:title")) {
-          try {
-            title = content.getProperty("dc:title").getValues()[0].getString();
-          } catch (Exception e) {
-            title = null;
-          }
-        }
-      }
-      if (title != null)
-        title = title.trim();
-    }
-    if (title != null && title.length() > 0)
-      return ContentReader.getXSSCompatibilityContent(title);
     if (isSymLink(node)) {
-      nProcessNode = getNodeSymLink(nProcessNode);
-      if (nProcessNode == null) {
-        nProcessNode = node;
-      }
-      if (nProcessNode.hasProperty("exo:title")) {
-        title = nProcessNode.getProperty("exo:title").getValue().getString();
-      }
-      if (nProcessNode.hasNode("jcr:content")) {
-        Node content = nProcessNode.getNode("jcr:content");
-        if (content.hasProperty("dc:title")) {
-          try {
-            title = content.getProperty("dc:title").getValues()[0].getString();
-          } catch (Exception e) {
-            title = null;
-          }
+      nProcessNode = Optional.ofNullable(getNodeSymLink(node)).orElse(node);
+    }
+    if (nProcessNode.hasProperty("exo:title")) {
+      title = nProcessNode.getProperty("exo:title").getValue().getString();
+    }
+    if (title == null && nProcessNode.hasNode("jcr:content")) {
+      Node content = nProcessNode.getNode("jcr:content");
+      if (content.hasProperty("dc:title")) {
+        try {
+          title = content.getProperty("dc:title").getValues()[0].getString();
+        } catch (Exception e) {
+          title = null;
         }
       }
-      if (title != null) {
-        title = title.trim();
-        if (title.length() == 0)
-          title = null;
-      }
     }
-
-    if (title == null)
+    if (title == null) {
       title = nProcessNode.getName();
+    }
+    if (title != null && title.length() > 0) {
+      title = title.trim();
+    }
     return ContentReader.getXSSCompatibilityContent(title);
   }
 
