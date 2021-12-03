@@ -95,12 +95,8 @@
   }
 
   ShareContent.prototype.doShare = function(){
-    gj(".uiShareDocuments.resizable #textAreaInput").exoMentions('val', function(value) {
-      value = value.replace(/<br\/?>/gi, '\n').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>');
-      gj(".uiShareDocuments.resizable #textAreaInput").val(value);
-      gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
-      gj("#shareActionBtn").trigger("click");
-    });
+    gj(".PopupContent .uiActionBorder .btn-primary").attr("disabled","disabled");
+    gj("#shareActionBtn").trigger("click");
   }
 
   /**
