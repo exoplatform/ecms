@@ -89,28 +89,6 @@
         }
       }
     });
-
-    gj(".uiShareDocuments.resizable #textAreaInput").exoMentions({
-      onDataRequest : function(mode, query, callback) {
-        var url = window.location.protocol + '//' + window.location.host + '/' + eXo.env.portal.rest + '/social/people/getprofile/data.json?search=' + query;
-        gj.getJSON(url, function(responseData) {
-          responseData = _.filter(responseData, function(item) {
-            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-          callback.call(this, responseData);
-        });
-      },
-      //idAction : 'ShareButton',
-      actionLink : 'AttachButton',
-      actionMention : 'mentionButton',
-      elasticStyle : {
-        maxHeight : '80px',
-        minHeight : '80px',
-        marginButton: '4px',
-        enableMargin: false
-      },
-      messages : window.eXo.social.I18n.mentions
-    });
     if (gj("#userSuggester").val() != "") {
       eXo.ecm.ShareContent.checkUpdatedEntry();
     }
