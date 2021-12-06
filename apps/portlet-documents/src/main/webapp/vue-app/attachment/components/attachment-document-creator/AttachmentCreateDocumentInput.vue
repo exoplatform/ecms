@@ -13,7 +13,11 @@
           :key="doc.id"
           class="d-flex flex-column align-center clickable"
           @click="showNewDocInput(doc)">
-          <i :class="doc.icon" class="uiIcon32x32"></i>
+          <v-icon
+            :color="doc.color"
+            class="uiIcon32x32">
+            {{ doc.icon }}
+          </v-icon>
           <span class="mt-3">{{ $t(doc.label) }}</span>
         </div>
       </div>
