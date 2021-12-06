@@ -89,7 +89,7 @@ export default {
       newDocumentActionExtension: 'new-document-action',
       newDocumentActions: {},
       MAX_DOCUMENT_TITLE_LENGTH: 510,
-      documentTitleRules: [title => title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
+      documentTitleRules: [title => title && title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
     };
   },
   computed: {

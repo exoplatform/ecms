@@ -579,9 +579,9 @@ export default {
               this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
               this.driveExplorerInitializing = false;
             });
-            //else if no default folder
+            //else if no default folder create file in root folder
           } else {
-            this.$root.$emit('attachments-default-folder-path-initialized', '', this.currentDrive.title);
+            this.$root.$emit('attachments-default-folder-path-initialized', '/', this.currentDrive.title);
           }
         });
       } else {
