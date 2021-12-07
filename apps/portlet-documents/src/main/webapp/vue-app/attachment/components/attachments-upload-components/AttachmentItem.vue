@@ -18,7 +18,11 @@
         v-else
         :class="smallAttachmentIcon && 'smallAttachmentIcon'"
         class="fileType">
-        <i :class="getIconClassFromFileMimeType(attachment.mimetype)"></i>
+        <v-icon
+          size="41"
+          :color="icon.color">
+          {{ icon.class }}
+        </v-icon>
       </div>
     </v-list-item-avatar>
     <v-list-item-content @click="openPreview()">
@@ -200,18 +204,67 @@ export default {
     attachmentTitle() {
       return this.attachment && this.attachment.title && unescape(this.attachment.title);
     },
-  },
-  methods: {
-    getIconClassFromFileMimeType: function (fileMimeType) {
-      if (fileMimeType) {
-        const fileMimeTypeClass = fileMimeType.replace(/\./g, '').replace('/', '').replace('\\', '');
-        return this.attachment.isCloudFile
-          ? `uiIcon32x32${fileMimeType.replace(/[/.]/g, '')}`
-          : `uiIconFileType${fileMimeTypeClass} uiIconFileTypeDefault`;
+    icon() {
+      const type = this.attachment && this.attachment.mimetype || '';
+      if (type.includes('pdf')) {
+        return {
+          class: 'fas fa-file-pdf',
+          color: '#FF0000',
+        };
+      } else if (type.includes('presentation') || type.includes('powerpoint')) {
+        return {
+          class: 'fas fa-file-powerpoint',
+          color: '#CB4B32',
+        };
+      } else if (type.includes('sheet') || type.includes('excel') || type.includes('csv')) {
+        return {
+          class: 'fas fa-file-excel',
+          color: '#217345',
+        };
+      } else if (type.includes('word') || type.includes('opendocument') || type.includes('rtf') ) {
+        return {
+          class: 'fas fa-file-word',
+          color: '#2A5699',
+        };
+      } else if (type.includes('plain')) {
+        return {
+          class: 'fas fa-file-alt',
+          color: '#385989',
+        };
+      } else if (type.includes('image')) {
+        return {
+          class: 'fas fa-file-image',
+          color: '#999999',
+        };
+      } else if (type.includes('video') || type.includes('octet-stream') || type.includes('ogg')) {
+        return {
+          class: 'fas fa-file-video',
+          color: '#79577A',
+        };
+      } else if (type.includes('zip') || type.includes('war') || type.includes('rar')) {
+        return {
+          class: 'fas fa-file-archive',
+          color: '#717272',
+        };
+      } else if (type.includes('illustrator') || type.includes('eps')) {
+        return {
+          class: 'fas fa-file-contract',
+          color: '#E79E24',
+        };
+      } else if (type.includes('html') || type.includes('xml') || type.includes('css')) {
+        return {
+          class: 'fas fa-file-code',
+          color: '#6cf500',
+        };
       } else {
-        return 'uiIconFileTypeDefault';
+        return {
+          class: 'fas fa-file',
+          color: '#578DC9',
+        };
       }
     },
+  },
+  methods: {
     detachFile() {
       if (this.canDetachAttachment) {
         this.$root.$emit('remove-attachment-item', this.attachment);
