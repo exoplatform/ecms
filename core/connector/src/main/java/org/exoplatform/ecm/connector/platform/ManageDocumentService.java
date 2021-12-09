@@ -146,7 +146,9 @@ public class ManageDocumentService implements ResourceContainer {
     EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
 
   private static final String  PRIVATE              = "Private";
-  
+
+  private static final String  NEW_APP              = "newApp";
+
   /** The limit size of uploaded file. */
   private int limit;
 
@@ -829,7 +831,7 @@ public class ManageDocumentService implements ResourceContainer {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
+      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language,NEW_APP , siteName, userId, existenceAction);
     }
     return fileUploadHandler.control(uploadId, action);
   }
