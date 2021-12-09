@@ -31,6 +31,7 @@ import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.portlet.PortletRequest;
 
+import org.exoplatform.commons.utils.MailUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
@@ -110,6 +111,8 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
     WatchCloudDocumentServiceImpl watchService =
                                                (WatchCloudDocumentServiceImpl) WCMCoreUtils.getService(WatchDocumentService.class);
     MessageConfig messageConfig = watchService.getMessageConfig();
+    String sender = MailUtils.getSenderName() + "<" + MailUtils.getSenderEmail() + ">";
+    messageConfig.setSender(sender);
     List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
     for (String receiver : emailList) {
       try {
