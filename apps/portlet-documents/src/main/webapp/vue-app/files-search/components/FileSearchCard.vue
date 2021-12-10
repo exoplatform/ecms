@@ -53,8 +53,7 @@ export default {
       return $('<div />').html(this.excerptHtml).text();
     },
   },
-  mounted() {
-  { 
+  mounted() { 
     if (this.result && this.excerptTitle) {
     // eslint-disable-next-line vue/no-mutating-props
       this.$set(this.result,'excerptTitle', this.excerptTitle);
