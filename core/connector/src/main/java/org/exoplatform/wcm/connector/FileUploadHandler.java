@@ -112,6 +112,14 @@ public class FileUploadHandler {
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
 
+  /** The Constant UPLOAD_DOC_NEW_APP. */
+  public static final String UPLOAD_DOC_NEW_APP          = "exo.upload.doc.newApp";
+
+  /** The Constant String UPLOAD_DOC_OLD_APP. */
+  public static final String UPLOAD_DOC_OLD_APP          = "exo.upload.doc.oldApp";
+
+  private static final String  OLD_APP              = "oldApp";
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
   
@@ -351,6 +359,7 @@ public class FileUploadHandler {
    * @param uploadId the upload id
    * @param fileName the file name
    * @param language the language
+   * @param source the source
    *
    * @return the response
    *
@@ -361,9 +370,10 @@ public class FileUploadHandler {
                                String uploadId,
                                String fileName,
                                String language,
+                               String source,
                                String siteName,
                                String userId) throws Exception {
-    return saveAsNTFile(workspaceName, parent, uploadId, fileName, language, siteName, userId, KEEP_BOTH);
+    return saveAsNTFile(workspaceName, parent, uploadId, fileName, language,source, siteName, userId, KEEP_BOTH);
   }
   
   /**
@@ -373,6 +383,7 @@ public class FileUploadHandler {
    * @param uploadId the upload id
    * @param fileName the file name
    * @param language the language
+   * @param source the source
    *
    * @return the response
    *
@@ -383,10 +394,11 @@ public class FileUploadHandler {
                                String uploadId,
                                String fileName,
                                String language,
+                               String source,
                                String siteName,
                                String userId,
                                String existenceAction) throws Exception {
-    return saveAsNTFile(workspaceName, parent, uploadId, fileName, language, siteName, userId, existenceAction,false);
+    return saveAsNTFile(workspaceName, parent, uploadId, fileName, language,source , siteName, userId, existenceAction,false);
   }
   /**
    * Save already uploaded file (identified by uploadId) as nt file.
@@ -405,6 +417,7 @@ public class FileUploadHandler {
    * @param uploadId the upload id
    * @param fileName the file name
    * @param language the language
+   * @param source the source
    *
    * @return the response
    *
@@ -415,6 +428,7 @@ public class FileUploadHandler {
                                String uploadId,
                                String fileName,
                                String language,
+                               String source,
                                String siteName,
                                String userId,
                                String existenceAction,
@@ -555,6 +569,12 @@ public class FileUploadHandler {
 
       // return uploaded file
       Document doc = getUploadedFile(workspaceName, file, mimetype);
+      String eventName = source.equals(OLD_APP) ? UPLOAD_DOC_OLD_APP : UPLOAD_DOC_NEW_APP;
+      try {
+        listenerService.broadcast(eventName, userId, file);
+      } catch (Exception e) {
+        LOG.error("Error broadcast upload document event", e);
+      }
       return Response.ok(new DOMSource(doc), MediaType.TEXT_XML)
           .cacheControl(cacheControl)
           .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
