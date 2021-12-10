@@ -135,6 +135,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(DriverConnector.class.getName());
 
+  private static final String  OLD_APP              = "oldApp";
+
   /** The limit. */
   private int limit;
 
@@ -982,11 +984,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
-      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
+      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language,OLD_APP , siteName, userId, existenceAction);
     }else if(FileUploadHandler.SAVE_NEW_VERSION_ACTION.equals(action)){
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
-      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction,true);
+      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language,OLD_APP , siteName, userId, existenceAction,true);
     }
     return fileUploadHandler.control(uploadId, action);
   }
