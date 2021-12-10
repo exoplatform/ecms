@@ -569,12 +569,7 @@ public class FileUploadHandler {
 
       // return uploaded file
       Document doc = getUploadedFile(workspaceName, file, mimetype);
-      String eventName = null;
-      if (source.equals(OLD_APP)){
-        eventName = UPLOAD_DOC_OLD_APP;
-      }else {
-        eventName = UPLOAD_DOC_NEW_APP;
-      }
+      String eventName = source.equals(OLD_APP) ? UPLOAD_DOC_OLD_APP : UPLOAD_DOC_NEW_APP;
       try {
         listenerService.broadcast(eventName, userId, file);
       } catch (Exception e) {
