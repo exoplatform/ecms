@@ -110,18 +110,18 @@ import java.util.regex.Matcher;
  */
 @ComponentConfig(
     events = {
-        @EventConfig(listeners = UIDocumentInfo.ChangeNodeActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.ViewNodeActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.SortActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.ChangeNodeActionListener.class, csrfCheck = false),
+        @EventConfig(listeners = UIDocumentInfo.ViewNodeActionListener.class, csrfCheck = false),
+        @EventConfig(listeners = UIDocumentInfo.SortActionListener.class, csrfCheck = false),
         @EventConfig(listeners = UIDocumentInfo.VoteActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.ChangeLanguageActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.DownloadActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.DownloadActionListener.class, csrfCheck = false),
         @EventConfig(listeners = UIDocumentInfo.StarClickActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.ShowPageActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.SortTimelineASCActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.SortTimelineDESCActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.ExpandTimelineCatergoryActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.CollapseTimelineCatergoryActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.ExpandTimelineCatergoryActionListener.class, csrfCheck = false),
+        @EventConfig(listeners = UIDocumentInfo.CollapseTimelineCatergoryActionListener.class, csrfCheck = false),
         @EventConfig(listeners = UIDocumentInfo.SwitchToAudioDescriptionActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.SwitchToOriginalActionListener.class),
         @EventConfig(listeners = UIBaseNodePresentation.OpenDocInDesktopActionListener.class)
