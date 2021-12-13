@@ -113,16 +113,16 @@ export default {
           workspace: 'collaboration',
           path: this.document.nodePath || this.document.path,
           title: this.document.title,
-          downloadUrl: this.document.downloadUrl,
-          openUrl: this.document.url || this.document.openUrl,
-          breadCrumb: this.document.previewBreadcrumb,
-          fileInfo: this.fileInfo(),
+          icon: this.document.icon,
           size: this.document.size,
+          openUrl: this.document.url || this.document.openUrl,
+          downloadUrl: this.document.downloadUrl,
         },
         version: {                                                                 
           number: this.document.version 
         },
-        showComments: false
+        showComments: false,
+        showOpenInFolderButton: false,
       });
     }
   }
