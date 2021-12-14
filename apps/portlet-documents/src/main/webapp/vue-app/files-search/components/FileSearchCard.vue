@@ -56,7 +56,7 @@ export default {
   mounted() {
     if (this.result && this.excerptTitle) {
       // eslint-disable-next-line vue/no-mutating-props
-      this.result.title = this.excerptTitle;
+      this.$set(this.result,'excerptTitle', this.excerptTitle);
     }
     this.computeEllipsis();
   },
