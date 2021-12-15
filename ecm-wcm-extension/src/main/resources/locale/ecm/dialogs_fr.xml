@@ -63,7 +63,7 @@
         <width>Largeur</width>
         <height>Hauteur</height>
         <content>#{word.content}</content>
-        <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et uploader un autre fichier à partir d'ici.</re-upload>
+        <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et charger un autre fichier à partir d'ici.</re-upload>
       </label>
     </dialog>
   </File>

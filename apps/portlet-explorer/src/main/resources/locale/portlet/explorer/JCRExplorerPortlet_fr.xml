@@ -217,7 +217,7 @@
       <UIRenameForm>Renommer</UIRenameForm>
       <UIActionContainer>Modifier</UIActionContainer>
       <UIFolderForm>Nouveau Dossier</UIFolderForm>
-      <UIUploadManager>Uploader un fichier</UIUploadManager>
+      <UIUploadManager>Charger un fichier</UIUploadManager>
       <UIReferencesList>Liste des références</UIReferencesList>
       <UIExportNode>Exporter</UIExportNode>
       <UINodeTypeInfo>Information sur le type de noeud</UINodeTypeInfo>
@@ -272,7 +272,7 @@
     <label>
       <name>Nom</name>
       <textToModify>Texte à modifier</textToModify>
-      <fileToUpload>Uploader un nouveau contenu pour ce document (doit avoir le même mime-type)</fileToUpload>
+      <fileToUpload>Charger un nouveau contenu pour ce document (doit avoir le même mime-type)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -285,7 +285,7 @@
       <AddFolder>Nouveau dossier</AddFolder>
       <AddDocument>Nouveau contenu</AddDocument>
       <EditDocument>Modifier</EditDocument>
-      <Upload>Uploader</Upload>
+      <Upload>Charger</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <WatchDocument>Suivre</WatchDocument>
@@ -585,7 +585,7 @@
       <Custom>Personnaliser</Custom>
       <AddFolder>Nouveau Dossier</AddFolder>
       <AddDocument>Nouveau contenu</AddDocument>
-      <Upload>Uploader des fichiers</Upload>
+      <Upload>Charger des fichiers</Upload>
       <MoveNode>Déplacer</MoveNode>
       <UnLock>Déverrouiller</UnLock>
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
@@ -600,7 +600,7 @@
       <Download>Télécharger</Download>
       <OpenDocument>Editer à Distance</OpenDocument>
       <EditProperty>Modifier les propriétés</EditProperty>
-      <UploadNewVersion>Uploader une nouvelle version</UploadNewVersion>
+      <UploadNewVersion>Charger une nouvelle version</UploadNewVersion>
       <CreateNewVersion>Enregistrer une version</CreateNewVersion>
     </event>
   </ECMContextMenu>
@@ -639,7 +639,7 @@
       <UIPropertyTab>Propriétés</UIPropertyTab>
       <UIMetadataTab>Metadonnées</UIMetadataTab>
       <UIPropertyForm>Ajouter une Propriété</UIPropertyForm>
-      <UIUploadContent>Information sur le fichier uploadé</UIUploadContent>
+      <UIUploadContent>Information sur le fichier chargé</UIUploadContent>
       <UIJCRAdvancedSearch>Requêter</UIJCRAdvancedSearch>
       <UISavedQuery>Requêtes Enregistrées</UISavedQuery>
       <AdvancedSearchResult>Résultats</AdvancedSearchResult>
@@ -1511,7 +1511,7 @@
       <format>Format</format>
       <systemView>Vue Système</systemView>
       <documentView>Vue Document</documentView>
-      <upload>Uploader</upload>
+      <upload>Charger un fichier</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1521,7 +1521,7 @@
     <msg>
       <import-successful>Import effectué avec succès.</import-successful>
       <filename-invalid>Veuillez sélectionner un fichier xml pour l'importer.</filename-invalid>
-      <filetype-error>Import impossible. Le fichier uploadé est probablement corrompu.</filetype-error>
+      <filetype-error>Import impossible. Le fichier chargé est probablement corrompu.</filetype-error>
       <xml-invalid>Il y a un caractère non valide à la position [ligne, colonne]:{0} dans le fichier {1}</xml-invalid>
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
       <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
@@ -2169,7 +2169,7 @@
       <access-denied>Accès refusé. Vous n'avez pas la permission d'ajouter une vignette.</access-denied>
       <confirm-delete>Voulez-vous supprimer cette vignette?</confirm-delete>
       <is-checked-in>Cet élément est checked-in. Veuillez faire un check-out avant de faire toute action.</is-checked-in>
-      <fileName-error>Veuillez sélectionner un fichier à uploader.</fileName-error>
+      <fileName-error>Veuillez sélectionner un fichier à charger.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Supprimer cette vignette</remove-thumbnail>
@@ -2233,7 +2233,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <uploadFileSizeLimitMB>Taille maximale des fichiers uploadés (Mo)</uploadFileSizeLimitMB>
+      <uploadFileSizeLimitMB>Taille maximale des fichiers chargés (Mo)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Accès direct aux lecteurs</isDirectlyDrive>
       <driveName>Nom du Lecteur</driveName>
       <usecase>Type d'accès</usecase>
@@ -2570,7 +2570,7 @@
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Veuillez uploader le fichier avant d'ajouter une catégorie.</upload-not-null>
+      <upload-not-null>Veuillez charger le fichier avant d'ajouter une catégorie.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
@@ -3124,7 +3124,7 @@
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
     <msg>
-      <wrong-mimetype>Le type Mime {0} n'est pas autorisé pour le champ {1}. Veuillez uploader un autre fichier</wrong-mimetype>
+      <wrong-mimetype>Le type Mime {0} n'est pas autorisé pour le champ {1}. Veuillez charger un autre fichier</wrong-mimetype>
     </msg>
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
@@ -3194,9 +3194,9 @@
     <Keep>Garder les deux</Keep>
     <Replace>Remplacer</Replace>
     <Canceled>Annulé</Canceled>
-      <UploadNewVersion>Uploader une nouvelle version</UploadNewVersion>
+      <UploadNewVersion>Charger une version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
-    <AbortAllConfirmation>Voulez vous annuler tous les fichiers en cours de transfert?</AbortAllConfirmation>
+    <AbortAllConfirmation>Voulez vous annuler tous les fichiers en cours de chargement?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>

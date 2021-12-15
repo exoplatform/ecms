@@ -101,7 +101,7 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>Por Archivo</AutoViewerMode>
+      <AutoViewerMode>Por carpeta</AutoViewerMode>
       <ManualViewerMode>Por contenido</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
