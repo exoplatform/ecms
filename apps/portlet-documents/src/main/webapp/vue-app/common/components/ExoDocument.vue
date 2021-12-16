@@ -3,7 +3,6 @@
     <v-list-item-icon class="mx-1">
       <v-icon
         :color="documentIcon.color"
-        x-large
         size="35">
         {{ documentIcon.ico }}
       </v-icon>
