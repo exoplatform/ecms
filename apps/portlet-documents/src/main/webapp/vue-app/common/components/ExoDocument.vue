@@ -7,7 +7,7 @@
     </v-list-item-icon>
     <v-list-item-content>
       <v-list-item-title 
-        v-sanitized-html="document.title" 
+        v-sanitized-html="document.excerptTitle ? document.excerptTitle : document.title" 
         :title="document.title" 
         class="text-truncate" />
       <v-list-item-subtitle v-if="!hideTime || !hideDrive">
