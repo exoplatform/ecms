@@ -1,7 +1,10 @@
 <template>
   <v-list-item @click.prevent="openPreview()">
-    <v-list-item-icon class="mx-0">
-      <v-icon :color="documentIcon.color" x-large>
+    <v-list-item-icon class="mx-1">
+      <v-icon
+        :color="documentIcon.color"
+        x-large
+        size="35">
         {{ documentIcon.ico }}
       </v-icon>
     </v-list-item-icon>
@@ -46,26 +49,26 @@ export default {
     documentIcon() {
       const icon = {};
       if (this.document.fileType.includes('pdf')) {
-        icon.ico = 'mdi-file-pdf';
-        icon.color = '#d07b7b';
+        icon.ico = 'fas fa-file-pdf';
+        icon.color = '#FF0000';
       } else if (this.document.fileType.includes('presentation') || this.document.fileType.includes('powerpoint')) {
-        icon.ico = 'mdi-file-powerpoint';
-        icon.color = '#e45030';
+        icon.ico = 'fas fa-file-powerpoint';
+        icon.color = '#CB4B32';
       } else if (this.document.fileType.includes('sheet') || this.document.fileType.includes('excel')) {
-        icon.ico = 'mdi-file-excel';
-        icon.color = '#1a744b';
+        icon.ico = 'fas fa-file-excel';
+        icon.color = '#217345';
       } else if (this.document.fileType.includes('word') || this.document.fileType.includes('opendocument') || this.document.fileType.includes('rtf') ) {
-        icon.ico = 'mdi-file-word';
-        icon.color = '#094d7f';
+        icon.ico = 'fas fa-file-word';
+        icon.color = '#2A5699';
       } else if (this.document.fileType.includes('plain')) {
-        icon.ico = 'mdi-clipboard-text';
+        icon.ico = 'fas fa-clipboard>';
         icon.color = '#1c9bd7';
       } else if (this.document.fileType.includes('image')) {
-        icon.ico = 'mdi-image';
-        icon.color = '#eab320';
+        icon.ico = 'fas fa-file-image';
+        icon.color = '#999999';
       } else {
-        icon.ico = 'mdi-file';
-        icon.color = '#cdcccc';
+        icon.ico = 'fas fa-file';
+        icon.color = '#578DC9';
       }
       return icon;
     },
