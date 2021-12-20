@@ -53,18 +53,30 @@ export default {
       } else if (this.document.fileType.includes('presentation') || this.document.fileType.includes('powerpoint')) {
         icon.icon = 'fas fa-file-powerpoint';
         icon.color = '#CB4B32';
-      } else if (this.document.fileType.includes('sheet') || this.document.fileType.includes('excel')) {
+      } else if (this.document.fileType.includes('sheet') || this.document.fileType.includes('excel') || this.document.fileType.includes('csv')) {
         icon.icon = 'fas fa-file-excel';
         icon.color = '#217345';
       } else if (this.document.fileType.includes('word') || this.document.fileType.includes('opendocument') || this.document.fileType.includes('rtf') ) {
         icon.icon = 'fas fa-file-word';
         icon.color = '#2A5699';
       } else if (this.document.fileType.includes('plain')) {
-        icon.icon = 'fas fa-clipboard>';
-        icon.color = '#1c9bd7';
+        icon.icon = 'fas fa-file-alt';
+        icon.color = '#385989';
       } else if (this.document.fileType.includes('image')) {
         icon.icon = 'fas fa-file-image';
         icon.color = '#999999';
+      } else if (this.document.fileType.includes('video') || this.document.fileType.includes('octet-stream') || this.document.fileType.includes('ogg')) {
+        icon.icon = 'fas fa-file-video';
+        icon.color =  '#79577A';
+      } else if (this.document.fileType.includes('zip') || this.document.fileType.includes('war') || this.document.fileType.includes('rar')) {
+        icon.icon = 'fas fa-file-archive';
+        icon.color = '#717272';
+      } else if (this.document.fileType.includes('illustrator') || this.document.fileType.includes('eps')) {
+        icon.icon = 'fas fa-file-contract';
+        icon.color = '#E79E24';
+      } else if (this.document.fileType.includes('html') || this.document.fileType.includes('xml') || this.document.fileType.includes('css')) {
+        icon.icon = 'fas fa-file-code';
+        icon.color = '#6cf500';
       } else {
         icon.icon = 'fas fa-file';
         icon.color = '#578DC9';
