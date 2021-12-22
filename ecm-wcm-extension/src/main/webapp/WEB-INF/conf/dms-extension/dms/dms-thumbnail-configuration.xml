@@ -98,8 +98,8 @@
                                 <value><string>application/vnd.openxmlformats-officedocument.presentationml.presentation</string></value>
                                 <value><string>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</string></value>
                                 <value><string>application/vnd.openxmlformats-officedocument.wordprocessingml.document</string></value>
-								<value><string>application/vnd.openxmlformats-officedocument.presentationml.template</string></value>
-								<value><string>application/vnd.sun.xml.impress</string></value>
+				<value><string>application/vnd.openxmlformats-officedocument.presentationml.template</string></value>
+				<value><string>application/vnd.sun.xml.impress</string></value>
                                 <value><string>application/vnd.sun.xml.writer</string></value>
                                 <value><string>application/wordperfect</string></value>
                                 <value><string>application/xls</string></value>
