@@ -86,7 +86,8 @@ public class DownloadConnector implements ResourceContainer{
     }catch (PathNotFoundException pne) {
       return Response.status(HTTPStatus.NOT_FOUND).build();
     } catch (AccessDeniedException ade) {
-      return Response.status(HTTPStatus.UNAUTHORIZED).build();
+      LOG.warn("You have not enough permissions on file: {}", fileName);
+      return Response.status(HTTPStatus.NOT_FOUND).build();
     }
     if (node.isNodeType("nt:file") || (node.isNodeType("nt:frozenNode")) && node.getProperty("jcr:frozenPrimaryType").getValue().getString().equals("nt:file")) {
       mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
