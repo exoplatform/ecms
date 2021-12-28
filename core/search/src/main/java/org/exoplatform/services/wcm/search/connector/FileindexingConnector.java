@@ -29,6 +29,10 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.search.DocumentWithMetadata;
+import org.exoplatform.social.metadata.MetadataService;
+import org.exoplatform.social.metadata.model.MetadataItem;
+import org.exoplatform.social.metadata.model.MetadataObject;
 
 /**
  * Indexing Connector for Files
@@ -36,6 +40,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
   public static final String   TYPE                           = "file";
+
+  private static final String FILE_METADATA_OBJECT_TYPE = "file";
 
   private static final int     DEFAULT_MAX_FILE_SIZE_TO_INDEX = 10;
 
@@ -47,6 +53,8 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
   private NewFolksonomyService newFolksonomyService;
 
+  private MetadataService      metadataService;
+
   private List<String>         supportedContentIndexingMimetypes;
 
   private long                 contentMaxSizeToIndexInBytes;
@@ -56,6 +64,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     this.repositoryService = CommonsUtils.getService(RepositoryService.class);
     this.trashService = CommonsUtils.getService(TrashService.class);
     this.newFolksonomyService = CommonsUtils.getService(NewFolksonomyService.class);
+    this.metadataService = CommonsUtils.getService(MetadataService.class);
     if (initParams.containsKey("documents.content.indexing.mimetypes")) {
       String supportedMimetypes = initParams.getValueParam("documents.content.indexing.mimetypes").getValue();
       supportedContentIndexingMimetypes = Arrays.stream(StringUtils.split(supportedMimetypes, ","))
@@ -231,12 +240,15 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
 
       LOGGER.info("ES document generated for file with id={} path=\"{}\"", id, node.getPath());
-      return new Document(id,
-                          null,
-                          new Date(),
-                          computePermissions(node),
-                          getTags(node, session.getWorkspace().getName()),
-                          fields);
+      DocumentWithMetadata document = new DocumentWithMetadata();
+      document.setId(id);
+      document.setLastUpdatedDate(new Date());
+      document.setPermissions(computePermissions(node));
+      document.setTags(getTags(node, session.getWorkspace().getName()));
+      document.setFields(fields);
+      addDocumentMetadata(document, node.getUUID());
+
+      return document;
     } catch (Exception e) {
       LOGGER.error("Error while indexing file " + id, e);
     } finally {
@@ -245,6 +257,12 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
     }
     return null;
+  }
+
+  private void addDocumentMetadata(DocumentWithMetadata document, String documentId) {
+    MetadataObject metadataObject = new MetadataObject(FILE_METADATA_OBJECT_TYPE, documentId);
+    List<MetadataItem> metadataItems = metadataService.getMetadataItemsByObject(metadataObject);
+    document.setMetadataItems(metadataItems);
   }
 
   protected boolean isInContentFolder(Node node) {
