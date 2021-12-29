@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search.base;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.social.metadata.model.MetadataItem;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,6 +42,7 @@ public class EcmsSearchResult extends SearchResult {
   private String size;
   private String drive;
   private String lastEditor;
+  private Map<String, List<MetadataItem>> metadatas;
 
   public EcmsSearchResult(String url,
                           String urlOnImage,
@@ -258,5 +260,13 @@ public class EcmsSearchResult extends SearchResult {
    */
   public void setPreviewBreadcrumb(LinkedHashMap<String, String> previewBreadcrumb) {
     this.previewBreadcrumb = previewBreadcrumb;
+  }
+
+  public Map<String, List<MetadataItem>> getMetadatas() {
+    return metadatas;
+  }
+
+  public void setMetadatas(Map<String, List<MetadataItem>> metadatas) {
+    this.metadatas = metadatas;
   }
 }
