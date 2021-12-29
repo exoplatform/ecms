@@ -1,13 +1,15 @@
 <template>
   <v-list-item @click.prevent="openPreview()">
-    <v-list-item-icon class="mx-0">
-      <v-icon :color="documentIcon.color" x-large>
-        {{ documentIcon.ico }}
+    <v-list-item-icon class="mx-1">
+      <v-icon
+        :color="documentIcon.color"
+        size="35">
+        {{ documentIcon.icon }}
       </v-icon>
     </v-list-item-icon>
     <v-list-item-content>
       <v-list-item-title 
-        v-sanitized-html="document.title" 
+        v-sanitized-html="document.excerptTitle ? document.excerptTitle : document.title" 
         :title="document.title" 
         class="text-truncate" />
       <v-list-item-subtitle v-if="!hideTime || !hideDrive">
@@ -46,26 +48,38 @@ export default {
     documentIcon() {
       const icon = {};
       if (this.document.fileType.includes('pdf')) {
-        icon.ico = 'mdi-file-pdf';
-        icon.color = '#d07b7b';
+        icon.icon = 'fas fa-file-pdf';
+        icon.color = '#FF0000';
       } else if (this.document.fileType.includes('presentation') || this.document.fileType.includes('powerpoint')) {
-        icon.ico = 'mdi-file-powerpoint';
-        icon.color = '#e45030';
-      } else if (this.document.fileType.includes('sheet') || this.document.fileType.includes('excel')) {
-        icon.ico = 'mdi-file-excel';
-        icon.color = '#1a744b';
+        icon.icon = 'fas fa-file-powerpoint';
+        icon.color = '#CB4B32';
+      } else if (this.document.fileType.includes('sheet') || this.document.fileType.includes('excel') || this.document.fileType.includes('csv')) {
+        icon.icon = 'fas fa-file-excel';
+        icon.color = '#217345';
       } else if (this.document.fileType.includes('word') || this.document.fileType.includes('opendocument') || this.document.fileType.includes('rtf') ) {
-        icon.ico = 'mdi-file-word';
-        icon.color = '#094d7f';
+        icon.icon = 'fas fa-file-word';
+        icon.color = '#2A5699';
       } else if (this.document.fileType.includes('plain')) {
-        icon.ico = 'mdi-clipboard-text';
-        icon.color = '#1c9bd7';
+        icon.icon = 'fas fa-file-alt';
+        icon.color = '#385989';
       } else if (this.document.fileType.includes('image')) {
-        icon.ico = 'mdi-image';
-        icon.color = '#eab320';
+        icon.icon = 'fas fa-file-image';
+        icon.color = '#999999';
+      } else if (this.document.fileType.includes('video') || this.document.fileType.includes('octet-stream') || this.document.fileType.includes('ogg')) {
+        icon.icon = 'fas fa-file-video';
+        icon.color =  '#79577A';
+      } else if (this.document.fileType.includes('zip') || this.document.fileType.includes('war') || this.document.fileType.includes('rar')) {
+        icon.icon = 'fas fa-file-archive';
+        icon.color = '#717272';
+      } else if (this.document.fileType.includes('illustrator') || this.document.fileType.includes('eps')) {
+        icon.icon = 'fas fa-file-contract';
+        icon.color = '#E79E24';
+      } else if (this.document.fileType.includes('html') || this.document.fileType.includes('xml') || this.document.fileType.includes('css')) {
+        icon.icon = 'fas fa-file-code';
+        icon.color = '#6cf500';
       } else {
-        icon.ico = 'mdi-file';
-        icon.color = '#cdcccc';
+        icon.icon = 'fas fa-file';
+        icon.color = '#578DC9';
       }
       return icon;
     },

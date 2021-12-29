@@ -29,7 +29,7 @@
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>Le type MIME du fichier uploadé est inconnu. Aucune nouvelle version de {0} ne sera créée.</WrongMimeType>
+      <WrongMimeType>Le type MIME du fichier chargé est inconnu. Aucune nouvelle version de {0} ne sera créée.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

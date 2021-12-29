@@ -13,7 +13,11 @@
           :key="doc.id"
           class="d-flex flex-column align-center clickable"
           @click="showNewDocInput(doc)">
-          <i :class="doc.icon" class="uiIcon32x32"></i>
+          <v-icon
+            :color="doc.color"
+            class="uiIcon32x32">
+            {{ doc.icon }}
+          </v-icon>
           <span class="mt-3">{{ $t(doc.label) }}</span>
         </div>
       </div>
@@ -85,7 +89,7 @@ export default {
       newDocumentActionExtension: 'new-document-action',
       newDocumentActions: {},
       MAX_DOCUMENT_TITLE_LENGTH: 510,
-      documentTitleRules: [title => title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
+      documentTitleRules: [title => title && title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
     };
   },
   computed: {

@@ -661,9 +661,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Uploader</Upload>
+      <Upload>Charger</Upload>
     </action>
-    <title>Import des types de noeud à partir d'un fichier XML</title>
+    <title>Import des types de nœud à partir d'un fichier XML</title>
     <msg>
       <filename-error>Parcourir les fichiers pour l'import</filename-error>
       <data-file-error>Seuls les fichiers XML ou ZIP sont supportés pour l'import</data-file-error>
@@ -957,7 +957,7 @@
       <addFolder>Ajouter un dossier</addFolder>
       <addDocument>Ajouter un document</addDocument>
       <editDocument>Modifier</editDocument>
-      <upload>Uploader</upload>
+      <upload>Charger</upload>
       <paste>Coller</paste>
       <search>Rechercher</search>
       <viewReferences>Voir les références</viewReferences>
@@ -993,7 +993,7 @@
       <shareDocuments>Partager</shareDocuments>
       <openDocument>Editer à Distance</openDocument>
       <editProperty>Propriétés du document</editProperty>
-      <uploadNewVersion>Importer une version</uploadNewVersion>
+      <uploadNewVersion>Charger une version</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
