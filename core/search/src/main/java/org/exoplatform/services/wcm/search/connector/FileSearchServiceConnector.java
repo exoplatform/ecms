@@ -113,7 +113,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
     String drive = "";
     ExtendedSession session = null;
-    String nodeUIID = "";
     try {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(id);
@@ -176,9 +175,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       ecmsSearchResult.setPreviewUrl(downloadUrl.toString());
       ecmsSearchResult.setUrl(downloadUrl.toString());
     }
-    if (StringUtils.isNotEmpty(nodeUIID)){
-      ecmsSearchResult.setMetadatas(retrieveMetadataItems(nodeUIID) );
-    }
+    ecmsSearchResult.setMetadatas(retrieveMetadataItems(id) );
 
     return ecmsSearchResult;
   }
