@@ -41,10 +41,10 @@ export default {
   }),
   computed: {
     isFavorite() {
-      return this.document.metadatas && this.document.metadatas.favorites && this.document.metadatas.favorites.length;
+      return this.document && this.document.metadatas && this.document.metadatas.favorites && this.document.metadatas.favorites.length;
     },
     favoriteId() {
-      return this.document.activityId ? this.document.activityId : this.document.id;
+      return  this.document && this.document.id;
     }
   },
   watch: {

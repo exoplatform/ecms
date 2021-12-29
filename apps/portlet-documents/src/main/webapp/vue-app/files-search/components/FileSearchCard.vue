@@ -4,11 +4,11 @@
     flat
     min-height="227">
     <exo-docs-favorite-action
-          :note="result"
-          absolute
-          top="0"
-          right="0"
-          @removed="$emit('refresh-favorite')" />
+      :document="result"
+      absolute
+      top="0"
+      right="0"
+      @removed="$emit('refresh-favorite')"  />
     <div class="mx-auto flex-grow-1 px-3 pt-3">
       <div
         ref="excerptNode"
