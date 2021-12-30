@@ -3,6 +3,12 @@
     class="searchFileCard d-flex flex-column border-radius box-shadow" 
     flat
     min-height="227">
+    <exo-docs-favorite-action
+      :document="result"
+      absolute
+      top="0"
+      right="0"
+      @removed="$emit('refresh-favorite')"  />
     <div class="mx-auto flex-grow-1 px-3 pt-3">
       <div
         ref="excerptNode"

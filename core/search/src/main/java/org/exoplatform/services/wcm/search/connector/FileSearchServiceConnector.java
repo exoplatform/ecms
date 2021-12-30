@@ -32,6 +32,10 @@ import javax.jcr.RepositoryException;
 import org.apache.commons.lang.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.util.ListHashMap;
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.social.metadata.MetadataService;
+import org.exoplatform.social.metadata.model.MetadataItem;
+import org.exoplatform.social.metadata.model.MetadataObject;
 import org.json.simple.JSONObject;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
@@ -59,7 +63,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
   private static final String CHARSET_UTF_8 = "UTF-8";
   private static final String DECODE_REGEX = "%(?![0-9a-fA-F]{2})";
-
+  private static final String FILE_METADATA_OBJECT_TYPE = "file";
 
   private static final Log LOG = ExoLogger.getLogger(FileSearchServiceConnector.class.getName());
 
@@ -156,7 +160,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             drive,
             lastEditor);
 
-    ecmsSearchResult.setExcerpts(searchResult.getExcerpts());
     ecmsSearchResult.setTags(tags);
     ecmsSearchResult.setImageUrl(getImageUrl(workspace, nodePath));
     ecmsSearchResult.setPreviewUrl(getPreviewUrl(jsonHit, searchContext, downloadUrl));
@@ -172,6 +175,8 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       ecmsSearchResult.setPreviewUrl(downloadUrl.toString());
       ecmsSearchResult.setUrl(downloadUrl.toString());
     }
+    ecmsSearchResult.setMetadatas(retrieveMetadataItems(id) );
+
     return ecmsSearchResult;
   }
 
@@ -194,6 +199,19 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
             append(repositoryName).append('/').
             append(workspace).append(nodePath);
     return downloadUrl.toString();
+  }
+
+  private Map<String, List<MetadataItem>> retrieveMetadataItems(String nodeId) {
+    MetadataService metadataService = CommonsUtils.getService(MetadataService.class);
+    MetadataObject metadataObject = new MetadataObject(FILE_METADATA_OBJECT_TYPE, nodeId);
+    List<MetadataItem> metadataItems = metadataService.getMetadataItemsByObject(metadataObject);
+    Map<String, List<MetadataItem>> metadata = new HashMap<>();
+    metadataItems.forEach(metadataItem -> {
+      String type = metadataItem.getMetadata().getType().getName();
+      metadata.computeIfAbsent(type, k -> new ArrayList<>());
+      metadata.get(type).add(metadataItem);
+    });
+    return metadata;
   }
 
   protected String getUrl(String nodePath) {
