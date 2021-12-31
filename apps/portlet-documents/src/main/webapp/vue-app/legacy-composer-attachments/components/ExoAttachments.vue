@@ -79,20 +79,26 @@
                   <div class="item"><span class="colorText"><hr class="rightLine"></span></div>
                 </div>
                 <div class="lastContent">
-                  <a
-                    title="Select on server"
-                    class="uploadButton"
-                    href="#"
-                    rel="tooltip"
-                    data-placement="bottom"
-                    @click="toggleServerFileSelector()">
-                    <i class="uiIcon32x32FolderDefault uiIcon32x32LightGray"></i>
-                    <v-icon
-                      color="#fff"
-                      x-small
-                      class="iconCloud">cloud</v-icon>
-                    <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
-                  </a>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <a
+                        class="uploadButton"
+                        href="#"
+                        rel="tooltip"
+                        data-placement="bottom"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="toggleServerFileSelector()">
+                        <i class="uiIcon32x32FolderDefault uiIcon32x32LightGray"></i>
+                        <v-icon
+                          color="#fff"
+                          x-small
+                          class="iconCloud">cloud</v-icon>
+                        <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
+                      </a>
+                    </template>
+                    <span>{{ $t('attachments.drawer.existingUploads') }}</span>
+                  </v-tooltip>
                 </div>
               </div>
             </div>
