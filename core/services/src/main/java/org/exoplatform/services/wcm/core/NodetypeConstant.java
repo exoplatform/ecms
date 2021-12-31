@@ -266,6 +266,8 @@ public class NodetypeConstant {
   public static final String SORT_BY_VERSIONABLE = "Versionable";
   public static final String SORT_BY_AUDITING = "Auditing";
   public static final String SHOW_OWNED_BY_USER_DOC = "OwnedByMe";
+
+  public static final String EOO_ONLYOFFICE_FILE = "eoo:onlyofficeFile";
   
 
 }
