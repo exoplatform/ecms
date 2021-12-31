@@ -140,7 +140,7 @@
           </a>
           <div :class="folder.type === 'new_folder' ? 'boxOfTitle' :''">
             <a
-              :title="folder.title"
+              :title="getI18nTitle(folder.title, 'Folder')"
               href="javascript:void(0);"
               rel="tooltip"
               data-placement="bottom">
@@ -168,7 +168,7 @@
                 @blur="saveNewNameFolder()"
                 @keyup.enter="$event.target.blur()"
                 @keyup.esc="cancelRenameNewFolder($event)">
-              <div v-else class="selectionLabel center">{{ folder.title }}</div>
+              <div v-else class="selectionLabel center">{{ getI18nTitle(folder.title, 'Folder') }}</div>
             </a>
           </div>
         </div>
@@ -223,14 +223,14 @@
                 <div 
                   v-for="driver in group.drives" 
                   :key="driver.name" 
-                  :title="driver.title" 
+                  :title="getI18nTitle(driver.title, 'Drives')"
                   class="folderSelection"
                   @click="openDrive(driver, name)">
                   <a
                     :data-original-title="driver.title"
                     rel="tooltip"
                     data-placement="bottom">
-                    <i 
+                    <i
                       v-show="!drivesInProgress[driver.title]"
                       :class="driver.isCloudDrive ? driver.driveTypeCSSClass : `uiIconEcms24x24DriveGroup ${driver.driveTypeCSSClass}`"
                       class="uiIconEcmsLightGray selectionIcon center"></i>
@@ -249,7 +249,7 @@
                     </div>
                     <div 
                       :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
-                      class="selectionLabel center">{{ driver.title }}</div>
+                      class="selectionLabel center">{{ getI18nTitle(driver.title, 'Drives') }}</div>
                   </a>
                 </div>
               </div>
@@ -501,6 +501,11 @@ export default {
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
   methods: {
+    getI18nTitle(title, key) {
+      const label = `${key}.label.${title.replace(/\s+/g, '')}`;
+      const translation = this.$t(label);
+      return translation === label && title || translation;
+    },
     openFolder: function (folder) {
       if (this.selectedFolder.id && this.selectedFolder.canRemove){
         this.$refs.rename[0].focus();
