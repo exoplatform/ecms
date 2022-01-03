@@ -384,6 +384,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName) throws Exception {
     try {
+      currentFolder = URLDecoder.decode(currentFolder, "UTF-8");
       // Check file existence
       Node currentFolderNode = getParentFolderNode(workspaceName,
                                                    Text.escapeIllegalJcrChars(driverName),
@@ -463,7 +464,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         workspaceName = workspaceName != null ? workspaceName :
                                                 manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName))
                                                                   .getWorkspace();
-
+        currentFolder = URLDecoder.decode(currentFolder, "UTF-8");
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
