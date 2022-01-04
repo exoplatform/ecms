@@ -784,6 +784,7 @@ public class DocumentServiceImpl implements DocumentService {
  public List<Document> getDocumentsByFolder(String folder, String condition, long limit) throws Exception {
    List<Document> documents = new ArrayList<Document>();
    if (folder != null) {
+     folder = escapeSQLString(folder);
      String query = "select * from nt:base where jcr:path like '" + folder + "/%' "
          + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') "
          + "and (exo:fileType like '%pdf%' "
@@ -799,7 +800,54 @@ public class DocumentServiceImpl implements DocumentService {
    }
    return documents;
  }
-  
+
+  private static String escapeSQLString(String value){
+    int length = value.length();
+    int newLength = length;
+    // first check for characters that might
+    // be dangerous and calculate a length
+    // of the string that has escapes.
+    for (int i=0; i<length; i++){
+      char c = value.charAt(i);
+      switch(c){
+        case '\\':
+        case '\"':
+        case '\'':
+        case '\0':{
+          newLength += 1;
+        } break;
+        default:
+          break;
+      }
+    }
+    if (length == newLength){
+      // nothing to escape in the string
+      return value;
+    }
+    StringBuilder sb = new StringBuilder(newLength);
+    for (int i=0; i<length; i++){
+      char c = value.charAt(i);
+      switch(c){
+        case '\\':{
+          sb.append("\\\\");
+        } break;
+        case '\"':{
+          sb.append("\\\"");
+        } break;
+        case '\'':{
+          sb.append("\\\'");
+        } break;
+        case '\0':{
+          sb.append("\\0");
+        } break;
+        default: {
+          sb.append(c);
+        }
+      }
+    }
+    return sb.toString();
+  }
+
   /**
    * {@inheritDoc}
    */
