@@ -44,7 +44,7 @@ export default {
   }),
   computed: {
     excerpts() {
-      return this.result && this.result.excerpts;
+      return [this.result && this.result.excerpt] || [];
     },
     excerptTitle() {
       return this.excerpts && this.excerpts['title'] && window.decodeURIComponent(this.excerpts['title'][0]);
@@ -53,7 +53,7 @@ export default {
       return this.excerpts && this.excerpts['name'] && window.decodeURIComponent(this.excerpts['name'][0]);
     },
     excerptHtml() {
-      return this.excerpts && this.excerpts['attachment.content'] && this.excerpts['attachment.content'].join('<br />...');
+      return this.excerpts  && this.excerpts.join('<br />...');
     },
     excerptText() {
       return $('<div />').html(this.excerptHtml).text();
