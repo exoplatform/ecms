@@ -15,7 +15,6 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.security.MembershipEntry;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -86,9 +85,6 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   @Mock
   Session                     session;
 
-  @Mock
-  ListenerService listenerService;
-
   @Before
   public void setUp() throws Exception {
     begin();
@@ -102,8 +98,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
                                                   manageDriveService,
                                                   nodeHierarchyCreator,
                                                   nodeFinder,
-                                                  linkManager,
-                                                  listenerService);
+                                                  linkManager);
   }
 
   @After

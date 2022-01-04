@@ -44,7 +44,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -71,11 +70,6 @@ public class AttachmentServiceImpl implements AttachmentService {
 
   private LinkManager                      linkManager;
 
-  private ListenerService                  listenerService;
-
-  /** The Constant UPLOAD_DOC_FROM_Platform. */
-  public static final String UPLOAD_DOC_FROM_Platform          = "exo.upload.doc.from.platform";
-
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
 
   private static final Log LOG = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
@@ -88,8 +82,7 @@ public class AttachmentServiceImpl implements AttachmentService {
                                ManageDriveService manageDriveService,
                                NodeHierarchyCreator nodeHierarchyCreator,
                                NodeFinder nodeFinder,
-                               LinkManager linkManager,
-                               ListenerService listenerService) {
+                               LinkManager linkManager) {
 
     this.attachmentStorage = attachmentStorage;
     this.repositoryService = repositoryService;
@@ -100,7 +93,6 @@ public class AttachmentServiceImpl implements AttachmentService {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.nodeFinder = nodeFinder;
     this.linkManager = linkManager;
-    this.listenerService = listenerService;
   }
 
   @Override
@@ -509,11 +501,6 @@ public class AttachmentServiceImpl implements AttachmentService {
         Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDetach, canEdit);
 
         attachment.setAcl(attachmentACL);
-        try {
-          listenerService.broadcast(UPLOAD_DOC_FROM_Platform, userIdentity.getUserId(), createdDocument);
-        } catch (Exception e) {
-          LOG.warn("Error while broadcasting upload document event", e);
-        }
         return attachment;
       } else {
         throw new IllegalStateException("Document template not available with " + templateName + " as a name");
