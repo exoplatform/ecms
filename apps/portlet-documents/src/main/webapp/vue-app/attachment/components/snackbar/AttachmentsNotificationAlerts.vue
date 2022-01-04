@@ -33,6 +33,15 @@ export default {
   },
   created() {
     this.$root.$on('attachments-notification-alert', this.addAlert);
+    document.addEventListener('attachments-notification-alert', (event) => {
+      if (event && event.detail && event.detail.messageObject) {
+        const alert = {
+          message: event.detail.messageObject.message,
+          type: event.detail.messageObject.type,
+        };
+        this.addAlert(alert);
+      }
+    });
   },
   methods: {
     addAlert(alert) {
