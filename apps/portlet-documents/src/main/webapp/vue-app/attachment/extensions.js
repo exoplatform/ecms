@@ -59,6 +59,7 @@ export function installExtensions() {
       if (data) {
         extensionRegistry.registerExtension('activity', 'action', Object.assign({
           id: 'download',
+          icon: 'fa-download',
           labelKey: 'documents.label.download',
           isEnabled: activity => {
             if (activity.templateParams) {
