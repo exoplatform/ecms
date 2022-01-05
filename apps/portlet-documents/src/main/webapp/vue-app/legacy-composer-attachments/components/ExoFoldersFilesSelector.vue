@@ -22,13 +22,13 @@
           @click="openDrive(currentDrive)">
           <span class="uiIconArrowRight"></span>
           <a
-            :title="currentDrive.title"
+            :title="getI18nTitle(currentDrive.title, 'Drives')"
             :class="currentDrive.isSelected? 'active' : ''"
             class="currentDriveTitle"
             data-toggle="tooltip"
             rel="tooltip"
             data-placement="bottom">
-            {{ currentDrive.title }}
+            {{ getI18nTitle(currentDrive.title, 'Drives') }}
           </a>
         </div>
         <div class="foldersHistory">
@@ -216,7 +216,7 @@
               class="category"
               active-class="categoryActive">
               <template v-slot:activator>
-                <v-list-item-content class="categoryContent">{{ name }}</v-list-item-content>
+                <v-list-item-content class="categoryContent">{{ getI18nTitle(name, 'Category') }}</v-list-item-content>
               </template>
               <!-- Drives block -->
               <div class="selectionBox">
