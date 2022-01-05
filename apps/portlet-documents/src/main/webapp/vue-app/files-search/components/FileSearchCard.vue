@@ -3,6 +3,12 @@
     class="searchFileCard d-flex flex-column border-radius box-shadow" 
     flat
     min-height="227">
+    <exo-docs-favorite-action
+      :document="result"
+      absolute
+      top="0"
+      right="0"
+      @removed="$emit('refresh-favorite')"  />
     <div class="mx-auto flex-grow-1 px-3 pt-3">
       <div
         ref="excerptNode"
@@ -38,7 +44,7 @@ export default {
   }),
   computed: {
     excerpts() {
-      return this.result && this.result.excerpts;
+      return [this.result && this.result.excerpt] || [];
     },
     excerptTitle() {
       return this.excerpts && this.excerpts['title'] && window.decodeURIComponent(this.excerpts['title'][0]);
@@ -47,7 +53,7 @@ export default {
       return this.excerpts && this.excerpts['name'] && window.decodeURIComponent(this.excerpts['name'][0]);
     },
     excerptHtml() {
-      return this.excerpts && this.excerpts['attachment.content'] && this.excerpts['attachment.content'].join('<br />...');
+      return this.excerpts  && this.excerpts.join('<br />...');
     },
     excerptText() {
       return $('<div />').html(this.excerptHtml).text();
