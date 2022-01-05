@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.connector.fckeditor;
 
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -382,6 +383,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName) throws Exception {
     try {
+      currentFolder = URLDecoder.decode(currentFolder, StandardCharsets.UTF_8);
       // Check file existence
       Node currentFolderNode = getParentFolderNode(workspaceName,
                                                    Text.escapeIllegalJcrChars(driverName),
@@ -461,12 +463,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         workspaceName = workspaceName != null ? workspaceName :
                                                 manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName))
                                                                   .getWorkspace();
-
+        currentFolder = URLDecoder.decode(currentFolder, StandardCharsets.UTF_8);
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
         fileName = Text.escapeIllegalJcrChars(fileName);
-        fileName = URLDecoder.decode(fileName, "UTF-8");
+        fileName = URLDecoder.decode(fileName, StandardCharsets.UTF_8);
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
                                            currentPortal,
