@@ -586,7 +586,7 @@
 		  var uri = eXo.ecm.MultiUpload.restContext + "/wcmDriver/uploadFile/checkExistence?" +
 		  "repositoryName=repository&workspaceName=" + eXo.ecm.MultiUpload.ws +
 		  "&driverName=" + eXo.ecm.MultiUpload.drive +
-		  "&currentFolder=" + eXo.ecm.MultiUpload.pathMap[id] +
+		  "&currentFolder=" + encodeURIComponent(eXo.ecm.MultiUpload.pathMap[id]) +
 		  "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
 		  "&fileName=" + cleanName(eXo.ecm.MultiUpload.uploadingFileIds[id].name) + 
@@ -817,7 +817,7 @@
 		  var uri = eXo.ecm.MultiUpload.restContext + "/wcmDriver/uploadFile/control?" +
 		  "repositoryName=repository&workspaceName=" + eXo.ecm.MultiUpload.ws +
 		  "&driverName=" + eXo.ecm.MultiUpload.drive +
-		  "&currentFolder=" + eXo.ecm.MultiUpload.pathMap[id] +
+		  "&currentFolder=" + encodeURIComponent(eXo.ecm.MultiUpload.pathMap[id]) +
 		  "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
 		  "&action=progress&uploadId=" + id;
@@ -905,7 +905,7 @@
 		    var uri = eXo.ecm.MultiUpload.restContext + "/wcmDriver/uploadFile/control?" +
 		    "repositoryName=repository&workspaceName=" + eXo.ecm.MultiUpload.ws +
 		    "&driverName=" + eXo.ecm.MultiUpload.drive +
-		    "&currentFolder=" + eXo.ecm.MultiUpload.pathMap[progressID] +
+		    "&currentFolder=" + encodeURIComponent(eXo.ecm.MultiUpload.pathMap[progressID]) +
 		    "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		    "&userId=" + eXo.ecm.MultiUpload.userId +
 		    "&uploadId=" + progressID +
