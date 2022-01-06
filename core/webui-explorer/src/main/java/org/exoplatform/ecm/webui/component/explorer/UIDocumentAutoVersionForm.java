@@ -154,7 +154,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
           }else {
             int fileIndex = 0;
             String copyTitle = null;
-            if (isFolder) {
+            if(isFolder){
             Node existNode = uiExplorer.getNodeByPath(destPath, srcSession);
             fileIndex = 1;
             String newDestPath = "";
@@ -542,17 +542,21 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
           destNode = destNodeIterator.nextNode();
         }
 
-        if(destNode.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
-          destNode.removeMixin(ActivityTypeUtils.EXO_ACTIVITY_INFO);
+        if(destNode!=null) {
+          if (destNode.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
+            destNode.removeMixin(ActivityTypeUtils.EXO_ACTIVITY_INFO);
+          }
+          if (destNode.isNodeType(NodetypeConstant.EOO_ONLYOFFICE_FILE)) {
+            destNode.removeMixin(NodetypeConstant.EOO_ONLYOFFICE_FILE);
+          }
+          destNode.save();
         }
-        if(destNode.isNodeType(NodetypeConstant.EOO_ONLYOFFICE_FILE)) {
-          destNode.removeMixin(NodetypeConstant.EOO_ONLYOFFICE_FILE);
-        }
-        destNode.save();
 
-        if(copyTitle != null)
+        if(copyTitle != null) {
           destNode.setProperty("exo:title", copyTitle);
+        }
         Utils.removeReferences(destNode);
+
       }catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
               ApplicationMessage.WARNING));
