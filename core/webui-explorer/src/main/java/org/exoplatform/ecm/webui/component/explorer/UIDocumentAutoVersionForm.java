@@ -154,6 +154,7 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
           }else {
             int fileIndex = 0;
             String copyTitle = null;
+            if(isFolder){
             Node existNode = uiExplorer.getNodeByPath(destPath, srcSession);
             fileIndex = 1;
             String newDestPath = "";
@@ -162,6 +163,9 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
               newDestPath = destPath.substring(0, lastDotIndex) + "-" + (fileIndex + 1 ) + destPath.substring(lastDotIndex);
               existNode = uiExplorer.getNodeByPath(newDestPath, srcSession);
               fileIndex ++;
+            }
+            destPath = newDestPath;
+            copyTitle = destPath.substring(destPath.lastIndexOf("/") + 1, lastDotIndex) + "(" + (fileIndex + 1 ) + ")" + destPath.substring(lastDotIndex);
             }
 
             copyNode(destSession, autoVersionComponent.getSourceWorkspace(),
@@ -529,19 +533,30 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
     if (workspace.getName().equals(srcWorkspaceName)) {
       try {
         workspace.copy(srcPath, destPath);
-        Node destNode = (Node) session.getItem(destPath);
+        Node parentDestNode = session.getItem(destPath).getParent();
+        String destName = session.getItem(destPath).getName();
+        NodeIterator destNodeIterator = parentDestNode.getNodes(destName);
+        Node destNode = null;
 
-        if(destNode.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
-          destNode.removeMixin(ActivityTypeUtils.EXO_ACTIVITY_INFO);
+        while (destNodeIterator.hasNext()) {
+          destNode = destNodeIterator.nextNode();
         }
-        if(destNode.isNodeType(NodetypeConstant.EOO_ONLYOFFICE_FILE)) {
-          destNode.removeMixin(NodetypeConstant.EOO_ONLYOFFICE_FILE);
-        }
-        destNode.save();
 
-        if(copyTitle != null)
-          destNode.setProperty("exo:title", copyTitle);
-        Utils.removeReferences(destNode);
+        if(destNode!=null) {
+          if (destNode.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
+            destNode.removeMixin(ActivityTypeUtils.EXO_ACTIVITY_INFO);
+          }
+          if (destNode.isNodeType(NodetypeConstant.EOO_ONLYOFFICE_FILE)) {
+            destNode.removeMixin(NodetypeConstant.EOO_ONLYOFFICE_FILE);
+          }
+          destNode.save();
+
+          if (copyTitle != null) {
+            destNode.setProperty("exo:title", copyTitle);
+          }
+          Utils.removeReferences(destNode);
+        }
+
       }catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
               ApplicationMessage.WARNING));
