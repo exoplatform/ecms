@@ -550,12 +550,12 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
             destNode.removeMixin(NodetypeConstant.EOO_ONLYOFFICE_FILE);
           }
           destNode.save();
-        }
 
-        if(copyTitle != null) {
-          destNode.setProperty("exo:title", copyTitle);
+          if (copyTitle != null) {
+            destNode.setProperty("exo:title", copyTitle);
+          }
+          Utils.removeReferences(destNode);
         }
-        Utils.removeReferences(destNode);
 
       }catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
