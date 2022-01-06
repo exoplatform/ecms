@@ -453,7 +453,7 @@ var DEFAULT_PREFERENCES = {
   disableFontFace: false,
   disableTextLayer: false,
   useOnlyCssZoom: false,
-  externalLinkTarget: 0,
+  externalLinkTarget: 2,
 };
 
 
