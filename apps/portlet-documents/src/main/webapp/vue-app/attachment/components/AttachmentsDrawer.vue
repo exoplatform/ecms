@@ -142,7 +142,8 @@ export default {
       currentDrive: {},
       uploadedFiles: [],
       attachmentsChanged: false,
-      newUploadedFiles: []
+      newUploadedFiles: [],
+      creationType: ''
     };
   },
   computed: {
@@ -194,6 +195,7 @@ export default {
   created() {
     document.addEventListener('paste', this.onPaste, false);
     this.$root.$on('open-select-from-drives', () => {
+      this.creationType = this.$t('attachments.uploaded.from.cloud');
       this.openSelectFromDrivesDrawer();
     });
     this.$root.$on('open-attachments-app-drawer', () => {
@@ -213,6 +215,7 @@ export default {
       this.uploadAddedAttachments();
     });
     this.$root.$on('add-new-uploaded-file', file => {
+      this.creationType = this.$t('attachments.uploaded.from.device');
       this.newUploadedFiles.push(file);
     });
     this.$root.$on('attachments-changed-from-drives', (selectedFromDrives, removedFilesFromDrive) => {
@@ -226,7 +229,11 @@ export default {
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
     this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
     this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
-    this.$root.$on('add-new-created-document', this.addNewCreatedDocument);
+    this.$root.$on('add-new-created-document', (doc) =>{
+      this.creationType = this.$t('attachments.added.by.platform');
+      this.addNewCreatedDocument(doc);
+    }
+    );
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -540,7 +547,8 @@ export default {
             'origin': operationOrigin.toLowerCase(),
             'documentSize': file.size,
             'documentName': file.title,
-            'documentExtension': fileExtension
+            'documentExtension': fileExtension,
+            'creationType': this.creationType,
           },
           'userId': eXo.env.portal.userIdentityId,
           'spaceId': eXo.env.portal.spaceId,

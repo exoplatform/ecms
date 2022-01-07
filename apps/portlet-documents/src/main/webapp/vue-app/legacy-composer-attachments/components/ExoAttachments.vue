@@ -413,6 +413,7 @@ export default {
       attachmentInfo: false,
       attachmentConfirmInfo: false,
       isCloudDriveEnabled: false,
+      creationType: ''
     };
   },
   computed: {
@@ -645,6 +646,8 @@ export default {
         this.uploadingCount--;
         this.$emit('uploadingCountChanged', this.uploadingCount);
         this.processNextQueuedUpload();
+        this.creationType = this.$t('attachments.uploaded.from.device');
+        this.sendDocumentAnalytics(file);
       });
     },
     removeAttachedFile: function(file) {
@@ -711,6 +714,10 @@ export default {
         if (selectedFiles.length >1) {
           this.attachmentSeveralFiles = true;
         }
+        this.creationType = this.$t('attachments.uploaded.from.cloud');
+        selectedFiles.forEach(file => {
+          this.sendDocumentAnalytics(file);
+        });
       }
       this.showDocumentSelector = !this.showDocumentSelector;
       this.drawerTitle = this.showDocumentSelector? this.$t('attachments.drawer.existingUploads') : this.$t('attachments.drawer.header');
@@ -812,6 +819,31 @@ export default {
         this.isCloudDriveEnabled = data.result === 'true';
       });
     },
+    sendDocumentAnalytics(file) {
+      if (file && file.uploadId || file.UUID || file.id) {
+        const operationOrigin = eXo.env.portal.selectedNodeUri;
+        const documentId = file.uploadId || file.UUID || file.id;
+        const fileExtension = file.name.split('.').pop() || file.title.split('.').pop();
+        const fileAnalytics = {
+          'module': 'Drive',
+          'subModule': 'attachment-drawer',
+          'parameters': {
+            'documentId': documentId,
+            'origin': operationOrigin.toLowerCase(),
+            'documentSize': file.size,
+            'documentName': file.name || file.title,
+            'documentExtension': fileExtension,
+            'creationType': this.creationType,
+          },
+          'userId': eXo.env.portal.userIdentityId,
+          'spaceId': eXo.env.portal.spaceId,
+          'userName': eXo.env.portal.userName,
+          'operation': 'fileCreated',
+          'timestamp': Date.now()
+        };
+        document.dispatchEvent(new CustomEvent('exo-statistic-message', {detail: fileAnalytics}));
+      }
+    }
   }
 };
 </script>
