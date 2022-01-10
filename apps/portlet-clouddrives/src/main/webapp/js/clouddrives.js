@@ -579,22 +579,24 @@
                 var path = contextNode.path;
                 var process = getDrive(workspace, path);
                 process.done(function(drive, status) {
-                    var provider = providers[drive.provider.id];
-                    if (provider) {
-                        provider.clientModule.done(function(client) {
-                            if (client) {
-                                // init context drive within the provider client
-                                if (client.initDrive && client.hasOwnProperty("initDrive")) {
-                                    client.initDrive(drive);
-                                }
-                                // init files by the client if applicable
-                                if (client.initFile && client.hasOwnProperty("initFile")) {
-                                    for (fpath in drive.files) {
-                                        client.initFile(drive.files[fpath]);
+                    if(drive) {
+                        var provider = providers[drive.provider.id];
+                        if (provider) {
+                            provider.clientModule.done(function(client) {
+                                if (client) {
+                                    // init context drive within the provider client
+                                    if (client.initDrive && client.hasOwnProperty("initDrive")) {
+                                        client.initDrive(drive);
+                                    }
+                                    // init files by the client if applicable
+                                    if (client.initFile && client.hasOwnProperty("initFile")) {
+                                        for (fpath in drive.files) {
+                                            client.initFile(drive.files[fpath]);
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                     // use already cached files with new drive
                     if (contextDrive && contextDrive.path == drive.path) {
