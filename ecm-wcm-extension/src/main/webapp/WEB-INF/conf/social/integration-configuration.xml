@@ -126,7 +126,7 @@
     <component-plugin>
       <name>social.metadataItem.updated</name>
       <set-method>addListener</set-method>
-      <type>oorg.exoplatform.services.wcm.search.connector.DocumentsMetadataListener</type>
+      <type>org.exoplatform.services.wcm.search.connector.DocumentsMetadataListener</type>
     </component-plugin>
   </external-component-plugins>
 
