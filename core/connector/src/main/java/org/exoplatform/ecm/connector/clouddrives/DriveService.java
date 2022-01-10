@@ -275,7 +275,7 @@ public class DriveService implements ResourceContainer {
         if (LOG.isDebugEnabled()) {
           LOG.debug("Item " + workspace + ":" + path + " not a cloud file or drive not connected.");
         }
-        return Response.status(Status.NOT_FOUND).entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path)).build();
+        return Response.status(Status.NO_CONTENT).entity(ErrorEntiry.notCloudDrive("Not connected", workspace, path)).build();    
       }
     } catch (LoginException e) {
       LOG.warn("Error login to read drive " + workspace + ":" + path + ". " + e.getMessage());
