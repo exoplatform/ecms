@@ -19,22 +19,32 @@ package org.exoplatform.ecm.webui.form.validator;
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.commons.utils.HTMLSanitizer;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by The eXo Platform SAS Author : Tran Hung Phong
  * phongth@exoplatform.com Jul 24, 2012
  */
 public class XSSValidator implements Validator {
-
+  private static final Log LOG = ExoLogger.getLogger(XSSValidator.class);
   @Override
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = ((String) uiInput.getValue());
     if (inputValue == null || inputValue.trim().length() == 0) {
       return;
+    }
+    try{
+      inputValue = URLDecoder.decode(inputValue, StandardCharsets.UTF_8);
+    }catch (Exception e){
+      LOG.warn(e.getMessage());
     }
 
     inputValue = HTMLSanitizer.sanitize(inputValue);

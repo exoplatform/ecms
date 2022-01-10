@@ -90,7 +90,7 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
     this.documentService = this.getApplicationComponent(DocumentService.class);
     // Title textbox
     UIFormStringInput titleTextBox = new UIFormStringInput(FIELD_TITLE_TEXT_BOX, FIELD_TITLE_TEXT_BOX, null);
-    titleTextBox.addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class).addValidator(XSSValidator.class);
+    titleTextBox.addValidator(MandatoryValidator.class).addValidator(XSSValidator.class);
     this.addUIFormInput(titleTextBox);
 
     List<NewDocumentTemplateProvider> templateProviders = documentService.getNewDocumentTemplateProviders();
@@ -140,7 +140,6 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
       }
       // Get title
       String title = uiDocumentForm.getUIStringInput(FIELD_TITLE_TEXT_BOX).getValue();
-
       if (StringUtils.isBlank(title)) {
         uiApp.addMessage(new ApplicationMessage("UINewDocumentForm.msg.name-invalid", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm);
