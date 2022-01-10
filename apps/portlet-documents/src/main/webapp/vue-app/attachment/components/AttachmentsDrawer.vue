@@ -4,6 +4,7 @@
       ref="attachmentsAppDrawer"
       :confirm-close="newUploadedFilesInProgress"
       :confirm-close-labels="confirmAbortUploadLabels"
+      :drawer-width="drawerWidth"
       class="attachmentsAppDrawer"
       right
       @closed="resetAttachmentsDrawer">
@@ -23,7 +24,7 @@
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
           <attachment-create-document-input
-            v-if="!entityType && ! entityId"
+            v-if="(!entityType && ! entityId) || isComposerAttachment"
             :attachments="attachments"
             :max-files-count="maxFilesCount"
             :max-files-size="maxFileSize"
@@ -35,7 +36,7 @@
             :max-files-size="maxFileSize"
             :current-drive="currentDrive"
             :path-destination-folder="pathDestinationFolder" />
-          <attachments-select-from-drive v-if="entityId && entityType" />
+          <attachments-select-from-drive v-if="(entityId && entityType) || isComposerAttachment" />
           <attachments-uploaded-files
             :attachments="attachments"
             :new-uploaded-files="newUploadedFiles"
@@ -116,6 +117,10 @@ export default {
       type: {},
       default: () => null
     },
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -170,6 +175,9 @@ export default {
         cancel: this.$t('attachments.no'),
       };
     },
+    drawerWidth() {
+      return this.isComposerAttachment ? '33%' : '420';
+    },
   },
   watch: {
     attachments: {
@@ -185,7 +193,7 @@ export default {
     },
     uploadFinished() {
       if (this.uploadFinished && this.uploadingCount === 0 && this.entityHasNewAttachments) {
-        this.$root.$emit('entity-attachments-updated');
+        this.$root.$emit('entity-attachments-updated', this.attachments);
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.displaySuccessMessage();
         this.$refs.attachmentsAppDrawer.endLoading();
@@ -448,7 +456,7 @@ export default {
       const attachmentIds = this.attachments.filter(attachment => attachment.id).map(attachment => attachment.id);
       if (attachmentIds.length === 0) {
         return this.removeAllAttachmentsFromEntity(this.entityId, this.entityType);
-      } else {
+      } else if (!this.isComposerAttachment){
         return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
           this.$root.$emit('entity-attachments-updated');
           document.dispatchEvent(new CustomEvent('entity-attachments-updated'));

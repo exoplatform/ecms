@@ -11,7 +11,8 @@
         :entity-type="entityType"
         :default-drive="defaultDrive"
         :default-folder="defaultFolder"
-        :current-space="currentSpace" />
+        :current-space="currentSpace"
+        :is-composer-attachment="isComposerAttachment" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
         :attachments="attachments" />
@@ -22,6 +23,12 @@
 
 <script>
 export default {
+  props: {
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    },
+  },
   data () {
     return {
       attachments: [],
@@ -108,6 +115,27 @@ export default {
   },
   methods: {
     openAttachmentsAppDrawer() {
+      if (this.isComposerAttachment) {
+        if (eXo.env.portal.spaceId) {
+          this.attachmentAppConfiguration = {
+            'defaultDrive': {
+              isSelected: true,
+              name: `.spaces.${eXo.env.portal.spaceGroup}`,
+              title: eXo.env.portal.spaceDisplayName,
+            },
+            'defaultFolder': 'Activity Stream Documents',
+          };
+        } else {
+          this.attachmentAppConfiguration = {
+            'defaultDrive': {
+              isSelected: true,
+              name: eXo.env.portal.userName,
+              title: eXo.env.portal.spaceDisplayName,
+            },
+            'defaultFolder': 'Activity Stream Documents',
+          };
+        }
+      }
       this.$root.$emit('open-attachments-app-drawer');
     },
     initAttachmentEnvironment() {
@@ -212,6 +240,7 @@ export default {
           }
         });
       }
+      this.$root.$emit('entity-attachments-updated', this.attachments);
     }
   }
 };
