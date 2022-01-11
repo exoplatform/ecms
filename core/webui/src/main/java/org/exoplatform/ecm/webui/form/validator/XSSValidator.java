@@ -41,12 +41,7 @@ public class XSSValidator implements Validator {
     if (inputValue == null || inputValue.trim().length() == 0) {
       return;
     }
-    try{
-      inputValue = URLDecoder.decode(inputValue, StandardCharsets.UTF_8);
-    }catch (Exception e){
-      LOG.warn(e.getMessage());
-    }
-
+    inputValue = URLDecoder.decode(inputValue, StandardCharsets.UTF_8);
     inputValue = HTMLSanitizer.sanitize(inputValue);
     if (StringUtils.isEmpty(inputValue)) {
       String message = "UIActionForm.msg.xss-vulnerability-character";
