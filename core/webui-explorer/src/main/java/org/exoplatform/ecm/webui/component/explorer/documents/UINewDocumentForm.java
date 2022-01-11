@@ -29,9 +29,9 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;import org.exoplatform.ecm.webui.form.validator.XSSValidator;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.form.validator.XSSValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -137,6 +137,7 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
       }
       // Get title
       String title = uiDocumentForm.getUIStringInput(FIELD_TITLE_TEXT_BOX).getValue();
+
       if (StringUtils.isBlank(title)) {
         uiApp.addMessage(new ApplicationMessage("UINewDocumentForm.msg.name-invalid", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm);

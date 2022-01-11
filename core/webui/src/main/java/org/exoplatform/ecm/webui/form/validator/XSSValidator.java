@@ -19,8 +19,6 @@ package org.exoplatform.ecm.webui.form.validator;
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.commons.utils.HTMLSanitizer;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
@@ -34,7 +32,6 @@ import java.nio.charset.StandardCharsets;
  * phongth@exoplatform.com Jul 24, 2012
  */
 public class XSSValidator implements Validator {
-  private static final Log LOG = ExoLogger.getLogger(XSSValidator.class);
   @Override
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = ((String) uiInput.getValue());
