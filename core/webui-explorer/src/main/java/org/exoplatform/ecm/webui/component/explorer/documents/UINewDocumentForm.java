@@ -29,6 +29,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
 
 import org.apache.commons.lang.StringUtils;
+
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.validator.XSSValidator;
