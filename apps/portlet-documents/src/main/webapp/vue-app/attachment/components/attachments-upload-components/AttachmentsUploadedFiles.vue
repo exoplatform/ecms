@@ -98,7 +98,7 @@
         tag="div"
         class="d-flex flex-column">
         <span
-          v-for="attachment in newUploadedFiles"
+          v-for="attachment in isComposerAttachment ? attachments : newUploadedFiles"
           :key="attachment.title"
           class="list-complete-item">
           <attachment-item
@@ -108,6 +108,8 @@
             :current-space="currentSpace"
             :current-drive="currentDrive"
             :allow-to-detach="allowToDetach"
+            :is-composer-attachment="isComposerAttachment"
+            :new-uploaded-files="newUploadedFiles"
             allow-to-edit />
         </span>
       </transition-group>
@@ -150,13 +152,17 @@ export default {
       type: String,
       default: ''
     },
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    },
   },
   computed: {
     displayMessageDestinationFolder() {
       return !this.attachments.length || this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
     },
     allowToDetach() {
-      return !!this.entityId && !!this.entityType;
+      return (!!this.entityId && !!this.entityType) || this.isComposerAttachment;
     },
   },
   methods: {

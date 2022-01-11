@@ -8,9 +8,11 @@ export function installExtensions() {
     iconClass: 'addFileComposerIcon',
     appClass: 'attachmentsSelector',
     component: {
-      name: 'exo-attachments',
+      name: 'attachment',
       props: {
-        showAttachmentsBackdrop: false,
+        isComposerAttachment: true,
+        attachmentAppConfiguration: {},
+        attachments: []
       },
       model: {
         value: [],
@@ -21,8 +23,8 @@ export function installExtensions() {
         'listener': 'updateAttachments'
       }]
     },
-    onExecute: function (attachmentsComponent) {
-      attachmentsComponent.toggleAttachmentsDrawer();
+    onExecute: function (attachmentsComponent, attachments) {
+      attachmentsComponent.openAttachmentsAppDrawer(attachments);
     }
   });
 
