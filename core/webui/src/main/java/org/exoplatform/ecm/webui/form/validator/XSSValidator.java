@@ -32,6 +32,7 @@ import java.nio.charset.StandardCharsets;
  * phongth@exoplatform.com Jul 24, 2012
  */
 public class XSSValidator implements Validator {
+
   @Override
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = ((String) uiInput.getValue());
