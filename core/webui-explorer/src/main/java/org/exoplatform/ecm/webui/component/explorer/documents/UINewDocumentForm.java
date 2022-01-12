@@ -32,6 +32,7 @@ import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.form.validator.XSSValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -83,10 +84,11 @@ public class UINewDocumentForm extends UIForm implements UIPopupComponent {
    * Constructor.
    *
    */
-  public UINewDocumentForm() {
+  public UINewDocumentForm() throws Exception{
     this.documentService = this.getApplicationComponent(DocumentService.class);
     // Title textbox
     UIFormStringInput titleTextBox = new UIFormStringInput(FIELD_TITLE_TEXT_BOX, FIELD_TITLE_TEXT_BOX, null);
+    titleTextBox.addValidator(XSSValidator.class);
     this.addUIFormInput(titleTextBox);
 
     List<NewDocumentTemplateProvider> templateProviders = documentService.getNewDocumentTemplateProviders();
