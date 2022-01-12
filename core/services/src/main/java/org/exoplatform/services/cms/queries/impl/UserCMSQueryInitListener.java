@@ -35,8 +35,8 @@ import org.exoplatform.services.listener.*;
 import org.exoplatform.services.organization.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.gatein.common.logging.Logger;
-import org.gatein.common.logging.LoggerFactory;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * @author Benjamin Mestrallet benjamin.mestrallet@exoplatform.com
@@ -44,7 +44,7 @@ import org.gatein.common.logging.LoggerFactory;
 @Asynchronous
 public class UserCMSQueryInitListener extends Listener<OrganizationService, String> {
 
-  private static final Logger LOG = LoggerFactory.getLogger(UserCMSQueryInitListener.class);
+  private static final Log     LOG = ExoLogger.getLogger(UserCMSQueryInitListener.class);
 
   private NewUserConfig config_;
   private NodeHierarchyCreator nodeHierarchyCreator_;

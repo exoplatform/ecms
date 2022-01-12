@@ -40,7 +40,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import static org.powermock.api.mockito.PowerMockito.*;
 
 @RunWith(PowerMockRunner.class)
-@PowerMockIgnore("javax.management.*")
+@PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
 @PrepareForTest(value = { ChangeStateCronJobImpl.class, SessionProvider.class, WCMCoreUtils.class })
 public class TestChangeStateCronJob {
 
