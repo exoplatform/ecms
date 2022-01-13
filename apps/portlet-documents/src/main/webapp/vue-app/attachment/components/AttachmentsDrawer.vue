@@ -45,7 +45,8 @@
             :current-space="currentSpace"
             :current-drive="currentDrive"
             :entity-id="entityId"
-            :entity-type="entityType" />
+            :entity-type="entityType"
+            :is-composer-attachment="isComposerAttachment" />
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
@@ -235,6 +236,8 @@ export default {
     });
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
+    this.$root.$on('attach-composer-item', (file) => this.linkUploadedAttachmentToEntity(file));
+    this.$root.$on('message-composer-closed', this.closeAttachmentsAppDrawer);
     this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
     this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
     this.$root.$on('add-new-created-document', (doc) =>{
@@ -298,7 +301,7 @@ export default {
             uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
             this.sendDocumentAnalytics(uploadedFile);
             this.addNewUploadedFileToAttachments(file, uploadedFile);
-            if (this.entityType && this.entityId) {
+            if (this.entityType && this.entityId && !this.isComposerAttachment) {
               this.linkUploadedAttachmentToEntity(file);
             } else {
               file.uploadId = '';
@@ -503,6 +506,7 @@ export default {
       uploadedFile.previewBreadcrumb = JSON.parse(uploadedFile.previewBreadcrumb);
       uploadedFile.acl = JSON.parse(uploadedFile.acl);
       this.uploadedFiles.push(uploadedFile);
+      this.$root.$emit('add-composer-attachment-item', file);
     },
     abortUploadingFiles() {
       if (this.newUploadedFilesInProgress) {
