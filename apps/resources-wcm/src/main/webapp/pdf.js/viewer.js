@@ -7207,7 +7207,7 @@ function webViewerInitialized() {
     document.getElementById('secondaryOpenFile').setAttribute('hidden', 'true');
   }
 
-  var locale = PDFJS.locale || navigator.language;
+  var locale = eXo.env.portal.language || navigator.language;
 
   if (PDFViewerApplication.preferencePdfBugEnabled) {
     // Special debugging flags in the hash section of the URL.
