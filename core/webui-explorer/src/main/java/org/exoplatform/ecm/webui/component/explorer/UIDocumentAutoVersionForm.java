@@ -6,6 +6,7 @@ import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.PasteMana
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
@@ -533,10 +534,30 @@ public class UIDocumentAutoVersionForm extends UIForm implements UIPopupComponen
     if (workspace.getName().equals(srcWorkspaceName)) {
       try {
         workspace.copy(srcPath, destPath);
-        Node destNode = (Node) session.getItem(destPath);
-        if(copyTitle != null)
-          destNode.setProperty("exo:title", copyTitle);
-        Utils.removeReferences(destNode);
+        Node parentDestNode = session.getItem(destPath).getParent();
+        String destName = session.getItem(destPath).getName();
+        NodeIterator destNodeIterator = parentDestNode.getNodes(destName);
+        Node destNode = null;
+
+        while (destNodeIterator.hasNext()) {
+          destNode = destNodeIterator.nextNode();
+        }
+
+        if(destNode!=null) {
+          if (destNode.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
+            destNode.removeMixin(ActivityTypeUtils.EXO_ACTIVITY_INFO);
+          }
+          if (destNode.isNodeType(NodetypeConstant.EOO_ONLYOFFICE_FILE)) {
+            destNode.removeMixin(NodetypeConstant.EOO_ONLYOFFICE_FILE);
+          }
+          destNode.save();
+
+          if (copyTitle != null) {
+            destNode.setProperty("exo:title", copyTitle);
+          }
+          Utils.removeReferences(destNode);
+        }
+
       }catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
               ApplicationMessage.WARNING));
