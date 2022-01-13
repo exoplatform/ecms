@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.ecm.dms.documents;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -28,6 +29,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
@@ -64,7 +66,7 @@ public class TestFavoriteService extends BaseWCMTestCase {
   }
   
   public void tearDown() throws Exception {
-    List<Node> favoritesOfJohn = favoriteService.getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john");
+    List<Node> favoritesOfJohn = favoriteService.getAllFavoriteNodesByUser("john",0);
     for (Node node : favoritesOfJohn) {
       favoriteService.removeFavorite(node, "john");
     }
@@ -81,19 +83,28 @@ public class TestFavoriteService extends BaseWCMTestCase {
    */
   public void testAddFavorite() throws Exception {
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
+    testAddFavouriteNode1.addMixin("mix:referenceable");
+    testAddFavouriteNode1.addMixin("exo:datetime");
+    testAddFavouriteNode1.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node testAddFavouriteNode2 = rootNode.addNode("testAddFavorite2");
+    testAddFavouriteNode2.addMixin("mix:referenceable");
+    testAddFavouriteNode2.addMixin("exo:datetime");
+    testAddFavouriteNode2.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     session.save();
     favoriteService.addFavorite(testAddFavouriteNode1, "john");
     favoriteService.addFavorite(testAddFavouriteNode2, "john");
 
     int johnFav = favoriteService.
-    getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john").size();
+    getAllFavoriteNodesByUser( "john",0).size();
 
     assertEquals("testAddFavorite failed!", 2, johnFav);
     
     // Add favorite to an un-existed user
     favoriteService.addFavorite(testAddFavouriteNode2, "unknown");
-    assertEquals(0, favoriteService.getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "unknown").size());
+    assertEquals(0, favoriteService.getAllFavoriteNodesByUser("unknown",0).size());
+
+    favoriteService.removeFavorite(testAddFavouriteNode1, "john");
+    favoriteService.removeFavorite(testAddFavouriteNode2, "john");
 
     testAddFavouriteNode1.remove();
     testAddFavouriteNode2.remove();
@@ -108,8 +119,12 @@ public class TestFavoriteService extends BaseWCMTestCase {
    */
   public void testIsFavoriter() throws Exception {
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
+    testAddFavouriteNode1.addMixin("mix:referenceable");
+    testAddFavouriteNode1.addMixin("exo:datetime");
+    testAddFavouriteNode1.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     favoriteService.addFavorite(testAddFavouriteNode1, "john");
     assertEquals(true, favoriteService.isFavoriter("john", testAddFavouriteNode1));
+    favoriteService.removeFavorite(testAddFavouriteNode1, "john");
     testAddFavouriteNode1.remove();
     session.save();
   }
@@ -124,8 +139,17 @@ public class TestFavoriteService extends BaseWCMTestCase {
    */
   public void testRemoveFavorite() throws Exception {
     Node test1Remove = rootNode.addNode("test1");
+    test1Remove.addMixin("mix:referenceable");
+    test1Remove.addMixin("exo:datetime");
+    test1Remove.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node test2Remove = rootNode.addNode("test2");
+    test2Remove.addMixin("mix:referenceable");
+    test2Remove.addMixin("exo:datetime");
+    test2Remove.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node test3Remove = rootNode.addNode("test3");
+    test3Remove.addMixin("mix:referenceable");
+    test3Remove.addMixin("exo:datetime");
+    test3Remove.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     session.save();
     favoriteService.addFavorite(test1Remove, "john");
     favoriteService.addFavorite(test2Remove, "john");
@@ -134,10 +158,12 @@ public class TestFavoriteService extends BaseWCMTestCase {
     favoriteService.removeFavorite(test2Remove, "john");
 
     int johnFav = favoriteService.
-        getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john").size();
+        getAllFavoriteNodesByUser("john",0).size();
 
     assertEquals("testRemoveFavorite failed!", 2, johnFav);
 
+    favoriteService.removeFavorite(test1Remove, "john");
+    favoriteService.removeFavorite(test3Remove, "john");
     test1Remove.remove();
     test2Remove.remove();
     test3Remove.remove();
@@ -156,10 +182,25 @@ public class TestFavoriteService extends BaseWCMTestCase {
   public void testGetAllFavouriteNodesByUser() throws Exception {
 
     Node node0 = rootNode.addNode("node0");
+    node0.addMixin("mix:referenceable");
+    node0.addMixin("exo:datetime");
+    node0.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node node1 = rootNode.addNode("node1");
+    node1.addMixin("mix:referenceable");
+    node1.addMixin("exo:datetime");
+    node1.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node node2 = rootNode.addNode("node2");
+    node2.addMixin("mix:referenceable");
+    node2.addMixin("exo:datetime");
+    node2.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node node3 = rootNode.addNode("node3");
+    node3.addMixin("mix:referenceable");
+    node3.addMixin("exo:datetime");
+    node3.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node node4 = rootNode.addNode("node4");
+    node4.addMixin("mix:referenceable");
+    node4.addMixin("exo:datetime");
+    node4.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     session.save();
 
 
@@ -171,8 +212,7 @@ public class TestFavoriteService extends BaseWCMTestCase {
 
     assertEquals("testGetAllFavouriteNodesByUser failed!", 5, favoriteService
         .getAllFavoriteNodesByUser(
-            rootNode.getSession().getWorkspace().getName(), "repository",
-            "john").size());
+            "john",0).size());
     session.save();
   }
 }

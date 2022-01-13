@@ -39,6 +39,7 @@ import org.exoplatform.services.rest.impl.ProviderBinder;
 import org.exoplatform.services.rest.impl.RequestHandlerImpl;
 import org.exoplatform.services.rest.impl.ResourceBinder;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.metadata.favorite.FavoriteService;
 
 /**
  * Created by The eXo Platform SAS

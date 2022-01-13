@@ -71,8 +71,7 @@ public class TestFavoriteRESTService extends BaseConnectorTestCase {
     session.save();
     favoriteService.addFavorite(testAddFavouriteNode1, "john");
     favoriteService.addFavorite(testAddFavouriteNode2, "john");
-    List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(COLLABORATION_WS,
-                                              manageableRepository.getConfiguration().getName(),  "john");
+    List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser("john",0);
     for (Node favorite : listNodes) {
       favorite.addMixin("exo:datetime");
       favorite.setProperty(DATE_MODIFIED, new GregorianCalendar());

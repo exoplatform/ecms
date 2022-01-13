@@ -21,6 +21,11 @@
     <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
   </component>
 
+  <component>
+    <key>org.exoplatform.webui.ext.UIExtensionManager</key>
+    <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
+  </component>
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
     <component-plugin>
