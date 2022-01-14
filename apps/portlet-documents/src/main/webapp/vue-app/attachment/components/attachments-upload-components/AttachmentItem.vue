@@ -136,6 +136,10 @@ export default {
       type: {},
       default: () => null
     },
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -266,7 +270,9 @@ export default {
   },
   methods: {
     detachFile() {
-      if (this.canDetachAttachment) {
+      if (this.canDetachAttachment && this.isComposerAttachment) {
+        this.$root.$emit('remove-composer-attachment-item', this.attachment);
+      } else if (this.canDetachAttachment) {
         this.$root.$emit('remove-attachment-item', this.attachment);
       }
     },

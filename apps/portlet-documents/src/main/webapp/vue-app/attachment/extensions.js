@@ -11,6 +11,8 @@ export function installExtensions() {
       name: 'attachment',
       props: {
         isComposerAttachment: true,
+        attachmentAppConfiguration: {},
+        attachments: []
       },
       model: {
         value: [],

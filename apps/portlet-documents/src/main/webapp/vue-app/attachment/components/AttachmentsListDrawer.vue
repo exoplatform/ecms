@@ -40,6 +40,7 @@
               :allow-to-edit="false"
               :attachment="attachment"
               :can-access="attachment.acl && attachment.acl.canAccess"
+              :is-composer-attachment="isComposerAttachment"
               allow-to-preview />
           </span>
         </transition-group>
@@ -63,6 +64,10 @@ export default {
       type: Array,
       default: () => []
     },
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    }
   },
   created() {
     this.$root.$on('open-attachments-list-drawer', () => this.openAttachmentsListDrawer());
