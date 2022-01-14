@@ -15,7 +15,8 @@
         :is-composer-attachment="isComposerAttachment" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
-        :attachments="attachments" />
+        :attachments="attachments"
+        :is-composer-attachment="isComposerAttachment" />
       <attachments-notification-alerts />
     </div>
   </v-app>
@@ -28,11 +29,17 @@ export default {
       type: Boolean,
       default: false
     },
+    attachmentAppConfiguration: {
+      type: Object,
+      default: () => null
+    },
+    attachments: {
+      type: Array,
+      default: () => []
+    },
   },
   data () {
     return {
-      attachments: [],
-      attachmentAppConfiguration: {},
       currentSpace: {},
     };
   },
@@ -115,27 +122,6 @@ export default {
   },
   methods: {
     openAttachmentsAppDrawer() {
-      if (this.isComposerAttachment) {
-        if (eXo.env.portal.spaceId) {
-          this.attachmentAppConfiguration = {
-            'defaultDrive': {
-              isSelected: true,
-              name: `.spaces.${eXo.env.portal.spaceGroup}`,
-              title: eXo.env.portal.spaceDisplayName,
-            },
-            'defaultFolder': 'Activity Stream Documents',
-          };
-        } else {
-          this.attachmentAppConfiguration = {
-            'defaultDrive': {
-              isSelected: true,
-              name: eXo.env.portal.userName,
-              title: eXo.env.portal.spaceDisplayName,
-            },
-            'defaultFolder': 'Activity Stream Documents',
-          };
-        }
-      }
       this.$root.$emit('open-attachments-app-drawer');
     },
     initAttachmentEnvironment() {
