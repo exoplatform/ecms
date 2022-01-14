@@ -59,6 +59,7 @@ export function installExtensions() {
       if (data) {
         extensionRegistry.registerExtension('activity', 'action', Object.assign({
           id: 'download',
+          icon: 'fa-download',
           labelKey: 'documents.label.download',
           isEnabled: activity => {
             if (activity.templateParams) {
@@ -73,6 +74,7 @@ export function installExtensions() {
         extensionRegistry.registerExtension('activity', 'action', Object.assign({
           id: 'downloadAll',
           labelKey: 'documents.label.downloadAll',
+          icon: 'fa-download',
           isEnabled: activity => {
             if (activity.templateParams) {
               const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')
