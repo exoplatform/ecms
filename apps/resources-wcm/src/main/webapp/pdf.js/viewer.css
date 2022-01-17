@@ -854,6 +854,7 @@ body {
 
 #secondaryToolbarButtonContainer :last-child {
   margin-bottom: 0;
+  margin-right: 2px;
 }
 
 .secondaryToolbarButton > span {

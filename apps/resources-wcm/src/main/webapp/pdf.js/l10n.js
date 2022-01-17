@@ -185,7 +185,7 @@ document.webL10n = (function(window, document, undefined) {
       var reComment = /^\s*#|^\s*$/;
       var reSection = /^\s*\[(.*)\]\s*$/;
       var reImport = /^\s*@import\s+url\((.*)\)\s*$/i;
-      var reSplit = /^([^=\s]*)\s*=\s*(.+)$/; // TODO: escape EOLs with '\'
+      var reSplit = /^([^=\s]*)\s*=*(.+)$/; // TODO: escape EOLs with '\'
 
       // parse the *.properties file into an associative array
       function parseRawLines(rawText, extendedSyntax, parsedRawLinesCallback) {
