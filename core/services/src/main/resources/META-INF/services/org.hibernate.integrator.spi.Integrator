@@ -1,2 +1,0 @@
-# Define integrators that should be instantiated by the ServiceLoader
-org.exoplatform.commons.persistence.impl.ExoEntityScanner

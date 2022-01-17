@@ -35,7 +35,7 @@ public class AttachmentContextEntity implements Serializable {
   private static final long serialVersionUID = -6445215481619188461L;
 
   @Id
-  @SequenceGenerator(name = "SEQ_ATTACHMENTS_CONTEXT_ID", sequenceName = "SEQ_ATTACHMENTS_CONTEXT_ID")
+  @SequenceGenerator(name = "SEQ_ATTACHMENTS_CONTEXT_ID", sequenceName = "SEQ_ATTACHMENTS_CONTEXT_ID", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_ATTACHMENTS_CONTEXT_ID")
   @Column(name = "ATTACHMENTS_CONTEXT_ID")
   private Long              id;
