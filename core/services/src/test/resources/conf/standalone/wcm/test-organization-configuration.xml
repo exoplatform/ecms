@@ -28,53 +28,6 @@
     <type>org.exoplatform.services.jcr.ext.resource.jcr.Handler</type>
   </component>
 
-  <!-- component>
-    <key>org.exoplatform.services.database.HibernateService</key>
-    <jmx-name>database:type=HibernateService</jmx-name>
-    <type>org.exoplatform.services.database.impl.HibernateServiceImpl</type>
-    <init-params>
-      <properties-param>
-        <name>hibernate.properties</name>
-        <description>Default Hibernate Service</description>
-        <property name="hibernate.show_sql" value="false"/>
-        <property name="hibernate.cglib.use_reflection_optimizer" value="true"/>
-        <property name="hibernate.connection.url" value="jdbc:hsqldb:file:../temp/data/exodb"/>
-        <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
-        <property name="hibernate.connection.autocommit" value="true"/>
-        <property name="hibernate.connection.username" value="sa"/>
-        <property name="hibernate.connection.password" value=""/>
-        <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-        <property name="hibernate.c3p0.min_size" value="5"/>
-        <property name="hibernate.c3p0.max_size" value="20"/>
-        <property name="hibernate.c3p0.timeout" value="1800"/>
-        <property name="hibernate.c3p0.max_statements" value="50"/>
-      </properties-param>
-    </init-params>
-  </component>
-  
-  <component>
-    <key>org.exoplatform.services.organization.OrganizationService</key>
-    <type>org.exoplatform.services.organization.hibernate.OrganizationServiceImpl</type>
-  </component>
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.database.HibernateService</target-component>
-    <component-plugin> 
-      <name>add.hibernate.mapping</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.database.impl.AddHibernateMappingPlugin</type>
-      <init-params>
-        <values-param>
-          <name>hibernate.mapping</name>
-          <value>org/exoplatform/services/organization/impl/UserImpl.hbm.xml</value>
-          <value>org/exoplatform/services/organization/impl/MembershipImpl.hbm.xml</value>
-          <value>org/exoplatform/services/organization/impl/GroupImpl.hbm.xml</value>
-          <value>org/exoplatform/services/organization/impl/MembershipTypeImpl.hbm.xml</value>
-          <value>org/exoplatform/services/organization/impl/UserProfileData.hbm.xml</value>
-        </values-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins -->
-  
   <!-- org service initializer, copied from ECM portal.war -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.organization.OrganizationService</target-component>

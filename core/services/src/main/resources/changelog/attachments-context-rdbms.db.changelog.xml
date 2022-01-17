@@ -64,4 +64,8 @@
                          columnNames="ATTACHMENT_ID, ENTITY_ID, ENTITY_TYPE"/>
   </changeSet>
 
+  <changeSet author="attachments" id="1.0.0-5" dbms="hsqldb">
+    <createSequence sequenceName="SEQ_ATTACHMENTS_CONTEXT_ID" startValue="1" />
+  </changeSet>
+
 </databaseChangeLog>
