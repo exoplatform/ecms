@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.api.support.membermodification.MemberMatcher;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -35,6 +36,7 @@ import org.exoplatform.social.core.space.spi.SpaceService;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Utils.class, CommonsUtils.class })
+@PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
 public class UtilsTest {
   @Test
   public void shouldPostFileActivityWhenFileIsPublic() throws Exception {

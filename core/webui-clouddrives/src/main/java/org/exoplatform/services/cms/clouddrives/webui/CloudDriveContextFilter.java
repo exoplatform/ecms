@@ -26,8 +26,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.gatein.common.logging.Logger;
-import org.gatein.common.logging.LoggerFactory;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.application.PortalApplication;
@@ -44,7 +44,7 @@ import org.exoplatform.web.filter.Filter;
 public class CloudDriveContextFilter implements Filter {
 
   /** The Constant LOG. */
-  protected static final Logger LOG = LoggerFactory.getLogger(CloudDriveContextFilter.class);
+  protected static final Log LOG = ExoLogger.getLogger(CloudDriveContextFilter.class);
 
   /**
    * {@inheritDoc}

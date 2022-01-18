@@ -62,8 +62,8 @@ import org.exoplatform.services.seo.SEOConfig;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.gatein.common.logging.Logger;
-import org.gatein.common.logging.LoggerFactory;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -96,7 +96,7 @@ public class SEOServiceImpl implements SEOService {
 
   private ListenerService listenerService;
 
-  private static final Logger log = LoggerFactory.getLogger(SEOServiceImpl.class);
+  private static final Log         log                   = ExoLogger.getLogger(SEOServiceImpl.class);
 
   /**
    * Constructor method
