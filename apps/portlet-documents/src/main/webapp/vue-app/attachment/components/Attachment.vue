@@ -134,7 +134,7 @@ export default {
       }
     },
     initEntityAttachmentsList() {
-      if (this.entityType && this.entityId) {
+      if (this.entityType && this.entityId && !this.isComposerAttachment) {
         return this.$attachmentService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
           attachments.forEach(attachments => {
             attachments.name = attachments.title;
