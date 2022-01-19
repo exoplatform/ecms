@@ -161,7 +161,7 @@ export default {
       return !this.attachments.length || this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
     },
     allowToDetach() {
-      return !!this.entityId && !!this.entityType;
+      return (!!this.entityId && !!this.entityType) || this.isComposerAttachment;
     },
   },
   methods: {

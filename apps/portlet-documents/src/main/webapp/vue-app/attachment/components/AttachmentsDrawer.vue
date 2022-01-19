@@ -54,7 +54,8 @@
           :entity-type="entityType"
           :default-drive="defaultDrive"
           :default-folder="defaultFolder"
-          :attached-files="attachments" />
+          :attached-files="attachments"
+          :is-composer-attachment="isComposerAttachment" />
         <div
           v-for="action in attachmentsComposerActions"
           :key="action.key"
@@ -176,8 +177,11 @@ export default {
         cancel: this.$t('attachments.no'),
       };
     },
+    isMobile() {
+      return this.$vuetify.breakpoint.name === 'xs' || this.$vuetify.breakpoint.name === 'sm';
+    },
     drawerWidth() {
-      return this.isComposerAttachment ? '33%' : '420';
+      return this.isComposerAttachment && !this.isMobile ? '33%' : '420';
     },
   },
   watch: {
@@ -432,6 +436,7 @@ export default {
     resetAttachmentsDrawer() {
       this.abortUploadingFiles();
       this.newUploadedFiles = [];
+      this.uploadingCount = 0;
       this.$refs.attachmentsAppDrawer.endLoading();
 
       //get the last 10 uploaded files to be sent within the custom event
@@ -444,7 +449,7 @@ export default {
       return this.$attachmentService.linkUploadedAttachmentToEntity(this.entityId, this.entityType, file.id).then((linkedAttachment) => {
         file.acl = linkedAttachment.acl;
         file.uploadId = '';
-        this.uploadingCount--;
+        this.uploadingCount = 0;
         this.processNextQueuedUpload();
       }).catch(e => {
         console.error(e);
