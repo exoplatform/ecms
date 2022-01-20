@@ -85,6 +85,12 @@ public class FileIndexerAction implements AdvancedAction {
           applyIndexingOperationOnNodes(node, n -> indexingService.reindex(FileindexingConnector.TYPE, n.getInternalIdentifier()), n -> hasNotPrivilegeableMixin(n));
         }
         break;
+      case ExtendedEvent.NODE_MOVED:
+        node = (NodeImpl) context.get(InvocationContext.CURRENT_ITEM);
+        if (node != null && !trashService.isInTrash(node)) {
+          applyIndexingOperationOnNodes(node, n -> indexingService.reindex(FileindexingConnector.TYPE, n.getInternalIdentifier()), n -> true);
+        }
+        break;
     }
 
     return true;
