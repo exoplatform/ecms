@@ -67,8 +67,23 @@
                     		</collection>
                    		</field>
                     </object>  
-                  </value>                                  
+                  </value>
 
+                  <value>
+                    <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Action">
+                      <field  name="type"><string>exo:move</string></field>
+                      <field  name="name"><string>moveNode</string></field>
+                      <field  name="description"><string>cut and past a node in a new destination</string></field>
+                      <field  name="srcWorkspace"><string>collaboration</string></field>
+                      <field  name="srcPath"><string>/</string></field>
+                      <field  name="isDeep"><boolean>true</boolean></field>
+                      <field  name="lifecyclePhase">
+                        <collection type="java.util.ArrayList">
+                          <value><string>node_moved</string></value>
+                        </collection>
+                      </field>
+                    </object>
+                  </value>
                 </collection>   
               </field>  
             </object>
