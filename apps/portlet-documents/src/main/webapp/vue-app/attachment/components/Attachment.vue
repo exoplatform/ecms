@@ -68,6 +68,10 @@ export default {
     this.$root.$on('remove-attachment-item', attachment => {
       this.removeAttachedFile(attachment);
     });
+    this.$root.$on('remove-composer-attachment-item', attachment => {
+      const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === attachment.id);
+      this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
+    });
     this.$root.$on('add-new-created-document', file => {
       this.attachments.push(file);
     });

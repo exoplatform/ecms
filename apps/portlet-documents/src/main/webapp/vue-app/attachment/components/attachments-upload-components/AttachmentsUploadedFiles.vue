@@ -109,6 +109,7 @@
             :current-drive="currentDrive"
             :allow-to-detach="allowToDetach"
             :is-composer-attachment="isComposerAttachment"
+            :new-uploaded-files="newUploadedFiles"
             allow-to-edit />
         </span>
       </transition-group>

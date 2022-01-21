@@ -338,7 +338,7 @@ export default {
         movedFile.id,
         this.entityType,
         this.entityId).then((updatedMovedFile) => {
-        this.$root.$emit('entity-attachments-updated');
+        this.$root.$emit('entity-attachments-updated', this.attachments);
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
 
         const movedAttachmentIndex = this.newUploadedFiles.findIndex(file => file.id === movedFile.id);
@@ -346,6 +346,14 @@ export default {
         movedAttachment.pathDestinationFolderForFile = folder;
         movedAttachment.fileDrive = newDestinationPathDrive;
         this.newUploadedFiles.splice(movedAttachmentIndex, 1, movedAttachment);
+
+        if (this.isComposerAttachment) {
+          const attachmentIndex = this.attachments.findIndex(file => file.id === movedFile.id);
+          const attachment = Object.assign({}, this.attachments[attachmentIndex]);
+          attachment.pathDestinationFolderForFile = folder;
+          attachment.fileDrive = newDestinationPathDrive;
+          this.attachments.splice(attachmentIndex, 1, attachment);
+        }
 
         const movedFileIndex = this.uploadedFiles.findIndex(file => file.id === movedFile.id);
         updatedMovedFile.drive = folder;
@@ -365,6 +373,12 @@ export default {
           file.pathDestinationFolderForFile = '';
           file.fileDrive = this.currentDrive;
         });
+        if (this.isComposerAttachment) {
+          this.attachments.filter(file => file.id === folderId).map(file => {
+            file.pathDestinationFolderForFile = '';
+            file.fileDrive = this.currentDrive;
+          });
+        }
       });
     },
     setCloudDriveProgress({progress}) {
@@ -464,7 +478,9 @@ export default {
       const attachmentIds = this.attachments.filter(attachment => attachment.id).map(attachment => attachment.id);
       if (attachmentIds.length === 0) {
         return this.removeAllAttachmentsFromEntity(this.entityId, this.entityType);
-      } else if (!this.isComposerAttachment){
+      } else if (this.isComposerAttachment) {
+        this.displaySuccessMessage();
+      } else {
         return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
           this.$root.$emit('entity-attachments-updated');
           document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
