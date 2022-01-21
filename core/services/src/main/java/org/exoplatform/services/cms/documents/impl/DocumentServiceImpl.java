@@ -246,9 +246,10 @@ public class DocumentServiceImpl implements DocumentService {
   public String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
     Node rootNode = null;
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    Session session = null;
     try {
       ManageableRepository repository = repoService.getCurrentRepository();
-      Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+      session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
       //add symlink to user folder destination
       nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
       rootNode = (Node) session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + getPrivatePath(username));
@@ -258,8 +259,11 @@ public class DocumentServiceImpl implements DocumentService {
       LOG.error(e.getMessage(), e);
       return "";
     } finally {
-      sessionProvider.close();
-    }
+        if(session != null)
+        {
+          session.logout();
+        }
+      }
   }
 
   /**
