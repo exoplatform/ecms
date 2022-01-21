@@ -11,10 +11,12 @@
         :entity-type="entityType"
         :default-drive="defaultDrive"
         :default-folder="defaultFolder"
-        :current-space="currentSpace" />
+        :current-space="currentSpace"
+        :is-composer-attachment="isComposerAttachment" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
-        :attachments="attachments" />
+        :attachments="attachments"
+        :is-composer-attachment="isComposerAttachment" />
       <attachments-notification-alerts />
     </div>
   </v-app>
@@ -22,10 +24,22 @@
 
 <script>
 export default {
+  props: {
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    },
+    attachmentAppConfiguration: {
+      type: Object,
+      default: () => null
+    },
+    attachments: {
+      type: Array,
+      default: () => []
+    },
+  },
   data () {
     return {
-      attachments: [],
-      attachmentAppConfiguration: {},
       currentSpace: {},
     };
   },
@@ -53,6 +67,10 @@ export default {
     this.$root.$on('entity-attachments-updated', () => this.initEntityAttachmentsList());
     this.$root.$on('remove-attachment-item', attachment => {
       this.removeAttachedFile(attachment);
+    });
+    this.$root.$on('remove-composer-attachment-item', attachment => {
+      const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === attachment.id);
+      this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
     });
     this.$root.$on('add-new-created-document', file => {
       this.attachments.push(file);
@@ -120,7 +138,7 @@ export default {
       }
     },
     initEntityAttachmentsList() {
-      if (this.entityType && this.entityId) {
+      if (this.entityType && this.entityId && !this.isComposerAttachment) {
         return this.$attachmentService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
           attachments.forEach(attachments => {
             attachments.name = attachments.title;
@@ -212,6 +230,7 @@ export default {
           }
         });
       }
+      this.$root.$emit('entity-attachments-updated', this.attachments);
     }
   }
 };
