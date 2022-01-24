@@ -50,14 +50,11 @@ public interface FavoriteService {
   /**
    * Gets all favorite nodes by a given user.
    * 
-   * @param workspace The workspace from which the favorite nodes are got.
-   * @param repository The repository from which the favorite nodes are got.
    * @param userName The user who added favorite.
    * @return The favorite node added by the user.
    * @throws Exception
    */
- public List<Node> getAllFavoriteNodesByUser(String workspace, String repository,
-     String userName) throws Exception;
+ public List<Node> getAllFavoriteNodesByUser( String userName, int limit) throws Exception;
 
   /**
    * Checks if a node is in favorite list of a given user.

@@ -133,6 +133,9 @@ public class DocumentServiceImpl implements DocumentService {
   private final ConfigurationManager configurationManager;
   private final String editorsRuntimeId;
   private CommonEditorPlugin commonEditorPlugin;
+  private FavoriteService favoriteService;
+  private Authenticator       authenticator;
+  private final IdentityRegistry identityRegistry;
   
   /**
    * Instantiates a new {@link DocumentService} implementation.
@@ -160,7 +163,7 @@ public class DocumentServiceImpl implements DocumentService {
                              OrganizationService organizationService,
                              SettingService settingService,
                              IdentityManager identityManager,
-                             IDGeneratorService idGenerator) {
+                             IDGeneratorService idGenerator, FavoriteService favoriteService, IdentityRegistry identityRegistry, Authenticator authenticator) {
     this.configurationManager = configurationManager;
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
@@ -172,6 +175,9 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
+    this.favoriteService = favoriteService;
+    this.identityRegistry = identityRegistry;
+    this.authenticator = authenticator;
     
     // Online editors support
     this.editorsRuntimeId = idGenerator.generateStringID(this);
@@ -908,15 +914,26 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    SessionProvider sessionProvider = getUserSessionProvider(userId);
     try {
-      Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-      Node userPrivateNode = (Node) userNode.getNode(Utils.PRIVATE);
-      String favoriteFolder = null;
-      if (userPrivateNode.hasNode(NodetypeConstant.FAVORITE)) {
-        favoriteFolder = ((Node) userPrivateNode.getNode(NodetypeConstant.FAVORITE)).getPath();
-      }
-      return getDocumentsByFolder(favoriteFolder, null, limit);
+      List<Document> documents = new ArrayList<>();
+            List<Node> nodes = favoriteService.getAllFavoriteNodesByUser(userId, limit);
+            for (Node node : nodes) {
+              Document document = new Document(node.getUUID(),
+                      Utils.getTitle(node),
+                      node.getPath(),
+                      Utils.getSearchDocumentDrive(node),
+                      Utils.getFileType(node),
+                      Utils.getDate(node).getTime().getTime(),
+                      getFilePreviewBreadCrumb(node),
+                      getLinkInDocumentsApp(node.getPath()),
+                      getDownloadUri(node),
+                      VersionHistoryUtils.getVersion(node),
+                      Utils.fileSize(node),
+                      getDocLastModifier(node));
+              documents.add(document);
+            }
+      return documents;
     } finally {
       sessionProvider.close();
     }
@@ -1242,6 +1259,31 @@ public class DocumentServiceImpl implements DocumentService {
     if (lockToken != null) {
       node.getSession().removeLockToken(lockToken);
     }
+  }
+
+  private SessionProvider getUserSessionProvider(String username) {
+    org.exoplatform.services.security.Identity aclIdentity = identityRegistry.getIdentity(username);
+    if (aclIdentity == null) {
+      try {
+        aclIdentity = authenticator.createIdentity(username);
+      } catch (Exception e) {
+        throw new IllegalStateException("Error retrieving user ACL identity with name : "+  username, e);
+      }
+    }
+
+    SessionProvider sessionProvider = new SessionProvider(new ConversationState(aclIdentity));
+    try {
+      ManageableRepository repository = repoService.getCurrentRepository();
+      String workspace = repository.getConfiguration().getDefaultWorkspaceName();
+
+      sessionProvider.setCurrentRepository(repository);
+      sessionProvider.setCurrentWorkspace(workspace);
+      return sessionProvider;
+    } catch (RepositoryException e) {
+      throw new IllegalStateException("Can't build a SessionProvider", e);
+    }
+
+
   }
   
 }

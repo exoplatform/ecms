@@ -82,8 +82,7 @@ public class FavoriteRESTService implements ResourceContainer {
       showItems = String.valueOf(NO_PER_PAGE);
     }
     try {
-      List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(workspaceName,
-          repoName, userName);
+      List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(userName,0);
       Collections.sort(listNodes, new PropertyValueComparator(DATE_MODIFIED, PropertyValueComparator.DESCENDING_ORDER));
       FavoriteNode favoriteNode;
       for (Node favorite : listNodes) {
