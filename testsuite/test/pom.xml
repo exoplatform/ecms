@@ -109,6 +109,10 @@
       <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>org.exoplatform.social</groupId>
+          <artifactId>social-component-api</artifactId>
+      </dependency>
   </dependencies>
   <build>
     <resources>
