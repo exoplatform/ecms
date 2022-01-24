@@ -368,6 +368,10 @@ export default {
       type: String,
       default: ''
     },
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -564,7 +568,7 @@ export default {
         //open it to generate the path
         this.openDrive(this.defaultDrive).then(() => {
           const defaultFolder = self.folders.find(folder => folder.title === self.defaultFolder);
-          if (self.entityType && self.entityId) {
+          if ((self.entityType && self.entityId) && !self.isComposerAttachment ) {
             if (defaultFolder) {
               this.openFolder(defaultFolder).then(() => {
                 this.createEntityTypeAndIdFolders(defaultFolder);
@@ -579,6 +583,9 @@ export default {
               this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
               this.driveExplorerInitializing = false;
             });
+            //else if no default folder create for activity stream composer
+          } else if (self.isComposerAttachment) {
+            this.$attachmentService.createFolder(this.currentDrive.name, this.workspace, this.defaultFolder, this.defaultFolder).then(this.initDestinationFolderPath);
             //else if no default folder create file in root folder
           } else {
             this.$root.$emit('attachments-default-folder-path-initialized', '/', this.currentDrive.title);

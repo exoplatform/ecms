@@ -1,6 +1,8 @@
 package org.exoplatform.wcm.ext.component.activity.listener;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -26,6 +28,8 @@ import javax.jcr.Session;
 import java.util.Collection;
 import java.util.List;
 
+import static org.exoplatform.social.rest.api.RestUtils.getCurrentUserIdentityId;
+
 public class ActivityListener extends ActivityListenerPlugin {
 
   private static final Log             LOG           = ExoLogger.getLogger(ActivityListener.class);
@@ -42,6 +46,8 @@ public class ActivityListener extends ActivityListenerPlugin {
 
   private final SpaceService           spaceService;
 
+  private final AttachmentService      attachmentService;
+
   private final SessionProviderService sessionProviderService;
 
   private final RepositoryService      repositoryService;
@@ -51,11 +57,12 @@ public class ActivityListener extends ActivityListenerPlugin {
   private final OrganizationService    organizationService;
 
   public ActivityListener(SpaceService spaceService,
-                          SessionProviderService sessionProviderService,
+                          AttachmentService attachmentService, SessionProviderService sessionProviderService,
                           RepositoryService repositoryService,
                           IShareDocumentService shareDocumentService,
                           OrganizationService organizationService) {
     this.spaceService = spaceService;
+    this.attachmentService = attachmentService;
     this.sessionProviderService = sessionProviderService;
     this.repositoryService = repositoryService;
     this.shareDocumentService = shareDocumentService;
@@ -64,14 +71,25 @@ public class ActivityListener extends ActivityListenerPlugin {
 
   @Override
   public void saveActivity(ActivityLifeCycleEvent activityLifeCycleEvent) {
-    shareActivityFilesToSpace(activityLifeCycleEvent);
+    ExoSocialActivity activity = activityLifeCycleEvent.getActivity();
+    shareActivityFilesToSpace(activity);
+    if (CollectionUtils.isNotEmpty(activity.getFiles())) {
+      long userIdentityId = getCurrentUserIdentityId();
+      for (ActivityFile activityFile : activity.getFiles()) {
+        try {
+          attachmentService.linkAttachmentToEntity(userIdentityId,
+                                                   Long.parseLong(activity.getId()),
+                                                   "activity",
+                                                   activityFile.getId());
+        } catch (IllegalAccessException e) {
+          LOG.error("Error when trying to link attachments to entity with type activity and id {}: ", activity.getId(), e);
+        }
+      }
+    }
   }
 
-  private void shareActivityFilesToSpace(ActivityLifeCycleEvent activityLifeCycleEvent) {
-    ExoSocialActivity activity = activityLifeCycleEvent.getActivity();
-    List<ActivityFile> filesToShare = activity.getFiles();
+  private void shareActivityFilesToSpace(ExoSocialActivity activity) {
     String[] uuidNodes = activity.getTemplateParams().get(NODE_UUID_PARAM).split(SEPARATOR_REGEX);
-
     String streamOwner = activity.getStreamOwner();
     Space targetSpace = spaceService.getSpaceByPrettyName(streamOwner);
 
