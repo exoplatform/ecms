@@ -600,7 +600,7 @@
       <Download>Télécharger</Download>
       <OpenDocument>Editer à Distance</OpenDocument>
       <EditProperty>Modifier les propriétés</EditProperty>
-      <UploadNewVersion>Charger une nouvelle version</UploadNewVersion>
+      <UploadNewVersion>Charger une version</UploadNewVersion>
       <CreateNewVersion>Enregistrer une version</CreateNewVersion>
     </event>
   </ECMContextMenu>

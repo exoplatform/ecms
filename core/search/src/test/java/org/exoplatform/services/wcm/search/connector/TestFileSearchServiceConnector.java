@@ -56,7 +56,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({WCMCoreUtils.class, CommonsUtils.class})
-@PowerMockIgnore({"javax.management.*","jdk.internal.reflect.*"})
+@PowerMockIgnore({ "javax.management.*", "jdk.internal.reflect.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
 public class TestFileSearchServiceConnector {
 
   public static final String ES_RESPONSE_EMPTY = "{ \"hits\": { \"hits\": [] } }";

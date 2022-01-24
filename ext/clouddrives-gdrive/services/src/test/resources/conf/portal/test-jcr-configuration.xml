@@ -34,28 +34,8 @@
       </value-param>
       <value-param>
         <name>configurator</name>
-        <value>org.exoplatform.services.log.impl.Log4JConfigurator</value>
+        <value>org.exoplatform.services.log.impl.SimpleExoLogConfigurator</value>
       </value-param>
-      <properties-param>
-        <name>properties</name>
-        <description>Log4J properties</description>
-        <property name="log4j.rootLogger" value="INFO, stdout, file" />
-
-        <property name="log4j.appender.stdout" value="org.apache.log4j.ConsoleAppender" />
-        <property name="log4j.appender.stdout.threshold" value="DEBUG" />
-
-        <property name="log4j.appender.stdout.layout" value="org.apache.log4j.PatternLayout" />
-        <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
-
-        <property name="log4j.appender.file" value="org.apache.log4j.FileAppender" />
-        <property name="log4j.appender.file.File" value="target/jcr.log" />
-
-        <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout" />
-        <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
-
-        <property name="log4j.category.jcr.NodeImpl" value="DEBUG" />
-
-      </properties-param>
     </init-params>
   </component>
 
