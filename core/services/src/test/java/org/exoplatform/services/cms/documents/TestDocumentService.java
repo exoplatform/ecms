@@ -1,5 +1,6 @@
 package org.exoplatform.services.cms.documents;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -16,8 +17,12 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.metadata.favorite.FavoriteService;
+import org.exoplatform.social.metadata.favorite.model.Favorite;
 
 public class TestDocumentService extends BaseWCMTestCase {
 
@@ -25,6 +30,8 @@ public class TestDocumentService extends BaseWCMTestCase {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private SessionProviderService sessionProviderService;
   private RepositoryService repoService;
+  private IdentityManager identityManager;
+  protected FavoriteService   favoriteService;
 
 
 
@@ -33,6 +40,8 @@ public class TestDocumentService extends BaseWCMTestCase {
     System.setProperty("gatein.email.domain.url", "http://localhost:8080");
     documentService = container.getComponentInstanceOfType(DocumentService.class);
     nodeHierarchyCreator = container.getComponentInstanceOfType(NodeHierarchyCreator.class);
+    favoriteService = (org.exoplatform.social.metadata.favorite.FavoriteService) container.getComponentInstanceOfType(FavoriteService.class);
+    identityManager = container.getComponentInstanceOfType(IdentityManager.class);
     sessionProviderService = container.getComponentInstanceOfType(SessionProviderService.class);
     repoService = container.getComponentInstanceOfType(RepositoryService.class);
   }
@@ -59,12 +68,19 @@ public class TestDocumentService extends BaseWCMTestCase {
     String userId = "root";
     applyUserSession(userId, "gtn", COLLABORATION_WS);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    Node userFavoriteNode = (Node) userNode.getNode(Utils.PRIVATE + "/" + NodetypeConstant.FAVORITE);
-    userFavoriteNode.addNode("doc.txt", "nt:file");
+    Node userFavoriteNode = (Node) userNode.getNode(Utils.PRIVATE);
+    Node node = userFavoriteNode.addNode("doc.txt", "nt:file");
+    node.addMixin("mix:referenceable");
+    node.addMixin("exo:datetime");
+    node.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     session.save();
+    node = userFavoriteNode.getNode("doc.txt");
+    Identity identity = identityManager.getOrCreateUserIdentity(userId);
+    Favorite favorite = new Favorite("file", node.getUUID(), "", Long.parseLong(identity.getId()));
+    favoriteService.createFavorite(favorite);
     List<Document> documents = documentService.getFavoriteDocuments(userId, 10);
     assertNotNull("documents wasn't created", documents);
-    assertEquals(0, documents.size());
+    assertEquals(1, documents.size());
   }
   
   public void testGetSharedDocuments() throws Exception {
