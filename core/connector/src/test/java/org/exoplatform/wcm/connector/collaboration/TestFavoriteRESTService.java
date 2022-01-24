@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -31,6 +32,7 @@ import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.collaboration.FavoriteRESTService.ListResultNode;
 
@@ -67,12 +69,17 @@ public class TestFavoriteRESTService extends BaseConnectorTestCase {
     ConversationState.setCurrent(c);
     Node rootNode = session.getRootNode();
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
+    testAddFavouriteNode1.addMixin("mix:referenceable");
+    testAddFavouriteNode1.addMixin("exo:datetime");
+    testAddFavouriteNode1.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     Node testAddFavouriteNode2 = rootNode.addNode("testAddFavorite2");
+    testAddFavouriteNode2.addMixin("mix:referenceable");
+    testAddFavouriteNode2.addMixin("exo:datetime");
+    testAddFavouriteNode2.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
     session.save();
     favoriteService.addFavorite(testAddFavouriteNode1, "john");
     favoriteService.addFavorite(testAddFavouriteNode2, "john");
-    List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(COLLABORATION_WS,
-                                              manageableRepository.getConfiguration().getName(),  "john");
+    List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser("john",0);
     for (Node favorite : listNodes) {
       favorite.addMixin("exo:datetime");
       favorite.setProperty(DATE_MODIFIED, new GregorianCalendar());
