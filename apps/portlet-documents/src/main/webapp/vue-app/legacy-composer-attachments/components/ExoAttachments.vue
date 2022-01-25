@@ -827,7 +827,6 @@ export default {
     },
     sendDocumentAnalytics(file) {
       if (file && file.uploadId || file.UUID || file.id) {
-        const operationOrigin = eXo.env.portal.selectedNodeUri;
         const documentId = file.uploadId || file.UUID || file.id;
         const fileExtension = file.name.split('.').pop() || file.title.split('.').pop();
         const fileAnalytics = {
@@ -835,7 +834,7 @@ export default {
           'subModule': 'attachment-drawer',
           'parameters': {
             'documentId': documentId,
-            'origin': operationOrigin.toLowerCase(),
+            'origin': this.$t('attachments.stream'),
             'documentSize': file.size,
             'documentName': file.name || file.title,
             'documentExtension': fileExtension,

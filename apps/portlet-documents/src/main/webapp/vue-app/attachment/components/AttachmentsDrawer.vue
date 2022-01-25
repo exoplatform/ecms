@@ -569,7 +569,6 @@ export default {
     },
     sendDocumentAnalytics(file) {
       if (file && file.UUID || file.id) {
-        const operationOrigin = this.entityType || eXo.env.portal.selectedNodeUri;
         const documentId = file.UUID || file.id;
         const fileExtension = file.title.split('.').pop();
         const fileAnalytics = {
@@ -577,7 +576,7 @@ export default {
           'subModule': 'attachment-drawer',
           'parameters': {
             'documentId': documentId,
-            'origin': operationOrigin.toLowerCase(),
+            'origin': this.$t('attachments.recent.view'),
             'documentSize': file.size,
             'documentName': file.title,
             'documentExtension': fileExtension,
@@ -587,6 +586,7 @@ export default {
           'spaceId': eXo.env.portal.spaceId,
           'userName': eXo.env.portal.userName,
           'operation': 'fileCreated',
+          'application': 'fileCreated',
           'timestamp': Date.now()
         };
         document.dispatchEvent(new CustomEvent('exo-statistic-message', {detail: fileAnalytics}));
