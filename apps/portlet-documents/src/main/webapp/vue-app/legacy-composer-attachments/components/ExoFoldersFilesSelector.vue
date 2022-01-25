@@ -502,7 +502,7 @@ export default {
   },
   methods: {
     getI18nTitle(title, key) {
-      const label = `${key}.label.${title.replace(/\s+/g, '')}`;
+      const label = `${key}.label.${title.replace(/\s+|_/g, '')}`;
       const translation = this.$t(label);
       return translation === label && title || translation;
     },
@@ -722,7 +722,7 @@ export default {
     addNewFolder() {
       if (!this.creatingNewFolder) {
         this.creatingNewFolder = true;
-        this.newFolderName = 'new_folder';
+        this.newFolderName = this.$t('Folder.label.newfolder');
         this.folders.unshift({
           id: 'new_folder',
           type: 'new_folder',
