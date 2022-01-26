@@ -6,7 +6,7 @@
     <div class="fileDetails">
       <div class="fileDetails1">
         <div
-          v-sanitized-html="file.name"
+          v-sanitized-html="fileTitle"
           class="fileNameLabel text-truncate"
           data-toggle="tooltip"
           rel="tooltip"
@@ -44,6 +44,11 @@ export default {
       MB_IN_GB: 10,
       measure: 'bytes'
     };
+  },
+  computed: {
+    fileTitle() {
+      return this.file.title || this.file.name;
+    },
   },
   methods: {
     getIconClassFromFileMimeType: function(fileMimeType) {
