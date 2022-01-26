@@ -150,7 +150,8 @@ export default {
       uploadedFiles: [],
       attachmentsChanged: false,
       newUploadedFiles: [],
-      creationType: ''
+      creationType: '',
+      sourceApp: ''
     };
   },
   computed: {
@@ -214,6 +215,10 @@ export default {
     this.$root.$on('open-attachments-app-drawer', () => {
       this.attachmentsChanged = false;
       this.openAttachmentsAppDrawer();
+    });
+    this.$root.$on('set-source-app', (sourceApp) => {
+      const fieldLabelI18NKey = `attachments.${sourceApp}`;
+      this.sourceApp = this.$t(fieldLabelI18NKey);
     });
     this.$root.$on('attachments-default-folder-path-initialized', (defaultDestinationFolderPath, folderName) => {
       this.initDefaultDestinationFolderPath(defaultDestinationFolderPath, folderName);
@@ -577,7 +582,7 @@ export default {
           'subModule': 'attachment-drawer',
           'parameters': {
             'documentId': documentId,
-            'origin': operationOrigin.toLowerCase(),
+            'origin': this.sourceApp || operationOrigin.toLowerCase(),
             'documentSize': file.size,
             'documentName': file.title,
             'documentExtension': fileExtension,
