@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bundle>
+<?xml version="1.0" encoding="UTF-8"?><bundle>
   <ContentSelector>
     <msg>
       <no-file-selected>Немає вибраного вмісту. Будь ласка, оберіть хоча б один.</no-file-selected>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bundle>
+<?xml version="1.0" encoding="UTF-8"?><bundle>
   <ContentSelector>
     <msg>
       <no-file-selected>Non non c'è nessun contenuto selezionato. Si prega di selezionarne almeno uno.</no-file-selected>

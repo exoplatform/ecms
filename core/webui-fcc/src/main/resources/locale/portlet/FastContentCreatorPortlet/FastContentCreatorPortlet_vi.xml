@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bundle>
+<?xml version="1.0" encoding="UTF-8"?><bundle>
   <UIFCCForm>
     <msg>
       <name-not-allowed>Không cho phép sử dụng tên này.</name-not-allowed>
