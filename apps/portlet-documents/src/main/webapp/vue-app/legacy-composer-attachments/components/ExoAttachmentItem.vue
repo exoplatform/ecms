@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     fileTitle() {
-      return this.file.title ? this.file.title : this.file.name;
+      return this.file.title || this.file.name;
     },
   },
   methods: {
