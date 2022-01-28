@@ -246,7 +246,7 @@ export default {
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
     this.$root.$on('attach-composer-item', (file) => this.linkUploadedAttachmentToEntity(file));
-    this.$root.$on('message-composer-closed', this.closeAttachmentsAppDrawer);
+    this.$root.$on('message-composer-closed', () => this.$refs.attachmentsAppDrawer.close());
     this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
     this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
     this.$root.$on('add-new-created-document', (doc) =>{
@@ -261,6 +261,7 @@ export default {
   methods: {
     openAttachmentsAppDrawer() {
       this.$refs.attachmentsAppDrawer.open();
+      this.$root.$emit('attachments-app-drawer-opened');
     },
     closeAttachmentsAppDrawer() {
       this.$root.$emit('reset-attachments-upload-input');
@@ -463,6 +464,7 @@ export default {
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(lastUploadedFiles)}}));
       this.uploadedFiles = [];
       this.$root.$emit('hide-create-new-document-input');
+      this.$root.$emit('attachments-app-drawer-closed');
     },
     linkUploadedAttachmentToEntity(file) {
       return this.$attachmentService.linkUploadedAttachmentToEntity(this.entityId, this.entityType, file.id).then((linkedAttachment) => {
@@ -536,7 +538,7 @@ export default {
     },
     abortUploadingFiles() {
       if (this.newUploadedFilesInProgress) {
-        this.$root.$emit('abort-attachments-new-upload');
+        this.$root.$emit('abort-attachments-new-upload', this.attachments.filter(attachment => !attachment.uploadId));
         this.newUploadedFiles.forEach(file => {
           if (file.uploadProgress < 100) {
             this.$uploadService.abortUpload(file.uploadId);
