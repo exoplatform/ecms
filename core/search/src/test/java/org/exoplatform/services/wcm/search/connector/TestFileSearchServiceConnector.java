@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.search.connector;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -29,6 +30,9 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.metadata.MetadataService;
+import org.exoplatform.social.metadata.model.MetadataItem;
+import org.exoplatform.social.metadata.model.MetadataObject;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
 import org.junit.After;
@@ -42,15 +46,17 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import javax.jcr.RepositoryException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(WCMCoreUtils.class)
-@PowerMockIgnore({"javax.management.*","jdk.internal.reflect.*"})
+@PrepareForTest({WCMCoreUtils.class, CommonsUtils.class})
+@PowerMockIgnore({ "javax.management.*", "jdk.internal.reflect.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
 public class TestFileSearchServiceConnector {
 
   public static final String ES_RESPONSE_EMPTY = "{ \"hits\": { \"hits\": [] } }";
@@ -183,15 +189,20 @@ public class TestFileSearchServiceConnector {
   @Mock
   DocumentService documentService;
 
+  @Mock
+  MetadataService metadataService;
+
   @Before
   public void setUp() throws RepositoryException {
     PowerMockito.mockStatic(WCMCoreUtils.class);
+    PowerMockito.mockStatic(CommonsUtils.class);
     when(WCMCoreUtils.getRestContextName()).thenReturn("rest");
 
     RepositoryEntry repositoryEntry = new RepositoryEntry();
     repositoryEntry.setName("repository");
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
+    when(CommonsUtils.getService(MetadataService.class)).thenReturn(metadataService);
   }
 
   @After
@@ -204,6 +215,9 @@ public class TestFileSearchServiceConnector {
     startSessionAs("john");
     InitParams initParams = buildInitParams();
     when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_EMPTY);
+
+    MetadataObject metadataObject = new MetadataObject("file", "7b9b54017f00010102ba5027fa2c5944");
+    when(metadataService.getMetadataItemsByObject(metadataObject)).thenReturn(new ArrayList<MetadataItem>());
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -221,6 +235,9 @@ public class TestFileSearchServiceConnector {
     startSessionAs("john");
     InitParams initParams = buildInitParams();
     when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
+
+    MetadataObject metadataObject = new MetadataObject("file", "7b9b54017f00010102ba5027fa2c5944");
+    when(metadataService.getMetadataItemsByObject(metadataObject)).thenReturn(new ArrayList<MetadataItem>());
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -243,6 +260,9 @@ public class TestFileSearchServiceConnector {
     startSessionAs("john");
     InitParams initParams = buildInitParams();
     when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_TWO_DOCS);
+
+    MetadataObject metadataObject = new MetadataObject("file", "7b9b54017f00010102ba5027fa2c5944");
+    when(metadataService.getMetadataItemsByObject(metadataObject)).thenReturn(new ArrayList<MetadataItem>());
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 
@@ -271,6 +291,10 @@ public class TestFileSearchServiceConnector {
     startSessionAs("john");
     InitParams initParams = buildInitParams();
     when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
+
+
+    MetadataObject metadataObject = new MetadataObject("file", "7b9b54017f00010102ba5027fa2c5944");
+    when(metadataService.getMetadataItemsByObject(metadataObject)).thenReturn(new ArrayList<MetadataItem>());
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 

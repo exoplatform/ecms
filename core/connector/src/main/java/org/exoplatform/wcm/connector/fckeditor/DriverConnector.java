@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.connector.fckeditor;
 
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -134,6 +135,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(DriverConnector.class.getName());
+
+  private static final String  OLD_APP              = "oldApp";
 
   /** The limit. */
   private int limit;
@@ -382,6 +385,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName) throws Exception {
     try {
+      currentFolder = URLDecoder.decode(currentFolder, StandardCharsets.UTF_8);
       // Check file existence
       Node currentFolderNode = getParentFolderNode(workspaceName,
                                                    Text.escapeIllegalJcrChars(driverName),
@@ -461,12 +465,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         workspaceName = workspaceName != null ? workspaceName :
                                                 manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName))
                                                                   .getWorkspace();
-
+        currentFolder = URLDecoder.decode(currentFolder, StandardCharsets.UTF_8);
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
         fileName = Text.escapeIllegalJcrChars(fileName);
-        fileName = URLDecoder.decode(fileName, "UTF-8");
+        fileName = URLDecoder.decode(fileName, StandardCharsets.UTF_8);
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
                                            currentPortal,
@@ -982,11 +986,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
-      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
+      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language,OLD_APP , siteName, userId, existenceAction);
     }else if(FileUploadHandler.SAVE_NEW_VERSION_ACTION.equals(action)){
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
-      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction,true);
+      return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language,OLD_APP , siteName, userId, existenceAction,true);
     }
     return fileUploadHandler.control(uploadId, action);
   }

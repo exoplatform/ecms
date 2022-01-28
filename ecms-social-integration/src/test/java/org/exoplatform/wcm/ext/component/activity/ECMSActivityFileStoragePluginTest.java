@@ -22,6 +22,7 @@ import org.exoplatform.upload.UploadService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -37,6 +38,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(NodeLocation.class)
+@PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
 public class ECMSActivityFileStoragePluginTest {
 
   static private String TEXT_PLAIN = "text/plain";

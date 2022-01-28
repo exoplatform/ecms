@@ -4,6 +4,7 @@
       ref="attachmentsAppDrawer"
       :confirm-close="newUploadedFilesInProgress"
       :confirm-close-labels="confirmAbortUploadLabels"
+      :drawer-width="drawerWidth"
       class="attachmentsAppDrawer"
       right
       @closed="resetAttachmentsDrawer">
@@ -23,7 +24,7 @@
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
           <attachment-create-document-input
-            v-if="!entityType && ! entityId"
+            v-if="(!entityType && ! entityId) || isComposerAttachment"
             :attachments="attachments"
             :max-files-count="maxFilesCount"
             :max-files-size="maxFileSize"
@@ -35,7 +36,7 @@
             :max-files-size="maxFileSize"
             :current-drive="currentDrive"
             :path-destination-folder="pathDestinationFolder" />
-          <attachments-select-from-drive v-if="entityId && entityType" />
+          <attachments-select-from-drive v-if="(entityId && entityType) || isComposerAttachment" />
           <attachments-uploaded-files
             :attachments="attachments"
             :new-uploaded-files="newUploadedFiles"
@@ -44,7 +45,8 @@
             :current-space="currentSpace"
             :current-drive="currentDrive"
             :entity-id="entityId"
-            :entity-type="entityType" />
+            :entity-type="entityType"
+            :is-composer-attachment="isComposerAttachment" />
         </div>
         <attachments-drive-explorer-drawer
           :is-cloud-enabled="isCloudDriveEnabled"
@@ -52,7 +54,8 @@
           :entity-type="entityType"
           :default-drive="defaultDrive"
           :default-folder="defaultFolder"
-          :attached-files="attachments" />
+          :attached-files="attachments"
+          :is-composer-attachment="isComposerAttachment" />
         <div
           v-for="action in attachmentsComposerActions"
           :key="action.key"
@@ -116,6 +119,10 @@ export default {
       type: {},
       default: () => null
     },
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -142,7 +149,8 @@ export default {
       currentDrive: {},
       uploadedFiles: [],
       attachmentsChanged: false,
-      newUploadedFiles: []
+      newUploadedFiles: [],
+      creationType: ''
     };
   },
   computed: {
@@ -169,6 +177,12 @@ export default {
         cancel: this.$t('attachments.no'),
       };
     },
+    isMobile() {
+      return this.$vuetify.breakpoint.name === 'xs' || this.$vuetify.breakpoint.name === 'sm';
+    },
+    drawerWidth() {
+      return this.isComposerAttachment && !this.isMobile ? '33%' : '420';
+    },
   },
   watch: {
     attachments: {
@@ -184,7 +198,7 @@ export default {
     },
     uploadFinished() {
       if (this.uploadFinished && this.uploadingCount === 0 && this.entityHasNewAttachments) {
-        this.$root.$emit('entity-attachments-updated');
+        this.$root.$emit('entity-attachments-updated', this.attachments);
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.displaySuccessMessage();
         this.$refs.attachmentsAppDrawer.endLoading();
@@ -194,6 +208,7 @@ export default {
   created() {
     document.addEventListener('paste', this.onPaste, false);
     this.$root.$on('open-select-from-drives', () => {
+      this.creationType = this.$t('attachments.uploaded.from.cloud');
       this.openSelectFromDrivesDrawer();
     });
     this.$root.$on('open-attachments-app-drawer', () => {
@@ -213,6 +228,7 @@ export default {
       this.uploadAddedAttachments();
     });
     this.$root.$on('add-new-uploaded-file', file => {
+      this.creationType = this.$t('attachments.uploaded.from.device');
       this.newUploadedFiles.push(file);
     });
     this.$root.$on('attachments-changed-from-drives', (selectedFromDrives, removedFilesFromDrive) => {
@@ -224,9 +240,15 @@ export default {
     });
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
+    this.$root.$on('attach-composer-item', (file) => this.linkUploadedAttachmentToEntity(file));
+    this.$root.$on('message-composer-closed', () => this.$refs.attachmentsAppDrawer.close());
     this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
     this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
-    this.$root.$on('add-new-created-document', this.addNewCreatedDocument);
+    this.$root.$on('add-new-created-document', (doc) =>{
+      this.creationType = this.$t('attachments.added.by.platform');
+      this.addNewCreatedDocument(doc);
+    }
+    );
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
@@ -234,6 +256,7 @@ export default {
   methods: {
     openAttachmentsAppDrawer() {
       this.$refs.attachmentsAppDrawer.open();
+      this.$root.$emit('attachments-app-drawer-opened');
     },
     closeAttachmentsAppDrawer() {
       this.$root.$emit('reset-attachments-upload-input');
@@ -283,7 +306,7 @@ export default {
             uploadedFile = this.$attachmentService.convertXmlToJson(uploadedFile);
             this.sendDocumentAnalytics(uploadedFile);
             this.addNewUploadedFileToAttachments(file, uploadedFile);
-            if (this.entityType && this.entityId) {
+            if (this.entityType && this.entityId && !this.isComposerAttachment) {
               this.linkUploadedAttachmentToEntity(file);
             } else {
               file.uploadId = '';
@@ -316,7 +339,7 @@ export default {
         movedFile.id,
         this.entityType,
         this.entityId).then((updatedMovedFile) => {
-        this.$root.$emit('entity-attachments-updated');
+        this.$root.$emit('entity-attachments-updated', this.attachments);
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
 
         const movedAttachmentIndex = this.newUploadedFiles.findIndex(file => file.id === movedFile.id);
@@ -324,6 +347,14 @@ export default {
         movedAttachment.pathDestinationFolderForFile = folder;
         movedAttachment.fileDrive = newDestinationPathDrive;
         this.newUploadedFiles.splice(movedAttachmentIndex, 1, movedAttachment);
+
+        if (this.isComposerAttachment) {
+          const attachmentIndex = this.attachments.findIndex(file => file.id === movedFile.id);
+          const attachment = Object.assign({}, this.attachments[attachmentIndex]);
+          attachment.pathDestinationFolderForFile = folder;
+          attachment.fileDrive = newDestinationPathDrive;
+          this.attachments.splice(attachmentIndex, 1, attachment);
+        }
 
         const movedFileIndex = this.uploadedFiles.findIndex(file => file.id === movedFile.id);
         updatedMovedFile.drive = folder;
@@ -343,6 +374,12 @@ export default {
           file.pathDestinationFolderForFile = '';
           file.fileDrive = this.currentDrive;
         });
+        if (this.isComposerAttachment) {
+          this.attachments.filter(file => file.id === folderId).map(file => {
+            file.pathDestinationFolderForFile = '';
+            file.fileDrive = this.currentDrive;
+          });
+        }
       });
     },
     setCloudDriveProgress({progress}) {
@@ -414,6 +451,7 @@ export default {
     resetAttachmentsDrawer() {
       this.abortUploadingFiles();
       this.newUploadedFiles = [];
+      this.uploadingCount = 0;
       this.$refs.attachmentsAppDrawer.endLoading();
 
       //get the last 10 uploaded files to be sent within the custom event
@@ -421,12 +459,13 @@ export default {
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(lastUploadedFiles)}}));
       this.uploadedFiles = [];
       this.$root.$emit('hide-create-new-document-input');
+      this.$root.$emit('attachments-app-drawer-closed');
     },
     linkUploadedAttachmentToEntity(file) {
       return this.$attachmentService.linkUploadedAttachmentToEntity(this.entityId, this.entityType, file.id).then((linkedAttachment) => {
         file.acl = linkedAttachment.acl;
         file.uploadId = '';
-        this.uploadingCount--;
+        this.uploadingCount = 0;
         this.processNextQueuedUpload();
       }).catch(e => {
         console.error(e);
@@ -441,6 +480,8 @@ export default {
       const attachmentIds = this.attachments.filter(attachment => attachment.id).map(attachment => attachment.id);
       if (attachmentIds.length === 0) {
         return this.removeAllAttachmentsFromEntity(this.entityId, this.entityType);
+      } else if (this.isComposerAttachment) {
+        this.displaySuccessMessage();
       } else {
         return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds).then(() => {
           this.$root.$emit('entity-attachments-updated');
@@ -488,10 +529,11 @@ export default {
       uploadedFile.previewBreadcrumb = JSON.parse(uploadedFile.previewBreadcrumb);
       uploadedFile.acl = JSON.parse(uploadedFile.acl);
       this.uploadedFiles.push(uploadedFile);
+      this.$root.$emit('add-composer-attachment-item', file);
     },
     abortUploadingFiles() {
       if (this.newUploadedFilesInProgress) {
-        this.$root.$emit('abort-attachments-new-upload');
+        this.$root.$emit('abort-attachments-new-upload', this.attachments.filter(attachment => !attachment.uploadId));
         this.newUploadedFiles.forEach(file => {
           if (file.uploadProgress < 100) {
             this.$uploadService.abortUpload(file.uploadId);
@@ -540,7 +582,8 @@ export default {
             'origin': operationOrigin.toLowerCase(),
             'documentSize': file.size,
             'documentName': file.title,
-            'documentExtension': fileExtension
+            'documentExtension': fileExtension,
+            'creationType': this.creationType,
           },
           'userId': eXo.env.portal.userIdentityId,
           'spaceId': eXo.env.portal.spaceId,

@@ -44,6 +44,7 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -100,6 +101,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
                                               new IsNotTrashHomeNodeFilter());
 
   private static final String RELATION_PROP = "exo:relation";
+  private static final String SYSTEM = "__system";
 
   private static boolean isRefresh = true;
   private static Map<String, Boolean> versionedRemember = new HashMap<>();
@@ -562,6 +564,14 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         pasteByCopy(destSession, srcWorkspace, srcPath, destPath);
         destNode = (Node) destSession.getItem(destPath);
         actionContainer.initiateObservation(destNode);
+
+        if(destNode.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
+          destNode.removeMixin(ActivityTypeUtils.EXO_ACTIVITY_INFO);
+        }
+        if(destNode.isNodeType(NodetypeConstant.EOO_ONLYOFFICE_FILE)) {
+          destNode.removeMixin(NodetypeConstant.EOO_ONLYOFFICE_FILE);
+        }
+
         // Set title
         if (title != null) {
           destNode.setProperty(Utils.EXO_TITLE, title);
@@ -643,7 +653,12 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       destNodeSystem.save();
       destNode.refresh(true);
     }
+    if (destNodeSystem.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      destNodeSystem.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+    }
+
     if (destNodeSystem.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      ((NodeImpl) destNodeSystem).setPermission(SYSTEM, PermissionType.ALL);
       ((NodeImpl) destNodeSystem).setPermission(userID, PermissionType.ALL);
       destNodeSystem.save();
       destNode.refresh(true);

@@ -355,13 +355,16 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
         connected.add(loadDrive(driveNode));
       } catch (CloudProviderException e) {
         // skip drives with provider errors
-        LOG.warn("Cannot load Cloud Drive associated with node " + driveNode.getPath() + " due to provider error. "
+        if (LOG.isDebugEnabled()) {
+          LOG.warn("Cannot load Cloud Drive associated with node " + driveNode.getPath() + " due to provider error. "
             + e.getMessage() + (e.getCause() != null ? ". " + e.getCause().getMessage() : "."), e);
+        }
       } catch (DriveTrashedException e) {
         // skip trashed drive and remove its node
-        LOG.warn("Node trashed " + driveNode.getPath() + ", it cannot be loaded as Cloud Drive and will be removed. "
+        if (LOG.isDebugEnabled()) {
+          LOG.warn("Node trashed " + driveNode.getPath() + ", it cannot be loaded as Cloud Drive and will be removed. "
             + e.getMessage());
-
+        }
         // Remove the node in another thread
         final String nodeUUID = driveNode.getUUID();
         final String nodePath = driveNode.getPath();

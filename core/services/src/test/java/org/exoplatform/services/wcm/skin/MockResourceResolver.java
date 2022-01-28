@@ -26,16 +26,15 @@ import java.util.Map;
 
 import org.exoplatform.portal.resource.ResourceResolver;
 import org.exoplatform.portal.resource.Resource;
-import org.gatein.common.logging.Logger;
-import org.gatein.common.logging.LoggerFactory;
-
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 /**
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
  */
 class MockResourceResolver implements ResourceResolver {
     /** . */
-    private final Logger log = LoggerFactory.getLogger(MockResourceResolver.class);
+    private final Log         log = ExoLogger.getLogger(MockResourceResolver.class);
 
     private Map<String, String> map = new HashMap<String, String>();
 

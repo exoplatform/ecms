@@ -24,6 +24,9 @@ import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Created by The eXo Platform SAS Author : Tran Hung Phong
  * phongth@exoplatform.com Jul 24, 2012
@@ -36,7 +39,7 @@ public class XSSValidator implements Validator {
     if (inputValue == null || inputValue.trim().length() == 0) {
       return;
     }
-
+    inputValue = URLDecoder.decode(inputValue, StandardCharsets.UTF_8);
     inputValue = HTMLSanitizer.sanitize(inputValue);
     if (StringUtils.isEmpty(inputValue)) {
       String message = "UIActionForm.msg.xss-vulnerability-character";

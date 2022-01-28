@@ -8,9 +8,11 @@ export function installExtensions() {
     iconClass: 'addFileComposerIcon',
     appClass: 'attachmentsSelector',
     component: {
-      name: 'exo-attachments',
+      name: 'attachment',
       props: {
-        showAttachmentsBackdrop: false,
+        isComposerAttachment: true,
+        attachmentAppConfiguration: {},
+        attachments: []
       },
       model: {
         value: [],
@@ -21,8 +23,8 @@ export function installExtensions() {
         'listener': 'updateAttachments'
       }]
     },
-    onExecute: function (attachmentsComponent) {
-      attachmentsComponent.toggleAttachmentsDrawer();
+    onExecute: function (attachmentsComponent, attachments) {
+      attachmentsComponent.openAttachmentsAppDrawer(attachments);
     }
   });
 
@@ -59,6 +61,7 @@ export function installExtensions() {
       if (data) {
         extensionRegistry.registerExtension('activity', 'action', Object.assign({
           id: 'download',
+          icon: 'fa-download',
           labelKey: 'documents.label.download',
           isEnabled: activity => {
             if (activity.templateParams) {
@@ -73,6 +76,7 @@ export function installExtensions() {
         extensionRegistry.registerExtension('activity', 'action', Object.assign({
           id: 'downloadAll',
           labelKey: 'documents.label.downloadAll',
+          icon: 'fa-download',
           isEnabled: activity => {
             if (activity.templateParams) {
               const docPaths = activity.templateParams.DOCPATH && activity.templateParams.DOCPATH.split('|@|')

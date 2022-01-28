@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.ElasticSearchFilter;
 import org.exoplatform.commons.search.es.ElasticSearchFilterType;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.impl.Utils;
@@ -23,10 +24,13 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 
 import io.swagger.annotations.*;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.metadata.favorite.FavoriteService;
 
 /**
  * @author Ayoub Zayati
@@ -60,7 +64,8 @@ public class FileSearchRestService implements ResourceContainer {
                                         @ApiParam(value = "My work", required = false, defaultValue = "false") @QueryParam("myWork") boolean myWork,
                                         @ApiParam(value = "Sort field", required = false, defaultValue = "date") @QueryParam("sort") String sortField,
                                         @ApiParam(value = "Sort direction", required = false, defaultValue = "desc") @QueryParam("direction") String sortDirection,
-                                        @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+                                        @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit,
+                                        @ApiParam(value = "favorites", required = false, defaultValue = "false") @QueryParam("favorites") boolean favorites) throws Exception {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
@@ -73,6 +78,13 @@ public class FileSearchRestService implements ResourceContainer {
     List<ElasticSearchFilter> recentFilters = new ArrayList<>();
     if (myWork) {
       recentFilters.add(filterMyWorkingDocuments());
+    }
+    if (favorites) {
+      Map<String, List<String>> metadataFilters = buildMetadataFilter();
+      String metadataQuery = buildMetadataQueryStatement(metadataFilters);
+      StringBuilder recentFilter = new StringBuilder();
+      recentFilter.append(metadataQuery);
+      recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MATADATAS, "", recentFilter.toString()));
     }
     recentFilters.add(getFileTypesFilter(myWork));
     UserACL userACL = PortalContainer.getInstance().getComponentInstanceOfType(UserACL.class);
@@ -165,4 +177,26 @@ public class FileSearchRestService implements ResourceContainer {
       sessionProvider.close();
     }
   }
+
+  private String buildMetadataQueryStatement(Map<String, List<String>> metadataFilters) {
+    StringBuilder metadataQuerySB = new StringBuilder();
+    Set<Map.Entry<String, List<String>>> metadataFilterEntries = metadataFilters.entrySet();
+    for (Map.Entry<String, List<String>> metadataFilterEntry : metadataFilterEntries) {
+      metadataQuerySB.append("{\"terms\":{\"metadatas.")
+              .append(metadataFilterEntry.getKey())
+              .append(".metadataName.keyword")
+              .append("\": [\"")
+              .append(org.apache.commons.lang.StringUtils.join(metadataFilterEntry.getValue(), "\",\""))
+              .append("\"]}},");
+    }
+    return metadataQuerySB.toString();
+  }
+
+  private Map<String, List<String>> buildMetadataFilter() {
+    Identity viewerIdentity = CommonsUtils.getService(IdentityManager.class).getOrCreateIdentity(OrganizationIdentityProvider.NAME, ConversationState.getCurrent().getIdentity().getUserId());
+    Map<String, List<String>> metadataFilters = new HashMap<>();
+    metadataFilters.put(FavoriteService.METADATA_TYPE.getName(), Collections.singletonList(viewerIdentity.getId()));
+    return metadataFilters;
+  }
+
 }

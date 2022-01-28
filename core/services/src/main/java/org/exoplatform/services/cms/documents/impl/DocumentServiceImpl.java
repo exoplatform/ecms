@@ -220,9 +220,10 @@ public class DocumentServiceImpl implements DocumentService {
   public String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
     Node rootNode = null;
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    Session session = null;
     try {
       ManageableRepository repository = repoService.getCurrentRepository();
-      Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+      session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
       //add symlink to user folder destination
       nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
       rootNode = (Node) session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + getPrivatePath(username));
@@ -232,8 +233,11 @@ public class DocumentServiceImpl implements DocumentService {
       LOG.error(e.getMessage(), e);
       return "";
     } finally {
-      sessionProvider.close();
-    }
+        if(session != null)
+        {
+          session.logout();
+        }
+      }
   }
 
   /**
@@ -726,13 +730,13 @@ public class DocumentServiceImpl implements DocumentService {
       String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
       String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
               : null;
-      if (editorsRuntimeId.equals(currentRuntumeId)) {
+      if (currentRuntumeId != null && editorsRuntimeId.equals(currentRuntumeId)) {
         return provider;
       } else {
         String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
+        Session session = systemSession;
         WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
           try {
-            Session session = sessionProvider.getSession(workspace, repoService.getCurrentRepository());
             Node tagetNode = session.getNodeByUUID(uuid);
             if (tagetNode.isNodeType(EXO_SYMLINK)) {
               tagetNode = linkManager.getTarget(tagetNode);
@@ -784,6 +788,7 @@ public class DocumentServiceImpl implements DocumentService {
  public List<Document> getDocumentsByFolder(String folder, String condition, long limit) throws Exception {
    List<Document> documents = new ArrayList<Document>();
    if (folder != null) {
+     folder = escapeSQLString(folder);
      String query = "select * from nt:base where jcr:path like '" + folder + "/%' "
          + "and (exo:primaryType = 'nt:file' or jcr:primaryType = 'nt:file') "
          + "and (exo:fileType like '%pdf%' "
@@ -799,7 +804,54 @@ public class DocumentServiceImpl implements DocumentService {
    }
    return documents;
  }
-  
+
+  private static String escapeSQLString(String value){
+    int length = value.length();
+    int newLength = length;
+    // first check for characters that might
+    // be dangerous and calculate a length
+    // of the string that has escapes.
+    for (int i=0; i<length; i++){
+      char c = value.charAt(i);
+      switch(c){
+        case '\\':
+        case '\"':
+        case '\'':
+        case '\0':{
+          newLength += 1;
+        } break;
+        default:
+          break;
+      }
+    }
+    if (length == newLength){
+      // nothing to escape in the string
+      return value;
+    }
+    StringBuilder sb = new StringBuilder(newLength);
+    for (int i=0; i<length; i++){
+      char c = value.charAt(i);
+      switch(c){
+        case '\\':{
+          sb.append("\\\\");
+        } break;
+        case '\"':{
+          sb.append("\\\"");
+        } break;
+        case '\'':{
+          sb.append("\\\'");
+        } break;
+        case '\0':{
+          sb.append("\\0");
+        } break;
+        default: {
+          sb.append(c);
+        }
+      }
+    }
+    return sb.toString();
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -829,7 +881,7 @@ public class DocumentServiceImpl implements DocumentService {
                                          Utils.getFileType(originalDocumentNode),
                                          Utils.getDate(documentNode).getTime().getTime(),
                                          getFilePreviewBreadCrumb(documentNode),
-                                         getLinkInDocumentsApp(originalDocumentNode.getPath()),
+                                         getLinkInDocumentsApp(documentNode.getPath()),
                                          getDownloadUri(originalDocumentNode),
                                          VersionHistoryUtils.getVersion(originalDocumentNode),
                                          Utils.fileSize(originalDocumentNode),
