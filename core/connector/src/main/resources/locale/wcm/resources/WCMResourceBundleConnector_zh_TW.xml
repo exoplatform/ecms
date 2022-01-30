@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><bundle>
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
   <ContentSelector>
     <msg>
       <no-file-selected>沒有選定的內容。請至少選擇一個。</no-file-selected>
