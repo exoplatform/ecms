@@ -98,6 +98,7 @@ export default {
               title: eXo.env.portal.spaceDisplayName,
             },
             'defaultFolder': 'Documents',
+            'sourceApp': '',
           };
         } else {
           this.attachmentAppConfiguration = {
@@ -107,7 +108,32 @@ export default {
               title: 'Personal Documents'
             },
             'defaultFolder': 'Documents',
+            'sourceApp': '',
           };
+        }
+      } else {
+        if (!this.attachmentAppConfiguration.defaultDrive) {
+          if (eXo.env.portal.spaceDisplayName) {
+            this.attachmentAppConfiguration.defaultDrive = {
+              isSelected: true,
+              name: `.spaces.${eXo.env.portal.spaceGroup}`,
+              title: eXo.env.portal.spaceDisplayName,
+            };
+          } else {
+            this.attachmentAppConfiguration.defaultDrive = {
+              isSelected: true,
+              name: 'Personal Documents',
+              title: 'Personal Documents'
+            };
+          }
+        }
+        if (!this.attachmentAppConfiguration.defaultFolder) {
+          this.attachmentAppConfiguration.defaultFolder = 'Documents';
+        }
+        if (!this.attachmentAppConfiguration.sourceApp) {
+          this.attachmentAppConfiguration.sourceApp = '';
+        } else {
+          this.$root.$emit('set-source-app', this.attachmentAppConfiguration.sourceApp);
         }
       }
       this.attachments = [];
