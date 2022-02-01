@@ -29,13 +29,7 @@ public class TestFavoriteService extends BaseWCMTestCase {
 
     public void testgetAllFavoriteNodesByUserThrowsNoExceptionIfHasNoFavorite() throws Exception {
         applyUserSession("john", "gtn", COLLABORATION_WS);
-        Node userNode =
-                nodeHierarchyCreator.getUserNode(sessionProvider, "john");
-        String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-        if (userNode.hasNode(favoritePath)) {
-            userNode.getNode(favoritePath).remove();
-        }
-        List<Node> list = favoriteService.getAllFavoriteNodesByUser(COLLABORATION_WS, REPO_NAME, "john");
+        List<Node> list = favoriteService.getAllFavoriteNodesByUser("john",0);
         assertEquals(0, list.size());
     }
 }

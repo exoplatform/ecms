@@ -21,23 +21,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
+import javax.jcr.*;
 
-import org.exoplatform.services.cms.documents.FavoriteService;
-import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.metadata.MetadataService;
+import org.exoplatform.social.metadata.favorite.model.Favorite;
+import org.exoplatform.social.metadata.favorite.FavoriteService;
+import org.exoplatform.social.metadata.favorite.model.Favorite;
+import org.exoplatform.social.metadata.model.Metadata;
+import org.exoplatform.social.metadata.model.MetadataItem;
+import org.exoplatform.social.metadata.model.MetadataKey;
+import org.exoplatform.social.metadata.model.MetadataType;
 
 /**
  * Created by The eXo Platform SARL
@@ -46,82 +51,60 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Nov 16, 2009
  * 10:02:04 AM
  */
-public class FavoriteServiceImpl implements FavoriteService {
+public class FavoriteServiceImpl implements org.exoplatform.services.cms.documents.FavoriteService {
 
-  private static final String EXO_PRIVILEGEABLE = "exo:privilegeable";
-  private static final String EXO_FAVORITEFOLDER = "exo:favoriteFolder";
-  private static final String NT_UNSTRUCTURED = "nt:unstructured";
-  private static final String FAVORITE_ALIAS = "userPrivateFavorites";
-
-  private NodeHierarchyCreator nodeHierarchyCreator;
-  private LinkManager linkManager;
+  private IdentityManager identityManager;
+  private FavoriteService favoriteService;
+  private MetadataService metadataService;
   private SessionProviderService sessionProviderService;
+  private RepositoryService repositoryService;
 
-  private OrganizationService    organizationService;
+  private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class);
 
-  public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
-      SessionProviderService sessionProviderService, OrganizationService organizationService) {
-    this.nodeHierarchyCreator = nodeHierarchyCreator;
-    this.linkManager = linkManager;
+  public static final MetadataType METADATA_TYPE = new MetadataType(1, "favorites");
+
+  public FavoriteServiceImpl(IdentityManager identityManager, FavoriteService favoriteService, MetadataService metadataService, SessionProviderService sessionProviderService, RepositoryService repositoryService) {
+    this.identityManager = identityManager;
+    this.favoriteService = favoriteService;
+    this.metadataService = metadataService;
     this.sessionProviderService = sessionProviderService;
-    this.organizationService = organizationService;
+    this.repositoryService = repositoryService;
   }
 
   /**
    * {@inheritDoc}
    */
   public void addFavorite(Node node, String userName) throws Exception {
-    // check if node is symlink
-    if (linkManager.isLink(node)) return;
-
-    // check if node has already been favorite node of current user
-    Node userFavoriteNode = null;
-    try {
-      userFavoriteNode = getUserFavoriteFolder(userName);
-      if (userFavoriteNode == null) {
-        return;
-      }
-    } catch (PathNotFoundException e) {
-      userFavoriteNode = createFavoriteFolder(userName);
+    Identity identity = identityManager.getOrCreateUserIdentity(userName);
+    if (identity != null) {
+      Favorite favorite = new Favorite("file", node.getUUID(), "", Long.parseLong(identity.getId()));
+      favoriteService.createFavorite(favorite);
     }
-
-    NodeIterator nodeIter = userFavoriteNode.getNodes();
-    while (nodeIter.hasNext()) {
-      Node childNode = nodeIter.nextNode();
-      if (linkManager.isLink(childNode)) {
-        Node targetNode = getTargetNode(childNode);
-        if (node.isSame(targetNode)) return;
-      }
-    }
-    // add favorite symlink
-    Node favoriteNode = linkManager.createLink(userFavoriteNode, NodetypeConstant.EXO_SYMLINK, node, node.getName() + ".lnk");
-    String nodeMimeType = Utils.getFileType(node);
-    favoriteNode.addMixin(NodetypeConstant.MIX_FILE_TYPE);
-    favoriteNode.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
-    if (favoriteNode.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
-      ((NodeImpl) favoriteNode).setPermission(userName, PermissionType.ALL);
-      favoriteNode.save();
-    }
-    userFavoriteNode.save();
-    userFavoriteNode.getSession().save();
   }
 
   /**
    * {@inheritDoc}
    */
-  public List<Node> getAllFavoriteNodesByUser(String workspace, String repository, String userName) throws Exception {
+  public List<Node> getAllFavoriteNodesByUser(String userName, int limit) throws Exception {
+    
     List<Node> ret = new ArrayList<Node>();
-    Node userFavoriteNode = getUserFavoriteFolder(userName);
-    if (userFavoriteNode != null) {
-      NodeIterator nodeIter = userFavoriteNode.getNodes();
-      while (nodeIter.hasNext()) {
-        Node childNode = nodeIter.nextNode();
-        if (linkManager.isLink(childNode)) {
-          Node targetNode = getTargetNode(childNode);
-          if (targetNode != null)
-            ret.add(targetNode);
+    Identity identity = identityManager.getOrCreateUserIdentity(userName);
+    if(identity != null){
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      Session session = sessionProvider.getSession(repositoryService.getCurrentRepository()
+              .getConfiguration()
+              .getDefaultWorkspaceName(), repositoryService.getCurrentRepository());
+    List<MetadataItem> favorites = metadataService.getMetadataItemsByMetadataNameAndTypeAndObject(String.valueOf(identity.getId()),METADATA_TYPE.getName(),"file",0,limit);
+    for(MetadataItem favorite : favorites){
+      try {
+        Node node =  session.getNodeByUUID(favorite.getObjectId());
+        if(node != null){
+          ret.add(node);
         }
+      } catch (RepositoryException repositoryException) {
+        LOG.warn("Can't get Favorite Node with UIID {}",favorite.getObjectId());
       }
+    }
     }
     return ret;
   }
@@ -130,111 +113,20 @@ public class FavoriteServiceImpl implements FavoriteService {
    * {@inheritDoc}
    */
   public void removeFavorite(Node node, String userName) throws Exception {
-    Node targetNode = null;
-
-    // check if node is symlink
-    if (linkManager.isLink(node)) {
-      targetNode = getTargetNode(node);
-      if (targetNode != null) removeFavorite(targetNode, userName);
-    } else {
-      // remove favorite
-      Node userFavoriteNode = getUserFavoriteFolder(userName);
-      if(userFavoriteNode != null) { // to avoid NPE
-        NodeIterator nodeIter = userFavoriteNode.getNodes();
-        while (nodeIter.hasNext()) {
-          Node childNode = nodeIter.nextNode();
-          if (linkManager.isLink(childNode)) {
-           targetNode = getTargetNode(childNode);
-            if (node.isSame(targetNode)) {
-              childNode.remove();
-              userFavoriteNode.save();
-              return;
-            }
-          }
-        }
-      }
-    }
+    Identity identity = identityManager.getOrCreateUserIdentity(userName);
+    Favorite favorite = new Favorite("file", node.getUUID(), "", Long.parseLong(identity.getId()));
+    favoriteService.deleteFavorite(favorite);
   }
 
   public boolean isFavoriter(String userName, Node node) throws Exception {
-    LinkManager lnkManager = WCMCoreUtils.getService(LinkManager.class);
-
-    if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
-      node = lnkManager.getTarget(node);
-    }
-
-    Node userFavoriteNode = null;
     try {
-      userFavoriteNode = getUserFavoriteFolder(userName);
-      if(userFavoriteNode == null) {
-        return false;
-      }
-    } catch (PathNotFoundException e) {
+      Identity identity = identityManager.getOrCreateUserIdentity(userName);
+      Favorite favorite = new Favorite("file", node.getUUID(), "", Long.parseLong(identity.getId()));
+      return favoriteService.isFavorite(favorite);
+    } catch (Exception e) {
+      LOG.warn("Cannot get the identifier of the node");
       return false;
     }
-
-    NodeIterator nodeIter = userFavoriteNode.getNodes();
-    while (nodeIter.hasNext()) {
-      Node childNode = nodeIter.nextNode();
-      if (linkManager.isLink(childNode)) {
-        Node targetNode = getTargetNode(childNode);
-        if (node.isSame(targetNode)) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
-  private Node getUserFavoriteFolder(String userName) throws Exception {
-    if (organizationService.getUserHandler().findUserByName(userName) == null) {
-      return null;
-    }
-    Node userNode =
-      nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
-    String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-    if (favoritePath == null || !userNode.hasNode(favoritePath)) {
-      return null;
-    }
-    return userNode.getNode(favoritePath);
-  }
-
-  private Node createFavoriteFolder(String userName) throws Exception {
-    // Get default favorite path
-    Node userNode =
-      nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
-    String userFavoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-
-    // Create favorite path
-    Node userFavoriteNode = userNode.addNode(userFavoritePath, NT_UNSTRUCTURED);
-
-    // Add Mixin types
-    userFavoriteNode.addMixin(EXO_PRIVILEGEABLE);
-    userFavoriteNode.addMixin(EXO_FAVORITEFOLDER);
-
-    // Add permission
-    Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
-    permissionsMap.put(userName, PermissionType.ALL);
-    ((ExtendedNode)userFavoriteNode).setPermissions(permissionsMap);
-    userNode.save();
-
-    return userFavoriteNode;
-  }
-
-  /**
-   * Get Target Node
-   * @param linkNode Link Node
-   * @return Real Node
-   */
-  private Node getTargetNode(Node linkNode) {
-    Node targetNode = null;
-    try {
-      targetNode = linkManager.getTarget(linkNode);
-    } catch (ItemNotFoundException e) {
-      targetNode = null;
-    } catch (RepositoryException e) {
-      targetNode = null;
-    }
-    return targetNode;
-  }
 }
