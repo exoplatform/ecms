@@ -42,6 +42,7 @@
     <!-- **************************************** -->
     <org.exoplatform.social.version>6.3.x-SNAPSHOT</org.exoplatform.social.version>
     <addon.exo.jcr.version>6.3.x-SNAPSHOT</addon.exo.jcr.version>
+    <addon.exo.tasks.version>3.3.x-SNAPSHOT</addon.exo.tasks.version>
     <org.exoplatform.platform-ui.version>6.3.x-SNAPSHOT</org.exoplatform.platform-ui.version>
     <!-- **************************************** -->
     <!-- Google API -->
@@ -96,10 +97,19 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- Import versions from platform-ui project -->
       <dependency>
         <groupId>org.exoplatform.platform-ui</groupId>
         <artifactId>platform-ui</artifactId>
         <version>${org.exoplatform.platform-ui.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Import versions from task project -->
+      <dependency>
+        <groupId>org.exoplatform.addons.task</groupId>
+        <artifactId>task-management-parent</artifactId>
+        <version>${addon.exo.tasks.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

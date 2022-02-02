@@ -38,6 +38,12 @@ export function installExtensions() {
     rank: 10,
   });
 
+  extensionRegistry.registerComponent('TaskDrawer', 'task-drawer-action', {
+    id: 'attachments',
+    vueComponent: Vue.options.components['task-attachment'],
+    rank: 10,
+  });
+
   const downloadHandlerExtension = {
     click: (activity) => {
       const repositories = activity.templateParams.REPOSITORY && activity.templateParams.REPOSITORY.split('|@|')

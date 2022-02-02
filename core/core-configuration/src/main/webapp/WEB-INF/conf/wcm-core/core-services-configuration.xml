@@ -2,8 +2,8 @@
 
 <configuration
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-        xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+        xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd http://www.exoplatform.org/xml/ns/kernel_1_3.xsd"
+        xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
 
 
     <component>
@@ -527,5 +527,15 @@
 			</init-params>
 		</component-plugin>
 	</external-component-plugins>
+
+  <external-component-plugins profiles="task">
+    <target-component>org.exoplatform.services.attachments.service.AttachmentService</target-component>
+    <component-plugin>
+      <name>TaskAttachmentACLPlugin</name>
+      <set-method>addACLPlugin</set-method>
+      <type>org.exoplatform.services.attachments.plugin.task.TaskAttachmentACLPlugin</type>
+    </component-plugin>
+  </external-component-plugins>
+
 </configuration>
 

@@ -647,3 +647,18 @@
 .parentPosition:hover .uiIconQuestion {
   color: @linkColor;
 }
+
+/*=========== Task Addon Attachment plugin ============*/
+.taskAttachment {
+  .uiAttachIcon {
+    padding-right: 2px ~'; /** orientation=lt */ ';
+    padding-left: 2px ~'; /** orientation=rt */ ';
+    &:before {
+      content: "\e91f";
+      font-family: "PLF-FONT-ICONS" !important;
+      color: @likeButtonColor;
+      font-style: normal;
+      font-size: 18px;
+    }
+  }
+}

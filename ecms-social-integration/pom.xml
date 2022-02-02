@@ -55,6 +55,11 @@
       <artifactId>exo-jcr-services</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.addons.task</groupId>
+      <artifactId>task-management-services</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.commons</artifactId>
     </dependency>
