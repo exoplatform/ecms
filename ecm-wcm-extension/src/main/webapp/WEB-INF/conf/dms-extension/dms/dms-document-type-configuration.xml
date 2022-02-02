@@ -104,7 +104,9 @@
               <value><string>dot</string></value>
               <value><string>dotm</string></value>
               <value><string>dotx</string></value>
-            </collection>
+		      <value><string>docxf</string></value>
+			  <value><string>oform</string></value>
+			</collection>
           </field>
         </object>
       </object-param>
