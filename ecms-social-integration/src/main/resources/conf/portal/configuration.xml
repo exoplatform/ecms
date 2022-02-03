@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd http://www.exoplatform.org/xml/ns/kernel_1_3.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
+
+  <external-component-plugins profiles="analytics">
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>exo.upload.doc.newApp</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.ecms.listener.analytics.AnalyticsDocumentsListener</type>
+      <init-params>
+        <value-param>
+          <name>operation</name>
+          <value>documentUploadedNewApp</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>exo.upload.doc.oldApp</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.ecms.listener.analytics.AnalyticsDocumentsListener</type>
+      <init-params>
+        <value-param>
+          <name>operation</name>
+          <value>documentUploadedOldApp</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins profiles="ecms">
+    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>       
+    <component-plugin>
+      <name>addActions</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
+      <description>add actions plugin</description>
+      <init-params>
+        <object-param>
+          <name>actions</name>
+          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
+            <field  name="actions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="workspace">
+                      <string>collaboration</string>
+                    </field>
+                    <field name="eventTypes">
+                      <string>addNode,addProperty,changeProperty,removeProperty</string>
+                    </field>
+                    <field name="ignoredProperties">
+                      <string>${exo.analytics.documents.ignored-properties:exo:editorsId,exo:currentProvider,exo:prefferedEditor}</string>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.ecms.listener.analytics.JCRNodeListener</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+</configuration>
