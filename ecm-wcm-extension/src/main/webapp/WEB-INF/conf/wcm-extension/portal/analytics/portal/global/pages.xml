@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    Copyright (C) 2020 eXo Platform SAS.
+
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<page-set xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_objects_1_8 http://www.exoplatform.org/xml/ns/gatein_objects_1_8" xmlns="http://www.exoplatform.org/xml/ns/gatein_objects_1_8">
+
+  <page>
+      <name>analytics-documents</name>
+      <title>Analytics</title>
+      <access-permissions>*:/platform/analytics;*:/platform/administrators</access-permissions>
+      <edit-permission>manager:/platform/analytics</edit-permission>
+      <container
+              id="topAnalyticsPage"
+              template="system:/groovy/portal/webui/container/UIContainer.gtmpl"
+              cssClass="singlePageApplication border-box-sizing">
+          <access-permissions>Everyone</access-permissions>
+          <container id="breadcrumbAnalytics" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+              <access-permissions>Everyone</access-permissions>
+              <portlet-application>
+                  <portlet>
+                      <application-ref>analytics</application-ref>
+                      <portlet-ref>AnalyticsDashboardBreadcrumb</portlet-ref>
+                  </portlet>
+                  <title>Breadcrumb Analytics</title>
+                  <access-permissions>Everyone</access-permissions>
+                  <show-info-bar>false</show-info-bar>
+              </portlet-application>
+          </container>
+          <container template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+              <access-permissions>Everyone</access-permissions>
+              <portlet-application>
+                  <portlet>
+                      <application-ref>analytics</application-ref>
+                      <portlet-ref>AnalyticsTablePortlet</portlet-ref>
+                      <preferences>
+                          <preference>
+                              <name>settings</name>
+                              <value>
+                                {
+                                  "pageSize":20,
+                                  "title":"",
+                                  "sortBy":"3",
+                                  "sortDirection":"desc",
+                                  "mainColumn":{
+                                     "title":"analytics.title",
+                                     "align": "left",
+                                     "width": "30vw",
+                                     "sortable":false,
+                                     "valueAggregation":{
+                                        "aggregation":{
+                                          "field":"documentId.keyword",
+                                          "type":"TERMS",
+                                          "dataType":"text"
+                                        },
+                                        "filters":[
+                                          {
+                                             "field":"subModule",
+                                             "type":"EQUAL",
+                                             "valueString":"attachment-drawer"
+                                          }
+                                        ]
+                                     }
+                                  },
+                                  "columns":[
+                                     {
+                                        "title":"analytics.type",
+                                        "previousPeriod":false,
+                                        "valueAggregation":{
+                                           "periodIndependent":true,
+                                           "aggregation":{
+                                              "sortDirection":"desc",
+                                              "field":"documentExtension.keyword",
+                                              "type":"TERMS"
+                                           }
+                                        },
+                                        "sortable":false,
+                                        "dataType":"text"
+                                     },
+                                     {
+                                       "title":"analytics.author",
+                                       "previousPeriod":false,
+                                       "valueAggregation":{
+                                          "aggregation":{
+                                             "sortDirection":"desc",
+                                             "field":"userId",
+                                             "type":"TERMS"
+                                          },
+                                         "periodIndependent":true
+                                       },
+                                      "sortable":false,
+                                      "dataType":"text"
+                                      },
+                                     {
+                                       "title":"analytics.creationDate",
+                                       "previousPeriod":false,
+                                       "valueAggregation":{
+                                          "periodIndependent":true,
+                                          "aggregation":{
+                                            "sortDirection":"desc",
+                                            "field":"timestamp",
+                                            "type":"MAX"
+                                          }
+                                      },
+                                      "sortable":true,
+                                      "dataType":"date"
+                                   },
+                                   {
+                                      "title":"analytics.size",
+                                      "previousPeriod":false,
+                                      "valueAggregation":{
+                                          "periodIndependent":true,
+                                          "aggregation":{
+                                            "sortDirection":"desc",
+                                            "field":"documentSize",
+                                            "type":"MAX"
+                                          }
+                                      },
+                                      "sortable":true,
+                                      "dataType":"long"
+                                    },
+                                   {
+                                      "title":"analytics.origin",
+                                      "previousPeriod":false,
+                                      "valueAggregation":{
+                                      "periodIndependent":true,
+                                      "aggregation":{
+                                        "sortDirection":"desc",
+                                        "field":"origin.keyword",
+                                        "type":"TERMS"
+                                      }
+                                     },
+                                      "sortable":false,
+                                      "dataType":"text"
+                                   }
+                                  ]
+                                }
+                              </value>
+                          </preference>
+                      </preferences>
+                  </portlet>
+                  <title>File Management Analytics</title>
+                  <access-permissions>Everyone</access-permissions>
+                  <show-info-bar>false</show-info-bar>
+              </portlet-application>
+          </container>
+      </container>
+  </page>
+
+</page-set>
