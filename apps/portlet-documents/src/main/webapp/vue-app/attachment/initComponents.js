@@ -14,6 +14,9 @@ import ActivityAttachments from './components/activity/ActivityAttachments.vue';
 import ActivityAttachment from './components/activity/ActivityAttachment.vue';
 import AttachmentCreateDocumentInput from './components/attachment-document-creator/AttachmentCreateDocumentInput.vue';
 import TaskAttachment from './components/task/TaskAttachment.vue';
+import AnalyticsTableCellDocumentTitleValue from './components/analytics/AnalyticsTableCellDocumentTitleValue.vue';
+import AnalyticsTableCellDocumentSizeValue from './components/analytics/AnalyticsTableCellDocumentSizeValue.vue';
+import AnalyticsTableCellDocumentOriginValue from './components/analytics/AnalyticsTableCellDocumentOriginValue.vue';
 
 const components = {
   'attachments-drawer': AttachmentsDrawer,
@@ -32,6 +35,9 @@ const components = {
   'activity-attachment': ActivityAttachment,
   'attachment-create-document-input': AttachmentCreateDocumentInput,
   'task-attachment': TaskAttachment,
+  'analytics-table-cell-document-title-value': AnalyticsTableCellDocumentTitleValue,
+  'analytics-table-cell-document-size-value': AnalyticsTableCellDocumentSizeValue,
+  'analytics-table-cell-document-origin-value': AnalyticsTableCellDocumentOriginValue,
 };
 
 for (const key in components) {
