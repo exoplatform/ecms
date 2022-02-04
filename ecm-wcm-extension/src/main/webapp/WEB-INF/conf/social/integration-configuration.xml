@@ -74,7 +74,7 @@
           <description>Files Search connector</description>
           <object type="org.exoplatform.social.core.search.SearchConnector">
             <field name="name">
-              <string>file</string>
+              <string>files</string>
             </field>
             <field name="uri">
               <string><![CDATA[/portal/rest/search/documents/recent?limit={limit}&q={keyword}&sort=relevancy]]></string>
