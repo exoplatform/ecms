@@ -95,4 +95,38 @@ export function installExtensions() {
       }
     });
 
+  extensionRegistry.registerExtension('AnalyticsTable', 'CellValue', {
+    type: 'document-title',
+    options: {
+      // Rank of executing 'match' method
+      rank: 10,
+      // Used Vue component to display cell value
+      vueComponent: Vue.options.components['analytics-table-cell-document-title-value'],
+      // Method complete signature : match: (fieldName, aggregationType, fieldDataType, item) => { ... }
+      match: fieldName => fieldName === 'documentId.keyword',
+    },
+  });
+  extensionRegistry.registerExtension('AnalyticsTable', 'CellValue', {
+    type: 'document-size',
+    options: {
+      // Rank of executing 'match' method
+      rank: 20,
+      // Used Vue component to display cell value
+      vueComponent: Vue.options.components['analytics-table-cell-document-size-value'],
+      // Method complete signature : match: (fieldName, aggregationType, fieldDataType, item) => { ... }
+      match: fieldName => fieldName === 'documentSize',
+    },
+  });
+  extensionRegistry.registerExtension('AnalyticsTable', 'CellValue', {
+    type: 'document-origin',
+    options: {
+      // Rank of executing 'match' method
+      rank: 30,
+      // Used Vue component to display cell value
+      vueComponent: Vue.options.components['analytics-table-cell-document-origin-value'],
+      // Method complete signature : match: (fieldName, aggregationType, fieldDataType, item) => { ... }
+      match: fieldName => fieldName === 'origin.keyword',
+    },
+  });
+
 }
