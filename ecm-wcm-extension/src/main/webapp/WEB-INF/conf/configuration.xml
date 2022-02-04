@@ -74,6 +74,7 @@
   <import>war:/conf/social/activity-listeners-configuration.xml</import>
   <import>war:/conf/social/integration-configuration.xml</import>
   <import>war:/conf/social/spaces-templates-configuration.xml</import>
+  <import profiles="analytics">war:/conf/social/analytics-ui-watchers-configuration.xml</import>
   <import profiles="app-center">war:/conf/wcm-extension/app-center-configuration.xml</import>
   <import>war:/conf/wcm-extension/dynamic-container-configuration.xml</import>
 

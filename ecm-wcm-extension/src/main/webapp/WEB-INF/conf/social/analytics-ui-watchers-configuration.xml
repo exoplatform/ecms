@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2019 eXo Platform SAS. This is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version. This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+  for more details. You should have received a copy of the GNU Lesser General Public License along with this software; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA, or see the FSF site: http://www.fsf.org. -->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  <external-component-plugins>
+    <target-component>org.exoplatform.analytics.api.service.AnalyticsService</target-component>
+
+    <component-plugin>
+      <name>Switch to Old Documents</name>
+      <set-method>addUIWatcherPlugin</set-method>
+      <type>org.exoplatform.analytics.api.service.StatisticUIWatcherPlugin</type>
+      <init-params>
+        <object-param>
+          <name>watcher</name>
+          <object type="org.exoplatform.analytics.api.service.StatisticWatcher">
+            <!-- Statistic data: name field -->
+            <field name="name">
+              <string>Switch to Old Documents</string>
+            </field>
+            <!-- Statistic data: operation field -->
+            <field name="operation">
+              <string>click</string>
+            </field>
+            <!-- Statistic data: additional embedded parameters -->
+            <field name="parameters">
+              <map type="java.util.HashMap">
+                <entry>
+                  <key>
+                    <string>ui</string>
+                  </key>
+                  <value>
+                    <string>documents</string>
+                  </value>
+                </entry>
+                <entry>
+                  <key>
+                    <string>application</string>
+                  </key>
+                  <value>
+                    <string>documentsHeader</string>
+                  </value>
+                </entry>
+              </map>
+            </field>
+            <!-- DOM jquery selector, used to search elements -->
+            <field name="domSelector">
+              <string>#switchToOldDocuments</string>
+            </field>
+            <!-- DOM jquery event, used to trigger storing new statistic data -->
+            <field name="domEvent">
+              <string>mousedown</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+
+    <component-plugin>
+      <name>Switch to New Documents</name>
+      <set-method>addUIWatcherPlugin</set-method>
+      <type>org.exoplatform.analytics.api.service.StatisticUIWatcherPlugin</type>
+      <init-params>
+        <object-param>
+          <name>watcher</name>
+          <object type="org.exoplatform.analytics.api.service.StatisticWatcher">
+            <!-- Statistic data: name field -->
+            <field name="name">
+              <string>Switch to New Documents</string>
+            </field>
+            <!-- Statistic data: operation field -->
+            <field name="operation">
+              <string>click</string>
+            </field>
+            <!-- Statistic data: additional embedded parameters -->
+            <field name="parameters">
+              <map type="java.util.HashMap">
+                <entry>
+                  <key>
+                    <string>ui</string>
+                  </key>
+                  <value>
+                    <string>documents</string>
+                  </value>
+                </entry>
+                <entry>
+                  <key>
+                    <string>application</string>
+                  </key>
+                  <value>
+                    <string>documentsHeader</string>
+                  </value>
+                </entry>
+              </map>
+            </field>
+            <!-- DOM jquery selector, used to search elements -->
+            <field name="domSelector">
+              <string>#switchToNewDocuments</string>
+            </field>
+            <!-- DOM jquery event, used to trigger storing new statistic data -->
+            <field name="domEvent">
+              <string>mousedown</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+
+    <component-plugin>
+      <name>Preview file on new document app</name>
+      <set-method>addUIWatcherPlugin</set-method>
+      <type>org.exoplatform.analytics.api.service.StatisticUIWatcherPlugin</type>
+      <init-params>
+        <object-param>
+          <name>watcher</name>
+          <object type="org.exoplatform.analytics.api.service.StatisticWatcher">
+            <!-- Statistic data: name field -->
+            <field name="name">
+              <string>Preview file on new document app</string>
+            </field>
+            <!-- Statistic data: operation field -->
+            <field name="operation">
+              <string>Preview file on new document app</string>
+            </field>
+            <!-- Statistic data: additional embedded parameters -->
+            <field name="parameters">
+              <map type="java.util.HashMap">
+                <entry>
+                  <key>
+                    <string>ui</string>
+                  </key>
+                  <value>
+                    <string>documents</string>
+                  </value>
+                </entry>
+                <entry>
+                  <key>
+                    <string>application</string>
+                  </key>
+                  <value>
+                    <string>documentsActions</string>
+                  </value>
+                </entry>
+              </map>
+            </field>
+            <!-- DOM jquery selector, used to search elements -->
+            <field name="domSelector">
+              <string>.openPreviewDoc</string>
+            </field>
+            <!-- DOM jquery event, used to trigger storing new statistic data -->
+            <field name="domEvent">
+              <string>mousedown</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+
+    <component-plugin>
+      <name>Preview file on old document app</name>
+      <set-method>addUIWatcherPlugin</set-method>
+      <type>org.exoplatform.analytics.api.service.StatisticUIWatcherPlugin</type>
+      <init-params>
+        <object-param>
+          <name>watcher</name>
+          <object type="org.exoplatform.analytics.api.service.StatisticWatcher">
+            <!-- Statistic data: name field -->
+            <field name="name">
+              <string>Preview file on old document app</string>
+            </field>
+            <!-- Statistic data: operation field -->
+            <field name="operation">
+              <string>Preview file on old document app</string>
+            </field>
+            <!-- Statistic data: additional embedded parameters -->
+            <field name="parameters">
+              <map type="java.util.HashMap">
+                <entry>
+                  <key>
+                    <string>ui</string>
+                  </key>
+                  <value>
+                    <string>documents</string>
+                  </value>
+                </entry>
+                <entry>
+                  <key>
+                    <string>application</string>
+                  </key>
+                  <value>
+                    <string>documentsActions</string>
+                  </value>
+                </entry>
+              </map>
+            </field>
+            <!-- DOM jquery selector, used to search elements -->
+            <field name="domSelector">
+              <string>.actionIconBox</string>
+            </field>
+            <!-- DOM jquery event, used to trigger storing new statistic data -->
+            <field name="domEvent">
+              <string>mousedown</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+
+  </external-component-plugins>
+</configuration>
