@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Selectaţi utilizatorul</SelectUser>
-      <SelectMember>Selectaţi rolul</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Selectaţi toată lumea</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Selectaţi utilizator</UIGroupSelector>
       <UIPermissionSelector>Selectaţi membru</UIPermissionSelector>
-      <UIGroupMemberSelector>Selectaţi rolul</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Selectare grup</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

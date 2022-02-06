@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>امتیاز</avg-rating>
+        <avg-rating>امتیاز میانگین</avg-rating>
         <subscription>رأی ها</subscription>
       </label>
     </view>

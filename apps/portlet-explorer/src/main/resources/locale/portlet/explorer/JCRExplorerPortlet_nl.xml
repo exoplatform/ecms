@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Selecteer gebruiker</SelectUser>
-      <SelectMember>Selecteer rol</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Selecteer iedereen</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Selecteer gebruiker</UIGroupSelector>
       <UIPermissionSelector>Selecteer lid</UIPermissionSelector>
-      <UIGroupMemberSelector>Selecteer rol</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Selecteer groep</selectGroup>
       <selectUser>Selecteer gebruiker</selectUser>
-      <selectMembership>Selecteer rol</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Selecteer groep</selectGroup>
       <selectUser>Selecteer gebruiker</selectUser>
-      <selectMembership>Selecteer rol</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

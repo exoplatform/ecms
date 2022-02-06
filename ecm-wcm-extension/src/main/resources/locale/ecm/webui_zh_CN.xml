@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>选择用户</UIPermissionUser>
-      <UIPermissionMembership>选择一个角色</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>选择一个角色</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>选择一个角色</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>浏览并选择一个组</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>选择组</selectGroup>
-      <selectMembership>选择一个角色</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

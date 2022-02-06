@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Vybrat roli</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
-      <selectMembership>Vybrat roli</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Vybrat uživatele</SelectUser>
-      <SelectMember>Vybrat roli</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Každý</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Vybrat uživatele</UIGroupSelector>
       <UIPermissionSelector>Vybrat člena</UIPermissionSelector>
-      <UIGroupMemberSelector>Vybrat roli</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat roli</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat roli</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Vybrat roli</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
       <selectUser>Vybrat uživatele</selectUser>
-      <selectMembership>Vybrat roli</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Vybrat skupinu</selectGroup>
-      <selectMembership>Vybrat roli</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

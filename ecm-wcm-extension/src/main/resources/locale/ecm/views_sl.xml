@@ -60,7 +60,7 @@
         <open-in-documents-tooltip>Odprite to datoteko v aplikaciji Dokumenti</open-in-documents-tooltip>
         <file-size-too-big>Vsebina datoteke je prevelika. Prenesite jo in odprite v odjemalcu.</file-size-too-big>
         <webDAV>WebDAV pogled</webDAV>
-        <download>Prenesi</download>
+        <download>Prenos</download>
         <htmlview>Prikaži kot HTML</htmlview>
         <plaintextview>Prikaži kot navadno besedilo</plaintextview>
         <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Ocena</avg-rating>
-        <subscription>Glasovi</subscription>
+        <avg-rating>Povprečna ocena</avg-rating>
+        <subscription>Glasov</subscription>
       </label>
     </view>
   </Vote>

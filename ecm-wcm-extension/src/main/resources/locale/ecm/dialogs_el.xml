@@ -14,7 +14,7 @@
         <time-interval>Χρονικό διάστημα</time-interval>
         <query-items>Στοιχεία ερωτήματος</query-items>
         <schedule-type>Τύπος Χρονοδιαγράμματος</schedule-type>
-        <remove>Αφαίρεση αντικειμένου</remove>
+        <remove>Κατάργηση αντικειμένου</remove>
         <add>Προσθήκη αντικειμένου</add>
         <expand>Επέκταση αυτού</expand>
       </label>

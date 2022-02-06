@@ -37,7 +37,7 @@
       <table>
         <Provider>Connecteur</Provider>
         <Description>Description</Description>
-        <Active>Activé</Active>
+        <Active>Actif</Active>
         <Permissions>Permissions</Permissions>
       </table>
       <modal>

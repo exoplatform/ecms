@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Выбрать роль</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Выбрать группу</selectGroup>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Выбрать пользователя</SelectUser>
-      <SelectMember>Выбрать роль</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Все</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Выбрать пользователя</UIGroupSelector>
       <UIPermissionSelector>Выбрать члена</UIPermissionSelector>
-      <UIGroupMemberSelector>Выбрать роль</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Выбрать группу</selectGroup>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

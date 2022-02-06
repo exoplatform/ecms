@@ -219,7 +219,7 @@
       <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Upload File</UIUploadManager>
       <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
+      <UIExportNode>Xaric edin</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
       <UIActivateVersion>Activate Versioning</UIActivateVersion>
@@ -227,7 +227,7 @@
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>
       <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>Advanced Search</UIECMSearch>
+      <UIECMSearch>Ətraflı axtarış</UIECMSearch>
       <UISavedQuery>Saved Queries List</UISavedQuery>
       <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
       <UIActionManager>Manage Actions</UIActionManager>
@@ -236,7 +236,7 @@
       <EditFormController>Edit Document</EditFormController>
       <UIRelationManager>Add Relation</UIRelationManager>
       <UICategoryManager>Add Category</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
+      <UIImportNode>Daxil etmək</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
       <UICommentForm>Comment</UICommentForm>
@@ -298,8 +298,8 @@
       <ManageCategories>Categories</ManageCategories>
       <ManageRelations>Relations</ManageRelations>
       <ManageActions>Actions</ManageActions>
-      <ExportNode>Export</ExportNode>
-      <ImportNode>Import</ImportNode>
+      <ExportNode>Xaric edin</ExportNode>
+      <ImportNode>Daxil etmək</ImportNode>
       <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
@@ -351,7 +351,7 @@
     <title>
       <select-tab>Select Tab</select-tab>
       <SimpleSearch>Sürətli Axtarış</SimpleSearch>
-      <AdvanceSearch>Advanced Search</AdvanceSearch>
+      <AdvanceSearch>Ətraflı axtarış</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
       <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
@@ -644,7 +644,7 @@
       <UISavedQuery>Saved Query</UISavedQuery>
       <AdvancedSearchResult>Search Results</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>Advanced Search</UISearchContainer>
+      <UISearchContainer>Ətraflı axtarış</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
@@ -757,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Sil</remove>
@@ -802,7 +802,7 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>İstifadəçi və ya Qrup</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Xaric edin</Export>
     </action>
-    <title>Export</title>
+    <title>Xaric edin</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1405,7 +1405,7 @@
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
       <e_2048>Update</e_2048>
-      <e_4096>Import</e_4096>
+      <e_4096>Daxil etmək</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
@@ -1515,9 +1515,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Daxil etmək</Import>
     </action>
-    <title>Import</title>
+    <title>Daxil etmək</title>
     <msg>
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>

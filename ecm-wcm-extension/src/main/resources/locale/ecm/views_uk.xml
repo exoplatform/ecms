@@ -7,7 +7,7 @@
         <en>Англійська</en>
         <fr>Французька</fr>
         <ru>Російська</ru>
-        <vi>вʼєтнамська</vi>
+        <vi>В’єтнамська</vi>
         <nl>Голландська</nl>
         <de>Німецька</de>
         <uk>Українська</uk>
@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Оцінка</avg-rating>
+        <avg-rating>Середній рейтинг</avg-rating>
         <subscription>Голоси</subscription>
       </label>
     </view>

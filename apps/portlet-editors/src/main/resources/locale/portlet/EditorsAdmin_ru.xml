@@ -37,7 +37,7 @@
       <table>
         <Provider>Провайдер</Provider>
         <Description>Описание</Description>
-        <Active>Активно</Active>
+        <Active>Активное</Active>
         <Permissions>Права доступа</Permissions>
       </table>
       <modal>

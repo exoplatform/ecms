@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Оценить</avg-rating>
+        <avg-rating>Средний рейтинг</avg-rating>
         <subscription>Голоса</subscription>
       </label>
     </view>

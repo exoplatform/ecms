@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>ユーザーを選択</UIPermissionUser>
-      <UIPermissionMembership>ロールを選択</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>ロールを選択</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>ロールを選択</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>グループの閲覧と選択</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectMembership>ロールを選択</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

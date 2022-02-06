@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Bewerten</avg-rating>
+        <avg-rating>Durschnittliche Bewertung</avg-rating>
         <subscription>Stimmen</subscription>
       </label>
     </view>

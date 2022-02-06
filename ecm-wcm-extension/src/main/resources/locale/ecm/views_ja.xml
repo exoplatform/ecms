@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>評価する</avg-rating>
+        <avg-rating>平均評価</avg-rating>
         <subscription>投票</subscription>
       </label>
     </view>
@@ -158,7 +158,7 @@
         <core-elements>コア要素</core-elements>
         <title>タイトル</title>
         <creator>作者</creator>
-        <subject>題</subject>
+        <subject>題名</subject>
         <source>参照元</source>
         <contributor>コントリビュータ</contributor>
         <resource-type>リソースタイプ</resource-type>

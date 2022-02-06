@@ -98,7 +98,7 @@
       <cloudDrives>Cloud Drives</cloudDrives>
       <provider>Провайдер</provider>
       <description>Описание</description>
-      <active>Активно</active>
+      <active>Активное</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>

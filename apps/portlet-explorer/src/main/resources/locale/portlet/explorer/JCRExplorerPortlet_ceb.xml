@@ -586,7 +586,7 @@
       <AddFolder>Ang Bag-o nga Folder</AddFolder>
       <AddDocument>Ang -bago nga Sulod</AddDocument>
       <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
+      <MoveNode>Ibalhin</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
       <WebDavView>Abliha sa MS Office</WebDavView>
-      <Download>Download</Download>
+      <Download>I-download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>I-edit ang mga Property sa Dokumento</EditProperty>
       <UploadNewVersion>Pag-upload ug bag-o nga bersyon</UploadNewVersion>
@@ -642,7 +642,7 @@
       <UIUploadContent>Information of uploaded file</UIUploadContent>
       <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
       <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
+      <AdvancedSearchResult>Ang mga resulta sa pagpangita</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
       <UISearchContainer>Advanced Search</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
@@ -1109,7 +1109,7 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pagdugang og Kategorya</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>I-export</Export>
     </action>
-    <title>Export</title>
+    <title>I-export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1399,13 +1399,13 @@
       <e_16>Property Changed</e_16>
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Move</e_64>
+      <e_64>Ibalhin</e_64>
       <e_128>Kopyaha</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
-      <e_2048>Update</e_2048>
-      <e_4096>Import</e_4096>
+      <e_2048>I-update</e_2048>
+      <e_4096>Mag-import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
@@ -1436,7 +1436,7 @@
     <label>
       <note>Versioning has not been activated for this document.</note>
       <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <button-active>Pag-aktibo</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
@@ -1478,7 +1478,7 @@
       <question>Are you sure you want to activate?</question>
     </label>
     <action>
-      <activate>Activate</activate>
+      <activate>Pag-aktibo</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1511,13 +1511,13 @@
       <format>Format</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <upload>I-upload ang File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Mag-import</Import>
     </action>
-    <title>Import</title>
+    <title>Mag-import</title>
     <msg>
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
@@ -1887,7 +1887,7 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Watch</Watch>
+      <Watch>Pagtan-aw</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>Continue</Continue>
       <Unwatch>Unwatch</Unwatch>
@@ -2441,7 +2441,7 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Pagdugang og Kategorya</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2542,7 +2542,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Admin</Admin>
-      <Info>Info</Info>
+      <Info>Impormasyon</Info>
       <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
       <Search>Search</Search>
@@ -2659,7 +2659,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>I-upload ang File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
@@ -2776,12 +2776,12 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>Pagdugang og Kategorya</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pagdugang og Kategorya</AddCategory>
     </tooltip>
    </UIActionBar>
 
@@ -2839,7 +2839,7 @@
 
   <TagPopup>
     <title>
-      <UITagForm>Ang tag</UITagForm>
+      <UITagForm>Ang Tag</UITagForm>
     </title>
   </TagPopup>
 
@@ -2973,7 +2973,7 @@
     <revisions>
       <version>Ang mga gipang-usab o gipang-revise</version>
       <date>Date</date>
-      <author>Author</author>
+      <author>Ang Nagbuhat</author>
       <status>Kahimtang</status>
       <action>Action</action>
       <label>Revision</label>
@@ -2991,7 +2991,7 @@
       <enrolled>Enrolled</enrolled>
       <draft>Draft</draft>
       <pending>Pending</pending>
-      <approved>Approved</approved>
+      <approved>Giaprobahan</approved>
       <inreview>In Review</inreview>
       <staged>Staged</staged>
       <published>Published</published>
@@ -3016,7 +3016,7 @@
       <date>Date</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
-      <user>Author</user>
+      <user>Ang Nagbuhat</user>
       <description>Description</description>
     </header>
     <create-version>New version is created</create-version>
@@ -3058,7 +3058,7 @@
   <WCMContentView>
     <header>
       <status>Kahimtang</status>
-      <author>Author</author>
+      <author>Ang Nagbuhat</author>
       <date>Created Date</date>
       <title>Document Title</title>
       <lastUser>Last User</lastUser>
@@ -3211,7 +3211,7 @@
     <label>
       <name>Name</name>
       <date>Date</date>
-      <size>Size</size>
+      <size>Kadak-on</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>

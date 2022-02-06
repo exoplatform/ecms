@@ -1248,7 +1248,7 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Category</title>
+    <title>Pagdugang og Kategorya</title>
     <label>
       <taxonomyName>Category Name</taxonomyName>
       <parentPath>Parent</parentPath>
@@ -1502,7 +1502,7 @@
 
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>Add Category</UITaxonomyForm>
+      <UITaxonomyForm>Pagdugang og Kategorya</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
 
@@ -1521,7 +1521,7 @@
       <name>Ang Klase</name>
       <action>Action</action>
       <label>Ang Template</label>
-      <icon>Ang icon</icon>
+      <icon>Ang aykon</icon>
     </header>
     <action>
       <AddNew>Magpuno ug Template</AddNew>
@@ -1539,7 +1539,7 @@
       <name>Ang Klase</name>
       <action>Action</action>
       <label>Ang Template</label>
-      <icon>Ang icon</icon>
+      <icon>Ang aykon</icon>
     </header>
     <action>
       <AddNew>Magpuno ug Template</AddNew>
@@ -1556,7 +1556,7 @@
     <header>
       <name>Ang Klase</name>
       <label>Ang Template</label>
-      <icon>Ang icon</icon>
+      <icon>Ang aykon</icon>
       <action>Action</action>
     </header>
     <action>
@@ -2013,7 +2013,7 @@
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Update</UpdateStyle>
+      <UpdateStyle>I-update</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -2537,7 +2537,7 @@
 
   <UIViewFormTabPane>
     <label>
-      <addCategory>Add Category</addCategory>
+      <addCategory>Pagdugang og Kategorya</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
     </label>
   </UIViewFormTabPane>

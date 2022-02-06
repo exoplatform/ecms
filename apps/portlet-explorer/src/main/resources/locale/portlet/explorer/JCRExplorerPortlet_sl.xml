@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Izberi uporabnika</SelectUser>
-      <SelectMember>Izberi vlogo</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Izberi vse</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Izberi uporabnika</UIGroupSelector>
       <UIPermissionSelector>Izberi člana</UIPermissionSelector>
-      <UIGroupMemberSelector>Izberi vlogo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2542,7 +2542,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Skrbnik</Admin>
-      <Info>Info</Info>
+      <Info>Informacije o strani</Info>
       <Actions>Dejanja</Actions>
       <Collaboration>Sodelovanje</Collaboration>
       <Search>Išči</Search>

@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Izberi vlogo</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Izberi uporabnika</SelectUser>
-      <SelectMember>Izberi vlogo</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Kdorkoli</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Izberi uporabnika</UIGroupSelector>
       <UIPermissionSelector>Izberi člana</UIPermissionSelector>
-      <UIGroupMemberSelector>Izberi vlogo</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Izberi skupino</selectGroup>
       <selectUser>Izberi uporabnika</selectUser>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Izberi skupino</selectGroup>
-      <selectMembership>Izberi vlogo</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

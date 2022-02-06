@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Pumili ng Gumagamit</SelectUser>
-      <SelectMember>Pumili ng tungkulin</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Piliin ang Lahat</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Pumili ng Gumagamit</UIGroupSelector>
       <UIPermissionSelector>Pumili ng Myembro</UIPermissionSelector>
-      <UIGroupMemberSelector>Pumili ng tungkulin</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1109,7 +1109,7 @@
     <tooltip>
       <AddMetadataType>Magdagdag ng Katangian</AddMetadataType>
       <AddNodeType>Magdagdag ng Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Magdagdag ng Kategorya</AddCategory>
       <FindExactly>Hanapin ng Tama</FindExactly>
     </tooltip>
     <label>
@@ -2032,7 +2032,7 @@
       <non-published>Hindi nai-publish</non-published>
       <public>Pampubliko</public>
       <private>Pribado</private>
-      <state>Estado</state>
+      <state>Ang Estado</state>
       <visibility>Bisibilidad</visibility>
       <nodeName>Pangalan:</nodeName>
       <lifecycleName>Ang Pangalan ng Lifecycle</lifecycleName>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Pumili ng Grupo</selectGroup>
       <selectUser>Pumili ng Gumagamit</selectUser>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2146,7 +2146,7 @@
   <UIVersionTreeList>
     <header>
       <version>Ang Bersyon</version>
-      <state>Estado</state>
+      <state>Ang Estado</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Pumili ng Grupo</selectGroup>
       <selectUser>Pumili ng Gumagamit</selectUser>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2441,7 +2441,7 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Magdagdag ng Kategorya</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2776,12 +2776,12 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>Magdagdag ng Kategorya</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Magdagdag ng Kategorya</AddCategory>
     </tooltip>
    </UIActionBar>
 
@@ -2974,7 +2974,7 @@
       <version>Ang mga pagbabago ng bersyon</version>
       <date>Ang Petsa</date>
       <author>Ang may Akda</author>
-      <status>Katayuan</status>
+      <status>Ang katayuan</status>
       <action>Ang Aksyon</action>
       <label>Ang pagbabago ng bersyon</label>
       <none>Walang pagbabago sa bersyon</none>
@@ -2984,7 +2984,7 @@
     </revisions>
     <status>
       <version>Ang pagbabago ng bersyon</version>
-      <title>Katayuan</title>
+      <title>Ang katayuan</title>
       <archived>Nai-archive</archived>
       <obsolete>Hindi na ginagamit</obsolete>
       <unpublished>Hindi nai-publish</unpublished>
@@ -3057,7 +3057,7 @@
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Katayuan</status>
+      <status>Ang katayuan</status>
       <author>Ang may Akda</author>
       <date>Petsa ng paglikha</date>
       <title>Ang Titulo ng Dokumento</title>

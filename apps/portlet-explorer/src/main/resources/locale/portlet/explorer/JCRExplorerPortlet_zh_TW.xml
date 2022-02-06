@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>選擇使用者</SelectUser>
-      <SelectMember>選擇角色</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>選擇所有人</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>選擇使用者</UIGroupSelector>
       <UIPermissionSelector>選擇成員</UIPermissionSelector>
-      <UIGroupMemberSelector>選擇角色</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -863,7 +863,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>選擇類別</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
@@ -926,7 +926,7 @@
       <shortcutPath>路徑</shortcutPath>
       <type>類型</type>
       <dateCreated>建立日期</dateCreated>
-      <score>得分</score>
+      <score>Score</score>
     </header>
     <title>
       <typeASC>按文件類型升序排序</typeASC>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>選擇群組</selectGroup>
       <selectUser>選擇使用者</selectUser>
-      <selectMembership>選擇角色</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>選擇群組</selectGroup>
       <selectUser>選擇使用者</selectUser>
-      <selectMembership>選擇角色</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

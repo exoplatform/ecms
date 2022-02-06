@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>ロールを選択</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectMembership>ロールを選択</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>ユーザーを選択</SelectUser>
-      <SelectMember>ロールを選択</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>全てのユーザー</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>ユーザーを選択</UIGroupSelector>
       <UIPermissionSelector>メンバの選択</UIPermissionSelector>
-      <UIGroupMemberSelector>ロールを選択</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectUser>ユーザーを選択</selectUser>
-      <selectMembership>ロールを選択</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectUser>ユーザーを選択</selectUser>
-      <selectMembership>ロールを選択</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>ロールを選択</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>グループの選択</selectGroup>
       <selectUser>ユーザーを選択</selectUser>
-      <selectMembership>ロールを選択</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>グループの選択</selectGroup>
-      <selectMembership>ロールを選択</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

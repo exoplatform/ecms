@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Αξιολογήστε</avg-rating>
+        <avg-rating>Μέση βαθμολογία</avg-rating>
         <subscription>Ψήφοι</subscription>
       </label>
     </view>

@@ -15,7 +15,7 @@
         <query-items>Query Items</query-items>
         <schedule-type>Schematype</schedule-type>
         <remove>#{word.remove}</remove>
-        <add>Item toevoegen</add>
+        <add>#{word.add}</add>
         <expand>Dit uitbreiden</expand>
       </label>
     </dialog>

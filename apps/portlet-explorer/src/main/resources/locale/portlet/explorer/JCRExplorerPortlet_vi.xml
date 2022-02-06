@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Chọn Người dùng</SelectUser>
-      <SelectMember>Chọn Vai trò</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Chọn Tất cả</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Chọn Người dùng</UIGroupSelector>
       <UIPermissionSelector>Chọn Thành viên</UIPermissionSelector>
-      <UIGroupMemberSelector>Chọn Vai trò</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Chọn Nhóm</selectGroup>
       <selectUser>Chọn Người dùng</selectUser>
-      <selectMembership>Chọn Vai trò</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Chọn nhóm người dùng</selectGroup>
       <selectUser>Chọn người dùng</selectUser>
-      <selectMembership>Chọn Vai trò</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

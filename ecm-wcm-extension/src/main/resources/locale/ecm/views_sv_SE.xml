@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Betygsätt</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Röster</subscription>
       </label>
     </view>

@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Pumili ng tungkulin</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Pumili ng Grupo</selectGroup>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Pumili ng Gumagamit</SelectUser>
-      <SelectMember>Pumili ng tungkulin</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Ang baway isa</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Pumili ng Gumagamit</UIGroupSelector>
       <UIPermissionSelector>Pumili ng Myembro</UIPermissionSelector>
-      <UIGroupMemberSelector>Pumili ng tungkulin</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Pumili ng Grupo</selectGroup>
       <selectUser>Pumili ng Gumagamit</selectUser>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Pumili ng Grupo</selectGroup>
       <selectUser>Pumili ng Gumagamit</selectUser>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Pumili ng Grupo</selectGroup>
       <selectUser>Pumili ng Gumagamit</selectUser>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Pumili ng Grupo</selectGroup>
-      <selectMembership>Pumili ng tungkulin</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

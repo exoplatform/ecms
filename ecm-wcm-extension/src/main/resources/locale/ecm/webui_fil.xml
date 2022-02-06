@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Pumili ng Gumagamit</UIPermissionUser>
-      <UIPermissionMembership>Pumili ng Papel na Ginagampanan</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Pumili ng Papel na Ginagampanan</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Pumili ng Papel na Ginagampanan</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>Mag-browse at pumili ng pangkat</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Pumili ng grupo</selectGroup>
-      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

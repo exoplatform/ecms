@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Įvertinti</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Balsai</subscription>
       </label>
     </view>

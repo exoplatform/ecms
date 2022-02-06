@@ -14,8 +14,8 @@
         <time-interval>Ang Pagitan sa Oras</time-interval>
         <query-items>Katanungan sa mga Aytem</query-items>
         <schedule-type>Ang Uri ng Iskedyul</schedule-type>
-        <remove>Tanggalin ang aytem</remove>
-        <add>Dagdagan ng aytem</add>
+        <remove>Alisin ang aytem</remove>
+        <add>Magdagdag ng aytem</add>
         <expand>Ang Palawakin Ito</expand>
       </label>
     </dialog>

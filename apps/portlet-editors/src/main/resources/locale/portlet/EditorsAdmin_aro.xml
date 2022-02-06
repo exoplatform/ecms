@@ -37,7 +37,7 @@
       <table>
         <Provider>مزود الخدمة</Provider>
         <Description>الوصف</Description>
-        <Active>ناشط</Active>
+        <Active>نشط</Active>
         <Permissions>الصلاحيّات</Permissions>
       </table>
       <modal>

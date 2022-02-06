@@ -27,7 +27,7 @@
         <comments>Commentaires</comments>
         <show-comments>Afficher les commentaires</show-comments>
         <hide-comments>Cacher les commentaires</hide-comments>
-        <comment-by>Commentée par</comment-by>
+        <comment-by>Commenté par</comment-by>
         <email>Email</email>
         <site>Site</site>
         <lastComment>Dernier commentaire par {user} à {time}</lastComment>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Noter</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>Note</avg-rating>
+        <subscription>Nb Vote</subscription>
       </label>
     </view>
   </Vote>
@@ -173,7 +173,7 @@
         <languages>Langues</languages>
       </label>
       <action>
-        <add-edit>Modifier</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>

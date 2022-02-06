@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Hodnodit</avg-rating>
+        <avg-rating>Prům. Hodnocení</avg-rating>
         <subscription>Hlasy</subscription>
       </label>
     </view>

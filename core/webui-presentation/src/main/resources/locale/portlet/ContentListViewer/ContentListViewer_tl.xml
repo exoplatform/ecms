@@ -26,7 +26,7 @@
       <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
-      <UICLVConfigOrderByFormSelectBox>Iniutos ni</UICLVConfigOrderByFormSelectBox>
+      <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Ang Pamagat</exo:title>
         <exo:dateCreated>Petsa ng paglikha</exo:dateCreated>
@@ -151,7 +151,7 @@
       <publish>I-publish</publish>
     </action>
     <label>
-      <draft>Draft</draft>
+      <draft>Ang Draft</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
@@ -171,16 +171,16 @@
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
+    <archived>Nai-archive</archived>
+    <obsolete>Hindi na ginagamit</obsolete>
+    <unpublished>Hindi nai-publish</unpublished>
     <enrolled>Na-enroll na</enrolled>
-    <draft>Draft</draft>
+    <draft>Ang Draft</draft>
     <pending>Nakabinbin</pending>
     <approved>Aprubahan</approved>
-    <inreview>In Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <inreview>Sinusuri pa</inreview>
+    <staged>Nailunsad</staged>
+    <published>I-publish</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>

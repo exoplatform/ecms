@@ -680,7 +680,7 @@
   <UINodeTypeImport>
     <action>
       <Cancel>إلغاء</Cancel>
-      <Import>إستيراد</Import>
+      <Import>استيراد</Import>
       <Upload>اضافة نوع الاجراء</Upload>
     </action>
     <header>
@@ -2355,7 +2355,7 @@
     <action>
       <AddTabForm>إضافة علامة تبويب</AddTabForm>
       <AddTab>حفظ</AddTab>
-      <BackViewForm>السابق</BackViewForm>
+      <BackViewForm>رجوع</BackViewForm>
     </action>
   </UIViewFormTabPane>
 

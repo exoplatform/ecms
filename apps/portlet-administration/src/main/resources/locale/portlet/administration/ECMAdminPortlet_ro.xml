@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Selectaţi rolul</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Selectaţi utilizator</SelectUser>
-      <SelectMember>Selectaţi rolul</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Toată lumea</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Selectaţi utilizator</UIGroupSelector>
       <UIPermissionSelector>Selectaţi membru</UIPermissionSelector>
-      <UIGroupMemberSelector>Selectaţi rolul</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizatorul</selectUser>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
       <selectUser>Selectaţi utilizator</selectUser>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

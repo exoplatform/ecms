@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Выберите пользователя</SelectUser>
-      <SelectMember>Выбрать роль</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Выбрать все</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Выбрать пользователя</UIGroupSelector>
       <UIPermissionSelector>Выберите члена</UIPermissionSelector>
-      <UIGroupMemberSelector>Выбрать роль</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Выбрать группу</selectGroup>
       <selectUser>Выбрать пользователя</selectUser>
-      <selectMembership>Выбрать роль</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

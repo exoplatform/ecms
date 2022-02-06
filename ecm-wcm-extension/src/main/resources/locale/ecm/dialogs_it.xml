@@ -14,8 +14,8 @@
         <time-interval>Intervallo Tempo</time-interval>
         <query-items>Oggetti Query</query-items>
         <schedule-type>Tipo Schedulato</schedule-type>
-        <remove>Rimuovi Oggetto</remove>
-        <add>Aggiungi Oggetto</add>
+        <remove>Rimuovere l'elemento</remove>
+        <add>Aggiungere elemento</add>
         <expand>Espandere questo</expand>
       </label>
     </dialog>

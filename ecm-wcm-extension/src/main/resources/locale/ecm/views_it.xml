@@ -60,7 +60,7 @@
         <open-in-documents-tooltip>Apri questo file nell'app Documenti</open-in-documents-tooltip>
         <file-size-too-big>Il contenuto di questo file è troppo grande. Dovrebbe scaricarlo ed usare un client esterno.</file-size-too-big>
         <webDAV>Vista WebDAV</webDAV>
-        <download>Scarica</download>
+        <download>Scarica questo File</download>
         <htmlview>Mostra come HTML</htmlview>
         <plaintextview>Mostra come testo semplice</plaintextview>
         <binary-not-available>Il contenuto di questo documento non è più disponibile. Contatta l'amministratore.</binary-not-available>
@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Valuta Quesito</avg-rating>
+        <avg-rating>Valutazione Med.</avg-rating>
         <subscription>Voti</subscription>
       </label>
     </view>
@@ -158,7 +158,7 @@
         <core-elements>Elementi fondamentali</core-elements>
         <title>Titolo</title>
         <creator>Creatore</creator>
-        <subject>Soggetto</subject>
+        <subject>Oggetto</subject>
         <source>Sorgente</source>
         <contributor>Contribuente</contributor>
         <resource-type>Tipo Risorsa</resource-type>

@@ -14,8 +14,8 @@
         <time-interval>Інтервал часу</time-interval>
         <query-items>Елементи запросу</query-items>
         <schedule-type>тип розкладу</schedule-type>
-        <remove>Вилучити об'єкт</remove>
-        <add>Додати об'єкт</add>
+        <remove>Видалити елемент</remove>
+        <add>Додати елемент</add>
         <expand>Розгорнути це</expand>
       </label>
     </dialog>

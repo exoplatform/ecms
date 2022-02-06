@@ -227,7 +227,7 @@
       <UIActivateAuditing>تفعيل التدقيق</UIActivateAuditing>
       <UIPermissionManager>ادارة الصلاحيّات</UIPermissionManager>
       <UIPropertiesManager>ادارة الخاصيّات</UIPropertiesManager>
-      <UIECMSearch>بحث متقدم</UIECMSearch>
+      <UIECMSearch>عمليّة بحث مُتطوّرة</UIECMSearch>
       <UISavedQuery>قائمة الإستبيانات المحفوظة</UISavedQuery>
       <UIWatchDocumentForm>تتبّع محتوى الوثيقة</UIWatchDocumentForm>
       <UIActionManager>إدارة الاجراءات</UIActionManager>
@@ -351,7 +351,7 @@
     <title>
       <select-tab>اختيار تبويبة</select-tab>
       <SimpleSearch>عملية بحث سريعة</SimpleSearch>
-      <AdvanceSearch>بحث متقدم</AdvanceSearch>
+      <AdvanceSearch>عمليّة بحث مُتطوّرة</AdvanceSearch>
       <SavedQueries>الاستبيانات المحفوظة</SavedQueries>
       <ShowAllOwnedByUser>اظهار كافة العناصر الخاصة بي</ShowAllOwnedByUser>
       <ShowAllFavourite>اظهار كافة العناصر المفضّلة</ShowAllFavourite>
@@ -597,7 +597,7 @@
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
       <WebDavView>فتح الملف بواسطة مايكروسوفت أوفيس</WebDavView>
-      <Download>تنزيل هذا الملف</Download>
+      <Download>تحميل</Download>
       <OpenDocument>تغيير عن بعد</OpenDocument>
       <EditProperty>تغيير خصائص الملف</EditProperty>
       <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
@@ -644,7 +644,7 @@
       <UISavedQuery>الاستبيانات المحفوظة</UISavedQuery>
       <AdvancedSearchResult>نتائج البحث</AdvancedSearchResult>
       <UISimpleSearch>بحث</UISimpleSearch>
-      <UISearchContainer>بحث متقدم</UISearchContainer>
+      <UISearchContainer>عمليّة بحث مُتطوّرة</UISearchContainer>
       <UICategoryManagerSearch>اضافة فئة إلى البحث</UICategoryManagerSearch>
       <UIConstraintsForm>شكل القيود</UIConstraintsForm>
       <UIViewSearchResult>عرض المحتوى</UIViewSearchResult>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>إلغاء</Cancel>
-      <Export>التصدير</Export>
+      <Export>تصدير</Export>
     </action>
-    <title>التصدير</title>
+    <title>تصدير</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1606,7 +1606,7 @@
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>فئة</path>
+      <path>الفئة</path>
       <action>الإجراءات</action>
     </header>
     <msg>
@@ -1619,7 +1619,7 @@
       </title>
     </action>
     <label>
-      <category>فئة</category>
+      <category>الفئة</category>
       <actions>اجراء</actions>
       <delete>حذف</delete>
     </label>
@@ -1875,7 +1875,7 @@
     </label>
     <title>
       <exeButton>الذهاب الى</exeButton>
-      <backButton>السابق</backButton>
+      <backButton>رجوع</backButton>
       <showHistory>إظهار السجل</showHistory>
       <changeNode>تغيير العقدة</changeNode>
     </title>

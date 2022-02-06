@@ -98,7 +98,7 @@
       <cloudDrives>الأقراص السحابية</cloudDrives>
       <provider>مزود الخدمة</provider>
       <description>الوصف</description>
-      <active>ناشط</active>
+      <active>نشط</active>
       <ConnectionToCloud>الاتصال بالأقراص السحابية</ConnectionToCloud>
     </label>
   </cloudStorage>

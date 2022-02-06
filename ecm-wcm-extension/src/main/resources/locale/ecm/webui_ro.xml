@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Selectaţi utilizatorul</UIPermissionUser>
-      <UIPermissionMembership>Selectaţi rolul</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Selectaţi rolul</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Selectaţi rolul</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>Răsfoiți şi selectaţi un grup</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Selectaţi grupul</selectGroup>
-      <selectMembership>Selectaţi rolul</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

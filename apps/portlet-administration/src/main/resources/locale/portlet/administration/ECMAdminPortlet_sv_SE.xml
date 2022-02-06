@@ -466,7 +466,7 @@
     </header>
     <action>
       <Export>Exportera</Export>
-      <Import>Importera</Import>
+      <Import>Import</Import>
       <Add>Lägg till</Add>
     </action>
     <tooltip>
@@ -680,7 +680,7 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Importera</Import>
+      <Import>Import</Import>
       <Upload>Ladda upp igen</Upload>
     </action>
     <header>

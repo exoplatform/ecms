@@ -14,8 +14,8 @@
         <time-interval>Tidsintervall</time-interval>
         <query-items>Spørringselementer</query-items>
         <schedule-type>Tidsplan type</schedule-type>
-        <remove>Fjern elementet</remove>
-        <add>Legg til element</add>
+        <remove>Fjern element</remove>
+        <add>Legge til element</add>
         <expand>Utvid dette</expand>
       </label>
     </dialog>

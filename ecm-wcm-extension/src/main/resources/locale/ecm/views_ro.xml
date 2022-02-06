@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Apreciază</avg-rating>
+        <avg-rating>Rating mediu</avg-rating>
         <subscription>Voturi</subscription>
       </label>
     </view>

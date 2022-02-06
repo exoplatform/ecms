@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Pilih Pengguna</UIPermissionUser>
-      <UIPermissionMembership>Pilih Peran</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Pilih Peran</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Pilih Peran</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>Jelajahi dan pilih grup</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Pilih Grup</selectGroup>
-      <selectMembership>Pilih Peran</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

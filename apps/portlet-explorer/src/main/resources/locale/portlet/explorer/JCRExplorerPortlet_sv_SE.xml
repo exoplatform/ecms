@@ -236,7 +236,7 @@
       <EditFormController>Redigera dokument</EditFormController>
       <UIRelationManager>Lägg till Relation</UIRelationManager>
       <UICategoryManager>Lägg till kategori</UICategoryManager>
-      <UIImportNode>Importera</UIImportNode>
+      <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>Visa Metadata</UIViewMetadataManager>
       <UIVoteForm>Omröstning dokument</UIVoteForm>
       <UICommentForm>Kommentar</UICommentForm>
@@ -1405,7 +1405,7 @@
       <e_512>Ta bort Mixin</e_512>
       <e_1024>Klon</e_1024>
       <e_2048>Uppdatera</e_2048>
-      <e_4096>Importera</e_4096>
+      <e_4096>Import</e_4096>
       <e_8192>Checka in</e_8192>
       <e_16384>Checka ut</e_16384>
       <e_32768>Återställ</e_32768>
@@ -1515,9 +1515,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Importera</Import>
+      <Import>Import</Import>
     </action>
-    <title>Importera</title>
+    <title>Import</title>
     <msg>
       <import-successful>Har importerats.</import-successful>
       <filename-invalid>Sök i en .xml-fil för fältet 'Ladda upp fil' för att importera.</filename-invalid>

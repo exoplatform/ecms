@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Gi karakter</avg-rating>
+        <avg-rating>Rate</avg-rating>
         <subscription>Stemmer</subscription>
       </label>
     </view>

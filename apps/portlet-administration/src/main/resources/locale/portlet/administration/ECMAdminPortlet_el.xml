@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Επιλογή ρόλου</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
-      <selectMembership>Επιλογή ρόλου</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Επιλογή χρήστη</SelectUser>
-      <SelectMember>Επιλογή ρόλου</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Όλοι</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Επιλογή χρήστη</UIGroupSelector>
       <UIPermissionSelector>Επιλέξτε μέλος</UIPermissionSelector>
-      <UIGroupMemberSelector>Επιλογή ρόλου</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectUser>Επιλογή χρήστη</selectUser>
-      <selectMembership>Επιλογή ρόλου</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectUser>Επιλογή χρήστη</selectUser>
-      <selectMembership>Επιλογή ρόλου</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Επιλογή ρόλου</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectUser>Επιλογή χρήστη</selectUser>
-      <selectMembership>Επιλογή ρόλου</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Επιλογή ομάδας</selectGroup>
-      <selectMembership>Επιλογή ρόλου</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

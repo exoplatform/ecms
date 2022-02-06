@@ -7,7 +7,7 @@
         <en>Inglés</en>
         <fr>Francés</fr>
         <ru>Ruso</ru>
-        <vi>Vietnamita</vi>
+        <vi>vietnamita</vi>
         <nl>Holandés</nl>
         <de>Alemán</de>
         <uk>Ucraniano</uk>
@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Valorar</avg-rating>
+        <avg-rating>Valoración</avg-rating>
         <subscription>Votos</subscription>
       </label>
     </view>

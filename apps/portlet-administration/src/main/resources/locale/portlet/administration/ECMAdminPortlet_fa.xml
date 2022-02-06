@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>انتخاب نقش</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
-      <selectMembership>انتخاب نقش</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>انتخاب کاربر</SelectUser>
-      <SelectMember>انتخاب نقش</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>همه</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>انتخاب کاربر</UIGroupSelector>
       <UIPermissionSelector>انتخاب عضو</UIPermissionSelector>
-      <UIGroupMemberSelector>انتخاب نقش</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب نقش</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب نقش</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>انتخاب نقش</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
       <selectUser>انتخاب کاربر</selectUser>
-      <selectMembership>انتخاب نقش</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>انتخاب گروه</selectGroup>
-      <selectMembership>انتخاب نقش</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

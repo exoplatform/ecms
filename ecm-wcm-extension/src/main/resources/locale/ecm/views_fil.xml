@@ -7,7 +7,7 @@
         <en>Ang Ingles</en>
         <fr>Ang Pranses</fr>
         <ru>Ruso</ru>
-        <vi>Biyetnames</vi>
+        <vi>Ang Biyetnames</vi>
         <nl>Olandes</nl>
         <de>Aleman</de>
         <uk>Ukranyo</uk>
@@ -90,7 +90,7 @@
     <view>
       <label>
         <avg-rating>Rate</avg-rating>
-        <subscription>Mga boto</subscription>
+        <subscription>Ang Mga boto</subscription>
       </label>
     </view>
   </Vote>
@@ -158,7 +158,7 @@
         <core-elements>Ang Ubod na mga Elemento</core-elements>
         <title>Ang Titulo</title>
         <creator>Ang lumikha</creator>
-        <subject>Ang Paksa</subject>
+        <subject>Ang paksa</subject>
         <source>Ang Pinanggalingan</source>
         <contributor>Ang Nag-ambag</contributor>
         <resource-type>Uri ng Resource</resource-type>

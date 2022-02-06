@@ -60,7 +60,7 @@
         <open-in-documents-tooltip>افتح هذا الملف في تطبيق المستندات</open-in-documents-tooltip>
         <file-size-too-big>محتوى هذا الملف كبير جدا. لتتمكن من عرضه يُرجى تنزيله</file-size-too-big>
         <webDAV>مشهد WebDAV</webDAV>
-        <download>تنزيل هذا الملف</download>
+        <download>تحميل</download>
         <htmlview>عرض بصيغة الـ HTML</htmlview>
         <plaintextview>عرض بصيغة نص عادي</plaintextview>
         <binary-not-available>محتوى هذا المستند لم يعد متوفراً. الرجاء الاتصال بالمسؤول.</binary-not-available>
@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>المعدل</avg-rating>
+        <avg-rating>تقييم</avg-rating>
         <subscription>الأصوات</subscription>
       </label>
     </view>

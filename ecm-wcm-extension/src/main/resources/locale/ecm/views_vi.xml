@@ -27,7 +27,7 @@
         <comments>Bình luận</comments>
         <show-comments>Hiển thị bình luận</show-comments>
         <hide-comments>Ẩn bình luận</hide-comments>
-        <comment-by>Nhận xét bởi</comment-by>
+        <comment-by>Bình luận bởi</comment-by>
         <email>Địa chỉ thư điện tử</email>
         <site>Trang web</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Đánh giá</avg-rating>
-        <subscription>Lượt Bình chọn</subscription>
+        <avg-rating>Xếp loại Trung bình</avg-rating>
+        <subscription>Số lượng bình chọn</subscription>
       </label>
     </view>
   </Vote>
@@ -173,7 +173,7 @@
         <languages>Ngôn ngữ</languages>
       </label>
       <action>
-        <add-edit>Thêm/sửa</add-edit>
+        <add-edit>Thêm/Sửa</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>

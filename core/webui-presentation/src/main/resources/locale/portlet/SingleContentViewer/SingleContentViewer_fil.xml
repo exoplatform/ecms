@@ -8,7 +8,7 @@
     </title>
     <label>
       <draft>I-Draft</draft>
-      <print>Imprinta</print>
+      <print>I-print</print>
     </label>
     <msg>
       <no-content>Walang matagpuan sa mga nilalaman.</no-content>
@@ -42,7 +42,7 @@
       <Save>#{word.save}</Save>
       <Abort>I-abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Imprinta</Print>
+      <Print>I-print</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Ang Nilalaman ng detalye sa mga Kagustuhan</title>
@@ -65,7 +65,7 @@
       <PrintSettingBlock>I-print ang mga Setting</PrintSettingBlock>
       <UISCVPrintPageParameter>ang kasama</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Ang Ipakita sa Pahina</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Ikandado</LockStatus>
+      <LockStatus>Kandado</LockStatus>
       <CacheManagement>Ang Pagkakakita ng Nilalaman</CacheManagement>
       <UISCVCacheRadioBox>Ang Nilalaman ay Ibahagi</UISCVCacheRadioBox>
     </label>
@@ -110,7 +110,7 @@
     <enrolled>Nakapag enrol na</enrolled>
     <draft>I-Draft</draft>
     <pending>Ang Nakabinbin</pending>
-    <approved>Inaprubahan</approved>
+    <approved>Naaprubahan</approved>
     <inreview>Ang Pagsusuri sa Ilalim</inreview>
     <staged>Ang naglunsad</staged>
     <published>Ang Nailathala</published>

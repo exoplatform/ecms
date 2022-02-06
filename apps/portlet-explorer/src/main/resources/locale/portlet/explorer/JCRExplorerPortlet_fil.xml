@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Pumili ng gumagamit</SelectUser>
-      <SelectMember>Pumili ng Papel na Ginagampanan</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Ang lahat ay pinili</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Pumili ng gumagamit</UIGroupSelector>
       <UIPermissionSelector>Piliin ang Miyembro</UIPermissionSelector>
-      <UIGroupMemberSelector>Pumili ng Papel na Ginagampanan</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Pumili ng grupo</selectGroup>
       <selectUser>Pumili ng user</selectUser>
-      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Pumili ng pangkat</selectGroup>
       <selectUser>Pumili ng gumagamit</selectUser>
-      <selectMembership>Pumili ng Papel na Ginagampanan</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--

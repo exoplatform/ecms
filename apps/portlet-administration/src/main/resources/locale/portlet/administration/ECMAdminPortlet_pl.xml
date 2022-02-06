@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Wybierz rolę</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
-      <selectMembership>Wybierz rolę</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Wybierz użytkownika</SelectUser>
-      <SelectMember>Wybierz rolę</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Wszyscy</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Wybierz użytkownika</UIGroupSelector>
       <UIPermissionSelector>Wybierz członka</UIPermissionSelector>
-      <UIGroupMemberSelector>Wybierz rolę</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
       <selectUser>Wybierz użytkownika</selectUser>
-      <selectMembership>Wybierz rolę</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
       <selectUser>Wybierz użytkownika</selectUser>
-      <selectMembership>Wybierz rolę</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Wybierz rolę</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
       <selectUser>Wybierz użytkownika</selectUser>
-      <selectMembership>Wybierz rolę</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Wybierz grupę</selectGroup>
-      <selectMembership>Wybierz rolę</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

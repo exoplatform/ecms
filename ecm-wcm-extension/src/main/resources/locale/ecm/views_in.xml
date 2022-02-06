@@ -27,7 +27,7 @@
         <comments>Komentar(s)</comments>
         <show-comments>Tampilkan komentar</show-comments>
         <hide-comments>Sembunyikan komentar</hide-comments>
-        <comment-by>Di komentari oleh</comment-by>
+        <comment-by>Dikomentari oleh</comment-by>
         <email>Email</email>
         <site>Situs</site>
         <lastComment>Komentar terakhir dikirim oleh {user} di {time}</lastComment>
@@ -60,7 +60,7 @@
         <open-in-documents-tooltip>Buka berkas ini di aplikasi dokumen</open-in-documents-tooltip>
         <file-size-too-big>Isi dari berkas ini terlalu besar. anda seharusnya mengunduh dan membuka di klien.</file-size-too-big>
         <webDAV>Tampilan WebDAV</webDAV>
-        <download>unggah</download>
+        <download>Download</download>
         <htmlview>Tampilkan sebagai HTML</htmlview>
         <plaintextview>Tampilkan sebagai teks biasa</plaintextview>
         <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Nilai</avg-rating>
+        <avg-rating>Menilai</avg-rating>
         <subscription>Suara</subscription>
       </label>
     </view>
@@ -173,7 +173,7 @@
         <languages>Bahasa</languages>
       </label>
       <action>
-        <add-edit>Tambahkan/Ubah</add-edit>
+        <add-edit>Tambah/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>

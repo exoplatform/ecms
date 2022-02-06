@@ -125,7 +125,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
       <read>Read</read>
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
@@ -465,8 +465,8 @@
       <action>Action</action>
     </header>
     <action>
-      <Export>Export</Export>
-      <Import>Import</Import>
+      <Export>Xaric edin</Export>
+      <Import>Daxil etmək</Import>
       <Add>Əlavə Et</Add>
     </action>
     <tooltip>
@@ -631,7 +631,7 @@
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Xaric edin</Export>
       <UncheckAll>Uncheck all</UncheckAll>
       <CheckAll>Check all</CheckAll>
     </action>
@@ -680,7 +680,7 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Daxil etmək</Import>
       <Upload>Re-upload</Upload>
     </action>
     <header>
@@ -907,7 +907,7 @@
       <Add>Əlavə Et</Add>
     </action>
     <label>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>İstifadəçi və ya Qrup</userOrGroup>
     </label>
     <msg>
       <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
@@ -1436,7 +1436,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
       <remove>Sil</remove>
@@ -1481,7 +1481,7 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>İstifadəçi və ya Qrup</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
       <remove>Sil</remove>
@@ -2463,7 +2463,7 @@
 
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
       <action>Action</action>
     </header>
     <action>

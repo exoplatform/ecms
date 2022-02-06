@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Derece</avg-rating>
+        <avg-rating>Ort. Puan</avg-rating>
         <subscription>Oylar</subscription>
       </label>
     </view>

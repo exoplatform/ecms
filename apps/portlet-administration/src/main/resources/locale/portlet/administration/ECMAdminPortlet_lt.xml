@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Pasirinkti vaidmenį</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
-      <selectMembership>Pasirinkti vaidmenį</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Pasirinkti vartotoją</SelectUser>
-      <SelectMember>Pasirinkti vaidmenį</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Kiekvienas</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Pasirinkti vartotoją</UIGroupSelector>
       <UIPermissionSelector>Pasirinkti narį</UIPermissionSelector>
-      <UIGroupMemberSelector>Pasirinkti vaidmenį</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectUser>Pasirinkti vartotoją</selectUser>
-      <selectMembership>Pasirinkti vaidmenį</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectUser>Pasirinkti vartotoją</selectUser>
-      <selectMembership>Pasirinkti vaidmenį</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Pasirinkti vaidmenį</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
       <selectUser>Pasirinkti vartotoją</selectUser>
-      <selectMembership>Pasirinkti vaidmenį</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Pasirinkti grupę</selectGroup>
-      <selectMembership>Pasirinkti vaidmenį</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
