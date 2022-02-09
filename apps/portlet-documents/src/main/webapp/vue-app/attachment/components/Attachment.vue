@@ -24,23 +24,11 @@
 
 <script>
 export default {
-  props: {
-    isComposerAttachment: {
-      type: Boolean,
-      default: false
-    },
-    attachmentAppConfiguration: {
-      type: Object,
-      default: () => null
-    },
-    attachments: {
-      type: Array,
-      default: () => []
-    },
-  },
   data () {
     return {
       currentSpace: {},
+      attachmentAppConfiguration: {},
+      attachments: [],
     };
   },
   computed: {
@@ -61,6 +49,9 @@ export default {
     },
     entityHasAttachments() {
       return this.attachments && this.attachments.length;
+    },
+    isComposerAttachment() {
+      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.isComposerAttachment;
     }
   },
   created() {
@@ -68,9 +59,16 @@ export default {
     this.$root.$on('remove-attachment-item', attachment => {
       this.removeAttachedFile(attachment);
     });
-    this.$root.$on('remove-composer-attachment-item', attachment => {
-      const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === attachment.id);
-      this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
+    document.addEventListener('remove-attachment-item', (event) => {
+      if (event && event.detail) {
+        this.removeAttachedFile(event.detail.attachment);
+      }
+    });
+    document.addEventListener('remove-composer-attachment-item', (event) => {
+      if (event && event.detail) {
+        const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === event.detail.attachment.id);
+        this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
+      }
     });
     this.$root.$on('add-new-created-document', file => {
       this.attachments.push(file);
@@ -137,6 +135,9 @@ export default {
         }
       }
       this.attachments = [];
+      if (this.isComposerAttachment) {
+        this.attachments = this.attachmentAppConfiguration.attachments;
+      }
       this.openAttachmentsAppDrawer();
       this.initAttachmentEnvironment();
     });
@@ -257,6 +258,7 @@ export default {
         });
       }
       this.$root.$emit('entity-attachments-updated', this.attachments);
+      document.dispatchEvent(new CustomEvent('entity-attachments-updated', {'detail': {'attachments': this.attachments}}));
     }
   }
 };

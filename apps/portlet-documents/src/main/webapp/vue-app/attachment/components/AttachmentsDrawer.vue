@@ -261,7 +261,6 @@ export default {
   methods: {
     openAttachmentsAppDrawer() {
       this.$refs.attachmentsAppDrawer.open();
-      this.$root.$emit('attachments-app-drawer-opened');
     },
     closeAttachmentsAppDrawer() {
       this.$root.$emit('reset-attachments-upload-input');
@@ -464,7 +463,6 @@ export default {
       document.dispatchEvent(new CustomEvent('attachments-upload-finished', {'detail': {'list': Object.values(lastUploadedFiles)}}));
       this.uploadedFiles = [];
       this.$root.$emit('hide-create-new-document-input');
-      this.$root.$emit('attachments-app-drawer-closed');
     },
     linkUploadedAttachmentToEntity(file) {
       return this.$attachmentService.linkUploadedAttachmentToEntity(this.entityId, this.entityType, file.id).then((linkedAttachment) => {
@@ -534,11 +532,13 @@ export default {
       uploadedFile.previewBreadcrumb = JSON.parse(uploadedFile.previewBreadcrumb);
       uploadedFile.acl = JSON.parse(uploadedFile.acl);
       this.uploadedFiles.push(uploadedFile);
-      this.$root.$emit('add-composer-attachment-item', file);
+      document.dispatchEvent(new CustomEvent('add-composer-attachment-item', {'detail': {'attachment': file}}));
     },
     abortUploadingFiles() {
       if (this.newUploadedFilesInProgress) {
         this.$root.$emit('abort-attachments-new-upload', this.attachments.filter(attachment => !attachment.uploadId));
+        document.dispatchEvent(new CustomEvent('abort-attachments-new-upload', {'detail': {'attachments': this.attachments.filter(attachment => !attachment.uploadId)}}));
+
         this.newUploadedFiles.forEach(file => {
           if (file.uploadProgress < 100) {
             this.$uploadService.abortUpload(file.uploadId);
