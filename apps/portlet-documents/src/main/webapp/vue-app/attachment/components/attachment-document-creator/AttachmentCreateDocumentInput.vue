@@ -179,6 +179,7 @@ export default {
         doc.drive = this.currentDrive.title;
         doc.date = doc.created;
         this.$root.$emit('add-new-created-document', doc);
+        document.dispatchEvent(new CustomEvent('add-new-created-document', {'detail': {'attachment': doc}}));
         this.$root.$emit('end-loading-attachment-drawer');
         this.resetNewDocInput();
         window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');

@@ -1,33 +1,4 @@
 export function installExtensions() {
-  extensionRegistry.registerExtension('ActivityComposer', 'activity-composer-action', {
-    key: 'file',
-    rank: 20,
-    resourceBundle: 'locale.portlet.attachments',
-    labelKey: 'attachments.composer.app.labelKey',
-    description: 'attachments.composer.app.description',
-    iconClass: 'addFileComposerIcon',
-    appClass: 'attachmentsSelector',
-    component: {
-      name: 'attachment',
-      props: {
-        isComposerAttachment: true,
-        attachmentAppConfiguration: {},
-        attachments: []
-      },
-      model: {
-        value: [],
-        default: []
-      },
-      events: [{
-        'event': 'attachmentsChanged',
-        'listener': 'updateAttachments'
-      }]
-    },
-    onExecute: function (attachmentsComponent, attachments) {
-      attachmentsComponent.openAttachmentsAppDrawer(attachments);
-    }
-  });
-
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
     id: 'attachments',
     isEnabled: (params) => {
