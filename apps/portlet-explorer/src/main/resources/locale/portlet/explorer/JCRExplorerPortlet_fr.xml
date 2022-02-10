@@ -1421,7 +1421,7 @@
     </eventName>
     <label>
       <operation>Opération</operation>
-      <userName>Identifiant</userName>
+      <userName>Utilisateur</userName>
       <date>Date</date>
       <version>Version</version>
     </label>
