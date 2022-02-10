@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.ShareDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
@@ -72,7 +73,7 @@ public class ShareDocumentsComponent extends UIAbstractManagerComponent{
   }
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
-          new IsDocumentFilter(), new ShareDocumentFilter()
+          new IsDocumentFilter(), new ShareDocumentFilter(), new CanSetPropertyFilter()
   });
 
   @UIExtensionFilters
