@@ -200,7 +200,7 @@ export default {
     uploadFinished() {
       if (this.uploadFinished && this.uploadingCount === 0 && this.entityHasNewAttachments) {
         this.$root.$emit('entity-attachments-updated', this.attachments);
-        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+        document.dispatchEvent(new CustomEvent('entity-attachments-updated', {detail: {'attachments': this.attachments}}));
         this.displaySuccessMessage();
         this.$refs.attachmentsAppDrawer.endLoading();
       }

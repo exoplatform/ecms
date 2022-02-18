@@ -25,10 +25,6 @@
 <script>
 export default {
   props: {
-    isComposerAttachment: {
-      type: Boolean,
-      default: false
-    },
     attachmentAppConfiguration: {
       type: Object,
       default: () => null
@@ -61,6 +57,9 @@ export default {
     },
     entityHasAttachments() {
       return this.attachments && this.attachments.length;
+    },
+    isComposerAttachment() {
+      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.isComposerAttachment;
     }
   },
   created() {
@@ -136,7 +135,7 @@ export default {
           this.$root.$emit('set-source-app', this.attachmentAppConfiguration.sourceApp);
         }
       }
-      this.attachments = [];
+      this.attachments = this.attachmentAppConfiguration.attachments || [];
       this.openAttachmentsAppDrawer();
       this.initAttachmentEnvironment();
     });

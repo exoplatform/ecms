@@ -86,6 +86,14 @@ export default {
       type: String,
       default: ''
     },
+    attachmentsList: {
+      type: Array,
+      default: () => []
+    },
+    isComposerAttachment: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -99,7 +107,9 @@ export default {
         'entityType': this.entityType,
         'defaultDrive': this.defaultDrive,
         'defaultFolder': this.defaultFolder,
-        'spaceId': this.spaceId
+        'spaceId': this.spaceId,
+        'attachments': this.attachmentsList,
+        'isComposerAttachment': this.isComposerAttachment,
       };
     }
   },
