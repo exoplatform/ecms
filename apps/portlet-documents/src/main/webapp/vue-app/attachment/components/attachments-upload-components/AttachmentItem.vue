@@ -278,7 +278,7 @@ export default {
   methods: {
     detachFile() {
       if (this.canDetachAttachment && this.isComposerAttachment) {
-        this.$root.$emit('remove-composer-attachment-item', this.attachment);
+        document.dispatchEvent(new CustomEvent('remove-composer-attachment-item', {'detail': {'attachment': this.attachment}}));
       } else if (this.canDetachAttachment) {
         this.$root.$emit('remove-attachment-item', this.attachment);
       }

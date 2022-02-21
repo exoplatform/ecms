@@ -723,6 +723,7 @@ export default {
     },
     addSelectedFiles() {
       this.$root.$emit('attachments-changed-from-drives', this.selectedFiles, this.removedFiles);
+      document.dispatchEvent(new CustomEvent('attachments-changed-from-drives', {'detail': {'attachments': this.selectedFiles}}));
       this.resetDriveExplorer();
     },
     showSearchDocumentInput() {
