@@ -27,7 +27,7 @@
     </component-plugin>
   </external-component-plugins>
 
-  <external-component-plugins profiles="ecms">
+  <external-component-plugins profiles="analytics">
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>       
     <component-plugin>
       <name>addActions</name>
