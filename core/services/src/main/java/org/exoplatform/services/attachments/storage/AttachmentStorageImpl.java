@@ -70,55 +70,69 @@ public class AttachmentStorageImpl implements AttachmentStorage {
   }
 
   @Override
-  public List<Attachment> getAttachmentsByEntity(Session systemSession,
-                                                 Session userSession,
-                                                 String workspace,
-                                                 long entityId,
-                                                 String entityType) throws Exception {
-    List<AttachmentContextEntity> attachmentsContextEntity = attachmentDAO.getAttachmentContextByEntity(entityId,
-                                                                                                        entityType.toUpperCase());
+  public List<Attachment> getAttachmentsByEntity(long entityId, String entityType) throws Exception {
+    Session systemSession = Utils.getSystemSession(sessionProviderService, repositoryService);
+    Session userSession = Utils.getSession(sessionProviderService, repositoryService);
+    String workspace = Utils.getCurrentWorkspace(repositoryService);
 
-    Utils.sortAttachmentsByDate(attachmentsContextEntity);
-    List<Attachment> attachments = new ArrayList<>();
-    if (!attachmentsContextEntity.isEmpty()) {
-      for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
-        String attachmentId = attachmentContextEntity.getAttachmentId();
-        if (!checkAttachmentNodeExistence(systemSession, attachmentId)) {
-          continue;
+    try {
+      List<AttachmentContextEntity> attachmentsContextEntity = attachmentDAO.getAttachmentContextByEntity(entityId,
+                                                                                                          entityType.toUpperCase());
+  
+      Utils.sortAttachmentsByDate(attachmentsContextEntity);
+      List<Attachment> attachments = new ArrayList<>();
+      if (!attachmentsContextEntity.isEmpty()) {
+        for (AttachmentContextEntity attachmentContextEntity : attachmentsContextEntity) {
+          String attachmentId = attachmentContextEntity.getAttachmentId();
+          if (!checkAttachmentNodeExistence(systemSession, attachmentId)) {
+            continue;
+          }
+          if (Utils.isQuarantinedItem(systemSession, attachmentId)) {
+            continue;
+          }
+          Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
+                                                                   documentService,
+                                                                   linkManager,
+                                                                   workspace,
+                                                                   userSession,
+                                                                   attachmentId);
+          attachments.add(attachment);
         }
-        if (Utils.isQuarantinedItem(systemSession, attachmentId)) {
-          continue;
-        }
-        Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
-                                                                 documentService,
-                                                                 linkManager,
-                                                                 workspace,
-                                                                 userSession,
-                                                                 attachmentId);
-        attachments.add(attachment);
+      }
+      return attachments.stream()
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+    } finally {
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+      if (userSession != null) {
+        userSession.logout();
       }
     }
-    return attachments.stream()
-                      .filter(Objects::nonNull)
-                      .collect(Collectors.toList());
   }
 
   @Override
-  public Attachment getAttachmentItemByEntity(Session session,
-                                              String workspace,
-                                              long entityId,
+  public Attachment getAttachmentItemByEntity(long entityId,
                                               String entityType,
                                               String attachmentId) throws Exception {
-    AttachmentContextEntity attachmentEntity = attachmentDAO.getAttachmentItemByEntity(entityId,
-                                                                                       entityType.toUpperCase(),
-                                                                                       attachmentId);
-
-    return EntityBuilder.fromAttachmentNode(repositoryService,
-                                            documentService,
-                                            linkManager,
-                                            workspace,
-                                            session,
-                                            attachmentEntity.getAttachmentId());
+    Session session = Utils.getSession(sessionProviderService, repositoryService);
+    try {
+      AttachmentContextEntity attachmentEntity = attachmentDAO.getAttachmentItemByEntity(entityId,
+                                                                                         entityType.toUpperCase(),
+                                                                                         attachmentId);
+  
+      return EntityBuilder.fromAttachmentNode(repositoryService,
+                                              documentService,
+                                              linkManager,
+                                              Utils.getCurrentWorkspace(repositoryService),
+                                              session,
+                                              attachmentEntity.getAttachmentId());
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
+    }
   }
 
   @Override

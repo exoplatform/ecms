@@ -11,12 +11,10 @@
         :entity-type="entityType"
         :default-drive="defaultDrive"
         :default-folder="defaultFolder"
-        :current-space="currentSpace"
-        :is-composer-attachment="isComposerAttachment" />
+        :current-space="currentSpace" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
-        :attachments="attachments"
-        :is-composer-attachment="isComposerAttachment" />
+        :attachments="attachments" />
       <attachments-notification-alerts />
     </div>
   </v-app>
@@ -26,49 +24,27 @@
 export default {
   data () {
     return {
-      currentSpace: {},
-      attachmentAppConfiguration: {},
       attachments: [],
+      currentSpace: {},
+      defaultDrive: null,
+      defaultFolder: null,
+      spaceId: null,
+      entityType: null,
+      entityId: null,
+      sourceApp: null,
+      drawerList: false,
+      attachToEntity: false,
     };
   },
   computed: {
-    defaultDrive() {
-      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.defaultDrive;
-    },
-    defaultFolder() {
-      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.defaultFolder;
-    },
-    spaceId() {
-      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.spaceId;
-    },
-    entityType() {
-      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.entityType;
-    },
-    entityId() {
-      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.entityId;
-    },
     entityHasAttachments() {
       return this.attachments && this.attachments.length;
-    },
-    isComposerAttachment() {
-      return this.attachmentAppConfiguration && this.attachmentAppConfiguration.isComposerAttachment;
     }
   },
   created() {
     this.$root.$on('entity-attachments-updated', () => this.initEntityAttachmentsList());
     this.$root.$on('remove-attachment-item', attachment => {
       this.removeAttachedFile(attachment);
-    });
-    document.addEventListener('remove-attachment-item', (event) => {
-      if (event && event.detail) {
-        this.removeAttachedFile(event.detail.attachment);
-      }
-    });
-    document.addEventListener('remove-composer-attachment-item', (event) => {
-      if (event && event.detail) {
-        const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === event.detail.attachment.id);
-        this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
-      }
     });
     this.$root.$on('add-new-created-document', file => {
       this.attachments.push(file);
@@ -86,66 +62,20 @@ export default {
       this.attachments = [];
     });
     document.addEventListener('open-attachments-app-drawer', (event) => {
-      this.attachmentAppConfiguration = event.detail;
-      if (!this.attachmentAppConfiguration) {
-        if (eXo.env.portal.spaceDisplayName) {
-          this.attachmentAppConfiguration = {
-            'defaultDrive': {
-              isSelected: true,
-              name: `.spaces.${eXo.env.portal.spaceGroup}`,
-              title: eXo.env.portal.spaceDisplayName,
-            },
-            'defaultFolder': 'Documents',
-            'sourceApp': '',
-          };
-        } else {
-          this.attachmentAppConfiguration = {
-            'defaultDrive': {
-              isSelected: true,
-              name: 'Personal Documents',
-              title: 'Personal Documents'
-            },
-            'defaultFolder': 'Documents',
-            'sourceApp': '',
-          };
-        }
-      } else {
-        if (!this.attachmentAppConfiguration.defaultDrive) {
-          if (eXo.env.portal.spaceDisplayName) {
-            this.attachmentAppConfiguration.defaultDrive = {
-              isSelected: true,
-              name: `.spaces.${eXo.env.portal.spaceGroup}`,
-              title: eXo.env.portal.spaceDisplayName,
-            };
-          } else {
-            this.attachmentAppConfiguration.defaultDrive = {
-              isSelected: true,
-              name: 'Personal Documents',
-              title: 'Personal Documents'
-            };
-          }
-        }
-        if (!this.attachmentAppConfiguration.defaultFolder) {
-          this.attachmentAppConfiguration.defaultFolder = 'Documents';
-        }
-        if (!this.attachmentAppConfiguration.sourceApp) {
-          this.attachmentAppConfiguration.sourceApp = '';
-        } else {
-          this.$root.$emit('set-source-app', this.attachmentAppConfiguration.sourceApp);
-        }
-      }
-      this.attachments = [];
-      if (this.isComposerAttachment) {
-        this.attachments = this.attachmentAppConfiguration.attachments;
-      }
-      this.openAttachmentsAppDrawer();
-      this.initAttachmentEnvironment();
+      this.drawerList = false;
+      this.readConfiguration(event.detail)
+        .then(() => {
+          this.initAttachmentEnvironment();
+          this.openAttachmentsAppDrawer();
+        });
     });
     document.addEventListener('open-attachments-list-drawer', (event) => {
-      this.attachmentAppConfiguration = event.detail;
-      this.attachments = [];
-      this.openAttachmentsDrawerList();
-      this.initAttachmentEnvironment();
+      this.drawerList = true;
+      this.readConfiguration(event.detail)
+        .then(() => {
+          this.initAttachmentEnvironment();
+          this.openAttachmentsDrawerList();
+        });
     });
   },
   mounted() {
@@ -155,21 +85,48 @@ export default {
     openAttachmentsAppDrawer() {
       this.$root.$emit('open-attachments-app-drawer');
     },
+    readConfiguration(config) {
+      config = config || {};
+      this.spaceId = this.getURLQueryParam('spaceId')  || config.spaceId || eXo.env.portal.spaceId;
+      this.defaultDrive = config.defaultDrive || {
+        isSelected: true,
+        name: eXo.env.portal.spaceGroup && `.spaces.${eXo.env.portal.spaceGroup}` || 'Personal Documents',
+        title: eXo.env.portal.spaceDisplayName || 'Personal Documents'
+      };
+      this.defaultFolder = config.defaultFolder
+        || (eXo.env.portal.spaceDisplayName && 'Documents') || 'Public';
+      this.sourceApp = config.sourceApp || null;
+      this.attachments = config.attachments || [];
+      this.attachToEntity = config.attachToEntity || false;
+      this.entityType = config.entityType;
+      this.entityId = config.entityId;
+      return this.initDefaultDrive();
+    },
+    startLoadingList() {
+      if (this.drawerList && this.$refs.attachmentsListDrawer) {
+        this.$refs.attachmentsListDrawer.startLoading();
+      } else if (!this.drawerList && this.$refs.attachmentsAppDrawer) {
+        this.$refs.attachmentsAppDrawer.startLoading();
+      }
+    },
+    endLoadingList() {
+      if (this.drawerList && this.$refs.attachmentsListDrawer) {
+        this.$refs.attachmentsListDrawer.endLoading();
+      } else if (!this.drawerList && this.$refs.attachmentsAppDrawer) {
+        this.$refs.attachmentsAppDrawer.endLoading();
+      }
+    },
     initAttachmentEnvironment() {
-      this.initDefaultDrive();
-      if (this.entityType && this.entityId) {
-        this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.startLoading();
-        this.initEntityAttachmentsList().then(() => {
-          this.$refs.attachmentsListDrawer.$refs.attachmentsListDrawer.endLoading();
-        });
+      if (this.entityType && this.entityId && this.attachToEntity) {
+        this.startLoadingList();
+        this.initEntityAttachmentsList()
+          .finally(() => this.endLoadingList());
       }
     },
     initEntityAttachmentsList() {
-      if (this.entityType && this.entityId && !this.isComposerAttachment) {
+      if (this.entityType && this.entityId) {
         return this.$attachmentService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
-          attachments.forEach(attachments => {
-            attachments.name = attachments.title;
-          });
+          attachments.forEach(attachment => attachment.name = attachment.title);
           this.attachments = attachments;
         });
       }
@@ -184,59 +141,60 @@ export default {
         if (file.uploadProgress !== this.maxProgress) {
           this.$root.$emit('abort-uploading-new-file', file);
         }
+      } else if (this.attachToEntity) {
+        this.startLoadingList();
+        this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id)
+          .then(() => {
+            this.$root.$emit('remove-attached-file', file);
+            const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
+            this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
+            this.$root.$emit('attachments-notification-alert', {
+              message: this.$t('attachments.detach.success'),
+              type: 'success',
+            });
+            this.initEntityAttachmentsList();
+            document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+            document.dispatchEvent(new CustomEvent('attachment-removed', {detail: file}));
+          })
+          .catch(e => {
+            console.error(e);
+            this.$root.$emit('attachments-notification-alert', {
+              message: this.$t('attachments.delete.failed').replace('{0}', file.title),
+              type: 'error',
+            });
+          })
+          .finally(() => this.endLoadingList());
       } else {
-        this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.startLoading();
-        this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id).then(() => {
-          this.$root.$emit('remove-attached-file', file);
-          const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
-          this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.detach.success'),
-            type: 'success',
-          });
-          this.initEntityAttachmentsList();
-          document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
-          this.$refs.attachmentsAppDrawer.$refs.attachmentsAppDrawer.endLoading();
-        }).catch(e => {
-          console.error(e);
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.delete.failed').replace('{0}', file.title),
-            type: 'error',
-          });
-        });
+        document.dispatchEvent(new CustomEvent('attachment-removed', {detail: file}));
+        this.$root.$emit('remove-attached-file', file);
+        const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
+        this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
       }
     },
     addDestinationFolderForAll(defaultDestinationFolderPath, pathDestinationFolder, currentDrive) {
-      for (let i = 0; i < this.attachments.length; i++) {
-        if (!this.attachments[i].destinationFolder || this.attachments[i].destinationFolder === defaultDestinationFolderPath) {
-          this.attachments[i].destinationFolder = pathDestinationFolder;
-          this.attachments[i].fileDrive = currentDrive;
+      for (const attachment in this.attachments) {
+        if (!attachment.destinationFolder || attachment.destinationFolder === defaultDestinationFolderPath) {
+          attachment.destinationFolder = pathDestinationFolder;
+          attachment.fileDrive = currentDrive;
         }
       }
     },
     initDefaultDrive() {
-      const spaceId = this.getURLQueryParam('spaceId') ? this.getURLQueryParam('spaceId') :
-        `${eXo.env.portal.spaceId}` ? `${eXo.env.portal.spaceId}` :
-          this.attachmentAppConfiguration.spaceId;
-      if (spaceId) {
-        this.$attachmentService.getSpaceById(spaceId).then(space => {
-          if (space) {
-            this.currentSpace = space;
-            const spaceGroupId = space.groupId.split('/spaces/')[1];
-            this.attachmentAppConfiguration.defaultDrive = {
-              name: `.spaces.${spaceGroupId}`,
-              title: spaceGroupId,
-              isSelected: true
-            };
-          }
-        });
-      } else if (this.attachmentAppConfiguration.entityId && this.attachmentAppConfiguration.entityType) {
-        this.attachmentAppConfiguration.defaultDrive = {
-          isSelected: true,
-          name: 'Personal Documents',
-          title: 'Personal Documents'
-        };
-        this.attachmentAppConfiguration.defaultFolder = 'Public';
+      if (this.spaceId) {
+        return this.$spaceService.getSpaceById(this.spaceId)
+          .then(space => {
+            if (space) {
+              this.currentSpace = space;
+              const spaceGroupId = space.groupId.split('/spaces/')[1];
+              this.defaultDrive = {
+                name: `.spaces.${spaceGroupId}`,
+                title: space.displayName,
+                isSelected: true
+              };
+            }
+          });
+      } else {
+        return Promise.resolve(null);
       }
     },
     getURLQueryParam(paramName) {
@@ -257,8 +215,6 @@ export default {
           }
         });
       }
-      this.$root.$emit('entity-attachments-updated', this.attachments);
-      document.dispatchEvent(new CustomEvent('entity-attachments-updated', {'detail': {'attachments': this.attachments}}));
     }
   }
 };
