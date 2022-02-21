@@ -1,4 +1,6 @@
 export function installExtensions() {
+  CKEDITOR.plugins.addExternal('attachFile', '/documents/js/ckEditorPlugins/attachFile/', 'plugin.js');
+
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
     id: 'attachments',
     isEnabled: (params) => {
@@ -12,6 +14,19 @@ export function installExtensions() {
   extensionRegistry.registerComponent('TaskDrawer', 'task-drawer-action', {
     id: 'attachments',
     vueComponent: Vue.options.components['task-attachment'],
+    rank: 10,
+  });
+
+  extensionRegistry.registerComponent('ActivityComposerAction', 'activity-composer-action', {
+    id: 'activityComposerAttachments',
+    vueComponent: Vue.options.components['activity-composer-attachments'],
+    rank: 10,
+  });
+
+  extensionRegistry.registerExtension('ActivityComposer', 'ckeditor-extensions', {
+    id: 'attachFile',
+    extraPlugin: 'attachFile',
+    extraToolbarItem: 'attachFile',
     rank: 10,
   });
 

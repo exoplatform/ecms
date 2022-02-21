@@ -1,17 +1,3 @@
-export function getSpaceById(id) {
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/v1/social/spaces/${id}`, {
-    credentials: 'include',
-    method: 'GET',
-  }).then((resp) => {
-    if (resp && resp.ok) {
-      return resp.json();
-    }
-  }).catch(e => {
-    log(`Error getting space: ${e.errorMessage ? e.errorMessage : e.errorCode}`);
-    throw new Error(`Error getting space with id ${e}`);
-  });
-}
-
 export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
   return fetch(`/portal/rest/managedocument/getFoldersAndFiles/?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}`,
     {})
@@ -268,6 +254,28 @@ export function getEntityAttachments(entityType, entityId) {
       return resp.json();
     } else {
       throw new Error('Error getting entity\'s linked attachments');
+    }
+  });
+}
+
+export function getAttachmentByEntityAndId(entityType, entityId, attachmentId) {
+  if (!attachmentId) {
+    throw new Error('Attachment Id can\'t be empty');
+  }
+  if (!entityType) {
+    throw new Error('Entity Type can\'t be empty');
+  }
+  if (!entityId) {
+    throw new Error('Entity Id can\'t be empty');
+  }
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/${entityType}/${entityId}/${attachmentId}`, {
+    credentials: 'include',
+    method: 'GET',
+  }).then((resp) => {
+    if (resp || resp.ok) {
+      return resp.json();
+    } else {
+      throw new Error('Error getting entity\'s linked attachment');
     }
   });
 }

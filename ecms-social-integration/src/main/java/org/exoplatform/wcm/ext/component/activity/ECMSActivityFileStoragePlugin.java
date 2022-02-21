@@ -38,31 +38,19 @@ import org.exoplatform.upload.UploadService;
  */
 public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
 
-  private static final String          ACTIVITY_FOLDER_UPLOAD_NAME = "Activity Stream Documents";
+  private static final String  ACTIVITY_FOLDER_UPLOAD_NAME = "Activity Stream Documents";
 
-  public static final String           REPOSITORY                  = "REPOSITORY";
+  private NodeHierarchyCreator nodeHierarchyCreator;
 
-  public static final String           WORKSPACE                   = "WORKSPACE";
+  private RepositoryService    repositoryService;
 
-  public static final String           DOC_PATH                    = "DOCPATH";
+  private SpaceService         spaceService;
 
-  public static final String           DOC_TITLE                   = "docTitle";
+  private UploadService        uploadService;
 
-  public static final String           MIME_TYPE                   = "mimeType";
+  private SessionProviderService sessionProviderService;
 
-  public static final String           ID                          = "id";
-
-  private final NodeHierarchyCreator   nodeHierarchyCreator;
-
-  private final RepositoryService      repositoryService;
-
-  private final SpaceService           spaceService;
-
-  private final UploadService          uploadService;
-
-  private final SessionProviderService sessionProviderService;
-
-  private final AutoVersionService     autoVersionService;
+  private AutoVersionService autoVersionService;
 
   public ECMSActivityFileStoragePlugin(SpaceService spaceService,
                                        NodeHierarchyCreator nodeHierarchyCreator,
@@ -165,12 +153,12 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
       if (activity.getTemplateParams() == null) {
         activity.setTemplateParams(new HashMap<>());
       }
-      concatenateParam(activity.getTemplateParams(), REPOSITORY, "repository");
-      concatenateParam(activity.getTemplateParams(), WORKSPACE, "collaboration");
-      concatenateParam(activity.getTemplateParams(), DOC_PATH, node.getPath());
-      concatenateParam(activity.getTemplateParams(), DOC_TITLE, uploadedResource.getFileName());
-      concatenateParam(activity.getTemplateParams(), MIME_TYPE, resourceNode.getProperty("jcr:mimeType").getString());
-      concatenateParam(activity.getTemplateParams(), ID, node.isNodeType("mix:referenceable") ? node.getUUID() : "");
+      concatenateParam(activity.getTemplateParams(), "REPOSITORY", "repository");
+      concatenateParam(activity.getTemplateParams(), "WORKSPACE", "collaboration");
+      concatenateParam(activity.getTemplateParams(), "DOCPATH", node.getPath());
+      concatenateParam(activity.getTemplateParams(), "docTitle", uploadedResource.getFileName());
+      concatenateParam(activity.getTemplateParams(), "mimeType", resourceNode.getProperty("jcr:mimeType").getString());
+      concatenateParam(activity.getTemplateParams(), "id", node.isNodeType("mix:referenceable") ? node.getUUID() : "");
 
       uploadService.removeUploadResource(activityFile.getUploadId());
     }
@@ -198,12 +186,12 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
       nodeTitle = attachmentNode.getName();
     }
 
-    concatenateParam(activity.getTemplateParams(), REPOSITORY, "repository");
-    concatenateParam(activity.getTemplateParams(), WORKSPACE, "collaboration");
-    concatenateParam(activity.getTemplateParams(), DOC_PATH, attachmentNode.getPath());
-    concatenateParam(activity.getTemplateParams(), DOC_TITLE, nodeTitle);
-    concatenateParam(activity.getTemplateParams(), MIME_TYPE, resourceNode.getProperty("jcr:mimeType").getString());
-    concatenateParam(activity.getTemplateParams(), ID, attachmentNode.isNodeType("mix:referenceable") ? attachmentNode.getUUID() : "");
+    concatenateParam(activity.getTemplateParams(), "REPOSITORY", "repository");
+    concatenateParam(activity.getTemplateParams(), "WORKSPACE", "collaboration");
+    concatenateParam(activity.getTemplateParams(), "DOCPATH", attachmentNode.getPath());
+    concatenateParam(activity.getTemplateParams(), "docTitle", nodeTitle);
+    concatenateParam(activity.getTemplateParams(), "mimeType", resourceNode.getProperty("jcr:mimeType").getString());
+    concatenateParam(activity.getTemplateParams(), "id", attachmentNode.isNodeType("mix:referenceable") ? attachmentNode.getUUID() : "");
   }
 
   private String getFileName(Node parentUploadNode,

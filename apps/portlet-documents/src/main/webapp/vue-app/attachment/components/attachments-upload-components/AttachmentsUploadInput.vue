@@ -228,6 +228,7 @@ export default {
       if (!file.aborted) {
         this.uploadingCount++;
         this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
+          .then(() => delete file.originalFileObject)
           .catch(() => {
             this.$root.$emit('attachments-notification-alert', {
               message: this.$t('attachments.link.failed'),
