@@ -592,7 +592,7 @@ export default {
     openFolder: function (folder) {
       if (this.selectedFolder.id && this.selectedFolder.canRemove) {
         this.$refs.rename[0].focus();
-      } else if (folder.type === 'new_folder') {
+      } else if (folder.type && folder.type === 'new_folder') {
         this.$refs.newFolder[0].focus();
       } else {
         this.currentAbsolutePath = folder.path;
