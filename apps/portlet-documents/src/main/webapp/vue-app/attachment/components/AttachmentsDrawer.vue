@@ -23,7 +23,7 @@
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
           <attachment-create-document-input
-            v-if="!entityType && ! entityId"
+            v-if="(!entityType && ! entityId) || !attachToEntity"
             :attachments="attachments"
             :max-files-count="maxFilesCount"
             :max-files-size="maxFileSize"
@@ -35,7 +35,7 @@
             :max-files-size="maxFileSize"
             :current-drive="currentDrive"
             :path-destination-folder="pathDestinationFolder" />
-          <attachments-select-from-drive v-if="entityId && entityType" />
+          <attachments-select-from-drive v-if="(entityId && entityType) || !attachToEntity" />
           <attachments-uploaded-files
             :attachments="attachments"
             :new-uploaded-files="newUploadedFiles"
@@ -115,6 +115,10 @@ export default {
     entityHasAttachments: {
       type: Boolean,
       default: false
+    },
+    attachToEntity: {
+      type: Boolean,
+      default: true
     },
     currentSpace: {
       type: {},
@@ -470,7 +474,7 @@ export default {
       const attachmentIds = this.attachments.filter(attachment => attachment.id).map(attachment => attachment.id);
       if (attachmentIds.length === 0) {
         return this.removeAllAttachmentsFromEntity(this.entityId, this.entityType);
-      } else {
+      } else if (this.attachToEntity) {
         return this.$attachmentService.updateLinkedAttachmentsToEntity(this.entityId, this.entityType, attachmentIds)
           .then(() => {
             this.$root.$emit('entity-attachments-updated');
@@ -536,6 +540,11 @@ export default {
       if (selectedFromDrives && selectedFromDrives.length || removedFilesFromDrive && removedFilesFromDrive.length) {
         this.attachmentsChanged = true;
         this.newUploadedFiles.push(...selectedFromDrives);
+        selectedFromDrives.forEach(file => document.dispatchEvent(new CustomEvent('attachment-added', {detail: {
+          attachment: file,
+          entityType: this.entityType,
+          entityId: this.entityId,
+        }})));
         this.uploadAddedAttachments();
       }
     },
@@ -553,6 +562,11 @@ export default {
     },
     addNewCreatedDocument(file) {
       if (file && file.id) {
+        document.dispatchEvent(new CustomEvent('attachment-added', {detail: {
+          attachment: file,
+          entityType: this.entityType,
+          entityId: this.entityId,
+        }}));
         this.sendDocumentAnalytics(file);
         this.newUploadedFiles.push(file);
         this.uploadedFiles.push(file);

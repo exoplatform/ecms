@@ -1016,7 +1016,7 @@ export default {
         });
       } else { //if entityType (tasks, event, ..) folder exist, we create directly entityId folder
         this.openFolder(defaultFolder).then(() => {
-          defaultFolder = this.folders.find(folder => parseInt(folder.title) === this.entityId);
+          defaultFolder = this.folders.find(folder => parseInt(folder.title) === parseInt(this.entityId));
           if (!defaultFolder) {
             this.newFolderName = this.entityId;
             this.creatingNewFolder = true;

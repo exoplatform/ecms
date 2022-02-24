@@ -11,7 +11,8 @@
         :entity-type="entityType"
         :default-drive="defaultDrive"
         :default-folder="defaultFolder"
-        :current-space="currentSpace" />
+        :current-space="currentSpace"
+        :attach-to-entity="attachToEntity" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
         :attachments="attachments" />
