@@ -592,7 +592,7 @@ export default {
     openFolder: function (folder) {
       if (this.selectedFolder.id && this.selectedFolder.canRemove) {
         this.$refs.rename[0].focus();
-      } else if (folder.type === 'new_folder') {
+      } else if (folder.type && folder.type === 'new_folder') {
         this.$refs.newFolder[0].focus();
       } else {
         this.currentAbsolutePath = folder.path;
@@ -1016,7 +1016,7 @@ export default {
         });
       } else { //if entityType (tasks, event, ..) folder exist, we create directly entityId folder
         this.openFolder(defaultFolder).then(() => {
-          defaultFolder = this.folders.find(folder => parseInt(folder.title) === this.entityId);
+          defaultFolder = this.folders.find(folder => parseInt(folder.title) === parseInt(this.entityId));
           if (!defaultFolder) {
             this.newFolderName = this.entityId;
             this.creatingNewFolder = true;

@@ -63,9 +63,7 @@ export default {
       this.attachments = JSON.parse(JSON.stringify(this.files));
 
       this.files.forEach((attachment, index) => {
-        if (attachment.acl) {
-          return;
-        } else if (this.activityId) {
+        if (this.activityId) {
           this.$attachmentService.getAttachmentByEntityAndId(this.entityType, this.activityId, attachment.id)
             .then(fileAttachment => this.attachments.splice(index, 1, fileAttachment));
         } else {
@@ -97,7 +95,7 @@ export default {
       if (index >= 0) {
         this.files.splice(index, 1);
       }
-      document.dispatchEvent(new CustomEvent('activity-composer-edited'));
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files.length}));
     },
   },
 };

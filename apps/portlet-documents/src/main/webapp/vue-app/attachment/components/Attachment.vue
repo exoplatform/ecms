@@ -11,7 +11,8 @@
         :entity-type="entityType"
         :default-drive="defaultDrive"
         :default-folder="defaultFolder"
-        :current-space="currentSpace" />
+        :current-space="currentSpace"
+        :attach-to-entity="attachToEntity" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
         :attachments="attachments" />
@@ -33,7 +34,7 @@ export default {
       entityId: null,
       sourceApp: null,
       drawerList: false,
-      attachToEntity: false,
+      attachToEntity: true,
     };
   },
   computed: {
@@ -97,7 +98,14 @@ export default {
         || (eXo.env.portal.spaceDisplayName && 'Documents') || 'Public';
       this.sourceApp = config.sourceApp || null;
       this.attachments = config.attachments || [];
-      this.attachToEntity = config.attachToEntity || false;
+      if (typeof config.attachToEntity !== 'undefined') {
+        this.attachToEntity = config.attachToEntity;
+        this.attachments.forEach((attachment) => {
+          if (attachment.acl) {
+            attachment.acl.canDetach = true;
+          }
+        });
+      }
       this.entityType = config.entityType;
       this.entityId = config.entityId;
       return this.initDefaultDrive();
