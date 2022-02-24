@@ -57,6 +57,7 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -113,16 +114,17 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
     MessageConfig messageConfig = watchService.getMessageConfig();
     String sender = MailUtils.getSenderName() + "<" + MailUtils.getSenderEmail() + ">";
     messageConfig.setSender(sender);
-    List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
-    for (String receiver : emailList) {
-      try {
-        Message message = createMessage(receiver, messageConfig);
-        mailService.sendMessage(message);
-      } catch (Exception e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Unexpected error", e);
-        }
+    try {
+      Node node = NodeLocation.getNodeByLocation(observedNode_);
+      NodeLocation nodeLocation = node.isNodeType(NodetypeConstant.NT_RESOURCE) ? NodeLocation.getNodeLocationByNode(node.getParent()) : observedNode_;
+      List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(nodeLocation));
+      for (String receiver : emailList) {
+        notifyUser(receiver, messageConfig, mailService);
       }
+    } catch (RepositoryException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unable to get node location", e);
+        }
     }
   }
 
@@ -315,5 +317,15 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
       }
     }
     return emailList;
+  }
+  private void notifyUser(String receiver, MessageConfig messageConfig, MailService mailService) {
+    try {
+      Message message = createMessage(receiver, messageConfig);
+      mailService.sendMessage(message);
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
+    }
   }
 }

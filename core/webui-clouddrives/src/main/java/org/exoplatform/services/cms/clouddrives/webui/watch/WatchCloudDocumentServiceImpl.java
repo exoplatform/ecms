@@ -33,6 +33,7 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.picocontainer.Startable;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
@@ -132,12 +133,13 @@ public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Star
   public void watchDocument(Node documentNode, String userName, int notifyType) throws Exception {
     Value newWatcher = documentNode.getSession().getValueFactory().createValue(userName);
     EmailNotifyCloudDocumentListener listener = null;
+    Node specificNode = documentNode.isNodeType(NodetypeConstant.NT_FILE) ? documentNode.getNode("jcr:content") : documentNode;
     if (!documentNode.isNodeType(EXO_WATCHABLE_MIXIN)) {
       documentNode.addMixin(EXO_WATCHABLE_MIXIN);
       if (notifyType == NOTIFICATION_BY_EMAIL) {
         documentNode.setProperty(EMAIL_WATCHERS_PROP, new Value[] { newWatcher });
         listener = new EmailNotifyCloudDocumentListener(documentNode);
-        observeNode(documentNode, listener);
+        observeNode(specificNode, listener);
       }
     } else {
       List<Value> watcherList = new ArrayList<Value>();
