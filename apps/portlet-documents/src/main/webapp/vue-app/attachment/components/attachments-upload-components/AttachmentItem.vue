@@ -136,14 +136,6 @@ export default {
       type: {},
       default: () => null
     },
-    isComposerAttachment: {
-      type: Boolean,
-      default: false
-    },
-    newUploadedFiles: {
-      type: {},
-      default: () => null
-    },
   },
   data() {
     return {
@@ -192,10 +184,10 @@ export default {
       return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     },
     canDetachAttachment() {
-      return this.attachmentHasPermission && this.attachmentHasPermission.canDetach || !this.attachment.id || this.attachment.isSelectedFromDrives || this.isComposerAttachment;
+      return this.attachmentHasPermission && this.attachmentHasPermission.canDetach || !this.attachment.id || this.attachment.isSelectedFromDrives;
     },
     canMoveAttachment() {
-      return this.canEdit && this.allowToEdit && !this.attachment.isSelectedFromDrives && !(this.isComposerAttachment && !this.isNewUploadedFile);
+      return this.canEdit && this.allowToEdit && !this.attachment.isSelectedFromDrives;
     },
     attachmentHasPermission() {
       return this.attachment && this.attachment.acl;
@@ -211,9 +203,6 @@ export default {
     },
     attachmentTitle() {
       return this.attachment && this.attachment.title && unescape(this.attachment.title);
-    },
-    isNewUploadedFile() {
-      return this.newUploadedFiles && this.newUploadedFiles.some(file => file.id === this.attachment.id);
     },
     icon() {
       const type = this.attachment && this.attachment.mimetype || '';
@@ -277,9 +266,7 @@ export default {
   },
   methods: {
     detachFile() {
-      if (this.canDetachAttachment && this.isComposerAttachment) {
-        document.dispatchEvent(new CustomEvent('remove-composer-attachment-item', {'detail': {'attachment': this.attachment}}));
-      } else if (this.canDetachAttachment) {
+      if (this.canDetachAttachment) {
         this.$root.$emit('remove-attachment-item', this.attachment);
       }
     },

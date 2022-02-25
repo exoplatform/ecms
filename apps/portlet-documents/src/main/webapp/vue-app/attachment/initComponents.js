@@ -12,6 +12,7 @@ import AttachmentsDriveExplorerDrawer from './components/attachments-drive-explo
 import AttachmentsSelectFromDrive from './components/attachments-drive-explorer/AttachmentsSelectFromDrive.vue';
 import ActivityAttachments from './components/activity/ActivityAttachments.vue';
 import ActivityAttachment from './components/activity/ActivityAttachment.vue';
+import ActivityComposerAttachments from './components/activity/ActivityComposerAttachments.vue';
 import AttachmentCreateDocumentInput from './components/attachment-document-creator/AttachmentCreateDocumentInput.vue';
 import TaskAttachment from './components/task/TaskAttachment.vue';
 import AnalyticsTableCellDocumentTitleValue from './components/analytics/AnalyticsTableCellDocumentTitleValue.vue';
@@ -33,6 +34,7 @@ const components = {
   'attachments-upload-input': AttachmentsUploadInput,
   'activity-attachments': ActivityAttachments,
   'activity-attachment': ActivityAttachment,
+  'activity-composer-attachments': ActivityComposerAttachments,
   'attachment-create-document-input': AttachmentCreateDocumentInput,
   'task-attachment': TaskAttachment,
   'analytics-table-cell-document-title-value': AnalyticsTableCellDocumentTitleValue,

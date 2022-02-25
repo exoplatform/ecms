@@ -1,0 +1,102 @@
+<template>
+  <div v-if="displayAttachments" class="actionItem action">
+    <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentListDrawer">
+      {{ $t('attachments.view.all') }} ({{ attachmentsLength }})
+    </a>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    activityId: {
+      type: String,
+      default: null,
+    },
+    message: {
+      type: String,
+      default: null,
+    },
+    maxMessageLength: {
+      type: Number,
+      default: 0,
+    },
+    templateParams: {
+      type: Object,
+      default: null,
+    },
+    files: {
+      type: Array,
+      default: null,
+    },
+  },
+  data: () => ({
+    attachments: null,
+    entityType: 'activity',
+  }),
+  computed: {
+    attachmentsLength() {
+      return this.files.length;
+    },
+    displayAttachments() {
+      return this.attachmentsLength > 0;
+    },
+    attachmentDrawerParams() {
+      return {
+        entityType: this.entityType,
+        entityId: this.activityId,
+        defaultFolder: 'Activity Stream Documents',
+        sourceApp: 'activityStream',
+        attachments: this.attachments,
+        spaceId: eXo.env.portal.spaceId,
+        attachToEntity: false, // Activity attachments are managed by composer instead of drawer
+      };
+    },
+  },
+  created() {
+    document.addEventListener('open-activity-attachments', () => this.openAttachmentDrawer());
+
+    document.addEventListener('attachment-added', event => this.addAttachment(event.detail));
+    document.addEventListener('attachment-removed', event => this.removeAttachment(event.detail));
+  },
+  methods: {
+    retrieveAttachments() {
+      this.attachments = JSON.parse(JSON.stringify(this.files));
+
+      this.files.forEach((attachment, index) => {
+        if (this.activityId) {
+          this.$attachmentService.getAttachmentByEntityAndId(this.entityType, this.activityId, attachment.id)
+            .then(fileAttachment => this.attachments.splice(index, 1, fileAttachment));
+        } else {
+          this.$attachmentService.getAttachmentById(this.entityType, this.activityId, attachment.id)
+            .then(fileAttachment => this.attachments.splice(index, 1, fileAttachment));
+        }
+      });
+    },
+    openAttachmentDrawer() {
+      this.retrieveAttachments();
+      this.$nextTick()
+        .then(() => {
+          document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentDrawerParams}));
+        });
+    },
+    openAttachmentListDrawer() {
+      this.retrieveAttachments();
+      this.$nextTick()
+        .then(() => {
+          document.dispatchEvent(new CustomEvent('open-attachments-list-drawer', {detail: this.attachmentDrawerParams}));
+        });
+    },
+    addAttachment(file) {
+      this.files.push(file.attachment);
+      document.dispatchEvent(new CustomEvent('activity-composer-edited'));
+    },
+    removeAttachment(file) {
+      const index = this.files.findIndex(attachment => attachment.id === file.id);
+      if (index >= 0) {
+        this.files.splice(index, 1);
+      }
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files.length}));
+    },
+  },
+};
+</script>
