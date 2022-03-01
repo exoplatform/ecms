@@ -32,7 +32,6 @@ import org.exoplatform.web.application.Parameter ;
     lastCommentLabel = lastCommentLabel.replace("{user}",user);
     lastCommentLabel = lastCommentLabel.replace("{time}",timeComment);
 
-	  jsManager.require("SHARED/uiCommentForm", "commentForm").addScripts("eXo.ecm.CommentForm.initUserProfilePopup();");
 %>
   <style>
 		<% _ctx.include(uicomponent.getTemplateSkin("exo:comments", "Stylesheet")); %>

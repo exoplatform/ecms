@@ -155,9 +155,6 @@
       <module>socialUtil</module>
     </depends>
     <depends>
-      <module>userPopupPlugin</module>
-    </depends>
-    <depends>
       <module>mentionsPlugin</module>
     </depends>
     <depends>
@@ -286,9 +283,6 @@
 
     <depends>
       <module>jquery</module>
-    </depends>
-    <depends>
-      <module>userPopupPlugin</module>
     </depends>
     <depends>
       <module>socialUtil</module>
