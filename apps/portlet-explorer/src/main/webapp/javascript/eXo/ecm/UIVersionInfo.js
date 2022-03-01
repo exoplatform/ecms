@@ -1,4 +1,4 @@
-(function($,userPopupPlugin,socialUtil) {
+(function($,socialUtil) {
 
   function UIVersionInfo(){};
 
@@ -53,22 +53,6 @@
     }
   };
 
-  UIVersionInfo.prototype.initUserProfilePopup = function(globalLabels) {
-    var labels = {};
-    var profileLabels = $.extend(true, {}, labels, globalLabels);
-    $.each(profileLabels, function(key) {
-      profileLabels[key] =  window.decodeURIComponent(profileLabels[key]);
-    });
-    $(".userAvatarLink").userPopup({
-      restURL: '//' + window.location.host + eXo.social.portal.context + '/' + eXo.social.portal.rest + '/social/people' + '/getPeopleInfo/{0}.json',
-      labels: profileLabels,
-      content: false,
-      defaultPosition: "left",
-      keepAlive: true,
-      maxWidth: "240px"
-    });
-  };
-
   UIVersionInfo.prototype.compareEventUrl = function(actionLink) {
     var me = eXo.ecm.UIVersionInfo;
     $(me.compareButton).click(function(evt) {
@@ -85,4 +69,4 @@
   eXo.ecm.UIVersionInfo = new UIVersionInfo();
   return eXo.ecm.UIVersionInfo;
 
-})($,userPopupPlugin,socialUtil);
+})($,socialUtil);
