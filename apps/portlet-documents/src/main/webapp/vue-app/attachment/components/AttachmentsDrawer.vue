@@ -51,6 +51,7 @@
           :entity-id="entityId"
           :entity-type="entityType"
           :default-drive="defaultDrive"
+          :extension-refs="$refs"
           :default-folder="defaultFolder"
           :attached-files="attachments" />
         <div
