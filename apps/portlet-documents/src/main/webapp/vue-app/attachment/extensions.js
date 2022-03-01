@@ -1,5 +1,5 @@
 export function installExtensions() {
-  CKEDITOR.plugins.addExternal('attachFile', '/documents/js/ckEditorPlugins/attachFile/', 'plugin.js');
+  CKEDITOR.plugins.addExternal('attachFile', '/eXoWCMResources/eXoPlugins/attachFile/', 'plugin.js');
 
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
     id: 'attachments',
