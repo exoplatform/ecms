@@ -666,7 +666,7 @@
     <title>Importar el tipo de nodo del archivo XML</title>
     <msg>
       <filename-error>Examinar un archivo de tipo de nodo para importar.</filename-error>
-      <data-file-error>Sólo los archivos .xml o .zip son compatibles para importar.</data-file-error>
+      <data-file-error>Solo se pueden importar archivos .xml o .zip.</data-file-error>
       <data-invalid>Los datos no están válidos. Por favor, compruebe el tipo de archivo y vuelva a intentarlo.</data-invalid>
       <nodetype-exist>El tipo de nodo '{0}' ya existe.</nodetype-exist>
       <namespace-invalid>El espacio de nombre '{0}' no es válido.</namespace-invalid>
@@ -1914,7 +1914,7 @@
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>Selecciona un Icono</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Seleccionar icono</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -2034,7 +2034,7 @@
   -->
   <ECMPhoneFormatValidator>
     <msg>
-      <Invalid>El campo '{0}' contiene un número de teléfono no válido. Por favor, especifique otro valor.</Invalid>
+      <Invalid>El campo «{0}» contiene un número de teléfono no válido. Especifica otro valor.</Invalid>
     </msg>
   </ECMPhoneFormatValidator>
   <!--
@@ -2044,13 +2044,13 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>El campo '{0}' tiene algunos caracteres no válidos. Por favor escriba otro valor.</Invalid-char>
-      <empty-input>El valor del campo '{0}' está vacío.</empty-input>
+      <Invalid-char>El campo «{0}» tiene algunos caracteres no válidos. Introduce otro valor.</Invalid-char>
+      <empty-input>El valor del campo «{0}» está vacío.</empty-input>
     </msg>
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Por favor, introduzca el valor en el campo '{0}'.</empty-input>
+      <empty-input>Introduce el valor en el campo «{0}».</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--

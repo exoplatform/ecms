@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>El valor del campo de prioridad debe estar en el formato numérico. El intervalo de valores válidos es de 0.0 a 1.0.</Invalid-number>
+      <Invalid-number>El valor del campo de prioridad debe estar en formato numérico. El intervalo de valores válidos es de 0,0 a 1,0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

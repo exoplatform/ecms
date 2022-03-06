@@ -277,7 +277,7 @@
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>El campo '{0}' es necesario.  Por favor introduzca su valor.</empty-input>
+      <empty-input>El campo «{0}» es necesario.  Introduce su valor.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>

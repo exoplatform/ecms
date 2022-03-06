@@ -343,9 +343,9 @@
       <added-hidden-mixin>Ha añadido correctamente el mixin oculto.</added-hidden-mixin>
       <not-supported>Esta función es solamente compatible con el tipo de documento.</not-supported>
       <empty-file-type>No puede añadir un documento aquí.</empty-file-type>
-      <unsupported-watch>Solo los documentos pueden monitorizados.</unsupported-watch>
+      <unsupported-watch>Solo se pueden vigilar documentos.</unsupported-watch>
       <watch-checkedin>Debe desproteger el documento antes de monitorizarlo.</watch-checkedin>
-      <unsupported-tagging>Solo los documentos pueden ser etiquetados.</unsupported-tagging>
+      <unsupported-tagging>Solo se pueden etiquetar documentos.</unsupported-tagging>
       <tagnode-checkedin>Debe desproteger el documento antes de etiquetarlo.</tagnode-checkedin>
     </msg>
     <title>
@@ -404,7 +404,7 @@
       <constraintviolation-exception>No fue encontrada la propiedad obligatoria jcr:uuid. Quizás el documento fue eliminado o cambiado. Por favor, pulse en el botón de actualizar.</constraintviolation-exception>
       <path-not-found-exception>Este documento fue eliminado o cambiado. Por favor, haga clic en el botón de Actualizar.</path-not-found-exception>
       <not-exist-categories>La categoría no existe.</not-exist-categories>
-      <lock-node-read-only>Este archivo está bloqueado por el usuario {0}. ¿Abrir en sólo lectura ?</lock-node-read-only>
+      <lock-node-read-only>Este archivo está bloqueado por el usuario {0}. ¿Abrir en solo lectura?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -1463,7 +1463,7 @@
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Sólo los documentos pueden ser inscritos.</node-type-invalid>
+      <node-type-invalid>Solo se pueden inscribir documentos.</node-type-invalid>
       <already-enroled>El documento ya ha sido inscrito.</already-enroled>
     </msg>
   </UIActivePublication>
@@ -1523,7 +1523,7 @@
       <filename-invalid>Buscar un archivo .xml para importarlo al campo 'Subir archivo'.</filename-invalid>
       <filetype-error>No se puede importar el archivo cargado. Tal vez, el archivo .xml no es válido.</filetype-error>
       <xml-invalid>Hay un carácter no válido en la posición [fila, columna]:{0} del archivo {1}</xml-invalid>
-      <mimetype-invalid>Sólo los archivos .xml o .zip son compatibles para importar.</mimetype-invalid>
+      <mimetype-invalid>Solo se pueden importar archivos .xml o .zip.</mimetype-invalid>
       <access-denied>Acceso denegado. No le está permitido importar allí.</access-denied>
       <constraint-violation-exception>Es imposible importar datos. El tipo '{0}' no está permitido en este lugar.</constraint-violation-exception>
       <item-exists-exception>Un elemento entrante tiene el mismo UUID que uno existente en el espacio de trabajo.</item-exists-exception>
@@ -1968,13 +1968,13 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>El campo '{0}' contiene  un número no válido de teléfono. Especifique otro valor.</Invalid>
+       <Invalid>El campo «{0}» contiene un número de teléfono no válido. Especifica otro valor.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
       <Invalid-char>El campo «{0}» contiene algunos caracteres no válidos. Introduce otro valor.</Invalid-char>
-      <empty-input>El valor del campo '{0}' es nulo o vacío.</empty-input>
+      <empty-input>El valor del campo «{0}» es nulo o vacío.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
@@ -2078,12 +2078,12 @@
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>El valor del campo 'Repetir Cuenta' no es válido. Sólo está permitido el tipo íntegro o -1.</invalid-value>
+      <invalid-value>El valor del campo «Repetir cuenta» no es válido. Solo se permiten de tipo íntegro o -1.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>El valor del campo 'Intervalo de Tiempo' no es válido. Sólo el tipo Long está permitido.</invalid-value>
+      <invalid-value>El valor del campo «Intervalo de tiempo» no es válido. Solo se permiten de tipo «Long».</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
@@ -2100,7 +2100,7 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>El valor del campo '{0}' es nulo o vacío.</empty-input>
+      <empty-input>El valor del campo «{0}» es nulo o vacío.</empty-input>
       <Invalid-char>El campo «{0}» contiene algunos caracteres no válidos. Introduce otro valor.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
@@ -2112,7 +2112,7 @@
   <SearchValidator>
     <msg>
       <empty-input>El valor de este campo es nulo o vacío.</empty-input>
-      <Invalid-char>Este campo contiene algunos caracteres no válidos.  Por favor, introduzca otro valor.</Invalid-char>
+      <Invalid-char>Este campo contiene algunos caracteres no válidos. Introduce otro valor.</Invalid-char>
       <Invalid-char2>El número debe ser seguido por el carácter '^'.</Invalid-char2>
       <Invalid-char1>El número siguiendo el caracter '~' debe estar entre 0 a 1.</Invalid-char1>
       <Invalid-char3>Número debe ser seguido por el carácter '^'.</Invalid-char3>
@@ -2165,7 +2165,7 @@
       <SelectFile>Elija la imagen en miniatura</SelectFile>
     </label>
     <msg>
-      <mimetype-incorrect>Tipo de archivo incorrecto. Las miniaturas sólo pueden crearse a partir de .JPG, .PNG o los .archivos GIF.</mimetype-incorrect>
+      <mimetype-incorrect>Tipo de archivo incorrecto. Las miniaturas solo pueden crearse a partir de .JPG, .PNG o los archivos .GIF.</mimetype-incorrect>
       <access-denied>Acceso denegado. No tiene permiso para añadir una viñeta.</access-denied>
       <confirm-delete>¿Está seguro que desea eliminar esta miniatura?</confirm-delete>
       <is-checked-in>Este elemento está protegido. Por favor, desprotéjalo antes de realizar cualquier acción.</is-checked-in>
@@ -2494,7 +2494,7 @@
       <versionHistory>Historia de la versión</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Tipo de archivo no válido en el historial de versiones. Sólo los archivos .zip son compatibles.</history-invalid-type>
+      <history-invalid-type>Tipo de archivo no válido en el historial de versiones. Solo los archivos .zip son compatibles.</history-invalid-type>
       <history-invalid-content>Contenido no válido en los datos de la historia de la versión. Selecciona un tipo de archivo compatible para importar.</history-invalid-content>
     </msg>
   </UIImportNode>

@@ -7,7 +7,7 @@
       <cannot-save>Error al guardar el nodo.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
-      <not-add-folder>Sólo se pueden añadir archivos en esta carpeta.</not-add-folder>
+      <not-add-folder>Solo se pueden añadir archivos en esta carpeta.</not-add-folder>
       <access-denied>Acceso denegado. No tiene permiso para añadir a '{0}'.</access-denied>
       <path-not-found>La ruta {0} fue eliminada o no es válida.</path-not-found>
       <node-locked>El nodo '{0}' está bloqueado. Por favor desbloquee este nodo antes de crear documentos.</node-locked>
@@ -154,7 +154,7 @@
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>El campo '{0}' con el valor '{1}' no es válido.</Invalid-input>
+      <Invalid-input>El campo «{0}» con el valor «{1}» no es válido.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
