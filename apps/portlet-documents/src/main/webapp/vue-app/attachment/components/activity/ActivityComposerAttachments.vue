@@ -1,9 +1,16 @@
 <template>
-  <div v-if="displayAttachments" class="actionItem action">
-    <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentListDrawer">
-      {{ $t('attachments.view.all') }} ({{ attachmentsLength }})
-    </a>
-  </div>
+  <v-app>
+    <div>
+      <div v-if="displayAttachments" class="actionItem action">
+        <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentListDrawer">
+          {{ $t('attachments.view.all') }} ({{ attachmentsLength }})
+        </a>
+      </div>
+      <changes-reminder
+        v-if="!isMobile"
+        :reminder="reminder" />
+    </div>
+  </v-app>
 </template>
 <script>
 export default {
@@ -32,6 +39,7 @@ export default {
   data: () => ({
     attachments: null,
     entityType: 'activity',
+    reminder: {}
   }),
   computed: {
     attachmentsLength() {
@@ -51,12 +59,16 @@ export default {
         attachToEntity: false, // Activity attachments are managed by composer instead of drawer
       };
     },
+    isMobile() {
+      return this.$vuetify.breakpoint.name === 'xs' || this.$vuetify.breakpoint.name === 'sm';
+    },
   },
   created() {
+    this.openComposerChangesReminder();
     document.addEventListener('open-activity-attachments', () => this.openAttachmentDrawer());
-
     document.addEventListener('attachment-added', event => this.addAttachment(event.detail));
     document.addEventListener('attachment-removed', event => this.removeAttachment(event.detail));
+    document.addEventListener('message-composer-opened', () => this.openComposerChangesReminder());
   },
   methods: {
     retrieveAttachments() {
@@ -96,6 +108,18 @@ export default {
         this.files.splice(index, 1);
       }
       document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files.length}));
+    },
+    openComposerChangesReminder() {
+      this.reminder = {
+        'name': 'activityComposerAttachFile' ,
+        'title': `${this.$t('activity.attach.file.reminder.title')}`,
+        'description': `${this.$t('activity.attach.file.reminder.description')}`,
+        'img': '/eXoWCMResources/skin/images/Icons/attachFileIcon.gif',
+      };
+      this.$nextTick()
+        .then(() => {
+          document.dispatchEvent(new CustomEvent('changes-reminder-open'));
+        });
     },
   },
 };

@@ -48,4 +48,13 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.api.settings.ExoFeatureService</target-component>
+    <component-plugin>
+      <name>activityComposerAttachFile</name>
+      <set-method>addFeaturePlugin</set-method>
+      <type>org.exoplatform.services.attachments.plugin.ComposerAttachmentFeaturePlugin</type>
+    </component-plugin>
+  </external-component-plugins>
 </configuration>
