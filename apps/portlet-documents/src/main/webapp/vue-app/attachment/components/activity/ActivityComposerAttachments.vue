@@ -33,7 +33,7 @@ export default {
     },
     files: {
       type: Array,
-      default: null,
+      default: () => []
     },
   },
   data: () => ({
@@ -64,7 +64,6 @@ export default {
     },
   },
   created() {
-    this.openComposerChangesReminder();
     document.addEventListener('open-activity-attachments', () => this.openAttachmentDrawer());
     document.addEventListener('attachment-added', event => this.addAttachment(event.detail));
     document.addEventListener('attachment-removed', event => this.removeAttachment(event.detail));
@@ -79,7 +78,7 @@ export default {
           this.$attachmentService.getAttachmentByEntityAndId(this.entityType, this.activityId, attachment.id)
             .then(fileAttachment => this.attachments.splice(index, 1, fileAttachment));
         } else {
-          this.$attachmentService.getAttachmentById(this.entityType, this.activityId, attachment.id)
+          this.$attachmentService.getAttachmentById(attachment.id)
             .then(fileAttachment => this.attachments.splice(index, 1, fileAttachment));
         }
       });
@@ -100,14 +99,14 @@ export default {
     },
     addAttachment(file) {
       this.files.push(file.attachment);
-      document.dispatchEvent(new CustomEvent('activity-composer-edited'));
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files}));
     },
     removeAttachment(file) {
       const index = this.files.findIndex(attachment => attachment.id === file.id);
       if (index >= 0) {
         this.files.splice(index, 1);
       }
-      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files.length}));
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files}));
     },
     openComposerChangesReminder() {
       this.reminder = {
