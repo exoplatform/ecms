@@ -218,8 +218,12 @@ public class UIJcrExplorerContainer extends UIContainer {
   }
 
   public boolean isNewDocumentsFeatureEnabled() {
-    if (!SpaceUtils.isSpaceContext()) {
-      return false;
+    try {
+      if (!SpaceUtils.isSpaceContext() && !getChild(UIJCRExplorer.class).getRootNode().getName().equals("Private")) {
+        return false;
+      }
+    } catch (Exception e) {
+      LOG.warn("Cannot get File explorer root node");
     }
     String userId = Util.getPortalRequestContext().getRemoteUser();
     return getFeatureService().isFeatureActiveForUser("NewDocuments", userId);
