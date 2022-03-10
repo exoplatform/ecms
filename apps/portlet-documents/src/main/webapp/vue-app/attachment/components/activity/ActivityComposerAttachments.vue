@@ -35,6 +35,10 @@ export default {
       type: Array,
       default: null,
     },
+    activityType: {
+      type: Array,
+      default: null,
+    },
   },
   data: () => ({
     attachments: null,
@@ -46,7 +50,7 @@ export default {
       return this.files.length;
     },
     displayAttachments() {
-      return this.attachmentsLength > 0;
+      return this.attachmentsLength > 0 && this.activityType && this.activityType.length === 0;
     },
     attachmentDrawerParams() {
       return {
