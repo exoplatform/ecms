@@ -1,8 +1,17 @@
 <template>
   <v-app>
     <div>
-      <div v-if="displayAttachments" class="actionItem action">
-        <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentListDrawer">
+      <div
+        v-if="displayAttachments"
+        class="actionItem action clickable pb-1 pt-3"
+        @click="openAttachmentListDrawer">
+        <v-icon
+          size="14"
+          color="primary"
+          class="pe-1">
+          fa-paperclip
+        </v-icon>
+        <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline">
           {{ $t('attachments.view.all') }} ({{ attachmentsLength }})
         </a>
       </div>
