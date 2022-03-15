@@ -46,7 +46,7 @@ export default {
     },
     activityType: {
       type: Array,
-      default: null,
+      default: () => []
     },
   },
   data: () => ({
