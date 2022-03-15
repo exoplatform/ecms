@@ -28,6 +28,10 @@ export default {
       type: String,
       default: null,
     },
+    spaceId: {
+      type: String,
+      default: null
+    },
     message: {
       type: String,
       default: null,
@@ -68,7 +72,7 @@ export default {
         defaultFolder: 'Activity Stream Documents',
         sourceApp: 'activityStream',
         attachments: this.attachments,
-        spaceId: eXo.env.portal.spaceId,
+        spaceId: this.spaceId,
         attachToEntity: false, // Activity attachments are managed by composer instead of drawer
       };
     },
