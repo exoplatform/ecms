@@ -579,6 +579,9 @@ export default {
               this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
               this.driveExplorerInitializing = false;
             });
+            // create a default folder for activity attachments if it doesn't exist
+          } else if (!defaultFolder && self.defaultFolder === 'Activity Stream Documents') {
+            this.$attachmentService.createFolder(self.currentDrive.name, self.workspace, this.currentAbsolutePath, self.defaultFolder);
             //else if no default folder create file in root folder
           } else {
             this.$root.$emit('attachments-default-folder-path-initialized', '/', this.currentDrive.title);

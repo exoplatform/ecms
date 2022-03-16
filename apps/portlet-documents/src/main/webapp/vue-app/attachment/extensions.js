@@ -11,6 +11,16 @@ export function installExtensions() {
     rank: 10,
   });
 
+  extensionRegistry.registerComponent('CommentContent', 'comment-content-extensions', {
+    id: 'attachments',
+    isEnabled: (params) => {
+      const activityOrComment = params && params.activity;
+      return activityOrComment && activityOrComment.templateParams && (activityOrComment.templateParams.DOCPATH || activityOrComment.templateParams.nodePath);
+    },
+    vueComponent: Vue.options.components['activity-attachments'],
+    rank: 20,
+  });
+
   extensionRegistry.registerComponent('TaskDrawer', 'task-drawer-action', {
     id: 'attachments',
     vueComponent: Vue.options.components['task-attachment'],
