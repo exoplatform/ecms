@@ -1,8 +1,17 @@
 <template>
   <v-app>
     <div>
-      <div v-if="displayAttachments" class="actionItem action">
-        <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline" @click="openAttachmentListDrawer">
+      <div
+        v-if="displayAttachments"
+        class="actionItem action clickable pb-1 pt-3"
+        @click="openAttachmentListDrawer">
+        <v-icon
+          size="14"
+          color="primary"
+          class="pe-1">
+          fa-paperclip
+        </v-icon>
+        <a class="viewAllAttachments primary--text font-weight-bold text-decoration-underline">
           {{ $t('attachments.view.all') }} ({{ attachmentsLength }})
         </a>
       </div>
@@ -19,6 +28,10 @@ export default {
       type: String,
       default: null,
     },
+    spaceId: {
+      type: String,
+      default: null
+    },
     message: {
       type: String,
       default: null,
@@ -33,7 +46,7 @@ export default {
     },
     files: {
       type: Array,
-      default: null,
+      default: () => []
     },
   },
   data: () => ({
@@ -55,7 +68,7 @@ export default {
         defaultFolder: 'Activity Stream Documents',
         sourceApp: 'activityStream',
         attachments: this.attachments,
-        spaceId: eXo.env.portal.spaceId,
+        spaceId: this.spaceId,
         attachToEntity: false, // Activity attachments are managed by composer instead of drawer
       };
     },
@@ -64,7 +77,6 @@ export default {
     },
   },
   created() {
-    this.openComposerChangesReminder();
     document.addEventListener('open-activity-attachments', () => this.openAttachmentDrawer());
     document.addEventListener('attachment-added', event => this.addAttachment(event.detail));
     document.addEventListener('attachment-removed', event => this.removeAttachment(event.detail));
@@ -79,7 +91,7 @@ export default {
           this.$attachmentService.getAttachmentByEntityAndId(this.entityType, this.activityId, attachment.id)
             .then(fileAttachment => this.attachments.splice(index, 1, fileAttachment));
         } else {
-          this.$attachmentService.getAttachmentById(this.entityType, this.activityId, attachment.id)
+          this.$attachmentService.getAttachmentById(attachment.id)
             .then(fileAttachment => this.attachments.splice(index, 1, fileAttachment));
         }
       });
@@ -100,14 +112,14 @@ export default {
     },
     addAttachment(file) {
       this.files.push(file.attachment);
-      document.dispatchEvent(new CustomEvent('activity-composer-edited'));
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files}));
     },
     removeAttachment(file) {
       const index = this.files.findIndex(attachment => attachment.id === file.id);
       if (index >= 0) {
         this.files.splice(index, 1);
       }
-      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files.length}));
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files}));
     },
     openComposerChangesReminder() {
       this.reminder = {
