@@ -585,14 +585,17 @@ export default {
             //else if no default folder create file in root folder
           } else if (self.defaultFolder.includes('/')){
             const pathParts= self.defaultFolder.split('/');
-            const folderName=pathParts[pathParts.length - 1];
-            const parentPath = self.defaultFolder.substring(0,self.defaultFolder.indexOf(`/${folderName}`));
+            const folderName = pathParts.pop();
+            const parentPath = pathParts.join('/');
             this.fetchChildrenContents(parentPath).then(() => {
               const defaultFolder = self.folders.find(folder => folder.title === folderName);
-              this.openFolder(defaultFolder).then(() => {
-                this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
-                this.driveExplorerInitializing = false;
-              });
+              if (defaultFolder){
+                this.openFolder(defaultFolder).then(() => {
+                  this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
+                  this.driveExplorerInitializing = false;
+                });
+              }
+              
             });
             
           } else {
