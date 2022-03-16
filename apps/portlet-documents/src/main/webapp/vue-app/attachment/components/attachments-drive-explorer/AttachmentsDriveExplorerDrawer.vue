@@ -582,8 +582,6 @@ export default {
             //else if no default folder create file in root folder
           } else if (self.defaultFolder.includes('/')){
             const pathParts= self.defaultFolder.split('/');
-            //const folderName=pathParts[pathParts.length - 1];
-            //const parentPath = self.defaultFolder.substring(0,self.defaultFolder.indexOf(`/${folderName}`));
             const folderName = pathParts.pop();
             const parentPath = pathParts.join('/');
             this.fetchChildrenContents(parentPath).then(() => {
