@@ -64,4 +64,13 @@
     </component-plugin>
   </external-component-plugins>
 
+  <external-component-plugins>
+    <target-component>org.exoplatform.social.core.space.spi.SpaceService</target-component>
+    <component-plugin>
+      <name>CustomizeSpaceFolderListener</name>
+      <set-method>addSpaceListener</set-method>
+      <type>org.exoplatform.social.space.customization.listeners.CustomizeSpaceFolderListener</type>
+    </component-plugin>
+  </external-component-plugins>
+
 </configuration>
