@@ -38,7 +38,7 @@ public class TestDocumentsAppRedirectService {
     SessionProviderService sessionProviderService = Mockito.mock(SessionProviderService.class);
 
     DocumentsAppRedirectService documentsAppRedirectService = new DocumentsAppRedirectService(sessionProviderService, repositoryService, documentService);
-    Response response = documentsAppRedirectService.redirect(request, null, null);
+    Response response = documentsAppRedirectService.redirect(request, null, null, null);
 
     assertNotNull(response);
     assertEquals(500, response.getStatus());
@@ -58,7 +58,7 @@ public class TestDocumentsAppRedirectService {
     Mockito.when(session.getNodeByIdentifier(Mockito.anyString())).thenThrow(new ItemNotFoundException());
 
     DocumentsAppRedirectService documentsAppRedirectService = new DocumentsAppRedirectService(sessionProviderService, repositoryService, documentService);
-    Response response = documentsAppRedirectService.redirect(request, "collaboration", "123");
+    Response response = documentsAppRedirectService.redirect(request, "collaboration", "123", null);
 
     assertNotNull(response);
     assertEquals(404, response.getStatus());
@@ -79,7 +79,7 @@ public class TestDocumentsAppRedirectService {
     Mockito.when(session.getNodeByIdentifier(Mockito.anyString())).thenReturn(node);
 
     DocumentsAppRedirectService documentsAppRedirectService = new DocumentsAppRedirectService(sessionProviderService, repositoryService, documentService);
-    Response response = documentsAppRedirectService.redirect(request, "collaboration", "123");
+    Response response = documentsAppRedirectService.redirect(request, "collaboration", "123", null);
 
     assertNotNull(response);
     assertEquals(307, response.getStatus());

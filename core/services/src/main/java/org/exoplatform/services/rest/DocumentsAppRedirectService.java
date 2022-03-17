@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -49,7 +50,8 @@ public class DocumentsAppRedirectService implements ResourceContainer {
   @Path("/{workspaceName}/{docId}")
   public Response redirect(@Context HttpServletRequest request,
                            @PathParam("workspaceName") String workspaceName,
-                           @PathParam("docId") String docId) throws IOException {
+                           @PathParam("docId") String docId,
+                           @QueryParam("optional") String optional) throws IOException {
 
     if(StringUtils.isEmpty(workspaceName) || StringUtils.isEmpty(docId)) {
       return Response.serverError().entity("Parameters workspaceName and docId are mandatory").build();
@@ -63,7 +65,14 @@ public class DocumentsAppRedirectService implements ResourceContainer {
       Node node = session.getNodeByIdentifier(docId);
       if(node != null) {
         String linkInDocumentsApp = documentService.getLinkInDocumentsApp(node.getPath());
-        URI redirectUrl = new URI(getURLPrefix(request) + linkInDocumentsApp);
+        URI redirectUrl = null;
+        if (optional != null) {
+           int position = linkInDocumentsApp.indexOf("&userId=");
+           linkInDocumentsApp = linkInDocumentsApp.substring(0,position);
+           redirectUrl = new URI(getURLPrefix(request) + linkInDocumentsApp);
+        } else {
+           redirectUrl = new URI(getURLPrefix(request) + linkInDocumentsApp);
+        }
         return Response.temporaryRedirect(redirectUrl).build();
       }
     } catch(ItemNotFoundException e) {
