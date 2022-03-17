@@ -42,6 +42,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
@@ -65,6 +66,10 @@ public class SpaceCustomizationService {
   private static final String     SPACE_NEW_HOME_PAGE_TEMPLATE = "custom space";
 
   private static final String     SCV_PORTLEt_NAME             = "SingleContentViewer";
+
+  private static final String     ACTIVITY_FOLDER_UPLOAD_NAME  = "Activity Stream Documents";
+
+  private SessionProviderService  sessionProviderService;
 
   private NodeHierarchyCreator    nodeHierarchyCreator         = null;
 
@@ -91,6 +96,7 @@ public class SpaceCustomizationService {
   public SpaceCustomizationService(DataStorage dataStorageService_,
                                    PageService pageService_,
                                    UserPortalConfigService userPortalConfigService_,
+                                   SessionProviderService sessionProviderService_,
                                    NodeHierarchyCreator nodeHierarchyCreator_,
                                    DMSConfiguration dmsConfiguration_,
                                    RepositoryService repositoryService_,
@@ -101,6 +107,7 @@ public class SpaceCustomizationService {
     this.repositoryService = repositoryService_;
     this.userACL = userACL_;
     this.configurationManager = configurationManager_;
+    this.sessionProviderService = sessionProviderService_;
     this.dataStorageService = dataStorageService_;
     this.pageService = pageService_;
     this.userPortalConfigService = userPortalConfigService_;
@@ -340,6 +347,25 @@ public class SpaceCustomizationService {
       this.spaceTemplateService = CommonsUtils.getService(SpaceTemplateService.class);
     }
     return this.spaceTemplateService;
+  }
+
+  public void createSpaceDefaultFolders(String groupId) throws Exception {
+    Node parentNode;
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    ManageableRepository currentRepository = repositoryService.getCurrentRepository();
+    String workspaceName = currentRepository.getConfiguration().getDefaultWorkspaceName();
+    Session session = sessionProvider.getSession(workspaceName, currentRepository);
+    String groupPath = nodeHierarchyCreator.getJcrPath("groupsPath");
+    String spaceParentPath = groupPath + groupId + "/Documents";
+    if (!session.itemExists(spaceParentPath)) {
+      throw new IllegalStateException("Root node of space '" + spaceParentPath + "' doesn't exist");
+    }
+    parentNode = (Node) session.getItem(spaceParentPath);
+
+    if (!parentNode.hasNode(ACTIVITY_FOLDER_UPLOAD_NAME)) {
+      parentNode.addNode(ACTIVITY_FOLDER_UPLOAD_NAME);
+      session.save();
+    }
   }
 
   private void editSCVPreference(Application<Portlet> selectedPortlet,
