@@ -583,6 +583,21 @@ export default {
           } else if (!defaultFolder && self.defaultFolder === 'Activity Stream Documents') {
             this.$attachmentService.createFolder(self.currentDrive.name, self.workspace, this.currentAbsolutePath, self.defaultFolder);
             //else if no default folder create file in root folder
+          } else if (self.defaultFolder.includes('/')){
+            const pathParts= self.defaultFolder.split('/');
+            const folderName = pathParts.pop();
+            const parentPath = pathParts.join('/');
+            this.fetchChildrenContents(parentPath).then(() => {
+              const defaultFolder = self.folders.find(folder => folder.title === folderName);
+              if (defaultFolder){
+                this.openFolder(defaultFolder).then(() => {
+                  this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
+                  this.driveExplorerInitializing = false;
+                });
+              }
+              
+            });
+            
           } else {
             this.$root.$emit('attachments-default-folder-path-initialized', '/', this.currentDrive.title);
           }
@@ -611,6 +626,7 @@ export default {
       this.folderDestinationForFile = folder.title;
       this.privateDestinationForFile = folder.isPublic;
     },
+
     openDrive(drive, group) {
       this.currentAbsolutePath = '';
       this.selectedFolderPath = '';
