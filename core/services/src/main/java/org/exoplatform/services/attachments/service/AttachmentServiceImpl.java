@@ -20,10 +20,7 @@ import java.security.AccessControlException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.jcr.ItemExistsException;
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -521,12 +518,11 @@ public class AttachmentServiceImpl implements AttachmentService {
       session = Utils.getSession(sessionProviderService, repositoryService);
       attachmentNode = session.getNodeByUUID(attachmentId);
       session.checkPermission(attachmentNode.getPath(), permissionType);
+    } catch (AccessDeniedException e) {
+      attachmentPermission = false;
     } catch (RepositoryException e) {
       throw new IllegalStateException("Can't get attachment node with id" + attachmentId, e);
-    } catch (AccessControlException e) {
-      attachmentPermission = false;
     }
-
     return attachmentPermission;
   }
 

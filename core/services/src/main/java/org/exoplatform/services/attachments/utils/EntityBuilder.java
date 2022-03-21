@@ -77,6 +77,7 @@ public class EntityBuilder {
     } catch (AccessDeniedException e) {
       Attachment privateAttachment = new Attachment();
       acl.setCanAccess(false);
+      privateAttachment.setId(attachmentId);
       privateAttachment.setAcl(acl);
       return privateAttachment;
     } catch (ItemNotFoundException e) {
