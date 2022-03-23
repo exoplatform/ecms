@@ -4,17 +4,10 @@ String perm = PERMISSION.equals("read") ? _ctx.appRes("Notification.label.view")
 %>
 
 <table border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#ffffff" align="center" style="background-color: #ffffff; font-size: 13px;color:#333333;line-height: 18px;font-family: HelveticaNeue, Helvetica, Arial, sans-serif;">
-<tr>
-<td align="center"  valign="middle" >
-<table  cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" align="center" style="border:1px solid #d8d8d8;">
-<tr>
-<td  height="45" valign="middle" style="margin:0;height:45px;font-weight:bold;vertical-align:middle;;background-color: #efefef;font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif;color:#2f5e92;font-size:18px;text-align:center">
-<%=_ctx.appRes("Notification.title.ShareFileToSpacePlugin", SPACE)%>
-</td>
-</tr>
-</table>
-</td>
-</tr><!--end header area-->
+<%
+  _templateContext.put("header_title", _ctx.appRes("Notification.title.ShareFileToSpacePlugin", SPACE));
+  _ctx.include("war:/notification/templates/mail/NotificationHeader.gtmpl", _templateContext);
+%>
     <tr>
         <td bgcolor="#ffffff" style="background-color: #ffffff;">
             <table cellpadding="0" cellspacing="0" width="100%"  bgcolor="#ffffff" style="background-color: #ffffff; border-left:1px solid #d8d8d8;border-right:1px solid #d8d8d8;">
@@ -193,17 +186,5 @@ String permission = "<strong><a>" + perm + "</a></strong>";
 
 </td>
     </tr><!--end content area-->
-<tr>
-<td bgcolor="#456693" align="center"  style="border:1px solid #456693;">
-<table border="0" cellpadding="0" cellspacing="0" width="92%"  style="font-size: 13px;line-height: 18px;font-family:HelveticaNeue,verdana,arial,tahoma">
-<tr>
-<td align="left" valign="top" style="font-family: HelveticaNeue, Helvetica, Arial, sans-serif,serif;color:#ffffff;font-size:13px;" >
-<h3 style="text-align: center; margin: 0; padding: 10px 0;">
-<a target="_blank" style="color: #ffffff; font-size: 13px;font-family:'HelveticaNeue Bold',arial,tahoma,serif; font-weight: bold; text-decoration: none;" href="http://www.exoplatform.com/company/en/home" title="eXo Platform"><%=_ctx.appRes("Notification.label.CompanyName")%></a>
-                        </h3>
-</td>
-                </tr>
-</table>
-        </td>
-</tr><!--end footer area-->
+    <% _ctx.include("war:/notification/templates/mail/NotificationFooter.gtmpl", _templateContext);%>
 </table>
