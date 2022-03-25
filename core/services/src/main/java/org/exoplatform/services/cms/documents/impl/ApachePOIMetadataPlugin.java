@@ -40,8 +40,12 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
   /** The Constant DOCX_EXTENSION. */
   private static final String       DOCX_EXTENSION       = ".docx";
 
+  /** The Constant DOCXF_EXTENSION. */
+  private static final String       DOCXF_EXTENSION       = ".docxf";
+  
   /** The Constant SUPPORTED_EXTENSIONS. */
   private static final List<String> SUPPORTED_EXTENSIONS = Collections.unmodifiableList(Arrays.asList(DOCX_EXTENSION,
+                                                                                                      DOCXF_EXTENSION,
                                                                                                       XLSX_EXTENSION,
                                                                                                       PPTX_EXTENSION));
 
@@ -87,10 +91,10 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
   }
 
   private void updateDocLanguage(POIXMLDocument document, String extension, String language) {
-    if (StringUtils.equals(extension, ".docx")) {
+    if (StringUtils.equals(extension, DOCX_EXTENSION) || StringUtils.equals(extension, DOCXF_EXTENSION)) {
       // Change the document editing language with the user's platform language
       ((XWPFDocument) document).getStyles().getStyle("Normal").getCTStyle().getRPr().getLang().setVal(language);
-    } else if (StringUtils.equals(extension, ".xlsx")) {
+    } else if (StringUtils.equals(extension, XLSX_EXTENSION)) {
       // Rename every sheet created with a new name translated with the user's
       // platform language
       ResourceBundle resourceBundle = this.resourceBundleService.getResourceBundle("locale.onlyoffice.Onlyoffice",
@@ -100,7 +104,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
         newSheetLabel = resourceBundle.getString("UINewDocumentForm.label.option.MicrosoftOfficeNewSheet");
       }
       updateSheetName(document, newSheetLabel);
-    } else if (StringUtils.equals(extension, ".pptx")) {
+    } else if (StringUtils.equals(extension, PPTX_EXTENSION)) {
       ((XMLSlideShow) document).getCTPresentation().getDefaultTextStyle().getDefPPr().getDefRPr().setLang(language);
       // Change the language of each element found in the first slide to the
       // user's language of the platform.
@@ -152,6 +156,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
     }
     switch (extension.toLowerCase()) {
     case DOCX_EXTENSION:
+    case DOCXF_EXTENSION:
       return new XWPFDocument(source);
     case XLSX_EXTENSION:
       return new XSSFWorkbook(source);
