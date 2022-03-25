@@ -518,7 +518,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       session = Utils.getSession(sessionProviderService, repositoryService);
       attachmentNode = session.getNodeByUUID(attachmentId);
       session.checkPermission(attachmentNode.getPath(), permissionType);
-    } catch (AccessDeniedException e) {
+    } catch (AccessControlException | AccessDeniedException e) {
       attachmentPermission = false;
     } catch (RepositoryException e) {
       throw new IllegalStateException("Can't get attachment node with id" + attachmentId, e);
