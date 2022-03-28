@@ -16,7 +16,7 @@
         <div class="color-title">
           <span v-if="!hideTime" :title="absoluteDateModified()">
             {{ relativeDateModified }}
-            <v-icon color="#a8b3c5">
+            <v-icon color="#5f708a">
               mdi-menu-right
             </v-icon>
           </span>
