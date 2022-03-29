@@ -53,6 +53,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
+import org.exoplatform.social.core.application.SpaceActivityPublisher;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
@@ -1043,5 +1044,58 @@ public class Utils {
     } else {
       commentNode.setProperty("exo:commentorAvatar", DEFAULT_AVATAR);
     } ;
+  }
+
+  public static String addVersionComment(Node node, String commentText, String userId) throws Exception {
+    String nodeActivityID;
+    IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
+    SpaceService spaceService = CommonsUtils.getService(SpaceService.class);
+    ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
+    String activityOwnerId = getActivityOwnerId(node);
+
+    ExoSocialActivity activity = createActivity(identityManager, activityOwnerId, node, commentText, activityType, true, "", "");
+    setActivityType(null);
+
+    if (!node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
+      String spaceGroupName = getSpaceName(node);
+      Space space = spaceService.getSpaceByGroupId(SpaceUtils.SPACE_GROUP + "/" + spaceGroupName);
+      if (spaceGroupName != null && spaceGroupName.length() > 0 && space != null) {
+        // post activity to space stream
+        Identity spaceIdentity = identityManager.getOrCreateIdentity(SpaceIdentityProvider.NAME, space.getPrettyName());
+        activityManager.saveActivityNoReturn(spaceIdentity, activity);
+      } else if (activityOwnerId != null && activityOwnerId.length() > 0) {
+        if (!isPublic(node)) {
+          // only post activity to user status stream if that upload is public
+          return null;
+        }
+        // post activity to user status stream
+        Identity ownerIdentity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, activityOwnerId);
+        activityManager.saveActivityNoReturn(ownerIdentity, activity);
+      } else {
+        return null;
+      }
+      if (!StringUtils.isEmpty(activity.getId())) {
+        ActivityTypeUtils.attachActivityId(node, activity.getId());
+      }
+    }
+    nodeActivityID = node.getProperty(ActivityTypeUtils.EXO_ACTIVITY_ID).getString();
+
+    if (nodeActivityID != null && !nodeActivityID.isEmpty() && commentText != null && !commentText.trim().isEmpty()) {
+      org.exoplatform.social.core.identity.model.Identity identity =
+                                                                   identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME,
+                                                                                                       userId);
+      activity = activityManager.getActivity(nodeActivityID);
+      ExoSocialActivity comment = new ExoSocialActivityImpl(identity.getId(),
+                                                            SpaceActivityPublisher.SPACE_APP_ID,
+                                                            commentText,
+                                                            null);
+      activityManager.saveComment(activity, comment);
+      return comment.getId();
+    } else {
+      LOG.warn("Cannot add comment. ActivityId and comment shouldn't be null or empty. activityId: {}, comment: {}",
+               nodeActivityID,
+               commentText);
+      return null;
+    }
   }
 }
