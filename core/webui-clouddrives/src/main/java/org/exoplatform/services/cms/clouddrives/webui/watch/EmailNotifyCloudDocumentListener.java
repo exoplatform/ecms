@@ -29,18 +29,14 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
-import javax.portlet.PortletRequest;
-
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.MailUtils;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
 import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.watch.WatchDocumentService;
 import org.exoplatform.services.cms.watch.impl.EmailNotifyListener;
 import org.exoplatform.services.cms.watch.impl.MessageConfig;
@@ -59,13 +55,9 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.url.navigation.NodeURL;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
-
+import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 import groovy.text.GStringTemplateEngine;
 import groovy.text.TemplateEngine;
-
 /**
  * This is a COPY of ECMS {@link EmailNotifyListener} with proposed fix of
  * https://jira.exoplatform.org/browse/ECMS-5973.<br>
@@ -154,18 +146,7 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
     Node node = NodeLocation.getNodeByLocation(observedNode_);
     binding.put("doc_title", org.exoplatform.services.cms.impl.Utils.getTitle(node));
     binding.put("doc_name", node.getName());
-
-    String documentLink;
-    if (WebuiRequestContext.getCurrentInstance() != null) {
-      documentLink = getViewableLink();
-    } else if (node.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFILE)
-        && node.hasProperty(WatchCloudDocumentServiceImpl.CLOUDDRIVE_WATCH_LINK)) {
-      documentLink = node.getProperty(WatchCloudDocumentServiceImpl.CLOUDDRIVE_WATCH_LINK).getString();
-    } else {
-      documentLink = "#"; // TODO get base server URL
-    }
-    binding.put("doc_url", documentLink); // XXX instead of getViewableLink()
-
+    binding.put("doc_url", getViewableLink(node)); // XXX instead of getViewableLink()
     message.setBody(engine.createTemplate(messageConfig.getContent()).make(binding).toString());
     message.setMimeType(messageConfig.getMimeType());
     return message;
@@ -178,85 +159,10 @@ public class EmailNotifyCloudDocumentListener implements EventListener {
    * @return the viewable link
    * @throws Exception the exception
    */
-  String getViewableLink() throws Exception {
-    PortalRequestContext pContext = Util.getPortalRequestContext();
-    NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
-    String nodePath = NodeLocation.getNodeByLocation(observedNode_).getPath();
-
-    ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-    List<DriveData> driveList = manageDriveService.getDriveByUserRoles(pContext.getRemoteUser(), getMemberships());
-    DriveData drive = getDrive(driveList, WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName(), nodePath);
-
-    String driverName = drive.getName();
-    String nodePathInDrive = "/".equals(drive.getHomePath()) ? nodePath : nodePath.substring(drive.getHomePath().length());
-    UserNode siteExNode = getUserNodeByURI(SITE_EXPLORER);
-    nodeURL.setNode(siteExNode);
-
-    nodeURL.setQueryParameterValue(PATH_PARAM, "/" + driverName + nodePathInDrive);
-
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletRequest portletRequest = portletRequestContext.getRequest();
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
-        + String.format("%s", portletRequest.getServerPort());
-    return baseURI + nodeURL.toString();
+  String getViewableLink(Node node) throws Exception {
+    // Exemple Link : http://localhost:8080/portal/private/rest/documents/view/collaboration/f3cf201e7f0001016c28b6ac54feb98e
+    return CommonsUtils.getCurrentDomain() + Utils.getContentLink(node);
   }
-
-  /**
-   * Gets the drive.
-   *
-   * @param lstDrive the lst drive
-   * @param workspace the workspace
-   * @param nodePath the node path
-   * @return the drive
-   * @throws RepositoryException the repository exception
-   */
-  private DriveData getDrive(List<DriveData> lstDrive, String workspace, String nodePath) throws RepositoryException {
-    NodeHierarchyCreator nhc = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    String userName = ConversationState.getCurrent().getIdentity().getUserId();
-    int idx;
-    String userNodePath = null;
-    try {
-      userNodePath = nhc.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userName).getPath();
-    } catch (Exception e) {
-      // Exception while finding the user home node
-      userNodePath = null;
-    }
-    DriveData driveData = null;
-    for (DriveData drive : lstDrive) {
-      String driveHomePath = drive.getHomePath();
-      idx = driveHomePath.indexOf(USER_ID);
-      if (idx >= 0 && userNodePath != null) {
-        driveHomePath = userNodePath + driveHomePath.substring(idx + USER_ID.length());
-      }
-      if (workspace.equals(drive.getWorkspace()) && nodePath.startsWith(driveHomePath)) {
-        driveData = drive;
-        break;
-      }
-    }
-    return driveData;
-  }
-
-  /**
-   * Gets the user node by URI.
-   *
-   * @param uri the uri
-   * @return the user node by URI
-   */
-  private UserNode getUserNodeByURI(String uri) {
-    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
-    List<UserNavigation> allNavs = userPortal.getNavigations();
-
-    for (UserNavigation nav : allNavs) {
-      if (nav.getKey().getType().equals(SiteType.GROUP)) {
-        UserNode userNode = userPortal.resolvePath(nav, null, uri);
-        if (userNode != null) {
-          return userNode;
-        }
-      }
-    }
-    return null;
-  }
-
   /**
    * Gets the memberships.
    *
