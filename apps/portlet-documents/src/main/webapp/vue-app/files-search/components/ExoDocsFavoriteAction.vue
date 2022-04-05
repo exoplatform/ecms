@@ -7,6 +7,7 @@
     :right="right"
     :space-id="spaceId"
     :template-params="templateParams"
+    :title="favoriteTitle"
     :small="false"
     type="file"
     type-label="Documents"
@@ -46,6 +47,9 @@ export default {
     },
     favoriteId() {
       return  this.document && this.document.id;
+    },
+    favoriteTitle() {
+      return this.document && this.document.title;
     }
   },
   watch: {
@@ -58,7 +62,7 @@ export default {
   methods: {
     removed() {
       this.displayAlert(this.$t('Favorite.tooltip.SuccessfullyDeletedFavorite'));
-      this.$favoriteService.removeFavorite('file', this.favoriteId)
+      this.$favoriteService.removeFavorite('file', this.favoriteId, this.favoriteTitle)
         .then(() => {
           this.isFavorite = false;
           this.$emit('removed');
@@ -70,7 +74,8 @@ export default {
     },
     added() {
       this.displayAlert(this.$t('Favorite.tooltip.SuccessfullyAddedAsFavorite'));
-      this.$favoriteService.addFavorite('file', this.favoriteId)
+      console.warn(this.document);
+      this.$favoriteService.addFavorite('file', this.favoriteId, 'testBy sara')
         .then(() => {
           this.isFavorite = true;
           this.$emit('added');
