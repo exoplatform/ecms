@@ -17,18 +17,12 @@
 package org.exoplatform.ecm.webui.component.explorer;
 
 import java.util.*;
-
 import javax.jcr.*;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-
 import org.apache.commons.lang.StringUtils;
-
 import org.exoplatform.commons.api.settings.*;
-import org.exoplatform.commons.api.settings.data.Context;
-import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.ecm.jcr.model.Preference;
-import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer.SwitchDocumentsActionListener;
 import org.exoplatform.ecm.webui.component.explorer.control.*;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -46,18 +40,12 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.*;
 import org.exoplatform.webui.core.model.SelectItemOption;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 /**
  * Created by The eXo Platform SARL
  */
 @ComponentConfig(
-  events = {
-     @EventConfig(listeners = SwitchDocumentsActionListener.class)
-  },
   template = "app:/groovy/webui/component/explorer/UIJCRExplorerContainer.gtmpl"
 )
 public class UIJcrExplorerContainer extends UIContainer {
@@ -238,13 +226,4 @@ public class UIJcrExplorerContainer extends UIContainer {
     }
     return featureService;
   }
-
-  public static class SwitchDocumentsActionListener extends EventListener<UIJcrExplorerContainer> {
-    @Override
-    public void execute(Event<UIJcrExplorerContainer> event) throws Exception {
-      UIJcrExplorerContainer jcrExplorerContainer = event.getSource();
-      event.getRequestContext().addUIComponentToUpdateByAjax(jcrExplorerContainer);
-    }
-  }
-
 }
