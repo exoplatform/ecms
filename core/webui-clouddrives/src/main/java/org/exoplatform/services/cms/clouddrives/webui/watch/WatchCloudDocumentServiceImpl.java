@@ -160,7 +160,7 @@ public class WatchCloudDocumentServiceImpl implements WatchDocumentService, Star
         && !documentNode.hasProperty(CLOUDDRIVE_WATCH_LINK)) {
       // init Cloud Drive document with document URI in portal and store this
       // URI
-      documentNode.setProperty(CLOUDDRIVE_WATCH_LINK, listener.getViewableLink());
+      documentNode.setProperty(CLOUDDRIVE_WATCH_LINK, listener.getViewableLink(documentNode));
     }
 
     documentNode.save();
