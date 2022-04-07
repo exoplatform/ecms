@@ -65,8 +65,6 @@ public class UIJcrExplorerContainer extends UIContainer {
 
   private ExoFeatureService featureService;
 
-  private SettingService    settingService;
-
   public UIJcrExplorerContainer() throws Exception {
     addChild(UIJCRExplorer.class, null, null);
     addChild(UIMultiUpload.class, null, null);
@@ -229,31 +227,9 @@ public class UIJcrExplorerContainer extends UIContainer {
     return getFeatureService().isFeatureActiveForUser("NewDocuments", userId);
   }
 
-  public boolean isDisplayNewDocumentsForUser() {
-    if (!isNewDocumentsFeatureEnabled()) {
-      return false;
-    }
+  public boolean isSwitchDocumentsFeatureEnabled() {
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    SettingValue<?> settingValue = getSettingService().get(Context.USER.id(userId),
-                                                           Scope.APPLICATION.id("NewDocumentsFeature"),
-                                                           "enabled");
-    return settingValue != null && settingValue.getValue() != null
-        && StringUtils.equals(settingValue.getValue().toString(), "true");
-  }
-
-  public void switchDocumentsFeatureForUser() {
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    boolean isActive = isDisplayNewDocumentsForUser();
-    if (isActive) {
-      getSettingService().remove(Context.USER.id(userId),
-                                 Scope.APPLICATION.id("NewDocumentsFeature"),
-                                 "enabled");
-    } else {
-      getSettingService().set(Context.USER.id(userId),
-                              Scope.APPLICATION.id("NewDocumentsFeature"),
-                              "enabled",
-                              SettingValue.create("true"));
-    }
+    return getFeatureService().isFeatureActiveForUser("SwitchOldDocuments", userId);
   }
 
   public ExoFeatureService getFeatureService() {
@@ -263,18 +239,10 @@ public class UIJcrExplorerContainer extends UIContainer {
     return featureService;
   }
 
-  public SettingService getSettingService() {
-    if (settingService == null) {
-      settingService = getApplicationComponent(SettingService.class);
-    }
-    return settingService;
-  }
-
   public static class SwitchDocumentsActionListener extends EventListener<UIJcrExplorerContainer> {
     @Override
     public void execute(Event<UIJcrExplorerContainer> event) throws Exception {
       UIJcrExplorerContainer jcrExplorerContainer = event.getSource();
-      jcrExplorerContainer.switchDocumentsFeatureForUser();
       event.getRequestContext().addUIComponentToUpdateByAjax(jcrExplorerContainer);
     }
   }
