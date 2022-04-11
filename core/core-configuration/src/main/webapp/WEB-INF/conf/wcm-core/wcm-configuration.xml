@@ -131,6 +131,17 @@
       </properties-param>
     </init-params>
   </component>
+  <component>
+    <key>SwitchOldDocumentsFeatureProperties</key>
+    <type>org.exoplatform.container.ExtendedPropertyConfigurator</type>
+    <init-params>
+      <properties-param>
+        <name>SwitchOldDocumentsFeatureProperties</name>
+        <description>New Documents Feature enablement flag</description>
+        <property name="exo.feature.SwitchOldDocuments.enabled" value="${exo.feature.SwitchOldDocuments.enabled:false}" />
+      </properties-param>
+    </init-params>
+  </component>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
