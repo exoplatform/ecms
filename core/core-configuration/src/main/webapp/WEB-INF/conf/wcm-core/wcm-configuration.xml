@@ -126,7 +126,7 @@
     <init-params>
       <properties-param>
         <name>OldDocumentsFeatureProperties</name>
-        <description>enabled Documents Feature  flag</description>
+        <description>Old Documents Feature  flag</description>
         <property name="exo.feature.OldDocuments.enabled" value="${exo.feature.OldDocuments.enabled:false}" />
       </properties-param>
     </init-params>
