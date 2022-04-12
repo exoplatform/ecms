@@ -125,9 +125,9 @@
     <type>org.exoplatform.container.ExtendedPropertyConfigurator</type>
     <init-params>
       <properties-param>
-        <name>NewDocumentsFeatureProperties</name>
-        <description>New Documents Feature enablement flag</description>
-        <property name="exo.feature.NewDocuments.enabled" value="${exo.feature.NewDocuments.enabled:false}" />
+        <name>OldDocumentsFeatureProperties</name>
+        <description>enabled Documents Feature  flag</description>
+        <property name="exo.feature.OldDocuments.enabled" value="${exo.feature.OldDocuments.enabled:false}" />
       </properties-param>
     </init-params>
   </component>
