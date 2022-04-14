@@ -15,8 +15,7 @@
         <img
           v-if="image"
           :src="attachment.image"
-          :style="{maxHeight: previewHeight, maxWidth: previewWidth, height: 'fit-content'}"
-          class="ma-auto"
+          class="mx-auto"
           @error="image = null">
         <v-icon
           v-else
@@ -24,7 +23,7 @@
           class="ma-auto d-flex"
           size="80px" />
       </v-card-text>
-      <v-card-text class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
+      <v-card-text v-if="!image" class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
         <div
           :title="attachment.name"
           class="text-color text-wrap text-break mx-0 my-auto text-truncate-2"
