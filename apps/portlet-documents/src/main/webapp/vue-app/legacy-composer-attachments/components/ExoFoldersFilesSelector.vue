@@ -215,7 +215,7 @@
               value="true"
               class="category"
               active-class="categoryActive">
-              <template v-slot:activator>
+              <template #activator>
                 <v-list-item-content class="categoryContent">{{ getI18nTitle(name, 'Category') }}</v-list-item-content>
               </template>
               <!-- Drives block -->

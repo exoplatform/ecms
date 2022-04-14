@@ -66,8 +66,7 @@
                 </template>
                 <template 
                   slot="item" 
-                  slot-scope="{ item, parent }" 
-                  class="permissionsItem">
+                  slot-scope="{ item, parent }">
                   <v-list-tile-avatar><img :src="item.avatarUrl" class="permissionsItemAvatar"></v-list-tile-avatar>
                   <v-list-tile-content class="permissionsItemName">
                     <v-list-tile-title v-sanitized-html="parent.genFilteredText(item.displayName)" />

@@ -82,7 +82,7 @@ export default {
       default: () => '152px',
     },
     previewWidth: {
-      type: Number,
+      type: String,
       default: () => '250px',
     },
   },
