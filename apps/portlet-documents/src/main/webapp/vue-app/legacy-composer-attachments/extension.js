@@ -16,7 +16,7 @@ export function getAttachmentsComposerExtensions() {
 }
 
 export function executeExtensionAction(extension, component) {
-  if (extension.hasOwnProperty('onExecute') && isFunction(extension.onExecute)) {
+  if (Object.prototype.hasOwnProperty.call(extension, 'onExecute') && isFunction(extension.onExecute)) {
     extension.onExecute.apply(component, [component]); // it will execute code inside onExecute() defined in configuration file
   }
 }
@@ -26,7 +26,7 @@ function getExtensionsByType(type) {
 }
 
 function isExtensionEnabled(extension) {
-  if (extension.hasOwnProperty('enabled')) {
+  if (Object.prototype.hasOwnProperty.call(extension, 'enabled')) {
     if (typeof extension.enabled === 'boolean') {
       return extension.enabled;
     } else if (isFunction(extension.enabled)) {

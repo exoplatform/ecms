@@ -80,7 +80,7 @@
                 </div>
                 <div class="lastContent">
                   <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
+                    <template #activator="{ on, attrs }">
                       <a
                         class="uploadButton"
                         href="#"
