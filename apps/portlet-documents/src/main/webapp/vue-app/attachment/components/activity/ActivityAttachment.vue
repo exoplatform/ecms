@@ -15,7 +15,7 @@
         <img
           v-if="image"
           :src="attachment.image"
-          class="mx-auto"
+          class="ma-auto"
           @error="image = null">
         <v-icon
           v-else
