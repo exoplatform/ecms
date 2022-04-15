@@ -203,16 +203,16 @@ public class UIJcrExplorerContainer extends UIContainer {
     }
   }
 
-  public boolean isNewDocumentsFeatureEnabled() {
+  public boolean isOldDocumentsFeatureEnabled() {
     try {
       if (!SpaceUtils.isSpaceContext() && !getChild(UIJCRExplorer.class).getRootNode().getName().equals("Private")) {
-        return false;
+        return true;
       }
     } catch (Exception e) {
       LOG.warn("Cannot get File explorer root node");
     }
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return getFeatureService().isFeatureActiveForUser("NewDocuments", userId);
+    return getFeatureService().isFeatureActiveForUser("OldDocuments", userId);
   }
 
   public boolean isSwitchDocumentsFeatureEnabled() {
