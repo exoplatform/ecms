@@ -46,6 +46,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -194,8 +195,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
         TrashService trashService = WCMCoreUtils.getService(TrashService.class);
         node = trashService.getNodeByTrashId(trashId);
-        if(!isDocumentNodeType(node) 
-        		&& !node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)){
+        if (node != null
+            && !isDocumentNodeType(node)
+            && !node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           Queue<Node> queue = new LinkedList<Node>();
           queue.add(node);
 
@@ -401,22 +403,24 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       node.remove();
       parentNode.save();
     } catch (VersionException ve) {
+      LOG.warn("Error deleting node", ve);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
                                               ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (ReferentialIntegrityException ref) {
+      LOG.warn("Error deleting node", ref);
       session.refresh(false);
       uiExplorer.refreshExplorer();
-      uiApp
-      .addMessage(new ApplicationMessage(
+      uiApp.addMessage(new ApplicationMessage(
                                          "UIPopupMenu.msg.remove-referentialIntegrityException", null,
                                          ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (ConstraintViolationException cons) {
+      LOG.warn("Error deleting node", cons);
       session.refresh(false);
       uiExplorer.refreshExplorer();
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
@@ -425,17 +429,16 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException lockException) {
+      LOG.warn("Error deleting node", lockException);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
                                               ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("an unexpected error occurs while removing the node", e);
-      }
-      JCRExceptionManager.process(uiApp, e);
+      LOG.warn("an unexpected error occurs while removing the node", e);
 
+      JCRExceptionManager.process(uiApp, e);
       return;
     }
     if (!isMultiSelect) {
@@ -587,7 +590,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   private boolean isDocumentNodeType(Node node) throws Exception {
     boolean isDocument = true;
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    TemplateService templateService = PortalContainer.getInstance().getComponentInstanceOfType(TemplateService.class);
     isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName());
     return isDocument;
   }
