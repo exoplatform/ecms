@@ -17,8 +17,36 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemExistsException;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.LoginException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
+import javax.jcr.Workspace;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.version.VersionException;
+
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentAutoVersionForm;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
@@ -34,6 +62,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterat
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.clipboard.ClipboardService;
 import org.exoplatform.services.cms.clipboard.jcr.model.ClipboardCommand;
@@ -43,6 +72,8 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
+import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
@@ -50,6 +81,9 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
+import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -64,20 +98,6 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
-
-import javax.jcr.*;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.*;
-import javax.jcr.version.VersionException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
 
 /**
  * Created by The eXo Platform SARL Author : Hoang Van Hung hunghvit@gmail.com
@@ -579,28 +599,28 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         thumbnailService.copyThumbnailNode(srcThumbnailNode, destNode);
       }
     } catch (ConstraintViolationException ce) {
-      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, ce);
+      LOG.warn("Error pasting document from {} to {}", srcPath, destPath, ce);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
           ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (VersionException ve) {
-      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, ve);
+      LOG.warn("Error pasting document from {} to {}", srcPath, destPath, ve);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.copied-node-in-versioning", null,
           ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (ItemExistsException iee) {
-      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, iee);
+      LOG.warn("Error pasting document from {} to {}", srcPath, destPath, iee);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
           ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (LoginException e) {
-      LOG.debug("Error pasting document from {} to {}", srcPath, destPath, e);
+      LOG.warn("Error pasting document from {} to {}", srcPath, destPath, e);
       if (ClipboardCommand.CUT.equals(type)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-login-node", null,
             ApplicationMessage.WARNING));
@@ -653,6 +673,41 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     }
   }
 
+  private static void updatePublicationLifecycle(Node destNode) throws Exception {
+    try {
+      // Make copied content enrolled as draft in publication lifecycle to cleanup references to old content
+      WCMPublicationService wcmPublicationService = PortalContainer.getInstance().getComponentInstanceOfType(WCMPublicationService.class);
+      if (wcmPublicationService.isEnrolledInWCMLifecycle(destNode)) {
+        PublicationService publicationService = PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+        String lifecycleName = publicationService.getNodeLifecycleName(destNode);
+        String originalState = null;
+        if (destNode.hasProperty(AuthoringPublicationConstant.CURRENT_STATE)) {
+          originalState = destNode.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
+        } else {
+          originalState = PublicationDefaultStates.DRAFT;
+        }
+
+        wcmPublicationService.unsubcribeLifecycle(destNode);
+        wcmPublicationService.enrollNodeInLifecycle(destNode, lifecycleName);
+
+        String siteName = Util.getPortalRequestContext().getPortalOwner();
+        String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+        // Make content draft again
+        wcmPublicationService.updateLifecyleOnChangeContent(destNode, siteName, remoteUser);
+
+        // Change node publication status to original state
+        String newState = publicationService.getCurrentState(destNode);
+        if (!StringUtils.equals(newState, originalState)) {
+          wcmPublicationService.updateLifecyleOnChangeContent(destNode, siteName, remoteUser, originalState);
+        }
+      }
+    } catch (Exception e) {
+      LOG.warn("Error while cleaning Publication lifecycle of copied content '{}'. Continue to paste content by ignoring optional publication lifecycle cleanup process.",
+               destNode.getPath(),
+               e);
+    }
+  }
+
   private static void removeReferences(Node destNode) throws Exception {
     NodeType[] mixinTypes = destNode.getMixinNodeTypes();
     Session session = destNode.getSession();
@@ -676,6 +731,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       Node destNode = (Node) session.getItem(destPath);
       changeCopiedNodeOwner(destNode);
       removeReferences(destNode);
+      updatePublicationLifecycle(destNode);
     } else {
       try {
         if (LOG.isDebugEnabled())
