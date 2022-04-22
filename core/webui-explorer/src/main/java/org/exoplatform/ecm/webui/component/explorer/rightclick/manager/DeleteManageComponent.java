@@ -35,20 +35,29 @@ import javax.jcr.ReferentialIntegrityException;
 import javax.jcr.Session;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.query.Query;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.Validate;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.CanDeleteNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotMandatoryChildNode;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotSpecificFolderNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
@@ -59,6 +68,7 @@ import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -66,6 +76,9 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
+import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -194,8 +207,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
         TrashService trashService = WCMCoreUtils.getService(TrashService.class);
         node = trashService.getNodeByTrashId(trashId);
-        if(!isDocumentNodeType(node) 
-        		&& !node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)){
+        if (node != null
+            && !isDocumentNodeType(node)
+            && !node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           Queue<Node> queue = new LinkedList<Node>();
           queue.add(node);
 
@@ -390,6 +404,11 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (PermissionUtil.canRemoveNode(node) && node.isNodeType(Utils.EXO_AUDITABLE)) {
         removeAuditForNode(node);
       }
+
+      // Workaround TASK-55628 : Remove referenced live revisions
+      updateReferencedLiveRevisionFromCopies(node, session);
+      // End Workaround TASK-55628
+
       //Remove symlinks
       LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       if(!node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
@@ -401,22 +420,24 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       node.remove();
       parentNode.save();
     } catch (VersionException ve) {
+      LOG.warn("Error deleting node", ve);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
                                               ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (ReferentialIntegrityException ref) {
+      LOG.warn("Error deleting node", ref);
       session.refresh(false);
       uiExplorer.refreshExplorer();
-      uiApp
-      .addMessage(new ApplicationMessage(
+      uiApp.addMessage(new ApplicationMessage(
                                          "UIPopupMenu.msg.remove-referentialIntegrityException", null,
                                          ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (ConstraintViolationException cons) {
+      LOG.warn("Error deleting node", cons);
       session.refresh(false);
       uiExplorer.refreshExplorer();
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
@@ -425,17 +446,16 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException lockException) {
+      LOG.warn("Error deleting node", lockException);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
                                               ApplicationMessage.WARNING));
 
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("an unexpected error occurs while removing the node", e);
-      }
-      JCRExceptionManager.process(uiApp, e);
+      LOG.warn("an unexpected error occurs while removing the node", e);
 
+      JCRExceptionManager.process(uiApp, e);
       return;
     }
     if (!isMultiSelect) {
@@ -443,6 +463,57 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         uiExplorer.setSelectNode(LinkUtils.getParentPath(virtualNodePath));
       else
         uiExplorer.setSelectNode(currentNode.getPath());
+    }
+  }
+
+  /**
+   * Workaround TASK-55628 : This method will search for nodes which references
+   * the same 'liveRevision' than the current node to delete.
+   * 
+   * In general case, this incoherence is due to the fact that the copy/paste node didn't
+   * considered the fact that a copied node must reference its own liveRevision.
+   * 
+   * @param nodeToDelete
+   * @param session
+   * @throws Exception
+   */
+  private void updateReferencedLiveRevisionFromCopies(Node nodeToDelete, Session session) throws Exception {
+    PublicationService publicationService = PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+    WCMPublicationService wcmPublicationService = PortalContainer.getInstance()
+                                                                 .getComponentInstanceOfType(WCMPublicationService.class);
+    if (wcmPublicationService.isEnrolledInWCMLifecycle(nodeToDelete)
+        && nodeToDelete.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+      String liveRevisionReference = nodeToDelete.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getString();
+      Query query = session.getWorkspace()
+                           .getQueryManager()
+                           .createQuery("SELECT * from " + AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_TYPE + " WHERE "
+                               + AuthoringPublicationConstant.LIVE_REVISION_PROP + " = '" + liveRevisionReference + "'",
+                                        Query.SQL);
+      NodeIterator nodes = query.execute().getNodes();
+      String siteName = Util.getPortalRequestContext().getPortalOwner();
+      String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+
+      while (nodes.hasNext()) {
+        Node copiedNode = nodes.nextNode();
+        String lifecycleName = publicationService.getNodeLifecycleName(copiedNode);
+        String originalState = null;
+        if (copiedNode.hasProperty(AuthoringPublicationConstant.CURRENT_STATE)) {
+          originalState = copiedNode.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
+        } else {
+          originalState = PublicationDefaultStates.DRAFT;
+        }
+
+        wcmPublicationService.unsubcribeLifecycle(copiedNode);
+        wcmPublicationService.enrollNodeInLifecycle(copiedNode, lifecycleName);
+        // Make content draft again
+        wcmPublicationService.updateLifecyleOnChangeContent(copiedNode, siteName, remoteUser);
+
+        // Change node publication status to original state
+        String newState = publicationService.getCurrentState(copiedNode);
+        if (!StringUtils.equals(newState, originalState)) {
+          wcmPublicationService.updateLifecyleOnChangeContent(copiedNode, siteName, remoteUser, originalState);
+        }
+      }
     }
   }
 
@@ -587,7 +658,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   private boolean isDocumentNodeType(Node node) throws Exception {
     boolean isDocument = true;
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    TemplateService templateService = PortalContainer.getInstance().getComponentInstanceOfType(TemplateService.class);
     isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName());
     return isDocument;
   }
