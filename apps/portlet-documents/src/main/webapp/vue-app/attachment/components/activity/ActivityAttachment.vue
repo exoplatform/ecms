@@ -157,6 +157,9 @@ export default {
     spaceURL() {
       return this.previewActivity && this.previewActivity.activityStream && this.previewActivity.activityStream.space && this.previewActivity.activityStream.space.groupId.replace('/spaces/', '');
     },
+    isCommentActivity() {
+      return this.activity && this.activity.activityId;
+    }
   },
   created() {
     this.image = this.attachment && this.attachment.image;
@@ -209,7 +212,8 @@ export default {
             },
             version: {
               number: attachment.version && Number(attachment.version) || 0,
-            }
+            },
+            showComments: !this.isCommentActivity
           });
         })
         .catch(e => {
