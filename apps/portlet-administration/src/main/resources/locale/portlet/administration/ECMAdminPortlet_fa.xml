@@ -1002,7 +1002,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>UIPermissionForm</permission>
+      <permission>Permissions</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
