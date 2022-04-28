@@ -360,6 +360,145 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot find user data location", e);
     }
   }
+  @Override
+  public void uploadSpaceFile(String filePath,
+                                   String spaceGroupId,
+                                    String fileName,
+                                   String imagesSubLocationPath) throws IllegalArgumentException {
+    if (StringUtils.isBlank(filePath)) {
+      return ;
+    }
+    try {
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      Session session = sessionProvider.getSession("collaboration", repositoryService.getCurrentRepository());
+      Node groupNode = session.getRootNode().getNode("Groups");
+      if (spaceGroupId.startsWith("/")) {
+        spaceGroupId = spaceGroupId.substring(1);
+      }
+      Node folderNode = groupNode.getNode(spaceGroupId);
+
+      if (folderNode == null) {
+        throw new IllegalArgumentException("Container node for uploaded processed images in HTML content must not be null");
+      }
+      if (StringUtils.isNotEmpty(imagesSubLocationPath)) {
+        for (String folder : imagesSubLocationPath.split("/")) {
+          if (StringUtils.isBlank(folder)) {
+            continue;
+          }
+          if (folderNode.hasNode(folder)) {
+            folderNode = folderNode.getNode(folder);
+            if (folderNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+              folderNode = linkManager.getTarget(folderNode);
+            }
+          } else if (folderNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+            folderNode = linkManager.getTarget(folderNode).getNode(folder);
+          } else {
+            folderNode = folderNode.addNode(folder, "nt:unstructured");
+          }
+        }
+      }
+      File file = new File(filePath);
+      if (!file.exists()) {
+        return;
+      }
+      int i = 1;
+      String originalFileName = fileName;
+      while (folderNode.hasNode(fileName)) {
+        if (originalFileName.contains(".")) {
+          int indexOfPoint = originalFileName.indexOf(".");
+          fileName = originalFileName.substring(0, indexOfPoint) + "(" + i + ")" + originalFileName.substring(indexOfPoint);
+        } else {
+          fileName = originalFileName + "(" + i + ")";
+        }
+        i++;
+      }
+
+      fileName = Text.escapeIllegalJcrChars(fileName);
+      fileName = Utils.cleanName(fileName);
+
+      Node imageNode = folderNode.addNode(fileName, "nt:file");
+      Node resourceNode = imageNode.addNode("jcr:content", "nt:resource");
+      resourceNode.setProperty("jcr:mimeType", URLConnection.guessContentTypeFromName(file.getName()));
+      resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
+
+      try (InputStream inputStream = new FileInputStream(file)) {
+        resourceNode.setProperty("jcr:data", inputStream);
+        resourceNode.getSession().save();
+        folderNode.getSession().save();
+      }
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Cannot create the image", e);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Cannot find user data location", e);
+    }
+  }
+
+  @Override
+  public void uploadUserFile(String filePath,
+                             String userId,
+                             String fileName,
+                             String imagesSubLocationPath) throws IllegalArgumentException {
+    if (StringUtils.isBlank(filePath)) {
+      return ;
+    }
+    try {
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      Node parentNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+
+      Node folderNode = parentNode;
+
+      if (StringUtils.isNotEmpty(imagesSubLocationPath)) {
+        for (String folder : imagesSubLocationPath.split("/")) {
+          if (StringUtils.isBlank(folder)) {
+            continue;
+          }
+          if (folderNode.hasNode(folder)) {
+            folderNode = folderNode.getNode(folder);
+            if (folderNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+              folderNode = linkManager.getTarget(folderNode);
+            }
+          } else if (folderNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+            folderNode = linkManager.getTarget(folderNode).getNode(folder);
+          } else {
+            folderNode = folderNode.addNode(folder, "nt:unstructured");
+          }
+        }
+      }
+      File file = new File(filePath);
+      if (!file.exists()) {
+        return;
+      }
+      int i = 1;
+      String originalFileName = fileName;
+      while (folderNode.hasNode(fileName)) {
+        if (originalFileName.contains(".")) {
+          int indexOfPoint = originalFileName.indexOf(".");
+          fileName = originalFileName.substring(0, indexOfPoint) + "(" + i + ")" + originalFileName.substring(indexOfPoint);
+        } else {
+          fileName = originalFileName + "(" + i + ")";
+        }
+        i++;
+      }
+
+      fileName = Text.escapeIllegalJcrChars(fileName);
+      fileName = Utils.cleanName(fileName);
+
+      Node imageNode = folderNode.addNode(fileName, "nt:file");
+      Node resourceNode = imageNode.addNode("jcr:content", "nt:resource");
+      resourceNode.setProperty("jcr:mimeType", URLConnection.guessContentTypeFromName(file.getName()));
+      resourceNode.setProperty("jcr:lastModified", Calendar.getInstance());
+
+      try (InputStream inputStream = new FileInputStream(file)) {
+        resourceNode.setProperty("jcr:data", inputStream);
+        resourceNode.getSession().save();
+        parentNode.getSession().save();
+      }
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Cannot create the image", e);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Cannot find user data location", e);
+    }
+  }
 
   /**
    * Process the given HTML content, export Files and replace URLs in the HTML
