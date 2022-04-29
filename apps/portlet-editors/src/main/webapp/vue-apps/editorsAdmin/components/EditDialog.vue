@@ -84,7 +84,7 @@
                   <v-checkbox
                     v-model="accessibleToAll"
                     :ripple="false"
-                    color="#578dc9"
+                    color="#476A9C"
                     dense
                     class="ma-0"
                     data-test="everybodyCheckbox" />

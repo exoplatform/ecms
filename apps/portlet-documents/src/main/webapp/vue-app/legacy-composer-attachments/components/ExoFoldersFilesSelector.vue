@@ -113,7 +113,7 @@
               :width="3"
               indeterminate
               class="loadingRing"
-              color="#578dc9" />
+              color="#476A9C" />
           </v-app>
         </div>
         <div v-if="emptyFolder" class="emptyFolder">
@@ -243,7 +243,7 @@
                         :size="40"
                         :value="drivesInProgress[driver.title]"
                         :width="4"
-                        color="var(--allPagesPrimaryColor, #578dc9)"
+                        color="var(--allPagesPrimaryColor, #476A9C)"
                         class="connectingDriveProgress">{{ drivesInProgress[driver.title] }}<span class="connectingDriveProgressPercent">%</span></v-progress-circular>
                       <!-- end of progress block -->
                     </div>
