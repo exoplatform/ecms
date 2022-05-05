@@ -259,7 +259,7 @@ export default {
       } else {
         return {
           class: 'fas fa-file',
-          color: '#578DC9',
+          color: '#476A9C',
         };
       }
     }
