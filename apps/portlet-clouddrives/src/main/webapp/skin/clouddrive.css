@@ -357,7 +357,7 @@
 }
 
 #connectCloudApp .cloudDriveListItem {
-	border: 1px solid #578dc9;
+	border: 1px solid #476A9C;
 	border-radius: 2px;
 	margin-bottom: 10px;
 	justify-content: center;
@@ -378,12 +378,12 @@
 }
 
 #connectCloudApp .cloudDriveListItem__icon i:before {
-	color: #578dc9;
+	color: #476A9C;
 }
 
 #connectCloudApp .cloudDriveListItem__content {
 	max-width: fit-content;
-	color: #578dc9;
+	color: #476A9C;
 	min-width: 157px;
 	text-align: center;
 }
