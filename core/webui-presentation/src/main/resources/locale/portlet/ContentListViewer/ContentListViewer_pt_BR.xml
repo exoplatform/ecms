@@ -23,7 +23,7 @@
       <Title>Preferências</Title>
       <ContentSelectionBlock>Seleção de contéudos</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modo</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Suporte em vários idiomas</UICLVConfigCheckTranslationFormCheckboxInput>
       <UICLVConfigItemPathFormInputSet>Caminho da Pasta</UICLVConfigItemPathFormInputSet>
     <UICLVConfigItemPathFormStringInput>Caminho da Pasta</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordenar por</UICLVConfigOrderByFormSelectBox>
@@ -70,7 +70,7 @@
       <UICLVConfigCacheEnableRadioBoxInput>Compartilhar conteúdo entre usuários</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
+      <TranslationHelp>Se você marcar esta opção, apenas o conteúdo do idioma do usuário aparecerá na lista. Por exemplo: quando esta opção é verificada e que o idioma do usuário é inglês, apenas o conteúdo escrito na língua inglesa será listado. Enquanto que esta opção não é marcada, listamos todo o conteúdo dentro da pasta.</TranslationHelp>
       <ModeSelectionHelp>Dois modos estão disponíveis para mostrar conteúdos. "Por pasta" mostrará todos os conteúdos disponíveis na pasta/categoria que você escolher ; "Por conteúdo" permite que você escolha-os manualmente.</ModeSelectionHelp>
       <FolderPathHelp>Selecione o conteúdo que quer mostrar. Esta seleção padrão será substituída dinamicamente se for ativada a Navegação dinâmica (veja abaixo modo avançado).</FolderPathHelp>
       <HeaderOptionHelp>Mostrar um cabeçalho no topo da lista de contéudos. Se for ativada a Detecção Automática, ele tentará encontrar um cabeçalho baseado na seleção atual.</HeaderOptionHelp>

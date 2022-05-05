@@ -993,7 +993,7 @@
       <shareDocuments>Compartilhar</shareDocuments>
       <openDocument>Edição remota</openDocument>
       <editProperty>Editar propriedades do documento</editProperty>
-      <uploadNewVersion>Upload a version</uploadNewVersion>
+      <uploadNewVersion>Carregar uma nova versão</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1002,7 +1002,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>Permissions</permission>
+      <permission>UIPermissionForm</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Selecionar tipo de associação</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Selecionar grupo</selectGroup>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Selecionar tipo de associação</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>Selecionar usuário</SelectUser>
-      <SelectMember>Select Role</SelectMember>
+      <SelectMember>Selecionar tipo de associação</SelectMember>
       <AddAny>Todos</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>Selecionar usuário</UIGroupSelector>
       <UIPermissionSelector>Selecionar membro</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Selecionar tipo de associação</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>Selecionar Grupo</selectGroup>
       <selectUser>Selecionar usuário</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Selecionar tipo de associação</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>Selecionar grupo</selectGroup>
       <selectUser>Selecionar usuário</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Selecionar tipo de associação</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Selecionar tipo de associação</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>Selecionar grupo</selectGroup>
       <selectUser>Selecionar usuário</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Selecionar tipo de associação</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2482,17 +2482,17 @@
       <Add>Adicionar</Add>
     </action>
     <label>
-      <userOrGroup>Roles:</userOrGroup>
+      <userOrGroup>Associados:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Esse tipo de associação já existe. Por favor, escolha outro.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Selecionar grupo</selectGroup>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Selecionar tipo de associação</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
