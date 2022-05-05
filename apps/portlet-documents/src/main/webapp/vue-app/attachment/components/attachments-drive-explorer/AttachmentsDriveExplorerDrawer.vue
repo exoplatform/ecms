@@ -134,7 +134,7 @@
                 :width="3"
                 indeterminate
                 class="loadingRing"
-                color="#578dc9" />
+                color="#476A9C" />
             </div>
             <div v-else class="content-explorer px-5 d-flex flex-wrap">
               <div v-if="emptyFolder" class="emptyFolder my-10 mx-auto flex-column d-flex align-center">
@@ -268,7 +268,7 @@
                             :size="40"
                             :value="drivesInProgress[driver.title]"
                             :width="4"
-                            color="var(--allPagesPrimaryColor, #578dc9)"
+                            color="var(--allPagesPrimaryColor, #476A9C)"
                             class="connectingDriveProgress">{{ drivesInProgress[driver.title] }}<span class="connectingDriveProgressPercent">%</span>
                           </v-progress-circular>
                           <!-- end of progress block -->
