@@ -2350,7 +2350,7 @@
       <non-node>الرجاء اختيار العقدة الهدف الصحيحة،  أو ربّما لم يكن لديك ما يكفي من حقوق لقراءة هذه العقدة.</non-node>
       <cannot-save>طرأ خطأ أثناء انشاء الوصلة الرمزيّة.</cannot-save>
       <item-exists-exception>عنصر بهذا الاسم موجود مسبقاً.</item-exists-exception>
-      <translation-node-same-language-default>الوثيقة المترجمة بنفس اللغة كلغة افتراضية للمستند الحالي.</translation-node-same-language-default>
+      <translation-node-same-language-default>هذه الترجمة لها نفس اللّغة مع اللغة الافتراضيّة للمستند الحالي.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
