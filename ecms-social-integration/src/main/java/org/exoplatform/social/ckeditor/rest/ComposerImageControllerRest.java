@@ -3,6 +3,7 @@ package org.exoplatform.social.ckeditor.rest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.annotation.security.RolesAllowed;
@@ -12,6 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.EntityTag;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
@@ -69,11 +71,15 @@ public class ComposerImageControllerRest implements ResourceContainer {
       InputStream stream = null;
       try {
         stream = new FileInputStream(file);
+        builder = Response.ok(stream, uploadResource.getMimeType())
+                          .header(HttpHeaders.CONTENT_LENGTH, stream.available());
       } catch (FileNotFoundException e) {
-        LOG.warn("File doesn't exists " + storeLocation);
+        LOG.warn("File {} doesn't exists", storeLocation);
+        return Response.serverError().build();
+      } catch (IOException e) {
+        LOG.warn("Error reading file {} content", storeLocation, e);
         return Response.serverError().build();
       }
-      builder = Response.ok(stream, uploadResource.getMimeType());
     }
     builder.tag(eTag);
     CacheControl cc = new CacheControl();
