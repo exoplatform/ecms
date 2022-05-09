@@ -383,7 +383,7 @@ public class AttachmentServiceImpl implements AttachmentService {
                                               attachmentId);
     } catch (Exception e) {
       throw new IllegalStateException("Error while trying to move attachment node with id " + attachmentId + " to the new path "
-          + newPath);
+          + newPath, e);
     } finally {
       if (session != null) {
         session.logout();
