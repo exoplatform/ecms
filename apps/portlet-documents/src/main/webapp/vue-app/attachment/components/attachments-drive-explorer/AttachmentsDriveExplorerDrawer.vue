@@ -832,7 +832,7 @@ export default {
           this.$root.$emit('add-destination-path-for-file', this.movedFile, this.getRelativePath(this.selectedFolderPath), this.folderDestinationForFile, this.currentDrive);
           this.modeFolderSelectionForFile = false;
         } else {
-          this.$root.$emit('select-destination-path-for-all', this.selectedFolderPath, this.schemaFolder, this.currentDrive);
+          this.$root.$emit('select-destination-path-for-all', this.selectedFolderPath, this.getRelativePath(this.selectedFolderPath), this.schemaFolder, this.currentDrive);
         }
       } else {
         this.addSelectedFiles();
@@ -924,7 +924,7 @@ export default {
       });
     },
     closeFolderActionsMenu: function () {
-      this.$refs.folderActionsMenu.closeMenu();
+      this.$refs.folderActionsMenu?.closeMenu();
     },
     deleteFolder() {
       if (this.selectedFolder.canRemove) {
@@ -962,7 +962,7 @@ export default {
         if (this.selectedFolder.title) {
           this.newName = this.selectedFolder.title;
           this.renameFolderAction = true;
-          this.$refs.folderActionsMenu.closeMenu();
+          this.$refs.folderActionsMenu?.closeMenu();
           this.$nextTick(() => {
             this.$refs.rename[0].focus();
           });
