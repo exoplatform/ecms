@@ -56,8 +56,8 @@ export default {
     this.$root.$on('attachments-changed-from-drives', (selectedFromDrives, removedFilesFromDrive) => {
       this.updateAttachmentsFromDrives(selectedFromDrives, removedFilesFromDrive);
     });
-    this.$root.$on('add-destination-path-for-all', (defaultDestinationFolderPath, pathDestinationFolder, currentDrive) => {
-      this.addDestinationFolderForAll(defaultDestinationFolderPath, pathDestinationFolder, currentDrive);
+    this.$root.$on('add-destination-path-for-all', (defaultDestinationFolderPath, folderRelativePath, currentDrive) => {
+      this.addDestinationFolderForAll(defaultDestinationFolderPath, folderRelativePath, currentDrive);
     });
     this.$root.$on('reset-attachment-list', () => {
       this.attachments = [];
@@ -179,13 +179,21 @@ export default {
         this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
       }
     },
-    addDestinationFolderForAll(defaultDestinationFolderPath, pathDestinationFolder, currentDrive) {
-      for (const attachment in this.attachments) {
-        if (!attachment.destinationFolder || attachment.destinationFolder === defaultDestinationFolderPath) {
-          attachment.destinationFolder = pathDestinationFolder;
-          attachment.fileDrive = currentDrive;
+    addDestinationFolderForAll(defaultDestinationFolderPath, folderRelativePath, currentDrive) {
+      this.attachments.forEach(attachment => {
+        if (attachment.id && (!attachment.destinationFolder || attachment.destinationFolder === defaultDestinationFolderPath)) {
+          this.$attachmentService.moveAttachmentToNewPath(
+            currentDrive.name,
+            folderRelativePath,
+            attachment.id,
+            this.entityType,
+            this.entityId
+          ).then(() => {
+            this.$root.$emit('entity-attachments-updated');
+            document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+          });
         }
-      }
+      });
     },
     initDefaultDrive() {
       if (this.spaceId) {
