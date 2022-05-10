@@ -74,11 +74,10 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
   private static final List<UIExtensionFilter> FILTERS
         = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
                                                 new IsNotFavouriteFilter(),
-                                                 new IsNotLockedFilter(),
-                                                 new IsCheckedOutFilter(),
-                                                 new CanSetPropertyFilter(),
-                                                 new IsNotTrashHomeNodeFilter(),
-                                                 new IsDocumentFilter() });
+                                                new IsNotLockedFilter(),
+                                                new IsCheckedOutFilter(),
+                                                new IsNotTrashHomeNodeFilter(),
+                                                new IsDocumentFilter() });
 
   private final static Log       LOG  = ExoLogger.getLogger(FavouriteManageComponent.class.getName());
 
@@ -132,10 +131,9 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
     }
 
     try {
-      if (!node.isCheckedOut())
+      if (!node.isCheckedOut()) {
         throw new VersionException("node is locked, can't add favourite to node:" + node.getPath());
-      if (!PermissionUtil.canSetProperty(node))
-        throw new AccessDeniedException("access denied, can't add favourite to node:" + node.getPath());
+      }
       favoriteService.addFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
       uiExplorer.updateAjax(event);
     } catch (LockException e) {
