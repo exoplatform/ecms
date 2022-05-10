@@ -74,10 +74,9 @@ public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
                                                 new IsFavouriteFilter(),
-                                                 new IsNotLockedFilter(),
-                                                 new IsCheckedOutFilter(),
-                                                 new HasRemovePermissionFilter(),
-                                                 new IsNotTrashHomeNodeFilter() });
+                                                new IsNotLockedFilter(),
+                                                new IsCheckedOutFilter(),
+                                                new IsNotTrashHomeNodeFilter() });
 
   private final static Log       LOG  = ExoLogger.getLogger(RemoveFavouriteManageComponent.class.getName());
 
@@ -137,10 +136,9 @@ public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
       }
 
       try {
-        if (!node.isCheckedOut())
+        if (!node.isCheckedOut()) {
           throw new VersionException("node is locked, can't remove favourite of node :" + node.getPath());
-        if (!PermissionUtil.canRemoveNode(node))
-          throw new AccessDeniedException("access denied, can't remove favourite of node:" + node.getPath());
+        }
         favoriteService.removeFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
         uiExplorer.updateAjax(event);
       } catch (LockException e) {
