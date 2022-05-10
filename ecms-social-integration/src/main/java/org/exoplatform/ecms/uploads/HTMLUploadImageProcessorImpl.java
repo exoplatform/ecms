@@ -130,8 +130,9 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     if (StringUtils.isBlank(content)) {
       return content;
     }
+    SessionProvider sessionProvider = null;
     try {
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Session session = sessionProvider.getSession(
                                                    repositoryService.getCurrentRepository()
                                                                     .getConfiguration()
@@ -229,6 +230,10 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot find File location, content will not be changed", e);
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot create the image, content will not be changed", e);
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
@@ -241,8 +246,9 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     }
     boolean uploadMode = false;
     boolean importMode = false;
+    SessionProvider sessionProvider = null;
     try {
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Session session = sessionProvider.getSession("collaboration", repositoryService.getCurrentRepository());
       Node groupNode = session.getRootNode().getNode("Groups");
       if (spaceGroupId.startsWith("/")) {
@@ -303,6 +309,10 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot find File location", e);
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot create the image", e);
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
@@ -313,8 +323,9 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     }
     boolean uploadMode = false;
     boolean importMode = false;
+    SessionProvider sessionProvider = null;
     try {
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Node parentNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
 
       Node imagesFolderNode = parentNode;
@@ -358,6 +369,10 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot create the image", e);
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot find user data location", e);
+    }finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
   @Override
@@ -368,8 +383,9 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     if (StringUtils.isBlank(filePath)) {
       return ;
     }
+    SessionProvider sessionProvider = null;
     try {
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Session session = sessionProvider.getSession("collaboration", repositoryService.getCurrentRepository());
       Node groupNode = session.getRootNode().getNode("Groups");
       if (spaceGroupId.startsWith("/")) {
@@ -430,6 +446,10 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot create the image", e);
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot find user data location", e);
+    }finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
@@ -441,8 +461,9 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     if (StringUtils.isBlank(filePath)) {
       return ;
     }
+    SessionProvider sessionProvider = null;
     try {
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Node parentNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
 
       Node folderNode = parentNode;
@@ -497,6 +518,10 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot create the image", e);
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot find user data location", e);
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
@@ -510,10 +535,11 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
   @Override
   public String processImagesForExport(String content_) throws IllegalArgumentException {
+    SessionProvider sessionProvider = null;
     try {
       Map<String, String> urlToReplaces = new HashMap<>();
       String content = content_;
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+      sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       String restUploadUrl = "/" + portalContainer.getName() + "/" + portalContainer.getRestContextName() + "/images/"
           + getRepositoryName() + "/";
       while (content.contains(restUploadUrl)) {
@@ -549,6 +575,10 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       }
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot process the content", e);
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
     return content_;
   }
