@@ -207,6 +207,7 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
       String message = "";
       Identity identity = ConversationState.getCurrent().getIdentity();
       boolean isShared = false;
+      String activityId = "";
       if (uiform.isOwner(identity.getUserId()) || uiform.canEdit(identity)) {
         if (uiform.getChild(UIFormTextAreaInput.class).getValue() != null)
           message = uiform.getChild(UIFormTextAreaInput.class).getValue();
@@ -236,7 +237,7 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
               } else {
                 String groupId = name.substring("*:".length());
                 service.unpublishDocumentToSpace(groupId, (ExtendedNode) node);
-                String activityId = service.publishDocumentToSpace(groupId, node, message, perm);
+                activityId = service.publishDocumentToSpace(groupId, node, message, perm);
                 NotificationContext ctx = NotificationContextImpl.cloneInstance().append(ShareFileToSpacePlugin.NODE, node)
                     .append(ShareFileToSpacePlugin.SENDER, ConversationState.getCurrent().getIdentity().getUserId())
                     .append(ShareFileToSpacePlugin.NODEID, node.getUUID())
@@ -266,10 +267,8 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
             if (entry.equals("") || uiform.isOwner(entry)) continue;
             else {
               String perm = permissions.get(entry);
-              String activityId = "";
               if (entry.startsWith(SPACE_PREFIX2)) {
                 String groupId = spaceService.getSpaceByPrettyName(entry.substring(SPACE_PREFIX2.length())).getGroupId();
-                activityId = service.publishDocumentToSpace(groupId, node, message, perm);
                 NotificationContext ctx = NotificationContextImpl.cloneInstance().append(ShareFileToSpacePlugin.NODE, node)
                     .append(ShareFileToSpacePlugin.SENDER, ConversationState.getCurrent().getIdentity().getUserId())
                     .append(ShareFileToSpacePlugin.NODEID, node.getUUID())
