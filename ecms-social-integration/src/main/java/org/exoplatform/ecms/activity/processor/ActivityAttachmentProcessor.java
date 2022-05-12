@@ -29,8 +29,8 @@ import javax.jcr.RepositoryException;
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.ecm.connector.dlp.FileDlpConnector;
 import org.exoplatform.services.attachments.model.ActivityFileAttachment;
+import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -124,7 +124,7 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
   }
 
   private boolean isQuarantinedItem(Node node) throws RepositoryException {
-    return node.getPath().startsWith("/" + FileDlpConnector.DLP_QUARANTINE_FOLDER + "/");
+    return node.getPath().startsWith("/" + Utils.QUARANTINE_FOLDER + "/");
   }
 
   private String[] getParameterValues(Map<String, String> activityParams, String paramName) {

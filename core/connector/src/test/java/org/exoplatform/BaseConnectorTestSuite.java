@@ -18,7 +18,6 @@ package org.exoplatform;
 
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
-import org.exoplatform.ecm.connector.dlp.TestFileDlpConnector;
 //import org.exoplatform.wcm.connector.authoring.TestCopyContentFile;
 //import org.exoplatform.wcm.connector.authoring.TestLifecycleConnector;
 import org.exoplatform.wcm.connector.collaboration.TestDownloadConnector;
@@ -48,8 +47,7 @@ import org.junit.runners.Suite.SuiteClasses;
   TestDownloadConnector.class,
   TestOpenInOfficeConnector.class,
   TestThumbnailRESTService.class,
-  TestFavoriteRESTService.class,
-  TestFileDlpConnector.class
+  TestFavoriteRESTService.class
 })
 @ConfigTestCase(BaseConnectorTestCase.class)
 public class BaseConnectorTestSuite extends BaseExoContainerTestSuite {
