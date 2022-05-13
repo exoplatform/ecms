@@ -164,7 +164,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     ecmsSearchResult.setImageUrl(getImageUrl(workspace, nodePath));
     ecmsSearchResult.setPreviewUrl(getPreviewUrl(jsonHit, searchContext, downloadUrl));
     ecmsSearchResult.setExcerpt(searchResult.getExcerpt());
-
+    ecmsSearchResult.setExcerpts(searchResult.getExcerpts());
     String formattedDate = getFormattedDate(searchResult.getDate(), lang);
     ecmsSearchResult.setDetail(driveName + formattedFileSize + " - " + formattedDate);
 
