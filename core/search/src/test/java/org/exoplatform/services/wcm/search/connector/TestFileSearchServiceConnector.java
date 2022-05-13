@@ -93,7 +93,12 @@ public class TestFileSearchServiceConnector {
           "               \"exo:internalUse\": \"false\",\n" +
           "               \"fileType\": \"application/pdf\",\n" +
           "               \"dc:publisher\": \"cairo 1.9.5 (http://cairographics.org)\"\n" +
-          "            }\n" +
+          "            },\n" +
+          "            \"highlight\":{ \n"+
+          "                  \"attachment.content\": [\n"+
+          "                 \"Hello <em>text</em> test\" \n" +
+          "                         ]\n" +
+          "             }\n" +
           "          }\n" +
           "        ]\n" +
           "      } }";
@@ -248,6 +253,7 @@ public class TestFileSearchServiceConnector {
     assertNotNull(searchResults);
     assertEquals(1, searchResults.size());
     SearchResult searchResult = searchResults.iterator().next();
+    assertEquals(1, searchResult.getExcerpts().size());
     assertEquals("exo-documentation.pdf", searchResult.getTitle());
     assertEquals("exo-tag-doc-john", ((EcmsSearchResult) searchResult).getTags().get(0));
     assertEquals(1505312333066L, searchResult.getDate());
