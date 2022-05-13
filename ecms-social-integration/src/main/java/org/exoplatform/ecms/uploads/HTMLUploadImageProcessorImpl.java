@@ -230,10 +230,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot find File location, content will not be changed", e);
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot create the image, content will not be changed", e);
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
     }
   }
 
@@ -309,10 +305,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot find File location", e);
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot create the image", e);
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
     }
   }
 
@@ -369,10 +361,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot create the image", e);
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot find user data location", e);
-    }finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
     }
   }
   @Override
@@ -446,10 +434,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot create the image", e);
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot find user data location", e);
-    }finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
     }
   }
 
@@ -518,10 +502,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot create the image", e);
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot find user data location", e);
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
     }
   }
 
@@ -575,10 +555,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       }
     } catch (Exception e) {
       throw new IllegalArgumentException("Cannot process the content", e);
-    } finally {
-      if (sessionProvider != null) {
-        sessionProvider.close();
-      }
     }
     return content_;
   }
