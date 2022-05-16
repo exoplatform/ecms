@@ -90,67 +90,42 @@ import org.exoplatform.wcm.connector.FileUploadHandler;
 public class ManageDocumentService implements ResourceContainer {
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
-  protected static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  protected static final String    IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
-  protected static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  protected static final String    LAST_MODIFIED_PROPERTY        = "Last-Modified";
 
   /** The cache control. */
-  private final CacheControl    cc;
+  private final CacheControl       cc;
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(ManageDocumentService.class.getName());
-  
-  /** Default folder name if the original is null */ 
-  private static final String DEFAULT_NAME = "untitled";
+  private static final Log         LOG                           = ExoLogger.getLogger(ManageDocumentService.class.getName());
+
+  /** Default folder name if the original is null */
+  private static final String      DEFAULT_NAME                  = "untitled";
 
   /** The manage drive service. */
-  private final ManageDriveService    manageDriveService;
+  private final ManageDriveService manageDriveService;
 
   /** The link manager. */
-  private final LinkManager linkManager;
-  
+  private final LinkManager        linkManager;
+
   /** The cloud drives. */
-  private final CloudDriveService cloudDrives;
+  private final CloudDriveService  cloudDrives;
 
   /** The file upload handler. */
-  protected FileUploadHandler   fileUploadHandler;
+  protected FileUploadHandler      fileUploadHandler;
 
   private enum DriveType {
     GENERAL, GROUP, PERSONAL
   }
 
-  final static public String   EXO_MUSICFOLDER      = "exo:musicFolder";
+  private static final String PRIVATE = "Private";
 
-  final static public String   EXO_VIDEOFOLDER      = "exo:videoFolder";
-
-  final static public String   EXO_PICTUREFOLDER    = "exo:pictureFolder";
-
-  final static public String   EXO_DOCUMENTFOLDER   = "exo:documentFolder";
-
-  final static public String   EXO_SEARCHFOLDER     = "exo:searchFolder";
-
-  final static public String   EXO_SYMLINK          = "exo:symlink";
-
-  final static public String   EXO_PRIMARYTYPE      = "exo:primaryType";
-
-  final static public String   EXO_TRASH_FOLDER     = "exo:trashFolder";
-
-  final static public String   EXO_FAVOURITE_FOLDER = "exo:favoriteFolder";
-
-  final static public String   NT_UNSTRUCTURED      = "nt:unstructured";
-
-  final static public String   NT_FOLDER            = "nt:folder";
-
-  final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
-    EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
-
-  private static final String  PRIVATE              = "Private";
-
-  private static final String  NEW_APP              = "newApp";
+  private static final String NEW_APP = "newApp";
 
   /** The limit size of uploaded file. */
-  private int limit;
+  private int                 limit;
 
   /**
    * Instantiates a document service.
@@ -351,10 +326,10 @@ public class ManageDocumentService implements ResourceContainer {
 
       Node newNode = node.addNode(name, folderNodeType);
 
-      if (!newNode.hasProperty("exo:title")) {
-        newNode.addMixin("exo:rss-enable");
+      if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE)) {
+        newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
       }
-      newNode.setProperty("exo:title", folderName);
+      newNode.setProperty(NodetypeConstant.EXO_TITLE, folderName);
       node.save();
       Document document = createNewDocument();
       String childFolder = StringUtils.isEmpty(currentFolder) ? newNode.getName() : currentFolder.concat("/")
@@ -686,13 +661,22 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     for (String folder : currentFolder.split("/")) {
-      if (node.hasNode(folder)){
+      if (node.hasNode(folder)) {
         node = node.getNode(folder);
-        if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) node = linkManager.getTarget(node);
-      } else if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-        node = linkManager.getTarget(node).getNode(folder);
       } else {
-        return node;
+        // create new folder
+        String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
+        name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
+        Node newNode = node.addNode(name, NodetypeConstant.NT_FOLDER);
+        if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE)) {
+          newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
+        }
+        newNode.setProperty(NodetypeConstant.EXO_TITLE, folder);
+        node.save();
+        node = newNode;
+      }
+      if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+        node = linkManager.getTarget(node);
       }
     }
     return node;
@@ -774,10 +758,10 @@ public class ManageDocumentService implements ResourceContainer {
     if (node == null)
       return "";
     String nodeType = node.getPrimaryNodeType().getName();
-    if (node.isNodeType(EXO_SYMLINK)) {
+    if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
       LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       try {
-        nodeType = node.getProperty(EXO_PRIMARYTYPE).getString();
+        nodeType = node.getProperty(NodetypeConstant.EXO_PRIMARYTYPE).getString();
         node = linkManager.getTarget(node);
         if (node == null)
           return "";
@@ -785,13 +769,13 @@ public class ManageDocumentService implements ResourceContainer {
         return "";
       }
     }
-    if (node.isNodeType(EXO_TRASH_FOLDER)) {
-      nodeType = EXO_TRASH_FOLDER;
+    if (node.isNodeType(NodetypeConstant.EXO_TRASH_FOLDER)) {
+      nodeType = NodetypeConstant.EXO_TRASH_FOLDER;
     }
-    if (node.isNodeType(EXO_FAVOURITE_FOLDER))
-      nodeType = EXO_FAVOURITE_FOLDER;
-    if (nodeType.equals(NT_UNSTRUCTURED) || nodeType.equals(NT_FOLDER)) {
-      for (String specificFolder : SPECIFIC_FOLDERS) {
+    if (node.isNodeType(NodetypeConstant.EXO_FAVOURITE_FOLDER))
+      nodeType = NodetypeConstant.EXO_FAVOURITE_FOLDER;
+    if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
+      for (String specificFolder : NodetypeConstant.SPECIFIC_FOLDERS) {
         if (node.isNodeType(specificFolder)) {
           nodeType = specificFolder;
           break;
