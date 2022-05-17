@@ -575,10 +575,10 @@ export default {
           }
           //if both default drive and default folder exist
           if (defaultFolder) {
-            this.openFolder(defaultFolder).then(() => {
-              this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
-              this.driveExplorerInitializing = false;
-            });
+            this.openFolder(defaultFolder)
+              .then(() => {
+                this.$root.$emit('attachments-default-folder-path-initialized', this.getRelativePath(self.selectedFolderPath), this.schemaFolder);
+              }).finally(() => this.driveExplorerInitializing = false);
             // create a default folder for activity attachments if it doesn't exist
           } else if (!defaultFolder && self.defaultFolder === 'Activity Stream Documents') {
             this.$attachmentService.createFolder(self.currentDrive.name, self.workspace, this.currentAbsolutePath, self.defaultFolder);
@@ -600,6 +600,7 @@ export default {
             
           } else {
             this.$root.$emit('attachments-default-folder-path-initialized', '/', this.currentDrive.title);
+            this.driveExplorerInitializing = false;
           }
         });
       } else {
