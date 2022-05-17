@@ -4,6 +4,7 @@
     color="transparent"
     elevation="0"
     app
+    absolute
     bottom
     left>
     <attachments-notification-alert
