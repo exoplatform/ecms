@@ -107,8 +107,8 @@
             :allow-to-preview="false"
             :current-space="currentSpace"
             :current-drive="currentDrive"
-            :allow-to-detach="true"
             :entityId="entityId"
+            allow-to-detach
             allow-to-edit />
         </span>
       </transition-group>
