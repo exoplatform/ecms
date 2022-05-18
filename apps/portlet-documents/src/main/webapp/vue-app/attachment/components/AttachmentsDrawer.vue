@@ -570,7 +570,6 @@ export default {
         }}));
         this.sendDocumentAnalytics(file);
         this.newUploadedFiles.push(file);
-        this.uploadedFiles.push(file);
       }
     },
     sendDocumentAnalytics(file) {
