@@ -12,7 +12,7 @@
       </v-row>
       <v-row>
         <v-col xs12>
-          <v-simple-table :dense="true" class="uiGrid table table-hover table-striped providersTable">
+          <v-simple-table :dense="true" class="uiGrid table-hover table-striped providersTable">
             <template #default>
               <thead>
                 <tr class="providersTableRow">
