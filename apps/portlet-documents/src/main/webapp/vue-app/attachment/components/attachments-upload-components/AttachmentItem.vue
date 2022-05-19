@@ -120,6 +120,10 @@ export default {
       type: Boolean,
       default: false
     },
+    entityId: {
+      type: String,
+      default: ''
+    },
     canAccess: {
       type: Boolean,
       default: true
@@ -184,7 +188,7 @@ export default {
       return `${this.attachedFromOtherDrivesLabel} ${this.attachmentsWillBeDisplayedForLabel}`;
     },
     canDetachAttachment() {
-      return this.attachmentHasPermission && this.attachmentHasPermission.canDetach || !this.attachment.id || this.attachment.isSelectedFromDrives;
+      return this.attachmentHasPermission && this.attachmentHasPermission.canDetach || !this.attachment.id || this.attachment.isSelectedFromDrives || !this.entityId;
     },
     canMoveAttachment() {
       return this.canEdit && this.allowToEdit && !this.attachment.isSelectedFromDrives;
