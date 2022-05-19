@@ -1,5 +1,6 @@
 export function installExtensions() {
   CKEDITOR.plugins.addExternal('attachFile', '/eXoWCMResources/eXoPlugins/attachFile/', 'plugin.js');
+  CKEDITOR.plugins.addExternal('uploadImage', '/eXoWCMResources/eXoPlugins/uploadImage/', 'plugin.js');
   CKEDITOR.plugins.addExternal('selectImage', '/eXoWCMResources/eXoPlugins/selectImage/', 'plugin.js');
 
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
@@ -41,7 +42,7 @@ export function installExtensions() {
     rank: 10,
   });
 
-  extensionRegistry.registerExtension('CommonCkeditor', 'ckeditor-extensions', {
+  extensionRegistry.registerExtension('WYSIWYGPlugins', 'image', {
     id: 'selectImage',
     extraPlugin: 'selectImage',
     extraToolbarItem: 'selectImage',

@@ -6,7 +6,7 @@
 'use strict';
 
 ( function() {
-	CKEDITOR.plugins.add( 'uploadimage', {
+	CKEDITOR.plugins.add( 'uploadImage', {
 		requires: 'uploadwidget,autogrow',
 
 		onLoad: function() {

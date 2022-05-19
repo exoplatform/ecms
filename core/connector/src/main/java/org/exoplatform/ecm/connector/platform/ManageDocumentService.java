@@ -326,7 +326,7 @@ public class ManageDocumentService implements ResourceContainer {
 
       Node newNode = node.addNode(name, folderNodeType);
 
-      if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE)) {
+      if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE) && newNode.canAddMixin(NodetypeConstant.EXO_RSS_ENABLE)) {
         newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
       }
       newNode.setProperty(NodetypeConstant.EXO_TITLE, folderName);
