@@ -1,5 +1,7 @@
 export function installExtensions() {
   CKEDITOR.plugins.addExternal('attachFile', '/eXoWCMResources/eXoPlugins/attachFile/', 'plugin.js');
+  CKEDITOR.plugins.addExternal('uploadImage', '/eXoWCMResources/eXoPlugins/uploadImage/', 'plugin.js');
+  CKEDITOR.plugins.addExternal('selectImage', '/eXoWCMResources/eXoPlugins/selectImage/', 'plugin.js');
 
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
     id: 'attachments',
@@ -38,6 +40,13 @@ export function installExtensions() {
     extraPlugin: 'attachFile',
     extraToolbarItem: 'attachFile',
     rank: 10,
+  });
+
+  extensionRegistry.registerExtension('WYSIWYGPlugins', 'image', {
+    id: 'selectImage',
+    extraPlugin: 'selectImage',
+    extraToolbarItem: 'selectImage',
+    rank: 20,
   });
 
   const downloadHandlerExtension = {
