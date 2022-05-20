@@ -43,7 +43,7 @@
                 data-toggle="tooltip"
                 rel="tooltip"
                 data-placement="bottom">
-                {{ currentDrive.title }}
+                {{ currentDrive.mainTitle }}
               </a>
             </div>
             <div v-if="foldersHistory.length > 2" class="longFolderHistory d-flex align-center">
@@ -275,7 +275,7 @@
                         </div>
                         <div
                           :class="{ 'connectingDriveTitle': drivesInProgress[driver.title] >= 0 || drivesInProgress[driver.title] <= 100}"
-                          class="selectionLabel text-truncate text-color center">{{ driver.title }}
+                          class="selectionLabel text-truncate text-color center">{{ driver.mainTitle }}
                         </div>
                       </a>
                     </div>
@@ -638,6 +638,7 @@ export default {
       this.currentDrive = {
         name: drive.name,
         title: drive.title,
+        mainTitle: drive.mainTitle,
         isSelected: true
       };
       return this.fetchChildrenContents('');
@@ -808,16 +809,25 @@ export default {
               : `${name.replace(/\s/g, '')} ${driverTypeClass}`;
             const driveLabel = fetchedDrivers[j].getAttribute('label')
               .replace('.', '').replace(' ', '');
-            this.drivers.push({
+            const labelKey = `Drives.label.${driveLabel}`;
+            const DriveTitle = labelKey === this.$t(labelKey) && driveLabel || this.$t(labelKey);
+            const driver = {
               name: name,
-              title: name.includes('space') ? driveLabel : this.$t(`Drives.label.${driveLabel}`),
+              title: DriveTitle,
+              mainTitle: DriveTitle,
               path: fetchedDrivers[j].getAttribute('path'),
               css: fetchedDrivers[j].getAttribute('nodeTypeCssClass'),
               type: 'drive',
               driveTypeCSSClass: driveTypeCSSClass,
               driverType: driverType,
               isCloudDrive: isCloudDrive
-            });
+            };
+            if (isCloudDrive) {
+              const index = name.indexOf('-');
+              driver.mainTitle = name.substr(0,index);
+              driver.title = name;
+            }
+            this.drivers.push(driver);
           }
         }
       }
