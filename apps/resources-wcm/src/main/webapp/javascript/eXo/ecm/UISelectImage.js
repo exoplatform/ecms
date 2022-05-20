@@ -523,10 +523,11 @@
           }
           var uploadFinished = false;
           var uploadError = false;
-          var spaceGroupId = CKEDITOR.currentInstance.config.spaceGroupId.replaceAll("/", ".");
+          var driveName = CKEDITOR.currentInstance.config.spaceGroupId && CKEDITOR.currentInstance.config.spaceGroupId.replaceAll("/", ".") || "Personal Documents";
+
           var imagesDownloadFolder = CKEDITOR.currentInstance.config.imagesDownloadFolder;
           var restURL = self.getRestContext() + "/"
-              + "managedocument/uploadFile/control?workspaceName=collaboration&driveName=" + spaceGroupId
+              + "managedocument/uploadFile/control?workspaceName=collaboration&driveName=" + driveName
               + "&currentPortal=" + eXo.env.portal.portalName + "&language="
               + eXo.env.portal.language + "&currentFolder=" + imagesDownloadFolder
               + "&uploadId=" + status.uploadId + "&fileName=" + status.name + "&action=save";
