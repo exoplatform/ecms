@@ -25,6 +25,7 @@ public class UtilsTest extends TestCase {
     String title17 = "test < test";
     String title18 = "test # test";
     String title19 = "test * test";
+    String title20 = "test . test";
 
     // When
     String titleClean1 = Utils.cleanName(title1);
@@ -46,6 +47,7 @@ public class UtilsTest extends TestCase {
     String titleClean17 = Utils.cleanName(title17);
     String titleClean18 = Utils.cleanName(title18);
     String titleClean19 = Utils.cleanName(title19);
+    String titleClean20 = Utils.cleanName(title20);
 
     // Then
     assertEquals(titleClean1,"test-test");
@@ -67,5 +69,6 @@ public class UtilsTest extends TestCase {
     assertEquals(titleClean17,"test-test");
     assertEquals(titleClean18,"test-test");
     assertEquals(titleClean19,"test-test");
+    assertEquals(titleClean20,"test-test");
   }
 }
