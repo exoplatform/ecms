@@ -56,7 +56,8 @@
                 formData = new FormData(),
                 xhr = fileLoader.xhr;
             fileLoader.uploadId = uploadId;
-			fileLoader.thumbnailURL = evt.data.fileLoader.data;
+            fileLoader.thumbnailURL = evt.data.fileLoader.data;
+
             fileLoader.uploadUrl = config.uploadUrl;
             xhr.open( 'POST', fileLoader.uploadUrl, true );
             formData.append( 'upload', fileLoader.file, fileLoader.fileName );
