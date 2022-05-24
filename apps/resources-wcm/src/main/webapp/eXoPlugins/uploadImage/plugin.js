@@ -56,8 +56,7 @@
                 formData = new FormData(),
                 xhr = fileLoader.xhr;
             fileLoader.uploadId = uploadId;
-            fileLoader.thumbnailURL = UISelectImage.getThumbnailURL(uploadId);
-
+			fileLoader.thumbnailURL = evt.data.fileLoader.data;
             fileLoader.uploadUrl = config.uploadUrl;
             xhr.open( 'POST', fileLoader.uploadUrl, true );
             formData.append( 'upload', fileLoader.file, fileLoader.fileName );
@@ -136,7 +135,41 @@
 				},
 
 				onUploaded: function( upload ) {
-					this.replaceWith( '<img src="' + upload.url + '" />' );
+					var self = this;
+					var uploadFinished = false;
+					var uploadError = false;
+					var driveName = CKEDITOR.currentInstance.config.spaceGroupId && CKEDITOR.currentInstance.config.spaceGroupId.replaceAll("/", ".") || "Personal Documents";
+
+					var imagesDownloadFolder = CKEDITOR.currentInstance.config.imagesDownloadFolder;
+					var restURL = eXo.env.server.context + "/" + eXo.env.portal.rest + "/"
+						+ "managedocument/uploadFile/control?workspaceName=collaboration&driveName=" + driveName
+						+ "&currentPortal=" + eXo.env.portal.portalName + "&language="
+						+ eXo.env.portal.language + "&currentFolder=" + imagesDownloadFolder
+						+ "&uploadId=" + upload.uploadId + "&fileName=" + upload.fileName + "&action=save";
+					fetch(restURL, {
+						credentials: 'include',
+						method: 'GET',
+					}).then(response => {
+						if (response.ok) {
+							uploadFinished = true;
+							return response.text();
+						} else {
+							return response.text().then(error => {
+								uploadError = true;
+								throw new Error(error);
+							});
+						}
+					})
+						.then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
+						.then(xml => {
+							if (xml) {
+								return xml.childNodes[0].attributes[0].value;
+							}
+						}).then(uuid => {
+						if (uploadFinished && !uploadError) {
+							self.replaceWith('<img src="' + eXo.env.server.context + "/" + eXo.env.portal.rest + "/images/repository/collaboration/" + (uuid ? uuid : "") + '" />');
+						}
+					});
 					if(editor.resizeEditor) {
 					  editor.resizeEditor();
 					} else if(editor.resize) {
