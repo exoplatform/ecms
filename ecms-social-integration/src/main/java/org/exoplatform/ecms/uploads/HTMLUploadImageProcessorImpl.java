@@ -126,6 +126,12 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
    * @throws IllegalArgumentException When Content location cannot be found or
    *           File cannot be created
    */
+  /**
+   * @since 6.3.0
+   * @deprecated Deprecated, Since the uploaded images will be stored in the document storage by the Ckeditor
+   *
+   */
+  @Deprecated
   public String processImages(String content, String parentNodeId, String imagesSubFolderPath) throws IllegalArgumentException {
     if (StringUtils.isBlank(content)) {
       return content;
@@ -232,8 +238,13 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
       throw new IllegalArgumentException("Cannot create the image, content will not be changed", e);
     }
   }
-
+  /**
+   * @since 6.3.0
+   * @deprecated Deprecated, Since the uploaded images will be stored in the document storage by the Ckeditor
+   *
+   */
   @Override
+  @Deprecated
   public String processSpaceImages(String content,
                                    String spaceGroupId,
                                    String imagesSubLocationPath) throws IllegalArgumentException {
@@ -308,7 +319,13 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
     }
   }
 
+  /**
+   * @since 6.3.0
+   * @deprecated Deprecated, Since the uploaded images will be stored in the document storage by the Ckeditor
+   *
+   */
   @Override
+  @Deprecated
   public String processUserImages(String content, String userId, String imagesSubLocationPath) throws IllegalArgumentException {
     if (StringUtils.isBlank(content)) {
       return content;
