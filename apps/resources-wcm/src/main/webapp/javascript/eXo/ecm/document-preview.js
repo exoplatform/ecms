@@ -516,8 +516,8 @@
                 }
 
                 if (!this.settings.showComments) {
-                  html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentPreview.settings.doc.title + '">' +
-                      '<div class="ellipsis">' + documentPreview.settings.doc.title + '</div>';
+                  html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + decodeURI(documentPreview.settings.doc.title) + '">' +
+                      '<div class="ellipsis">' + decodeURI(documentPreview.settings.doc.title) + '</div>';
                   if (documentPreview.settings.version && (documentPreview.settings.version.number != 0)) {
                     html +='<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>';
                   }
