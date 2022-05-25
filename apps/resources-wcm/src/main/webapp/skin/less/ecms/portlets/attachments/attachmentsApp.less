@@ -53,7 +53,7 @@
 
     .dropFileBox {
       border-radius: 5px;
-      border: 3px dashed #a8b3c5;
+      border: 3px dashed @greyColorLighten1Default;
     }
 
     .connectCloudDriveAction {
@@ -402,7 +402,7 @@
 
 
 .destinationFolder {
-  border-bottom: 1px solid #a8b3c5;;
+  border-bottom: 1px solid @greyColorLighten1Default;
 
   .folderLocation {
     width: 100%;
@@ -416,7 +416,7 @@
   }
 
   .colorIcon {
-    color: #a8b3c5;
+    color: @greyColorLighten1Default;
   }
 
   .folder {
@@ -451,7 +451,7 @@
 
   .selectFile {
     width: 100%;
-    border-bottom: 1px solid #a8b3c5;
+    border-bottom: 1px solid @greyColorLighten1Default;
 
     > p {
       margin-bottom: 0px;
@@ -464,7 +464,7 @@
 
   .disabled {
     cursor: pointer;
-    color: #a8b3c5;
+    color: @greyColorLighten1Default;
   }
 }
 
@@ -580,6 +580,7 @@
 }
 
 .uiIconFileTypeapplicationvndgoogle-appspresentation:before,
+.uiIconFileTypeapplicationvndopenxmlformats-officedocumentpresentationmltemplate:before,
 .uiIconFileTypeapplicationvndopenxmlformats-officedocumentpresentationmlpresentation:before {
   content: "\e703";
   color: #D07B7B;

@@ -15,7 +15,6 @@
         <img
           v-if="image"
           :src="attachment.image"
-          :style="{maxHeight: previewHeight, maxWidth: previewWidth, height: 'fit-content'}"
           class="ma-auto"
           @error="image = null">
         <v-icon
@@ -24,7 +23,7 @@
           class="ma-auto d-flex"
           size="80px" />
       </v-card-text>
-      <v-card-text class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
+      <v-card-text v-if="!image" class="activity-attachment-title d-flex font-weight-bold border-top-color py-2">
         <div
           :title="attachment.name"
           class="text-color text-wrap text-break mx-0 my-auto text-truncate-2"
@@ -83,7 +82,7 @@ export default {
       default: () => '152px',
     },
     previewWidth: {
-      type: Number,
+      type: String,
       default: () => '250px',
     },
   },
@@ -158,6 +157,9 @@ export default {
     spaceURL() {
       return this.previewActivity && this.previewActivity.activityStream && this.previewActivity.activityStream.space && this.previewActivity.activityStream.space.groupId.replace('/spaces/', '');
     },
+    isCommentActivity() {
+      return this.activity && this.activity.activityId;
+    }
   },
   created() {
     this.image = this.attachment && this.attachment.image;
@@ -210,7 +212,8 @@ export default {
             },
             version: {
               number: attachment.version && Number(attachment.version) || 0,
-            }
+            },
+            showComments: !this.isCommentActivity
           });
         })
         .catch(e => {

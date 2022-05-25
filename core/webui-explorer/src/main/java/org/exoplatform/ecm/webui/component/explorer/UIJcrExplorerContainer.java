@@ -17,18 +17,12 @@
 package org.exoplatform.ecm.webui.component.explorer;
 
 import java.util.*;
-
 import javax.jcr.*;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-
 import org.apache.commons.lang.StringUtils;
-
 import org.exoplatform.commons.api.settings.*;
-import org.exoplatform.commons.api.settings.data.Context;
-import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.ecm.jcr.model.Preference;
-import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer.SwitchDocumentsActionListener;
 import org.exoplatform.ecm.webui.component.explorer.control.*;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -46,26 +40,18 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.*;
 import org.exoplatform.webui.core.model.SelectItemOption;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 /**
  * Created by The eXo Platform SARL
  */
 @ComponentConfig(
-  events = {
-     @EventConfig(listeners = SwitchDocumentsActionListener.class)
-  },
   template = "app:/groovy/webui/component/explorer/UIJCRExplorerContainer.gtmpl"
 )
 public class UIJcrExplorerContainer extends UIContainer {
   private static final Log LOG  = ExoLogger.getLogger(UIJcrExplorerContainer.class.getName());
 
   private ExoFeatureService featureService;
-
-  private SettingService    settingService;
 
   public UIJcrExplorerContainer() throws Exception {
     addChild(UIJCRExplorer.class, null, null);
@@ -217,43 +203,21 @@ public class UIJcrExplorerContainer extends UIContainer {
     }
   }
 
-  public boolean isNewDocumentsFeatureEnabled() {
+  public boolean isOldDocumentsFeatureEnabled() {
     try {
       if (!SpaceUtils.isSpaceContext() && !getChild(UIJCRExplorer.class).getRootNode().getName().equals("Private")) {
-        return false;
+        return true;
       }
     } catch (Exception e) {
       LOG.warn("Cannot get File explorer root node");
     }
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return getFeatureService().isFeatureActiveForUser("NewDocuments", userId);
+    return getFeatureService().isFeatureActiveForUser("OldDocuments", userId);
   }
 
-  public boolean isDisplayNewDocumentsForUser() {
-    if (!isNewDocumentsFeatureEnabled()) {
-      return false;
-    }
+  public boolean isSwitchDocumentsFeatureEnabled() {
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    SettingValue<?> settingValue = getSettingService().get(Context.USER.id(userId),
-                                                           Scope.APPLICATION.id("NewDocumentsFeature"),
-                                                           "enabled");
-    return settingValue != null && settingValue.getValue() != null
-        && StringUtils.equals(settingValue.getValue().toString(), "true");
-  }
-
-  public void switchDocumentsFeatureForUser() {
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    boolean isActive = isDisplayNewDocumentsForUser();
-    if (isActive) {
-      getSettingService().remove(Context.USER.id(userId),
-                                 Scope.APPLICATION.id("NewDocumentsFeature"),
-                                 "enabled");
-    } else {
-      getSettingService().set(Context.USER.id(userId),
-                              Scope.APPLICATION.id("NewDocumentsFeature"),
-                              "enabled",
-                              SettingValue.create("true"));
-    }
+    return getFeatureService().isFeatureActiveForUser("SwitchOldDocuments", userId);
   }
 
   public ExoFeatureService getFeatureService() {
@@ -262,21 +226,4 @@ public class UIJcrExplorerContainer extends UIContainer {
     }
     return featureService;
   }
-
-  public SettingService getSettingService() {
-    if (settingService == null) {
-      settingService = getApplicationComponent(SettingService.class);
-    }
-    return settingService;
-  }
-
-  public static class SwitchDocumentsActionListener extends EventListener<UIJcrExplorerContainer> {
-    @Override
-    public void execute(Event<UIJcrExplorerContainer> event) throws Exception {
-      UIJcrExplorerContainer jcrExplorerContainer = event.getSource();
-      jcrExplorerContainer.switchDocumentsFeatureForUser();
-      event.getRequestContext().addUIComponentToUpdateByAjax(jcrExplorerContainer);
-    }
-  }
-
 }

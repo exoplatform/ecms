@@ -1,5 +1,5 @@
 const path = require("path");
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const webpackCommonConfig = require("./webpack.common.js");
 
 // the display name of the war
@@ -13,7 +13,8 @@ let config = merge(webpackCommonConfig, {
     path: path.resolve(`${exoServerPath}/webapps/${app}/`),
     filename: 'js/[name].bundle.js'
   },
-  devtool: "inline-source-map"
+  mode: 'development',
+  devtool: 'eval-source-map'
 });
 
 module.exports = config;

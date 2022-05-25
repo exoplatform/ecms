@@ -7,29 +7,23 @@
     "url": "https://github.com/exoplatform/ecms"
   },
   "scripts": {
-    "watch": "eslint --fix ./src/main/webapp/vue-apps/**/*.js ./src/main/webapp/vue-apps/**/*.vue && webpack --config webpack.dev.js --progress --colors --watch -d",
+    "watch": "webpack --config webpack.dev.js --progress --color --watch",
     "lint": "eslint --fix ./src/main/webapp/vue-apps/**/*.js ./src/main/webapp/vue-apps/**/*.vue",
     "build": "webpack --config webpack.prod.js --mode production"
   },
   "author": "eXo",
   "license": "LGPL",
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
-    "babel-loader": "^8.1.0",
-    "eslint": "^5.16.0",
-    "eslint-config-meedsio": "^1.0.3",
-    "eslint-loader": "^2.1.1",
-    "eslint-plugin-jest": "^24.3.6",
-    "eslint-plugin-vue": "^7.9.0",
-    "jest": "^26.6.3",
-    "vue": "^2.6.10",
-    "vue-i18n": "^8.15.0",
-    "vue-loader": "^14.2.3",
-    "vue-template-compiler": "^2.6.10",
-    "vuetify": "^2.1.7",
-    "webpack": "^4.25.0",
-    "webpack-cli": "^3.1.2",
-    "webpack-merge": "^4.1.4"
+    "babel-loader": "^8.2.4",
+    "eslint": "^8.12.0",
+    "eslint-config-meedsio": "^1.0.4",
+    "eslint-plugin-vue": "^8.6.0",
+    "eslint-webpack-plugin": "^3.1.1",
+    "vue": "^2.6.14",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-merge": "^5.8.0"
   }
 }
