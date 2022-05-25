@@ -14,7 +14,7 @@ const urls = [
   `/portal/rest/i18n/bundle/locale.portlet.attachments-${lang}.json`,
   `/portal/rest/i18n/bundle/locale.portlet.documents-${lang}.json`
 ];
-
+eXo.env.portal.utf8 = require('utf8');
 // get overridden components if exist
 if (extensionRegistry) {
   const components = extensionRegistry.loadComponents('attachmentApp');
