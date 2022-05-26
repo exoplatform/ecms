@@ -154,8 +154,7 @@ export function isCloudDriveEnabled() {
 
 export function uploadAttachment(workspaceName, driveName, currentFolder, currentPortal, uploadId, fileName, language,
   existenceAction, action) {
-    fileName = eXo.env.portal.utf8.encode(fileName);
-    return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/managedocument/uploadFile/control?workspaceName=${workspaceName}&driveName=${driveName}&currentFolder=${currentFolder}&currentPortal=${currentPortal}&uploadId=${uploadId}&fileName=${fileName}&language=${language}&existenceAction=${existenceAction}&action=${action}`, {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/managedocument/uploadFile/control?workspaceName=${workspaceName}&driveName=${driveName}&currentFolder=${currentFolder}&currentPortal=${currentPortal}&uploadId=${uploadId}&fileName=${fileName}&language=${language}&existenceAction=${existenceAction}&action=${action}`, {
     credentials: 'include',
     method: 'GET',
   }).then(response => {

@@ -29,7 +29,6 @@
   "dependencies": {
     "anchorme": "^1.1.2",
     "autosize": "^4.0.2",
-    "axios": "^0.21.2",
-    "utf8": "^3.0.0"
+    "axios": "^0.21.2"
   }
 }
