@@ -433,7 +433,7 @@ public class FileUploadHandler {
                                String userId,
                                String existenceAction,
                                boolean isNewVersion) throws Exception {
-	fileName = Utils.cleanNameWithAccents(fileName);
+    fileName = Utils.cleanNameWithAccents(fileName);
     String exoTitle = fileName;
     fileName = Utils.cleanName(fileName);
     try {
