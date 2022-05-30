@@ -441,6 +441,7 @@ export default {
       }
       files.forEach(file => {
         file.isSelected = this.attachedFiles.some(f => f.id === file.id);
+        file.name = decodeURI(file.name);
       });
       return files;
     },
