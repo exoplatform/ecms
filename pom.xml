@@ -4,12 +4,12 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>25-M01</version>
+    <version>25-devx-SNAPSHOT</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>6.4.x-SNAPSHOT</version>
+  <version>6.4.x-devx-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -40,7 +40,7 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.4.x-SNAPSHOT</org.exoplatform.social.version>
+    <org.exoplatform.social.version>6.4.x-devx-SNAPSHOT</org.exoplatform.social.version>
     <addon.exo.jcr.version>6.4.x-SNAPSHOT</addon.exo.jcr.version>
     <addon.exo.tasks.version>3.4.x-SNAPSHOT</addon.exo.tasks.version>
     <org.exoplatform.platform-ui.version>6.4.x-SNAPSHOT</org.exoplatform.platform-ui.version>
