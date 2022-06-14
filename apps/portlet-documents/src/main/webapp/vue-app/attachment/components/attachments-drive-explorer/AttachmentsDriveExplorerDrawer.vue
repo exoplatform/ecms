@@ -43,7 +43,7 @@
                 data-toggle="tooltip"
                 rel="tooltip"
                 data-placement="bottom">
-                {{ currentDrive.mainTitle }}
+                {{ currentDrive.title }}
               </a>
             </div>
             <div v-if="foldersHistory.length > 2" class="longFolderHistory d-flex align-center">
