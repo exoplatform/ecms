@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Utils {
 
-  private static final String DLP_QUARANTINE_FOLDER = "Quarantine";
+  public static final String QUARANTINE_FOLDER = "Quarantine";
 
   public static void sortAttachmentsByDate(List<AttachmentContextEntity> attachments) {
     attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(),
@@ -88,6 +88,6 @@ public class Utils {
 
   public static boolean isQuarantinedItem(Session systemSession, String attachmentId) throws RepositoryException {
     Node attachmentNode = systemSession.getNodeByUUID(attachmentId);
-    return attachmentNode.getPath().startsWith("/" + DLP_QUARANTINE_FOLDER + "/");
+    return attachmentNode.getPath().startsWith("/" + QUARANTINE_FOLDER + "/");
   }
 }

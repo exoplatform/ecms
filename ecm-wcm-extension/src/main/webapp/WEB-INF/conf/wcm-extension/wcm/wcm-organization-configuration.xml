@@ -42,13 +42,7 @@
         <description>administrator</description>
         <value>/platform/administrators</value>
       </value-param>
-	  
-      <value-param>
-        <name>portal.dlp.groups</name>
-        <description>dlp</description>
-        <value>/platform/dlp</value>
-      </value-param>
-      
+
       <value-param>
         <name>portal.administrator.mstype</name>
         <description>administrator</description>
