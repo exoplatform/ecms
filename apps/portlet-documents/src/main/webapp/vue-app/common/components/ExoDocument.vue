@@ -64,7 +64,7 @@ export default {
         icon.color = '#385989';
       } else if (this.document.fileType.includes('image')) {
         icon.icon = 'fas fa-file-image';
-        icon.color = '#999999';
+        icon.color = '#767676';
       } else if (this.document.fileType.includes('video') || this.document.fileType.includes('octet-stream') || this.document.fileType.includes('ogg')) {
         icon.icon = 'fas fa-file-video';
         icon.color =  '#79577A';

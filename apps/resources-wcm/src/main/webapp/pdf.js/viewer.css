@@ -1018,7 +1018,7 @@ a:focus > .thumbnail > .thumbnailSelectionRing,
 }
 
 .thumbnail.selected > .thumbnailSelectionRing {
-	border: 3px solid #999999;
+	border: 3px solid #767676;
 	margin: -3px;
 }
 

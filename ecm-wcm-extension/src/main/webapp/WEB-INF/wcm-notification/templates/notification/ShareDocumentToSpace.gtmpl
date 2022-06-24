@@ -174,7 +174,7 @@ String permission = "<strong><a>" + perm + "</a></strong>";
 </p>
 
 
-<p style="margin: 10px 0; color: #999999">
+<p style="margin: 10px 0; color: #767676">
     <%=_ctx.appRes("Notification.label.footer", FOOTER_LINK)%>
 </p>
 </td>

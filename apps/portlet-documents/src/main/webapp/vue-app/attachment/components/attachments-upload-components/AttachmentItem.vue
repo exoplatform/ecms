@@ -238,7 +238,7 @@ export default {
       } else if (type.includes('image')) {
         return {
           class: 'fas fa-file-image',
-          color: '#999999',
+          color: '#767676',
         };
       } else if (type.includes('video') || type.includes('octet-stream') || type.includes('ogg')) {
         return {
