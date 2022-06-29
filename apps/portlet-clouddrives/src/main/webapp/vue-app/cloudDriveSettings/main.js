@@ -19,7 +19,7 @@ import './initComponents.js';
 // getting language of the PLF
 const lang = eXo.env.portal.language || 'en';
 // init Vue app when locale resources are ready
-const url = `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/locale.portlet.AgendaConnectors-${lang}.json`;
+const url = `${eXo.env.portal.context}/${eXo.env.portal.rest}/i18n/bundle/locale.clouddrive.CloudDrive-${lang}.json`;
 
 const vuetify = new Vuetify(eXo.env.portal.vuetifyPreset);
 
@@ -37,7 +37,7 @@ export function init() {
 }
 // get overridden components if exists
 if (extensionRegistry) {
-  const components = extensionRegistry.loadComponents('AgendaConnectors');
+  const components = extensionRegistry.loadComponents('CloudDriveSettings');
   if (components && components.length > 0) {
     components.forEach(cmp => {
       Vue.component(cmp.componentName, cmp.componentOptions);

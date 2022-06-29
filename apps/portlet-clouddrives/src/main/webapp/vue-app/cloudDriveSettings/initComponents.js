@@ -15,11 +15,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 import CloudDriveSettings from './components/CloudDriveSettings.vue';
-import CloudDriveSettingsDrawer from './components/CloudDriveSettingsDrawer.vue';
 
 const components = {
   'cloud-drive-settings': CloudDriveSettings,
-  'cloud-drive-settings-drawer': CloudDriveSettingsDrawer,
 };
 
 for (const key in components) {

@@ -16,53 +16,32 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     <v-card
       class="border-radius ma-4"
       flat>
-      <v-list two-line>
+      <v-list>
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="title text-color">
-              test cloud drive
+              {{ $t("cloudDriveSettings.label.title") }}
             </v-list-item-title>
-            <v-list-item-subtitle class="my-3 text-sub-title font-italic">
-              {{ $t('mailIntegration.settings.connectMail.description') }}
+            <v-list-item-subtitle class="my-3 text-color">
+              {{ $t("cloudDriveSettings.label.subtitle") }}
             </v-list-item-subtitle>
-            <v-list-item-subtitle :title="displayAccountTooltip">
-              <span class="my-auto text-capitalize text-truncate"> {{ emailName }} </span>
-              <span class="my-auto text-truncate"> {{ account }} </span>
+            <v-list-item-subtitle class="my-3 text-sub-title font-italic">
+              {{ $t("cloudDriveSettings.label.description") }}
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
             <v-btn
-              icon
-              @click="openDrawer">
+              icon>
               <i class="uiIconEdit uiIconLightBlue pb-2"></i>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
       </v-list>
     </v-card>
-    <cloud-drive-settings-drawer ref="CloudDriveSettingsDrawer" />
   </v-app>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    mailIntegrationEnabled: false,
-    displayed: true,
-    editMode: false,
-    emailName: '',
-    account: '',
-    mailIntegrationSetting: [],
-  }),
-  computed: {
-    displayAccountTooltip() {
-      return `${this.emailName} ${this.account}`;
-    }
-  },
-  methods: {
-    openDrawer() {
-      this.$refs.CloudDriveSettingsDrawer.openDrawer();
-    }
-  },
 };
 </script>
