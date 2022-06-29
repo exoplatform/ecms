@@ -57,6 +57,30 @@
     </module>
   </portlet>
 
+  <portlet>
+    <name>CloudDriveSettingsPortlet</name>
+    <module>
+      <script>
+        <path>/js/cloudDriveSettings.bundle.js</path>
+      </script>
+      <depends>
+        <module>extensionRegistry</module>
+      </depends>
+      <depends>
+        <module>eXoVueI18n</module>
+      </depends>
+      <depends>
+        <module>vue</module>
+      </depends>
+      <depends>
+        <module>vuetify</module>
+      </depends>
+      <depends>
+        <module>commonVueComponents</module>
+      </depends>
+    </module>
+  </portlet>
+
   <!-- Javascript for Cloud Drive UI support in WCM -->
   <module>
     <name>cloudDriveUtils</name>
