@@ -102,4 +102,11 @@
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
+  <cloudDriveSettings>
+    <label>
+      <title>Documents</title>
+      <subtitle>Connect your personal drives</subtitle>
+      <description>Access your personal drives from the platform</description>
+    </label>
+  </cloudDriveSettings>
 </bundle>

@@ -32,7 +32,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
           <v-list-item-action>
             <v-btn
               icon>
-              <i class="uiIconEdit uiIconLightBlue pb-2"></i>
+              <em class="uiIconEdit uiIconLightBlue pb-2"></em>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
