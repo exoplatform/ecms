@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
       body-classes="hide-scroll decrease-z-index-more"
       right>
       <template slot="title">
-        Connect your personal drives
+        {{ $t("cloudDriveSettings.drawer.title") }}
       </template>
       <template slot="content">
         <v-list
@@ -27,40 +27,43 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
           <v-list-item>
             <v-list-item-avatar class="rounded-0">
               <v-avatar tile size="40">
-                <img src="https://e7.pngegg.com/pngimages/840/338/png-clipart-google-logo-gooole-text-logo-thumbnail.png">
+                <img src="/clouddrives/skin/images/Google.png" :alt="$t('cloudDriveSettings.drawer.google')">
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
               <template>
                 <v-list-item-title class="title">
-                  Google
+                  {{ $t("cloudDriveSettings.drawer.google") }}
                 </v-list-item-title>
               </template>
             </v-list-item-content>
             <v-list-item-action>
               <v-btn
                 class="btn">
-                Connect
+                {{ $t("cloudDriveSettings.drawer.button.connect") }}
               </v-btn>
             </v-list-item-action>
           </v-list-item>
           <v-list-item>
             <v-list-item-avatar class="rounded-0">
-              <v-avatar tile size="40">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Microsoft_Office_OneDrive_%282019%E2%80%93present%29.svg/512px-Microsoft_Office_OneDrive_%282019%E2%80%93present%29.svg.png">
+              <v-avatar
+                tile
+                size="40"
+                height="auto">
+                <img src="/clouddrives/skin/images/OneDrive.png" :alt="$t('cloudDriveSettings.drawer.onedrive')">
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
               <template>
                 <v-list-item-title class="title">
-                  One Drive
+                  {{ $t("cloudDriveSettings.drawer.onedrive") }}
                 </v-list-item-title>
               </template>
             </v-list-item-content>
             <v-list-item-action>
               <v-btn
                 class="btn">
-                Connect
+                {{ $t("cloudDriveSettings.drawer.button.connect") }}
               </v-btn>
             </v-list-item-action>
           </v-list-item>
