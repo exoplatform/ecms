@@ -34,17 +34,24 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
           </v-list-item-content>
           <v-list-item-action>
             <v-btn
-              icon>
+              icon
+              @click="openDriveConnectors">
               <em class="uiIconEdit uiIconLightBlue pb-2"></em>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
       </v-list>
     </v-card>
+    <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" />
   </v-app>
 </template>
 
 <script>
 export default {
+  methods: {
+    openDriveConnectors() {
+      this.$refs.cloudDriveSettingsDrawer.open();
+    }
+  }
 };
 </script>
