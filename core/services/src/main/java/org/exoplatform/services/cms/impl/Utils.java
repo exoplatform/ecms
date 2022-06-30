@@ -701,15 +701,22 @@ public class Utils {
 
   public static String cleanName(String oldName) {
     if (StringUtils.isEmpty(oldName)) return oldName;
-    String specialChar = "&#*@.'\"\t\r\n$\\><:;[]/%|";
+    String specialChar = "&#*@'\"\t\r\n$\\><:;[]/%|";
     StringBuilder ret = new StringBuilder();
     for (int i = 0; i < oldName.length(); i++) {
       char currentChar = oldName.charAt(i);
       if (specialChar.indexOf(currentChar) > -1) {
-        ret.append('-');
+        ret.append('_');
       } else {
         ret.append(currentChar);
       }
+    }
+    if(ret.indexOf(".") > -1 && ret.indexOf(".") != ret.lastIndexOf(".") ){
+      String extention = ret.substring(ret.lastIndexOf("."));
+      String sufix = ret.substring(0,ret.lastIndexOf("."))
+                        .replaceAll("\\.","_");
+      ret = new StringBuilder(sufix);
+      ret.append(extention);
     }
     return ret.toString();
   }
