@@ -108,5 +108,13 @@
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Wokrplace</description>
     </label>
+    <drawer>
+      <title>Connect your personal drives</title>
+      <google>Google</google>
+      <onedrive>One Drive</onedrive>
+      <button>
+        <connect>Connect</connect>
+      </button>
+    </drawer>
   </cloudDriveSettings>
 </bundle>
