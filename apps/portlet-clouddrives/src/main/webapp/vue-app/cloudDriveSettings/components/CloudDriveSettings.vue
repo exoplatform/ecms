@@ -28,23 +28,30 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <v-list-item-subtitle class="my-3 text-color">
               {{ $t("cloudDriveSettings.label.subtitle") }}
             </v-list-item-subtitle>
-            <v-list-item-subtitle class="my-3 text-sub-title font-italic">
+            <v-list-item-subtitle class="my-3 text-sub-title font-italic" @click="openDriveConnectorsDrawer">
               {{ $t("cloudDriveSettings.label.description") }}
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
             <v-btn
-              icon>
+              icon
+              @click="openDriveConnectorsDrawer">
               <em class="uiIconEdit uiIconLightBlue pb-2"></em>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
       </v-list>
     </v-card>
+    <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" />
   </v-app>
 </template>
 
 <script>
 export default {
+  methods: {
+    openDriveConnectorsDrawer() {
+      this.$refs.cloudDriveSettingsDrawer.open();
+    }
+  }
 };
 </script>
