@@ -52,4 +52,25 @@
     </portlet-info>
   </portlet>
 
+  <portlet>
+    <portlet-name>CloudDriveSettingsPortlet</portlet-name>
+    <display-name xml:lang="EN">Cloud storage portlet</display-name>
+    <portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
+    <init-param>
+      <name>portlet-view-dispatched-file-path</name>
+      <value>/html/cloudDriveSettings.html</value>
+    </init-param>
+    <expiration-cache>-1</expiration-cache>
+    <cache-scope>PUBLIC</cache-scope>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <resource-bundle>locale.clouddrive.CloudDrive</resource-bundle>
+    <portlet-info>
+      <title>Cloud Drive Settings Application</title>
+      <short-title>Cloud Drive Settings</short-title>
+      <keywords>CloudDriveSettings</keywords>
+    </portlet-info>
+  </portlet>
+
 </portlet-app>
