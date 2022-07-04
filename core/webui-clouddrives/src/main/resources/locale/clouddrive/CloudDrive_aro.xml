@@ -102,4 +102,11 @@
       <ConnectionToCloud>الاتصال بالأقراص السحابية</ConnectionToCloud>
     </label>
   </cloudStorage>
+  <cloudDriveSettings>
+    <label>
+      <title>وثائق</title>
+      <subtitle>Connect your personal drives</subtitle>
+      <description>Access your personal drives from your Digital Wokrplace</description>
+    </label>
+  </cloudDriveSettings>
 </bundle>

@@ -102,4 +102,11 @@
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
+  <cloudDriveSettings>
+    <label>
+      <title>文档</title>
+      <subtitle>Connect your personal drives</subtitle>
+      <description>Access your personal drives from your Digital Wokrplace</description>
+    </label>
+  </cloudDriveSettings>
 </bundle>

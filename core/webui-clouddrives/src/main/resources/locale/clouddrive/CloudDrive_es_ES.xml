@@ -102,4 +102,11 @@
       <ConnectionToCloud>Conexión con unidades en la nube</ConnectionToCloud>
     </label>
   </cloudStorage>
+  <cloudDriveSettings>
+    <label>
+      <title>Documentos</title>
+      <subtitle>Connect your personal drives</subtitle>
+      <description>Access your personal drives from your Digital Wokrplace</description>
+    </label>
+  </cloudDriveSettings>
 </bundle>

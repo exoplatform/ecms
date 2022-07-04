@@ -102,4 +102,11 @@
       <ConnectionToCloud>crwdns6966728:0crwdne6966728:0</ConnectionToCloud>
     </label>
   </cloudStorage>
+  <cloudDriveSettings>
+    <label>
+      <title>crwdns7046726:0crwdne7046726:0</title>
+      <subtitle>crwdns7046728:0crwdne7046728:0</subtitle>
+      <description>crwdns7046730:0crwdne7046730:0</description>
+    </label>
+  </cloudDriveSettings>
 </bundle>
