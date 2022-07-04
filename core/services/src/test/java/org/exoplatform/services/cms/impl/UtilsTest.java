@@ -6,27 +6,27 @@ public class UtilsTest extends TestCase {
 
   public void testCleanName() {
     // Given
-    String title1 = "test | test";
-    String title2 = "test % test";
-    String title3 = "test & test";
-    String title4 = "test @ test";
-    String title5 = "test $ test";
-    String title6 = "test / test";
-    String title7 = "test [ test";
-    String title8 = "test ] test";
-    String title9 = "test : test";
-    String title10 = "test ; test";
-    String title11 = "test \\ test";
-    String title12 = "test \t test";
-    String title13 = "test \" test";
-    String title14 = "test \n test";
-    String title15 = "test \r test";
-    String title16 = "test > test";
-    String title17 = "test < test";
-    String title18 = "test # test";
-    String title19 = "test * test";
-    String title20 = "test . test";
-    String title21 = "test.test.test.pdf";
+    String title1 = "test|test";
+    String title2 = "test%test";
+    String title3 = "test&test";
+    String title4 = "test@test";
+    String title5 = "test$test";
+    String title6 = "test/test";
+    String title7 = "test[test";
+    String title8 = "test]test";
+    String title9 = "test:test";
+    String title10 = "test;test";
+    String title11 = "test\\test";
+    String title12 = "test\ttest";
+    String title13 = "test\"test";
+    String title14 = "test\ntest";
+    String title15 = "test\rtest";
+    String title16 = "test>test";
+    String title17 = "test<test";
+    String title18 = "test#test";
+    String title19 = "test*test";
+    String title20 = "test.test";
+    String title21 = "test.test.pdf";
 
     // When
     String titleClean1 = Utils.cleanName(title1);
@@ -52,26 +52,26 @@ public class UtilsTest extends TestCase {
     String titleClean21 = Utils.cleanName(title21);
 
     // Then
-    assertEquals(titleClean1,"test _ test");
-    assertEquals(titleClean2,"test _ test");
-    assertEquals(titleClean3,"test _ test");
-    assertEquals(titleClean4,"test _ test");
-    assertEquals(titleClean5,"test _ test");
-    assertEquals(titleClean6,"test _ test");
-    assertEquals(titleClean7,"test _ test");
-    assertEquals(titleClean8,"test _ test");
-    assertEquals(titleClean9,"test _ test");
-    assertEquals(titleClean10,"test _ test");
-    assertEquals(titleClean11,"test _ test");
-    assertEquals(titleClean12,"test _ test");
-    assertEquals(titleClean13,"test _ test");
-    assertEquals(titleClean14,"test _ test");
-    assertEquals(titleClean15,"test _ test");
-    assertEquals(titleClean16,"test _ test");
-    assertEquals(titleClean17,"test _ test");
-    assertEquals(titleClean18,"test _ test");
-    assertEquals(titleClean19,"test _ test");
-    assertEquals(titleClean20,"test . test");
-    assertEquals(titleClean21,"test_test_test.pdf");
+    assertEquals(titleClean1,"test_test");
+    assertEquals(titleClean2,"test_test");
+    assertEquals(titleClean3,"test_test");
+    assertEquals(titleClean4,"test_test");
+    assertEquals(titleClean5,"test_test");
+    assertEquals(titleClean6,"test_test");
+    assertEquals(titleClean7,"test_test");
+    assertEquals(titleClean8,"test_test");
+    assertEquals(titleClean9,"test_test");
+    assertEquals(titleClean10,"test_test");
+    assertEquals(titleClean11,"test_test");
+    assertEquals(titleClean12,"test_test");
+    assertEquals(titleClean13,"test_test");
+    assertEquals(titleClean14,"test_test");
+    assertEquals(titleClean15,"test_test");
+    assertEquals(titleClean16,"test_test");
+    assertEquals(titleClean17,"test_test");
+    assertEquals(titleClean18,"test_test");
+    assertEquals(titleClean19,"test_test");
+    assertEquals(titleClean20,"test.test");
+    assertEquals(titleClean21,"test_test.pdf");
   }
 }

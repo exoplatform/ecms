@@ -701,7 +701,12 @@ public class Utils {
 
   public static String cleanName(String oldName) {
     if (StringUtils.isEmpty(oldName)) return oldName;
-    String specialChar = "&#*@'\"\t\r\n$\\><:;[]/%|";
+    String extention ="" ;
+    if(oldName.lastIndexOf(".") > -1){
+      extention = oldName.substring(oldName.lastIndexOf("."));
+      oldName = oldName.substring(0,oldName.lastIndexOf(".")) ;
+    }
+    String specialChar = "&#*@.'\"\t\r\n$\\><:;[]/%|";
     StringBuilder ret = new StringBuilder();
     for (int i = 0; i < oldName.length(); i++) {
       char currentChar = oldName.charAt(i);
@@ -711,13 +716,7 @@ public class Utils {
         ret.append(currentChar);
       }
     }
-    if(ret.indexOf(".") > -1 && ret.indexOf(".") != ret.lastIndexOf(".") ){
-      String extention = ret.substring(ret.lastIndexOf("."));
-      String sufix = ret.substring(0,ret.lastIndexOf("."))
-                        .replaceAll("\\.","_");
-      ret = new StringBuilder(sufix);
-      ret.append(extention);
-    }
+    ret.append(extention);
     return ret.toString();
   }
 
