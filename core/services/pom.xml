@@ -11,7 +11,7 @@
   <description>eXo CMS Service</description>
   <properties>
     <rest.api.doc.title>Ecms services Rest Api</rest.api.doc.title>
-    <rest.api.doc.version>1.0.x</rest.api.doc.version>
+    <rest.api.doc.version>1.0</rest.api.doc.version>
 
     <exo.test.coverage.ratio>0.34</exo.test.coverage.ratio>
   </properties>
