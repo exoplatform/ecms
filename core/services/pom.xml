@@ -10,6 +10,9 @@
   <name>eXo PLF:: CMS Service</name>
   <description>eXo CMS Service</description>
   <properties>
+    <rest.api.doc.title>Ecms services Rest Api</rest.api.doc.title>
+    <rest.api.doc.version>1.0.x</rest.api.doc.version>
+
     <exo.test.coverage.ratio>0.34</exo.test.coverage.ratio>
   </properties>
   <dependencies>
@@ -317,6 +320,27 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>io.openapitools.swagger</groupId>
+        <artifactId>swagger-maven-plugin</artifactId>
+        <configuration>
+          <useResourcePackagesChildren>true</useResourcePackagesChildren>
+          <resourcePackages>
+            <locations>org.exoplatform.services</locations>
+          </resourcePackages>
+          <swaggerConfig>
+            <info>
+              <title>${rest.api.doc.title}</title>
+              <version>${rest.api.doc.version}</version>
+              <description>All used ecms rest endpoints</description>
+              <license>
+                <url>https://www.gnu.org/licenses/agpl-3.0.en.html</url>
+                <name>AGPL</name>
+              </license>
+            </info>
+          </swaggerConfig>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
