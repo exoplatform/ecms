@@ -78,6 +78,18 @@
       <depends>
         <module>commonVueComponents</module>
       </depends>
+      <depends>
+        <module>cloudDriveUtils</module>
+      </depends>
+      <depends>
+        <module>cloudDrive_gdrive</module>
+      </depends>
+      <depends>
+        <module>cloudDrive_onedrive</module>
+      </depends>
+      <depends>
+        <module>cloudDrives</module>
+      </depends>
     </module>
   </portlet>
 

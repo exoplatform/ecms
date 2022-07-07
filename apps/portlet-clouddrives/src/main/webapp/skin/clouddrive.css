@@ -391,4 +391,14 @@
 #connectCloudApp .cloudDriveListItem__title {
 	font-size: 14px;
 }
+
+#cloudDriveSettingsDrawer .noEnabledConnectors .uiIconCloudDriveConnector {
+	font-size: 52px;
+	height: 52px;
+	color: #4d5466 !important;
+}
+
+#cloudDriveSettingsDrawer .noEnabledConnectors .uiIconCloudDriveConnector::before {
+	content: '';
+}
   

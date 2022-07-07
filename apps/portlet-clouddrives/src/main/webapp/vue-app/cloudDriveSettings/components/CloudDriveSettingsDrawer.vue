@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
   <div>
     <exo-drawer
       ref="cloudDriveSettingsDrawer"
+      id="cloudDriveSettingsDrawer"
       class="cloudDriveSettingsDrawer"
       body-classes="hide-scroll decrease-z-index-more"
       right>
@@ -25,18 +26,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         {{ $t("cloudDriveSettings.drawer.title") }}
       </template>
       <template slot="content">
-        <v-list
+        <v-list v-if="connectors && connectors.length !== 0"
           two-line>
-          <v-list-item>
+
+          <v-list-item
+            v-for="item in connectors"
+            :key="item.id">
             <v-list-item-avatar class="rounded-0">
-              <v-avatar tile size="40">
-                <img src="/clouddrives/skin/images/Google.png" :alt="$t('cloudDriveSettings.drawer.google')">
+              <v-avatar tile size="40" height="auto">
+                <img :src="`/clouddrives/skin/images/${item.name}.png`" :alt="item.name">
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
               <template>
                 <v-list-item-title class="title">
-                  {{ $t("cloudDriveSettings.drawer.google") }}
+                  {{ item.name }}
                 </v-list-item-title>
               </template>
             </v-list-item-content>
@@ -47,7 +51,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
               </v-btn>
             </v-list-item-action>
           </v-list-item>
-          <v-list-item>
+
+<!--          <v-list-item>
             <v-list-item-avatar class="rounded-0">
               <v-avatar
                 tile
@@ -69,8 +74,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                 {{ $t("cloudDriveSettings.drawer.button.connect") }}
               </v-btn>
             </v-list-item-action>
-          </v-list-item>
+          </v-list-item>-->
         </v-list>
+        <div
+          v-else
+          class="noEnabledConnectors d-flex flex-column align-center">
+          <span class="uiIconCloudDriveConnector material-icons ma-5">cloud_off</span>
+          <p>{{ $t('cloudDriveSettings.drawer.NoConnector') }}</p>
+        </div>
       </template>
     </exo-drawer>
   </div>
@@ -78,12 +89,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 export default {
+  props: {
+    connectors: {
+      type: Array,
+      default: () => [],
+    },
+  },
   methods: {
     open() {
-      this.connectionInProgress = false;
-      this.$root.$emit('agenda-connectors-init');
       if (this.$refs.cloudDriveSettingsDrawer) {
         this.$refs.cloudDriveSettingsDrawer.open();
+        console.log(this.connectors);
       }
     },
     close() {

@@ -42,12 +42,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         </v-list-item>
       </v-list>
     </v-card>
-    <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" />
+    <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" :connectors="enabledConnectors" />
+    <cloud-drive-connector @connectors-loaded="connectors = $event" />
   </v-app>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    connectors: {},
+  }),
+  computed: {
+    enabledConnectors() {
+      return Object.keys(this.connectors).reverse().map(key => ({...this.connectors[key]})) || [];
+    },
+  },
   methods: {
     openDriveConnectorsDrawer() {
       this.$refs.cloudDriveSettingsDrawer.open();
