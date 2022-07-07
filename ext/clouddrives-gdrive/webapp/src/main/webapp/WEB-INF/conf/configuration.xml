@@ -41,7 +41,7 @@
   </external-component-plugins>
 
   <!-- Google Drive connector plugin -->
-  <external-component-plugins>
+  <!--<external-component-plugins>
     <target-component>org.exoplatform.services.cms.clouddrives.CloudDriveService</target-component>
     <component-plugin>
       <name>add.clouddriveprovider</name>
@@ -60,7 +60,7 @@
         </properties-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
+  </external-component-plugins>-->
 
   <!--
   Dedicated ECMS menu action for Google Drive.
