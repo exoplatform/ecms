@@ -54,7 +54,7 @@ export default {
   }),
   computed: {
     enabledConnectors() {
-      return Object.keys(this.connectors).reverse().map(key => ({...this.connectors[key]})) || [];
+      return this.connectors || {};
     },
   },
   methods: {

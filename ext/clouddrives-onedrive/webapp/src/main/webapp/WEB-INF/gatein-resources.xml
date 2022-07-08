@@ -23,7 +23,7 @@
   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
   <!-- Javascript for Cloud Drive support of One Drive -->
-  <module>
+  <!--<module>
     <name>cloudDriveSocketIO</name>
     <load-group>cloudDriveOnedriveGRP</load-group>
     <script>
@@ -57,5 +57,5 @@
     <depends>
       <module>cloudDriveSocketIO</module>
     </depends>
-  </module>
+  </module>-->
 </gatein-resources>

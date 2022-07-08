@@ -48,12 +48,12 @@
       <depends>
         <module>cloudDriveUtils</module>
       </depends>
-      <depends>
+<!--      <depends>
         <module>cloudDrive_gdrive</module>
       </depends>
       <depends>
         <module>cloudDrive_onedrive</module>
-      </depends>
+      </depends>-->
     </module>
   </portlet>
 
@@ -81,12 +81,12 @@
       <depends>
         <module>cloudDriveUtils</module>
       </depends>
-      <depends>
+<!--      <depends>
         <module>cloudDrive_gdrive</module>
       </depends>
       <depends>
         <module>cloudDrive_onedrive</module>
-      </depends>
+      </depends>-->
       <depends>
         <module>cloudDrives</module>
       </depends>

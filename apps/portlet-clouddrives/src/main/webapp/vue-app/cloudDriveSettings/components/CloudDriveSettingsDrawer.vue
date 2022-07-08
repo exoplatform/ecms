@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         {{ $t("cloudDriveSettings.drawer.title") }}
       </template>
       <template slot="content">
-        <v-list v-if="connectors && connectors.length !== 0"
+        <v-list v-if="connectors && Object.keys(this.connectors).length !== 0"
           two-line>
 
           <v-list-item
@@ -52,29 +52,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             </v-list-item-action>
           </v-list-item>
 
-<!--          <v-list-item>
-            <v-list-item-avatar class="rounded-0">
-              <v-avatar
-                tile
-                size="40"
-                height="auto">
-                <img src="/clouddrives/skin/images/OneDrive.png" :alt="$t('cloudDriveSettings.drawer.onedrive')">
-              </v-avatar>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <template>
-                <v-list-item-title class="title">
-                  {{ $t("cloudDriveSettings.drawer.onedrive") }}
-                </v-list-item-title>
-              </template>
-            </v-list-item-content>
-            <v-list-item-action>
-              <v-btn
-                class="btn">
-                {{ $t("cloudDriveSettings.drawer.button.connect") }}
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>-->
         </v-list>
         <div
           v-else
@@ -91,8 +68,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 export default {
   props: {
     connectors: {
-      type: Array,
-      default: () => [],
+      type: Object,
+      default: null,
     },
   },
   methods: {

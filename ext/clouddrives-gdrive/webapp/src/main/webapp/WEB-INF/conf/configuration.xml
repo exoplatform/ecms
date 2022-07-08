@@ -25,7 +25,7 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <!-- Google Drive namespace for use within JCR -->
-  <external-component-plugins>
+  <!--<external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
     <component-plugin>
       <name>add.namespaces</name>
@@ -38,7 +38,7 @@
         </properties-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
+  </external-component-plugins>-->
 
   <!-- Google Drive connector plugin -->
   <!--<external-component-plugins>
@@ -103,7 +103,7 @@
   <!--
   ResourceBundleService with texts for Google Drive UI support.
   -->
-  <external-component-plugins>
+  <!--<external-component-plugins>
     <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
     <component-plugin>
       <name>ResourceBundle Plugin</name>
@@ -122,5 +122,5 @@
         </values-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
+  </external-component-plugins>-->
 </configuration>
