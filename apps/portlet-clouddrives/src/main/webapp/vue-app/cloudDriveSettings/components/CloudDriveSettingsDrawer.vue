@@ -26,14 +26,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         {{ $t("cloudDriveSettings.drawer.title") }}
       </template>
       <template slot="content">
-        <v-list v-if="connectors && Object.keys(this.connectors).length !== 0"
+        <v-list
+          v-if="connectors && Object.keys(this.connectors).length !== 0"
           two-line>
-
           <v-list-item
             v-for="item in connectors"
             :key="item.id">
             <v-list-item-avatar class="rounded-0">
-              <v-avatar tile size="40" height="auto">
+              <v-avatar
+                tile
+                size="40"
+                height="auto">
                 <img :src="`/clouddrives/skin/images/${item.name}.png`" :alt="item.name">
               </v-avatar>
             </v-list-item-avatar>
@@ -51,7 +54,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
               </v-btn>
             </v-list-item-action>
           </v-list-item>
-
         </v-list>
         <div
           v-else
@@ -76,7 +78,6 @@ export default {
     open() {
       if (this.$refs.cloudDriveSettingsDrawer) {
         this.$refs.cloudDriveSettingsDrawer.open();
-        console.log(this.connectors);
       }
     },
     close() {

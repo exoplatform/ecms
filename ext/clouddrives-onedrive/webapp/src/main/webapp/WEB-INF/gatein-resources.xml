@@ -22,40 +22,4 @@
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
-  <!-- Javascript for Cloud Drive support of One Drive -->
-  <!--<module>
-    <name>cloudDriveSocketIO</name>
-    <load-group>cloudDriveOnedriveGRP</load-group>
-    <script>
-      <minify>false</minify>
-      <adapter>
-        (function() {
-        <include>/js/socket.io.js</include>
-        return {
-          io: io
-        };
-        })();
-      </adapter>
-    </script>
-  </module>
-  
-  <module>
-    <name>cloudDrive_onedrive</name>
-    <load-group>cloudDriveOnedriveGRP</load-group>
-    <script>
-      <path>/js/clouddrive-onedrive.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-    </depends>
-    <depends>
-      <module>cloudDriveDocuments</module>
-    </depends>
-    <depends>
-      <module>cloudDriveUtils</module>
-    </depends>
-    <depends>
-      <module>cloudDriveSocketIO</module>
-    </depends>
-  </module>-->
 </gatein-resources>

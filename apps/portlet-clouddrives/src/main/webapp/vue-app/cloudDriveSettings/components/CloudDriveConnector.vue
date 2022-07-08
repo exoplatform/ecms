@@ -1,6 +1,6 @@
 <script>
-import { getUserDrive } from '../../connectCloudDrive/js/cloudDriveService';
-import { CloudDrivePlugin } from '../../connectCloudDrive/js/cloudDrivePlugin';
+import { getUserDrive } from '../js/cloudDriveService';
+import { CloudDrivePlugin } from '../js/cloudDrivePlugin';
 
 export default {
   data: function() {
@@ -8,24 +8,9 @@ export default {
       providers: {},
       userDrive: {}, // user Personal Documents drive
       connectingProvider: '', // provider that is in connecting process
-      showCloudDrawer: false, // show or hide cloud drive drawer
       drivesInProgress: {}, // contain all drives that are in connecting process, drive name is a key and progress percent is a value
       alert: { message: '', type: '' }, // alert for error or info messages displayed at the top
-      showAlertMessage: false,
-      MESSAGE_TIMEOUT: 5000 // alert message hides after 5 sec
     };
-  },
-  watch: {
-    // when showAlertMessage changes to true, wait some time, than hide
-    showAlertMessage: function(newVal) {
-      if (newVal) {
-        setTimeout(() => this.showAlertMessage = false, this.MESSAGE_TIMEOUT);
-      }
-    },
-    // when drive connecting process started hide cloud drive drawer
-    drivesInProgress: function() {
-      if (this.showCloudDrawer) { this.showCloudDrawer = false; }
-    }
   },
   created() {
     for (const extension of CloudDrivePlugin) {
@@ -48,7 +33,6 @@ export default {
 
       }).catch(err => {
         this.alert = { message: err.message, type: 'error' };
-        this.showAlertMessage = true;
       });
   },
   methods: {
@@ -77,18 +61,14 @@ export default {
             // if another drive is in connecting progress progress line will appear again, but it's hiding can be visible to user
             this.$emit('updateProgress', { progress: null });
           }, latency);
-          this.showCloudDrawer = false; // hide cloud drive drawer after drive connected
           // note: if drawer was opened before and some drive finished its connecting this will close drawer
         },
         (error) => {
           if (error) {
             this.alert = { message: error, type: 'error' };
-            this.showAlertMessage = true;
-            this.toggleCloudDrawer();
           } else {
             // if error is undefined/null action was cancelled
             this.alert = { message: 'Canceled', type: 'info' };
-            this.showAlertMessage = true;
           }
           this.$emit('updateProgress', { progress: null }); // hide progress line at the top of composer
         },
@@ -100,12 +80,8 @@ export default {
             this.openDriveFolder(progressData.drive.path, progressData.drive.title); // display drive in composer
           }
           this.$emit('updateProgress', { progress: progressData.progress }); // update progress at the top of composer
-          this.showCloudDrawer = false; // hide cloud drive drawer when progress begins
         }
       );
-    },
-    toggleCloudDrawer: function() {
-      this.showCloudDrawer = !this.showCloudDrawer;
     },
     openDriveFolder: function(path, title) {
       // createdDrive should consist of the same properties as drives in exoAttachments as it will be added to existing drives array

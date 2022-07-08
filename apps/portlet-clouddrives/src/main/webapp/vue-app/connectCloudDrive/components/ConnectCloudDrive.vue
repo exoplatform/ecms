@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import { getUserDrive } from '../js/cloudDriveService';
-import { CloudDrivePlugin } from '../js/cloudDrivePlugin';
+import { getUserDrive } from '../../cloudDriveSettings/js/cloudDriveService';
+import { CloudDrivePlugin } from '../../cloudDriveSettings/js/cloudDrivePlugin';
 
 export default {
   model: {
