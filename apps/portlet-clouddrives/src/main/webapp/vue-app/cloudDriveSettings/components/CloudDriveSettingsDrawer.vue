@@ -49,7 +49,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             </v-list-item-content>
             <v-list-item-action>
               <v-btn
-                class="btn">
+                class="btn"
+                @click="connect(item.id)">
                 {{ $t("cloudDriveSettings.drawer.button.connect") }}
               </v-btn>
             </v-list-item-action>
@@ -85,6 +86,9 @@ export default {
         this.$refs.cloudDriveSettingsDrawer.close();
       }
     },
+    connect(providerId) {
+      this.$root.$emit('cloud-drive-connect', providerId);
+    }
   },
 };
 </script>

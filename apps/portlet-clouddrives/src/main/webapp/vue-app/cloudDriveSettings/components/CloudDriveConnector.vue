@@ -13,6 +13,7 @@ export default {
     };
   },
   created() {
+    this.$root.$on('cloud-drive-connect', this.connectToCloudDrive);
     for (const extension of CloudDrivePlugin) {
       // connect extension to AttachmentsComposer, "attachments-composer-action" is extension type
       // composer and extension type should be the same as in extension.js inside ecm-wcm-extension
