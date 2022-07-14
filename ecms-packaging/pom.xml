@@ -128,22 +128,8 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-ext-gdrive-webapp</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-ext-onedrive-services</artifactId>
       <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-ext-onedrive-webapp</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
       <scope>provided</scope>
     </dependency>
     <dependency>

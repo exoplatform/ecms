@@ -113,7 +113,7 @@
       <button>
         <connect>Connect</connect>
       </button>
-      <NoConnector>No personal drive connector available</NoConnector>
+      <noConnector>No personal drive connector available</noConnector>
     </drawer>
   </cloudDriveSettings>
 </bundle>

@@ -10,10 +10,12 @@ export default {
       connectingProvider: '', // provider that is in connecting process
       drivesInProgress: {}, // contain all drives that are in connecting process, drive name is a key and progress percent is a value
       alert: { message: '', type: '' }, // alert for error or info messages displayed at the top
+      connectorsImages: []
     };
   },
   created() {
     this.$root.$on('cloud-drive-connect', this.connectToCloudDrive);
+    this.connectorsImages = extensionRegistry.loadExtensions('cloud-drive-connectors', 'images') || [];
     for (const extension of CloudDrivePlugin) {
       // connect extension to AttachmentsComposer, "attachments-composer-action" is extension type
       // composer and extension type should be the same as in extension.js inside ecm-wcm-extension
@@ -30,6 +32,12 @@ export default {
         };
         // get providers from cloudDrives module, note that providers should already exist in module at this stage
         this.providers = cloudDrives.getProviders();
+        // get image paths from cloudDrive connectors addon
+        if (this.connectorsImages && this.connectorsImages.length !== 0) {
+          Object.values(this.providers).forEach((provider) => {
+            provider.image = Object.values(this.connectorsImages[0]).find(connector => connector.id === provider.id).path;
+          });
+        }
         this.$emit('connectors-loaded', this.providers);
 
       }).catch(err => {

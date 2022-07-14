@@ -37,7 +37,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                 tile
                 size="40"
                 height="auto">
-                <img :src="`/clouddrives/skin/images/${item.name}.png`" :alt="item.name">
+                <img :src="`${item.image}`" :alt="item.name">
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
@@ -60,7 +60,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
           v-else
           class="noEnabledConnectors d-flex flex-column align-center">
           <span class="uiIconCloudDriveConnector material-icons ma-5">cloud_off</span>
-          <p>{{ $t('cloudDriveSettings.drawer.NoConnector') }}</p>
+          <p>{{ $t('cloudDriveSettings.drawer.noConnector') }}</p>
         </div>
       </template>
     </exo-drawer>
