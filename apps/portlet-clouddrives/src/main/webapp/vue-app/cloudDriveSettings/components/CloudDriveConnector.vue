@@ -56,6 +56,7 @@ export default {
       const fullProgress = 100; // means 100%
       cloudDrives.connect(providerId).then(
         data => {
+          console.log({data});
           this.openDriveFolder(data.drive.path, data.drive.title); // display drive in composer
           this.drivesInProgress = Object.assign({}, this.drivesInProgress, {[data.drive.title]: fullProgress });
           this.$emit('updateDrivesInProgress', { drives: this.drivesInProgress }); // drives update in parent component
@@ -73,6 +74,7 @@ export default {
           // note: if drawer was opened before and some drive finished its connecting this will close drawer
         },
         (error) => {
+          console.log({error});
           if (error) {
             this.alert = { message: error, type: 'error' };
           } else {
@@ -82,6 +84,7 @@ export default {
           this.$emit('updateProgress', { progress: null }); // hide progress line at the top of composer
         },
         progressData => {
+          console.log({progressData});
           if (progressData.drive.title) {
             this.drivesInProgress = Object.assign({}, this.drivesInProgress, {[progressData.drive.title]: progressData.progress });
             // update drivesInProgress in attachmentsComposer, so display drive actual progress at every time progress updates
