@@ -45,16 +45,18 @@ export default {
       });
   },
   methods: {
-    connectToCloudDrive: function(providerId) {
+    connectToCloudDrive: function(provider) {
+      // start loading connect button
+      this.$set(provider, 'loading', true);
       // init cloudDrives module with Personal Documents workspace and path recieved in getUserDrive()
       // note: cloudDrives.init() also is called by server
       // initialize cloud drive context node
       cloudDrives.init(this.userDrive.workspace, this.userDrive.homePath);
-      this.connectingProvider = providerId;
+      this.connectingProvider = provider.id;
       // show progress line at the top in composer
       this.$emit('updateProgress', { progress: 0 });
       const fullProgress = 100; // means 100%
-      cloudDrives.connect(providerId).then(
+      cloudDrives.connect(provider.id).then(
         data => {
           console.log({data});
           this.openDriveFolder(data.drive.path, data.drive.title); // display drive in composer
@@ -72,6 +74,8 @@ export default {
             this.$emit('updateProgress', { progress: null });
           }, latency);
           // note: if drawer was opened before and some drive finished its connecting this will close drawer
+          // end loading connect button
+          this.$set(provider, 'loading', false);
         },
         (error) => {
           console.log({error});
@@ -81,6 +85,9 @@ export default {
             // if error is undefined/null action was cancelled
             this.alert = { message: 'Canceled', type: 'info' };
           }
+          // end loading connect button
+          this.$set(provider, 'loading', false);
+
           this.$emit('updateProgress', { progress: null }); // hide progress line at the top of composer
         },
         progressData => {
@@ -91,6 +98,9 @@ export default {
             this.$emit('updateDrivesInProgress', { drives: this.drivesInProgress }); // drives update in parent component
             this.openDriveFolder(progressData.drive.path, progressData.drive.title); // display drive in composer
           }
+          // end loading connect button
+          this.$set(provider, 'loading', false);
+
           this.$emit('updateProgress', { progress: progressData.progress }); // update progress at the top of composer
         }
       );

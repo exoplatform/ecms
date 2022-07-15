@@ -50,7 +50,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <v-list-item-action>
               <v-btn
                 class="btn"
-                @click="connect(item.id)">
+                :loading="item.loading"
+                @click="connect(item)">
                 {{ $t("cloudDriveSettings.drawer.button.connect") }}
               </v-btn>
             </v-list-item-action>
