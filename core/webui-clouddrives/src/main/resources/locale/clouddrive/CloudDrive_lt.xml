@@ -109,9 +109,6 @@
       <description>Access your personal drives from your Digital Wokrplace</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
-      <google>Google Drive</google>
-      <onedrive>One Drive</onedrive>
       <button>
         <connect>Connect</connect>
       </button>

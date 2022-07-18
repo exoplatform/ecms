@@ -16,10 +16,12 @@
  */
 import CloudDriveSettings from './components/CloudDriveSettings.vue';
 import CloudDriveSettingsDrawer from './components/CloudDriveSettingsDrawer.vue';
+import CloudDriveConnector from './components/CloudDriveConnector.vue';
 
 const components = {
   'cloud-drive-settings': CloudDriveSettings,
   'cloud-drive-settings-drawer': CloudDriveSettingsDrawer,
+  'cloud-drive-connector': CloudDriveConnector,
 };
 
 for (const key in components) {

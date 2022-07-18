@@ -16,6 +16,5 @@
 
   <modules>
     <module>services</module>
-    <module>webapp</module>
   </modules>
 </project>
