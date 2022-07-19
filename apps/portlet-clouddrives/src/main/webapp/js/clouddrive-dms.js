@@ -26,13 +26,13 @@
 		 * Initialize provider for later operations.
 		 */
 		this.initProvider = function(id, provider) {
-			if (window == top) {
+			if (window === top) {
 				try {
 					// load provider styles
-					utils.loadStyle("/clouddrives-" + id + "/skin/clouddrive.css");
+					utils.loadStyle("/cloud-drive-connectors/skin/clouddrive.css");
 					// XXX load Enterprise Skin if required
-					if (eXo.env && eXo.env.client && eXo.env.client.skin == "Enterprise") {
-						utils.loadStyle("/clouddrives-" + id + "/skin/clouddrive-enterprise.css");
+					if (eXo.env && eXo.env.client && eXo.env.client.skin === "Enterprise") {
+						utils.loadStyle("/cloud-drive-connectors/skin/clouddrive-enterprise.css");
 					}
 				} catch(e) {
 					utils.log("Error loading provider (" + id + ") style.", e);
@@ -466,7 +466,7 @@
                 var modifiedLocalDate = file.modifiedLocal;
                 // var withUpdatedDate = updateDate(orig,  modifiedDate);
                 var withUpdatedDate = orig.replace(modifiedLocalDate,modifiedRemoteDate);
-                $(this).text(withUpdatedDate);                
+                $(this).text(withUpdatedDate);
               }
             }
           });
@@ -1678,6 +1678,6 @@
 			utils.log("Error configuring Cloud Drive style.", e);
 		}
     }
-    
+
     return cloudDrivesDms;
 })($, cloudDriveUtils, cloudDrives, cloudDriveTasks, uiRightClickPopupMenu, uiSimpleView, uiFileView);
