@@ -299,7 +299,6 @@
 
             if (authURL) {
                 // use user interaction for authentication
-                //authWindow = window.open(authURL, "_blank", "width=600,height=600");
                 authWindow = connectDrivePopup(authURL, providerId, '600', '600');
             } else {
                 // function to call for auth using authURL from provider
