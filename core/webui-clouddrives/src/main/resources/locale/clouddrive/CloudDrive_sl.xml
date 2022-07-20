@@ -110,11 +110,10 @@
     </label>
     <drawer>
       <title>Connect your personal drives</title>
-      <google>Google Drive</google>
-      <onedrive>One Drive</onedrive>
       <button>
         <connect>Connect</connect>
       </button>
+      <noConnector>No personal drive connector available</noConnector>
     </drawer>
   </cloudDriveSettings>
 </bundle>

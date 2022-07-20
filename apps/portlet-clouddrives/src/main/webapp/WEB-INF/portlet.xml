@@ -14,7 +14,7 @@
     </init-param>
     <init-param>
       <name>preload.resource.stylesheet</name>
-      <value><![CDATA[/clouddrives-onedrive/skin/clouddrive.css|/clouddrives-onedrive/skin/clouddrive-enterprise.css|/clouddrives-gdrive/skin/clouddrive.css|/clouddrives-gdrive/skin/clouddrive-enterprise.css]]></value>
+      <value><![CDATA[/cloud-drive-connectors/skin/clouddrive.css|/cloud-drive-connectors/skin/clouddrive-enterprise.css]]></value>
     </init-param>
     <init-param>
       <name>preload.resource.rest</name>
