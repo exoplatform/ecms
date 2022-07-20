@@ -109,9 +109,11 @@
       <description>Access your personal drives from your Digital Wokrplace</description>
     </label>
     <drawer>
+      <title>Connect your personal drives</title>
       <button>
         <connect>Connect</connect>
       </button>
+      <noConnector>No personal drive connector available</noConnector>
     </drawer>
   </cloudDriveSettings>
 </bundle>
