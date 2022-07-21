@@ -43,7 +43,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
       </v-list>
     </v-card>
     <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" :connectors="enabledConnectors" />
-    <cloud-drive-connector @connectors-loaded="connectors = $event" />
+    <cloud-drive-connector @connectors-loaded="connectors = $event" @display-alert="displayAlert" />
+    <cloud-drive-alert />
   </v-app>
 </template>
 
@@ -60,6 +61,12 @@ export default {
   methods: {
     openDriveConnectorsDrawer() {
       this.$refs.cloudDriveSettingsDrawer.open();
+    },
+    displayAlert(message, type) {
+      this.$root.$emit('connectors-connection-alert', {
+        message,
+        type: type || 'success',
+      });
     }
   }
 };
