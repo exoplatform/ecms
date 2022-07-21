@@ -81,10 +81,10 @@ export default {
       this.displayAlert(this.$t('Favorite.tooltip.ErrorAddingAsFavorite', 'file'), 'error');
     },
     displayAlert(message, type) {
-      this.$root.$emit('notes-notification-alert', {
+      document.dispatchEvent(new CustomEvent('notification-alert', {detail: {
         message,
         type: type || 'success',
-      });
+      }}));
     },
   },
 };
