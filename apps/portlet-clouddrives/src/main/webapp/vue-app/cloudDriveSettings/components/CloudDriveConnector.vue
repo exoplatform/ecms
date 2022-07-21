@@ -91,6 +91,7 @@ export default {
           // note: if drawer was opened before and some drive finished its connecting this will close drawer
           // end loading connect button
           this.$set(provider, 'loading', false);
+          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.successMessage'));
         },
         (error) => {
           if (error) {
@@ -101,6 +102,7 @@ export default {
           }
           // end loading connect button
           this.$set(provider, 'loading', false);
+          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.errorMessage'), 'error');
 
           this.$emit('updateProgress', { progress: null }); // hide progress line at the top of composer
         },

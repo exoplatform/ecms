@@ -17,11 +17,13 @@
 import CloudDriveSettings from './components/CloudDriveSettings.vue';
 import CloudDriveSettingsDrawer from './components/CloudDriveSettingsDrawer.vue';
 import CloudDriveConnector from './components/CloudDriveConnector.vue';
+import CloudDriveAlert from './components/CloudDriveAlert.vue';
 
 const components = {
   'cloud-drive-settings': CloudDriveSettings,
   'cloud-drive-settings-drawer': CloudDriveSettingsDrawer,
   'cloud-drive-connector': CloudDriveConnector,
+  'cloud-drive-alert': CloudDriveAlert,
 };
 
 for (const key in components) {
