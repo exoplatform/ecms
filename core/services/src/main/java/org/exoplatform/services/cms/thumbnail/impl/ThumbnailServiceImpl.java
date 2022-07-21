@@ -17,6 +17,8 @@
 package org.exoplatform.services.cms.thumbnail.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -273,6 +275,23 @@ public class ThumbnailServiceImpl implements ThumbnailService {
 
   public List<ComponentPlugin> getComponentPlugins() {
     return plugins_;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public byte[] createCustomThumbnail(byte[] imageContent, int targetWidth, int targetHeight) throws Exception {
+    BufferedImage image = toBufferedImage(imageContent);
+    if (image != null) {
+      return ImageUtils.scaleImage(image, targetWidth, targetHeight).readAllBytes();
+    }
+    return imageContent;
+  }
+
+  private BufferedImage toBufferedImage(byte[] imageBytes) throws IOException {
+    ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
+    return ImageIO.read(bis);
   }
 
   /**
