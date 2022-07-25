@@ -2,34 +2,34 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>crwdns6791775:0crwdne6791775:0</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>crwdns6791776:0crwdne6791776:0</rename>
-      <cancel>crwdns6791777:0crwdne6791777:0</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
-      <renaming>crwdns6791778:0crwdne6791778:0</renaming>
+      <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>crwdns6812350:0crwdne6812350:0</word>
-          <excel>crwdns6812351:0crwdne6812351:0</excel>
-          <powerpoint>crwdns6812352:0crwdne6812352:0</powerpoint>
-          <desktop>crwdns6812353:0crwdne6812353:0</desktop>
-          <desktop-app>crwdns6823131:0{0}crwdne6823131:0</desktop-app>
+          <word>Open in Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Open in Powerpoint</powerpoint>
+          <desktop>Open on Desktop</desktop>
+          <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>crwdns6825031:0{0}crwdne6825031:0</WrongMimeType>
+      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

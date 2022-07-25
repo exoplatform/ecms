@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>crwdns6793354:0crwdne6793354:0</PublicationRequestApproval>
-      <PublicationApproveContent>crwdns6793355:0crwdne6793355:0</PublicationApproveContent>
-      <PublicationPublish>crwdns6793356:0crwdne6793356:0</PublicationPublish>
+      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
+      <PublicationApproveContent>Approve Content</PublicationApproveContent>
+      <PublicationPublish>Publish</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

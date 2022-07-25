@@ -2,63 +2,63 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>crwdns6793104:0crwdne6793104:0</title>
-      <description>crwdns6793105:0crwdne6793105:0</description>
-      <keywords>crwdns6793106:0crwdne6793106:0</keywords>
-      <language>crwdns6793107:0crwdne6793107:0</language>
-      <robots>crwdns6793108:0crwdne6793108:0</robots>
-      <sitemap>crwdns6793109:0crwdne6793109:0</sitemap>
-      <sitemapvisible>crwdns6793110:0crwdne6793110:0</sitemapvisible>
-    <isInherited>crwdns6793111:0crwdne6793111:0</isInherited>
-      <priority>crwdns6793112:0crwdne6793112:0</priority>
-      <frequency>crwdns6793113:0crwdne6793113:0</frequency>
-      <select-language>crwdns6793114:0crwdne6793114:0</select-language>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
+      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+    <isInherited>Inherited from parent page</isInherited>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
+      <select-language>Select a language</select-language>
       <option>
-        <Always>crwdns6793115:0crwdne6793115:0</Always>
-        <Hourly>crwdns6793116:0crwdne6793116:0</Hourly>
-        <Daily>crwdns6793117:0crwdne6793117:0</Daily>
-        <Weekly>crwdns6793118:0crwdne6793118:0</Weekly>
-        <Monthly>crwdns6793119:0crwdne6793119:0</Monthly>
-        <Yearly>crwdns6793120:0crwdne6793120:0</Yearly>
-        <Never>crwdns6793121:0crwdne6793121:0</Never>
+        <Always>Always</Always>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
+        <Weekly>Weekly</Weekly>
+        <Monthly>Monthly</Monthly>
+        <Yearly>Yearly</Yearly>
+        <Never>Never</Never>
       </option> 
     </label>
     <tip>
-  <priority>crwdns6793122:0crwdne6793122:0</priority>
+  <priority>Valid values range from 0.0 to 1.0</priority>
   </tip>   
     <action>
-      <Save>crwdns6793123:0#{word.save}crwdne6793123:0</Save>
-      <Cancel>crwdns6793124:0#{word.cancel}crwdne6793124:0</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>crwdns6793125:0crwdne6793125:0</repository-exception>
-      <confirm-delete>crwdns6793126:0crwdne6793126:0</confirm-delete>      
+      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>crwdns6793127:0crwdne6793127:0</seo-delete>
+    <seo-delete>Delete</seo-delete>
     </title>
   <help> 
-  <priority>crwdns6793128:0crwdne6793128:0</priority>
-  <description>crwdns6793129:0crwdne6793129:0</description>
-  <keywords>crwdns6793130:0crwdne6793130:0</keywords>  
+  <priority>Valid values range from 0.0 to 1.0.</priority>
+  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
+  <keywords>Most important terms in the page separated by a comma.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>crwdns6793131:0crwdne6793131:0</UISEOForm>
+      <UISEOForm>SEO Management</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>crwdns6793132:0crwdne6793132:0</seo>
+      <seo>SEO Management</seo>
   </title>
   <label>
-    <seo>crwdns6793133:0crwdne6793133:0</seo>
+    <seo>SEO</seo>
   </label>
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>crwdns6793134:0crwdne6793134:0</Invalid-number>
+      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

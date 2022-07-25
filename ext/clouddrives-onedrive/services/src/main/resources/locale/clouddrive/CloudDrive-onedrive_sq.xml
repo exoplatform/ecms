@@ -23,13 +23,13 @@
     <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
     <UITabForm>
         <label>
-            <connectOneDrive>crwdns6939644:0crwdne6939644:0</connectOneDrive>
+            <connectOneDrive>Connect OneDrive</connectOneDrive>
         </label>
     </UITabForm>
     <!-- For menu caption in Action Bar -->
     <UIActionBar>
         <tooltip>
-            <ConnectOneDrive>crwdns6939646:0crwdne6939646:0</ConnectOneDrive>
+            <ConnectOneDrive>Connect your OneDrive</ConnectOneDrive>
         </tooltip>
     </UIActionBar>
 </bundle>

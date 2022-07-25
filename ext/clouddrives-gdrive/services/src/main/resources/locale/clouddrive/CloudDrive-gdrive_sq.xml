@@ -23,13 +23,13 @@
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <connectGDrive>crwdns6940008:0crwdne6940008:0</connectGDrive>
+      <connectGDrive>Connect Google Drive</connectGDrive>
     </label>
   </UITabForm>
   <!-- For menu caption in Action Bar -->
   <UIActionBar>
     <tooltip>
-      <ConnectGDrive>crwdns6940010:0crwdne6940010:0</ConnectGDrive>
+      <ConnectGDrive>Connect your Google Drive</ConnectGDrive>
     </tooltip>
   </UIActionBar>
 </bundle>

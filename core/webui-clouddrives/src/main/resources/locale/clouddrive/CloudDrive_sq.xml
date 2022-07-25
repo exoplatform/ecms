@@ -23,83 +23,83 @@
   <UITabForm>
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
-      <showConnectCloudDrive>crwdns6940294:0crwdne6940294:0</showConnectCloudDrive>
+      <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
     </label>
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>crwdns6940296:0crwdne6940296:0</ConnectCloudDriveForm>
-      <ConnectYour>crwdns6940298:0crwdne6940298:0</ConnectYour>
-      <UISharingManager>crwdns6940300:0crwdne6940300:0</UISharingManager>
+      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
+      <ConnectYour>Connect your</ConnectYour>
+      <UISharingManager>Cloud file sharing</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>crwdns6940302:0crwdne6940302:0</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
     <event>
-      <OpenCloudFile>crwdns6940304:0crwdne6940304:0</OpenCloudFile>
-      <SyncingFile>crwdns6940306:0crwdne6940306:0</SyncingFile>
-      <PushCloudFile>crwdns6940308:0crwdne6940308:0</PushCloudFile>
-      <RefreshCloudDrive>crwdns6940310:0crwdne6940310:0</RefreshCloudDrive>
-      <RefreshView>crwdns6940312:0crwdne6940312:0</RefreshView>
+      <OpenCloudFile>Open on</OpenCloudFile>
+      <SyncingFile>Synchronizing file...</SyncingFile>
+      <PushCloudFile>Push to</PushCloudFile>
+      <RefreshCloudDrive>Sync with</RefreshCloudDrive>
+      <RefreshView>Refresh view</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>crwdns6940314:0$fileUrlcrwdnd6940314:0$serviceNamecrwdne6940314:0</OpenFileOn>
-      <OpenOn>crwdns6940316:0crwdne6940316:0</OpenOn>
-      <EditFile>crwdns6940318:0crwdne6940318:0</EditFile>
-      <ViewFile>crwdns6940320:0crwdne6940320:0</ViewFile>
+      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
+      <OpenOn>Open on</OpenOn>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
-      <sourceview>crwdns6940322:0crwdne6940322:0</sourceview>
-      <webview>crwdns6940324:0crwdne6940324:0</webview>
+      <sourceview>View source code</sourceview>
+      <webview>View as web page</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>crwdns6940326:0crwdne6940326:0</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>crwdns6940328:0crwdne6940328:0</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>crwdns6940330:0crwdne6940330:0</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>crwdns6940332:0crwdne6940332:0</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>crwdns6940334:0crwdne6940334:0</DestinationNotWrittable>
-      <DestinationNotDefined>crwdns6940336:0crwdne6940336:0</DestinationNotDefined>
-      <SourceNotDefined>crwdns6940338:0crwdne6940338:0</SourceNotDefined>
-      <ErrorMoveToDestination>crwdns6940340:0crwdne6940340:0</ErrorMoveToDestination>
-      <DestinationItemNameExists>crwdns6940342:0crwdne6940342:0</DestinationItemNameExists>
-      <LinkCreated>crwdns6940344:0{0}crwdne6940344:0</LinkCreated>
-      <FileLinksCreated>crwdns6940346:0{0}crwdnd6940346:0{1}crwdne6940346:0</FileLinksCreated>
-      <FileLinksSharedInSpace>crwdns6940348:0{0}crwdnd6940348:0{1}crwdnd6940348:0{2}crwdne6940348:0</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>crwdns6940350:0{0}crwdnd6940350:0{1}crwdnd6940350:0{2}crwdne6940350:0</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>crwdns6940352:0{0}crwdnd6940352:0{2}crwdnd6940352:0{1}crwdne6940352:0</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>crwdns6940354:0crwdne6940354:0</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>crwdns6940356:0crwdne6940356:0</ErrorReadingDrives>
-      <CannotFindUser>crwdns6940358:0{0}crwdne6940358:0</CannotFindUser>
-      <ErrorReadingFileLinks>crwdns6940360:0crwdne6940360:0</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>crwdns6940362:0crwdne6940362:0</ErrorReadingUserDrive>
+      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
+      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
+      <SourceNotDefined>Source file not defined</SourceNotDefined>
+      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
+      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
+      <LinkCreated>Link {0} created</LinkCreated>
+      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
+      <CannotFindUser>Cannot find user {0}</CannotFindUser>
+      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
     <action>
-      <Cancel>crwdns6940364:0#{word.cancel}crwdne6940364:0</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConnectCloudDriveForm>
   <ConnectDriveDrawer>
     <title>
-      <ConnectYourService>crwdns6940366:0crwdne6940366:0</ConnectYourService>
+      <ConnectYourService>Connect your service</ConnectYourService>
     </title>
   </ConnectDriveDrawer>
   <cloudStorage>
     <label>
-      <title>crwdns6966718:0crwdne6966718:0</title>
-      <cloudDrives>crwdns6966720:0crwdne6966720:0</cloudDrives>
-      <provider>crwdns6966722:0crwdne6966722:0</provider>
-      <description>crwdns6966724:0crwdne6966724:0</description>
-      <active>crwdns6966726:0crwdne6966726:0</active>
-      <ConnectionToCloud>crwdns6966728:0crwdne6966728:0</ConnectionToCloud>
+      <title>Cloud Storage</title>
+      <cloudDrives>Cloud Drives</cloudDrives>
+      <provider>Provider</provider>
+      <description>Description</description>
+      <active>Active</active>
+      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
 </bundle>

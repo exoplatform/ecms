@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>crwdns6836804:0crwdne6836804:0</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>crwdns6839021:0crwdne6839021:0</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>crwdns6836806:0crwdne6836806:0</Draft>
-        <Published>crwdns6836807:0crwdne6836807:0</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>
