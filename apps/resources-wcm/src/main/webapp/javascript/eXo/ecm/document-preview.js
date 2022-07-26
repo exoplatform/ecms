@@ -48,6 +48,7 @@
     isDownloadStatusActivated: true,
 
     init: function (docPreviewSettings) {
+
       $('.spaceButtomNavigation').addClass('hidden');
       if($('.commentsLoaded').length) {
         $("#documentPreviewContent").html('<div class="loading">' +
@@ -399,7 +400,7 @@
                 breadCrumbContent += '&nbsp;<i class="uiIconArrowRight"></i>&nbsp;';
                 breadCrumbContentTooltip += " > ";
               }
-              breadCrumbContent += '<a href="' + folderPath + '" onclick="event.stopPropagation();window.location.href=this.href">' + XSSUtils.escapeHtml(folderName) + '</a>';
+              breadCrumbContent += '<a href="' + decodeURI(folderPath) + '" onclick="event.stopPropagation();window.location.href=this.href">' + XSSUtils.escapeHtml(folderName) + '</a>';
               breadCrumbContentTooltip += folderName;
               folderIndex++;
             }
@@ -559,6 +560,27 @@
           for (var folderName in documentPreview.settings.doc.breadCrumb) {
             if (documentPreview.settings.doc.breadCrumb.hasOwnProperty(folderName)) {
               var folderPath = documentPreview.settings.doc.breadCrumb[folderName];
+              var baseurl = folderPath.slice(0,folderPath.indexOf('?'));
+              var path =decodeURIComponent( folderPath.slice(folderPath.indexOf('?') , folderPath.indexOf('&')));
+              if (eXo.env.portal.spaceName){
+                const index = path.indexOf('/Documents');
+                if (index !== -1){
+                  folderPath= `${baseurl}${path.substring(index+10)}`;
+                }
+              } else {
+                if (path.includes('/Private')){
+                  const index  = path.indexOf('/Private');
+                  if (index !== -1){
+                    folderPath= `${baseurl}${path.substring(index)}`;
+                  }
+                }
+                if (path.includes('/Public')){
+                  const index = path.indexOf('/Public');
+                  if (index !== -1){
+                    folderPath= `${baseurl}${path.substring(index)}`;
+                  }
+                } 
+              }
               if(folderIndex > 0) {
                 breadCrumbContent += '&nbsp;<i class="uiIconArrowRight"></i>&nbsp;';
                 breadCrumbContentTooltip += " > ";
