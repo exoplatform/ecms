@@ -48,7 +48,6 @@
     isDownloadStatusActivated: true,
 
     init: function (docPreviewSettings) {
-
       $('.spaceButtomNavigation').addClass('hidden');
       if($('.commentsLoaded').length) {
         $("#documentPreviewContent").html('<div class="loading">' +
