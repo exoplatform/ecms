@@ -573,7 +573,7 @@
                 }
                 if (path.includes('/Public')){
                   const index = path.indexOf('/Public');
-                    folderPath= `${baseurl}${path.substring(index)}`;
+                  folderPath= `${baseurl}${path.substring(index)}`;
                 } 
               }
               if(folderIndex > 0) {
