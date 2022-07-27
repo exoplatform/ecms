@@ -560,7 +560,7 @@
             if (documentPreview.settings.doc.breadCrumb.hasOwnProperty(folderName)) {
               var folderPath = documentPreview.settings.doc.breadCrumb[folderName];
               var baseurl = folderPath.slice(0,folderPath.indexOf('?'));
-              var path =decodeURIComponent( folderPath.slice(folderPath.indexOf('?') , folderPath.indexOf('&')));
+              var path = decodeURIComponent(folderPath.slice(folderPath.indexOf('?'), folderPath.indexOf('&')));
               if (eXo.env.portal.spaceName){
                 if(path.includes('/Documents'){
                   const index = path.indexOf('/Documents');
