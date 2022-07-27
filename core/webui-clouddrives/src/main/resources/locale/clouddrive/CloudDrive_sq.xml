@@ -29,7 +29,6 @@
   <UIPopupWindow>
     <title>
       <ConnectCloudDriveForm>crwdns6940296:0crwdne6940296:0</ConnectCloudDriveForm>
-      <ConnectYour>crwdns6940298:0crwdne6940298:0</ConnectYour>
       <UISharingManager>crwdns6940300:0crwdne6940300:0</UISharingManager>
     </title>
   </UIPopupWindow>
@@ -87,11 +86,6 @@
       <Cancel>crwdns6940364:0#{word.cancel}crwdne6940364:0</Cancel>
     </action>
   </ConnectCloudDriveForm>
-  <ConnectDriveDrawer>
-    <title>
-      <ConnectYourService>crwdns6940366:0crwdne6940366:0</ConnectYourService>
-    </title>
-  </ConnectDriveDrawer>
   <cloudStorage>
     <label>
       <title>crwdns6966718:0crwdne6966718:0</title>

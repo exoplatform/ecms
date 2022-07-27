@@ -29,7 +29,6 @@
   <UIPopupWindow>
     <title>
       <ConnectCloudDriveForm>Bulut Belgelerini Bağlayın</ConnectCloudDriveForm>
-      <ConnectYour>Şunu bağlayın</ConnectYour>
       <UISharingManager>Bulut dosya paylaşımı</UISharingManager>
     </title>
   </UIPopupWindow>
@@ -87,11 +86,6 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConnectCloudDriveForm>
-  <ConnectDriveDrawer>
-    <title>
-      <ConnectYourService>Servisinizi bağlayın</ConnectYourService>
-    </title>
-  </ConnectDriveDrawer>
   <cloudStorage>
     <label>
       <title>Cloud Storage</title>
