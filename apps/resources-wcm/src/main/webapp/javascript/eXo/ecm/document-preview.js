@@ -569,15 +569,11 @@
               } else {
                 if (path.includes('/Private')){
                   const index  = path.indexOf('/Private');
-                  if (index !== -1){
                     folderPath= `${baseurl}${path.substring(index)}`;
-                  }
                 }
                 if (path.includes('/Public')){
                   const index = path.indexOf('/Public');
-                  if (index !== -1){
                     folderPath= `${baseurl}${path.substring(index)}`;
-                  }
                 } 
               }
               if(folderIndex > 0) {
