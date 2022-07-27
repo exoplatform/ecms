@@ -569,7 +569,7 @@
               } else {
                 if (path.includes('/Private')){
                   const index  = path.indexOf('/Private');
-                    folderPath= `${baseurl}${path.substring(index)}`;
+                  folderPath= `${baseurl}${path.substring(index)}`;
                 }
                 if (path.includes('/Public')){
                   const index = path.indexOf('/Public');
