@@ -559,6 +559,23 @@
           for (var folderName in documentPreview.settings.doc.breadCrumb) {
             if (documentPreview.settings.doc.breadCrumb.hasOwnProperty(folderName)) {
               var folderPath = documentPreview.settings.doc.breadCrumb[folderName];
+              var baseurl = folderPath.slice(0,folderPath.indexOf('?'));
+              var path = decodeURIComponent(folderPath.slice(folderPath.indexOf('?'), folderPath.indexOf('&')));
+              if (eXo.env.portal.spaceName){
+                if(path.includes('/Documents'){
+                  const index = path.indexOf('/Documents');
+                  folderPath= `${baseurl}${path.substring(index+10)}`;
+                }
+              } else {
+                if (path.includes('/Private')){
+                  const index  = path.indexOf('/Private');
+                  folderPath= `${baseurl}${path.substring(index)}`;
+                }
+                if (path.includes('/Public')){
+                  const index = path.indexOf('/Public');
+                  folderPath= `${baseurl}${path.substring(index)}`;
+                } 
+              }
               if(folderIndex > 0) {
                 breadCrumbContent += '&nbsp;<i class="uiIconArrowRight"></i>&nbsp;';
                 breadCrumbContentTooltip += " > ";
