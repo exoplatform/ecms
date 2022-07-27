@@ -54,7 +54,7 @@
 
   <portlet>
     <portlet-name>CloudDriveSettingsPortlet</portlet-name>
-    <display-name xml:lang="EN">Cloud storage portlet</display-name>
+    <display-name xml:lang="EN">Cloud Drive Settings portlet</display-name>
     <portlet-class>org.exoplatform.commons.api.portlet.GenericDispatchedViewPortlet</portlet-class>
     <init-param>
       <name>portlet-view-dispatched-file-path</name>
