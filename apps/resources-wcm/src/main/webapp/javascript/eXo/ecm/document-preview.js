@@ -564,7 +564,7 @@
               if (eXo.env.portal.spaceName){
                 if(path.includes('/Documents'){
                   const index = path.indexOf('/Documents');
-                  folderPath= `${baseurl}${path.substring(index+10)}`;
+                  folderPath= `${baseurl}${path.substring(index+10)`;
                 }
               } else {
                 if (path.includes('/Private')){
