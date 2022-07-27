@@ -562,8 +562,8 @@
               var baseurl = folderPath.slice(0,folderPath.indexOf('?'));
               var path =decodeURIComponent( folderPath.slice(folderPath.indexOf('?') , folderPath.indexOf('&')));
               if (eXo.env.portal.spaceName){
-                const index = path.indexOf('/Documents');
-                if (index !== -1){
+                if(path.includes('/Documents'){
+                  const index = path.indexOf('/Documents');
                   folderPath= `${baseurl}${path.substring(index+10)}`;
                 }
               } else {
