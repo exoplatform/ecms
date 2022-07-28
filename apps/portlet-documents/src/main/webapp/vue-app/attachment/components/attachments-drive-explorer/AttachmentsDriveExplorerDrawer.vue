@@ -301,21 +301,21 @@
     <template slot="footer">
       <div class="d-flex">
         <span
-          v-if="!modeFolderSelection"
-          :class="filesCountClass"
-          class="countLimit">
+            v-if="!modeFolderSelection"
+            :class="filesCountClass"
+            class="countLimit">
           {{ $t('attachments.drawer.maxFileCountLeft').replace('{0}', filesCountLeft) }}
         </span>
         <v-spacer />
         <v-btn
-          class="btn mr-3"
-          @click="closeAttachmentsDriveExplorerDrawer()">
+            class="btn mr-3"
+            @click="closeAttachmentsDriveExplorerDrawer()">
           {{ $t('attachments.drawer.cancel') }}
         </v-btn>
         <v-btn
-          class="btn btn-primary"
-          :disabled="!selectFromDrivesEnabled"
-          @click="selectActionDriveExplorerDrawer()">
+            class="btn btn-primary"
+            :disabled="!selectFromDrivesEnabled"
+            @click="selectActionDriveExplorerDrawer()">
           {{ $t('attachments.drawer.select') }}
         </v-btn>
       </div>
