@@ -98,6 +98,26 @@
               class="uiIconLightGray uiIconAddFolder"
               @click="addNewFolder()"></a>
           </div>
+          <!-- Action buttons for extensionRegistry extensions -->
+          <div
+            v-for="action in attachmentsComposerActions"
+            :key="action.key"
+            :class="`${action.appClass}Action`"
+            class="actionBox ml-1 align-center">
+            <div
+              v-if="!modeFolderSelection"
+              class="actionBoxLogo"
+              @click="executeAction(action)">
+              <v-icon v-if="action.iconName" class="uiActionIcon pa-2">
+                {{ action.iconName }}
+              </v-icon>
+              <i
+                v-else
+                :class="action.iconClass"
+                class="uiActionIcon"></i>
+            </div>
+          </div>
+          <!-- end of action buttons block -->
         </div>
 
         <transition name="fade" mode="in-out">
@@ -303,6 +323,7 @@
 </template>
 
 <script>
+import {getAttachmentsComposerExtensions, executeExtensionAction} from '../../../../js/extension';
 
 export default {
   props: {
@@ -363,6 +384,7 @@ export default {
       selectedFolderPath: '',
       schemaFolder: '',
       folderDestinationForFile: '',
+      attachmentsComposerActions: [], // extensions from extensionRegistry
       creatingNewFolder: false,
       newFolderName: '',
       currentAbsolutePath: '',
@@ -507,6 +529,8 @@ export default {
   },
   created() {
     this.initDestinationFolderPath();
+    document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
+    this.attachmentsComposerActions = getAttachmentsComposerExtensions();
     this.$root.$on('open-drive-explorer-drawer', () => this.openAttachmentsDriveExplorerDrawer());
     this.$root.$on('open-select-from-drives-drawer', () => this.openSelectFromDrivesDrawer());
     this.$root.$on('change-attachment-destination-path', this.openSelectDestinationFolderForFile);
@@ -819,6 +843,9 @@ export default {
       }
 
       this.closeAttachmentsDriveExplorerDrawer();
+    },
+    executeAction(action) { // will execute code inside 'onExecute' extension method
+      executeExtensionAction(action, this.extensionRefs[action.key][0]);
     },
     addNewFolder() {
       if (!this.creatingNewFolder) {
