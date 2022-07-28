@@ -16,35 +16,37 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <template>
   <v-app>
-    <v-card
-      class="border-radius ma-4"
-      flat>
-      <v-list>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="title text-color">
-              {{ $t("cloudDriveSettings.label.title") }}
-            </v-list-item-title>
-            <v-list-item-subtitle class="my-3 text-color">
-              {{ $t("cloudDriveSettings.label.subtitle") }}
-            </v-list-item-subtitle>
-            <v-list-item-subtitle class="my-3 text-sub-title font-italic" @click="openDriveConnectorsDrawer">
-              {{ $t("cloudDriveSettings.label.description") }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-btn
-              icon
-              @click="openDriveConnectorsDrawer">
-              <em class="uiIconEdit uiIconLightBlue pb-2"></em>
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-    </v-card>
-    <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" :connectors="enabledConnectors" />
-    <cloud-drive-connector @connectors-loaded="connectors = $event" @display-alert="displayAlert" />
-    <cloud-drive-alert />
+    <template v-if="displayed">
+      <v-card
+        class="border-radius ma-4"
+        flat>
+        <v-list>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title class="title text-color">
+                {{ $t("cloudDriveSettings.label.title") }}
+              </v-list-item-title>
+              <v-list-item-subtitle class="my-3 text-color">
+                {{ $t("cloudDriveSettings.label.subtitle") }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle class="my-3 text-sub-title font-italic" @click="openDriveConnectorsDrawer">
+                {{ $t("cloudDriveSettings.label.description") }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-btn
+                icon
+                @click="openDriveConnectorsDrawer">
+                <em class="uiIconEdit uiIconLightBlue pb-2"></em>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
+      </v-card>
+      <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" :connectors="enabledConnectors" />
+      <cloud-drive-connector @connectors-loaded="connectors = $event" @display-alert="displayAlert" />
+      <cloud-drive-alert />
+    </template>
   </v-app>
 </template>
 
@@ -52,11 +54,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 export default {
   data: () => ({
     connectors: {},
+    displayed: true,
   }),
   computed: {
     enabledConnectors() {
       return this.connectors || {};
     },
+  },
+  created() {
+    document.addEventListener('hideSettingsApps', () => this.displayed = false);
+    document.addEventListener('showSettingsApps', () => this.displayed = true);
   },
   methods: {
     openDriveConnectorsDrawer() {
