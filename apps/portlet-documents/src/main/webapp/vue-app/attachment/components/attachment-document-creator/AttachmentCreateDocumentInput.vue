@@ -150,8 +150,7 @@ export default {
           }
         })
         .then((doc) => this.manageNewCreatedDocument(doc))
-        .catch( error => {
-          console.error(error);
+        .catch(() => {
           this.$root.$emit('attachments-notification-alert', {
             message: this.newDocCreationFailedLabel,
             type: 'error',
