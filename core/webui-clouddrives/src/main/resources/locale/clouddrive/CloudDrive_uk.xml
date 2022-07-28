@@ -29,7 +29,6 @@
   <UIPopupWindow>
     <title>
       <ConnectCloudDriveForm>Підключити документи з хмари</ConnectCloudDriveForm>
-      <ConnectYour>Підключіть ваш</ConnectYour>
       <UISharingManager>Відкриття спільного доступу до файлу у хмарі</UISharingManager>
     </title>
   </UIPopupWindow>
@@ -87,11 +86,6 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConnectCloudDriveForm>
-  <ConnectDriveDrawer>
-    <title>
-      <ConnectYourService>Підключити вашу службу</ConnectYourService>
-    </title>
-  </ConnectDriveDrawer>
   <cloudStorage>
     <label>
       <title>Cloud Storage</title>

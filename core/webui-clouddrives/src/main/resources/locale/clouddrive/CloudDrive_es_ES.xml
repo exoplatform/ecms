@@ -29,7 +29,6 @@
   <UIPopupWindow>
     <title>
       <ConnectCloudDriveForm>Conectar documentos en la nube</ConnectCloudDriveForm>
-      <ConnectYour>Conecta tu</ConnectYour>
       <UISharingManager>Compartir archivos en la nube</UISharingManager>
     </title>
   </UIPopupWindow>
@@ -87,11 +86,6 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConnectCloudDriveForm>
-  <ConnectDriveDrawer>
-    <title>
-      <ConnectYourService>Conecta tu servicio</ConnectYourService>
-    </title>
-  </ConnectDriveDrawer>
   <cloudStorage>
     <label>
       <title>Almacenamiento en la nube</title>

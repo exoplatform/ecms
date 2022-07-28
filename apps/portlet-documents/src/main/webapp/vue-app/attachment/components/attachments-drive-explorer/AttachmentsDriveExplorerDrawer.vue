@@ -101,7 +101,6 @@
           <!-- Action buttons for extensionRegistry extensions -->
           <div
             v-for="action in attachmentsComposerActions"
-            v-show="showDriveAction"
             :key="action.key"
             :class="`${action.appClass}Action`"
             class="actionBox ml-1 align-center">
@@ -328,10 +327,6 @@ import {getAttachmentsComposerExtensions, executeExtensionAction} from '../../..
 
 export default {
   props: {
-    isCloudEnabled: {
-      type: Boolean,
-      default: false,
-    },
     spaceId: {
       type: String,
       default: ''
@@ -417,9 +412,6 @@ export default {
     };
   },
   computed: {
-    showDriveAction() { // show drivers extension buttons only if it's root path
-      return this.isCloudEnabled && (this.currentDrive ? this.currentDrive.name === 'Personal Documents' : true);
-    },
     filteredFolders() {
       let folders = this.folders.slice();
       if (this.searchFilesFolders && this.searchFilesFolders.trim().length) {

@@ -29,7 +29,6 @@
   <UIPopupWindow>
     <title>
       <ConnectCloudDriveForm>توصيل المستندات السحابية</ConnectCloudDriveForm>
-      <ConnectYour>الاتصال الآن</ConnectYour>
       <UISharingManager>مشاركة الملفات السحابية</UISharingManager>
     </title>
   </UIPopupWindow>
@@ -87,11 +86,6 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConnectCloudDriveForm>
-  <ConnectDriveDrawer>
-    <title>
-      <ConnectYourService>قم بتوصيل خدمتك</ConnectYourService>
-    </title>
-  </ConnectDriveDrawer>
   <cloudStorage>
     <label>
       <title>التخزين السحابي</title>

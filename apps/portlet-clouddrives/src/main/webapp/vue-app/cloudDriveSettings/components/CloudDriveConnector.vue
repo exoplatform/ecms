@@ -16,7 +16,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <script>
 import { getUserDrive } from '../js/cloudDriveService';
-import { CloudDrivePlugin } from '../js/cloudDrivePlugin';
 
 export default {
   data: function() {
@@ -32,11 +31,6 @@ export default {
   created() {
     this.$root.$on('cloud-drive-connect', this.connectToCloudDrive);
     this.connectorsImages = extensionRegistry.loadExtensions('cloud-drive-connectors', 'images') || [];
-    for (const extension of CloudDrivePlugin) {
-      // connect extension to AttachmentsComposer, "attachments-composer-action" is extension type
-      // composer and extension type should be the same as in extension.js inside ecm-wcm-extension
-      extensionRegistry.registerExtension('AttachmentsComposer', 'attachments-composer-action', extension);
-    }
     getUserDrive()
       .then(data => {
         this.userDrive = {

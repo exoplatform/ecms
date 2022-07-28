@@ -47,7 +47,6 @@
             :entity-type="entityType" />
         </div>
         <attachments-drive-explorer-drawer
-          :is-cloud-enabled="isCloudDriveEnabled"
           :entity-id="entityId"
           :entity-type="entityType"
           :default-drive="defaultDrive"
@@ -143,7 +142,6 @@ export default {
       isActivityStream: true,
       drivesInProgress: {},
       attachmentInfo: false,
-      isCloudDriveEnabled: false,
       defaultDestinationFolderPath: '',
       defaultSchemaFolder: [],
       workspace: 'collaboration',
@@ -243,7 +241,6 @@ export default {
       this.addNewCreatedDocument(doc);
     }
     );
-    this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
   },
@@ -420,11 +417,6 @@ export default {
     },
     changeCloudDriveProgress(drives) { // listen clouddrives 'updateDrivesInProgress' event
       this.drivesInProgress = drives; // update progress for connecting drive to display that drive is in connection
-    },
-    getCloudDriveStatus() {
-      this.$attachmentService.isCloudDriveEnabled().then(data => {
-        this.isCloudDriveEnabled = data.result === 'true';
-      });
     },
     initDefaultDestinationFolderPath(defaultDestinationFolderPath, folderName) {
       this.defaultDestinationFolderPath = defaultDestinationFolderPath || '';
