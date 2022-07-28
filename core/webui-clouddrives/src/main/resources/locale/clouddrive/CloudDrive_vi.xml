@@ -29,7 +29,6 @@
   <UIPopupWindow>
     <title>
       <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
-      <ConnectYour>Connect your</ConnectYour>
       <UISharingManager>Cloud file sharing</UISharingManager>
     </title>
   </UIPopupWindow>
@@ -87,11 +86,6 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConnectCloudDriveForm>
-  <ConnectDriveDrawer>
-    <title>
-      <ConnectYourService>Connect your service</ConnectYourService>
-    </title>
-  </ConnectDriveDrawer>
   <cloudStorage>
     <label>
       <title>Cloud Storage</title>

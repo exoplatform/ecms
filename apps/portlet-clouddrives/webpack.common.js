@@ -7,7 +7,6 @@ let config = {
   // set the entry point of the application
   // can use multiple entry
   entry: {
-    "clouddrives-app": "./src/main/webapp/vue-app/connectCloudDrive/main.js",
     "cloudStorage": "./src/main/webapp/vue-app/cloudStorage/main.js",
     "cloudDriveSettings": "./src/main/webapp/vue-app/cloudDriveSettings/main.js"
   },
