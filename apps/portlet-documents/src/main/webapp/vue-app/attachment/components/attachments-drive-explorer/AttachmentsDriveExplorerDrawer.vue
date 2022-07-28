@@ -564,7 +564,7 @@ export default {
         this.driveExplorerInitializing = true;
         //open it to generate the path
         this.openDrive(this.defaultDrive).then(() => {
-          const defaultFolder = self.folders.find(folder => folder.title === self.defaultFolder);
+          const defaultFolder = self.folders.find(folder => folder.name === self.defaultFolder.split('/').pop());
           if (self.entityType && self.entityId) {
             if (defaultFolder) {
               this.openFolder(defaultFolder).then(() => {
@@ -629,7 +629,7 @@ export default {
       this.privateDestinationForFile = folder.isPublic;
     },
 
-    openDrive(drive, group) {
+    openDrive(drive, group, parentPath) {
       this.currentAbsolutePath = '';
       this.selectedFolderPath = '';
       this.folderDestinationForFile = '';
@@ -642,7 +642,7 @@ export default {
         mainTitle: drive.mainTitle,
         isSelected: true
       };
-      return this.fetchChildrenContents('');
+      return this.fetchChildrenContents(parentPath);
     },
     fetchChildrenContents: function (parentPath) {
       this.loadingFolders = true;
