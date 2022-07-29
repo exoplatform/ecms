@@ -562,18 +562,18 @@
               var baseurl = folderPath.slice(0,folderPath.indexOf('?'));
               var path = decodeURIComponent(folderPath.slice(folderPath.indexOf('?'), folderPath.indexOf('&')));
               if (eXo.env.portal.spaceName){
-                if(path.includes('/Documents'){
+                if(path.includes('/Documents')){
                   const index = path.indexOf('/Documents');
-                  folderPath= `${baseurl}${path.substring(index+10)}`;
+                  folderPath= baseurl.concat(path.substring(index+10));
                 }
               } else {
                 if (path.includes('/Private')){
                   const index  = path.indexOf('/Private');
-                  folderPath= `${baseurl}${path.substring(index)}`;
+                  folderPath= baseurl.concat(path.substring(index));
                 }
                 if (path.includes('/Public')){
                   const index = path.indexOf('/Public');
-                  folderPath= `${baseurl}${path.substring(index)}`;
+                  folderPath= baseurl.concat(path.substring(index));
                 } 
               }
               if(folderIndex > 0) {
