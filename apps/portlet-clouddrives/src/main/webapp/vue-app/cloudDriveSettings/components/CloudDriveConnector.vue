@@ -107,8 +107,6 @@ export default {
             this.$emit('updateDrivesInProgress', { drives: this.drivesInProgress }); // drives update in parent component
             this.openDriveFolder(progressData.drive.path, progressData.drive.title); // display drive in composer
           }
-          // end loading connect button
-          this.$set(provider, 'loading', false);
 
           this.$emit('updateProgress', { progress: progressData.progress }); // update progress at the top of composer
         }
