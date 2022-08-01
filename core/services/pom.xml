@@ -333,7 +333,7 @@
             <info>
               <title>${rest.api.doc.title}</title>
               <version>${rest.api.doc.version}</version>
-              <description>{rest.api.doc.description}</description>
+              <description>${rest.api.doc.description}</description>
               <license>
                 <url>https://www.gnu.org/licenses/agpl-3.0.en.html</url>
                 <name>AGPL</name>
