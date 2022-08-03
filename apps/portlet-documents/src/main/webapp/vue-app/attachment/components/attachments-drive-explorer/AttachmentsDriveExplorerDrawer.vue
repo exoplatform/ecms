@@ -563,8 +563,15 @@ export default {
         const self = this;
         this.driveExplorerInitializing = true;
         //open it to generate the path
-        this.openDrive(this.defaultDrive).then(() => {
-          const defaultFolder = self.folders.find(folder => folder.title === self.defaultFolder);
+        let parentFolder = this.defaultFolder.substr(0, this.defaultFolder.lastIndexOf('/') + 1);
+        if (!parentFolder) {
+          parentFolder = '/';
+        }
+        if (!parentFolder.startsWith('/')) {
+          parentFolder = '/'.concat(parentFolder) ;
+        }
+        this.openDrive(this.defaultDrive, null, parentFolder).then(() => {
+          const defaultFolder = self.folders.find(folder => folder.name === self.defaultFolder.split('/').pop());
           if (self.entityType && self.entityId) {
             if (defaultFolder) {
               this.openFolder(defaultFolder).then(() => {
@@ -587,7 +594,10 @@ export default {
           } else if (self.defaultFolder.includes('/')){
             const pathParts= self.defaultFolder.split('/');
             const folderName = pathParts.pop();
-            const parentPath = pathParts.join('/');
+            let parentPath = pathParts.join('/');
+            if (!parentPath) {
+              parentPath = '/';
+            }
             this.fetchChildrenContents(parentPath).then(() => {
               const defaultFolder = self.folders.find(folder => folder.title === folderName);
               if (defaultFolder){
@@ -629,7 +639,7 @@ export default {
       this.privateDestinationForFile = folder.isPublic;
     },
 
-    openDrive(drive, group) {
+    openDrive(drive, group, parentPath) {
       this.currentAbsolutePath = '';
       this.selectedFolderPath = '';
       this.folderDestinationForFile = '';
@@ -642,7 +652,7 @@ export default {
         mainTitle: drive.mainTitle,
         isSelected: true
       };
-      return this.fetchChildrenContents('');
+      return this.fetchChildrenContents(parentPath);
     },
     fetchChildrenContents: function (parentPath) {
       this.loadingFolders = true;
