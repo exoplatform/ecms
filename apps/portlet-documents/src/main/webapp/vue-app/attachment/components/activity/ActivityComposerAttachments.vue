@@ -52,11 +52,15 @@ export default {
   data: () => ({
     attachments: null,
     entityType: 'activity',
-    reminder: {}
+    reminder: {},
+    attachedFiles: {
+      type: Array,
+      default: () => []
+    }
   }),
   computed: {
     attachmentsLength() {
-      return this.files.length;
+      return this.attachedFiles.length;
     },
     displayAttachments() {
       return this.attachmentsLength > 0;
@@ -84,7 +88,8 @@ export default {
   },
   methods: {
     retrieveAttachments() {
-      this.attachments = JSON.parse(JSON.stringify(this.files));
+      this.attachedFiles = this.files;
+      this.attachments = JSON.parse(JSON.stringify(this.attachedFiles));
 
       this.files.forEach((attachment, index) => {
         if (this.activityId) {
@@ -111,15 +116,15 @@ export default {
         });
     },
     addAttachment(file) {
-      this.files.push(file.attachment);
-      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files}));
+      this.attachedFiles.push(file.attachment);
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.attachedFiles}));
     },
     removeAttachment(file) {
-      const index = this.files.findIndex(attachment => attachment.id === file.id);
+      const index = this.attachedFiles.findIndex(attachment => attachment.id === file.id);
       if (index >= 0) {
-        this.files.splice(index, 1);
+        this.attachedFiles.splice(index, 1);
       }
-      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.files}));
+      document.dispatchEvent(new CustomEvent('activity-composer-edited', {detail: this.attachedFiles}));
     },
     openComposerChangesReminder() {
       this.reminder = {
