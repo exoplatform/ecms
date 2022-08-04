@@ -11,6 +11,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.api.search.data.SearchResult;
@@ -26,7 +32,6 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
 
-import io.swagger.annotations.*;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -36,7 +41,7 @@ import org.exoplatform.social.metadata.favorite.FavoriteService;
  * @author Ayoub Zayati
  */
 @Path("search/documents")
-@Api(tags = "search/documents", value = "search/documents", description = "Managing search documents")
+@Tag(name = "search/documents", description = "Managing search documents")
 public class FileSearchRestService implements ResourceContainer {
 
   private FileSearchServiceConnector fileSearchServiceConnector;
@@ -54,18 +59,18 @@ public class FileSearchRestService implements ResourceContainer {
   @Path("/recent")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets recent documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns recent documents")
+  @Operation(
+          summary = "Gets recent documents",
+          method = "GET",
+          description = "This returns recent documents")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response searchRecentDocuments(@ApiParam(value = "Query string", required = false) @QueryParam("q") String query,
-                                        @ApiParam(value = "My work", required = false, defaultValue = "false") @QueryParam("myWork") boolean myWork,
-                                        @ApiParam(value = "Sort field", required = false, defaultValue = "date") @QueryParam("sort") String sortField,
-                                        @ApiParam(value = "Sort direction", required = false, defaultValue = "desc") @QueryParam("direction") String sortDirection,
-                                        @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit,
-                                        @ApiParam(value = "favorites", required = false, defaultValue = "false") @QueryParam("favorites") boolean favorites) throws Exception {
+      @ApiResponse(responseCode = "200", description = "Request fulfilled") })
+  public Response searchRecentDocuments(@Parameter(description = "Query string") @QueryParam("q") String query,
+                                        @Parameter(description = "My work") @Schema(defaultValue = "false") @QueryParam("myWork") boolean myWork,
+                                        @Parameter(description = "Sort field") @Schema(defaultValue = "date") @QueryParam("sort") String sortField,
+                                        @Parameter(description = "Sort direction") @Schema(defaultValue = "desc") @QueryParam("direction") String sortDirection,
+                                        @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit,
+                                        @Parameter(description = "favorites") @Schema(defaultValue = "false") @QueryParam("favorites") boolean favorites) throws Exception {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
@@ -105,13 +110,13 @@ public class FileSearchRestService implements ResourceContainer {
   @Path("/recentSpaces")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets recent spaces documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns recent spaces documents")
+  @Operation(
+          summary = "Gets recent spaces documents",
+          method = "GET",
+          description = "This returns recent spaces documents")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response searchRecentSpacesDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+      @ApiResponse(responseCode = "200", description = "Request fulfilled") })
+  public Response searchRecentSpacesDocuments(@Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
