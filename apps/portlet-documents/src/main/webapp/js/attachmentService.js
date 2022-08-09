@@ -1,9 +1,13 @@
 export function fetchFoldersAndFiles(currentDrive, workspace, parentPath) {
-  if (parentPath.startsWith('/')) {
-    parentPath = parentPath.substr(1);
-  }
-  if (parentPath.endsWith('/')) {
-    parentPath = parentPath.substr(0, parentPath.length - 1);
+  if(parentPath) {
+    if (parentPath.startsWith('/')) {
+      parentPath = parentPath.substr(1);
+    }
+    if (parentPath.endsWith('/')) {
+      parentPath = parentPath.substr(0, parentPath.length - 1);
+    }
+  } else {
+    parentPath = '';
   }
   return fetch(`/portal/rest/managedocument/getFoldersAndFiles/?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}`,
     {})
