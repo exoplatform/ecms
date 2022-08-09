@@ -144,8 +144,8 @@
           </div>
 
           <div class="uploadedFiles">
-            <div class="uploadedFilesTitle">{{ $t('attachments.drawer.title') }} ({{ value.length }})</div>
-            <div v-if="value.length > 0" class="destinationFolder">
+            <div class="uploadedFilesTitle">{{ $t('attachments.drawer.title') }} ({{ attachedFiles.length }})</div>
+            <div v-if="attachedFiles.length > 0" class="destinationFolder">
               <div v-if="showDestinationPath && !displayMessageDestinationFolder" class="folderLocation">
                 <div
                   :title="schemaFolder[0]"
@@ -224,7 +224,7 @@
             </div>
             <div class="uploadedFilesItems">
               <div
-                v-for="attachedFile in value"
+                v-for="attachedFile in attachedFiles"
                 :key="attachedFile.name"
                 class="uploadedFilesItem">
                 <div class="showDestination">
@@ -281,7 +281,7 @@
         </div>
         <exo-folders-files-selector 
           v-if="showDocumentSelector && !showDestinationFolder && !showDestinationFolderForFile" 
-          :attached-files="value" 
+          :attached-files="attachedFiles"
           :space-id="spaceId"
           :is-cloud-enabled="isCloudDriveEnabled"
           :extension-refs="$refs"
@@ -387,6 +387,7 @@ export default {
       message: '',
       selectedFolder: '',
       uploadingFilesQueue: [],
+      attachedFiles: [],
       uploadingCount: 0,
       maxUploadInProgressCount: 2,
       maxProgress: 100,
@@ -467,25 +468,26 @@ export default {
     value: {
       deep: true,
       handler() {
-        this.$emit('attachmentsChanged', this.value);
-        this.displayMessageDestinationFolder = !this.value.some(val => val.uploadId != null && val.uploadId !== '');
-        if (this.value.length === 0) {
+        this.attachedFiles = this.value;
+        this.$emit('attachmentsChanged', this.attachedFiles);
+        this.displayMessageDestinationFolder = !this.attachedFiles.some(val => val.uploadId != null && val.uploadId !== '');
+        if (this.attachedFiles.length === 0) {
           this.pathDestinationFolder = '';
           this.showDestinationPath = false;
           this.schemaFolder = [];
           this.displayMessageDestinationFolder = true;
           this.addDefaultPath();
         }
-        if (this.value.length > 0 && !this.pathDestinationFolder) {
-          for (let i = 0; i < this.value.length; i++) {
-            if (!this.value[i].pathDestinationFolder) {
-              this.value[i].pathDestinationFolder = this.pathDestinationFolder;
+        if (this.attachedFiles.length > 0 && !this.pathDestinationFolder) {
+          for (let i = 0; i < this.attachedFiles.length; i++) {
+            if (!this.attachedFiles[i].pathDestinationFolder) {
+              this.attachedFiles[i].pathDestinationFolder = this.pathDestinationFolder;
             }
           }
         }
-        this.privateFilesAttached = this.value.some(file => file.isPublic === false);
-        this.fromAnotherSpaces = this.value.filter(({ space }) => space && space.name !== this.groupId)
-          .map(({ space }) => space.title).filter((value, i, self) => self.indexOf(value) === i).join(',');
+        this.privateFilesAttached = this.attachedFiles.some(file => file.isPublic === false);
+        this.fromAnotherSpaces = this.attachedFiles.filter(({ space }) => space && space.name !== this.groupId)
+          .map(({ space }) => space.title).filter((attachedFiles, i, self) => self.indexOf(attachedFiles) === i).join(',');
       }
     }
   },
@@ -572,7 +574,7 @@ export default {
       return Math.floor(Math.random() * maxUploadId);
     },
     queueUpload: function(file) {
-      if (this.value.length >= this.maxFilesCount) {
+      if (this.attachedFiles.length >= this.maxFilesCount) {
         this.filesCountLimitError = true;
         return;
       }
@@ -589,14 +591,14 @@ export default {
         return;
       }
 
-      const fileExists = this.value.some(f => f.name === file.name);
+      const fileExists = this.attachedFiles.some(f => f.name === file.name);
       if (fileExists) {
         this.sameFileErrorMessage = this.sameFileErrorMessage.replace('{0}', file.name);
         this.sameFileError = true;
         return;
       }
 
-      this.value.push(file);
+      this.attachedFiles.push(file);
       if (this.uploadingCount < this.maxUploadInProgressCount) {
         this.sendFileToServer(file);
       } else {
@@ -658,16 +660,16 @@ export default {
     },
     removeAttachedFile: function(file) {
       if (!file.id) {
-        this.value = this.value.filter(attachedFile => attachedFile.uploadId !== file.uploadId);
+        this.attachedFiles = this.attachedFiles.filter(attachedFile => attachedFile.uploadId !== file.uploadId);
         if (file.uploadProgress !== this.maxProgress) {
           this.uploadingCount--;
           this.$emit('uploadingCountChanged', this.uploadingCount);
           this.processNextQueuedUpload();
         }
       } else {
-        this.value = this.value.filter(attachedFile => attachedFile.id !== file.id);
+        this.attachedFiles = this.attachedFiles.filter(attachedFile => attachedFile.id !== file.id);
       }
-      this.$emit('input', this.value);
+      this.$emit('input', this.attachedFiles);
     },
     addDestinationFolder(pathDestinationFolder, folderName) {
       this.pathDestinationFolder = pathDestinationFolder;
@@ -676,9 +678,9 @@ export default {
       } else {
         this.showDestinationPath = true;
       }
-      for (let i = 0; i < this.value.length; i++) {
-        if (!this.value[i].destinationFolder){
-          this.value[i].destinationFolder = this.pathDestinationFolder;
+      for (let i = 0; i < this.attachedFiles.length; i++) {
+        if (!this.attachedFiles[i].destinationFolder){
+          this.attachedFiles[i].destinationFolder = this.pathDestinationFolder;
         }
       }
       this.schemaFolder = [];
@@ -693,12 +695,12 @@ export default {
       }
     },
     addDestinationFolderForFile(pathDestinationFolder, folder, isPublic){
-      for (let i =0 ;i< this.value.length;i++){
-        if (this.value[i].name === this.destinationFileName){
-          this.value[i].pathDestinationFolderForFile = folder;
-          this.value[i].destinationFolder = pathDestinationFolder;
+      for (let i =0 ;i< this.attachedFiles.length;i++){
+        if (this.attachedFiles[i].name === this.destinationFileName){
+          this.attachedFiles[i].pathDestinationFolderForFile = folder;
+          this.attachedFiles[i].destinationFolder = pathDestinationFolder;
           // TODO: get 'isPublic' property of file from rest, now 'isPublic' assigned to 'isPublic' property of destination folder
-          this.value[i].isPublic = isPublic;
+          this.attachedFiles[i].isPublic = isPublic;
         }
       }
       this.pathDestinationFolder = '';
@@ -713,10 +715,10 @@ export default {
     },
     toggleServerFileSelector(selectedFiles){
       if (selectedFiles) {
-        this.value = selectedFiles;
+        this.attachedFiles = selectedFiles;
         this.attachmentInfo = true;
-        this.$emit('input', this.value);
-        this.$emit('attachmentsChanged', this.value);
+        this.$emit('input', this.attachedFiles);
+        this.$emit('attachmentsChanged', this.attachedFiles);
         if (selectedFiles.length >1) {
           this.attachmentSeveralFiles = true;
         }
@@ -763,11 +765,11 @@ export default {
       }
     },
     deleteDestinationFolderForFile(fileName){
-      for (let i=0;i<this.value.length;i++){
-        if (this.value[i].name === fileName){
-          this.value[i].showDestinationFolderForFile = '';
-          this.value[i].pathDestinationFolderForFile = '';
-          this.value[i].isPublic = true;
+      for (let i=0;i<this.attachedFiles.length;i++){
+        if (this.attachedFiles[i].name === fileName){
+          this.attachedFiles[i].showDestinationFolderForFile = '';
+          this.attachedFiles[i].pathDestinationFolderForFile = '';
+          this.attachedFiles[i].isPublic = true;
           break;
         }
       }
