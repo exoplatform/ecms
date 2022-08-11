@@ -1,6 +1,9 @@
 package org.exoplatform.services.rest.transferRules;
 
-import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
@@ -13,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/transferRules")
-@Api(tags = "/transferRules", value = "/transferRules", description = "Managing transfer rules")
+@Tag(name = "/transferRules", description = "Managing transfer rules")
 public class TransferRulesRestService implements ResourceContainer {
 
   private SettingService settingService;
@@ -26,13 +29,13 @@ public class TransferRulesRestService implements ResourceContainer {
   @Path("/getTransfertRulesDocumentStatus")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets the status of the transfert rules documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns the status of the transfert rules documents")
+  @Operation(
+          summary = "Gets the status of the transfert rules documents",
+          method = "GET",
+          description = "This returns the status of the transfert rules documents")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled"),
-      @ApiResponse (code = 500, message = "Internal server error due to data encoding")})
+      @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+      @ApiResponse (responseCode = "500", description = "Internal server error due to data encoding")})
   public Response getTransfertRulesDocumentStatus() {
     SettingValue<?> sharedDocumentSettingValue = settingService.get(Context.GLOBAL.id("sharedDocumentStatus"),
                                                       Scope.APPLICATION.id("sharedDocumentStatus"),
@@ -49,14 +52,14 @@ public class TransferRulesRestService implements ResourceContainer {
   @Path("/saveSharedDocumentStatus")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("administrators")
-  @ApiOperation(value = "Updates the shared document status",
-      httpMethod = "PUT",
-      response = Response.class,
-      notes = "Updates the shared document status.")
+  @Operation(
+          summary = "Updates the shared document status",
+          method = "PUT",
+          description = "Updates the shared document status.")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled"),
-      @ApiResponse(code = 400, message = "Invalid query input"),
-      @ApiResponse (code = 500, message = "Internal server error due to data encoding")})
+      @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+      @ApiResponse(responseCode = "400", description = "Invalid query input"),
+      @ApiResponse (responseCode = "500", description = "Internal server error due to data encoding")})
   public Response saveSharedDocumentStatus(String sharedDocumentStatus) {
     settingService.set(Context.GLOBAL.id("sharedDocumentStatus"), Scope.APPLICATION.id("sharedDocumentStatus"),
                        "exo:sharedDocumentStatus",
@@ -68,14 +71,14 @@ public class TransferRulesRestService implements ResourceContainer {
   @Path("/saveDownloadDocumentStatus")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("administrators")
-  @ApiOperation(value = "Updates the download document status",
-      httpMethod = "PUT",
-      response = Response.class,
-      notes = "Updates the download document status.")
+  @Operation(
+          summary = "Updates the download document status",
+          method = "PUT",
+          description = "Updates the download document status.")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled"),
-      @ApiResponse(code = 400, message = "Invalid query input"),
-      @ApiResponse (code = 500, message = "Internal server error due to data encoding")})
+      @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+      @ApiResponse(responseCode = "400", description = "Invalid query input"),
+      @ApiResponse (responseCode = "500", description = "Internal server error due to data encoding")})
   public Response saveDownloadDocumentStatus(String downloadDocumentStatus) {
     settingService.set(Context.GLOBAL.id("downloadDocumentStatus"), Scope.APPLICATION.id("downloadDocumentStatus"),
                        "exo:downloadDocumentStatus",

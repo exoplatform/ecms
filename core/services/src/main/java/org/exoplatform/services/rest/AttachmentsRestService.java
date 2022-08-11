@@ -29,9 +29,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.apache.commons.lang.StringUtils;
 
-import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.services.attachments.model.*;
@@ -47,10 +53,9 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
-import io.swagger.annotations.*;
 
 @Path("/attachments")
-@Api(value = "/attachments", description = "Managing attachments") // NOSONAR deprecated attribute
+@Tag(name = "/attachments", description = "Managing attachments")
 public class AttachmentsRestService implements ResourceContainer {
   private static final Log    LOG = ExoLogger.getLogger(AttachmentsRestService.class.getName());
 
@@ -72,14 +77,15 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Link an existing attachment to the given entity (Event, Task, Wiki,...)", httpMethod = "POST", response = Response.class, consumes = "application/json")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response linkAttachmentToEntity(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                         @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                         @ApiParam(value = "file uuid stored in jcr to be attached to the provided entity", required = true) @PathParam("attachmentId") String attachmentId) {
+  @Operation(summary = "Link an attachment to an entity", description = "Link an existing attachment to the given entity (Event, Task, Wiki,...)", method = "POST")
+  @ApiResponses(value = { 
+          @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response linkAttachmentToEntity(@Parameter(description = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                         @Parameter(description = "entity type", required = true) @PathParam("entityType") String entityType,
+                                         @Parameter(description = "file uuid stored in jcr to be attached to the provided entity", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -108,14 +114,15 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}")
   @Consumes("application/x-www-form-urlencoded")
   @RolesAllowed("users")
-  @ApiOperation(value = "Update entity's attachments list", httpMethod = "PUT", response = Response.class, consumes = "application/x-www-form-urlencoded")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response updateAttachmentsLinkedToContext(@ApiParam(value = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                                   @ApiParam(value = "entity type", required = true) @PathParam("entityType") String entityType,
-                                                   @ApiParam(value = "list of files uuid stored in jcr attached to the provided entity", required = true) @FormParam("attachmentId") List<String> attachmentIds) {
+  @Operation(summary = "Update entity's attachments list", method = "PUT", description = "Update entity's attachments list")
+  @ApiResponses(value = { 
+          @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response updateAttachmentsLinkedToContext(@Parameter(description = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                                   @Parameter(description = "entity type", required = true) @PathParam("entityType") String entityType,
+                                                   @Parameter(description = "list of files uuid stored in jcr attached to the provided entity", required = true) @FormParam("attachmentId") List<String> attachmentIds) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -140,13 +147,14 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, produces = "application/json")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response getAttachmentsByEntity(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                         @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
+  @Operation(summary = "Get list of attachments linked to an entity", method = "GET", description = "Get the list of attachments linked to the given entity")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response getAttachmentsByEntity(@Parameter(description = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                         @Parameter(description = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity identifier must be a positive integer").build();
@@ -177,14 +185,15 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Get the list of attachments linked to the given entity", httpMethod = "GET", response = Response.class, produces = "application/json")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response getAttachmentByIdByEntity(@ApiParam(value = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId,
-                                            @ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                            @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
+  @Operation(summary = "Get list of attachments linked to the given entity", method = "GET", description = "Get the list of attachments linked to the given entity")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response getAttachmentByIdByEntity(@Parameter(description = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId,
+                                            @Parameter(description = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                            @Parameter(description = "Entity type", required = true) @PathParam("entityType") String entityType) throws Exception {
     if (StringUtils.isBlank(attachmentId)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Attachment identifier is mandatory").build();
     }
@@ -212,12 +221,13 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Get an attachment with its jcr uuid", httpMethod = "GET", response = Response.class, produces = "application/json")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response getAttachmentById(@ApiParam(value = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId) throws Exception {
+  @Operation(summary = "Get an attachment with its jcr uuid", method = "GET", description = "Get an attachment with its jcr uuid")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response getAttachmentById(@Parameter(description = "Attachment technical identifier", required = true) @PathParam("attachmentId") String attachmentId) throws Exception {
     if (StringUtils.isBlank(attachmentId)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Attachment identifier is mandatory").build();
     }
@@ -241,13 +251,14 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Delete the list of attachments linked to the given entity", httpMethod = "DELETE", response = Response.class, consumes = "application/json")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response deleteAttachmentsByEntity(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                            @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType) {
+  @Operation(summary = "Delete a list of attachments", description = "Delete the list of attachments linked to the given entity", method = "DELETE")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response deleteAttachmentsByEntity(@Parameter(description = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                            @Parameter(description = "Entity type", required = true) @PathParam("entityType") String entityType) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -276,14 +287,15 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("{entityType}/{entityId}/{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Delete an attachment linked to the given entity", httpMethod = "DELETE", response = Response.class, consumes = "application/json", notes = "returns deleted attachment")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.OK, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response deleteEntityAttachment(@ApiParam(value = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
-                                         @ApiParam(value = "Entity type", required = true) @PathParam("entityType") String entityType,
-                                         @ApiParam(value = "Attachment id", required = true) @PathParam("attachmentId") String attachmentId) {
+  @Operation(summary = "Delete an attachment linked to the given entity", method = "DELETE",  description = "Delete an attachment linked to the given entity and returns the deleted attachment")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response deleteEntityAttachment(@Parameter(description = "Entity technical identifier", required = true) @PathParam("entityId") long entityId,
+                                         @Parameter(description = "Entity type", required = true) @PathParam("entityType") String entityType,
+                                         @Parameter(description = "Attachment id", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (entityId <= 0) {
       return Response.status(Response.Status.BAD_REQUEST).entity("Entity technical identifier must be positive").build();
@@ -320,12 +332,13 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("/downloadByPath")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Downloads a list of attachments by it paths", httpMethod = "POST", response = Response.class, consumes = "application/x-www-form-urlencoded", notes = "redirects to download URL of binary that contains the list of attachments in a Zip file if multiple, else the selected file")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.SEE_OTHER, message = "Request Redirect"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response downloadActivityAttachments(@ApiParam(value = "Filename to use for download", required = true) @QueryParam("fileName") String fileName,
-                                              @ApiParam(value = "List of file attachments to download", required = true) List<ActivityFileAttachment> activityFileAttachments) throws URISyntaxException {
+  @Operation(summary = "Downloads a list of attachments by it paths", method = "POST", description = "redirects to download URL of binary that contains the list of attachments in a Zip file if multiple, else the selected file")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "303", description = "Request Redirect"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response downloadActivityAttachments(@Parameter(description = "Filename to use for download", required = true) @QueryParam("fileName") String fileName,
+                                              @RequestBody(description = "List of file attachments to download", required = true) List<ActivityFileAttachment> activityFileAttachments) throws URISyntaxException {
     if (activityFileAttachments == null || activityFileAttachments.isEmpty()) {
       return Response.status(Status.BAD_REQUEST).entity("attachments param is mandatory").build();
     }
@@ -343,16 +356,17 @@ public class AttachmentsRestService implements ResourceContainer {
   @Consumes("application/x-www-form-urlencoded")
   @Produces(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(value = "Move an attachment to a destination path", httpMethod = "POST", response = Response.class, consumes = "application/x-www-form-urlencoded", notes = "returns empty response")
-  @ApiResponses(value = { @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
-      @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Invalid query input"),
-      @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-      @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error") })
-  public Response moveAttachmentToNewPath(@ApiParam(value = "New path", required = true) @FormParam("newPath") String newPath,
-                                          @ApiParam(value = "New destination path's drive", required = true) @FormParam("newPathDrive") String newPathDrive,
-                                          @ApiParam(value = "New destination path's drive", required = true) @FormParam("entityType") String entityType,
-                                          @ApiParam(value = "Entity technical identifier", required = true) @FormParam("entityId") long entityId,
-                                          @ApiParam(value = "Entity type", required = true) @PathParam("attachmentId") String attachmentId) {
+  @Operation(summary = "Move an attachment to a destination path", method = "POST", description = "Move an attachment to a destination path and returns empty response")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "500", description = "Internal server error") })
+  public Response moveAttachmentToNewPath(@Parameter(description = "New path", required = true) @FormParam("newPath") String newPath,
+                                          @Parameter(description = "New destination path's drive", required = true) @FormParam("newPathDrive") String newPathDrive,
+                                          @Parameter(description = "New destination path's drive", required = true) @FormParam("entityType") String entityType,
+                                          @Parameter(description = "Entity technical identifier", required = true) @FormParam("entityId") long entityId,
+                                          @Parameter(description = "Entity type", required = true) @PathParam("attachmentId") String attachmentId) {
 
     if (StringUtils.isEmpty(newPathDrive)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("New destination path's drive is mandatory").build();
@@ -385,16 +399,16 @@ public class AttachmentsRestService implements ResourceContainer {
   @Path("/newDoc")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "create new document",
-    httpMethod = "POST",
-    response = Response.class,
-    notes = "This returns a new created document")
+  @Operation(
+          summary = "create new document",
+          method = "POST",
+          description = "create new document and returns a new created document")
   @ApiResponses(value = {
-    @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response createNewDocument(@ApiParam(value = "title", required = false, defaultValue = "20") @FormParam("title") String title,
-                                    @ApiParam(value = "path of new document", required = true) @FormParam("path") String path,
-                                    @ApiParam(value = "New destination path's drive", required = true) @FormParam("pathDrive") String pathDrive,
-                                    @ApiParam(value = "template name of new document", required = false, defaultValue = "20") @FormParam("templateName") String templateName) throws Exception {
+    @ApiResponse(responseCode = "200", description = "Request fulfilled") })
+  public Response createNewDocument(@Parameter(description = "title") @Schema(defaultValue = "20") @FormParam("title") String title,
+                                    @Parameter(description = "path of new document", required = true) @FormParam("path") String path,
+                                    @Parameter(description = "New destination path's drive", required = true) @FormParam("pathDrive") String pathDrive,
+                                    @Parameter(description = "template name of new document") @Schema(defaultValue = "20") @FormParam("templateName") String templateName) throws Exception {
     if (StringUtils.isEmpty(title)) {
       return Response.status(Response.Status.BAD_REQUEST).entity("New document title is mandatory").build();
     }

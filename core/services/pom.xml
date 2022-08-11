@@ -209,6 +209,13 @@
       <groupId>com.rometools</groupId>
       <artifactId>rome</artifactId>
     </dependency>
+    <!--swagger-->
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!--test-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
