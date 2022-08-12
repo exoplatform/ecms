@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms</artifactId>
-    <version>6.4.x-SNAPSHOT</version>
+    <version>6.4.0-20220811</version>
   </parent>
   <artifactId>ecms-packaging</artifactId>
   <packaging>pom</packaging>
