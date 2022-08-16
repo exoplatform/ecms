@@ -164,4 +164,14 @@ public interface ThumbnailService {
    * @return ComponentPlugin list
    */
   public List<ComponentPlugin> getComponentPlugins();
+
+  /**
+   * Creates a thumbnail with custom provided width and height
+   *
+   * @param imageContent original image content
+   * @param targetWidth target resized image width
+   * @param targetHeight target resized image height
+   * @return byte array of image content
+   */
+  byte[] createCustomThumbnail(byte [] imageContent, int targetWidth, int targetHeight) throws Exception;
 }
