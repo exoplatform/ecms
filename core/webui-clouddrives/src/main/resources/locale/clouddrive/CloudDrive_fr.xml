@@ -99,18 +99,18 @@
   <cloudDriveSettings>
     <label>
       <title>Documents</title>
-      <subtitle>Connect your personal drives</subtitle>
-      <description>Access your personal drives from your Digital Wokrplace</description>
+      <subtitle>Connectez vos lecteurs personnels</subtitle>
+      <description>Accédez à vos lecteurs personnels depuis votre Digital Workplace</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
+      <title>Connectez vos lecteurs personnels</title>
       <button>
         <connect>Ajouter contact</connect>
       </button>
-      <noConnector>No personal drive connector available</noConnector>
+      <noConnector>Aucun connecteur de calendrier personnel n'est disponible</noConnector>
     </drawer>
     <alert>
-      <successMessage>Your cloud drive is connected correctly</successMessage>
+      <successMessage>Votre calendrier est correctement connecté</successMessage>
       <errorMessage>Échec de la connexion</errorMessage>
     </alert>
   </cloudDriveSettings>
