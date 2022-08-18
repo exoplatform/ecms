@@ -86,6 +86,10 @@ export default {
           // end loading connect button
           this.$set(provider, 'loading', false);
           this.$emit('display-alert', this.$t('cloudDriveSettings.alert.successMessage'));
+          // after connect successful
+          if (data.drive.connected) {
+            this.$set(provider, 'user', data.drive.title);
+          }
         },
         (error) => {
           if (error) {
