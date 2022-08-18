@@ -192,13 +192,13 @@ export default {
         });
       }
 
-      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).forEach(newFile => {
-        this.queueUpload(newFile);
+      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).forEach((newFile,index) => {
+        this.queueUpload(newFile,index);
       });
       this.$refs.uploadInput.value = null;
     },
-    queueUpload: function (file) {
-      if (this.attachments.length >= this.maxFilesCount) {
+    queueUpload: function (file,index) {
+      if (index === this.maxFilesCount) {
         this.$root.$emit('attachments-notification-alert', {
           message: this.maxFileCountErrorLabel,
           type: 'error',
