@@ -36,6 +36,12 @@
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-component-upgrade</artifactId>
     </dependency>
+    <!--swagger-->
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <!-- need for test -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>

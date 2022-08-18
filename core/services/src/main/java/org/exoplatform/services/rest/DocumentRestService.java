@@ -3,12 +3,6 @@
  */
 package org.exoplatform.services.rest;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,6 +11,12 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
@@ -25,7 +25,7 @@ import org.exoplatform.services.security.ConversationState;
  * @author Ayoub Zayati
  */
 @Path("/documents")
-@Api(tags = "/documents", value = "/documents", description = "Managing documents")
+@Tag(name = "/documents", description = "Managing documents")
 public class DocumentRestService implements ResourceContainer {
 
   private DocumentService  documentService;
@@ -40,13 +40,13 @@ public class DocumentRestService implements ResourceContainer {
   @Path("/favorite")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets favorite documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns favorite documents")
+  @Operation(
+          summary = "Gets favorite documents",
+          method = "GET",
+          description = "This returns favorite documents")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response getFavoriteDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+      @ApiResponse(responseCode = "200", description = "Request fulfilled") })
+  public Response getFavoriteDocuments(@Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
@@ -58,15 +58,15 @@ public class DocumentRestService implements ResourceContainer {
   @Path("/folder")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets documents by folder",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns documents by folder")
+  @Operation(
+          summary = "Gets documents by folder",
+          method = "GET",
+          description = "This returns documents by folder")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled"),
-      @ApiResponse(code = 400, message = "Invalid query input") })
-  public Response getDocumentsByFolder(@ApiParam(value = "Folder from which documents to be retrieved", required = true) @QueryParam("folder") String folder,
-                                       @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+      @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+      @ApiResponse(responseCode = "400", description = "Invalid query input") })
+  public Response getDocumentsByFolder(@Parameter(description = "Folder from which documents to be retrieved", required = true) @QueryParam("folder") String folder,
+                                       @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
     if (folder == null) {
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
@@ -80,15 +80,15 @@ public class DocumentRestService implements ResourceContainer {
   @Path("/query")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets documents by quey",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns documents by quey")
+  @Operation(
+          summary = "Gets documents by quey",
+          method = "GET",
+          description = "This returns documents by quey")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled"),
-      @ApiResponse(code = 400, message = "Invalid query input") })
-  public Response getDocumentsByQuery(@ApiParam(value = "Query from which documents to be retrieved", required = true) @QueryParam("query") String query,
-                                      @ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+      @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+      @ApiResponse(responseCode = "400", description = "Invalid query input") })
+  public Response getDocumentsByQuery(@Parameter(description = "Query from which documents to be retrieved", required = true) @QueryParam("query") String query,
+                                      @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
     if (query == null) {
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
@@ -102,13 +102,10 @@ public class DocumentRestService implements ResourceContainer {
   @Path("/shared")
   @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Gets shared documents",
-      httpMethod = "GET",
-      response = Response.class,
-      notes = "This returns shared documents")
+  @Operation(summary = "Gets shared documents", method = "GET", description = "This returns shared documents")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Request fulfilled") })
-  public Response getSharedDocuments(@ApiParam(value = "Limit", required = false, defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
+      @ApiResponse(responseCode = "200", description = "Request fulfilled") })
+  public Response getSharedDocuments(@Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit) throws Exception {
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
