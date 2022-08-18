@@ -15,10 +15,13 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.services.cms.clouddrives.settings;
+package org.exoplatform.services.rest;
 
 import io.swagger.annotations.*;
 import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.services.cms.clouddrives.settings.CloudDriveSettingsRestEntity;
+import org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsService;
+import org.exoplatform.services.cms.clouddrives.settings.RestUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -30,8 +33,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/v1/clouddrive/settings")
-@Api(value = "/v1/clouddrive/settings", description = "Manages clouddrive connectors settings associated to users") // NOSONAR
+@Path("/clouddrive/settings")
+@Api(value = "/clouddrive/settings", description = "Manages clouddrive connectors settings associated to users") // NOSONAR
 public class CloudDriveUserSettingsRest {
 
   private static final Log                LOG = ExoLogger.getLogger(CloudDriveUserSettingsRest.class);
