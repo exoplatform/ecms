@@ -58,6 +58,8 @@ export default {
     connectToCloudDrive: function(provider) {
       // start loading connect button
       this.$set(provider, 'loading', true);
+      this.$set(provider, 'user', 'ahmed@exo.com');
+      this.$emit('connectors-loaded', this.providers);
       // init cloudDrives module with Personal Documents workspace and path recieved in getUserDrive()
       // note: cloudDrives.init() also is called by server
       // initialize cloud drive context node

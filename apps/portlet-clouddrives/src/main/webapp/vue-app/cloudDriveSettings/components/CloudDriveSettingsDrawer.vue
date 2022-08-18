@@ -84,6 +84,9 @@ export default {
       default: null,
     },
   },
+  created() {
+    this.$root.$on('cloud-drive-connectors-drawer-open', this.open);
+  },
   methods: {
     open() {
       if (this.$refs.cloudDriveSettingsDrawer) {
