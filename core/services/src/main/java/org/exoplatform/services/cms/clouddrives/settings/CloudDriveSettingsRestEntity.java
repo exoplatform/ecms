@@ -26,11 +26,8 @@ import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CloudDriveSettingsRestEntity {
-    private String                        id;
 
     private String                        connector;
-
-    private String                        user;
 
     private String                        account;
 

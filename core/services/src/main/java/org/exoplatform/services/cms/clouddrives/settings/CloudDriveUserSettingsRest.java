@@ -15,15 +15,16 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.services.rest;
+package org.exoplatform.services.cms.clouddrives.settings;
 
-import io.swagger.annotations.*;
-import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.services.cms.clouddrives.settings.CloudDriveSettingsRestEntity;
-import org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsService;
-import org.exoplatform.services.cms.clouddrives.settings.RestUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 import javax.annotation.security.RolesAllowed;
@@ -34,8 +35,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/clouddrive/settings")
-@Api(value = "/clouddrive/settings", description = "Manages clouddrive connectors settings associated to users") // NOSONAR
-public class CloudDriveUserSettingsRest {
+@Tag(name = "/clouddrive/settings", description = "Manages clouddrive connectors settings associated to users")
+public class CloudDriveUserSettingsRest implements ResourceContainer {
 
   private static final Log                LOG = ExoLogger.getLogger(CloudDriveUserSettingsRest.class);
 
@@ -52,23 +53,21 @@ public class CloudDriveUserSettingsRest {
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("users")
-  @ApiOperation(
-          value = "Saves clouddrive connectors settings for authenticated user",
-          httpMethod = "PUT",
-          response = Response.class,
-          consumes = "application/json"
+  @Operation(
+          summary = "Saves clouddrive connectors settings for authenticated user",
+          method = "PUT"
   )
   @ApiResponses(
           value = {
-                  @ApiResponse(code = HTTPStatus.NO_CONTENT, message = "Request fulfilled"),
-                  @ApiResponse(code = HTTPStatus.BAD_REQUEST, message = "Bad request"),
-                  @ApiResponse(code = HTTPStatus.UNAUTHORIZED, message = "Unauthorized operation"),
-                  @ApiResponse(code = HTTPStatus.INTERNAL_ERROR, message = "Internal server error"),
+                  @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+                  @ApiResponse(responseCode = "400", description = "Invalid query input"),
+                  @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+                  @ApiResponse(responseCode = "500", description = "Internal server error")
           }
   )
   public Response saveUserSettings(
-          @ApiParam(
-                  value = "User's clouddrive connectors settings to update",
+          @Parameter(
+                  description = "User's clouddrive connectors settings to update",
                   required = true
           )
                   CloudDriveSettingsRestEntity cloudDriveSettingsRestEntity) {

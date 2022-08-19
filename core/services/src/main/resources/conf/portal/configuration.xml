@@ -39,7 +39,7 @@
   </component>
 
   <component>
-    <type>org.exoplatform.services.rest.CloudDriveUserSettingsRest</type>
+    <type>org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsRest</type>
   </component>
 
   <external-component-plugins>
