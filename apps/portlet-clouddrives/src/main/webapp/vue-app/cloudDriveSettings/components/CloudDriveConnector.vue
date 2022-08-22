@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <script>
-import { getUserDrive, saveUserSettings } from '../js/cloudDriveService';
+import { getUserDrive, saveUserSettings, getUserSettings } from '../js/cloudDriveService';
 
 export default {
   data: function() {
@@ -54,11 +54,13 @@ export default {
         this.alert = { message: err.message, type: 'error' };
       });
   },
+  mounted() {
+    this.init();
+  },
   methods: {
     connectToCloudDrive: function(provider) {
       // start loading connect button
       this.$set(provider, 'loading', true);
-      this.$set(provider, 'user', 'ahmed@exo.com');
       this.$emit('connectors-loaded', this.providers);
       // init cloudDrives module with Personal Documents workspace and path recieved in getUserDrive()
       // note: cloudDrives.init() also is called by server
@@ -88,7 +90,7 @@ export default {
           const settings = {
             connector: provider.id,
             account: userEmail
-          }
+          };
           saveUserSettings(settings).then(() => {
             // after connect successful
             if (data.drive.connected) {
@@ -100,7 +102,7 @@ export default {
           }).finally(() => {
             // end loading connect button
             this.$set(provider, 'loading', false);
-          })
+          });
         },
         (error) => {
           if (error) {
@@ -145,6 +147,17 @@ export default {
     },
     capitalized(value) { // capitalize the first letter of value
       return typeof value !== 'string' ? '' :  value.charAt(0).toUpperCase() + value.slice(1);
+    },
+    init() {
+      getUserSettings().then(res => {
+        Object.keys(res).forEach((element, index) => {
+          Object.values(this.providers).forEach((provider) => {
+            if (element === provider.id) {
+              this.$set(provider, 'user', Object.values(res)[index]);
+            }
+          });
+        });
+      });
     }
   },
 };

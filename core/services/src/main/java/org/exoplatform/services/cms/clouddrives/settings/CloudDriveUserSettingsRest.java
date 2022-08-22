@@ -26,11 +26,10 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.json.JSONObject;
 
 import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -80,6 +79,33 @@ public class CloudDriveUserSettingsRest implements ResourceContainer {
       return Response.noContent().build();
     } catch (Exception e) {
       LOG.warn("Error saving clouddrive connectors settings for user with id '{}'", identityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
+    }
+  }
+
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @Operation(
+          summary = "Get clouddrive connectors settings for authenticated user",
+          method = "GET"
+  )
+  @ApiResponses(
+          value = {
+                  @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+                  @ApiResponse(responseCode = "400", description = "Invalid query input"),
+                  @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+                  @ApiResponse(responseCode = "500", description = "Internal server error")
+          }
+  )
+  public Response getUserSettings() {
+    long identityId = RestUtils.getCurrentUserIdentityId(identityManager);
+    try {
+      String cloudDriveSettingsRestEntity = cloudDriveUserSettingsService.getCloudDriveUserSettings(identityId);
+      return Response.ok(cloudDriveSettingsRestEntity).build();
+    } catch (Exception e) {
+      LOG.warn("Error retrieving clouddrive connectors settings for user with id '{}'", identityId, e);
       return Response.serverError().entity(e.getMessage()).build();
     }
   }

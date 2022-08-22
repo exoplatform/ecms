@@ -18,6 +18,7 @@
 package org.exoplatform.services.cms.clouddrives.settings;
 
 import org.exoplatform.social.core.identity.model.Identity;
+import org.json.JSONObject;
 
 public interface CloudDriveUserSettingsService {
 
@@ -28,4 +29,11 @@ public interface CloudDriveUserSettingsService {
      * @param cloudDriveSettingsRestEntity object of {@link CloudDriveSettingsRestEntity}
      */
     void saveCloudDriveUserSettings(long identityId, CloudDriveSettingsRestEntity cloudDriveSettingsRestEntity);
+
+    /**
+     * Gets clouddrive connectors settings for authenticated user
+     *
+     * @param identityId technical identifier of {@link Identity}
+     */
+    String getCloudDriveUserSettings(long identityId);
 }

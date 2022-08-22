@@ -61,3 +61,14 @@ export function saveUserSettings(settings) {
   });
 }
 
+export function getUserSettings() {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/settings`,{
+    credentials: 'include',
+    method: 'GET',
+  }).then((resp) => {
+    if (resp && resp.ok) {
+      return resp.json();
+    }
+  });
+}
+
