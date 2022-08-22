@@ -89,6 +89,9 @@ export default {
     },
     connect(providerId) {
       this.$root.$emit('cloud-drive-connect', providerId);
+    },
+    disconnect(){
+      this.$root.$emit('cloud-drive-disconnect');
     }
   },
 };

@@ -30,6 +30,7 @@ export default {
   },
   created() {
     this.$root.$on('cloud-drive-connect', this.connectToCloudDrive);
+    this.$root.$on('cloud-drive-disconnect', this.disconnectFromCloudDrive);
     this.connectorsImages = extensionRegistry.loadExtensions('cloud-drive-connectors', 'images') || [];
     getUserDrive()
       .then(data => {
@@ -55,6 +56,9 @@ export default {
       });
   },
   methods: {
+    disconnectFromCloudDrive: function(){
+      cloudDrives.disconnect(this.userDrive.workspace, this.userDrive.homePath);
+    },
     connectToCloudDrive: function(provider) {
       // start loading connect button
       this.$set(provider, 'loading', true);
