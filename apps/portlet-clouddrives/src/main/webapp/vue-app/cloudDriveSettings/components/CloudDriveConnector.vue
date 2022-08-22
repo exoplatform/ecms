@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <script>
-import { getUserDrive } from '../js/cloudDriveService';
+import { getUserDrive, saveUserSettings } from '../js/cloudDriveService';
 
 export default {
   data: function() {
@@ -84,14 +84,23 @@ export default {
             // if another drive is in connecting progress progress line will appear again, but it's hiding can be visible to user
             this.$emit('updateProgress', { progress: null });
           }, latency);
-          // note: if drawer was opened before and some drive finished its connecting this will close drawer
-          // end loading connect button
-          this.$set(provider, 'loading', false);
-          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.successMessage'));
-          // after connect successful
-          if (data.drive.connected) {
-            this.$set(provider, 'user', data.drive.title);
+          const userEmail = data.drive.title.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi)[0];
+          const settings = {
+            connector: provider.id,
+            account: userEmail
           }
+          saveUserSettings(settings).then(() => {
+            // after connect successful
+            if (data.drive.connected) {
+              this.$set(provider, 'user', userEmail);
+            }
+            this.$emit('display-alert', this.$t('cloudDriveSettings.alert.successMessage'));
+          }).catch(() => {
+            this.$emit('display-alert', this.$t('cloudDriveSettings.alert.errorSaveUserSettings'), 'error');
+          }).finally(() => {
+            // end loading connect button
+            this.$set(provider, 'loading', false);
+          })
         },
         (error) => {
           if (error) {

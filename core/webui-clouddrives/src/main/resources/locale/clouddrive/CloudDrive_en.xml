@@ -113,6 +113,7 @@
     <alert>
       <successMessage>Your cloud drive is connected correctly</successMessage>
       <errorMessage>Failed connection</errorMessage>
+      <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
     </alert>
   </cloudDriveSettings>
 </bundle>
