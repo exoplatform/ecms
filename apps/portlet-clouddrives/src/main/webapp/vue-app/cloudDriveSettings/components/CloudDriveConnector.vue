@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <script>
-import { getUserDrive, saveUserSettings, getUserSettings } from '../js/cloudDriveService';
+import { getUserDrive, disconnect, saveUserSettings, getUserSettings } from '../js/cloudDriveService';
 
 export default {
   data: function() {
@@ -30,6 +30,7 @@ export default {
   },
   created() {
     this.$root.$on('cloud-drive-connect', this.connectToCloudDrive);
+    this.$root.$on('cloud-drive-disconnect', this.disconnectFromCloudDrive);
     this.connectorsImages = extensionRegistry.loadExtensions('cloud-drive-connectors', 'images') || [];
     getUserDrive()
       .then(data => {
@@ -58,6 +59,9 @@ export default {
     this.init();
   },
   methods: {
+    disconnectFromCloudDrive: function(provider) {
+      disconnect(this.userDrive.workspace, provider.user, provider.id);
+    },
     connectToCloudDrive: function(provider) {
       // start loading connect button
       this.$set(provider, 'loading', true);

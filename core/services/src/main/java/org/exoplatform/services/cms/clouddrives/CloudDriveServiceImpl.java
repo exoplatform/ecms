@@ -29,13 +29,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.jcr.query.Query;
 
+import org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.picocontainer.Startable;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.clouddrives.features.CloudDriveFeatures;
@@ -116,6 +116,10 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /** The jcr service. */
   protected final RepositoryService                          jcrService;
 
+  private CloudDriveUserSettingsService                      cloudDriveUserSettingsService;
+
+  private IdentityManager                                    identityManager;
+
   /** The session providers. */
   protected final SessionProviderService                     sessionProviders;
 
@@ -135,7 +139,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * User-in-repositoryDrives reference map for unregistration of disconnected
    * and removed drives (via {@link LocalDrivesListener}).
-   * 
+   *
    * @see #repositoryDrives
    */
   protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives        =
@@ -159,16 +163,20 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   /**
    * Cloud Drive service with storage in JCR and with managed features.
-   * 
+   *
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
    * @param features {@link CloudDriveFeatures}
    */
   public CloudDriveServiceImpl(RepositoryService jcrService,
                                SessionProviderService sessionProviders,
-                               CloudDriveFeatures features) {
+                               CloudDriveFeatures features,
+                               CloudDriveUserSettingsService cloudDriveUserSettingsService,
+                               IdentityManager identityManager) {
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
+    this.cloudDriveUserSettingsService = cloudDriveUserSettingsService;
+    this.identityManager = identityManager;
 
     // Add internal listener for handling consistency in users-per-repository
     // map (on drive disconnect or
@@ -183,12 +191,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   /**
    * Cloud Drive service with storage in JCR and all features permitted.
-   * 
+   *
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
    */
-  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders) {
-    this(jcrService, sessionProviders, new PermissiveFeatures());
+  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders, CloudDriveUserSettingsService cloudDriveUserSettingsService, IdentityManager identityManager) {
+    this(jcrService, sessionProviders, new PermissiveFeatures(), cloudDriveUserSettingsService, identityManager);
   }
 
   /**
@@ -381,7 +389,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
           if (localPath.equals(driveNode.getPath())) {
             // drive exists
             if (local.isConnected()) {
-              // and already connected it's the same user, this could happen if the access was revoked and 
+              // and already connected it's the same user, this could happen if the access was revoked and
               // user want to get this access again, thus we update access key from this new user instance.
               // XXX this usecase based on GoogleDrive workflow and can be changed
               local.updateAccess(user);
@@ -469,7 +477,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   /**
    * List of available connectors.
-   * 
+   *
    * @return collection of {@link CloudDriveConnector} instances.
    */
   public Collection<CloudDriveConnector> getConnectors() {
@@ -504,7 +512,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Load all ecd:cloudDrive nodes into connected map if ecd:connected is true
    * for each of them.
-   * 
+   *
    * @param jcrRepository {@link ManageableRepository}
    */
   protected void loadConnected(ManageableRepository jcrRepository) {
@@ -579,5 +587,32 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
       // restore existing session provider
       sessionProviders.setSessionProvider(null, spOrig);
     }
+  }
+
+  @Override
+  public void disconnectCloudDrive(String workspace, String userEmail, String providerId) throws IllegalAccessException {
+    long userIdentityId = getCurrentUserIdentityId(identityManager);
+    String currentUserName = ConversationState.getCurrent().getIdentity().getUserId();
+    SessionProvider sessionProvider = sessionProviders.getSessionProvider(null);
+    try {
+      Session userSession = sessionProvider.getSession(workspace, jcrService.getCurrentRepository());
+      String queryString = "select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE + " where ecd:localUserName='" + currentUserName
+          + "' AND ecd:provider='" + providerId + "' AND ecd:userEmail='" + userEmail + "'";
+      Query query = userSession.getWorkspace().getQueryManager().createQuery(queryString, Query.SQL);
+      NodeIterator nodeIterator = query.execute().getNodes();
+      if (nodeIterator.hasNext()) {
+        Node cloudDriveNode = nodeIterator.nextNode();
+        cloudDriveNode.remove();
+        userSession.save();
+      }
+      cloudDriveUserSettingsService.deleteCloudDriveUserSettings(userIdentityId, providerId);
+    } catch (Exception e) {
+      throw new IllegalAccessException("User " + userIdentityId + " to disconnect " + userEmail + " cloud drive account");
+    }
+  }
+  public static final long getCurrentUserIdentityId(IdentityManager identityManager) {
+    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+    Identity identity = identityManager.getOrCreateUserIdentity(currentUser);
+    return identity == null ? 0 : Long.parseLong(identity.getId());
   }
 }

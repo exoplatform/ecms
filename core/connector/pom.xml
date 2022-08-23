@@ -15,6 +15,12 @@
     <exo.test.coverage.ratio>0.0</exo.test.coverage.ratio>
   </properties>
   <dependencies>
+    <!--swagger-->
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>com.googlecode.json-simple</groupId>
       <artifactId>json-simple</artifactId>

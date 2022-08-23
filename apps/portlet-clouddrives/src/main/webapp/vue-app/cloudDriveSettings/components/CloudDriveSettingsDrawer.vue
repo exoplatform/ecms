@@ -98,8 +98,11 @@ export default {
         this.$refs.cloudDriveSettingsDrawer.close();
       }
     },
-    connect(providerId) {
-      this.$root.$emit('cloud-drive-connect', providerId);
+    connect(provider) {
+      this.$root.$emit('cloud-drive-connect', provider);
+    },
+    disconnect(provider) {
+      this.$root.$emit('cloud-drive-disconnect', provider);
     }
   },
 };
