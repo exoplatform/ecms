@@ -18,7 +18,6 @@
 package org.exoplatform.services.cms.clouddrives.settings;
 
 import org.exoplatform.social.core.identity.model.Identity;
-import org.json.JSONObject;
 
 public interface CloudDriveUserSettingsService {
 

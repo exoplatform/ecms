@@ -19,8 +19,6 @@ package org.exoplatform.services.cms.clouddrives.settings;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.exoplatform.ws.frameworks.json.impl.JsonException;
-import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
 @Data
 @AllArgsConstructor
@@ -30,13 +28,4 @@ public class CloudDriveSettingsRestEntity {
     private String                        connector;
 
     private String                        account;
-
-    @Override
-    public String toString() {
-        try {
-            return new JsonGeneratorImpl().createJsonObject(this).toString();
-        } catch (JsonException e) {
-            throw new IllegalStateException("Error parsing current global object to string", e);
-        }
-    }
 }

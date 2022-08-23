@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         tile
         size="24"
         height="auto">
-        <img :src="connector.image">
+        <img :src="connector.image" :alt="connector.image">
       </v-avatar>
       <a
         class="mx-2 my-auto"

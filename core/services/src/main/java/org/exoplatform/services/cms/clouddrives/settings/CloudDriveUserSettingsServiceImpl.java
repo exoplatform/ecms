@@ -83,13 +83,5 @@ public class CloudDriveUserSettingsServiceImpl implements CloudDriveUserSettings
             CLOUD_DRIVE_USER_SETTING_SCOPE,
             CLOUD_DRIVE_SETTING_KEY);
     return settingValue != null && settingValue.getValue() != null ? settingValue.getValue().toString() : "{}";
-    /*if (settingValue != null && settingValue.getValue() != null) {
-      try {
-        return new JSONObject(settingValue.getValue().toString());
-      } catch (JSONException e) {
-        throw new IllegalStateException("Error while parsing to jsonObject", e);
-      }
-    }
-    else return new JSONObject();*/
   }
 }

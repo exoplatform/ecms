@@ -24,6 +24,10 @@ import org.exoplatform.social.core.manager.IdentityManager;
 
 public class RestUtils {
 
+    private RestUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static final String getCurrentUser() {
         return ConversationState.getCurrent().getIdentity().getUserId();
     }
