@@ -33,6 +33,15 @@
     <type>org.exoplatform.services.attachments.storage.AttachmentStorageImpl</type>
   </component>
 
+  <component>
+    <key>org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsService</key>
+    <type>org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsServiceImpl</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsRest</type>
+  </component>
+
   <external-component-plugins>
     <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>
     <component-plugin>
