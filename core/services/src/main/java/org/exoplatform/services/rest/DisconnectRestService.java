@@ -21,10 +21,10 @@ public class DisconnectRestService implements ResourceContainer {
 
   private static final Log            LOG = ExoLogger.getLogger(DisconnectRestService.class.getName());
 
-  private DisconnectCloudDriveService disconnectCloudDriveService;
+  private CloudDriveService cloudDriveService;
 
-  public DisconnectRestService(DisconnectCloudDriveService disconnectCloudDriveService) {
-    this.disconnectCloudDriveService = disconnectCloudDriveService;
+  public DisconnectRestService(CloudDriveService cloudDriveService) {
+    this.cloudDriveService = cloudDriveService;
   }
 
   @POST
@@ -45,7 +45,7 @@ public class DisconnectRestService implements ResourceContainer {
                              @QueryParam("providerId")
                              String providerId) {
     try {
-      disconnectCloudDriveService.disconnectCloudDrive(workspace, path, providerId);
+      cloudDriveService.disconnectCloudDrive(workspace, path, providerId);
       return Response.ok().build();
     } catch (Exception e) {
       LOG.warn("Error disconnecting from cloud drive", e);

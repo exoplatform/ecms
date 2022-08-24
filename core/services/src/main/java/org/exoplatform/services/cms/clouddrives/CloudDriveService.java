@@ -120,4 +120,14 @@ public interface CloudDriveService {
    * @return List of {@link CloudProvider}
    */
   Set<CloudProvider> getProviders();
+
+  /**
+   * Disconnect From cloud drive
+   *
+   * @param workspace {@link String} node workspace
+   * @param path {@link String} node path
+   * @providerId  {@link String} CloudProvider id
+   */
+  void disconnectCloudDrive(String workspace, String path,String providerId);
+
 }

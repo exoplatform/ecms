@@ -29,13 +29,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.jcr.query.Query;
 
+import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.picocontainer.Startable;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.clouddrives.features.CloudDriveFeatures;
@@ -116,6 +115,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /** The jcr service. */
   protected final RepositoryService                          jcrService;
 
+  protected final NodeFinder                                 finder;
+
   /** The session providers. */
   protected final SessionProviderService                     sessionProviders;
 
@@ -159,15 +160,17 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   /**
    * Cloud Drive service with storage in JCR and with managed features.
-   * 
-   * @param jcrService {@link RepositoryService}
+   *
+   * @param jcrService       {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
-   * @param features {@link CloudDriveFeatures}
+   * @param features         {@link CloudDriveFeatures}
    */
   public CloudDriveServiceImpl(RepositoryService jcrService,
                                SessionProviderService sessionProviders,
-                               CloudDriveFeatures features) {
+                               CloudDriveFeatures features,
+                               NodeFinder finder) {
     this.jcrService = jcrService;
+    this.finder = finder;
     this.sessionProviders = sessionProviders;
 
     // Add internal listener for handling consistency in users-per-repository
@@ -187,8 +190,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
    */
-  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders) {
-    this(jcrService, sessionProviders, new PermissiveFeatures());
+  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders, NodeFinder finder) {
+    this(jcrService, sessionProviders, new PermissiveFeatures(), finder);
   }
 
   /**
@@ -580,4 +583,31 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
       sessionProviders.setSessionProvider(null, spOrig);
     }
   }
+
+  @Override
+  public void disconnectCloudDrive(String workspace, String path, String providerId) {
+    String userName = getCurrentUserIdentity().getUserId();
+    SessionProvider sp = sessionProviders.getSessionProvider(null);
+    try {
+      Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
+      Item item = finder.findItem(userSession, path);
+      Node userNode = (Node) item;
+      String queryStr = "select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE + " where ecd:localUserName='" + userName
+          + "' AND ecd:provider='" + providerId + "'";
+      Query q = userNode.getSession().getWorkspace().getQueryManager().createQuery(queryStr, Query.SQL);
+      NodeIterator r = q.execute().getNodes();
+      if (r.hasNext()) {
+        Node driveNode = r.nextNode();
+        driveNode.remove();
+        userNode.save();
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public Identity getCurrentUserIdentity() {
+    return ConversationState.getCurrent().getIdentity();
+  }
+
 }

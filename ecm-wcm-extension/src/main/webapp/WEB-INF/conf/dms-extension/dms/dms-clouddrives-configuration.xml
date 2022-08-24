@@ -9,10 +9,6 @@
     <type>org.exoplatform.services.cms.clouddrives.CloudDriveServiceImpl</type>
   </component>
   <component>
-    <key>org.exoplatform.services.cms.clouddrives.DisconnectCloudDriveService</key>
-    <type>org.exoplatform.services.cms.clouddrives.DisconnectCloudDriveServiceImpl</type>
-  </component>
-  <component>
     <key>org.exoplatform.services.cms.clouddrives.CloudDriveFeatures</key>
     <type>org.exoplatform.services.cms.clouddrives.features.PermissiveFeatures</type>
   </component>
