@@ -125,9 +125,8 @@ public interface CloudDriveService {
    * Disconnect From cloud drive
    *
    * @param workspace {@link String} node workspace
-   * @param path {@link String} node path
    * @providerId  {@link String} CloudProvider id
    */
-  void disconnectCloudDrive(String workspace, String path,String providerId);
+  void disconnectCloudDrive(String workspace, String providerId);
 
 }

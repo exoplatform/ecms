@@ -161,9 +161,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Cloud Drive service with storage in JCR and with managed features.
    *
-   * @param jcrService       {@link RepositoryService}
+   * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
-   * @param features         {@link CloudDriveFeatures}
+   * @param features {@link CloudDriveFeatures}
    */
   public CloudDriveServiceImpl(RepositoryService jcrService,
                                SessionProviderService sessionProviders,
@@ -585,21 +585,20 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   }
 
   @Override
-  public void disconnectCloudDrive(String workspace, String path, String providerId) {
+  public void disconnectCloudDrive(String workspace, String providerId) {
     String userName = getCurrentUserIdentity().getUserId();
     SessionProvider sp = sessionProviders.getSessionProvider(null);
     try {
       Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
-      Item item = finder.findItem(userSession, path);
-      Node userNode = (Node) item;
       String queryStr = "select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE + " where ecd:localUserName='" + userName
           + "' AND ecd:provider='" + providerId + "'";
-      Query q = userNode.getSession().getWorkspace().getQueryManager().createQuery(queryStr, Query.SQL);
+      Query q = userSession.getWorkspace().getQueryManager().createQuery(queryStr, Query.SQL);
       NodeIterator r = q.execute().getNodes();
       if (r.hasNext()) {
         Node driveNode = r.nextNode();
+        Session driveSession = driveNode.getSession();
         driveNode.remove();
-        userNode.save();
+        driveSession.save();
       }
     } catch (Exception e) {
       throw new RuntimeException(e);

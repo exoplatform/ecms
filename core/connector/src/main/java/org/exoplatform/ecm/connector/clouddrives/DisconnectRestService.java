@@ -1,4 +1,4 @@
-package org.exoplatform.services.rest;
+package org.exoplatform.ecm.connector.clouddrives;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,7 +27,7 @@ public class DisconnectRestService implements ResourceContainer {
     this.cloudDriveService = cloudDriveService;
   }
 
-  @POST
+  @DELETE
   @Produces(MediaType.APPLICATION_JSON)
   @Operation(summary = "Disconnect From Cloud Drive", method = "POST", description = "Disconnect From Cloud Drive")
   @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Request fulfilled"),
@@ -38,14 +38,11 @@ public class DisconnectRestService implements ResourceContainer {
   public Response disconnect(@Parameter(description = "workspace", required = true)
                              @QueryParam("workspace")
                              String workspace,
-                             @Parameter(description = "path", required = true)
-                             @QueryParam("path")
-                             String path,
                              @Parameter(description = "providerId", required = true)
                              @QueryParam("providerId")
                              String providerId) {
     try {
-      cloudDriveService.disconnectCloudDrive(workspace, path, providerId);
+      cloudDriveService.disconnectCloudDrive(workspace, providerId);
       return Response.ok().build();
     } catch (Exception e) {
       LOG.warn("Error disconnecting from cloud drive", e);

@@ -265,9 +265,6 @@
   <component>
     <type>org.exoplatform.services.rest.DocumentRestService</type>
   </component>
-  <component>
-    <type>org.exoplatform.services.rest.DisconnectRestService</type>
-  </component>
 
   <component>
     <type>org.exoplatform.services.rest.transferRules.TransferRulesRestService</type>

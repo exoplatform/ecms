@@ -72,10 +72,10 @@ export function getUserSettings() {
   });
 }
 
-export function disconnect(workspace, path, providerId) {
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/disconnect?workspace=${workspace}&path=${path}&providerId=${providerId}`, {
+export function disconnect(workspace, providerId) {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/disconnect?workspace=${workspace}&providerId=${providerId}`, {
     credentials: 'include',
-    method: 'POST',
+    method: 'DELETE',
   }).then(resp => {
     if (!resp || !resp.ok) {
       throw new Error('Response code indicates a server error', resp);

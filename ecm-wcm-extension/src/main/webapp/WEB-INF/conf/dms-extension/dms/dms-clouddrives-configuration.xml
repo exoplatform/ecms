@@ -41,6 +41,9 @@
     <type>org.exoplatform.ecm.connector.clouddrives.ContentService</type>
   </component>
   <component>
+    <type>org.exoplatform.ecm.connector.clouddrives.DisconnectRestService</type>
+  </component>
+  <component>
     <type>org.exoplatform.services.cms.clouddrives.webui.rest.ResourceService</type>
   </component>
   <component>

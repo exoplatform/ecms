@@ -59,8 +59,8 @@ export default {
     this.init();
   },
   methods: {
-    disconnectFromCloudDrive: function(provider){
-      disconnect(this.userDrive.workspace, this.userDrive.homePath, provider.id);
+    disconnectFromCloudDrive: function(provider) {
+      disconnect(this.userDrive.workspace, provider.id);
     },
     connectToCloudDrive: function(provider) {
       // start loading connect button
