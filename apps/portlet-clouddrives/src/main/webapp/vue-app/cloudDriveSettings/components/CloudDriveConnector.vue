@@ -86,11 +86,12 @@ export default {
             // if another drive is in connecting progress progress line will appear again, but it's hiding can be visible to user
             this.$emit('updateProgress', { progress: null });
           }, latency);
-          const userEmail = data.drive.email;
+          const userEmail = data.drive.title.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi)[0];
           const settings = {
             connector: provider.id,
             account: userEmail
           };
+          console.log(settings);
           saveUserSettings(settings).then(() => {
             // after connect successful
             if (data.drive.connected) {
