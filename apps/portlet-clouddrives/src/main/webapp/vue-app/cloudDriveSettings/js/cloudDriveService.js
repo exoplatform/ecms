@@ -72,8 +72,8 @@ export function getUserSettings() {
   });
 }
 
-export function disconnect(workspace, providerId) {
-  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/disconnect?workspace=${workspace}&providerId=${providerId}`, {
+export function disconnect(workspace, userEmail, providerId) {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/disconnect?workspace=${workspace}&userEmail=${userEmail}&providerId=${providerId}`, {
     credentials: 'include',
     method: 'DELETE',
   }).then(resp => {

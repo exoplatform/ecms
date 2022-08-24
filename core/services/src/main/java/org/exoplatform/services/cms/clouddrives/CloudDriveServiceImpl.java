@@ -32,9 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.jcr.*;
 import javax.jcr.query.Query;
 
-import org.exoplatform.services.cms.clouddrives.jcr.NodeFinder;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Identity;
 import org.picocontainer.Startable;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.clouddrives.features.CloudDriveFeatures;
@@ -115,7 +113,6 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /** The jcr service. */
   protected final RepositoryService                          jcrService;
 
-  protected final NodeFinder                                 finder;
 
   /** The session providers. */
   protected final SessionProviderService                     sessionProviders;
@@ -167,10 +164,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    */
   public CloudDriveServiceImpl(RepositoryService jcrService,
                                SessionProviderService sessionProviders,
-                               CloudDriveFeatures features,
-                               NodeFinder finder) {
+                               CloudDriveFeatures features) {
     this.jcrService = jcrService;
-    this.finder = finder;
     this.sessionProviders = sessionProviders;
 
     // Add internal listener for handling consistency in users-per-repository
@@ -190,8 +185,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
    */
-  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders, NodeFinder finder) {
-    this(jcrService, sessionProviders, new PermissiveFeatures(), finder);
+  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders) {
+    this(jcrService, sessionProviders, new PermissiveFeatures());
   }
 
   /**
@@ -585,28 +580,22 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   }
 
   @Override
-  public void disconnectCloudDrive(String workspace, String providerId) {
-    String userName = getCurrentUserIdentity().getUserId();
-    SessionProvider sp = sessionProviders.getSessionProvider(null);
+  public void disconnectCloudDrive(String workspace, String userEmail, String providerId) {
+    String currentUserName = ConversationState.getCurrent().getIdentity().getUserId();
+    SessionProvider sessionProvider = sessionProviders.getSessionProvider(null);
     try {
-      Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
-      String queryStr = "select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE + " where ecd:localUserName='" + userName
-          + "' AND ecd:provider='" + providerId + "'";
-      Query q = userSession.getWorkspace().getQueryManager().createQuery(queryStr, Query.SQL);
-      NodeIterator r = q.execute().getNodes();
-      if (r.hasNext()) {
-        Node driveNode = r.nextNode();
-        Session driveSession = driveNode.getSession();
-        driveNode.remove();
-        driveSession.save();
+      Session userSession = sessionProvider.getSession(workspace, jcrService.getCurrentRepository());
+      String queryString = "select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE + " where ecd:localUserName='" + currentUserName
+          + "' AND ecd:provider='" + providerId + "' AND ecd:userEmail='" + userEmail + "'";
+      Query query = userSession.getWorkspace().getQueryManager().createQuery(queryString, Query.SQL);
+      NodeIterator nodeIterator = query.execute().getNodes();
+      if (nodeIterator.hasNext()) {
+        Node cloudDriveNode = nodeIterator.nextNode();
+        cloudDriveNode.remove();
+        userSession.save();
       }
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      throw new RuntimeException("An error occurred when disconnecting from cloud drive", e);
     }
   }
-
-  public Identity getCurrentUserIdentity() {
-    return ConversationState.getCurrent().getIdentity();
-  }
-
 }

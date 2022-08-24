@@ -19,7 +19,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 @Path("/clouddrive/disconnect")
 public class DisconnectRestService implements ResourceContainer {
 
-  private static final Log            LOG = ExoLogger.getLogger(DisconnectRestService.class.getName());
+  private static final Log  LOG = ExoLogger.getLogger(DisconnectRestService.class.getName());
 
   private CloudDriveService cloudDriveService;
 
@@ -31,21 +31,21 @@ public class DisconnectRestService implements ResourceContainer {
   @Produces(MediaType.APPLICATION_JSON)
   @Operation(summary = "Disconnect From Cloud Drive", method = "POST", description = "Disconnect From Cloud Drive")
   @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Request fulfilled"),
-      @ApiResponse(responseCode = "400", description = "Invalid query input"),
-      @ApiResponse(responseCode = "404", description = "Not found"),
-      @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
       @ApiResponse(responseCode = "500", description = "Internal server error"), })
   public Response disconnect(@Parameter(description = "workspace", required = true)
                              @QueryParam("workspace")
                              String workspace,
+                             @Parameter(description = "userEmail", required = true)
+                             @QueryParam("userEmail")
+                             String userEmail,
                              @Parameter(description = "providerId", required = true)
                              @QueryParam("providerId")
-                             String providerId) {
+                             String providerId ) {
     try {
-      cloudDriveService.disconnectCloudDrive(workspace, providerId);
+      cloudDriveService.disconnectCloudDrive(workspace, userEmail, providerId);
       return Response.ok().build();
     } catch (Exception e) {
-      LOG.warn("Error disconnecting from cloud drive", e);
+      LOG.error("Error disconnecting from cloud drive", e);
       return Response.serverError().entity(e.getMessage()).build();
     }
   }

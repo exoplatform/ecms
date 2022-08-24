@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     disconnectFromCloudDrive: function(provider) {
-      disconnect(this.userDrive.workspace, provider.id);
+      disconnect(this.userDrive.workspace, provider.user, provider.id);
     },
     connectToCloudDrive: function(provider) {
       // start loading connect button
