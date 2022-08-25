@@ -32,7 +32,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.jcr.*;
 import javax.jcr.query.Query;
 
+import org.exoplatform.services.cms.clouddrives.settings.CloudDriveUserSettingsService;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.picocontainer.Startable;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.clouddrives.features.CloudDriveFeatures;
@@ -113,6 +116,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /** The jcr service. */
   protected final RepositoryService                          jcrService;
 
+  private CloudDriveUserSettingsService                      cloudDriveUserSettingsService;
+  
+  private IdentityManager                                    identityManager;
 
   /** The session providers. */
   protected final SessionProviderService                     sessionProviders;
@@ -164,9 +170,13 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    */
   public CloudDriveServiceImpl(RepositoryService jcrService,
                                SessionProviderService sessionProviders,
-                               CloudDriveFeatures features) {
+                               CloudDriveFeatures features,
+                               CloudDriveUserSettingsService cloudDriveUserSettingsService,
+                               IdentityManager identityManager) {
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
+    this.cloudDriveUserSettingsService = cloudDriveUserSettingsService;
+    this.identityManager = identityManager;
 
     // Add internal listener for handling consistency in users-per-repository
     // map (on drive disconnect or
@@ -185,8 +195,8 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
    */
-  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders) {
-    this(jcrService, sessionProviders, new PermissiveFeatures());
+  public CloudDriveServiceImpl(RepositoryService jcrService, SessionProviderService sessionProviders, CloudDriveUserSettingsService cloudDriveUserSettingsService, IdentityManager identityManager) {
+    this(jcrService, sessionProviders, new PermissiveFeatures(), cloudDriveUserSettingsService, identityManager);
   }
 
   /**
@@ -581,6 +591,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   @Override
   public void disconnectCloudDrive(String workspace, String userEmail, String providerId) {
+    long userIdentityId = getCurrentUserIdentityId(identityManager);
     String currentUserName = ConversationState.getCurrent().getIdentity().getUserId();
     SessionProvider sessionProvider = sessionProviders.getSessionProvider(null);
     try {
@@ -594,8 +605,14 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         cloudDriveNode.remove();
         userSession.save();
       }
+      cloudDriveUserSettingsService.deleteCloudDriveUserSettings(userIdentityId);
     } catch (Exception e) {
       throw new RuntimeException("An error occurred when disconnecting from cloud drive", e);
     }
+  }
+  public static final long getCurrentUserIdentityId(IdentityManager identityManager) {
+    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+    Identity identity = identityManager.getOrCreateUserIdentity(currentUser);
+    return identity == null ? 0 : Long.parseLong(identity.getId());
   }
 }

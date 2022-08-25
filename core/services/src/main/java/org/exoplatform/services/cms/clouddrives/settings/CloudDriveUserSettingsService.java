@@ -35,4 +35,11 @@ public interface CloudDriveUserSettingsService {
      * @param identityId technical identifier of {@link Identity}
      */
     String getCloudDriveUserSettings(long identityId);
+
+    /**
+     * remove clouddrive connectors settings for authenticated user
+     *
+     * @param identityId technical identifier of {@link Identity}
+     */
+    public void deleteCloudDriveUserSettings(long identityId);
 }
