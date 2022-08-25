@@ -122,12 +122,13 @@ public interface CloudDriveService {
   Set<CloudProvider> getProviders();
 
   /**
-   * Disconnect From cloud drive
+   * Disconnect from cloud drive
    *
    * @param workspace {@link String} node workspace
    * @param userEmail {@link String} connected user email
    * @providerId {@link String} CloudProvider id
+   * @throws IllegalAccessException when the current user is not disconnect from cloud drive
    */
-  void disconnectCloudDrive(String workspace, String userEmail, String providerId);
+  void disconnectCloudDrive(String workspace, String userEmail, String providerId) throws IllegalAccessException;
 
 }

@@ -117,7 +117,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   protected final RepositoryService                          jcrService;
 
   private CloudDriveUserSettingsService                      cloudDriveUserSettingsService;
-  
+
   private IdentityManager                                    identityManager;
 
   /** The session providers. */
@@ -139,7 +139,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * User-in-repositoryDrives reference map for unregistration of disconnected
    * and removed drives (via {@link LocalDrivesListener}).
-   * 
+   *
    * @see #repositoryDrives
    */
   protected final Map<CloudUser, Map<CloudUser, CloudDrive>> userDrives        =
@@ -191,7 +191,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   /**
    * Cloud Drive service with storage in JCR and all features permitted.
-   * 
+   *
    * @param jcrService {@link RepositoryService}
    * @param sessionProviders {@link SessionProviderService}
    */
@@ -389,7 +389,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
           if (localPath.equals(driveNode.getPath())) {
             // drive exists
             if (local.isConnected()) {
-              // and already connected it's the same user, this could happen if the access was revoked and 
+              // and already connected it's the same user, this could happen if the access was revoked and
               // user want to get this access again, thus we update access key from this new user instance.
               // XXX this usecase based on GoogleDrive workflow and can be changed
               local.updateAccess(user);
@@ -477,7 +477,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
 
   /**
    * List of available connectors.
-   * 
+   *
    * @return collection of {@link CloudDriveConnector} instances.
    */
   public Collection<CloudDriveConnector> getConnectors() {
@@ -512,7 +512,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   /**
    * Load all ecd:cloudDrive nodes into connected map if ecd:connected is true
    * for each of them.
-   * 
+   *
    * @param jcrRepository {@link ManageableRepository}
    */
   protected void loadConnected(ManageableRepository jcrRepository) {
@@ -590,7 +590,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   }
 
   @Override
-  public void disconnectCloudDrive(String workspace, String userEmail, String providerId) {
+  public void disconnectCloudDrive(String workspace, String userEmail, String providerId) throws IllegalAccessException {
     long userIdentityId = getCurrentUserIdentityId(identityManager);
     String currentUserName = ConversationState.getCurrent().getIdentity().getUserId();
     SessionProvider sessionProvider = sessionProviders.getSessionProvider(null);
@@ -605,9 +605,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         cloudDriveNode.remove();
         userSession.save();
       }
-      cloudDriveUserSettingsService.deleteCloudDriveUserSettings(userIdentityId);
+      cloudDriveUserSettingsService.deleteCloudDriveUserSettings(userIdentityId, providerId);
     } catch (Exception e) {
-      throw new RuntimeException("An error occurred when disconnecting from cloud drive", e);
+      throw new IllegalAccessException("User " + userIdentityId + " to disconnect " + userEmail + " cloud drive account");
     }
   }
   public static final long getCurrentUserIdentityId(IdentityManager identityManager) {

@@ -85,10 +85,17 @@ public class CloudDriveUserSettingsServiceImpl implements CloudDriveUserSettings
     return settingValue != null && settingValue.getValue() != null ? settingValue.getValue().toString() : "{}";
   }
 
-  public void deleteCloudDriveUserSettings(long identityId) {
+  public void deleteCloudDriveUserSettings(long identityId, String providerId) throws JSONException{
 
-    this.settingService.remove(Context.USER.id(String.valueOf(identityId)),
-            CLOUD_DRIVE_USER_SETTING_SCOPE,
-            CLOUD_DRIVE_SETTING_KEY);
+    SettingValue<?> settingValue = this.settingService.get(Context.USER.id(String.valueOf(identityId)),
+                                                           CLOUD_DRIVE_USER_SETTING_SCOPE,
+                                                           CLOUD_DRIVE_SETTING_KEY);
+
+    JSONObject existingUserSettings = new JSONObject(settingValue.getValue().toString());
+    existingUserSettings.remove(providerId);
+    this.settingService.set(Context.USER.id(String.valueOf(identityId)),
+                            CLOUD_DRIVE_USER_SETTING_SCOPE,
+                            CLOUD_DRIVE_SETTING_KEY,
+                            SettingValue.create(existingUserSettings.toString()));
   }
 }
