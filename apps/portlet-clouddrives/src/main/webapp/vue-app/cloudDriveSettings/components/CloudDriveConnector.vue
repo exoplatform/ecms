@@ -65,9 +65,9 @@ export default {
         .then(() => {
           // after disconnect successful
           this.$set(provider, 'user', null);
-          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.successDisconnectMessage'));
+          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.disconnectSuccessMessage'));
         }).catch(() => {
-          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.errorDisconnectMessage'), 'error');
+          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.disconnectErrorMessage'), 'error');
         }).finally(() => {
           // end loading disconnect button
           this.$set(provider, 'loading', false);
