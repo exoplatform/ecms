@@ -60,7 +60,18 @@ export default {
   },
   methods: {
     disconnectFromCloudDrive: function(provider) {
-      disconnect(this.userDrive.workspace, provider.user, provider.id);
+      this.$set(provider, 'loading', true);
+      disconnect(this.userDrive.workspace, provider.user, provider.id)
+        .then(() => {
+          // after disconnect successful
+          this.$set(provider, 'user', null);
+          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.successDisconnectMessage'));
+        }).catch(() => {
+          this.$emit('display-alert', this.$t('cloudDriveSettings.alert.errorDisconnectMessage'), 'error');
+        }).finally(() => {
+          // end loading disconnect button
+          this.$set(provider, 'loading', false);
+        });
     },
     connectToCloudDrive: function(provider) {
       // start loading connect button
