@@ -252,4 +252,13 @@ public class DriveInfo {
     return connected;
   }
 
+  /**
+   * Gets the user's email.
+   *
+   * @return the email
+   */
+  public String getEmail() {
+    return email;
+  }
+
 }
