@@ -17,7 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <template>
   <div v-if="connectedConnector.length > 0">
     <div
-      class="d-flex my-2"
+      class="d-flex my-1"
       v-for="(connector, index) in connectedConnector"
       :key="index">
       <v-avatar
