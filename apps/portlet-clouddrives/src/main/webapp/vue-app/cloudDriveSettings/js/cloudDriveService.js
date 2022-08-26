@@ -79,8 +79,6 @@ export function disconnect(workspace, userEmail, providerId) {
   }).then(resp => {
     if (!resp || !resp.ok) {
       throw new Error('Response code indicates a server error', resp);
-    } else {
-      return resp.json();
     }
   });
 }
