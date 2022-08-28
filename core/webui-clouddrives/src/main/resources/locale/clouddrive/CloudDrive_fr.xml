@@ -105,7 +105,7 @@
     <drawer>
       <title>Connectez vos lecteurs personnels</title>
       <button>
-        <connect>Ajouter contact</connect>
+        <connect>Se connecter</connect>
       </button>
       <noConnector>Aucun connecteur de calendrier personnel n'est disponible</noConnector>
     </drawer>
