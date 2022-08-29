@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.clouddrives.settings;
 
 import org.exoplatform.social.core.identity.model.Identity;
+import org.json.JSONException;
 
 public interface CloudDriveUserSettingsService {
 
@@ -34,4 +35,12 @@ public interface CloudDriveUserSettingsService {
      * @param identityId technical identifier of {@link Identity}
      */
     String getCloudDriveUserSettings(long identityId);
-}
+
+    /**
+     * Removes clouddrive connectors settings for authenticated user
+     *
+     * @param identityId technical identifier of {@link Identity}
+     * @throws  JSONException when the current user is not delete cloud drive settings
+     */
+    public void deleteCloudDriveUserSettings(long identityId, String providerId) throws JSONException;
+  }

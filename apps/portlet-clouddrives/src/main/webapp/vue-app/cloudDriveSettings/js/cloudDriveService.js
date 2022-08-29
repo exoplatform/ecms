@@ -68,6 +68,19 @@ export function getUserSettings() {
   }).then((resp) => {
     if (resp && resp.ok) {
       return resp.json();
+    }  
+  });
+}
+
+export function disconnect(workspace, userEmail, providerId) {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/disconnect?workspace=${workspace}&userEmail=${userEmail}&providerId=${providerId}`, {
+    credentials: 'include',
+    method: 'DELETE',
+  }).then(resp => {
+    if (!resp || !resp.ok) {
+      throw new Error('Response code indicates a server error', resp);
+    } else {
+      return resp.json();
     }
   });
 }
