@@ -41,7 +41,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
-              <template>
+              <template v-if="item.user">
+                <v-list-item-title>
+                  {{ $t('cloudDriveSettings.drawer.connectedAccountWith') }}:
+                </v-list-item-title>
+                <v-list-item-subtitle :title="item.user" class="font-italic">
+                  {{ item.user }}
+                </v-list-item-subtitle>
+              </template>
+              <template v-else>
                 <v-list-item-title class="title">
                   {{ item.name }}
                 </v-list-item-title>
@@ -75,6 +83,9 @@ export default {
       type: Object,
       default: null,
     },
+  },
+  created() {
+    this.$root.$on('cloud-drive-connectors-drawer-open', this.open);
   },
   methods: {
     open() {

@@ -69,6 +69,9 @@ public class DriveInfo {
   /** The connected. */
   final boolean                       connected;
 
+  /** The connected account. */
+  final String                       email;
+
   /**
    * Instantiates a new drive info.
    *
@@ -90,7 +93,8 @@ public class DriveInfo {
             CloudProvider provider,
             Map<String, CloudFile> files,
             Collection<String> removed,
-            Collection<CloudDriveMessage> messages) {
+            Collection<CloudDriveMessage> messages,
+            String email) {
     this.title = title;
     this.workspace = workspace;
     this.path = path;
@@ -100,6 +104,7 @@ public class DriveInfo {
     this.files = files;
     this.messages = messages;
     this.removed = removed;
+    this.email = email;
   }
 
   /**
@@ -131,7 +136,8 @@ public class DriveInfo {
                          drive.getUser().getProvider(),
                          driveFiles,
                          removed,
-                         messages);
+                         messages,
+                         drive.getUser().getEmail());
   }
 
   /**
@@ -244,6 +250,15 @@ public class DriveInfo {
    */
   public boolean isConnected() {
     return connected;
+  }
+
+  /**
+   * Gets the user's email.
+   *
+   * @return the email
+   */
+  public String getEmail() {
+    return email;
   }
 
 }

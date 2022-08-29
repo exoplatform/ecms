@@ -26,11 +26,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
               <v-list-item-title class="title text-color">
                 {{ $t("cloudDriveSettings.label.title") }}
               </v-list-item-title>
-              <v-list-item-subtitle class="my-3 text-color">
+              <v-list-item-subtitle class="my-1 text-color">
                 {{ $t("cloudDriveSettings.label.subtitle") }}
               </v-list-item-subtitle>
-              <v-list-item-subtitle class="my-3 text-sub-title font-italic" @click="openDriveConnectorsDrawer">
-                {{ $t("cloudDriveSettings.label.description") }}
+              <v-list-item-subtitle class="my-1 text-sub-title font-italic">
+                <cloud-drive-settings-status :connectors="connectors">
+                  <template slot="connectButton">
+                    {{ $t("cloudDriveSettings.label.description") }}
+                  </template>
+                </cloud-drive-settings-status>
               </v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
@@ -43,7 +47,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
           </v-list-item>
         </v-list>
       </v-card>
-      <cloud-drive-settings-drawer ref="cloudDriveSettingsDrawer" :connectors="enabledConnectors" />
+      <cloud-drive-settings-drawer :connectors="enabledConnectors" />
       <cloud-drive-connector @connectors-loaded="connectors = $event" @display-alert="displayAlert" />
       <cloud-drive-alert />
     </template>
@@ -67,7 +71,7 @@ export default {
   },
   methods: {
     openDriveConnectorsDrawer() {
-      this.$refs.cloudDriveSettingsDrawer.open();
+      this.$root.$emit('cloud-drive-connectors-drawer-open');
     },
     displayAlert(message, type) {
       this.$root.$emit('connectors-connection-alert', {
