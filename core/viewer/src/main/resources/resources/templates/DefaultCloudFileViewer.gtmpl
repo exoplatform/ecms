@@ -45,13 +45,9 @@ if (drive) {
   	def viewFile = uicomponent.appRes("CloudFileViewer.event.ViewFile")
   	def editFile = uicomponent.appRes("CloudFileViewer.event.EditFile")
 	%>
-	<div class="file-content">
-    <a id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
-      class="btn pull-right">
-      ${editFile}
-    </a>
+	<div class="file-content" style="height: 100%;">
 		<iframe frameborder="0"
-			style="position: absolute; width: 100%; height: 100%;"
+			style="position: relative; width: 100%; height: 100%;"
 			src="${previewLink}">
 		</iframe>
 	</div>
