@@ -107,11 +107,18 @@
       <button>
         <connect>crwdns7050400:0crwdne7050400:0</connect>
       </button>
+      <button>
+        <disconnect>crwdns7050784:0crwdne7050784:0</disconnect>
+      </button>
       <noConnector>crwdns7050402:0crwdne7050402:0</noConnector>
+      <connectedAccountWith>crwdns7050786:0crwdne7050786:0</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>crwdns7050578:0crwdne7050578:0</successMessage>
       <errorMessage>crwdns7050580:0crwdne7050580:0</errorMessage>
+      <errorSaveUserSettings>crwdns7050788:0crwdne7050788:0</errorSaveUserSettings>
+      <disconnectSuccessMessage>crwdns7050790:0crwdne7050790:0</disconnectSuccessMessage>
+      <disconnectErrorMessage>crwdns7050792:0crwdne7050792:0</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>

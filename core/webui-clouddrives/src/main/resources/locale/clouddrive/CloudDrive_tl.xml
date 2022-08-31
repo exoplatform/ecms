@@ -107,11 +107,18 @@
       <button>
         <connect>Ikonekta</connect>
       </button>
+      <button>
+        <disconnect>Huwag ikonekta</disconnect>
+      </button>
       <noConnector>No personal drive connector available</noConnector>
+      <connectedAccountWith>You are connected with</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>Your cloud drive is connected correctly</successMessage>
       <errorMessage>Failed connection</errorMessage>
+      <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
+      <disconnectSuccessMessage>Your cloud drive is disconnected correctly</disconnectSuccessMessage>
+      <disconnectErrorMessage>Failed disconnection</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
