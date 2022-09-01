@@ -298,7 +298,9 @@ export default {
             openUrl: self.attachment.url || self.attachment.openUrl,
             breadCrumb: self.attachment.previewBreadcrumb,
             fileInfo: self.fileInfo(),
-            size: self.attachment.size
+            size: self.attachment.size,
+            isCloudDrive: self.attachment.cloudDrive
+
           },
           version: {
             number: self.attachment.version

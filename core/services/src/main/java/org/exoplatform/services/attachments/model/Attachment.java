@@ -55,6 +55,8 @@ public class Attachment implements Cloneable {
   private LinkedHashMap<String, String> previewBreadcrumb;
 
   private String                        version;
+  
+  private boolean                       cloudDrive;
 
   @Override
   public Attachment clone() { // NOSONAR
@@ -72,6 +74,7 @@ public class Attachment implements Cloneable {
                           downloadUrl,
                           openUrl,
                           previewBreadcrumb,
-                          version);
+                          version,
+                          cloudDrive);
   }
 }
