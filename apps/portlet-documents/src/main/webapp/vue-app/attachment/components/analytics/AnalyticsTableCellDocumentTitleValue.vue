@@ -92,7 +92,9 @@ export default {
           openUrl: this.attachment.url || this.attachment.openUrl,
           breadCrumb: this.attachment.previewBreadcrumb,
           fileInfo: this.fileInfo,
-          size: this.attachment.size
+          size: this.attachment.size,
+          isCloudDrive: this.attachment.cloudDrive
+
         },
         version: {
           number: this.attachment.version

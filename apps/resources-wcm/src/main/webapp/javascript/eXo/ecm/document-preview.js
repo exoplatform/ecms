@@ -16,7 +16,8 @@
         openUrl: null,
         size: null,
         cssIcon : null,
-        isWebContent: false
+        isWebContent: false,
+        isCloudDrive: false
       },
       showComments: true,
       showOpenInFolderButton: true,
@@ -524,29 +525,32 @@
                   html +='</div>';
                 }
                 '<!-- put vote area here -->'
-                html += '<div class="previewBtn dropup">' +
-                    '<div class="btn-group">' +
+                html += '<div class="previewBtn dropup">';
+                if(!documentPreview.defaultSettings.doc.isCloudDrive){
+                  html += '<div class="btn-group">' +
                     '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
                     '    <i class="uiVerticalDots"></i></button>' +
                     '    <ul class="dropdown-menu" role="menu">';
-                if (this.settings.showOpenInFolderButton) {
-                  html+='      <li><div class="openBtn">' +
-                    '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-                    '                </div></li>';
-                }
-                if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
-                  if (this.settings.doc.downloadUrl.includes('javascript:')) {
-                    html +='      <li><div class="downloadBtn">' +
-                      '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                      '                </div></li>';
-                  } else {
-                    html +='      <li><div class="downloadBtn">' +
-                      '                <a onclick="documentPreview.download(\'' + this.settings.doc.downloadUrl + '\', \'' + this.settings.doc.title + '\')" class="clickable"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                  if (this.settings.showOpenInFolderButton) {
+                    html+='      <li><div class="openBtn">' +
+                      '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
                       '                </div></li>';
                   }
+                  if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
+                    if (this.settings.doc.downloadUrl.includes('javascript:')) {
+                      html +='      <li><div class="downloadBtn">' +
+                        '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                        '                </div></li>';
+                    } else {
+                      html +='      <li><div class="downloadBtn">' +
+                      '                <a onclick="documentPreview.download(\'' + this.settings.doc.downloadUrl + '\', \'' + this.settings.doc.title + '\')" class="clickable"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                      '                </div></li>';
+                    }
+                  }
+                  html +='    </ul>' +
+                      '  </div>';
                 }
-                html +='    </ul>' +
-                    '  </div>';
+                
                 if (this.settings.showComments) {
                   html += '<div class="showComments">' +
                       '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
@@ -603,7 +607,7 @@
             '</div>'
         );
       }
-      if(!this.isDownloadStatusActivated) {
+      if(!this.isDownloadStatusActivated && !documentPreview.defaultSettings.doc.isCloudDrive) {
         var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
         editorButtonsLoader.done(function ($buttonsContainer) {
           $(".previewBtn").append($buttonsContainer);
