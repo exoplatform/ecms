@@ -732,8 +732,7 @@ public class Utils {
     } else {
       fileName = accentsconverter.transliterate(fileName);
     }
-    return Text.escapeIllegalJcrChars(fileName);
-
+    return fileName;
   }
 
   public static List<String> getMemberships() throws Exception {
