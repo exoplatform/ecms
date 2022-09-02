@@ -132,6 +132,7 @@ export default {
           breadCrumb: this.document.previewBreadcrumb,
           fileInfo: this.fileInfo(),
           size: this.document.size,
+          isCloudDrive: this.document.cloudDrive
         },
         version: {                                                                 
           number: this.document.version 

@@ -59,7 +59,8 @@ public class EntityBuilder {
                                 attachment.getDownloadUrl(),
                                 attachment.getOpenUrl(),
                                 attachment.getPreviewBreadcrumb(),
-                                attachment.getVersion()
+                                attachment.getVersion(),
+                                attachment.isCloudDrive()
 
     );
   }
@@ -108,6 +109,7 @@ public class EntityBuilder {
     } else {
       attachment.setUpdater(null);
     }
+    attachment.setCloudDrive(attachmentNode.hasProperty("ecd:driveUUID"));
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
     String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
     attachment.setMimetype(mimetype);

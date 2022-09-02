@@ -198,6 +198,7 @@ export default {
               downloadUrl: attachment.downloadUrl,
               breadCrumb: attachment.previewBreadcrumb,
               fileInfo,
+              isCloudDrive: attachment.cloudDrive
             },
             author: this.author,
             activity: {

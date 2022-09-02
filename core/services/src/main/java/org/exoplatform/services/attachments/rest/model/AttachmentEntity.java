@@ -57,6 +57,8 @@ public class AttachmentEntity {
   private LinkedHashMap<String, String> previewBreadcrumb;
 
   private String                        version;
+  
+  private boolean                       cloudDrive;
 
   @Override
   public AttachmentEntity clone() { // NOSONAR
@@ -74,7 +76,8 @@ public class AttachmentEntity {
                                 downloadUrl,
                                 openUrl,
                                 previewBreadcrumb,
-                                version);
+                                version,
+                                cloudDrive);
   }
 
 }
