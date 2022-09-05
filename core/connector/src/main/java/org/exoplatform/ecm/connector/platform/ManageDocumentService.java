@@ -427,7 +427,7 @@ public class ManageDocumentService implements ResourceContainer {
                                            userId,
                                            action,
                                            language,
-                                           fileName,
+                                           Text.escapeIllegalJcrChars(fileName),
                                            uploadId, existenceAction);
       }
     } catch (Exception e) {
