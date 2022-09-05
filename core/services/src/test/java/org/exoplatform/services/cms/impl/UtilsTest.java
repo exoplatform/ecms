@@ -7,7 +7,6 @@ public class UtilsTest extends TestCase {
   public void testCleanName() {
     // Given
     String title1 = "test|test";
-    String title2 = "test%test";
     String title3 = "test&test";
     String title4 = "test@test";
     String title5 = "test$test";
@@ -30,7 +29,6 @@ public class UtilsTest extends TestCase {
 
     // When
     String titleClean1 = Utils.cleanName(title1);
-    String titleClean2 = Utils.cleanName(title2);
     String titleClean3 = Utils.cleanName(title3);
     String titleClean4 = Utils.cleanName(title4);
     String titleClean5 = Utils.cleanName(title5);
@@ -53,7 +51,6 @@ public class UtilsTest extends TestCase {
 
     // Then
     assertEquals(titleClean1,"test_test");
-    assertEquals(titleClean2,"test_test");
     assertEquals(titleClean3,"test_test");
     assertEquals(titleClean4,"test_test");
     assertEquals(titleClean5,"test_test");
