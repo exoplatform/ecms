@@ -113,11 +113,13 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
     String drive = "";
     ExtendedSession session = null;
+    boolean isCloudDrive = false;
     try {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(id);
       previewBreadcrumb = documentService.getFilePreviewBreadCrumb(node);
       drive = Utils.getSearchDocumentDrive(node);
+      isCloudDrive = node.hasProperty("ecd:driveUUID");
     } catch (Exception e ) {
       LOG.error("Error while getting file node " + id, e);
     } finally {
@@ -176,6 +178,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       ecmsSearchResult.setUrl(downloadUrl.toString());
     }
     ecmsSearchResult.setMetadatas(retrieveMetadataItems(id) );
+    ecmsSearchResult.setCloudDrive(isCloudDrive);
 
     return ecmsSearchResult;
   }
