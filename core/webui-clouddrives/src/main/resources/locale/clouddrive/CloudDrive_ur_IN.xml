@@ -118,7 +118,7 @@
       <errorMessage>Failed connection</errorMessage>
       <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
       <disconnectSuccessMessage>Your cloud drive is disconnected correctly</disconnectSuccessMessage>
-      <disconnectErrorMessage>Failed disconnection</disconnectErrorMessage>
+      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
