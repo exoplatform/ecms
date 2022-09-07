@@ -43,6 +43,7 @@ public class EcmsSearchResult extends SearchResult {
   private String drive;
   private String lastEditor;
   private Map<String, List<MetadataItem>> metadatas;
+  private boolean isCloudDrive;
 
   public EcmsSearchResult(String url,
                           String urlOnImage,
@@ -268,5 +269,13 @@ public class EcmsSearchResult extends SearchResult {
 
   public void setMetadatas(Map<String, List<MetadataItem>> metadatas) {
     this.metadatas = metadatas;
+  }
+
+  public boolean isCloudDrive() {
+    return isCloudDrive;
+  }
+
+  public void setCloudDrive(boolean cloudDrive) {
+    isCloudDrive = cloudDrive;
   }
 }
