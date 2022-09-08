@@ -40,9 +40,9 @@ export default {
           workspace: data.workspace,
           homePath: data.homePath,
         };
-        getCloudDriveProviders().then((res) => {
+        getCloudDriveProviders().then((providers) => {
           // get providers from cloudDrives module, note that providers should already exist in module at this stage
-          this.providers = res;
+          this.providers = providers;
         }).then(() => {
           this.connectorsImages = extensionRegistry.loadExtensions('cloud-drive-connectors', 'images') || [];
           // get image paths from cloudDrive connectors addon
