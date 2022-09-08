@@ -107,4 +107,30 @@ public class CloudDriveUserSettingsRest implements ResourceContainer {
       return Response.serverError().entity(e.getMessage()).build();
     }
   }
+
+  @GET
+  @Path("/providers")
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @Operation(
+          summary = "Retrieves cloud drive providers",
+          method = "GET"
+  )
+  @ApiResponses(
+          value = {
+                  @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+                  @ApiResponse(responseCode = "400", description = "Invalid query input"),
+                  @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+                  @ApiResponse(responseCode = "500", description = "Internal server error")
+          }
+  )
+  public Response getCloudDriveProviders() {
+    try {
+      String cloudDriveProviders = cloudDriveUserSettingsService.getCloudDriveProviders();
+      return Response.ok(cloudDriveProviders).build();
+    } catch (Exception e) {
+      LOG.warn("Error while retrieving cloud drive providers", e);
+      return Response.serverError().entity(e.getMessage()).build();
+    }
+  }
 }

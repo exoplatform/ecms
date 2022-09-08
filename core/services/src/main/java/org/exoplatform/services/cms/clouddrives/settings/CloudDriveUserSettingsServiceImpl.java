@@ -20,6 +20,9 @@ import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
 import org.exoplatform.commons.api.settings.data.Scope;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
+import org.exoplatform.services.cms.clouddrives.CloudProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,5 +99,17 @@ public class CloudDriveUserSettingsServiceImpl implements CloudDriveUserSettings
                             CLOUD_DRIVE_USER_SETTING_SCOPE,
                             CLOUD_DRIVE_SETTING_KEY,
                             SettingValue.create(existingUserSettings.toString()));
+  }
+
+  @Override
+  public String getCloudDriveProviders() throws JSONException {
+
+    CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
+    JSONObject providersJSON = new JSONObject();
+    for (CloudProvider provider : service.getProviders()) {
+      providersJSON.put(provider.getId(), new JSONObject(provider));
+    }
+    return providersJSON.toString();
+
   }
 }

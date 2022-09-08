@@ -83,3 +83,14 @@ export function disconnect(workspace, userEmail, providerId) {
   });
 }
 
+export function getCloudDriveProviders() {
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/clouddrive/settings/providers`,{
+    credentials: 'include',
+    method: 'GET',
+  }).then((resp) => {
+    if (resp && resp.ok) {
+      return resp.json();
+    }
+  });
+}
+

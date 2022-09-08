@@ -56,13 +56,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
               </template>
             </v-list-item-content>
             <v-list-item-action>
-              <v-btn v-if="!item.user"
+              <v-btn
+                v-if="!item.user"
                 class="btn"
                 :loading="item.loading"
                 @click="connect(item)">
                 {{ $t("cloudDriveSettings.drawer.button.connect") }}
               </v-btn>
-              <v-btn v-else
+              <v-btn
+                v-else
                 class="btn"
                 :loading="item.loading"
                 @click="disconnect(item)">

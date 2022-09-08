@@ -43,4 +43,12 @@ public interface CloudDriveUserSettingsService {
      * @throws  JSONException when the current user is not delete cloud drive settings
      */
     public void deleteCloudDriveUserSettings(long identityId, String providerId) throws JSONException;
+
+    /**
+     * Retrieves cloud drive providers
+     *
+     * @throws  JSONException when the current user is not delete cloud drive settings
+     * @return
+     */
+    public String getCloudDriveProviders() throws JSONException;
   }
