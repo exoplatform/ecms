@@ -48,9 +48,6 @@
       <depends>
         <module>cloudDriveUtils</module>
       </depends>
-      <depends>
-        <module>cloudDrives</module>
-      </depends>
     </module>
   </portlet>
 
