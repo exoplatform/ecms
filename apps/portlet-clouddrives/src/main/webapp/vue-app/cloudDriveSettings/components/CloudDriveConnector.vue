@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <script>
-import { getUserDrive, disconnect, saveUserSettings, getUserSettings } from '../js/cloudDriveService';
+import { getUserDrive, disconnect, saveUserSettings, getUserSettings, getCloudDriveProviders } from '../js/cloudDriveService';
 
 export default {
   data: function() {
@@ -31,7 +31,6 @@ export default {
   created() {
     this.$root.$on('cloud-drive-connect', this.connectToCloudDrive);
     this.$root.$on('cloud-drive-disconnect', this.disconnectFromCloudDrive);
-    this.connectorsImages = extensionRegistry.loadExtensions('cloud-drive-connectors', 'images') || [];
     getUserDrive()
       .then(data => {
         this.userDrive = {
@@ -41,22 +40,26 @@ export default {
           workspace: data.workspace,
           homePath: data.homePath,
         };
-        // get providers from cloudDrives module, note that providers should already exist in module at this stage
-        this.providers = cloudDrives.getProviders();
-        // get image paths from cloudDrive connectors addon
-        if (this.connectorsImages && this.connectorsImages.length !== 0) {
-          Object.values(this.providers).forEach((provider) => {
-            provider.image = Object.values(this.connectorsImages[0]).find(connector => connector.id === provider.id).path;
-          });
-        }
-        this.$emit('connectors-loaded', this.providers);
+        getCloudDriveProviders().then((res) => {
+          // get providers from cloudDrives module, note that providers should already exist in module at this stage
+          this.providers = res;
+        }).then(() => {
+          this.connectorsImages = extensionRegistry.loadExtensions('cloud-drive-connectors', 'images') || [];
+          // get image paths from cloudDrive connectors addon
+          if (this.connectorsImages && this.connectorsImages.length !== 0) {
+            Object.values(this.providers).forEach((provider) => {
+              provider.image = Object.values(this.connectorsImages[0]).find(connector => connector.id === provider.id).path;
+            });
+          }
+          // initialize already connected accounts
+          this.init();
+        }).then(() => {
+          this.$emit('connectors-loaded', this.providers);
+        });
 
       }).catch(err => {
         this.alert = { message: err.message, type: 'error' };
       });
-  },
-  mounted() {
-    this.init();
   },
   methods: {
     disconnectFromCloudDrive: function(provider) {
