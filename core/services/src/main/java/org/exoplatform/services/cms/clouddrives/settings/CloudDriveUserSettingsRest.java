@@ -21,10 +21,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
+import org.exoplatform.services.cms.clouddrives.CloudProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.json.JSONObject;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
@@ -104,6 +108,36 @@ public class CloudDriveUserSettingsRest implements ResourceContainer {
       return Response.ok(cloudDriveSettingsRestEntity).build();
     } catch (Exception e) {
       LOG.warn("Error retrieving clouddrive connectors settings for user with id '{}'", identityId, e);
+      return Response.serverError().entity(e.getMessage()).build();
+    }
+  }
+
+  @GET
+  @Path("/providers")
+  @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed("users")
+  @Operation(
+          summary = "Retrieves cloud drive providers",
+          method = "GET"
+  )
+  @ApiResponses(
+          value = {
+                  @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+                  @ApiResponse(responseCode = "400", description = "Invalid query input"),
+                  @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+                  @ApiResponse(responseCode = "500", description = "Internal server error")
+          }
+  )
+  public Response getCloudDriveProviders() {
+    try {
+      CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
+      JSONObject providersJSON = new JSONObject();
+      for (CloudProvider provider : service.getProviders()) {
+        providersJSON.put(provider.getId(), new JSONObject(provider));
+      }
+      return Response.ok(providersJSON.toString()).build();
+    } catch (Exception e) {
+      LOG.warn("Error while retrieving cloud drive providers", e);
       return Response.serverError().entity(e.getMessage()).build();
     }
   }
