@@ -34,11 +34,8 @@ public class CloudDriveUserSettingsServiceImpl implements CloudDriveUserSettings
 
   private static final String          CLOUD_DRIVE_SETTING_KEY             = "CloudDriveSettings";
 
-  private CloudDriveService            cloudDriveService;
-
-  public CloudDriveUserSettingsServiceImpl(SettingService settingService, CloudDriveService cloudDriveService) {
+  public CloudDriveUserSettingsServiceImpl(SettingService settingService) {
       this.settingService = settingService;
-      this.cloudDriveService = cloudDriveService;
   }
 
   @Override
@@ -106,8 +103,9 @@ public class CloudDriveUserSettingsServiceImpl implements CloudDriveUserSettings
 
   @Override
   public String getCloudDriveProviders() throws JSONException {
+    CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
     JSONObject providersJSON = new JSONObject();
-    for (CloudProvider provider : this.cloudDriveService.getProviders()) {
+    for (CloudProvider provider : service.getProviders()) {
       providersJSON.put(provider.getId(), new JSONObject(provider));
     }
     return providersJSON.toString();
