@@ -12,6 +12,7 @@ import java.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ooxml.POIXMLDocument;
 import org.apache.poi.ooxml.POIXMLProperties;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -86,6 +87,8 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
       coreProps.getUnderlyingProperties().setLanguageProperty(language);
       coreProps.setCreated(metadataFormat.format(created));
       document.write(fos);
+    } catch (InvalidFormatException e) {
+      LOG.error("Unable to set date in metadata : date={}", created, e);
     }
     return new DeleteOnCloseFileInputStream(tempFile);
   }
@@ -93,7 +96,7 @@ public class ApachePOIMetadataPlugin extends BaseComponentPlugin implements Docu
   private void updateDocLanguage(POIXMLDocument document, String extension, String language) {
     if (StringUtils.equals(extension, DOCX_EXTENSION) || StringUtils.equals(extension, DOCXF_EXTENSION)) {
       // Change the document editing language with the user's platform language
-      ((XWPFDocument) document).getStyles().getStyle("Normal").getCTStyle().getRPr().getLang().setVal(language);
+      ((XWPFDocument) document).getStyles().getStyle("Normal").getCTStyle().getRPr().getLangArray(0).setVal(language);
     } else if (StringUtils.equals(extension, XLSX_EXTENSION)) {
       // Rename every sheet created with a new name translated with the user's
       // platform language
