@@ -106,12 +106,10 @@ public class CloudDriveUserSettingsServiceImpl implements CloudDriveUserSettings
 
   @Override
   public String getCloudDriveProviders() throws JSONException {
-
     JSONObject providersJSON = new JSONObject();
     for (CloudProvider provider : this.cloudDriveService.getProviders()) {
       providersJSON.put(provider.getId(), new JSONObject(provider));
     }
     return providersJSON.toString();
-
   }
 }
