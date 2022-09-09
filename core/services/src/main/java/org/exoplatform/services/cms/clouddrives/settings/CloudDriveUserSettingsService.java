@@ -33,7 +33,6 @@ public interface CloudDriveUserSettingsService {
      * Gets clouddrive connectors settings for authenticated user
      *
      * @param identityId technical identifier of {@link Identity}
-     * @return cloud drive user settings json
      */
     String getCloudDriveUserSettings(long identityId);
 
@@ -44,12 +43,4 @@ public interface CloudDriveUserSettingsService {
      * @throws JSONException when the current user is not delete cloud drive settings
      */
     public void deleteCloudDriveUserSettings(long identityId, String providerId) throws JSONException;
-
-    /**
-     * Retrieves cloud drive providers
-     *
-     * @throws JSONException when the current user is not delete cloud drive settings
-     * @return cloud drive providers json
-     */
-    public String getCloudDriveProviders() throws JSONException;
   }

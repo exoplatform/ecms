@@ -21,10 +21,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.exoplatform.services.cms.clouddrives.CloudDriveService;
+import org.exoplatform.services.cms.clouddrives.CloudProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
+import org.json.JSONObject;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
@@ -126,8 +130,12 @@ public class CloudDriveUserSettingsRest implements ResourceContainer {
   )
   public Response getCloudDriveProviders() {
     try {
-      String cloudDriveProviders = cloudDriveUserSettingsService.getCloudDriveProviders();
-      return Response.ok(cloudDriveProviders).build();
+      CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
+      JSONObject providersJSON = new JSONObject();
+      for (CloudProvider provider : service.getProviders()) {
+        providersJSON.put(provider.getId(), new JSONObject(provider));
+      }
+      return Response.ok(providersJSON.toString()).build();
     } catch (Exception e) {
       LOG.warn("Error while retrieving cloud drive providers", e);
       return Response.serverError().entity(e.getMessage()).build();
