@@ -110,7 +110,7 @@
       <button>
         <disconnect>Se déconnecter</disconnect>
       </button>
-      <noConnector>Aucun connecteur de calendrier personnel n'est disponible</noConnector>
+      <noConnector>Aucun connecteur de lecteur personnel n'est disponible</noConnector>
       <connectedAccountWith>Vous êtes connecté avec</connectedAccountWith>
     </drawer>
     <alert>
@@ -118,7 +118,7 @@
       <errorMessage>Échec de la connexion</errorMessage>
       <errorSaveUserSettings>Impossible de connecter le compte du lecteur distant</errorSaveUserSettings>
       <disconnectSuccessMessage>Votre lecteur distant a été correctement déconnecté</disconnectSuccessMessage>
-      <disconnectErrorMessage>Échec de la connexion</disconnectErrorMessage>
+      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>

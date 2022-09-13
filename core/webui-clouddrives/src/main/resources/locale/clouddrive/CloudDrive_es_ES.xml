@@ -118,7 +118,7 @@
       <errorMessage>Failed connection</errorMessage>
       <errorSaveUserSettings>Error al guardar la cuenta de una unidad conectada</errorSaveUserSettings>
       <disconnectSuccessMessage>Tu unidad en la nube se ha desconectado con éxito</disconnectSuccessMessage>
-      <disconnectErrorMessage>Error al desconectar</disconnectErrorMessage>
+      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
