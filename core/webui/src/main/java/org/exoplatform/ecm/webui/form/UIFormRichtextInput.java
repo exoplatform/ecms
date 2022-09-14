@@ -209,7 +209,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
             .append("   CKEDITOR.remove(" + instance + "); " + instance + " = null;\n")
             .append("}\n")
             .append("$('[name=\\'").append(name).append("\\']').ckeditor({")
-            .append("customConfig: '/commons-extension/eXoConfig.js',")
+            .append("customConfig: '/ecmexplorer/javascript/eXo/ecm/ckeditorCustom/config.js',")
             .append("removePlugins: 'hideBottomToolbar',")
             .append("toolbar:'").append(toolbar).append("',")
             .append("toolbarLocation: 'top',")
