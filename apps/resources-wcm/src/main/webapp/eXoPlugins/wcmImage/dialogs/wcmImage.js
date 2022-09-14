@@ -252,7 +252,7 @@
 					original.removeListener( 'abort', onImgLoadErrorEvent );
 
 					// Set Error image.
-					var noimage = CKEDITOR.getUrl( CKEDITOR.plugins.get( 'image' ).path + 'images/noimage.png' );
+					var noimage = CKEDITOR.getUrl( CKEDITOR.plugins.get( 'wcmImage' ).path + 'images/noimage.png' );
 
 					if ( this.preview )
 						this.preview.setAttribute( 'src', noimage );
@@ -275,7 +275,7 @@
 
 			return {
 				title: editor.lang.image[ dialogType == 'image' ? 'title' : 'titleButton' ],
-				minWidth: ( CKEDITOR.skinName || editor.config.skin ) == 'moono-lisa' ? 500 : 420,
+				minWidth: 420,
 				minHeight: 360,
 				getModel: function( editor ) {
 					var element = editor.getSelection().getSelectedElement(),
@@ -507,7 +507,6 @@
 							type: 'hbox',
 							widths: [ '280px', '110px' ],
 							align: 'right',
-							className: 'cke_dialog_image_url',
 							children: [ {
 								id: 'txtUrl',
 								type: 'text',
@@ -582,7 +581,27 @@
 								style: 'display:inline-block;margin-top:14px;',
 								align: 'center',
 								label: editor.lang.common.browseServer,
-								hidden: true,
+								onClick: function(){
+									var nodePath = null;
+									var addressBarContent = document.getElementById('AddressBarControl').children[1].defaultValue;
+									var subPath = decodeURIComponent(addressBarContent);
+                                    //add this condition to make the difference between the path of a WebContent which already exists and a new one
+									if ( document.getElementsByClassName('addressItem')  && document.getElementsByClassName('addressItem').length > 0) {
+										var addressItem = document.getElementsByClassName('addressItem')["0"].childNodes["0"].data;
+										//to avoid the duplication of addressItem in case when trying to extract the nodePath of some drives (like Managed Sites) when access to them from the collaboration drive
+										if ( ! ( addressBarContent.startsWith(addressItem))) {
+											nodePath = decodeURIComponent(addressItem + addressBarContent);
+                                        } 
+										else {
+											nodePath = decodeURIComponent(addressBarContent).replace(decodeURIComponent(addressItem), "");
+                                        }
+                                    } else {
+                                        nodePath = decodeURIComponent(addressBarContent);
+                                    }
+                                    window.open('/eXoWCMResources/eXoPlugins/content/content.html?insertContentType=Image&subPath='+ encodeURIComponent(subPath) +'&nodePath=' + encodeURIComponent(nodePath) + '&viewType=thumbnail&components=' + previewImageId + '&currentInstance=' + editor.name, 'WCMGadgetSelector', 'width=1024,height=600');
+                                    window.popup_opened = true;
+								},
+								hidden: false,
 								filebrowser: 'info:txtUrl'
 							} ]
 						} ]
@@ -710,7 +729,6 @@
 								{
 									id: 'ratioLock',
 									type: 'html',
-									className: 'cke_dialog_image_ratiolock',
 									style: 'margin-top:30px;width:40px;height:40px;',
 									onLoad: function() {
 										// Activate Reset button
@@ -1033,7 +1051,6 @@
 					{
 						type: 'button',
 						id: 'browse',
-						className: 'cke_dialog_image_browse',
 						filebrowser: {
 							action: 'Browse',
 							target: 'Link:txtUrl',
@@ -1261,7 +1278,7 @@
 			};
 		};
 
-	CKEDITOR.dialog.add( 'image', function( editor ) {
+	CKEDITOR.dialog.add( 'wcmImage', function( editor ) {
 		return imageDialog( editor, 'image' );
 	} );
 
