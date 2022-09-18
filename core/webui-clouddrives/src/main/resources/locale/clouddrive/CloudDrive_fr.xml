@@ -118,7 +118,7 @@
       <errorMessage>Échec de la connexion</errorMessage>
       <errorSaveUserSettings>Impossible de connecter le compte du lecteur distant</errorSaveUserSettings>
       <disconnectSuccessMessage>Votre lecteur distant a été correctement déconnecté</disconnectSuccessMessage>
-      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
+      <disconnectErrorMessage>Échec de la connexion</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
