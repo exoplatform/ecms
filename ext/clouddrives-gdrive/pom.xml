@@ -24,7 +24,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms-ext</artifactId>
-    <version>6.2.5</version>
+    <version>6.2.5-patched</version>
   </parent>
 
   <artifactId>ecms-ext-gdrive</artifactId>
