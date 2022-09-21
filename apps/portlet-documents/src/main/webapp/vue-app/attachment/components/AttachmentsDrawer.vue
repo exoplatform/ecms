@@ -112,6 +112,10 @@ export default {
       type: Array,
       default: () => []
     },
+    files: {
+      type: Array,
+      default: () => []
+    },
     entityHasAttachments: {
       type: Boolean,
       default: false
@@ -251,9 +255,15 @@ export default {
     endLoading() {
       this.$refs.attachmentsAppDrawer.endLoading();
     },
+    handleProvidedFiles() {
+      if (this.files && this.files.length>0){
+        this.$root.$emit('handle-provided-files',this.files);
+      }
+    },
     openAttachmentsAppDrawer() {
       this.$refs.attachmentsAppDrawer.open();
       this.$root.$emit('attachments-app-drawer-opened');
+      window.setTimeout(() => this.handleProvidedFiles(), 400);
     },
     closeAttachmentsAppDrawer() {
       this.$root.$emit('reset-attachments-upload-input');
