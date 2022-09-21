@@ -303,9 +303,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @return the target file id
    * @throws RepositoryException the repository exception
    */
-  protected String getTargetFileId(String fileId, String workspace) throws RepositoryException {
-    ExtendedSession systemSession = (ExtendedSession) repositoryService.getCurrentRepository().getSystemSession(workspace);
-    Node node = systemSession.getNodeByIdentifier(fileId);
+    protected String getTargetFileId(String fileId, String workspace) throws RepositoryException {
+      ExtendedSession systemSession = (ExtendedSession) repositoryService.getCurrentRepository().getSystemSession(workspace);
+      Node node = systemSession.getNodeByIdentifier(fileId);
     if (node.isNodeType(EXO_SYMLINK)) {
       node = linkManager.getTarget(node, true);
       if (node != null) {

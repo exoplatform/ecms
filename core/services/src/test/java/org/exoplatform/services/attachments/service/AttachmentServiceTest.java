@@ -14,6 +14,7 @@ import org.exoplatform.services.cms.documents.*;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.security.MembershipEntry;
 import org.junit.*;
@@ -83,7 +84,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   LinkManager                 linkManager;
 
   @Mock
-  Session                     session;
+  Session session;
 
   @Before
   public void setUp() throws Exception {
@@ -155,7 +156,8 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     Node node1 = mock(Node.class);
     Node nodeContent1 = mock(Node.class);
     Property property = mock(Property.class);
-    when(session.getNodeByUUID(anyString())).thenReturn(node1);
+    ExtendedSession extendedSession = mock(ExtendedSession.class);
+    when(extendedSession.getNodeByIdentifier(anyString())).thenReturn(node1);
     Workspace workSpace = mock(Workspace.class);
     when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node1.getSession()).thenReturn(session);
@@ -165,12 +167,12 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(property.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property.getLong()).thenReturn((long) 1);
     lenient().when(node1.getPath()).thenReturn("/collaboration/");
-    lenient().when(session.getNodeByUUID(String.valueOf(1))).thenReturn(node1);
+    lenient().when(extendedSession.getNodeByIdentifier(String.valueOf(1))).thenReturn(node1);
 
     Node node2 = mock(Node.class);
     Node nodeContent2 = mock(Node.class);
     Property property2 = mock(Property.class);
-    when(session.getNodeByUUID(anyString())).thenReturn(node2);
+    when(extendedSession.getNodeByIdentifier(anyString())).thenReturn(node2);
     when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node2.getSession()).thenReturn(session);
     lenient().when(node2.getProperty(anyString())).thenReturn(property2);
@@ -179,12 +181,12 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(property2.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property2.getLong()).thenReturn((long) 2);
     lenient().when(node2.getPath()).thenReturn("/collaboration/");
-    lenient().when(session.getNodeByUUID(String.valueOf(2))).thenReturn(node2);
+    lenient().when(extendedSession.getNodeByIdentifier(String.valueOf(2))).thenReturn(node2);
 
     Node node3 = mock(Node.class);
     Node nodeContent3 = mock(Node.class);
     Property property3 = mock(Property.class);
-    when(session.getNodeByUUID(anyString())).thenReturn(node3);
+    when(extendedSession.getNodeByIdentifier(anyString())).thenReturn(node3);
     lenient().when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node3.getSession()).thenReturn(session);
     lenient().when(node3.getProperty(anyString())).thenReturn(property3);
@@ -193,7 +195,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(property3.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property3.getLong()).thenReturn((long) 3);
     lenient().when(node3.getPath()).thenReturn("/collaboration/");
-    Mockito.when(session.getNodeByUUID(String.valueOf(3))).thenReturn(node3);
+    Mockito.when(extendedSession.getNodeByIdentifier(String.valueOf(3))).thenReturn(node3);
 
     String username = "testuser";
     long currentIdentityId = 2;
