@@ -152,6 +152,7 @@ export default {
       default: ''
     },
   },
+
   computed: {
     displayMessageDestinationFolder() {
       return !this.attachments.length || this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
@@ -163,7 +164,7 @@ export default {
   methods: {
     openSelectDestinationFolderDrawer() {
       this.$root.$emit('open-drive-explorer-drawer');
-    },
+    }
   }
 };
 </script>

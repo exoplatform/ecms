@@ -98,12 +98,14 @@ export default {
     this.$root.$on('reset-attachments-upload-input', () => this.resetUploadInput());
     this.$root.$on('abort-attachments-new-upload', () => this.abortUploadingNewAttachments());
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
+    this.$root.$on('handle-provided-files', files =>  this.handleFileUpload(files));
   },
   beforeDestroy() {
     this.$root.$off('handle-pasted-files-from-clipboard', this.handleFileUpload);
     this.$root.$off('reset-attachments-upload-input', this.resetUploadInput);
     this.$root.$off('abort-attachments-new-upload', this.abortUploadingNewAttachments);
     this.$root.$off('abort-uploading-new-file', this.abortUploadingNewFile);
+    this.$root.$off('handle-provided-files', this.handleFileUpload);
   },
   methods: {
     initDragAndDropEvents() {
