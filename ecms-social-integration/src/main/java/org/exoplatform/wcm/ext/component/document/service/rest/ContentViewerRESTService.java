@@ -40,6 +40,7 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -95,8 +96,8 @@ public class ContentViewerRESTService implements ResourceContainer {
     String content = null;
     try {
       ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = getSystemProvider().getSession(workspaceName, repository);
-      Node contentNode = session.getNodeByUUID(uuid);
+      ExtendedSession session = (ExtendedSession) getSystemProvider().getSession(workspaceName, repository);
+      Node contentNode = session.getNodeByIdentifier(uuid);
 
       if(contentNode != null && contentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         contentNode = linkManager.getTarget(contentNode);
