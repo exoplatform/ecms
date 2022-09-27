@@ -23,7 +23,6 @@ import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -47,13 +46,13 @@ import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper.ProviderInfo;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
@@ -303,8 +302,8 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @throws RepositoryException the repository exception
    */
   protected String getTargetFileId(String fileId, String workspace) throws RepositoryException {
-    Session systemSession = repositoryService.getCurrentRepository().getSystemSession(workspace);
-    Node node = systemSession.getNodeByUUID(fileId);
+    ExtendedSession systemSession = (ExtendedSession) repositoryService.getCurrentRepository().getSystemSession(workspace);
+    Node node = systemSession.getNodeByIdentifier(fileId);
     if (node.isNodeType(EXO_SYMLINK)) {
       node = linkManager.getTarget(node, true);
       if (node != null) {
