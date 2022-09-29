@@ -24,6 +24,7 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -72,8 +73,9 @@ public class EntityBuilder {
                                                     String attachmentId) throws Exception {
     Node attachmentNode = null;
     Permission acl = new Permission();
+    ExtendedSession extendedSession = (ExtendedSession) session;
     try {
-      attachmentNode = session.getNodeByUUID(attachmentId);
+      attachmentNode = extendedSession.getNodeByIdentifier(attachmentId);
     } catch (AccessDeniedException e) {
       Attachment privateAttachment = new Attachment();
       acl.setCanAccess(false);

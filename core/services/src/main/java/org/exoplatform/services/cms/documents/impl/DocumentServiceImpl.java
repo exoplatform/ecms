@@ -58,6 +58,7 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -729,21 +730,21 @@ public class DocumentServiceImpl implements DocumentService {
     Session systemSession = null;
     try {
       systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
-      Node node = systemSession.getNodeByUUID(uuid);
+      ExtendedSession extendedSessionSession = (ExtendedSession) systemSession;
+      Node node = extendedSessionSession.getNodeByIdentifier(uuid);
       if (node.isNodeType(EXO_SYMLINK)) {
         node = linkManager.getTarget(node, true);
       }
       String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
-      String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
+      String currentRuntimeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
               : null;
-      if (currentRuntumeId != null && editorsRuntimeId.equals(currentRuntumeId)) {
+      if (currentRuntimeId != null && editorsRuntimeId.equals(currentRuntimeId)) {
         return provider;
       } else {
         String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
-        Session session = systemSession;
         WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
           try {
-            Node tagetNode = session.getNodeByUUID(uuid);
+            Node tagetNode = extendedSessionSession.getNodeByIdentifier(uuid);
             if (tagetNode.isNodeType(EXO_SYMLINK)) {
               tagetNode = linkManager.getTarget(tagetNode);
             }
@@ -1026,8 +1027,8 @@ public class DocumentServiceImpl implements DocumentService {
       workspace = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
     }
     SessionProvider sp = sessionProviderService.getSessionProvider(null);
-    Session session = sp.getSession(workspace, repoService.getCurrentRepository());
-    return session.getNodeByUUID(uuid);
+    ExtendedSession extendedSession = (ExtendedSession) sp.getSession(workspace, repoService.getCurrentRepository());
+    return extendedSession.getNodeByIdentifier(uuid);
   }
   
   public LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) {
