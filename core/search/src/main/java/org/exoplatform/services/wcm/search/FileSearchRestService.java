@@ -51,20 +51,12 @@ public class FileSearchRestService implements ResourceContainer {
   private FileSearchServiceConnector fileSearchServiceConnector;
   
   private NodeHierarchyCreator nodeHierarchyCreator;
-  private final IdentityManager     identityManager;
-
-  private final FavoriteService     favoriteService;
-
-  private final TagService     tagService;
 
   private static final int DEFAULT_LIMIT = 20;
 
-  public FileSearchRestService(FileSearchServiceConnector fileSearchServiceConnector, NodeHierarchyCreator nodeHierarchyCreator, IdentityManager  identityManager, FavoriteService  favoriteService, TagService tagService) {
+  public FileSearchRestService(FileSearchServiceConnector fileSearchServiceConnector, NodeHierarchyCreator nodeHierarchyCreator) {
     this.fileSearchServiceConnector = fileSearchServiceConnector;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
-    this.identityManager = identityManager;
-    this.favoriteService = favoriteService;
-    this.tagService = tagService;
   }
 
   @GET
