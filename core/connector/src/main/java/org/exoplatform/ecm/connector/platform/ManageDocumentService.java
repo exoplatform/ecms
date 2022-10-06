@@ -320,7 +320,7 @@ public class ManageDocumentService implements ResourceContainer {
     try {
       Node node = getNode(driveName, workspaceName, currentFolder);
       // The name automatically determined from the title according to the current algorithm.
-      String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folderName));
+      String name = Text.escapeIllegalJcrChars(Utils.cleanName(folderName));
       // Set default name if new title contain no valid character
       name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
 
