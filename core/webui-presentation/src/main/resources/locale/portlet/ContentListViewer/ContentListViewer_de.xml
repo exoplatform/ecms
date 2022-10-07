@@ -9,18 +9,18 @@
     <msg>
       <non-contents>Leider sind keine Artikel verfügbar.</non-contents>
       <item-not-found>Element nicht gefunden.</item-not-found>
-      <no-permission>Ihnen fehlt die Berechtigung, diesen Knoten zuzugreifen.</no-permission>
+      <no-permission>Ihnen fehlt die Zugangsberechtigung.</no-permission>
       <category-back>Zur vorherigen Kategorie gehen</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Inhaltsliste Voreinstellungen</UICLVConfig>
+      <UICLVConfig>Einstellungen Inhaltsliste</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Inhaltsliste Voreinstellungen</Title>
+      <Title>Einstellungen Inhaltsliste</Title>
       <ContentSelectionBlock>Inhaltsauswahl</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modus</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigCheckTranslationFormCheckboxInput>Mehrsprachenunterstützung</UICLVConfigCheckTranslationFormCheckboxInput>
@@ -71,7 +71,7 @@
     </label>
     <help>
       <TranslationHelp>Wenn Sie diese Option aktivieren, werden nur Inhalte mit der Sprache des Benutzers in der Liste angezeigt. Beispiel: Wenn diese Option aktiviert ist und die Benutzersprache Englisch ist, werden nur Inhalte aufgelistet, die in der englischen Sprache geschrieben sind. Wenn diese Option nicht aktiviert ist, werden alle Inhalte im Ordner aufgelistet.</TranslationHelp>
-      <ModeSelectionHelp>Es stehen zwei Modi zur Verfügung, um Inhalt anzuzeigen. "Nach Ordner" wird den gesamten Inhalt in Ihrem ausgewählten Ordner/Ihrer ausgewählten Kategorie anzeigen. Bei Wahl von "Nach Inhalt" können Sie den Inhalt manuell wählen, den Sie anzeigen möchten.</ModeSelectionHelp>
+      <ModeSelectionHelp>Es stehen zwei Modi zur Verfügung, um Inhalte anzuzeigen. "Nach Ordner" wird den gesamten Inhalt in Ihrem ausgewählten Ordner/Ihrer ausgewählten Kategorie anzeigen. Bei Wahl von "Nach Inhalt" können Sie den Inhalt manuell wählen, den Sie anzeigen möchten.</ModeSelectionHelp>
       <FolderPathHelp>Wählen Sie den Inhalt, den Sie anzeigen möchten. Die Standardauswahl wird dynamisch ersetzt werden, wenn Sie die dynamische Navigation aktivieren (sehen Sie weiter unten für die Wahl des erweiterten Modus).</FolderPathHelp>
       <HeaderOptionHelp>Eine Kopfzeile am Anfang der Inhaltsliste anzeigen. Wenn Sie die Option "automatische Erkennung" aktivieren, wird versucht die Kopfzeile anhand der aktuellen Auswahl zu finden.</HeaderOptionHelp>
       <GeneralOptionHelp>Wählen Sie die grafischen Elemente, die Sie in Ihrer Liste anzeigen möchten. Beachten Sie, das abhängig von der ausgewählten Vorlage einige Elemente möglicherweise nicht verfügbar sind.</GeneralOptionHelp>
@@ -79,7 +79,7 @@
       <ParameterHelp>Dieser Parameter wird verwendet werden, um den Inhalt zu erhalten, wenn dynamische Navigation aktiviert ist.</ParameterHelp>
       <ShowDetailInPageHelp>Beim Klicken auf "Inhalt" wird der Benutzer zu einer Detailseite weitergeleitet. Sie müssen ein "Inhalte nach URL" Portlet mit eingeschalteter dynamischer Navigation auf der Zielseite haben, um den Inhalt anzuzeigen.</ShowDetailInPageHelp>
       <DetailParameterHelp>Dieser Parameter wird den Pfad zum Inhalt im Link der Detailseite enthalten. Dieser Parameter muss dem verwendeten Parameter im "Inhalte nach URL" Portlet der Seite entsprechen.</DetailParameterHelp>
-      <ContentByQueryHelp>Sie können eine SQL-Abfrage festlegen, um Inhalten dynamisch abzurufen. Folgende Parameter sind zulässig: ${user}, ${lang} oder ein beliebiger Abrufparameter (PARAM) umgeben von ${PARAM}.</ContentByQueryHelp>
+      <ContentByQueryHelp>Sie können eine SQL-Abfrage festlegen, um Inhalte dynamisch abzurufen. Folgende Parameter sind zulässig: ${user}, ${lang} oder ein beliebiger Abrufparameter (PARAM) umgeben von ${PARAM}.</ContentByQueryHelp>
       <ContentsVisibilityHelp>"Durch Authentifizierung eingeschränkt" filtert den Inhalt basierend auf der Authentifizierung. Wenn Sie sich nicht anmelden, sehen Sie nur öffentliche Inhalte. Wenn Sie eingeloggt sind, sehen Sie alle sichtbaren Inhalt von Intranetbenutzern (geteilt mit allen). "Eingeschränkt durch Benutzerrollen" bedeutet, dass Sie Inhalte entsprechend Ihrer Benutzerrolen sehen werden. In den meisten Fällen sollte diese Option nicht verwendet werden, da sie die Gesamtleistung reduziert.</ContentsVisibilityHelp>
     </help>
     <action>

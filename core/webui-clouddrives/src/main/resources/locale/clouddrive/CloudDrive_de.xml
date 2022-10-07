@@ -88,7 +88,7 @@
   </ConnectCloudDriveForm>
   <cloudStorage>
     <label>
-      <title>Cloud Storage</title>
+      <title>Cloud-Speicher</title>
       <cloudDrives>Cloud Drives</cloudDrives>
       <provider>Anbieter</provider>
       <description>Beschreibung</description>
