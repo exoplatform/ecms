@@ -40,11 +40,11 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.3.x-SNAPSHOT</org.exoplatform.social.version>
-    <addon.exo.jcr.version>6.3.x-SNAPSHOT</addon.exo.jcr.version>
-    <addon.exo.tasks.version>3.3.x-SNAPSHOT</addon.exo.tasks.version>
-    <org.exoplatform.platform-ui.version>6.3.x-SNAPSHOT</org.exoplatform.platform-ui.version>
-    <addon.exo.analytics.version>1.2.x-SNAPSHOT</addon.exo.analytics.version>
+    <org.exoplatform.social.version>6.3.2-RC01</org.exoplatform.social.version>
+    <addon.exo.jcr.version>6.3.2-RC01</addon.exo.jcr.version>
+    <addon.exo.tasks.version>3.3.2-RC01</addon.exo.tasks.version>
+    <org.exoplatform.platform-ui.version>6.3.2-RC01</org.exoplatform.platform-ui.version>
+    <addon.exo.analytics.version>1.2.2-RC01</addon.exo.analytics.version>
     <!-- **************************************** -->
     <!-- Google API -->
     <!-- **************************************** -->
