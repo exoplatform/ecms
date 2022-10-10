@@ -459,3 +459,31 @@ export function downloadFiles(attachments, fileName) {
     a.remove();
   });
 }
+
+export function checkExistence(driveName, workspaceName, currentFolder, fileName) {
+  const formData = new FormData();
+
+  if (workspaceName) {
+    formData.append('workspaceName', workspaceName);
+  }
+  if (driveName) {
+    formData.append('driveName', driveName);
+  }
+  if (currentFolder) {
+    formData.append('currentFolder', currentFolder);
+  }
+  if (fileName) {
+    formData.append('fileName', fileName);
+  }
+
+  const params = new URLSearchParams(formData).toString();
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/managedocument/uploadFile/exist?${params}`, {
+    credentials: 'include',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }).then(resp => resp && resp.text())
+      .then(text => new DOMParser().parseFromString(text, "text/xml"));
+}
+

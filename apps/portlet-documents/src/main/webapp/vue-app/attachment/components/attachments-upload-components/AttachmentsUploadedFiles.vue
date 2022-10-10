@@ -102,13 +102,15 @@
           :key="attachment.title"
           class="list-complete-item">
           <attachment-item
+            @keepBoth="$emit('keep-both', attachment)"
+            @createVersion="$emit('create-version', attachment)"
             :attachment="attachment"
             :can-edit="attachment.acl && attachment.acl.canEdit"
             :allow-to-preview="false"
             :current-space="currentSpace"
             :current-drive="currentDrive"
             :entity-id="entityId"
-            allow-to-detach
+            :allow-to-detach="allowToDetach"
             allow-to-edit />
         </span>
       </transition-group>
@@ -152,7 +154,11 @@ export default {
       default: ''
     },
   },
-
+  created() {
+    this.$root.$on('refresh-uploaded-files-list', () => {
+      this.$forceUpdate();
+    });
+  },
   computed: {
     displayMessageDestinationFolder() {
       return !this.attachments.length || this.attachments.some(val => val.uploadId != null && val.uploadId !== '');
