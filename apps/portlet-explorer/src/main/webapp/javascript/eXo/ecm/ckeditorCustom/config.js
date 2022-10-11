@@ -23,13 +23,12 @@ CKEDITOR.editorConfig = function( config ) {
     // The configuration options below are needed when running CKEditor from source files.
     CKEDITOR.plugins.addExternal('simpleLink','/commons-extension/eXoPlugins/simpleLink/','plugin.js');
     CKEDITOR.plugins.addExternal('simpleImage','/commons-extension/eXoPlugins/simpleImage/','plugin.js');
-    CKEDITOR.plugins.addExternal('suggester','/commons-extension/eXoPlugins/suggester/','plugin.js');
 	CKEDITOR.plugins.addExternal('content','/eXoWCMResources/eXoPlugins/content/','plugin.js');
 	CKEDITOR.plugins.addExternal('insertPortalLink','/commons-extension/eXoPlugins/insertPortalLink/','plugin.js');
 	CKEDITOR.plugins.addExternal('wcmImage','/eXoWCMResources/eXoPlugins/wcmImage/','plugin.js');
   
     //TODO we should ensure adding these plugins
-    config.extraPlugins = 'simpleLink,simpleImage,suggester,content,insertPortalLink,wcmImage';
+    config.extraPlugins = 'simpleLink,simpleImage,content,insertPortalLink,wcmImage';
 
     // Move toolbar below the test area
     config.toolbarLocation = 'bottom';
@@ -85,10 +84,4 @@ CKEDITOR.editorConfig = function( config ) {
     config.autoGrow_minHeight = 80;
 
     config.language = eXo.env.portal.language || 'en';
-    config.suggester = {
-        suffix: ' ',
-        renderMenuItem: '<li data-value="${uid}"><div class="avatarSmall" style="display: inline-block;"><img src="${avatar}"></div>${name} (${uid})</li>',
-        renderItem: '<span class="exo-mention">${name}<a href="#" class="remove"><i class="uiIconClose uiIconLightGray"></i></a></span>',
-        sourceProviders: ['exo:people']
-    };
 };
