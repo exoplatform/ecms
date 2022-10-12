@@ -37,6 +37,8 @@
             :path-destination-folder="pathDestinationFolder" />
           <attachments-select-from-drive v-if="(entityId && entityType) || !attachToEntity" />
           <attachments-uploaded-files
+            @keep-both="uploadManually($event, 'keep')"
+            @create-version="uploadManually($event, 'createVersion')"
             :attachments="attachments"
             :new-uploaded-files="newUploadedFiles"
             :schema-folder="schemaFolder"
@@ -155,11 +157,12 @@ export default {
       attachmentsChanged: false,
       newUploadedFiles: [],
       creationType: '',
+      saveMode: 'keep'
     };
   },
   computed: {
     uploadFinished() {
-      return this.attachments.length > 0 && this.attachments.every(file => !file.uploadId);
+      return this.attachments.length > 0 && (this.attachments.every(file => !file.uploadId) || this.attachments.every(file => file.waitAction));
     },
     entityHasNewAttachments() {
       return this.uploadedFiles.length > 0;
@@ -247,6 +250,11 @@ export default {
     );
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
+    this.$root.$on('continue-upload-to-destination-path', (file) => {
+      this.uploadFileToDestinationPath(file);
+      this.$root.$emit('entity-attachments-updated');
+      document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+    });
   },
   methods: {
     startLoading() {
@@ -273,7 +281,7 @@ export default {
     uploadAddedAttachments() {
       if (this.newUploadedFilesAdded) { //added new uploaded files
         this.$refs.attachmentsAppDrawer.startLoading();
-        this.attachments.filter(file => file.uploadId).forEach(file => {
+        this.attachments.filter(file => file.uploadId && !file.waitAction).forEach(file => {
           this.queueUpload(file);
         });
       } else if (this.attachmentsChanged) { //updated from drives
@@ -295,8 +303,14 @@ export default {
         this.uploadFileToDestinationPath(this.uploadingFilesQueue.shift());
       }
     },
+    uploadManually(file, mode) {
+      this.saveMode = mode;
+      file.waitAction = false;
+      this.$root.$emit('attachment-continue-upload', file);
+      file.actions = [];
+    },
     uploadFileToDestinationPath: function (file) {
-      if (file.uploadId) {
+      if (file.uploadId && !file.waitAction) {
         this.uploadingCount++;
         this.$attachmentService.uploadAttachment(
           this.workspace,
@@ -306,7 +320,7 @@ export default {
           file.uploadId,
           file.title,
           eXo.env.portal.language,
-          'keep',
+          this.saveMode,
           'save'
         ).then((uploadedFile) => {
           if (uploadedFile) {
@@ -327,6 +341,8 @@ export default {
               this.processNextQueuedUpload();
             }
           }
+          this.saveMode = 'keep';
+          this.waitingActionUploads();
         }).catch(() => {
           this.uploadingCount--;
           this.processNextQueuedUpload();
@@ -336,6 +352,15 @@ export default {
             type: 'error',
           });
         });
+      }
+    },
+    waitingActionUploads() {
+      const onlyWaiting = this.attachments.every(attachment => attachment.waitAction || attachment.uploadProgress === 100);
+      if (onlyWaiting && !this.uploadFinished) {
+        this.$root.$emit('entity-attachments-updated');
+        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+        this.$root.$emit('refresh-uploaded-files-list');
+        this.displaySuccessMessage();
       }
     },
     addDestinationFolderForAll(pathDestinationFolder, folderRelativePath, folder, currentDrive) {
