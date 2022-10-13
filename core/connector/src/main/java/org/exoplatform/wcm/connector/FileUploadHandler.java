@@ -513,15 +513,20 @@ public class FileUploadHandler {
           }
           parent = parent.getParent();
         }
+        boolean doIndexName = parent.hasNode(nodeName);
         do {
           try {
             file = parent.addNode(nodeName, FCKUtils.NT_FILE);
             fileCreated = true;
           } catch (ItemExistsException e) {//sameNameSibling is not allowed
             nodeName = increaseName(fileName, ++count);
+            doIndexName = false;
           }
         } while (!fileCreated);
         //--------------------------------------------------------
+        if (exoTitle != null && count >= 1) {
+          exoTitle = getNewName(exoTitle, "(" + count + ")");
+        }
         if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
           file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
         }
@@ -535,7 +540,16 @@ public class FileUploadHandler {
         if(!file.isNodeType(NodetypeConstant.MIX_I18N))
           file.addMixin(NodetypeConstant.MIX_I18N);
 
-        if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
+        if (!file.hasProperty(NodetypeConstant.EXO_TITLE) && doIndexName) {
+          String name = file.getName();
+          String path = file.getPath();
+          String index = path.substring(StringUtils.indexOf(path, name) + name.length());
+          if (exoTitle != null && StringUtils.isNotBlank(index)) {
+            String suffix = index.replace("[", "(").replace("]", ")");
+            exoTitle = getNewName(exoTitle, suffix);
+          }
+          file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
+        } else if (!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
           file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
         }
         jcrContent = file.addNode("jcr:content","nt:resource");
@@ -543,7 +557,7 @@ public class FileUploadHandler {
         file = parent.getNode(nodeName);
         autoVersionService.autoVersion(file,isNewVersion);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
-      }else if(parent.isNodeType(NodetypeConstant.NT_FILE)){
+      } else if(parent.isNodeType(NodetypeConstant.NT_FILE)){
         file = parent;
         autoVersionService.autoVersion(file,isNewVersion);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
@@ -586,6 +600,14 @@ public class FileUploadHandler {
     }
   }
 
+  private static String getNewName(String exoTitle, String newNameSuffix) {
+    int pointIndex = exoTitle.lastIndexOf(".");
+    String extension = pointIndex != -1 ? exoTitle.substring(pointIndex) : "";
+    exoTitle = pointIndex != -1 ? exoTitle.substring(0, pointIndex).concat(newNameSuffix).concat(extension)
+            : exoTitle.concat(newNameSuffix);
+    return exoTitle;
+  }
+  
   private Document getUploadedFile(String workspaceName, Node file, String mimetype) throws Exception {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
