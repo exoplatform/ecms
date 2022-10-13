@@ -56,7 +56,7 @@ export function getDrivers() {
     });
 }
 
-export function createFolder(currentDrive, workspace, parentPath, newFolderName, folderNodeType) {
+export function createFolder(currentDrive, workspace, parentPath, newFolderName, folderNodeType, isSystem) {
   const formData = new FormData();
   if (currentDrive) {
     formData.append('driveName', currentDrive);
@@ -72,6 +72,9 @@ export function createFolder(currentDrive, workspace, parentPath, newFolderName,
   }
   if (folderNodeType) {
     formData.append('folderNodeType', folderNodeType);
+  }
+  if (isSystem) {
+    formData.append('isSystem', isSystem);
   }
   const params = new URLSearchParams(formData).toString();
 
