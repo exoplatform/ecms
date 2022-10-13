@@ -305,8 +305,6 @@ public class ManageDocumentService implements ResourceContainer {
    * @param currentFolder The path to the folder where a child folder is added.
    * @param folderName The folder name.
    * @return {@link Document} which contains the created folder.
-   * @throws Exception The exception
-   *
    * @anchor ManageDocumentService.createFolder
    */
   @GET
@@ -316,9 +314,10 @@ public class ManageDocumentService implements ResourceContainer {
                                @QueryParam("workspaceName") String workspaceName,
                                @QueryParam("currentFolder") String currentFolder,
                                @QueryParam("folderName") String folderName,
-                               @QueryParam("folderNodeType") @DefaultValue("nt:folder") String folderNodeType) throws Exception {
+                               @QueryParam("folderNodeType") @DefaultValue("nt:folder") String folderNodeType,
+                               @QueryParam("isSystem") @DefaultValue("false") boolean isSystem) {
     try {
-      Node node = getNode(driveName, workspaceName, currentFolder);
+      Node node = getNode(driveName, workspaceName, currentFolder, isSystem);
       // The name automatically determined from the title according to the current algorithm.
       String name = Text.escapeIllegalJcrChars(Utils.cleanName(folderName));
       // Set default name if new title contain no valid character
@@ -652,7 +651,16 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
-    Session session = getSession(workspaceName);
+    return getNode(driveName, workspaceName, currentFolder, false);
+  }
+  
+  private Node getNode(String driveName, String workspaceName, String currentFolder, boolean isSystem) throws Exception {
+    Session session;
+    if (isSystem) {
+      session = getSystemSession(workspaceName);
+    } else {
+      session = getSession(workspaceName);
+    }
     String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     String drivePath = Utils.getPersonalDrivePath(driveHomePath, userId);
@@ -684,6 +692,12 @@ public class ManageDocumentService implements ResourceContainer {
 
   private Session getSession(String workspaceName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    ManageableRepository manageableRepository = getCurrentRepository();
+    return sessionProvider.getSession(workspaceName, manageableRepository);
+  }
+
+  private Session getSystemSession(String workspaceName) throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     ManageableRepository manageableRepository = getCurrentRepository();
     return sessionProvider.getSession(workspaceName, manageableRepository);
   }
