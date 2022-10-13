@@ -99,26 +99,26 @@
   <cloudDriveSettings>
     <label>
       <title>Documentos</title>
-      <subtitle>Connect your personal drives</subtitle>
-      <description>Access your personal drives from your Digital Workplace</description>
+      <subtitle>Conecta tus unidades personales</subtitle>
+      <description>Accede a tus unidades personales desde tu espacio de trabajo digital</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
+      <title>Conecta tus unidades personales</title>
       <button>
         <connect>Conectar</connect>
       </button>
       <button>
         <disconnect>Desconectar</disconnect>
       </button>
-      <noConnector>No personal drive connector available</noConnector>
+      <noConnector>No hay conector de unidad personal disponible</noConnector>
       <connectedAccountWith>Estás conectado con</connectedAccountWith>
     </drawer>
     <alert>
-      <successMessage>Your cloud drive is connected correctly</successMessage>
-      <errorMessage>Failed connection</errorMessage>
+      <successMessage>Tu unidad en la nube se ha conectado con éxito</successMessage>
+      <errorMessage>Error de conexión</errorMessage>
       <errorSaveUserSettings>Error al guardar la cuenta de una unidad conectada</errorSaveUserSettings>
       <disconnectSuccessMessage>Tu unidad en la nube se ha desconectado con éxito</disconnectSuccessMessage>
-      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
+      <disconnectErrorMessage>Error al desconectar</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
