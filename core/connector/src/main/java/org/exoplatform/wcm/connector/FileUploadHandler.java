@@ -570,6 +570,13 @@ public class FileUploadHandler {
       if(fileCreated) {
         file.getParent().save();
         autoVersionService.autoVersion(file,isNewVersion);
+        if (file.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+          if (!file.isCheckedOut()) {
+            file.checkout();
+          }
+          file.checkin();
+          file.checkout();
+        }
       }
       //parent.getSession().refresh(true); // Make refreshing data
       //parent.save();
