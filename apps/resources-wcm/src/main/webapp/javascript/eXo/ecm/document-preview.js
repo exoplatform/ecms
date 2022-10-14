@@ -1337,7 +1337,7 @@
 
   // Resize Event
   var resizeEventHandler = function() {
-    var pdfDisplayAreaHeight = window.innerHeight - 70 - ((documentPreview.settings.doc.fileInfo || documentPreview.settings.doc.breadCrumb) ? 55 : 0);
+    var pdfDisplayAreaHeight = window.innerHeight - 125;
     var $uiDocumentPreview = $('#uiDocumentPreview');
 
     // Show empty preview message
