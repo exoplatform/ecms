@@ -152,6 +152,9 @@ export default {
         if (file.uploadProgress !== this.maxProgress) {
           this.$root.$emit('abort-uploading-new-file', file);
         }
+        if (this.attachments.length === 0) {
+          this.$root.$emit('end-loading-attachment-drawer');
+        }
       } else if (this.attachToEntity) {
         this.startLoadingList();
         this.$attachmentService.removeEntityAttachment(this.entityId, this.entityType, file.id)
