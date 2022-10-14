@@ -31,11 +31,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -46,6 +42,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -858,5 +858,40 @@ public class ManageDocumentService implements ResourceContainer {
       parentNode = (node.isNodeType("exo:symlink")? linkManager.getTarget(node) : node);
     }
     return sb.toString();
+  }
+
+  @GET
+  @Path("/uploadFile/exist/")
+  @Produces(MediaType.TEXT_XML)
+  @RolesAllowed("users")
+  @Operation(
+          summary = "check uploaded file existence",
+          description = "check uploaded file existence",
+          method = "GET")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "500", description = "Internal server error"), })
+  public Response checkFileExistence(@Parameter(description = "workspace name") @QueryParam("workspaceName") String workspaceName,
+                                     @Parameter(description = "drive name name") @QueryParam("driveName") String driveName,
+                                     @Parameter(description = "current folder name") @QueryParam("currentFolder") String currentFolder,
+                                     @Parameter(description = "uploaded fil name") @QueryParam("fileName") String fileName) throws Exception {
+    if (workspaceName == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("workspace name is mandatory").build();
+    }
+    if (driveName == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("drive name is mandatory").build();
+    }
+    if (currentFolder == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("current folder name is mandatory").build();
+    }
+    if (fileName == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("file name is mandatory").build();
+    }
+    Node node = getNode(driveName,workspaceName, currentFolder);
+    try {
+      return fileUploadHandler.checkExistence(node, Utils.cleanName(fileName));
+    } catch (Exception e) {
+      return Response.serverError().entity(e.getMessage()).build();    }
   }
 }
