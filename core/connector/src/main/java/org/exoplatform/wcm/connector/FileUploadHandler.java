@@ -545,7 +545,8 @@ public class FileUploadHandler {
           String path = file.getPath();
           String index = path.substring(StringUtils.indexOf(path, name) + name.length());
           if (exoTitle != null && StringUtils.isNotBlank(index)) {
-            String suffix = index.replace("[", "(").replace("]", ")");
+            int indexSuffix = Integer.parseInt(index.substring(1, index.lastIndexOf("]")));
+            String suffix = "(" + (indexSuffix - 1) + ")";
             exoTitle = getNewName(exoTitle, suffix);
           }
           file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
