@@ -556,7 +556,6 @@ public class FileUploadHandler {
         jcrContent = file.addNode("jcr:content","nt:resource");
       }else if(parent.hasNode(nodeName)){
         file = parent.getNode(nodeName);
-        autoVersionService.autoVersion(file,isNewVersion);
         jcrContent = file.hasNode("jcr:content")?file.getNode("jcr:content"):file.addNode("jcr:content","nt:resource");
       } else if(parent.isNodeType(NodetypeConstant.NT_FILE)){
         file = parent;
@@ -567,9 +566,21 @@ public class FileUploadHandler {
       jcrContent.setProperty("jcr:lastModified", new GregorianCalendar());
       jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
       jcrContent.setProperty("jcr:mimeType", mimetype);
+
+      if(parent.hasNode(nodeName) && CREATE_VERSION.equals(existenceAction)) {
+        file.save();
+        autoVersionService.autoVersion(file,isNewVersion);
+      }
       if(fileCreated) {
         file.getParent().save();
         autoVersionService.autoVersion(file,isNewVersion);
+        if (file.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+          if (!file.isCheckedOut()) {
+            file.checkout();
+          }
+          file.checkin();
+          file.checkout();
+        }
       }
       //parent.getSession().refresh(true); // Make refreshing data
       //parent.save();
