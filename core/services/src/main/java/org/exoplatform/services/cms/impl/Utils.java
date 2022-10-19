@@ -701,7 +701,7 @@ public class Utils {
 
   public static String cleanName(String oldName) {
     if (StringUtils.isEmpty(oldName)) return oldName;
-    String extension ="" ;
+    String extension = "" ;
     if(oldName.lastIndexOf(".") > -1){
       extension = oldName.substring(oldName.lastIndexOf("."));
       oldName = oldName.substring(0,oldName.lastIndexOf(".")) ;
