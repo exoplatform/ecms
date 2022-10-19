@@ -434,8 +434,8 @@ public class FileUploadHandler {
                                String existenceAction,
                                boolean isNewVersion) throws Exception {
     fileName = Utils.cleanNameWithAccents(fileName);
-    fileName = Utils.cleanName(fileName);
     String exoTitle = fileName;
+    fileName = Utils.cleanName(fileName);
     try {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
