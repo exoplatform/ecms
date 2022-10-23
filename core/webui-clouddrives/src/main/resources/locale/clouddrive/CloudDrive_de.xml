@@ -114,10 +114,10 @@
       <connectedAccountWith>Sie sind verbunden mit</connectedAccountWith>
     </drawer>
     <alert>
-      <successMessage>Your cloud drive is connected correctly</successMessage>
-      <errorMessage>Failed connection</errorMessage>
-      <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
-      <disconnectSuccessMessage>Your cloud drive is disconnected correctly</disconnectSuccessMessage>
+      <successMessage>Ihr Cloud-Drive ist korrekt verbunden</successMessage>
+      <errorMessage>Fehlgeschlagene Verbindung</errorMessage>
+      <errorSaveUserSettings>Drivekonto kann nicht gespeichert werden</errorSaveUserSettings>
+      <disconnectSuccessMessage>Ihr Cloud-Drive ist korrekt getrennt</disconnectSuccessMessage>
       <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>

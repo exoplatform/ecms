@@ -383,7 +383,7 @@
     </msg>
     <tab>
       <label>
-        <DriveInputSet>Laufwerk</DriveInputSet>
+        <DriveInputSet>Dokument</DriveInputSet>
         <ViewsInputSet>Ansichten anwenden</ViewsInputSet>
         <PermissionInputSet>Berechtigungen auswählen</PermissionInputSet>
       </label>
@@ -408,12 +408,12 @@
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Laufwerk hinzufügen</UIDriveForm>
+      <UIDriveForm>Dokument hinzufügen</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
     <title>
-      <UIDriveForm>Laufwerk bearbeiten</UIDriveForm>
+      <UIDriveForm>Dokument bearbeiten</UIDriveForm>
     </title>
   </EditDriveManagerPopup>
   <UITreeList>
