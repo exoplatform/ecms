@@ -47,7 +47,7 @@ export default {
         }
         const repository = attachment.repository;
         const workspace = attachment.workspace;
-        const imageURL = mimeType.includes('image/') && `${eXo.env.portal.context}/${eXo.env.portal.rest}/jcr/${repository}/${workspace}${attachment.docPath.replace(/\[/g, '%5b').replace(/\]/g, '%5d').replace(/\+/g, '%2b')}` || null;
+        const imageURL = mimeType.includes('image/') && `${eXo.env.portal.context}/${eXo.env.portal.rest}/thumbnailImage/custom/250x250/${repository}/${workspace}${attachment.docPath.replace(/\[/g, '%5b').replace(/\]/g, '%5d').replace(/\+/g, '%2b')}` || null;
 
         attachments.push({
           id: attachment.id,
