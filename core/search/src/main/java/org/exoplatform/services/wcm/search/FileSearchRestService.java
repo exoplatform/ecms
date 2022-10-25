@@ -78,9 +78,6 @@ public class FileSearchRestService implements ResourceContainer {
                                         @Parameter(description = "Tag names list") @Schema(defaultValue = "false") @QueryParam("tags") List<String> tagNames
                                         ) throws Exception {
 
-    if (StringUtils.isBlank(query) && !favorites && CollectionUtils.isEmpty(tagNames)) {
-      return Response.status(Response.Status.BAD_REQUEST).entity("'query' parameter is mandatory").build();
-    }
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
