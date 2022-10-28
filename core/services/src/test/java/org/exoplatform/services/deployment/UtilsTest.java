@@ -333,16 +333,6 @@ public class UtilsTest extends BaseCommonsTestCase {
         // ignore me
       }
     }
-
-    @Override
-    protected void finalize() throws IOException {
-      try {
-        file.delete();
-      } catch (Exception e) {
-        // ignore me
-      }
-      super.finalize();
-    }
   }
 
 }
