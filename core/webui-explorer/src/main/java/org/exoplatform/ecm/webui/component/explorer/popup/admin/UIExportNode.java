@@ -336,15 +336,5 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         // ignore me
       }
     }
-
-    @Override
-    protected void finalize() throws IOException {
-      try {
-        file.delete();
-      } catch (Exception e) {
-        // ignore me
-      }
-      super.finalize();
-    }
   }
 }

@@ -102,7 +102,10 @@ public class TestThumbnailRESTService extends BaseConnectorTestCase{
     
     /* Prepare the favourite nodes */
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, headers, null);
-    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    assertNotNull(response);
+    if(response.getStatus() == 200) {
+      assertEquals("image", response.getContentType().getType());
+    }  
   }
   
   public void tearDown() throws Exception {
