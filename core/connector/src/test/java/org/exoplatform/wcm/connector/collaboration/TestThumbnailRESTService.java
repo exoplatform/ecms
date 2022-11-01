@@ -105,7 +105,8 @@ public class TestThumbnailRESTService extends BaseConnectorTestCase{
     assertNotNull(response);
     if(response.getStatus() == 200) {
       assertEquals("image", response.getContentType().getType());
-    }  }
+    }  
+  }
   
   public void tearDown() throws Exception {
     super.tearDown();
