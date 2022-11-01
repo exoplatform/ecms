@@ -278,8 +278,9 @@ public class ThumbnailRESTService implements ResourceContainer {
               try {
                 BufferedImage image = thumbnailPlugin.getBufferedImage(content, targetNode.getPath());
                 thumbnailService_.addThumbnailImage(thumbnailNode, image, propertyName);
-              } catch (Exception e) {
-            	throw new Exception("Failed to get image.", e);            	
+              } catch (UnsatisfiedLinkError e) {
+                LOG.error("Failed to get image: " + e.getMessage(), e);
+                return Response.serverError().entity(e.getMessage()).build();
               }
             }
 
