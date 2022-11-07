@@ -41,6 +41,8 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();
   def binarySrc = Utils.getWebdavURL(currentNode);
+  // force retrieving an image for video thumbnail
+  binarySrc += "#t=0.001";
 %>
 
   <video src="$binarySrc" controls="controls" class="videoContent">
