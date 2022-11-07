@@ -183,8 +183,7 @@ public class FileSearchRestService implements ResourceContainer {
   private ElasticSearchFilter filterMyWorkingDocuments() {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     StringBuilder recentFilter = new StringBuilder();
-    recentFilter.append("\"should\" : {\n \"term\" : { \"author\" : \"" + userId + "\" }\n },\n");
-    recentFilter.append("\"must\" : {\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }");
+    recentFilter.append("\"should\" :[\n{\n \"term\" : { \"author\" : \"" + userId + "\" }\n },{\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }\n]");
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MY_WORK_DOCS, "", recentFilter.toString());
   }
 
