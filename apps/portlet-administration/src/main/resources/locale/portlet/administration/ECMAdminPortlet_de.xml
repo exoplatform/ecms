@@ -22,7 +22,7 @@
       <UITemplatesManager>Dokumente</UITemplatesManager>
       <UICLVTemplatesManager>Liste</UICLVTemplatesManager>
       <UIViewManager>Ansichten</UIViewManager>
-      <UIDriveManager>Laufwerke</UIDriveManager>
+      <UIDriveManager>Dokumente</UIDriveManager>
       <UIQueriesManager>Abfragen</UIQueriesManager>
       <UIActionManager>Aktionen</UIActionManager>
       <UIScriptManager>Skripte</UIScriptManager>

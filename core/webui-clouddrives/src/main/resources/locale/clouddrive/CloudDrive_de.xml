@@ -93,24 +93,24 @@
       <provider>Anbieter</provider>
       <description>Beschreibung</description>
       <active>Aktiv</active>
-      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+      <ConnectionToCloud>Verbindung zu Cloud-Drive</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
       <title>Dokumente</title>
-      <subtitle>Connect your personal drives</subtitle>
-      <description>Access your personal drives from your Digital Workplace</description>
+      <subtitle>Verbinden Sie Ihre persönlichen Drives</subtitle>
+      <description>Greifen Sie auf Ihre persönlichen Dokumente von Ihrem digitalen Arbeitsplatz aus zu.</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
+      <title>Verbinden Sie Ihre persönlichen Drives</title>
       <button>
         <connect>Verbinden</connect>
       </button>
       <button>
         <disconnect>Trennen</disconnect>
       </button>
-      <noConnector>No personal drive connector available</noConnector>
+      <noConnector>Es ist keine persönliche Drive-Verbindung verfügbar</noConnector>
       <connectedAccountWith>Sie sind verbunden mit</connectedAccountWith>
     </drawer>
     <alert>
@@ -118,7 +118,7 @@
       <errorMessage>Fehlgeschlagene Verbindung</errorMessage>
       <errorSaveUserSettings>Drivekonto kann nicht gespeichert werden</errorSaveUserSettings>
       <disconnectSuccessMessage>Ihr Cloud-Drive ist korrekt getrennt</disconnectSuccessMessage>
-      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
+      <disconnectErrorMessage>Fehler beim Trennen der Verbindung.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
