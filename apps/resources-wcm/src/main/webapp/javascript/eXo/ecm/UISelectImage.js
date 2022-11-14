@@ -546,7 +546,9 @@
               });
             }
           })
-              .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
+              .then(xmlStr => {
+                return (new window.DOMParser()).parseFromString(xmlStr, 'text/xml');
+              })
               .then(xml => {
                 if (xml) {
                   return xml.childNodes[0].attributes[0].value;
