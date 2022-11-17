@@ -26,6 +26,7 @@ import javax.jcr.Node;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
 import org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl;
+import org.exoplatform.services.thumbnail.ImageResizeService;
 
 /**
  * TODO not finished! not used. Created by The eXo Platform SAS
@@ -46,8 +47,11 @@ public class CloudDriveThumbnailServiceImpl extends ThumbnailServiceImpl {
    * @param cloudDrives the cloud drives
    * @throws Exception the exception
    */
-  public CloudDriveThumbnailServiceImpl(InitParams initParams, CloudDriveService cloudDrives) throws Exception {
-    super(initParams);
+  public CloudDriveThumbnailServiceImpl(InitParams initParams,
+                                        CloudDriveService cloudDrives,
+                                        ImageResizeService imageResizeService)
+      throws Exception {
+    super(initParams, imageResizeService);
     this.cloudDrives = cloudDrives;
   }
 
