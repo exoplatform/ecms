@@ -86,37 +86,37 @@ public class EntityBuilder {
     } catch (ItemNotFoundException e) {
       throw new ObjectNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
-    Node originalDocumentNode = attachmentNode;
+    Node originalAttachmentNode = attachmentNode;
     if (linkManager.isLink(attachmentNode)) {
-      originalDocumentNode = linkManager.getTarget(attachmentNode);
-      if (originalDocumentNode == null) {
+      originalAttachmentNode = linkManager.getTarget(attachmentNode);
+      if (originalAttachmentNode == null) {
         throw new ObjectNotFoundException("Target Node with of symlink " + attachmentId + " wasn't found");
       }
     }
 
     Attachment attachment = new Attachment();
-    attachment.setId(originalDocumentNode.getUUID());
-    String attachmentsTitle = getStringProperty(originalDocumentNode, "exo:title");
+    attachment.setId(originalAttachmentNode.getUUID());
+    String attachmentsTitle = getStringProperty(originalAttachmentNode, "exo:title");
     attachment.setTitle(attachmentsTitle);
     String attachmentsPath = attachmentNode.getPath();
     attachment.setPath(attachmentsPath);
-    attachment.setCreated(getStringProperty(originalDocumentNode, "exo:dateCreated"));
-    if (originalDocumentNode.hasProperty("exo:dateModified")) {
-      attachment.setUpdated(getStringProperty(originalDocumentNode, "exo:dateModified"));
+    attachment.setCreated(getStringProperty(originalAttachmentNode, "exo:dateCreated"));
+    if (originalAttachmentNode.hasProperty("exo:dateModified")) {
+      attachment.setUpdated(getStringProperty(originalAttachmentNode, "exo:dateModified"));
     } else {
       attachment.setUpdated(null);
     }
-    if (originalDocumentNode.hasProperty("exo:lastModifier")) {
-      attachment.setUpdater(getStringProperty(originalDocumentNode, "exo:lastModifier"));
+    if (originalAttachmentNode.hasProperty("exo:lastModifier")) {
+      attachment.setUpdater(getStringProperty(originalAttachmentNode, "exo:lastModifier"));
     } else {
       attachment.setUpdater(null);
     }
-    attachment.setCloudDrive(originalDocumentNode.hasProperty("ecd:driveUUID"));
+    attachment.setCloudDrive(originalAttachmentNode.hasProperty("ecd:driveUUID"));
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
     String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
     attachment.setMimetype(mimetype);
 
-    long size = originalDocumentNode.getNode("jcr:content").getProperty("jcr:data").getLength();
+    long size = originalAttachmentNode.getNode("jcr:content").getProperty("jcr:data").getLength();
     attachment.setSize(size);
 
     String downloadUrl = getDownloadUrl(repositoryService, workspace, attachmentsPath);
@@ -125,14 +125,14 @@ public class EntityBuilder {
     String openUrl = getUrl(documentService, attachmentsPath);
     attachment.setOpenUrl(openUrl);
 
-    String attachmentsVersion = getStringProperty(originalDocumentNode, "exo:baseVersion");
+    String attachmentsVersion = getStringProperty(originalAttachmentNode, "exo:baseVersion");
     attachment.setVersion(attachmentsVersion);
 
     LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
     try {
       previewBreadcrumb = documentService.getFilePreviewBreadCrumb(attachmentNode);
     } catch (Exception e) {
-      LOG.error("Error while getting file preview breadcrumb " + originalDocumentNode.getUUID(), e);
+      LOG.error("Error while getting file preview breadcrumb " + originalAttachmentNode.getUUID(), e);
     }
     attachment.setPreviewBreadcrumb(previewBreadcrumb);
 
