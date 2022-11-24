@@ -133,7 +133,7 @@ public class EntityBuilder {
     try {
       previewBreadcrumb = documentService.getFilePreviewBreadCrumb(attachmentNode);
     } catch (Exception e) {
-      LOG.error("Error while getting file preview breadcrumb " + originalAttachmentNode.getUUID(), e);
+      LOG.error("Error while getting file preview breadcrumb " + ((NodeImpl) originalAttachmentNode).getIdentifier(), e);
     }
     attachment.setPreviewBreadcrumb(previewBreadcrumb);
 
