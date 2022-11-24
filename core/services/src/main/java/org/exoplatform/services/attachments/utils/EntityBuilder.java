@@ -25,6 +25,7 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -95,7 +96,7 @@ public class EntityBuilder {
     }
 
     Attachment attachment = new Attachment();
-    attachment.setId(originalAttachmentNode.getUUID());
+    attachment.setId(((NodeImpl) originalAttachmentNode).getIdentifier());
     String attachmentsTitle = getStringProperty(originalAttachmentNode, "exo:title");
     attachment.setTitle(attachmentsTitle);
     String attachmentsPath = attachmentNode.getPath();
