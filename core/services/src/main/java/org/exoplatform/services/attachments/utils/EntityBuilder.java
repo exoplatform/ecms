@@ -25,6 +25,7 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -85,36 +86,37 @@ public class EntityBuilder {
     } catch (ItemNotFoundException e) {
       throw new ObjectNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
-
+    Node originalAttachmentNode = attachmentNode;
     if (linkManager.isLink(attachmentNode)) {
-      attachmentNode = linkManager.getTarget(attachmentNode);
-      if (attachmentNode == null) {
+      originalAttachmentNode = linkManager.getTarget(attachmentNode);
+      if (originalAttachmentNode == null) {
         throw new ObjectNotFoundException("Target Node with of symlink " + attachmentId + " wasn't found");
       }
     }
 
     Attachment attachment = new Attachment();
-    attachment.setId(attachmentNode.getUUID());
-    String attachmentsTitle = getStringProperty(attachmentNode, "exo:title");
+    attachment.setId(((NodeImpl) originalAttachmentNode).getIdentifier());
+    String attachmentsTitle = getStringProperty(originalAttachmentNode, "exo:title");
     attachment.setTitle(attachmentsTitle);
     String attachmentsPath = attachmentNode.getPath();
     attachment.setPath(attachmentsPath);
-    attachment.setCreated(getStringProperty(attachmentNode, "exo:dateCreated"));
-    if (attachmentNode.hasProperty("exo:dateModified")) {
-      attachment.setUpdated(getStringProperty(attachmentNode, "exo:dateModified"));
+    attachment.setCreated(getStringProperty(originalAttachmentNode, "exo:dateCreated"));
+    if (originalAttachmentNode.hasProperty("exo:dateModified")) {
+      attachment.setUpdated(getStringProperty(originalAttachmentNode, "exo:dateModified"));
     } else {
       attachment.setUpdated(null);
     }
-    if (attachmentNode.hasProperty("exo:lastModifier")) {
-      attachment.setUpdater(getStringProperty(attachmentNode, "exo:lastModifier"));
+    if (originalAttachmentNode.hasProperty("exo:lastModifier")) {
+      attachment.setUpdater(getStringProperty(originalAttachmentNode, "exo:lastModifier"));
     } else {
       attachment.setUpdater(null);
     }
+    attachment.setCloudDrive(originalAttachmentNode.hasProperty("ecd:driveUUID"));
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
     String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
     attachment.setMimetype(mimetype);
 
-    long size = attachmentNode.getNode("jcr:content").getProperty("jcr:data").getLength();
+    long size = originalAttachmentNode.getNode("jcr:content").getProperty("jcr:data").getLength();
     attachment.setSize(size);
 
     String downloadUrl = getDownloadUrl(repositoryService, workspace, attachmentsPath);
@@ -123,14 +125,14 @@ public class EntityBuilder {
     String openUrl = getUrl(documentService, attachmentsPath);
     attachment.setOpenUrl(openUrl);
 
-    String attachmentsVersion = getStringProperty(attachmentNode, "exo:baseVersion");
+    String attachmentsVersion = getStringProperty(originalAttachmentNode, "exo:baseVersion");
     attachment.setVersion(attachmentsVersion);
 
     LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
     try {
       previewBreadcrumb = documentService.getFilePreviewBreadCrumb(attachmentNode);
     } catch (Exception e) {
-      LOG.error("Error while getting file preview breadcrumb " + attachmentNode.getUUID(), e);
+      LOG.error("Error while getting file preview breadcrumb " + ((NodeImpl) originalAttachmentNode).getIdentifier(), e);
     }
     attachment.setPreviewBreadcrumb(previewBreadcrumb);
 
