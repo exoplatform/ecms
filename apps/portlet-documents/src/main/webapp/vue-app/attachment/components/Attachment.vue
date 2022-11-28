@@ -16,7 +16,9 @@
         :files="files" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
-        :attachments="attachments" />
+        :supported-documents="supportedDocuments"
+        :attachments="attachments"
+        :open-attachments-in-editor="openAttachmentsInEditor" />
       <attachments-notification-alerts />
     </div>
   </v-app>
@@ -37,6 +39,8 @@ export default {
       sourceApp: null,
       drawerList: false,
       attachToEntity: true,
+      supportedDocuments: null,
+      openAttachmentsInEditor: false
     };
   },
   computed: {
@@ -80,11 +84,16 @@ export default {
           this.openAttachmentsDrawerList();
         });
     });
+    document.addEventListener('documents-supported-document-types-updated', this.refreshSupportedDocumentExtensions);
+    this.refreshSupportedDocumentExtensions();
   },
   mounted() {
     this.$root.$applicationLoaded();
   },
   methods: {
+    refreshSupportedDocumentExtensions () {
+      this.supportedDocuments = extensionRegistry.loadExtensions('documents', 'supported-document-types');
+    },
     openAttachmentsAppDrawer() {
       this.$root.$emit('open-attachments-app-drawer');
     },
@@ -111,6 +120,7 @@ export default {
       }
       this.entityType = config.entityType;
       this.entityId = config.entityId;
+      this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
       return this.initDefaultDrive();
     },
     startLoadingList() {

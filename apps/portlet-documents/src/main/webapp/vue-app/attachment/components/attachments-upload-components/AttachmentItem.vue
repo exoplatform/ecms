@@ -4,7 +4,7 @@
       <v-list-item-avatar
         :class="smallAttachmentIcon ? 'me-0' :'me-3'"
         class="border-radius"
-        @click="openPreview()">
+        @click="openFile()">
         <div v-if="attachment.uploadProgress < 100" class="fileProgress">
           <v-progress-circular
             :rotate="-90"
@@ -26,7 +26,7 @@
           </v-icon>
         </div>
       </v-list-item-avatar>
-      <v-list-item-content @click="openPreview()">
+      <v-list-item-content @click="openFile()">
         <v-list-item-title class="uploadedFileTitle" :title="attachmentTitle">
           {{ attachmentTitle || notAccessibleAttachmentTitle }}
         </v-list-item-title>
@@ -125,6 +125,14 @@ export default {
       default: true
     },
     allowToPreview: {
+      type: Boolean,
+      default: false
+    },
+    openInEditor: {
+      type: Boolean,
+      default: false
+    },
+    isFileEditable: {
       type: Boolean,
       default: false
     },
@@ -295,6 +303,18 @@ export default {
     },
     fileInfo() {
       return `${this.$t('documents.preview.updatedOn')} ${this.absoluteDateModified()} ${this.$t('documents.preview.updatedBy')} ${this.attachment.lastEditor} ${this.attachment.size}`;
+    },
+    openFileInEditor() {
+      if (this.attachment && this.attachment.id) {
+        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}&source=peview`, '_blank');
+      }
+    },
+    openFile() {
+      if (this.openInEditor && this.isFileEditable && this.attachment.acl?.canEdit) {
+        this.openFileInEditor();
+      } else {
+        this.openPreview();
+      }
     },
     openPreview() {
       if (this.allowToPreview && this.attachment.id) {
