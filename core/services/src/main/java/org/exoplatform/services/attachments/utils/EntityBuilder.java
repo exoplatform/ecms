@@ -111,7 +111,6 @@ public class EntityBuilder {
     } else {
       attachment.setUpdater(null);
     }
-    attachment.setCloudDrive(originalAttachmentNode.hasProperty("ecd:driveUUID"));
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
     String mimetype = mimeTypeResolver.getMimeType(attachmentsTitle);
     attachment.setMimetype(mimetype);
