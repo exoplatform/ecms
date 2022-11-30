@@ -115,7 +115,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
                                                .append("    \"drive\" : {\"type\" : \"text\"},\n")
                                                .append("    \"version\" : {\"type\" : \"long\"},\n")
                                                .append("    \"name\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
-                                               .append("    \"title\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
+                                               .append("    \"title\":  { \"type\": \"text\", \"fields\": { \"raw\": { \"type\": \"keyword\" }, \"whitespace\": { \"type\": \"text\", \"analyzer\": \"whitespace_lowercase_asciifolding\" } }, \"index_options\": \"offsets\" },\n")
                                                .append("    \"tags\" : {\"type\" : \"keyword\"},\n")
                                                .append("    \"dc:title\" : {\"type\" : \"text\"},\n")
                                                .append("    \"dc:creator\" : {\"type\" : \"text\"},\n")
