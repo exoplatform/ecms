@@ -586,6 +586,10 @@ public class DocumentServiceImpl implements DocumentService {
     listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     currentNode.save();
     data.close();
+    AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+    if(autoVersionService != null) {
+      autoVersionService.autoVersion(addedNode);
+    }
     return addedNode;
   }
 
