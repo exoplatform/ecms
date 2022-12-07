@@ -515,9 +515,9 @@
     </label>
     <msg>
       <unable-save-node>'{0}' telah diciptkan. silahkan simpan sesi untuk mengesahkan tindakan ini.</unable-save-node>
-      <save-node-success>'{0}' telah disimpan.</save-node-success>
+      <save-node-success>'{0}' has been saved.</save-node-success>
       <node-copied>'{0}' telah disalin.</node-copied>
-      <node-cut>'{0}' telah dipotong.</node-cut>
+      <node-cut>'{0}' has been cut.</node-cut>
       <remove-root>Anda tidak dapat menghapus folder root.</remove-root>
       <node-remove-success>'{0}' telah dihapus.</node-remove-success>
     </msg>
@@ -1040,9 +1040,9 @@
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Tidak ada tampilan template untuk item ini.</not-support>
+      <not-support>There is no View template for this item.</not-support>
       <empty>Tidak ditemukan hasil</empty>
-      <access-denied>Kamu tidak bisa melihat item ini, mungkin karena tidak mempunyai template Tampilan atau karena Kamu tidak mempunyai akses ke konten ini.</access-denied>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>Kueri tidak valid.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Susunlah berdasarkan tanggal dibuat dalam urutan kebawah</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Lihat Item ini</View>
+      <View>View this Item</View>
       <OpenFolder>Buka Folder</OpenFolder>
       <DeletePermanently>Hapus untuk selama-lamanya</DeletePermanently>
       <RestoreFromTrash>Pulihkan dari tempat sampah</RestoreFromTrash>
@@ -2347,13 +2347,13 @@
       <constraint-violation>Anda tidak dapat menambahkan jenis '{0}' ke item saat ini.</constraint-violation>
       <repository-exception>Akses ditolak. Anda tidak memiliki izin untuk menambahkan symlink ke item ini.</repository-exception>
       <numberformat-exception>Anda tidak dapat menyimpan folder ini. Nama harus dalam format numerik.</numberformat-exception>
-      <path-node-invalid>Silakan masukkan pathnya.</path-node-invalid>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
       <path-node-not-allowed>Nama ini tidak di izinkan.</path-node-not-allowed>
       <non-node>Silahkan pilih target kepercayaan; anda mungkin tidak memiliki hak untuk membaca simpul ini.</non-node>
       <cannot-save>Terjadi kesalahan saat membuat symlink ini.</cannot-save>
-      <item-exists-exception>Item dengan nama ini sudah ada.</item-exists-exception>
-      <translation-node-same-language-default>Dokumen terjemahan memiliki bahasa yang sama dengan bahasa standar dokumen saat ini.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Target item ini tidak direferensikan.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
@@ -2462,7 +2462,7 @@
 <ReadOnly>Buka hanya Baca</ReadOnly>
 <Cancel>Batalkan</Cancel>
       <KeepBoth>Simpan keduanya</KeepBoth>
-      <CreateNewVersion>Simpan sebagai versi baru</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 

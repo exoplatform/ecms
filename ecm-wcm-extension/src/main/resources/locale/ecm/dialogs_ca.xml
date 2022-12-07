@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Enllaç</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Utilitza @ per mencionar algú al teu comentari</placeholder>
+      <placeholder>Utilitza @ per tal de mencionar algú al seu comentari</placeholder>
     </label>
   </UICommentForm>
  
@@ -74,7 +74,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Contrasenya</password>
-      <link>Link</link>
+      <link>Enllaç</link>
       <to>Envia un correu a</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Contrasenya</password>
-      <link>Link</link>
+      <link>Enllaç</link>
       <to>Envia un correu a</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>No pot afegir un document de tipus '{0}' aquí.</constraint-violation>
-      <repository-exception>S'ha produït un error inesperat. Contacta amb l'administrador per obtenir més detalls.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>No pot desar aquesta carpeta. El nom proporcionat ha de ser en format numèric.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

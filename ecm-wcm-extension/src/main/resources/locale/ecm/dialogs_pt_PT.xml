@@ -8,7 +8,7 @@
       <label>
         <end-time>Hora de fim</end-time>
         <start-time>Hora de início</start-time>
-        <lifecycle>Ciclo de Vida</lifecycle>
+        <lifecycle>Ciclo de vida</lifecycle>
         <mimeType>Tipo Mime</mimeType>
         <repeat-count>Contagem de testes</repeat-count>
         <time-interval>Intervalo de tempo</time-interval>
@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ para identificar uma pessoa no comentário</placeholder>
+      <placeholder>Use @ para identificar uma pessoa em seu comentário</placeholder>
     </label>
   </UICommentForm>
  
@@ -73,7 +73,7 @@
       <description>#{word.description}</description>
       <port>Porta</port>
       <userName>#{word.userName}</userName>
-      <password>Palavra-passe</password>
+      <password>Senha</password>
       <link>Link</link>
       <to>Enviar email para</to>
       <actionName>#{word.name}</actionName>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadados</metadata>
+        <metadata>Metadado</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Começar publicação</start-publication>
-        <end-publication>Finalizar publicação</end-publication>
+        <start-publication>Início de publicação</start-publication>
+        <end-publication>Fim de publicação</end-publication>
       </label>
     </dialog>
   </Published>
@@ -244,7 +244,7 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Histórico de versões</version-history>
+        <version-history>Histórico de Versão</version-history>
         <base-version>Versão base</base-version>
         <is-checked-out>Foi  verificado</is-checked-out>
         <predecessors>Predecessores</predecessors>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Endereço de E-mail inválido.</Invalid-input>
+      <Invalid-input>Endereço de email é inválido.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -295,7 +295,7 @@
         <id>Id</id>
         <name>Nome</name>
         <lifecycle>Ciclo de Vida</lifecycle>
-        <homePath>Caminho Raiz</homePath>
+        <homePath>Caminho Base</homePath>
         <targetWorkspace>Espaço de Trabalho destino</targetWorkspace>
         <targetPath>Caminho de destino</targetPath>
       </label>
@@ -315,23 +315,23 @@
 <yes>Sim</yes>
 <true>Verdadeiro</true>
 <false>Falso</false>
-<Electronic>Eletrônico</Electronic>
+<Electronic>A cada hora</Electronic>
 <Paper>Papel</Paper>
 <NONE>Nenhum</NONE>
 <CLASSIFIED>Classificado</CLASSIFIED>
-<UNCLASSIFIED>Não classificado</UNCLASSIFIED>
+<UNCLASSIFIED>Não Classificado</UNCLASSIFIED>
 <NOCONTRACT>Sem Contrato</NOCONTRACT>
-<one-minute>Um minuto</one-minute>
-<hourly>De hora em hora</hourly>
+<one-minute>Um Minuto</one-minute>
+<hourly>A cada hora</hourly>
 <daily>Diariamente</daily>
-<quarterly>Trimestral</quarterly>
+<quarterly>Trimestalmente</quarterly>
 <yearly>Anualmente</yearly>
-<ten-years>Dez anos</ten-years>
-<read>Ação do usuário</read>
-  <schedule>Agendador</schedule>
-  <node_added>Adição de conteúdo</node_added>
-  <node_removed>Remoção de conteúdo</node_removed>
-  <property_added>Adição de propriedade</property_added>
+<ten-years>Dez Anos</ten-years>
+<read>Ação do Usuário</read>
+  <schedule>Planejador</schedule>
+  <node_added>Adição de Contéudo</node_added>
+  <node_removed>Remoção de Conteúdo</node_removed>
+  <property_added>Adição de Propriedade</property_added>
   <property_removed>Remoção de propriedade</property_removed>
   <property_changed>Modificação de propriedade</property_changed>
 
@@ -340,7 +340,7 @@
       <label>
         <isDeep>Recursiva</isDeep>
         <nodetypes>Tipos de Nó</nodetypes>
-        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Tipos de Nós Afetados</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -350,7 +350,7 @@
       <label>
         <isDeep>Recursiva</isDeep>
         <nodetypes>Tipos de Nó</nodetypes>
-        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Recursiva</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -360,7 +360,7 @@
       <label>
         <isDeep>Recursiva</isDeep>
         <nodetypes>Tipos de Nó</nodetypes>
-        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Tipos de Nós Afetados</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -370,7 +370,7 @@
       <label>
         <isDeep>Recursiva</isDeep>
         <nodetypes>Tipos de Nó</nodetypes>
-        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Tipos de Nós Afetados</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>O nó atual não permite a adição do tipo de nó '{0}'.</constraint-violation>
-      <repository-exception>Um erro inesperado ocorreu. Por favor, entre em contato com seu administrador do sistema para mais detalhes.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>Não é possível gravar este documento. O nome deve ser de tipo numérico.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

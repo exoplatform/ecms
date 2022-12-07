@@ -50,8 +50,8 @@
     <event>
       <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
       <OpenOn>Open on</OpenOn>
-      <EditFile>编辑</EditFile>
-      <ViewFile>查看</ViewFile>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
       <sourceview>View source code</sourceview>
@@ -91,24 +91,24 @@
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
       <provider>Provider</provider>
-      <description>说明</description>
-      <active>活动</active>
+      <description>Description</description>
+      <active>Active</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>文档</title>
+      <title>Documents</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>连接</connect>
+        <connect>Connect</connect>
       </button>
       <button>
-        <disconnect>断开连接</disconnect>
+        <disconnect>Disconnect</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

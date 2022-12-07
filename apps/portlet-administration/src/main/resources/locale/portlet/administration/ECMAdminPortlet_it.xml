@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Ripristinare</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Nome vietato</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Aggiungi Permesso</AddPermission>
-      <RemovePermission>Rimuovi Permesso</RemovePermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Aggiungi Icona</AddIcon>
       <AddPath>Aggiungi Percorso</AddPath>
     </title>
@@ -1364,7 +1364,7 @@
   <UITaxonomyTreeForm>
     <label>
       <name>Nome</name>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <homePath>Percorso Home</homePath>
       <permissions>Permessi</permissions>
     </label>
@@ -1386,8 +1386,8 @@
     <title>Aggiungi un'autorizzazione a questo nodo</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Salva</Save>
-      <Reset>Ripristinare</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Seleziona almeno un permesso.</checkbox-require>
@@ -2330,7 +2330,7 @@
       <action>Azione</action>
     </header>
     <tooltip>
-      <UnLock>Sblocco</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Non hai permessi di accedere al nodo con percorso {0}, o il nodo è stato eliminato.</access-denied-exception>

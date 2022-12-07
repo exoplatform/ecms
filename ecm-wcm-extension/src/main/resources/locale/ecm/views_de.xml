@@ -31,7 +31,7 @@
         <email>E-mail</email>
         <site>Seite</site>
         <lastComment>Letzter Kommentar geschrieben von {user} am {time}</lastComment>
-        <Less_Than_A_Minute>Vor weniger als einer Minute</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>Vor etwa einer Minute</About_A_Minute>
         <About_x_Minutes>Vor {0} Minuten</About_x_Minutes>
         <About_An_Hour>Vor etwa einer Stunde</About_An_Hour>

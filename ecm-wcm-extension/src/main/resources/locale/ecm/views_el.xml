@@ -31,7 +31,7 @@
         <email>Διεύθυνση ηλεκτρονικού ταχυδρομείου</email>
         <site>Τοποθεσία</site>
         <lastComment>Τελευταίο σχόλιο από {user} στις {time}</lastComment>
-        <Less_Than_A_Minute>πριν από λιγότερο από ένα λεπτό</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>περίπου πριν από ένα λεπτό</About_A_Minute>
         <About_x_Minutes>περίπου {0} λεπτά πριν</About_x_Minutes>
         <About_An_Hour>περίπου μία ώρα πριν</About_An_Hour>
@@ -154,7 +154,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Δ/Υ</not-avaliable>
         <core-elements>Βασικά στοιχεία</core-elements>
         <title>Τίτλος</title>
         <creator>Δημιουργός</creator>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Ηχητική περιγραφή</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Διαβάστε περισσότερα</Read-more>
       <Read-less>Διαβάστε λιγότερα</Read-less>
       <Switch-back-to-original-video>Πρωτότυπο βίντεο</Switch-back-to-original-video>
       </label>

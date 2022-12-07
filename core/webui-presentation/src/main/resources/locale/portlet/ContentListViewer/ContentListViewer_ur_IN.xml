@@ -41,7 +41,7 @@
       <UICLVConfigHeaderFormStringInput>سرتحریر</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>سانچا</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>صفحہ سازی</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>اشیاءفی صفحہ</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
@@ -85,7 +85,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <delete>حذف کریں</delete>
+      <delete>Delete</delete>
     </action>
     <msg>
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
@@ -119,15 +119,15 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>نزولی</OrderDesc>
-        <OrderAsc>صعودی</OrderAsc>
+        <OrderDesc>Descendant</OrderDesc>
+        <OrderAsc>Ascendant</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>بنیادی راستہ منتخب کریں</SelectBasePath>
-      <SelectTargetPage>بنیادی راستہ منتخب کریں</SelectTargetPage>
+      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectTargetPage>Select Base Path</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
@@ -147,7 +147,7 @@
     <action>
       <refresh>تازہ کریں</refresh>
       <edit>مشمول ایکسپلورر میں تدوین کریں</edit>
-      <delete>حذف کریں</delete>
+      <delete>Delete</delete>
       <publish>شائع کریں</publish>
     </action>
     <label>

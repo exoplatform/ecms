@@ -311,19 +311,19 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>Ні</no>
+<no>НІ</no>
 <yes>Так</yes>
 <true>Вірно</true>
 <false>Невірно</false>
 <Electronic>Електронний</Electronic>
-<Paper>Paper</Paper>
+<Paper>Паперовий</Paper>
 <NONE>Жоден</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
+<CLASSIFIED>Класифікований</CLASSIFIED>
 <UNCLASSIFIED>Некласифікований</UNCLASSIFIED>
 <NOCONTRACT>Немає контракту</NOCONTRACT>
 <one-minute>Одна хвилина</one-minute>
 <hourly>Погодинно</hourly>
-<daily>Щодня</daily>
+<daily>Щоденно</daily>
 <quarterly>Щоквартально</quarterly>
 <yearly>Щороку</yearly>
 <ten-years>Десять років</ten-years>
@@ -332,8 +332,8 @@
   <node_added>Доповнення вмісту</node_added>
   <node_removed>Вилучення вмісту</node_removed>
   <property_added>Доповнення властивості</property_added>
-  <property_removed>Видалення властивості</property_removed>
-  <property_changed>Модифікація властивості</property_changed>
+  <property_removed>Видалення власності</property_removed>
+  <property_changed>Модифікація власності</property_changed>
 
   <ScriptAction>
     <dialog>
@@ -400,13 +400,13 @@
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>Новий Документ</newDocument>
+      <newDocument>New Document</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>Новий Документ</UINewDocumentForm>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Будь ласка, введіть назву документа.</name-invalid>
-      <constraint-violation>В поточний вузол не дозволяють додати тип вузла"{0}".</constraint-violation>
-      <repository-exception>Сталася неочікувана помилка. Для більш докладної інформації зверніться до адміністратора.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>У вас немає дозволу на додавання тут нового документа.</repository-exception-permission>
-      <numberformat-exception>Цю дію не можна зберегти. Надане ім'я має бути в числовому форматі.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Ви не можете зберегти документ. Елемент з такою ж назвою вже існує.</not-allow-sameNameSibling>
     </msg>

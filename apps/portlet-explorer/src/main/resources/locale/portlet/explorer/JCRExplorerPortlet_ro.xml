@@ -599,7 +599,7 @@
       <WebDavView>Descărcaţi şi permiteți adăugarea</WebDavView>
       <Download>Descarcă</Download>
       <OpenDocument>Modifică de la distanță</OpenDocument>
-      <EditProperty>Modifică proprietățile documentului</EditProperty>
+      <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Încarcă o versiune nouă</UploadNewVersion>
       <CreateNewVersion>Salvează ca versiune nouă</CreateNewVersion>
     </event>
@@ -1376,11 +1376,11 @@
       <compare-versions>Compară versiunile selectate</compare-versions>
     </action>
     <labels>
-      <version>Versiune</version>
-      <date>Data</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Modificat de</author>
-      <summary>Rezumat</summary>
-      <action>Acțiune</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Eroare la compararea versiunilor</can-not-compare>
       <compare-unavailable>Compararea versiunilor nu este disponibilă pentru acest document</compare-unavailable>
       <DateChange>{0}</DateChange>
-      <PreviousAndNextCompare>Modificări de la {0} la {1}</PreviousAndNextCompare>
-      <ComparedWith>Comparată cu</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Restaurează la versiunea {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Deschide ca Read-only</ReadOnly>
 <Cancel>Renunță</Cancel>
       <KeepBoth>Păstrați ambele</KeepBoth>
-      <CreateNewVersion>Salvează ca versiune nouă</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3194,7 +3194,7 @@
     <Keep>Păstrați ambele</Keep>
     <Replace>Înlocuire</Replace>
     <Canceled>Anulat</Canceled>
-      <UploadNewVersion>Încarcă o versiune nouă</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Vreți să abandonați toate fișierele în parcurs?</AbortAllConfirmation>
   </label>

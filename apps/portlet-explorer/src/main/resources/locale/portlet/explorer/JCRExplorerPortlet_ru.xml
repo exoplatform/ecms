@@ -599,7 +599,7 @@
       <WebDavView>Открыть в MS Office</WebDavView>
       <Download>Загрузить</Download>
       <OpenDocument>Удаленное редактирование</OpenDocument>
-      <EditProperty>Редактировать свойства документа</EditProperty>
+      <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Загрузить новую версию</UploadNewVersion>
       <CreateNewVersion>Сохранить как новую версию</CreateNewVersion>
     </event>
@@ -1376,11 +1376,11 @@
       <compare-versions>Сравнить выбранные версии</compare-versions>
     </action>
     <labels>
-      <version>Версия</version>
-      <date>Дата</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Изменено</author>
-      <summary>Краткое описание</summary>
-      <action>Действие</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Не удалось сравнить две версии</can-not-compare>
       <compare-unavailable>Версия сравнения недоступна для данного документа</compare-unavailable>
       <DateChange>На {0}</DateChange>
-      <PreviousAndNextCompare>Изменения с {0} по {1}</PreviousAndNextCompare>
-      <ComparedWith>По сравнению с</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Восстановлено из версии {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Открыть только для чтения</ReadOnly>
 <Cancel>Отмена</Cancel>
       <KeepBoth>Оставить оба</KeepBoth>
-      <CreateNewVersion>Сохранить как новую версию</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -3194,7 +3194,7 @@
     <Keep>Оставить оба</Keep>
     <Replace>Заменить</Replace>
     <Canceled>Отменено</Canceled>
-      <UploadNewVersion>Загрузить новую версию</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Вы хотите прервать все файлы в прогрессе?</AbortAllConfirmation>
   </label>

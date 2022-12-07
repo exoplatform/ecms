@@ -1386,7 +1386,7 @@
     <title>Afegeix un permís al node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Desa</Save>
+      <Save>Save</Save>
       <Reset>Restablir</Reset>
     </action>
     <msg>
@@ -2330,7 +2330,7 @@
       <action>Acció</action>
     </header>
     <tooltip>
-      <UnLock>Desbloqueja</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>No té permís per accedir al node mitjançant {0}, o aquest node s'ha suprimit.</access-denied-exception>

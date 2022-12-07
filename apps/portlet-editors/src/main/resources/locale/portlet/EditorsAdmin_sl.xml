@@ -36,27 +36,27 @@
       <title>Document editors</title>
       <table>
         <Provider>Ponudnik</Provider>
-        <Description>Opis</Description>
-        <Active>Aktiven</Active>
-        <Permissions>Dovoljenja</Permissions>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>Brez</None>
+        <None>None</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Shrani</Save>
-        <Cancel>Prekliči</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Uredi</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Opozorilo</title>
+      <title>Warning</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

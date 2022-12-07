@@ -597,7 +597,7 @@
       <RestoreFromTrash>Atkurti iš šiukšliadėžės</RestoreFromTrash>
       <EmptyTrash>Išvalyti šiukšliadėžę</EmptyTrash>
       <WebDavView>Atidaryti su MS Office</WebDavView>
-      <Download>Atsisiųsti</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Eksportuoti</Export>
     </action>
-    <title>Eksportuoti</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Teisės pasirinkimas</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Versija</version>
+      <version>Version</version>
       <baseVersion>current draft</baseVersion>
       <addLabel>Pridėti etiketę</addLabel>
       <removeLable>Pašalinti etiketę</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Versija</version>
-      <date>Data</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Modified By</author>
-      <summary>Santrauka</summary>
-      <action>Veiksmas</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Nepavyko palyginti versijų</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Pakeitimai nuo {0} į {1}</PreviousAndNextCompare>
-      <ComparedWith>Palyginta su</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -1517,7 +1517,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importuoti</Import>
     </action>
-    <title>Importuoti</title>
+    <title>Import</title>
     <msg>
       <import-successful>Sėkmingai importuotas.</import-successful>
       <filename-invalid>Pasirinkite .xml failą 'Įkelti failą' laukelyje, kad įkelti.</filename-invalid>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Mazgo tipas</nodeType>
-      <nodeName>Pavadinimas</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Versijos numeris</VersionNumber>
       <VersionLabels>Versijos etiketės</VersionLabels>
       <VersionDate>Versijos data</VersionDate>
@@ -1875,7 +1875,7 @@
     </label>
     <title>
       <exeButton>Eiti</exeButton>
-      <backButton>Atgal</backButton>
+      <backButton>Back</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Pakeisti mazgą</changeNode>
     </title>
@@ -2034,7 +2034,7 @@
       <private>Privatus</private>
       <state>Būsena</state>
       <visibility>Matomumas</visibility>
-      <nodeName>Vardas:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Gyvavimo ciklo pavadinimas</lifecycleName>
       <stateName>Būsenos pavadinimas</stateName>
     </label>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Pasirinkti kelią</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Simbolinės nuorodos pavadinimas</symLinkName>
-      <pathNode>Kelias</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2458,7 +2458,7 @@
       <Back>Atgal į pervadinimą</Back>
       <Keepfile>Palikti abu failus</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Atšaukti</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>

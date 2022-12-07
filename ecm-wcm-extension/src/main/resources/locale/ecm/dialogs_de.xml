@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Woran arbeiten Sie? Verwenden Sie @, um jemanden zu erwähnen</placeholder>
+      <placeholder>Verwenden Sie @, um jemanden in Ihrem Kommentar zu erwähnen</placeholder>
     </label>
   </UICommentForm>
  
@@ -200,7 +200,7 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Veröffentlichung starten</start-publication>
+        <start-publication>Veröffentlichungsbeginn</start-publication>
         <end-publication>Veröffentlichungsende</end-publication>
       </label>
     </dialog>
@@ -244,7 +244,7 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Versionshistorie</version-history>
+        <version-history>Versionsverlauf</version-history>
         <base-version>Basisversion</base-version>
         <is-checked-out>Ist ausgecheckt</is-checked-out>
         <predecessors>Vorgänger</predecessors>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Ungültige E-Mail-Adresse.</Invalid-input>
+      <Invalid-input>E-Mail-Adresse ist ungültig.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -313,7 +313,7 @@
   -->
 <no>Nein</no>
 <yes>Ja</yes>
-<true>Wahr</true>
+<true>Richtig</true>
 <false>Falsch</false>
 <Electronic>Elektronisch</Electronic>
 <Paper>Papier</Paper>
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Bitte geben Sie den Dokumentennamen ein</name-invalid>
-      <constraint-violation>Der aktuelle Knoten erlaubt kein Hinzufügen des Knotentyps '{0}'</constraint-violation>
-      <repository-exception>Ein unerwarteter Fehler ist aufgetreten. Kontaktieren Sie bitte Ihren Administrator für weitere Informationen.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>Sie haben hier nicht die Berechtigung, ein neues Dokument hinzuzufügen.</repository-exception-permission>
-      <numberformat-exception>Sie können dieses Dokument nicht speichern. Der übergebene Name muss nummerischen Formats sein.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Sie können das Dokument nicht speichern. Ein gleichnamiges Element ist bereits vorhanden.</not-allow-sameNameSibling>
     </msg>

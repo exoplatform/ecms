@@ -36,24 +36,24 @@
       <title>Document editors</title>
       <table>
         <Provider>Provider</Provider>
-        <Description>Beskrivelse</Description>
-        <Active>Aktiv</Active>
-        <Permissions>Tilganger</Permissions>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>Ingen</None>
+        <None>None</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Lagre</Save>
-        <Cancel>Avbryt</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Rediger</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
       <title>Warning</title>

@@ -31,7 +31,7 @@
         <email>Эл. почта</email>
         <site>Сайт</site>
         <lastComment>Последний комментарий размещен {user} в {time}</lastComment>
-        <Less_Than_A_Minute>меньше минуты назад</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>около минуты назад</About_A_Minute>
         <About_x_Minutes>около {0} минут назад</About_x_Minutes>
         <About_An_Hour>около часа назад</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>Предварительный просмотр недоступен для файлов больше, чем {0} MB.</pdf-max-size>
         <pdf-max-page>Предварительный просмотр недоступен для содержимого с более чем {0} страниц.</pdf-max-page>
         <using-webDAV>или открыть в MS Office</using-webDAV>
-        <open-on-desktop>Открыть на рабочем столе</open-on-desktop>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Открыть в Документах</open-in-documents>
         <open-in-documents-tooltip>Открыть этот файл в приложении Документы</open-in-documents-tooltip>
@@ -74,8 +74,8 @@
   <Mail>
     <view>
       <label>
-        <from>С:</from>
-        <to>До:</to>
+        <from>От:</from>
+        <to>Кому:</to>
         <cc>Cc:</cc>
         <date>Дата:</date>
         <subject>Тема:</subject>
@@ -100,7 +100,7 @@
   <ListView>
     <view>
       <label>
-        <name>Название</name>
+        <name>Имя</name>
         <versionable>Версифицируемый</versionable>
         <exo_owner>Владелец</exo_owner>
         <exo_dateCreated>Дата создания</exo_dateCreated>
@@ -154,10 +154,10 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Н/Д</not-avaliable>
         <core-elements>Основные элементы</core-elements>
         <title>Заголовок</title>
-        <creator>Автор</creator>
+        <creator>Создатель</creator>
         <subject>Тема</subject>
         <source>Источник</source>
         <contributor>Соавтор</contributor>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Аудио описание</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Подробнее</Read-more>
       <Read-less>Скрыть подробности</Read-less>
       <Switch-back-to-original-video>Оригинальное видео</Switch-back-to-original-video>
       </label>

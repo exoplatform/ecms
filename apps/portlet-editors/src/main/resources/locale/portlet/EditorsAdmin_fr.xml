@@ -37,26 +37,26 @@
       <table>
         <Provider>Connecteur</Provider>
         <Description>Description</Description>
-        <Active>Actif</Active>
+        <Active>Active</Active>
         <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Autorisations d'édition</title>
         <SearchLabel>Entrez un nom d'utilisateur ou d'un groupe</SearchLabel>
         <WithPermissions>Qui a la permission</WithPermissions>
-        <None>Aucune</None>
+        <None>None</None>
         <Everybody>Tout le monde</Everybody>
       </modal>
       <buttons>
-        <Save>Enregistrer</Save>
-        <Cancel>Annuler</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Modifier</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Attention</title>
+      <title>Warning</title>
       <message>Il semble que vous n'êtes pas actif depuis un moment. La page de l'éditeur sera fermée dans %s secondes.</message>
     </idlePopup>
   </editors>

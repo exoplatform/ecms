@@ -596,10 +596,10 @@
       <MoveToTrash>تحويله الى سلة المهملات</MoveToTrash>
       <RestoreFromTrash>الاستعادة من سلّة المهملات</RestoreFromTrash>
       <EmptyTrash>إفراغ سلّة المهملات</EmptyTrash>
-      <WebDavView>فتح الملف بواسطة مايكروسوفت أوفيس</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
       <Download>تنزيل هذا الملف</Download>
       <OpenDocument>تغيير عن بعد</OpenDocument>
-      <EditProperty>تغيير خصائص الملف</EditProperty>
+      <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>تحميل نسخة جديدة</UploadNewVersion>
       <CreateNewVersion>تسجيل ضمن نسخة جديدة</CreateNewVersion>
     </event>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>النسخة الأصلية</original>
-      <version>إصدار</version>
+      <version>Version</version>
       <baseVersion>الإصدار الحالي.</baseVersion>
       <addLabel>إضافة رمز</addLabel>
       <removeLable>حذف رمز</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>مقارنة الإصدارات المختارة</compare-versions>
     </action>
     <labels>
-      <version>إصدار</version>
-      <date>تاريخ</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>تمّ تغييره من طرف</author>
-      <summary>مُلخّص</summary>
-      <action>اجراء</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>لم تتم المقارنة بين الإصدارين</can-not-compare>
       <compare-unavailable>مقارنة الإصدار غير متوفرة لهذا الملف</compare-unavailable>
       <DateChange>في {0}</DateChange>
-      <PreviousAndNextCompare>التّغييرات من {0} الى {1}</PreviousAndNextCompare>
-      <ComparedWith>بالمقارنة مع</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>استعادة من النسخة {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -2460,7 +2460,7 @@
 <ReadOnly>فتح للقراءة فقط</ReadOnly>
 <Cancel>الغاء</Cancel>
       <KeepBoth>الابقاء عليهما</KeepBoth>
-      <CreateNewVersion>تسجيل ضمن نسخة جديدة</CreateNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 

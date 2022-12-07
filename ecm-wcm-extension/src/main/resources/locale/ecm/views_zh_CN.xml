@@ -31,7 +31,7 @@
         <email>电子邮件</email>
         <site>站点</site>
         <lastComment>{user} 在 {time} 的最后一条批注</lastComment>
-        <Less_Than_A_Minute>少于一分钟前</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>大约一分钟前</About_A_Minute>
         <About_x_Minutes>关于 {0} 分钟前</About_x_Minutes>
         <About_An_Hour>大约一小时前</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>预览不可用于内容大于 {0} MB的文件。</pdf-max-size>
         <pdf-max-page>预览不可用于与内容超过 {0} 页的文件。</pdf-max-page>
         <using-webDAV>或在 MS Office 中打开</using-webDAV>
-        <open-on-desktop>在桌面上打开</open-on-desktop>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
@@ -75,7 +75,7 @@
     <view>
       <label>
         <from>从：</from>
-        <to>到：</to>
+        <to>到:</to>
         <cc>Cc:</cc>
         <date>日期:</date>
         <subject>主题：</subject>
@@ -142,7 +142,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>名称</action-name>
+        <action-name>姓名</action-name>
         <lifecycle>生命周期</lifecycle>
         <description>说明</description>
       </label>
@@ -154,7 +154,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>不适用</not-avaliable>
         <core-elements>核心元素</core-elements>
         <title>标题</title>
         <creator>创建者</creator>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>音频说明</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>阅读更多</Read-more>
       <Read-less>读取较少</Read-less>
       <Switch-back-to-original-video>原始视频</Switch-back-to-original-video>
       </label>

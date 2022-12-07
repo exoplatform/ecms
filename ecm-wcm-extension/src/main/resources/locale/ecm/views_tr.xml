@@ -31,7 +31,7 @@
         <email>E-posta</email>
         <site>Site</site>
         <lastComment>Son yorum {user} kullanıcısı tarafından {time} tarihinde yapıldı</lastComment>
-        <Less_Than_A_Minute>bir dakikadan daha önce</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>yaklaşık bir dakika önce</About_A_Minute>
         <About_x_Minutes>yaklaşık {0} dakika önce</About_x_Minutes>
         <About_An_Hour>yaklaşık bir saat önce</About_An_Hour>
@@ -74,8 +74,8 @@
   <Mail>
     <view>
       <label>
-        <from>Başlangıç Tarihi:</from>
-        <to>Bitiş Tarihi:</to>
+        <from>Kimden:</from>
+        <to>Kime:</to>
         <cc>Bilgi:</cc>
         <date>Tarih:</date>
         <subject>Konu:</subject>
@@ -131,7 +131,7 @@
     <view>
       <label>
         <action-name>Eylem Adı</action-name>
-        <lifecycle>Ömrü</lifecycle>
+        <lifecycle>Yaşam döngüsü</lifecycle>
         <description>Açıklama</description>
       </label>
     </view>
@@ -143,7 +143,7 @@
     <view>
       <label>
         <action-name>Ad</action-name>
-        <lifecycle>Ömrü</lifecycle>
+        <lifecycle>Yaşam döngüsü</lifecycle>
         <description>Açıklama</description>
       </label>
     </view>
@@ -154,7 +154,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>YOK</not-avaliable>
+        <not-avaliable>Uygulanabilir Değil</not-avaliable>
         <core-elements>Temel Unsurlar</core-elements>
         <title>Başlık</title>
         <creator>Oluşturan</creator>

@@ -7,7 +7,7 @@
   -->
   <UITreeList>
     <header>
-      <name>Name</name>
+      <name>Ang Pangalan</name>
       <action>Add</action>
     </header>
     <info>
@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Pumili</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Kahit anong Permiso</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

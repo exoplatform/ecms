@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Orijinal Versiyon</original>
-      <version>Sürüm</version>
+      <version>Version</version>
       <baseVersion>geçerli sürüm</baseVersion>
       <addLabel>Etiket Ekle</addLabel>
       <removeLable>Etiketi Kaldır</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>Seçilen sürümleri karşılaştır</compare-versions>
     </action>
     <labels>
-      <version>Sürüm</version>
-      <date>Tarih</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Değiştiren:</author>
-      <summary>Özet</summary>
-      <action>Yöntem</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>İki sürümünü karşılaştırmada başarısız oldu</can-not-compare>
       <compare-unavailable>Sürüm karşılaştırma bu belge için geçerli değil</compare-unavailable>
       <DateChange>{0} tarihinde</DateChange>
-      <PreviousAndNextCompare>{0} {1} değiştirildi</PreviousAndNextCompare>
-      <ComparedWith>Bununla Karşılaştırıldı</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>{0} sürümünden geri yüklendi</restoredFrom>
     </label>
   </UIDiff>

@@ -4,7 +4,7 @@
     <title>
       <QuickEdit>Baguhin ang Nilalaman ng Explorer</QuickEdit>
       <print>Ang i-print ang Pahina na Ito</print>
-      <FastPublish>I-publish</FastPublish>
+      <FastPublish>Publish</FastPublish>
     </title>
     <label>
       <draft>I-Draft</draft>
@@ -40,9 +40,9 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>I-abort</Abort>
+      <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>I-print</Print>
+      <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Ang Nilalaman ng detalye sa mga Kagustuhan</title>
@@ -61,11 +61,11 @@
       <Advance>Pinahusay</Advance>
       <ContextCaption>Ang Dinamika sa Nabigasyon</ContextCaption>
       <UISCVContextualRadioBox>Ang Nilalaman ng Kasinghulugan</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>ni</UISCVParameterInputBox>
+      <UISCVParameterInputBox>by</UISCVParameterInputBox>
       <PrintSettingBlock>I-print ang mga Setting</PrintSettingBlock>
       <UISCVPrintPageParameter>ang kasama</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Ang Ipakita sa Pahina</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Kandado</LockStatus>
+      <LockStatus>Lock</LockStatus>
       <CacheManagement>Ang Pagkakakita ng Nilalaman</CacheManagement>
       <UISCVCacheRadioBox>Ang Nilalaman ay Ibahagi</UISCVCacheRadioBox>
     </label>
@@ -80,9 +80,9 @@
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Ang Pagpipili ng Nilalaman</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Ang I-display ang mga Setting</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>I-print ang mga Setting</UISCVConfigPrintFormInputSet>
+        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Pinahusay</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
@@ -95,22 +95,22 @@
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Ang Ipakita sa Pahina</SelectTargetPage>
+      <SelectTargetPage>Show in Page</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Tagapili ng pahina</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
     <archived>I-archive</archived>
     <obsolete>Ang Laos na</obsolete>
     <unpublished>Ang Hindi Nalathala</unpublished>
-    <enrolled>Nakapag enrol na</enrolled>
+    <enrolled>Enrolled</enrolled>
     <draft>I-Draft</draft>
     <pending>Ang Nakabinbin</pending>
-    <approved>Naaprubahan</approved>
+    <approved>Approved</approved>
     <inreview>Ang Pagsusuri sa Ilalim</inreview>
     <staged>Ang naglunsad</staged>
     <published>Ang Nailathala</published>

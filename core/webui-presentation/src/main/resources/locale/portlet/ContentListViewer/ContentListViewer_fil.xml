@@ -119,7 +119,7 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Angkan</OrderDesc>
+        <OrderDesc>Descendant</OrderDesc>
         <OrderAsc>Ascendant</OrderAsc>
       </option>
     </label>

@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>الاسم</name>
-      <action>اضافة</action>
+      <action>إضافة</action>
     </header>
     <info>
       <child-not-found>الفرع غير موجود!</child-not-found>
@@ -31,8 +31,8 @@
       <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>#{word.save}</SaveCategories>
-      <Cancel>#{word.cancel}</Cancel>
+      <SaveCategories>حفظ</SaveCategories>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <cannot-save>لم يتمّ حفظ الفئات.</cannot-save>
@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>اختيار مستخدم</UIPermissionUser>
-      <UIPermissionMembership>اختيار عُضويّة</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>اختيار عُضويّة</TaxoSelectUserOrGroup>
+      <UIPermissionUser>اختيار المستخدم</UIPermissionUser>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>اختيار مستخدم</selectUser>
+      <selectUser>اختيار المستخدم</selectUser>
       <selectGroup>تصفح واختر مجموعة</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>اختيار عُضويّة</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>تصفح واختر مجموعة</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار عُضويّة</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>صلاحيّة للجميع</anyPermission>
+      <anyPermission>جميع التصاريح</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

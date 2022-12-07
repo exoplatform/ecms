@@ -12,7 +12,7 @@
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Redaguoti</Draft>
+        <Draft>Edit</Draft>
         <Published>Paskelbtas</Published>
       </option>
     </label>

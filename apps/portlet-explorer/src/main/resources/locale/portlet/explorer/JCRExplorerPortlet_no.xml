@@ -597,7 +597,7 @@
       <RestoreFromTrash>Gjenopprett fra papirkurven</RestoreFromTrash>
       <EmptyTrash>Tøm papirkurven</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>Last ned</Download>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Eksporter</Export>
     </action>
-    <title>Eksporter</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Rettighets velger</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Versjon</version>
+      <version>Version</version>
       <baseVersion>current draft</baseVersion>
       <addLabel>Legge til etikett</addLabel>
       <removeLable>Fjern etikett</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Versjon</version>
-      <date>Dato</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Modified By</author>
-      <summary>Sammendrag</summary>
-      <action>Handling</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Kan ikke sammenligne de to versjonene</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Endringer fra {0} til {1}</PreviousAndNextCompare>
-      <ComparedWith>Sammenlignet med</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -1517,7 +1517,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importer</Import>
     </action>
-    <title>Importer</title>
+    <title>Import</title>
     <msg>
       <import-successful>Importert.</import-successful>
       <filename-invalid>Velg en .xml fil via "filopplasting"-feltet for å importere.</filename-invalid>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Nodetype</nodeType>
-      <nodeName>Navn</nodeName>
+      <nodeName>Name</nodeName>
       <VersionNumber>Versjonsnummer</VersionNumber>
       <VersionLabels>Versjonsetiketter</VersionLabels>
       <VersionDate>Versjonsdato</VersionDate>
@@ -1875,7 +1875,7 @@
     </label>
     <title>
       <exeButton>Gå</exeButton>
-      <backButton>Tilbake</backButton>
+      <backButton>Back</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Endre node</changeNode>
     </title>
@@ -2034,7 +2034,7 @@
       <private>Privat</private>
       <state>Tilstand</state>
       <visibility>Synlighet</visibility>
-      <nodeName>navn:</nodeName>
+      <nodeName>Name:</nodeName>
       <lifecycleName>Navn på livssyklus</lifecycleName>
       <stateName>Navn på status</stateName>
     </label>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Velg sti</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symlink navn</symLinkName>
-      <pathNode>Sti</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2458,7 +2458,7 @@
       <Back>Tilbake til Gi nytt navn</Back>
       <Keepfile>Behold begge filene</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Avbryt</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>

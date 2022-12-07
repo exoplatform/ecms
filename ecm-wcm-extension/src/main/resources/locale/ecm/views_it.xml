@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Ultimo commento postato da</postedBy>
-        <at>al</at>
+        <at>il</at>
         <comments>Commento(i)</comments>
         <show-comments>Mostra commenti</show-comments>
         <hide-comments>Nascondi commenti</hide-comments>
@@ -31,7 +31,7 @@
         <email>E-mail</email>
         <site>Sito</site>
         <lastComment>Ultimo commento pubblicato da {user} alle {time}</lastComment>
-        <Less_Than_A_Minute>meno di un minuto fa</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>circa un minuto fa</About_A_Minute>
         <About_x_Minutes>circa {0} minuti fa</About_x_Minutes>
         <About_An_Hour>circa un'ora fa</About_An_Hour>
@@ -75,7 +75,7 @@
     <view>
       <label>
         <from>Da:</from>
-        <to>Fino a:</to>
+        <to>A:</to>
         <cc>Cc:</cc>
         <date>Data:</date>
         <subject>Oggetto:</subject>
@@ -142,7 +142,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Nome</action-name>
+        <action-name>Nome Azione</action-name>
         <lifecycle>Ciclo di Vita</lifecycle>
         <description>Descrizione</description>
       </label>
@@ -154,7 +154,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N. d.</not-avaliable>
+        <not-avaliable>N/D</not-avaliable>
         <core-elements>Elementi fondamentali</core-elements>
         <title>Titolo</title>
         <creator>Creatore</creator>
@@ -178,7 +178,7 @@
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Aggiungi/Modifica ProprietÃ </add-edit>
+        <add-edit>Proprietà Aggiungi/Modifica</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -198,7 +198,7 @@
     <view>
       <label>
         <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipi di nodi</nodetypes>
+        <nodetypes>Tipo Nodo</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
         <nodeTypeName>Nomi Tipi Nodo</nodeTypeName>
       </label> 
@@ -209,7 +209,7 @@
     <view>
       <label>
         <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipi di nodi</nodetypes> 
+        <nodetypes>Tipo Nodo</nodetypes> 
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
         <nodeTypeName>Nomi Tipi Nodo</nodeTypeName>
       </label> 
@@ -220,7 +220,7 @@
     <view>
       <label>
         <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipi di nodi</nodetypes>
+        <nodetypes>Tipo Nodo</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
         <nodeTypeName>Nomi Tipi Nodo</nodeTypeName>
       </label> 

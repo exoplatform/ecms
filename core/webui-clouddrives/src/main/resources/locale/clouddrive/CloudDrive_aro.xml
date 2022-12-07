@@ -34,7 +34,7 @@
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>توصيل المستندات السحابية</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
@@ -49,9 +49,9 @@
   <CloudFileViewer>
     <event>
       <OpenFileOn>فتح $fileUrl على $serviceName</OpenFileOn>
-      <OpenOn>فتح بواسطة</OpenOn>
-      <EditFile>تغيير</EditFile>
-      <ViewFile>عرض</ViewFile>
+      <OpenOn>Open on</OpenOn>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
       <sourceview>أكشف نص البرمجة</sourceview>
@@ -90,28 +90,28 @@
     <label>
       <title>التخزين السحابي</title>
       <cloudDrives>الأقراص السحابية</cloudDrives>
-      <provider>مزود الخدمة</provider>
-      <description>الوصف</description>
-      <active>نشط</active>
+      <provider>Provider</provider>
+      <description>Description</description>
+      <active>Active</active>
       <ConnectionToCloud>الاتصال بالأقراص السحابية</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>وثائق</title>
+      <title>Documents</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>اتصال</connect>
+        <connect>Connect</connect>
       </button>
       <button>
-        <disconnect>قطع الاتصال</disconnect>
+        <disconnect>Disconnect</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
-      <connectedAccountWith>أنت متصل بـ</connectedAccountWith>
+      <connectedAccountWith>You are connected with</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>Your cloud drive is connected correctly</successMessage>

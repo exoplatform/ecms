@@ -28,13 +28,13 @@
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Conectar documentos en la nube</ConnectCloudDriveForm>
+      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
       <UISharingManager>Compartir archivos en la nube</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Conectar documentos en la nube</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
@@ -49,9 +49,9 @@
   <CloudFileViewer>
     <event>
       <OpenFileOn>Abrir $fileUrl en $serviceName</OpenFileOn>
-      <OpenOn>Abrir en</OpenOn>
-      <EditFile>Editar</EditFile>
-      <ViewFile>Ajuste</ViewFile>
+      <OpenOn>Open on</OpenOn>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
       <sourceview>Ver código fuente</sourceview>
@@ -90,28 +90,28 @@
     <label>
       <title>Almacenamiento en la nube</title>
       <cloudDrives>Unidades en la nube</cloudDrives>
-      <provider>Proveedor</provider>
-      <description>Descripción</description>
-      <active>Activo</active>
+      <provider>Provider</provider>
+      <description>Description</description>
+      <active>Active</active>
       <ConnectionToCloud>Conexión con unidades en la nube</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documentos</title>
+      <title>Documents</title>
       <subtitle>Conecta tus unidades personales</subtitle>
       <description>Accede a tus unidades personales desde tu espacio de trabajo digital</description>
     </label>
     <drawer>
-      <title>Conecta tus unidades personales</title>
+      <title>Connect your personal drives</title>
       <button>
-        <connect>Conectar</connect>
+        <connect>Connect</connect>
       </button>
       <button>
-        <disconnect>Desconectar</disconnect>
+        <disconnect>Disconnect</disconnect>
       </button>
       <noConnector>No hay conector de unidad personal disponible</noConnector>
-      <connectedAccountWith>Estás conectado con</connectedAccountWith>
+      <connectedAccountWith>You are connected with</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>Tu unidad en la nube se ha conectado con éxito</successMessage>

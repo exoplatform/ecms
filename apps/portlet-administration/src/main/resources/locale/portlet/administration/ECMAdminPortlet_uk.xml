@@ -2330,7 +2330,7 @@
       <action>Дія</action>
     </header>
     <tooltip>
-      <UnLock>Розблокування</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Ви не маєте дозволу на доступ до вузла зі шляхом {0}, або цей вузол видалили.</access-denied-exception>

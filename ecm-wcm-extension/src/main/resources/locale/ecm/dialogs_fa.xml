@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>لینک</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>شماره پورت</port>
       <userName>#{word.userName}</userName>
       <password>رمز عبور</password>
-      <link>Link</link>
+      <link>لینک</link>
       <to>ارسال نامه به</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>شماره پورت</port>
       <userName>#{word.userName}</userName>
       <password>رمز عبور</password>
-      <link>Link</link>
+      <link>لینک</link>
       <to>ارسال نامه به</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -316,9 +316,9 @@
 <true>درست</true>
 <false>نادرست</false>
 <Electronic>الکترونیکی</Electronic>
-<Paper>Paper</Paper>
+<Paper>کاغذ</Paper>
 <NONE>هیچ کدام</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
+<CLASSIFIED>طبقه بندی شده</CLASSIFIED>
 <UNCLASSIFIED>طبقه بندی نشده</UNCLASSIFIED>
 <NOCONTRACT>بدون قرارداد</NOCONTRACT>
 <one-minute>یک دقیقه</one-minute>
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>گره فعلی به شما اجازه افزودن نوع گره '{0}' را نمی دهد.</constraint-violation>
-      <repository-exception>یک خطای غیر منتظره رخ داده است. لطفا برای کسب اطلاعات بیشتر با سرپرست تماس بگیرید.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>سند ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

@@ -31,7 +31,7 @@
         <email>E-mail</email>
         <site>Site</site>
         <lastComment>Último comentário postado por {user} em {time}</lastComment>
-        <Less_Than_A_Minute>menos de um minuto atrás</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>cerca de um minuto atrás</About_A_Minute>
         <About_x_Minutes>cerca de {0} minutos atrás</About_x_Minutes>
         <About_An_Hour>cerca de uma hora atrás</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>A visualização não está disponível para conteúdo maior que {0} MB.</pdf-max-size>
         <pdf-max-page>A visualização não está disponível para conteúdo com mais de {0} páginas.</pdf-max-page>
         <using-webDAV>ou abrir no MS Office</using-webDAV>
-        <open-on-desktop>Abrir na área de trabalho</open-on-desktop>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Abrir Documento</open-in-documents>
         <open-in-documents-tooltip>Abrir este arquivo no app de documentos</open-in-documents-tooltip>
@@ -75,7 +75,7 @@
     <view>
       <label>
         <from>De:</from>
-        <to>a:</to>
+        <to>Para:</to>
         <cc>Cc:</cc>
         <date>Data:</date>
         <subject>Assunto:</subject>
@@ -102,7 +102,7 @@
       <label>
         <name>Nome</name>
         <versionable>Versionável</versionable>
-        <exo_owner>Proprietário</exo_owner>
+        <exo_owner>Dono</exo_owner>
         <exo_dateCreated>Data de criação</exo_dateCreated>
         <exo_dateModified>Data de Modificação</exo_dateModified>
         <auditing>Auditoria</auditing>
@@ -118,7 +118,7 @@
       <label>
         <action-name>Nome da ação</action-name>
         <lifecycle>Ciclo de Vida</lifecycle>
-        <metadata>Metadados</metadata>
+        <metadata>Metadado</metadata>
         <description>Descrição</description>
       </label>
     </view>
@@ -154,10 +154,10 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>N/D</not-avaliable>
         <core-elements>Elementos centrais</core-elements>
         <title>Título</title>
-        <creator>Autor</creator>
+        <creator>Criador</creator>
         <subject>Assunto</subject>
         <source>Fonte</source>
         <contributor>Colaborador</contributor>
@@ -198,7 +198,7 @@
     <view>
       <label>
         <isDeep>Recursiva</isDeep>
-        <nodetypes>Tipos de Nó</nodetypes>
+        <nodetypes>Tipos de nó</nodetypes>
         <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
         <nodeTypeName>Tipos de nós</nodeTypeName>
       </label> 
@@ -209,7 +209,7 @@
     <view>
       <label>
         <isDeep>Recursiva</isDeep>
-        <nodetypes>Tipos de Nó</nodetypes> 
+        <nodetypes>Tipos de nó</nodetypes> 
         <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
         <nodeTypeName>Tipos de nós</nodeTypeName>
       </label> 
@@ -220,9 +220,9 @@
     <view>
       <label>
         <isDeep>Recursiva</isDeep>
-        <nodetypes>Tipos de Nó</nodetypes>
+        <nodetypes>Tipos de nó</nodetypes>
         <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
-        <nodeTypeName>Tipos de nós</nodeTypeName>
+        <nodeTypeName>Tipos de nó</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Descrição do Áudio</Play-audio-description-of-this-video>
-      <Read-more>Ler mais</Read-more>
+      <Read-more>Ver mais</Read-more>
       <Read-less>Menos</Read-less>
       <Switch-back-to-original-video>Vídeo original</Switch-back-to-original-video>
       </label>

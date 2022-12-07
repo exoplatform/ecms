@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>#{word.reset}</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-not-allowed>Naam verboden</name-not-allowed>
@@ -1386,8 +1386,8 @@
     <title>Rechten toevoegen aan node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Opslaan</Save>
-      <Reset>#{word.reset}</Reset>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>YU moet ten minste een toestemming</checkbox-require>
@@ -2330,7 +2330,7 @@
       <action>Actie</action>
     </header>
     <tooltip>
-      <UnLock>vrijmaken</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>You don't have permission to access node with path {0} or this node is deleted</access-denied-exception>

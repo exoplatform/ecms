@@ -727,7 +727,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reiniciar</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-invalid>Por favor ingrese el nombre de propiedad.</name-invalid>
@@ -811,7 +811,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reiniciar</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
@@ -1376,11 +1376,11 @@
       <compare-versions>Comparar las versiones seleccionadas</compare-versions>
     </action>
     <labels>
-      <version>Versión</version>
-      <date>Fecha</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Modificado por</author>
-      <summary>Sumario</summary>
-      <action>Acción</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>No se pudo comparar ambas versiones</can-not-compare>
       <compare-unavailable>La comparación de versiones no está disponible para este documento</compare-unavailable>
       <DateChange>En {0}</DateChange>
-      <PreviousAndNextCompare>Modificaciones desde {0} hasta {1}</PreviousAndNextCompare>
-      <ComparedWith>En comparación con</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Restaurado de la versión {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -3034,7 +3034,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reiniciar</Reset>
+      <Reset>Reset</Reset>
     </action>
   </UIPublicationSchedule>
 

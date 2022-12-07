@@ -12,7 +12,7 @@
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Upravit</Draft>
+        <Draft>Edit</Draft>
         <Published>Zveřejněno</Published>
       </option>
     </label>

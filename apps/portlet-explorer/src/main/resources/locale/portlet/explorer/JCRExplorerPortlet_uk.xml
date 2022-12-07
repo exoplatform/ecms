@@ -1376,11 +1376,11 @@
       <compare-versions>Порівняти вибрані версії</compare-versions>
     </action>
     <labels>
-      <version>Версія</version>
-      <date>Дата</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Змінено</author>
-      <summary>Резюме</summary>
-      <action>Дія</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Не вдалося порівняти дві версії</can-not-compare>
       <compare-unavailable>Версія порівняння недоступна для цього документа</compare-unavailable>
       <DateChange>На {0}</DateChange>
-      <PreviousAndNextCompare>Зміни від {0} до {1}</PreviousAndNextCompare>
-      <ComparedWith>У порівнянні з</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Відновлено з версії {0}</restoredFrom>
     </label>
   </UIDiff>

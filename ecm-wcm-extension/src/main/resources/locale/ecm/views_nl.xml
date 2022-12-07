@@ -29,9 +29,9 @@
         <hide-comments>Commentaren verbergen</hide-comments>
         <comment-by>Becommentarieerd door</comment-by>
         <email>E-mail</email>
-        <site>Site portaal</site>
+        <site>Site</site>
         <lastComment>Laatste commentaar geplaatst door {user} op {time}</lastComment>
-        <Less_Than_A_Minute>minder dan een minuut geleden</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>ongeveer een minuut geleden</About_A_Minute>
         <About_x_Minutes>over {0} minuten geleden</About_x_Minutes>
         <About_An_Hour>ongeveer een uur geleden</About_An_Hour>
@@ -100,7 +100,7 @@
   <ListView>
     <view>
       <label>
-        <name>Naam</name>
+        <name>naam</name>
         <versionable>Versionable</versionable>
         <exo_owner>Eigenaar</exo_owner>
         <exo_dateCreated>Datum aangemaakt</exo_dateCreated>
@@ -210,7 +210,7 @@
       <label>
         <isDeep>Is diep</isDeep>
         <nodetypes>Node type</nodetypes> 
-        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
         <nodeTypeName>Node Type namen</nodeTypeName>
       </label> 
     </view>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Audiobeschrijving</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Verder lezen</Read-more>
       <Read-less>Lees minder</Read-less>
       <Switch-back-to-original-video>Originele video</Switch-back-to-original-video>
       </label>

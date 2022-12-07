@@ -29,13 +29,13 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
-    <categories>Ang mga kategorya</categories>
+    <categories>Categories</categories>
     </label>
   </UIDocumentForm>
  
   <UICommentForm>
     <label>
-      <placeholder>Paggamit ug @ sa pag-hisgot ug usa ka tawo sa imung komento</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -58,7 +58,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Ang mga kategorya</categories>
+        <categories>Categories</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <width>Width</width>
         <height>Height</height>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Ang Metadata</metadata>
+        <metadata>Metadata</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Ang Relasyon</relation>
+        <relation>Relation</relation>
       </label>
     </dialog>
   </Relationable>
@@ -245,7 +245,7 @@
     <dialog>
       <label>
         <version-history>Version History</version-history>
-        <base-version>Ang Bashihan sa Bersyon</base-version>
+        <base-version>Base Version</base-version>
         <is-checked-out>Is Checked out</is-checked-out>
         <predecessors>Predecessors</predecessors>
         <merge-failed>Merge Failed</merge-failed>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Dili balido ang email address.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -295,7 +295,7 @@
         <id>Id</id>
         <name>Name</name>
         <lifecycle>Lifecycle</lifecycle>
-        <homePath>Ang Home Path</homePath>
+        <homePath>Home Path</homePath>
         <targetWorkspace>Target Workspace</targetWorkspace>
         <targetPath>Target Path</targetPath>
       </label>
@@ -339,7 +339,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase sa Nodes</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,7 +349,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase sa Nodes</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -359,7 +359,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase sa Nodes</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -369,7 +369,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase sa Nodes</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -421,8 +421,8 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>Dili pwedeng makadungag ug klase sa dokumento '{0}' dinhi.</constraint-violation>
-      <repository-exception>Adunay nahitabo nga wala damhang error. Palihug kontaka ang administrador para sa dugang mga detalye.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
       <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->

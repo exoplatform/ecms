@@ -36,27 +36,27 @@
       <title>Редактори документу</title>
       <table>
         <Provider>Постачальник</Provider>
-        <Description>Опис</Description>
-        <Active>Активні</Active>
-        <Permissions>Права доступу</Permissions>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Редагувати права доступу</title>
         <SearchLabel>Введіть користувача або назву групи</SearchLabel>
         <WithPermissions>Хто має дозвіл</WithPermissions>
-        <None>Жоден</None>
+        <None>None</None>
         <Everybody>Усі</Everybody>
       </modal>
       <buttons>
-        <Save>Зберегти</Save>
-        <Cancel>Скасувати</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Редагувати</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Попередження</title>
+      <title>Warning</title>
       <message>Здається, ви давно не активні. Сторінка редактора буде закрита через %s секунд.</message>
     </idlePopup>
   </editors>

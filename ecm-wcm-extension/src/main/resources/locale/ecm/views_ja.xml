@@ -28,10 +28,10 @@
         <show-comments>コメントの表示</show-comments>
         <hide-comments>コメントの非表示</hide-comments>
         <comment-by>コメント</comment-by>
-        <email>電子メール</email>
+        <email>メール</email>
         <site>サイト</site>
         <lastComment>{time} に {user} に投稿された最新コメント</lastComment>
-        <Less_Than_A_Minute>1 分以内</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>約 1 分前</About_A_Minute>
         <About_x_Minutes>約 {0} 分前</About_x_Minutes>
         <About_An_Hour>約 1 時間前</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>プレビューは {0} MB より大きいコンテンツで使用できません。</pdf-max-size>
         <pdf-max-page>プレビューは {0} ページを超えるコンテンツでは使用できません。</pdf-max-page>
         <using-webDAV>または MS Office で開く</using-webDAV>
-        <open-on-desktop>デスクトップ上に開く</open-on-desktop>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>文書で開きます</open-in-documents>
         <open-in-documents-tooltip>文書アプリでこのファイルを開きます。</open-in-documents-tooltip>
@@ -102,7 +102,7 @@
       <label>
         <name>名前</name>
         <versionable>バージョン可能</versionable>
-        <exo_owner>所有者</exo_owner>
+        <exo_owner>オーナー</exo_owner>
         <exo_dateCreated>作成された日付</exo_dateCreated>
         <exo_dateModified>変更日</exo_dateModified>
         <auditing>監査</auditing>
@@ -118,7 +118,7 @@
       <label>
         <action-name>アクション名</action-name>
         <lifecycle>ライフサイクル</lifecycle>
-        <metadata>メタデータ観覧</metadata>
+        <metadata>メタデータ</metadata>
         <description>説明</description>
       </label>
     </view>
@@ -157,12 +157,12 @@
         <not-avaliable>N/A</not-avaliable>
         <core-elements>コア要素</core-elements>
         <title>タイトル</title>
-        <creator>作者</creator>
-        <subject>題名</subject>
-        <source>参照元</source>
+        <creator>作成者</creator>
+        <subject>題</subject>
+        <source>ソース</source>
         <contributor>コントリビュータ</contributor>
         <resource-type>リソースタイプ</resource-type>
-        <date>日時</date>
+        <date>日付</date>
         <publisher>公開者</publisher>
         <description>説明</description>
         <rights>権限</rights>

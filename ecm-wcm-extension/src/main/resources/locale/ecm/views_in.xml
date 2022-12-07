@@ -5,7 +5,7 @@
     <label>
       <languages>
         <en>Inggris</en>
-        <fr>Prancis</fr>
+        <fr>Perancis</fr>
         <ru>Rusia</ru>
         <vi>Vietnam</vi>
         <nl>Belanda</nl>
@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Komentar terakhir dikirim oleh</postedBy>
-        <at>di</at>
+        <at>pada</at>
         <comments>Komentar(s)</comments>
         <show-comments>Tampilkan komentar</show-comments>
         <hide-comments>Sembunyikan komentar</hide-comments>
@@ -54,13 +54,13 @@
         <pdf-max-size>Pratinjau tidak tersedia untuk konten yang lebih besar dari {0} MB.</pdf-max-size>
         <pdf-max-page>Pratinjaunya tidak tersedia untuk konten dengan lebih dari {0} halaman.</pdf-max-page>
         <using-webDAV>atau Buka di MS Office</using-webDAV>
-        <open-on-desktop>Buka pada Desktop</open-on-desktop>
+        <open-on-desktop>Buka di Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Buka di Dokumen</open-in-documents>
         <open-in-documents-tooltip>Buka berkas ini di aplikasi dokumen</open-in-documents-tooltip>
         <file-size-too-big>Isi dari berkas ini terlalu besar. anda seharusnya mengunduh dan membuka di klien.</file-size-too-big>
         <webDAV>Tampilan WebDAV</webDAV>
-        <download>Download</download>
+        <download>Unduh</download>
         <htmlview>Tampilkan sebagai HTML</htmlview>
         <plaintextview>Tampilkan sebagai teks biasa</plaintextview>
         <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
@@ -74,8 +74,8 @@
   <Mail>
     <view>
       <label>
-        <from>Diri:</from>
-        <to>Ke:</to>
+        <from>Dari:</from>
+        <to>Untuk:</to>
         <cc>Cc:</cc>
         <date>Tanggal:</date>
         <subject>Subyek:</subject>
@@ -130,7 +130,7 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Nama tindakan</action-name>
+        <action-name>Nama Aksi</action-name>
         <lifecycle>Lingkaran kehidupan</lifecycle>
         <description>Deskripsi</description>
       </label>
@@ -166,19 +166,19 @@
         <publisher>Penerbit</publisher>
         <description>Deskripsi</description>
         <rights>Hak</rights>
-        <relation>Relasi</relation>
+        <relation>Hubungan</relation>
         <format>Format</format>
         <coverage>Cakupan</coverage>
         <identifier>Pengenal</identifier>
         <languages>Bahasa</languages>
       </label>
       <action>
-        <add-edit>Tambah/Edit</add-edit>
+        <add-edit>Tambah/Ubah</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Tambahkan/Ubah Properti</add-edit>
+        <add-edit>Tambah / Ubah Properti</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -198,7 +198,7 @@
     <view>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis node</nodetypes>
+        <nodetypes>Jenis simpul</nodetypes>
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
         <nodeTypeName>Nama Jenis simpul</nodeTypeName>
       </label> 
@@ -209,7 +209,7 @@
     <view>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis node</nodetypes> 
+        <nodetypes>Jenis simpul</nodetypes> 
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
         <nodeTypeName>Nama Jenis simpul</nodeTypeName>
       </label> 
@@ -220,7 +220,7 @@
     <view>
       <label>
         <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis node</nodetypes>
+        <nodetypes>Jenis simpul</nodetypes>
         <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
         <nodeTypeName>Nama Jenis simpul</nodeTypeName>
       </label> 
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Deskripsi suara</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Baca lebih banyak</Read-more>
       <Read-less>Kurang Baca</Read-less>
       <Switch-back-to-original-video>Video asli</Switch-back-to-original-video>
       </label>

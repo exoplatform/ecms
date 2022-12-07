@@ -62,12 +62,12 @@
   <UIPermissionMembership>
     <label>
       <selectUser>Select Role</selectUser>
-      <selectGroup>Poišči in izberi skupino</selectGroup>
+      <selectGroup>Poiščite in izberite skupino</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Izberite skupino</selectGroup>
+      <selectGroup>Izberi skupino</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>

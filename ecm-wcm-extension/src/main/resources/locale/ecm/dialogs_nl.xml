@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Waar werkt u aan ? Gebruik @ om iemand te vermelden</placeholder>
+      <placeholder>Gebruik @ om iemand te vermelden in uw commentaar</placeholder>
     </label>
   </UICommentForm>
  
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Dekking:</coverage>
         <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <language>Taal:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -200,7 +200,7 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Begin publicatie</start-publication>
+        <start-publication>Start publication</start-publication>
         <end-publication>Einde publicatie</end-publication>
       </label>
     </dialog>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version history</version-history>
-        <base-version>Base versie</base-version>
+        <version-history>Versiegeschiedenis</version-history>
+        <base-version>Basis versie</base-version>
         <is-checked-out>Is uitgecheckt</is-checked-out>
         <predecessors>Voorafgaande taken</predecessors>
         <merge-failed>Samenvoegen is mislukt</merge-failed>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Het e-mailadres is ongeldig.</Invalid-input>
+      <Invalid-input>Email address is ongeldig!</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -314,15 +314,15 @@
 <no>Nee</no>
 <yes>Ja</yes>
 <true>Waar</true>
-<false>Valse</false>
+<false>Onwaar</false>
 <Electronic>Elektronische</Electronic>
 <Paper>Papier</Paper>
 <NONE>Geen</NONE>
 <CLASSIFIED>Geclassificeerde</CLASSIFIED>
-<UNCLASSIFIED>Niet-geclassificeerde</UNCLASSIFIED>
+<UNCLASSIFIED>Un Classified</UNCLASSIFIED>
 <NOCONTRACT>Geen Contract</NOCONTRACT>
-<one-minute>Een minuut</one-minute>
-<hourly>Ieder uur</hourly>
+<one-minute>Eén minuut</one-minute>
+<hourly>Per uur</hourly>
 <daily>Dagelijks</daily>
 <quarterly>Per kwartaal</quarterly>
 <yearly>Jaarlijks</yearly>
@@ -340,7 +340,7 @@
       <label>
         <isDeep>Is diep</isDeep>
         <nodetypes>Node type</nodetypes>
-        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -350,7 +350,7 @@
       <label>
         <isDeep>Is diep</isDeep>
         <nodetypes>Node type</nodetypes>
-        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -360,7 +360,7 @@
       <label>
         <isDeep>Is diep</isDeep>
         <nodetypes>Node type</nodetypes>
-        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -370,7 +370,7 @@
       <label>
         <isDeep>Is diep</isDeep>
         <nodetypes>Node type</nodetypes>
-        <affectedNodeTypeNames>Nodes met probleem</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Node met probleem</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>Huidig node laat niet toe '{0}' node type toe te voegen</constraint-violation>
-      <repository-exception>Kan niet naar dit folder opslaan. Naam heeft geen index of bestaat al</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>Kan document niet opslaan. naam mag geen '[' or ']' bevatten.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Poslední komentář přidal</postedBy>
-        <at>jako</at>
+        <at>na</at>
         <comments>Komentář(ů)</comments>
         <show-comments>Zobrazit komentáře</show-comments>
         <hide-comments>Skrýt komentáře</hide-comments>
@@ -31,7 +31,7 @@
         <email>E-mail</email>
         <site>Web</site>
         <lastComment>Poslední komentář odeslal {user} v {time}</lastComment>
-        <Less_Than_A_Minute>před méně než minutou</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>asi před minutou</About_A_Minute>
         <About_x_Minutes>asi před {0} minutami</About_x_Minutes>
         <About_An_Hour>asi před hodinou</About_An_Hour>
@@ -100,7 +100,7 @@
   <ListView>
     <view>
       <label>
-        <name>Název</name>
+        <name>Jméno</name>
         <versionable>Možné verzování</versionable>
         <exo_owner>Vlastník</exo_owner>
         <exo_dateCreated>Datum vytvoření</exo_dateCreated>
@@ -142,7 +142,7 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Název</action-name>
+        <action-name>Jméno</action-name>
         <lifecycle>Cyklus</lifecycle>
         <description>Popis</description>
       </label>
@@ -154,9 +154,9 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>NENÍ K DISPOZICI</not-avaliable>
         <core-elements>Základní prvky</core-elements>
-        <title>Nadpis</title>
+        <title>Popisek</title>
         <creator>Tvůrce</creator>
         <subject>Předmět š</subject>
         <source>Zdroj</source>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Popis zvuku</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Přečtěte si více</Read-more>
       <Read-less>Číst méně</Read-less>
       <Switch-back-to-original-video>Původní video</Switch-back-to-original-video>
       </label>

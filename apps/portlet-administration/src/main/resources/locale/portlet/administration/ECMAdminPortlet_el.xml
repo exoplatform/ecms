@@ -2330,7 +2330,7 @@
       <action>Ενέργεια</action>
     </header>
     <tooltip>
-      <UnLock>Ξεκλείδωμα</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Δεν έχετε δικαίωμα πρόσβασης στον κόμβο με τη διαδρομή {0} ή αυτός ο κόμβος έχει διαγραφεί.</access-denied-exception>

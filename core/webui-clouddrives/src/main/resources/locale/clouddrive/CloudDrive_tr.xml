@@ -50,8 +50,8 @@
     <event>
       <OpenFileOn>$serviceName üzerinde $fileUrl dosyasını açın</OpenFileOn>
       <OpenOn>Şurada aç</OpenOn>
-      <EditFile>Düzenle</EditFile>
-      <ViewFile>Görünüm</ViewFile>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
       <sourceview>Kaynak kodunu görüntüle</sourceview>
@@ -90,25 +90,25 @@
     <label>
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Sağlaycı</provider>
-      <description>Açıklama</description>
-      <active>Etkin</active>
+      <provider>Provider</provider>
+      <description>Description</description>
+      <active>Active</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Belgeler</title>
+      <title>Documents</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Bağlan</connect>
+        <connect>Connect</connect>
       </button>
       <button>
-        <disconnect>Bağlantıyı kes</disconnect>
+        <disconnect>Disconnect</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Gumamit ng @ upang banggitin ang isang tao sa iyong komento</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -46,7 +46,7 @@
     <dialog>
       <label>
         <name>Name</name>
-        <content>Nilalaman</content>
+        <content>Content</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -73,7 +73,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Ang password</password>
+      <password>Password</password>
       <link>Link</link>
       <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
@@ -84,7 +84,7 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Ang password</password>
+      <password>Password</password>
       <link>Link</link>
       <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Ang Metadata</metadata>
+        <metadata>Metadata</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Coverage:</coverage>
         <identifier>Identifier:</identifier>
-        <language>Wika:</language>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Simulan ang Paglathala</start-publication>
-        <end-publication>Tapusin ang Paglathala</end-publication>
+        <start-publication>Start Publication</start-publication>
+        <end-publication>End Publication</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Ang relasyon</relation>
+        <relation>Relation</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Ang Pamagat</title>
+        <title>Title</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Ang kasaysayan ng bersyon</version-history>
-        <base-version>Ang Basihang Bersyon</base-version>
+        <version-history>Version History</version-history>
+        <base-version>Base Version</base-version>
         <is-checked-out>Is Checked out</is-checked-out>
         <predecessors>Predecessors</predecessors>
         <merge-failed>Merge Failed</merge-failed>
@@ -263,7 +263,7 @@
         <name>Name</name>
         <autoload>Auto Load</autoload>
         <minetype>MIME Type</minetype>
-        <content>Nilalaman</content>
+        <content>Content</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Hindi wasto ang address ng email.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -295,7 +295,7 @@
         <id>Id</id>
         <name>Name</name>
         <lifecycle>Lifecycle</lifecycle>
-        <homePath>Ang Home Path</homePath>
+        <homePath>Home Path</homePath>
         <targetWorkspace>Target Workspace</targetWorkspace>
         <targetPath>Target Path</targetPath>
       </label>
@@ -313,33 +313,33 @@
   -->
 <no>No</no>
 <yes>Yes</yes>
-<true>Totoo</true>
-<false>Mali</false>
-<Electronic>Elektronik</Electronic>
-<Paper>Ang Papel</Paper>
-<NONE>Wala</NONE>
-<CLASSIFIED>Nauuri na</CLASSIFIED>
-<UNCLASSIFIED>Hindi nai-uri</UNCLASSIFIED>
-<NOCONTRACT>Walang Kontrata</NOCONTRACT>
-<one-minute>Isang Minuto</one-minute>
-<hourly>Oras-oras</hourly>
-<daily>Araw-araw</daily>
-<quarterly>Nakabatay sa Pangatlong Buwan</quarterly>
-<yearly>Taon-taon</yearly>
-<ten-years>Sampung Taon</ten-years>
-<read>Ang Aksyon ng Gumagamit</read>
-  <schedule>Ang Nag-iiskedyul</schedule>
-  <node_added>Ang Pagdaragdag ng Nilalaman</node_added>
-  <node_removed>Ang Pagtatanggal sa Nilalaman</node_removed>
-  <property_added>Ang Pagdaragdag ng Katangian</property_added>
-  <property_removed>Ang Pagtatanggal ng Katangian</property_removed>
-  <property_changed>Ang Pagmodipika sa Katangian</property_changed>
+<true>True</true>
+<false>False</false>
+<Electronic>Electronic</Electronic>
+<Paper>Paper</Paper>
+<NONE>None</NONE>
+<CLASSIFIED>Classified</CLASSIFIED>
+<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+<NOCONTRACT>No Contract</NOCONTRACT>
+<one-minute>One Minute</one-minute>
+<hourly>Hourly</hourly>
+<daily>Daily</daily>
+<quarterly>Quarterly</quarterly>
+<yearly>Yearly</yearly>
+<ten-years>Ten Years</ten-years>
+<read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase ng Node</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,7 +349,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase ng Node</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -359,7 +359,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase ng Node</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -369,7 +369,7 @@
     <dialog>
       <label>
         <isDeep>Is Deep</isDeep>
-        <nodetypes>Ang mga Klase ng Node</nodetypes>
+        <nodetypes>Node Types</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>Hindi ka maaaring magdagdag ng klase '{0}' ng dokumento dito.</constraint-violation>
-      <repository-exception>May naganap na hindi inaasahang error. Mangyaring kumontak sa namamahala para sa karagdagang mga detalye.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>Hindi ka maaaring makapag save ng dukomentong ito. Ang pangalang ibinigay ay dapat nasa nyumerikal na pormat.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

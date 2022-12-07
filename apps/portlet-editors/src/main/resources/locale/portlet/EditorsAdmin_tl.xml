@@ -37,19 +37,19 @@
       <table>
         <Provider>Ang Provider o Tagapagtustos</Provider>
         <Description>Description</Description>
-        <Active>Gawing aktibo</Active>
+        <Active>Active</Active>
         <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>Wala</None>
+        <None>None</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
         <Save>Save</Save>
-        <Cancel>Kanselahin</Cancel>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>

@@ -7,8 +7,8 @@
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Palitan ng pangalan</rename>
-      <cancel>Kanselahin</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
       <renaming>Renaming...</renaming>

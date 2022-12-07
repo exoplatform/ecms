@@ -3,7 +3,7 @@
   <UISEOForm>
     <label>  
       <title>Title:</title>
-      <description>Beskrivning:</description>
+      <description>Description:</description>
       <keywords>Keywords:</keywords>
       <language>Language:</language>
       <robots>Robots:</robots>
@@ -45,7 +45,7 @@
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>SEO Administrering</UISEOForm>
+      <UISEOForm>SEO Management</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>

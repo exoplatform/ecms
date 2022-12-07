@@ -2330,7 +2330,7 @@
       <action>Dejanje</action>
     </header>
     <tooltip>
-      <UnLock>Odkleni</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Nimate dovoljenja za dostop do vozlišča, ki se nahaja na naslovu {0}, ali pa je vozlišče bilo izbrisano.</access-denied-exception>

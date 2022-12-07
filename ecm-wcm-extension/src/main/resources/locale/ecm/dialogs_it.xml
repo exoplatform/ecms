@@ -8,7 +8,7 @@
       <label>
         <end-time>Tempo Fine</end-time>
         <start-time>Tempo Inizio</start-time>
-        <lifecycle>Ciclo di Vita</lifecycle>
+        <lifecycle>Ciclo di vita</lifecycle>
         <mimeType>Tipo Mime</mimeType>
         <repeat-count>Conteggio Ripetizione</repeat-count>
         <time-interval>Intervallo Tempo</time-interval>
@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>A cosa stai lavorando? Utilizzare @ per citare qualcuno</placeholder>
+      <placeholder>Utilizza @ per citare qualcuno nel tuo commento</placeholder>
     </label>
   </UICommentForm>
  
@@ -86,7 +86,7 @@
       <userName>#{word.userName}</userName>
       <password>Password</password>
       <link>Collegamento</link>
-      <to>Invia Mail A</to>
+      <to>Manda Mail A</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -164,7 +164,7 @@
         <format>#{word.format}</format>
         <coverage>Copertura</coverage>
         <identifier>Identificatore</identifier>
-        <language>Lingua:</language>
+        <language>Lingua</language>
       </label>
     </dialog>
   </ElementSet>
@@ -189,7 +189,7 @@
       <label>
         <destination-workpsace>Workspace di Destinazione</destination-workpsace>
         <destination-path>Path di Destinazione</destination-path>
-        <primary-type>Tipi Primari</primary-type>
+        <primary-type>Tipo Primario</primary-type>
         <mixin-types>Tipi Mixin</mixin-types>
       </label>
     </dialog>
@@ -244,7 +244,7 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Storico Versione</version-history>
+        <version-history>Storico Versioni</version-history>
         <base-version>Versione Base</base-version>
         <is-checked-out>È stato fato il Check out</is-checked-out>
         <predecessors>Predecessori</predecessors>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>L'indirizzo email non è valido.</Invalid-input>
+      <Invalid-input>Indirizzo mail non valido.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -295,7 +295,7 @@
         <id>ID</id>
         <name>Nome</name>
         <lifecycle>Ciclo di Vita</lifecycle>
-        <homePath>Percorso Home</homePath>
+        <homePath>Path Home</homePath>
         <targetWorkspace>Workspace Destinazione</targetWorkspace>
         <targetPath>Path Destinazione</targetPath>
       </label>
@@ -314,32 +314,32 @@
 <no>No</no>
 <yes>Si</yes>
 <true>Vero</true>
-<false>Falso</false>
+<false>falso</false>
 <Electronic>Elettronico</Electronic>
 <Paper>Carta</Paper>
-<NONE>Nessuno</NONE>
+<NONE>Niente</NONE>
 <CLASSIFIED>Classificato</CLASSIFIED>
-<UNCLASSIFIED>Non Classificato</UNCLASSIFIED>
+<UNCLASSIFIED>Non classificato</UNCLASSIFIED>
 <NOCONTRACT>Nessun Contratto</NOCONTRACT>
-<one-minute>Un Minuto</one-minute>
+<one-minute>Un minuto</one-minute>
 <hourly>Ogni ora</hourly>
-<daily>Quotidianamente</daily>
-<quarterly>Mensile</quarterly>
+<daily>Giornalmente</daily>
+<quarterly>Ogni quadrimestre</quarterly>
 <yearly>Annualmente</yearly>
 <ten-years>Dieci Anni</ten-years>
 <read>Azione Utente</read>
   <schedule>Schedulatore</schedule>
-  <node_added>Aggiunta Contenuto</node_added>
+  <node_added>Addizione Contenuto</node_added>
   <node_removed>Rimozione Contenuto</node_removed>
-  <property_added>Aggiunta ProprietÃ </property_added>
-  <property_removed>Rimozione proprietÃ </property_removed>
-  <property_changed>Modifica proprietÃ </property_changed>
+  <property_added>Addizione Proprietà</property_added>
+  <property_removed>Rimozione Proprietà</property_removed>
+  <property_changed>Modifica Proprietà</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipi di nodi</nodetypes>
+        <isDeep>È profondo</isDeep>
+        <nodetypes>Tipi Nodo</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -348,8 +348,8 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipi di nodi</nodetypes>
+        <isDeep>È profondo</isDeep>
+        <nodetypes>Tipi Nodo</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -358,8 +358,8 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipi di nodi</nodetypes>
+        <isDeep>È profondo</isDeep>
+        <nodetypes>Tipi Nodo</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -368,8 +368,8 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>È Profondo</isDeep>
-        <nodetypes>Tipi di nodi</nodetypes>
+        <isDeep>È profondo</isDeep>
+        <nodetypes>Tipi Nodo</nodetypes>
         <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -400,13 +400,13 @@
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>Nuovo Documento</newDocument>
+      <newDocument>New Document</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>Nuovo Documento</UINewDocumentForm>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Sei pregato di inserire il nome del documento.</name-invalid>
-      <constraint-violation>Il nodo non consente di aggiungere il tipo di nodo '{0}'.</constraint-violation>
-      <repository-exception>Errore sconosciuto. Contatta l'amministratore per maggiori dettagli.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>Non hai il permesso di aggiungere qui un nuovo documento.</repository-exception-permission>
-      <numberformat-exception>Impossible salvare questo documento. Il nome fornito deve essere in formato numerico.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Non puoi salvare il documento. Un elemento con lo stesso nome esiste già.</not-allow-sameNameSibling>
     </msg>

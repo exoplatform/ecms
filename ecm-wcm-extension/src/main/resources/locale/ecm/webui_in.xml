@@ -8,14 +8,14 @@
   <UITreeList>
     <header>
       <name>Nama</name>
-      <action>Tambahkan</action>
+      <action>Tambah</action>
     </header>
     <info>
       <child-not-found>Anak tidak ditemukan!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Pilih</select>
+        <select>Memilih</select>
       </title>
     </action>
   </UITreeList>
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Memilih halaman</UIPageSelector>
+      <UIPageSelector>Pemilih halaman</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--

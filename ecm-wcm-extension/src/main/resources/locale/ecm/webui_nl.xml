@@ -7,7 +7,7 @@
   -->
   <UITreeList>
     <header>
-      <name>Naam</name>
+      <name>naam</name>
       <action>Toevoegen</action>
     </header>
     <info>
@@ -48,21 +48,21 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Selecteer Gebruiker</UIPermissionUser>
+      <UIPermissionUser>Selecteer gebruiker</UIPermissionUser>
       <UIPermissionMembership>Select Role</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Selecteer Gebruiker</selectUser>
+      <selectUser>Selecteer gebruiker</selectUser>
       <selectGroup>Navigeer en selecteer een groep</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
       <selectUser>Select Role</selectUser>
-      <selectGroup>Navigeer en selecteer een groep</selectGroup>
+      <selectGroup>Bladeren en selecteer een groep</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>

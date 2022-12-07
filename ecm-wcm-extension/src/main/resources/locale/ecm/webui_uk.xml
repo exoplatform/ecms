@@ -8,14 +8,14 @@
   <UITreeList>
     <header>
       <name>Ім’я</name>
-      <action>Add</action>
+      <action>Додати</action>
     </header>
     <info>
       <child-not-found>Дитина не знайдено!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Виберіть</select>
+        <select>Вибрати</select>
       </title>
     </action>
   </UITreeList>
@@ -48,9 +48,9 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Виберіть користувача</UIPermissionUser>
-      <UIPermissionMembership>Виберіть Членство</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Виберіть Членство</TaxoSelectUserOrGroup>
+      <UIPermissionUser>Виберіть Користувача</UIPermissionUser>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Виберіть Членство</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>Перегляд і вибір групи</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>Виберіть групу</selectGroup>
-      <selectMembership>Виберіть Членство</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

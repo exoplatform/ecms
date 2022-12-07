@@ -12,7 +12,7 @@
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Uredi</Draft>
+        <Draft>Edit</Draft>
         <Published>Objavljeno</Published>
       </option>
     </label>

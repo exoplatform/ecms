@@ -596,7 +596,7 @@
       <MoveToTrash>Sposta nel Cestino</MoveToTrash>
       <RestoreFromTrash>Ripristina dal Cestino</RestoreFromTrash>
       <EmptyTrash>Svuota Cestino</EmptyTrash>
-      <WebDavView>Aperto in MS Office</WebDavView>
+      <WebDavView>Open in MS Office</WebDavView>
       <Download>Scarica</Download>
       <OpenDocument>Modifica remota</OpenDocument>
       <EditProperty>Modifica proprietà documento</EditProperty>
@@ -615,7 +615,7 @@
       <no-references>Referenze non trovate</no-references>
     </msg>
     <header>
-      <workspace>Area di lavoro</workspace>
+      <workspace>Workspace</workspace>
       <path>Percorso</path>
     </header>
     <action>
@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Versione originale</original>
-      <version>Versione</version>
+      <version>Version</version>
       <baseVersion>versione corrente</baseVersion>
       <addLabel>Aggiungi Etichetta</addLabel>
       <removeLable>Rimuovi Etichetta</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>Confronta le versioni selezionate</compare-versions>
     </action>
     <labels>
-      <version>Versione</version>
-      <date>Data</date>
+      <version>Version</version>
+      <date>Date</date>
       <author>Modificato da</author>
-      <summary>Sommario</summary>
-      <action>Azione</action>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Impossible comparare tra 2 versioni</can-not-compare>
       <compare-unavailable>Il confronto delle versioni non è disponibile per questo documento</compare-unavailable>
       <DateChange>In {0}</DateChange>
-      <PreviousAndNextCompare>Modifiche da {0} a {1}</PreviousAndNextCompare>
-      <ComparedWith>Confrontati con</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Ripristinato dalla versione {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -2542,7 +2542,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Amministratore</Admin>
-      <Info>Info Pagina</Info>
+      <Info>Info</Info>
       <Actions>Azioni</Actions>
       <Collaboration>Collaborazione</Collaboration>
       <Search>Ricerca</Search>

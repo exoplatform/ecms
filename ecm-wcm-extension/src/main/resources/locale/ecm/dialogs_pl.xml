@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Użyj @ żeby oznaczyć kogoś w komentarzu</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>Obecny węzeł nie pozwala na to, aby dodać do niego węzeł typu „{0}”.</constraint-violation>
-      <repository-exception>Wystąpił nieoczekiwany błąd. Proszę skontaktować się z administratorem po więcej szczegółów.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>Nie można zapisać dokumentu. Nazwa musi być w formacie liczbowym.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

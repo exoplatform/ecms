@@ -190,7 +190,7 @@
         <destination-workpsace>Hedef Çalışma Alanı</destination-workpsace>
         <destination-path>Hedef Yolu</destination-path>
         <primary-type>Birincil Türü</primary-type>
-        <mixin-types>Mixin Türü</mixin-types>
+        <mixin-types>Mixin Türleri</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Sürüm Geçmişi</version-history>
-        <base-version>Temel Sürüm</base-version>
+        <version-history>Sürüm geçmişi</version-history>
+        <base-version>Temel sürüm</base-version>
         <is-checked-out>Kullanıma alındı</is-checked-out>
         <predecessors>Öncel</predecessors>
         <merge-failed>Birleştirme başarısız oldu</merge-failed>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>E-posta adresi geçerli değil.</Invalid-input>
+      <Invalid-input>E-posta adresi geçersiz.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -316,15 +316,15 @@
 <true>Doğru</true>
 <false>Yanlış</false>
 <Electronic>Elektronik</Electronic>
-<Paper>Evrak</Paper>
+<Paper>Kağıt</Paper>
 <NONE>Hiçbiri</NONE>
-<CLASSIFIED>Gizli (Bilgi)</CLASSIFIED>
-<UNCLASSIFIED>Sınıflandırılmamış</UNCLASSIFIED>
-<NOCONTRACT>Sözleşme Yok</NOCONTRACT>
+<CLASSIFIED>Gizli Bilgidir</CLASSIFIED>
+<UNCLASSIFIED>Gizli Bilgi Değildir</UNCLASSIFIED>
+<NOCONTRACT>Sözleşme yok</NOCONTRACT>
 <one-minute>Bir Dakika</one-minute>
 <hourly>Saatlik</hourly>
 <daily>Günlük</daily>
-<quarterly>Üç Aylık</quarterly>
+<quarterly>Üç Aylik</quarterly>
 <yearly>Yıllık</yearly>
 <ten-years>On Yıllık</ten-years>
 <read>Kullanıcı Eylemi</read>
@@ -339,7 +339,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türleri</nodetypes>
+        <nodetypes>Düğüm Türüleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,7 +349,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türleri</nodetypes>
+        <nodetypes>Düğüm Türüleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -359,7 +359,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türleri</nodetypes>
+        <nodetypes>Düğüm Türüleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -369,7 +369,7 @@
     <dialog>
       <label>
         <isDeep>Derin</isDeep>
-        <nodetypes>Düğüm Türleri</nodetypes>
+        <nodetypes>Düğüm Türüleri</nodetypes>
         <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Lütfen belge adını girin.</name-invalid>
-      <constraint-violation>Geçerli düğüm '{0}' düğüm türünü eklemenize izin vermez.</constraint-violation>
-      <repository-exception>Beklenmeyen bir hata oluştu. Daha fazla ayrıntı için yöneticinize başvurun.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>Buraya yeni bir belge ekleme izniniz yok.</repository-exception-permission>
-      <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Belgeyi kaydedemezsiniz. Aynı ada sahip bir öğe zaten var.</not-allow-sameNameSibling>
     </msg>

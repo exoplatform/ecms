@@ -39,7 +39,7 @@
       </option>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Ang Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
@@ -65,7 +65,7 @@
       <Down>Sa ubos</Down>
       <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Ang Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
@@ -108,7 +108,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Pagpuno ug Path</AddPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
@@ -145,7 +145,7 @@
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>I-refresh</refresh>
+      <refresh>Refresh</refresh>
       <edit>Edit in Content Explorer</edit>
       <delete>Delete</delete>
       <publish>Publish</publish>
@@ -177,7 +177,7 @@
     <enrolled>Enrolled</enrolled>
     <draft>Draft</draft>
     <pending>Pending</pending>
-    <approved>Giaprobahan</approved>
+    <approved>Approved</approved>
     <inreview>In Review</inreview>
     <staged>Staged</staged>
     <published>Published</published>

@@ -38,7 +38,7 @@
         <Provider>Provider</Provider>
         <Description>Description</Description>
         <Active>Active</Active>
-        <Permissions>Kebenaran</Permissions>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
@@ -48,12 +48,12 @@
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Simpan</Save>
-        <Cancel>Batal</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Sunting</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
       <title>Warning</title>

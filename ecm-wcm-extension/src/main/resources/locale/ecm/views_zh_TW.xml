@@ -31,7 +31,7 @@
         <email>電子郵件：</email>
         <site>網站</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
-        <Less_Than_A_Minute>小於一分鐘前</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>大約一分鐘前</About_A_Minute>
         <About_x_Minutes>約 {0} 分鐘前</About_x_Minutes>
         <About_An_Hour>大約一小時前</About_An_Hour>
@@ -154,10 +154,10 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>不適用</not-avaliable>
         <core-elements>核心元素</core-elements>
         <title>標題</title>
-        <creator>建立者:</creator>
+        <creator>建立者</creator>
         <subject>主題</subject>
         <source>來源</source>
         <contributor>貢獻者</contributor>

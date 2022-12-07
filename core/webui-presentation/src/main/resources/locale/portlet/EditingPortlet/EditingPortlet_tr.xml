@@ -12,7 +12,7 @@
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Düzenle</Draft>
+        <Draft>Edit</Draft>
         <Published>Yayınlandı</Published>
       </option>
     </label>

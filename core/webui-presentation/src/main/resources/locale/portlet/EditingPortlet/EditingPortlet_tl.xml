@@ -13,7 +13,7 @@
     <label>
       <option>
         <Draft>Edit</Draft>
-        <Published>I-publish</Published>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

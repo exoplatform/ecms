@@ -2330,7 +2330,7 @@
       <action>Akce</action>
     </header>
     <tooltip>
-      <UnLock>Odemknout</UnLock>
+      <UnLock>UnLock</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Nemáte oprávnění k přístupu uzlu s cestou {0}, nebo tento uzel je odstraněn.</access-denied-exception>

@@ -1311,7 +1311,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>کردار منتخب کریں</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1325,7 +1325,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
-      <selectMembership>کردار منتخب کریں</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1452,7 +1452,7 @@
   <permission>
     <title>
       <SelectUser>صارف منتخب کریں</SelectUser>
-      <SelectMember>کردار منتخب کریں</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>ہر کوئی</AddAny>
     </title>
   </permission>
@@ -1465,7 +1465,7 @@
     <title>
       <UIGroupSelector>صارف منتخب کریں</UIGroupSelector>
       <UIPermissionSelector>رکن منتخب کریں</UIPermissionSelector>
-      <UIGroupMemberSelector>کردار منتخب کریں</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2160,7 +2160,7 @@
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
       <selectUser>صارف منتخب کریں</selectUser>
-      <selectMembership>کردار منتخب کریں</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2168,7 +2168,7 @@
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
       <selectUser>صارف منتخب کریں</selectUser>
-      <selectMembership>کردار منتخب کریں</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2197,7 +2197,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>کردار منتخب کریں</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2212,7 +2212,7 @@
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
       <selectUser>صارف منتخب کریں</selectUser>
-      <selectMembership>کردار منتخب کریں</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>جُھنڈ منتخب کریں</selectGroup>
-      <selectMembership>کردار منتخب کریں</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
