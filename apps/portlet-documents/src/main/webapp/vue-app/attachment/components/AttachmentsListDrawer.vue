@@ -37,6 +37,8 @@
             :key="attachment"
             class="list-complete-item">
             <attachment-item
+              :open-in-editor="openAttachmentsInEditor"
+              :is-file-editable="isFileEditable(attachment)"
               :allow-to-edit="false"
               :attachment="attachment"
               :can-access="attachment.acl && attachment.acl.canAccess"
@@ -63,11 +65,24 @@ export default {
       type: Array,
       default: () => []
     },
+    supportedDocuments: {
+      type: Array,
+      default: () => []
+    },
+    openAttachmentsInEditor: {
+      type: Boolean,
+      default: () => false
+    }
   },
   created() {
     this.$root.$on('open-attachments-list-drawer', () => this.openAttachmentsListDrawer());
   },
   methods: {
+    isFileEditable(attachment) {
+      const type = attachment && attachment.mimetype || '';
+      return this.supportedDocuments && this.supportedDocuments.filter(doc => doc.edit && doc.mimeType === type
+          && !attachment.cloudDriveFile).length > 0;
+    },
     startLoading() {
       this.$refs.attachmentsListDrawer.startLoading();
     },
