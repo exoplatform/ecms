@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
     </action>
     <msg>
       <name-not-allowed>Nombre prohibido</name-not-allowed>
@@ -1015,7 +1015,7 @@
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
       <Restore>Restaurar</Restore>
@@ -1079,7 +1079,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
       <Restore>Restaurar</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
@@ -1387,7 +1387,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
@@ -1490,7 +1490,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
@@ -1676,7 +1676,7 @@
   <UICLVTemplateForm_ContentTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -1690,7 +1690,7 @@
   <UICLVTemplateForm_PageTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -1704,7 +1704,7 @@
   <UICLVTemplateForm_CateTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
@@ -1722,7 +1722,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>

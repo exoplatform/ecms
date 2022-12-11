@@ -27,18 +27,18 @@
       <UICategoryNavigationTreeNameFormSelectBox>Nombre del árbol</UICategoryNavigationTreeNameFormSelectBox>
       <UICategoryNavigationTemplateFormSelectBox>Plantilla de vista de árbol</UICategoryNavigationTemplateFormSelectBox>
       
-      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <UICategoryNavigationTargetPathFormInputSet>Mostrar en la página</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Selección</TreeSelectionBlock>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <AdvancedBlock>Advanced</AdvancedBlock>
   
-  <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
-  <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationTreePathFormInputSet>Ruta de destino</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Ruta de destino</UICategoryNavigationTreePathFormStringInput>
   <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
   <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automático</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
-  <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreepathPopupWindow>Ruta de destino</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>

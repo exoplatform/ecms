@@ -727,7 +727,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
     </action>
     <msg>
       <name-invalid>Por favor ingrese el nombre de propiedad.</name-invalid>
@@ -811,7 +811,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
     </action>
     <msg>
       <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
@@ -3034,7 +3034,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Reiniciar</Reset>
     </action>
   </UIPublicationSchedule>
 
