@@ -179,8 +179,6 @@ export default {
         doc.drive = this.currentDrive.title;
         doc.date = doc.created;
         this.$root.$emit('add-new-created-document', doc);
-        this.$root.$emit('end-loading-attachment-drawer');
-        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.$root.$emit('attachments-notification-alert', {
           message: this.$t('attachments.upload.success'),
           type: 'success',
