@@ -246,8 +246,8 @@ export default {
     this.$root.$on('add-new-created-document', (doc) =>{
       this.creationType = this.$t('attachments.added.by.platform');
       this.addNewCreatedDocument(doc);
-    }
-    );
+      document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+    });
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
     this.$root.$on('continue-upload-to-destination-path', (file) => {
