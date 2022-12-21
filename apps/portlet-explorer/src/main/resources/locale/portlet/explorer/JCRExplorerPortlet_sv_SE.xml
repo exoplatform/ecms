@@ -597,7 +597,7 @@
       <RestoreFromTrash>Återställ från papperskorgen</RestoreFromTrash>
       <EmptyTrash>Töm papperskorgen</EmptyTrash>
       <WebDavView>Open in MS Office</WebDavView>
-      <Download>Download</Download>
+      <Download>Ladda ner</Download>
       <OpenDocument>Remote Edit</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
@@ -1155,11 +1155,11 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter:</filter>
+      <filter>Filtrera:</filter>
       <result>Resultat:</result>
     </label>
     <title>
-      <result>Filter</result>
+      <result>Filtrera</result>
     </title>
     <button>
       <label-Select>Välj</label-Select>
@@ -1321,7 +1321,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Export>Exportera</Export>
     </action>
-    <title>Export</title>
+    <title>Exportera</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Väljare för behörighet</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1377,10 +1377,10 @@
     </action>
     <labels>
       <version>Version</version>
-      <date>Date</date>
+      <date>Datum</date>
       <author>Modified By</author>
-      <summary>Summary</summary>
-      <action>Action</action>
+      <summary>Sammanfattning</summary>
+      <action>Åtgärd</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1497,7 +1497,7 @@
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
       <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <ComparedWith>Jämfört med</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -1574,7 +1574,7 @@
   <UIViewVersion>
     <label>
       <nodeType>Nodtyp</nodeType>
-      <nodeName>Name</nodeName>
+      <nodeName>Namn</nodeName>
       <VersionNumber>Versionsnummer</VersionNumber>
       <VersionLabels>Versionsetiketter</VersionLabels>
       <VersionDate>Versionsdatum</VersionDate>
@@ -1875,7 +1875,7 @@
     </label>
     <title>
       <exeButton>Gå</exeButton>
-      <backButton>Back</backButton>
+      <backButton>Tillbaka</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Ändra nod</changeNode>
     </title>
@@ -2034,7 +2034,7 @@
       <private>Privat</private>
       <state>Läge</state>
       <visibility>Synlighet</visibility>
-      <nodeName>Name:</nodeName>
+      <nodeName>Namn:</nodeName>
       <lifecycleName>Livscykel namn</lifecycleName>
       <stateName>Läges namn</stateName>
     </label>
@@ -2272,7 +2272,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Välj sökväg</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symlink namn</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Sökväg</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2458,7 +2458,7 @@
       <Back>Tillbaka till namnbyte</Back>
       <Keepfile>Behåll båda filerna</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+<Cancel>Avbryt</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>

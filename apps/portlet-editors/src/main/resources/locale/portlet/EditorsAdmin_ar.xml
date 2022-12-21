@@ -36,9 +36,9 @@
       <title>محررات المستندات</title>
       <table>
         <Provider>مزود الخدمة</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>الوصف</Description>
+        <Active>ناشط</Active>
+        <Permissions>الصلاحيّات</Permissions>
       </table>
       <modal>
         <title>تعديل الصلاحيات</title>

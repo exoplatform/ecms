@@ -1376,11 +1376,11 @@
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Version</version>
-      <date>Date</date>
+      <version>Phiên bản</version>
+      <date>Ngày</date>
       <author>Modified By</author>
-      <summary>Summary</summary>
-      <action>Action</action>
+      <summary>Tóm tắt</summary>
+      <action>Tác vụ</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Không thể so sánh 2 phiên bản</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <PreviousAndNextCompare>Thay đổi từ {0} đến {1}</PreviousAndNextCompare>
+      <ComparedWith>So sánh với</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -3194,7 +3194,7 @@
     <Keep>Giữ cả hai</Keep>
     <Replace>Thay thế</Replace>
     <Canceled>Huỷ bỏ</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Tải một phiên bản mới</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Bạn có muốn hủy bỏ tất cả các tập tin đang được tải lên?</AbortAllConfirmation>
   </label>

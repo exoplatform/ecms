@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Añadir Permisos</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Quitar el permiso</RemovePermission>
       <AddIcon>Añadir icono</AddIcon>
       <AddPath>Añadir Ruta</AddPath>
     </title>
@@ -1386,7 +1386,7 @@
     <title>Añadir un permiso a este nodo</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
+      <Save>Guardar</Save>
       <Reset>Reiniciar</Reset>
     </action>
     <msg>
@@ -2330,7 +2330,7 @@
       <action>Acción</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Desbloquear</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>No tiene permiso para acceder al nodo con la ruta {0}, o el nodo fue eliminado.</access-denied-exception>

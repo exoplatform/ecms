@@ -991,7 +991,7 @@
       <checkIn>ورود</checkIn>
       <checkOut>بررسی</checkOut>
       <shareDocuments>اشتراک</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <openDocument>ویرایش از راه دور</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
@@ -2330,7 +2330,7 @@
       <action>اقدام</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>باز کردن قفل</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>شما مجوز لازم برای دسترسی به گره با مسیر {0} را ندارید و یا این گره حذف شده است.</access-denied-exception>

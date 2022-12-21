@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <constraint-violation>Huidig node laat niet toe '{0}' node type toe te voegen</constraint-violation>
+      <repository-exception>Kan niet naar dit folder opslaan. Naam heeft geen index of bestaat al</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Kan document niet opslaan. naam mag geen '[' or ']' bevatten.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

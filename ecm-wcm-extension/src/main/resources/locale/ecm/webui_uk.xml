@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Вибрати</select>
+        <select>Виберіть</select>
       </title>
     </action>
   </UITreeList>
@@ -48,7 +48,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Виберіть Користувача</UIPermissionUser>
+      <UIPermissionUser>Виберіть користувача</UIPermissionUser>
       <UIPermissionMembership>Select Role</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>

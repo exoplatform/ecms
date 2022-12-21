@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>リセット</Reset>
     </action>
     <msg>
       <name-not-allowed>名前が見つかりません。</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>権限の追加</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>権限の削除</RemovePermission>
       <AddIcon>追加アイコン</AddIcon>
       <AddPath>追加パス</AddPath>
     </title>
@@ -991,7 +991,7 @@
       <checkIn>チェックイン</checkIn>
       <checkOut>チェックアウト</checkOut>
       <shareDocuments>共有</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <openDocument>リモート編集</openDocument>
       <editProperty>文書のプロパティを編集</editProperty>
       <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
@@ -1386,8 +1386,8 @@
     <title>このノードへ権限を追加</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>保存</Save>
+      <Reset>リセット</Reset>
     </action>
     <msg>
       <checkbox-require>少なくとも一つの権限を選択する必要があります。</checkbox-require>
@@ -2330,7 +2330,7 @@
       <action>アクション</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>ロック解除</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>パス {0} のノードにアクセスするための権限が無いか、ノードは削除されました。</access-denied-exception>

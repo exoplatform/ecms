@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Lütfen belge adını girin.</name-invalid>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <constraint-violation>Geçerli düğüm '{0}' düğüm türünü eklemenize izin vermez.</constraint-violation>
+      <repository-exception>Beklenmeyen bir hata oluştu. Daha fazla ayrıntı için yöneticinize başvurun.</repository-exception>
       <repository-exception-permission>Buraya yeni bir belge ekleme izniniz yok.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Bu eylem kaydedemezsiniz. Verilen adı sayısal biçiminde olması gerekir.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Belgeyi kaydedemezsiniz. Aynı ada sahip bir öğe zaten var.</not-allow-sameNameSibling>
     </msg>

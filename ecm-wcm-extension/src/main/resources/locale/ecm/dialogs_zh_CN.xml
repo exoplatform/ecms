@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <constraint-violation>当前节点不允许您添加的节点类型 '{0}'。</constraint-violation>
+      <repository-exception>出现意外的错误。为了更多详细信息，请与您的管理员联系。</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>您不能保存此文档。提供的名称必须是数值格式。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

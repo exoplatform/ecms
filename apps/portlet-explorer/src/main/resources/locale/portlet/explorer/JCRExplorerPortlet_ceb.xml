@@ -80,7 +80,7 @@
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>I-sirado ang Sidebar</Close>
     </title>
   </UISideBar>
   <!--
@@ -155,7 +155,7 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>I-set up ang imong mga preperensiya sa pag-browse</title>
     <label>
       <enableStructure>I-browse sa structure nga moda:</enableStructure>
       <showSideBar>Ipakita ang sidebar:</showSideBar>
@@ -233,7 +233,7 @@
       <UIActionManager>Idumala ang mga Aksyon</UIActionManager>
       <UIDocumentForm>I-edit ang Dokumento</UIDocumentForm>
       <UIDocumentFormController>Pagdungag ug Bag-o nga Dokumento</UIDocumentFormController>
-      <EditFormController>Edit Document</EditFormController>
+      <EditFormController>I-edit ang Dokumento</EditFormController>
       <UIRelationManager>Pagdungag ug Relasyon</UIRelationManager>
       <UICategoryManager>Pagdugang og Kategorya</UICategoryManager>
       <UIImportNode>I-import</UIImportNode>
@@ -250,10 +250,10 @@
       <UIActivePublication>Mag-enroll sa Publication Lifecycle</UIActivePublication>
       <UITaggingForm>Mag-tag ug Dokumento</UITaggingForm>
       <UIThumbnailForm>Pagdungag ug Hulagway sa Thumbnail</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Ang mga Preperensiya sa Pag-browse sa mga Dokumento</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Pagpili ug Restore Path</UISelectRestorePath>
       <UISEOForm>Idumala ang SEO</UISEOForm>
-      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UISEOToolbarForm>Idumala ang SEO</UISEOToolbarForm>
       <UIReadOnlyFileConfirmMessage>Ablihi ang Dokumento</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Kopyaha ang Dokumento</UIDocumentAutoVersionForm>
     </title>
@@ -282,7 +282,7 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New Folder</AddFolder>
+      <AddFolder>Ang Bag-o nga Folder</AddFolder>
       <AddDocument>Ang -bago nga Sulod</AddDocument>
       <EditDocument>Ang pag-usab</EditDocument>
       <Upload>I-upload</Upload>
@@ -296,13 +296,13 @@
       <ManageAuditing>Ang Audit</ManageAuditing>
       <ManagePublications>Ang mga publikasyon</ManagePublications>
       <ManageCategories>Ang mga kategorya</ManageCategories>
-      <ManageRelations>Relations</ManageRelations>
+      <ManageRelations>Ang mga relasyon</ManageRelations>
       <ManageActions>Ang mga aksyon</ManageActions>
       <ExportNode>I-eksport</ExportNode>
       <ImportNode>I-import</ImportNode>
       <OverloadThumbnail>Usba ang Hulagway sa Aykon</OverloadThumbnail>
       <ManageHidden>Ipakita/Itago ang Sulod</ManageHidden>
-      <ViewReferences>References</ViewReferences>
+      <ViewReferences>Ang mga reperensiya</ViewReferences>
       <ViewNodeType>Ang mga Tipo</ViewNodeType>
       <ViewPermissions>Ang mga permiso</ViewPermissions>
       <ViewProperties>Ang mga Property</ViewProperties>
@@ -378,7 +378,7 @@
       <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
       <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
       <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Gitangtang o gi-usab na kining maong elemento. Palihug pinduta ang Refresh nga pindutanan.</path-not-found>
       <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
       <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
       <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
@@ -522,9 +522,9 @@
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
+      <Rename>Usaba ang pangalan</Rename>
       <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Copy>Kopyaha</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -532,7 +532,7 @@
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
       <EditDocument>Edit</EditDocument>
-      <Paste>Paste</Paste>
+      <Paste>I-paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
@@ -543,7 +543,7 @@
       <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
       <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
       <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Gitangtang o gi-usab na kining maong elemento. Palihug pinduta ang Refresh nga pindutanan.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Remove this attachment file</remove-attachment>
@@ -572,21 +572,21 @@
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
       <EditDocument>Edit</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
+      <Copy>Kopyaha</Copy>
+      <Rename>Usaba ang pangalan</Rename>
       <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
-      <Paste>Paste</Paste>
+      <Paste>I-paste</Paste>
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
       <WebDAV>View WebDAV</WebDAV>
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
+      <AddFolder>Ang Bag-o nga Folder</AddFolder>
+      <AddDocument>Ang -bago nga Sulod</AddDocument>
       <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
+      <MoveNode>Ibalhin</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
@@ -596,10 +596,10 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
-      <Download>Download</Download>
+      <WebDavView>Abliha sa MS Office</WebDavView>
+      <Download>I-download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
+      <EditProperty>I-edit ang mga Property sa Dokumento</EditProperty>
       <UploadNewVersion>Pag-upload ug bag-o nga bersyon</UploadNewVersion>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
@@ -615,8 +615,8 @@
       <no-references>References not found</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>Ang Workspace</workspace>
+      <path>Ang Path</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -636,20 +636,20 @@
       <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
-      <UIPropertyTab>Properties</UIPropertyTab>
-      <UIMetadataTab>Metadata</UIMetadataTab>
+      <UIPropertyTab>Ang mga Property</UIPropertyTab>
+      <UIMetadataTab>Ang Metadata</UIMetadataTab>
       <UIPropertyForm>Add New Property</UIPropertyForm>
       <UIUploadContent>Information of uploaded file</UIUploadContent>
       <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
       <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
+      <AdvancedSearchResult>Ang mga resulta sa pagpangita</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
       <UISearchContainer>Advanced Search</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
       <UIContentNameSearch>Search by Name</UIContentNameSearch>
-      <UINodeInfo>Version Info</UINodeInfo>
+      <UINodeInfo>Ang Impormasyon sa Bersyon</UINodeInfo>
       <UINodeProperty>Node Property</UINodeProperty>
       <UIActionListContainer>Available Actions</UIActionListContainer>
       <UIActionContainer>Add Action</UIActionContainer>
@@ -657,7 +657,7 @@
       <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
       <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
       <UINonPublishedForm>Estado</UINonPublishedForm>
-      <UIPublishedForm>State</UIPublishedForm>
+      <UIPublishedForm>Estado</UIPublishedForm>
       <UIPublicationLogList>History</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
@@ -757,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Remove</remove>
@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Role</SelectMember>
+      <SelectMember>Pilia ang papel</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilia ang papel</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -800,9 +800,9 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Pagpili</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Ang Nigamit o Grupo</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -836,7 +836,7 @@
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
       <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-type>Ang Klase</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -880,7 +880,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Dili pwede kining maong keyword.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
@@ -899,8 +899,8 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Walay nakita nga resulta.</not-found>
+      <keyword-not-allow>Dili pwede kining maong keyword.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -915,16 +915,16 @@
   <UISearchResult>
     <msg>
       <not-support>There is no View template for this document.</not-support>
-      <empty>No results found.</empty>
+      <empty>Walay nakita nga resulta.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Ang Path</path>
       <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <shortcutPath>Ang Path</shortcutPath>
+      <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -946,16 +946,16 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this document</not-support>
-      <empty>No results found.</empty>
+      <empty>Walay nakita nga resulta.</empty>
       <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Ang Path</path>
       <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <shortcutPath>Ang Path</shortcutPath>
+      <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -983,10 +983,10 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Ang Path</path>
       <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <shortcutPath>Ang Path</shortcutPath>
+      <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -1008,16 +1008,16 @@
   <UIShowAllHiddenResult>
     <msg>
       <not-support>There is no View template for this item.</not-support>
-      <empty>No results found.</empty>
+      <empty>Walay nakita nga resulta.</empty>
       <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Ang Path</path>
       <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <shortcutPath>Ang Path</shortcutPath>
+      <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
@@ -1047,10 +1047,10 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
+      <path>Ang Path</path>
       <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
+      <shortcutPath>Ang Path</shortcutPath>
+      <type>Ang Klase</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -1074,7 +1074,7 @@
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Properties</metadataProperty>
+      <metadataProperty>Ang mga Property</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
@@ -1109,7 +1109,7 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pagdugang og Kategorya</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
@@ -1121,8 +1121,8 @@
       <containPro-Contain>Contain</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>From</ConstraintOption-From>
-      <ConstraintOption-To>To</ConstraintOption-To>
+      <ConstraintOption-From>Gikan ni</ConstraintOption-From>
+      <ConstraintOption-To>Para sa</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
       <created>Created</created>
@@ -1162,11 +1162,11 @@
       <result>Filter</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>Pagpili</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Walay nakita nga resulta.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1251,7 +1251,7 @@
       <language>Language</language>
       <query>Query</query>
       <action>Actions</action>
-      <path>Path</path>
+      <path>Ang Path</path>
     </header>
   </UIECMSearch>
   <UIResult>
@@ -1279,7 +1279,7 @@
   <UISavedQuery>
     <header>
       <name>Name</name>
-      <type>Type</type>
+      <type>Ang Klase</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
       <action>Actions</action>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Walay nakita nga resulta.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>I-export</Export>
     </action>
-    <title>Export</title>
+    <title>I-export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>Ang Tigpili ug Permiso</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1399,13 +1399,13 @@
       <e_16>Property Changed</e_16>
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Move</e_64>
-      <e_128>Copy</e_128>
+      <e_64>Ibalhin</e_64>
+      <e_128>Kopyaha</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
-      <e_2048>Update</e_2048>
-      <e_4096>Import</e_4096>
+      <e_2048>I-update</e_2048>
+      <e_4096>Mag-import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
@@ -1478,7 +1478,7 @@
       <question>Are you sure you want to activate?</question>
     </label>
     <action>
-      <activate>Activate</activate>
+      <activate>Pag-aktibo</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1496,8 +1496,8 @@
       <can-not-compare>Failed to compare two versions</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <PreviousAndNextCompare>Ang mga kausaban gikan sa {0} hangtud sa {1}</PreviousAndNextCompare>
+      <ComparedWith>Ikompara Sa</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -1511,13 +1511,13 @@
       <format>Format</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <upload>I-upload ang File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Mag-import</Import>
     </action>
-    <title>Import</title>
+    <title>Mag-import</title>
     <msg>
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
@@ -1655,7 +1655,7 @@
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relations</path>
+      <path>Ang mga relasyon</path>
       <action>Actions</action>
     </header>
     <action>
@@ -1675,7 +1675,7 @@
   -->
   <UIClipboard>
     <header>
-      <path>Path</path>
+      <path>Ang Path</path>
       <command>Cm</command>
       <action>Action</action>
     </header>
@@ -1714,7 +1714,7 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>Pagdungag ug Bag-o nga Dokumento</title>
     <action>
       <Save>#{word.save}</Save>
       <SaveAndClose>Save &amp; Close</SaveAndClose>
@@ -1782,8 +1782,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>I-edit ang Aksyon</UIActionForm>
+      <EditFormAction>I-edit ang Aksyon</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1874,7 +1874,7 @@
       <address>Address:</address>
     </label>
     <title>
-      <exeButton>Go</exeButton>
+      <exeButton>Lakaw</exeButton>
       <backButton>Back</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Change Node</changeNode>
@@ -1887,7 +1887,7 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Watch</Watch>
+      <Watch>Pagtan-aw</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>Continue</Continue>
       <Unwatch>Unwatch</Unwatch>
@@ -2032,7 +2032,7 @@
       <non-published>Unpublished</non-published>
       <public>Public</public>
       <private>Private</private>
-      <state>State</state>
+      <state>Estado</state>
       <visibility>Visibility</visibility>
       <nodeName>Name:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
@@ -2068,7 +2068,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Dili balido ang email address.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2146,7 +2146,7 @@
   <UIVersionTreeList>
     <header>
       <version>Version</version>
-      <state>State</state>
+      <state>Estado</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilia ang papel</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Path</pathNode>
+      <pathNode>Ang Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2311,13 +2311,13 @@
     <msg>
       <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
       <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
+      <name-not-allowed>Dili pwede kining maong ngalan.</name-not-allowed>
+      <fileName-error>Dili balido kining ngalan sa file.</fileName-error>
       <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
       <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Dili ka pwede mag-save niining maong folder. Kinahanglan nga ang gitahag nga ngalan anaa sa pormat nga numero.</numberformat-exception>
       <path-node-invalid>Please enter the path.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <path-node-not-allowed>Dili pwede kining maong ngalan.</path-node-not-allowed>
       <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
       <cannot-save>You can't add a symlink for this type of document.</cannot-save>
       <item-exists-exception>An item with this name already exists.</item-exists-exception>
@@ -2340,13 +2340,13 @@
     <msg>
       <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
       <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
+      <name-not-allowed>Dili pwede kining maong ngalan.</name-not-allowed>
+      <fileName-error>Dili balido kining ngalan sa file.</fileName-error>
       <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
       <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Dili ka pwede mag-save niining maong folder. Kinahanglan nga ang gitahag nga ngalan anaa sa pormat nga numero.</numberformat-exception>
       <path-node-invalid>Please enter the path.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <path-node-not-allowed>Dili pwede kining maong ngalan.</path-node-not-allowed>
       <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>An error occurred while creating the symlink.</cannot-save>
       <item-exists-exception>An item with this name already exists.</item-exists-exception>
@@ -2441,7 +2441,7 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Pagdugang og Kategorya</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2542,7 +2542,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Admin</Admin>
-      <Info>Info</Info>
+      <Info>Impormasyon</Info>
       <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
       <Search>Search</Search>
@@ -2629,7 +2629,7 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Sigurado baka nga gusto nimong deleton kini nga komentaryo?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2659,7 +2659,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>I-upload ang File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
@@ -2679,7 +2679,7 @@
   <UIPreferencesForm>
       <label>
           <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Type</Type>
+          <Type>Ang Klase</Type>
           <CreatedDate>Created Date</CreatedDate>
           <ModifiedDate>Modified Date</ModifiedDate>
           <Ascending>Ascending</Ascending>
@@ -2689,7 +2689,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Ang mga Na-save nga Pagpangita</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2710,7 +2710,7 @@
       <Documents>Document</Documents>
       <Content>Content</Content>
     </label>
-    <title>Set Up Filter Preferences</title>
+    <title>Pag-set Up ug mga Preperensiya ss Filter</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2720,7 +2720,7 @@
   <UIAllItemsByType>
     <label>
     <ByType>Filter by Type</ByType>
-      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Pag-set Up ug mga Preperensiya ss Filter</DocumentFilterConfiguration>
     </label>
     <title>
       <ShowVideo>Show all video files</ShowVideo>
@@ -2776,12 +2776,12 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>Pagdugang og Kategorya</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Pagdugang og Kategorya</AddCategory>
     </tooltip>
    </UIActionBar>
 
@@ -2797,14 +2797,14 @@
     <title>
       <PublicTags>Ang mga tag</PublicTags>
       <EditPublicTags>Edit Tags</EditPublicTags>
-      <PrivateTags>Tags</PrivateTags>
+      <PrivateTags>Ang mga tag</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
       <name>Name</name>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <relatedDocuments>Ang Kapareho nga mga Dokumento</relatedDocuments>
       <action>Action</action>
     </header>
     <action>
@@ -2833,13 +2833,13 @@
     </action>
     <label>
       <tagName>Tag Name:</tagName>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <relatedDocuments>Ang Kapareho nga mga Dokumento</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag</UITagForm>
+      <UITagForm>Ang Tag</UITagForm>
     </title>
   </TagPopup>
 
@@ -2971,10 +2971,10 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
+      <version>Ang mga gipang-usab o gipang-revise</version>
       <date>Date</date>
-      <author>Author</author>
-      <status>Status</status>
+      <author>Ang Nagbuhat</author>
+      <status>Kahimtang</status>
       <action>Action</action>
       <label>Revision</label>
       <none>No revisions</none>
@@ -2984,7 +2984,7 @@
     </revisions>
     <status>
       <version>Revision</version>
-      <title>Status</title>
+      <title>Kahimtang</title>
       <archived>Archived</archived>
       <obsolete>Obsolete</obsolete>
       <unpublished>Unpublished</unpublished>
@@ -2999,8 +2999,8 @@
     </status>
     <scheduled>
       <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
+      <from>Gikan ni</from>
+      <to>Para sa</to>
     </scheduled>
     <title>
       <preview>Preview</preview>
@@ -3016,7 +3016,7 @@
       <date>Date</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
-      <user>Author</user>
+      <user>Ang Nagbuhat</user>
       <description>Description</description>
     </header>
     <create-version>New version is created</create-version>
@@ -3051,14 +3051,14 @@
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublicationContainer>Idumala ang Publikasyon</UIPublicationContainer>
+      <UIPublishingPanel>Idumala ang Publikasyon</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Status</status>
-      <author>Author</author>
+      <status>Kahimtang</status>
+      <author>Ang Nagbuhat</author>
       <date>Created Date</date>
       <title>Document Title</title>
       <lastUser>Last User</lastUser>
@@ -3103,10 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Walay pagtugot sa pag-akses. Ciguro wala kay permiso sa workspace sa drive '{0}'.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Ang drive '{0}' nasulod sa usa ka dili ilado nga workspace. Palihug i-reconfigure ang kini nga drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3194,7 +3194,7 @@
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
     <Canceled>Canceled</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Pag-upload ug bag-o nga bersyon</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   </label>
@@ -3211,7 +3211,7 @@
     <label>
       <name>Name</name>
       <date>Date</date>
-      <size>Size</size>
+      <size>Kadak-on</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>

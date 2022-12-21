@@ -100,7 +100,7 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>نام</name>
         <versionable>Versionable</versionable>
         <exo_owner>Owner</exo_owner>
         <exo_dateCreated>Date Created</exo_dateCreated>

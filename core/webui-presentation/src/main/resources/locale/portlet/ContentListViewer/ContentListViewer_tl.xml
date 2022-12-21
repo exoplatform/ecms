@@ -2,7 +2,7 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Mga kagustuhan</Preferences>
       <AddContent>Add Content</AddContent>
       <ManageContent>Manage Content</ManageContent>
     </label>
@@ -39,8 +39,8 @@
       </option>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigDisplayTemplateFormSelectBox>Ang Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Ang Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
@@ -53,10 +53,10 @@
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
+      <AdvancedBlock>Adbans</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigShowCLVByStringInput>sa pamamagitan ng</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Show in Page</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
@@ -65,7 +65,7 @@
       <Down>Pababa</Down>
       <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>Ang Workspace</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
@@ -95,7 +95,7 @@
       <label>
         <clvContentTab>Content Selection</clvContentTab>
         <clvDisplayTab>Display Settings</clvDisplayTab>
-        <clvAdvancedTab>Advanced</clvAdvancedTab>
+        <clvAdvancedTab>Adbans</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -108,12 +108,12 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Magdagdag ng Path</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>Folder Browser</UIContentSelectorFolder>
+      <UIContentSelectorFolder>Ang folder ng Browser</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
   <UICLVConfigOrderTypeFormSelectBox>
@@ -148,10 +148,10 @@
       <refresh>Refresh</refresh>
       <edit>Edit in Content Explorer</edit>
       <delete>Delete</delete>
-      <publish>Publish</publish>
+      <publish>I-publish</publish>
     </action>
     <label>
-      <draft>Draft</draft>
+      <draft>Ang Draft</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
@@ -171,16 +171,16 @@
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>In Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>Nai-archive</archived>
+    <obsolete>Hindi na ginagamit</obsolete>
+    <unpublished>Hindi nai-publish</unpublished>
+    <enrolled>Na-enroll na</enrolled>
+    <draft>Ang Draft</draft>
+    <pending>Nakabinbin</pending>
+    <approved>Aprubahan</approved>
+    <inreview>Sinusuri pa</inreview>
+    <staged>Nailunsad</staged>
+    <published>I-publish</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>

@@ -42,7 +42,7 @@
       <Save>#{word.save}</Save>
       <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>I-print</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Pagpuno ug Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -110,7 +110,7 @@
     <enrolled>Enrolled</enrolled>
     <draft>Draft</draft>
     <pending>Pending</pending>
-    <approved>Approved</approved>
+    <approved>Giaprobahan</approved>
     <inreview>Under Review</inreview>
     <staged>Staged</staged>
     <published>Published</published>

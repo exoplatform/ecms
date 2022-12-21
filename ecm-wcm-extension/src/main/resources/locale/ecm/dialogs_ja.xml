@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <constraint-violation>現在のノードは '{0}' ノードタイプを追加することが許されていません。</constraint-violation>
+      <repository-exception>アクセス出来ません！このフォルダに権限を追加できません。</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>このドキュメントを保存できません。与えられた名前はナンバーフォーマットである必要があります。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

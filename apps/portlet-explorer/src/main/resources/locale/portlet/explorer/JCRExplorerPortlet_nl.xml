@@ -1376,11 +1376,11 @@
       <compare-versions>Vergelijk geselecteerde versies</compare-versions>
     </action>
     <labels>
-      <version>Version</version>
-      <date>Date</date>
+      <version>Versie</version>
+      <date>Datum</date>
       <author>Aangepast door</author>
-      <summary>Summary</summary>
-      <action>Action</action>
+      <summary>Samenvatting</summary>
+      <action>Actie</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>Probleem bij het vergelijken van 2 versies</can-not-compare>
       <compare-unavailable>Versievergelijking is niet beschikbaar voor dit document</compare-unavailable>
       <DateChange>Op {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <PreviousAndNextCompare>Wijzigingen ten opzichte van {0} naar {1}</PreviousAndNextCompare>
+      <ComparedWith>In vergelijking met</ComparedWith>
       <restoredFrom>Hersteld van versie {0}</restoredFrom>
     </label>
   </UIDiff>

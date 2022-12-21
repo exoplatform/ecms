@@ -400,13 +400,13 @@
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>New Document</newDocument>
+      <newDocument>Nuovo Documento</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>Nuovo Documento</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Sei pregato di inserire il nome del documento.</name-invalid>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <constraint-violation>Il nodo non consente di aggiungere il tipo di nodo '{0}'.</constraint-violation>
+      <repository-exception>Errore sconosciuto. Contatta l'amministratore per maggiori dettagli.</repository-exception>
       <repository-exception-permission>Non hai il permesso di aggiungere qui un nuovo documento.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Impossible salvare questo documento. Il nome fornito deve essere in formato numerico.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Non puoi salvare il documento. Un elemento con lo stesso nome esiste già.</not-allow-sameNameSibling>
     </msg>

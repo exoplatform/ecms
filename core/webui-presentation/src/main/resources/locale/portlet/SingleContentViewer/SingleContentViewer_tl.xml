@@ -4,10 +4,10 @@
     <title>
       <QuickEdit>Edit in Content Explorer</QuickEdit>
       <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <FastPublish>I-publish</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
+      <draft>Ang Draft</draft>
       <print>I-print</print>
     </label>
     <msg>
@@ -40,16 +40,16 @@
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
+      <Abort>Huwag ituloy</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>I-print</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
       <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Mga kagustuhan</Preferences>
       <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
@@ -58,14 +58,14 @@
       <ContentPathBlock>Content Selection</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
+      <Advance>Adbans</Advance>
       <ContextCaption>Dynamic Navigation</ContextCaption>
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
+      <UISCVParameterInputBox>sa pamamagitan ng</UISCVParameterInputBox>
       <PrintSettingBlock>Print Settings</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
+      <LockStatus>Ang Lock</LockStatus>
       <CacheManagement>Content Visibility</CacheManagement>
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
@@ -83,14 +83,14 @@
         <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Adbans</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Magdagdag ng Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -104,16 +104,16 @@
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
+    <archived>Nai-archive</archived>
+    <obsolete>Hindi na ginagamit</obsolete>
+    <unpublished>Hindi nai-publish</unpublished>
+    <enrolled>Na-enroll na</enrolled>
+    <draft>Ang Draft</draft>
+    <pending>Nakabinbin</pending>
+    <approved>Aprubahan</approved>
     <inreview>Under Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <staged>Nailunsad</staged>
+    <published>I-publish</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>

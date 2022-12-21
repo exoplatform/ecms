@@ -250,7 +250,7 @@
       <UIActivePublication>Mag enrol sa paglalathala ng ikot ng buhay</UIActivePublication>
       <UITaggingForm>I-tag ang Dokumento</UITaggingForm>
       <UIThumbnailForm>Magdagdag ng Imahe sa Thumbnail</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UIAllItemsPreferenceForm>Mga Dokumento sa Pagba-browse ng mga Preperensiya</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Pumili ng landas ng ibabalik</UISelectRestorePath>
       <UISEOForm>Mamahala sa SEO</UISEOForm>
       <UISEOToolbarForm>Mamahala sa SEO</UISEOToolbarForm>
@@ -378,7 +378,7 @@
       <can-not-paste-node>Wala kang pahintulot para ilipat ang item na ito. Mangyaring tawagan ang administrador.</can-not-paste-node>
       <can-not-move-node>Wala kang pahintulot para ilipat ang item na ito. Mangyaring tawagan ang administrador.</can-not-move-node>
       <does-not-support-versioning>Wala kang pahintulot para maglipat. Mangyaring tawagan ang administrador.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Ang elementong ito ay binura o binago. Mangyaring pindutin ang pindutan ng Refresh.</path-not-found>
       <paste-lock-exception>Ang '{0}' ay hindi maaaring ma-paste dito. Siguraduhing ito at ang folder nito ay hindi naka-lock. At suriin na walang kaugnay na dokumento ang naka-lock.</paste-lock-exception>
       <can-not-checkin-node>Hindi mo maaaring ma-suri ang aytem na ito. Mangyaring suriin na mayroon kang mga tamang pahintulot.</can-not-checkin-node>
       <can-not-checkout-node>Hindi mo maaaring i-check out ang item na ito. Mangyaring suriin na mayroon kang tamang mga pahintulot.</can-not-checkout-node>
@@ -543,7 +543,7 @@
       <confirm-deleteattachment>Sigurado ka bang gusto mong tanggaling ang attachment file na ito?</confirm-deleteattachment>
       <confirm-deleteattcomment>Sigurado ka bang gusto mong tanggalin ang komentong ito?</confirm-deleteattcomment>
       <access-denied-exception>Ang pag-access ay hindi pinahintulutan. Maaaring wala kang mga pribiliheyo sa pagbasa, o ang dokumento ay maaaring natanggal o nabago.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>Ang elementong ito ay binura o binago. Mangyaring pindutin ang pindutan ng Refresh.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Tanggali ang attachment file</remove-attachment>
@@ -599,7 +599,7 @@
       <WebDavView>Buksan sa MS Office</WebDavView>
       <Download>I-download</Download>
       <OpenDocument>Remote na Pag-edit</OpenDocument>
-      <EditProperty>Edit Document Properties</EditProperty>
+      <EditProperty>Baguhin ang mga Katangian ng Dokumento</EditProperty>
       <UploadNewVersion>Mag-upload ng bagong bersyon</UploadNewVersion>
       <CreateNewVersion>I-save bilang bagong bersyon</CreateNewVersion>
     </event>
@@ -633,7 +633,7 @@
       <UIPublicationPanel>Pagbabago</UIPublicationPanel>
       <UIPublicationSchedule>Naka-iskedyul</UIPublicationSchedule>
       <UIPublicationPagesContainer>Mga pahina</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIPublicationHistory>Kasaysayan</UIPublicationHistory>
       <UIVersionViewer>Tagatingin ng Bersyon</UIVersionViewer>
 
       <UIPropertyTab>Mga Katangian</UIPropertyTab>
@@ -649,7 +649,7 @@
       <UIConstraintsForm>Form ng mga Limitasyon</UIConstraintsForm>
       <UIViewSearchResult>Tingnan ang Nilalaman</UIViewSearchResult>
       <UIContentNameSearch>Maghanap ayon sa Pangalan</UIContentNameSearch>
-      <UINodeInfo>Version Info</UINodeInfo>
+      <UINodeInfo>Impormasyon para bersyon</UINodeInfo>
       <UINodeProperty>Katangian ng Node</UINodeProperty>
       <UIActionListContainer>Magagamit na mga Aksyon</UIActionListContainer>
       <UIActionContainer>Magdagdag ng Aksyon</UIActionContainer>
@@ -658,7 +658,7 @@
       <UIAddLanguageContainer>Magdagdag ng wika</UIAddLanguageContainer>
       <UINonPublishedForm>Ang kalagayan</UINonPublishedForm>
       <UIPublishedForm>Kalagayan</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
+      <UIPublicationLogList>Kasaysayan</UIPublicationLogList>
       <UIDocumentWithTree>Tingnan ang payl</UIDocumentWithTree>
       <UIDocumentInfo>Tingnan ng Dokumento</UIDocumentInfo>
       <UICategoriesSelectPanel>Pumili ng mga Kategorya</UICategoriesSelectPanel>
@@ -680,7 +680,7 @@
     <header>
       <name>Ang pangalan</name>
       <multiValue>Maraming halaga</multiValue>
-      <value>Value</value>
+      <value>Halaga</value>
       <action>Ang kilos</action>
     </header>
     <label>
@@ -880,7 +880,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Ang keyword na ito ay hindi pinayagan.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
@@ -899,8 +899,8 @@
     </label>
     <msg>
       <keyword-null>Mangyaring ipasok ang iyong keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>Walang mga resulta na nakita.</not-found>
+      <keyword-not-allow>Ang keyword na ito ay hindi pinayagan.</keyword-not-allow>
       <value-null>Mangyaring ipasok ang iyong keyword o mga hadlang.</value-null>
       <value-save-null>Mangyaring maglagay ng isang keyword o limitasyon bago i-save ang tanung na ito.</value-save-null>
       <inputSearch-invalid>May mga hindi wastong karakter sa input ng paghahanap.</inputSearch-invalid>
@@ -915,7 +915,7 @@
   <UISearchResult>
     <msg>
       <not-support>Walang View template para sa dokumentong ito.</not-support>
-      <empty>No results found.</empty>
+      <empty>Walang mga resulta na nakita.</empty>
       <access-denied>Hindi mo maaring buksan ang folder na ito, maaaring dahil hindi na ito umiiral o dahil wala kang karapatan para i-access ito.</access-denied>
       <query-invalid>Ang tanong ay hindi wasto.</query-invalid>
     </msg>
@@ -946,7 +946,7 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>Walang View na template para sa dokumentong ito</not-support>
-      <empty>No results found.</empty>
+      <empty>Walang mga resulta na nakita.</empty>
       <access-denied>Hindi mo maaaring tingnan ang dokumentong ito, maaaring dahil ang template na ito ay hindi suportado o dahil ang pag-access ay hindi pinapayagan.</access-denied>
       <query-invalid>Ang query ay hindi wasto</query-invalid>
     </msg>
@@ -961,16 +961,16 @@
     </header>
     <title>
       <typeASC>Ihanay ayon sa uri ng dokumento sa pataas na pagkakasunod</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
+      <typeDESC>Ihanay ayon sa uri ng dokumento sa pababa na pagakakasunod</typeDESC>
+      <scoreASC>Ihanay ayon sa puntos sa pataas na pagkakasunod</scoreASC>
+      <scoreDESC>Ihanay ayon sa puntos sa pababa na pagkakasunod</scoreDESC>
+      <nameASC>Ihanay ayon sa pangalan sa pataas na pagkakasunod</nameASC>
+      <nameDESC>Ihanay ayon sa pangalan sa pababa na pagkakasunod</nameDESC>
       <datecreatedASC>Ihanay ayon sa petsa ng Pagkakagawa sa pataas na pagkakasunod</datecreatedASC>
       <datecreatedDESC>Ihanay ayon sa petsa ng Pagkakagawa sa pababa na pagkakasunod</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Tingnan ang item na ito</View>
       <OpenFolder>Pumunta sa Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
@@ -979,7 +979,7 @@
       <not-support>Walang View na template para sa item na ito</not-support>
       <empty>Walang mga resulta na natagpuan</empty>
       <access-denied>Hindi mo maaaring tingnan ang item na ito, maaaring dahil ang template na ito ay hindi suportado o dahil ang pag-access ay hindi pinapayagan.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <query-invalid>Ang query ay hindi wasto</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -991,24 +991,24 @@
       <score>Puntos</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <typeASC>Ihanay ayon sa uri ng dokumento sa pataas na pagkakasunod</typeASC>
+      <typeDESC>Ihanay ayon sa uri ng dokumento sa pababa na pagakakasunod</typeDESC>
+      <scoreASC>Ihanay ayon sa puntos sa pataas na pagkakasunod</scoreASC>
+      <scoreDESC>Ihanay ayon sa puntos sa pababa na pagkakasunod</scoreDESC>
+      <nameASC>Ihanay ayon sa pangalan sa pataas na pagkakasunod</nameASC>
+      <nameDESC>Ihanay ayon sa pangalan sa pababa na pagkakasunod</nameDESC>
+      <datecreatedASC>Ihanay ayon sa petsa ng pagkakagawa sa pataas na pagkakasunod</datecreatedASC>
       <datecreatedDESC>Ihanay ayon sa petsa ng pagkakagawa sa pababa na pagkakasunod</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>Tingnan ang item na ito</View>
       <OpenFolder>Pumunta sa Folder</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
       <not-support>Walang View ang template para sa item na ito.</not-support>
-      <empty>No results found.</empty>
+      <empty>Walang mga resulta na nakita.</empty>
       <access-denied>Hindi mo maaaring tingnan ang item na ito, maaaring dahil ito ay walang View ang template o dahil wala kang access dito.</access-denied>
       <query-invalid>Ang query ay hindi wasto.</query-invalid>
     </msg>
@@ -1023,13 +1023,13 @@
       <AddRemoveFavourite>Magdagdag/alisin sa Paborito</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <typeASC>Ihanay ayon sa uri ng dokumento sa pataas na pagkakasunod</typeASC>
+      <typeDESC>Ihanay ayon sa uri ng dokumento sa pababa na pagakakasunod</typeDESC>
+      <scoreASC>Ihanay ayon sa puntos sa pataas na pagkakasunod</scoreASC>
+      <scoreDESC>Ihanay ayon sa puntos sa pababa na pagkakasunod</scoreDESC>
+      <nameASC>Ihanay ayon sa pangalan sa pataas na pagkakasunod</nameASC>
+      <nameDESC>Ihanay ayon sa pangalan sa pababa na pagkakasunod</nameDESC>
+      <datecreatedASC>Ihanay ayon sa petsa ng pagkakagawa sa pataas na pagkakasunod</datecreatedASC>
       <datecreatedDESC>Ihanay ayon sa petsa ng pagkakagawa sa pababa na pagkakasunod</datecreatedDESC>
     </title>
     <tooltip>
@@ -1166,7 +1166,7 @@
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Walang mga resulta na nakita.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>Sigurado ka bang gusto mong burahin ang query na ito?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Walang mga resulta na nakita.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1714,7 +1714,7 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>Magdagdag ng Bagong Dokumento</title>
     <action>
       <Save>#{word.save}</Save>
       <SaveAndClose>I-save at Isarado</SaveAndClose>
@@ -1767,7 +1767,7 @@
   <UIQuerySaveForm>
     <title>I-save ang porma ng pagtatanong</title>
     <label>
-      <query>Query</query>
+      <query>Pagtatanong</query>
       <name>Ang Pangalan ng nagtatanong</name>
     </label>
     <action>
@@ -1782,8 +1782,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>Baguhin ang Aksyon</UIActionForm>
+      <EditFormAction>Baguhin ang Aksyon</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -2100,7 +2100,7 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <empty-input>Ang halaga ng patlang na '{0}' ay wala o walang laman.</empty-input>
       <Invalid-char>Ang patlang na '{0}' ay naglalaman ng iilang mga imbalidong tauhan. Pakipasok ng ibang halaga.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
@@ -2242,7 +2242,7 @@
       <showActionBar>Ipakita ang Aksyon na Bar</showActionBar>
       <showSideBar>Ipakita ang bar sa kaliwa</showSideBar>
       <showFilterBar>Ipakita ang Filter na Bar</showFilterBar>
-      <nodePath>Select Path</nodePath>
+      <nodePath>Pumili ng Landas</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
@@ -2311,13 +2311,13 @@
     <msg>
       <addFolder-successful>Ang symlink na '{0}' ay matagumpay na naidagdag.</addFolder-successful>
       <name-invalid>Pakipasok ng pangalan ng symlink.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
+      <name-not-allowed>Ang pangalan na ito ay hindi pinapayagan.</name-not-allowed>
+      <fileName-error>Ang pangalan ng file ay hindi balido.</fileName-error>
       <constraint-violation>Hindi ka maaaring magdagdag ng item na uring '{0}' dito.</constraint-violation>
       <repository-exception>Ang pag-access ay hindi pinayagan. Wala kang permiso para magdagdag ng symlink dito.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Hindi ka maaaring mag-save ng Polder. Ang pangalan na binigay ay kinakailangang nasa numerical na format.</numberformat-exception>
       <path-node-invalid>Pakipasok ng landas.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <path-node-not-allowed>Ang pangalan na ito ay hindi pinapayagan.</path-node-not-allowed>
       <non-node>Mangyaring piliin ang trust target; maaaring wala kang mga karapatan para basahin ang item na ito.</non-node>
       <cannot-save>Hindi ka maaaring magdagdag ng symlink para sa uri ng dokumentong ito.</cannot-save>
       <item-exists-exception>Mayroong item na may parehong pangalan na umiiral na.</item-exists-exception>
@@ -2340,18 +2340,18 @@
     <msg>
       <addFolder-successful>Ang symlink na '{0}' ay matagumpay na naidagdag.</addFolder-successful>
       <name-invalid>Pakipasok ang pangalan ng symlink.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
+      <name-not-allowed>Ang pangalan na ito ay hindi pinapayagan.</name-not-allowed>
+      <fileName-error>Ang pangalan ng file ay hindi balido.</fileName-error>
       <constraint-violation>Hindi mo maaaring idagdag ang '{0}' na uri sa kasalukuyang item.</constraint-violation>
       <repository-exception>Ang pag-access ay hindi pinayagan. Wala kang permiso para magdagdag ng symlink sa item na ito.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Hindi ka maaaring mag-save ng Polder. Ang pangalan na binigay ay kinakailangang nasa numerical na format.</numberformat-exception>
       <path-node-invalid>Pakipasok ng landas.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <path-node-not-allowed>Ang pangalan na ito ay hindi pinapayagan.</path-node-not-allowed>
       <non-node>Mangyaring pumili ng trust target; maaaring wala kang karapatan para basahin ang node na ito.</non-node>
       <cannot-save>May mali na naganap habang ginagawa ang symlink.</cannot-save>
       <item-exists-exception>Mayroong item na may parehong pangalan na umiiral na.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <translation-node-same-language-default>Ang nasalin na dokumento ay may parehong wika na default na wika sa kasalukuyang dokumento.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Ang target na item na ito ay hindi natukoy.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
@@ -2362,7 +2362,7 @@
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
+      <UIContentSelectorOne>Pumili ng Dokumento</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
@@ -2420,7 +2420,7 @@
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
+        <UICategoriesAddedList>Ang mga Kategorya ng Reperensiya</UICategoriesAddedList>
         <UIOneNodePathSelector>Pumili ng Kategorya</UIOneNodePathSelector>
       </label>
     </tab>
@@ -2460,7 +2460,7 @@
 <ReadOnly>Buksan at basahin -lamang</ReadOnly>
 <Cancel>Ikansela</Cancel>
       <KeepBoth>Itago pareho</KeepBoth>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>I-save bilang bagong bersyon</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
@@ -2468,9 +2468,9 @@
     <label>
       <Close>#{word.close}</Close>
       <OK>Sige</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <ReplaceData>Palitan ang Data</ReplaceData>
+      <Back>Bumalik sa Pagpalit ng Pangalan</Back>
+      <Keepfile>Panatilihin ang parehong mga file</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
@@ -2623,7 +2623,7 @@
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-comment>Tanggalin ang komentong ito</remove-comment>
       <edit-comment>I-edit ang komentong ito</edit-comment>
     </tooltip>
   </Comments>
@@ -2653,7 +2653,7 @@
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Sigurado ka bang gusto mong tanggaling ang attachment file na ito?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
@@ -2689,7 +2689,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Naka-save na mga Paghahanap</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2704,10 +2704,10 @@
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Image</Images>
+      <Images>Larawan</Images>
       <Video>Video</Video>
-      <Music>Music</Music>
-      <Documents>Document</Documents>
+      <Music>Musika</Music>
+      <Documents>Ang Dokumento</Documents>
       <Content>Ang nilalaman</Content>
     </label>
     <title>Itakda ang Filter para sa mga Preperensiya</title>
@@ -2749,10 +2749,10 @@
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
+      <showOwnedByUser>Pag-aari ko</showOwnedByUser>
       <showFavourites>Ang Mga Paborito</showFavourites>
       <showHiddens>Ang Nakatago</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showTrash>Ang Basura</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2822,7 +2822,7 @@
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
+      <UIEditingTagsForm>I-edit ang Tag</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -2856,7 +2856,7 @@
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied.</editTagAccessDenied>
+      <editTagAccessDenied>Ang pag-access ay hindi pinayagan.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
@@ -2868,7 +2868,7 @@
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
+      <UINodeTypeSelector>Pumili ng Uri ng Node</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
@@ -2976,14 +2976,14 @@
       <author>Ang May-Akda</author>
       <status>Ang katayuan</status>
       <action>Ang Aksyon</action>
-      <label>Revision</label>
+      <label>Pagbabago</label>
       <none>Walang mga rebesyon</none>
       <seeall>Tingnan ang lahat ng mga bersyon</seeall>
       <currentVersion>Kasalukuyang Rebisyon</currentVersion>
       <confirm>Mawawala ang iyang naka-draft na trabaho. Sigurado ka bang gusto mong palitan ang kasalukuyang rebisyon?</confirm>
     </revisions>
     <status>
-      <version>Revision</version>
+      <version>Pagbabago</version>
       <title>Ang kalagayan</title>
       <archived>Naka-archive</archived>
       <obsolete>Lipas</obsolete>
@@ -2998,7 +2998,7 @@
       <live>Nailathala</live>
     </status>
     <scheduled>
-      <title>Scheduled</title>
+      <title>Naka-iskedyul</title>
       <from>Mula sa</from>
       <to>Para sa</to>
     </scheduled>
@@ -3051,8 +3051,8 @@
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublicationContainer>Ang namamahala sa publikasyon</UIPublicationContainer>
+      <UIPublishingPanel>Ang namamahala sa publikasyon</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
@@ -3103,10 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>Walang mga view na na-apply para sa iyong pahintulot sa pag-access sa drive na '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <access-denied>Hindi pinayagan ang pagpasok. Maaaring wala kang pahintulot sa workspace ng drive na ‘{0}’.</access-denied>
       <not-found>Ang dokumentong sinusubukang mong i-access ay hindi na magagamit.</not-found>
       <empty-drives>Ang pag-access ay hindi pinayagan. Maaaring walang drive sa repository na ito o wala kang pahintulot para i-access ang anumang mga drive sa repositoryng ito.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Ang drive ‘{0}’ ay nakaimbak sa isang hindi kilala na workspace. Mangyaring mag-reconfigure sa drive na ito.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3140,7 +3140,7 @@
   <UNCLASSIFIED>Hindi nauuri</UNCLASSIFIED>
   <NOCONTRACT>Walang kontrata</NOCONTRACT>
   <one-minute>Isang Minuto</one-minute>
-  <hourly>Hourly</hourly>
+  <hourly>Oras-Oras</hourly>
   <daily>Araw-araw</daily>
   <quarterly>Kada tatlong buwan</quarterly>
   <yearly>Taunan</yearly>
@@ -3194,7 +3194,7 @@
     <Keep>Panatilihing pareho</Keep>
     <Replace>Ang Palitan</Replace>
     <Canceled>Kanselado</Canceled>
-      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <UploadNewVersion>Mag-upload ng bagong bersyon</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Gusto mo bang itigil ang pag-unlad ng lahat ng mga payl?</AbortAllConfirmation>
   </label>

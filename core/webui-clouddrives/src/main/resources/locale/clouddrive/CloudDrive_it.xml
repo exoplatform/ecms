@@ -28,13 +28,13 @@
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
+      <ConnectCloudDriveForm>Connetti Documenti del Cloud</ConnectCloudDriveForm>
       <UISharingManager>Condivisione file del cloud</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Connetti Documenti del Cloud</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
@@ -49,9 +49,9 @@
   <CloudFileViewer>
     <event>
       <OpenFileOn>Apri $fileUrl su $serviceName</OpenFileOn>
-      <OpenOn>Open on</OpenOn>
-      <EditFile>Edit</EditFile>
-      <ViewFile>View</ViewFile>
+      <OpenOn>Apri su</OpenOn>
+      <EditFile>Modificare</EditFile>
+      <ViewFile>Vista</ViewFile>
     </event>
     <label>
       <sourceview>Visualizza codice sorgente</sourceview>
@@ -90,25 +90,25 @@
     <label>
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Provider</provider>
-      <description>Description</description>
-      <active>Active</active>
+      <provider>Fornitore</provider>
+      <description>Descrizione</description>
+      <active>Attiva</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documents</title>
+      <title>Documenti</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Connettarsi</connect>
       </button>
       <button>
-        <disconnect>Disconnect</disconnect>
+        <disconnect>Disconnetti</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

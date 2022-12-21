@@ -36,27 +36,27 @@
       <title>Belge düzenleyiciler</title>
       <table>
         <Provider>Sağlaycı</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Açıklama</Description>
+        <Active>Etkin</Active>
+        <Permissions>İzinler</Permissions>
       </table>
       <modal>
         <title>İzinleri düzenle</title>
         <SearchLabel>Kullanıcı veya grup adını girin</SearchLabel>
         <WithPermissions>Kimin izni var</WithPermissions>
-        <None>None</None>
+        <None>Hiçbiri</None>
         <Everybody>Herkes</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Kaydet</Save>
+        <Cancel>İptal</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>Düzenle</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Uyarı</title>
       <message>Uzun bir süredir aktif olmadığınız görünüyor. Düzenleyici sayfası, %s saniye içinde kapatılacak.</message>
     </idlePopup>
   </editors>

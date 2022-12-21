@@ -34,7 +34,7 @@
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Connecter des documents Cloud</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
@@ -49,9 +49,9 @@
   <CloudFileViewer>
     <event>
       <OpenFileOn>Ouvrir $fileUrl sur $serviceName</OpenFileOn>
-      <OpenOn>Open on</OpenOn>
-      <EditFile>Edit</EditFile>
-      <ViewFile>View</ViewFile>
+      <OpenOn>Ouvrir dans</OpenOn>
+      <EditFile>Modifier</EditFile>
+      <ViewFile>Vue</ViewFile>
     </event>
     <label>
       <sourceview>Afficher le code source</sourceview>
@@ -90,9 +90,9 @@
     <label>
       <title>Stockage cloud</title>
       <cloudDrives>Lecteurs Cloud</cloudDrives>
-      <provider>Provider</provider>
+      <provider>Connecteur</provider>
       <description>Description</description>
-      <active>Active</active>
+      <active>Actif</active>
       <ConnectionToCloud>Connexion aux lecteurs de stockage en ligne</ConnectionToCloud>
     </label>
   </cloudStorage>
@@ -103,19 +103,19 @@
       <description>Accédez à vos lecteurs personnels depuis votre Digital Workplace</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
+      <title>Connectez vos lecteurs personnels</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Se connecter</connect>
       </button>
       <button>
         <disconnect>Se déconnecter</disconnect>
       </button>
       <noConnector>Aucun connecteur de lecteur personnel n'est disponible</noConnector>
-      <connectedAccountWith>You are connected with</connectedAccountWith>
+      <connectedAccountWith>Vous êtes connecté avec</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>Votre calendrier est correctement connecté</successMessage>
-      <errorMessage>Failed connection</errorMessage>
+      <errorMessage>Échec de la connexion</errorMessage>
       <errorSaveUserSettings>Impossible de connecter le compte du lecteur distant</errorSaveUserSettings>
       <disconnectSuccessMessage>Votre lecteur distant a été correctement déconnecté</disconnectSuccessMessage>
       <disconnectErrorMessage>Échec de la connexion</disconnectErrorMessage>

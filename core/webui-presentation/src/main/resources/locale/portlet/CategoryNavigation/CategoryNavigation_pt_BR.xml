@@ -30,15 +30,15 @@
       <UICategoryNavigationTargetPathFormInputSet>Mostrar na Página</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Seleção de Árvore</TreeSelectionBlock>
       <DisplaySettingBlock>Definições de Exibição</DisplaySettingBlock>
-      <AdvancedBlock>Advanced</AdvancedBlock>
+      <AdvancedBlock>Avançado</AdvancedBlock>
   
-  <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
-  <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
-  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationTreePathFormInputSet>Caminho de destino</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Caminho de destino</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Cabeçalho</UICategoryNavigationHeaderFormStringInput>
   <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automático</UICategoryNavigationAutomaticDetectionCheckBoxInput>
   <UICategoryNavigationDynamicNavigationLabel>Navegação Dinâmica</UICategoryNavigationDynamicNavigationLabel>
   <UICategoryNavigationWithClvFormStringInput>com</UICategoryNavigationWithClvFormStringInput>
-  <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreepathPopupWindow>Caminho de destino</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
@@ -52,7 +52,7 @@
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>The category does not exist.</not-existed-category>
+      <not-existed-category>A categoria não existe</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

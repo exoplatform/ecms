@@ -1379,7 +1379,7 @@
       <version>Version</version>
       <date>Date</date>
       <author>Modifié par</author>
-      <summary>Summary</summary>
+      <summary>Résumé</summary>
       <action>Action</action>
     </labels>
   </UIVersionInfo>
@@ -1496,8 +1496,8 @@
       <can-not-compare>Impossible de comparer les deux versions</can-not-compare>
       <compare-unavailable>La comparaison de version n’est pas disponible pour ce document</compare-unavailable>
       <DateChange>Le {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <PreviousAndNextCompare>Modifications de {0} à {1}</PreviousAndNextCompare>
+      <ComparedWith>Comparé à</ComparedWith>
       <restoredFrom>Restauré depuis la version {0}</restoredFrom>
     </label>
   </UIDiff>

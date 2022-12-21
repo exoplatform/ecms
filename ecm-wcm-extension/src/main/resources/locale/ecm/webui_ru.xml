@@ -48,14 +48,14 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Выбрать пользователя</UIPermissionUser>
+      <UIPermissionUser>Выберите пользователя</UIPermissionUser>
       <UIPermissionMembership>Select Role</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Выбрать пользователя</selectUser>
+      <selectUser>Выберите пользователя</selectUser>
       <selectGroup>Просмотреть и выбрать группу</selectGroup>
     </label>
   </UIPermissionUser>

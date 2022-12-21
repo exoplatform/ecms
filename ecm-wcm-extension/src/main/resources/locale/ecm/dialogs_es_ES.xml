@@ -406,7 +406,7 @@
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>New Document</UINewDocumentForm>
+      <UINewDocumentForm>Nuevo documento</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Introduce el nombre del documento.</name-invalid>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <constraint-violation>No puede añadir un documento de tipo '{0}' aquí.</constraint-violation>
+      <repository-exception>Ocurrió un error inesperado. Póngase en contacto con su administrador para obtener más detalles.</repository-exception>
       <repository-exception-permission>No tienes permiso para añadir nuevos documentos aquí.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>No se puede guardar este documento. El nombre proporcionado debe estar en formato numérico.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>No puedes guardar el documento. Ya existe un elemento con el mismo nombre.</not-allow-sameNameSibling>
     </msg>

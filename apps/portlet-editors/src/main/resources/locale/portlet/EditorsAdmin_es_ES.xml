@@ -36,27 +36,27 @@
       <title>Editores de documentos</title>
       <table>
         <Provider>Proveedor</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Descripción</Description>
+        <Active>Activo</Active>
+        <Permissions>Permisos</Permissions>
       </table>
       <modal>
         <title>Editar permisos</title>
         <SearchLabel>Introduce el nombre de usuario o grupo</SearchLabel>
         <WithPermissions>¿Quién tiene permiso?</WithPermissions>
-        <None>None</None>
+        <None>Ninguno</None>
         <Everybody>Todo el mundo</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Guardar</Save>
+        <Cancel>Cancelar</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>Editar</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Aviso</title>
       <message>Parece que no ha estado activo durante mucho tiempo. La página del editor se cerrará en %s segundos.</message>
     </idlePopup>
   </editors>

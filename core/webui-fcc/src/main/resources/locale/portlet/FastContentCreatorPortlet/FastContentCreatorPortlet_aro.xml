@@ -101,7 +101,7 @@
       <child-not-found>هذه العقدة لا تملك فروع بعد.</child-not-found>
     </info>
     <header>
-      <name>اسم</name>
+      <name>الاسم</name>
       <action>اجراء</action>
     </header>
   </UITreeList>
@@ -146,8 +146,8 @@
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>حدد الموقع</UIOneNodePathSelector>
-      <UIPermissionSelector>صلاحيّة المستكشف</UIPermissionSelector>
+      <UIOneNodePathSelector>اختيار المكان</UIOneNodePathSelector>
+      <UIPermissionSelector>مستكشف الصلاحيّات</UIPermissionSelector>
       <UICategoriesSelector>إضافة فئات</UICategoriesSelector>
     </title>
   </PopupComponent>
@@ -161,7 +161,7 @@
   <UITabPane>
     <title>
       <UICategoriesSelectPanel>اختيار فئات</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>الفئات المُشار إليها</UISelectedCategoriesGrid>
+      <UISelectedCategoriesGrid>الفئات الموصولة</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 

@@ -28,7 +28,7 @@
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
+      <ConnectCloudDriveForm>Підключити документи з хмари</ConnectCloudDriveForm>
       <UISharingManager>Відкриття спільного доступу до файлу у хмарі</UISharingManager>
     </title>
   </UIPopupWindow>
@@ -50,8 +50,8 @@
     <event>
       <OpenFileOn>Відкрити $fileUrl в $serviceName</OpenFileOn>
       <OpenOn>Відкрити у</OpenOn>
-      <EditFile>Edit</EditFile>
-      <ViewFile>View</ViewFile>
+      <EditFile>Редагувати</EditFile>
+      <ViewFile>Перегляд</ViewFile>
     </event>
     <label>
       <sourceview>Переглянути вихідний код</sourceview>
@@ -90,25 +90,25 @@
     <label>
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Provider</provider>
-      <description>Description</description>
-      <active>Active</active>
+      <provider>Постачальник</provider>
+      <description>Опис</description>
+      <active>Активні</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documents</title>
+      <title>Документи</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Додати в контакти</connect>
       </button>
       <button>
-        <disconnect>Disconnect</disconnect>
+        <disconnect>Відключити</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

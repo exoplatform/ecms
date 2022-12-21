@@ -28,13 +28,13 @@
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
+      <ConnectCloudDriveForm>Conectar documentos en la nube</ConnectCloudDriveForm>
       <UISharingManager>Compartir archivos en la nube</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Conectar documentos en la nube</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
@@ -49,9 +49,9 @@
   <CloudFileViewer>
     <event>
       <OpenFileOn>Abrir $fileUrl en $serviceName</OpenFileOn>
-      <OpenOn>Open on</OpenOn>
-      <EditFile>Edit</EditFile>
-      <ViewFile>View</ViewFile>
+      <OpenOn>Abrir en</OpenOn>
+      <EditFile>Editar</EditFile>
+      <ViewFile>Ajuste</ViewFile>
     </event>
     <label>
       <sourceview>Ver código fuente</sourceview>
@@ -90,28 +90,28 @@
     <label>
       <title>Almacenamiento en la nube</title>
       <cloudDrives>Unidades en la nube</cloudDrives>
-      <provider>Provider</provider>
-      <description>Description</description>
-      <active>Active</active>
+      <provider>Proveedor</provider>
+      <description>Descripción</description>
+      <active>Activo</active>
       <ConnectionToCloud>Conexión con unidades en la nube</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documents</title>
+      <title>Documentos</title>
       <subtitle>Conecta tus unidades personales</subtitle>
       <description>Accede a tus unidades personales desde tu espacio de trabajo digital</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
+      <title>Conecta tus unidades personales</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Conectar</connect>
       </button>
       <button>
-        <disconnect>Disconnect</disconnect>
+        <disconnect>Desconectar</disconnect>
       </button>
       <noConnector>No hay conector de unidad personal disponible</noConnector>
-      <connectedAccountWith>You are connected with</connectedAccountWith>
+      <connectedAccountWith>Estás conectado con</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>Tu unidad en la nube se ha conectado con éxito</successMessage>

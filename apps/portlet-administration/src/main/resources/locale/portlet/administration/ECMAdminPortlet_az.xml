@@ -8,7 +8,7 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
+        <Templates>Şablonlar</Templates>
         <Explorer>Explorer</Explorer>
         <Repository>Repository</Repository>
         <Advanced>Advanced</Advanced>
@@ -19,7 +19,7 @@
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Documents</UITemplatesManager>
+      <UITemplatesManager>Sənədlər</UITemplatesManager>
       <UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
@@ -53,10 +53,10 @@
       <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
+      <add>Əlavə Et</add>
       <paste>Paste</paste>
       <cut>Cut</cut>
-      <copy>Copy</copy>
+      <copy>Kopyala</copy>
       <remove>Delete</remove>
     </title>
   </UITaxonomyManager>
@@ -125,11 +125,11 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
       <read>Read</read>
       <addNode>Add Node</addNode>
       <setProperty>Set Property</setProperty>
-      <remove>Remove</remove>
+      <remove>Sil</remove>
       <action>Action</action>
     </header>
   </UIPermissionTreeInfo>
@@ -314,12 +314,12 @@
     <header>
       <name>Element Name</name>
       <type>Type</type>
-      <description>Description</description>
+      <description>Açıqlama</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Description</description>
+      <description>Açıqlama</description>
     </info>
     <tab>
       <element>Elements</element>
@@ -346,7 +346,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
-      <permissions>Permissions</permissions>
+      <permissions>İcazələr</permissions>
       <views>View</views>
       <action>Action</action>
     </header>
@@ -465,9 +465,9 @@
       <action>Action</action>
     </header>
     <action>
-      <Export>Export</Export>
-      <Import>Import</Import>
-      <Add>Add</Add>
+      <Export>Xaric edin</Export>
+      <Import>Daxil etmək</Import>
+      <Add>Əlavə Et</Add>
     </action>
     <tooltip>
       <View>View</View>
@@ -486,7 +486,7 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <header>
       <icon>Icon</icon>
@@ -550,7 +550,7 @@
       <AddConstraints>Add Constraints</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Add Type</AddType>
-      <AddValue>Add</AddValue>
+      <AddValue>Əlavə Et</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -631,7 +631,7 @@
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Xaric edin</Export>
       <UncheckAll>Uncheck all</UncheckAll>
       <CheckAll>Check all</CheckAll>
     </action>
@@ -680,7 +680,7 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>Daxil etmək</Import>
       <Upload>Re-upload</Upload>
     </action>
     <header>
@@ -711,7 +711,7 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
       <AddPath>Add Path</AddPath>
@@ -788,7 +788,7 @@
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Documents</UITemplateContainer>
+      <UITemplateContainer>Sənədlər</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
       <UIActionScriptContainer>Action</UIActionScriptContainer>
@@ -817,7 +817,7 @@
     </title>
     <header>
       <name>Name</name>
-      <permissions>Permissions</permissions>
+      <permissions>İcazələr</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
       <action>Action</action>
@@ -839,7 +839,7 @@
   <AddPopup>
     <title>
       <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Add Template</AddPopup>
+      <AddPopup>Şablon Əlavə Et</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -855,11 +855,11 @@
     </title>
     <header>
       <tabName>Tab</tabName>
-      <localizeButtons>Description</localizeButtons>
+      <localizeButtons>Açıqlama</localizeButtons>
       <action>Actions</action>
     </header>
     <action>
-      <AddTab>Add</AddTab>
+      <AddTab>Əlavə Et</AddTab>
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
@@ -887,7 +887,7 @@
       <Delete>Delete</Delete>
     </title>
     <header>
-      <friendlyPermission>Permissions</friendlyPermission>
+      <friendlyPermission>İcazələr</friendlyPermission>
       <action>Action</action>
     </header>
     <action>
@@ -904,10 +904,10 @@
 
   <UIViewPermissionForm>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <label>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>İstifadəçi və ya Qrup</userOrGroup>
     </label>
     <msg>
       <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
@@ -921,7 +921,7 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
@@ -952,7 +952,7 @@
       <tabName>Tab Name</tabName>
       <permission>Permission</permission>
       <tabs>Tabs</tabs>
-      <template>Templates</template>
+      <template>Şablonlar</template>
       <enableVersion>Enable Version</enableVersion>
       <addFolder>Add Folder</addFolder>
       <addDocument>Add Document</addDocument>
@@ -990,7 +990,7 @@
       <addSymLink>Add Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Paylaş</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a version</uploadNewVersion>
@@ -1035,7 +1035,7 @@
 
   <tab_permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>İstifadəçini seç</SelectUser>
       <SelectMember>Select Member</SelectMember>
       <AddAny>Any</AddAny>
     </title>
@@ -1058,7 +1058,7 @@
       <action>Action</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <msg>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1304,8 +1304,8 @@
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>İstifadəçini seç</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>İstifadəçini seç</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
@@ -1324,7 +1324,7 @@
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Qrupu seç</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
@@ -1366,7 +1366,7 @@
       <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
-      <permissions>Permissions</permissions>
+      <permissions>İcazələr</permissions>
     </label>
     <msg>
       <homapath-emty>Input Path</homapath-emty>
@@ -1386,7 +1386,7 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
+      <Save>Saxla</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -1411,7 +1411,7 @@
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>İcazə əlavə et</AddDrivePermissionSelector>
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1436,10 +1436,10 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
-      <remove>Remove</remove>
+      <remove>Sil</remove>
       <action>Action</action>
     </header>
     <msg>
@@ -1451,9 +1451,9 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>İstifadəçini seç</SelectUser>
       <SelectMember>Select Role</SelectMember>
-      <AddAny>Everyone</AddAny>
+      <AddAny>Hər Kəs</AddAny>
     </title>
   </permission>
   <!--
@@ -1463,7 +1463,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>İstifadəçini seç</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
@@ -1481,10 +1481,10 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>İstifadəçi və ya Qrup</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
-      <remove>Remove</remove>
+      <remove>Sil</remove>
     </label>
     <title>Add permission to this node</title>
     <action>
@@ -1524,7 +1524,7 @@
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Əlavə Et</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1542,7 +1542,7 @@
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Əlavə Et</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1560,7 +1560,7 @@
       <action>Action</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Şablon Əlavə Et</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1595,7 +1595,7 @@
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Əlavə Et</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1618,7 +1618,7 @@
       <Delete>Delete</Delete>
     </title>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Əlavə Et</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1631,7 +1631,7 @@
       <template>Template</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
+      <AddTemplate>Şablon Əlavə Et</AddTemplate>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1888,7 +1888,7 @@
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
@@ -1927,7 +1927,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>Permissions</permission>
+      <permission>İcazələr</permission>
       <action>Actions</action>
     </header>
     <action>
@@ -1949,7 +1949,7 @@
       <type>Query Type</type>
       <statement>Statement</statement>
       <cache>Enable Cache Results</cache>
-      <permissions>Permissions</permissions>
+      <permissions>İcazələr</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -2000,7 +2000,7 @@
     <title>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
-      <Remove>Remove</Remove>
+      <Remove>Sil</Remove>
     </title>
     <action>
       <AddStyle>Add Style</AddStyle>
@@ -2087,17 +2087,17 @@
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -2142,7 +2142,7 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>İcazə əlavə et</AddPermission>
     </title>
   </step1>
   <step2>
@@ -2158,16 +2158,16 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Qrupu seç</selectGroup>
+      <selectUser>İstifadəçini seç</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Qrupu seç</selectGroup>
+      <selectUser>İstifadəçini seç</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2192,7 +2192,7 @@
 
   <MetadataPermission>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Qrupu seç</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
@@ -2210,8 +2210,8 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Qrupu seç</selectGroup>
+      <selectUser>İstifadəçini seç</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
@@ -2253,8 +2253,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Group</group>
-      <searchUser>User</searchUser>
+      <group>Qrup</group>
+      <searchUser>İstifadəçi</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2300,7 +2300,7 @@
   <UIUnLockForm>
     <label>
       <name>Path Node</name>
-      <permissions>Permissions</permissions>
+      <permissions>İcazələr</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2409,7 +2409,7 @@
   <UITagManager>
     <action>
       <title>
-        <RemoveStyle>Remove</RemoveStyle>
+        <RemoveStyle>Sil</RemoveStyle>
         <AddStyle>Add Style</AddStyle>
       </title>
     </action>
@@ -2463,7 +2463,7 @@
 
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
       <action>Action</action>
     </header>
     <action>
@@ -2476,10 +2476,10 @@
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add Permission</title>
+    <title>İcazə əlavə et</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <label>
       <userOrGroup>Roles:</userOrGroup>
@@ -2491,7 +2491,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Qrupu seç</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2509,7 +2509,7 @@
   <UIActionForm>
     <title>
       <ShowComponent>Open Window</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <removeReference>Sil</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>
@@ -2550,7 +2550,7 @@
   <DriveInputSet>
     <title>
       <ChooseNodeType>Select Node Types</ChooseNodeType>
-      <RemoveNodeType>Remove</RemoveNodeType>
+      <RemoveNodeType>Sil</RemoveNodeType>
     </title>
   </DriveInputSet>
   <PopupNodeTypeSelector>

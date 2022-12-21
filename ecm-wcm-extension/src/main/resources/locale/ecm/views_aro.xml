@@ -102,7 +102,7 @@
       <label>
         <name>الاسم</name>
         <versionable>قابل للإصدار</versionable>
-        <exo_owner>مالك</exo_owner>
+        <exo_owner>المالك</exo_owner>
         <exo_dateCreated>تاريخ الإضافة</exo_dateCreated>
         <exo_dateModified>تاريخ التعديل</exo_dateModified>
         <auditing>تدقيق</auditing>

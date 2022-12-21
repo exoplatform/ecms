@@ -1351,7 +1351,7 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Version</version>
+      <version>版本</version>
       <baseVersion>current draft</baseVersion>
       <addLabel>添加标签</addLabel>
       <removeLable>移除标签</removeLable>
@@ -1376,11 +1376,11 @@
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Version</version>
-      <date>Date</date>
+      <version>版本</version>
+      <date>日期</date>
       <author>Modified By</author>
-      <summary>Summary</summary>
-      <action>Action</action>
+      <summary>摘要</summary>
+      <action>操作</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1496,8 +1496,8 @@
       <can-not-compare>未能比较两个版本</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
-      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared With</ComparedWith>
+      <PreviousAndNextCompare>从{0}更改到{1}</PreviousAndNextCompare>
+      <ComparedWith>与比较</ComparedWith>
       <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -2460,7 +2460,7 @@
 <ReadOnly>打开只读</ReadOnly>
 <Cancel>关闭</Cancel>
       <KeepBoth>都保留</KeepBoth>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>创建一个新的版本</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 

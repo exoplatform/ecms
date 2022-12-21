@@ -36,27 +36,27 @@
       <title>Document editors</title>
       <table>
         <Provider>Furnizor</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Descriere</Description>
+        <Active>Activ</Active>
+        <Permissions>Drepturi</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
+        <None>Nici unul</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Salvaţi</Save>
+        <Cancel>Renunță</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>Modifică</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Avertisment</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

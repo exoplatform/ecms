@@ -9,7 +9,7 @@
     <tab>
       <label>
         <Templates>Mallar</Templates>
-        <Explorer>Explorer</Explorer>
+        <Explorer>Utforskaren</Explorer>
         <Repository>Repository</Repository>
         <Advanced>Avancerad</Advanced>
       </label>
@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Återställ</Reset>
     </action>
     <msg>
       <name-not-allowed>Förbjudet namn</name-not-allowed>
@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Lägg till behörighet</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Ta bort behörigheten</RemovePermission>
       <AddIcon>Lägg till ikon</AddIcon>
       <AddPath>Lägga till sökväg</AddPath>
     </title>
@@ -990,7 +990,7 @@
       <addSymLink>Lägg till Symlink</addSymLink>
       <checkIn>Check In</checkIn>
       <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
+      <shareDocuments>Dela</shareDocuments>
       <openDocument>Remote Edit</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a version</uploadNewVersion>
@@ -1023,7 +1023,7 @@
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
@@ -1074,7 +1074,7 @@
   -->
   <UITemplateForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Lägg till behörighet</AddPermission>
     </title>
     <action>
       <Save>#{word.save}</Save>
@@ -1386,8 +1386,8 @@
     <title>Add a permission to this node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Spara</Save>
+      <Reset>Återställ</Reset>
     </action>
     <msg>
       <checkbox-require>Välj minst en rättighet.</checkbox-require>
@@ -1405,7 +1405,7 @@
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
@@ -1737,7 +1737,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
@@ -1778,12 +1778,12 @@
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Väljare för behörighet</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
@@ -1976,7 +1976,7 @@
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Väljare för behörighet</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -2330,7 +2330,7 @@
       <action>Åtgärd</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Låsa upp</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Du har inte behörighet att komma åt noden med sökvägen {0}, eller denna nod är borttagen</access-denied-exception>

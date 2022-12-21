@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Select</select>
+        <select>Pumili</select>
       </title>
     </action>
   </UITreeList>
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Kahit anong Permiso</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

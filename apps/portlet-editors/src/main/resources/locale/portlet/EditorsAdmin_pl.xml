@@ -36,27 +36,27 @@
       <title>Document editors</title>
       <table>
         <Provider>Dostawca</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Opis</Description>
+        <Active>Aktywny</Active>
+        <Permissions>Uprawnienia</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
+        <None>Brak</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Zapisz</Save>
+        <Cancel>Anuluj</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>Edytuj</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Uwaga</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

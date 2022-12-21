@@ -36,27 +36,27 @@
       <title>Document-Editors</title>
       <table>
         <Provider>Anbieter</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Beschreibung</Description>
+        <Active>Aktiv</Active>
+        <Permissions>Berechtigungen</Permissions>
       </table>
       <modal>
         <title>Berechtigungen bearbeiten</title>
         <SearchLabel>Geben Sie den Benutzer- oder Gruppennamen ein</SearchLabel>
         <WithPermissions>Wer die Berechtigung hat</WithPermissions>
-        <None>None</None>
+        <None>Keine</None>
         <Everybody>Alle</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Speichern</Save>
+        <Cancel>Abbrechen</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>Bearbeiten</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Warnung</title>
       <message>Es scheint, als wären Sie schon lange nicht mehr aktiv gewesen. Die Editor-Seite wird in %s Sekunden geschlossen.</message>
     </idlePopup>
   </editors>

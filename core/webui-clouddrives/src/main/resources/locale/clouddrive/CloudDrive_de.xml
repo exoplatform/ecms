@@ -50,8 +50,8 @@
     <event>
       <OpenFileOn>Öffnen Sie $fileUrl unter $serviceName</OpenFileOn>
       <OpenOn>Öffnen auf</OpenOn>
-      <EditFile>Edit</EditFile>
-      <ViewFile>View</ViewFile>
+      <EditFile>Bearbeiten</EditFile>
+      <ViewFile>Einstellung</ViewFile>
     </event>
     <label>
       <sourceview>Quellcode anzeigen</sourceview>
@@ -90,28 +90,28 @@
     <label>
       <title>Cloud-Speicher</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Provider</provider>
-      <description>Description</description>
-      <active>Active</active>
+      <provider>Anbieter</provider>
+      <description>Beschreibung</description>
+      <active>Aktiv</active>
       <ConnectionToCloud>Verbindung zu Cloud-Drive</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documents</title>
+      <title>Dokumente</title>
       <subtitle>Verbinden Sie Ihre persönlichen Drives</subtitle>
       <description>Greifen Sie auf Ihre persönlichen Dokumente von Ihrem digitalen Arbeitsplatz aus zu.</description>
     </label>
     <drawer>
       <title>Verbinden Sie Ihre persönlichen Drives</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Verbinden</connect>
       </button>
       <button>
-        <disconnect>Disconnect</disconnect>
+        <disconnect>Trennen</disconnect>
       </button>
       <noConnector>Es ist keine persönliche Drive-Verbindung verfügbar</noConnector>
-      <connectedAccountWith>You are connected with</connectedAccountWith>
+      <connectedAccountWith>Sie sind verbunden mit</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>Ihr Cloud-Drive ist korrekt verbunden</successMessage>

@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
       <name-not-allowed>Yasak İsim</name-not-allowed>
@@ -1387,7 +1387,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>Kaydet</Save>
-      <Reset>Reset</Reset>
+      <Reset>Sıfırla</Reset>
     </action>
     <msg>
       <checkbox-require>Lütfen en az bir izin seçin.</checkbox-require>
@@ -2330,7 +2330,7 @@
       <action>Eylem</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Kilidini Aç</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Düğüm yolu {0} ile erişmek için izniniz yok veya bu düğümde silindi.</access-denied-exception>

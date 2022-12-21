@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>Ang pangalan</name>
-      <action>Magdagdag</action>
+      <action>Dagdag</action>
     </header>
     <info>
       <child-not-found>Hindi matagpuan ang bata!</child-not-found>
@@ -48,26 +48,26 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Pumili ng gumagamit</UIPermissionUser>
+      <UIPermissionUser>Pumili ng Gumagamit</UIPermissionUser>
       <UIPermissionMembership>Select Role</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Pumili ng gumagamit</selectUser>
+      <selectUser>Pumili ng Gumagamit</selectUser>
       <selectGroup>Mag-browse at pumili ng pangkat</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
       <selectUser>Select Role</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectGroup>Mag-browse at pumili ng pangkat</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Pumili ng pangkat</selectGroup>
+      <selectGroup>Pumili ng grupo</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Tagapili ng pahina</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Kahit anong Permiso</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

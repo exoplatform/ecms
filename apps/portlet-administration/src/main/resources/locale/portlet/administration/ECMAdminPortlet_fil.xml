@@ -1520,7 +1520,7 @@
     <header>
       <name>Ang uri</name>
       <action>Ang Aksyon</action>
-      <label>Template</label>
+      <label>Ang template</label>
       <icon>Ang icon</icon>
     </header>
     <action>
@@ -1548,7 +1548,7 @@
       <confirm-delete>Sigurado ka bang gusto mong burahin?</confirm-delete>
       <access-denied>Ang pag-access ay tinanggihan. Wala kang pahintulot para gamitin ang function na ito.</access-denied>
       <editing-template>Ang access ay hindi pinayagan. Hindi mo maaaring burahin o baguhin ang template na ito ng sabay-sabay.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <template-not-exist>Ang template na sinubukan mong tanggalin ay hindi umiiral.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
 
@@ -1566,7 +1566,7 @@
       <confirm-delete>Gusto mo ba talagang tanggalin?</confirm-delete>
       <access-denied>Ang pag-access ay tinanggihan. Wala kang pahintulot para gamitin ang function na ito.</access-denied>
       <editing-template>Ang access ay hindi pinayagan. Hindi mo maaaring burahin o baguhin ang template na ito ng sabay-sabay.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <template-not-exist>Ang template na sinubukan mong tanggalin ay hindi umiiral.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1602,7 +1602,7 @@
     <msg>
       <confirm-delete>Sigurado ka bang gusto mong burahin ang template na ito?</confirm-delete>
       <access-denied>Ang pag-access ay tinanggihan. Wala kang pahintulot para gamitin ang function na ito.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <editing-template>Ang access ay hindi pinayagan. Hindi mo maaaring burahin o baguhin ang template na ito ng sabay-sabay.</editing-template>
       <template-not-exist>Ang template na iyong sinusubukang alisin ay hindi na umiiral.</template-not-exist>
     </msg>
   </UICLVTemplateList>
@@ -1663,13 +1663,13 @@
 
   <CLVTemplatePopup_CateTemplateContainer>
     <title>
-      <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>
+      <UICLVTemplateForm_CateTemplateContainer>Magdagdag ng Listahan ng Template</UICLVTemplateForm_CateTemplateContainer>
     </title>
   </CLVTemplatePopup_CateTemplateContainer>
 
   <CLVTemplatePopup_PageTemplateContainer>
     <title>
-      <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>
+      <UICLVTemplateForm_PageTemplateContainer>Magdagdag ng Listahan ng Template</UICLVTemplateForm_PageTemplateContainer>
     </title>
   </CLVTemplatePopup_PageTemplateContainer>
 
@@ -1697,7 +1697,7 @@
       <title>Ang pangalan</title>
       <template>Ang pangalan ng template</template>
       <content>Ang nilalaman</content>
-      <type>Template Type</type>
+      <type>Ang uri ng Template</type>
     </label>
   </UICLVTemplateForm_PageTemplateContainer>
 
@@ -1711,12 +1711,12 @@
       <title>Ang pangalan</title>
       <template>Ang pangalan ng template</template>
       <content>Ang nilalaman</content>
-      <type>Template Type</type>
+      <type>Ang uri ng Template</type>
     </label>
   </UICLVTemplateForm_CateTemplateContainer>
   <UICLVTemplateForm>
     <label>
-      <paginators>Paginator</paginators>
+      <paginators>Ang paginator</paginators>
       <list>Ang nilalaman</list>
       <navigation>Ang nabigasyon</navigation>
     </label>
@@ -1755,7 +1755,7 @@
       <UITemplateContent>ViewForm</UITemplateContent>
       <UIPopupWindow>Tingnan ang Permiso</UIPopupWindow>
       <selectVersion>Ang mga Bersyon</selectVersion>
-      <content>Content:</content>
+      <content>Nilalaman:</content>
       <name>Ang pangalan:</name>
       <isDocumentTemplate>ang Dokumentong Template</isDocumentTemplate>
       <viewPermission>Ang pahintulot:</viewPermission>
@@ -1768,11 +1768,11 @@
       <UITemplateContent>DialogForm</UITemplateContent>
       <UIPopupWindow>Ang diyalogong Permiso</UIPopupWindow>
       <selectVersion>Ang mga Bersyon</selectVersion>
-      <content>Content:</content>
+      <content>Nilalaman:</content>
       <name>Ang pangalan:</name>
       <isDocumentTemplate>ay Dokumentong Template</isDocumentTemplate>
       <viewPermission>Ang pahintulot:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Paganahin ang Pagbe-bersyon</enableVersion>
     </label>
     <title>Magdagdag/I-edit ang Diyalogo</title>
   </DialogForm>
@@ -1815,7 +1815,7 @@
     <label>
       <name>Ang pangalan:</name>
       <label>Ang tatak:</label>
-      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
+      <isDocumentTemplate>ay Dokumentong Template:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1884,7 +1884,7 @@
     <msg>
       <name-invalid>Ang patlang ng pangalan ay dapat walang laman na espesyal na mga character.</name-invalid>
       <roles-invalid>Ang pahintulot ng patlang ay kinakailangan.</roles-invalid>
-      <version-restored>Version {0} was restored successfully.</version-restored>
+      <version-restored>Bersyon na {0} ay matagumpay na naibalik.</version-restored>
       <name-exist>Ang pangalan na {0} ay umiiral na.</name-exist>
     </msg>
     <title>
@@ -2113,7 +2113,7 @@
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <AddConstraints>Dagdagan ng Limitasyon</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
@@ -2397,11 +2397,11 @@
       <UITemplateContent>SkinForm</UITemplateContent>
       <UIPopupWindow>Pahintulot sa Balat</UIPopupWindow>
       <selectVersion>Ang mga Bersyon</selectVersion>
-      <content>Content:</content>
+      <content>Nilalaman:</content>
       <name>Ang Pangalan:</name>
       <isDocumentTemplate>ang Dokumentong Template</isDocumentTemplate>
       <viewPermission>Ang pahintulot:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Paganahin ang Pagbe-bersyon</enableVersion>
     </label>
     <title>Magdagdag/baguhin ang Balat</title>
   </SkinForm>

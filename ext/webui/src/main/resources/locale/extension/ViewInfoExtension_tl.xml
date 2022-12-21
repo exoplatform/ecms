@@ -14,14 +14,14 @@
 <UIViewInfoContainer>
 <label>
       <name>Name</name>
-      <title>Title</title>
+      <title>Ang Pamagat</title>
       <type>Type</type>
-      <size>Size</size>
-      <owner>Owner</owner>
+      <size>Sukat</size>
+      <owner>May-ari</owner>
       <lastModifier>Last Modifier</lastModifier>
-      <created>Created Date</created>
+      <created>Petsa ng paglikha</created>
       <lastModified>Last Modified Date</lastModified>
-      <publicationState>Publication State</publicationState>
+      <publicationState>Estado ng paglalathala</publicationState>
 </label>
 <value>
       <folder>Folder</folder>

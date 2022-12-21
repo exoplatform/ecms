@@ -712,7 +712,7 @@
     </label>
     <title>
       <AddPermission>Dodaj uprawnienie</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <RemovePermission>Usuń uprawnienia</RemovePermission>
       <AddIcon>Dodaj ikonę</AddIcon>
       <AddPath>Dodaj ścieżkę</AddPath>
     </title>
@@ -991,7 +991,7 @@
       <checkIn>Zamelduj się</checkIn>
       <checkOut>Wymelduj się</checkOut>
       <shareDocuments>Udostępnij</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <openDocument>Edycja zdalna</openDocument>
       <editProperty>Edytuj właściwości dokumentu</editProperty>
       <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
@@ -1386,7 +1386,7 @@
     <title>Dodaj uprawnienia do tego węzła</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
+      <Save>Zapisz</Save>
       <Reset>Resetowanie</Reset>
     </action>
     <msg>
@@ -2330,7 +2330,7 @@
       <action>Akcja</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Odblokuj</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>Nie masz uprawnień dostępu do węzła ze ścieżką {0}, lub węzeł został usunięty.</access-denied-exception>

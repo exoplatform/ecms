@@ -1376,11 +1376,11 @@
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Version</version>
-      <date>Date</date>
+      <version>نسخه</version>
+      <date>تاریخ</date>
       <author>Modified By</author>
-      <summary>Summary</summary>
-      <action>Action</action>
+      <summary>خلاصه</summary>
+      <action>اقدام</action>
     </labels>
   </UIVersionInfo>
   <!--

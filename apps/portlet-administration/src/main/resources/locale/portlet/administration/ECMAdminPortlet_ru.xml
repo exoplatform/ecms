@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Сброс</Reset>
     </action>
     <msg>
       <name-not-allowed>Запрещенное имя</name-not-allowed>
@@ -991,7 +991,7 @@
       <checkIn>Зарегистрируйся</checkIn>
       <checkOut>Выйди</checkOut>
       <shareDocuments>Поделиться</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <openDocument>Удаленное редактирование</openDocument>
       <editProperty>Редактировать свойства документа</editProperty>
       <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
@@ -1386,8 +1386,8 @@
     <title>Добавить права доступа для этого узла</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>Save</Save>
-      <Reset>Reset</Reset>
+      <Save>Сохранить</Save>
+      <Reset>Сброс</Reset>
     </action>
     <msg>
       <checkbox-require>Пожалуйста, выберите хотя бы одно разрешение.</checkbox-require>
@@ -2330,7 +2330,7 @@
       <action>Действие</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Разблокировать</UnLock>
     </tooltip>
     <msg>
       <access-denied-exception>У вас нет разрешения на доступ к узлу с путем {0}, либо этот узел удален.</access-denied-exception>
