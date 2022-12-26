@@ -669,6 +669,7 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     for (String folder : currentFolder.split("/")) {
+      folder = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
       if (node.hasNode(folder)) {
         node = node.getNode(folder);
       } else {

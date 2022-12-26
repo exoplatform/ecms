@@ -27,6 +27,7 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -486,10 +487,10 @@ public class DocumentServiceImpl implements DocumentService {
       if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         currentNode = linkManager.getTarget(currentNode);
       }
-      List<Node> nodes = new ArrayList<Node>();
-      String CurrentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
-      nodes = linkManager.getNodeSymlinksUnderFolder(currentNode.getUUID(), shared.getPath(), CurrentNodeWorkspaceName);
-      if (nodes.size() != 0) {
+      List<Node> nodes;
+      String currentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
+      nodes = linkManager.getNodeSymlinksUnderFolder(((ExtendedNode)currentNode).getIdentifier(), shared.getPath(), currentNodeWorkspaceName);
+      if (!nodes.isEmpty()) {
         link = nodes.get(0);
       }
       if (link == null && currentNode.isNodeType(NodetypeConstant.NT_FILE)) {

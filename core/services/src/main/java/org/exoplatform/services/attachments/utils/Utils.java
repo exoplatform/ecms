@@ -8,19 +8,34 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.util.List;
 
+import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
+import static org.exoplatform.services.wcm.core.NodetypeConstant.EXO_PRIVILEGEABLE;
+
 public class Utils {
 
+  private static final Log LOG                      = ExoLogger.getExoLogger(Utils.class);
+
   public static final String QUARANTINE_FOLDER = "Quarantine";
+
+  public static final String EMPTY_STRING = "";
+
+  public static final String  EXO_SYMLINK_UUID         = "exo:uuid";
 
   public static void sortAttachmentsByDate(List<AttachmentContextEntity> attachments) {
     attachments.sort((attachment1, attachment2) -> ObjectUtils.compare(attachment2.getAttachedDate(),
@@ -66,6 +81,34 @@ public class Utils {
     return getTargetNode(session, nodeFinder, parentPathStr);
   }
 
+  public static Node createSymlink(Node attachmentNode, Node parentNode, String permission) {
+    try {
+      Node linkNode = parentNode.addNode(attachmentNode.getName(), EXO_SYMLINK);
+      linkNode.setProperty(EXO_WORKSPACE, attachmentNode.getSession().getWorkspace().getName());
+      linkNode.setProperty(EXO_PRIMARYTYPE, attachmentNode.getPrimaryNodeType().getName());
+      linkNode.setProperty(EXO_SYMLINK_UUID, ((ExtendedNode) attachmentNode).getIdentifier());
+      if (linkNode.canAddMixin(EXO_SORTABLE)) {
+        linkNode.addMixin(EXO_SORTABLE);
+      }
+      if (attachmentNode.hasProperty(EXO_TITLE)) {
+        linkNode.setProperty(EXO_TITLE, attachmentNode.getProperty(EXO_TITLE).getString());
+      }
+      linkNode.setProperty(EXO_NAME, attachmentNode.getName());
+      String nodeMimeType = getMimeType(attachmentNode);
+      linkNode.addMixin(MIX_FILE_TYPE);
+      linkNode.setProperty(EXO_FILE_TYPE, nodeMimeType);
+      if (linkNode.canAddMixin(EXO_PRIVILEGEABLE)) {
+        linkNode.addMixin(EXO_PRIVILEGEABLE);
+      }
+      ((ExtendedNode) linkNode).setPermission(permission, new String[] { PermissionType.READ });
+      parentNode.save();
+      return linkNode;
+    } catch (Exception e) {
+      LOG.error("Error updating sharing of document {}", attachmentNode, e);
+    }
+    return parentNode;
+  }
+
   public static Node getTargetNode(Session session, NodeFinder nodeFinder, String path) throws Exception {
     return (Node) nodeFinder.getItem(session, path, true);
   }
@@ -87,7 +130,27 @@ public class Utils {
   }
 
   public static boolean isQuarantinedItem(Session systemSession, String attachmentId) throws RepositoryException {
-    Node attachmentNode = systemSession.getNodeByUUID(attachmentId);
+    Node attachmentNode = ((ExtendedSession)systemSession).getNodeByIdentifier(attachmentId);
     return attachmentNode.getPath().startsWith("/" + QUARANTINE_FOLDER + "/");
+  }
+
+  /**
+   * Get the MimeType
+   *
+   * @param node the node
+   * @return the MimeType
+   */
+  public static String getMimeType(Node node) {
+    try {
+      if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+        if (node.hasNode(NodetypeConstant.JCR_CONTENT))
+          return node.getNode(NodetypeConstant.JCR_CONTENT)
+                  .getProperty(NodetypeConstant.JCR_MIME_TYPE)
+                  .getString();
+      }
+    } catch (RepositoryException e) {
+      LOG.error(e.getMessage(), e);
+    }
+    return "";
   }
 }

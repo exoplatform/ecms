@@ -664,7 +664,7 @@ public class Utils {
     Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
     str = accentsconverter.transliterate(str);
     //the character ? seems to not be changed to d by the transliterate function
-    StringBuffer cleanedStr = new StringBuffer(str.trim());
+    StringBuilder cleanedStr = new StringBuilder(str.trim());
     // delete special character
     int strLength = cleanedStr.length();
     int i = 0;
@@ -683,7 +683,7 @@ public class Utils {
     while (StringUtils.isNotEmpty(cleanedStr.toString()) && !Character.isLetterOrDigit(cleanedStr.charAt(0))) {
       cleanedStr.deleteCharAt(0);
     }
-    String clean = cleanedStr.toString().toLowerCase();
+    String clean = cleanedStr.toString();
     if (clean.endsWith("-")) {
       clean = clean.substring(0, clean.length()-1);
     }

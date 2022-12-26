@@ -213,7 +213,6 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     Node nodeContent3 = mock(NodeImpl.class);
     lenient().when(((NodeImpl) node2).getIdentifier()).thenReturn("3");
     Property property3 = mock(Property.class);
-    when(session.getNodeByUUID(anyString())).thenReturn(node3);
     when(((ExtendedSession) session).getNodeByIdentifier(anyString())).thenReturn(node3);
     lenient().when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node3.getProperty(anyString())).thenReturn(property3);
@@ -222,7 +221,6 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(property3.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property3.getLong()).thenReturn((long) 3);
     lenient().when(node3.getPath()).thenReturn("/collaboration/");
-    when(session.getNodeByUUID(String.valueOf(3))).thenReturn(node3);
     when(((ExtendedSession) session).getNodeByIdentifier(String.valueOf(3))).thenReturn(node3);
 
     String username = "testuser";
