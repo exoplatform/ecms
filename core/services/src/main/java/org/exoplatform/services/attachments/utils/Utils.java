@@ -81,6 +81,13 @@ public class Utils {
     return getTargetNode(session, nodeFinder, parentPathStr);
   }
 
+  /**
+   * Creates a symlink for the file defined by attachmentNode inside the parentNode folder with setting the permission
+   * @param attachmentNode the attached file
+   * @param parentNode the folder where the attachment will be saved
+   * @param permission the permission to set to the file
+   * @return the node representing the link for the file
+   */
   public static Node createSymlink(Node attachmentNode, Node parentNode, String permission) {
     try {
       Node linkNode = parentNode.addNode(attachmentNode.getName(), EXO_SYMLINK);

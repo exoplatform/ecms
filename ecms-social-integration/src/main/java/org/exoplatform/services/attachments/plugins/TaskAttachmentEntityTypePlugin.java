@@ -27,7 +27,7 @@ import static org.exoplatform.services.attachments.utils.Utils.EXO_SYMLINK_UUID;
 import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
 
 /**
- * Attachment
+ * Plugin to define how and where files attached to tasks are stored
  */
 public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
 
@@ -121,7 +121,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
     return "task";
   }
 
-  public Node getDestinationFolder(Node rootNode, Long entityId) {
+  private Node getDestinationFolder(Node rootNode, Long entityId) {
     Node parentNode;
     try {
       if (rootNode.hasNode("task")) {
