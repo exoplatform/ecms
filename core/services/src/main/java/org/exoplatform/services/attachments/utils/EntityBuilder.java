@@ -96,7 +96,7 @@ public class EntityBuilder {
     }
 
     Attachment attachment = new Attachment();
-    attachment.setId(((NodeImpl) originalAttachmentNode).getIdentifier());
+    attachment.setId(((NodeImpl) attachmentNode).getIdentifier());
     String attachmentsTitle = getStringProperty(originalAttachmentNode, "exo:title");
     attachment.setTitle(attachmentsTitle);
     String attachmentsPath = attachmentNode.getPath();

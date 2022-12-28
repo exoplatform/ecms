@@ -74,7 +74,8 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
     // Node does not exist, we return the same attachmentId
     String attachmentId = "123456789Azerty";
     String attachmentName = "testFile.docx";
-    assertEquals(attachmentId, taskAttachmentEntityTypePlugin.getAttachmentOrLinkId("task", entityId, attachmentId));
+    assertEquals(1, taskAttachmentEntityTypePlugin.getlinkedAttachments("task", entityId, attachmentId).size());
+    assertEquals(attachmentId, taskAttachmentEntityTypePlugin.getlinkedAttachments("task", entityId, attachmentId).get(0));
 
     // Node exist
     NodeImpl node = mock(NodeImpl.class);
@@ -97,6 +98,7 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
     when(workspace.getName()).thenReturn("collaboration");
     when(session.getWorkspace()).thenReturn(workspace);
     when(node.getSession()).thenReturn(session);
+    when(node.getPath()).thenReturn("/Groups/spaces/spaceOne/documents/testFile.docx");
     when(linkNode.getIdentifier()).thenReturn(linkNodeIdentifier);
     when(taskNode.addNode(anyString(), anyString())).thenReturn(linkNode);
     when(taskParentNode.getNode(String.valueOf(anyLong()))).thenReturn(taskNode);
@@ -105,6 +107,17 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
     when(extendedSession.getItem(anyString())).thenReturn(rootNode);
 
     // Will return link ID instead of the original attached file
-    assertEquals(linkNodeIdentifier, taskAttachmentEntityTypePlugin.getAttachmentOrLinkId("task", 1, attachmentId));
+    assertEquals(1, taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).size());
+    assertEquals(linkNodeIdentifier, taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).get(0));
+
+
+    when(projectService.getParticipator(anyLong())).thenReturn(new HashSet<>(Arrays.asList("user1",
+            "/platform/users", "member:/spaces/space1", "member:/spaces/spaceOne")));
+
+    // Will return link ID instead of the original attached file
+    assertEquals(2, taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).size());
+    assertTrue(taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).contains(attachmentId));
+    assertTrue(taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).contains(linkNodeIdentifier));
+
   }
 }

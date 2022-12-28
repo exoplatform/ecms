@@ -21,7 +21,7 @@ import org.exoplatform.task.service.ProjectService;
 import org.exoplatform.task.service.TaskService;
 
 import javax.jcr.*;
-import java.util.Set;
+import java.util.*;
 
 import static org.exoplatform.services.attachments.utils.Utils.EXO_SYMLINK_UUID;
 import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
@@ -62,7 +62,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
   }
 
   @Override
-  public String getAttachmentOrLinkId(String entityType, long entityId, String attachmentId) {
+  public List<String> getlinkedAttachments(String entityType, long entityId, String attachmentId) {
 
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
     try {
@@ -75,7 +75,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
       // check if content is still there
       Node attachmentNode = getNodeByIdentifier(userSession, attachmentId);
       if (attachmentNode == null) {
-        return attachmentId;
+        return Collections.singletonList(attachmentId);
       }
 
       // Check if the content is symlink, then get the original content
@@ -87,33 +87,40 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
         }
       }
 
-      Node linkNode = null;
+      List<String> linkNodes = new ArrayList<>();
       for (String permittedIdentity : taskPermittedIdentities) {
-        // set read permission
+        if (permittedIdentity.contains(":/spaces/")) {
+          String groupId = permittedIdentity.split(":")[1];
+          if (attachmentNode.getPath().contains(groupId + "/")) {
+            LOG.warn("document is in the same space, ignore it ! {} | {}", permittedIdentity, groupId);
+            linkNodes.add(attachmentId);
+          } else {
+            // Create a symlink in Document app of the space if the task belongs to a
+            // project of a space
+            Node rootNode = getGroupNode(nodeHierarchyCreator, userSession, groupId);
+            if (rootNode != null) {
+              Node parentNode = getDestinationFolder(rootNode, task.getId());
+              Node linkNode = Utils.createSymlink(attachmentNode, parentNode, permittedIdentity);
+              if (linkNode != null) {
+                linkNodes.add(((ExtendedNode) linkNode).getIdentifier());
+              }
+            }
+          }
+        }
+        // set read permission for users or groups different from spaces
         if (attachmentNode.canAddMixin(EXO_PRIVILEGEABLE)) {
           attachmentNode.addMixin(EXO_PRIVILEGEABLE);
         }
-        ((ExtendedNode) attachmentNode).setPermission(permittedIdentity, new String[] { PermissionType.READ });
+        ((ExtendedNode) attachmentNode).setPermission(permittedIdentity, new String[]{PermissionType.READ});
         attachmentNode.save();
-
-        // Create a symlink in Document app of the space if the task belongs to a
-        // project of a space
-        if (permittedIdentity.contains(":/spaces/")) {
-          String groupId = permittedIdentity.split(":")[1];
-          Node rootNode = getGroupNode(nodeHierarchyCreator, userSession, groupId);
-          if (rootNode != null) {
-            Node parentNode = getDestinationFolder(rootNode, task.getId());
-            linkNode = Utils.createSymlink(attachmentNode, parentNode, permittedIdentity);
-          }
-        }
       }
-      return linkNode != null ? ((ExtendedNode) linkNode).getIdentifier() : attachmentId;
+      return linkNodes;
     } catch (EntityNotFoundException e) {
       LOG.error("Could not find task with ID {}", entityId, e);
     } catch (Exception e) {
       LOG.error("Error updating shared document {}", attachmentId, e);
     }
-    return attachmentId;
+    return Collections.singletonList(attachmentId);
   }
 
   @Override
@@ -163,16 +170,5 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
       groupsPath = DEFAULT_GROUPS_HOME_PATH;
     }
     return groupsPath;
-  }
-
-  private static Node getNodeByIdentifier(Session session, String nodeId) {
-    try {
-      return ((ExtendedSession) session).getNodeByIdentifier(nodeId);
-    } catch (PathNotFoundException e) {
-      LOG.info("Node with identifier {} is not found. Ignore search result.", nodeId);
-    } catch (RepositoryException e) {
-      LOG.debug("Error retrieving node with identifier {}. Will attempt to retrieve it by path", nodeId, e);
-    }
-    return null;
   }
 }

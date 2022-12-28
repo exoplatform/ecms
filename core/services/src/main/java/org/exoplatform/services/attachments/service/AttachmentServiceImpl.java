@@ -39,12 +39,12 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
-import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 public class AttachmentServiceImpl implements AttachmentService {
@@ -121,9 +121,11 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
-    attachmentId = getAttachmentEntityTypePlugin(entityType).getAttachmentOrLinkId(entityType, entityId, attachmentId);
+    List<String> attachmentIds = getAttachmentEntityTypePlugin(entityType).getlinkedAttachments(entityType, entityId, attachmentId);
 
-    attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachmentId);
+    for (String attachment : attachmentIds) {
+      attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachment);
+    }
     return getAttachmentByIdByEntity(entityType, entityId, attachmentId, userIdentityId);
   }
 
@@ -519,7 +521,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     Node attachmentNode;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
-      attachmentNode = session.getNodeByUUID(attachmentId);
+      attachmentNode = ((ExtendedSession)session).getNodeByIdentifier(attachmentId);
       session.checkPermission(attachmentNode.getPath(), permissionType);
     } catch (AccessControlException | AccessDeniedException e) {
       attachmentPermission = false;

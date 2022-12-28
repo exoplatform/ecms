@@ -99,10 +99,11 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                                                    attachmentId);
           attachments.add(attachment);
         }
+        attachments = Utils.removeDuplicatedAttachments(userSession, attachments);
       }
       return attachments.stream()
                         .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
+                        .toList();
     } finally {
       if (systemSession != null) {
         systemSession.logout();

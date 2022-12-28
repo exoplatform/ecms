@@ -2,6 +2,7 @@ package org.exoplatform.services.attachments.utils;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -20,9 +21,12 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
 import static org.exoplatform.services.wcm.core.NodetypeConstant.EXO_PRIVILEGEABLE;
@@ -89,8 +93,9 @@ public class Utils {
    * @return the node representing the link for the file
    */
   public static Node createSymlink(Node attachmentNode, Node parentNode, String permission) {
+    Node linkNode;
     try {
-      Node linkNode = parentNode.addNode(attachmentNode.getName(), EXO_SYMLINK);
+      linkNode = parentNode.addNode(attachmentNode.getName(), EXO_SYMLINK);
       linkNode.setProperty(EXO_WORKSPACE, attachmentNode.getSession().getWorkspace().getName());
       linkNode.setProperty(EXO_PRIMARYTYPE, attachmentNode.getPrimaryNodeType().getName());
       linkNode.setProperty(EXO_SYMLINK_UUID, ((ExtendedNode) attachmentNode).getIdentifier());
@@ -112,8 +117,8 @@ public class Utils {
       return linkNode;
     } catch (Exception e) {
       LOG.error("Error updating sharing of document {}", attachmentNode, e);
+      return null;
     }
-    return parentNode;
   }
 
   public static Node getTargetNode(Session session, NodeFinder nodeFinder, String path) throws Exception {
@@ -159,5 +164,40 @@ public class Utils {
       LOG.error(e.getMessage(), e);
     }
     return "";
+  }
+
+  /**
+   * Removes duplicated items and symlinks if their original file is present in the list
+   * @param userSession JCR session for the user
+   * @param attachments List of attachments
+   * @return list of attachments with no duplicates
+   */
+  public static List<Attachment> removeDuplicatedAttachments(Session userSession, List<Attachment> attachments) {
+    Map<String, Attachment> filteringAttachmentsMap = new HashMap<>();
+    for(Attachment entity : attachments) {
+      Node entityNode = getNodeByIdentifier(userSession, entity.getId());
+      try {
+        if (entityNode != null && entityNode.isNodeType(EXO_SYMLINK)) {
+          String originalEntityNodeId = entityNode.getProperty(EXO_SYMLINK_UUID).getString();
+          filteringAttachmentsMap.put(originalEntityNodeId, entity);
+        } else {
+          filteringAttachmentsMap.put(entity.getId(), entity);
+        }
+      } catch (Exception e) {
+        filteringAttachmentsMap.put(entity.getId(), entity);
+      }
+    }
+    return filteringAttachmentsMap.values().stream().toList();
+  }
+
+  public static Node getNodeByIdentifier(Session session, String nodeId) {
+    try {
+      return ((ExtendedSession) session).getNodeByIdentifier(nodeId);
+    } catch (PathNotFoundException e) {
+      LOG.info("Node with identifier {} was not found !", nodeId);
+    } catch (RepositoryException e) {
+      LOG.debug("Error retrieving node with identifier {}", nodeId, e);
+    }
+    return null;
   }
 }

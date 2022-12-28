@@ -4,6 +4,9 @@ package org.exoplatform.services.attachments.service;
 import org.exoplatform.container.component.BaseComponentPlugin;
 
 
+import java.util.Collections;
+import java.util.List;
+
 import static org.exoplatform.services.attachments.utils.Utils.EMPTY_STRING;
 
 /**
@@ -19,8 +22,8 @@ public class AttachmentEntityTypePlugin extends BaseComponentPlugin {
    * @param attachmentId the original attachment ID that may be changed after calling this function
    * @return the ID of the attachment to link with provided entity
    */
-  public String getAttachmentOrLinkId(String entityType, long entityId, String attachmentId) {
-    return attachmentId;
+  public List<String> getlinkedAttachments(String entityType, long entityId, String attachmentId) {
+    return Collections.singletonList(attachmentId);
   }
 
   /**
