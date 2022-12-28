@@ -1,20 +1,17 @@
 package org.exoplatform.services.attachments.plugins;
 
 import org.apache.commons.lang3.StringUtils;
-import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.attachments.service.AttachmentEntityTypePlugin;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.task.dto.ProjectDto;
 import org.exoplatform.task.dto.TaskDto;
 import org.exoplatform.task.exception.EntityNotFoundException;
 import org.exoplatform.task.service.ProjectService;
@@ -45,7 +42,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
 
   public static final String         DOCUMENTS_NODE           = "Documents";
 
-  private static final String        DEFAULT_GROUPS_HOME_PATH = "/Groups";
+  private static final String        DEFAULT_GROUPS_HOME_PATH = "/Groups"; //NOSONAR
 
   public static final String         GROUPS_PATH_ALIAS        = "groupsPath";
 
@@ -92,7 +89,6 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
         if (permittedIdentity.contains(":/spaces/")) {
           String groupId = permittedIdentity.split(":")[1];
           if (attachmentNode.getPath().contains(groupId + "/")) {
-            LOG.warn("document is in the same space, ignore it ! {} | {}", permittedIdentity, groupId);
             linkNodes.add(attachmentId);
           } else {
             // Create a symlink in Document app of the space if the task belongs to a
@@ -115,10 +111,8 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
         attachmentNode.save();
       }
       return linkNodes;
-    } catch (EntityNotFoundException e) {
-      LOG.error("Could not find task with ID {}", entityId, e);
     } catch (Exception e) {
-      LOG.error("Error updating shared document {}", attachmentId, e);
+      LOG.error("Error getting linked documents {}", attachmentId, e);
     }
     return Collections.singletonList(attachmentId);
   }

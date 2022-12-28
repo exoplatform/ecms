@@ -154,11 +154,8 @@ public class Utils {
    */
   public static String getMimeType(Node node) {
     try {
-      if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-        if (node.hasNode(NodetypeConstant.JCR_CONTENT))
-          return node.getNode(NodetypeConstant.JCR_CONTENT)
-                  .getProperty(NodetypeConstant.JCR_MIME_TYPE)
-                  .getString();
+      if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && node.hasNode(NodetypeConstant.JCR_CONTENT)) {
+        return node.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_MIME_TYPE).getString();
       }
     } catch (RepositoryException e) {
       LOG.error(e.getMessage(), e);
