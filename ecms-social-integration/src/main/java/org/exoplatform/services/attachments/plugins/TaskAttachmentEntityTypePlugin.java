@@ -73,7 +73,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
       Session userSession = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
 
       // check if content is still there
-      Node attachmentNode = getNodeByIdentifier(userSession, attachmentId);
+      Node attachmentNode = Utils.getNodeByIdentifier(userSession, attachmentId);
       if (attachmentNode == null) {
         return Collections.singletonList(attachmentId);
       }
@@ -81,7 +81,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
       // Check if the content is symlink, then get the original content
       if (attachmentNode.isNodeType(EXO_SYMLINK)) {
         String sourceNodeId = attachmentNode.getProperty(EXO_SYMLINK_UUID).getString();
-        Node originalNode = getNodeByIdentifier(userSession, sourceNodeId);
+        Node originalNode = Utils.getNodeByIdentifier(userSession, sourceNodeId);
         if (originalNode != null) {
           attachmentNode = originalNode;
         }
