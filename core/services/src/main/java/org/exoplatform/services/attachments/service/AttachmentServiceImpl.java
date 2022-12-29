@@ -39,17 +39,17 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
-import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 public class AttachmentServiceImpl implements AttachmentService {
 
-  private static final Log LOG = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
+  private static final Log                 LOG        = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
 
   private RepositoryService                repositoryService;
 
@@ -68,6 +68,8 @@ public class AttachmentServiceImpl implements AttachmentService {
   private NodeFinder                       nodeFinder;
 
   private LinkManager                      linkManager;
+
+  private Map<String, AttachmentEntityTypePlugin> attachmentPlugins;
 
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
 
@@ -90,6 +92,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.nodeFinder = nodeFinder;
     this.linkManager = linkManager;
+    this.attachmentPlugins = new HashMap<>();
   }
 
   @Override
@@ -118,7 +121,11 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
-    attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachmentId);
+    List<String> attachmentIds = getAttachmentEntityTypePlugin(entityType).getlinkedAttachments(entityType, entityId, attachmentId);
+
+    for (String attachment : attachmentIds) {
+      attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachment);
+    }
     return getAttachmentByIdByEntity(entityType, entityId, attachmentId, userIdentityId);
   }
 
@@ -239,9 +246,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     try {
-      Attachment attachment = attachmentStorage.getAttachmentItemByEntity(entityId,
-                                                                          entityType,
-                                                                          attachmentId);
+      Attachment attachment = attachmentStorage.getAttachmentItemByEntity(entityId, entityType, attachmentId);
       if (attachment == null) {
         throw new ObjectNotFoundException("Attachment with id" + attachmentId + " linked to entity with id " + entityId
             + " and type" + entityType + " not found");
@@ -419,7 +424,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       session = Utils.getSession(sessionProviderService, repositoryService);
       Node currentNode =
                        Utils.getParentFolderNode(session, manageDriveService, nodeHierarchyCreator, nodeFinder, pathDrive, path);
-      if(currentNode.hasNode(title)) {
+      if (currentNode.hasNode(title)) {
         throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");
       }
       List<NewDocumentTemplate> documentTemplates = getDocumentTemplateList(userIdentity);
@@ -431,11 +436,11 @@ public class AttachmentServiceImpl implements AttachmentService {
         Node createdDocument = documentService.createDocumentFromTemplate(currentNode, title, documentTemplate);
         session.save();
         Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
-                                                documentService,
-                                                linkManager,
-                                                Utils.getCurrentWorkspace(repositoryService),
-                                                session,
-                                                createdDocument.getUUID());
+                                                                 documentService,
+                                                                 linkManager,
+                                                                 Utils.getCurrentWorkspace(repositoryService),
+                                                                 session,
+                                                                 createdDocument.getUUID());
 
         boolean canView = checkAttachmentJCRPermission(attachment.getId(), PermissionType.READ);
         boolean canDetach = checkAttachmentJCRPermission(attachment.getId(), PermissionType.REMOVE);
@@ -516,7 +521,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     Node attachmentNode;
     try {
       session = Utils.getSession(sessionProviderService, repositoryService);
-      attachmentNode = session.getNodeByUUID(attachmentId);
+      attachmentNode = ((ExtendedSession)session).getNodeByIdentifier(attachmentId);
       session.checkPermission(attachmentNode.getPath(), permissionType);
     } catch (AccessControlException | AccessDeniedException e) {
       attachmentPermission = false;
@@ -524,6 +529,17 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalStateException("Can't get attachment node with id" + attachmentId, e);
     }
     return attachmentPermission;
+  }
+
+  public void addAttachmentEntityTypePlugin(AttachmentEntityTypePlugin attachmentEntityTypePlugin) {
+    this.attachmentPlugins.put(attachmentEntityTypePlugin.getEntityType(), attachmentEntityTypePlugin);
+  }
+
+  public AttachmentEntityTypePlugin getAttachmentEntityTypePlugin (String entityType) {
+    if(attachmentPlugins.isEmpty() || attachmentPlugins.get(entityType) == null) {
+      return new AttachmentEntityTypePlugin();
+    }
+    return attachmentPlugins.get(entityType);
   }
 
 }

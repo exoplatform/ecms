@@ -170,7 +170,7 @@ public class AttachmentsRestService implements ResourceContainer {
         attachmentsEntities = attachments.stream()
                                          .map(attachment -> EntityBuilder.fromAttachment(identityManager, attachment))
                                          .filter(attachmentEntity -> attachmentEntity.getAcl().isCanView())
-                                         .collect(Collectors.toList());
+                                         .toList();
       }
       return Response.ok(attachmentsEntities).build();
     } catch (IllegalAccessException e) {

@@ -73,4 +73,13 @@
     </component-plugin>
   </external-component-plugins>
 
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.attachments.service.AttachmentService</target-component>
+    <component-plugin>
+      <name>TaskAttachmentEntityTypePlugin</name>
+      <set-method>addAttachmentEntityTypePlugin</set-method>
+      <type>org.exoplatform.services.attachments.plugins.TaskAttachmentEntityTypePlugin</type>
+    </component-plugin>
+  </external-component-plugins>
+
 </configuration>

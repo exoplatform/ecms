@@ -172,7 +172,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     Node nodeContent1 = mock(Node.class);
     Property property = mock(Property.class);
     Workspace workSpace = mock(Workspace.class);
-    when(((ExtendedSession) session).getNodeByIdentifier(anyString())).thenReturn(node1);
+    when(((ExtendedSession) session).getNodeByIdentifier(String.valueOf(1))).thenReturn(node1);
     when(session.getNodeByUUID(anyString())).thenReturn(node1);
     when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node1.getSession()).thenReturn(session);
@@ -196,7 +196,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(((NodeImpl) node2).getIdentifier()).thenReturn("2");
     Property property2 = mock(Property.class);
     when(session.getNodeByUUID(anyString())).thenReturn(node2);
-    when(((ExtendedSession) session).getNodeByIdentifier(anyString())).thenReturn(node2);
+    when(((ExtendedSession) session).getNodeByIdentifier(String.valueOf(2))).thenReturn(node2);
     when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node2.getProperty(anyString())).thenReturn(property2);
     lenient().when(node2.getNode(anyString())).thenReturn(nodeContent2);
@@ -211,10 +211,9 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(node3.getSession()).thenReturn(session);
     node3 = mock(NodeImpl.class);
     Node nodeContent3 = mock(NodeImpl.class);
-    lenient().when(((NodeImpl) node2).getIdentifier()).thenReturn("3");
+    lenient().when(((NodeImpl) node3).getIdentifier()).thenReturn("3");
     Property property3 = mock(Property.class);
-    when(session.getNodeByUUID(anyString())).thenReturn(node3);
-    when(((ExtendedSession) session).getNodeByIdentifier(anyString())).thenReturn(node3);
+    when(((ExtendedSession) session).getNodeByIdentifier(String.valueOf(3))).thenReturn(node3);
     lenient().when(session.getWorkspace()).thenReturn(workSpace);
     lenient().when(node3.getProperty(anyString())).thenReturn(property3);
     lenient().when(node3.getNode(anyString())).thenReturn(nodeContent3);
@@ -222,7 +221,6 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(property3.getDate()).thenReturn(Calendar.getInstance());
     lenient().when(property3.getLong()).thenReturn((long) 3);
     lenient().when(node3.getPath()).thenReturn("/collaboration/");
-    when(session.getNodeByUUID(String.valueOf(3))).thenReturn(node3);
     when(((ExtendedSession) session).getNodeByIdentifier(String.valueOf(3))).thenReturn(node3);
 
     String username = "testuser";
@@ -310,7 +308,6 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     ManageableRepository manageableRepository = repositoryService.getRepository("repository");
     lenient().when(repositoryService.getRepository(Mockito.anyString())).thenReturn(manageableRepository);
     Node parentNode = mock(Node.class);
-    when(session.getNodeByUUID(anyString())).thenReturn(parentNode);
     Node node1 = mock(Node.class);
     Node nodeContent1 = mock(Node.class);
     Property property = mock(Property.class);
