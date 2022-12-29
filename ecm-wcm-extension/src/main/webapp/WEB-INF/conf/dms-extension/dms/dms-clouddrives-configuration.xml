@@ -101,6 +101,38 @@
     <type>org.exoplatform.services.cms.clouddrives.webui.thumbnail.CloudDriveThumbnailRESTService</type>
   </component>
 
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.addons.AddOnService</target-component>
+    <component-plugin>
+      <name>addPlugin</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.commons.addons.AddOnPluginImpl</type>
+      <description>add application Config</description>
+      <init-params>
+        <value-param>
+          <name>priority</name>
+          <value>10</value>
+        </value-param>
+        <value-param>
+          <name>containerName</name>
+          <value>settings-bottom-container</value>
+        </value-param>
+        <object-param>
+          <name>CloudDrivePortlet</name>
+          <description>Cloud Drive portlet</description>
+          <object type="org.exoplatform.portal.config.serialize.PortletApplication">
+            <field name="state">
+              <object type="org.exoplatform.portal.config.model.TransientApplicationState">
+                <field name="contentId">
+                  <string>clouddrives/CloudDrivePortlet</string>
+                </field>
+              </object>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>cd
 
   <!-- use this plugin in external configuration, e.g. an extension -->
   <external-component-plugins>
