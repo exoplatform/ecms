@@ -162,4 +162,17 @@ public interface AttachmentService {
    * @throws Exception the exception
    */
   Attachment createNewDocument(Identity userIdentity, String title, String path, String pathDrive, String templateName) throws Exception;
+
+  /**
+   * Register a new AttachmentEntityTypePlugin
+   * @param attachmentEntityTypePlugin
+   */
+  public void addAttachmentEntityTypePlugin(AttachmentEntityTypePlugin attachmentEntityTypePlugin);
+
+  /**
+   * Retrieves a AttachmentEntityTypePlugin from the registered plugins
+   * @param entityType
+   * @return the registered AttachmentEntityTypePlugin
+   */
+  public AttachmentEntityTypePlugin getAttachmentEntityTypePlugin (String entityType);
 }
