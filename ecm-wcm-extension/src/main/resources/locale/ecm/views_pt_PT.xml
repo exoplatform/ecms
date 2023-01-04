@@ -54,7 +54,7 @@
         <pdf-max-size>A pré-visualização não está disponível para o conteúdo maior do que {0} MB.</pdf-max-size>
         <pdf-max-page>A visualização não está disponível para conteúdo com mais de {0} páginas.</pdf-max-page>
         <using-webDAV>ou abrir no MS Office</using-webDAV>
-        <open-on-desktop>Abrir na área de trabalho</open-on-desktop>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Abrir Documento</open-in-documents>
         <open-in-documents-tooltip>Abrir este ficheiro na aplicação de documentos</open-in-documents-tooltip>

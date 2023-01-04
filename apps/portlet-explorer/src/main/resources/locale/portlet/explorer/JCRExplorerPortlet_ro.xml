@@ -1496,8 +1496,8 @@
       <can-not-compare>Eroare la compararea versiunilor</can-not-compare>
       <compare-unavailable>Compararea versiunilor nu este disponibilă pentru acest document</compare-unavailable>
       <DateChange>{0}</DateChange>
-      <PreviousAndNextCompare>Modificări de la {0} la {1}</PreviousAndNextCompare>
-      <ComparedWith>Comparată cu</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Restaurează la versiunea {0}</restoredFrom>
     </label>
   </UIDiff>

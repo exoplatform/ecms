@@ -54,7 +54,7 @@
         <pdf-max-size>L'aperçu n'est pas disponible pour les contenus de plus de {0} Mo.</pdf-max-size>
         <pdf-max-page>L'aperçu n'est pas disponible pour les contenus avec plus de {0} pages.</pdf-max-page>
         <using-webDAV>ou Ouvrir dans MS Office</using-webDAV>
-        <open-on-desktop>Ouvrir à distance</open-on-desktop>
+        <open-on-desktop>Open on Desktop</open-on-desktop>
         <editOnline>Editer en ligne</editOnline>
         <open-in-documents>Ouvrir dans Documents</open-in-documents>
         <open-in-documents-tooltip>Ouvrir ce fichier dans l'application Documents</open-in-documents-tooltip>

@@ -1496,8 +1496,8 @@
       <can-not-compare>Не удалось сравнить две версии</can-not-compare>
       <compare-unavailable>Версия сравнения недоступна для данного документа</compare-unavailable>
       <DateChange>На {0}</DateChange>
-      <PreviousAndNextCompare>Изменения с {0} по {1}</PreviousAndNextCompare>
-      <ComparedWith>По сравнению с</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Восстановлено из версии {0}</restoredFrom>
     </label>
   </UIDiff>

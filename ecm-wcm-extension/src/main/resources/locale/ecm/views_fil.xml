@@ -54,7 +54,7 @@
         <pdf-max-size>Ang preview ay hindi magagamit para sa mga nilalaman na mahigit sa {0} MB.</pdf-max-size>
         <pdf-max-page>Ang preview ay hindi magagamit para sa mga nilalaman na may mahigit sa {0} na mga pahina.</pdf-max-page>
         <using-webDAV>o Buksan sa MS Office</using-webDAV>
-        <open-on-desktop>Buksan sa Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Buksan ang mga Dokumento</open-in-documents>
         <open-in-documents-tooltip>Buksan ang payl na ito sa app ng mga Dokumento</open-in-documents-tooltip>

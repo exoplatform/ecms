@@ -1496,8 +1496,8 @@
       <can-not-compare>Primerja dveh različic ni uspela</can-not-compare>
       <compare-unavailable>Primerjava različic za ta dokument ni na voljo</compare-unavailable>
       <DateChange>Na {0}</DateChange>
-      <PreviousAndNextCompare>Spremembe iz {0} na {1}</PreviousAndNextCompare>
-      <ComparedWith>V primerjavi z</ComparedWith>
+      <PreviousAndNextCompare>Changes from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared With</ComparedWith>
       <restoredFrom>Obnovljeno iz različice {0}</restoredFrom>
     </label>
   </UIDiff>

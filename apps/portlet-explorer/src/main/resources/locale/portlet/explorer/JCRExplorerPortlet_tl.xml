@@ -1496,8 +1496,8 @@
       <can-not-compare>Hindi nagtagumay sa pagkumpara ng dalawang mga bersyon</can-not-compare>
       <compare-unavailable>Hindi pwede sa dokumentong ito ang pagkumpara sa bersyon</compare-unavailable>
       <DateChange>Sa {0}</DateChange>
-      <PreviousAndNextCompare>Ang pagbabago mula sa {0} hanggang {1}</PreviousAndNextCompare>
-      <ComparedWith>I-kumpara Sa</ComparedWith>
+      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared with</ComparedWith>
       <restoredFrom>Naibalik mula sa bersyon {0}</restoredFrom>
     </label>
   </UIDiff>

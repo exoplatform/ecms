@@ -54,7 +54,7 @@
         <pdf-max-size>پیش نمایش برای محتوای بزرگتر از {0} مگابایت امکان پذیر نیست.</pdf-max-size>
         <pdf-max-page>پیش نمایش برای محتوای بالای {0} صفحه امکان پذیر نیست.</pdf-max-page>
         <using-webDAV>و یا باز کردن در مایکروسافت آفیس</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
