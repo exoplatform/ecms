@@ -310,12 +310,24 @@
               <collection type="java.util.ArrayList">
                 <value>
                   <object type="org.exoplatform.application.registry.Application">
-                    <field name="applicationName"><string>DocumentsPortlet</string></field>
-                    <field name="categoryName"><string>tools</string></field>
-                    <field name="displayName"><string>Documents</string></field>
-                    <field name="description"><string>DocumentsPortlet</string></field>
-                    <field name="type"><string>portlet</string></field>
-                    <field name="contentId"><string>documents/DocumentsPortlet</string></field>
+                    <field name="applicationName">
+                      <string>DocumentsPortlet</string>
+                    </field>
+                    <field name="categoryName">
+                      <string>tools</string>
+                    </field>
+                    <field name="displayName">
+                      <string>Documents</string>
+                    </field>
+                    <field name="description">
+                      <string>DocumentsPortlet</string>
+                    </field>
+                    <field name="type">
+                      <string>portlet</string>
+                    </field>
+                    <field name="contentId">
+                      <string>documents/DocumentsPortlet</string>
+                    </field>
                     <field name="accessPermissions">
                       <collection type="java.util.ArrayList" item-type="java.lang.String">
                         <value><string>*:/platform/users</string></value>
