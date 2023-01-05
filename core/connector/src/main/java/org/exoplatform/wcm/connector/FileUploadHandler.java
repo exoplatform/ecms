@@ -433,9 +433,9 @@ public class FileUploadHandler {
                                String userId,
                                String existenceAction,
                                boolean isNewVersion) throws Exception {
-    fileName = Utils.cleanNameWithAccents(fileName);
     String exoTitle = fileName;
-    fileName = Utils.cleanName(fileName);
+    fileName = Utils.cleanNameWithAccents(fileName);
+    fileName = Text.escapeIllegalJcrChars(Utils.cleanName(fileName));
     try {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
@@ -549,9 +549,9 @@ public class FileUploadHandler {
             String suffix = "(" + (indexSuffix - 1) + ")";
             exoTitle = getNewName(exoTitle, suffix);
           }
-          file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
+          file.setProperty(NodetypeConstant.EXO_TITLE, Utils.cleanDocumentTitle(exoTitle));
         } else if (!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
-          file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
+          file.setProperty(NodetypeConstant.EXO_TITLE, Utils.cleanDocumentTitle(exoTitle));
         }
         jcrContent = file.addNode("jcr:content","nt:resource");
       }else if(parent.hasNode(nodeName)){

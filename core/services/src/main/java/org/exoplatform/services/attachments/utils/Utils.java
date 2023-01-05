@@ -17,6 +17,8 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -89,5 +91,11 @@ public class Utils {
   public static boolean isQuarantinedItem(Session systemSession, String attachmentId) throws RepositoryException {
     Node attachmentNode = systemSession.getNodeByUUID(attachmentId);
     return attachmentNode.getPath().startsWith("/" + QUARANTINE_FOLDER + "/");
+  }
+
+  public static boolean isValidDocumentTitle(String name) {
+    Pattern regex = Pattern.compile("[<\\\\>:\"/|?*]");
+    Matcher matcher = regex.matcher(name);
+    return !matcher.find();
   }
 }

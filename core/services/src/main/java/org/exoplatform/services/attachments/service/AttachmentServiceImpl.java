@@ -403,6 +403,9 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (StringUtils.isEmpty(title)) {
       throw new IllegalArgumentException("New document title is mandatory");
     }
+    if (!Utils.isValidDocumentTitle(title)) {
+      throw new IllegalArgumentException("New document title is not valid");
+    }
     if (StringUtils.isEmpty(path)) {
       throw new IllegalArgumentException("new document path is mandatory");
     }
