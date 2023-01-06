@@ -426,7 +426,7 @@ public class ManageDocumentService implements ResourceContainer {
                                            userId,
                                            action,
                                            language,
-                                           Text.escapeIllegalJcrChars(fileName),
+                                           fileName,
                                            uploadId, existenceAction);
       }
     } catch (Exception e) {
@@ -680,7 +680,7 @@ public class ManageDocumentService implements ResourceContainer {
         if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE)) {
           newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
         }
-        newNode.setProperty(NodetypeConstant.EXO_TITLE, folder);
+        newNode.setProperty(NodetypeConstant.EXO_TITLE, org.exoplatform.services.cms.impl.Utils.cleanDocumentTitle(folder));
         node.save();
         node = newNode;
       }
