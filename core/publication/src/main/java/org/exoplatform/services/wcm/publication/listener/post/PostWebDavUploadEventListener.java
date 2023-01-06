@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.publication.listener.post;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.jcr.webdav.WebDavService;
@@ -83,7 +84,7 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
       if(currentNode.canAddMixin("exo:rss-enable")) {
         currentNode.addMixin("exo:rss-enable");
         if(!currentNode.hasProperty("exo:title")) {
-          currentNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(currentNode.getName())); 
+          currentNode.setProperty("exo:title", Utils.cleanDocumentTitle(currentNode.getName()));
         }
       }
     

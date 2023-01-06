@@ -690,6 +690,37 @@ public class Utils {
 
     return clean;
   }
+
+  /**
+   * This method will clean the document title for better search indexing, it's
+   * not related to jcr accepted chars as we are speaking about the display name
+   * here.
+   * 
+   * @param title The document title
+   * @return {@link String}
+   */
+  public static String cleanDocumentTitle(String title) {
+    return replaceSpecialChars(title, "[<\\>:\"/|?*]");
+  }
+  
+  private static String replaceSpecialChars(String name, String specialChars) {
+    String extension = "";
+    if (name.lastIndexOf(".") != -1) {
+      extension = name.substring(name.lastIndexOf("."));
+      name = name.substring(0, name.lastIndexOf("."));
+    }
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < name.length(); i++) {
+      char currentChar = name.charAt(i);
+      if (specialChars.indexOf(currentChar) > -1) {
+        builder.append('_');
+      } else {
+        builder.append(currentChar);
+      }
+    }
+    builder.append(extension);
+    return builder.toString();
+  }
   
   /**
    * Clean string. Replace specialChar by "-"
@@ -700,24 +731,10 @@ public class Utils {
    */
 
   public static String cleanName(String oldName) {
-    if (StringUtils.isEmpty(oldName)) return oldName;
-    String extension = "" ;
-    if(oldName.lastIndexOf(".") > -1){
-      extension = oldName.substring(oldName.lastIndexOf("."));
-      oldName = oldName.substring(0,oldName.lastIndexOf(".")) ;
+    if (StringUtils.isEmpty(oldName)) {
+      return oldName;
     }
-    String specialChar = "&#*@.'\"\t\r\n$\\><:;[]/|";
-    StringBuilder ret = new StringBuilder();
-    for (int i = 0; i < oldName.length(); i++) {
-      char currentChar = oldName.charAt(i);
-      if (specialChar.indexOf(currentChar) > -1) {
-        ret.append('_');
-      } else {
-        ret.append(currentChar);
-      }
-    }
-    ret.append(extension);
-    return ret.toString();
+    return replaceSpecialChars(oldName, "&#*?@.'\"\t\r\n$\\><:;[]/|");
   }
 
   /** Return name after cleaning

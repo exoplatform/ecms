@@ -280,6 +280,13 @@ public class AttachmentServiceTest extends BaseExoTestCase {
       // Expected
     }
 
+    try {
+      attachmentService.createNewDocument(userIdentity, "title<:?.docx", "path", "drive", "template");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+
     String docTitle = "test.docx";
     String docPath = "Documents";
     String pathDrive = "Personal Documents";

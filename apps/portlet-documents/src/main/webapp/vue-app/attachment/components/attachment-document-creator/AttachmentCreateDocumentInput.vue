@@ -89,7 +89,9 @@ export default {
       newDocumentActionExtension: 'new-document-action',
       newDocumentActions: {},
       MAX_DOCUMENT_TITLE_LENGTH: 510,
-      documentTitleRules: [title => !title || title && title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
+      titleRegex: /[<\\>:"/|?*]/,
+      documentTitleRules: [title => !title || title && title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel,
+        title => !this.titleRegex.test(title)],
     };
   },
   computed: {
@@ -134,6 +136,13 @@ export default {
     },
     createNewDoc() {
       if (this.documentTitleMaxLengthReached) {
+        return;
+      }
+      if (this.titleRegex.test(this.newDocumentTitle)) {
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.$t('attachments.valid.title.error.message'),
+          type: 'warning',
+        });
         return;
       }
       this.$root.$emit('start-loading-attachment-drawer');
