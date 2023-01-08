@@ -54,7 +54,7 @@
         <pdf-max-size>Het afdrukvoorbeeld is niet beschikbaar voor inhoud groter dan {0} MB.</pdf-max-size>
         <pdf-max-page>Het afdrukvoorbeeld is niet beschikbaar voor inhoud met meer dan {0} pagina's.</pdf-max-page>
         <using-webDAV>of Open in MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documenten</open-in-documents>
         <open-in-documents-tooltip>Open dit bestand in Documenten-app</open-in-documents-tooltip>

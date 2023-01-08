@@ -31,7 +31,7 @@
         <email>Email</email>
         <site>Site</site>
         <lastComment>Dernier commentaire par {user} à {time}</lastComment>
-        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <Less_Than_A_Minute>il y a moins d'une minute</Less_Than_A_Minute>
         <About_A_Minute>il y a une minute</About_A_Minute>
         <About_x_Minutes>il y a environ {0} minutes</About_x_Minutes>
         <About_An_Hour>il y a environ une heure</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>L'aperçu n'est pas disponible pour les contenus de plus de {0} Mo.</pdf-max-size>
         <pdf-max-page>L'aperçu n'est pas disponible pour les contenus avec plus de {0} pages.</pdf-max-page>
         <using-webDAV>ou Ouvrir dans MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Ouvrir sur votre poste de travail</open-on-desktop>
         <editOnline>Editer en ligne</editOnline>
         <open-in-documents>Ouvrir dans Documents</open-in-documents>
         <open-in-documents-tooltip>Ouvrir ce fichier dans l'application Documents</open-in-documents-tooltip>

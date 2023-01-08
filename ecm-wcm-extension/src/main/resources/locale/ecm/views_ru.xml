@@ -54,7 +54,7 @@
         <pdf-max-size>Предварительный просмотр недоступен для файлов больше, чем {0} MB.</pdf-max-size>
         <pdf-max-page>Предварительный просмотр недоступен для содержимого с более чем {0} страниц.</pdf-max-page>
         <using-webDAV>или открыть в MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Открыть в Документах</open-in-documents>
         <open-in-documents-tooltip>Открыть этот файл в приложении Документы</open-in-documents-tooltip>

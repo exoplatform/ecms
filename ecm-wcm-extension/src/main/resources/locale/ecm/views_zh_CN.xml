@@ -54,7 +54,7 @@
         <pdf-max-size>预览不可用于内容大于 {0} MB的文件。</pdf-max-size>
         <pdf-max-page>预览不可用于与内容超过 {0} 页的文件。</pdf-max-page>
         <using-webDAV>或在 MS Office 中打开</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
