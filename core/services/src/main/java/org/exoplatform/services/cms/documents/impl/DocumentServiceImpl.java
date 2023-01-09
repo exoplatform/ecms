@@ -27,6 +27,7 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -486,10 +487,10 @@ public class DocumentServiceImpl implements DocumentService {
       if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         currentNode = linkManager.getTarget(currentNode);
       }
-      List<Node> nodes = new ArrayList<Node>();
-      String CurrentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
-      nodes = linkManager.getNodeSymlinksUnderFolder(currentNode.getUUID(), shared.getPath(), CurrentNodeWorkspaceName);
-      if (nodes.size() != 0) {
+      List<Node> nodes;
+      String currentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
+      nodes = linkManager.getNodeSymlinksUnderFolder(((ExtendedNode)currentNode).getIdentifier(), shared.getPath(), currentNodeWorkspaceName);
+      if (!nodes.isEmpty()) {
         link = nodes.get(0);
       }
       if (link == null && currentNode.isNodeType(NodetypeConstant.NT_FILE)) {
@@ -1032,8 +1033,8 @@ public class DocumentServiceImpl implements DocumentService {
   }
   
   public LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) {
-    LinkedHashMap<String, String> docFolderBreadCrumb = getDocFolderRelativePathWithLinks(fileNode);
     LinkedHashMap<String, String> fileBreadCrumb = new LinkedHashMap<>();
+    LinkedHashMap<String, String> docFolderBreadCrumb = getDocFolderRelativePathWithLinks(fileNode);
     if (docFolderBreadCrumb != null) {
       int breadCrumbSize = docFolderBreadCrumb.size();
       int folderIndex = 0;
@@ -1097,7 +1098,7 @@ public class DocumentServiceImpl implements DocumentService {
         String drivePublicFolderHomePath = null;
         if (ManageDriveServiceImpl.PERSONAL_DRIVE_NAME.equals(drive.getName())) {
           drivePublicFolderHomePath = driveHomePath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME, "/"
-              + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+                  + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
         }
 
         // calculate the relative path to the drive by browsing up the content
@@ -1127,20 +1128,22 @@ public class DocumentServiceImpl implements DocumentService {
           // title is used if it exists, otherwise the name is used
           if (parentPath.equals(driveHomePath)) {
             nodeName = driveName;
-          } else if (parentContentNode.hasProperty("exo:title")) {
-            nodeName = parentContentNode.getProperty("exo:title").getString();
+          } else if (parentContentNode.hasProperty(EXO_TITLE_PROP)) {
+            nodeName = parentContentNode.getProperty(EXO_TITLE_PROP).getString();
           } else {
             nodeName = parentContentNode.getName();
           }
           reversedFolderPathWithLinks.put(nodeName + "_" + reversedFolderPathWithLinks.size(), getDocOpenUri(parentContentNode));
 
-          if (parentPath.equals("/")) {
+          if (parentPath.equals("/") || parentPath.equals(driveHomePath)) {
             break;
           } else {
             parentContentNode = parentContentNode.getParent();
           }
         }
       }
+    } catch (AccessDeniedException ade) {
+      LOG.warn(ade.getMessage());
     } catch (Exception re) {
       LOG.error("Cannot retrieve path of doc " + re.getMessage(), re);
     }
