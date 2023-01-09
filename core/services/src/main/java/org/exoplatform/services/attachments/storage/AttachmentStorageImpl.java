@@ -103,7 +103,7 @@ public class AttachmentStorageImpl implements AttachmentStorage {
       }
       return attachments.stream()
                         .filter(Objects::nonNull)
-                        .toList();
+                        .collect(Collectors.toList());
     } finally {
       if (systemSession != null) {
         systemSession.logout();

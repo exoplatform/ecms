@@ -27,6 +27,7 @@ import javax.jcr.Session;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
 import static org.exoplatform.services.wcm.core.NodetypeConstant.EXO_PRIVILEGEABLE;
@@ -183,7 +184,7 @@ public class Utils {
         filteringAttachmentsMap.put(entity.getId(), entity);
       }
     }
-    return filteringAttachmentsMap.values().stream().toList();
+    return filteringAttachmentsMap.values().stream().collect(Collectors.toList());
   }
 
   public static Node getNodeByIdentifier(Session session, String nodeId) {
