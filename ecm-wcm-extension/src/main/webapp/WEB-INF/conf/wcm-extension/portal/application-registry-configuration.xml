@@ -14,61 +14,6 @@
       <description>this listener init the portlets are registered in PortletRegister</description>
       <init-params>
         <object-param>
-          <name>administration</name>
-          <description>description</description>
-          <object type="org.exoplatform.application.registry.ApplicationCategory">
-            <field name="name">
-              <string>Administration</string>
-            </field>
-            <field name="displayName">
-              <string>Administration</string>
-            </field>
-            <field name="description">
-              <string>Applications for administration</string>
-            </field>
-            <field name="accessPermissions">
-              <collection type="java.util.ArrayList" item-type="java.lang.String">
-                <value>
-                  <string>*:/platform/administrators</string>
-                </value>
-              </collection>
-            </field>
-            <field name="applications">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <object type="org.exoplatform.application.registry.Application">
-                    <field name="applicationName">
-                      <string>ECMAdminPortlet</string>
-                    </field>
-                    <field name="categoryName">
-                      <string>administration</string>
-                    </field>
-                    <field name="displayName">
-                      <string>Content Administration</string>
-                    </field>
-                    <field name="description">
-                      <string>Content Administration.</string>
-                    </field>
-                    <field name="type">
-                      <string>portlet</string>
-                    </field>
-                    <field name="contentId">
-                      <string>ecmadmin/ECMAdminPortlet</string>
-                    </field>
-                    <field name="accessPermissions">
-                      <collection type="java.util.ArrayList" item-type="java.lang.String">
-                        <value>
-                          <string>*:/platform/administrators</string>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
           <name>content</name>
           <description>description</description>
           <object type="org.exoplatform.application.registry.ApplicationCategory">
