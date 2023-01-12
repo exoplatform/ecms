@@ -228,7 +228,7 @@
       <name>tools.portlets.registry</name>
       <set-method>initListener</set-method>
       <type>org.exoplatform.application.registry.ApplicationCategoriesPlugins</type>
-      <description>Add tasks portlet to Tools category</description>
+      <description>Add documents portlet to Tools category</description>
       <init-params>
         <value-param>
           <name>system</name>
