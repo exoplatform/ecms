@@ -24,6 +24,7 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -184,7 +185,7 @@ public class Utils {
         filteringAttachmentsMap.put(entity.getId(), entity);
       }
     }
-    return filteringAttachmentsMap.values().stream().toList();
+    return new ArrayList<>(filteringAttachmentsMap.values());
   }
 
   public static Node getNodeByIdentifier(Session session, String nodeId) {
