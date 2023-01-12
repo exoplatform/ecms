@@ -29,6 +29,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
 import static org.exoplatform.services.wcm.core.NodetypeConstant.EXO_PRIVILEGEABLE;
 
@@ -197,5 +200,11 @@ public class Utils {
       LOG.debug("Error retrieving node with identifier {}", nodeId, e);
     }
     return null;
+  }
+  
+  public static boolean isValidDocumentTitle(String name) {
+    Pattern regex = Pattern.compile("[<\\\\>:\"/|?*]");
+    Matcher matcher = regex.matcher(name);
+    return !matcher.find();
   }
 }
