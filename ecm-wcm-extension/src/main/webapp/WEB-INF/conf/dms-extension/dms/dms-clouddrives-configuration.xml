@@ -132,7 +132,7 @@
         </object-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>cd
+  </external-component-plugins>
 
   <!-- use this plugin in external configuration, e.g. an extension -->
   <external-component-plugins>
