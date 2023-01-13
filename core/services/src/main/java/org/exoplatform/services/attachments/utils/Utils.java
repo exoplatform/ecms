@@ -24,9 +24,13 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
 import static org.exoplatform.services.wcm.core.NodetypeConstant.EXO_PRIVILEGEABLE;
@@ -184,7 +188,7 @@ public class Utils {
         filteringAttachmentsMap.put(entity.getId(), entity);
       }
     }
-    return filteringAttachmentsMap.values().stream().toList();
+    return new ArrayList<>(filteringAttachmentsMap.values());
   }
 
   public static Node getNodeByIdentifier(Session session, String nodeId) {
@@ -196,5 +200,11 @@ public class Utils {
       LOG.debug("Error retrieving node with identifier {}", nodeId, e);
     }
     return null;
+  }
+  
+  public static boolean isValidDocumentTitle(String name) {
+    Pattern regex = Pattern.compile("[<\\\\>:\"/|?*]");
+    Matcher matcher = regex.matcher(name);
+    return !matcher.find();
   }
 }

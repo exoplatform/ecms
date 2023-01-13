@@ -19,6 +19,8 @@ package org.exoplatform.services.cms.webdav;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -420,7 +422,9 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            HierarchicalProperty body) {
 
     try {
-      repoPath = convertRepoPath(repoPath, true);
+      int fileNameIndex = repoPath.lastIndexOf("/") + 1;
+      String cleanPath = repoPath.substring(0, fileNameIndex) + Utils.cleanName(repoPath.substring(fileNameIndex));
+      repoPath = convertRepoPath(cleanPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -482,14 +486,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                                   LinkUtils.getParentPath(path(normalizePath(repoPath))),
                                   true);
         repoPath = item.getSession().getWorkspace().getName()
-            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
+            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(Utils.cleanName(LinkUtils.getItemName(path(repoPath)))));
         session = item.getSession();
       } catch (PathNotFoundException e) {
         item = nodeFinder.getItem(workspaceName(repoPath),
                                   LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))),
                                   true);
         repoPath = item.getSession().getWorkspace().getName()
-            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
+            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(Utils.cleanName(LinkUtils.getItemName(path(repoPath)))));
         session = item.getSession();
       }
       activityService = WCMCoreUtils.getService(ActivityCommonService.class);
@@ -681,8 +685,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @HeaderParam(ExtHttpHeaders.OVERWRITE) String overwriteHeader,
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
+    String destHeader;
     try {
       repoPath = convertRepoPath(repoPath, true);
+      destHeader = destinationHeader.substring(0, destinationHeader.lastIndexOf("/") + 1)
+          + Utils.cleanName(LinkUtils.getItemName(path(URLDecoder.decode(destinationHeader, StandardCharsets.UTF_8))));
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -695,7 +702,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     }
     Response response = super.move(repoName,
                                    repoPath,
-                                   destinationHeader,
+                                   destHeader,
                                    lockTokenHeader,
                                    ifHeader,
                                    depthHeader,
@@ -720,13 +727,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     try {
       URI dest = buildURI(destinationHeader);
       String destPath = dest.getPath();
+      destPath = destPath.substring(0, destPath.lastIndexOf("/") + 1) + Utils.cleanName(LinkUtils.getItemName(destPath));
       int repoIndex = destPath.indexOf(repoName);
       destPath = normalizePath(repoIndex == -1 ? destPath : destPath.substring(repoIndex + repoName.length() + 1));
       String destNodePath = path(destPath);
       Node destNode = (Node) nodeFinder.getItem(workspaceName(destPath), path(normalizePath(destNodePath)), true);
-      String nodeName = Text.escapeIllegalJcrChars(destNode.getName());
-      destNode.setProperty("exo:name", nodeName);
-      destNode.setProperty("exo:title", nodeName);
+      String nodeName = destNode.getName();
+      destNode.setProperty("exo:name", Text.escapeIllegalJcrChars(Utils.cleanName(nodeName)));
+      destNode.setProperty("exo:title", Utils.cleanDocumentTitle(nodeName));
       if (!Utils.isFolder(destNode)) {
         Node content = destNode.getNode("jcr:content");
         String mimeType = mimeTypeResolver.getMimeType(nodeName);
@@ -775,7 +783,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       Item item = nodeFinder.getItem(workspaceName(repoPath), LinkUtils.getParentPath(path(normalizePath(repoPath))), true);
       repoPath =
           item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), 
-                                                                            LinkUtils.getItemName(path(repoPath)));
+                                                                            Utils.cleanName(LinkUtils.getItemName(path(repoPath))));
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.CONFLICT).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
