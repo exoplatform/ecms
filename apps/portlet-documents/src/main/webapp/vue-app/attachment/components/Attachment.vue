@@ -70,19 +70,15 @@ export default {
     });
     document.addEventListener('open-attachments-app-drawer', (event) => {
       this.drawerList = false;
-      this.readConfiguration(event.detail)
-        .then(() => {
-          this.initAttachmentEnvironment();
-          this.openAttachmentsAppDrawer();
-        });
+      this.readConfiguration(event.detail);
+      this.initAttachmentEnvironment();
+      this.openAttachmentsAppDrawer();
     });
     document.addEventListener('open-attachments-list-drawer', (event) => {
       this.drawerList = true;
-      this.readConfiguration(event.detail)
-        .then(() => {
-          this.initAttachmentEnvironment();
-          this.openAttachmentsDrawerList();
-        });
+      this.readConfiguration(event.detail);
+      this.initAttachmentEnvironment();
+      this.openAttachmentsDrawerList();
     });
     document.addEventListener('documents-supported-document-types-updated', this.refreshSupportedDocumentExtensions);
     this.refreshSupportedDocumentExtensions();
@@ -99,14 +95,29 @@ export default {
     },
     readConfiguration(config) {
       config = config || {};
-      this.spaceId = this.getURLQueryParam('spaceId')  || config.spaceId || eXo.env.portal.spaceId;
-      this.defaultDrive = config.defaultDrive || {
-        isSelected: true,
-        name: eXo.env.portal.spaceGroup && `.spaces.${eXo.env.portal.spaceGroup}` || 'Personal Documents',
-        title: eXo.env.portal.spaceDisplayName || 'Personal Documents'
-      };
+      this.spaceId = this.getURLQueryParam('spaceId') || config.spaceId || eXo.env.portal.spaceId;
+      if (this.spaceId) {
+        this.$spaceService.getSpaceById(this.spaceId)
+          .then(space => {
+            if (space) {
+              this.currentSpace = space;
+              const spaceGroupId = space.groupId.split('/spaces/')[1];
+              this.defaultDrive = {
+                name: `.spaces.${spaceGroupId}`,
+                title: space.displayName,
+                isSelected: true
+              };
+            }
+          });
+      } else {
+        this.defaultDrive = config.defaultDrive || {
+          isSelected: true,
+          name: eXo.env.portal.spaceGroup && `.spaces.${eXo.env.portal.spaceGroup}` || 'Personal Documents',
+          title: eXo.env.portal.spaceDisplayName || 'Personal Documents'
+        };
+      }
       this.defaultFolder = config.defaultFolder
-        || (eXo.env.portal.spaceDisplayName && 'Documents') || 'Public';
+        || (eXo.env.portal.spaceId && 'Documents') || 'Public';
       this.sourceApp = config.sourceApp || null;
       this.files = config.files || null;
       this.attachments = config.attachments || [];
@@ -121,7 +132,6 @@ export default {
       this.entityType = config.entityType;
       this.entityId = config.entityId;
       this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
-      return this.initDefaultDrive();
     },
     startLoadingList() {
       if (this.drawerList && this.$refs.attachmentsListDrawer) {
@@ -210,24 +220,6 @@ export default {
           });
         }
       });
-    },
-    initDefaultDrive() {
-      if (this.spaceId) {
-        return this.$spaceService.getSpaceById(this.spaceId)
-          .then(space => {
-            if (space) {
-              this.currentSpace = space;
-              const spaceGroupId = space.groupId.split('/spaces/')[1];
-              this.defaultDrive = {
-                name: `.spaces.${spaceGroupId}`,
-                title: space.displayName,
-                isSelected: true
-              };
-            }
-          });
-      } else {
-        return Promise.resolve(null);
-      }
     },
     getURLQueryParam(paramName) {
       const urlParams = new URLSearchParams(window.location.search);
