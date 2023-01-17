@@ -521,19 +521,7 @@ export default {
     },
     entityId() {
       this.initDestinationFolderPath();
-    },
-    entityType() {
-      this.initDestinationFolderPath();
-    },
-    spaceId() {
-      this.initDestinationFolderPath();
-    },
-    defaultDrive() {
-      this.initDestinationFolderPath();
-    },
-    defaultFolder() {
-      this.initDestinationFolderPath();
-    },
+    }
   },
   created() {
     this.initDestinationFolderPath();
