@@ -199,7 +199,10 @@ export default {
         this.displaySuccessMessage();
         this.$refs.attachmentsAppDrawer.endLoading();
       }
-    }
+    },
+    defaultDrive() {
+      this.initDefaultDestinationFolderPath(this.defaultFolder);
+    },
   },
   created() {
     document.addEventListener('paste', this.onPaste, false);
