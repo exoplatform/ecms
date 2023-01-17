@@ -103,7 +103,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
       for (String permittedIdentity : taskPermittedIdentities) {
         if (permittedIdentity.contains(":/spaces/")) {
           String groupId = permittedIdentity.split(":")[1];
-          if (attachmentNode.getPath().contains(groupId + "/")) {
+          if (attachmentNode.getPath().contains(groupId + "/") && !linkNodes.contains(attachmentId)) {
             linkNodes.add(attachmentId);
           } else {
             // Create a symlink in Document app of the space if the task belongs to a
@@ -111,9 +111,12 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
             Node rootNode = getGroupNode(nodeHierarchyCreator, userSession, groupId);
             if (rootNode != null) {
               Node parentNode = getDestinationFolder(rootNode, task.getId());
-              Node linkNode = Utils.createSymlink(attachmentNode, parentNode, permittedIdentity);
-              if (linkNode != null) {
-                linkNodes.add(((ExtendedNode) linkNode).getIdentifier());
+              // We won't add the file symlink as attachment if another file exists with the same name
+              if(!parentNode.hasNode(attachmentNode.getName())) {
+                Node linkNode = Utils.createSymlink(attachmentNode, parentNode, permittedIdentity);
+                if (linkNode != null) {
+                  linkNodes.add(((ExtendedNode) linkNode).getIdentifier());
+                }
               }
             }
           }
