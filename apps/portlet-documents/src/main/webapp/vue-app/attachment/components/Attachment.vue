@@ -117,7 +117,7 @@ export default {
         };
       }
       this.defaultFolder = config.defaultFolder
-        || (eXo.env.portal.spaceId && 'Documents') || 'Public';
+        || (eXo.env.portal.spaceId && '/') || 'Public';
       this.sourceApp = config.sourceApp || null;
       this.files = config.files || null;
       this.attachments = config.attachments || [];
