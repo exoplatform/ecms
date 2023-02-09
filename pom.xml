@@ -40,10 +40,10 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.5.x-exo-SNAPSHOT</org.exoplatform.social.version>
+    <org.exoplatform.social.version>6.5.x-maintenance-SNAPSHOT</org.exoplatform.social.version>
     <addon.exo.jcr.version>6.5.x-maintenance-SNAPSHOT</addon.exo.jcr.version>
     <addon.exo.tasks.version>3.5.x-maintenance-SNAPSHOT</addon.exo.tasks.version>
-    <org.exoplatform.platform-ui.version>6.5.x-exo-SNAPSHOT</org.exoplatform.platform-ui.version>
+    <org.exoplatform.platform-ui.version>6.5.x-maintenance-SNAPSHOT</org.exoplatform.platform-ui.version>
     <addon.exo.analytics.version>1.4.x-maintenance-SNAPSHOT</addon.exo.analytics.version>
     <!-- **************************************** -->
     <!-- Apache Chemistry (OpencCMIS) API -->
