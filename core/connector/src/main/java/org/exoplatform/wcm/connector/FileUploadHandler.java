@@ -304,7 +304,7 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document fileExistence = builder.newDocument();
-    fileName = Text.escapeIllegalJcrChars(fileName);
+    fileName = Utils.cleanNameWithAccents(fileName);
     fileName = fileName.replaceAll(FILE_DECODE_REGEX, "%25");
     fileName = URLDecoder.decode(fileName,"UTF-8");
     fileName = fileName.replaceAll(FILE_DECODE_REGEX, "-");
