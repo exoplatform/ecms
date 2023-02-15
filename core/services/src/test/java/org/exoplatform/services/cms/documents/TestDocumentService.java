@@ -111,7 +111,20 @@ public class TestDocumentService extends BaseWCMTestCase {
     Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
 
     nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
-    session.getRootNode().getNode("Groups").addNode("spaces").addNode(spaceId.split("/")[2]);
+    Node groupsNode = session.getRootNode().getNode("Groups");
+    Node spacesNode;
+    if(!groupsNode.hasNode("spaces")) {
+      spacesNode = groupsNode.addNode("spaces");
+    } else {
+      spacesNode = groupsNode.getNode("spaces");
+    }
+    String spaceNodeName = spaceId.split("/")[2];
+    Node testSpaceNode;
+    if(!spacesNode.hasNode(spaceNodeName)) {
+      testSpaceNode = spacesNode.addNode(spaceNodeName);
+    } else {
+      testSpaceNode = spacesNode.getNode(spaceNodeName);
+    }
     rootNode = (Node) session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH) + spaceId);
     Node spaceDocumentNode = rootNode.addNode("Documents");
     Node ActivityNode = spaceDocumentNode.addNode("Activity Stream Documents");
