@@ -90,7 +90,7 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Arbeitsbereich-Laufwerk:</driveWorkspace>
+      <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Zurück zu JCR Hauptlaufwerke</backToJCR>
       <setUpBrowser>Ihre Browsing-Präferenzen einstellen</setUpBrowser>
       <refesh>Aktualisieren</refesh>
