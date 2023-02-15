@@ -145,7 +145,12 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     if (StringUtils.equals(portalConfigService.getGlobalPortal(), portalName)) {
       return null;
     }
-    Node portalsStorage = getLivePortalsStorage(sessionProvider);
+    Node portalsStorage = null ;
+    try {
+      portalsStorage = getLivePortalsStorage(sessionProvider);
+    } catch (PathNotFoundException e) {
+      return null;
+    }
     if (portalsStorage != null) {
       return portalsStorage.getNode(portalName);
     }
