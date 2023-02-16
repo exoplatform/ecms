@@ -38,6 +38,7 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.cms.thumbnail.impl.ThumbnailUtils;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
@@ -103,10 +104,8 @@ public class ThumbnailRESTService implements ResourceContainer {
                                     @PathParam("workspaceName") String workspaceName,
                                     @PathParam("nodePath") String nodePath,
                                     @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(workspaceName,
-                              nodePath,
-                              ThumbnailService.MEDIUM_SIZE,
-                              ifModifiedSince);
+    Node imageNode = getShowingNode(workspaceName, nodePath);
+    return getThumbnailByType(imageNode, ThumbnailService.MEDIUM_SIZE, ifModifiedSince);
   }
 
 /**
@@ -126,7 +125,8 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String workspaceName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(workspaceName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
+    Node imageNode = getShowingNode(workspaceName, nodePath);
+    return getThumbnailByType(imageNode, ThumbnailService.BIG_SIZE, ifModifiedSince);
   }
 
 /**
@@ -146,7 +146,8 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String workspaceName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(workspaceName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
+    Node imageNode = getShowingNode(workspaceName, nodePath);
+    return getThumbnailByType(imageNode, ThumbnailService.BIG_SIZE, ifModifiedSince);
   }
 
 /**
@@ -166,7 +167,8 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String workspaceName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(workspaceName, nodePath, ThumbnailService.SMALL_SIZE, ifModifiedSince);
+    Node imageNode = getShowingNode(workspaceName, nodePath);
+    return getThumbnailByType(imageNode, ThumbnailService.SMALL_SIZE, ifModifiedSince);
   }
 
 /**
@@ -188,7 +190,30 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String workspaceName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(workspaceName, nodePath, "exo:"+size, ifModifiedSince);
+    Node imageNode = getShowingNode(workspaceName, nodePath);
+    return getThumbnailByType(imageNode, "exo:" + size, ifModifiedSince);
+  }
+
+  /**
+   * Returns an image with a custom size.
+   *
+   * @param size The customized size of the image.
+   * @param workspaceName The workspace name.
+   * @param identifier The identifier.
+   * @return Response inputstream.
+   * @throws Exception
+   *
+   * @anchor ThumbnailRESTService.getCustomImage
+   */
+  @Path("/custom/{size}/{workspaceName}/{identifier}")
+  @GET
+  public Response getCustomImage(@PathParam("size") String size,
+                                 @PathParam("workspaceName") String workspaceName,
+                                 @PathParam("identifier") String identifier,
+                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, SessionProviderService.getRepository());
+    Node imageNode = ((ExtendedSession) session).getNodeByIdentifier(identifier);
+    return getThumbnailByType(imageNode, "exo:" + size, ifModifiedSince);
   }
 
   /**
@@ -247,21 +272,18 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 
-  private Response getThumbnailByType(String workspaceName, String nodePath,
+  private Response getThumbnailByType(Node imageNode,
       String propertyName, String ifModifiedSince) throws Exception {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if (!thumbnailService_.isEnableThumbnail())
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-    Node showingNode = getShowingNode(workspaceName, nodePath);
-    String identifier = ((NodeImpl) showingNode).getInternalIdentifier();
-    Node targetNode = getTargetNode(showingNode);
+    Node targetNode = getTargetNode(imageNode);
     Node parentNode = null;
     try {
-      parentNode = showingNode.getParent();
+      parentNode = imageNode.getParent();
     } catch (AccessDeniedException e) {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspaceName,
-                                                                           repositoryService_.getCurrentRepository());
-      parentNode = session.getItem(showingNode.getPath()).getParent();
+      Session session = imageNode.getSession();
+      parentNode = session.getItem(imageNode.getPath()).getParent();
     }
     if(targetNode.isNodeType("nt:file")) {
       Node content = targetNode.getNode("jcr:content");
@@ -272,7 +294,7 @@ public class ThumbnailRESTService implements ResourceContainer {
           if(thumbnailPlugin.getMimeTypes().contains(mimeType)) {
             Node thumbnailFolder = ThumbnailUtils.getThumbnailFolder(parentNode);
 
-            Node thumbnailNode = ThumbnailUtils.getThumbnailNode(thumbnailFolder, identifier);
+            Node thumbnailNode = ThumbnailUtils.getThumbnailNode(thumbnailFolder, ((NodeImpl)imageNode).getIdentifier());
 
             if(!thumbnailNode.hasProperty(propertyName)) {
               try {
@@ -308,7 +330,7 @@ public class ThumbnailRESTService implements ResourceContainer {
         }
       }
     }
-    return getThumbnailRes(parentNode, identifier, propertyName, ifModifiedSince);
+    return getThumbnailRes(parentNode, ((NodeImpl)imageNode).getIdentifier(), propertyName, ifModifiedSince);
   }
 
   private Response getThumbnailRes(Node parentNode,
