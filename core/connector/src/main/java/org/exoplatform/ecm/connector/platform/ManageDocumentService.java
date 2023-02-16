@@ -418,7 +418,7 @@ public class ManageDocumentService implements ResourceContainer {
       if ((workspaceName != null) && (driveName != null) && (currentFolder != null)) {
         Node currentFolderNode = getNode(Text.escapeIllegalJcrChars(driveName),
                                          Text.escapeIllegalJcrChars(workspaceName),
-                                         Text.escapeIllegalJcrChars(currentFolder));
+                                         org.exoplatform.services.jcr.util.Text.escapeIllegalJcrChars(currentFolder));
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
         return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
                                            currentFolderNode,
