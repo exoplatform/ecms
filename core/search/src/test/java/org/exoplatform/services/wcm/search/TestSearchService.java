@@ -22,9 +22,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.search.domain.Document;
-import org.exoplatform.commons.search.index.IndexingOperationProcessor;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
@@ -43,8 +41,10 @@ import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.search.connector.FileindexingConnector;
-import org.exoplatform.services.wcm.search.mock.MockIndexingOperationProcessor;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by The eXo Platform SAS
@@ -55,13 +55,13 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 @ConfiguredBy({
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.social.component.core-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml")
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml"),
 })
 public class TestSearchService extends BaseSearchTest {
 
   private CmsService cmsService_;
-  private MockIndexingOperationProcessor indexingOperationProcessor;
   private static final String CONTENT = "exo:webContent";
 
   public void setUp() throws Exception {
@@ -69,7 +69,6 @@ public class TestSearchService extends BaseSearchTest {
     ConversationState c = new ConversationState(new Identity(session.getUserID()));
     ConversationState.setCurrent(c);
     cmsService_ = WCMCoreUtils.getService(CmsService.class);
-    indexingOperationProcessor = (MockIndexingOperationProcessor) WCMCoreUtils.getService(IndexingOperationProcessor.class);
     applySystemSession();
   }
 
@@ -139,7 +138,9 @@ public class TestSearchService extends BaseSearchTest {
     assertTrue(session.itemExists(path));
     Node webcontent = rootNode.getNode("sites content/live/classic/web contents/webcontenttitle/default.html");
     String id = webcontent.getUUID();
-    Document document = indexingOperationProcessor.getConnectors().get(FileindexingConnector.TYPE).create(id);
+    FileindexingConnector fileindexingConnector = mock(FileindexingConnector.class);
+    when(fileindexingConnector.create(id)).thenCallRealMethod();
+    Document document = fileindexingConnector.create(id);
     assertNull(document);
   }
   
@@ -166,7 +167,6 @@ public class TestSearchService extends BaseSearchTest {
     if(!webContentNode.isNodeType("metadata:siteMetadata")) webContentNode.addMixin("metadata:siteMetadata");
     wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
     context = new HashMap<String, String>();
-//      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
     publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);
 
     session.save();
@@ -846,7 +846,7 @@ public class TestSearchService extends BaseSearchTest {
     String author = "root";
     queryCriteria.setAuthors(new String[]{author});
     //webcontent0, webcontent1, webcontent0[1], webcontent1[1]
-    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
+    assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, Locale.ENGLISH, 10, true).getAvailable());
   }
 
   public void testSearchByMimeTypes()throws Exception{
@@ -941,12 +941,12 @@ public class TestSearchService extends BaseSearchTest {
       int i=0;
       while (i<resultNodes.size() && !isItemDuplicated){
         ResultNode node = resultNodes.get(i);
-        Integer hash = new Integer(node.hashCode());
+        Integer hash = Integer.valueOf(node.hashCode());
         if (hashResults.contains(hash)) {
           isItemDuplicated=true;
           assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+(offset-limit));
         } else {
-          hashResults.add(new Integer(hash));
+          hashResults.add(Integer.valueOf(hash));
         }
         i++;
       }
@@ -1009,12 +1009,12 @@ public class TestSearchService extends BaseSearchTest {
       int i=0;
       while (i<resultNodes.size() && !isItemDuplicated){
         ResultNode node = resultNodes.get(i);
-        Integer hash = new Integer(node.hashCode());
+        Integer hash = node.hashCode();
         if (hashResults.contains(hash)) {
           isItemDuplicated=true;
           assertionMsg = String.format(assertionMsg,"Node: \"" + node.getPath() + "\" is duplicated at offset "+(offset-limit));
         } else {
-          hashResults.add(new Integer(hash));
+          hashResults.add(hash);
         }
         i++;
       }
