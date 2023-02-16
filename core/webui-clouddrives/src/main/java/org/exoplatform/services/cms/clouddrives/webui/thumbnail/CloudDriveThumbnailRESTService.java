@@ -161,6 +161,20 @@ public class CloudDriveThumbnailRESTService extends ThumbnailRESTService {
     }
   }
 
+  @Path("/custom/{size}/{workspaceName}/{identifier}")
+  @GET
+  @Override
+  public Response getCustomImage(@PathParam("size") String size,
+                                 @PathParam("workspaceName") String workspaceName,
+                                 @PathParam("identifier") String identifier,
+                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
+    if (accept(workspaceName, identifier)) {
+      return super.getCustomImage(size, workspaceName, identifier, ifModifiedSince);
+    } else {
+      return ok();
+    }
+  }
+
   /**
    * {@inheritDoc}
    */
