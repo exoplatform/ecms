@@ -82,6 +82,8 @@ import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.web.CacheUserProfileFilter;
 
+import static org.exoplatform.services.cms.impl.Utils.cleanNameWithAccents;
+
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
  * 22, 2011
@@ -565,8 +567,10 @@ public class DocumentServiceImpl implements DocumentService {
         LOG.warn("Couldn't find appropriate metadata plugin for the {} extension.", template.getExtension());
       }
     }
+    // Clean document name
+    String cleanedName = cleanNameWithAccents(title);
     // Add node
-    Node addedNode = currentNode.addNode(title, NT_FILE);
+    Node addedNode = currentNode.addNode(cleanedName, NT_FILE);
 
     // Set title
     if (!addedNode.hasProperty(EXO_TITLE_PROP)) {
