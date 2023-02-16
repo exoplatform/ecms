@@ -47,6 +47,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
 
+import static org.exoplatform.services.cms.impl.Utils.cleanNameWithAccents;
+
 public class AttachmentServiceImpl implements AttachmentService {
 
   private static final Log                 LOG        = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
@@ -427,7 +429,7 @@ public class AttachmentServiceImpl implements AttachmentService {
       session = Utils.getSession(sessionProviderService, repositoryService);
       Node currentNode =
                        Utils.getParentFolderNode(session, manageDriveService, nodeHierarchyCreator, nodeFinder, pathDrive, path);
-      if (currentNode.hasNode(title)) {
+      if (currentNode.hasNode(cleanNameWithAccents(title))) {
         throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");
       }
       List<NewDocumentTemplate> documentTemplates = getDocumentTemplateList(userIdentity);
