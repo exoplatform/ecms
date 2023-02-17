@@ -22,16 +22,19 @@ import java.util.*;
 
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.BaseConnectorTestCase;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 
 /**
@@ -106,6 +109,27 @@ public class TestThumbnailRESTService extends BaseConnectorTestCase{
     if(response.getStatus() == 200) {
       assertEquals("image", response.getContentType().getType());
     }  
+  }
+
+  public void testGetCustomImage() throws Exception{
+    String workspaceName = "collaboration";
+    String userName = "john";
+    Node rootNode = session.getRootNode();
+    Node node = rootNode.addNode("test");
+    node.setProperty(NodetypeConstant.JCR_MIME_TYPE, "image/png");
+    session.save();
+    String identifier = ((NodeImpl) node).getIdentifier();
+    applyUserSession(userName, "gtn", workspaceName);
+    ConversationState.setCurrent(new ConversationState(new Identity(userName)));
+    String restPath = "/thumbnailImage/custom/250x250/collaboration/"+identifier;
+    MultivaluedMap<String, String> headers = new MultivaluedMapImpl();
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, -10);
+    SimpleDateFormat dateFormat = new SimpleDateFormat(ThumbnailRESTService.IF_MODIFIED_SINCE_DATE_FORMAT);
+    headers.putSingle("If-Modified-Since", dateFormat.format(cal.getTime()));
+    ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, headers, null);
+    assertNotNull(response);
+    assertEquals(200,response.getStatus());
   }
   
   public void tearDown() throws Exception {
