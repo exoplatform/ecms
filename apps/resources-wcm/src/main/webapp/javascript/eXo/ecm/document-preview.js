@@ -372,15 +372,14 @@
         }
 
         if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
-            if (this.settings.doc.downloadUrl.includes('javascript:')) {
-              html += '      <li><div class="downloadBtn">' +
-                '                <a href="' + this.settings.doc.downloadUrl + '" class="clickable"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                '                </div></li>';
-            } else {
-              html += '      <li><div class="downloadBtn">' +
-                '                <a onclick="documentPreview.download(\'' + this.settings.doc.downloadUrl + '\', \'' + this.settings.doc.title + '\')" class="clickable"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                '                </div></li>';
-            }
+          html += '      <li><div class="downloadBtn">' +
+                  '      <a href="' + this.settings.doc.downloadUrl + '" class="clickable"';
+          if (!this.settings.doc.downloadUrl.includes('javascript:')) {
+            html+= ' download="' + this.settings.doc.title + '"';
+          }
+          html += '><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                  '                </div></li>';
+
         }
         html +='    </ul>' +
             '  </div>';
@@ -537,15 +536,14 @@
                       '                </div></li>';
                   }
                   if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
-                    if (this.settings.doc.downloadUrl.includes('javascript:')) {
-                      html +='      <li><div class="downloadBtn">' +
-                        '                <a href="' + this.settings.doc.downloadUrl + '"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                        '                </div></li>';
-                    } else {
-                      html +='      <li><div class="downloadBtn">' +
-                      '                <a onclick="documentPreview.download(\'' + this.settings.doc.downloadUrl + '\', \'' + this.settings.doc.title + '\')" class="clickable"><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                      '                </div></li>';
+                    html += '      <li><div class="downloadBtn">' +
+                            '      <a href="' + this.settings.doc.downloadUrl + '" class="clickable"';
+                    if (!this.settings.doc.downloadUrl.includes('javascript:')) {
+                      html+= ' download="' + this.settings.doc.title + '"';
                     }
+                    html += '><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                            '                </div></li>';
+
                   }
                   html +='    </ul>' +
                       '  </div>';
@@ -1265,30 +1263,6 @@
     hide: function () {
       $('#documentPreviewContainer').hide();
       $('body').css('overflow', '');
-    },
-
-    download: function (url, fileName) {
-      if (url.indexOf('/') > 0 && !url.includes(window.location.hostname)) {
-        return;
-      }
-      return fetch(url, {
-        credentials: 'include',
-        method: 'GET',
-      }).then(resp => {
-        if (resp && resp.ok) {
-          return resp.blob();
-        } else {
-          throw new Error(`Error downloading file '${url}' from server`);
-        }
-      }).then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName.replace(/\[[0-9]*\]$/g, '');
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      });
     },
 
     goToNext: function () {
