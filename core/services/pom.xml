@@ -270,6 +270,12 @@
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-core</artifactId>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
     <!-- "unused declared" by analyze but still use for test -->
     <dependency>
       <groupId>org.hsqldb</groupId>
