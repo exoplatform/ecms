@@ -90,7 +90,7 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Arbeitsbereich-Laufwerk:</driveWorkspace>
+      <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Zurück zu JCR Hauptlaufwerke</backToJCR>
       <setUpBrowser>Ihre Browsing-Präferenzen einstellen</setUpBrowser>
       <refesh>Aktualisieren</refesh>
@@ -1496,8 +1496,8 @@
       <can-not-compare>Fehler beim Vergleichen von diesen zwei Versionen</can-not-compare>
       <compare-unavailable>Der Versionsvergleich ist für dieses Dokument nicht verfügbar</compare-unavailable>
       <DateChange>Auf {0}</DateChange>
-      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared with</ComparedWith>
+      <PreviousAndNextCompare>Änderungen von {0} zu {1}</PreviousAndNextCompare>
+      <ComparedWith>verglichen mit</ComparedWith>
       <restoredFrom>Wiederhergestellt von Version {0}</restoredFrom>
     </label>
   </UIDiff>
