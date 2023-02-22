@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionManager;
 import org.junit.Test;
 
 import org.exoplatform.portal.config.UserPortalConfigService;
@@ -41,13 +42,14 @@ public class LivePortalManagerServiceTest {
     WCMConfigurationService wcmConfigurationService = mock(WCMConfigurationService.class);
     RepositoryService repositoryService = mock(RepositoryService.class);
     UserPortalConfigService portalConfigService = mock(UserPortalConfigService.class);
+    DataDistributionManager dataDistributionManager = mock(DataDistributionManager.class);
     SessionProvider sessionProvider = mock(SessionProvider.class);
 
     LivePortalManagerServiceImpl livePortalManagerService = new LivePortalManagerServiceImpl(listenerService,
                                                                                              webSchemaConfigService,
                                                                                              wcmConfigurationService,
                                                                                              portalConfigService,
-                                                                                             repositoryService);
+                                                                                             repositoryService, dataDistributionManager);
 
     String globalPortalName = "global";
     when(portalConfigService.getGlobalPortal()).thenReturn(globalPortalName);

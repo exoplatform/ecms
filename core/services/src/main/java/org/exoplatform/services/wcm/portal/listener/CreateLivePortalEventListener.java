@@ -90,7 +90,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     try {
       try {
         livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
-        return;//portal already exists or its portal config not yet created
+        return;//portal already exists
       } catch (Exception e) {
         //portal did not exists, process to create
         if (LOG.isInfoEnabled()) {
