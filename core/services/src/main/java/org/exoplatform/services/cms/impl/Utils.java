@@ -673,7 +673,7 @@ public class Utils {
       if (c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|' || c == 'ʿ' || c == 'ˇ') {
         cleanedStr.deleteCharAt(i);
         cleanedStr.insert(i, '_');
-      } else if (!(Character.isLetterOrDigit(c) || Character.isWhitespace(c) || c == '.' || c == '-' || c == '_')) {
+      } else if (!(Character.isLetterOrDigit(c) || Character.isWhitespace(c) || c == '.' || c == '-' || c == '_' || c == '%')) {
         cleanedStr.deleteCharAt(i);
         strLength = cleanedStr.length();
         continue;

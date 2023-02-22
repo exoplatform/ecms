@@ -46,7 +46,7 @@
     <org.exoplatform.platform-ui.version>6.5.x-exo-SNAPSHOT</org.exoplatform.platform-ui.version>
     <addon.exo.analytics.version>1.4.x-exo-SNAPSHOT</addon.exo.analytics.version>
     <!-- **************************************** -->
-    <!-- Apache Chemistry (OpencCMIS) API -->
+    <!-- Apache Chemistry (OpenCMIS) API -->
     <!-- **************************************** -->
     <org.apache.chemistry.opencmis.version>1.1.0</org.apache.chemistry.opencmis.version>
     <!-- **************************************** -->
