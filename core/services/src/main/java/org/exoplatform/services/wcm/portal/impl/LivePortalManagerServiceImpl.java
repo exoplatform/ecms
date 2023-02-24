@@ -16,10 +16,16 @@
  */
 package org.exoplatform.services.wcm.portal.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.jcr.*;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
@@ -29,12 +35,9 @@ import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.distribution.DataDistributionManager;
-import org.exoplatform.services.jcr.ext.distribution.DataDistributionMode;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -60,8 +63,6 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
 
   private final String                      PORTAL_FOLDER   = "exo:portalFolder";
 
-  private static final String               SITES_PATH      = "/sites";
-
   private static final Log LOG = ExoLogger.getLogger(LivePortalManagerServiceImpl.class.getName());
 
   private ConcurrentHashMap<String, String> livePortalPaths = new ConcurrentHashMap<String, String>();
@@ -76,28 +77,24 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
 
   private ListenerService                   listenerService;
 
-  private final DataDistributionManager     dataDistributionManager;
-
   /**
    * Instantiates a new live portal manager service impl.
    *
    * @param webSchemaConfigService the web schema config service
    * @param wcmConfigurationService the wcm config service
    * @param repositoryService the repository service
-   * @param dataDistributionManager_
    */
   public LivePortalManagerServiceImpl(
-          ListenerService listenerService,
-          WebSchemaConfigService webSchemaConfigService,
-          WCMConfigurationService wcmConfigurationService,
-          UserPortalConfigService portalConfigService,
-          RepositoryService repositoryService, DataDistributionManager dataDistributionManager_) {
+      ListenerService listenerService,
+      WebSchemaConfigService webSchemaConfigService,
+      WCMConfigurationService wcmConfigurationService,
+      UserPortalConfigService portalConfigService,
+      RepositoryService repositoryService) {
     this.wcmConfigService = wcmConfigurationService;
     this.webSchemaConfigService = webSchemaConfigService;
     this.portalConfigService = portalConfigService;
     this.repositoryService = repositoryService;
     this.listenerService = listenerService;
-    this.dataDistributionManager = dataDistributionManager_;
   }
 
   /*
@@ -148,8 +145,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     if (StringUtils.equals(portalConfigService.getGlobalPortal(), portalName)) {
       return null;
     }
-    Node portalsStorage = null ;
-    portalsStorage = getLivePortalsStorage(sessionProvider);
+    Node portalsStorage = getLivePortalsStorage(sessionProvider);
     if (portalsStorage != null) {
       return portalsStorage.getNode(portalName);
     }
@@ -197,14 +193,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     String portalsStoragePath = locationEntry.getPath();
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
-    try {
-      return (Node) session.getItem(portalsStoragePath);
-    } catch (PathNotFoundException e) {
-      if (SITES_PATH.equals(portalsStoragePath)) {
-        return createSitesNode(session);
-      }
-      throw new PathNotFoundException("Node not found ", e);
-    }
+    return (Node)session.getItem(portalsStoragePath);
   }
 
   /*
@@ -356,23 +345,4 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
       RequestLifeCycle.end();
     }
   }
-
-  private Node createSitesNode(Session session) throws RepositoryException {
-    Node rootNode = session.getRootNode();
-    Map<String, String[]> permissionsMap = new HashMap<>();
-    List<String> permissions = new ArrayList<>(4);
-    permissions.add(PermissionType.READ);
-    permissions.add(PermissionType.ADD_NODE);
-    permissions.add(PermissionType.SET_PROPERTY);
-    permissions.add(PermissionType.REMOVE);
-    List<String> readPermissions = new ArrayList<String>();
-    readPermissions.add(PermissionType.READ);
-    permissionsMap.put("*:/platform/web-contributors", permissions.toArray(new String[permissions.size()]));
-    permissionsMap.put("*:/platform/administrators", permissions.toArray(new String[permissions.size()]));
-    permissionsMap.put("any", readPermissions.toArray(new String[readPermissions.size()]));
-
-    return dataDistributionManager.getDataDistributionType(DataDistributionMode.NONE)
-                                   .getOrCreateDataNode(rootNode, SITES_PATH, null, null, permissionsMap);
-  }
-  
 }
