@@ -62,7 +62,6 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
 
   private NodeHierarchyCreator nodeHierarchyCreator;
 
-  private boolean isNodeHierarchyCreatorInitialized = false;
 
   @SuppressWarnings("unchecked")
   public CreateLivePortalEventListener(ManageDriveService manageDriveService, WCMConfigurationService configurationService, NodeHierarchyCreator nodeHierarchyCreator, InitParams params) throws Exception {
@@ -186,11 +185,10 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
   }
 
   private void initNodeHierarchyCreator() {
-    if (!isNodeHierarchyCreatorInitialized) {
+    if (!nodeHierarchyCreator.isNodeHierarchyCreatorInitialized()) {
       LOG.info("init nodeHierarchyCreator ...");
       try {
         this.nodeHierarchyCreator.init();
-        isNodeHierarchyCreatorInitialized = true;
         LOG.info("nodeHierarchyCreator initialized");
 
       } catch (Exception e) {
