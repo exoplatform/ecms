@@ -16,8 +16,8 @@
  */
 package org.exoplatform.services.wcm.portal.listener;
 
-import org.exoplatform.portal.config.DataStorageImpl;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.wcm.javascript.XJavascriptService;
@@ -41,12 +41,12 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *
  * @see UpdateLivePortalEventListener
  */
-public class UpdateLivePortalEventListener extends Listener<DataStorageImpl,PortalConfig>{
+public class UpdateLivePortalEventListener extends Listener<LayoutService, PortalConfig>{
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
-  public void onEvent(Event<DataStorageImpl, PortalConfig> event) throws Exception {
+  public void onEvent(Event<LayoutService, PortalConfig> event) throws Exception {
 
     XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
     XSkinService xSkinService = WCMCoreUtils.getService(XSkinService.class);

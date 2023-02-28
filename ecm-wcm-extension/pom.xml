@@ -43,11 +43,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.document</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.organization.api</artifactId>
       <scope>runtime</scope>
     </dependency>

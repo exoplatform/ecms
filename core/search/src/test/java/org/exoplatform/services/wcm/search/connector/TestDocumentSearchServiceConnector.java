@@ -16,20 +16,21 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.api.search.SearchServiceConnector;
-import org.exoplatform.commons.api.search.data.SearchContext;
-import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
-import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.ecms.legacy.search.SearchServiceConnector;
+import org.exoplatform.ecms.legacy.search.data.SearchContext;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -37,8 +38,6 @@ import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
-
-import org.mockito.Mockito;
 
 /**
  * Created by The eXo Platform SAS

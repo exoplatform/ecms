@@ -649,7 +649,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
     List<String> listPortalName = new ArrayList<String>();
     DataStorage service = WCMCoreUtils.getService(DataStorage.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class) ;
-    PageList pageList = service.find(query) ;
+    PageList pageList = service.find(query, null) ;
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(Object object:pageList.getAll()) {
       PortalConfig portalConfig = (PortalConfig)object;
