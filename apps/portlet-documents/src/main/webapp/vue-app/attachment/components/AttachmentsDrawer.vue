@@ -6,7 +6,7 @@
       :confirm-close-labels="confirmAbortUploadLabels"
       class="attachmentsAppDrawer"
       right
-      @closed="resetAttachmentsDrawer">
+      @closed="closeAttachmentsAppDrawer">
       <template slot="title">
         <div class="attachmentsDrawerHeader">
           <span>{{ $t('attachments.upload.document') }}</span>
@@ -210,11 +210,7 @@ export default {
     },
   },
   created() {
-    document.addEventListener('paste', this.onPaste, false);
-    this.$root.$on('open-select-from-drives', () => {
-      this.creationType = this.$t('attachments.uploaded.from.cloud');
-      this.openSelectFromDrivesDrawer();
-    });
+    
     this.$root.$on('open-attachments-app-drawer', () => {
       this.attachmentsChanged = false;
       this.openAttachmentsAppDrawer();
@@ -272,11 +268,17 @@ export default {
       }
     },
     openAttachmentsAppDrawer() {
+      document.addEventListener('paste', this.onPaste, false);
+      this.$root.$on('open-select-from-drives', () => {
+        this.creationType = this.$t('attachments.uploaded.from.cloud');
+        this.openSelectFromDrivesDrawer();
+      });
       this.$refs.attachmentsAppDrawer.open();
       this.$root.$emit('attachments-app-drawer-opened');
       window.setTimeout(() => this.handleProvidedFiles(), 400);
     },
     closeAttachmentsAppDrawer() {
+      this.resetAttachmentsDrawer();
       this.$root.$emit('reset-attachments-upload-input');
       document.removeEventListener('paste', this.onPaste, false);
       this.$refs.attachmentsAppDrawer.close();
