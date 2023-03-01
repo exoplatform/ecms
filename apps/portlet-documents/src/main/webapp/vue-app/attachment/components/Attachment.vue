@@ -158,7 +158,7 @@ export default {
       if (this.entityType && this.entityId) {
         return this.$attachmentService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
           attachments.forEach(attachment => attachment.name = attachment.title);
-          this.attachments = attachments;
+          Object.assign(this.attachments, attachments);
         });
       }
     },
