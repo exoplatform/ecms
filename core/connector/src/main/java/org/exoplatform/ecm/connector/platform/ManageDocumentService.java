@@ -18,10 +18,7 @@ package org.exoplatform.ecm.connector.platform;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
@@ -418,7 +415,7 @@ public class ManageDocumentService implements ResourceContainer {
       if ((workspaceName != null) && (driveName != null) && (currentFolder != null)) {
         Node currentFolderNode = getNode(Text.escapeIllegalJcrChars(driveName),
                                          Text.escapeIllegalJcrChars(workspaceName),
-                                         org.exoplatform.services.jcr.util.Text.escapeIllegalJcrChars(currentFolder));
+                                         Text.escapeIllegalJcrChars(currentFolder));
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
         return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
                                            currentFolderNode,
@@ -669,7 +666,7 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     for (String folder : currentFolder.split("/")) {
-      String cleanFolderName = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
+      String cleanFolderName = org.exoplatform.services.jcr.util.Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
       if (node.hasNode(folder)) {
         node = node.getNode(folder);
       } else if (node.hasNode(cleanFolderName)) {
