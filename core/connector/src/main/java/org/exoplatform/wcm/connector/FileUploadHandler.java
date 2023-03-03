@@ -566,6 +566,7 @@ public class FileUploadHandler {
       jcrContent.setProperty("jcr:lastModified", new GregorianCalendar());
       jcrContent.setProperty("jcr:data", new BufferedInputStream(new FileInputStream(new File(location))));
       jcrContent.setProperty("jcr:mimeType", mimetype);
+      file.setProperty(NodetypeConstant.EXO_DATE_MODIFIED, new GregorianCalendar());
 
       if(parent.hasNode(nodeName) && CREATE_VERSION.equals(existenceAction)) {
         file.save();
