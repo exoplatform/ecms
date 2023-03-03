@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="Hello World! title" />
+	<Content type="html"> 
+<![CDATA[This is a text inside CDATA.]]></Content>
+</Module>

@@ -172,7 +172,7 @@ public class UISearchForm extends UIForm {
     List<SelectItemOption<String>> portals = new ArrayList<SelectItemOption<String>>();
     DataStorage service = getApplicationComponent(DataStorage.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class);
-    List<PortalConfig> list = service.find(query).getAll();
+    List<PortalConfig> list = service.find(query, null).getAll();
     portals.add(new SelectItemOption<String>(ALL_OPTION, ALL_OPTION));
     for (PortalConfig portalConfig : list) {
       portals.add(new SelectItemOption<String>(portalConfig.getName(), portalConfig.getName()));
