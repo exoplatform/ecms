@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<note>
+  <to>John</to>
+  <from>Alice</from>
+  <heading>Reminder</heading>
+  <body>Don't forget it this weekend!</body>
+</note>

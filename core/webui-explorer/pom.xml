@@ -50,10 +50,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.document</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.organization.api</artifactId>
     </dependency>
     <dependency>

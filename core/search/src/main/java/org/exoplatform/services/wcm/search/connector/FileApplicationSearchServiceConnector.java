@@ -16,25 +16,26 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.commons.api.search.data.SearchContext;
-import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.commons.search.es.ElasticSearchFilter;
-import org.exoplatform.commons.search.es.ElasticSearchFilterType;
+
 import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecms.legacy.search.data.SearchContext;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
+import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilter;
+import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilterType;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Search connector for files for the Sites Explorer application
