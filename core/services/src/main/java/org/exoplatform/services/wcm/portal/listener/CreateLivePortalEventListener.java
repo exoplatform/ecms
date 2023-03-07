@@ -22,9 +22,9 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
-import org.exoplatform.portal.config.DataStorageImpl;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -47,7 +47,7 @@ import java.util.List;
  *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-public class CreateLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
+public class CreateLivePortalEventListener extends Listener<LayoutService, PortalConfig> {
   private static final Log LOG = ExoLogger.getLogger(CreateLivePortalEventListener.class.getName());
   private boolean autoCreatedDrive = true;
   private List<String> targetDrives = null;
@@ -83,7 +83,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
    *
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
-  public final void onEvent(final Event<DataStorageImpl, PortalConfig> event) throws Exception {
+  public final void onEvent(final Event<LayoutService, PortalConfig> event) throws Exception {
     PortalConfig portalConfig = event.getData();
     if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())
         || StringUtils.equals(getPortalConfigService().getGlobalPortal(), portalConfig.getName())) {

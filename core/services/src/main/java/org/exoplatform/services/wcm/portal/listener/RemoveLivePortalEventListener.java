@@ -16,8 +16,8 @@
  */
 package org.exoplatform.services.wcm.portal.listener;
 
-import org.exoplatform.portal.config.DataStorageImpl;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.Event;
@@ -33,7 +33,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
+public class RemoveLivePortalEventListener extends Listener<LayoutService, PortalConfig> {
   private static final Log LOG = ExoLogger.getLogger(RemoveLivePortalEventListener.class.getName());
 
   /*
@@ -41,7 +41,7 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
    *
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
-  public void onEvent(Event<DataStorageImpl, PortalConfig> event) throws Exception {
+  public void onEvent(Event<LayoutService, PortalConfig> event) throws Exception {
     PortalConfig portalConfig = event.getData();
     if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())) return;
     String portalName = portalConfig.getName();

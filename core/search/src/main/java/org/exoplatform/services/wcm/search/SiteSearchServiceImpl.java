@@ -16,20 +16,29 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import javax.jcr.*;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.Value;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
-import javax.jcr.query.*;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.Row;
+import javax.jcr.query.RowIterator;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.container.PortalContainer;
+
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
-import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -50,15 +59,18 @@ import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.QueryCriteria.DATE_RANGE_SELECTED;
 import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
 import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
-import org.exoplatform.services.wcm.search.base.*;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
+import org.exoplatform.services.wcm.search.base.PageListFactory;
+import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 import org.exoplatform.services.wcm.search.connector.BaseSearchServiceConnector;
-import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
+import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 /**
  * The SiteSearchService component is used in the Search portlet that allows users
  * to find all information matching with your given keyword.

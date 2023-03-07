@@ -19,17 +19,20 @@ package org.exoplatform.services.wcm.search.connector;
 import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.commons.api.search.SearchServiceConnector;
-import org.exoplatform.commons.api.search.data.SearchContext;
-import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecms.legacy.search.SearchServiceConnector;
+import org.exoplatform.ecms.legacy.search.data.SearchContext;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;

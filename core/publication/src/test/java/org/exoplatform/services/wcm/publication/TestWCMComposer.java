@@ -88,10 +88,10 @@ public class TestWCMComposer extends BasePublicationTestCase {
 		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
 		MembershipEntry membershipEntry = new MembershipEntry("/platform/web-contributors", "*");
 		membershipEntries.add(membershipEntry);
-		Identity identity = new Identity("John", membershipEntries);
+		Identity identity = new Identity("john", membershipEntries);
 		ConversationState state = new ConversationState(identity);
 		ConversationState.setCurrent(state);
-		applyUserSession("John", "gtn", "collaboration");
+		applyUserSession("john", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live/web contents/site artifacts";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
 		// When
@@ -111,10 +111,10 @@ public class TestWCMComposer extends BasePublicationTestCase {
 		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
 		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
 		membershipEntries.add(membershipEntry);
-		Identity identity = new Identity("John", membershipEntries);
+		Identity identity = new Identity("john", membershipEntries);
 		ConversationState state = new ConversationState(identity);
 		ConversationState.setCurrent(state);
-		applyUserSession("Root", "gtn", "collaboration");
+		applyUserSession("root", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
 		//test if FILTER_TOTAL value is already set
@@ -139,10 +139,10 @@ public class TestWCMComposer extends BasePublicationTestCase {
 		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
 		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
 		membershipEntries.add(membershipEntry);
-		Identity identity = new Identity("John", membershipEntries);
+		Identity identity = new Identity("john", membershipEntries);
 		ConversationState state = new ConversationState(identity);
 		ConversationState.setCurrent(state);
-		applyUserSession("Root", "gtn", "collaboration");
+		applyUserSession("root", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
 		//test if FILTER_TOTAL value is already set
@@ -167,10 +167,10 @@ public class TestWCMComposer extends BasePublicationTestCase {
 		Collection<MembershipEntry> membershipEntries = new ArrayList<MembershipEntry>();
 		MembershipEntry membershipEntry = new MembershipEntry("/platform/administrators", "*");
 		membershipEntries.add(membershipEntry);
-		Identity identity = new Identity("John", membershipEntries);
+		Identity identity = new Identity("john", membershipEntries);
 		ConversationState state = new ConversationState(identity);
 		ConversationState.setCurrent(state);
-		applyUserSession("Root", "gtn", "collaboration");
+		applyUserSession("root", "gtn", "collaboration");
 		String folderPath = "repository:collaboration:/sites content/live";
 		NodeLocation  nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
 		//test if FILTER_TOTAL value is already set

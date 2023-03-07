@@ -16,12 +16,12 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
-import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.social.metadata.model.MetadataItem;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
+import org.exoplatform.social.metadata.model.MetadataItem;
 
 /**
  * Created by The eXo Platform SAS
