@@ -99,7 +99,8 @@ export default {
         'entityType': this.entityType,
         'defaultDrive': this.defaultDrive,
         'defaultFolder': this.defaultFolder,
-        'spaceId': this.spaceId
+        'spaceId': this.spaceId,
+        'attachments': this.attachments 
       };
     }
   },
