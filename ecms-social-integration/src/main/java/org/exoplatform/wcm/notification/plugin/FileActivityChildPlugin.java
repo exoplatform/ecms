@@ -51,7 +51,7 @@ import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.social.core.utils.MentionUtils;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
-import org.exoplatform.webui.cssfile.*;
+import org.exoplatform.ecms.css.*;
 
 
 public class FileActivityChildPlugin extends AbstractNotificationChildPlugin {
