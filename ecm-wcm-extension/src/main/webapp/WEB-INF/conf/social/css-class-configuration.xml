@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+  <component>
+    <key>org.exoplatform.ecms.css.CssClassManager</key>
+    <type>org.exoplatform.ecms.css.CssClassManager</type>
+    <description>Manages CSS class of icon files</description>
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.ecms.css.CssClassManager</target-component>
+    <component-plugin>
+      <name>forum.default.cssclass</name>
+      <set-method>registerCssClassPlugin</set-method>
+      <type>org.exoplatform.ecms.css.CssClassPlugin</type>
+      <description>default supported CSS class icon file</description>
+      <init-params>
+
+        <object-param>
+          <name>default</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>default</string>
+            </field>
+            <field name="cssClass">
+              <string>FileDefault</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationoctet-stream]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>gzip</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>gzip</string>
+            </field>
+            <field name="cssClass">
+              <string>FileArchiveDefault</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationx-tar,applicationx-gzip,applicationx-bzip2,applicationother-zip]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>gz</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>gz</string>
+            </field>
+            <field name="cssClass">
+              <string>FileArchiveDefault</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>xz</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>xz</string>
+            </field>
+            <field name="cssClass">
+              <string>FileArchiveDefault</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>tar</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>tar</string>
+            </field>
+            <field name="cssClass">
+              <string>FileArchiveDefault</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>rar</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>rar</string>
+            </field>
+            <field name="cssClass">
+              <string>FileArchiveRar</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationrar]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>zip</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>zip</string>
+            </field>
+            <field name="cssClass">
+              <string>FileArchiveZip</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[FileZip,applicationzip]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>7z</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>7z</string>
+            </field>
+            <field name="cssClass">
+              <string>FileArchiveZip</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>jar</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>jar</string>
+            </field>
+            <field name="cssClass">
+              <string>FileJar</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationjava-archive]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>ear</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>ear</string>
+            </field>
+            <field name="cssClass">
+              <string>FileEar</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationear-java-archive]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>war</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>war</string>
+            </field>
+            <field name="cssClass">
+              <string>FileWar</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationx-zip]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>wav</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>wav</string>
+            </field>
+            <field name="cssClass">
+              <string>FileAudioDefault</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[audiomidi,audiox-aiff,audiobasic,audiox-wav,audioother]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>m4a</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>m4a</string>
+            </field>
+            <field name="cssClass">
+              <string>FileAudioDefault</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mp3</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mp3</string>
+            </field>
+            <field name="cssClass">
+              <string>FileMp3</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[audiomp3]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>m3u</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>m3u</string>
+            </field>
+            <field name="cssClass">
+              <string>audioother</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[audioother]]></string>
+            </field>
+          </object>
+        </object-param>
+
+
+        <object-param>
+          <name>mid</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mid</string>
+            </field>
+            <field name="cssClass">
+              <string>audioother</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[audioother]]></string>
+            </field>
+          </object>
+        </object-param>
+        
+        <object-param>
+          <name>wma</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>wma</string>
+            </field>
+            <field name="cssClass">
+              <string>FileWma</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[audiox-ms-wma]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>avi</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>avi</string>
+            </field>
+            <field name="cssClass">
+              <string>FileVideo</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videox-msvideo,videoquicktime,videox-sgi-movie,videox-msvideo,videompe]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mpe</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mpe</string>
+            </field>
+            <field name="cssClass">
+              <string>FileVideo</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mov</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mov</string>
+            </field>
+            <field name="cssClass">
+              <string>FileVideo</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>swf</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>swf</string>
+            </field>
+            <field name="cssClass">
+              <string>FileFlash</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationx-shockwave-flash]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>flv</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>flv</string>
+            </field>
+            <field name="cssClass">
+              <string>FileFlash</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videox-flv]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>wmv</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>wmv</string>
+            </field>
+            <field name="cssClass">
+              <string>FileWmv</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videox-ms-wmv]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>gdoc</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>gdoc</string>
+            </field>
+            <field name="cssClass">
+              <string>FileGdoc</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndgoogle-appsdocument]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>doc</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>doc</string>
+            </field>
+            <field name="cssClass">
+              <string>FileWord</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationmsword,applicationwordperfect,applicationvndopenxmlformats-officedocumentwordprocessingmldocument,FileDocx]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>odt</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>odt</string>
+            </field>
+            <field name="cssClass">
+              <string>FileOpenOffice1</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[FileOdt,applicationvndoasisopendocumenttext,applicationvndoasisopendocumentspreadsheet,applicationvndoasisopendocumentdatabase]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mpg</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mpg</string>
+            </field>
+            <field name="cssClass">
+              <string>FileMpeg</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videompg]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mp4</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mp4</string>
+            </field>
+            <field name="cssClass">
+              <string>FileMpeg</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videomp4]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mpeg</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mpeg</string>
+            </field>
+            <field name="cssClass">
+              <string>FileMpeg</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videompeg,videompg]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>m4v</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>m4v</string>
+            </field>
+            <field name="cssClass">
+              <string>FileM4v</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videox-m4v]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mkv</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mkv</string>
+            </field>
+            <field name="cssClass">
+              <string>FileMkv</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[videox-matroska]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>txt</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>txt</string>
+            </field>
+            <field name="cssClass">
+              <string>FileTxt</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[textplain]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>lwp</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>lwp</string>
+            </field>
+            <field name="cssClass">
+              <string>FileLwp</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationlwp]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>page</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>page</string>
+            </field>
+            <field name="cssClass">
+              <string>FilePage</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applepages]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>mdb</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>mdb</string>
+            </field>
+            <field name="cssClass">
+              <string>FileMdb</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationmsaccess]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>odf</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>odf</string>
+            </field>
+            <field name="cssClass">
+              <string>FileOdf</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndoasisopendocumentformula]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>exe</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>exe</string>
+            </field>
+            <field name="cssClass">
+              <string>FileExe</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationexe]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>pdf</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>pdf</string>
+            </field>
+            <field name="cssClass">
+              <string>FilePdf</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationpdf]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>sh</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>sh</string>
+            </field>
+            <field name="cssClass">
+              <string>FileScript</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationpostscript]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>ftf</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>ftf</string>
+            </field>
+            <field name="cssClass">
+              <string>FileRtf</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationrtf]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>gslides</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>gslides</string>
+            </field>
+            <field name="cssClass">
+              <string>FileGslides</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndgoogle-appspresentation]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>applekey</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>applekey</string>
+            </field>
+            <field name="cssClass">
+              <string>FileAppleKey</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[textkey]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>office2</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>office2</string>
+            </field>
+            <field name="cssClass">
+              <string>FileOpenOffice2</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndoasisopendocumentpresentation]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>ppt</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>ppt</string>
+            </field>
+            <field name="cssClass">
+              <string>FilePpt</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationppt,applicationvndopenxmlformats-officedocumentpresentationmlpresentation,FilePptx]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>prz</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>prz</string>
+            </field>
+            <field name="cssClass">
+              <string>FilePrz</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationfreelance]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>gsheet</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>gsheet</string>
+            </field>
+            <field name="cssClass">
+              <string>FileGsheet</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndgoogle-appsspreadsheet]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>xls</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>xls</string>
+            </field>
+            <field name="cssClass">
+              <string>FileExcel</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationxls,applicationxlt,applicationvndopenxmlformats-officedocumentspreadsheetmlsheet,FileXlsx]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>xlt</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>xlt</string>
+            </field>
+            <field name="cssClass">
+              <string>FileExcel</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationxls,applicationxlt,applicationvndopenxmlformats-officedocumentspreadsheetmlsheet,FileXls,FileXlt]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>sxc</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>sxc</string>
+            </field>
+            <field name="cssClass">
+              <string>FileExcel</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[FileSxc]]></string>
+            </field>
+          </object>
+        </object-param>
+        
+        <object-param>
+          <name>office3</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>office3</string>
+            </field>
+            <field name="cssClass">
+              <string>FileOpenOffice3</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndoasisopendocumentspreadsheet-template]]></string>
+            </field>
+          </object>
+        </object-param>
+
+
+        <object-param>
+          <name>ots</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>ots</string>
+            </field>
+            <field name="cssClass">
+              <string>FileOpenOffice3</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndoasisopendocumentspreadsheet-template]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>html</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>html</string>
+            </field>
+            <field name="cssClass">
+              <string>FileHtml</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[texthtml,texthtm,FileHtm,FileShtml,FileGtmpl]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>xml</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>xml</string>
+            </field>
+            <field name="cssClass">
+              <string>FileXml</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[textxml]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>js</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>js</string>
+            </field>
+            <field name="cssClass">
+              <string>FileJs</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationx-javascript]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>json</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>json</string>
+            </field>
+            <field name="cssClass">
+              <string>FileJson</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationjson]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>css</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>css</string>
+            </field>
+            <field name="cssClass">
+              <string>FileCss</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[textcss, FileLess]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>xsl</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>xsl</string>
+            </field>
+            <field name="cssClass">
+              <string>FileXsl</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[textxsl]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>ttf</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>ttf</string>
+            </field>
+            <field name="cssClass">
+              <string>FileFont</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[fonttff,fontotf,fontttc,fonteot,fontdfont,fontttf,fontwoff]]></string>
+            </field>
+          </object>
+        </object-param>
+        
+        <object-param>
+          <name>woff</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>woff</string>
+            </field>
+            <field name="cssClass">
+              <string>FileFont</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[fonttff,fontotf,fontttc,fonteot,fontdfont,fontttf,fontwoff]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>gdraw</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>gdraw</string>
+            </field>
+            <field name="cssClass">
+              <string>FileGdraw</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndgoogle-appsdrawing]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>bmp</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>bmp</string>
+            </field>
+            <field name="cssClass">
+              <string>FileBmp</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagebmp]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>icon</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>icon</string>
+            </field>
+            <field name="cssClass">
+              <string>FileIco</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagex-icon]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>gif</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>gif</string>
+            </field>
+            <field name="cssClass">
+              <string>FileGif</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagegif]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>odg</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>odg</string>
+            </field>
+            <field name="cssClass">
+              <string>FileOdg</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationvndoasisopendocumentgraphics]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>png</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>png</string>
+            </field>
+            <field name="cssClass">
+              <string>FilePng</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagepng]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>psd</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>psd</string>
+            </field>
+            <field name="cssClass">
+              <string>FilePsd</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagepsd]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>psb</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>psb</string>
+            </field>
+            <field name="cssClass">
+              <string>FilePsd</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagepsb]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>raw</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>raw</string>
+            </field>
+            <field name="cssClass">
+              <string>FileRaw</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationraw]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>tif</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>tif</string>
+            </field>
+            <field name="cssClass">
+              <string>FileTif</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagetiff]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>xcf</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>xcf</string>
+            </field>
+            <field name="cssClass">
+              <string>FileXcf</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagexcf]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>indd</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>indd</string>
+            </field>
+            <field name="cssClass">
+              <string>FileIndd</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationx-indesign]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>ai</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>ai</string>
+            </field>
+            <field name="cssClass">
+              <string>FileAi</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[applicationillustrator,applicationeps]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>svg</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>svg</string>
+            </field>
+            <field name="cssClass">
+              <string>FileSvg</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagesvg-xml]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>jpeg</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>jpeg</string>
+            </field>
+            <field name="cssClass">
+              <string>FileJpg</string>
+            </field>
+            <field name="groupFileTypes">
+              <string><![CDATA[imagejpeg]]></string>
+            </field>
+          </object>
+        </object-param>
+
+        <object-param>
+          <name>jpg</name>
+          <description></description>
+          <object type="org.exoplatform.ecms.css.CssClassIconFile">
+            <field name="type">
+              <string>jpg</string>
+            </field>
+            <field name="cssClass">
+              <string>FileJpg</string>
+            </field>
+            <field name="groupFileTypes">
+              <string></string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>

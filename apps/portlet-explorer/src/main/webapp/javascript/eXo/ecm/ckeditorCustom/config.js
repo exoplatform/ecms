@@ -24,7 +24,7 @@ CKEDITOR.editorConfig = function( config ) {
     CKEDITOR.plugins.addExternal('simpleLink','/commons-extension/eXoPlugins/simpleLink/','plugin.js');
     CKEDITOR.plugins.addExternal('simpleImage','/commons-extension/eXoPlugins/simpleImage/','plugin.js');
 	CKEDITOR.plugins.addExternal('content','/eXoWCMResources/eXoPlugins/content/','plugin.js');
-	CKEDITOR.plugins.addExternal('insertPortalLink','/commons-extension/eXoPlugins/insertPortalLink/','plugin.js');
+	CKEDITOR.plugins.addExternal('insertPortalLink','/eXoWCMResources/eXoPlugins/insertPortalLink/','plugin.js');
 	CKEDITOR.plugins.addExternal('wcmImage','/eXoWCMResources/eXoPlugins/wcmImage/','plugin.js');
   
     //TODO we should ensure adding these plugins
