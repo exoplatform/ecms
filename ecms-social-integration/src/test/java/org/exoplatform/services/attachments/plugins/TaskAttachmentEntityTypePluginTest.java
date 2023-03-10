@@ -103,6 +103,11 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
     when(extendedSession.getNodeByIdentifier(anyString())).thenReturn(node);
     when(extendedSession.itemExists(anyString())).thenReturn(true);
 
+    // Return original node ID if it is not under space and user can not access the group's target folder
+    when(node.getPath()).thenReturn("/Users/user1/documents/testFile.docx");
+    assertEquals(1, taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).size());
+    assertEquals(attachmentId, taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).get(0));
+
     // Create different nodes
     NodeImpl rootNode = mock(NodeImpl.class);
     NodeImpl taskParentNode = mock(NodeImpl.class);
