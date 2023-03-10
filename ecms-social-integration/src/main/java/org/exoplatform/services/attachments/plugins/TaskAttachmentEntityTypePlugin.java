@@ -129,7 +129,7 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
         attachmentNode.save();
       }
       if(linkNodes.isEmpty()) {
-        linkNodes.add(attachmentId);
+        return Collections.singletonList(attachmentId);
       }
       return linkNodes;
     } catch (Exception e) {
