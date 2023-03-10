@@ -128,6 +128,9 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
         ((ExtendedNode) attachmentNode).setPermission(permittedIdentity, new String[]{PermissionType.READ});
         attachmentNode.save();
       }
+      if(linkNodes.isEmpty()) {
+        linkNodes.add(attachmentId);
+      }
       return linkNodes;
     } catch (Exception e) {
       LOG.error("Error getting linked documents {}", attachmentId, e);
