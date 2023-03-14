@@ -22,7 +22,7 @@
       <UITemplatesManager>Dokumente</UITemplatesManager>
       <UICLVTemplatesManager>Liste</UICLVTemplatesManager>
       <UIViewManager>Ansichten</UIViewManager>
-      <UIDriveManager>Laufwerke</UIDriveManager>
+      <UIDriveManager>Dokumente</UIDriveManager>
       <UIQueriesManager>Abfragen</UIQueriesManager>
       <UIActionManager>Aktionen</UIActionManager>
       <UIScriptManager>Skripte</UIScriptManager>
@@ -383,7 +383,7 @@
     </msg>
     <tab>
       <label>
-        <DriveInputSet>Laufwerk</DriveInputSet>
+        <DriveInputSet>Dokument</DriveInputSet>
         <ViewsInputSet>Ansichten anwenden</ViewsInputSet>
         <PermissionInputSet>Berechtigungen auswählen</PermissionInputSet>
       </label>
@@ -408,12 +408,12 @@
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Laufwerk hinzufügen</UIDriveForm>
+      <UIDriveForm>Dokument hinzufügen</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
     <title>
-      <UIDriveForm>Laufwerk bearbeiten</UIDriveForm>
+      <UIDriveForm>Dokument bearbeiten</UIDriveForm>
     </title>
   </EditDriveManagerPopup>
   <UITreeList>
@@ -993,7 +993,7 @@
       <shareDocuments>Teilen</shareDocuments>
       <openDocument>Entferntes Bearbeiten</openDocument>
       <editProperty>Dokumenteigenschaften bearbeiten</editProperty>
-      <uploadNewVersion>Upload a version</uploadNewVersion>
+      <uploadNewVersion>Eine neue Version hochladen</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>

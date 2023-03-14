@@ -22,12 +22,13 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
-import org.exoplatform.portal.config.DataStorageImpl;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
@@ -39,7 +40,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +47,7 @@ import java.util.List;
  *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-public class CreateLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
+public class CreateLivePortalEventListener extends Listener<LayoutService, PortalConfig> {
   private static final Log LOG = ExoLogger.getLogger(CreateLivePortalEventListener.class.getName());
   private boolean autoCreatedDrive = true;
   private List<String> targetDrives = null;
@@ -60,10 +60,14 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
 
   private WCMConfigurationService wcmConfigService;
 
+  private NodeHierarchyCreator nodeHierarchyCreator;
+
+
   @SuppressWarnings("unchecked")
-  public CreateLivePortalEventListener(ManageDriveService manageDriveService, WCMConfigurationService configurationService, InitParams params) throws Exception {
+  public CreateLivePortalEventListener(ManageDriveService manageDriveService, WCMConfigurationService configurationService, NodeHierarchyCreator nodeHierarchyCreator, InitParams params) throws Exception {
     this.manageDriveService = manageDriveService;
     this.wcmConfigService = configurationService;
+    this.nodeHierarchyCreator = nodeHierarchyCreator;
     if(params != null) {
       ValueParam autoCreated = params.getValueParam(AUTO_CREATE_DRIVE);
       if(autoCreated != null)
@@ -79,7 +83,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
    *
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
-  public final void onEvent(final Event<DataStorageImpl, PortalConfig> event) throws Exception {
+  public final void onEvent(final Event<LayoutService, PortalConfig> event) throws Exception {
     PortalConfig portalConfig = event.getData();
     if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())
         || StringUtils.equals(getPortalConfigService().getGlobalPortal(), portalConfig.getName())) {
@@ -89,6 +93,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       try {
+        initNodeHierarchyCreator();
         livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
         return;//portal already exists
       } catch (Exception e) {
@@ -177,5 +182,18 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
     }
     return portalConfigService;
+  }
+
+  private void initNodeHierarchyCreator() {
+    if (!nodeHierarchyCreator.isNodeHierarchyCreatorInitialized()) {
+      LOG.info("init nodeHierarchyCreator ...");
+      try {
+        this.nodeHierarchyCreator.init();
+        LOG.info("nodeHierarchyCreator initialized");
+
+      } catch (Exception e) {
+        LOG.error("error when initializing nodeHierarchyCreator", e);
+      }
+    }
   }
 }

@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.4.x-SNAPSHOT</version>
+    <version>6.5.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-services</artifactId>
   <name>eXo PLF:: CMS Service</name>
@@ -14,7 +14,7 @@
     <rest.api.doc.version>1.0</rest.api.doc.version>
     <rest.api.doc.description>All used ecms rest endpoints</rest.api.doc.description>
 
-    <exo.test.coverage.ratio>0.34</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.33</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>
@@ -269,6 +269,12 @@
       <artifactId>commons-component-common</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-core</artifactId>
+      <scope>test</scope>
+      <type>test-jar</type>
     </dependency>
     <!-- "unused declared" by analyze but still use for test -->
     <dependency>

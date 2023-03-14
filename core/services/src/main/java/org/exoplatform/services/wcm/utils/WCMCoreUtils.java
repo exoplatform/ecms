@@ -48,8 +48,6 @@ import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 import org.quartz.impl.JobDetailImpl;
 
-import com.github.scribejava.core.java8.Consumer;
-
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
@@ -66,9 +64,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.container.xml.ValueParam;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -236,7 +232,7 @@ public class WCMCoreUtils {
           m.setUserName(userId);
           membershipsHash.add(m);
         }
-        memberships =  new LinkedList(membershipsHash);
+        memberships =  new LinkedList<>(membershipsHash);
       } else {
         memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
       }
@@ -540,7 +536,7 @@ public class WCMCoreUtils {
                                         LinkManager linkManager,
                                         SessionProvider sessionProvider,
                                         String portalName) throws Exception {
-    Iterator iterator = initParams.getObjectParamIterator();
+    Iterator<ObjectParameter> iterator = initParams.getObjectParamIterator();
     LinkDeploymentDescriptor deploymentDescriptor = null;
     ValueParam valueParam = initParams.getValueParam("override");
     boolean overrideData = false;
@@ -552,7 +548,7 @@ public class WCMCoreUtils {
         String sourcePath = null;
         String targetPath = null;
         try {
-          ObjectParameter objectParameter = (ObjectParameter) iterator.next();
+          ObjectParameter objectParameter = iterator.next();
           deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
           sourcePath = deploymentDescriptor.getSourcePath();
           targetPath = deploymentDescriptor.getTargetPath();
@@ -736,33 +732,6 @@ public class WCMCoreUtils {
   public static String getPortalName() {
     PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
-  }
-  
-  public static String getCurrentPortalName() throws Exception {
-    // Try to get the portal owner from request context
-    try {
-      PortalRequestContext requestContext = Util.getPortalRequestContext();
-      if (requestContext != null) {
-        String portalOwner = requestContext.getPortalOwner();
-        if (portalOwner != null) {
-          return portalOwner;
-        }
-      }
-    } catch (Exception e) {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Cannot get portal owner from portal request context: {}", e.getMessage());
-      }
-    }
-    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class) ;
-    String defaultPortal = userPortalConfigService.getDefaultPortal();
-    // Retrieve the list of accessible portals by current user (defined in ConservationState.getCurrent() )
-    List<String> allPortalNames = userPortalConfigService.getAllPortalNames();
-    // Check if current portal is accessbile
-    if (allPortalNames.contains(defaultPortal)) {
-      return defaultPortal;
-    } else {
-      return allPortalNames.get(0);
-    }
   }
 
   public static String getRemoteUser() {

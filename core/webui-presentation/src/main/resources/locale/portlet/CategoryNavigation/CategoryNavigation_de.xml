@@ -25,7 +25,7 @@
       <UICategoryNavigationTreeTitleFormStringInput>Titel</UICategoryNavigationTreeTitleFormStringInput>
   
       <UICategoryNavigationTreeNameFormSelectBox>Strukturname</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Struktur-Viewer-Vorlage</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Struktur-Ansichts-Vorlage</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>In Seite anzeigen</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Strukturauswahl</TreeSelectionBlock>

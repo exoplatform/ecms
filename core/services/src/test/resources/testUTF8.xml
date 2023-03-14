@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="Hello World! title" />
+	<Content type="html"> 
+	<Title>Це тестовий текст.</Title>
+<![CDATA[Archimède et Lius à Châteauneuf testing chars en été]]></Content>
+</Module>

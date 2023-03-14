@@ -16,30 +16,20 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import javax.jcr.Node;
-import javax.jcr.nodetype.NodeDefinition;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeIterator;
-import javax.jcr.nodetype.NodeTypeManager;
 
 import org.apache.commons.lang.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecms.legacy.search.data.SearchContext;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeDefinitionImpl;
-import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeManagerImpl;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;

@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.4.x-SNAPSHOT</version>
+    <version>6.5.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecm-wcm-extension</artifactId>
   <packaging>war</packaging>
@@ -39,11 +39,6 @@
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-webui-ext</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.document</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>

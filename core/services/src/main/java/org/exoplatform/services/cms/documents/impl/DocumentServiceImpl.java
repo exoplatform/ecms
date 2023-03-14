@@ -27,6 +27,7 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.gatein.api.Portal;
 import org.gatein.api.navigation.Navigation;
 import org.gatein.api.navigation.Nodes;
@@ -58,6 +59,7 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -79,6 +81,8 @@ import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.web.CacheUserProfileFilter;
+
+import static org.exoplatform.services.cms.impl.Utils.cleanNameWithAccents;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar
@@ -485,10 +489,10 @@ public class DocumentServiceImpl implements DocumentService {
       if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
         currentNode = linkManager.getTarget(currentNode);
       }
-      List<Node> nodes = new ArrayList<Node>();
-      String CurrentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
-      nodes = linkManager.getNodeSymlinksUnderFolder(currentNode.getUUID(), shared.getPath(), CurrentNodeWorkspaceName);
-      if (nodes.size() != 0) {
+      List<Node> nodes;
+      String currentNodeWorkspaceName = currentNode.getSession().getWorkspace().getName();
+      nodes = linkManager.getNodeSymlinksUnderFolder(((ExtendedNode)currentNode).getIdentifier(), shared.getPath(), currentNodeWorkspaceName);
+      if (!nodes.isEmpty()) {
         link = nodes.get(0);
       }
       if (link == null && currentNode.isNodeType(NodetypeConstant.NT_FILE)) {
@@ -563,8 +567,10 @@ public class DocumentServiceImpl implements DocumentService {
         LOG.warn("Couldn't find appropriate metadata plugin for the {} extension.", template.getExtension());
       }
     }
+    // Clean document name
+    String cleanedName = cleanNameWithAccents(title);
     // Add node
-    Node addedNode = currentNode.addNode(title, NT_FILE);
+    Node addedNode = currentNode.addNode(cleanedName, NT_FILE);
 
     // Set title
     if (!addedNode.hasProperty(EXO_TITLE_PROP)) {
@@ -585,6 +591,10 @@ public class DocumentServiceImpl implements DocumentService {
     listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     currentNode.save();
     data.close();
+    AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+    if(autoVersionService != null) {
+      autoVersionService.autoVersion(addedNode);
+    }
     return addedNode;
   }
 
@@ -729,21 +739,21 @@ public class DocumentServiceImpl implements DocumentService {
     Session systemSession = null;
     try {
       systemSession = repoService.getCurrentRepository().getSystemSession(workspace);
-      Node node = systemSession.getNodeByUUID(uuid);
+      ExtendedSession extendedSessionSession = (ExtendedSession) systemSession;
+      Node node = extendedSessionSession.getNodeByIdentifier(uuid);
       if (node.isNodeType(EXO_SYMLINK)) {
         node = linkManager.getTarget(node, true);
       }
       String provider = node.hasProperty(EXO_CURRENT_PROVIDER) ? node.getProperty(EXO_CURRENT_PROVIDER).getString() : null;
-      String currentRuntumeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
+      String currentRuntimeId = node.hasProperty(EXO_EDITORS_RUNTIME_ID) ? node.getProperty(EXO_EDITORS_RUNTIME_ID).getString()
               : null;
-      if (currentRuntumeId != null && editorsRuntimeId.equals(currentRuntumeId)) {
+      if (currentRuntimeId != null && editorsRuntimeId.equals(currentRuntimeId)) {
         return provider;
       } else {
         String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
-        Session session = systemSession;
         WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
           try {
-            Node tagetNode = session.getNodeByUUID(uuid);
+            Node tagetNode = extendedSessionSession.getNodeByIdentifier(uuid);
             if (tagetNode.isNodeType(EXO_SYMLINK)) {
               tagetNode = linkManager.getTarget(tagetNode);
             }
@@ -1026,13 +1036,13 @@ public class DocumentServiceImpl implements DocumentService {
       workspace = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
     }
     SessionProvider sp = sessionProviderService.getSessionProvider(null);
-    Session session = sp.getSession(workspace, repoService.getCurrentRepository());
-    return session.getNodeByUUID(uuid);
+    ExtendedSession extendedSession = (ExtendedSession) sp.getSession(workspace, repoService.getCurrentRepository());
+    return extendedSession.getNodeByIdentifier(uuid);
   }
   
   public LinkedHashMap<String, String> getFilePreviewBreadCrumb(Node fileNode) {
-    LinkedHashMap<String, String> docFolderBreadCrumb = getDocFolderRelativePathWithLinks(fileNode);
     LinkedHashMap<String, String> fileBreadCrumb = new LinkedHashMap<>();
+    LinkedHashMap<String, String> docFolderBreadCrumb = getDocFolderRelativePathWithLinks(fileNode);
     if (docFolderBreadCrumb != null) {
       int breadCrumbSize = docFolderBreadCrumb.size();
       int folderIndex = 0;
@@ -1096,7 +1106,7 @@ public class DocumentServiceImpl implements DocumentService {
         String drivePublicFolderHomePath = null;
         if (ManageDriveServiceImpl.PERSONAL_DRIVE_NAME.equals(drive.getName())) {
           drivePublicFolderHomePath = driveHomePath.replace("/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME, "/"
-              + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
+                  + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME);
         }
 
         // calculate the relative path to the drive by browsing up the content
@@ -1126,20 +1136,22 @@ public class DocumentServiceImpl implements DocumentService {
           // title is used if it exists, otherwise the name is used
           if (parentPath.equals(driveHomePath)) {
             nodeName = driveName;
-          } else if (parentContentNode.hasProperty("exo:title")) {
-            nodeName = parentContentNode.getProperty("exo:title").getString();
+          } else if (parentContentNode.hasProperty(EXO_TITLE_PROP)) {
+            nodeName = parentContentNode.getProperty(EXO_TITLE_PROP).getString();
           } else {
             nodeName = parentContentNode.getName();
           }
           reversedFolderPathWithLinks.put(nodeName + "_" + reversedFolderPathWithLinks.size(), getDocOpenUri(parentContentNode));
 
-          if (parentPath.equals("/")) {
+          if (parentPath.equals("/") || parentPath.equals(driveHomePath)) {
             break;
           } else {
             parentContentNode = parentContentNode.getParent();
           }
         }
       }
+    } catch (AccessDeniedException ade) {
+      LOG.warn(ade.getMessage());
     } catch (Exception re) {
       LOG.error("Cannot retrieve path of doc " + re.getMessage(), re);
     }

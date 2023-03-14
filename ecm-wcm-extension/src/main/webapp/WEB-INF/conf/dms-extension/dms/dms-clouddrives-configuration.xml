@@ -115,7 +115,7 @@
         </value-param>
         <value-param>
           <name>containerName</name>
-          <value>middle-topNavigation-container</value>
+          <value>settings-bottom-container</value>
         </value-param>
         <object-param>
           <name>CloudDrivePortlet</name>

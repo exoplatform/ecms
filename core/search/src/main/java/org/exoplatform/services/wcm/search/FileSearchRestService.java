@@ -3,27 +3,31 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.commons.search.es.ElasticSearchFilter;
-import org.exoplatform.commons.search.es.ElasticSearchFilterType;
-import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
+import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilter;
+import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilterType;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -31,11 +35,16 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
-
-import org.exoplatform.social.core.identity.model.Identity;
-import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
-import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.metadata.favorite.FavoriteService;
+import org.exoplatform.social.metadata.tag.TagService;
+import org.exoplatform.social.rest.api.RestUtils;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * @author Ayoub Zayati
@@ -70,7 +79,10 @@ public class FileSearchRestService implements ResourceContainer {
                                         @Parameter(description = "Sort field") @Schema(defaultValue = "date") @QueryParam("sort") String sortField,
                                         @Parameter(description = "Sort direction") @Schema(defaultValue = "desc") @QueryParam("direction") String sortDirection,
                                         @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit,
-                                        @Parameter(description = "favorites") @Schema(defaultValue = "false") @QueryParam("favorites") boolean favorites) throws Exception {
+                                        @Parameter(description = "favorites") @Schema(defaultValue = "false") @QueryParam("favorites") boolean favorites,
+                                        @Parameter(description = "Tag names list") @Schema(defaultValue = "false") @QueryParam("tags") List<String> tagNames
+                                        ) throws Exception {
+
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
     }
@@ -81,14 +93,23 @@ public class FileSearchRestService implements ResourceContainer {
       sortDirection = "desc";
     }
     List<ElasticSearchFilter> recentFilters = new ArrayList<>();
+    String userid = String.valueOf(RestUtils.getCurrentUserIdentityId());
     if (myWork) {
       recentFilters.add(filterMyWorkingDocuments());
     }
+    Map<String, List<String>> metadataFilters = new HashMap<>();
     if (favorites) {
-      Map<String, List<String>> metadataFilters = buildMetadataFilter();
-      String metadataQuery = buildMetadataQueryStatement(metadataFilters);
       StringBuilder recentFilter = new StringBuilder();
-      recentFilter.append(metadataQuery);
+      metadataFilters.put(FavoriteService.METADATA_TYPE.getName(), Collections.singletonList(userid));
+      String favoriteQuery = buildFavoriteQueryStatement(metadataFilters.get(FavoriteService.METADATA_TYPE.getName()));
+      recentFilter.append(favoriteQuery);
+      recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MATADATAS, "", recentFilter.toString()));
+    }
+    if (!CollectionUtils.isEmpty(tagNames)) {
+      StringBuilder recentFilter = new StringBuilder();
+      metadataFilters.put(TagService.METADATA_TYPE.getName(), tagNames);
+      String tagsQuery = buildTagsQueryStatement(metadataFilters.get(TagService.METADATA_TYPE.getName()));
+      recentFilter.append(tagsQuery);
       recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MATADATAS, "", recentFilter.toString()));
     }
     recentFilters.add(getFileTypesFilter(myWork));
@@ -167,8 +188,7 @@ public class FileSearchRestService implements ResourceContainer {
   private ElasticSearchFilter filterMyWorkingDocuments() {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     StringBuilder recentFilter = new StringBuilder();
-    recentFilter.append("\"should\" : {\n \"term\" : { \"author\" : \"" + userId + "\" }\n },\n");
-    recentFilter.append("\"must\" : {\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }");
+    recentFilter.append("\"should\" :[\n{\n \"term\" : { \"author\" : \"" + userId + "\" }\n },{\n \"term\" : { \"lastModifier\" : \"" + userId + "\" }\n }\n]");
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MY_WORK_DOCS, "", recentFilter.toString());
   }
 
@@ -183,25 +203,35 @@ public class FileSearchRestService implements ResourceContainer {
     }
   }
 
-  private String buildMetadataQueryStatement(Map<String, List<String>> metadataFilters) {
-    StringBuilder metadataQuerySB = new StringBuilder();
-    Set<Map.Entry<String, List<String>>> metadataFilterEntries = metadataFilters.entrySet();
-    for (Map.Entry<String, List<String>> metadataFilterEntry : metadataFilterEntries) {
-      metadataQuerySB.append("{\"terms\":{\"metadatas.")
-              .append(metadataFilterEntry.getKey())
-              .append(".metadataName.keyword")
-              .append("\": [\"")
-              .append(org.apache.commons.lang.StringUtils.join(metadataFilterEntry.getValue(), "\",\""))
-              .append("\"]}},");
+  private String buildFavoriteQueryStatement(List<String> values) {
+    if (CollectionUtils.isEmpty(values)) {
+      return "";
     }
-    return metadataQuerySB.toString();
+    return new StringBuilder().append("{\"terms\":{")
+            .append("\"metadatas.favorites.metadataName.keyword\": [\"")
+            .append(StringUtils.join(values, "\",\""))
+            .append("\"]}},")
+            .toString();
   }
-
-  private Map<String, List<String>> buildMetadataFilter() {
-    Identity viewerIdentity = CommonsUtils.getService(IdentityManager.class).getOrCreateIdentity(OrganizationIdentityProvider.NAME, ConversationState.getCurrent().getIdentity().getUserId());
-    Map<String, List<String>> metadataFilters = new HashMap<>();
-    metadataFilters.put(FavoriteService.METADATA_TYPE.getName(), Collections.singletonList(viewerIdentity.getId()));
-    return metadataFilters;
+  private String buildTagsQueryStatement(List<String> values) {
+    if (CollectionUtils.isEmpty(values)) {
+      return "";
+    }
+    List<String> tagsQueryParts = values.stream()
+            .map(value -> new StringBuilder().append("{\"term\": {\n")
+                    .append("            \"metadatas.tags.metadataName.keyword\": {\n")
+                    .append("              \"value\": \"")
+                    .append(value)
+                    .append("\",\n")
+                    .append("              \"case_insensitive\":true\n")
+                    .append("            }\n")
+                    .append("          }}")
+                    .toString())
+            .collect(Collectors.toList());
+    return new StringBuilder()
+            .append(StringUtils.join(tagsQueryParts, ","))
+            .append("  ,\n")
+            .toString();
   }
 
 }

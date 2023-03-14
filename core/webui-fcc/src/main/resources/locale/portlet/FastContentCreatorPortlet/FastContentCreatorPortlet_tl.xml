@@ -101,8 +101,8 @@
       <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Ang Pangalan</name>
+      <action>Ang Aksyon</action>
     </header>
   </UITreeList>
 
@@ -146,7 +146,7 @@
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Pumili ng Lokasyon</UIOneNodePathSelector>
       <UIPermissionSelector>Ang Browser sa Permiso</UIPermissionSelector>
       <UICategoriesSelector>Magdagdag ng mga Kategorya</UICategoriesSelector>
     </title>

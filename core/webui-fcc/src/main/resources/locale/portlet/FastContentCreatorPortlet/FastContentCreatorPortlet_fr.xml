@@ -102,7 +102,7 @@
     </info>
     <header>
       <name>Nom</name>
-      <action>Action</action>
+      <action/>
     </header>
   </UITreeList>
 
@@ -148,7 +148,7 @@
     <title>
       <UIOneNodePathSelector>Sélectionnez l'emplacement</UIOneNodePathSelector>
       <UIPermissionSelector>Sélecteur de permissions</UIPermissionSelector>
-      <UICategoriesSelector>Ajouter des Catégories</UICategoriesSelector>
+      <UICategoriesSelector>Ajouter des catégories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

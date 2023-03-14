@@ -1620,14 +1620,14 @@
     </action>
     <label>
       <category>Catégorie</category>
-      <actions>Action</actions>
+      <actions/>
       <delete>Supprimer</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
       <name>Nom</name>
-      <action>Action</action>
+      <action/>
     </header>
     <info>
       <child-not-found>Cet élément n'a pas d'enfant.</child-not-found>
@@ -1798,7 +1798,7 @@
   <lifecycle>Evénement</lifecycle>
   <triggeredaction>Action déclenchée</triggeredaction>
       <instanceOf>Instances de cette Action</instanceOf>
-      <action>Action</action>
+      <action/>
     </header>
     <msg>
       <remove-popup-first>Vous devez d'abord fermer la fenêtre d'édition avant de pouvoir supprimer cet élément.</remove-popup-first>
@@ -2249,7 +2249,7 @@
   <UIDriveSelector>
     <label>
       <driveName>Nom du Lecteur</driveName>
-      <action>Action</action>
+      <action/>
       <adddrives>Ajouter des Lecteurs</adddrives>
     </label>
   </UIDriveSelector>
@@ -2805,7 +2805,7 @@
     <header>
       <name>Nom</name>
       <relatedDocuments>Documents relatifs</relatedDocuments>
-      <action>Action</action>
+      <action/>
     </header>
     <action>
       <title>
@@ -2975,7 +2975,7 @@
       <date>Date</date>
       <author>Auteur</author>
       <status>Etat</status>
-      <action>Action</action>
+      <action/>
       <label>Version</label>
       <none>Aucune version</none>
       <seeall>Voir toutes les versions</seeall>

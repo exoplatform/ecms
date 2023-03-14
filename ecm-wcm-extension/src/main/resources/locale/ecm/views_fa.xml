@@ -31,7 +31,7 @@
         <email>ایمیل</email>
         <site>سایت</site>
         <lastComment>آخرین نظر ارسال شده توسط {user} در {time}</lastComment>
-        <Less_Than_A_Minute>کمتر از یک دقیقه پیش</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>حدود یک دقیقه پیش</About_A_Minute>
         <About_x_Minutes>حدود {0} دقيقه پیش</About_x_Minutes>
         <About_An_Hour>حدود یک ساعت پیش</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>پیش نمایش برای محتوای بزرگتر از {0} مگابایت امکان پذیر نیست.</pdf-max-size>
         <pdf-max-page>پیش نمایش برای محتوای بالای {0} صفحه امکان پذیر نیست.</pdf-max-page>
         <using-webDAV>و یا باز کردن در مایکروسافت آفیس</using-webDAV>
-        <open-on-desktop>باز کردن روی میز کار</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
@@ -119,7 +119,7 @@
         <action-name>نام عمل</action-name>
         <lifecycle>چرخه عمر</lifecycle>
         <metadata>فراداده</metadata>
-        <description>شرح</description>
+        <description>توضیحات</description>
       </label>
     </view>
   </AddMetadata>
@@ -132,7 +132,7 @@
       <label>
         <action-name>نام عمل</action-name>
         <lifecycle>چرخه عمر</lifecycle>
-        <description>شرح</description>
+        <description>توضیحات</description>
       </label>
     </view>
   </AutoVersioning>
@@ -144,7 +144,7 @@
       <label>
         <action-name>نام</action-name>
         <lifecycle>چرخه عمر</lifecycle>
-        <description>شرح</description>
+        <description>توضیحات</description>
       </label>
     </view>
   </EnableVersioning>
@@ -157,14 +157,14 @@
         <not-avaliable>N/A</not-avaliable>
         <core-elements>عناصر اصلی</core-elements>
         <title>عنوان</title>
-        <creator>سازنده</creator>
+        <creator>ایجادکننده</creator>
         <subject>موضوع</subject>
         <source>منبع</source>
         <contributor>مشارکت کننده</contributor>
         <resource-type>نوع منبع</resource-type>
         <date>تاریخ</date>
         <publisher>ناشر</publisher>
-        <description>شرح</description>
+        <description>توضیحات</description>
         <rights>حقوق</rights>
         <relation>ارتباط</relation>
         <format>فرمت</format>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>توضیح صوتی</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>بیشتر</Read-more>
       <Read-less>کمتر</Read-less>
       <Switch-back-to-original-video>فیلم اصلی</Switch-back-to-original-video>
       </label>

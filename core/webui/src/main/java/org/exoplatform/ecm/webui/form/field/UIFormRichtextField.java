@@ -17,13 +17,13 @@
 package org.exoplatform.ecm.webui.form.field;
 
 import org.exoplatform.ecm.webui.form.DialogFormField;
+import org.exoplatform.ecm.webui.form.UIFormRichtextInput;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.form.UIFormInputBase;
-import org.exoplatform.webui.form.UIFormRichtextInput;
 
 import java.util.Collection;
 

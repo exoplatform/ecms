@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Enllaç</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Utilitza @ per mencionar algú al teu comentari</placeholder>
+      <placeholder>Utilitza @ per tal de mencionar algú al seu comentari</placeholder>
     </label>
   </UICommentForm>
  
@@ -74,7 +74,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Contrasenya</password>
-      <link>Link</link>
+      <link>Enllaç</link>
       <to>Envia un correu a</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Contrasenya</password>
-      <link>Link</link>
+      <link>Enllaç</link>
       <to>Envia un correu a</to>
       <actionName>#{word.name}</actionName>
     </label>

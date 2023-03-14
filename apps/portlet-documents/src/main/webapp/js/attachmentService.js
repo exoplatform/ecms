@@ -56,8 +56,29 @@ export function getDrivers() {
     });
 }
 
-export function createFolder(currentDrive, workspace, parentPath, newFolderName) {
-  return fetch(`/portal/rest/managedocument/createFolder?driveName=${currentDrive}&workspaceName=${workspace}&currentFolder=${parentPath}&folderName=${newFolderName}`, {})
+export function createFolder(currentDrive, workspace, parentPath, newFolderName, folderNodeType, isSystem) {
+  const formData = new FormData();
+  if (currentDrive) {
+    formData.append('driveName', currentDrive);
+  }
+  if (workspace) {
+    formData.append('workspaceName', workspace);
+  }
+  if (parentPath) {
+    formData.append('currentFolder', parentPath);
+  }
+  if (newFolderName) {
+    formData.append('folderName', newFolderName);
+  }
+  if (folderNodeType) {
+    formData.append('folderNodeType', folderNodeType);
+  }
+  if (isSystem) {
+    formData.append('isSystem', isSystem);
+  }
+  const params = new URLSearchParams(formData).toString();
+
+  return fetch(`/portal/rest/managedocument/createFolder?${params}`, {})
     .then(response => {
       if (response.ok) {
         return response.text();
@@ -438,3 +459,31 @@ export function downloadFiles(attachments, fileName) {
     a.remove();
   });
 }
+
+export function checkExistence(driveName, workspaceName, currentFolder, fileName) {
+  const formData = new FormData();
+
+  if (workspaceName) {
+    formData.append('workspaceName', workspaceName);
+  }
+  if (driveName) {
+    formData.append('driveName', driveName);
+  }
+  if (currentFolder) {
+    formData.append('currentFolder', currentFolder);
+  }
+  if (fileName) {
+    formData.append('fileName', fileName);
+  }
+
+  const params = new URLSearchParams(formData).toString();
+  return fetch(`${eXo.env.portal.context}/${eXo.env.portal.rest}/managedocument/uploadFile/exist?${params}`, {
+    credentials: 'include',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }).then(resp => resp && resp.text())
+      .then(text => new DOMParser().parseFromString(text, "text/xml"));
+}
+

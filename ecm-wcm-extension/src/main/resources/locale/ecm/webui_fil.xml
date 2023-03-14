@@ -7,7 +7,7 @@
   -->
   <UITreeList>
     <header>
-      <name>Pangalan</name>
+      <name>Ang pangalan</name>
       <action>Dagdag</action>
     </header>
     <info>

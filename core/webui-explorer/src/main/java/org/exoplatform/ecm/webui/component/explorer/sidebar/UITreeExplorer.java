@@ -35,7 +35,7 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.ws.commons.util.Base64;
-import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.xml.PortalContainerInfo;

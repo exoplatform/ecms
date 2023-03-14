@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Nuoroda</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Jungtis</port>
       <userName>#{word.userName}</userName>
       <password>Slaptažodis</password>
-      <link>Link</link>
+      <link>Nuoroda</link>
       <to>Siųsti laišką</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Jungtis</port>
       <userName>#{word.userName}</userName>
       <password>Slaptažodis</password>
-      <link>Link</link>
+      <link>Nuoroda</link>
       <to>Siųsti laišką</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Aprėptis:</coverage>
         <identifier>Identifikatorius:</identifier>
-        <language>Language:</language>
+        <language>Kalba:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Antraštė</title>
+        <title>Pavadinimas</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -260,7 +260,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Pavadinimas</name>
+        <name>Vardas</name>
         <autoload>Automatinis krovimas</autoload>
         <minetype>MIME tipas</minetype>
         <content>Turinys</content>
@@ -293,7 +293,7 @@
     <dialog>
       <label>
         <id>ID</id>
-        <name>Pavadinimas</name>
+        <name>Vardas</name>
         <lifecycle>Gyvenimo ciklas</lifecycle>
         <homePath>Namų kelias</homePath>
         <targetWorkspace>Tikslinė darbo sritis</targetWorkspace>
@@ -316,9 +316,9 @@
 <true>Tiesa</true>
 <false>Netiesa</false>
 <Electronic>Elektroninis</Electronic>
-<Paper>Paper</Paper>
+<Paper>Popierius</Paper>
 <NONE>Nėra</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
+<CLASSIFIED>Klasifikuotas</CLASSIFIED>
 <UNCLASSIFIED>Neklasifikuotas</UNCLASSIFIED>
 <NOCONTRACT>Nėra sutarties</NOCONTRACT>
 <one-minute>Viena minutė</one-minute>
@@ -330,7 +330,7 @@
 <read>Vartotojo veiksmas</read>
   <schedule>Planuotojas</schedule>
   <node_added>Turinio papildymas</node_added>
-  <node_removed>Turinio šalinimas</node_removed>
+  <node_removed>Turinio pašalinimas</node_removed>
   <property_added>Sąvybių papildymas</property_added>
   <property_removed>Sąvybių pašalinimas</property_removed>
   <property_changed>Sąvybių pakeitimas</property_changed>

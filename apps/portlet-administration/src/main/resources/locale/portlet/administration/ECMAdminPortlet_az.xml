@@ -1002,7 +1002,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>Permissions</permission>
+      <permission>UIPermissionForm</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1470,8 +1470,8 @@
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Qrupu seç</selectGroup>
-      <selectUser>İstifadəçini seç</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>

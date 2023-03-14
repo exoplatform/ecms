@@ -18,10 +18,7 @@ package org.exoplatform.ecm.connector.platform;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
@@ -31,11 +28,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -46,6 +39,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -305,8 +302,6 @@ public class ManageDocumentService implements ResourceContainer {
    * @param currentFolder The path to the folder where a child folder is added.
    * @param folderName The folder name.
    * @return {@link Document} which contains the created folder.
-   * @throws Exception The exception
-   *
    * @anchor ManageDocumentService.createFolder
    */
   @GET
@@ -316,11 +311,12 @@ public class ManageDocumentService implements ResourceContainer {
                                @QueryParam("workspaceName") String workspaceName,
                                @QueryParam("currentFolder") String currentFolder,
                                @QueryParam("folderName") String folderName,
-                               @QueryParam("folderNodeType") @DefaultValue("nt:folder") String folderNodeType) throws Exception {
+                               @QueryParam("folderNodeType") @DefaultValue("nt:folder") String folderNodeType,
+                               @QueryParam("isSystem") @DefaultValue("false") boolean isSystem) {
     try {
-      Node node = getNode(driveName, workspaceName, currentFolder);
+      Node node = getNode(driveName, workspaceName, currentFolder, isSystem);
       // The name automatically determined from the title according to the current algorithm.
-      String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folderName));
+      String name = Text.escapeIllegalJcrChars(Utils.cleanName(folderName));
       // Set default name if new title contain no valid character
       name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
 
@@ -427,7 +423,7 @@ public class ManageDocumentService implements ResourceContainer {
                                            userId,
                                            action,
                                            language,
-                                           Text.escapeIllegalJcrChars(fileName),
+                                           fileName,
                                            uploadId, existenceAction);
       }
     } catch (Exception e) {
@@ -652,7 +648,16 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
-    Session session = getSession(workspaceName);
+    return getNode(driveName, workspaceName, currentFolder, false);
+  }
+  
+  private Node getNode(String driveName, String workspaceName, String currentFolder, boolean isSystem) throws Exception {
+    Session session;
+    if (isSystem) {
+      session = getSystemSession(workspaceName);
+    } else {
+      session = getSession(workspaceName);
+    }
     String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     String drivePath = Utils.getPersonalDrivePath(driveHomePath, userId);
@@ -661,8 +666,11 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     for (String folder : currentFolder.split("/")) {
+      String cleanFolderName = org.exoplatform.services.jcr.util.Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
       if (node.hasNode(folder)) {
         node = node.getNode(folder);
+      } else if (node.hasNode(cleanFolderName)) {
+        node = node.getNode(cleanFolderName);
       } else {
         // create new folder
         String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
@@ -671,7 +679,7 @@ public class ManageDocumentService implements ResourceContainer {
         if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE)) {
           newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
         }
-        newNode.setProperty(NodetypeConstant.EXO_TITLE, folder);
+        newNode.setProperty(NodetypeConstant.EXO_TITLE, org.exoplatform.services.cms.impl.Utils.cleanDocumentTitle(folder));
         node.save();
         node = newNode;
       }
@@ -684,6 +692,12 @@ public class ManageDocumentService implements ResourceContainer {
 
   private Session getSession(String workspaceName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    ManageableRepository manageableRepository = getCurrentRepository();
+    return sessionProvider.getSession(workspaceName, manageableRepository);
+  }
+
+  private Session getSystemSession(String workspaceName) throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     ManageableRepository manageableRepository = getCurrentRepository();
     return sessionProvider.getSession(workspaceName, manageableRepository);
   }
@@ -844,5 +858,40 @@ public class ManageDocumentService implements ResourceContainer {
       parentNode = (node.isNodeType("exo:symlink")? linkManager.getTarget(node) : node);
     }
     return sb.toString();
+  }
+
+  @GET
+  @Path("/uploadFile/exist/")
+  @Produces(MediaType.TEXT_XML)
+  @RolesAllowed("users")
+  @Operation(
+          summary = "check uploaded file existence",
+          description = "check uploaded file existence",
+          method = "GET")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "204", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "500", description = "Internal server error"), })
+  public Response checkFileExistence(@Parameter(description = "workspace name") @QueryParam("workspaceName") String workspaceName,
+                                     @Parameter(description = "drive name name") @QueryParam("driveName") String driveName,
+                                     @Parameter(description = "current folder name") @QueryParam("currentFolder") String currentFolder,
+                                     @Parameter(description = "uploaded fil name") @QueryParam("fileName") String fileName) throws Exception {
+    if (workspaceName == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("workspace name is mandatory").build();
+    }
+    if (driveName == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("drive name is mandatory").build();
+    }
+    if (currentFolder == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("current folder name is mandatory").build();
+    }
+    if (fileName == null) {
+      return Response.status(Response.Status.BAD_REQUEST).entity("file name is mandatory").build();
+    }
+    Node node = getNode(driveName,workspaceName, currentFolder);
+    try {
+      return fileUploadHandler.checkExistence(node, Utils.cleanName(fileName));
+    } catch (Exception e) {
+      return Response.serverError().entity(e.getMessage()).build();    }
   }
 }

@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.4.x-SNAPSHOT</version>
+    <version>6.5.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-webui-explorer</artifactId>
   <packaging>jar</packaging>
@@ -47,10 +47,6 @@
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
       <artifactId>commons-webui-component</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.document</artifactId>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>

@@ -16,12 +16,12 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
-import org.exoplatform.commons.api.search.data.SearchContext;
-import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
+import org.exoplatform.ecms.legacy.search.data.SearchContext;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -35,6 +35,9 @@ import org.exoplatform.social.metadata.model.MetadataItem;
 import org.exoplatform.social.metadata.model.MetadataObject;
 import org.exoplatform.web.controller.metadata.ControllerDescriptor;
 import org.exoplatform.web.controller.router.Router;
+
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +52,6 @@ import javax.jcr.RepositoryException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -57,7 +59,7 @@ import static org.mockito.Mockito.*;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({WCMCoreUtils.class, CommonsUtils.class})
 @PowerMockIgnore({ "javax.management.*", "jdk.internal.reflect.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
-public class TestFileSearchServiceConnector {
+public class TestFileSearchServiceConnector extends TestCase {
 
   public static final String ES_RESPONSE_EMPTY = "{ \"hits\": { \"hits\": [] } }";
 
@@ -201,13 +203,13 @@ public class TestFileSearchServiceConnector {
   public void setUp() throws RepositoryException {
     PowerMockito.mockStatic(WCMCoreUtils.class);
     PowerMockito.mockStatic(CommonsUtils.class);
-    when(WCMCoreUtils.getRestContextName()).thenReturn("rest");
+    when(WCMCoreUtils.getRestContextName()).thenAnswer(invocation -> "rest");
 
     RepositoryEntry repositoryEntry = new RepositoryEntry();
     repositoryEntry.setName("repository");
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
-    when(CommonsUtils.getService(MetadataService.class)).thenReturn(metadataService);
+    when(CommonsUtils.getService(MetadataService.class)).thenAnswer(invocation -> metadataService);
   }
 
   @After

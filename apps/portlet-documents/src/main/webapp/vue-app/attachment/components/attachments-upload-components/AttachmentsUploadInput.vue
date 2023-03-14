@@ -35,6 +35,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     attachments: {
@@ -98,12 +99,17 @@ export default {
     this.$root.$on('reset-attachments-upload-input', () => this.resetUploadInput());
     this.$root.$on('abort-attachments-new-upload', () => this.abortUploadingNewAttachments());
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
+    this.$root.$on('handle-provided-files', files => this.handleFileUpload(files));
+    this.$root.$on('attachment-continue-upload', (file) => {
+      this.sendFileToServer(file, true);
+    });
   },
   beforeDestroy() {
     this.$root.$off('handle-pasted-files-from-clipboard', this.handleFileUpload);
     this.$root.$off('reset-attachments-upload-input', this.resetUploadInput);
     this.$root.$off('abort-attachments-new-upload', this.abortUploadingNewAttachments);
     this.$root.$off('abort-uploading-new-file', this.abortUploadingNewFile);
+    this.$root.$off('handle-provided-files', this.handleFileUpload);
   },
   methods: {
     initDragAndDropEvents() {
@@ -192,20 +198,22 @@ export default {
         });
       }
 
-      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).forEach(newFile => {
-        this.queueUpload(newFile);
+      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).forEach((newFile, index) => {
+        if (this.attachments.length === this.maxFilesCount) {
+          if (this.newUploadedFiles[index - 1] || index === 0) {
+            this.$root.$emit('attachments-notification-alert', {
+              message: this.maxFileCountErrorLabel,
+              type: 'error',
+            });
+          }
+          return;
+        } else {
+          this.queueUpload(newFile);
+        }
       });
       this.$refs.uploadInput.value = null;
     },
     queueUpload: function (file) {
-      if (this.attachments.length >= this.maxFilesCount) {
-        this.$root.$emit('attachments-notification-alert', {
-          message: this.maxFileCountErrorLabel,
-          type: 'error',
-        });
-        return;
-      }
-
       const fileSizeInMb = file.size / this.BYTES_IN_MB;
       if (fileSizeInMb > this.maxFileSize) {
         this.$root.$emit('attachments-notification-alert', {
@@ -214,18 +222,42 @@ export default {
         });
         return;
       }
+      this.checkExistenceActions(file.title).then(actions => {
+        if (actions.length > 0) {
+          file.actions = actions;
+          file.waitAction = true;
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.$t('attachments.upload.conflict.message'),
+            type: 'warning',
+          });
+          this.$root.$emit('start-loading-attachment-drawer');
+        }
+        this.$root.$emit('add-new-uploaded-file', file);
+        this.newUploadedFiles.push(file);
 
-      this.$root.$emit('add-new-uploaded-file', file);
-      this.newUploadedFiles.push(file);
-
-      if (this.uploadingCount < this.maxUploadInProgressCount) {
-        this.sendFileToServer(file);
-      } else {
-        this.uploadingFilesQueue.push(file);
-      }
+        if (this.uploadingCount < this.maxUploadInProgressCount) {
+          this.sendFileToServer(file);
+        } else {
+          this.uploadingFilesQueue.push(file);
+        }
+      });
     },
-    sendFileToServer(file) {
-      if (!file.aborted) {
+    checkExistenceActions(fileName) {
+      const actions = [];
+      return this.$attachmentService.checkExistence(this.currentDrive.name, 'collaboration', this.pathDestinationFolder, fileName).then((data) => {
+        const exist = data && data.firstChild;
+        const versioned = exist && exist.firstChild;
+        if (exist && exist.tagName === 'Existed') {
+          actions.push('keepBoth');
+        }
+        if (versioned && (versioned.tagName === 'Versioned' || versioned.tagName === 'CanVersioning')) {
+          actions.push('createVersion');
+        }
+        return actions;
+      });
+    },
+    sendFileToServer(file, continueAction) {
+      if (!file.aborted && !file.waitAction) {
         this.uploadingCount++;
         this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
           .then(() => delete file.originalFileObject)
@@ -236,12 +268,12 @@ export default {
             });
             this.removeAttachedFile(file);
           });
-        this.controlUpload(file);
+        this.controlUpload(file, continueAction);
       } else {
         this.processNextQueuedUpload();
       }
     },
-    controlUpload(file) {
+    controlUpload(file, continueAction) {
       if (file.aborted) {
         this.uploadingCount--;
         this.processNextQueuedUpload();
@@ -258,6 +290,11 @@ export default {
                 } else {
                   this.uploadingCount--;
                   this.processNextQueuedUpload();
+                }
+                if (file.uploadProgress === 100 && continueAction) {
+                  this.$root.$emit('continue-upload-to-destination-path', file);
+                  const index = this.newUploadedFiles.findIndex(f => f.id === file.id);
+                  this.newUploadedFiles.splice(index, 1);
                 }
               }
             })

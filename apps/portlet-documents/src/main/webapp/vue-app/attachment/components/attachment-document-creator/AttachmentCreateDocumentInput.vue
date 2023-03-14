@@ -89,7 +89,9 @@ export default {
       newDocumentActionExtension: 'new-document-action',
       newDocumentActions: {},
       MAX_DOCUMENT_TITLE_LENGTH: 510,
-      documentTitleRules: [title => !title || title && title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel],
+      titleRegex: /[<\\>:"/|?*]/,
+      documentTitleRules: [title => !title || title && title.trim().length <= this.MAX_DOCUMENT_TITLE_LENGTH - this.selectedDocType.extension.length || this.newDocTitleMaxLengthLabel,
+        title => !this.titleRegex.test(title)],
     };
   },
   computed: {
@@ -136,6 +138,13 @@ export default {
       if (this.documentTitleMaxLengthReached) {
         return;
       }
+      if (this.titleRegex.test(this.newDocumentTitle)) {
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.$t('attachments.valid.title.error.message'),
+          type: 'warning',
+        });
+        return;
+      }
       this.$root.$emit('start-loading-attachment-drawer');
       this.$attachmentService.createNewDoc(this.newDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder)
         .then((resp) => {
@@ -179,7 +188,10 @@ export default {
         doc.drive = this.currentDrive.title;
         doc.date = doc.created;
         this.$root.$emit('add-new-created-document', doc);
-        this.$root.$emit('end-loading-attachment-drawer');
+        this.$root.$emit('attachments-notification-alert', {
+          message: this.$t('attachments.upload.success'),
+          type: 'success',
+        });
         this.resetNewDocInput();
         window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
       }

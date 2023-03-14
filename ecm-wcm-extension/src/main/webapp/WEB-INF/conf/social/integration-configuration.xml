@@ -23,43 +23,6 @@
   <component>
     <type>org.exoplatform.social.space.customization.SpaceCustomizationService</type>
   </component>
-  <external-component-plugins>
-    <target-component>org.exoplatform.commons.api.search.SearchService</target-component>
-    <!-- Ecms -->
-    <component-plugin>
-      <name>FileSearchConnector</name>
-      <set-method>addConnector</set-method>
-      <type>org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector</type>
-      <description>eXo WCM documents</description>
-      <init-params>
-        <properties-param>
-          <name>constructor.params</name>
-          <property name="searchType" value="file"/>
-          <property name="displayName" value="Files"/>
-          <property name="index" value="file_alias"/>
-          <property name="type" value="file"/>
-          <property name="enable" value="${exo.unified-search.connector.file.enable:true}"/>
-          <property name="titleField" value="title"/>
-          <property name="searchFields" value="name,title,tags,attachment.content,dc:title,dc:creator,dc:subject,dc:description,dc:publisher,dc:contributor,dc:resourceType,dc:format,dc:identifier,dc:source,dc:language,dc:relation,dc:coverage,dc:rights"/>
-        </properties-param>
-      </init-params>
-    </component-plugin>
-
-    <component-plugin>
-      <name>DocumentSearchConnector</name>
-      <set-method>addConnector</set-method>
-      <type>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</type>
-      <description>eXo DMS documents</description>
-      <init-params>
-        <properties-param>
-           <name>constructor.params</name>
-           <property name="searchType" value="document"/>
-           <property name="displayName" value="Documents"/>
-           <property name="enable" value="${exo.unified-search.connector.document.enable:true}"/>
-        </properties-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
 
   <external-component-plugins>
     <target-component>org.exoplatform.social.core.search.SearchService</target-component>
@@ -85,6 +48,9 @@
             <field name="favoritesEnabled">
               <boolean>true</boolean>
             </field>
+            <field name="tagsEnabled">
+              <boolean>true</boolean>
+            </field>
             <field name="jsModule">
               <string>SHARED/FileSearch</string>
             </field>
@@ -99,17 +65,6 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-    <component-plugin>
-      <name>CmsService.event.postEdit</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.ecms.indexing.listener.UnifiedSearchContentListener</type>
-      <description>Content listener for Unified Search</description>
-    </component-plugin>
-  </external-component-plugins>
-
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>

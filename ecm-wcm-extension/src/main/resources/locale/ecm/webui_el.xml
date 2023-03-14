@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>Όνομα</name>
-      <action>Add</action>
+      <action>Προσθήκη</action>
     </header>
     <info>
       <child-not-found>Δεν βρέθηκαν θυγατρικοί κόμβοι!</child-not-found>

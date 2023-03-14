@@ -16,6 +16,7 @@
           v-if="image"
           :src="attachment.image"
           class="ma-auto"
+          loading="lazy"
           @error="image = null">
         <v-icon
           v-else

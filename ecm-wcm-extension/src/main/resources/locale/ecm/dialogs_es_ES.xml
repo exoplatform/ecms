@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ para mencionar a alguien en su comentario</placeholder>
+      <placeholder>Use @ para mencionar alguien en su comentario</placeholder>
     </label>
   </UICommentForm>
  
@@ -312,7 +312,7 @@
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 <no>No</no>
-<yes>Sí</yes>
+<yes>Si</yes>
 <true>Cierto</true>
 <false>Falso</false>
 <Electronic>Electrónico</Electronic>

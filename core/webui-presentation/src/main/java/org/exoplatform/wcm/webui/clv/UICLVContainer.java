@@ -22,8 +22,8 @@ import javax.jcr.Session;
 import javax.jcr.query.Row;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.access.PermissionType;

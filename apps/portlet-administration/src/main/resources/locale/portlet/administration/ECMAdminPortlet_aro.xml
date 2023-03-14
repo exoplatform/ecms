@@ -1418,7 +1418,7 @@
 
   <UIPopupWindow>
     <title>
-      <UIPermissionManager>إدارة الصلاحيات</UIPermissionManager>
+      <UIPermissionManager>ادارة الصلاحيّات</UIPermissionManager>
     </title>
   </UIPopupWindow>
 
@@ -1436,23 +1436,23 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>مستخدم او مجموعة</usersOrGroups>
-      <read>القراءة</read>
+      <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
+      <read>قراءة</read>
       <addNode>تغيير العقدة</addNode>
       <remove>حذف</remove>
       <action>اجراء</action>
     </header>
     <msg>
-      <confirm-delete-permission>هل تريد أن تحذف هذه الصلاحية؟</confirm-delete-permission>
+      <confirm-delete-permission>هل ترغب حقّــا بحذف هذه الصلاحيّة؟</confirm-delete-permission>
       <no-permission-tochange>ليس لديك الحق لحذف هذه الصلاحية.</no-permission-tochange>
       <no-permission-remove>لا يمكنك إزالة المالك أو مستخدم النظام.</no-permission-remove>
-      <access-denied>.غير مسموح بالدخول. لا يُمكن حذف هذه الصلاحية.</access-denied>
+      <access-denied>غير مسموح بالدخول! ليس لك الحقوق المطلوبة لحذف هذا الصلاحية.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
       <SelectUser>اختيار مستخدم</SelectUser>
-      <SelectMember>اختيار عضوية</SelectMember>
+      <SelectMember>اختيار العضوية</SelectMember>
       <AddAny>الجميع</AddAny>
     </title>
   </permission>
@@ -1464,14 +1464,14 @@
   <SelectUserOrGroup>
     <title>
       <UIGroupSelector>اختيار مستخدم</UIGroupSelector>
-      <UIPermissionSelector>اختيار العضوية</UIPermissionSelector>
+      <UIPermissionSelector>اختيار عضو</UIPermissionSelector>
       <UIGroupMemberSelector>اختيار العضوية</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectUser>اختيار مستخدم</selectUser>
+      <selectUser>اختيار المستخدم</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' هو صاحب العقدة و له كل الصلاحيات</not-change-owner>
@@ -1481,7 +1481,7 @@
     <label>
       <UIPopupWindow>اختيار</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>مستخدم او مجموعة</userOrGroup>
+      <userOrGroup>مستخدم أو مجموعة</userOrGroup>
       <read>قراءة</read>
       <add_node>تغيير</add_node>
       <remove>حذف</remove>
@@ -1490,13 +1490,13 @@
     <action>
       <Close>أغلق</Close>
       <Save>حفظ</Save>
-      <Reset>إعادة ضبط</Reset>
+      <Reset>اعادة تعيين</Reset>
     </action>
     <msg>
-      <checkbox-require>يجب عليك إختيار صلاحية واحدة على الأقل</checkbox-require>
+      <checkbox-require>يجب أن تختار صلاحية واحدة على الأقل</checkbox-require>
       <userOrGroup-required>يجب عليك اختيار المستخدم أو المجموعة  قبل حفظ هذه الصلاحية</userOrGroup-required>
-      <not-change-permission>ليس لديك الحق في اضافة صلاحية</not-change-permission>
-      <access-denied>.غير مسموح بالدخول!  لا يمكن حذف هذه الصلاحيّة</access-denied>
+      <not-change-permission>ليس لديك الحق في اضافة صلاحيّة.</not-change-permission>
+      <access-denied>غير مسموح. لا يمكنك حذف هذه الصلاحيّة.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -2082,7 +2082,7 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
+      <confirm-delete>هل ترغب حقا بالحذف؟</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
@@ -2168,13 +2168,13 @@
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
       <selectUser>اختيار مستخدم</selectUser>
-      <selectMembership>إختيار العضوية</selectMembership>
+      <selectMembership>اختر عضوية</selectMembership>
     </label>
   </UIPermissionSelector>
 
   <UIAnyPermission>
     <label>
-      <anyPermission>جميع الصلاحيات</anyPermission>
+      <anyPermission>صلاحيّة للجميع</anyPermission>
     </label>
   </UIAnyPermission>
 
@@ -2443,7 +2443,7 @@
       <NextViewTree>التالي</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>يحتوي المجال '{0}' على أحرف XSS</xss-vulnerability-character>
+      <xss-vulnerability-character>يحتوي المجال '{0}' على اختراق XSS</xss-vulnerability-character>
       <xss-vulnerability-character-wo-label>القيمة التي تمّ ادخالها في هذا المجال قد تحتوي على أحرف XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
@@ -2492,7 +2492,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار العضوية</selectMembership>
+      <selectMembership>اختيار عضوية</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -2509,7 +2509,7 @@
   <UIActionForm>
     <title>
       <ShowComponent>فتح نافذة</ShowComponent>
-      <removeReference>إزالة</removeReference>
+      <removeReference>ازالة</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>

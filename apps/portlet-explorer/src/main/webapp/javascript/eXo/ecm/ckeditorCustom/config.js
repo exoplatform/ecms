@@ -15,16 +15,20 @@ if(userAgent != null && userAgent.indexOf('exo/') == 0 && userAgent.indexOf('(an
     CKEDITOR.env.webkit = true;
 }
 
+CKEDITOR.eXoPath = CKEDITOR.basePath.substr(0, CKEDITOR.basePath.indexOf("ckeditor/"));
+
 CKEDITOR.editorConfig = function( config ) {
 
     // %REMOVE_START%
     // The configuration options below are needed when running CKEditor from source files.
-    config.plugins = 'dialogui,dialog,about,a11yhelp,basicstyles,blockquote,clipboard,panel,floatpanel,menu,contextmenu,button,toolbar,enterkey,entities,popup,filebrowser,floatingspace,listblock,richcombo,format,horizontalrule,htmlwriter,wysiwygarea,image,indent,indentlist,fakeobjects,link,list,maximize,pastetext,pastefromword,removeformat,showborders,sourcearea,specialchar,menubutton,scayt,stylescombo,tab,table,tabletools,undo,wsc,panelbutton,colorbutton,colordialog,autogrow,confighelper';
     CKEDITOR.plugins.addExternal('simpleLink','/commons-extension/eXoPlugins/simpleLink/','plugin.js');
     CKEDITOR.plugins.addExternal('simpleImage','/commons-extension/eXoPlugins/simpleImage/','plugin.js');
-    CKEDITOR.plugins.addExternal('suggester','/commons-extension/eXoPlugins/suggester/','plugin.js');
+	CKEDITOR.plugins.addExternal('content','/eXoWCMResources/eXoPlugins/content/','plugin.js');
+	CKEDITOR.plugins.addExternal('insertPortalLink','/commons-extension/eXoPlugins/insertPortalLink/','plugin.js');
+	CKEDITOR.plugins.addExternal('wcmImage','/eXoWCMResources/eXoPlugins/wcmImage/','plugin.js');
+  
     //TODO we should ensure adding these plugins
-    config.extraPlugins = 'simpleLink,simpleImage,suggester';
+    config.extraPlugins = 'simpleLink,simpleImage,content,insertPortalLink,wcmImage';
 
     // Move toolbar below the test area
     config.toolbarLocation = 'bottom';
@@ -33,12 +37,46 @@ CKEDITOR.editorConfig = function( config ) {
     config.contentsCss = '/commons-extension/ckeditorCustom/contents.css';
 
     config.enterMode = CKEDITOR.ENTER_BR;
+	
+	config.removePlugins = 'scayt,wsc';
+	config.toolbarCanCollapse = false;
+	config.skin = 'moono-exo,/commons-extension/ckeditor/skins/moono-exo/';
+	config.allowedContent = true;
+	config.resize_enabled = true;
+	config.language = eXo.env.portal.language || 'en';
+	config.pasteFromWordRemoveFontStyles = false;
+	config.pasteFromWordRemoveStyles = false;
+        config.syntaxhighlight_lang = 'java';
+	config.syntaxhighlight_hideControls = true;
+	CKEDITOR.dtd.$removeEmpty['i'] = false;
 
     config.toolbar = [
         ['Bold','Italic','RemoveFormat',],
         ['-','NumberedList','BulletedList','Blockquote'],
         ['-','simpleLink', 'simpleImage'],
     ] ;
+	
+	config.toolbar_CompleteWCM = [
+		['Source','Templates'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Find','Replace','SelectAll','-','Undo','Redo'],
+		['Flash','Table','SpecialChar', 'content.btn', 'WcmImage'], 		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
+		['Link','insertPortalLink.btn','Unlink','Anchor'],		
+		['Styles','Format','Font','FontSize', '-' ,'Maximize']
+	] ;
+	
+	config.toolbar_BasicWCM = [
+		['Source','-','Bold','Italic','Underline','Strike'],
+    ['-','NumberedList','BulletedList','Outdent','Indent'],
+		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
+		['-','Link','Unlink','insertPortalLink.btn','content.btn', 'WcmImage'],
+    ['-','Maximize','ShowBlocks','Styles','Format','Font','FontSize']
+	] ;
+
+	config.toolbar_SuperBasicWCM = [
+		   ['Source','-','Bold','Italic','Underline'],
+		   ['-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+		   ['-','Link','Unlink','insertPortalLink.btn','content.btn', 'WcmImage'],
+	] ;
 
     config.height = 80;
 
@@ -46,10 +84,4 @@ CKEDITOR.editorConfig = function( config ) {
     config.autoGrow_minHeight = 80;
 
     config.language = eXo.env.portal.language || 'en';
-    config.suggester = {
-        suffix: ' ',
-        renderMenuItem: '<li data-value="${uid}"><div class="avatarSmall" style="display: inline-block;"><img src="${avatar}"></div>${name} (${uid})</li>',
-        renderItem: '<span class="exo-mention">${name}<a href="#" class="remove"><i class="uiIconClose uiIconLightGray"></i></a></span>',
-        sourceProviders: ['exo:people']
-    };
 };

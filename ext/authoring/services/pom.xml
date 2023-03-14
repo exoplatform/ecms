@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-ext-authoring</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.4.x-SNAPSHOT</version>
+    <version>6.5.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-ext-authoring-services</artifactId>
   <packaging>jar</packaging>
@@ -205,4 +205,14 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>@{argLine} --add-opens=java.management/java.lang.management=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED </argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

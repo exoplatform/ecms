@@ -18,6 +18,7 @@ package org.exoplatform.services.cms.thumbnail.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -35,11 +36,11 @@ import javax.jcr.Session;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.impl.ImageUtils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.thumbnail.ImageResizeService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -56,18 +57,22 @@ public class ThumbnailServiceImpl implements ThumbnailService {
   final private static String NT_FILE = "nt:file";
 
   private boolean isEnableThumbnail_ = false;
+
+  private ImageResizeService imageResizeService;
+
   private String smallSize_;
   private String mediumSize_;
   private String bigSize_;
   private String mimeTypes_;
   private List<ComponentPlugin> plugins_ = new ArrayList<ComponentPlugin>();
 
-  public ThumbnailServiceImpl(InitParams initParams) throws Exception {
+  public ThumbnailServiceImpl(InitParams initParams, ImageResizeService imageResizeService) throws Exception {
     smallSize_ = initParams.getValueParam("smallSize").getValue();
     mediumSize_ = initParams.getValueParam("mediumSize").getValue();
     bigSize_ = initParams.getValueParam("bigSize").getValue();
     mimeTypes_ = initParams.getValueParam("mimetypes").getValue();
     isEnableThumbnail_ = Boolean.parseBoolean(initParams.getValueParam("enable").getValue());
+    this.imageResizeService = imageResizeService;
   }
 
   /**
@@ -151,7 +156,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     if(propertyName.equals(SMALL_SIZE)) parseImageSize(thumbnailNode, image, smallSize_, SMALL_SIZE);
     else if(propertyName.equals(MEDIUM_SIZE)) parseImageSize(thumbnailNode, image, mediumSize_, MEDIUM_SIZE);
     else if(propertyName.equals(BIG_SIZE)) parseImageSize(thumbnailNode, image, bigSize_, BIG_SIZE);
-    else parseImageSize(thumbnailNode, image, propertyName.substring(4), propertyName, false);
+    else parseImageSize(thumbnailNode, image, propertyName.substring(4), propertyName);
   }
 
   /**
@@ -282,11 +287,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    */
   @Override
   public byte[] createCustomThumbnail(byte[] imageContent, int targetWidth, int targetHeight) throws Exception {
-    BufferedImage image = toBufferedImage(imageContent);
-    if (image != null) {
-      return ImageUtils.scaleImage(image, targetWidth, targetHeight).readAllBytes();
-    }
-    return imageContent;
+      return imageResizeService.scaleImage(imageContent, targetWidth, targetHeight, false, false);
   }
 
   private BufferedImage toBufferedImage(byte[] imageBytes) throws IOException {
@@ -317,10 +318,11 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * @throws Exception
    */
   private void createThumbnailImage(Node thumbnailNode, BufferedImage image, int width, int height,
-      String propertyName, boolean crop) throws Exception {
+      String propertyName) throws Exception {
     if (width>1600) width=1600;
     if (height>1600) height=1600;
-    InputStream thumbnailStream = ImageUtils.scaleImage(image, width, height, crop);
+    byte[] bytes = imageResizeService.scaleImage(toByteArray(image), width, height, false, false);
+    InputStream thumbnailStream = new ByteArrayInputStream(bytes);
     try {
       thumbnailNode.setProperty(propertyName, thumbnailStream);
       thumbnailNode.getSession().save();
@@ -333,6 +335,12 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     }
   }
 
+  private byte[] toByteArray(BufferedImage bufferedImage) throws IOException {
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+    return byteArrayOutputStream.toByteArray();
+  }
+  
   /**
    * Analysis size which has format (width x height) and call method createThumbnailImage
    * to put data into propertyName of node
@@ -343,18 +351,6 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * @throws Exception
    */
   private void parseImageSize(Node node, BufferedImage image, String size, String propertyName) throws Exception {
-    parseImageSize(node, image, size, propertyName, false);
-  }
-  /**
-   * Analysis size which has format (width x height) and call method createThumbnailImage
-   * to put data into propertyName of node
-   * @param node
-   * @param image
-   * @param size
-   * @param propertyName
-   * @throws Exception
-   */
-  private void parseImageSize(Node node, BufferedImage image, String size, String propertyName, boolean crop) throws Exception {
     int width = 0;
     int height = 0;
     if (size.startsWith("x")) {
@@ -366,6 +362,6 @@ public class ThumbnailServiceImpl implements ThumbnailService {
       width = Integer.parseInt(imageSize[0]);
       height = Integer.parseInt(imageSize[1]);
     }
-    createThumbnailImage(node, image, width, height, propertyName, crop);
+    createThumbnailImage(node, image, width, height, propertyName);
   }
 }

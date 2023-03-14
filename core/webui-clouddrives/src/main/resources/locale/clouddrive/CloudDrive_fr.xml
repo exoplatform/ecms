@@ -108,17 +108,17 @@
         <connect>Se connecter</connect>
       </button>
       <button>
-        <disconnect>Enlever contact</disconnect>
+        <disconnect>Se déconnecter</disconnect>
       </button>
-      <noConnector>Aucun connecteur de calendrier personnel n'est disponible</noConnector>
+      <noConnector>Aucun connecteur de lecteur personnel n'est disponible</noConnector>
       <connectedAccountWith>Vous êtes connecté avec</connectedAccountWith>
     </drawer>
     <alert>
       <successMessage>Votre calendrier est correctement connecté</successMessage>
       <errorMessage>Échec de la connexion</errorMessage>
-      <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
-      <disconnectSuccessMessage>Your cloud drive is disconnected correctly</disconnectSuccessMessage>
-      <disconnectErrorMessage>Failed disconnection</disconnectErrorMessage>
+      <errorSaveUserSettings>Impossible de connecter le compte du lecteur distant</errorSaveUserSettings>
+      <disconnectSuccessMessage>Votre lecteur distant a été correctement déconnecté</disconnectSuccessMessage>
+      <disconnectErrorMessage>Échec de la connexion</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>

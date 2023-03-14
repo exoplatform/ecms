@@ -31,8 +31,8 @@
       <action>#{word.action}</action>
     </header>
     <action>
-      <SaveCategories>#{word.save}</SaveCategories>
-      <Cancel>#{word.cancel}</Cancel>
+      <SaveCategories>حفظ</SaveCategories>
+      <Cancel>إلغاء</Cancel>
     </action>
     <msg>
       <cannot-save>لم يتمّ حفظ الفئات.</cannot-save>
@@ -49,8 +49,8 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>اختيار مستخدم</UIPermissionUser>
-      <UIPermissionMembership>اختيار عُضويّة</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>اختيار عُضويّة</TaxoSelectUserOrGroup>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
@@ -61,14 +61,14 @@
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>اختيار عُضويّة</selectUser>
+      <selectUser>Select Role</selectUser>
       <selectGroup>تصفح واختر مجموعة</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
       <selectGroup>اختيار مجموعة</selectGroup>
-      <selectMembership>اختيار عُضويّة</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--

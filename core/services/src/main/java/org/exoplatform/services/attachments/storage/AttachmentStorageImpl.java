@@ -24,6 +24,7 @@ import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import javax.jcr.AccessDeniedException;
@@ -98,6 +99,7 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                                                    attachmentId);
           attachments.add(attachment);
         }
+        attachments = Utils.removeDuplicatedAttachments(userSession, attachments);
       }
       return attachments.stream()
                         .filter(Objects::nonNull)
@@ -150,7 +152,7 @@ public class AttachmentStorageImpl implements AttachmentStorage {
 
   private boolean checkAttachmentNodeExistence(Session session, String attachmentId) throws RepositoryException {
     try {
-      session.getNodeByUUID(attachmentId);
+      ((ExtendedSession)session).getNodeByIdentifier(attachmentId);
     } catch (ItemNotFoundException | AccessDeniedException e) {
       return false;
     }

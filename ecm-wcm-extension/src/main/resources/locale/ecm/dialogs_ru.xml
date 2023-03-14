@@ -164,7 +164,7 @@
         <format>#{word.format}</format>
         <coverage>Покрытие</coverage>
         <identifier>Идентификатор</identifier>
-        <language>Язык:</language>
+        <language>Язык</language>
       </label>
     </dialog>
   </ElementSet>
@@ -260,7 +260,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Название</name>
+        <name>Имя</name>
         <autoload>Автозагрузка</autoload>
         <minetype>Тип MIME</minetype>
         <content>Содержимое</content>
@@ -293,9 +293,9 @@
     <dialog>
       <label>
         <id>Идентификатор</id>
-        <name>Название</name>
+        <name>Имя</name>
         <lifecycle>Жизненный цикл</lifecycle>
-        <homePath>Путь в домашний директорий</homePath>
+        <homePath>Маршрут личного каталога</homePath>
         <targetWorkspace>Целевая рабочая область</targetWorkspace>
         <targetPath>Целевой путь</targetPath>
       </label>
@@ -316,16 +316,16 @@
 <true>Верно</true>
 <false>Неверно</false>
 <Electronic>Электронный</Electronic>
-<Paper>Бумага</Paper>
+<Paper>Бумажный</Paper>
 <NONE>Нет</NONE>
-<CLASSIFIED>Классифицируются</CLASSIFIED>
+<CLASSIFIED>Классифицированные</CLASSIFIED>
 <UNCLASSIFIED>Неклассифицированные</UNCLASSIFIED>
 <NOCONTRACT>Нет связи</NOCONTRACT>
 <one-minute>Ежеминутно</one-minute>
 <hourly>Каждый час</hourly>
-<daily>Ежедневно</daily>
-<quarterly>Ежеквартально</quarterly>
-<yearly>Ежегодно</yearly>
+<daily>Каждый день</daily>
+<quarterly>Каждый квартал</quarterly>
+<yearly>Каждый год</yearly>
 <ten-years>Каждые десять лет</ten-years>
 <read>Действие пользователя</read>
   <schedule>Планировщик</schedule>
@@ -340,7 +340,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -350,7 +350,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -360,7 +360,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -370,7 +370,7 @@
       <label>
         <isDeep>Глубоко</isDeep>
         <nodetypes>Типы узлов</nodetypes>
-        <affectedNodeTypeNames>Типы узлов, оказавшихся под воздействием</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Типы узлов, оказавшиеся под воздействием</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>

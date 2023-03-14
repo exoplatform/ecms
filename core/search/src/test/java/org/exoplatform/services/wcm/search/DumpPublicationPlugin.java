@@ -244,7 +244,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     List<String> listPortalName = new ArrayList<String>();
     DataStorage service = WCMCoreUtils.getService(DataStorage.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class) ;
-    ListAccess<PortalConfig> pageList = service.find2(query) ;
+    ListAccess<PortalConfig> pageList = service.find2(query, null) ;
     List<PortalConfig> portalConfigs = WCMCoreUtils.getAllElementsOfListAccess(pageList);
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(PortalConfig portalConfig : portalConfigs) {

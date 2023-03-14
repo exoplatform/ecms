@@ -40,7 +40,7 @@ public interface CloudDriveUserSettingsService {
      * Removes clouddrive connectors settings for authenticated user
      *
      * @param identityId technical identifier of {@link Identity}
-     * @throws  JSONException when the current user is not delete cloud drive settings
+     * @throws JSONException when the current user is not delete cloud drive settings
      */
     public void deleteCloudDriveUserSettings(long identityId, String providerId) throws JSONException;
   }

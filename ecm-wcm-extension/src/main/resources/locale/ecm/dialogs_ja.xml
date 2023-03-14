@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>コメントを誰かにメンションするには@を使用します</placeholder>
+      <placeholder>コメントに誰かをメンションするには@ を使用します。</placeholder>
     </label>
   </UICommentForm>
  
@@ -58,7 +58,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>カテゴリー</categories>
+        <categories>カテゴリ</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <width>幅</width>
         <height>高さ</height>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>メタデータ観覧</metadata>
+        <metadata>メタデータ</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -164,7 +164,7 @@
         <format>#{word.format}</format>
         <coverage>範囲</coverage>
         <identifier>識別子</identifier>
-        <language>言語:</language>
+        <language>言語</language>
       </label>
     </dialog>
   </ElementSet>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>公開の開始</start-publication>
-        <end-publication>公開の終了</end-publication>
+        <start-publication>公開開始</start-publication>
+        <end-publication>公開終了</end-publication>
       </label>
     </dialog>
   </Published>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>メールアドレスが正しくありません、</Invalid-input>
+      <Invalid-input>Eメールアドレスは無効です！</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>

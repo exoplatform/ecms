@@ -1,101 +1,113 @@
 <template>
-  <div :class="allowToPreview && 'clickable'" class="attachment d-flex">
-    <v-list-item-avatar
-      :class="smallAttachmentIcon ? 'me-0' :'me-3'"
-      class="border-radius"
-      @click="openPreview()">
-      <div v-if="attachment.uploadProgress < 100" class="fileProgress">
-        <v-progress-circular
-          :rotate="-90"
-          :size="40"
-          :width="4"
-          :value="attachment.uploadProgress"
-          color="primary">
-          {{ attachment.uploadProgress }}
-        </v-progress-circular>
-      </div>
-      <div
-        v-else
-        :class="smallAttachmentIcon && 'smallAttachmentIcon'"
-        class="fileType">
+  <v-main>
+    <div :class="allowToPreview && 'clickable'" class="attachment d-flex">
+      <v-list-item-avatar
+        :class="smallAttachmentIcon ? 'me-0' :'me-3'"
+        class="border-radius"
+        @click="openFile()">
+        <div v-if="attachment.uploadProgress < 100" class="fileProgress">
+          <v-progress-circular
+            :rotate="-90"
+            :size="40"
+            :width="4"
+            :value="attachment.uploadProgress"
+            color="primary">
+            {{ attachment.uploadProgress }}
+          </v-progress-circular>
+        </div>
+        <div
+          v-else
+          :class="smallAttachmentIcon && 'smallAttachmentIcon'"
+          class="fileType">
+          <v-icon
+            size="41"
+            :color="icon.color">
+            {{ icon.class }}
+          </v-icon>
+        </div>
+      </v-list-item-avatar>
+      <v-list-item-content @click="openFile()">
+        <v-list-item-title class="uploadedFileTitle" :title="attachmentTitle">
+          {{ attachmentTitle || notAccessibleAttachmentTitle }}
+        </v-list-item-title>
+        <v-list-item-subtitle v-if="canMoveAttachment" class="d-flex v-messages uploadedFileSubTitle">
+          <v-chip
+            v-if="attachment.pathDestinationFolderForFile"
+            close
+            small
+            class="attachment-location px-2"
+            @click:close="$root.$emit('remove-destination-for-file', attachment.id)"
+            @click="openSelectDestinationFolderForFile(attachment)">
+            {{ attachment.pathDestinationFolderForFile }}
+          </v-chip>
+          <a
+            v-if="!attachment.pathDestinationFolderForFile"
+            :title="$t('attachments.ChangeLocation')"
+            rel="tooltip"
+            data-placement="top"
+            class="attachmentDestinationPath primary--text"
+            @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChangeLocation') }}</a>
+        </v-list-item-subtitle>
+      </v-list-item-content>
+      <v-list-item-action class="d-flex flex-row align-center">
         <v-icon
-          size="41"
-          :color="icon.color">
-          {{ icon.class }}
+          v-if="attachment.isSelectedFromDrives && fromAnotherSpaceAttachment || fromAnotherDriveAttachment"
+          :title="attachmentPrivacyLabel"
+          size="14"
+          color="primary"
+          depressed>
+          fa-info-circle
         </v-icon>
-      </div>
-    </v-list-item-avatar>
-    <v-list-item-content @click="openPreview()">
-      <v-list-item-title class="uploadedFileTitle" :title="attachmentTitle">
-        {{ attachmentTitle || notAccessibleAttachmentTitle }}
-      </v-list-item-title>
-      <v-list-item-subtitle v-if="canMoveAttachment" class="d-flex v-messages uploadedFileSubTitle">
-        <v-chip
-          v-if="attachment.pathDestinationFolderForFile"
-          close
-          small
-          class="attachment-location px-2"
-          @click:close="$root.$emit('remove-destination-for-file', attachment.id)"
-          @click="openSelectDestinationFolderForFile(attachment)">
-          {{ attachment.pathDestinationFolderForFile }}
-        </v-chip>
-        <a
-          v-if="!attachment.pathDestinationFolderForFile"
-          :title="$t('attachments.ChangeLocation')"
-          rel="tooltip"
-          data-placement="top"
-          class="attachmentDestinationPath primary--text"
-          @click="openSelectDestinationFolderForFile(attachment)">{{ $t('attachments.ChangeLocation') }}</a>
-      </v-list-item-subtitle>
-    </v-list-item-content>
-    <v-list-item-action class="d-flex flex-row align-center">
-      <v-icon
-        v-if="attachment.isSelectedFromDrives && fromAnotherSpaceAttachment || fromAnotherDriveAttachment"
-        :title="attachmentPrivacyLabel"
-        size="14"
-        color="primary"
-        depressed>
-        fa-info-circle
-      </v-icon>
-      <v-icon
-        v-if="!canAccess"
-        :title="notAccessibleAttachmentTooltip"
-        size="14"
-        color="primary"
-        depressed>
-        fa-info-circle
-      </v-icon>
-      <v-btn
-        v-if="attachmentInProgress && allowToDetach"
-        class="d-flex align-end"
-        outlined
-        x-small
-        height="18"
-        width="18"
-        @click="detachFile(attachment)">
-        <i class="uiIconCloseCircled error--text"></i>
-      </v-btn>
-      <div
-        v-else-if="allowToDetach && canAccess"
-        :class="!canDetachAttachment && 'not-allowed'"
-        :title="!canDetachAttachment && $t('attachments.remove.notAuthorize') || $t('attachment.detach')"
-        class="remove-button">
+        <v-icon
+          v-if="!canAccess"
+          :title="notAccessibleAttachmentTooltip"
+          size="14"
+          color="primary"
+          depressed>
+          fa-info-circle
+        </v-icon>
         <v-btn
-          :disabled="!canDetachAttachment"
-          class="d-flex"
+          v-if="attachmentInProgress"
+          class="d-flex align-end"
           outlined
           x-small
-          height="24"
-          width="24"
+          height="18"
+          width="18"
           @click="detachFile(attachment)">
-          <v-icon
-            :class="!canDetachAttachment && 'grey--text' || 'error--text'"
-            small
-            class="fas fa-unlink" />
+          <i class="uiIconCloseCircled error--text"></i>
         </v-btn>
-      </div>
-    </v-list-item-action>
-  </div>
+        <div
+          v-if="allowToDetach && canAccess"
+          :class="!canDetachAttachment && 'not-allowed'"
+          :title="!canDetachAttachment && $t('attachments.remove.notAuthorize') || $t('attachment.detach')"
+          class="remove-button">
+          <v-btn
+            :disabled="!canDetachAttachment"
+            class="d-flex"
+            outlined
+            x-small
+            height="24"
+            width="24"
+            @click="detachFile(attachment)">
+            <v-icon
+              :class="!canDetachAttachment && 'grey--text' || 'error--text'"
+              small
+              class="fas fa-unlink" />
+          </v-btn>
+        </div>
+      </v-list-item-action>
+    </div>
+    <div
+      class="d-flex">
+      <p
+        class="docActionItem me-4 ml-4 clickable"
+        v-for="action in attachment.actions"
+        @click="$emit(`${action}`, attachment)"
+        :key="action">
+        {{ $t(`attachments.upload.action.${action}`) }}
+      </p>
+    </div>
+  </v-main>
 </template>
 <script>
 export default {
@@ -113,6 +125,14 @@ export default {
       default: true
     },
     allowToPreview: {
+      type: Boolean,
+      default: false
+    },
+    openInEditor: {
+      type: Boolean,
+      default: false
+    },
+    isFileEditable: {
       type: Boolean,
       default: false
     },
@@ -283,6 +303,18 @@ export default {
     },
     fileInfo() {
       return `${this.$t('documents.preview.updatedOn')} ${this.absoluteDateModified()} ${this.$t('documents.preview.updatedBy')} ${this.attachment.lastEditor} ${this.attachment.size}`;
+    },
+    openFileInEditor() {
+      if (this.attachment && this.attachment.id) {
+        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}&source=peview`, '_blank');
+      }
+    },
+    openFile() {
+      if (this.openInEditor && this.isFileEditable && this.attachment.acl?.canEdit) {
+        this.openFileInEditor();
+      } else {
+        this.openPreview();
+      }
     },
     openPreview() {
       if (this.allowToPreview && this.attachment.id) {

@@ -6,7 +6,7 @@
       :confirm-close-labels="confirmAbortUploadLabels"
       class="attachmentsAppDrawer"
       right
-      @closed="resetAttachmentsDrawer">
+      @closed="closeAttachmentsAppDrawer">
       <template slot="title">
         <div class="attachmentsDrawerHeader">
           <span>{{ $t('attachments.upload.document') }}</span>
@@ -37,6 +37,8 @@
             :path-destination-folder="pathDestinationFolder" />
           <attachments-select-from-drive v-if="(entityId && entityType) || !attachToEntity" />
           <attachments-uploaded-files
+            @keep-both="uploadManually($event, 'keep')"
+            @create-version="uploadManually($event, 'createVersion')"
             :attachments="attachments"
             :new-uploaded-files="newUploadedFiles"
             :schema-folder="schemaFolder"
@@ -112,6 +114,10 @@ export default {
       type: Array,
       default: () => []
     },
+    files: {
+      type: Array,
+      default: () => []
+    },
     entityHasAttachments: {
       type: Boolean,
       default: false
@@ -151,11 +157,12 @@ export default {
       attachmentsChanged: false,
       newUploadedFiles: [],
       creationType: '',
+      saveMode: 'keep'
     };
   },
   computed: {
     uploadFinished() {
-      return this.attachments.length > 0 && this.attachments.every(file => !file.uploadId);
+      return this.attachments.length > 0 && (this.attachments.every(file => !file.uploadId) || this.attachments.every(file => file.waitAction));
     },
     entityHasNewAttachments() {
       return this.uploadedFiles.length > 0;
@@ -197,14 +204,13 @@ export default {
         this.displaySuccessMessage();
         this.$refs.attachmentsAppDrawer.endLoading();
       }
-    }
+    },
+    defaultDrive() {
+      this.initDefaultDestinationFolderPath(this.defaultFolder);
+    },
   },
   created() {
-    document.addEventListener('paste', this.onPaste, false);
-    this.$root.$on('open-select-from-drives', () => {
-      this.creationType = this.$t('attachments.uploaded.from.cloud');
-      this.openSelectFromDrivesDrawer();
-    });
+    
     this.$root.$on('open-attachments-app-drawer', () => {
       this.attachmentsChanged = false;
       this.openAttachmentsAppDrawer();
@@ -239,10 +245,15 @@ export default {
     this.$root.$on('add-new-created-document', (doc) =>{
       this.creationType = this.$t('attachments.added.by.platform');
       this.addNewCreatedDocument(doc);
-    }
-    );
+      document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+    });
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
+    this.$root.$on('continue-upload-to-destination-path', (file) => {
+      this.uploadFileToDestinationPath(file);
+      this.$root.$emit('entity-attachments-updated');
+      document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+    });
   },
   methods: {
     startLoading() {
@@ -251,11 +262,23 @@ export default {
     endLoading() {
       this.$refs.attachmentsAppDrawer.endLoading();
     },
+    handleProvidedFiles() {
+      if (this.files && this.files.length>0){
+        this.$root.$emit('handle-provided-files',this.files);
+      }
+    },
     openAttachmentsAppDrawer() {
+      document.addEventListener('paste', this.onPaste, false);
+      this.$root.$on('open-select-from-drives', () => {
+        this.creationType = this.$t('attachments.uploaded.from.cloud');
+        this.openSelectFromDrivesDrawer();
+      });
       this.$refs.attachmentsAppDrawer.open();
       this.$root.$emit('attachments-app-drawer-opened');
+      window.setTimeout(() => this.handleProvidedFiles(), 400);
     },
     closeAttachmentsAppDrawer() {
+      this.resetAttachmentsDrawer();
       this.$root.$emit('reset-attachments-upload-input');
       document.removeEventListener('paste', this.onPaste, false);
       this.$refs.attachmentsAppDrawer.close();
@@ -263,7 +286,7 @@ export default {
     uploadAddedAttachments() {
       if (this.newUploadedFilesAdded) { //added new uploaded files
         this.$refs.attachmentsAppDrawer.startLoading();
-        this.attachments.filter(file => file.uploadId).forEach(file => {
+        this.attachments.filter(file => file.uploadId && !file.waitAction).forEach(file => {
           this.queueUpload(file);
         });
       } else if (this.attachmentsChanged) { //updated from drives
@@ -285,8 +308,14 @@ export default {
         this.uploadFileToDestinationPath(this.uploadingFilesQueue.shift());
       }
     },
+    uploadManually(file, mode) {
+      this.saveMode = mode;
+      file.waitAction = false;
+      this.$root.$emit('attachment-continue-upload', file);
+      file.actions = [];
+    },
     uploadFileToDestinationPath: function (file) {
-      if (file.uploadId) {
+      if (file.uploadId && !file.waitAction) {
         this.uploadingCount++;
         this.$attachmentService.uploadAttachment(
           this.workspace,
@@ -296,7 +325,7 @@ export default {
           file.uploadId,
           file.title,
           eXo.env.portal.language,
-          'keep',
+          this.saveMode,
           'save'
         ).then((uploadedFile) => {
           if (uploadedFile) {
@@ -317,6 +346,8 @@ export default {
               this.processNextQueuedUpload();
             }
           }
+          this.saveMode = 'keep';
+          this.waitingActionUploads();
         }).catch(() => {
           this.uploadingCount--;
           this.processNextQueuedUpload();
@@ -326,6 +357,15 @@ export default {
             type: 'error',
           });
         });
+      }
+    },
+    waitingActionUploads() {
+      const onlyWaiting = this.attachments.every(attachment => attachment.waitAction || attachment.uploadProgress === 100);
+      if (onlyWaiting && !this.uploadFinished) {
+        this.$root.$emit('entity-attachments-updated');
+        document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+        this.$root.$emit('refresh-uploaded-files-list');
+        this.displaySuccessMessage();
       }
     },
     addDestinationFolderForAll(pathDestinationFolder, folderRelativePath, folder, currentDrive) {

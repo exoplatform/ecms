@@ -1347,7 +1347,7 @@
   <UIVersionInfo>
     <title>Historial de versiones</title>
     <summary>
-      <empty>Haga clic aquí para añadir un resumen</empty>
+      <empty>Haz clic aquí para añadir un resumen</empty>
     </summary>
     <tooltip>
       <original>Versión original</original>
@@ -1496,8 +1496,8 @@
       <can-not-compare>No se pudo comparar ambas versiones</can-not-compare>
       <compare-unavailable>La comparación de versiones no está disponible para este documento</compare-unavailable>
       <DateChange>En {0}</DateChange>
-      <PreviousAndNextCompare>Modificaciones desde {0} hasta {1}</PreviousAndNextCompare>
-      <ComparedWith>En comparación con</ComparedWith>
+      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared with</ComparedWith>
       <restoredFrom>Restaurado de la versión {0}</restoredFrom>
     </label>
   </UIDiff>

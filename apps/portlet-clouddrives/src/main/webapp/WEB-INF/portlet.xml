@@ -30,7 +30,6 @@
       <keywords>clouddrives</keywords>
     </portlet-info>
   </portlet>
-
   <portlet>
     <portlet-name>cloudStoragePortlet</portlet-name>
     <display-name xml:lang="EN">Cloud storage portlet</display-name>

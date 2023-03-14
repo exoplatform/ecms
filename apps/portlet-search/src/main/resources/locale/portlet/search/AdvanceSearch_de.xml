@@ -63,9 +63,9 @@
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Das Schlüsselwort ist ungültig. Einige Zeichen werden nicht erkannt.</keyword-not-support>
-     <not-checked>Bitte wählen Sie einen Suchtyp.</not-checked>
-     <keyword-not-empty>Bitte geben Sie ein Schlüsselwort ein.</keyword-not-empty>
+     <keyword-not-support>Das Passwort ist ungültig. Einige Zeichen werden nicht erkannt.</keyword-not-support>
+     <not-checked>Bitte wählen Sie einen Suchtyp aus.</not-checked>
+     <keyword-not-empty>Bitte geben Sie Ihr Passwort ein.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>

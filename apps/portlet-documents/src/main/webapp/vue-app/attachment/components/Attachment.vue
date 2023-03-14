@@ -12,10 +12,13 @@
         :default-drive="defaultDrive"
         :default-folder="defaultFolder"
         :current-space="currentSpace"
-        :attach-to-entity="attachToEntity" />
+        :attach-to-entity="attachToEntity"
+        :files="files" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
-        :attachments="attachments" />
+        :supported-documents="supportedDocuments"
+        :attachments="attachments"
+        :open-attachments-in-editor="openAttachmentsInEditor" />
       <attachments-notification-alerts />
     </div>
   </v-app>
@@ -26,6 +29,7 @@ export default {
   data () {
     return {
       attachments: [],
+      files: [],
       currentSpace: {},
       defaultDrive: null,
       defaultFolder: null,
@@ -35,6 +39,8 @@ export default {
       sourceApp: null,
       drawerList: false,
       attachToEntity: true,
+      supportedDocuments: null,
+      openAttachmentsInEditor: false
     };
   },
   computed: {
@@ -64,39 +70,56 @@ export default {
     });
     document.addEventListener('open-attachments-app-drawer', (event) => {
       this.drawerList = false;
-      this.readConfiguration(event.detail)
-        .then(() => {
-          this.initAttachmentEnvironment();
-          this.openAttachmentsAppDrawer();
-        });
+      this.readConfiguration(event.detail);
+      this.initAttachmentEnvironment();
+      this.openAttachmentsAppDrawer();
     });
     document.addEventListener('open-attachments-list-drawer', (event) => {
       this.drawerList = true;
-      this.readConfiguration(event.detail)
-        .then(() => {
-          this.initAttachmentEnvironment();
-          this.openAttachmentsDrawerList();
-        });
+      this.readConfiguration(event.detail);
+      this.initAttachmentEnvironment();
+      this.openAttachmentsDrawerList();
     });
+    document.addEventListener('documents-supported-document-types-updated', this.refreshSupportedDocumentExtensions);
+    this.refreshSupportedDocumentExtensions();
   },
   mounted() {
     this.$root.$applicationLoaded();
   },
   methods: {
+    refreshSupportedDocumentExtensions () {
+      this.supportedDocuments = extensionRegistry.loadExtensions('documents', 'supported-document-types');
+    },
     openAttachmentsAppDrawer() {
       this.$root.$emit('open-attachments-app-drawer');
     },
     readConfiguration(config) {
       config = config || {};
-      this.spaceId = this.getURLQueryParam('spaceId')  || config.spaceId || eXo.env.portal.spaceId;
-      this.defaultDrive = config.defaultDrive || {
-        isSelected: true,
-        name: eXo.env.portal.spaceGroup && `.spaces.${eXo.env.portal.spaceGroup}` || 'Personal Documents',
-        title: eXo.env.portal.spaceDisplayName || 'Personal Documents'
-      };
+      this.spaceId = this.getURLQueryParam('spaceId') || config.spaceId || eXo.env.portal.spaceId;
+      if (this.spaceId) {
+        this.$spaceService.getSpaceById(this.spaceId)
+          .then(space => {
+            if (space) {
+              this.currentSpace = space;
+              const spaceGroupId = space.groupId.split('/spaces/')[1];
+              this.defaultDrive = {
+                name: `.spaces.${spaceGroupId}`,
+                title: space.displayName,
+                isSelected: true
+              };
+            }
+          });
+      } else {
+        this.defaultDrive = config.defaultDrive || {
+          isSelected: true,
+          name: eXo.env.portal.spaceGroup && `.spaces.${eXo.env.portal.spaceGroup}` || 'Personal Documents',
+          title: eXo.env.portal.spaceDisplayName || 'Personal Documents'
+        };
+      }
       this.defaultFolder = config.defaultFolder
-        || (eXo.env.portal.spaceDisplayName && 'Documents') || 'Public';
+        || (eXo.env.portal.spaceId && '/') || 'Public';
       this.sourceApp = config.sourceApp || null;
+      this.files = config.files || null;
       this.attachments = config.attachments || [];
       if (typeof config.attachToEntity !== 'undefined') {
         this.attachToEntity = config.attachToEntity;
@@ -108,7 +131,7 @@ export default {
       }
       this.entityType = config.entityType;
       this.entityId = config.entityId;
-      return this.initDefaultDrive();
+      this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
     },
     startLoadingList() {
       if (this.drawerList && this.$refs.attachmentsListDrawer) {
@@ -135,7 +158,7 @@ export default {
       if (this.entityType && this.entityId) {
         return this.$attachmentService.getEntityAttachments(this.entityType, this.entityId).then(attachments => {
           attachments.forEach(attachment => attachment.name = attachment.title);
-          this.attachments = attachments;
+          Object.assign(this.attachments, attachments);
         });
       }
     },
@@ -148,6 +171,9 @@ export default {
         this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
         if (file.uploadProgress !== this.maxProgress) {
           this.$root.$emit('abort-uploading-new-file', file);
+        }
+        if (this.attachments.length === 0) {
+          this.$root.$emit('end-loading-attachment-drawer');
         }
       } else if (this.attachToEntity) {
         this.startLoadingList();
@@ -194,24 +220,6 @@ export default {
           });
         }
       });
-    },
-    initDefaultDrive() {
-      if (this.spaceId) {
-        return this.$spaceService.getSpaceById(this.spaceId)
-          .then(space => {
-            if (space) {
-              this.currentSpace = space;
-              const spaceGroupId = space.groupId.split('/spaces/')[1];
-              this.defaultDrive = {
-                name: `.spaces.${spaceGroupId}`,
-                title: space.displayName,
-                isSelected: true
-              };
-            }
-          });
-      } else {
-        return Promise.resolve(null);
-      }
     },
     getURLQueryParam(paramName) {
       const urlParams = new URLSearchParams(window.location.search);

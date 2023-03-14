@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Σύνδεσμος (link)</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -74,7 +74,7 @@
       <port>Θύρα</port>
       <userName>#{word.userName}</userName>
       <password>Κωδικός πρόσβασης</password>
-      <link>Link</link>
+      <link>Σύνδεσμος (link)</link>
       <to>Στείλτε μήνυμα</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Θύρα</port>
       <userName>#{word.userName}</userName>
       <password>Κωδικός πρόσβασης</password>
-      <link>Link</link>
+      <link>Σύνδεσμος (link)</link>
       <to>Στείλτε μήνυμα</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -190,7 +190,7 @@
         <destination-workpsace>Χώρος εργασίας προορισμού</destination-workpsace>
         <destination-path>Διαδρομή προορισμού</destination-path>
         <primary-type>Πρωτεύων τύπος</primary-type>
-        <mixin-types>Μεικτοί τύποι</mixin-types>
+        <mixin-types>Μεικτός τύπος</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -316,9 +316,9 @@
 <true>Αληθές</true>
 <false>Ψευδές</false>
 <Electronic>Ηλεκτρονικό</Electronic>
-<Paper>Paper</Paper>
-<NONE>Δεν έχει οριστεί</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
+<Paper>Χαρτί</Paper>
+<NONE>Κανένα</NONE>
+<CLASSIFIED>Ταξινομημένα</CLASSIFIED>
 <UNCLASSIFIED>Μη ταξινομημένο</UNCLASSIFIED>
 <NOCONTRACT>Καμία σύμβαση</NOCONTRACT>
 <one-minute>Ένα λεπτό</one-minute>

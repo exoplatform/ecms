@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Dernier commentaire par</postedBy>
-        <at>le</at>
+        <at>à</at>
         <comments>Commentaires</comments>
         <show-comments>Afficher les commentaires</show-comments>
         <hide-comments>Cacher les commentaires</hide-comments>
@@ -54,7 +54,7 @@
         <pdf-max-size>L'aperçu n'est pas disponible pour les contenus de plus de {0} Mo.</pdf-max-size>
         <pdf-max-page>L'aperçu n'est pas disponible pour les contenus avec plus de {0} pages.</pdf-max-page>
         <using-webDAV>ou Ouvrir dans MS Office</using-webDAV>
-        <open-on-desktop>Ouvrir à distance</open-on-desktop>
+        <open-on-desktop>Ouvrir sur votre poste de travail</open-on-desktop>
         <editOnline>Editer en ligne</editOnline>
         <open-in-documents>Ouvrir dans Documents</open-in-documents>
         <open-in-documents-tooltip>Ouvrir ce fichier dans l'application Documents</open-in-documents-tooltip>
@@ -74,8 +74,8 @@
   <Mail>
     <view>
       <label>
-        <from>De</from>
-        <to>A</to>
+        <from>De :</from>
+        <to>À :</to>
         <cc>Cc :</cc>
         <date>Date :</date>
         <subject>Sujet :</subject>
@@ -102,7 +102,7 @@
       <label>
         <name>Nom</name>
         <versionable>Versionnable</versionable>
-        <exo_owner>Utilisateur</exo_owner>
+        <exo_owner>Propriétaire</exo_owner>
         <exo_dateCreated>Date de création</exo_dateCreated>
         <exo_dateModified>Date de Modif.</exo_dateModified>
         <auditing>Audit</auditing>
@@ -118,7 +118,7 @@
       <label>
         <action-name>Nom de l'action</action-name>
         <lifecycle>Cycle de vie</lifecycle>
-        <metadata>Métadonnées</metadata>
+        <metadata>Metadonnée</metadata>
         <description>Description</description>
       </label>
     </view>
@@ -154,10 +154,10 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>ND</not-avaliable>
+        <not-avaliable/>
         <core-elements>Dublin Core</core-elements>
         <title>Titre</title>
-        <creator>Auteur</creator>
+        <creator>Créateur</creator>
         <subject>Sujet</subject>
         <source>Source</source>
         <contributor>Contributeur</contributor>
@@ -173,12 +173,12 @@
         <languages>Langues</languages>
       </label>
       <action>
-        <add-edit>Ajouter/Modifier</add-edit>
+        <add-edit>Modifier</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Ajouter/Modifier les Propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -198,7 +198,7 @@
     <view>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de Noeud</nodetypes>
+        <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
         <nodeTypeName>Types de noeuds</nodeTypeName>
       </label> 
@@ -209,9 +209,9 @@
     <view>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de Noeud</nodetypes> 
+        <nodetypes>Types de noeud</nodetypes> 
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-        <nodeTypeName>Types de noeuds</nodeTypeName>
+        <nodeTypeName>Types de noeud</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -220,9 +220,9 @@
     <view>
       <label>
         <isDeep>Récursif</isDeep>
-        <nodetypes>Types de Noeud</nodetypes>
+        <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-        <nodeTypeName>Types de noeuds</nodeTypeName>
+        <nodeTypeName>Types de noeud</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
-      <Read-more>Lire la Suite</Read-more>
+      <Read-more>Lire la suite</Read-more>
       <Read-less>Réduire</Read-less>
       <Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
       </label>

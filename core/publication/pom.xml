@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.4.x-SNAPSHOT</version>
+    <version>6.5.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-publication</artifactId>
   <packaging>jar</packaging>
@@ -139,6 +139,12 @@
       <artifactId>ecms-core-services</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-core</artifactId>
+      <scope>test</scope>
+      <type>test-jar</type>
     </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>

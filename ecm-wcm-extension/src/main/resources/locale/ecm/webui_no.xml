@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>Navn</name>
-      <action>Add</action>
+      <action>Legg til</action>
     </header>
     <info>
       <child-not-found>Underkategori ikke funnet!</child-not-found>

@@ -90,7 +90,7 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Arbeitsbereich-Laufwerk:</driveWorkspace>
+      <driveWorkspace>Drive Workspace:</driveWorkspace>
       <backToJCR>Zurück zu JCR Hauptlaufwerke</backToJCR>
       <setUpBrowser>Ihre Browsing-Präferenzen einstellen</setUpBrowser>
       <refesh>Aktualisieren</refesh>
@@ -109,9 +109,9 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Persönliche Laufwerke</PersonalDrives>
-      <GroupDrives>Gruppenlaufwerke</GroupDrives>
-      <GeneralDrives>Allgemeine Laufwerke</GeneralDrives>
+      <PersonalDrives>Persönliche Dokumente</PersonalDrives>
+      <GroupDrives>Gruppendokumente</GroupDrives>
+      <GeneralDrives>Allgemeine Dokumente</GeneralDrives>
     </title>
     <msg>
       <no-view-found>Mit Ihren Berechtigungen ist keine Ansicht in Laufwerk "{0}" verfügbar.</no-view-found>
@@ -310,7 +310,7 @@
       <ViewRelations>Beziehungen anzeigen/ausblenden</ViewRelations>
       <ShowJCRStructure>Inhaltsstruktur anzeigen/ausblenden</ShowJCRStructure>
       <EditProperty>Dokumenteigenschaften bearbeiten</EditProperty>
-      <UploadNewVersion>Upload a version</UploadNewVersion>
+      <UploadNewVersion>Eine neue Version hochladen</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Diese Aktion kann nicht im Quellknoten ausgeführt werden.</cannot-action-in-rootnode>
@@ -2250,7 +2250,7 @@
     <label>
       <driveName>Laufwerkname</driveName>
       <action>Aktion</action>
-      <adddrives>Laufwerke hinzufügen</adddrives>
+      <adddrives>Dokumente hinzufügen</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -3099,7 +3099,7 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <ShowDrives>Laufwerke anzeigen</ShowDrives>
+      <ShowDrives>Dokumente anzeigen</ShowDrives>
     </DrivesArea>
     <msg>
       <no-view-found>Auf Ihre Zugangsberechtigung auf Laufwerk '{0}' sind keine Ansichten in Kraft.</no-view-found>

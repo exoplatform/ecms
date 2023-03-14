@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>Název</name>
-      <action>Add</action>
+      <name>Jméno</name>
+      <action>Přidat</action>
     </header>
     <info>
       <child-not-found>Potomek nebyl nalezen!</child-not-found>

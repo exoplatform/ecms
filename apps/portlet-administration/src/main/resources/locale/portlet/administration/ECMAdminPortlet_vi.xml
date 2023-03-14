@@ -154,7 +154,7 @@
   <UIActionForm>
     <title>Thêm hành động vào cây danh mục</title>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>Lưu</Save>
     </action>
     <msg>
       <name-not-allowed>Không được để trống tên cũng như không được sử dụng các ký tự đặc biệt trong tên hành động.</name-not-allowed>
@@ -1002,7 +1002,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>Permissions</permission>
+      <permission>UIPermissionForm</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1488,8 +1488,8 @@
     </label>
     <title>Add permission to this node</title>
     <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
+      <Close>Đóng</Close>
+      <Save>Lưu</Save>
       <Reset>Thiết lập lại</Reset>
     </action>
     <msg>

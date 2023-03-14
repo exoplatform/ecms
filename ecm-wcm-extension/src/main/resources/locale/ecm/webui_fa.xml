@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>نام</name>
-      <action>Add</action>
+      <action>افزودن</action>
     </header>
     <info>
       <child-not-found>فرزند یافت نشد!</child-not-found>

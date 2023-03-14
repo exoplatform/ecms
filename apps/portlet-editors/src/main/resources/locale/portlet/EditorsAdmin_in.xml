@@ -36,27 +36,27 @@
       <title>Document editors</title>
       <table>
         <Provider>penyedia</Provider>
-        <Description>Deskripsi</Description>
-        <Active>Aktif</Active>
-        <Permissions>Ijin Akses</Permissions>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>Tidak ada</None>
+        <None>None</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Simpan</Save>
-        <Cancel>membatalkan</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>merubah</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Peringatan</title>
+      <title>Warning</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>الرابط</link>
+      <link>الوصلة</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>استخدم  الرمز @  للإشارة إلى شخص ما في التعليق الخاص بك</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -73,8 +73,8 @@
       <description>#{word.description}</description>
       <port>المنفذ</port>
       <userName>الإسم</userName>
-      <password>كلمة السر</password>
-      <link>الرابط</link>
+      <password>كلمةالسر</password>
+      <link>الوصلة</link>
       <to>بعث الرسالة الالكترونية إلى</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>المنفذ</port>
       <userName>الإسم</userName>
       <password>كلمة السر</password>
-      <link>الرابط</link>
+      <link>الوصلة</link>
       <to>بعث الرسالة الالكترونية إلى</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>المعرف</id>
+        <id>المعرف الوحيد</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>المعرف</id>
+        <id>المعرف الوحيد</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>علاقة</relation>
+        <relation>العلاقة</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>عنوان</title>
+        <title>العنوان</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>تاريخ الإصدار</version-history>
-        <base-version>الإصدار الرئيسي</base-version>
+        <version-history>تاريخ الإصدارات</version-history>
+        <base-version>الاصدار الاساسي</base-version>
         <is-checked-out>في حالة انهاء المعالجة</is-checked-out>
         <predecessors>الأسلاف</predecessors>
         <merge-failed>فشل الادماج</merge-failed>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>عنوان البريد الالكتروني غير صحيح.</Invalid-input>
+      <Invalid-input>البريد الالكتروني غير صحيح.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -292,10 +292,10 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>المعرف</id>
+        <id>المعرف الوحيد</id>
         <name>الاسم</name>
         <lifecycle>دورة الحياة</lifecycle>
-        <homePath>مسار الصفحة الرئيسية</homePath>
+        <homePath>مسار الاستقبال</homePath>
         <targetWorkspace>هدف فضاء العمل</targetWorkspace>
         <targetPath>مسار الهدف</targetPath>
       </label>
@@ -317,10 +317,10 @@
 <false>خطأ</false>
 <Electronic>إلكتروني</Electronic>
 <Paper>ورقة</Paper>
-<NONE>لا شَيْء</NONE>
+<NONE>لا شيء</NONE>
 <CLASSIFIED>مُصنّف</CLASSIFIED>
 <UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
-<NOCONTRACT>بدون عقد</NOCONTRACT>
+<NOCONTRACT>بدون عَقد</NOCONTRACT>
 <one-minute>دقيقة واحدة</one-minute>
 <hourly>كل ساعة</hourly>
 <daily>يوميا</daily>
@@ -331,15 +331,15 @@
   <schedule>جدولة</schedule>
   <node_added>إضافة محتوى</node_added>
   <node_removed>إزالة المحتوى</node_removed>
-  <property_added>إضافة خاصيّة</property_added>
-  <property_removed>إزالة الخاصيّة</property_removed>
+  <property_added>إضافة خاصية</property_added>
+  <property_removed>إزالة الخاصية</property_removed>
   <property_changed>تعديل الملكية</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>أنواع العقد</nodetypes>
+        <nodetypes>نوع العقدة</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -349,7 +349,7 @@
     <dialog>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>أنواع العقد</nodetypes>
+        <nodetypes>نوع العقدة</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -359,7 +359,7 @@
     <dialog>
       <label>
         <isDeep>عميق</isDeep>
-        <nodetypes>أنواع العقد</nodetypes>
+        <nodetypes>نوع العقدة</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
     </dialog>
@@ -379,7 +379,7 @@
   <dialog>
   <label>
   <captions>التسميات التوضيحية</captions>
-<audioDescription>وصف المقطع الصوتي</audioDescription>
+<audioDescription>الوصف الصوتي</audioDescription>
 <alternativeText>النص البديل</alternativeText>
 </label>
 </dialog>

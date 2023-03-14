@@ -17,7 +17,10 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.thumbnail;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -27,9 +30,10 @@ import javax.jcr.Node;
 import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 
-import org.exoplatform.services.cms.impl.ImageUtils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.thumbnail.ImageResizeService;
+import org.exoplatform.services.thumbnail.ImageResizeServiceImpl;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 
 /**
@@ -40,10 +44,13 @@ import org.exoplatform.services.wcm.BaseWCMTestCase;
  */
 public class TestThumbnailService extends BaseWCMTestCase {
 
-  private ThumbnailService thumbnailService;
-  
+  private ThumbnailService   thumbnailService;
+
+  private ImageResizeService imageResizeService;
+
   public void setUp() throws Exception {
     super.setUp();
+    imageResizeService = new ImageResizeServiceImpl();
     thumbnailService = (ThumbnailService)container.getComponentInstanceOfType(ThumbnailService.class);
     applySystemSession(); 
   }
@@ -196,7 +203,9 @@ public class TestThumbnailService extends BaseWCMTestCase {
     Node test = session.getRootNode().addNode("test");
     session.save();
     Node childTest = thumbnailService.addThumbnailNode(test);
-    Value value = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
+    File file = new File(getClass().getClassLoader().getResource("conf/dms/artifacts/images/ThumnailView.jpg").getFile());
+    byte [] imageContent = Files.readAllBytes(file.toPath());
+    Value value = session.getValueFactory().createValue(new ByteArrayInputStream(imageResizeService.scaleImage(imageContent, 32, 32, false, false)));
     thumbnailService.addThumbnailImage(childTest, ImageIO.read(getClass().getResource("/conf/dms/artifacts/images/ThumnailView.jpg").openStream()),  ThumbnailService.SMALL_SIZE);
     assertNotNull(value);
   }
@@ -211,7 +220,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
     Node test = session.getRootNode().addNode("test");
     assertNull(thumbnailService.getThumbnailImage(test, "exo:smallSize"));
     Node childTest = thumbnailService.addThumbnailNode(test);
-//    Value value = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
     thumbnailService.addThumbnailImage(childTest, ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")),  ThumbnailService.SMALL_SIZE);
     assertNotNull(childTest.getProperty(ThumbnailService.SMALL_SIZE).getValue());
   }
@@ -225,7 +233,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    */
   public void testCreateSpecifiedThumbnail() throws Exception {
     Node test = session.getRootNode().addNode("test");
-//    Value value = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
     thumbnailService.createSpecifiedThumbnail(test, ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), ThumbnailService.SMALL_SIZE);
     Node thumbnail = thumbnailService.getThumbnailNode(test);
     assertNotNull(thumbnail.getProperty(ThumbnailService.SMALL_SIZE).getValue());
@@ -240,9 +247,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    */
   public void testCreateThumbnailImage() throws Exception {
     Node test = session.getRootNode().addNode("test");
-//    Value value1 = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
-//    Value value2 = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 64, 64));
-//    Value value3 = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 300, 300));
     InputStream is = getClass().getResource("/conf/dms/artifacts/images/ThumnailView.jpg").openStream();
     thumbnailService.createThumbnailImage(test, ImageIO.read(is), "image/jpeg");
     Node thumbnail = thumbnailService.getThumbnailNode(test);
@@ -295,7 +299,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
     Node thumbnailImage1 = thumbnailsFolder.getNode(((NodeImpl)child1).getInternalIdentifier());
     Node thumbnailImage2 = thumbnailsFolder.getNode(((NodeImpl)child2).getInternalIdentifier());
     Node thumbnailImage3 = thumbnailsFolder.getNode(((NodeImpl)child3).getInternalIdentifier());
-    //Value value = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
     assertNotNull(thumbnailImage1.getProperty(ThumbnailService.SMALL_SIZE).getValue());
     assertNotNull(thumbnailImage2.getProperty(ThumbnailService.SMALL_SIZE).getValue());
     assertNotNull(thumbnailImage3.getProperty(ThumbnailService.SMALL_SIZE).getValue());

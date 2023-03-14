@@ -31,7 +31,7 @@
         <email>E-mail</email>
         <site>Site-ul</site>
         <lastComment>Ultimul comentariu a fost postat de {user} la {time}</lastComment>
-        <Less_Than_A_Minute>cu mai puţin de un minut în urmă</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>aproximativ cu un minut în urmă</About_A_Minute>
         <About_x_Minutes>aproximativ {0} minute în urmă</About_x_Minutes>
         <About_An_Hour>aproximativ cu o oră în urmă</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>Vizualizarea nu este disponibilă pentru conținut mai mare de {0} MB.</pdf-max-size>
         <pdf-max-page>Vizualizarea nu este disponibilă pentru conținut cu peste {0} pagini.</pdf-max-page>
         <using-webDAV>sau deschide în Office</using-webDAV>
-        <open-on-desktop>Deschide pe Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Deschide în Documente</open-in-documents>
         <open-in-documents-tooltip>Deschide acest fișier în aplicația de documente</open-in-documents-tooltip>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Descriere audio</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Citește mai mult</Read-more>
       <Read-less>Citește mai puţin</Read-less>
       <Switch-back-to-original-video>Video original</Switch-back-to-original-video>
       </label>

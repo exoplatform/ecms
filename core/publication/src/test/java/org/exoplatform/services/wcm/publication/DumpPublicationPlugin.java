@@ -113,9 +113,10 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
    * @see org.exoplatform.services.ecm.publication.PublicationPlugin#canAddMixin(javax.jcr.Node)
    */
   public boolean canAddMixin(Node node) throws Exception {
-    List<String> runningPortals = getRunningPortals(node.getSession().getUserID());
+    String userID = node.getSession().getUserID();
+    List<String> runningPortals = getRunningPortals(userID);
     if(runningPortals.size() == 0) {
-      throw new AccessControlException("Current user doesn't have access permission to any portal");
+      throw new AccessControlException("Current user " + userID + " doesn't have access permission to any portal");
     }
     if (node.isLocked()) {
       throw new LockException("This node is locked");
@@ -239,7 +240,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     List<String> listPortalName = new ArrayList<String>();
     DataStorage service = WCMCoreUtils.getService(DataStorage.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class) ;
-    ListAccess<PortalConfig> pageList = service.find2(query) ;
+    ListAccess<PortalConfig> pageList = service.find2(query, null) ;
     List<PortalConfig> portalConfigs = WCMCoreUtils.getAllElementsOfListAccess(pageList);
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(PortalConfig portalConfig : portalConfigs) {

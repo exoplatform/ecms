@@ -24,7 +24,7 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Link-ul</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Folosește @ pentru a menționa pe cineva în comentariile tale</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -74,7 +74,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Parola</password>
-      <link>Link</link>
+      <link>Link-ul</link>
       <to>Trimite Mail la</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -85,7 +85,7 @@
       <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Parola</password>
-      <link>Link</link>
+      <link>Link-ul</link>
       <to>Trimite Mail la</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Adresa de e-mail nu este validă.</Invalid-input>
+      <Invalid-input>Adresa de e-mail invalidă.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>

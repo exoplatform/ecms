@@ -1496,8 +1496,8 @@
       <can-not-compare>لم تتم المقارنة بين الإصدارين</can-not-compare>
       <compare-unavailable>مقارنة الإصدار غير متوفرة لهذا الملف</compare-unavailable>
       <DateChange>في {0}</DateChange>
-      <PreviousAndNextCompare>التّغييرات من {0} الى {1}</PreviousAndNextCompare>
-      <ComparedWith>بالمقارنة مع</ComparedWith>
+      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared with</ComparedWith>
       <restoredFrom>استعادة من النسخة {0}</restoredFrom>
     </label>
   </UIDiff>

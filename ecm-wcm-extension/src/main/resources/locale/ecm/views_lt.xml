@@ -23,15 +23,15 @@
     <view>
       <label>
         <postedBy>Paskutinį komentarą parašė</postedBy>
-        <at>at</at>
+        <at>į</at>
         <comments>Komentaras(ai)</comments>
         <show-comments>Rodyti komentarus</show-comments>
         <hide-comments>Slėpti komentarus</hide-comments>
         <comment-by>Komentavo</comment-by>
-        <email>El. paštas</email>
+        <email>El.paštas</email>
         <site>Svetainė</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
-        <Less_Than_A_Minute>mažiau nei prieš minutę</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>prieš minutę</About_A_Minute>
         <About_x_Minutes>maždaug prieš {0} minutes(ių)</About_x_Minutes>
         <About_An_Hour>maždaug prieš valandą</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>arba atidaryti su MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
@@ -75,7 +75,7 @@
     <view>
       <label>
         <from>Nuo:</from>
-        <to>Iki:</to>
+        <to>Kam:</to>
         <cc>Cc:</cc>
         <date>Data:</date>
         <subject>Tema:</subject>
@@ -100,7 +100,7 @@
   <ListView>
     <view>
       <label>
-        <name>Pavadinimas</name>
+        <name>Vardas</name>
         <versionable>Versijuojamas</versionable>
         <exo_owner>Savininkas</exo_owner>
         <exo_dateCreated>Sukūrimo data</exo_dateCreated>
@@ -154,9 +154,9 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Nėra</not-avaliable>
         <core-elements>Pagrindiniai elementai</core-elements>
-        <title>Antraštė</title>
+        <title>Pavadinimas</title>
         <creator>Kūrėjas</creator>
         <subject>Tema</subject>
         <source>Šaltinis</source>
@@ -167,7 +167,7 @@
         <description>Aprašymas</description>
         <rights>Teisės</rights>
         <relation>Ryšys</relation>
-        <format>Foramatas</format>
+        <format>Formatas</format>
         <coverage>Padengimas</coverage>
         <identifier>Identifikatorius</identifier>
         <languages>Kalbos</languages>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Garso aprašymas</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Skaityti daugiau</Read-more>
       <Read-less>Skaityti mažiau</Read-less>
       <Switch-back-to-original-video>Originalus vaizdo įrašas</Switch-back-to-original-video>
       </label>

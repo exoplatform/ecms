@@ -16,27 +16,40 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
+import static org.exoplatform.services.cms.folksonomy.NewFolksonomyService.EXO_TAGGED;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import javax.jcr.query.Row;
+import javax.jcr.query.RowIterator;
+
 import org.apache.commons.lang3.StringUtils;
 
-import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.connector.FileApplicationSearchServiceConnector;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import javax.jcr.*;
-import javax.jcr.query.*;
-import java.util.*;
-
-import static org.exoplatform.services.cms.folksonomy.NewFolksonomyService.EXO_TAGGED;
 
 /**
  * Created by The eXo Platform SAS

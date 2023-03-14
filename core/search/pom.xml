@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.4.x-SNAPSHOT</version>
+    <version>6.5.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-search</artifactId>
   <name>eXo PLF:: WCM Search Service</name>
@@ -145,6 +145,12 @@
       <artifactId>ecms-core-services</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.social</groupId>
+      <artifactId>social-component-core</artifactId>
+      <scope>test</scope>
+      <type>test-jar</type>
     </dependency>
     <!-- need for test -->
     <dependency>

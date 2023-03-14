@@ -4,7 +4,7 @@
   <View>
     <label>
       <languages>
-        <en>İngilis Dili</en>
+        <en>English</en>
         <fr>French</fr>
         <ru>Russian</ru>
         <vi>Vietnamese</vi>
@@ -28,7 +28,7 @@
         <show-comments>Show comments</show-comments>
         <hide-comments>Hide comments</hide-comments>
         <comment-by>Commented by</comment-by>
-        <email>E-poçt</email>
+        <email>Email</email>
         <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
@@ -54,7 +54,7 @@
         <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>or Open in MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
@@ -119,7 +119,7 @@
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
         <metadata>Metadata</metadata>
-        <description>Açıqlama</description>
+        <description>Description</description>
       </label>
     </view>
   </AddMetadata>
@@ -132,7 +132,7 @@
       <label>
         <action-name>Action Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>Açıqlama</description>
+        <description>Description</description>
       </label>
     </view>
   </AutoVersioning>
@@ -144,7 +144,7 @@
       <label>
         <action-name>Name</action-name>
         <lifecycle>Lifecycle</lifecycle>
-        <description>Açıqlama</description>
+        <description>Description</description>
       </label>
     </view>
   </EnableVersioning>
@@ -164,7 +164,7 @@
         <resource-type>Resource Type</resource-type>
         <date>Date</date>
         <publisher>Publisher</publisher>
-        <description>Açıqlama</description>
+        <description>Description</description>
         <rights>Rights</rights>
         <relation>Relation</relation>
         <format>Format</format>

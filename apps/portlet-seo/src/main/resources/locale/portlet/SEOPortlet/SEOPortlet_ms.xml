@@ -35,7 +35,7 @@
       <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Padam</seo-delete>
+    <seo-delete>Delete</seo-delete>
     </title>
   <help> 
   <priority>Valid values range from 0.0 to 1.0.</priority>

@@ -311,19 +311,19 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>Ні</no>
+<no>НІ</no>
 <yes>Так</yes>
 <true>Вірно</true>
 <false>Невірно</false>
 <Electronic>Електронний</Electronic>
-<Paper>Paper</Paper>
+<Paper>Паперовий</Paper>
 <NONE>Жоден</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
+<CLASSIFIED>Класифікований</CLASSIFIED>
 <UNCLASSIFIED>Некласифікований</UNCLASSIFIED>
 <NOCONTRACT>Немає контракту</NOCONTRACT>
 <one-minute>Одна хвилина</one-minute>
 <hourly>Погодинно</hourly>
-<daily>Щодня</daily>
+<daily>Щоденно</daily>
 <quarterly>Щоквартально</quarterly>
 <yearly>Щороку</yearly>
 <ten-years>Десять років</ten-years>
@@ -332,8 +332,8 @@
   <node_added>Доповнення вмісту</node_added>
   <node_removed>Вилучення вмісту</node_removed>
   <property_added>Доповнення властивості</property_added>
-  <property_removed>Видалення властивості</property_removed>
-  <property_changed>Модифікація властивості</property_changed>
+  <property_removed>Видалення власності</property_removed>
+  <property_changed>Модифікація власності</property_changed>
 
   <ScriptAction>
     <dialog>

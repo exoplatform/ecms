@@ -41,8 +41,6 @@ import org.eclipse.jetty.util.component.LifeCycle;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
 import org.picocontainer.Startable;
 
-import com.google.api.services.plus.model.Activity.Provider;
-
 import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;

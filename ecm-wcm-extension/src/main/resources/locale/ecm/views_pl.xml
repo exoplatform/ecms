@@ -4,8 +4,8 @@
   <View>
     <label>
       <languages>
-        <en>angielski</en>
-        <fr>francuski</fr>
+        <en>Angielski</en>
+        <fr>Francuski</fr>
         <ru>Rosyjski</ru>
         <vi>Wietnamski</vi>
         <nl>Duński</nl>
@@ -31,7 +31,7 @@
         <email>Adres e-mail</email>
         <site>Witryna</site>
         <lastComment>Ostatni komentarz dodany przez {user} o godzinie {time}</lastComment>
-        <Less_Than_A_Minute>mniej niż minutę temu</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>około minuty temu</About_A_Minute>
         <About_x_Minutes>około {0} minut(-y) temu</About_x_Minutes>
         <About_An_Hour>około godzinę temu</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>Podgląd jest niedostępny dla treści większej niż {0} MB.</pdf-max-size>
         <pdf-max-page>Podgląd jest niedostępny dla treści o zawartości ponad {0} stron.</pdf-max-page>
         <using-webDAV>lub Otwórz w MS Office</using-webDAV>
-        <open-on-desktop>Otwórz na Pulpicie</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Otwórz w Dokumentach</open-in-documents>
         <open-in-documents-tooltip>Otwórz ten plik w aplikacji Dokumenty</open-in-documents-tooltip>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Opis audio</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Czytaj więcej</Read-more>
       <Read-less>Czytaj mniej</Read-less>
       <Switch-back-to-original-video>Oryginalny film</Switch-back-to-original-video>
       </label>

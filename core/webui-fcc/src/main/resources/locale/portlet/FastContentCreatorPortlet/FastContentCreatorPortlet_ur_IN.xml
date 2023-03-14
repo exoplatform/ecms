@@ -85,7 +85,7 @@
   <UIWorkspaceList>
     <label>
       <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodePath>راستہ جڈ:</rootNodePath>
       <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>

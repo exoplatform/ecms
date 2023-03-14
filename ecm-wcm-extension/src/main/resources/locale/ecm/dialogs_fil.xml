@@ -8,7 +8,7 @@
       <label>
         <end-time>Tapusin ang Oras</end-time>
         <start-time>Umpisa ng Oras</start-time>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Ang Ikot ng Buhay</lifecycle>
         <mimeType>Ang Uri ng Mime</mimeType>
         <repeat-count>Ulitin ang Pagbibilang</repeat-count>
         <time-interval>Ang Pagitan sa Oras</time-interval>
@@ -24,18 +24,18 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Ang Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Pangalan</name>
-    <categories>Ang Mga Kategorya</categories>
+      <name>Ang pangalan</name>
+    <categories>Mga kategorya</categories>
     </label>
   </UIDocumentForm>
  
   <UICommentForm>
     <label>
-      <placeholder>Gamit ang @ para banggitin ang isang tao sa iyong komento</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -46,7 +46,7 @@
     <dialog>
       <label>
         <name>Pangalan</name>
-        <content>Nilalaman</content>
+        <content>Ang Nilalaman</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,7 +58,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Ang Mga Kategorya</categories>
+        <categories>Mga Kategorya</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <width>Ang Lapad</width>
         <height>Ang Taas</height>
@@ -73,8 +73,8 @@
       <description>#{word.description}</description>
       <port>Ang Port</port>
       <userName>#{word.userName}</userName>
-      <password>Ang Password</password>
-      <link>Link</link>
+      <password>Password</password>
+      <link>Ang Link</link>
       <to>Ipadala ang Liham</to>
       <actionName>#{word.name}</actionName>
     </label>
@@ -82,11 +82,11 @@
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Ang Port</port>
+      <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Ang Password</password>
-      <link>Link</link>
-      <to>Ipadala ang Liham</to>
+      <password>Password</password>
+      <link>Ang Link</link>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Ang Id</id>
+        <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Ang Id</id>
+        <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -164,7 +164,7 @@
         <format>#{word.format}:</format>
         <coverage>Ang Nasasakupan:</coverage>
         <identifier>Ang Pagkakakilanlan:</identifier>
-        <language>Ang Wika:</language>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -189,8 +189,8 @@
       <label>
         <destination-workpsace>Ang Destinasyon na Workspace</destination-workpsace>
         <destination-path>Ang Destinasyon na Landas</destination-path>
-        <primary-type>Ang Pangunahin na Uri</primary-type>
-        <mixin-types>Ang mga Uri ay I-Mixin</mixin-types>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Simula ng Paglathala</start-publication>
-        <end-publication>Katapusan ng Paglathala</end-publication>
+        <start-publication>Start Publication</start-publication>
+        <end-publication>End Publication</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Ang kaugnayan</relation>
+        <relation>Relation</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Ang Titulo</title>
+        <title>Ang Pamagat</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,8 +244,8 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Ang kasaysayan ng Bersyon</version-history>
-        <base-version>Base na Bersyon</base-version>
+        <version-history>Version History</version-history>
+        <base-version>Base Version</base-version>
         <is-checked-out>Ay Suriin</is-checked-out>
         <predecessors>Ang Mga Predecessor</predecessors>
         <merge-failed>Ang Nabigong Pagsama-sama</merge-failed>
@@ -263,7 +263,7 @@
         <name>Pangalan</name>
         <autoload>I-load ng Awtomatiko</autoload>
         <minetype>Ang Uri ng MIME</minetype>
-        <content>Nilalaman</content>
+        <content>Ang Nilalaman</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -292,10 +292,10 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Ang Id</id>
+        <id>Id</id>
         <name>Pangalan</name>
         <lifecycle>Lifecycle</lifecycle>
-        <homePath>Ang landas sa bahay</homePath>
+        <homePath>Landas papunta sa bahay</homePath>
         <targetWorkspace>Ang Target sa Workspace</targetWorkspace>
         <targetPath>Target sa Landas</targetPath>
       </label>
@@ -313,34 +313,34 @@
   -->
 <no>Hindi</no>
 <yes>Oo</yes>
-<true>Totoo</true>
+<true>Tunay</true>
 <false>Hindi totoo</false>
-<Electronic>Elektronik</Electronic>
-<Paper>Ang Papel</Paper>
+<Electronic>Electronic</Electronic>
+<Paper>Paper</Paper>
 <NONE>Wala</NONE>
-<CLASSIFIED>Paguuri</CLASSIFIED>
-<UNCLASSIFIED>Hindi nauuri</UNCLASSIFIED>
-<NOCONTRACT>Walang kontrata</NOCONTRACT>
-<one-minute>Isang Minuto</one-minute>
-<hourly>Oras-Oras</hourly>
-<daily>Araw-araw</daily>
-<quarterly>Kada tatlong buwan</quarterly>
-<yearly>Taon-taon</yearly>
-<ten-years>Mga sampung taon</ten-years>
-<read>Ang Aksyon ang gumagamit</read>
-  <schedule>Taga-schedule</schedule>
-  <node_added>Ang Pagdagdag ng Nilalaman</node_added>
-  <node_removed>Ang Pagtanggal ng Nilalaman</node_removed>
-  <property_added>Ang Pagdagdag ng Katangian</property_added>
-  <property_removed>Pagtanggal ng Katangian</property_removed>
-  <property_changed>Pagbabago ng Katangian</property_changed>
+<CLASSIFIED>Classified</CLASSIFIED>
+<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+<NOCONTRACT>No Contract</NOCONTRACT>
+<one-minute>One Minute</one-minute>
+<hourly>Hourly</hourly>
+<daily>Ang Araw-araw</daily>
+<quarterly>Quarterly</quarterly>
+<yearly>Ang Taon-taon</yearly>
+<ten-years>Ten Years</ten-years>
+<read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang mga uri ng node</nodetypes>
-        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
+        <nodetypes>Tipo ng mga node</nodetypes>
+        <affectedNodeTypeNames>Ang mga Apektado na Uri ng Node</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -349,8 +349,8 @@
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang mga uri ng node</nodetypes>
-        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
+        <nodetypes>Tipo ng mga node</nodetypes>
+        <affectedNodeTypeNames>Ang Apektado na mga Uri ng Node</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -359,8 +359,8 @@
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang mga uri ng node</nodetypes>
-        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
+        <nodetypes>Tipo ng mga Node</nodetypes>
+        <affectedNodeTypeNames>Mga apektado na uri ng node</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -369,8 +369,8 @@
     <dialog>
       <label>
         <isDeep>Ay Malalim</isDeep>
-        <nodetypes>Ang mga uri ng node</nodetypes>
-        <affectedNodeTypeNames>Ang Mga Uri ng Noda na Apektado</affectedNodeTypeNames>
+        <nodetypes>Ang Tipo ng mga Node</nodetypes>
+        <affectedNodeTypeNames>Mga Apektado na Uri ng Node</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -379,7 +379,7 @@
   <dialog>
   <label>
   <captions>Ang Mga Kapsiyon</captions>
-<audioDescription>Ang Paglalarawan ng audio</audioDescription>
+<audioDescription>Ang Paglalarawan sa audio</audioDescription>
 <alternativeText>Ang Alternatibong teksto</alternativeText>
 </label>
 </dialog>

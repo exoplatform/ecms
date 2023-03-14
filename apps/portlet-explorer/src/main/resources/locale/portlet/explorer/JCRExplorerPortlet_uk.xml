@@ -1496,8 +1496,8 @@
       <can-not-compare>Не вдалося порівняти дві версії</can-not-compare>
       <compare-unavailable>Версія порівняння недоступна для цього документа</compare-unavailable>
       <DateChange>На {0}</DateChange>
-      <PreviousAndNextCompare>Зміни від {0} до {1}</PreviousAndNextCompare>
-      <ComparedWith>У порівнянні з</ComparedWith>
+      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared with</ComparedWith>
       <restoredFrom>Відновлено з версії {0}</restoredFrom>
     </label>
   </UIDiff>

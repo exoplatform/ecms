@@ -31,7 +31,7 @@
         <email>Електронна пошта</email>
         <site>Сайт</site>
         <lastComment>Останній коментар, написав {user} в {time}</lastComment>
-        <Less_Than_A_Minute>менше хвилини назад</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>біля хвилини назад</About_A_Minute>
         <About_x_Minutes>біля {0} хвилин назад</About_x_Minutes>
         <About_An_Hour>близько години назад</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>Попередній перегляд недоступний для файлів, що перевищує {0} МБ.</pdf-max-size>
         <pdf-max-page>Попередній перегляд недоступний для вмісту з понад {0} сторінок.</pdf-max-page>
         <using-webDAV>або відкрийте в MS Office</using-webDAV>
-        <open-on-desktop>Відкрити на Робочому столі</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Редагувати Онлайн</editOnline>
         <open-in-documents>Відкрити в Документах</open-in-documents>
         <open-in-documents-tooltip>Відкрийте цей файл в додатку Документи</open-in-documents-tooltip>
@@ -154,7 +154,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Н/Д</not-avaliable>
         <core-elements>Основні елементи</core-elements>
         <title>Назва</title>
         <creator>Розробник</creator>
@@ -167,7 +167,7 @@
         <description>Опис</description>
         <rights>Права</rights>
         <relation>Співвідношення</relation>
-        <format>Формат</format>
+        <format>Формати</format>
         <coverage>Покриття</coverage>
         <identifier>Ідентифікатор</identifier>
         <languages>Мови</languages>

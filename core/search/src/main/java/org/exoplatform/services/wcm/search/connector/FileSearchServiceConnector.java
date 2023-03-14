@@ -23,7 +23,13 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.jcr.Node;
@@ -32,17 +38,14 @@ import javax.jcr.RepositoryException;
 import org.apache.commons.lang.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.util.ListHashMap;
-import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.social.metadata.MetadataService;
-import org.exoplatform.social.metadata.model.MetadataItem;
-import org.exoplatform.social.metadata.model.MetadataObject;
 import org.json.simple.JSONObject;
 
-import org.exoplatform.commons.api.search.data.SearchContext;
-import org.exoplatform.commons.api.search.data.SearchResult;
-import org.exoplatform.commons.search.es.ElasticSearchServiceConnector;
 import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecms.legacy.search.data.SearchContext;
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
+import org.exoplatform.ecms.legacy.search.es.ElasticSearchServiceConnector;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
@@ -55,6 +58,9 @@ import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.metadata.MetadataService;
+import org.exoplatform.social.metadata.model.MetadataItem;
+import org.exoplatform.social.metadata.model.MetadataObject;
 
 /**
  * Search connector for files
@@ -113,11 +119,13 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     LinkedHashMap<String, String> previewBreadcrumb = new LinkedHashMap<>();
     String drive = "";
     ExtendedSession session = null;
+    boolean isCloudDrive = false;
     try {
       session = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repositoryService.getCurrentRepository());
       Node node = session.getNodeByIdentifier(id);
       previewBreadcrumb = documentService.getFilePreviewBreadCrumb(node);
       drive = Utils.getSearchDocumentDrive(node);
+      isCloudDrive = node.hasProperty("ecd:driveUUID");
     } catch (Exception e ) {
       LOG.error("Error while getting file node " + id, e);
     } finally {
@@ -176,6 +184,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       ecmsSearchResult.setUrl(downloadUrl.toString());
     }
     ecmsSearchResult.setMetadatas(retrieveMetadataItems(id) );
+    ecmsSearchResult.setCloudDrive(isCloudDrive);
 
     return ecmsSearchResult;
   }

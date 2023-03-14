@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Woran arbeiten Sie? Verwenden Sie @, um jemanden zu erwähnen</placeholder>
+      <placeholder>Verwenden Sie @, um jemanden in Ihrem Kommentar zu erwähnen</placeholder>
     </label>
   </UICommentForm>
  
@@ -200,7 +200,7 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Veröffentlichung starten</start-publication>
+        <start-publication>Veröffentlichungsbeginn</start-publication>
         <end-publication>Veröffentlichungsende</end-publication>
       </label>
     </dialog>
@@ -244,7 +244,7 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Versionshistorie</version-history>
+        <version-history>Versionsverlauf</version-history>
         <base-version>Basisversion</base-version>
         <is-checked-out>Ist ausgecheckt</is-checked-out>
         <predecessors>Vorgänger</predecessors>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Ungültige E-Mail-Adresse.</Invalid-input>
+      <Invalid-input>E-Mail-Adresse ist ungültig.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -313,7 +313,7 @@
   -->
 <no>Nein</no>
 <yes>Ja</yes>
-<true>Wahr</true>
+<true>Richtig</true>
 <false>Falsch</false>
 <Electronic>Elektronisch</Electronic>
 <Paper>Papier</Paper>

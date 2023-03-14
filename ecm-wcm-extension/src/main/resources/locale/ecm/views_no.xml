@@ -23,15 +23,15 @@
     <view>
       <label>
         <postedBy>Siste kommentar postet av</postedBy>
-        <at>på</at>
+        <at>hos</at>
         <comments>Kommentar(er)</comments>
         <show-comments>Vis kommentarer</show-comments>
         <hide-comments>Skjul kommentarer</hide-comments>
         <comment-by>Kommentert av</comment-by>
-        <email>Epost</email>
+        <email>E-post</email>
         <site>Nettsted</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
-        <Less_Than_A_Minute>mindre enn ett minutt siden</Less_Than_A_Minute>
+        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
         <About_A_Minute>omtrent et minutt siden</About_A_Minute>
         <About_x_Minutes>for {0} minutter siden</About_x_Minutes>
         <About_An_Hour>for en time siden</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
         <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
         <using-webDAV>or Open in MS Office</using-webDAV>
-        <open-on-desktop>Open on Desktop</open-on-desktop>
+        <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Open in Documents</open-in-documents>
         <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
@@ -231,7 +231,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Lydbeskrivelse</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Les mer</Read-more>
       <Read-less>Les mindre</Read-less>
       <Switch-back-to-original-video>Opprinnelige video</Switch-back-to-original-video>
       </label>

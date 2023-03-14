@@ -513,19 +513,7 @@ export default {
     },
     entityId() {
       this.initDestinationFolderPath();
-    },
-    entityType() {
-      this.initDestinationFolderPath();
-    },
-    spaceId() {
-      this.initDestinationFolderPath();
-    },
-    defaultDrive() {
-      this.initDestinationFolderPath();
-    },
-    defaultFolder() {
-      this.initDestinationFolderPath();
-    },
+    }
   },
   created() {
     this.initDestinationFolderPath();
@@ -581,7 +569,9 @@ export default {
               }).finally(() => this.driveExplorerInitializing = false);
             // create a default folder for activity attachments if it doesn't exist
           } else if (!defaultFolder && self.defaultFolder === 'Activity Stream Documents') {
-            this.$attachmentService.createFolder(self.currentDrive.name, self.workspace, this.currentAbsolutePath, self.defaultFolder);
+            this.$attachmentService.createFolder(self.currentDrive.name, self.workspace, this.currentAbsolutePath, self.defaultFolder, 'nt:unstructured', true).then(() => {
+              this.initDestinationFolderPath();
+            });
             //else if no default folder create file in root folder
           } else if (self.defaultFolder.includes('/')){
             const pathParts= self.defaultFolder.split('/');

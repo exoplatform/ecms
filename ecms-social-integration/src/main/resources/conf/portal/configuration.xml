@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd http://www.exoplatform.org/xml/ns/kernel_1_3.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
+  <component>
+    <type>org.exoplatform.social.space.customization.SpaceCustomizationService</type>
+  </component>
 
   <external-component-plugins profiles="analytics">
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>
@@ -70,6 +73,15 @@
       <name>CustomizeSpaceFolderListener</name>
       <set-method>addSpaceListener</set-method>
       <type>org.exoplatform.social.space.customization.listeners.CustomizeSpaceFolderListener</type>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.attachments.service.AttachmentService</target-component>
+    <component-plugin>
+      <name>TaskAttachmentEntityTypePlugin</name>
+      <set-method>addAttachmentEntityTypePlugin</set-method>
+      <type>org.exoplatform.services.attachments.plugins.TaskAttachmentEntityTypePlugin</type>
     </component-plugin>
   </external-component-plugins>
 

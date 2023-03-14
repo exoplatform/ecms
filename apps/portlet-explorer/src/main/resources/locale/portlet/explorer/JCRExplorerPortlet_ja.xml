@@ -1496,8 +1496,8 @@
       <can-not-compare>2バージョンの比較に失敗しました。</can-not-compare>
       <compare-unavailable>この文書ではバージョン比較ができません</compare-unavailable>
       <DateChange>{0} に</DateChange>
-      <PreviousAndNextCompare>{0} から {1} へ変更</PreviousAndNextCompare>
-      <ComparedWith>比較：</ComparedWith>
+      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared with</ComparedWith>
       <restoredFrom>バージョン{0}から復元</restoredFrom>
     </label>
   </UIDiff>

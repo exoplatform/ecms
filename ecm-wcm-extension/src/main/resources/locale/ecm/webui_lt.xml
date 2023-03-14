@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>Pavadinimas</name>
-      <action>Add</action>
+      <action>Pridėti</action>
     </header>
     <info>
       <child-not-found>Atšaka nerasta!</child-not-found>
