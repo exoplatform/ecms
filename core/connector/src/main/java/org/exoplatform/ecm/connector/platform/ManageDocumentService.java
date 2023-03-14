@@ -44,6 +44,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -417,8 +419,17 @@ public class ManageDocumentService implements ResourceContainer {
                                          Text.escapeIllegalJcrChars(workspaceName),
                                          Text.escapeIllegalJcrChars(currentFolder));
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
-        return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
-                                           currentFolderNode,
+        if (driveName.startsWith(".spaces.")){
+          String groupId = driveName.replace(".spaces.","/spaces/");
+          List<AccessControlEntry> canUploadPermession = ((ExtendedNode) currentFolderNode).getACL().getPermissionEntries()
+          .stream().filter(accessControlEntry -> accessControlEntry.getIdentity().equals("*:" + groupId) && accessControlEntry.getPermission().equals(PermissionType.ADD_NODE)).toList();
+          if (canUploadPermession.isEmpty()){
+            return Response.status(Status.UNAUTHORIZED).build();
+          }
+          //no need to this object later , make it legible for the garbage collector
+          canUploadPermession = null ;
+        }
+        return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName), currentFolderNode,
                                            currentPortal,
                                            userId,
                                            action,
@@ -833,7 +844,6 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return fileUploadHandler.control(uploadId, action);
   }
-
   private String createTitlePath(String driveName, String workspaceName, String currentFolder) throws Exception {
     String[] folders = currentFolder.split("/");
     StringBuilder sb = new StringBuilder();
