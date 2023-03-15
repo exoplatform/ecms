@@ -570,7 +570,7 @@ public class DocumentServiceImpl implements DocumentService {
     // Clean document name
     String cleanedName = cleanNameWithAccents(title);
     // Add node
-    Node addedNode = currentNode.addNode(cleanedName, NT_FILE);
+    Node addedNode = currentNode.addNode(cleanedName.toLowerCase(), NT_FILE);
 
     // Set title
     if (!addedNode.hasProperty(EXO_TITLE_PROP)) {
