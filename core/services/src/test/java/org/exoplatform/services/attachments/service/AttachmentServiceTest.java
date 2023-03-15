@@ -13,6 +13,10 @@ import javax.jcr.Property;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
 
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.AccessControlList;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -51,6 +55,7 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
+
 
 @ConfiguredBy({ @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
     @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
@@ -344,6 +349,52 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     assertNotNull(newCreatedDocument);
     assertEquals("1", newCreatedDocument.getId());
     assertEquals(docTitle, newCreatedDocument.getTitle());
+
+    //assert fail when try to create a document on a space with read only access permission
+    ExtendedNode node = mock(ExtendedNode.class);
+    lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, ".spaces.testspace", docPath)).thenReturn(node);
+    AccessControlList acl = new AccessControlList("john", Arrays.asList(new AccessControlEntry("*:/spaces/testspace", PermissionType.READ)));
+    lenient().when(node.getACL()).thenReturn(acl);
+    try {
+      attachmentService.createNewDocument(userIdentity, docTitle, docPath, ".spaces.testspace", templateName);
+      fail();
+    }catch (IllegalAccessException e ){
+      //expected
+    }
+
+    //assert document successfully created with ADD_NODE permission
+    String newlyCreatedDocUUID = "2";
+    Node node2 = mock(Node.class);
+    lenient().when(node2.getSession()).thenReturn(session);
+    ExtendedNode extendedParentNode = mock(ExtendedNode.class);
+    node2 = mock(NodeImpl.class);
+    lenient().when(((NodeImpl) node2).getIdentifier()).thenReturn(newlyCreatedDocUUID);
+    lenient().when(((ExtendedSession) session).getNodeByIdentifier(createdDocUUID)).thenReturn(node);
+    lenient().when(node2.getProperty(anyString())).thenReturn(property);
+    lenient().when(node2.getNode(anyString())).thenReturn(nodeContent1);
+    lenient().when(nodeContent1.getProperty(anyString())).thenReturn(property);
+    lenient().when(node2.hasProperty("exo:title")).thenReturn(true);
+    lenient().when(node2.getProperty("exo:title").getString()).thenReturn(docTitle);
+    lenient().when(property.getDate()).thenReturn(Calendar.getInstance());
+    lenient().when(property.getLong()).thenReturn((long) 2);
+    lenient().when(node2.getPath()).thenReturn("/collaboration/");
+    lenient().when(node2.getName()).thenReturn(docTitle);
+    lenient().when(node2.getUUID()).thenReturn(newlyCreatedDocUUID);
+    lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, ".spaces.testspace", docPath)).thenReturn(extendedParentNode);
+    lenient().when(((ExtendedSession) session).getNodeByIdentifier(newlyCreatedDocUUID)).thenReturn(node2);
+    lenient().when(documentService.createDocumentFromTemplate(extendedParentNode, docTitle, documentTemplate)).thenReturn(node2);
+    lenient().when(documentService.getNewDocumentTemplateProviders()).thenReturn(Collections.singletonList(documentTemplateProvider));
+    AccessControlList acl1 = new AccessControlList("john", Arrays.asList(new AccessControlEntry("*:/spaces/testspace", PermissionType.ADD_NODE)));
+    lenient().when(extendedParentNode.getACL()).thenReturn(acl1);
+
+    //when
+    attachmentService.createNewDocument(userIdentity, docTitle, docPath, ".spaces.testspace", templateName);
+    // then
+    Attachment newCreatedDocument1 = attachmentService.getAttachmentById(newlyCreatedDocUUID);
+    assertNotNull(newCreatedDocument1);
+    assertEquals("2", newCreatedDocument1.getId());
+    assertEquals(docTitle, newCreatedDocument1.getTitle());
+
   }
 
 }

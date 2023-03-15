@@ -21,7 +21,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.jcr.*;
-import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -439,8 +438,6 @@ public class AttachmentServiceImpl implements AttachmentService {
         if (canAddNodePermession.isEmpty()){
           throw new IllegalAccessException();
         }
-        //no need to this object later , make it eligible for the garbage collector
-        canAddNodePermession = null ;
       }
       if (currentNode.hasNode(cleanNameWithAccents(title))) {
         throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");

@@ -426,8 +426,6 @@ public class ManageDocumentService implements ResourceContainer {
           if (canUploadPermession.isEmpty()){
             return Response.status(Status.UNAUTHORIZED).build();
           }
-          //no need to this object later , make it legible for the garbage collector
-          canUploadPermession = null ;
         }
         return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName), currentFolderNode,
                                            currentPortal,
