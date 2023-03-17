@@ -29,11 +29,11 @@ public class ContentUIActivity {
 
   public static final String  CONTENT_LINK        = "contenLink";
 
-  public static final String  MESSAGE             = "message";
+  public static final String  MESSAGE             = "MESSAGE";
 
-  public static final String  REPOSITORY          = "repository";
+  public static final String  REPOSITORY          = "REPOSITORY";
 
-  public static final String  WORKSPACE           = "workspace";
+  public static final String  WORKSPACE           = "WORKSPACE  ";
 
   public static final String  CONTENT_NAME        = "contentName";
 
