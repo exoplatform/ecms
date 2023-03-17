@@ -25,6 +25,7 @@ import javax.jcr.*;
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
@@ -38,9 +39,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -431,13 +430,9 @@ public class AttachmentServiceImpl implements AttachmentService {
       session = Utils.getSession(sessionProviderService, repositoryService);
       Node currentNode =
                        Utils.getParentFolderNode(session, manageDriveService, nodeHierarchyCreator, nodeFinder, pathDrive, path);
-      if (pathDrive.startsWith(".spaces.")){
-        String groupId = pathDrive.replace(".spaces.","/spaces/");
-        List<AccessControlEntry> canAddNodePermession = ((ExtendedNode) currentNode ).getACL().getPermissionEntries()
-                                                                                         .stream().filter(accessControlEntry -> accessControlEntry.getIdentity().equals("*:" + groupId) && accessControlEntry.getPermission().equals(PermissionType.ADD_NODE)).toList();
-        if (canAddNodePermession.isEmpty()){
-          throw new IllegalAccessException();
-        }
+
+      if (!PermissionUtil.canAddNode(currentNode)){
+        throw new IllegalAccessException("Permission to create a new document is missing");
       }
       if (currentNode.hasNode(cleanNameWithAccents(title))) {
         throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");

@@ -2,9 +2,7 @@ package org.exoplatform.services.attachments.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.*;
 
@@ -13,9 +11,7 @@ import javax.jcr.Property;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
 
-import org.exoplatform.services.jcr.access.AccessControlEntry;
-import org.exoplatform.services.jcr.access.AccessControlList;
-import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.junit.After;
@@ -339,62 +335,32 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(node1.getUUID()).thenReturn(createdDocUUID);
     lenient().when(((ExtendedSession) session).getNodeByIdentifier(createdDocUUID)).thenReturn(node1);
     lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, pathDrive, docPath)).thenReturn(parentNode);
+    mockStatic(PermissionUtil.class);
+    //can add node permission
+    lenient().when(PermissionUtil.canAddNode(parentNode)).thenReturn(true);
     lenient().when(documentService.createDocumentFromTemplate(parentNode, docTitle, documentTemplate)).thenReturn(node1);
     lenient().when(documentService.getNewDocumentTemplateProviders()).thenReturn(Collections.singletonList(documentTemplateProvider));
     // when
     attachmentService.createNewDocument(userIdentity, docTitle, docPath, pathDrive, templateName);
 
     // then
+    //assert created document with add_node permission
     Attachment newCreatedDocument = attachmentService.getAttachmentById(createdDocUUID);
     assertNotNull(newCreatedDocument);
     assertEquals("1", newCreatedDocument.getId());
     assertEquals(docTitle, newCreatedDocument.getTitle());
 
-    //assert fail when try to create a document on a space with read only access permission
-    ExtendedNode node = mock(ExtendedNode.class);
+    //assert IllegalAccessException when try to add a new document without add_node permission
+    Node node = mock(Node.class);
     lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, ".spaces.testspace", docPath)).thenReturn(node);
-    AccessControlList acl = new AccessControlList("john", Arrays.asList(new AccessControlEntry("*:/spaces/testspace", PermissionType.READ)));
-    lenient().when(node.getACL()).thenReturn(acl);
+    lenient().when(PermissionUtil.canAddNode(parentNode)).thenReturn(false);
     try {
       attachmentService.createNewDocument(userIdentity, docTitle, docPath, ".spaces.testspace", templateName);
       fail();
     }catch (IllegalAccessException e ){
       //expected
+      assertEquals("Permission to create a new document is missing",e.getMessage());
     }
-
-    //assert document successfully created with ADD_NODE permission
-    String newlyCreatedDocUUID = "2";
-    Node node2 = mock(Node.class);
-    lenient().when(node2.getSession()).thenReturn(session);
-    ExtendedNode extendedParentNode = mock(ExtendedNode.class);
-    node2 = mock(NodeImpl.class);
-    lenient().when(((NodeImpl) node2).getIdentifier()).thenReturn(newlyCreatedDocUUID);
-    lenient().when(((ExtendedSession) session).getNodeByIdentifier(createdDocUUID)).thenReturn(node);
-    lenient().when(node2.getProperty(anyString())).thenReturn(property);
-    lenient().when(node2.getNode(anyString())).thenReturn(nodeContent1);
-    lenient().when(nodeContent1.getProperty(anyString())).thenReturn(property);
-    lenient().when(node2.hasProperty("exo:title")).thenReturn(true);
-    lenient().when(node2.getProperty("exo:title").getString()).thenReturn(docTitle);
-    lenient().when(property.getDate()).thenReturn(Calendar.getInstance());
-    lenient().when(property.getLong()).thenReturn((long) 2);
-    lenient().when(node2.getPath()).thenReturn("/collaboration/");
-    lenient().when(node2.getName()).thenReturn(docTitle);
-    lenient().when(node2.getUUID()).thenReturn(newlyCreatedDocUUID);
-    lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, ".spaces.testspace", docPath)).thenReturn(extendedParentNode);
-    lenient().when(((ExtendedSession) session).getNodeByIdentifier(newlyCreatedDocUUID)).thenReturn(node2);
-    lenient().when(documentService.createDocumentFromTemplate(extendedParentNode, docTitle, documentTemplate)).thenReturn(node2);
-    lenient().when(documentService.getNewDocumentTemplateProviders()).thenReturn(Collections.singletonList(documentTemplateProvider));
-    AccessControlList acl1 = new AccessControlList("john", Arrays.asList(new AccessControlEntry("*:/spaces/testspace", PermissionType.ADD_NODE)));
-    lenient().when(extendedParentNode.getACL()).thenReturn(acl1);
-
-    //when
-    attachmentService.createNewDocument(userIdentity, docTitle, docPath, ".spaces.testspace", templateName);
-    // then
-    Attachment newCreatedDocument1 = attachmentService.getAttachmentById(newlyCreatedDocUUID);
-    assertNotNull(newCreatedDocument1);
-    assertEquals("2", newCreatedDocument1.getId());
-    assertEquals(docTitle, newCreatedDocument1.getTitle());
-
   }
 
 }

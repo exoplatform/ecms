@@ -44,8 +44,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.services.jcr.access.AccessControlEntry;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -419,13 +417,9 @@ public class ManageDocumentService implements ResourceContainer {
                                          Text.escapeIllegalJcrChars(workspaceName),
                                          Text.escapeIllegalJcrChars(currentFolder));
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
-        if (driveName.startsWith(".spaces.")){
-          String groupId = driveName.replace(".spaces.","/spaces/");
-          List<AccessControlEntry> canUploadPermession = ((ExtendedNode) currentFolderNode).getACL().getPermissionEntries()
-          .stream().filter(accessControlEntry -> accessControlEntry.getIdentity().equals("*:" + groupId) && accessControlEntry.getPermission().equals(PermissionType.ADD_NODE)).toList();
-          if (canUploadPermession.isEmpty()){
-            return Response.status(Status.UNAUTHORIZED).build();
-          }
+
+        if (!PermissionUtil.canAddNode(currentFolderNode)){
+          return Response.status(Status.UNAUTHORIZED).build();
         }
         return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName), currentFolderNode,
                                            currentPortal,
