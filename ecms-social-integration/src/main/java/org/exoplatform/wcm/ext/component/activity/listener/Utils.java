@@ -67,7 +67,7 @@ import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.activity.ContentUIActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.cssfile.*;
+import org.exoplatform.ecms.css.*;
 
 
 

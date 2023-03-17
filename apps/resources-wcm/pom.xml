@@ -12,8 +12,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.platform-ui</groupId>
-      <artifactId>platform-ui-skin</artifactId>
+      <groupId>org.exoplatform.gatein.portal</groupId>
+      <artifactId>exo.portal.web.eXoSkin</artifactId>
       <classifier>sources</classifier>
       <scope>provided</scope>
     </dependency>
@@ -52,7 +52,7 @@
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <includeArtifactIds>platform-ui-skin</includeArtifactIds>
+              <includeArtifactIds>exo.portal.web.eXoSkin</includeArtifactIds>
               <outputDirectory>${project.build.directory}/src/main/webapp</outputDirectory>
             </configuration>
           </execution>
@@ -64,6 +64,9 @@
         <executions>
           <execution>
             <id>core</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
             <configuration>
               <sourceDirectory>${project.build.directory}/src/main/webapp/skin/less</sourceDirectory>
               <outputDirectory>${project.build.directory}/${project.build.finalName}/skin/css</outputDirectory>
@@ -84,9 +87,6 @@
                 <include>ecms/portlets/attachments/attachmentsApp.less</include>
               </includes>
             </configuration>
-            <goals>
-              <goal>compile</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>
