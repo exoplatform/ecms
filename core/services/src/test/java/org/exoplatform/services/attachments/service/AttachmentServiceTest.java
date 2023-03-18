@@ -2,9 +2,7 @@ package org.exoplatform.services.attachments.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.*;
 
@@ -13,6 +11,8 @@ import javax.jcr.Property;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
 
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -51,6 +51,7 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
+
 
 @ConfiguredBy({ @ConfigurationUnit(scope = ContainerScope.ROOT, path = "conf/configuration.xml"),
     @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
@@ -334,16 +335,32 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(node1.getUUID()).thenReturn(createdDocUUID);
     lenient().when(((ExtendedSession) session).getNodeByIdentifier(createdDocUUID)).thenReturn(node1);
     lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, pathDrive, docPath)).thenReturn(parentNode);
+    mockStatic(PermissionUtil.class);
+    //can add node permission
+    lenient().when(PermissionUtil.canAddNode(parentNode)).thenReturn(true);
     lenient().when(documentService.createDocumentFromTemplate(parentNode, docTitle, documentTemplate)).thenReturn(node1);
     lenient().when(documentService.getNewDocumentTemplateProviders()).thenReturn(Collections.singletonList(documentTemplateProvider));
     // when
     attachmentService.createNewDocument(userIdentity, docTitle, docPath, pathDrive, templateName);
 
     // then
+    //assert created document with add_node permission
     Attachment newCreatedDocument = attachmentService.getAttachmentById(createdDocUUID);
     assertNotNull(newCreatedDocument);
     assertEquals("1", newCreatedDocument.getId());
     assertEquals(docTitle, newCreatedDocument.getTitle());
+
+    //assert IllegalAccessException when try to add a new document without add_node permission
+    Node node = mock(Node.class);
+    lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, ".spaces.testspace", docPath)).thenReturn(node);
+    lenient().when(PermissionUtil.canAddNode(parentNode)).thenReturn(false);
+    try {
+      attachmentService.createNewDocument(userIdentity, docTitle, docPath, ".spaces.testspace", templateName);
+      fail();
+    }catch (IllegalAccessException e ){
+      //expected
+      assertEquals("Permission to create a new document is missing",e.getMessage());
+    }
   }
 
 }
