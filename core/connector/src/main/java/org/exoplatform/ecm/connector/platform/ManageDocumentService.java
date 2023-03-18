@@ -417,8 +417,11 @@ public class ManageDocumentService implements ResourceContainer {
                                          Text.escapeIllegalJcrChars(workspaceName),
                                          Text.escapeIllegalJcrChars(currentFolder));
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
-        return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
-                                           currentFolderNode,
+
+        if (!PermissionUtil.canAddNode(currentFolderNode)){
+          return Response.status(Status.UNAUTHORIZED).build();
+        }
+        return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName), currentFolderNode,
                                            currentPortal,
                                            userId,
                                            action,
@@ -833,7 +836,6 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return fileUploadHandler.control(uploadId, action);
   }
-
   private String createTitlePath(String driveName, String workspaceName, String currentFolder) throws Exception {
     String[] folders = currentFolder.split("/");
     StringBuilder sb = new StringBuilder();
