@@ -25,6 +25,7 @@ import javax.jcr.*;
 import org.apache.commons.lang.StringUtils;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
@@ -429,6 +430,10 @@ public class AttachmentServiceImpl implements AttachmentService {
       session = Utils.getSession(sessionProviderService, repositoryService);
       Node currentNode =
                        Utils.getParentFolderNode(session, manageDriveService, nodeHierarchyCreator, nodeFinder, pathDrive, path);
+
+      if (!PermissionUtil.canAddNode(currentNode)){
+        throw new IllegalAccessException("Permission to create a new document is missing");
+      }
       if (currentNode.hasNode(cleanNameWithAccents(title))) {
         throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");
       }
