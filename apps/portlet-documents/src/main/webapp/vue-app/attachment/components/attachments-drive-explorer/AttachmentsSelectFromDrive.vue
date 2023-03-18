@@ -5,20 +5,22 @@
       <v-divider />
     </div>
     <div class="lastContent d-flex align-center justify-center">
-      <a
-        title="Select on server"
-        class="uploadButton d-flex align-center"
-        href="#"
-        rel="tooltip"
-        data-placement="bottom"
-        @click="openSelectFromDrivesDrawer()">
-        <i class="uiIcon32x32FolderDefault uiIcon32x32LightGray"></i>
-        <v-icon
-          color="#fff"
-          x-small
-          class="iconCloud">cloud</v-icon>
-        <span class="text colorText">{{ $t('attachments.drawer.existingUploads') }}</span>
-      </a>
+      <v-tooltip
+        bottom>
+        <template #activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="uploadButton d-flex align-center"
+            color="primary"
+            text
+            @click="openSelectFromDrivesDrawer()">
+            <i class="uiIcon32x32FolderDefault uiIcon32x32LightGray"></i>
+            <span class="ms-1">{{ $t('attachments.drawer.existingUploads') }}</span>
+          </v-btn>
+        </template>
+        {{ $t('attachments.drawer.selectFromExistingUploads') }}
+      </v-tooltip>
     </div>
   </div>
 </template>
