@@ -426,6 +426,8 @@ public class AttachmentsRestService implements ResourceContainer {
       Identity userIdentity = getCurrentUserIdentity();
       Attachment attachment = attachmentService.createNewDocument(userIdentity, title, path, pathDrive, templateName);
       return Response.ok(EntityBuilder.fromAttachment(identityManager, attachment)).build();
+    } catch (IllegalAccessException e) {
+      return Response.status(Status.UNAUTHORIZED).entity("Unauthorized to create a new document").build();
     } catch (ItemExistsException e) {
       return Response.status(Status.CONFLICT).entity("Document with the same name already exist in this current path").build();
     } catch (Exception e) {
