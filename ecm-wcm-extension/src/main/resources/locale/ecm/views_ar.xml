@@ -31,7 +31,7 @@
         <email>عنوان البريد الإلكتروني</email>
         <site>الموقع</site>
         <lastComment>آخر تعليق تمّ ارساله بواسطة {user} على السّاعة {time}</lastComment>
-        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <Less_Than_A_Minute>منذ أقل من دقيقة</Less_Than_A_Minute>
         <About_A_Minute>منذ نحو دقيقة</About_A_Minute>
         <About_x_Minutes>منذ حوالي {0} دقائق</About_x_Minutes>
         <About_An_Hour>منذ حوالي ساعة</About_An_Hour>
