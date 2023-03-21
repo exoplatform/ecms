@@ -169,7 +169,7 @@ export default {
   },
   methods: {
     openSelectDestinationFolderDrawer() {
-      this.$root.$emit('open-drive-explorer-drawer');
+      this.$root.$emit('open-drive-explorer-drawer', this.currentDrive);
     }
   }
 };
