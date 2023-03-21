@@ -409,6 +409,9 @@ export default {
       modeFolderSelectionForFile: false,
       movedFile: {},
       driveExplorerInitializing: false,
+      currentFolder: {},
+      folderPath: '',
+      destinationFolder: ''
     };
   },
   computed: {
@@ -519,11 +522,36 @@ export default {
     this.initDestinationFolderPath();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
-    this.$root.$on('open-drive-explorer-drawer', () => this.openAttachmentsDriveExplorerDrawer());
+    this.$root.$on('open-drive-explorer-drawer', (currentDrive) => {
+      this.currentDrive = currentDrive;
+      this.destinationFolder = this.selectedFolderPath ? this.selectedFolderPath : this.defaultFolder;
+      if (this.destinationFolder !== '/'){
+        this.initHistoryTree();
+      }
+      this.fetchChildrenContents(this.destinationFolder);
+      this.openAttachmentsDriveExplorerDrawer();
+    });
     this.$root.$on('open-select-from-drives-drawer', () => this.openSelectFromDrivesDrawer());
     this.$root.$on('change-attachment-destination-path', this.openSelectDestinationFolderForFile);
   },
   methods: {
+    initHistoryTree(){
+      this.resetExplorer();
+      this.folderPath = '';
+      this.currentAbsolutePath = this.destinationFolder;
+      this.selectedFolderPath = this.destinationFolder;
+      this.schemaFolder = this.currentDrive.title.concat('/', this.destinationFolder);
+      const folderNames = this.destinationFolder.split('/');
+      folderNames.forEach(folderName => {
+        this.folderPath = `${this.folderPath}/${folderName}`;
+        const folder = {
+          name: folderName,
+          title: folderName,
+          path: this.folderPath
+        };
+        this.generateHistoryTree(folder);
+      });
+    },
     openAttachmentsDriveExplorerDrawer() {
       this.modeFolderSelection = true;
       this.$refs.driveExplorerDrawer.open();
