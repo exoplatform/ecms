@@ -201,8 +201,11 @@ public class Utils {
     }
     return null;
   }
-  
+
   public static boolean isValidDocumentTitle(String name) {
+    if (StringUtils.isBlank(name)) {
+      return false;
+    }
     Pattern regex = Pattern.compile("[<\\\\>:\"/|?*]");
     Matcher matcher = regex.matcher(name);
     return !matcher.find();
