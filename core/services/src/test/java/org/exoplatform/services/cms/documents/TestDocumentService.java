@@ -61,6 +61,7 @@ public class TestDocumentService extends BaseWCMTestCase {
     Node content = document.getNode("jcr:content");
     assertEquals("Mime-type is not correct", mime, content.getProperty("jcr:mimeType").getString());
     assertEquals("Mime-type is not correct", "", content.getProperty("jcr:data").getString());
+    assertEquals(title.toLowerCase(), document.getName());
     clear();
   }
   
@@ -163,7 +164,7 @@ public class TestDocumentService extends BaseWCMTestCase {
   
   private void clear() throws Exception {
     Node rootNode = session.getRootNode();
-    Node documentNode = rootNode.getNode("Test.docx");
+    Node documentNode = rootNode.getNode("test.docx");
     documentNode.remove();
     session.save();
   }
