@@ -892,7 +892,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     Node node = getNode(driveName,workspaceName, currentFolder);
     try {
-      return fileUploadHandler.checkExistence(node, Utils.cleanName(fileName));
+      return fileUploadHandler.checkExistence(node, Utils.cleanName(fileName.toLowerCase()));
     } catch (Exception e) {
       return Response.serverError().entity(e.getMessage()).build();    }
   }
