@@ -18,6 +18,7 @@ package org.exoplatform.services.cms.impl;
 
 import com.ibm.icu.text.Transliterator;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -709,6 +710,7 @@ public class Utils {
       extension = name.substring(name.lastIndexOf("."));
       name = name.substring(0, name.lastIndexOf("."));
     }
+    name = name.trim();
     StringBuilder builder = new StringBuilder();
     for (int i = 0; i < name.length(); i++) {
       char currentChar = name.charAt(i);
@@ -751,6 +753,15 @@ public class Utils {
     }
     return Text.escapeIllegalJcrChars(fileName);
 
+  }
+
+  public static String normalizeFileBaseName(String title) {
+    String name = FilenameUtils.getBaseName(title).trim();
+    String extension = FilenameUtils.getExtension(title);
+    if (StringUtils.isNotBlank(extension)) {
+      return name + "." + extension;
+    }
+    return name;
   }
 
   public static List<String> getMemberships() throws Exception {
