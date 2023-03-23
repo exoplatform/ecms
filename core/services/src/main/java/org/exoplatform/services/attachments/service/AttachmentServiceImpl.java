@@ -434,7 +434,8 @@ public class AttachmentServiceImpl implements AttachmentService {
       if (!PermissionUtil.canAddNode(currentNode)){
         throw new IllegalAccessException("Permission to create a new document is missing");
       }
-      if (currentNode.hasNode(cleanNameWithAccents(title))) {
+      title = org.exoplatform.services.cms.impl.Utils.normalizeFileBaseName(title);
+      if (currentNode.hasNode(cleanNameWithAccents(title.toLowerCase()))) {
         throw new ItemExistsException("Document with the same name " + title + " already exist in this current path");
       }
       List<NewDocumentTemplate> documentTemplates = getDocumentTemplateList(userIdentity);
