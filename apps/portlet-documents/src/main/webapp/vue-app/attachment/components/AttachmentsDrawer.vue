@@ -323,7 +323,7 @@ export default {
           file.destinationFolder,
           eXo.env.portal.portalName,
           file.uploadId,
-          file.title,
+          encodeURIComponent(file.title),
           eXo.env.portal.language,
           this.saveMode,
           'save'
