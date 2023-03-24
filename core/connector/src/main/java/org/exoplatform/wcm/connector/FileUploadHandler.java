@@ -52,7 +52,6 @@ import org.w3c.dom.Element;
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
@@ -67,7 +66,6 @@ import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by The eXo Platform SAS
@@ -433,9 +431,9 @@ public class FileUploadHandler {
                                String userId,
                                String existenceAction,
                                boolean isNewVersion) throws Exception {
-    String exoTitle = fileName;
+    String exoTitle = Utils.normalizeFileBaseName(fileName);
     fileName = Utils.cleanNameWithAccents(fileName);
-    fileName = Text.escapeIllegalJcrChars(Utils.cleanName(fileName));
+    fileName = Text.escapeIllegalJcrChars(Utils.cleanName(fileName.toLowerCase()));
     try {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
