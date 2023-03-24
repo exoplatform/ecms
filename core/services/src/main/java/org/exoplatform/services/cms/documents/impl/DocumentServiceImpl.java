@@ -568,7 +568,7 @@ public class DocumentServiceImpl implements DocumentService {
       }
     }
     // Clean document name
-    String cleanedName = cleanNameWithAccents(title);
+    String cleanedName = Utils.cleanName(cleanNameWithAccents(title));
     // Add node
     Node addedNode = currentNode.addNode(cleanedName, NT_FILE);
 
