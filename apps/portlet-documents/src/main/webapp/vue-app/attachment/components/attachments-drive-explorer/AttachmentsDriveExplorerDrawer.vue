@@ -528,22 +528,22 @@ export default {
       this.openAttachmentsDriveExplorerDrawer();
     });
     this.$root.$on('open-select-from-drives-drawer', () => this.openSelectFromDrivesDrawer());
-    this.$root.$on('change-attachment-destination-path', (file) => {
-      this.currentDrive = file.fileDrive;
+    this.$root.$on('change-attachment-destination-path', (file, currentDrive) => {
+      this.currentDrive = currentDrive;
       this.initHistoryTree();
       this.openSelectDestinationFolderForFile(file);
     });
   },
   methods: {
     initHistoryTree(){
+      this.foldersHistory = [];
       this.resetExplorer();
-      this.destinationFolder = this.selectedFolderPath ? this.selectedFolderPath : this.defaultFolder;
-      if (this.destinationFolder !== '/'){
+      if (this.defaultFolder !== '/'){
         this.folderPath = '';
-        this.currentAbsolutePath = this.destinationFolder;
-        this.selectedFolderPath = this.destinationFolder;
-        this.schemaFolder = this.currentDrive.title.concat('/', this.destinationFolder);
-        const folderNames = this.destinationFolder.split('/');
+        this.currentAbsolutePath = this.defaultFolder;
+        this.selectedFolderPath = this.defaultFolder;
+        this.schemaFolder = this.currentDrive.title.concat('/', this.defaultFolder);        
+        const folderNames = this.defaultFolder.split('/');
         folderNames.forEach(folderName => {
           this.folderPath = `${this.folderPath}/${folderName}`;
           const folder = {
@@ -554,7 +554,7 @@ export default {
           this.generateHistoryTree(folder);
         });
       }
-      this.fetchChildrenContents(this.destinationFolder); 
+      this.fetchChildrenContents(this.defaultFolder); 
     },
     openAttachmentsDriveExplorerDrawer() {
       this.modeFolderSelection = true;
