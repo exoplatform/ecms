@@ -528,8 +528,11 @@ export default {
       this.openAttachmentsDriveExplorerDrawer();
     });
     this.$root.$on('open-select-from-drives-drawer', () => this.openSelectFromDrivesDrawer());
-    this.$root.$on('change-attachment-destination-path', (file, currentDrive) => {
-      this.currentDrive = currentDrive;
+    this.$root.$on('change-attachment-destination-path', (file) => {
+      this.currentDrive = file.fileDrive;
+      if (file.pathDestinationFolderForFile !== '') {
+        this.defaultFolder = file.pathDestinationFolderForFile;
+      }
       this.initHistoryTree();
       this.openSelectDestinationFolderForFile(file);
     });
