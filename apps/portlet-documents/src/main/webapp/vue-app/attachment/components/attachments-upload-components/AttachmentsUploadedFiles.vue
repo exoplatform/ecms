@@ -13,7 +13,10 @@
       </div>
       <span>{{ $t('no.attachments') }}</span>
     </div>
-    <div v-if="attachments.length > 0" class="destinationFolder d-flex justify-space-between mb-4 ms-5">
+    <!-- we hide the possibility to select a folder for all files
+    There a lot of problem with this feature and need a rework to make it work.
+    To be able to release 6.4.0 we hide it -->
+    <div v-if="false && attachments.length > 0" class="destinationFolder d-flex justify-space-between mb-4 ms-5">
       <div v-if="!displayMessageDestinationFolder && schemaFolder.length" class="destinationFolderBreadcrumb d-flex">
         <div
           :title="schemaFolder[0]"
