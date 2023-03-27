@@ -409,6 +409,9 @@ export default {
       modeFolderSelectionForFile: false,
       movedFile: {},
       driveExplorerInitializing: false,
+      currentFolder: {},
+      folderPath: '',
+      destinationFolder: ''
     };
   },
   computed: {
@@ -519,11 +522,43 @@ export default {
     this.initDestinationFolderPath();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
-    this.$root.$on('open-drive-explorer-drawer', () => this.openAttachmentsDriveExplorerDrawer());
+    this.$root.$on('open-drive-explorer-drawer', (currentDrive) => {
+      this.currentDrive = currentDrive;
+      this.initHistoryTree();
+      this.openAttachmentsDriveExplorerDrawer();
+    });
     this.$root.$on('open-select-from-drives-drawer', () => this.openSelectFromDrivesDrawer());
-    this.$root.$on('change-attachment-destination-path', this.openSelectDestinationFolderForFile);
+    this.$root.$on('change-attachment-destination-path', (file) => {
+      this.currentDrive = file.fileDrive;
+      if (file.pathDestinationFolderForFile !== '') {
+        this.defaultFolder = file.pathDestinationFolderForFile;
+      }
+      this.initHistoryTree();
+      this.openSelectDestinationFolderForFile(file);
+    });
   },
   methods: {
+    initHistoryTree(){
+      this.foldersHistory = [];
+      this.resetExplorer();
+      if (this.defaultFolder !== '/'){
+        this.folderPath = '';
+        this.currentAbsolutePath = this.defaultFolder;
+        this.selectedFolderPath = this.defaultFolder;
+        this.schemaFolder = this.currentDrive.title.concat('/', this.defaultFolder);        
+        const folderNames = this.defaultFolder.split('/');
+        folderNames.forEach(folderName => {
+          this.folderPath = `${this.folderPath}/${folderName}`;
+          const folder = {
+            name: folderName,
+            title: folderName,
+            path: this.folderPath,
+          };
+          this.generateHistoryTree(folder);
+        });
+      }
+      this.fetchChildrenContents(this.defaultFolder); 
+    },
     openAttachmentsDriveExplorerDrawer() {
       this.modeFolderSelection = true;
       this.$refs.driveExplorerDrawer.open();
