@@ -298,7 +298,7 @@ export default {
       }
     },
     openSelectDestinationFolderForFile(attachment) {
-      this.$root.$emit('change-attachment-destination-path', attachment, this.currentDrive);
+      this.$root.$emit('change-attachment-destination-path', attachment);
     },
     absoluteDateModified(options) {
       const lang = eXo && eXo.env && eXo.env.portal && eXo.env.portal.language || 'en';
