@@ -436,7 +436,13 @@ export default {
       }
       files.forEach(file => {
         file.isSelected = this.attachedFiles.some(f => f.id === file.id);
-        file.name = decodeURI(file.name);
+        try {
+          file.name = decodeURI(file.name);
+        }
+        catch (error) {
+          // Nothing to do, name contains % character , but it represents not an encoded character
+          // No need to decode the file name
+        }
       });
       return files;
     },
