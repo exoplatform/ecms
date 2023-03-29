@@ -2697,7 +2697,7 @@
        <Images>Bild</Images>
        <Video>Video</Video>
        <Music>Musik</Music>
-       <Documents>Documents</Documents>
+       <Documents>Dokumente</Documents>
        <Content>Inhalt</Content>
     </label>
   </DocumentType>
@@ -2707,7 +2707,7 @@
       <Images>Bild</Images>
       <Video>Video</Video>
       <Music>Musik</Music>
-      <Documents>Documents</Documents>
+      <Documents>Dokumente</Documents>
       <Content>Inhalt</Content>
     </label>
     <title>Filtervoreinstellungen einrichten</title>

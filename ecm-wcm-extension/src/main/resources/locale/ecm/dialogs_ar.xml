@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>استخدم  الرمز @  للإشارة إلى شخص ما في التعليق</placeholder>
     </label>
   </UICommentForm>
  
@@ -249,7 +249,7 @@
         <is-checked-out>في حالة انهاء المعالجة</is-checked-out>
         <predecessors>الأسلاف</predecessors>
         <merge-failed>فشل الادماج</merge-failed>
-        <uuid>UUID</uuid>
+        <uuid>معرف المستخدم الفريد (UUID)</uuid>
       </label>
     </dialog>
   </Versionable>
