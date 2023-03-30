@@ -178,6 +178,7 @@ export default {
           title: file.name,
           size: file.size,
           mimetype: file.type,
+          acl: file.acl,
           uploadId: this.getNewUploadId(),
           uploadProgress: 0,
           destinationFolder: this.pathDestinationFolder,
