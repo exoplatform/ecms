@@ -33,7 +33,7 @@ public class ContentUIActivity {
 
   public static final String  REPOSITORY          = "REPOSITORY";
 
-  public static final String  WORKSPACE           = "WORKSPACE  ";
+  public static final String  WORKSPACE           = "WORKSPACE";
 
   public static final String  CONTENT_NAME        = "contentName";
 
