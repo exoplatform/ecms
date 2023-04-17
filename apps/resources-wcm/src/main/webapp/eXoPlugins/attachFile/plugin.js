@@ -2,7 +2,7 @@ CKEDITOR.plugins.add( 'attachFile', {
 
   // Register the icons. They must match command names.
   icons: 'attachFile',
-  lang : ['en','fr'],
+  lang : ['en','fr','de'],
 
   // The plugin initialization logic goes inside this method.
   init: function( editor ) {

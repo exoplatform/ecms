@@ -4,7 +4,7 @@ require(['/eXoResources/javascript/jquery-3.2.1.js']);
 
 CKEDITOR.plugins.add('acceptInline',
 	{
-    lang : ['en','fr','vi'],
+    lang : ['en','fr','vi', 'de'],
 		init : function(editor) {
 			var pluginName = 'acceptInline';
 			var mypath = this.path;	
