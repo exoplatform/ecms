@@ -1,6 +1,6 @@
 CKEDITOR.plugins.add('content',
 	{
-    lang : ['en','fr','vi'],
+    lang : ['en','fr','vi','de'],
 		init : function(editor) {
 			var pluginName = 'content';
 			var mypath = this.path;	
