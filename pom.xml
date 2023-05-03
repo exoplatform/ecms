@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>maven-parent-pom</artifactId>
+    <artifactId>maven-parent-exo-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>26-exo-M01</version>
+    <version>26-M01</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
@@ -19,7 +19,7 @@
     <module>ext</module>
     <module>ecm-wcm-extension</module>
     <module>testsuite</module>
-    <module>ecms-social-integration</module>
+<!--    <module>ecms-social-integration</module>-->
     <module>ecms-packaging</module>
   </modules>
   <scm>
@@ -40,11 +40,8 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.social.version>6.5.x-exo-SNAPSHOT</org.exoplatform.social.version>
     <addon.exo.jcr.version>6.5.x-SNAPSHOT</addon.exo.jcr.version>
-    <addon.exo.tasks.version>3.5.x-exo-SNAPSHOT</addon.exo.tasks.version>
-    <org.exoplatform.platform-ui.version>6.5.x-exo-SNAPSHOT</org.exoplatform.platform-ui.version>
-    <addon.exo.analytics.version>1.4.x-exo-SNAPSHOT</addon.exo.analytics.version>
+
     <!-- **************************************** -->
     <!-- Apache Chemistry (OpenCMIS) API -->
     <!-- **************************************** -->
@@ -72,41 +69,9 @@
     <dependencies>
       <!-- Import versions from social project -->
       <dependency>
-        <groupId>org.exoplatform.social</groupId>
-        <artifactId>social</artifactId>
-        <version>${org.exoplatform.social.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <!-- Import versions from jcr project -->
-      <dependency>
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>jcr-parent</artifactId>
         <version>${addon.exo.jcr.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <!-- Import versions from platform-ui project -->
-      <dependency>
-        <groupId>org.exoplatform.platform-ui</groupId>
-        <artifactId>platform-ui</artifactId>
-        <version>${org.exoplatform.platform-ui.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <!-- Import versions from task project -->
-      <dependency>
-        <groupId>org.exoplatform.addons.task</groupId>
-        <artifactId>task-management-parent</artifactId>
-        <version>${addon.exo.tasks.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <!-- Import versions from analytics project -->
-      <dependency>
-        <groupId>org.exoplatform.addons.analytics</groupId>
-        <artifactId>analytics-parent</artifactId>
-        <version>${addon.exo.analytics.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
