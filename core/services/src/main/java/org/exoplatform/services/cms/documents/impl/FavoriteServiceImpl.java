@@ -102,7 +102,7 @@ public class FavoriteServiceImpl implements org.exoplatform.services.cms.documen
           ret.add(node);
         }
       } catch (RepositoryException repositoryException) {
-        LOG.warn("Can't get Favorite Node with UIID {}",favorite.getObjectId());
+        LOG.warn("Can't get Favorite Node with UUID {}",favorite.getObjectId());
       }
     }
     }
@@ -121,8 +121,11 @@ public class FavoriteServiceImpl implements org.exoplatform.services.cms.documen
   public boolean isFavoriter(String userName, Node node) throws Exception {
     try {
       Identity identity = identityManager.getOrCreateUserIdentity(userName);
-      Favorite favorite = new Favorite("file", node.getUUID(), "", Long.parseLong(identity.getId()));
-      return favoriteService.isFavorite(favorite);
+      if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+        Favorite favorite = new Favorite("file", node.getUUID(), "", Long.parseLong(identity.getId()));
+        return favoriteService.isFavorite(favorite);
+      }
+      return false;
     } catch (Exception e) {
       LOG.warn("Cannot get the identifier of the node");
       return false;
