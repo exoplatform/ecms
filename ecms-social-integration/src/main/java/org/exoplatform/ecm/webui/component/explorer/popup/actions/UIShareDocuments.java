@@ -16,8 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import static org.exoplatform.wcm.notification.plugin.FileActivityChildPlugin.EXO_RESOURCES_URI;
-import static org.exoplatform.wcm.notification.plugin.FileActivityChildPlugin.ICON_FILE_EXTENSION;
 
 import java.util.*;
 import java.util.function.Function;
@@ -27,10 +25,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.social.core.identity.model.Profile;
-import org.exoplatform.commons.api.notification.NotificationContext;
 import org.exoplatform.social.core.space.model.Space;
-import org.exoplatform.commons.api.notification.model.PluginKey;
-import org.exoplatform.commons.notification.impl.NotificationContextImpl;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.*;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
@@ -55,8 +50,6 @@ import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.document.service.IShareDocumentService;
-import org.exoplatform.wcm.notification.plugin.ShareFileToSpacePlugin;
-import org.exoplatform.wcm.notification.plugin.ShareFileToUserPlugin;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -69,6 +62,9 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.*;
+
+import static org.exoplatform.wcm.ext.component.activity.listener.Utils.EXO_RESOURCES_URI;
+import static org.exoplatform.wcm.ext.component.activity.listener.Utils.ICON_FILE_EXTENSION;
 
 /**
  * Created by The eXo Platform SAS
@@ -207,59 +203,31 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
       String message = "";
       Identity identity = ConversationState.getCurrent().getIdentity();
       boolean isShared = false;
-      String activityId = "";
       if (uiform.isOwner(identity.getUserId()) || uiform.canEdit(identity)) {
         if (uiform.getChild(UIFormTextAreaInput.class).getValue() != null)
           message = uiform.getChild(UIFormTextAreaInput.class).getValue();
         for (String name : accessList) {
-          try {
-            if (IdentityConstants.ANY.equals(name)
-                || IdentityConstants.SYSTEM.equals(name)
-                || uiform.hasPermission(name, uiform.getPermission(name))
-                || uiform.isOwner(name) || uiform.isGroupType(name)) {
-              continue;
-            } else if (permissions.containsKey(name)) {
-              String perm = permissions.get(name);
-              if (!name.startsWith(SPACE_PREFIX2)) {
-                service.unpublishDocumentToUser(name, (ExtendedNode) node);
-                service.publishDocumentToUser(name, node, message, perm);
-                NotificationContext ctx = NotificationContextImpl.cloneInstance().append(ShareFileToUserPlugin.NODE, node)
-                    .append(ShareFileToUserPlugin.SENDER, ConversationState.getCurrent().getIdentity().getUserId())
-                    .append(ShareFileToUserPlugin.NODEID, node.getUUID())
-                    .append(ShareFileToUserPlugin.URL, documentService.getDocumentUrlInPersonalDocuments(node, name))
-                    .append(ShareFileToUserPlugin.RECEIVER, name)
-                    .append(ShareFileToUserPlugin.PERM, perm)
-                    .append(ShareFileToUserPlugin.ICON, uiform.getDefaultThumbnail(node))
-                    .append(ShareFileToUserPlugin.MIMETYPE, uiform.getMimeType(node))
-                    .append(ShareFileToUserPlugin.MESSAGE, message);
-                ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(ShareFileToUserPlugin.ID))).execute(ctx);
-                isShared = true;
-              } else {
-                String groupId = name.substring("*:".length());
-                service.unpublishDocumentToSpace(groupId, (ExtendedNode) node);
-                activityId = service.publishDocumentToSpace(groupId, node, message, perm);
-                NotificationContext ctx = NotificationContextImpl.cloneInstance().append(ShareFileToSpacePlugin.NODE, node)
-                    .append(ShareFileToSpacePlugin.SENDER, ConversationState.getCurrent().getIdentity().getUserId())
-                    .append(ShareFileToSpacePlugin.NODEID, node.getUUID())
-                    .append(ShareFileToUserPlugin.URL, documentService.getDocumentUrlInSpaceDocuments(node, groupId))
-                    .append(ShareFileToSpacePlugin.RECEIVER, groupId)
-                    .append(ShareFileToSpacePlugin.PERM, perm)
-                    .append(ShareFileToSpacePlugin.ICON, uiform.getDefaultThumbnail(node))
-                    .append(ShareFileToSpacePlugin.MIMETYPE, uiform.getMimeType(node))
-                    .append(ShareFileToSpacePlugin.ACTIVITY_ID, activityId)
-                    .append(ShareFileToSpacePlugin.MESSAGE, message);
-                ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(ShareFileToSpacePlugin.ID))).execute(ctx);
-                isShared = true;
-              }
-            } else if (!name.startsWith(SPACE_PREFIX2)) {
+          if (IdentityConstants.ANY.equals(name)
+              || IdentityConstants.SYSTEM.equals(name)
+              || uiform.hasPermission(name, uiform.getPermission(name))
+              || uiform.isOwner(name) || uiform.isGroupType(name)) {
+          } else if (permissions.containsKey(name)) {
+            String perm = permissions.get(name);
+            if (!name.startsWith(SPACE_PREFIX2)) {
               service.unpublishDocumentToUser(name, (ExtendedNode) node);
+              service.publishDocumentToUser(name, node, message, perm);
+              isShared = true;
             } else {
               String groupId = name.substring("*:".length());
               service.unpublishDocumentToSpace(groupId, (ExtendedNode) node);
+              service.publishDocumentToSpace(groupId, node, message, perm);
+              isShared = true;
             }
-          } catch (RepositoryException e) {
-            uiApp.addMessage(new ApplicationMessage("UIShareDocuments.label.InvalidEntry", null,
-                ApplicationMessage.WARNING));
+          } else if (!name.startsWith(SPACE_PREFIX2)) {
+            service.unpublishDocumentToUser(name, (ExtendedNode) node);
+          } else {
+            String groupId = name.substring("*:".length());
+            service.unpublishDocumentToSpace(groupId, (ExtendedNode) node);
           }
         }
         if (entries.size() > 0) {
@@ -268,32 +236,9 @@ public class UIShareDocuments extends UIForm implements UIPopupComponent{
             else {
               String perm = permissions.get(entry);
               if (entry.startsWith(SPACE_PREFIX2)) {
-                String groupId = spaceService.getSpaceByPrettyName(entry.substring(SPACE_PREFIX2.length())).getGroupId();
-                NotificationContext ctx = NotificationContextImpl.cloneInstance().append(ShareFileToSpacePlugin.NODE, node)
-                    .append(ShareFileToSpacePlugin.SENDER, ConversationState.getCurrent().getIdentity().getUserId())
-                    .append(ShareFileToSpacePlugin.NODEID, node.getUUID())
-                    .append(ShareFileToUserPlugin.URL, documentService.getDocumentUrlInSpaceDocuments(node, groupId))
-                    .append(ShareFileToSpacePlugin.RECEIVER, groupId)
-                    .append(ShareFileToSpacePlugin.PERM, perm)
-                    .append(ShareFileToSpacePlugin.ICON, uiform.getDefaultThumbnail(node))
-                    .append(ShareFileToSpacePlugin.MIMETYPE, uiform.getMimeType(node))
-                    .append(ShareFileToSpacePlugin.ACTIVITY_ID, activityId)
-                    .append(ShareFileToSpacePlugin.MESSAGE, message);
-                ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(ShareFileToSpacePlugin.ID))).execute(ctx);
                 isShared = true;
               } else {
                 service.publishDocumentToUser(entry, node, message, perm);
-                NotificationContext ctx = NotificationContextImpl.cloneInstance().append(ShareFileToUserPlugin.NODE, node)
-                    .append(ShareFileToUserPlugin.SENDER, ConversationState.getCurrent().getIdentity().getUserId())
-                    .append(ShareFileToUserPlugin.NODEID, node.getUUID())
-                    .append(ShareFileToUserPlugin.URL, documentService.getDocumentUrlInPersonalDocuments(node, entry))
-                    .append(ShareFileToUserPlugin.RECEIVER, entry)
-                    .append(ShareFileToUserPlugin.PERM, perm)
-                    .append(ShareFileToUserPlugin.ICON, uiform.getDefaultThumbnail(node))
-                    .append(ShareFileToUserPlugin.MIMETYPE, uiform.getMimeType(node))
-                    .append(ShareFileToUserPlugin.MESSAGE, message);
-
-                ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(ShareFileToUserPlugin.ID))).execute(ctx);
                 isShared = true;
               }
             }
