@@ -127,7 +127,7 @@ public class FavoriteServiceImpl implements org.exoplatform.services.cms.documen
       }
       return false;
     } catch (Exception e) {
-      LOG.warn("Cannot get the identifier of the node");
+      LOG.warn("Cannot get the identifier of the node", e.getMessage());
       return false;
     }
   }
