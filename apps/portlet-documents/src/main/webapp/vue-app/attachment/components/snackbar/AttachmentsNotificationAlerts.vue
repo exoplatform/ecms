@@ -45,7 +45,9 @@ export default {
   },
   methods: {
     addAlert(alert) {
-      if (alert) {
+      //check if the alert is already displayed
+      const alertExists = this.alerts.some((existingAlert) => existingAlert.message === alert.message && existingAlert.type === alert.type);
+      if (alert && !alertExists) {
         this.alerts.push(alert);
         // eslint-disable-next-line no-magic-numbers
         window.setTimeout(() => this.deleteAlert(alert), 5000);
