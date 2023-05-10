@@ -199,17 +199,16 @@ export default {
         });
       }
 
-      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).forEach((newFile, index) => {
-        if (this.attachments.length === this.maxFilesCount) {
-          if (this.newUploadedFiles[index - 1] || index === 0) {
-            this.$root.$emit('attachments-notification-alert', {
-              message: this.maxFileCountErrorLabel,
-              type: 'error',
-            });
-          }
-          return;
+      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).every((newFile, index) => {
+        if (index === this.maxFilesCount || this.maxFilesCount === 0) {
+          this.$root.$emit('attachments-notification-alert', {
+            message: this.maxFileCountErrorLabel,
+            type: 'error',
+          });
+          return false;
         } else {
           this.queueUpload(newFile);
+          return true;
         }
       });
       this.$refs.uploadInput.value = null;
