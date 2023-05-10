@@ -200,7 +200,7 @@ export default {
       }
 
       newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).every((newFile, index) => {
-        if (index === 3 || this.maxFilesCount === 0) {
+        if (index === this.maxFilesCount || this.maxFilesCount === 0) {
           this.$root.$emit('attachments-notification-alert', {
             message: this.maxFileCountErrorLabel,
             type: 'error',
