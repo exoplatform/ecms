@@ -80,6 +80,11 @@ export default {
       return this.$vuetify.breakpoint.name === 'xs' || this.$vuetify.breakpoint.name === 'sm';
     },
   },
+  watch: {
+    files(files){
+      this.attachedFiles = files;
+    }
+  },
   created() {
     document.addEventListener('open-activity-attachments', () => this.openAttachmentDrawer());
     document.addEventListener('attachment-added', event => this.addAttachment(event.detail));
