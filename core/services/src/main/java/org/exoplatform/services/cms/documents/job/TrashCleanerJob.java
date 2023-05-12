@@ -39,8 +39,7 @@ public class TrashCleanerJob implements Job {
 
   private static final Log LOG = ExoLogger.getLogger(TrashCleanerJob.class);
 
-  public TrashCleanerJob() {
-  }
+  public static final String EXO_AUDIT = "exo:audit";
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
     String timeLimit = System.getProperty("exo.trashcleaner.lifetime");
@@ -48,11 +47,16 @@ public class TrashCleanerJob implements Job {
       timeLimit = "30";
     LOG.info("Start TrashCleanerJob, delete nodes in trash older than " + timeLimit + " days.");
     TrashService trashService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(TrashService.class);
-    int deletedNode = 0;
+
     Node trashNode = trashService.getTrashHomeNode();
 
-    try {
+    int deletedNode = processDelete(timeLimit, trashNode);
+    LOG.info("Empty Trash folder successfully! " + deletedNode + " nodes deleted");
+  }
 
+  private int processDelete(String timeLimit, Node trashNode) {
+    int deletedNode = 0;
+    try {
       if (trashNode.hasNodes()) {
         NodeIterator childNodes = trashNode.getNodes();
         long size = childNodes.getSize();
@@ -76,12 +80,10 @@ public class TrashCleanerJob implements Job {
               if ((Calendar.getInstance().getTimeInMillis() - dateCreated > Long.parseLong(timeLimit) * 24 * 60 * 60 * 1000)
                   && (currentNode.isNodeType("exo:restoreLocation"))) {
                 recursiveDelete(currentNode);
-//                deleteNode(currentNode);
                 deletedNode++;
               }
             } else {
               recursiveDelete(currentNode);
-//              deleteNode(currentNode);
               deletedNode++;
             }
           } catch (Exception ex) {
@@ -92,7 +94,7 @@ public class TrashCleanerJob implements Job {
     } catch (RepositoryException ex) {
       LOG.error("Failed to get child nodes", ex);
     }
-    LOG.info("Empty Trash folder successfully! " + deletedNode + " nodes deleted");
+    return deletedNode;
   }
 
   public void recursiveDelete(Node node) throws Exception {
@@ -117,29 +119,10 @@ public class TrashCleanerJob implements Job {
     LOG.debug("Try to delete node {}",node.getPath());
     try {
       Node nodeToDelete = readNodeWithNewSession(node,sessionForDeleteNode);
-      try {
-        removeReferences(nodeToDelete);
-      } catch (Exception ex) {
-        LOG.error("An error occurs while removing relations for node {}", nodeToDelete.getPath(), ex);
-      }
-
-      try {
-        actionService.removeAction(nodeToDelete, repoService.getCurrentRepository().getConfiguration().getName());
-      } catch (Exception ex) {
-        LOG.error("An error occurs while removing actions related to node {} ", nodeToDelete.getPath(), ex);
-      }
-      try {
-        thumbnailService.processRemoveThumbnail(nodeToDelete);
-      } catch (Exception ex) {
-        LOG.error("An error occurs while removing thumbnail for node {} ", nodeToDelete.getPath(), ex);
-      }
-      try {
-        if (checkPermission(nodeToDelete,"remove") && nodeToDelete.isNodeType("exo:auditable")) {
-          removeAuditForNode(nodeToDelete, repoService.getCurrentRepository());
-        }
-      } catch (Exception ex) {
-        LOG.error("An error occurs while removing audit for node {}", nodeToDelete.getPath(), ex);
-      }
+      removeReferences(nodeToDelete);
+      removeActions(actionService, repoService, nodeToDelete);
+      removeThumbNails(thumbnailService, nodeToDelete);
+      removeAuditForNode(nodeToDelete, repoService.getCurrentRepository());
       nodeToDelete.remove();
       nodeToDelete.getSession().save();
       LOG.debug("Node " + nodeToDelete.getPath() + " deleted");
@@ -155,7 +138,27 @@ public class TrashCleanerJob implements Job {
     }
   }
 
-  private static boolean checkPermission(Node node, String permissionType) throws RepositoryException {
+  private void removeThumbNails(ThumbnailService thumbnailService, Node nodeToDelete) {
+    String nodePath = "";
+    try {
+      nodePath = nodeToDelete.getPath();
+      thumbnailService.processRemoveThumbnail(nodeToDelete);
+    } catch (Exception ex) {
+      LOG.error("An error occurs while removing thumbnail for node {} ", nodePath, ex);
+    }
+  }
+
+  private void removeActions(ActionServiceContainer actionService, RepositoryService repoService, Node nodeToDelete) {
+    String nodePath = "";
+    try {
+      nodePath = nodeToDelete.getPath();
+      actionService.removeAction(nodeToDelete, repoService.getCurrentRepository().getConfiguration().getName());
+    } catch (Exception ex) {
+      LOG.error("An error occurs while removing actions related to node {} ", nodePath, ex);
+    }
+  }
+
+  private boolean checkPermission(Node node, String permissionType) throws RepositoryException {
     try {
       ((ExtendedNode)node).checkPermission(permissionType);
       return true;
@@ -169,37 +172,53 @@ public class TrashCleanerJob implements Job {
     return ((SessionImpl)sessionForDeleteNode).getNodeByIdentifier(idf);
   }
 
-  private void removeReferences(Node node) throws Exception {
-    RelationsService relationService =ExoContainerContext.getCurrentContainer()
-                                                         .getComponentInstanceOfType(RelationsService.class);
+  private void removeReferences(Node node) {
+    String nodePath = "";
+    try {
+      nodePath=node.getPath();
+      RelationsService relationService =ExoContainerContext.getCurrentContainer()
+                                                           .getComponentInstanceOfType(RelationsService.class);
 
 
-    PropertyIterator iter = node.getReferences();
-    if (iter.hasNext()) {
-      // if there is a reference, move it
-      String relationPath = iter.nextProperty().getPath();
-      LOG.debug("Node " + node.getPath() + " is referenced by " + relationPath + ", remove the referenec");
+      PropertyIterator iter = node.getReferences();
+      if (iter.hasNext()) {
+        // if there is a reference, move it
+        String relationPath = iter.nextProperty().getPath();
+        LOG.debug("Node " + node.getPath() + " is referenced by " + relationPath + ", remove the referenec");
 
-      Item relation = node.getSession().getItem(relationPath);
-      Node sourceRelationNode = relation.getParent();
+        Item relation = node.getSession().getItem(relationPath);
+        Node sourceRelationNode = relation.getParent();
 
-      relationService.removeRelation(sourceRelationNode,node.getPath());
+        relationService.removeRelation(sourceRelationNode,node.getPath());
+      }
+
+      NodeIterator children = node.getNodes();
+      while (children.hasNext()) {
+        Node child = children.nextNode();
+        removeReferences(child);
+      }
+    } catch (Exception ex) {
+      LOG.error("An error occurs while removing relations for node {}", nodePath, ex);
     }
-
-    NodeIterator children = node.getNodes();
-    while (children.hasNext()) {
-      Node child = children.nextNode();
-      removeReferences(child);
-    }
-
   }
 
-  private void removeAuditForNode(Node node, ManageableRepository repository) throws Exception {
-    Session session = SessionProvider.createSystemProvider().getSession(node.getSession().getWorkspace().getName(), repository);
-    if (session.getRootNode().hasNode("exo:audit") && session.getRootNode().getNode("exo:audit").hasNode(node.getUUID())) {
-      session.getRootNode().getNode("exo:audit").getNode(node.getUUID()).remove();
-      session.save();
+  private void removeAuditForNode(Node node, ManageableRepository repository) {
+    String nodePath = "";
+
+    try {
+      nodePath=node.getPath();
+      if (checkPermission(node,"remove") && node.isNodeType("exo:auditable")) {
+        Session session = SessionProvider.createSystemProvider().getSession(node.getSession().getWorkspace().getName(), repository);
+        if (session.getRootNode().hasNode(EXO_AUDIT) && session.getRootNode().getNode(EXO_AUDIT).hasNode(node.getUUID())) {
+          session.getRootNode().getNode(EXO_AUDIT).getNode(node.getUUID()).remove();
+          session.save();
+        }
+      }
+    } catch (Exception ex) {
+      LOG.error("An error occurs while removing audit for node {}", nodePath, ex);
     }
+
+
   }
 
 }
