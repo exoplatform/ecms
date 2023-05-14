@@ -279,7 +279,7 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Trazar Metadatos</title>
+    <title>Mapear metadatos</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>Aplicar</Save>
