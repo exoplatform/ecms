@@ -64,7 +64,9 @@ public class TrashCleanerJob implements Job {
 
         while (childNodes.hasNext()) {
           Node currentNode = (Node) childNodes.next();
-
+          if (!currentNode.getSession().isLive()) {
+            currentNode.getSession().refresh(false);
+          }
           try {
             current++;
             if (current % 50 == 0) {
