@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>maven-parent-exo-pom</artifactId>
+    <artifactId>maven-exo-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
     <version>26-M01</version>
     <relativePath />
@@ -19,7 +19,7 @@
     <module>ext</module>
     <module>ecm-wcm-extension</module>
     <module>testsuite</module>
-<!--    <module>ecms-social-integration</module>-->
+    <module>ecms-social-integration</module>
     <module>ecms-packaging</module>
   </modules>
   <scm>
