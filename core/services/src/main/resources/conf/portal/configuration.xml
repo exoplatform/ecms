@@ -66,4 +66,26 @@
       <type>org.exoplatform.services.attachments.plugin.ComposerAttachmentFeaturePlugin</type>
     </component-plugin>
   </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
+    <component-plugin>
+      <name>TrashCleaner</name>
+      <set-method>addCronJob</set-method>
+      <type>org.exoplatform.services.scheduler.CronJob</type>
+      <description>add a cron job to the JobSchedulerService</description>
+      <init-params>
+        <properties-param>
+          <name>cronjob.info</name>
+          <description>Trash Cleaner Job</description>
+          <property name="job"
+                    value="org.exoplatform.services.cms.documents.job.TrashCleanerJob"/>
+          <property name="groupName" value="group1"/>
+          <!-- launch every saturday night at 8PM -->
+          <property name="expression" value="${exo.trashcleaner.cron.expression:0 0 20 ? * SAT}"/>
+          <property name="jobName" value="TrashCleanerJob"/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 </configuration>
