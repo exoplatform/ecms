@@ -69,6 +69,7 @@ export default {
       maxProgress: 100,
       newUploadedFiles: [],
       abortUploading: false,
+      uploadedFilesCount: 0
     };
   },
   computed: {
@@ -89,6 +90,7 @@ export default {
     uploadFinished() {
       if (this.uploadFinished && this.uploadingCount === 0) {
         this.$root.$emit('link-new-added-attachments');
+        this.uploadedFilesCount += this.newUploadedFiles.length;
         this.newUploadedFiles = [];
       }
     }
@@ -200,7 +202,7 @@ export default {
       }
 
       newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).every((newFile, index) => {
-        if (index === this.maxFilesCount || this.maxFilesCount === 0) {
+        if (index === this.maxFilesCount || this.maxFilesCount === 0 || this.uploadedFilesCount >= this.maxFilesCount) {
           this.$root.$emit('attachments-notification-alert', {
             message: this.maxFileCountErrorLabel,
             type: 'error',
@@ -323,6 +325,7 @@ export default {
     resetUploadInput() {
       this.newUploadedFiles = [];
       this.uploadingCount = 0;
+      this.uploadedFilesCount = 0;
     },
     abortUploadingNewAttachments() {
       this.resetUploadInput();
