@@ -592,7 +592,7 @@
       <GetURL>Copier l'URL</GetURL>
       <AddThumbnail>Ajouter/Supprimer une Vignette</AddThumbnail>
       <AddToFavourite>Ajouter à mes favoris</AddToFavourite>
-      <RemoveFromFavourite>Supprimer</RemoveFromFavourite>
+      <RemoveFromFavourite>Supprimer des favoris</RemoveFromFavourite>
       <MoveToTrash>Déplacer vers la Corbeille</MoveToTrash>
       <RestoreFromTrash>Restaurer</RestoreFromTrash>
       <EmptyTrash>Supprimer</EmptyTrash>

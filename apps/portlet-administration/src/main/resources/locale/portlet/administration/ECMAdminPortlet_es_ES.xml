@@ -753,7 +753,7 @@
   <UIActionTypeForm>
     <title>Añadir el tipo de acción</title>
     <label>
-      <actionType>Extender el Tipo de Acción:</actionType>
+      <actionType>Extender el tipo de acción:</actionType>
       <name>Nombre:</name>
       <isMove>es la acción con movimiento:</isMove>
       <variables>Variables:</variables>
@@ -2433,13 +2433,13 @@
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <NextAddAction>Siguiente</NextAddAction>
-      <Previous>Previo</Previous>
+      <Previous>Anterior</Previous>
     </action>
   </UIPermissionTreeForm>
 
   <UIActionForm>
     <action>
-      <PreviousViewPermission>Previo</PreviousViewPermission>
+      <PreviousViewPermission>Anterior</PreviousViewPermission>
       <NextViewTree>Siguiente</NextViewTree>
     </action>
     <msg>
@@ -2450,7 +2450,7 @@
 
   <UITaxonomyTreeWorkingArea>
     <action>
-      <Previous>Previo</Previous>
+      <Previous>Anterior</Previous>
     </action>
   </UITaxonomyTreeWorkingArea>
 
