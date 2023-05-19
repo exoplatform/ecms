@@ -20,6 +20,8 @@ import org.w3c.dom.Element;
 import javax.jcr.Node;
 import java.text.SimpleDateFormat;
 
+import static org.exoplatform.wcm.connector.fckeditor.DriverConnector.FILE_TYPE_SIMPLE_IMAGE;
+
 public class FCKFileHandler {
 
   public static Element createFileElement(Document document,
@@ -40,6 +42,9 @@ public class FCKFileHandler {
     Element file = document.createElement("File");
     AutoVersionService autoVersionService=WCMCoreUtils.getService(AutoVersionService.class);
     file.setAttribute("name", Utils.getTitle(displayNode));
+    if (sourceNode.hasProperty("ecd:thumbnailUrl") && fileType.equals(FILE_TYPE_SIMPLE_IMAGE)) {
+      file.setAttribute("thumbnailUrl", sourceNode.getProperty("ecd:thumbnailUrl").getString());
+    }
     if (childRelativePath != null) {
       file.setAttribute("currentFolder", childRelativePath);
     }
