@@ -2,6 +2,7 @@
   var UISelectFromDrives = {
       personalDriveName : "Personal Documents",
       defaultPrivateLocation : "Public",
+      thumbnailUrl : '',
       init : function(imageDialogWindowCnt, spaceGroupId, callback) {
         this.driveDatas = null;
         this.callback = callback;
@@ -71,7 +72,11 @@
           this.selectBTN.on("click", function() {
             self.imageDialogWindowCnt.find(" > *").removeClass("hidden");
             self.selectExistingDriveCnt.addClass("hidden");
-            self.callback(window.location.origin + self.selectedFileURL);
+            if (self.thumbnailUrl && self.thumbnailUrl !== 'undefined') {
+              self.callback(self.thumbnailUrl);
+            } else {
+              self.callback(window.location.origin + self.selectedFileURL);
+            }
             self.selectExistingDriveCnt.find(".fileSelection").removeClass("selected");
             self.setSelectedFile();
           });
@@ -205,15 +210,23 @@
               filesArray.each(function() {
                 var relativePath = $(this).attr("path").replace(self.selectedDriveData.attr("path") + "/", "");
                 $('<div class="fileSelection">' +
-                  '<a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="" data-original-title="' + $(this).attr("title") + '" data-name="' + $(this).attr("name") + '" data-url="' + $(this).attr("url") + '">' +
+                  '<a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="" data-original-title="' + $(this).attr("title") + '" data-name="' + $(this).attr("name") + '" data-url="' + $(this).attr("url") + '" thumbnail-url="' + $(this).attr("thumbnailUrl") + '">' +
                     '<div class="' + $(this).attr("nodeTypeCssClass") + ' selectionIcon center"></div>' +
                     '<div class="selectionLabel truncate center">' + $(this).attr("title") + '</div>' +
                   '</a>' +
                 '</div>').insertAfter(".selectExistingDriveDialog .filesTitle");
               });
               this.selectExistingDriveCnt.find(".fileSelection a").on("click", function() {
+                var fileURL = '';
                 self.selectExistingDriveCnt.find(".fileSelection").removeClass("selected");
-                self.setSelectedFile($(this).attr("data-url"));
+                if ($(this).attr("thumbnail-url") && $(this).attr("thumbnail-url") !== 'undefined') {
+                  self.thumbnailUrl = $(this).attr("thumbnail-url");
+                  fileURL = self.thumbnailUrl;
+                } else {
+                  self.thumbnailUrl = '';
+                  fileURL = $(this).attr("data-url");
+                }
+                self.setSelectedFile(fileURL);
                 $(this).parent().addClass("selected");
               });
             }
