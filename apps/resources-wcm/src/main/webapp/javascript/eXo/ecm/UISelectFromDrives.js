@@ -289,7 +289,7 @@
           });
         }
         $('*[rel="tooltip"]').tooltip();
-        this.selectExistingDriveCnt.find(".searchBox input").trigger("keyup");
+        this.selectExistingDriveCnt.find(".searchBox input").val('').trigger("keyup");
       },
       initSearchBox : function($parentElement) {
         if($.expr && $.expr.createPseudo) {
