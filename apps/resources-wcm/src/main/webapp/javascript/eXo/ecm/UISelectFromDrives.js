@@ -258,7 +258,7 @@
               $('<div class="driveData" rel="tooltip" data-placement="bottom" title="" data-original-title="' + $(this).attr("label") + '" style="width:135px;">' +
                   '<a href="javascript:void(0);" data-name="' + $(this).attr("name") + '">' +
                     '<i class="' + $(this).attr("nodeTypeCssClass") + ' uiIconEcms24x24Drive' + $(this).attr("name").replace(" ", "") + ' uiIconEcms24x24DrivePrivate uiIconEcmsLightGray selectionIcon center"></i>' +
-                    '<div class="selectionLabel center">' + $(this).attr("label") + '</div>' +
+                    '<div class="selectionLabel truncate center">' + $(this).attr("label") + '</div>' +
                   '</a>' +
                 '</div>').insertAfter(".selectExistingDriveDialog .filesTitle");
             });
@@ -268,7 +268,7 @@
               $('<div class="driveData" rel="tooltip" data-placement="bottom" title="" data-original-title="' + $(this).attr("label") + '" style="width:135px;">' +
                   '<a href="javascript:void(0);" data-name="' + $(this).attr("name") + '">' +
                     '<i class="' + $(this).attr("nodeTypeCssClass") + ' uiIconEcms24x24Drive' + $(this).attr("name").replace(" ", "") + ' uiIconEcms24x24DriveGroup uiIconEcmsLightGray selectionIcon center"></i>' +
-                    '<div class="selectionLabel center">' + $(this).attr("label") + '</div>' +
+                    '<div class="selectionLabel truncate center">' + $(this).attr("label") + '</div>' +
                   '</a>' +
                 '</div>').insertAfter(".selectExistingDriveDialog .filesTitle");
             });
@@ -278,7 +278,7 @@
               $('<div class="driveData" rel="tooltip" data-placement="bottom" title="" data-original-title="' + $(this).attr("label") + '" style="width: 135px;">' +
                   '<a href="javascript:void(0);" data-name="' + $(this).attr("name") + '">' +
                     '<i class="' + $(this).attr("nodeTypeCssClass") + ' uiIconEcms24x24Drive' + $(this).attr("name").replace(" ", "") + ' uiIconEcms24x24DriveGeneral uiIconEcmsLightGray selectionIcon center"></i>' +
-                    '<div class="selectionLabel center">' + $(this).attr("label") + '</div>' +
+                    '<div class="selectionLabel truncate center">' + $(this).attr("label") + '</div>' +
                   '</a>' +
                 '</div>').insertAfter(".selectExistingDriveDialog .filesTitle");
             });
