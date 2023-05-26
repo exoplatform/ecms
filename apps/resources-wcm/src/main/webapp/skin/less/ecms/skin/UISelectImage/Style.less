@@ -1,0 +1,257 @@
+.selectExistingDriveDialog {
+	
+	.popupContent {
+		padding: 0;
+	}
+	#UIDocActivityPopup {
+		#UIDocumentSelectorTab, #UIFolderSelectorTab {
+			.breadcrumbContainer {
+				display: inline-block;
+				padding: 5px 20px;
+				border-bottom: 1px #ccc solid;
+				box-sizing: border-box;
+				line-height: 33px;
+				width: 100%;
+				.breadcrumb {
+					margin: 6px 0;
+					display: flex;
+					.backBTN {
+						display: none;
+					}
+		
+					> li {
+						height: 21px;
+						max-width: 100px;
+						display: flex;
+						a {
+							float: initial;
+						}
+					}
+		
+					.uiIconMiniArrowRight {
+						margin: 7px 5px 5px 5px;
+					}
+		
+					.active {
+						color: #2f5e92;
+						max-width: 100px;
+					}
+				}
+		
+				.searchBox {
+					width: 150px;
+					position: relative;
+					> input {
+						width: 100%;
+						margin: 0;
+						padding: 0 0 0 6px;
+					}
+		
+					> a {
+						position: absolute;
+						right: 5px;
+						top: 4px;
+					}
+				}
+			}
+		
+			.selectionBox {
+				height: 350px;
+				max-height: 350px;
+				overflow: auto;
+				padding: 5px;
+				background-position-y: -50px;
+				background-size: 100%;
+				background-repeat: no-repeat;
+		
+				h4 {
+					margin-left: 20px;
+				}
+		
+				.driveData , .folderSelection , .fileSelection {
+					display: inline-table;
+					text-align: center;
+					border: 1px transparent solid;
+				}
+		
+				.folderSelection , .fileSelection {
+					margin: 5px;
+					width: 95px;
+					padding: 0;
+				}
+		
+				.driveData {
+					margin: 0 5px;
+					width: 114px;
+					padding: 20px;
+				}
+		
+				.center {
+					margin: auto;
+					padding: 2px;
+					text-align: center;
+					word-break: normal;
+				}
+		
+				.selectionLabel {
+					padding-top: 2px;
+					display: block;
+					padding: 0;
+					color: #000;
+				}
+		
+				.folderSelection .selectionIcon {
+					padding-bottom: 2px;
+					font-size: 55px;
+				}
+		
+				.driveData .selectionIcon {
+					padding-bottom: 2px;
+					font-size: 55px;
+				}
+		
+				.fileSelection .selectionIcon {
+					display: inline-block;
+					height: 55px;
+					width: 55px;
+					margin-top: 2px;
+					background-size: 100%;
+					background-repeat: no-repeat;
+				}
+		
+				.fileSelection.selected {
+					border: 1px #2f5e92 solid;
+					background-repeat: no-repeat;
+					background-position-x: 102%;
+					background-position-y: -2px;
+					background-image: url("@{images-path}/social/skin/Activity/selectedDocument.gif");
+				}
+		
+				.truncate {
+					max-width: 90px;
+					width: 90px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+			.emptyFolder, .emptyResults {
+				margin: auto 0;
+				line-height: 50px;
+				display: block;
+				text-align: center;
+				vertical-align: middle;
+				font-size: 1.5em;
+				color: black;
+				white-space: pre-line;
+				display: none;
+				background-position-x: 50%;
+				background-repeat: no-repeat;
+				margin-top: 15%;
+				padding-top: 45px;
+			}
+		
+			.emptyFolder {
+				background-image: url("@{images-path}/social/skin/Activity/emptyfolder.png");
+			}
+		
+			.emptyResults {
+				background-image: url("@{images-path}/social/skin/Activity/noresult.png");
+			}
+		
+			.fileAlreadySelected {
+				position: absolute;
+				width: 75%;
+				opacity: 0.9;
+			}
+		}
+		.uiActionBorder {
+			height:auto !important;
+			margin-left: 0 !important;
+			margin-right: 0 !important;
+			margin-top: 0 !important;
+			padding: 15px !important;
+		}
+	}
+	.uiBgd64x64FileDefault {
+		display: inline-block;
+		height: 55px;
+		width: 55px;
+		margin-top: 2px;
+		background-size: 100%;
+		background-repeat: no-repeat;
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileDefault.png");
+	}
+	
+	.uiBgd64x64FileFlash , .uiBgd64x64applicationx-shockwave-flash , .uiBgd64x64videox-flv {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileFlash.png");
+	}
+	
+	.uiBgd64x64FileFont , .uiBgd64x64fonttff , .uiBgd64x64fontotf , .uiBgd64x64fontttc , .uiBgd64x64fonteot , .uiBgd64x64fontdfont , .uiBgd64x64fontttf , .uiBgd64x64fontwoff {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileFont.png");
+	}
+	
+	.uiBgd64x64FileGdraw , .uiBgd64x64applicationvndgoogle-appsdrawing {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileGdraw.png");
+	}
+	
+	.uiBgd64x64FileBmp , .uiBgd64x64imagebmp {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileBmp.png");
+	}
+	
+	.uiBgd64x64FileIco , .uiBgd64x64imagex-icon {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileIco.png");
+	}
+	
+	.uiBgd64x64FileGif , .uiBgd64x64imagegif {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileGif.png");
+	}
+	
+	.uiBgd64x64FileOdg , .uiBgd64x64applicationvndoasisopendocumentgraphics {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileOdg.png");
+	}
+	
+	.uiBgd64x64FilePng , .uiBgd64x64imagepng {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FilePng.png");
+	}
+	
+	.uiBgd64x64FilePsd , .uiBgd64x64imagepsd , .uiBgd64x64applicationx-photoshop {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FilePsd.png");
+	}
+	
+	.uiBgd64x64FileRaw , .uiBgd64x64applicationraw {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileRaw.png");
+	}
+	
+	.uiBgd64x64FileTif , .uiBgd64x64imagetiff {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileTif.png");
+	}
+	
+	.uiBgd64x64FileXcf , .uiBgd64x64imagexcf {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileXcf.png");
+	}
+	
+	.uiBgd64x64FileIndd , .uiBgd64x64applicationx-indesign {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileIndd.png");
+	}
+	
+	.uiBgd64x64FileAi , .uiBgd64x64applicationillustrator , .uiBgd64x64applicationeps {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileAi.png");
+	}
+	
+	.uiBgd64x64FileSvg , .uiBgd64x64imagesvg-xml {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileSvg.png");
+	}
+	
+	.uiBgd64x64FileJpg , .uiBgd64x64imagejpeg {
+		background-image: url("@{images-path}/Icons/TypeIcons/EmailNotificationIcons/uiIcon64x64FileJpg.png");
+	}
+	
+	.uiBgdFile {
+		background: url("@{images-path}/social/skin/Activity/Fileicons/file.png") no-repeat top center /50%;
+	}
+	
+	.uiBgdFileImage {
+		background: url("@{images-path}/social/skin/Activity/Fileicons/image.png") no-repeat top center /50%;
+	}
+}
