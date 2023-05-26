@@ -831,7 +831,7 @@ public class Utils {
              .append(repository)
              .append("/")
              .append(workspace)
-             .append(originalNodePath.replace("%", "%25"));
+             .append(originalNodePath.replaceAll("%", "%25"));
     if (withTimeParam) {
       if (imagePath.indexOf("?") > 0) {
         imagePath.append("&time=");
