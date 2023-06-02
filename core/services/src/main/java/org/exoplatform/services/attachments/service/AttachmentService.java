@@ -175,4 +175,13 @@ public interface AttachmentService {
    * @return the registered AttachmentEntityTypePlugin
    */
   public AttachmentEntityTypePlugin getAttachmentEntityTypePlugin (String entityType);
+
+  /**
+   * Mark document as viewed
+   *
+   * @param nodeId              document node id
+   * @param viewer              document viewer username
+   * @return total number of views
+   */
+  long markAttachmentAsViewed(String nodeId, String viewer);
 }
