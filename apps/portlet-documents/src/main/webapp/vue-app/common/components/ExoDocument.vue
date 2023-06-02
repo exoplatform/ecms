@@ -29,6 +29,7 @@
   </v-list-item>
 </template>
 <script>
+
 export default {
   props: {
     document: {
@@ -139,6 +140,7 @@ export default {
         },
         showComments: false
       });
+      document.dispatchEvent(new CustomEvent('mark-attachment-as-viewed', {detail: {file: this.document}}));
     }
   }
 };

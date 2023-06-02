@@ -1,15 +1,13 @@
 package org.exoplatform.services.attachments.service;
 
+import static org.exoplatform.services.wcm.core.NodetypeConstant.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 import java.util.*;
 
-import javax.jcr.Node;
-import javax.jcr.Property;
-import javax.jcr.Session;
-import javax.jcr.Workspace;
+import javax.jcr.*;
 
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -19,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -363,4 +362,25 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     }
   }
 
+  @Test
+  public void markAttachmentAsViewed() throws RepositoryException {
+    Session session = mock(Session.class);
+    MockedStatic<Utils> UTILS = mockStatic(Utils.class);
+    Node node = mock(Node.class);
+    UTILS.when(() -> Utils.getSession(sessionProviderService, repositoryService)).thenReturn(session);
+    UTILS.when(() -> Utils.getNodeByIdentifier(session, "123")).thenReturn(node);
+    UTILS.when(() -> Utils.markDocumentAsViewed(session, "123", "user")).thenCallRealMethod();
+    lenient().when(node.canAddMixin(DOCUMENTS_VIEW_MIXIN)).thenReturn(true);
+    lenient().when(node.hasProperty(DOCUMENT_VIEWS_PROPERTY)).thenReturn(true);
+    lenient().when(node.hasProperty(DOCUMENT_VIEWERS_PROPERTY)).thenReturn(true);
+    Property property = mock(Property.class);
+    Value value = mock(Value.class);
+    lenient().when(node.getProperty(DOCUMENT_VIEWS_PROPERTY)).thenReturn(property);
+    lenient().when(node.getProperty(DOCUMENT_VIEWERS_PROPERTY)).thenReturn(property);
+    lenient().when(property.getValue()).thenReturn(value);
+    lenient().when(value.getLong()).thenReturn(1L);
+    lenient().when(property.getString()).thenReturn("user");
+    attachmentService.markAttachmentAsViewed("123", "user");
+    verify(session, times(1)).save();
+  }
 }

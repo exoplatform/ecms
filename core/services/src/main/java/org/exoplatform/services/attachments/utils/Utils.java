@@ -24,10 +24,7 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -209,5 +206,33 @@ public class Utils {
     Pattern regex = Pattern.compile("[<\\\\>:\"/|?*]");
     Matcher matcher = regex.matcher(name);
     return !matcher.find();
+  }
+
+  public static long markDocumentAsViewed(Session session, String nodeId, String viewer) throws RepositoryException {
+    long views = 1L;
+    Node node = getNodeByIdentifier(session, nodeId);
+    if (node == null) {
+      return 0L;
+    }
+    if (node.canAddMixin(DOCUMENTS_VIEW_MIXIN)) {
+      node.addMixin(DOCUMENTS_VIEW_MIXIN);
+    }
+    if (node.hasProperty(DOCUMENT_VIEWS_PROPERTY)) {
+      views = node.getProperty(DOCUMENT_VIEWS_PROPERTY).getLong() + 1L;
+      node.setProperty(DOCUMENT_VIEWS_PROPERTY, views);
+    } else {
+      node.setProperty(DOCUMENT_VIEWS_PROPERTY, 1L);
+    }
+    if (node.hasProperty(DOCUMENT_VIEWERS_PROPERTY)) {
+      String viewers = node.getProperty(DOCUMENT_VIEWERS_PROPERTY).getString();
+      boolean exist = Arrays.asList(viewers.split(",")).contains(viewer);
+      if (!exist) {
+        node.setProperty(DOCUMENT_VIEWERS_PROPERTY, viewers + "," + viewer);
+      }
+    } else {
+      node.setProperty(DOCUMENT_VIEWERS_PROPERTY, viewer);
+    }
+    session.save();
+    return views;
   }
 }
