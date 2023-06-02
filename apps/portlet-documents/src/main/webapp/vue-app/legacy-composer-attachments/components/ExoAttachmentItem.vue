@@ -1,5 +1,7 @@
 <template>
-  <div class="attachment">
+  <div
+    class="attachment"
+    @click="openPreview">
     <div class="fileType">
       <i :class="getIconClassFromFileMimeType(file.mimetype)"></i>
     </div>
@@ -51,6 +53,29 @@ export default {
     },
   },
   methods: {
+    openPreview() {
+      Vue.prototype.$attachmentService.getAttachmentById(this.file.id).then(attachment => {
+        documentPreview.init({
+          doc: {
+            id: attachment.id,
+            repository: 'repository',
+            workspace: 'collaboration',
+            path: attachment.nodePath || attachment.path,
+            title: attachment.title,
+            downloadUrl: attachment.downloadUrl,
+            openUrl: attachment.url || attachment.openUrl,
+            breadCrumb: attachment.previewBreadcrumb,
+            size: attachment.size,
+            isCloudDrive: attachment.cloudDrive
+          },
+          version: {
+            number: attachment.version
+          },
+          showComments: false
+        });
+      });
+      document.dispatchEvent(new CustomEvent('mark-attachment-as-viewed', {detail: {file: this.file}}));
+    },
     getIconClassFromFileMimeType: function(fileMimeType) {
       if (fileMimeType) {
         const fileMimeTypeClass = fileMimeType.replace(/\./g, '').replace('/', '').replace('\\', '');

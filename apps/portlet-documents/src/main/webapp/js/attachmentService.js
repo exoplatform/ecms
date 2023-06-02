@@ -487,3 +487,21 @@ export function checkExistence(driveName, workspaceName, currentFolder, fileName
       .then(text => new DOMParser().parseFromString(text, "text/xml"));
 }
 
+export function markAttachmentAsViewed(nodeId, viewer) {
+  const formData = new FormData();
+  formData.append('viewer', viewer);
+  const params = new URLSearchParams(formData).toString();
+  const url = `${window.location.origin}${eXo.env.portal.context}/${eXo.env.portal.rest}/attachments/viewed/${nodeId}?${params}`;
+  return fetch(url, {
+    headers: {
+      'Content-Type': 'text/plain'
+    },
+    method: 'PATCH'
+  }).then(response => {
+    if (response?.ok) {
+      return response.text();
+    } else {
+      throw response;
+    }
+  });
+}
