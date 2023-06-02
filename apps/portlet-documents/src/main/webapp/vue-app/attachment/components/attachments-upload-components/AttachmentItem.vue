@@ -289,6 +289,9 @@ export default {
     }
   },
   methods: {
+    markDocumentAsViewed() {
+      document.dispatchEvent(new CustomEvent('mark-attachment-as-viewed', {detail: {file: this.attachment}}));
+    },
     detachFile() {
       if (this.canDetachAttachment) {
         this.$root.$emit('remove-attachment-item', this.attachment);
@@ -307,6 +310,7 @@ export default {
     openFileInEditor() {
       if (this.attachment && this.attachment.id) {
         window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}&source=peview`, '_blank');
+        this.markDocumentAsViewed();
       }
     },
     openFile() {
@@ -340,6 +344,7 @@ export default {
           showComments: false
         });
       }
+      this.markDocumentAsViewed();
     }
   }
 };
