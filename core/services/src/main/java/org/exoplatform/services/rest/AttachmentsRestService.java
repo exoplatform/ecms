@@ -46,6 +46,7 @@ import org.exoplatform.services.attachments.service.AttachmentService;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.http.PATCH;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
@@ -449,6 +450,37 @@ public class AttachmentsRestService implements ResourceContainer {
                                                                  identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME,
                                                                                                      currentUser);
     return identity == null ? 0 : Long.parseLong(identity.getId());
+  }
+
+  @PATCH
+  @Produces(MediaType.TEXT_PLAIN)
+  @RolesAllowed("users")
+  @Path("/viewed/{nodeId}")
+  @Operation(summary = "Download a given document", method = "GET", description = "Download a given document")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Request fulfilled"),
+          @ApiResponse(responseCode = "400", description = "Invalid query input"),
+          @ApiResponse(responseCode = "500", description = "Internal server error"), })
+  public Response markAsViewed(@Parameter(description = "node id", required = true)
+                               @PathParam("nodeId") String nodeId,
+                               @Parameter(description = "viewer username", required = true)
+                               @QueryParam("viewer") String viewer) {
+    if (StringUtils.isBlank(nodeId)) {
+      return Response.status(Status.BAD_REQUEST).entity("nodeId is mandatory").build();
+    }
+    if (StringUtils.isBlank(viewer)) {
+      return Response.status(Status.BAD_REQUEST).entity("viewer is mandatory").build();
+    }
+    long userIdentityId = getCurrentUserIdentityId();
+    if (userIdentityId == 0) {
+      return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+    try {
+      long views = attachmentService.markAttachmentAsViewed(nodeId, viewer);
+      return Response.ok(String.valueOf(views)).type(MediaType.TEXT_PLAIN_TYPE).build();
+    } catch (Exception e) {
+      return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+    }
   }
 
   public String getDownloadLink(List<ActivityFileAttachment> activityFileAttachments, String fileName) {

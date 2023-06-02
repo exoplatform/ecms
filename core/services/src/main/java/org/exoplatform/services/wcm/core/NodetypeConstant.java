@@ -268,6 +268,10 @@ public class NodetypeConstant {
   public static final String SHOW_OWNED_BY_USER_DOC = "OwnedByMe";
 
   public static final String EOO_ONLYOFFICE_FILE = "eoo:onlyofficeFile";
-  
 
+  public static final String DOCUMENTS_VIEW_MIXIN      = "mix:documentsView";
+
+  public static final String DOCUMENT_VIEWS_PROPERTY   = "exo:documentViews";
+
+  public static final String DOCUMENT_VIEWERS_PROPERTY = "exo:documentViewers";
 }
