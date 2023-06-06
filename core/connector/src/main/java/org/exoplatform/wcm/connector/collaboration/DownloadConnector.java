@@ -64,7 +64,7 @@ public class DownloadConnector implements ResourceContainer{
     }
     try {
       path = URLDecoder.decode(path, StandardCharsets.UTF_8);
-    }catch (Exception e){
+    } catch (Exception e) {
       LOG.debug("The filePath is already decoded");
     }
     try {
