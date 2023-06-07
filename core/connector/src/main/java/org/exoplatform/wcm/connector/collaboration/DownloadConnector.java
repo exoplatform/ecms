@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Enables downloading the content of _nt\:file_.
@@ -61,7 +62,11 @@ public class DownloadConnector implements ResourceContainer{
     if (!path.startsWith("/")) {
       path = "/" + path;
     }
-
+    try {
+      path = URLDecoder.decode(path, StandardCharsets.UTF_8);
+    } catch (Exception e) {
+      LOG.debug("The filePath is already decoded");
+    }
     try {
       node = (Node) session.getItem(path);
       fileName = node.getName();
