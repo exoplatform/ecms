@@ -204,7 +204,7 @@ export default {
             author: this.author,
             activity: {
               id: this.previewActivity.id,
-              liked: !!this.previewActivity.likes.length,
+              liked: this.previewActivity.hasLiked,
               likes: this.previewActivity.likes.length,
               status: this.previewActivity.title,
               postTime: this.relativePostTime,
