@@ -196,7 +196,7 @@
       } else {
         return $.ajax({
             type: 'DELETE',
-            url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes/' + eXo.env.portal.userName
+            url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes'
           }).done(function (data) {
             self.settings.activity.liked = false;
             self.settings.activity.likes--;
