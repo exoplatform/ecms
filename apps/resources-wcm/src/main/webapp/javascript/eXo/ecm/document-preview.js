@@ -179,9 +179,9 @@
       });
     },
 
-    like: function(like) {
+    like: function(liked) {
       var self = this;
-      if(like) {
+      if(liked === 'false') {
         return $.post('/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes', {liker: eXo.env.portal.userName})
           .done(function (data) {
             self.settings.activity.liked = true;
@@ -453,7 +453,7 @@
                         '</a>' +
                       '</li>' +
                       '<li>' +
-                        '<a href="javascript:void(0);" id="previewLikeLink" onclick="documentPreview.like(!documentPreview.settings.activity.liked)" rel="tooltip" data-placement="bottom" title="${UIActivity.label.Like}">' +
+                        '<a href="javascript:void(0);" id="previewLikeLink" onclick="documentPreview.like(documentPreview.settings.activity.liked)" rel="tooltip" data-placement="bottom" title="${UIActivity.label.Like}">' +
                           '<i class="uiIconThumbUp uiIconLightGray"></i>&nbsp;<span class="nbOfLikes"></span>' +
                         '</a>' +
                       '</li>' +
