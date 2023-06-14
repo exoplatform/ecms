@@ -181,7 +181,7 @@
 
     like: function(liked) {
       var self = this;
-      if(liked === 'false') {
+      if(!liked) {
         return $.post('/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes', {liker: eXo.env.portal.userName})
           .done(function (data) {
             self.settings.activity.liked = true;
