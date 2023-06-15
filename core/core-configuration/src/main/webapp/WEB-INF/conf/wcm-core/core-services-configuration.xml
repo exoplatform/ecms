@@ -492,27 +492,33 @@
 		  <set-method>addListener</set-method>
 		  <type>org.exoplatform.ecm.utils.LockManagerListener</type>
 	  </component-plugin>
-	</external-component-plugins>
-        <external-component-plugins>
-		<target-component>org.exoplatform.upload.UploadService</target-component>
-		<component-plugin>
-			<name>MIME type Plugins for UploadService</name>
-			<set-method>register</set-method>
-			<type>org.exoplatform.upload.MimeTypeUploadPlugin</type>
-			<init-params>
-				<value-param>
-					<name>mimetype-path</name>
-					<value>war:/conf/wcm-core/mimetype/mimetypes.properties</value>
-				</value-param>
-				<value-param>
-					<name>mimetype-default</name>
-					<value>application/octet-stream</value>
-				</value-param>
-			</init-params>
-		</component-plugin>
-	</external-component-plugins>
+        <component-plugin>
+            <name>update-document-views-detail</name>
+            <set-method>addListener</set-method>
+            <type>org.exoplatform.services.attachments.listener.AttachmentViewListener</type>
+        </component-plugin>
+    </external-component-plugins>
 
-  <external-component-plugins profiles="task">
+    <external-component-plugins>
+        <target-component>org.exoplatform.upload.UploadService</target-component>
+        <component-plugin>
+            <name>MIME type Plugins for UploadService</name>
+            <set-method>register</set-method>
+            <type>org.exoplatform.upload.MimeTypeUploadPlugin</type>
+            <init-params>
+                <value-param>
+                    <name>mimetype-path</name>
+                    <value>war:/conf/wcm-core/mimetype/mimetypes.properties</value>
+                </value-param>
+                <value-param>
+                    <name>mimetype-default</name>
+                    <value>application/octet-stream</value>
+                </value-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
+
+    <external-component-plugins profiles="task">
     <target-component>org.exoplatform.services.attachments.service.AttachmentService</target-component>
     <component-plugin>
       <name>TaskAttachmentACLPlugin</name>
