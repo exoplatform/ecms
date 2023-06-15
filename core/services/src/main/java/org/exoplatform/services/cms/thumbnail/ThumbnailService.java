@@ -173,5 +173,5 @@ public interface ThumbnailService {
    * @param targetHeight target resized image height
    * @return byte array of image content
    */
-  byte[] createCustomThumbnail(byte [] imageContent, int targetWidth, int targetHeight) throws Exception;
+  byte[] createCustomThumbnail(byte [] imageContent, int targetWidth, int targetHeight, String mimeType) throws Exception;
 }
