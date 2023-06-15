@@ -310,7 +310,6 @@ export default {
     openFileInEditor() {
       if (this.attachment && this.attachment.id) {
         window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}&source=peview`, '_blank');
-        this.markDocumentAsViewed();
       }
     },
     openFile() {
