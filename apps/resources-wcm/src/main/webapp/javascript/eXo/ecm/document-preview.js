@@ -179,9 +179,9 @@
       });
     },
 
-    like: function(like) {
+    like: function(liked) {
       var self = this;
-      if(like) {
+      if(!liked) {
         return $.post('/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes', {liker: eXo.env.portal.userName})
           .done(function (data) {
             self.settings.activity.liked = true;
@@ -196,7 +196,7 @@
       } else {
         return $.ajax({
             type: 'DELETE',
-            url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes/' + eXo.env.portal.userName
+            url: '/portal/rest/v1/social/activities/' + this.settings.activity.id + '/likes'
           }).done(function (data) {
             self.settings.activity.liked = false;
             self.settings.activity.likes--;
@@ -453,7 +453,7 @@
                         '</a>' +
                       '</li>' +
                       '<li>' +
-                        '<a href="javascript:void(0);" id="previewLikeLink" onclick="documentPreview.like(!documentPreview.settings.activity.liked)" rel="tooltip" data-placement="bottom" title="${UIActivity.label.Like}">' +
+                        '<a href="javascript:void(0);" id="previewLikeLink" onclick="documentPreview.like(documentPreview.settings.activity.liked)" rel="tooltip" data-placement="bottom" title="${UIActivity.label.Like}">' +
                           '<i class="uiIconThumbUp uiIconLightGray"></i>&nbsp;<span class="nbOfLikes"></span>' +
                         '</a>' +
                       '</li>' +
