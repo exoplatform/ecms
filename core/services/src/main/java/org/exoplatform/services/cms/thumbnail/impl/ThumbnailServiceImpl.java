@@ -286,8 +286,11 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * {@inheritDoc}
    */
   @Override
-  public byte[] createCustomThumbnail(byte[] imageContent, int targetWidth, int targetHeight) throws Exception {
-      return imageResizeService.scaleImage(imageContent, targetWidth, targetHeight, false, false);
+  public byte[] createCustomThumbnail(byte[] imageContent, int targetWidth, int targetHeight, String mimeType) throws Exception {
+    if ("image/gif".equalsIgnoreCase(mimeType)){
+      return imageContent;
+    }
+    return imageResizeService.scaleImage(imageContent, targetWidth, targetHeight, false, false);
   }
 
   private BufferedImage toBufferedImage(byte[] imageBytes) throws IOException {

@@ -35,6 +35,7 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.thumbnail.ImageResizeService;
 import org.exoplatform.services.thumbnail.ImageResizeServiceImpl;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Created by The eXo Platform SARL
@@ -340,6 +341,21 @@ public class TestThumbnailService extends BaseWCMTestCase {
     assertTrue(session.itemExists("/" + ThumbnailService.EXO_THUMBNAILS_FOLDER + "/" + identifier));
     thumbnailService.processRemoveThumbnail(test);
     assertFalse(session.itemExists("/" + ThumbnailService.EXO_THUMBNAILS_FOLDER + "/" + identifier));
+  }
+
+  public void testCreateCustomThumbnail() throws Exception {
+    byte[] imageContent = new byte[] { 0x12, 0x34, 0x56, 0x78 };
+    int targetWidth = 100;
+    int targetHeight = 100;
+    String mimeType1 = "image/gif";
+    String mimeType2 = "image/png";
+    byte[] expectedResult = new byte[] { 0x12, 0x34, 0x56, 0x78 };
+    byte[]  result1 = thumbnailService.createCustomThumbnail(imageContent, targetWidth, targetHeight, mimeType1);
+    byte[]  result2 = thumbnailService.createCustomThumbnail(imageContent, targetWidth, targetHeight, mimeType2);
+
+    assertArrayEquals(expectedResult, result1);
+    assertArrayEquals(expectedResult, result2);
+
   }
 
   /**
