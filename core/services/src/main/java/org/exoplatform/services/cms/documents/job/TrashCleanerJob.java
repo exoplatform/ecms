@@ -146,8 +146,10 @@ public class TrashCleanerJob implements Job {
       nodeToDelete.getSession().save();
       LOG.debug("Node " + nodeToDelete.getPath() + " deleted");
     } catch (ReferentialIntegrityException ref) {
-      LOG.error("ReferentialIntegrityException when removing " + node.getName() + " node from Trash", ref);
-    } catch (ConstraintViolationException cons) {
+      if (!fixReferentialIntegrityException(node)) {
+        LOG.error("ReferentialIntegrityException when removing " + node.getName() + " node from Trash", ref);
+        //log nothing if the fix success to deleteNode
+      }    } catch (ConstraintViolationException cons) {
       LOG.error("ConstraintViolationException when removing " + node.getName() + " node from Trash", cons);
     } catch (Exception ex) {
       LOG.error("Error while removing " + node.getName() + " node from Trash", ex);
@@ -185,6 +187,67 @@ public class TrashCleanerJob implements Job {
       return false;
     }
   }
+
+  private boolean fixReferentialIntegrityException(Node node) {
+    String name="";
+
+    //This node have a version in versionHistory,
+    // which is set as liveRevision of another node which was copy pasted from this node
+    //we need to
+    //1) find this node
+    //2) clean his publication
+
+    try {
+      Session session = node.getSession();
+      session.refresh(false);
+      name=node.getName();
+      boolean shouldDeleteNode = false;
+
+      String liveRevision = node.getProperty("publication:liveRevision").getValue().getString();
+      Node versionHistory = session.getNodeByUUID(liveRevision).getParent();
+      for (NodeIterator it = versionHistory.getNodes(); it.hasNext(); ) {
+        Node child = it.nextNode();
+        long nbRef = child.getReferences().getSize();
+        LOG.info("Version history child node {} have {} references",child.getPath(),nbRef);
+        for (PropertyIterator iter = child.getReferences(); iter.hasNext(); ) {
+          // if there is a reference, move it
+          String relationPath = iter.nextProperty().getPath();
+          LOG.info("Node " + child.getPath() + " is referenced by " + relationPath);
+          if (!relationPath.startsWith(node.getPath())) {
+            Node relation = node.getSession().getItem(relationPath).getParent();
+            cleanPublication(relation);
+            shouldDeleteNode=true;
+          }
+        }
+      }
+
+      if (shouldDeleteNode) {
+        deleteNode(node);
+        return true;
+      }
+
+    } catch (Exception e) {
+      LOG.error("Error while removing (without the version history) " + name + " node from Trash", e);
+    }
+    return false;
+
+
+  }
+
+  private void cleanPublication(Node relation) {
+    String name="";
+    try {
+      name = relation.getName();
+      relation.setProperty("publication:liveRevision", (javax.jcr.Value) null);
+      relation.setProperty("publication:currentState", "published");
+      relation.save();
+
+      LOG.info("Publication cleaned on node {}, to fix integrity problem.",name);
+    } catch (Exception e) {
+      LOG.error("Unable to clean publication for node {}",name,e);
+    }
+  }
+
 
   private Node readNodeWithNewSession(Node node, Session sessionForDeleteNode) throws RepositoryException {
     String idf = ((NodeImpl)node).getIdentifier();
