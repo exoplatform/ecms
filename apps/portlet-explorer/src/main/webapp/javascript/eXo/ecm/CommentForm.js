@@ -52,7 +52,7 @@
         CKEDITOR.basePath = '/commons-extension/ckeditor/';
         $('textarea#comment').ckeditor({
             //TODO we should ensure adding external plugins for link and image
-            customConfig: '/commons-extension/ckeditorCustom/config.js',
+            customConfig: `${eXo.env.portal.context}/${eXo.env.portal.rest}/richeditor/configuration?type=ecms-comment-form&v=${eXo.env.client.assetsVersion}`,
             extraPlugins: extraPlugins,
             placeholder: placeholder,
             typeOfRelation: 'mention_comment',
