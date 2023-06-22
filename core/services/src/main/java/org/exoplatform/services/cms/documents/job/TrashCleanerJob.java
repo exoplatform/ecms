@@ -149,7 +149,8 @@ public class TrashCleanerJob implements Job {
       if (!fixReferentialIntegrityException(node)) {
         LOG.error("ReferentialIntegrityException when removing " + node.getName() + " node from Trash", ref);
         //log nothing if the fix success to deleteNode
-      }    } catch (ConstraintViolationException cons) {
+      }
+    } catch (ConstraintViolationException cons) {
       LOG.error("ConstraintViolationException when removing " + node.getName() + " node from Trash", cons);
     } catch (Exception ex) {
       LOG.error("Error while removing " + node.getName() + " node from Trash", ex);
