@@ -209,11 +209,11 @@ public class TrashCleanerJob implements Job {
       for (NodeIterator it = versionHistory.getNodes(); it.hasNext(); ) {
         Node child = it.nextNode();
         long nbRef = child.getReferences().getSize();
-        LOG.info("Version history child node {} have {} references",child.getPath(),nbRef);
+        LOG.debug("Version history child node {} have {} references",child.getPath(),nbRef);
         for (PropertyIterator iter = child.getReferences(); iter.hasNext(); ) {
           // if there is a reference, move it
           String relationPath = iter.nextProperty().getPath();
-          LOG.info("Node " + child.getPath() + " is referenced by " + relationPath);
+          LOG.debug("Node " + child.getPath() + " is referenced by " + relationPath);
           if (!relationPath.startsWith(node.getPath())) {
             Node relation = node.getSession().getItem(relationPath).getParent();
             cleanPublication(relation);
