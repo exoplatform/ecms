@@ -1180,7 +1180,7 @@
         CKEDITOR.basePath = '/commons-extension/ckeditor/';
         var toolbarHeight = 39;
         commentInput.ckeditor({
-          customConfig: '/commons-extension/ckeditorCustom/config.js',
+          customConfig: `${eXo.env.portal.context}/${eXo.env.portal.rest}/richeditor/configuration?type=document-preview&v=${eXo.env.client.assetsVersion}`,
           extraPlugins: extraPlugins,
           typeOfRelation: 'mention_comment',
           spaceURL: this.settings.activity.spaceURL,
