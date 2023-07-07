@@ -412,7 +412,7 @@
         docPreviewContainer.find(".previewBtn").html(html);
 
       } else {
-        var authorFullName = XSSUtils.sanitizeString(this.settings.author.fullname != null ? this.settings.author.fullname : '');
+        var authorFullName = XSSUtils.sanitizeString(this.settings.author?.fullname != null ? this.settings.author.fullname : '');
         let html = '<div class="uiDocumentPreview' + (this.settings.showComments ? '' : ' collapsed') + '" id="uiDocumentPreview">' +
           '<div class="exitWindow">' +
             '<a class="uiIconClose uiIconWhite" title="${UIActivity.comment.close}" onclick="documentPreview.hide()"></a>' +
