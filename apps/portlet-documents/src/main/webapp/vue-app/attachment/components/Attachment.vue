@@ -82,11 +82,19 @@ export default {
     });
     document.addEventListener('documents-supported-document-types-updated', this.refreshSupportedDocumentExtensions);
     this.refreshSupportedDocumentExtensions();
+    document.addEventListener('mark-attachment-as-viewed', this.markAttachmentAsViewed);
   },
   mounted() {
     this.$root.$applicationLoaded();
   },
   methods: {
+    markAttachmentAsViewed(event) {
+      const file = event.detail.file;
+      const userName = eXo.env.portal.userName;
+      return Vue.prototype.$attachmentService.markAttachmentAsViewed(file.id, userName).then(views => {
+        document.dispatchEvent(new CustomEvent('document-views-updated', {detail: {file: file, views: views}}));
+      });
+    },
     refreshSupportedDocumentExtensions () {
       this.supportedDocuments = extensionRegistry.loadExtensions('documents', 'supported-document-types');
     },

@@ -166,6 +166,9 @@ export default {
     this.image = this.attachment && this.attachment.image;
   },
   methods: {
+    markDocumentAsViewed() {
+      document.dispatchEvent(new CustomEvent('mark-attachment-as-viewed', {detail: {file: this.attachment}}));
+    },
     closeErrorBox(event) {
       if (event) {
         event.preventDefault();
@@ -224,6 +227,7 @@ export default {
           this.invalid = true;
         })
         .finally(() => this.loading = false);
+      this.markDocumentAsViewed();
     },
   },
 };

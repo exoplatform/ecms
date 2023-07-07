@@ -101,6 +101,7 @@ export default {
         },
         showComments: false
       });
+      document.dispatchEvent(new CustomEvent('mark-attachment-as-viewed', {detail: {file: this.attachment}}));
     },
   },
 };
