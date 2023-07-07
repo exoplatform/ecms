@@ -1,5 +1,13 @@
               2023-07-07 eXo Support <support@exoplatform.org> 
 
    # 6.4.2 Patches changelog: 
+   
+   * 2022-07-04: Patch-6.4.2:1, Author: Jihed Chabbeh<jchabbeh@exoplatform.com>
+
+  -  https://github.com/exoplatform/documents/pull/1008
+  
+  * 2022-07-07: Patch-6.4.2:2, Author: Jihed Chabbeh<jchabbeh@exoplatform.com>
+
+  -  https://github.com/exoplatform/ecms/pull/2145
 
 
