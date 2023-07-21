@@ -831,7 +831,11 @@ public class Utils {
              .append(repository)
              .append("/")
              .append(workspace)
+<<<<<<< Updated upstream
              .append(originalNodePath.replaceAll("%", "%25"));
+=======
+             .append(originalNodePath);
+>>>>>>> Stashed changes
     if (withTimeParam) {
       if (imagePath.indexOf("?") > 0) {
         imagePath.append("&time=");
