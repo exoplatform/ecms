@@ -22,10 +22,6 @@
       <artifactId>icu4j</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.totsp.feedpod</groupId>
-      <artifactId>itunes-com-podcast</artifactId>
-    </dependency>
-    <dependency>
       <groupId>commons-chain</groupId>
       <artifactId>commons-chain</artifactId>
     </dependency>
