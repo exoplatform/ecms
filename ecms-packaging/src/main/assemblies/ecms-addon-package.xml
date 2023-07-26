@@ -42,7 +42,6 @@
       <includes>
         <include>org.exoplatform.ecms:*:jar</include>
         <include> org.icepdf.os:icepdf-core:jar</include>
-<!--        <include>com.totsp.feedpod:itunes-com-podcast:jar</include>-->
         <include>com.sun.media:jai-codec:jar</include>
         <include>com.sun.media:jai-core:jar</include>
         <include>org.artofsolving.jodconverter:jodconverter-core:jar</include>
