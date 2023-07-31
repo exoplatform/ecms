@@ -516,7 +516,7 @@
                 }
 
                 if (!this.settings.showComments) {
-                  const documentTitle = documentPreview.settings.doc.title;
+                  let documentTitle = documentPreview.settings.doc.title;
                   try {
                     documentTitle = decodeURI(documentPreview.settings.doc.title);
                   } catch (error) {
