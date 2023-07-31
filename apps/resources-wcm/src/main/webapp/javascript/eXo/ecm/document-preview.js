@@ -516,8 +516,14 @@
                 }
 
                 if (!this.settings.showComments) {
-                  html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + decodeURI(documentPreview.settings.doc.title) + '">' +
-                      '<div class="ellipsis">' + decodeURI(documentPreview.settings.doc.title) + '</div>';
+                  const documentTitle = documentPreview.settings.doc.title;
+                  try {
+                    documentTitle = decodeURI(documentPreview.settings.doc.title);
+                  } catch (error) {
+                    // No problem, we can use the title as is, it does not need to be decoded and it contains a % character
+                  }
+                  html += '<div class="fileName" data-container="body" rel="tooltip" data-placement="top" title="' + documentTitle + '">' +
+                      '<div class="ellipsis">' + documentTitle + '</div>';
                   if (documentPreview.settings.version && (documentPreview.settings.version.number != 0)) {
                     html +='<div class="label primary fileVersion"' + (documentPreview.settings.doc.openUrl ? 'onclick="window.location.href=\'' + documentPreview.settings.doc.openUrl + '&versions=true\'"' : "") + '>V' + documentPreview.settings.version.number + '</div>';
                   }
