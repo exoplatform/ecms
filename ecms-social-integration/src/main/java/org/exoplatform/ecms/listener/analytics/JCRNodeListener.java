@@ -255,7 +255,11 @@ public class JCRNodeListener implements Action {
     } else {
       title = managedNode.getName();
     }
-    title = URLDecoder.decode(URLDecoder.decode(title, DEFAULT_CHARSET), DEFAULT_CHARSET);
+    try {
+      title = URLDecoder.decode(URLDecoder.decode(title, DEFAULT_CHARSET), DEFAULT_CHARSET);
+    } catch (Exception e) {
+      // Nothing to do the title contains a % character
+    }
     statisticData.addParameter(DOCUMENT_NAME_PARAM, title);
   }
 
