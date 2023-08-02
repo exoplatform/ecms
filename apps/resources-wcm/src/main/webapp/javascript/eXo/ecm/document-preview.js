@@ -542,8 +542,9 @@
                       '                </div></li>';
                   }
                   if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
+                    const downloadUrl = this.settings.doc.downloadUrl.replaceAll('%', '%25').replaceAll('+', '%2B');
                     html += '      <li><div class="downloadBtn">' +
-                            '      <a href="' + this.settings.doc.downloadUrl + '" class="clickable"';
+                            '      <a href="' + downloadUrl + '" class="clickable"';
                     if (!this.settings.doc.downloadUrl.includes('javascript:')) {
                       html+= ' download="' + this.settings.doc.title + '"';
                     }
