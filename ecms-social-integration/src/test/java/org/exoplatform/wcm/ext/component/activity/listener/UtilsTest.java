@@ -1,26 +1,30 @@
 package org.exoplatform.wcm.ext.component.activity.listener;
 
-import static org.mockito.Matchers.*;
+import static org.exoplatform.services.jcr.ext.ActivityTypeUtils.EXO_ACTIVITY_INFO;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 
 import javax.jcr.Node;
+import javax.jcr.Property;
 
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
 import org.exoplatform.social.core.identity.model.Identity;
 
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.space.model.Space;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.api.support.membermodification.MemberMatcher;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
@@ -34,49 +38,64 @@ import org.exoplatform.social.core.space.spi.SpaceService;
 /**
  * Test class for org.exoplatform.wcm.ext.component.activity.listener.Utils
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Utils.class, CommonsUtils.class })
-@PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
+@RunWith(MockitoJUnitRunner.class)
 public class UtilsTest {
+
+  @Mock
+  ActivityManager activityManager;
+
+  @Mock
+  IdentityManager identityManager;
+
+  @Mock
+  ActivityCommonService activityCommonService;
+
+  @Mock
+  SpaceService spaceService;
+
+  MockedStatic<CommonsUtils> COMMONS_UTILS;
+
+  MockedStatic<Utils> UTILS;
+
+  @Before
+  public void setUp() throws Exception {
+    COMMONS_UTILS = mockStatic(CommonsUtils.class);
+    UTILS = mockStatic(Utils.class);
+    COMMONS_UTILS.when(() -> activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
+    COMMONS_UTILS.when(() -> CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
+    COMMONS_UTILS.when(() -> CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
+    COMMONS_UTILS.when(() -> CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
+    COMMONS_UTILS.when(() -> CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
+    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(new Space());
+
+    UTILS.when(() -> Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
+
+    UTILS.when(() -> Utils.getActivityOwnerId(any()))
+            .thenReturn("john");
+    UTILS.when(() -> Utils.isPublic(any())).thenCallRealMethod();
+    ExoSocialActivity activity = new ExoSocialActivityImpl();
+    activity.setId("123");
+    UTILS.when(() -> Utils.createActivity(any(), nullable(String.class), any(), nullable(String.class), nullable(String.class), anyBoolean(), nullable(String.class), nullable(String.class)))
+            .thenReturn(activity);
+    when(activityManager.getActivity(anyString())).thenReturn(activity);
+    when(identityManager.getOrCreateIdentity(eq(OrganizationIdentityProvider.NAME), any())).thenReturn(new Identity());
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    COMMONS_UTILS.close();
+    UTILS.close();
+  }
+
   @Test
   public void shouldPostFileActivityWhenFileIsPublic() throws Exception {
     // Given
-    ActivityManager activityManager = mock(ActivityManager.class);
-    IdentityManager identityManager = mock(IdentityManager.class);
-    ActivityCommonService activityCommonService = mock(ActivityCommonService.class);
-    SpaceService spaceService = mock(SpaceService.class);
-    PowerMockito.mockStatic(CommonsUtils.class);
-    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
-    when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
-    when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
-    when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
-    when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
-
-    PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
-
-    Utils spy = PowerMockito.spy(new Utils());
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
-                .withArguments(any())
-                .thenReturn("john");
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "isPublic", Node.class)).withArguments(any()).thenCallRealMethod();
-    PowerMockito.when(spy,
-                      MemberMatcher.method(Utils.class,
-                                           "createActivity",
-                                           IdentityManager.class,
-                                           String.class,
-                                           Node.class,
-                                           String.class,
-                                           String.class,
-                                           boolean.class,
-                                           String.class,
-                                           String.class))
-                .withArguments(any(), nullable(String.class), any(), nullable(String.class), nullable(String.class), anyBoolean(), nullable(String.class), nullable(String.class))
-                .thenReturn(new ExoSocialActivityImpl());
 
     ExtendedNode node = mock(ExtendedNode.class);
-    when(node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)).thenReturn(false);
+    when(node.isCheckedOut()).thenReturn(true);
+    when(node.isNodeType(EXO_ACTIVITY_INFO)).thenReturn(false);
+    when(node.canAddMixin(EXO_ACTIVITY_INFO)).thenReturn(true);
+    lenient().when(node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)).thenReturn(false);
     AccessControlList acl = new AccessControlList("john", Arrays.asList(new AccessControlEntry("any", "read")));
     when(node.getACL()).thenReturn(acl);
 
@@ -89,31 +108,11 @@ public class UtilsTest {
 
   @Test
   public void shouldNotPostFileActivityWhenFileIsNotPublic() throws Exception {
-    // Given
-    ActivityManager activityManager = mock(ActivityManager.class);
-    IdentityManager identityManager = mock(IdentityManager.class);
-    ActivityCommonService activityCommonService = mock(ActivityCommonService.class);
-    SpaceService spaceService = mock(SpaceService.class);
-    PowerMockito.mockStatic(CommonsUtils.class);
-    when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
-    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
-    when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
-    when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
-    when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
-
-    PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
-
-    Utils spy = PowerMockito.spy(new Utils());
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
-                .withArguments(any())
-                .thenReturn("john");
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "isPublic", Node.class)).withArguments(any()).thenCallRealMethod();
-
     ExtendedNode node = mock(ExtendedNode.class);
-    when(node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)).thenReturn(false);
-    AccessControlList acl = new AccessControlList("john", Arrays.asList(new AccessControlEntry("*:/spaces/space1", "read")));
+    lenient().when(node.isCheckedOut()).thenReturn(true);
+    when(node.isNodeType(EXO_ACTIVITY_INFO)).thenReturn(false);
+    lenient().when(node.canAddMixin(EXO_ACTIVITY_INFO)).thenReturn(true);
+    lenient().when(node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)).thenReturn(false);    AccessControlList acl = new AccessControlList("john", Arrays.asList(new AccessControlEntry("*:/spaces/space1", "read")));
     when(node.getACL()).thenReturn(acl);
 
     // When
@@ -125,48 +124,18 @@ public class UtilsTest {
 
   @Test
   public void checkPostActivityIfActivityTypeIsEnabled() throws Exception {
-    // Given
-    IdentityManager identityManager = mock(IdentityManager.class);
-    ActivityCommonService activityCommonService = mock(ActivityCommonService.class);
-    SpaceService spaceService = mock(SpaceService.class);
-    PowerMockito.mockStatic(CommonsUtils.class);
-    when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
-    when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
-    when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
-
-    PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
-    when(Utils.postActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
-
-    Utils spy = PowerMockito.spy(new Utils());
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
-                .withArguments(any())
-                .thenReturn("john");
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "isPublic", Node.class)).withArguments(any()).thenCallRealMethod();
-    PowerMockito.when(spy,
-                      MemberMatcher.method(Utils.class,
-                                           "createActivity",
-                                           IdentityManager.class,
-                                           String.class,
-                                           Node.class,
-                                           String.class,
-                                           String.class,
-                                           boolean.class,
-                                           String.class,
-                                           String.class))
-                .withArguments(any(), nullable(String.class), any(), nullable(String.class), nullable(String.class), anyBoolean(), nullable(String.class), nullable(String.class))
-                .thenReturn(new ExoSocialActivityImpl());
-
     ExtendedNode node = mock(ExtendedNode.class);
-    when(node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)).thenReturn(false);
+    when(node.isCheckedOut()).thenReturn(true);
+    when(node.isNodeType(EXO_ACTIVITY_INFO)).thenReturn(false);
+    when(node.canAddMixin(EXO_ACTIVITY_INFO)).thenReturn(true);
+    lenient().when(node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)).thenReturn(false);
     AccessControlList acl = new AccessControlList("john", Arrays.asList(new AccessControlEntry("any", "read")));
     when(node.getACL()).thenReturn(acl);
 
     //Enable activity type
     ActivityManager activityManager = mock(ActivityManager.class);
     when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
-    when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
+    COMMONS_UTILS.when(() -> CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
 
     // Check File activity when it is disabled
     // When
@@ -177,8 +146,7 @@ public class UtilsTest {
 
     // Check Content activity when it is disabled
     // When
-    reset(activityManager);
-    when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
+    lenient().when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(true);
     Utils.postActivity(node, null, false, false, "", "");
 
     // Then
@@ -186,48 +154,19 @@ public class UtilsTest {
   }
   @Test
   public void checkPostActivityIfActivityTypeIsDisabled() throws Exception {
-    // Given
-    IdentityManager identityManager = mock(IdentityManager.class);
-    ActivityCommonService activityCommonService = mock(ActivityCommonService.class);
-    SpaceService spaceService = mock(SpaceService.class);
-    PowerMockito.mockStatic(CommonsUtils.class);
-    when(CommonsUtils.getService(eq(IdentityManager.class))).thenReturn(identityManager);
-    when(CommonsUtils.getService(eq(ActivityCommonService.class))).thenReturn(activityCommonService);
-    when(CommonsUtils.getService(eq(SpaceService.class))).thenReturn(spaceService);
-    when(spaceService.getSpaceByGroupId(nullable(String.class))).thenReturn(null);
-
-    PowerMockito.mockStatic(Utils.class);
-    when(Utils.postFileActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
-    when(Utils.postActivity(any(), nullable(String.class), anyBoolean(), anyBoolean(), nullable(String.class), nullable(String.class))).thenCallRealMethod();
-
-    Utils spy = PowerMockito.spy(new Utils());
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "getActivityOwnerId", Node.class))
-            .withArguments(any())
-            .thenReturn("john");
-    PowerMockito.when(spy, MemberMatcher.method(Utils.class, "isPublic", Node.class)).withArguments(any()).thenCallRealMethod();
-    PowerMockito.when(spy,
-            MemberMatcher.method(Utils.class,
-                    "createActivity",
-                    IdentityManager.class,
-                    String.class,
-                    Node.class,
-                    String.class,
-                    String.class,
-                    boolean.class,
-                    String.class,
-                    String.class))
-            .withArguments(any(), nullable(String.class), any(), nullable(String.class), nullable(String.class), anyBoolean(), nullable(String.class), nullable(String.class))
-            .thenReturn(new ExoSocialActivityImpl());
-
     ExtendedNode node = mock(ExtendedNode.class);
-    when(node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)).thenReturn(false);
+    lenient().when(node.isCheckedOut()).thenReturn(true);
+    lenient().when(node.isNodeType(EXO_ACTIVITY_INFO)).thenReturn(false);
+    lenient().when(node.canAddMixin(EXO_ACTIVITY_INFO)).thenReturn(true);
+    lenient().when(node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)).thenReturn(false);
+
     AccessControlList acl = new AccessControlList("john", Arrays.asList(new AccessControlEntry("any", "read")));
-    when(node.getACL()).thenReturn(acl);
+    lenient().when(node.getACL()).thenReturn(acl);
 
     //Disable activity type
     ActivityManager activityManager = mock(ActivityManager.class);
     when(activityManager.isActivityTypeEnabled(nullable(String.class))).thenReturn(false);
-    when(CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
+    COMMONS_UTILS.when(() -> CommonsUtils.getService(eq(ActivityManager.class))).thenReturn(activityManager);
 
     // Check File activity when it is disabled
     // When
@@ -244,6 +183,43 @@ public class UtilsTest {
 
     // Then
     verify(activityManager, never()).saveActivityNoReturn(any(), any(ExoSocialActivity.class));
+  }
+
+  @Test
+  public void testAddVersionComment() {
+    UTILS.when(() -> Utils.addVersionComment(any(Node.class), anyString(), anyString())).thenCallRealMethod();
+    UTILS.when(() -> Utils.getSpaceName(any())).thenReturn("/spaces/spaceOne");
+    ConversationState conversionState = ConversationState.getCurrent();
+    if(conversionState == null) {
+      conversionState = new ConversationState(new org.exoplatform.services.security.Identity("root"));
+      ConversationState.setCurrent(conversionState);
+    }
+
+    Node node = mock(Node.class);
+    String commentText = "this is a comment";
+    String userName = "root";
+    try {
+      when(node.isCheckedOut()).thenReturn(true);
+      when(node.isNodeType(EXO_ACTIVITY_INFO)).thenReturn(false);
+      when(node.canAddMixin(EXO_ACTIVITY_INFO)).thenReturn(true);
+      lenient().when(node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)).thenReturn(false);
+      Utils.addVersionComment(node, commentText, userName);
+      verify(activityManager,times(1)).saveComment(any(), any());
+    } catch (Exception e) {
+      fail();
+    }
+    try {
+      when(node.isNodeType(EXO_ACTIVITY_INFO)).thenReturn(true);
+      Property property = mock(Property.class);
+      when(property.getString()).thenReturn("444");
+      when(node.getProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)).thenReturn(property);
+      when(activityManager.getActivity(eq("444"))).thenReturn(null);
+      lenient().when(node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)).thenReturn(true);
+      Utils.addVersionComment(node, commentText, userName);
+      verify(activityManager,times(2)).saveComment(any(), any());
+    } catch (Exception e) {
+      fail();
+    }
   }
 
 }

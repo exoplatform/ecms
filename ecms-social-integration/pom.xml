@@ -11,7 +11,7 @@
   <name>eXo PLF:: ECMS - Social Activities</name>
   <description>ECMS with Social activity</description>
   <properties>
-    <exo.test.coverage.ratio>0.05</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.12</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>
@@ -172,17 +172,7 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-module-junit4</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-mockito2</artifactId>
+      <artifactId>mockito-inline</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

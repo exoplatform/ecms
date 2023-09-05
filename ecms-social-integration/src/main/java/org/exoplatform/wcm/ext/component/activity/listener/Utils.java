@@ -684,7 +684,7 @@ public class Utils {
    * 
    * @return activity owner
    */
-  private static String getActivityOwnerId(Node node) {
+  public static String getActivityOwnerId(Node node) {
     String activityOwnerId = "";
     ConversationState conversationState = ConversationState.getCurrent();
     if (conversationState != null) {
@@ -706,9 +706,8 @@ public class Utils {
    * @return the group name
    * @throws Exception
    */
-  private static String getSpaceName(Node node) throws Exception {
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator) ExoContainerContext.getCurrentContainer()
-                                                                                          .getComponentInstanceOfType(NodeHierarchyCreator.class);
+  public static String getSpaceName(Node node) throws Exception {
+    NodeHierarchyCreator nodeHierarchyCreator = CommonsUtils.getService(NodeHierarchyCreator.class);
     String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
     String spacesFolder = groupPath + "/spaces/";
     String spaceName = "";
@@ -721,7 +720,7 @@ public class Utils {
     return spaceName;
   }
 
-  private static boolean isPublic(Node node) {
+  public static boolean isPublic(Node node) {
     if (node instanceof ExtendedNode) {
       ExtendedNode n = (ExtendedNode)node;
       try {
@@ -1047,23 +1046,28 @@ public class Utils {
   }
 
   public static String addVersionComment(Node node, String commentText, String userId) throws Exception {
-    String nodeActivityID;
+    String nodeActivityID = null;
     IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
     SpaceService spaceService = CommonsUtils.getService(SpaceService.class);
     ActivityManager activityManager = CommonsUtils.getService(ActivityManager.class);
     String activityOwnerId = getActivityOwnerId(node);
+    boolean deletedActivity = false;
+    if(node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)) {
+      nodeActivityID = node.getProperty(ActivityTypeUtils.EXO_ACTIVITY_ID).getString();
+      deletedActivity = activityManager.getActivity(nodeActivityID) == null;
+    }
 
     ExoSocialActivity activity = createActivity(identityManager, activityOwnerId, node, commentText, activityType, true, "", "");
     setActivityType(null);
 
-    if (!node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
+    if (!node.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO) || deletedActivity) {
       String spaceGroupName = getSpaceName(node);
       Space space = spaceService.getSpaceByGroupId(SpaceUtils.SPACE_GROUP + "/" + spaceGroupName);
-      if (spaceGroupName != null && spaceGroupName.length() > 0 && space != null) {
+      if (spaceGroupName != null && !spaceGroupName.isEmpty() && space != null) {
         // post activity to space stream
         Identity spaceIdentity = identityManager.getOrCreateIdentity(SpaceIdentityProvider.NAME, space.getPrettyName());
         activityManager.saveActivityNoReturn(spaceIdentity, activity);
-      } else if (activityOwnerId != null && activityOwnerId.length() > 0) {
+      } else if (activityOwnerId != null && !activityOwnerId.isEmpty()) {
         if (!isPublic(node)) {
           // only post activity to user status stream if that upload is public
           return null;
@@ -1075,10 +1079,10 @@ public class Utils {
         return null;
       }
       if (!StringUtils.isEmpty(activity.getId())) {
+        nodeActivityID = activity.getId();
         ActivityTypeUtils.attachActivityId(node, activity.getId());
       }
     }
-    nodeActivityID = node.getProperty(ActivityTypeUtils.EXO_ACTIVITY_ID).getString();
 
     if (nodeActivityID != null && !nodeActivityID.isEmpty() && commentText != null && !commentText.trim().isEmpty()) {
       org.exoplatform.social.core.identity.model.Identity identity =
