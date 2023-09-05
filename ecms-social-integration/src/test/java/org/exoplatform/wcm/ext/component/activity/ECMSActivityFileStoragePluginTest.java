@@ -22,9 +22,7 @@ import org.exoplatform.upload.UploadService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.jcr.Node;
 import javax.jcr.Property;
@@ -36,9 +34,7 @@ import java.io.File;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(NodeLocation.class)
-@PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
+@RunWith(MockitoJUnitRunner.class)
 public class ECMSActivityFileStoragePluginTest {
 
   static private String TEXT_PLAIN = "text/plain";
@@ -101,10 +97,10 @@ public class ECMSActivityFileStoragePluginTest {
     uploadResource.setStoreLocation(file.getPath());
     uploadResource.setMimeType(TEXT_PLAIN);
     when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
-    when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
+    lenient().when(sessionProviderService.getSessionProvider(any())).thenReturn(sessionProvider);
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
-    when(repositoryEntry.getName()).thenReturn("workspace");
+    lenient().when(repositoryEntry.getName()).thenReturn("workspace");
     when(repositoryEntry.getDefaultWorkspaceName()).thenReturn("collaboration");
     when(sessionProvider.getSession(any(), any())).thenReturn(session);
     Node userNode = mock(Node.class);

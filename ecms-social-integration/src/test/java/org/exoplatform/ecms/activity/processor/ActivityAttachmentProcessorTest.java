@@ -7,10 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.jcr.Node;
 import java.util.HashMap;
@@ -18,9 +16,7 @@ import java.util.HashMap;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(NodeLocation.class)
-@PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
+@RunWith(MockitoJUnitRunner.class)
 public class ActivityAttachmentProcessorTest {
 
     @Mock
@@ -47,8 +43,8 @@ public class ActivityAttachmentProcessorTest {
                 templateParams.get("nodePath"), templateParams.get("nodeUUID"), true);
         Node currentNode = mock(Node.class);
         doCallRealMethod().when(activityAttachmentProcessor).processActivity(activity);
-        PowerMockito.mockStatic(NodeLocation.class);
-        when(NodeLocation.getNodeByLocation(ArgumentMatchers.refEq(nodeLocation))).thenReturn(currentNode);
+        MockedStatic<NodeLocation> NODE_LOCATION = mockStatic(NodeLocation.class);
+        NODE_LOCATION.when(() -> NodeLocation.getNodeByLocation(ArgumentMatchers.refEq(nodeLocation))).thenReturn(currentNode);
         activityAttachmentProcessor.processActivity(activity);
         assertEquals(1, activity.getFiles().size());
     }
