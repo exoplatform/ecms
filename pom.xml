@@ -40,7 +40,7 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <addon.exo.jcr.version>6.5.x-SNAPSHOT</addon.exo.jcr.version>
+    <addon.exo.jcr.version>6.5.0-M23</addon.exo.jcr.version>
 
     <!-- **************************************** -->
     <!-- Apache Chemistry (OpenCMIS) API -->
