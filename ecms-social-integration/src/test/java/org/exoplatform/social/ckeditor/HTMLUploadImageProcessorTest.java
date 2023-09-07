@@ -3,7 +3,6 @@ package org.exoplatform.social.ckeditor;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 import javax.jcr.Node;
 import javax.jcr.Property;

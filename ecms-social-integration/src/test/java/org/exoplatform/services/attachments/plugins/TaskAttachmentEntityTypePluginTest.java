@@ -32,7 +32,6 @@ import org.exoplatform.task.dto.StatusDto;
 import org.exoplatform.task.dto.TaskDto;
 import org.exoplatform.task.service.ProjectService;
 import org.exoplatform.task.service.TaskService;
-import org.powermock.api.mockito.PowerMockito;
 
 import javax.jcr.nodetype.NodeType;
 import java.util.Arrays;
@@ -49,14 +48,14 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
     long entityId = 1;
 
     // Mock services
-    TaskService taskService = PowerMockito.mock(TaskService.class);
-    ProjectService projectService = PowerMockito.mock(ProjectService.class);
-    NodeHierarchyCreator nodeHierarchyCreator = PowerMockito.mock(NodeHierarchyCreator.class);
-    RepositoryService repositoryService = PowerMockito.mock(RepositoryService.class);
-    SessionProviderService sessionProviderService = PowerMockito.mock(SessionProviderService.class);
+    TaskService taskService = mock(TaskService.class);
+    ProjectService projectService = mock(ProjectService.class);
+    NodeHierarchyCreator nodeHierarchyCreator = mock(NodeHierarchyCreator.class);
+    RepositoryService repositoryService = mock(RepositoryService.class);
+    SessionProviderService sessionProviderService = mock(SessionProviderService.class);
 
     // Mock SessionProvider
-    SessionProvider sessionProvider = PowerMockito.mock(SessionProvider.class);
+    SessionProvider sessionProvider = mock(SessionProvider.class);
     when(sessionProviderService.getSessionProvider(null)).thenReturn(sessionProvider);
 
     // Mock Repository service and JCR session
