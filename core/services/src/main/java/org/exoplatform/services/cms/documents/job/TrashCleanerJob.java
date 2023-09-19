@@ -18,7 +18,9 @@
 package org.exoplatform.services.cms.documents.job;
 
 import java.security.AccessControlException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.jcr.Item;
 import javax.jcr.Node;
@@ -54,7 +56,7 @@ import org.exoplatform.services.log.Log;
 @DisallowConcurrentExecution
 public class TrashCleanerJob implements Job {
 
-  private static final Log LOG = ExoLogger.getLogger(TrashCleanerJob.class);
+  private static final Log   LOG       = ExoLogger.getLogger(TrashCleanerJob.class);
 
   public static final String EXO_AUDIT = "exo:audit";
 
@@ -78,9 +80,13 @@ public class TrashCleanerJob implements Job {
         NodeIterator childNodes = trashNode.getNodes();
         long size = childNodes.getSize();
         int current = 0;
+        List<Node> reversedListNodes = new ArrayList<>();
 
         while (childNodes.hasNext()) {
           Node currentNode = (Node) childNodes.next();
+          reversedListNodes.add(0, currentNode);
+        }
+        for (Node currentNode : reversedListNodes) {
           if (!currentNode.getSession().isLive()) {
             currentNode.getSession().refresh(false);
           }
@@ -134,10 +140,10 @@ public class TrashCleanerJob implements Job {
                                                            .getComponentInstanceOfType(ThumbnailService.class);
     RepositoryService repoService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(RepositoryService.class);
     SessionProvider sessionProviderForDeleteNode = SessionProvider.createSystemProvider();
-    Session sessionForDeleteNode =sessionProviderForDeleteNode.getSession("collaboration",repoService.getDefaultRepository());
-    LOG.debug("Try to delete node {}",node.getPath());
+    Session sessionForDeleteNode = sessionProviderForDeleteNode.getSession("collaboration", repoService.getDefaultRepository());
+    LOG.debug("Try to delete node {}", node.getPath());
     try {
-      Node nodeToDelete = readNodeWithNewSession(node,sessionForDeleteNode);
+      Node nodeToDelete = readNodeWithNewSession(node, sessionForDeleteNode);
       removeReferences(nodeToDelete);
       removeActions(actionService, repoService, nodeToDelete);
       removeThumbNails(thumbnailService, nodeToDelete);
@@ -148,7 +154,7 @@ public class TrashCleanerJob implements Job {
     } catch (ReferentialIntegrityException ref) {
       if (!fixReferentialIntegrityException(node)) {
         LOG.error("ReferentialIntegrityException when removing " + node.getName() + " node from Trash", ref);
-        //log nothing if the fix success to deleteNode
+        // log nothing if the fix success to deleteNode
       }
     } catch (ConstraintViolationException cons) {
       LOG.error("ConstraintViolationException when removing " + node.getName() + " node from Trash", cons);
@@ -182,7 +188,7 @@ public class TrashCleanerJob implements Job {
 
   private boolean checkPermission(Node node, String permissionType) throws RepositoryException {
     try {
-      ((ExtendedNode)node).checkPermission(permissionType);
+      ((ExtendedNode) node).checkPermission(permissionType);
       return true;
     } catch (AccessControlException e) {
       return false;
@@ -190,34 +196,34 @@ public class TrashCleanerJob implements Job {
   }
 
   private boolean fixReferentialIntegrityException(Node node) {
-    String name="";
+    String name = "";
 
-    //This node have a version in versionHistory,
+    // This node have a version in versionHistory,
     // which is set as liveRevision of another node which was copy pasted from this node
-    //we need to
-    //1) find this node
-    //2) clean his publication
+    // we need to
+    // 1) find this node
+    // 2) clean his publication
 
     try {
       Session session = node.getSession();
       session.refresh(false);
-      name=node.getName();
+      name = node.getName();
       boolean shouldDeleteNode = false;
 
       String liveRevision = node.getProperty("publication:liveRevision").getValue().getString();
       Node versionHistory = session.getNodeByUUID(liveRevision).getParent();
-      for (NodeIterator it = versionHistory.getNodes(); it.hasNext(); ) {
+      for (NodeIterator it = versionHistory.getNodes(); it.hasNext();) {
         Node child = it.nextNode();
         long nbRef = child.getReferences().getSize();
-        LOG.debug("Version history child node {} have {} references",child.getPath(),nbRef);
-        for (PropertyIterator iter = child.getReferences(); iter.hasNext(); ) {
+        LOG.debug("Version history child node {} have {} references", child.getPath(), nbRef);
+        for (PropertyIterator iter = child.getReferences(); iter.hasNext();) {
           // if there is a reference, move it
           String relationPath = iter.nextProperty().getPath();
           LOG.debug("Node " + child.getPath() + " is referenced by " + relationPath);
           if (!relationPath.startsWith(node.getPath())) {
             Node relation = node.getSession().getItem(relationPath).getParent();
             cleanPublication(relation);
-            shouldDeleteNode=true;
+            shouldDeleteNode = true;
           }
         }
       }
@@ -232,36 +238,33 @@ public class TrashCleanerJob implements Job {
     }
     return false;
 
-
   }
 
   private void cleanPublication(Node relation) {
-    String name="";
+    String name = "";
     try {
       name = relation.getName();
       relation.setProperty("publication:liveRevision", (javax.jcr.Value) null);
       relation.setProperty("publication:currentState", "published");
       relation.save();
 
-      LOG.info("Publication cleaned on node {}, to fix integrity problem.",name);
+      LOG.info("Publication cleaned on node {}, to fix integrity problem.", name);
     } catch (Exception e) {
-      LOG.error("Unable to clean publication for node {}",name,e);
+      LOG.error("Unable to clean publication for node {}", name, e);
     }
   }
 
-
   private Node readNodeWithNewSession(Node node, Session sessionForDeleteNode) throws RepositoryException {
-    String idf = ((NodeImpl)node).getIdentifier();
-    return ((SessionImpl)sessionForDeleteNode).getNodeByIdentifier(idf);
+    String idf = ((NodeImpl) node).getIdentifier();
+    return ((SessionImpl) sessionForDeleteNode).getNodeByIdentifier(idf);
   }
 
   private void removeReferences(Node node) {
     String nodePath = "";
     try {
-      nodePath=node.getPath();
-      RelationsService relationService =ExoContainerContext.getCurrentContainer()
-                                                           .getComponentInstanceOfType(RelationsService.class);
-
+      nodePath = node.getPath();
+      RelationsService relationService = ExoContainerContext.getCurrentContainer()
+                                                            .getComponentInstanceOfType(RelationsService.class);
 
       PropertyIterator iter = node.getReferences();
       if (iter.hasNext()) {
@@ -272,7 +275,7 @@ public class TrashCleanerJob implements Job {
         Item relation = node.getSession().getItem(relationPath);
         Node sourceRelationNode = relation.getParent();
 
-        relationService.removeRelation(sourceRelationNode,node.getPath());
+        relationService.removeRelation(sourceRelationNode, node.getPath());
       }
 
       NodeIterator children = node.getNodes();
@@ -289,9 +292,10 @@ public class TrashCleanerJob implements Job {
     String nodePath = "";
 
     try {
-      nodePath=node.getPath();
-      if (checkPermission(node,"remove") && node.isNodeType("exo:auditable")) {
-        Session session = SessionProvider.createSystemProvider().getSession(node.getSession().getWorkspace().getName(), repository);
+      nodePath = node.getPath();
+      if (checkPermission(node, "remove") && node.isNodeType("exo:auditable")) {
+        Session session =
+                        SessionProvider.createSystemProvider().getSession(node.getSession().getWorkspace().getName(), repository);
         if (session.getRootNode().hasNode(EXO_AUDIT) && session.getRootNode().getNode(EXO_AUDIT).hasNode(node.getUUID())) {
           session.getRootNode().getNode(EXO_AUDIT).getNode(node.getUUID()).remove();
           session.save();
@@ -300,7 +304,6 @@ public class TrashCleanerJob implements Job {
     } catch (Exception ex) {
       LOG.error("An error occurs while removing audit for node {}", nodePath, ex);
     }
-
 
   }
 
