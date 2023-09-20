@@ -7,7 +7,7 @@
 
 ( function() {
 
-  var template = '<img alt="" src="" />',
+  var template = '<a href="" target=""><img alt="" src="" /></a>',
     templateBlock = new CKEDITOR.template(
       '<figure class="{captionedClass}">' +
         template +
@@ -155,8 +155,9 @@
       // non-captioned, block or inline according to what is the
       // new state of the widget.
       if ( this.deflated ) {
+        editor.insertElement( this.element );
         this.widget = editor.widgets.initOn( this.element, 'selectImage', this.widget.data );
-
+        editor.widgets.fire( 'checkWidgets' )
         // Once widget was re-created, it may become an inline element without
         // block wrapper (i.e. when unaligned, end not captioned). Let's do some
         // sort of autoparagraphing here (http://dev.ckeditor.com/ticket/10853).
@@ -179,7 +180,7 @@
       // If now widget was destroyed just update wrapper's alignment.
       // According to the new state.
       else {
-        setWrapperAlign( this.widget, alignClasses );
+        setWrapperAlign(this.widget, alignClasses);
       }
     }
 
@@ -289,7 +290,6 @@
             alt: image.getAttribute( 'alt' ) || '',
             width: image.getAttribute( 'width' ) || '',
             height: image.getAttribute( 'height' ) || '',
-
             // Lock ratio is on by default (http://dev.ckeditor.com/ticket/10833).
             lock: this.ready ? helpers.checkHasNaturalRatio( image ) : true
           };
@@ -519,7 +519,6 @@
             shift.element = imageOrLink;
           }
         },
-
         link: function( shift, oldValue, newValue ) {
           if ( shift.changed.link ) {
             var img = shift.element.is( 'img' ) ?
@@ -598,7 +597,8 @@
       function wrapInLink( img, linkData ) {
         var link = doc.createElement( 'a', {
           attributes: {
-            href: linkData.url
+            href: linkData?.url,
+            target: linkData?.target?.type
           }
         } );
 
