@@ -1,6 +1,7 @@
   (function(UISelectFromDrives, $, base){
   var UISelectImage = {
     urlPattern: new RegExp("(http|ftp|https)://(.*)/(.*)"),
+    imageLinkUrlPattern: new RegExp("((http|https):\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9-]+\\.[^\\s]{2,})"),
     init : function(dialogElement, widgetData, enableOkButtonCallback, disableOkButtonCallback) {
       this.status = {};
       this.$parentDialog = $(dialogElement);
@@ -112,6 +113,22 @@
               '<i class="uiIconAlignRight"/>' +
             '</a>' +
           '</div>' +
+        '</div>' +
+        '<div class="imageLinkOptions hidden">' +
+          '<div class="imageLinkArea">' +
+          '<label for="imageLink">${CKEditor.image.link}:</label>' +
+          '<p class="caption text-light-color">${CKEditor.image.link.description}</p>' +
+          '<input type="text" name="imageLink" class="imageLink" />' +
+          '<p class="caption text-error hidden">${CKEditor.image.link.format.error}</p>' +
+          '</div>' +
+          '<div class="imageLinkTargetArea">' +
+          '<label for="imageLinkTarget">${CKEditor.image.linkTarget}:</label>' +
+          '<p class="caption text-light-color">${CKEditor.image.linkTarget.description}</p>' +
+          '<select name="imageLinkTarget" class="imageLinkTarget">' +
+          '<option value="_self">${CKEditor.image.linkTarget.self}</option>' +
+          '<option value="_blank">${CKEditor.image.linkTarget.blank}</option>' +
+          '</select>' +
+          '</div>' +
         '</div>'
       );
 
@@ -121,6 +138,9 @@
       this.warningMessageCnt = this.$parentDialog.find(".alert");
       this.imageURLCnt = this.$parentDialog.find(".imageURLContainer");
       this.imageElement = this.imagePreviewCnt.find("img");
+      this.imageLink = this.imagePreviewCnt.find("a");
+      this.imageLinkOptionsContainer = this.$parentDialog.find(".imageLinkOptions");
+      this.linkFormatError = this.$parentDialog.find(".text-error");
       this.imageElement.on("load", function (data){
         self.showBlock(self.backBtn, false);
         self.showBlock(self.imageURLCnt, false);
@@ -129,6 +149,7 @@
         self.showBlock(self.imagePreviewCnt, true);
         self.showBlock(self.deleteFile, true);
         self.showBlock(self.altImageContainer, true);
+        self.showBlock(self.imageLinkOptionsContainer, true);
         self.enableOKButton(true);
         self.triggerResizeEvent();
       }).on("error", function (data) {
@@ -145,6 +166,7 @@
         self.showBlock(self.imagePreviewCnt, false);
         self.showBlock(self.deleteFile, false);
         self.showBlock(self.altImageContainer, false);
+        self.showBlock(self.imageLinkOptionsContainer, false);
         self.displayWarning("${CKEditor.image.error.badURL}");
       });
 
@@ -176,6 +198,7 @@
         self.imageURLCnt.find("input").val("");
         self.altImageContainer.find("input[type='text']").val("");
         self.imageElement.attr("alt", "");
+        self.showBlock(self.imageLinkOptionsContainer, false);
       });
       if (base.Browser.isIE()) {
         $uploadBtn.find("label").attr("for", $input.attr("id"));
@@ -249,7 +272,16 @@
         self.altValue = self.altImageContainer.find("input[type='text']").val();
         self.imageElement.attr("alt", self.altValue);
       });
-
+      self.imageLinkOptionsContainer.find("input[type='text']").on("blur, keyup", function (e) {
+        const linkValue = e.target.value.trim();
+        if (linkValue && !self.imageLinkUrlPattern.test(linkValue)) {
+          self.showBlock(self.linkFormatError, true);
+          self.enableOKButton(false);
+        } else {
+          self.showBlock(self.linkFormatError, false);
+          self.enableOKButton(true);
+        }
+      });
       $input.on("change", function() {
         self.handleFileUpload(this.files, self.$parentDialog);
       });
@@ -295,6 +327,16 @@
         } else {
             self.altImageContainer.find("input[type='text']").val("");
             self.imageElement.attr("alt", "");
+        }
+        if (widgetData.link && !widgetData.link.url) {
+          self.imageLinkOptionsContainer.find("input[type='text']").val(widgetData.link);
+        } else if (widgetData?.link?.url) {
+          const linkValue = widgetData.link.url.protocol + widgetData.link.url.url;
+          self.imageLinkOptionsContainer.find("input[type='text']").val(linkValue);
+        }
+        if (widgetData?.link?.target?.type) {
+          const targetValue = widgetData?.link?.target?.type;
+          self.imageLinkOptionsContainer.find(".imageLinkTarget").val(targetValue).change();
         }
         if (widgetData.align == "center") {
           this.$parentDialog.find(".selectImageAlign .btn-group .btn[data-align=Middle]").trigger("click");
