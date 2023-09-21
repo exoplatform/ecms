@@ -709,7 +709,7 @@ public class Utils {
   }
   public static String replaceSpecialChars(String name, String specialChars, String nodeType) {
     String extension = "";
-    if (nodeType.equals(NodetypeConstant.NT_FILE) && name.lastIndexOf(".") != -1) {
+    if (NodetypeConstant.NT_FILE.equals(nodeType) && name.lastIndexOf(".") != -1) {
       extension = name.substring(name.lastIndexOf("."));
       name = name.substring(0, name.lastIndexOf("."));
     }
