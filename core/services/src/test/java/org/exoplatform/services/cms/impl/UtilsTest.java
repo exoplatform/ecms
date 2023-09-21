@@ -1,6 +1,7 @@
 package org.exoplatform.services.cms.impl;
 
 import junit.framework.TestCase;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 public class UtilsTest extends TestCase {
 
@@ -70,5 +71,10 @@ public class UtilsTest extends TestCase {
     assertEquals(titleClean19,"test_test");
     assertEquals(titleClean20,"test.test");
     assertEquals(titleClean21,"test_test.pdf");
+    //
+    String newsTitle = "news.title";
+    String newsTitleWithSpecialCharacter  = "news.title/test";
+    assertEquals(Utils.cleanName(newsTitle, NodetypeConstant.EXO_NEWS), "news_title");
+    assertEquals(Utils.cleanName(newsTitleWithSpecialCharacter, NodetypeConstant.EXO_NEWS), "news.title_test");
   }
 }

@@ -705,8 +705,11 @@ public class Utils {
   }
   
   private static String replaceSpecialChars(String name, String specialChars) {
+    return replaceSpecialChars(name, specialChars, NodetypeConstant.NT_FILE);
+  }
+  public static String replaceSpecialChars(String name, String specialChars, String nodeType) {
     String extension = "";
-    if (name.lastIndexOf(".") != -1) {
+    if (nodeType.equals(NodetypeConstant.NT_FILE) && name.lastIndexOf(".") != -1) {
       extension = name.substring(name.lastIndexOf("."));
       name = name.substring(0, name.lastIndexOf("."));
     }
@@ -733,10 +736,13 @@ public class Utils {
    */
 
   public static String cleanName(String oldName) {
+    return cleanName(oldName, NodetypeConstant.NT_FILE);
+  }
+  public static String cleanName(String oldName, String nodeType) {
     if (StringUtils.isEmpty(oldName)) {
       return oldName;
     }
-    return replaceSpecialChars(oldName, "&#*?!@.'\"\t\r\n$\\><:;[]/|’");
+    return replaceSpecialChars(oldName, "&#*?!@.'\"\t\r\n$\\><:;[]/|’", nodeType);
   }
 
   /** Return name after cleaning
