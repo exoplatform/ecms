@@ -158,6 +158,8 @@ public class NodetypeConstant {
 
   public static final String EXO_NEWSLETTER_ENTRY             = "exo:newsletterEntry";
 
+  public static final String EXO_NEWS                         = "exo:news";
+
   public static final String EXO_LINKABLE                     = "exo:linkable";
 
   public static final String EXO_LINKS                        = "exo:links";
