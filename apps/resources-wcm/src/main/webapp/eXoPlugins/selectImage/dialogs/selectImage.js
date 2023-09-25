@@ -165,12 +165,16 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
                         return;
                       }
                       var dialog = this.getDialog();
+                      const UrlProtocolRegex = /^(http|ftp|https):\/\/[^ "]+$/;
                       require(["SHARED/jquery"], function($) {
                         var $imageElement = $(dialog.getElement().$).find(".selectedImagePreview img");
-                        const imageLink = $(dialog.getElement().$).find(".imageLinkArea input").val();
+                        let imageLink = $(dialog.getElement().$).find(".imageLinkArea input").val();
                         const imageLinkTarget = $(dialog.getElement().$).find(".imageLinkTargetArea select").find(":selected").val();
                         widget.setData( 'src', $imageElement.attr("src") );
                         widget.setData( 'alt', $imageElement.attr("alt") );
+                        if (!UrlProtocolRegex.test(imageLink)) {
+                          imageLink = 'https://' + imageLink;
+                        }
                         if (imageLink) {
                           const url = imageLink.split('://')[1];
                           const linkData = {

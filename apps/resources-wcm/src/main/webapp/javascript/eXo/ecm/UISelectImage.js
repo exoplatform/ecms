@@ -1,7 +1,7 @@
   (function(UISelectFromDrives, $, base){
   var UISelectImage = {
     urlPattern: new RegExp("(http|ftp|https)://(.*)/(.*)"),
-    imageLinkUrlPattern: new RegExp("((http|https):\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9-]+\\.[^\\s]{2,})"),
+    imageLinkUrlPattern: new RegExp("((?:www\\.|(?!www))[a-zA-Z0-9-]+\\.[^\\s]{2,})"),
     init : function(dialogElement, widgetData, enableOkButtonCallback, disableOkButtonCallback) {
       this.status = {};
       this.$parentDialog = $(dialogElement);
