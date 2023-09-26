@@ -704,7 +704,7 @@ public class Utils {
     return replaceSpecialChars(title, "[<\\>:\"/|?*]");
   }
   
-  private static String replaceSpecialChars(String name, String specialChars) {
+  public static String replaceSpecialChars(String name, String specialChars) {
     return replaceSpecialChars(name, specialChars, NodetypeConstant.NT_FILE);
   }
   public static String replaceSpecialChars(String name, String specialChars, String nodeType) {
