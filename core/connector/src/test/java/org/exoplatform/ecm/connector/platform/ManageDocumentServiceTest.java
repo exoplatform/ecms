@@ -19,10 +19,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -30,12 +28,9 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.powermock.api.mockito.PowerMockito.mock;
-import static org.powermock.api.mockito.PowerMockito.when;
+import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PowerMockIgnore({ "javax.management.*" })
-@PrepareForTest({ WCMCoreUtils.class, ConversationState.class, Utils.class})
+@RunWith(MockitoJUnitRunner.class)
 public class ManageDocumentServiceTest {
 
   @Mock
@@ -58,9 +53,12 @@ public class ManageDocumentServiceTest {
 
   private ManageDocumentService manageDocumentService;
 
+  MockedStatic<Utils> UTILS;
+  MockedStatic<SessionProvider> SESSION_PROVIDER;
+
   @Before
   public void setUp() throws Exception {
-    PowerMockito.mockStatic(WCMCoreUtils.class);
+    MockedStatic<WCMCoreUtils> WCM_CORE_UTILS = mockStatic(WCMCoreUtils.class);
     ValueParam valueParam = mock(ValueParam.class);
     when(valueParam.getValue()).thenReturn("20");
     when(initParams.getValueParam("upload.limit.size")).thenReturn(valueParam);
@@ -68,21 +66,33 @@ public class ManageDocumentServiceTest {
 
     SessionProvider userSessionProvider = mock(SessionProvider.class);
     SessionProvider systemSessionProvider = mock(SessionProvider.class);
-    when(WCMCoreUtils.getUserSessionProvider()).thenReturn(userSessionProvider);
-    when(WCMCoreUtils.getSystemSessionProvider()).thenReturn(systemSessionProvider);
+    WCM_CORE_UTILS.when(WCMCoreUtils::getUserSessionProvider).thenReturn(userSessionProvider);
+    WCM_CORE_UTILS.when(WCMCoreUtils::getSystemSessionProvider).thenReturn(systemSessionProvider);
     RepositoryService repositoryService = mock(RepositoryService.class);
-    when(WCMCoreUtils.getService(RepositoryService.class)).thenReturn(repositoryService);
+    WCM_CORE_UTILS.when(() -> WCMCoreUtils.getService(RepositoryService.class)).thenReturn(repositoryService);
     ManageableRepository manageableRepository = mock(ManageableRepository.class);
     when(repositoryService.getCurrentRepository()).thenReturn(manageableRepository);
-    when(systemSessionProvider.getSession("collaboration", manageableRepository)).thenReturn(session);
+    lenient().when(systemSessionProvider.getSession("collaboration", manageableRepository)).thenReturn(session);
     when(userSessionProvider.getSession("collaboration", manageableRepository)).thenReturn(session);
-    PowerMockito.mockStatic(ConversationState.class);
+    MockedStatic<ConversationState> CONVERSATION_STATE = mockStatic(ConversationState.class);
     ConversationState conversationState = mock(ConversationState.class);
-    when(ConversationState.getCurrent()).thenReturn(conversationState);
+    CONVERSATION_STATE.when(ConversationState::getCurrent).thenReturn(conversationState);
     Identity identity = mock(Identity.class);
     when(conversationState.getIdentity()).thenReturn(identity);
     when(identity.getUserId()).thenReturn("user");
-    PowerMockito.mockStatic(Utils.class);
+    DriveData driveData = mock(DriveData.class);
+    when(manageDriveService.getDriveByName(anyString())).thenReturn(driveData);
+    when(driveData.getHomePath()).thenReturn("path");
+    UTILS = mockStatic(Utils.class);
+    UTILS.when(() -> Utils.getPersonalDrivePath("path", "user")).thenReturn("personalDrivePath");
+    UTILS.when(() -> Utils.cleanString(anyString())).thenCallRealMethod();
+    UTILS.when(() -> Utils.cleanName(anyString())).thenCallRealMethod();
+    UTILS.when(() -> Utils.cleanName(anyString(), anyString())).thenCallRealMethod();
+    UTILS.when(() -> Utils.cleanNameWithAccents(anyString())).thenCallRealMethod();
+    UTILS.when(() -> Utils.replaceSpecialChars(anyString(), anyString())).thenCallRealMethod();
+    UTILS.when(() -> Utils.replaceSpecialChars(anyString(), anyString(), anyString())).thenCallRealMethod();
+    SESSION_PROVIDER = mockStatic(SessionProvider.class);
+    SESSION_PROVIDER.when(SessionProvider::createSystemProvider).thenReturn(systemSessionProvider);
   }
 
   @Test
@@ -96,19 +106,21 @@ public class ManageDocumentServiceTest {
     response = this.manageDocumentService.checkFileExistence("collaboration", "testspace", "/documents", null);
     assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 
-    response = this.manageDocumentService.checkFileExistence("collaboration", "testspace", "/documents", "test.docx");
-    DriveData driveData = mock(DriveData.class);
-    when(manageDriveService.getDriveByName(anyString())).thenReturn(driveData);
-    when(driveData.getHomePath()).thenReturn("path");
-    when(Utils.getPersonalDrivePath("path", "user")).thenReturn("personalDrivePath");
     Node node = mock(Node.class);
-    when(session.getItem("personalDrivePath")).thenReturn(node);
-    when(node.hasNode("Documents")).thenReturn(true);
+    when(session.getItem(anyString())).thenReturn(node);
+    lenient().when(node.hasNode("Documents")).thenReturn(true);
     Node targetNode = mock(Node.class);
-    when(node.getNode("Documents")).thenReturn(targetNode);
-    when(node.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(false);
-    when(fileUploadHandler.checkExistence(targetNode, "test.docx")).thenReturn(Response.ok().build());
+    lenient().when(node.getNode("Documents")).thenReturn(targetNode);
+    lenient().when(node.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(false);
+    Node folderNode1 = mock(Node.class);
+    when(node.addNode(anyString(), eq(NodetypeConstant.NT_FOLDER))).thenReturn(folderNode1);
+    lenient().when(fileUploadHandler.checkExistence(targetNode, "test.docx")).thenReturn(Response.ok().build());
+
+    response = this.manageDocumentService.checkFileExistence("collaboration", "testspace", "/documents", "test.docx");
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
+
+    response = this.manageDocumentService.checkFileExistence("collaboration", ".spaces.space_one", "DRIVE_ROOT_NODE/Documents", "test.docx");
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
   }
 }

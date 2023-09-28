@@ -20,6 +20,7 @@ import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 //import org.exoplatform.wcm.connector.authoring.TestCopyContentFile;
 //import org.exoplatform.wcm.connector.authoring.TestLifecycleConnector;
+import org.exoplatform.ecm.connector.platform.ManageDocumentServiceTest;
 import org.exoplatform.wcm.connector.collaboration.TestDownloadConnector;
 import org.exoplatform.wcm.connector.collaboration.TestFavoriteRESTService;
 import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
@@ -47,7 +48,8 @@ import org.junit.runners.Suite.SuiteClasses;
   TestDownloadConnector.class,
   TestOpenInOfficeConnector.class,
   TestThumbnailRESTService.class,
-  TestFavoriteRESTService.class
+  TestFavoriteRESTService.class,
+  ManageDocumentServiceTest.class
 })
 @ConfigTestCase(BaseConnectorTestCase.class)
 public class BaseConnectorTestSuite extends BaseExoContainerTestSuite {
