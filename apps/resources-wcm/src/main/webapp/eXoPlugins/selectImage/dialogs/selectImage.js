@@ -165,11 +165,29 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
                         return;
                       }
                       var dialog = this.getDialog();
+                      const UrlProtocolRegex = /^(http|ftp|https):\/\/[^ "]+$/;
                       require(["SHARED/jquery"], function($) {
                         var $imageElement = $(dialog.getElement().$).find(".selectedImagePreview img");
+                        let imageLink = $(dialog.getElement().$).find(".imageLinkArea input").val();
+                        const imageLinkTarget = $(dialog.getElement().$).find(".imageLinkTargetArea select").find(":selected").val();
                         widget.setData( 'src', $imageElement.attr("src") );
                         widget.setData( 'alt', $imageElement.attr("alt") );
-
+                        if (imageLink && !UrlProtocolRegex.test(imageLink)) {
+                          imageLink = 'https://' + imageLink;
+                        }
+                        if (imageLink) {
+                          const url = imageLink.split('://')[1];
+                          const linkData = {
+                            type: 'url',
+                            url: {url: url, protocol: imageLink.split(url)[0],},
+                            target: {type: imageLinkTarget},
+                          }
+                          widget.setData('link', linkData);
+                          widget.setData('href', imageLink);
+                          widget.setData('target', imageLinkTarget);
+                        } else {
+                          widget.setData('link', null);
+                        }
                         if ($imageElement.hasClass("left")) {
                           widget.setData( 'align', 'left' );
                         } else if ($imageElement.hasClass("right")) {
@@ -188,6 +206,6 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
       require(["SHARED/uiSelectImage"], function(UISelectImage){
         UISelectImage.cancel();
       })
-    }
+    },
   };
 } );
