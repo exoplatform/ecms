@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Waktu berakhir</end-time>
+        <start-time>Waktu mulai</start-time>
+        <lifecycle>Lingkaran kehidupan</lifecycle>
+        <mimeType>Jenis Mime</mimeType>
+        <repeat-count>Menghitung ulang</repeat-count>
+        <time-interval>Jarak waktu</time-interval>
+        <query-items>Item Kueri</query-items>
+        <schedule-type>Jenis Jadwal</schedule-type>
+        <remove>Hapus Item</remove>
+        <add>Tambah Item</add>
+        <expand>Perluas ini</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Tautan</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Nama</name>
+    <categories>Kategori</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <UICommentForm>
+    <label>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
+    </label>
+  </UICommentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Nama</name>
+        <content>Isi</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Kategori</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <width>Lebar</width>
+        <height>Tinggi</height>
+        <content>#{word.content}</content>
+        <re-upload>Berkasnya sudah ada. anda dapat menghapus dan mengupload berkas lain.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Pelabuhan</port>
+      <userName>#{word.userName}</userName>
+      <password>Kata Sandi</password>
+      <link>Tautan</link>
+      <to>Kirim Surat ke</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Pelabuhan</port>
+      <userName>#{word.userName}</userName>
+      <password>Kata Sandi</password>
+      <link>Tautan</link>
+      <to>Kirim Surat ke</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron ekspresi</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Pencipta:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Sumber:</source>
+        <contributor>Penyumbang:</contributor>
+        <resource-type>Jenis Sumber Daya:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Penerbit:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Hak:</rights>
+        <relation>Hubungan:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Cakupan:</coverage>
+        <identifier>Pengenal:</identifier>
+        <language>Language:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Jenis utama</primary-type>
+        <mixin-types>Jenis Campuran</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Tujuan kerja</destination-workpsace>
+        <destination-path>Jalur Tujuan</destination-path>
+        <primary-type>Tipe utama</primary-type>
+        <mixin-types>Jenis Campuran</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Mulai Publikasi</start-publication>
+        <end-publication>Publikasi Akhir</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Hubungan</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Judul</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Sejarah Versi</version-history>
+        <base-version>Versi dasar</base-version>
+        <is-checked-out>Apakah periksa</is-checked-out>
+        <predecessors>Pendahulu</predecessors>
+        <merge-failed>Gabung Gagal</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Nama</name>
+        <autoload>Beban otomatis</autoload>
+        <minetype>Jenis MIME</minetype>
+        <content>Konten</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Alamat email tidak valid.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Bidangnya '{0}' ialah diperlukan. Silahkan masukkan nilai anda.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Bidangnya '{0}' tidak valid.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>Nama</name>
+        <lifecycle>Lingkaran kehidupan</lifecycle>
+        <homePath>Jalur rumah</homePath>
+        <targetWorkspace>Sasaran ruang kerja</targetWorkspace>
+        <targetPath>Jalur Sasaran</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Tidak dapat menyimpan dokumen ini. Mungkin ada masalah dengan sebuah pencegat pra-simpan.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>Tidak</no>
+<yes>iya nih</yes>
+<true>Benar</true>
+<false>Salah</false>
+<Electronic>Elektronik</Electronic>
+<Paper>Kertas</Paper>
+<NONE>Tak satupun</NONE>
+<CLASSIFIED>Rahasia</CLASSIFIED>
+<UNCLASSIFIED>Tidak diklasifikasikan</UNCLASSIFIED>
+<NOCONTRACT>Tidak ada kontrak</NOCONTRACT>
+<one-minute>Satu menit</one-minute>
+<hourly>Sejam</hourly>
+<daily>Harian</daily>
+<quarterly>Triwulanan</quarterly>
+<yearly>Tahunan</yearly>
+<ten-years>Sepuluh tahun</ten-years>
+<read>Aksi Pengguna</read>
+  <schedule>Penjadwal</schedule>
+  <node_added>Penambahan konten</node_added>
+  <node_removed>Penghapusan Konten</node_removed>
+  <property_added>Penambahan Properti</property_added>
+  <property_removed>Penghapusan Properti</property_removed>
+  <property_changed>Modifikasi Properti</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Dipengaruhi jenis simpul</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Apakah Dalam</isDeep>
+        <nodetypes>Jenis simpul</nodetypes>
+        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Keterangan</captions>
+<audioDescription>Deskripsi suara</audioDescription>
+<alternativeText>Teks alternatif</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Keterangan harus menyediakan teks percakapan dan suara penting</CaptionsHelp>
+<AudioDescriptionHelp>Sebuah deskripsi audio ialah sebuah diriwayatkan lacak dari video</AudioDescriptionHelp>
+<AlternativeTextHelp>Menyediakan sebuah tempat yang mudah diakses, cara alternatif dari penyajian informasi</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+
+ <!-- New Document i18n -->
+  <UIActionBar>
+    <tooltip>
+      <NewDocument>New Document</NewDocument>
+    </tooltip>
+  </UIActionBar>
+  
+  <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
+  <UITabForm>
+    <label>
+      <newDocument>New Document</newDocument>
+    </label>
+  </UITabForm>
+  <!-- For new document popup window -->
+  <UIPopupWindow>
+    <title>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
+    </title>
+  </UIPopupWindow>
+   <!-- For new document form -->
+  <UINewDocumentForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Create Document</Save>
+    </action>
+    <label>
+      <titleTextBox>Document Name:</titleTextBox>
+      <typeSelectBox>Document Type:</typeSelectBox>
+    </label>
+    <msg>
+      <name-invalid>Please enter the document name.</name-invalid>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
+    </msg>
+  </UINewDocumentForm>
+  
+</bundle>

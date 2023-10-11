@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Preferensi</Preferences>
+      <AddContent>Tambahkan Konten</AddContent>
+      <ManageContent>Kelola Konten</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Maaf, tidak ada artikel yang tersedia.</non-contents>
+      <item-not-found>Item tidak ditemukan.</item-not-found>
+      <no-permission>Anda tidak memiliki izin untuk mengakses node ini.</no-permission>
+      <category-back>Pergi ke halaman sebelumnya</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Daftar Preferensi Konten
+ </UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Daftar Preferensi Konten</Title>
+      <ContentSelectionBlock>Pemilihan Konten</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigCheckTranslationFormCheckboxInput>Multi-language support</UICLVConfigCheckTranslationFormCheckboxInput>
+      <UICLVConfigItemPathFormInputSet>Berkas Path</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Berkas Path</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Dipesan oleh</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Judul</exo:title>
+        <exo:dateCreated>Tanggal Dibuat</exo:dateCreated>
+        <exo:lastModifiedDate>Tanggal Diubah</exo:lastModifiedDate>
+        <publication:liveDate>Tanggal Diterbitkan</publication:liveDate>
+        <exo:startEvent>Tanggal Acara</exo:startEvent>
+        <exo:index>Indeks</exo:index>
+        <DESC>Keturunan</DESC>
+        <ASC>Kekuasaan</ASC>
+      </option>
+      <DisplaySettingBlock>Pengaturan Tampilan</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Item per halaman</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Tampilkan Gambar</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Lihat lainnya</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Tampilkan Header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Segarkan tampilan</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Tampilkan Judul</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Tampilkan Tanggal</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Tampilkan Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Tampilkan Tautan Lainnya</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Izinkan URL Dinamis</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Tampilkan tautan RSS</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Deteksi otomatis</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Lanjutan</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Navigasi dinamis</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Folder kontekstual</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>oleh</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>dengan</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Tampilkan di Halaman</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Tidak ditemukan konten.</content-not-found>
+      <ContentPath>Jalur Konten</ContentPath>
+      <Up>Atas</Up>
+      <Down>Turun</Down>
+      <UICLVConfigCacheManagementLabel>Visibilitas konten</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Konten menurut Kueri</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Ruang kerja</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>dengan kuery</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Berbagi konten antara pengguna</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <TranslationHelp>If you check this option, only contents with the user's language will appear in the list. For example: when this option is checked and that the user language is English, only contents written in the English language will be listed. Whereas when this option is not checked we list all the contents inside the folder.</TranslationHelp>
+      <ModeSelectionHelp>Dua mode yang tersedia untuk tampilan konten. "Oleh Folder" akan mengambil semua konten tersedia yang dapat anda pilih dalam folder/kategori. "Oleh Konten" memungkinkan anda secara manual memilih konten yang ingin anda tampilkan.</ModeSelectionHelp>
+      <FolderPathHelp>Pilih konten yang ingin untuk anda tampilkan. pilihan bawaan akan diganti secara dinamis jika anda mengaktifkan pilihan navigasi dinamis (lihat mode Lanjutan di bawah ini).</FolderPathHelp>
+      <HeaderOptionHelp>Tampilkan sebuah header di atas daftar isi. Jika anda mengaktifkan pilihan deteksi otomatis, ini akan mencoba untuk menemukan header berdasarkan pilihan saat ini.</HeaderOptionHelp>
+      <GeneralOptionHelp>Pilih elemen grafis yang ingin Kamu Tampilkan dalam daftar. Perhatikan bahwa, tergantung pada template Kamu pilih, beberapa elemen mungkin tidak tersedia.</GeneralOptionHelp>
+      <ContextualHelp>Mengaktifkan pilihan Navigasi Dinamis. yang lain bisa mengubah konten secara dinamis berdasarkan parameter URL.</ContextualHelp>
+      <ParameterHelp>Ukuran ini akan digunakan untuk mengakses konten jika Navigasi Dinamis diaktifkan.</ParameterHelp>
+      <ShowDetailInPageHelp>Mengklik pada konten untuk mengarahkan pengguna ke rincian halaman. anda harus memiliki sebuah "konten oleh URL" portlet dengan diaktifkan navigasi dinamis pada halaman target untuk menampilkan konten.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Parameter ini akan dihubungkan ke path konten pada link rincian halaman. Parameter ini harus cocok dengan parameter yang digunakan dalam "konten oleh URL" portlet pada halamannya.</DetailParameterHelp>
+      <ContentByQueryHelp>Anda bisa mengatur pertanyaan SQL untuk mendapatkan konten secara dinamis. Berikut parameter yang diizinkan : ${user}, ${lang} atau apapun bisa mendapatkan parameter (PARAM) yang dikelilingi oleh ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Dibatasi oleh Otentikasi" akan menyaring konten berdasarkan otentikasi. Jika anda tidak masuk, anda hanya akan melihat konten umum. Jika anda masuk, anda akan melihat semua konten yang terlihat oleh pengguna internet (tapi berbagi oleh semua). "Dibatasi oleh Peran Pengguna" berarti anda akan melihat konten tergantung pada hak-hak anda. Dalam kebanyakan kasus, pilihan ini tidak boleh digunakan, karena akan mengurangi kinerja secara keseluruhan.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <delete>Hapus</delete>
+    </action>
+    <msg>
+      <not-valid-path>Folder Path tidak valid.</not-valid-path>
+      <saving-success>Preferensi portlet disimpan.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Pemilihan Konten</clvContentTab>
+        <clvDisplayTab>Pengaturan Tampilan</clvDisplayTab>
+        <clvAdvancedTab>Lanjutan</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>Dengan Folder</AutoViewerMode>
+      <ManualViewerMode>Dengan Konten</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Pilih Folder Path</SelectFolderPath>
+      <AddPath>Menambahkan jalan</AddPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Browser Folder</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>Keturunan</OrderDesc>
+        <OrderAsc>Ascendant</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Pilih Jalur Dasar</SelectBasePath>
+      <SelectTargetPage>Pilih Jalur Dasar</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Pemilih Halaman</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <msg>
+      <confirm-delete>Apakah anda yakin anda ingin menghapus konten ini?</confirm-delete>
+      <delete-content-successfully>Konten berhasil dihapus.</delete-content-successfully>
+    </msg>
+    <label>
+      <readmore>Read more</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+    </label>
+    <action>
+      <refresh>Perbarui</refresh>
+      <edit>Mengubah Konten Explorer</edit>
+      <delete>Hapus</delete>
+      <publish>Menerbitkan</publish>
+    </action>
+    <label>
+      <draft>Rancangan</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Beberapa Konten Pilihan Panel</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Diaktifkan</contextualEnable>
+      <contextualDisable>Cacat</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Diarsipkan</archived>
+    <obsolete>Usang</obsolete>
+    <unpublished>Tidak diterbitkan</unpublished>
+    <enrolled>Terdaftar</enrolled>
+    <draft>Konsep</draft>
+    <pending>Tunda</pending>
+    <approved>Disetujui</approved>
+    <inreview>Dalam Review</inreview>
+    <staged>Dipentaskan</staged>
+    <published>Diterbitkan</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Dibatasi oleh otentikasi</ENABLE>
+      <DISABLE>Restricted by User Roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

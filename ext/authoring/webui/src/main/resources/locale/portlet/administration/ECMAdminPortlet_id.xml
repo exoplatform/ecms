@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>Publikasi&gt; Permintaan Persetujuan</publicationRequestApproval>
+          <publicationApproveContent>Publikasi&gt; Setujui Konten</publicationApproveContent>
+          <publicationPublish>Publikasi&gt; Publikasikan</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>

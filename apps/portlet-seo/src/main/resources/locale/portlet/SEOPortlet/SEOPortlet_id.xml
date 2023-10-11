@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Judul:</title>
+      <description>Deskripsi:</description>
+      <keywords>Kata kunci:</keywords>
+      <language>Bahasa:</language>
+      <robots>Robot:</robots>
+      <sitemap>Peta situs:</sitemap>
+      <sitemapvisible>Terlihat pada peta situs</sitemapvisible>
+    <isInherited>Diwarisi dari induk halaman</isInherited>
+      <priority>Priority:</priority>
+      <frequency>Frekuensi:</frequency>
+      <select-language>Pilih bahasa</select-language>
+      <option>
+        <Always>Selalu</Always>
+        <Hourly>Per jam</Hourly>
+        <Daily>Harian</Daily>
+        <Weekly>Mingguan</Weekly>
+        <Monthly>Bulanan</Monthly>
+        <Yearly>Tahunan</Yearly>
+        <Never>Tak pernah</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Nilai jarak yang benar berkisar antara 0,0 sampai 1.0</priority>
+  </tip>   
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Terjadi sebuah kesalahan tak terduga saat menyimpan metadata halaman.</repository-exception>
+      <confirm-delete>Apakah anda yakin anda ingin menghapus data SEO ini?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Hapus</seo-delete>
+    </title>
+  <help> 
+  <priority>Nilai jarak yang sah berkisar antara 0,0 sampai 1.0.</priority>
+  <description>Membantu pencari: beri tahu mereka bahwa halaman berikut memiliki tautan yang mereka cari.</description>
+  <keywords>Bahasa yang paling penting dalam halaman yang terpisah dengan koma.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Manajemen SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Manajemen SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Nilai Prioritas bidang harus dalam format menurut angka. Nila jarak yang sah adalah dari 0,0 sampai 1,0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

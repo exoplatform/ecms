@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Disana tidak ada isi yang dipilih. Silahkan pilih minimal satu.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Ganti nama</rename>
+      <cancel>Batal</cancel>
+    </label>
+    <msg>
+      <renaming>Mengubah nama...</renaming>
+    </msg>
+  </RenameConnector>
+  <OpenInOfficeConnector>
+    <label>
+      <exo>
+        <remote-edit>
+          <word>Buka di word</word>
+          <excel>Buka di Excel</excel>
+          <powerpoint>Buka di Powerpoint</powerpoint>
+          <desktop>Buka pada Desktop</desktop>
+          <desktop-app>Buka dalam {0}</desktop-app>
+        </remote-edit>
+      </exo>
+    </label>
+  </OpenInOfficeConnector>
+  <DocumentAutoVersion>
+    <msg>
+      <WrongMimeType>Jenis mime dari berkas yang diunggah itu adalah tidak diketahui. Tidak ada versi baru dari {0} yang akan dibuat.</WrongMimeType>
+    </msg>
+  </DocumentAutoVersion>
+</bundle>

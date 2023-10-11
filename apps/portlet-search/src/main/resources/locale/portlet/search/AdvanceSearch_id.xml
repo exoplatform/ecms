@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Kata kunci</keyword>
+      <portal>Portal</portal>
+      <Page>Halaman</Page>
+      <Document>Dokumen</Document>
+    </label>
+    <action>
+      <Search>Cari</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Halaman</Page>
+      <Document>Dokumen</Document>
+      <DocumentAndPage>Dokumen dan halaman</DocumentAndPage>
+      <documentandpage>Dokumen dan halaman</documentandpage>
+      <results>Hasil {0} untuk {1} untuk {2}</results>
+      <oneResult>Hanya satu hasil untuk {0}</oneResult>
+      <ofAboutCaption>tentang</ofAboutCaption>
+      <timeUnitCaption>detik-detik</timeUnitCaption>
+      <similar>Tempat konten yang sama muncul</similar>
+      <editor>Editor</editor>
+      <date>Tanggal</date>
+      <relevancy>Relevansi</relevancy>
+      <title>Judul</title>
+      <sortBy>Urutkan Berdasarkan:</sortBy>
+    </label>
+    <action>
+      <edit>Ubah</edit>
+    </action>
+    <msg>
+      <search-not-match-type>Pencarian anda {0} tidak cocok dengan apapun{1}.</search-not-match-type>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Item per halaman</itemsPerPageSelector>
+      <searchFormSelector>Cari bentuk Template</searchFormSelector>
+      <searchResultSelector>Hasil Pencarian Template</searchResultSelector>
+      <searchPaginatorSelector>Pencarian Template Paginator</searchPaginatorSelector>
+      <searchPageLayoutSelector>Mencari Halaman Tata Letak Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Path Dasar</searchResultBasePathInputSetAction>
+      <pageMode>Mode Halaman</pageMode>
+      <option>
+        <none>Tidak ada</none>
+        <more>Lainnya</more>
+        <pagination>Pagination</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>#{kata.menyimpan}</Save>
+      <Cancel>#{kata.membatalkan}</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Memilih Jalur Dasar</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Kata kunci tidak benar.Beberapa karakter tidak dikenali.</keyword-not-support>
+     <not-checked>Silahkan memilih jenis pencarian.</not-checked>
+     <keyword-not-empty>Silahkan memasukkan kata kunci.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Selanjutnya</next>
+      <previous>Sebelumnya</previous>
+      <more>Lainnya</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Mengubah dengan cepat</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>pada Halaman</pageCheckBox>
+      <documentCheckBox>pada Konten</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>cari semua situs</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Dasbor penulis</title>
+      <nocontent>Tidak ada isi</nocontent>
+      <mydraft>Draft konten saya</mydraft>
+      <waitingapproval>Menunggu persetujuan saya</waitingapproval>
+      <approve>Menyetujui</approve>
+      <publishedtomorrow>Untuk dipublikasikan besok</publishedtomorrow>
+      <refresh>#{word.refresh}</refresh>
+    </label>
+  </UIDashboardForm>
+</bundle>

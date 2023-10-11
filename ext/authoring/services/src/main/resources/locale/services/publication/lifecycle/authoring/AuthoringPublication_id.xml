@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Konten itu sudah usang</obsoleted>
+        <published>Konten itu dipublikasikan</published>
+<unpublished>Konten tidak dipublikasikan</unpublished>
+<archived>Konten diarsipkan</archived>
+<staged>Konten dipentaskan</staged>
+<approved>Konten telah disetujui</approved>
+<pending>Kontennya tertunda</pending>
+<draft>Isinya ada dalam bentuk draft</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+  <Publication>
+    <log>
+      <description>
+        <enrolled>Kontennya masuk dalam publikasi siklus kehidupan</enrolled>
+      </description>
+    </log>
+  </Publication>
+</bundle>

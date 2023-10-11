@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Tampilan Informasi</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Tampilan Informasi</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Nama</name>
+      <title>Judul</title>
+      <type>Tipe</type>
+      <size>Ukuran</size>
+      <owner>Pemilik</owner>
+      <lastModifier>Pengubah terakhir</lastModifier>
+      <created>Tanggal Dibuat</created>
+      <lastModified>Tanggal Perubahan Terakhir</lastModified>
+      <publicationState>Publikasi Negara</publicationState>
+</label>
+<value>
+      <folder>Folder</folder>
+</value>
+<action>
+<Close>#{word.close}</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

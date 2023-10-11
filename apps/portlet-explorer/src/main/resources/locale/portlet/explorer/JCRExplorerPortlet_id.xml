@@ -1,0 +1,3249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>Nama</name>
+      <email>Email</email>
+      <website>Situs Web</website>
+      <comment>Komentar</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>Anda tidak dapat berkomentar tentang jenis dokumen ini.</not-support>
+      <not-checkedout>Anda harus memeriksa dokumen terlebih dahulu sebelum mengomentarinya.</not-checkedout>
+      <content-null>Anda tidak bisa memposting komentar kosong.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Buruk</normal>
+      <good>Di bawah rata-rata</good>
+      <verygood>Rata-rata</verygood>
+      <excellent>Di atas rata-rata</excellent>
+      <best>Bagus</best>
+      <no-value>belum ada nilai</no-value>
+    </title>
+    <label>
+      <my-rating>Penilaian saya:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>Oke</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>Anda tidak dapat memilih tipe dokumen ini.</not-support>
+      <not-checkedout>Anda harus memeriksa dokumen untuk memilih.</not-checkedout>
+      <vote-restriction>Anda tidak dapat memilih lebih dari sekali.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>Sesi disegarkan dengan sukses.</refresh-session-success>
+      <no-node-history>Anda berada pada akar folder.</no-node-history>
+      <save-session-success>Semua perubahan telah disimpan.</save-session-success>
+      <target-path-not-found>Kamu tidak dapat mengakses jalan ini, entah karena tidak ada lagi atau karena Kamu tidak memiliki hak akses.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Relasi</Relation>
+      <Explorer>Penjelajah Berkas</Explorer>
+      <Close>Tutup sisi bar</Close>
+      <TagExplorer>Penanda awan</TagExplorer>
+      <Clipboard>Papan klip</Clipboard>
+      <SavedSearches>Simpan pencarian</SavedSearches>
+    </label>
+    <title>
+      <Control>Control Sidebar</Control>
+      <Close>Tutup Sidebar</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>Mendorong ruang kerja:</driveWorkspace>
+      <backToJCR>Kembali untuk JCR drive utama</backToJCR>
+      <setUpBrowser>Siapkan preferensi penjelajah anda</setUpBrowser>
+      <refesh>Perbarui</refesh>
+      <currentDrive>Mendorong arus</currentDrive>
+      <selectView>Pilih melihat</selectView>
+      <showSideBar>Tampilkan Sidebar</showSideBar>
+      <more>Lainnya</more>
+      <backTo>Kembali</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesArea  #
+  #############################################################################
+  -->
+  <UIDrivesBrowser>
+    <title>
+      <PersonalDrives>Drive pribadi</PersonalDrives>
+      <GroupDrives>Kelompok drive</GroupDrives>
+      <GeneralDrives>Drive Umum</GeneralDrives>
+    </title>
+    <msg>
+      <no-view-found>Ada tidak ada pemandangan yang tersedia menurut Anda izin akses dalam drive '{0}'.</no-view-found>
+      <access-denied>Akses ditolak. Mungkin kamu tidak memiliki izin kerja dari drive '{0}'.</access-denied>
+      <workspace-not-exist>Berkendara '{0}' disimpan dalam satu workspace tidak diakui. Harap mengkonfigurasi ulang drive ini.</workspace-not-exist>
+    </msg>
+  </UIDrivesBrowser>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Penjelajah</title>
+    <label>
+      <Root>Akar</Root>
+      <webDavView>Buka di MS Office</webDavView>
+    </label>
+    <msg>
+      <path-not-found>Elemen ini telah dihapus atau diubah. mohon klik tombol refresh.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Terjemahan</languages-list>
+      <relation-list>Hubungan</relation-list>
+      <references-list>Referensi</references-list>
+      <no-related-document>Tidak ada terkait dokumen</no-related-document>
+      <related-document>Dokumen terkait</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Mengatur preferensi perambanan</title>
+    <label>
+      <enableStructure>Pencarian dalam struktur mode:</enableStructure>
+      <showSideBar>Menunjukkan bilah sisi:</showSideBar>
+      <showHiddenNode>Munculkan item yang tersembunyi:</showHiddenNode>
+      <showNonDocument>Munculkan item bukan dokumen:</showNonDocument>
+      <showRefDocuments>Munculkan direferensikan item:</showRefDocuments>
+      <enableDragAndDrop>Aktifkan drag &amp; drop:</enableDragAndDrop>
+      <sortBy>Urutan:</sortBy>
+      <order>Pesanan oleh:</order>
+      <nodesPerPage>Item per halaman:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Tetapkan filter preferensi</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Ubah nama</title>
+    <label>
+      <nameField>Nama</nameField>
+      <titleField>Judul</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>'{0}' diganti namanya menjadi '{1}' sukses sepenuhnya.</rename-successfull>
+      <rename-denied>Jalan masuk ditolak. anda tidak dapat mengganti nama item ini.</rename-denied>
+      <fileName-invalid>Nama barunya berisi beberapa karakter yang tidak sah.</fileName-invalid>
+      <newName-same-oldName>Nama baru ini sudah ada. silahkan periksa kembali.</newName-same-oldName>
+      <version-exception>Dokumen ini (atau salah satu leluhurnya) tidak diperiksa.</version-exception>
+      <lock-exception>Dokumen ini terkunci. silahkan membuka kuncinya sebelum mengganti nama.</lock-exception>
+      <constraintViolation-exception>Sebuah kesalahan terjadi saat mengganti nama '{0}'. silahkan Periksa kembali.</constraintViolation-exception>
+      <unknown-prefix>Awalan '{0}' belum terdaftar.</unknown-prefix>
+      <rename-error>Sebuah kesalahan terjadi saat mengganti nama. Silahkan Periksa lagi.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Ubah nama</UIRenameForm>
+      <UIActionContainer>Ubah Tindakan</UIActionContainer>
+      <UIFolderForm>Folder baru</UIFolderForm>
+      <UIUploadManager>Unggah data</UIUploadManager>
+      <UIReferencesList>Daftar referensi</UIReferencesList>
+      <UIExportNode>Ekspor</UIExportNode>
+      <UINodeTypeInfo>Informasi jenis simpul</UINodeTypeInfo>
+      <UIVersionInfo>Informasi versi</UIVersionInfo>
+      <UIActivateVersion>Versi aktif</UIActivateVersion>
+      <UIAuditingInfo>Audit informasi</UIAuditingInfo>
+      <UIActivateAuditing>Aktifkan audit</UIActivateAuditing>
+      <UIPermissionManager>Manajemen izin</UIPermissionManager>
+      <UIPropertiesManager>Manajemen Properti</UIPropertiesManager>
+      <UIECMSearch>Pencarian Custom</UIECMSearch>
+      <UISavedQuery>Daftar queri Tersimpan</UISavedQuery>
+      <UIWatchDocumentForm>Menonton dokumen</UIWatchDocumentForm>
+      <UIActionManager>Kelola Tindakan</UIActionManager>
+      <UIDocumentForm>Ubah Dokumen</UIDocumentForm>
+      <UIDocumentFormController>Tambahkan Dokumen Baru</UIDocumentFormController>
+      <EditFormController>Ubah Dokumen</EditFormController>
+      <UIRelationManager>Tambahkan hubungan</UIRelationManager>
+      <UICategoryManager>Tambahkan kategori</UICategoryManager>
+      <UIImportNode>Impor</UIImportNode>
+      <UIViewMetadataManager>Lihat Metadata</UIViewMetadataManager>
+      <UIVoteForm>Dokumen suara</UIVoteForm>
+      <UICommentForm>Komentar</UICommentForm>
+      <UIPreferencesForm>Preferensi pencarian dokumen</UIPreferencesForm>
+      <UIPublicationManager>Mengelola Publikasi</UIPublicationManager>
+      <UIConfirmMessage>Menghapus ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Menghapus berkas ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Hapus Folder?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Hapus Item?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Konfirmasi pengembalian</UIRestoreConfirmMessage>
+      <UIActivePublication>Mendaftar untuk publikasi lingkaran kehidupan</UIActivePublication>
+      <UITaggingForm>Menandai dokumen</UITaggingForm>
+      <UIThumbnailForm>Tambahkan gambar Thumbnail</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Preferensi jelajah dokumen</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Pilih path yang dipulihkan</UISelectRestorePath>
+      <UISEOForm>Mengelola SEO</UISEOForm>
+      <UISEOToolbarForm>Mengelola SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Buka dokumen</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Salinan dokumen</UIDocumentAutoVersionForm>
+    </title>
+    <header>
+      <workspace>Ruang kerja</workspace>
+      <path>Jalan</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Mengedit isi File</title>
+    <label>
+      <name>Nama</name>
+      <textToModify>Teks untuk dimodifikasi</textToModify>
+      <fileToUpload>Unggah konten baru untuk dokumen itu (pastilah jenis mime yang sama)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Folder baru</AddFolder>
+      <AddDocument>Konten baru</AddDocument>
+      <EditDocument>Ubah</EditDocument>
+      <Upload>Upload</Upload>
+      <Paste>Tempel</Paste>
+      <Search>Cari</Search>
+      <WatchDocument>Menantau/Tidak Memantau</WatchDocument>
+      <TaggingDocument>Menandai</TaggingDocument>
+      <Vote>Memilih</Vote>
+      <Comment>Komentar</Comment>
+      <ManageVersions>Versi</ManageVersions>
+      <ManageAuditing>Audit</ManageAuditing>
+      <ManagePublications>Publikasi</ManagePublications>
+      <ManageCategories>Kategori</ManageCategories>
+      <ManageRelations>Hubungan</ManageRelations>
+      <ManageActions>Tindakan</ManageActions>
+      <ExportNode>Ekspor</ExportNode>
+      <ImportNode>Impor</ImportNode>
+      <OverloadThumbnail>Ubah gambar icon</OverloadThumbnail>
+      <ManageHidden>Tampilkan/Sembunyikan konten</ManageHidden>
+      <ViewReferences>Referensi</ViewReferences>
+      <ViewNodeType>Jenis</ViewNodeType>
+      <ViewPermissions>Izin</ViewPermissions>
+      <ViewProperties>Properti</ViewProperties>
+      <ViewMetadatas>Metadata</ViewMetadatas>
+      <ViewRelations>Tampilkan/Sembunyikan hubungan</ViewRelations>
+      <ShowJCRStructure>Tampilkan/Sembunyikan struktur konten</ShowJCRStructure>
+      <EditProperty>Ubah properti dokumen</EditProperty>
+      <UploadNewVersion>Upload a version</UploadNewVersion>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>Kamu tidak dapat melakukan tindakan pada akar ini.</cannot-action-in-rootnode>
+      <node-checkedin>Kamu harus check dulu.</node-checkedin>
+      <cannot-enable-version-rootnode>Tidak dapat mengaktifkan pada versi root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Tidak dapat mengaktifkan publikasi di root.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>Hanya dokumen yang bisa diterbitkan.</not-supported-nodetype>
+        <no-publication-lifecycle>Tidak ada publikasi siklus kehidupan yang dikonfigurasi.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>Dokumen itu sudah berhenti berlangganan.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Operasi ini hanya didukung untuk dokumen.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Dokumen itu berhenti berlangganan dengan sukses.</unsubcriber-lifecycle-finish>
+      <access-false>Dokumen ini bukan artikel atau lapor masuk.</access-false>
+      <unsupported-action>Tindakan ini tidak didukung.</unsupported-action>
+      <not-relationable>Dokumen ini tidak memiliki hubungan.</not-relationable>
+      <node-pasted>'{0}' telah disisipkan di lokasi '{1}'. Operasi ini sudah disimpan.</node-pasted>
+      <no-node-selected>Tidak untuk menyalin.</no-node-selected>
+      <unable-edit>Mengubah jenis dokumen '{1}' sepertinya '{0}' tidak didukung.</unable-edit>
+      <not-support>Tidak dapat mengubah item yang dipilih.</not-support>
+      <template-null>Dokumen ini belum ada bentuk template.</template-null>
+      <keyword-null>Tidak ada kata kunci untuk dicari.</keyword-null>
+      <not-found>Tidak ada hasil yang ditemukan.</not-found>
+      <keyword-not-allow>Kata kunci ini tidak diperbolehkan.</keyword-not-allow>
+      <is-not-referenable>'{0}' tidak dapat direferensikan.</is-not-referenable>
+      <access-denied>Akses ditolak. Anda tidak memiliki izin untuk mengubah item ini.</access-denied>
+      <access-add-denied>Akses ditolak. Anda tidak memiliki izin untuk menambahkan item di sini.</access-add-denied>
+      <item-existed>Node ini sudah ada. Tidak mungkin mempunyai nama yang sama dengan saudara kandungnya.</item-existed>
+      <removed-hidden-mixin>Anda sukses menghapus mixin tersembunyi.</removed-hidden-mixin>
+      <added-hidden-mixin>Anda telah sukses menambahkan mixin tersembunyi.</added-hidden-mixin>
+      <not-supported>Fungsi ini hanya didukung untuk jenis dokumen.</not-supported>
+      <empty-file-type>Anda tidak dapat menambahkan dokumen di sini.</empty-file-type>
+      <unsupported-watch>Hanya dokumen yang dapat disaksikan.</unsupported-watch>
+      <watch-checkedin>Anda harus memeriksa dokumen sebelum menonton.</watch-checkedin>
+      <unsupported-tagging>Hanya dokumen yang dapat ditandai.</unsupported-tagging>
+      <tagnode-checkedin>Anda harus memeriksa dokumen sebelum penandaan.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Pilih Tab</select-tab>
+      <SimpleSearch>Pencarian cepat</SimpleSearch>
+      <AdvanceSearch>Pencarian Custom</AdvanceSearch>
+      <SavedQueries>Kueri yang Disimpan</SavedQueries>
+      <ShowAllOwnedByUser>Tampilkan Semua Item Saya</ShowAllOwnedByUser>
+      <ShowAllFavourite>Tampilkan Semua Item Favorit</ShowAllFavourite>
+      <ShowAllHidden>Tampilkan Semua Item Tersembunyi</ShowAllHidden>
+      <ShowAllFromTrash>Tampilkan Semua Item Dari Troli Sampah</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>Akses ditolak. Anda tidak memiliki izin untuk menambahkan item ini.</has-not-permission>
+      <has-not-edit-permission>Akses ditolak. Anda tidak memiliki izin mengubah di sini. Silahkan hubungi administrator.</has-not-edit-permission>
+      <cannot-login-node>Anda tidak dapat mengakses dan menyisipkan item di sini.</cannot-login-node>
+      <cannot-paste-nodetype>Anda tidak bisa menyisipkan jenis item ini di sini.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Anda tidak memiliki izin untuk membuka dokumen ini.</has-not-permission-unlok>
+      <bound-exception>Anda tidak memiliki izin untuk mengubah nama item ini. Silahkan hubungi administrator.</bound-exception>
+      <bound-move-exception>Anda tidak dapat memindahkan item kedalam dirinya sendiri atau dalam subfolder.</bound-move-exception>
+      <does-not-support-auditing>Kamu tidak bisa mengaktifkan audit di sini.</does-not-support-auditing>
+      <can-not-rename-node>Anda tidak memiliki izin untuk mengganti nama item ini. Silahkan Hubungi administrator untuk mendapatkan hak yang diperlukan.</can-not-rename-node>
+      <can-not-cut-node>Anda tidak memiliki izin untuk memotong item ini. Silahkan hubungi administrator.</can-not-cut-node>
+      <can-not-remove-node>Anda tidak memiliki izin untuk menghapus item ini. Silahkan hubungi administrator.</can-not-remove-node>
+      <can-not-lock-node>Anda tidak memiliki izin untuk mengunci {0}. Silahkan hubungi administrator.</can-not-lock-node>
+      <can-not-unlock-node>Anda tidak memiliki izin untuk membuka kunci item ini. Silahkan hubungi administrator.</can-not-unlock-node>
+      <no-node>Harap pilih setidaknya satu item sebelum ditempelkan.</no-node>
+      <can-not-paste-node>Anda tidak memiliki izin untuk pindah ke item ini. Silahkan menghubungi administrator.</can-not-paste-node>
+      <can-not-move-node>Anda tidak memiliki izin untuk memindahkan item ini. Silahkan menghubungi administrator.</can-not-move-node>
+      <does-not-support-versioning>Anda tidak memiliki izin untuk pindah. Silahkan menghubungi administrator.</does-not-support-versioning>
+      <path-not-found>Elemen ini telah dihapus atau diganti. Silahkan Klik tombol Refresh.</path-not-found>
+      <paste-lock-exception>'{0}' tidak bisa disisipkan di sini. Atau Pastikan folder ini tidak terkunci. periksa juga bahwa tidak ada dokumen terkait yang terkunci.</paste-lock-exception>
+      <can-not-checkin-node>Kamu tidak mempunyai izin untuk pindah. Silahkan hubungi administrator.</can-not-checkin-node>
+      <can-not-checkout-node>Anda tidak dapat melihat item ini Harap periksa apakah Anda memiliki izin yang diperlukan.</can-not-checkout-node>
+      <move-constraint-exception>Terjadi kesalahan saat memindahkan item ini.</move-constraint-exception>
+      <not-lock-owner>Kamu tidak bisa membuka kunci dokumen ini karena Kamu bukan pemilik kunci.</not-lock-owner>
+      <is-checked-in>Silakan diperiksa dokumen ini sebelum memberi nama baru.</is-checked-in>
+      <is-checked-in-lock>Silakan diperiksa dokumen ini sebelum melakukan penguncian.</is-checked-in-lock>
+      <cant-lock>Kamu tidak bisa mengunci dokumen ini.</cant-lock>
+      <node-locked>Item dengan jalur {0} atau tingkat atas terkunci.</node-locked>
+      <can-not-delete>Silahkan tutup dokumen ini sebelum menghapusnya.</can-not-delete>
+      <can-not-delete-version>Kamu tidak bisa menghapus dokumen ini. Ini berversi.</can-not-delete-version>
+      <not-support>Kamu tidak bisa menghapus item yang dipilih. Silahkan pilih yang lain.</not-support>
+      <current-node-not-allow-paste>Kamu tidak bisa menempelkan item yang disalin di sana.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Anda tidak dapat menempelkan item yang disalin di sini karena itu berversi.</copied-node-in-versioning>
+      <parent-node-locked>Kamu tidak mempunyai izin untuk membuka kunci '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Anda tidak bisa membuka kunci item ini. Folder induk terkunci.</this-node-locked-by-parent>
+      <paste-node-same-name>Tidak dapat menyisipkan item ini di sini. Item dengan nama yang sama sudah ada di folder tujuan.</paste-node-same-name>
+      <has-not-add-permission>Anda tidak punya izin untuk menambahkannya di sini.</has-not-add-permission>
+      <node-cutting>Item sedang dipotong. anda tidak bisa menempelkannya di sini.</node-cutting>
+      <access-denied>Akses ditolak. mungkin anda tidak memiliki izin.</access-denied>
+      <remove-verion-exception>Kamu tidak bisa menghapus dokumen ini karena sudah diperiksa.</remove-verion-exception>
+      <remove-referentialIntegrityException>Kamu tidak bisa menghapus item ini karena saat ini direferensikan oleh yang lain.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Properti wajib jcr: uuid itu tidak ditemukan.dokumennya mungkin telah dihapus atau diubah.silahkan klik tombol refresh.</constraintviolation-exception>
+      <path-not-found-exception>Dokumen ini sudah dihapus atau diubah. Silahkan klik tombol Refresh.</path-not-found-exception>
+      <not-exist-categories>Kategori tidak ada.</not-exist-categories>
+      <lock-node-read-only>Berkas ini dikunci oleh pengguna {0}. Buka baca saja?</lock-node-read-only>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Buat Folder</Save>
+    </action>
+    <label>
+      <titleTextBox>Nama Folder:</titleTextBox>
+      <customTypeCheckBox>Gunakan sebuah jenis dari folder</customTypeCheckBox>
+    </label>
+    <title>Tambah/Ubah Folder</title>
+    <msg>
+      <addFolder-successful>Folder ini '{0}' berhasil ditambahkan.</addFolder-successful>
+      <name-invalid>Silahkan masukkan nama foldernya.</name-invalid>
+      <title-invalid>Silahkan masukkan judul folder.</title-invalid>
+      <name-not-allowed>Nama ini tidak diperbolehkan.</name-not-allowed>
+      <fileName-error>Nama berkas tidak sah.</fileName-error>
+      <constraint-violation>Anda tidak dapat menambahkan dokumen tipe ini '{0}' di sini.</constraint-violation>
+      <repository-exception>Terjadi kesalahan tak terduga. Silahkan hubungi administrtor anda untuk informasi lebih lanjut.</repository-exception>
+      <repository-exception-permission>Anda tidak memiliki izin untuk menambahkan folder baru di sini.</repository-exception-permission>
+      <numberformat-exception>Anda tidak dapat menyimpan folder ini. nama yang disediakan itu wajib dalam format angka.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>Anda tidak dapat menyimpan folder. Item dengan nama yang sama sudah ada.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Anda harus memilih tipe folder yang sesuai</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Periksa apakah anda berniat ingin menyimpan isi web atau jenis dokumen khusus di dalam folder ini</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Ikon</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Apakah Kamu yakin ingin menghapus item ini '{0}'?</confirm-delete>
+      <confirm-delete-file>Kamu Yakin ingin menghapus berkas ini '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Yakin ingin menghapus folder ini '{0}' dan semua subfoldernya?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Apakah Anda yakin Anda ingin menghapus item ini '{0}' secara permanen?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Yakin ingin menghapus berkas ini '{0}' secara permanen?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Apakah anda yakin ingin menghapus folder ini '{0}' dan semua subfoldernya secara permanen?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Apakah Anda yakin ingin menghapus folder ini '{0}' dan semua subfolder?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Apakah anda yakin ingin menghapus berkas ini '{0}' dan referensinya?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Apakah anda yakin ingin menghapus folder ini '{0}' dan rujukannya?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Apakah Anda yakin ingin menghapus item {0} yang dipilih?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Apakah kamu Yakin ingin menghapus berkas terpilih {0}?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Apakah kamu Yakin ingin menghapus {0} folder yang dipilih dan semua subfoldernya?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Apakah kamu Yakin ingin menghapus {0} item dan file yang dipilih?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Apakah anda yakin ingin menghapus {0} item, folder, dan semua subfolder yang dipilih?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Apakah anda yakin ingin menghapus {0} berkas, folder, dan semua subfolder yang dipilih?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Apakah anda yakin ingin menghapus {0} item, berkas, folder, dan semua subfolder yang dipilih?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Apakah Anda yakin ingin menghapus secara permanen item {0} yang dipilih?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Apaka anda yakin ingin menghapus berkas pilihan secara permanen {0}?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Apakah Anda yakin ingin menghapus secara permanen {0} folder dan semua subfolder yang dipilih?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Apakah anda yakin ingin menghapus secara permanen {0} item dan berkas yang dipilih?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Apakah Anda yakin ingin menghapus secara permanen {0} item, folder dan semua subfoldernya yang terpilih?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Apakah Anda yakin ingin menghapus secara permanen {0} file, folder dan semua subfolders yang dipilih?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Apakah Anda yakin ingin menghapus secara permanen {0} item, file, folder dan semua subfolders yang dipilih?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Apakah Anda yakin ingin menghapus {0} item dan referensinya yang dipilih?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Apakah Anda yakin ingin menghapus {0} file dan referensinya yang dipilih?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Apakah Anda yakin ingin menghapus {0} folder, semua subfolder dan referensinya yang dipilih?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Apakah Anda yakin ingin menghapus {0} item, file dan referensinya yang terpilih?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Apakah Anda yakin ingin menghapus {0} item, referensinya, folder dan semua subfolders yang terpilih?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Apakah Anda yakin ingin menghapus {0} file, folder referensinya, dan semua subfolders yang terpilih?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Apakah Anda yakin ingin menghapus {0} item, file, referensinya, folder dan semua subfolders yang terpilih?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' telah terhapus.</feedback-delete>
+      <feedback-delete-multi>{0} item telah terhapus.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' telah dihapus secara permanen.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} item akan dihapus secara permanen.</feedback-delete-permanently-multi>
+      <undo-delete>Kembali</undo-delete>
+      <feedback-restore>'{0}' berhasil dipulihkan.</feedback-restore>
+      <feedback-restore-multi>{0} item telah berhasil dipulihkan.</feedback-restore-multi>
+      
+      <confirm-restore>Item '{0}' sudah ada di lokasi sebelumnya. Apakah anda yakin ingin mengembalikannya?</confirm-restore>
+      <confirm-move>Apakah anda yakin ingin pindah?</confirm-move>
+      <node-cut>'{0}' telah dipotong.</node-cut>
+      <execute-successfully>Jenis tindakan '{0}' telah dijalankan.</execute-successfully>
+      <save-node-success>'{0}' telah disimpan.</save-node-success>
+      <move-problem>Anda tidak dapat memindahkan '{0}' ke '{1}' karena ada masalah dengan perizinan atau kondisi kendala.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>Item ini tidak punya anak.</no-children>
+      <no-children-but-has-hidden>Folder ini tidak memiliki item apapun, namun disana ada beberapa file tersembunyi.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>'{0}' telah diciptkan. silahkan simpan sesi untuk mengesahkan tindakan ini.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' telah disalin.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>Anda tidak dapat menghapus folder root.</remove-root>
+      <node-remove-success>'{0}' telah dihapus.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Ganti nama</Rename>
+      <Cut>Potong</Cut>
+      <Copy>Salin</Copy>
+      <Save>#{word.save}</Save>
+      <RemoveNode>Hapus</RemoveNode>
+      <Checkin>Mendaftar</Checkin>
+      <Checkout>Periksa</Checkout>
+      <Lock>Kunci</Lock>
+      <Unlock>Buka kunci</Unlock>
+      <EditDocument>Ubah</EditDocument>
+      <Paste>Tempel</Paste>
+      <LockedBy>Terkunci oleh</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>Akses ditolak. Anda tidak dapat mengakses '{0}'.</access-denied>
+      <null-exception>Item tidak ditemukan. Bisa saja telah dihapus atau diubah, atau anda tidak memiliki izin akses.</null-exception>
+      <confirm-deleteattachment>Apakah Anda yakin ingin menghapus lampiran berkas ini?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Apakah Anda yakin ingin menghapus komentar ini?</confirm-deleteattcomment>
+      <access-denied-exception>Akses ditolak. Anda mungkin tidak memiliki hak untuk membaca, atau mungkin dokumen tersebut telah dihapus atau diubah.</access-denied-exception>
+      <path-not-found>Elemen ini telah dihapus atau diganti. Klik tombol Refresh.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Hapus file lampiran ini</remove-attachment>
+      <remove-comment>Hapus komentar ini</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>Nama</name>
+        <versionable>Dapat dihitung</versionable>
+        <exo_owner>Pemilik</exo_owner>
+        <auditing>Memeriksa</auditing>
+        <exo_dateCreated>Tanggal Diciptakan</exo_dateCreated>
+        <exo_dateModified>Tanggal dimodifikasi</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Kunci</Lock>
+      <Unlock>Buka kunci</Unlock>
+      <EditDocument>Ubah</EditDocument>
+      <Copy>Salin</Copy>
+      <Rename>Ubah nama</Rename>
+      <Delete>Hapus</Delete>
+      <Save>#{word.save}</Save>
+      <Cut>Potong</Cut>
+      <Paste>Tempel</Paste>
+      <CheckOut>Periksa</CheckOut>
+      <CheckIn>Mendaftar</CheckIn>
+      <WebDAV>Lihat WebDAV</WebDAV>
+      <autoversion>Versi otomatis</autoversion>
+      <Custom>Adat</Custom>
+      <AddFolder>Folder baru</AddFolder>
+      <AddDocument>Konten baru</AddDocument>
+      <Upload>Unggah berkas</Upload>
+      <MoveNode>Pindah</MoveNode>
+      <UnLock>Buka kunci</UnLock>
+      <ViewProperties>Tampilkan Properti</ViewProperties>
+      <GetURL>Salin URL ke Clipboard</GetURL>
+      <AddThumbnail>Tambahkan/hapus Thumbnail</AddThumbnail>
+      <AddToFavourite>Tambahkan ke Favorit</AddToFavourite>
+      <RemoveFromFavourite>Hapus Dari Favorit</RemoveFromFavourite>
+      <MoveToTrash>Pindahkan ke Sampah</MoveToTrash>
+      <RestoreFromTrash>Pulihkan dari Sampah</RestoreFromTrash>
+      <EmptyTrash>Tong Sampah kosong</EmptyTrash>
+      <WebDavView>Buka pada MS Office</WebDavView>
+      <Download>Unduh</Download>
+      <OpenDocument>Ubah jarak jauh</OpenDocument>
+      <EditProperty>Ubah Properti Dokumen</EditProperty>
+      <UploadNewVersion>Unggah versi baru</UploadNewVersion>
+      <CreateNewVersion>Simpan sebagai versi baru</CreateNewVersion>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>Referensi tidak ditemukan</no-references>
+    </msg>
+    <header>
+      <workspace>Ruang kerja</workspace>
+      <path>Jalan</path>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>Revisi</UIPublicationPanel>
+      <UIPublicationSchedule>Dijadwalkan</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Halaman</UIPublicationPagesContainer>
+      <UIPublicationHistory>Riwayat</UIPublicationHistory>
+      <UIVersionViewer>Versi Pemirsa</UIVersionViewer>
+
+      <UIPropertyTab>Properti</UIPropertyTab>
+      <UIMetadataTab>Metadata</UIMetadataTab>
+      <UIPropertyForm>Tambahkan Properti Baru</UIPropertyForm>
+      <UIUploadContent>Informasi file yang diunggah</UIUploadContent>
+      <UIJCRAdvancedSearch>Kueri baru</UIJCRAdvancedSearch>
+      <UISavedQuery>Kueri tersimpan</UISavedQuery>
+      <AdvancedSearchResult>Hasil Pencarian</AdvancedSearchResult>
+      <UISimpleSearch>Pencarian Sederhana</UISimpleSearch>
+      <UISearchContainer>Pencarian Lanjutan</UISearchContainer>
+      <UICategoryManagerSearch>Tambahkan Kategori pada pencarian</UICategoryManagerSearch>
+      <UIConstraintsForm>Form Kendala</UIConstraintsForm>
+      <UIViewSearchResult>Tampilkan konten</UIViewSearchResult>
+      <UIContentNameSearch>Cari berdasarkan Nama</UIContentNameSearch>
+      <UINodeInfo>Informasi versi</UINodeInfo>
+      <UINodeProperty>Properti simpul</UINodeProperty>
+      <UIActionListContainer>Tindakan yang Tersedia</UIActionListContainer>
+      <UIActionContainer>Tambahkan Tindakan</UIActionContainer>
+      <UIActionViewContainer>Informasi tindakan</UIActionViewContainer>
+      <UIMultiLanguageForm>Tampilkan Bahasa</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Tambahkan Bahasa</UIAddLanguageContainer>
+      <UINonPublishedForm>Negara</UINonPublishedForm>
+      <UIPublishedForm>Negara</UIPublishedForm>
+      <UIPublicationLogList>Riwayat</UIPublicationLogList>
+      <UIDocumentWithTree>Tampilan berkas</UIDocumentWithTree>
+      <UIDocumentInfo>Tampilan Dokumen</UIDocumentInfo>
+      <UICategoriesSelectPanel>Pilih Kategori</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Kategori yang Direferensikan</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Tindakan Publikasi Alurkerja</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Tampilan Publikasi Alurkerja</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Situs Metadata</metadatasitemetadata>
+      <dcelementset>Dublin Core</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Ubah properti ini</edit>
+      <delete>Hapus properti ini</delete>
+    </title>
+    <confirm>
+      <remove-property>Apakah anda yakin ingin menghapus properti ini?</remove-property>
+    </confirm>
+    <header>
+      <name>Nama</name>
+      <multiValue>Banyak Nilai</multiValue>
+      <value>Nilai</value>
+      <action>Tindakan</action>
+    </header>
+    <label>
+      <binary>Binary Data</binary>
+      <notavailable>N/A</notavailable>
+      <cannotget>Tidak bisa mendapatkan nilai</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Tambah/Ubah Properti</title>
+    <label>
+      <name>Nama:</name>
+      <type>Jenis:</type>
+      <value>Nilai:</value>
+      <upload>Unggah:</upload>
+      <namespace>Nama ruang:</namespace>
+      <multiple>Banyak:</multiple>
+      <property_select>Tambahkan properti baru:</property_select>
+      <value0>Nilai 0</value0>
+      <value1>Nilai 1</value1>
+      <value2>Nilai 2</value2>
+      <value3>Nalai 3</value3>
+      <value4>Nilai 4</value4>
+      <value5>Nilai 5</value5>
+      <value6>Nilai 6</value6>
+      <value7>Nilai 7</value7>
+      <value8>Nilai 8</value8>
+      <value9>Nilai 9</value9>
+      <value10>Nilai 10</value10>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Setel ulang</Reset>
+    </action>
+    <msg>
+      <name-invalid>Silahka masukkan nama properti.</name-invalid>
+      <unable-create>Tidak dapat menambahkan properti.</unable-create>
+      <value-invalid>Harap masukkan nilainya.</value-invalid>
+      <node-checkedin>Anda harus memeriksa item ini sebelum menambahkan sebuah properti.</node-checkedin>
+      <can-not-add>Anda tidak dapat menambahkan properti kedalam item ini. Ini hanya diperbolehkan untuk jenis nt:yang tidak terstruktur.</can-not-add>
+      <propertyName-invalid>Nama properti harus termasuk nama ruang (contoh. Nama-nama ruang).</propertyName-invalid>
+      <propertyName-exist>Properti '{0}' sudah ada.</propertyName-exist>
+      <propertyValu-null>Beberapa nilai mungkin menjadi batal.</propertyValu-null>
+      <valueFormatEx>Anda tidak dapat menetapkan nilai bernilai banyak ke properti bernilai tunggal.</valueFormatEx>
+      <number-format-exception>Nilai yang Anda masukkan formatnya salah.</number-format-exception>
+      <property-not-exist>Properti '{0}' tidak ada.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Ubah</Edit>
+        <Delete>Menghapus Izin</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Pengguna atau Kelompok</usersOrGroups>
+      <read>Baca</read>
+      <addNode>Modifikasi</addNode>
+      <remove>Hapus</remove>
+      <action>Tindakan</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Apakah Anda yakin ingin menghapus izin ini?</confirm-delete-permission>
+      <no-permission-tochange>Anda tidak memiliki hak untuk menghapus izin.</no-permission-tochange>
+      <no-permission-remove>Anda tidak dapat menghapus pemiliknya.</no-permission-remove>
+      <access-denied>Akses ditolak. Anda tidak dapat menghapus izin ini.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Pilih Pengguna</SelectUser>
+      <SelectMember>Select Role</SelectMember>
+      <AddAny>Pilih Siapa saja</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Pilih Pengguna</UIGroupSelector>
+      <UIPermissionSelector>Pilih Anggota</UIPermissionSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Jelajahi dan Pilih sebuah Grup</selectGroup>
+      <selectUser>Pilih Pengguna</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' ini adalah pemilik barang dan memiliki izin penguasaan penuh.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Pilih</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Pengguna atau Kelompok</userOrGroup>
+      <read>Baca benar</read>
+      <add_node>Ubah Hak</add_node>
+      <remove>Hapus Kanan</remove>
+    </label>
+    <title>Tambahkan sebuah izin</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Setel ulang</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Tolong memilih setidaknya satu izin.</checkbox-require>
+      <userOrGroup-required>Silahkan memilih pengguna atau kelompok sebelum menyimpan izin ini.</userOrGroup-required>
+      <not-change-permission>Anda tidak memiliki hak untuk menambahkan sebuah izin.</not-change-permission>
+      <access-denied>Akses tidak diizinkan. Anda tidak dapat menghapus izin ini.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Jenis Simpul</node-type>
+      <name>Nama</name>
+      <item>Nama Item Utama</item>
+      <super-types>Jenis Induk</super-types>
+      <mixin>Jenis simpul mixin</mixin>
+      <orderable-children>Anak anak Tertip</orderable-children>
+      <property-def>Definisi Properti Simpul</property-def>
+      <prop-name>Nama</prop-name>
+      <prop-type>Jenis</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Definisi simpul anak</node-def>
+      <node-def-name>Nama</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>AC</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Pilih kategori</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Nama Konten:</keyword>
+      <location>Cari di lokasi ini:</location>
+    </label>
+    <action>
+      <Search>Cari</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>Kata kunci ini tidak diizinkan.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Tampilkan/Sembunyikan Form Kendala</MoreConstraints>
+      <Search>Cari</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operator:</firstOperator>
+      <input>Kata atau frasa dalam konten:</input>
+      <constraints>Kendala lainnya:</constraints>
+      <nodePath>Lokasi saat ini:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Silahkan masukkan kata kunci anda.</keyword-null>
+      <not-found>Tidak ada hasil yang ditemukan.</not-found>
+      <keyword-not-allow>Kata kunci ini tidak diizinkan.</keyword-not-allow>
+      <value-null>Silahkan masukkan kata kunci anda atau kendala.</value-null>
+      <value-save-null>Silahkan masukkan kata kunci atau kendala sebelum menyimpan pertanyaan ini.</value-save-null>
+      <inputSearch-invalid>Ada karakter yang tidak sah dimasukkan dalam pencarian.</inputSearch-invalid>
+      <query-invalid>Kueri tidak valid Silakan periksa kendala yang anda hadapi.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>Tampilan Template</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>Tidak ada tampilan template untuk dokumen ini.</not-support>
+      <empty>Tidak ditemukan hasil.</empty>
+      <access-denied>Kamu tidak bisa membuka folder ini, mungkin karena sudah tidak ada lagi atau karena Kamu tidak mempunyai hak untuk mengaksesnya.</access-denied>
+      <query-invalid>Kueri tidak valid.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Path</path>
+      <action>Tindakan</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Jenis</type>
+      <dateCreated>Diciptakan Tanggal</dateCreated>
+      <score>Skor</score>
+    </header>
+    <title>
+      <typeASC>Susun berdasarkan jenis dokumen dalam urutan keatas</typeASC>
+      <typeDESC>Susun berdasarkan jenis dokumen dalam urutan kebawah</typeDESC>
+      <scoreASC>Susun berdasarkan skor dalam urutan keatas</scoreASC>
+      <scoreDESC>Susun berdasarkan skor dalam urutan Kebawah</scoreDESC>
+      <nameASC>Susun berdasarkan nama dalam urutan keatas</nameASC>
+      <nameDESC>Susun berdasarkan nama dalam urutan kebawah</nameDESC>
+      <datecreatedASC>Susun berdasarkan tanggal pembuatan dalam urutan keatas</datecreatedASC>
+      <datecreatedDESC>Susun berdasarkan tanggal pembuatan dalam urutan kebawah</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Perhatikan hal ini</View>
+      <OpenFolder>Buka folder</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>Tidak ada tampilan template untuk dokumen ini</not-support>
+      <empty>Tidak ada hasil yang didapatkan.</empty>
+      <access-denied>Kamu tidak bisa melihat dokumen ini, mungkin karena template ini tidak didukung atau karena akses ditolak.</access-denied>
+      <query-invalid>Kueri tidak valid</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Path</path>
+      <action>Tindakan</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Jenis</type>
+      <dateCreated>Tanggal Pembuatan</dateCreated>
+      <score>Skor</score>
+    </header>
+    <title>
+      <typeASC>Susunlah menurut jenis dokumen dalam urutan keatas</typeASC>
+      <typeDESC>Susunlah menurut jenis dokumen dalam urutan Kebawah</typeDESC>
+      <scoreASC>Susunlah berdasarkan skor dalam urutan keatas</scoreASC>
+      <scoreDESC>Susunlah berdasarkan skor dalam urutan kebawah</scoreDESC>
+      <nameASC>Susunlah menurut nama dalam urutan keatas</nameASC>
+      <nameDESC>Susunlah menurut nama dalam urutan kebawah</nameDESC>
+      <datecreatedASC>Susunlah berdasarkan Tanggal Dibuat dalam urutan keatas</datecreatedASC>
+      <datecreatedDESC>Susunlah berdasarkan Tanggal dibuat dalam urutan kebawah</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Perhatikan hal ini</View>
+      <OpenFolder>Buka Folder</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Disana tdak ada contoh tampilan untuk barang ini</not-support>
+      <empty>Tidak ditemukan hasil</empty>
+      <access-denied>Kamu tidak dapat melihat hal ini, mungkin karena template ini tidak didukung atau karena akses ditolak.</access-denied>
+      <query-invalid>Kueri tidak valid</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Path</path>
+      <action>Tindakan</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Tipe</type>
+      <dateCreated>Tanggal Diciptakan</dateCreated>
+      <score>Skor</score>
+    </header>
+    <title>
+      <typeASC>Susun berdasarkan jenis dokumen dalam urutan keatas</typeASC>
+      <typeDESC>Susun berdasarkan jenis dokumen dalam urutan kebawah</typeDESC>
+      <scoreASC>Susun berdasarkan skor dalam urutan keatas</scoreASC>
+      <scoreDESC>Susun berdasarkan skor dalam urutan kebawah</scoreDESC>
+      <nameASC>Urutkan menurut nama dalam urutan menaik</nameASC>
+      <nameDESC>Urutkan menurut nama dalam urutan menurun</nameDESC>
+      <datecreatedASC>Urutkan berdasarkan tanggal dibuat dalam urutan menaik</datecreatedASC>
+      <datecreatedDESC>Urutkan berdasarkan tanggal dibuat dalam urutan menurun</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Lihat item ini</View>
+      <OpenFolder>Buka Folder</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Tidak ada tampilan template untuk item ini.</not-support>
+      <empty>Tidak ditemukan hasil.</empty>
+      <access-denied>Kamu tidak bisa melihat item ini, mungkin karena tidak mempunyai template Tampilan atau karena Kamu tidak mempunyai akses ke konten ini.</access-denied>
+      <query-invalid>Kueri tidak valid.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Path</path>
+      <action>Tindakan</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Jenis</type>
+      <dateCreated>Tanggal Pembuatan</dateCreated>
+      <score>Skor</score>
+      <AddRemoveFavourite>Tambah/Hapus pada favorit</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Urutkan dokumen menurut jenis dalam urutan menaik</typeASC>
+      <typeDESC>Urutkan menurut jenis dokumen dalam urutan menurun</typeDESC>
+      <scoreASC>Urutkan berdasarkan skor dalam urutan menaik</scoreASC>
+      <scoreDESC>Urutkan berdasarkan skor dalam urutan menurun</scoreDESC>
+      <nameASC>Urutkan menurut nama dalam urutan menaik</nameASC>
+      <nameDESC>Urutkan menurut nama dalam urutan menurun</nameDESC>
+      <datecreatedASC>Urutkan berdasarkan tanggal dibuat dalam urutan menaik</datecreatedASC>
+      <datecreatedDESC>Urutkan berdasarkan tanggal dibuat dalam urutan menurun</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Lihat Item ini</View>
+      <OpenFolder>Pergi ke folder</OpenFolder>
+      <RemoveHiddenAttribute>Hapus Atribut Tersembunyi</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>There is no View template for this item.</not-support>
+      <empty>Tidak ditemukan hasil</empty>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <query-invalid>Kueri tidak valid.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Jalan</path>
+      <action>Tindakan</action>
+      <shortcutPath>Jalan</shortcutPath>
+      <type>Jenis</type>
+      <dateCreated>Tanggal Dibuat</dateCreated>
+      <score>Skor</score>
+    </header>
+    <title>
+      <typeASC>Urutkan menurut jenis dokumen dalam urutan menaik</typeASC>
+      <typeDESC>Susunlah menurut jenis dokumen dalam urutan kebawah</typeDESC>
+      <scoreASC>Susunlah berdasarkan skor dalam urutan keatas</scoreASC>
+      <scoreDESC>Susunlah berdasarkan skor dalam urutan kebawah</scoreDESC>
+      <nameASC>Susunlah menurut nama dalam urutan keatas</nameASC>
+      <nameDESC>Susunlah menurut nama dalam urutan kebawah</nameDESC>
+      <datecreatedASC>Susunlah berdasarkan tanggal pembuatan dalam urutan keatas</datecreatedASC>
+      <datecreatedDESC>Susunlah berdasarkan tanggal dibuat dalam urutan kebawah</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>View this Item</View>
+      <OpenFolder>Buka Folder</OpenFolder>
+      <DeletePermanently>Hapus untuk selama-lamanya</DeletePermanently>
+      <RestoreFromTrash>Pulihkan dari tempat sampah</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Properti</metadataProperty>
+      <operator>Operator</operator>
+      <contains>Mengandung Nilai</contains>
+      <notcontains>Tidak Mengandung Nilai</notcontains>
+    </label>
+    <action>
+      <Add>Tambah</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>Nama properti diperlukan.</properties-required>
+      <value-required>Bidang Nilai diperlukan.</value-required>
+      <date-invalid>Tanggal Mulai harus lebih awal dari tanggal sampai.</date-invalid>
+      <fromDate-required>Tanggal mulai diperlukan.</fromDate-required>
+      <must-choose-one>Anda harus memilih setidaknya satu jenis.</must-choose-one>
+      <properties-null>Pilih properti terlebih dulu, kemudian filter.</properties-null>
+      <exactly-require>Anda harus mengisi Nilai sebenarnya sebelum menyimpan batasan ini.</exactly-require>
+      <fromDate-invalid>Jenis tidak valid di bidang 'Dari'. Harap pilih ulang atau ketik dengan benar.</fromDate-invalid>
+      <toDate-invalid>Jenis tidak valid di bidang 'Ke'. Harap pilih ulang atau ketik dengan benar.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Tambah</label-Add>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <ConstraintsForm>
+    <action>
+      <Add>Tambah</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </ConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Tambahkan Properti</AddMetadataType>
+      <AddNodeType>Tambahkan Jenis simpul</AddNodeType>
+      <AddCategory>Tambahkan kategori</AddCategory>
+      <FindExactly>Temukan yang Tepat</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Operator</operator>
+      <exactlyPro-properties>Properti</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Berisi Persis</exactlyPro-ContainExactly>
+      <containPro-properties>Properti</containPro-properties>
+      <containPro-Contain>Berisi</containPro-Contain>
+      <notContainPro-properties>Properti</notContainPro-properties>
+      <notContainPro-notContain>Tidak Mengandung</notContainPro-notContain>
+      <ConstraintOption-From>Dari</ConstraintOption-From>
+      <ConstraintOption-To>Untuk</ConstraintOption-To>
+      <DocumentType-label>Jenis Dokumen</DocumentType-label>
+      <Category-label>Kategori</Category-label>
+      <created>Dibuat</created>
+      <modified>Dimodifikasi</modified>
+      <and>Dan</and>
+      <or>Atau</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Pilih Jenis Simpul</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Tambahkan Kategori ke Pencarian</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Pilih Kategori</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Form kueri</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Saring:</filter>
+      <result>Hasil:</result>
+    </label>
+    <title>
+      <result>Saring</result>
+    </title>
+    <button>
+      <label-Select>Pilih</label-Select>
+      <label-Cancel>#{word.cancel}</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>Tidak ditemukan hasil.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>Nama:</name>
+      <selectBox>Pilih Gaya Permintaan:</selectBox>
+      <query>Kueri:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Cari</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>Nama tidak valid.</name-invalid>
+      <query-added>Kueri berhasil ditambahkan.</query-added>
+      <save_unSuccessful>Tidak dapat menyimpan Kueri. Pernyataan mungkin tidak valid atau nama kueri sudah ada.</save_unSuccessful>
+      <invalid-queryStatement>Peryataan kueri tidak valid.</invalid-queryStatement>
+      <value-save-null>Mohon masukkan kueri pernyataan Anda.</value-save-null>
+      <query-name-null>Mohon masukkan nama kueri Anda.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>Nama</name>
+      <selectBox>Pilih Gaya Queri
+ </selectBox>
+      <query>Kueri</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>Ubah Formulir Kueri</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Jenis metadata</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Tambah</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Memilih Properti</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Memilih Properti</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Memilih properti</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Jenis metadata</metadataType>
+    </label>
+    <pLabel>Properti:</pLabel>
+    <action>
+      <Add>Tambah</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Filter Forum</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>Nama</name>
+      <language>Bahasa</language>
+      <query>Kueri</query>
+      <action>Tindakan</action>
+      <path>Path</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>Data tidak ditemukan.</not-found>
+    </msg>
+    <header>
+      <action>Tindakan</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Silahkan masukkan nama query untuk disimpan.</query-name-null>
+      <access-denied>Akses ditolak. Anda tidak memiliki izin tambahan yang diperlukan untuk menyimpan kueri ini.</access-denied>
+      <save-failed>Kamu tidak bisa menyimpan kueri, mungkin karena pernyataan tersebut tidak valid atau karena nama kueri sudah ada.</save-failed>
+    </msg>
+    <label>
+      <queryName>Nama query</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>Nama</name>
+      <type>Jenis</type>
+      <statement>Pernyataan</statement>
+      <permission>Izin</permission>
+      <action>Tindakan</action>
+    </header>
+    <tooltip>
+      <Execute>Eksekusi</Execute>
+      <Edit>Ubah</Edit>
+      <Delete>Hapus</Delete>
+    </tooltip>
+    <label>
+      <no-children>Tidak ada kueri tersimpan.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Apakah kamu yakin ingin menghapus kueri ini?</confirm-delete-query>
+      <not-result-found>Tidak ditemukan hasil.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Hasil</results>
+      <of-about>tentang</of-about>
+      <of>dari</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Format</format>
+      <nodePath>Path untuk ekspor</nodePath>
+      <zip>Kodepos</zip>
+      <systemView>Tampilan sistem</systemView>
+      <documentView>Tampilan Dokumen</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Ekspor</Export>
+    </action>
+    <title>Ekspor</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Pemilihan izin</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Tambah Kategori</UICategoriesSelector>
+      <UIOneNodePathSelector>Tambah Kategori</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <title>Versi sejarah</title>
+    <summary>
+      <empty>Klik disini untuk menambahkan ringkasan</empty>
+    </summary>
+    <tooltip>
+      <original>Original Version</original>
+      <version>Versi</version>
+      <baseVersion>current draft</baseVersion>
+      <addLabel>Tambahkan Label</addLabel>
+      <removeLable>Hapus Label</removeLable>
+      <restoreVersion>Kembalikan Versi</restoreVersion>
+      <viewVersion>Tampilkan versi</viewVersion>
+      <deleteVersion>Hapus Versi</deleteVersion>
+      <compareVersion>Gabungkan dengan versi dasar</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>Tampilan template tidak didukung.</have-no-view-template>
+      <cannot-remove-version>Anda tidak dapat menghapus versi awal.</cannot-remove-version>
+      <error-removing-version>Terjadi kesalahan saat menghapus versi ini.</error-removing-version>
+      <error-removing-referenced-version>Ini adalah versi rujukan dan tidak dapat dihapus.</error-removing-referenced-version>
+      <confirm-restore>Apakah Anda yakin ingin mengembalikan versi ini?</confirm-restore>
+      <confirm-delete>Apakah anda yakin ingin menghapus versi ini?</confirm-delete>
+      <not-checked-out>Anda harus memeriksa dokumen ini sebelum mengembalikannya.</not-checked-out>
+      <invalid-item-state>Kamu tidak bisa memulihkan versi ini, sebab satu atau beberapa hal telah dihapus atau dipindahkan ke bagian lain.</invalid-item-state>
+    </msg>
+    <action>
+      <close>#{word.close}</close>
+      <close-view>Tutup tampilan</close-view>
+      <compare-versions>Gabungkan versi yang dipilih</compare-versions>
+    </action>
+    <labels>
+      <version>Versi</version>
+      <date>Tanggal</date>
+      <author>Dimodifikasi oleh</author>
+      <summary>Ringkasan</summary>
+      <action>Tindakan</action>
+    </labels>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>Tidak ada Versi</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Ditambahkan</e_1>
+      <e_2>Dokumen terhapus</e_2>
+      <e_4>Properti yang ditambahkan</e_4>
+      <e_16>Properti telah berubah</e_16>
+      <e_8>Properti terhapus</e_8>
+      <e_32>#{word.save}</e_32>
+      <e_64>Pindah</e_64>
+      <e_128>Salin</e_128>
+      <e_256>Tambah Mixin</e_256>
+      <e_512>Hapus Mixin</e_512>
+      <e_1024>Klon</e_1024>
+      <e_2048>Perbaharui</e_2048>
+      <e_4096>Impor</e_4096>
+      <e_8192>Mendaftar</e_8192>
+      <e_16384>Keluar</e_16384>
+      <e_32768>Pulihkan</e_32768>
+      <e_65536>Gabungkan</e_65536>
+      <e_131072>Batalkan penggabungan</e_131072>
+      <e_262144>Selesai menggabungkan</e_262144>
+      <e_524288>Tambah lebel versi</e_524288>
+      <e_1048576>Hapus lebel versi</e_1048576>
+      <e_2097152>Hapus versi</e_2097152>
+      <e_4194304>Kunci</e_4194304>
+      <e_8388608>Buka kunci</e_8388608>
+      <e_16777216>Baca</e_16777216>
+    </eventName>
+    <label>
+      <operation>Operasi</operation>
+      <userName>Nama Pengguna</userName>
+      <date>Tanggal</date>
+      <version>Versi</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>Versi belum diaktifkan untuk dokumen ini.</note>
+      <question>Anda yakin ingin mengaktifkannya?</question>
+      <button-active>Mengaktifkan</button-active>
+      <button-cancel>#{word.cancel}</button-cancel>
+    </label>
+    <msg>
+      <access-denied>Anda tidak memiliki izin untuk mengaktifkan versi dokumen ini</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Nama</LifecycleName>
+      <LifecycleDesc>Deskripsi</LifecycleDesc>
+      <action>Tindakan</action>
+    </header>
+    <action>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>Tidak ditemukan plugin publikasi.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Hanya dokumen yang dapat didaftarkan.</node-type-invalid>
+      <already-enroled>Dokumen ini telah terdaftar.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>Audit belum diaktifkan untuk dokumen ini.</note>
+      <question>Apakah anda yakin ingin mengaktifkannya?</question>
+    </label>
+    <action>
+      <activate>Mengaktifkan</activate>
+      <cancel>#{word.cancel}</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <backTo>Kembali ke versi riwayat</backTo>
+      <diffTitle>Mencocokkan antara dua versi</diffTitle>
+      <noContent>Disana tidak ada konten yang dapat digabungkan</noContent>
+      <compareVerion>Versi</compareVerion>
+      <can-not-compare>Gagal menggabungkan dua versi</can-not-compare>
+      <compare-unavailable>Penggabungan versi tidak tersedia untuk dokumen ini</compare-unavailable>
+      <DateChange>Pada {0}</DateChange>
+      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
+      <ComparedWith>Compared with</ComparedWith>
+      <restoredFrom>Dipulihkan dari versi {0}</restoredFrom>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Format</format>
+      <systemView>Tampilan sistem</systemView>
+      <documentView>Tampilan Dokumen</documentView>
+      <upload>Unggah berkas</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Impor</Import>
+    </action>
+    <title>Impor</title>
+    <msg>
+      <import-successful>Berhasil diimpor.</import-successful>
+      <filename-invalid>Jelajahi file. xml pada bidang 'unggahan file' untuk diimpor.</filename-invalid>
+      <filetype-error>Tidak dapat mengimpor berkas yang di unggah. Berkas .xml mungkin tidak valid.</filetype-error>
+      <xml-invalid>Ada huruf yang tidak valid pada posisi [baris, kolom]: {0} pada {1} file</xml-invalid>
+      <mimetype-invalid>Anda hanya bisa mengimpor .xml atau .berkas zip.</mimetype-invalid>
+      <access-denied>Akses ditolak. Anda tidak diizinkan untuk mengimpor di sana.</access-denied>
+      <constraint-violation-exception>Tidak mungkin mengimpor data. Tipe '{0}' tidak diizinkan di lokasi ini.</constraint-violation-exception>
+      <item-exists-exception>Item masuk memiliki UUID yang sama dengan item yang ada di ruang kerja.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Lebel</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Tambahkan Lebel</title>
+    <msg>
+      <label-invalid>Label berisi beberapa karakter yang tidak valid.</label-invalid>
+      <label-exist>'{0}' sudah ada.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Hapus Lebel</title>
+    <label>
+      <label>Pilih lebel</label>
+    </label>
+    <action>
+      <Remove>Hapus</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Pohon Anak</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Jenis Simpul</nodeType>
+      <nodeName>Nama</nodeName>
+      <VersionNumber>Nomor Versi</VersionNumber>
+      <VersionLabels>Lebel Versi</VersionLabels>
+      <VersionDate>Versi Tanggal</VersionDate>
+      <PropertyName>Nama Property</PropertyName>
+      <PropertyValue>Nilai Properti</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Fungsi ini tidak didukung untuk versioning.</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Nama anak-anak</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Kategori yang direferensikan</UICategoriesAddedList>
+        <UIOneNodePathSelector>Pilih Kategori</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Kategori</path>
+      <action>Tindakan</action>
+    </header>
+    <msg>
+      <access-denied>Akses ditolak. Anda tidak memiliki izin akses.</access-denied>
+      <confirm-delete>Apakah anda yakin ingin menghapus referensi ini?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>Hapus</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Kategori</category>
+      <actions>Tindakan</actions>
+      <delete>Hapus</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>Nama</name>
+      <action>Tindakan</action>
+    </header>
+    <info>
+      <child-not-found>Item ini tidak memiliki anak.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Pilih Hubungan</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Daftar Hubungan</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Hubungan</path>
+      <action>Tindakan</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Hapus</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Apakah anda yakin ingin menghapus relasi ini?</confirm-delete>
+      <can-not-add-itself>Anda tidak bisa menambah relasi dengan dirinya sendiri.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>Path</path>
+      <command>Cm</command>
+      <action>Tindakan</action>
+    </header>
+    <label>
+      <nocommand>Tidak ada item di clipboard.</nocommand>
+    </label>
+    <action>
+      <clearall>Bersihkan semua</clearall>
+    </action>
+    <msg>
+      <unable-pasted>Tidak dapat menyisipkan item ini.</unable-pasted>
+      <node-pasted>{0} telah ditempel di lokasi {1}. Operasi ini sudah disimpan.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Pilih template anda dari daftar di bawah ini</selectTemplate>
+      <ThumbnailView>Tampilan gambar thumbnail</ThumbnailView>
+      <ListView>Tampilan daftar</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Tambahkan Dokumen Baru</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Simpan &amp; tutup</SaveAndClose>
+      <ChangeType>Ubah tipe konten</ChangeType>
+      <Fullscreen>Layar penuh</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Maksimalkan/minimalkan</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>Terjadi kesalahan saat menyimpan dokumen.</cannot-save>
+      <in-versioning>Silakan periksa folder yang ada sebelum menambahkan item baru.</in-versioning>
+      <not-support>Tidak dapat memuat templete '{0}'.</not-support>
+      <value-invalid>'{0}' adalah nilai yang dibutuhkan.</value-invalid>
+      <repository-exception>Terjadi kesalahan waktu menyimpan dokumen.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>Kamu tidak mempunyai izin untuk menambahkan dokumen baru ke folder ini.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Kamu tidak bisa menyimpan dokumen ini. Tidak diizinkan untuk memiliki nama yang sama dengan saudaranya.</not-allowed-same-name-sibling>
+      <numberformat-exception>Kamu tidak bisa menyimpan dokumen ini. Nama yang disediakan harus dalam format numerik.</numberformat-exception>
+      <item-not-found>Dokumen tidak ditemukan. Dokumen ini (atau pendahulunya) mungkin telah dihapus. Silahkan klik tombol Refresh.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Keterangan</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Simpan Formulir Permintaan</title>
+    <label>
+      <query>Kueri</query>
+      <name>Nama kueri</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Ubah Tindakan</UIActionForm>
+      <EditFormAction>Ubah Tindakan</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Deskripsi</description>
+  <lifecycle>Lingkaran kehidupan</lifecycle>
+  <triggeredaction>Dipicu Aksi</triggeredaction>
+      <instanceOf>Contoh jenis tindakan</instanceOf>
+      <action>Tindakan</action>
+    </header>
+    <msg>
+      <remove-popup-first>Kamu harus menutup edit pop-up sebelum menghapus hal ini.</remove-popup-first>
+      <confirm-delete-action>Apakah kamu yakin ingin menghapus tindakan ini?</confirm-delete-action>
+      <template-empty>Templatenya '{0}' angka atau kosong.</template-empty>
+      <template-null>Templatenya adalah null atau kamu tidak mempunyai izin untuk mengakses template ini.</template-null>
+      <access-denied>Akses ditolak. Kamu tidak mempunyai izin untuk melakukan tindakan ini.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Lihat</View>
+      <Edit>Ubah</Edit>
+      <Delete>Hapus</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Bentuk tindakan</name>
+    </label>
+    <msg>
+      <repository-exception>Kamu tidak bisa menyimpan tindakan ini. Nama yang diberikan memiliki beberapa karakter khusus.</repository-exception>
+      <numberformat-exception>Kamu tidak bisa menyimpan dokumen ini. Nama yang diberikan harus dalam format numerik.</numberformat-exception>
+      <existed-action>Nama tindakan ini '{0}' sudah ada. Silahkan pilih yang lain.</existed-action>
+      <unable-add-action>Tidak dapat menambahkan tindakan ini.</unable-add-action>
+      <unable-add>Tidak dapat menambahkan tindakan ini. folder root item ini di tempat lain atau anda tidak memiliki izin untuk mengubahnya.</unable-add>
+      <not-support>Dialog '{0}' tidak didukung.</not-support>
+      <no-permission-add>Akses ditolak. Anda tidak memiliki hak untuk menambahkan tindakan di sini.</no-permission-add>
+      <access-denied>Akses ditolak. Anda tidak memiliki izin untuk mengakses template ini.</access-denied>
+      <lifecycle-invalid>Anda tidak dapat menambahkan tindakan ini. Fase tindakan siklus kehidupan tidak benar.</lifecycle-invalid>
+    </msg>
+    <title>Aksi menambah/mengedit</title>
+    <validator>
+      <validator>Validasi</validator>
+      <destPath>Dengan Path</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>Tipe pembuatan aksi</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Pilih lokasi</UIOneNodePathSelector>
+      <UIPermissionSelector>Izin Browser</UIPermissionSelector>
+      <UICategoriesSelector>Tambahkan katagori</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Validasi</validator>
+      <destPath>Dengan Path</destPath>
+    </validator>
+    <title>Form tindakan</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>Path tidak ditemukan.</path-not-found>
+      <access-denied>Akses ditolak. Anda tidak memiliki izin untuk membaca.</access-denied>
+      <keyword-not-support>Kata kunci ini tidak benar. Beberapa karakter tidak didukung.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Pergi</exeButton>
+      <address>Alamat:</address>
+    </label>
+    <title>
+      <exeButton>Pergi</exeButton>
+      <backButton>Kembali</backButton>
+      <showHistory>Tampilkan Riwayat</showHistory>
+      <changeNode>Ubah Simpul</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Pantau</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>Lanjutan</Continue>
+      <Unwatch>Belum ditonton</Unwatch>
+    </action>
+    <label>
+      <notificationType>Jenis Pemberitahuan:</notificationType>
+    </label>
+    <msg>
+      <not-support>Jenis pemberitahuan ini tidak didukung. Silahkan pilih tipe yang lain.</not-support>
+      <watching-successfully>Anda sedang memantau dokumen ini.</watching-successfully>
+      <unwatching-successfully>Anda telah berhasil meninggalkan daftar pengamat dengan sukses.</unwatching-successfully>
+      <node-iswatching>Dokumen ini telah dipantau.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Nama Tag:</names>
+      <linked>Linked Tags:</linked>
+    </label>
+    <action>
+      <AddTag>Tambah</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>Nama tag '{0}' sudah tersedia.</name-exist>
+      <tagName-invalid>Nama tag berisi beberapa karakter yang tidak valid.</tagName-invalid>
+      <tagName-empty-or-invalid>Nama tag kosong atau berisi beberapa karakter yang tidak benar.</tagName-empty-or-invalid>
+      <tag-name-empty>Nama tag anda kosong</tag-name-empty>
+      <tag-name-duplicate>Tag nama input duplikat.</tag-name-duplicate>
+      <tagName-too-long>Salah satu tag yang dimasukkan terlalu panjang. Nama tag harus kurang dari 30 karakter.</tagName-too-long>
+      <path-not-found>Tag ini telah dihapus atau diganti. Silahkan klik tombol Refresh.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>Pisahkan beberapa tag dengan koma ","</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>Dokumen tidak mendukung tampilan ini.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>Tambahkan/Ubah Properti</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>Akses ditolak. Entah Anda bukan pemilik atau tidak memiliki izin mengubah.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+   <ECMPhoneFormatValidator>
+     <msg>
+       <Invalid>Kolom '{0}' mengandung nomor telepon yang tidak valid. Silahkan masukkan nilai lain.</Invalid>
+     </msg>
+  </ECMPhoneFormatValidator>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Kolom '{0}' berisi beberapa karakter yang tidak valid. Harap masukkan nilai lain.</Invalid-char>
+      <empty-input>Nilai bidang '{0}' adalah bilangan atau kosong.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Kolom '{0}' dengan nilai '{1}' tidak valid.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>Ungkapan cron Anda tidak valid. Silakan periksa sintaknya.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Silahkan isi kolom '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Kategori salah. Silakan pilih kategori yang benar.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>Tindakan gagal. Masih ada beberapa item referensi di ruang kerja.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Item ini sudah ada.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>Akses ditolak. Anda tidak memiliki izin untuk melakukan tindakan ini.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>Akses ditolak.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>Item tidak ditemukan. Itu mungkin telah dihapus atau diubah.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>Path tidak ditemukan. Itu mungkin telah dihapus atau diubah.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>Anda tidak dapat melakukan tindakan ini karena ada beberapa kendala.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Publikasikan</published>
+      <non-published>Tidak dipublikasika</non-published>
+      <public>Umum</public>
+      <private>Pribadi</private>
+      <state>Negara</state>
+      <visibility>Visibilitas</visibility>
+      <nodeName>Nama:</nodeName>
+      <lifecycleName>Nama Siklus kehidupan</lifecycleName>
+      <stateName>Nama Negara</stateName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <UnsubcriberLifeCycle>Tidak berguna</UnsubcriberLifeCycle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Ruang kerja:</workspaceName>
+      <rootNodeInfo>Jalur Akar:</rootNodeInfo>
+      <rootPath>Jalur Akar:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Pemilih</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Alamat email tidak valid.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Anda yakin ingin menghapusnya?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>Nilai di kolom 'Penghitungan Ulang' tidak valid. Hanya bilangan bulat atau -1 yang diperbolehkan.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>Nilai di kolom 'Interval Waktu' tidak valid. Hanya tipe panjang yang diperbolehkan.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Pilih Grup</selectGroup>
+      <selectUser>Pilih Pengguna</selectUser>
+      <selectMembership>Select Role</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>Nilai dari kolom '{0}' adalah bilangan atau kosong.</empty-input>
+      <Invalid-char>Kolom '{0}' berisi beberapa karakter yang tidak valid. Harap masukkan nilai lain.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>Nilai dari kolom ini adalah bilangan atau kosong.</empty-input>
+      <Invalid-char>Kolom ini berisi beberapa karakter yang tidak valid. Harap masukkan nilai lain.</Invalid-char>
+      <Invalid-char2>Nomornya harus diikuti dengan karakter '~'.</Invalid-char2>
+      <Invalid-char1>Nomor yang mengikuti karakter '~' harus antara 0 dan 1.</Invalid-char1>
+      <Invalid-char3>Nomornya harus diikuti dengan karakter '^'.</Invalid-char3>
+      <Invalid-char4>Ruang tidak diizinkan di dekat karakter '~'.</Invalid-char4>
+      <Invalid-char5>Spasi tidak diizinkan di dekat karakter '^'.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Tanggal</date>
+      <newState>Negara baru</newState>
+      <user>Pengguna</user>
+      <description>Deskripsi</description>
+      <version>Versi</version>
+      <visibility>Visibilitas</visibility>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Versi</version>
+      <state>Negara</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Hapus gambar thumbnail</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Gambar Thumbnail</mediumSize>
+      <SelectFile>Pilih Gambar Thumbnail</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Jenis file salah. Thumbnail hanya dapat dibuat dari berkas .JPG, .PNG, atau file .GIF.</mimetype-incorrect>
+      <access-denied>Akses ditolak. Anda tidak memiliki izin untuk menambahkan item thumbnail.</access-denied>
+      <confirm-delete>Apakah anda yakin ingin menghapus gambar mini ini?</confirm-delete>
+      <is-checked-in>Item ini sudah dimasukkan. Silahkan periksa sebelum melakukan tindakan apapun.</is-checked-in>
+      <fileName-error>Silahkan pilih berkas yang akan di unggah.</fileName-error>
+    </msg>
+    <title>
+      <remove-thumbnail>Hapus Thumbnail ini</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Semua izin</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Tambahkan Setiap Izin</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Pilih Kelompok</selectGroup>
+      <selectUser>Pilih Pengguna</selectUser>
+      <selectMembership>Select Role</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+ 
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>Ada baik tidak ada kendaraan atau anda tidak punya izin untuk mengakses kendaraan ini.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>Ubah Berkas Penjelajah</title>
+    <action>
+      <Edit>Ubah</Edit>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>Batas ukuran file yang diunggah (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Pengemudi Langsung</isDirectlyDrive>
+      <driveName>Nama Pengemudi</driveName>
+      <usecase>Pilih tipe</usecase>
+      <SelectNodePath>Pilih Path</SelectNodePath>
+      <showTopBar>Tampilkan Bar Atas</showTopBar>
+      <showActionBar>Tampilkan Bar Aksi</showActionBar>
+      <showSideBar>Tampilkan Bar Kiri</showSideBar>
+      <showFilterBar>Tampilkan Bar Penyaring</showFilterBar>
+      <nodePath>Pilih Jalur</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Nama Drive</driveName>
+      <action>Tindakan</action>
+      <adddrives>Menambahkan Drive</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>Drive pribadi pengguna saat ini akan digunakan ketika Anda memilih Personal Usecase.</personal-usecase>
+      <drive-edit-permission>Anda tidak dapat merubah nama drive. Silahkan klik tombol Edit.</drive-edit-permission>
+      <path-edit-permission>Anda tidak bisa mengedit jalannya. Mohon klik tombol edit.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Pilih Drive</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Pilih Jalur</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Pilih Pengemudi</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Tambah symlink</AddSymLink>
+      <AddLocalizationLink>Tambah terjemahan</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Symlink Manajer</UISymLinkManager>
+      <UIAddTranslationManager>Tambah terjemahan</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Nama Symlink</symLinkName>
+      <pathNode>Jalan</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>Symlink ini '{0}' berhasil ditambahkan.</addFolder-successful>
+      <name-invalid>Silahkan masukkan nama symlink.</name-invalid>
+      <name-not-allowed>Nama ini tidak dibenarkan.</name-not-allowed>
+      <fileName-error>Nama berkas tidak valid.</fileName-error>
+      <constraint-violation>Anda tidak dapat menambahkan item jenis '{0}' di sini.</constraint-violation>
+      <repository-exception>Akses ditolak. Anda tidak memiliki izin untuk menambahkan symlink di sini.</repository-exception>
+      <numberformat-exception>Kamu tidak bisa menyimpan folder ini. Nama yang disediakan harus dalam format numerik.</numberformat-exception>
+      <path-node-invalid>Silakan masukkan pathnya.</path-node-invalid>
+      <path-node-not-allowed>Nama ini tidak di izinkan.</path-node-not-allowed>
+      <non-node>Silakan pilih target kepercayaan; Kamu mungkin tidak memiliki hak untuk membaca hal ini.</non-node>
+      <cannot-save>Kamu tidak bisa menambahkan symlink untuk jenis dokumen ini.</cannot-save>
+      <item-exists-exception>Item dengan nama ini sudah ada.</item-exists-exception>
+      <translation-node-same-language-default>Dokumen terjemahan memiliki bahasa yang sama dengan bahasa standar dokumen saat ini.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Target item ini tidak direferensikan.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Nama Symlink</symLinkName>
+      <pathNode>Dokumen Path:</pathNode>
+      <note>Pilih dokumen lain yang akan diterjemahkan
+ </note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Pilih Dokumen</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>Folder ini '{0}' berhasil ditambahkan.</addFolder-successful>
+      <name-invalid>Silahkan masukkan nama symlink.</name-invalid>
+      <name-not-allowed>Nama ini tidak di izinkan.</name-not-allowed>
+      <fileName-error>Nama berkas tidak valid.</fileName-error>
+      <constraint-violation>Anda tidak dapat menambahkan jenis '{0}' ke item saat ini.</constraint-violation>
+      <repository-exception>Akses ditolak. Anda tidak memiliki izin untuk menambahkan symlink ke item ini.</repository-exception>
+      <numberformat-exception>Anda tidak dapat menyimpan folder ini. Nama harus dalam format numerik.</numberformat-exception>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-not-allowed>Nama ini tidak di izinkan.</path-node-not-allowed>
+      <non-node>Silahkan pilih target kepercayaan; anda mungkin tidak memiliki hak untuk membaca simpul ini.</non-node>
+      <cannot-save>Terjadi kesalahan saat membuat symlink ini.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Pilih Item Target</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Pilih Dokumen</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Tambah symlink</AddSymLink>
+      <AddLocalizationLink>Menambahkan terjemahan</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>Kamu tidak bisa membuat tautan untuk '{0}' di '{1}'.</create-link-problem>
+      <dest-node-is-link>Tujuan '{0}' sudah menjadi symlink, sehingga Anda tidak dapat membuat symlink di dalamnya.</dest-node-is-link>
+      <selected-is-link>Item yang dipilih '{0}' sudah menjadi link. Anda tidak dapat membuat link ke link lain.</selected-is-link>
+      <confirm-create-link>Anda ingin membuat link ke lokasi ini?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Buat link</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Akses ditolak. Anda tidak memiliki izin membaca di ruang kerja ini.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Pohon kategori</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Tambah Kategori</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Pohon katagori:</taxonomyTree>
+      <rootNodePath>Pohon akar:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Kelola katagori sederhana</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Kategori yang Direferensikan</UICategoriesAddedList>
+        <UIOneNodePathSelector>Pilih Kategori</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Pilih Kategori</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Tambahkan kategori</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>Nama katagori sudah ada.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>Hapus</OK>
+      <ReplaceData>Ganti data</ReplaceData>
+      <Back>Kembali untuk mengubah nama</Back>
+      <Keepfile>Simpan kedua file</Keepfile>
+<ReadOnly>Buka hanya Baca</ReadOnly>
+<Cancel>Batalkan</Cancel>
+      <KeepBoth>Simpan keduanya</KeepBoth>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>OK</OK>
+      <ReplaceData>Ganti data</ReplaceData>
+      <Back>Kembali untuk mengubah nama</Back>
+      <Keepfile>Simpan kedua file</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Tambahkan Kategori</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>Kamu tidak bisa memindahkan file, karena folder tujuan sama dengan folder sumbernya.</can-not-move-to-itself>
+      <is-editing>Kamu tidak bisa memindahkan dokumen saat sedang diedit. Tolong tutup dulu.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>Perilaku UUID</behavior>
+      <versionHistory>Versi Sejarah</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Jenis file tidak valid dalam versi riwayat. Hanya file.zip yang didukung.</history-invalid-type>
+      <history-invalid-content>Konten tidak valid dalam versi data riwayat. Harap pilih jenis file yang didukung untuk diimpor.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Membuat baru</type0>
+      <type1>Hapus yang ada</type1>
+      <type2>Ganti yang ada</type2>
+      <type3>Lemparkan Pengecualian</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Ekspor Versi Sejarah</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>Barang ini atau berkas induknya dikunci oleh pengguna lain, jadi anda tidak dapat menghapusnya.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Tampilan Dokumen</docview>
+      <sysview>Tampilan sistem</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>Anda tidak memiliki izin untuk memuat template '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Admin</Admin>
+      <Info>Info</Info>
+      <Actions>Tindakan</Actions>
+      <Collaboration>Kolaborasi</Collaboration>
+      <Search>Cari</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>Anda tidak dapat membuka kunci ini karena '{0}' (berkas induknya) atau diperiksa.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>Tidak dapat mengaktifkan versi pada dokumen ini.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>Kamu tidak bisa membaca data dari sumbernya.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>Mohon unggah berkas sebelum menambahkan sebuah kategori.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>Anda harus menetapkan properti untuk grup ini.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>Nama tindakan ini tidak diizinkan.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>Nama kueri ini tidak diizinkan.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>Kata atau frasa dalam konten tidak dibenarkan.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+ 
+    <!--
+   #############  From DMS 2.6 #############
+   -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Tampilkan Dokumen</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Folder Dokumen</nt_folder>
+      <nt_unstructured>Folder Konten</nt_unstructured>
+      <exo_cssFolder>Folder CSS</exo_cssFolder>
+      <exo_jsFolder>Folder Javascript</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Folder Konten Web</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Hapus komentar ini</remove-comment>
+      <edit-comment>Ubah komentar ini</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Apakah anda yakin ingin menghapus komentar ini?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Kamu harus memilih Tampilan Sistem saat mengekspor data yang berukuran besar.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>Anda tidak mempunyai izin untuk mengakses pokok kategori ini.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>Nama Drive bilangan atau kosong. Isi bidang Nama Drive.</notNullDriveName>
+      <notNullPath>Jalannya adalah batal atau kosong. silahkan mengisi jalannya.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Apakah Kamu yakin ingin menghapus file lampiran ini?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Unggah File</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>Milik saya</OwnedByMe>
+      <Favourites>Favorit</Favourites>
+      <Hidden>Tersembunyi</Hidden>
+      <Trash>Sampah</Trash>
+      <Configuration>Atur Preferensi</Configuration>
+    </label>
+    <title>
+      <allItems>Semua item</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Menurut abjad</Alphabetic>
+          <Type>Tipe</Type>
+          <CreatedDate>Tanggal pembuatan</CreatedDate>
+          <ModifiedDate>Tanggal Modifikasi</ModifiedDate>
+          <Ascending>Menaik</Ascending>
+          <Descending>Menurun</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Pencarian tersimpan</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Gambar</Images>
+       <Video>Video</Video>
+       <Music>Musik</Music>
+       <Documents>Dokumen</Documents>
+       <Content>Konten</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Gambar</Images>
+      <Video>Video</Video>
+      <Music>Musik</Music>
+      <Documents>Dokumen</Documents>
+      <Content>Konten</Content>
+    </label>
+    <title>Siapkan Filter Preferensi</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Filter menurut Jenis</ByType>
+      <DocumentFilterConfiguration>Siapkan Filter Preferensi</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Tampilkan semua berkas video</ShowVideo>
+      <ShowMusic>Tampilkan semua file musik</ShowMusic>
+      <ShowImages>Tampilkan semua berkas gambar</ShowImages>
+      <ShowDocuments>Tampilkan semua berkas dokumen</ShowDocuments>
+      <ShowContent>Tampilkan semua jenis dokumen</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Slide Show</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Putar Media</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Filter Jenis Dokumen</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Milik saya</showOwnedByUser>
+      <showFavourites>Kesukaan</showFavourites>
+      <showHiddens>Tersembunyi</showHiddens>
+      <showTrash>Tong Sampah</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Apakah anda yakin ingin mengosongkan semua item dari tong sampah?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Nama Katagori</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Tambahkan kategori</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Tambahkan kategori</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Umum</Public>
+      <Private>Pribadi</Private>
+      <tagScopes>Cakupan tag</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Tag</PublicTags>
+      <EditPublicTags>Ubah Tag</EditPublicTags>
+      <PrivateTags>Tag</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Nama</name>
+      <relatedDocuments>Dokumen terkait</relatedDocuments>
+      <action>Tindakan</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Ubah Tag</EditTag>
+        <RemoveTag>Hapus Tag</RemoveTag>
+        <AddTag>Tambah Tag</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Anda yakin akan menghapus tag ini?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Ubah Tag</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Nama Tag:</tagName>
+      <relatedDocuments>Dokumen terkait</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Tag</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>Anda tidak dapat mengubah  {0}. Ini dikunci oleh pengguna lain.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>Terjadi kesalahan saat memperbaharui gaya tag.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>Akses ditolak.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Manejer Tag</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Pilih Jenis Simpul</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Tampilkan Komponen</ShowComponent>
+      <removeReference>Hapus</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Tampilkan Komponen</ShowComponent>
+      <removeReference>Hapus</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Ada beberapa karakter yang tidak valid. Harap ketik nilai lain.</Invalid-char>
+      <empty-input>Nilai kolom bilangan atau kosong.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Bahasa query:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>Terjadi kesalahan. Informasi tentang repositori telah hilang.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>Terjadi kesalahan. Informasi tentang repositori telah hilang.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>Kamu tidak bisa menyimpan dokumen. Data yang masukan hilang atau tidak valid.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>Anda tidak dapat menyimpan dokumen. Data masukan hilang atau tidak valid.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <formInput>Path sebelumnya hilang. Silahkan pilih yang baru.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Tambah</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Pilih Induk</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Tambahkan root</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>Path halaman utama kosong.</homePath-emty>
+      <targetPath-emty>Path target kosong.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>Tidak ada kategori.</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
+    <button>
+      <Close>#{word.close}</Close>
+    </button>
+    <revisions>
+      <version>Revisi</version>
+      <date>Tanggal</date>
+      <author>Penulis</author>
+      <status>Status</status>
+      <action>Tindakan</action>
+      <label>Revisi</label>
+      <none>Tidak ada revisi</none>
+      <seeall>Lihat semua revisi</seeall>
+      <currentVersion>Revisi Terkini</currentVersion>
+      <confirm>Anda akan kehilangan draf kerja Anda. Apakah anda yakin ingin mengganti versi saat ini?</confirm>
+    </revisions>
+    <status>
+      <version>Revisi</version>
+      <title>Status</title>
+      <archived>Diarsipkan</archived>
+      <obsolete>Usang</obsolete>
+      <unpublished>Tidak diterbitkan</unpublished>
+      <enrolled>Terdaftar</enrolled>
+      <draft>Konsep</draft>
+      <pending>Tertunda</pending>
+      <approved>Disetujui</approved>
+      <inreview>Sedang direview</inreview>
+      <staged>Dipentaskan</staged>
+      <published>Dipublikasikan</published>
+      <live>Dipublikasikan</live>
+    </status>
+    <scheduled>
+      <title>Penjadwalan</title>
+      <from>Dari</from>
+      <to>Kepada</to>
+    </scheduled>
+    <title>
+      <preview>Pratinjau</preview>
+      <restore>Pulihkan</restore>
+    </title>
+    <msg>
+      <have-no-view-template>Tampilan template tidak didukung.</have-no-view-template>
+      <restore-complete>Pemulihan telah selesai.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Tanggal</date>
+      <versionName>Revisi Nama</versionName>
+      <currentState>Kondisi saat ini</currentState>
+      <user>Penulis</user>
+      <description>Deskripsi</description>
+    </header>
+    <create-version>Versi baru telah dibuat</create-version>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Kamu bisa menjadwalkan publikasi dokumen Kamu. Pilih tanggal yang Kamu inginkan untuk melihat dokumen Kamu diterbitkan</introduction>
+      <no-schedule-info>Tidak ada jadwal publikasi untuk dokumen Kamu</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Tanggal mulai publikasi</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>Tanggal akhir publikasi</UIPublicationPanelEndDateInput>
+    </label>
+    <msg>
+      <save-finished>Jadwal publikasi baru Kamu telah berhasil disimpan.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Setel ulang</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Tanggal publikasi</header>
+      <start>Mulai Publikasi</start>
+      <end>Publikasi Akhir</end>
+    </label>
+    <msg>
+      <invalid-format>Format tanggal tidak valid Silahkan periksa lagi.</invalid-format>
+      <fromDate-after-toDate>Tanggal Mulai harus lebih awal dari tanggal sekarang.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Mengelola Publikasi</UIPublicationContainer>
+      <UIPublishingPanel>Mengelola Publikasi</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Status</status>
+      <author>Penulis</author>
+      <date>Tanggal Pembuatan</date>
+      <title>Judul Dokumen</title>
+      <lastUser>Pengguna terakhir</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>Nama tag sudah tersedia.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Pilih Kategori</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Sembunyikan Lanjutan</HideAdvance>
+     <ShowAdvance>Tampilkan Lanjutan</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Lanjutan</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Berkas akses ditolak.</file-access-denied>
+  <anonymous-access-denied>Pengguna anonim tidak memiliki izin untuk menggunakan fungsi ini.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <ShowDrives>Tampilkan Drive</ShowDrives>
+    </DrivesArea>
+    <msg>
+      <no-view-found>Disana tidak ada tampilan yang diterapkan untuk izin akses anda di kendaraan '{0}'.</no-view-found>
+      <access-denied>Akses ditolak. Anda mungkin tidak memiliki izin di ruang kerja drive '{0}'.</access-denied>
+      <not-found>Dokumen yang ingin Anda akses tidak lagi tersedia.</not-found>
+      <empty-drives>Akses ditolak. Mungkin tidak ada drive di repositori ini atau Kamu tidak mempunyai izin untuk mengakses drive apa pun dalam repositori ini.</empty-drives>
+      <workspace-not-exist>Drive '{0}' disimpan di satu area kerja yang tidak dikenal. Harap konfigurasikan ulang drive ini.</workspace-not-exist>
+    </msg>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Semua bidang nilai disimpan.</fields-saved>
+      <fields-cancelled>Semua bidang nilai telah dibatalkan.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>Perubahan yang Anda buat akan hilang jika Anda menutup form ini.</confirm-close>
+  <confirm-changeType>Perubahan yang Anda buat akan hilang jika Anda mengubah jenis konten.</confirm-changeType>
+  <confirm-navigate>Perubahan yang Anda buat akan hilang jika Anda berpindah dari laman ini.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Jenis mime {0} tidak diizinkan untuk bidang {1}. Mohon unggah file lain</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>Tidak</no>
+  <yes>Ya</yes>
+  <true>Benar</true>
+  <false>Salah</false>
+  <Electronic>Elektronik</Electronic>
+  <Paper>Kertas</Paper>
+  <NONE>Tidak ada</NONE>
+  <CLASSIFIED>Rahasia</CLASSIFIED>
+  <UNCLASSIFIED>Tidak dirahasiakan</UNCLASSIFIED>
+  <NOCONTRACT>Tidak ada kontrak</NOCONTRACT>
+  <one-minute>Satu menit</one-minute>
+  <hourly>Per jam</hourly>
+  <daily>Harian</daily>
+  <quarterly>Kuartalan</quarterly>
+  <yearly>Tahunan</yearly>
+  <ten-years>Sepuluh tahun</ten-years>
+  <read>Tindakan pengguna</read>
+  <schedule>Penjadwalan</schedule>
+  <node_added>Penambahan konten</node_added>
+  <node_removed>Penghapusan Konten</node_removed>
+  <property_added>Penambahan Properti</property_added>
+  <property_removed>Penghapusan Properti</property_removed>
+  <property_changed>Modifikasi properti</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>{0} terkunci Kamu tidak bisa memindahkannya ke tempat Sampah.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} atau folder induknya telah diperiksa atau anda tidak dapat memindahkannya ke sampah.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Akses ditolak. anda tidak dapat memindahkannya {0} ke sampah.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>Terjadi kesalahan saat mengedit properti ini.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Item ini terkunci Anda tidak bisa memantaunya.</node-is-locked>
+      <unknown-error>Beberapa kesalahan telah terjadi. Anda tidak dapat melihat dokumen ini.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Kolom'{0}' mungkin berisi karakter XSS yang rentan</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Batalkan semua</AbortAll>
+    <AbortAllFiles>Batalkan semua berkas</AbortAllFiles>
+    <MaxFileSize>Ukuran berkas maksimal adalah</MaxFileSize>
+    <InvalidCharacters>Karakter yang tidak valid akan diganti dengan '-'</InvalidCharacters>
+    <DropFileMessage>Masukkan berkas anda ke folder ini sekarang</DropFileMessage>
+    <Close>#{word.close}</Close>
+    <in>di dalam</in>
+    <MaxFileSizeAlert>Ukuran berkas melebihi batas</MaxFileSizeAlert>
+    <Waiting>Menunggu</Waiting>
+    <Error>Kesalahan</Error>
+    <or>atau</or>
+    <AlreadyInUse>Telah digunakan</AlreadyInUse>
+    <Keep>Simpan keduanya</Keep>
+    <Replace>Ganti</Replace>
+    <Canceled>Dibatalkan</Canceled>
+      <UploadNewVersion>Unggah versi baru</UploadNewVersion>
+    <Cancel>#{word.cancel}</Cancel>
+    <AbortAllConfirmation>Apakah Kamu ingin membatalkan semua file yang sedang berjalan?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Dibuat pada</CreatedOn>
+  <Updated>Telah diperbarui</Updated>
+  <by>oleh</by>
+  <you>anda</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Nama</name>
+      <date>Tanggal</date>
+      <size>Ukuran</size>
+      <sortBy>Urutkan berdasarkan:</sortBy>
+      <filesAreSelected>Berkas telah dipilih.</filesAreSelected>
+      <ClearSelection>Hapus pilihan</ClearSelection>
+      <more>Lainnya</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>Nama properti salah, silahkan masukkan nilai lain untuk properti ini!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <UIDocumentAutoVersionForm>
+    <msg>Sebuah dokumen {0} sudah ada. Apa yang ingin anda lakukan?</msg>
+    <UIChkRememberNonVersioned>
+      <label>Ingat pilihan saya untuk semua dokumen non-versi lainnya</label>
+    </UIChkRememberNonVersioned>
+    <UIChkRememberVersioned>
+      <label>Ingat pilihan saya untuk semua berversi dokumen lainnya</label>
+    </UIChkRememberVersioned>
+  </UIDocumentAutoVersionForm>
+  <DocumentAuto>
+    <message>Versi baru dari dokumen {0} telah berhasil dibuat.</message>
+    <messageMultiFile>Dokumen versi baru telah dibuat.</messageMultiFile>
+  </DocumentAuto>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>Tidak dapat memodifikasi dokumen yang sedang diperiksa.</msg>  
+  </VersionException>
+</bundle>

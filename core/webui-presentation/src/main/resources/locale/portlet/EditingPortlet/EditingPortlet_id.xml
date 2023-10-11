@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <EditingPortlet>
+    <label>
+      <Editing>Mode:</Editing>
+    </label>
+    <msg>
+      <not-permission>Kamu tidak mempunyai izin untuk melakukan tindakan ini.</not-permission>
+    </msg>
+  </EditingPortlet>
+
+  <UIEditingForm>
+    <label>
+      <option>
+        <Draft>Ubah</Draft>
+        <Published>Terpublikasikan</Published>
+      </option>
+    </label>
+  </UIEditingForm>
+</bundle>

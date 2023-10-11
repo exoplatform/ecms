@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Nama ini tidak diizinkan.</name-not-allowed>
+      <in-versioning>Silahkan periksa simpul saat ini sebelum menambahkan sebuah simpul baru.</in-versioning>
+      <cannot-save>Terjadi sebuah kesalahan saat menyimpan simpul ini.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Tidak dapat memuat template '{0}'.</not-support>
+      <not-add-folder>Hanya file yang bisa ditambahkan untuk folder ini.</not-add-folder>
+      <access-denied>Akses ditolak. anda tidak harus memiliki izin tambahan di '{0}'.</access-denied>
+      <path-not-found>Jalur itu ' {0} ' telah dihapus atau tidak sah.</path-not-found>
+      <node-locked>Simpul '{0}' terkunci. silahkan membuka kunci simpul ini sebelum membuat dokumen.</node-locked>
+      <node-isExist>Simpul ini sudah ada di '{0}', dan tidak diizinkan untuk menjadi nama yang sama dengan saudara kandungnya.</node-isExist>
+      <get-dialog-path>Terjadi sebuah kesalahan sementara saat mendapatkan jalur dialog.</get-dialog-path>
+      <new-jcr-template>Terjadi sebuah kesalahan waktu membuat template baru.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Lokasi Penyimpanan</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Pilih ruang kerja</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Template Pilihan</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Lokasi untuk menyimpan</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Pilih Template</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Tombol simpan adat</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Tombol simpan pesan</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Pengalihan:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Jalur pengalihan:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Tindakan</UIFCCActionField>
+    </label>
+    <msg>
+      <save-successfully>Disimpan ke preferensi portlet dengan sukses.</save-successfully>
+      <item-not-found>Path ini tidak valid.</item-not-found>
+      <fileType-empty>Silahkan pilih sebuah jenis berkas sebelum menyimpan konfigurasi ini.</fileType-empty>
+      <ws-empty>Silahkan pilih satu ruang kerja.</ws-empty>
+      <action-empty>Silakan pilih sebuah folder dengan sebuah tindakan.</action-empty>
+      <message-empty>Bidang "adat simpan pesan" diperlukan adalah anda tidak memilih pilihan redirect, atau jalurnya kosong.</message-empty>
+      <get-template>Terjadi sebuah kesalahan saat mengakses template.</get-template>
+      <set-template-option>Terjadi sebuah kesalahan sementara mengatur template.</set-template-option>
+      <do-select>Terjadi sebuah kesalahan sementara saat memilih lokasi.</do-select>
+      </msg>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Pilih jalur</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Nama</name>
+      <description>Deskripsi</description>
+      <instanceOf>Contoh dari</instanceOf>
+      <action>Tindakan</action>
+    </header>
+    <action>
+      <Add>Tambah</Add>
+    </action>
+    <msg>
+      <empty>Tidak ada tindakan</empty>
+      <remove-popup-first>Anda harus menutup edit pop-up sebelum menghapus simpul ini.</remove-popup-first>
+      <confirm-delete-action>Apakah Kamu yakin ingin menghapus tindakan ini?</confirm-delete-action>
+      <template-empty>Template dari ' {0} ' adalah null atau kosong.</template-empty>
+      <template-null>Templatenya adalah null atau kosong, atau Kamu tidak mempunyai izin untuk mengakses template ini.</template-null>
+      <access-denied>Akses tidak diizinkan. Anda tidak memiliki izin untuk melakukan tindakan ini.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Pilih lokasi</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Ruang kerja:</workspaceName>
+      <rootNodePath>Jalur akar:</rootNodePath>
+      <rootNodeInfo>Akar node</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Tambahkan Root Node</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Simpul ini tidak memiliki anak.</child-not-found>
+    </info>
+    <header>
+      <name>Nama</name>
+      <action>Aksi</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Tambah tindakan</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Tambah/Ubah Tindakan</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <repository-exception>Tidak bisa menyimpan tindakan ini. nama yang disediakan harus tidak memiliki sebuah indeks sebagai elemen terakhirnya.</repository-exception>
+      <numberformat-exception>Tidak bisa menyimpan tindakan ini. Nama yang disediakan harus tidak memiliki '[' atau ']'.</numberformat-exception>
+      <existed-action>Nama tindakannya '{0}' sudah ada. silahkan pilih nama yang lain.</existed-action>
+      <unable-add-action>Tidak mampu untuk menambahkan tindakan ini.</unable-add-action>
+      <unable-add>Tidak mampu untuk menambahkan tindakan ini. Simpul ini adalah akar atau kamu tidak mempunyai izin.</unable-add>
+      <not-support>Dialog '{0}' tidak didukung.</not-support>
+      <no-permission-add>Akses ditolak. anda tidak memiliki hak untuk menambahkan tindakan di sini.</no-permission-add>
+      <access-denied>Akses ditolak. Kamu tidak mempunyai izin untuk mengakses template ini.</access-denied>
+    </msg>
+    <validator>
+      <validator>Validasi</validator>
+      <destPath>Dengan path</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Buat sebuah tindakan dari jenis</actionType>
+    </label>
+    <msg>
+      <not-support>Tidak dapat memuat templete '{0}'.</not-support>
+      <do-not-permission>Anda tidak memiliki izin untuk memuat templatenya '{0}'.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Pilih lokasi</UIOneNodePathSelector>
+      <UIPermissionSelector>Izin Penjelajah</UIPermissionSelector>
+      <UICategoriesSelector>Tambahkan katagori</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Bidangnya '{0}' dengan nilai '{1}' adalah tidak sah.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Pilih Kategori</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Kategori yang Direferensikan</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <UICategoriesSelector>
+    <action>
+      <close>#{word.close}</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Tambahkan Kategori</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Pohon Kategori</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Pemilihan kategori</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>
