@@ -36,7 +36,6 @@
           <label>#{portal.administration.transfert-rules}</label>
           <icon>fas fa-exchange-alt</icon>
           <page-reference>portal::administration::transferRules</page-reference>
-
         </node>
       </node>
     </node>

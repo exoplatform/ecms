@@ -25,8 +25,8 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-	<external-component-plugins>
-		<target-component>org.exoplatform.portal.config.UserPortalConfigService</target-component>
+  <external-component-plugins>
+    <target-component>org.exoplatform.portal.config.UserPortalConfigService</target-component>
     <!-- ADDED to initialize Portal layout of Site using default Site layout
           defined in war:/conf/portal/group/template/group/group.xml -->
     <component-plugin>
@@ -123,7 +123,8 @@
           </object>
         </object-param>
       </init-params>
-    </component-plugin><component-plugin>
+    </component-plugin>
+    <component-plugin>
       <name>new.portal.config.user.listener</name>
       <set-method>initListener</set-method>
       <type>org.exoplatform.portal.config.NewPortalConfigListener</type>
@@ -189,5 +190,5 @@
         </object-param>
       </init-params>
     </component-plugin>
-	</external-component-plugins>
+  </external-component-plugins>
 </configuration>

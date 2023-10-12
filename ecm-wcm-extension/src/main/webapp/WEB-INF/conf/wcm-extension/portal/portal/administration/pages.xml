@@ -24,7 +24,7 @@
     <title>Site Explorer</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
     <edit-permission>manager:/platform/web-contributors</edit-permission>
-    <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+    <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" cssClass="singlePageApplication">
       <access-permissions>*:/platform/users</access-permissions>
       <portlet-application>
         <portlet>
@@ -62,7 +62,7 @@
     <title>WCM Administration</title>
     <access-permissions>manager:/platform/web-contributors</access-permissions>
     <edit-permission>manager:/platform/web-contributors</edit-permission>
-    <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+    <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" cssClass="singlePageApplication">
       <access-permissions>*:/platform/users</access-permissions>
       <portlet-application>
         <portlet>
