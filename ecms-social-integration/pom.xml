@@ -89,7 +89,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.social</groupId>
-      <artifactId>social-component-webui</artifactId>
+      <artifactId>social-component-web</artifactId>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.addons.analytics</groupId>
