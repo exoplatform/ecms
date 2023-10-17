@@ -51,6 +51,7 @@ import org.w3c.dom.Element;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
@@ -306,13 +307,21 @@ public class FileUploadHandler {
     fileName = fileName.replaceAll(FILE_DECODE_REGEX, "%25");
     fileName = URLDecoder.decode(fileName,"UTF-8");
     fileName = fileName.replaceAll(FILE_DECODE_REGEX, "-");
-    Element rootElement = fileExistence.createElement(
-                              parent.hasNode(fileName) ? "Existed" : "NotExisted");
-    if(parent.hasNode(fileName)){
-      Node existNode = parent.getNode(fileName);
-      if(existNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
-        rootElement.appendChild(fileExistence.createElement("Versioned"));
+    Node existNode = null;
+    if (parent.hasNodes()) {
+      NodeIterator iterator = parent.getNodes();
+      while (iterator.hasNext()) {
+        Node childNode = iterator.nextNode();
+        if (childNode.getName().equalsIgnoreCase(fileName)) {
+          existNode = childNode;
+          break;
+        }
       }
+    }
+    Element rootElement = fileExistence.createElement(
+                              existNode !=null ? "Existed" : "NotExisted");
+    if(existNode != null && existNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)){
+        rootElement.appendChild(fileExistence.createElement("Versioned"));
     }
     if(parent.isNodeType(NodetypeConstant.NT_FILE) && 
         resolver.getMimeType(parent.getName()).equals(resolver.getMimeType(fileName))){

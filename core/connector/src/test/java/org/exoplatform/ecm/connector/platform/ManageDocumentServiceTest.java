@@ -23,8 +23,10 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 import javax.ws.rs.core.Response;
+import javax.xml.transform.dom.DOMSource;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -122,5 +124,25 @@ public class ManageDocumentServiceTest {
 
     response = this.manageDocumentService.checkFileExistence("collaboration", ".spaces.space_one", "DRIVE_ROOT_NODE/Documents", "test.docx");
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    //
+    String fileName = "lowercase.docx";
+    response = this.manageDocumentService.checkFileExistence("collaboration", ".testspace", "/", fileName);
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    DOMSource domSource = (DOMSource) response.getEntity();
+    assertEquals("NotExisted", domSource.getNode().getFirstChild().getNodeName());
+    //
+    Node existingNode = mock(Node.class);
+    when(node.hasNodes()).thenReturn(true);
+    NodeIterator nodeIterator = mock(NodeIterator.class);
+    when(node.getNodes()).thenReturn(nodeIterator);
+    when(nodeIterator.hasNext()).thenReturn(true);
+    when(nodeIterator.nextNode()).thenReturn(existingNode);
+    when(existingNode.getName()).thenReturn(fileName);
+    String existingFileName = fileName.toUpperCase();
+    //
+    response = this.manageDocumentService.checkFileExistence("collaboration", "testspace", "/", existingFileName);
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    domSource = (DOMSource) response.getEntity();
+    assertEquals("Existed", domSource.getNode().getFirstChild().getNodeName());
   }
 }
