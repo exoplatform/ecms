@@ -19,6 +19,26 @@
 <page-set xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_objects_1_8 http://www.exoplatform.org/xml/ns/gatein_objects_1_8"
           xmlns="http://www.exoplatform.org/xml/ns/gatein_objects_1_8">
+  
+  <page>
+    <name>cloudStorage</name>
+    <title>Cloud Storage</title>
+    <access-permissions>*:/platform/administrators</access-permissions>
+    <edit-permission>manager:/platform/administrators</edit-permission>
+    <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" cssClass="singlePageApplication">
+      <access-permissions>*:/platform/users</access-permissions>
+      <portlet-application>
+        <portlet>
+          <application-ref>clouddrives</application-ref>
+          <portlet-ref>cloudStoragePortlet</portlet-ref>
+        </portlet>
+        <title>cloud Storage</title>
+        <access-permissions>*:/platform/administrators</access-permissions>
+        <show-info-bar>false</show-info-bar>
+      </portlet-application>
+    </container>
+  </page>
+  
   <page>
     <name>editors</name>
     <title>Editors Administration</title>

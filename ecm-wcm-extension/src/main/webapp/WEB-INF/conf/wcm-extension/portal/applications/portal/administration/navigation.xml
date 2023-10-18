@@ -36,6 +36,12 @@
           <label>#{portal.administration.documents-settings}</label>
           <icon>fas fa-file-alt</icon>
           <node>
+            <name>cloud-storage</name>
+            <label>#{portal.administration.cloud-storage}</label>
+            <icon>fas fa-cloud-download-alt</icon>
+            <page-reference>portal::administration::cloudStorage</page-reference>
+          </node>
+		  <node>
             <name>documents-editors</name>
             <label>#{portal.administration.documents-editors}</label>
             <icon>fas fa-edit</icon>
