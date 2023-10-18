@@ -35,7 +35,7 @@
  
   <UICommentForm>
     <label>
-      <placeholder>Use @ to mention someone in your comment</placeholder>
+      <placeholder>Gunakan @ untuk mention seseorang dalam komentar anda</placeholder>
     </label>
   </UICommentForm>
  
@@ -71,7 +71,7 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Pelabuhan</port>
+      <port>Port</port>
       <userName>#{word.userName}</userName>
       <password>Kata Sandi</password>
       <link>Tautan</link>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron ekspresi</cron-expression>
+        <cron-expression>Ekspresi Cron</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -151,11 +151,11 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Pencipta:</creator>
+        <creator>Pembuat:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Sumber:</source>
-        <contributor>Penyumbang:</contributor>
-        <resource-type>Jenis Sumber Daya:</resource-type>
+        <source>Source:</source>
+        <contributor>Kontributor:</contributor>
+        <resource-type>Resource Type:</resource-type>
         <date>#{word.date}:</date>
         <publisher>Penerbit:</publisher>
         <description>#{word.description}:</description>
