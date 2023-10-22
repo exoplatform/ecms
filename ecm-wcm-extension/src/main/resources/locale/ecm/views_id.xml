@@ -54,7 +54,7 @@
         <pdf-max-size>Pratinjau tidak tersedia untuk konten yang lebih besar dari {0} MB.</pdf-max-size>
         <pdf-max-page>Pratinjaunya tidak tersedia untuk konten dengan lebih dari {0} halaman.</pdf-max-page>
         <using-webDAV>atau Buka di MS Office</using-webDAV>
-        <open-on-desktop>Open in Desktop</open-on-desktop>
+        <open-on-desktop>Buka pada Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
         <open-in-documents>Buka di Dokumen</open-in-documents>
         <open-in-documents-tooltip>Buka berkas ini di aplikasi dokumen</open-in-documents-tooltip>
@@ -63,7 +63,7 @@
         <download>Unduh</download>
         <htmlview>Tampilkan sebagai HTML</htmlview>
         <plaintextview>Tampilkan sebagai teks biasa</plaintextview>
-        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
+        <binary-not-available>Isi dokumen ini tidak lagi tersedia. Silakan hubungi administrator Anda.</binary-not-available>
       </label>
     </view>
   </File>

@@ -22,42 +22,42 @@
 <bundle>
   <editors>
     <admin>
-    <page>Editors Administration</page>
+    <page>Administrasi Editor</page>
       <error>
-        <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
-        <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
-        <CannotGetProviders>Can't get providers list.</CannotGetProviders>
-        <PermissionNotValid>The specified permission is not valid. Maybe the user or group doesn't exist.</PermissionNotValid>
-        <CannotLoadIdentities>Can't load identities by specified criteria</CannotLoadIdentities>
-        <CannotSavePreferredEditor>Can't save selected editor as preferred one.</CannotSavePreferredEditor>
-        <UnableGetData>An error occurred while reading the data.</UnableGetData>
-        <UnablePostData>An error occurred while saving the data.</UnablePostData>
+        <ProviderNotRegistered>Penyedia editor tidak terdaftar.</ProviderNotRegistered>
+        <EmptyRequest>Permintaan harus mengandung setidaknya 1 parameter formulir (aktif/izin).</EmptyRequest>
+        <CannotGetProviders>Tidak mendapatkan daftar penyedia.</CannotGetProviders>
+        <PermissionNotValid>Izin yang ditentukan tidak valid. Mungkin pengguna atau grup tidak ada.</PermissionNotValid>
+        <CannotLoadIdentities>Tidak dapat memuat identitas berdasarkan kriteria yang ditentukan.</CannotLoadIdentities>
+        <CannotSavePreferredEditor>Tidak dapat menyimpan editor yang dipilih sebagai yang diinginkan.</CannotSavePreferredEditor>
+        <UnableGetData>Terjadi kesalahan saat membaca data.</UnableGetData>
+        <UnablePostData>Terjadi kesalahan saat menyimpan data.</UnablePostData>
       </error>
-      <title>Document editors</title>
+      <title>Pengedit Dokumen</title>
       <table>
         <Provider>penyedia</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Deskripsi</Description>
+        <Active>Aktif</Active>
+        <Permissions>Izin Akses</Permissions>
       </table>
       <modal>
-        <title>Edit permissions</title>
-        <SearchLabel>Enter user or group name</SearchLabel>
-        <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
-        <Everybody>Everybody</Everybody>
+        <title>Edit Perizinan</title>
+        <SearchLabel>Masukkan nama pengguna atau grup</SearchLabel>
+        <WithPermissions>Siapa yang memiliki izin?</WithPermissions>
+        <None>Tidak ada</None>
+        <Everybody>semua orang</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Simpan</Save>
+        <Cancel>Batal</Cancel>
       </buttons>
     </admin>
     <buttons>
       <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
-      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
+      <title>Peringatan</title>
+      <message>Tampaknya Anda sudah tidak aktif cukup lama. Halaman editor akan ditutup dalam %s detik.</message>
     </idlePopup>
   </editors>
 </bundle>

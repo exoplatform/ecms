@@ -994,7 +994,7 @@
       <shareDocuments>Bagikan</shareDocuments>
       <openDocument>Ubah jarak jauh</openDocument>
       <editProperty>Mengubah properti dokumen</editProperty>
-      <uploadNewVersion>Upload a version</uploadNewVersion>
+      <uploadNewVersion>Mengunggah versi baru</uploadNewVersion>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1313,7 +1313,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select Role</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Pilih Keanggotaan</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
 
@@ -1327,7 +1327,7 @@
   <TaxoTreeSelectUserOrGroup>
     <label>
       <selectGroup>Pilih kelompok</selectGroup>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
 
@@ -1454,7 +1454,7 @@
   <permission>
     <title>
       <SelectUser>Pilih Pengguna</SelectUser>
-      <SelectMember>Select Role</SelectMember>
+      <SelectMember>Pilih Keanggotaan</SelectMember>
       <AddAny>Semua orang</AddAny>
     </title>
   </permission>
@@ -1467,7 +1467,7 @@
     <title>
       <UIGroupSelector>Pilih Pengguna</UIGroupSelector>
       <UIPermissionSelector>Pilih Anggota</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilih Keanggotaan</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -2162,7 +2162,7 @@
     <label>
       <selectGroup>Pilih Kelompok</selectGroup>
       <selectUser>Pilih Pengguna</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
@@ -2170,7 +2170,7 @@
     <label>
       <selectGroup>Pilih Grup</selectGroup>
       <selectUser>Pilih Pengguna</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </UIPermissionSelector>
 
@@ -2199,7 +2199,7 @@
   </MetadataPermission>
   <MetadataPermission>
     <label>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
@@ -2214,7 +2214,7 @@
     <label>
       <selectGroup>Pilih Grup</selectGroup>
       <selectUser>Pilih Pengguna</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2484,17 +2484,17 @@
       <Add>Tambah</Add>
     </action>
     <label>
-      <userOrGroup>Roles:</userOrGroup>
+      <userOrGroup>Keanggotaan:</userOrGroup>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This role already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Keanggotaan ini sudah ada. Silahkan pilih yang lain.</userOrGroup-alreadyExists>
     </msg>
   </UITagPermissionForm>
 
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Pilih Kelompok</selectGroup>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </UIGroupMemberSelector>
 

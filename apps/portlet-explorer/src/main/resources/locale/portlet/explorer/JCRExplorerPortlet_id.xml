@@ -310,7 +310,7 @@
       <ViewRelations>Tampilkan/Sembunyikan hubungan</ViewRelations>
       <ShowJCRStructure>Tampilkan/Sembunyikan struktur konten</ShowJCRStructure>
       <EditProperty>Ubah properti dokumen</EditProperty>
-      <UploadNewVersion>Upload a version</UploadNewVersion>
+      <UploadNewVersion>Mengunggah versi baru</UploadNewVersion>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Kamu tidak dapat melakukan tindakan pada akar ini.</cannot-action-in-rootnode>
@@ -515,9 +515,9 @@
     </label>
     <msg>
       <unable-save-node>'{0}' telah diciptkan. silahkan simpan sesi untuk mengesahkan tindakan ini.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
+      <save-node-success>'{0}' telah disimpan.</save-node-success>
       <node-copied>'{0}' telah disalin.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
+      <node-cut>'{0}' telah dipotong.</node-cut>
       <remove-root>Anda tidak dapat menghapus folder root.</remove-root>
       <node-remove-success>'{0}' telah dihapus.</node-remove-success>
     </msg>
@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Pilih Pengguna</SelectUser>
-      <SelectMember>Select Role</SelectMember>
+      <SelectMember>Pilih Keanggotaan</SelectMember>
       <AddAny>Pilih Siapa saja</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Pilih Pengguna</UIGroupSelector>
       <UIPermissionSelector>Pilih Anggota</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Pilih Keanggotaan</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -1040,9 +1040,9 @@
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
+      <not-support>Tidak ada tampilan template untuk item ini.</not-support>
       <empty>Tidak ditemukan hasil</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <access-denied>Anda tidak dapat melihat item ini, baik karena tidak ada templat Tampilan atau karena Anda tidak memiliki akses ke item tersebut.</access-denied>
       <query-invalid>Kueri tidak valid.</query-invalid>
     </msg>
     <header>
@@ -1065,7 +1065,7 @@
       <datecreatedDESC>Susunlah berdasarkan tanggal dibuat dalam urutan kebawah</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
+      <View>Lihat Item ini</View>
       <OpenFolder>Buka Folder</OpenFolder>
       <DeletePermanently>Hapus untuk selama-lamanya</DeletePermanently>
       <RestoreFromTrash>Pulihkan dari tempat sampah</RestoreFromTrash>
@@ -1351,9 +1351,9 @@
       <empty>Klik disini untuk menambahkan ringkasan</empty>
     </summary>
     <tooltip>
-      <original>Original Version</original>
+      <original>Versi Asli</original>
       <version>Versi</version>
-      <baseVersion>current draft</baseVersion>
+      <baseVersion>versi saat ini</baseVersion>
       <addLabel>Tambahkan Label</addLabel>
       <removeLable>Hapus Label</removeLable>
       <restoreVersion>Kembalikan Versi</restoreVersion>
@@ -1497,8 +1497,8 @@
       <can-not-compare>Gagal menggabungkan dua versi</can-not-compare>
       <compare-unavailable>Penggabungan versi tidak tersedia untuk dokumen ini</compare-unavailable>
       <DateChange>Pada {0}</DateChange>
-      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared with</ComparedWith>
+      <PreviousAndNextCompare>Perubahan dari {0} ke {1}</PreviousAndNextCompare>
+      <ComparedWith>Tergabung dengan</ComparedWith>
       <restoredFrom>Dipulihkan dari versi {0}</restoredFrom>
     </label>
   </UIDiff>
@@ -2091,7 +2091,7 @@
     <label>
       <selectGroup>Pilih Grup</selectGroup>
       <selectUser>Pilih Pengguna</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2211,7 +2211,7 @@
     <label>
       <selectGroup>Pilih Kelompok</selectGroup>
       <selectUser>Pilih Pengguna</selectUser>
-      <selectMembership>Select Role</selectMembership>
+      <selectMembership>Pilih Keanggotaan</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2347,13 +2347,13 @@
       <constraint-violation>Anda tidak dapat menambahkan jenis '{0}' ke item saat ini.</constraint-violation>
       <repository-exception>Akses ditolak. Anda tidak memiliki izin untuk menambahkan symlink ke item ini.</repository-exception>
       <numberformat-exception>Anda tidak dapat menyimpan folder ini. Nama harus dalam format numerik.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-invalid>Silakan masukkan pathnya.</path-node-invalid>
       <path-node-not-allowed>Nama ini tidak di izinkan.</path-node-not-allowed>
       <non-node>Silahkan pilih target kepercayaan; anda mungkin tidak memiliki hak untuk membaca simpul ini.</non-node>
       <cannot-save>Terjadi kesalahan saat membuat symlink ini.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <item-exists-exception>Item dengan nama ini sudah ada.</item-exists-exception>
+      <translation-node-same-language-default>Dokumen yang diterjemahkan memiliki bahasa yang sama dengan bahasa default dokumen saat ini.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Target item ini tidak direferensikan.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
@@ -2462,7 +2462,7 @@
 <ReadOnly>Buka hanya Baca</ReadOnly>
 <Cancel>Batalkan</Cancel>
       <KeepBoth>Simpan keduanya</KeepBoth>
-      <CreateNewVersion>Save as new version</CreateNewVersion>
+      <CreateNewVersion>Simpan sebagai versi baru</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 

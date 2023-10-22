@@ -72,13 +72,13 @@
       <LinkCreated>Link {0} telah dibuat.</LinkCreated>
       <FileLinksCreated>File {0} dihubungkan di {1}</FileLinksCreated>
       <FileLinksSharedInSpace>Link file {0} dibagikan di {1} dari ruang {2}.</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
-      <CannotFindUser>Cannot find user {0}</CannotFindUser>
-      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
+      <FileLinksSharedInGroup>File link {0} dibagikan di {1} dari grup {2}.</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>File link {0} dibagikan dengan pengguna {2} di folder {1} miliknya.</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>Pengaitan berkas tidak didukung ke tujuan ini.</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Kesalahan membaca drive dokumen.</ErrorReadingDrives>
+      <CannotFindUser>Tidak dapat menemukan pengguna {0}.</CannotFindUser>
+      <ErrorReadingFileLinks>Kesalahan membaca tautan berkas.</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Kesalahan membaca drive pengguna.</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
@@ -88,37 +88,37 @@
   </ConnectCloudDriveForm>
   <cloudStorage>
     <label>
-      <title>Cloud Storage</title>
-      <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Provider</provider>
-      <description>Description</description>
-      <active>Active</active>
-      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+      <title>Penyimpanan Cloud</title>
+      <cloudDrives>Cloud Drive</cloudDrives>
+      <provider>Penyedia</provider>
+      <description>Deskripsi</description>
+      <active>Aktif</active>
+      <ConnectionToCloud>Koneksi ke Drive Cloud</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documents</title>
-      <subtitle>Connect your personal drives</subtitle>
-      <description>Access your personal drives from your Digital Workplace</description>
+      <title>Dokumen</title>
+      <subtitle>Hubungkan drive pribadi Anda</subtitle>
+      <description>Akses drive pribadi Anda dari Lingkungan Kerja Digital Anda</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
+      <title>Hubungkan drive pribadi Anda</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Hubungkan</connect>
       </button>
       <button>
-        <disconnect>Disconnect</disconnect>
+        <disconnect>Putuskan Koneksi</disconnect>
       </button>
-      <noConnector>No personal drive connector available</noConnector>
-      <connectedAccountWith>You are connected with</connectedAccountWith>
+      <noConnector>Tidak ada konektor drive pribadi yang tersedia.</noConnector>
+      <connectedAccountWith>Anda terhubung dengan</connectedAccountWith>
     </drawer>
     <alert>
-      <successMessage>Your cloud drive is connected correctly</successMessage>
-      <errorMessage>Failed connection</errorMessage>
-      <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
-      <disconnectSuccessMessage>Your cloud drive is disconnected correctly</disconnectSuccessMessage>
-      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
+      <successMessage>Drive cloud Anda telah terhubung dengan benar.</successMessage>
+      <errorMessage>Koneksi gagal</errorMessage>
+      <errorSaveUserSettings>Tidak dapat menyimpan akun drive yang terhubung.</errorSaveUserSettings>
+      <disconnectSuccessMessage>Drive cloud Anda telah terputus dengan benar.</disconnectSuccessMessage>
+      <disconnectErrorMessage>Gagal memutuskan koneksi.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
