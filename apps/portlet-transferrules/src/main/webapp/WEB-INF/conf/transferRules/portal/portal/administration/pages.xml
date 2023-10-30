@@ -31,7 +31,7 @@
           <portlet-ref>transferRulesPortlet</portlet-ref>
         </portlet>
         <title>Transfer Rules Administration</title>
-        <access-permissions>*:/platform/administrators</access-permissions>
+        <access-permissions>Everyone</access-permissions>
         <show-info-bar>false</show-info-bar>
       </portlet-application>
     </container>
