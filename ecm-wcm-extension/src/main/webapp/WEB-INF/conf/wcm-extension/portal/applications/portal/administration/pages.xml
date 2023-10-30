@@ -26,14 +26,14 @@
     <access-permissions>*:/platform/administrators</access-permissions>
     <edit-permission>manager:/platform/administrators</edit-permission>
     <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" cssClass="singlePageApplication">
-      <access-permissions>*:/platform/users</access-permissions>
+      <access-permissions>Everyone</access-permissions>
       <portlet-application>
         <portlet>
           <application-ref>clouddrives</application-ref>
           <portlet-ref>cloudStoragePortlet</portlet-ref>
         </portlet>
         <title>cloud Storage</title>
-        <access-permissions>*:/platform/administrators</access-permissions>
+        <access-permissions>Everyone</access-permissions>
         <show-info-bar>false</show-info-bar>
       </portlet-application>
     </container>
@@ -45,14 +45,14 @@
     <access-permissions>*:/platform/administrators</access-permissions>
     <edit-permission>manager:/platform/administrators</edit-permission>
     <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" cssClass="singlePageApplication">
-      <access-permissions>*:/platform/users</access-permissions>
+      <access-permissions>Everyone</access-permissions>
       <portlet-application>
         <portlet>
           <application-ref>editors</application-ref>
           <portlet-ref>EditorsAdminPortlet</portlet-ref>
         </portlet>
         <title>Document Editors Administration</title>
-        <access-permissions>*:/platform/administrators</access-permissions>
+        <access-permissions>Everyone</access-permissions>
         <show-info-bar>false</show-info-bar>
       </portlet-application>
     </container>
