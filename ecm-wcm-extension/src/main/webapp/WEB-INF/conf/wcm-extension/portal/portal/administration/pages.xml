@@ -25,7 +25,7 @@
     <access-permissions>*:/platform/web-contributors</access-permissions>
     <edit-permission>manager:/platform/web-contributors</edit-permission>
     <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" cssClass="singlePageApplication">
-      <access-permissions>*:/platform/users</access-permissions>
+      <access-permissions>Everyone</access-permissions>
       <portlet-application>
         <portlet>
           <application-ref>ecmexplorer</application-ref>
@@ -39,7 +39,7 @@
           </preferences>
         </portlet>
         <title>Site Explorer</title>
-        <access-permissions>*:/platform/web-contributors</access-permissions>
+        <access-permissions>Everyone</access-permissions>
         <show-info-bar>false</show-info-bar>
         <show-application-state>false</show-application-state>
         <show-application-mode>false</show-application-mode>
@@ -50,7 +50,7 @@
           <portlet-ref>AuthoringDashboard</portlet-ref>
         </portlet>
         <title>Authoring Dashboard</title>
-        <access-permissions>*:/platform/web-contributors</access-permissions>
+        <access-permissions>Everyone</access-permissions>
         <show-info-bar>false</show-info-bar>
         <show-application-state>false</show-application-state>
         <show-application-mode>false</show-application-mode>
@@ -63,7 +63,7 @@
     <access-permissions>manager:/platform/web-contributors</access-permissions>
     <edit-permission>manager:/platform/web-contributors</edit-permission>
     <container id="singlePageApplicationContainer" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" cssClass="singlePageApplication">
-      <access-permissions>*:/platform/users</access-permissions>
+      <access-permissions>Everyone</access-permissions>
       <portlet-application>
         <portlet>
           <application-ref>ecmadmin</application-ref>
@@ -71,7 +71,7 @@
           <preferences></preferences>
         </portlet>
         <title>WCM Administration</title>
-        <access-permissions>*:/platform/web-contributors</access-permissions>
+        <access-permissions>Everyone</access-permissions>
         <show-info-bar>false</show-info-bar>
         <show-application-state>false</show-application-state>
         <show-application-mode>false</show-application-mode>
