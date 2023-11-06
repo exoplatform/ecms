@@ -44,6 +44,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -650,10 +652,31 @@ public class ManageDocumentService implements ResourceContainer {
     return file;
   }
 
+  /**
+   * This function gets or creates the folder where the files will be stored
+   * @param driveName the name of the selected JCR drive
+   * @param workspaceName The name of the JCR workspace
+   * @param currentFolder The folder where the files will be stored
+   *                      for spaces, the currentFolder will be created directly under the Documents folder of the space.
+   *                      If the currentFolder param is preceded with 'DRIVE_ROOT_NODE' then currentFolder will be created under the root folder of the space
+   * @return Node object representing the parent folder where the files will be uploaded
+   * @throws Exception
+   */
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
     return getNode(driveName, workspaceName, currentFolder, false);
   }
-  
+
+  /**
+   * This function gets or creates the folder where the files will be stored
+   * @param driveName the name of the selected JCR drive
+   * @param workspaceName The name of the JCR workspace
+   * @param currentFolder The folder where the files will be stored
+   *                      for spaces, the currentFolder will be created directly under the Documents folder of the space.
+   *                      If the currentFolder param is preceded with 'DRIVE_ROOT_NODE' then currentFolder will be created under the root folder of the space
+   * @param isSystem use system session if true
+   * @return Node object representing the parent folder where the files will be uploaded
+   * @throws Exception
+   */
   private Node getNode(String driveName, String workspaceName, String currentFolder, boolean isSystem) throws Exception {
     Session session;
     if (isSystem) {
@@ -661,14 +684,29 @@ public class ManageDocumentService implements ResourceContainer {
     } else {
       session = getSession(workspaceName);
     }
-    String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();
+    DriveData driveData = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName));
+    String driveHomePath = driveData.getHomePath();
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     String drivePath = Utils.getPersonalDrivePath(driveHomePath, userId);
     Node node = (Node) session.getItem(Text.escapeIllegalJcrChars(drivePath));
     if (StringUtils.isEmpty(currentFolder)) {
       return node;
     }
-    for (String folder : currentFolder.split("/")) {
+    // Check if we store the file under Documents folder or under the root folder of the space
+    if(driveName.startsWith(".spaces.") && currentFolder.startsWith("DRIVE_ROOT_NODE")) {
+      String driveRootPath = driveHomePath;
+      if(driveHomePath.contains("/Documents")) {
+        driveRootPath = driveHomePath.substring(0, driveHomePath.indexOf("/Documents"));
+      }
+      // Need system session to create the folder if it does not exist
+      SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+      Session systemSession = sessionProvider.getSession(workspaceName, getCurrentRepository());
+      node = (Node) systemSession.getItem(Text.escapeIllegalJcrChars(driveRootPath));
+      currentFolder = currentFolder.substring("DRIVE_ROOT_NODE/".length());
+    }
+
+    List<String> foldersNames = Arrays.stream(currentFolder.split("/")).filter(item -> !item.isEmpty()).toList().stream().toList();
+    for (String folder : foldersNames) {
       String cleanFolderName = org.exoplatform.services.jcr.util.Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
       if (node.hasNode(folder)) {
         node = node.getNode(folder);
@@ -683,6 +721,16 @@ public class ManageDocumentService implements ResourceContainer {
           newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
         }
         newNode.setProperty(NodetypeConstant.EXO_TITLE, org.exoplatform.services.cms.impl.Utils.cleanDocumentTitle(folder));
+
+        // Update permissions
+        if (newNode.canAddMixin("exo:privilegeable")) {
+          newNode.addMixin("exo:privilegeable");
+        }
+        String groupId = driveData.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
+        if(StringUtils.isNotBlank(groupId) && groupId.startsWith("/spaces/")) {
+          ((ExtendedNode) newNode).setPermission(groupId, new String[]{PermissionType.READ, PermissionType.ADD_NODE, PermissionType.SET_PROPERTY});
+        }
+
         node.save();
         node = newNode;
       }

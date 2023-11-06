@@ -30,12 +30,13 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore({ "javax.management.*" })
-@PrepareForTest({ WCMCoreUtils.class, ConversationState.class, Utils.class})
+@PrepareForTest({ WCMCoreUtils.class, ConversationState.class, Utils.class, SessionProvider.class})
 public class ManageDocumentServiceTest {
 
   @Mock
@@ -83,6 +84,20 @@ public class ManageDocumentServiceTest {
     when(conversationState.getIdentity()).thenReturn(identity);
     when(identity.getUserId()).thenReturn("user");
     PowerMockito.mockStatic(Utils.class);
+
+    DriveData driveData = mock(DriveData.class);
+    when(manageDriveService.getDriveByName(anyString())).thenReturn(driveData);
+    when(driveData.getHomePath()).thenReturn("path");
+    PowerMockito.mockStatic(Utils.class);
+    when(Utils.getPersonalDrivePath("path", "user")).thenReturn("personalDrivePath");
+    when(Utils.cleanString(anyString())).thenCallRealMethod();
+    when(Utils.cleanName(anyString())).thenCallRealMethod();
+    when(Utils.cleanName(anyString(), anyString())).thenCallRealMethod();
+    when(Utils.cleanNameWithAccents(anyString())).thenCallRealMethod();
+    when(Utils.replaceSpecialChars(anyString(), anyString())).thenCallRealMethod();
+    when(Utils.replaceSpecialChars(anyString(), anyString(), anyString())).thenCallRealMethod();
+    PowerMockito.mockStatic(SessionProvider.class);
+    when(SessionProvider.createSystemProvider()).thenReturn(systemSessionProvider);
   }
 
   @Test
@@ -96,19 +111,19 @@ public class ManageDocumentServiceTest {
     response = this.manageDocumentService.checkFileExistence("collaboration", "testspace", "/documents", null);
     assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 
-    response = this.manageDocumentService.checkFileExistence("collaboration", "testspace", "/documents", "test.docx");
-    DriveData driveData = mock(DriveData.class);
-    when(manageDriveService.getDriveByName(anyString())).thenReturn(driveData);
-    when(driveData.getHomePath()).thenReturn("path");
-    when(Utils.getPersonalDrivePath("path", "user")).thenReturn("personalDrivePath");
     Node node = mock(Node.class);
-    when(session.getItem("personalDrivePath")).thenReturn(node);
+    when(session.getItem(anyString())).thenReturn(node);
     when(node.hasNode("Documents")).thenReturn(true);
     Node targetNode = mock(Node.class);
     when(node.getNode("Documents")).thenReturn(targetNode);
-    when(node.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(false);
+    Node folderNode1 = mock(Node.class);
+    when(node.addNode(anyString(), eq(NodetypeConstant.NT_FOLDER))).thenReturn(folderNode1);
     when(fileUploadHandler.checkExistence(targetNode, "test.docx")).thenReturn(Response.ok().build());
+
+    response = this.manageDocumentService.checkFileExistence("collaboration", "testspace", "/documents", "test.docx");
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
+    response = this.manageDocumentService.checkFileExistence("collaboration", ".spaces.space_one", "DRIVE_ROOT_NODE/Documents", "test.docx");
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
   }
 }
