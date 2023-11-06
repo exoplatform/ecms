@@ -111,13 +111,12 @@
         </object-param>
       </init-params>
     </component-plugin>
-
     <component-plugin>
       <name>new.portal.config.user.listener</name>
       <set-method>initListener</set-method>
       <type>org.exoplatform.portal.config.NewPortalConfigListener</type>
       <description>this listener init the portal configuration</description>
-	  <priority>690</priority>
+      <priority>690</priority>
       <init-params>
         <object-param>
           <name>portal.configuration</name>
@@ -145,7 +144,6 @@
         </object-param>
       </init-params>
     </component-plugin>
-
     <component-plugin profiles="analytics">
       <name>new.portal.config.user.listener</name>
       <set-method>initListener</set-method>
