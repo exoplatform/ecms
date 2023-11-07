@@ -522,7 +522,13 @@ export default {
     },
     entityId() {
       this.initDestinationFolderPath();
-    }
+    },
+    defaultFolder() {
+      this.initDestinationFolderPath();
+    },
+    defaultDrive() {
+      this.initDestinationFolderPath();
+    },
   },
   created() {
     this.initDestinationFolderPath();
