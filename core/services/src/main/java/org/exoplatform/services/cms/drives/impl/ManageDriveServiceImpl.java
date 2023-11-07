@@ -332,7 +332,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       DriveData drive = groupDriveTemplate.clone();
       drive.setHomePath(groupDriveTemplate.getHomePath().replace("${groupId}", groupName));
       drive.setName(name);
-      drive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, name);
+      drive.getParameters().put(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID, groupName);
       drive.setPermissions("*:" + groupName);
       return drive;
     }
