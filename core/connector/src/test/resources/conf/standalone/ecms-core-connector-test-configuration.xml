@@ -389,37 +389,7 @@
       </value-param>            
     </init-params>
   </component>
-  
-  <component>
-    <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
-    <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>port</name>
-        <value>8100, 8101, 8102, 8103, 8104</value>
-      </value-param>
-      <value-param>
-        <name>officeHome</name>
-        <value>/usr/lib/libreoffice</value>
-      </value-param>
-      <value-param>
-        <name>taskQueueTimeout</name>
-        <value>30000</value>
-      </value-param>
-      <value-param>
-        <name>taskExecutionTimeout</name>
-        <value>120000</value>
-      </value-param>
-      <value-param>
-        <name>maxTasksPerProcess</name>
-        <value>200</value>
-      </value-param>
-      <value-param>
-        <name>retryTimeout</name>
-        <value>120000</value>
-      </value-param>
-    </init-params>
-  </component>
+
 
   <external-component-plugins>
     <target-component>org.exoplatform.social.metadata.MetadataService</target-component>

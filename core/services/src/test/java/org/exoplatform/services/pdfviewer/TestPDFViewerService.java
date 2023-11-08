@@ -3,9 +3,7 @@ package org.exoplatform.services.pdfviewer;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cache.CacheService;
-import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -25,14 +23,11 @@ public class TestPDFViewerService {
   @Mock
   private CacheService cacheService;
 
-  @Mock
-  private JodConverterService jodConverterService;
-
   @Test
   public void shouldGetDefaultValuesWhenNoInitParams() throws Exception {
     InitParams initParams = new InitParams();
 
-    PDFViewerService pdfViewerService = new PDFViewerService(repositoryService, cacheService, jodConverterService, initParams);
+    PDFViewerService pdfViewerService = new PDFViewerService(repositoryService, cacheService, initParams);
 
     assertEquals(PDFViewerService.DEFAULT_MAX_FILE_SIZE, pdfViewerService.getMaxFileSize());
     assertEquals(PDFViewerService.DEFAULT_MAX_PAGES, pdfViewerService.getMaxPages());
@@ -50,7 +45,7 @@ public class TestPDFViewerService {
     maxPagesValueParam.setValue("10");
     initParams.addParam(maxPagesValueParam);
 
-    PDFViewerService pdfViewerService = new PDFViewerService(repositoryService, cacheService, jodConverterService, initParams);
+    PDFViewerService pdfViewerService = new PDFViewerService(repositoryService, cacheService, initParams);
 
     assertEquals(5 * 1024 * 1024, pdfViewerService.getMaxFileSize());
     assertEquals(10, pdfViewerService.getMaxPages());
@@ -68,7 +63,7 @@ public class TestPDFViewerService {
     maxPagesValueParam.setValue("0.5");
     initParams.addParam(maxPagesValueParam);
 
-    PDFViewerService pdfViewerService = new PDFViewerService(repositoryService, cacheService, jodConverterService, initParams);
+    PDFViewerService pdfViewerService = new PDFViewerService(repositoryService, cacheService, initParams);
 
     assertEquals(PDFViewerService.DEFAULT_MAX_FILE_SIZE, pdfViewerService.getMaxFileSize());
     assertEquals(PDFViewerService.DEFAULT_MAX_PAGES, pdfViewerService.getMaxPages());
