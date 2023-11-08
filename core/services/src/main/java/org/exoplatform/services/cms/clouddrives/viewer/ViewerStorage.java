@@ -45,7 +45,6 @@ import javax.imageio.ImageIO;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.services.cms.clouddrives.*;
 import org.icepdf.core.exceptions.PDFException;
 import org.icepdf.core.exceptions.PDFSecurityException;
@@ -57,7 +56,6 @@ import org.icepdf.core.util.GraphicsRenderingHints;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
-import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
@@ -73,8 +71,6 @@ import org.exoplatform.services.pdfviewer.PDFViewerService;
  * will be evicted.<br>
  * Local files will be stored in JVM temporary folder in a tree hiearachy:
  * repository/workspace/username/driveTitle/fileId.<br>
- * If remote file is not in PDF, image or text format it will be attempted to
- * convert it to the PDF by {@link JodConverterService}. <br>
  * Created by The eXo Platform SAS
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
@@ -762,9 +758,6 @@ public class ViewerStorage {
   /** The spool. */
   protected final ConcurrentHashMap<FileKey, ContentFile> spool    = new ConcurrentHashMap<FileKey, ContentFile>();
 
-  /** The jod converter. */
-  protected final JodConverterService                     jodConverter;
-
   /** The root dir. */
   protected final File                                    rootDir;
 
@@ -775,13 +768,10 @@ public class ViewerStorage {
    * Instantiates a new viewer storage.
    *
    * @param cacheService the cache service
-   * @param jodConverter the jod converter
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public ViewerStorage(CacheService cacheService, JodConverterService jodConverter) throws IOException {
+  public ViewerStorage(CacheService cacheService) throws IOException {
     String storageName = "CloudDrive." + ViewerStorage.class.getSimpleName();
-
-    this.jodConverter = jodConverter;
 
     File probe = null;
     try {
@@ -927,26 +917,6 @@ public class ViewerStorage {
             || file.getType().startsWith("application/x-pdf")) {
           // copy content directly
           spoolToFile(content.getStream(), tempFile);
-        } else {
-          // we assuming office document here: convert to PDF using Jod
-          // converter
-          // spool original content of cloud file to local file (file required
-          // by Jod)
-          File origFile = new File(parent, name + "-tmp");
-          try {
-            spoolToFile(content.getStream(), origFile);
-            boolean success = jodConverter.convert(origFile, tempFile, "pdf");
-            // If the converting was failure then delete the content temporary
-            // file
-            if (!success) {
-              tempFile.delete();
-            }
-          } catch (OfficeException e) {
-            tempFile.delete();
-            throw new IOException("Error converting office document " + file.getTitle() + " (" + cleanName + ")", e);
-          } finally {
-            origFile.delete();
-          }
         }
 
         if (tempFile.exists()) {
@@ -1199,7 +1169,7 @@ public class ViewerStorage {
 
   /**
    * Convert given page of PDF document to PNG image file. Method adapted from
-   * {@link PDFViewerRESTService}.
+   * {@link org.exoplatform.wcm.connector.viewer.PDFViewerRESTService}.
    *
    * @param input the input
    * @param page the page
