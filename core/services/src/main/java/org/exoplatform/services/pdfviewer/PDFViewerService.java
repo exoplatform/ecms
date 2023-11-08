@@ -30,13 +30,11 @@ import java.util.logging.Logger;
 import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
-import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
@@ -63,8 +61,6 @@ public class PDFViewerService {
 
   private static final String CACHE_NAME = "ecms.PDFViewerService";
 
-  private JodConverterService            jodConverter_;
-
   private ExoCache<Serializable, Object> pdfCache;
 
   private long                           maxFileSize;
@@ -73,9 +69,7 @@ public class PDFViewerService {
 
   public PDFViewerService(RepositoryService repositoryService,
                           CacheService caService,
-                          JodConverterService jodConverter,
                           InitParams initParams) throws Exception {
-    jodConverter_ = jodConverter;
     pdfCache = caService.getCacheInstance(CACHE_NAME);
 
     maxFileSize = DEFAULT_MAX_FILE_SIZE;
@@ -197,42 +191,8 @@ public class PDFViewerService {
       String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
       if ("pdf".equals(extension)) {
         read(input, new BufferedOutputStream(new FileOutputStream(content)));
-      } else {
-        // create temp file to store original data of nt:file node
-        File in = File.createTempFile(name + "_tmp", "." + extension);
-        read(input, new BufferedOutputStream(new FileOutputStream(in)));
-        long fileSize = in.length(); // size in byte
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("File '" + currentNode.getPath() + "' of " + fileSize + " B. Size limit for preview: "
-              + (getMaxFileSize() / (1024 * 1024)) + " MB");
-        }
-        if (fileSize <= getMaxFileSize()) {
-          try {
-            boolean success = jodConverter_.convert(in, content, "pdf");
-            // If the converting failed then delete the content of temporary
-            // file
-            if (!success) {
-              content.delete();
-              content = null;
-            }
-
-          } catch (OfficeException connection) {
-            content.delete();
-            content = null;
-            if (LOG.isErrorEnabled()) {
-              LOG.error("Exception when using Office Service", connection);
-            }
-          } finally {
-            in.delete();
-          }
-        } else {
-          LOG.info("File '" + currentNode.getPath() + "' is too big for preview.");
-          content.delete();
-          content = null;
-          in.delete();
-        }
       }
-      if (content != null && content.exists()) {
+      if (content.exists()) {
         if (contentNode.hasProperty("jcr:lastModified")) {
           pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
           pdfCache.put(new ObjectKey(bd1.toString()), lastModified);

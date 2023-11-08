@@ -44,11 +44,6 @@
         <include> org.icepdf.os:icepdf-core:jar</include>
         <include>com.sun.media:jai-codec:jar</include>
         <include>com.sun.media:jai-core:jar</include>
-        <include>org.artofsolving.jodconverter:jodconverter-core:jar</include>
-        <include>org.openoffice:juh:jar</include>
-        <include>org.openoffice:jurt:jar</include>
-        <include>org.openoffice:ridl:jar</include>
-        <include>org.openoffice:unoil:jar</include>
       </includes>
       <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
       <useProjectArtifact>false</useProjectArtifact>
