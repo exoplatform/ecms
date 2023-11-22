@@ -34,7 +34,7 @@
         <node>
           <name>documents-settings</name>
           <label>#{portal.administration.documents-settings}</label>
-          <icon>fas fa-file-alt</icon>
+          <icon>fas fa-folder-open</icon>
           <node>
             <name>cloud-storage</name>
             <label>#{portal.administration.cloud-storage}</label>
