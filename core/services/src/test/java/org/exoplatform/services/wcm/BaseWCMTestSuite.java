@@ -23,6 +23,7 @@ import org.exoplatform.services.cms.clipboard.TestClipboardService;
 import org.exoplatform.services.cms.documents.TestCustomizeViewService;
 import org.exoplatform.services.cms.documents.TestDocumentService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
+import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
 import org.exoplatform.services.deployment.TestWCMContentInitializerService;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
@@ -51,6 +52,7 @@ import org.exoplatform.services.ecm.dms.watchdocument.TestWatchDocumentService;
 import org.exoplatform.services.pdfviewer.TestPDFViewerService;
 import org.exoplatform.services.portletcache.TestFragmentCacheService;
 import org.exoplatform.services.portletcache.TestPortletFutureCache;
+import org.exoplatform.services.rest.AttachmentsRestServiceTest;
 import org.exoplatform.services.rest.TestDocumentsAppRedirectService;
 import org.exoplatform.services.seo.TestSEOService;
 import org.exoplatform.services.wcm.core.TestWCMConfigurationService;
@@ -115,11 +117,13 @@ import org.junit.runners.Suite.SuiteClasses;
   TestSEOService.class,
   TestClipboardService.class,
   TestPDFViewerService.class,
+  AttachmentsRestServiceTest.class,
   TestDocumentsAppRedirectService.class,
   TestDocumentService.class,
   TestCustomizeViewService.class,
   TestXSkinService.class,
-  AttachmentServiceTest.class
+  AttachmentServiceTest.class,
+  DocumentServiceImplTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
