@@ -26,6 +26,7 @@ import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.gatein.common.NotYetImplemented;
 
 /**
  * DMS DocumentService interface. Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Mar 22, 2011
@@ -85,6 +86,10 @@ public interface DocumentService {
    */
   String getLinkInDocumentsApp(String nodePath) throws Exception;
 
+  default String getLinkInDocumentsAppByIdentifier(String nodeIdentifier) throws Exception {
+    throw new UnsupportedOperationException("This is the default function, it should not be used !");
+  }
+
   /**
    * Get the link to display a document in the Documents app in the given drive. It will try to get the best matching context
    * (personal doc, space doc, ...).
@@ -93,8 +98,22 @@ public interface DocumentService {
    * @param drive The drive to use
    * @return The link to open the document
    * @throws Exception the exception
+   * @deprecated use getLinkInDocumentsAppByIdentifier(String nodeIdentifier, DriveData drive) instead
    */
   String getLinkInDocumentsApp(String nodePath, DriveData drive) throws Exception;
+
+  /**
+   * Get the link to display a document in the Documents app in the given drive. It will try to get the best matching context
+   * (personal doc, space doc, ...).
+   *
+   * @param nodeIdentifier The path of the node
+   * @param drive    The drive to use
+   * @return The link to open the document
+   * @throws Exception the exception
+   */
+  default String getLinkInDocumentsAppByIdentifier(String nodeIdentifier, DriveData drive) throws Exception {
+    throw new UnsupportedOperationException("This is the default function, it should not be used !");
+  }
 
   /**
    * Get the drive containing the node with the given node path, for the current user. If several drives contain the node, try to
@@ -104,7 +123,11 @@ public interface DocumentService {
    * @return The drive containing the node
    * @throws Exception the exception
    */
-  DriveData getDriveOfNode(String nodePath) throws Exception;
+  default DriveData getDriveOfNode(String nodePath) throws Exception {
+    throw new UnsupportedOperationException("This is the default function, it should not be used !");
+  }
+
+  DriveData getDriveOfNodeByIdentifier(String nodeIdentifier) throws Exception;
 
   /**
    * Get the drive containing the node with the given node path. If several drives contain the node, try to find the best
