@@ -41,7 +41,7 @@
             <icon>fas fa-cloud-download-alt</icon>
             <page-reference>portal::administration::cloudStorage</page-reference>
           </node>
-		  <node>
+          <node>
             <name>documents-editors</name>
             <label>#{portal.administration.documents-editors}</label>
             <icon>fas fa-edit</icon>
