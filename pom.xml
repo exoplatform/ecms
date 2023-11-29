@@ -4,7 +4,7 @@
   <parent>
     <artifactId>maven-exo-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>26-M04</version>
+    <version>26-RC01</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
