@@ -19,7 +19,6 @@
         :supported-documents="supportedDocuments"
         :attachments="attachments"
         :open-attachments-in-editor="openAttachmentsInEditor" />
-      <attachments-notification-alerts />
     </div>
   </v-app>
 </template>
@@ -190,20 +189,15 @@ export default {
             this.$root.$emit('remove-attached-file', file);
             const fileIndex = this.attachments.findIndex(attachedFile => attachedFile.id === file.id);
             this.attachments.splice(fileIndex, fileIndex >= 0 ? 1 : 0);
-            this.$root.$emit('attachments-notification-alert', {
-              message: this.$t('attachments.detach.success'),
-              type: 'success',
-            });
+            this.$root.$emit('alert-message', this.$t('attachments.detach.success'), 'success');
             this.initEntityAttachmentsList();
             document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
             document.dispatchEvent(new CustomEvent('attachment-removed', {detail: file}));
           })
           .catch(e => {
             console.error(e);
-            this.$root.$emit('attachments-notification-alert', {
-              message: this.$t('attachments.delete.failed').replace('{0}', file.title),
-              type: 'error',
-            });
+            const message = this.$t('attachments.delete.failed').replace('{0}', file.title);
+            this.$root.$emit('alert-message', message, 'error');
           })
           .finally(() => this.endLoadingList());
       } else {

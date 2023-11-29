@@ -352,10 +352,8 @@ export default {
           this.uploadingCount--;
           this.processNextQueuedUpload();
           this.$emit('uploadingCountChanged', this.uploadingCount);
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.upload.failed').replace('{0}', file.title),
-            type: 'error',
-          });
+          const message = this.$t('attachments.upload.failed').replace('{0}', file.title);
+          this.$root.$emit('alert-message', message, 'error');
         });
       }
     },
@@ -497,10 +495,7 @@ export default {
       }).catch(e => {
         console.error(e);
         this.$refs.attachmentsAppDrawer.endLoading();
-        this.$root.$emit('attachments-notification-alert', {
-          message: this.$t('attachments.link.failed'),
-          type: 'error',
-        });
+        this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
       });
     },
     updateLinkedAttachmentsToEntity() {
@@ -517,10 +512,7 @@ export default {
           .catch(e => {
             console.error(e);
             this.$refs.attachmentsAppDrawer.endLoading();
-            this.$root.$emit('attachments-notification-alert', {
-              message: this.$t('attachments.link.failed'),
-              type: 'error',
-            });
+            this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
           });
       }
     },
@@ -532,17 +524,11 @@ export default {
       }).catch(e => {
         console.error(e);
         this.$refs.attachmentsAppDrawer.endLoading();
-        this.$root.$emit('attachments-notification-alert', {
-          message: this.$t('attachments.link.failed'),
-          type: 'error',
-        });
+        this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
       });
     },
     displaySuccessMessage() {
-      this.$root.$emit('attachments-notification-alert', {
-        message: this.filesUploadedSuccessLabel,
-        type: 'success',
-      });
+      this.$root.$emit('alert-message', this.filesUploadedSuccessLabel, 'success');
     },
     openSelectFromDrivesDrawer() {
       this.$root.$emit('open-select-from-drives-drawer');
