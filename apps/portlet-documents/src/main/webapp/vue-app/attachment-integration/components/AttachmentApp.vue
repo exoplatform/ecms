@@ -59,7 +59,6 @@
         </div>
       </div>
     </div>
-    <attachments-notification-alerts />
   </div>
 </template>
 
