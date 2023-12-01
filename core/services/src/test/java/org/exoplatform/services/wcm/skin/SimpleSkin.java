@@ -51,6 +51,9 @@ class SimpleSkin implements SkinConfig {
 
     private final int priority;
 
+    private String             type;
+
+
     public SimpleSkin(SkinService service, String module, String name, String cssPath) {
         this(service, module, name, cssPath, Integer.MAX_VALUE);
     }
@@ -125,5 +128,16 @@ class SimpleSkin implements SkinConfig {
                 }
             }
         };
+    }
+
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
     }
 }
