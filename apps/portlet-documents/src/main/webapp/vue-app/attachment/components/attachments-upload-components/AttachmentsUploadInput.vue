@@ -195,20 +195,12 @@ export default {
         const existingFiles = existingAttachedFiles.length === 1 ? existingAttachedFiles.map(file => file.title) : existingAttachedFiles.length;
         let sameFileErrorMessage = existingAttachedFiles.length === 1 ? this.$t('attachments.drawer.sameFile.error') : this.$t('attachments.drawer.sameFiles.error');
         sameFileErrorMessage = sameFileErrorMessage.replace('{0}', `<b> ${existingFiles} </b>`);
-        document.dispatchEvent(new CustomEvent('alert-message', {detail: {
-          useHtml: true,
-          alertType: 'error',
-          alertMessage: sameFileErrorMessage,
-        }}));
+        this.$root.$emit('alert-message', sameFileErrorMessage, 'error');
       }
 
       newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).every((newFile, index) => {
         if (index === this.maxFilesCount || this.maxFilesCount === 0 || this.uploadedFilesCount >= this.maxFilesCount) {
-          document.dispatchEvent(new CustomEvent('alert-message', {detail: {
-            useHtml: true,
-            alertType: 'error',
-            alertMessage: this.maxFileCountErrorLabel,
-          }}));
+          this.$root.$emit('alert-message', this.maxFileCountErrorLabel, 'error');
           return false;
         } else {
           this.queueUpload(newFile);
@@ -220,11 +212,7 @@ export default {
     queueUpload: function (file) {
       const fileSizeInMb = file.size / this.BYTES_IN_MB;
       if (fileSizeInMb > this.maxFileSize) {
-        document.dispatchEvent(new CustomEvent('alert-message', {detail: {
-          useHtml: true,
-          alertType: 'error',
-          alertMessage: this.maxFileSizeErrorLabel
-        }}));
+        this.$root.$emit('alert-message', this.maxFileSizeErrorLabel, 'error');
         return;
       }
       this.checkExistenceActions(file.title).then(actions => {
