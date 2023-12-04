@@ -160,11 +160,7 @@ export default {
     },
     showNewDocInput(doc) {
       if (this.attachments.length >= this.maxFilesCount) {
-        document.dispatchEvent(new CustomEvent('alert-message', {detail: {
-          useHtml: true,
-          alertType: 'error',
-          alertMessage: this.maxFileCountErrorLabel,
-        }}));
+        this.$root.$emit('alert-message', this.maxFileCountErrorLabel, 'error');
         return;
       }
       this.$refs.NewDocInputHidden.focus();
