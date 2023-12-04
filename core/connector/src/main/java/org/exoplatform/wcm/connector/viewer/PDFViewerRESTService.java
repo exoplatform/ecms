@@ -40,11 +40,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
-import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.jodconverter.JodConverterService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -78,14 +76,11 @@ public class PDFViewerRESTService implements ResourceContainer {
   private static final String PDF_VIEWER_CACHE = "ecms.PDFViewerRestService";
   private RepositoryService repositoryService_;
   private ExoCache<Serializable, Object> pdfCache;
-  private JodConverterService jodConverter_;
   private static final Log LOG  = ExoLogger.getLogger(PDFViewerRESTService.class.getName());
 
   public PDFViewerRESTService(RepositoryService repositoryService,
-                              CacheService caService,
-                              JodConverterService jodConverter) throws Exception {
+                              CacheService caService) throws Exception {
     repositoryService_ = repositoryService;
-    jodConverter_ = jodConverter;
     PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
     if(pdfViewerService != null){
       pdfCache = pdfViewerService.getCache();
@@ -360,28 +355,9 @@ public class PDFViewerRESTService implements ResourceContainer {
         PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
         Each JVM reference takes 1KB of system memory and leads to a memleak
       */
-      // Convert to pdf if need
       String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
       if ("pdf".equals(extension)) {
         read(input, new BufferedOutputStream(new FileOutputStream(content)));
-      } else {
-        // create temp file to store original data of nt:file node
-        File in = File.createTempFile(name + "_tmp", "." + extension);
-        read(input, new BufferedOutputStream(new FileOutputStream(in)));
-        try {
-          boolean success = jodConverter_.convert(in, content, "pdf");
-          // If the converting was failure then delete the content temporary file
-          if (!success) {
-            content.delete();
-          }
-        } catch (OfficeException connection) {
-          content.delete();
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Exception when using Office Service");
-          }
-        } finally {
-          in.delete();
-        }
       }
       if (content.exists()) {
         pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
