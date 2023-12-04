@@ -312,6 +312,25 @@ public class DocumentServiceImpl implements DocumentService {
     return getLinkInDocumentsApp(nodePath, drive);
   }
 
+ /**
+   * Get link to open a document in the Documents application.
+   * This method will try to guess what is the best drive to use based on the node path.
+   * @param nodeIdentifier path of the nt:file node to open
+   * @return Link to open the document
+   * @throws Exception
+   */
+  @Override
+  public String getLinkInDocumentsAppByIdentifier(String nodeIdentifier) throws Exception {
+    String userId = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
+    boolean isAnonymous = userId == null || userId.isEmpty() || userId.equals(IdentityConstants.ANONIM);
+    if(nodeIdentifier == null || isAnonymous) {
+      return null;
+    }
+    // find the best matching drive to display the document
+    DriveData drive = this.getDriveOfNodeByIdentifier(nodeIdentifier);
+    return getLinkInDocumentsAppByIdentifier(nodeIdentifier, drive);
+  }
+
   /**
    * Get link to open a document in the Documents application with the given drive
    * @param nodePath path of the nt:file node to open
@@ -321,12 +340,21 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public String getLinkInDocumentsApp(String nodePath, DriveData drive) throws Exception {
-    if(nodePath == null) {
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    ManageableRepository repository = repoService.getCurrentRepository();
+    Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+    Node node = (Node) session.getItem(nodePath);
+    return getLinkInDocumentsAppByIdentifier(((NodeImpl) node).getIdentifier(), drive);
+  }
+
+  @Override
+  public String getLinkInDocumentsAppByIdentifier(String nodeIdentifier, DriveData drive) throws Exception {
+    if(nodeIdentifier == null) {
       return null;
     }
 
     String containerName = portalContainerInfo.getContainerName();
-    StringBuffer url = new StringBuffer();
+    StringBuilder url = new StringBuilder();
     url.append("/").append(containerName);
     if (drive == null) {
       SiteKey siteKey = getDefaultSiteKey();
@@ -335,45 +363,27 @@ public class DocumentServiceImpl implements DocumentService {
       return url.toString();
     }
 
-    String encodedDriveName = URLEncoder.encode(drive.getName(), "UTF-8");
-    String encodedNodePath = URLEncoder.encode(nodePath, "UTF-8");
     if(drive.getName().startsWith(".spaces")) {
       // handle group drive case
       String groupId = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
       if(groupId != null) {
         String groupPageName;
-          // the doc is in a space -> we use the documents application of the space
-          // we need to retrieve the root navigation URI of the space since it can differ from
-          // the group id if the space has been renamed
-          String rootNavigation = getSpaceRootNavigationNodeURI(groupId.replace(".","/"));
-
-          groupPageName = rootNavigation + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
-
-        url.append("/g/").append(groupId.replaceAll("\\.", ":")).append("/").append(groupPageName)
-                .append("?path=").append(encodedDriveName).append(encodedNodePath)
-                .append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID).append("=").append(groupId);
+        // the doc is in a space -> we use the documents application of the space
+        // we need to retrieve the root navigation URI of the space since it can differ from
+        // the group id if the space has been renamed
+        String rootNavigation = getSpaceRootNavigationNodeURI(groupId.replace(".","/"));
+        groupPageName = rootNavigation + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
+        url.append("/g/").append(groupId.replace("/", ":")).append("/").append(groupPageName);
       } else {
-        throw new Exception("Cannot get group id from node path " + nodePath);
-      }
-    } else if(drive.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
-            || drive.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
-      // handle personal drive case
-      SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
-              .append("?path=" + encodedDriveName + encodedNodePath);
-      String[] splitedNodePath = nodePath.split("/");
-      if(splitedNodePath != null && splitedNodePath.length >= 6) {
-        String userId = splitedNodePath[5];
-        url.append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID).append("=").append(userId);
+        throw new Exception("Cannot get group id from node path " + nodeIdentifier);
       }
     } else {
       // default case
       SiteKey siteKey = getDefaultSiteKey();
-      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
-              .append("?path=" + encodedDriveName + encodedNodePath);
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME);
     }
 
-    return url.toString();
+    return url.append("?documentPreviewId=").append(nodeIdentifier).toString();
   }
 
   /**
@@ -407,14 +417,26 @@ public class DocumentServiceImpl implements DocumentService {
   }
 
   @Override
+  public DriveData getDriveOfNodeByIdentifier(String nodeIdentifier) throws Exception {
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    ManageableRepository repository = repoService.getCurrentRepository();
+    Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+    Node node = session.getNodeByUUID(nodeIdentifier);
+    if (ConversationState.getCurrent()==null) {
+      return null;
+    }
+    return getDriveOfNode(node.getPath(), ConversationState.getCurrent().getIdentity().getUserId(), Utils.getMemberships());
+  }
+
+  @Override
   public DriveData getDriveOfNode(String nodePath, String userId, List<String> memberships) throws Exception {
     DriveData nodeDrive = null;
     List<DriveData> drives = manageDriveService.getDriveByUserRoles(userId, memberships);
 
     // Manage special cases
     String[] splitedPath = nodePath.split("/");
-    if (splitedPath != null && splitedPath.length >= 2 && splitedPath.length >= 6
-        && splitedPath[1].equals(ManageDriveServiceImpl.PERSONAL_DRIVE_ROOT_NODE)) {
+    if (splitedPath != null && splitedPath.length >= 6
+            && splitedPath[1].equals(ManageDriveServiceImpl.PERSONAL_DRIVE_ROOT_NODE)) {
       if (splitedPath[5].equals(userId)) {
         nodeDrive = manageDriveService.getDriveByName(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME);
       } else {
@@ -458,9 +480,8 @@ public class DocumentServiceImpl implements DocumentService {
       }
     };
     String remoteId = ConversationState.getCurrent().getIdentity().getUserId() ;
-    UserPortalConfig userPortalCfg = userPortalConfigSer.
-            getUserPortalConfig(userPortalConfigSer.getDefaultPortal(), remoteId, NULL_CONTEXT);
-    return userPortalCfg;
+    return userPortalConfigSer.
+                              getUserPortalConfig(userPortalConfigSer.getDefaultPortal(), remoteId, NULL_CONTEXT);
   }
 
   protected SiteKey getDefaultSiteKey() throws Exception {
@@ -468,8 +489,7 @@ public class DocumentServiceImpl implements DocumentService {
     if (prc == null) {
       return null;
     }
-    SiteKey siteKey = SiteKey.portal(prc.getPortalConfig().getName());
-    return siteKey;
+    return SiteKey.portal(prc.getPortalConfig().getName());
   }
 
   private String getPrivatePath(String user) {

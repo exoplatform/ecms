@@ -123,7 +123,7 @@ public class EntityBuilder {
     String downloadUrl = getDownloadUrl(repositoryService, workspace, attachmentsPath);
     attachment.setDownloadUrl(downloadUrl);
 
-    String openUrl = getUrl(documentService, attachmentsPath);
+    String openUrl = getUrl(documentService, attachmentId);
     attachment.setOpenUrl(openUrl);
 
     String attachmentsVersion = getStringProperty(originalAttachmentNode, "exo:baseVersion");
@@ -178,12 +178,18 @@ public class EntityBuilder {
     return downloadUrl.toString();
   }
 
-  private static String getUrl(DocumentService documentService, String nodePath) {
+  /**
+   * Provides the URL of the document in its Drive
+   * @param documentService
+   * @param nodeIdentifier
+   * @return URL of type String
+   */
+  private static String getUrl(DocumentService documentService, String nodeIdentifier) {
     String url = "";
     try {
-      url = documentService.getLinkInDocumentsApp(nodePath);
+      url = documentService.getLinkInDocumentsAppByIdentifier(nodeIdentifier);
     } catch (Exception e) {
-      LOG.error("Cannot get url of document " + nodePath, e);
+      LOG.error("Cannot get url of document " + nodeIdentifier, e);
     }
     return url;
   }

@@ -60,6 +60,7 @@ public class DriveData implements Comparable<DriveData>, Serializable {
     driveData.setHomePath(getHomePath());
     driveData.setIcon(getIcon());
     driveData.setName(getName());
+    driveData.setLabel(getLabel());
     driveData.setPermissions(getPermissions());
     driveData.setShowHiddenNode(getShowHiddenNode());
     driveData.setViewNonDocument(getViewNonDocument());
