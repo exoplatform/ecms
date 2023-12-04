@@ -57,10 +57,6 @@
       <artifactId>lucene-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.artofsolving.jodconverter</groupId>
-      <artifactId>jodconverter-core</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
     </dependency>

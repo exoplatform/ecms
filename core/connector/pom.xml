@@ -50,10 +50,6 @@
       <artifactId>jsr311-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.artofsolving.jodconverter</groupId>
-      <artifactId>jodconverter-core</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
     </dependency>
