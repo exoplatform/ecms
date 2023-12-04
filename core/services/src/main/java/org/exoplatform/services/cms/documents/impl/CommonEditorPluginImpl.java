@@ -1,6 +1,5 @@
 package org.exoplatform.services.cms.documents.impl;
 
-import com.sun.star.uno.RuntimeException;
 
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
