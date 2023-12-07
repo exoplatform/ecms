@@ -4,12 +4,12 @@
   <parent>
     <artifactId>maven-exo-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>27-M02</version>
+    <version>27-mips-SNAPSHOT</version>
     <relativePath />
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>6.6.x-SNAPSHOT</version>
+  <version>6.6.x-mips-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -40,7 +40,7 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <addon.exo.jcr.version>6.6.x-SNAPSHOT</addon.exo.jcr.version>
+    <addon.exo.jcr.version>6.6.x-mips-SNAPSHOT</addon.exo.jcr.version>
 
     <!-- **************************************** -->
     <!-- Apache Chemistry (OpenCMIS) API -->
