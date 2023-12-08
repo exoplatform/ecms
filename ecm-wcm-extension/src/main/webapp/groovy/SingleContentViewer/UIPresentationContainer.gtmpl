@@ -52,7 +52,7 @@
 			def edittingStyle = isShowInfoBar? "top:20px":"";	
 			%>
 			
-			<div class="UIPresentationContainer" id="$uicomponent.id">
+			<div class="UIPresentationContainer card-border-radius" id="$uicomponent.id">
 			
 			<%
 				if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node) && PermissionUtil.canSetProperty(node)) {
