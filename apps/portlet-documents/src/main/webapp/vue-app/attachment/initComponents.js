@@ -3,8 +3,6 @@ import AttachmentItem  from './components/attachments-upload-components/Attachme
 import AttachmentsFolderActionsMenu  from './components/attachments-drive-explorer/AttachmentsFolderActionsMenu.vue';
 import Attachment from './components/Attachment.vue';
 import AttachmentsDriveExplorerFileItem from './components/attachments-drive-explorer/AttachmentsDriveExplorerFileItem.vue';
-import AttachmentsNotificationAlert from './components/snackbar/AttachmentsNotificationAlert.vue';
-import AttachmentsNotificationAlerts from './components/snackbar/AttachmentsNotificationAlerts.vue';
 import AttachmentsListDrawer from './components/AttachmentsListDrawer.vue';
 import AttachmentsUploadInput from './components/attachments-upload-components/AttachmentsUploadInput.vue';
 import AttachmentsUploadedFiles from './components/attachments-upload-components/AttachmentsUploadedFiles.vue';
@@ -27,8 +25,6 @@ const components = {
   'attachments-select-from-drive': AttachmentsSelectFromDrive,
   'attachments-drive-explorer-file-item': AttachmentsDriveExplorerFileItem,
   'attachments-folder-actions-menu': AttachmentsFolderActionsMenu,
-  'attachments-notification-alert': AttachmentsNotificationAlert,
-  'attachments-notification-alerts': AttachmentsNotificationAlerts,
   'attachments-list-drawer': AttachmentsListDrawer,
   'attachments-uploaded-files': AttachmentsUploadedFiles,
   'attachments-upload-input': AttachmentsUploadInput,
