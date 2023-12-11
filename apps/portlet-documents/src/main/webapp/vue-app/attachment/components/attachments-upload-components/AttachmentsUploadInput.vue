@@ -195,18 +195,20 @@ export default {
         const existingFiles = existingAttachedFiles.length === 1 ? existingAttachedFiles.map(file => file.title) : existingAttachedFiles.length;
         let sameFileErrorMessage = existingAttachedFiles.length === 1 ? this.$t('attachments.drawer.sameFile.error') : this.$t('attachments.drawer.sameFiles.error');
         sameFileErrorMessage = sameFileErrorMessage.replace('{0}', `<b> ${existingFiles} </b>`);
-        this.$root.$emit('attachments-notification-alert', {
-          message: sameFileErrorMessage,
-          type: 'error',
-        });
+        document.dispatchEvent(new CustomEvent('alert-message', {detail: {
+          useHtml: true,
+          alertType: 'error',
+          alertMessage: sameFileErrorMessage,
+        }}));
       }
 
       newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).every((newFile, index) => {
         if (index === this.maxFilesCount || this.maxFilesCount === 0 || this.uploadedFilesCount >= this.maxFilesCount) {
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.maxFileCountErrorLabel,
-            type: 'error',
-          });
+          document.dispatchEvent(new CustomEvent('alert-message', {detail: {
+            useHtml: true,
+            alertType: 'error',
+            alertMessage: this.maxFileCountErrorLabel,
+          }}));
           return false;
         } else {
           this.queueUpload(newFile);
@@ -218,20 +220,18 @@ export default {
     queueUpload: function (file) {
       const fileSizeInMb = file.size / this.BYTES_IN_MB;
       if (fileSizeInMb > this.maxFileSize) {
-        this.$root.$emit('attachments-notification-alert', {
-          message: this.maxFileSizeErrorLabel,
-          type: 'error',
-        });
+        document.dispatchEvent(new CustomEvent('alert-message', {detail: {
+          useHtml: true,
+          alertType: 'error',
+          alertMessage: this.maxFileSizeErrorLabel
+        }}));
         return;
       }
       this.checkExistenceActions(file.title).then(actions => {
         if (actions.length > 0) {
           file.actions = actions;
           file.waitAction = true;
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.$t('attachments.upload.conflict.message'),
-            type: 'warning',
-          });
+          this.$root.$emit('alert-message', this.$t('attachments.upload.conflict.message'), 'warning');
           this.$root.$emit('start-loading-attachment-drawer');
         }
         this.$root.$emit('add-new-uploaded-file', file);
@@ -264,10 +264,7 @@ export default {
         this.$uploadService.upload(file.originalFileObject, file.uploadId, file.signal)
           .then(() => delete file.originalFileObject)
           .catch(() => {
-            this.$root.$emit('attachments-notification-alert', {
-              message: this.$t('attachments.link.failed'),
-              type: 'error',
-            });
+            this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
             this.removeAttachedFile(file);
           });
         this.controlUpload(file, continueAction);
@@ -302,10 +299,7 @@ export default {
             })
             .catch(() => {
               this.removeAttachedFile(file);
-              this.$root.$emit('attachments-notification-alert', {
-                message: this.$t('attachments.link.failed'),
-                type: 'error',
-              });
+              this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
             });
         }, 200);
       }
