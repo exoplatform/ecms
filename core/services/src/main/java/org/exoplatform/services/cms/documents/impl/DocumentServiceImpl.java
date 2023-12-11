@@ -18,6 +18,7 @@ package org.exoplatform.services.cms.documents.impl;
 
 import java.io.*;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import javax.jcr.*;
@@ -118,7 +119,8 @@ public class DocumentServiceImpl implements DocumentService {
   private static final String COLLABORATION = "collaboration";
   private static final long DEFAULT_EDITORS_IDLE_TIMEOUT = 1800000;
   private static final Log LOG = ExoLogger.getLogger(DocumentServiceImpl.class);
-  
+  public static final String PATH_PARAM = "?path=";
+
   private final List<NewDocumentTemplateProvider> templateProviders = new ArrayList<>();
   private final List<DocumentEditorProvider> editorProviders = new ArrayList<>();
   private final List<NewDocumentTemplateProvider> unmodifiebleTemplateProviders = Collections.unmodifiableList(templateProviders);
@@ -227,6 +229,7 @@ public class DocumentServiceImpl implements DocumentService {
    *
    * {@inheritDoc}
    */
+  @Override
   public String getDocumentUrlInPersonalDocuments(Node currentNode, String username) throws Exception {
     Node rootNode = null;
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
@@ -254,6 +257,7 @@ public class DocumentServiceImpl implements DocumentService {
    *
    * {@inheritDoc}
    */
+  @Override
   public String getDocumentUrlInSpaceDocuments(Node currentNode, String spaceId) throws Exception {
     Node rootNode = null;
     try {
@@ -344,7 +348,65 @@ public class DocumentServiceImpl implements DocumentService {
     ManageableRepository repository = repoService.getCurrentRepository();
     Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
     Node node = (Node) session.getItem(nodePath);
-    return getLinkInDocumentsAppByIdentifier(((NodeImpl) node).getIdentifier(), drive);
+    if(node.isNodeType(NodetypeConstant.NT_FILE)) {
+      return getLinkInDocumentsAppByIdentifier(((NodeImpl) node).getIdentifier(), drive);
+    } else {
+      return getFolderLinkInDocumentsApp(nodePath, drive);
+    }
+  }
+
+  private String getFolderLinkInDocumentsApp(String nodePath, DriveData drive) throws Exception {
+    if(nodePath == null) {
+      return null;
+    }
+
+    String containerName = portalContainerInfo.getContainerName();
+    StringBuilder url = new StringBuilder();
+    url.append("/").append(containerName);
+    if (drive == null) {
+      SiteKey siteKey = getDefaultSiteKey();
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
+              .append(DOCUMENT_NOT_FOUND);
+      return url.toString();
+    }
+
+    String encodedDriveName = URLEncoder.encode(drive.getName(), StandardCharsets.UTF_8);
+    String encodedNodePath = URLEncoder.encode(nodePath, StandardCharsets.UTF_8);
+    if(drive.getName().startsWith(".spaces")) {
+      // handle group drive case
+      String groupId = drive.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
+      if(groupId != null) {
+        String groupPageName;
+        // the doc is in a space -> we use the documents application of the space
+        // we need to retrieve the root navigation URI of the space since it can differ from
+        // the group id if the space has been renamed
+        String rootNavigation = getSpaceRootNavigationNodeURI(groupId.replace(".","/"));
+
+        groupPageName = rootNavigation + "/" + DOCUMENTS_APP_NAVIGATION_NODE_NAME;
+
+        url.append("/g/").append(groupId.replace("/", ":")).append("/").append(groupPageName)
+                .append(PATH_PARAM).append(encodedDriveName).append(encodedNodePath)
+                .append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID).append("=").append(groupId);
+      } else {
+        throw new Exception("Cannot get group id from node path " + nodePath);
+      }
+    } else if(drive.getName().equals(ManageDriveServiceImpl.USER_DRIVE_NAME)
+            || drive.getName().equals(ManageDriveServiceImpl.PERSONAL_DRIVE_NAME)) {
+      // handle personal drive case
+      SiteKey siteKey = getDefaultSiteKey();
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME).append(PATH_PARAM).append(encodedDriveName).append(encodedNodePath);
+      String[] splitedNodePath = nodePath.split("/");
+      if(splitedNodePath != null && splitedNodePath.length >= 6) {
+        String userId = splitedNodePath[5];
+        url.append("&").append(ManageDriveServiceImpl.DRIVE_PARAMATER_USER_ID).append("=").append(userId);
+      }
+    } else {
+      // default case
+      SiteKey siteKey = getDefaultSiteKey();
+      url.append("/").append(siteKey.getName()).append("/").append(DOCUMENTS_APP_NAVIGATION_NODE_NAME)
+              .append(PATH_PARAM + encodedDriveName + encodedNodePath);
+    }
+    return url.toString();
   }
 
   @Override
@@ -453,7 +515,7 @@ public class DocumentServiceImpl implements DocumentService {
       if(groupDocumentsRootNodeName >= 0) {
         // extract group id for doc path
         String groupId = nodePath.substring(ManageDriveServiceImpl.GROUPS_DRIVE_ROOT_NODE.length() + 1, groupDocumentsRootNodeName);
-        nodeDrive = manageDriveService.getDriveByName(groupId.replaceAll("/", "."));
+        nodeDrive = manageDriveService.getDriveByName(groupId.replace("/", "."));
       }
     }
     if (nodeDrive == null) {
@@ -481,7 +543,7 @@ public class DocumentServiceImpl implements DocumentService {
     };
     String remoteId = ConversationState.getCurrent().getIdentity().getUserId() ;
     return userPortalConfigSer.
-                              getUserPortalConfig(userPortalConfigSer.getDefaultPortal(), remoteId, NULL_CONTEXT);
+                              getUserPortalConfig(userPortalConfigSer.getMetaPortal(), remoteId, NULL_CONTEXT);
   }
 
   protected SiteKey getDefaultSiteKey() throws Exception {
@@ -1089,7 +1151,7 @@ public class DocumentServiceImpl implements DocumentService {
             String groupId = parameters.get("groupId");
             if (StringUtils.isNotBlank(groupId)) {
               try {
-                groupId = groupId.replaceAll("\\.", "/");
+                groupId = groupId.replace("\\.", "/");
                 if (groupId.startsWith(SpaceUtils.SPACE_GROUP)) {
                   SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
                   Space space = spaceService.getSpaceByGroupId(groupId);
@@ -1213,18 +1275,18 @@ public class DocumentServiceImpl implements DocumentService {
     downloadUrl.append('/').append(restContextName).append("/jcr/").
             append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/').
             append(workspaceName).append(fileNode.getPath());
-   return downloadUrl.toString().replaceFirst(fileNode.getName(), URLEncoder.encode(fileNode.getName(), "UTF-8")); 
+   return downloadUrl.toString().replaceFirst(fileNode.getName(), URLEncoder.encode(fileNode.getName(), StandardCharsets.UTF_8));
   }
   
   private String getDocLastModifier(Node node) {
     String docLastModifier = "";
     try {
-      if (node.isNodeType("exo:symlink")){
+      if (node.isNodeType(EXO_SYMLINK)){
         String uuid = node.getProperty("exo:uuid").getString();
         node = node.getSession().getNodeByUUID(uuid);
       }
-      if(node != null && node.hasProperty("exo:lastModifier")) {
-        String docLastModifierUsername = node.getProperty("exo:lastModifier").getString();
+      if(node != null && node.hasProperty(EXO_LAST_MODIFIER_PROP)) {
+        String docLastModifierUsername = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
         docLastModifier = getUserFullName(docLastModifierUsername);
       }
     } catch (RepositoryException e) {
