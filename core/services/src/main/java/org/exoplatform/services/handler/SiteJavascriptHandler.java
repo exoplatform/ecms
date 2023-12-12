@@ -19,7 +19,6 @@ package org.exoplatform.services.handler;
 import java.io.PrintWriter;
 
 import javax.jcr.Node;
-import javax.servlet.http.HttpServletResponse;
 
 import org.exoplatform.ecm.utils.MessageDigester;
 import org.exoplatform.services.cache.CacheService;
@@ -32,6 +31,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.ControllerContext;
 import org.exoplatform.web.WebRequestHandler;
 import org.exoplatform.web.controller.QualifiedName;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Created by The eXo Platform SAS

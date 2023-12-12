@@ -27,7 +27,7 @@ import java.util.Map.Entry;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringUtils;

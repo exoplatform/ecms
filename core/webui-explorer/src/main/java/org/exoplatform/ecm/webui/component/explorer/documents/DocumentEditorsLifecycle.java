@@ -20,7 +20,6 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.servlet.ServletRequest;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -40,6 +39,8 @@ import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
+
+import jakarta.servlet.ServletRequest;
 
 /**
  * The Class DocumentEditorsLifecycle.

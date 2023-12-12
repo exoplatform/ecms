@@ -1,7 +1,34 @@
 package org.exoplatform.wcm.connector.collaboration;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import javax.annotation.security.RolesAllowed;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.EntityTag;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.tika.io.IOUtils;
+import org.json.JSONObject;
+import org.picocontainer.Startable;
+
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentType;
@@ -15,25 +42,7 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.rest.api.RestUtils;
 
-import org.json.JSONObject;
-import org.picocontainer.Startable;
-
-import javax.annotation.security.RolesAllowed;
-import javax.jcr.*;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NoSuchNodeTypeException;
-import javax.jcr.version.VersionException;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-import javax.ws.rs.core.Response.Status;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 /**

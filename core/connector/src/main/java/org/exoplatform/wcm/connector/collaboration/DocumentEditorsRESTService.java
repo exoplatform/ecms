@@ -23,7 +23,6 @@ import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -67,6 +66,8 @@ import org.exoplatform.wcm.connector.collaboration.editors.HypermediaLink;
 import org.exoplatform.wcm.connector.collaboration.editors.PreviewInfo;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * The Class DocumentEditorsRESTService is REST endpoint for working with editable documents.

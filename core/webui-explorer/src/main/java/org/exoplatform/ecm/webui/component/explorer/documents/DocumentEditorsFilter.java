@@ -19,11 +19,6 @@ package org.exoplatform.ecm.webui.component.explorer.documents;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -31,6 +26,11 @@ import org.exoplatform.web.WebAppController;
 import org.exoplatform.web.application.ApplicationLifecycle;
 import org.exoplatform.web.filter.Filter;
 import org.exoplatform.webui.application.WebuiApplication;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 /**
  * The Class DocumentEditorsFilter.
