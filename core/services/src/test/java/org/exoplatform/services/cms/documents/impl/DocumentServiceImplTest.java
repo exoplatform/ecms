@@ -157,7 +157,7 @@ public class DocumentServiceImplTest {
 
     PortalConfig portalConfig = mock(PortalConfig.class);
     when(portalConfig.getName()).thenReturn("dw");
-    when(userPortalConfigService.getDefaultPortal()).thenReturn("dw");
+    when(userPortalConfigService.getMetaPortal()).thenReturn("dw");
     when(userPortalConfig.getPortalConfig()).thenReturn(portalConfig);
     when(userPortalConfigService.getUserPortalConfig(anyString(), anyString(), any(UserPortalContext.class))).thenReturn(userPortalConfig);
     WCM_CORE_UTILS.when(() -> WCMCoreUtils.getService(UserPortalConfigService.class)).thenReturn(userPortalConfigService);
