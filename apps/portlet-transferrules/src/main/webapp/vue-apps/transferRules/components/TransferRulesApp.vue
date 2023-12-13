@@ -1,6 +1,6 @@
 <template>
   <v-app id="transferRules">
-    <v-card class="ma-4 border-radius" flat>
+    <v-card class="pa-5 card-border-radius" flat>
       <v-list>
         <v-list-item>
           <v-list-item-content>
