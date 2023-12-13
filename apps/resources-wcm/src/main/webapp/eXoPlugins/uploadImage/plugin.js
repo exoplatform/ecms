@@ -169,12 +169,7 @@
               }
             }).then(uuid => {
               if (uploadFinished && !uploadError) {
-                self.replaceWith('<img src="' + eXo.env.server.context + "/" + eXo.env.portal.rest + "/images/repository/collaboration/" + (uuid ? uuid : "") + '" />');
-                if (editor.resizeEditor) {
-                  editor.resizeEditor();
-                } else if (editor.resize) {
-                  editor.resize();
-                }
+                self.replaceWith('<img src="' + eXo.env.server.context + "/" + eXo.env.portal.rest + "/images/repository/collaboration/" + (uuid || "") + '" />');
                 setTimeout(function() {
                   editor.execCommand('autogrow');
                 }, 500);
