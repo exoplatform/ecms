@@ -17,8 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.sidebar;
 
 import java.util.Set;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
@@ -33,6 +32,9 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Created by The eXo Platform SARL
