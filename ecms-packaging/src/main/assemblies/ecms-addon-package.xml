@@ -44,7 +44,7 @@
         <include> org.icepdf.os:icepdf-core:jar</include>
         <include>com.sun.media:jai-codec:jar</include>
         <include>com.sun.media:jai-core:jar</include>
-		<include>com.ibm.icu:icu4j:jar</include>
+        <include>com.ibm.icu:icu4j:jar</include>
       </includes>
       <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
       <useProjectArtifact>false</useProjectArtifact>
