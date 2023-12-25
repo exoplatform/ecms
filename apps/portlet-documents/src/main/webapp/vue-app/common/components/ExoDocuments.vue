@@ -1,6 +1,6 @@
 <template>
   <v-flex>
-    <v-list class="documents-timeline-list">
+    <v-list class="documents-timeline-list pa-5 card-border-radius">
       <v-list-item-group color="primary">
         <exo-document
           v-for="(document,i) in documents"
