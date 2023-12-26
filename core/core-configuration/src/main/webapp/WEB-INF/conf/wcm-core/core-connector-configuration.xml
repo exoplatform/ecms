@@ -68,6 +68,7 @@
     <type>org.exoplatform.wcm.connector.collaboration.RESTImagesRendererService</type>
   </component>
   <component>
+    <key>org.exoplatform.wcm.connector.viewer.PDFViewerRESTService</key>
     <type>org.exoplatform.wcm.connector.viewer.PDFViewerRESTService</type>
   </component>
   <component>
