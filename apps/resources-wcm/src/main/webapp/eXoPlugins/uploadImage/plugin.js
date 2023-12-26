@@ -27,7 +27,7 @@
         });
       }
       var config = editor.config
-
+      const isImagePasteBlocked = config.isImagePasteBlocked;
       require(["SHARED/uiSelectImage", "SHARED/jquery"], function(UISelectImage, $) {
         if (editor.editable()) {
           $(editor.editable().$).parent().on('dragover', function(e) {
@@ -51,7 +51,10 @@
         editor.on('fileUploadRequest', function(evt) {
           // Prevent the default request handler.
           evt.stop();
-
+          if (self.isUploadByPasteDisabled) {
+            evt.cancel();
+            return;
+          }
           var fileLoader = evt.data.fileLoader,
             formData = new FormData(),
             xhr = fileLoader.xhr;
@@ -184,7 +187,14 @@
         if (!evt.data.dataValue.match(/<img[\s\S]+data:/i)) {
           return;
         }
-
+        if (isImagePasteBlocked) {
+          evt.cancel();
+          self = this;
+          // Assert that the image is not uploaded after canceling the paste event.
+          self.isUploadByPasteDisabled = true;
+          return;
+        }
+        self.isUploadByPasteDisabled = false
         var data = evt.data,
           // Prevent XSS attacks.
           tempDoc = document.implementation.createHTMLDocument(''),
@@ -220,6 +230,7 @@
       });
     }
   });
+  var isUploadByPasteDisabled = false
 
   // jscs:disable maximumLineLength
   // Black rectangle which is shown before image is loaded.
