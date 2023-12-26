@@ -25,6 +25,7 @@
     </component>
 
     <component>
+        <key>org.exoplatform.services.pdfviewer.PDFViewerService</key>
         <type>org.exoplatform.services.pdfviewer.PDFViewerService</type>
         <init-params>
           <value-param>
