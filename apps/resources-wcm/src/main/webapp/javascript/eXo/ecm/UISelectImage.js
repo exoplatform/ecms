@@ -24,7 +24,7 @@
       this.enableOkButtonCallback = enableOkButtonCallback;
       this.disableOkButtonCallback = disableOkButtonCallback;
       this.enableOKButton(false);
-
+      const hideUploadImageLink = CKEDITOR.currentInstance.config.hideUploadImageLink || false;
       this.$parentDialog.find(".selectImageBox").html(
         '<div class="alert alert-error hidden">' +
           '<i class="uiIconError"></i><span class="message"></span>' +
@@ -58,11 +58,11 @@
           '</div>' +
           '<div class="selectImageLinks">' +
             '<span class="dropFileDescription visible-desktop hidden-tablet hidden-phone">${CKEditor.image.DropYouImageHere}<br /></span>' +
-            '<span class="hidden-tablet hidden-phone">${CKEditor.image.or}<br /></span>' +
-            '<span class="uploadImageLink">' +
-              '<a href="javascript:void(0)"><span class="visible-desktop hidden-tablet hidden-phone">${CKEditor.image.uploadFromYourDesktop}</span><span class="hidden-desktop visible-tablet visible-phone">${CKEditor.image.UploadFromYourMobile}</span>\</a>' +
-              '<br />' +
-            '</span>' +
+            ( hideUploadImageLink ? '' :  '<span class="hidden-tablet hidden-phone">${CKEditor.image.or}<br /></span>' +
+                '<span class="uploadImageLink">' +
+                '<a href="javascript:void(0)"><span class="visible-desktop hidden-tablet hidden-phone">${CKEditor.image.uploadFromYourDesktop}</span><span class="hidden-desktop visible-tablet visible-phone">${CKEditor.image.UploadFromYourMobile}</span>\</a>' +
+                '<br />' +
+                '</span>' ) +
             '<span>${CKEditor.image.or}</span>' +
             '<span class="selectFromExistingUpload">' +
               '<br />' +
@@ -632,6 +632,6 @@
       return false;
     }
     return stringValue.toUpperCase().indexOf(searchTerm.toUpperCase(), stringValue.length - searchTerm.length) !== -1;
-  }
+  };
   return UISelectImage;
 })(UISelectFromDrives, jQuery, gtnbase)
