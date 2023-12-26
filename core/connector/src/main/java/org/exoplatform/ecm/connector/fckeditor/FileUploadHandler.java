@@ -23,12 +23,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.utils.IOUtil;
@@ -37,8 +39,8 @@ import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /*
  * Created by The eXo Platform SAS

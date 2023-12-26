@@ -21,7 +21,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MultivaluedMap;
 
 import org.exoplatform.services.rest.ContainerResponseWriter;
@@ -32,6 +31,8 @@ import org.exoplatform.services.rest.impl.InputHeadersMap;
 import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
 import org.exoplatform.services.rest.tools.DummyContainerResponseWriter;
 import org.exoplatform.services.test.mock.MockHttpServletRequest;
+
+import jakarta.servlet.http.HttpServletRequest;
 /**
  * Created by The eXo Platform SAS
  * Author : Lai Trung Hieu

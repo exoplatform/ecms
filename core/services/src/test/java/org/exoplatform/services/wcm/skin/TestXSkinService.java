@@ -29,8 +29,6 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.servlet.ServletContext;
 
 import org.exoplatform.commons.xml.DocumentSource;
 import org.exoplatform.component.test.web.ServletContextImpl;
@@ -38,7 +36,6 @@ import org.exoplatform.component.test.web.WebAppImpl;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.resource.config.xml.SkinConfigParser;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -50,6 +47,8 @@ import org.exoplatform.web.controller.QualifiedName;
 import org.exoplatform.web.controller.metadata.DescriptorBuilder;
 import org.exoplatform.web.controller.router.Router;
 import org.exoplatform.web.controller.router.RouterConfigException;
+
+import jakarta.servlet.ServletContext;
 
 /**
  * The Class TestXJavaScriptService.
