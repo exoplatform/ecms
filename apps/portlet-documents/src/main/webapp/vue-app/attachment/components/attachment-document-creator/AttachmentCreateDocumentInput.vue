@@ -139,20 +139,14 @@ export default {
         return;
       }
       if (this.titleRegex.test(this.newDocumentTitle)) {
-        this.$root.$emit('attachments-notification-alert', {
-          message: this.$t('attachments.valid.title.error.message'),
-          type: 'warning',
-        });
+        this.$root.$emit('alert-message', this.$t('attachments.valid.title.error.message'), 'warning');
         return;
       }
       this.$root.$emit('start-loading-attachment-drawer');
       this.$attachmentService.createNewDoc(this.newDocumentTitle, this.selectedDocType.type, this.currentDrive.name, this.pathDestinationFolder)
         .then((resp) => {
           if (resp && resp.status && resp.status === 409) {
-            this.$root.$emit('attachments-notification-alert', {
-              message: this.newDocTitleExistLabel,
-              type: 'error',
-            });
+            this.$root.$emit('alert-message', this.newDocTitleExistLabel, 'error');
             this.$root.$emit('end-loading-attachment-drawer');
           } else {
             return resp;
@@ -160,19 +154,17 @@ export default {
         })
         .then((doc) => this.manageNewCreatedDocument(doc))
         .catch(() => {
-          this.$root.$emit('attachments-notification-alert', {
-            message: this.newDocCreationFailedLabel,
-            type: 'error',
-          });
+          this.$root.$emit('alert-message', this.newDocCreationFailedLabel, 'error');
           this.$root.$emit('end-loading-attachment-drawer');
         });
     },
     showNewDocInput(doc) {
       if (this.attachments.length >= this.maxFilesCount) {
-        this.$root.$emit('attachments-notification-alert', {
-          message: this.maxFileCountErrorLabel,
-          type: 'error',
-        });
+        document.dispatchEvent(new CustomEvent('alert-message', {detail: {
+          useHtml: true,
+          alertType: 'error',
+          alertMessage: this.maxFileCountErrorLabel,
+        }}));
         return;
       }
       this.$refs.NewDocInputHidden.focus();
@@ -188,10 +180,7 @@ export default {
         doc.drive = this.currentDrive.title;
         doc.date = doc.created;
         this.$root.$emit('add-new-created-document', doc);
-        this.$root.$emit('attachments-notification-alert', {
-          message: this.$t('attachments.upload.success'),
-          type: 'success',
-        });
+        this.$root.$emit('alert-message', this.$t('attachments.upload.success'), 'success');
         this.resetNewDocInput();
         window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
       }

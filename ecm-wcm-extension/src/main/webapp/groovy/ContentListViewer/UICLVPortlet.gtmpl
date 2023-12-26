@@ -6,6 +6,6 @@
   
 %>  
 
-<div class="UICLVPortlet" id="$uicomponent.id">
+<div class="UICLVPortlet card-border-radius" id="$uicomponent.id">
   <% uicomponent.renderChildren(); %>
 </div>
