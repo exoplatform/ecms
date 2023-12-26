@@ -3,7 +3,7 @@
   import org.exoplatform.web.application.JavascriptManager;
   import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.webui.util.NavigationUtils;
-  import javax.servlet.http.HttpSession;
+  import jakarta.servlet.http.HttpSession;
   import org.exoplatform.services.wcm.publication.WCMComposer;
   import org.exoplatform.wcm.webui.Utils;
   import org.apache.commons.lang.StringUtils;

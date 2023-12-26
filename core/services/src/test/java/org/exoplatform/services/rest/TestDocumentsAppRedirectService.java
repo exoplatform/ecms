@@ -1,23 +1,23 @@
 package org.exoplatform.services.rest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.ws.rs.core.Response;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.ItemImpl;
-import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
 
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Response;
-
-import static org.junit.Assert.*;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Tests for DocumentsAppRedirectService

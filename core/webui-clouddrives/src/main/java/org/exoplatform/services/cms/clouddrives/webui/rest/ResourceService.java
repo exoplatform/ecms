@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.annotation.security.RolesAllowed;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -40,6 +39,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * REST service providing access to UI resources. Created by The eXo Platform
