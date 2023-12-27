@@ -3,7 +3,7 @@
 	import org.exoplatform.wcm.webui.Utils;
 	import java.net.URLDecoder;
 	import org.exoplatform.ecm.utils.text.Text;
-	import org.apache.commons.lang.StringEscapeUtils;
+	import org.apache.commons.lang3.StringEscapeUtils;
 	import org.exoplatform.wcm.webui.reader.ContentReader;
 	
 	def rcontext = _ctx.getRequestContext();
@@ -57,7 +57,7 @@
 													<div class="control-group">  
 													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>: </label>
 													  <div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
-											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.ModeSelectionHelp") )%>">
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.ModeSelectionHelp") )%>">
 												          <i class="uiIconQuestion uiIconLightGray"></i>          
 												      </div> 
 													  
@@ -69,7 +69,7 @@
 													  </div>
 													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_TRANSLATION_FORM_RADIO_BOX_INPUT) %>: </label>
 													  <div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
-                                                            onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.TranslationHelp") )%>">
+                                                            onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.TranslationHelp") )%>">
 														  <i class="uiIconQuestion uiIconLightGray"></i>
 													  </div>
 													  <div class="controls">
@@ -81,7 +81,7 @@
 													    <%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: 
 													  </label>
 													  <div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
-											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.FolderPathHelp") )%>">
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.FolderPathHelp") )%>">
 												          <i class="uiIconQuestion uiIconLightGray"></i>          
 												      </div> 
 													  
@@ -145,7 +145,7 @@
 													<div class="control-group">  
 													  <label class="control-label" for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %>: </label>
 													  	<div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
-											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.HeaderOptionHelp") )%>">
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.HeaderOptionHelp") )%>">
 												          <i class="uiIconQuestion uiIconLightGray"></i>          
 												      </div> 
 													  	
@@ -232,10 +232,10 @@
 											  } else if(formInput.getName().equals(uicomponent.ADVANCED_TAB)) {
 											  %>
     <%
-      def contextualHelp = StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.ContextualHelp"));
-      def parameterHelp = StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.ParameterHelp"));
-      def contentByQueryHelp = StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.ContentByQueryHelp"));
-      def showDetailInPageHelp = StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp")); 
+      def contextualHelp = StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.ContextualHelp"));
+      def parameterHelp = StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.ParameterHelp"));
+      def contentByQueryHelp = StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.ContentByQueryHelp"));
+      def showDetailInPageHelp = StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp")); 
     %>
   
 												<div class="form-horizontal" >  
@@ -294,7 +294,7 @@
 													<div class="clearfix"> 
 														
 														<div style="display:inline-block;" class="parentPosition pull-right" onmouseover="(function(elm) {eXo.ecm.WCMUtils.showPopover(elm);})(this)"
-											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml(_ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp")) %>">
+											                onmouseout="(function(elm) {eXo.ecm.WCMUtils.hidePopover(elm);})(this)" data-toggle="popover" data-placement="left" data-content="<%= StringEscapeUtils.escapeHtml4(_ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp")) %>">
 												          <i class="uiIconQuestion uiIconLightGray"></i>          
 												      </div> 
 														

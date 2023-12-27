@@ -16,8 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;

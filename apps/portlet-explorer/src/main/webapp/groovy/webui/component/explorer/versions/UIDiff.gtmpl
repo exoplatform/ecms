@@ -1,5 +1,5 @@
 <%
-    import org.apache.commons.lang.StringEscapeUtils;
+    import org.apache.commons.lang3.StringEscapeUtils;
     import org.exoplatform.ecm.jcr.model.VersionNode;
     import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
     import org.exoplatform.social.core.identity.model.Identity;
@@ -26,7 +26,7 @@
         if(identity != null && identity.getProfile() != null) {
           profileFullName = identity.getProfile().getFullName();
         }
-        return StringEscapeUtils.escapeHtml(profileFullName);
+        return StringEscapeUtils.escapeHtml4(profileFullName);
     }
 
     def rcontext = _ctx.getRequestContext() ;

@@ -24,8 +24,8 @@ import java.util.List;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecms.legacy.search.data.SearchContext;
@@ -156,7 +156,7 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
       url.append("id:'").append(node.getUUID()).append("',");
     }
 
-    String title = StringEscapeUtils.escapeHtml(getTitleResult(node)).replace("'", "\\'");
+    String title = StringEscapeUtils.escapeHtml4(getTitleResult(node)).replace("'", "\\'");
     url.append("fileType:'").append(getFileType(node)).append("',");
     url.append("title:'").append(title).append("',");
     url.append("path:'").append(node.getPath())

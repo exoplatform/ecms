@@ -22,7 +22,7 @@ import java.util.*;
 import javax.jcr.*;
 import javax.jcr.query.*;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.testing.BaseCommonsTestCase;
 import org.exoplatform.component.test.*;

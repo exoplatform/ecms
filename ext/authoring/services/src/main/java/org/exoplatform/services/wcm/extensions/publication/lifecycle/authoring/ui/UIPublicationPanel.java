@@ -16,7 +16,7 @@
  */
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.exoplatform.ecm.utils.lock.LockUtil;

@@ -16,7 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.lifecycle;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.webui.application.WebuiRequestContext;

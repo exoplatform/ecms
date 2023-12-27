@@ -20,7 +20,7 @@ import java.util.*;
 import javax.jcr.*;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.api.settings.*;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.*;

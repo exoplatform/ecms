@@ -24,7 +24,7 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.jcr.core.ManageableRepository;

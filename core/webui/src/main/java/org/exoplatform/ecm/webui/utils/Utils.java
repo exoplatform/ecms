@@ -48,8 +48,8 @@ import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
@@ -789,8 +789,8 @@ public class Utils {
     String draft = INLINE_DRAFT;
     String published = INLINE_PUBLISHED;
     try {
-      draft = StringEscapeUtils.escapeHtml(resourceBundle.getString("PublicationStates.draft"));
-      published = StringEscapeUtils.escapeHtml(resourceBundle.getString("PublicationStates.published"));
+      draft = StringEscapeUtils.escapeHtml4(resourceBundle.getString("PublicationStates.draft"));
+      published = StringEscapeUtils.escapeHtml4(resourceBundle.getString("PublicationStates.published"));
     } catch (MissingResourceException ex) {
       if (LOG.isWarnEnabled()) {
         LOG.warn("Missing resource exception of draft/published status.", ex);
@@ -820,9 +820,9 @@ public class Utils {
     String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
     String currentValue = StringUtils.replace(defaultValue, "{portalName}", siteName);
     try {
-      strSuggestion = StringEscapeUtils.escapeHtml(resourceBundle.getString("UIPresentation.label.EditingSuggestion"));
-      acceptButton = StringEscapeUtils.escapeHtml(resourceBundle.getString("UIPresentation.title.AcceptButton"));
-      cancelButton = StringEscapeUtils.escapeHtml(resourceBundle.getString("UIPresentation.title.CancelButton"));
+      strSuggestion = StringEscapeUtils.escapeHtml4(resourceBundle.getString("UIPresentation.label.EditingSuggestion"));
+      acceptButton = StringEscapeUtils.escapeHtml4(resourceBundle.getString("UIPresentation.title.AcceptButton"));
+      cancelButton = StringEscapeUtils.escapeHtml4(resourceBundle.getString("UIPresentation.title.CancelButton"));
     } catch (MissingResourceException e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn("MissingResourceException of EditingSuggestion/Accept/Cancel buttons.", e);

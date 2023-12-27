@@ -1,6 +1,6 @@
 <%
   import java.net.URLEncoder;
-  import org.apache.commons.lang.StringEscapeUtils;
+  import org.apache.commons.lang3.StringEscapeUtils;
   
   public String getMsgEscapeJS(String msg) {
     return StringEscapeUtils.escapeJavaScript(_ctx.appRes(uicomponent.getId() + ".label." + msg));
@@ -65,7 +65,7 @@
 		
 		<!-- div containing URL to refresh UIJCRExplorer -->
 		<div id="MultiUploadRefreshExplorer" style="display:none">
-			<%=URLEncoder.encode(org.apache.commons.lang.StringEscapeUtils.unescapeHtml(uicomponent.event("RefreshExplorer")), "utf-8")%>
+			<%=URLEncoder.encode(org.apache.commons.lang3.StringEscapeUtils.unescapeHtml4(uicomponent.event("RefreshExplorer")), "utf-8")%>
 		</div>
   </div>
 </div>

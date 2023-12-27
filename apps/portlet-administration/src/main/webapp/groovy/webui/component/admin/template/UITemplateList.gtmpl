@@ -1,7 +1,7 @@
 <%
   import org.exoplatform.webui.core.UIComponent ;
   import org.exoplatform.wcm.webui.reader.ContentReader;
-  import org.apache.commons.lang.StringEscapeUtils;
+  import org.apache.commons.lang3.StringEscapeUtils;
   
   String[] beanFields =  uicomponent.getBeanFields() ;
   String[] beanActions =  uicomponent.getBeanActions() ;
@@ -91,7 +91,7 @@
 	            <%def beanIdField = uicomponent.getBeanIdField() ; %>          
 	            <%for(action in beanActions) { %>
 	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>
-	            <%  def actionTitle = StringEscapeUtils.escapeHtml(_ctx.appRes("UITemplatesManager.title." + action)); %>
+	            <%  def actionTitle = StringEscapeUtils.escapeHtml4(_ctx.appRes("UITemplatesManager.title." + action)); %>
 	              <% 
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){

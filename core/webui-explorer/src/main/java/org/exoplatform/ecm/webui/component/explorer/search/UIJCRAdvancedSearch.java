@@ -16,7 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.search;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.webui.form.validator.MandatoryValidator;

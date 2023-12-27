@@ -24,7 +24,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.jcr.Node;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;

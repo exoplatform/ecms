@@ -19,7 +19,7 @@ package org.exoplatform.wcm.ext.component.activity.listener;
 import javax.jcr.Node;
 import javax.jcr.Value;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;

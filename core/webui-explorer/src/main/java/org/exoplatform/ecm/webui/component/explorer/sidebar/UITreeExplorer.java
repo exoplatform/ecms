@@ -33,7 +33,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Row;
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ws.commons.util.Base64;
 import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.commons.utils.CommonsUtils;

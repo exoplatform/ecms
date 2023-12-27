@@ -16,7 +16,7 @@
   import org.exoplatform.services.wcm.core.NodeLocation;
   import org.exoplatform.services.cms.link.NodeLinkAware;
   import javax.jcr.Node;
-  import org.apache.commons.lang.StringUtils;
+  import org.apache.commons.lang3.StringUtils;
 
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiDocumentInfo = uicomponent.getAncestorOfType(UIDocumentInfo.class);
@@ -174,8 +174,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
        }
        String expandLink = uicomponent.event("ExpandNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
        String collapseLink = uicomponent.event("CollapseNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
-       expandLink = URLEncoder.encode(org.apache.commons.lang.StringEscapeUtils.unescapeHtml(expandLink), "utf-8");
-       collapseLink = URLEncoder.encode(org.apache.commons.lang.StringEscapeUtils.unescapeHtml(collapseLink), "utf-8");
+       expandLink = URLEncoder.encode(org.apache.commons.lang3.StringEscapeUtils.unescapeHtml4(expandLink), "utf-8");
+       collapseLink = URLEncoder.encode(org.apache.commons.lang3.StringEscapeUtils.unescapeHtml4(collapseLink), "utf-8");
        
        def docListId = uicomponent.getID(data);
        def manageVersionAction = uicomponent.event("ManageVersions", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));

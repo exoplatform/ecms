@@ -30,7 +30,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.Row;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.utils.Utils;

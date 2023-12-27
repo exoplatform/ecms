@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 import javax.jcr.*;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;

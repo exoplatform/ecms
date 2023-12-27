@@ -19,7 +19,7 @@ import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 import javax.portlet.PortletMode;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;

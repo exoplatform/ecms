@@ -19,7 +19,7 @@ package org.exoplatform.services.wcm.publication.listener.post;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;

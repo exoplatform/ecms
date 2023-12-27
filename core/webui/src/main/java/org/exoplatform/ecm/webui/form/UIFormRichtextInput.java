@@ -4,7 +4,7 @@ package org.exoplatform.ecm.webui.form;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.utils.TimeConvertUtils;

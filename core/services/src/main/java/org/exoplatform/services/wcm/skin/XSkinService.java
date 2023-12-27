@@ -30,7 +30,7 @@ import javax.jcr.RepositoryException;
 import jakarta.servlet.ServletContext;
 
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 
 import org.exoplatform.container.PortalContainer;

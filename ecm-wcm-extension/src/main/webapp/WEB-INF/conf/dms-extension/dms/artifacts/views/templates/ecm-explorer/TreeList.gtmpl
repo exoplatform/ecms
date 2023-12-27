@@ -17,7 +17,7 @@
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-  import org.apache.commons.lang.StringUtils;
+  import org.apache.commons.lang3.StringUtils;
   import org.exoplatform.services.cms.link.NodeFinder;
 
   def linkManager = WCMCoreUtils.getService(LinkManager.class);

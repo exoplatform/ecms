@@ -24,7 +24,7 @@ import java.util.TreeSet;
 import javax.jcr.Node;
 import javax.jcr.lock.Lock;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;

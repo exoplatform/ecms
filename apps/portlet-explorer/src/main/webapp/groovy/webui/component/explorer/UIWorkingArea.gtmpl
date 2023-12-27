@@ -18,8 +18,8 @@
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
-  import org.apache.commons.lang.StringUtils;
-  import org.apache.commons.lang.StringEscapeUtils;
+  import org.apache.commons.lang3.StringUtils;
+  import org.apache.commons.lang3.StringEscapeUtils;
   import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RestoreFromTrashManageComponent;
 
   def rcontext = _ctx.getRequestContext() ;

@@ -16,7 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.utils.*;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent;
