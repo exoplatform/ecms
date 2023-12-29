@@ -290,7 +290,8 @@ export default {
                   this.uploadingCount--;
                   this.processNextQueuedUpload();
                 }
-                if (file.uploadProgress === 100 && continueAction) {
+                if (file.uploadProgress === 100 && continueAction && !file.inProcess) {
+                  file.inProcess = true;
                   this.$root.$emit('continue-upload-to-destination-path', file);
                   const index = this.newUploadedFiles.findIndex(f => f.id === file.id);
                   this.newUploadedFiles.splice(index, 1);
