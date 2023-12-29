@@ -25,6 +25,7 @@
       this.disableOkButtonCallback = disableOkButtonCallback;
       this.enableOKButton(false);
       const hideUploadImageLink = CKEDITOR.currentInstance.config.hideUploadImageLink || false;
+      const isImageDragBlocked = CKEDITOR.currentInstance.config.isImageDragBlocked || false;
       this.$parentDialog.find(".selectImageBox").html(
         '<div class="alert alert-error hidden">' +
           '<i class="uiIconError"></i><span class="message"></span>' +
@@ -57,13 +58,13 @@
             '</div>' +
           '</div>' +
           '<div class="selectImageLinks">' +
-            '<span class="dropFileDescription visible-desktop hidden-tablet hidden-phone">${CKEditor.image.DropYouImageHere}<br /></span>' +
+          ( isImageDragBlocked ? '' : '<span class="dropFileDescription visible-desktop hidden-tablet hidden-phone">${CKEditor.image.DropYouImageHere}<br /></span>' ) +
             ( hideUploadImageLink ? '' :  '<span class="hidden-tablet hidden-phone">${CKEditor.image.or}<br /></span>' +
                 '<span class="uploadImageLink">' +
                 '<a href="javascript:void(0)"><span class="visible-desktop hidden-tablet hidden-phone">${CKEditor.image.uploadFromYourDesktop}</span><span class="hidden-desktop visible-tablet visible-phone">${CKEditor.image.UploadFromYourMobile}</span>\</a>' +
                 '<br />' +
                 '</span>' ) +
-            '<span>${CKEditor.image.or}</span>' +
+          ( !isImageDragBlocked || !hideUploadImageLink ? '<span>${CKEditor.image.or}</span>' : '') +
             '<span class="selectFromExistingUpload">' +
               '<br />' +
               '<a href="javascript:void(0)"><span>${CKEditor.image.selectFromExistingUploads}</span></a>' +
@@ -300,24 +301,26 @@
           self.imageElement.addClass("center");
         }
       });
-      var $dropFileArea = this.$parentDialog.find(".dropFileArea");
-      $dropFileArea.on('dragover', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        $(this).addClass('dragEntered');
-      });
-      $dropFileArea.on('dragleave', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        $(this).removeClass('dragEntered');
-      });
-      $dropFileArea.on('drop', function(e) {
-        $(this).removeClass('dragEntered');
-        e.preventDefault();
-        var files = e.originalEvent.dataTransfer.files;
-        // We need to send dropped files to Server
-        self.handleFileUpload(files, self.$parentDialog);
-      });
+      if (!isImageDragBlocked) {
+        var $dropFileArea = this.$parentDialog.find(".dropFileArea");
+        $dropFileArea.on('dragover', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          $(this).addClass('dragEntered');
+        });
+        $dropFileArea.on('dragleave', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          $(this).removeClass('dragEntered');
+        });
+        $dropFileArea.on('drop', function(e) {
+          $(this).removeClass('dragEntered');
+          e.preventDefault();
+          var files = e.originalEvent.dataTransfer.files;
+          // We need to send dropped files to Server
+          self.handleFileUpload(files, self.$parentDialog);
+        });
+      }
       this.$parentDialog.find(".selectImageAlign .btn-group .btn[data-align=Left]").addClass("active");
       if(widgetData  && widgetData.src ) {
         this.displayImage(widgetData.src);
