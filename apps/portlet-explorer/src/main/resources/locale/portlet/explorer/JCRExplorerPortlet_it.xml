@@ -1496,8 +1496,8 @@
       <can-not-compare>Impossible comparare tra 2 versioni</can-not-compare>
       <compare-unavailable>Il confronto delle versioni non è disponibile per questo documento</compare-unavailable>
       <DateChange>In {0}</DateChange>
-      <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
-      <ComparedWith>Compared with</ComparedWith>
+      <PreviousAndNextCompare>Cambiare da {0} a {1}</PreviousAndNextCompare>
+      <ComparedWith>Rispetto a</ComparedWith>
       <restoredFrom>Ripristinato dalla versione {0}</restoredFrom>
     </label>
   </UIDiff>

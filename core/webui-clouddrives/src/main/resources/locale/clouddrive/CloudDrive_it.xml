@@ -88,37 +88,37 @@
   </ConnectCloudDriveForm>
   <cloudStorage>
     <label>
-      <title>Cloud Storage</title>
-      <cloudDrives>Cloud Drives</cloudDrives>
+      <title>Archiviazione nel Cloud</title>
+      <cloudDrives>Unità Cloud</cloudDrives>
       <provider>Fornitore</provider>
       <description>Descrizione</description>
       <active>Attiva</active>
-      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
+      <ConnectionToCloud>Connessione alle Unità Cloud</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
       <title>Documenti</title>
-      <subtitle>Connect your personal drives</subtitle>
-      <description>Access your personal drives from your Digital Workplace</description>
+      <subtitle>Collegare le Sue Unità personali</subtitle>
+      <description>Accedere alle Sue unità personali dalla Sua Digitale Workplace</description>
     </label>
     <drawer>
-      <title>Connect your personal drives</title>
+      <title>Collegare le Sue Unità personali</title>
       <button>
         <connect>Connettarsi</connect>
       </button>
       <button>
         <disconnect>Disconnetti</disconnect>
       </button>
-      <noConnector>No personal drive connector available</noConnector>
-      <connectedAccountWith>You are connected with</connectedAccountWith>
+      <noConnector>Nessun connettore di unità personale disponibile</noConnector>
+      <connectedAccountWith>È connesso con</connectedAccountWith>
     </drawer>
     <alert>
-      <successMessage>Your cloud drive is connected correctly</successMessage>
-      <errorMessage>Failed connection</errorMessage>
-      <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
-      <disconnectSuccessMessage>Your cloud drive is disconnected correctly</disconnectSuccessMessage>
-      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
+      <successMessage>La Sua unità cloud è connessa correttamente</successMessage>
+      <errorMessage>Connessione fallita</errorMessage>
+      <errorSaveUserSettings>Impossibile salvare il profilo dell'unità connessa</errorSaveUserSettings>
+      <disconnectSuccessMessage>La Sua unità cloud è disconnessa correttamente</disconnectSuccessMessage>
+      <disconnectErrorMessage>Impossibile disconnettere.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>
