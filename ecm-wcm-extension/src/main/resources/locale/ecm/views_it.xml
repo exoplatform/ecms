@@ -31,7 +31,7 @@
         <email>E-mail</email>
         <site>Sito</site>
         <lastComment>Ultimo commento pubblicato da {user} alle {time}</lastComment>
-        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
+        <Less_Than_A_Minute>meno di un minuto fa</Less_Than_A_Minute>
         <About_A_Minute>circa un minuto fa</About_A_Minute>
         <About_x_Minutes>circa {0} minuti fa</About_x_Minutes>
         <About_An_Hour>circa un'ora fa</About_An_Hour>
@@ -54,7 +54,7 @@
         <pdf-max-size>L'anteprima non è disponibile per i contenuti più grande di {0} MB.</pdf-max-size>
         <pdf-max-page>L'anteprima non è disponibile per i contenuti con oltre {0} pagine.</pdf-max-page>
         <using-webDAV>o Apri in MS Office</using-webDAV>
-        <open-on-desktop>Open in Desktop</open-on-desktop>
+        <open-on-desktop>Aprire su Desktop</open-on-desktop>
         <editOnline>Modifica Online</editOnline>
         <open-in-documents>Apri in Documenti</open-in-documents>
         <open-in-documents-tooltip>Apri questo file nell'app Documenti</open-in-documents-tooltip>
