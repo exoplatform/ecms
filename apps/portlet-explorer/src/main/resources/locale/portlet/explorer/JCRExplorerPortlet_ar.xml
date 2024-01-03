@@ -2666,7 +2666,7 @@
   <UIAllItems>
     <label>
       <OwnedByMe>تمّ انشاؤها بواسطتي</OwnedByMe>
-      <Favourites>المفضلة</Favourites>
+      <Favourites>العناصر المفضلة</Favourites>
       <Hidden>مخفي</Hidden>
       <Trash>سلّة المهملات</Trash>
       <Configuration>إعدادات</Configuration>
@@ -2750,7 +2750,7 @@
   <UIAllItemsPreferenceForm>
     <label>
       <showOwnedByUser>تمّ انشاؤها بواسطتي</showOwnedByUser>
-      <showFavourites>المفضلة</showFavourites>
+      <showFavourites>العناصر المفضلة</showFavourites>
       <showHiddens>مخفي</showHiddens>
       <showTrash>سلّة المهملات</showTrash>
     </label>
