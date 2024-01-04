@@ -277,14 +277,14 @@ export default {
         this.uploadingCount--;
         this.processNextQueuedUpload();
       } else {
-        window.setTimeout(() => {
-          if (file.uploadId) {
+        if (file.uploadId) {
+          window.setTimeout(() => {
             this.$uploadService.getUploadProgress(file.uploadId)
               .then(percent => {
                 if (this.abortUploading) {
                   return;
                 } else {
-                  file.uploadProgress = Number(percent);
+                  file.uploadProgress = file.inProcess && 100 || Number(percent);
                   if (!file.uploadProgress || file.uploadProgress < 100) {
                     this.controlUpload(file);
                   } else {
@@ -303,8 +303,8 @@ export default {
                 this.removeAttachedFile(file);
                 this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
               });
-          }
-        }, 200);
+          }, 200);
+        }
       }
     },
     processNextQueuedUpload: function () {
