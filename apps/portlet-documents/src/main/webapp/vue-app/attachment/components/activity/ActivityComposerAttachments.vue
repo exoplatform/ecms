@@ -68,7 +68,7 @@ export default {
     attachmentDrawerParams() {
       return {
         entityType: this.entityType,
-        entityId: this.activityId,
+        entityId: '',
         defaultFolder: 'Activity Stream Documents',
         sourceApp: 'activityStream',
         attachments: this.attachments,
