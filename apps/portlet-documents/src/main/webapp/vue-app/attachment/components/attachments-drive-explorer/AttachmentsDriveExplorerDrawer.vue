@@ -585,6 +585,16 @@ export default {
       this.$refs.driveExplorerDrawer.close();
     },
     initDestinationFolderPath: function () {
+      this.driveRootPath = '';
+      this.drivers = [];
+      this.folders = [];
+      this.files = [];
+      this.space = {};
+      this.folderDestinationForFile = '';
+      this.selectedFolder = {};
+      this.currentFolder = {};
+      this.folderPath = '';
+      this.destinationFolder = '';
       //if default drive exist
       if (this.defaultDrive && this.defaultDrive.name) {
         const self = this;
@@ -599,14 +609,8 @@ export default {
         }
         this.openDrive(this.defaultDrive, null, parentFolder).then(() => {
           const defaultFolder = self.folders.find(folder => folder.name === self.defaultFolder.split('/').pop());
-          if (self.entityType && self.entityId) {
-            if (defaultFolder) {
-              this.openFolder(defaultFolder).then(() => {
-                this.createEntityTypeAndIdFolders(defaultFolder);
-              });
-            } else {
-              this.createEntityTypeAndIdFolders(defaultFolder);
-            }
+          if (self.entityType) {
+            this.createEntityTypeAndIdFolders(defaultFolder);
           }
           //if both default drive and default folder exist
           if (defaultFolder) {
@@ -1065,11 +1069,15 @@ export default {
     getFolderIcon(folder) {
       return `uiIcon-${folder.cloudProvider}`;
     },
-    createEntityTypeAndIdFolders(defaultFolder) {
-      defaultFolder = this.folders.find(folder => folder.title === this.entityType);
+    createEntityTypeAndIdFolders() {
+      let entityForlder = this.entityType;
+      if (this.entityType === 'activity'){
+        entityForlder = 'Activity Stream Documents';
+      }
+      let defaultFolder = this.folders.find(folder => folder.title === entityForlder);
       //if entityType (tasks, event, ..) folder not found
       if (!defaultFolder) {
-        this.newFolderName = this.entityType;
+        this.newFolderName = entityForlder;
         this.creatingNewFolder = true;
         this.createNewFolder().then((newFolder) => {
           this.openFolder(newFolder).then(() => {
@@ -1084,7 +1092,7 @@ export default {
             });
           });
         });
-      } else { //if entityType (tasks, event, ..) folder exist, we create directly entityId folder
+      } else if (this.entityId){ //if entityType (tasks, event, ..) folder exist, we create directly entityId folder
         this.openFolder(defaultFolder).then(() => {
           defaultFolder = this.folders.find(folder => parseInt(folder.title) === parseInt(this.entityId));
           if (!defaultFolder) {
