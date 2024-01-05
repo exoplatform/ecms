@@ -277,31 +277,34 @@ export default {
         this.uploadingCount--;
         this.processNextQueuedUpload();
       } else {
-        window.setTimeout(() => {
-          this.$uploadService.getUploadProgress(file.uploadId)
-            .then(percent => {
-              if (this.abortUploading) {
-                return;
-              } else {
-                file.uploadProgress = Number(percent);
-                if (!file.uploadProgress || file.uploadProgress < 100) {
-                  this.controlUpload(file);
+        if (file.uploadId) {
+          window.setTimeout(() => {
+            this.$uploadService.getUploadProgress(file.uploadId)
+              .then(percent => {
+                if (this.abortUploading) {
+                  return;
                 } else {
-                  this.uploadingCount--;
-                  this.processNextQueuedUpload();
+                  file.uploadProgress = file.inProcess && 100 || Number(percent);
+                  if (!file.uploadProgress || file.uploadProgress < 100) {
+                    this.controlUpload(file);
+                  } else {
+                    this.uploadingCount--;
+                    this.processNextQueuedUpload();
+                  }
+                  if (file.uploadProgress === 100 && continueAction && !file.inProcess) {
+                    file.inProcess = true;
+                    this.$root.$emit('continue-upload-to-destination-path', file);
+                    const index = this.newUploadedFiles.findIndex(f => f.id === file.id);
+                    this.newUploadedFiles.splice(index, 1);
+                  }
                 }
-                if (file.uploadProgress === 100 && continueAction) {
-                  this.$root.$emit('continue-upload-to-destination-path', file);
-                  const index = this.newUploadedFiles.findIndex(f => f.id === file.id);
-                  this.newUploadedFiles.splice(index, 1);
-                }
-              }
-            })
-            .catch(() => {
-              this.removeAttachedFile(file);
-              this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
-            });
-        }, 200);
+              })
+              .catch(() => {
+                this.removeAttachedFile(file);
+                this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
+              });
+          }, 200);
+        }
       }
     },
     processNextQueuedUpload: function () {
