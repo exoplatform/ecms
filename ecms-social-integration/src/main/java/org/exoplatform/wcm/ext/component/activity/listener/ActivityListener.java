@@ -1,5 +1,6 @@
 package org.exoplatform.wcm.ext.component.activity.listener;
 
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -70,8 +71,11 @@ public class ActivityListener extends ActivityListenerPlugin {
   private void shareActivityFilesToSpace(ActivityLifeCycleEvent activityLifeCycleEvent) {
     ExoSocialActivity activity = activityLifeCycleEvent.getActivity();
     List<ActivityFile> filesToShare = activity.getFiles();
-    String[] uuidNodes = activity.getTemplateParams().get(NODE_UUID_PARAM).split(SEPARATOR_REGEX);
-
+    String ids = activity.getTemplateParams().get(NODE_UUID_PARAM);
+    if (StringUtils.isBlank(ids)){
+      return;
+    }
+    String[] uuidNodes = ids.split(SEPARATOR_REGEX);
     String streamOwner = activity.getStreamOwner();
     Space targetSpace = spaceService.getSpaceByPrettyName(streamOwner);
 
