@@ -332,6 +332,12 @@ public class ManageDocumentService implements ResourceContainer {
       // Set default name if new title contain no valid character
       name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
 
+      if (node.hasNode(name)) {
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Folder already exists");
+        }
+        return Response.status(Status.BAD_REQUEST).entity("Folder already exists").cacheControl(cc).build();
+      }
       Node newNode = node.addNode(name, folderNodeType);
 
       if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE) && newNode.canAddMixin(NodetypeConstant.EXO_RSS_ENABLE)) {
