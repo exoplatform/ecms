@@ -620,11 +620,6 @@
       <set-method>addListenerPlugin</set-method>
       <type>org.exoplatform.social.core.listeners.SocialMembershipListenerImpl</type>
     </component-plugin>
-    <component-plugin>
-      <name>social.update.profile.event.listener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.social.core.listeners.SocialUserProfileEventListenerImpl</type>
-    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>
