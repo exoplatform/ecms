@@ -575,7 +575,7 @@
               + "managedocument/uploadFile/control?workspaceName=collaboration&driveName=" + driveName
               + "&currentPortal=" + eXo.env.portal.portalName + "&language="
               + eXo.env.portal.language + "&currentFolder=" + imagesDownloadFolder
-              + "&uploadId=" + status.uploadId + "&fileName=" + status.name + "&action=save";
+              + "&uploadId=" + status.uploadId + "&fileName=" + encodeURIComponent(status.name) + "&action=save";
           fetch(restURL, {
             credentials: 'include',
             method: 'GET',
