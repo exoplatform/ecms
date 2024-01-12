@@ -18,7 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import javax.jcr.Node;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;

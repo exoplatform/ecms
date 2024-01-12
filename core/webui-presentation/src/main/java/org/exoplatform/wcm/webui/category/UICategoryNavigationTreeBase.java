@@ -25,7 +25,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.utils.Utils;

@@ -1,6 +1,7 @@
 package org.exoplatform.services.wcm.search.mock;
 
-import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.hc.client5.http.io.HttpClientConnectionManager;
+
 import org.exoplatform.commons.search.es.client.ElasticIndexingAuditTrail;
 import org.exoplatform.commons.search.es.client.ElasticResponse;
 import org.exoplatform.commons.search.es.client.ElasticSearchingClient;

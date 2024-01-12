@@ -33,7 +33,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.VersionException;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.lock.LockUtil;

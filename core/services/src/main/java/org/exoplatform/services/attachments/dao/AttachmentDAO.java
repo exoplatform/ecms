@@ -19,8 +19,8 @@ package org.exoplatform.services.attachments.dao;
 import org.exoplatform.commons.persistence.impl.GenericDAOJPAImpl;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import java.util.Collections;
 import java.util.List;
 

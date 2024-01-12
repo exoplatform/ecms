@@ -3,7 +3,7 @@ package org.exoplatform.wcm.webui;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.component.BaseComponentPlugin;

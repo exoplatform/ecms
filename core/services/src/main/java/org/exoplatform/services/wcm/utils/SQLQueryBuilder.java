@@ -18,7 +18,7 @@ package org.exoplatform.services.wcm.utils;
 
 import java.util.Calendar;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.utils.ISO8601;
 
 

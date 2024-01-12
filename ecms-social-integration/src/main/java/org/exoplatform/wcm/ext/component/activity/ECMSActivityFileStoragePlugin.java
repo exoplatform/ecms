@@ -101,7 +101,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
         }
       } else {
         String remoteUser = ConversationState.getCurrent().getIdentity().getUserId();
-        if (org.apache.commons.lang.StringUtils.isBlank(remoteUser)) {
+        if (org.apache.commons.lang3.StringUtils.isBlank(remoteUser)) {
           throw new IllegalStateException("Remote user is empty");
         }
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, remoteUser);

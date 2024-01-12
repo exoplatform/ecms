@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.apache.commons.lang.LocaleUtils;
+import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.groovy.util.ListHashMap;
 import org.json.simple.JSONObject;

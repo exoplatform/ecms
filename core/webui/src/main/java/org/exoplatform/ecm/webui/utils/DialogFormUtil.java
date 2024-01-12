@@ -32,7 +32,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyType;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.commons.utils.IOUtil;
@@ -218,7 +218,7 @@ public class DialogFormUtil {
                 inputValue = "";
               else if (option == null || option.indexOf(SANITIZATION_FLAG) < 0) {
                 inputValue = HTMLSanitizer.sanitize(inputValue);
-                inputValue = StringEscapeUtils.unescapeHtml(inputValue);
+                inputValue = StringEscapeUtils.unescapeHtml4(inputValue);
               }
               if (input.getName().equals("name") && input.getAncestorOfType(UIDialogForm.class).isAddNew()) {
                 JcrInputProperty titleInputProperty = (JcrInputProperty) properties.get("title");

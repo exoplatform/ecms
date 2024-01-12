@@ -10,8 +10,8 @@
 import javax.jcr.Node
 import java.util.Locale;
     import java.text.DateFormat;
-    import org.apache.commons.lang.StringUtils;
-    import org.apache.commons.lang.StringEscapeUtils;
+    import org.apache.commons.lang3.StringUtils;
+    import org.apache.commons.lang3.StringEscapeUtils;
     import org.exoplatform.portal.webui.util.Util;
     import org.exoplatform.social.core.identity.model.Identity;
     import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
@@ -48,7 +48,7 @@ import java.util.Locale;
         if(identity != null && identity.getProfile() != null) {
           profileFullName = identity.getProfile().getFullName();
         }
-        return StringEscapeUtils.escapeHtml(profileFullName);
+        return StringEscapeUtils.escapeHtml4(profileFullName);
     }
 
   public void writeNodes() {

@@ -16,7 +16,7 @@
  */
 package org.exoplatform.ecm.webui.form.validator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.web.application.ApplicationMessage;

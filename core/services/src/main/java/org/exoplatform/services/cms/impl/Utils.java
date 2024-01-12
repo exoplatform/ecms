@@ -19,8 +19,8 @@ package org.exoplatform.services.cms.impl;
 import com.ibm.icu.text.Transliterator;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cms.BasePath;
@@ -379,7 +379,7 @@ public class Utils {
       }
 
     }
-    return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
+    return StringEscapeUtils.escapeHtml4(Text.unescapeIllegalJcrChars(title));
   }
 
   public static String escapeIllegalCharacterInQuery(String query) {

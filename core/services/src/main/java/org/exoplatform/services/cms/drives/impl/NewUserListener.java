@@ -18,7 +18,7 @@ package org.exoplatform.services.cms.drives.impl;
 
 import javax.jcr.Node;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.ManageDriveService;

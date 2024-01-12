@@ -4,7 +4,7 @@
   import org.exoplatform.container.ExoContainer;
   import org.exoplatform.services.seo.SEOService;  
   import java.util.Locale;
-  import org.apache.commons.lang.StringUtils;
+  import org.apache.commons.lang3.StringUtils;
   import org.exoplatform.webui.application.WebuiRequestContext;
 
 

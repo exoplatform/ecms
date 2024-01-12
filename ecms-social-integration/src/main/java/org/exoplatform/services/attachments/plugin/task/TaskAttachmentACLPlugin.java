@@ -16,7 +16,7 @@
  */
 package org.exoplatform.services.attachments.plugin.task;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;

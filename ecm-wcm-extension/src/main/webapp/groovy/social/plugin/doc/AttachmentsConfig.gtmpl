@@ -1,5 +1,5 @@
 <%
-  import org.apache.commons.lang.StringUtils;
+  import org.apache.commons.lang3.StringUtils;
 
   def maxToUpload = org.exoplatform.commons.utils.PropertyManager.getProperty("exo.social.composer.maxToUpload");
   if(StringUtils.isBlank(maxToUpload)) {

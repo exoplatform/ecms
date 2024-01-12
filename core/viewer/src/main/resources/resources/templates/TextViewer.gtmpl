@@ -6,7 +6,7 @@
 	import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;	
   import org.exoplatform.commons.utils.HTMLSanitizer;
-  import org.apache.commons.lang.StringEscapeUtils;
+  import org.apache.commons.lang3.StringEscapeUtils;
   import org.exoplatform.wcm.webui.reader.ContentReader;
 	
 	UIComponent uiParent = uicomponent.getParent();
@@ -43,7 +43,7 @@
 					if(contentNode.hasProperty("jcr:data")){
 						String iframeId = uiParent.getId() + "ifame" ;
 						def rqcontext = _ctx.getRequestContext() ;
-						def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
+						def strContent = StringEscapeUtils.unescapeHtml4(contentNode.getProperty("jcr:data").getString());	
 						strContent = ContentReader.getEscapeHtmlContent(HTMLSanitizer.sanitize(strContent));
 				%>
 				<div class="textContent">
@@ -61,7 +61,7 @@
 				<div class="textContent">
 					<%
 						if(contentNode.hasProperty("jcr:data")) {
-							def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
+							def strContent = StringEscapeUtils.unescapeHtml4(contentNode.getProperty("jcr:data").getString());	
 							strContent = ContentReader.getEscapeHtmlContent(HTMLSanitizer.sanitize(strContent));
 							println "<pre>" + strContent + "</pre>"; 
 						}
@@ -73,7 +73,7 @@
 <%} else {%>
   <%        
     if(!unsupportMimeTypeText.contains(mimeType) && contentNode.hasProperty("jcr:data")) {
-      def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
+      def strContent = StringEscapeUtils.unescapeHtml4(contentNode.getProperty("jcr:data").getString());	
 			strContent = ContentReader.getEscapeHtmlContent(HTMLSanitizer.sanitize(strContent));
       if(getFileSize(contentNode) < 1024) {
         println "<pre>" + strContent + "</pre>"; 

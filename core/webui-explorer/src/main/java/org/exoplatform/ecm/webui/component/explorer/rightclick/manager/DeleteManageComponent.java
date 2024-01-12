@@ -40,8 +40,8 @@ import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.codec.binary.StringUtils;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.Validate;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
@@ -575,7 +575,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         Node node = this.getNodeByPath(nodePath);
         if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete";
         else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently";
-        deleteNoticeParam = StringEscapeUtils.unescapeHtml(Utils.getTitle(node));
+        deleteNoticeParam = StringEscapeUtils.unescapeHtml4(Utils.getTitle(node));
         if (node != null) {
           trashId = processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
         }
@@ -592,7 +592,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     deleteNotice = res.getString(deleteNotice);
     deleteNotice = deleteNotice.replace("{" + 0 + "}", deleteNoticeParam);
     deleteNotice = deleteNotice.replace("\"", "'");
-    deleteNotice = StringEscapeUtils.escapeHtml(deleteNotice);
+    deleteNotice = StringEscapeUtils.escapeHtml4(deleteNotice);
     if(checkToMoveToTrash) {
       String undoLink = getUndoLink(trashId);
       uiWorkingArea.setDeleteNotice(deleteNotice);
@@ -742,7 +742,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } else {
       Node node = deleteManageComponent.getNodeByPath(nodePath);
       if(node != null)
-        nodeName = StringEscapeUtils.unescapeHtml(Utils.getTitle(node));
+        nodeName = StringEscapeUtils.unescapeHtml4(Utils.getTitle(node));
       contentType = deleteManageComponent.getContentType(nodePath);
       if(contentType == FILE_TYPE)
         uiConfirmMessage.setId(DELETE_FILE_CONFIRM_TITLE);

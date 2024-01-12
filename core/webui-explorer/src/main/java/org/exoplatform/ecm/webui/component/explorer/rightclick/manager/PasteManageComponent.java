@@ -43,8 +43,8 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentAutoVersionForm;
