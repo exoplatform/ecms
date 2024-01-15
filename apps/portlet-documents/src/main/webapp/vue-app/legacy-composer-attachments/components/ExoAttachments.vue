@@ -521,6 +521,7 @@ export default {
     this.getCloudDriveStatus();
     document.addEventListener('extension-AttachmentsComposer-attachments-composer-action-updated', () => this.attachmentsComposerActions = getAttachmentsComposerExtensions());
     this.attachmentsComposerActions = getAttachmentsComposerExtensions();
+    this.attachedFiles = this.value;
   },
   methods: {
     toggleAttachmentsDrawer: function() {
