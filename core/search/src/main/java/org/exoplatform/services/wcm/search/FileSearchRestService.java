@@ -160,6 +160,7 @@ public class FileSearchRestService implements ResourceContainer {
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.oasis.opendocument.text\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/msword\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\" }\n }");
+    fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.openxmlformats-officedocument.wordprocessingml.document.form\" }\n }");
     if (!myWork) {
       fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/jpeg\" }\n }");
       fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/png\" }\n }");
