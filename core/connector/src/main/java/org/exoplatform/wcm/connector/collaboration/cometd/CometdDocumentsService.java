@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.jcr.RepositoryException;
 
 import org.cometd.annotation.Param;
