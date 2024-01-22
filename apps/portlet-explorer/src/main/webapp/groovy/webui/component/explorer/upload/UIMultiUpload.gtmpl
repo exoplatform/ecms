@@ -3,7 +3,7 @@
   import org.apache.commons.lang3.StringEscapeUtils;
   
   public String getMsgEscapeJS(String msg) {
-    return StringEscapeUtils.escapeJavaScript(_ctx.appRes(uicomponent.getId() + ".label." + msg));
+    return StringEscapeUtils.escapeEcmaScript(_ctx.appRes(uicomponent.getId() + ".label." + msg));
   }
 
   public String getMsg(String msg) {

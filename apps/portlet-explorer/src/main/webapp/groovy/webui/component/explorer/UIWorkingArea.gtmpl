@@ -63,7 +63,7 @@
   def nodePathDelete = uicomponent.getNodePathDelete();
   def deleteNotice = uicomponent.getDeleteNotice();
   def wcmNotice = uicomponent.getWCMNotice();
-  def undo = StringEscapeUtils.escapeJavaScript(_ctx.appRes('UIWorkingArea.msg.undo-delete'));
+  def undo = StringEscapeUtils.escapeEcmaScript(_ctx.appRes('UIWorkingArea.msg.undo-delete'));
   uicomponent.setNodePathDelete("");
   uicomponent.setDeleteNotice("");
   uicomponent.setWCMNotice("");
