@@ -734,7 +734,7 @@ public class ManageDocumentService implements ResourceContainer {
         }
         String groupId = driveData.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
         if(StringUtils.isNotBlank(groupId) && groupId.startsWith("/spaces/")) {
-          ((ExtendedNode) newNode).setPermission(groupId, new String[]{PermissionType.READ, PermissionType.ADD_NODE, PermissionType.SET_PROPERTY});
+          ((ExtendedNode) newNode).setPermission("*:" + groupId, new String[]{PermissionType.READ, PermissionType.ADD_NODE, PermissionType.SET_PROPERTY});
         }
 
         node.save();
