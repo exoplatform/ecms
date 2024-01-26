@@ -221,7 +221,6 @@ public class AttachmentsRestService implements ResourceContainer {
   @GET
   @Path("{attachmentId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @RolesAllowed("users")
   @Operation(summary = "Get an attachment with its jcr uuid", method = "GET", description = "Get an attachment with its jcr uuid")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "Request fulfilled"),

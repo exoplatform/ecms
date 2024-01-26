@@ -361,28 +361,39 @@
               '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
             '</div>';
         }
-        html +='<div class="btn-group">' +
-            '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
-            '    <i class="uiVerticalDots"></i></button>' +
-            '    <ul class="dropdown-menu" role="menu">';
-        if (this.settings.showOpenInFolderButton) {
-          html+='      <li><div class="openBtn">' +
-            '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-            '                </div></li>';
-        }
+        if (eXo.env.portal.userName !== '') {	
+          html +='<div class="btn-group">' +
+              '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
+              '    <i class="uiVerticalDots"></i></button>' +
+              '    <ul class="dropdown-menu" role="menu">';
+          if (this.settings.showOpenInFolderButton) {
+            html+='      <li><div class="openBtn">' +
+              '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
+              '                </div></li>';
+          }
 
-        if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
-          html += '      <li><div class="downloadBtn">' +
+          if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
+            html += '      <li><div class="downloadBtn">' +
+                    '      <a href="' + this.settings.doc.downloadUrl + '" class="clickable"';
+            if (!this.settings.doc.downloadUrl.includes('javascript:')) {
+              html+= ' download="' + this.settings.doc.title + '"';
+            }
+            html += '><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                    '                </div></li>';
+
+          }
+          html +='    </ul>' +
+              '  </div>';
+		}
+        else {
+          html += '      <div>' +
                   '      <a href="' + this.settings.doc.downloadUrl + '" class="clickable"';
           if (!this.settings.doc.downloadUrl.includes('javascript:')) {
             html+= ' download="' + this.settings.doc.title + '"';
           }
           html += '><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                  '                </div></li>';
-
+                  '                </div>';
         }
-        html +='    </ul>' +
-            '  </div>';
         if (this.settings.showComments) {
           html += '<div class="showComments">' +
               '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
@@ -532,30 +543,41 @@
                 '<!-- put vote area here -->'
                 html += '<div class="previewBtn dropup">';
                 if(!documentPreview.defaultSettings.doc.isCloudDrive){
-                  html += '<div class="btn-group">' +
-                    '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
-                    '    <i class="uiVerticalDots"></i></button>' +
-                    '    <ul class="dropdown-menu" role="menu">';
-                  if (this.settings.showOpenInFolderButton) {
-                    html+='      <li><div class="openBtn">' +
-                      '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
-                      '                </div></li>';
+                  const downloadUrl = this.settings.doc.downloadUrl.replaceAll('%', '%25').replaceAll('+', '%2B');
+				  if (eXo.env.portal.userName !== '') {	
+                    html += '<div class="btn-group">' +
+                      '    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">' +
+                      '    <i class="uiVerticalDots"></i></button>' +
+                      '    <ul class="dropdown-menu" role="menu">';
+                    if (this.settings.showOpenInFolderButton) {
+                      html+='      <li><div class="openBtn">' +
+                        '                <a href="' + this.settings.doc.openUrl + '"><i class="uiIconGotoFolder uiIconWhite"></i>&nbsp;${UIActivity.comment.openInDocuments}</a>' +
+                        '                </div></li>';
+                    }
+                    if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
+                    
+                      html += '      <li><div class="downloadBtn">' +
+                              '      <a href="' + downloadUrl + '" class="clickable"';
+                      if (!this.settings.doc.downloadUrl.includes('javascript:')) {
+                        html+= ' download="' + this.settings.doc.title + '"';
+                      }
+                      html += '><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
+                              '                </div></li>';
+
+                    }
+                    html +='    </ul>' +
+                        '  </div>';
                   }
-                  if (!this.settings.doc.size == "" && !this.isDownloadStatusActivated) {
-                    const downloadUrl = this.settings.doc.downloadUrl.replaceAll('%', '%25').replaceAll('+', '%2B');
-                    html += '      <li><div class="downloadBtn">' +
+                  else {
+                    html += '      <div>' +
                             '      <a href="' + downloadUrl + '" class="clickable"';
                     if (!this.settings.doc.downloadUrl.includes('javascript:')) {
                       html+= ' download="' + this.settings.doc.title + '"';
                     }
                     html += '><i class="uiIconDownload uiIconWhite"></i>&nbsp;${UIActivity.comment.download}</a>' +
-                            '                </div></li>';
-
+                            '                </div>';
                   }
-                  html +='    </ul>' +
-                      '  </div>';
                 }
-                
                 if (this.settings.showComments) {
                   html += '<div class="showComments">' +
                       '<a><i class="uiIconComment uiIconWhite"></i>&nbsp;${UIActivity.comment.showComment}</a>' +
