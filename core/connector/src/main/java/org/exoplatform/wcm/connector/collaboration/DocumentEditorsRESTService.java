@@ -267,7 +267,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    */
   @POST
   @Path("/preview")
-  @RolesAllowed("users")
   @Produces(MediaType.APPLICATION_JSON)
   public Response initPreview(@Context UriInfo uriInfo,
                               @Context HttpServletRequest request,
