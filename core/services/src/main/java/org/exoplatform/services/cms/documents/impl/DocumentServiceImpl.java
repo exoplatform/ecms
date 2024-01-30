@@ -347,11 +347,46 @@ public class DocumentServiceImpl implements DocumentService {
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     ManageableRepository repository = repoService.getCurrentRepository();
     Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
-    Node node = (Node) session.getItem(nodePath);
+    Node node = getItem(session, nodePath);
+    if (node == null) {
+      return "";
+    }
     if(node.isNodeType(NodetypeConstant.NT_FILE)) {
       return getLinkInDocumentsAppByIdentifier(((NodeImpl) node).getIdentifier(), drive);
     } else {
       return getFolderLinkInDocumentsApp(nodePath, drive);
+    }
+  }
+
+  private Node getItem(Session session, String nodePath) throws RepositoryException {
+    try {
+      return (Node) session.getItem(nodePath);
+    } catch (PathNotFoundException e) {
+      String currentPath = nodePath;
+      Node currentNode = null;
+      while (currentNode == null && !currentPath.isBlank()) {
+        currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
+        try {
+          currentNode = (Node) session.getItem(currentPath);
+        } catch (Exception ex) {
+          // continue
+        }
+      }
+      if (currentNode == null || !currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+        return null;
+      }
+      currentNode = linkManager.getTarget(currentNode);
+      String[] pathParts = nodePath.substring(currentPath.length() + 1).split("/");
+      for (String part : pathParts) {
+        currentNode = currentNode.getNode(part);
+        if (currentNode != null && currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+          currentNode = linkManager.getTarget(currentNode);
+        }
+        if (currentNode == null) {
+          break;
+        }
+      }
+      return currentNode;
     }
   }
 
