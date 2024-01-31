@@ -21,11 +21,13 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Authenticator;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.gatein.api.Portal;
@@ -40,6 +42,7 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Repository;
 import javax.jcr.Session;
 
@@ -264,5 +267,26 @@ public class DocumentServiceImplTest {
     assertNotNull(drive);
     assertEquals("General drive", drive.getLabel());
 
+  }
+  @Test
+  public void testGetLinkInDocumentsApp() throws Exception {
+    String nodePath = "/Groups/spaces/spaceOne/Documents/FolderA/FolderB";
+    when(session.getItem(nodePath)).thenReturn(null);
+    String link = documentService.getLinkInDocumentsApp(nodePath, generalDrive);
+    assertEquals("", link);
+    when(session.getItem(nodePath)).thenThrow(PathNotFoundException.class);
+    Node symlinkNode = mock(Node.class);
+    Node originNode = mock(Node.class);
+    NodeImpl folderB = mock(NodeImpl.class);
+    when(session.getItem("/Groups/spaces/spaceOne/Documents/FolderA")).thenReturn(symlinkNode);
+    when(symlinkNode.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(true);
+    when(linkManager.getTarget(symlinkNode)).thenReturn(originNode);
+    when(originNode.getNode("FolderB")).thenReturn(folderB);
+    when(folderB.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(false);
+    when(folderB.isNodeType(NodetypeConstant.NT_FILE)).thenReturn(true);
+    String identifier = "docIdentifier";
+    when((folderB.getIdentifier())).thenReturn(identifier);
+    link = documentService.getLinkInDocumentsApp(nodePath, generalDrive);
+    assertTrue(link.contains(identifier));
   }
 }
