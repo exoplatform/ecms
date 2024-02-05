@@ -24,7 +24,7 @@
   <parent>
     <artifactId>ecms-apps</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.4.4</version>
+    <version>6.4.4-patched</version>
   </parent>
   <artifactId>ecms-apps-portlet-clouddrives</artifactId>
   <packaging>war</packaging>

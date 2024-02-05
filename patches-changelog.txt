@@ -1,0 +1,5 @@
+              2024-02-05 eXo Support <support@exoplatform.org> 
+
+   # 6.4.4 Patches changelog: 
+
+
