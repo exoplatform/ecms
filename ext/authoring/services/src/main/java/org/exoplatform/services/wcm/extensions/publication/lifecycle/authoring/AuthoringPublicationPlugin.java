@@ -304,8 +304,10 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       if (!node.isCheckedOut()) {
         node.checkout();
       }
-      node.setProperty(AuthoringPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
-      node.save();
+      if (context == null || !context.containsKey("context.action") || !context.get("context.action").equals("delete")) {
+        node.setProperty(AuthoringPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
+        node.save();
+      }
       Version liveVersion = node.checkin();
       node.checkout();
       // Change current live revision to unpublished
