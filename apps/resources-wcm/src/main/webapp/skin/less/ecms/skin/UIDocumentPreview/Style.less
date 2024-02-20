@@ -706,9 +706,13 @@
 			height: 0;
 
 			.ellipsis {
-				display: contents;
+				display: inline-block;
 				color: @white;
 				font-weight: bold;
+				width: 400px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 
 			.label {
@@ -811,11 +815,20 @@
 				display: none;
 			}
 		    a {
-		    	color: @btnPrimaryColor;
+				text-overflow: ellipsis !important;
+				max-width: 200px;
+				width: min-content;
+				display: inline-block;
+				overflow: hidden;
+				white-space: nowrap;
+				color: @btnPrimaryColor;
 		    	&:hover i, &:active i, &.active i, {
                     color: @colorIconSecondary;
 		    	}
 		    }
+			.ellipsis-reverse-apply {
+				direction: unset !important;
+			}
 		}
 	}
 }
