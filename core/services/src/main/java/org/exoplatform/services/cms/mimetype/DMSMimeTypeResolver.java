@@ -87,6 +87,10 @@ public class DMSMimeTypeResolver {
     if (ext.equals("")) {
       ext = filename;
     }
+    if (!dmsmimeTypes.containsKey("log")) {
+      dmsmimeTypes.setProperty("log", "text/x-log");
+      dmsmimeTypes.setProperty("class", "application/java-vm");
+    }
     String mimeType = dmsmimeTypes.getProperty(ext.toLowerCase(), mimeTypes.getDefaultMimeType());
     if (mimeType == null || mimeType.length() == 0) return mimeTypes.getMimeType(filename);
     return mimeType;
