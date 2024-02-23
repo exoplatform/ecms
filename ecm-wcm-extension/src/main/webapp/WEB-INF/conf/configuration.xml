@@ -53,7 +53,6 @@
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/ecms-portal-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/application-registry-configuration.xml</import>
-  <import>war:/conf/wcm-extension/portal/navigation-categories-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/deployment/template-empty-deployment-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/nodetype-templates-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/application-templates-configuration.xml</import>

@@ -45,7 +45,6 @@
           <value>locale.wcm.views</value>
           <value>locale.wcm.webui</value>
           <value>locale.wcm.resources.WCMResourceBundleConnector</value>
-          <value>locale.navigation.group.platform.web-contributors</value>
           <value>locale.navigation.group.platform.editors</value>
         </values-param>
         <values-param>
@@ -54,7 +53,6 @@
           <value>locale.wcm.views</value>
           <value>locale.wcm.webui</value>
           <value>locale.wcm.resources.WCMResourceBundleConnector</value>
-          <value>locale.navigation.group.platform.web-contributors</value>
           <value>locale.navigation.group.platform.editors</value>
         </values-param>
       </init-params>
