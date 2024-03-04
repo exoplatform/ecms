@@ -33,7 +33,7 @@ export function init() {
       vuetify,
       i18n
     }, `#${appId}`, 'Cloud Drive Settings');
-  });
+  }).finally(() => Vue.prototype.$utils.includeExtensions('CloudDriveSettingsExtension'));
 }
 // get overridden components if exists
 if (extensionRegistry) {
