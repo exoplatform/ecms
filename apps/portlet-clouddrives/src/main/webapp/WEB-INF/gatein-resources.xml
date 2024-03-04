@@ -27,6 +27,7 @@
   <portlet>
     <name>CloudDriveSettingsPortlet</name>
     <module>
+      <load-group>cloudDriveGRP</load-group>	  
       <script>
         <path>/js/cloudDriveSettings.bundle.js</path>
       </script>
