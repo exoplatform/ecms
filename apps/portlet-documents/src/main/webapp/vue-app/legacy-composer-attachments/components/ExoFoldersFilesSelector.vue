@@ -194,7 +194,7 @@
           :class="file.selected? 'selected' : ''"
           class="fileSelection"
           @click="selectFile(file)">
-          <exo-attachment-item :file="file" />
+          <exo-attachment-item :file="file" :prevent-preview="true" />
         </div>
       </div>
       <div v-else class="categorizedDrives">
