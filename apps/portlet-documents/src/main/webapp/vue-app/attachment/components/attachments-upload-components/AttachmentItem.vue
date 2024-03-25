@@ -288,6 +288,13 @@ export default {
       }
     }
   },
+  watch: {
+    attachmentInProgress(newVal) {
+      if (!newVal) {
+        this.$root.$emit('end-loading-attachment-drawer');
+      }
+    },
+  },
   methods: {
     markDocumentAsViewed() {
       document.dispatchEvent(new CustomEvent('mark-attachment-as-viewed', {detail: {file: this.attachment}}));
