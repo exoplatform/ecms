@@ -162,7 +162,7 @@ export default {
   },
   computed: {
     uploadFinished() {
-      return this.attachments.length > 0 && (this.attachments.every(file => !file.uploadId) || this.attachments.every(file => file.waitAction));
+      return this.attachments.length > 0 && !(this.attachments.some(file => file.waitAction) || this.newUploadedFilesInProgress);
     },
     entityHasNewAttachments() {
       return this.uploadedFiles.length > 0;
@@ -241,7 +241,7 @@ export default {
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
     this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
-    this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
+    this.$root.$on('end-loading-attachment-drawer', () => this.endLoading());
     this.$root.$on('add-new-created-document', (doc) =>{
       this.creationType = this.$t('attachments.added.by.platform');
       this.addNewCreatedDocument(doc);
@@ -260,7 +260,9 @@ export default {
       this.$refs.attachmentsAppDrawer.startLoading();
     },
     endLoading() {
-      this.$refs.attachmentsAppDrawer.endLoading();
+      if (this.uploadFinished) {
+        this.$refs.attachmentsAppDrawer.endLoading();
+      }
     },
     handleProvidedFiles() {
       if (this.files && this.files.length>0){
