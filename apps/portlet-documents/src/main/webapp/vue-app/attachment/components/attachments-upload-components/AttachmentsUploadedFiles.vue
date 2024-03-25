@@ -160,6 +160,7 @@ export default {
   created() {
     this.$root.$on('refresh-uploaded-files-list', () => {
       this.$forceUpdate();
+      this.endLoadingAttachmentDrawer();
     });
   },
   computed: {
@@ -173,6 +174,12 @@ export default {
   methods: {
     openSelectDestinationFolderDrawer() {
       this.$root.$emit('open-drive-explorer-drawer', this.currentDrive);
+    },
+    endLoadingAttachmentDrawer() {
+      const isLoadingDrawer =  this.attachments && this.attachments.some(val => val.waitAction || val.uploadProgress < 100);
+      if (!isLoadingDrawer) {
+        this.$root.$emit('end-loading-attachment-drawer');
+      }
     }
   }
 };
