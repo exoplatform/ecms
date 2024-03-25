@@ -162,7 +162,7 @@ export default {
   },
   computed: {
     uploadFinished() {
-      return this.attachments.length > 0 && (this.attachments.every(file => !file.uploadId) || this.attachments.every(file => file.waitAction));
+      return this.attachments.length > 0 && !(this.attachments.some(file => file.waitAction) || this.newUploadedFilesInProgress);
     },
     entityHasNewAttachments() {
       return this.uploadedFiles.length > 0;
