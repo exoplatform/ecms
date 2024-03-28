@@ -162,13 +162,20 @@ export default {
   },
   computed: {
     uploadFinished() {
-      return this.attachments.length > 0 && !(this.attachments.some(file => file.waitAction) || this.newUploadedFilesInProgress);
+      return this.attachments.length > 0 && (this.attachments.every(file => !file.uploadId) || this.attachments.every(file => file.waitAction));
     },
     entityHasNewAttachments() {
       return this.uploadedFiles.length > 0;
     },
     newUploadedFilesAdded() {
       return this.newUploadedFiles && this.newUploadedFiles.some(file => file.uploadId);
+    },
+    uploadfilesFinished() {
+      return this.attachments.length > 0 && !(this.attachments.some(file => file.waitAction) || this.newUploadedFilesInProgress) 
+              || this.attachments.length === 0;
+    },
+    attachmentsCount(){
+      return this.attachments.length;
     },
     filesUploadedSuccessLabel() {
       return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');
@@ -202,8 +209,11 @@ export default {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.displaySuccessMessage();
-        this.$refs.attachmentsAppDrawer.endLoading();
+        this.endLoading();
       }
+    },
+    attachmentsCount (){
+      this.endLoading();
     },
     defaultDrive() {
       this.initDefaultDestinationFolderPath(this.defaultFolder);
@@ -260,7 +270,7 @@ export default {
       this.$refs.attachmentsAppDrawer.startLoading();
     },
     endLoading() {
-      if (this.uploadFinished) {
+      if (this.uploadfilesFinished) {
         this.$refs.attachmentsAppDrawer.endLoading();
       }
     },
