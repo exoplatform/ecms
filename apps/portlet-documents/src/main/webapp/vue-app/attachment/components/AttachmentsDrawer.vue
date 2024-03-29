@@ -170,6 +170,13 @@ export default {
     newUploadedFilesAdded() {
       return this.newUploadedFiles && this.newUploadedFiles.some(file => file.uploadId);
     },
+    uploadfilesFinished() {
+      return this.attachments.length > 0 && !(this.attachments.some(file => file.waitAction) || this.newUploadedFilesInProgress) 
+              || this.attachments.length === 0;
+    },
+    attachmentsCount(){
+      return this.attachments.length;
+    },
     filesUploadedSuccessLabel() {
       return this.entityType && this.entityId && this.$t('attachments.upload.success') || this.$t('documents.upload.success');
     },
@@ -202,8 +209,11 @@ export default {
         this.$root.$emit('entity-attachments-updated');
         document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
         this.displaySuccessMessage();
-        this.$refs.attachmentsAppDrawer.endLoading();
+        this.endLoading();
       }
+    },
+    attachmentsCount (){
+      this.endLoading();
     },
     defaultDrive() {
       this.initDefaultDestinationFolderPath(this.defaultFolder);
@@ -241,7 +251,7 @@ export default {
     this.$root.$on('abort-uploading-new-file', this.abortUploadingNewFile);
     this.$root.$on('remove-attached-file', this.removeAttachedFile);
     this.$root.$on('start-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.startLoading());
-    this.$root.$on('end-loading-attachment-drawer', () => this.$refs.attachmentsAppDrawer.endLoading());
+    this.$root.$on('end-loading-attachment-drawer', () => this.endLoading());
     this.$root.$on('add-new-created-document', (doc) =>{
       this.creationType = this.$t('attachments.added.by.platform');
       this.addNewCreatedDocument(doc);
@@ -260,7 +270,9 @@ export default {
       this.$refs.attachmentsAppDrawer.startLoading();
     },
     endLoading() {
-      this.$refs.attachmentsAppDrawer.endLoading();
+      if (this.uploadfilesFinished) {
+        this.$refs.attachmentsAppDrawer.endLoading();
+      }
     },
     handleProvidedFiles() {
       if (this.files && this.files.length>0){
