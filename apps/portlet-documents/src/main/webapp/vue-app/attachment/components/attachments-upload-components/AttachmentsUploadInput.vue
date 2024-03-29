@@ -231,7 +231,7 @@ export default {
         if (actions.length > 0) {
           file.actions = actions;
           file.waitAction = true;
-          this.$root.$emit('alert-message', this.$t('attachments.upload.conflict.message'), 'warning');
+          this.$root.$emit('alert-message', this.$root.$t('attachments.upload.conflict.message'), 'warning');
           this.$root.$emit('start-loading-attachment-drawer');
         }
         this.$root.$emit('add-new-uploaded-file', file);
