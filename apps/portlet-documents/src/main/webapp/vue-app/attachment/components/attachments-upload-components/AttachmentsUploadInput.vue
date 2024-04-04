@@ -286,12 +286,12 @@ export default {
                 } else {
                   file.uploadProgress = file.inProcess && 100 || Number(percent);
                   if (!file.uploadProgress || file.uploadProgress < 100) {
-                    this.controlUpload(file);
+                    this.controlUpload(file, continueAction);
                   } else {
                     this.uploadingCount--;
                     this.processNextQueuedUpload();
                   }
-                  if (file.uploadProgress === 100 && continueAction && !file.inProcess) {
+                  if (file.uploadProgress === 100 && !file.inProcess) {
                     file.inProcess = true;
                     this.$root.$emit('continue-upload-to-destination-path', file);
                     const index = this.newUploadedFiles.findIndex(f => f.id === file.id);
