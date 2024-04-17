@@ -142,7 +142,7 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
       this.setupContent(this.element);
 
       var dialog = this;
-      require(["SHARED/uiSelectImage"], function(UISelectImage){
+      window.require(["SHARED/uiSelectImage"], function(UISelectImage){
         UISelectImage.init(parentElement.$, widget.data, function() {
           dialog.enableButton('ok');
         }, function() {
@@ -166,7 +166,7 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
                       }
                       var dialog = this.getDialog();
                       const UrlProtocolRegex = /^(http|ftp|https):\/\/[^ "]+$/;
-                      require(["SHARED/jquery"], function($) {
+                      window.require(["SHARED/jquery"], function($) {
                         var $imageElement = $(dialog.getElement().$).find(".selectedImagePreview img");
                         let imageLink = $(dialog.getElement().$).find(".imageLinkArea input").val();
                         const imageLinkTarget = $(dialog.getElement().$).find(".imageLinkTargetArea select").find(":selected").val();
@@ -203,7 +203,7 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
     ],
     buttons: [CKEDITOR.dialog.okButton, CKEDITOR.dialog.cancelButton],
     onCancel: function() {
-      require(["SHARED/uiSelectImage"], function(UISelectImage){
+      window.require(["SHARED/uiSelectImage"], function(UISelectImage){
         UISelectImage.cancel();
       })
     },
