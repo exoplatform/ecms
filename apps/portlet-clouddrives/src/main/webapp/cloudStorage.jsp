@@ -3,7 +3,7 @@
 <div class="VuetifyApp">
   <div id="cloudStorageApp">
     <script type="text/javascript">
-      require(['SHARED/cloudStorage'],
+      window.require(['SHARED/cloudStorage'],
               app => app.init()
       );
     </script>
