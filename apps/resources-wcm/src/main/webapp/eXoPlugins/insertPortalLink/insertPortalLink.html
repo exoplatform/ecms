@@ -23,11 +23,11 @@
 		<script type="text/javascript">
 			var CKEDITOR = window.opener.CKEDITOR || {};
 			require(["../../../eXoResources/javascript/eXo/core/Base.js"], function(base) {
-				window.base = base; require(["../../../eXoResources/javascript/eXo/webui/UIPopup.js"], function(uiPopup) {
-					window.uiPopup = uiPopup; require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
-						window.uiMaskLayer = uiMaskLayer; require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
-							window.wcm_utils = wcm_utils; require(["js/LinkSelector.js"], function(link_selector) {
-								window.link_selector = link_selector; require(["../../../commons-extension/eXoPlugins.js"], function() {
+				window.base = base; window.require(["../../../eXoResources/javascript/eXo/webui/UIPopup.js"], function(uiPopup) {
+					window.uiPopup = uiPopup; window.require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
+						window.uiMaskLayer = uiMaskLayer; window.require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
+							window.wcm_utils = wcm_utils; window.require(["js/LinkSelector.js"], function(link_selector) {
+								window.link_selector = link_selector; window.require(["../../../commons-extension/eXoPlugins.js"], function() {
 									
 
 									eXo.ecm.LinkSelector.init();	
