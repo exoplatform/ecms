@@ -21,6 +21,23 @@
 	}
 }
 
+.VuetifyApp .v-application .UIForm {
+  button, input, select, textarea {
+    border-style: solid;
+    border-radius: @borderRadiusLarge;
+    &[disabled] {
+      background-color: @primaryBackgroundHover;
+    }
+    &[readonly] {
+      background-color: @primaryBackgroundHover;
+    }
+  }
+  select {
+    -moz-appearance: auto;
+    -webkit-appearance: auto;
+  }
+}
+
 #UIContentSelectorMulti {
 	.uiWCMSearchContainer, .uiContentSearchResult {
 		height: 400px;
