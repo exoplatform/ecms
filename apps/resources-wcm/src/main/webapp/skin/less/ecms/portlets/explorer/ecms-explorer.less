@@ -6,6 +6,11 @@
 @import "UIFileView/Style.less";
 @import "Xeditable/bootstrap3-editable.less";
 
+.VuetifyApp .UIJCRExplorerPortlet *:not(.ignore-vuetify-classes) {
+  &, &::before, &::after {
+    box-sizing: unset;
+  }
+}
 .UIJCRExplorerPortlet {
 	padding: 25px 10px;
 	background: @lightGrey !important;
