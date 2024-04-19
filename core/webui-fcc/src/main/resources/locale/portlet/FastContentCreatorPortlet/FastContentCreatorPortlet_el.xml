@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>Αυτό το όνομα δεν επιτρέπεται.</name-not-allowed>
-      <in-versioning>Παρακαλώ επιβεβαιώστε τον τρέχοντα κόμβο πριν από την προσθήκη ενός νέου κόμβου.</in-versioning>
-      <cannot-save>Παρουσιάστηκε σφάλμα κατά την αποθήκευση του κόμβου.</cannot-save>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <in-versioning>Please check the current node before adding a new node.</in-versioning>
+      <cannot-save>An error occurred while saving the node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Δεν μπορεί να φορτωθεί το πρότυπο '{0}'.</not-support>
-      <not-add-folder>Μόνο αρχεία μπορούν να προστεθούν σε αυτόν το φάκελο.</not-add-folder>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια προσθήκης στο '{0}'.</access-denied>
-      <path-not-found>Η διαδρομή '{0}' έχει διαγραφεί ή δεν είναι έγκυρη.</path-not-found>
-      <node-locked>Ο κόμβος '{0}' είναι κλειδωμένος. Παρακαλώ ξεκλειδώστε αυτόν τον κόμβο πριν από τη δημιουργία εγγράφων.</node-locked>
-      <node-isExist>Αυτός ο κόμβος υπάρχει ήδη στο '{0}' και δεν επιτρέπεται δύο συγγενικοί κόμβοι να μοιράζονται την ίδια ονομασία.</node-isExist>
-      <get-dialog-path>Παρουσιάστηκε σφάλμα κατά τη λήψη της διαδρομής του διαλόγου.</get-dialog-path>
-      <new-jcr-template>Παρουσιάστηκε σφάλμα κατά τη δημιουργία νέου προτύπου.</new-jcr-template>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-add-folder>Only files can be added to this folder.</not-add-folder>
+      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
+      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
+      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
+      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
+      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
+      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Αποθήκευση τοποθεσίας</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Επιλέξτε το χώρο εργασίας</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Επιλογές προτύπου</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Θέση αποθήκευσης</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Επιλέξτε πρότυπο</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Προσαρμοσμένο πλήκτρο "Αποθήκευση"</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Προσαρμοσμένο μήνυμα Αποθήκευσης</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Ανακατεύθυνση:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Διαδρομή ανακατεύθυνσης:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Ενέργειες</UIFCCActionField>
+      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Actions</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Αποθηκεύτηκαν οι επιλογές με επιτυχία στο συστατικό στοιχείο πύλης.</save-successfully>
-      <item-not-found>Η διαδρομή δεν είναι έγκυρη.</item-not-found>
-      <fileType-empty>Επιλέξτε έναν τύπο αρχείου πριν να αποθηκεύσετε αυτήν τη ρύθμιση.</fileType-empty>
-      <ws-empty>Παρακαλώ επιλέξτε ένα χώρο εργασίας.</ws-empty>
-      <action-empty>Παρακαλώ επιλέξτε ένα φάκελο με ενέργειες.</action-empty>
-      <message-empty>Το πεδίο "Προσαρμοσμένο μήνυμα Αποθήκευσης" πρέπει να συμπληρωθεί στην περίπτωση που δεν επιλέξετε την επιλογή της "Ανακατεύθυνσης" ή η διαδρομή είναι κενή.</message-empty>
-      <get-template>Παρουσιάστηκε σφάλμα κατά την πρόσβαση στο πρότυπο.</get-template>
-      <set-template-option>Παρουσιάστηκε σφάλμα κατά τη ρύθμιση της επιλογής στο πρότυπο.</set-template-option>
-      <do-select>Παρουσιάστηκε σφάλμα κατά την επιλογή της τοποθεσίας.</do-select>
+      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
+      <item-not-found>This path is invalid.</item-not-found>
+      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
+      <ws-empty>Please select one workspace.</ws-empty>
+      <action-empty>Please select a folder with an action.</action-empty>
+      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
+      <get-template>An error occurred while accessing the template.</get-template>
+      <set-template-option>An error occurred while setting the template option.</set-template-option>
+      <do-select>An error occurred while selecting the location.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,116 +52,116 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Επιλέξτε διαδρομή</SelectPath>
+      <SelectPath>Select Path</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Όνομα</name>
-      <description>Περιγραφή</description>
-      <instanceOf>Παρουσία του</instanceOf>
-      <action>Ενέργεια</action>
+      <name>Name</name>
+      <description>Description</description>
+      <instanceOf>Instance of</instanceOf>
+      <action>Action</action>
     </header>
     <action>
-      <Add>Προσθήκη</Add>
+      <Add>Add</Add>
     </action>
     <msg>
-      <empty>Καμία ενέργεια</empty>
-      <remove-popup-first>Πρέπει να κλείσετε το παράθυρο της επεξεργασίας πριν από τη διαγραφή αυτού του κόμβου.</remove-popup-first>
-      <confirm-delete-action>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την ενέργεια;</confirm-delete-action>
-      <template-empty>Το πρότυπο '{0}' είναι κενό ή δεν έχει οριστεί.</template-empty>
-      <template-null>Το πρότυπο είναι είτε είναι κενό είτε δεν έχει οριστεί ή δεν έχετε δικαίωμα πρόσβασης σε αυτό.</template-null>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να εκτελέσετε αυτήν την ενέργεια.</access-denied>
+      <empty>No actions</empty>
+      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
+      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <template-empty>The template of '{0}' is null or empty.</template-empty>
+      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Επιλογή τοποθεσίας</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Χώρος Εργασίας:</workspaceName>
-      <rootNodePath>Διαδρομή εκκίνησης:</rootNodePath>
-      <rootNodeInfo>Κόμβος-Ρίζα</rootNodeInfo>
+      <workspaceName>Workspace:</workspaceName>
+      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Προσθήκη κόμβου-ρίζα</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>Αυτός ο κόμβος δεν εμπεριέχει άλλους κόμβους.</child-not-found>
+      <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Όνομα</name>
-      <action>Ενέργεια</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Προσθήκη ενέργειας</UIFCCActionContainer>
+      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Προσθήκη/Επεξεργασία Ενέργειας</title>
+    <title>Add/Edit Action</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Δεν μπορεί να αποθηκευτεί αυτή η ενέργεια. Το όνομα που παρέχεται δεν πρέπει να έχει ένα ευρετήριο ως το τελευταίο στοιχείο.</repository-exception>
-      <numberformat-exception>Δεν μπορεί να αποθηκευτεί αυτή η ενέργεια. Το όνομα δεν πρέπει να περιέχει τους χαρακτήρες «[» και «]».</numberformat-exception>
-      <existed-action>Το όνομα της ενέργειας '{0}' υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο όνομα.</existed-action>
-      <unable-add-action>Δεν είναι δυνατή η προσθήκη αυτής της ενέργειας.</unable-add-action>
-      <unable-add>Δεν είναι δυνατή η προσθήκη αυτής της ενέργειας. Αυτός ο κόμβος είτε είναι ρίζα είτε δεν έχετε δικαιώματα.</unable-add>
-      <not-support>Το παράθυρο διαλόγου '{0}' δεν υποστηρίζεται.</not-support>
-      <no-permission-add>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε το δικαίωμα να προσθέσετε μια ενέργεια εδώ.</no-permission-add>
-      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε δικαίωμα πρόσβασης σε αυτό το πρότυπο.</access-denied>
+      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
+      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
+      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
+      <unable-add-action>Unable to add this action.</unable-add-action>
+      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
+      <not-support>The dialog '{0}' is not supported.</not-support>
+      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
+      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
     </msg>
     <validator>
-      <validator>Επαληθευτής</validator>
-      <destPath>Με διαδρομή</destPath>
+      <validator>Validator</validator>
+      <destPath>With Path</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Δημιουργήστε μια ενέργεια του τύπου</actionType>
+      <actionType>Create an Action of Type</actionType>
     </label>
     <msg>
-      <not-support>Δεν μπορεί να φορτωθεί το πρότυπο του '{0}'.</not-support>
-      <do-not-permission>Δεν έχετε άδεια για να φορτώσετε το πρότυπο του '{0}'.</do-not-permission>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Επιλογή τοποθεσίας</UIOneNodePathSelector>
-      <UIPermissionSelector>Περιηγητής Δικαιωμάτων</UIPermissionSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
       <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Το πεδίο '{0}' με την τιμή '{1}' δεν είναι έγκυρο.</Invalid-input>
+      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Επιλογή Κατηγοριών</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Αναφερόμενες Κατηγορίες</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -173,19 +173,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Προσθήκη Κατηγοριών</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Δέντρο Κατηγοριών</taxonomyTree>
+      <taxonomyTree>Category Tree</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Επιλογέας Κατηγοριών</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

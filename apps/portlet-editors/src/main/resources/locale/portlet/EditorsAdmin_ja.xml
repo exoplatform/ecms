@@ -35,28 +35,28 @@
       </error>
       <title>Document editors</title>
       <table>
-        <Provider>プロバイダー</Provider>
-        <Description>説明</Description>
-        <Active>アクティブ</Active>
-        <Permissions>権限観覧</Permissions>
+        <Provider>Provider</Provider>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>無し</None>
+        <None>None</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>保存</Save>
-        <Cancel>キャンセル</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>編集</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>警告</title>
+      <title>Warning</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

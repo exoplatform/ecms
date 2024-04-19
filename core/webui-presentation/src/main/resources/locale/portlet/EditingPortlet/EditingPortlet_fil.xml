@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Ang Mode:</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>Ikaw ay walang permiso na gawin ang kilos na ito.</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Baguhin</Draft>
-        <Published>Ilathala</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

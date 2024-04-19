@@ -12,8 +12,8 @@
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Redigera</Draft>
-        <Published>Publicerad</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

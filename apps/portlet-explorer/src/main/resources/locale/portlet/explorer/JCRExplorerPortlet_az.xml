@@ -8,7 +8,7 @@
   <UICommentForm>
     <label>
       <name>Name</name>
-      <email>E-poçt</email>
+      <email>Email</email>
       <website>Website</website>
       <comment>Comment</comment>
     </label>
@@ -219,7 +219,7 @@
       <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Upload File</UIUploadManager>
       <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Xaric edin</UIExportNode>
+      <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
       <UIActivateVersion>Activate Versioning</UIActivateVersion>
@@ -227,7 +227,7 @@
       <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
       <UIPermissionManager>Permission Management</UIPermissionManager>
       <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>Ətraflı axtarış</UIECMSearch>
+      <UIECMSearch>Advanced Search</UIECMSearch>
       <UISavedQuery>Saved Queries List</UISavedQuery>
       <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
       <UIActionManager>Manage Actions</UIActionManager>
@@ -236,7 +236,7 @@
       <EditFormController>Edit Document</EditFormController>
       <UIRelationManager>Add Relation</UIRelationManager>
       <UICategoryManager>Add Category</UICategoryManager>
-      <UIImportNode>Daxil etmək</UIImportNode>
+      <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
       <UICommentForm>Comment</UICommentForm>
@@ -298,13 +298,13 @@
       <ManageCategories>Categories</ManageCategories>
       <ManageRelations>Relations</ManageRelations>
       <ManageActions>Actions</ManageActions>
-      <ExportNode>Xaric edin</ExportNode>
-      <ImportNode>Daxil etmək</ImportNode>
+      <ExportNode>Export</ExportNode>
+      <ImportNode>Import</ImportNode>
       <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
       <ManageHidden>Show/Hide Content</ManageHidden>
       <ViewReferences>References</ViewReferences>
       <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>İcazələr</ViewPermissions>
+      <ViewPermissions>Permissions</ViewPermissions>
       <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
@@ -350,8 +350,8 @@
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Sürətli Axtarış</SimpleSearch>
-      <AdvanceSearch>Ətraflı axtarış</AdvanceSearch>
+      <SimpleSearch>Quick Search</SimpleSearch>
+      <AdvanceSearch>Advanced Search</AdvanceSearch>
       <SavedQueries>Saved Queries</SavedQueries>
       <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
       <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
@@ -524,7 +524,7 @@
     <tooltip>
       <Rename>Rename</Rename>
       <Cut>Cut</Cut>
-      <Copy>Kopyala</Copy>
+      <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -555,7 +555,7 @@
       <label>
         <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Sahib</exo_owner>
+        <exo_owner>Owner</exo_owner>
         <auditing>Auditing</auditing>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modifed</exo_dateModified>
@@ -572,7 +572,7 @@
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
       <EditDocument>Edit</EditDocument>
-      <Copy>Kopyala</Copy>
+      <Copy>Copy</Copy>
       <Rename>Rename</Rename>
       <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
@@ -585,7 +585,7 @@
       <Custom>Custom</Custom>
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
-      <Upload>Faylları yüklə</Upload>
+      <Upload>Upload Files</Upload>
       <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
@@ -644,7 +644,7 @@
       <UISavedQuery>Saved Query</UISavedQuery>
       <AdvancedSearchResult>Search Results</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>Ətraflı axtarış</UISearchContainer>
+      <UISearchContainer>Advanced Search</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
@@ -655,7 +655,7 @@
       <UIActionContainer>Add Action</UIActionContainer>
       <UIActionViewContainer>Action Info</UIActionViewContainer>
       <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Dil Əlavə Et</UIAddLanguageContainer>
+      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
       <UIPublicationLogList>History</UIPublicationLogList>
@@ -708,7 +708,7 @@
       <name>Name:</name>
       <type>Type:</type>
       <value>Value:</value>
-      <upload>Yüklə:</upload>
+      <upload>Upload:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -757,10 +757,10 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>İstifadəçi və ya Qrup</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Sil</remove>
+      <remove>Remove</remove>
       <action>Action</action>
     </header>
     <msg>
@@ -772,7 +772,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>İstifadəçini seç</SelectUser>
+      <SelectUser>Select User</SelectUser>
       <SelectMember>Select Role</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
@@ -784,7 +784,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>İstifadəçini seç</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
@@ -802,7 +802,7 @@
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>İstifadəçi və ya Qrup</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -1080,7 +1080,7 @@
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Əlavə Et</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Əlavə Et</label-Add>
+      <label-Add>Add</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Əlavə Et</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1212,7 +1212,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Əlavə Et</Add>
+      <Add>Add</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1236,7 +1236,7 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>Əlavə Et</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1281,7 +1281,7 @@
       <name>Name</name>
       <type>Type</type>
       <statement>Statement</statement>
-      <permission>İcazələr</permission>
+      <permission>Permissions</permission>
       <action>Actions</action>
     </header>
     <tooltip>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Xaric edin</Export>
+      <Export>Export</Export>
     </action>
-    <title>Xaric edin</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1400,12 +1400,12 @@
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
       <e_64>Move</e_64>
-      <e_128>Kopyala</e_128>
+      <e_128>Copy</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
       <e_2048>Update</e_2048>
-      <e_4096>Daxil etmək</e_4096>
+      <e_4096>Import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
@@ -1421,7 +1421,7 @@
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>İstifadəçi Adı</userName>
+      <userName>Username</userName>
       <date>Date</date>
       <version>Version</version>
     </label>
@@ -1451,7 +1451,7 @@
   <UIActivePublication>
     <header>
       <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Açıqlama</LifecycleDesc>
+      <LifecycleDesc>Description</LifecycleDesc>
       <action>Action</action>
     </header>
     <action>
@@ -1515,9 +1515,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Daxil etmək</Import>
+      <Import>Import</Import>
     </action>
-    <title>Daxil etmək</title>
+    <title>Import</title>
     <msg>
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
@@ -1559,7 +1559,7 @@
       <label>Select Label</label>
     </label>
     <action>
-      <Remove>Sil</Remove>
+      <Remove>Remove</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1794,7 +1794,7 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Açıqlama</description>
+      <description>Description</description>
   <lifecycle>Life Cycle</lifecycle>
   <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance of Action Type</instanceOf>
@@ -1913,7 +1913,7 @@
       <linked>Linked Tags:</linked>
     </label>
     <action>
-      <AddTag>Əlavə Et</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2088,8 +2088,8 @@
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Qrupu seç</selectGroup>
-      <selectUser>İstifadəçini seç</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2129,8 +2129,8 @@
     <header>
       <date>Date</date>
       <newState>New State</newState>
-      <user>İstifadəçi</user>
-      <description>Açıqlama</description>
+      <user>User</user>
+      <description>Description</description>
       <version>Version</version>
       <visibility>Visibility</visibility>
     </header>
@@ -2208,8 +2208,8 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Qrupu seç</selectGroup>
-      <selectUser>İstifadəçini seç</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2458,7 +2458,7 @@
       <Back>Back to Rename</Back>
       <Keepfile>Keep both files</Keepfile>
 <ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Ləğv Et</Cancel>
+<Cancel>Cancel</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2875,14 +2875,14 @@
     <UIActionForm>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Sil</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
       <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Sil</removeReference>
+      <removeReference>Remove</removeReference>
     </title>
   </EditFormAction>
 
@@ -2934,7 +2934,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Əlavə Et</Add>
+      <Add>Add</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -3017,7 +3017,7 @@
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
       <user>Author</user>
-      <description>Açıqlama</description>
+      <description>Description</description>
     </header>
     <create-version>New version is created</create-version>
   </UIPublicationHistory>
@@ -3185,11 +3185,11 @@
     <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>içində</in>
+    <in>in</in>
     <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
     <Error>Error</Error>
-    <or>və ya</or>
+    <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>

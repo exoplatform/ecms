@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>Waktu berakhir</end-time>
-        <start-time>Waktu mulai</start-time>
-        <lifecycle>Lingkaran kehidupan</lifecycle>
-        <mimeType>Jenis Mime</mimeType>
-        <repeat-count>Menghitung ulang</repeat-count>
-        <time-interval>Jarak waktu</time-interval>
-        <query-items>Item Kueri</query-items>
-        <schedule-type>Jenis Jadwal</schedule-type>
-        <remove>Hapus Item</remove>
-        <add>Tambah Item</add>
-        <expand>Perluas ini</expand>
+        <end-time>End Time</end-time>
+        <start-time>Start Time</start-time>
+        <lifecycle>Lifecycle</lifecycle>
+        <mimeType>Mime Type</mimeType>
+        <repeat-count>Repeat Count</repeat-count>
+        <time-interval>Time Interval</time-interval>
+        <query-items>Query Items</query-items>
+        <schedule-type>Schedule Type</schedule-type>
+        <remove>Remove Item</remove>
+        <add>Add Item</add>
+        <expand>Expand This</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,18 +24,18 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Tautan</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Nama</name>
-    <categories>Kategori</categories>
+      <name>Name</name>
+    <categories>Categories</categories>
     </label>
   </UIDocumentForm>
  
   <UICommentForm>
     <label>
-      <placeholder>Gunakan @ untuk mention seseorang dalam komentar anda</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Nama</name>
-        <content>Isi</content>
+        <name>Name</name>
+        <content>Content</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Kategori</categories>
+        <categories>Categories</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Lebar</width>
-        <height>Tinggi</height>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
-        <re-upload>Berkasnya sudah ada. anda dapat menghapus dan mengupload berkas lain.</re-upload>
+        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
       </label>
     </dialog>
   </File>
@@ -73,20 +73,20 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Kata Sandi</password>
-      <link>Tautan</link>
-      <to>Kirim Surat ke</to>
+      <password>Password</password>
+      <link>Link</link>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Pelabuhan</port>
+      <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Kata Sandi</password>
-      <link>Tautan</link>
-      <to>Kirim Surat ke</to>
+      <password>Password</password>
+      <link>Link</link>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Ekspresi Cron</cron-expression>
+        <cron-expression>Cron expression</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -151,19 +151,19 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Pembuat:</creator>
+        <creator>Creator:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Sumber:</source>
-        <contributor>Kontributor:</contributor>
-        <resource-type>Jenis Sumber Daya:</resource-type>
+        <source>Source:</source>
+        <contributor>Contributor:</contributor>
+        <resource-type>Resource Type:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Penerbit:</publisher>
+        <publisher>Publisher:</publisher>
         <description>#{word.description}:</description>
-        <rights>Hak:</rights>
-        <relation>Hubungan:</relation>
+        <rights>Rights:</rights>
+        <relation>Relation:</relation>
         <format>#{word.format}:</format>
-        <coverage>Cakupan:</coverage>
-        <identifier>Pengenal:</identifier>
+        <coverage>Coverage:</coverage>
+        <identifier>Identifier:</identifier>
         <language>Language:</language>
       </label>
     </dialog>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Jenis utama</primary-type>
-        <mixin-types>Jenis Campuran</mixin-types>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Tujuan kerja</destination-workpsace>
-        <destination-path>Jalur Tujuan</destination-path>
-        <primary-type>Tipe utama</primary-type>
-        <mixin-types>Jenis Campuran</mixin-types>
+        <destination-workpsace>Destination Workspace</destination-workpsace>
+        <destination-path>Destination Path</destination-path>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Mulai Publikasi</start-publication>
-        <end-publication>Publikasi Akhir</end-publication>
+        <start-publication>Start Publication</start-publication>
+        <end-publication>End Publication</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Hubungan</relation>
+        <relation>Relation</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Judul</title>
+        <title>Title</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,11 +244,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Sejarah Versi</version-history>
-        <base-version>Versi dasar</base-version>
-        <is-checked-out>Apakah periksa</is-checked-out>
-        <predecessors>Pendahulu</predecessors>
-        <merge-failed>Gabung Gagal</merge-failed>
+        <version-history>Version History</version-history>
+        <base-version>Base Version</base-version>
+        <is-checked-out>Is Checked out</is-checked-out>
+        <predecessors>Predecessors</predecessors>
+        <merge-failed>Merge Failed</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Nama</name>
-        <autoload>Beban otomatis</autoload>
-        <minetype>Jenis MIME</minetype>
-        <content>Konten</content>
+        <name>Name</name>
+        <autoload>Auto Load</autoload>
+        <minetype>MIME Type</minetype>
+        <content>Content</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Alamat email tidak valid.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Bidangnya '{0}' ialah diperlukan. Silahkan masukkan nilai anda.</empty-input>
+      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>Bidangnya '{0}' tidak valid.</Invalid-number>
+      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -293,17 +293,17 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>Nama</name>
-        <lifecycle>Lingkaran kehidupan</lifecycle>
-        <homePath>Jalur rumah</homePath>
-        <targetWorkspace>Sasaran ruang kerja</targetWorkspace>
-        <targetPath>Jalur Sasaran</targetPath>
+        <name>Name</name>
+        <lifecycle>Lifecycle</lifecycle>
+        <homePath>Home Path</homePath>
+        <targetWorkspace>Target Workspace</targetWorkspace>
+        <targetPath>Target Path</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Tidak dapat menyimpan dokumen ini. Mungkin ada masalah dengan sebuah pencegat pra-simpan.</DialogFormException>
+   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -311,36 +311,36 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>Tidak</no>
-<yes>iya nih</yes>
-<true>Benar</true>
-<false>Salah</false>
-<Electronic>Elektronik</Electronic>
-<Paper>Kertas</Paper>
-<NONE>Tak satupun</NONE>
-<CLASSIFIED>Rahasia</CLASSIFIED>
-<UNCLASSIFIED>Tidak diklasifikasikan</UNCLASSIFIED>
-<NOCONTRACT>Tidak ada kontrak</NOCONTRACT>
-<one-minute>Satu menit</one-minute>
-<hourly>Sejam</hourly>
-<daily>Harian</daily>
-<quarterly>Triwulanan</quarterly>
-<yearly>Tahunan</yearly>
-<ten-years>Sepuluh tahun</ten-years>
-<read>Aksi Pengguna</read>
-  <schedule>Penjadwal</schedule>
-  <node_added>Penambahan konten</node_added>
-  <node_removed>Penghapusan Konten</node_removed>
-  <property_added>Penambahan Properti</property_added>
-  <property_removed>Penghapusan Properti</property_removed>
-  <property_changed>Modifikasi Properti</property_changed>
+<no>No</no>
+<yes>Yes</yes>
+<true>True</true>
+<false>False</false>
+<Electronic>Electronic</Electronic>
+<Paper>Paper</Paper>
+<NONE>None</NONE>
+<CLASSIFIED>Classified</CLASSIFIED>
+<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+<NOCONTRACT>No Contract</NOCONTRACT>
+<one-minute>One Minute</one-minute>
+<hourly>Hourly</hourly>
+<daily>Daily</daily>
+<quarterly>Quarterly</quarterly>
+<yearly>Yearly</yearly>
+<ten-years>Ten Years</ten-years>
+<read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
-        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -348,9 +348,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
-        <affectedNodeTypeNames>Dipengaruhi jenis simpul</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -358,9 +358,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
-        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -368,9 +368,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Apakah Dalam</isDeep>
-        <nodetypes>Jenis simpul</nodetypes>
-        <affectedNodeTypeNames>Jenis simpul yang terkena</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -378,55 +378,55 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Keterangan</captions>
-<audioDescription>Deskripsi suara</audioDescription>
-<alternativeText>Teks alternatif</alternativeText>
+  <captions>Captions</captions>
+<audioDescription>Audio description</audioDescription>
+<alternativeText>Alternative text</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Keterangan harus menyediakan teks percakapan dan suara penting</CaptionsHelp>
-<AudioDescriptionHelp>Sebuah deskripsi audio ialah sebuah diriwayatkan lacak dari video</AudioDescriptionHelp>
-<AlternativeTextHelp>Menyediakan sebuah tempat yang mudah diakses, cara alternatif dari penyajian informasi</AlternativeTextHelp>
+<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
+<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
 
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>Dokumen baru</NewDocument>
+      <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
   
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>Dokumen baru</newDocument>
+      <newDocument>New Document</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>Dokumen baru</UINewDocumentForm>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Buat Dokumen</Save>
+      <Save>Create Document</Save>
     </action>
     <label>
-      <titleTextBox>Nama Dokumen</titleTextBox>
-      <typeSelectBox>Jenis dokumen:</typeSelectBox>
+      <titleTextBox>Document Name:</titleTextBox>
+      <typeSelectBox>Document Type:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Silakan masukkan nama dokumen.</name-invalid>
-      <constraint-violation>Anda tidak dapat menambahkan dokumen dengan jenis '{0}' di sini.</constraint-violation>
-      <repository-exception>Terjadi kesalahan tak terduga. Silakan hubungi administrator Anda untuk informasi lebih lanjut.</repository-exception>
-      <repository-exception-permission>Anda tidak memiliki izin untuk menambahkan folder baru di sini.</repository-exception-permission>
-      <numberformat-exception>Kamu tidak bisa menyimpan dokumen ini. Nama yang disediakan harus dalam format numerik.</numberformat-exception>
+      <name-invalid>Please enter the document name.</name-invalid>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Anda tidak dapat menyimpan folder. Item dengan nama yang sama sudah ada.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

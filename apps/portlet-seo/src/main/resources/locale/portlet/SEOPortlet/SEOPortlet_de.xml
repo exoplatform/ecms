@@ -2,45 +2,45 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Titel:</title>
-      <description>Beschreibung:</description>
-      <keywords>Schlüsselwörter:</keywords>
-      <language>Sprache:</language>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
       <robots>Robots:</robots>
-      <sitemap>Seitenübersicht:</sitemap>
-      <sitemapvisible>Sichtbar in der Seitenübersicht</sitemapvisible>
-    <isInherited>Geerbt von übergeordneter Seite</isInherited>
-      <priority>Priorität:</priority>
-      <frequency>Häufigkeit:</frequency>
-      <select-language>Sprache auswählen</select-language>
+      <sitemap>Sitemap:</sitemap>
+      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+    <isInherited>Inherited from parent page</isInherited>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
+      <select-language>Select a language</select-language>
       <option>
-        <Always>Immer</Always>
-        <Hourly>Stündlich</Hourly>
-        <Daily>Täglich</Daily>
-        <Weekly>Wöchentlich</Weekly>
-        <Monthly>Monatlich</Monthly>
-        <Yearly>Jährlich</Yearly>
-        <Never>Niemals</Never>
+        <Always>Always</Always>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
+        <Weekly>Weekly</Weekly>
+        <Monthly>Monthly</Monthly>
+        <Yearly>Yearly</Yearly>
+        <Never>Never</Never>
       </option> 
     </label>
     <tip>
-  <priority>Gültige Werte liegen zwischen 0.0 und 1.0</priority>
+  <priority>Valid values range from 0.0 to 1.0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>Unerwarteter Fehler beim Speichern der Seitenmetadaten.</repository-exception>
-      <confirm-delete>Möchten Sie diese SEO-Daten wirklich löschen?</confirm-delete>      
+      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Löschen</seo-delete>
+    <seo-delete>Delete</seo-delete>
     </title>
   <help> 
-  <priority>Gültige Werte liegen zwischen 0.0 und 1.0.</priority>
-  <description>Hilfesuchende: Lassen Sie die andere Benutzer wissen, dass die folgende Seite einen Link enthält, nach dem sie suchen.</description>
-  <keywords>Die wichtigsten Begriffe auf der Seite durch ein Komma getrennt.</keywords>  
+  <priority>Valid values range from 0.0 to 1.0.</priority>
+  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
+  <keywords>Most important terms in the page separated by a comma.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>Der Wert des Prioritätfeldes muss in nummerischem Format sein. Die gültigen Werte liegen zwischen 0.0 und 1.0.</Invalid-number>
+      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

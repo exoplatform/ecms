@@ -23,62 +23,62 @@
   <UITabForm>
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
-      <showConnectCloudDrive>Підключити документи з хмари</showConnectCloudDrive>
+      <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
     </label>
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Підключити документи з хмари</ConnectCloudDriveForm>
-      <UISharingManager>Відкриття спільного доступу до файлу у хмарі</UISharingManager>
+      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
+      <UISharingManager>Cloud file sharing</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Підключити документи з хмари</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
     <event>
-      <OpenCloudFile>Відкрити у</OpenCloudFile>
-      <SyncingFile>Синхронізація файлу...</SyncingFile>
-      <PushCloudFile>Відправити до</PushCloudFile>
-      <RefreshCloudDrive>Синхронізувати з</RefreshCloudDrive>
-      <RefreshView>Оновити вигляд</RefreshView>
+      <OpenCloudFile>Open on</OpenCloudFile>
+      <SyncingFile>Synchronizing file...</SyncingFile>
+      <PushCloudFile>Push to</PushCloudFile>
+      <RefreshCloudDrive>Sync with</RefreshCloudDrive>
+      <RefreshView>Refresh view</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Відкрити $fileUrl в $serviceName</OpenFileOn>
-      <OpenOn>Відкрити у</OpenOn>
-      <EditFile>Редагувати</EditFile>
-      <ViewFile>Перегляд</ViewFile>
+      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
+      <OpenOn>Open on</OpenOn>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
-      <sourceview>Переглянути вихідний код</sourceview>
-      <webview>Переглянути як веб-сторінку</webview>
+      <sourceview>View source code</sourceview>
+      <webview>View as web page</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>Не вдалося перемістити файл до іншого хмарного сховища</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>Не вдалося перемістити файл за межі хмарного диску</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>Не вдалося перемістити файл з хмари в інше робоче середовище</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>Не вдалося скопіювати або перемістити папку з хмарного диску</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>Не вдається записати в папку</DestinationNotWrittable>
-      <DestinationNotDefined>Папка призначення не визначена</DestinationNotDefined>
-      <SourceNotDefined>Вихідний файл не визначено</SourceNotDefined>
-      <ErrorMoveToDestination>Помилка при переміщенні спільного посилання до місця призначення</ErrorMoveToDestination>
-      <DestinationItemNameExists>Таке ім'я вже існує в точці призначення</DestinationItemNameExists>
-      <LinkCreated>Посилання {0} створено</LinkCreated>
-      <FileLinksCreated>На файл {0} зроблено посилання в {1}</FileLinksCreated>
-      <FileLinksSharedInSpace>Посилання на файл {0}, спільне у {1} ​області {2}</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>Посилання на файл {0} спільне в {1} групи {2}</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>Посилання на файл {0} спільне з користувачем {2} в його папці {1}</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>Посилання на файл не підтримується цим напрямком</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>Помилка читання дисків документа</ErrorReadingDrives>
-      <CannotFindUser>Не вдалося знайти користувача {0}</CannotFindUser>
-      <ErrorReadingFileLinks>Помилка читання посилань на файл</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>Помилка читання користувацького диска</ErrorReadingUserDrive>
+      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
+      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
+      <SourceNotDefined>Source file not defined</SourceNotDefined>
+      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
+      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
+      <LinkCreated>Link {0} created</LinkCreated>
+      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
+      <CannotFindUser>Cannot find user {0}</CannotFindUser>
+      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
@@ -90,25 +90,25 @@
     <label>
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Постачальник</provider>
-      <description>Опис</description>
-      <active>Активні</active>
+      <provider>Provider</provider>
+      <description>Description</description>
+      <active>Active</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Документи</title>
+      <title>Documents</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Додати в контакти</connect>
+        <connect>Connect</connect>
       </button>
       <button>
-        <disconnect>Відключити</disconnect>
+        <disconnect>Disconnect</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

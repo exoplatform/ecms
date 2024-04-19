@@ -7,15 +7,15 @@
   -->
   <UITreeList>
     <header>
-      <name>Nom</name>
-      <action>Ajouter</action>
+      <name>Name</name>
+      <action>Add</action>
     </header>
     <info>
-      <child-not-found>Pas de sous-noeud.</child-not-found>
+      <child-not-found>Child not found!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Sélectionner</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -26,8 +26,8 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Nom de catégorie</categoryName>
-      <categoryPath>Chemin de catégorie</categoryPath>
+      <categoryName>Category name</categoryName>
+      <categoryPath>Category path</categoryPath>
       <action>#{word.action}</action>
     </header>
     <action>
@@ -35,10 +35,10 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <cannot-save>Les catégories n'ont pas été enregistrées.</cannot-save>
-      <have-saved>Les catégories ont été enregistrées avec succès.</have-saved>
-      <non-categories>Veuillez sélectionner des catégories valides.</non-categories>
-      <confirm-delete>Etes-vous sûr de vouloir supprimer cette catégorie ?</confirm-delete>
+      <cannot-save>Categories were not saved.</cannot-save>
+      <have-saved>Categories were saved successfully</have-saved>
+      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
+      <confirm-delete>Do you want to delete this category?</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
   <!--
@@ -48,27 +48,27 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Utilisateur</UIPermissionUser>
-      <UIPermissionMembership>Sélectionner un rôle</UIPermissionMembership>
-      <TaxoSelectUserOrGroup>Sélectionner un rôle</TaxoSelectUserOrGroup>
+      <UIPermissionUser>Select User</UIPermissionUser>
+      <UIPermissionMembership>Select Role</UIPermissionMembership>
+      <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Utilisateur</selectUser>
-      <selectGroup>Groupe</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Sélectionner un rôle</selectUser>
-      <selectGroup>Groupe</selectGroup>
+      <selectUser>Select Role</selectUser>
+      <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Groupe</selectGroup>
-      <selectMembership>Sélectionner un rôle</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
   <!--
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Sélecteur de Page</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Ajouter le Dossier Racine</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Toute Personne</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

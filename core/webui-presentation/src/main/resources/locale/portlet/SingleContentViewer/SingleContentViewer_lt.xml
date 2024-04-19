@@ -2,123 +2,123 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Redaguoti turinio naršyklėje</QuickEdit>
-      <print>Spausdinti šį puslapį</print>
-      <FastPublish>Paskelbti</FastPublish>
+      <QuickEdit>Edit in Content Explorer</QuickEdit>
+      <print>Print This Page</print>
+      <FastPublish>Publish</FastPublish>
     </title>
     <label>
-      <draft>Projektas</draft>
-      <print>Spausdinti</print>
+      <draft>Draft</draft>
+      <print>Print</print>
     </label>
     <msg>
-      <no-content>Turinys nerastas.</no-content>
-      <internal-server-error>Įvyko duomenų užklausos klaida jungiantis prie serverio.</internal-server-error>
-      <empty-title-error>Prašom nurodyti naują pavadinimą.</empty-title-error>
+      <no-content>No contents found.</no-content>
+      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
+      <empty-title-error>Please specify the new title.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Pasirinkite turinį</UIContentSelectorOne>
+      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>Jūs neturite leidimo pasiekti redagavimo režimo.</AccessControlException>
+      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Įjungta</Enable>
-      <Disable>Išjungta</Disable>
+      <Enable>Enabled</Enable>
+      <Disable>Disabled</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Išsamaus turinio nuostatos</UISCVPreferences>
+      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Nutraukti</Abort>
+      <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Spausdinti</Print>
+      <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Išsamaus turinio nuostatos</title>
+    <title>Content Detail Preferences</title>
     <label>
-      <Back>Grįžti į ankstesnį puslapį</Back>
-      <Edit>Redaguoti</Edit>
-      <Preferences>Nuostatos</Preferences>
-      <Title>Išsamaus turinio nuostatos</Title>
-      <UISCVShowTitleConfigurationCheckBox>Rodyti pavadinima</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Rodyti datą</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Rodyti parinkties juostą</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Rodymo nustatymas</DisplaySettingBlock>
-      <ContentPathBlock>Turinio pasirinkimas</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Turinio kelias</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Turinio kelias</UISCVContentPathConfigurationInputBox>
-      <Advance>Plačiau</Advance>
-      <ContextCaption>Dinaminė navigacija</ContextCaption>
-      <UISCVContextualRadioBox>Kontekstinis turinys</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>pagal</UISCVParameterInputBox>
-      <PrintSettingBlock>Spausdinimo parametrai</PrintSettingBlock>
-      <UISCVPrintPageParameter>su</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Rodyti puslapyje</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Užrakinti</LockStatus>
-      <CacheManagement>Turinio matomumas</CacheManagement>
-      <UISCVCacheRadioBox>Dalintis turiniu</UISCVCacheRadioBox>
+      <Back>Back to previous page</Back>
+      <Edit>Edit</Edit>
+      <Preferences>Preferences</Preferences>
+      <Title>Content Detail Preferences</Title>
+      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <ContentPathBlock>Content Selection</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
+      <Advance>Advanced</Advance>
+      <ContextCaption>Dynamic Navigation</ContextCaption>
+      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>by</UISCVParameterInputBox>
+      <PrintSettingBlock>Print Settings</PrintSettingBlock>
+      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Lock</LockStatus>
+      <CacheManagement>Content Visibility</CacheManagement>
+      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Pasirinkite turinį, kurį norite rodyti. Numatytasis pasirinkimas bus pakeistas dinamiškai jei įjungsite Dinaminės Navigacijos opciją (žr. Plačiau apačioje).</ContentPathBlock>
-      <DisplaySettingBlock>Galite rodyti arba slėpti parinkties juostą naudojamą spausdinimo nuorodai. Pavadinimas ir data taip pat nėra privaloma.</DisplaySettingBlock>
-      <ContextualHelp>Aktyvina Dinaminę Navigaciją. Turinys gali būti dinamiškai pakeistas remiantis kitu URL parametru.</ContextualHelp>
-      <ParameterHelp>Šis parametras bus naudojamas gauti turinį jei Dinaminė Navigacija yra aktyvinta.</ParameterHelp>
+      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
+      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
+      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>Elemento kelias yra klaidingas.</not-valid-path>
+      <not-valid-path>The item path is invalid.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Turinio pasirinkimas</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Rodymo nustatymas</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Spausdinimo parametrai</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Plačiau</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Pasirinkite aplanko kelią</SelectFolderPath>
-      <AddPath>Pridėti kelią</AddPath>
+      <SelectFolderPath>Select Folder Path</SelectFolderPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Rodyti puslapyje</SelectTargetPage>
+      <SelectTargetPage>Show in Page</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Puslapio parinkimas</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>Suarchyvuotas</archived>
-    <obsolete>Pasenęs</obsolete>
-    <unpublished>Neskelbtas</unpublished>
-    <enrolled>Įtrauktas</enrolled>
-    <draft>Ruošinys</draft>
-    <pending>Laukiama</pending>
-    <approved>Patvirtintas</approved>
-    <inreview>Nagrinėjamasis</inreview>
-    <staged>Įvykdytas</staged>
-    <published>Paskelbtas</published>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
+    <draft>Draft</draft>
+    <pending>Pending</pending>
+    <approved>Approved</approved>
+    <inreview>Under Review</inreview>
+    <staged>Staged</staged>
+    <published>Published</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Ribojamas pagal autentifikaciją</Enable>
-      <Disable>Ribojamas pagal vartotojų roles</Disable>
+      <Enable>Restricted by Authentication</Enable>
+      <Disable>Restricted by User roles</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

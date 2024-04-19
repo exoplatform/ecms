@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>Končni čas</end-time>
-        <start-time>Začetni čas</start-time>
-        <lifecycle>Življenjski cikel</lifecycle>
-        <mimeType>Vrsta MIME</mimeType>
-        <repeat-count>Števec ponovitev</repeat-count>
-        <time-interval>Časovni Interval</time-interval>
-        <query-items>Poizvedbe elementov</query-items>
-        <schedule-type>Vrsta urnika</schedule-type>
-        <remove>Odstrani element</remove>
-        <add>Dodaj element</add>
-        <expand>Razširi</expand>
+        <end-time>End Time</end-time>
+        <start-time>Start Time</start-time>
+        <lifecycle>Lifecycle</lifecycle>
+        <mimeType>Mime Type</mimeType>
+        <repeat-count>Repeat Count</repeat-count>
+        <time-interval>Time Interval</time-interval>
+        <query-items>Query Items</query-items>
+        <schedule-type>Schedule Type</schedule-type>
+        <remove>Remove Item</remove>
+        <add>Add Item</add>
+        <expand>Expand This</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,18 +24,18 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Povezava</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Ime</name>
-    <categories>Kategorije</categories>
+      <name>Name</name>
+    <categories>Categories</categories>
     </label>
   </UIDocumentForm>
  
   <UICommentForm>
     <label>
-      <placeholder>Uporabite @, če želite omeniti nekoga v vašem komentarju</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Ime</name>
-        <content>Vsebina</content>
+        <name>Name</name>
+        <content>Content</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Kategorije</categories>
+        <categories>Categories</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Širina</width>
-        <height>Višina</height>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
-        <re-upload>Datoteka že obstaja. Lahko jo izbrišeš in preneseš drugo datoteko.</re-upload>
+        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
       </label>
     </dialog>
   </File>
@@ -71,22 +71,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Vrata</port>
+      <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Geslo</password>
-      <link>Povezava</link>
-      <to>Pošlji e-pošto</to>
+      <password>Password</password>
+      <link>Link</link>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Vrata</port>
+      <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Geslo</password>
-      <link>Povezava</link>
-      <to>Pošlji e-pošto</to>
+      <password>Password</password>
+      <link>Link</link>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -97,10 +97,10 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>ID</id>
+        <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metapodatki</metadata>
+        <metadata>Metadata</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>ID</id>
+        <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron izraz</cron-expression>
+        <cron-expression>Cron expression</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>ID</id>
+        <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -151,20 +151,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Avtor:</creator>
+        <creator>Creator:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Vir:</source>
-        <contributor>Sodelavec:</contributor>
-        <resource-type>Vrsta vira:</resource-type>
+        <source>Source:</source>
+        <contributor>Contributor:</contributor>
+        <resource-type>Resource Type:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Založnik:</publisher>
+        <publisher>Publisher:</publisher>
         <description>#{word.description}:</description>
-        <rights>Pravice:</rights>
-        <relation>Odnos:</relation>
+        <rights>Rights:</rights>
+        <relation>Relation:</relation>
         <format>#{word.format}:</format>
-        <coverage>Pokritost:</coverage>
-        <identifier>Identifikator:</identifier>
-        <language>Jezik:</language>
+        <coverage>Coverage:</coverage>
+        <identifier>Identifier:</identifier>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primarna vrsta</primary-type>
-        <mixin-types>Vrsta Mixin</mixin-types>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Ciljni delovni prostor</destination-workpsace>
-        <destination-path>Ciljna pot</destination-path>
-        <primary-type>Primarna vrsta</primary-type>
-        <mixin-types>Vrsta Mixin</mixin-types>
+        <destination-workpsace>Destination Workspace</destination-workpsace>
+        <destination-path>Destination Path</destination-path>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Začni z objavo</start-publication>
-        <end-publication>Končaj objavo</end-publication>
+        <start-publication>Start Publication</start-publication>
+        <end-publication>End Publication</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Odnos</relation>
+        <relation>Relation</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Naslov</title>
+        <title>Title</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,11 +244,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Zgodovina različic</version-history>
-        <base-version>Osnovna različica</base-version>
-        <is-checked-out>Je rezervirano</is-checked-out>
-        <predecessors>Predhodniki</predecessors>
-        <merge-failed>Spajanje ni uspelo</merge-failed>
+        <version-history>Version History</version-history>
+        <base-version>Base Version</base-version>
+        <is-checked-out>Is Checked out</is-checked-out>
+        <predecessors>Predecessors</predecessors>
+        <merge-failed>Merge Failed</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Ime</name>
-        <autoload>Samodejno nalaganje</autoload>
-        <minetype>Vrsta MIME</minetype>
-        <content>Vsebina</content>
+        <name>Name</name>
+        <autoload>Auto Load</autoload>
+        <minetype>MIME Type</minetype>
+        <content>Content</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>E-poštni naslov ni veljaven.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Polje '{0}' je obvezno. Vnesi vrednost.</empty-input>
+      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>Polje {0} ni veljavno.</Invalid-number>
+      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -292,18 +292,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>ID</id>
-        <name>Ime</name>
-        <lifecycle>Življenjski cikel</lifecycle>
-        <homePath>Pot domov</homePath>
-        <targetWorkspace>Ciljni delovni prostor</targetWorkspace>
-        <targetPath>Ciljna pot</targetPath>
+        <id>Id</id>
+        <name>Name</name>
+        <lifecycle>Lifecycle</lifecycle>
+        <homePath>Home Path</homePath>
+        <targetWorkspace>Target Workspace</targetWorkspace>
+        <targetPath>Target Path</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Tega dokumenta ni možno shraniti. Mogoče je težava z pred-shranjevalnim prestreznikom.</DialogFormException>
+   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -311,36 +311,36 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>Ne</no>
-<yes>Da</yes>
-<true>Pravilno</true>
-<false>Napačno</false>
-<Electronic>Elektronska</Electronic>
-<Paper>Papir</Paper>
-<NONE>Brez</NONE>
-<CLASSIFIED>Razvrščeni</CLASSIFIED>
-<UNCLASSIFIED>Nerazvrščeni</UNCLASSIFIED>
-<NOCONTRACT>Ni pogodbe</NOCONTRACT>
-<one-minute>Ena minuta</one-minute>
-<hourly>Vsako uro</hourly>
-<daily>Dnevno</daily>
-<quarterly>Četrtletno</quarterly>
-<yearly>Letno</yearly>
-<ten-years>Deset let</ten-years>
-<read>Dejanje uporabnika</read>
-  <schedule>Razporejevalnik opravil</schedule>
-  <node_added>Dodatek vsebine</node_added>
-  <node_removed>Odstranjevanje vsebine</node_removed>
-  <property_added>Dodajanje lastnosti</property_added>
-  <property_removed>Odstranjevanje lastnosti</property_removed>
-  <property_changed>Spreminjanje lastnosti</property_changed>
+<no>No</no>
+<yes>Yes</yes>
+<true>True</true>
+<false>False</false>
+<Electronic>Electronic</Electronic>
+<Paper>Paper</Paper>
+<NONE>None</NONE>
+<CLASSIFIED>Classified</CLASSIFIED>
+<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+<NOCONTRACT>No Contract</NOCONTRACT>
+<one-minute>One Minute</one-minute>
+<hourly>Hourly</hourly>
+<daily>Daily</daily>
+<quarterly>Quarterly</quarterly>
+<yearly>Yearly</yearly>
+<ten-years>Ten Years</ten-years>
+<read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -348,9 +348,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -358,9 +358,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -368,9 +368,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Podrobneje</isDeep>
-        <nodetypes>Vrste vozlišč</nodetypes>
-        <affectedNodeTypeNames>Vpliva na vrste vozlišč</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -378,15 +378,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Napisi</captions>
-<audioDescription>Avdio opis</audioDescription>
-<alternativeText>Nadomestno besedilo</alternativeText>
+  <captions>Captions</captions>
+<audioDescription>Audio description</audioDescription>
+<alternativeText>Alternative text</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Napisi bi naj zagotovili besedilo pogovornh oken in pomembnih zvokov</CaptionsHelp>
-<AudioDescriptionHelp>Zvočni opis je govorjena sled videa</AudioDescriptionHelp>
-<AlternativeTextHelp>Zagotoviti dostopen, alternativni način predstavitve informacij</AlternativeTextHelp>
+<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
+<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
 
@@ -421,10 +421,10 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>Trenutno vozlišče ne omogoča dodajanje vozlišča tipa '{0}'.</constraint-violation>
-      <repository-exception>Prišlo je do nepričakovane napake. Obrnite se na skrbnika.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>Tega dokumenta ni mogoče shraniti. Ime mora biti v številski obliki.</numberformat-exception>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

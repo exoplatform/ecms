@@ -35,7 +35,7 @@
       </error>
       <title>Document editors</title>
       <table>
-        <Provider>Tighatag</Provider>
+        <Provider>Provider</Provider>
         <Description>Description</Description>
         <Active>Active</Active>
         <Permissions>Permissions</Permissions>

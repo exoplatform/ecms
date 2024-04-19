@@ -2,29 +2,29 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>Rodyti informaciją</UIViewInfoManager>
+<UIViewInfoManager>View Information</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>Rodyti informaciją</ViewInfo>
+<ViewInfo>View Information</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Pavadinimas</name>
-      <title>Pavadinimas</title>
-      <type>Tipas</type>
-      <size>Dydis</size>
-      <owner>Savininkas</owner>
-      <lastModifier>Paskutinis keitė</lastModifier>
-      <created>Sukūrimo data</created>
-      <lastModified>Paskutinio pakeitimo data</lastModified>
-      <publicationState>Paskelbimo būsena</publicationState>
+      <name>Name</name>
+      <title>Title</title>
+      <type>Type</type>
+      <size>Size</size>
+      <owner>Owner</owner>
+      <lastModifier>Last Modifier</lastModifier>
+      <created>Created Date</created>
+      <lastModified>Last Modified Date</lastModified>
+      <publicationState>Publication State</publicationState>
 </label>
 <value>
-      <folder>Aplankas</folder>
+      <folder>Folder</folder>
 </value>
 <action>
 <Close>#{word.close}</Close>

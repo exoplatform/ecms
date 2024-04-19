@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>Heure de fin</end-time>
-        <start-time>Heure de début</start-time>
-        <lifecycle>Cycle de vie</lifecycle>
-        <mimeType>Type Mime</mimeType>
-        <repeat-count>Nombre d'essais</repeat-count>
-        <time-interval>Intervalle entre 2 essais</time-interval>
-        <query-items>Eléments de la requête</query-items>
-        <schedule-type>Type de planification</schedule-type>
-        <remove>Supprimer</remove>
-        <add>Ajouter</add>
-        <expand>Étendre</expand>
+        <end-time>End Time</end-time>
+        <start-time>Start Time</start-time>
+        <lifecycle>Lifecycle</lifecycle>
+        <mimeType>Mime Type</mimeType>
+        <repeat-count>Repeat Count</repeat-count>
+        <time-interval>Time Interval</time-interval>
+        <query-items>Query Items</query-items>
+        <schedule-type>Schedule Type</schedule-type>
+        <remove>Remove Item</remove>
+        <add>Add Item</add>
+        <expand>Expand This</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,18 +24,18 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Lien</link>
+      <link>Link</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Nom</name>
-    <categories>Catégories</categories>
+      <name>Name</name>
+    <categories>Categories</categories>
     </label>
   </UIDocumentForm>
  
   <UICommentForm>
     <label>
-      <placeholder>Utilisez @ pour mentionner quelqu'un dans votre commentaire</placeholder>
+      <placeholder>Use @ to mention someone in your comment</placeholder>
     </label>
   </UICommentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Nom</name>
-        <content>Contenu</content>
+        <name>Name</name>
+        <content>Content</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Catégories</categories>
+        <categories>Categories</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Largeur</width>
-        <height>Hauteur</height>
+        <width>Width</width>
+        <height>Height</height>
         <content>#{word.content}</content>
-        <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et charger un autre fichier à partir d'ici.</re-upload>
+        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
       </label>
     </dialog>
   </File>
@@ -73,9 +73,9 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Mot de Passe</password>
-      <link>Lien</link>
-      <to>Envoyer un Email à</to>
+      <password>Password</password>
+      <link>Link</link>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
@@ -84,9 +84,9 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Mot de Passe</password>
-      <link>Lien</link>
-      <to>Envoyer un Email à</to>
+      <password>Password</password>
+      <link>Link</link>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadonnée</metadata>
+        <metadata>Metadata</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Commande Cron</cron-expression>
+        <cron-expression>Cron expression</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -139,7 +139,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Commande Cron</cron-expression>
+        <cron-expression>Cron Expression</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -150,21 +150,21 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>Titre</title>
-        <creator>Créateur</creator>
-        <subject>#{word.subject}</subject>
-        <source>Source</source>
-        <contributor>Contributeur</contributor>
-        <resource-type>Type de Ressource</resource-type>
-        <date>#{word.date}</date>
-        <publisher>Editeur</publisher>
-        <description>#{word.description}</description>
-        <rights>Droits</rights>
-        <relation>Relation</relation>
-        <format>#{word.format}</format>
-        <coverage>Couverture</coverage>
-        <identifier>Identifiant</identifier>
-        <language>Langue</language>
+        <title>#{word.title}:</title>
+        <creator>Creator:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Source:</source>
+        <contributor>Contributor:</contributor>
+        <resource-type>Resource Type:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Publisher:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Rights:</rights>
+        <relation>Relation:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Coverage:</coverage>
+        <identifier>Identifier:</identifier>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Type Primaire</primary-type>
-        <mixin-types>Types Mixin</mixin-types>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Espace de stockage cible</destination-workpsace>
-        <destination-path>Emplacement</destination-path>
-        <primary-type>Type Primaire</primary-type>
-        <mixin-types>Types Mixin</mixin-types>
+        <destination-workpsace>Destination Workspace</destination-workpsace>
+        <destination-path>Destination Path</destination-path>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Début de publication</start-publication>
-        <end-publication>Fin de publication</end-publication>
+        <start-publication>Start Publication</start-publication>
+        <end-publication>End Publication</end-publication>
       </label>
     </dialog>
   </Published>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Titre</title>
+        <title>Title</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,11 +244,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>L'historique des versions</version-history>
-        <base-version>Version de base</base-version>
-        <is-checked-out>Est extrait</is-checked-out>
-        <predecessors>Prédécesseurs</predecessors>
-        <merge-failed>Echec de la fusion</merge-failed>
+        <version-history>Version History</version-history>
+        <base-version>Base Version</base-version>
+        <is-checked-out>Is Checked out</is-checked-out>
+        <predecessors>Predecessors</predecessors>
+        <merge-failed>Merge Failed</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Nom</name>
-        <autoload>Chargement automatique</autoload>
-        <minetype>Type MIME</minetype>
-        <content>Contenu</content>
+        <name>Name</name>
+        <autoload>Auto Load</autoload>
+        <minetype>MIME Type</minetype>
+        <content>Content</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>L'adresse email est invalide.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Le champ '{0}' est requis. Veuillez saisir une valeur.</empty-input>
+      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>Le champs '{0}' est invalid.</Invalid-number>
+      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -293,17 +293,17 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>Nom</name>
-        <lifecycle>Cycle de Vie</lifecycle>
-        <homePath>Chemin Racine</homePath>
-        <targetWorkspace>Espace de stockage cible</targetWorkspace>
-        <targetPath>Chemin Cible</targetPath>
+        <name>Name</name>
+        <lifecycle>Lifecycle</lifecycle>
+        <homePath>Home Path</homePath>
+        <targetWorkspace>Target Workspace</targetWorkspace>
+        <targetPath>Target Path</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor.</DialogFormException>
+   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -311,36 +311,36 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>Non</no>
-<yes>Oui</yes>
-<true>Vrai</true>
-<false>Faux</false>
-<Electronic>Électronique</Electronic>
-<Paper>Papier</Paper>
-<NONE>Aucun</NONE>
-<CLASSIFIED>Classé</CLASSIFIED>
-<UNCLASSIFIED>Non classé</UNCLASSIFIED>
-<NOCONTRACT>Aucun contrat</NOCONTRACT>
-<one-minute>Une fois par Minute</one-minute>
-<hourly>Une fois par heure</hourly>
-<daily>Quotidien</daily>
-<quarterly>Trimestriel</quarterly>
-<yearly>Annuel</yearly>
-<ten-years>Tous les 10 ans</ten-years>
-<read>Action Utilisateur</read>
-  <schedule>Planificateur</schedule>
-  <node_added>Ajout de Contenu</node_added>
-  <node_removed>Suppression de Contenu</node_removed>
-  <property_added>Ajout de Propriété</property_added>
-  <property_removed>Suppression de Propriété</property_removed>
-  <property_changed>Modification de Propriété</property_changed>
+<no>No</no>
+<yes>Yes</yes>
+<true>True</true>
+<false>False</false>
+<Electronic>Electronic</Electronic>
+<Paper>Paper</Paper>
+<NONE>None</NONE>
+<CLASSIFIED>Classified</CLASSIFIED>
+<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+<NOCONTRACT>No Contract</NOCONTRACT>
+<one-minute>One Minute</one-minute>
+<hourly>Hourly</hourly>
+<daily>Daily</daily>
+<quarterly>Quarterly</quarterly>
+<yearly>Yearly</yearly>
+<ten-years>Ten Years</ten-years>
+<read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Récursif</isDeep>
-        <nodetypes>Types de noeud</nodetypes>
-        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -348,9 +348,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Récursif</isDeep>
-        <nodetypes>Types de noeud</nodetypes>
-        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -358,9 +358,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Récursif</isDeep>
-        <nodetypes>Types de Noeud</nodetypes>
-        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -368,9 +368,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Récursif</isDeep>
-        <nodetypes>Types de Noeud</nodetypes>
-        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -378,55 +378,55 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Sous-titres</captions>
-<audioDescription>Description audio</audioDescription>
-<alternativeText>Texte alternatif</alternativeText>
+  <captions>Captions</captions>
+<audioDescription>Audio description</audioDescription>
+<alternativeText>Alternative text</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.</CaptionsHelp>
-<AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.</AudioDescriptionHelp>
-<AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
+<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
+<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
 
  <!-- New Document i18n -->
   <UIActionBar>
     <tooltip>
-      <NewDocument>Nouveau document</NewDocument>
+      <NewDocument>New Document</NewDocument>
     </tooltip>
   </UIActionBar>
   
   <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
   <UITabForm>
     <label>
-      <newDocument>Nouveau document</newDocument>
+      <newDocument>New Document</newDocument>
     </label>
   </UITabForm>
   <!-- For new document popup window -->
   <UIPopupWindow>
     <title>
-      <UINewDocumentForm>Nouveau document</UINewDocumentForm>
+      <UINewDocumentForm>New Document</UINewDocumentForm>
     </title>
   </UIPopupWindow>
    <!-- For new document form -->
   <UINewDocumentForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Créer un document</Save>
+      <Save>Create Document</Save>
     </action>
     <label>
-      <titleTextBox>Nom du document :</titleTextBox>
-      <typeSelectBox>Type de document :</typeSelectBox>
+      <titleTextBox>Document Name:</titleTextBox>
+      <typeSelectBox>Document Type:</typeSelectBox>
     </label>
     <msg>
-      <name-invalid>Veuillez saisir le nom du document.</name-invalid>
-      <constraint-violation>Vous ne pouvez pas ajouter de document du type '{0}' ici.</constraint-violation>
-      <repository-exception>Une erreur s'est produite. Veuillez contacter votre administrateur pour plus de détails.</repository-exception>
-      <repository-exception-permission>Vous n'avez pas la permission d'ajouter un nouveau document ici.</repository-exception-permission>
-      <numberformat-exception>Enregistrement du document impossible. Vous devez saisir un format numérique.</numberformat-exception>
+      <name-invalid>Please enter the document name.</name-invalid>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Impossible d'enregistrer car un autre document du même nom existe déjà dans ce dossier.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>
   </UINewDocumentForm>
   

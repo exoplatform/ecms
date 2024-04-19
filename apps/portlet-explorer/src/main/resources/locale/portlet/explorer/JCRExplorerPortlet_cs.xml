@@ -7,19 +7,19 @@
   -->
   <UICommentForm>
     <label>
-      <name>Jméno</name>
-      <email>E-mail</email>
-      <website>Webová stránka</website>
-      <comment>Komentář</comment>
+      <name>Name</name>
+      <email>Email</email>
+      <website>Website</website>
+      <comment>Comment</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Tento typ dokumentu nemůžete okomentovat.</not-support>
-      <not-checkedout>Je třeba provést check out na uzlu předtím, než k němu přidáte komentář.</not-checkedout>
-      <content-null>Nelze přidat prázdný komentář.</content-null>
+      <not-support>You can't comment on this type of document.</not-support>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <content-null>You cannot post an empty comment.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -29,25 +29,25 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Špatná</normal>
-      <good>Podprůměrná</good>
-      <verygood>Průměrná</verygood>
-      <excellent>Nadprůměrná</excellent>
-      <best>Dobrá</best>
-      <no-value>zatím žádná hodnota</no-value>
+      <normal>Poor</normal>
+      <good>Below average</good>
+      <verygood>Average</verygood>
+      <excellent>Above average</excellent>
+      <best>Good</best>
+      <no-value>no value yet</no-value>
     </title>
     <label>
-      <my-rating>Moje hodnocení:</my-rating>
+      <my-rating>My Rating:</my-rating>
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
-      <not-support>Nemůžete hlasovat pro tento typ dokumentu.</not-support>
-      <not-checkedout>Před hlasováním je třeba na uzlu provést check out.</not-checkedout>
-      <vote-restriction>Nelze hlasovat více než jednou.</vote-restriction>
+      <not-support>You cannot vote for this document type.</not-support>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You can't vote more than once.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>Relace byla úspěšně obnovena.</refresh-session-success>
-      <no-node-history>Nacházíte se v kořenovém uzlu.</no-node-history>
-      <save-session-success>Všechny změny byly uloženy.</save-session-success>
-      <target-path-not-found>Nemůžete přistoupit na tento uzel, protože již neexistuje nebo nemáte právo na přístup.</target-path-not-found>
+      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
+      <no-node-history>You are at the root folder.</no-node-history>
+      <save-session-success>All changes have been saved.</save-session-success>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Vztah</Relation>
-      <Explorer>Průzkumník souborů</Explorer>
-      <Close>Zavřít postranní panel</Close>
+      <Relation>Relation</Relation>
+      <Explorer>File Explorer</Explorer>
+      <Close>Close Sidebar</Close>
       <TagExplorer>Tag Cloud</TagExplorer>
-      <Clipboard>Schránka</Clipboard>
-      <SavedSearches>Uložená hledání</SavedSearches>
+      <Clipboard>Clipboard</Clipboard>
+      <SavedSearches>Saved Searches</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Zavřít postranní panel</Close>
+      <Close>Close Sidebar</Close>
     </title>
   </UISideBar>
   <!--
@@ -90,15 +90,15 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Pracovní plocha disku:</driveWorkspace>
-      <backToJCR>Zpět do hlavního disku JCR</backToJCR>
-      <setUpBrowser>Nastavit předvolby prohlížeče</setUpBrowser>
-      <refesh>Aktualizovat</refesh>
-      <currentDrive>Aktuální disk</currentDrive>
-      <selectView>Vybrat zobrazení</selectView>
-      <showSideBar>Zobrazit postranní panel</showSideBar>
-      <more>Více</more>
-      <backTo>Zpět</backTo>
+      <driveWorkspace>Drive Workspace:</driveWorkspace>
+      <backToJCR>Back to JCR Main Drives</backToJCR>
+      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
+      <refesh>Refresh</refesh>
+      <currentDrive>Current Drive</currentDrive>
+      <selectView>Select View</selectView>
+      <showSideBar>Show Sidebar</showSideBar>
+      <more>More</more>
+      <backTo>Back</backTo>
     </label>
   </UIViewBar>
 
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Osobní disky</PersonalDrives>
-      <GroupDrives>Skupinové disky</GroupDrives>
-      <GeneralDrives>Obecné disky</GeneralDrives>
+      <PersonalDrives>Personal drives</PersonalDrives>
+      <GroupDrives>Group drives</GroupDrives>
+      <GeneralDrives>General drives</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>V disku '{0}' není, vzhledem k Vašim přístupovým právům, k dispozici žádné zobrazení.</no-view-found>
-      <access-denied>Přístup byl odepřen. Nemáte oprávnění v prostoru disku {0}.</access-denied>
-      <workspace-not-exist>Disk {0} byl uložen v neznámém prostoru. Překonfigurujte prosím tento disk.</workspace-not-exist>
+      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -126,13 +126,13 @@
   #############################################################################
   -->
   <UITreeExplorer>
-    <title>Průzkumník</title>
+    <title>Explorer</title>
     <label>
-      <Root>Kořen</Root>
-      <webDavView>Otevřít v MS Office</webDavView>
+      <Root>Root</Root>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
-      <path-not-found>Tento prvek byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -142,11 +142,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Překlady</languages-list>
-      <relation-list>Související</relation-list>
-      <references-list>Odkazy</references-list>
-      <no-related-document>Žádné související dokument</no-related-document>
-      <related-document>Související dokumenty</related-document>
+      <languages-list>Translations</languages-list>
+      <relation-list>Relations</relation-list>
+      <references-list>References</references-list>
+      <no-related-document>No Related Document</no-related-document>
+      <related-document>Related Documents</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -155,17 +155,17 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Nastavit předvolby prohlížeče</title>
+    <title>Set up your browsing preferences</title>
     <label>
-      <enableStructure>Povolit strukturu DMS:</enableStructure>
-      <showSideBar>Zobrazit postranní panel:</showSideBar>
-      <showHiddenNode>Zobrazit skryté uzly:</showHiddenNode>
-      <showNonDocument>Zobrazit ne-dokumentové uzly:</showNonDocument>
-      <showRefDocuments>Zobrazit odkazované dokumenty:</showRefDocuments>
-      <enableDragAndDrop>Povolit Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Seřadit podle:</sortBy>
-      <order>Seřadit podle:</order>
-      <nodesPerPage>Položek na stránku:</nodesPerPage>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
+      <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
+      <sortBy>Sort order:</sortBy>
+      <order>Order by:</order>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Nastavit předvolby filtru</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Přejmenovat</title>
+    <title>Rename</title>
     <label>
-      <nameField>Jméno</nameField>
-      <titleField>Popisek</titleField>
+      <nameField>Name</nameField>
+      <titleField>Title</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -201,65 +201,65 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>Uzel {0} byl úspěšně přejmenován na {1}.</rename-successfull>
-      <rename-denied>Přístup byl odepřen. Tento uzel nelze přejmenovat.</rename-denied>
-      <fileName-invalid>Nový název obsahuje některé neplatné znaky.</fileName-invalid>
-      <newName-same-oldName>Nový název již existuje. Zkontrolujte znovu.</newName-same-oldName>
-      <version-exception>Tento uzel (nebo předchůdce tohoto uzlu) není zaškrtnut.</version-exception>
-      <lock-exception>Tento uzel je uzamčen. Před přejmenováním jej odemkněte.</lock-exception>
-      <constraintViolation-exception>Došlo k chybě při přejmenovávání uzlu {0}. Zkontrolujte znovu.</constraintViolation-exception>
-      <unknown-prefix>Předpona {0} nebyla dosud zaregistrována.</unknown-prefix>
-      <rename-error>Došlo k chybě při přejmenovávání tohoto uzlu. Zkontrolujte znovu.</rename-error>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
+      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Přejmenovat</UIRenameForm>
-      <UIActionContainer>Upravit akci</UIActionContainer>
-      <UIFolderForm>Nová složka</UIFolderForm>
-      <UIUploadManager>Nahrát soubor</UIUploadManager>
-      <UIReferencesList>Seznam odkazů</UIReferencesList>
-      <UIExportNode>Exportovat</UIExportNode>
-      <UINodeTypeInfo>Informace o typu uzlu</UINodeTypeInfo>
-      <UIVersionInfo>Informace o verzi</UIVersionInfo>
-      <UIActivateVersion>Aktivovat verzi</UIActivateVersion>
-      <UIAuditingInfo>Informací o auditování</UIAuditingInfo>
-      <UIActivateAuditing>Zapnutí auditování</UIActivateAuditing>
-      <UIPermissionManager>Správa oprávnění</UIPermissionManager>
-      <UIPropertiesManager>Správa vlastností</UIPropertiesManager>
-      <UIECMSearch>Pokročilé vyhledávání</UIECMSearch>
-      <UISavedQuery>Seznam uložených dotazů</UISavedQuery>
-      <UIWatchDocumentForm>Sledovat dokument</UIWatchDocumentForm>
-      <UIActionManager>Správa akcí</UIActionManager>
-      <UIDocumentForm>Upravit dokument</UIDocumentForm>
-      <UIDocumentFormController>Přidat nový dokument</UIDocumentFormController>
-      <EditFormController>Upravit dokument</EditFormController>
-      <UIRelationManager>Přidat vztah</UIRelationManager>
-      <UICategoryManager>Přidat kategorii</UICategoryManager>
-      <UIImportNode>Importovat</UIImportNode>
-      <UIViewMetadataManager>Zobrazit Metadata</UIViewMetadataManager>
-      <UIVoteForm>Hlasovat o dokumentu</UIVoteForm>
-      <UICommentForm>Komentář</UICommentForm>
-      <UIPreferencesForm>Předvolby</UIPreferencesForm>
-      <UIPublicationManager>Správa publikace</UIPublicationManager>
-      <UIConfirmMessage>Odstranit ?</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Odstranit soubor ?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Odstranit složku ?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Odstranit položky?</UIDeleteItemsConfirmMessage>
-      <UIRestoreConfirmMessage>Potvrdit obnovení</UIRestoreConfirmMessage>
-      <UIActivePublication>Zapsat do publikačního cyklu</UIActivePublication>
-      <UITaggingForm>Otagovat dokument</UITaggingForm>
-      <UIThumbnailForm>Přidat miniaturu</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Předvolby</UIAllItemsPreferenceForm>
-      <UISelectRestorePath>Vybrat místo obnovení</UISelectRestorePath>
-      <UISEOForm>Správa SEO</UISEOForm>
-      <UISEOToolbarForm>Správa SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Otevřít dokument</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Kopírovat dokument</UIDocumentAutoVersionForm>
+      <UIRenameForm>Rename</UIRenameForm>
+      <UIActionContainer>Edit Action</UIActionContainer>
+      <UIFolderForm>New Folder</UIFolderForm>
+      <UIUploadManager>Upload File</UIUploadManager>
+      <UIReferencesList>References List</UIReferencesList>
+      <UIExportNode>Export</UIExportNode>
+      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
+      <UIVersionInfo>Version Info</UIVersionInfo>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIAuditingInfo>Auditing Information</UIAuditingInfo>
+      <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
+      <UIPermissionManager>Permission Management</UIPermissionManager>
+      <UIPropertiesManager>Properties Management</UIPropertiesManager>
+      <UIECMSearch>Advanced Search</UIECMSearch>
+      <UISavedQuery>Saved Queries List</UISavedQuery>
+      <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
+      <UIActionManager>Manage Actions</UIActionManager>
+      <UIDocumentForm>Edit Document</UIDocumentForm>
+      <UIDocumentFormController>Add New Document</UIDocumentFormController>
+      <EditFormController>Edit Document</EditFormController>
+      <UIRelationManager>Add Relation</UIRelationManager>
+      <UICategoryManager>Add Category</UICategoryManager>
+      <UIImportNode>Import</UIImportNode>
+      <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
+      <UIVoteForm>Vote Document</UIVoteForm>
+      <UICommentForm>Comment</UICommentForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UIPublicationManager>Manage Publication</UIPublicationManager>
+      <UIConfirmMessage>Delete ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
+      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
+      <UITaggingForm>Tag Document</UITaggingForm>
+      <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
+      <UISEOForm>Manage SEO</UISEOForm>
+      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
-      <workspace>Pracovní plocha</workspace>
-      <path>Cesta</path>
+      <workspace>Workspace</workspace>
+      <path>Path</path>
     </header>
   </UIPopupWindow>
   <!--
@@ -268,11 +268,11 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>Upravit obsah souboru</title>
+    <title>Edit File Content</title>
     <label>
-      <name>Název</name>
-      <textToModify>Text, který chcete upravit</textToModify>
-      <fileToUpload>Nahrát nový obsah pro tento dokument (musí být stejný typ mime)</fileToUpload>
+      <name>Name</name>
+      <textToModify>Text to modify</textToModify>
+      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -282,129 +282,129 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Nová složka</AddFolder>
-      <AddDocument>Nový obsah</AddDocument>
-      <EditDocument>Upravit</EditDocument>
-      <Upload>Nahrát</Upload>
-      <Paste>Vložit</Paste>
-      <Search>Hledat</Search>
-      <WatchDocument>Sledovat/Přestat sledovat</WatchDocument>
+      <AddFolder>New Folder</AddFolder>
+      <AddDocument>New Content</AddDocument>
+      <EditDocument>Edit</EditDocument>
+      <Upload>Upload</Upload>
+      <Paste>Paste</Paste>
+      <Search>Search</Search>
+      <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
-      <Vote>Hlasovat</Vote>
-      <Comment>Komentář</Comment>
-      <ManageVersions>Verze</ManageVersions>
+      <Vote>Vote</Vote>
+      <Comment>Comment</Comment>
+      <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
-      <ManagePublications>Publikace</ManagePublications>
-      <ManageCategories>Kategorie</ManageCategories>
-      <ManageRelations>Související</ManageRelations>
-      <ManageActions>Akce</ManageActions>
-      <ExportNode>Exportovat</ExportNode>
-      <ImportNode>Importovat</ImportNode>
-      <OverloadThumbnail>Miniatura přetížení</OverloadThumbnail>
-      <ManageHidden>Zobrazit/Skrýt obsah</ManageHidden>
-      <ViewReferences>Odkazy</ViewReferences>
-      <ViewNodeType>Typy</ViewNodeType>
-      <ViewPermissions>Oprávnění</ViewPermissions>
-      <ViewProperties>Vlastnosti</ViewProperties>
+      <ManagePublications>Publications</ManagePublications>
+      <ManageCategories>Categories</ManageCategories>
+      <ManageRelations>Relations</ManageRelations>
+      <ManageActions>Actions</ManageActions>
+      <ExportNode>Export</ExportNode>
+      <ImportNode>Import</ImportNode>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <ManageHidden>Show/Hide Content</ManageHidden>
+      <ViewReferences>References</ViewReferences>
+      <ViewNodeType>Types</ViewNodeType>
+      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewProperties>Properties</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
-      <ViewRelations>Zobrazit/skrýt vztahy</ViewRelations>
-      <ShowJCRStructure>Zobrazit/skrýt strukturu obsahu</ShowJCRStructure>
-      <EditProperty>Upravit vlastnosti dokumentu</EditProperty>
+      <ViewRelations>Show/Hide Relations</ViewRelations>
+      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Tuto akci nelze provést v kořenovém uzlu.</cannot-action-in-rootnode>
-      <node-checkedin>Je třeba nejprve zaškrtnout.</node-checkedin>
-      <cannot-enable-version-rootnode>Nelze povolit správu verzí pro kořenový uzel.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Nelze povolit publikaci pro kořenový uzel.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <node-checkedin>You must check out first.</node-checkedin>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Publikaci podporuje pouze uzel dokumentu.</not-supported-nodetype>
-        <no-publication-lifecycle>Není nakonfigurován žádný cyklus publikace.</no-publication-lifecycle>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>Uzel už byl odhlášen.</unsubcriber-lifecycle>
-      <not-supported-nodetype>Cyklus neodběratele podporuje pouze uzel dokumentu.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Uzel byl úspěšně odhlášen.</unsubcriber-lifecycle-finish>
-      <access-false>Uzel není článek nebo checked in.</access-false>
-      <unsupported-action>Tato akce není podporována.</unsupported-action>
-      <not-relationable>Tento uzel ještě neměl žádné související odkazy na jiný uzel.</not-relationable>
-      <node-pasted>Uzel {0} byl vložen do {1}. Tato operace již byla uložena.</node-pasted>
-      <no-node-selected>Žádný uzel nebyl zkopírován.</no-node-selected>
-      <unable-edit>U uzlu {0} typu {1} nejsou podporovány úpravy.</unable-edit>
-      <not-support>Nelze upravit vybraný uzel.</not-support>
-      <template-null>Tento uzel nemá k dispozici dialog.</template-null>
-      <keyword-null>Neexistují žádná klíčová slova pro vyhledávání.</keyword-null>
-      <not-found>Nebyly nalezeny žádné výsledky.</not-found>
-      <keyword-not-allow>Toto klíčové slovo není povoleno.</keyword-not-allow>
-      <is-not-referenable>Uzel {0} nemůže být odkazován.</is-not-referenable>
-      <access-denied>Přístup byl odepřen. V tomto uzlu nemáte oprávnění k úpravám.</access-denied>
-      <access-add-denied>Přístup byl odepřen. V tomto uzlu nemáte oprávnění přidávat.</access-add-denied>
-      <item-existed>Tento uzel již existuje. Nemůže mít stejný název jako jeho sourozenec.</item-existed>
-      <removed-hidden-mixin>Odebrali jste skrytý mixin úspěšně.</removed-hidden-mixin>
-      <added-hidden-mixin>Přidali jste skrytý mixin úspěšně.</added-hidden-mixin>
-      <not-supported>Tato funkce je podporována pouze pro typ dokument.</not-supported>
-      <empty-file-type>Do tohoto uzlu nelze přidat dokument.</empty-file-type>
-      <unsupported-watch>Sledovat lze pouze uzel dokumentu.</unsupported-watch>
-      <watch-checkedin>Před sledováním je třeba na uzlu provést check out.</watch-checkedin>
-      <unsupported-tagging>Mohou být označeny pouze uzly dokumentu.</unsupported-tagging>
-      <tagnode-checkedin>Před tagováním je třeba na uzlu provést check out.</tagnode-checkedin>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
+      <unsupported-action>This action is not supported.</unsupported-action>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
+      <keyword-null>There are no keywords to search.</keyword-null>
+      <not-found>No results found.</not-found>
+      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
+      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
+      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
+      <not-supported>This function is supported for the document type only.</not-supported>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
-      <select-tab>Vybrat záložku</select-tab>
-      <SimpleSearch>Rychlé vyhledávání</SimpleSearch>
-      <AdvanceSearch>Pokročilé vyhledávání</AdvanceSearch>
-      <SavedQueries>Uložené dotazy</SavedQueries>
-      <ShowAllOwnedByUser>Zobrazit všechny položky</ShowAllOwnedByUser>
-      <ShowAllFavourite>Zobrazit všechny oblíbené položky</ShowAllFavourite>
-      <ShowAllHidden>Zobrazit všechny skryté položky</ShowAllHidden>
-      <ShowAllFromTrash>Zobrazit všechny položky z koše</ShowAllFromTrash>
+      <select-tab>Select Tab</select-tab>
+      <SimpleSearch>Quick Search</SimpleSearch>
+      <AdvanceSearch>Advanced Search</AdvanceSearch>
+      <SavedQueries>Saved Queries</SavedQueries>
+      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
+      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
+      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
+      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Přístup byl odepřen. V tomto uzlu nemáte oprávnění přidávat.</has-not-permission>
-      <has-not-edit-permission>Přístup byl odepřen. Nemáte oprávnění pro úpravu. Obraťte se na správce.</has-not-edit-permission>
-      <cannot-login-node>Nelze získat přístup a vložit zde uzel.</cannot-login-node>
-      <cannot-paste-nodetype>Zde nelze vložit uzel.</cannot-paste-nodetype>
-      <has-not-permission-unlok>Nemáte oprávnění k odemknutí tohoto uzlu.</has-not-permission-unlok>
-      <bound-exception>Nemáte oprávnění k přejmenování tohoto uzlu. Obraťte se na správce.</bound-exception>
-      <bound-move-exception>Uzel nelze přesunout do sebe nebo do svého podřízeného uzlu.</bound-move-exception>
-      <does-not-support-auditing>V tomto uzlu nelze aktivovat auditování.</does-not-support-auditing>
-      <can-not-rename-node>Nemáte oprávnění k přejmenování tohoto uzlu. Obraťte se na správce, aby jste dostali příslušné právo.</can-not-rename-node>
-      <can-not-cut-node>Nemáte oprávnění k vyjmutí tohoto uzlu. Obraťte se na správce.</can-not-cut-node>
-      <can-not-remove-node>Nemáte oprávnění k odstranění tohoto uzlu. Obraťte se na správce.</can-not-remove-node>
-      <can-not-lock-node>Nemáte oprávnění k uzamčení uzlu {0}. Obraťte se na správce.</can-not-lock-node>
-      <can-not-unlock-node>Nemáte oprávnění k odemknutí tohoto uzlu. Obraťte se na správce.</can-not-unlock-node>
-      <no-node>Před vložením vyberte prosím alespoň jeden uzel.</no-node>
-      <can-not-paste-node>Nemáte oprávnění k přesunutí do tohoto uzlu. Obraťte se na správce.</can-not-paste-node>
-      <can-not-move-node>Nemáte oprávnění k přesunutí tohoto uzlu. Obraťte se na správce.</can-not-move-node>
-      <does-not-support-versioning>Nemáte oprávnění k přesunutí do tohoto uzlu. Obraťte se na správce.</does-not-support-versioning>
-      <path-not-found>Tento prvek byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</path-not-found>
-      <paste-lock-exception>Do tohoto uzlu nelze vložit '{0}', protože zdrojový nebo cílový uzel je uzamčen nebo souvisí se zamčeným uzlem.</paste-lock-exception>
-      <can-not-checkin-node>Na tomto uzlu nelze provést check in. Zkontrolujte, zda máte správná oprávnění.</can-not-checkin-node>
-      <can-not-checkout-node>Na tomto uzlu nelze provést check out. Zkontrolujte, zda máte správná oprávnění.</can-not-checkout-node>
-      <move-constraint-exception>Došlo k chybě během přesunu uzlu.</move-constraint-exception>
-      <not-lock-owner>Tento uzel nelze odemknout, protože nejste majitelem zámku.</not-lock-owner>
-      <is-checked-in>Prosím, proveďte na tomto uzlu check out před tím, než ho přejmenujete.</is-checked-in>
-      <is-checked-in-lock>Prosím, proveďte na tomto uzlu check out před tím, než ho uzamknete.</is-checked-in-lock>
-      <cant-lock>Tento uzel nelze uzamknout.</cant-lock>
-      <node-locked>Položka s cestou {0} nebo vyšší úroveň je uzamčena.</node-locked>
-      <can-not-delete>Prosím, zavřete tento uzel před odstraněním.</can-not-delete>
-      <can-not-delete-version>Tento uzel nelze odstranit. Je pod správou verzí.</can-not-delete-version>
-      <not-support>Nelze odstranit vybraný uzel. Zvolte prosím jiný uzel.</not-support>
-      <current-node-not-allow-paste>Typ zkopírovaného uzlu nelze vložit do aktuálního uzlu.</current-node-not-allow-paste>
-      <copied-node-in-versioning>Nelze vložit zkopírovaný uzel. Je pod správou verzí.</copied-node-in-versioning>
-      <parent-node-locked>Nemáte oprávnění k odemčení uzlu {0}.</parent-node-locked>
-      <this-node-locked-by-parent>Tento uzel nelze odemknout. Je uzamčen nadřazeným uzlem.</this-node-locked-by-parent>
-      <paste-node-same-name>Nelze vložit uzel se stejným názvem jako uzel v cílové složce.</paste-node-same-name>
-      <has-not-add-permission>Nemáte oprávnění přidat nový uzel.</has-not-add-permission>
-      <node-cutting>Uzel se vyjímá. Nelze jej zde vložit.</node-cutting>
-      <access-denied>Přístup byl odepřen. V tomto uzlu nemáte oprávnění.</access-denied>
-      <remove-verion-exception>Tento uzel nelze odebrat, protože na něm (nebo jeho nadřazeném uzlu) probíhá check in.</remove-verion-exception>
-      <remove-referentialIntegrityException>Tento uzel nelze odstranit, protože je v současné době cílem odkazované vlastnosti.</remove-referentialIntegrityException>
-      <constraintviolation-exception>Povinná položka Jcr:uuid nebyla nalezena. Uzel byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</constraintviolation-exception>
-      <path-not-found-exception>Tento uzel byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</path-not-found-exception>
-      <not-exist-categories>Kategorie neexistuje.</not-exist-categories>
-      <lock-node-read-only>Tento soubor je uzamčen uživatelem {0}. Otevřít pouze pro čtení?</lock-node-read-only>
+      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
+      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
+      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
+      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
+      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
+      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
+      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
+      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
+      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
+      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
+      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
+      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
+      <no-node>Please select at least one item before pasting.</no-node>
+      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
+      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
+      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
+      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
+      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
+      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
+      <is-checked-in>Please check out this document before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
+      <cant-lock>You can't lock this document.</cant-lock>
+      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
+      <can-not-delete>Please close this document before deleting.</can-not-delete>
+      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
+      <not-support>You can't delete the selected item. Please select another one.</not-support>
+      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
+      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
+      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
+      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
+      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
+      <access-denied>Access denied. You may not have the permission.</access-denied>
+      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
+      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <not-exist-categories>The category does not exist.</not-exist-categories>
+      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -415,29 +415,29 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Vytvořit složku</Save>
+      <Save>Create Folder</Save>
     </action>
     <label>
-      <titleTextBox>Název složky:</titleTextBox>
-      <customTypeCheckBox>Použít vlastní typ složky</customTypeCheckBox>
+      <titleTextBox>Folder Name:</titleTextBox>
+      <customTypeCheckBox>Use a custom type of folder</customTypeCheckBox>
     </label>
-    <title>Přidat/upravit složku</title>
+    <title>Add/Edit Folder</title>
     <msg>
-      <addFolder-successful>Složka {0}' byla úspěšně přidána.</addFolder-successful>
-      <name-invalid>Zadejte název složky.</name-invalid>
-      <title-invalid>Zadejte titulek složky.</title-invalid>
-      <name-not-allowed>Tento název není povolen.</name-not-allowed>
-      <fileName-error>Název souboru je neplatný.</fileName-error>
-      <constraint-violation>Aktuální uzel nepovoluje přidat typ uzlu {0}.</constraint-violation>
-      <repository-exception>Došlo k neočekávané chybě. Pro další podrobnosti kontaktujte správce.</repository-exception>
-      <repository-exception-permission>Do tohoto uzlu nemáte oprávnění přidat novou složku.</repository-exception-permission>
-      <numberformat-exception>Tuto složku nelze uložit. Zadaný název musí být v číselném formátu.</numberformat-exception>
+      <addFolder-successful>The folder '{0}' was added successfully.</addFolder-successful>
+      <name-invalid>Please enter the folder name.</name-invalid>
+      <title-invalid>Please enter the folder title.</title-invalid>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Tuto složku nelze uložit. Tento uzel nepovoluje dva uzly se stejným názvem.</not-allow-sameNameSibling>
-      <ntFolder-not-avaiable>Je třeba vybrat vlastní typ složky</ntFolder-not-avaiable>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
     </msg>
     <help>
-      <customTypeCheckBoxHelp>Zkontrolujte, zda máte v úmyslu v této složce uložit obsah webu nebo vlastní typy dokumentů</customTypeCheckBoxHelp>
+      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
     </help>
   </UIFolderForm>
   <!--
@@ -447,118 +447,118 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Ikona</Icon>
+      <Icon>Icon</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Jste si jisti, že chcete odstranit položku '{0}'?</confirm-delete>
-      <confirm-delete-file>Jste si jisti, že chcete odstranit soubor '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Jste si jisti, že chcete smazat složku {0} a všechny její podsložky?</confirm-delete-folder>
+      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
+      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Jste si jisti, že chcete natrvalo odstranit položku '{0}'?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Jste si jisti, že chcete natrvalo odstranit soubor '{0}'?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Jste si jisti, že chcete trvale odstranit složku {0} a všechny její podsložky?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>Are you sure you want to permanently remove the item '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Are you sure you want to permanently remove the file '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Are you sure you want to permanently remove the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Jste si jisti, že chcete odstranit položku {0} a jeho odkazy?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Jste si jisti, že chcete odstranit soubor '{0}' a jeho odkazy?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Jste si jisti, že chcete odstranit složku {0} a její odkazy?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Jste si jisti, že chcete odstranit {0} vybraných položek?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Jste si jisti, že chcete odstranit {0} vybraných souborů?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Jste si jisti, že chcete odstranit {0} vybraných složek a všechny jejich podsložky?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Jste si jisti, že chcete odstranit {0} vybraných položek a souborů?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Jste si jisti, že chcete odstranit {0} vybraných položek, složek a všech podsložek?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Jste si jisti, že chcete odstranit {0} vybraných souborů, složek a všech jejich podsložek?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Jste si jisti, že chcete odstranit {0} vybraných položek, souborů, složek a všech podsložek?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Jste si jisti, že chcete natrvalo odstranit {0} vybraných položek?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Jste si jisti, že chcete natrvalo odstranit {0} vybraných souborů?</confirm-delete-multi-nodes-file-permanently>
-      <confirm-delete-multi-nodes-folder-permanently>Jste si jisti, že chcete natrvalo odstranit {0} vybraných složek a všech jejich podsložek?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Jste si jisti, že chcete natrvalo odstranit {0} vybraných položek a souborů?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>Jste si jisti, že chcete natrvalo odstranit {0} vybraných položek, složek a všech podsložek?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Jste si jisti, že chcete natrvalo odstranit {0} vybraných souborů, složek a všech podsložek?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Jste si jisti, že chcete natrvalo odstranit {0} vybraných položek, souborů, složek a všech podsložek?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Jste si jisti, že chcete odstranit {0} vybraných položek a jejich odkazy?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Jste si jisti, že chcete odstranit {0} vybraných souborů a jejich odkazy?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Jste si jisti, že chcete odstranit {0} vybraných složek, všechny podsložky a jejich odkazy?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Jste si jisti, že chcete odstranit {0} vybraných položek, souborů a jejich odkazy?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Jste si jisti, že chcete odstranit {0} vybraných položek, jejich odkazy, složky a všechny podsložky?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
-      <confirm-delete-multi-nodes-file-and-folder-have-relations>Jste si jisti, že chcete odstranit {0} vybraných souborů, jejich odkazy, složky a všechny podsložky?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Jste si jisti, že chcete odstranit {0} vybraných položek, souborů, jejich odkazy, složky a všechny podsložky?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' byl úspěšně odstraněn.</feedback-delete>
-      <feedback-delete-multi>{0} položek bylo úspěšně odstraněno.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' byl trvale odstraněn.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} položek bylo odstraněno trvale.</feedback-delete-permanently-multi>
-      <undo-delete>Vrátit zpět</undo-delete>
-      <feedback-restore>'{0}' byl úspěšně obnoven.</feedback-restore>
-      <feedback-restore-multi>{0} položek bylo úspěšně obnoveno.</feedback-restore-multi>
+      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
+      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
+      <undo-delete>Undo</undo-delete>
+      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
+      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
       
-      <confirm-restore>Uzel se stejným názvem již existuje v bývalém umístění uzlu '{0}'. Jste si jisti, že chcete obnovit tento uzel?</confirm-restore>
-      <confirm-move>Jste si jisti, že chcete přesunout?</confirm-move>
-      <node-cut>Uzel {0} byl vyjmut.</node-cut>
-      <execute-successfully>Byla provedena vlastní akce {0}.</execute-successfully>
-      <save-node-success>Uzel {0} byl uložen.</save-node-success>
-      <move-problem>Uzel '{0}' nelze přesunout do '{1}', protože došlo k potížím s oprávněním nebo podmínkami omezení.</move-problem>
+      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
+      <confirm-move>Are you sure you want to move?</confirm-move>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Tento uzel nemá žádné podřízené uzly.</no-children>
-      <no-children-but-has-hidden>Tento uzel nemá žádné podřízené uzly, ale obsahuje některé skryté soubory.</no-children-but-has-hidden>
+      <no-children>This item doesn't have children.</no-children>
+      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Uzel '{0}' byl nově vytvořen. Před provedením této akce uložte relaci.</unable-save-node>
-      <save-node-success>Uzel {0} byl uložen.</save-node-success>
-      <node-copied>Uzel {0} byl zkopírován.</node-copied>
-      <node-cut>Uzel {0} byl vyjmut.</node-cut>
-      <remove-root>Nelze odstranit kořenový uzel.</remove-root>
-      <node-remove-success>Uzel {0}' byl odstraněn.</node-remove-success>
+      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
+      <save-node-success>'{0}' has been saved.</save-node-success>
+      <node-copied>'{0}' has been copied.</node-copied>
+      <node-cut>'{0}' has been cut.</node-cut>
+      <remove-root>You can't remove the root folder.</remove-root>
+      <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Přejmenovat</Rename>
-      <Cut>Vyjmout</Cut>
-      <Copy>Kopírovat</Copy>
+      <Rename>Rename</Rename>
+      <Cut>Cut</Cut>
+      <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Odstranit</RemoveNode>
-      <Checkin>CheckIn</Checkin>
+      <RemoveNode>Delete</RemoveNode>
+      <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
-      <Lock>Zamknout</Lock>
-      <Unlock>Odemknout</Unlock>
-      <EditDocument>Upravit</EditDocument>
-      <Paste>Vložit</Paste>
-      <LockedBy>Uzamčeno</LockedBy>
+      <Lock>Lock</Lock>
+      <Unlock>Unlock</Unlock>
+      <EditDocument>Edit</EditDocument>
+      <Paste>Paste</Paste>
+      <LockedBy>Locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Přístup byl odepřen. Nelze získat přístup k uzlu {0}.</access-denied>
-      <null-exception>Položka nebyla nalezena. Byla buď odstraněna, změněna nebo nemáte oprávnění k přístupu k tomuto uzlu.</null-exception>
-      <confirm-deleteattachment>Jste si jisti, že chcete odstranit tuto přílohu?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Jste si jisti, že chcete odstranit tento komentář?</confirm-deleteattcomment>
-      <access-denied-exception>Přístup odepřen. Pravděpodobně nemáte oprávnění pro čtení, nebo byl uzel odstraněn či upraven.</access-denied-exception>
-      <path-not-found>Tento prvek byl odstraněn nebo změněn. Prosím klikněte na tlačítko Obnovit.</path-not-found>
+      <access-denied>Access denied. You can't access '{0}'.</access-denied>
+      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
+      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
+      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Odstranit tuto přílohu</remove-attachment>
-      <remove-comment>Odstranit komentář</remove-comment>
+      <remove-attachment>Remove this attachment file</remove-attachment>
+      <remove-comment>Remove this comment</remove-comment>
     </tooltip>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
-        <name>Jméno</name>
-        <versionable>Možné verzování</versionable>
-        <exo_owner>Vlastník</exo_owner>
-        <auditing>Auditování</auditing>
-        <exo_dateCreated>Datum vytvoření</exo_dateCreated>
-        <exo_dateModified>Datum úpravy</exo_dateModified>
+        <name>Name</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Owner</exo_owner>
+        <auditing>Auditing</auditing>
+        <exo_dateCreated>Date Created</exo_dateCreated>
+        <exo_dateModified>Date Modifed</exo_dateModified>
       </label>
     </view>
   </ListView>
@@ -569,39 +569,39 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Zamknout</Lock>
-      <Unlock>Odemknout</Unlock>
-      <EditDocument>Upravit</EditDocument>
-      <Copy>Kopírovat</Copy>
-      <Rename>Přejmenovat</Rename>
-      <Delete>Odstranit</Delete>
+      <Lock>Lock</Lock>
+      <Unlock>UnLock</Unlock>
+      <EditDocument>Edit</EditDocument>
+      <Copy>Copy</Copy>
+      <Rename>Rename</Rename>
+      <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
-      <Cut>Vyjmout</Cut>
-      <Paste>Vložit</Paste>
+      <Cut>Cut</Cut>
+      <Paste>Paste</Paste>
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
-      <WebDAV>Zobrazit protokol WebDAV</WebDAV>
-      <autoversion>Automatické verzování</autoversion>
-      <Custom>Vlastní</Custom>
-      <AddFolder>Nová složka</AddFolder>
-      <AddDocument>Nový obsah</AddDocument>
-      <Upload>Nahrát soubory</Upload>
-      <MoveNode>Přesunout</MoveNode>
-      <UnLock>Odemknout</UnLock>
-      <ViewProperties>Zobrazit vlastnosti</ViewProperties>
-      <GetURL>Kopírovat URL do schránky</GetURL>
-      <AddThumbnail>Přidat či odebrat miniaturu</AddThumbnail>
-      <AddToFavourite>Přidat k oblíbeným</AddToFavourite>
-      <RemoveFromFavourite>Odebrat z oblíbených</RemoveFromFavourite>
-      <MoveToTrash>Přesunout do koše</MoveToTrash>
-      <RestoreFromTrash>Obnovit z koše</RestoreFromTrash>
-      <EmptyTrash>Vysypat koš</EmptyTrash>
-      <WebDavView>Otevřít v MS Office</WebDavView>
-      <Download>Stáhnout</Download>
-      <OpenDocument>Vzdálená úprava</OpenDocument>
-      <EditProperty>Upravit vlastnosti dokumentu</EditProperty>
-      <UploadNewVersion>Nahrát novou verzi</UploadNewVersion>
-      <CreateNewVersion>Uložit jako novou verzi</CreateNewVersion>
+      <WebDAV>View WebDAV</WebDAV>
+      <autoversion>Auto Versioning</autoversion>
+      <Custom>Custom</Custom>
+      <AddFolder>New Folder</AddFolder>
+      <AddDocument>New Content</AddDocument>
+      <Upload>Upload Files</Upload>
+      <MoveNode>Move</MoveNode>
+      <UnLock>Unlock</UnLock>
+      <ViewProperties>View Properties</ViewProperties>
+      <GetURL>Copy URL To Clipboard</GetURL>
+      <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
+      <AddToFavourite>Add To Favorite</AddToFavourite>
+      <RemoveFromFavourite>Remove From Favorite</RemoveFromFavourite>
+      <MoveToTrash>Move to Trash</MoveToTrash>
+      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
+      <EmptyTrash>Empty Trash</EmptyTrash>
+      <WebDavView>Open in MS Office</WebDavView>
+      <Download>Download</Download>
+      <OpenDocument>Remote Edit</OpenDocument>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
  
@@ -612,11 +612,11 @@
   -->
   <UIReferencesList>
     <msg>
-      <no-references>Odkazy nebyly nalezeny</no-references>
+      <no-references>References not found</no-references>
     </msg>
     <header>
-      <workspace>Pracovní plocha</workspace>
-      <path>Cesta</path>
+      <workspace>Workspace</workspace>
+      <path>Path</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -630,58 +630,58 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
-      <UIPublicationPanel>Revize</UIPublicationPanel>
-      <UIPublicationSchedule>Naplánováno</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Stránky</UIPublicationPagesContainer>
-      <UIPublicationHistory>Historie</UIPublicationHistory>
-      <UIVersionViewer>Prohlížeč verzí</UIVersionViewer>
+      <UIPublicationPanel>Revision</UIPublicationPanel>
+      <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>History</UIPublicationHistory>
+      <UIVersionViewer>Version Viewer</UIVersionViewer>
 
-      <UIPropertyTab>Vlastnosti</UIPropertyTab>
+      <UIPropertyTab>Properties</UIPropertyTab>
       <UIMetadataTab>Metadata</UIMetadataTab>
-      <UIPropertyForm>Přidat novou vlastnost</UIPropertyForm>
-      <UIUploadContent>Informace o nahraném souboru</UIUploadContent>
-      <UIJCRAdvancedSearch>Nový dotaz</UIJCRAdvancedSearch>
-      <UISavedQuery>Uložené dotazy</UISavedQuery>
-      <AdvancedSearchResult>Výsledky hledání</AdvancedSearchResult>
-      <UISimpleSearch>Jednoduché hledání</UISimpleSearch>
-      <UISearchContainer>Pokročilé vyhledávání</UISearchContainer>
-      <UICategoryManagerSearch>Přidat kategorii do hledání</UICategoryManagerSearch>
-      <UIConstraintsForm>Formulář omezení</UIConstraintsForm>
-      <UIViewSearchResult>Zobrazit obsah</UIViewSearchResult>
-      <UIContentNameSearch>Hledat podle jména</UIContentNameSearch>
-      <UINodeInfo>Informace o verzi</UINodeInfo>
-      <UINodeProperty>Vlastnost uzlu</UINodeProperty>
-      <UIActionListContainer>Dostupné akce</UIActionListContainer>
-      <UIActionContainer>Přidat akci</UIActionContainer>
-      <UIActionViewContainer>Informace o akci</UIActionViewContainer>
-      <UIMultiLanguageForm>Zobrazit jazyk</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Přidat jazyk</UIAddLanguageContainer>
-      <UINonPublishedForm>Stav</UINonPublishedForm>
-      <UIPublishedForm>Stav</UIPublishedForm>
-      <UIPublicationLogList>Historie</UIPublicationLogList>
-      <UIDocumentWithTree>Zobrazení souboru</UIDocumentWithTree>
-      <UIDocumentInfo>Zobrazení dokumentu</UIDocumentInfo>
-      <UICategoriesSelectPanel>Vybrat kategorie</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Odkazované kategorie</UISelectedCategoriesGrid>
+      <UIPropertyForm>Add New Property</UIPropertyForm>
+      <UIUploadContent>Information of uploaded file</UIUploadContent>
+      <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
+      <UISavedQuery>Saved Query</UISavedQuery>
+      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
+      <UISimpleSearch>Simple Search</UISimpleSearch>
+      <UISearchContainer>Advanced Search</UISearchContainer>
+      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
+      <UIConstraintsForm>Constraints Form</UIConstraintsForm>
+      <UIViewSearchResult>View Content</UIViewSearchResult>
+      <UIContentNameSearch>Search by Name</UIContentNameSearch>
+      <UINodeInfo>Version Info</UINodeInfo>
+      <UINodeProperty>Node Property</UINodeProperty>
+      <UIActionListContainer>Available Actions</UIActionListContainer>
+      <UIActionContainer>Add Action</UIActionContainer>
+      <UIActionViewContainer>Action Info</UIActionViewContainer>
+      <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
+      <UINonPublishedForm>State</UINonPublishedForm>
+      <UIPublishedForm>State</UIPublishedForm>
+      <UIPublicationLogList>History</UIPublicationLogList>
+      <UIDocumentWithTree>File View</UIDocumentWithTree>
+      <UIDocumentInfo>Document View</UIDocumentInfo>
+      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Metadata webu</metadatasitemetadata>
+      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
   <UIPropertyTab>
     <title>
-      <edit>Upravit tuto vlastnost</edit>
-      <delete>Odstranit tuto vlastnost</delete>
+      <edit>Edit this property</edit>
+      <delete>Remove this property</delete>
     </title>
     <confirm>
-      <remove-property>Jste si jisti, že chcete odstranit tuto vlastnost?</remove-property>
+      <remove-property>Are you sure you want to remove this property?</remove-property>
     </confirm>
     <header>
-      <name>Jméno</name>
+      <name>Name</name>
       <multiValue>Multi Value</multiValue>
-      <value>Hodnota</value>
-      <action>Akce</action>
+      <value>Value</value>
+      <action>Action</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -705,10 +705,10 @@
   <UIPropertyForm>
     <title>Add/Edit Property</title>
     <label>
-      <name>Název:</name>
-      <type>Typ:</type>
+      <name>Name:</name>
+      <type>Type:</type>
       <value>Value:</value>
-      <upload>Nahrát:</upload>
+      <upload>Upload:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -727,14 +727,14 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Vynulovat</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
       <unable-create>Cannot add properties.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
+      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Upravit</Edit>
+        <Edit>Edit</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -760,8 +760,8 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Odstranit</remove>
-      <action>Akce</action>
+      <remove>Remove</remove>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -784,7 +784,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Vybrat uživatele</UIGroupSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
@@ -792,32 +792,32 @@
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Vybrat uživatele</selectUser>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>Uživatel nebo skupina</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Add a permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Vynulovat</Reset>
+      <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
       <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
       <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Přístup byl odepřen. Toto oprávnění, nelze odebrat.</access-denied>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -829,14 +829,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Jméno</name>
+      <name>Name</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Jméno</prop-name>
-      <prop-type>Typ</prop-type>
+      <prop-name>Name</prop-name>
+      <prop-type>Type</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -844,7 +844,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Jméno</node-def-name>
+      <node-def-name>Name</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -876,17 +876,17 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Hledat</Search>
+      <Search>Search</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>Toto klíčové slovo není povoleno.</keyword-not-allowed>
+      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Hledat</Search>
+      <Search>Search</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -899,8 +899,8 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>Nebyly nalezeny žádné výsledky.</not-found>
-      <keyword-not-allow>Toto klíčové slovo není povoleno.</keyword-not-allow>
+      <not-found>No results found.</not-found>
+      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -914,18 +914,18 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>Nebyly nalezeny žádné výsledky.</empty>
+      <not-support>There is no View template for this document.</not-support>
+      <empty>No results found.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Cesta</path>
-      <action>Akce</action>
-      <shortcutPath>Cesta</shortcutPath>
-      <type>Typ</type>
-      <dateCreated>Datum vytvoření</dateCreated>
+      <path>Path</path>
+      <action>Action</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -939,148 +939,148 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
+      <View>View this item</View>
       <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>Nebyly nalezeny žádné výsledky.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
+      <not-support>There is no View template for this document</not-support>
+      <empty>No results found.</empty>
+      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Cesta</path>
-      <action>Akce</action>
-      <shortcutPath>Cesta</shortcutPath>
-      <type>Typ</type>
-      <dateCreated>Datum vytvoření</dateCreated>
-      <score>Skóre</score>
+      <path>Path</path>
+      <action>Action</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
     </header>
     <title>
-      <typeASC>Seřadit podle typu dokumentu ve vzestupném pořadí</typeASC>
-      <typeDESC>Seřadit podle typu dokumentu v sestupném pořadí</typeDESC>
-      <scoreASC>Seřadit podle skóre ve vzestupném pořadí</scoreASC>
-      <scoreDESC>Seřadit podle skóre v sestupném pořadí</scoreDESC>
-      <nameASC>Seřadit podle názvu ve vzestupném pořadí</nameASC>
-      <nameDESC>Seřadit podle názvu v sestupném pořadí</nameDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
       <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobrazit tento uzel</View>
+      <View>View this item</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Pro tento uzel neexistuje žádná šablona zobrazení</not-support>
+      <not-support>There is no View template for this item</not-support>
       <empty>No results found</empty>
-      <access-denied>Tento uzel nelze zobrazit, protože buď tato šablona není podporována nebo je odepřen přístup.</access-denied>
-      <query-invalid>Dotaz je neplatný</query-invalid>
+      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
+      <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Cesta</path>
-      <action>Akce</action>
-      <shortcutPath>Cesta</shortcutPath>
-      <type>Typ</type>
-      <dateCreated>Datum vytvoření</dateCreated>
-      <score>Skóre</score>
+      <path>Path</path>
+      <action>Action</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
     </header>
     <title>
-      <typeASC>Seřadit podle typu dokumentu ve vzestupném pořadí</typeASC>
-      <typeDESC>Seřadit podle typu dokumentu v sestupném pořadí</typeDESC>
-      <scoreASC>Seřadit podle skóre ve vzestupném pořadí</scoreASC>
-      <scoreDESC>Seřadit podle skóre v sestupném pořadí</scoreDESC>
-      <nameASC>Seřadit podle názvu ve vzestupném pořadí</nameASC>
-      <nameDESC>Seřadit podle jména v sestupném pořadí</nameDESC>
-      <datecreatedASC>Seřadit podle data vytvoření ve vzestupném pořadí</datecreatedASC>
-      <datecreatedDESC>Seřadit podle data vytvoření v sestupném pořadí</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Přejít do složky</OpenFolder>
+      <View>View this item</View>
+      <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>Pro tento uzel neexistuje žádná šablona zobrazení.</not-support>
-      <empty>Nebyly nalezeny žádné výsledky.</empty>
-      <access-denied>Tento uzel nelze zobrazit, protože tato šablona není podporována nebo protože byl odepřen přístup.</access-denied>
-      <query-invalid>Dotaz je neplatný.</query-invalid>
+      <not-support>There is no View template for this item.</not-support>
+      <empty>No results found.</empty>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Cesta</path>
-      <action>Akce</action>
-      <shortcutPath>Cesta</shortcutPath>
-      <type>Typ</type>
-      <dateCreated>Datum vytvoření</dateCreated>
-      <score>Skóre</score>
+      <path>Path</path>
+      <action>Action</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Seřadit podle typu dokumentu ve vzestupném pořadí</typeASC>
-      <typeDESC>Seřadit podle typu dokumentu v sestupném pořadí</typeDESC>
-      <scoreASC>Seřadit podle skóre ve vzestupném pořadí</scoreASC>
-      <scoreDESC>Seřadit podle skóre v sestupném pořadí</scoreDESC>
-      <nameASC>Seřadit podle názvu vzestupně</nameASC>
-      <nameDESC>Seřadit podle názvu sestupně</nameDESC>
-      <datecreatedASC>Seřadit podle data vytvoření ve vzestupném pořadí</datecreatedASC>
-      <datecreatedDESC>Seřadit podle data vytvoření v sestupném pořadí</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobrazit tento uzel</View>
-      <OpenFolder>Přejít do složky</OpenFolder>
+      <View>View this Item</View>
+      <OpenFolder>Go to Folder</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Pro tento uzel neexistuje žádná šablona zobrazení.</not-support>
-      <empty>Nebyly nalezeny žádné výsledky</empty>
-      <access-denied>Tento uzel nelze zobrazit, protože tato šablona není podporována nebo protože byl odepřen přístup.</access-denied>
-      <query-invalid>Dotaz je neplatný.</query-invalid>
+      <not-support>There is no View template for this item.</not-support>
+      <empty>No results found</empty>
+      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Cesta</path>
-      <action>Akce</action>
-      <shortcutPath>Cesta</shortcutPath>
-      <type>Typ</type>
-      <dateCreated>Datum vytvoření</dateCreated>
-      <score>Skóre</score>
+      <path>Path</path>
+      <action>Action</action>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date Created</dateCreated>
+      <score>Score</score>
     </header>
     <title>
-      <typeASC>Seřadit podle typu dokumentu ve vzestupném pořadí</typeASC>
-      <typeDESC>Seřadit podle typu dokumentu v sestupném pořadí</typeDESC>
-      <scoreASC>Seřadit podle skóre ve vzestupném pořadí</scoreASC>
-      <scoreDESC>Seřadit podle skóre v sestupném pořadí</scoreDESC>
-      <nameASC>Seřadit podle názvu vzestupně</nameASC>
-      <nameDESC>Seřadit podle názvu sestupně</nameDESC>
-      <datecreatedASC>Seřadit podle data vytvoření ve vzestupném pořadí</datecreatedASC>
-      <datecreatedDESC>Seřadit podle data vytvoření v sestupném pořadí</datecreatedDESC>
+      <typeASC>Sort by document type in ascending order</typeASC>
+      <typeDESC>Sort by document type in descending order</typeDESC>
+      <scoreASC>Sort by score in ascending order</scoreASC>
+      <scoreDESC>Sort by score in descending order</scoreDESC>
+      <nameASC>Sort by name in ascending order</nameASC>
+      <nameDESC>Sort by name in descending order</nameDESC>
+      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Zobrazit tento uzel</View>
-      <OpenFolder>Přejít do složky</OpenFolder>
+      <View>View this Item</View>
+      <OpenFolder>Go to Folder</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Obnovit z koše</RestoreFromTrash>
+      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Vlastnosti</metadataProperty>
+      <metadataProperty>Properties</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Přidat</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Přidat</label-Add>
+      <label-Add>Add</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Přidat</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1109,42 +1109,42 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Přidat kategorii</AddCategory>
+      <AddCategory>Add Category</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operátor</operator>
-      <exactlyPro-properties>Vlastnost</exactlyPro-properties>
-      <exactlyPro-ContainExactly>Obsahuje přesně</exactlyPro-ContainExactly>
-      <containPro-properties>Vlastnost</containPro-properties>
-      <containPro-Contain>Obsahuje</containPro-Contain>
-      <notContainPro-properties>Vlastnost</notContainPro-properties>
-      <notContainPro-notContain>Neobsahuje</notContainPro-notContain>
-      <ConstraintOption-From>Od</ConstraintOption-From>
-      <ConstraintOption-To>Do</ConstraintOption-To>
-      <DocumentType-label>Typ dokumentu</DocumentType-label>
-      <Category-label>Kategorie</Category-label>
-      <created>Vytvořeno</created>
-      <modified>Změněno</modified>
-      <and>A</and>
-      <or>Nebo</or>
+      <operator>Operator</operator>
+      <exactlyPro-properties>Property</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
+      <containPro-properties>Property</containPro-properties>
+      <containPro-Contain>Contain</containPro-Contain>
+      <notContainPro-properties>Property</notContainPro-properties>
+      <notContainPro-notContain>Not Contain</notContainPro-notContain>
+      <ConstraintOption-From>From</ConstraintOption-From>
+      <ConstraintOption-To>To</ConstraintOption-To>
+      <DocumentType-label>Document Type</DocumentType-label>
+      <Category-label>Category</Category-label>
+      <created>Created</created>
+      <modified>Modified</modified>
+      <and>And</and>
+      <or>Or</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
     <title>
-      <UINodeTypeSelectForm>Vybrat typ uzlu</UINodeTypeSelectForm>
+      <UINodeTypeSelectForm>Select Node Type</UINodeTypeSelectForm>
     </title>
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Přidat kategorii do hledání</UICategoryManagerSearch>
-      <UIOneNodePathSelector>Vybrat kategorii</UIOneNodePathSelector>
+      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
     <title>
-      <UISaveQueryForm>Formulář dotazu</UISaveQueryForm>
+      <UISaveQueryForm>Query Form</UISaveQueryForm>
     </title>
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
@@ -1155,46 +1155,46 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filtr:</filter>
-      <result>Výsledky:</result>
+      <filter>Filter:</filter>
+      <result>Results:</result>
     </label>
     <title>
-      <result>Filtr</result>
+      <result>Filter</result>
     </title>
     <button>
-      <label-Select>Vybrat</label-Select>
+      <label-Select>Select</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>Nebyly nalezeny žádné výsledky.</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Název:</name>
-      <selectBox>Vybrat styl dotazu:</selectBox>
-      <query>Dotaz:</query>
+      <name>Name:</name>
+      <selectBox>Select Query Style:</selectBox>
+      <query>Query:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Hledat</Search>
+      <Search>Search</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
-      <name-invalid>Název je neplatný.</name-invalid>
-      <query-added>Dotaz byl úspěšně přidán.</query-added>
-      <save_unSuccessful>Dotaz nelze uložit. Příkaz může být neplatný, nebo již název dotazu existuje.</save_unSuccessful>
-      <invalid-queryStatement>Neplatný příkaz dotazu.</invalid-queryStatement>
-      <value-save-null>Zadejte příkaz dotazu.</value-save-null>
-      <query-name-null>Zadejte název dotazu.</query-name-null>
+      <name-invalid>The name is invalid.</name-invalid>
+      <query-added>The query was added successfully.</query-added>
+      <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
+      <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
+      <value-save-null>Please enter your query statement.</value-save-null>
+      <query-name-null>Please enter your query name.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Jméno</name>
-      <selectBox>Vybrat styl dotazu</selectBox>
-      <query>Dotaz</query>
+      <name>Name</name>
+      <selectBox>Select Query Style</selectBox>
+      <query>Query</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1203,73 +1203,73 @@
   </EditQueryForm>
   <EditSavedQueryForm>
     <title>
-      <EditQueryForm>Upravit formulář dotazu</EditQueryForm>
+      <EditQueryForm>Edit Query Form</EditQueryForm>
     </title>
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Typ metadat</metadataType>
+      <metadataType>Metadata type</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Přidat</Add>
+      <Add>Add</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Vybrat vlastnost</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Vybrat vlastnost</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Vybrat vlastnost</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Typ metadat</metadataType>
+      <metadataType>Metadata Type</metadataType>
     </label>
-    <pLabel>Vlastnosti:</pLabel>
+    <pLabel>Properties:</pLabel>
     <action>
-      <Add>Přidat</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>
-      <UICompareExactlyForm>Formulář filtru</UICompareExactlyForm>
+      <UICompareExactlyForm>Filter Form</UICompareExactlyForm>
     </title>
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Jméno</name>
-      <language>Jazyk</language>
-      <query>Dotaz</query>
-      <action>Akce</action>
-      <path>Cesta</path>
+      <name>Name</name>
+      <language>Language</language>
+      <query>Query</query>
+      <action>Actions</action>
+      <path>Path</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Data nebyla nalezena.</not-found>
+      <not-found>Data not found.</not-found>
     </msg>
     <header>
-      <action>Akce</action>
+      <action>Action</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Pro uložení zadejte název dotazu.</query-name-null>
-      <access-denied>Přístup byl odepřen. Nemáte oprávnění přidávat, potřebné k uložení tohoto dotazu.</access-denied>
-      <save-failed>Dotaz nelze uložit, protože je výraz neplatný, nebo protože název dotazu již existuje.</save-failed>
+      <query-name-null>Please enter query name to save.</query-name-null>
+      <access-denied>Access denied. You do not have the add permission needed to save this query.</access-denied>
+      <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
     </msg>
     <label>
-      <queryName>Název dotazu</queryName>
+      <queryName>Query name</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1278,30 +1278,30 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Jméno</name>
-      <type>Typ</type>
-      <statement>Prohlášení</statement>
-      <permission>Oprávnění</permission>
-      <action>Akce</action>
+      <name>Name</name>
+      <type>Type</type>
+      <statement>Statement</statement>
+      <permission>Permissions</permission>
+      <action>Actions</action>
     </header>
     <tooltip>
-      <Execute>Spustit</Execute>
-      <Edit>Upravit</Edit>
-      <Delete>Odstranit</Delete>
+      <Execute>Execute</Execute>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </tooltip>
     <label>
-      <no-children>Žádný dotaz není uložen.</no-children>
+      <no-children>No query is saved.</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Jste si jisti, že chcete odstranit tento dotaz?</confirm-delete-query>
-      <not-result-found>Nebyly nalezeny žádné výsledky.</not-result-found>
+      <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
     <label>
-      <results>Výsledky</results>
-      <of-about>asi</of-about>
-      <of>z</of>
+      <results>Results</results>
+      <of-about>of about</of-about>
+      <of>of</of>
     </label>
   </UIQueryResultPageIterator>
   <!--
@@ -1311,17 +1311,17 @@
   -->
   <UIExportNode>
     <label>
-      <format>Formát</format>
-      <nodePath>Cesta k exportu</nodePath>
+      <format>Format</format>
+      <nodePath>Path to Export</nodePath>
       <zip>Zip</zip>
-      <systemView>Zobrazení systému</systemView>
-      <documentView>Zobrazení dokumentu</documentView>
+      <systemView>System View</systemView>
+      <documentView>Document View</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Exportovat</Export>
+      <Export>Export</Export>
     </action>
-    <title>Exportovat uzel</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,13 +1330,13 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Práva</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
     <title>
-      <UICategoriesSelector>Přidat kategorie</UICategoriesSelector>
-      <UIOneNodePathSelector>Přidat kategorie</UIOneNodePathSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Add Categories</UIOneNodePathSelector>
     </title>
   </UIPopupTaxonomy>
   <!--
@@ -1345,42 +1345,42 @@
   ###############################################################################
   -->
   <UIVersionInfo>
-    <title>Historie verze</title>
+    <title>Version history</title>
     <summary>
-      <empty>Klikněte zde pro přidání shrnutí</empty>
+      <empty>Click here to add a summary</empty>
     </summary>
     <tooltip>
-      <original>Originální verze</original>
-      <version>Verze</version>
+      <original>Original Version</original>
+      <version>Version</version>
       <baseVersion>current draft</baseVersion>
-      <addLabel>Přidat popisek</addLabel>
-      <removeLable>Odebrat popisek</removeLable>
-      <restoreVersion>Obnovit verzi</restoreVersion>
-      <viewVersion>Zobrazit informace o verzi</viewVersion>
-      <deleteVersion>Odstranit verzi</deleteVersion>
-      <compareVersion>Porovnat se základní verzí</compareVersion>
+      <addLabel>Add Label</addLabel>
+      <removeLable>Remove Label</removeLable>
+      <restoreVersion>Restore Version</restoreVersion>
+      <viewVersion>View Version</viewVersion>
+      <deleteVersion>Delete Version</deleteVersion>
+      <compareVersion>Compare with the  base version</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>Šablona zobrazení není podporována.</have-no-view-template>
-      <cannot-remove-version>Základní verzi nelze odstranit.</cannot-remove-version>
-      <error-removing-version>Při odstraňování této verze se vyskytla chyba.</error-removing-version>
-      <error-removing-referenced-version>Tato verze je odkazována a nelze ji odstranit.</error-removing-referenced-version>
-      <confirm-restore>Opravdu chcete tuto verzi obnovit?</confirm-restore>
-      <confirm-delete>Jste si jisti, že chcete odstranit tuto verzi?</confirm-delete>
-      <not-checked-out>Před obnovením musíte na tomto uzlu provést check out.</not-checked-out>
-      <invalid-item-state>Tuto verzi nelze obnovit, buď proto, že jedna nebo více položek byla odstraněna nebo přesunuta během jiné relace.</invalid-item-state>
+      <have-no-view-template>The view template is not supported.</have-no-view-template>
+      <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
+      <error-removing-version>An error occurred while deleting this version.</error-removing-version>
+      <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
+      <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
+      <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
+      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
+      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
-      <close-view>Zavřít zobrazení</close-view>
-      <compare-versions>Porovnat vybrané verze</compare-versions>
+      <close-view>Close View</close-view>
+      <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Verze</version>
-      <date>Datum</date>
-      <author>Upravil</author>
-      <summary>Shrnutí</summary>
-      <action>Akce</action>
+      <version>Version</version>
+      <date>Date</date>
+      <author>Modified By</author>
+      <summary>Summary</summary>
+      <action>Action</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1390,40 +1390,40 @@
   -->
   <UIAuditingInfo>
     <msg>
-      <noVersion>Žádná verze</noVersion>
+      <noVersion>No Version</noVersion>
     </msg>
     <eventName>
-      <e_1>Uzel přidán</e_1>
-      <e_2>Uzel odstraněn</e_2>
-      <e_4>Vlastnost přidána</e_4>
-      <e_16>Vlastnost změněna</e_16>
-      <e_8>Vlastnost odstraněna</e_8>
+      <e_1>Added</e_1>
+      <e_2>Document Removed</e_2>
+      <e_4>Property Added</e_4>
+      <e_16>Property Changed</e_16>
+      <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Přesunout</e_64>
-      <e_128>Kopírovat</e_128>
-      <e_256>Přidat Smíšený typ</e_256>
-      <e_512>Odstranit Smíšený typ</e_512>
-      <e_1024>Klon</e_1024>
-      <e_2048>Aktualizovat</e_2048>
-      <e_4096>Importovat</e_4096>
+      <e_64>Move</e_64>
+      <e_128>Copy</e_128>
+      <e_256>Add Mixin</e_256>
+      <e_512>Remove Mixin</e_512>
+      <e_1024>Clone</e_1024>
+      <e_2048>Update</e_2048>
+      <e_4096>Import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
-      <e_32768>Obnovit</e_32768>
-      <e_65536>Sloučit</e_65536>
-      <e_131072>Zrušit sloučení</e_131072>
-      <e_262144>Sloučeno</e_262144>
-      <e_524288>Přidat popisek verze</e_524288>
-      <e_1048576>Odstranit popisek verze</e_1048576>
-      <e_2097152>Odstranit verzi</e_2097152>
-      <e_4194304>Zamknout</e_4194304>
-      <e_8388608>Odemknout</e_8388608>
-      <e_16777216>Čtení</e_16777216>
+      <e_32768>Restore</e_32768>
+      <e_65536>Merge</e_65536>
+      <e_131072>Cancel Merge</e_131072>
+      <e_262144>Done Merge</e_262144>
+      <e_524288>Add Version Label</e_524288>
+      <e_1048576>Remove Version Label</e_1048576>
+      <e_2097152>Remove Version</e_2097152>
+      <e_4194304>Lock</e_4194304>
+      <e_8388608>Unlock</e_8388608>
+      <e_16777216>Read</e_16777216>
     </eventName>
     <label>
-      <operation>Operace</operation>
-      <userName>Uživatelské jméno</userName>
-      <date>Datum</date>
-      <version>Verze</version>
+      <operation>Operation</operation>
+      <userName>Username</userName>
+      <date>Date</date>
+      <version>Version</version>
     </label>
   </UIAuditingInfo>
 
@@ -1434,13 +1434,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Správa verzí nebyla aktivována pro tento uzel.</note>
-      <question>Jste si jisti, že chcete aktivovat?</question>
-      <button-active>Aktivovat</button-active>
+      <note>Versioning has not been activated for this document.</note>
+      <question>Are you sure you want to activate it?</question>
+      <button-active>Activate</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>Nemáte oprávnění k aktivaci správy verzí v tomto uzlu</access-denied>
+      <access-denied>You don't have permission to activate versioning on this document</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1450,21 +1450,21 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Název</LifecycleName>
-      <LifecycleDesc>Popis</LifecycleDesc>
-      <action>Akce</action>
+      <LifecycleName>Name</LifecycleName>
+      <LifecycleDesc>Description</LifecycleDesc>
+      <action>Action</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
-        <empty>Nenalezeny žádné pluginy zveřejnění.</empty>
+        <empty>No publication plugins found.</empty>
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Pouze typ uzel dokumentu může být zapsán.</node-type-invalid>
-      <already-enroled>Tento dokument již byl zapsán.</already-enroled>
+      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
+      <already-enroled>This document has already been enrolled.</already-enroled>
     </msg>
   </UIActivePublication>
   <!--
@@ -1474,11 +1474,11 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Pro tento uzel nebylo auditování aktivováno.</note>
-      <question>Jste si jisti, že chcete aktivovat?</question>
+      <note>Auditing has not been activated for this document.</note>
+      <question>Are you sure you want to activate?</question>
     </label>
     <action>
-      <activate>Aktivovat</activate>
+      <activate>Activate</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1489,16 +1489,16 @@
   -->
   <UIDiff>
     <label>
-      <backTo>Zpět na historii verzí</backTo>
-      <diffTitle>Porovnat mezi dvěma verzemi</diffTitle>
-      <noContent>Neexistuje žádný obsah ke srovnání</noContent>
-      <compareVerion>Verze</compareVerion>
-      <can-not-compare>Porovnání dvou verzí se nezdařilo</can-not-compare>
-      <compare-unavailable>Srovnání verzí není pro tento dokument k dispozici</compare-unavailable>
-      <DateChange>Na {0}</DateChange>
+      <backTo>Back to version history</backTo>
+      <diffTitle>Compare between two versions</diffTitle>
+      <noContent>There is no content to compare</noContent>
+      <compareVerion>Version</compareVerion>
+      <can-not-compare>Failed to compare two versions</can-not-compare>
+      <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
+      <DateChange>On {0}</DateChange>
       <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
       <ComparedWith>Compared with</ComparedWith>
-      <restoredFrom>Obnoveno z verze {0}</restoredFrom>
+      <restoredFrom>Restored from version {0}</restoredFrom>
     </label>
   </UIDiff>
   <!--
@@ -1508,25 +1508,25 @@
   -->
   <UIImportNode>
     <label>
-      <format>Formát</format>
-      <systemView>Zobrazení systému</systemView>
-      <documentView>Zobrazení dokumentu</documentView>
-      <upload>Nahrát soubor</upload>
+      <format>Format</format>
+      <systemView>System View</systemView>
+      <documentView>Document View</documentView>
+      <upload>Upload File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Importovat</Import>
+      <Import>Import</Import>
     </action>
-    <title>Importovat uzel</title>
+    <title>Import</title>
     <msg>
-      <import-successful>Úspěšně importováno.</import-successful>
-      <filename-invalid>Pro import vyberte soubor XML do pole 'Nahrát soubor'.</filename-invalid>
-      <filetype-error>Nelze importovat nahraný soubor. Soubor XML může být neplatný.</filetype-error>
-      <xml-invalid>Na pozici [řádek, sloupec] je neplatný znak: {0} v {1} souboru</xml-invalid>
-      <mimetype-invalid>Importovat lze pouze soubory XML nebo zip.</mimetype-invalid>
-      <access-denied>Přístup byl odepřen. Tam nelze importovat.</access-denied>
-      <constraint-violation-exception>Nelze importovat data. V tomto umístění není povolen typ {0}.</constraint-violation-exception>
-      <item-exists-exception>Příchozí odkazovaný uzel má stejné UUID jako existující uzel v pracovním prostoru.</item-exists-exception>
+      <import-successful>Imported successfully.</import-successful>
+      <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
+      <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
+      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
+      <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
+      <access-denied>Access denied. You are not allowed to import there.</access-denied>
+      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
+      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1536,16 +1536,16 @@
   -->
   <UILabelForm>
     <label>
-      <label>Popisek</label>
+      <label>Label</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Přidat popisek</title>
+    <title>Add Label</title>
     <msg>
-      <label-invalid>Popisek obsahuje některé neplatné znaky.</label-invalid>
-      <label-exist>'{0}' již existuje.</label-exist>
+      <label-invalid>The label contains some invalid characters.</label-invalid>
+      <label-exist>'{0}' already exists.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1554,12 +1554,12 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Odebrat popisek</title>
+    <title>Remove Label</title>
     <label>
-      <label>Vybrat popisek</label>
+      <label>Select Label</label>
     </label>
     <action>
-      <Remove>Odstranit</Remove>
+      <Remove>Remove</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1569,24 +1569,24 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Podřízený strom</title>
+    <title>Children Tree</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Typ uzlu</nodeType>
-      <nodeName>Název uzlu</nodeName>
-      <VersionNumber>Číslo verze</VersionNumber>
-      <VersionLabels>Popisky verze</VersionLabels>
-      <VersionDate>Datum verze</VersionDate>
-      <PropertyName>Název vlastnosti</PropertyName>
-      <PropertyValue>Hodnoty vlastností</PropertyValue>
+      <nodeType>Node Type</nodeType>
+      <nodeName>Name</nodeName>
+      <VersionNumber>Version Number</VersionNumber>
+      <VersionLabels>Version Labels</VersionLabels>
+      <VersionDate>Version Date</VersionDate>
+      <PropertyName>Property Name</PropertyName>
+      <PropertyValue>Property Values</PropertyValue>
     </label>
     <msg>
-      <not-supported>Tato funkce není podporována pro správu verzí.</not-supported>
+      <not-supported>This function is not supported for versioning.</not-supported>
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Název potomků</title>
+    <title>Children Name</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1599,38 +1599,38 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Odkazované kategorie</UICategoriesAddedList>
-        <UIOneNodePathSelector>Vybrat kategorii</UIOneNodePathSelector>
+        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>Kategorie</path>
-      <action>Akce</action>
+      <path>Category</path>
+      <action>Actions</action>
     </header>
     <msg>
-      <access-denied>Přístup byl odepřen. U tohoto uzlu nemáte oprávnění k přístupu.</access-denied>
-      <confirm-delete>Jste si jisti, že chcete odstranit tento odkaz?</confirm-delete>
+      <access-denied>Access denied. You don't have access permission.</access-denied>
+      <confirm-delete>Are you sure you want to delete this reference?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Delete>Odstranit</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <label>
-      <category>Kategorie</category>
-      <actions>Akce</actions>
-      <delete>Odstranit</delete>
+      <category>Category</category>
+      <actions>Action</actions>
+      <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Jméno</name>
-      <action>Akce</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
     <info>
-      <child-not-found>Tento uzel nemá žádné podřízené uzly.</child-not-found>
+      <child-not-found>This item doesn't have any child.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1644,28 +1644,28 @@
     </action>
     <tab>
       <label>
-        <UIOneNodePathSelector>Vybrat vztah</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Relation</UIOneNodePathSelector>
       </label>
     </tab>
     <tab>
       <label>
-        <UIRelationsAddedList>Seznam vztahů</UIRelationsAddedList>
+        <UIRelationsAddedList>Relation List</UIRelationsAddedList>
       </label>
     </tab>
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Související</path>
-      <action>Akce</action>
+      <path>Relations</path>
+      <action>Actions</action>
     </header>
     <action>
       <title>
-        <Delete>Odstranit</Delete>
+        <Delete>Delete</Delete>
       </title>
     </action>
     <msg>
-      <confirm-delete>Jste si jisti, že chcete odstranit tento vztah?</confirm-delete>
-      <can-not-add-itself>Vztah nelze přidat na sebe.</can-not-add-itself>
+      <confirm-delete>Are you sure you want to delete this relation?</confirm-delete>
+      <can-not-add-itself>You cannot add a relation to itself.</can-not-add-itself>
     </msg>
   </UIRelationsAddedList>
   <!--
@@ -1675,19 +1675,19 @@
   -->
   <UIClipboard>
     <header>
-      <path>Cesta</path>
+      <path>Path</path>
       <command>Cm</command>
-      <action>Akce</action>
+      <action>Action</action>
     </header>
     <label>
-      <nocommand>Ve schránce nejsou žádné položky.</nocommand>
+      <nocommand>There are no items in the clipboard.</nocommand>
     </label>
     <action>
-      <clearall>Vymazat vše</clearall>
+      <clearall>Clear All</clearall>
     </action>
     <msg>
-      <unable-pasted>Tento uzel nelze vložit.</unable-pasted>
-      <node-pasted>Uzel {0} byl vložen do {1}. Tato operace již byla uložena.</node-pasted>
+      <unable-pasted>Can't paste this item.</unable-pasted>
+      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1702,9 +1702,9 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Vyberte šablonu z následujícího seznamu</selectTemplate>
-      <ThumbnailView>Zobrazení miniatur</ThumbnailView>
-      <ListView>Zobrazení seznamu</ListView>
+      <selectTemplate>Select your template from the list below</selectTemplate>
+      <ThumbnailView>Thumbnail View</ThumbnailView>
+      <ListView>List View</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1714,29 +1714,29 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Přidat nový dokument</title>
+    <title>Add New Document</title>
     <action>
       <Save>#{word.save}</Save>
-      <SaveAndClose>Uložit &amp; zavřít</SaveAndClose>
-      <ChangeType>Změnit typ obsahu</ChangeType>
-      <Fullscreen>Celá obrazovka</Fullscreen>
+      <SaveAndClose>Save &amp; Close</SaveAndClose>
+      <ChangeType>Change Content Type</ChangeType>
+      <Fullscreen>Fullscreen</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
 <tooltip>
-<FullScreen>Maximalizovat/Minimalizovat</FullScreen>
+<FullScreen>Maximize/Minimize</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>Při ukládání dokumentu došlo k chybě.</cannot-save>
-      <in-versioning>Před přidáním nového uzlu proveďte na aktuálním uzlu check out.</in-versioning>
-      <not-support>Nelze načíst šablonu {0}.</not-support>
-      <value-invalid>'{0}' je potřebnou hodnotou.</value-invalid>
-      <repository-exception>Při ukládání dokumentu došlo k chybě.</repository-exception>
+      <cannot-save>An error occurred while saving the document.</cannot-save>
+      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <value-invalid>'{0}' is a needed value.</value-invalid>
+      <repository-exception>An error occurred while saving the document.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>Do tohoto uzlu nemáte oprávnění přidat nový dokument.</repository-exception-permission>
-      <not-allowed-same-name-sibling>Tento dokument nelze uložit. Není dovoleno mít stejný název jako jeho sourozenec.</not-allowed-same-name-sibling>
-      <numberformat-exception>Tento dokument nelze uložit. Zadaný název musí být v číselném formátu.</numberformat-exception>
-      <item-not-found>Položka nebyla nalezena. Tento uzel (nebo nadřazený uzel) byl možná odstraněn. Prosím klikněte na tlačítko Obnovit.</item-not-found>
+      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
+      <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
+      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1747,7 +1747,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Informace</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1765,10 +1765,10 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Uložit formulář dotazu</title>
+    <title>Save Query Form</title>
     <label>
-      <query>Dotaz</query>
-      <name>Název dotazu</name>
+      <query>Query</query>
+      <name>Query Name</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1782,8 +1782,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Upravit akci</UIActionForm>
-      <EditFormAction>Upravit akci</EditFormAction>
+      <UIActionForm>Edit Action</UIActionForm>
+      <EditFormAction>Edit Action</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1794,24 +1794,24 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Popis</description>
-  <lifecycle>Životní cyklus</lifecycle>
-  <triggeredaction>Spuštěná akce</triggeredaction>
-      <instanceOf>Instance typu akce</instanceOf>
-      <action>Akce</action>
+      <description>Description</description>
+  <lifecycle>Life Cycle</lifecycle>
+  <triggeredaction>Triggered Action</triggeredaction>
+      <instanceOf>Instance of Action Type</instanceOf>
+      <action>Action</action>
     </header>
     <msg>
-      <remove-popup-first>Před odstraněním tohoto uzlu je nutné zavřít okno s úpravami.</remove-popup-first>
-      <confirm-delete-action>Jste si jisti, že chcete tuto akci odstranit?</confirm-delete-action>
-      <template-empty>Šablona {0}' má hodnotu null nebo je prázdná.</template-empty>
-      <template-null>Šablona je buď null nebo nemáte oprávnění k jejímu přístupu.</template-null>
-      <access-denied>Přístup byl odepřen. Nemáte oprávnění k provedení této akce.</access-denied>
+      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
+      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <template-empty>The '{0}' template is null or empty.</template-empty>
+      <template-null>The template is either null or you do not have permission to access this template.</template-null>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>Zobrazit</View>
-      <Edit>Upravit</Edit>
-      <Delete>Odstranit</Delete>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1820,43 +1820,43 @@
       <Back>#{word.back}</Back>
     </action>
     <label>
-      <name>Formulář akce</name>
+      <name>Action Form</name>
     </label>
     <msg>
-      <repository-exception>Tuto akci nelze uložit. Zadaný název obsahuje některé speciální znaky.</repository-exception>
-      <numberformat-exception>Tuto akci nelze uložit. Zadaný název musí být v číselném formátu.</numberformat-exception>
-      <existed-action>Název akce '{0}' již existuje. Vyberte jinou kombinaci.</existed-action>
-      <unable-add-action>Tuto akci nelze přidat.</unable-add-action>
-      <unable-add>Tuto akci nelze přidat. Tento uzel je buď kořenovým uzlem nebo máte oprávnění.</unable-add>
-      <not-support>Dialogové okno '{0}' není podporováno.</not-support>
-      <no-permission-add>Přístup byl odepřen. Nemáte právo zde přidat akci.</no-permission-add>
-      <access-denied>Přístup byl odepřen. Nemáte oprávnění k přístupu k této šabloně.</access-denied>
-      <lifecycle-invalid>Tuto akci nelze přidat. Fáze životního cyklu akce je neplatná.</lifecycle-invalid>
+      <repository-exception>You cannot save this action. The name provided has some special characters.</repository-exception>
+      <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
+      <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
+      <unable-add-action>Cannot add this action.</unable-add-action>
+      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
+      <not-support>Dialog '{0}' is not supported.</not-support>
+      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
+      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <lifecycle-invalid>You cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
     </msg>
-    <title>Přidat či upravit akci</title>
+    <title>Add/Edit Action</title>
     <validator>
-      <validator>Validátor</validator>
-      <destPath>S cestou</destPath>
+      <validator>Validator</validator>
+      <destPath>With Path</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
     <label>
-      <actionType>Vytvořit akci typu</actionType>
+      <actionType>Create Action of Type</actionType>
     </label>
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Vybrat umístění</UIOneNodePathSelector>
-      <UIPermissionSelector>Prohlížeč oprávnění</UIPermissionSelector>
-      <UICategoriesSelector>Přidat kategorie</UICategoriesSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
     <validator>
-      <validator>Validátor</validator>
-      <destPath>S cestou</destPath>
+      <validator>Validator</validator>
+      <destPath>With Path</destPath>
     </validator>
-    <title>Formulář akce</title>
+    <title>Action Form</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1865,19 +1865,19 @@
   -->
   <UIAddressBar>
     <msg>
-      <path-not-found>Cesta nebyla nalezena.</path-not-found>
-      <access-denied>Přístup byl odepřen. Nemáte právo pro čtení.</access-denied>
-      <keyword-not-support>Klíčové slovo je neplatné. Některé znaky nejsou podporovány.</keyword-not-support>
+      <path-not-found>Path not found.</path-not-found>
+      <access-denied>Access denied. You don't have the permission to read.</access-denied>
+      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Přejít</exeButton>
-      <address>Adresa:</address>
+      <exeButton>Go</exeButton>
+      <address>Address:</address>
     </label>
     <title>
-      <exeButton>Přejít</exeButton>
-      <backButton>Zpět na předchozí uzel</backButton>
-      <showHistory>Zobrazit adresu historie</showHistory>
-      <changeNode>Změnit uzel</changeNode>
+      <exeButton>Go</exeButton>
+      <backButton>Back</backButton>
+      <showHistory>Show History</showHistory>
+      <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
   <!--
@@ -1887,19 +1887,19 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Sledovat</Watch>
+      <Watch>Watch</Watch>
       <Cancel>#{word.cancel}</Cancel>
-      <Continue>Pokračovat</Continue>
-      <Unwatch>Přestat sledovat</Unwatch>
+      <Continue>Continue</Continue>
+      <Unwatch>Unwatch</Unwatch>
     </action>
     <label>
-      <notificationType>Typ upozornění:</notificationType>
+      <notificationType>Notification Type:</notificationType>
     </label>
     <msg>
-      <not-support>Tento typ upozornění není podporován. Vyberte jiný typ.</not-support>
-      <watching-successfully>Sledujete tento dokument.</watching-successfully>
-      <unwatching-successfully>Úspěšně jste opustili seznam pozorovatelů.</unwatching-successfully>
-      <node-iswatching>Tento dokument je sledován.</node-iswatching>
+      <not-support>This notification type is not supported. Please select another type.</not-support>
+      <watching-successfully>You are watching this document.</watching-successfully>
+      <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
+      <node-iswatching>This document is watched.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1909,24 +1909,24 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Názvy tagů:</names>
-      <linked>Propojené Tagy:</linked>
+      <names>Tag Names:</names>
+      <linked>Linked Tags:</linked>
     </label>
     <action>
-      <AddTag>Přidat</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>Název tagu '{0}' již existuje.</name-exist>
-      <tagName-invalid>Název tagu obsahuje některé neplatné znaky.</tagName-invalid>
+      <name-exist>The tag name '{0}' already exists.</name-exist>
+      <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
       <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
-      <tag-name-empty>Název tagu je prázdný</tag-name-empty>
-      <tag-name-duplicate>Názvy vstupní tagů jsou duplicitní.</tag-name-duplicate>
-      <tagName-too-long>Jeden z tagů byl příliš dlouhý. Název tagu musí být menší než 30 znaků.</tagName-too-long>
-      <path-not-found>Tento tag byl odstraněn nebo změněn. Klepněte na tlačítko Aktualizovat.</path-not-found>
+      <tag-name-empty>Your tag name is empty</tag-name-empty>
+      <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
+      <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
+      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
     </msg>
     <introduction>
-      <tagName>Více tagů oddělte čárkami ","</tagName>
+      <tagName>Separate multiple tags by commas ","</tagName>
     </introduction>
   </UITaggingForm>
 
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Uzel nepodporuje toto zobrazení.</path-not-found>
+      <path-not-found>The document does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1953,12 +1953,12 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Přidat či upravit vlastnosti</UIViewMetadataForm>
+      <UIViewMetadataForm>Add/Edit Properties</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Přístup byl odepřen. Buď nejste vlastníkem tohoto uzlu nebo nemáte oprávnění k jeho úpravě.</access-denied>
+      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -1968,31 +1968,31 @@
   -->
    <ECMPhoneFormatValidator>
      <msg>
-       <Invalid>Pole '{0}' obsahuje neplatné telefonní číslo. Zadejte jinou hodnotu.</Invalid>
+       <Invalid>The field '{0}' contains invalid an Phone number. Please enter another value.</Invalid>
      </msg>
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
-      <Invalid-char>Pole {0} obsahuje některé neplatné znaky. Zadejte jinou hodnotu.</Invalid-char>
-      <empty-input>Hodnota pole '{0}' je null nebo prázdná.</empty-input>
+      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Pole {0} s hodnotou {1} je neplatné.</Invalid-input>
+      <Invalid-input>Field '{0}' with value '{1}' is invalid.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Cron výraz je neplatný. Zkontrolujte syntaxi.</invalid-input>
+    <invalid-input>Your cron expression is invalid. Please check the syntax.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Prosím vyplňte pole '{0}'.</empty-input>
+      <empty-input>Please fill in the field '{0}'.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
     <msg>
-      <non-categories>Kategorie jsou nesprávné. Vyberte prosím správné kategorie.</non-categories>
+      <non-categories>Categories are wrong. Please select good categories.</non-categories>
     </msg>
   </CategoryValidator>
   <!--
@@ -2001,25 +2001,25 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>Akce se nezdařila. Stále existují některé referenční položky v pracovním prostoru.</msg>
+    <msg>Action failed. There are still some reference items in the workspace.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>Tato položka již existuje.</msg>
+    <msg>This item already exists.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Přístup byl odepřen. Nemáte oprávnění k provedení této akce.</msg>
+    <msg>Access denied. You do not have permission to perform this action.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Přístup byl odepřen.</msg>
+    <msg>Access denied.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Položka nebyla nalezena. Možná byla odstraněna nebo změněna.</msg>
+    <msg>Item not found. It may have been removed or changed.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Cesta nebyla nalezena. Možná byla odstraněna nebo změněna.</msg>
+    <msg>Path not found. It may have been removed or changed.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>Nelze provést tuto akci, kvůli některým omezením.</msg>
+    <msg>You cannot perform this action due to some constraints.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -2028,19 +2028,19 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Zveřejněno</published>
-      <non-published>Nezveřejněno</non-published>
-      <public>Veřejné</public>
-      <private>Soukromé</private>
-      <state>Stav</state>
-      <visibility>Viditelnost</visibility>
-      <nodeName>Název uzlu:</nodeName>
-      <lifecycleName>Název cyklu</lifecycleName>
-      <stateName>Název stavu</stateName>
+      <published>Published</published>
+      <non-published>Unpublished</non-published>
+      <public>Public</public>
+      <private>Private</private>
+      <state>State</state>
+      <visibility>Visibility</visibility>
+      <nodeName>Name:</nodeName>
+      <lifecycleName>Lifecycle Name</lifecycleName>
+      <stateName>State Name</stateName>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <UnsubcriberLifeCycle>Neodběratel</UnsubcriberLifeCycle>
+      <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
@@ -2051,14 +2051,14 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Pracovní plocha:</workspaceName>
-      <rootNodeInfo>Kořenová cesta:</rootNodeInfo>
-      <rootPath>Kořenová cesta:</rootPath>
+      <workspaceName>Workspace:</workspaceName>
+      <rootNodeInfo>Root Path:</rootNodeInfo>
+      <rootPath>Root Path:</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Výběr uzlu</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2068,28 +2068,28 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>E-mailová adresa je neplatná.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Jste si jisti, že chcete odstranit?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>Hodnota v poli 'Počet opakování' je neplatná. Jsou povolena pouze celá čísla nebo -1.</invalid-value>
+      <invalid-value>The value in the field 'Repeat Count' is invalid. Only integers or -1 are allowed.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>Hodnota v poli 'Časový Interval' je neplatná. Jsou povoleny pouze typy long.</invalid-value>
+      <invalid-value>The value in the field 'Time Interval' is invalid. Only long types are allowed.</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Vybrat skupinu</selectGroup>
-      <selectUser>Vybrat uživatele</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2100,8 +2100,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>Hodnota pole '{0}' je null nebo prázdná.</empty-input>
-      <Invalid-char>Pole {0} obsahuje některé neplatné znaky. Zadejte jinou hodnotu.</Invalid-char>
+      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <Invalid-char>The field '{0}'contains some invalid characters. Please enter another value.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2111,13 +2111,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>Hodnota tohoto pole je null nebo prázdná.</empty-input>
-      <Invalid-char>Toto pole obsahuje některé neplatné znaky. Zadejte jinou hodnotu.</Invalid-char>
-      <Invalid-char2>Číslo musí následovat znak "~".</Invalid-char2>
-      <Invalid-char1>Číslo následující znak ' ~' musí být v rozmezí 0 a 1.</Invalid-char1>
-      <Invalid-char3>Číslo musí následovat znak ' ^'.</Invalid-char3>
-      <Invalid-char4>U znaku "~" nejsou mezery povoleny .</Invalid-char4>
-      <Invalid-char5>U znaku "^" nejsou mezery povoleny.</Invalid-char5>
+      <empty-input>The value of this field is null or empty.</empty-input>
+      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
+      <Invalid-char2>The number must be followed by the character '~'.</Invalid-char2>
+      <Invalid-char1>The number following the character '~' must between 0 and 1.</Invalid-char1>
+      <Invalid-char3>The number must be followed by the character '^'.</Invalid-char3>
+      <Invalid-char4>Spaces are not allowed near the character '~'.</Invalid-char4>
+      <Invalid-char5>Spaces are not allowed near the character '^'.</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -2127,12 +2127,12 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Datum</date>
-      <newState>Nový stav</newState>
-      <user>Uživatel</user>
-      <description>Popis</description>
-      <version>Verze</version>
-      <visibility>Viditelnost</visibility>
+      <date>Date</date>
+      <newState>New State</newState>
+      <user>User</user>
+      <description>Description</description>
+      <version>Version</version>
+      <visibility>Visibility</visibility>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -2145,8 +2145,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Verze</version>
-      <state>Stav</state>
+      <version>Version</version>
+      <state>State</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2158,21 +2158,21 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>Odebrat miniaturu</RemoveThumbnail>
+      <RemoveThumbnail>Remove Thumbnail</RemoveThumbnail>
     </action>
     <label>
-      <mediumSize>Obrázek miniatury</mediumSize>
-      <SelectFile>Vybrat miniaturu</SelectFile>
+      <mediumSize>Thumbnail Image</mediumSize>
+      <SelectFile>Choose Thumbnail Image</SelectFile>
     </label>
     <msg>
-      <mimetype-incorrect>Typ souboru není správný. Miniatury lze vytvořit pouze ze souborů typu .JPG.PNG nebo .GIF.</mimetype-incorrect>
-      <access-denied>Přístup byl odepřen. Do tohoto uzlu nemáte oprávnění přidat miniaturu.</access-denied>
-      <confirm-delete>Jste si jisti, že chcete odstranit tuto miniaturu?</confirm-delete>
-      <is-checked-in>Na tomto uzlu probíhá check in. Prosím, před provedením libovolné akce proveďte check out.</is-checked-in>
-      <fileName-error>Prosím vyberte soubor k nahrání.</fileName-error>
+      <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
+      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
+      <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
+      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
-      <remove-thumbnail>Odstranit tuto miniaturu</remove-thumbnail>
+      <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
     </title>
   </UIThumbnailForm>
   <!--
@@ -2182,13 +2182,13 @@
   -->
   <UIAnyPermission>
     <label>
-      <anyPermission>Jakékoliv oprávnění</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIAnyPermission>
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Nastavit libovolné oprávnění</AddAnyPermission>
+      <AddAnyPermission>Set Any Permission</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2208,8 +2208,8 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Vybrat skupinu</selectGroup>
-      <selectUser>Vybrat uživatele</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2222,35 +2222,35 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>Buď tento disk neexistuje nebo k němu nemáte oprávnění k přístupu.</nopermission>
+    <nopermission>There is either no drive or you do not have permission to access this drive.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>Upravit prohlížeč souborů</title>
+    <title>Edit File Explorer</title>
     <action>
-      <Edit>Upravit</Edit>
+      <Edit>Edit</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <uploadFileSizeLimitMB>Limit velikosti nahraného souboru (MB)</uploadFileSizeLimitMB>
-      <isDirectlyDrive>Přímý disk</isDirectlyDrive>
-      <driveName>Název disku</driveName>
-      <usecase>Vybrat typ</usecase>
-      <SelectNodePath>Vybrat cestu</SelectNodePath>
-      <showTopBar>Zobrazit horní panel</showTopBar>
-      <showActionBar>Zobrazit panel akcí</showActionBar>
-      <showSideBar>Zobrazit levý panel</showSideBar>
-      <showFilterBar>Zobrazit panel filtrování</showFilterBar>
-      <nodePath>Vybrat cestu</nodePath>
+      <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Direct Drive</isDirectlyDrive>
+      <driveName>Drive Name</driveName>
+      <usecase>Select Type</usecase>
+      <SelectNodePath>Select Path</SelectNodePath>
+      <showTopBar>Show Top Bar</showTopBar>
+      <showActionBar>Show Action Bar</showActionBar>
+      <showSideBar>Show Left Bar</showSideBar>
+      <showFilterBar>Show Filter Bar</showFilterBar>
+      <nodePath>Select Path</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
   <UIDriveSelector>
     <label>
-      <driveName>Název disku</driveName>
-      <action>Akce</action>
-      <adddrives>Přidat disky</adddrives>
+      <driveName>Drive Name</driveName>
+      <action>Action</action>
+      <adddrives>Add Drives</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -2258,27 +2258,27 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <personal-usecase>Když vyberete osobní použití, bude použit soukromý disk aktuálního uživatele.</personal-usecase>
-      <drive-edit-permission>Název disku nelze upravovat. Klikněte na tlačítko Upravit.</drive-edit-permission>
-      <path-edit-permission>Cestu nelze upravovat. Klikněte na tlačítko Upravit.</path-edit-permission>
+      <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
+      <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
+      <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Vybrat disk</UIDriveSelector>
+      <UIDriveSelector>Select Drive</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Vybrat uzel</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Vybrat disk</SelectDrive>
+      <SelectDrive>Select Drive</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2287,141 +2287,141 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Přidat symlink</AddSymLink>
-      <AddLocalizationLink>Přidat překlad</AddLocalizationLink>
+      <AddSymLink>Add Symlink</AddSymLink>
+      <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Správce symlinků</UISymLinkManager>
-      <UIAddTranslationManager>Přidat překlad</UIAddTranslationManager>
+      <UISymLinkManager>Symlink Manager</UISymLinkManager>
+      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
   <UISymLinkForm>
     <label>
-      <symLinkName>Název symlinku</symLinkName>
-      <pathNode>Cesta uzlu</pathNode>
+      <symLinkName>Symlink Name</symLinkName>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <addFolder-successful>Symlink '{0}' byl úspěšně přidán.</addFolder-successful>
-      <name-invalid>Zadejte prosím název symlinku.</name-invalid>
-      <name-not-allowed>Tento název není povolen.</name-not-allowed>
-      <fileName-error>Název souboru je neplatný.</fileName-error>
-      <constraint-violation>Typ uzlu {0} nelze přidat k aktuálnímu uzlu.</constraint-violation>
-      <repository-exception>Přístup byl odepřen. Do tohoto uzlu nemáte oprávnění přidat symbolický odkaz.</repository-exception>
-      <numberformat-exception>Tuto složku nelze uložit. Zadaný název musí být v číselném formátu.</numberformat-exception>
-      <path-node-invalid>Zadejte uzel s cestou.</path-node-invalid>
-      <path-node-not-allowed>Tento název není povolen.</path-node-not-allowed>
-      <non-node>Prosím vyberte důvěryhodný cílový uzel; nemusíte mít k tomuto uzlu právo pro čtení.</non-node>
-      <cannot-save>K tomuto typu uzlu nelze přidat symbolický odkaz.</cannot-save>
-      <item-exists-exception>Název uzlu již existuje.</item-exists-exception>
-      <translation-node-same-language-default>Uzel s překladem má stejný jazyk jako výchozí jazyk aktuálního uzlu.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Tento cílový uzel není nijak odkazován.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
+      <name-invalid>Please enter the symlink name.</name-invalid>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
+      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
   <UIAddTranslationForm>
     <label>
-      <symLinkName>Název symbolického odkazu</symLinkName>
-      <pathNode>Cesta k dokumentu:</pathNode>
-      <note>Vyberte jiný dokument, který bude sloužit pro překlad</note>
+      <symLinkName>Symlink Name</symLinkName>
+      <pathNode>Document Path:</pathNode>
+      <note>Select another document that will serve as the translation</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <SelectDocument>Vybrat dokument</SelectDocument>
+      <SelectDocument>Select Document</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>Symbolický odkaz '{0}' byl úspěšně přidán.</addFolder-successful>
-      <name-invalid>Zadejte prosím název symbolického odkazu.</name-invalid>
-      <name-not-allowed>Tento název není povolen.</name-not-allowed>
-      <fileName-error>Název souboru je neplatný.</fileName-error>
-      <constraint-violation>Typ uzlu {0} nelze přidat k aktuálnímu uzlu.</constraint-violation>
-      <repository-exception>Přístup byl odepřen. Do tohoto uzlu nemáte oprávnění přidat symbolický odkaz.</repository-exception>
-      <numberformat-exception>Tuto složku nelze uložit. Zadaný název musí být v číselném formátu.</numberformat-exception>
-      <path-node-invalid>Zadejte uzel s cestou.</path-node-invalid>
-      <path-node-not-allowed>Tento název není povolen.</path-node-not-allowed>
-      <non-node>Prosím vyberte důvěryhodný cílový uzel; nemusíte mít k tomuto uzlu právo pro čtení.</non-node>
-      <cannot-save>Došlo k chybě při vytváření symbolického odkazu.</cannot-save>
-      <item-exists-exception>Název uzlu již existuje.</item-exists-exception>
-      <translation-node-same-language-default>Uzel s překladem má stejný jazyk jako výchozí jazyk aktuálního uzlu.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>Tento cílový uzel není nijak odkazován.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
+      <name-invalid>Please enter the symlink name.</name-invalid>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
+      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <path-node-invalid>Please enter the path.</path-node-invalid>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
+      <cannot-save>An error occurred while creating the symlink.</cannot-save>
+      <item-exists-exception>An item with this name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Vybrat cílový uzel</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Vybrat dokument</UIContentSelectorOne>
+      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
   <ECMContextMenu>
     <event>
-      <AddSymLink>Přidat symbolický odkaz</AddSymLink>
-      <AddLocalizationLink>Přidat překlad</AddLocalizationLink>
+      <AddSymLink>Add Symlink</AddSymLink>
+      <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>Nelze vytvořit odkaz z uzlu {0} na {1}.</create-link-problem>
-      <dest-node-is-link>Cílový uzel '{0}' je již symbolickým odkazem, takže nelze vytvořit symbolický odkaz uvnitř něj.</dest-node-is-link>
-      <selected-is-link>Zvolená položka '{0}' je již odkazem. Nemůžete vytvořit odkaz na jiný odkaz.</selected-is-link>
-      <confirm-create-link>Chcete vytvořit odkaz na toto umístění?</confirm-create-link>
+      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
+      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Vytvořit odkaz</CreateLink>
+      <CreateLink>Create Link</CreateLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkspaceList>
     <msg>
-      <AccessDeniedException>Přístup byl odepřen.  V této pracovní ploše nemáte oprávnění ke čtení.</AccessDeniedException>
+      <AccessDeniedException>Access denied. You do not have read permission in this workspace.</AccessDeniedException>
     </msg>
     <label>
-      <taxonomyTree>Strom kategorií</taxonomyTree>
+      <taxonomyTree>Category Tree</taxonomyTree>
     </label>
   </UIWorkspaceList>
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Přidat kategorie</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Strom kategorie:</taxonomyTree>
-      <rootNodePath>Kořenový strom:</rootNodePath>
+      <taxonomyTree>Category Tree:</taxonomyTree>
+      <rootNodePath>Root Tree:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
 
   <UIActionBar>
     <tooltip>
-      <ManageSimpleCategories>Správa jednoduchých kategorií</ManageSimpleCategories>
+      <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
 
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Odkazované kategorie</UICategoriesAddedList>
-        <UIOneNodePathSelector>Vybrat kategorii</UIOneNodePathSelector>
+        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2429,7 +2429,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Vybrat kategorii</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2441,95 +2441,95 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Přidat kategorii</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>Název kategorie již existuje.</ItemExistsException>
+      <ItemExistsException>The category name already exists.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Odstranit</OK>
-      <ReplaceData>Nahradit data</ReplaceData>
-      <Back>Zpět na přejmenování</Back>
-      <Keepfile>Ponechat oba soubory</Keepfile>
-<ReadOnly>Otevřít pouze pro čtení</ReadOnly>
-<Cancel>#{word.cancel}</Cancel>
-      <KeepBoth>Ponechat oba</KeepBoth>
-      <CreateNewVersion>Uložit jako novou verzi</CreateNewVersion>
+      <OK>Delete</OK>
+      <ReplaceData>Replace Data</ReplaceData>
+      <Back>Back to Rename</Back>
+      <Keepfile>Keep both files</Keepfile>
+<ReadOnly>Open Read-only</ReadOnly>
+<Cancel>Cancel</Cancel>
+      <KeepBoth>Keep Both</KeepBoth>
+      <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>Ok</OK>
-      <ReplaceData>Nahradit data</ReplaceData>
-      <Back>Zpět na přejmenování</Back>
-      <Keepfile>Ponechat oba soubory</Keepfile>
+      <OK>OK</OK>
+      <ReplaceData>Replace Data</ReplaceData>
+      <Back>Back to Rename</Back>
+      <Keepfile>Keep both files</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Přidat kategorie</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>Soubor nelze přesunout, protože cílová složka je shodná se zdrojovou.</can-not-move-to-itself>
-      <is-editing>Dokument nelze přesunout, zatímco je upravován. Prosím, nejprve jej zavřete.</is-editing>
+      <can-not-move-to-itself>You cannot move the file, because the destination folder is the same as the source folder.</can-not-move-to-itself>
+      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
-      <behavior>UUID chování</behavior>
-      <versionHistory>Historie verzí</versionHistory>
+      <behavior>UUID Behavior</behavior>
+      <versionHistory>Version History</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Neplatný typ souboru v historii verzí. Jsou podporovány pouze soubory typu .ZIP.</history-invalid-type>
-      <history-invalid-content>Neplatný obsah v datech historie verzí. Vyberte podporovaný typ souboru k importu.</history-invalid-content>
+      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
+      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Vytvořit nový</type0>
-      <type1>Odebrat stávající</type1>
-      <type2>Nahradit stávající</type2>
-      <type3>Vyhodit výjimku</type3>
+      <type0>Create New</type0>
+      <type1>Remove Existing</type1>
+      <type2>Replace Existing</type2>
+      <type3>Throw Exception</type3>
     </Behavior>
   </Import>
 
   <UIExportNode>
     <action>
-      <ExportHistory>Exportovat historii verzí</ExportHistory>
+      <ExportHistory>Export Version History</ExportHistory>
     </action>
   </UIExportNode>
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>Tento uzel nebo nadřazený uzel je uzamčen jiným uživatelem, takže jej nelze odstranit.</node-locked-other-person>
+      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
-      <docview>Zobrazení dokumentu</docview>
-      <sysview>Zobrazení systému</sysview>
+      <docview>Document View</docview>
+      <sysview>System View</sysview>
     </label>
   </Import>
 
   <UIDocumentForm>
     <msg>
-      <do-not-permission>Nemáte oprávnění k načtení šablony {0}.</do-not-permission>
+      <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2542,16 +2542,16 @@
   <UIActionBar>
     <obtion>
       <Admin>Admin</Admin>
-      <Info>Informace</Info>
-      <Actions>Akce</Actions>
-      <Collaboration>Spolupráce</Collaboration>
-      <Search>Hledat</Search>
+      <Info>Info</Info>
+      <Actions>Actions</Actions>
+      <Collaboration>Collaboration</Collaboration>
+      <Search>Search</Search>
     </obtion>
   </UIActionBar>
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Nelze odemknout, protože uzel '{0}' (nebo jeho nadřazený uzel) je checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,39 +2560,39 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Nelze povolit správu verzí uzlu.</cannot-enable-version>
+      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>Ze zdrojového uzlu nelze číst data.</cannot-readsource>
+        <cannot-readsource>You can't read data from the source.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Před přidáním kategorie nejprve nahrajte soubor.</upload-not-null>
+      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>Pro tuto skupinu musíte nastavit vlastnost.</allow-setProperty>
+      <allow-setProperty>You must set a property for this group.</allow-setProperty>
     </msg>
   </UIActionBar>
 
   <UIActionForm>
     <msg>
-      <name-not-allowed>Tento název akce není povolen.</name-not-allowed>
+      <name-not-allowed>This action name is not allowed.</name-not-allowed>
     </msg>
   </UIActionForm>
 
   <UISaveQueryForm>
     <msg>
-      <name-not-allowed>Tento název dotazu není povolen.</name-not-allowed>
+      <name-not-allowed>This query name is not allowed.</name-not-allowed>
     </msg>
   </UISaveQueryForm>
   <UISimpleSearch>
     <msg>
-      <name-not-allowed>Slovo nebo fráze v obsahu není povoleno.</name-not-allowed>
+      <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
     </msg>
   </UISimpleSearch>
 
@@ -2602,7 +2602,7 @@
    -->
   <ECMContextMenu>
       <event>
-        <Permlink>Zobrazit dokument</Permlink>
+        <Permlink>View Document</Permlink>
       </event>
   </ECMContextMenu>
   
@@ -2612,105 +2612,105 @@
    -->
   <UIFolderForm>
     <label>
-      <nt_folder>Složka dokumentu</nt_folder>
-      <nt_unstructured>Složka obsahu</nt_unstructured>
-      <exo_cssFolder>Složka CSS</exo_cssFolder>
-      <exo_jsFolder>Složka Javascript</exo_jsFolder>
+      <nt_folder>Document Folder</nt_folder>
+      <nt_unstructured>Content Folder</nt_unstructured>
+      <exo_cssFolder>CSS Folder</exo_cssFolder>
+      <exo_jsFolder>Javascript Folder</exo_jsFolder>
       <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Složka obsahu webu</exo_webFolder>
+      <exo_webFolder>Web Content Folder</exo_webFolder>
    </label>
   </UIFolderForm>
 
   <Comments>
     <tooltip>
-      <remove-comment>Odstranit komentář</remove-comment>
-      <edit-comment>Upravit komentář</edit-comment>
+      <remove-comment>Remove this comment</remove-comment>
+      <edit-comment>Edit this comment</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Jste si jisti, že chcete smazat tento komentář?</confirm-deletecomment>
+      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
  <UIExportNode>
   <msg>
-    <OutOfMemoryError>Při exportu velkých dat byste měli vybrat zobrazení systému.</OutOfMemoryError>
+    <OutOfMemoryError>You should select System View while exporting large data.</OutOfMemoryError>
   </msg>
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>Nemáte oprávnění k přístupu k těmto stromům kategorií.</AccessDeniedException>
+      <AccessDeniedException>You do not have permission to access these category trees.</AccessDeniedException>
     </msg>
   </Taxonomy>
 
   <UIJcrExplorerEditForm>
     <msg>
-      <notNullDriveName>Název disku je null nebo prázdný. Vyplňte pole Název disku.</notNullDriveName>
-      <notNullPath>Cesta je null nebo prázdná. Prosím vyplňte cestu.</notNullPath>
+      <notNullDriveName>The Drive Name is null or empty. Please fill out the Drive Name field.</notNullDriveName>
+      <notNullPath>The path is null or empty. Please fill out the path.</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Jste si jisti, že chcete odstranit tuto přílohu?</remove-attachment>
+      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Nahrát soubor</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
   <UIAllItems>
     <label>
-      <OwnedByMe>Patřící mně</OwnedByMe>
-      <Favourites>Oblíbené</Favourites>
-      <Hidden>Skryté</Hidden>
-      <Trash>Koš</Trash>
-      <Configuration>Nastavit předvolby</Configuration>
+      <OwnedByMe>Owned by me</OwnedByMe>
+      <Favourites>Favorites</Favourites>
+      <Hidden>Hidden</Hidden>
+      <Trash>Trash</Trash>
+      <Configuration>Set Up Preferences</Configuration>
     </label>
     <title>
-      <allItems>Všechny položky</allItems>
+      <allItems>All Items</allItems>
     </title>
   </UIAllItems>
 
   <UIPreferencesForm>
       <label>
-          <Alphabetic>Abecedně</Alphabetic>
-          <Type>Typ</Type>
-          <CreatedDate>Datum vytvoření</CreatedDate>
-          <ModifiedDate>Datum změny</ModifiedDate>
-          <Ascending>Vzestupně</Ascending>
-          <Descending>Sestupně</Descending>
+          <Alphabetic>Alphabetical</Alphabetic>
+          <Type>Type</Type>
+          <CreatedDate>Created Date</CreatedDate>
+          <ModifiedDate>Modified Date</ModifiedDate>
+          <Ascending>Ascending</Ascending>
+          <Descending>Descending</Descending>
       </label>
   </UIPreferencesForm>
 
   <UISavedSearches>
     <title>
-      <savedSearches>Uložená hledání</savedSearches>
+      <savedSearches>Saved Searches</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
     <label>
-       <Images>Obrázek</Images>
+       <Images>Image</Images>
        <Video>Video</Video>
-       <Music>Hudba</Music>
-       <Documents>Dokument</Documents>
-       <Content>Obsah</Content>
+       <Music>Music</Music>
+       <Documents>Document</Documents>
+       <Content>Content</Content>
     </label>
   </DocumentType>
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Obrázek</Images>
+      <Images>Image</Images>
       <Video>Video</Video>
-      <Music>Hudba</Music>
-      <Documents>Dokument</Documents>
-      <Content>Obsah</Content>
+      <Music>Music</Music>
+      <Documents>Document</Documents>
+      <Content>Content</Content>
     </label>
-    <title>Nastavit předvolby filtru</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2719,40 +2719,40 @@
 
   <UIAllItemsByType>
     <label>
-    <ByType>Filtrovat podle typu</ByType>
-      <DocumentFilterConfiguration>Nastavit předvolby filtru</DocumentFilterConfiguration>
+    <ByType>Filter by Type</ByType>
+      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
     </label>
     <title>
-      <ShowVideo>Zobrazit všechny video soubory</ShowVideo>
-      <ShowMusic>Zobrazit všechny hudební soubory</ShowMusic>
-      <ShowImages>Zobrazit všechny soubory obrázků</ShowImages>
-      <ShowDocuments>Zobrazit všechny soubory dokumentů</ShowDocuments>
-      <ShowContent>Zobrazit všechny typy dokumentů</ShowContent>
+      <ShowVideo>Show all video files</ShowVideo>
+      <ShowMusic>Show all music files</ShowMusic>
+      <ShowImages>Show all image files</ShowImages>
+      <ShowDocuments>Show all document files</ShowDocuments>
+      <ShowContent>Show all document types</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Prezentace</slide-show>
+      <slide-show>Slide Show</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
     <event>
-      <PlayMedia>Přehrát média</PlayMedia>
+      <PlayMedia>Play Media</PlayMedia>
     </event>
   </ECMContextMenu>
   <UIPopupWindow>
     <title>
-      <UIDocumentFilterForm>Typ filtru dokumentů</UIDocumentFilterForm>
+      <UIDocumentFilterForm>Filter Documents Type</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Patřící mně</showOwnedByUser>
-      <showFavourites>Oblíbené</showFavourites>
-      <showHiddens>Skryté</showHiddens>
-      <showTrash>Koš</showTrash>
+      <showOwnedByUser>Owned by me</showOwnedByUser>
+      <showFavourites>Favorites</showFavourites>
+      <showHiddens>Hidden</showHiddens>
+      <showTrash>Trash</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2762,12 +2762,12 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Jste si jisti, že chcete vyprázdnit všechny položky z koše?</confirm-delete>
+      <confirm-delete>Are you sure you want to empty all items from trash?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
-      <name>Název kategorie</name>
+      <name>Category Name</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2776,53 +2776,53 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Přidat kategorii</UICategoryForm>
+      <UICategoryForm>Add Category</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Přidat kategorii</AddCategory>
+      <AddCategory>Add Category</AddCategory>
     </tooltip>
    </UIActionBar>
 
    <UITaggingForm>
     <label>
-      <Public>Veřejné</Public>
-      <Private>Soukromé</Private>
-      <tagScopes>Rozsahy tagu</tagScopes>
+      <Public>Public</Public>
+      <Private>Private</Private>
+      <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
 
   <UITagExplorer>
     <title>
-      <PublicTags>Tagy</PublicTags>
-      <EditPublicTags>Upravit tagy</EditPublicTags>
-      <PrivateTags>Tagy</PrivateTags>
+      <PublicTags>Tags</PublicTags>
+      <EditPublicTags>Edit Tags</EditPublicTags>
+      <PrivateTags>Tags</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
-      <name>Jméno</name>
-      <relatedDocuments>Související dokumenty</relatedDocuments>
-      <action>Akce</action>
+      <name>Name</name>
+      <relatedDocuments>Related Documents</relatedDocuments>
+      <action>Action</action>
     </header>
     <action>
       <title>
-        <EditTag>Upravit tag</EditTag>
-        <RemoveTag>Odstranit tag</RemoveTag>
-        <AddTag>Přidat tag</AddTag>
+        <EditTag>Edit Tag</EditTag>
+        <RemoveTag>Remove Tag</RemoveTag>
+        <AddTag>Add Tag</AddTag>
       </title>
     </action>
     <msg>
-      <confirm-remove>Opravdu chcete tento tag odstranit?</confirm-remove>
+      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Upravit tag</UIEditingTagsForm>
+      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -2832,8 +2832,8 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <label>
-      <tagName>Název tagu:</tagName>
-      <relatedDocuments>Související dokumenty</relatedDocuments>
+      <tagName>Tag Name:</tagName>
+      <relatedDocuments>Related Documents</relatedDocuments>
     </label>
   </UITagForm>
 
@@ -2845,57 +2845,57 @@
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>Nelze upravit tento uzel s cestou k {0}. Je uzamčen jiným uživatelem.</node-locked-editing>
+      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>Došlo k chybě při aktualizaci stylu tagu.</error-update>
+      <error-update>An error occurred while updating the tag style.</error-update>
     </msg>
   </UITagStyleForm>
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Přístup byl odepřen.</editTagAccessDenied>
+      <editTagAccessDenied>Access denied.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Správce tagů</UITaggingFormContainer>
+      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Vybrat typ uzlu</UINodeTypeSelector>
+      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
-      <ShowComponent>Zobrazit komponenty</ShowComponent>
-      <removeReference>Odstranit</removeReference>
+      <ShowComponent>Show Component</ShowComponent>
+      <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Zobrazit komponenty</ShowComponent>
-      <removeReference>Odstranit</removeReference>
+      <ShowComponent>Show Component</ShowComponent>
+      <removeReference>Remove</removeReference>
     </title>
   </EditFormAction>
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>Jsou zde některé neplatné znaky. Zadejte jinou hodnotu.</Invalid-char>
-      <empty-input>Hodnota pole je null nebo prázdná.</empty-input>
+      <Invalid-char>There are some invalid characters. Please type another value.</Invalid-char>
+      <empty-input>The value of the field is null or empty.</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
   <UIPreferencesForm>
       <label>
-            <queryType>Typ dotazu:</queryType>
+            <queryType>Query language:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2903,23 +2903,23 @@
 
   <UIDocumentInfo>
     <msg>
-      <repository-error>Došlo k chybě. Informace o úložišti byly ztraceny.</repository-error>
+      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
     </msg>
   </UIDocumentInfo>
 
   <UITreeExplorer>
     <msg>
-      <repository-error>Došlo k chybě. Informace o úložišti byly ztraceny.</repository-error>
+      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>Dokument nelze uložit. Vstupní data chybí nebo jsou neplatná.</constraintviolation-exception>
+      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>Dokument nelze uložit. Vstupní data chybí nebo jsou neplatná.</constraintviolation-exception>
+      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -2929,34 +2929,34 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <formInput>Předchozí cesta byla ztracena. Zvolte prosím novou.</formInput>
+      <formInput>The previous path was lost. Please select a new one.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Přidat</Add>
+      <Add>Add</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Vybrat nadřazený uzel</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Přidat kořenový uzel</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UIActionForm>
     <msg>
-      <homePath-emty>Cesta domů je prázdná.</homePath-emty>
-      <targetPath-emty>Cílová cesta je prázdná.</targetPath-emty>
+      <homePath-emty>The home path is empty.</homePath-emty>
+      <targetPath-emty>The target path is empty.</targetPath-emty>
     </msg>
     </UIActionForm>
     <UIActionBar>
       <msg>
-        <not-exist-categories>Není tu žádná kategorie.</not-exist-categories>
+        <not-exist-categories>There are no categories.</not-exist-categories>
       </msg>
     </UIActionBar>
 
@@ -2971,102 +2971,102 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Revize</version>
-      <date>Datum</date>
-      <author>Autor</author>
-      <status>Stav</status>
-      <action>Akce</action>
-      <label>Revize</label>
-      <none>Bez revize</none>
-      <seeall>Zobrazit všechny verze</seeall>
-      <currentVersion>Aktuální revize</currentVersion>
-      <confirm>Vaše práce bude ztracena. Jste si jisti, že chcete nahradit aktuální revizi?</confirm>
+      <version>Revisions</version>
+      <date>Date</date>
+      <author>Author</author>
+      <status>Status</status>
+      <action>Action</action>
+      <label>Revision</label>
+      <none>No revisions</none>
+      <seeall>See all versions</seeall>
+      <currentVersion>Current Revision</currentVersion>
+      <confirm>You will lose your draft work. Are you sure you want to replace the current revision?</confirm>
     </revisions>
     <status>
-      <version>Revize</version>
-      <title>Stav</title>
-      <archived>Archivováno</archived>
-      <obsolete>Zastaralý</obsolete>
-      <unpublished>Nezveřejněno</unpublished>
-      <enrolled>Zapsané</enrolled>
-      <draft>Koncept</draft>
-      <pending>Čekající</pending>
-      <approved>Schváleno</approved>
-      <inreview>V revizi</inreview>
-      <staged>Umístěno</staged>
-      <published>Zveřejněno</published>
-      <live>Zveřejněno</live>
+      <version>Revision</version>
+      <title>Status</title>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Unpublished</unpublished>
+      <enrolled>Enrolled</enrolled>
+      <draft>Draft</draft>
+      <pending>Pending</pending>
+      <approved>Approved</approved>
+      <inreview>In Review</inreview>
+      <staged>Staged</staged>
+      <published>Published</published>
+      <live>Published</live>
     </status>
     <scheduled>
-      <title>Naplánováno</title>
-      <from>Od</from>
-      <to>Do</to>
+      <title>Scheduled</title>
+      <from>From</from>
+      <to>To</to>
     </scheduled>
     <title>
-      <preview>Náhled</preview>
-      <restore>Obnovit</restore>
+      <preview>Preview</preview>
+      <restore>Restore</restore>
     </title>
     <msg>
-      <have-no-view-template>Šablona zobrazení není podporována.</have-no-view-template>
-      <restore-complete>Obnovení bylo dokončeno.</restore-complete>
+      <have-no-view-template>The View template is not supported.</have-no-view-template>
+      <restore-complete>Restore completed.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Datum</date>
-      <versionName>Název revize</versionName>
-      <currentState>Současný stav</currentState>
-      <user>Autor</user>
-      <description>Popis</description>
+      <date>Date</date>
+      <versionName>Revision Name</versionName>
+      <currentState>Current State</currentState>
+      <user>Author</user>
+      <description>Description</description>
     </header>
-    <create-version>Je vytvořena nová verze</create-version>
+    <create-version>New version is created</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
-      <introduction>Můžete naplánovat zveřejnění dokumentu. Vyberte data, kdy byste rádi viděli váš dokument zveřejněn</introduction>
-      <no-schedule-info>Pro váš dokument neexistuje žádné naplánované zveřejnění</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Datum zahájení publikace</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>Datum dokončení publikace</UIPublicationPanelEndDateInput>
+      <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
+      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
     </label>
     <msg>
-      <save-finished>Nový plán zveřejnění byl úspěšně uložen.</save-finished>
+      <save-finished>Your new publication schedule was saved successfully.</save-finished>
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Vynulovat</Reset>
+      <Reset>Reset</Reset>
     </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
-      <header>Datum zveřejnění</header>
-      <start>Začít proces zveřejnění</start>
-      <end>Ukončit proces zveřejnění</end>
+      <header>Publication Date</header>
+      <start>Start Publication</start>
+      <end>End Publication</end>
     </label>
     <msg>
-      <invalid-format>Formát data je neplatný. Zkontrolujte znovu.</invalid-format>
-      <fromDate-after-toDate>Datum od musí být dřívější než datum do.</fromDate-after-toDate>
+      <invalid-format>The date format is invalid. Please check again.</invalid-format>
+      <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Správa publikace</UIPublicationContainer>
-      <UIPublishingPanel>Správa publikace</UIPublishingPanel>
+      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
+      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Stav</status>
-      <author>Autor</author>
-      <date>Datum vytvoření</date>
-      <title>Název dokumentu</title>
-      <lastUser>Poslední uživatel</lastUser>
+      <status>Status</status>
+      <author>Author</author>
+      <date>Created Date</date>
+      <title>Document Title</title>
+      <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>Název tagu již existuje.</NameAlreadyExist>
+      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist>
     </msg>
   </UITagForm>
 
@@ -3076,165 +3076,165 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Vybrat kategorii</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
    <action>
-     <HideAdvance>Skrýt pokročilé nastavení</HideAdvance>
-     <ShowAdvance>Zobrazit pokročilé nastavení</ShowAdvance>
+     <HideAdvance>Hide Advanced</HideAdvance>
+     <ShowAdvance>Show Advanced</ShowAdvance>
     </action>
     <label>
-    <Advance>Pokročilé nastavení</Advance>
+    <Advance>Advanced</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
 <msg>
-  <file-access-denied>Přístup k souboru byl odepřen.</file-access-denied>
-  <anonymous-access-denied>Anonymní uživatel nemá oprávnění k použití této funkce.</anonymous-access-denied>
+  <file-access-denied>File access denied.</file-access-denied>
+  <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
 </msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <ShowDrives>Zobrazit disky</ShowDrives>
+      <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
       <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <not-found>Dokument, ke kterému se pokoušíte získat přístup, již není k dispozici.</not-found>
+      <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
       <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>Hodnoty všech polí byly uloženy.</fields-saved>
-      <fields-cancelled>Hodnoty všech polí  byly zrušeny.</fields-cancelled>
+      <fields-saved>All field values saved.</fields-saved>
+      <fields-cancelled>All field values canceled.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
   <msg>
-  <confirm-close>Provedené změny budou ztraceny, pokud zavřete tento formulář.</confirm-close>
-  <confirm-changeType>Provedené změny budou ztraceny, pokud změníte typ obsahu.</confirm-changeType>
-  <confirm-navigate>Pokud opustíte tuto stránku, budou provedené změny ztraceny.</confirm-navigate>
+  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
+  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
+  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
   </msg>
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
     <msg>
-      <wrong-mimetype>MIME typ {0} není pro pole {1} povolen. Prosím nahrajte jiný soubor</wrong-mimetype>
+      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
     </msg>
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>Ne</no>
-  <yes>Ano</yes>
-  <true>Pravda</true>
-  <false>Nepravda</false>
-  <Electronic>Elektronický</Electronic>
+    <no>No</no>
+  <yes>Yes</yes>
+  <true>True</true>
+  <false>False</false>
+  <Electronic>Electronic</Electronic>
   <Paper>Paper</Paper>
-  <NONE>Žádný</NONE>
+  <NONE>None</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
-  <UNCLASSIFIED>Nezařazené</UNCLASSIFIED>
-  <NOCONTRACT>Žádná smlouva</NOCONTRACT>
-  <one-minute>Minuta</one-minute>
-  <hourly>Každou hodinu</hourly>
-  <daily>Denně</daily>
-  <quarterly>Čtvrletně</quarterly>
-  <yearly>Ročně</yearly>
-  <ten-years>Deset let</ten-years>
-  <read>Akce uživatele</read>
-  <schedule>Plánovač</schedule>
-  <node_added>Přidání obsahu</node_added>
-  <node_removed>Odstranění obsahu</node_removed>
-  <property_added>Přidání vlastnosti</property_added>
-  <property_removed>Odebrání vlastnosti</property_removed>
-  <property_changed>Změna vlastnosti</property_changed>
+  <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+  <NOCONTRACT>No Contract</NOCONTRACT>
+  <one-minute>One Minute</one-minute>
+  <hourly>Hourly</hourly>
+  <daily>Daily</daily>
+  <quarterly>Quarterly</quarterly>
+  <yearly>Yearly</yearly>
+  <ten-years>Ten Years</ten-years>
+  <read>User Action</read>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
 </label>
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Uzel {0} je uzamčen. Nelze jej přesunout do koše.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Uzel {0} nebo jeho rodič je checked in. Nelze jej přesunout do koše.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Přístup byl odepřen. Uzel {0} nelze přesunout do koše.</access-denied-to-delete>
+<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
   <msg>
-  <unknown-error>Při úpravách této vlastnosti došlo k chybě.</unknown-error>
+  <unknown-error>An error occurred while editing this property.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>Tento uzel je uzamčen. Nelze jej sledovat.</node-is-locked>
-      <unknown-error>Došlo k chybám. Tento uzel nelze sledovat.</unknown-error>
+      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
+      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Pole '{0}' obsahuje XSS zranitelné znaky</xss-vulnerability-character>
+      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
   <label>
-    <AbortAll>Zrušit vše</AbortAll>
-    <AbortAllFiles>Přerušit všechny soubory</AbortAllFiles>
-    <MaxFileSize>Maximální velikost souboru je</MaxFileSize>
-    <InvalidCharacters>Neplatné znaky budou změněny na '-'</InvalidCharacters>
-    <DropFileMessage>Umistěte své soubory sem do aktuální složky</DropFileMessage>
+    <AbortAll>Abort all</AbortAll>
+    <AbortAllFiles>Abort all Files</AbortAllFiles>
+    <MaxFileSize>Maximum file size is</MaxFileSize>
+    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
+    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>v</in>
-    <MaxFileSizeAlert>Velikost souboru přesahuje limit velikosti</MaxFileSizeAlert>
-    <Waiting>Čeká se</Waiting>
-    <Error>Chyba</Error>
-    <or>nebo</or>
-    <AlreadyInUse>Již v provozu</AlreadyInUse>
-    <Keep>Zachovat obě</Keep>
-    <Replace>Nahradit</Replace>
-    <Canceled>Zrušeno</Canceled>
-      <UploadNewVersion>Nahrát novou verzi</UploadNewVersion>
+    <in>in</in>
+    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
+    <Waiting>Waiting</Waiting>
+    <Error>Error</Error>
+    <or>or</or>
+    <AlreadyInUse>Already in use</AlreadyInUse>
+    <Keep>Keep both</Keep>
+    <Replace>Replace</Replace>
+    <Canceled>Canceled</Canceled>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
-    <AbortAllConfirmation>Přejete si přerušit všechny soubory v průběhu?</AbortAllConfirmation>
+    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Vytvořeno</CreatedOn>
-  <Updated>Aktualizováno</Updated>
-  <by>od</by>
-  <you>vy</you>
+  <CreatedOn>Created on</CreatedOn>
+  <Updated>Updated</Updated>
+  <by>by</by>
+  <you>you</you>
   </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Jméno</name>
-      <date>Datum</date>
-      <size>Velikost</size>
-      <sortBy>Seřadit podle:</sortBy>
-      <filesAreSelected>Soubory jsou vybrány.</filesAreSelected>
-      <ClearSelection>Zrušit výběr</ClearSelection>
-      <more>Více</more>
+      <name>Name</name>
+      <date>Date</date>
+      <size>Size</size>
+      <sortBy>Sort by:</sortBy>
+      <filesAreSelected>Files are selected.</filesAreSelected>
+      <ClearSelection>Clear selection</ClearSelection>
+      <more>More</more>
     </label>
   </FileView>
   <UIPropertyForm>
   <msg>
-  <property-name-incorrect>Název vlastnosti je neplatný, prosím zadejte jinou hodnotu!</property-name-incorrect>
+  <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
-    <msg>Dokument {0} již existuje. Co chcete dělat?</msg>
+    <msg>A document {0} already exists. What do you want to do?</msg>
     <UIChkRememberNonVersioned>
-      <label>Zapamatovat si moji volbu pro všechny ostatní nezpracované dokumenty</label>
+      <label>Remember my choice for all others non-versioned documents</label>
     </UIChkRememberNonVersioned>
     <UIChkRememberVersioned>
-      <label>Zapamatovat si moji volbu pro všechny ostatní verze dokumentů</label>
+      <label>Remember my choice for all other versioned documents</label>
     </UIChkRememberVersioned>
   </UIDocumentAutoVersionForm>
   <DocumentAuto>
-    <message>Nová verze dokumentu {0} byla úspěšně vytvořena.</message>
-    <messageMultiFile>Byla vytvořena nová verze dokumentu.</messageMultiFile>
+    <message>A new version of the document {0} has been created successfully.</message>
+    <messageMultiFile>A new version of the document has been created.</messageMultiFile>
   </DocumentAuto>
   <!--
   ###################################################################################
@@ -3242,6 +3242,6 @@
   ###################################################################################
   -->
   <VersionException>
-  <msg>Nelze upravovat dokumenty, které jsou ve stavu checked in.</msg>  
+  <msg>Cannot modify documents that are being checked in.</msg>  
   </VersionException>
 </bundle>

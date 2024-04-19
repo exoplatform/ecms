@@ -15,8 +15,8 @@
 <label>
       <name>Name</name>
       <title>Title</title>
-      <type>Ang Klase</type>
-      <size>Kadak-on</size>
+      <type>Type</type>
+      <size>Size</size>
       <owner>Owner</owner>
       <lastModifier>Last Modifier</lastModifier>
       <created>Created Date</created>

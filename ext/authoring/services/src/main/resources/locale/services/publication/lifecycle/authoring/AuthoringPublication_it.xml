@@ -3,21 +3,21 @@
   <PublicationService>
     <AuthoringPublicationPlugin>
       <changeState>
-        <obsoleted>Contenuto obsoleto</obsoleted>
-        <published>Contenut pubblicato</published>
-<unpublished>Contenuto non pubblicato</unpublished>
-<archived>Contenuto archiviato</archived>
-<staged>Contenuto in canetiere</staged>
-<approved>Contenut approvato</approved>
-<pending>Contenuto in attesa</pending>
-<draft>Contenuto in bozza</draft>
+        <obsoleted>The content is obsolete</obsoleted>
+        <published>The content is published</published>
+<unpublished>The content is unpublished</unpublished>
+<archived>The content is archived</archived>
+<staged>The content is staged</staged>
+<approved>The content is approved</approved>
+<pending>The content is pending</pending>
+<draft>The content is in draft form</draft>
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
   <Publication>
     <log>
       <description>
-        <enrolled>Il contenuto è iscritto nel ciclo di vita della pubblicazione</enrolled>
+        <enrolled>The content enrolls in Publication life cycle</enrolled>
       </description>
     </log>
   </Publication>

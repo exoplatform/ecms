@@ -90,7 +90,7 @@
     <label>
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Tighatag</provider>
+      <provider>Provider</provider>
       <description>Description</description>
       <active>Active</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>

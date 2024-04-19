@@ -23,62 +23,62 @@
   <UITabForm>
     <label>
       <!-- Used in Administration-Content-Explorer in Views settings a popup with actions list -->
-      <showConnectCloudDrive>Connecter des documents Cloud</showConnectCloudDrive>
+      <showConnectCloudDrive>Connect Cloud Documents</showConnectCloudDrive>
     </label>
   </UITabForm>
   <UIPopupWindow>
     <title>
-      <ConnectCloudDriveForm>Connecter des documents Cloud</ConnectCloudDriveForm>
-      <UISharingManager>Partage de fichiers dans le cloud</UISharingManager>
+      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
+      <UISharingManager>Cloud file sharing</UISharingManager>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <ShowConnectCloudDrive>Connecter des documents Cloud</ShowConnectCloudDrive>
+      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
     <event>
-      <OpenCloudFile>Ouvrir dans</OpenCloudFile>
-      <SyncingFile>Synchronisation du fichier...</SyncingFile>
-      <PushCloudFile>Envoyer vers</PushCloudFile>
-      <RefreshCloudDrive>Synchroniser avec</RefreshCloudDrive>
-      <RefreshView>Actualiser la vue</RefreshView>
+      <OpenCloudFile>Open on</OpenCloudFile>
+      <SyncingFile>Synchronizing file...</SyncingFile>
+      <PushCloudFile>Push to</PushCloudFile>
+      <RefreshCloudDrive>Sync with</RefreshCloudDrive>
+      <RefreshView>Refresh view</RefreshView>
     </event>
   </ECMContextMenu>
   <CloudFileViewer>
     <event>
-      <OpenFileOn>Ouvrir $fileUrl sur $serviceName</OpenFileOn>
-      <OpenOn>Ouvrir dans</OpenOn>
-      <EditFile>Modifier</EditFile>
-      <ViewFile>Vue</ViewFile>
+      <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
+      <OpenOn>Open on</OpenOn>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
-      <sourceview>Afficher le code source</sourceview>
-      <webview>Voir en tant que page web</webview>
+      <sourceview>View source code</sourceview>
+      <webview>View as web page</webview>
     </label>
   </CloudFileViewer>
   <CloudFile>
     <msg>
-      <MoveToAnotherDriveNotSupported>Impossible de déplacer le fichier vers un autre répertoire Cloud</MoveToAnotherDriveNotSupported>
-      <MoveToOutsideDriveNotSupported>Impossible de déplacer le fichier en dehors de son répertoire Cloud</MoveToOutsideDriveNotSupported>
-      <MoveBetweenWorkspacesNotSupported>Impossible de déplacer le fichier cloud vers un autre espace de travail</MoveBetweenWorkspacesNotSupported>
-      <CloudDriveCopyMoveNotSupported>Impossible de copier ou déplacer le dossier du répertoire Cloud</CloudDriveCopyMoveNotSupported>
-      <DestinationNotWrittable>Impossible d'écrire dans le dossier de destination</DestinationNotWrittable>
-      <DestinationNotDefined>Le dossier de destination n'est pas défini</DestinationNotDefined>
-      <SourceNotDefined>Fichier source non défini</SourceNotDefined>
-      <ErrorMoveToDestination>Erreur lors du déplacement du lien partagé vers la destination</ErrorMoveToDestination>
-      <DestinationItemNameExists>Ce nom d'article existe déjà dans le dossier de destination</DestinationItemNameExists>
-      <LinkCreated>Lien {0} créé</LinkCreated>
-      <FileLinksCreated>Fichier {0} lié à {1}</FileLinksCreated>
-      <FileLinksSharedInSpace>Lien du fichier {0} partagé dans {1} de l'espace {2}</FileLinksSharedInSpace>
-      <FileLinksSharedInGroup>Lien du fichier {0} partagé dans {1} du groupe {2}</FileLinksSharedInGroup>
-      <FileLinksSharedWithUser>Lien de fichier {0} partagé avec l'utilisateur {2} dans son dossier {1}</FileLinksSharedWithUser>
-      <FileLinksNotSupportedToThisDestination>Lien de fichier non pris en charge vers cette destination</FileLinksNotSupportedToThisDestination>
-      <ErrorReadingDrives>Erreur lors de la lecture des lecteurs de documents</ErrorReadingDrives>
-      <CannotFindUser>Impossible de trouver l'utilisateur {0}</CannotFindUser>
-      <ErrorReadingFileLinks>Erreur lors de la lecture des liens vers le fichier</ErrorReadingFileLinks>
-      <ErrorReadingUserDrive>Erreur lors de la lecture du lecteur d'utilisateur</ErrorReadingUserDrive>
+      <MoveToAnotherDriveNotSupported>Can't move file to another cloud drive</MoveToAnotherDriveNotSupported>
+      <MoveToOutsideDriveNotSupported>Can't move file to outside its cloud drive</MoveToOutsideDriveNotSupported>
+      <MoveBetweenWorkspacesNotSupported>Can't move cloud file to different workspace</MoveBetweenWorkspacesNotSupported>
+      <CloudDriveCopyMoveNotSupported>Can't copy or move cloud drive folder</CloudDriveCopyMoveNotSupported>
+      <DestinationNotWrittable>Can't write in destination folder</DestinationNotWrittable>
+      <DestinationNotDefined>Destination folder not defined</DestinationNotDefined>
+      <SourceNotDefined>Source file not defined</SourceNotDefined>
+      <ErrorMoveToDestination>Error moving shared link to destination</ErrorMoveToDestination>
+      <DestinationItemNameExists>Such item name already exists at destination</DestinationItemNameExists>
+      <LinkCreated>Link {0} created</LinkCreated>
+      <FileLinksCreated>File {0} linked in {1}</FileLinksCreated>
+      <FileLinksSharedInSpace>File link {0} shared in {1} of {2} space</FileLinksSharedInSpace>
+      <FileLinksSharedInGroup>File link {0} shared in {1} of {2} group</FileLinksSharedInGroup>
+      <FileLinksSharedWithUser>File link {0} shared with user {2} in his {1} folder</FileLinksSharedWithUser>
+      <FileLinksNotSupportedToThisDestination>File linking not supported to this destination</FileLinksNotSupportedToThisDestination>
+      <ErrorReadingDrives>Error reading document drives</ErrorReadingDrives>
+      <CannotFindUser>Cannot find user {0}</CannotFindUser>
+      <ErrorReadingFileLinks>Error reading file links</ErrorReadingFileLinks>
+      <ErrorReadingUserDrive>Error reading user drive</ErrorReadingUserDrive>
     </msg>
   </CloudFile>
   <ConnectCloudDriveForm>
@@ -88,37 +88,37 @@
   </ConnectCloudDriveForm>
   <cloudStorage>
     <label>
-      <title>Stockage cloud</title>
-      <cloudDrives>Lecteurs Cloud</cloudDrives>
-      <provider>Connecteur</provider>
+      <title>Cloud Storage</title>
+      <cloudDrives>Cloud Drives</cloudDrives>
+      <provider>Provider</provider>
       <description>Description</description>
-      <active>Actif</active>
-      <ConnectionToCloud>Connexion aux lecteurs de stockage en ligne</ConnectionToCloud>
+      <active>Active</active>
+      <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
       <title>Documents</title>
-      <subtitle>Connectez vos lecteurs personnels</subtitle>
-      <description>Accédez à vos lecteurs personnels depuis votre Digital Workplace</description>
+      <subtitle>Connect your personal drives</subtitle>
+      <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
-      <title>Connectez vos lecteurs personnels</title>
+      <title>Connect your personal drives</title>
       <button>
-        <connect>Se connecter</connect>
+        <connect>Connect</connect>
       </button>
       <button>
-        <disconnect>Se déconnecter</disconnect>
+        <disconnect>Disconnect</disconnect>
       </button>
-      <noConnector>Aucun connecteur de lecteur personnel n'est disponible</noConnector>
-      <connectedAccountWith>Vous êtes connecté avec</connectedAccountWith>
+      <noConnector>No personal drive connector available</noConnector>
+      <connectedAccountWith>You are connected with</connectedAccountWith>
     </drawer>
     <alert>
-      <successMessage>Votre calendrier est correctement connecté</successMessage>
-      <errorMessage>Échec de la connexion</errorMessage>
-      <errorSaveUserSettings>Impossible de connecter le compte du lecteur distant</errorSaveUserSettings>
-      <disconnectSuccessMessage>Votre lecteur distant a été correctement déconnecté</disconnectSuccessMessage>
-      <disconnectErrorMessage>Échec de la connexion</disconnectErrorMessage>
+      <successMessage>Your cloud drive is connected correctly</successMessage>
+      <errorMessage>Failed connection</errorMessage>
+      <errorSaveUserSettings>Cannot save connected drive account</errorSaveUserSettings>
+      <disconnectSuccessMessage>Your cloud drive is disconnected correctly</disconnectSuccessMessage>
+      <disconnectErrorMessage>Failed to disconnect.</disconnectErrorMessage>
     </alert>
   </cloudDriveSettings>
 </bundle>

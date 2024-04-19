@@ -2,63 +2,63 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Название:</title>
-      <description>Описание:</description>
-      <keywords>Ключевые слова:</keywords>
-      <language>Язык:</language>
-      <robots>Роботы:</robots>
-      <sitemap>Карта сайта:</sitemap>
-      <sitemapvisible>Видимый на карте сайта</sitemapvisible>
-    <isInherited>Унаследовано от исходной страницы</isInherited>
-      <priority>Приоритет:</priority>
-      <frequency>Частота:</frequency>
-      <select-language>Выбрать язык</select-language>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
+      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+    <isInherited>Inherited from parent page</isInherited>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
+      <select-language>Select a language</select-language>
       <option>
-        <Always>Всегда</Always>
-        <Hourly>Каждый час</Hourly>
-        <Daily>Ежедневно</Daily>
-        <Weekly>Еженедельно</Weekly>
-        <Monthly>Ежемесячно</Monthly>
-        <Yearly>Ежегодно</Yearly>
-        <Never>Никогда</Never>
+        <Always>Always</Always>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
+        <Weekly>Weekly</Weekly>
+        <Monthly>Monthly</Monthly>
+        <Yearly>Yearly</Yearly>
+        <Never>Never</Never>
       </option> 
     </label>
     <tip>
-  <priority>Диапазон допустимых значений от 0.0 до 1.0</priority>
+  <priority>Valid values range from 0.0 to 1.0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>Непредвиденная ошибка произошла при сохранении метаданных страницы.</repository-exception>
-      <confirm-delete>Вы уверены, что вы хотите удалить эти данные SEO?</confirm-delete>      
+      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Удалить</seo-delete>
+    <seo-delete>Delete</seo-delete>
     </title>
   <help> 
-  <priority>Диапазон допустимых значений от 0.0 до 1.0.</priority>
-  <description>Помогите поисковикам: сообщите, если следующая страница имеет связь с тем, что они ищут.</description>
-  <keywords>Наиболее важные термины на странице разделены запятой.</keywords>  
+  <priority>Valid values range from 0.0 to 1.0.</priority>
+  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
+  <keywords>Most important terms in the page separated by a comma.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>Управление SEO</UISEOForm>
+      <UISEOForm>SEO Management</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>Управление SEO</seo>
+      <seo>SEO Management</seo>
   </title>
   <label>
-    <seo>СЕО</seo>
+    <seo>SEO</seo>
   </label>
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>Значение поля Приоритет должно иметь цифровой формат. Диапазон допустимых значений от 0.0 до 1.0.</Invalid-number>
+      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

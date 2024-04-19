@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Anahtar Kelime</keyword>
+      <keyword>Keyword</keyword>
       <portal>Portal</portal>
-      <Page>Sayfa</Page>
-      <Document>Belge</Document>
+      <Page>Page</Page>
+      <Document>Document</Document>
     </label>
     <action>
-      <Search>Ara</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Sayfa</Page>
-      <Document>Belge</Document>
-      <DocumentAndPage>Belge ve Sayfa</DocumentAndPage>
-      <documentandpage>Belge ve Sayfa Sayfa</documentandpage>
-      <results>{2} için {0} - {1} arası sonuçlar</results>
-      <oneResult>{0} için sadece bir sonuç var</oneResult>
-      <ofAboutCaption>yaklaşık</ofAboutCaption>
-      <timeUnitCaption>saniye</timeUnitCaption>
-      <similar>Aynı içeriğin görüntülendiği sayfalar</similar>
-      <editor>Düzenleyen</editor>
-      <date>Tarih</date>
-      <relevancy>İlgi</relevancy>
-      <title>Başlık</title>
-      <sortBy>Sıralama ölçütü:</sortBy>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Düzenle</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>{0} aramanız {1} ile eşleşmedi.</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Sayfa Başına Öğe</itemsPerPageSelector>
-      <searchFormSelector>Arama Formu Şablonu</searchFormSelector>
-      <searchResultSelector>Arama Sonucu Şablonu</searchResultSelector>
-      <searchPaginatorSelector>Arama Sayfalandırma Şablonu</searchPaginatorSelector>
-      <searchPageLayoutSelector>Arama Sayfası Yerleşim Şablonu</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Ana Yol</searchResultBasePathInputSetAction>
-      <pageMode>Sayfa Modu</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>Hiçbiri</none>
-        <more>Daha</more>
-        <pagination>Sayfalandırma</pagination>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Ana Yolu Seçin</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Anahtar geçersiz. Bazı karakterler desteklenmez.</keyword-not-support>
-     <not-checked>Lütfen arama türü seçin.</not-checked>
-     <keyword-not-empty>Lütfen bir anahtar kelime girin.</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Sonraki</next>
-      <previous>Önceki</previous>
-      <more>Daha</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Hızlı Düzenle</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>Sayfaları</pageCheckBox>
-      <documentCheckBox>İçeriği</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>tüm sitelerde ara</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>

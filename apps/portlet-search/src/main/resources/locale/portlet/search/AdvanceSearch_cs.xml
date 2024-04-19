@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Klíčové slovo</keyword>
+      <keyword>Keyword</keyword>
       <portal>Portal</portal>
-      <Page>Stránka</Page>
-      <Document>Dokument</Document>
+      <Page>Page</Page>
+      <Document>Document</Document>
     </label>
     <action>
-      <Search>Hledat</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Stránka</Page>
-      <Document>Dokument</Document>
-      <DocumentAndPage>Dokument a stránka</DocumentAndPage>
-      <documentandpage>Dokument a stránka</documentandpage>
-      <results>Výsledky {0} až {1} pro {2}</results>
-      <oneResult>Pouze jeden výsledek pro {0}</oneResult>
-      <ofAboutCaption>asi</ofAboutCaption>
-      <timeUnitCaption>sekund</timeUnitCaption>
-      <similar>Stránky, kde je uveden stejný obsah</similar>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
       <editor>Editor</editor>
-      <date>Datum</date>
-      <relevancy>Důležitost</relevancy>
-      <title>Popisek</title>
-      <sortBy>Seřadit podle:</sortBy>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Upravit</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>Vaše hledání {0} neodpovídá žádné {1}.</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Položek na stránku</itemsPerPageSelector>
-      <searchFormSelector>Šablona formuláře vyhledávání</searchFormSelector>
-      <searchResultSelector>Šablona výsledků vyhledávání</searchResultSelector>
-      <searchPaginatorSelector>Šablona stránkování vyhledávání</searchPaginatorSelector>
-      <searchPageLayoutSelector>Šablona rozložení stránky vyhledávání</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Základní cesta</searchResultBasePathInputSetAction>
-      <pageMode>Režim stránky</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>Žádný</none>
-        <more>Více</more>
-        <pagination>Stránkování</pagination>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Vybrat základní cestu</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Klíčové slovo je neplatné. Některé znaky nejsou rozpoznány.</keyword-not-support>
-     <not-checked>Prosím vyberte typ vyhledávání.</not-checked>
-     <keyword-not-empty>Zadejte klíčové slovo.</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Další</next>
-      <previous>Předchozí</previous>
-      <more>Více</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Rychlé úpravy</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>na stránkách</pageCheckBox>
-      <documentCheckBox>v obsahu</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>hledat všechny stránky</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>

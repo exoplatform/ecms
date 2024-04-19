@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Λέξη-κλειδί</keyword>
-      <portal>Πύλη</portal>
-      <Page>Σελίδα</Page>
-      <Document>Έγγραφο</Document>
+      <keyword>Keyword</keyword>
+      <portal>Portal</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
     </label>
     <action>
-      <Search>Αναζήτηση</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Σελίδα</Page>
-      <Document>Έγγραφο</Document>
-      <DocumentAndPage>Έγγραφο και σελίδα</DocumentAndPage>
-      <documentandpage>Έγγραφο και σελίδα</documentandpage>
-      <results>Αποτελέσματα: {0} από {1} για {2}</results>
-      <oneResult>Μόνο ένα αποτέλεσμα για {0}</oneResult>
-      <ofAboutCaption>από περίπου</ofAboutCaption>
-      <timeUnitCaption>δευτερόλεπτα</timeUnitCaption>
-      <similar>Σελίδες όπου εμφανίζεται το ίδιο περιεχόμενο</similar>
-      <editor>Πρόγραμμα επεξεργασίας</editor>
-      <date>Ημερομηνία</date>
-      <relevancy>Συνάφεια</relevancy>
-      <title>Τίτλος</title>
-      <sortBy>Ταξινόμηση κατά:</sortBy>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Επεξεργασία</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>Το κριτήριο σας {0} δεν ταιριάζει με κανένα {1}.</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Αντικείμενα ανά σελίδα</itemsPerPageSelector>
-      <searchFormSelector>Πρότυπο φόρμας αναζήτησης</searchFormSelector>
-      <searchResultSelector>Πρότυπο αποτελεσμάτων αναζήτησης</searchResultSelector>
-      <searchPaginatorSelector>Πρότυπο σελιδοποίησης αναζήτησης</searchPaginatorSelector>
-      <searchPageLayoutSelector>Πρότυπο διάταξης σελίδας αναζήτησης</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Διαδρομή βάσης</searchResultBasePathInputSetAction>
-      <pageMode>Λειτουργία σελίδας</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>Κανένα</none>
-        <more>Περισσότερα</more>
-        <pagination>Σελιδοποίηση</pagination>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Επιλέξτε διαδρομή βάσης</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Η λέξη-κλειδί δεν είναι έγκυρη. Ορισμένοι χαρακτήρες δεν αναγνωρίζονται.</keyword-not-support>
-     <not-checked>Επιλέξτε ένα τύπο αναζήτησης.</not-checked>
-     <keyword-not-empty>Παρακαλώ εισάγετε μια λέξη-κλειδί.</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Επόμενη</next>
-      <previous>Προηγούμενη</previous>
-      <more>Περισσότερα</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Γρήγορη επεξεργασία</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>στις σελίδες</pageCheckBox>
-      <documentCheckBox>στο περιεχόμενο</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>Αναζήτηση σε όλους τους ιστότοπους</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>

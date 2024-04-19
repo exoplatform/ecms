@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Veröffentlichung &gt; Genehmigung anfordern</publicationRequestApproval>
-          <publicationApproveContent>Veröffentlichung &gt; Inhalte genehmigen</publicationApproveContent>
-          <publicationPublish>Veröffentlichung &gt; veröffentlichen</publicationPublish>
+          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
+          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
+          <publicationPublish>Publication &gt; Publish</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>

@@ -2,63 +2,63 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>عنوان:</title>
-      <description>توضیحات:</description>
-      <keywords>کلمات کلیدی:</keywords>
-      <language>زبان:</language>
-      <robots>روبات ها:</robots>
-      <sitemap>نقشه سایت:</sitemap>
-      <sitemapvisible>قابل مشاهده در نقشه سایت</sitemapvisible>
-    <isInherited>از صفحه پدر به ارث رسیده</isInherited>
-      <priority>اولويت:</priority>
-      <frequency>تکرار:</frequency>
-      <select-language>یک زبان را انتخاب کنید</select-language>
+      <title>Title:</title>
+      <description>Description:</description>
+      <keywords>Keywords:</keywords>
+      <language>Language:</language>
+      <robots>Robots:</robots>
+      <sitemap>Sitemap:</sitemap>
+      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+    <isInherited>Inherited from parent page</isInherited>
+      <priority>Priority:</priority>
+      <frequency>Frequency:</frequency>
+      <select-language>Select a language</select-language>
       <option>
-        <Always>همیشه</Always>
-        <Hourly>ساعتی</Hourly>
-        <Daily>روزانه</Daily>
-        <Weekly>هفتگی</Weekly>
-        <Monthly>ماهانه</Monthly>
-        <Yearly>سالانه</Yearly>
-        <Never>هرگز</Never>
+        <Always>Always</Always>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
+        <Weekly>Weekly</Weekly>
+        <Monthly>Monthly</Monthly>
+        <Yearly>Yearly</Yearly>
+        <Never>Never</Never>
       </option> 
     </label>
     <tip>
-  <priority>محدوده مقادیر معتبر بین 0.0 و1.0</priority>
+  <priority>Valid values range from 0.0 to 1.0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>در هنگام ذخیره فراداده یک خطای غیر منتظره رخ داد.</repository-exception>
-      <confirm-delete>آیا مطمئن هستید که می خواهید این اطلاعات جستجوگرها را حذف کنید؟</confirm-delete>      
+      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>حذف</seo-delete>
+    <seo-delete>Delete</seo-delete>
     </title>
   <help> 
-  <priority>محدوده مقادیر معتبر بین 0.0 و1.0.</priority>
-  <description>کمک به جستجوگران: به آنها اجازه دهید بدانند که صفحه زیر شامل لینکی است که آنها دنبالش می گردند.</description>
-  <keywords>در این صفحه مهمترین اصطلاحات با کاما جدا شده اند.</keywords>  
+  <priority>Valid values range from 0.0 to 1.0.</priority>
+  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
+  <keywords>Most important terms in the page separated by a comma.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>مدیریت جستجوگرها</UISEOForm>
+      <UISEOForm>SEO Management</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>مدیریت جستجوگرها</seo>
+      <seo>SEO Management</seo>
   </title>
   <label>
-    <seo>جستجوگرها</seo>
+    <seo>SEO</seo>
   </label>
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>مقدار فیلد اولویت باید عدد باشد. محدوده مقادیر معتبر بین 0.0 و 1.0 است.</Invalid-number>
+      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

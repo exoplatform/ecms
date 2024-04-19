@@ -7,7 +7,7 @@
         <en>English</en>
         <fr>French</fr>
         <ru>Russian</ru>
-        <vi>ويتناميز</vi>
+        <vi>Vietnamese</vi>
         <nl>Dutch</nl>
         <de>German</de>
         <uk>Ukrainian</uk>
@@ -27,19 +27,19 @@
         <comments>Comment(s)</comments>
         <show-comments>Show comments</show-comments>
         <hide-comments>Hide comments</hide-comments>
-        <comment-by>نے تبصرہ کیا</comment-by>
+        <comment-by>Commented by</comment-by>
         <email>Email</email>
         <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
-        <About_A_Minute>تقریبا ایک منٹ پہلے</About_A_Minute>
-        <About_x_Minutes>تقریبا {0} منٹ پہلے</About_x_Minutes>
-        <About_An_Hour>تقریبا ایک گھنٹہ پہلے پہلے</About_An_Hour>
-        <About_x_Hours>تقریبآ{0} گھنٹے پہلے</About_x_Hours>
-        <About_A_Day>تقریبا ایک دن پہلے</About_A_Day>
-        <About_x_Days>تقریبا 0} دن پہلے</About_x_Days>
-        <About_A_Month>تقریبا ایک مہینہ پہلے</About_A_Month>
-        <About_x_Months>تقریبا} 0} مہینے پہلے</About_x_Months>
+        <About_A_Minute>about a minute ago</About_A_Minute>
+        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
+        <About_An_Hour>about an hour ago</About_An_Hour>
+        <About_x_Hours>about {0} hours ago</About_x_Hours>
+        <About_A_Day>about a day ago</About_A_Day>
+        <About_x_Days>about {0} days ago</About_x_Days>
+        <About_A_Month>about a month ago</About_A_Month>
+        <About_x_Months>about {0} months ago</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>شرح</avg-rating>
-        <subscription>ووٹ</subscription>
+        <avg-rating>Rate</avg-rating>
+        <subscription>Votes</subscription>
       </label>
     </view>
   </Vote>
@@ -100,7 +100,7 @@
   <ListView>
     <view>
       <label>
-        <name>نام</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
         <exo_owner>Owner</exo_owner>
         <exo_dateCreated>Date Created</exo_dateCreated>
@@ -170,7 +170,7 @@
         <format>Format</format>
         <coverage>Coverage</coverage>
         <identifier>Identifier</identifier>
-        <languages>زبانیں</languages>
+        <languages>Languages</languages>
       </label>
       <action>
         <add-edit>Add/Edit</add-edit>

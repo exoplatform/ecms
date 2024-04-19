@@ -3,11 +3,11 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>沒有內容</nocontent>
-      <mydraft>我的草稿內容</mydraft>
-      <waitingapproval>等待我的核准</waitingapproval>
-      <approve>核准</approve>
-      <publishedtomorrow>將於明日發佈</publishedtomorrow>
+      <nocontent>No Content</nocontent>
+      <mydraft>My Draft Content</mydraft>
+      <waitingapproval>Waiting For My Approval</waitingapproval>
+      <approve>Approve</approve>
+      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

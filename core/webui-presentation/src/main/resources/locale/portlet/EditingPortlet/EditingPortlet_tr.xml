@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Mod:</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>Bu eylemi yapmak için yetkiniz yok.</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Düzenle</Draft>
-        <Published>Yayınlandı</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

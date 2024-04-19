@@ -8,57 +8,57 @@
       <language>Language:</language>
       <robots>Robots:</robots>
       <sitemap>Sitemap:</sitemap>
-      <sitemapvisible>在網站地圖中可見</sitemapvisible>
-    <isInherited>承接上層頁面</isInherited>
+      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+    <isInherited>Inherited from parent page</isInherited>
       <priority>Priority:</priority>
       <frequency>Frequency:</frequency>
-      <select-language>選擇一種語言</select-language>
+      <select-language>Select a language</select-language>
       <option>
-        <Always>總是</Always>
-        <Hourly>每小時</Hourly>
-        <Daily>每日</Daily>
-        <Weekly>每週</Weekly>
-        <Monthly>每月</Monthly>
-        <Yearly>每年</Yearly>
-        <Never>從來沒有</Never>
+        <Always>Always</Always>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
+        <Weekly>Weekly</Weekly>
+        <Monthly>Monthly</Monthly>
+        <Yearly>Yearly</Yearly>
+        <Never>Never</Never>
       </option> 
     </label>
     <tip>
-  <priority>有效值範圍從 0.0 到 1.0</priority>
+  <priority>Valid values range from 0.0 to 1.0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>保存網頁的中繼資料時發生意外的錯誤。</repository-exception>
-      <confirm-delete>您確定要刪除這些 SEO 資料嗎?</confirm-delete>      
+      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>刪除</seo-delete>
+    <seo-delete>Delete</seo-delete>
     </title>
   <help> 
-  <priority>有效值範圍從 0.0 到 1.0。</priority>
-  <description>幫助搜索者： 他們正在尋找一個連結，讓他們知道下面的頁面有。</description>
-  <keywords>在頁面中以逗號分隔是最重要的條件。</keywords>  
+  <priority>Valid values range from 0.0 to 1.0.</priority>
+  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
+  <keywords>Most important terms in the page separated by a comma.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>搜索引擎優化管理</UISEOForm>
+      <UISEOForm>SEO Management</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>搜索引擎優化管理</seo>
+      <seo>SEO Management</seo>
   </title>
   <label>
-    <seo>搜索引擎優化</seo>
+    <seo>SEO</seo>
   </label>
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>優先順序欄位的值必須是數字格式。有效值範圍是從 0.0 到 1.0。</Invalid-number>
+      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

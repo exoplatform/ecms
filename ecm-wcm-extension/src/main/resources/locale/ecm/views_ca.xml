@@ -4,14 +4,14 @@
   <View>
     <label>
       <languages>
-        <en>Anglès</en>
-        <fr>Francès</fr>
-        <ru>Rús</ru>
-        <vi>Vietnamita</vi>
-        <nl>Holandès</nl>
-        <de>Alemany</de>
-        <uk>Ucraïnès</uk>
-        <ar>Àrab</ar>
+        <en>English</en>
+        <fr>French</fr>
+        <ru>Russian</ru>
+        <vi>Vietnamese</vi>
+        <nl>Dutch</nl>
+        <de>German</de>
+        <uk>Ukrainian</uk>
+        <ar>Arabic</ar>
       </languages>
     </label>
   </View>
@@ -22,24 +22,24 @@
   <Comment>
     <view>
       <label>
-        <postedBy>Últim comentari publicat per</postedBy>
-        <at>a</at>
-        <comments>Comentari(s)</comments>
-        <show-comments>Mostra els comentaris</show-comments>
-        <hide-comments>Amaga els comentaris</hide-comments>
-        <comment-by>Comentat per</comment-by>
-        <email>Correu electrònic</email>
-        <site>Lloc</site>
-        <lastComment>Últim comentari Publicat per {user} a {time}</lastComment>
+        <postedBy>Last comment posted by</postedBy>
+        <at>at</at>
+        <comments>Comment(s)</comments>
+        <show-comments>Show comments</show-comments>
+        <hide-comments>Hide comments</hide-comments>
+        <comment-by>Commented by</comment-by>
+        <email>Email</email>
+        <site>Site</site>
+        <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
-        <About_A_Minute>fa al voltant d'un minut</About_A_Minute>
-        <About_x_Minutes>fa al voltant de {0} minuts</About_x_Minutes>
-        <About_An_Hour>fa al voltant d'una hora</About_An_Hour>
-        <About_x_Hours>fa unes {0} hores</About_x_Hours>
-        <About_A_Day>fa al voltant d'un dia</About_A_Day>
-        <About_x_Days>fa al voltant de {0} dies</About_x_Days>
-        <About_A_Month>fa al voltant d'un mes</About_A_Month>
-        <About_x_Months>fa al voltant de {0} mesos</About_x_Months>
+        <About_A_Minute>about a minute ago</About_A_Minute>
+        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
+        <About_An_Hour>about an hour ago</About_An_Hour>
+        <About_x_Hours>about {0} hours ago</About_x_Hours>
+        <About_A_Day>about a day ago</About_A_Day>
+        <About_x_Days>about {0} days ago</About_x_Days>
+        <About_A_Month>about a month ago</About_A_Month>
+        <About_x_Months>about {0} months ago</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -50,19 +50,19 @@
   <File>
     <view>
       <label>
-        <not-viewable>La vista prèvia d'aquest document no està disponible.</not-viewable>
-        <pdf-max-size>La visualització prèvia no està disponible per a continguts més grans de {0} MB.</pdf-max-size>
-        <pdf-max-page>La visualització prèvia no està disponible per a continguts amb més de {0} pàgines.</pdf-max-page>
-        <using-webDAV>o obre en MS Office</using-webDAV>
+        <not-viewable>The preview of this document is not available.</not-viewable>
+        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
+        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
+        <using-webDAV>or Open in MS Office</using-webDAV>
         <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
-        <open-in-documents>Obre en Documents</open-in-documents>
-        <open-in-documents-tooltip>Obre aquest fitxer a l'aplicació Documents</open-in-documents-tooltip>
-        <file-size-too-big>El contingut d'aquest fitxer és massa gran. Hauria de descarregar-lo i obrir-lo per veure'l.</file-size-too-big>
-        <webDAV>Vista WebDAV</webDAV>
-        <download>Descarrega</download>
-        <htmlview>Visualitza en HTML</htmlview>
-        <plaintextview>Mostra com a text</plaintextview>
+        <open-in-documents>Open in Documents</open-in-documents>
+        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
+        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
+        <webDAV>WebDAV View</webDAV>
+        <download>Download</download>
+        <htmlview>View as HTML</htmlview>
+        <plaintextview>View as Plain text</plaintextview>
         <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
@@ -74,12 +74,12 @@
   <Mail>
     <view>
       <label>
-        <from>Des de:</from>
-        <to>Al:</to>
+        <from>From:</from>
+        <to>To:</to>
         <cc>Cc:</cc>
-        <date>Data:</date>
-        <subject>Assumpte:</subject>
-        <attachment>Fitxers adjunts:</attachment>
+        <date>Date:</date>
+        <subject>Subject:</subject>
+        <attachment>Attachments:</attachment>
       </label>
     </view>
   </Mail>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Valoració</avg-rating>
-        <subscription>Vots</subscription>
+        <avg-rating>Rate</avg-rating>
+        <subscription>Votes</subscription>
       </label>
     </view>
   </Vote>
@@ -100,12 +100,12 @@
   <ListView>
     <view>
       <label>
-        <name>Nom</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Propietari</exo_owner>
-        <exo_dateCreated>Data de creació</exo_dateCreated>
-        <exo_dateModified>Data de modificació</exo_dateModified>
-        <auditing>Auditoria</auditing>
+        <exo_owner>Owner</exo_owner>
+        <exo_dateCreated>Date Created</exo_dateCreated>
+        <exo_dateModified>Date Modified</exo_dateModified>
+        <auditing>Auditing</auditing>
       </label>
     </view>
   </ListView>
@@ -116,10 +116,10 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Nom de l'acció</action-name>
-        <lifecycle>Cicle de vida</lifecycle>
-        <metadata>Metadades</metadata>
-        <description>Descripció</description>
+        <action-name>Action Name</action-name>
+        <lifecycle>Lifecycle</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>Description</description>
       </label>
     </view>
   </AddMetadata>
@@ -130,9 +130,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Nom de l'acció</action-name>
-        <lifecycle>Cicle de vida</lifecycle>
-        <description>Descripció</description>
+        <action-name>Action Name</action-name>
+        <lifecycle>Lifecycle</lifecycle>
+        <description>Description</description>
       </label>
     </view>
   </AutoVersioning>
@@ -142,9 +142,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Nom</action-name>
-        <lifecycle>Cicle de vida</lifecycle>
-        <description>Descripció</description>
+        <action-name>Name</action-name>
+        <lifecycle>Lifecycle</lifecycle>
+        <description>Description</description>
       </label>
     </view>
   </EnableVersioning>
@@ -154,31 +154,31 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/D</not-avaliable>
-        <core-elements>Elements bàsics</core-elements>
-        <title>Títol</title>
-        <creator>Autor</creator>
-        <subject>Assumpte</subject>
-        <source>Font</source>
-        <contributor>Col·laborador</contributor>
-        <resource-type>Tipus de Recurs</resource-type>
-        <date>Data</date>
-        <publisher>Editor</publisher>
-        <description>Descripció</description>
-        <rights>Drets</rights>
-        <relation>Relació</relation>
+        <not-avaliable>N/A</not-avaliable>
+        <core-elements>Core Elements</core-elements>
+        <title>Title</title>
+        <creator>Creator</creator>
+        <subject>Subject</subject>
+        <source>Source</source>
+        <contributor>Contributor</contributor>
+        <resource-type>Resource Type</resource-type>
+        <date>Date</date>
+        <publisher>Publisher</publisher>
+        <description>Description</description>
+        <rights>Rights</rights>
+        <relation>Relation</relation>
         <format>Format</format>
-        <coverage>Cobertura</coverage>
-        <identifier>Identificador</identifier>
-        <languages>Idiomes</languages>
+        <coverage>Coverage</coverage>
+        <identifier>Identifier</identifier>
+        <languages>Languages</languages>
       </label>
       <action>
-        <add-edit>Afegeix/Edita</add-edit>
+        <add-edit>Add/Edit</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Afegeix/Edita les propietats</add-edit>
+        <add-edit>Add/Edit Properties</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -186,10 +186,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Recursiu</isDeep>
-        <nodetypes>Tipus de node</nodetypes>
-        <affectedNodeTypeNames>Tipus de node afectats</affectedNodeTypeNames>
-        <nodeTypeName>Nom del tipus node</nodeTypeName>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node types</nodetypes>
+        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -197,10 +197,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Recursiu</isDeep>
-        <nodetypes>Tipus de node</nodetypes>
-        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
-        <nodeTypeName>Noms de tipus node</nodeTypeName>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -208,10 +208,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Recursiu</isDeep>
-        <nodetypes>Tipus de node</nodetypes> 
-        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
-        <nodeTypeName>Noms de tipus node</nodeTypeName>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes> 
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -219,10 +219,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Recursiu</isDeep>
-        <nodetypes>Tipus de node</nodetypes>
-        <affectedNodeTypeNames>Tipus de Node afectats</affectedNodeTypeNames>
-        <nodeTypeName>Noms de tipus node</nodeTypeName>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <nodeTypeName>Node Type Names</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -230,13 +230,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Descripció audio</Play-audio-description-of-this-video>
-      <Read-more>Llegeix més</Read-more>
-      <Read-less>Llegir menys</Read-less>
-      <Switch-back-to-original-video>Vídeo original</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
+      <Read-more>Read more</Read-more>
+      <Read-less>Read less</Read-less>
+      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>Un segon fitxer multimèdia està disponible com una descripció audio</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

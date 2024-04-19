@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>キーワード</keyword>
-      <portal>ポータル</portal>
-      <Page>ページ</Page>
-      <Document>ドキュメント</Document>
+      <keyword>Keyword</keyword>
+      <portal>Portal</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
     </label>
     <action>
-      <Search>検索</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>ページ</Page>
-      <Document>ドキュメント</Document>
-      <DocumentAndPage>ドキュメントとページ</DocumentAndPage>
-      <documentandpage>ドキュメントとページ</documentandpage>
-      <results>結果 {0} は、{2} の {1} でした。</results>
-      <oneResult>{0} の結果は一つでした。</oneResult>
-      <ofAboutCaption>について</ofAboutCaption>
-      <timeUnitCaption>秒</timeUnitCaption>
-      <similar>同じコンテンツが表示されるページ</similar>
-      <editor>編集者</editor>
-      <date>日時</date>
-      <relevancy>関連性</relevancy>
-      <title>タイトル</title>
-      <sortBy>並べ替え:</sortBy>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>編集</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>検索 {0} では、 {1} は一致しません。</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>ページ毎アイテム数</itemsPerPageSelector>
-      <searchFormSelector>フォームテンプレートを検索</searchFormSelector>
-      <searchResultSelector>検索結果テンプレートを検索</searchResultSelector>
-      <searchPaginatorSelector>改ページテンプレートを検索</searchPaginatorSelector>
-      <searchPageLayoutSelector>ページレイアウトテンプレートを検索</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>ベースパス</searchResultBasePathInputSetAction>
-      <pageMode>ページ モード</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>無し</none>
-        <more>詳細</more>
-        <pagination>改ページ</pagination>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>ベースパスを選択</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>検索キーワードが無効です。文字列が認識されていません。</keyword-not-support>
-     <not-checked>検索タイプを選択してください。</not-checked>
-     <keyword-not-empty>検索キーワードを入力してください。</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>次へ</next>
-      <previous>戻る</previous>
-      <more>詳細</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>クイック編集</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>ページに</pageCheckBox>
-      <documentCheckBox>コンテンツに</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>すべてのサイトを検索する。</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>
