@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>نام</name>
-      <action>ا ضافہ کریں</action>
+      <name>Name</name>
+      <action>Add</action>
     </header>
     <info>
       <child-not-found>Child not found!</child-not-found>
@@ -26,7 +26,7 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>زمرے کا نام</categoryName>
+      <categoryName>Category name</categoryName>
       <categoryPath>Category path</categoryPath>
       <action>#{word.action}</action>
     </header>

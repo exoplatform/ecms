@@ -50,7 +50,7 @@
     <event>
       <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
       <OpenOn>Open on</OpenOn>
-      <EditFile>Sunting</EditFile>
+      <EditFile>Edit</EditFile>
       <ViewFile>View</ViewFile>
     </event>
     <label>
@@ -105,7 +105,7 @@
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Sambung</connect>
+        <connect>Connect</connect>
       </button>
       <button>
         <disconnect>Disconnect</disconnect>

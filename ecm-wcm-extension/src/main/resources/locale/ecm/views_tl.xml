@@ -7,7 +7,7 @@
         <en>English</en>
         <fr>French</fr>
         <ru>Russian</ru>
-        <vi>Biyetnames</vi>
+        <vi>Vietnamese</vi>
         <nl>Dutch</nl>
         <de>German</de>
         <uk>Ukrainian</uk>
@@ -32,14 +32,14 @@
         <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
-        <About_A_Minute>mga isang minuto na lumipas</About_A_Minute>
-        <About_x_Minutes>tungkol sa {0} minuto ang nakalipas</About_x_Minutes>
-        <About_An_Hour>mga isang oras ang nakalipas</About_An_Hour>
-        <About_x_Hours>tungkol sa {0} oras ang nakalipas</About_x_Hours>
-        <About_A_Day>tungkol sa isang araw na nakalipas</About_A_Day>
-        <About_x_Days>tungkol sa {0} araw na nakalipas</About_x_Days>
-        <About_A_Month>mga isang buwan na ang nakalipas</About_A_Month>
-        <About_x_Months>tungkol sa {0} months ago</About_x_Months>
+        <About_A_Minute>about a minute ago</About_A_Minute>
+        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
+        <About_An_Hour>about an hour ago</About_An_Hour>
+        <About_x_Hours>about {0} hours ago</About_x_Hours>
+        <About_A_Day>about a day ago</About_A_Day>
+        <About_x_Days>about {0} days ago</About_x_Days>
+        <About_A_Month>about a month ago</About_A_Month>
+        <About_x_Months>about {0} months ago</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Pag-rate</avg-rating>
-        <subscription>Ang mga Boto</subscription>
+        <avg-rating>Rate</avg-rating>
+        <subscription>Votes</subscription>
       </label>
     </view>
   </Vote>
@@ -100,12 +100,12 @@
   <ListView>
     <view>
       <label>
-        <name>Ang Pangalan</name>
-        <versionable>Pwedeng I-version</versionable>
-        <exo_owner>May-ari</exo_owner>
-        <exo_dateCreated>Ang Petsa ng Pagkakagawa</exo_dateCreated>
+        <name>Name</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Owner</exo_owner>
+        <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Pag-audit</auditing>
+        <auditing>Auditing</auditing>
       </label>
     </view>
   </ListView>
@@ -170,7 +170,7 @@
         <format>Format</format>
         <coverage>Coverage</coverage>
         <identifier>Identifier</identifier>
-        <languages>Ang mga wika</languages>
+        <languages>Languages</languages>
       </label>
       <action>
         <add-edit>Add/Edit</add-edit>

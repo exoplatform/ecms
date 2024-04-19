@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Raktas</keyword>
-      <portal>Portalas</portal>
-      <Page>Puslapis</Page>
-      <Document>Dokumentas</Document>
+      <keyword>Keyword</keyword>
+      <portal>Portal</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
     </label>
     <action>
-      <Search>Paieška</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Puslapis</Page>
-      <Document>Dokumentas</Document>
-      <DocumentAndPage>Dokumentas ir puslapis</DocumentAndPage>
-      <documentandpage>Dokumentas ir puslapis</documentandpage>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
       <results>Results {0} to {1} for {2}</results>
       <oneResult>Only one result for {0}</oneResult>
-      <ofAboutCaption>apie</ofAboutCaption>
-      <timeUnitCaption>sekundės(-ių)</timeUnitCaption>
-      <similar>Puslapiai, kuriuose tas pats turinys</similar>
-      <editor>Redaktorius</editor>
-      <date>Data</date>
-      <relevancy>Aktualumas</relevancy>
-      <title>Pavadinmas</title>
-      <sortBy>Rūšiuoti pagal:</sortBy>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Redaguoti</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>Jūsų paieška {0} neatitinka jokių {1}.</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Elementų kiekis puslapyje</itemsPerPageSelector>
-      <searchFormSelector>Ieškoti pagal šabloną</searchFormSelector>
-      <searchResultSelector>Paieškos rezultatų šablonas</searchResultSelector>
-      <searchPaginatorSelector>Paieškos puslapiavimo šablonas</searchPaginatorSelector>
-      <searchPageLayoutSelector>Paieškos puslapio išdėstymo šablonas</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Bazinis kelias</searchResultBasePathInputSetAction>
-      <pageMode>Puslapio režimas</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>Nėra</none>
-        <more>Daugiau</more>
-        <pagination>Numeracija</pagination>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Pasirinkti bazinį kelią</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Raktinis žodis yra neteisingas. Kai kurie ženklai yra neatpažįstami.</keyword-not-support>
-     <not-checked>Pasirinkite paieškos tipą.</not-checked>
-     <keyword-not-empty>Įveskite raktinį žodį.</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Sekantis</next>
-      <previous>Ankstesnis</previous>
-      <more>Daugiau</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Greitas redagavimas</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>puslapiuose</pageCheckBox>
-      <documentCheckBox>turinyje</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>Ieškoti visose svetainėse</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>

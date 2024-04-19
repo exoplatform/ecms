@@ -7,19 +7,19 @@
   -->
   <UICommentForm>
     <label>
-      <name>Ang Ngalan</name>
-      <email>Ang Email</email>
-      <website>Ang Website</website>
-      <comment>Ang komento</comment>
+      <name>Name</name>
+      <email>Email</email>
+      <website>Website</website>
+      <comment>Comment</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Dili ka pwedeng maka-comment sa kani nga klase sa dokumento.</not-support>
-      <not-checkedout>Kinahanglang mag-check out sa dokumento sa dili pa maghatag ug komento niini.</not-checkedout>
-      <content-null>Dili ka makapost ug walay sulod ng komento.</content-null>
+      <not-support>You can't comment on this type of document.</not-support>
+      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
+      <content-null>You cannot post an empty comment.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -29,15 +29,15 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Kabus</normal>
-      <good>Ubos sa average</good>
-      <verygood>Ang average</verygood>
-      <excellent>Taas sa average</excellent>
-      <best>Maayo</best>
-      <no-value>wala pay balyu</no-value>
+      <normal>Poor</normal>
+      <good>Below average</good>
+      <verygood>Average</verygood>
+      <excellent>Above average</excellent>
+      <best>Good</best>
+      <no-value>no value yet</no-value>
     </title>
     <label>
-      <my-rating>Ang akong grado:</my-rating>
+      <my-rating>My Rating:</my-rating>
     </label>
     <button>
       <label>
@@ -45,9 +45,9 @@
       </label>
     </button>
     <msg>
-      <not-support>Dili ka makabutar sa kani nga klase sa dukomento.</not-support>
-      <not-checkedout>Kinahanglang i-check out usa ang dukomento para maka-butar.</not-checkedout>
-      <vote-restriction>Dili ka makabutar ug labaw sa usa.</vote-restriction>
+      <not-support>You cannot vote for this document type.</not-support>
+      <not-checkedout>You must check out the document to vote.</not-checkedout>
+      <vote-restriction>You can't vote more than once.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>Malampuson nga na-refresh ang sesyon.</refresh-session-success>
-      <no-node-history>Wala ka sa root folder.</no-node-history>
-      <save-session-success>Na-save na tanang kausaban.</save-session-success>
-      <target-path-not-found>Dili ka pwedeng maka-akses kani nga agianan, siguro tungod kay wala na kini o tungod kay wala nakay permiso sa pag-akses.</target-path-not-found>
+      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
+      <no-node-history>You are at the root folder.</no-node-history>
+      <save-session-success>All changes have been saved.</save-session-success>
+      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Ang Relasyon</Relation>
-      <Explorer>Ang Eksplorer sa File</Explorer>
-      <Close>I-sirado ang Sidebar</Close>
-      <TagExplorer>I-tag ang Cloud</TagExplorer>
-      <Clipboard>Ang Cilpboard</Clipboard>
-      <SavedSearches>Ang mga Na-save nga Pagpangita</SavedSearches>
+      <Relation>Relation</Relation>
+      <Explorer>File Explorer</Explorer>
+      <Close>Close Sidebar</Close>
+      <TagExplorer>Tag Cloud</TagExplorer>
+      <Clipboard>Clipboard</Clipboard>
+      <SavedSearches>Saved Searches</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>I-sirado ang Sidebar</Close>
+      <Close>Close Sidebar</Close>
     </title>
   </UISideBar>
   <!--
@@ -90,15 +90,15 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Ang Pag-drive sa Workspace:</driveWorkspace>
-      <backToJCR>Balik sa JCR Main Drives</backToJCR>
-      <setUpBrowser>I-set up ang imong mga preperensiya sa pag-browse</setUpBrowser>
-      <refesh>I-refresh</refesh>
-      <currentDrive>Ang Kasamtangang Drive</currentDrive>
-      <selectView>Pag-pili ug Tan-awanan</selectView>
-      <showSideBar>Ipakita ang Sidebar</showSideBar>
-      <more>Daghan pa</more>
-      <backTo>Balik</backTo>
+      <driveWorkspace>Drive Workspace:</driveWorkspace>
+      <backToJCR>Back to JCR Main Drives</backToJCR>
+      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
+      <refesh>Refresh</refesh>
+      <currentDrive>Current Drive</currentDrive>
+      <selectView>Select View</selectView>
+      <showSideBar>Show Sidebar</showSideBar>
+      <more>More</more>
+      <backTo>Back</backTo>
     </label>
   </UIViewBar>
 
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Ang Kaugalingon nga mga drive</PersonalDrives>
-      <GroupDrives>Ang mga drives sa grupo</GroupDrives>
-      <GeneralDrives>Ang kadaghanang mga drive</GeneralDrives>
+      <PersonalDrives>Personal drives</PersonalDrives>
+      <GroupDrives>Group drives</GroupDrives>
+      <GeneralDrives>General drives</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>Walay anaa nga tan-awanan basi sa imung permiso sa pag-akses sa drive '{0}'.</no-view-found>
-      <access-denied>Walay pagtugot sa pag-akses. Ciguro wala kay permiso sa workspace sa drive '{0}'.</access-denied>
-      <workspace-not-exist>Ang drive '{0}' nasulod sa usa ka dili ilado nga workspace. Palihug i-reconfigure ang kini nga drive.</workspace-not-exist>
+      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -126,13 +126,13 @@
   #############################################################################
   -->
   <UITreeExplorer>
-    <title>Ang eksplorer</title>
+    <title>Explorer</title>
     <label>
-      <Root>Ang root</Root>
-      <webDavView>Abliha sa MS Office</webDavView>
+      <Root>Root</Root>
+      <webDavView>Open in MS Office</webDavView>
     </label>
     <msg>
-      <path-not-found>Gitangtang o gi-usab na kining maong elemento. Palihug pinduta ang Refresh nga pindutanan.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -142,11 +142,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Ang mga pagtranslate</languages-list>
-      <relation-list>Ang mga relasyon</relation-list>
-      <references-list>Ang mga reperensiya</references-list>
-      <no-related-document>Walay Kapareho nga Dokumento</no-related-document>
-      <related-document>Ang Kapareho nga mga Dokumento</related-document>
+      <languages-list>Translations</languages-list>
+      <relation-list>Relations</relation-list>
+      <references-list>References</references-list>
+      <no-related-document>No Related Document</no-related-document>
+      <related-document>Related Documents</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -155,17 +155,17 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>I-set up ang imong mga preperensiya sa pag-browse</title>
+    <title>Set up your browsing preferences</title>
     <label>
-      <enableStructure>I-browse sa structure nga moda:</enableStructure>
-      <showSideBar>Ipakita ang sidebar:</showSideBar>
-      <showHiddenNode>Ipakita ang nakatago nga mga aytem:</showHiddenNode>
-      <showNonDocument>Ipakita ang mga aytem nga dili dokumento:</showNonDocument>
-      <showRefDocuments>Ipakita ang naka-reperens nga mga aytem:</showRefDocuments>
-      <enableDragAndDrop>Ipaandar ang Pag-drag ug Pag-drop:</enableDragAndDrop>
-      <sortBy>I-sort ang order:</sortBy>
-      <order>I-order sa:</order>
-      <nodesPerPage>Ang mga aytem kada pahina:</nodesPerPage>
+      <enableStructure>Browse in structure mode:</enableStructure>
+      <showSideBar>Show sidebar:</showSideBar>
+      <showHiddenNode>Show hidden items:</showHiddenNode>
+      <showNonDocument>Show non-document items:</showNonDocument>
+      <showRefDocuments>Show referenced items:</showRefDocuments>
+      <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
+      <sortBy>Sort order:</sortBy>
+      <order>Order by:</order>
+      <nodesPerPage>Items per page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Pag-set Up ug mga Preperensiya ss Filter</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -190,9 +190,9 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Usba ang Pangalan</title>
+    <title>Rename</title>
     <label>
-      <nameField>Ang Pangalan</nameField>
+      <nameField>Name</nameField>
       <titleField>Title</titleField>
     </label>
     <action>
@@ -201,65 +201,65 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' nausab na ang pangalan sa '{1}' nga malampuson.</rename-successfull>
-      <rename-denied>Walay pagtugot sa pag-akses. Dili ka pwede maka-usab sa pangalan sa aytem.</rename-denied>
-      <fileName-invalid>Ang bag-o nga pangalan adunay mga dili balid nga mga karakter.</fileName-invalid>
-      <newName-same-oldName>Ang bag-o nga pangalan ay anaa na. Palihug tan-awa ug balik.</newName-same-oldName>
-      <version-exception>Kini nga dokumento (o usa sa mga katigulangan) kay wala na-check out.</version-exception>
-      <lock-exception>Naka-lock kining maong dokumento. Palihug i-unlock sa dili pa magsugod ug pag-usab sa ngalan.</lock-exception>
-      <constraintViolation-exception>Adunay nahitabo nga error samtang nag-usab sa ngalan '{0}'. Palihug tan-awa ug balik.</constraintViolation-exception>
-      <unknown-prefix>Ang prefiks '{0}' kay wala pa marehistro.</unknown-prefix>
-      <rename-error>Adunay nahitabo nga error samtang nag-usab sa ngalan '{0}'. Palihug tan-awa ug balik.</rename-error>
+      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
+      <rename-denied>Access denied. You can't rename this item.</rename-denied>
+      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
+      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
+      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
+      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
+      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
+      <rename-error>An error occurred while renaming. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Ilisi ug ngalan</UIRenameForm>
-      <UIActionContainer>I-edit ang Aksyon</UIActionContainer>
-      <UIFolderForm>Ang Bag-o nga Folder</UIFolderForm>
-      <UIUploadManager>I-upload ang File</UIUploadManager>
-      <UIReferencesList>Ang Listahan sa mga Reperensiya</UIReferencesList>
-      <UIExportNode>I-eksport</UIExportNode>
-      <UINodeTypeInfo>Ang Impormasyon sa Node Type</UINodeTypeInfo>
-      <UIVersionInfo>Ang Impormasyon sa Bersyon</UIVersionInfo>
-      <UIActivateVersion>Paandara ang Pag-bersyon</UIActivateVersion>
-      <UIAuditingInfo>Ang Impormasyon sa Pag-audit</UIAuditingInfo>
-      <UIActivateAuditing>Paandara ang Pag-audit</UIActivateAuditing>
-      <UIPermissionManager>Ang Pagdumala sa Permiso</UIPermissionManager>
-      <UIPropertiesManager>Ang Pagdumala sa mga Property</UIPropertiesManager>
-      <UIECMSearch>Ang Adbans nga Pagpangita</UIECMSearch>
-      <UISavedQuery>Ang Naka-save nga Listahan sa mga Pangutana</UISavedQuery>
-      <UIWatchDocumentForm>Tan-awa ang Dokumento</UIWatchDocumentForm>
-      <UIActionManager>Idumala ang mga Aksyon</UIActionManager>
-      <UIDocumentForm>I-edit ang Dokumento</UIDocumentForm>
-      <UIDocumentFormController>Pagdungag ug Bag-o nga Dokumento</UIDocumentFormController>
-      <EditFormController>I-edit ang Dokumento</EditFormController>
-      <UIRelationManager>Pagdungag ug Relasyon</UIRelationManager>
-      <UICategoryManager>Pagdugang og Kategorya</UICategoryManager>
-      <UIImportNode>I-import</UIImportNode>
-      <UIViewMetadataManager>Tan-awa ang Metadata</UIViewMetadataManager>
-      <UIVoteForm>Botohi ang Dokumento</UIVoteForm>
-      <UICommentForm>Ang Komentaryo</UICommentForm>
-      <UIPreferencesForm>Ang mga Preperensiya sa Pag-browse sa mga Dokumento</UIPreferencesForm>
-      <UIPublicationManager>Idumala ang Publikasyon</UIPublicationManager>
-      <UIConfirmMessage>Tangtangon?</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Tangtangon ang file?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Tangtangon ang Folder?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Tangtangon ang mga Aytem?</UIDeleteItemsConfirmMessage>
-      <UIRestoreConfirmMessage>Ikomperma ang Pagbalik</UIRestoreConfirmMessage>
-      <UIActivePublication>Mag-enroll sa Publication Lifecycle</UIActivePublication>
-      <UITaggingForm>Mag-tag ug Dokumento</UITaggingForm>
-      <UIThumbnailForm>Pagdungag ug Hulagway sa Thumbnail</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Ang mga Preperensiya sa Pag-browse sa mga Dokumento</UIAllItemsPreferenceForm>
-      <UISelectRestorePath>Pagpili ug Restore Path</UISelectRestorePath>
-      <UISEOForm>Idumala ang SEO</UISEOForm>
-      <UISEOToolbarForm>Idumala ang SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Ablihi ang Dokumento</UIReadOnlyFileConfirmMessage>
-      <UIDocumentAutoVersionForm>Kopyaha ang Dokumento</UIDocumentAutoVersionForm>
+      <UIRenameForm>Rename</UIRenameForm>
+      <UIActionContainer>Edit Action</UIActionContainer>
+      <UIFolderForm>New Folder</UIFolderForm>
+      <UIUploadManager>Upload File</UIUploadManager>
+      <UIReferencesList>References List</UIReferencesList>
+      <UIExportNode>Export</UIExportNode>
+      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
+      <UIVersionInfo>Version Info</UIVersionInfo>
+      <UIActivateVersion>Activate Versioning</UIActivateVersion>
+      <UIAuditingInfo>Auditing Information</UIAuditingInfo>
+      <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
+      <UIPermissionManager>Permission Management</UIPermissionManager>
+      <UIPropertiesManager>Properties Management</UIPropertiesManager>
+      <UIECMSearch>Advanced Search</UIECMSearch>
+      <UISavedQuery>Saved Queries List</UISavedQuery>
+      <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
+      <UIActionManager>Manage Actions</UIActionManager>
+      <UIDocumentForm>Edit Document</UIDocumentForm>
+      <UIDocumentFormController>Add New Document</UIDocumentFormController>
+      <EditFormController>Edit Document</EditFormController>
+      <UIRelationManager>Add Relation</UIRelationManager>
+      <UICategoryManager>Add Category</UICategoryManager>
+      <UIImportNode>Import</UIImportNode>
+      <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
+      <UIVoteForm>Vote Document</UIVoteForm>
+      <UICommentForm>Comment</UICommentForm>
+      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
+      <UIPublicationManager>Manage Publication</UIPublicationManager>
+      <UIConfirmMessage>Delete ?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
+      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
+      <UITaggingForm>Tag Document</UITaggingForm>
+      <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
+      <UISEOForm>Manage SEO</UISEOForm>
+      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
-      <workspace>Ang Workspace</workspace>
-      <path>Ang Path</path>
+      <workspace>Workspace</workspace>
+      <path>Path</path>
     </header>
   </UIPopupWindow>
   <!--
@@ -268,11 +268,11 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>I-edit ang Sulod sa File</title>
+    <title>Edit File Content</title>
     <label>
-      <name>Ang Ngalan</name>
-      <textToModify>I-text para mausab</textToModify>
-      <fileToUpload>Mag-upload ug bag-o nga sulod para sa kana nga dokumento (dapat pareho kini ug mime -type)</fileToUpload>
+      <name>Name</name>
+      <textToModify>Text to modify</textToModify>
+      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -282,81 +282,81 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Ang Bag-o nga Folder</AddFolder>
-      <AddDocument>Ang -bago nga Sulod</AddDocument>
-      <EditDocument>Ang pag-usab</EditDocument>
-      <Upload>I-upload</Upload>
-      <Paste>I-paste</Paste>
-      <Search>Pagpangita</Search>
-      <WatchDocument>Tan-awa/Ayaw Tan-awa</WatchDocument>
-      <TaggingDocument>Ang Tag</TaggingDocument>
-      <Vote>Ang Boto</Vote>
-      <Comment>Ang Komento</Comment>
-      <ManageVersions>Ang mga Bersyon</ManageVersions>
-      <ManageAuditing>Ang Audit</ManageAuditing>
-      <ManagePublications>Ang mga publikasyon</ManagePublications>
-      <ManageCategories>Ang mga kategorya</ManageCategories>
-      <ManageRelations>Ang mga relasyon</ManageRelations>
-      <ManageActions>Ang mga aksyon</ManageActions>
-      <ExportNode>I-eksport</ExportNode>
-      <ImportNode>I-import</ImportNode>
-      <OverloadThumbnail>Usba ang Hulagway sa Aykon</OverloadThumbnail>
-      <ManageHidden>Ipakita/Itago ang Sulod</ManageHidden>
-      <ViewReferences>Ang mga reperensiya</ViewReferences>
-      <ViewNodeType>Ang mga Tipo</ViewNodeType>
-      <ViewPermissions>Ang mga permiso</ViewPermissions>
-      <ViewProperties>Ang mga Property</ViewProperties>
-      <ViewMetadatas>Ang Metadata</ViewMetadatas>
-      <ViewRelations>Ipakita/Itago ang mga Relasyon</ViewRelations>
-      <ShowJCRStructure>Ipakita/Itago ang Sulod sa Struktura</ShowJCRStructure>
-      <EditProperty>I-edit ang mga Property sa Dokumento</EditProperty>
+      <AddFolder>New Folder</AddFolder>
+      <AddDocument>New Content</AddDocument>
+      <EditDocument>Edit</EditDocument>
+      <Upload>Upload</Upload>
+      <Paste>Paste</Paste>
+      <Search>Search</Search>
+      <WatchDocument>Watch/Unwatch</WatchDocument>
+      <TaggingDocument>Tag</TaggingDocument>
+      <Vote>Vote</Vote>
+      <Comment>Comment</Comment>
+      <ManageVersions>Versions</ManageVersions>
+      <ManageAuditing>Audit</ManageAuditing>
+      <ManagePublications>Publications</ManagePublications>
+      <ManageCategories>Categories</ManageCategories>
+      <ManageRelations>Relations</ManageRelations>
+      <ManageActions>Actions</ManageActions>
+      <ExportNode>Export</ExportNode>
+      <ImportNode>Import</ImportNode>
+      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
+      <ManageHidden>Show/Hide Content</ManageHidden>
+      <ViewReferences>References</ViewReferences>
+      <ViewNodeType>Types</ViewNodeType>
+      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewProperties>Properties</ViewProperties>
+      <ViewMetadatas>Metadata</ViewMetadatas>
+      <ViewRelations>Show/Hide Relations</ViewRelations>
+      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>Dili pa makabuhat niiining maong aksyon sa root.</cannot-action-in-rootnode>
-      <node-checkedin>Kinahanglan mag-check out usa.</node-checkedin>
-      <cannot-enable-version-rootnode>Dili maka-activate sa pag-bersyon sa root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Dili maka-activate ang publikasyon sa root.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
+      <node-checkedin>You must check out first.</node-checkedin>
+      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Mga dokumento lang ang pwedeng mai-publikar.</not-supported-nodetype>
-        <no-publication-lifecycle>Walay pulikasyon lifecycle nga nai-configure.</no-publication-lifecycle>
+        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
+        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>Wala na mai-subscribe ang dokumento.</unsubcriber-lifecycle>
-      <not-supported-nodetype>Kini nga operasyon ay nag-suporta lang sa mga dokumento.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>Malampuson nga wala nai-subscribe ang dokumento.</unsubcriber-lifecycle-finish>
-      <access-false>Ang dokumento dili artikulo o na-check in.</access-false>
-      <unsupported-action>Dili suportado kining maong aksyon.</unsupported-action>
-      <not-relationable>Walay relasyon kining maong dokumento.</not-relationable>
-      <node-pasted>'{0}' na-paste na sa lokasyon '{1}'. Na-save na kining maong operasyon.</node-pasted>
-      <no-node-selected>Walay makopya.</no-node-selected>
-      <unable-edit>Ang pag-edit sa mga dokumento sa type '{1}' pareha sa '{0}' kay dili suportado.</unable-edit>
-      <not-support>Dili pwedeng makadelete sa napili nga aytem.</not-support>
-      <template-null>Kining maong dokumento kay walay form template.</template-null>
-      <keyword-null>Walay mga keywords sa pagpangita.</keyword-null>
-      <not-found>Walay nakita nga resulta.</not-found>
-      <keyword-not-allow>Dili pwede kining maong keyword.</keyword-not-allow>
-      <is-not-referenable>'{0}' dili pwede mai-reperensiya.</is-not-referenable>
-      <access-denied>Wala tuguti ang pag-akses. Wala kai permiso para maka-edit niining maong aytem.</access-denied>
-      <access-add-denied>Wala tuguti ang pag-akses. Wala kai permiso para makadungag ug mga aytem dinhi.</access-add-denied>
-      <item-existed>Anaa na kini nga node. Dili pwede nga pareha ang ngalan niiini sa igsoon.</item-existed>
-      <removed-hidden-mixin>Malampuson nimu nga natangtang ang nakatago nga mixin.</removed-hidden-mixin>
-      <added-hidden-mixin>Malampuson nimu nga nadungag ang nakatago nga mixin.</added-hidden-mixin>
-      <not-supported>Kini nga punksyon kay suportado lang sa klase sa dokumento.</not-supported>
-      <empty-file-type>Dili ka pwede magdungag ug dokumento dinhi.</empty-file-type>
-      <unsupported-watch>Ang mga dokumento lang ang pwede matan-aw.</unsupported-watch>
-      <watch-checkedin>Kinahanglan i-check out ang dokumento sa dili pa mutan-aw.</watch-checkedin>
-      <unsupported-tagging>Mga dokumento lang ang pwedeng ma-tag.</unsupported-tagging>
-      <tagnode-checkedin>Kinahanglan i-check out ang dokumento sa dili pa mu-tag.</tagnode-checkedin>
+      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The document is not an article or checked in.</access-false>
+      <unsupported-action>This action is not supported.</unsupported-action>
+      <not-relationable>This document has no relations.</not-relationable>
+      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>Nothing to copy.</no-node-selected>
+      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
+      <not-support>Can't edit the selected item.</not-support>
+      <template-null>This document has no form template.</template-null>
+      <keyword-null>There are no keywords to search.</keyword-null>
+      <not-found>No results found.</not-found>
+      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
+      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
+      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
+      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
+      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
+      <not-supported>This function is supported for the document type only.</not-supported>
+      <empty-file-type>You can't add a document here.</empty-file-type>
+      <unsupported-watch>Only documents can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
+      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
     </msg>
     <title>
-      <select-tab>Pagpili ug Tab</select-tab>
-      <SimpleSearch>Paspas na Pagpangita</SimpleSearch>
-      <AdvanceSearch>Ang Adbans nga Pagpangita</AdvanceSearch>
-      <SavedQueries>Ang Naka-save nga mga Pangutana</SavedQueries>
-      <ShowAllOwnedByUser>Ipakita ang Tanan Nakong mga Termino</ShowAllOwnedByUser>
-      <ShowAllFavourite>Ipakita ang Tanang Paborito nga mga Aytem</ShowAllFavourite>
-      <ShowAllHidden>Ipakita ang Tanan nga Nakatago nga mga Aytem</ShowAllHidden>
-      <ShowAllFromTrash>Ipakita ang Tanang mga Aytem Gikan sa Basurahan</ShowAllFromTrash>
+      <select-tab>Select Tab</select-tab>
+      <SimpleSearch>Quick Search</SimpleSearch>
+      <AdvanceSearch>Advanced Search</AdvanceSearch>
+      <SavedQueries>Saved Queries</SavedQueries>
+      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
+      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
+      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
+      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
@@ -378,7 +378,7 @@
       <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
       <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
       <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>Gitangtang o gi-usab na kining maong elemento. Palihug pinduta ang Refresh nga pindutanan.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
       <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
       <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
       <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
@@ -426,18 +426,18 @@
       <addFolder-successful>The folder '{0}' was added successfully.</addFolder-successful>
       <name-invalid>Please enter the folder name.</name-invalid>
       <title-invalid>Please enter the folder title.</title-invalid>
-      <name-not-allowed>Dili pwede kining maong ngalan.</name-not-allowed>
-      <fileName-error>Dili balido kining ngalan sa file.</fileName-error>
-      <constraint-violation>Dili pwedeng makadungag ug klase sa dokumento '{0}' dinhi.</constraint-violation>
-      <repository-exception>Adunay nahitabo nga wala damhang error. Palihug kontaka ang administrador para sa dugang mga detalye.</repository-exception>
-      <repository-exception-permission>Wala kay permiso para magdungag ug bag-o nga folder dinhi.</repository-exception-permission>
-      <numberformat-exception>Dili ka pwede mag-save niining maong folder. Kinahanglan nga ang gitahag nga ngalan anaa sa pormat nga numero.</numberformat-exception>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Dili ka pwede maka-save sa folder. Adunay aytem nga kapareho ug pangalan.</not-allow-sameNameSibling>
-      <ntFolder-not-avaiable>Kinahanglang magpili ug kustom nga klase sa folder</ntFolder-not-avaiable>
+      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
     </msg>
     <help>
-      <customTypeCheckBoxHelp>Tan-awa kun gusto nim nga magbutang ug web nga sulod or kustom nga klase sa dokumento niining maong folder</customTypeCheckBoxHelp>
+      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
     </help>
   </UIFolderForm>
   <!--
@@ -447,55 +447,55 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Ang aykon</Icon>
+      <Icon>Icon</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Sigurado baka nga gusto nimung deleton ang aytem '{0}'?</confirm-delete>
-      <confirm-delete-file>Sigurado baka nga gusto nimung deleton ang file '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Sigurado baka nga gusto nimung deleton ang folder '{0}' ug ang tanang mga subfolder?</confirm-delete-folder>
+      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
+      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Sigurado baka nga gusto nimung permanente nga matantang ang aytem '{0}'?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Sigurado baka nga gusto nimung permanente nga matantang ang aytem '{0}'?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Sigurado baka nga gusto nimung permanente nga matantang ang folder '{0}' ug ang tanang subfolder?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>Are you sure you want to permanently remove the item '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Are you sure you want to permanently remove the file '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Are you sure you want to permanently remove the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Sigurado baka nga gusto nimung deleton ang aytem '{0}' ug ang mga reperensiya niini?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Sigurado baka nga gusto nimung deleton ang file '{0}' ug ang mga reperensiya niini?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Sigurado baka nga gusto nimung deleton ang folder '{0}' ug ang mga reperensiya niini?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga aytem?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga file?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga aytem ug ang mga file?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga aytem, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga file, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga aytem, mga file, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Sigurado baka nga gusto nimu nga permanenteng matangtang ang '{0}' napili nga mga aytem?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Sigurado baka nga gusto nimu nga permanenteng matangtang ang {0} napili nga mga file?</confirm-delete-multi-nodes-file-permanently>
-      <confirm-delete-multi-nodes-folder-permanently>Sigurado baka nga gusto nimu nga permanenteng matangtang ang {0} napili nga mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Sigurado baka nga gusto nimu nga permanenteng matangtang ang {0} napili nga mga aytem ug mga file?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>Sigurado baka nga gusto nimu nga permanenteng matangtang ang {0} napili nga mga file, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Sigurado baka nga gusto nimu nga permanenteng matangtang ang {0} napili nga mga file, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Sigurado baka nga gusto nimu nga permanenteng matangtang ang {0} napili nga mga item, mga file, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga aytem ug ang mga reperensiya niini?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga file ug ang mga reperensiya niini?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga folder, ang tanang subfolder ug ang mga reperensiya niini?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga aytem, mga file ug ang mga reperensiya niini?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga aytem, mga reperensiya, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
-      <confirm-delete-multi-nodes-file-and-folder-have-relations>Sigurado baka nga gusto nimung deleton ang {0} napili nga mga file, mga reperensiya, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Sigurado baka nga gusto nimung deleton ang '{0}' napili nga mga aytem, mga file, mga reperensiya niini, mga folder ug ang tanang subfolder?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' malampuson nga na-delete.</feedback-delete>
-      <feedback-delete-multi>{0} malampuson nga na-delete ang mga aytem.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' permanente nga natantang.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} permanenting natangtang ang mga aytem.</feedback-delete-permanently-multi>
+      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
+      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
       <undo-delete>Undo</undo-delete>
       <feedback-restore>'{0}' was successfully restored.</feedback-restore>
       <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
@@ -522,9 +522,9 @@
       <node-remove-success>'{0}' has been removed.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Usaba ang pangalan</Rename>
+      <Rename>Rename</Rename>
       <Cut>Cut</Cut>
-      <Copy>Kopyaha</Copy>
+      <Copy>Copy</Copy>
       <Save>#{word.save}</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -532,7 +532,7 @@
       <Lock>Lock</Lock>
       <Unlock>Unlock</Unlock>
       <EditDocument>Edit</EditDocument>
-      <Paste>I-paste</Paste>
+      <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
@@ -543,7 +543,7 @@
       <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
       <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
       <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>Gitangtang o gi-usab na kining maong elemento. Palihug pinduta ang Refresh nga pindutanan.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Remove this attachment file</remove-attachment>
@@ -572,21 +572,21 @@
       <Lock>Lock</Lock>
       <Unlock>UnLock</Unlock>
       <EditDocument>Edit</EditDocument>
-      <Copy>Kopyaha</Copy>
-      <Rename>Usaba ang pangalan</Rename>
+      <Copy>Copy</Copy>
+      <Rename>Rename</Rename>
       <Delete>Delete</Delete>
       <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
-      <Paste>I-paste</Paste>
+      <Paste>Paste</Paste>
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
       <WebDAV>View WebDAV</WebDAV>
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
-      <AddFolder>Ang Bag-o nga Folder</AddFolder>
-      <AddDocument>Ang -bago nga Sulod</AddDocument>
+      <AddFolder>New Folder</AddFolder>
+      <AddDocument>New Content</AddDocument>
       <Upload>Upload Files</Upload>
-      <MoveNode>Ibalhin</MoveNode>
+      <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
@@ -596,11 +596,11 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Abliha sa MS Office</WebDavView>
-      <Download>I-download</Download>
+      <WebDavView>Open in MS Office</WebDavView>
+      <Download>Download</Download>
       <OpenDocument>Remote Edit</OpenDocument>
-      <EditProperty>I-edit ang mga Property sa Dokumento</EditProperty>
-      <UploadNewVersion>Pag-upload ug bag-o nga bersyon</UploadNewVersion>
+      <EditProperty>Edit Document Properties</EditProperty>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </event>
   </ECMContextMenu>
@@ -615,8 +615,8 @@
       <no-references>References not found</no-references>
     </msg>
     <header>
-      <workspace>Ang Workspace</workspace>
-      <path>Ang Path</path>
+      <workspace>Workspace</workspace>
+      <path>Path</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -636,28 +636,28 @@
       <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
-      <UIPropertyTab>Ang mga Property</UIPropertyTab>
-      <UIMetadataTab>Ang Metadata</UIMetadataTab>
+      <UIPropertyTab>Properties</UIPropertyTab>
+      <UIMetadataTab>Metadata</UIMetadataTab>
       <UIPropertyForm>Add New Property</UIPropertyForm>
       <UIUploadContent>Information of uploaded file</UIUploadContent>
       <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
       <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Ang mga resulta sa pagpangita</AdvancedSearchResult>
+      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
       <UISearchContainer>Advanced Search</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
       <UIViewSearchResult>View Content</UIViewSearchResult>
       <UIContentNameSearch>Search by Name</UIContentNameSearch>
-      <UINodeInfo>Ang Impormasyon sa Bersyon</UINodeInfo>
+      <UINodeInfo>Version Info</UINodeInfo>
       <UINodeProperty>Node Property</UINodeProperty>
       <UIActionListContainer>Available Actions</UIActionListContainer>
       <UIActionContainer>Add Action</UIActionContainer>
       <UIActionViewContainer>Action Info</UIActionViewContainer>
       <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
       <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
-      <UINonPublishedForm>Estado</UINonPublishedForm>
-      <UIPublishedForm>Estado</UIPublishedForm>
+      <UINonPublishedForm>State</UINonPublishedForm>
+      <UIPublishedForm>State</UIPublishedForm>
       <UIPublicationLogList>History</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
@@ -708,7 +708,7 @@
       <name>Name:</name>
       <type>Type:</type>
       <value>Value:</value>
-      <upload>I-upload:</upload>
+      <upload>Upload:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -757,7 +757,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>Ang Nigamit o Grupo</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Remove</remove>
@@ -773,7 +773,7 @@
   <permission>
     <title>
       <SelectUser>Select User</SelectUser>
-      <SelectMember>Pilia ang papel</SelectMember>
+      <SelectMember>Select Role</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
@@ -786,7 +786,7 @@
     <title>
       <UIGroupSelector>Select User</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Pilia ang papel</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -800,9 +800,9 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Pagpili</UIPopupWindow>
+      <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>Ang Nigamit o Grupo</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
@@ -836,7 +836,7 @@
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
       <prop-name>Name</prop-name>
-      <prop-type>Ang Klase</prop-type>
+      <prop-type>Type</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -880,7 +880,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>Dili pwede kining maong keyword.</keyword-not-allowed>
+      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
@@ -899,8 +899,8 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>Walay nakita nga resulta.</not-found>
-      <keyword-not-allow>Dili pwede kining maong keyword.</keyword-not-allow>
+      <not-found>No results found.</not-found>
+      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -915,16 +915,16 @@
   <UISearchResult>
     <msg>
       <not-support>There is no View template for this document.</not-support>
-      <empty>Walay nakita nga resulta.</empty>
+      <empty>No results found.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ang Path</path>
+      <path>Path</path>
       <action>Action</action>
-      <shortcutPath>Ang Path</shortcutPath>
-      <type>Ang Klase</type>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -946,16 +946,16 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this document</not-support>
-      <empty>Walay nakita nga resulta.</empty>
+      <empty>No results found.</empty>
       <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ang Path</path>
+      <path>Path</path>
       <action>Action</action>
-      <shortcutPath>Ang Path</shortcutPath>
-      <type>Ang Klase</type>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -983,10 +983,10 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ang Path</path>
+      <path>Path</path>
       <action>Action</action>
-      <shortcutPath>Ang Path</shortcutPath>
-      <type>Ang Klase</type>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -1008,16 +1008,16 @@
   <UIShowAllHiddenResult>
     <msg>
       <not-support>There is no View template for this item.</not-support>
-      <empty>Walay nakita nga resulta.</empty>
+      <empty>No results found.</empty>
       <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ang Path</path>
+      <path>Path</path>
       <action>Action</action>
-      <shortcutPath>Ang Path</shortcutPath>
-      <type>Ang Klase</type>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
@@ -1047,10 +1047,10 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Ang Path</path>
+      <path>Path</path>
       <action>Action</action>
-      <shortcutPath>Ang Path</shortcutPath>
-      <type>Ang Klase</type>
+      <shortcutPath>Path</shortcutPath>
+      <type>Type</type>
       <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
@@ -1074,7 +1074,7 @@
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Ang mga Property</metadataProperty>
+      <metadataProperty>Properties</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
@@ -1109,7 +1109,7 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Pagdugang og Kategorya</AddCategory>
+      <AddCategory>Add Category</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
@@ -1121,8 +1121,8 @@
       <containPro-Contain>Contain</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>Gikan ni</ConstraintOption-From>
-      <ConstraintOption-To>Para sa</ConstraintOption-To>
+      <ConstraintOption-From>From</ConstraintOption-From>
+      <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
       <created>Created</created>
@@ -1162,11 +1162,11 @@
       <result>Filter</result>
     </title>
     <button>
-      <label-Select>Pagpili</label-Select>
+      <label-Select>Select</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>Walay nakita nga resulta.</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1251,7 +1251,7 @@
       <language>Language</language>
       <query>Query</query>
       <action>Actions</action>
-      <path>Ang Path</path>
+      <path>Path</path>
     </header>
   </UIECMSearch>
   <UIResult>
@@ -1279,7 +1279,7 @@
   <UISavedQuery>
     <header>
       <name>Name</name>
-      <type>Ang Klase</type>
+      <type>Type</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
       <action>Actions</action>
@@ -1294,7 +1294,7 @@
     </label>
     <msg>
       <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>Walay nakita nga resulta.</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1319,9 +1319,9 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>I-export</Export>
+      <Export>Export</Export>
     </action>
-    <title>I-export</title>
+    <title>Export</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,7 +1330,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Ang Tigpili ug Permiso</UIUserContainer>
+      <UIUserContainer>Permission Selector</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1399,17 +1399,17 @@
       <e_16>Property Changed</e_16>
       <e_8>Property Removed</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Ibalhin</e_64>
-      <e_128>Kopyaha</e_128>
+      <e_64>Move</e_64>
+      <e_128>Copy</e_128>
       <e_256>Add Mixin</e_256>
       <e_512>Remove Mixin</e_512>
       <e_1024>Clone</e_1024>
-      <e_2048>I-update</e_2048>
-      <e_4096>Mag-import</e_4096>
+      <e_2048>Update</e_2048>
+      <e_4096>Import</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
-      <e_65536>Maghiusa</e_65536>
+      <e_65536>Merge</e_65536>
       <e_131072>Cancel Merge</e_131072>
       <e_262144>Done Merge</e_262144>
       <e_524288>Add Version Label</e_524288>
@@ -1436,7 +1436,7 @@
     <label>
       <note>Versioning has not been activated for this document.</note>
       <question>Are you sure you want to activate it?</question>
-      <button-active>Pag-aktibo</button-active>
+      <button-active>Activate</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
@@ -1478,7 +1478,7 @@
       <question>Are you sure you want to activate?</question>
     </label>
     <action>
-      <activate>Pag-aktibo</activate>
+      <activate>Activate</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1511,13 +1511,13 @@
       <format>Format</format>
       <systemView>System View</systemView>
       <documentView>Document View</documentView>
-      <upload>I-upload ang File</upload>
+      <upload>Upload File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Mag-import</Import>
+      <Import>Import</Import>
     </action>
-    <title>Mag-import</title>
+    <title>Import</title>
     <msg>
       <import-successful>Imported successfully.</import-successful>
       <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
@@ -1655,7 +1655,7 @@
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Ang mga relasyon</path>
+      <path>Relations</path>
       <action>Actions</action>
     </header>
     <action>
@@ -1675,7 +1675,7 @@
   -->
   <UIClipboard>
     <header>
-      <path>Ang Path</path>
+      <path>Path</path>
       <command>Cm</command>
       <action>Action</action>
     </header>
@@ -1714,7 +1714,7 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Pagdungag ug Bag-o nga Dokumento</title>
+    <title>Add New Document</title>
     <action>
       <Save>#{word.save}</Save>
       <SaveAndClose>Save &amp; Close</SaveAndClose>
@@ -1782,8 +1782,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>I-edit ang Aksyon</UIActionForm>
-      <EditFormAction>I-edit ang Aksyon</EditFormAction>
+      <UIActionForm>Edit Action</UIActionForm>
+      <EditFormAction>Edit Action</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1870,11 +1870,11 @@
       <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Lakaw</exeButton>
+      <exeButton>Go</exeButton>
       <address>Address:</address>
     </label>
     <title>
-      <exeButton>Lakaw</exeButton>
+      <exeButton>Go</exeButton>
       <backButton>Back</backButton>
       <showHistory>Show History</showHistory>
       <changeNode>Change Node</changeNode>
@@ -1887,7 +1887,7 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Pagtan-aw</Watch>
+      <Watch>Watch</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>Continue</Continue>
       <Unwatch>Unwatch</Unwatch>
@@ -2032,7 +2032,7 @@
       <non-published>Unpublished</non-published>
       <public>Public</public>
       <private>Private</private>
-      <state>Estado</state>
+      <state>State</state>
       <visibility>Visibility</visibility>
       <nodeName>Name:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
@@ -2068,7 +2068,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Dili balido ang email address.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2090,7 +2090,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Pilia ang papel</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2146,7 +2146,7 @@
   <UIVersionTreeList>
     <header>
       <version>Version</version>
-      <state>Estado</state>
+      <state>State</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2210,7 +2210,7 @@
     <label>
       <selectGroup>Select Group</selectGroup>
       <selectUser>Select User</selectUser>
-      <selectMembership>Pilia ang papel</selectMembership>
+      <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2302,7 +2302,7 @@
   <UISymLinkForm>
     <label>
       <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Ang Path</pathNode>
+      <pathNode>Path</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2311,13 +2311,13 @@
     <msg>
       <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
       <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>Dili pwede kining maong ngalan.</name-not-allowed>
-      <fileName-error>Dili balido kining ngalan sa file.</fileName-error>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
       <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
       <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
-      <numberformat-exception>Dili ka pwede mag-save niining maong folder. Kinahanglan nga ang gitahag nga ngalan anaa sa pormat nga numero.</numberformat-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <path-node-invalid>Please enter the path.</path-node-invalid>
-      <path-node-not-allowed>Dili pwede kining maong ngalan.</path-node-not-allowed>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
       <cannot-save>You can't add a symlink for this type of document.</cannot-save>
       <item-exists-exception>An item with this name already exists.</item-exists-exception>
@@ -2340,13 +2340,13 @@
     <msg>
       <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
       <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>Dili pwede kining maong ngalan.</name-not-allowed>
-      <fileName-error>Dili balido kining ngalan sa file.</fileName-error>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
       <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
       <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
-      <numberformat-exception>Dili ka pwede mag-save niining maong folder. Kinahanglan nga ang gitahag nga ngalan anaa sa pormat nga numero.</numberformat-exception>
+      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
       <path-node-invalid>Please enter the path.</path-node-invalid>
-      <path-node-not-allowed>Dili pwede kining maong ngalan.</path-node-not-allowed>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
       <cannot-save>An error occurred while creating the symlink.</cannot-save>
       <item-exists-exception>An item with this name already exists.</item-exists-exception>
@@ -2441,7 +2441,7 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Pagdugang og Kategorya</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2542,7 +2542,7 @@
   <UIActionBar>
     <obtion>
       <Admin>Admin</Admin>
-      <Info>Impormasyon</Info>
+      <Info>Info</Info>
       <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
       <Search>Search</Search>
@@ -2629,7 +2629,7 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Sigurado baka nga gusto nimong deleton kini nga komentaryo?</confirm-deletecomment>
+      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
@@ -2659,7 +2659,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>I-upload ang File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
@@ -2679,7 +2679,7 @@
   <UIPreferencesForm>
       <label>
           <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Ang Klase</Type>
+          <Type>Type</Type>
           <CreatedDate>Created Date</CreatedDate>
           <ModifiedDate>Modified Date</ModifiedDate>
           <Ascending>Ascending</Ascending>
@@ -2689,7 +2689,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Ang mga Na-save nga Pagpangita</savedSearches>
+      <savedSearches>Saved Searches</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -2710,7 +2710,7 @@
       <Documents>Document</Documents>
       <Content>Content</Content>
     </label>
-    <title>Pag-set Up ug mga Preperensiya ss Filter</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2720,7 +2720,7 @@
   <UIAllItemsByType>
     <label>
     <ByType>Filter by Type</ByType>
-      <DocumentFilterConfiguration>Pag-set Up ug mga Preperensiya ss Filter</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
     </label>
     <title>
       <ShowVideo>Show all video files</ShowVideo>
@@ -2776,12 +2776,12 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Pagdugang og Kategorya</UICategoryForm>
+      <UICategoryForm>Add Category</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Pagdugang og Kategorya</AddCategory>
+      <AddCategory>Add Category</AddCategory>
     </tooltip>
    </UIActionBar>
 
@@ -2795,23 +2795,23 @@
 
   <UITagExplorer>
     <title>
-      <PublicTags>Ang mga tag</PublicTags>
+      <PublicTags>Tags</PublicTags>
       <EditPublicTags>Edit Tags</EditPublicTags>
-      <PrivateTags>Ang mga tag</PrivateTags>
+      <PrivateTags>Tags</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
       <name>Name</name>
-      <relatedDocuments>Ang Kapareho nga mga Dokumento</relatedDocuments>
+      <relatedDocuments>Related Documents</relatedDocuments>
       <action>Action</action>
     </header>
     <action>
       <title>
         <EditTag>Edit Tag</EditTag>
         <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Dugangi ug tag</AddTag>
+        <AddTag>Add Tag</AddTag>
       </title>
     </action>
     <msg>
@@ -2833,13 +2833,13 @@
     </action>
     <label>
       <tagName>Tag Name:</tagName>
-      <relatedDocuments>Ang Kapareho nga mga Dokumento</relatedDocuments>
+      <relatedDocuments>Related Documents</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Ang Tag</UITagForm>
+      <UITagForm>Tag</UITagForm>
     </title>
   </TagPopup>
 
@@ -2971,10 +2971,10 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Ang mga gipang-usab o gipang-revise</version>
+      <version>Revisions</version>
       <date>Date</date>
-      <author>Ang Nagbuhat</author>
-      <status>Kahimtang</status>
+      <author>Author</author>
+      <status>Status</status>
       <action>Action</action>
       <label>Revision</label>
       <none>No revisions</none>
@@ -2984,14 +2984,14 @@
     </revisions>
     <status>
       <version>Revision</version>
-      <title>Kahimtang</title>
+      <title>Status</title>
       <archived>Archived</archived>
       <obsolete>Obsolete</obsolete>
       <unpublished>Unpublished</unpublished>
       <enrolled>Enrolled</enrolled>
       <draft>Draft</draft>
       <pending>Pending</pending>
-      <approved>Giaprobahan</approved>
+      <approved>Approved</approved>
       <inreview>In Review</inreview>
       <staged>Staged</staged>
       <published>Published</published>
@@ -2999,8 +2999,8 @@
     </status>
     <scheduled>
       <title>Scheduled</title>
-      <from>Gikan ni</from>
-      <to>Para sa</to>
+      <from>From</from>
+      <to>To</to>
     </scheduled>
     <title>
       <preview>Preview</preview>
@@ -3016,7 +3016,7 @@
       <date>Date</date>
       <versionName>Revision Name</versionName>
       <currentState>Current State</currentState>
-      <user>Ang Nagbuhat</user>
+      <user>Author</user>
       <description>Description</description>
     </header>
     <create-version>New version is created</create-version>
@@ -3051,14 +3051,14 @@
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Idumala ang Publikasyon</UIPublicationContainer>
-      <UIPublishingPanel>Idumala ang Publikasyon</UIPublishingPanel>
+      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
+      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Kahimtang</status>
-      <author>Ang Nagbuhat</author>
+      <status>Status</status>
+      <author>Author</author>
       <date>Created Date</date>
       <title>Document Title</title>
       <lastUser>Last User</lastUser>
@@ -3103,10 +3103,10 @@
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Walay pagtugot sa pag-akses. Ciguro wala kay permiso sa workspace sa drive '{0}'.</access-denied>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
       <not-found>The document you are trying to access is no longer available.</not-found>
       <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Ang drive '{0}' nasulod sa usa ka dili ilado nga workspace. Palihug i-reconfigure ang kini nga drive.</workspace-not-exist>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
@@ -3194,7 +3194,7 @@
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
     <Canceled>Canceled</Canceled>
-      <UploadNewVersion>Pag-upload ug bag-o nga bersyon</UploadNewVersion>
+      <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   </label>
@@ -3211,7 +3211,7 @@
     <label>
       <name>Name</name>
       <date>Date</date>
-      <size>Kadak-on</size>
+      <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>

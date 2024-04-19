@@ -7,15 +7,15 @@
   -->
   <UITreeList>
     <header>
-      <name>Όνομα</name>
-      <action>Προσθήκη</action>
+      <name>Name</name>
+      <action>Add</action>
     </header>
     <info>
-      <child-not-found>Δεν βρέθηκαν θυγατρικοί κόμβοι!</child-not-found>
+      <child-not-found>Child not found!</child-not-found>
     </info>
     <action>
       <title>
-        <select>Επιλογή</select>
+        <select>Select</select>
       </title>
     </action>
   </UITreeList>
@@ -26,8 +26,8 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Όνομα κατηγορίας</categoryName>
-      <categoryPath>Διαδρομή Κατηγορίας</categoryPath>
+      <categoryName>Category name</categoryName>
+      <categoryPath>Category path</categoryPath>
       <action>#{word.action}</action>
     </header>
     <action>
@@ -35,10 +35,10 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <cannot-save>Οι Κατηγορίες δεν αποθηκεύτηκαν.</cannot-save>
-      <have-saved>Οι Κατηγορίες αποθηκεύτηκαν με επιτυχία</have-saved>
-      <non-categories>Οι κατηγορίες είναι λάθος. Παρακαλώ επιλέξτε τις κατάλληλες κατηγορίες.</non-categories>
-      <confirm-delete>Θέλετε να διαγράψετε αυτήν την κατηγορία;</confirm-delete>
+      <cannot-save>Categories were not saved.</cannot-save>
+      <have-saved>Categories were saved successfully</have-saved>
+      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
+      <confirm-delete>Do you want to delete this category?</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
   <!--
@@ -48,26 +48,26 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Επιλογή χρήστη</UIPermissionUser>
+      <UIPermissionUser>Select User</UIPermissionUser>
       <UIPermissionMembership>Select Role</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Επιλογή χρήστη</selectUser>
-      <selectGroup>Περιηγηθείτε και επιλέξτε μια ομάδα</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
       <selectUser>Select Role</selectUser>
-      <selectGroup>Περιηγηθείτε και επιλέξτε μια ομάδα</selectGroup>
+      <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectGroup>Select Group</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Επιλογέας σελίδας</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Προσθήκη κόμβου-ρίζα</AddRootNode>
+      <AddRootNode>Add Root</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Όλοι</anyPermission>
+      <anyPermission>Any Permission</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

@@ -35,28 +35,28 @@
       </error>
       <title>Document editors</title>
       <table>
-        <Provider>Proveïdor</Provider>
-        <Description>Descripció</Description>
-        <Active>Actiu</Active>
-        <Permissions>Permisos</Permissions>
+        <Provider>Provider</Provider>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>Cap</None>
+        <None>None</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Desa</Save>
-        <Cancel>Cancel·la</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edita</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Advertència</title>
+      <title>Warning</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

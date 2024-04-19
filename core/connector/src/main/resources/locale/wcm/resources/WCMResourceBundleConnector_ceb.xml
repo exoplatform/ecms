@@ -7,7 +7,7 @@
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Usaba ang pangalan</rename>
+      <rename>Rename</rename>
       <cancel>Cancel</cancel>
     </label>
     <msg>

@@ -30,7 +30,7 @@
       <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Sunting</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
       <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>

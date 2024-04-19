@@ -2,123 +2,123 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>コンテンツ・エクスプローラーで編集</QuickEdit>
-      <print>このページを印刷する</print>
-      <FastPublish>公開する</FastPublish>
+      <QuickEdit>Edit in Content Explorer</QuickEdit>
+      <print>Print This Page</print>
+      <FastPublish>Publish</FastPublish>
     </title>
     <label>
-      <draft>ドラフト</draft>
-      <print>印刷</print>
+      <draft>Draft</draft>
+      <print>Print</print>
     </label>
     <msg>
-      <no-content>表示するコンテンツがありません</no-content>
-      <internal-server-error>サーバーからデータを要求中にエラーが発生しました。</internal-server-error>
-      <empty-title-error>新しいタイトルを指定してください。</empty-title-error>
+      <no-content>No contents found.</no-content>
+      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
+      <empty-title-error>Please specify the new title.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>コンテンツの選択</UIContentSelectorOne>
+      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>編集モードにアクセスする権限がありません</AccessControlException>
+      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>有効</Enable>
-      <Disable>無効</Disable>
+      <Enable>Enabled</Enable>
+      <Disable>Disabled</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>コンテンツ詳細設定</UISCVPreferences>
+      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>中断</Abort>
+      <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>印刷</Print>
+      <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>コンテンツ詳細設定</title>
+    <title>Content Detail Preferences</title>
     <label>
-      <Back>前ページに戻る</Back>
-      <Edit>編集</Edit>
-      <Preferences>設定</Preferences>
-      <Title>コンテンツ詳細設定</Title>
-      <UISCVShowTitleConfigurationCheckBox>タイトルの表示</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>日時の表示</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>オプションバーの表示</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>表示設定</DisplaySettingBlock>
-      <ContentPathBlock>コンテンツ選択</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>コンテンツパス</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>コンテンツパス</UISCVContentPathConfigurationInputBox>
-      <Advance>詳細</Advance>
-      <ContextCaption>ダイナミックナビゲーション</ContextCaption>
-      <UISCVContextualRadioBox>コンテクスチュアルコンテント</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>作成者:</UISCVParameterInputBox>
-      <PrintSettingBlock>印刷設定</PrintSettingBlock>
-      <UISCVPrintPageParameter>を</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>ページに表示</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>ロック</LockStatus>
-      <CacheManagement>コンテンツ参照レベル</CacheManagement>
-      <UISCVCacheRadioBox>Share content between users</UISCVCacheRadioBox>
+      <Back>Back to previous page</Back>
+      <Edit>Edit</Edit>
+      <Preferences>Preferences</Preferences>
+      <Title>Content Detail Preferences</Title>
+      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <ContentPathBlock>Content Selection</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
+      <Advance>Advanced</Advance>
+      <ContextCaption>Dynamic Navigation</ContextCaption>
+      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>by</UISCVParameterInputBox>
+      <PrintSettingBlock>Print Settings</PrintSettingBlock>
+      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Lock</LockStatus>
+      <CacheManagement>Content Visibility</CacheManagement>
+      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>表示したいコンテンツを選択してください。ダイナミックナビゲーション（詳細モード。下記参照）を有効化すると、このデフォルトコンテンツが動的に変化します。</ContentPathBlock>
-      <DisplaySettingBlock>印刷リンクを表示するオプションバーは表示、非表示を選択できます。タイトルと日付表示もオプションです。</DisplaySettingBlock>
-      <ContextualHelp>ダイナミックナビゲーションの有効化。URLパラメータに基づき、コンテンツが動的に変わります。</ContextualHelp>
-      <ParameterHelp>ダイナミックナビゲーションが有効化されている場合、コンテンツの取得にこのパラメータが使用されます。</ParameterHelp>
+      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
+      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
+      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>アイテムパスが不正です</not-valid-path>
+      <not-valid-path>The item path is invalid.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>コンテンツ選択</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>表示設定</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>印刷設定</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>詳細設定</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>フォルダパスの選択</SelectFolderPath>
-      <AddPath>パスの追加</AddPath>
+      <SelectFolderPath>Select Folder Path</SelectFolderPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>ページに表示</SelectTargetPage>
+      <SelectTargetPage>Show in Page</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>ページ選択</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>達成済</archived>
-    <obsolete>廃止済</obsolete>
-    <unpublished>非公開</unpublished>
-    <enrolled>登録済</enrolled>
-    <draft>ドラフト</draft>
-    <pending>保留中</pending>
-    <approved>承認済</approved>
-    <inreview>レビュー中</inreview>
-    <staged>ステージ済</staged>
-    <published>公開</published>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
+    <draft>Draft</draft>
+    <pending>Pending</pending>
+    <approved>Approved</approved>
+    <inreview>Under Review</inreview>
+    <staged>Staged</staged>
+    <published>Published</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>認証で制約</Enable>
-      <Disable>ユーザー ロールによって制約</Disable>
+      <Enable>Restricted by Authentication</Enable>
+      <Disable>Restricted by User roles</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

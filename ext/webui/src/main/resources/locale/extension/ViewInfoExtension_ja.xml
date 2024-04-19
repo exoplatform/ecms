@@ -2,29 +2,29 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>情報の表示</UIViewInfoManager>
+<UIViewInfoManager>View Information</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>情報の表示</ViewInfo>
+<ViewInfo>View Information</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>名前</name>
-      <title>タイトル</title>
-      <type>タイプ</type>
-      <size>サイズ</size>
-      <owner>所有者</owner>
-      <lastModifier>最終更新者</lastModifier>
-      <created>作成日</created>
-      <lastModified>最終更新日付</lastModified>
-      <publicationState>公開ステータス</publicationState>
+      <name>Name</name>
+      <title>Title</title>
+      <type>Type</type>
+      <size>Size</size>
+      <owner>Owner</owner>
+      <lastModifier>Last Modifier</lastModifier>
+      <created>Created Date</created>
+      <lastModified>Last Modified Date</lastModified>
+      <publicationState>Publication State</publicationState>
 </label>
 <value>
-      <folder>フォルダ</folder>
+      <folder>Folder</folder>
 </value>
 <action>
 <Close>#{word.close}</Close>

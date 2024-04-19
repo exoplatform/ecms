@@ -2,94 +2,94 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Kata kunci</keyword>
+      <keyword>Keyword</keyword>
       <portal>Portal</portal>
-      <Page>Halaman</Page>
-      <Document>Dokumen</Document>
+      <Page>Page</Page>
+      <Document>Document</Document>
     </label>
     <action>
-      <Search>Cari</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Halaman</Page>
-      <Document>Dokumen</Document>
-      <DocumentAndPage>Dokumen dan halaman</DocumentAndPage>
-      <documentandpage>Dokumen dan halaman</documentandpage>
-      <results>Hasil {0} untuk {1} untuk {2}</results>
-      <oneResult>Hanya satu hasil untuk {0}</oneResult>
-      <ofAboutCaption>tentang</ofAboutCaption>
-      <timeUnitCaption>detik-detik</timeUnitCaption>
-      <similar>Tempat konten yang sama muncul</similar>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
       <editor>Editor</editor>
-      <date>Tanggal</date>
-      <relevancy>Relevansi</relevancy>
-      <title>Judul</title>
-      <sortBy>Urutkan Berdasarkan:</sortBy>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Ubah</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>Pencarian anda {0} tidak cocok dengan apapun{1}.</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Item per halaman</itemsPerPageSelector>
-      <searchFormSelector>Cari bentuk Template</searchFormSelector>
-      <searchResultSelector>Hasil Pencarian Template</searchResultSelector>
-      <searchPaginatorSelector>Pencarian Template Paginator</searchPaginatorSelector>
-      <searchPageLayoutSelector>Mencari Halaman Tata Letak Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Path Dasar</searchResultBasePathInputSetAction>
-      <pageMode>Mode Halaman</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>Tidak ada</none>
-        <more>Lainnya</more>
+        <none>None</none>
+        <more>More</more>
         <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
-      <Save>#{kata.menyimpan}</Save>
-      <Cancel>#{kata.membatalkan}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Memilih Jalur Dasar</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>Kata kunci tidak benar.Beberapa karakter tidak dikenali.</keyword-not-support>
-     <not-checked>Silahkan memilih jenis pencarian.</not-checked>
-     <keyword-not-empty>Silahkan memasukkan kata kunci.</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Selanjutnya</next>
-      <previous>Sebelumnya</previous>
-      <more>Lainnya</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Mengubah dengan cepat</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>pada Halaman</pageCheckBox>
-      <documentCheckBox>pada Konten</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>cari semua situs</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>

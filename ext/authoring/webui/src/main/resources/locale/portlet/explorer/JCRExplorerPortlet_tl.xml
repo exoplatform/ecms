@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Mag-rekwest ng Pag-apruba</PublicationRequestApproval>
-      <PublicationApproveContent>Tanggapin ang Nilalaman</PublicationApproveContent>
-      <PublicationPublish>I-publish</PublicationPublish>
+      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
+      <PublicationApproveContent>Approve Content</PublicationApproveContent>
+      <PublicationPublish>Publish</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

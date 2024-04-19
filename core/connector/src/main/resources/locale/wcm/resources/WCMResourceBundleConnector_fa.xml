@@ -2,27 +2,27 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>هیچ محتوایی انتخاب نشده است. لطفا حداقل یکی را انتخاب کنید.</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>تغییر نام</rename>
-      <cancel>انصراف</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
-      <renaming>در حال تغییر نام...</renaming>
+      <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>باز کردن در برنامه Word</word>
-          <excel>باز کردن در برنامه Excel</excel>
-          <powerpoint>باز کردن در برنامه Powerpoint</powerpoint>
-          <desktop>باز کردن روی میز کار</desktop>
-          <desktop-app>باز کردن در {0}</desktop-app>
+          <word>Open in Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Open in Powerpoint</powerpoint>
+          <desktop>Open on Desktop</desktop>
+          <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>

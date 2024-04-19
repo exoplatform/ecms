@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Dili balido ang email address.</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -421,8 +421,8 @@
     </label>
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
-      <constraint-violation>Dili pwedeng makadungag ug klase sa dokumento '{0}' dinhi.</constraint-violation>
-      <repository-exception>Adunay nahitabo nga wala damhang error. Palihug kontaka ang administrador para sa dugang mga detalye.</repository-exception>
+      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
       <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->

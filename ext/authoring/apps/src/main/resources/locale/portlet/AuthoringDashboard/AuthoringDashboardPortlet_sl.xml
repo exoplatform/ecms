@@ -3,11 +3,11 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>Ni vsebine</nocontent>
-      <mydraft>Moj osnutek vsebine</mydraft>
-      <waitingapproval>Čaka na mojo odobritev</waitingapproval>
-      <approve>Odobri</approve>
-      <publishedtomorrow>Čaka na objavo</publishedtomorrow>
+      <nocontent>No Content</nocontent>
+      <mydraft>My Draft Content</mydraft>
+      <waitingapproval>Waiting For My Approval</waitingapproval>
+      <approve>Approve</approve>
+      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

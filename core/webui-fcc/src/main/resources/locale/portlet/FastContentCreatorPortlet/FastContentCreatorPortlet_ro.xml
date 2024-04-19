@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>Acest nume nu este permis.</name-not-allowed>
-      <in-versioning>Vă rugăm verificați acest modul înainte de a adăuga unul nou.</in-versioning>
-      <cannot-save>Eroare la salvare modul.</cannot-save>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <in-versioning>Please check the current node before adding a new node.</in-versioning>
+      <cannot-save>An error occurred while saving the node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Nu se poate încărca şablonul de "{0}".</not-support>
-      <not-add-folder>La acest folder pot fi adăugate doar fișiere.</not-add-folder>
-      <access-denied>Acces refuzat. Nu puteți adăuga la "{0}".</access-denied>
-      <path-not-found>Calea "{0}" a fost ştearsă sau este invalidă.</path-not-found>
-      <node-locked>Modulul "{0}" este blocat. Vă rugăm să deblocați acest modul înainte de a crea documente.</node-locked>
-      <node-isExist>Acest modul există în '{0}' și nu este permis ca numele să fie identic cu al modulului înrudit.</node-isExist>
-      <get-dialog-path>Eroare la obţinerea căii de dialog.</get-dialog-path>
-      <new-jcr-template>Eroare la crearea unui nou şablon.</new-jcr-template>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <not-add-folder>Only files can be added to this folder.</not-add-folder>
+      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
+      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
+      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
+      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
+      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
+      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Locaţie de salvare</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Selectaţi spaţiul de lucru</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Opţiuni  şablon</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Locaţie pentru a salva</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Selectați șablonul</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Buton salvare personalizat</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Mesaj salvare personalizat</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirecţionare:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Cale redirecționare:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Acțiuni</UIFCCActionField>
+      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Actions</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Preferințele portletului au fost salvate cu succes.</save-successfully>
-      <item-not-found>Calea este invalidă.</item-not-found>
-      <fileType-empty>Vă rugăm să selectaţi un tip de fişier înainte de a salva această configuraţie.</fileType-empty>
-      <ws-empty>Vă rugăm să selectaţi un spațiu de lucru.</ws-empty>
-      <action-empty>Vă rugăm să selectaţi un folder cu o acţiune.</action-empty>
-      <message-empty>Câmpul "Mesaj de salvare personalizat" este necesar în cazul în care nu alegeţi opţiunea de redirecţionare, sau calea este goală.</message-empty>
-      <get-template>Eroare în timpul accesării şablonului.</get-template>
-      <set-template-option>Eroare la setarea opțiunilor șablonului.</set-template-option>
-      <do-select>Eroare în timp ce selectaţi locaţia.</do-select>
+      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
+      <item-not-found>This path is invalid.</item-not-found>
+      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
+      <ws-empty>Please select one workspace.</ws-empty>
+      <action-empty>Please select a folder with an action.</action-empty>
+      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
+      <get-template>An error occurred while accessing the template.</get-template>
+      <set-template-option>An error occurred while setting the template option.</set-template-option>
+      <do-select>An error occurred while selecting the location.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,116 +52,116 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Selectaţi calea</SelectPath>
+      <SelectPath>Select Path</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Nume</name>
-      <description>Descriere</description>
-      <instanceOf>Instanță a</instanceOf>
-      <action>Acțiune</action>
+      <name>Name</name>
+      <description>Description</description>
+      <instanceOf>Instance of</instanceOf>
+      <action>Action</action>
     </header>
     <action>
-      <Add>Adaugă</Add>
+      <Add>Add</Add>
     </action>
     <msg>
-      <empty>Fără acțiuni</empty>
-      <remove-popup-first>Trebuie să închideți fereastra de editare înainte de a şterge acest modul.</remove-popup-first>
-      <confirm-delete-action>Sigur ștergeți această acțiune?</confirm-delete-action>
-      <template-empty>Șablonul pentru "{0}" este null sau gol.</template-empty>
-      <template-null>Șablonul este nul sau gol, sau nu aveţi permisiunea de a accesa acest șablon.</template-null>
-      <access-denied>Acces refuzat. Nu aveţi dreptul de a efectua această acţiune.</access-denied>
+      <empty>No actions</empty>
+      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
+      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
+      <template-empty>The template of '{0}' is null or empty.</template-empty>
+      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Selectați locația</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Spațiu de lucru:</workspaceName>
-      <rootNodePath>Cale rădăcină:</rootNodePath>
-      <rootNodeInfo>Modul rădăcină</rootNodeInfo>
+      <workspaceName>Workspace:</workspaceName>
+      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Adauga modulul rădăcină</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>Acest modul nu are sub-module.</child-not-found>
+      <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Nume</name>
-      <action>Acțiune</action>
+      <name>Name</name>
+      <action>Action</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Adaugă acţiune</UIFCCActionContainer>
+      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Adaugă/Editează acțiune</title>
+    <title>Add/Edit Action</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Nu poate salva această acţiune. Denumirea nu trebuie să aibă un indice ca element final.</repository-exception>
-      <numberformat-exception>Nu poate salva această acţiune. Denumirea nu trebuie să conțină '[' sau ']'.</numberformat-exception>
-      <existed-action>Numele de acţiune "{0}" există deja. Vă rugăm să selectaţi un alt unul.</existed-action>
-      <unable-add-action>Imposibil de adăugat această acţiune.</unable-add-action>
-      <unable-add>Imposibil de adăugat această acţiune. Acest modul este rădăcină sau nu aveţi drepturi.</unable-add>
-      <not-support>Caseta de dialog '{0}' nu este acceptată.</not-support>
-      <no-permission-add>Acces refuzat. Nu aveţi dreptul de a adăuga o acţiune aici.</no-permission-add>
-      <access-denied>Acces refuzat. Nu aveţi permisiunea de a accesa acest șablon.</access-denied>
+      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
+      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
+      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
+      <unable-add-action>Unable to add this action.</unable-add-action>
+      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
+      <not-support>The dialog '{0}' is not supported.</not-support>
+      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
+      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
     </msg>
     <validator>
       <validator>Validator</validator>
-      <destPath>Cu cale</destPath>
+      <destPath>With Path</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Creaţi o acţiune de tip</actionType>
+      <actionType>Create an Action of Type</actionType>
     </label>
     <msg>
-      <not-support>Nu se poate încărca şablonul de "{0}".</not-support>
-      <do-not-permission>Nu aveţi permisiunea de a încărca şablonul "{0}".</do-not-permission>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Selectați locația</UIOneNodePathSelector>
-      <UIPermissionSelector>Parcurgere drepturi</UIPermissionSelector>
-      <UICategoriesSelector>Adaugă categorii</UICategoriesSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Câmpul "{0}" cu valoarea "{1}" este invalid.</Invalid-input>
+      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Selectaţi categoriile</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Categorii de referinţă</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -173,19 +173,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Adaugă categorii</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Mulțimea de categorii</taxonomyTree>
+      <taxonomyTree>Category Tree</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Selector de categorie</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

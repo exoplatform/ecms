@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>關鍵字</keyword>
-      <portal>入口網站</portal>
-      <Page>頁面</Page>
-      <Document>文件</Document>
+      <keyword>Keyword</keyword>
+      <portal>Portal</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
     </label>
     <action>
-      <Search>搜尋</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>頁面</Page>
-      <Document>文件</Document>
-      <DocumentAndPage>文件和頁面</DocumentAndPage>
-      <documentandpage>文件和頁面</documentandpage>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
       <results>Results {0} to {1} for {2}</results>
       <oneResult>Only one result for {0}</oneResult>
-      <ofAboutCaption>約</ofAboutCaption>
-      <timeUnitCaption>秒</timeUnitCaption>
-      <similar>網頁中出現相同的內容</similar>
-      <editor>編輯器</editor>
-      <date>日期</date>
-      <relevancy>相關性</relevancy>
-      <title>標題</title>
-      <sortBy>排序依據:</sortBy>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>編輯</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>您搜索 {0} 不匹配任何 {1}。</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>每頁項目</itemsPerPageSelector>
-      <searchFormSelector>搜尋表單範本</searchFormSelector>
-      <searchResultSelector>搜尋結果範本</searchResultSelector>
-      <searchPaginatorSelector>搜尋分頁程式範本</searchPaginatorSelector>
-      <searchPageLayoutSelector>搜尋頁面配置範本</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>基本路徑</searchResultBasePathInputSetAction>
-      <pageMode>頁面模式</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>無</none>
-        <more>更多</more>
-        <pagination>分頁</pagination>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>選擇基本路徑</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>關鍵字不正確。無法識別某些字元。</keyword-not-support>
-     <not-checked>請選擇搜尋類型。</not-checked>
-     <keyword-not-empty>請輸入一個關鍵字。</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>下一步</next>
-      <previous>上一步</previous>
-      <more>更多</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>快速編輯</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>在頁面中</pageCheckBox>
-      <documentCheckBox>在內容中</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>搜尋所有網站</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>

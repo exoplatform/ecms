@@ -8,7 +8,7 @@
     </title>
     <label>
       <draft>Draft</draft>
-      <print>I-print</print>
+      <print>Print</print>
     </label>
     <msg>
       <no-content>No contents found.</no-content>
@@ -42,7 +42,7 @@
       <Save>#{word.save}</Save>
       <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>I-print</Print>
+      <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Pagpuno ug Path</AddPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -110,7 +110,7 @@
     <enrolled>Enrolled</enrolled>
     <draft>Draft</draft>
     <pending>Pending</pending>
-    <approved>Giaprobahan</approved>
+    <approved>Approved</approved>
     <inreview>Under Review</inreview>
     <staged>Staged</staged>
     <published>Published</published>

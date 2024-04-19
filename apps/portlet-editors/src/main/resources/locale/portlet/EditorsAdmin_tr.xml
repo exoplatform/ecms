@@ -22,42 +22,42 @@
 <bundle>
   <editors>
     <admin>
-    <page>Düzenleyici Yönetimi</page>
+    <page>Editors Administration</page>
       <error>
-        <ProviderNotRegistered>Düzenleyici sağlayıcı kayıtlı değil.</ProviderNotRegistered>
-        <EmptyRequest>İstek en az 1 form parametresi (etkin/izinler) içermelidir.</EmptyRequest>
-        <CannotGetProviders>Sağlayıcı listesi alınamıyor.</CannotGetProviders>
-        <PermissionNotValid>Belirtilen izin geçerli değil. Kullanıcı veya grup mevcut olmayabilir.</PermissionNotValid>
-        <CannotLoadIdentities>Kimlikler belirtilen kriterlere göre yüklenemiyor</CannotLoadIdentities>
-        <CannotSavePreferredEditor>Seçili düzenleyici tercih edilen düzenleyici olarak kaydedilemiyor.</CannotSavePreferredEditor>
-        <UnableGetData>Verileri okurken bir hata oluştu.</UnableGetData>
-        <UnablePostData>Verileri kaydederken bir hata oluştu.</UnablePostData>
+        <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
+        <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
+        <CannotGetProviders>Can't get providers list.</CannotGetProviders>
+        <PermissionNotValid>The specified permission is not valid. Maybe the user or group doesn't exist.</PermissionNotValid>
+        <CannotLoadIdentities>Can't load identities by specified criteria</CannotLoadIdentities>
+        <CannotSavePreferredEditor>Can't save selected editor as preferred one.</CannotSavePreferredEditor>
+        <UnableGetData>An error occurred while reading the data.</UnableGetData>
+        <UnablePostData>An error occurred while saving the data.</UnablePostData>
       </error>
-      <title>Belge düzenleyiciler</title>
+      <title>Document editors</title>
       <table>
-        <Provider>Sağlaycı</Provider>
-        <Description>Açıklama</Description>
-        <Active>Etkin</Active>
-        <Permissions>İzinler</Permissions>
+        <Provider>Provider</Provider>
+        <Description>Description</Description>
+        <Active>Active</Active>
+        <Permissions>Permissions</Permissions>
       </table>
       <modal>
-        <title>İzinleri düzenle</title>
-        <SearchLabel>Kullanıcı veya grup adını girin</SearchLabel>
-        <WithPermissions>Kimin izni var</WithPermissions>
-        <None>Hiçbiri</None>
-        <Everybody>Herkes</Everybody>
+        <title>Edit permissions</title>
+        <SearchLabel>Enter user or group name</SearchLabel>
+        <WithPermissions>Who has permission</WithPermissions>
+        <None>None</None>
+        <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Kaydet</Save>
-        <Cancel>İptal</Cancel>
+        <Save>Save</Save>
+        <Cancel>Cancel</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Düzenle</EditorButton>
+      <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Uyarı</title>
-      <message>Uzun bir süredir aktif olmadığınız görünüyor. Düzenleyici sayfası, %s saniye içinde kapatılacak.</message>
+      <title>Warning</title>
+      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>
 </bundle>

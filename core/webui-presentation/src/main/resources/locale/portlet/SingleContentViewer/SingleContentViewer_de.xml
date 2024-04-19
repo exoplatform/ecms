@@ -2,123 +2,123 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Im Inhaltsexplorer bearbeiten</QuickEdit>
-      <print>Diese Seite drucken</print>
-      <FastPublish>Veröffentlichen</FastPublish>
+      <QuickEdit>Edit in Content Explorer</QuickEdit>
+      <print>Print This Page</print>
+      <FastPublish>Publish</FastPublish>
     </title>
     <label>
-      <draft>Entwurf</draft>
-      <print>Drucken</print>
+      <draft>Draft</draft>
+      <print>Print</print>
     </label>
     <msg>
-      <no-content>Keine Inhalte gefunden.</no-content>
-      <internal-server-error>Beim Anfordern von Daten vom Server ist ein Fehler aufgetreten.</internal-server-error>
-      <empty-title-error>Bitte geben Sie den neuen Titel ein.</empty-title-error>
+      <no-content>No contents found.</no-content>
+      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
+      <empty-title-error>Please specify the new title.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Inhalt auswählen</UIContentSelectorOne>
+      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>Ihnen fehlt die Berechtigung auf den Bearbeitungsmodus zuzugreifen.</AccessControlException>
+      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Aktiviert</Enable>
-      <Disable>Deaktiviert</Disable>
+      <Enable>Enabled</Enable>
+      <Disable>Disabled</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Einstellungen zu Details des Inhalts</UISCVPreferences>
+      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
       <Save>#{word.save}</Save>
-      <Abort>Abbrechen</Abort>
+      <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Drucken</Print>
+      <Print>Print</Print>
       <Close>#{word.close}</Close>
     </action>
-    <title>Einstellungen zu Details des Inhalts</title>
+    <title>Content Detail Preferences</title>
     <label>
-      <Back>Zurück zur vorherigen Seite</Back>
-      <Edit>Bearbeiten</Edit>
-      <Preferences>Präferenzen</Preferences>
-      <Title>Einstellungen zu Details des Inhalts</Title>
-      <UISCVShowTitleConfigurationCheckBox>Titel anzeigen</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Datum anzeigen</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Optionsleiste anzeigen</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Anzeigeeinstellungen</DisplaySettingBlock>
-      <ContentPathBlock>Inhaltsauswahl</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Inhaltspfad</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Inhaltspfad</UISCVContentPathConfigurationInputBox>
-      <Advance>Erweitert</Advance>
-      <ContextCaption>Dynamische Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Kontextueller Inhalt</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>von</UISCVParameterInputBox>
-      <PrintSettingBlock>Druckeinstellungen</PrintSettingBlock>
-      <UISCVPrintPageParameter>mit</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>In Seite anzeigen</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Sperren</LockStatus>
-      <CacheManagement>Inhaltssichtbarkeit</CacheManagement>
-      <UISCVCacheRadioBox>Inhalt teilen</UISCVCacheRadioBox>
+      <Back>Back to previous page</Back>
+      <Edit>Edit</Edit>
+      <Preferences>Preferences</Preferences>
+      <Title>Content Detail Preferences</Title>
+      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <ContentPathBlock>Content Selection</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
+      <Advance>Advanced</Advance>
+      <ContextCaption>Dynamic Navigation</ContextCaption>
+      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>by</UISCVParameterInputBox>
+      <PrintSettingBlock>Print Settings</PrintSettingBlock>
+      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Lock</LockStatus>
+      <CacheManagement>Content Visibility</CacheManagement>
+      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Wählen Sie den Inhalt, den Sie anzeigen möchten. Dieser Standard-Inhalt wird dynamisch ersetzt werden, wenn Sie die dynamische Navigation aktivieren (sehen Sie unten für den erweiterten Modus).</ContentPathBlock>
-      <DisplaySettingBlock>Sie können die Optionsleiste ein- oder ausblenden, um den Druck-Link anzuzeigen. Die Titel- und Datumsanzeige sind ebenfalls optional.</DisplaySettingBlock>
-      <ContextualHelp>Die dynamische Navigation aktivieren. Der Inhalt kann durch einen anderen URL-basierten Parameter dynamisch geändert werden.</ContextualHelp>
-      <ParameterHelp>Dieser Parameter wird verwendet werden, um den Inhalt zu erhalten, wenn die dynamische Navigation aktiviert ist.</ParameterHelp>
+      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
+      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
+      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>Der Elementpfad ist ungültig.</not-valid-path>
+      <not-valid-path>The item path is invalid.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Inhaltsauswahl</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Anzeigeeinstellungen</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Druckeinstellungen</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Erweitert</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Einen Ordnerpfad auswählen</SelectFolderPath>
-      <AddPath>Pfad hinzufügen</AddPath>
+      <SelectFolderPath>Select Folder Path</SelectFolderPath>
+      <AddPath>Add Path</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>In Seite anzeigen</SelectTargetPage>
+      <SelectTargetPage>Show in Page</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Seitenauswahl</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>Archiviert</archived>
-    <obsolete>Veraltet</obsolete>
-    <unpublished>Unveröffentlicht</unpublished>
-    <enrolled>Eingeschrieben</enrolled>
-    <draft>Entwurf</draft>
-    <pending>Ausstehend</pending>
-    <approved>Genehmigt</approved>
-    <inreview>Unter Überprüfung</inreview>
-    <staged>bereitgestellt</staged>
-    <published>Veröffentlicht</published>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
+    <draft>Draft</draft>
+    <pending>Pending</pending>
+    <approved>Approved</approved>
+    <inreview>Under Review</inreview>
+    <staged>Staged</staged>
+    <published>Published</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Beschränkt durch Authentifzierung</Enable>
-      <Disable>Beschränkt durch Benutzerrollen</Disable>
+      <Enable>Restricted by Authentication</Enable>
+      <Disable>Restricted by User roles</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

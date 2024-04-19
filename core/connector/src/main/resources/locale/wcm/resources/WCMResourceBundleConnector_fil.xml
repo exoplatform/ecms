@@ -2,34 +2,34 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>Walang napili na nilalaman doon. Pakusap na pumili kahit isa.</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Ang Baguhin ang Pangalan</rename>
-      <cancel>Ang Kanselahin</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
-      <renaming>Ang pagpalit ng pangalan...</renaming>
+      <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>Buksan sa Salita</word>
-          <excel>Buksan sa Excel</excel>
-          <powerpoint>Ang Powerpoint ay Bukas</powerpoint>
-          <desktop>Ang Desktop ay buksan</desktop>
-          <desktop-app>Ang Buksan sa {0}</desktop-app>
+          <word>Open in Word</word>
+          <excel>Open in Excel</excel>
+          <powerpoint>Open in Powerpoint</powerpoint>
+          <desktop>Open on Desktop</desktop>
+          <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>Ang mimetype ng payl na-upload ay hindi matukoy. Hindi bago ang bersyon ng {0} sa nalikha na.</WrongMimeType>
+      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

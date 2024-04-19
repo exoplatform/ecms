@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Δημοσίευση &gt; Ζητήστε έγκριση</publicationRequestApproval>
-          <publicationApproveContent>Δημοσίευση &gt; Έγκριση περιεχομένου</publicationApproveContent>
-          <publicationPublish>Δημοσίευση &gt; Δημοσιοποιήστε το</publicationPublish>
+          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
+          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
+          <publicationPublish>Publication &gt; Publish</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>

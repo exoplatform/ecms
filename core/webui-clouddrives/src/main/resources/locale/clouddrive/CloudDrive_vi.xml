@@ -50,8 +50,8 @@
     <event>
       <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
       <OpenOn>Open on</OpenOn>
-      <EditFile>Chỉnh sửa</EditFile>
-      <ViewFile>Cài đặt</ViewFile>
+      <EditFile>Edit</EditFile>
+      <ViewFile>View</ViewFile>
     </event>
     <label>
       <sourceview>View source code</sourceview>
@@ -91,24 +91,24 @@
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
       <provider>Provider</provider>
-      <description>Mô tả</description>
-      <active>Bật</active>
+      <description>Description</description>
+      <active>Active</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Tài liệu</title>
+      <title>Documents</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Kết nối</connect>
+        <connect>Connect</connect>
       </button>
       <button>
-        <disconnect>Ngừng kết nối</disconnect>
+        <disconnect>Disconnect</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

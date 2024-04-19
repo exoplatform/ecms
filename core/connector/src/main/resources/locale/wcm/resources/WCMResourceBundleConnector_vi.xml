@@ -2,26 +2,26 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>Bạn cần chọn ít nhất một nội dung.</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Đổi tên</rename>
-      <cancel>Hủy bỏ</cancel>
+      <rename>Rename</rename>
+      <cancel>Cancel</cancel>
     </label>
     <msg>
-      <renaming>Đang đổi tên...</renaming>
+      <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>Mở trong Word</word>
+          <word>Open in Word</word>
           <excel>Open in Excel</excel>
-          <powerpoint>Mở trong Powerpoint</powerpoint>
-          <desktop>Mở trên máy tính</desktop>
+          <powerpoint>Open in Powerpoint</powerpoint>
+          <desktop>Open on Desktop</desktop>
           <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>

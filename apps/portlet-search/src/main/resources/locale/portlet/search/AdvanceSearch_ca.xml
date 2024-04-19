@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Paraula clau</keyword>
+      <keyword>Keyword</keyword>
       <portal>Portal</portal>
-      <Page>Pàgina</Page>
+      <Page>Page</Page>
       <Document>Document</Document>
     </label>
     <action>
-      <Search>Cerca</Search>
+      <Search>Search</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Pàgina</Page>
+      <Page>Page</Page>
       <Document>Document</Document>
-      <DocumentAndPage>Document i Pàgina</DocumentAndPage>
-      <documentandpage>Document i Pàgina</documentandpage>
-      <results>Resultats {0} a {1} de {2}</results>
-      <oneResult>Un únic resultat per a {0}</oneResult>
-      <ofAboutCaption>d'uns</ofAboutCaption>
-      <timeUnitCaption>segons</timeUnitCaption>
-      <similar>Pàgines on apareix el mateix contingut</similar>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>Document and Page</documentandpage>
+      <results>Results {0} to {1} for {2}</results>
+      <oneResult>Only one result for {0}</oneResult>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
       <editor>Editor</editor>
-      <date>Data</date>
-      <relevancy>Rellevància</relevancy>
-      <title>Títol</title>
-      <sortBy>Ordena per:</sortBy>
+      <date>Date</date>
+      <relevancy>Relevance</relevancy>
+      <title>Title</title>
+      <sortBy>Sort By:</sortBy>
     </label>
     <action>
-      <edit>Edita</edit>
+      <edit>Edit</edit>
     </action>
     <msg>
-      <search-not-match-type>La seva cerca {0} no coincideix amb cap {1}.</search-not-match-type>
+      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Elements per Pàgina</itemsPerPageSelector>
-      <searchFormSelector>Plantilla del Formulari de Cerca</searchFormSelector>
-      <searchResultSelector>Plantilla de Resultats de Cerca</searchResultSelector>
-      <searchPaginatorSelector>Plantilla de Paginació de Cerca</searchPaginatorSelector>
-      <searchPageLayoutSelector>Plantilla de disposició de la Pàgina de Cerca</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Ruta Base</searchResultBasePathInputSetAction>
-      <pageMode>Mode de Pàgina</pageMode>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
+      <pageMode>Page Mode</pageMode>
       <option>
-        <none>Cap</none>
-        <more>Més</more>
-        <pagination>Paginació</pagination>
+        <none>None</none>
+        <more>More</more>
+        <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Selecciona la Ruta de la Base</SelectBasePath>
+      <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>La paraula clau no és vàlida. No es reconeixen alguns caràcters.</keyword-not-support>
-     <not-checked>Si us plau, selecciona un tipus de cerca.</not-checked>
-     <keyword-not-empty>Si us plau, introdueix una paraula clau.</keyword-not-empty>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
+     <not-checked>Please select a search type.</not-checked>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Següent</next>
-      <previous>Anterior</previous>
-      <more>Més</more>
+      <next>Next</next>
+      <previous>Previous</previous>
+      <more>More</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Edició Ràpida</quickEditTitle>
+      <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>en les Pàgines</pageCheckBox>
-      <documentCheckBox>en el Contingut</documentCheckBox>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>cerca a tots els llocs</all>
+        <all>search all sites</all>
       </option>  
     </label>  
   </ViewMode>

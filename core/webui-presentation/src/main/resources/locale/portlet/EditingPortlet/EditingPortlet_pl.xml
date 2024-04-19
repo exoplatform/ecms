@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Tryb:</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>Nie masz uprawnień aby wykonać tę akcję.</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Edytuj</Draft>
-        <Published>Opublikowane</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

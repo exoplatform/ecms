@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Mod:</Editing>
+      <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>Nu ai permisiunea să faci această acțiune.</not-permission>
+      <not-permission>You don't have permission to do this action.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Modifică</Draft>
-        <Published>Publicat</Published>
+        <Draft>Edit</Draft>
+        <Published>Published</Published>
       </option>
     </label>
   </UIEditingForm>

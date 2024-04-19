@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Publikacija &gt; Zahtevek za odobritev</publicationRequestApproval>
-          <publicationApproveContent>Publikacija &gt; Odobri vsebino</publicationApproveContent>
-          <publicationPublish>Publikacija &gt; Objavi</publicationPublish>
+          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
+          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
+          <publicationPublish>Publication &gt; Publish</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>
