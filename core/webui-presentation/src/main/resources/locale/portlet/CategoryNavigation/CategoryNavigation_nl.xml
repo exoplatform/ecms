@@ -2,13 +2,13 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Quick Edit</QuickEdit>
+      <QuickEdit>Snel bewerken</QuickEdit>
     </title>
   </UICNContainer>
 
   <UICNConfigPopupWindow>
     <title>
-      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+      <UICategoryNavigationConfig>Categorie lijstconfiguratie</UICategoryNavigationConfig>
     </title>
   </UICNConfigPopupWindow>
 
@@ -21,38 +21,38 @@
   <UICategoryNavigationConfig>
     <label>
       <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeNameSelectBox>Taxonomy Tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Titel</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Naam boomstructuur</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Kijker boomstructuur sjabloon</UICategoryNavigationTemplateFormSelectBox>
       
-      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
-      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <AdvancedBlock>Advanced</AdvancedBlock>
+      <UICategoryNavigationTargetPathFormInputSet>In pagina weergeven</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Boomstructuurselectie</TreeSelectionBlock>
+      <DisplaySettingBlock>Weergave-instellingen</DisplaySettingBlock>
+      <AdvancedBlock>Geavanceerde</AdvancedBlock>
   
-  <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
-  <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
-  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
-  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
-  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
-  <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationTreePathFormInputSet>Doelpad</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Doelpad</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Koptekst</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatisch</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+  <UICategoryNavigationDynamicNavigationLabel>Dynamische navigatie</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>met</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Doelpad</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not supported.</not-support-encoding>
-      <render>An error occurred when rendering.</render>
-      <saving-success>The information was updated successfully.</saving-success>
+      <not-support-encoding>Codering wordt niet ondersteund.</not-support-encoding>
+      <render>Er is een fout opgetreden bij het renderen.</render>
+      <saving-success>De informatie is met succes bijgewerkt.</saving-success>
     </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Opslaan</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>The category does not exist.</not-existed-category>
+      <not-existed-category>Category does not exist</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

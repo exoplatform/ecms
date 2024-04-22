@@ -2,7 +2,7 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Quick Edit</QuickEdit>
+      <QuickEdit>Γρήγορη επεξεργασία</QuickEdit>
     </title>
   </UICNContainer>
 
@@ -20,25 +20,25 @@
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
-      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationRepositoryFormSelectBox>Αποθετήριο</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Δέντρο Κατηγοριών</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Τίτλος</UICategoryNavigationTreeTitleFormStringInput>
   
       <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
       <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
       
-      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <UICategoryNavigationTargetPathFormInputSet>Εμφάνιση στη σελίδα</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <AdvancedBlock>Advanced</AdvancedBlock>
+      <DisplaySettingBlock>Ρυθμίσεις εμφάνισης</DisplaySettingBlock>
+      <AdvancedBlock>Για προχωρημένους</AdvancedBlock>
   
-  <UICategoryNavigationTreePathFormInputSet>Target Path</UICategoryNavigationTreePathFormInputSet>
-  <UICategoryNavigationTreePathFormStringInput>Target Path</UICategoryNavigationTreePathFormStringInput>
-  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+  <UICategoryNavigationTreePathFormInputSet>Διαδρομή προορισμού</UICategoryNavigationTreePathFormInputSet>
+  <UICategoryNavigationTreePathFormStringInput>Διαδρομή προορισμού</UICategoryNavigationTreePathFormStringInput>
+  <UICategoryNavigationHeaderFormStringInput>Κεφαλίδα</UICategoryNavigationHeaderFormStringInput>
   <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
-  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
-  <UICategoryNavigationTreepathPopupWindow>Target Path</UICategoryNavigationTreepathPopupWindow>    
+  <UICategoryNavigationDynamicNavigationLabel>Δυναμική πλοήγηση</UICategoryNavigationDynamicNavigationLabel>
+  <UICategoryNavigationWithClvFormStringInput>με</UICategoryNavigationWithClvFormStringInput>
+  <UICategoryNavigationTreepathPopupWindow>Διαδρομή προορισμού</UICategoryNavigationTreepathPopupWindow>    
       
     </label>
     <msg>
@@ -47,12 +47,12 @@
       <saving-success>The information was updated successfully.</saving-success>
     </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Αποθήκευση</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>The category does not exist.</not-existed-category>
+      <not-existed-category>Η κατηγορία δεν υπάρχει.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

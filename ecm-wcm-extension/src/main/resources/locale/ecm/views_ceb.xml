@@ -27,19 +27,19 @@
         <comments>Comment(s)</comments>
         <show-comments>Show comments</show-comments>
         <hide-comments>Hide comments</hide-comments>
-        <comment-by>Commented by</comment-by>
+        <comment-by>Komento ni</comment-by>
         <email>Email</email>
         <site>Site</site>
         <lastComment>Last comment posted by {user} at {time}</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
-        <About_A_Minute>about a minute ago</About_A_Minute>
-        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
-        <About_An_Hour>about an hour ago</About_An_Hour>
-        <About_x_Hours>about {0} hours ago</About_x_Hours>
-        <About_A_Day>about a day ago</About_A_Day>
-        <About_x_Days>about {0} days ago</About_x_Days>
-        <About_A_Month>about a month ago</About_A_Month>
-        <About_x_Months>about {0} months ago</About_x_Months>
+        <About_A_Minute>mga usa ka minuto ang nilabay</About_A_Minute>
+        <About_x_Minutes>mga {0} pipila ka minuto ang nilabay</About_x_Minutes>
+        <About_An_Hour>mga usa ka oras ang nilabay</About_An_Hour>
+        <About_x_Hours>mga {0} pipila ka oras ang nilabay</About_x_Hours>
+        <About_A_Day>mag usa ka adlaw ang nilabay</About_A_Day>
+        <About_x_Days>mga {0} pipila ka adlaw ang nilabay</About_x_Days>
+        <About_A_Month>mga usa ka buwan ang nilabay</About_A_Month>
+        <About_x_Months>mga {0} pipila ka buwan ang nilabay</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -89,7 +89,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
+        <avg-rating>Pag-rate</avg-rating>
         <subscription>Votes</subscription>
       </label>
     </view>
@@ -170,7 +170,7 @@
         <format>Format</format>
         <coverage>Coverage</coverage>
         <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <languages>Mga pinulongan</languages>
       </label>
       <action>
         <add-edit>Add/Edit</add-edit>

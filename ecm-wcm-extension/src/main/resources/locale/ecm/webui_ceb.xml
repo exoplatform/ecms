@@ -15,7 +15,7 @@
     </info>
     <action>
       <title>
-        <select>Select</select>
+        <select>Pagpili</select>
       </title>
     </action>
   </UITreeList>
@@ -26,7 +26,7 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Category name</categoryName>
+      <categoryName>Ang ngalan sa kategorya</categoryName>
       <categoryPath>Category path</categoryPath>
       <action>#{word.action}</action>
     </header>

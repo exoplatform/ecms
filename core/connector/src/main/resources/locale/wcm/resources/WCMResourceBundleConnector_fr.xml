@@ -2,34 +2,34 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Aucun contenu. Veuillez en sélectionner un.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Renommer</rename>
+      <cancel>Annuler</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>Renommage en cours...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>Open in Word</word>
-          <excel>Open in Excel</excel>
-          <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>Open on Desktop</desktop>
-          <desktop-app>Open in {0}</desktop-app>
+          <word>Ouvrir dans Word</word>
+          <excel>Ouvrir dans Excel</excel>
+          <powerpoint>Ouvrir dans Powerpoint</powerpoint>
+          <desktop>Ouvrir à distance</desktop>
+          <desktop-app>Ouvrir dans {0}</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+      <WrongMimeType>Le type MIME du fichier chargé est inconnu. Aucune nouvelle version de {0} ne sera créée.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

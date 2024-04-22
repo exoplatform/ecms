@@ -8,7 +8,7 @@
   <UITreeList>
     <header>
       <name>Name</name>
-      <action>Add</action>
+      <action>Əlavə Et</action>
     </header>
     <info>
       <child-not-found>Child not found!</child-not-found>
@@ -48,14 +48,14 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Select User</UIPermissionUser>
+      <UIPermissionUser>İstifadəçini seç</UIPermissionUser>
       <UIPermissionMembership>Select Role</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Select User</selectUser>
+      <selectUser>İstifadəçini seç</selectUser>
       <selectGroup>Browse and select a group</selectGroup>
     </label>
   </UIPermissionUser>
@@ -67,7 +67,7 @@
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Qrupu seç</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>

@@ -35,10 +35,10 @@
       </error>
       <title>Document editors</title>
       <table>
-        <Provider>Provider</Provider>
-        <Description>Description</Description>
+        <Provider>Provayder</Provider>
+        <Description>Açıqlama</Description>
         <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Permissions>İcazələr</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
@@ -48,15 +48,15 @@
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Saxla</Save>
+        <Cancel>Ləğv Et</Cancel>
       </buttons>
     </admin>
     <buttons>
       <EditorButton>Edit</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Xəbərdarlıq</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

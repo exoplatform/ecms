@@ -2,18 +2,18 @@
 <bundle>
   <EditingPortlet>
     <label>
-      <Editing>Mode:</Editing>
+      <Editing>Modo:</Editing>
     </label>
     <msg>
-      <not-permission>You don't have permission to do this action.</not-permission>
+      <not-permission>Non disponi dell'autorizzazione necessaria per eseguire questa azione.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Edit</Draft>
-        <Published>Published</Published>
+        <Draft>Modifica</Draft>
+        <Published>Pubblicato</Published>
       </option>
     </label>
   </UIEditingForm>

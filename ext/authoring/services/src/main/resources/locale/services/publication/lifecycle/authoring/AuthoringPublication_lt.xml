@@ -3,21 +3,21 @@
   <PublicationService>
     <AuthoringPublicationPlugin>
       <changeState>
-        <obsoleted>The content is obsolete</obsoleted>
-        <published>The content is published</published>
-<unpublished>The content is unpublished</unpublished>
-<archived>The content is archived</archived>
-<staged>The content is staged</staged>
-<approved>The content is approved</approved>
-<pending>The content is pending</pending>
-<draft>The content is in draft form</draft>
+        <obsoleted>Turinys yra pasenęs</obsoleted>
+        <published>Turinys yra paskelbtas</published>
+<unpublished>Turinys nėra paskelbtas</unpublished>
+<archived>Turinys yra archyvuotas</archived>
+<staged>Turinys yra įvykdytas</staged>
+<approved>Turinys yra patvirtintas</approved>
+<pending>Turinys laukiamas</pending>
+<draft>Turinys yra projekto formoje</draft>
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
   <Publication>
     <log>
       <description>
-        <enrolled>The content enrolls in Publication life cycle</enrolled>
+        <enrolled>Turinys įrašytas į paskelbimo gyvavimo ciklą</enrolled>
       </description>
     </log>
   </Publication>

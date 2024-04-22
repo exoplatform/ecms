@@ -2,12 +2,12 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
-      <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Waiting For My Approval</waitingapproval>
-      <approve>Approve</approve>
-      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <title>Autor Dashboard</title>
+      <nocontent>Kein Inhalt</nocontent>
+      <mydraft>Inhalt meines Entwurfs</mydraft>
+      <waitingapproval>Zu genehmigen</waitingapproval>
+      <approve>Genehmigen</approve>
+      <publishedtomorrow>Wird morgen veröffentlicht</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

@@ -2,55 +2,55 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Title:</title>
-      <description>Description:</description>
-      <keywords>Keywords:</keywords>
-      <language>Language:</language>
-      <robots>Robots:</robots>
-      <sitemap>Sitemap:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
-    <isInherited>Inherited from parent page</isInherited>
-      <priority>Priority:</priority>
-      <frequency>Frequency:</frequency>
-      <select-language>Select a language</select-language>
+      <title>タイトル</title>
+      <description>説明:</description>
+      <keywords>キーワード:</keywords>
+      <language>言語:</language>
+      <robots>ロボット:</robots>
+      <sitemap>サイトマップ：</sitemap>
+      <sitemapvisible>サイトマップで公開</sitemapvisible>
+    <isInherited>親ページから継承</isInherited>
+      <priority>優先順位：</priority>
+      <frequency>頻度:</frequency>
+      <select-language>言語を選択</select-language>
       <option>
-        <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Always>常に表示</Always>
+        <Hourly>毎時</Hourly>
+        <Daily>毎日</Daily>
+        <Weekly>毎週</Weekly>
+        <Monthly>毎月</Monthly>
+        <Yearly>毎年</Yearly>
+        <Never>表示しない</Never>
       </option> 
     </label>
     <tip>
-  <priority>Valid values range from 0.0 to 1.0</priority>
+  <priority>有効な値の範囲は 0.0 から 1.0 です</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
-      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
+      <repository-exception>ページメタデータの保存中に予期しないエラーが発生しました。</repository-exception>
+      <confirm-delete>これらの SEO のデータを削除してもよろしいですか？</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>削除</seo-delete>
     </title>
   <help> 
-  <priority>Valid values range from 0.0 to 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
-  <keywords>Most important terms in the page separated by a comma.</keywords>  
+  <priority>有効な値の範囲は 0.0 から 1.0 です</priority>
+  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+  <keywords>コンマで区切られた、このページで最も重要な用語</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>SEO Management</UISEOForm>
+      <UISEOForm>SEO の管理</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>SEO Management</seo>
+      <seo>SEO の管理</seo>
   </title>
   <label>
     <seo>SEO</seo>
@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>優先度フィールドの値は数値形式である必要があります。有効な値の範囲は 0.0 から 1.0 です。</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

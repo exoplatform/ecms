@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>結束時間</end-time>
+        <start-time>開始時間</start-time>
+        <lifecycle>生命週期</lifecycle>
+        <mimeType>Mime 類型</mimeType>
+        <repeat-count>重複次數</repeat-count>
+        <time-interval>時間間隔</time-interval>
+        <query-items>查詢項目</query-items>
+        <schedule-type>計畫類型</schedule-type>
+        <remove>刪除項目</remove>
+        <add>增加項目</add>
+        <expand>展開這個</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>連結</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>名稱</name>
+    <categories>類別</categories>
     </label>
   </UIDocumentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>名稱</name>
+        <content>內容</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>類別</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
-        <width>Width</width>
-        <height>Height</height>
+        <width>寬</width>
+        <height>高</height>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>該檔案已經存在。您可以刪除它，並將另一個檔案上傳。</re-upload>
       </label>
     </dialog>
   </File>
@@ -71,22 +71,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>埠</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>密碼</password>
+      <link>連結</link>
+      <to>發送郵件到</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>埠</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>密碼</password>
+      <link>連結</link>
+      <to>發送郵件到</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -100,7 +100,7 @@
         <id>Id</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>中繼資料</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron 運算式</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -151,20 +151,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>建立者:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>來源:</source>
+        <contributor>貢獻者 ：</contributor>
+        <resource-type>資源類型：</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>發行者：</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
+        <rights>權利：</rights>
+        <relation>關係：</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <coverage>覆蓋範圍：</coverage>
+        <identifier>識別碼：</identifier>
+        <language>語言：</language>
       </label>
     </dialog>
   </ElementSet>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>主要類型</primary-type>
+        <mixin-types>混合類型</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>目標工作區</destination-workpsace>
+        <destination-path>目標路徑</destination-path>
+        <primary-type>主要類型</primary-type>
+        <mixin-types>混合類型</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>開始的出版物</start-publication>
+        <end-publication>最終出版物</end-publication>
       </label>
     </dialog>
   </Published>
@@ -222,7 +222,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>關係</relation>
       </label>
     </dialog>
   </Relationable>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>標題</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,11 +244,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>版本歷程記錄</version-history>
+        <base-version>基本版本</base-version>
+        <is-checked-out>已簽出</is-checked-out>
+        <predecessors>前置任務</predecessors>
+        <merge-failed>合併失敗</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <name>名稱</name>
+        <autoload>自動負載</autoload>
+        <minetype>MIME 類型</minetype>
+        <content>內容</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>電子郵件地址是不正確。</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>欄位"{0}"是必需的。請輸入您的值。</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>欄位"{0}"無效。</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -293,17 +293,17 @@
     <dialog>
       <label>
         <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <name>名稱</name>
+        <lifecycle>生命週期</lifecycle>
+        <homePath>家路徑</homePath>
+        <targetWorkspace>目標工作區</targetWorkspace>
+        <targetPath>目標路徑</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>不能保存此文檔。可能預保存攔截器有問題。</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -311,36 +311,36 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
+<no>否</no>
+<yes>是</yes>
 <true>True</true>
 <false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<Electronic>電子</Electronic>
+<Paper>紙</Paper>
+<NONE>無</NONE>
+<CLASSIFIED>分類</CLASSIFIED>
+<UNCLASSIFIED>未分類</UNCLASSIFIED>
+<NOCONTRACT>沒有合約</NOCONTRACT>
+<one-minute>一分鐘</one-minute>
+<hourly>每小時</hourly>
+<daily>每日</daily>
+<quarterly>每季</quarterly>
+<yearly>每年</yearly>
+<ten-years>十年</ten-years>
+<read>使用者操作</read>
+  <schedule>調度</schedule>
+  <node_added>內容增加</node_added>
+  <node_removed>內容刪除</node_removed>
+  <property_added>屬性加法</property_added>
+  <property_removed>屬性刪除</property_removed>
+  <property_changed>屬性修改</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -348,9 +348,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -358,9 +358,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -368,9 +368,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>深</isDeep>
+        <nodetypes>節點類型</nodetypes>
+        <affectedNodeTypeNames>受影響的節點類型</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -378,15 +378,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>標題</captions>
+<audioDescription>音訊描述</audioDescription>
+<alternativeText>替代文字</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>標題應提供對話的方塊和重要聲音的文字</CaptionsHelp>
+<AudioDescriptionHelp>音訊描述是講述軌道的視頻</AudioDescriptionHelp>
+<AlternativeTextHelp>提供可訪問、 替代性方式呈現資訊</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
 
@@ -422,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>出現意外的錯誤。更多詳細資訊請與您的管理員聯繫。</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>您不能儲存此文件。提供的名稱必須是數字格式。</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

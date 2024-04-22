@@ -2,45 +2,45 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Title:</title>
-      <description>Description:</description>
+      <title>Titel:</title>
+      <description>Beschrijving</description>
       <keywords>Keywords:</keywords>
-      <language>Language:</language>
+      <language>Taal:</language>
       <robots>Robots:</robots>
       <sitemap>Sitemap:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
-    <isInherited>Inherited from parent page</isInherited>
-      <priority>Priority:</priority>
-      <frequency>Frequency:</frequency>
-      <select-language>Select a language</select-language>
+      <sitemapvisible>Zichtbaar in Sitemap</sitemapvisible>
+    <isInherited>Overgenomen van bovenliggende pagina</isInherited>
+      <priority>Prioriteit: </priority>
+      <frequency>Frequentie:</frequency>
+      <select-language>Selecteer een taal</select-language>
       <option>
-        <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Always>Altijd</Always>
+        <Hourly>Ieder uur</Hourly>
+        <Daily>Dagelijks</Daily>
+        <Weekly>Wekelijks</Weekly>
+        <Monthly>Maandelijkse</Monthly>
+        <Yearly>Jaarlijks</Yearly>
+        <Never>Nooit</Never>
       </option> 
     </label>
     <tip>
-  <priority>Valid values range from 0.0 to 1.0</priority>
+  <priority>Geldige waarden variëren van 0.0 tot 1.0</priority>
   </tip>   
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
-      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
+      <repository-exception>Er is een onverwachte fout opgetreden tijdens het opslaan van de pagina-metagegevens.</repository-exception>
+      <confirm-delete>Weet u zeker dat u wilt verwijderen van deze SEO gegevens?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>Verwijderen</seo-delete>
     </title>
   <help> 
-  <priority>Valid values range from 0.0 to 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
-  <keywords>Most important terms in the page separated by a comma.</keywords>  
+  <priority>Geldige waarden variëren van 0.0 te 1.0.</priority>
+  <description>Zoekers helpen: ze laten weten dat de volgende pagina is een link die ze zoekt.</description>
+  <keywords>Meest belangrijke termen in de pagina gescheiden door een komma.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>De waarde van het veld prioriteit moet worden in een numerieke indeling. Het bereik van geldige waarden is van 0.0 tot 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

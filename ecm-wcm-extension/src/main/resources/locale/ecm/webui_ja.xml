@@ -7,15 +7,15 @@
   -->
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Add</action>
+      <name>名前</name>
+      <action>追加</action>
     </header>
     <info>
-      <child-not-found>Child not found!</child-not-found>
+      <child-not-found>子要素が見つかりません！</child-not-found>
     </info>
     <action>
       <title>
-        <select>Select</select>
+        <select>選択</select>
       </title>
     </action>
   </UITreeList>
@@ -26,8 +26,8 @@
   -->
   <UISelectedCategoriesGrid>
     <header>
-      <categoryName>Category name</categoryName>
-      <categoryPath>Category path</categoryPath>
+      <categoryName>カテゴリ名</categoryName>
+      <categoryPath>カテゴリパス</categoryPath>
       <action>#{word.action}</action>
     </header>
     <action>
@@ -35,10 +35,10 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <cannot-save>Categories were not saved.</cannot-save>
-      <have-saved>Categories were saved successfully</have-saved>
-      <non-categories>Categories are wrong. Please select the appropriate categories.</non-categories>
-      <confirm-delete>Do you want to delete this category?</confirm-delete>
+      <cannot-save>カテゴリは保存されていません。</cannot-save>
+      <have-saved>カテゴリが保存されました。</have-saved>
+      <non-categories>カテゴリが間違っています。正しいカテゴリを選んでください。</non-categories>
+      <confirm-delete>カテゴリを削除しますか</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
   <!--
@@ -48,26 +48,26 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Select User</UIPermissionUser>
+      <UIPermissionUser>ユーザーを選択</UIPermissionUser>
       <UIPermissionMembership>Select Role</UIPermissionMembership>
       <TaxoSelectUserOrGroup>Select Role</TaxoSelectUserOrGroup>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Select User</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectUser>ユーザーを選択</selectUser>
+      <selectGroup>グループの閲覧と選択</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
       <selectUser>Select Role</selectUser>
-      <selectGroup>Browse and select a group</selectGroup>
+      <selectGroup>グループの閲覧と選択</selectGroup>
     </label>
   </UIPermissionMembership>
   <TaxoSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>グループの選択</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoSelectUserOrGroup>
@@ -78,7 +78,7 @@
   -->
   <UICLVConfigTargetPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>ページ選択</UIPageSelector>
     </title>
   </UICLVConfigTargetPageSelectorPopupWindow>
   <!--
@@ -88,7 +88,7 @@
   -->
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>ルートノードの追加</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -98,7 +98,7 @@
   -->
   <UIMetadataAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>権限</anyPermission>
     </label>
   </UIMetadataAnyPermission>
 </bundle>

@@ -5,15 +5,15 @@
       <Editing>Mode:</Editing>
     </label>
     <msg>
-      <not-permission>You don't have permission to do this action.</not-permission>
+      <not-permission>No teniu permís per dur a terme aquesta acció.</not-permission>
     </msg>
   </EditingPortlet>
 
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Edit</Draft>
-        <Published>Published</Published>
+        <Draft>Edita</Draft>
+        <Published>Publicat</Published>
       </option>
     </label>
   </UIEditingForm>
