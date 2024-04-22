@@ -2,16 +2,16 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>沒有選定的內容。請至少選擇一個。</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>重新命名</rename>
+      <cancel>取消</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>重新命名中......</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>

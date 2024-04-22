@@ -36,27 +36,27 @@
       <title>Document editors</title>
       <table>
         <Provider>Provider</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>说明</Description>
+        <Active>活动</Active>
+        <Permissions>权限</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
+        <None>无</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>保存</Save>
+        <Cancel>取消</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>编辑</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>警告</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

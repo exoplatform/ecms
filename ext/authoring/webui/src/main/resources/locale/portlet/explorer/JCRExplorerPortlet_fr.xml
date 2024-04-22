@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
-      <PublicationApproveContent>Approve Content</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationRequestApproval>Demander Validation</PublicationRequestApproval>
+      <PublicationApproveContent>Valider</PublicationApproveContent>
+      <PublicationPublish>Publier</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

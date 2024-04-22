@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
-      <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <keyword>Zoekwoord</keyword>
+      <portal>Portaal</portal>
+      <Page>Pagina</Page>
+      <Document>Documents</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Zoek</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
+      <Page>Pagina</Page>
+      <Document>Documents</Document>
+      <DocumentAndPage>Document en pagina</DocumentAndPage>
+      <documentandpage>Document en pagina</documentandpage>
+      <results>Resultaten {0} te {1} voor {2}</results>
+      <oneResult>Slechts één resultaat voor {0}</oneResult>
+      <ofAboutCaption>van ongeveer</ofAboutCaption>
+      <timeUnitCaption>seconden</timeUnitCaption>
+      <similar>Pagina's waar de dezelfde inhoud wordt weergegeven</similar>
       <editor>Editor</editor>
-      <date>Date</date>
-      <relevancy>Relevance</relevancy>
-      <title>Title</title>
-      <sortBy>Sort By:</sortBy>
+      <date>Datum</date>
+      <relevancy>Relevantie</relevancy>
+      <title>Titel</title>
+      <sortBy>Sorteren op:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Bewerken</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>Uw zoekopdracht {0} komt niet overeen met een {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>Items per pagina</itemsPerPageSelector>
+      <searchFormSelector>Zoek formuliersjabloon</searchFormSelector>
+      <searchResultSelector>Zoek resultaat sjabloon</searchResultSelector>
+      <searchPaginatorSelector>Zoek slideview sjabloon</searchPaginatorSelector>
+      <searchPageLayoutSelector>Zoek pagina-indeling sjabloon</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Basispad</searchResultBasePathInputSetAction>
+      <pageMode>Pagina modus</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>Geen</none>
+        <more>Meer</more>
+        <pagination>Paginering</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Selecteer basispad</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>Het sleutelwoord is ongeldig. Sommige tekens worden niet herkend.</keyword-not-support>
+     <not-checked>Selecteer een zoektype.</not-checked>
+     <keyword-not-empty>Voer een trefwoord.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>Volgende</next>
+      <previous>#{word.previous}</previous>
+      <more>Meer</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Snel bewerken</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>in pagina 's</pageCheckBox>
+      <documentCheckBox>in inhoud</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>zoek alle sites</all>
       </option>  
     </label>  
   </ViewMode>

@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
-      <PublicationApproveContent>Approve Content</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationRequestApproval>リクエストの承認</PublicationRequestApproval>
+      <PublicationApproveContent>コンテンツの承認</PublicationApproveContent>
+      <PublicationPublish>公開</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

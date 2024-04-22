@@ -2,34 +2,34 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>選択したコンテンツがありません。少なくとも 1 つ以上のコンテンツを選択してください。</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>名前変更</rename>
+      <cancel>キャンセル</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>名前を変更中です。。。</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
     <label>
       <exo>
         <remote-edit>
-          <word>Open in Word</word>
-          <excel>Open in Excel</excel>
-          <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>Open on Desktop</desktop>
-          <desktop-app>Open in {0}</desktop-app>
+          <word>Word で開く</word>
+          <excel>Excel で開く</excel>
+          <powerpoint>Powerpoint で開く</powerpoint>
+          <desktop>デスクトップ上に開く</desktop>
+          <desktop-app>{0} で開く</desktop-app>
         </remote-edit>
       </exo>
     </label>
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+      <WrongMimeType>アップロードされたファイルの mime タイプが不明です。{0} の新しいバージョンは作成されません。</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

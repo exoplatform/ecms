@@ -36,8 +36,8 @@
       <title>Document editors</title>
       <table>
         <Provider>Provider</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
+        <Description>تفصیل</Description>
+        <Active>زیر عمل</Active>
         <Permissions>Permissions</Permissions>
       </table>
       <modal>
@@ -48,15 +48,15 @@
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>محفوظ کریں</Save>
+        <Cancel>منسوخ</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>ترمیم</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>تنبیہ</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

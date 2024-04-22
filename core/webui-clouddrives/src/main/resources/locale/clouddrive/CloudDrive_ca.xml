@@ -50,8 +50,8 @@
     <event>
       <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
       <OpenOn>Open on</OpenOn>
-      <EditFile>Edit</EditFile>
-      <ViewFile>View</ViewFile>
+      <EditFile>Edita</EditFile>
+      <ViewFile>Veure</ViewFile>
     </event>
     <label>
       <sourceview>View source code</sourceview>
@@ -90,9 +90,9 @@
     <label>
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Provider</provider>
-      <description>Description</description>
-      <active>Active</active>
+      <provider>Proveïdor</provider>
+      <description>Descripció</description>
+      <active>Actiu</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
@@ -105,10 +105,10 @@
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Connecta</connect>
       </button>
       <button>
-        <disconnect>Disconnect</disconnect>
+        <disconnect>Desconnecta</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

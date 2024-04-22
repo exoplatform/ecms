@@ -3,11 +3,11 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
-      <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Waiting For My Approval</waitingapproval>
-      <approve>Approve</approve>
-      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <nocontent>Nu există conținut</nocontent>
+      <mydraft>Ciornă conținut</mydraft>
+      <waitingapproval>Aşteptă pentru aprobarea mea</waitingapproval>
+      <approve>Aprobă</approve>
+      <publishedtomorrow>Pentru a fi publicate mâine</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

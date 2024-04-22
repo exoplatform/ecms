@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
-          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
-          <publicationPublish>Publication &gt; Publish</publicationPublish>
+          <publicationRequestApproval>Pagpapahayag &gt; Ang kahilingan ng pagpayag</publicationRequestApproval>
+          <publicationApproveContent>Pagpapahayag &gt; sinang-ayunang nilalaman</publicationApproveContent>
+          <publicationPublish>Pagpapahayag &gt; magpatibay</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>

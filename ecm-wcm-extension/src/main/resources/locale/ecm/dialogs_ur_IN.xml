@@ -14,8 +14,8 @@
         <time-interval>Time Interval</time-interval>
         <query-items>Query Items</query-items>
         <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
+        <remove>چیز ہٹائیں</remove>
+        <add>چیز شامل کریں</add>
         <expand>Expand This</expand>
       </label>
     </dialog>
@@ -272,7 +272,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>ای میل ایڈریس غلط ہے.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>

@@ -4,14 +4,14 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
+        <en>英語</en>
+        <fr>フランス語</fr>
+        <ru>ロシア語</ru>
+        <vi>ベトナム語</vi>
+        <nl>オランダ語</nl>
+        <de>ドイツ語</de>
+        <uk>ウクライナ語</uk>
+        <ar>アラビア語</ar>
       </languages>
     </label>
   </View>
@@ -22,24 +22,24 @@
   <Comment>
     <view>
       <label>
-        <postedBy>Last comment posted by</postedBy>
-        <at>at</at>
-        <comments>Comment(s)</comments>
-        <show-comments>Show comments</show-comments>
-        <hide-comments>Hide comments</hide-comments>
-        <comment-by>Commented by</comment-by>
-        <email>Email</email>
-        <site>Site</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
+        <postedBy>最終コメント</postedBy>
+        <at>で</at>
+        <comments>コメント</comments>
+        <show-comments>コメントの表示</show-comments>
+        <hide-comments>コメントの非表示</hide-comments>
+        <comment-by>コメント</comment-by>
+        <email>メール</email>
+        <site>サイト</site>
+        <lastComment>{time} に {user} に投稿された最新コメント</lastComment>
         <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
-        <About_A_Minute>about a minute ago</About_A_Minute>
-        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
-        <About_An_Hour>about an hour ago</About_An_Hour>
-        <About_x_Hours>about {0} hours ago</About_x_Hours>
-        <About_A_Day>about a day ago</About_A_Day>
-        <About_x_Days>about {0} days ago</About_x_Days>
-        <About_A_Month>about a month ago</About_A_Month>
-        <About_x_Months>about {0} months ago</About_x_Months>
+        <About_A_Minute>約 1 分前</About_A_Minute>
+        <About_x_Minutes>約 {0} 分前</About_x_Minutes>
+        <About_An_Hour>約 1 時間前</About_An_Hour>
+        <About_x_Hours>約 {0} 時間前</About_x_Hours>
+        <About_A_Day>１日前</About_A_Day>
+        <About_x_Days>約 {0} 日前</About_x_Days>
+        <About_A_Month>約 1 ヶ月前</About_A_Month>
+        <About_x_Months>約 {0} ヶ月前</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -50,19 +50,19 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
-        <using-webDAV>or Open in MS Office</using-webDAV>
+        <not-viewable>このドキュメントのプレビューは使用できません。</not-viewable>
+        <pdf-max-size>プレビューは {0} MB より大きいコンテンツで使用できません。</pdf-max-size>
+        <pdf-max-page>プレビューは {0} ページを超えるコンテンツでは使用できません。</pdf-max-page>
+        <using-webDAV>または MS Office で開く</using-webDAV>
         <open-on-desktop>Open in Desktop</open-on-desktop>
         <editOnline>Edit Online</editOnline>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
-        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
-        <webDAV>WebDAV View</webDAV>
-        <download>Download</download>
-        <htmlview>View as HTML</htmlview>
-        <plaintextview>View as Plain text</plaintextview>
+        <open-in-documents>文書で開きます</open-in-documents>
+        <open-in-documents-tooltip>文書アプリでこのファイルを開きます。</open-in-documents-tooltip>
+        <file-size-too-big>ファイルのコンテンツが大きすぎます。ダウンロードし、クライアント上で開いて下さい。</file-size-too-big>
+        <webDAV>WebDAV ビュー</webDAV>
+        <download>ファイルをダウンロード</download>
+        <htmlview>HTMLで見る</htmlview>
+        <plaintextview>テキストで見る</plaintextview>
         <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
       </label>
     </view>
@@ -74,12 +74,12 @@
   <Mail>
     <view>
       <label>
-        <from>From:</from>
-        <to>To:</to>
+        <from>差出人：</from>
+        <to>宛先：</to>
         <cc>Cc:</cc>
-        <date>Date:</date>
-        <subject>Subject:</subject>
-        <attachment>Attachments:</attachment>
+        <date>日付:</date>
+        <subject>件名：</subject>
+        <attachment>添付:</attachment>
       </label>
     </view>
   </Mail>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>平均評価</avg-rating>
+        <subscription>投票</subscription>
       </label>
     </view>
   </Vote>
@@ -100,12 +100,12 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <name>名前</name>
+        <versionable>バージョン可能</versionable>
+        <exo_owner>オーナー</exo_owner>
+        <exo_dateCreated>作成された日付</exo_dateCreated>
+        <exo_dateModified>変更日</exo_dateModified>
+        <auditing>監査</auditing>
       </label>
     </view>
   </ListView>
@@ -116,10 +116,10 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <metadata>Metadata</metadata>
-        <description>Description</description>
+        <action-name>アクション名</action-name>
+        <lifecycle>ライフサイクル</lifecycle>
+        <metadata>メタデータ</metadata>
+        <description>説明</description>
       </label>
     </view>
   </AddMetadata>
@@ -130,9 +130,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <action-name>アクション名</action-name>
+        <lifecycle>ライフサイクル</lifecycle>
+        <description>説明</description>
       </label>
     </view>
   </AutoVersioning>
@@ -142,9 +142,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <action-name>名前</action-name>
+        <lifecycle>ライフサイクル</lifecycle>
+        <description>説明</description>
       </label>
     </view>
   </EnableVersioning>
@@ -155,30 +155,30 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
-        <core-elements>Core Elements</core-elements>
-        <title>Title</title>
-        <creator>Creator</creator>
-        <subject>Subject</subject>
-        <source>Source</source>
-        <contributor>Contributor</contributor>
-        <resource-type>Resource Type</resource-type>
-        <date>Date</date>
-        <publisher>Publisher</publisher>
-        <description>Description</description>
-        <rights>Rights</rights>
-        <relation>Relation</relation>
-        <format>Format</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <core-elements>コア要素</core-elements>
+        <title>タイトル</title>
+        <creator>作成者</creator>
+        <subject>題</subject>
+        <source>ソース</source>
+        <contributor>コントリビュータ</contributor>
+        <resource-type>リソースタイプ</resource-type>
+        <date>日付</date>
+        <publisher>公開者</publisher>
+        <description>説明</description>
+        <rights>権限</rights>
+        <relation>関連</relation>
+        <format>フォーマット</format>
+        <coverage>範囲</coverage>
+        <identifier>識別子</identifier>
+        <languages>言語</languages>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
+        <add-edit>追加/編集</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <add-edit>プロパティの追加/編集</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -186,10 +186,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node types</nodetypes>
-        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>ノードの型名</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -197,10 +197,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -208,10 +208,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes> 
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes> 
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -219,10 +219,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -230,13 +230,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
-      <Read-less>Read less</Read-less>
-      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>オーディオの説明</Play-audio-description-of-this-video>
+      <Read-more>続きを参照</Read-more>
+      <Read-less>閉じる</Read-less>
+      <Switch-back-to-original-video>元のビデオ</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>A second media file is available as audio description</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

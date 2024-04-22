@@ -102,7 +102,7 @@
       <label>
         <name>Name</name>
         <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
+        <exo_owner>Pemilik</exo_owner>
         <exo_dateCreated>Date Created</exo_dateCreated>
         <exo_dateModified>Date Modified</exo_dateModified>
         <auditing>Auditing</auditing>

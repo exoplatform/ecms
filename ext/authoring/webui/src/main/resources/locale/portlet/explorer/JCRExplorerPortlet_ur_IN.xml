@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
-      <PublicationApproveContent>Approve Content</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationRequestApproval>منظوری کی درخواست کریں</PublicationRequestApproval>
+      <PublicationApproveContent>مواد کی منظوری دیں</PublicationApproveContent>
+      <PublicationPublish>شائع کریں</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

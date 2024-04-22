@@ -35,21 +35,21 @@
       </error>
       <title>Document editors</title>
       <table>
-        <Provider>Provider</Provider>
+        <Provider>Ang Provider o Tagapagtustos</Provider>
         <Description>Description</Description>
-        <Active>Active</Active>
+        <Active>Gawing aktibo</Active>
         <Permissions>Permissions</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
+        <None>Wala</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
         <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Cancel>Kanselahin</Cancel>
       </buttons>
     </admin>
     <buttons>

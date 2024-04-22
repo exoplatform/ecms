@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>Deze naam is niet toegestaan.</name-not-allowed>
+      <in-versioning>Controleer het huidige node voordat u een nieuw node toevoegt.</in-versioning>
+      <cannot-save>Er is een fout opgetreden tijdens het opslaan van het node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <not-support>Kan niet laden de sjabloon van de '{0}'.</not-support>
+      <not-add-folder>Alleen bestanden kunnen worden toegevoegd aan deze map.</not-add-folder>
+      <access-denied>De toegang is geweigerd. U Voeg geen toestemming op '{0}'.</access-denied>
+      <path-not-found>Het pad '{0}' werd verwijderd of is ongeldig.</path-not-found>
+      <node-locked>Node '{0}' is vergrendeld. Gelieve te ontgrendelen dit knooppunt voordat u documenten maakt.</node-locked>
+      <node-isExist>Dit Node al bestaat in de '{0}' en is niet toegestaan als dezelfde naam heeft als zijn broer.</node-isExist>
+      <get-dialog-path>Er is een fout opgetreden terwijl ze het dialoogvenster pad.</get-dialog-path>
+      <new-jcr-template>Er is een fout opgetreden tijdens het maken van een nieuwe sjabloon.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCSaveLocationField>Locatie opslaan</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Selecteert u werkruimte</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Sjabloon opties</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Locatie voor het opslaan</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Selecteer sjabloon</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Aangepaste knop Opslaan</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Aangepaste bericht opslaan</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Omleiden:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCActionField>Acties</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <save-successfully>Portlet voorkeuren opgeslagen.</save-successfully>
+      <item-not-found>Dit pad is ongeldig.</item-not-found>
+      <fileType-empty>Selecteer een bestandstype voordat u deze configuratie opslaat.</fileType-empty>
+      <ws-empty>Selecteer een werkruimte.</ws-empty>
+      <action-empty>Selecteer een map met een actie.</action-empty>
+      <message-empty>Het veld "Aangepaste opslaan bericht" is vereist in het geval u niet de optie redirect kiest, of het pad leeg is.</message-empty>
+      <get-template>Er is een fout opgetreden terwijl het toegang tot van de sjabloon.</get-template>
+      <set-template-option>Er is een fout opgetreden tijdens het instellen van de optie sjabloon.</set-template-option>
+      <do-select>Er is een fout opgetreden terwijl het selecteren van de locatie.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,116 +52,116 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Select path</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
-      <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <name>Naam</name>
+      <description>Beschrijving</description>
+      <instanceOf>Exemplaar van</instanceOf>
+      <action>Actie</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Toevoegen</Add>
     </action>
     <msg>
-      <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <empty>Geen acties</empty>
+      <remove-popup-first>U moet wijzig popup sluiten voor het verwijderen van deze node.</remove-popup-first>
+      <confirm-delete-action>Wilt u deze actie verwijderen?</confirm-delete-action>
+      <template-empty>De sjabloon voor '{0}' is null of leeg.</template-empty>
+      <template-null>De sjabloon is null of leeg, of u bent niet gemachtigd voor toegang tot deze sjabloon.</template-null>
+      <access-denied>toegang geweigerd! U hebt niet genoeg rechten om deze actie uit te voeren</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>selecteer locatie</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
+      <workspaceName>Werkruimte</workspaceName>
+      <rootNodePath>Root pad</rootNodePath>
       <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Toevoegen Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Node heeft geen enkele child.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Naam</name>
+      <action>Actie</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Actie toevoegen</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Actie toevoegen/wijzigen</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
-      <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
-      <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <repository-exception>Deze actie kan niet opslaan. De opgegeven naam moet niet een index als het laatste element.</repository-exception>
+      <numberformat-exception>Deze actie kan niet opslaan. De opgegeven naam moet niet ' [' of ']'.</numberformat-exception>
+      <existed-action>De actie naam '{0}' bestaat al. Selecteer een andere naam.</existed-action>
+      <unable-add-action>Kan niet toevoegen van deze actie.</unable-add-action>
+      <unable-add>Kan niet toevoegen van deze actie. Dit knooppunt is wortel of u hebt geen goedkeuringen.</unable-add>
+      <not-support>Het dialoogvenster '{0}' wordt niet ondersteund.</not-support>
+      <no-permission-add>toegang geweigerd ! U heeft geen recht op actie toe te voegen</no-permission-add>
+      <access-denied>toegang geweigerd! U hebt geen toegang op deze template</access-denied>
     </msg>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>met pad</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Aanmaken Actie van Type</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
+      <not-support>Kan niet laden de sjabloon van de '{0}'.</not-support>
+      <do-not-permission>U bent niet gemachtigd om te laden van de sjabloon van de '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>selecteer locatie</UIOneNodePathSelector>
+      <UIPermissionSelector>Rechten verkenner</UIPermissionSelector>
+      <UICategoriesSelector>Categorieën toevoegen</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Het veld '{0}' met de waarde '{1}' is ongeldig.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Selecteer Categorieën</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Gereferencieerd categorieen</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -173,19 +173,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Categorieën toevoegen</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Categorien kiezer</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>
