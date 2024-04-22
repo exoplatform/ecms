@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>Aquest nom no està permès.</name-not-allowed>
+      <in-versioning>Si us plau comprovi el node actual abans d'afegir un de nou.</in-versioning>
+      <cannot-save>S'ha produït un error mentre es desava el node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <not-support>No es pot carregar la plantilla de '{0}'.</not-support>
+      <not-add-folder>Només es poden afegir fitxers a aquesta carpeta.</not-add-folder>
+      <access-denied>Accés denegat. No té permís per afegir a '{0}'.</access-denied>
+      <path-not-found>S'ha suprimit la ruta '{0}' o es invàlida.</path-not-found>
+      <node-locked>El node '{0}' està blocat. Desbloqueu aquest node abans de crear documents.</node-locked>
+      <node-isExist>Aquest node ja existeix a '{0}' i no es possible que tingui el mateix nom.</node-isExist>
+      <get-dialog-path>S'ha produït un error al obtenir la ruta al diàleg.</get-dialog-path>
+      <new-jcr-template>S'ha produït un error al crear una nova plantilla.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCSaveLocationField>Desa la ubicació</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Seleccioni un Espai de Treball</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Opcions de Plantilla</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Ubicació per desar</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Selecciona una plantilla</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Personalitza el botó de Desar</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Missatge de Desat personalitzat</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Redirigeix:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>URL de redirecció:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Accions</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <save-successfully>Desat a les preferències del portlet satisfactòriament.</save-successfully>
+      <item-not-found>La ruta no és vàlida.</item-not-found>
+      <fileType-empty>Selecciona un tipus de fitxer abans de desar aquesta configuració.</fileType-empty>
+      <ws-empty>Si us plau, selecciona una àrea de treball.</ws-empty>
+      <action-empty>Si us plau selecciona una carpeta amb una acció.</action-empty>
+      <message-empty>El camp "Missatge de Desat personalitzat" es necessari en cas que no triï l'opció de redirecció, o la ruta sigui buida.</message-empty>
+      <get-template>S'ha produït un error en accedir a la plantilla.</get-template>
+      <set-template-option>S'ha produït un error en configurar l'opció de la plantilla.</set-template-option>
+      <do-select>S'ha produït un error en seleccionar la ubicació.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,116 +52,116 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Selecciona la ruta</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
-      <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <name>Nom</name>
+      <description>Descripció</description>
+      <instanceOf>Instància de</instanceOf>
+      <action>Acció</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Afegeix</Add>
     </action>
     <msg>
-      <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <empty>Cap acció</empty>
+      <remove-popup-first>Ha de tancar la finestra d'edició abans de suprimir aquest node.</remove-popup-first>
+      <confirm-delete-action>Està segur que vol suprimir aquesta acció?</confirm-delete-action>
+      <template-empty>La plantilla de '{0}' és nul·la o és buida.</template-empty>
+      <template-null>La plantilla és nul·la o està buida, o no té permís per accedir-hi.</template-null>
+      <access-denied>Accés denegat. No té permís per fer aquesta acció.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecciona l'ubicació</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <workspaceName>Àrea de treball:</workspaceName>
+      <rootNodePath>Ruta a l'Arrel:</rootNodePath>
+      <rootNodeInfo>Node arrel</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Afegeix Node Arrel</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Aquest node encara no te cap de secundari.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Nom</name>
+      <action>Acció</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Afegeix una acció</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Afegeix/Edita Acció</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
-      <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
-      <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <repository-exception>No es pot desar aquesta acció. El nom proporcionat no ha de tenir un índex com el seu element final.</repository-exception>
+      <numberformat-exception>No es pot desar aquesta acció. El non proporcionat no ha de tenir '[' o ']'.</numberformat-exception>
+      <existed-action>El nom de l'acció '{0}' ja existeix. Selecciona un altre nom.</existed-action>
+      <unable-add-action>No es pot afegir aquesta acció.</unable-add-action>
+      <unable-add>No es pot afegir aquesta acció. Aquest node és l'arrel o no té permisos.</unable-add>
+      <not-support>El quadre de diàleg '{0}' no és compatible.</not-support>
+      <no-permission-add>Accés denegat. No té permisos per afegir una acció aquí.</no-permission-add>
+      <access-denied>Accés denegat. No té permís per accedir a aquesta plantilla.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Validador</validator>
+      <destPath>Amb la ruta</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Crea una acció de tipus</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
+      <not-support>No es pot carregar la plantilla de '{0}'.</not-support>
+      <do-not-permission>No té permís per carregar la plantilla de '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Selecciona l'ubicació</UIOneNodePathSelector>
+      <UIPermissionSelector>Navegador de Permisos</UIPermissionSelector>
+      <UICategoriesSelector>Afegeix Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>El camp '{0}' amb el valor '{1}' no és vàlid.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Selecciona les categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Categories Referenciades</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -173,19 +173,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Afegeix Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Arbre de Categories</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Selector de Categoria</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

@@ -36,27 +36,27 @@
       <title>Document editors</title>
       <table>
         <Provider>Provider</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Beschrijving</Description>
+        <Active>Actieve</Active>
+        <Permissions>Permissies</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
+        <None>Geen</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Opslaan</Save>
+        <Cancel>Annuleren</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>Bewerken</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Waarschuwing</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

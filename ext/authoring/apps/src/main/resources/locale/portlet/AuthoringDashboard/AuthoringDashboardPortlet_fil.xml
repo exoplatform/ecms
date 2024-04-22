@@ -3,11 +3,11 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
-      <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Waiting For My Approval</waitingapproval>
-      <approve>Approve</approve>
-      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <nocontent>Ang Walang Nilalaman</nocontent>
+      <mydraft>Ang Aking Nilalaman sa Draft</mydraft>
+      <waitingapproval>Ang Antay Para sa Aking Pahintulot</waitingapproval>
+      <approve>Ang Aprubahan</approve>
+      <publishedtomorrow>Ang Paglalathala Bukas</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

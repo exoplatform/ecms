@@ -7,10 +7,10 @@
   -->
   <UICommentForm>
     <label>
-      <name>Name</name>
-      <email>Email</email>
-      <website>Website</website>
-      <comment>Comment</comment>
+      <name>نام</name>
+      <email>ایمیل</email>
+      <website>وب سایت</website>
+      <comment>نظر</comment>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -18,8 +18,8 @@
     </action>
     <msg>
       <not-support>You can't comment on this type of document.</not-support>
-      <not-checkedout>You must check out the document before commenting on it.</not-checkedout>
-      <content-null>You cannot post an empty comment.</content-null>
+      <not-checkedout>شما باید گره را قبل از ثبت نظر در مورد آن، ترخیص کنید.</not-checkedout>
+      <content-null>شما مجاز به ارسال نظر خالی نمی باشید.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -29,25 +29,25 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Poor</normal>
-      <good>Below average</good>
-      <verygood>Average</verygood>
-      <excellent>Above average</excellent>
-      <best>Good</best>
-      <no-value>no value yet</no-value>
+      <normal>ضعیف</normal>
+      <good>پایین تر از متوسط</good>
+      <verygood>متوسط</verygood>
+      <excellent>بالاتر از متوسط</excellent>
+      <best>خوب</best>
+      <no-value>هنوز مقدار ندارد</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>امتیاز من:</my-rating>
     </label>
     <button>
       <label>
-        <confirm>OK</confirm>
+        <confirm>تایید</confirm>
       </label>
     </button>
     <msg>
-      <not-support>You cannot vote for this document type.</not-support>
-      <not-checkedout>You must check out the document to vote.</not-checkedout>
-      <vote-restriction>You can't vote more than once.</vote-restriction>
+      <not-support>شما نمی توانید به این نوع سند رای بدهید.</not-support>
+      <not-checkedout>شما باید گره را قبل از ثبت رای در مورد آن، ترخیص کنید.</not-checkedout>
+      <vote-restriction>شما نمی توانید بیش از یک بار رای بدهید.</vote-restriction>
     </msg>
   </UIVoteForm>
  
@@ -58,10 +58,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
-      <no-node-history>You are at the root folder.</no-node-history>
-      <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>You can't access this path, either because it doesn't exist anymore or because you don't have access permissions.</target-path-not-found>
+      <refresh-session-success>جلسه با موفقیت تازه سازی شد.</refresh-session-success>
+      <no-node-history>شما در گره ريشه هستید.</no-node-history>
+      <save-session-success>تمامی تغییرات ذخیره شده اند.</save-session-success>
+      <target-path-not-found>شما به این گره دسترسی ندارید، زیرا این گره وجود ندارد و یا شما مجوز دسترسی به آن را ندارید.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -71,16 +71,16 @@
   -->
   <UISideBar>
     <label>
-      <Relation>Relation</Relation>
-      <Explorer>File Explorer</Explorer>
-      <Close>Close Sidebar</Close>
-      <TagExplorer>Tag Cloud</TagExplorer>
-      <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <Relation>ارتباط</Relation>
+      <Explorer>مرورگر فایل</Explorer>
+      <Close>بستن نوار جانبی</Close>
+      <TagExplorer>برچسب ابری</TagExplorer>
+      <Clipboard>کلیپ برد</Clipboard>
+      <SavedSearches>جستجوهای ذخیره شده</SavedSearches>
     </label>
     <title>
       <Control>Control Sidebar</Control>
-      <Close>Close Sidebar</Close>
+      <Close>بستن نوار جانبی</Close>
     </title>
   </UISideBar>
   <!--
@@ -90,15 +90,15 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace:</driveWorkspace>
-      <backToJCR>Back to JCR Main Drives</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
-      <refesh>Refresh</refesh>
-      <currentDrive>Current Drive</currentDrive>
-      <selectView>Select View</selectView>
-      <showSideBar>Show Sidebar</showSideBar>
-      <more>More</more>
-      <backTo>Back</backTo>
+      <driveWorkspace>درایو فضای کار:</driveWorkspace>
+      <backToJCR>بازگشت به درایو اصلی JCR</backToJCR>
+      <setUpBrowser>تنظیم مشخصات نحوه نمایش خود</setUpBrowser>
+      <refesh>تازه سازی</refesh>
+      <currentDrive>درایو فعلی</currentDrive>
+      <selectView>انتخاب نما</selectView>
+      <showSideBar>نمایش نوار جانبی</showSideBar>
+      <more>بیشتر</more>
+      <backTo>بازگشت</backTo>
     </label>
   </UIViewBar>
 
@@ -109,14 +109,14 @@
   -->
   <UIDrivesBrowser>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
+      <PersonalDrives>درایوهای شخصی</PersonalDrives>
+      <GroupDrives>درایوهای گروه</GroupDrives>
+      <GeneralDrives>درایوهای عمومی</GeneralDrives>
     </title>
     <msg>
-      <no-view-found>There is no view available according to your access permissions in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <no-view-found>مجوز دسترسی شما شامل هیچ نمایی در درایو '{0}' نمی شود.</no-view-found>
+      <access-denied>دسترسی رد شد. شما ممکن است در فضای درایو '{0}' مجوز لازم را نداشته باشید.</access-denied>
+      <workspace-not-exist>درایو '{0}' در یک فضای کاری نامشخص ذخیره شده است. لطفا این درایو را دوباره تنظیم کنید.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
 
@@ -126,13 +126,13 @@
   #############################################################################
   -->
   <UITreeExplorer>
-    <title>Explorer</title>
+    <title>مرورگر</title>
     <label>
-      <Root>Root</Root>
-      <webDavView>Open in MS Office</webDavView>
+      <Root>ریشه</Root>
+      <webDavView>Download and allow edition</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -142,11 +142,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
-      <relation-list>Relations</relation-list>
-      <references-list>References</references-list>
-      <no-related-document>No Related Document</no-related-document>
-      <related-document>Related Documents</related-document>
+      <languages-list>ترجمه ها</languages-list>
+      <relation-list>ارتباطات</relation-list>
+      <references-list>مراجع</references-list>
+      <no-related-document>هیچ سند مرتبطی موجود نیست</no-related-document>
+      <related-document>اسناد مرتبط</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -155,17 +155,17 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>تنظیم مشخصات نحوه نمایش خود</title>
     <label>
-      <enableStructure>Browse in structure mode:</enableStructure>
-      <showSideBar>Show sidebar:</showSideBar>
-      <showHiddenNode>Show hidden items:</showHiddenNode>
-      <showNonDocument>Show non-document items:</showNonDocument>
-      <showRefDocuments>Show referenced items:</showRefDocuments>
-      <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
-      <sortBy>Sort order:</sortBy>
-      <order>Order by:</order>
-      <nodesPerPage>Items per page:</nodesPerPage>
+      <enableStructure>فعالسازی ساختار DMS.</enableStructure>
+      <showSideBar>نمایش نوار جانبی:</showSideBar>
+      <showHiddenNode>نمایش گره های پنهان:</showHiddenNode>
+      <showNonDocument>نمایش گره های غیر سندی:</showNonDocument>
+      <showRefDocuments>نمایش اسناد مرجع:</showRefDocuments>
+      <enableDragAndDrop>فعال کردن کشیدن و رها کردن:</enableDragAndDrop>
+      <sortBy>مرتب سازی بر اساس:</sortBy>
+      <order>مرتب کردن:</order>
+      <nodesPerPage>آیتم ها در هر صفحه:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -178,7 +178,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Set Up Filter Preferences</title>
+    <title>تنظیمات فیلتر</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -190,10 +190,10 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>تغییر نام</title>
     <label>
-      <nameField>Name</nameField>
-      <titleField>Title</titleField>
+      <nameField>نام</nameField>
+      <titleField>عنوان</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -201,65 +201,65 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <rename-successfull>'{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied. You can't rename this item.</rename-denied>
-      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
-      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
-      <version-exception>This document (or one of its ancestors) is not checked out.</version-exception>
-      <lock-exception>This document is locked. Please unlock it before renaming.</lock-exception>
-      <constraintViolation-exception>An error occurred while renaming '{0}'. Please check again.</constraintViolation-exception>
-      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
-      <rename-error>An error occurred while renaming. Please check again.</rename-error>
+      <rename-successfull>گره '{0}' به '{1}' با موفقیت تغییر نام یافت.</rename-successfull>
+      <rename-denied>دسترسی رد شد. نام این گره را تغییر دهید.</rename-denied>
+      <fileName-invalid>نام جدید شامل کاراکترهای نامعتبر است.</fileName-invalid>
+      <newName-same-oldName>نام جدید در حال حاضر وجود دارد. لطفا دوباره چک کنید.</newName-same-oldName>
+      <version-exception>این گره (یا والد این گره) هنوز ترخیص نشده است.</version-exception>
+      <lock-exception>این گره قفل شده است. لطفا آن را قبل از تغییر نام باز کنید.</lock-exception>
+      <constraintViolation-exception>در حین تغییر نام گره '{0}' خطایی رخ داده است. لطفا دوباره چک کنید.</constraintViolation-exception>
+      <unknown-prefix>پیشوند '{0}' هنوز ثبت نشده است.</unknown-prefix>
+      <rename-error>در حین تغییر نام این گره خطایی رخ داده است. لطفا دوباره چک کنید.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
-      <UIRenameForm>Rename</UIRenameForm>
-      <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>Upload File</UIUploadManager>
-      <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
-      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
-      <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Versioning</UIActivateVersion>
-      <UIAuditingInfo>Auditing Information</UIAuditingInfo>
-      <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
-      <UIPermissionManager>Permission Management</UIPermissionManager>
-      <UIPropertiesManager>Properties Management</UIPropertiesManager>
-      <UIECMSearch>Advanced Search</UIECMSearch>
-      <UISavedQuery>Saved Queries List</UISavedQuery>
-      <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
-      <UIActionManager>Manage Actions</UIActionManager>
-      <UIDocumentForm>Edit Document</UIDocumentForm>
-      <UIDocumentFormController>Add New Document</UIDocumentFormController>
-      <EditFormController>Edit Document</EditFormController>
-      <UIRelationManager>Add Relation</UIRelationManager>
-      <UICategoryManager>Add Category</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
-      <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
-      <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Comment</UICommentForm>
-      <UIPreferencesForm>Documents Browsing Preferences</UIPreferencesForm>
-      <UIPublicationManager>Manage Publication</UIPublicationManager>
-      <UIConfirmMessage>Delete ?</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
-      <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
-      <UITaggingForm>Tag Document</UITaggingForm>
-      <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Documents Browsing Preferences</UIAllItemsPreferenceForm>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-      <UISEOForm>Manage SEO</UISEOForm>
-      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
-      <UIReadOnlyFileConfirmMessage>Open Document</UIReadOnlyFileConfirmMessage>
+      <UIRenameForm>تغییر نام</UIRenameForm>
+      <UIActionContainer>ویرایش اقدام</UIActionContainer>
+      <UIFolderForm>پوشه جدید</UIFolderForm>
+      <UIUploadManager>آپلود فایل</UIUploadManager>
+      <UIReferencesList>فهرست مراجع</UIReferencesList>
+      <UIExportNode>استخراج</UIExportNode>
+      <UINodeTypeInfo>اطلاعات نوع گره</UINodeTypeInfo>
+      <UIVersionInfo>اطلاعات نسخه</UIVersionInfo>
+      <UIActivateVersion>فعال کردن نسخه</UIActivateVersion>
+      <UIAuditingInfo>اطلاعات ممیزی</UIAuditingInfo>
+      <UIActivateAuditing>فعال کردن ممیزی</UIActivateAuditing>
+      <UIPermissionManager>مدیریت مجوز</UIPermissionManager>
+      <UIPropertiesManager>مدیریت ویژگی ها</UIPropertiesManager>
+      <UIECMSearch>جستجوی پیشرفته</UIECMSearch>
+      <UISavedQuery>لیست پرس وجو های ذخیره شده</UISavedQuery>
+      <UIWatchDocumentForm>پاییدن سند</UIWatchDocumentForm>
+      <UIActionManager>مدیریت اقدامات</UIActionManager>
+      <UIDocumentForm>ویرایش سند</UIDocumentForm>
+      <UIDocumentFormController>افزودن سند جدید</UIDocumentFormController>
+      <EditFormController>ویرایش سند</EditFormController>
+      <UIRelationManager>افزودن ارتباط</UIRelationManager>
+      <UICategoryManager>افزودن دسته</UICategoryManager>
+      <UIImportNode>وارد کردن</UIImportNode>
+      <UIViewMetadataManager>مشاهده فراداده</UIViewMetadataManager>
+      <UIVoteForm>رای دادن به سند</UIVoteForm>
+      <UICommentForm>نظر</UICommentForm>
+      <UIPreferencesForm>تنظیمات</UIPreferencesForm>
+      <UIPublicationManager>مدیریت انتشار</UIPublicationManager>
+      <UIConfirmMessage>حذف؟</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>فایل حذف شود؟</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>پوشه حذف شود؟</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>موارد حذف شوند؟</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>تأیید بازیابی</UIRestoreConfirmMessage>
+      <UIActivePublication>ثبت در چرخه انتشار</UIActivePublication>
+      <UITaggingForm>برچسب سند</UITaggingForm>
+      <UIThumbnailForm>اضافه کردن تصویر بند انگشتی</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>تنظیمات</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>انتخاب مسیر بازیابی</UISelectRestorePath>
+      <UISEOForm>مدیریت جستجوگرها</UISEOForm>
+      <UISEOToolbarForm>مدیریت جستجوگرها</UISEOToolbarForm>
+      <UIReadOnlyFileConfirmMessage>باز کردن سند</UIReadOnlyFileConfirmMessage>
       <UIDocumentAutoVersionForm>Copy Document</UIDocumentAutoVersionForm>
     </title>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>فضای کار</workspace>
+      <path>مسیر</path>
     </header>
   </UIPopupWindow>
   <!--
@@ -268,11 +268,11 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>Edit File Content</title>
+    <title>ویرایش محتویات فایل</title>
     <label>
-      <name>Name</name>
-      <textToModify>Text to modify</textToModify>
-      <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
+      <name>نام</name>
+      <textToModify>ویرایش متن</textToModify>
+      <fileToUpload>آپلود محتوای جدید برای سند (باید از همان نوع mime فعلی باشد)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -282,129 +282,129 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <EditDocument>Edit</EditDocument>
-      <Upload>Upload</Upload>
-      <Paste>Paste</Paste>
-      <Search>Search</Search>
-      <WatchDocument>Watch/Unwatch</WatchDocument>
-      <TaggingDocument>Tag</TaggingDocument>
-      <Vote>Vote</Vote>
-      <Comment>Comment</Comment>
-      <ManageVersions>Versions</ManageVersions>
-      <ManageAuditing>Audit</ManageAuditing>
-      <ManagePublications>Publications</ManagePublications>
-      <ManageCategories>Categories</ManageCategories>
-      <ManageRelations>Relations</ManageRelations>
-      <ManageActions>Actions</ManageActions>
-      <ExportNode>Export</ExportNode>
-      <ImportNode>Import</ImportNode>
-      <OverloadThumbnail>Change Icon Image</OverloadThumbnail>
-      <ManageHidden>Show/Hide Content</ManageHidden>
-      <ViewReferences>References</ViewReferences>
-      <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
-      <ViewProperties>Properties</ViewProperties>
-      <ViewMetadatas>Metadata</ViewMetadatas>
-      <ViewRelations>Show/Hide Relations</ViewRelations>
-      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
+      <AddFolder>پوشه جدید</AddFolder>
+      <AddDocument>محتوای جدید</AddDocument>
+      <EditDocument>ویرایش</EditDocument>
+      <Upload>آپلود</Upload>
+      <Paste>الحاق</Paste>
+      <Search>جستجو</Search>
+      <WatchDocument>پاییدن/نپاییدن</WatchDocument>
+      <TaggingDocument>برچسب</TaggingDocument>
+      <Vote>رای</Vote>
+      <Comment>نظر</Comment>
+      <ManageVersions>نسخه ها</ManageVersions>
+      <ManageAuditing>ممیزی</ManageAuditing>
+      <ManagePublications>انتشارات</ManagePublications>
+      <ManageCategories>دسته ها</ManageCategories>
+      <ManageRelations>ارتباطات</ManageRelations>
+      <ManageActions>اقدامات</ManageActions>
+      <ExportNode>استخراج</ExportNode>
+      <ImportNode>وارد کردن</ImportNode>
+      <OverloadThumbnail>بیش از حد کوچک</OverloadThumbnail>
+      <ManageHidden>نمایش/پنهان کردن محتوا</ManageHidden>
+      <ViewReferences>مراجع</ViewReferences>
+      <ViewNodeType>انواع</ViewNodeType>
+      <ViewPermissions>مجوزها</ViewPermissions>
+      <ViewProperties>مشخصات</ViewProperties>
+      <ViewMetadatas>فراداده</ViewMetadatas>
+      <ViewRelations>نمایش/پنهان کردن ارتباطات</ViewRelations>
+      <ShowJCRStructure>نمایش/پنهان کردن ساختار محتوا</ShowJCRStructure>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a version</UploadNewVersion>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can't perform this action at root.</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Can't activate versioning on root.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can't activate publication at root.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>قادر به انجام این اقدام در گره ریشه نیستید.</cannot-action-in-rootnode>
+      <node-checkedin>شما باید اول ترخیص کنید.</node-checkedin>
+      <cannot-enable-version-rootnode>نسخه بندی برای گره ریشه را نمی توان فعال کرد.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>قابلیت انتشار برای گره ریشه را نمی توان فعال کرد.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Only documents can be published.</not-supported-nodetype>
-        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
+        <not-supported-nodetype>قابلیت انتشار تنها از گره سندی پشتیبانی می کند.</not-supported-nodetype>
+        <no-publication-lifecycle>چرخه انتشار پیکربندی نشده است.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The document was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>This operation is only supported for documents.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The document was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The document is not an article or checked in.</access-false>
-      <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>This document has no relations.</not-relationable>
-      <node-pasted>'{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
-      <no-node-selected>Nothing to copy.</no-node-selected>
-      <unable-edit>Editing documents of type '{1}' like '{0}' is not supported.</unable-edit>
-      <not-support>Can't edit the selected item.</not-support>
-      <template-null>This document has no form template.</template-null>
-      <keyword-null>There are no keywords to search.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
-      <is-not-referenable>'{0}' can't be referenceable.</is-not-referenable>
-      <access-denied>Access denied. You don't have edit permission for this item.</access-denied>
-      <access-add-denied>Access denied. You don't have permission to add items here.</access-add-denied>
-      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
-      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
-      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
-      <not-supported>This function is supported for the document type only.</not-supported>
-      <empty-file-type>You can't add a document here.</empty-file-type>
-      <unsupported-watch>Only documents can be watched.</unsupported-watch>
-      <watch-checkedin>You must check out the document before watching.</watch-checkedin>
-      <unsupported-tagging>Only documents can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the document before tagging.</tagnode-checkedin>
+      <unsubcriber-lifecycle>گره لغو عضویت شده است.</unsubcriber-lifecycle>
+      <not-supported-nodetype>چرخه لغو عضویت تنها از گره سندی پشتیبانی می کند.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>گره با موفقیت لغو عضویت شد.</unsubcriber-lifecycle-finish>
+      <access-false>گره یک مقاله نیست و یا ترخیص نشده است.</access-false>
+      <unsupported-action>این عملکرد پشتیبانی نمی شود.</unsupported-action>
+      <not-relationable>این گره در حال حاضر هیچ پیوندی با گره دیگر ندارد.</not-relationable>
+      <node-pasted>گره '{0}' به محل "{1}" جابجا شده است. این عملیات ذخیره شده است.</node-pasted>
+      <no-node-selected>هیچ گره ای کپی نشده است.</no-node-selected>
+      <unable-edit>گره '{0}' با نوع گره '{1}' از ویرایش پشتیبانی نمی کند.</unable-edit>
+      <not-support>قادر به ویرایش گره انتخاب شده نمی باشید.</not-support>
+      <template-null>در این گره هیچ گفتگوی موجود نیست.</template-null>
+      <keyword-null>هیچ کلمه کلیدی برای جستجو وجود ندارد.</keyword-null>
+      <not-found>هیچ نتیجه ای در بر نداشت.</not-found>
+      <keyword-not-allow>این کلمه مجاز نمی باشد.</keyword-not-allow>
+      <is-not-referenable>گره '{0}' نمی تواند قابل ارجاع باشد.</is-not-referenable>
+      <access-denied>دسترسی رد شد. شما دسترسی ویرایش در این گره را ندارید.</access-denied>
+      <access-add-denied>دسترسی رد شد. شما دسترسی افزودن مجوز در این گره را ندارید.</access-add-denied>
+      <item-existed>این گره در حال حاضر وجود دارد. نامگذاری مشابه با گره های همرده مجاز نیست.</item-existed>
+      <removed-hidden-mixin>شما mixin پنهان را با موفقیت حذف نمودید.</removed-hidden-mixin>
+      <added-hidden-mixin>شما mixin پنهان را با موفقیت اضافه نمودید.</added-hidden-mixin>
+      <not-supported>این عملکرد تنها توسط نوع سندی پشتیبانی می شود.</not-supported>
+      <empty-file-type>افزودن سند به این گره  مجاز نیست.</empty-file-type>
+      <unsupported-watch>تنها گره سندی قابلیت پاییده شدن را دارد.</unsupported-watch>
+      <watch-checkedin>گره باید قبل از پاییده شدن ترخیص گردد.</watch-checkedin>
+      <unsupported-tagging>تنها می توان به گره سندی بر چسب زد.</unsupported-tagging>
+      <tagnode-checkedin>گره قبل از برچسب خوردن باید ترخیص شود.</tagnode-checkedin>
     </msg>
     <title>
-      <select-tab>Select Tab</select-tab>
-      <SimpleSearch>Quick Search</SimpleSearch>
-      <AdvanceSearch>Advanced Search</AdvanceSearch>
-      <SavedQueries>Saved Queries</SavedQueries>
-      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
-      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
-      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
-      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
+      <select-tab>انتخاب برگه</select-tab>
+      <SimpleSearch>جستجوی سریع</SimpleSearch>
+      <AdvanceSearch>جستجوی پیشرفته</AdvanceSearch>
+      <SavedQueries>جستارهای ذخیره شده</SavedQueries>
+      <ShowAllOwnedByUser>نمایش همه آیتم های من</ShowAllOwnedByUser>
+      <ShowAllFavourite>نمایش همه آیتم های مورد علاقه</ShowAllFavourite>
+      <ShowAllHidden>نمایش همه آیتم های پنهان</ShowAllHidden>
+      <ShowAllFromTrash>نمایش همه آیتم ها از سطل زباله</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You don't have permissions to add in this item.</has-not-permission>
-      <has-not-edit-permission>Access denied. You don't have edit permission here. Please contact the administrator.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste an item here.</cannot-login-node>
-      <cannot-paste-nodetype>You can't paste this type of item here.</cannot-paste-nodetype>
-      <has-not-permission-unlok>You don't have permission to unlock this document.</has-not-permission-unlok>
-      <bound-exception>You don't have the permission to rename this item. Please contact the administrator.</bound-exception>
-      <bound-move-exception>You can't move an item to itself or in a subfolder.</bound-move-exception>
-      <does-not-support-auditing>You can't activate auditing here.</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this item. Please contact the administrator to get the necessary rights.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this item. Please contact the administrator.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this item. Please contact the administrator.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock {0}. Please contact the administrator.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this item. Please contact the administrator.</can-not-unlock-node>
-      <no-node>Please select at least one item before pasting.</no-node>
-      <can-not-paste-node>You don't have permission to move to this item. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move this item. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>You don't have permission to move. Please contact the administrator.</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
-      <paste-lock-exception>'{0}' can't be pasted here. Make sure it is not locked nor this folder. Also check that no related document is locked.</paste-lock-exception>
-      <can-not-checkin-node>You can't check in this item. Please check that you have the necessary permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You can't check out this item. Please check that you have the necessary permissions.</can-not-checkout-node>
-      <move-constraint-exception>An error occurred while moving this item.</move-constraint-exception>
-      <not-lock-owner>You can't unlock this document because you are not the lock owner.</not-lock-owner>
-      <is-checked-in>Please check out this document before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this document before locking.</is-checked-in-lock>
-      <cant-lock>You can't lock this document.</cant-lock>
-      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Please close this document before deleting.</can-not-delete>
-      <can-not-delete-version>You can't delete this document. It's versioned.</can-not-delete-version>
-      <not-support>You can't delete the selected item. Please select another one.</not-support>
-      <current-node-not-allow-paste>You can't paste the copied item there.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You can't paste the copied item here because it's versioned.</copied-node-in-versioning>
-      <parent-node-locked>You don't have permission to unlock '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You can't unlock this item. Parent folder is locked.</this-node-locked-by-parent>
-      <paste-node-same-name>Can't paste this item here. An item with the same name already exists in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You don't have the permission to add here.</has-not-add-permission>
-      <node-cutting>Item is being cut. You can't paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have the permission.</access-denied>
-      <remove-verion-exception>You can't remove this document because it is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>You can't delete this item because it is currently referenced by another one.</remove-referentialIntegrityException>
-      <constraintviolation-exception>The mandatory property jcr:uuid was not found. The document may have been deleted or changed. Please click the Refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This document was deleted or changed. Please click the Refresh button.</path-not-found-exception>
-      <not-exist-categories>The category does not exist.</not-exist-categories>
-      <lock-node-read-only>This file is locked by user {0}. Open read-only ?</lock-node-read-only>
+      <has-not-permission>دسترسی رد شد. شما دسترسی افزودن مجوز در این گره را ندارید.</has-not-permission>
+      <has-not-edit-permission>دسترسی رد شد. شما مجوز ویرایش در این گره را ندارید. لطفا با سرپرست تماس بگیرید.</has-not-edit-permission>
+      <cannot-login-node>شما نمی توانید در اینجا به گره دسترسی داشته و یا آن را به اینجا منتقل کنید.</cannot-login-node>
+      <cannot-paste-nodetype>شما نمی توانید گره را به اینجا منتقل کنید.</cannot-paste-nodetype>
+      <has-not-permission-unlok>شما مجوز لازم را برای باز کردن این گره ندارید.</has-not-permission-unlok>
+      <bound-exception>شما دارای مجوز تغییر نام این گره نیستید. لطفا با سرپرست تماس بگیرید.</bound-exception>
+      <bound-move-exception>امکان انتقال گره به خود آن و یا گره های فرزند آن وجود ندارد.</bound-move-exception>
+      <does-not-support-auditing>شما نمی توانید در این گره ممیزی را فعال کنید.</does-not-support-auditing>
+      <can-not-rename-node>شما مجوز لازم برای تغییر نام این گره را ندارید. لطفا برای گرفتن مجوز درست با مدیر سیستم تماس بگیرید.</can-not-rename-node>
+      <can-not-cut-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-cut-node>
+      <can-not-remove-node>شما دارای مجوز حذف این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-remove-node>
+      <can-not-lock-node>شما مجوز لازم برای قفل کردن گره {0} را ندارید. لطفا با سرپرست تماس بگیرید.</can-not-lock-node>
+      <can-not-unlock-node>شما دارای مجوز باز کردن این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-unlock-node>
+      <no-node>لطفا یک گره را قبل از اتمام عمل انتقال انتخاب نمایید.</no-node>
+      <can-not-paste-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-paste-node>
+      <can-not-move-node>شما دارای مجوز جابجایی این گره نیستید. لطفا با سرپرست تماس بگیرید.</can-not-move-node>
+      <does-not-support-versioning>شما دارای مجوز انتقال به این گره نیستید. لطفا با سرپرست تماس بگیرید.</does-not-support-versioning>
+      <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
+      <paste-lock-exception>نمی توان '{0}' را در این گره قرار داد، زیرا گره منبع یا مقصد قفل شده و یا با یک گره قفل شده ازتباط دارد.</paste-lock-exception>
+      <can-not-checkin-node>شما نمی توانید این گره را وارد کنید. لطفا دسترسی های خود را بررسی نمایید.</can-not-checkin-node>
+      <can-not-checkout-node>شما نمی توانید این گره را ترخیص کنید. لطفا دسترسی های خود را بررسی نمایید.</can-not-checkout-node>
+      <move-constraint-exception>در حین جابجایی گره خطایی رخ داده است.</move-constraint-exception>
+      <not-lock-owner>شما نمی توانید این گره را باز کنید زیرا مالک قفل آن نیستید.</not-lock-owner>
+      <is-checked-in>لطفا قبل از تغییر نام گره را ترخیص کنید.</is-checked-in>
+      <is-checked-in-lock>لطفا قبل از قفل کردن گره، آن را ترخیص کنید.</is-checked-in-lock>
+      <cant-lock>شما نمی توانید این گره را قفل کنید.</cant-lock>
+      <node-locked>آیتم با مسیر {0} یا آیتمی در سطح بالاتر قفل شده است.</node-locked>
+      <can-not-delete>لطفا این گره را قبل از حذف قفل کنید.</can-not-delete>
+      <can-not-delete-version>نمی توانید این گره را حذف کنید. زیرا در حال نسخه بندی است.</can-not-delete-version>
+      <not-support>گره انتخاب شده حذف نمی شود. لطفا گره دیگری را انتخاب کنید.</not-support>
+      <current-node-not-allow-paste>نوع گره کپی شده را نمی توان به گره جاری منتقل کرد.</current-node-not-allow-paste>
+      <copied-node-in-versioning>گره کپی شده را نمی توان منتقل کرد. زیرا در حال نسخه بندی است.</copied-node-in-versioning>
+      <parent-node-locked>شما مجوز لازم را برای باز کردن گره '{0}' ندارید.</parent-node-locked>
+      <this-node-locked-by-parent>شما نمی توانید این گره را باز کنید. این گره توسط گره والد قفل شده است.</this-node-locked-by-parent>
+      <paste-node-same-name>گره با نام یکسان را نمی توان به عنوان یک گره به پوشه مقصد منتقل کرد.</paste-node-same-name>
+      <has-not-add-permission>شما مجوز لازم برای اضافه کردن یک گره جدید را ندارید.</has-not-add-permission>
+      <node-cutting>گره آماده جابجایی است. ولی نمی توانید آن را به اینجا منتقل کنید.</node-cutting>
+      <access-denied>دسترسی رد شد. شما ممکن است مجوز لازم در این گره را نداشته باشید.</access-denied>
+      <remove-verion-exception>گره حذف نمی شود، زیرا خود آن (و یا گره والد آن) رزرو شده است.</remove-verion-exception>
+      <remove-referentialIntegrityException>این گره حذف نمی شود، زیرا در حال حاضر مقصد یک ارجاع می باشد.</remove-referentialIntegrityException>
+      <constraintviolation-exception>آیتم اجباری Jcr:uuid پیدا شد. گره تغییر داده یا حذف شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</constraintviolation-exception>
+      <path-not-found-exception>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found-exception>
+      <not-exist-categories>دسته وجود ندارد.</not-exist-categories>
+      <lock-node-read-only>این فایل توسط کاربر {0} قفل شده است. در حالت read only باز شود؟</lock-node-read-only>
     </msg>
   </UIPopupMenu>
   <!--
@@ -415,29 +415,29 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Create Folder</Save>
+      <Save>ایجاد پوشه</Save>
     </action>
     <label>
-      <titleTextBox>Folder Name:</titleTextBox>
-      <customTypeCheckBox>Use a custom type of folder</customTypeCheckBox>
+      <titleTextBox>نام پوشه:</titleTextBox>
+      <customTypeCheckBox>استفاده از یک نوع سفارشی از پوشه</customTypeCheckBox>
     </label>
-    <title>Add/Edit Folder</title>
+    <title>افزودن/ویرایش پوشه</title>
     <msg>
-      <addFolder-successful>The folder '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the folder name.</name-invalid>
-      <title-invalid>Please enter the folder title.</title-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You don't have the permission to add a new folder here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
+      <addFolder-successful>پوشه '{0}' با موفقیت اضافه شد.</addFolder-successful>
+      <name-invalid>لطفاً نام پوشه را وارد کنید.</name-invalid>
+      <title-invalid>لطفا عنوان پوشه را وارد کنید.</title-invalid>
+      <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
+      <fileName-error>نام فایل نامعتبر است.</fileName-error>
+      <constraint-violation>گره فعلی به شما اجازه افزودن نوع گره '{0}' را نمی دهد.</constraint-violation>
+      <repository-exception>یک خطای غیر منتظره رخ داده است. لطفا برای کسب اطلاعات بیشتر با سرپرست تماس بگیرید.</repository-exception>
+      <repository-exception-permission>شما دارای مجوز برای افزودن یک پوشه جدید به این گره نیستید.</repository-exception-permission>
+      <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>You can't save the folder. An item with the same name already exists.</not-allow-sameNameSibling>
-      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
+      <not-allow-sameNameSibling>پوشه ذخیره نمی شود. این گره، دو گره با نام یکسان را قبول نمی کند.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>شما باید یک نوع سفارشی از پوشه را انتخاب کنید</ntFolder-not-avaiable>
     </msg>
     <help>
-      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
+      <customTypeCheckBoxHelp>در صورت تمایل برای ذخیره کردن محتوای وب و یا انواع سند سفارشی در این پوشه، گزینه را انتخاب کنید.</customTypeCheckBoxHelp>
     </help>
   </UIFolderForm>
   <!--
@@ -447,118 +447,118 @@
   -->
   <UIWorkingArea>
     <title>
-      <Icon>Icon</Icon>
+      <Icon>آیکن</Icon>
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
-      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
+      <confirm-delete>مطمئن هستید که می خواهید آیتم '{0}' را حذف کنید؟</confirm-delete>
+      <confirm-delete-file>آیا مطمئن هستید که میخواهید فایل '{0}' را حذف کنید؟</confirm-delete-file>
+      <confirm-delete-folder>آیا مطمئنید که می خواهید پوشه '{0}' و پوشه های فرعی آن را حذف کنید؟</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Are you sure you want to permanently remove the item '{0}'?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Are you sure you want to permanently remove the file '{0}'?</confirm-delete-file-permanently>
-      <confirm-delete-folder-permanently>Are you sure you want to permanently remove the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
+      <confirm-delete-permanently>آیا مطمئن هستید که می خواهید آیتم '{0}' به طور دایمی حذف شود؟</confirm-delete-permanently>
+      <confirm-delete-file-permanently>آیا مطمئن هستید که می خواهید فایل '{0}' به طور دایمی حذف شود؟</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>آیا مطمئن هستید که می خواهید پوشه '{0}' و پوشه های فرعی آن به طور دایمی حذف شوند؟</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>آیا مطمئن هستید که می خواهید آیتم '{0}' و ارجاعات آن به طور دایمی حذف شوند؟</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>آیا مطمئن هستید که می خواهید فایل '{0}' و ارجاعات آن به طور دایمی حذف شوند؟</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>آیا مطمئن هستید که می خواهید پوشه '{0}' و ارجاعات آن به طور دایمی حذف شوند؟</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic>آیا مطمئن هستید که می خواهید آیتم های {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>آیا مطمئن هستید که می خواهید فایل های {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>آیا مطمئن هستید که می خواهید پوشه های {0} انتخاب شده و پوشه های فرعی آنها را حذف کنید؟</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>آیا مطمئن هستید که می خواهید آیتم ها و فایل های {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>آیا مطمئن هستید که می خواهید آیتم ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>آیا مطمئن هستید که می خواهید فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>آیا مطمئن هستید که می خواهید آیتم ها، فایل ها،پوشه ها و پوشه های فرعی {0} انتخاب شده را حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
-      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to permanently remove the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to permanently remove the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
-      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to permanently remove the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to permanently remove the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
-      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to permanently remove the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-permanently>آیا مطمئن هستید که می خواهید آیتم های {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>آیا مطمئن هستید که می خواهید فایل های {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>آیا مطمئن هستید که می خواهید پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>آیا مطمئن هستید که می خواهید آیتم ها و فایل های {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>آیا مطمئن هستید که می خواهید آیتم ها و پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>آیا مطمئن هستید که می خواهید فایل ها و پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>آیا مطمئن هستید که می خواهید آیتم ها، فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به طور دایمی حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
-      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
-      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>آیا مطمئن هستید که می خواهید آیتم های {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>آیا مطمئن هستید که می خواهید فایل های {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>آیا مطمئن هستید که می خواهید پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>آیا مطمئن هستید که می خواهید آیتم ها و فایل های {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>آیا مطمئن هستید که می خواهید آیتم ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>آیا مطمئن هستید که می خواهید فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>آیا مطمئن هستید که می خواهید آیتم ها، فایل ها، پوشه ها و پوشه های فرعی {0} انتخاب شده را به به همراه ارجاعات آن ها حذف کنید؟</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
-      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
-      <undo-delete>Undo</undo-delete>
-      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
-      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
+      <feedback-delete>'{0}' با موفقیت حذف شد.</feedback-delete>
+      <feedback-delete-multi>آیتم های {0} با موفقیت حذف شدند.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' برای همیشه حذف شد.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>آیتم های {0} برای همیشه حذف شدند.</feedback-delete-permanently-multi>
+      <undo-delete>عقبگرد</undo-delete>
+      <feedback-restore>'{0}' با موفقیت برگردانده شد.</feedback-restore>
+      <feedback-restore-multi>آیتم های {0} با موفقیت بازیابی شدند.</feedback-restore-multi>
       
-      <confirm-restore>A '{0}' item already exists at the previous location. Are you sure you want to restore it?</confirm-restore>
-      <confirm-move>Are you sure you want to move?</confirm-move>
-      <node-cut>'{0}' has been cut.</node-cut>
-      <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <move-problem>You can't move '{0}' to '{1}' because there was a problem with permissions or constraint conditions.</move-problem>
+      <confirm-restore>گره ای با همین نام در محل قبلی گره '{0}' وجود دارد. آیا از بازیابی این گره اطمینان دارید؟</confirm-restore>
+      <confirm-move>آیا می خواهید منتقل شود؟</confirm-move>
+      <node-cut>گره '{0}' قطع شده است.</node-cut>
+      <execute-successfully>اقدام سفارشی '{0}' اجرا شده است.</execute-successfully>
+      <save-node-success>گره '{0}' ذخیره شده است.</save-node-success>
+      <move-problem>گره '{0}' به '{1}' انتقال نمی یابد، زیرا مشکلی در مورد مجوز  و یا محدودیت ها وجود دارد.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This item doesn't have children.</no-children>
-      <no-children-but-has-hidden>This folder does not have any item, but there are some hidden files.</no-children-but-has-hidden>
+      <no-children>این گره هیچ گره فرزندی ندارد.</no-children>
+      <no-children-but-has-hidden>این گره هیچ گره فرزندی ندارد، اما تعدادی پرونده پنهان در آن وجود دارد.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>'{0}' has been created. Please save session to validate this action.</unable-save-node>
-      <save-node-success>'{0}' has been saved.</save-node-success>
-      <node-copied>'{0}' has been copied.</node-copied>
-      <node-cut>'{0}' has been cut.</node-cut>
-      <remove-root>You can't remove the root folder.</remove-root>
-      <node-remove-success>'{0}' has been removed.</node-remove-success>
+      <unable-save-node>گره '{0}' تازه ایجاد شده است. لطفا قبل از انجام این عمل جلسه را ذخیره کنید.</unable-save-node>
+      <save-node-success>گره '{0}' ذخیره شده است.</save-node-success>
+      <node-copied>گره '{0}' کپی شده است.</node-copied>
+      <node-cut>گره '{0}' قطع شده است.</node-cut>
+      <remove-root>قادر به حذف گره ریشه نیستید.</remove-root>
+      <node-remove-success>گره '{0}' حذف شده است.</node-remove-success>
     </msg>
     <tooltip>
-      <Rename>Rename</Rename>
-      <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Rename>تغییر نام</Rename>
+      <Cut>برش</Cut>
+      <Copy>کپی</Copy>
       <Save>#{word.save}</Save>
-      <RemoveNode>Delete</RemoveNode>
-      <Checkin>Checkin</Checkin>
-      <Checkout>Checkout</Checkout>
-      <Lock>Lock</Lock>
-      <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Paste>Paste</Paste>
-      <LockedBy>Locked by</LockedBy>
+      <RemoveNode>حذف</RemoveNode>
+      <Checkin>رزرو</Checkin>
+      <Checkout>ترخیص</Checkout>
+      <Lock>قفل</Lock>
+      <Unlock>باز کردن قفل</Unlock>
+      <EditDocument>ویرایش</EditDocument>
+      <Paste>الحاق</Paste>
+      <LockedBy>قفل شده توسط</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You can't access '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you don't have the access permission.</null-exception>
-      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the documen may have been removed or changed.</access-denied-exception>
-      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <access-denied>دسترسی رد شد. به گره '{0}' دسترسی ندارید.</access-denied>
+      <null-exception>موردی یافت نشد. تغییر داده یا حذف شده و یا شما اجازه دسترسی به این گره را ندارید.</null-exception>
+      <confirm-deleteattachment>آیا از حذف این فایل پیوست اطمینان دارید؟</confirm-deleteattachment>
+      <confirm-deleteattcomment>آیا از حذف این نظر اطمینان دارید؟</confirm-deleteattcomment>
+      <access-denied-exception>دسترسی رد شد. شما ممکن است دارای مجوز خواندن  نبوده و یا گره حذف شده یا تغییر داده شده است.</access-denied-exception>
+      <path-not-found>این اِلمان حذف و یا تغییر کرده است. لطفاً روی دکمه تازه سازی کلیک کنید.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Remove this attachment file</remove-attachment>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-attachment>حذف این فایل پیوست</remove-attachment>
+      <remove-comment>حذف این نظر</remove-comment>
     </tooltip>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <auditing>Auditing</auditing>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modifed</exo_dateModified>
+        <name>نام</name>
+        <versionable>قابل نسخه بندی</versionable>
+        <exo_owner>صاحب</exo_owner>
+        <auditing>ممیزی</auditing>
+        <exo_dateCreated>تاریخ ایجاد</exo_dateCreated>
+        <exo_dateModified>تاریخ اصلاح</exo_dateModified>
       </label>
     </view>
   </ListView>
@@ -569,36 +569,36 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Lock</Lock>
-      <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
-      <Delete>Delete</Delete>
+      <Lock>قفل</Lock>
+      <Unlock>باز کردن قفل</Unlock>
+      <EditDocument>ویرایش</EditDocument>
+      <Copy>کپی</Copy>
+      <Rename>تغییر نام</Rename>
+      <Delete>حذف</Delete>
       <Save>#{word.save}</Save>
-      <Cut>Cut</Cut>
-      <Paste>Paste</Paste>
-      <CheckOut>CheckOut</CheckOut>
-      <CheckIn>CheckIn</CheckIn>
-      <WebDAV>View WebDAV</WebDAV>
-      <autoversion>Auto Versioning</autoversion>
-      <Custom>Custom</Custom>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
-      <UnLock>Unlock</UnLock>
-      <ViewProperties>View Properties</ViewProperties>
-      <GetURL>Copy URL To Clipboard</GetURL>
-      <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
-      <AddToFavourite>Add To Favorite</AddToFavourite>
-      <RemoveFromFavourite>Remove From Favorite</RemoveFromFavourite>
-      <MoveToTrash>Move to Trash</MoveToTrash>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-      <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Open in MS Office</WebDavView>
-      <Download>Download</Download>
-      <OpenDocument>Remote Edit</OpenDocument>
+      <Cut>برش</Cut>
+      <Paste>الحاق</Paste>
+      <CheckOut>ترخیص</CheckOut>
+      <CheckIn>رزرو</CheckIn>
+      <WebDAV>مشاهده WebDAV</WebDAV>
+      <autoversion>نسخه بندی خودکار</autoversion>
+      <Custom>سفارشی</Custom>
+      <AddFolder>پوشه جدید</AddFolder>
+      <AddDocument>محتوای جدید</AddDocument>
+      <Upload>آپلود فایل</Upload>
+      <MoveNode>انتقال</MoveNode>
+      <UnLock>باز کردن قفل</UnLock>
+      <ViewProperties>مشاهده ویژگی ها</ViewProperties>
+      <GetURL>کپی URL در کلیپ برد</GetURL>
+      <AddThumbnail>افزودن/حذف کردن تصویر بند انگشتی</AddThumbnail>
+      <AddToFavourite>افزودن به لیست علاقه مندی ها</AddToFavourite>
+      <RemoveFromFavourite>حذف از لیست علاقه مندی ها</RemoveFromFavourite>
+      <MoveToTrash>انتقال به سطل زباله</MoveToTrash>
+      <RestoreFromTrash>بازیابی از سطل زباله</RestoreFromTrash>
+      <EmptyTrash>خالی کردن سطل زباله</EmptyTrash>
+      <WebDavView>Download and allow edition</WebDavView>
+      <Download>دانلود</Download>
+      <OpenDocument>ویرایش از راه دور</OpenDocument>
       <EditProperty>Edit Document Properties</EditProperty>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
       <CreateNewVersion>Save as new version</CreateNewVersion>
@@ -612,11 +612,11 @@
   -->
   <UIReferencesList>
     <msg>
-      <no-references>References not found</no-references>
+      <no-references>ارجاعات یافت نشد</no-references>
     </msg>
     <header>
-      <workspace>Workspace</workspace>
-      <path>Path</path>
+      <workspace>فضای کار</workspace>
+      <path>مسیر</path>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -630,58 +630,58 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
-      <UIPublicationPanel>Revision</UIPublicationPanel>
-      <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>History</UIPublicationHistory>
-      <UIVersionViewer>Version Viewer</UIVersionViewer>
+      <UIPublicationPanel>نسخه جدید</UIPublicationPanel>
+      <UIPublicationSchedule>زمان بندی شده</UIPublicationSchedule>
+      <UIPublicationPagesContainer>صفحات</UIPublicationPagesContainer>
+      <UIPublicationHistory>تاريخچه</UIPublicationHistory>
+      <UIVersionViewer>نمایشگر نسخه</UIVersionViewer>
 
-      <UIPropertyTab>Properties</UIPropertyTab>
-      <UIMetadataTab>Metadata</UIMetadataTab>
-      <UIPropertyForm>Add New Property</UIPropertyForm>
-      <UIUploadContent>Information of uploaded file</UIUploadContent>
-      <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
-      <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
-      <UISimpleSearch>Simple Search</UISimpleSearch>
-      <UISearchContainer>Advanced Search</UISearchContainer>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIConstraintsForm>Constraints Form</UIConstraintsForm>
-      <UIViewSearchResult>View Content</UIViewSearchResult>
-      <UIContentNameSearch>Search by Name</UIContentNameSearch>
-      <UINodeInfo>Version Info</UINodeInfo>
-      <UINodeProperty>Node Property</UINodeProperty>
-      <UIActionListContainer>Available Actions</UIActionListContainer>
-      <UIActionContainer>Add Action</UIActionContainer>
-      <UIActionViewContainer>Action Info</UIActionViewContainer>
-      <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
-      <UINonPublishedForm>State</UINonPublishedForm>
-      <UIPublishedForm>State</UIPublishedForm>
-      <UIPublicationLogList>History</UIPublicationLogList>
-      <UIDocumentWithTree>File View</UIDocumentWithTree>
-      <UIDocumentInfo>Document View</UIDocumentInfo>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UIPropertyTab>ویژگیها</UIPropertyTab>
+      <UIMetadataTab>فراداده</UIMetadataTab>
+      <UIPropertyForm>افزودن ویژگی جدید</UIPropertyForm>
+      <UIUploadContent>اطلاعات مربوط به فایل آپلود شده</UIUploadContent>
+      <UIJCRAdvancedSearch>جستار جدید</UIJCRAdvancedSearch>
+      <UISavedQuery>جستار ذخیره شده</UISavedQuery>
+      <AdvancedSearchResult>نتایج جستجو</AdvancedSearchResult>
+      <UISimpleSearch>جستجوی ساده</UISimpleSearch>
+      <UISearchContainer>جستجوی پیشرفته</UISearchContainer>
+      <UICategoryManagerSearch>افزودن دسته به جستجو</UICategoryManagerSearch>
+      <UIConstraintsForm>فرم محدودیت ها</UIConstraintsForm>
+      <UIViewSearchResult>مشاهده محتوا</UIViewSearchResult>
+      <UIContentNameSearch>جستجو بر اساس نام</UIContentNameSearch>
+      <UINodeInfo>اطلاعات نسخه</UINodeInfo>
+      <UINodeProperty>ویژگی گره</UINodeProperty>
+      <UIActionListContainer>اقدامات موجود</UIActionListContainer>
+      <UIActionContainer>اضافه کردن اقدام</UIActionContainer>
+      <UIActionViewContainer>اطلاعات اقدام</UIActionViewContainer>
+      <UIMultiLanguageForm>مشاهده زبان</UIMultiLanguageForm>
+      <UIAddLanguageContainer>افزودن زبان</UIAddLanguageContainer>
+      <UINonPublishedForm>حالت</UINonPublishedForm>
+      <UIPublishedForm>حالت</UIPublishedForm>
+      <UIPublicationLogList>تاریخچه</UIPublicationLogList>
+      <UIDocumentWithTree>نمای فایل</UIDocumentWithTree>
+      <UIDocumentInfo>نمای سند</UIDocumentInfo>
+      <UICategoriesSelectPanel>انتخاب دسته بندی</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>دسته بندی های مورد ارجاع</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
-      <dcelementset>Dublin Core</dcelementset>
+      <metadatasitemetadata>فراداده سایت</metadatasitemetadata>
+      <dcelementset>هسته دوبلین</dcelementset>
     </title>
   </UITabPane>
   <UIPropertyTab>
     <title>
-      <edit>Edit this property</edit>
-      <delete>Remove this property</delete>
+      <edit>ویرایش این ویژگی</edit>
+      <delete>حذف این ویژگی</delete>
     </title>
     <confirm>
-      <remove-property>Are you sure you want to remove this property?</remove-property>
+      <remove-property>آیا از حذف این ویژگی اطمینان دارید؟</remove-property>
     </confirm>
     <header>
-      <name>Name</name>
+      <name>نام</name>
       <multiValue>Multi Value</multiValue>
-      <value>Value</value>
-      <action>Action</action>
+      <value>مقدار</value>
+      <action>اقدام</action>
     </header>
     <label>
       <binary>Binary Data</binary>
@@ -705,10 +705,10 @@
   <UIPropertyForm>
     <title>Add/Edit Property</title>
     <label>
-      <name>Name:</name>
-      <type>Type:</type>
+      <name>نام:</name>
+      <type>نوع:</type>
       <value>Value:</value>
-      <upload>Upload:</upload>
+      <upload>آپلود:</upload>
       <namespace>Namespace:</namespace>
       <multiple>Multiple:</multiple>
       <property_select>Add New Property:</property_select>
@@ -727,14 +727,14 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>تنظیم مجدد</Reset>
     </action>
     <msg>
       <name-invalid>Please enter the property name.</name-invalid>
       <unable-create>Cannot add properties.</unable-create>
       <value-invalid>Please enter the value.</value-invalid>
-      <node-checkedin>You must check out this item before adding a property.</node-checkedin>
-      <can-not-add>You can't add properties to this item. This is only allowed for the type nt:unstructured.</can-not-add>
+      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
+      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
       <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
       <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
       <propertyValu-null>Some values may be null.</propertyValu-null>
@@ -752,7 +752,7 @@
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
+        <Edit>ویرایش</Edit>
         <Delete>Remove Permission</Delete>
       </title>
     </action>
@@ -760,8 +760,8 @@
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <remove>حذف</remove>
+      <action>اقدام</action>
     </header>
     <msg>
       <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
@@ -784,7 +784,7 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIGroupSelector>انتخاب کاربر</UIGroupSelector>
       <UIPermissionSelector>Select Member</UIPermissionSelector>
       <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
@@ -792,32 +792,32 @@
   <UIGroupSelector>
     <label>
       <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectUser>انتخاب کاربر</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this item and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>کاربر یا گروه</userOrGroup>
       <read>Read Right</read>
       <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission</title>
+    <title>Add a permission to that node</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>تنظیم مجدد</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
       <userOrGroup-required>Please select a user or group before saving this permission.</userOrGroup-required>
       <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <access-denied>دسترسی رد شد. شما نمی توانید این مجوز را حذف کنید.</access-denied>
     </msg>
   </UIPermissionForm>
 
@@ -829,14 +829,14 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Name</name>
+      <name>نام</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <prop-name>نام</prop-name>
+      <prop-type>نوع</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
@@ -844,9 +844,9 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def-name>نام</node-def-name>
       <node-def-opv>OPV</node-def-opv>
-      <node-def-ac>AC</node-def-ac>
+      <node-def-ac>ایجاد خودکار</node-def-ac>
       <node-def-man>MAN</node-def-man>
       <node-def-pr>PR</node-def-pr>
       <node-def-dnt>DNT</node-def-dnt>
@@ -876,17 +876,17 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>جستجو</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>این کلمه مجاز نمی باشد.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Search</Search>
+      <Search>جستجو</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -899,8 +899,8 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <not-found>هیچ نتیجه ای در بر نداشت.</not-found>
+      <keyword-not-allow>این کلمه مجاز نمی باشد.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
       <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
@@ -914,18 +914,18 @@
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this document.</not-support>
-      <empty>No results found.</empty>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت.</empty>
       <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -939,148 +939,148 @@
       <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>View this node</View>
       <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this document</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You can't view this document, either because this template is not supported or because access is denied.</access-denied>
+      <not-support>There is no View template for this node</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت.</empty>
+      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
       <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
       <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
+      <View>مشاهده این گره</View>
       <OpenFolder>Go to Folder</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this item</not-support>
+      <not-support>هیچ قالب نمایی برای این گره وجود ندارد</not-support>
       <empty>No results found</empty>
-      <access-denied>You can't view this item, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <query-invalid>جستار غیرمعتبر می باشد</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
+      <datecreatedASC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب صعودی</datecreatedASC>
+      <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this item</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>View this Node</View>
+      <OpenFolder>برو به پوشه</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>هیچ قالب نمایی برای این گره وجود ندارد.</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت.</empty>
+      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <query-invalid>جستار غیرمعتبر می باشد.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
       <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
+      <datecreatedASC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب صعودی</datecreatedASC>
+      <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>مشاهده این گره</View>
+      <OpenFolder>برو به پوشه</OpenFolder>
       <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this item.</not-support>
-      <empty>No results found</empty>
-      <access-denied>You can't view this item, either because it has no View template or because you don't have access to it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>هیچ قالب نمایی برای این گره وجود ندارد.</not-support>
+      <empty>هیچ نتیجه ای در بر نداشت</empty>
+      <access-denied>شما قادر به مشاهده این گره نیستید، زیرا این قالب پشتیبانی نمی شود یا اینکه دسترسی رد شده است.</access-denied>
+      <query-invalid>جستار غیرمعتبر می باشد.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <path>مسیر</path>
+      <action>اقدام</action>
+      <shortcutPath>مسیر</shortcutPath>
+      <type>نوع</type>
+      <dateCreated>تاریخ ایجاد</dateCreated>
+      <score>امتیاز</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>مرتب سازی بر اساس نوع سند به ترتیب صعودی</typeASC>
+      <typeDESC>مرتب سازی بر اساس نوع سند به ترتیب نزولی</typeDESC>
+      <scoreASC>مرتب سازی بر اساس امتیاز به ترتیب صعودی</scoreASC>
+      <scoreDESC>مرتب سازی بر اساس امتیاز به ترتیب نزولی</scoreDESC>
+      <nameASC>مرتب سازی بر اساس نام به ترتیب صعودی</nameASC>
+      <nameDESC>مرتب سازی بر اساس نام به ترتیب نزولی</nameDESC>
+      <datecreatedASC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب صعودی</datecreatedASC>
+      <datecreatedDESC>مرتب سازی بر اساس تاریخ ایجاد به ترتیب نزولی</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Item</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>مشاهده این گره</View>
+      <OpenFolder>برو به پوشه</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
+      <RestoreFromTrash>بازیابی از سطل زباله</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Properties</metadataProperty>
+      <metadataProperty>ویژگیها</metadataProperty>
       <operator>Operator</operator>
       <contains>Contain Value</contains>
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Add</Add>
+      <Add>افزودن</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1095,13 +1095,13 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Add</label-Add>
+      <label-Add>افزودن</label-Add>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <ConstraintsForm>
     <action>
-      <Add>Add</Add>
+      <Add>افزودن</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </ConstraintsForm>
@@ -1109,42 +1109,42 @@
     <tooltip>
       <AddMetadataType>Add Property</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>افزودن دسته</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operator</operator>
-      <exactlyPro-properties>Property</exactlyPro-properties>
-      <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
-      <containPro-properties>Property</containPro-properties>
-      <containPro-Contain>Contain</containPro-Contain>
-      <notContainPro-properties>Property</notContainPro-properties>
-      <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>From</ConstraintOption-From>
-      <ConstraintOption-To>To</ConstraintOption-To>
-      <DocumentType-label>Document Type</DocumentType-label>
-      <Category-label>Category</Category-label>
-      <created>Created</created>
-      <modified>Modified</modified>
-      <and>And</and>
-      <or>Or</or>
+      <operator>عملگر</operator>
+      <exactlyPro-properties>ویژگی</exactlyPro-properties>
+      <exactlyPro-ContainExactly>دقیقا شامل</exactlyPro-ContainExactly>
+      <containPro-properties>ویژگی</containPro-properties>
+      <containPro-Contain>شامل</containPro-Contain>
+      <notContainPro-properties>ویژگی</notContainPro-properties>
+      <notContainPro-notContain>شامل نمی شود</notContainPro-notContain>
+      <ConstraintOption-From>از</ConstraintOption-From>
+      <ConstraintOption-To>به</ConstraintOption-To>
+      <DocumentType-label>نوع سند</DocumentType-label>
+      <Category-label>دسته</Category-label>
+      <created>ایجاد شده</created>
+      <modified>تغییر یافته</modified>
+      <and>و</and>
+      <or>یا</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
     <title>
-      <UINodeTypeSelectForm>Select Node Type</UINodeTypeSelectForm>
+      <UINodeTypeSelectForm>انتخاب نوع گره</UINodeTypeSelectForm>
     </title>
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      <UICategoryManagerSearch>افزودن دسته به جستجو</UICategoryManagerSearch>
+      <UIOneNodePathSelector>انتخاب دسته</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
     <title>
-      <UISaveQueryForm>Query Form</UISaveQueryForm>
+      <UISaveQueryForm>فرم جستار</UISaveQueryForm>
     </title>
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
@@ -1155,46 +1155,46 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter:</filter>
-      <result>Results:</result>
+      <filter>فیلتر:</filter>
+      <result>نتایج:</result>
     </label>
     <title>
-      <result>Filter</result>
+      <result>فیلتر</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
+      <label-Select>انتخاب</label-Select>
       <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>هیچ نتیجه ای در بر نداشت.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name:</name>
-      <selectBox>Select Query Style:</selectBox>
-      <query>Query:</query>
+      <name>نام:</name>
+      <selectBox>استیل جستار را انتخاب کنید:</selectBox>
+      <query>جستار:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Search</Search>
+      <Search>جستجو</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
-      <name-invalid>The name is invalid.</name-invalid>
-      <query-added>The query was added successfully.</query-added>
-      <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
-      <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
-      <value-save-null>Please enter your query statement.</value-save-null>
-      <query-name-null>Please enter your query name.</query-name-null>
+      <name-invalid>نام نا معتبر است.</name-invalid>
+      <query-added>جستار با موفقیت اضافه شد.</query-added>
+      <save_unSuccessful>جستار ذخیره نمی شود. عبارت وارد شده نامعتبر بوده و یا نام جستار در حال حاضر وجود دارد.</save_unSuccessful>
+      <invalid-queryStatement>عبارت ورودی جستار نامعتبر است.</invalid-queryStatement>
+      <value-save-null>لطفاً عبارت جستار خود را وارد کنید.</value-save-null>
+      <query-name-null>لطفاً نام جستار خود را وارد کنید.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
-      <selectBox>Select Query Style</selectBox>
-      <query>Query</query>
+      <name>نام</name>
+      <selectBox>استیل جستار را انتخاب کنید</selectBox>
+      <query>جستار</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1203,73 +1203,73 @@
   </EditQueryForm>
   <EditSavedQueryForm>
     <title>
-      <EditQueryForm>Edit Query Form</EditQueryForm>
+      <EditQueryForm>ویرایش فرم جستار</EditQueryForm>
     </title>
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>نوع فراداده</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Add</Add>
+      <Add>افزودن</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>انتخاب ویژگی</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>انتخاب ویژگی</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>انتخاب ویژگی</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>نوع فراداده</metadataType>
     </label>
-    <pLabel>Properties:</pLabel>
+    <pLabel>ویژگیها:</pLabel>
     <action>
-      <Add>Add</Add>
+      <Add>افزودن</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>
-      <UICompareExactlyForm>Filter Form</UICompareExactlyForm>
+      <UICompareExactlyForm>فرم فیلتر</UICompareExactlyForm>
     </title>
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
-      <language>Language</language>
-      <query>Query</query>
-      <action>Actions</action>
-      <path>Path</path>
+      <name>نام</name>
+      <language>زبان</language>
+      <query>جستار</query>
+      <action>اقدامات</action>
+      <path>مسیر</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Data not found.</not-found>
+      <not-found>داده یافت نشد.</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>اقدام</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Please enter query name to save.</query-name-null>
-      <access-denied>Access denied. You do not have the add permission needed to save this query.</access-denied>
-      <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
+      <query-name-null>لطفا نام جستار را برای ذخیره کردن وارد نمایید.</query-name-null>
+      <access-denied>دسترسی رد شد. شما اجازه افزودن دسترسی ذخیره کردن در این جستار را ندارید.</access-denied>
+      <save-failed>جستار ذخیره نشد، عبارت ورودی جستار نامعتبر بوده و یا نام جستار وجود دارد.</save-failed>
     </msg>
     <label>
-      <queryName>Query name</queryName>
+      <queryName>نام جستار</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1278,30 +1278,30 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
-      <type>Type</type>
-      <statement>Statement</statement>
-      <permission>Permissions</permission>
-      <action>Actions</action>
+      <name>نام</name>
+      <type>نوع</type>
+      <statement>عبارت</statement>
+      <permission>مجوزها</permission>
+      <action>اقدامات</action>
     </header>
     <tooltip>
-      <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Execute>اجرا</Execute>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
     </tooltip>
     <label>
-      <no-children>No query is saved.</no-children>
+      <no-children>هیچ جستاری ذخیره نشده است.</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <confirm-delete-query>آیا از حذف این جستار اطمینان دارید؟</confirm-delete-query>
+      <not-result-found>هیچ نتیجه ای در بر نداشت.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
     <label>
-      <results>Results</results>
-      <of-about>of about</of-about>
-      <of>of</of>
+      <results>نتایج</results>
+      <of-about>حدود</of-about>
+      <of>از</of>
     </label>
   </UIQueryResultPageIterator>
   <!--
@@ -1311,17 +1311,17 @@
   -->
   <UIExportNode>
     <label>
-      <format>Format</format>
-      <nodePath>Path to Export</nodePath>
-      <zip>Zip</zip>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
+      <format>فرمت</format>
+      <nodePath>مسیر استخراج</nodePath>
+      <zip>فایل های فشرده</zip>
+      <systemView>نمای سیستم</systemView>
+      <documentView>نمای سند</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>استخراج</Export>
     </action>
-    <title>Export</title>
+    <title>استخراج گره</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1330,13 +1330,13 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Selector</UIUserContainer>
+      <UIUserContainer>انتخابگر مجوز</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
     <title>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
-      <UIOneNodePathSelector>Add Categories</UIOneNodePathSelector>
+      <UICategoriesSelector>افزودن دسته</UICategoriesSelector>
+      <UIOneNodePathSelector>افزودن دسته</UIOneNodePathSelector>
     </title>
   </UIPopupTaxonomy>
   <!--
@@ -1351,36 +1351,36 @@
     </summary>
     <tooltip>
       <original>Original Version</original>
-      <version>Version</version>
+      <version>نسخه</version>
       <baseVersion>current draft</baseVersion>
-      <addLabel>Add Label</addLabel>
-      <removeLable>Remove Label</removeLable>
-      <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version</viewVersion>
-      <deleteVersion>Delete Version</deleteVersion>
-      <compareVersion>Compare with the  base version</compareVersion>
+      <addLabel>افزودن برچسب</addLabel>
+      <removeLable>حذف برچسب</removeLable>
+      <restoreVersion>بازیابی نسخه</restoreVersion>
+      <viewVersion>مشاهده اطلاعات نسخه</viewVersion>
+      <deleteVersion>حذف نسخه</deleteVersion>
+      <compareVersion>مقایسه با نسخه پایه</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>The view template is not supported.</have-no-view-template>
-      <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
+      <have-no-view-template>مشاهده قالب پشتیبانی نمی شود.</have-no-view-template>
+      <cannot-remove-version>قادر به حذف نسخه پایه نمی باشید.</cannot-remove-version>
       <error-removing-version>An error occurred while deleting this version.</error-removing-version>
       <error-removing-referenced-version>This version is referenced and can't be removed.</error-removing-referenced-version>
       <confirm-restore>Are you sure you want to restore this version?</confirm-restore>
-      <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this document before restoring.</not-checked-out>
-      <invalid-item-state>You can't restore this version, either because one or more items were deleted or moved by another session.</invalid-item-state>
+      <confirm-delete>آیا از حذف این نسخه اطمینان دارید؟</confirm-delete>
+      <not-checked-out>لطفا قبل از بازیابی گره، آن را ترخیص کنید.</not-checked-out>
+      <invalid-item-state>شما نمی توانید این نسخه را بازیابی نمایید، چون یک یا چند آیتم آن حذف شده و یا به جلسه دیگری منتقل شده اند.</invalid-item-state>
     </msg>
     <action>
       <close>#{word.close}</close>
-      <close-view>Close View</close-view>
+      <close-view>بستن نما</close-view>
       <compare-versions>Compare selected versions</compare-versions>
     </action>
     <labels>
-      <version>Version</version>
-      <date>Date</date>
+      <version>نسخه</version>
+      <date>تاریخ</date>
       <author>Modified By</author>
-      <summary>Summary</summary>
-      <action>Action</action>
+      <summary>خلاصه</summary>
+      <action>اقدام</action>
     </labels>
   </UIVersionInfo>
   <!--
@@ -1390,40 +1390,40 @@
   -->
   <UIAuditingInfo>
     <msg>
-      <noVersion>No Version</noVersion>
+      <noVersion>بدون نسخه</noVersion>
     </msg>
     <eventName>
-      <e_1>Added</e_1>
-      <e_2>Document Removed</e_2>
-      <e_4>Property Added</e_4>
-      <e_16>Property Changed</e_16>
-      <e_8>Property Removed</e_8>
+      <e_1>گره اضافه شده</e_1>
+      <e_2>حذف گره</e_2>
+      <e_4>ویژگی اضافه شده</e_4>
+      <e_16>تغییر ويژگي</e_16>
+      <e_8>حذف ویژگی</e_8>
       <e_32>#{word.save}</e_32>
-      <e_64>Move</e_64>
-      <e_128>Copy</e_128>
-      <e_256>Add Mixin</e_256>
-      <e_512>Remove Mixin</e_512>
-      <e_1024>Clone</e_1024>
-      <e_2048>Update</e_2048>
-      <e_4096>Import</e_4096>
-      <e_8192>Check in</e_8192>
-      <e_16384>Check out</e_16384>
-      <e_32768>Restore</e_32768>
-      <e_65536>Merge</e_65536>
-      <e_131072>Cancel Merge</e_131072>
-      <e_262144>Done Merge</e_262144>
-      <e_524288>Add Version Label</e_524288>
-      <e_1048576>Remove Version Label</e_1048576>
-      <e_2097152>Remove Version</e_2097152>
-      <e_4194304>Lock</e_4194304>
-      <e_8388608>Unlock</e_8388608>
-      <e_16777216>Read</e_16777216>
+      <e_64>انتقال</e_64>
+      <e_128>کپی</e_128>
+      <e_256>افزودن Mixin</e_256>
+      <e_512>حذف Mixin</e_512>
+      <e_1024>نمونه سازی</e_1024>
+      <e_2048>به روز رسانی</e_2048>
+      <e_4096>وارد کردن</e_4096>
+      <e_8192>رزرو</e_8192>
+      <e_16384>ترخیص</e_16384>
+      <e_32768>بازيابي</e_32768>
+      <e_65536>ادغام</e_65536>
+      <e_131072>لغو ادغام</e_131072>
+      <e_262144>اتمام ادغام</e_262144>
+      <e_524288>افزودن برچسب نسخه</e_524288>
+      <e_1048576>حذف برچسب نسخه</e_1048576>
+      <e_2097152>حذف نسخه</e_2097152>
+      <e_4194304>قفل</e_4194304>
+      <e_8388608>باز کردن قفل</e_8388608>
+      <e_16777216>خواندن</e_16777216>
     </eventName>
     <label>
-      <operation>Operation</operation>
-      <userName>Username</userName>
-      <date>Date</date>
-      <version>Version</version>
+      <operation>عملیات</operation>
+      <userName>نام کاربری</userName>
+      <date>تاریخ</date>
+      <version>نسخه</version>
     </label>
   </UIAuditingInfo>
 
@@ -1434,13 +1434,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this document.</note>
-      <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <note>نسخه بندی برای این گره فعال شده است.</note>
+      <question>آیا مطمئنید که می خواهید آن را فعال کنید؟</question>
+      <button-active>فعال کردن</button-active>
       <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
-      <access-denied>You don't have permission to activate versioning on this document</access-denied>
+      <access-denied>شما مچوز لازم برای فعال کردن نسخه بندی در این گره را ندارید</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1450,21 +1450,21 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <LifecycleName>نام</LifecycleName>
+      <LifecycleDesc>شرح</LifecycleDesc>
+      <action>اقدام</action>
     </header>
     <action>
       <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
-        <empty>No publication plugins found.</empty>
+        <empty>هیچ افزونه انتشاری یافت نشد.</empty>
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only documents can be enrolled.</node-type-invalid>
-      <already-enroled>This document has already been enrolled.</already-enroled>
+      <node-type-invalid>تنها نوع گره سند را می توان ثبت نمود.</node-type-invalid>
+      <already-enroled>این سند در حال حاضر ثبت شده است.</already-enroled>
     </msg>
   </UIActivePublication>
   <!--
@@ -1474,11 +1474,11 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this document.</note>
-      <question>Are you sure you want to activate?</question>
+      <note>ممیزی برای این گره فعال نشده است.</note>
+      <question>آیا مطمئنید که می خواهید آن را فعال کنید؟</question>
     </label>
     <action>
-      <activate>Activate</activate>
+      <activate>فعال کردن</activate>
       <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
@@ -1490,10 +1490,10 @@
   <UIDiff>
     <label>
       <backTo>Back to version history</backTo>
-      <diffTitle>Compare between two versions</diffTitle>
+      <diffTitle>مقایسه بین دو نسخه</diffTitle>
       <noContent>There is no content to compare</noContent>
-      <compareVerion>Version</compareVerion>
-      <can-not-compare>Failed to compare two versions</can-not-compare>
+      <compareVerion>نسخه</compareVerion>
+      <can-not-compare>عدم موفقیت در مقایسه دو نسخه</can-not-compare>
       <compare-unavailable>Version comparison is not available for this document</compare-unavailable>
       <DateChange>On {0}</DateChange>
       <PreviousAndNextCompare>Change from {0} to {1}</PreviousAndNextCompare>
@@ -1508,25 +1508,25 @@
   -->
   <UIImportNode>
     <label>
-      <format>Format</format>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <format>فرمت</format>
+      <systemView>نمای سیستم</systemView>
+      <documentView>نمای سند</documentView>
+      <upload>آپلود فایل</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Import>وارد کردن</Import>
     </action>
-    <title>Import</title>
+    <title>وارد کردن گره</title>
     <msg>
-      <import-successful>Imported successfully.</import-successful>
-      <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
-      <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
-      <xml-invalid>There is an invalid character at position [row, column]:{0} in {1} file</xml-invalid>
-      <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
-      <access-denied>Access denied. You are not allowed to import there.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed at this location.</constraint-violation-exception>
-      <item-exists-exception>An incoming item has the same UUID as an existing item in the workspace.</item-exists-exception>
+      <import-successful>با موفقیت وارد شده.</import-successful>
+      <filename-invalid>برای وارد کردن، یک فایل .xml را در فیلد 'آپلود فایل' جایگذاری نمایید.</filename-invalid>
+      <filetype-error>قادر به وارد کردن فایل آپلود شده نمی باشید. فایل xml ممکن است نامعتبر باشد.</filetype-error>
+      <xml-invalid>یک حرف نامعتبر در موقعیت [سطر، ستون] وجود دارد:{0} در پرونده {1}</xml-invalid>
+      <mimetype-invalid>فقط فایل های .xml یا فایل های فشرده را می توان وارد کرد.</mimetype-invalid>
+      <access-denied>دسترسی رد شد. مجوز وارد کردن وجود ندارد.</access-denied>
+      <constraint-violation-exception>وارد کردن داده ممکن نیست. نوع '{0}' در این محل مجاز نیست.</constraint-violation-exception>
+      <item-exists-exception>یک گره قابل ارجاع ورودی، UUID یکسان با گره موجود در فضای کار را دارد.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1536,16 +1536,16 @@
   -->
   <UILabelForm>
     <label>
-      <label>Label</label>
+      <label>برچسب</label>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Label</title>
+    <title>افزودن برچسب</title>
     <msg>
-      <label-invalid>The label contains some invalid characters.</label-invalid>
-      <label-exist>'{0}' already exists.</label-exist>
+      <label-invalid>برچسب حاوی کاراکتر های نامعتبر است.</label-invalid>
+      <label-exist>'{0}' در حال حاضر وجود دارد.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1554,12 +1554,12 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Remove Label</title>
+    <title>حذف برچسب</title>
     <label>
-      <label>Select Label</label>
+      <label>انتخاب برچسب</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>حذف</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1569,24 +1569,24 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Children Tree</title>
+    <title>درخت فرزند ها</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node Type</nodeType>
-      <nodeName>Name</nodeName>
-      <VersionNumber>Version Number</VersionNumber>
-      <VersionLabels>Version Labels</VersionLabels>
-      <VersionDate>Version Date</VersionDate>
-      <PropertyName>Property Name</PropertyName>
-      <PropertyValue>Property Values</PropertyValue>
+      <nodeType>نوع گره</nodeType>
+      <nodeName>نام گره</nodeName>
+      <VersionNumber>شماره نسخه</VersionNumber>
+      <VersionLabels>برچسب های نسخه</VersionLabels>
+      <VersionDate>تاریخ نسخه</VersionDate>
+      <PropertyName>نام ويژگي</PropertyName>
+      <PropertyValue>مقادیر ویژگی</PropertyValue>
     </label>
     <msg>
-      <not-supported>This function is not supported for versioning.</not-supported>
+      <not-supported>این عملکرد برای نسخه بندی پشتیبانی نمی شود.</not-supported>
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Children Name</title>
+    <title>نام فرزندان</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1599,38 +1599,38 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>دسته بندی های مورد ارجاع</UICategoriesAddedList>
+        <UIOneNodePathSelector>انتخاب دسته</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>Category</path>
-      <action>Actions</action>
+      <path>دسته</path>
+      <action>اقدامات</action>
     </header>
     <msg>
-      <access-denied>Access denied. You don't have access permission.</access-denied>
-      <confirm-delete>Are you sure you want to delete this reference?</confirm-delete>
+      <access-denied>دسترسی رد شد. شما مجوز دسترسی به این گره را ندارید.</access-denied>
+      <confirm-delete>آیا از حذف این ارجاع اطمینان دارید؟</confirm-delete>
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>حذف</Delete>
       </title>
     </action>
     <label>
-      <category>Category</category>
-      <actions>Action</actions>
-      <delete>Delete</delete>
+      <category>دسته</category>
+      <actions>اقدام</actions>
+      <delete>حذف</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>نام</name>
+      <action>اقدام</action>
     </header>
     <info>
-      <child-not-found>This item doesn't have any child.</child-not-found>
+      <child-not-found>این گره هیچ گره فرزندی ندارد.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1644,28 +1644,28 @@
     </action>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select Relation</UIOneNodePathSelector>
+        <UIOneNodePathSelector>انتخاب ارتباط</UIOneNodePathSelector>
       </label>
     </tab>
     <tab>
       <label>
-        <UIRelationsAddedList>Relation List</UIRelationsAddedList>
+        <UIRelationsAddedList>لیست ارتباطات</UIRelationsAddedList>
       </label>
     </tab>
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relations</path>
-      <action>Actions</action>
+      <path>ارتباطات</path>
+      <action>اقدامات</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>حذف</Delete>
       </title>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this relation?</confirm-delete>
-      <can-not-add-itself>You cannot add a relation to itself.</can-not-add-itself>
+      <confirm-delete>آیا از حذف این ارتباط اطمینان دارید؟</confirm-delete>
+      <can-not-add-itself>نمی توانید یک رابطه را به خود آن اضافه کنید.</can-not-add-itself>
     </msg>
   </UIRelationsAddedList>
   <!--
@@ -1675,19 +1675,19 @@
   -->
   <UIClipboard>
     <header>
-      <path>Path</path>
+      <path>مسیر</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>اقدام</action>
     </header>
     <label>
-      <nocommand>There are no items in the clipboard.</nocommand>
+      <nocommand>هیچ موردی در کلیپ برد وجود ندارد.</nocommand>
     </label>
     <action>
-      <clearall>Clear All</clearall>
+      <clearall>پاک کردن همه</clearall>
     </action>
     <msg>
-      <unable-pasted>Can't paste this item.</unable-pasted>
-      <node-pasted>{0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>این گره قابل انتقال نیست.</unable-pasted>
+      <node-pasted>گره '{0}' به محل "{1}" جابجا شده است. این عملیات ذخیره شده است.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1702,9 +1702,9 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template from the list below</selectTemplate>
-      <ThumbnailView>Thumbnail View</ThumbnailView>
-      <ListView>List View</ListView>
+      <selectTemplate>قالب خود را از لیست زیر انتخاب کنید</selectTemplate>
+      <ThumbnailView>نمای بندانگشتی</ThumbnailView>
+      <ListView>نمای لیست</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1714,29 +1714,29 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>افزودن سند جدید</title>
     <action>
       <Save>#{word.save}</Save>
-      <SaveAndClose>Save &amp; Close</SaveAndClose>
-      <ChangeType>Change Content Type</ChangeType>
-      <Fullscreen>Fullscreen</Fullscreen>
+      <SaveAndClose>ذخیره کن و ببند</SaveAndClose>
+      <ChangeType>تغییر نوع محتوا</ChangeType>
+      <Fullscreen>تمام صفحه</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
 <tooltip>
-<FullScreen>Maximize/Minimize</FullScreen>
+<FullScreen>بزرگنمایی/کوچک نمایی</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current folder before adding a new item.</in-versioning>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <value-invalid>'{0}' is a needed value.</value-invalid>
-      <repository-exception>An error occurred while saving the document.</repository-exception>
+      <cannot-save>خطایی هنگام ذخیره سند رخ داده است.</cannot-save>
+      <in-versioning>لطفاً گره حاضر را قبل از افزودن گره جدید ترخیص نمایید.</in-versioning>
+      <not-support>قالب '{0}' را نمی توان بارگذاری کرد.</not-support>
+      <value-invalid>'{0}' باید مقدار داشته باشد.</value-invalid>
+      <repository-exception>خطایی هنگام ذخیره سند رخ داده است.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You don't have permission to add a new document to this folder.</repository-exception-permission>
-      <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
-      <item-not-found>Document not found. This document (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <repository-exception-permission>شما مجوز افزودن یک سند جدید به این گره را ندارید.</repository-exception-permission>
+      <not-allowed-same-name-sibling>قادر به ذخیره این نوشتار نمی باشید. نمی توان از یک نام یکسان در گره های هم رده استفاده نمود.</not-allowed-same-name-sibling>
+      <numberformat-exception>سند ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <item-not-found>آیتم یافت نشد. این گره (یا گره والد آن) حذف شده است. لطفاً روی دکمه تازه سازی کلیک کنید.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1747,7 +1747,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>اطلاعات</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1765,10 +1765,10 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Save Query Form</title>
+    <title>ذخیره فرم جستار</title>
     <label>
-      <query>Query</query>
-      <name>Query Name</name>
+      <query>جستار</query>
+      <name>نام جستار</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1782,8 +1782,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>ویرایش اقدام</UIActionForm>
+      <EditFormAction>ویرایش اقدام</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1794,24 +1794,24 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
-  <lifecycle>Life Cycle</lifecycle>
-  <triggeredaction>Triggered Action</triggeredaction>
-      <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <description>شرح</description>
+  <lifecycle>چرخه</lifecycle>
+  <triggeredaction>اقدام در حال انجام</triggeredaction>
+      <instanceOf>نمونه ای از نوع اقدام</instanceOf>
+      <action>اقدام</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this item.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The '{0}' template is null or empty.</template-empty>
-      <template-null>The template is either null or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <remove-popup-first>قبل از حذف نود باید پنجره pop-up ویرایش را ببندید.</remove-popup-first>
+      <confirm-delete-action>آیا مطمئنید که می خواهید این اقدام را حذف کنید؟</confirm-delete-action>
+      <template-empty>قالب '{0}' خالی است.</template-empty>
+      <template-null>قالب خالی است و یا شما به آن دسترسی ندارید.</template-null>
+      <access-denied>دسترسی رد شد. برای انجام این عمل مجوز ندارید.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <View>مشاهده</View>
+      <Edit>ویرایش</Edit>
+      <Delete>حذف</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -1820,43 +1820,43 @@
       <Back>#{word.back}</Back>
     </action>
     <label>
-      <name>Action Form</name>
+      <name>فرم اقدام</name>
     </label>
     <msg>
-      <repository-exception>You cannot save this action. The name provided has some special characters.</repository-exception>
-      <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
-      <unable-add-action>Cannot add this action.</unable-add-action>
-      <unable-add>Can't add this action. This item is either the root folder or you don't have the permission to edit.</unable-add>
-      <not-support>Dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
-      <lifecycle-invalid>You cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
+      <repository-exception>نمی توانید این اقدام را ذخیره کنید. نام وارد شده شامل کاراکترهای ویژه است.</repository-exception>
+      <numberformat-exception>اقدام ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <existed-action>نام اقدام '{0}' در حال حاضر وجود دارد. لطفاً یکی دیگر را انتخاب کنید.</existed-action>
+      <unable-add-action>این اقدام را نمی توان اضافه کرد.</unable-add-action>
+      <unable-add>این اقدام را نمی توان اضافه کرد. این گره ریشه یا است یا شما به آن دسترسی ندارید.</unable-add>
+      <not-support>گفتگوی '{0}' پشتیبانی نمی شود.</not-support>
+      <no-permission-add>دسترسی رد شد. شما مجوز افزودن اقدام در اینجا را ندارید.</no-permission-add>
+      <access-denied>دسترسی رد شد. شما مجوز لازم برای دسترسی به این قالب را ندارید.</access-denied>
+      <lifecycle-invalid>نمی توانید این اقدام را اضافه کنید. مرحله چرخه اقدام نامعتبر است.</lifecycle-invalid>
     </msg>
-    <title>Add/Edit Action</title>
+    <title>افزودن/ویرایش اقدام</title>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>اعتبار سنج</validator>
+      <destPath>با مسیر</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
     <label>
-      <actionType>Create Action of Type</actionType>
+      <actionType>ایجاد اقدام از نوع</actionType>
     </label>
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>انتخاب مکان</UIOneNodePathSelector>
+      <UIPermissionSelector>مرورگر مجوزها</UIPermissionSelector>
+      <UICategoriesSelector>افزودن دسته</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>اعتبار سنج</validator>
+      <destPath>با مسیر</destPath>
     </validator>
-    <title>Action Form</title>
+    <title>فرم اقدام</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1865,19 +1865,19 @@
   -->
   <UIAddressBar>
     <msg>
-      <path-not-found>Path not found.</path-not-found>
-      <access-denied>Access denied. You don't have the permission to read.</access-denied>
-      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+      <path-not-found>مسیر یافت نشد.</path-not-found>
+      <access-denied>دسترسی رد شد. شما حق خواندن این گره را ندارید.</access-denied>
+      <keyword-not-support>کلمه کلیدی نامعتبر است. برخی از کاراکترها معتبر نیستند.</keyword-not-support>
     </msg>
     <label>
-      <exeButton>Go</exeButton>
-      <address>Address:</address>
+      <exeButton>برو</exeButton>
+      <address>آدرس:</address>
     </label>
     <title>
-      <exeButton>Go</exeButton>
-      <backButton>Back</backButton>
-      <showHistory>Show History</showHistory>
-      <changeNode>Change Node</changeNode>
+      <exeButton>برو</exeButton>
+      <backButton>به گره قبلی</backButton>
+      <showHistory>نمایش آدرس تاریخچه</showHistory>
+      <changeNode>تغییر گره</changeNode>
     </title>
   </UIAddressBar>
   <!--
@@ -1887,19 +1887,19 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Watch</Watch>
+      <Watch>پاییدن</Watch>
       <Cancel>#{word.cancel}</Cancel>
-      <Continue>Continue</Continue>
-      <Unwatch>Unwatch</Unwatch>
+      <Continue>ادامه</Continue>
+      <Unwatch>نپاییدن</Unwatch>
     </action>
     <label>
-      <notificationType>Notification Type:</notificationType>
+      <notificationType>نوع اطلاع رسانی:</notificationType>
     </label>
     <msg>
-      <not-support>This notification type is not supported. Please select another type.</not-support>
-      <watching-successfully>You are watching this document.</watching-successfully>
-      <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
-      <node-iswatching>This document is watched.</node-iswatching>
+      <not-support>این نوع اطلاع رسانی پشتیبانی نمی شود. لطفا نوع دیگری را انتخاب کنید.</not-support>
+      <watching-successfully>شما این سند را می پایید.</watching-successfully>
+      <unwatching-successfully>شما از لیست پاییدن با موفقیت خارج شده اید.</unwatching-successfully>
+      <node-iswatching>این سند در حال پاییده شدن است.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1909,24 +1909,24 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tag Names:</names>
-      <linked>Linked Tags:</linked>
+      <names>نام برچسب ها:</names>
+      <linked>برچسب های مرتبط:</linked>
     </label>
     <action>
-      <AddTag>Add</AddTag>
+      <AddTag>افزودن</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>The tag name '{0}' already exists.</name-exist>
-      <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
+      <name-exist>نام برچسب '{0}' در حال حاضر وجود دارد.</name-exist>
+      <tagName-invalid>نام برچسب شامل کاراکترهای نامعتبر است.</tagName-invalid>
       <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
-      <tag-name-empty>Your tag name is empty</tag-name-empty>
-      <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
-      <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
-      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
+      <tag-name-empty>نام برچسب خالی است</tag-name-empty>
+      <tag-name-duplicate>نام برچسب ورودی تکراری است.</tag-name-duplicate>
+      <tagName-too-long>یکی از برچسب های وارد شده بیش از حد طولانی است. نام برچسب باید کمتر از 30 کاراکتر باشد.</tagName-too-long>
+      <path-not-found>این برچسب تغییر داده یا حذف شده است. روی دکمه تازه سازی کلیک کنید.</path-not-found>
     </msg>
     <introduction>
-      <tagName>Separate multiple tags by commas ","</tagName>
+      <tagName>برچسب های چندتایی را با "،" از هم جدا کنید.</tagName>
     </introduction>
   </UITaggingForm>
 
@@ -1937,7 +1937,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>The document does not support this view.</path-not-found>
+      <path-not-found>گره این نما را پشتیبانی نمی کند.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -1953,12 +1953,12 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Add/Edit Properties</UIViewMetadataForm>
+      <UIViewMetadataForm>افزودن/ویرایش ویژگی ها</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. Either you are not the owner or don't have edit permission.</access-denied>
+      <access-denied>دسترسی رد شد. شما یا مالک این گره نیستید و یا مجوز ویرایش آن را ندارید.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -1973,26 +1973,26 @@
   </ECMPhoneFormatValidator>
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <Invalid-char>فیلد '{0}' شامل کاراکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <empty-input>مقدار فیلد '{0}' خالي است.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Field '{0}' with value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>فیلد '{0}' با مقدار '{1}' نامعتبر است.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Your cron expression is invalid. Please check the syntax.</invalid-input>
+    <invalid-input>عبارت cron شما نامعتبر است. لطفا آن را از نظر نحوی بررسی کنید.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please fill in the field '{0}'.</empty-input>
+      <empty-input>لطفا فیلد '{0}' را پر کنید.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
     <msg>
-      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+      <non-categories>دسته ها اشتباه هستند. لطفاً دسته های درست را انتخاب کنید.</non-categories>
     </msg>
   </CategoryValidator>
   <!--
@@ -2001,25 +2001,25 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>Action failed. There are still some reference items in the workspace.</msg>
+    <msg>اقدام انجام نشد. هنوز تعدادی ارجاع به آیتم در فضای کار وجود دارد.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>This item already exists.</msg>
+    <msg>این آیتم در حال حاضر وجود دارد.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Access denied. You do not have permission to perform this action.</msg>
+    <msg>دسترسی رد شد. برای انجام این عمل مجوز ندارید.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Access denied.</msg>
+    <msg>دسترسی ممنوع.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Item not found. It may have been removed or changed.</msg>
+    <msg>موردی یافت نشد. ممکن است حذف و یا تغییر داده شده است.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Path not found. It may have been removed or changed.</msg>
+    <msg>مسیر یافت نشد. ممکن است حذف و یا تغییر داده شده است.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>You cannot perform this action due to some constraints.</msg>
+    <msg>به دلیل برخی محدودیت ها قادر به انجام این کار نیستید.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -2028,19 +2028,19 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Published</published>
-      <non-published>Unpublished</non-published>
-      <public>Public</public>
-      <private>Private</private>
-      <state>State</state>
-      <visibility>Visibility</visibility>
-      <nodeName>Name:</nodeName>
-      <lifecycleName>Lifecycle Name</lifecycleName>
-      <stateName>State Name</stateName>
+      <published>منتشرشده</published>
+      <non-published>منتشر نشده</non-published>
+      <public>عمومی</public>
+      <private>خصوصی</private>
+      <state>حالت</state>
+      <visibility>وضعیت نمایش</visibility>
+      <nodeName>نام گره:</nodeName>
+      <lifecycleName>نام چرخه</lifecycleName>
+      <stateName>نام وضعیت</stateName>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
+      <UnsubcriberLifeCycle>لغو عضویت کننده</UnsubcriberLifeCycle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
@@ -2051,14 +2051,14 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodeInfo>Root Path:</rootNodeInfo>
-      <rootPath>Root Path:</rootPath>
+      <workspaceName>فضای کار:</workspaceName>
+      <rootNodeInfo>مسیر ریشه:</rootNodeInfo>
+      <rootPath>مسیر ریشه:</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>انتخاب گر گره</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2068,28 +2068,28 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>آدرس ایمیل اشتباه است.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>آیا مطمئنید که می خواهید حذف کنید؟</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>The value in the field 'Repeat Count' is invalid. Only integers or -1 are allowed.</invalid-value>
+      <invalid-value>مقدار فیلد 'تعداد تکرار' نامعتبر است. فقط اعداد صحیح یا -1 مجاز هستند.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>The value in the field 'Time Interval' is invalid. Only long types are allowed.</invalid-value>
+      <invalid-value>مقدار فیلد 'فاصله' نامعتبر است. فقط اعداد صحیح مجاز هستند.</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
@@ -2100,8 +2100,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
-      <Invalid-char>The field '{0}'contains some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>مقدار فیلد '{0}' خالي است.</empty-input>
+      <Invalid-char>فیلد '{0}' شامل کاراکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2111,13 +2111,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>The value of this field is null or empty.</empty-input>
-      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
-      <Invalid-char2>The number must be followed by the character '~'.</Invalid-char2>
-      <Invalid-char1>The number following the character '~' must between 0 and 1.</Invalid-char1>
-      <Invalid-char3>The number must be followed by the character '^'.</Invalid-char3>
-      <Invalid-char4>Spaces are not allowed near the character '~'.</Invalid-char4>
-      <Invalid-char5>Spaces are not allowed near the character '^'.</Invalid-char5>
+      <empty-input>مقدار این فیلد خالي است.</empty-input>
+      <Invalid-char>فیلد '{0}' شامل کاراکترهای نامعتبر است. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <Invalid-char2>مقدار عددی باید با کاراکتر '~' دنبال شود.</Invalid-char2>
+      <Invalid-char1>مقدار عددی که با '~' دنبال شده است باید بین 0 و 1 باشد.</Invalid-char1>
+      <Invalid-char3>مقدار عددی باید با کاراکتر '^' دنبال شود.</Invalid-char3>
+      <Invalid-char4>گذاشتن فاصله در اطراف '~' مجاز نیست.</Invalid-char4>
+      <Invalid-char5>گذاشتن فاصله در اطراف '^' مجاز نیست.</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -2127,12 +2127,12 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
-      <newState>New State</newState>
-      <user>User</user>
-      <description>Description</description>
-      <version>Version</version>
-      <visibility>Visibility</visibility>
+      <date>تاریخ</date>
+      <newState>وضعیت جدید</newState>
+      <user>کاربر</user>
+      <description>شرح</description>
+      <version>نسخه</version>
+      <visibility>وضعیت نمایش</visibility>
     </header>
     <action>
       <Close>#{word.close}</Close>
@@ -2145,8 +2145,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
-      <state>State</state>
+      <version>نسخه</version>
+      <state>وضعیت</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2158,21 +2158,21 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>Remove Thumbnail</RemoveThumbnail>
+      <RemoveThumbnail>حذف بندانگشتی</RemoveThumbnail>
     </action>
     <label>
-      <mediumSize>Thumbnail Image</mediumSize>
-      <SelectFile>Choose Thumbnail Image</SelectFile>
+      <mediumSize>تصویر بندانگشتی</mediumSize>
+      <SelectFile>انتخاب تصویر بند انگشتی</SelectFile>
     </label>
     <msg>
-      <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add a thumbnail.</access-denied>
-      <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
-      <is-checked-in>This item is checked in. Please check out before performing any action.</is-checked-in>
-      <fileName-error>Please select a file to upload.</fileName-error>
+      <mimetype-incorrect>نوع فایل نادرست. تصاویر بندانگشتی تنها می توانند از فایل های .JPG، .PNG و یا .GIF درست شوند.</mimetype-incorrect>
+      <access-denied>دسترسی رد شد. شما مجوز برای افزودن تصویر بند انگشتی به این گره را ندارید.</access-denied>
+      <confirm-delete>آیا مایل به حذف این تصویر بند انگشتی هستید؟</confirm-delete>
+      <is-checked-in>این گره رزرو شده است. لطفا قبل از انجام هر گونه اقدام آن را ترخیص کنید.</is-checked-in>
+      <fileName-error>لطفاً فایلی برای آپلود انتخاب کنید.</fileName-error>
     </msg>
     <title>
-      <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
+      <remove-thumbnail>حذف این تصویر بند انگشتی</remove-thumbnail>
     </title>
   </UIThumbnailForm>
   <!--
@@ -2182,13 +2182,13 @@
   -->
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>هر گونه مجوز</anyPermission>
     </label>
   </UIAnyPermission>
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Set Any Permission</AddAnyPermission>
+      <AddAnyPermission>تنظیم هر گونه مجوز</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2208,8 +2208,8 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>انتخاب گروه</selectGroup>
+      <selectUser>انتخاب کاربر</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -2222,35 +2222,35 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>There is either no drive or you do not have permission to access this drive.</nopermission>
+    <nopermission>هیچ درایوی وجود ندارد و یا شما اجازه دسترسی به این درایو را ندارید.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>Edit File Explorer</title>
+    <title>ویرایش مرورگر فایل</title>
     <action>
-      <Edit>Edit</Edit>
+      <Edit>ویرایش</Edit>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
-      <isDirectlyDrive>Direct Drive</isDirectlyDrive>
-      <driveName>Drive Name</driveName>
-      <usecase>Select Type</usecase>
-      <SelectNodePath>Select Path</SelectNodePath>
-      <showTopBar>Show Top Bar</showTopBar>
-      <showActionBar>Show Action Bar</showActionBar>
-      <showSideBar>Show Left Bar</showSideBar>
-      <showFilterBar>Show Filter Bar</showFilterBar>
-      <nodePath>Select Path</nodePath>
+      <uploadFileSizeLimitMB>محدودیت اندازه فایل آپلود شده (مگابایت)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>درایو مستقیم</isDirectlyDrive>
+      <driveName>نام درایو</driveName>
+      <usecase>نوع را انتخاب کنید</usecase>
+      <SelectNodePath>انتخاب مسیر</SelectNodePath>
+      <showTopBar>نمایش نوار بالا</showTopBar>
+      <showActionBar>نمایش نوار اقدامات</showActionBar>
+      <showSideBar>نمایش نوار سمت چپ</showSideBar>
+      <showFilterBar>نمایش نوار فیلتر</showFilterBar>
+      <nodePath>انتخاب مسیر</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
   <UIDriveSelector>
     <label>
-      <driveName>Drive Name</driveName>
-      <action>Action</action>
-      <adddrives>Add Drives</adddrives>
+      <driveName>نام درایو</driveName>
+      <action>اقدام</action>
+      <adddrives>افزودن درایو</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -2258,27 +2258,27 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
-      <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
-      <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
+      <personal-usecase>درایو شخصی کاربر فعلی وقتیکه موردکاربری شخصی را انتخاب کنید استفاده خواهد شد.</personal-usecase>
+      <drive-edit-permission>قادر به ویرایش نام درایو نمی باشید. لطفا دکمه ویرایش را کلیک کنید.</drive-edit-permission>
+      <path-edit-permission>قادر به ویرایش مسیر نمی باشید. لطفا دکمه ویرایش را کلیک کنید.</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Select Drive</UIDriveSelector>
+      <UIDriveSelector>انتخاب درایو</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>انتخاب گره</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Select Drive</SelectDrive>
+      <SelectDrive>انتخاب درایو</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2287,141 +2287,141 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>افزودن Symlink</AddSymLink>
+      <AddLocalizationLink>افزودن ترجمه</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Symlink Manager</UISymLinkManager>
-      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
+      <UISymLinkManager>مدیر Symlink</UISymLinkManager>
+      <UIAddTranslationManager>افزودن ترجمه</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
   <UISymLinkForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Path</pathNode>
+      <symLinkName>نام Symlink</symLinkName>
+      <pathNode>مسیر گره</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You can't add an item of type '{0}' here.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink here.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the rights to read this item.</non-node>
-      <cannot-save>You can't add a symlink for this type of document.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>Symlink '{0}' با موفقیت اضافه شد.</addFolder-successful>
+      <name-invalid>لطفا نام symlink را وارد کنید.</name-invalid>
+      <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
+      <fileName-error>نام فایل نامعتبر است.</fileName-error>
+      <constraint-violation>قادر به افزودن نوع گره '{0}' به گره فعلی نیستید.</constraint-violation>
+      <repository-exception>دسترسی رد شد. شما مجوز برای اضافه کردن symlink به این گره را ندارید.</repository-exception>
+      <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <path-node-invalid>لطفا گره مسیر را وارد کنید.</path-node-invalid>
+      <path-node-not-allowed>این نام مجاز نیست.</path-node-not-allowed>
+      <non-node>لطفا گره مقصد مناسب را انتخاب نمایید، شما مجوز خواندن این گره را ندارید.</non-node>
+      <cannot-save>شما نمی توانید یک symlink به این نوع گره اضافه کنید.</cannot-save>
+      <item-exists-exception>نام گره در حال حاضر وجود دارد.</item-exists-exception>
+      <translation-node-same-language-default>گره ترجمه دارای زبان یکسان با زبان پیش فرض گره جاری است.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>به این گره هدف هیچ ارجاعی وجود ندارد.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
   <UIAddTranslationForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Document Path:</pathNode>
-      <note>Select another document that will serve as the translation</note>
+      <symLinkName>نام Symlink</symLinkName>
+      <pathNode>مسیر سند:</pathNode>
+      <note>سند دیگری را که به عنوان ترجمه عمل کند انتخاب کنید</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <SelectDocument>Select Document</SelectDocument>
+      <SelectDocument>انتخاب سند</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You can't add the '{0}' type to the current item.</constraint-violation>
-      <repository-exception>Access denied. You don't have permission to add a symlink to this item.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target; you may not have the right to read this node.</non-node>
-      <cannot-save>An error occurred while creating the symlink.</cannot-save>
-      <item-exists-exception>An item with this name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translated document has the same language as the default language of current document.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target item is not referred.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>Symlink '{0}' با موفقیت اضافه شده است.</addFolder-successful>
+      <name-invalid>لطفا نام symlink را وارد کنید.</name-invalid>
+      <name-not-allowed>این نام مجاز نیست.</name-not-allowed>
+      <fileName-error>نام فایل نامعتبر است.</fileName-error>
+      <constraint-violation>قادر به افزودن نوع گره '{0}' به گره فعلی نیستید.</constraint-violation>
+      <repository-exception>دسترسی رد شد. شما مجوز برای اضافه کردن symlink به این گره را ندارید.</repository-exception>
+      <numberformat-exception>پوشه ذخیره نمی شود. نام تعیین شده باید به فرمت عددی باشد.</numberformat-exception>
+      <path-node-invalid>لطفا گره مسیر را وارد کنید.</path-node-invalid>
+      <path-node-not-allowed>این نام مجاز نیست.</path-node-not-allowed>
+      <non-node>لطفا گره مقصد مناسب را انتخاب نمایید، شما مجوز خواندن این گره را ندارید.</non-node>
+      <cannot-save>در هنگام ایجاد symlink خطایی رخ داده است.</cannot-save>
+      <item-exists-exception>نام گره در حال حاضر وجود دارد.</item-exists-exception>
+      <translation-node-same-language-default>گره ترجمه دارای زبان یکسان با زبان پیش فرض گره جاری است.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>به این گره هدف هیچ ارجاعی وجود ندارد.</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Item</UIOneNodePathSelector>
+      <UIOneNodePathSelector>انتخاب گره هدف</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
+      <UIContentSelectorOne>انتخاب سند</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
   <ECMContextMenu>
     <event>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>افزودن Symlink</AddSymLink>
+      <AddLocalizationLink>افزودن ترجمه</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can't create a link for '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <create-link-problem>قادر به ایجاد لینک برای گره '{0}' در '{1}' نمی باشید.</create-link-problem>
+      <dest-node-is-link>گره مقصد '{0}' در حال حاضر symlink است، بنابراین شما قادر به ایجاد symlink داخل آن نیستید.</dest-node-is-link>
       <selected-is-link>The selected item '{0}' is already a link. You can't create a link to another link.</selected-is-link>
-      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
+      <confirm-create-link>آیا می خواهید یک لینک به این مکان ایجاد کنید؟</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create Link</CreateLink>
+      <CreateLink>ایجاد لینک</CreateLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkspaceList>
     <msg>
-      <AccessDeniedException>Access denied. You do not have read permission in this workspace.</AccessDeniedException>
+      <AccessDeniedException>دسترسی رد شد. شما در این فضای کار دسترسی خواندن ندارید.</AccessDeniedException>
     </msg>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>درخت دسته بندی</taxonomyTree>
     </label>
   </UIWorkspaceList>
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>افزودن دسته</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree:</taxonomyTree>
-      <rootNodePath>Root Tree:</rootNodePath>
+      <taxonomyTree>درخت دسته بندی:</taxonomyTree>
+      <rootNodePath>ریشه درخت:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
 
   <UIActionBar>
     <tooltip>
-      <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
+      <ManageSimpleCategories>مدیریت دسته بندی های ساده</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
 
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>دسته بندی های مورد ارجاع</UICategoriesAddedList>
+        <UIOneNodePathSelector>انتخاب دسته</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2429,7 +2429,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>انتخاب دسته</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2441,24 +2441,24 @@
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>افزودن دسته</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>The category name already exists.</ItemExistsException>
+      <ItemExistsException>نام دسته در حال حاضر وجود دارد.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
-<ReadOnly>Open Read-only</ReadOnly>
-<Cancel>Cancel</Cancel>
+      <OK>حذف</OK>
+      <ReplaceData>جایگزین کردن داده ها</ReplaceData>
+      <Back>بازگشت به تغییر نام</Back>
+      <Keepfile>هر دو پرونده حفظ شود</Keepfile>
+<ReadOnly>در حالت read only باز شود</ReadOnly>
+<Cancel>انصراف</Cancel>
       <KeepBoth>Keep Both</KeepBoth>
       <CreateNewVersion>Save as new version</CreateNewVersion>
     </label>
@@ -2467,69 +2467,69 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>تایید</OK>
+      <ReplaceData>جایگزین کردن داده ها</ReplaceData>
+      <Back>بازگشت به تغییر نام</Back>
+      <Keepfile>هر دو پرونده حفظ شود</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>افزودن دسته</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>You cannot move the file, because the destination folder is the same as the source folder.</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <can-not-move-to-itself>فایل منتقل نمی شود. زیرا پوشه مبداء و مقصد یکسان هستند.</can-not-move-to-itself>
+      <is-editing>نمی توانید سندی را که در حال ویرایش است منتقل کنید. لطفاً ابتدا آن را ببندید.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
-      <behavior>UUID Behavior</behavior>
-      <versionHistory>Version History</versionHistory>
+      <behavior>رفتار UUID</behavior>
+      <versionHistory>تاریخچه نسخه</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
-      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
+      <history-invalid-type>نوع فایل نامعتبر در تاریخ نسخه. تنها فایل های فشرده پشتیبانی می شوند.</history-invalid-type>
+      <history-invalid-content>محتوای نامعتبر در داده های تاریخچه نسخه. لطفا یک نوع فایل پشتیبانی شده را برای وارد کردن انتخاب کنید.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Create New</type0>
-      <type1>Remove Existing</type1>
-      <type2>Replace Existing</type2>
-      <type3>Throw Exception</type3>
+      <type0>ایجاد جدید</type0>
+      <type1>حذف موجود</type1>
+      <type2>جایگزین موجود</type2>
+      <type3>اعلام خطا</type3>
     </Behavior>
   </Import>
 
   <UIExportNode>
     <action>
-      <ExportHistory>Export Version History</ExportHistory>
+      <ExportHistory>استخراج تاریخچه نسخه بندی</ExportHistory>
     </action>
   </UIExportNode>
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This item or its parent folder is locked by another user, so you can't delete it.</node-locked-other-person>
+      <node-locked-other-person>این گره و یا گره والد آن توسط کاربر دیگری قفل شده است، شما نمی توانید آن راحذف نمایید.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
-      <docview>Document View</docview>
-      <sysview>System View</sysview>
+      <docview>نمای سند</docview>
+      <sysview>نمای سیستم</sysview>
     </label>
   </Import>
 
   <UIDocumentForm>
     <msg>
-      <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
+      <do-not-permission>شما مجوز بارگذاری قالب '{0}' را ندارید.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2541,17 +2541,17 @@
   -->
   <UIActionBar>
     <obtion>
-      <Admin>Admin</Admin>
-      <Info>Info</Info>
-      <Actions>Actions</Actions>
-      <Collaboration>Collaboration</Collaboration>
-      <Search>Search</Search>
+      <Admin>مدیر</Admin>
+      <Info>اطلاعات</Info>
+      <Actions>اقدامات</Actions>
+      <Collaboration>همکاری</Collaboration>
+      <Search>جستجو</Search>
     </obtion>
   </UIActionBar>
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You can't unlock because the '{0}' (or its parent folder) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>شما نمی توانید گره '{0}' (و یا گره والد آن) را باز کنید، زیرا رزرو شده است.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2560,39 +2560,39 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Can't activate versioning on this document.</cannot-enable-version>
+      <cannot-enable-version>گره نسخه بندی را نمی توان فعال کرد.</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You can't read data from the source.</cannot-readsource>
+        <cannot-readsource>قادر به خواندن داده ها از گره منبع نیستید.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
+      <upload-not-null>لطفا فایل را قبل از افزودن دسته آپلود کنید.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must set a property for this group.</allow-setProperty>
+      <allow-setProperty>یک ویژگی را برای این گروه باید تنظیم کنید.</allow-setProperty>
     </msg>
   </UIActionBar>
 
   <UIActionForm>
     <msg>
-      <name-not-allowed>This action name is not allowed.</name-not-allowed>
+      <name-not-allowed>این نام اقدام مجاز نمی باشد.</name-not-allowed>
     </msg>
   </UIActionForm>
 
   <UISaveQueryForm>
     <msg>
-      <name-not-allowed>This query name is not allowed.</name-not-allowed>
+      <name-not-allowed>این نام جستار مجاز نمی باشد.</name-not-allowed>
     </msg>
   </UISaveQueryForm>
   <UISimpleSearch>
     <msg>
-      <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
+      <name-not-allowed>یک کلمه یا عبارت موجود در محتوا مجاز نمی باشد.</name-not-allowed>
     </msg>
   </UISimpleSearch>
 
@@ -2602,7 +2602,7 @@
    -->
   <ECMContextMenu>
       <event>
-        <Permlink>View Document</Permlink>
+        <Permlink>مشاهده سند</Permlink>
       </event>
   </ECMContextMenu>
   
@@ -2612,105 +2612,105 @@
    -->
   <UIFolderForm>
     <label>
-      <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <nt_folder>پوشه اسناد</nt_folder>
+      <nt_unstructured>پوشه محتوا</nt_unstructured>
+      <exo_cssFolder>پوشه CSS</exo_cssFolder>
+      <exo_jsFolder>پوشه جاوا اسکریپت</exo_jsFolder>
       <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <exo_webFolder>پوشه محتویات وب</exo_webFolder>
    </label>
   </UIFolderForm>
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
-      <edit-comment>Edit this comment</edit-comment>
+      <remove-comment>حذف این نظر</remove-comment>
+      <edit-comment>ویرایش این نظر</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>آیا مطمئنید که می خواهید این نظر را حذف کنید؟</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
 
  <UIExportNode>
   <msg>
-    <OutOfMemoryError>You should select System View while exporting large data.</OutOfMemoryError>
+    <OutOfMemoryError>در هنگام مشاهده داده های حجیم باید نمای سیستم را انتخاب نمایید.</OutOfMemoryError>
   </msg>
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>You do not have permission to access these category trees.</AccessDeniedException>
+      <AccessDeniedException>شما دارای مجوز برای دسترسی به این درخت های دسته بندی نیستید.</AccessDeniedException>
     </msg>
   </Taxonomy>
 
   <UIJcrExplorerEditForm>
     <msg>
-      <notNullDriveName>The Drive Name is null or empty. Please fill out the Drive Name field.</notNullDriveName>
-      <notNullPath>The path is null or empty. Please fill out the path.</notNullPath>
+      <notNullDriveName>نام درایو خالي است. لطفا فیلد متناظر را مقداردهی نمایید.</notNullDriveName>
+      <notNullPath>مسیر خالي است. لطفا فیلد متناظر را مقداردهی نمایید.</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>آیا از حذف این فایل پیوست اطمینان دارید؟</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>آپلود فایل</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
   <UIAllItems>
     <label>
-      <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>Favorites</Favourites>
-      <Hidden>Hidden</Hidden>
-      <Trash>Trash</Trash>
-      <Configuration>Set Up Preferences</Configuration>
+      <OwnedByMe>متعلق به من</OwnedByMe>
+      <Favourites>علاقه مندیها</Favourites>
+      <Hidden>مخفی</Hidden>
+      <Trash>سطل آشغال</Trash>
+      <Configuration>تنظیمات</Configuration>
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>همه آیتم ها</allItems>
     </title>
   </UIAllItems>
 
   <UIPreferencesForm>
       <label>
-          <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Type</Type>
-          <CreatedDate>Created Date</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
-          <Ascending>Ascending</Ascending>
-          <Descending>Descending</Descending>
+          <Alphabetic>الفبایی</Alphabetic>
+          <Type>نوع</Type>
+          <CreatedDate>تاریخ ایجاد</CreatedDate>
+          <ModifiedDate>تاریخ اصلاح</ModifiedDate>
+          <Ascending>صعودی</Ascending>
+          <Descending>نزولی</Descending>
       </label>
   </UIPreferencesForm>
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>جستجوهای ذخیره شده</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
     <label>
-       <Images>Image</Images>
-       <Video>Video</Video>
-       <Music>Music</Music>
-       <Documents>Document</Documents>
-       <Content>Content</Content>
+       <Images>تصویر</Images>
+       <Video>ویدیو</Video>
+       <Music>موسیقی</Music>
+       <Documents>سند</Documents>
+       <Content>محتوا</Content>
     </label>
   </DocumentType>
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Image</Images>
-      <Video>Video</Video>
-      <Music>Music</Music>
-      <Documents>Document</Documents>
-      <Content>Content</Content>
+      <Images>تصویر</Images>
+      <Video>ویدیو</Video>
+      <Music>موسیقی</Music>
+      <Documents>سند</Documents>
+      <Content>محتوا</Content>
     </label>
-    <title>Set Up Filter Preferences</title>
+    <title>تنظیمات فیلتر</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2719,40 +2719,40 @@
 
   <UIAllItemsByType>
     <label>
-    <ByType>Filter by Type</ByType>
-      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
+    <ByType>فیلتر شده توسط نوع</ByType>
+      <DocumentFilterConfiguration>تنظیمات فیلتر</DocumentFilterConfiguration>
     </label>
     <title>
-      <ShowVideo>Show all video files</ShowVideo>
-      <ShowMusic>Show all music files</ShowMusic>
-      <ShowImages>Show all image files</ShowImages>
-      <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContent>Show all document types</ShowContent>
+      <ShowVideo>نمایش همه فایل های ویدئویی</ShowVideo>
+      <ShowMusic>نمایش همه فایل های موسیقی</ShowMusic>
+      <ShowImages>نمایش تمام فایل های تصویری</ShowImages>
+      <ShowDocuments>نمایش تمام فایل های سند</ShowDocuments>
+      <ShowContent>نمایش انواع سند</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Slide Show</slide-show>
+      <slide-show>نمایش اسلاید</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
     <event>
-      <PlayMedia>Play Media</PlayMedia>
+      <PlayMedia>اجرای مدیا</PlayMedia>
     </event>
   </ECMContextMenu>
   <UIPopupWindow>
     <title>
-      <UIDocumentFilterForm>Filter Documents Type</UIDocumentFilterForm>
+      <UIDocumentFilterForm>فیلتر نوع اسناد</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>Favorites</showFavourites>
-      <showHiddens>Hidden</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showOwnedByUser>متعلق به من</showOwnedByUser>
+      <showFavourites>علاقه مندیها</showFavourites>
+      <showHiddens>مخفی</showHiddens>
+      <showTrash>سطل آشغال</showTrash>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2762,12 +2762,12 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Are you sure you want to empty all items from trash?</confirm-delete>
+      <confirm-delete>آیا مطمئنید که می خواهید همه موارد را از سطل زباله را خالی کنید؟</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
-      <name>Category Name</name>
+      <name>نام دسته</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2776,53 +2776,53 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>افزودن دسته</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>افزودن دسته</AddCategory>
     </tooltip>
    </UIActionBar>
 
    <UITaggingForm>
     <label>
-      <Public>Public</Public>
-      <Private>Private</Private>
-      <tagScopes>Tag Scopes</tagScopes>
+      <Public>عمومی</Public>
+      <Private>خصوصی</Private>
+      <tagScopes>محدوده های برچسب</tagScopes>
     </label>
    </UITaggingForm>
 
   <UITagExplorer>
     <title>
-      <PublicTags>Tags</PublicTags>
-      <EditPublicTags>Edit Tags</EditPublicTags>
-      <PrivateTags>Tags</PrivateTags>
+      <PublicTags>برچسب ها</PublicTags>
+      <EditPublicTags>ویرایش برچسب ها</EditPublicTags>
+      <PrivateTags>برچسب ها</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
-      <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <name>نام</name>
+      <relatedDocuments>اسناد مرتبط</relatedDocuments>
+      <action>اقدام</action>
     </header>
     <action>
       <title>
-        <EditTag>Edit Tag</EditTag>
-        <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Add Tag</AddTag>
+        <EditTag>ویرایش برچسب</EditTag>
+        <RemoveTag>حذف برچسب</RemoveTag>
+        <AddTag>افزودن برچسب</AddTag>
       </title>
     </action>
     <msg>
-      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
+      <confirm-remove>مطمئن هستید که می خواهید این برچسب را حذف کنید؟</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
+      <UIEditingTagsForm>ویرایش برچسب</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -2832,70 +2832,70 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <label>
-      <tagName>Tag Name:</tagName>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <tagName>نام برچسب:</tagName>
+      <relatedDocuments>اسناد مرتبط</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag</UITagForm>
+      <UITagForm>برچسب</UITagForm>
     </title>
   </TagPopup>
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You can't edit  {0}. It's locked by another user.</node-locked-editing>
+      <node-locked-editing>قادر به ویرایش این گره با مسیر {0} نمی باشید. این گره توسط کاربر دیگری قفل شده است.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>An error occurred while updating the tag style.</error-update>
+      <error-update>در هنگام بروزرسانی استیل برچسب خطایی رخ داده است.</error-update>
     </msg>
   </UITagStyleForm>
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied.</editTagAccessDenied>
+      <editTagAccessDenied>دسترسی ممنوع.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>مدير برچسب</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
+      <UINodeTypeSelector>انتخاب نوع گره</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>مشاهده کامپوننت</ShowComponent>
+      <removeReference>حذف</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>مشاهده کامپوننت</ShowComponent>
+      <removeReference>حذف</removeReference>
     </title>
   </EditFormAction>
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field is null or empty.</empty-input>
+      <Invalid-char>کاراکتر نامعتبر وجود دارد. لطفاً مقدار دیگری وارد کنید.</Invalid-char>
+      <empty-input>مقدار این فیلد خالي است.</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query language:</queryType>
+            <queryType>نوع جستار:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -2903,23 +2903,23 @@
 
   <UIDocumentInfo>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>خطایی رخ داده است. اطلاعات در مورد مخزن از دست رفته است.</repository-error>
     </msg>
   </UIDocumentInfo>
 
   <UITreeExplorer>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>خطایی رخ داده است. اطلاعات در مورد مخزن از دست رفته است.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>قادر به ذخیره سند نمی باشید. داده های ورودی گم شده يا نامعتبر هستند.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>قادر به ذخیره سند نمی باشید. داده های ورودی گم شده يا نامعتبر هستند.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -2929,34 +2929,34 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <formInput>The previous path was lost. Please select a new one.</formInput>
+      <formInput>مسیر قبلی گم شده است. لطفا مسیر جدیدی انتخاب کنید.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>افزودن</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent</UIOneNodePathSelector>
+      <UIOneNodePathSelector>گره والد را انتخاب کنید</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root</AddRootNode>
+      <AddRootNode>افزودن گره ریشه</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UIActionForm>
     <msg>
-      <homePath-emty>The home path is empty.</homePath-emty>
-      <targetPath-emty>The target path is empty.</targetPath-emty>
+      <homePath-emty>مسیر خانه خالی است.</homePath-emty>
+      <targetPath-emty>مسیر هدف خالی است.</targetPath-emty>
     </msg>
     </UIActionForm>
     <UIActionBar>
       <msg>
-        <not-exist-categories>There are no categories.</not-exist-categories>
+        <not-exist-categories>دسته بندی وجود ندارد.</not-exist-categories>
       </msg>
     </UIActionBar>
 
@@ -2971,102 +2971,102 @@
       <Close>#{word.close}</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
-      <date>Date</date>
-      <author>Author</author>
-      <status>Status</status>
-      <action>Action</action>
-      <label>Revision</label>
-      <none>No revisions</none>
-      <seeall>See all versions</seeall>
-      <currentVersion>Current Revision</currentVersion>
-      <confirm>You will lose your draft work. Are you sure you want to replace the current revision?</confirm>
+      <version>نسخه بندی جدید</version>
+      <date>تاریخ</date>
+      <author>مولف</author>
+      <status>وضعیت</status>
+      <action>اقدام</action>
+      <label>نسخه جدید</label>
+      <none>نسخه بندی وجود ندارد</none>
+      <seeall>مشاهدهٔ تمام نسخه ها</seeall>
+      <currentVersion>نسخه فعلی</currentVersion>
+      <confirm>پیش نویس خود را از دست می دهید. آیا می خواهید جایگزین نسخه فعلی شود؟</confirm>
     </revisions>
     <status>
-      <version>Revision</version>
-      <title>Status</title>
-      <archived>Archived</archived>
-      <obsolete>Obsolete</obsolete>
-      <unpublished>Unpublished</unpublished>
-      <enrolled>Enrolled</enrolled>
-      <draft>Draft</draft>
-      <pending>Pending</pending>
-      <approved>Approved</approved>
-      <inreview>In Review</inreview>
-      <staged>Staged</staged>
-      <published>Published</published>
-      <live>Published</live>
+      <version>نسخه جدید</version>
+      <title>وضعیت</title>
+      <archived>آرشیو شده</archived>
+      <obsolete>منسوخ</obsolete>
+      <unpublished>منتشر نشده</unpublished>
+      <enrolled>ثبت شده</enrolled>
+      <draft>پیش‌نویس</draft>
+      <pending>در انتظار</pending>
+      <approved>تایید شده</approved>
+      <inreview>در حال بررسی</inreview>
+      <staged>صحنه</staged>
+      <published>منتشرشده</published>
+      <live>منتشرشده</live>
     </status>
     <scheduled>
-      <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
+      <title>زمان بندی شده</title>
+      <from>از</from>
+      <to>به</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
-      <restore>Restore</restore>
+      <preview>پیش نمایش</preview>
+      <restore>بازیابی</restore>
     </title>
     <msg>
-      <have-no-view-template>The View template is not supported.</have-no-view-template>
-      <restore-complete>Restore completed.</restore-complete>
+      <have-no-view-template>مشاهده قالب پشتیبانی نمی شود.</have-no-view-template>
+      <restore-complete>بازیابی کامل شد.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
-      <versionName>Revision Name</versionName>
-      <currentState>Current State</currentState>
-      <user>Author</user>
-      <description>Description</description>
+      <date>تاریخ</date>
+      <versionName>نام نسخه جدید</versionName>
+      <currentState>وضعیت کنونی</currentState>
+      <user>مولف</user>
+      <description>شرح</description>
     </header>
-    <create-version>New version is created</create-version>
+    <create-version>نسخه جدید ایجاد شده است</create-version>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
-      <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
-      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
-      <UIPublicationPanelStartDateInput>Start Publication date</UIPublicationPanelStartDateInput>
-      <UIPublicationPanelEndDateInput>End Publication date</UIPublicationPanelEndDateInput>
+      <introduction>شما می توانید برای انتشار سند خود زمانبندی کنید. تاریخ های مورد نظر خود را برای زمان انتشار سند انتخاب نمایید</introduction>
+      <no-schedule-info>هیچ زمانبندی برای انتشار سند شما وجود ندارد</no-schedule-info>
+      <UIPublicationPanelStartDateInput>تاریخ شروع انتشار</UIPublicationPanelStartDateInput>
+      <UIPublicationPanelEndDateInput>تاریخ پایان انتشار</UIPublicationPanelEndDateInput>
     </label>
     <msg>
-      <save-finished>Your new publication schedule was saved successfully.</save-finished>
+      <save-finished>زمانبندی انتشار شما با موفقیت ذخیره شد.</save-finished>
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>تنظیم مجدد</Reset>
     </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
-      <header>Publication Date</header>
-      <start>Start Publication</start>
-      <end>End Publication</end>
+      <header>تاریخ انتشار</header>
+      <start>شروع انتشار</start>
+      <end>پایان انتشار</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
-      <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
+      <invalid-format>فرمت تاريخ نامعتبر است. لطفا دوباره چک کنید.</invalid-format>
+      <fromDate-after-toDate>تاریخ شروع باید پیش از تاریخ پایان باشد.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublicationContainer>مدیریت انتشار</UIPublicationContainer>
+      <UIPublishingPanel>مدیریت انتشار</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Status</status>
-      <author>Author</author>
-      <date>Created Date</date>
-      <title>Document Title</title>
-      <lastUser>Last User</lastUser>
+      <status>وضعیت</status>
+      <author>مولف</author>
+      <date>تاریخ ایجاد</date>
+      <title>عنوان سند</title>
+      <lastUser>آخرین کاربر</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist>
+      <NameAlreadyExist>نام برچسب در حال حاضر وجود دارد.</NameAlreadyExist>
     </msg>
   </UITagForm>
 
@@ -3076,30 +3076,30 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>انتخاب دسته</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
    <action>
-     <HideAdvance>Hide Advanced</HideAdvance>
-     <ShowAdvance>Show Advanced</ShowAdvance>
+     <HideAdvance>مخفی کردن پیشرفته</HideAdvance>
+     <ShowAdvance>نمایش پیشرفته</ShowAdvance>
     </action>
     <label>
-    <Advance>Advanced</Advance>
+    <Advance>پیشرفته</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
 <msg>
-  <file-access-denied>File access denied.</file-access-denied>
-  <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
+  <file-access-denied>دسترسی فایل رد شد.</file-access-denied>
+  <anonymous-access-denied>کاربر ناشناس اجازه استفاده از این عملکرد را ندارد.</anonymous-access-denied>
 </msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <ShowDrives>Show Drives</ShowDrives>
+      <ShowDrives>نمایش درایوها</ShowDrives>
     </DrivesArea>
     <msg>
       <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
@@ -3111,116 +3111,116 @@
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>All field values saved.</fields-saved>
-      <fields-cancelled>All field values canceled.</fields-cancelled>
+      <fields-saved>همه مقادیر فیلدها ذخیره شد.</fields-saved>
+      <fields-cancelled>لغو همه مقادیر فیلدها.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
   <msg>
-  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
-  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+  <confirm-close>در صورت بستن این فرم همه تغییرات انجام شده از دست خواهد رفت.</confirm-close>
+  <confirm-changeType>در صورت تغییر نوع محتوا همه تغییرات انجام شده از دست خواهد رفت.</confirm-changeType>
+  <confirm-navigate>در صورت خارج شدن از این صفحه همه تغییرات انجام شده از دست خواهد رفت.</confirm-navigate>
   </msg>
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
     <msg>
-      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
+      <wrong-mimetype>نوعMime  {0} در فیلد {1} مجاز نمی باشد. لطفا فایل دیگری آپلود کنید</wrong-mimetype>
     </msg>
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
-  <true>True</true>
-  <false>False</false>
-  <Electronic>Electronic</Electronic>
+    <no>خیر</no>
+  <yes>بله</yes>
+  <true>درست</true>
+  <false>نادرست</false>
+  <Electronic>الکترونیکی</Electronic>
   <Paper>Paper</Paper>
-  <NONE>None</NONE>
+  <NONE>هیچ کدام</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
-  <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-  <NOCONTRACT>No Contract</NOCONTRACT>
-  <one-minute>One Minute</one-minute>
-  <hourly>Hourly</hourly>
-  <daily>Daily</daily>
-  <quarterly>Quarterly</quarterly>
-  <yearly>Yearly</yearly>
-  <ten-years>Ten Years</ten-years>
-  <read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+  <UNCLASSIFIED>طبقه بندی نشده</UNCLASSIFIED>
+  <NOCONTRACT>بدون قرارداد</NOCONTRACT>
+  <one-minute>یک دقیقه</one-minute>
+  <hourly>ساعتی</hourly>
+  <daily>روزانه</daily>
+  <quarterly>فصلی</quarterly>
+  <yearly>سالانه</yearly>
+  <ten-years>ده سال</ten-years>
+  <read>اقدام کاربر</read>
+  <schedule>زمان بند</schedule>
+  <node_added>افزودن محتوا</node_added>
+  <node_removed>حذف محتوا</node_removed>
+  <property_added>افزودن ویژگی</property_added>
+  <property_removed>حذف ویژگی</property_removed>
+  <property_changed>اصلاح ويژگی</property_changed>
 </label>
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>{0} is locked. You can't move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>{0} or its parent folder is checked in. You can't move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You can't move {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>گره {0} قفل شده است. نمی توانید آن را به سطل زباله انتقال دهید.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>گره {0} یا گره والد آن رزرو شده است. شما نمی توانید آن را به سطل زباله انتقال دهید.</can-not-remove-checked-in-node>
+<access-denied-to-delete>دسترسی رد شد. نمی توانیدگره  {0} را به سطل زباله انتقال دهید.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
   <msg>
-  <unknown-error>An error occurred while editing this property.</unknown-error>
+  <unknown-error>در حین اصلاح این ویژگی خطایی رخ داده است.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This item is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You can't watch this document.</unknown-error>
+      <node-is-locked>این گره قفل شده است. شما نمی توانید آن را بپایید.</node-is-locked>
+      <unknown-error>خطایی رخ داده است. شما نمی توانید این گره را بپایید.</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character>فیلد '{0}' شامل کاراکترهای نا منطبق با XSS است</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
   <label>
-    <AbortAll>Abort all</AbortAll>
-    <AbortAllFiles>Abort all Files</AbortAllFiles>
-    <MaxFileSize>Maximum file size is</MaxFileSize>
-    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
-    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
+    <AbortAll>لغو همه</AbortAll>
+    <AbortAllFiles>لغو همه فایل ها</AbortAllFiles>
+    <MaxFileSize>حداکثر اندازه فایل</MaxFileSize>
+    <InvalidCharacters>کاراکترهای نامعتبر با '-' جایگزین خواهند شد</InvalidCharacters>
+    <DropFileMessage>فایل های خود را در اینجا در پوشه جاری قرار دهید</DropFileMessage>
     <Close>#{word.close}</Close>
-    <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the limit of</MaxFileSizeAlert>
-    <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
-    <or>or</or>
-    <AlreadyInUse>Already in use</AlreadyInUse>
-    <Keep>Keep both</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
+    <in>در</in>
+    <MaxFileSizeAlert>اندازه فایل بیشتر از حد مجاز</MaxFileSizeAlert>
+    <Waiting>در حال انتظار</Waiting>
+    <Error>خطا</Error>
+    <or>یا</or>
+    <AlreadyInUse>در حال حاضر در حال استفاده</AlreadyInUse>
+    <Keep>نگه داشتن هر دو</Keep>
+    <Replace>جایگزین</Replace>
+    <Canceled>لغو شد</Canceled>
       <UploadNewVersion>Upload a new version</UploadNewVersion>
     <Cancel>#{word.cancel}</Cancel>
-    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+    <AbortAllConfirmation>آیا مایلید که تمام فایل های در حال انجام لغو شوند؟</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
-  <Updated>Updated</Updated>
-  <by>by</by>
-  <you>you</you>
+  <CreatedOn>ایجاد شده در</CreatedOn>
+  <Updated>به روز شده</Updated>
+  <by>توسط</by>
+  <you>شما</you>
   </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
-      <size>Size</size>
-      <sortBy>Sort by:</sortBy>
-      <filesAreSelected>Files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <name>نام</name>
+      <date>تاریخ</date>
+      <size>اندازه</size>
+      <sortBy>مرتب سازی بر اساس:</sortBy>
+      <filesAreSelected>فایل ها انتخاب شده اند.</filesAreSelected>
+      <ClearSelection>پاک کردن انتخاب</ClearSelection>
+      <more>بیشتر</more>
     </label>
   </FileView>
   <UIPropertyForm>
   <msg>
-  <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+  <property-name-incorrect>نام ويژگي نادرست است، لطفا مقدار دیگری برای آن وارد کنید!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
   <UIDocumentAutoVersionForm>
@@ -3242,6 +3242,6 @@
   ###################################################################################
   -->
   <VersionException>
-  <msg>Cannot modify documents that are being checked in.</msg>  
+  <msg>امکان ویرایش اسناد رزرو شده وجود ندارد.</msg>  
   </VersionException>
 </bundle>

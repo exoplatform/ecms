@@ -36,27 +36,27 @@
       <title>Document editors</title>
       <table>
         <Provider>Provider</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Description>Περιγραφή</Description>
+        <Active>Ενεργό</Active>
+        <Permissions>Δικαιώματα</Permissions>
       </table>
       <modal>
         <title>Edit permissions</title>
         <SearchLabel>Enter user or group name</SearchLabel>
         <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
+        <None>Δεν έχει οριστεί</None>
         <Everybody>Everybody</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>Αποθήκευση</Save>
+        <Cancel>Ακύρωση</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>Επεξεργασία</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
+      <title>Προειδοποίηση</title>
       <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
     </idlePopup>
   </editors>

@@ -2,123 +2,124 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Edit in Content Explorer</QuickEdit>
-      <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <QuickEdit>Ubah konten penjelajahan</QuickEdit>
+      <print>Cetak halaman ini</print>
+      <FastPublish>Menerbitkan</FastPublish>
     </title>
     <label>
       <draft>Draft</draft>
-      <print>Print</print>
+      <print>Cetak</print>
     </label>
     <msg>
-      <no-content>No contents found.</no-content>
-      <internal-server-error>An error occurred while requesting the data from the sever.</internal-server-error>
-      <empty-title-error>Please specify the new title.</empty-title-error>
+      <no-content>Isi konten tidak ditemukan.</no-content>
+      <internal-server-error>Terjadi sebuah kesalahan saat meminta data dari server.</internal-server-error>
+      <empty-title-error>Silahkan tentukan judul baru.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Select Content</UIContentSelectorOne>
+      <UIContentSelectorOne>Pilih Konten</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>You do not have permission to access the Edit mode.</AccessControlException>
+      <AccessControlException>Anda tidak memiliki izin untuk mengakses cara edit.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
     <label>
-      <Enable>Enabled</Enable>
-      <Disable>Disabled</Disable>
+      <Enable>Diaktifkan</Enable>
+      <Disable>Cacat</Disable>
     </label>
   </UISCVContextualRadioBox>
   <UIPreferencesPopupWindows>
     <title>
-      <UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+      <UISCVPreferences>Preferensi Daftar Isi
+ </UISCVPreferences>
     </title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>#{word.save}</Save>
-      <Abort>Abort</Abort>
-      <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
-      <Close>#{word.close}</Close>
+      <Save>#{kata.simpan}</Save>
+      <Abort>Menggugurkan</Abort>
+      <Cancel>#{kata.batal}</Cancel>
+      <Print>Cetak</Print>
+      <Close>#{kata.tutup}</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>Preferensi Detail Konten</title>
     <label>
-      <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
-      <Title>Content Detail Preferences</Title>
-      <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <ContentPathBlock>Content Selection</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
-      <ContextCaption>Dynamic Navigation</ContextCaption>
-      <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
-      <PrintSettingBlock>Print Settings</PrintSettingBlock>
-      <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
-      <CacheManagement>Content Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
+      <Back>Kembali ke halaman sebelumnya</Back>
+      <Edit>Ubah</Edit>
+      <Preferences>Preferensi</Preferences>
+      <Title>Preferensi Detail Konten</Title>
+      <UISCVShowTitleConfigurationCheckBox>Tunjukkan Judul</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Tampilkan Tanggal</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Tampilkan Bar pilihan</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Pengaturan tampilan</DisplaySettingBlock>
+      <ContentPathBlock>Pemilihan Konten</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Jalur Konten</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Jalur Konten</UISCVContentPathConfigurationInputBox>
+      <Advance>Maju</Advance>
+      <ContextCaption>Navigasi Dinamis</ContextCaption>
+      <UISCVContextualRadioBox>Kadar kualitas</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>oleh</UISCVParameterInputBox>
+      <PrintSettingBlock>Pengaturan cetak</PrintSettingBlock>
+      <UISCVPrintPageParameter>dengan</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Tampilkan di Halaman</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Mengunci</LockStatus>
+      <CacheManagement>Visibilitas Konten</CacheManagement>
+      <UISCVCacheRadioBox>Konten berbagi</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
+      <ContentPathBlock>Pilih konten yang ingin anda Tampilkan. Konten bawaan ini akan diganti secara penuh jika anda mengaktifkan pilihan navigasi dinamis (Lihat mode lanjutan di bawah).</ContentPathBlock>
+      <DisplaySettingBlock>Anda dapat menampilkan atau menyembunyikan bagian pilihan bar yang digunakan untuk mencetak dan menampilkan tautan. Judul tampilan tanggal juga ialah opsional.</DisplaySettingBlock>
+      <ContextualHelp>Mengaktifkan Navigasi Dinamis. Konten bisa diubah menjadi secara dinamis oleh parameter menggunakan URL lainnya.</ContextualHelp>
+      <ParameterHelp>Parameter ini akan digunakan untuk mendapatkan konten apabila Navigasi Dinamis diaktifkan.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>Item path tidak valid.</not-valid-path>
     </msg>
     <tab>
       <label>
-        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigContentFormInputSet>Pemilihan Konten</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Pengaturan tampilan</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Cetak Pengaturan</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Maju</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>Pilih folder Path</SelectFolderPath>
+      <AddPath>Menambahkan jalan</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Show in Page</SelectTargetPage>
+      <SelectTargetPage>Tampilkan di Halaman</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <UISCVConfigPrintPageSelectorPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Pemilih halaman</UIPageSelector>
     </title>
   </UISCVConfigPrintPageSelectorPopupWindow>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>Under Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>Menyimpan arsip</archived>
+    <obsolete>Usang</obsolete>
+    <unpublished>Tidak diterbitkan</unpublished>
+    <enrolled>Terdaftar</enrolled>
+    <draft>Konsep</draft>
+    <pending>Tunda</pending>
+    <approved>Disetujui</approved>
+    <inreview>Di bawah ulasan</inreview>
+    <staged>Dipentaskan</staged>
+    <published>Diterbitkan</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restricted by Authentication</Enable>
-      <Disable>Restricted by User roles</Disable>
+      <Enable>Dibatasi oleh otentikasi</Enable>
+      <Disable>Dibatasi dengan peran pengguna</Disable>
     </label>
   </UISCVCacheRadioBox>
 </bundle>

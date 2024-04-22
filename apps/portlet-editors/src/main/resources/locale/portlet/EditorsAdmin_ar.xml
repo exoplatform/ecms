@@ -22,42 +22,42 @@
 <bundle>
   <editors>
     <admin>
-    <page>Editors Administration</page>
+    <page>ادارة المواقع</page>
       <error>
-        <ProviderNotRegistered>The editor provider is not registered.</ProviderNotRegistered>
-        <EmptyRequest>The request should contain at least 1 form param (active/permissions).</EmptyRequest>
-        <CannotGetProviders>Can't get providers list.</CannotGetProviders>
-        <PermissionNotValid>The specified permission is not valid. Maybe the user or group doesn't exist.</PermissionNotValid>
-        <CannotLoadIdentities>Can't load identities by specified criteria</CannotLoadIdentities>
-        <CannotSavePreferredEditor>Can't save selected editor as preferred one.</CannotSavePreferredEditor>
-        <UnableGetData>An error occurred while reading the data.</UnableGetData>
-        <UnablePostData>An error occurred while saving the data.</UnablePostData>
+        <ProviderNotRegistered>موفر المحرر غير مسجل.</ProviderNotRegistered>
+        <EmptyRequest>يجب أن يحتوي الطلب على شكل واحد على الأقل (نشط/الأذونات).</EmptyRequest>
+        <CannotGetProviders>لا يمكن الحصول على قائمة مقدمي الخدمات.</CannotGetProviders>
+        <PermissionNotValid>الإذن المحدد غير صالح. ربما المستخدم أو المجموعة غير موجودة.</PermissionNotValid>
+        <CannotLoadIdentities>لا يمكن تحميل الهويات بمعايير محددة</CannotLoadIdentities>
+        <CannotSavePreferredEditor>لا يمكن حفظ المحرر المحدد كمحرر مفضل.</CannotSavePreferredEditor>
+        <UnableGetData>حدث خطأ أثناء عمليّة إرسال البريد الإلكتروني.</UnableGetData>
+        <UnablePostData>حدث خطأ أثناء حفظ البيانات.</UnablePostData>
       </error>
-      <title>Document editors</title>
+      <title>محررات المستندات</title>
       <table>
-        <Provider>Provider</Provider>
-        <Description>Description</Description>
-        <Active>Active</Active>
-        <Permissions>Permissions</Permissions>
+        <Provider>مزود الخدمة</Provider>
+        <Description>الوصف</Description>
+        <Active>ناشط</Active>
+        <Permissions>الصلاحيّات</Permissions>
       </table>
       <modal>
-        <title>Edit permissions</title>
-        <SearchLabel>Enter user or group name</SearchLabel>
-        <WithPermissions>Who has permission</WithPermissions>
-        <None>None</None>
-        <Everybody>Everybody</Everybody>
+        <title>تعديل الصلاحيات</title>
+        <SearchLabel>أدخل اسم المستخدم أو المجموعة</SearchLabel>
+        <WithPermissions>من لديه إذن</WithPermissions>
+        <None>لا شَيْء</None>
+        <Everybody>الجميع</Everybody>
       </modal>
       <buttons>
-        <Save>Save</Save>
-        <Cancel>Cancel</Cancel>
+        <Save>حفظ</Save>
+        <Cancel>الغاء</Cancel>
       </buttons>
     </admin>
     <buttons>
-      <EditorButton>Edit</EditorButton>
+      <EditorButton>تغيير</EditorButton>
     </buttons>
     <idlePopup>
-      <title>Warning</title>
-      <message>Seems you haven't been active for quite a long time. The editor page will be closed in %s seconds.</message>
+      <title>تحذير</title>
+      <message>يبدو أنك لم تكن نشيطا منذ وقت طويل. سيتم إغلاق صفحة المحرر في %s ثوان.</message>
     </idlePopup>
   </editors>
 </bundle>

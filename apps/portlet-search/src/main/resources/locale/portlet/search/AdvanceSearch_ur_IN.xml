@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
-      <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <keyword>کلیدی الفاظ</keyword>
+      <portal>پورٹل/ چوکھٹ</portal>
+      <Page>صفحہ</Page>
+      <Document>دستاویز</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>تلاش کریں</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
-      <editor>Editor</editor>
-      <date>Date</date>
-      <relevancy>Relevance</relevancy>
-      <title>Title</title>
-      <sortBy>Sort By:</sortBy>
+      <Page>صفحہ</Page>
+      <Document>دستاویز</Document>
+      <DocumentAndPage>دستاویز اور صفحہ</DocumentAndPage>
+      <documentandpage>دستاویز اور صفحہ</documentandpage>
+      <results>نتائج {0} تا{1} {2} کے لیے</results>
+      <oneResult>صرف ایک نتیجہ{0} کیلئے</oneResult>
+      <ofAboutCaption>متعلق/ بارے میں</ofAboutCaption>
+      <timeUnitCaption>سیکنڈ</timeUnitCaption>
+      <similar>صفحات جہاں ایک ہی مواد ظاہر ہوتا ہے</similar>
+      <editor>مدیر</editor>
+      <date>تاریخ</date>
+      <relevancy>مطابقت</relevancy>
+      <title>عنوان</title>
+      <sortBy>بہ ترتیب:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>ترمیم</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>آپ کی تلاش {0} کسی بھی {1} سے میل نہیں کھاتا.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>اشیاءفی صفحہ</itemsPerPageSelector>
+      <searchFormSelector>سانچہ سے تلاش کریں</searchFormSelector>
+      <searchResultSelector>سا نچہ تلاش نتیجہ</searchResultSelector>
+      <searchPaginatorSelector>تلاش پییجینیٹر سا نچہ</searchPaginatorSelector>
+      <searchPageLayoutSelector>تلاش کے صفحے کا وضع قطع سانچہ</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>بنیادی راستہ</searchResultBasePathInputSetAction>
+      <pageMode>صفحہ طرز</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>کوئی نہیں</none>
+        <more>مزید</more>
+        <pagination>صفحہ سازی</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>بنیادی راستہ منتخب کریں</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>مطلوبہ لفظ غلط ہے- کچھ کرداروں کی شناخت نہیں ہو رہی ہے.</keyword-not-support>
+     <not-checked>براۓ مہربانی تلاش کی قسم منتخب کریں.</not-checked>
+     <keyword-not-empty>براۓ مہربانی مطلوبہ لفظ درج کریں.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>اگلا</next>
+      <previous>پچھلا</previous>
+      <more>مزید</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>فوری ترمیم</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>صفحات میں</pageCheckBox>
+      <documentCheckBox>مواد میں</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>تمام سائٹس تلاش کریں</all>
       </option>  
     </label>  
   </ViewMode>

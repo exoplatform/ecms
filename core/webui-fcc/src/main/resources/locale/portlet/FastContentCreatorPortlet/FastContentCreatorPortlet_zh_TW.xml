@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>此名稱是不允許的。</name-not-allowed>
+      <in-versioning>增加一個新的節點前，請先檢查當前節點。</in-versioning>
+      <cannot-save>保存節點時出現錯誤。</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <not-support>無法載入該範本的 '{0}'。</not-support>
+      <not-add-folder>只有檔案才可以增加到此資料夾。</not-add-folder>
+      <access-denied>訪問被拒絕。你在 '{0}' 沒有增加的權限。</access-denied>
+      <path-not-found>路徑"{0}"是已刪除或無效。</path-not-found>
+      <node-locked>節點"{0}"已被鎖定。請建立文檔之前，解鎖此節點。</node-locked>
+      <node-isExist>此節點已存在於 '{0}'，不允許其它節點名稱相同。</node-isExist>
+      <get-dialog-path>獲取對話方塊的路徑時發生錯誤。</get-dialog-path>
+      <new-jcr-template>建立新範本時出錯。</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCSaveLocationField>保存位置</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>選擇工作區</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>範本選項</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>要保存的位置</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>選擇範本</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>自訂的保存按鈕</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>自訂的保存訊息</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>重新導向：</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>重新導向路徑：</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>操作</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <save-successfully>已成功保存入口網站應用程式偏好選項。</save-successfully>
+      <item-not-found>此路徑不正確。</item-not-found>
+      <fileType-empty>請在保存此配置之前，選擇一種檔案類型。</fileType-empty>
+      <ws-empty>請選擇一個工作區。</ws-empty>
+      <action-empty>請選擇某一個操作的資料夾。</action-empty>
+      <message-empty>"自訂保存訊息"欄位是必需的不選擇重新導向選項，或路徑為空的情況下。</message-empty>
+      <get-template>訪問範本時出現錯誤。</get-template>
+      <set-template-option>設定範本選項時出錯。</set-template-option>
+      <do-select>選擇位置時出錯。</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,116 +52,116 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>選擇路徑</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
-      <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <name>名稱</name>
+      <description>描述</description>
+      <instanceOf>實例</instanceOf>
+      <action>操作</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>新增</Add>
     </action>
     <msg>
-      <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <empty>沒有操作</empty>
+      <remove-popup-first>您必須在刪除此節點之前關閉編輯快顯視窗。</remove-popup-first>
+      <confirm-delete-action>是否確定要刪除此操作?</confirm-delete-action>
+      <template-empty>此範本的 '{0}' 是 null 或為空。</template-empty>
+      <template-null>該範本是 null 或為空，或您沒有權限訪問此範本。</template-null>
+      <access-denied>訪問被拒絕。您沒有權限來執行此操作。</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>選擇位置</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <workspaceName>工作區：</workspaceName>
+      <rootNodePath>根路徑：</rootNodePath>
+      <rootNodeInfo>根節點</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>增加根節點</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>此節點不具有任何子部分。</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>名稱</name>
+      <action>操作</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>增加操作</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>增加/編輯操作</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
-      <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
-      <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <repository-exception>不能保存此操作。提供的名稱沒有必要作為最後一個元素的索引。</repository-exception>
+      <numberformat-exception>不能保存此操作。提供的名稱不能有 '[' 或']'。</numberformat-exception>
+      <existed-action>操作名稱 '{0}' 已存在。請選擇另一個名稱。</existed-action>
+      <unable-add-action>無法增加此操作。</unable-add-action>
+      <unable-add>無法增加此操作。此節點是根或您沒有權限。</unable-add>
+      <not-support>對話方塊中"{0}' 不受支援。</not-support>
+      <no-permission-add>訪問被拒絕。你並沒有在這裡增加採取行動的權利。</no-permission-add>
+      <access-denied>訪問被拒絕。您沒有權限訪問此範本。</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>驗證程式</validator>
+      <destPath>與路徑</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>建立操作的類型</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
+      <not-support>無法載入該範本的 '{0}'。</not-support>
+      <do-not-permission>您沒有權限要載入的範本中 '{0}'。</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>選擇位置</UIOneNodePathSelector>
+      <UIPermissionSelector>瀏覽器的權限</UIPermissionSelector>
+      <UICategoriesSelector>新增類別</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>欄位 '{0}' 與 '{1}' 的值不正確。</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>選擇類別</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>引用的類別</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -173,19 +173,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>新增類別</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>類別樹</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>類別選擇器</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

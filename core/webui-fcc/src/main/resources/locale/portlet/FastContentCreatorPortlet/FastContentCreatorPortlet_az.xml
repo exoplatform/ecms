@@ -59,12 +59,12 @@
   <UIFCCActionList>
     <header>
       <name>Name</name>
-      <description>Description</description>
+      <description>Açıqlama</description>
       <instanceOf>Instance of</instanceOf>
       <action>Action</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Əlavə Et</Add>
     </action>
     <msg>
       <empty>No actions</empty>

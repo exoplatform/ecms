@@ -12,8 +12,8 @@
   <UIEditingForm>
     <label>
       <option>
-        <Draft>Edit</Draft>
-        <Published>Published</Published>
+        <Draft>編輯</Draft>
+        <Published>已發佈</Published>
       </option>
     </label>
   </UIEditingForm>

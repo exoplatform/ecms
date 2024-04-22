@@ -2,18 +2,18 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>Це ім'я не допускається.</name-not-allowed>
+      <in-versioning>Перш ніж додавати новий вузол, будь ласка, перевірте поточний вузол.</in-versioning>
+      <cannot-save>Сталася помилка під час збереження вузла.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <not-support>Не вдалося завантажити шаблон '{0}'.</not-support>
+      <not-add-folder>Лише файли можуть бути додані до цієї папки.</not-add-folder>
+      <access-denied>Доступ заборонено. У вас немає дозволу на додавання в '{0}'.</access-denied>
+      <path-not-found>Шлях '{0}' був видалений або є неприпустимим.</path-not-found>
+      <node-locked>Вузол '{0}' заблокований. Розблокуйте цей вузол, перш ніж створювати документи.</node-locked>
+      <node-isExist>Цей вузол вже існує в '{0}' і не дозволяється мати декілька вузлів з одаковими іменами.</node-isExist>
+      <get-dialog-path>При отриманні шляху до діалогового вікна сталася помилка.</get-dialog-path>
+      <new-jcr-template>Під час створення нового шаблону сталася помилка.</new-jcr-template>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -23,27 +23,27 @@
 
   <UIFCCConfig>
     <label>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCSaveLocationField>Зберегти розташування</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Вибрати робочу область</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Параметри шаблону</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Розташування для збереження</UIFCCLocationFormInputAction>
+      <UIFCCTemplateFormSelectBox>Вибрати шаблон</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Користувальницька кнопка збереження</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Користувальницьке повідомлення про збереження</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Переспрямування:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Шлях для переспрямування:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Дії</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <save-successfully>Успішно збережено в настройках порталу.</save-successfully>
+      <item-not-found>Цей шлях є неприпустимим.</item-not-found>
+      <fileType-empty>Будь ласка, виберіть тип файлу перед збереженням цієї конфігурації.</fileType-empty>
+      <ws-empty>Будь ласка, виберіть одну робочу область.</ws-empty>
+      <action-empty>Будь ласка виберіть папку з дією.</action-empty>
+      <message-empty>Поле "Користувальницьке повідомлення про збереження" потрібне в випадку, якщо ви не вибрали опцію переспрямування або шлях був порожній.</message-empty>
+      <get-template>Сталася помилка під час доступу до шаблона.</get-template>
+      <set-template-option>Сталася помилка під час установлення параметру шаблону.</set-template-option>
+      <do-select>Сталася помилка під час вибору розташування.</do-select>
       </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -52,116 +52,116 @@
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Вибрати шлях</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
-      <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <name>Ім’я</name>
+      <description>Опис</description>
+      <instanceOf>Екземпляр</instanceOf>
+      <action>Дія</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Додати</Add>
     </action>
     <msg>
-      <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <empty>Нема дій</empty>
+      <remove-popup-first>Спливаюче меню редагування потрібно закривати перед видаленням цього вузла.</remove-popup-first>
+      <confirm-delete-action>Ви дійсно бажаєте видалити цю дію?</confirm-delete-action>
+      <template-empty>Шаблон "{0}" анульований або пустий.</template-empty>
+      <template-null>Шаблон анульований або пустий, або ви не маєте дозволу на доступ до цього шаблону.</template-null>
+      <access-denied>Доступ заборонено. У вас не вистачає на це права доступу.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Виберіть розташування</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <workspaceName>Робоча область:</workspaceName>
+      <rootNodePath>Кореневий шлях:</rootNodePath>
+      <rootNodeInfo>Кореневий вузол</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Додати кореневий вузол</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Цей вузол немає дочірніх вузлів.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Ім’я</name>
+      <action>Дія</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Додати дію</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Додати/Змінити дію</title>
     <action>
       <Save>#{word.save}</Save>
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
-      <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
-      <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <repository-exception>Не вдалося зберегти цю дію. Надане ім'я не може мати такий же індекс як і його останній елемент.</repository-exception>
+      <numberformat-exception>Не вдалося зберегти цю дію. Надане ім'я не повинне мати ' [' або ']'.</numberformat-exception>
+      <existed-action>Дія під іменем "{0}" уже існує. Будь ласка, виберіть іншу назву.</existed-action>
+      <unable-add-action>Не вдалося додати цю дію.</unable-add-action>
+      <unable-add>Не вдалося додати цю дію. Цей вузол є кореневим або у вас немає прав доступу.</unable-add>
+      <not-support>Діалогове вікно '{0}' не підтримується.</not-support>
+      <no-permission-add>Доступ заборонено. Ви не маєте права додавати тут дію.</no-permission-add>
+      <access-denied>Доступ заборонено. Ви не маєте дозвіл на доступ до цього шаблону.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Агент перевірки</validator>
+      <destPath>Із шляхом</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Створити дію типу</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
+      <not-support>Не вдалося завантажити шаблон '{0}'.</not-support>
+      <do-not-permission>Ви не маєте дозволу завантажити шаблон '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
+      <UIOneNodePathSelector>Виберіть розташування</UIOneNodePathSelector>
+      <UIPermissionSelector>Оглядач прав доступа</UIPermissionSelector>
       <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Поле "{0}" зі значенням "{1}", є неприпустимим.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Виберіть категорії</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Згадувані категорії</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -173,19 +173,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Додати категорії</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Дерево категорій</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Вибір категорії</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

@@ -2,53 +2,53 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
+      <keyword>Schlüsselbegriff</keyword>
       <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <Page>Seite</Page>
+      <Document>Dokument</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Suche</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <results>Results {0} to {1} for {2}</results>
-      <oneResult>Only one result for {0}</oneResult>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
+      <Page>Seite</Page>
+      <Document>Dokument</Document>
+      <DocumentAndPage>Dokument und Seite</DocumentAndPage>
+      <documentandpage>Dokument und Seite</documentandpage>
+      <results>Ergebnisse der {0} für {1} für {2}</results>
+      <oneResult>Nur ein Ergebnis für {0}</oneResult>
+      <ofAboutCaption>von ungefähr</ofAboutCaption>
+      <timeUnitCaption>Sekunden</timeUnitCaption>
+      <similar>Seiten, auf denen der gleiche Inhalt angezeigt wird</similar>
       <editor>Editor</editor>
-      <date>Date</date>
-      <relevancy>Relevance</relevancy>
-      <title>Title</title>
-      <sortBy>Sort By:</sortBy>
+      <date>Datum</date>
+      <relevancy>Relevanz</relevancy>
+      <title>Titel</title>
+      <sortBy>Sortieren nach:</sortBy>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Bearbeiten</edit>
     </action>
     <msg>
-      <search-not-match-type>Your search {0} does not match any {1}.</search-not-match-type>
+      <search-not-match-type>Ihre Suche {0} findet keine übereinstimmenden {1}.</search-not-match-type>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>Elemente pro Seite</itemsPerPageSelector>
+      <searchFormSelector>Suchformular Vorlage</searchFormSelector>
+      <searchResultSelector>Suchergebnis Vorlage</searchResultSelector>
+      <searchPaginatorSelector>Suche-Paginierung Vorlage</searchPaginatorSelector>
+      <searchPageLayoutSelector>Suche-Seitenlayout Vorlage</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Basispfad</searchResultBasePathInputSetAction>
+      <pageMode>Seitenmodus</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>Keine</none>
+        <more>Mehr</more>
+        <pagination>Paginierung</pagination>
       </option>
     </label>
     <action>
@@ -58,38 +58,38 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>einen Basispfad auswählen</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>Das Passwort ist ungültig. Einige Zeichen werden nicht erkannt.</keyword-not-support>
+     <not-checked>Bitte wählen Sie einen Suchtyp aus.</not-checked>
+     <keyword-not-empty>Bitte geben Sie Ihr Passwort ein.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>Weiter</next>
+      <previous>Zurück</previous>
+      <more>Mehr</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Schnelle Bearbeitung</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>in Seiten</pageCheckBox>
+      <documentCheckBox>im Inhalt</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>Suche auf allen Seiten</all>
       </option>  
     </label>  
   </ViewMode>
