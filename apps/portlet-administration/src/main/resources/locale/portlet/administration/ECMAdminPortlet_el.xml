@@ -8,29 +8,29 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
-        <Explorer>Explorer</Explorer>
-        <Repository>Repository</Repository>
-        <Advanced>Advanced</Advanced>
+        <Templates>Πρότυπα</Templates>
+        <Explorer>Περιηγητής</Explorer>
+        <Repository>Αποθετήριο</Repository>
+        <Advanced>Προχωρημένα</Advanced>
       </label>
     </tab>
     <label>
-      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
-      <UIMetadataManager>Metadata</UIMetadataManager>
-      <UINamespaceManager>Namespaces</UINamespaceManager>
-      <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Documents</UITemplatesManager>
-      <UICLVTemplatesManager>List</UICLVTemplatesManager>
-      <UIViewManager>Views</UIViewManager>
-      <UIDriveManager>Drives</UIDriveManager>
-      <UIQueriesManager>Queries</UIQueriesManager>
-      <UIActionManager>Actions</UIActionManager>
-      <UIScriptManager>Scripts</UIScriptManager>
-      <UIUnLockManager>Locks</UIUnLockManager>
-      <UIFolksonomyManager>Tags</UIFolksonomyManager>
+      <UITaxonomyManagerTrees>Κατηγορίες</UITaxonomyManagerTrees>
+      <UIMetadataManager>Μεταδεδομένα</UIMetadataManager>
+      <UINamespaceManager>Χώροι ονομάτων</UINamespaceManager>
+      <UINodeTypeManager>Τύποι κόμβων</UINodeTypeManager>
+      <UITemplatesManager>Έγγραφα</UITemplatesManager>
+      <UICLVTemplatesManager>Λίστα</UICLVTemplatesManager>
+      <UIViewManager>Προβολές</UIViewManager>
+      <UIDriveManager>Μονάδες</UIDriveManager>
+      <UIQueriesManager>Ερωτήματα</UIQueriesManager>
+      <UIActionManager>Ενέργειες</UIActionManager>
+      <UIScriptManager>Σενάρια</UIScriptManager>
+      <UIUnLockManager>Κλειδώματα</UIUnLockManager>
+      <UIFolksonomyManager>Ετικέτες</UIFolksonomyManager>
     </label>
     <msg>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να εκτελέσετε αυτήν την ενέργεια.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,24 +40,24 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
-      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
-      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
-      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
-      <path-error>An error occurred while removing this category node.</path-error>
+      <referential-integrity>Δεν μπορεί να γίνει ανάγνωση από το αρχείο προέλευσης ή η κατηγορία προορισμού είναι μια υπό-κατηγορία.</referential-integrity>
+      <no-taxonomy-selected>Πρέπει να αντιγράψετε ή να αποκόψετε τουλάχιστον μία κατηγορία.</no-taxonomy-selected>
+      <node-is-cutting>Δεν μπορείτε να επικολλήσετε εδώ. Ο κόμβος της κατηγορίας '{0}' μπορεί να κοπεί.</node-is-cutting>
+      <can-not-paste>Δεν υπάρχει κανένα στοιχείο στην προσωρινή μνήμη για να επικολλήσετε.</can-not-paste>
+      <reference-exception>Δεν μπορείτε να διαγράψετε αυτήν την κατηγορία, επειδή υπάρχει αναφορά σε αυτή από το περιεχόμενο.</reference-exception>
+      <path-error>Παρουσιάστηκε σφάλμα κατά την κατάργηση αυτού του κόμβου της κατηγορίας.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την κατηγορία;</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
-      <paste>Paste</paste>
-      <cut>Cut</cut>
-      <copy>Copy</copy>
-      <remove>Delete</remove>
+      <add>Προσθήκη</add>
+      <paste>Επικόλληση</paste>
+      <cut>Αποκοπή</cut>
+      <copy>Αντιγραφή</copy>
+      <remove>Διαγραφή</remove>
     </title>
   </UITaxonomyManager>
 
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Καθορίστε το όνομα της κατηγορίας, το χώρο εργασίας και την αρχική διαδρομή.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Ρυθμίστε τα δικαιώματα για το δέντρο κατηγοριών.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Προσθέστε μια ενέργεια στο δέντρο κατηγοριών για να ολοκληρώσετε τη δημιουργία ή την ενημέρωση.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Επεξεργαστείτε το δέντρο ταξινομίας προσθέτοντας, αντιγράφοντας, αποκόβοντας και την επιλέγοντας δικαιώματα.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>The category tree does not exist.</not-exist-tree>
+      <not-exist-tree>Το δέντρο κατηγοριών δεν υπάρχει.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
 
@@ -90,25 +90,25 @@
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
-      <name-emty>The tree name is required.</name-emty>
-      <homePath-emty>The home path is required.</homePath-emty>
-      <targetPath-emty>The target path is required.</targetPath-emty>
-      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
+      <name-not-allowed>Απαγορευμένο όνομα</name-not-allowed>
+      <name-emty>Το όνομα για το δέντρο απαιτείται.</name-emty>
+      <homePath-emty>Η αρχική διαδρομή απαιτείται.</homePath-emty>
+      <targetPath-emty>Η διαδρομή προορισμού απαιτείται.</targetPath-emty>
+      <taxonomytree-existed>Το όνομα για το δέντρο κατηγοριών υπάρχει ήδη.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Name</TaxoTreeName>
-      <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
+      <TaxoTreeName>Όνομα</TaxoTreeName>
+      <TaxoTreeWorkspace>Χώρος Εργασίας</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Αρχική διαδρομή</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Προσθήκη διαδρομής</AddPath>
     </title>
   </TaxonomyTreeHomePath>
 
@@ -120,17 +120,17 @@
   <UIPermissionTreeInfo>
     <action>
       <title>
-        <Delete>Delete</Delete>
-        <Edit>Edit</Edit>
+        <Delete>Διαγραφή</Delete>
+        <Edit>Επεξεργασία</Edit>
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <read>Read</read>
-      <addNode>Add Node</addNode>
-      <setProperty>Set Property</setProperty>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <usersOrGroups>Χρήστης ή Ομάδα</usersOrGroups>
+      <read>Ανάγνωση</read>
+      <addNode>Προσθήκη κόμβου</addNode>
+      <setProperty>Ορισμός ιδιότητας</setProperty>
+      <remove>Κατάργηση</remove>
+      <action>Ενέργεια</action>
     </header>
   </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
   -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
+      <have-not-any-permission>Καθορίστε τουλάχιστον ένα δικαίωμα για αυτόν τον κόμβο.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
   -->
 
   <UIActionForm>
-    <title>Add an action to the category tree</title>
+    <title>Προσθέστε μια ενέργεια στο δέντρο κατηγοριών</title>
     <action>
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
-      <path-invalid>The path is invalid.</path-invalid>
-      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
-      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add an action.</no-permission-add>
-      <not-created-tree>The category tree has not yet been created.</not-created-tree>
+      <name-not-allowed>Κενό όνομα ή ειδικοί χαρακτήρες δεν επιτρέπονται στο όνομα της ενέργειας.</name-not-allowed>
+      <path-invalid>Η διαδρομή δεν είναι έγκυρη.</path-invalid>
+      <taxonomy-existed>Το δέντρο κατηγοριών υπάρχει ήδη.</taxonomy-existed>
+      <taxonomy-node-existed>Ο κόμβος κατηγορίας υπάρχει ήδη.</taxonomy-node-existed>
+      <no-permission-add>Δεν έχετε το δικαίωμα να προσθέσετε μια ενέργεια.</no-permission-add>
+      <not-created-tree>Το δέντρο κατηγοριών δεν έχει ακόμα δημιουργηθεί.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,8 +173,8 @@
   -->
   <UITemplatesList>
     <header>
-      <name>Template Name</name>
-      <action>Actions</action>
+      <name>Όνομα προτύπου</name>
+      <action>Ενέργειες</action>
     </header>
   </UITemplatesList>
   <!--
@@ -184,23 +184,23 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Namespace Form</UINamespaceForm>
+      <UINamespaceForm>Φόρμα Χώρου Ονομάτων</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Register New Namespace</title>
+    <title>Δημιουργία νέου χώρου ονομάτων</title>
     <label>
-      <namespace>Namespace Prefix</namespace>
-      <uri>URI</uri>
+      <namespace>Πρόθεμα χώρου ονομάτων</namespace>
+      <uri>Ενιαίο Αναγνωριστικό Πόρου (URI)</uri>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
-      <prefix-null>Please specify the namespace's prefix.</prefix-null>
-      <uri-null>Please specify the namespace's URI.</uri-null>
+      <register-unsuccessfull>Το όνομα χώρου ή το ενιαίο αναγνωριστικό πόρου (URI) υπάρχει ήδη.</register-unsuccessfull>
+      <prefix-null>Παρακαλούμε ορίστε το πρόθεμα για το χώρο ονομάτων.</prefix-null>
+      <uri-null>Παρακαλούμε ορίστε το ενιαίο αναγνωριστικό πόρου (URI) για το χώρο ονομάτων.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -210,17 +210,17 @@
   -->
   <UINamespaceList>
     <header>
-      <prefix>Prefix</prefix>
-      <uri>Namespace URI</uri>
-      <action>Action</action>
+      <prefix>Πρόθεμα</prefix>
+      <uri>Ενιαίο Αναγνωριστικό Πόρου (URI) για το χώρο ονομάτων</uri>
+      <action>Ενέργεια</action>
     </header>
     <action>
-      <AddNamespace>Register</AddNamespace>
+      <AddNamespace>Εγγραφή</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Register New Namespace</UINamespaceForm>
+      <UINamespaceForm>Δημιουργία νέου χώρου ονομάτων</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -230,30 +230,30 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
-      <True>true</True>
-      <False>false</False>
+      <false>ψευδές</false>
+      <true>αληθές</true>
+      <True>αληθές</True>
+      <False>ψευδές</False>
     </label>
     <title>
-      <view>View</view>
-      <edit>Edit</edit>
-      <delete>Delete</delete>
+      <view>Προβολή</view>
+      <edit>Επεξεργασία</edit>
+      <delete>Διαγραφή</delete>
     </title>
     <header>
-      <icon>Icon</icon>
-      <name>Metadata</name>
-      <type>Type</type>
-      <internalUse>Internal Use</internalUse>
-      <action>Actions</action>
+      <icon>Εικονίδιο</icon>
+      <name>Μεταδεδομένα</name>
+      <type>Τύπος</type>
+      <internalUse>Εσωτερική χρήση</internalUse>
+      <action>Ενέργειες</action>
     </header>
     <msg>
-      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
-      <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
-      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτά τα μεταδεδομένα;</confirm-delete>
+      <delete-successful>Τα πρότυπα του '{0}' διαγράφηκαν με επιτυχία.</delete-successful>
+      <path-not-found-exception>Αυτά τα μεταδεδομένα έχουν διαγραφεί ή αλλάξει. Παρακαλώ κάντε κλικ στο κουμπί Ανανέωση.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Add Metadata</Add>
+      <Add>Προσθήκη μεταδεδομένων</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -264,13 +264,13 @@
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>Επεξεργασία προτύπου μεταδεδομένων</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
     <title>
-      <MetadataPermission>Set Permissions</MetadataPermission>
-      <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
+      <MetadataPermission>Ορισμός δικαιωμάτων</MetadataPermission>
+      <QueriesPermissionBrowse>Προσθήκη δικαιωμάτων</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -279,29 +279,29 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Mapping Metadata</title>
+    <title>Χαρτογράφηση Μεταδεδομένων</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Apply</Save>
+      <Save>Εφαρμογή</Save>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node name</label>
-      <input>Action</input>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
     </header>
     <label>
-      <dialogTemplate>Dialog Template:</dialogTemplate>
-      <viewTemplate>View Template:</viewTemplate>
-      <metadataName>Metadata Name:</metadataName>
-      <viewPermission>Permission:</viewPermission>
+      <dialogTemplate>Πρότυπο διαλόγου:</dialogTemplate>
+      <viewTemplate>Πρότυπο Προβολής:</viewTemplate>
+      <metadataName>Όνομα μεταδεδομένων:</metadataName>
+      <viewPermission>Δικαιώματα:</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Ετικέτα:</metadataLabel>
     </label>
     <tab>
       <label>
-        <metadataTypeTab>Metadata Type</metadataTypeTab>
-        <dialogTab>Dialog Template</dialogTab>
-        <viewTab>View Template</viewTab>
+        <metadataTypeTab>Τύπος μεταδεδομένων</metadataTypeTab>
+        <dialogTab>Πρότυπο διαλόγου</dialogTab>
+        <viewTab>Πρότυπο Προβολής</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -312,18 +312,18 @@
   -->
   <UIMetadataView>
     <header>
-      <name>Element Name</name>
-      <type>Type</type>
-      <description>Description</description>
-      <isMixin>Is Mixin Type</isMixin>
-      <orderable>Orderable children</orderable>
+      <name>Όνομα στοιχείου</name>
+      <type>Τύπος</type>
+      <description>Περιγραφή</description>
+      <isMixin>Μεικτός (Mixin) τύπος</isMixin>
+      <orderable>Οι εξαρτημένοι κόμβοι μπορούν να ταξινομηθούν</orderable>
     </header>
     <info>
-      <description>Description</description>
+      <description>Περιγραφή</description>
     </info>
     <tab>
-      <element>Elements</element>
-      <metadataView>Metadata Information</metadataView>
+      <element>Στοιχεία</element>
+      <metadataView>Πληροφορίες μεταδεδομένων</metadataView>
     </tab>
     <action>
       <Cancel>#{word.close}</Cancel>
@@ -332,7 +332,7 @@
   </UIMetadataView>
   <ViewMetadataPopup>
     <title>
-      <UIMetadataView>Metadata Information</UIMetadataView>
+      <UIMetadataView>Πληροφορίες μεταδεδομένων</UIMetadataView>
     </title>
   </ViewMetadataPopup>
   <!--
@@ -342,26 +342,26 @@
   -->
   <UIDriveList>
     <header>
-      <icon>Icon</icon>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
-      <permissions>Permissions</permissions>
-      <views>View</views>
-      <action>Action</action>
+      <icon>Εικονίδιο</icon>
+      <name>Όνομα</name>
+      <workspace>Χώρος Εργασίας</workspace>
+      <homePath>Αρχική διαδρομή</homePath>
+      <permissions>Δικαιώματα</permissions>
+      <views>Προβολή</views>
+      <action>Ενέργεια</action>
     </header>
     <tooltip>
-      <Delete>Delete</Delete>
-      <EditInfo>Edit</EditInfo>
+      <Delete>Διαγραφή</Delete>
+      <EditInfo>Επεξεργασία</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη μονάδα δίσκου;</confirm-delete>
     </msg>
     <action>
-      <AddDrive>Add Drive</AddDrive>
+      <AddDrive>Προσθήκη μονάδας δίσκου</AddDrive>
     </action>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{0} στο {1}</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -372,63 +372,63 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>The drive already exists.</drive-exists>
-      <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
-      <drive-views-invalid>Please select a view.</drive-views-invalid>
-      <icon-not-found>Icon not found.</icon-not-found>
-      <permission-null>You must set the permission for this drive.</permission-null>
-      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
-      <name-null>Please enter the drive name.</name-null>
-      <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
+      <drive-exists>Η μονάδα δίσκου υπάρχει ήδη.</drive-exists>
+      <workspace-path-invalid>Η διαδρομή του χώρου εργασίας δεν είναι έγκυρη.</workspace-path-invalid>
+      <drive-views-invalid>Παρακαλώ επιλέξτε μια προβολή.</drive-views-invalid>
+      <icon-not-found>Το εικονίδιο δεν βρέθηκε.</icon-not-found>
+      <permission-null>Πρέπει να ορίσετε τα δικαιώματα για αυτό το δίσκο.</permission-null>
+      <allowCreateFolders>Πρέπει να επιλέξετε τον τύπο φακέλου.</allowCreateFolders>
+      <name-null>Παρακαλούμε εισάγετε το όνομα της μονάδας δίσκου.</name-null>
+      <fileName-invalid>Το όνομα της μονάδας δίσκου έχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
     </msg>
     <tab>
       <label>
-        <DriveInputSet>Drive</DriveInputSet>
-        <ViewsInputSet>Apply Views</ViewsInputSet>
-        <PermissionInputSet>Set Permissions</PermissionInputSet>
+        <DriveInputSet>Μονάδα δίσκου</DriveInputSet>
+        <ViewsInputSet>Εφαρμογή Προβολών</ViewsInputSet>
+        <PermissionInputSet>Ορισμός δικαιωμάτων</PermissionInputSet>
       </label>
     </tab>
     <label>
-      <name>Name:</name>
-      <workspace>Workspace:</workspace>
-      <homePath>Home Path:</homePath>
-      <icon>Workspace Icon:</icon>
-      <viewPreferences>Show Referenced Documents:</viewPreferences>
-      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
-      <viewSideBar>Show Sidebar:</viewSideBar>
-      <permissions>Permissions:</permissions>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
-      <Admin>Admin:</Admin>
-      <Categories>Categories:</Categories>
-      <Icons>Icons:</Icons>
-      <List>List:</List>
-      <Web>Web:</Web>
+      <name>Όνομα:</name>
+      <workspace>Χώρος Εργασίας:</workspace>
+      <homePath>Αρχική διαδρομή:</homePath>
+      <icon>Εικονίδιο χώρου εργασίας:</icon>
+      <viewPreferences>Εμφάνιση αναφερόμενων εγγράφων:</viewPreferences>
+      <viewNonDocument>Εμφάνιση κόμβων που δεν αφορούν έγγραφα:</viewNonDocument>
+      <viewSideBar>Εμφάνιση πλευρικής μπάρας:</viewSideBar>
+      <permissions>Δικαιώματα:</permissions>
+      <showHiddenNode>Εμφάνιση κρυφών κόμβων:</showHiddenNode>
+      <allowCreateFolders>Επιτρέπεται η δημιουργία φακέλων:</allowCreateFolders>
+      <Admin>Διαχειριστής:</Admin>
+      <Categories>Κατηγορίες:</Categories>
+      <Icons>Εικονίδια:</Icons>
+      <List>Λίστα:</List>
+      <Web>Ιστός:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
     <title>
-      <UIDriveForm>Add Drive</UIDriveForm>
+      <UIDriveForm>Προσθήκη μονάδας δίσκου</UIDriveForm>
     </title>
   </AddDriveManagerPopup>
   <EditDriveManagerPopup>
     <title>
-      <UIDriveForm>Edit Drive</UIDriveForm>
+      <UIDriveForm>Επεξεργασία μονάδας δίσκου</UIDriveForm>
     </title>
   </EditDriveManagerPopup>
   <UITreeList>
     <info>
-      <child-not-found>Child node not found.</child-not-found>
+      <child-not-found>Ο θυγατρικός κόμβος δεν βρέθηκε.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Όνομα</name>
+      <action>Ενέργεια</action>
     </header>
   </UITreeList>
 
   <UIRepositoryList>
     <titlebar>
-      <label>Manage ECM Main Functions</label>
+      <label>Διαχείριση κυρίων λειτουργιών της Εταιρικής Διαχείρισης Περιεχομένου (ECM)</label>
     </titlebar>
   </UIRepositoryList>
 
@@ -439,9 +439,9 @@
   -->
   <UINodeTypeManager>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
-      <input>Action</input>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -454,28 +454,28 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>True</true>
-      <false>False</false>
+      <true>Αληθές</true>
+      <false>Ψευδές</false>
     </label>
     <header>
-      <icon>Icon</icon>
-      <nodeType>Node Type</nodeType>
-      <mixinType>Mixin Type</mixinType>
-      <orderable>Orderable Child Nodes</orderable>
-      <action>Action</action>
+      <icon>Εικονίδιο</icon>
+      <nodeType>Τύπος κόμβου</nodeType>
+      <mixinType>Μεικτός τύπος</mixinType>
+      <orderable>Εξαρτημένοι κόμβοι που μπορούν να ταξινομηθούν</orderable>
+      <action>Ενέργεια</action>
     </header>
     <action>
-      <Export>Export</Export>
-      <Import>Import</Import>
-      <Add>Add</Add>
+      <Export>Εξαγωγή</Export>
+      <Import>Εισαγωγή</Import>
+      <Add>Προσθήκη</Add>
     </action>
     <tooltip>
-      <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <View>Προβολή</View>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον τύπο κόμβου;</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -486,12 +486,12 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Προσθήκη</Add>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
-      <input>Action</input>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -502,55 +502,55 @@
   <UINodeTypeForm>
     <tab>
       <label>
-        <nodeTypeDefinition>Node Type</nodeTypeDefinition>
-        <propertyDefinition>Property</propertyDefinition>
-        <childNodeDefinition>Child Node</childNodeDefinition>
-        <superTypeTab>Super Types</superTypeTab>
-        <DefaultTypeTab>Default Primary</DefaultTypeTab>
-        <RequiredTypeTab>Required Primary</RequiredTypeTab>
-        <Contraints>Constraints</Contraints>
+        <nodeTypeDefinition>Τύπος κόμβου</nodeTypeDefinition>
+        <propertyDefinition>Ιδιότητα</propertyDefinition>
+        <childNodeDefinition>Θυγατρικός κόμβος</childNodeDefinition>
+        <superTypeTab>Σούπερ Τύποι</superTypeTab>
+        <DefaultTypeTab>Προεπιλογή πρωτεύοντα τύπου</DefaultTypeTab>
+        <RequiredTypeTab>Απαιτούμενος πρωτεύον τύπος</RequiredTypeTab>
+        <Contraints>Περιορισμοί</Contraints>
       </label>
     </tab>
     <label>
-      <propertiesDefinitions>Property Definitions</propertiesDefinitions>
-      <childDefinitions>Child Node Definitions</childDefinitions>
-      <namespace>Name Space</namespace>
-      <propertyNamespace>Name Space</propertyNamespace>
-      <nodeTypeName>Node Type Name</nodeTypeName>
-      <mixinType>Is Mixin Type</mixinType>
-      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
-      <primaryItemName>Primary Item Name</primaryItemName>
-      <superTypes>Super Types</superTypes>
-      <propertyname>Definition Name</propertyname>
-      <requiredType>Required Type</requiredType>
-      <multiple>Is Multiple</multiple>
-      <mandatory>Is Mandatory</mandatory>
-      <autoCreated>Is Auto-created</autoCreated>
-      <parentversion>On parent version</parentversion>
-      <protected>Is Protected</protected>
-      <constraints>Values</constraints>
+      <propertiesDefinitions>Ορισμοί ιδιοτήτων</propertiesDefinitions>
+      <childDefinitions>Ορισμοί εξαρτημένων κόμβων</childDefinitions>
+      <namespace>Χώρος Ονομάτων</namespace>
+      <propertyNamespace>Χώρος Ονομάτων</propertyNamespace>
+      <nodeTypeName>Όνομα τύπου κόμβου</nodeTypeName>
+      <mixinType>Μεικτός (Mixin) τύπος</mixinType>
+      <hasOrderableChildNodes>Εξαρτημένοι κόμβοι που μπορούν να ταξινομηθούν</hasOrderableChildNodes>
+      <primaryItemName>Όνομα πρωταρχικού στοιχείου</primaryItemName>
+      <superTypes>Σούπερ Τύποι</superTypes>
+      <propertyname>Όνομα ορισμού</propertyname>
+      <requiredType>Απαιτούμενος τύπος</requiredType>
+      <multiple>Πολλαπλό</multiple>
+      <mandatory>Υποχρεωτικό</mandatory>
+      <autoCreated>Δημιουργείται αυτόματα</autoCreated>
+      <parentversion>Κληρονομική έκδοση</parentversion>
+      <protected>Προστατευμένο</protected>
+      <constraints>Τιμές</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Is same name sibling</sameNameSiblings>
-      <childNamespace>Name Space</childNamespace>
-      <childMandatory>Is Mandatory</childMandatory>
-      <childAutocreated>Is Auto-created</childAutocreated>
-      <childParentversion>On parent version</childParentversion>
-      <childProtected>Is Protected</childProtected>
-      <childNodename>Definition Name</childNodename>
-      <requiredPrimaryType>Required Primary Type</requiredPrimaryType>
-      <defaultPrimaryType>Default Primary Type</defaultPrimaryType>
-      <valueconstraints>Value Constraints</valueconstraints>
+      <sameNameSiblings>Κοινό όνομα στους κόμβους του ίδιου επιπέδου</sameNameSiblings>
+      <childNamespace>Χώρος ονομάτων</childNamespace>
+      <childMandatory>Υποχρεωτικό</childMandatory>
+      <childAutocreated>Δημιουργείται αυτόματα</childAutocreated>
+      <childParentversion>Κληρονομική έκδοση</childParentversion>
+      <childProtected>Προστατευμένο</childProtected>
+      <childNodename>Όνομα ορισμού</childNodename>
+      <requiredPrimaryType>Απαιτούμενος πρωτεύον τύπος</requiredPrimaryType>
+      <defaultPrimaryType>Προεπιλεγμένος πρωτεύον τύπος</defaultPrimaryType>
+      <valueconstraints>Περιορισμοί τιμής</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Save as Draft</SaveDraft>
-      <AddProperty>Add Property</AddProperty>
-      <AddChild>Add Child</AddChild>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <SaveDraft>Αποθήκευση ως πρoσχέδιο</SaveDraft>
+      <AddProperty>Προσθήκη ιδιότητας</AddProperty>
+      <AddChild>Προσθήκη απότοκου</AddChild>
+      <AddConstraints>Προσθήκη περιορισμών</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>Add Type</AddType>
-      <AddValue>Add</AddValue>
+      <AddType>Προσθήκη τύπου</AddType>
+      <AddValue>Προσθήκη</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -560,62 +560,62 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
-      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
-      <nodeType-name>The node type name is required.</nodeType-name>
-      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
-      <node-type-exists>The '{0}' node type already exists.</node-type-exists>
-      <node-type-name>The node type name is invalid.</node-type-name>
-      <values-error>Please select only one node type for the default primary type.</values-error>
-      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
-      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
+      <register-successfully>Ο τύπος κόμβου '{0}' καταχωρήθηκε με επιτυχία.</register-successfully>
+      <supertype-is-madatory>Ο υπερκείμενος τύπος είναι υποχρεωτικός όταν εγγράφετε ένα νέο τύπο κόμβου. Παρακαλώ επιλέξτε τουλάχιστον έναν υπερκείμενο τύπο.</supertype-is-madatory>
+      <register-failed>Η εγγραφή του τύπου κόμβου ήταν ανεπιτυχής. Είτε γιατί υπάρχει ήδη είτε γιατί ο υπερκείμενος τύπος δεν είναι έγκυρος.</register-failed>
+      <nodeType-name>Απαιτείται το όνομα του τύπου κόμβου.</nodeType-name>
+      <fileName-invalid>Το όνομα αρχείου έχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+      <node-type-exists>Ο τύπος κόμβου '{0}' υπάρχει ήδη.</node-type-exists>
+      <node-type-name>Το όνομα του τύπου κόμβου δεν είναι έγκυρο.</node-type-name>
+      <values-error>Παρακαλώ επιλέξτε μόνο έναν τύπο κόμβου για τον πρωτεύοντα προεπιλεγμένο τύπο.</values-error>
+      <confirm-delete-child>Είστε σίγουροι ότι θέλετε να διαγράψετε αυτόν τον θυγατρικό κόμβο;</confirm-delete-child>
+      <confirm-delete-property>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την ιδιότητα;</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
     <tab>
       <label>
-        <constraints>Constraints</constraints>
-        <UIFormMultiValueInputSet>Constraints</UIFormMultiValueInputSet>
+        <constraints>Περιορισμοί</constraints>
+        <UIFormMultiValueInputSet>Περιορισμοί</UIFormMultiValueInputSet>
       </label>
     </tab>
     <msg>
-      <property-name>The property definition's name was invalid.</property-name>
-      <not-supported-value-constraints>This required type does not support value constraints.</not-supported-value-constraints>
+      <property-name>Το όνομα του ορισμού ιδιότητας δεν είναι έγκυρο.</property-name>
+      <not-supported-value-constraints>Αυτός ο απαιτούμενος τύπος δεν υποστηρίζει περιορισμούς τιμών.</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>The child node name is required.</child-name>
-      <child-invalid>The child node name contains some invalid characters.</child-invalid>
-      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
-      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
-      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
+      <child-name>Το όνομα του θυγατρικού κόμβου είναι απαιτούμενο.</child-name>
+      <child-invalid>Το όνομα του θυγατρικού κόμβου περιέχει κάποιους μη έγκυρους χαρακτήρες.</child-invalid>
+      <default-node-type-not-found>Ο προεπιλεγμένος τύπος κόμβου δεν βρέθηκε.</default-node-type-not-found>
+      <requiredPrimaryType>Ο απαιτούμενος πρωτεύον τύπος είναι απαραίτητος.</requiredPrimaryType>
+      <defaultPrimaryType>Ο προεπιλεγμένος πρωτεύον τύπος είναι απαραίτητος.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
     <title>
-      <FormdefaultPrimaryTypePopup>Select Default Primary Type</FormdefaultPrimaryTypePopup>
+      <FormdefaultPrimaryTypePopup>Επιλέξτε προεπιλεγμένο πρωτεύων τύπο</FormdefaultPrimaryTypePopup>
     </title>
   </defaultPrimaryTypePopup>
   <requiredPrimaryTypePopup>
     <title>
-      <FormrequiredPrimaryTypePopup>Select Required Primary Type</FormrequiredPrimaryTypePopup>
+      <FormrequiredPrimaryTypePopup>Επιλέξτε τον απαιτούμενο πρωτεύων τύπο</FormrequiredPrimaryTypePopup>
     </title>
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Select Super Types</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Επιλέξτε υπέρ τύπους</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Add/Edit Node Type Definitions</UINodeTypeForm>
+      <UINodeTypeForm>Προσθήκη/επεξεργασία ορισμών τύπου κόμβου</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>View Node Type Information</UINodeTypeForm>
+      <UINodeTypeForm>Προβολή πληροφοριών τύπου κόμβου</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -625,24 +625,24 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>Icon</icon>
-      <label>Node name</label>
-      <input>Action</input>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
-      <UncheckAll>Uncheck all</UncheckAll>
-      <CheckAll>Check all</CheckAll>
+      <Export>Εξαγωγή</Export>
+      <UncheckAll>Αποεπιλογή όλων</UncheckAll>
+      <CheckAll>Επιλογή όλων</CheckAll>
     </action>
-    <title>Export Node Types</title>
+    <title>Εξαγωγή τύπων κόμβoυ</title>
     <msg>
-      <item-null>Please select at least one node that you want to export.</item-null>
+      <item-null>Παρακαλώ επιλέξτε τουλάχιστον έναν κόμβο που θέλετε να εξάγετε.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>Export Node Types</UINodeTypeExport>
+      <UINodeTypeExport>Εξαγωγή τύπων κόμβoυ</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -657,19 +657,19 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>File Name</upload>
+      <upload>Όνομα αρχείου</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Upload</Upload>
+      <Upload>Ανέβασμα αρχείων</Upload>
     </action>
-    <title>Import Node Type From XML File</title>
+    <title>Εισαγωγή τύπου κόμβου από αρχείο XML</title>
     <msg>
-      <filename-error>Browse a node type file to import.</filename-error>
-      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
-      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
-      <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
-      <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
+      <filename-error>Επιλέξτε ένα αρχείο τύπου κόμβου για να εισαχθεί.</filename-error>
+      <data-file-error>Μπορούν να εισαχθούν μόνο αρχεία .xml ή .zip.</data-file-error>
+      <data-invalid>Τα δεδομένα δεν είναι έγκυρα. Παρακαλώ ελέγξτε τον τύπο του αρχείου και προσπαθήστε ξανά.</data-invalid>
+      <nodetype-exist>Ο τύπος κόμβου '{0}' υπάρχει ήδη.</nodetype-exist>
+      <namespace-invalid>Ο χώρος ονομάτων '{0}' δεν είναι έγκυρος.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -680,23 +680,23 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
-      <Upload>Re-upload</Upload>
+      <Import>Εισαγωγή</Import>
+      <Upload>Ανεβάστε ξανά</Upload>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
-      <input>Action</input>
+      <icon>Εικονίδιο</icon>
+      <label>Όνομα κόμβου</label>
+      <input>Ενέργεια</input>
     </header>
-    <title>Select Import Node Type</title>
+    <title>Επιλέξτε τύπο κόμβου για εισαγωγή</title>
     <msg>
-      <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
-      <nodetype-registered>Registration successful.</nodetype-registered>
+      <no-nodetype-registered>Δεν υπάρχουν τύποι κόμβου καταχωρημένοι.</no-nodetype-registered>
+      <nodetype-registered>Επιτυχής εγγραφή.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Import Node Type From XML File</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Εισαγωγή τύπου κόμβου από αρχείο XML</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -711,10 +711,10 @@
       <unstructuredFolder>Unstructured Folder</unstructuredFolder>
     </label>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
-      <AddIcon>Add Icon</AddIcon>
-      <AddPath>Add Path</AddPath>
+      <AddIcon>Προσθέστε εικονίδιο</AddIcon>
+      <AddPath>Προσθήκη διαδρομής</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -724,20 +724,20 @@
   -->
   <UIActionTypeList>
     <header>
-      <name>Script</name>
-      <label>Name</label>
-      <action>Actions</action>
+      <name>Δέσμη ενεργειών</name>
+      <label>Όνομα</label>
+      <action>Ενέργειες</action>
     </header>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </title>
     <action>
-      <AddAction>Add Action Type</AddAction>
+      <AddAction>Προσθήκη τύπου Ενέργειας</AddAction>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this action type?</confirm-delete>
-      <cannot-delete>You cannot remove this action type because the system is still using it.</cannot-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον τύπο ενέργειας;</confirm-delete>
+      <cannot-delete>Δεν μπορείτε να καταργήσετε αυτό το είδος ενέργειας, επειδή το σύστημα εξακολουθεί να τον χρησιμοποιεί.</cannot-delete>
     </msg>
   </UIActionTypeList>
   <!--
@@ -747,31 +747,31 @@
   -->
   <ActionPopup>
     <title>
-      <UIActionTypeForm>Add Action Type</UIActionTypeForm>
+      <UIActionTypeForm>Προσθήκη τύπου Ενέργειας</UIActionTypeForm>
     </title>
   </ActionPopup>
   <UIActionTypeForm>
-    <title>Add Action Type</title>
+    <title>Προσθήκη τύπου Ενέργειας</title>
     <label>
-      <actionType>Extend Action Type:</actionType>
-      <name>Name:</name>
+      <actionType>Επέκταση τύπου ενέργειας:</actionType>
+      <name>Όνομα:</name>
       <isMove>is Action Move:</isMove>
-      <variables>Variables:</variables>
-      <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
-      <exo_scriptAction>Groovy Scripts:</exo_scriptAction>
-      <exo_ruleAction>Defined Rules:</exo_ruleAction>
-      <script>Script:</script>
+      <variables>Μεταβλητές:</variables>
+      <exo_businessProcessAction>Επιχειρηματικές διαδικασίες:</exo_businessProcessAction>
+      <exo_scriptAction>Δέσμες ενεργειών Groovy:</exo_scriptAction>
+      <exo_ruleAction>Καθορισμένοι κανόνες:</exo_ruleAction>
+      <script>Δέσμη ενεργειών:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>The '{0}' action type was added successfully.</action-type-added>
-      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
-      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
-      <action-exist>This action already exists in the ECM system.</action-exist>
-      <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
+      <action-type-added>Ο τύπος '{0}' ενέργειας προστέθηκε με επιτυχία.</action-type-added>
+      <action-type-create-error>Παρουσιάστηκε σφάλμα κατά τη δημιουργία του τύπου ενέργειας.</action-type-create-error>
+      <action-name-invalid>'{0}' δεν είναι έγκυρο. Το όνομα πρέπει να αρχίζει με 'exo:'.</action-name-invalid>
+      <action-exist>Αυτός ο τύπος ενέργειας υπάρχει ήδη στο σύστημα.</action-exist>
+      <fileName-invalid>Το όνομα της ενέργειας περιέχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
     </msg>
   </UIActionTypeForm>
   <!--
@@ -781,27 +781,27 @@
   -->
   <UITabPane>
     <title>
-      <UIViewContainer>Views</UIViewContainer>
-      <ECMTemplate>Explorer Templates</ECMTemplate>
-      <UIScriptForm>Scripts</UIScriptForm>
-      <UIDialogTab>Dialog</UIDialogTab>
-      <UIViewTab>View</UIViewTab>
-      <UITemplateEditForm>Template</UITemplateEditForm>
-      <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Documents</UITemplateContainer>
-      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
-      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-      <UIActionScriptContainer>Action</UIActionScriptContainer>
-      <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-      <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+      <UIViewContainer>Προβολές</UIViewContainer>
+      <ECMTemplate>Πρότυπα Εξερευνητή</ECMTemplate>
+      <UIScriptForm>Σενάρια</UIScriptForm>
+      <UIDialogTab>Διάλογος</UIDialogTab>
+      <UIViewTab>Προβολή</UIViewTab>
+      <UITemplateEditForm>Πρότυπο</UITemplateEditForm>
+      <UITemplateForm>Πρότυπο</UITemplateForm>
+      <UITemplateContainer>Έγγραφα</UITemplateContainer>
+      <UIActionsTemplateContainer>Ενέργειες</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Υπόλοιποι</UIOthersTemplateContainer>
+      <UIActionScriptContainer>Ενέργεια</UIActionScriptContainer>
+      <UIWidgetScriptContainer>Γραφικά στοιχεία</UIWidgetScriptContainer>
+      <UIInterceptorScriptContainer>Αναχαιτιστικά</UIInterceptorScriptContainer>
 
-      <nodeTypeDefinition>Node Type</nodeTypeDefinition>
-      <propertyDefinition>Property</propertyDefinition>
-      <childNodeDefinition>Child Node</childNodeDefinition>
-      <SuperTypeTab>Super Types</SuperTypeTab>
-      <DefaultTypeTab>Default Primary</DefaultTypeTab>
-      <RequiredTypeTab>Required Primary</RequiredTypeTab>
-      <Contraints>Constraints</Contraints>
+      <nodeTypeDefinition>Τύπος κόμβου</nodeTypeDefinition>
+      <propertyDefinition>Ιδιότητα</propertyDefinition>
+      <childNodeDefinition>Θυγατρικός κόμβος</childNodeDefinition>
+      <SuperTypeTab>Σούπερ Τύποι</SuperTypeTab>
+      <DefaultTypeTab>Προεπιλογή πρωτεύοντα τύπου</DefaultTypeTab>
+      <RequiredTypeTab>Απαιτούμενος πρωτεύον τύπος</RequiredTypeTab>
+      <Contraints>Περιορισμοί</Contraints>
     </title>
   </UITabPane>
   <!--
@@ -811,106 +811,106 @@
   -->
   <UIViewList>
     <title>
-      <View>View</View>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <View>Προβολή</View>
+      <EditInfo>Επεξεργασία</EditInfo>
+      <Delete>Διαγραφή</Delete>
     </title>
     <header>
-      <name>Name</name>
-      <permissions>Permissions</permissions>
-      <tabList>Action Tab</tabList>
-      <baseVersion>Base Version</baseVersion>
-      <action>Action</action>
+      <name>Όνομα</name>
+      <permissions>Δικαιώματα</permissions>
+      <tabList>Καρτέλα Ενεργειών</tabList>
+      <baseVersion>Βασική έκδοση</baseVersion>
+      <action>Ενέργεια</action>
     </header>
     <action>
-      <AddView>Add View</AddView>
+      <AddView>Προσθήκη προβολής</AddView>
     </action>
     <msg>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this view?</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <template-in-use>Δεν μπορεί να διαγραφεί το {0}. Είναι αυτή τη στιγμή σε χρήση.</template-in-use>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη προβολή;</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
     <title>
-      <UIViewFormTabPane>View</UIViewFormTabPane>
+      <UIViewFormTabPane>Προβολή</UIViewFormTabPane>
     </title>
   </ViewPopup>
   <AddPopup>
     <title>
-      <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Add Template</AddPopup>
+      <UIViewFormTabPane>Προσθήκη προβολής</UIViewFormTabPane>
+      <AddPopup>Προσθήκη Προτύπου</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
     <title>
-      <UIViewFormTabPane>Edit View</UIViewFormTabPane>
+      <UIViewFormTabPane>Επεξεργασία προβολής</UIViewFormTabPane>
     </title>
   </EditPopup>
 
   <UITabList>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </title>
     <header>
-      <tabName>Tab</tabName>
-      <localizeButtons>Description</localizeButtons>
-      <action>Actions</action>
+      <tabName>Καρτέλα</tabName>
+      <localizeButtons>Περιγραφή</localizeButtons>
+      <action>Ενέργειες</action>
     </header>
     <action>
-      <AddTab>Add</AddTab>
+      <AddTab>Προσθήκη</AddTab>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την καρτέλα;</confirm-delete>
     </msg>
     <grid>
       <msg>
-        <empty>There is no tab on this view</empty>
+        <empty>Δεν υπάρχει καμία καρτέλα σε αυτή την προβολή</empty>
       </msg>
     </grid>
   </UITabList>
 
   <UIViewPermissionList>
-    <title>Select Owner with permissions on this view:</title>
+    <title>Επιλέξτε ιδιοκτήτη με δικαιώματα σε αυτήν την προβολή:</title>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{0} στο {1}</permission>
     </label>
     <msg>
-      <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
-      <permission-cannot-empty>View permission is required and cannot be empty.</permission-cannot-empty>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δικαίωμα;</confirm-delete>
+      <permission-cannot-empty>Το δικαίωμα προβολής είναι απαραίτητο και δεν μπορεί να είναι κενό.</permission-cannot-empty>
     </msg>
   </UIViewPermissionList>
 
   <UIViewPermissionList>
     <title>
-      <Delete>Delete</Delete>
+      <Delete>Διαγραφή</Delete>
     </title>
     <header>
-      <friendlyPermission>Permissions</friendlyPermission>
-      <action>Action</action>
+      <friendlyPermission>Δικαιώματα</friendlyPermission>
+      <action>Ενέργεια</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Διαγραφή</Delete>
       </title>
     </action>
     <grid>
       <msg>
-        <empty>There is no permission on this view</empty>
+        <empty>Δεν υπάρχουν δικαιώματα σε αυτή την προβολή</empty>
       </msg>
     </grid>
   </UIViewPermissionList>
 
   <UIViewPermissionForm>
     <action>
-      <Add>Add</Add>
+      <Add>Προσθήκη</Add>
     </action>
     <label>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>Χρήστης ή Ομάδα</userOrGroup>
     </label>
     <msg>
-      <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
+      <permission-exist>Το δικαίωμα '{0}' υπάρχει ήδη στη λίστα.</permission-exist>
     </msg>
   </UIViewPermissionForm>
 
@@ -921,77 +921,77 @@
   -->
   <UIViewForm>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+      <RemovePermission>Αφαίρεση δικαιώματος</RemovePermission>
     </title>
     <msg>
-      <view-name-invalid>The view name is required.</view-name-invalid>
-      <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
-      <permission-not-empty>Please select a permission for the view.</permission-not-empty>
-      <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
-      <mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
-      <view-exist>The view name already exists.</view-exist>
+      <view-name-invalid>Απαιτείται το όνομα της προβολής.</view-name-invalid>
+      <fileName-invalid>Το όνομα προβολής περιέχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
+      <permission-not-empty>Παρακαλώ επιλέξτε ένα δικαίωμα για την προβολή.</permission-not-empty>
+      <mustbe-add-tab>Παρακαλούμε προσθέστε μια καρτέλα.</mustbe-add-tab>
+      <mustbe-add-permission>Παρακαλώ επιλέξτε δικαιώματα για αυτήν την προβολή</mustbe-add-permission>
+      <view-exist>Το όνομα της προβολής υπάρχει ήδη.</view-exist>
     </msg>
     <label>
-      <viewName>Name</viewName>
-      <template>Template</template>
-      <version>Restore Version</version>
-      <enableVersion>Enable Version</enableVersion>
-      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+      <viewName>Όνομα</viewName>
+      <template>Πρότυπο</template>
+      <version>Επαναφορά Έκδοσης</version>
+      <enableVersion>Ενεργοποίηση έκδοσης</enableVersion>
+      <hideExplorerPanel>Απόκρυψη πίνακα περιηγητή στην πλευρική μπάρα</hideExplorerPanel>
     </label>
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Please select at least one function from the list.</button-select-error>
-      <tab-name-error>The tab name is required.</tab-name-error>
-      <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
+      <button-select-error>Παρακαλώ επιλέξτε τουλάχιστον μία λειτουργία από τη λίστα.</button-select-error>
+      <tab-name-error>Απαιτείται το όνομα της καρτέλας.</tab-name-error>
+      <fileName-invalid>Το όνομα της καρτέλας περιέχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
     </msg>
     <label>
-      <version>Restore Version</version>
-      <viewName>Name</viewName>
-      <tabName>Tab Name</tabName>
-      <permission>Permission</permission>
-      <tabs>Tabs</tabs>
-      <template>Templates</template>
-      <enableVersion>Enable Version</enableVersion>
-      <addFolder>Add Folder</addFolder>
-      <addDocument>Add Document</addDocument>
-      <editDocument>Edit Document</editDocument>
-      <upload>Upload</upload>
-      <paste>Paste</paste>
-      <search>Search</search>
-      <viewReferences>View References</viewReferences>
-      <viewNodeType>View Node Type</viewNodeType>
-      <viewPermissions>View Permissions</viewPermissions>
-      <viewProperties>View Properties</viewProperties>
-      <manageVersions>Manage Versions</manageVersions>
-      <manageAuditing>Manage Auditing</manageAuditing>
-      <managePublications>Manage Publication</managePublications>
-      <manageCategories>Manage Categories</manageCategories>
-      <manageRelations>Manage Relations</manageRelations>
-      <manageActions>Manage Actions</manageActions>
-      <exportNode>Export Node</exportNode>
-      <importNode>Import Node</importNode>
-      <viewRelations>View Relations</viewRelations>
-      <showJCRStructure>Show JCR Structure</showJCRStructure>
-      <watchDocument>Watch Document</watchDocument>
-      <taggingDocument>Tag Document</taggingDocument>
-      <viewMetadatas>View Metadata</viewMetadatas>
-      <overloadThumbnail>Change Icon Image</overloadThumbnail>
-      <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Comment</comment>
-      <vote>Vote</vote>
-      <addCategory>Add Category</addCategory>
-      <addLocalizationLink>Add Translation</addLocalizationLink>
-      <publicationRequestApproval>Request Approval</publicationRequestApproval>
-      <publicationApproveContent>Approve Content</publicationApproveContent>
-      <publicationPublish>Publish</publicationPublish>
-      <contentNavigation>Content Navigation</contentNavigation>
-      <addSymLink>Add Symlink</addSymLink>
-      <checkIn>Check In</checkIn>
-      <checkOut>Check Out</checkOut>
-      <shareDocuments>Share</shareDocuments>
-      <openDocument>Remote Edit</openDocument>
+      <version>Επαναφορά Έκδοσης</version>
+      <viewName>Όνομα</viewName>
+      <tabName>Όνομα καρτέλας</tabName>
+      <permission>Δικαιώματα</permission>
+      <tabs>Καρτέλες</tabs>
+      <template>Πρότυπα</template>
+      <enableVersion>Ενεργοποίηση έκδοσης</enableVersion>
+      <addFolder>Προσθήκη φακέλου</addFolder>
+      <addDocument>Προσθήκη εγγράφου</addDocument>
+      <editDocument>Επεξεργασία εγγράφου</editDocument>
+      <upload>Ανέβασμα αρχείων</upload>
+      <paste>Επικόλληση</paste>
+      <search>Αναζήτηση</search>
+      <viewReferences>Προβολή παραπομπών</viewReferences>
+      <viewNodeType>Προβολή τύπου κόμβου</viewNodeType>
+      <viewPermissions>Προβολή δικαιωμάτων</viewPermissions>
+      <viewProperties>Προβολή ιδιοτήτων</viewProperties>
+      <manageVersions>Διαχείριση εκδόσεων</manageVersions>
+      <manageAuditing>Διαχείριση ελέγχου</manageAuditing>
+      <managePublications>Διαχείριση δημοσίευσης</managePublications>
+      <manageCategories>Διαχείριση κατηγοριών</manageCategories>
+      <manageRelations>Διαχείριση σχέσεων</manageRelations>
+      <manageActions>Διαχείριση ενεργειών</manageActions>
+      <exportNode>Εξαγωγή κόμβου</exportNode>
+      <importNode>Εισαγωγή κόμβου</importNode>
+      <viewRelations>Προβολή σχέσεων</viewRelations>
+      <showJCRStructure>Εμφάνιση δομής αποθετηρίου περιεχομένου (JCR)</showJCRStructure>
+      <watchDocument>Παρακολούθηση εγγράφου</watchDocument>
+      <taggingDocument>Ετικέτες εγγράφου</taggingDocument>
+      <viewMetadatas>Προβολή μεταδεδομένων</viewMetadatas>
+      <overloadThumbnail>Υπερφόρτωση μικρογραφίας</overloadThumbnail>
+      <manageHidden>Απόκρυψη/Εμφάνιση περιεχομένου</manageHidden>
+      <comment>Σχόλιο</comment>
+      <vote>Ψηφοφορία</vote>
+      <addCategory>Προσθήκη κατηγορίας</addCategory>
+      <addLocalizationLink>Προσθέστε μετάφραση</addLocalizationLink>
+      <publicationRequestApproval>Αίτηση έγκρισης</publicationRequestApproval>
+      <publicationApproveContent>Έγκριση Περιεχομένου</publicationApproveContent>
+      <publicationPublish>Δημοσίευση</publicationPublish>
+      <contentNavigation>Πλοήγηση Περιεχομένου</contentNavigation>
+      <addSymLink>Προσθήκη συντόμευσης</addSymLink>
+      <checkIn>Δέσμευση</checkIn>
+      <checkOut>Αποδέσμευση</checkOut>
+      <shareDocuments>Μοιραστείτε</shareDocuments>
+      <openDocument>Απομακρυσμένη επεξεργασία</openDocument>
       <editProperty>Edit Document Properties</editProperty>
       <uploadNewVersion>Upload a version</uploadNewVersion>
     </label>
@@ -1002,42 +1002,42 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>Permissions</permission>
+      <permission>UIPermissionForm</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Action</UITabContainer>
-        <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>
+        <UITabContainer>Ενέργεια</UITabContainer>
+        <UIViewForm>Προβολή</UIViewForm>
+        <UIViewPermissionContainer>Δικαιώματα</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Αρχικοποίηση</Reset>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
-      <Restore>Restore</Restore>
+      <Restore>Επαναφορά</Restore>
     </action>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Επιλογέας Δικαιωμάτων</UIPermissionSelector>
     </title>
   </PopupViewPermission>
 
   <TabForm_Popup>
     <title>
-      <UITabForm>Add/Edit Tab</UITabForm>
+      <UITabForm>Προσθήκη/επεξεργασία καρτέλας</UITabForm>
     </title>
   </TabForm_Popup>
 
   <tab_permission>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Any</AddAny>
+      <SelectUser>Επιλογή χρήστη</SelectUser>
+      <SelectMember>Επιλέξτε μέλος</SelectMember>
+      <AddAny>Όλοι</AddAny>
     </title>
   </tab_permission>
   <!--
@@ -1047,24 +1047,24 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>View</View>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <View>Προβολή</View>
+      <EditInfo>Επεξεργασία</EditInfo>
+      <Delete>Διαγραφή</Delete>
     </title>
     <header>
-      <name>Name</name>
-      <path>Value</path>
-      <baseVersion>Base Version</baseVersion>
-      <action>Action</action>
+      <name>Όνομα</name>
+      <path>Τιμή</path>
+      <baseVersion>Βασική έκδοση</baseVersion>
+      <action>Ενέργεια</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Προσθήκη</Add>
     </action>
     <msg>
-      <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
+      <template-in-use>Δεν μπορεί να διαγραφεί το {0}. Είναι αυτή τη στιγμή σε χρήση.</template-in-use>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το πρότυπο;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <delete-permission-denied>Δεν έχετε δικαίωμα να διαγράψετε το πρότυπο '{0}'.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1079,32 +1079,32 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
-      <Restore>Restore</Restore>
+      <Reset>Αρχικοποίηση</Reset>
+      <Restore>Επαναφορά</Restore>
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <role-require>Please select a permission.</role-require>
-      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
-      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
-      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
+      <version-restored>Η έκδοση {0} αποκαταστάθηκε επιτυχώς.</version-restored>
+      <role-require>Παρακαλώ επιλέξτε ένα δικαίωμα.</role-require>
+      <template-name-exist>Το όνομα προτύπου '{0}' υπάρχει ήδη.</template-name-exist>
+      <add-permission-denied>Δεν έχετε άδεια για να προσθέσετε ένα νέο πρότυπο.</add-permission-denied>
+      <edit-permission-denied>Δεν έχετε δικαίωμα να τροποποιήσετε το πρότυπο '{0}'.</edit-permission-denied>
     </msg>
     <tab>
       <label>
-        <template>Template</template>
-        <defaultDialog>Dialog</defaultDialog>
-        <defaultView>View</defaultView>
+        <template>Πρότυπο</template>
+        <defaultDialog>Διάλογος</defaultDialog>
+        <defaultView>Προβολή</defaultView>
       </label>
     </tab>
     <label>
-      <name>Name:</name>
-      <label>Label:</label>
-      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
-      <dialog>Dialog Content</dialog>
-      <view>View Content</view>
-      <permission>Permission:</permission>
-      <selectPemistion>Permission</selectPemistion>
+      <name>Όνομα:</name>
+      <label>Ετικέτα:</label>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου:</isDocumentTemplate>
+      <dialog>Περιεχόμενο του παράθυρου διαλόγου</dialog>
+      <view>Προβολή περιεχομένου</view>
+      <permission>Δικαιώματα:</permission>
+      <selectPemistion>Δικαιώματα</selectPemistion>
     </label>
   </UITemplateForm>
   <!--
@@ -1114,27 +1114,27 @@
   -->
   <ecmTempForm>
     <label>
-      <version>Select Version:</version>
-      <content>Content:</content>
-      <name>Name:</name>
-      <homeTemplate>Template Type:</homeTemplate>
-      <enableVersion>Enabled Version:</enableVersion>
+      <version>Επιλέξτε έκδοση:</version>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <homeTemplate>Τύπος προτύπου:</homeTemplate>
+      <enableVersion>Ενεργοποιημένη έκδοση:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
     <title>
-      <ecmTempForm>Add/Edit View Template</ecmTempForm>
+      <ecmTempForm>Προσθήκη/επεξεργασία προτύπου προβολής</ecmTempForm>
     </title>
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>Add Explorer Template</ecmTempForm>
-      <ecmTempFormAdd>Add Explorer Template</ecmTempFormAdd>
+      <ecmTempForm>Προσθήκη προτύπου περιηγητή</ecmTempForm>
+      <ecmTempFormAdd>Προσθήκη προτύπου περιηγητή</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>Edit Explorer Template</ecmTempForm>
+      <ecmTempForm>Επεξεργασία προτύπου περιηγητή</ecmTempForm>
     </title>
   </ecmTempFormEdit>
 
@@ -1150,7 +1150,7 @@
   -->
   <UIECMFilterForm>
     <label>
-      <selectScript>Select Category</selectScript>
+      <selectScript>Επιλογή κατηγορίας</selectScript>
     </label>
   </UIECMFilterForm>
   <!--
@@ -1162,20 +1162,20 @@
     <action>
       <Edit>#{word.edit}</Edit>
       <Delete>#{word.delete}</Delete>
-      <AddNew>Add Script</AddNew>
+      <AddNew>Προσθήκη δέσμης ενεργειών</AddNew>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη δέσμη ενεργειών;</confirm-delete>
     </msg>
     <header>
-      <scriptName>Name</scriptName>
-      <path>Script</path>
-      <baseVersion>Base Version</baseVersion>
-      <action>Actions</action>
+      <scriptName>Όνομα</scriptName>
+      <path>Δέσμη ενεργειών</path>
+      <baseVersion>Βασική έκδοση</baseVersion>
+      <action>Ενέργειες</action>
     </header>
     <tooltip>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </tooltip>
   </UIScriptList>
   <!--
@@ -1195,13 +1195,13 @@
       <Restore>#{word.restore}</Restore>
       <Cancel>#{word.cancel}</Cancel>
       <Refresh>#{word.refresh}</Refresh>
-      <Change>Change</Change>
+      <Change>Τροποποίηση</Change>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <name-null>Please enter the script name.</name-null>
-      <name-exist>The script name '{0}' already exists.</name-exist>
-      <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
+      <version-restored>Η έκδοση {0} αποκαταστάθηκε επιτυχώς.</version-restored>
+      <name-null>Παρακαλούμε εισάγετε το όνομα της δέσμης ενεργειών.</name-null>
+      <name-exist>Το όνομα της δέσμης ενεργειών '{0}' υπάρχει ήδη.</name-exist>
+      <fileName-invalid>Το όνομα της δέσμης ενεργειών έχει κάποιους μη έγκυρους χαρακτήρες.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1211,16 +1211,16 @@
   -->
   <ScriptContainerPopup>
     <title>
-      <UIScriptForm>Add/Edit Script</UIScriptForm>
+      <UIScriptForm>Προσθήκη/επεξεργασία δέσμης ενεργειών</UIScriptForm>
     </title>
   </ScriptContainerPopup>
   <UIScriptForm>
     <label>
-      <selectVersion>Versions</selectVersion>
-      <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
-      <scriptName>Script</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <scriptContent>Περιεχόμενο</scriptContent>
+      <scriptLabel>Όνομα</scriptLabel>
+      <scriptName>Δέσμη ενεργειών</scriptName>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1231,11 +1231,11 @@
 
   <ecmScriptForm>
     <label>
-      <selectVersion>Versions</selectVersion>
-      <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
-      <scriptName>Script</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <scriptContent>Περιεχόμενο</scriptContent>
+      <scriptLabel>Όνομα</scriptLabel>
+      <scriptName>Δέσμη ενεργειών</scriptName>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1248,34 +1248,34 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Category</title>
+    <title>Προσθήκη κατηγορίας</title>
     <label>
-      <taxonomyName>Category Name</taxonomyName>
-      <parentPath>Parent</parentPath>
+      <taxonomyName>Όνομα κατηγορίας</taxonomyName>
+      <parentPath>Γονικός</parentPath>
     </label>
     <msg>
-      <exist>The "{0}" category already exists.</exist>
-      <name-null>Please specify the category name.</name-null>
-      <name-invalid>The category name has some invalid characters.</name-invalid>
-      <name-too-long>The category name must have less than 30 characters.</name-too-long>
+      <exist>Η κατηγορία "{0}" υπάρχει ήδη.</exist>
+      <name-null>Παρακαλούμε να προσδιορίσετε το όνομα της κατηγορίας.</name-null>
+      <name-invalid>Το όνομα της κατηγορίας έχει κάποιους μη έγκυρους χαρακτήρες.</name-invalid>
+      <name-too-long>Το όνομα της κατηγορίας πρέπει να έχει λιγότερους από 30 χαρακτήρες.</name-too-long>
     </msg>
   </UITaxonomyForm>
 
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Επεξεργαστείτε το δέντρο κατηγοριών</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Προσθήκη δέντρου κατηγοριών</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
 
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Επεξεργαστείτε το δέντρο κατηγοριών</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1285,27 +1285,27 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
+      <parentPath>Γονικός:</parentPath>
+      <taxonomyName>Όνομα κατηγορίας:</taxonomyName>
     </label>
     <msg>
-      <name-null>The category name is empty.</name-null>
-      <name-invalid>The category name is invalid.</name-invalid>
-      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
-      <exist>The category name already exists.</exist>
+      <name-null>Το όνομα της κατηγορίας είναι κενό.</name-null>
+      <name-invalid>Το όνομα της κατηγορίας δεν είναι έγκυρο.</name-invalid>
+      <name-too-long>Το όνομα της κατηγορίας δεν πρέπει να έχει περισσότερους από {0} χαρακτήρες.</name-too-long>
+      <exist>Το όνομα της κατηγορίας υπάρχει ήδη.</exist>
     </msg>
   </UITaxonomyTreeCreateChildForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Επιλέξτε διαδρομή</UIOneNodePathSelector>
     </title>
   </PopupComponent>
 
   <TaxoPopupUserSelector>
     <title>
-      <TaxoTreeSelectUserOrGroup>Select User</TaxoTreeSelectUserOrGroup>
-      <UIPermissionTreeSelectUser>Select User</UIPermissionTreeSelectUser>
+      <TaxoTreeSelectUserOrGroup>Επιλογή χρήστη</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Επιλογή χρήστη</UIPermissionTreeSelectUser>
     </title>
   </TaxoPopupUserSelector>
 
@@ -1317,14 +1317,14 @@
 
   <TaxoTreeAnyPermission>
     <label>
-      <any>Any Permission</any>
+      <any>Όλοι</any>
       <anyPermission>TaxoTreeAnyPermission</anyPermission>
     </label>
   </TaxoTreeAnyPermission>
 
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
@@ -1336,23 +1336,23 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Category Tree</name>
-      <workspace>Workspace</workspace>
-      <homePath>Path</homePath>
-      <action>Action</action>
+      <name>Δέντρο Κατηγοριών</name>
+      <workspace>Χώρος Εργασίας</workspace>
+      <homePath>Διαδρομή</homePath>
+      <action>Ενέργεια</action>
     </header>
     <action>
-      <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
+      <AddTaxonomyTree>Προσθήκη δέντρου κατηγοριών</AddTaxonomyTree>
     </action>
     <tooltip>
-      <EditTaxonomyTree>Edit Category Tree</EditTaxonomyTree>
-      <Delete>Delete Category Tree</Delete>
+      <EditTaxonomyTree>Επεξεργαστείτε το δέντρο κατηγοριών</EditTaxonomyTree>
+      <Delete>Διαγραφή δέντρου κατηγοριών</Delete>
     </tooltip>
-    <title>Browse Category Tree</title>
+    <title>Περιήγηση στο δέντρο κατηγοριών</title>
     <msg>
-      <no-list>No category trees have been created.</no-list>
-      <confirm-delete>Are you sure you want to delete the category tree?</confirm-delete>
-      <is-in-trash>This category tree has been moved to the Trash.</is-in-trash>
+      <no-list>Δεν έχουν δημιουργηθεί δέντρα κατηγοριών.</no-list>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε το δέντρο κατηγοριών;</confirm-delete>
+      <is-in-trash>Αυτό το δέντρο κατηγοριών έχει μεταφερθεί στον κάδο απορριμμάτων.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
 
@@ -1363,97 +1363,97 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Path</homePath>
-      <permissions>Permissions</permissions>
+      <name>Όνομα</name>
+      <workspace>Χώρος Εργασίας</workspace>
+      <homePath>Διαδρομή</homePath>
+      <permissions>Δικαιώματα</permissions>
     </label>
     <msg>
-      <homapath-emty>Input Path</homapath-emty>
+      <homapath-emty>Διαδρομή εισαγωγής</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
 
   <UIPermissionTreeForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Επιλογή</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
-      <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <userOrGroup>Χρήστης ή Ομάδα</userOrGroup>
+      <read>Δικαίωμα ανάγνωσης</read>
+      <add_node>Δικαίωμα προσθήκης κόμβου</add_node>
+      <set_property>Δικαίωμα ορισμού ιδιότητας</set_property>
+      <remove>Δικαίωμα διαγραφής</remove>
     </label>
-    <title>Add a permission to this node</title>
+    <title>Προσθήκη δικαιωμάτων σε αυτόν τον κόμβο</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Παρακαλώ επιλέξτε τουλάχιστον ένα δικαίωμα.</checkbox-require>
+      <userOrGroup-required>Παρακαλώ επιλέξτε ένα χρήστη ή ομάδα πριν να αποθηκεύσετε το δικαίωμα.</userOrGroup-required>
+      <not-change-permission>Δεν έχετε άδεια να προσθέσετε το δικαίωμα.</not-change-permission>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να καταργήσετε αυτό το δικαίωμα.</access-denied>
     </msg>
   </UIPermissionTreeForm>
 
   <PopupTaxonomyJCRBrowser>
     <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Επιλέξτε Αρχική διαδρομή</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
 
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Επιλογέας Δικαιωμάτων</UIPermissionSelector>
     </title>
   </PopupTaxonomyTreePermission>
 
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <AddDrivePermissionSelector>Προσθήκη δικαιώματος</AddDrivePermissionSelector>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
 
   <UIPopupWindow>
     <title>
-      <UIPermissionManager>Permission Management</UIPermissionManager>
+      <UIPermissionManager>Διαχείριση δικαιωμάτων</UIPermissionManager>
     </title>
   </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Permission Management</UIUserContainer>
+      <UIUserContainer>Διαχείριση δικαιωμάτων</UIUserContainer>
     </title>
   </PopupUserSelector>
 
   <UIPermissionInfo>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Remove Permission</Delete>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Αφαίρεση δικαιώματος</Delete>
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <read>Read</read>
-      <addNode>Modify Node</addNode>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <usersOrGroups>Χρήστης ή Ομάδα</usersOrGroups>
+      <read>Ανάγνωση</read>
+      <addNode>Τροποποίηση κόμβου</addNode>
+      <remove>Κατάργηση</remove>
+      <action>Ενέργεια</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove this permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <confirm-delete-permission>Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτό το δικαίωμα;</confirm-delete-permission>
+      <no-permission-tochange>Δεν έχετε άδεια να αφαιρέσετε αυτό το δικαίωμα.</no-permission-tochange>
+      <no-permission-remove>Δεν μπορείτε να καταργήσετε τον ιδιοκτήτη ή τον χρήστη του συστήματος.</no-permission-remove>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να καταργήσετε αυτό το δικαίωμα.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Επιλογή χρήστη</SelectUser>
       <SelectMember>Select Role</SelectMember>
-      <AddAny>Everyone</AddAny>
+      <AddAny>Όλοι</AddAny>
     </title>
   </permission>
   <!--
@@ -1463,52 +1463,52 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
-      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIGroupSelector>Επιλογή χρήστη</UIGroupSelector>
+      <UIPermissionSelector>Επιλέξτε μέλος</UIPermissionSelector>
       <UIGroupMemberSelector>Select Role</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' είναι ο ιδιοκτήτης αυτού του κόμβου και έχει τον πλήρη έλεγχο.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Επιλογή</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User or Group</userOrGroup>
-      <read>Read</read>
-      <add_node>Modify</add_node>
-      <remove>Remove</remove>
+      <userOrGroup>Χρήστης ή Ομάδα</userOrGroup>
+      <read>Ανάγνωση</read>
+      <add_node>Επεξεργασία</add_node>
+      <remove>Κατάργηση</remove>
     </label>
-    <title>Add permission to this node</title>
+    <title>Προσθήκη δικαιωμάτων σε αυτόν τον κόμβο</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Αρχικοποίηση</Reset>
     </action>
     <msg>
-      <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <checkbox-require>Παρακαλώ επιλέξτε τουλάχιστον ένα δικαίωμα.</checkbox-require>
+      <userOrGroup-required>Παρακαλώ επιλέξτε ένα χρήστη ή ομάδα πριν να αποθηκεύσετε το δικαίωμα.</userOrGroup-required>
+      <not-change-permission>Δεν έχετε άδεια να προσθέσετε το δικαίωμα.</not-change-permission>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να καταργήσετε αυτό το δικαίωμα.</access-denied>
     </msg>
   </UIPermissionForm>
 
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>Add Category</UITaxonomyForm>
+      <UITaxonomyForm>Προσθήκη κατηγορίας</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
 
   <UITaxonomyManager>
     <title>
-      <permission>Permission Management</permission>
+      <permission>Διαχείριση δικαιωμάτων</permission>
     </title>
   </UITaxonomyManager>
   <!--
@@ -1518,55 +1518,55 @@
   -->
   <UITemplateList>
     <header>
-      <name>Type</name>
-      <action>Action</action>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <name>Τύπος</name>
+      <action>Ενέργεια</action>
+      <label>Πρότυπο</label>
+      <icon>Εικονίδιο</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Προσθήκη Προτύπου</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Θέλετε πραγματικά να το διαγράψετε;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
     </msg>
   </UITemplateList>
 
   <UIActionsTemplateList>
     <header>
-      <name>Type</name>
-      <action>Action</action>
-      <label>Template</label>
-      <icon>Icon</icon>
+      <name>Τύπος</name>
+      <action>Ενέργεια</action>
+      <label>Πρότυπο</label>
+      <icon>Εικονίδιο</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Προσθήκη Προτύπου</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Θέλετε πραγματικά να το διαγράψετε;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
 
   <UIOthersTemplateList>
     <header>
-      <name>Type</name>
-      <label>Template</label>
-      <icon>Icon</icon>
-      <action>Action</action>
+      <name>Τύπος</name>
+      <label>Πρότυπο</label>
+      <icon>Εικονίδιο</icon>
+      <action>Ενέργεια</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Προσθήκη Προτύπου</AddNew>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Θέλετε πραγματικά να το διαγράψετε;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 
@@ -1578,155 +1578,155 @@
 
   <UITabPane>
     <title>
-      <ContentTemplateContainer>Content</ContentTemplateContainer>
-      <CateTemplateContainer>Navigation</CateTemplateContainer>
-      <PageTemplateContainer>Paginator</PageTemplateContainer>
+      <ContentTemplateContainer>Περιεχόμενο</ContentTemplateContainer>
+      <CateTemplateContainer>Πλοήγηση</CateTemplateContainer>
+      <PageTemplateContainer>Σελιδοποίηση</PageTemplateContainer>
     </title>
   </UITabPane>
 
   <UICLVTemplateList>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </title>
     <header>
-      <title>Name</title>
-      <action>Action</action>
-      <template>Template</template>
+      <title>Όνομα</title>
+      <action>Ενέργεια</action>
+      <template>Πρότυπο</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <AddTemplate>Προσθήκη Προτύπου</AddTemplate>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
-      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το πρότυπο;</confirm-delete>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια να χρησιμοποιήσετε αυτή τη λειτουργία.</access-denied>
+      <editing-template>Δεν επιτρέπεται η πρόσβαση. Δεν μπορείτε να διαγράψετε και να επεξεργαστείτε αυτό το πρότυπο ταυτόχρονα.</editing-template>
+      <template-not-exist>Το πρότυπο που προσπαθείτε να διαγράψετε δεν υπάρχει.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 
   <CateTemplateList>
     <header>
-      <title>Name</title>
-      <action>Action</action>
-      <template>Template</template>
+      <title>Όνομα</title>
+      <action>Ενέργεια</action>
+      <template>Πρότυπο</template>
     </header>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </title>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <AddTemplate>Προσθήκη Προτύπου</AddTemplate>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </action>
   </CateTemplateList>
 
   <PageTemplateList>
     <header>
-      <title>Name</title>
-      <action>Action</action>
-      <template>Template</template>
+      <title>Όνομα</title>
+      <action>Ενέργεια</action>
+      <template>Πρότυπο</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <AddTemplate>Προσθήκη Προτύπου</AddTemplate>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </action>
   </PageTemplateList>
 
   <EditCLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Edit List Template</UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Επεξεργαστείτε το πρότυπο λίστας</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </EditCLVTemplatePopup_ContentTemplateContainer>
 
   <EditCLVTemplatePopup_CateTemplateContainer>
     <title>
-      <UICLVTemplateForm_CateTemplateContainer>Edit List Template</UICLVTemplateForm_CateTemplateContainer>
+      <UICLVTemplateForm_CateTemplateContainer>Επεξεργαστείτε το πρότυπο λίστας</UICLVTemplateForm_CateTemplateContainer>
     </title>
   </EditCLVTemplatePopup_CateTemplateContainer>
 
   <EditCLVTemplatePopup_PageTemplateContainer>
     <title>
-      <UICLVTemplateForm_PageTemplateContainer>Edit List Template</UICLVTemplateForm_PageTemplateContainer>
+      <UICLVTemplateForm_PageTemplateContainer>Επεξεργαστείτε το πρότυπο λίστας</UICLVTemplateForm_PageTemplateContainer>
     </title>
   </EditCLVTemplatePopup_PageTemplateContainer>
 
   <CLVTemplatePopup_ContentTemplateContainer>
     <title>
-      <UICLVTemplateForm_ContentTemplateContainer>Add List Template</UICLVTemplateForm_ContentTemplateContainer>
+      <UICLVTemplateForm_ContentTemplateContainer>Προσθέστε το πρότυπο λίστας</UICLVTemplateForm_ContentTemplateContainer>
     </title>
   </CLVTemplatePopup_ContentTemplateContainer>
 
   <CLVTemplatePopup_CateTemplateContainer>
     <title>
-      <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>
+      <UICLVTemplateForm_CateTemplateContainer>Προσθέστε το πρότυπο λίστας</UICLVTemplateForm_CateTemplateContainer>
     </title>
   </CLVTemplatePopup_CateTemplateContainer>
 
   <CLVTemplatePopup_PageTemplateContainer>
     <title>
-      <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>
+      <UICLVTemplateForm_PageTemplateContainer>Προσθέστε το πρότυπο λίστας</UICLVTemplateForm_PageTemplateContainer>
     </title>
   </CLVTemplatePopup_PageTemplateContainer>
 
   <UICLVTemplateForm_ContentTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Αρχικοποίηση</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
-      <template>Template Name</template>
-      <content>Content</content>
-      <type>Template Type</type>
+      <title>Όνομα</title>
+      <template>Όνομα προτύπου</template>
+      <content>Περιεχόμενο</content>
+      <type>Τύπος προτύπου</type>
     </label>
   </UICLVTemplateForm_ContentTemplateContainer>
 
   <UICLVTemplateForm_PageTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Αρχικοποίηση</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
-      <template>Template Name</template>
-      <content>Content</content>
-      <type>Template Type</type>
+      <title>Όνομα</title>
+      <template>Όνομα προτύπου</template>
+      <content>Περιεχόμενο</content>
+      <type>Τύπος προτύπου</type>
     </label>
   </UICLVTemplateForm_PageTemplateContainer>
 
   <UICLVTemplateForm_CateTemplateContainer>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Αρχικοποίηση</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <title>Name</title>
-      <template>Template Name</template>
-      <content>Content</content>
-      <type>Template Type</type>
+      <title>Όνομα</title>
+      <template>Όνομα προτύπου</template>
+      <content>Περιεχόμενο</content>
+      <type>Τύπος προτύπου</type>
     </label>
   </UICLVTemplateForm_CateTemplateContainer>
   <UICLVTemplateForm>
     <label>
-      <paginators>Paginator</paginators>
-      <list>Content</list>
-      <navigation>Navigation</navigation>
+      <paginators>Σελιδοποίηση</paginators>
+      <list>Περιεχόμενο</list>
+      <navigation>Πλοήγηση</navigation>
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Αρχικοποίηση</Reset>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <template-existing>This template name already exists. Please select another one.</template-existing>
+      <template-existing>Αυτό το όνομα προτύπου υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο.</template-existing>
     </msg>
   </UICLVTemplateForm>
 
@@ -1737,68 +1737,68 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Επιλογέας Δικαιωμάτων</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePermission>
     <title>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Επιλογή δικαιώματος</UIPermissionSelector>
     </title>
   </TemplatePermission>
   <TemplateContainerPopup>
     <title>
-      <UITemplateForm>Template Form</UITemplateForm>
+      <UITemplateForm>Πρότυπο φόρμας</UITemplateForm>
     </title>
   </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
-      <UIPopupWindow>View Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
-      <name>Name:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Versioning activated</enableVersion>
+      <UIPopupWindow>Άδεια Προβολής</UIPopupWindow>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου</isDocumentTemplate>
+      <viewPermission>Δικαιώματα:</viewPermission>
+      <enableVersion>Η τήρηση ιστορικού εκδόσεων ενεργοποιήθηκε</enableVersion>
     </label>
-    <title>Add/Edit View</title>
+    <title>Προσθήκη/επεξεργασία προβολής</title>
   </ViewForm>
   <DialogForm>
     <label>
       <UITemplateContent>DialogForm</UITemplateContent>
-      <UIPopupWindow>Dialog Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
-      <name>Name:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <UIPopupWindow>Δικαιώματα του παράθυρου διαλόγου</UIPopupWindow>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου</isDocumentTemplate>
+      <viewPermission>Δικαιώματα:</viewPermission>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
     </label>
-    <title>Add/Edit Dialog</title>
+    <title>Προσθήκη/επεξεργασία παράθυρου διαλόγου</title>
   </DialogForm>
   <DialogFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Επιλογέας Δικαιωμάτων</UIPermissionSelector>
     </title>
   </DialogFormTemplatePermission>
   <ViewFormTemplatePermission>
     <title>
-      <UIPermissionSelector>Permission Selector</UIPermissionSelector>
+      <UIPermissionSelector>Επιλογέας Δικαιωμάτων</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
-      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[
-        View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
-      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[
-        View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer>
+        <![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
     </title>
   </UITemplatesManager>
   <!--
@@ -1813,9 +1813,9 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Name:</name>
-      <label>Label:</label>
-      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
+      <name>Όνομα:</name>
+      <label>Ετικέτα:</label>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1830,19 +1830,19 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
-      <action>Actions</action>
+      <name>Όνομα</name>
+      <roles>Ρόλοι</roles>
+      <baseVersion>Έκδοση</baseVersion>
+      <action>Ενέργειες</action>
     </header>
     <msg>
-      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure you want to delete this dialog?</confirm-delete>
+      <undeletable>Δεν μπορείτε να διαγράψετε το '{0}' επειδή είναι προεπιλεγμένο.</undeletable>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το παράθυρο διαλόγου;</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Διαγραφή</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1853,19 +1853,19 @@
   -->
   <UIViewTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
-      <action>Actions</action>
+      <name>Όνομα</name>
+      <roles>Ρόλοι</roles>
+      <baseVersion>Έκδοση</baseVersion>
+      <action>Ενέργειες</action>
     </header>
     <msg>
-      <undeletable>'{0}' cannot be deleted, it is the default one.</undeletable>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <undeletable>Το '{0}' δεν μπορεί να διαγραφεί γιατί είναι προεπιλεγμένο.</undeletable>
+      <confirm-delete>Θέλετε πραγματικά να προχωρήσετε στη διαγραφή;</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Διαγραφή</Delete>
       </title>
     </action>
   </UIViewTab>
@@ -1882,14 +1882,14 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <name-invalid>The field name must not contain special characters.</name-invalid>
-      <roles-invalid>The Permission field is required.</roles-invalid>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <name-exist>The name '{0}' already exists.</name-exist>
+      <name-invalid>Το όνομα του πεδίου δεν μπορεί να περιέχει ειδικούς χαρακτήρες.</name-invalid>
+      <roles-invalid>Το πεδίο δικαιωμάτων είναι υποχρεωτικό.</roles-invalid>
+      <version-restored>Η έκδοση {0} αποκαταστάθηκε επιτυχώς.</version-restored>
+      <name-exist>Το όνομα {0} υπάρχει ήδη.</name-exist>
     </msg>
     <title>
-      <AddPermission>Add Permission</AddPermission>
-      <RemovePermission>Remove Permission</RemovePermission>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
+      <RemovePermission>Αφαίρεση δικαιώματος</RemovePermission>
     </title>
   </UITemplateContent>
   <!--
@@ -1909,12 +1909,12 @@
   -->
   <JCRBrowser>
     <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Επιλέξτε Αρχική διαδρομή</UIOneNodePathSelector>
     </title>
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>Select Icon</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Επιλέξτε το εικονίδιο</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -1924,32 +1924,32 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Name</name>
-      <type>Type</type>
-      <statement>Statement</statement>
-      <permission>Permissions</permission>
-      <action>Actions</action>
+      <name>Όνομα</name>
+      <type>Τύπος</type>
+      <statement>Δήλωση</statement>
+      <permission>Δικαιώματα</permission>
+      <action>Ενέργειες</action>
     </header>
     <action>
-      <AddQuery>Add Query</AddQuery>
+      <AddQuery>Προσθήκη ερωτήματος</AddQuery>
     </action>
     <tooltip>
-      <Edit>Edit this Query</Edit>
-      <Delete>Delete this Query</Delete>
+      <Edit>Επεξεργαστείτε αυτό το ερώτημα</Edit>
+      <Delete>Διαγραφή ερωτήματος</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this query?</confirm-delete>
-      <query-not-existed>The query does not exist anymore.</query-not-existed>
-      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το ερώτημα;</confirm-delete>
+      <query-not-existed>Το ερώτημα δεν υπάρχει πια.</query-not-existed>
+      <can-not-remove>Παρουσιάστηκε σφάλμα κατά τη διαγραφή του ερωτήματος. Για πληροφορίες επικοινωνήστε με το διαχειριστή.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
     <label>
-      <name>Query Name</name>
-      <type>Query Type</type>
-      <statement>Statement</statement>
-      <cache>Enable Cache Results</cache>
-      <permissions>Permissions</permissions>
+      <name>Όνομα του ερωτήματος</name>
+      <type>Τύπος ερωτήματος</type>
+      <statement>Δήλωση</statement>
+      <cache>Ενεργοποίηση αποτελεσμάτων από λανθάνουσα μνήμη</cache>
+      <permissions>Δικαιώματα</permissions>
       <PermissionButton>UIQueriesForm</PermissionButton>
     </label>
     <action>
@@ -1957,26 +1957,26 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>Please select permissions.</permission-require>
-      <name-invalid>The Name field cannot contain special characters.</name-invalid>
-      <name-existing>This query name already exists. Please select another one.</name-existing>
-      <invalid-query>The query is invalid. Please check your query statement.</invalid-query>
-      <access-denied>Access denied. You do not have permission to perform this operation.</access-denied>
+      <permission-require>Παρακαλώ επιλέξτε τα δικαιώματα.</permission-require>
+      <name-invalid>Το πεδίο του ονόματος δεν μπορεί να περιέχει ειδικούς χαρακτήρες.</name-invalid>
+      <name-existing>Αυτό το όνομα ερωτήματος υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο.</name-existing>
+      <invalid-query>Το ερώτημα δεν είναι έγκυρο. Ελέγξτε τη δήλωση του ερωτήματος.</invalid-query>
+      <access-denied>Δεν επιτρέπεται η πρόσβαση. Δεν έχετε άδεια για να εκτελέσετε αυτήν την ενέργεια.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
     <title>
-      <UIQueriesForm>Add Query</UIQueriesForm>
+      <UIQueriesForm>Προσθήκη ερωτήματος</UIQueriesForm>
     </title>
   </AddQueryForm>
   <EditQueryForm>
     <title>
-      <UIQueriesForm>Edit Query</UIQueriesForm>
+      <UIQueriesForm>Επεξεργασία ερωτήματος</UIQueriesForm>
     </title>
   </EditQueryForm>
   <PermissionPopup>
     <title>
-      <UIGroupMemberSelector>Permission Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Επιλογέας Δικαιωμάτων</UIGroupMemberSelector>
     </title>
   </PermissionPopup>
   <!--
@@ -1986,45 +1986,45 @@
   -->
   <UITagManager>
     <title>
-      <EditStyle>Edit Style</EditStyle>
-      <RemoveStyle>Remove Style</RemoveStyle>
+      <EditStyle>Επεξεργασία στυλ</EditStyle>
+      <RemoveStyle>Κατάργηση στυλ</RemoveStyle>
     </title>
   </UITagManager>
   <UITagStyleList>
     <header>
-      <name>Style Name</name>
-      <documentRange>Number of Occurrences</documentRange>
-      <tagHTML>Tag Style</tagHTML>
-      <action>Action</action>
+      <name>Όνομα στυλ</name>
+      <documentRange>Πλήθος εμφανίσεων</documentRange>
+      <tagHTML>Στυλ ετικέτας</tagHTML>
+      <action>Ενέργεια</action>
     </header>
     <title>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
-      <Remove>Remove</Remove>
+      <Edit>Επεξεργασία</Edit>
+      <Delete>Διαγραφή</Delete>
+      <Remove>Κατάργηση</Remove>
     </title>
     <action>
-      <AddStyle>Add Style</AddStyle>
+      <AddStyle>Προσθήκη στυλ</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Style Name:</styleName>
-      <documentRange>Number of Occurrences:</documentRange>
-      <styleHTML>HTML Style:</styleHTML>
+      <styleName>Όνομα στυλ:</styleName>
+      <documentRange>Πλήθος εμφανίσεων:</documentRange>
+      <styleHTML>Στυλ HTML:</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Update</UpdateStyle>
+      <UpdateStyle>Ενημέρωση</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
-      <error-update>Update failed. Your information is invalid.</error-update>
-      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
+      <range-validator>Το εύρος δεν είναι έγκυρο. Η μορφή πρέπει να είναι: α..ω, όπου α και ω θετικοί ακέραιοι. Μπορείτε όπου ω να ορίσετε * το οποίο αφήνει το εύρος ανοικτό.</range-validator>
+      <error-update>Απέτυχε η ενημέρωση. Τα στοιχεία σας δεν είναι έγκυρα.</error-update>
+      <item-not-existing>Δεν μπορείτε να αποθηκεύσετε αλλαγές σε αυτή την ετικέτα, δεδομένου ότι δεν υπάρχει πια στη βάση δεδομένων.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
+      <UITagStyleForm>Επεξεργαστείτε το στυλ διαμόρφωσης της ετικέτας</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
@@ -2044,13 +2044,13 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' has some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is empty.</empty-input>
+      <Invalid-char>Το πεδίο '{0}' έχει κάποιους μη έγκυρους χαρακτήρες. Παρακαλώ πληκτρολογήστε μια άλλη τιμή.</Invalid-char>
+      <empty-input>Η τιμή του πεδίου '{0}' είναι κενή.</empty-input>
     </msg>
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please enter the value into the field '{0}'.</empty-input>
+      <empty-input>Παρακαλώ εισάγετε την τιμή στο πεδίο '{0}'.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2060,7 +2060,7 @@
   -->
   <PermissionValidator>
     <msg>
-      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+      <permission-path-invalid>Το δικαίωμα '{0}' δεν είναι έγκυρο.</permission-path-invalid>
     </msg>
   </PermissionValidator>
   <!--
@@ -2070,9 +2070,9 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
+      <workspaceName>Χώρος Εργασίας:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodePath>Διαδρομή εκκίνησης:</rootNodePath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -2082,43 +2082,43 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε;</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>Add Super Type</AddSuperType>
+      <AddSuperType>Προσθήκη υπέρ τύπου</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Add Required Type</AddRequiredType>
-      <AddDefaultType>Add Default Type</AddDefaultType>
+      <AddRequiredType>Προσθήκη απαιτούμενου τύπου</AddRequiredType>
+      <AddDefaultType>Προσθήκη προεπιλεγμένου τύπου</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <AddConstraints>Προσθήκη περιορισμών</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
     <title>
-      <Select>Select</Select>
+      <Select>Επιλογή</Select>
     </title>
   </authInputSet>
   <!--
@@ -2126,73 +2126,73 @@
   -->
   <UIViewContainer>
     <title>
-      <View>View</View>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <View>Προβολή</View>
+      <EditInfo>Επεξεργασία</EditInfo>
+      <Delete>Διαγραφή</Delete>
     </title>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>{0} στο {1}</permission>
     </label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <EditInfo>Επεξεργασία</EditInfo>
+      <Delete>Διαγραφή</Delete>
     </title>
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Add Permission</AddPermission>
+      <AddPermission>Προσθήκη δικαιώματος</AddPermission>
     </title>
   </step1>
   <step2>
     <title>
-      <SelectContainer>Select Container</SelectContainer>
-      <SelectStore>Select Store</SelectStore>
+      <SelectContainer>Επιλογή Περιέκτη</SelectContainer>
+      <SelectStore>Επιλογή αποθηκευτικού χώρου</SelectStore>
     </title>
   </step2>
   <step3>
     <title>
-      <SelectQueryHandler>Select Query Handler</SelectQueryHandler>
+      <SelectQueryHandler>Επιλογή χειριστή ερωτήματος</SelectQueryHandler>
     </title>
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIDrivePermissionSelector>
 
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIPermissionSelector>
 
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Όλοι</anyPermission>
     </label>
   </UIAnyPermission>
 
   <UIMDriveAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Όλοι</anyPermission>
     </label>
   </UIMDriveAnyPermission>
 
   <UIQueriesAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Όλοι</anyPermission>
     </label>
   </UIQueriesAnyPermission>
 
   <MetadataPermission>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
     </label>
   </MetadataPermission>
   <MetadataPermission>
@@ -2202,7 +2202,7 @@
   </MetadataPermission>
   <anyPermission>
     <title>
-      <AddAnyPermission>Set any Permission</AddAnyPermission>
+      <AddAnyPermission>Ορισμός ελεύθερης πρόσβασης</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2210,8 +2210,8 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
+      <selectUser>Επιλογή χρήστη</selectUser>
       <selectMembership>Select Role</selectMembership>
     </label>
   </QueriesPermissionBrowse>
@@ -2220,7 +2220,7 @@
   -->
   <UIViewFormTabPane>
     <label>
-      <addSymLink>Add Symlink</addSymLink>
+      <addSymLink>Προσθήκη συντόμευσης</addSymLink>
     </label>
   </UIViewFormTabPane>
   <!--
@@ -2229,19 +2229,19 @@
 
   <UIDriveForm>
     <msg>
-      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+      <permission-path-invalid>Το δικαίωμα '{0}' δεν είναι έγκυρο.</permission-path-invalid>
     </msg>
   </UIDriveForm>
 
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The home path is required.</homepath-emty>
-      <targetpath-emty>The target path is required.</targetpath-emty>
+      <homepath-emty>Η αρχική διαδρομή απαιτείται.</homepath-emty>
+      <targetpath-emty>Η διαδρομή προορισμού απαιτείται.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
     <msg>
-      <exist>This tree node already exists.</exist>
+      <exist>Αυτός ο κόμβος δέντρου υπάρχει ήδη.</exist>
     </msg>
   </UITaxonomyWorkingArea>
 
@@ -2253,8 +2253,8 @@
         <firstName>#{word.firstName}</firstName>
         <email>#{word.email}</email>
       </option>
-      <group>Group</group>
-      <searchUser>User</searchUser>
+      <group>Ομάδα</group>
+      <searchUser>Χρήστης</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2270,37 +2270,37 @@
   -->
   <DriveInputSet>
     <label>
-      <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
-      <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <nt_folder>Φάκελος εγγράφων</nt_folder>
+      <nt_unstructured>Φάκελος περιεχομένου</nt_unstructured>
+      <exo_cssFolder>Φάκελος CSS</exo_cssFolder>
+      <exo_jsFolder>Φάκελος Javascript</exo_jsFolder>
+      <exo_linkFolder>Φάκελος συνδέσμων</exo_linkFolder>
+      <exo_webFolder>Φάκελος περιεχομένου Web</exo_webFolder>
     </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
+      <confirm-delete-permission>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δικαίωμα;</confirm-delete-permission>
+      <no-permission-remove>Δεν μπορείτε να καταργήσετε τον ιδιοκτήτη ή τον χρήστη του συστήματος.</no-permission-remove>
     </msg>
   </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
     <msg>
-      <no-right-target-path>Please select another home path.</no-right-target-path>
+      <no-right-target-path>Παρακαλώ επιλέξτε μια άλλη αρχική διαδρομή.</no-right-target-path>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <ManageUnLock>Manage Locks</ManageUnLock>
+        <ManageUnLock>Διαχείριση κλειδωμάτων</ManageUnLock>
       </label>
     </tab>
   </UIECMAdminControlPanel>
   <UIUnLockForm>
     <label>
-      <name>Path Node</name>
-      <permissions>Permissions</permissions>
+      <name>Διαδρομή κόμβου</name>
+      <permissions>Δικαιώματα</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
@@ -2308,37 +2308,37 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>You must select permissions.</permission-require>
+      <permission-require>Πρέπει να επιλέξετε τα δικαιώματα.</permission-require>
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
     <header>
-      <name>Groups or Users</name>
-      <action>Action</action>
+      <name>Ομάδες ή χρήστες</name>
+      <action>Ενέργεια</action>
     </header>
     <tooltip>
-      <DeleteLock>Delete Group</DeleteLock>
+      <DeleteLock>Διαγραφή ομάδας</DeleteLock>
     </tooltip>
     <msg>
-      <can-not-delete-lock-holder>Cannot delete the group {0}.</can-not-delete-lock-holder>
+      <can-not-delete-lock-holder>Δεν μπορείτε να διαγράψετε την ομάδα {0}.</can-not-delete-lock-holder>
     </msg>
   </UILockHolderList>
   <UILockNodeList>
     <header>
-      <name>Title</name>
-      <hoderLock>Lock Owner</hoderLock>
-      <action>Action</action>
+      <name>Τίτλος</name>
+      <hoderLock>Κλείδωμα ιδιοκτήτη</hoderLock>
+      <action>Ενέργεια</action>
     </header>
     <tooltip>
-      <UnLock>UnLock</UnLock>
+      <UnLock>Ξεκλείδωμα</UnLock>
     </tooltip>
     <msg>
-      <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
+      <access-denied-exception>Δεν έχετε δικαίωμα πρόσβασης στον κόμβο με τη διαδρομή {0} ή αυτός ο κόμβος έχει διαγραφεί.</access-denied-exception>
     </msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Manage Lock</UIUnLockForm>
+      <UIUnLockForm>Διαχείριση κλειδώματος</UIUnLockForm>
     </title>
   </EditUnLockForm>
   <UITabPane>
@@ -2346,16 +2346,16 @@
       <Close>#{word.close}</Close>
     </action>
     <title>
-      <UILockHolderContainer>Manage Lock</UILockHolderContainer>
-      <UILockNodeList>Locked Node</UILockNodeList>
+      <UILockHolderContainer>Διαχείριση κλειδώματος</UILockHolderContainer>
+      <UILockNodeList>Κλειδωμένος κόμβος</UILockNodeList>
     </title>
   </UITabPane>
 
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Add Tab</AddTabForm>
+      <AddTabForm>Προσθήκη καρτέλας</AddTabForm>
       <AddTab>#{word.save}</AddTab>
-      <BackViewForm>Back</BackViewForm>
+      <BackViewForm>Πίσω</BackViewForm>
     </action>
   </UIViewFormTabPane>
 
@@ -2375,19 +2375,19 @@
 
   <UISkinTab>
     <header>
-      <name>Name</name>
-      <roles>Roles</roles>
-      <baseVersion>Version</baseVersion>
-      <action>Actions</action>
+      <name>Όνομα</name>
+      <roles>Ρόλοι</roles>
+      <baseVersion>Έκδοση</baseVersion>
+      <action>Ενέργειες</action>
     </header>
     <msg>
-      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure you want to delete this skin?</confirm-delete>
+      <undeletable>Δεν μπορείτε να διαγράψετε το '{0}' επειδή είναι προεπιλεγμένο.</undeletable>
+      <confirm-delete>Θέλετε σίγουρα να διαγράψετε αυτό το θέμα εμφάνισης;</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Επεξεργασία</Edit>
+        <Delete>Διαγραφή</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2395,26 +2395,26 @@
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
-      <UIPopupWindow>Skin Permission</UIPopupWindow>
-      <selectVersion>Versions</selectVersion>
-      <content>Content:</content>
-      <name>Name:</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <UIPopupWindow>Δικαίωμα θέματος εμφάνισης</UIPopupWindow>
+      <selectVersion>Εκδόσεις</selectVersion>
+      <content>Περιεχόμενο:</content>
+      <name>Όνομα:</name>
+      <isDocumentTemplate>είναι πρότυπο εγγράφου</isDocumentTemplate>
+      <viewPermission>Δικαιώματα:</viewPermission>
+      <enableVersion>Ενεργοποιήστε την τήρηση ιστορικού εκδόσεων</enableVersion>
     </label>
-    <title>Add/Edit Skin</title>
+    <title>Προσθήκη/επεξεργασία θέματος εμφάνισης</title>
   </SkinForm>
 
   <UITagManager>
     <action>
       <title>
-        <RemoveStyle>Remove</RemoveStyle>
-        <AddStyle>Add Style</AddStyle>
+        <RemoveStyle>Κατάργηση</RemoveStyle>
+        <AddStyle>Προσθήκη στυλ</AddStyle>
       </title>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this tag style?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στυλ ετικέτας;</confirm-delete>
     </msg>
   </UITagManager>
 
@@ -2425,61 +2425,61 @@
   </UITaxonomyTreeContainer>
   <UITaxonomyTreeMainForm>
     <action>
-      <NextViewPermission>Next</NextViewPermission>
+      <NextViewPermission>Επόμενο</NextViewPermission>
     </action>
   </UITaxonomyTreeMainForm>
 
   <UIPermissionTreeForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <NextAddAction>Next</NextAddAction>
-      <Previous>Previous</Previous>
+      <NextAddAction>Επόμενο</NextAddAction>
+      <Previous>Προηγούμενο</Previous>
     </action>
   </UIPermissionTreeForm>
 
   <UIActionForm>
     <action>
-      <PreviousViewPermission>Previous</PreviousViewPermission>
-      <NextViewTree>Next</NextViewTree>
+      <PreviousViewPermission>Προηγούμενο</PreviousViewPermission>
+      <NextViewTree>Επόμενο</NextViewTree>
     </action>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
-      <xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+      <xss-vulnerability-character>Το πεδίο '{0}' περιέχει χαρακτήρες υπεύθυνους για ευπάθεια XSS</xss-vulnerability-character>
+      <xss-vulnerability-character-wo-label>Η εισαγωγή σας μπορεί να περιέχει χαρακτήρες ευπάθειας XSS</xss-vulnerability-character-wo-label>
     </msg>
   </UIActionForm>
 
   <UITaxonomyTreeWorkingArea>
     <action>
-      <Previous>Previous</Previous>
+      <Previous>Προηγούμενο</Previous>
     </action>
   </UITaxonomyTreeWorkingArea>
 
   <UITabPane>
     <title>
-      <UITagManager>Tag Manager</UITagManager>
-      <UITagPermissionManager>Tag Permission Manager</UITagPermissionManager>
+      <UITagManager>Διαχειριστής ετικετών</UITagManager>
+      <UITagPermissionManager>Διαχειριστής δικαιωμάτων ετικετών</UITagPermissionManager>
     </title>
   </UITabPane>
 
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
-      <action>Action</action>
+      <usersOrGroups>Χρήστης ή Ομάδα</usersOrGroups>
+      <action>Ενέργεια</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Διαγραφή</Delete>
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δικαίωμα;</confirm-delete-permission>
     </msg>
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add Permission</title>
+    <title>Προσθήκη δικαιώματος</title>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Προσθήκη</Add>
     </action>
     <label>
       <userOrGroup>Roles:</userOrGroup>
@@ -2491,42 +2491,42 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Επιλογή ομάδας</selectGroup>
       <selectMembership>Select Role</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIFolksonomyManager>
     <msg>
-      <confirm-delete>Are you sure you want to delete this style?</confirm-delete>
+      <confirm-delete>Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στυλ ετικέτας;</confirm-delete>
     </msg>
     <action>
       <title>
-        <AddStyle>Add Style</AddStyle>
+        <AddStyle>Προσθήκη στυλ</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>
   <UIActionForm>
     <title>
-      <ShowComponent>Open Window</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>Άνοιγμα παράθυρου</ShowComponent>
+      <removeReference>Κατάργηση</removeReference>
     </title>
   </UIActionForm>
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field is empty.</empty-input>
+      <Invalid-char>Υπάρχουν κάποιοι μη έγκυροι χαρακτήρες. Εισάγετε μια άλλη τιμή.</Invalid-char>
+      <empty-input>Η τιμή του πεδίου είναι κενή.</empty-input>
     </msg>
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
+      <constraint-violation-exception>Ο κόμβος '{0}' δεν μπορεί να προστεθεί στο '{1}' στον χώρο εργασίας '{2}'.  Υπάρχει ένα πρόβλημα με τα δικαιώματα ή με τις συνθήκες περιορισμών.</constraint-violation-exception>
     </msg>
   </UIActionForm>
 
   <UIWorkspaceWizard>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
+      <name-not-allowed>Απαγορευμένο όνομα</name-not-allowed>
     </msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>
@@ -2537,61 +2537,61 @@
 
   <UIViewFormTabPane>
     <label>
-      <addCategory>Add Category</addCategory>
-      <addLocalizationLink>Add Translation</addLocalizationLink>
+      <addCategory>Προσθήκη κατηγορίας</addCategory>
+      <addLocalizationLink>Προσθέστε μετάφραση</addLocalizationLink>
     </label>
   </UIViewFormTabPane>
 
   <UIDriveForm>
     <label>
-      <allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
+      <allowNodeTypesOnTree>Επιτρεπόμενοι τύποι κόμβων αριστερού δέντρου:</allowNodeTypesOnTree>
     </label>
   </UIDriveForm>
   <DriveInputSet>
     <title>
-      <ChooseNodeType>Select Node Types</ChooseNodeType>
-      <RemoveNodeType>Remove</RemoveNodeType>
+      <ChooseNodeType>Επιλέξτε τύπους κόμβων</ChooseNodeType>
+      <RemoveNodeType>Κατάργηση</RemoveNodeType>
     </title>
   </DriveInputSet>
   <PopupNodeTypeSelector>
     <title>
-      <UINodeTypeSelector>Select Node Types</UINodeTypeSelector>
-      <PopupNodeTypeSelector>Select Node Types</PopupNodeTypeSelector>
+      <UINodeTypeSelector>Επιλέξτε τύπους κόμβων</UINodeTypeSelector>
+      <PopupNodeTypeSelector>Επιλέξτε τύπους κόμβων</PopupNodeTypeSelector>
     </title>
   </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
-      <selectedAllNodeTypes>Select All Node Types</selectedAllNodeTypes>
+      <selectedAllNodeTypes>Επιλέξτε όλα τα είδη του κόμβου</selectedAllNodeTypes>
     </label>
   </UINodeTypeSelector>
   <UIScriptForm>
     <msg>
-      <PathNotFoundException>The script already exists in the '{0}' folder.</PathNotFoundException>
+      <PathNotFoundException>Η δέσμη ενεργειών υπάρχει ήδη στο φάκελο '{0}'.</PathNotFoundException>
     </msg>
   </UIScriptForm>
   <UINodeTypeList>
     <msg>
-      <no-list>There is no node type matching your search.</no-list>
+      <no-list>Δεν υπάρχει κανένας τύπος κόμβου που να ταιριάζει στην αναζήτηση σας.</no-list>
     </msg>
   </UINodeTypeList>
   <UIActionForm>
     <msg>
-      <canotChangeActionId>You cannot change the Action ID.</canotChangeActionId>
+      <canotChangeActionId>Δεν μπορείτε να αλλάξετε το αναγνωριστικό της ενέργειας.</canotChangeActionId>
     </msg>
   </UIActionForm>
   <PopupComponent>
     <title>
-      <UINodeTypeSelector>Node Type Selector</UINodeTypeSelector>
+      <UINodeTypeSelector>Επιλογέας τύπων κόμβου</UINodeTypeSelector>
     </title>
   </PopupComponent>
   <UIPageIterator>
     <label>
-      <maxPageSize>Maximum Page Size</maxPageSize>
+      <maxPageSize>Μέγιστο μέγεθος σελίδας</maxPageSize>
     </label>
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
+      <can-not-unlock-node>Δεν έχετε άδεια για να ξεκλειδώσετε αυτόν τον κόμβο. Παρακαλώ επικοινωνήστε με το διαχειριστή για να πάρετε τη σχετική άδεια.</can-not-unlock-node>
     </msg>
   </UILockNodeList>
 </bundle>

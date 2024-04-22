@@ -50,8 +50,8 @@
     <event>
       <OpenFileOn>Open $fileUrl on $serviceName</OpenFileOn>
       <OpenOn>Open on</OpenOn>
-      <EditFile>Edit</EditFile>
-      <ViewFile>View</ViewFile>
+      <EditFile>Rediger</EditFile>
+      <ViewFile>Vis</ViewFile>
     </event>
     <label>
       <sourceview>View source code</sourceview>
@@ -91,24 +91,24 @@
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
       <provider>Provider</provider>
-      <description>Description</description>
-      <active>Active</active>
+      <description>Beskrivelse</description>
+      <active>Aktiv</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documents</title>
+      <title>Dokumenter</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Legg til i nettverk</connect>
       </button>
       <button>
-        <disconnect>Disconnect</disconnect>
+        <disconnect>Koble fra</disconnect>
       </button>
       <noConnector>No personal drive connector available</noConnector>
       <connectedAccountWith>You are connected with</connectedAccountWith>

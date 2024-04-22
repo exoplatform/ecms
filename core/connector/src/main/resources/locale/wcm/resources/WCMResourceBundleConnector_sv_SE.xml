@@ -2,16 +2,16 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Inget innehåll är valt. Välj minst en.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Ändra Namn</rename>
+      <cancel>Avbryt</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>Byter namn på...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>

@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
-          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
-          <publicationPublish>Publication &gt; Publish</publicationPublish>
+          <publicationRequestApproval>Publikasjon &gt; godkjenningsforespørsel</publicationRequestApproval>
+          <publicationApproveContent>Publikasjon &gt; godkjenn innhold</publicationApproveContent>
+          <publicationPublish>Publikasjon &gt; publiser</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>

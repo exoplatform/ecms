@@ -4,11 +4,11 @@
     <title>
       <QuickEdit>Edit in Content Explorer</QuickEdit>
       <print>Print This Page</print>
-      <FastPublish>Publish</FastPublish>
+      <FastPublish>شائع کریں</FastPublish>
     </title>
     <label>
       <draft>Draft</draft>
-      <print>Print</print>
+      <print>چھاپو</print>
     </label>
     <msg>
       <no-content>No contents found.</no-content>
@@ -42,13 +42,13 @@
       <Save>#{word.save}</Save>
       <Abort>Abort</Abort>
       <Cancel>#{word.cancel}</Cancel>
-      <Print>Print</Print>
+      <Print>چھاپو</Print>
       <Close>#{word.close}</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
+      <Edit>ترمیم</Edit>
       <Preferences>Preferences</Preferences>
       <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
@@ -61,11 +61,11 @@
       <Advance>Advanced</Advance>
       <ContextCaption>Dynamic Navigation</ContextCaption>
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-      <UISCVParameterInputBox>by</UISCVParameterInputBox>
+      <UISCVParameterInputBox>نے</UISCVParameterInputBox>
       <PrintSettingBlock>Print Settings</PrintSettingBlock>
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
+      <LockStatus>بند</LockStatus>
       <CacheManagement>Content Visibility</CacheManagement>
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>راستہ شامل کریں</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -110,7 +110,7 @@
     <enrolled>Enrolled</enrolled>
     <draft>Draft</draft>
     <pending>Pending</pending>
-    <approved>Approved</approved>
+    <approved>منظور ہوگیا</approved>
     <inreview>Under Review</inreview>
     <staged>Staged</staged>
     <published>Published</published>

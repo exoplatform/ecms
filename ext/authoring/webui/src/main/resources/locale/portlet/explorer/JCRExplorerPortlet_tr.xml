@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
-      <PublicationApproveContent>Approve Content</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationRequestApproval>Onay İste</PublicationRequestApproval>
+      <PublicationApproveContent>İçeriği Onayla</PublicationApproveContent>
+      <PublicationPublish>Yayımla</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

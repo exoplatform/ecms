@@ -2,16 +2,16 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Er is geen inhoud geselecteerd. Selecteer ten minste één.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Hernoem</rename>
+      <cancel>Annuleren</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>Hernoemen...</renaming>
     </msg>
   </RenameConnector>
   <OpenInOfficeConnector>
@@ -21,7 +21,7 @@
           <word>Open in Word</word>
           <excel>Open in Excel</excel>
           <powerpoint>Open in Powerpoint</powerpoint>
-          <desktop>Open on Desktop</desktop>
+          <desktop>Open op bureau</desktop>
           <desktop-app>Open in {0}</desktop-app>
         </remote-edit>
       </exo>
@@ -29,7 +29,7 @@
   </OpenInOfficeConnector>
   <DocumentAutoVersion>
     <msg>
-      <WrongMimeType>The mimetype of the file uploaded is unknown. No new version of {0} will be created.</WrongMimeType>
+      <WrongMimeType>Het mimetype van het geüpload bestand is onbekend. Er zal geen nieuwe versie van {0} worden gemaakt.</WrongMimeType>
     </msg>
   </DocumentAutoVersion>
 </bundle>

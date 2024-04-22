@@ -2,26 +2,26 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>View Information</UIViewInfoManager>
+<UIViewInfoManager>Afișare informații</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Afișare informații</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
-      <title>Title</title>
-      <type>Type</type>
-      <size>Size</size>
-      <owner>Owner</owner>
-      <lastModifier>Last Modifier</lastModifier>
-      <created>Created Date</created>
-      <lastModified>Last Modified Date</lastModified>
-      <publicationState>Publication State</publicationState>
+      <name>Nume</name>
+      <title>Titlu</title>
+      <type>Tip</type>
+      <size>Dimensiune</size>
+      <owner>Proprietar</owner>
+      <lastModifier>Data ultimei modificări</lastModifier>
+      <created>Dată creare</created>
+      <lastModified>Data ultimei modificări</lastModified>
+      <publicationState>Starea publicării</publicationState>
 </label>
 <value>
       <folder>Folder</folder>

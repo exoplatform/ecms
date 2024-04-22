@@ -4,14 +4,14 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
+        <en>Anglais</en>
+        <fr>Français</fr>
+        <ru>Russe</ru>
+        <vi>Vietnamien</vi>
+        <nl>Néerlandais</nl>
+        <de>Allemand</de>
+        <uk>Ukrainien</uk>
+        <ar>Arabe</ar>
       </languages>
     </label>
   </View>
@@ -22,24 +22,24 @@
   <Comment>
     <view>
       <label>
-        <postedBy>Last comment posted by</postedBy>
-        <at>at</at>
-        <comments>Comment(s)</comments>
-        <show-comments>Show comments</show-comments>
-        <hide-comments>Hide comments</hide-comments>
-        <comment-by>Commented by</comment-by>
+        <postedBy>Dernier commentaire par</postedBy>
+        <at>à</at>
+        <comments>Commentaires</comments>
+        <show-comments>Afficher les commentaires</show-comments>
+        <hide-comments>Cacher les commentaires</hide-comments>
+        <comment-by>Commenté par</comment-by>
         <email>Email</email>
         <site>Site</site>
-        <lastComment>Last comment posted by {user} at {time}</lastComment>
-        <Less_Than_A_Minute>less than a minute ago</Less_Than_A_Minute>
-        <About_A_Minute>about a minute ago</About_A_Minute>
-        <About_x_Minutes>about {0} minutes ago</About_x_Minutes>
-        <About_An_Hour>about an hour ago</About_An_Hour>
-        <About_x_Hours>about {0} hours ago</About_x_Hours>
-        <About_A_Day>about a day ago</About_A_Day>
-        <About_x_Days>about {0} days ago</About_x_Days>
-        <About_A_Month>about a month ago</About_A_Month>
-        <About_x_Months>about {0} months ago</About_x_Months>
+        <lastComment>Dernier commentaire par {user} à {time}</lastComment>
+        <Less_Than_A_Minute>il y a moins d'une minute</Less_Than_A_Minute>
+        <About_A_Minute>il y a une minute</About_A_Minute>
+        <About_x_Minutes>il y a environ {0} minutes</About_x_Minutes>
+        <About_An_Hour>il y a environ une heure</About_An_Hour>
+        <About_x_Hours>il y a environ {0} heures</About_x_Hours>
+        <About_A_Day>il y a environ un jour</About_A_Day>
+        <About_x_Days>il y a environ {0} jours</About_x_Days>
+        <About_A_Month>il y a environ un mois</About_A_Month>
+        <About_x_Months>il y a environ {0} mois</About_x_Months>
       </label>
     </view>
   </Comment>
@@ -50,20 +50,20 @@
   <File>
     <view>
       <label>
-        <not-viewable>The preview of this document is not available.</not-viewable>
-        <pdf-max-size>The preview is not available for content larger than {0} MB.</pdf-max-size>
-        <pdf-max-page>The preview is not available for content with over {0} pages.</pdf-max-page>
-        <using-webDAV>or Open in MS Office</using-webDAV>
-        <open-on-desktop>Open in Desktop</open-on-desktop>
-        <editOnline>Edit Online</editOnline>
-        <open-in-documents>Open in Documents</open-in-documents>
-        <open-in-documents-tooltip>Open this file in Documents app</open-in-documents-tooltip>
-        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
-        <webDAV>WebDAV View</webDAV>
-        <download>Download</download>
-        <htmlview>View as HTML</htmlview>
-        <plaintextview>View as Plain text</plaintextview>
-        <binary-not-available>The content of this document is no longer available. Please contact your administrator.</binary-not-available>
+        <not-viewable>L'aperçu de ce document n'est pas disponible.</not-viewable>
+        <pdf-max-size>L'aperçu n'est pas disponible pour les contenus de plus de {0} Mo.</pdf-max-size>
+        <pdf-max-page>L'aperçu n'est pas disponible pour les contenus avec plus de {0} pages.</pdf-max-page>
+        <using-webDAV>ou Ouvrir dans MS Office</using-webDAV>
+        <open-on-desktop>Ouvrir sur votre poste de travail</open-on-desktop>
+        <editOnline>Editer en ligne</editOnline>
+        <open-in-documents>Ouvrir dans Documents</open-in-documents>
+        <open-in-documents-tooltip>Ouvrir ce fichier dans l'application Documents</open-in-documents-tooltip>
+        <file-size-too-big>Le contenu de ce fichier est trop important. Veuillez le télécharger pour le consulter.</file-size-too-big>
+        <webDAV>Vue WebDAV</webDAV>
+        <download>Télécharger</download>
+        <htmlview>Vue HTML</htmlview>
+        <plaintextview>Vue texte brut</plaintextview>
+        <binary-not-available>Le contenu de ce document n'est plus disponible. Veuillez contacter votre administrateur.</binary-not-available>
       </label>
     </view>
   </File>
@@ -74,12 +74,12 @@
   <Mail>
     <view>
       <label>
-        <from>From:</from>
-        <to>To:</to>
-        <cc>Cc:</cc>
-        <date>Date:</date>
-        <subject>Subject:</subject>
-        <attachment>Attachments:</attachment>
+        <from>De :</from>
+        <to>À :</to>
+        <cc>Cc :</cc>
+        <date>Date :</date>
+        <subject>Sujet :</subject>
+        <attachment>Pièces jointes :</attachment>
       </label>
     </view>
   </Mail>
@@ -89,8 +89,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Rate</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>Note</avg-rating>
+        <subscription>Nb Vote</subscription>
       </label>
     </view>
   </Vote>
@@ -100,12 +100,12 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <name>Nom</name>
+        <versionable>Versionnable</versionable>
+        <exo_owner>Propriétaire</exo_owner>
+        <exo_dateCreated>Date de création</exo_dateCreated>
+        <exo_dateModified>Date de Modif.</exo_dateModified>
+        <auditing>Audit</auditing>
       </label>
     </view>
   </ListView>
@@ -116,9 +116,9 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <metadata>Metadata</metadata>
+        <action-name>Nom de l'action</action-name>
+        <lifecycle>Cycle de vie</lifecycle>
+        <metadata>Metadonnée</metadata>
         <description>Description</description>
       </label>
     </view>
@@ -130,8 +130,8 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Nom de l'action</action-name>
+        <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
       </label>
     </view>
@@ -142,8 +142,8 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Nom</action-name>
+        <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
       </label>
     </view>
@@ -154,31 +154,31 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
-        <core-elements>Core Elements</core-elements>
-        <title>Title</title>
-        <creator>Creator</creator>
-        <subject>Subject</subject>
+        <not-avaliable/>
+        <core-elements>Dublin Core</core-elements>
+        <title>Titre</title>
+        <creator>Créateur</creator>
+        <subject>Sujet</subject>
         <source>Source</source>
-        <contributor>Contributor</contributor>
-        <resource-type>Resource Type</resource-type>
+        <contributor>Contributeur</contributor>
+        <resource-type>Type de Ressource</resource-type>
         <date>Date</date>
-        <publisher>Publisher</publisher>
+        <publisher>Editeur</publisher>
         <description>Description</description>
-        <rights>Rights</rights>
+        <rights>Droits</rights>
         <relation>Relation</relation>
         <format>Format</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <coverage>Couverture</coverage>
+        <identifier>Identifiant</identifier>
+        <languages>Langues</languages>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
+        <add-edit>Modifier</add-edit>
         <cancel>#{word.cancel}</cancel>
       </action>
       <tooltip>
         <cancel>#{word.cancel}</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -186,10 +186,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node types</nodetypes>
-        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -197,10 +197,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -208,10 +208,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes> 
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeud</nodetypes> 
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -219,10 +219,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -230,13 +230,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
-      <Read-less>Read less</Read-less>
-      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
+      <Read-more>Lire la suite</Read-more>
+      <Read-less>Réduire</Read-less>
+      <Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>Un second media est disponible comme description audio</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

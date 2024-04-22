@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>Sluttid</end-time>
+        <start-time>Starttid</start-time>
+        <lifecycle>Livscykel</lifecycle>
+        <mimeType>MIME-typ</mimeType>
+        <repeat-count>Upprepa sammanräkning</repeat-count>
+        <time-interval>Tidsintervall</time-interval>
+        <query-items>Sök artiklar</query-items>
+        <schedule-type>Schematyp</schedule-type>
+        <remove>Ta bort objekt</remove>
+        <add>Lägg till objekt</add>
+        <expand>Expandera detta</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Länk</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>Namn</name>
+    <categories>Kategorier</categories>
     </label>
   </UIDocumentForm>
  
@@ -45,8 +45,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>Namn</name>
+        <content>Innehåll</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -58,12 +58,12 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Kategorier</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <width>Width</width>
         <height>Height</height>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Filen finns redan. Du kan ta bort den och ladda upp en annan fil.</re-upload>
       </label>
     </dialog>
   </File>
@@ -71,22 +71,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Portera</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Lösenord</password>
+      <link>Länk</link>
+      <to>Skicka e-post till</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Portera</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Lösenord</password>
+      <link>Länk</link>
+      <to>Skicka e-post till</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -97,7 +97,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Metadata</metadata>
@@ -112,7 +112,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -120,7 +120,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron process</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -131,7 +131,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -151,20 +151,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Skapad av:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Källa:</source>
+        <contributor>Bidragsgivare:</contributor>
+        <resource-type>Resurstyp:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Utgivare:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
+        <rights>Rättigheter:</rights>
         <relation>Relation:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <coverage>Täckning:</coverage>
+        <identifier>Identifierare:</identifier>
+        <language>Språk:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -175,8 +175,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Primär typ</primary-type>
+        <mixin-types>Mixin Typ</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -187,10 +187,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Destination arbetsyta</destination-workpsace>
+        <destination-path>Målsökvägen</destination-path>
+        <primary-type>Primär typ</primary-type>
+        <mixin-types>Mixin Typ</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -200,8 +200,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Starta publicering</start-publication>
+        <end-publication>Avsluta publikation</end-publication>
       </label>
     </dialog>
   </Published>
@@ -232,7 +232,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>Titel</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -244,11 +244,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>Versionshistorik</version-history>
+        <base-version>Bas version</base-version>
+        <is-checked-out>Utcheckad</is-checked-out>
+        <predecessors>Föregångare</predecessors>
+        <merge-failed>Det gick inte att koppla dokument</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -260,10 +260,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Namn</name>
         <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <minetype>MIME-typ</minetype>
+        <content>Innehåll</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -272,17 +272,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>E-postadressen är ogiltig.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>Fältet {0} är obligatoriskt. Skriv in ditt värde.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Fältet {0} är ogiltig.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -292,18 +292,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <id>ID</id>
+        <name>Namn</name>
+        <lifecycle>Livscykel</lifecycle>
+        <homePath>Sökväg Hem</homePath>
+        <targetWorkspace>Målet arbetsyta</targetWorkspace>
+        <targetPath>Målet sökväg</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Det går inte att spara dokumentet. Det kan finnas ett problem med spara-funktionen.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -311,36 +311,36 @@
   #####Since version 2.6#######
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<no>Nej</no>
+<yes>Ja</yes>
+<true>sant</true>
+<false>falskt</false>
+<Electronic>Elektroniska</Electronic>
+<Paper>Papper</Paper>
+<NONE>Ingen</NONE>
+<CLASSIFIED>Klassificerad</CLASSIFIED>
+<UNCLASSIFIED>Oklassificerad</UNCLASSIFIED>
+<NOCONTRACT>Inget kontrakt</NOCONTRACT>
+<one-minute>En minut</one-minute>
+<hourly>Varje timme</hourly>
+<daily>Dagligen</daily>
+<quarterly>Kvartalsvis</quarterly>
+<yearly>Årligen</yearly>
+<ten-years>Tio år</ten-years>
+<read>Användaråtgärd</read>
+  <schedule>Schemaläggaren</schedule>
+  <node_added>Tillägg till innehåll</node_added>
+  <node_removed>Ta bort innehåll</node_removed>
+  <property_added>Lägg till egenskaper</property_added>
+  <property_removed>Ta bort egenskaper</property_removed>
+  <property_changed>Ändra egenskaper</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -348,9 +348,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -358,9 +358,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -368,9 +368,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -378,15 +378,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Bildtexter</captions>
+<audioDescription>Ljudbeskrivning</audioDescription>
+<alternativeText>Alternativ text</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Bildtexter skall innehålla text och viktiga ljud</CaptionsHelp>
+<AudioDescriptionHelp>En Ljudbeskrivning är ett klipp ur videon</AudioDescriptionHelp>
+<AlternativeTextHelp>Ge ett tillgängligt, alternativt sätt att presentera informationen</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
 
@@ -422,9 +422,9 @@
     <msg>
       <name-invalid>Please enter the document name.</name-invalid>
       <constraint-violation>You can't add a document of type '{0}' here.</constraint-violation>
-      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
+      <repository-exception>Ett oväntat fel uppstod. Kontakta administratören för mer information.</repository-exception>
       <repository-exception-permission>You don't have the permission to add a new document here.</repository-exception-permission>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
+      <numberformat-exception>Du kan inte spara det här dokumentet. Namnet som anges måste vara i numeriskt format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>You can't save the document. An item with the same name already exists.</not-allow-sameNameSibling>
     </msg>

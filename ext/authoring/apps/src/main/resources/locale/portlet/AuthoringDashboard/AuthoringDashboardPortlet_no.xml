@@ -3,11 +3,11 @@
   <UIDashboardForm>
     <label>
       <title>Author Dashboard</title>
-      <nocontent>No Content</nocontent>
-      <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Waiting For My Approval</waitingapproval>
-      <approve>Approve</approve>
-      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <nocontent>Ingen innhold</nocontent>
+      <mydraft>Mitt utkast</mydraft>
+      <waitingapproval>Venter på godkjenning</waitingapproval>
+      <approve>Godkjenn</approve>
+      <publishedtomorrow>For publisering i morgen</publishedtomorrow>
       <refresh>#{word.refresh}</refresh>
     </label>
   </UIDashboardForm>

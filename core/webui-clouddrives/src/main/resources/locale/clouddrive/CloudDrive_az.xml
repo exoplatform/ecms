@@ -90,22 +90,22 @@
     <label>
       <title>Cloud Storage</title>
       <cloudDrives>Cloud Drives</cloudDrives>
-      <provider>Provider</provider>
-      <description>Description</description>
+      <provider>Provayder</provider>
+      <description>Açıqlama</description>
       <active>Active</active>
       <ConnectionToCloud>Connection to Cloud drives</ConnectionToCloud>
     </label>
   </cloudStorage>
   <cloudDriveSettings>
     <label>
-      <title>Documents</title>
+      <title>Sənədlər</title>
       <subtitle>Connect your personal drives</subtitle>
       <description>Access your personal drives from your Digital Workplace</description>
     </label>
     <drawer>
       <title>Connect your personal drives</title>
       <button>
-        <connect>Connect</connect>
+        <connect>Əlaqələndir</connect>
       </button>
       <button>
         <disconnect>Disconnect</disconnect>

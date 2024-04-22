@@ -3,21 +3,21 @@
   <PublicationService>
     <AuthoringPublicationPlugin>
       <changeState>
-        <obsoleted>The content is obsolete</obsoleted>
-        <published>The content is published</published>
-<unpublished>The content is unpublished</unpublished>
-<archived>The content is archived</archived>
-<staged>The content is staged</staged>
-<approved>The content is approved</approved>
-<pending>The content is pending</pending>
-<draft>The content is in draft form</draft>
+        <obsoleted>內容已過時</obsoleted>
+        <published>公佈的內容</published>
+<unpublished>內容是未發佈</unpublished>
+<archived>內容已歸檔</archived>
+<staged>內容正在上演</staged>
+<approved>內容被批准</approved>
+<pending>內容正在等待</pending>
+<draft>內容是以草稿形式</draft>
       </changeState>
     </AuthoringPublicationPlugin>
   </PublicationService>
   <Publication>
     <log>
       <description>
-        <enrolled>The content enrolls in Publication life cycle</enrolled>
+        <enrolled>內容註冊發佈在生命週期中</enrolled>
       </description>
     </log>
   </Publication>
