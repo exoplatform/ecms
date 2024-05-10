@@ -1105,7 +1105,7 @@
       attachToDocuments( 'mousemove', onMouseMove, listeners );
 
       // Clean up the mousemove listener. Update widget data if valid.
-      attachToDocuments( 'mouseup', onMouseUp, listeners );
+      attachToDocuments( 'pointerup', onMouseUp, listeners );
 
       // The entire editable will have the special cursor while resizing goes on.
       editable.addClass( cursorClass );
