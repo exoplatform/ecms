@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-core</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>7.0.x-SNAPSHOT</version>
+    <version>7.0.0-20240513</version>
   </parent>
   <artifactId>ecms-core-webui-seo</artifactId>
   <packaging>jar</packaging>
