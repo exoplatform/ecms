@@ -20,7 +20,6 @@ package org.exoplatform.services.cms.clouddrives.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.PrivilegedExceptionAction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -34,7 +33,6 @@ import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 
 import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.commons.utils.SecurityHelper;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.configuration.ConfigurationException;
 import org.exoplatform.container.configuration.ConfigurationManager;
@@ -134,33 +132,28 @@ public class ExtendedMimeTypeResolver {
    */
   public void addPlugin(final MimeTypeMap typesMap) {
     try {
-      SecurityHelper.doPrivilegedIOExceptionAction(new PrivilegedExceptionAction<Void>() {
-        public Void run() throws Exception {
-          for (String path : typesMap.getPaths()) {
+      for (String path : typesMap.getPaths()) {
+        try {
+          Scanner scanner = null;
+          InputStream stream = configService.getInputStream(path);
+          if (stream != null) {
+            scanner = new Scanner(stream, "ISO-8859-1");
+          }
+          if (scanner == null) {
+            LOG.warn("Cannot read extended mimetypes from path " + path);
+          } else {
             try {
-              Scanner scanner = null;
-              InputStream stream = configService.getInputStream(path);
-              if (stream != null) {
-                scanner = new Scanner(stream, "ISO-8859-1");
+              while (scanner.hasNextLine()) {
+                processLine(scanner.nextLine());
               }
-              if (scanner == null) {
-                LOG.warn("Cannot read extended mimetypes from path " + path);
-              } else {
-                try {
-                  while (scanner.hasNextLine()) {
-                    processLine(scanner.nextLine());
-                  }
-                } finally {
-                  scanner.close();
-                }
-              }
-            } catch (IOException e) {
-              throw new IOException("Error loadinng extended mimetypes from path " + path + ": " + e.getMessage(), e);
+            } finally {
+              scanner.close();
             }
           }
-          return null;
+        } catch (Exception e) {
+          throw new IOException("Error loadinng extended mimetypes from path " + path + ": " + e.getMessage(), e);
         }
-      });
+      }
     } catch (IOException e) {
       throw new InternalError("Unable to load extended mimetypes: " + e.toString());
     }
