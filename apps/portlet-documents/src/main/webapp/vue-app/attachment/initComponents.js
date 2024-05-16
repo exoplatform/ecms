@@ -16,6 +16,7 @@ import TaskAttachment from './components/task/TaskAttachment.vue';
 import AnalyticsTableCellDocumentTitleValue from './components/analytics/AnalyticsTableCellDocumentTitleValue.vue';
 import AnalyticsTableCellDocumentSizeValue from './components/analytics/AnalyticsTableCellDocumentSizeValue.vue';
 import AnalyticsTableCellDocumentOriginValue from './components/analytics/AnalyticsTableCellDocumentOriginValue.vue';
+import ContentAttachmentList from './components/content/ContentAttachmentList.vue';
 
 const components = {
   'attachments-drawer': AttachmentsDrawer,
@@ -36,6 +37,7 @@ const components = {
   'analytics-table-cell-document-title-value': AnalyticsTableCellDocumentTitleValue,
   'analytics-table-cell-document-size-value': AnalyticsTableCellDocumentSizeValue,
   'analytics-table-cell-document-origin-value': AnalyticsTableCellDocumentOriginValue,
+  'content-attachment-list': ContentAttachmentList
 };
 
 for (const key in components) {
