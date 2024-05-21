@@ -134,4 +134,9 @@ export function installExtensions() {
     },
   });
 
+  extensionRegistry.registerComponent('NewsDetails', 'news-details-attachments', {
+    id: 'attachment-list',
+    vueComponent: Vue.options.components['content-attachment-list'],
+    rank: 10,
+  });
 }
