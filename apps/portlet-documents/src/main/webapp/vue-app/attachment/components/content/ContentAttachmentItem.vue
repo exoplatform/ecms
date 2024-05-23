@@ -17,34 +17,32 @@
 -->
 
 <template>
-  <div>
-    <div
-      v-show="attachmentsIds?.length"
-      class="newsAttachmentsTitle mx-13"
-      :class="isMobile && 'd-flex flex-row pa-4 subtitle-2'">
-      {{ $t('attachments.list') }}
-      ({{ attachmentsIds ? attachmentsIds.length : 0 }})
-    </div>
-    <div class="newsAttachments">
-      <content-attachment-item
-        v-for="attachmentId in attachmentsIds"
-        :key="attachmentId"
-        :attachment-id="attachmentId" />
-    </div>
-  </div>
+  <exo-attachment-item
+    :file="attachment"
+    class="newsAttachment text-truncate"/>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      attachment: null
+    };
+  },
   props: {
-    attachmentsIds: {
+    attachmentId: {
       type: String,
-      default: null,
+      default: null
     }
   },
-  computed: {
-    isMobile() {
-      return this.$vuetify?.breakpoint?.smAndDown;
+  created() {
+    this.getAttachmentById(this.attachmentId);
+  },
+  methods: {
+    getAttachmentById() {
+      return Vue.prototype.$attachmentService.getAttachmentById(this.attachmentId).then(attachment => {
+        this.attachment = attachment;
+      });
     }
   }
 };
