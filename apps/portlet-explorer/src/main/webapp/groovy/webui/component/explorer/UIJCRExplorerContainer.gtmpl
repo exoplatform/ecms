@@ -5,9 +5,7 @@
   
   jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/base", "base").
   addScripts("ecmutil.ECMUtils.onDbClickOnTreeExplorer();").
-  addScripts("ecmutil.ECMUtils.init('UIJCRExplorerPortlet');").
-  addScripts("eXo.session.itvInit();");
-  
+  addScripts("ecmutil.ECMUtils.init('UIJCRExplorerPortlet');");
 %>
 <div class="$uicomponent.id" id="$uicomponent.id" >
 	<div style="height: 0px;">
