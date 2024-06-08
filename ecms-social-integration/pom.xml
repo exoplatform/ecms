@@ -84,7 +84,7 @@
       <artifactId>social-component-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.addons.analytics</groupId>
+      <groupId>io.meeds.analytics</groupId>
       <artifactId>analytics-api</artifactId>
       <scope>provided</scope>
     </dependency>
