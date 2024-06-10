@@ -9,7 +9,7 @@ CKEDITOR.plugins.setLang( 'selectImage', 'fr', {
   captionPlaceholder: 'Légende',
   infoTab: 'Informations sur l\'image',
   lockRatio: 'Conserver les proportions',
-  menu: 'Changer l\'image',
+  menu: 'Propriétés de l\'image',
   insertImage: 'Insérer une image',
   pathName: 'image',
   pathNameCaption: 'légende',
