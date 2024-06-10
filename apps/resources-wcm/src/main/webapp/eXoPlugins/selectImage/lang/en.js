@@ -9,7 +9,7 @@ CKEDITOR.plugins.setLang( 'selectImage', 'en', {
   captionPlaceholder: 'Caption',
   infoTab: 'Image Info',
   lockRatio: 'Lock Ratio',
-  menu: 'Change Image',
+  menu: 'Image Properties',
   insertImage: 'Insert image',
   pathName: 'image',
   pathNameCaption: 'caption',
