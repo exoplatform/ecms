@@ -7,7 +7,7 @@
 
 ( function() {
 
-  var template = '<a href="" target=""><img alt="" src="" /></a>',
+  var template = '<img alt="" src="" />',
     templateBlock = new CKEDITOR.template(
       '<figure class="{captionedClass}">' +
         template +
@@ -94,15 +94,18 @@
       } );
 
       // Register context menu option for editing widget.
-      if ( editor.contextMenu ) {
-          editor.addMenuGroup( 'image' );
-          editor.addMenuItem( 'selectImageItem', {
-              label: editor.lang.selectImage.menu,
-              icon: this.path + 'icons/selectImage.png',
-              command: 'selectImage',
-              group: 'image'
-          });
+      if ( editor.addMenuItems ) {
+        editor.addMenuItems( {
+          selectImageItem: {
+            label: editor.lang.selectImage.menu,
+            icon: this.path + 'icons/selectImage.png',
+            command: 'selectImage',
+            group: 'image'
+          }
+        } );
+      }
 
+      if ( editor.contextMenu ) {
           editor.contextMenu.addListener( function( element ) {
               if ( element) {
                   return { selectImageItem: CKEDITOR.TRISTATE_OFF };
@@ -155,7 +158,6 @@
       // non-captioned, block or inline according to what is the
       // new state of the widget.
       if ( this.deflated ) {
-        editor.insertElement( this.element );
         this.widget = editor.widgets.initOn( this.element, 'selectImage', this.widget.data );
         editor.widgets.fire( 'checkWidgets' )
         // Once widget was re-created, it may become an inline element without
