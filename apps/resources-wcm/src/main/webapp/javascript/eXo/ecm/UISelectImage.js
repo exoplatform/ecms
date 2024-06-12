@@ -290,15 +290,15 @@
         self.$parentDialog.find(".selectImageAlign .btn-group .btn").removeClass("active");
         $(this).addClass("active");
         var alignment = $(this).data("align");
-        self.imageElement.removeClass("left");
-        self.imageElement.removeClass("right");
-        self.imageElement.removeClass("center");
+        self.imageElement.removeClass("pull-left");
+        self.imageElement.removeClass("pull-right");
+        self.imageElement.removeClass("text-center");
         if(alignment == "Left") {
-          self.imageElement.addClass("left");
+          self.imageElement.addClass("pull-left");
         } else if(alignment == "Right") {
-          self.imageElement.addClass("right");
+          self.imageElement.addClass("pull-right");
         } else if(alignment == "Middle") {
-          self.imageElement.addClass("center");
+          self.imageElement.addClass("text-center");
         }
       });
       if (!isImageDragBlocked) {
