@@ -9,7 +9,7 @@ CKEDITOR.plugins.setLang( 'selectImage', 'fr-ca', {
   captionPlaceholder: 'Caption', // MISSING
   infoTab: 'Informations sur l\'image2',
   lockRatio: 'Verrouiller les proportions',
-  menu: 'Changer l\'image',
+  menu: 'Propriétés de l\'image',
   insertImage: 'Insérer une image',
   pathName: 'image', // MISSING
   pathNameCaption: 'caption', // MISSING
