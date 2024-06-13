@@ -107,7 +107,7 @@
 
       if ( editor.contextMenu ) {
           editor.contextMenu.addListener( function( element ) {
-              if ( element) {
+            if (!element?.is('body') && element?.$?.querySelector('img[data-plugin-name=selectImage]')) {
                   return { selectImageItem: CKEDITOR.TRISTATE_OFF };
               }
           });
