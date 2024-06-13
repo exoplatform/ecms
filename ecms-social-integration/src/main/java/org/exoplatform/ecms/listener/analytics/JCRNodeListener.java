@@ -1,6 +1,6 @@
 package org.exoplatform.ecms.listener.analytics;
 
-import static org.exoplatform.analytics.utils.AnalyticsUtils.addSpaceStatistics;
+import static io.meeds.analytics.utils.AnalyticsUtils.addSpaceStatistics;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -15,8 +15,8 @@ import javax.jcr.observation.Event;
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
 
-import org.exoplatform.analytics.model.StatisticData;
-import org.exoplatform.analytics.utils.AnalyticsUtils;
+import io.meeds.analytics.model.StatisticData;
+import io.meeds.analytics.utils.AnalyticsUtils;
 import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;

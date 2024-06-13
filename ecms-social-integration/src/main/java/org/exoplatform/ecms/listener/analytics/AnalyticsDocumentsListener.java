@@ -1,7 +1,10 @@
 package org.exoplatform.ecms.listener.analytics;
 
-import org.exoplatform.analytics.model.StatisticData;
-import org.exoplatform.analytics.utils.AnalyticsUtils;
+import static io.meeds.analytics.utils.AnalyticsUtils.*;
+
+import javax.jcr.Node;
+
+import io.meeds.analytics.model.StatisticData;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.Asynchronous;
@@ -12,10 +15,6 @@ import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvide
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
-
-import javax.jcr.Node;
-
-import static org.exoplatform.analytics.utils.AnalyticsUtils.addSpaceStatistics;
 
 @Asynchronous
 public class AnalyticsDocumentsListener extends Listener<String, Node> {
@@ -50,7 +49,7 @@ public class AnalyticsDocumentsListener extends Listener<String, Node> {
     statisticData.addParameter("documentsOwner", ((NodeImpl) data).getACL().getOwner());
     String nodePath = data.getPath();
     addSpaceStatistic(statisticData, nodePath);
-    AnalyticsUtils.addStatisticData(statisticData);
+    addStatisticData(statisticData);
   }
 
   public IdentityManager getIdentityManager() {
