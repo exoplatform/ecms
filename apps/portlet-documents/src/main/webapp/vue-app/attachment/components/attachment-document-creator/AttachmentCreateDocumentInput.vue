@@ -182,7 +182,7 @@ export default {
         this.$root.$emit('add-new-created-document', doc);
         this.$root.$emit('alert-message', this.$t('attachments.upload.success'), 'success');
         this.resetNewDocInput();
-        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}`, '_blank');
+        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${doc.id}&backTo=${window.location.pathname}`, '_blank');
       }
     }
   }
