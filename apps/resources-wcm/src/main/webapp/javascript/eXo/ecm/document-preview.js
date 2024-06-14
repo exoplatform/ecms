@@ -344,7 +344,7 @@
       if(docPreviewContainer.length == 0) {
         docPreviewContainer = $("<div />", {
           "id": "documentPreviewContainer",
-          "class": "maskLayer"
+          "class": "maskLayer z-index-modal position-absolute"
         }).appendTo('body');
       }
       docPreviewContainer.hide();
