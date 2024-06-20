@@ -49,7 +49,7 @@
 
     <!-- Portal & ECMS -->
     <dependency>
-      <groupId>org.exoplatform.commons</groupId>
+      <groupId>io.meeds.commons</groupId>
       <artifactId>commons-component-common</artifactId>
       <scope>provided</scope>
     </dependency>
