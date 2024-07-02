@@ -1,18 +1,19 @@
 <template>
   <v-app id="cloudStorageApp">
-    <v-container style="width: 95%">
-      <v-row>
-        <v-col xs12 px-3>
-          <h4 class="Title">
-            <span class="me-3">
-              {{ $t("cloudStorage.label.title") }}
-            </span>
-          </h4>
+    <v-container class="application-body pa-5 ma-0">
+      <v-row class="ma-0">
+        <v-col class="pa-0">
+          <span class="text-title me-3">
+            {{ $t("cloudStorage.label.title") }}
+          </span>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col xs12>
-          <v-simple-table :dense="true" class="uiGrid table-hover table-striped providersTable">
+      <v-row class="ma-0">
+        <v-col class="pa-0 my-4">
+          <v-simple-table
+            :dense="true"
+            class="uiGrid table-hover table-striped providersTable"
+            style="width: 96%">
             <template #default>
               <thead>
                 <tr class="providersTableRow">

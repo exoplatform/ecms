@@ -1,23 +1,17 @@
 <template>
   <v-app id="transferRules">
-    <v-card class="pa-5 card-border-radius" flat>
-      <v-list>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="title text-color font-weight-bold transfertRulesTitle">
-              {{ $t('documents.transferRules.label') }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 text-color font-weight-medium textSize">
+    <v-card class="application-body pa-5" flat>
+      <v-card-title class="text-title pa-0 transfertRulesTitle">
+        {{ $t('documents.transferRules.label') }}
+      </v-card-title>
+      <v-list class="pa-0" dense>
+        <v-list-item class="pa-0" dense>
+          <v-list-item-content class="pa-0">
+            <v-list-item-title class="mb-1">
               {{ $t('documents.transferRules.suspend.download') }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-sub-title font-italic textSize">
-              <div>
-                {{ $t('documents.transferRules.suspend.download.description') }}
-              </div>
+            <v-list-item-subtitle>
+              {{ $t('documents.transferRules.suspend.download.description') }}
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
@@ -32,15 +26,13 @@
             </label>
           </v-list-item-action>
         </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 text-color font-weight-medium textSize">
+        <v-list-item class="pa-0" dense>
+          <v-list-item-content class="pa-0">
+            <v-list-item-title class="mb-1">
               {{ $t('documents.transferRules.suspend.sharing') }}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-sub-title font-italic textSize">
-              <div>
-                {{ $t('documents.transferRules.suspend.sharing.description') }}
-              </div>
+            <v-list-item-subtitle>
+              {{ $t('documents.transferRules.suspend.sharing.description') }}
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>

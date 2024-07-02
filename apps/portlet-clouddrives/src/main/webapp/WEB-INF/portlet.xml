@@ -20,6 +20,10 @@
       <name>preload.resource.rest</name>
       <value><![CDATA[/portal/rest/clouddrive/features/status/enabled|/portal/rest/clouddrive/document/drive/personal]]></value>
     </init-param>
+    <init-param>
+      <name>layout-css-class</name>
+      <value>no-layout-style</value>
+    </init-param>
     <supports>
       <mime-type>text/html</mime-type>
     </supports>

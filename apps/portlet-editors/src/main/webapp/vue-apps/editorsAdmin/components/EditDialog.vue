@@ -19,7 +19,7 @@
     <v-card class="provider uiPopup">
       <div v-show="error" class="alert alert-error">{{ $t(error) }}</div>
       <v-card-title class="headline popupHeader justify-space-between providerHeader mb-0">
-        <span class="PopupTitle popupTitle providerHeaderTitle">{{ $t("editors.admin.modal.title") }}</span>
+        <span class="PopupTitle popupTitle providerHeaderTitle text-title">{{ $t("editors.admin.modal.title") }}</span>
         <i class="uiIconClose providerHeaderClose" @click="closeDialog"></i>
       </v-card-title>
       <v-card-text class="popupContent providerContent pa-4">

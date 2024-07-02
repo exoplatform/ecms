@@ -45,12 +45,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                 <v-list-item-title>
                   {{ $t('cloudDriveSettings.drawer.connectedAccountWith') }}:
                 </v-list-item-title>
-                <v-list-item-subtitle :title="item.user" class="font-italic">
+                <v-list-item-subtitle :title="item.user">
                   {{ item.user }}
                 </v-list-item-subtitle>
               </template>
               <template v-else>
-                <v-list-item-title class="title">
+                <v-list-item-title>
                   {{ item.name }}
                 </v-list-item-title>
               </template>

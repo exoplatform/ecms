@@ -23,13 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <v-list>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title class="title text-color">
+              <v-list-item-title class="text-title">
                 {{ $t("cloudDriveSettings.label.title") }}
               </v-list-item-title>
-              <v-list-item-subtitle class="my-1 text-color">
+              <v-list-item-title class="my-1">
                 {{ $t("cloudDriveSettings.label.subtitle") }}
-              </v-list-item-subtitle>
-              <v-list-item-subtitle class="my-1 text-sub-title font-italic">
+              </v-list-item-title>
+              <v-list-item-subtitle class="my-1">
                 <cloud-drive-settings-status :connectors="connectors">
                   <template slot="connectButton">
                     {{ $t("cloudDriveSettings.label.description") }}
