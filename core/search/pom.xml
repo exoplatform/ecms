@@ -17,21 +17,21 @@
       <artifactId>jcr</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.commons</groupId>
+      <groupId>io.meeds.commons</groupId>
       <artifactId>commons-search</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.commons</groupId>
+      <groupId>io.meeds.commons</groupId>
       <artifactId>commons-component-upgrade</artifactId>
     </dependency>
     <!-- need for test -->
     <dependency>
-      <groupId>org.exoplatform.commons</groupId>
+      <groupId>io.meeds.commons</groupId>
       <artifactId>commons-testing</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.core</groupId>
+      <groupId>io.meeds.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
     </dependency>
     <dependency>
@@ -51,20 +51,20 @@
       <artifactId>exo.jcr.component.ext</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.kernel</groupId>
+      <groupId>io.meeds.kernel</groupId>
       <artifactId>exo.kernel.commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.kernel</groupId>
+      <groupId>io.meeds.kernel</groupId>
       <artifactId>exo.kernel.container</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.webui.portal</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.webui.portal</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.portal</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.portal</artifactId>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
@@ -72,34 +72,34 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.file-storage</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.file-storage</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.identity</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.identity</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.portal</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.portal</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.test.core</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.test.core</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.test.web</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.test.web</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.commons</groupId>
+      <groupId>io.meeds.commons</groupId>
       <artifactId>commons-component-common</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
@@ -111,7 +111,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.social</groupId>
+      <groupId>io.meeds.social</groupId>
       <artifactId>social-component-core</artifactId>
       <scope>test</scope>
       <type>test-jar</type>
