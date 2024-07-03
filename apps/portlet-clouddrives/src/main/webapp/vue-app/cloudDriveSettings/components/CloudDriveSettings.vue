@@ -18,7 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
   <v-app>
     <template v-if="displayed">
       <v-card
-        class="card-border-radius"
+        class="application-body"
         flat>
         <v-list>
           <v-list-item>
