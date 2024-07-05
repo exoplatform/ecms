@@ -1,24 +1,22 @@
 <template>
   <v-app id="editors-admin">
-    <v-container style="width: 95%">
+    <v-container class="application-body pa-5 ma-0">
       <div v-show="error" class="alert alert-error">
         {{ i18n.te(`${errorResourceBase}.${error}`) ? $t(`${errorResourceBase}.${error}`) : error }}
       </div>
-      <v-row>
-        <v-col
-          xs12
-          px-3
-          class="pb-0">
-          <h3 class="editorsTitle">
-            <span class="me-3">
-              {{ $t("editors.admin.title") }}
-            </span>
-          </h3>
+      <v-row class="ma-0">
+        <v-col class="pa-0">
+          <span class="text-title me-3">
+            {{ $t("editors.admin.title") }}
+          </span>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col xs12>
-          <v-simple-table :dense="true" class="uiGrid table table-hover table-striped providersTable">
+      <v-row class="ma-0">
+        <v-col class="pa-0 my-4">
+          <v-simple-table
+            :dense="true"
+            class="uiGrid table table-hover table-striped providersTable"
+            style="width: 96%">
             <template #default>
               <thead>
                 <tr class="providersTableRow">
