@@ -18,6 +18,8 @@
 package org.exoplatform.services.attachments.listener;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -31,7 +33,10 @@ import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.services.listener.Listener;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,9 +58,11 @@ public class ShareAttachmentsToSpaceListener extends Listener<Map<String, Object
 
   public static final String           CONTENT              = "content";
 
-  private static final String          IMAGE_SRC_REGEX      =
-                                                       "<img\\s+src=\"([^\"]*/portal/rest/(?:images|jcr)/repository/collaboration/[^\"]*)\"";
+  public static final String           SPACE                = "space";
 
+  public static final String           AUDIENCE             = "audience";
+
+  private static final String          IMAGE_SRC_REGEX      = "src=\"/portal/rest/images/?(.+)?\"";
   public ShareAttachmentsToSpaceListener(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     this.repositoryService = repositoryService;
     this.sessionProviderService = sessionProviderService;
@@ -63,40 +70,85 @@ public class ShareAttachmentsToSpaceListener extends Listener<Map<String, Object
 
   @Override
   public void onEvent(Event event) throws Exception {
-    Map<String, Object> source = (Map<String, Object>) event.getSource();
-    List<String> attachmentsIds = (List<String>) source.get(NEWS_ATTACHMENTS_IDS);
-    String content = (String) source.get(CONTENT);
+    Map<String, Object> data = (Map<String, Object>) event.getData();
+    List<String> attachmentsIds = (List<String>) data.get(NEWS_ATTACHMENTS_IDS);
+    String audience = (String) data.get(AUDIENCE);
+    Space space = (Space) data.get(SPACE);
+    String content = (String) data.get(CONTENT);
     if (content != null) {
-      attachmentsIds.addAll(extractImageAttachmentIdsFromContent(content));
+      attachmentsIds.addAll(extractImageAttachmentUuidOrPath(content));
     }
-    Space space = (Space) event.getData();
-    if (!CollectionUtils.isEmpty(attachmentsIds) && space != null) {
-      for (String attachmentId : attachmentsIds) {
+    updateNodePermissions(attachmentsIds, audience, space);
+  }
+
+  private List<String> extractImageAttachmentUuidOrPath(String content) {
+    List<String> imageNodeIds = new ArrayList<>();
+    Matcher matcher = Pattern.compile(IMAGE_SRC_REGEX).matcher(content);
+    while (matcher.find()) {
+      String srcStringPart = matcher.group(1);
+      if (srcStringPart.contains("\"")) {
+        // content has many images
+        matcher = Pattern.compile(IMAGE_SRC_REGEX).matcher(srcStringPart);
+        srcStringPart = srcStringPart.substring(0, srcStringPart.indexOf("\""));
+      }
+      String attachmentNodeId = srcStringPart.substring(srcStringPart.lastIndexOf("/") + 1);
+      imageNodeIds.add(attachmentNodeId);
+    }
+    StringBuilder existingUploadImagesSrcRegex = new StringBuilder();
+    existingUploadImagesSrcRegex.append("src=\"");
+    existingUploadImagesSrcRegex.append(CommonsUtils.getCurrentDomain());
+    existingUploadImagesSrcRegex.append("/");
+    existingUploadImagesSrcRegex.append(PortalContainer.getCurrentPortalContainerName());
+    existingUploadImagesSrcRegex.append("/");
+    existingUploadImagesSrcRegex.append(CommonsUtils.getRestContextName());
+    existingUploadImagesSrcRegex.append("/jcr/?(.+)?\"");
+
+    String repositoryAndWorkSpaceSuffix = "/repository/collaboration";
+    Matcher pathMatcher = Pattern.compile(existingUploadImagesSrcRegex.toString()).matcher(content);
+    while (pathMatcher.find()) {
+      String srcStringPart = pathMatcher.group(1);
+      if (srcStringPart.contains("\"")) {
+        // content has many than images
+        pathMatcher = Pattern.compile(existingUploadImagesSrcRegex.toString()).matcher(srcStringPart);
+        srcStringPart = srcStringPart.substring(0, srcStringPart.indexOf("\""));
+      }
+      String imagePath = srcStringPart.substring(srcStringPart.indexOf(repositoryAndWorkSpaceSuffix) + repositoryAndWorkSpaceSuffix.length());
+      imageNodeIds.add(imagePath);
+    }
+    return imageNodeIds;
+  }
+  private void updateNodePermissions(List<String> identifiers,String audience, Space space) throws RepositoryException {
+    Session session = Utils.getSystemSession(sessionProviderService, repositoryService);
+    if (!CollectionUtils.isEmpty(identifiers)) {
+      for (String attachmentId : identifiers) {
         try {
-          Session session = Utils.getSystemSession(sessionProviderService, repositoryService);
-          Node attachmentNode = session.getNodeByUUID(attachmentId);
+          Node attachmentNode;
+          boolean isNodeUUID = !attachmentId.contains("/");
+          if (isNodeUUID) {
+            attachmentNode = session.getNodeByUUID(attachmentId);
+          } else {
+            attachmentNode = (Node) session.getItem(URLDecoder.decode(attachmentId, StandardCharsets.UTF_8));
+          }
           if (!attachmentNode.getPath().startsWith(QUARANTINE)) {
             if (attachmentNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
               attachmentNode.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
             }
-            ((ExtendedNode) attachmentNode).setPermission("*:" + space.getGroupId(), new String[] { PermissionType.READ });
-            attachmentNode.save();
+            // make the attachment public
+            if (audience.equals("all")) {
+              ((ExtendedNode) attachmentNode).setPermission("*:/platform/users", new String[] { PermissionType.READ });
+              attachmentNode.save();
+            }
+            // share the attachment with the space
+            else if (space != null) {
+              ((ExtendedNode) attachmentNode).setPermission("*:" + space.getGroupId(), new String[] { PermissionType.READ });
+              attachmentNode.save();
+            }
           }
         } catch (Exception e) {
           LOG.error("Error while sharing attachment of id : {} to space: {}", attachmentId, space.getDisplayName(), e);
         }
       }
     }
-  }
 
-  private List<String> extractImageAttachmentIdsFromContent(String content) {
-    List<String> attachmentIds = new ArrayList<>();
-    Matcher matcher = Pattern.compile(IMAGE_SRC_REGEX).matcher(content);
-    while (matcher.find()) {
-      String match = matcher.group(1);
-      String attachmentNodeId = match.substring(match.lastIndexOf("/") + 1);
-      attachmentIds.add(attachmentNodeId);
-    }
-    return attachmentIds;
   }
 }
