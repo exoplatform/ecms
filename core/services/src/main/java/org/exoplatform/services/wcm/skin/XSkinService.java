@@ -160,15 +160,11 @@ public class XSkinService implements Startable {
       skinPath = StringUtils.replaceOnce(skinPath,"(.*)", DEFAULT_SKIN_NAME);
 
       // Invalidate previously cached CSS path
-      skinService.removeSkin(moduleName, DEFAULT_SKIN_NAME);
-      skinService.addSkin(moduleName, DEFAULT_SKIN_NAME, skinPath);
+      skinService.addSkin(moduleName, DEFAULT_SKIN_NAME, skinPath, true);
     } else {
       while (iterator.hasNext()) {
         String skinName = iterator.next();
         skinPath = StringUtils.replaceOnce(skinPath,"(.*)",skinName);
-
-        // Invalidate previously cached CSS path
-        skinService.removeSkin(moduleName, skinName);
 
         // Update CSS path with new Update date
         jsLastModifiedDate = System.currentTimeMillis();
