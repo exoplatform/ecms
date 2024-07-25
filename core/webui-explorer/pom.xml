@@ -26,6 +26,10 @@
           <artifactId>junit</artifactId>
           <groupId>junit</groupId>
         </exclusion>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
