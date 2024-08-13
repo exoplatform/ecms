@@ -125,9 +125,7 @@ public class XSkinService implements Startable {
     // Update CSS path with new Update date
     jsLastModifiedDate = System.currentTimeMillis();
 
-    if (sharedPortalName.equals(portal.getName())) {
-      addSharedPortalSkin(portal);
-    } else {
+    if (!sharedPortalName.equals(portal.getName())) {
       addPortalSkin(portal);
     }
   }
@@ -201,32 +199,7 @@ public class XSkinService implements Startable {
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    /**
-     * Because all skins are added via {@link PortalContainerInitTask} (which run after services start) in {@link org.exoplatform.portal.resource.GateInSkinConfigDeployer#add(WebApp, URL)}
-     * And we need to add custom styleSheet after all skins are configured and ready.
-     * So, we must use {@link PortalContainerPostCreateTask} (it's run after all init tasks executed) for doing that.
-     */
-    final PortalContainerPostCreateTask task = new PortalContainerPostCreateTask() {
-      public void execute(ServletContext context, PortalContainer portalContainer) {
-        SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-        try {
-          LivePortalManagerService livePortalManagerService = portalContainer.getComponentInstanceOfType(LivePortalManagerService.class);
-          List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
-          for (Node portal : livePortals) {
-            addPortalSkin(portal);
-          }
-          Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-          addSharedPortalSkin(sharedPortal);
-        } catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Exception when start XSkinService", e);
-          }
-        } finally {
-          sessionProvider.close();
-        }
-      }
-    };
-    PortalContainer.addInitTask(this.servletContext, task, null);
+    
   }
 
   /* (non-Javadoc)
