@@ -71,9 +71,7 @@ public class NavigationConnector implements ResourceContainer{
   private String getNavigationAsJSON(String portalName, String username) throws Exception {
 
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
-        username,
-        PortalRequestContext.USER_PORTAL_CONTEXT);
+    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName, username);
     UserPortal userPortal = userPortalCfg.getUserPortal();
 
     //filter nodes
