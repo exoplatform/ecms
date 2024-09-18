@@ -9,7 +9,6 @@
   import org.apache.commons.lang3.StringUtils;
 
   def rcontext = _ctx.getRequestContext();
-  NavigationUtils.removeNavigationAsJson(rcontext.getPortalOwner(), rcontext.getRemoteUser());
 %>
 <script type="text/javascript">
   eXo.env.portal.wcmContentTitle = '<%= rcontext.getRequest().getAttribute("WCM.Content.Title") %>';

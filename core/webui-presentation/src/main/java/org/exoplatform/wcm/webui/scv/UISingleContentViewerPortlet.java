@@ -295,28 +295,4 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     json.put("childs", jsonChildren);
     return json;
   }
-  
-  public String getNavigationScope() throws Exception {
-    PortletPreferences preferences = ((PortletRequestContext)WebuiRequestContext.getCurrentInstance()).
-        getRequest().getPreferences();
-    String navigationScope = preferences.getValue(NAVIGATION_SCOPE, NAVIGATION_SCOPE_CHILDREN);
-    return navigationScope;
-  }
-  
-  public String getNavigation() throws Exception {
-    String userName = ConversationState.getCurrent().getIdentity().getUserId();  
-    String portalName = Util.getPortalRequestContext().getPortalOwner();
-    
-    PortletPreferences preferences = ((PortletRequestContext)WebuiRequestContext.getCurrentInstance()).
-                                     getRequest().getPreferences();
-    String navigationScope = preferences.getValue(NAVIGATION_SCOPE, NAVIGATION_SCOPE_CHILDREN);
-    Scope scope = Scope.CHILDREN;
-    switch (navigationScope) {
-      case NAVIGATION_SCOPE_SINGLE: scope = Scope.SINGLE; break;
-      case NAVIGATION_SCOPE_CHILDREN: scope = Scope.CHILDREN; break;
-      case NAVIGATION_SCOPE_GRAND_CHILDREN: scope = Scope.GRANDCHILDREN; break;
-      case NAVIGATION_SCOPE_ALL: scope = Scope.ALL; break;
-    }
-    return NavigationUtils.getNavigationAsJSON(portalName, userName, scope, navigationScope);
-  }
 }
