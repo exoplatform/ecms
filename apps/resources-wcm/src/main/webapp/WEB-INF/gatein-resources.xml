@@ -270,26 +270,7 @@
       <as>gj</as>
     </depends>
   </module>
-  
 
-  <module>
-    <name>wcm-navigation</name>
-    <as>wcm_navigation</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/public/Navigation.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>ecm-bootstrap</module>
-    </depends>
-    <depends>
-      <module>navigation</module>
-    </depends>
-  </module>
-  
   <module>
     <name>wcm-search</name>
     <as>wcm_search</as>
@@ -305,17 +286,6 @@
     </depends>
     <depends>
       <module>uiForm</module>
-    </depends>
-  </module>
-  
-  <module>
-    <name>wcm-breadcrumb</name>
-    <as>wcm_breadcrumb</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/public/Breadcrumb.js</path>
-    </script>
-    <depends>
-      <module>ecm-bootstrap</module>
     </depends>
   </module>
   
