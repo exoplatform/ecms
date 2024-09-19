@@ -43,7 +43,7 @@ import java.util.Map;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ShareAttachmentsToSpaceListenerTest {
+public class UpdateContentPermissionsListenerTest {
 
   @Mock
   private SessionProviderService          sessionProviderService;
@@ -51,7 +51,7 @@ public class ShareAttachmentsToSpaceListenerTest {
   @Mock
   private RepositoryService               repositoryService;
 
-  private ShareAttachmentsToSpaceListener shareAttachmentsToSpaceListener;
+  private UpdateContentPermissionsListener shareAttachmentsToSpaceListener;
 
   private MockedStatic<Utils>             UTILS = mockStatic(Utils.class);
 
@@ -61,7 +61,7 @@ public class ShareAttachmentsToSpaceListenerTest {
 
   @Before
   public void setUp() throws Exception {
-    this.shareAttachmentsToSpaceListener = new ShareAttachmentsToSpaceListener(repositoryService, sessionProviderService);
+    this.shareAttachmentsToSpaceListener = new UpdateContentPermissionsListener(repositoryService, sessionProviderService);
   }
 
   @After
