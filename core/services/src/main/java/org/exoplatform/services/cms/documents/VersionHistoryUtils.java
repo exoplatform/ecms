@@ -176,13 +176,35 @@ public class VersionHistoryUtils {
     return Integer.parseInt(currentVersion);
   }
 
-  /**
-   * Remove redundant version
-   * - Remove versions has been expired
-   * - Remove versions over max allow
-   * @param nodeVersioning
-   * @throws Exception
-   */
+  public static long computeVersionsSize(Node node) {
+    long versionSize=0;
+    try {
+      if (node.isNodeType(VersionHistoryUtils.MIX_VERSIONABLE)) {
+        VersionHistory versionHistory = node.getVersionHistory();
+        VersionIterator iterator = versionHistory.getAllVersions();
+        while (iterator.hasNext()) {
+          Version version = iterator.nextVersion();
+          if (version.hasNode("jcr:frozenNode")) {
+            Node frozen= version.getNode("jcr:frozenNode");
+            if (frozen.hasNode("jcr:content")) {
+              long currentVersionSize = frozen.getNode("jcr:content").getProperty("jcr:data").getLength();
+              versionSize+=currentVersionSize;
+            }
+          }
+        }
+      }
+    }catch (Exception e) {
+      versionSize=0;
+    }
+    return versionSize;
+  }
+    /**
+     * Remove redundant version
+     * - Remove versions has been expired
+     * - Remove versions over max allow
+     * @param nodeVersioning
+     * @throws Exception
+     */
   private static void removeRedundant(Node nodeVersioning) throws Exception{
     VersionHistory versionHistory = nodeVersioning.getVersionHistory();
     String baseVersion = nodeVersioning.getBaseVersion().getName();

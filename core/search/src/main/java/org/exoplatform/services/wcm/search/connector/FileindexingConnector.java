@@ -112,6 +112,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
                                                .append("    \"lastModifier\" : {\"type\" : \"text\"},\n")
                                                .append("    \"fileType\" : {\"type\" : \"keyword\"},\n")
                                                .append("    \"fileSize\" : {\"type\" : \"long\"},\n")
+                                               .append("    \"fileSizeWithVersions\" : {\"type\" : \"long\"},\n")
                                                .append("    \"drive\" : {\"type\" : \"text\"},\n")
                                                .append("    \"version\" : {\"type\" : \"long\"},\n")
                                                .append("    \"name\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
@@ -220,6 +221,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
         Property dataProperty = contentNode.getProperty(NodetypeConstant.JCR_DATA);
         long fileSize = dataProperty.getLength();
+        long fileSizeWithVersion = VersionHistoryUtils.computeVersionsSize(node);
         canIndexContent = canIndexContent && fileSize < this.contentMaxSizeToIndexInBytes;
 
         if (canIndexContent) {
@@ -227,10 +229,13 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
           byte[] fileBytes = IOUtils.toByteArray(fileStream);
           fields.put("file", Base64.getEncoder().encodeToString(fileBytes));
           fields.put("fileSize", String.valueOf(fileBytes.length));
+          fileSizeWithVersion+=fileBytes.length;
         } else {
           fields.put("file", "");
           fields.put("fileSize", String.valueOf(fileSize));
+          fileSizeWithVersion+=fileSize;
         }
+        fields.put("fileSizeWithVersions", String.valueOf(fileSizeWithVersion));
 
         // Dublin Core metadata
         Map<String, String> dublinCoreMetadata = extractDublinCoreMetadata(contentNode);

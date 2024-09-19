@@ -37,7 +37,6 @@ import javax.jcr.lock.LockException;
 import javax.jcr.version.VersionException;
 
 import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
@@ -269,9 +268,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
   for (String portalName : getRunningPortals(remoteUser)) {
 
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
-                                              remoteUser,
-                                                                                 PortalRequestContext.USER_PORTAL_CONTEXT);
+    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName, remoteUser);
     UserPortal userPortal = userPortalCfg.getUserPortal();
 
     //get nodes

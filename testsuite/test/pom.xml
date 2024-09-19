@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-testsuite</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>6.6.x-SNAPSHOT</version>
+    <version>7.0.x-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-testsuite-test</artifactId>
   <name>eXo PLF:: ECMS Testing</name>
@@ -13,15 +13,15 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.commons</groupId>
+      <groupId>io.meeds.commons</groupId>
       <artifactId>commons-testing</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.core</groupId>
+      <groupId>io.meeds.core</groupId>
       <artifactId>exo.core.component.organization.api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.core</groupId>
+      <groupId>io.meeds.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
     </dependency>
     <dependency>
@@ -33,28 +33,28 @@
       <artifactId>exo.jcr.component.ext</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.kernel</groupId>
+      <groupId>io.meeds.kernel</groupId>
       <artifactId>exo.kernel.commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.kernel</groupId>
+      <groupId>io.meeds.kernel</groupId>
       <artifactId>exo.kernel.container</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ws</groupId>
+      <groupId>io.meeds.ws</groupId>
       <artifactId>exo.ws.rest.core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ws</groupId>
+      <groupId>io.meeds.ws</groupId>
       <artifactId>exo.ws.testframework</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.resources</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.resources</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.test.core</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.test.core</artifactId>
     </dependency>
     <!-- need for test -->
     <dependency>
@@ -63,25 +63,25 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.identity</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.identity</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.portal</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.portal</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.gatein.portal</groupId>
-      <artifactId>exo.portal.component.portal</artifactId>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.portal</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <!-- need for test -->
     <dependency>
-      <groupId>org.exoplatform.social</groupId>
+      <groupId>io.meeds.social</groupId>
       <artifactId>social-component-api</artifactId>
     </dependency>
   </dependencies>

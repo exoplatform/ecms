@@ -107,7 +107,9 @@
                 <properties-param>
                     <name>constructor.params</name>
                     <property name="index_alias" value="file_alias"/>
-                    <property name="index_current" value="file_v3"/>
+                    <property name="index_current" value="file_v4"/>
+                    <property name="index_previous" value="file_v3" />
+                    <property name="reindexOnUpgrade" value="true" />
                 </properties-param>
             </init-params>
         </component-plugin>

@@ -16,6 +16,12 @@
  */
 package org.exoplatform.services.wcm;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
@@ -61,13 +67,6 @@ import org.exoplatform.services.wcm.core.TestWebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.TestFriendlyService;
 import org.exoplatform.services.wcm.javascript.TestXJavaScriptService;
 import org.exoplatform.services.wcm.portal.artifacts.TestCreatePortalArtifactsService;
-import org.exoplatform.services.wcm.skin.TestXSkinService;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Created by The eXo Platform SAS
@@ -86,7 +85,6 @@ import org.junit.runners.Suite.SuiteClasses;
   TestWCMConfigurationService.class,
   TestFriendlyService.class,
   TestCreatePortalArtifactsService.class,
-  TestXSkinService.class,
   TestFragmentCacheService.class,
   TestPortletFutureCache.class,
   TestDocumentTypeService.class,
@@ -121,7 +119,6 @@ import org.junit.runners.Suite.SuiteClasses;
   TestDocumentsAppRedirectService.class,
   TestDocumentService.class,
   TestCustomizeViewService.class,
-  TestXSkinService.class,
   AttachmentServiceTest.class,
   DocumentServiceImplTest.class
 })

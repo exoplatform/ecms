@@ -218,7 +218,6 @@ xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
           <property name="publication" value="http://www.exoplatform.com/jcr/publication/1.1/" />
           <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/" />
           <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/" />
-          <property name="app" value="http://www.gatein.org/jcr/application-registry/1.0/" />
           <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/" />
           <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/" />
           <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/" />

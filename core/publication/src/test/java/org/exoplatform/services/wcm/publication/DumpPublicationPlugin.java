@@ -265,9 +265,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
   for (String portalName : getRunningPortals(remoteUser)) {
 
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
-                                              remoteUser,
-                                                                                 PortalRequestContext.USER_PORTAL_CONTEXT);
+    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName, remoteUser);
     UserPortal userPortal = userPortalCfg.getUserPortal();
 
     //get nodes

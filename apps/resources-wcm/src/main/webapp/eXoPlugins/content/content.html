@@ -29,11 +29,11 @@
 
 			var CKEDITOR = window.opener.CKEDITOR || {};
 			require(["../../../eXoResources/javascript/eXo/core/Base.js"], function(base) {
-				window.base = base; require(["../../../eXoResources/javascript/eXo/webui/UIPopup.js"], function(uiPopup) {
-					window.uiPopup = uiPopup; require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
-						window.uiMaskLayer = uiMaskLayer; require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
-							window.wcm_utils = wcm_utils; require(["../../../eXoWCMResources/javascript/eXo/wcm/frontoffice/private/ContentSelector.js"], function(content_selector) {
-								window.content_selector = content_selector; require(["../../../commons-extension/eXoPlugins.js"], function() {
+				window.base = base; window.require(["../../../eXoResources/javascript/eXo/webui/UIPopup.js"], function(uiPopup) {
+					window.uiPopup = uiPopup; window.require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
+						window.uiMaskLayer = uiMaskLayer; window.require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
+							window.wcm_utils = wcm_utils; window.require(["../../../eXoWCMResources/javascript/eXo/wcm/frontoffice/private/ContentSelector.js"], function(content_selector) {
+								window.content_selector = content_selector; window.require(["../../../commons-extension/eXoPlugins.js"], function() {
 									eXp.init();
 									var langCode = eXo.ecm.ECS.userLanguage, 
 									    pluginLang = ['en', 'fr', 'vi'];
@@ -41,7 +41,7 @@
 									if (CKEDITOR.tools.indexOf(pluginLang, langCode) >= 0)
 									  eXp.userLanguage = langCode;
 
-                                    require(["lang/" + eXp.userLanguage + ".js"], function() {
+                                    window.require(["lang/" + eXp.userLanguage + ".js"], function() {
 
                                         var thumbnailViewTitle = UserLanguage.ViewThumbnailLabel;
                                         var listViewTitle = UserLanguage.ViewListLabel;

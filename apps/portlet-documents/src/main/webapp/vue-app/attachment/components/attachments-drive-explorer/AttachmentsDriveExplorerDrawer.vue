@@ -620,7 +620,7 @@ export default {
               }).finally(() => this.driveExplorerInitializing = false);
             // create a default folder for activity attachments if it doesn't exist
           } else if (!defaultFolder && self.defaultFolder === 'Activity Stream Documents') {
-            this.$attachmentService.createFolder(self.currentDrive.name, self.workspace, this.currentAbsolutePath, self.defaultFolder, 'nt:unstructured', true).then(() => {
+            this.$attachmentService.createFolder(self.currentDrive.name, self.workspace, this.currentAbsolutePath, self.defaultFolder, 'nt:folder', true).then(() => {
               this.initDestinationFolderPath();
             });
             //else if no default folder create file in root folder
@@ -912,7 +912,7 @@ export default {
       }
       this.$nextTick(() => this.$refs.newFolder[0].focus());
     },
-    createNewFolder() {
+    createNewFolder(isSystem) {
       if (this.creatingNewFolder) {
         if (this.newFolderName) {
           const folderNameExists = this.folders.some(folder => folder.title === this.newFolderName);
@@ -923,7 +923,7 @@ export default {
             this.popupBodyMessage = `${this.$t('attachments.filesFoldersSelector.popup.folderNameExists')}`;
           } else {
             const self = this;
-            return this.$attachmentService.createFolder(this.currentDrive.name, this.workspace, this.currentAbsolutePath, this.newFolderName).then(xml => {
+            return this.$attachmentService.createFolder(this.currentDrive.name, this.workspace, this.currentAbsolutePath, this.newFolderName, 'nt:folder',isSystem).then(xml => {
               const createdNewFolder = xml.childNodes[0];
               if (createdNewFolder) {
                 const folderType = createdNewFolder.getAttribute('nodeType');
@@ -1079,7 +1079,7 @@ export default {
       if (!defaultFolder) {
         this.newFolderName = entityForlder;
         this.creatingNewFolder = true;
-        this.createNewFolder().then((newFolder) => {
+        this.createNewFolder(true).then((newFolder) => {
           this.openFolder(newFolder).then(() => {
             this.newFolderName = this.entityId;
             this.creatingNewFolder = true;

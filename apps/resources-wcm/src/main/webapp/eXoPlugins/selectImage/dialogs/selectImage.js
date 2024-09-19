@@ -142,7 +142,7 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
       this.setupContent(this.element);
 
       var dialog = this;
-      require(["SHARED/uiSelectImage"], function(UISelectImage){
+      window.require(["SHARED/uiSelectImage"], function(UISelectImage){
         UISelectImage.init(parentElement.$, widget.data, function() {
           dialog.enableButton('ok');
         }, function() {
@@ -166,12 +166,12 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
                       }
                       var dialog = this.getDialog();
                       const UrlProtocolRegex = /^(http|ftp|https):\/\/[^ "]+$/;
-                      require(["SHARED/jquery"], function($) {
+                      window.require(["SHARED/jquery"], function($) {
                         var $imageElement = $(dialog.getElement().$).find(".selectedImagePreview img");
                         let imageLink = $(dialog.getElement().$).find(".imageLinkArea input").val();
                         const imageLinkTarget = $(dialog.getElement().$).find(".imageLinkTargetArea select").find(":selected").val();
                         widget.setData( 'src', $imageElement.attr("src") );
-                        widget.setData( 'alt', $imageElement.attr("alt") );
+                        widget.setData( 'alt', $imageElement.attr("alt") || '');
                         if (imageLink && !UrlProtocolRegex.test(imageLink)) {
                           imageLink = 'https://' + imageLink;
                         }
@@ -186,13 +186,13 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
                           widget.setData('href', imageLink);
                           widget.setData('target', imageLinkTarget);
                         } else {
-                          widget.setData('link', null);
+                          widget.setData('link', undefined);
                         }
-                        if ($imageElement.hasClass("left")) {
+                        if ($imageElement.hasClass("pull-left")) {
                           widget.setData( 'align', 'left' );
-                        } else if ($imageElement.hasClass("right")) {
+                        } else if ($imageElement.hasClass("pull-right")) {
                           widget.setData( 'align', 'right' );
-                        } else if ($imageElement.hasClass("center")) {
+                        } else if ($imageElement.hasClass("text-center")) {
                           widget.setData( 'align', 'center' );
                         }
                       });
@@ -203,7 +203,7 @@ CKEDITOR.dialog.add( 'selectImage', function( editor ) {
     ],
     buttons: [CKEDITOR.dialog.okButton, CKEDITOR.dialog.cancelButton],
     onCancel: function() {
-      require(["SHARED/uiSelectImage"], function(UISelectImage){
+      window.require(["SHARED/uiSelectImage"], function(UISelectImage){
         UISelectImage.cancel();
       })
     },

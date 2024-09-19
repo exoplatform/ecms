@@ -288,6 +288,13 @@ export default {
       }
     }
   },
+  watch: {
+    attachmentInProgress(newVal) {
+      if (!newVal) {
+        this.$root.$emit('end-loading-attachment-drawer');
+      }
+    },
+  },
   methods: {
     markDocumentAsViewed() {
       document.dispatchEvent(new CustomEvent('mark-attachment-as-viewed', {detail: {file: this.attachment}}));
@@ -309,7 +316,7 @@ export default {
     },
     openFileInEditor() {
       if (this.attachment && this.attachment.id) {
-        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}`, '_blank');
+        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}&backTo=${window.location.pathname}`, '_blank');
       }
     },
     openFile() {

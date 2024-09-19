@@ -28,7 +28,7 @@
       }
       var config = editor.config
       const isImagePasteBlocked = config.isImagePasteBlocked;
-      require(["SHARED/uiSelectImage", "SHARED/jquery"], function(UISelectImage, $) {
+      window.require(["SHARED/uiSelectImage", "SHARED/jquery"], function(UISelectImage, $) {
         if (editor.editable()) {
           $(editor.editable().$).parent().on('dragover', function(e) {
             if (e && e.originalEvent && e.originalEvent.dataTransfer

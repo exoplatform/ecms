@@ -71,6 +71,10 @@
       <name>preload.resource.bundles</name>
       <value>locale.portlet.attachments</value>
     </init-param>
+    <init-param>
+      <name>layout-css-class</name>
+      <value>no-layout-style</value>
+    </init-param>
     <supports>
       <mime-type>text/html</mime-type>
     </supports>

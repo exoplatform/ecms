@@ -36,6 +36,13 @@ export default {
       default: function () {
         return new Object();
       }
+    },
+    preventPreview: {
+      type: Boolean,
+      required: false,
+      default: function () {
+        return false;
+      }
     }
   },
   data() {
@@ -54,6 +61,9 @@ export default {
   },
   methods: {
     openPreview() {
+      if (this.preventPreview) {
+        return;
+      }
       Vue.prototype.$attachmentService.getAttachmentById(this.file.id).then(attachment => {
         documentPreview.init({
           doc: {

@@ -55,7 +55,7 @@ import java.util.Locale;
   	def context = _ctx.getRequestContext();
   	def jsManager = context.getJavascriptManager();
 
-    def actionCompareLink = StringUtils.getNestedString(uicomponent.event("CompareVersion"),"javascript:ajaxGet(\'","\')");
+    def actionCompareLink = StringUtils.substringBetween(uicomponent.event("CompareVersion"),"javascript:ajaxGet(\'","\')");
     jsManager.require("SHARED/UIVersionInfo", "uiVersionInfo").addScripts("uiVersionInfo.init(\""+uicomponent.id+"\");")
            .addScripts("uiVersionInfo.compareEventUrl(\""+actionCompareLink+"\");");
     Locale currentLocale = Util.getPortalRequestContext().getLocale();
@@ -146,7 +146,7 @@ import java.util.Locale;
       </td>
     </tr>
     <%
-    def actionUrl = StringUtils.getNestedString(uicomponent.event('AddSummary', node.getPath()),"javascript:ajaxGet(\'","\')");
+    def actionUrl = StringUtils.substringBetween(uicomponent.event('AddSummary', node.getPath()),"javascript:ajaxGet(\'","\')");
     if (uicomponent.hasPermission(currentVersionNode))
       jsManager.require("SHARED/jquery", "gj").require("SHARED/UIVersionInfo", "uiVersionInfo").require("SHARED/X-editable", "xeditable").addScripts("gj(\"#versionSummary"+versionNumber+"\").editable({ mode: \"inline\", url: eXo.ecm.UIVersionInfo.sendVersionSummary, params : {path:\""+ node.getPath() +"\" , actionUrl:\""+ actionUrl +"\"}, pk:\""+versionNumber+"\" ,type: \"text\" ,emptytext: \""+emptySummary+"\" });");
     else

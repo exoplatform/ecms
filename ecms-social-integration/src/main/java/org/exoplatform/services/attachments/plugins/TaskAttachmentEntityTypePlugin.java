@@ -20,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.services.attachments.service.AttachmentEntityTypePlugin;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -125,7 +127,10 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
         if (attachmentNode.canAddMixin(EXO_PRIVILEGEABLE)) {
           attachmentNode.addMixin(EXO_PRIVILEGEABLE);
         }
-        ((ExtendedNode) attachmentNode).setPermission(permittedIdentity, new String[]{PermissionType.READ});
+        AccessControlList permsList = ((ExtendedNode) attachmentNode).getACL();
+        if (permsList == null || (permsList != null && permsList.getPermissions(permittedIdentity).isEmpty())) {
+          ((ExtendedNode) attachmentNode).setPermission(permittedIdentity, new String[] { PermissionType.READ });
+        }
         attachmentNode.save();
       }
       if(linkNodes.isEmpty()) {
