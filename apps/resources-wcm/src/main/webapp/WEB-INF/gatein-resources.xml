@@ -292,6 +292,7 @@
   <module>
     <name>flowplayer</name>
     <script>
+      <minify>false</minify>
       <path>/javascript/eXo/wcm/flowplayer/flowplayer-3.2.6.min.js</path>
     </script>
   </module>
