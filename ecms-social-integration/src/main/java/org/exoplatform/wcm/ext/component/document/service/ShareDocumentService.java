@@ -51,7 +51,6 @@ import org.exoplatform.social.plugin.doc.UIDocActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 
-
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -320,11 +319,9 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
     String originalActivityId = sharedActivity.getTemplateParams().get("originalActivityId");
     String spacePrettyName = sharedActivity.getActivityStream().getPrettyId();
     Space targetSpace = spaceService.getSpaceByPrettyName(spacePrettyName);
-    Identity targetSpaceIdentity = identityManager.getOrCreateSpaceIdentity(spacePrettyName);
     Identity posterIdentity = identityManager.getIdentity(sharedActivity.getPosterId());
     String posterUsername = posterIdentity.getRemoteId();
-    if (targetSpaceIdentity != null && SpaceUtils.isSpaceManagerOrSuperManager(posterUsername, targetSpace.getGroupId())
-        || (spaceService.isMember(targetSpace, posterUsername) && SpaceUtils.isRedactor(posterUsername, targetSpace.getGroupId()))) {
+    if (spaceService.canRedactOnSpace(targetSpace, posterUsername)) {
       Map<String, String> originalActivityTemplateParams = activityManager.getActivity(originalActivityId).getTemplateParams();
       String[] originalActivityFilesWorkspaces = getParameterValues(originalActivityTemplateParams, WORKSPACE);
       if (originalActivityFilesWorkspaces == null) {
