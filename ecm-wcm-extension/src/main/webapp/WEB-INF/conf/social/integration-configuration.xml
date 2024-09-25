@@ -84,9 +84,9 @@
       <type>org.exoplatform.services.wcm.search.listener.DocumentsMetadataListener</type>
     </component-plugin>
     <component-plugin>
-      <name>content.share.attachments</name>
+      <name>content.update.permissions</name>
       <set-method>addListener</set-method>
-      <type>org.exoplatform.services.attachments.listener.ShareAttachmentsToSpaceListener</type>
+      <type>org.exoplatform.services.attachments.listener.UpdateContentPermissionsListener</type>
     </component-plugin>
   </external-component-plugins>
 

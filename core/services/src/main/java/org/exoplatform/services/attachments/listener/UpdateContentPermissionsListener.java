@@ -43,10 +43,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ShareAttachmentsToSpaceListener extends Listener<Map<String, Object>, Space> {
-
-  private static final Log             LOG                  =
-                                           ExoLogger.getLogger(ShareAttachmentsToSpaceListener.class.getName());
+public class UpdateContentPermissionsListener extends Listener<Map<String, Object>, Space> {
 
   private final RepositoryService      repositoryService;
 
@@ -58,12 +55,13 @@ public class ShareAttachmentsToSpaceListener extends Listener<Map<String, Object
 
   public static final String           CONTENT              = "content";
 
-  public static final String           SPACE                = "space";
+  public static final String           SPACES               = "spaces";
 
   public static final String           AUDIENCE             = "audience";
 
   private static final String          IMAGE_SRC_REGEX      = "src=\"/portal/rest/images/?(.+)?\"";
-  public ShareAttachmentsToSpaceListener(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
+
+  public UpdateContentPermissionsListener(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     this.repositoryService = repositoryService;
     this.sessionProviderService = sessionProviderService;
   }
@@ -71,14 +69,16 @@ public class ShareAttachmentsToSpaceListener extends Listener<Map<String, Object
   @Override
   public void onEvent(Event event) throws Exception {
     Map<String, Object> data = (Map<String, Object>) event.getData();
-    List<String> attachmentsIds = (List<String>) data.get(NEWS_ATTACHMENTS_IDS);
+    List<String> attachmentsIds =
+                                (List<String>) data.get(NEWS_ATTACHMENTS_IDS) != null ? (List<String>) data.get(NEWS_ATTACHMENTS_IDS)
+                                                                                      : new ArrayList<String>();
     String audience = (String) data.get(AUDIENCE);
-    Space space = (Space) data.get(SPACE);
+    List<Space> spaces = (List<Space>) data.get(SPACES);
     String content = (String) data.get(CONTENT);
     if (content != null) {
       attachmentsIds.addAll(extractImageAttachmentUuidOrPath(content));
     }
-    updateNodePermissions(attachmentsIds, audience, space);
+    updateNodePermissions(attachmentsIds, audience, spaces);
   }
 
   private List<String> extractImageAttachmentUuidOrPath(String content) {
@@ -112,43 +112,43 @@ public class ShareAttachmentsToSpaceListener extends Listener<Map<String, Object
         pathMatcher = Pattern.compile(existingUploadImagesSrcRegex.toString()).matcher(srcStringPart);
         srcStringPart = srcStringPart.substring(0, srcStringPart.indexOf("\""));
       }
-      String imagePath = srcStringPart.substring(srcStringPart.indexOf(repositoryAndWorkSpaceSuffix) + repositoryAndWorkSpaceSuffix.length());
+      String imagePath = srcStringPart.substring(srcStringPart.indexOf(repositoryAndWorkSpaceSuffix)
+          + repositoryAndWorkSpaceSuffix.length());
       imageNodeIds.add(imagePath);
     }
     return imageNodeIds;
   }
-  private void updateNodePermissions(List<String> identifiers,String audience, Space space) throws RepositoryException {
+
+  private void updateNodePermissions(List<String> identifiers, String audience, List<Space> spaces) throws RepositoryException {
     Session session = Utils.getSystemSession(sessionProviderService, repositoryService);
     if (!CollectionUtils.isEmpty(identifiers)) {
       for (String attachmentId : identifiers) {
-        try {
-          Node attachmentNode;
-          boolean isNodeUUID = !attachmentId.contains("/");
-          if (isNodeUUID) {
-            attachmentNode = session.getNodeByUUID(attachmentId);
-          } else {
-            attachmentNode = (Node) session.getItem(URLDecoder.decode(attachmentId, StandardCharsets.UTF_8));
+        Node attachmentNode;
+        boolean isNodeUUID = !attachmentId.contains("/");
+        if (isNodeUUID) {
+          attachmentNode = session.getNodeByUUID(attachmentId);
+        } else {
+          attachmentNode = (Node) session.getItem(URLDecoder.decode(attachmentId, StandardCharsets.UTF_8));
+        }
+        if (!attachmentNode.getPath().startsWith(QUARANTINE)) {
+          if (attachmentNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+            attachmentNode.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
           }
-          if (!attachmentNode.getPath().startsWith(QUARANTINE)) {
-            if (attachmentNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
-              attachmentNode.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
-            }
-            // make the attachment public
-            if (audience.equals("all")) {
-              ((ExtendedNode) attachmentNode).setPermission("*:/platform/users", new String[] { PermissionType.READ });
-              attachmentNode.save();
-            }
-            // share the attachment with the space
-            else if (space != null) {
+          if (spaces != null) {
+            for (Space space : spaces) {
               ((ExtendedNode) attachmentNode).setPermission("*:" + space.getGroupId(), new String[] { PermissionType.READ });
               attachmentNode.save();
             }
           }
-        } catch (Exception e) {
-          LOG.error("Error while sharing attachment of id : {} to space: {}", attachmentId, space.getDisplayName(), e);
+          if (audience.equals("all")) {
+            ((ExtendedNode) attachmentNode).setPermission("any", new String[] { PermissionType.READ });
+            attachmentNode.save();
+          } else {
+            ((ExtendedNode) attachmentNode).removePermission("any", PermissionType.READ);
+            attachmentNode.save();
+          }
         }
       }
     }
-
   }
 }
