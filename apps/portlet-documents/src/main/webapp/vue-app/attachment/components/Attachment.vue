@@ -14,6 +14,8 @@
         :current-space="currentSpace"
         :attach-to-entity="attachToEntity"
         :display-uploaded-files="displayUploadedFilesList"
+        :source-app="sourceApp"
+        :create-entity-type-folder="createEntityTypeFolder"
         :files="files" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
@@ -41,7 +43,8 @@ export default {
       attachToEntity: true,
       supportedDocuments: null,
       openAttachmentsInEditor: false,
-      displayUploadedFiles: false
+      displayUploadedFiles: false,
+      createEntityTypeFolder: true
     };
   },
   computed: {
@@ -145,6 +148,7 @@ export default {
       this.entityId = config.entityId;
       this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
       this.displayUploadedFiles = config.displayUploadedFiles;
+      this.createEntityTypeFolder = config.createEntityTypeFolder;
     },
     startLoadingList() {
       if (this.drawerList && this.$refs.attachmentsListDrawer) {

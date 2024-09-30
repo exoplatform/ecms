@@ -1,3 +1,23 @@
+<template>
+  <div class="NoteAttachments">
+    <attachment-app
+        v-if="entityId > 0 && entityType && spaceId"
+        :entity-id="entityId"
+        :space-id="spaceId"
+        :default-folder="'Activity Stream Documents'"
+        :display-uploaded-files="true"
+        :create-entity-type-folder="false"
+        :entity-type="entityType">
+    <template #attachmentsButton>
+      <button
+        ref="openAttachmentDrawerButton"
+        @click="openAttachmentDrawer"
+        class="button-hidden d-none"></button>
+    </template>
+    <template #attachedFilesList />
+    </attachment-app>
+  </div>
+</template>
 <script>
 
 export default {
@@ -15,45 +35,12 @@ export default {
       default: null,
     },
   },
-  data: () => ({
-    attachments: [],
-    attachedFiles: {
-      type: Array,
-      default: () => []
-    }
-  }),
   created() {
     document.addEventListener('open-notes-attachments', () => this.openAttachmentDrawer());
   },
   methods: {
-    buildAttachmentDrawerParams() {
-      return {
-        entityType: this.entityType,
-        entityId: this.entityId,
-        sourceApp: 'noteEditor',
-        attachments: this.attachments,
-        spaceId: this.spaceId,
-        displayUploadedFiles: true,
-        defaultDrive: 'Activity Stream Documents',
-        defaultFolder: 'Activity Stream Documents'
-
-      };
-    },
-    retrieveAttachments() {
-      if (this.entityId && this.entityType) {
-        return this.$attachmentService.getEntityAttachments(this.entityType, this.entityId)
-          .then(attachments => {
-            attachments.forEach(attachments => {
-              attachments.name = attachments.title;
-            });
-            this.attachments = attachments;
-          });
-      }
-    },
     openAttachmentDrawer() {
-      this.retrieveAttachments().then(() => {
-        document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.buildAttachmentDrawerParams()}));
-      });
+      this.$refs.openAttachmentDrawerButton.click();
     },
   }
 };

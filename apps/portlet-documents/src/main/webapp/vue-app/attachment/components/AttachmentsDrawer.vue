@@ -1,7 +1,12 @@
 <template>
   <div class="attachments-drawer">
+    <v-overlay
+      z-index="1200"
+      :value="drawer"
+      @click.native="closeDrawersByOverlay" />
     <exo-drawer
       ref="attachmentsAppDrawer"
+      v-model="drawer"
       :confirm-close="newUploadedFilesInProgress"
       :confirm-close-labels="confirmAbortUploadLabels"
       class="attachmentsAppDrawer"
@@ -50,11 +55,13 @@
             :entity-type="entityType" />
         </div>
         <attachments-drive-explorer-drawer
+          ref="attachmentsDriveExplorerDrawer"
           :entity-id="entityId"
           :entity-type="entityType"
           :default-drive="defaultDrive"
           :extension-refs="$refs"
           :default-folder="defaultFolder"
+          :create-entity-type-folder="createEntityTypeFolder"
           :attached-files="attachments" />
         <div
           v-for="action in attachmentsComposerActions"
@@ -134,6 +141,10 @@ export default {
     displayUploadedFiles: {
       type: Boolean,
       default: false
+    },
+    createEntityTypeFolder: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -162,7 +173,8 @@ export default {
       attachmentsChanged: false,
       newUploadedFiles: [],
       creationType: '',
-      saveMode: 'keep'
+      saveMode: 'keep',
+      drawer: false
     };
   },
   computed: {
@@ -643,6 +655,19 @@ export default {
         };
         document.dispatchEvent(new CustomEvent('exo-statistic-message', {detail: fileAnalytics}));
       }
+    },
+    closeDrawersByOverlay() {
+      if (!this.isDriveExplorerDrawerClosed()) {
+        this.closeAttachmentsDriveExplorerDrawer();
+        return;
+      }
+      this.closeAttachmentsAppDrawer();
+    },
+    isDriveExplorerDrawerClosed() {
+      return this.$refs.attachmentsDriveExplorerDrawer.isClosed();
+    },
+    closeAttachmentsDriveExplorerDrawer() {
+      this.$refs.attachmentsDriveExplorerDrawer.closeAttachmentsDriveExplorerDrawer();
     }
   }
 };

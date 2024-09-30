@@ -150,7 +150,7 @@ function installNoteEditorExtensions() {
     rank: 30,
   });
 
-  extensionRegistry.registerComponent('notesRichEditor', 'notes-editor-extensions', {
+  extensionRegistry.registerComponent('NotesRichEditor', 'notes-editor-extensions', {
     id: 'notes-attachment',
     vueComponent: Vue.options.components['notes-attachment'],
     rank: 10,
