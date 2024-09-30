@@ -45,6 +45,7 @@
             :max-files-count="maxFilesCount"
             :current-space="currentSpace"
             :current-drive="currentDrive"
+            :default-folder="defaultFolder"
             :entity-id="entityId"
             :entity-type="entityType" />
         </div>
@@ -130,6 +131,10 @@ export default {
       type: {},
       default: () => null
     },
+    displayUploadedFiles: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -191,6 +196,9 @@ export default {
         cancel: this.$t('attachments.no'),
       };
     },
+    displayUploadedFilesList() {
+      return this.attachments && this.attachments.length && this.displayUploadedFiles;
+    }
   },
   watch: {
     attachments: {
@@ -218,9 +226,15 @@ export default {
     defaultDrive() {
       this.initDefaultDestinationFolderPath(this.defaultFolder);
     },
+    displayUploadedFiles() {
+      if (this.displayUploadedFiles) {
+        this.$forceUpdate();
+        this.newUploadedFiles = Object.assign([], this.attachments);
+        this.$root.$emit('refresh-uploaded-files-list');
+      }
+    }
   },
   created() {
-    
     this.$root.$on('open-attachments-app-drawer', () => {
       this.attachmentsChanged = false;
       this.openAttachmentsAppDrawer();
@@ -285,6 +299,9 @@ export default {
         this.creationType = this.$t('attachments.uploaded.from.cloud');
         this.openSelectFromDrivesDrawer();
       });
+      if (this.displayUploadedFilesList) {
+        this.newUploadedFiles = Object.assign([], this.attachments);
+      }
       this.$refs.attachmentsAppDrawer.open();
       this.$root.$emit('attachments-app-drawer-opened');
       window.setTimeout(() => this.handleProvidedFiles(), 400);

@@ -13,6 +13,7 @@
         :default-folder="defaultFolder"
         :current-space="currentSpace"
         :attach-to-entity="attachToEntity"
+        :display-uploaded-files="displayUploadedFilesList"
         :files="files" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
@@ -39,12 +40,16 @@ export default {
       drawerList: false,
       attachToEntity: true,
       supportedDocuments: null,
-      openAttachmentsInEditor: false
+      openAttachmentsInEditor: false,
+      displayUploadedFiles: false
     };
   },
   computed: {
     entityHasAttachments() {
       return this.attachments && this.attachments.length;
+    },
+    displayUploadedFilesList() {
+      return this.displayUploadedFiles;
     }
   },
   created() {
@@ -139,6 +144,7 @@ export default {
       this.entityType = config.entityType;
       this.entityId = config.entityId;
       this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
+      this.displayUploadedFiles = config.displayUploadedFiles;
     },
     startLoadingList() {
       if (this.drawerList && this.$refs.attachmentsListDrawer) {

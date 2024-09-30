@@ -112,6 +112,7 @@
             :allow-to-preview="false"
             :current-space="currentSpace"
             :current-drive="currentDrive"
+            :default-folder="defaultFolder"
             :entity-id="entityId"
             :allow-to-detach="allowToDetach"
             allow-to-edit />
@@ -153,6 +154,10 @@ export default {
       default: ''
     },
     entityType: {
+      type: String,
+      default: ''
+    },
+    defaultFolder: {
       type: String,
       default: ''
     },
