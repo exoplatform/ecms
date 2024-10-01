@@ -136,6 +136,10 @@ export default {
       type: Boolean,
       default: false
     },
+    isFileFillable: {
+      type: Boolean,
+      default: false
+    },
     canEdit: {
       type: Boolean,
       default: false
@@ -325,13 +329,19 @@ export default {
     fileInfo() {
       return `${this.$t('documents.preview.updatedOn')} ${this.absoluteDateModified()} ${this.$t('documents.preview.updatedBy')} ${this.attachment.lastEditor} ${this.attachment.size}`;
     },
-    openFileInEditor() {
+    openFileInEditor(mode) {
       if (this.attachment && this.attachment.id) {
-        window.open(`${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}&backTo=${window.location.pathname}`, '_blank');
+        let url = `${eXo.env.portal.context}/${eXo.env.portal.portalName}/oeditor?docId=${this.attachment.id}&backTo=${window.location.pathname}`;
+        if (mode) {
+          url += `&mode=${mode}`;
+        }
+        window.open(url, '_blank');
       }
     },
     openFile() {
-      if (this.openInEditor && this.isFileEditable && this.attachment.acl?.canEdit) {
+      if (this.openInEditor && this.isFileFillable && this.attachment.acl?.canEdit) {
+        this.openFileInEditor('fillform');
+      } else if (this.openInEditor && this.isFileEditable && this.attachment.acl?.canEdit) {
         this.openFileInEditor();
       } else {
         this.openPreview();
