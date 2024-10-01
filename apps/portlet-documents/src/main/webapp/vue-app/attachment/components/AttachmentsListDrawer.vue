@@ -40,6 +40,7 @@
             <attachment-item
               :open-in-editor="openAttachmentsInEditor"
               :is-file-editable="isFileEditable(attachment)"
+              :is-file-fillable="isFileFillable(attachment)"
               :allow-to-edit="false"
               :attachment="attachment"
               :allow-to-detach="allowToDetach"
@@ -91,7 +92,11 @@ export default {
     isFileEditable(attachment) {
       const type = attachment && attachment.mimetype || '';
       return this.supportedDocuments && this.supportedDocuments.filter(doc => doc.edit && doc.mimeType === type
-          && !attachment.cloudDriveFile).length > 0;
+                                                                              && !attachment.cloudDriveFile).length > 0;
+    },
+    isFileFillable(attachment) {
+      const type = attachment && attachment.mimetype || '';
+      return type === 'application/pdf';
     },
     startLoading() {
       this.$refs.attachmentsListDrawer.startLoading();
