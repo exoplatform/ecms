@@ -15,6 +15,7 @@
         :attach-to-entity="attachToEntity"
         :display-uploaded-files="displayUploadedFilesList"
         :source-app="sourceApp"
+        :show-drawer-overlay="showDrawerOverlay"
         :create-entity-type-folder="createEntityTypeFolder"
         :files="files" />
       <attachments-list-drawer
@@ -44,7 +45,8 @@ export default {
       supportedDocuments: null,
       openAttachmentsInEditor: false,
       displayUploadedFiles: false,
-      createEntityTypeFolder: true
+      createEntityTypeFolder: true,
+      showDrawerOverlay: false
     };
   },
   computed: {
@@ -149,6 +151,8 @@ export default {
       this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
       this.displayUploadedFiles = config.displayUploadedFiles;
       this.createEntityTypeFolder = config.createEntityTypeFolder;
+      this.showDrawerOverlay = config.showDrawerOverlay;
+
     },
     startLoadingList() {
       if (this.drawerList && this.$refs.attachmentsListDrawer) {

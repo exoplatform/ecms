@@ -19,7 +19,32 @@ CKEDITOR.plugins.add( 'noteFileAttach', {
     editor.ui.addButton( 'noteFileAttach', {
       label: editor.lang.noteFileAttach.buttonTooltip,
       command: 'noteFileAttach',
-      toolbar: 'insert,20'
+      toolbar: 'insert',
     });
+
+    editor.on('instanceReady', function() {
+      const buttonElement = document.querySelector('.cke_button__notefileattach');
+      if (buttonElement) {
+        buttonElement.classList.add('cke_button_disabled');
+      }
+      const iconElement = document.querySelector('.cke_button__notefileattach_icon');
+      if (iconElement) {
+        iconElement.style.setProperty('background-size', '13px', 'important');
+      }
+    });
+
+    document.addEventListener('toggle-attach-button', function(event) {
+      const buttonElement = document.querySelector('.cke_button__notefileattach');
+      if (buttonElement) {
+        if (event.detail && event.detail.enable) {
+          // If the event detail contains 'enable: true', remove the disabled class
+          buttonElement.classList.remove('cke_button_disabled');
+        } else {
+          // Otherwise, add the disabled class
+          buttonElement.classList.add('cke_button_disabled');
+        }
+      }
+    });
+
   }
 });

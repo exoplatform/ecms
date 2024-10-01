@@ -63,6 +63,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     entityId: {
@@ -96,6 +97,10 @@ export default {
     createEntityTypeFolder: {
       type: Boolean,
       default: true
+    },
+    showDrawerOverlay: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -115,6 +120,7 @@ export default {
         'displayUploadedFiles': this.displayUploadedFiles,
         'createEntityTypeFolder': this.createEntityTypeFolder,
         'sourceApp': this.sourceApp,
+        'showDrawerOverlay': this.showDrawerOverlay
       };
     }
   },

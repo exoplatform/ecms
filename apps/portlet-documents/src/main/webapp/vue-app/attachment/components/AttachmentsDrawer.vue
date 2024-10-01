@@ -1,6 +1,7 @@
 <template>
   <div class="attachments-drawer">
     <v-overlay
+      v-if="showDrawerOverlay"
       z-index="1200"
       :value="drawer"
       @click.native="closeDrawersByOverlay" />
@@ -145,6 +146,10 @@ export default {
     createEntityTypeFolder: {
       type: Boolean,
       default: true
+    },
+    showDrawerOverlay: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -243,6 +248,13 @@ export default {
         this.$forceUpdate();
         this.newUploadedFiles = Object.assign([], this.attachments);
         this.$root.$emit('refresh-uploaded-files-list');
+      }
+    },
+    newUploadedFilesInProgress(newVal) {
+      if (newVal) {
+        document.dispatchEvent(new CustomEvent('new-file-upload-progress'));
+      } else {
+        document.dispatchEvent(new CustomEvent('new-file-upload-done'));
       }
     }
   },
@@ -606,6 +618,7 @@ export default {
           entityId: this.entityId,
         }})));
         this.uploadAddedAttachments();
+        document.dispatchEvent(new CustomEvent('attachment-added-from-drives'));
       }
     },
     abortUploadingNewFile(file) {

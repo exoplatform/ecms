@@ -415,7 +415,7 @@ export default {
       driveExplorerInitializing: false,
       currentFolder: {},
       folderPath: '',
-      destinationFolder: '',
+      destinationFolder: ''
     };
   },
   computed: {
@@ -552,7 +552,6 @@ export default {
       this.initHistoryTree();
       this.openSelectDestinationFolderForFile(file);
     });
-    this.$root.$on('close-drawer-by-overlay');
   },
   methods: {
     initHistoryTree(){
