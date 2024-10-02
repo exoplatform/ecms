@@ -8,7 +8,7 @@
       :display-uploaded-files="true"
       :create-entity-type-folder="false"
       :show-drawer-overlay="true"
-      :entity-type="processedEntityType">
+      :entity-type="entityType">
     <template #attachmentsButton>
       <button
         ref="openAttachmentDrawerButton"
@@ -41,21 +41,10 @@ export default {
     }
   },
   computed: {
-    processedEntityType() {
-      return this.entityType && this.lang && `${this.entityType}_${this.lang}` || this.entityType;
-    }
   },
   watch: {
-    entityId(newVal) {
-      if (newVal > 0) {
-        document.dispatchEvent(new CustomEvent('toggle-attach-button', {
-          detail: { enable: true }
-        }));
-      } else {
-        document.dispatchEvent(new CustomEvent('toggle-attach-button', {
-          detail: { enable: false }
-        }));
-      }
+    entityId() {
+      this.refreshButtonDisplayRules();
     }
   },
   created() {
@@ -63,9 +52,10 @@ export default {
     //synchronizing the draft saving with the editor
     document.addEventListener('new-file-upload-progress', this.emitEditorExtensionsUpdatingDataEvent);
     document.addEventListener('new-file-upload-done', this.emitEditorExtensionsDataUpdatedEvent);
-    document.addEventListener('open-notes-attachments', () => this.openAttachmentDrawer());
-    document.addEventListener('attachment-removed', () => this.emitEditorExtensionsDataUpdatedEvent());
-    document.addEventListener('attachment-added-from-drives', () => this.emitEditorExtensionsDataUpdatedEvent());
+    document.addEventListener('open-notes-attachments', this.openAttachmentDrawer);
+    document.addEventListener('attachment-removed', this.emitEditorExtensionsDataUpdatedEvent);
+    document.addEventListener('attachment-added-from-drives', this.emitEditorExtensionsDataUpdatedEvent);
+    document.addEventListener('note-file-attach-plugin-button-initialized', this.refreshButtonDisplayRules);
   },
   methods: {
     openAttachmentDrawer() {
@@ -74,18 +64,31 @@ export default {
       }
     },
     emitEditorExtensionsUpdatingDataEvent() {
-      const eventDetails = {
-        showAutoSaveMessage: true,
-        processAutoSave: this.entityType === 'Page'
-      };
-      document.dispatchEvent(new CustomEvent('editor-extensions-data-start-updating', eventDetails));
+      document.dispatchEvent(new CustomEvent('editor-extensions-data-start-updating', {
+        detail: {
+          showAutoSaveMessage: true,
+          processAutoSave: this.entityType === 'Page'
+        }
+      }));
     },
     emitEditorExtensionsDataUpdatedEvent() {
-      const eventDetails = {
-        showAutoSaveMessage: true,
-        processAutoSave: this.entityType === 'Page'
-      };
-      document.dispatchEvent(new CustomEvent('editor-extensions-data-updated', eventDetails));
+      document.dispatchEvent(new CustomEvent('editor-extensions-data-updated', {
+        detail: {
+          showAutoSaveMessage: true,
+          processAutoSave: this.entityType === 'Page'
+        }
+      }));
+    },
+    refreshButtonDisplayRules() {
+      if (this.entityId && this.entityId !== 0) {
+        document.dispatchEvent(new CustomEvent('toggle-attach-button', {
+          detail: { enable: true }
+        }));
+      } else {
+        document.dispatchEvent(new CustomEvent('toggle-attach-button', {
+          detail: { enable: false }
+        }));
+      }
     }
   }
 };

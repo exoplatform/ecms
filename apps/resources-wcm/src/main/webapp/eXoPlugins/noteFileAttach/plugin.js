@@ -29,8 +29,10 @@ CKEDITOR.plugins.add( 'noteFileAttach', {
       }
       const iconElement = document.querySelector('.cke_button__notefileattach_icon');
       if (iconElement) {
-        iconElement.style.setProperty('background-size', '13px', 'important');
+        iconElement.style.setProperty('background-size', '12px', 'important');
+        iconElement.style.setProperty('background-position', '0px 1px', 'important');
       }
+      document.dispatchEvent(new CustomEvent('note-file-attach-plugin-button-initialized'))
     });
 
     document.addEventListener('toggle-attach-button', function(event) {
