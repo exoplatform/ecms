@@ -114,7 +114,7 @@ public class FileSearchRestService implements ResourceContainer {
     }
     recentFilters.add(getFileTypesFilter(myWork));
     UserACL userACL = PortalContainer.getInstance().getComponentInstanceOfType(UserACL.class);
-    if (!userACL.isSuperUser() && !userACL.isUserInGroup(userACL.getAdminGroups())) {
+    if (!userACL.isSuperUser(ConversationState.getCurrent().getIdentity()) && !userACL.isUserInGroup(ConversationState.getCurrent().getIdentity(), userACL.getAdminGroups())) {
       recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
     }
     if (StringUtils.isNotBlank(query)) {

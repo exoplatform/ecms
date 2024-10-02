@@ -43,6 +43,8 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui.UIPublicationContainer;
@@ -653,10 +655,15 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(Object object:pageList.getAll()) {
       PortalConfig portalConfig = (PortalConfig)object;
-      if(userACL.hasPermission(portalConfig)) {
+      if(userACL.hasAccessPermission(portalConfig, getCurrentIdentity())) {
         listPortalName.add(portalConfig.getName());
       }
     }
     return listPortalName;
+  }
+
+  private Identity getCurrentIdentity() {
+    ConversationState conversationState = ConversationState.getCurrent();
+    return conversationState == null ? null : conversationState.getIdentity();
   }
 }

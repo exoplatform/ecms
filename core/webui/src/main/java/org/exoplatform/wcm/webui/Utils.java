@@ -70,6 +70,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
@@ -913,9 +914,10 @@ public class Utils {
     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
 
     if (uiPage != null) {
-      return userACL.hasEditPermissionOnPage(uiPage.getOwnerType(),
-                                             uiPage.getOwnerId(),
-                                             uiPage.getEditPermission());
+      return userACL.hasEditPermission(ConversationState.getCurrent().getIdentity(),
+                                       uiPage.getOwnerType(),
+                                       uiPage.getOwnerId(),
+                                       uiPage.getEditPermission());
     }
     UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
     .findFirstComponentOfType(UIPortal.class);
@@ -929,7 +931,7 @@ public class Utils {
     if (page == null) {
       return false;
     }
-    return userACL.hasEditPermission(page);
+    return userACL.hasEditPermission(page, ConversationState.getCurrent().getIdentity());
   }
 
   public static boolean hasEditPermissionOnNavigation() throws Exception {
@@ -943,9 +945,10 @@ public class Utils {
     UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
                                         .findFirstComponentOfType(UIPortal.class);
     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
-    return userACL.hasEditPermissionOnPortal(currentUIPortal.getSiteKey().getTypeName(),
-                                             currentUIPortal.getSiteKey().getName(),
-                                             currentUIPortal.getEditPermission());
+    return userACL.hasEditPermission(ConversationState.getCurrent().getIdentity(),
+                                     currentUIPortal.getSiteKey().getTypeName(),
+                                     currentUIPortal.getSiteKey().getName(),
+                                     currentUIPortal.getEditPermission());
   }
 
   public static UserNavigation getSelectedNavigation() throws Exception { 
@@ -1134,7 +1137,7 @@ public class Utils {
    */
   public static boolean isAdministratorUser() {
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
-    return userACL.isUserInGroup(userACL.getAdminGroups());
+    return userACL.isUserInGroup(ConversationState.getCurrent().getIdentity(), userACL.getAdminGroups());
   }
   
   public static String getProfileLink(String userId) {
