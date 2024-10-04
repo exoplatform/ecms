@@ -31,7 +31,7 @@
         </div>
       </div>
       <div
-        v-if="$scopedSlots.attachedFilesList"
+        v-if="$scopedSlots.attachmentsList"
         class="attachedFilesList"
         @click="openAttachmentsDrawerList()">
         <slot :attachments="attachments" name="attachedFilesList"></slot>
@@ -63,7 +63,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     entityId: {
@@ -86,22 +85,6 @@ export default {
       type: String,
       default: ''
     },
-    displayUploadedFiles: {
-      type: Boolean,
-      default: false
-    },
-    sourceApp: {
-      type: String,
-      default: ''
-    },
-    createEntityTypeFolder: {
-      type: Boolean,
-      default: true
-    },
-    showDrawerOverlay: {
-      type: Boolean,
-      default: false
-    }
   },
   data() {
     return {
@@ -116,11 +99,7 @@ export default {
         'defaultDrive': this.defaultDrive,
         'defaultFolder': this.defaultFolder,
         'spaceId': this.spaceId,
-        'attachments': this.attachments,
-        'displayUploadedFiles': this.displayUploadedFiles,
-        'createEntityTypeFolder': this.createEntityTypeFolder,
-        'sourceApp': this.sourceApp,
-        'showDrawerOverlay': this.showDrawerOverlay
+        'attachments': this.attachments 
       };
     }
   },

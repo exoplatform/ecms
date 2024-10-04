@@ -29,7 +29,7 @@
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
           <attachment-create-document-input
-            v-if="(!entityType && ! entityId) || !attachToEntity"
+            v-if="(!entityType && !entityId) || !attachToEntity && displayCreateDocumentInput"
             :attachments="attachments"
             :max-files-count="maxFilesCount"
             :max-files-size="maxFileSize"
@@ -52,6 +52,7 @@
             :current-space="currentSpace"
             :current-drive="currentDrive"
             :default-folder="defaultFolder"
+            :display-uploaded-files="displayUploadedFiles"
             :entity-id="entityId"
             :entity-type="entityType" />
         </div>
@@ -150,6 +151,10 @@ export default {
     showDrawerOverlay: {
       type: Boolean,
       default: false
+    },
+    displayCreateDocumentInput: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -213,9 +218,6 @@ export default {
         cancel: this.$t('attachments.no'),
       };
     },
-    displayUploadedFilesList() {
-      return this.attachments && this.attachments.length && this.displayUploadedFiles;
-    }
   },
   watch: {
     attachments: {
@@ -242,13 +244,6 @@ export default {
     },
     defaultDrive() {
       this.initDefaultDestinationFolderPath(this.defaultFolder);
-    },
-    displayUploadedFiles() {
-      if (this.displayUploadedFiles) {
-        this.$forceUpdate();
-        this.newUploadedFiles = Object.assign([], this.attachments);
-        this.$root.$emit('refresh-uploaded-files-list');
-      }
     },
     newUploadedFilesInProgress(newVal) {
       if (newVal) {
@@ -323,9 +318,6 @@ export default {
         this.creationType = this.$t('attachments.uploaded.from.cloud');
         this.openSelectFromDrivesDrawer();
       });
-      if (this.displayUploadedFilesList) {
-        this.newUploadedFiles = Object.assign([], this.attachments);
-      }
       this.$refs.attachmentsAppDrawer.open();
       this.$root.$emit('attachments-app-drawer-opened');
       window.setTimeout(() => this.handleProvidedFiles(), 400);
@@ -335,6 +327,7 @@ export default {
       this.$root.$emit('reset-attachments-upload-input');
       document.removeEventListener('paste', this.onPaste, false);
       this.$refs.attachmentsAppDrawer.close();
+      document.dispatchEvent(new CustomEvent('attachments-app-drawer-closed'));
     },
     uploadAddedAttachments() {
       if (this.newUploadedFilesAdded) { //added new uploaded files
