@@ -1,7 +1,7 @@
 <template>
   <div class="attachments-drawer">
     <v-overlay
-      v-if="showDrawerOverlay"
+      v-if="showCustomDrawerOverlay"
       z-index="1200"
       :value="drawer"
       @click.native="closeDrawersByOverlay" />
@@ -148,7 +148,7 @@ export default {
       type: Boolean,
       default: true
     },
-    showDrawerOverlay: {
+    showCustomDrawerOverlay: {
       type: Boolean,
       default: false
     },

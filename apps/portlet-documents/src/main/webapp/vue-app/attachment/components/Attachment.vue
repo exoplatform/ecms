@@ -15,7 +15,7 @@
         :attach-to-entity="attachToEntity"
         :display-uploaded-files="displayUploadedFilesList"
         :source-app="sourceApp"
-        :show-drawer-overlay="showDrawerOverlay"
+        :show-custom-drawer-overlay="showCustomDrawerOverlay"
         :display-create-document-input="displayCreateDocumentInput"
         :create-entity-type-folder="createEntityTypeFolder"
         :files="files" />
@@ -47,7 +47,7 @@ export default {
       openAttachmentsInEditor: false,
       displayUploadedFiles: false,
       createEntityTypeFolder: true,
-      showDrawerOverlay: false,
+      showCustomDrawerOverlay: false,
       displayCreateDocumentInput: true
     };
   },
@@ -153,7 +153,7 @@ export default {
       this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
       this.displayUploadedFiles = config.displayUploadedFiles;
       this.createEntityTypeFolder = config.createEntityTypeFolder;
-      this.showDrawerOverlay = config.showDrawerOverlay;
+      this.showCustomDrawerOverlay = config.showCustomDrawerOverlay;
       this.displayCreateDocumentInput = config.displayCreateDocumentInput;
     },
     startLoadingList() {

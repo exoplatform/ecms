@@ -20,39 +20,55 @@ package org.exoplatform.services.attachments.listener;
 import java.util.List;
 import java.util.Map;
 
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
-public class LinkNoteAttachmentsOnSaveListener extends Listener<String, Map<String, Object>> {
-
-  private final AttachmentStorage attachmentService;
+public class NoteAttachmentUpdateListener extends Listener<String, Map<String, Object>> {
 
   private final String            WIKI_DRAFT_PAGES   = "WIKI_DRAFT_PAGES";
 
 
   private final String            WIKI_PAGE_VERSIONS = "WIKI_PAGE_VERSIONS";
 
-  public LinkNoteAttachmentsOnSaveListener(AttachmentStorage attachmentService) {
-    this.attachmentService = attachmentService;
-  }
+  private static final Log LOG              = ExoLogger.getLogger(NoteAttachmentUpdateListener.class);
+
 
   @Override
   public void onEvent(Event event) throws Exception {
     if (event.getData() != null) {
-      Map<String, Object> data = (Map<String, Object>) event.getData();
-      String draftPageId = (String) data.get("draftPageId");
-      String pageVersionId = (String) data.get("pageVersionId");
-      String draftForExistingPageId = (String) data.get("draftForExistingPageId");
+      SessionProvider sessionProvider = null;
+      try {
+
+        sessionProvider = SessionProvider.createSystemProvider();
+        SessionProviderService sessionProviderService = ExoContainerContext.getService(SessionProviderService.class);
+        sessionProviderService.setSessionProvider(null, sessionProvider);
+
+        Map<String, Object> data = (Map<String, Object>) event.getData();
+        String draftPageId = (String) data.get("draftPageId");
+        String pageVersionId = (String) data.get("pageVersionId");
+        String draftForExistingPageId = (String) data.get("draftForExistingPageId");
 
 
-      if (draftPageId != null && pageVersionId != null) {
-        moveAttachments(draftPageId, pageVersionId, WIKI_DRAFT_PAGES, WIKI_PAGE_VERSIONS);
-      }
+        if (draftPageId != null && pageVersionId != null) {
+          moveAttachments(draftPageId, pageVersionId, WIKI_DRAFT_PAGES, WIKI_PAGE_VERSIONS);
+        }
 
-      if (draftForExistingPageId != null && pageVersionId != null) {
-        copyAttachments(pageVersionId, draftForExistingPageId, WIKI_PAGE_VERSIONS, WIKI_DRAFT_PAGES);
+        if (draftForExistingPageId != null && pageVersionId != null) {
+          copyAttachments(pageVersionId, draftForExistingPageId, WIKI_PAGE_VERSIONS, WIKI_DRAFT_PAGES);
+        }
+      } catch (Exception e) {
+        LOG.error("error when updating note attachments", e);
+      } finally {
+        if (sessionProvider != null) {
+          sessionProvider.close();
+        }
       }
     }
 
@@ -62,6 +78,7 @@ public class LinkNoteAttachmentsOnSaveListener extends Listener<String, Map<Stri
                                String targetId,
                                String sourceEntityType,
                                String targetEntityType) throws Exception {
+    AttachmentStorage attachmentService = ExoContainerContext.getService(AttachmentStorage.class);
     List<Attachment> attachmentList = attachmentService.getAttachmentsByEntity(Long.parseLong(sourceId), sourceEntityType);
 
     if (attachmentList != null && !attachmentList.isEmpty()) {
@@ -76,6 +93,7 @@ public class LinkNoteAttachmentsOnSaveListener extends Listener<String, Map<Stri
                                String targetId,
                                String sourceEntityType,
                                String targetEntityType) throws Exception {
+    AttachmentStorage attachmentService = ExoContainerContext.getService(AttachmentStorage.class);
     List<Attachment> attachmentList = attachmentService.getAttachmentsByEntity(Long.parseLong(sourceId), sourceEntityType);
 
     if (attachmentList != null && !attachmentList.isEmpty()) {

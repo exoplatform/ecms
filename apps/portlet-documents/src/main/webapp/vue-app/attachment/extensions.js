@@ -2,7 +2,6 @@ export function installExtensions() {
   CKEDITOR.plugins.addExternal('attachFile', '/eXoWCMResources/eXoPlugins/attachFile/', 'plugin.js');
   CKEDITOR.plugins.addExternal('uploadImage', '/eXoWCMResources/eXoPlugins/uploadImage/', 'plugin.js');
   CKEDITOR.plugins.addExternal('selectImage', '/eXoWCMResources/eXoPlugins/selectImage/', 'plugin.js');
-  CKEDITOR.plugins.addExternal('noteFileAttach', '/eXoWCMResources/eXoPlugins/noteFileAttach/', 'plugin.js');
 
   installNoteEditorExtensions();
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
@@ -40,8 +39,7 @@ export function installExtensions() {
   extensionRegistry.registerExtension('ActivityComposer', 'ckeditor-extensions', {
     id: 'attachFile',
     extraPlugin: 'attachFile',
-    extraToolbarItem: 'attachFile',
-    rank: 10,
+    extraToolbarItem: 'attachFile'
   });
 
   extensionRegistry.registerExtension('WYSIWYGPlugins', 'image', {
@@ -144,9 +142,8 @@ export function installExtensions() {
 }
 function installNoteEditorExtensions() {
   extensionRegistry.registerExtension('NotesEditor', 'ckeditor-extensions', {
-    id: 'noteFileAttach',
-    extraPlugin: 'noteFileAttach',
-    extraToolbarItem: 'noteFileAttach',
+    id: 'attachFile',
+    extraPlugin: 'attachFile',
     rank: 30,
   });
 

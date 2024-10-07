@@ -45,13 +45,13 @@ export default {
         'displayUploadedFiles': this.displayUploadedFiles,
         'createEntityTypeFolder': this.createEntityTypeFolder,
         'sourceApp': 'note',
-        'showDrawerOverlay': true,
+        'showCustomDrawerOverlay': true,
         'attachToEntity': this.attachToEntity,
         'displayCreateDocumentInput': this.displayCreateDocumentInput
       };
     },
     attachToEntity() {
-      return this.entityType !== 'WIKI_PAGE_VERSIONS'
+      return this.entityType !== 'WIKI_PAGE_VERSIONS';
     }
   },
   watch: {
@@ -60,11 +60,11 @@ export default {
     },
     isEmptyNoteTranslation() {
       this.refreshButtonDisplayRules();
-    }
+    },
+
   },
   created() {
     document.addEventListener('open-notes-attachments', this.openAttachmentDrawer);
-    document.addEventListener('attachment-added-from-drives', this.emitEditorExtensionsDataUpdatedEvent);
     document.addEventListener('note-file-attach-plugin-button-initialized', this.refreshButtonDisplayRules);
     document.addEventListener('attachments-app-drawer-closed', this.emitEditorExtensionsDataUpdatedEvent);
     document.addEventListener('note-draft-auto-save-done', (event) => {
@@ -72,13 +72,17 @@ export default {
         this.updateLinkedAttachmentsToEntity(event.detail.draftId);
       }
     });
+    document.addEventListener('article-draft-auto-save-done', (event) => {
+      if (this.attachmentListUpdated && event.detail.draftId) {
+        this.updateLinkedAttachmentsToEntity(event.detail.draftId);
+      }
+    });
   },
   beforeDestroy() {
-    document.removeEventListener('note-draft-auto-save-done')
+    document.removeEventListener('note-draft-auto-save-done');
     document.removeEventListener('open-notes-attachments');
-    document.removeEventListener('attachment-removed');
     document.removeEventListener('note-file-attach-plugin-button-initialized');
-    document.addEventListener('attachments-app-drawer-closed')
+    document.addEventListener('attachments-app-drawer-closed');
   },
   methods: {
     openAttachmentDrawer() {
@@ -87,7 +91,7 @@ export default {
         this.originalAttachmentsList = [];
         this.initEntityAttachmentsList().then(() => {
           document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
-        })
+        });
 
       }
     },
@@ -129,26 +133,26 @@ export default {
     updateLinkedAttachmentsToEntity(entityId) {
       const attachmentIds = this.attachments.filter(attachment => attachment.id).map(attachment => attachment.id);
       if (attachmentIds.length === 0) {
-        return this.$attachmentService.removeAllAttachmentsFromEntity(entityId, this.entityType).then(() => {
+        return this.$attachmentService.removeAllAttachmentsFromEntity(entityId, 'WIKI_DRAFT_PAGES').then(() => {
           document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
           this.attachmentListUpdated = false;
         }).catch(e => {
           console.error(e);
           this.$refs.attachmentsAppDrawer.endLoading();
           this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
-          this.attachmentListUpdated = false
+          this.attachmentListUpdated = false;
         });
       } else {
-        return this.$attachmentService.updateLinkedAttachmentsToEntity(entityId, this.entityType, attachmentIds)
-            .then(() => {
-              document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
-              this.attachmentListUpdated = false;
-            })
-            .catch(e => {
-              this.attachmentListUpdated = false;
-              console.error(e);
-              this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
-            });
+        return this.$attachmentService.updateLinkedAttachmentsToEntity(entityId, 'WIKI_DRAFT_PAGES', attachmentIds)
+          .then(() => {
+            document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
+            this.attachmentListUpdated = false;
+          })
+          .catch(e => {
+            this.attachmentListUpdated = false;
+            console.error(e);
+            this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
+          });
       }
     },
   }

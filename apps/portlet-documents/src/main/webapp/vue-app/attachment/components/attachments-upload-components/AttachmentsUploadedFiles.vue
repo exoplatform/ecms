@@ -168,7 +168,7 @@ export default {
   },
   created() {
     if (this.displayUploadedFiles) {
-      this.updateUploadedFilesList()
+      this.updateUploadedFilesList();
     }
     this.$root.$on('refresh-uploaded-files-list', () => {
       this.$forceUpdate();
@@ -191,7 +191,7 @@ export default {
     },
     attachments: {
       handler() {
-        if(this.displayUploadedFiles) {
+        if (this.displayUploadedFiles) {
           this.updateUploadedFilesList();
         }
       },

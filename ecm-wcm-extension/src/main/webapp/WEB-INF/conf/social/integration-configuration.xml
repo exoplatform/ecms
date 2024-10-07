@@ -91,12 +91,12 @@
     <component-plugin>
       <name>note.page.version.created</name>
       <set-method>addListener</set-method>
-      <type>org.exoplatform.services.attachments.listener.LinkNoteAttachmentsOnSaveListener</type>
+      <type>org.exoplatform.services.attachments.listener.NoteAttachmentUpdateListener</type>
     </component-plugin>
     <component-plugin>
       <name>note.draft.for.exist.page.created</name>
       <set-method>addListener</set-method>
-      <type>org.exoplatform.services.attachments.listener.LinkNoteAttachmentsOnSaveListener</type>
+      <type>org.exoplatform.services.attachments.listener.NoteAttachmentUpdateListener</type>
     </component-plugin>
 
   </external-component-plugins>
