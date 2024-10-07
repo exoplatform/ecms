@@ -51,6 +51,8 @@ import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
@@ -247,7 +249,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     List<PortalConfig> portalConfigs = WCMCoreUtils.getAllElementsOfListAccess(pageList);
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(PortalConfig portalConfig : portalConfigs) {
-      if(userACL.hasPermission(portalConfig)) {
+      if(userACL.hasAccessPermission(portalConfig, getCurrentIdentity())) {
         listPortalName.add(portalConfig.getName());
       }
     }
@@ -357,4 +359,10 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     changeState(node, newState, context);
 
   }
+
+  private static Identity getCurrentIdentity() {
+    ConversationState conversationState = ConversationState.getCurrent();
+    return conversationState == null ? null : conversationState.getIdentity();
+  }
+
 }

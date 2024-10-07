@@ -214,8 +214,7 @@ public class PortalLinkConnector implements ResourceContainer {
     rootElement.appendChild(foldersElement);
     for (Object object : pageList.getAll()) {
       PortalConfig config = (PortalConfig) object;
-//      if (!portalUserACL.hasPermission(config, userId)) {
-      if (!portalUserACL.hasPermission(config)) {
+      if (!portalUserACL.hasAccessPermission(config, ConversationState.getCurrent().getIdentity())) {
         continue;
       }
       Element folderElement = rootElement.getOwnerDocument().createElement("Folder");

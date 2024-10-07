@@ -27,6 +27,7 @@ import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -79,7 +80,7 @@ public class UIPublicationPagesContainer extends UIContainer {
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(Object object:pageList.getAll()) {
       PortalConfig portalConfig = (PortalConfig)object;
-      if(userACL.hasPermission(portalConfig)) {
+      if(userACL.hasAccessPermission(portalConfig, ConversationState.getCurrent().getIdentity())) {
         listPortalName.add(portalConfig.getName());
       }
     }

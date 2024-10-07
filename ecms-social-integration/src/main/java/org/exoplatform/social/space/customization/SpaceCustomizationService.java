@@ -316,11 +316,7 @@ public class SpaceCustomizationService {
                                           customSpaceHomePage.getFactoryId(),
                                           customSpaceHomePage.getAccessPermissions() != null ? Arrays.asList(customSpaceHomePage.getAccessPermissions())
                                                                                              : null,
-                                          customSpaceHomePage.getEditPermission(),
-                                          customSpaceHomePage.getMoveAppsPermissions() != null ? Arrays.asList(customSpaceHomePage.getMoveAppsPermissions())
-                                                                                               : null,
-                                          customSpaceHomePage.getMoveContainersPermissions() != null ? Arrays.asList(customSpaceHomePage.getMoveContainersPermissions())
-                                                                                                     : null);
+                                          customSpaceHomePage.getEditPermission());
 
       pageService.savePage(new PageContext(pageKey, pageState));
       dataStorageService.save(customSpaceHomePage);

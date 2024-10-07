@@ -443,21 +443,6 @@
   </component>
 
   <component>
-    <key>org.gatein.api.oauth.OAuthProviderAccessor</key>
-    <type>org.gatein.api.oauth.BasicOAuthProviderAccessorImpl</type>
-  </component>
-
-  <component>
-    <key>org.gatein.security.oauth.spi.OAuthProviderTypeRegistry</key>
-    <type>org.gatein.security.oauth.registry.OAuthProviderTypeRegistryImpl</type>
-  </component>
-
-  <component>
-    <key>org.gatein.security.oauth.spi.SocialNetworkService</key>
-    <type>org.gatein.security.oauth.data.SocialNetworkServiceImpl</type>
-  </component>
-
-  <component>
     <type>org.exoplatform.web.security.codec.CodecInitializer</type>
     <init-params>
       <value-param>

@@ -53,6 +53,7 @@ import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleExc
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.core.UIComponent;
@@ -244,7 +245,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     List<PortalConfig> portalConfigs = WCMCoreUtils.getAllElementsOfListAccess(pageList);
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(PortalConfig portalConfig : portalConfigs) {
-      if(userACL.hasPermission(portalConfig)) {
+      if(userACL.hasAccessPermission(portalConfig, ConversationState.getCurrent().getIdentity())) {
         listPortalName.add(portalConfig.getName());
       }
     }
