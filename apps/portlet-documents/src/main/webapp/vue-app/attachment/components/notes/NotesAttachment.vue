@@ -52,10 +52,10 @@ export default {
       };
     },
     attachToEntity() {
-      return  this.entityId !== 0 && this.entityId !== null && this.entityType !== 'WIKI_PAGE_VERSIONS';
+      return !!this.entityId && this.entityType !== 'WIKI_PAGE_VERSIONS';
     },
     processAutoSave() {
-      return this.attachmentListUpdated && (this.entityId === 0 || this.entityId == null || this.entityType === 'WIKI_PAGE_VERSIONS');
+      return this.attachmentListUpdated && !this.attachToEntity;
     }
   },
   created() {
@@ -79,6 +79,7 @@ export default {
   },
   methods: {
     openAttachmentDrawer() {
+      this.originalAttachmentsList = [];
       this.attachments = [];
       if (this.entityId > 0 && this.entityType && this.spaceId && !this.isEmptyNoteTranslation) {
         this.initEntityAttachmentsList().then(() => {
