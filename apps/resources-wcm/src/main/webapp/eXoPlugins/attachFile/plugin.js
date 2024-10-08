@@ -28,34 +28,13 @@ CKEDITOR.plugins.add( 'attachFile', {
     editor.ui.addButton( 'attachFile', toolbar);
     if (isNotesEditorInstance) {
       editor.on('instanceReady', function() {
-        const buttonElement = document.querySelector('.cke_button__attachfile');
-        if (buttonElement) {
-          buttonElement.classList.add('cke_button_disabled');
-          buttonElement.style.setProperty('pointer-events', 'none');
-        }
         const iconElement = document.querySelector('.cke_button__attachfile_icon');
         if (iconElement) {
           iconElement.style.setProperty('background-size', '12px', 'important');
           iconElement.style.setProperty('background-position', '1px 1px', 'important');
         }
-
-        document.dispatchEvent(new CustomEvent('note-file-attach-plugin-button-initialized'))
       });
 
-      document.addEventListener('toggle-attach-button', function(event) {
-        const buttonElement = document.querySelector('.cke_button__attachfile');
-        if (buttonElement) {
-          if (event.detail && event.detail.enable) {
-            // If the event detail contains 'enable: true', remove the disabled class
-            buttonElement.classList.remove('cke_button_disabled');
-            buttonElement.style.removeProperty('pointer-events');
-          } else {
-            // Otherwise, add the disabled class
-            buttonElement.classList.add('cke_button_disabled');
-            buttonElement.style.setProperty('pointer-events', 'none');
-          }
-        }
-      });
     }
   }
 });

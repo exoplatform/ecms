@@ -30,7 +30,8 @@ export default {
       createEntityTypeFolder: false,
       displayCreateDocumentInput: false,
       originalAttachmentsList: [],
-      attachmentListUpdated: false
+      attachmentListUpdated: false,
+      isDrawerClosedEventHandled: false
     };
   },
   computed: {
@@ -51,22 +52,15 @@ export default {
       };
     },
     attachToEntity() {
-      return this.entityType !== 'WIKI_PAGE_VERSIONS';
+      return  this.entityId !== 0 && this.entityId !== null && this.entityType !== 'WIKI_PAGE_VERSIONS';
+    },
+    processAutoSave() {
+      return this.attachmentListUpdated && (this.entityId === 0 || this.entityId == null || this.entityType === 'WIKI_PAGE_VERSIONS');
     }
-  },
-  watch: {
-    entityId() {
-      this.refreshButtonDisplayRules();
-    },
-    isEmptyNoteTranslation() {
-      this.refreshButtonDisplayRules();
-    },
-
   },
   created() {
     document.addEventListener('open-notes-attachments', this.openAttachmentDrawer);
-    document.addEventListener('note-file-attach-plugin-button-initialized', this.refreshButtonDisplayRules);
-    document.addEventListener('attachments-app-drawer-closed', this.emitEditorExtensionsDataUpdatedEvent);
+    document.addEventListener('attachments-app-drawer-closed', this.handleDrawerClosedEvent);
     document.addEventListener('note-draft-auto-save-done', (event) => {
       if (this.attachmentListUpdated && event.detail.draftId) {
         this.updateLinkedAttachmentsToEntity(event.detail.draftId);
@@ -81,18 +75,26 @@ export default {
   beforeDestroy() {
     document.removeEventListener('note-draft-auto-save-done');
     document.removeEventListener('open-notes-attachments');
-    document.removeEventListener('note-file-attach-plugin-button-initialized');
     document.addEventListener('attachments-app-drawer-closed');
   },
   methods: {
     openAttachmentDrawer() {
-      if (this.entityId > 0 && this.entityType && this.spaceId){
-        this.attachments = [];
-        this.originalAttachmentsList = [];
+      this.attachments = [];
+      if (this.entityId > 0 && this.entityType && this.spaceId && !this.isEmptyNoteTranslation) {
         this.initEntityAttachmentsList().then(() => {
           document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
         });
-
+      } else {
+        document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
+      }
+    },
+    handleDrawerClosedEvent() {
+      if (!this.isDrawerClosedEventHandled) {
+        this.emitEditorExtensionsDataUpdatedEvent(event);
+        this.isDrawerClosedEventHandled = true;
+        setTimeout(() => {
+          this.isDrawerClosedEventHandled = false;
+        }, 1000);
       }
     },
     emitEditorExtensionsDataUpdatedEvent() {
@@ -102,20 +104,9 @@ export default {
       document.dispatchEvent(new CustomEvent('note-editor-extensions-data-updated', {
         detail: {
           showAutoSaveMessage: true,
-          processAutoSave: this.attachmentListUpdated && this.entityType === 'WIKI_PAGE_VERSIONS'
+          processAutoSave: this.processAutoSave
         }
       }));
-    },
-    refreshButtonDisplayRules() {
-      if (this.entityId && this.entityId !== 0 && !this.isEmptyNoteTranslation) {
-        document.dispatchEvent(new CustomEvent('toggle-attach-button', {
-          detail: { enable: true }
-        }));
-      } else {
-        document.dispatchEvent(new CustomEvent('toggle-attach-button', {
-          detail: { enable: false }
-        }));
-      }
     },
     initEntityAttachmentsList() {
       if (this.entityType && this.entityId) {
