@@ -210,7 +210,7 @@ export default {
     },
     updateUploadedFilesList() {
       this.attachments.forEach((attachment) => {
-        if (!this.newUploadedFiles.find((item) => item.title === attachment.title)) {
+        if (!this.newUploadedFiles.find((item) => item.id === attachment.id)) {
           this.newUploadedFiles.push(attachment);  // Push only if the attachment is not already there
         }
       });

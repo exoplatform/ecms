@@ -245,13 +245,6 @@ export default {
     defaultDrive() {
       this.initDefaultDestinationFolderPath(this.defaultFolder);
     },
-    newUploadedFilesInProgress(newVal) {
-      if (newVal) {
-        document.dispatchEvent(new CustomEvent('new-file-upload-progress'));
-      } else {
-        document.dispatchEvent(new CustomEvent('new-file-upload-done'));
-      }
-    }
   },
   created() {
     this.$root.$on('open-attachments-app-drawer', () => {
@@ -297,6 +290,8 @@ export default {
       this.$root.$emit('entity-attachments-updated');
       document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
     });
+    document.addEventListener('end-loading-attachment-drawer', this.endLoading);
+    document.addEventListener('start-loading-attachment-drawer', this.startLoading);
   },
   methods: {
     startLoading() {
@@ -611,7 +606,6 @@ export default {
           entityId: this.entityId,
         }})));
         this.uploadAddedAttachments();
-        document.dispatchEvent(new CustomEvent('attachment-added-from-drives'));
       }
     },
     abortUploadingNewFile(file) {

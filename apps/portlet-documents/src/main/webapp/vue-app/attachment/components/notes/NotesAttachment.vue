@@ -31,7 +31,8 @@ export default {
       displayCreateDocumentInput: false,
       originalAttachmentsList: [],
       attachmentListUpdated: false,
-      isDrawerClosedEventHandled: false
+      isDrawerClosedEventHandled: false,
+      initDone: false
     };
   },
   computed: {
@@ -82,12 +83,14 @@ export default {
       this.originalAttachmentsList = [];
       this.attachments = [];
       if (this.entityId > 0 && this.entityType && this.spaceId && !this.isEmptyNoteTranslation) {
+        this.initDone = false;
+        this.waitInit();
         this.initEntityAttachmentsList().then(() => {
-          document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
+          this.initDone = true;
+          document.dispatchEvent(new CustomEvent('end-loading-attachment-drawer'));
         });
-      } else {
-        document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
       }
+      document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
     },
     handleDrawerClosedEvent() {
       if (!this.isDrawerClosedEventHandled) {
@@ -102,12 +105,14 @@ export default {
       const attachmentAdded = this.attachments.filter((item) => !this.originalAttachmentsList.some(originalItem => originalItem.id === item.id)).length > 0;
       const attachmentRemoved = this.originalAttachmentsList.filter((originalItem) => !this.attachments.some(item => item.id === originalItem.id)).length > 0;
       this.attachmentListUpdated = attachmentRemoved || attachmentAdded;
-      document.dispatchEvent(new CustomEvent('note-editor-extensions-data-updated', {
-        detail: {
-          showAutoSaveMessage: true,
-          processAutoSave: this.processAutoSave
-        }
-      }));
+      if (this.attachmentListUpdated) {
+        document.dispatchEvent(new CustomEvent('note-editor-extensions-data-updated', {
+          detail: {
+            showAutoSaveMessage: true,
+            processAutoSave: this.processAutoSave
+          }
+        }));
+      }
     },
     initEntityAttachmentsList() {
       if (this.entityType && this.entityId) {
@@ -121,6 +126,15 @@ export default {
           }
         });
       } else {return Promise.resolve();}
+    },
+    waitInit() {
+      setTimeout(() => {
+        if (!this.initDone) {
+          document.dispatchEvent(new CustomEvent('start-loading-attachment-drawer'));
+        } else {
+          this.waitInit();
+        }
+      }, 200);
     },
     updateLinkedAttachmentsToEntity(entityId) {
       const attachmentIds = this.attachments.filter(attachment => attachment.id).map(attachment => attachment.id);
