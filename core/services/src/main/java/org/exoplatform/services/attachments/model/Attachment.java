@@ -58,6 +58,8 @@ public class Attachment implements Cloneable {
   
   private boolean                       cloudDrive;
 
+  private boolean                       eXoDrive;
+
   @Override
   public Attachment clone() { // NOSONAR
     return new Attachment(id,
@@ -75,6 +77,7 @@ public class Attachment implements Cloneable {
                           openUrl,
                           previewBreadcrumb,
                           version,
-                          cloudDrive);
+                          cloudDrive,
+                          eXoDrive);
   }
 }

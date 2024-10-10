@@ -62,7 +62,8 @@ public class EntityBuilder {
                                 attachment.getOpenUrl(),
                                 attachment.getPreviewBreadcrumb(),
                                 attachment.getVersion(),
-                                attachment.isCloudDrive()
+                                attachment.isCloudDrive(),
+                                attachment.isEXoDrive()
 
     );
   }

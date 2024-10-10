@@ -753,7 +753,7 @@ export default {
         file.isSelectedFromDrives = true;
         const alreadyAttachedFile = this.attachedFiles.find(f => f.id === file.id);
         if (!alreadyAttachedFile) {
-          this.selectedFiles.push({...file, space: this.fromSpace});
+          this.selectedFiles.push({...file, space: this.fromSpace , eXoDrive: true});
         }
         const alreadyRemovedFileIndex = this.removedFiles.findIndex(f => f.id === file.id);
         if (alreadyRemovedFileIndex !== -1) {

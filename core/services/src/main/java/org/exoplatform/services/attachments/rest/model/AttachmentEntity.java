@@ -60,6 +60,8 @@ public class AttachmentEntity {
   
   private boolean                       cloudDrive;
 
+  private boolean                       eXoDrive;
+
   @Override
   public AttachmentEntity clone() { // NOSONAR
     return new AttachmentEntity(id,
@@ -77,7 +79,8 @@ public class AttachmentEntity {
                                 openUrl,
                                 previewBreadcrumb,
                                 version,
-                                cloudDrive);
+                                cloudDrive,
+                                eXoDrive);
   }
 
 }
