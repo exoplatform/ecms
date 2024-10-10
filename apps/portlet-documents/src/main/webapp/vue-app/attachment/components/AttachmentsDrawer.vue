@@ -1,7 +1,13 @@
 <template>
   <div class="attachments-drawer">
+    <v-overlay
+      v-if="showCustomDrawerOverlay"
+      z-index="1200"
+      :value="drawer"
+      @click.native="closeDrawersByOverlay" />
     <exo-drawer
       ref="attachmentsAppDrawer"
+      v-model="drawer"
       :confirm-close="newUploadedFilesInProgress"
       :confirm-close-labels="confirmAbortUploadLabels"
       class="attachmentsAppDrawer"
@@ -23,7 +29,7 @@
             {{ $t('attachments.alert.sharing.availableFor') }} <b>{{ currentSpaceDisplayName }}</b> {{ $t('attachments.alert.sharing.members') }}
           </div>
           <attachment-create-document-input
-            v-if="(!entityType && ! entityId) || !attachToEntity"
+            v-if="(!entityType && !entityId) || !attachToEntity && displayCreateDocumentInput"
             :attachments="attachments"
             :max-files-count="maxFilesCount"
             :max-files-size="maxFileSize"
@@ -45,15 +51,19 @@
             :max-files-count="maxFilesCount"
             :current-space="currentSpace"
             :current-drive="currentDrive"
+            :default-folder="defaultFolder"
+            :display-uploaded-files="displayUploadedFiles"
             :entity-id="entityId"
             :entity-type="entityType" />
         </div>
         <attachments-drive-explorer-drawer
+          ref="attachmentsDriveExplorerDrawer"
           :entity-id="entityId"
           :entity-type="entityType"
           :default-drive="defaultDrive"
           :extension-refs="$refs"
           :default-folder="defaultFolder"
+          :create-entity-type-folder="createEntityTypeFolder"
           :attached-files="attachments" />
         <div
           v-for="action in attachmentsComposerActions"
@@ -130,6 +140,22 @@ export default {
       type: {},
       default: () => null
     },
+    displayUploadedFiles: {
+      type: Boolean,
+      default: false
+    },
+    createEntityTypeFolder: {
+      type: Boolean,
+      default: true
+    },
+    showCustomDrawerOverlay: {
+      type: Boolean,
+      default: false
+    },
+    displayCreateDocumentInput: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -157,7 +183,8 @@ export default {
       attachmentsChanged: false,
       newUploadedFiles: [],
       creationType: '',
-      saveMode: 'keep'
+      saveMode: 'keep',
+      drawer: false
     };
   },
   computed: {
@@ -220,7 +247,6 @@ export default {
     },
   },
   created() {
-    
     this.$root.$on('open-attachments-app-drawer', () => {
       this.attachmentsChanged = false;
       this.openAttachmentsAppDrawer();
@@ -264,6 +290,8 @@ export default {
       this.$root.$emit('entity-attachments-updated');
       document.dispatchEvent(new CustomEvent('entity-attachments-updated'));
     });
+    document.addEventListener('end-loading-attachment-drawer', this.endLoading);
+    document.addEventListener('start-loading-attachment-drawer', this.startLoading);
   },
   methods: {
     startLoading() {
@@ -294,6 +322,7 @@ export default {
       this.$root.$emit('reset-attachments-upload-input');
       document.removeEventListener('paste', this.onPaste, false);
       this.$refs.attachmentsAppDrawer.close();
+      document.dispatchEvent(new CustomEvent('attachments-app-drawer-closed'));
     },
     uploadAddedAttachments() {
       if (this.newUploadedFilesAdded) { //added new uploaded files
@@ -626,6 +655,19 @@ export default {
         };
         document.dispatchEvent(new CustomEvent('exo-statistic-message', {detail: fileAnalytics}));
       }
+    },
+    closeDrawersByOverlay() {
+      if (!this.isDriveExplorerDrawerClosed()) {
+        this.closeAttachmentsDriveExplorerDrawer();
+        return;
+      }
+      this.closeAttachmentsAppDrawer();
+    },
+    isDriveExplorerDrawerClosed() {
+      return this.$refs.attachmentsDriveExplorerDrawer.isClosed();
+    },
+    closeAttachmentsDriveExplorerDrawer() {
+      this.$refs.attachmentsDriveExplorerDrawer.closeAttachmentsDriveExplorerDrawer();
     }
   }
 };
