@@ -25,7 +25,7 @@ CKEDITOR.plugins.add( 'attachFile', {
       command: 'attachFile',
       toolbar: 'insert'
     };
-    editor.ui.addButton( 'attachFile', toolbar);
+    editor.ui.addButton('attachFile', toolbar);
     if (isNotesEditorInstance) {
       editor.on('instanceReady', function() {
         const iconElement = document.querySelector('.cke_button__attachfile_icon');
