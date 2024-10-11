@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
-			   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+               xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+               xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
 
   <component>
     <type>org.exoplatform.wcm.ext.component.identity.provider.DocumentIdentityProvider</type>
@@ -83,6 +83,11 @@
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.search.listener.DocumentsMetadataListener</type>
     </component-plugin>
+    <component-plugin>
+      <name>content.update.permissions</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.attachments.listener.UpdateContentPermissionsListener</type>
+    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>
@@ -145,7 +150,7 @@
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.documents.DocumentService</target-component>
   </external-component-plugins>
-  
+
   <external-component-plugins>
     <target-component>org.exoplatform.groovyscript.text.TemplateService</target-component>
     <component-plugin>
