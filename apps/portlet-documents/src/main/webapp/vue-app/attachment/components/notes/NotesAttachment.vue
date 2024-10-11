@@ -1,5 +1,20 @@
-
+<template>
+  <span v-if="displayAttachmentIcon">
+    <v-icon
+      size="16"
+      @click="openAttachmentsList">
+    fa-solid fa-paperclip
+    </v-icon>
+    <attachments-list-drawer
+      ref="attachmentsListDrawer"
+      :attachments="attachments"
+      :allow-to-detach="false"
+      :display-open-attachment-drawer-button="false"
+      :open-attachments-in-editor="false" />
+  </span>
+</template>
 <script>
+
 export default {
   props: {
     entityId: {
@@ -21,6 +36,10 @@ export default {
     isEmptyNoteTranslation: {
       type: Boolean,
       default: false
+    },
+    editMode: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -35,7 +54,19 @@ export default {
       initDone: false
     };
   },
+  watch: {
+    entityId() {
+      if (!this.editMode) {
+        this.originalAttachmentsList = [];
+        this.attachments = [];
+        this.initEntityAttachmentsList();
+      }
+    }
+  },
   computed: {
+    displayAttachmentIcon() {
+      return !this.editMode && this.attachments.length > 0;
+    },
     attachmentAppConfiguration() {
       return {
         'entityId': this.entityId,
@@ -57,9 +88,12 @@ export default {
     },
     processAutoSave() {
       return this.attachmentListUpdated && !this.attachToEntity;
-    }
+    },
   },
   created() {
+    if (!this.editMode) {
+      this.initEntityAttachmentsList();
+    }
     document.addEventListener('open-notes-attachments', this.openAttachmentDrawer);
     document.addEventListener('attachments-app-drawer-closed', this.handleDrawerClosedEvent);
     document.addEventListener('note-draft-auto-save-done', (event) => {
@@ -91,6 +125,9 @@ export default {
         });
       }
       document.dispatchEvent(new CustomEvent('open-attachments-app-drawer', {detail: this.attachmentAppConfiguration}));
+    },
+    openAttachmentsList() {
+      this.$root.$emit('open-attachments-list-drawer');
     },
     handleDrawerClosedEvent() {
       if (!this.isDrawerClosedEventHandled) {
