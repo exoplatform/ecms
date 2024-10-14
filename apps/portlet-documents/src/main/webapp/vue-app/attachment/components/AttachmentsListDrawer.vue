@@ -18,6 +18,7 @@
     </template>
     <template slot="titleIcons">
       <v-btn
+        v-if="displayOpenAttachmentDrawerButton"
         icon
         color="primary"
         @click="openAttachmentsAppDrawer()">
@@ -41,6 +42,7 @@
               :is-file-editable="isFileEditable(attachment)"
               :allow-to-edit="false"
               :attachment="attachment"
+              :allow-to-detach="allowToDetach"
               :can-access="attachment.acl && attachment.acl.canAccess"
               allow-to-preview />
           </span>
@@ -72,6 +74,14 @@ export default {
     openAttachmentsInEditor: {
       type: Boolean,
       default: () => false
+    },
+    allowToDetach: {
+      type: Boolean,
+      default: true
+    },
+    displayOpenAttachmentDrawerButton: {
+      type: Boolean,
+      default: true
     }
   },
   created() {
