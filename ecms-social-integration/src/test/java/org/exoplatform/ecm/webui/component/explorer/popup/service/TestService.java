@@ -236,7 +236,7 @@ public class TestService extends AbstractKernelTest {
     space.setPendingUsers(pendingUsers);
     space.setManagers(managers);
     space.setMembers(members);
-    spaceService.saveSpace(space, true);
+    spaceService.createSpace(space);
     return space;
   }
   
