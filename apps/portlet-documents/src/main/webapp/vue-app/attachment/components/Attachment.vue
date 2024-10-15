@@ -13,6 +13,11 @@
         :default-folder="defaultFolder"
         :current-space="currentSpace"
         :attach-to-entity="attachToEntity"
+        :display-uploaded-files="displayUploadedFilesList"
+        :source-app="sourceApp"
+        :show-custom-drawer-overlay="showCustomDrawerOverlay"
+        :display-create-document-input="displayCreateDocumentInput"
+        :create-entity-type-folder="createEntityTypeFolder"
         :files="files" />
       <attachments-list-drawer
         ref="attachmentsListDrawer"
@@ -39,12 +44,19 @@ export default {
       drawerList: false,
       attachToEntity: true,
       supportedDocuments: null,
-      openAttachmentsInEditor: false
+      openAttachmentsInEditor: false,
+      displayUploadedFiles: false,
+      createEntityTypeFolder: true,
+      showCustomDrawerOverlay: false,
+      displayCreateDocumentInput: true
     };
   },
   computed: {
     entityHasAttachments() {
       return this.attachments && this.attachments.length;
+    },
+    displayUploadedFilesList() {
+      return this.displayUploadedFiles;
     }
   },
   created() {
@@ -139,6 +151,10 @@ export default {
       this.entityType = config.entityType;
       this.entityId = config.entityId;
       this.openAttachmentsInEditor = config.openAttachmentsInEditor || false;
+      this.displayUploadedFiles = config.displayUploadedFiles;
+      this.createEntityTypeFolder = config.createEntityTypeFolder;
+      this.showCustomDrawerOverlay = config.showCustomDrawerOverlay;
+      this.displayCreateDocumentInput = config.displayCreateDocumentInput;
     },
     startLoadingList() {
       if (this.drawerList && this.$refs.attachmentsListDrawer) {

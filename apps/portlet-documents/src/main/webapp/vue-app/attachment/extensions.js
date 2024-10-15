@@ -3,6 +3,7 @@ export function installExtensions() {
   CKEDITOR.plugins.addExternal('uploadImage', '/eXoWCMResources/eXoPlugins/uploadImage/', 'plugin.js');
   CKEDITOR.plugins.addExternal('selectImage', '/eXoWCMResources/eXoPlugins/selectImage/', 'plugin.js');
 
+  installNoteEditorExtensions();
   extensionRegistry.registerComponent('ActivityContent', 'activity-content-extensions', {
     id: 'attachments',
     isEnabled: (params) => {
@@ -38,8 +39,7 @@ export function installExtensions() {
   extensionRegistry.registerExtension('ActivityComposer', 'ckeditor-extensions', {
     id: 'attachFile',
     extraPlugin: 'attachFile',
-    extraToolbarItem: 'attachFile',
-    rank: 10,
+    extraToolbarItem: 'attachFile'
   });
 
   extensionRegistry.registerExtension('WYSIWYGPlugins', 'image', {
@@ -139,4 +139,18 @@ export function installExtensions() {
     vueComponent: Vue.options.components['content-attachment-list'],
     rank: 10,
   });
+}
+function installNoteEditorExtensions() {
+  extensionRegistry.registerExtension('NotesEditor', 'ckeditor-extensions', {
+    id: 'attachFile',
+    extraPlugin: 'attachFile',
+    rank: 30,
+  });
+
+  extensionRegistry.registerComponent('NotesRichEditor', 'notes-editor-extensions', {
+    id: 'notes-attachment',
+    vueComponent: Vue.options.components['notes-attachment'],
+    rank: 10,
+  });
+  document.dispatchEvent(new CustomEvent('notes-editor-extensions-updated'));
 }

@@ -363,6 +363,10 @@ export default {
       type: String,
       default: ''
     },
+    createEntityTypeFolder: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -609,7 +613,7 @@ export default {
         }
         this.openDrive(this.defaultDrive, null, parentFolder).then(() => {
           const defaultFolder = self.folders.find(folder => folder.name === self.defaultFolder.split('/').pop());
-          if (self.entityType) {
+          if (self.entityType && self.createEntityTypeFolder) {
             this.createEntityTypeAndIdFolders(defaultFolder);
           }
           //if both default drive and default folder exist
@@ -1125,7 +1129,10 @@ export default {
     resetDriveExplorer() {
       this.selectedFiles = [];
       this.removedFiles = [];
-    }
+    },
+    isClosed() {
+      return this.$refs.driveExplorerDrawer.$el.classList.contains('v-navigation-drawer--close');
+    },
   }
 };
 </script>

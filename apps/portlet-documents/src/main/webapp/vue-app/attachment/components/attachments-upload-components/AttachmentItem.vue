@@ -160,6 +160,10 @@ export default {
       type: {},
       default: () => null
     },
+    defaultFolder: {
+      type: String,
+      default: ''
+    },
   },
   data() {
     return {
@@ -286,6 +290,9 @@ export default {
           color: '#476A9C',
         };
       }
+    },
+    attachmentDefaultFolderName() {
+      return this.defaultFolder || null ;
     }
   },
   watch: {
@@ -305,6 +312,10 @@ export default {
       }
     },
     openSelectDestinationFolderForFile(attachment) {
+      if (attachment && !attachment.fileDrive && this.currentDrive && this.attachmentDefaultFolderName) {
+        attachment.fileDrive = this.currentDrive;
+        attachment.pathDestinationFolderForFile = this.attachmentDefaultFolderName;
+      }
       this.$root.$emit('change-attachment-destination-path', attachment);
     },
     absoluteDateModified(options) {

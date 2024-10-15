@@ -112,6 +112,7 @@
             :allow-to-preview="false"
             :current-space="currentSpace"
             :current-drive="currentDrive"
+            :default-folder="defaultFolder"
             :entity-id="entityId"
             :allow-to-detach="allowToDetach"
             allow-to-edit />
@@ -156,8 +157,19 @@ export default {
       type: String,
       default: ''
     },
+    defaultFolder: {
+      type: String,
+      default: ''
+    },
+    displayUploadedFiles: {
+      type: Boolean,
+      default: false
+    }
   },
   created() {
+    if (this.displayUploadedFiles) {
+      this.updateUploadedFilesList();
+    }
     this.$root.$on('refresh-uploaded-files-list', () => {
       this.$forceUpdate();
       this.endLoadingAttachmentDrawer();
@@ -171,6 +183,21 @@ export default {
       return !!this.entityId && !!this.entityType;
     },
   },
+  watch: {
+    displayUploadedFiles(newVal) {
+      if (newVal) {
+        this.updateUploadedFilesList();
+      }
+    },
+    attachments: {
+      handler() {
+        if (this.displayUploadedFiles) {
+          this.updateUploadedFilesList();
+        }
+      },
+      deep: true
+    }
+  },
   methods: {
     openSelectDestinationFolderDrawer() {
       this.$root.$emit('open-drive-explorer-drawer', this.currentDrive);
@@ -180,6 +207,13 @@ export default {
       if (!isLoadingDrawer) {
         this.$root.$emit('end-loading-attachment-drawer');
       }
+    },
+    updateUploadedFilesList() {
+      this.attachments.forEach((attachment) => {
+        if (!this.newUploadedFiles.find((item) => item.id === attachment.id)) {
+          this.newUploadedFiles.push(attachment);  // Push only if the attachment is not already there
+        }
+      });
     }
   }
 };
