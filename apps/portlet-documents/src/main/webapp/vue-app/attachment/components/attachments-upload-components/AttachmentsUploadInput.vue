@@ -131,7 +131,7 @@ export default {
           }.bind(this));
 
           document.addEventListener('dragover', function () {
-            this.$refs.dropFileBox.classList.add('dragStart');
+            this.$refs.dropFileBox?.classList.add('dragStart');
           }.bind(this));
 
           /*
@@ -144,11 +144,11 @@ export default {
           }.bind(this));
 
           document.addEventListener('dragleave', function () {
-            this.$refs.dropFileBox.classList.remove('dragStart');
+            this.$refs.dropFileBox?.classList.remove('dragStart');
           }.bind(this));
 
           document.addEventListener('drop', function () {
-            this.$refs.dropFileBox.classList.remove('dragStart');
+            this.$refs.dropFileBox?.classList.remove('dragStart');
           }.bind(this));
 
           window.require(['SHARED/jquery'], function ($) {
@@ -162,60 +162,63 @@ export default {
       this.$refs.uploadInput.click();
     },
     handleFileUpload: function (files) {
-      this.abortUploading = false;
-      const newFilesArray = Array.from(files);
+      if (this.$refs.uploadInput){
+        this.abortUploading = false;
+        const newFilesArray = Array.from(files);
 
-      newFilesArray.sort(function (file1, file2) {
-        return file1.size - file2.size;
-      });
-
-      this.newUploadedFiles = [];
-      const newAttachedFiles = [];
-      newFilesArray.forEach(file => {
-        const controller = new AbortController();
-        const signal = controller.signal;
-        newAttachedFiles.push({
-          originalFileObject: file,
-          fileDrive: this.currentDrive,
-          title: file.name,
-          size: file.size,
-          mimetype: file.type,
-          acl: file.acl,
-          uploadId: this.getNewUploadId(),
-          uploadProgress: 0,
-          destinationFolder: this.pathDestinationFolder,
-          pathDestinationFolderForFile: '',
-          isPublic: true,
-          signal: signal
+        newFilesArray.sort(function (file1, file2) {
+          return file1.size - file2.size;
         });
-      });
 
-      const existingAttachedFiles = newAttachedFiles.filter(file => this.attachments.some(f => f.title === file.title));
-      if (existingAttachedFiles.length > 0) {
-        const existingFiles = existingAttachedFiles.length === 1 ? existingAttachedFiles.map(file => file.title) : existingAttachedFiles.length;
-        let sameFileErrorMessage = existingAttachedFiles.length === 1 ? this.$t('attachments.drawer.sameFile.error') : this.$t('attachments.drawer.sameFiles.error');
-        sameFileErrorMessage = sameFileErrorMessage.replace('{0}', `<b> ${existingFiles} </b>`);
-        document.dispatchEvent(new CustomEvent('alert-message', {detail: {
-          useHtml: true,
-          alertType: 'error',
-          alertMessage: sameFileErrorMessage,
-        }}));
-      }
+        this.newUploadedFiles = [];
+        const newAttachedFiles = [];
+        newFilesArray.forEach(file => {
+          const controller = new AbortController();
+          const signal = controller.signal;
+          newAttachedFiles.push({
+            originalFileObject: file,
+            fileDrive: this.currentDrive,
+            title: file.name,
+            size: file.size,
+            mimetype: file.type,
+            acl: file.acl,
+            uploadId: this.getNewUploadId(),
+            uploadProgress: 0,
+            destinationFolder: this.pathDestinationFolder,
+            pathDestinationFolderForFile: '',
+            isPublic: true,
+            signal: signal
+          });
+        });
 
-      newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).every((newFile, index) => {
-        if (index === this.maxFilesCount || this.maxFilesCount === 0 || this.uploadedFilesCount >= this.maxFilesCount) {
+        const existingAttachedFiles = newAttachedFiles.filter(file => this.attachments.some(f => f.title === file.title));
+        if (existingAttachedFiles.length > 0) {
+          const existingFiles = existingAttachedFiles.length === 1 ? existingAttachedFiles.map(file => file.title) : existingAttachedFiles.length;
+          let sameFileErrorMessage = existingAttachedFiles.length === 1 ? this.$t('attachments.drawer.sameFile.error') : this.$t('attachments.drawer.sameFiles.error');
+          sameFileErrorMessage = sameFileErrorMessage.replace('{0}', `<b> ${existingFiles} </b>`);
           document.dispatchEvent(new CustomEvent('alert-message', {detail: {
             useHtml: true,
             alertType: 'error',
-            alertMessage: this.maxFileCountErrorLabel,
+            alertMessage: sameFileErrorMessage,
           }}));
-          return false;
-        } else {
-          this.queueUpload(newFile);
-          return true;
         }
-      });
-      this.$refs.uploadInput.value = null;
+
+        newAttachedFiles.filter(file => !this.attachments.some(f => f.title === file.title)).every((newFile, index) => {
+          if (index === this.maxFilesCount || this.maxFilesCount === 0 || this.uploadedFilesCount >= this.maxFilesCount) {
+            document.dispatchEvent(new CustomEvent('alert-message', {detail: {
+              useHtml: true,
+              alertType: 'error',
+              alertMessage: this.maxFileCountErrorLabel,
+            }}));
+            return false;
+          } else {
+            this.queueUpload(newFile);
+            return true;
+          }
+        });
+        this.$refs.uploadInput.value = null;
+      
+      }
     },
     queueUpload: function (file) {
       const fileSizeInMb = file.size / this.BYTES_IN_MB;
