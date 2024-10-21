@@ -19,7 +19,10 @@ package org.exoplatform.services.attachments.listener;
 
 import groovy.util.logging.Commons;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -37,6 +40,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.jcr.Session;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +55,9 @@ public class UpdateContentPermissionsListenerTest {
   @Mock
   private RepositoryService               repositoryService;
 
+  @Mock
+  private AttachmentStorage               attachmentStorage;
+
   private UpdateContentPermissionsListener shareAttachmentsToSpaceListener;
 
   private MockedStatic<Utils>             UTILS = mockStatic(Utils.class);
@@ -59,9 +66,11 @@ public class UpdateContentPermissionsListenerTest {
 
   private MockedStatic<PortalContainer>   PORTAL_CONTAINER = mockStatic(PortalContainer.class);
 
+  private static MockedStatic<ExoContainerContext> EXO_CONTAINER_CONTEXT = mockStatic(ExoContainerContext.class);
+
   @Before
   public void setUp() throws Exception {
-    this.shareAttachmentsToSpaceListener = new UpdateContentPermissionsListener(repositoryService, sessionProviderService);
+    this.shareAttachmentsToSpaceListener = new UpdateContentPermissionsListener(repositoryService, attachmentStorage);
   }
 
   @After
@@ -69,6 +78,7 @@ public class UpdateContentPermissionsListenerTest {
     UTILS.close();
     COMMONS_UTILS.close();
     PORTAL_CONTAINER.close();
+    EXO_CONTAINER_CONTEXT.close();
   }
 
   @Test
@@ -76,11 +86,8 @@ public class UpdateContentPermissionsListenerTest {
     Space space = new Space();
     space.setDisplayName("test space");
     space.setGroupId("/spaces/test");
-    List<String> attachmentIds = new ArrayList<>();
-    attachmentIds.add("123");
-    attachmentIds.add("456");
-    Map<String, Object> params = Map.of("attachmentsIds",
-                                        attachmentIds,
+    Map<String, Object> params = Map.of("latestVersionId",
+                                        "1",
                                         "audience",
                                         "all",
                                         "space",
@@ -100,17 +107,21 @@ public class UpdateContentPermissionsListenerTest {
     COMMONS_UTILS.when(() -> CommonsUtils.getRestContextName()).thenReturn(restContextName);
     PORTAL_CONTAINER.when(() -> PortalContainer.getCurrentPortalContainerName()).thenReturn(currentPortalContainerName);
     COMMONS_UTILS.when(() -> CommonsUtils.getCurrentDomain()).thenReturn(currentDomainName);
+    EXO_CONTAINER_CONTEXT.when(() -> ExoContainerContext.getService(SessionProviderService.class)).thenReturn(sessionProviderService);
 
     when(session.getItem(nullable(String.class))).thenReturn(existingUploadedNewsImageNode);
     String nodePath = "Groups/spaces/test/testimage";
     when(existingUploadedNewsImageNode.getPath()).thenReturn(nodePath);
     when(existingUploadedNewsImageNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)).thenReturn(true);
+    Attachment attachment = new Attachment();
+    attachment.setId("123");
+    when(attachmentStorage.getAttachmentsByEntity(1, "WIKI_PAGE_VERSIONS")).thenReturn(List.of(attachment));
 
     UTILS.when(() -> Utils.getSystemSession(sessionProviderService, repositoryService)).thenReturn(session);
 
     shareAttachmentsToSpaceListener.onEvent(new Event("content.share.attachments", null, params));
-    verify(attachmentNode, times(3)).setPermission(anyString(), any());
-    verify(attachmentNode, times(3)).save();
+    verify(attachmentNode, times(2)).setPermission(anyString(), any());
+    verify(attachmentNode, times(2)).save();
     verify(existingUploadedNewsImageNode, times(1)).setPermission(anyString(), any());
     verify(existingUploadedNewsImageNode, times(1)).save();
 
