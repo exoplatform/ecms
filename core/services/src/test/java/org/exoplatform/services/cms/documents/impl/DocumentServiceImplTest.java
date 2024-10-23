@@ -6,7 +6,6 @@ import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
-import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -162,7 +161,7 @@ public class DocumentServiceImplTest {
     when(portalConfig.getName()).thenReturn("dw");
     when(userPortalConfigService.getMetaPortal()).thenReturn("dw");
     when(userPortalConfig.getPortalConfig()).thenReturn(portalConfig);
-    when(userPortalConfigService.getUserPortalConfig(anyString(), anyString(), any(UserPortalContext.class))).thenReturn(userPortalConfig);
+    when(userPortalConfigService.getUserPortalConfig(anyString(), anyString())).thenReturn(userPortalConfig);
     WCM_CORE_UTILS.when(() -> WCMCoreUtils.getService(UserPortalConfigService.class)).thenReturn(userPortalConfigService);
     personalDrive = new DriveData();
     personalDrive.setLabel("Personal drive");

@@ -1,19 +1,17 @@
 package org.exoplatform.services.ecm.dms.documents;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.gatein.pc.api.PortletInvoker;
-import org.mockito.Mockito;
 
 public class TestTrashService extends BaseWCMTestCase {
 
@@ -90,8 +88,8 @@ public class TestTrashService extends BaseWCMTestCase {
   	Node trashNode = rootNode.addNode("Trash");
   	Node testNode = rootNode.addNode("TestNode");
   	Node documentNode = testNode.addNode("Documents");
-  	Node taxonomyNode = rootNode.addNode("exo:ecm").addNode("exo:taxonomyTrees").addNode("storage").addNode("System");
-  	
+  	Node taxonomyNode = getOrAdd(rootNode, "exo:ecm", "exo:taxonomyTrees", "storage", "System");
+
   	Node node0 = documentNode.addNode("node0");
   	node0.addMixin(MIX_REFERENCEABLE);
   	LinkManager linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
@@ -279,7 +277,7 @@ public class TestTrashService extends BaseWCMTestCase {
   	Node trashNode = rootNode.addNode("Trash");
   	Node testNode = rootNode.addNode("TestNode");
   	Node documentNode = testNode.addNode("Documents");
-  	Node taxonomyNode = rootNode.addNode("exo:ecm").addNode("exo:taxonomyTrees").addNode("storage").addNode("System");
+    Node taxonomyNode = getOrAdd(rootNode, "exo:ecm", "exo:taxonomyTrees", "storage", "System");
   	
   	Node node0 = documentNode.addNode("node0");
   	node0.addMixin(MIX_REFERENCEABLE);
@@ -562,6 +560,17 @@ public class TestTrashService extends BaseWCMTestCase {
     testNode.remove();
     session.save();
   }
-  
+
+  private Node getOrAdd(Node rootNode, String ...paths) throws RepositoryException {
+    Node taxonomyNode = rootNode;
+    for (String path : Arrays.asList(paths)) {
+      taxonomyNode = getOrAdd(taxonomyNode, path);
+    }
+    return taxonomyNode;
+  }
+
+  private Node getOrAdd(Node rootNode, String path) throws RepositoryException {
+    return rootNode.hasNode(path) ? rootNode.getNode(path) : rootNode.addNode(path);
+  }
 
 }

@@ -98,10 +98,6 @@
     </dependency>
     <dependency>
       <groupId>io.meeds.portal</groupId>
-      <artifactId>portal.component.web.server</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.meeds.portal</groupId>
       <artifactId>portal.webui.portal</artifactId>
     </dependency>
     <dependency>
