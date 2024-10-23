@@ -91,11 +91,6 @@
       <artifactId>portal.component.web.controller</artifactId>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
-      <groupId>io.meeds.portal</groupId>
-      <artifactId>portal.component.web.server</artifactId>
-      <scope>runtime</scope>
-    </dependency>
   </dependencies>
   <build>
     <finalName>ecm-wcm-core</finalName>

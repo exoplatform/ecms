@@ -41,7 +41,6 @@ import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvide
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
-import org.exoplatform.social.core.space.impl.DefaultSpaceApplicationHandler;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.document.service.IShareDocumentService;
@@ -222,10 +221,8 @@ public class TestService extends AbstractKernelTest {
     space.setPrettyName(space.getDisplayName());
     space.setRegistration(Space.OPEN);
     space.setDescription("add new space " + spaceName);
-    space.setType(DefaultSpaceApplicationHandler.NAME);
     space.setVisibility(Space.OPEN);
     space.setRegistration(Space.VALIDATION);
-    space.setPriority(Space.INTERMEDIATE_PRIORITY);
     space.setGroupId(SpaceUtils.SPACE_GROUP + "/" + space.getPrettyName());
     space.setUrl(space.getPrettyName());
     String[] managers = new String[] { "root"};

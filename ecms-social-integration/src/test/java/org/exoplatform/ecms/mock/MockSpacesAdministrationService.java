@@ -15,19 +15,4 @@ public class MockSpacesAdministrationService implements SpacesAdministrationServ
   public void updateSpacesAdministratorsMemberships(List<MembershipEntry> permissionsExpressions) {
 
   }
-
-  @Override
-  public List<MembershipEntry> getSpacesCreatorsMemberships() {
-    return null;
-  }
-
-  @Override
-  public void updateSpacesCreatorsMemberships(List<MembershipEntry> permissionsExpressions) {
-
-  }
-
-  @Override
-  public boolean canCreateSpace(String username) {
-    return false;
-  }
 }

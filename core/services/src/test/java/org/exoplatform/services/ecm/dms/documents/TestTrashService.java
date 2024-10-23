@@ -90,7 +90,7 @@ public class TestTrashService extends BaseWCMTestCase {
   	Node trashNode = rootNode.addNode("Trash");
   	Node testNode = rootNode.addNode("TestNode");
   	Node documentNode = testNode.addNode("Documents");
-  	Node taxonomyNode = rootNode.addNode("exo:ecm").addNode("exo:taxonomyTrees").addNode("storage").addNode("System");
+  	Node taxonomyNode = rootNode.getNode("exo:ecm").getNode("exo:taxonomyTrees").getNode("storage").addNode("System");
   	
   	Node node0 = documentNode.addNode("node0");
   	node0.addMixin(MIX_REFERENCEABLE);
@@ -279,7 +279,7 @@ public class TestTrashService extends BaseWCMTestCase {
   	Node trashNode = rootNode.addNode("Trash");
   	Node testNode = rootNode.addNode("TestNode");
   	Node documentNode = testNode.addNode("Documents");
-  	Node taxonomyNode = rootNode.addNode("exo:ecm").addNode("exo:taxonomyTrees").addNode("storage").addNode("System");
+    Node taxonomyNode = rootNode.getNode("exo:ecm").getNode("exo:taxonomyTrees").getNode("storage").addNode("System");
   	
   	Node node0 = documentNode.addNode("node0");
   	node0.addMixin(MIX_REFERENCEABLE);

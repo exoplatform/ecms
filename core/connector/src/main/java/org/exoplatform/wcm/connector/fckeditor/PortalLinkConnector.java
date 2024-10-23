@@ -54,7 +54,6 @@ import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
-import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.portal.webui.util.NavigationUtils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -253,20 +252,7 @@ public class PortalLinkConnector implements ResourceContainer {
 
     // get navigation data
     UserPortalConfigService pConfig = WCMCoreUtils.getService(UserPortalConfigService.class);
-    UserPortalContext NULL_CONTEXT = new UserPortalContext()
-    {
-       public ResourceBundle getBundle(UserNavigation navigation)
-       {
-          return null;
-       }
-       public Locale getUserLocale()
-       {
-          return Locale.ENGLISH;
-       }
-    };
-    UserPortalConfig userPortalCfg = pConfig.getUserPortalConfig(portalName,
-                                                                 userId,
-                                                                 NULL_CONTEXT);
+    UserPortalConfig userPortalCfg = pConfig.getUserPortalConfig(portalName, userId);
     UserPortal userPortal = userPortalCfg.getUserPortal();
     UserNavigation navigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
     UserNode userNode = null;

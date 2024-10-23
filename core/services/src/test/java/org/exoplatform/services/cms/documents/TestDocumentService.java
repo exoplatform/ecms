@@ -100,7 +100,6 @@ public class TestDocumentService extends BaseWCMTestCase {
   public void testGetDocumentUrlInSpaceDocuments() throws Exception {
     Space space = new Space();
     space.setDisplayName("testSpace");
-    space.setApp("documents");
     space.setPrettyName(space.getDisplayName());
     String shortName = SpaceUtils.cleanString(space.getPrettyName());
     space.setGroupId("/spaces/" + shortName);

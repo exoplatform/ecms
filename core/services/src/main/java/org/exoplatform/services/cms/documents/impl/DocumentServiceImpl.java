@@ -46,7 +46,6 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.localization.LocaleContextInfoUtils;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
-import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.*;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
@@ -568,17 +567,8 @@ public class DocumentServiceImpl implements DocumentService {
 
   protected UserPortalConfig getDefaultUserPortalConfig() throws Exception {
     UserPortalConfigService userPortalConfigSer = WCMCoreUtils.getService(UserPortalConfigService.class);
-    UserPortalContext NULL_CONTEXT = new UserPortalContext() {
-      public ResourceBundle getBundle(UserNavigation navigation) {
-        return null;
-      }
-      public Locale getUserLocale() {
-        return Locale.ENGLISH;
-      }
-    };
     String remoteId = ConversationState.getCurrent().getIdentity().getUserId() ;
-    return userPortalConfigSer.
-                              getUserPortalConfig(userPortalConfigSer.getMetaPortal(), remoteId, NULL_CONTEXT);
+    return userPortalConfigSer.getUserPortalConfig(userPortalConfigSer.getMetaPortal(), remoteId);
   }
 
   protected SiteKey getDefaultSiteKey() throws Exception {

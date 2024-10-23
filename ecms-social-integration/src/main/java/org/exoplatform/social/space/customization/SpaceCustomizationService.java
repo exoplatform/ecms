@@ -2,7 +2,6 @@ package org.exoplatform.social.space.customization;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.ImportUUIDBehavior;
@@ -11,10 +10,8 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.ExoProperties;
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserACL;
@@ -23,14 +20,7 @@ import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.ApplicationType;
 import org.exoplatform.portal.config.model.Container;
 import org.exoplatform.portal.config.model.ModelObject;
-import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PortalConfig;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.navigation.NavigationContext;
-import org.exoplatform.portal.mop.page.PageContext;
-import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.page.PageService;
-import org.exoplatform.portal.mop.page.PageState;
 import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.portal.pom.spi.portlet.Preference;
 import org.exoplatform.services.cms.BasePath;
@@ -49,12 +39,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.social.core.space.SpaceApplication;
-import org.exoplatform.social.core.space.SpaceTemplate;
 import org.exoplatform.social.core.space.SpaceUtils;
-import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
-import org.exoplatform.social.core.space.spi.SpaceTemplateService;
 
 public class SpaceCustomizationService {
   final static private Log        LOG                          = ExoLogger.getExoLogger(SpaceCustomizationService.class);
@@ -86,8 +72,6 @@ public class SpaceCustomizationService {
   private UserPortalConfigService userPortalConfigService      = null;
 
   private SpaceService            spaceService                 = null;
-
-  private SpaceTemplateService    spaceTemplateService         = null;
 
   private UserACL                 userACL                      = null;
 
@@ -248,101 +232,11 @@ public class SpaceCustomizationService {
     LOG.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into " + fullTargetNodePath);
   }
 
-  public void createSpaceHomePage(String spacePrettyName, String spaceGroupId, ExoProperties welcomeSCVCustomPreferences) {
-
-    RequestLifeCycle.begin(PortalContainer.getInstance());
-    try {
-      LOG.info("Updating '" + spaceGroupId + "' Space Home Page");
-
-      // creates the new home page
-      Space space = getSpaceService().getSpaceByGroupId(spaceGroupId);
-      if (space == null) {
-        throw new IllegalStateException("Can't find space with group id " + spaceGroupId);
-      }
-      String spaceType = space.getType();
-      SpaceTemplateService spaceTemplateService = getSpaceTemplateService();
-      SpaceTemplate spaceTemplate = spaceTemplateService.getSpaceTemplateByName(spaceType);
-      if (spaceTemplate == null) {
-        LOG.warn("Could not find space template:{}. Space home page will not be created for space:{}.",
-                 spaceType,
-                 spacePrettyName);
-        return;
-      }
-      SpaceApplication homeApplication = spaceTemplate.getSpaceHomeApplication();
-      if (homeApplication == null) {
-        LOG.warn("Could not find home application for template:{}. Space home page will not be created for space:{}.",
-                 spaceType,
-                 spacePrettyName);
-        return;
-      }
-      String portletName = homeApplication.getPortletName();
-      String pageName = PortalConfig.GROUP_TYPE + "::" + spaceGroupId + "::" + portletName;
-      Page oldSpaceHomePage = dataStorageService.getPage(pageName);
-      PageContext pageContext = pageService.loadPage(PageKey.parse(oldSpaceHomePage.getPageId()));
-      pageContext.update(oldSpaceHomePage);
-
-      // creates the customized home page for the space and set few fields
-      // with values from the old home page
-      Page customSpaceHomePage = userPortalConfigService.createPageTemplate(SPACE_NEW_HOME_PAGE_TEMPLATE,
-                                                                            PortalConfig.GROUP_TYPE,
-                                                                            spaceGroupId);
-      customSpaceHomePage.setTitle(oldSpaceHomePage.getTitle());
-      customSpaceHomePage.setName(oldSpaceHomePage.getName());
-      customSpaceHomePage.setAccessPermissions(oldSpaceHomePage.getAccessPermissions());
-      customSpaceHomePage.setEditPermission(oldSpaceHomePage.getEditPermission());
-      customSpaceHomePage.setOwnerType(PortalConfig.GROUP_TYPE);
-      customSpaceHomePage.setOwnerId(spaceGroupId);
-      // needs to populate the accessPermissions list to all children:
-      // containers and applications
-      editChildrenAccesPermisions(customSpaceHomePage.getChildren(), customSpaceHomePage.getAccessPermissions());
-      // dataStorageService.save(customSpaceHomePage);
-      // mandatory preference "Space_URL" should be added to the home page
-      // applications
-      editSpaceURLPreference(customSpaceHomePage.getChildren(), spacePrettyName);
-      // gets the welcome SingleContentViewer Portlet
-      Application<Portlet> welcomeSCVPortlet = getPortletApplication(customSpaceHomePage.getChildren(), SCV_PORTLEt_NAME);
-      // configures the welcome SingleContentViewer Portlet
-      editSCVPreference(welcomeSCVPortlet, spaceGroupId, welcomeSCVCustomPreferences);
-
-      //
-      NavigationContext navContext = SpaceUtils.createGroupNavigation(spaceGroupId);
-
-      SiteKey siteKey = navContext.getKey();
-      PageKey pageKey = new PageKey(siteKey, customSpaceHomePage.getName());
-      PageState pageState = new PageState(
-                                          customSpaceHomePage.getTitle(),
-                                          customSpaceHomePage.getDescription(),
-                                          customSpaceHomePage.isShowMaxWindow(),
-                                          customSpaceHomePage.getFactoryId(),
-                                          customSpaceHomePage.getAccessPermissions() != null ? Arrays.asList(customSpaceHomePage.getAccessPermissions())
-                                                                                             : null,
-                                          customSpaceHomePage.getEditPermission());
-
-      pageService.savePage(new PageContext(pageKey, pageState));
-      dataStorageService.save(customSpaceHomePage);
-    } catch (Exception e) {
-      LOG.error("Error while customizing the Space home page for space: " + spaceGroupId, e);
-    } finally {
-      try {
-        RequestLifeCycle.end();
-      } catch (Exception e) {
-        LOG.warn("An exception has occurred while proceed RequestLifeCycle.end() : " + e.getMessage());
-      }
-    }
-  }
-
   public SpaceService getSpaceService() {
     if (this.spaceService == null) {
       this.spaceService = (SpaceService) PortalContainer.getInstance().getComponentInstanceOfType(SpaceService.class);
     }
     return this.spaceService;
-  }
-
-  public SpaceTemplateService getSpaceTemplateService() {
-    if (this.spaceTemplateService == null) {
-      this.spaceTemplateService = CommonsUtils.getService(SpaceTemplateService.class);
-    }
-    return this.spaceTemplateService;
   }
 
   public void createSpaceDefaultFolders(String groupId) throws Exception {
