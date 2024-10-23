@@ -18,16 +18,19 @@
 package org.exoplatform.services.attachments.listener;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.services.attachments.model.Attachment;
+import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.Event;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.services.listener.Listener;
@@ -47,9 +50,8 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
 
   private final RepositoryService      repositoryService;
 
-  private final SessionProviderService sessionProviderService;
+  private final AttachmentStorage attachmentStorage;
 
-  public static final String           NEWS_ATTACHMENTS_IDS = "attachmentsIds";
 
   public static final String           QUARANTINE           = "/Quarantine/";
 
@@ -61,24 +63,33 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
 
   private static final String          IMAGE_SRC_REGEX      = "src=\"/portal/rest/images/?(.+)?\"";
 
-  public UpdateContentPermissionsListener(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
+  public UpdateContentPermissionsListener(RepositoryService repositoryService, AttachmentStorage attachmentStorage) {
     this.repositoryService = repositoryService;
-    this.sessionProviderService = sessionProviderService;
+    this.attachmentStorage = attachmentStorage;
   }
 
   @Override
   public void onEvent(Event event) throws Exception {
+
+    // set system session provider to avoid SessionProviderService NullPointerException with spring context
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    SessionProviderService sessionProviderService = ExoContainerContext.getService(SessionProviderService.class);
+    sessionProviderService.setSessionProvider(null, sessionProvider);
+
     Map<String, Object> data = (Map<String, Object>) event.getData();
-    List<String> attachmentsIds =
-                                (List<String>) data.get(NEWS_ATTACHMENTS_IDS) != null ? (List<String>) data.get(NEWS_ATTACHMENTS_IDS)
-                                                                                      : new ArrayList<String>();
+    List<String> attachmentsIds = new ArrayList<>();
+    String entityType = data.containsKey("entityType") ? (String) data.get("entityType") : null;
+    String entityId = data.containsKey("entityId") ? (String) data.get("entityId") : null;
+    if (StringUtils.isNotEmpty(entityId) && StringUtils.isNotEmpty(entityType)) {
+      attachmentsIds.addAll(attachmentStorage.getAttachmentsByEntity(Long.valueOf(entityId), entityType).stream().map(Attachment::getId).toList());
+    }
     String audience = (String) data.get(AUDIENCE);
     List<Space> spaces = (List<Space>) data.get(SPACES);
     String content = (String) data.get(CONTENT);
     if (content != null) {
       attachmentsIds.addAll(extractImageAttachmentUuidOrPath(content));
     }
-    updateNodePermissions(attachmentsIds, audience, spaces);
+    updateNodePermissions(attachmentsIds, audience, spaces, sessionProviderService);
   }
 
   private List<String> extractImageAttachmentUuidOrPath(String content) {
@@ -119,7 +130,8 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
     return imageNodeIds;
   }
 
-  private void updateNodePermissions(List<String> identifiers, String audience, List<Space> spaces) throws RepositoryException {
+  private void updateNodePermissions(List<String> identifiers, String audience, List<Space> spaces, SessionProviderService sessionProviderService) throws RepositoryException {
+
     Session session = Utils.getSystemSession(sessionProviderService, repositoryService);
     if (!CollectionUtils.isEmpty(identifiers)) {
       for (String attachmentId : identifiers) {
