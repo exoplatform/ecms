@@ -53,7 +53,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
-import org.exoplatform.social.core.application.SpaceActivityPublisher;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
@@ -85,6 +84,8 @@ public class Utils {
   public  static final String SHARE_FILE           = "sharefiles:spaces";
   public  static final String SHARE_CONTENT        = "sharecontents:spaces";
 
+  public static final String SPACE_APP_ID = "exosocial:spaces";
+  
   /** the publication:currentState property name */
   public static final String  CURRENT_STATE_PROP  = "publication:currentState";
 
@@ -1090,7 +1091,7 @@ public class Utils {
                                                                                                        userId);
       activity = activityManager.getActivity(nodeActivityID);
       ExoSocialActivity comment = new ExoSocialActivityImpl(identity.getId(),
-                                                            SpaceActivityPublisher.SPACE_APP_ID,
+                                                            SPACE_APP_ID,
                                                             commentText,
                                                             null);
       activityManager.saveComment(activity, comment);
