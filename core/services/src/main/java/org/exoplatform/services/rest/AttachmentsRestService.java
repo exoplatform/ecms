@@ -147,7 +147,6 @@ public class AttachmentsRestService implements ResourceContainer {
   @GET
   @Path("{entityType}/{entityId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @RolesAllowed("users")
   @Operation(summary = "Get list of attachments linked to an entity", method = "GET", description = "Get the list of attachments linked to the given entity")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "Request fulfilled"),
