@@ -95,7 +95,8 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                                                    documentService,
                                                                    linkManager,
                                                                    workspace,
-                                                                   userSession,
+                                                                   userSession.getUserID().equals("__anonim") ? systemSession
+                                                                                                              : userSession,
                                                                    attachmentId);
           attachments.add(attachment);
         }
