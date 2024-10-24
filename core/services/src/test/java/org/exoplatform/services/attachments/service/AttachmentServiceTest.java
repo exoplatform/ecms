@@ -165,6 +165,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
     when(repositoryEntry.getDefaultWorkspaceName()).thenReturn("collaboration");
     when(sessionProvider.getSession(any(), any())).thenReturn(session);
+    when(session.getUserID()).thenReturn("1");
 
     ManageableRepository manageableRepository = repositoryService.getRepository("repository");
     lenient().when(repositoryService.getRepository(Mockito.anyString())).thenReturn(manageableRepository);

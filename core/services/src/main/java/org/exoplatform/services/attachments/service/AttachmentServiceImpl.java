@@ -274,10 +274,6 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    if (userIdentityId <= 0) {
-      throw new IllegalAccessException("User identity must be positive");
-    }
-
     List<Attachment> entityAttachments;
     try {
       entityAttachments = attachmentStorage.getAttachmentsByEntity(entityId, entityType);
@@ -287,10 +283,10 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     if (!entityAttachments.isEmpty()) {
       entityAttachments.forEach(attachment -> {
-        boolean canView = canView(userIdentityId, entityType, entityId, attachment.getId());
-        boolean canEdit = canEdit(userIdentityId, entityType, entityId, attachment.getId());
-        boolean canDetach = canDetach(userIdentityId, entityType, entityId, attachment.getId());
-        Permission attachmentACL = new Permission(attachment.getAcl().isCanAccess(), canView, canDetach, canEdit);
+        boolean canView = userIdentityId <= 0 || canView(userIdentityId, entityType, entityId, attachment.getId());
+        boolean canEdit = userIdentityId > 0 && canEdit(userIdentityId, entityType, entityId, attachment.getId());
+        boolean canDetach = userIdentityId > 0 && canDetach(userIdentityId, entityType, entityId, attachment.getId());
+        Permission attachmentACL = new Permission(userIdentityId <= 0 || attachment.getAcl().isCanAccess(), canView, canDetach, canEdit);
         attachment.setAcl(attachmentACL);
       });
     }
