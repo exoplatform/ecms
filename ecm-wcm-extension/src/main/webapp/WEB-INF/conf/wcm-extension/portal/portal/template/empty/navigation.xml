@@ -27,14 +27,12 @@
   <priority>1</priority>
   <page-nodes>
     <node>
-      <uri>overview</uri>
       <name>overview</name>
       <label>Overview</label>
       <page-reference>portal::@owner@::overview</page-reference>      
     </node>                                           
 
     <node>
-      <uri>detail</uri>
       <name>detail</name>
       <label>#{portal.@owner@.detail}</label>
       <visibility>SYSTEM</visibility>
@@ -42,7 +40,6 @@
     </node>
     
     <node>
-      <uri>printviewer</uri>
       <name>printviewer</name>
       <label>#{portal.@owner@.printviewer}</label>
       <visibility>SYSTEM</visibility>
@@ -50,7 +47,6 @@
     </node>
 
     <node>
-      <uri>searchResult</uri>
       <name>searchResult</name>
       <label>#{portal.@owner@.searchResult}</label>
       <visibility>HIDDEN</visibility>      
@@ -58,7 +54,6 @@
     </node>
     
     <node>
-      <uri>newAccount</uri>
       <name>newAccount</name>
       <label>#{portal.@owner@.newAccount}</label>
       <visibility>HIDDEN</visibility>

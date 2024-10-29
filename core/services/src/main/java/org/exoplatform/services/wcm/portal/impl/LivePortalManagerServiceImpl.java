@@ -31,7 +31,8 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
-import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.mop.SiteType;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -315,8 +316,8 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
   private void checkAllPortalSitesCreated() throws Exception {
     RequestLifeCycle.begin(PortalContainer.getInstance());
     try {
-      DataStorage dataStorage = portalConfigService.getDataStorage();
-      List<String> allPortalNames = dataStorage.getAllPortalNames();
+      LayoutService dataStorage = portalConfigService.getDataStorage();
+      List<String> allPortalNames = dataStorage.getSiteNames(SiteType.PORTAL, 0, 1000);
       if (allPortalNames != null) {
         for (String portalName : allPortalNames) {
           // Global site shouldn't have a folder
@@ -338,7 +339,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
           if (portalConfig == null) {
             continue;
           }
-          listenerService.broadcast("org.exoplatform.portal.config.DataStorage.portalConfigCreated", dataStorage, portalConfig);;
+          listenerService.broadcast("org.exoplatform.portal.mop.service.LayoutService.portalConfigCreated", dataStorage, portalConfig);;
         }
       }
     } finally {

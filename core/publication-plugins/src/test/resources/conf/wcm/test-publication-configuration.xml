@@ -325,16 +325,6 @@
         </object-param>
       </init-params>
     </component-plugin>
-    <component-plugin>
-      <name>user.portal.config.listener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.portal.config.UserPortalConfigListener</type>
-    </component-plugin>
-    <component-plugin>
-      <name>group.portal.config.listener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.portal.config.GroupPortalConfigListener</type>
-    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins>

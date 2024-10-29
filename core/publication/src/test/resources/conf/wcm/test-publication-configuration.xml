@@ -358,19 +358,19 @@
   <external-component-plugins>
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>
     <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.portalConfigCreated</name>
+      <name>org.exoplatform.portal.mop.service.LayoutService.portalConfigCreated</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.portal.listener.CreateLivePortalEventListener</type>
       <description>this listener create new live portal content storage</description>
     </component-plugin>
     <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.portalConfigRemoved</name>
+      <name>org.exoplatform.portal.mop.service.LayoutService.portalConfigRemoved</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.portal.listener.RemoveLivePortalEventListener</type>
       <description>this listener new live portal content storage</description>
     </component-plugin>
     <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.portalConfigUpdated</name>
+      <name>org.exoplatform.portal.mop.service.LayoutService.portalConfigUpdated</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.portal.listener.UpdateLivePortalEventListener</type>
       <description>this listener new live portal content storage</description>
@@ -423,16 +423,6 @@
           </object>
         </object-param>
       </init-params>
-    </component-plugin>
-    <component-plugin>
-      <name>user.portal.config.listener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.portal.config.UserPortalConfigListener</type>
-    </component-plugin>
-    <component-plugin>
-      <name>group.portal.config.listener</name>
-      <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.portal.config.GroupPortalConfigListener</type>
     </component-plugin>
   </external-component-plugins>
 

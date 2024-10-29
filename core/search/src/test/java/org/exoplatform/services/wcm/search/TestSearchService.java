@@ -16,12 +16,21 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.util.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.commons.search.domain.Document;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
@@ -29,8 +38,8 @@ import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
-import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
+import org.exoplatform.portal.mop.storage.PageStorage;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -42,9 +51,6 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.search.connector.FileindexingConnector;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by The eXo Platform SAS
@@ -145,7 +151,7 @@ public class TestSearchService extends BaseSearchTest {
   }
   
   protected void addChildNodes(Node parentNode)throws Exception{
-    PageService pageService = getService(PageService.class);
+    PageStorage pageService = getService(PageStorage.class);
     PageContext page = pageService.loadPage(new PageKey(new SiteKey("portal", "classic"), "testpage"));
     if(page == null){
       PageState pageState = new PageState("testpage", "test page", true,

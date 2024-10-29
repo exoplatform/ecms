@@ -43,7 +43,7 @@ import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
@@ -67,29 +67,28 @@ import jakarta.servlet.ServletContext;
  * Returns a page URI for a given location.
  *
  * @LevelAPI Provisional
- *
  * @anchor PortalLinkConnector
  */
 @Path("/portalLinks/")
 public class PortalLinkConnector implements ResourceContainer {
 
   /** The RESOURC e_ type. */
-  final private String RESOURCE_TYPE       = "PortalPageURI";
+  final private String        RESOURCE_TYPE                 = "PortalPageURI";
 
   /** The portal data storage. */
-  private DataStorage  portalDataStorage;
+  private LayoutService       portalDataStorage;
 
   /** The portal user acl. */
-  private UserACL      portalUserACL;
+  private UserACL             portalUserACL;
 
   /** The servlet context. */
-  private ServletContext servletContext;
+  private ServletContext      servletContext;
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(PortalLinkConnector.class.getName());
+  private static final Log    LOG                           = ExoLogger.getLogger(PortalLinkConnector.class.getName());
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
-  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  private static final String LAST_MODIFIED_PROPERTY        = "Last-Modified";
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
@@ -101,13 +100,13 @@ public class PortalLinkConnector implements ResourceContainer {
    * @param dataStorage The data storage.
    * @param userACL The user ACL.
    * @param servletContext The servlet context.
-   *
    * @throws Exception the exception
    */
   public PortalLinkConnector(InitParams params,
-                             DataStorage dataStorage,
+                             LayoutService dataStorage,
                              UserACL userACL,
-                             ServletContext servletContext) throws Exception {
+                             ServletContext servletContext)
+      throws Exception {
     this.portalDataStorage = dataStorage;
     this.portalUserACL = userACL;
     this.servletContext = servletContext;
@@ -121,15 +120,17 @@ public class PortalLinkConnector implements ResourceContainer {
    * @param type The file type.
    * @return The page URI.
    * @throws Exception The exception
-   *
    * @anchor PortalLinkConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
 //  @OutputTransformer(XMLOutputTransformer.class)
-  public Response getPageURI(@QueryParam("currentFolder") String currentFolder,
-                             @QueryParam("command") String command,
-                             @QueryParam("type") String type) throws Exception {
+  public Response getPageURI(@QueryParam("currentFolder")
+  String currentFolder,
+                             @QueryParam("command")
+                             String command,
+                             @QueryParam("type")
+                             String type) throws Exception {
     try {
       String userId = getCurrentUser();
       return buildReponse(currentFolder, command, userId);
@@ -165,9 +166,7 @@ public class PortalLinkConnector implements ResourceContainer {
    * @param currentFolder The current folder.
    * @param command The command.
    * @param userId The user Id
-   *
    * @return the response
-   *
    * @throws Exception the exception
    */
   private Response buildReponse(String currentFolder, String command, String userId) throws Exception {
@@ -193,9 +192,7 @@ public class PortalLinkConnector implements ResourceContainer {
    * @param currentFolder The current folder.
    * @param command The command.
    * @param userId The user Id.
-   *
    * @return The document
-   *
    * @throws Exception the exception
    */
   private Document buildPortalXMLResponse(String currentFolder, String command, String userId) throws Exception {
@@ -232,9 +229,7 @@ public class PortalLinkConnector implements ResourceContainer {
    * @param currentFolder The current folder.
    * @param command The command.
    * @param userId The user Id.
-   *
    * @return The document.
-   *
    * @throws Exception the exception
    */
   private Document buildNavigationXMLResponse(String currentFolder, String command, String userId) throws Exception {
@@ -290,9 +285,7 @@ public class PortalLinkConnector implements ResourceContainer {
    *
    * @param commandStr The command str.
    * @param currentPath The current path.
-   *
    * @return The element.
-   *
    * @throws ParserConfigurationException the parser configuration exception
    */
   private Element initRootElement(String commandStr, String currentPath) throws ParserConfigurationException {
@@ -320,7 +313,6 @@ public class PortalLinkConnector implements ResourceContainer {
    * @param filesElement
    * @param userId The user Id.
    * @param portalConfigService The portal config service.
-   *
    * @throws Exception the exception
    */
   private void processPageNode(String portalName,
@@ -333,8 +325,8 @@ public class PortalLinkConnector implements ResourceContainer {
     PageContext page = portalConfigService.getPage(pageRef);
     String pageUri = "";
     if (page == null) {
-    pageUri = "/";
-    Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
+      pageUri = "/";
+      Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
       folderElement.setAttribute("name", userNode.getName());
       folderElement.setAttribute("folderType", "");
       folderElement.setAttribute("url", pageUri);

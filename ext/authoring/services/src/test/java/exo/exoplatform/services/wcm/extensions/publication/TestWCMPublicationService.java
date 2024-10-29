@@ -7,13 +7,9 @@ import javax.jcr.Node;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
-import org.exoplatform.portal.config.DataStorage;
-import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.EventType;
-import org.exoplatform.portal.mop.navigation.NavigationService;
-import org.exoplatform.portal.pom.spi.portlet.Portlet;
-import org.exoplatform.services.ecm.publication.PublicationPlugin;
+import org.exoplatform.portal.mop.service.LayoutService;
+import org.exoplatform.portal.mop.service.NavigationService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.listener.ListenerService;
@@ -21,10 +17,10 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
-import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class TestWCMPublicationService extends BasePublicationTestCase {
@@ -47,7 +43,7 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
   private final String testPortletPreferences = "portal#classic:/web/BannerPortlet/testPortletPreferences";
 
   /** . */
-  private DataStorage storage_;
+  private LayoutService storage_;
 
   /** . */
   private NavigationService navService;
@@ -88,21 +84,21 @@ public class TestWCMPublicationService extends BasePublicationTestCase {
     };
 
     PortalContainer container = PortalContainer.getInstance();
-    storage_ = (DataStorage) container.getComponentInstanceOfType(DataStorage.class);
+    storage_ = container.getComponentInstanceOfType(LayoutService.class);
     navService = (NavigationService) container.getComponentInstanceOfType(NavigationService.class);
     events = new LinkedList<Event>();
     listenerService = (ListenerService) container.getComponentInstanceOfType(ListenerService.class);
     org = WCMCoreUtils.getService(OrganizationService.class);
 
-    listenerService.addListener(DataStorage.PAGE_CREATED, listener);
-    listenerService.addListener(DataStorage.PAGE_REMOVED, listener);
-    listenerService.addListener(DataStorage.PAGE_UPDATED, listener);
+    listenerService.addListener(LayoutService.PAGE_CREATED, listener);
+    listenerService.addListener(LayoutService.PAGE_REMOVED, listener);
+    listenerService.addListener(LayoutService.PAGE_UPDATED, listener);
     listenerService.addListener(EventType.NAVIGATION_CREATED, listener);
     listenerService.addListener(EventType.NAVIGATION_DESTROYED, listener);
     listenerService.addListener(EventType.NAVIGATION_UPDATED, listener);
-    listenerService.addListener(DataStorage.PORTAL_CONFIG_CREATED, listener);
-    listenerService.addListener(DataStorage.PORTAL_CONFIG_UPDATED, listener);
-    listenerService.addListener(DataStorage.PORTAL_CONFIG_REMOVED, listener);
+    listenerService.addListener(LayoutService.PORTAL_CONFIG_CREATED, listener);
+    listenerService.addListener(LayoutService.PORTAL_CONFIG_UPDATED, listener);
+    listenerService.addListener(LayoutService.PORTAL_CONFIG_REMOVED, listener);
   }
 
   public void tearDown() throws Exception {

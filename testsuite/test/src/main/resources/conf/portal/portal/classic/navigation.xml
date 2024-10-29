@@ -27,7 +27,6 @@
   <priority>1</priority>
   <page-nodes>
     <node>
-      <uri>home</uri>
       <name>home</name>
       <label xml:lang="en">Overview</label>
       <label xml:lang="fr">Accueil</label>
@@ -38,7 +37,6 @@
       <page-reference>portal::classic::homepage</page-reference>      
     </node>
     <node>
-      <uri>detail</uri>
       <name>detail</name>
       <label xml:lang="en">Details</label>
       <label xml:lang="fr">Détail</label>
@@ -49,7 +47,6 @@
       <page-reference>portal::classic::detail</page-reference>
     </node>
     <node>
-      <uri>printviewer</uri>
       <name>printviewer</name>
       <label xml:lang="en">Print Viewer</label>
       <label xml:lang="fr">Imprimer la page</label>
@@ -60,7 +57,6 @@
       <page-reference>portal::classic::printviewer</page-reference>
     </node>
     <node>
-      <uri>searchResult</uri>
       <name>searchResult</name>
       <label xml:lang="en">Search</label>
       <label xml:lang="fr">Résultats de recherche</label>
@@ -72,7 +68,6 @@
     </node>
     
     <node>
-      <uri>newAccount</uri>
       <name>newAccount</name>
       <label xml:lang="en">New Account</label>
       <label xml:lang="fr">Nouveau compte</label>

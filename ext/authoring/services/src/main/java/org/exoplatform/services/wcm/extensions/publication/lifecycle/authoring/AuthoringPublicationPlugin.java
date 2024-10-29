@@ -24,7 +24,7 @@ import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
@@ -649,7 +649,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
 
   private List<String> getRunningPortals(String userId) throws Exception {
     List<String> listPortalName = new ArrayList<String>();
-    DataStorage service = WCMCoreUtils.getService(DataStorage.class);
+    LayoutService service = WCMCoreUtils.getService(LayoutService.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class) ;
     PageList pageList = service.find(query, null) ;
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
