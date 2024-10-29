@@ -18,7 +18,7 @@ import java.util.List;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.webui.util.Util;
@@ -170,7 +170,7 @@ public class UISearchForm extends UIForm {
   @SuppressWarnings("unchecked")
   private List getPortalList() throws Exception {
     List<SelectItemOption<String>> portals = new ArrayList<SelectItemOption<String>>();
-    DataStorage service = getApplicationComponent(DataStorage.class);
+    LayoutService service = getApplicationComponent(LayoutService.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class);
     List<PortalConfig> list = service.find(query, null).getAll();
     portals.add(new SelectItemOption<String>(ALL_OPTION, ALL_OPTION));

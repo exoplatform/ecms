@@ -114,7 +114,7 @@ public class PublicationUtil {
     if(chidren == null) return ;
     for(ModelObject object: chidren) {
       if(object instanceof Application) {
-        Application<?> application = Application.class.cast(object);
+        Application application = Application.class.cast(object);
         if(application.getId().contains(applicationName)) {
           results.add(application.getId());
         }
@@ -139,7 +139,7 @@ public class PublicationUtil {
       return;
     for (ModelObject object : chidren) {
       if (object instanceof Application) {
-        Application<?> application = Application.class.cast(object);
+        Application application = Application.class.cast(object);
         if(!removingApplicationIds.contains(application.getId())) {
           childrenTmp.add(object);
         }

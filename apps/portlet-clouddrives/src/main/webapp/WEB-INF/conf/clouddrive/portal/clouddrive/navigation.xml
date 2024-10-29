@@ -25,7 +25,6 @@
   <priority>1</priority>
   <page-nodes>
     <node>
-      <uri>home</uri>
       <name>home</name>
       <label>Documents</label>
       <page-reference>portal::clouddrive::homepage</page-reference>

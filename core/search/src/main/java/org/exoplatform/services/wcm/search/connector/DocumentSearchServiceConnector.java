@@ -29,14 +29,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecms.legacy.search.data.SearchContext;
-import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.Container;
 import org.exoplatform.portal.config.model.ModelObject;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.navigation.NavigationContext;
-import org.exoplatform.portal.mop.navigation.NavigationService;
+import org.exoplatform.portal.mop.service.NavigationService;
 import org.exoplatform.portal.mop.navigation.NodeContext;
 import org.exoplatform.portal.mop.navigation.NodeModel;
 import org.exoplatform.portal.mop.navigation.Scope;
@@ -197,7 +197,7 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
   
   private boolean hasPortlet(NodeContext<?> pageCt, String plName) {
     if (plName == null) return false;
-    DataStorage ds = WCMCoreUtils.getService(DataStorage.class);
+    LayoutService ds = WCMCoreUtils.getService(LayoutService.class);
     try {
       for (ModelObject mo : ds.getPage(pageCt.getState().getPageRef().format()).getChildren()) {
         if (containApp(mo, plName)) {
@@ -211,10 +211,10 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
   }
   
   private boolean containApp(ModelObject mo, String plName) {
-    DataStorage ds = WCMCoreUtils.getService(DataStorage.class);
-    if (mo instanceof Application<?>) {
+    LayoutService ds = WCMCoreUtils.getService(LayoutService.class);
+    if (mo instanceof Application) {
       try {
-        if (ds.getId(((Application<?>)mo).getState()).contains(plName)) {
+        if (ds.getId(((Application)mo).getState()).contains(plName)) {
           return true;
         }
       } catch (Exception e) {

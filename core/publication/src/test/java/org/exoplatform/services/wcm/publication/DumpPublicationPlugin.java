@@ -38,7 +38,7 @@ import javax.jcr.version.VersionException;
 
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
@@ -239,7 +239,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
    */
   private List<String> getRunningPortals(String userId) throws Exception {
     List<String> listPortalName = new ArrayList<String>();
-    DataStorage service = WCMCoreUtils.getService(DataStorage.class);
+    LayoutService service = WCMCoreUtils.getService(LayoutService.class);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class) ;
     ListAccess<PortalConfig> pageList = service.find2(query, null) ;
     List<PortalConfig> portalConfigs = WCMCoreUtils.getAllElementsOfListAccess(pageList);
