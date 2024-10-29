@@ -274,10 +274,6 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalArgumentException("Entity type is mandatory");
     }
 
-    if (userIdentityId <= 0) {
-      throw new IllegalAccessException("User identity must be positive");
-    }
-
     List<Attachment> entityAttachments;
     try {
       entityAttachments = attachmentStorage.getAttachmentsByEntity(entityId, entityType);
