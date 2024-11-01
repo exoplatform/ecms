@@ -169,26 +169,6 @@
   </component>
 
   <external-component-plugins>
-    <target-component>org.exoplatform.portal.config.UserACL</target-component>
-    <component-plugin>
-      <name>addPortalACLPlugin</name>
-      <set-method>addPortalACLPlugin</set-method>
-      <type>org.exoplatform.portal.config.PortalACLPlugin</type>
-      <description>setting some permission for portal</description>
-      <init-params>
-        <values-param>
-          <name>access.control.workspace.roles</name>
-          <value>editor:/platform/web-contributors</value>
-        </values-param>
-        <values-param>
-          <name>portal.creation.roles</name>
-          <value>*:/platform/administrators</value>
-        </values-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
     <component-plugin>
       <name>addActions</name>
