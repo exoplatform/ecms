@@ -42,10 +42,6 @@
     </dependency>
     <dependency>
       <groupId>io.meeds.core</groupId>
-      <artifactId>exo.core.component.organization.api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.meeds.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
     </dependency>
     <dependency>
