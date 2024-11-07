@@ -31,17 +31,18 @@
   </changeSet>
 
   <changeSet author="attachments" id="1.0.0-1">
+    <validCheckSum>ANY</validCheckSum>
     <createTable tableName="EXO_ATTACHMENTS_CONTEXT">
       <column name="ATTACHMENTS_CONTEXT_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
         <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ATTACHMENTS_CONTEXT" />
       </column>
-      <column name="ATTACHMENT_ID" type="NVARCHAR(200)"/>
+      <column name="ATTACHMENT_ID" type="VARCHAR(200)"/>
       <column name="ENTITY_ID" type="BIGINT" />
-      <column name="ENTITY_TYPE" type="NVARCHAR(200)" />
+      <column name="ENTITY_TYPE" type="VARCHAR(200)" />
       <column name="ATTACHED_DATE" type="BIGINT" />
     </createTable>
     <modifySql dbms="mysql">
-      <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci" />
+      <append value=" ENGINE=INNODB CHARSET=UTF8MB4 COLLATE utf8mb4_0900_ai_ci" />
     </modifySql>
   </changeSet>
 
@@ -52,9 +53,10 @@
   </changeSet>
 
   <changeSet author="attachments" id="1.0.0-3">
+    <validCheckSum>ANY</validCheckSum>
     <addNotNullConstraint columnName="ATTACHMENT_ID"
                           constraintName="ATTACHMENTS_CONTEXT_ID_NON_NULL"
-                          columnDataType="NVARCHAR(200)"
+                          columnDataType="VARCHAR(200)"
                           tableName="EXO_ATTACHMENTS_CONTEXT"/>
   </changeSet>
 
@@ -67,5 +69,9 @@
   <changeSet author="attachments" id="1.0.0-5" dbms="hsqldb">
     <createSequence sequenceName="SEQ_ATTACHMENTS_CONTEXT_ID" startValue="1" />
   </changeSet>
-
+  <changeSet author="attachments" id="1.0.0-6" >
+    <sql dbms="mysql">
+      ALTER TABLE EXO_ATTACHMENTS_CONTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+    </sql>
+  </changeSet>
 </databaseChangeLog>
