@@ -637,7 +637,9 @@
       if(!this.isDownloadStatusActivated && !documentPreview.defaultSettings.doc.isCloudDrive) {
         var editorButtonsLoader = editorbuttons.initPreviewButtons(this.settings.doc.id, this.settings.doc.workspace, 'dropup');
         editorButtonsLoader.done(function ($buttonsContainer) {
-          $(".previewBtn").append($buttonsContainer);
+          if ($(".previewBtn").find('.editorButtonContainer').length === 0){
+            $(".previewBtn").append($buttonsContainer);
+          }
         });
       }
 
