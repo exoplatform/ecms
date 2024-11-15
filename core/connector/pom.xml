@@ -121,11 +121,6 @@
       <artifactId>rome</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.meeds.core</groupId>
-      <artifactId>exo.core.component.organization.api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>io.meeds.commons</groupId>
       <artifactId>commons-component-common</artifactId>
     </dependency>

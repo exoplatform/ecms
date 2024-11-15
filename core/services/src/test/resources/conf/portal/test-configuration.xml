@@ -30,4 +30,10 @@
         </value-param>
       </init-params>
    </component>
+
+   <component>
+      <key>org.exoplatform.services.compress.CompressData</key>
+      <type>org.exoplatform.services.compress.CompressData</type>
+   </component>
+
 </configuration>
