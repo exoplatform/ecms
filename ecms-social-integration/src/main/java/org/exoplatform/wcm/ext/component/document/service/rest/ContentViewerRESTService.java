@@ -121,7 +121,6 @@ public class ContentViewerRESTService implements ResourceContainer {
       PortalRequestContext requestContext = new PortalRequestContext(application, controllerContext, org.exoplatform.portal.mop.SiteType.PORTAL.toString(), "", "", null);
       WebuiRequestContext.setCurrentInstance(requestContext);
       UIPortalApplication uiApplication = new UIPortalApplication();
-      uiApplication.setCurrentSite(new UIPortal());
       requestContext.setUIApplication(uiApplication);
       requestContext.setWriter(writer);
 

@@ -21,10 +21,14 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.config.UserPortalConfigService;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.portal.webui.util.NavigationUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -246,7 +250,12 @@ public class UIPageNodeSelector extends UIContainer {
     tree.setParentSelected(null);
 
     UserNavigation selectedNav = selectedNode.getUserNavigation();
-    UserNode userNode = userPortal.resolvePath(selectedNav, null, uri);
+    UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    UserNode userNode = portalConfigService.getSiteNodeOrGlobalNode(selectedNav.getKey().getTypeName(),
+                                                                    selectedNav.getKey().getName(),
+                                                                    uri,
+                                                                    userId);
 
     if (userNode != null) {
       userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);

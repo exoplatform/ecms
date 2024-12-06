@@ -78,7 +78,6 @@ public class TestSEOService extends BaseWCMTestCase{
     UIPortal uiPortal = Mockito.mock(UIPortal.class);
     UIPortalApplication uiPortalApp = Mockito.mock(UIPortalApplication.class);
     
-    uiPortalApp.setCurrentSite(uiPortal);
     Mockito.when(ctx.getUIApplication()).thenReturn(uiPortalApp);
     Mockito.when(uiPortalApp.getCurrentSite()).thenReturn(uiPortal);
     

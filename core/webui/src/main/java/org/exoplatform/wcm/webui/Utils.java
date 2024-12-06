@@ -36,6 +36,7 @@ import javax.jcr.query.QueryManager;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.download.DownloadService;
@@ -563,9 +564,14 @@ public class Utils {
     UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
     List<UserNavigation> allNavs = userPortal.getNavigations();
 
+    UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
     for (UserNavigation nav : allNavs) {
       if (nav.getKey().getType().getName().equalsIgnoreCase(siteType)) {
-        UserNode userNode = userPortal.resolvePath(nav, null, editorPageURI);
+        UserNode userNode = portalConfigService.getSiteNodeOrGlobalNode(nav.getKey().getTypeName(),
+                                                                        nav.getKey().getName(),
+                                                                        editorPageURI,
+                                                                        userId);
         if (userNode != null) {
           return userNode;
         }
@@ -577,10 +583,14 @@ public class Utils {
   private static UserNode getEditorNode(String editorPageURI) {
     UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
     List<UserNavigation> allNavs = userPortal.getNavigations();
-
+    UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
     for (UserNavigation nav : allNavs) {
       if (nav.getKey().getType().equals(SiteType.GROUP)) {
-        UserNode userNode = userPortal.resolvePath(nav, null, editorPageURI);
+        UserNode userNode = portalConfigService.getSiteNodeOrGlobalNode(nav.getKey().getTypeName(),
+                                                                        nav.getKey().getName(),
+                                                                        editorPageURI,
+                                                                        userId);
         if (userNode != null) {
           return userNode;
         }

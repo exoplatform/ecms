@@ -28,6 +28,8 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceURL;
 
 import org.exoplatform.portal.mop.navigation.Scope;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
@@ -179,8 +181,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
         || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode() && Utils.isPortletViewMode(pContext))) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
-      if (log.isTraceEnabled())
-        log.trace("SCV rendering : cache set to "+wcmService.getPortletExpirationCache());
+      if (LOG.isTraceEnabled())
+        LOG.trace("SCV rendering : cache set to "+wcmService.getPortletExpirationCache());
     }
 
     if(!newMode.equals(mode)) {
@@ -245,11 +247,14 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
     filterConfigBuilder.withReadWriteCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
     filterConfigBuilder.withTemporalCheck();
-    UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
 
     // get user node & update children
-    UserNavigation userNav = userPortal.getNavigation(Util.getUIPortal().getSiteKey());
-    UserNode userNode = userPortal.resolvePath(userNav, filterConfig, nodeURI);
+    UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    UserNode userNode = portalConfigService.getSiteNodeOrGlobalNode(Util.getUIPortal().getSiteKey().getTypeName(),
+                                                                    Util.getUIPortal().getSiteKey().getName(),
+                                                                    nodeURI,
+                                                                    userId);
 
     if (userNode != null) {
       userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);
