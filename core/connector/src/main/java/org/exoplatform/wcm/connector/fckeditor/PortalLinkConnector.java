@@ -261,7 +261,7 @@ public class PortalLinkConnector implements ResourceContainer {
       userNode = userPortal.getNode(navigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
     } else {
       pageNodeUri = pageNodeUri.substring(1, pageNodeUri.length() - 1);
-      userNode = userPortal.resolvePath(navigation, null, pageNodeUri);
+      userNode = pConfig.getSiteNodeOrGlobalNode(navigation.getKey().getTypeName(), navigation.getKey().getName(), pageNodeUri, userId);
 
       if (userNode != null) {
         userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);

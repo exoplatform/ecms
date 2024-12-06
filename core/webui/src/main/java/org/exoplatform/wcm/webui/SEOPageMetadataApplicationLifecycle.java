@@ -6,17 +6,22 @@ import java.util.Enumeration;
 import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.application.RequestNavigationData;
-import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.config.UserPortalConfigService;
+import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.SiteType;
-import org.exoplatform.portal.mop.user.*;
+import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
-import org.exoplatform.web.application.*;
+import org.exoplatform.web.application.Application;
+import org.exoplatform.web.application.ApplicationLifecycle;
+import org.exoplatform.web.application.RequestFailure;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
 public class SEOPageMetadataApplicationLifecycle extends BaseComponentPlugin
@@ -47,15 +52,16 @@ public class SEOPageMetadataApplicationLifecycle extends BaseComponentPlugin
           }
         }
 
-        UserPortal userPortal = pcontext.getUserPortal();
-        UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(siteName));
-        UserNodeFilterConfig.Builder builder = UserNodeFilterConfig.builder();
+        UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
         String nodePath = pcontext.getNodePath();
         UserNode currentNode = null;
         if (StringUtils.isBlank(nodePath)) {
-          currentNode = userPortal.getDefaultPath(builder.build());
+          currentNode = portalConfigService.getDefaultSiteNode(siteName, ConversationState.getCurrent().getIdentity().getUserId());
         } else {
-          currentNode = userPortal.resolvePath(navigation, builder.build(), nodePath);
+          currentNode = portalConfigService.getSiteNodeOrGlobalNode(PortalConfig.PORTAL_TYPE,
+                                                                    siteName,
+                                                                    nodePath,
+                                                                    ConversationState.getCurrent().getIdentity().getUserId());
         }
         if (currentNode != null && currentNode.getPageRef() != null
             && SiteType.PORTAL.equals(currentNode.getPageRef().getSite().getType())) {
