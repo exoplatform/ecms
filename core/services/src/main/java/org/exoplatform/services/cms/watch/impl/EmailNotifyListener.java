@@ -31,6 +31,7 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.*;
 import org.exoplatform.portal.webui.util.Util;
@@ -245,9 +246,13 @@ public class EmailNotifyListener implements EventListener {
     UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
     List<UserNavigation> allNavs = userPortal.getNavigations();
 
+    UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
     for (UserNavigation nav : allNavs) {
       if (nav.getKey().getType().equals(SiteType.GROUP)) {
-        UserNode userNode = userPortal.resolvePath(nav, null, uri);
+        UserNode userNode = portalConfigService.getSiteNodeOrGlobalNode(nav.getKey().getTypeName(),
+                                                                        nav.getKey().getName(),
+                                                                        uri,
+                                                                        ConversationState.getCurrent().getIdentity().getUserId());
         if (userNode != null) {
           return userNode;
         }

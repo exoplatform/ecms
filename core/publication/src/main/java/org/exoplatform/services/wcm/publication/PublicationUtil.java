@@ -25,17 +25,16 @@ import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.ValueFormatException;
 
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.Container;
 import org.exoplatform.portal.config.model.ModelObject;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.navigation.NodeContext;
-import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
-import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
-import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.security.ConversationState;
 
 /**
  * Created by The eXo Platform SAS
@@ -274,20 +273,14 @@ public class PublicationUtil {
    * @throws Exception the exception
    */
   public static boolean isNodeContentPublishedToPageNode(Node contentNode, String navNodeURI) throws Exception {
-
-    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
-
-    // make filter
-    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
-    filterConfigBuilder.withReadWriteCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
-    filterConfigBuilder.withTemporalCheck();
-    UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
-
     // get user node
     String nodeURI = navNodeURI.replace("/" + Util.getPortalRequestContext().getPortalOwner() + "/", "");
-    UserNavigation userNav = userPortal.getNavigation(Util.getUIPortal().getSiteKey());
-    UserNode userNode = userPortal.resolvePath(userNav, filterConfig, nodeURI);
-    
+    UserNode userNode = ExoContainerContext.getService(UserPortalConfigService.class)
+                                           .getSiteNodeOrGlobalNode(Util.getUIPortal().getSiteKey().getTypeName(),
+                                                                    Util.getUIPortal().getSiteKey().getName(),
+                                                                    nodeURI,
+                                                                    ConversationState.getCurrent().getIdentity().getUserId());
+
     if (userNode == null || userNode.getPageRef() == null) return false;
     
     return PublicationUtil.getValuesAsString(contentNode, "publication:webPageIDs").contains(userNode.getPageRef());

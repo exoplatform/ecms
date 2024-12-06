@@ -65,12 +65,10 @@ public class UIFormRichtextField extends DialogFormField {
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
     SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-    String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
+    String skin = Util.getUIPortalApplication().getSkin();
     String portal = Util.getUIPortal().getName();
     Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
     SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
-                                                            .getUserPortalConfig()
-                                                            .getPortalConfig()
                                                             .getSkin());
     if (customSkin != null) portalSkins.add(customSkin);
     for (SkinConfig portalSkin : portalSkins) {

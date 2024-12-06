@@ -22,12 +22,14 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Value;
 
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.util.NavigationUtils;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -197,8 +199,11 @@ public class UIPublicationAction extends UIForm {
      */
     private UserNode getUserNodeByUri(UserNavigation pageNav, String uri) {
       if(pageNav == null || uri == null) return null;
-      UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
-      return userPortal.resolvePath(pageNav, null, uri);
+      return ExoContainerContext.getService(UserPortalConfigService.class)
+                                .getSiteNodeOrGlobalNode(pageNav.getKey().getTypeName(),
+                                                         pageNav.getKey().getName(),
+                                                         uri,
+                                                         ConversationState.getCurrent().getIdentity().getUserId());
     }
   }
 

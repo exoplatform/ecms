@@ -324,8 +324,8 @@ public class UICLVPortlet extends UIPortletApplication {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE,
                                          "" + wcmService.getPortletExpirationCache());
-      if (log.isTraceEnabled())
-        log.trace("CLV rendering : cache set to " + wcmService.getPortletExpirationCache());
+      if (LOG.isTraceEnabled())
+        LOG.trace("CLV rendering : cache set to " + wcmService.getPortletExpirationCache());
     }
     String nDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
     PortletMode npMode = pContext.getApplicationMode();
