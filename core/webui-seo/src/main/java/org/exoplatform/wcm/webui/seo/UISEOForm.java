@@ -632,7 +632,7 @@ public class UISEOForm extends UIForm{
     // Get default locale
     Locale defaultLocale = Locale.getDefault();
     // set default locale to current user selected language
-    Locale.setDefault(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale());
+    Locale.setDefault(Util.getPortalRequestContext().getLocale());
 
     LocaleConfigService localService = WCMCoreUtils.getService(LocaleConfigService.class) ;
     List<SelectItemOption<String>> languages = new ArrayList<>() ;
