@@ -156,7 +156,7 @@ public class PDFViewer extends UIForm {
 
   public String getResourceBundle(String key) {
     try {
-      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+      Locale locale = Util.getPortalRequestContext().getLocale();
       ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
       ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
 
@@ -168,7 +168,7 @@ public class PDFViewer extends UIForm {
 
   public String getResource(String key) {
     try {
-      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+      Locale locale = Util.getPortalRequestContext().getLocale();
       ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
       sharedResourcesBundleNames = resourceBundleService.getSharedResourceBundleNames();
       sharedResourceBundle = resourceBundleService.getResourceBundle(sharedResourcesBundleNames, locale);

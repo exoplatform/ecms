@@ -163,7 +163,7 @@ public class UISearchResult extends UIContainer {
   }
 
   public DateFormat getSimpleDateFormat() {
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+    Locale locale = Util.getPortalRequestContext().getLocale();
     return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
   }
 
