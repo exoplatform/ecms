@@ -127,7 +127,7 @@ public abstract class AbstractCloudFileViewer extends UIAbstractManagerComponent
    * @return the resource bundle
    */
   public String appRes(String key) {
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+    Locale locale = Util.getPortalRequestContext().getLocale();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
                                                                             new String[] { "locale.clouddrive.CloudDrive",

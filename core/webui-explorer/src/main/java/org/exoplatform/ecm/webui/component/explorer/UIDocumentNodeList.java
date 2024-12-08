@@ -243,7 +243,7 @@ public class UIDocumentNodeList extends UIContainer {
     try {
       Property property = node.getProperty(propertyName);
       if(property != null) {
-        Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+        Locale locale = Util.getPortalRequestContext().getLocale();
         DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
         return dateFormat.format(property.getDate().getTime());
       }
