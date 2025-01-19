@@ -154,8 +154,12 @@ public class TestSearchService extends BaseSearchTest {
     PageStorage pageService = getService(PageStorage.class);
     PageContext page = pageService.loadPage(new PageKey(new SiteKey("portal", "classic"), "testpage"));
     if(page == null){
-      PageState pageState = new PageState("testpage", "test page", true,
-                                          "testpage", null, null, null, null);
+      PageState pageState = new PageState("testpage",
+                                          "test page",
+                                          true,
+                                          "testpage",
+                                          null,
+                                          null);
       page = new  PageContext(new PageKey(new SiteKey("portal", "classic"), "testpage"), pageState);
       pageService.savePage(page);
     }
