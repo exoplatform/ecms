@@ -34,7 +34,7 @@
         </value-param>
         <value-param>
           <name>containerName</name>
-          <value>bottom-all-container</value>
+          <value>body-end-container</value>
         </value-param>
         <object-param>
           <name>attachment-app-portlet</name>
