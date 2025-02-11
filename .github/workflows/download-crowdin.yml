@@ -9,6 +9,9 @@ jobs:
   download-crowdin-exo:
     name: CI Build
     uses: exoplatform/swf-scripts/.github/workflows/download-crowdin-exoplatform.yml@master
+    with:
+      YML_CROWDIN_LANGUAGES_ARG: ${{vars.YML_CROWDIN_LANGUAGES_ARG}}
+      CROWDIN_LANGUAGES_ARG: ${{vars.CROWDIN_LANGUAGES_ARG}}
     secrets:
       CROWDIN_GITHUB_TOKEN: ${{ secrets.CROWDIN_GITHUB_TOKEN }}
       CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
