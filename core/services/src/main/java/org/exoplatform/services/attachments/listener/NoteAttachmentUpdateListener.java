@@ -54,10 +54,15 @@ public class NoteAttachmentUpdateListener extends Listener<String, Map<String, O
         String draftPageId = (String) data.get("draftPageId");
         String pageVersionId = (String) data.get("pageVersionId");
         String draftForExistingPageId = (String) data.get("draftForExistingPageId");
+        String unscheduledPageVersionId = (String) data.get("unscheduledPageVersionId");
 
 
         if (draftPageId != null && pageVersionId != null) {
           moveAttachments(draftPageId, pageVersionId, WIKI_DRAFT_PAGES, WIKI_PAGE_VERSIONS);
+        }
+
+        if (draftPageId != null && unscheduledPageVersionId != null) {
+          moveAttachments(unscheduledPageVersionId, draftPageId, WIKI_PAGE_VERSIONS ,WIKI_DRAFT_PAGES);
         }
 
         if (draftForExistingPageId != null && pageVersionId != null) {
