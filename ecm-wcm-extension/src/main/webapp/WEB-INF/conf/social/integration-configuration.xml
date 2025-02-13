@@ -98,6 +98,11 @@
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.attachments.listener.NoteAttachmentUpdateListener</type>
     </component-plugin>
+    <component-plugin>
+      <name>note.draft.for.new.page.created</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.attachments.listener.NoteAttachmentUpdateListener</type>
+    </component-plugin>
 
   </external-component-plugins>
 

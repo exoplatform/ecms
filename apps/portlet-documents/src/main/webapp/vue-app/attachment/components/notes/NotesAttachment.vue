@@ -113,9 +113,9 @@ export default {
     });
   },
   beforeDestroy() {
-    document.removeEventListener('note-draft-auto-save-done');
-    document.removeEventListener('open-notes-attachments');
-    document.addEventListener('attachments-app-drawer-closed');
+    document.removeEventListener('open-notes-attachments', this.openAttachmentDrawer);
+    document.removeEventListener('attachments-app-drawer-closed', this.handleDrawerClosedEvent);
+    document.removeEventListener('article-draft-auto-save-done');
   },
   methods: {
     openAttachmentDrawer() {
