@@ -1,13 +1,31 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.jcr.*;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Property;
+import javax.jcr.PropertyType;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.Value;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
-import javax.jcr.query.*;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,11 +36,12 @@ import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.documents.VersionHistoryUtils;
-import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
-import org.exoplatform.services.jcr.core.*;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
@@ -51,8 +70,6 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
   private TrashService         trashService;
 
-  private NewFolksonomyService newFolksonomyService;
-
   private MetadataService      metadataService;
 
   private List<String>         supportedContentIndexingMimetypes;
@@ -63,7 +80,6 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     super(initParams);
     this.repositoryService = CommonsUtils.getService(RepositoryService.class);
     this.trashService = CommonsUtils.getService(TrashService.class);
-    this.newFolksonomyService = CommonsUtils.getService(NewFolksonomyService.class);
     this.metadataService = CommonsUtils.getService(MetadataService.class);
     if (initParams.containsKey("documents.content.indexing.mimetypes")) {
       String supportedMimetypes = initParams.getValueParam("documents.content.indexing.mimetypes").getValue();
@@ -179,7 +195,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
 
       // If not not a file or trashed or technical node - we skip it
-      if (!node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node) || isInContentFolder(node)) {
+      if (!node.isNodeType(NodetypeConstant.NT_FILE) || trashService.isInTrash(node)) {
         return null;
       }
 
@@ -249,7 +265,6 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       document.setId(id);
       document.setLastUpdatedDate(new Date());
       document.setPermissions(computePermissions(node));
-      document.setTags(getTags(node, session.getWorkspace().getName()));
       document.setFields(fields);
       addDocumentMetadata(document, node.getUUID());
 
@@ -268,20 +283,6 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     MetadataObject metadataObject = new MetadataObject(FILE_METADATA_OBJECT_TYPE, documentId);
     List<MetadataItem> metadataItems = metadataService.getMetadataItemsByObject(metadataObject);
     document.setMetadataItems(metadataItems);
-  }
-
-  protected boolean isInContentFolder(Node node) {
-    try {
-      return ((node.isNodeType("exo:htmlFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent())) ||
-          (node.isNodeType("exo:cssFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
-          (node.isNodeType("exo:jsFile") && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent())) ||
-          (node.isNodeType("nt:file")
-              && (node.getPath().contains("/medias/images") || node.getPath().contains("/medias/videos")
-                  || node.getPath().contains("/medias/audio"))
-              && org.exoplatform.services.cms.impl.Utils.isDocument(node.getParent().getParent().getParent())));
-    } catch (Exception e) {
-      return false;
-    }
   }
 
   @Override
@@ -374,15 +375,5 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
     }
 
     return permissions;
-  }
-
-  // Get tags of document
-  private List<String> getTags(Node node, String workspace) throws Exception {
-    List<String> tags = new ArrayList<>();
-    List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocument(node, workspace);
-    for (Node nodeTag : tagList) {
-      tags.add(nodeTag.getName());
-    }
-    return tags;
   }
 }

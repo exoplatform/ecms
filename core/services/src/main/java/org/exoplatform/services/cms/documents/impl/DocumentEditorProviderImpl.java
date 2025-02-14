@@ -206,22 +206,6 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public <T> T initPreview(String fileId, String workspace, URI requestURI, Locale locale) {
     return editor.initPreview(fileId, workspace, requestURI, locale);
   }
-  
-  
-  /**
-   * Inits the explorer.
-   *
-   * @param <T> the generic type
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @param context the context
-   * @return the settings object
-   */
-  @Override
-  public <T> T initExplorer(String fileId, String workspace, WebuiRequestContext context) {
-    return editor.initExplorer(fileId, workspace, context);
-  }
-
 
   /**
    * Gets the provider name.

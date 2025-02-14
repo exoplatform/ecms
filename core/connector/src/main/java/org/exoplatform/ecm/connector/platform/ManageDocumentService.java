@@ -52,7 +52,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
@@ -474,7 +473,7 @@ public class ManageDocumentService implements ResourceContainer {
       Node sourceNode = null;
       Node referNode = null;
       Node child = iterator.nextNode();
-      if (child.isNodeType(FCKUtils.EXO_HIDDENABLE) && !showHidden)
+      if (child.isNodeType(NodetypeConstant.EXO_HIDDENABLE) && !showHidden)
         continue;
       if (child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid") && child.hasProperty("exo:workspace")) {
         sourceNode = linkManager.getTarget(child);

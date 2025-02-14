@@ -1,16 +1,13 @@
 package org.exoplatform.services.ecm.dms.documents;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 
 public class TestTrashService extends BaseWCMTestCase {
@@ -133,10 +130,6 @@ public class TestTrashService extends BaseWCMTestCase {
     node1.addMixin(MIX_REFERENCEABLE);
     
     // Add public tag for node
-    NewFolksonomyService newFolksonomyService = (NewFolksonomyService)container.getComponentInstanceOfType(NewFolksonomyService.class);
-    String[] tags = {"wcm","ecms"};    
-    newFolksonomyService.addPublicTag("/tags", tags, node0, COLLABORATION_WS);  
-    newFolksonomyService.addPublicTag("/tags", tags, node1, COLLABORATION_WS); 
     session.save();
     session2.save();
     
@@ -413,34 +406,6 @@ public class TestTrashService extends BaseWCMTestCase {
     trashNode.remove();
     testNode.remove();
     session.save();
-  }
-  /**
-   * test method testRemoveRelations()
-   * input: /TestNode/node0
-   *        Add a relation node to node0
-   *        /TestNode/node3
-   * test action: remove all relation nodes of node0
-   * expectedValue : 0 (number of relation nodes of /testNode/node0 )   
-   * @throws Exception
-   */
-  public void testRemoveRelations() throws Exception {
-  	Node rootNode = session.getRootNode();
-  	Node testNode = rootNode.addNode("testNode");
-  	Node test0 = rootNode.addNode("test0");
-  	testNode.addMixin(MIX_REFERENCEABLE);
-  	test0.addMixin(MIX_REFERENCEABLE);
-  	session.save();
-  	RelationsService relationService = (RelationsService) container.getComponentInstanceOfType(RelationsService.class);
-  	relationService.addRelation(testNode, "/test0", session.getWorkspace().getName());
-  	session.save();
-  	trashService.removeRelations(testNode, sessionProvider);
-  	session.save();
-  	List<Node> nodesRelation = relationService.getRelations(testNode, sessionProvider);
-  	int count = nodesRelation.size();
-  	assertEquals("testRemoveRelations failed!", 0, count);
-  	testNode.remove();
-  	test0.remove();
-  	session.save();
   }
 
   /**

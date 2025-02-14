@@ -398,7 +398,6 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
           }
 
           concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.MIME_TYPE, Utils.getMimeType(originalActivityFileNode));
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.IMAGE_PATH, Utils.getIllustrativeImage(targetSpaceFileNode));
           String nodeTitle;
           try {
             nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(targetSpaceFileNode);
@@ -530,10 +529,10 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
   private String getSize(Node node) {
     double size = 0;
     try {
-      if (node.hasNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT)) {
-        Node contentNode = node.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT);
-        if (contentNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA)) {
-          size = contentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA).getLength();
+      if (node.hasNode(NodetypeConstant.JCR_CONTENT)) {
+        Node contentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
+        if (contentNode.hasProperty(NodetypeConstant.JCR_DATA)) {
+          size = contentNode.getProperty(NodetypeConstant.JCR_DATA).getLength();
         }
 
         return FileUtils.byteCountToDisplaySize((long) size);

@@ -42,7 +42,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -107,8 +106,7 @@ public class RESTImagesRendererService implements ResourceContainer{
                                      @HeaderParam("If-Modified-Since") String ifModifiedSince) {
     try {
       SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
-      WCMService wcmService = WCMCoreUtils.getService(WCMService.class);
-      Node node = wcmService.getReferencedContent(sessionProvider, workspaceName, nodeIdentifier);
+      Node node = WCMCoreUtils.getReferencedContent(sessionProvider, workspaceName, nodeIdentifier);
       if (node == null) return Response.status(HTTPStatus.NOT_FOUND).build();
 
       if ("file".equals(param)) {

@@ -25,16 +25,15 @@ import java.util.Set;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
+import org.picocontainer.Startable;
+
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.javascript.XJavascriptService;
-import org.exoplatform.services.wcm.skin.XSkinService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.picocontainer.Startable;
 
 /**
  * Created by The eXo Platform SAS
@@ -129,10 +128,6 @@ public class WCMContentInitializerService implements Startable{
       contentInitializerServiceLogContent.setProperty("jcr:data", logData.toString());
       contentInitializerServiceLogContent.setProperty("jcr:lastModified", date.getTime());
       session.save();
-      XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
-      XSkinService xSkinService = WCMCoreUtils.getService(XSkinService.class);
-      xSkinService.start();
-      jsService.start();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Error when start WCMContentInitializerService: ", e);

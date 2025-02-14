@@ -457,28 +457,6 @@ public class TestCmsService extends BaseWCMTestCase {
     session.save();
   }
 
- /**
-  * Test method CmsService.moveNode()
-  * Move node test1 to test2 node, clean test1 node
-  * Expect: node test1 does not exist, node test2/test1 exits
-  * @throws Exception
-  */
-  public void testMoveNode() throws Exception {
-    Node test1 = session.getRootNode().addNode("source");
-    session.save();
-    Session session2 = sessionProviderService_.getSystemSessionProvider(null).getSession(SYSTEM_WS, repository);
-    Node test2 = session.getRootNode().addNode("target");
-    session2.save();
-    String destPath = test2.getPath() + test1.getPath();
-    cmsService.moveNode(test1.getPath(), COLLABORATION_WS, SYSTEM_WS, destPath);
-    assertTrue(session2.itemExists(destPath));
-    assertTrue(!session.itemExists("/source"));
-
-    test2.remove();
-    session.save();
-    session2.save();
-  }
-
   /**
    *  Compare two input stream, return true if bytes of is1 equal bytes of is2
    * @param is1

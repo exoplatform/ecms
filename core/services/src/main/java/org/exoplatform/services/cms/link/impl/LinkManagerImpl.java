@@ -134,19 +134,6 @@ public class LinkManagerImpl implements LinkManager {
       linkNode.setProperty(SYMLINK_TITLE, linkTitle);
       linkNode.setProperty(SYMLINK_NAME, linkName);
       linkNode.getSession().save();
-      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-      try {
-        String remoteUser = WCMCoreUtils.getRemoteUser();
-        if (remoteUser != null) {
-          if (Utils.isDocument(target) && targetEdited) {
-            listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, null, target);
-          }
-        }
-      } catch (Exception e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Error while broadcasting event: " + e.getMessage());
-        }
-      }
       return linkNode;
     }
     return null;

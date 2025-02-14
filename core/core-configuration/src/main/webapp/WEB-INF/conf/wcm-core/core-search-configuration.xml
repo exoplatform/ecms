@@ -5,37 +5,6 @@
         xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
     <component>
-        <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
-        <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
-        <component-plugins>
-            <component-plugin>
-                <name>ExcludeMimeTypes</name>
-                <set-method>addExcludeIncludeDataTypePlugin</set-method>
-                <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
-                <init-params>
-                    <properties-param>
-                        <name>search.exclude.datatypes</name>
-                        <description>exclude some data type when search</description>
-                        <property name="mimetypes"
-                                  value="${wcm.search.excluded-mimetypes:text/css,text/javascript,application/x-javascript,text/ecmascript}"/>
-                        <property name="nodetypes" value="${wcm.search.excluded-nodetypes:exo:restoreLocation}"/>
-                    </properties-param>
-                </init-params>
-            </component-plugin>
-        </component-plugins>
-        <init-params>
-            <value-param>
-                <name>isEnabledFuzzySearch</name>
-                <value>${wcm.search.enableFuzzySearch:true}</value>
-            </value-param>
-            <value-param>
-                <name>fuzzySearchIndex</name>
-                <value>${wcm.search.fuzzySearchIndex:}</value>
-            </value-param>
-        </init-params>
-    </component>
-
-    <component>
         <key>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</key>
         <type>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</type>
         <init-params>

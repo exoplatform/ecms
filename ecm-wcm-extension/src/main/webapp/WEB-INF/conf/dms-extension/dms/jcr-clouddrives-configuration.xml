@@ -95,8 +95,8 @@
         <values-param>
           <name>autoCreatedInNewRepository</name>
           <description>Cloud Drive node types configuration file</description>
-          <value>jar:/conf/portal/jcr/clouddrive-nodetypes.xml</value>
-          <value>jar:/conf/portal/jcr/clouddrive-ui-nodetypes.xml</value>
+          <value>war:/conf/dms-extension/dms/clouddrive-nodetypes.xml</value>
+          <value>war:/conf/dms-extension/dms/clouddrive-ui-nodetypes.xml</value>
         </values-param>
       </init-params>
     </component-plugin>

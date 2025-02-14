@@ -56,7 +56,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
+import org.exoplatform.services.wcm.search.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.metadata.MetadataService;
 import org.exoplatform.social.metadata.model.MetadataItem;

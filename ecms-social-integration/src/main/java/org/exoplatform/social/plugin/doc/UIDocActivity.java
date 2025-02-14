@@ -16,40 +16,52 @@
  */
 package org.exoplatform.social.plugin.doc;
 
-/**
- * Created by The eXo Platform SAS
- * Author : Zun
- *          exo@exoplatform.com
- * Jul 23, 2010  
- */
 public class UIDocActivity {
-  
-  private static final String IMAGE_PREFIX = "image/";
-  private static final String DOCUMENT_POSTFIX = "/pdf";
-  
-  public static final String DOCLINK = "DOCLINK";
-  public static final String MESSAGE = "MESSAGE";
-  public static final String REPOSITORY = "REPOSITORY";
-  public static final String WORKSPACE = "WORKSPACE";
-  public static final String DOCNAME = "DOCNAME";
-  public static final String ID = "id";
-  public static final String DOCPATH = "DOCPATH";
-  public static final String  LINK_PARAM = "link";
 
-  public static final String CONTENT_NAME       = "contentName";
-  public static final String CONTENT_LINK       = "contenLink";
-  public static final String IMAGE_PATH         = "imagePath";
-  public static final String MIME_TYPE          = "mimeType";
-  public static final String STATE              = "state";
-  public static final String AUTHOR             = "author";
-  public static final String DATE_CREATED       = "dateCreated";
-  public static final String LAST_MODIFIED      = "lastModified";
-  public static final String DOCUMENT_TYPE_LABEL= "docTypeLabel";  
-  public static final String DOCUMENT_TITLE     = "docTitle";  
-  public static final String DOCUMENT_VERSION   = "docVersion";  
-  public static final String DOCUMENT_SUMMARY   = "docSummary";
-  public static final String IS_SYMLINK         = "isSymlink";
-  public static final String REPOSITORY_NAME = "repository";
-  public static final String WORKSPACE_NAME = "collaboration";
+  public static final String DOCLINK             = "DOCLINK";
+
+  public static final String MESSAGE             = "MESSAGE";
+
+  public static final String REPOSITORY          = "REPOSITORY";
+
+  public static final String WORKSPACE           = "WORKSPACE";
+
+  public static final String DOCNAME             = "DOCNAME";
+
+  public static final String ID                  = "id";
+
+  public static final String DOCPATH             = "DOCPATH";
+
+  public static final String LINK_PARAM          = "link";
+
+  public static final String CONTENT_NAME        = "contentName";
+
+  public static final String CONTENT_LINK        = "contenLink";
+
+  public static final String IMAGE_PATH          = "imagePath";
+
+  public static final String MIME_TYPE           = "mimeType";
+
+  public static final String STATE               = "state";
+
+  public static final String AUTHOR              = "author";
+
+  public static final String DATE_CREATED        = "dateCreated";
+
+  public static final String LAST_MODIFIED       = "lastModified";
+
+  public static final String DOCUMENT_TYPE_LABEL = "docTypeLabel";
+
+  public static final String DOCUMENT_TITLE      = "docTitle";
+
+  public static final String DOCUMENT_VERSION    = "docVersion";
+
+  public static final String DOCUMENT_SUMMARY    = "docSummary";
+
+  public static final String IS_SYMLINK          = "isSymlink";
+
+  public static final String REPOSITORY_NAME     = "repository";
+
+  public static final String WORKSPACE_NAME      = "collaboration";
 
 }

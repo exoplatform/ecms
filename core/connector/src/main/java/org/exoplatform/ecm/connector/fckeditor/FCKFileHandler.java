@@ -20,12 +20,10 @@ import java.text.SimpleDateFormat;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.ISO8601;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import org.exoplatform.commons.utils.ISO8601;
 
 /**
  * Created by The eXo Platform SAS.
@@ -34,18 +32,7 @@ import org.w3c.dom.Element;
  */
 public class FCKFileHandler {
 
-  private TemplateService templateService;
-
   private static final String[] IMAGE_MIMETYPE = {"image/gif", "image/jpeg", "image/bmp", "image/png", "image/tiff"};
-
-  /**
-   * Instantiates a new fCK file handler.
-   *
-   * @param container the container
-   */
-  public FCKFileHandler(ExoContainer container) {
-    templateService = WCMCoreUtils.getService(TemplateService.class);
-  }
 
   /**
    * Gets the file type.
@@ -118,10 +105,7 @@ public class FCKFileHandler {
   protected String getDocumentType(final Node node) throws Exception {
     if (node.isNodeType("exo:presentationable"))
       return node.getProperty("exo:presentationType").getString();
-    String primaryType = node.getPrimaryNodeType().getName();
-    if (templateService.getDocumentTemplates().contains(primaryType))
-      return primaryType;
-    return null;
+    return node.getPrimaryNodeType().getName();
   }
 
   /**

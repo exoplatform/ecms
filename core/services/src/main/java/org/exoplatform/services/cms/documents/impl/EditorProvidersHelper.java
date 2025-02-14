@@ -38,29 +38,6 @@ public class EditorProvidersHelper {
   }
 
   /**
-   * Inits the explorer.
-   *
-   * @param providers the providers
-   * @param identity the identity
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @param context the context
-   * @return the list
-   */
-  public List<ProviderInfo> initExplorer(List<DocumentEditorProvider> providers,
-                                         Identity identity,
-                                         String fileId,
-                                         String workspace,
-                                         WebuiRequestContext context) {
-    return initEditorProviders(providers,
-                               identity,
-                               fileId,
-                               workspace,
-                               (provider) -> provider.initExplorer(fileId, workspace, context));
-
-  }
-
-  /**
    * Inits the preview.
    *
    * @param providers the providers

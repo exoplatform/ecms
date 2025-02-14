@@ -845,7 +845,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         if (activityService.isBroadcastNTFileEvents(node)) {
           listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
         }
-      } else if(!WCMCoreUtils.isDocumentNodeType(node)){
+      } else {
         Queue<Node> queue = new LinkedList<Node>();
         queue.add(node);
 
@@ -854,14 +854,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         try {
           while (!queue.isEmpty()) {
             tempNode = queue.poll();
-            if (WCMCoreUtils.isDocumentNodeType(tempNode) 
-                || tempNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+            if (tempNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
               listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, tempNode.getParent(), tempNode);
             } else {
-              for (NodeIterator iter = tempNode.getNodes(); iter.hasNext(); ) {
+              for (NodeIterator iter = tempNode.getNodes(); iter.hasNext();) {
                 Node childNode = iter.nextNode();
-                if(WCMCoreUtils.isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) 
-                    || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
+                if (childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
                   queue.add(childNode);
               }
             }

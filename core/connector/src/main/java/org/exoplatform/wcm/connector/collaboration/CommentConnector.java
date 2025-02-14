@@ -24,21 +24,24 @@ import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
-import javax.ws.rs.*;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
-import org.exoplatform.services.cms.comments.CommentsService;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
-import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
-import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import org.exoplatform.services.cms.comments.CommentsService;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.wcm.connector.BaseConnector;
 
 
 /**
@@ -217,37 +220,6 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
       jcrPath.substring(1);
     }
     return getContent(workspaceName, jcrPath, null, false);
-  }
-
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.wcm.connector.fckeditor.BaseConnector#getRootContentStorage
-   * (javax.jcr.Node)
-   */
-  @Override
-  protected Node getRootContentStorage(Node parentNode) throws Exception {
-    try {
-      PortalFolderSchemaHandler folderSchemaHandler =
-        webSchemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
-      return folderSchemaHandler.getDocumentStorage(parentNode);
-    } catch (Exception e) {
-      WebContentSchemaHandler webContentSchemaHandler =
-        webSchemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
-      return webContentSchemaHandler.getDocumentFolder(parentNode);
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.wcm.connector.fckeditor.BaseConnector#getContentStorageType
-   * ()
-   */
-  @Override
-  protected String getContentStorageType() throws Exception {
-    return FCKUtils.DOCUMENT_TYPE;
   }
 
 }

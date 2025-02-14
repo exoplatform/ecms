@@ -18,7 +18,6 @@ package org.exoplatform.services.deployment.plugins;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -48,8 +47,7 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
    */
   public LinkDeploymentPlugin(InitParams initParams,
                               RepositoryService repositoryService,
-                              LinkManager linkManager,
-                              TaxonomyService taxonomyService) {
+                              LinkManager linkManager) {
     super(initParams);
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;

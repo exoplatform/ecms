@@ -16,17 +16,33 @@
  */
 package org.exoplatform.services.cms.documents.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import javax.jcr.version.VersionException;
+
+import org.gatein.pc.api.PortletInvoker;
+import org.gatein.pc.api.info.PortletInfo;
+import org.gatein.pc.api.info.PreferencesInfo;
+
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -37,24 +53,8 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.gatein.pc.api.PortletInvoker;
-import org.gatein.pc.api.info.PortletInfo;
-import org.gatein.pc.api.info.PreferencesInfo;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -75,7 +75,6 @@ public class TrashServiceImpl implements TrashService {
 
   private RepositoryService repositoryService;
   private LinkManager linkManager;
-  private TaxonomyService taxonomyService_;
   private String trashWorkspace_;
   private String trashHome_;
   private ExoCache<String, Object> cache;
@@ -85,11 +84,9 @@ public class TrashServiceImpl implements TrashService {
 
   public TrashServiceImpl(RepositoryService repositoryService,
                           LinkManager linkManager,
-                          TaxonomyService taxonomyService,
                           InitParams initParams) throws Exception {
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;
-    this.taxonomyService_ = taxonomyService;
     this.trashWorkspace_ = initParams.getValueParam("trashWorkspace").getValue();
     this.trashHome_ = initParams.getValueParam("trashHomeNodePath").getValue();
     cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance(CACHE_NAME);
@@ -164,10 +161,6 @@ public class TrashServiceImpl implements TrashService {
     if (node.isNodeType(SYMLINK)) nodeUUID = null;
     String taxonomyLinkUUID = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(UUID).getString() : null;
     String taxonomyLinkWS = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(EXO_WORKSPACE).getString() : null;
-    if(nodeUUID != null) {
-      SEOService seoService = WCMCoreUtils.getService(SEOService.class);
-      cache.remove(seoService.getHash(nodeUUID));
-    }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
       String restorePath = fixRestorePath(node.getPath());
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -182,23 +175,6 @@ public class TrashServiceImpl implements TrashService {
         //clone node in trash folder
         trashSession.getWorkspace().clone(nodeWorkspaceName,
             node.getPath(), actualTrashPath, true);
-        if (node.isNodeType(MIX_REFERENCEABLE)) {
-            Node clonedNode = trashSession.getNodeByUUID(node.getUUID());
-            //remove link from tag to node
-
-            NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
-
-            String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-            List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, tagWorkspace);
-            for (Node tag : tags) {
-              newFolksonomyService.removeTagOfDocument(tag.getPath(), node, tagWorkspace);
-              linkManager.createLink(tag, clonedNode);
-              long total = tag.hasProperty(EXO_TOTAL) ?
-                  tag.getProperty(EXO_TOTAL).getLong() : 0;
-                  tag.setProperty(EXO_TOTAL, total - 1);
-                  tag.getSession().save();
-            }
-        }
         node.remove();
       }
       
@@ -215,18 +191,6 @@ public class TrashServiceImpl implements TrashService {
         } catch (Exception e) {
           if (LOG.isWarnEnabled()) {
             LOG.warn(e.getMessage());
-          }
-        }
-        if (targetNode != null && isInTaxonomyTree(originalPath, targetNode)) {
-          List<Node> symlinks = linkManager.getAllLinks(targetNode, SYMLINK, sessionProvider);
-          boolean found = false;
-          for (Node symlink : symlinks)
-            if (!symlink.isNodeType(EXO_RESTORE_LOCATION)) {
-              found = true;
-              break;
-            }
-          if (!found) {
-            this.moveToTrash(targetNode, sessionProvider);
           }
         }
       }
@@ -270,31 +234,6 @@ public class TrashServiceImpl implements TrashService {
     }
     return restoreId;
   }
-  
-  /**
-   *
-   * @param path
-   * @param targetNode
-   * @return
-   */
-  private boolean isInTaxonomyTree(String path, Node targetNode) {
-    try {
-      List<Node> taxonomyTrees = taxonomyService_.getAllTaxonomyTrees(true);
-      for (Node tree : taxonomyTrees)
-        if (path.contains(tree.getPath())) {
-          Node taxonomyActionNode = tree.getNode("exo:actions/taxonomyAction");
-          String targetWorkspace = taxonomyActionNode.getProperty(EXO_TARGETWS).getString();
-          String targetPath = taxonomyActionNode.getProperty(EXO_TARGETPATH).getString();
-          if (targetNode.getSession().getWorkspace().getName().equals(targetWorkspace)
-              && targetNode.getPath().contains(targetPath))
-            return true;
-          break;
-        }
-      return false;
-    } catch (Exception e) {
-      return false;
-    }
-  }
 
 
   /**
@@ -328,24 +267,6 @@ public class TrashServiceImpl implements TrashService {
       //clone node
       restoreSession.getWorkspace().clone(
           trashWorkspace, trashNodePath, restorePath, true);
-      if (trashNode.isNodeType(MIX_REFERENCEABLE)) {
-        Node restoredNode = restoreSession.getNodeByUUID(trashNode.getUUID());
-
-        //remove link from tag to node in trash
-        NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
-
-        String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-        List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(trashNode, tagWorkspace);
-        for (Node tag : tags) {
-          newFolksonomyService.removeTagOfDocument(tag.getPath(), trashNode, tagWorkspace);
-          linkManager.createLink(tag, restoredNode);
-          long total = tag.hasProperty(EXO_TOTAL) ?
-              tag.getProperty(EXO_TOTAL).getLong() : 0;
-              tag.setProperty(EXO_TOTAL, total + 1);
-              tag.getSession().save();
-        }
-      }
-
       trashNodeSession.getItem(trashNodePath).remove();
     }
 

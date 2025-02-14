@@ -75,10 +75,10 @@ public class ExtendedMimeTypeResolver {
     public MimeTypeMap(InitParams params) throws ConfigurationException {
       ValuesParam param = params.getValuesParam("mimetypes-properties");
       if (param != null) {
-        ArrayList<String> paths = new ArrayList<String>();
+        ArrayList<String> paths = new ArrayList<>();
         for (Object v : param.getValues()) {
-          if (v instanceof String) {
-            paths.add((String) v);
+          if (v instanceof String string) {
+            paths.add(string);
           }
         }
         this.paths = paths;
@@ -102,13 +102,13 @@ public class ExtendedMimeTypeResolver {
   protected final ConfigurationManager      configService;
 
   /** The mime types. */
-  protected final Map<String, List<String>> mimeTypes  = new HashMap<String, List<String>>();
+  protected final Map<String, List<String>> mimeTypes  = new HashMap<>();
 
   /** The extentions. */
-  protected final Map<String, List<String>> extentions = new HashMap<String, List<String>>();
+  protected final Map<String, List<String>> extentions = new HashMap<>();
 
   /** The modes. */
-  protected final Map<String, Set<String>>  modes      = new LinkedHashMap<String, Set<String>>();
+  protected final Map<String, Set<String>>  modes      = new LinkedHashMap<>();
 
   /** The resolver. */
   protected final MimeTypeResolver          resolver;

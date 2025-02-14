@@ -28,7 +28,7 @@ import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
+import org.exoplatform.services.wcm.search.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.metadata.MetadataService;
 import org.exoplatform.social.metadata.model.MetadataItem;

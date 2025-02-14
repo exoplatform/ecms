@@ -21,7 +21,7 @@ package org.exoplatform.ecm.webui.viewer;
 import java.util.Arrays;
 import java.util.List;
 
-import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
+import org.exoplatform.ecm.webui.CloudDriveContext;
 import org.exoplatform.ecm.webui.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;

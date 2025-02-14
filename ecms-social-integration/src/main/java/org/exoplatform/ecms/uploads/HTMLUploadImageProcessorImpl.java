@@ -1,8 +1,17 @@
 package org.exoplatform.ecms.uploads;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URLConnection;
-import java.util.*;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,7 +35,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.core.WCMService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.common.service.HTMLUploadImageProcessor;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
@@ -69,8 +78,6 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
 
   private final NodeHierarchyCreator   nodeHierarchyCreator;
 
-  private final WCMService             wcmService;
-
   private String                       repositoryName;
 
   public HTMLUploadImageProcessorImpl(PortalContainer portalContainer,
@@ -78,15 +85,13 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
                                       RepositoryService repositoryService,
                                       LinkManager linkManager,
                                       SessionProviderService sessionProviderService,
-                                      NodeHierarchyCreator nodeHierarchyCreator,
-                                      WCMService wcmService) {
+                                      NodeHierarchyCreator nodeHierarchyCreator) {
     this.portalContainer = portalContainer;
     this.uploadService = uploadService;
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;
     this.sessionProviderService = sessionProviderService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
-    this.wcmService = wcmService;
   }
 
   private static String getURLToReplace(String body, String uploadId, int uploadIdIndex) {
@@ -546,7 +551,7 @@ public class HTMLUploadImageProcessorImpl implements HTMLUploadImageProcessor {
         workspace = workspace.split("/")[0];
         String urlToReplace = restUploadUrl + workspace + "/" + nodeIdentifier;
         try {
-          Node dataNode = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
+          Node dataNode = WCMCoreUtils.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
           if(dataNode!=null){
             String fileName = dataNode.getName();
             Node jcrContentNode = dataNode.getNode("jcr:content");

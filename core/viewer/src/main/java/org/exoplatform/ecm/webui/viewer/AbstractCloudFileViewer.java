@@ -23,9 +23,8 @@ import java.util.ResourceBundle;
 
 import javax.ws.rs.core.MediaType;
 
-import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
+import org.exoplatform.ecm.webui.CloudDriveContext;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudFile;
 import org.exoplatform.services.resources.ResourceBundleService;

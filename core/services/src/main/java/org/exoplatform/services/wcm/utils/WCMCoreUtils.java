@@ -25,13 +25,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -39,7 +37,6 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
-import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -69,8 +66,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.metadata.MetadataService;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -89,22 +84,17 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Tran Nguyen Ngoc
- * ngoc.tran@exoplatform.com
- * Sep 8, 2009
+ * Created by The eXo Platform SAS Author : Tran Nguyen Ngoc
+ * ngoc.tran@exoplatform.com Sep 8, 2009
  */
 public class WCMCoreUtils {
 
-  private static final Log LOG = ExoLogger.getLogger(WCMCoreUtils.class.getName());
+  private static final Log    LOG                      = ExoLogger.getLogger(WCMCoreUtils.class.getName());
 
-  private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
-      + "and exo:active='true' "
-      + "and jcr:mixinTypes <> 'exo:restoreLocation' "
-      + "order by exo:priority ASC";
+  private static String       WEBCONTENT_CSS_QUERY     = "select * from exo:cssFile where jcr:path like '{path}/%' " +
+      "and exo:active='true' " + "and jcr:mixinTypes <> 'exo:restoreLocation' " + "order by exo:priority ASC";
 
   private static final String BAR_NAVIGATION_STYLE_KEY = "bar_navigation_style";
 
@@ -112,7 +102,6 @@ public class WCMCoreUtils {
    * Gets the service.
    *
    * @param clazz the clazz
-   *
    * @return the service
    */
   public static <T> T getService(Class<T> clazz) {
@@ -131,17 +120,20 @@ public class WCMCoreUtils {
 
   /**
    * Use only on system process
+   * 
    * @param node
    * @return
    * @throws RepositoryException
    */
-  public static Node getNodeBySystemSession(Node node) throws RepositoryException{
+  public static Node getNodeBySystemSession(Node node) throws RepositoryException {
     SessionProvider systemSessionProvider = getSystemSessionProvider();
-    return (Node)systemSessionProvider.getSession(node.getSession().getWorkspace().getName(), getRepository()).getItem(node.getPath());
+    return (Node) systemSessionProvider.getSession(node.getSession().getWorkspace().getName(), getRepository())
+                                       .getItem(node.getPath());
   }
 
   /**
    * Check permission can access to parent
+   * 
    * @param node
    * @return
    */
@@ -164,16 +156,14 @@ public class WCMCoreUtils {
     return sessionProviderService.getSessionProvider(null);
   }
 
-  public static boolean isAnonim()
-  {
+  public static boolean isAnonim() {
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if (userId == null)
       return true;
     return false;
   }
 
-  public static SessionProvider createAnonimProvider()
-  {
+  public static SessionProvider createAnonimProvider() {
     return SessionProvider.createAnonimProvider();
   }
 
@@ -182,7 +172,6 @@ public class WCMCoreUtils {
    *
    * @param clazz the class
    * @param containerName the container's name
-   *
    * @return the service
    */
   public static <T> T getService(Class<T> clazz, String containerName) {
@@ -190,7 +179,7 @@ public class WCMCoreUtils {
     if (containerName != null) {
       container = RootContainer.getInstance().getPortalContainer(containerName);
     }
-    if (container.getComponentInstanceOfType(clazz)==null) {
+    if (container.getComponentInstanceOfType(clazz) == null) {
       containerName = PortalContainer.getCurrentPortalContainerName();
       container = RootContainer.getInstance().getPortalContainer(containerName);
     }
@@ -198,19 +187,19 @@ public class WCMCoreUtils {
   }
 
   public static String getContainerNameFromJobContext(JobExecutionContext context) {
-    return ((JobDetailImpl)context.getJobDetail()).getGroup().split(":")[0];
+    return ((JobDetailImpl) context.getJobDetail()).getGroup().split(":")[0];
   }
 
   /**
-   * Check current user has permission to access a node or not
-   * -    For each permission, compare with user's permissions
-   * -      If permission has membership type is "*", just check the user's group id only
-   * -      If permission has other membership types, then check the user's membership type and user's group id
+   * Check current user has permission to access a node or not - For each
+   * permission, compare with user's permissions - If permission has membership
+   * type is "*", just check the user's group id only - If permission has other
+   * membership types, then check the user's membership type and user's group id
    *
    * @param userId the current user's name
    * @param permissions the current node
-   * @param isNeedFullAccess if true, count full access (4) then return true, if false, return true if match first permission
-   *
+   * @param isNeedFullAccess if true, count full access (4) then return true, if
+   *          false, return true if match first permission
    * @return true is user has permissions, otherwise return false
    */
   public static boolean hasPermission(String userId, List<String> permissions, boolean isNeedFullAccess) {
@@ -222,7 +211,7 @@ public class WCMCoreUtils {
       startRequest(organizationService);
       Identity identity = ConversationState.getCurrent().getIdentity();
       Collection<?> memberships = null;
-      if (userId.equals(identity.getUserId())){
+      if (userId.equals(identity.getUserId())) {
         Collection<MembershipEntry> membershipsEntries = identity.getMemberships();
         HashSet<MembershipImpl> membershipsHash = new HashSet<MembershipImpl>();
         for (MembershipEntry membershipEntry : membershipsEntries) {
@@ -232,7 +221,7 @@ public class WCMCoreUtils {
           m.setUserName(userId);
           membershipsHash.add(m);
         }
-        memberships =  new LinkedList<>(membershipsHash);
+        memberships = new LinkedList<>(membershipsHash);
       } else {
         memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
       }
@@ -241,7 +230,8 @@ public class WCMCoreUtils {
       int count = 0;
       String permissionTmp = "";
       for (String permission : permissions) {
-        if (!permissionTmp.equals(permission)) count = 0;
+        if (!permissionTmp.equals(permission))
+          count = 0;
         for (Object userMembershipObj : memberships) {
           userMembership = (Membership) userMembershipObj;
           if (permission.equals(userMembership.getUserName())) {
@@ -249,23 +239,26 @@ public class WCMCoreUtils {
           } else if ("any".equals(permission)) {
             if (isNeedFullAccess) {
               count++;
-              if (count == 4) return true;
-            }
-            else return true;
+              if (count == 4)
+                return true;
+            } else
+              return true;
           } else if (permission.startsWith("*") && permission.contains(userMembership.getGroupId())) {
             if (isNeedFullAccess) {
               count++;
-              if (count == 4) return true;
-            }
-            else return true;
+              if (count == 4)
+                return true;
+            } else
+              return true;
           } else {
             userMembershipTmp = userMembership.getMembershipType() + ":" + userMembership.getGroupId();
             if (permission.equals(userMembershipTmp)) {
               if (isNeedFullAccess) {
                 count++;
-                if (count == 4) return true;
-              }
-              else return true;
+                if (count == 4)
+                  return true;
+              } else
+                return true;
             }
           }
         }
@@ -308,16 +301,14 @@ public class WCMCoreUtils {
     return null;
   }
 
-  public static void startRequest(OrganizationService orgService) throws Exception
-  {
-    if(orgService instanceof ComponentRequestLifecycle) {
+  public static void startRequest(OrganizationService orgService) throws Exception {
+    if (orgService instanceof ComponentRequestLifecycle) {
       ((ComponentRequestLifecycle) orgService).startRequest(ExoContainerContext.getCurrentContainer());
     }
   }
 
-  public static void endRequest(OrganizationService orgService) throws Exception
-  {
-    if(orgService instanceof ComponentRequestLifecycle) {
+  public static void endRequest(OrganizationService orgService) throws Exception {
+    if (orgService instanceof ComponentRequestLifecycle) {
       ((ComponentRequestLifecycle) orgService).endRequest(ExoContainerContext.getCurrentContainer());
     }
   }
@@ -348,15 +339,18 @@ public class WCMCoreUtils {
   public static String getActiveStylesheet(Node webcontent) throws Exception {
     StringBuilder buffer = new StringBuilder();
     String cssQuery = StringUtils.replaceOnce(WEBCONTENT_CSS_QUERY, "{path}", webcontent.getPath());
-    // Need re-login to get session because this node is get from template and the session is not live anymore.
-    // If node is version (which is stored in system workspace) we have to login to system workspace to get data
+    // Need re-login to get session because this node is get from template and
+    // the session is not live anymore.
+    // If node is version (which is stored in system workspace) we have to login
+    // to system workspace to get data
     NodeLocation webcontentLocation = NodeLocation.getNodeLocationByNode(webcontent);
-    ManageableRepository repository = (ManageableRepository)webcontent.getSession().getRepository();
+    ManageableRepository repository = (ManageableRepository) webcontent.getSession().getRepository();
     Session session;
     try {
       if (webcontentLocation.getPath().startsWith("/jcr:system"))
         session =
-        WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getSystemWorkspaceName(), repository);
+                WCMCoreUtils.getSystemSessionProvider()
+                            .getSession(repository.getConfiguration().getSystemWorkspaceName(), repository);
       else {
         session = WCMCoreUtils.getSystemSessionProvider().getSession(webcontentLocation.getWorkspace(), repository);
       }
@@ -368,10 +362,10 @@ public class WCMCoreUtils {
       while (iterator.hasNext()) {
         Node registeredCSSFile = iterator.nextNode();
         buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                      .getProperty(NodetypeConstant.JCR_DATA)
-                      .getString());
+                                       .getProperty(NodetypeConstant.JCR_DATA)
+                                       .getString());
       }
-    } catch(Exception e) {
+    } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected problem happen when active stylesheet", e);
       }
@@ -380,25 +374,28 @@ public class WCMCoreUtils {
   }
 
   /**
-   * gets the global css of given site node. For example, if the site is acme<br>
+   * gets the global css of given site node. For example, if the site is
+   * acme<br>
    * we then return all css code only inside acme/css
+   * 
    * @param siteNode the root node of the site
    * @return global css code inside this site
    * @throws Exception
    */
   public static String getSiteGlobalActiveStylesheet(Node siteNode) throws Exception {
-    if (siteNode == null) return StringUtils.EMPTY;
+    if (siteNode == null)
+      return StringUtils.EMPTY;
 
     StringBuilder buffer = new StringBuilder();
     try {
       List<Node> cssNodeList = new ArrayList<Node>();
       NodeIterator iterator = siteNode.getNodes();
-      //get all cssFolder child nodes of siteNode
+      // get all cssFolder child nodes of siteNode
       while (iterator.hasNext()) {
         Node cssFolder = iterator.nextNode();
         if (cssFolder.isNodeType(NodetypeConstant.EXO_CSS_FOLDER)) {
           NodeIterator iter = cssFolder.getNodes();
-          //get all cssFile child nodes of cssFolder node
+          // get all cssFile child nodes of cssFolder node
           while (iter.hasNext()) {
             Node registeredCSSFile = iter.nextNode();
             if (registeredCSSFile.isNodeType(NodetypeConstant.EXO_CSS_FILE) &&
@@ -408,18 +405,18 @@ public class WCMCoreUtils {
           }
         }
       }
-      //sort cssFile by priority and merge them
+      // sort cssFile by priority and merge them
       Collections.sort(cssNodeList, new FileCSSComparatorByPriority());
       for (Node registeredCSSFile : cssNodeList) {
         try {
           buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                        .getProperty(NodetypeConstant.JCR_DATA)
-                        .getString());
+                                         .getProperty(NodetypeConstant.JCR_DATA)
+                                         .getString());
         } catch (Exception e) {
           continue;
         }
       }
-    } catch(Exception e) {
+    } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected problem happen when active stylesheet", e);
       }
@@ -427,108 +424,34 @@ public class WCMCoreUtils {
     return buffer.toString();
   }
 
-  /**
-   * gets the global javascript of given site node. For example, if the site is acme<br>
-   * we then return all javascript code only inside acme/js
-   * @param siteNode the root node of the site
-   * @return global javascript code inside this site
-   * @throws Exception
-   */
-  public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
-    return getSiteGlobalActiveJs(siteNode, getSystemSessionProvider());
-  }
-
-  /**
-   * gets the global javascript of given site node. For example, if the site is acme<br>
-   * we then return all javascript code only inside acme/js
-   * @param siteNode the root node of the site
-   * @return global javascript code inside this site
-   * @throws Exception
-   */
-  public static String getSiteGlobalActiveJs(Node siteNode, SessionProvider sessionProvider) throws Exception {
-    StringBuilder buffer = new StringBuilder();
-    LivePortalManagerService livePortalService = getService(LivePortalManagerService.class);
-    buffer.append(getSiteActiveJs(livePortalService.getLiveSharedPortal(sessionProvider))).append(getSiteActiveJs(siteNode));
-    return buffer.toString();
-  }
-
-  public static String getSiteActiveJs(Node siteNode) throws Exception {
-    if (siteNode == null) return StringUtils.EMPTY;
-
-    StringBuilder buffer = new StringBuilder();
-    try {
-      List<Node> jsNodeList = new ArrayList<Node>();
-      NodeIterator iterator = siteNode.getNodes();
-      //get all jsFolder child nodes of siteNode
-      while (iterator.hasNext()) {
-        Node jsFolder = iterator.nextNode();
-        if (jsFolder.isNodeType(NodetypeConstant.EXO_JS_FOLDER)) {
-          NodeIterator iter = jsFolder.getNodes();
-          //get all jsFile child nodes of jsFolder node
-          while (iter.hasNext()) {
-            Node registeredJSFile = iter.nextNode();
-            if (registeredJSFile.isNodeType(NodetypeConstant.EXO_JS_FILE) &&
-                registeredJSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
-              jsNodeList.add(registeredJSFile);
-            }
-          }
-        }
-      }
-      //sort jsFile by priority and merge them
-      Collections.sort(jsNodeList, new FileComparatorByPriority());
-      for (Node registeredJSFile : jsNodeList) {
-        try {
-          buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                        .getProperty(NodetypeConstant.JCR_DATA)
-                        .getString());
-        } catch (Exception e) {
-          continue;
-        }
-      }
-    } catch(Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Unexpected problem happen when active javascript", e);
-      }
-    }
-    return buffer.toString();
-  }
-
-  public static Hashtable<String, String> getMetadataTemplates(Node node) throws Exception {
-    MetadataService metadataService = WCMCoreUtils.getService(MetadataService.class);
-    Hashtable<String, String> templates = new Hashtable<String, String>();
-    List<String> metaDataList = metadataService.getMetadataList();
-
-    NodeType[] nodeTypes = node.getMixinNodeTypes();
-    for(NodeType nt : nodeTypes) {
-      if(metaDataList.contains(nt.getName())) {
-        templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
-      }
-    }
-    Item primaryItem;
-    try {
-      primaryItem = node.getPrimaryItem();
-    } catch (ItemNotFoundException e) {
-      primaryItem = null;
-    }
-    if (primaryItem != null && primaryItem.isNode()) {
-      Node primaryNode = (Node) node.getPrimaryItem();
-      NodeType[] primaryTypes = primaryNode.getMixinNodeTypes();
-      for(NodeType nt : primaryTypes) {
-        if(metaDataList.contains(nt.getName())) {
-          templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
-        }
-      }
-    }
-    return templates;
-  }
-
   public static String getRestContextName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
-        getComponentInstance(PortalContainerConfig.class);
+    PortalContainerConfig portalContainerConfig =
+                                                (PortalContainerConfig) container.getComponentInstance(PortalContainerConfig.class);
     PortalContainerInfo containerInfo =
-        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+                                      (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
     return portalContainerConfig.getRestContextName(containerInfo.getContainerName());
+  }
+
+  public static Node getReferencedContent(SessionProvider sessionProvider,
+                                          String workspace,
+                                          String nodeIdentifier) throws Exception {
+    if (workspace == null || nodeIdentifier == null)
+      throw new ItemNotFoundException();
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
+    Node content = null;
+    try {
+      content = session.getNodeByUUID(nodeIdentifier);
+    } catch (ItemNotFoundException itemNotFoundException) {
+      try {
+        content = (Node) session.getItem(nodeIdentifier);
+      } catch (Exception exception) {
+        content = null;
+      }
+    }
+    return content;
   }
 
   public static void deployLinkToPortal(InitParams initParams,
@@ -541,7 +464,7 @@ public class WCMCoreUtils {
     ValueParam valueParam = initParams.getValueParam("override");
     boolean overrideData = false;
     if (valueParam != null) {
-        overrideData = "true".equals(valueParam.getValue());
+      overrideData = "true".equals(valueParam.getValue());
     }
     try {
       while (iterator.hasNext()) {
@@ -552,18 +475,18 @@ public class WCMCoreUtils {
           deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
           sourcePath = deploymentDescriptor.getSourcePath();
           targetPath = deploymentDescriptor.getTargetPath();
-  
-          //in case: create portal from template
+
+          // in case: create portal from template
           if (portalName != null && portalName.length() > 0) {
             sourcePath = StringUtils.replace(sourcePath, "{portalName}", portalName);
             targetPath = StringUtils.replace(targetPath, "{portalName}", portalName);
           }
-  
+
           // sourcePath should looks like : repository:collaboration:/sites
           // content/live/acme
           String[] src = sourcePath.split(":");
           String[] tgt = targetPath.split(":");
-  
+
           if (src.length == 3 && tgt.length == 3) {
             ManageableRepository repository = repositoryService.getCurrentRepository();
             Session session = sessionProvider.getSession(src[1], repository);
@@ -572,30 +495,30 @@ public class WCMCoreUtils {
             Node nodeSrc = (Node) session.getItem(src[2]);
             Node nodeTgt = (Node) session2.getItem(tgt[2]);
             Node tnode = (Node) session.getItem(nodeTgt.getPath());
-            //check if the link node already exist then remove it 
+            // check if the link node already exist then remove it
             if (overrideData && tnode.hasNode(nodeSrc.getName())) {
-                 NodeIterator nodeIterator = tnode.getNodes(nodeSrc.getName());
-                while (nodeIterator.hasNext()) {
-                  String path = "";
-                  try {
-                    Node targetNode = nodeIterator.nextNode();
-                    path = targetNode.getPath();
-                    LOG.info(" - Remove " + targetNode.getPath());
-                    targetNode.remove();
-                    session.save();
-                  } catch (Exception e) {
-                    if (LOG.isDebugEnabled()) {
-                      LOG.debug("Can not remove node: " + path, e);
-                    } else if (LOG.isWarnEnabled()) {
-                      LOG.warn("Can not remove node: " + path);
-                    }
+              NodeIterator nodeIterator = tnode.getNodes(nodeSrc.getName());
+              while (nodeIterator.hasNext()) {
+                String path = "";
+                try {
+                  Node targetNode = nodeIterator.nextNode();
+                  path = targetNode.getPath();
+                  LOG.info(" - Remove " + targetNode.getPath());
+                  targetNode.remove();
+                  session.save();
+                } catch (Exception e) {
+                  if (LOG.isDebugEnabled()) {
+                    LOG.debug("Can not remove node: " + path, e);
+                  } else if (LOG.isWarnEnabled()) {
+                    LOG.warn("Can not remove node: " + path);
                   }
                 }
+              }
             }
             linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
             ExoContainer container = ExoContainerContext.getCurrentContainer();
             PortalContainerInfo containerInfo =
-              (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+                                              (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
             String containerName = containerInfo.getContainerName();
             ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,
                                                                       containerName);
@@ -615,20 +538,19 @@ public class WCMCoreUtils {
       }
     } catch (Exception ex) {
       if (LOG.isErrorEnabled()) {
-        LOG.error("create link from " + deploymentDescriptor.getSourcePath() + " to "
-            + deploymentDescriptor.getTargetPath() + " is FAILURE at "
-            + new Date().toString() + "\n",
-            ex);
+        LOG.error("create link from " + deploymentDescriptor.getSourcePath() + " to " + deploymentDescriptor.getTargetPath() +
+            " is FAILURE at " + new Date().toString() + "\n",
+                  ex);
       }
       throw ex;
     }
   }
 
   /**
-   * compares two JsFile node by exo:priority value, tending to sort in DESC order
-   * because Js file with higher priority is loaded first
+   * compares two JsFile node by exo:priority value, tending to sort in DESC
+   * order because Js file with higher priority is loaded first
+   * 
    * @author vu_nguyen
-   *
    */
   private static class FileComparatorByPriority implements Comparator<Node> {
     @Override
@@ -640,11 +562,11 @@ public class WCMCoreUtils {
           return 1;
         } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
           return -1;
-        } else if (o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() == 
-                  o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong()){
-          return o1.getName().compareTo(o2.getName()); 
+        } else if (o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() ==
+            o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong()) {
+          return o1.getName().compareTo(o2.getName());
         } else {
-          return (int)(o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
+          return (int) (o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
               o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
         }
       } catch (Exception e) {
@@ -652,12 +574,14 @@ public class WCMCoreUtils {
       }
     }
   }
+
   /**
-   * compares two CSSFile node by exo:priority value, tending to sort in ASC order
-   * because CSSFile file with higher priority is loaded last
+   * compares two CSSFile node by exo:priority value, tending to sort in ASC
+   * order because CSSFile file with higher priority is loaded last
+   * 
    * @author vinh_nguyen
    */
-  private static class FileCSSComparatorByPriority implements Comparator<Node>{
+  private static class FileCSSComparatorByPriority implements Comparator<Node> {
     @Override
     public int compare(Node o1, Node o2) {
       try {
@@ -666,7 +590,7 @@ public class WCMCoreUtils {
         } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
           return 1;
         } else {
-          return (int)(o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
+          return (int) (o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
               o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
         }
       } catch (ValueFormatException e) {
@@ -678,14 +602,13 @@ public class WCMCoreUtils {
       }
     }
   }
+
   /**
    * Generate uri.
    *
    * @param file the node
    * @param propertyName the image property name, null if file is an image node
-   *
    * @return the string
-   *
    * @throws Exception the exception
    */
   public static String generateImageURI(Node file, String propertyName) throws Exception {
@@ -693,51 +616,66 @@ public class WCMCoreUtils {
     NodeLocation fileLocation = NodeLocation.getNodeLocationByNode(file);
     String repository = fileLocation.getRepository();
     String workspaceName = fileLocation.getWorkspace();
-    String nodeIdentifiler = file.isNodeType("mix:referenceable") ? file.getUUID() : file.getPath().replaceFirst("/","");
+    String nodeIdentifiler = file.isNodeType("mix:referenceable") ? file.getUUID() : file.getPath().replaceFirst("/", "");
     String portalName = PortalContainer.getCurrentPortalContainerName();
     String restContextName = PortalContainer.getCurrentRestContextName();
 
     if (propertyName == null) {
       if (isNodeTypeOrFrozenType(file, NodetypeConstant.NT_FILE)) {
         InputStream stream = file.getNode("jcr:content").getProperty("jcr:data").getStream();
-        if (stream.available() == 0) return null;
+        if (stream.available() == 0)
+          return null;
         stream.close();
-        builder.append("/").append(portalName).append("/")
-        .append(restContextName).append("/")
-        .append("images/")
-        .append(repository).append("/")
-        .append(workspaceName).append("/")
-        .append(nodeIdentifiler)
-        .append("?param=file");
+        builder.append("/")
+               .append(portalName)
+               .append("/")
+               .append(restContextName)
+               .append("/")
+               .append("images/")
+               .append(repository)
+               .append("/")
+               .append(workspaceName)
+               .append("/")
+               .append(nodeIdentifiler)
+               .append("?param=file");
         return builder.toString();
-      } else return null;
+      } else
+        return null;
     }
-    builder.append("/").append(portalName).append("/")
-    .append(restContextName).append("/")
-    .append("images/")
-    .append(repository).append("/")
-    .append(workspaceName).append("/")
-    .append(nodeIdentifiler)
-    .append("?param=").append(propertyName);
+    builder.append("/")
+           .append(portalName)
+           .append("/")
+           .append(restContextName)
+           .append("/")
+           .append("images/")
+           .append(repository)
+           .append("/")
+           .append(workspaceName)
+           .append("/")
+           .append(nodeIdentifiler)
+           .append("?param=")
+           .append(propertyName);
     return builder.toString();
   }
-  
+
   public static boolean isNodeTypeOrFrozenType(Node node, String type) throws RepositoryException {
-    if (node.isNodeType(type)) return true;
-    if (!node.isNodeType(NodetypeConstant.NT_FROZEN_NODE)) return false;
+    if (node.isNodeType(type))
+      return true;
+    if (!node.isNodeType(NodetypeConstant.NT_FROZEN_NODE))
+      return false;
     String realType = node.getProperty("jcr:frozenPrimaryType").getString();
     return getRepository().getNodeTypeManager().getNodeType(realType).isNodeType(type);
   }
-  
+
   public static String getPortalName() {
-    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
-    return containerInfo.getContainerName() ;
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
+    return containerInfo.getContainerName();
   }
 
   public static String getRemoteUser() {
     try {
       return ConversationState.getCurrent().getIdentity().getUserId();
-    } catch(NullPointerException npe) {
+    } catch (NullPointerException npe) {
       return null;
     }
   }
@@ -746,13 +684,6 @@ public class WCMCoreUtils {
     return getService(UserACL.class).getSuperUser();
   }
 
-  public static boolean isDocumentNodeType(Node node) throws Exception {
-    boolean isDocument = true;
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
-    return isDocument;
-  }
-  
   /**
    * Get the bar navigation style of UIToolbarContainer.gtmpl
    * 
@@ -769,9 +700,11 @@ public class WCMCoreUtils {
     }
     return barNavigationStyle;
   }
+
   /**
-   * Get the link to display a document in the Documents app.
-   * It will try to get the best matching context (personal doc, space doc, ...).
+   * Get the link to display a document in the Documents app. It will try to get
+   * the best matching context (personal doc, space doc, ...).
+   * 
    * @param nodePath The path of the node
    * @return The link to open the document
    * @throws Exception
@@ -780,11 +713,11 @@ public class WCMCoreUtils {
     DocumentService documentService = WCMCoreUtils.getService(DocumentService.class);
     return documentService.getLinkInDocumentsApp(nodePath);
   }
-  
+
   /**
-   * Allows to perform actions using user session provider.
-   * Invokes the handler with obtained session provider using the conversation state based on userId.
-   * Restores the conversation state after calling the handler.
+   * Allows to perform actions using user session provider. Invokes the handler
+   * with obtained session provider using the conversation state based on
+   * userId. Restores the conversation state after calling the handler.
    *
    * @param userId the user id for conversation state
    * @param handler the handler to be called
@@ -808,7 +741,7 @@ public class WCMCoreUtils {
         throw new IllegalArgumentException("User identity not found " + userId + " for setting conversation state");
       }
     }
-    
+
     SessionProviderService sessionProviderService = getService(SessionProviderService.class);
     // Remember current conversation state
     ConversationState currentConvoState = ConversationState.getCurrent();
@@ -826,5 +759,5 @@ public class WCMCoreUtils {
       ConversationState.setCurrent(currentConvoState);
       sessionProviderService.setSessionProvider(null, currentContextProvider);
     }
-  } 
+  }
 }

@@ -29,23 +29,29 @@ import javax.ws.rs.core.Response;
 import java.util.Arrays;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          toannh@exoplatform.com
- * Dec 04/01, 2015
- * Test all methods of OpenInOfficeConnector
+ * Created by The eXo Platform SAS Author : eXoPlatform toannh@exoplatform.com
+ * Dec 04/01, 2015 Test all methods of OpenInOfficeConnector
  */
-public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
-  private final String OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY     = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
-  private final String OPEN_DOCUMENT_ON_DESKTOP_CSS_CLASS        = "uiIconOpenOnDesktop";
-  private final String OPEN_DOCUMENT_IN_WORD_CSS_CLASS           = "uiIcon16x16applicationmsword";
-  private final String OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY        = "OpenInOfficeConnector.label.exo.remote-edit.word";
-  private final String OPEN_DOCUMENT_IN_EXCEL_CSS_CLASS          = "uiIcon16x16applicationxls";
-  private final String OPEN_DOCUMENT_IN_EXCEL_RESOURCE_KEY       = "OpenInOfficeConnector.label.exo.remote-edit.excel";
-  private final String OPEN_DOCUMENT_IN_PPT_CSS_CLASS            = "uiIcon16x16applicationvndopenxmlformats-officedocumentpresentationmlpresentation";
-  private final String OPEN_DOCUMENT_IN_PPT_RESOURCE_KEY         = "OpenInOfficeConnector.label.exo.remote-edit.powerpoint";
+public class TestOpenInOfficeConnector extends BaseConnectorTestCase {
+  private final String         OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY = "OpenInOfficeConnector.label.exo.remote-edit.desktop";
 
-  OpenInOfficeConnector openInOfficeConnector =null;
+  private final String         OPEN_DOCUMENT_ON_DESKTOP_CSS_CLASS    = "uiIconOpenOnDesktop";
+
+  private final String         OPEN_DOCUMENT_IN_WORD_CSS_CLASS       = "uiIcon16x16applicationmsword";
+
+  private final String         OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY    = "OpenInOfficeConnector.label.exo.remote-edit.word";
+
+  private final String         OPEN_DOCUMENT_IN_EXCEL_CSS_CLASS      = "uiIcon16x16applicationxls";
+
+  private final String         OPEN_DOCUMENT_IN_EXCEL_RESOURCE_KEY   = "OpenInOfficeConnector.label.exo.remote-edit.excel";
+
+  private final String         OPEN_DOCUMENT_IN_PPT_CSS_CLASS        =
+                                                              "uiIcon16x16applicationvndopenxmlformats-officedocumentpresentationmlpresentation";
+
+  private final String         OPEN_DOCUMENT_IN_PPT_RESOURCE_KEY     = "OpenInOfficeConnector.label.exo.remote-edit.powerpoint";
+
+  OpenInOfficeConnector        openInOfficeConnector                 = null;
+
   private ManageableRepository manageableRepository;
 
   public void setUp() throws Exception {
@@ -149,7 +155,7 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
     assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
   }
 
-  public void testUpdateDocumentTitle() throws Exception{
+  public void testUpdateDocumentTitle() throws Exception {
     String parentPath = "sites1";
     String restPath = "/office/updateDocumentTitle?objId=collaboration:/" + parentPath + "/test.doc&lang=en";
     applyUserSession("john", "gtn", "collaboration");
@@ -163,7 +169,7 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
   }
 
-  public void testUpdateDocumentTitleWithDocumentNamedWithColon() throws Exception{
+  public void testUpdateDocumentTitleWithDocumentNamedWithColon() throws Exception {
     String parentPath = "sites3";
     String restPath = "/office/updateDocumentTitle?objId=collaboration:/" + parentPath + "/exo:colon.doc&lang=en";
     applyUserSession("john", "gtn", "collaboration");
@@ -177,28 +183,6 @@ public class TestOpenInOfficeConnector extends BaseConnectorTestCase{
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
   }
 
-  public void testGetDocumentInfos() throws Exception{
-    String word = "test.doc";
-    String excel = "test.xls";
-    String powerpoint = "test.ppt";
-    String other = "test.txt";
-
-    String[] resultWordActual  = openInOfficeConnector.getDocumentInfos(word);
-    String[] resultExcelActual = openInOfficeConnector.getDocumentInfos(excel);
-    String[] resultPptActual   = openInOfficeConnector.getDocumentInfos(powerpoint);
-    String[] resultOtherActual = openInOfficeConnector.getDocumentInfos(other);
-
-    String[] resultWordExpected  = {OPEN_DOCUMENT_IN_WORD_RESOURCE_KEY, OPEN_DOCUMENT_IN_WORD_CSS_CLASS};
-    String[] resultExcelExpected = {OPEN_DOCUMENT_IN_EXCEL_RESOURCE_KEY, OPEN_DOCUMENT_IN_EXCEL_CSS_CLASS};
-    String[] resultPptExpected   = {OPEN_DOCUMENT_IN_PPT_RESOURCE_KEY, OPEN_DOCUMENT_IN_PPT_CSS_CLASS};
-    String[] resultOtherExpected = {OPEN_DOCUMENT_ON_DESKTOP_RESOURCE_KEY, OPEN_DOCUMENT_ON_DESKTOP_CSS_CLASS};
-
-    assertTrue(Arrays.equals(resultWordActual, resultWordExpected));
-    assertTrue(Arrays.equals(resultExcelActual, resultExcelExpected));
-    assertTrue(Arrays.equals(resultPptActual, resultPptExpected));
-    assertTrue(Arrays.equals(resultOtherActual, resultOtherExpected));
-  }
-  
   public void tearDown() throws Exception {
     super.tearDown();
   }

@@ -12,7 +12,7 @@
 	UIComponent uiParent = uicomponent.getParent();
 
   def originalNode = uiParent.getOriginalNode();
-  def currentNode = uiParent.getNode() ;
+  def currentNode = uiParent.getNode();
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();

@@ -161,7 +161,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   /**
    * Collection of ComponentPlugin
    */
-  private Collection<ComponentPlugin> actionPlugins        = new ArrayList<ComponentPlugin>();
+  private Collection<ComponentPlugin> actionPlugins        = new ArrayList<>();
 
   /**
    * Constructor method
@@ -169,8 +169,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param cmsService        CmsService
    * @throws Exception
    */
-  public ActionServiceContainerImpl(RepositoryService repositoryService, CmsService cmsService
-      ) throws Exception {
+  public ActionServiceContainerImpl(RepositoryService repositoryService, CmsService cmsService) throws Exception {
     repositoryService_ = repositoryService;
     cmsService_ = cmsService;
   }
@@ -194,12 +193,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
         LOG.error("Cannot start ActionServiceContainerImpl", e);
       }
     }
-  }
-
-  /**
-   * Implement method stop service
-   */
-  public void stop() {
   }
 
   /**

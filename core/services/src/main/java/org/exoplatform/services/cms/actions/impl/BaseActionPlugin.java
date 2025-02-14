@@ -410,7 +410,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     if (!srcNode.hasNode(actionsNodeName)) {
       RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
       ManageableRepository manageRepo = repositoryService.getCurrentRepository();
-    
+
       firstImport = true;
       if (!srcNode.isNodeType("exo:actionable")) {
         srcNode.addMixin("exo:actionable");

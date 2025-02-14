@@ -16,51 +16,6 @@
  */
 package org.exoplatform.services.cms.impl;
 
-import com.ibm.icu.text.Transliterator;
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
-import org.exoplatform.services.cms.thumbnail.ThumbnailService;
-import org.exoplatform.services.context.DocumentContext;
-import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.services.jcr.util.Text;
-import org.exoplatform.services.jcr.util.VersionHistoryImporter;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.*;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.social.core.space.model.Space;
-import org.exoplatform.social.core.space.spi.SpaceService;
-
-import javax.jcr.*;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.PropertyDefinition;
-import javax.ws.rs.core.MediaType;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -70,271 +25,99 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
+import javax.ws.rs.core.MediaType;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import com.ibm.icu.text.Transliterator;
+
+import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
+import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.context.DocumentContext;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.jcr.util.Text;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
 
 /**
  * @author benjaminmestrallet
  */
 public class Utils {
-  private final static Log   LOG          = ExoLogger.getLogger(Utils.class.getName());
+  private final static Log     LOG                       = ExoLogger.getLogger(Utils.class.getName());
 
-  private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"-";
-  
-  private static final String SEPARATOR = "/";
+  private static final String  ILLEGAL_SEARCH_CHARACTERS = "\\!^()+{}[]:\"-";
 
-  public static final String MAPPING_FILE = "mapping.properties";
+  private static final String  SEPARATOR                 = "/";
 
-  public static final String EXO_SYMLINK = "exo:symlink";
+  public static final String   MAPPING_FILE              = "mapping.properties";
 
-  public static final String PRIVATE = "Private";
+  public static final String   EXO_SYMLINK               = "exo:symlink";
 
-  public static final String PUBLIC = "Public";
-  
-  public static final String QUARANTINE = "Quarantine";
-  
-  public static final String SPACES_NODE_PATH = "/Groups/spaces";
-  
-  final static public String SPACE_GROUP = "/spaces";
+  public static final String   PRIVATE                   = "Private";
 
-  public static final String[] SPECIFIC_FOLDERS = { "exo:folksonomyFolder", NodetypeConstant.EXO_DOCUMENTFOLDER, NodetypeConstant.EXO_FAVOURITE_FOLDER,
-      NodetypeConstant.EXO_PICTUREFOLDER, NodetypeConstant.EXO_MUSICFOLDER, NodetypeConstant.EXO_VIDEOFOLDER, NodetypeConstant.EXO_SEARCHFOLDER };
+  public static final String   PUBLIC                    = "Public";
 
+  public static final String   QUARANTINE                = "Quarantine";
 
-  public static final long KB = 1024L;
-  public static final long MB = 1024L*KB;
-  public static final long GB = 1024L*MB;
+  public static final String   SPACES_NODE_PATH          = "/Groups/spaces";
 
-  public static Node makePath(Node rootNode, String path, String nodetype)
-      throws PathNotFoundException, RepositoryException {
-    return makePath(rootNode, path, nodetype, null);
-  }
+  final static public String   SPACE_GROUP               = "/spaces";
 
-  @SuppressWarnings("unchecked")
-  public static Node makePath(Node rootNode, String path, String nodetype, Map permissions)
-      throws PathNotFoundException, RepositoryException {
-    String[] tokens = path.split("/") ;
-    Node node = rootNode;
-    for (int i = 0; i < tokens.length; i++) {
-      String token = tokens[i];
-      if(token.length() > 0) {
-        if(node.hasNode(token)) {
-          node = node.getNode(token) ;
-        } else {
-          node = node.addNode(token, nodetype);
-          node.getSession().save();
-          node = (Node)node.getSession().getItem(node.getPath());
-          if (node.canAddMixin("exo:privilegeable")){
-            node.addMixin("exo:privilegeable");
-          }
-          if(permissions != null){
-            ((ExtendedNode)node).setPermissions(permissions);
-          }
-        }
-      }
-    }
-    rootNode.save();
-    return node;
-  }
+  public static final String[] SPECIFIC_FOLDERS          = { "exo:folksonomyFolder", NodetypeConstant.EXO_DOCUMENTFOLDER,
+    NodetypeConstant.EXO_FAVOURITE_FOLDER,
+    NodetypeConstant.EXO_PICTUREFOLDER, NodetypeConstant.EXO_MUSICFOLDER, NodetypeConstant.EXO_VIDEOFOLDER,
+    NodetypeConstant.EXO_SEARCHFOLDER };
 
-  /**
-   * this function used to process import version history for a node
-   *
-   * @param currentNode
-   * @param versionHistorySourceStream
-   * @param mapHistoryValue
-   * @throws Exception
-   */
-  public static void processImportHistory(Node currentNode,
-                                          InputStream versionHistorySourceStream,
-                                          Map<String, String> mapHistoryValue) throws Exception {
-    //read stream, get the version history data & keep it inside a map
-    Map<String, byte[]> mapVersionHistoryData = getVersionHistoryData (versionHistorySourceStream);
+  public static final long     KB                        = 1024L;
 
-    //import one by one
-    for (String uuid : mapHistoryValue.keySet()) {
-      for (String name : mapVersionHistoryData.keySet()) {
-        if (name.equals(uuid + ".xml")) {
-          try {
-            byte[] versionHistoryData = mapVersionHistoryData.get(name);
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(versionHistoryData);
-            String value = mapHistoryValue.get(uuid);
-            Node versionableNode = currentNode.getSession().getNodeByUUID(uuid);
-            importHistory((NodeImpl) versionableNode,
-                          inputStream,
-                          getBaseVersionUUID(value),
-                          getPredecessors(value),
-                          getVersionHistory(value));
-            currentNode.getSession().save();
-            break;
-          } catch (ItemNotFoundException item) {
-            currentNode.getSession().refresh(false);
-            if (LOG.isErrorEnabled()) {
-              LOG.error("Can not found versionable node" + item, item);
-            }
-          } catch (Exception e) {
-            currentNode.getSession().refresh(false);
-            if (LOG.isErrorEnabled()) {
-              LOG.error("Import version history failed " + e, e);
-            }
-          }
-        }
-      }
-    }
-  }
+  public static final long     MB                        = 1024L * KB;
 
-  /**
-   * This function is used to get the version history data which is kept inside the xml files
-   * @param versionHistorySourceStream
-   * @return a map saving version history data with format: [file name, version history data]
-   * @throws IOException
-   */
-  private static Map<String, byte[]> getVersionHistoryData (InputStream versionHistorySourceStream) throws IOException {
-    Map<String, byte[]> mapVersionHistoryData = new HashMap<String, byte[]>();
-    ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(versionHistorySourceStream));
-    byte[] data = new byte[1024];
-    ZipEntry entry = zipInputStream.getNextEntry();
-    while (entry != null) {
-      //get binary data inside the zip entry
-      ByteArrayOutputStream out = new ByteArrayOutputStream();
-      int available = -1;
-      while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
-        out.write(data, 0, available);
-      }
-
-      //save data into map
-      mapVersionHistoryData.put(entry.getName(), out.toByteArray());
-
-      //go to next entry
-      out.close();
-      zipInputStream.closeEntry();
-      entry = zipInputStream.getNextEntry();
-    }
-
-    zipInputStream.close();
-    return mapVersionHistoryData;
-  }
-
-  /**
-   * do import a version into a node
-   *
-   * @param versionableNode
-   * @param versionHistoryStream
-   * @param baseVersionUuid
-   * @param predecessors
-   * @param versionHistory
-   * @throws RepositoryException
-   * @throws IOException
-   */
-  private static void importHistory(NodeImpl versionableNode,
-                                    InputStream versionHistoryStream,
-                                    String baseVersionUuid,
-                                    String[] predecessors,
-                                    String versionHistory) throws RepositoryException, IOException {
-    VersionHistoryImporter versionHistoryImporter = new VersionHistoryImporter(versionableNode,
-                                                                               versionHistoryStream,
-                                                                               baseVersionUuid,
-                                                                               predecessors,
-                                                                               versionHistory);
-    versionHistoryImporter.doImport();
-  }
-
-  /**
-   * get data from the version history file
-   *
-   * @param importHistorySourceStream
-   * @return
-   * @throws Exception
-   */
-  public static Map<String, String> getMapImportHistory(InputStream importHistorySourceStream) throws Exception {
-    ZipInputStream zipInputStream = new ZipInputStream(importHistorySourceStream);
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    byte[] data = new byte[1024];
-    ZipEntry entry = zipInputStream.getNextEntry();
-    Map<String, String> mapHistoryValue = new HashMap<String, String>();
-    while (entry != null) {
-      int available = -1;
-      if (entry.getName().equals(MAPPING_FILE)) {
-        while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
-          out.write(data, 0, available);
-        }
-        InputStream inputStream = new ByteArrayInputStream(out.toByteArray());
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-        String strLine;
-        // Read File Line By Line
-        while ((strLine = br.readLine()) != null) {
-          // Put the history information into list
-          if (strLine.indexOf("=") > -1) {
-            mapHistoryValue.put(strLine.split("=")[0], strLine.split("=")[1]);
-          }
-        }
-        // Close the input stream
-        inputStream.close();
-        zipInputStream.closeEntry();
-        break;
-      }
-      entry = zipInputStream.getNextEntry();
-    }
-    out.close();
-    zipInputStream.close();
-    return mapHistoryValue;
-  }
-
-  private static String getBaseVersionUUID(String valueHistory) {
-    String[] arrHistoryValue = valueHistory.split(";");
-    return arrHistoryValue[1];
-  }
-
-  private static String[] getPredecessors(String valueHistory) {
-    String[] arrHistoryValue = valueHistory.split(";");
-    String strPredecessors = arrHistoryValue[1];
-    if (strPredecessors.indexOf(",") > -1) {
-      return strPredecessors.split(",");
-    }
-    return new String[] { strPredecessors };
-  }
-
-  private static String getVersionHistory(String valueHistory) {
-    String[] arrHistoryValue = valueHistory.split(";");
-    return arrHistoryValue[0];
-  }
+  public static final long     GB                        = 1024L * MB;
 
   public static String getPersonalDrivePath(String parameterizedDrivePath, String userId) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    try{
+    try {
       Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
       return StringUtils.replaceOnce(parameterizedDrivePath,
-        nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}",
-        userNode.getPath());
+                                     nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}",
+                                     userNode.getPath());
     } finally {
       sessionProvider.close();
     }
-  }
-
-  public static List<PropertyDefinition> getProperties(Node node) throws Exception {
-    List<PropertyDefinition> properties = new ArrayList<PropertyDefinition>();
-    NodeType nodetype = node.getPrimaryNodeType() ;
-    Collection<NodeType> types = new ArrayList<NodeType>() ;
-    types.add(nodetype) ;
-    NodeType[] mixins = node.getMixinNodeTypes() ;
-    if (mixins != null) types.addAll(Arrays.asList(mixins)) ;
-    for(NodeType nodeType : types) {
-      for(PropertyDefinition property : nodeType.getPropertyDefinitions()) {
-        String name = property.getName();
-        if(!name.equals("exo:internalUse")&& !property.isProtected()&& !node.hasProperty(name)) {
-          properties.add(property);
-        }
-      }
-    }
-    return properties;
   }
 
   public static boolean isInTrash(Node node) throws RepositoryException {
@@ -360,11 +143,11 @@ public class Utils {
           title = content.getProperty("dc:title").getValues()[0].getString();
         } catch (PathNotFoundException ex) {
           title = null;
-        } catch(ValueFormatException ex) {
+        } catch (ValueFormatException ex) {
           title = null;
-        } catch(RepositoryException ex) {
+        } catch (RepositoryException ex) {
           title = null;
-        } catch(ArrayIndexOutOfBoundsException ex) {
+        } catch (ArrayIndexOutOfBoundsException ex) {
           title = null;
         }
       }
@@ -382,49 +165,42 @@ public class Utils {
     return StringEscapeUtils.escapeHtml4(Text.unescapeIllegalJcrChars(title));
   }
 
-  public static String escapeIllegalCharacterInQuery(String query) {
-    String ret = query;
-    if(ret != null) {
-      for (char c : ILLEGAL_SEARCH_CHARACTERS.toCharArray()) {
-        ret = ret.replace(c + "", "\\" + c);
-      }
+  /**
+   * Remove the symlink of a deleted node
+   * 
+   * @param node The deleted node
+   * @throws Exception
+   */
+  public static void removeSymlinks(Node node) throws Exception {
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+    for (Node symlink : symlinks) {
+      symlink.remove();
     }
-    ret = ret.replace("'", "''");
-    return ret;
   }
-
-	/**
-	 * Remove the symlink of a deleted node
-	 * @param node The deleted node
-	 * @throws Exception
-	 */
-	public static void removeSymlinks(Node node) throws Exception {
-		LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
-		List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
-		for (Node symlink : symlinks) {
-			symlink.remove();
-		}
-	}
 
   /**
    * Remove deleted Symlink from Trash
+   * 
    * @param node
    * @throws Exception
    */
   private static void removeDeadSymlinksFromTrash(Node node) throws Exception {
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
-    ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
     for (Node symlink : symlinks) {
       symlink.remove();
       listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, symlink);
     }
   }
-  
+
   /**
    * Remove all the link of a deleted node
+   * 
    * @param node
-   * @param keepInTrash true if the link will be move to trash, otherwise set by false
+   * @param keepInTrash true if the link will be move to trash, otherwise set by
+   *          false
    * @throws Exception
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
@@ -444,11 +220,12 @@ public class Utils {
         if (!node.isNodeType(EXO_SYMLINK)) {
           try {
             List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK, sessionProvider);
-            // Before removing symlinks, We order symlinks by name descending, index descending.
+            // Before removing symlinks, We order symlinks by name descending,
+            // index descending.
             // Example: symlink[3],symlink[2], symlink[1] to avoid the case that
-            // the index of same name symlink automatically changed to increasing one by one
-            Collections.sort(symlinks, new Comparator<Node>()
-                             {
+            // the index of same name symlink automatically changed to
+            // increasing one by one
+            Collections.sort(symlinks, new Comparator<Node>() {
               @Override
               public int compare(Node node1, Node node2) {
                 try {
@@ -457,22 +234,23 @@ public class Utils {
                   if (name1.equals(name2)) {
                     int index1 = node1.getIndex();
                     int index2 = node2.getIndex();
-                    return -1 * ((Integer)index1).compareTo(index2);
+                    return -1 * ((Integer) index1).compareTo(index2);
                   }
                   return -1 * name1.compareTo(name2);
                 } catch (RepositoryException e) {
                   return 0;
                 }
               }
-                             });
+            });
 
             for (Node symlink : symlinks) {
               synchronized (symlink) {
                 if (keepInTrash) {
                   trashService.moveToTrash(symlink, sessionProvider, 1);
                 } else {
-                  if (symlink.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO) && node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)) {
-                    ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+                  if (symlink.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)
+                      && node.hasProperty(ActivityTypeUtils.EXO_ACTIVITY_ID)) {
+                    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
                     listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, null, symlink);
                   }
                   Session nodeSession = symlink.getSession();
@@ -486,7 +264,7 @@ public class Utils {
               LOG.warn(e.getMessage());
             }
           }
-          for (NodeIterator iter = node.getNodes(); iter.hasNext(); ) {
+          for (NodeIterator iter = node.getNodes(); iter.hasNext();) {
             queue.add(iter.nextNode());
           }
         }
@@ -529,11 +307,13 @@ public class Utils {
    * @return
    * @throws Exception
    */
-  private static Node getServiceLogContentNode(SessionProvider systemProvider, String serviceName, String logType) throws Exception {
+  private static Node getServiceLogContentNode(SessionProvider systemProvider,
+                                               String serviceName,
+                                               String logType) throws Exception {
     // Get workspace and session where store service log
     ManageableRepository repository = WCMCoreUtils.getRepository();
     Session session =
-        systemProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+                    systemProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
     Node serviceLogContentNode = null;
 
     try {
@@ -542,12 +322,14 @@ public class Utils {
 
       // Get service node
       Node serviceNode = serviceFolder.hasNode(serviceName) ?
-          serviceFolder.getNode(serviceName) : serviceFolder.addNode(serviceName, NodetypeConstant.NT_UNSTRUCTURED);
+                                                            serviceFolder.getNode(serviceName) :
+                                                            serviceFolder.addNode(serviceName, NodetypeConstant.NT_UNSTRUCTURED);
 
       // Get log node of service
       String serviceLogName = serviceName + "_" + logType;
       Node serviceLogNode = serviceNode.hasNode(serviceLogName) ?
-          serviceNode.getNode(serviceLogName) : serviceNode.addNode(serviceLogName, NodetypeConstant.NT_FILE);
+                                                                serviceNode.getNode(serviceLogName) :
+                                                                serviceNode.addNode(serviceLogName, NodetypeConstant.NT_FILE);
 
       // Get service log content
       if (serviceLogNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
@@ -565,6 +347,7 @@ public class Utils {
     }
     return serviceLogContentNode;
   }
+
   /**
    * Get Service Log Content Node of specific service.
    *
@@ -572,25 +355,26 @@ public class Utils {
    * @return
    * @throws Exception
    */
-  
+
   public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
     return getServiceLogContentNode(WCMCoreUtils.getSystemSessionProvider(), serviceName, logType);
   }
 
   /**
    * Get all the templates which have been added into the system
+   * 
    * @param className Simple name of class.
    * @param id The unique value which used to build service log name.
    * @param skipActivities To skip raising activities on activity stream.
    * @return A Set of templates name which have been added.
    * @throws Exception
-  */
+   */
   public static Set<String> getAllEditedConfiguredData(String className, String id, boolean skipActivities) throws Exception {
     SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
       HashSet<String> editedConfigTemplates = new HashSet<String>();
-      Node serviceLogContentNode= getServiceLogContentNode(systemProvider, className, id);
+      Node serviceLogContentNode = getServiceLogContentNode(systemProvider, className, id);
       if (serviceLogContentNode != null) {
         String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
         editedConfigTemplates.addAll(Arrays.asList(logData.split(";")));
@@ -603,21 +387,27 @@ public class Utils {
 
   /**
    * Keep the name of templates in jcr:data property at the first time loaded.
+   * 
    * @param template Name of template which will be kept in jcr:data property
    * @param className A simple class name
    * @param id The unique value which used to build service log name.
    * @param skipActivities To skip raising activities on activity stream.
    * @throws Exception
- */
-  public static void addEditedConfiguredData(String template, String className, String id, boolean skipActivities) throws Exception {
+   */
+  public static void addEditedConfiguredData(String template,
+                                             String className,
+                                             String id,
+                                             boolean skipActivities) throws Exception {
     SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
       Node serviceLogContentNode = getServiceLogContentNode(systemProvider, className, id);
       if (serviceLogContentNode != null) {
         String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-        if (StringUtils.isEmpty(logData)) logData = template;
-        else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
+        if (StringUtils.isEmpty(logData))
+          logData = template;
+        else if (logData.indexOf(template) == -1)
+          logData = logData.concat(";").concat(template);
         serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
         serviceLogContentNode.getSession().save();
       }
@@ -658,13 +448,13 @@ public class Utils {
    * Clean string.
    *
    * @param str the str
-   *
    * @return the string
    */
   public static String cleanString(String str) {
     Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
     str = accentsconverter.transliterate(str);
-    //the character ? seems to not be changed to d by the transliterate function
+    // the character ? seems to not be changed to d by the transliterate
+    // function
     StringBuilder cleanedStr = new StringBuilder(str.trim());
     // delete special character
     int strLength = cleanedStr.length();
@@ -686,7 +476,7 @@ public class Utils {
     }
     String clean = cleanedStr.toString();
     if (clean.endsWith("-")) {
-      clean = clean.substring(0, clean.length()-1);
+      clean = clean.substring(0, clean.length() - 1);
     }
 
     return clean;
@@ -703,10 +493,11 @@ public class Utils {
   public static String cleanDocumentTitle(String title) {
     return replaceSpecialChars(title, "[<\\>:\"/|?*]");
   }
-  
+
   public static String replaceSpecialChars(String name, String specialChars) {
     return replaceSpecialChars(name, specialChars, NodetypeConstant.NT_FILE);
   }
+
   public static String replaceSpecialChars(String name, String specialChars, String nodeType) {
     String extension = "";
     if (NodetypeConstant.NT_FILE.equals(nodeType) && name.lastIndexOf(".") != -1) {
@@ -726,18 +517,18 @@ public class Utils {
     builder.append(extension);
     return builder.toString();
   }
-  
+
   /**
    * Clean string. Replace specialChar by "-"
    *
    * @param oldName the str
-   *
    * @return the string
    */
 
   public static String cleanName(String oldName) {
     return cleanName(oldName, NodetypeConstant.NT_FILE);
   }
+
   public static String cleanName(String oldName, String nodeType) {
     if (StringUtils.isEmpty(oldName)) {
       return oldName;
@@ -745,7 +536,9 @@ public class Utils {
     return replaceSpecialChars(oldName, "&#*?!@.'\"\t\r\n$\\><:;[]/|’", nodeType);
   }
 
-  /** Return name after cleaning
+  /**
+   * Return name after cleaning
+   * 
    * @param fileName file name
    * @return cleaned name
    */
@@ -796,14 +589,14 @@ public class Utils {
     IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
     if (currentUserIdentity == null) {
-      return Collections.<MembershipEntry>emptySet();
+      return Collections.<MembershipEntry> emptySet();
     } else {
       return currentUserIdentity.getMemberships();
     }
   }
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)
-      throws RepositoryException {
+                                                                                throws RepositoryException {
     if (node == null)
       return "";
 
@@ -825,13 +618,11 @@ public class Utils {
 
     if (node.isNodeType(NodetypeConstant.EXO_TRASH_FOLDER)) {
       nodeType = NodetypeConstant.EXO_TRASH_FOLDER;
-    }
-    else if (node.isNodeType(NodetypeConstant.EXO_FAVOURITE_FOLDER)) {
+    } else if (node.isNodeType(NodetypeConstant.EXO_FAVOURITE_FOLDER)) {
       nodeType = NodetypeConstant.EXO_FAVOURITE_FOLDER;
-    }
-    else if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
+    } else if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
       if (PRIVATE.equals(node.getName()) || PUBLIC.equals(node.getName()) || QUARANTINE.equals(node.getName())) {
-          nodeType = String.format("exo:%sFolder", node.getName().toLowerCase());
+        nodeType = String.format("exo:%sFolder", node.getName().toLowerCase());
       } else {
         for (String specificFolder : NodetypeConstant.SPECIFIC_FOLDERS) {
           if (node.isNodeType(specificFolder)) {
@@ -866,47 +657,33 @@ public class Utils {
     if (node.isNodeType(NodetypeConstant.NT_FILE)) {
       if (node.hasNode(NodetypeConstant.JCR_CONTENT)) {
         Node jcrContentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
-        str.append(' ').append(appended).append(
-                                                jcrContentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString().toLowerCase().replaceAll(
-                                                                                                                                               "/|\\.", ""));
+        str.append(' ')
+           .append(appended)
+           .append(
+                   jcrContentNode.getProperty(NodetypeConstant.JCR_MIMETYPE)
+                                 .getString()
+                                 .toLowerCase()
+                                 .replaceAll(
+                                             "/|\\.",
+                                             ""));
       }
     }
     return str.toString();
   }
 
   public static String getNodeTypeIcon(Node node, String appended)
-      throws RepositoryException {
+                                                                   throws RepositoryException {
     return getNodeTypeIcon(node, appended, null);
   }
-  
+
   public static String getFileType(Node node) throws Exception {
-    return getNodeTypeIcon(node, "").
-            replace(".", "").replace("/", "").replace("\\","").replace(".", "");
+    return getNodeTypeIcon(node, "").replace(".", "").replace("/", "").replace("\\", "").replace(".", "");
   }
 
   public static String getFileType(NodeImpl node) throws Exception {
-    return getNodeTypeIcon(node, "").
-        replace(".", "").replace("/", "").replace("\\","").replace(".", "");
+    return getNodeTypeIcon(node, "").replace(".", "").replace("/", "").replace("\\", "").replace(".", "");
   }
 
-  /**
-   * Check if a node is document type.
-   * @param node
-   * @return true: is document; false: not document
-   * @throws Exception
-   */
-  public static boolean isDocument(Node node) throws Exception {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    if (templateService==null) return false;
-    List<String> documentTypeList = templateService.getDocumentTemplates();
-    if (documentTypeList==null) return false;
-    for (String documentType : documentTypeList) {
-      if (node.getPrimaryNodeType().isNodeType(documentType)) {
-        return true;
-      }
-    }
-    return false;
-  }
   /**
    * get Last Modify date of jcr:content of a node
    * 
@@ -916,42 +693,44 @@ public class Utils {
    */
   public static String getJcrContentLastModified(Node node) throws Exception {
     String lastModified = "";
-    if(node.hasProperty("jcr:content/jcr:lastModified")){
+    if (node.hasProperty("jcr:content/jcr:lastModified")) {
       lastModified = node.getProperty("jcr:content/jcr:lastModified").getString();
-    }else if(node.hasProperty("jcr:content/exo:dateModified")){
-      lastModified =node.getProperty("jcr:content/exo:dateModified").getString();
-    }else if(node.hasProperty("jcr:content/exo:lastModifiedDate")){
-      lastModified =node.getProperty("jcr:content/exo:lastModifiedDate").getString();
+    } else if (node.hasProperty("jcr:content/exo:dateModified")) {
+      lastModified = node.getProperty("jcr:content/exo:dateModified").getString();
+    } else if (node.hasProperty("jcr:content/exo:lastModifiedDate")) {
+      lastModified = node.getProperty("jcr:content/exo:lastModifiedDate").getString();
     }
     return lastModified;
   }
 
   /**
-   *
    * get jcr:baseVersion of a node
+   * 
    * @param node
    * @return jcr:baseVersion of a node
    * @throws Exception
    */
   public static String getJcrContentBaseVersion(Node node) throws Exception {
-    return node.hasProperty("jcr:baseVersion")? node.getProperty("jcr:baseVersion").getString() : null;
+    return node.hasProperty("jcr:baseVersion") ? node.getProperty("jcr:baseVersion").getString() : null;
   }
-  
-  
+
   public static Calendar getDate(Node node) throws Exception {
-      return node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) ? 
-                   node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate() :
-                   node.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate();
+    return node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) ?
+                                                                     node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE)
+                                                                         .getDate() :
+                                                                     node.getProperty(NodetypeConstant.EXO_DATE_CREATED)
+                                                                         .getDate();
   }
-  
+
   public static String getOwner(Node node) throws Exception {
-      return node.hasProperty(NodetypeConstant.EXO_OWNER) ? 
-                   node.getProperty(NodetypeConstant.EXO_OWNER).getString() :
-                   "";
+    return node.hasProperty(NodetypeConstant.EXO_OWNER) ?
+                                                        node.getProperty(NodetypeConstant.EXO_OWNER).getString() :
+                                                        "";
   }
-  
+
   /**
    * gets the file size in friendly format
+   * 
    * @param node the file node
    * @return the file size
    * @throws Exception
@@ -966,8 +745,8 @@ public class Utils {
     try {
       size = node.getProperty("jcr:content/jcr:data").getLength();
     } catch (PathNotFoundException pne) {
-      LOG.error("Unable to read binary content from disk for node " + node.getPath() + ". The binary content is not "
-                              + "accessible, it was removed, or may have been quarantined by an antivirus.",pne);
+      LOG.error("Unable to read binary content from disk for node " + node.getPath() + ". The binary content is not " +
+          "accessible, it was removed, or may have been quarantined by an antivirus.", pne);
     } catch (Exception e) {
       LOG.error("Can not get file size", e);
     }
@@ -1010,6 +789,7 @@ public class Utils {
 
   /**
    * refines the size up to 3 digits, add '0' in front if necessary.
+   * 
    * @param size the size
    * @return the size in 3 digit format
    */
@@ -1023,87 +803,30 @@ public class Utils {
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
   }
-  
-  /* check if a node is folder 
+
+  /*
+   * check if a node is folder
    * @param node node to check
    * @return folder or not
    */
-  public static boolean isFolder(Node node) throws RepositoryException  {
+  public static boolean isFolder(Node node) throws RepositoryException {
     return node.isNodeType(NodetypeConstant.NT_FOLDER)
-        || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
- }
+           || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
+  }
 
- /**
-  *  check if a node is a personal default folder. Personal default folders are:
-  *  Documents, Favorites, Pictures, Public, Music, videos, Folksonomy and Searches.
-  * @param node node to check
-  * @return personal default folder or not
- */
- public static boolean isPersonalDefaultFolder(Node node) throws Exception {
-    if (node.hasProperty(NodetypeConstant.JCR_PRIMARY_TYPE)) {
-      String nodeType = node.getProperty(NodetypeConstant.JCR_PRIMARY_TYPE).getString();
-      if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
-        for (String specificFolder : SPECIFIC_FOLDERS) {
-          if (node.isNodeType(specificFolder)) {
-            NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-            String relativePathAlias = null;
-            switch (specificFolder) {
-            case "exo:folksonomyFolder":
-              relativePathAlias = "userPrivateFolksonomy";
-              break;
-            case NodetypeConstant.EXO_DOCUMENTFOLDER:
-              relativePathAlias = "userPrivateDocuments";
-              break;
-            case NodetypeConstant.EXO_FAVOURITE_FOLDER:
-              relativePathAlias = "userPrivateFavorites";
-              break;
-            case NodetypeConstant.EXO_PICTUREFOLDER:
-              relativePathAlias = "userPrivatePicture";
-              break;
-            case NodetypeConstant.EXO_MUSICFOLDER:
-              relativePathAlias = "userPrivateAudio";
-              break;
-            case NodetypeConstant.EXO_VIDEOFOLDER:
-              relativePathAlias = "userPrivateVideo";
-              break;
-            case NodetypeConstant.EXO_SEARCHFOLDER:
-              relativePathAlias = "userPrivateSearches";
-              break;
-            default:
-              break;
-            }
-            if (relativePathAlias != null) {
-              String relativePath = nodeHierarchyCreator.getJcrPath(relativePathAlias);
-              if (relativePath != null && node.getPath().endsWith(relativePath)) {
-                return true;
-              }
-            }
-          }
-        }
+  public static String getSearchDocumentDrive(Node documentNode) throws Exception {
+    String nodePath = documentNode.getPath();
+    if (!nodePath.startsWith(SPACES_NODE_PATH)) {
+      return documentNode.getParent().getName();
+    }
+    String[] splittedNodePath = nodePath.split(SEPARATOR);
+    if (splittedNodePath.length > 3) {
+      SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
+      Space space = spaceService.getSpaceByGroupId(SPACE_GROUP + SEPARATOR + splittedNodePath[3]);
+      if (space != null) {
+        return space.getDisplayName();
       }
     }
-   String path = node.getPath();
-   String owner = ((ExtendedNode) node).getACL().getOwner();
-   if (StringUtils.isNotBlank(path) && StringUtils.isNotBlank(owner)) {
-     return path.endsWith(ManageDriveServiceImpl.PERSONAL_DRIVE_PRIVATE_FOLDER_NAME + "/" + ManageDriveServiceImpl.PERSONAL_DRIVE_PUBLIC_FOLDER_NAME)
-         && "__system".equals(owner);
-   }
-   return false;
- }
- 
- public static String getSearchDocumentDrive(Node documentNode) throws Exception {
-   String nodePath = documentNode.getPath();
-   if (!nodePath.startsWith(SPACES_NODE_PATH)) {
-     return documentNode.getParent().getName();
-   }
-   String[] splittedNodePath = nodePath.split(SEPARATOR);
-   if (splittedNodePath.length > 3) {
-     SpaceService spaceService = WCMCoreUtils.getService(SpaceService.class);
-     Space space = spaceService.getSpaceByGroupId(SPACE_GROUP + SEPARATOR + splittedNodePath[3]);
-     if (space != null) {
-       return space.getDisplayName();
-     }
-   }
-   return "";
- }
+    return "";
+  }
 }

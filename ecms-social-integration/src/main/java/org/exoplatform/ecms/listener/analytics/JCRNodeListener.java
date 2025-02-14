@@ -7,22 +7,27 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
-import javax.jcr.*;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.jcr.observation.Event;
 
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
 
-import io.meeds.analytics.model.StatisticData;
-import io.meeds.analytics.utils.AnalyticsUtils;
 import org.exoplatform.commons.utils.PropertyManager;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -34,6 +39,9 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+
+import io.meeds.analytics.model.StatisticData;
+import io.meeds.analytics.utils.AnalyticsUtils;
 
 public class JCRNodeListener implements Action {
 
@@ -65,8 +73,6 @@ public class JCRNodeListener implements Action {
 
   private static final String                   DOCUMENT_CREATED_OPERATION           = "documentCreated";
 
-  private static final String                   FILE_CREATED_OPERATION               = "fileCreated";
-
   private static final String                   DOCUMENT_MOVED_TO_TRASH_OPERATION    = "documentMovedToTrash";
 
   private static final String                   FILE_MOVED_TO_TRASH_OPERATION        = "fileMovedToTrash";
@@ -84,8 +90,6 @@ public class JCRNodeListener implements Action {
   private static final String                   EXO_USER_PREFERENCES                 = "exo:userPrefferences";
 
   private PortalContainer                       container;
-
-  private TemplateService                       templateService;
 
   private SpaceService                          spaceService;
 
@@ -105,7 +109,7 @@ public class JCRNodeListener implements Action {
       }
 
       Object item = context.get(InvocationContext.CURRENT_ITEM);
-      Node node = (item instanceof Property) ? ((Property) item).getParent() : (Node) item;
+      Node node = (item instanceof Property property) ? property.getParent() : (Node) item;
       if (node == null) {
         return true;
       }
@@ -288,10 +292,8 @@ public class JCRNodeListener implements Action {
   }
 
   private Node getManagedNode(Node node) throws RepositoryException {
-    String nodeType = node.getPrimaryNodeType().getName();
-    if (!node.isNodeType(NodetypeConstant.NT_RESOURCE)
-        && (node.isNodeType(NodetypeConstant.NT_FILE) || getTemplateService().isManagedNodeType(nodeType))) {
-      // Found parent managed node
+    if (!node.isNodeType(NodetypeConstant.NT_FILE)
+        && node.isNodeType(NodetypeConstant.NT_RESOURCE)) {
       return node;
     }
     return null;
@@ -307,13 +309,6 @@ public class JCRNodeListener implements Action {
         addSpaceStatistics(statisticData, space);
       }
     }
-  }
-
-  private TemplateService getTemplateService() {
-    if (templateService == null) {
-      templateService = this.container.getComponentInstanceOfType(TemplateService.class);
-    }
-    return templateService;
   }
 
   private SpaceService getSpaceService() {

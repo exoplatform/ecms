@@ -16,108 +16,16 @@
  */
 package org.exoplatform.services.cms.documents;
 
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.services.cms.documents.impl.DocumentType;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
-/**
- * Get documents by mime types
- */
 public interface DocumentTypeService {
 
   /**
-   * Get all supported document type
-   * @return supported types
-   */
-  public List<String> getAllSupportedType();
-
-  /**
-   * Get all documents by kind of document type
-   * @param documentType Kind of document(Images, Video,...)
-   * @param workspace The name of workspace will be used to get documents
-   * @param sessionProvider
-   * @return all documents by kind of document type
-   * @throws Exception
-   */
-  public List<Node> getAllDocumentsByDocumentType(String documentType,
-                                                  String workspace,
-                                                  SessionProvider sessionProvider) throws Exception;
-
-  /**
-   * Get all document by mimetype
-   * @param workspace The name of workspace will be used to get documents
-   * @param sessionProvider
-   * @param mimeType The mime type of node(For example: image/jpg)
-   * @return all documents by mime type
-   * @throws Exception
-   */
-  public List<Node> getAllDocumentsByType(String workspace,
-                                          SessionProvider sessionProvider,
-                                          String mimeType) throws Exception;
-
-  /**
-   * Get all document by array of mimetype
-   * @param workspace The name of workspace will be used to get documents
-   * @param sessionProvider
-   * @param mimeTypes The array of mimetype(For example: ["image/jpg", "image/png"])
-   * @return all documents by mime type
-   * @throws Exception
-   */
-  public List<Node> getAllDocumentsByType(String workspace,
-                                          SessionProvider sessionProvider,
-                                          String[] mimeTypes) throws Exception;
-
-  /**
-   * Get all document type by user
-   * @param workspace The name of workspace will be used to get documents
-   * @param sessionProvider
-   * @param mimeTypes The array of mimetype(For example: ["image/jpg", "image/png"])
-   * @param userName The name of current user
-   * @return all documents by mime type
-   * @throws Exception
-   */
-  public List<Node> getAllDocumentsByUser(String workspace,
-                                          SessionProvider sessionProvider,
-                                          String[] mimeTypes,
-                                          String userName) throws Exception;
-
-  /**
-   * Check the document is content type or not.
-   *
-   * @param documentType
-   * @return
-   */
-  public boolean isContentsType(String documentType);
-
-  /**
-   * Get all contents type document
-   * @param documentType Contents type
-   * @param workspace The name of workspace will be used to get documents
-   * @param sessionProvider
-   * @param userName
-   * @return all contents type document
-   * @throws Exception
-   */
-  public List<Node> getAllDocumentByContentsType(String documentType,
-                                                 String workspace,
-                                                 SessionProvider sessionProvider,
-                                                 String userName) throws Exception;
-
-
-  /**
-   * Get mime types by document type
-   * @param documentType
-   * @return
-   */
-  public String[] getMimeTypes(String documentType);
-
-  /**
    * Get documentType of extension string
+   * 
    * @param mimeType
    * @return DocumentType
    */
   public DocumentType getDocumentType(String mimeType);
+
 }

@@ -27,20 +27,6 @@
     <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
   </component>
   
-  <component>
-    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
-    <init-params>
-      <value-param>
-        <name>name</name>
-        <value>false</value>
-      </value-param>
-    </init-params>
-  </component>
-  
-  <component>
-    <type>org.exoplatform.groovyscript.text.TemplateService</type>
-  </component>
-  
    <component>
     <key>org.exoplatform.services.wcm.portal.LivePortalManagerService</key>
     <type>org.exoplatform.services.wcm.portal.impl.LivePortalManagerServiceImpl</type>
@@ -183,16 +169,6 @@
       <properties-param>
         <name>RuntimeContextParams</name>
         <description>some params for runtime</description>
-
-        <property name="parameterizedPageURI" value="/detail" />
-        <property name="printPageURI" value="/printviewer" />
-        <property name="printViewerPage" value="printviewer" />
-
-        <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
-        <property name="SCVPortlet" value="/presentation/SingleContentViewer" />
-
-        <property name="formViewTemplatePath" value="/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl" />
-        <property name="paginatorTemplatePath" value="/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl" />
       </properties-param>
       <properties-param>
         <name>share.portal.config</name>
@@ -339,35 +315,6 @@
     </init-params>
   </component>
 
-  <component>
-    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
-    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
-    <component-plugins>
-      <component-plugin>
-        <name>ExcludeMimeTypes</name>
-        <set-method>addExcludeIncludeDataTypePlugin</set-method>
-        <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
-        <init-params>
-          <properties-param>
-            <name>search.exclude.datatypes</name>
-            <description>exclude some data type when search</description>
-            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
-            <property name="nodetypes" value="${wcm.search.excluded-nodetypes:exo:restoreLocation}" />
-          </properties-param>
-        </init-params>
-      </component-plugin>
-    </component-plugins>
-    <init-params>
-      <value-param>
-        <name>isEnabledFuzzySearch</name>
-        <value>true</value>
-      </value-param>
-      <value-param>
-        <name>fuzzySearchIndex</name>
-        <value></value>
-      </value-param>
-    </init-params>
-  </component>
 	
   <component>
     <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
@@ -399,31 +346,11 @@
     <key>org.exoplatform.services.wcm.portal.artifacts.RemovePortalArtifactsService</key>
     <type>org.exoplatform.services.wcm.portal.artifacts.RemovePortalArtifactsServiceImpl</type>
   </component>
-  
+
   <component>
     <key>org.exoplatform.services.wcm.core.WebSchemaConfigService</key>
     <type>org.exoplatform.services.wcm.core.impl.WebSchemaConfigServiceImpl</type>
     <component-plugins>
-      <component-plugin>
-        <name>CSSFileHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.skin.CSSFileHandler</type>
-      </component-plugin>
-      <component-plugin>
-        <name>JSFileHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.javascript.JSFileHandler</type>
-      </component-plugin>
-      <component-plugin>
-        <name>WebContentSchemaHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler</type>
-      </component-plugin>
-      <component-plugin>
-        <name>HTMLFileSchemaHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.webcontent.HTMLFileSchemaHandler</type>
-      </component-plugin>
       <component-plugin>
         <name>PortalFolderSchemaHandler</name>
         <set-method>addWebSchemaHandler</set-method>

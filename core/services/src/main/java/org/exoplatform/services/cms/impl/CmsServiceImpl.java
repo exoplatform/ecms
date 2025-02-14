@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -39,28 +40,23 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
-import javax.jcr.Workspace;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.ItemDefinitionImpl;
 import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -73,7 +69,6 @@ public class CmsServiceImpl implements CmsService {
   private RepositoryService jcrService;
   private IDGeneratorService idGeneratorService;
   private static final String MIX_REFERENCEABLE = "mix:referenceable" ;
-  private static final Log LOG  = ExoLogger.getLogger(CmsServiceImpl.class.getName());
   private ListenerService listenerService;
   private ActivityCommonService activityService = null;
 
@@ -90,19 +85,6 @@ public class CmsServiceImpl implements CmsService {
     this.idGeneratorService = idGeneratorService;
     this.jcrService = jcrService;
     this.listenerService = listenerService;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String storeNode(String workspace, String nodeTypeName, String storePath, Map mappings) throws Exception {
-    Session session = jcrService.getCurrentRepository().login(workspace);
-    Node storeHomeNode = (Node) session.getItem(storePath);
-    String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
-    storeHomeNode.save();
-    session.logout();
-    return path;
   }
 
   /**
@@ -154,7 +136,7 @@ public class CmsServiceImpl implements CmsService {
           }
           NodeType mixinType = nodetypeManager.getNodeType(type);
           for (Iterator<String> iter = keys.iterator(); iter.hasNext();) {
-            String keyJCRPath = (String) iter.next();
+            String keyJCRPath = iter.next();
             JcrInputProperty jcrInputProperty = (JcrInputProperty) mappings.get(keyJCRPath);
             if (!jcrInputProperty.getJcrPath().equals(NODE)) {
               String inputMixinTypeName = jcrInputProperty.getMixintype();
@@ -211,113 +193,6 @@ public class CmsServiceImpl implements CmsService {
 
     storeHomeNode.save();
     return currentNode.getPath();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings,
-                                boolean isAddNew) throws Exception {
-    Set keys = mappings.keySet();
-    String nodePath = extractNodeName(keys);
-    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
-
-    String primaryType = relRootProp.getNodetype() ;
-    if(primaryType == null || primaryType.length() == 0) {
-      primaryType = nodeTypeName ;
-    }
-    Session session = storeNode.getSession();
-    NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
-    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
-
-    //Broadcast CmsService.event.preEdit event
-    listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,storeNode,mappings);
-    updateNodeRecursively(NODE, storeNode, nodeType, mappings);
-    if (storeNode.isNodeType("exo:datetime")) {
-      storeNode.setProperty("exo:dateModified", new GregorianCalendar());
-    }
-    listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, storeNode);
-    //add lastModified property to jcr:content
-    storeNode.save();
-    return storeNode.getPath();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings,
-                                boolean isAddNew) throws Exception {
-    Set keys = mappings.keySet();
-    String nodePath = extractNodeName(keys);
-    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
-    String nodeName = (String)relRootProp.getValue();
-    if (nodeName == null || nodeName.length() == 0) {
-      nodeName = idGeneratorService.generateStringID(nodeTypeName);
-    }
-    String primaryType = relRootProp.getNodetype() ;
-    if(primaryType == null || primaryType.length() == 0) {
-      primaryType = nodeTypeName ;
-    }
-    Session session = storeHomeNode.getSession();
-    NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
-    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
-    Node currentNode = null;
-    String[] mixinTypes = null ;
-    String mixintypeName = relRootProp.getMixintype();
-    if(mixintypeName != null && mixintypeName.trim().length() > 0) {
-      if(mixintypeName.indexOf(",") > -1){
-        mixinTypes = mixintypeName.split(",") ;
-      }else {
-        mixinTypes = new String[] {mixintypeName} ;
-      }
-    }
-    String currentNodePath;
-    if (isAddNew) {
-      //Broadcast CmsService.event.preCreate event
-      listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
-      currentNode = storeHomeNode.addNode(nodeName, primaryType);
-      currentNodePath = currentNode.getPath();
-      if(mixinTypes != null){
-        for(String type : mixinTypes){
-          if(!currentNode.isNodeType(type)) {
-            currentNode.addMixin(type);
-          }
-          NodeType mixinType = nodetypeManager.getNodeType(type);
-          createNodeRecursively(NODE, currentNode, mixinType, mappings);
-        }
-      }
-      createNodeRecursively(NODE, currentNode, nodeType, mappings);
-      if(!currentNode.isNodeType(MIX_REFERENCEABLE)) {
-        currentNode.addMixin(MIX_REFERENCEABLE) ;
-      }
-      //Broadcast CmsService.event.postCreate event
-      listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
-    } else {
-      currentNode = storeHomeNode.getNode(nodeName);
-      currentNodePath = currentNode.getPath();
-      updateNodeRecursively(NODE, currentNode, nodeType, mappings);
-      if(currentNode.isNodeType("exo:datetime")) {
-        currentNode.setProperty("exo:dateModified",new GregorianCalendar()) ;
-      }
-      listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
-    }
-    //check if currentNode has been moved
-    if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
-      currentNode = (Node)session.getItem(currentNodePath);
-      LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
-      if (linkManager.isLink(currentNode)) {
-        try {
-          currentNode = linkManager.getTarget(currentNode, false);
-        } catch (Exception ex) {
-          currentNode = linkManager.getTarget(currentNode, true);
-        }
-      }
-    }
-
-    String uuid = currentNode.getUUID();
-    storeHomeNode.save();
-    return uuid;
   }
 
   /**
@@ -640,7 +515,7 @@ public class CmsServiceImpl implements CmsService {
           }
         } else {
           if(!node.hasProperty(propertyName) || (node.hasProperty(propertyName) && 
-              !node.getProperty(propertyName).getString().equals((String)value)))
+              !node.getProperty(propertyName).getString().equals(value)))
             node.setProperty(propertyName, (String) value);
         }
       }
@@ -1208,118 +1083,15 @@ public class CmsServiceImpl implements CmsService {
           stringArray[i] = valueItem.getString();
         i++;
       }
-      if(stringArray != null && stringArray.length > 0)
+      if(stringArray.length > 0)
         Arrays.sort(stringArray);
       if(arrayValue2 != null && arrayValue2.length > 0)
         Arrays.sort(arrayValue2);
-      return ArrayUtils.isEquals(stringArray, arrayValue2);  	    
+      return Objects.deepEquals(stringArray, arrayValue2);  	    
     } else {
       if(arrayValue2 != null) return false;
       else return true;
     }	
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath) {
-    Session srcSession = null ;
-    Session destSession = null ;
-    if (!srcWorkspace.equals(destWorkspace)) {
-      try {
-        srcSession = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
-        destSession = jcrService.getCurrentRepository().getSystemSession(destWorkspace);
-        Workspace workspace = destSession.getWorkspace();
-        Node srcNode = (Node) srcSession.getItem(nodePath);
-        try {
-          destSession.getItem(destPath);
-        } catch (PathNotFoundException e) {
-          createNode(destSession, destPath);
-        }
-        workspace.clone(srcWorkspace, nodePath, destPath, true);
-        try {
-          if (activityService==null) {
-            activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-          }
-          if (listenerService!=null && activityService.isAcceptedNode(srcNode)) {
-            listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, srcNode, destPath);
-          }
-        }catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Can not notify NodeMovedActivity: " + e.getMessage());
-          }
-        }
-        //Remove src node
-        srcNode.remove();
-        srcSession.save();
-        destSession.save() ;
-        srcSession.logout();
-        destSession.logout();
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      } finally {
-        if(srcSession != null) srcSession.logout();
-        if(destSession !=null) destSession.logout();
-      }
-    } else {
-      Session session = null ;
-      try{
-        session = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
-        Workspace workspace = session.getWorkspace();
-        try {
-          session.getItem(destPath);
-        } catch (PathNotFoundException e) {
-          createNode(session, destPath);
-          session.refresh(false) ;
-        }
-
-        workspace.move(nodePath, destPath);
-        try {
-          Node movedNode =(Node) session.getItem(destPath);
-          if (activityService==null) {
-            activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-          }
-          if (listenerService!=null && activityService.isAcceptedNode(movedNode)) {
-            listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, movedNode, destPath);
-          }
-        }catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Can not notify NodeMovedActivity: " + e.getMessage());
-          }
-        }
-        session.logout();
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      } finally {
-        if (session != null && session.isLive())
-          session.logout();
-      }
-    }
-  }
-
-  /**
-   * Create node following path in uri
-   * @param session Session
-   * @param uri     path to created node
-   * @throws RepositoryException
-   */
-  private void createNode(Session session, String uri) throws RepositoryException {
-    String[] splittedName = StringUtils.split(uri, "/");
-    Node rootNode = session.getRootNode();
-    for (int i = 0; i < splittedName.length - 1; i++) {
-      try {
-        rootNode.getNode(splittedName[i]);
-      } catch (PathNotFoundException exc) {
-        rootNode.addNode(splittedName[i], "nt:unstructured");
-        rootNode.save() ;
-      }
-      rootNode = rootNode.getNode(splittedName[i]) ;
-    }
   }
 
   /**

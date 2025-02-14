@@ -74,13 +74,13 @@ public class PDFViewerRESTService implements ResourceContainer {
   private static final int MAX_NAME_LENGTH= 150;
   private static final String LASTMODIFIED = "Last-Modified";
   private static final String PDF_VIEWER_CACHE = "ecms.PDFViewerRestService";
-  private RepositoryService repositoryService_;
+  private RepositoryService repositoryService;
   private ExoCache<Serializable, Object> pdfCache;
   private static final Log LOG  = ExoLogger.getLogger(PDFViewerRESTService.class.getName());
 
   public PDFViewerRESTService(RepositoryService repositoryService,
                               CacheService caService) throws Exception {
-    repositoryService_ = repositoryService;
+    this.repositoryService = repositoryService;
     PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
     if(pdfViewerService != null){
       pdfCache = pdfViewerService.getCache();
@@ -134,7 +134,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     InputStream is = null;
     String fileName = null;
     try {
-      ManageableRepository repository = repositoryService_.getCurrentRepository();
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       session = getSystemProvider().getSession(wsName, repository);
       Node currentNode = session.getNodeByUUID(uuid);  
       fileName = Utils.getTitle(currentNode);
@@ -158,7 +158,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     try {
       Object objCache = pdfCache.get(new ObjectKey(bd.toString()));
       InputStream is = null;
-      ManageableRepository repository = repositoryService_.getCurrentRepository();
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       session = getSystemProvider().getSession(wsName, repository);
       Node currentNode = session.getNodeByUUID(uuid);
       String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())

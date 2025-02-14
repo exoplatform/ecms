@@ -34,7 +34,6 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -50,7 +49,6 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.*;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -144,12 +142,6 @@ public class Utils {
                                                                                   .getName();
     String workspace = node.getSession().getWorkspace().getName();
     
-    String illustrationImg;
-    try{
-      illustrationImg = Utils.getIllustrativeImage(node);
-    }catch(Exception ex){
-      illustrationImg="";
-    }
     String strDateCreated = "";
     if (node.hasProperty(NodetypeConstant.EXO_DATE_CREATED)) {
       Calendar dateCreated = node.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate();
@@ -181,8 +173,6 @@ public class Utils {
     activityParams.put(ContentUIActivity.WORKSPACE, workspace);
     activityParams.put(ContentUIActivity.MESSAGE, activityMsgBundleKey);
     activityParams.put(ContentUIActivity.MIME_TYPE, getMimeType(linkManager.isLink(node)?linkManager.getTarget(node, true):node));
-    activityParams.put(ContentUIActivity.IMAGE_PATH, illustrationImg);
-    activityParams.put(ContentUIActivity.IMAGE_PATH, illustrationImg);
     if (isComment && StringUtils.isNotBlank(systemComment)) {
       activityParams.put(ContentUIActivity.IS_SYSTEM_COMMENT, String.valueOf(isComment));
     	activityParams.put(ContentUIActivity.SYSTEM_COMMENT, systemComment);
@@ -219,15 +209,11 @@ public class Utils {
     try {
       LinkManager linkManager = CommonsUtils.getService(LinkManager.class);
       String mimeType = getMimeType(linkManager.isLink(node)?linkManager.getTarget(node, true):node);
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-      String portalName = containerInfo.getContainerName();
-
-      String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+      String portalName = ExoContainerContext.getCurrentContainer().getContext().getPortalContainerName();
+      String restContextName = CommonsUtils.getRestContextName();
       String preferenceWS = node.getSession().getWorkspace().getName();
       String encodedPath = URLEncoder.encode(node.getPath(), "utf-8");
       encodedPath = encodedPath.replaceAll ("%2F", "/");
-
       if (mimeType.startsWith("image")) {
 
         return CommonsUtils.getCurrentDomain() + "/" + portalName + "/" + restContextName + "/thumbnailImage/custom/300x300/" +
@@ -597,12 +583,10 @@ public class Utils {
     String state;
     String nodeTitle;
     String nodeType = null;
-    String documentTypeLabel;
+    String documentTypeLabel = "";
     String currentVersion = null;
-    TemplateService templateService = CommonsUtils.getService(TemplateService.class);
     try {
       nodeType = contentNode.getPrimaryNodeType().getName();
-      documentTypeLabel = templateService.getTemplateLabel(nodeType);
     }catch (Exception e) {
       documentTypeLabel = "";
     }
@@ -815,63 +799,6 @@ public class Utils {
         LOG.info("No activity is deleted, return no related activity");
       }
     }    
-  }
-
-  /**
-   * Gets the illustrative image.
-   * 
-   * @param node the node
-   * @return the illustrative image
-   */
-  public static String getIllustrativeImage(Node node) {
-    WebSchemaConfigService schemaConfigService = CommonsUtils.getService(WebSchemaConfigService.class);
-    WebContentSchemaHandler contentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
-    Node illustrativeImage = null;
-    String uri = "";
-    try {
-      illustrativeImage = contentSchemaHandler.getIllustrationImage(node);
-      uri = generateThumbnailImageURI(illustrativeImage);
-    } catch (PathNotFoundException ex) {
-      return uri;
-    } catch (Exception e) { // WebContentSchemaHandler
-      LOG.warn(e.getMessage(), e);
-    }
-    return uri;
-  }
-
-  /**
-   * Generate the Thumbnail Image URI.
-   * 
-   * @param file the node
-   * @return the Thumbnail uri with medium size
-   * @throws Exception the exception
-   */
-  public static String generateThumbnailImageURI(Node file) throws Exception {
-    StringBuilder builder = new StringBuilder();
-    NodeLocation fielLocation = NodeLocation.getNodeLocationByNode(file);
-    String repository = fielLocation.getRepository();
-    String workspaceName = fielLocation.getWorkspace();
-    String nodeIdentifiler = file.getPath().replaceFirst("/", "");
-    String portalName = PortalContainer.getCurrentPortalContainerName();
-    String restContextName = PortalContainer.getCurrentRestContextName();
-    InputStream stream = file.getNode(NodetypeConstant.JCR_CONTENT)
-                             .getProperty(NodetypeConstant.JCR_DATA)
-                             .getStream();
-    if (stream.available() == 0)
-      return null;
-    stream.close();
-    builder.append("/")
-           .append(portalName)
-           .append("/")
-           .append(restContextName)
-           .append("/")
-           .append("thumbnailImage/medium/")
-           .append(repository)
-           .append("/")
-           .append(workspaceName)
-           .append("/")
-           .append(nodeIdentifiler);
-    return builder.toString();
   }
 
   /**

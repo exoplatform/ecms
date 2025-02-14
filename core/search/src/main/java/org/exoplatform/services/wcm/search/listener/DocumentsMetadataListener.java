@@ -22,8 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.commons.search.index.IndexingService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
-import org.exoplatform.social.core.manager.IdentityManager;
-import org.exoplatform.social.metadata.favorite.FavoriteService;
 import org.exoplatform.social.metadata.model.MetadataItem;
 
 public class DocumentsMetadataListener extends Listener<Long, MetadataItem> {

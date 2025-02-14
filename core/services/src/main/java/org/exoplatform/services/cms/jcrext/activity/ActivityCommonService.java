@@ -29,7 +29,6 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -188,26 +187,20 @@ public class ActivityCommonService {
       return false;
     }
   }
-  private boolean isDocumentNodeType(Node node) throws Exception {
-  	boolean isBroadCast = true;
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    isBroadCast = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
-    
-    if(!isBroadCast) {
-    	isBroadCast = !(node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || node.isNodeType(NodetypeConstant.NT_FOLDER));
-    }
-    return isBroadCast;
+
+  private boolean isDocumentNodeType(Node node) throws RepositoryException {
+    return node.isNodeType(NodetypeConstant.NT_FILE);
   }
-  
-  public boolean isBroadcastNTFileEvents(Node node) throws Exception {
+
+  public boolean isBroadcastNTFileEvents(Node node) throws RepositoryException {
     boolean result = true;
-    while(result && !((NodeImpl)node).isRoot()) {
-      try{
+    while (result && !((NodeImpl) node).isRoot()) {
+      try {
         node = node.getParent();
         result = !isDocumentNodeType(node);
-      }catch (AccessDeniedException ex){
+      } catch (AccessDeniedException ex) {
         return result;
-      }catch (RepositoryException ex) {
+      } catch (RepositoryException ex) {
         return !isDocumentNodeType(node);
       }
     }

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PropertyIterator;
@@ -31,7 +30,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -40,9 +38,9 @@ import org.quartz.JobExecutionException;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
@@ -144,7 +142,6 @@ public class TrashCleanerJob implements Job {
     LOG.debug("Try to delete node {}", node.getPath());
     try {
       Node nodeToDelete = readNodeWithNewSession(node, sessionForDeleteNode);
-      removeReferences(nodeToDelete);
       removeActions(actionService, repoService, nodeToDelete);
       removeThumbNails(thumbnailService, nodeToDelete);
       removeAuditForNode(nodeToDelete, repoService.getCurrentRepository());
@@ -257,35 +254,6 @@ public class TrashCleanerJob implements Job {
   private Node readNodeWithNewSession(Node node, Session sessionForDeleteNode) throws RepositoryException {
     String idf = ((NodeImpl) node).getIdentifier();
     return ((SessionImpl) sessionForDeleteNode).getNodeByIdentifier(idf);
-  }
-
-  private void removeReferences(Node node) {
-    String nodePath = "";
-    try {
-      nodePath = node.getPath();
-      RelationsService relationService = ExoContainerContext.getCurrentContainer()
-                                                            .getComponentInstanceOfType(RelationsService.class);
-
-      PropertyIterator iter = node.getReferences();
-      if (iter.hasNext()) {
-        // if there is a reference, move it
-        String relationPath = iter.nextProperty().getPath();
-        LOG.debug("Node " + node.getPath() + " is referenced by " + relationPath + ", remove the referenec");
-
-        Item relation = node.getSession().getItem(relationPath);
-        Node sourceRelationNode = relation.getParent();
-
-        relationService.removeRelation(sourceRelationNode, node.getPath());
-      }
-
-      NodeIterator children = node.getNodes();
-      while (children.hasNext()) {
-        Node child = children.nextNode();
-        removeReferences(child);
-      }
-    } catch (Exception ex) {
-      LOG.error("An error occurs while removing relations for node {}", nodePath, ex);
-    }
   }
 
   private void removeAuditForNode(Node node, ManageableRepository repository) {

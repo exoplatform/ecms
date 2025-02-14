@@ -16,6 +16,5 @@
 	<import>war:/conf/wcm-core/core-viewer-configuration.xml</import>
 	<import>war:/conf/wcm-core/core-webui-configuration.xml</import>
 	<import>war:/conf/wcm-core/ext-authoring-configuration.xml</import>
-	<import>war:/conf/wcm-core/ext-authoring-webui-configuration.xml</import>
 	<import>war:/conf/wcm-core/core-handler-configuration.xml</import>
 </configuration>

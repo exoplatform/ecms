@@ -69,32 +69,6 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
   }
 
   /**
-   * Test get runtime context param.
-   */
-  public void testGetRuntimeContextParam() {
-    assertEquals("/detail", configurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI));
-    assertEquals("/printviewer", configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_PAGE_URI));
-    assertEquals("printviewer", configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_VIEWER_PAGE));
-    assertEquals("/presentation/ContentListViewerPortlet", configurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET));
-    assertEquals("/presentation/SingleContentViewer", configurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET));
-    assertEquals("/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH));
-  }
-
-  /**
-   * Test get runtime context params.
-   */
-  public void testGetRuntimeContextParams() {
-    Collection<String> runtimeContextParams = configurationService.getRuntimeContextParams();
-    assertTrue(runtimeContextParams.contains("/detail"));
-    assertTrue(runtimeContextParams.contains("/printviewer"));
-    assertTrue(runtimeContextParams.contains("printviewer"));
-    assertTrue(runtimeContextParams.contains("/presentation/ContentListViewerPortlet"));
-    assertTrue(runtimeContextParams.contains("/presentation/SingleContentViewer"));
-    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl"));
-    assertEquals(7, runtimeContextParams.size());
-  }
-
-  /**
    * Test get shared portal name.
    */
   public void testGetSharedPortalName() {
