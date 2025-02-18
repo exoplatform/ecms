@@ -178,7 +178,7 @@
                       <string>removeNode</string>
                     </field>
                     <field name="actionClassName">
-                      <string>org.exoplatform.services.cms.jcrext.RemoveNodeAction</string>
+                      <string>org.exoplatform.services.cms.thumbnail.action.RemoveNodeAction</string>
                     </field>
                   </object>
                 </value>

@@ -66,18 +66,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
-    <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
-    <init-params>
-      <value-param>
-        <name>cleanup-cache</name>
-        <description>The cleanup cache period in seconds</description>
-        <value>300</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.wcm.skin.XSkinService</key>
     <type>org.exoplatform.services.wcm.skin.XSkinService</type>
   </component>
@@ -111,83 +99,6 @@
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.portal.listener.UpdateLivePortalEventListener</type>
       <description>this listener new live portal content storage</description>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
-    <component-plugin>
-      <name>addActions</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
-      <description>Reload all templates after edit</description>
-      <init-params>
-        <object-param>
-          <name>actions</name>
-          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
-            <field name="actions">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="workspace">
-                      <string>dms-system</string>
-                    </field>
-                    <field name="path">
-                      <string>/exo:ecm/views/templates/</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>exo:resources</string>
-                    </field>
-                    <field name="eventTypes">
-                      <string>changeProperty</string>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.services.wcm.template.TemplateModificationAction</string>
-                    </field>
-                  </object>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
-    <component-plugin>
-      <name>addActions</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
-      <description>Add mixin exo:sortable and property exo:title of TARGET NODE for SYMLINK NODE</description>
-      <init-params>
-        <object-param>
-          <name>actions</name>
-          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
-            <field name="actions">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="nodeTypes">
-                      <string>exo:taxonomyLink</string>
-                    </field>
-                    <field name="eventTypes">
-                      <string>addProperty</string>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.services.wcm.symlink.CreateLinkAction</string>
-                    </field>
-                  </object>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
     </component-plugin>
   </external-component-plugins>
 

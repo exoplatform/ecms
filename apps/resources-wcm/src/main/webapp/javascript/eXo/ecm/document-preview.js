@@ -684,66 +684,6 @@
             self.showErrorMessage("${UIActivity.comment.canNotLoadComments}");
             console.log("Can not load comments!");
         });
-      } else {
-        // load document comments
-        $.ajax({
-          url: '/portal/rest/contents/comment/all',
-          data: {jcrPath: '/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + this.settings.doc.path},
-          dataType: 'xml',
-          cache: false
-        }).done(function(data) {
-          var promises = [];
-          var comments = [];
-          var commentorsUsernames = [];
-          var commentors = [];
-          $(data).find("comment").each(function() {
-            var id = $(this).find("id").text();
-            var commentor = $(this).find("commentor").text();
-            var content = $(this).find("content").text();
-            var date = $(this).find("date").text();
-            // insert the comment as the first element since we want to display comments from the oldest to the
-            // newest whereas the web service returns in the opposite order
-            comments.unshift({
-              id: id,
-              poster: commentor,
-              body: content,
-              updateDate: date,
-              identity: {
-                profile: null
-              }
-            });
-            // store commentors in an associative array to ensure uniqueness
-            commentorsUsernames[commentor] = commentor;
-          });
-
-          // fetch all commentors profiles
-          for(var key in commentorsUsernames) {
-            if (commentorsUsernames.hasOwnProperty(key)) {
-              promises.push($.ajax({
-                url: '/portal/rest/v1/social/users/' + key
-              }).done(function (data) {
-                commentors[data.username] = data;
-              }));
-            }
-          }
-
-          // launch commentors profiles fetches using promise to allow to launch them in parallel
-          // and to wait for the end of all requests to continue
-          Promise.all(promises).then(function() {
-            // complete comments objects with commentors profiles
-            $.each(comments, function(index, comment) {
-              comment.identity.profile = commentors[comment.poster];
-            });
-            self.renderComments(comments, commentActivityParentId, scrollToCommentId);
-          }, function(err) {
-            // error occurred
-          });
-          resizeEventHandler();
-          self.clearErrorMessage();
-        }).fail(function () {
-            self.showErrorMessage("${UIActivity.comment.canNotLoadComments}");
-            console.log("Can not load comments!");
-        });
       }
     },
 
@@ -987,25 +927,6 @@
             self.showErrorMessage("${UIActivity.comment.canNotAddComment}");
             console.log("Can not post comment!");
           });
-        } else {
-          // post comment on the document
-          return $.ajax({
-            type: 'POST',
-            url: '/portal/rest/contents/comment/add',
-            data: {
-              jcrPath: '/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + this.settings.doc.path,
-              comment: commentContent
-            },
-            contentType: 'application/x-www-form-urlencoded'
-          }).done(function (data) {
-            self.loadComments();
-            self.moveCKEditorInOriginalLocation();
-            self.initCKEditor();
-            self.clearErrorMessage();
-          }).fail(function () {
-            self.showErrorMessage("${UIActivity.comment.canNotAddComment}");
-            console.log("Can not post comment!");
-          });
         }
       }
     },
@@ -1017,17 +938,6 @@
         return $.ajax({
           type: 'DELETE',
           url: '/portal/rest/v1/social/comments/' + commentId
-        }).done(function (data) {
-          self.loadComments();
-          self.clearErrorMessage();
-        }).fail(function () {
-            self.showErrorMessage("${UIActivity.comment.canNotDeleteComment}");
-            console.log("Can not delete comment!");
-        });
-      } else {
-        return $.ajax({
-          type: 'DELETE',
-          url: '/portal/rest/contents/comment/delete/?jcrPath=/' + this.settings.doc.repository + '/' + this.settings.doc.workspace + this.settings.doc.path + '&commentId=' + commentId
         }).done(function (data) {
           self.loadComments();
           self.clearErrorMessage();
