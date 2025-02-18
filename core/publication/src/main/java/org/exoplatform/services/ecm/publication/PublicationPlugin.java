@@ -72,29 +72,6 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
   throws IncorrectStateUpdateLifecycleException, Exception;
 
   /**
-   * Retrieves the WebUI form corresponding to the current state of the
-   * specified node.
-   * There are two cases here. Either the form contains read only fields (when
-   * the state is supposed to be processed by an external entity such as a
-   * Workflow). Or the form has editable fields or buttons (in the case the
-   * user can interfere. In that case, some action listeners are leveraged.).
-   * In all cases, all UI and listener classes are provided in the JAR
-   * corresponding to the PublicationPlugin.
-   * The method first inspects the specified Node. If it does not contain
-   * a publication mixin, then it throws a NotInPublicationLifecycleException
-   * exception. Else, it retrieves the lifecycle name from the mixin,
-   * selects the appropriate publication plugin and delegates the call to it.
-   *
-   * @param node the Node from which the state UI should be retrieved
-   * @param component the component
-   *
-   * @return a WebUI form corresponding to the current state and node.
-   *
-   * @throws Exception the exception
-   */
-  public abstract UIForm getStateUI(Node node, UIComponent component) throws Exception;
-
-  /**
    * Retrieves an image showing the lifecycle state of the specified Node.
    * The implementation of this method typically retrieves the current state
    * of the specified Node, then fetches the bytes of an appropriate image

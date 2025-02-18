@@ -94,8 +94,6 @@ public interface WCMPublicationService {
    * Called by create and edit listeners. It allows to update the lifecycle of
    * the content depending of its current state.
    *
-   * @see org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener
-   * @see org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener
    * @param node
    * @param siteName
    * @param remoteUser

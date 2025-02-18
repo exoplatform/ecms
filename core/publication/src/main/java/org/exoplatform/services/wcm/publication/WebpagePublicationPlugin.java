@@ -22,8 +22,6 @@ import javax.jcr.Node;
 
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
-import org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener;
-import org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener;
 
 /**
  * Created by The eXo Platform SAS
@@ -48,9 +46,6 @@ public abstract class WebpagePublicationPlugin extends PublicationPlugin {
    * @param remoteUser the remote user
    *
    * @throws Exception the exception
-   *
-   * @see PostCreateContentEventListener
-   * @see PostEditContentEventListener
    */
   public abstract void updateLifecyleOnChangeContent(Node node, String remoteUser) throws Exception;
 
@@ -63,9 +58,6 @@ public abstract class WebpagePublicationPlugin extends PublicationPlugin {
    * @param newState the new state
    *
    * @throws Exception the exception
-   *
-   * @see PostCreateContentEventListener
-   * @see PostEditContentEventListener
    */
   public abstract void updateLifecyleOnChangeContent(Node node, String remoteUser, String newState) throws Exception;
 

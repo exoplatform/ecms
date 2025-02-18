@@ -43,8 +43,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 })
 public class BaseSearchTest extends BaseECMSTestCase {
   
-  protected QueryCriteria queryCriteria = new QueryCriteria();
-  protected SiteSearchService siteSearchService;
   protected WCMPublicationService wcmPublicationService;
   protected WebpagePublicationPlugin publicationPlugin ;
   protected UserPortalConfigService userPortalConfigService;
@@ -56,7 +54,6 @@ public class BaseSearchTest extends BaseECMSTestCase {
 
   public void setUp() throws Exception {
     super.setUp();
-    siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
     userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);

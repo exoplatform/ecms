@@ -27,7 +27,6 @@ import javax.jcr.query.QueryResult;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -126,7 +125,6 @@ public class ExportContentJob implements Job {
       long time = date.getTime();
       File file = new File(localTempDir + File.separatorChar + time + ".xml");
       ByteArrayOutputStream bos = null;
-      List<Node> categorySymLinks = null;
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
       FileOutputStream output = new FileOutputStream(file);
       XMLStreamWriter xmlsw = outputFactory.createXMLStreamWriter(output, "UTF-8");
@@ -135,7 +133,6 @@ public class ExportContentJob implements Job {
       xmlsw.writeNamespace("xs", URL);
       QueryResult queryResult = query.execute();
       if (queryResult.getNodes().getSize() > 0) {
-        TaxonomyService taxonomyService = WCMCoreUtils.getService(TaxonomyService.class, containerName);
         Date nodeDate = null;
         Date now = null;
         xmlsw.writeStartElement("xs", "published-contents", URL);
@@ -181,31 +178,6 @@ public class ExportContentJob implements Job {
             xmlsw.writeCData(bos.toString());
             xmlsw.writeEndElement();
             xmlsw.writeStartElement("xs", "links", URL);
-
-            categorySymLinks = taxonomyService.getAllCategories(node, true);
-
-            for (Node nodeSymlink : categorySymLinks) {
-
-              NodeLocation symlinkLocation = NodeLocation.getNodeLocationByNode(nodeSymlink);
-              StringBuilder symlinkTargetPath = new StringBuilder();
-              symlinkTargetPath.append(symlinkLocation.getRepository());
-              symlinkTargetPath.append(":");
-              symlinkTargetPath.append(symlinkLocation.getWorkspace());
-              symlinkTargetPath.append(":");
-              symlinkTargetPath.append(symlinkLocation.getPath());
-
-              xmlsw.writeStartElement("xs", "link", URL);
-              xmlsw.writeStartElement("xs", "type", URL);
-              xmlsw.writeCharacters("exo:taxonomyLink");
-              xmlsw.writeEndElement();
-              xmlsw.writeStartElement("xs", "title", URL);
-              xmlsw.writeCharacters(node.getName());
-              xmlsw.writeEndElement();
-              xmlsw.writeStartElement("xs", "targetPath", URL);
-              xmlsw.writeCharacters(symlinkTargetPath.toString());
-              xmlsw.writeEndElement();
-              xmlsw.writeEndElement();
-            }
             xmlsw.writeEndElement();
             xmlsw.writeEndElement();
           }

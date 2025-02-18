@@ -54,7 +54,6 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIForm;
@@ -280,23 +279,6 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     }
   }
   return listPageNavigationUri;
-  }
-
-  /**
-   * Checks if is shared portal.
-   *
-   * @param portalName the portal name
-   *
-   * @return true, if is shared portal
-   *
-   * @throws Exception the exception
-   */
-  @SuppressWarnings("unused")
-  private boolean isSharedPortal(String portalName) throws Exception{
-    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-    return sharedPortal.getName().equals(portalName);
   }
 
   /* (non-Javadoc)

@@ -20,23 +20,35 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
-import javax.jcr.*;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.commons.utils.ISO8601;
-import org.exoplatform.container.*;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.ecms.css.CssClassIconFile;
+import org.exoplatform.ecms.css.CssClassManager;
+import org.exoplatform.ecms.css.CssClassUtils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.context.DocumentContext;
-import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
@@ -47,10 +59,10 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.core.*;
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
 import org.exoplatform.social.core.identity.model.Identity;
@@ -66,7 +78,6 @@ import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.activity.ContentUIActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.ecms.css.*;
 
 
 
@@ -824,12 +835,10 @@ public class Utils {
    * @return the illustrative image
    */
   public static String getIllustrativeImage(Node node) {
-    WebSchemaConfigService schemaConfigService = CommonsUtils.getService(WebSchemaConfigService.class);
-    WebContentSchemaHandler contentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     Node illustrativeImage = null;
     String uri = "";
     try {
-      illustrativeImage = contentSchemaHandler.getIllustrationImage(node);
+      illustrativeImage = node.getNode("medias/images/illustration");
       uri = generateThumbnailImageURI(illustrativeImage);
     } catch (PathNotFoundException ex) {
       return uri;

@@ -42,33 +42,4 @@
     </init-params>
   </component>
 
-  <!--
-	WE USE CMS CONTENT EVENT LISTENER TO ENROLL CONTENTS (DMS like nt:file OR WCM like exo:webContent) 
-	THIS EVENT ISN'T BROADCASTED FOR UPLOADED DOCUMENTS
-	-->
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-    <component-plugin>
-      <name>CmsService.event.postCreate</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener</type>
-      <description>this listener will force the created document enroll to publication lifecycle</description>
-    </component-plugin>
-    <component-plugin>
-      <name>CmsService.event.postEdit</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener</type>
-      <description>this listener will change state of document to draft after editing</description>
-    </component-plugin>    
-  </external-component-plugins>
-  
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-    <component-plugin>
-      <name>WebDavService.event.postUpload</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.post.PostWebDavUploadEventListener</type>
-      <description>this listener will change state of document to draft after uploading a file from webdav</description>
-    </component-plugin>
-  </external-component-plugins>  
 </configuration>

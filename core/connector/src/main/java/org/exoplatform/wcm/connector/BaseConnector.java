@@ -36,14 +36,11 @@ import org.exoplatform.ecm.connector.fckeditor.FCKFileHandler;
 import org.exoplatform.ecm.connector.fckeditor.FCKFolderHandler;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.voting.VotingService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.WebSchemaConfigService;
-import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -72,17 +69,8 @@ public abstract class BaseConnector {
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(BaseConnector.class.getName());
 
-  /** The voting service. */
-  protected VotingService votingService;
-
   /** The link manager. */
   protected LinkManager linkManager;
-
-  /** The live portal manager service. */
-  protected LivePortalManagerService          livePortalManagerService;
-
-  /** The web schema config service. */
-  protected WebSchemaConfigService            webSchemaConfigService;
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
   protected static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
@@ -111,59 +99,13 @@ public abstract class BaseConnector {
    * Instantiates a new base connector.
    */
   public BaseConnector() {
-    livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    webSchemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
-    votingService = WCMCoreUtils.getService(VotingService.class);
     linkManager = WCMCoreUtils.getService(LinkManager.class);
 
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     folderHandler = new FCKFolderHandler(container);
     fileHandler = new FCKFileHandler(container);
     fileUploadHandler = new FileUploadHandler();
-  }
-
-  /**
-   * Builds the xml response on expand.
-   *
-   * @param currentFolder the current folder
-   * @param runningPortal The current portal instance
-   * @param workspaceName the workspace name
-   * @param jcrPath the jcr path
-   * @param command the command
-   * @return the response
-   * @throws Exception the exception
-   */
-  protected Response buildXMLResponseOnExpand(String currentFolder,
-                                              String runningPortal,
-                                              String workspaceName,
-                                              String jcrPath,
-                                              String command) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node sharedPortalNode = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-    Node activePortalNode = getCurrentPortalNode(jcrPath,
-                                                 runningPortal,
-                                                 sharedPortalNode);
-    if (currentFolder.length() == 0 || "/".equals(currentFolder))
-      return buildXMLResponseForRoot(activePortalNode, sharedPortalNode, command);
-    String currentPortalRelPath = "/" + activePortalNode.getName() + "/";
-    String sharePortalRelPath = "/" + sharedPortalNode.getName() + "/";
-    Node webContent = getWebContent(workspaceName, jcrPath);
-    if (!activePortalNode.getPath().equals(sharedPortalNode.getPath())
-        && currentFolder.startsWith(sharePortalRelPath)) {
-      if (currentFolder.equals(sharePortalRelPath)) {
-        return buildXMLResponseForPortal(sharedPortalNode, null, command);
-      }
-      Node currentContentStorageNode = getCorrectContentStorage(sharedPortalNode,
-          null,
-          currentFolder);
-      return buildXMLResponseForContentStorage(currentContentStorageNode, command);
-    } else if (!activePortalNode.getPath().equals(sharedPortalNode.getPath())
-        && currentFolder.startsWith(currentPortalRelPath)) {
-      return buildXMLResponseCommon(activePortalNode, webContent, currentFolder, command);
-    } else {
-      return buildXMLResponseCommon(sharedPortalNode, webContent, currentFolder, command);
-    }
   }
 
   /**
@@ -395,42 +337,5 @@ public abstract class BaseConnector {
   protected Node getContent(String workspaceName, String jcrPath) throws Exception {
     return getContent(workspaceName, jcrPath, null, true);
   }  
-
-  /**
-   * Gets the web content.
-   *
-   * @param workspaceName the workspace name
-   * @param jcrPath the jcr path
-   * @return the web content
-   * @throws Exception the exception
-   */
-  protected Node getWebContent(String workspaceName, String jcrPath) throws Exception {
-    return getContent(workspaceName, jcrPath, "exo:webContent", true);
-  }
-
-  protected Node getCurrentPortalNode(String jcrPath,
-                                      String runningPortal,
-                                      Node sharedPortal) throws Exception {
-    if (jcrPath == null || jcrPath.length() == 0)
-      return null;
-    Node currentPortal = null;
-    List<Node> livePortaNodes = new ArrayList<Node>();
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    try {
-      livePortaNodes = livePortalManagerService.getLivePortals(sessionProvider);
-      if (sharedPortal != null)
-        livePortaNodes.add(sharedPortal);
-      for (Node portalNode : livePortaNodes) {
-        String portalPath = portalNode.getPath();
-        if (jcrPath.startsWith(portalPath))
-          currentPortal = portalNode;
-      }
-      if (currentPortal == null)
-        currentPortal = livePortalManagerService.getLivePortal(sessionProvider, runningPortal);
-      return currentPortal;
-    } catch (Exception e) {
-      return null;
-    }
-  }
 
 }

@@ -46,10 +46,6 @@
   </component>
 
   <component>
-    <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
-  </component>
-
-  <component>
     <type>org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService</type>
   </component>
 

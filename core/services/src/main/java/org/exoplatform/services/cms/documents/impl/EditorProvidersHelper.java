@@ -13,7 +13,6 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * The Class EditorProviderHelper.
@@ -35,29 +34,6 @@ public class EditorProvidersHelper {
    */
   private EditorProvidersHelper(DocumentService documentService) {
     this.documentService = documentService;
-  }
-
-  /**
-   * Inits the explorer.
-   *
-   * @param providers the providers
-   * @param identity the identity
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @param context the context
-   * @return the list
-   */
-  public List<ProviderInfo> initExplorer(List<DocumentEditorProvider> providers,
-                                         Identity identity,
-                                         String fileId,
-                                         String workspace,
-                                         WebuiRequestContext context) {
-    return initEditorProviders(providers,
-                               identity,
-                               fileId,
-                               workspace,
-                               (provider) -> provider.initExplorer(fileId, workspace, context));
-
   }
 
   /**

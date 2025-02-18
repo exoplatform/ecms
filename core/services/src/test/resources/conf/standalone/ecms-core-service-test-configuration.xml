@@ -5,11 +5,6 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
-    <key>org.exoplatform.services.wcm.skin.XSkinService</key>
-    <type>org.exoplatform.services.wcm.skin.XSkinService</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.social.core.identity.IdentityProvider</key>
     <type>org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider</type>
   </component>
@@ -70,11 +65,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.wcm.javascript.XJavascriptService</key>
-    <type>org.exoplatform.services.wcm.javascript.XJavascriptService</type>
-  </component>
-
-  <component>
     <type>org.exoplatform.groovyscript.text.TemplateService</type>
   </component>
 
@@ -118,18 +108,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
-    <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
-    <init-params>
-      <value-param>
-        <name>cleanup-cache</name>
-        <description>The cleanup cache period in seconds</description>
-        <value>300</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
     <key>org.exoplatform.webui.ext.UIExtensionManager</key>
     <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
   </component>
@@ -137,10 +115,6 @@
   <component>
     <key>org.gatein.api.Portal</key>
     <type>org.exoplatform.services.cms.documents.mock.PortalMock</type>
-  </component>
-
-  <component>
-    <type>org.exoplatform.services.deployment.ContentInitializerService</type>
   </component>
 
   <component>
@@ -169,11 +143,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>
-    <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.cms.metadata.MetadataService</key>
     <type>org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl</type>
   </component>
@@ -189,11 +158,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.cms.voting.VotingService</key>
-    <type>org.exoplatform.services.cms.voting.impl.VotingServiceImpl</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.cms.comments.CommentsService</key>
     <type>org.exoplatform.services.cms.comments.impl.CommentsServiceImpl</type>
   </component>
@@ -204,88 +168,13 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.cms.queries.QueryService</key>
-    <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>relativePath</name>
-        <value>Private/Queries</value>
-      </value-param>
-      <value-param>
-        <name>group</name>
-        <value>*:/admin</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.cms.templates.TemplateService</key>
     <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>
   </component>
 
   <component>
-    <key>org.exoplatform.services.cms.views.ManageViewService</key>
-    <type>org.exoplatform.services.cms.views.impl.ManageViewServiceImpl</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.cms.link.LinkManager</key>
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>
-    <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
-    <init-params>
-      <object-param>
-        <name>defaultPermission.configuration</name>
-        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission">
-          <field name="permissions">
-            <collection type="java.util.ArrayList">
-              <value>
-                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
-                  <field name="identity">
-                    <string>*:/platform/administrators</string>
-                  </field>
-                  <field name="read">
-                    <string>true</string>
-                  </field>
-                  <field name="addNode">
-                    <string>true</string>
-                  </field>
-                  <field name="setProperty">
-                    <string>true</string>
-                  </field>
-                  <field name="remove">
-                    <string>true</string>
-                  </field>
-                </object>
-              </value>
-              <value>
-                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
-                  <field name="identity">
-                    <string>*:/platform/users</string>
-                  </field>
-                  <field name="read">
-                    <string>true</string>
-                  </field>
-                  <field name="addNode">
-                    <string>true</string>
-                  </field>
-                  <field name="setProperty">
-                    <string>true</string>
-                  </field>
-                  <field name="remove">
-                    <string>false</string>
-                  </field>
-                </object>
-              </value>
-            </collection>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
-
   </component>
 
   <component>
@@ -313,11 +202,6 @@
         <value>image/jpeg;image/png;image/gif;image/bmp</value>
       </value-param>
     </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
-    <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
   </component>
 
   <component>
@@ -355,91 +239,8 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.cms.timeline.TimelineService</key>
-    <type>org.exoplatform.services.cms.timeline.impl.TimelineServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>itemPerTimeline</name>
-        <value>5</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.cms.lock.LockService</key>
     <type>org.exoplatform.services.cms.lock.impl.LockServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.seo.SEOService</key>
-    <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
-    <init-params>
-      <object-param>
-        <name>seo.config</name>
-        <object type="org.exoplatform.services.seo.SEOConfig">
-          <field name="robotsindex">
-            <collection type="java.util.ArrayList">
-              <value>
-                <string>INDEX</string>
-              </value>
-              <value>
-                <string>NOINDEX</string>
-              </value>
-            </collection>
-          </field>
-          <field name="robotsfollow">
-            <collection type="java.util.ArrayList">
-              <value>
-                <string>FOLLOW</string>
-              </value>
-              <value>
-                <string>NOFOLLOW</string>
-              </value>
-            </collection>
-          </field>
-          <field name="frequency">
-            <collection type="java.util.ArrayList">
-              <value>
-                <string>Always</string>
-              </value>
-              <value>
-                <string>Hourly</string>
-              </value>
-              <value>
-                <string>Daily</string>
-              </value>
-              <value>
-                <string>Weekly</string>
-              </value>
-              <value>
-                <string>Monthly</string>
-              </value>
-              <value>
-                <string>Yearly</string>
-              </value>
-              <value>
-                <string>Never</string>
-              </value>
-            </collection>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>
-    <type>org.exoplatform.services.cms.clipboard.impl.ClipboardServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>liveTime</name>
-        <value>${wcm.cache.clipboard.timetolive:-1}</value>
-      </value-param>
-      <value-param>
-        <name>maxSize</name>
-        <value>${wcm.cache.clipboard.MaxNodes:500}</value>
-      </value-param>
-    </init-params>
   </component>
 
   <external-component-plugins>

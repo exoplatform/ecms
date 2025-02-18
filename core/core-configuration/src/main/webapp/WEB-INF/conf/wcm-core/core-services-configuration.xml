@@ -7,16 +7,8 @@
 
 
     <component>
-        <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
-    </component>
-
-    <component>
         <key>org.exoplatform.webui.ext.UIExtensionManager</key>
         <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
-    </component>
-
-    <component>
-        <type>org.exoplatform.services.deployment.ContentInitializerService</type>
     </component>
 
     <component>
@@ -66,11 +58,6 @@
     </component>
 
     <component>
-        <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>
-        <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
-    </component>
-
-    <component>
         <key>org.exoplatform.services.cms.metadata.MetadataService</key>
         <type>org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl</type>
     </component>
@@ -86,11 +73,6 @@
     </component>
 
     <component>
-        <key>org.exoplatform.services.cms.voting.VotingService</key>
-        <type>org.exoplatform.services.cms.voting.impl.VotingServiceImpl</type>
-    </component>
-
-    <component>
         <key>org.exoplatform.services.cms.comments.CommentsService</key>
         <type>org.exoplatform.services.cms.comments.impl.CommentsServiceImpl</type>
     </component>
@@ -101,47 +83,13 @@
     </component>
 
     <component>
-        <key>org.exoplatform.services.cms.queries.QueryService</key>
-        <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
-        <init-params>
-            <value-param>
-                <name>workspace</name>
-                <value>system</value>
-            </value-param>
-            <value-param>
-                <name>relativePath</name>
-                <value>Private/Queries</value>
-            </value-param>
-            <value-param>
-                <name>group</name>
-                <value>*:/admin</value>
-            </value-param>
-        </init-params>
-    </component>
-
-    <component>
         <key>org.exoplatform.services.cms.templates.TemplateService</key>
         <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>
     </component>
 
     <component>
-        <key>org.exoplatform.services.cms.views.ManageViewService</key>
-        <type>org.exoplatform.services.cms.views.impl.ManageViewServiceImpl</type>
-    </component>
-
-    <component>
-        <key>org.exoplatform.services.cms.views.CustomizeViewService</key>
-        <type>org.exoplatform.services.cms.views.impl.StartableCustomizeViewServiceImpl</type>
-    </component>
-    
-    <component>
         <key>org.exoplatform.services.cms.link.LinkManager</key>
         <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
-    </component>
-
-    <component>
-        <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
-        <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
     </component>
 
     <component>
@@ -179,34 +127,8 @@
     </component>
 
     <component>
-        <key>org.exoplatform.services.cms.timeline.TimelineService</key>
-        <type>org.exoplatform.services.cms.timeline.impl.TimelineServiceImpl</type>
-        <init-params>
-            <value-param>
-                <name>itemPerTimeline</name>
-                <value>5</value>
-            </value-param>
-        </init-params>
-    </component>
-
-    <component>
         <key>org.exoplatform.services.cms.lock.LockService</key>
         <type>org.exoplatform.services.cms.lock.impl.LockServiceImpl</type>
-    </component>
-
-    <component>
-        <key>org.exoplatform.services.cms.clipboard.ClipboardService</key>
-        <type>org.exoplatform.services.cms.clipboard.impl.ClipboardServiceImpl</type>
-        <init-params>
-            <value-param>
-                <name>liveTime</name>
-                <value>${exo.cache.ecms.clipboard.TimeToLive:-1}</value>
-            </value-param>
-            <value-param>
-                <name>maxSize</name>
-                <value>${exo.cache.ecms.clipboard.MaxNodes:500}</value>
-            </value-param>
-        </init-params>
     </component>
 
   <component>
@@ -338,44 +260,6 @@
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
       <description>Configures the cache for Site Search Service</description>
       <init-params>
-        <object-param>
-          <name>ecms.SiteSearchService.found</name>
-          <description></description>
-          <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-            <field name="name"><string>ecms.SiteSearchService.found</string></field>
-            <field name="maxSize"><int>${exo.cache.ecms.sitesearchservice.found.MaxNodes:10000}</int></field>
-            <field name="liveTime"><long>${exo.cache.ecms.sitesearchservice.found.TimeToLive:3600}</long></field>
-          </object>
-         </object-param>
-          <object-param>
-              <name>ecms.SiteSearchService.drop</name>
-              <description></description>
-              <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-                  <field name="name"><string>ecms.SiteSearchService.drop</string></field>
-                  <field name="maxSize"><int>${exo.cache.ecms.sitesearchservice.drop.MaxNodes:10000}</int></field>
-                  <field name="liveTime"><long>${exo.cache.ecms.sitesearchservice.drop.TimeToLive:3600}</long></field>
-              </object>
-          </object-param>
-          <object-param>
-              <name>ecms.FragmentCacheService</name>
-              <description></description>
-              <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-                  <field name="name"><string>ecms.FragmentCacheService</string></field>
-                  <field name="maxSize"><int>${exo.cache.ecms.fragmentcacheservice.MaxNodes:1000}</int></field>
-                  <field name="liveTime"><long>${exo.cache.ecms.fragmentcacheservice.TimeToLive:300}</long></field>
-              </object>
-          </object-param>
-          <object-param>
-              <name>ecms.InitialWebContentPlugin</name>
-              <description></description>
-              <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-                  <field name="name"><string>ecms.InitialWebContentPlugin</string></field>
-                  <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.InitialWebContentPlugin.strategy:LIRS}</string></field>
-                  <field name="maxSize"><int>${exo.cache.ecms.initialwebcontentplugin.MaxNodes:300}</int></field>
-                  <field name="liveTime"><long>${exo.cache.ecms.initialwebcontentplugin.TimeToLive:86400}</long></field>
-                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.initialwebcontentplugin.cacheMode:replication}</string></field>
-              </object>
-          </object-param>
           <object-param>
               <name>ecms.TemplateService</name>
               <description>The Cache configuration for document nodetype </description>
@@ -408,17 +292,6 @@
               </object>
           </object-param>
           <object-param>
-              <name>ecms.query</name>
-              <description>The clustered cache configuration</description>
-              <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-                  <field name="name"><string>ecms.query</string></field>
-                  <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.queryservice.strategy:LIRS}</string></field>
-                  <field name="maxSize"><int>${exo.cache.ecms.queryservice.MaxNodes:5000}</int></field>
-                  <field name="liveTime"><long>${exo.cache.ecms.queryservice.TimeToLive:86400}</long></field>
-                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.queryservice.cacheMode:replication}</string></field>
-              </object>
-          </object-param>
-          <object-param>
               <name>ecms.LockService</name>
               <description>The Cache configuration for Lock service</description>
               <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
@@ -427,17 +300,6 @@
                   <field name="maxSize"><int>${exo.cache.ecms.lockservice.MaxNodes:300}</int></field>
                   <field name="liveTime"><long>${exo.cache.ecms.lockservice.TimeToLive:-1}</long></field>
                   <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.lockservice.cacheMode:replication}</string></field>
-              </object>
-          </object-param>
-          <object-param>
-              <name>ecms.FolksonomyService</name>
-              <description>The Cache configuration for Folk service</description>
-              <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
-                  <field name="name"><string>ecms.FolksonomyService</string></field>
-                  <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.folkservice.strategy:LIRS}</string></field>
-                  <field name="maxSize"><int>${exo.cache.ecms.folkservice.MaxNodes:300}</int></field>
-                  <field name="liveTime"><long>${exo.cache.ecms.folkservice.TimeToLive:-1}</long></field>
-                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.folkservice.cacheMode:replication}</string></field>
               </object>
           </object-param>
           <object-param>

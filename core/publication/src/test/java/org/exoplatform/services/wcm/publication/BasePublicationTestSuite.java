@@ -31,9 +31,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-  TestWCMComposer.class,
   TestPublicationService.class,
-  TestPublicationPresentationService.class,
   TestWCMPublicationService.class
 })
 @ConfigTestCase(BasePublicationTestCase.class)

@@ -39,7 +39,6 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * The Class DocumentEditorProviderImpl.
@@ -206,22 +205,6 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public <T> T initPreview(String fileId, String workspace, URI requestURI, Locale locale) {
     return editor.initPreview(fileId, workspace, requestURI, locale);
   }
-  
-  
-  /**
-   * Inits the explorer.
-   *
-   * @param <T> the generic type
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @param context the context
-   * @return the settings object
-   */
-  @Override
-  public <T> T initExplorer(String fileId, String workspace, WebuiRequestContext context) {
-    return editor.initExplorer(fileId, workspace, context);
-  }
-
 
   /**
    * Gets the provider name.

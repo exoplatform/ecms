@@ -20,11 +20,10 @@ import javax.jcr.version.Version;
 import javax.portlet.PortletMode;
 
 import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
@@ -32,6 +31,7 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.navigation.Scope;
+import org.exoplatform.portal.mop.service.LayoutService;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -47,7 +47,6 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
-import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui.UIPublicationContainer;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
@@ -58,8 +57,6 @@ import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionData;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionLog;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.form.UIForm;
 
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
@@ -418,19 +415,6 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
 
   public String getLifecycleType() {
     return AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_TYPE;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see org.exoplatform.services.ecm.publication.PublicationPlugin#getStateUI
-   * (javax.jcr.Node, org.exoplatform.webui.core.UIComponent)
-   */
-  public UIForm getStateUI(Node node, UIComponent component) throws Exception {
-    UIPublicationContainer publicationContainer = component.createUIComponent(UIPublicationContainer.class,
-                                                                              null,
-                                                                              null);
-    publicationContainer.initContainer(node);
-    return publicationContainer;
   }
 
   /*

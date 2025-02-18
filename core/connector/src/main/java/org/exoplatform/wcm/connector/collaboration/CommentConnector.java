@@ -34,8 +34,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
-import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -228,15 +226,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
    */
   @Override
   protected Node getRootContentStorage(Node parentNode) throws Exception {
-    try {
-      PortalFolderSchemaHandler folderSchemaHandler =
-        webSchemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
-      return folderSchemaHandler.getDocumentStorage(parentNode);
-    } catch (Exception e) {
-      WebContentSchemaHandler webContentSchemaHandler =
-        webSchemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
-      return webContentSchemaHandler.getDocumentFolder(parentNode);
-    }
+    return parentNode;
   }
 
   /*

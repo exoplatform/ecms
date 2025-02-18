@@ -29,7 +29,8 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 
 import org.json.JSONObject;
-import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
+
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.cms.clouddrives.CloudDrive;
 import org.exoplatform.services.cms.clouddrives.CloudDriveException;
 import org.exoplatform.services.cms.clouddrives.CloudDriveService;
@@ -37,6 +38,7 @@ import org.exoplatform.services.cms.clouddrives.CloudProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.plugin.doc.UIBaseNodePresentation;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
@@ -58,9 +60,6 @@ public class CloudDriveContext {
   /** The Constant LOG. */
   protected static final Log    LOG                        = ExoLogger.getLogger(CloudDriveContext.class);
 
-  /** The constant UIJCREXPLORER_CONTEXT_NODE. */
-  public static final String    UIJCREXPLORER_CONTEXT_NODE = "UIJCRExplorer.contextNode";
-
   /**
    * Initialize request with Cloud Drive support from given WebUI component.
    *
@@ -68,23 +67,11 @@ public class CloudDriveContext {
    * @throws Exception the exception
    */
   public static void init(UIComponent uiComponent) throws Exception {
-    Node contextNode;
-
-    // when in document explorer
-    WebuiRequestContext reqContext = WebuiRequestContext.getCurrentInstance();
-    contextNode = (Node) reqContext.getAttribute(UIJCREXPLORER_CONTEXT_NODE);
-
-    if (contextNode == null && uiComponent.getParent() instanceof UIBaseNodePresentation) {
-      // when in social activity stream (file view)
-      UIBaseNodePresentation docViewer = uiComponent.getParent();
-      contextNode = docViewer.getNode();
-    }
-
-    if (contextNode != null) {
-      // we store current node in the context
-      init(WebuiRequestContext.getCurrentInstance(), contextNode.getSession().getWorkspace().getName(), contextNode.getPath());
-    } else {
-      LOG.warn("Cannot find ancestor context node in component " + uiComponent + ", parent: " + uiComponent.getParent());
+    if (uiComponent.getParent() instanceof UIBaseNodePresentation docViewer) {
+      Node contextNode = docViewer.getNode();
+      init(PortalRequestContext.getCurrentInstance(),
+           contextNode.getSession().getWorkspace().getName(),
+           contextNode.getPath());
     }
   }
 

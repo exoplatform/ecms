@@ -49,20 +49,6 @@ public class PublicationPresentationServiceImpl implements PublicationPresentati
     this.publicationPlugins_ = new HashMap<String, PublicationPlugin>();
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.cms.publication.PublicationService#getStateUI(javax.jcr.Node)
-   */
-  public UIForm getStateUI(Node node, UIComponent component) throws NotInPublicationLifecycleException, Exception {
-    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
-
-    if (!publicationService.isNodeEnrolledInLifecycle(node)) {
-      throw new NotInPublicationLifecycleException();
-    }
-    String lifecycleName=publicationService.getNodeLifecycleName(node);
-    PublicationPlugin nodePlugin = this.publicationPlugins_.get(lifecycleName);
-    return nodePlugin.getStateUI(node,component);
-  }
-
   /**
    * Add a Publication Plugin to the service.
    * The method caches all added plugins.

@@ -29,11 +29,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.zip.ZipInputStream;
 
 import javax.imageio.ImageIO;
@@ -48,7 +45,6 @@ import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.commons.api.settings.SettingService;
@@ -56,16 +52,13 @@ import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
 import org.exoplatform.commons.api.settings.data.Scope;
 import org.exoplatform.commons.utils.CommonsUtils;
-import org.exoplatform.commons.utils.HTMLSanitizer;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
-import org.exoplatform.ecm.webui.form.UIOpenDocumentForm;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -75,7 +68,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.Constants;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
@@ -84,16 +76,11 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 
@@ -738,226 +725,6 @@ public class Utils {
     return portalContainerConfig.getRestContextName(portalContainerName);
   }
 
-  public static String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
-    String defaultValue = "";
-    String idGenerator = "";
-    Pattern p = Pattern.compile("[^a-zA-Z0-9]");
-    Matcher m = p.matcher(propertyName);
-    if (orgNode.hasProperty(propertyName)) {
-      defaultValue = orgNode.getProperty(propertyName).getString();
-    }
-    idGenerator = m.replaceAll("_");
-    return getInlineEditingField(orgNode, propertyName, defaultValue, INPUT_TEXT, idGenerator, DEFAULT_CSS_NAME, true);
-  }
-
-  /**
-   * @param orgNode Processed node
-   * @param propertyName which property used for editing
-   * @param inputType input type for editing: TEXT, TEXTAREA, WYSIWYG
-   * @param cssClass class name for CSS, should implement: cssClass,
-   *          [cssClass]Title Edit[cssClass] as relative css Should create the
-   *          function: InlineEditor.presentationRequestChange[cssClass] to
-   *          request the rest-service
-   * @param isGenericProperty set as true to use generic javascript function,
-   *          other wise, must create the correctspond function
-   *          InlineEditor.presentationRequestChange[cssClass]
-   * @param arguments Extra parameter for Input component (toolbar, width,
-   *          height,.. for CKEditor/TextArea)
-   * @return String that can be put on groovy template
-   * @throws Exception
-   * @author vinh_nguyen
-   */
-  public static String getInlineEditingField(Node orgNode,
-                                             String propertyName,
-                                             String defaultValue,
-                                             String inputType,
-                                             String idGenerator,
-                                             String cssClass,
-                                             boolean isGenericProperty,
-                                             String... arguments) throws Exception {
-    HashMap<String, String> parsedArguments = parseArguments(arguments);
-    String height = parsedArguments.get(HEIGHT);
-    String bDirection = parsedArguments.get(BUTTON_DIR);
-    String publishLink = parsedArguments.get(FAST_PUBLISH_LINK);
-
-    Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
-    String language = locale.toString();
-    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-    ResourceBundle resourceBundle;
-    resourceBundle = resourceBundleService.getResourceBundle(LOCALE_WEBUI_DMS, locale);
-
-    String draft = INLINE_DRAFT;
-    String published = INLINE_PUBLISHED;
-    try {
-      draft = StringEscapeUtils.escapeHtml4(resourceBundle.getString("PublicationStates.draft"));
-      published = StringEscapeUtils.escapeHtml4(resourceBundle.getString("PublicationStates.published"));
-    } catch (MissingResourceException ex) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("Missing resource exception of draft/published status.", ex);
-      }
-    }
-
-    String portletRealID;
-    if(WebuiRequestContext.getCurrentInstance() instanceof PortletRequestContext) {
-      portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext) WebuiRequestContext.getCurrentInstance());
-    } else {
-      portletRealID = "";
-    }
-    StringBuffer sb = new StringBuffer();
-    StringBuffer actionsb = new StringBuffer();
-    String repo = ((ManageableRepository) orgNode.getSession().getRepository()).getConfiguration().getName();
-    String workspace = orgNode.getSession().getWorkspace().getName();
-    String uuid = orgNode.getUUID();
-    String strSuggestion = "";
-    String acceptButton = "";
-    String cancelButton = "";
-    portletRealID = portletRealID.replace('-', '_');
-    String showBlockId = "Current" + idGenerator + "_" + portletRealID;
-    String editBlockEditorID = "Edit" + idGenerator + "_" + portletRealID;
-    String editFormID = "Edit" + idGenerator + "Form_" + portletRealID;
-    String newValueInputId = "new" + idGenerator + "_" + portletRealID;
-    String currentValueID = "old" + idGenerator + "_" + portletRealID;
-    String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
-    String currentValue = StringUtils.replace(defaultValue, "{portalName}", siteName);
-    try {
-      strSuggestion = StringEscapeUtils.escapeHtml4(resourceBundle.getString("UIPresentation.label.EditingSuggestion"));
-      acceptButton = StringEscapeUtils.escapeHtml4(resourceBundle.getString("UIPresentation.title.AcceptButton"));
-      cancelButton = StringEscapeUtils.escapeHtml4(resourceBundle.getString("UIPresentation.title.CancelButton"));
-    } catch (MissingResourceException e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("MissingResourceException of EditingSuggestion/Accept/Cancel buttons.", e);
-      }
-    }
-    actionsb.append(" return InlineEditor.presentationRequestChange");
-
-    if (isGenericProperty) {
-      actionsb.append("Property").append("('").append("/property?', '").append(propertyName).append("', '");
-    } else {
-      actionsb.append(cssClass).append("('");
-    }
-    actionsb.append(currentValueID)
-            .append("', '")
-            .append(newValueInputId)
-            .append("', '")
-            .append(repo)
-            .append("', '")
-            .append(workspace)
-            .append("', '")
-            .append(uuid)
-            .append("', '")
-            .append(editBlockEditorID)
-            .append("', '")
-            .append(showBlockId)
-            .append("', '")
-            .append(siteName)
-            .append("', '")
-            .append(language);
-
-    if (inputType.equals(INPUT_WYSIWYG)) {
-      actionsb.append("', 1);");
-    } else {
-      actionsb.append("');");
-    }
-    String strAction = actionsb.toString();
-
-    if (orgNode.hasProperty(propertyName)) {
-      try {
-        if (propertyName.equals(EXO_TITLE))
-          return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-        String propertyValue;
-        if (propertyName.equals(JCR_CONTENT_DESCRIPTION)) {
-          propertyValue = orgNode.getProperty(propertyName).getValues()[0].getString();
-          return HTMLSanitizer.sanitize(propertyValue);
-        }
-        if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
-          // The requested property is multiple-valued, inline editing enable
-          // users to edit the first value of property
-          propertyValue = orgNode.getProperty(propertyName).getValues()[0].getString();
-          propertyValue = ContentReader.simpleEscapeHtml(propertyValue);
-        } else {
-          propertyValue = orgNode.getProperty(propertyName).getString();
-        }
-        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
-          return StringUtils.replace(propertyValue, "{portalName}", siteName);
-        else
-          return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\"" + propertyName + "\" repo=\"" + repo
-              + "\" workspace=\"" + workspace + "\"" + " uuid=\"" + uuid + "\" siteName=\"" + siteName + "\" publishedMsg=\""
-              + published + "\" draftMsg=\"" + draft + "\" fastpublishlink=\"" + publishLink + "\" language=\"" + language
-              + "\" >" + propertyValue + "</div>";
-      } catch (Exception e) {
-        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
-          return currentValue;
-        else
-          return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\"" + propertyName + "\" repo=\"" + repo
-              + "\" workspace=\"" + workspace + "\" " + "uuid=\"" + uuid + "\" siteName=\"" + siteName + "\" publishedMsg=\""
-              + published + "\" draftMsg=\"" + draft + "\" fastpublishlink=\"" + publishLink + "\" language=\"" + language
-              + "\" >" + defaultValue + "</div>";
-      }
-    }
-
-    sb.append("<div class=\"InlineEditing\" >\n");
-    sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"")
-      .append(showBlockId)
-      .append("\" Class=\"")
-      .append(cssClass)
-      .append("\"");
-    sb.append("title=\"").append(strSuggestion).append("\"");
-    sb.append(" onClick=\"InlineEditor.presentationSwitchBlock('")
-      .append(showBlockId)
-      .append("', '")
-      .append(editBlockEditorID)
-      .append("');\"");
-
-    sb.append("onmouseout=\"this.className='")
-      .append(cssClass)
-      .append("';\" onblur=\"this.className='")
-      .append(cssClass)
-      .append("';\" onfocus=\"this.className='")
-      .append(cssClass)
-      .append("Hover")
-      .append("';\" onmouseover=\"this.className='")
-      .append(cssClass)
-      .append("Hover';\">")
-      .append(currentValue)
-      .append("</div>\n");
-    sb.append("\t<div id=\"").append(editBlockEditorID).append("\" class=\"Edit").append(cssClass).append("\">\n");
-    sb.append("\t\t<form name=\"")
-      .append(editFormID)
-      .append("\" id=\"")
-      .append(editFormID)
-      .append("\" onSubmit=\"")
-      .append(strAction)
-      .append("\">\n");
-    sb.append("<DIV style=\"display:none; visible:hidden\" id=\"")
-      .append(currentValueID)
-      .append("\" name=\"")
-      .append(currentValueID)
-      .append("\">")
-      .append(currentValue)
-      .append("</DIV>");
-
-    if (bDirection != null && bDirection.equals(LEFT2RIGHT)) {
-      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\"")
-        .append(" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
-        .append(strAction)
-        .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
-      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"CancelButton\" style=\"float:left\" ")
-        .append("onClick=\"InlineEditor.presentationSwitchBlock('");
-      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
-    } else {
-      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"CancelButton\" ")
-        .append("onClick=\"InlineEditor.presentationSwitchBlock('");
-      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
-      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"AcceptButton\" onclick=\"")
-        .append(strAction)
-        .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
-    }
-    sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
-
-    sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
-    return sb.toString();
-  }
-
   private static HashMap<String, String> parseArguments(String... arguments) {
     HashMap<String, String> map = new HashMap<String, String>();
     int sIndex = -1;
@@ -1066,39 +833,6 @@ public class Utils {
     }
     
     return URLDecoder.decode(name, "UTF-8");
-  }
-
-  /**
-   * @param node
-   * @return
-   * @throws Exception
-   */
-  public static String getTitleWithSymlink(Node node) throws Exception {
-    String title = null;
-    Node nProcessNode = node;
-    if (isSymLink(node)) {
-      nProcessNode = Optional.ofNullable(getNodeSymLink(node)).orElse(node);
-    }
-    if (nProcessNode.hasProperty("exo:title")) {
-      title = nProcessNode.getProperty("exo:title").getValue().getString();
-    }
-    if (title == null && nProcessNode.hasNode("jcr:content")) {
-      Node content = nProcessNode.getNode("jcr:content");
-      if (content.hasProperty("dc:title")) {
-        try {
-          title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch (Exception e) {
-          title = null;
-        }
-      }
-    }
-    if (title == null) {
-      title = nProcessNode.getName();
-    }
-    if (title != null && title.length() > 0) {
-      title = title.trim();
-    }
-    return ContentReader.getXSSCompatibilityContent(title);
   }
 
   /**
@@ -1263,60 +997,6 @@ public class Utils {
       }
     }
     return ret.toArray(new String[] {});
-  }
-
-  public static void openDocumentInDesktop(Node currentNode, UIPopupContainer popupContainer, Event<? extends UIComponent> event) throws Exception {
-    HttpServletRequest httpServletRequest = Util.getPortalRequestContext().getRequest();
-
-    String nodePath = currentNode.getPath();
-    String ws = currentNode.getSession().getWorkspace().getName();
-    String repo = WCMCoreUtils.getRepository().getConfiguration().getName();
-    String filePath = httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":"
-        + httpServletRequest.getServerPort() + "/" + WCMCoreUtils.getRestContextName() + "/private/jcr/" + repo + "/" + ws
-        + nodePath;
-    String workspaceMountPath = httpServletRequest.getScheme()+ "://" + httpServletRequest.getServerName() + ":"
-        + httpServletRequest.getServerPort() + "/"
-        + WCMCoreUtils.getRestContextName()+ "/private/jcr/" + repo + "/" + ws;
-
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-
-    String mountPath;
-
-    if(((NodeImpl)currentNode.getParent()).isRoot()) {
-      mountPath = workspaceMountPath;
-    }
-    else{
-      mountPath = workspaceMountPath + checkMountPath(currentNode, generateMountURL(nodePath, ws, nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH),
-              nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH)));
-    }
-
-
-    if (currentNode.isLocked()) {
-      String[] userLock = { currentNode.getLock().getLockOwner() };
-
-      UIOpenDocumentForm uiOpenDocumentForm = popupContainer.activate(UIOpenDocumentForm.class, 600);
-      uiOpenDocumentForm.setId("UIReadOnlyFileConfirmMessage");
-      uiOpenDocumentForm.setMessageKey("UIPopupMenu.msg.lock-node-read-only");
-      uiOpenDocumentForm.setArguments(userLock);
-      uiOpenDocumentForm.setFilePath(nodePath);
-      uiOpenDocumentForm.setMountPath(mountPath);
-      uiOpenDocumentForm.setAbsolutePath(filePath);
-      event.getRequestContext()
-           .getJavascriptManager()
-           .require("SHARED/openDocumentInOffice")
-           .addScripts("eXo.ecm.OpenDocumentInOffice.showConfirmBox();");
-    } else {
-      event.getRequestContext()
-           .getJavascriptManager()
-           .require("SHARED/openDocumentInOffice")
-           .addScripts("eXo.ecm.OpenDocumentInOffice.openDocument('" + filePath + "', '" + mountPath + "');");
-    }
-    event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer.getParent());
-
-  }
-
-  public static void logUnavaiblePreview(String path) {
-    LOG.warn("Can not preview the document having path : " + path);
   }
 
   public static String encodePath(String path, String encoding) {

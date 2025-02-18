@@ -1,7 +1,0 @@
-<div class="uiViewPermissionForm">
-	<% uiform.begin() %>
-			<div>
-				<% uiform.renderChild(uiform.TAB_PERMISSION) %>
-			</div>
-	<% uiform.end() %>
-</div>

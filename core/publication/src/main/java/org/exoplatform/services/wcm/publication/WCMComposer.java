@@ -17,12 +17,11 @@
 package org.exoplatform.services.wcm.publication;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
  * Gets content inside WCM.
@@ -31,79 +30,80 @@ import org.exoplatform.services.wcm.core.NodeLocation;
  *
  * @LevelAPI Experimental
  */
+@Deprecated(forRemoval = true, since = "7.0")
 public interface WCMComposer {
 
   /** Filter parameter to filter results by state. For example: draft, staged, published. */
-  public final static String FILTER_STATE = "filter-state";
+  public static final String FILTER_STATE = "filter-state";
 
   /** Filter parameter to filter results by primary type. For example: exo:webContent. */
-  public final static String FILTER_PRIMARY_TYPE = "filter-primary-type";
+  public static final String FILTER_PRIMARY_TYPE = "filter-primary-type";
 
   /** Filter parameter to order results. For example: exo:title, dc:title. */
-  public final static String FILTER_ORDER_BY = "filter-order-by";
+  public static final String FILTER_ORDER_BY = "filter-order-by";
 
   /** Filter parameter to choice translation results. */
-  public final static String FILTER_TRANSLATION = "filter-translation";
+  public static final String FILTER_TRANSLATION = "filter-translation";
 
   /** Filter parameter to order results in ascending or descending order. Its values are: ASC and DESC. */
-  public final static String FILTER_ORDER_TYPE = "filter-order-type";
+  public static final String FILTER_ORDER_TYPE = "filter-order-type";
 
   /** Filter parameter to filter results by target mode. For example: editing, approving, live. */
-  public final static String FILTER_MODE = "filter-mode";
+  public static final String FILTER_MODE = "filter-mode";
 
   /** Filter parameter to search recursively or not. For example: recursive.*/
-  public final static String FILTER_RECURSIVE = "filter-recursive";
+  public static final String FILTER_RECURSIVE = "filter-recursive";
 
   /** Filter parameter to filter results by a dedicated version. For example: base, 1, 2, 3, and more.*/
-  public final static String FILTER_VERSION = "filter-version";
+  public static final String FILTER_VERSION = "filter-version";
 
   /** Filter parameter to filter results by site. For example: ACME. */
-  public final static String FILTER_SITE_NAME = "filter-site";
+  public static final String FILTER_SITE_NAME = "filter-site";
 
   /** Filter parameter to filter results by user. This means only content authored by this user is returned. */
-  public final static String FILTER_REMOTE_USER = "filter-remote-user";
+  public static final String FILTER_REMOTE_USER = "filter-remote-user";
 
   /** Filter parameter to filter results by language. This means only content in this language is returned. For example: fr, en, de. */
-  public final static String FILTER_LANGUAGE = "filter-language";
+  public static final String FILTER_LANGUAGE = "filter-language";
 
   /** Filter parameter to add a parameter to the executed query. For example: "AND exo:myproperty like 'cat1%'".*/
-  public final static String FILTER_QUERY = "filter-query";
+  public static final String FILTER_QUERY = "filter-query";
 
   /** Filter parameter to execute a specific query. For example: "SELECT * from nt:base".*/
-  public final static String FILTER_QUERY_FULL = "filter-query-full";
+  public static final String FILTER_QUERY_FULL = "filter-query-full";
 
   /** Filter parameter to limit the result size. */
-  public final static String FILTER_LIMIT = "filter-limit";
+  public static final String FILTER_LIMIT = "filter-limit";
 
   /** Filter parameter to return results with an offset delimiter. */
-  public final static String FILTER_OFFSET = "filter-offset";
+  public static final String FILTER_OFFSET = "filter-offset";
 
   /** Total number of content. */
-  public final static String FILTER_TOTAL = "filter-total-number";
+  public static final String FILTER_TOTAL = "filter-total-number";
 
   /** Filter parameter to filter results by visibility. For example: public, user. */
-  public final static String FILTER_VISIBILITY = "filter-visibility";
+  public static final String FILTER_VISIBILITY = "filter-visibility";
 
   /** Mode of portlet. **/
-  public final static String PORTLET_MODE = "portlet-mode";
+  public static final String PORTLET_MODE = "portlet-mode";
 
   /** The constant MODE_EDIT. */
-  public final static String MODE_EDIT = "Edit";
+  public static final String MODE_EDIT = "Edit";
 
   /** The constant MODE_LIVE. */
-  public final static String MODE_LIVE = "Live";
+  public static final String MODE_LIVE = "Live";
 
   /** The constant IS_RECURSIVE. */
-  public final static String IS_RECURSIVE = "rec";
+  public static final String IS_RECURSIVE = "rec";
 
   /** The constant for base version. */
-  public final static String BASE_VERSION = "base";
+  public static final String BASE_VERSION = "base";
 
   /** The constant VISIBILITY PUBLIC. */
-  public final static String VISIBILITY_PUBLIC = "public";
+  public static final String VISIBILITY_PUBLIC = "public";
 
   /** The constant VISIBILITY USER. */
-  public final static String VISIBILITY_USER = "user";
+  public static final String VISIBILITY_USER = "user";
 
   /**
    * Gets a content node at a specified path based on given filters.
@@ -113,62 +113,10 @@ public interface WCMComposer {
    * @param filters The given filters.
    * @param sessionProvider The session provider.
    * @return The content node.
-   * @throws Exception The exception
    */
   public Node getContent(String workspace,
                          String nodeIdentifier,
-                         HashMap<String, String> filters,
-                         SessionProvider sessionProvider) throws Exception;
+                         Map<String, String> filters,
+                         SessionProvider sessionProvider);
 
-  /**
-   * Gets content nodes at a specified path based on given filters.
-   * 
-   * @param workspace The workspace that includes the content nodes.
-   * @param path The path.
-   * @param filters The given filters.
-   * @param sessionProvider The session provider.
-   * @return The list of content nodes.
-   * @throws Exception The exception
-   */
-  public List<Node> getContents(String workspace,
-                                String path,
-                                HashMap<String, String> filters,
-                                SessionProvider sessionProvider) throws Exception;
-
-  /**
-   * Gets content nodes that are paginated at a specified path based on given filters.
-   *
-   * @param nodeLocation Location of the content nodes.
-   * @param filters The given filters.
-   * @param sessionProvider The session provider.
-   * @return The list of content nodes.
-   * @throws Exception The exception
-   */
- public Result getPaginatedContents(NodeLocation nodeLocation,
-                                                             HashMap<String, String> filters,
-                                                             SessionProvider sessionProvider) throws Exception ;
-															 
-  /**
-   * Gets the allowed states for a given mode.
-   *
-   * @param mode The given mode.
-   * @return The list of states.
-   * @throws Exception The exception
-   */
-  public List<String> getAllowedStates(String mode) throws Exception ;
-
-  /**
-   * Resets the template filters.
-   *
-   * @throws Exception the exception
-   */
-  public void cleanTemplates() throws Exception ;
-
-  /**
-   * Updates the SQL filter of templates.
-   *
-   * @return A part of the query that allows to search all document nodes and taxonomy links. It returns "null" if there is any exception.
-   * @throws Exception the exception
-   */
-  public String updateTemplatesSQLFilter() throws Exception;
 }

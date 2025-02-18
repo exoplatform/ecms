@@ -81,23 +81,4 @@ public interface PublicationManager {
    */
   public List<Lifecycle> getLifecyclesFromUser(String remoteUser, String state);
 
-  /**
-   * Gets all content nodes.
-   *
-   * @param fromstate The current state of the content.
-   * @param tostate The state by which lifecycles are retrieved from a user.
-   * @param date Any given date.
-   * The publication dates of returned content nodes are smaller than this given date.
-   * @param user The last user who changes the state.
-   * @param lang Language of the content nodes.
-   * @param workspace The workspace where content nodes are got.
-   * @return The list of content nodes.
-   * @throws Exception
-   */
-  public List<Node> getContents(String fromstate,
-      String tostate,
-      String date,
-      String user,
-      String lang,
-      String workspace) throws Exception;
 }

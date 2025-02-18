@@ -1,8 +1,0 @@
-<div class="UIActivePublication">
-  <div style="text-align: center; margin: 10px;"><%=_ctx.appRes(uicomponent.getId() + ".label.note")%></div>
-  <div style="text-align: center; margin: 10px;"><%=_ctx.appRes(uicomponent.getId() + ".label.question")%></div>
-	<div class="UIAction">
-		  <a onclick="<%=uicomponent.event("EnablePublication")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);">Enrol</a>
-		  <a onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);">Cancel</a>
-   </div>   
-</div>

@@ -80,9 +80,7 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.exoplatform.wcm.connector.FileUploadHandler;
 import org.exoplatform.wcm.connector.handler.FCKFileHandler;
@@ -948,15 +946,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @Override
   protected Node getRootContentStorage(Node node) throws Exception {
-    try {
-      PortalFolderSchemaHandler folderSchemaHandler = webSchemaConfigService
-      .getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
-      return folderSchemaHandler.getImagesFolder(node);
-    } catch (Exception e) {
-      WebContentSchemaHandler webContentSchemaHandler = webSchemaConfigService
-      .getWebSchemaHandlerByType(WebContentSchemaHandler.class);
-      return webContentSchemaHandler.getImagesFolders(node);
-    }
+    return node;
   }
 
   /**

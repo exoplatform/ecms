@@ -12,7 +12,5 @@
   <description>eXo Entreprise Content Management Suite :: Extensions</description>
   <modules>
     <module>authoring</module>
-    <module>fastcontentcreator</module>
-    <module>webui</module>
   </modules>
 </project>

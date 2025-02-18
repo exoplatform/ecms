@@ -40,12 +40,7 @@
   <component>
     <type>org.exoplatform.groovyscript.text.TemplateService</type>
   </component>
-  
-   <component>
-    <key>org.exoplatform.services.wcm.portal.LivePortalManagerService</key>
-    <type>org.exoplatform.services.wcm.portal.impl.LivePortalManagerServiceImpl</type>
-  </component>
-  
+
   <component>
     <key>org.exoplatform.services.ecm.publication.PublicationService</key>
     <type>org.exoplatform.services.ecm.publication.impl.PublicationServiceImpl</type>    
@@ -80,61 +75,7 @@
       </value-param>
     </init-params>    
   </component>
-  
-  <component>
-    <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>
-    <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
-    <init-params>
-      <object-param>
-        <name>defaultPermission.configuration</name>
-        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission">
-          <field name="permissions">
-            <collection type="java.util.ArrayList">
-              <value>
-                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
-                  <field name="identity">
-                    <string>*:/platform/administrators</string>
-                  </field>
-                  <field name="read">
-                    <string>true</string>
-                  </field>
-                  <field name="addNode">
-                    <string>true</string>
-                  </field>
-                  <field name="setProperty">
-                    <string>true</string>
-                  </field>
-                  <field name="remove">
-                    <string>true</string>
-                  </field>
-                </object>
-              </value>
-              <value>
-                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
-                  <field name="identity">
-                    <string>*:/platform/users</string>
-                  </field>
-                  <field name="read">
-                    <string>true</string>
-                  </field>
-                  <field name="addNode">
-                    <string>true</string>
-                  </field>
-                  <field name="setProperty">
-                    <string>true</string>
-                  </field>
-                  <field name="remove">
-                    <string>false</string>
-                  </field>
-                </object>
-              </value>
-            </collection>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
-  </component>
-  
+
   <component>
     <key>org.exoplatform.services.cms.link.NodeFinder</key>
     <type>org.exoplatform.services.cms.link.impl.NodeFinderImpl</type>
@@ -150,13 +91,6 @@
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>
-
-
-  <component>
-    <key>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</key>
-    <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
-  </component>
-
 
   <component>
     <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
@@ -298,23 +232,6 @@
     <type>org.exoplatform.services.wcm.search.mock.MockElasticSearchingClient</type>
   </component>
 
-	<component>
-		<key>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</key>
-		<type>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</type>
-		<init-params>
-         <properties-param>
-           <name>constructor.params</name>
-           <property name="searchType" value="file"/>
-           <property name="displayName" value="Files"/>
-           <property name="index" value="file_alias"/>
-           <property name="type" value="file"/>
-           <property name="enable" value="${exo.unified-search.connector.file.enable:true}"/>
-           <property name="titleField" value="title"/>
-           <property name="searchFields" value="name,title,tags,attachment.content"/>
-         </properties-param>
-    </init-params>   
-	</component>
-
   <component>
     <type>org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector</type>
     <init-params>
@@ -340,99 +257,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
-    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
-    <component-plugins>
-      <component-plugin>
-        <name>ExcludeMimeTypes</name>
-        <set-method>addExcludeIncludeDataTypePlugin</set-method>
-        <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
-        <init-params>
-          <properties-param>
-            <name>search.exclude.datatypes</name>
-            <description>exclude some data type when search</description>
-            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
-            <property name="nodetypes" value="${wcm.search.excluded-nodetypes:exo:restoreLocation}" />
-          </properties-param>
-        </init-params>
-      </component-plugin>
-    </component-plugins>
-    <init-params>
-      <value-param>
-        <name>isEnabledFuzzySearch</name>
-        <value>true</value>
-      </value-param>
-      <value-param>
-        <name>fuzzySearchIndex</name>
-        <value></value>
-      </value-param>
-    </init-params>
-  </component>
-	
-  <component>
-    <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
-    <type>org.exoplatform.services.wcm.link.LiveLinkManagerServiceImpl</type>
-    <init-params>
-      <properties-param>
-        <name>server.config</name>
-        <description>server.address</description>
-        <property name="scheme" value="http" />
-        <property name="hostName" value="localhost" />
-        <property name="port" value="8080" />
-      </properties-param>
-    </init-params>
-  </component>
-  
-  <component>
-    <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>
-    <type>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsServiceImpl</type>
-    <init-params>
-      <values-param>
-        <name>ignored.portals</name>
-        <description>initial portals. the service will not deploy data to the initial portal</description>
-        <value>classic</value>
-      </values-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.wcm.portal.artifacts.RemovePortalArtifactsService</key>
-    <type>org.exoplatform.services.wcm.portal.artifacts.RemovePortalArtifactsServiceImpl</type>
-  </component>
-  
-  <component>
-    <key>org.exoplatform.services.wcm.core.WebSchemaConfigService</key>
-    <type>org.exoplatform.services.wcm.core.impl.WebSchemaConfigServiceImpl</type>
-    <component-plugins>
-      <component-plugin>
-        <name>CSSFileHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.skin.CSSFileHandler</type>
-      </component-plugin>
-      <component-plugin>
-        <name>JSFileHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.javascript.JSFileHandler</type>
-      </component-plugin>
-      <component-plugin>
-        <name>WebContentSchemaHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler</type>
-      </component-plugin>
-      <component-plugin>
-        <name>HTMLFileSchemaHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.webcontent.HTMLFileSchemaHandler</type>
-      </component-plugin>
-      <component-plugin>
-        <name>PortalFolderSchemaHandler</name>
-        <set-method>addWebSchemaHandler</set-method>
-        <type>org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler</type>
-      </component-plugin>
-    </component-plugins>
-  </component>
-
-  <component>
     <key>org.gatein.api.Portal</key>
     <type>org.gatein.api.PortalImpl</type>
   </component>
@@ -453,19 +277,10 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.wcm.skin.XSkinService</key>
-    <type>org.exoplatform.services.wcm.skin.XSkinService</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.web.application.javascript.JavascriptConfigService</key>
     <type>org.exoplatform.web.application.javascript.JavascriptConfigService</type>
   </component>
 
-  <component>
-    <key>org.exoplatform.services.wcm.javascript.XJavascriptService</key>
-    <type>org.exoplatform.services.wcm.javascript.XJavascriptService</type>
-  </component>
   <component>
     <key>org.exoplatform.commons.search.index.IndexingOperationProcessor</key>
     <type>org.exoplatform.services.wcm.search.mock.MockIndexingOperationProcessor</type>
@@ -486,29 +301,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-    <component-plugin>
-      <name>org.exoplatform.portal.mop.service.LayoutService.portalConfigCreated</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.portal.listener.CreateLivePortalEventListener</type>
-      <description>this listener create new live portal content storage</description>
-    </component-plugin>
-    <component-plugin>
-      <name>org.exoplatform.portal.mop.service.LayoutService.portalConfigRemoved</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.portal.listener.RemoveLivePortalEventListener</type>
-      <description>this listener new live portal content storage</description>
-    </component-plugin>
-    <component-plugin>
-      <name>org.exoplatform.portal.mop.service.LayoutService.portalConfigUpdated</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.portal.listener.UpdateLivePortalEventListener</type>
-      <description>this listener new live portal content storage</description>
-    </component-plugin>
-  </external-component-plugins>
-  
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
     <component-plugin>
@@ -522,72 +315,6 @@
           <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
             <field name="actions">
               <collection type="java.util.ArrayList">
-                <value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="workspace">
-                      <string>collaboration</string>
-                    </field>
-                    <field name="path">
-                      <string>/sites content</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>nt:unstructured,nt:folder,nt:file,exo:portalFolder</string>
-                    </field>
-                    <field name="eventTypes">
-                      <string>addNode</string>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.services.wcm.core.impl.WebSchemaCreationAction</string>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="workspace">
-                      <string>collaboration</string>
-                    </field>
-                    <field name="path">
-                      <string>/sites content</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>nt:file,nt:resource</string>
-                    </field>
-                    <field name="eventTypes">
-                      <string>addProperty,changeProperty,removeProperty</string>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.services.wcm.core.impl.WebSchemaModificationAction</string>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field name="workspace">
-                      <string>collaboration</string>
-                    </field>
-                    <field name="path">
-                      <string>/sites content</string>
-                    </field>
-                    <field name="isDeep">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="nodeTypes">
-                      <string>nt:file,nt:resource</string>
-                    </field>
-                    <field name="eventTypes">
-                      <string>removeNode</string>
-                    </field>
-                    <field name="actionClassName">
-                      <string>org.exoplatform.services.wcm.core.impl.WebSchemaRemoverAction</string>
-                    </field>
-                  </object>
-                </value>
                 <value>
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field name="eventTypes">
@@ -782,158 +509,6 @@
                     </field>
                   </object>
                 </value>
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>exo:article</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Article</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/article/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/article/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>exo:sample</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Sample node</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/sample/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/sample/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>exo:pictureOnHeadWebcontent</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Illustrated Web Content</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/pictureOnHeadWebContent/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/pictureOnHeadWebContent/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*:/platform/web-contributors</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>exo:webContent</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>webcontent</string>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/webContent/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                
               </collection>
             </field>
           </object>

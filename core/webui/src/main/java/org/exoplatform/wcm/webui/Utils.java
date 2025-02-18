@@ -17,7 +17,6 @@
 package org.exoplatform.wcm.webui;
 
 import java.io.InputStream;
-import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,35 +28,34 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
-import javax.jcr.Workspace;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
+import com.ibm.icu.text.Transliterator;
+
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
-
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.utils.lock.LockUtil;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
-import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.page.UIPage;
 import org.exoplatform.portal.webui.page.UIPageBody;
 import org.exoplatform.portal.webui.portal.UIPortal;
+import org.exoplatform.portal.webui.util.NavigationUtils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
@@ -77,12 +75,8 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
-import org.exoplatform.portal.webui.util.NavigationUtils;
-import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.url.navigation.NavigationResource;
@@ -90,20 +84,15 @@ import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
-import com.ibm.icu.text.Transliterator;
 
 /**
  * Created by The eXo Platform SAS Author : Hoa Pham hoa.phamvu@exoplatform.com
  * Oct 23, 2008
  */
 public class Utils {
-
-  /** The Quick edit attribute for HTTPSession */
-  public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
 
   private static final Log LOG = ExoLogger.getExoLogger(Utils.class);
 
@@ -132,24 +121,6 @@ public class Utils {
     if (uiMaskWS.getWindowWidth() > 0 && uiMaskWS.getWindowHeight() < 0)
       return true;
     return false;
-  }
-
-  /**
-   * Checks if is quick editmode.
-   *
-   * @param container the current container
-   * @param popupWindowId the popup window id
-   *
-   * @return true, if is quick editmode
-   */
-  public static boolean isQuickEditMode(UIContainer container, String popupWindowId) {
-    UIPopupContainer popupContainer = getPopupContainer(container);
-    if (popupContainer == null)
-      return false;
-    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
-    if (popupWindow == null)
-      return false;
-    return true;
   }
 
   /**
@@ -343,120 +314,7 @@ public class Utils {
    * @see WCMComposer
    */
   public static String getCurrentMode() {
-    Object isQuickEditable = Util.getPortalRequestContext()
-                                 .getRequest()
-                                 .getSession()
-                                 .getAttribute(TURN_ON_QUICK_EDIT);
-    if (isQuickEditable == null)
-      return WCMComposer.MODE_LIVE;
-    boolean turnOnQuickEdit = Boolean.parseBoolean(isQuickEditable.toString());
-    return turnOnQuickEdit ? WCMComposer.MODE_EDIT : WCMComposer.MODE_LIVE;
-  }
-
-  /**
-   * Check if the current mode is live mode or not
-   *
-   * @return return true if current mode is WCMComposer.MODE_LIVE; otherwise
-   *         false.
-   */
-  public static boolean isLiveMode() {
-    return WCMComposer.MODE_LIVE.equals(getCurrentMode());
-  }
-
-  /**
-   * Check if the content is draft and current mode of the site is edit mode
-   *
-   * @param content the content node.
-   * @return true, the content is draft and current mode is edit mode, otherwise
-   *         return false.
-   */
-  public static boolean isShowDraft(Node content) {
-    if (content == null)
-      return false;
-    try {
-      if (content.isNodeType("nt:frozenNode"))
-        return false;
-      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-      String contentState = wcmPublicationService.getContentState(content);
-      boolean isDraftContent = false;
-      if (PublicationDefaultStates.DRAFT.equals(contentState))
-        isDraftContent = true;
-      boolean isShowDraft = false;
-      if (WCMComposer.MODE_EDIT.equals(getCurrentMode()))
-        isShowDraft = true;
-      return isDraftContent && isShowDraft;
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
-  /**
-   * Check if the current mode of the site is edit mode
-   *
-   * @return true, if current mode is edit mode
-   */
-  public static boolean isShowQuickEdit() {
-    try {
-      boolean isEditMode = false;
-      if (WCMComposer.MODE_EDIT.equals(getCurrentMode()))
-        isEditMode = true;
-      return isEditMode;
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
-  /**
-   * Check if the user can delete the current node
-   *
-   * @return true, if current mode is edit mode
-   * @throws RepositoryException
-   * @throws AccessControlException
-   */
-  public static boolean isShowDelete(Node content) throws RepositoryException {
-    boolean isEditMode = false;
-    if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
-    try {
-      ((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
-      ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
-      ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
-    } catch (AccessControlException e) {
-      isEditMode = false;
-    } catch (Exception e) {
-      String nodePath = null;
-      try {
-        nodePath = content.getPath();
-      } catch (Exception e1) {
-        // Nothing to log
-      }
-      LOG.error("Error while checking permissions on node " + nodePath, e);
-      isEditMode = false;
-    }
-    return isEditMode;
-  }
-
-  /**
-   * Check if the content is editable and current mode of the site is edit mode
-   *
-   * @param content the content node
-   * @return true if there is no content if the content is editable and current
-   *         mode is edit mode
-   */
-  public static boolean isShowQuickEdit(Node content) {
-    if (content == null)
-      return true;
-    try {
-      boolean isEditMode = false;
-      if (WCMComposer.MODE_EDIT.equals(getCurrentMode())
-          || Util.getUIPortalApplication().getModeState() != UIPortalApplication.NORMAL_MODE)
-        isEditMode = true;
-      ((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
-      ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
-      ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
-      return isEditMode;
-    } catch (Exception e) {
-      return false;
-    }
+    return WCMComposer.MODE_LIVE;
   }
 
   public static String getEditLink(Node node, boolean isEditable, boolean isNew) {
@@ -476,15 +334,6 @@ public class Utils {
     } catch (RepositoryException re) {
       return null;
     } catch(Exception e) {
-      return null;
-    }
-  }
-  
-  public static String getActivityEditLink(Node node) {
-    try {
-      String itemPath = node.getSession().getWorkspace().getName() + node.getPath();
-      return getActivityEditLink(itemPath);
-    } catch (RepositoryException e) {
       return null;
     }
   }
@@ -508,7 +357,7 @@ public class Utils {
                                                        .getApplicationComponent(WCMConfigurationService.class);
     String editorPageURI = configurationService.getRuntimeContextParam(
                                isEditable || isNew ? WCMConfigurationService.EDITOR_PAGE_URI :
-                                                     WCMConfigurationService.SITE_EXPLORER_URI);
+                                                     WCMConfigurationService.EDIT_PAGE_URI);
     UserNode editorNode = getEditorNode(editorPageURI);
 
     if (editorNode == null) {
@@ -526,58 +375,6 @@ public class Utils {
     nodeURL.setQueryParameterValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, backto);
 
     return nodeURL.toString();
-  }
-  
-  public static String getActivityEditLink(String itemPath) {
-    PortalRequestContext pContext = Util.getPortalRequestContext();    
-    String siteType = pContext.getSiteKey().getType().getName();
-    String backto = pContext.getRequestURI();
-    WCMConfigurationService configurationService = Util.getUIPortalApplication()
-    		.getApplicationComponent(WCMConfigurationService.class);
-    
-    String editorPageURI = null;
-    if(siteType.equals(PortalConfig.PORTAL_TYPE))
-      editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDIT_PAGE_URI);
-    else if(siteType.equals(PortalConfig.GROUP_TYPE)) {
-      StringBuffer sb = new StringBuffer();      
-    	editorPageURI = pContext.getSiteName();
-    	editorPageURI = editorPageURI.substring(editorPageURI.lastIndexOf("/")+1, editorPageURI.length());
-    	sb.append(editorPageURI).append("/").append(DOCUMENTS_ACTIVITY);
-    	editorPageURI = sb.toString();
-    }
-    UserNode editorNode = getEditorNode(editorPageURI, siteType);
-
-    if (editorNode == null) {
-      return "";
-    }
-
-    NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
-    nodeURL.setNode(editorNode);
-    nodeURL.setQueryParameterValue("path", itemPath);
-    nodeURL.setQueryParameterValue("edit", "true");   
-    nodeURL.setQueryParameterValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, backto);
-
-    return nodeURL.toString();
-  }
-  
-  private static UserNode getEditorNode(String editorPageURI, String siteType) {
-    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
-    List<UserNavigation> allNavs = userPortal.getNavigations();
-
-    UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    for (UserNavigation nav : allNavs) {
-      if (nav.getKey().getType().getName().equalsIgnoreCase(siteType)) {
-        UserNode userNode = portalConfigService.getSiteNodeOrGlobalNode(nav.getKey().getTypeName(),
-                                                                        nav.getKey().getName(),
-                                                                        editorPageURI,
-                                                                        userId);
-        if (userNode != null) {
-          return userNode;
-        }
-      }
-    }
-    return null;
   }
 
   private static UserNode getEditorNode(String editorPageURI) {
@@ -600,106 +397,6 @@ public class Utils {
   }
 
   /**
-   * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
-   * . <br>
-   * Every <code>UIPopupWindow</code> created by this method is belong to this
-   * container.
-   *
-   * @param container the current container
-   * @param component the component which will be display as a popup
-   * @param popupWindowId the popup's ID
-   * @param width the width of the popup
-   * @throws Exception the exception
-   */
-  public static void createPopupWindow(UIContainer container,
-                                       UIComponent component,
-                                       String popupWindowId,
-                                       int width) throws Exception {
-    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
-    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-    requestContext.addUIComponentToUpdateByAjax(popupContainer);
-  }
-
-  /**
-   * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
-   * . <br>
-   * Every <code>UIPopupWindow</code> created by this method is belong to this
-   * container.
-   *
-   * @param container the current container
-   * @param component the component which will be display as a popup
-   * @param popupWindowId the popup's ID
-   * @param width the width of the popup
-   * @param isShowMask Set as true to create mask layer
-   * @throws Exception the exception
-   */
-  public static void createPopupWindow(UIContainer container,
-                                       UIComponent component,
-                                       String popupWindowId,
-                                       int width, boolean isShowMask) throws Exception {
-    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
-    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
-    popupWindow.setShowMask(isShowMask);
-    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-    requestContext.addUIComponentToUpdateByAjax(popupContainer);
-  }
-
-  /**
-   * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
-   * . <br>
-   * Every <code>UIPopupWindow</code> created by this method is belong to this
-   * container.
-   *
-   * @param container the current container
-   * @param component the component which will be display as a popup
-   * @param popupWindowId the popup's ID
-   * @param width the width of the popup
-   * @param top the top of the popup
-   * @param left the left of the popup
-   * @throws Exception the exception
-   */
-  public static void createPopupWindow(UIContainer container,
-      UIComponent component,
-      String popupWindowId,
-      int width, int top, int left) throws Exception {
-    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
-    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
-    popupWindow.setCoordindate(top, left);
-    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-    requestContext.addUIComponentToUpdateByAjax(popupContainer);
-  }
-  
-  public static void createPopupWindow(UIContainer container,
-                                       UIComponent component,
-                                       String popupWindowId,
-                                       boolean isMiddle,
-                                       int width) throws Exception {
-    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
-    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
-    popupWindow.setMiddle(isMiddle);
-    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-    requestContext.addUIComponentToUpdateByAjax(popupContainer);
-  }
-
-  private static UIPopupContainer initPopup(UIContainer container,
-      UIComponent component,
-      String popupWindowId,
-      int width) throws Exception {
-    UIPopupContainer popupContainer = getPopupContainer(container);
-    popupContainer.removeChildById(popupWindowId);
-    popupContainer.removeChildById("UIPopupWindow");
-    UIPopupWindow popupWindow = popupContainer.addChild(UIPopupWindow.class, null, popupWindowId);
-    popupWindow.setUIComponent(component);
-    popupWindow.setWindowSize(width, 0);
-    popupWindow.setShow(true);
-    popupWindow.setRendered(true);
-    popupWindow.setResizable(true);
-    popupWindow.setShowMask(true);
-    return popupContainer;
-  }
-
-
-  /**
    * Close popup window.
    *
    * @param container the current container
@@ -708,22 +405,6 @@ public class Utils {
   public static void closePopupWindow(UIContainer container, String popupWindowId) {
     UIPopupContainer popupContainer = getPopupContainer(container);
     popupContainer.removeChildById(popupWindowId);
-  }
-
-  /**
-   * Update popup window.
-   *
-   * @param container the container
-   * @param component the component which will be replace for the old one in the
-   *          same popup
-   * @param popupWindowId the popup's ID
-   */
-  public static void updatePopupWindow(UIContainer container,
-                                       UIComponent component,
-                                       String popupWindowId) {
-    UIPopupContainer popupContainer = getPopupContainer(container);
-    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
-    popupWindow.setUIComponent(component);
   }
 
   /**

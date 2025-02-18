@@ -6,6 +6,7 @@ package org.exoplatform.services.wcm.publication;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.*;
 import javax.jcr.query.Query;
@@ -22,7 +23,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
@@ -43,6 +43,9 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import lombok.SneakyThrows;
+
 import org.picocontainer.Startable;
 
 /**
@@ -55,6 +58,7 @@ import org.picocontainer.Startable;
     @Property(key = "service", value = "composer"), @Property(key = "type", value = "content") })
 @ManagedDescription("WCM Composer service")
 @RESTEndpoint(path = "wcmcomposerservice")
+@Deprecated(forRemoval = true, since = "7.0")
 public class WCMComposerImpl implements WCMComposer, Startable {
 
     final static public String EXO_RESTORELOCATION = "exo:restoreLocation";
@@ -66,8 +70,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private LinkManager linkManager;
 
   private PublicationService  publicationService;
-
-  private TaxonomyService  taxonomyService;
 
   private TemplateService templateService;
 
@@ -130,10 +132,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * org.exoplatform.services.wcm.publication.WCMComposer#getContent(java.lang
    * .String, java.lang.String, java.lang.String, java.util.HashMap)
    */
+  @SneakyThrows
   public Node getContent(String workspace,
                          String nodeIdentifier,
-                         HashMap<String, String> filters,
-                         SessionProvider sessionProvider) throws Exception {
+                         Map<String, String> filters,
+                         SessionProvider sessionProvider) {
     String mode = filters.get(FILTER_MODE);
     String version = filters.get(FILTER_VERSION);
     String visibility = filters.get(FILTER_VISIBILITY);
@@ -162,317 +165,17 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
 
     Node node = null;
-    try {
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode)) {
-        sessionProvider = remoteUser == null?
-                          aclSessionProviderService.getAnonymSessionProvider() :
-                          aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
-      }
-      node = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
-    } catch (RepositoryException e) {
-      node = getNodeByCategory(nodeIdentifier);
+      sessionProvider = remoteUser == null ?
+                                           aclSessionProviderService.getAnonymSessionProvider() :
+                                           aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
     }
+    node = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
     if (version == null || !BASE_VERSION.equals(version)) {
       node = getViewableContent(node, filters);
     }
 
     return node;
-  }
-
-  public List<Node> getContents(String workspace,
-                                String path,
-                                HashMap<String, String> filters,
-                                SessionProvider sessionProvider) throws Exception {
-    String mode = filters.get(FILTER_MODE);
-    String version = filters.get(FILTER_VERSION);
-    String orderBy = filters.get(FILTER_ORDER_BY);
-    String orderType = filters.get(FILTER_ORDER_TYPE);
-    String visibility = filters.get(FILTER_VISIBILITY); 
-    String remoteUser = null;
-    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
-      remoteUser = "##PUBLIC##VISIBILITY";
-    } else {
-      remoteUser = getRemoteUser();
-    }
-
-    if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
-      orderBy = "exo:dateModified";
-      filters.put(FILTER_ORDER_BY, orderBy);
-    }
-    if ("exo:title".equals(orderBy)) {
-      if(MODE_LIVE.equals(mode)) {
-        orderBy = "exo:titlePublished "+orderType+", exo:title";
-      }
-      if ("exo:taxonomy".equals(this.getTypeFromPath(workspace, path, sessionProvider))) {
-        orderBy = "exo:title "+orderType+", exo:titlePublished";
-      }
-      filters.put(FILTER_ORDER_BY, orderBy);
-    }
-
-    List<Node> nodes = new ArrayList<Node>();
-    try {
-      if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
-        sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
-      }
-      if (LOG.isDebugEnabled()) LOG.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
-      NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
-
-      Node node = null, viewNode = null;
-      while (nodeIterator != null && nodeIterator.hasNext()) {
-        node = nodeIterator.nextNode();
-        viewNode = getViewableContent(node, filters);
-        if (viewNode != null) {
-          nodes.add(viewNode);
-        }
-      }
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
-
-    return nodes;
-  }
-
-  public Result getPaginatedContents(NodeLocation nodeLocation,
-                                     HashMap<String, String> filters,
-                                     SessionProvider sessionProvider) throws Exception {
-    String path = nodeLocation.getPath();
-    String workspace = nodeLocation.getWorkspace();
-
-    String mode = filters.get(FILTER_MODE);
-    String version = filters.get(FILTER_VERSION);
-    String orderBy = filters.get(FILTER_ORDER_BY);
-    String orderType = filters.get(FILTER_ORDER_TYPE);
-    String visibility = filters.get(FILTER_VISIBILITY);
-
-
-    String remoteUser = getRemoteUser();
-
-    if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
-      orderBy = "exo:dateModified";
-      filters.put(FILTER_ORDER_BY, orderBy);
-    }
-    if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
-      orderBy = "exo:titlePublished "+orderType+", exo:title";
-      filters.put(FILTER_ORDER_BY, orderBy);
-    }
-
-    if (LOG.isDebugEnabled()) LOG.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
-
-
-
-    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode)) {
-      sessionProvider = remoteUser == null?
-                        aclSessionProviderService.getAnonymSessionProvider() :
-                        aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
-    }
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(workspace, manageableRepository);
-    Node currentFolder = null;
-
-    Item item = session.getItem(path);
-    if (item != null) {
-      currentFolder = (Node) item;
-    }
-
-    Result result;
-    //Distinguish whether the targeted nodes are symlinks or not
-    if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
-      result = getPaginatedTaxonomiesContent(nodeLocation, workspace, filters, sessionProvider);
-    } else {
-      result = getPaginatedNodesContent(nodeLocation, workspace, filters, sessionProvider);
-    }
-
-    return result;
-  }
-
-  /**
-   * return paginated result in case of taxonomies nodes. This nodes are loaded in memory from jcr then
-   * filtered against publication because the information about publication is not in the symlink but in its target
-   * node
-   * @param nodeLocation
-   * @param workspace
-   * @param filters
-   * @param sessionProvider
-   * @return current page result with populating taxonomies
-   * @throws Exception
-   */
-  private Result getPaginatedTaxonomiesContent(NodeLocation nodeLocation, String workspace,
-                                               HashMap<String, String> filters,
-                                               SessionProvider sessionProvider) throws Exception{
-    List<Node> nodes = new ArrayList<Node>();
-    long totalSize;
-    long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
-    String path = nodeLocation.getPath();
-    NodeIterator taxonomyNodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
-    List<Node> taxonomyNodes = new ArrayList<Node>();
-    Node taxonomyNode = null, taxonomyViewNode = null;
-    if (taxonomyNodeIterator != null) {
-      while (taxonomyNodeIterator.hasNext()) {
-        taxonomyNode = taxonomyNodeIterator.nextNode();
-        taxonomyViewNode = getViewableContent(taxonomyNode, filters);
-        if (taxonomyViewNode != null) {
-          taxonomyNodes.add(taxonomyViewNode);
-        }
-      }
-    }
-    long limit = (filters.get(FILTER_LIMIT)!=null)?new Integer(filters.get(FILTER_LIMIT)):0;
-    long max = offset + limit;
-    totalSize = taxonomyNodes.size();
-    if (max > totalSize){
-      max = totalSize;
-    }
-    for (long i = offset ; i < max ; i++ ){
-      nodes.add(taxonomyNodes.get((int)i));
-    }
-
-    Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
-    return result;
-
-  }
-
-  /**
-   * return paginated result in case of document nodes. The nodes are filtered in jcr side. The publication statut is
-   * part of node's properties
-   * @param nodeLocation
-   * @param workspace
-   * @param filters
-   * @param sessionProvider
-   * @return current page result with populating nodes
-   * @throws Exception
-   */
-  private Result getPaginatedNodesContent(NodeLocation nodeLocation, String workspace,
-                                          HashMap<String, String> filters,
-                                          SessionProvider sessionProvider) throws Exception{
-    List<Node> nodes = new ArrayList<Node>();
-    long totalSize;
-    long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
-    String path = nodeLocation.getPath();
-    totalSize = getViewabaleContentsSize(path, workspace, filters, sessionProvider);
-    NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
-    Node node = null, viewNode = null;
-    if (nodeIterator != null) {
-      while (nodeIterator.hasNext()) {
-        node = nodeIterator.nextNode();
-        viewNode = getViewableContent(node, filters);
-        if (viewNode != null) {
-          nodes.add(viewNode);
-        }
-      }
-    }
-
-    Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
-    return result;
-
-  }
-
-  /**
-   * get total contents' size
-   * @param path
-   * @param workspace
-   * @param filters
-   * @param sessionProvider
-   * @return
-   * @throws Exception
-   */
-  private long getViewabaleContentsSize(String path, String workspace,HashMap<String, String> filters,
-                                      SessionProvider sessionProvider) throws Exception {
-
-    long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
-    if (totalSize == 0) {
-      NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
-      if (nodeIterator != null) {
-        totalSize = nodeIterator.getSize();
-      }
-    }
-    return totalSize;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMComposer#getContents(java.lang
-   * .String, java.lang.String, java.lang.String, java.util.HashMap)
-   */
-  private NodeIterator getViewableContents(String workspace,
-                                           String path,
-                                           HashMap<String, String> filters,
-                                           SessionProvider sessionProvider, boolean paginated) throws Exception {
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(workspace, manageableRepository);
-    QueryManager manager = session.getWorkspace().getQueryManager();
-    String defaultLanguage = filters.get(FILTER_LANGUAGE);
-    String mode = filters.get(FILTER_MODE);
-    String orderBy = filters.get(FILTER_ORDER_BY);
-    Boolean translation = Boolean.parseBoolean(filters.get(FILTER_TRANSLATION));
-    String orderFilter = getOrderSQLFilter(filters);
-    String recursive = filters.get(FILTER_RECURSIVE);
-    String primaryType = filters.get(FILTER_PRIMARY_TYPE);
-    String queryFilter = filters.get(FILTER_QUERY);
-    String queryFilterFull = filters.get(FILTER_QUERY_FULL);
-    StringBuffer statement = new StringBuffer();
-    boolean filterTemplates = true;
-    if (queryFilterFull!=null) {
-      statement.append(queryFilterFull);
-      updateSymlinkByQuery(workspace, queryFilterFull, sessionProvider);
-    } else {
-      addUsedPrimaryTypes(primaryType);
-      if (primaryType == null) {
-        primaryType = "nt:base";
-        Node currentFolder = null;
-        if ("/".equals(path)) {
-          currentFolder = session.getRootNode();
-        } else {
-          Item item = session.getItem(path);
-          if (item != null) {
-            currentFolder = (Node) item;
-          }
-        }
-
-        if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
-          primaryType = "exo:taxonomyLink";
-        }
-      } else {
-        filterTemplates = false;
-      }
-      addUsedOrderBy(orderBy);
-
-      statement.append("SELECT * FROM " + primaryType + " WHERE (jcr:path LIKE '" + path + "/%'");
-      if (recursive==null || "false".equals(recursive)) {
-        statement.append(" AND NOT jcr:path LIKE '" + path + "/%/%')");
-      } else {
-        statement.append(")");
-      }
-      if (translation) {
-        statement.append(" AND ( exo:language = '" + defaultLanguage + "')");
-      }
-      // If clv view mode is live, only get nodes which has published version
-      if (MODE_LIVE.equals(mode) && !"exo:taxonomyLink".equals(primaryType))
-        statement.append(" AND NOT publication:currentState = 'unpublished' AND (publication:currentState IS NULL OR publication:currentState = 'published' " +
-        		"OR exo:titlePublished IS NOT NULL)");
-      if (filterTemplates) statement.append(" AND " + getTemplatesSQLFilter());
-      if (queryFilter!=null) {
-        statement.append(queryFilter);
-      }
-      statement.append(orderFilter);
-      updateSymlink(workspace, path, sessionProvider);
-    }
-    Query query = manager.createQuery(statement.toString(), Query.SQL);
-
-    if (paginated) {
-      long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
-      long limit = (filters.get(FILTER_LIMIT)!=null)?new Long(filters.get(FILTER_LIMIT)):0;
-      if (limit>0) {
-        ((QueryImpl)query).setOffset(offset);
-        ((QueryImpl)query).setLimit(limit);
-      }
-    }
-
-    // order by title with in-sensitive case.
-    ((QueryImpl)query).setCaseInsensitiveOrder(true);
-
-    return query.execute().getNodes();
   }
 
   /**
@@ -484,7 +187,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    *
    * @throws Exception the exception
    */
-  private Node getViewableContent(Node node, HashMap<String, String> filters) throws Exception {
+  @SneakyThrows
+  private Node getViewableContent(Node node, Map<String, String> filters) {
     Node viewNode = null;
     if (trashService == null) {
       trashService = WCMCoreUtils.getService(TrashService.class);
@@ -527,7 +231,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   }
 
 
-  private Node getPublishedContent(Node node, HashMap<String, String> filters) throws Exception {
+  private Node getPublishedContent(Node node, Map<String, String> filters) throws Exception {
     HashMap<String, Object> context = new HashMap<String, Object>();
     String mode = filters.get(FILTER_MODE);
     context.put(WCMComposer.FILTER_MODE, mode);
@@ -559,21 +263,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return targetNode;
   }
 
-  public List<Node> getCategories(Node node) throws Exception {
-    if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
-    List<Node> listCategories = new ArrayList<Node>();
-    List<Node> listNode = getAllTaxonomyTrees();
-    for(Node itemNode : listNode) {
-      listCategories.addAll(taxonomyService.getCategories(node, itemNode.getName()));
-    }
-    return listCategories;
-  }
-
-  List<Node> getAllTaxonomyTrees() throws RepositoryException {
-    if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
-    return taxonomyService.getAllTaxonomyTrees();
-  }
-
   String displayCategory(Node node, List<Node> taxonomyTrees) {
     try {
       for (Node taxonomyTree : taxonomyTrees) {
@@ -586,38 +275,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
     return "";
   }
-
-  /**
-   * We currently support 2 modes :
-   * MODE_LIVE : PUBLISHED state only
-   * MODE_EDIT : PUBLISHED, DRAFT, PENDING, STAGED, APPROVED allowed.
-   *
-   * @param mode the current mode (MODE_LIVE or MODE_EDIT)
-   *
-   * @return the allowed states
-   */
-  public List<String> getAllowedStates(String mode) {
-    List<String> states = new ArrayList<String>();
-    if (MODE_LIVE.equals(mode)) {
-      states.add(PublicationDefaultStates.PUBLISHED);
-    } else if (MODE_EDIT.equals(mode)) {
-      states.add(PublicationDefaultStates.PUBLISHED);
-      states.add(PublicationDefaultStates.DRAFT);
-      states.add(PublicationDefaultStates.PENDING);
-      states.add(PublicationDefaultStates.STAGED);
-      states.add(PublicationDefaultStates.APPROVED);
-    }
-    return states;
-  }
-
-
-  @Managed
-  @ManagedDescription("Clean all templates in Composer")
-    public void cleanTemplates() throws Exception {
-      this.templatesFilter = null;
-      getTemplatesSQLFilter();
-      if (LOG.isDebugEnabled()) LOG.debug("WCMComposer templates have been cleaned !");
-    }
 
   @Managed
   @ManagedDescription("Used Languages")
@@ -637,97 +294,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return usedOrderBy;
   }
 
-
-  /* (non-Javadoc)
-   * @see org.picocontainer.Startable#start()
-   */
-  public void start() {}
-
-  /* (non-Javadoc)
-   * @see org.picocontainer.Startable#stop()
-   */
-  public void stop() {}
-
-  /**
-   * Gets the order sql filter.
-   *
-   * @param filters the filters
-   *
-   * @return the order sql filter
-   */
-  private String getOrderSQLFilter(HashMap<String, String> filters) {
-    StringBuffer orderQuery = new StringBuffer(" ORDER BY ");
-    String orderBy = filters.get(FILTER_ORDER_BY);
-    String orderType = filters.get(FILTER_ORDER_TYPE);
-    if (orderType == null)
-      orderType = "DESC";
-    if (orderBy == null)
-      orderBy = "exo:title";
-    orderQuery.append(orderBy).append(" ").append(orderType);
-    return orderQuery.toString();
-  }
-
-  /**
-   * Gets all document nodetypes and write a query statement
-   * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
-   */
-  private String getTemplatesSQLFilter() {
-    if (templatesFilter != null) return templatesFilter;
-    return updateTemplatesSQLFilter();
-  }
-  /**
-   * Update all document nodetypes and write a query statement
-   * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
-   */
-  public String updateTemplatesSQLFilter() {
-    try {
-      List<String> documentTypes = templateService.getDocumentTemplates();
-      StringBuffer documentTypeClause = new StringBuffer("(");
-      for (int i = 0; i < documentTypes.size(); i++) {
-        String documentType = documentTypes.get(i);
-        documentTypeClause.append("jcr:primaryType = '" + documentType + "'");
-        if (i != (documentTypes.size() - 1)) documentTypeClause.append(" OR ");
-      }
-      templatesFilter = documentTypeClause.toString();
-      templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
-      return templatesFilter;
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Error when perform getTemlatesSQLFilter: ", e);
-      }
-      return null;
-    }
-  }
-
-  /**
-   * Gets the node by category.
-   *
-   * @param parameters the parameters
-   *
-   * @return the node by category
-   *
-   * @throws Exception the exception
-   */
-  private Node getNodeByCategory(String parameters) throws Exception {
-    try {
-      if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
-      Node taxonomyTree = taxonomyService.getTaxonomyTree(parameters.split("/")[0]);
-      Node symlink = taxonomyTree.getNode(parameters.substring(parameters.indexOf("/") + 1));
-      return linkManager.getTarget(symlink);
-    } catch (Exception e) {
-      return null;
-    }
-  }
-
   private void addUsedLanguage(String lang) {
     if (!usedLanguages.contains(lang)) usedLanguages.add(lang);
-  }
-
-  private void addUsedOrderBy(String orderBy) {
-    if (!usedOrderBy.contains(orderBy)) usedOrderBy.add(orderBy);
-  }
-  private void addUsedPrimaryTypes(String primaryType) {
-    if (!usedPrimaryTypes.contains(primaryType)) usedPrimaryTypes.add(primaryType);
   }
 
   private List<AccessControlEntry> getAnyUserACL() {
@@ -747,50 +315,5 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       return identity.getUserId();
     }
     return null;
-  }
-
-  private void updateSymlink(String workspace, String path, SessionProvider sessionProvider) {
-    if ("/".equals(path)) {
-      path = "";
-    }
-    StringBuilder statement = new StringBuilder();
-    statement.append("SELECT * FROM " + NodetypeConstant.EXO_SYMLINK + " WHERE (jcr:path LIKE '" + path + "/%'")
-             .append(" AND NOT jcr:path LIKE '" + path + "/%/%')");
-    updateSymlinkByQuery(workspace, statement.toString(), sessionProvider);
-  }
-
-  private void updateSymlinkByQuery(String workspace, String statement, SessionProvider sessionProvider) {
-    try {
-      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      Session session = sessionProvider.getSession(workspace, manageableRepository);
-      QueryManager manager = session.getWorkspace().getQueryManager();
-      NodeIterator iter = manager.createQuery(statement, Query.SQL).execute().getNodes();
-      while (iter.hasNext()) {
-        try {
-          Node currentNode = iter.nextNode();
-          linkManager.updateSymlink(currentNode);
-        } catch (Exception ex) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Can not update symlink data", ex);
-          }
-        }
-      }
-    } catch (RepositoryException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Can not update symlinks data", e);
-      }
-    }
-  }
-  
-  private String getTypeFromPath (String workspace, String path, SessionProvider sessionProvider) throws Exception {
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(workspace, manageableRepository);
-    Node currentFolder = null;
-    try {
-       Node node = (Node)session.getItem(path);
-       return node.getPrimaryNodeType().getName();
-    } catch(PathNotFoundException pne) {
-      return null;
-    }
   }
 }

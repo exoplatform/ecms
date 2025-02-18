@@ -35,10 +35,6 @@
       <artifactId>ecms-core-webui</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-webui-explorer</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.core</artifactId>
     </dependency>
