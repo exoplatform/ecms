@@ -13,8 +13,6 @@
   <modules>
     <module>services</module>
     <module>viewer</module>
-    <module>publication</module>
-    <module>publication-plugins</module>
     <module>connector</module>
     <module>webui</module>
     <module>search</module>

@@ -12,9 +12,6 @@
     <type>org.exoplatform.ecm.connector.LocalizationConnector</type>
   </component>
   <component>
-    <type>org.exoplatform.wcm.connector.collaboration.CommentConnector</type>
-  </component>
-  <component>
     <type>org.exoplatform.wcm.connector.collaboration.ResourceBundleConnector</type>
   </component>
   <component>
@@ -25,9 +22,6 @@
   </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.DownloadConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.PublicationGetDocumentRESTService</type>
   </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.FavoriteRESTService</type>

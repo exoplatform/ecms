@@ -17,76 +17,25 @@
 package org.exoplatform.wcm.webui;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.portlet.PortletMode;
-import javax.portlet.PortletPreferences;
 
-import com.ibm.icu.text.Transliterator;
-
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
-import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.SiteType;
-import org.exoplatform.portal.mop.page.PageContext;
-import org.exoplatform.portal.mop.page.PageKey;
-import org.exoplatform.portal.mop.user.UserNavigation;
-import org.exoplatform.portal.mop.user.UserNode;
-import org.exoplatform.portal.mop.user.UserPortal;
-import org.exoplatform.portal.webui.page.UIPage;
-import org.exoplatform.portal.webui.page.UIPageBody;
-import org.exoplatform.portal.webui.portal.UIPortal;
-import org.exoplatform.portal.webui.util.NavigationUtils;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
-import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityRegistry;
-import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.wcm.core.WCMConfigurationService;
-import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.web.application.RequestContext;
-import org.exoplatform.web.url.navigation.NavigationResource;
-import org.exoplatform.web.url.navigation.NodeURL;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
-import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.core.UIPortletApplication;
+
+import lombok.SneakyThrows;
 
 /**
  * Created by The eXo Platform SAS Author : Hoa Pham hoa.phamvu@exoplatform.com
@@ -94,10 +43,6 @@ import org.exoplatform.webui.core.UIPortletApplication;
  */
 public class Utils {
 
-  private static final Log LOG = ExoLogger.getExoLogger(Utils.class);
-
-  private static final String SQL_PARAM_PATTERN = "\\$\\{([^\\$\\{\\}])+\\}";
-  
   private static final String JCR_CONTENT = "jcr:content";
 
   private static final String JCR_DATA = "jcr:data";
@@ -107,357 +52,6 @@ public class Utils {
   private static final String NT_FILE = "nt:file";
 
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
-  
-  private static final String DOCUMENTS_ACTIVITY = "documents";
-
-  /**
-   * Checks if is edits the portlet in create page wizard.
-   * @return true, if is edits the portlet in create page wizard
-   */
-  public static boolean isEditPortletInCreatePageWizard() {
-    UIPortalApplication portalApplication = Util.getUIPortalApplication();
-    UIMaskWorkspace uiMaskWS = portalApplication.getChildById(UIPortalApplication.UI_MASK_WS_ID);
-    // show maskworkpace is being in Portal page edit mode
-    if (uiMaskWS.getWindowWidth() > 0 && uiMaskWS.getWindowHeight() < 0)
-      return true;
-    return false;
-  }
-
-  /**
-   * Check if the portlet current mode is view mode or not
-   * @param pContext The request context of a portlet
-   *
-   * @return return true if current portlet mode is view mode; otherwise return false
-   */
-  public static boolean isPortletViewMode(PortletRequestContext pContext) {
-    return PortletMode.VIEW.equals(pContext.getApplicationMode());
-  }
-
-  public static boolean isPortalEditMode() {
-    return Util.getUIPortalApplication().getModeState() != UIPortalApplication.NORMAL_MODE;
-  }
-
-  public static String getRealPortletId(PortletRequestContext portletRequestContext) {
-    String portletId = portletRequestContext.getWindowId();
-    int modeState = Util.getUIPortalApplication().getModeState();
-    switch (modeState) {
-    case UIPortalApplication.NORMAL_MODE:
-      return portletId;
-    case UIPortalApplication.APP_BLOCK_EDIT_MODE:
-      return "UIPortlet-" + portletId;
-    case UIPortalApplication.APP_VIEW_EDIT_MODE:
-      return "EditMode-" + portletId;
-    default:
-      return null;
-    }
-  }
-
-  /**
-   * Can edit current portal.
-   *
-   * @param remoteUser the remote user
-   * @return true, if successful
-   * @throws Exception the exception
-   */
-  public static boolean canEditCurrentPortal(String remoteUser) throws Exception {
-    if (remoteUser == null)
-      return false;
-    IdentityRegistry identityRegistry = Util.getUIPortalApplication()
-                                            .getApplicationComponent(IdentityRegistry.class);
-    Identity identity = identityRegistry.getIdentity(remoteUser);
-    if (identity == null)
-      return false;
-    UIPortal uiPortal = Util.getUIPortal();
-    // this code only work for single edit permission
-    String editPermission = uiPortal.getEditPermission();
-    MembershipEntry membershipEntry = MembershipEntry.parse(editPermission);
-    return identity.isMemberOf(membershipEntry);
-  }
-
-  /**
-   * Clean string.
-   *
-   * @param str the str
-   * @return the string
-   */
-  public static String cleanString(String str) {
-    Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
-    str = accentsconverter.transliterate(str);
-    // the character ? seems to not be changed to d by the transliterate
-    // function
-    StringBuffer cleanedStr = new StringBuffer(str.trim());
-    // delete special character
-    for (int i = 0; i < cleanedStr.length(); i++) {
-      char c = cleanedStr.charAt(i);
-      if (c == ' ') {
-        if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
-          cleanedStr.deleteCharAt(i--);
-        } else {
-          c = '-';
-          cleanedStr.setCharAt(i, c);
-        }
-        continue;
-      }
-      if (i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
-        cleanedStr.deleteCharAt(i--);
-        continue;
-      }
-      if (i > 0 && c == '-' && cleanedStr.charAt(i - 1) == '-')
-        cleanedStr.deleteCharAt(i--);
-    }
-    return cleanedStr.toString().toLowerCase();
-  }
-
-  /**
-   * Refresh whole portal by AJAX.
-   *
-   * @param context the portlet request context
-   */
-  public static void updatePortal(PortletRequestContext context) {
-    UIPortalApplication portalApplication = Util.getUIPortalApplication();
-    PortalRequestContext portalRequestContext = (PortalRequestContext) context.getParentAppRequestContext();
-    UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
-    portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS);
-    portalRequestContext.ignoreAJAXUpdateOnPortlets(true);
-  }
-
-  /**
-   * Gets the viewable node by WCMComposer (depends on site mode)
-   *
-   * @param repository the repository's name
-   * @param workspace the workspace's name
-   * @param nodeIdentifier the node's path or node's UUID
-   * @return the viewable node. Return <code>null</code> if
-   *         <code>nodeIdentifier</code> is invalid
-   * @see #getViewableNodeByComposer(String repository, String workspace, String
-   *      nodeIdentifier, String version) getViewableNodeByComposer()
-   */
-  public static Node getViewableNodeByComposer(String repository,
-                                               String workspace,
-                                               String nodeIdentifier) {
-    return getViewableNodeByComposer(repository, workspace, nodeIdentifier, null);
-  }
-
-  /**
-   * Gets the viewable node by WCMComposer (depends on site mode)
-   *
-   * @param repository the repository's name
-   * @param workspace the workspace's name
-   * @param nodeIdentifier the node's path or node's UUID
-   * @param version the base version (e.g. <code>WCMComposer.BASE_VERSION</code>
-   *          )
-   * @return the viewable node. Return <code>null</code> if
-   *         <code>nodeIdentifier</code> is invalid
-   * @see #getViewableNodeByComposer(String repository, String workspace, String
-   *      nodeIdentifier) getViewableNodeByComposer()
-   * @see WCMComposer
-   */
-  public static Node getViewableNodeByComposer(String repository,
-                                               String workspace,
-                                               String nodeIdentifier,
-                                               String version) {
-    return getViewableNodeByComposer(repository, workspace, nodeIdentifier, version, WCMComposer.VISIBILITY_USER);
-  }
-
-  /**
-   * Gets the viewable node by WCMComposer (depends on site mode)
-   *
-   * @param repository the repository's name
-   * @param workspace the workspace's name
-   * @param nodeIdentifier the node's path or node's UUID
-   * @param version the base version (e.g. <code>WCMComposer.BASE_VERSION</code>
-   *          )
-   * @param cacheVisibility the visibility of cache
-   *
-   * @return the viewable node. Return <code>null</code> if
-   *         <code>nodeIdentifier</code> is invalid
-   * @see #getViewableNodeByComposer(String repository, String workspace, String
-   *      nodeIdentifier) getViewableNodeByComposer()
-   * @see WCMComposer
-   */
-  public static Node getViewableNodeByComposer(String repository,
-                                               String workspace,
-                                               String nodeIdentifier,
-                                               String version,
-                                               String cacheVisibility) {
-    try {
-      HashMap<String, String> filters = new HashMap<String, String>();
-      StringBuffer filterLang = new StringBuffer(Util.getPortalRequestContext()
-                                                     .getLocale()
-                                                     .getLanguage());
-      String country = Util.getPortalRequestContext().getLocale().getCountry();
-      if (country != null && country.length() > 0) {
-        filterLang.append("_").append(country);
-      }
-      filters.put(WCMComposer.FILTER_LANGUAGE, filterLang.toString());
-      filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
-      PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-      PortletMode portletMode = portletRequestContext.getApplicationMode();
-      filters.put(WCMComposer.PORTLET_MODE, portletMode.toString());
-      if (version != null)
-        filters.put(WCMComposer.FILTER_VERSION, version);
-      filters.put(WCMComposer.FILTER_VISIBILITY, cacheVisibility);
-      return WCMCoreUtils.getService(WCMComposer.class)
-                         .getContent(workspace,
-                                 Text.escapeIllegalJcrChars(nodeIdentifier),
-                                     filters,
-                                     WCMCoreUtils.getUserSessionProvider());
-    } catch (Exception e) {
-      return null;
-    }
-  }
-
-  /**
-   * Gets the current mode of the site
-   *
-   * @return the current mode (e.g. <code>WCMComposer.MODE_EDIT</code>)
-   * @see WCMComposer
-   */
-  public static String getCurrentMode() {
-    return WCMComposer.MODE_LIVE;
-  }
-
-  public static String getEditLink(Node node, boolean isEditable, boolean isNew) {
-    try {
-      ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-      String nodeWorkspace = node.getSession().getWorkspace().getName();
-      String driveWorkspace = nodeWorkspace;
-      List<DriveData> listDrive = manageDriveService.getAllDrives();
-      for(DriveData drive : listDrive) {
-        if(drive.getWorkspace().equals(nodeWorkspace) && node.getPath().startsWith(drive.getHomePath())) {
-          driveWorkspace = drive.getName();
-          break;
-        }
-      }
-      String itemPath = driveWorkspace + node.getPath();
-      return getEditLink(itemPath, isEditable, isNew);
-    } catch (RepositoryException re) {
-      return null;
-    } catch(Exception e) {
-      return null;
-    }
-  }
-
-  /**
-   * Creates a restfull compliant link to the editor for editing a content,
-   * adding a content or managing contents. Example : Add Content : isEditable =
-   * false, isNew = true, itemPath = the parent folder path Edit Content :
-   * isEditable = true, isNew = false, itemPath = the content path Manage
-   * Contents = isEditable = false, isNew = false, itemPath = the folder path
-   *
-   * @param itemPath
-   * @param isEditable
-   * @param isNew
-   * @return
-   */
-  public static String getEditLink(String itemPath, boolean isEditable, boolean isNew) {
-    PortalRequestContext pContext = Util.getPortalRequestContext();
-    String backto = pContext.getRequestURI();
-    WCMConfigurationService configurationService = Util.getUIPortalApplication()
-                                                       .getApplicationComponent(WCMConfigurationService.class);
-    String editorPageURI = configurationService.getRuntimeContextParam(
-                               isEditable || isNew ? WCMConfigurationService.EDITOR_PAGE_URI :
-                                                     WCMConfigurationService.EDIT_PAGE_URI);
-    UserNode editorNode = getEditorNode(editorPageURI);
-
-    if (editorNode == null) {
-      return "";
-    }
-
-    NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
-    nodeURL.setNode(editorNode).setQueryParameterValue("path", itemPath);
-    if (isEditable) {
-      nodeURL.setQueryParameterValue("edit", "true");
-    }
-    if (isNew) {
-      nodeURL.setQueryParameterValue("addNew", "true");
-    }
-    nodeURL.setQueryParameterValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, backto);
-
-    return nodeURL.toString();
-  }
-
-  private static UserNode getEditorNode(String editorPageURI) {
-    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
-    List<UserNavigation> allNavs = userPortal.getNavigations();
-    UserPortalConfigService portalConfigService = ExoContainerContext.getService(UserPortalConfigService.class);
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    for (UserNavigation nav : allNavs) {
-      if (nav.getKey().getType().equals(SiteType.GROUP)) {
-        UserNode userNode = portalConfigService.getSiteNodeOrGlobalNode(nav.getKey().getTypeName(),
-                                                                        nav.getKey().getName(),
-                                                                        editorPageURI,
-                                                                        userId);
-        if (userNode != null) {
-          return userNode;
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Close popup window.
-   *
-   * @param container the current container
-   * @param popupWindowId the popup's ID
-   */
-  public static void closePopupWindow(UIContainer container, String popupWindowId) {
-    UIPopupContainer popupContainer = getPopupContainer(container);
-    popupContainer.removeChildById(popupWindowId);
-  }
-
-  /**
-   * Gets the popup container.
-   *
-   * @param container the current container
-   * @return the popup container
-   */
-  public static UIPopupContainer getPopupContainer(UIContainer container) {
-    if (container instanceof UIPortletApplication)
-      return container.getChild(UIPopupContainer.class);
-    UIPortletApplication portletApplication = container.getAncestorOfType(UIPortletApplication.class);
-    return portletApplication.getChild(UIPopupContainer.class);
-  }
-
-  /**
-   * Creates the popup message.
-   *
-   * @param container the current container
-   * @param message the message key
-   * @param args the arguments to show in the message
-   * @param type the message's type (e.g. <code>ApplicationMessage.INFO</code>)
-   * @see ApplicationMessage
-   */
-  public static void createPopupMessage(UIContainer container,
-                                        String message,
-                                        Object[] args,
-                                        int type) {
-    UIApplication application = container.getAncestorOfType(UIApplication.class);
-    application.addMessage(new ApplicationMessage(message, args, type));
-  }
-
-  /**
-   * Get one portlet preference by name
-   *
-   * @param preferenceName the name of preference
-   * @return the portlet preference's value
-   */
-  public static String getPortletPreference(String preferenceName) {
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
-    return preferences.getValue(preferenceName, null);
-  }
-
-  /**
-   * Get all portlet preferences
-   *
-   * @return all portlet preferences
-   */
-  public static PortletPreferences getAllPortletPreferences() {
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    return portletRequestContext.getRequest().getPreferences();
-  }
 
   /**
    * Check if the node is viewable for the current user or not viewable. <br>
@@ -514,7 +108,7 @@ public class Utils {
     String portalName = PortalContainer.getCurrentPortalContainerName();
 
     String originalNodePath = isGetRealNodePath ? getRealNodePath(node) : Text.escape(node.getPath(),'%',true);
-    StringBuffer imagePath = new StringBuffer();
+    StringBuilder imagePath = new StringBuilder();
     imagePath.append("/")
              .append(portalName)
              .append("/")
@@ -549,7 +143,7 @@ public class Utils {
                                  String strWorkspace,
                                  String strIdentifier,
                                  boolean isWCMBase) throws RepositoryException {
-    return getRealNode(strRepository, strWorkspace, strIdentifier, isWCMBase, WCMComposer.VISIBILITY_USER);
+    return getRealNode(strRepository, strWorkspace, strIdentifier, isWCMBase, null);
   }
 
   /**
@@ -564,22 +158,15 @@ public class Utils {
    *         in trash.
    * @throws RepositoryException
    */
+  @SneakyThrows
   public static Node getRealNode(String strRepository,
                                  String strWorkspace,
                                  String strIdentifier,
                                  boolean isWCMBase,
                                  String cacheVisibility) throws RepositoryException {
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
-    Node selectedNode;
-    if (isWCMBase) {
-      selectedNode = getViewableNodeByComposer(strRepository,
-                                               strWorkspace,
-                                               strIdentifier,
-                                               WCMComposer.BASE_VERSION,
-                                               cacheVisibility);
-    } else {
-      selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier, null, cacheVisibility);
-    }
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(strWorkspace, WCMCoreUtils.getService(RepositoryService.class).getRepository(strRepository));
+    Node selectedNode = session.getNodeByUUID(strIdentifier);
     if (selectedNode != null) {
       if (!org.exoplatform.ecm.webui.utils.Utils.isInTrash(selectedNode)) {
         if (linkManager.isLink(selectedNode)) {
@@ -595,148 +182,6 @@ public class Utils {
       }
     }
     return null;
-  }
-
-  public static boolean hasEditPermissionOnPage() throws Exception {
-    UIPortalApplication portalApp = Util.getUIPortalApplication();
-    UIWorkingWorkspace uiWorkingWS = portalApp.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
-    UIPageBody pageBody = uiWorkingWS.findFirstComponentOfType(UIPageBody.class);
-    UIPage uiPage = (UIPage) pageBody.getUIComponent();
-    UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
-
-    if (uiPage != null) {
-      return userACL.hasEditPermission(ConversationState.getCurrent().getIdentity(),
-                                       uiPage.getOwnerType(),
-                                       uiPage.getOwnerId(),
-                                       uiPage.getEditPermission());
-    }
-    UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
-    .findFirstComponentOfType(UIPortal.class);
-    UserNode currentNode = currentUIPortal.getSelectedUserNode();
-    PageKey pageReference = currentNode.getPageRef();
-    if (pageReference == null) {
-      return false;
-    }
-    UserPortalConfigService portalConfigService = portalApp.getApplicationComponent(UserPortalConfigService.class);
-    PageContext page = portalConfigService.getPage(pageReference);
-    if (page == null) {
-      return false;
-    }
-    return userACL.hasEditPermission(page, ConversationState.getCurrent().getIdentity());
-  }
-
-  public static boolean hasEditPermissionOnNavigation() throws Exception {
-    UserNavigation selectedNavigation = getSelectedNavigation();
-    if(selectedNavigation == null) return false;
-    return selectedNavigation.isModifiable();
-  }
-
-  public static boolean hasEditPermissionOnPortal() throws Exception {
-    UIPortalApplication portalApp = Util.getUIPortalApplication();
-    UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
-                                        .findFirstComponentOfType(UIPortal.class);
-    UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
-    return userACL.hasEditPermission(ConversationState.getCurrent().getIdentity(),
-                                     currentUIPortal.getSiteKey().getTypeName(),
-                                     currentUIPortal.getSiteKey().getName(),
-                                     currentUIPortal.getEditPermission());
-  }
-
-  public static UserNavigation getSelectedNavigation() throws Exception { 
-    SiteKey siteKey = Util.getUIPortal().getSiteKey();
-    return NavigationUtils.getUserNavigation(
-          Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
-          siteKey);
-  }
-
-  public static boolean isEmptyContent(String inputValue) {
-    boolean isEmpty = true;
-    inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
-    inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
-    inputValue = inputValue.replaceAll("&nbsp;", "");
-    if(inputValue != null && inputValue.length() > 0) return false;
-    return isEmpty;
-  }
-
-  /**
-   * @param workspace
-   * @param strQuery
-   * @param SQLLanguage
-   * @return true as valid query, false as Invalid
-   */
-  public static boolean checkQuery(String workspace, String strQuery, String SQLLanguage) {
-    try {
-      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace,
-            WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository());
-      QueryManager qm = session.getWorkspace().getQueryManager();
-      Query query = qm.createQuery(strQuery, SQLLanguage);
-      query.execute();
-    }catch(Exception e) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * get the parameter list from SQL query, the parameter have the ${PARAM} format. <br>
-   * For example:
-   * <ul>
-   *   <li>${folder-id}</li>
-   *   <li>${user}</li>
-   *   <li>${lang}</li>
-   * </ul>
-   * @param sqlQuery the given input SQL query
-   * @return a list of parameter in input SQL query
-   */
-  public static HashSet<String> getQueryParams(String sqlQuery) {
-    HashSet<String> params = new HashSet<String>();
-    if (sqlQuery == null) {
-      return params;
-    }
-    Matcher matcher = Pattern.compile(SQL_PARAM_PATTERN).matcher(sqlQuery);
-    while (matcher.find()) {
-      String param = matcher.group();
-      param = param.replaceAll("\\$\\{", "").replaceAll("\\}", "");
-      params.add(param);
-    }
-    return params;
-  }
-
-  /**
-   * Replace the parameter with the relevant value from <code>params</code>to
-   * build the SQL query
-   *
-   * @param sqlQuery the input query that contain parameter
-   * @param params list of all parameter(key, value) pass to the query
-   * @return SQL query after replacing the parameter with value
-   */
-  public static String buildQuery(String sqlQuery, HashMap<String, String> params) {
-    if (!hasParam(sqlQuery) || params == null || params.isEmpty()) {
-      return sqlQuery;
-    }
-    String query = sqlQuery;
-    for (String param : params.keySet()) {
-      query = query.replaceAll("\\$\\{" + param + "\\}", params.get(param));
-    }
-    return query;
-  }
-
-  /**
-   * Check if the input SQL query contains any parameter or not.
-   *
-   * @param sqlQuery
-   * @return <code>false</code> if input SQL query does not contain any
-   *         parameter <br>
-   *         <code>true</code> if input SQL query one or more parameter
-   */
-  public static boolean hasParam(String sqlQuery) {
-    if (sqlQuery == null || sqlQuery.trim().length() == 0) {
-      return false;
-    }
-    if (Pattern.compile(SQL_PARAM_PATTERN).matcher(sqlQuery).find()) {
-      return true;
-    }
-    return false;
   }
 
   /**
@@ -794,68 +239,6 @@ public class Utils {
       }
     }
     return currentNode ;
-  }
-
-  /**
-   * Allows you to add a lock token to the given node
-   */
-  public static void addLockToken(Node node) throws Exception {
-    if (node.isLocked()) {
-      String lockToken = LockUtil.getLockToken(node);
-      if(lockToken != null) {
-        node.getSession().addLockToken(lockToken);
-      }
-    }
-  }
-  
-  /**
-   * sets to lower case n first elements of string
-   * @param st
-   * @param n
-   */
-  public static String toLowerCase(String st, int n) {
-    StringBuilder sb = new StringBuilder(st);
-    for (int i = 0; i < n; i++) {
-      if (i < sb.length()) {
-        sb.setCharAt(i, Character.toLowerCase(st.charAt(i)));
-      }
-    }
-    return sb.toString();
-  }
-  /**
-   * 
-   * @return true if current user is administrative user; false if current user is normal user
-   */
-  public static boolean isAdministratorUser() {
-    UserACL userACL = WCMCoreUtils.getService(UserACL.class);
-    return userACL.isUserInGroup(ConversationState.getCurrent().getIdentity(), userACL.getAdminGroups());
-  }
-  
-  public static String getProfileLink(String userId) {
-    RequestContext ctx = RequestContext.getCurrentInstance();
-    NodeURL nodeURL = ctx.createURL(NodeURL.TYPE);
-    NavigationResource resource =
-        new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
-    return nodeURL.setResource(resource).toString() + "/" + userId;
-  }
-
-  /**
-   * Remove refences of node
-   * @param destNode
-   * @throws Exception
-   */
-  public static void removeReferences(Node destNode) throws Exception {
-    NodeType[] mixinTypes = destNode.getMixinNodeTypes();
-    Session session = destNode.getSession();
-    for (int i = 0; i < mixinTypes.length; i++) {
-      if (mixinTypes[i].getName().equals(org.exoplatform.ecm.webui.utils.Utils.EXO_CATEGORIZED)
-              && destNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_CATEGORIZED)) {
-        Node valueNode = null;
-        Value valueAdd = session.getValueFactory().createValue(valueNode);
-        destNode.setProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_CATEGORIZED, new Value[] { valueAdd });
-      }
-    }
-    destNode.save();
   }
 
 }

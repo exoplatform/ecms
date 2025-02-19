@@ -128,14 +128,4 @@
     </component-plugin>
   </external-component-plugins>
 
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-    <component-plugin>
-      <name>WCMPublicationService.event.updateState</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.symlink.PublicationUpdateStateListener</type>
-      <description>this listener will update the link's metadata</description>
-    </component-plugin>
-  </external-component-plugins>
-  
 </configuration>

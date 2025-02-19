@@ -93,13 +93,6 @@ public interface NodePresentation {
   public String getNodeType() throws Exception;
 
   /**
-   * Checks if is node type supported.
-   *
-   * @return true, if is node type supported
-   */
-  public boolean isNodeTypeSupported();
-
-  /**
    * Gets the template path.
    *
    * @return the template path
@@ -130,21 +123,6 @@ public interface NodePresentation {
    * @throws Exception the exception
    */
   public String getViewableLink(Node attNode, Parameter[] params) throws Exception;
-
-
-  /**
-   * Checks if is rss link.
-   *
-   * @return true, if is rss link
-   */
-  public boolean isRssLink();
-
-  /**
-   * Gets the rss link.
-   *
-   * @return the rss link
-   */
-  public String getRssLink();
 
   /**
    * Gets the supported localise.
@@ -236,36 +214,6 @@ public interface NodePresentation {
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception;
 
   /**
-   * Get UIComponent for comment
-   * @return
-   * @throws Exception
-   */
-  public UIComponent getCommentComponent() throws Exception;
-
-  /**
-   * Get UIComponent to remove attachment in document
-   * @return
-   * @throws Exception
-   */
-  public UIComponent getRemoveAttach() throws Exception;
-
-  /**
-   * Get UIComponent to remove comment in document
-   * @return
-   * @throws Exception
-   */
-
-  public UIComponent getRemoveComment() throws Exception;
-
-  /**
-   * Gets the comments.
-   *
-   * @return the comments
-   * @throws Exception the exception
-   */
-  public List<Node> getComments() throws Exception;
-
-  /**
    * Gets the download link.
    *
    * @param node the node
@@ -331,7 +279,5 @@ public interface NodePresentation {
   public boolean switchBackAudioDescription();
   
   public String getActionOpenDocInDesktop() throws Exception;
-  
-  public UIPopupContainer getPopupContainer() throws Exception;
   
 }

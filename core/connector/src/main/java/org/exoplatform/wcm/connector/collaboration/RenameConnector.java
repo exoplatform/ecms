@@ -16,22 +16,11 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import org.apache.commons.lang3.StringUtils;
-import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.cms.lock.LockService;
-import org.exoplatform.services.cms.relations.RelationsService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.Node;
@@ -45,11 +34,22 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
+import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.cms.lock.LockService;
+import org.exoplatform.services.cms.relations.RelationsService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * The RenameConnector aims to enhance the use of the _rename_ action on the Sites Explorer.
@@ -219,15 +219,7 @@ public class RenameConnector implements ResourceContainer {
         renamedNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
       }
       renamedNode.setProperty("exo:title", newExoTitle);
-
       nodeSession.save();
-      
-      // Update state of node
-      WCMPublicationService publicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-      if (publicationService.isEnrolledInWCMLifecycle(renamedNode)) {
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-        listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, renamedNode);
-      }
 
       return Response.ok(uuid).build();
     } catch (LockException e) {

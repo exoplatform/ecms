@@ -16,7 +16,6 @@
   <modules>
     <module>core</module>
     <module>apps</module>
-    <module>ext</module>
     <module>ecm-wcm-extension</module>
     <module>testsuite</module>
     <module>ecms-social-integration</module>
@@ -75,6 +74,7 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
       <!-- Declare our own artifacts -->
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -85,43 +85,6 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-administration</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-administration</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-explorer</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-explorer</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-presentation</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-presentation</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-editors</artifactId>
         <version>${project.version}</version>
         <type>war</type>
@@ -132,29 +95,15 @@
         <version>${project.version}</version>
         <type>pom</type>
       </dependency>
-
-
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-search</artifactId>
+        <artifactId>ecms-apps-portlet-transferrules</artifactId>
         <version>${project.version}</version>
         <type>war</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-search</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-seo</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-seo</artifactId>
+        <artifactId>ecms-apps-portlet-transferrules</artifactId>
         <version>${project.version}</version>
         <type>pom</type>
       </dependency>
@@ -177,16 +126,6 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-publication</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-publication-plugins</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-search</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -200,11 +139,6 @@
         <artifactId>ecms-core-services</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui-fcc</artifactId>
-        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -230,61 +164,7 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui-administration</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui-explorer</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui-presentation</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui-seo</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-authoring-apps</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-authoring-apps</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-authoring-services</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-authoring-webui</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-webui</artifactId>
+        <artifactId>ecms-core-webui-clouddrives</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -325,7 +205,7 @@
       <!-- Cloud Drive extension -->
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui-clouddrives</artifactId>
+        <artifactId>ecms-apps-portlet-clouddrives</artifactId>
         <version>${project.version}</version>
         <type>jar</type>
       </dependency>
@@ -337,25 +217,13 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-gdrive-services</artifactId>
+        <artifactId>ecms-apps-portlet-documents</artifactId>
         <version>${project.version}</version>
         <type>jar</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-gdrive-webapp</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-onedrive-services</artifactId>
-        <version>${project.version}</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-ext-onedrive-webapp</artifactId>
+        <artifactId>ecms-apps-portlet-documents</artifactId>
         <version>${project.version}</version>
         <type>war</type>
       </dependency>

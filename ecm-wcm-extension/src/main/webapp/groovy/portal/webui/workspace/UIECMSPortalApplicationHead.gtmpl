@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" id="legacyEcmsObject">
   if (!window.eXo) {
     window.eXo = {};
   }

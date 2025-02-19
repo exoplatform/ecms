@@ -36,7 +36,6 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.container.UIContainer;
-import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -122,17 +121,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   }
 
   /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getComments()
-   */
-  public List<Node> getComments() throws Exception {
-    return getApplicationComponent(CommentsService.class).getComments(getOriginalNode(), getLanguage()) ;
-  }
-
-  public List<Node> getSortedComments() throws Exception {
-    return Lists.reverse(this.getComments());
-  }
-
-  /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getComponentInstanceOfType(java.lang.String)
    */
   public Object getComponentInstanceOfType(String className) {
@@ -215,16 +203,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     return ((ManageableRepository)getNode().getSession().getRepository()).getConfiguration().getName() ;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getRssLink()
-   */
-  public String getRssLink() { return null ; }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.NodePresentation#isRssLink()
-   */
-  public boolean isRssLink() { return false ; }
-  
   /**
    * Checks if allow render fast publish link for the inline editting
    *
@@ -401,11 +379,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   @Override
   public String getActionOpenDocInDesktop() throws Exception {
     return this.event("OpenDocInDesktop");
-  }
-  
-  @Override
-  public UIPopupContainer getPopupContainer() throws Exception {
-    return null;
   }
 
   public String getRelativeTimeLabel(WebuiBindingContext webuiBindingContext, Date postedTime) {

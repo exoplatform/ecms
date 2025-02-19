@@ -127,7 +127,6 @@
           <a class="pull-right btn dowload-link" href="$downloadLink"><i class="uiIconDownload uiIconLightGray"></i> <%=_ctx.appRes("File.view.label.download")%></a>
           <%}%>
         <%}%>
-        <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
       </div>
       <div class="document-preview-default">
 		  <div class="content uiContentBox">
@@ -185,7 +184,6 @@
        <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
         <div class="pull-right"><a class="btn" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a> </div>
        <%}%>
-        <div class="vote-document"><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
     </div>
     <div class="content uiContentBox">
         <%

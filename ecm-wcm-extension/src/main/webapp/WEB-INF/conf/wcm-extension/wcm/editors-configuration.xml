@@ -1,35 +1,6 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-  
-   <!-- ECMS menu action for editor buttons. -->
-  <external-component-plugins>
-    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-    <component-plugin>
-      <name>Add Editor Buttons Actions</name>
-      <set-method>registerUIExtensionPlugin</set-method>
-      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>EditorsOpen</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type">
-              <string>org.exoplatform.ecm.dms.UIActionBar</string>
-            </field>
-            <field name="name">
-              <string>EditorsOpen</string>
-            </field>
-            <field name="rank">
-              <int>10</int>
-            </field>
-            <field name="component">
-              <string>org.exoplatform.ecm.webui.component.explorer.documents.EditorsOpenManageComponent</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
@@ -47,45 +18,6 @@
     </component-plugin>
   </external-component-plugins>
 
-  <external-component-plugins>
-    <target-component>org.exoplatform.web.filter.ExtensibleFilter</target-component>
-    <component-plugin>
-      <name>Doument editors integration filter plugin</name>
-      <set-method>addFilterDefinitions</set-method>
-      <type>org.exoplatform.web.filter.FilterDefinitionPlugin</type>
-      <init-params>
-        <object-param>
-          <name>Doument editors integration filter plugin</name>
-          <object type="org.exoplatform.web.filter.FilterDefinition">
-            <field name="filter">
-              <object type="org.exoplatform.ecm.webui.component.explorer.documents.DocumentEditorsFilter" />
-            </field>
-            <field name="patterns">
-              <collection type="java.util.ArrayList" item-type="java.lang.String">
-                <value>
-                  <string>/intranet/drives.*</string>
-                </value>
-                <value>
-                  <string>/dw/drives.*</string>
-                </value>
-                <value>
-                  <string>/dw/documents.*</string>
-                </value>
-                <value>
-                  <string>/g/.*/documents.*</string>
-                </value>
-                <value>
-                  <string>/g/.*/drives.*</string>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  
-    
   <!-- Common Editor Plugin -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.documents.DocumentService</target-component>

@@ -53,49 +53,14 @@
   <!-- ECMS integration -->
   <!-- DEPRECATED: delete (we don't have to use this hacks) -->
   <component>
-    <key>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIService</key>
-    <type>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIService</type>
-  </component>
-  <component>
     <key>org.exoplatform.services.cms.clouddrives.webui.action.CloudFileActionService</key>
     <type>org.exoplatform.services.cms.clouddrives.webui.action.CloudFileActionService</type>
   </component>
 
-  <!-- ECMS overrides to make Cloud Drive files work correct -->
-  <component>
-    <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
-    <type>org.exoplatform.services.cms.clouddrives.webui.watch.WatchCloudDocumentServiceImpl</type>
-  </component>
   <component>
     <key>org.exoplatform.wcm.ext.component.document.service.IShareDocumentService</key>
     <type>org.exoplatform.services.cms.clouddrives.webui.document.CloudDriveShareDocumentService</type>
   </component>
-  <!-- component>
-    <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
-    <type>org.exoplatform.services.cms.clouddrives.webui.thumbnail.CloudDriveThumbnailServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>smallSize</name>
-        <value>32x32</value>
-      </value-param>
-      <value-param>
-        <name>mediumSize</name>
-        <value>116x116</value>
-      </value-param>
-      <value-param>
-        <name>bigSize</name>
-        <value>300x300</value>
-      </value-param>
-      <value-param>
-        <name>enable</name>
-        <value>false</value>
-      </value-param>
-      <value-param>
-        <name>mimetypes</name>
-        <value>image/jpeg;image/png;image/gif;image/bmp</value>
-      </value-param>
-    </init-params>
-  </component -->
   <component>
     <key>org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService</key>
     <type>org.exoplatform.services.cms.clouddrives.webui.thumbnail.CloudDriveThumbnailRESTService</type>
@@ -195,31 +160,6 @@
             </field>
           </object>
         </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <!--
-    Default ECMS menu actions for Cloud Drive. You can add or replace defaults with your set of menus.
-    Search in Cloud Drive connectors' configuration for action names to add or remove.
-    Sample: if need remove "Connect Cloud Documents" which is ShowConnectCloudDrive action and
-    add "Connect your Google Drive" which is an action configured in Google Drive as ConnectGDrive.
-    Then remove ShowConnectCloudDrive value below and add respectively ConnectGDrive. After that
-    when CloudDriveUIService will start (e.g. on the server start), it will add "Connect your Google Drive"
-    to the ECMS views.
-  -->
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIService</target-component>
-    <component-plugin>
-      <name>add.clouddrive.ecms.menu</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.cms.clouddrives.webui.CloudDriveUIExtension</type>
-      <init-params>
-        <values-param>
-          <name>default-actions</name>
-          <description>Names of ECMS menu actions enabled by default</description>
-          <value>ShowConnectCloudDrive</value>
-        </values-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>

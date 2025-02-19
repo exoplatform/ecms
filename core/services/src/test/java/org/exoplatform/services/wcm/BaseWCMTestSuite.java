@@ -30,7 +30,6 @@ import org.exoplatform.services.cms.documents.TestDocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
-import org.exoplatform.services.ecm.dms.comment.TestCommentService;
 import org.exoplatform.services.ecm.dms.configuration.TestDMSConfigurationService;
 import org.exoplatform.services.ecm.dms.documents.TestFavoriteService;
 import org.exoplatform.services.ecm.dms.documents.TestTrashService;
@@ -43,7 +42,6 @@ import org.exoplatform.services.ecm.dms.scripts.TestScriptService;
 import org.exoplatform.services.ecm.dms.test.LinkUtilsTest;
 import org.exoplatform.services.ecm.dms.test.TestSymLink;
 import org.exoplatform.services.ecm.dms.thumbnail.TestThumbnailService;
-import org.exoplatform.services.ecm.dms.watchdocument.TestWatchDocumentService;
 import org.exoplatform.services.pdfviewer.TestPDFViewerService;
 import org.exoplatform.services.rest.AttachmentsRestServiceTest;
 import org.exoplatform.services.rest.TestDocumentsAppRedirectService;
@@ -68,10 +66,8 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   TestRelationsService.class,
   TestDriveService.class,
   TestMultiLanguageService.class,
-  TestWatchDocumentService.class,
   TestScriptService.class,
   TestCmsService.class,
-  TestCommentService.class,
   TestMetadataService.class,
   TestLinkManager.class,
   LinkUtilsTest.class,

@@ -147,22 +147,6 @@ public class UIDocViewer extends UIBaseNodePresentation {
     return null;
   }
 
-  public boolean isNodeTypeSupported() {
-    return false;
-  }
-
-  public UIComponent getCommentComponent() {
-    return null;
-  }
-
-  public UIComponent getRemoveAttach() {
-    return null;
-  }
-
-  public UIComponent getRemoveComment() {
-    return null;
-  }
-
   public UIComponent getUIComponent(String mimeType) throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     List<UIExtension> extensions = manager.getUIExtensions(Utils.FILE_VIEWER_EXTENSION_TYPE);
@@ -196,14 +180,4 @@ public class UIDocViewer extends UIBaseNodePresentation {
     return NodeLocation.getNodeByLocation(nodeLocation);
   }
 
-  @Override
-  public UIPopupContainer getPopupContainer() throws Exception {
-    UIPopupContainer pContainer1 = getAncestorOfType(UIPopupContainer.class); 
-    UIPopupContainer pContainer2 = pContainer1.getChildById(UIDocViewerPopup);
-    if (pContainer2 == null) {
-      pContainer2 = pContainer1.addChild(UIPopupContainer.class, null, UIDocViewerPopup);
-    }
-    return pContainer2;
-  }
-  
 }

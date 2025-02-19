@@ -71,7 +71,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
@@ -597,8 +596,6 @@ public class FileUploadHandler {
       //parent.save();
       uploadService.removeUploadResource(uploadId);
       uploadIdTimeMap.remove(uploadId);
-      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-      wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
      
       if (activityService.isBroadcastNTFileEvents(file) && !CREATE_VERSION.equals(existenceAction)) {
         listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
