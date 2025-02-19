@@ -121,22 +121,7 @@
       <module>wcm_bts_typeahead</module>
     </depends>
   </module>
-  
-  <module>
-    <name>content-selector</name>
-    <as>content_selector</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/private/ContentSelector.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>wcm-utils</module>
-    </depends>
-  </module>
-  
+
   <module>
     <name>wcm-utils</name>
     <as>wcm_utils</as>
@@ -175,28 +160,6 @@
     <depends>
       <module>jquery</module>
       <as>gj</as>
-    </depends>
-  </module>
-
-  <module>
-    <name>share-content</name>
-    <as>share_c</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/public/ShareContent.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>socialUtil</module>
-    </depends>
-    <depends>
-      <module>mentionsPlugin</module>
-    </depends>
-    <depends>
-      <module>mentionsLib</module>
-      <as>mentions</as>
     </depends>
   </module>
 
@@ -426,6 +389,5 @@
       <module>portalRequest</module>
     </depends> 
   </module>
-
 
 </gatein-resources>

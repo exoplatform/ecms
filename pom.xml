@@ -271,6 +271,8 @@
               <org.apache.commons.logging.simplelog.log.org.exoplatform>debug</org.apache.commons.logging.simplelog.log.org.exoplatform>
               <org.apache.commons.logging.simplelog.log.net.hibernate>warn</org.apache.commons.logging.simplelog.log.net.hibernate>
               <java.naming.factory.initial>org.exoplatform.services.naming.SimpleContextFactory</java.naming.factory.initial>
+              <maven.exoplatform.dir>${project.build.directory}</maven.exoplatform.dir>
+              <exo.conf.dir.name>test-classes/conf</exo.conf.dir.name>
               <exo.profiles>hsqldb</exo.profiles>
             </systemPropertyVariables>
           </configuration>

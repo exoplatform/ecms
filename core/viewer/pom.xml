@@ -9,6 +9,9 @@
   <artifactId>ecms-core-viewer</artifactId>
   <name>eXo PLF:: DMS Document Viewer</name>
   <description>eXo PDF Viewer</description>
+  <properties>
+    <exo.test.coverage.ratio>0.10</exo.test.coverage.ratio>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>javax.jcr</groupId>
@@ -46,5 +49,69 @@
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-connector</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-testsuite-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.identity</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.portal</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.test.core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.meeds.portal</groupId>
+      <artifactId>portal.component.test.web</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.meeds.commons</groupId>
+      <artifactId>commons-component-common</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.meeds.social</groupId>
+      <artifactId>social-component-core</artifactId>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-services</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <build>
+    <resources>
+      <!-- We need to filter only properties files -->
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**/*.properties</exclude>
+        </excludes>
+      </resource>
+    </resources>
+  </build>
 </project>

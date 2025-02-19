@@ -62,6 +62,7 @@ import org.exoplatform.wcm.ext.component.activity.listener.Utils;
  * 19, 2014
  */
 public class ShareDocumentService implements IShareDocumentService, Startable {
+
   public static final String     SHARED_TEMPLATE_PARAMS_PREFIX = "Shared_";
 
   public static final Log        LOG                           = ExoLogger.getLogger(ShareDocumentService.class);

@@ -24,7 +24,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
-import org.exoplatform.ecm.connector.platform.ManageDocumentServiceTest;
 import org.exoplatform.wcm.connector.collaboration.TestFavoriteRESTService;
 import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
 
@@ -37,7 +36,6 @@ import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
 @SuiteClasses({ 
   TestOpenInOfficeConnector.class,
   TestFavoriteRESTService.class,
-  ManageDocumentServiceTest.class
 })
 @ConfigTestCase(BaseConnectorTestCase.class)
 public class BaseConnectorTestSuite extends BaseExoContainerTestSuite {

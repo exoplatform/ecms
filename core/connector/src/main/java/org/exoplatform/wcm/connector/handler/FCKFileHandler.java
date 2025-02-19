@@ -20,9 +20,10 @@ import org.w3c.dom.Element;
 import javax.jcr.Node;
 import java.text.SimpleDateFormat;
 
-import static org.exoplatform.wcm.connector.fckeditor.DriverConnector.FILE_TYPE_SIMPLE_IMAGE;
-
 public class FCKFileHandler {
+
+  /** The Constant FILE_TYPE_SIMPLE_IMAGE for JPG/JPEG, PNG and GIF. */
+  public static final String FILE_TYPE_SIMPLE_IMAGE                       = "SimpleImage";
 
   public static Element createFileElement(Document document,
       String fileType,
