@@ -28,7 +28,6 @@ import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.context.DocumentContext;
@@ -896,16 +895,7 @@ public class Utils {
    * @throws Exception
    */
   public static boolean isDocument(Node node) throws Exception {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    if (templateService==null) return false;
-    List<String> documentTypeList = templateService.getDocumentTemplates();
-    if (documentTypeList==null) return false;
-    for (String documentType : documentTypeList) {
-      if (node.getPrimaryNodeType().isNodeType(documentType)) {
-        return true;
-      }
-    }
-    return false;
+    return node.isNodeType(NodetypeConstant.NT_FILE);
   }
   /**
    * get Last Modify date of jcr:content of a node

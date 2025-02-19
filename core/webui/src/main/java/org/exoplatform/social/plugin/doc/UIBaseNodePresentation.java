@@ -24,11 +24,8 @@ import java.util.Locale;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
-
-import com.google.common.collect.Lists;
 
 import org.exoplatform.commons.utils.DateUtils;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -37,7 +34,6 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -46,7 +42,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.WebuiBindingContext;
 
 /*
@@ -63,8 +58,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
 
   /** The language_. */
   private String language_ ;
-  private boolean enableVote;
-  private boolean enableComment;
   private String mediaState = MEDIA_STATE_NONE;
   private static final Log LOG  = ExoLogger.getLogger(UIBaseNodePresentation.class.getName());
 
@@ -98,23 +91,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#encodeHTML(java.lang.String)
    */
   public String encodeHTML(String text) throws Exception { return Utils.encodeHTML(text) ; }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getAttachments()
-   */
-  public List<Node> getAttachments() throws Exception {
-    List<Node> attachments = new ArrayList<Node>() ;
-    NodeIterator childrenIterator = getNode().getNodes();;
-    TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    while (childrenIterator.hasNext()) {
-      Node childNode = childrenIterator.nextNode();
-      String nodeType = childNode.getPrimaryNodeType().getName();
-      List<String> listCanCreateNodeType =
-        Utils.getListAllowedFileType(getNode(), templateService) ;
-      if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
-    }
-    return attachments;
-  }
 
   public String getViewableLink(Node attNode, Parameter[] params) throws Exception {
     return "";
@@ -219,14 +195,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   }
 
   /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getViewTemplate(java.lang.String, java.lang.String)
-   */
-  public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
-    TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
-  }
-
-  /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getWebDAVServerPrefix()
    */
   public String getWebDAVServerPrefix() throws Exception {
@@ -320,40 +288,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       return context.getRequest().getPreferences().getValues(preferenceName,null);
     }
     return null;
-  }
-
-  public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
-    TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
-  }
-
-  private String getStrValue(String scope, Node node) throws Exception {
-    StringBuilder ret = new StringBuilder();
-    if (Utils.PRIVATE.equals(scope))
-      ret.append(node.getSession().getUserID());
-    else if (Utils.GROUP.equals(scope)) {
-      for (String group : Utils.getGroups())
-        ret.append(group).append(';');
-      ret.deleteCharAt(ret.length() - 1);
-    }
-
-    return ret.toString();
-  }
-
-  public boolean isEnableComment() {
-    return enableComment;
-  }
-
-  public boolean isEnableVote() {
-   return enableVote;
-  }
-
-  public void setEnableComment(boolean value) {
-    enableComment = value;
-  }
-
-  public void setEnableVote(boolean value) {
-    enableVote = value;
   }
 
   public String getMediaState() { return mediaState; }

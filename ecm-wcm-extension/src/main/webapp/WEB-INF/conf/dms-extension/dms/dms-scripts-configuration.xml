@@ -57,53 +57,6 @@
                       <field  name="name"><string>ecm-explorer/action/AddMetadata.groovy</string></field>
                     </object>
                   </value>
-
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Add to Category</string></field>
-                      <field  name="name"><string>ecm-explorer/action/AddToCategory.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Add to Favorites</string></field>
-                      <field  name="name"><string>ecm-explorer/action/AddToFavorites.groovy</string></field>
-                    </object>
-                  </value>
-                  <!-- ecm-explorer/widget -->
-
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Fill SelectBox With Metadatas</string></field>
-                      <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithMetadatas.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Fill SelectBox With Workspaces</string></field>
-                      <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy</string></field>
-                    </object>
-                  </value>
-
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Fill SelectBox With Language</string></field>
-                      <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithLanguage.groovy</string></field>
-                    </object>
-                  </value>
-                  <!-- ecm-explorer/interceptor -->
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Pre Node Save Interceptor</string></field>
-                      <field  name="name"><string>ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Post Node Save Interceptor</string></field>
-                      <field  name="name"><string>ecm-explorer/interceptor/PostNodeSaveInterceptor.groovy</string></field>
-                    </object>
-                  </value>
                 </collection>
               </field>
             </object>

@@ -65,7 +65,6 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -687,7 +686,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                String currentParentFolder,
                                                String nodeDriveName,
                                                String type) throws Exception {
-      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
       Element rootElement = FCKUtils.createRootElement(command, node, folderHandler.getFolderType(node));
       NodeList nodeList = rootElement.getElementsByTagName("CurrentFolder");
       Element currentFolder = (Element) nodeList.item(0);
@@ -714,7 +712,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         String fileType = null;
         if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
           continue;
-        if(TYPE_FOLDER.equals(type) && templateService.isManagedNodeType(child.getPrimaryNodeType().getName()))
+        if(TYPE_FOLDER.equals(type) && child.isNodeType(NodetypeConstant.NT_FILE))
           continue;
 
         if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
@@ -820,11 +818,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private boolean isDMSDocument(Node node) throws Exception {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    List<String> dmsDocumentListTmp = templateService.getDocumentTemplates();
-    List<String> dmsDocumentList = new ArrayList<String>();
-    dmsDocumentList.addAll(dmsDocumentListTmp);
-    dmsDocumentList.remove(NodetypeConstant.EXO_WEBCONTENT);
+    List<String> dmsDocumentList = new ArrayList<>();
+    dmsDocumentList.add(NodetypeConstant.NT_FILE);
     for (String documentType : dmsDocumentList) {
       if (node.getPrimaryNodeType().isNodeType(documentType)
           && !isMediaType(node)
@@ -843,8 +838,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws RepositoryException
    */
   private boolean isDocument(Node node, String type) throws RepositoryException {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    List<String> documentTypeList = templateService.getDocumentTemplates();
+    List<String> documentTypeList = new ArrayList<>();
+    documentTypeList.add(NodetypeConstant.NT_FILE);
     if (TYPE_EDITOR.equals(type) && browsableContent != null) {
       for (String browsableDocument : browsableContent) {
         documentTypeList.remove(browsableDocument);
@@ -1066,7 +1061,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception
    */
   private Node getChildOfType(Node node, String childType, String type) throws Exception {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     if (node == null) {
       return null;
     }
@@ -1074,7 +1068,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     while (iter.hasNext()) {
       Node child = iter.nextNode();
       if (!isDocument(child, type) && child.isNodeType(childType)
-              && !templateService.isManagedNodeType(child.getPrimaryNodeType().getName())
+              && !child.isNodeType(NodetypeConstant.NT_FILE)
               && !"exo:thumbnails".equals(child.getPrimaryNodeType().getName()))
       {
         return child;

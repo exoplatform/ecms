@@ -47,7 +47,6 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -607,13 +606,10 @@ public class Utils {
     Map<String, String> activityParams = activity.getTemplateParams();
     String state;
     String nodeTitle;
-    String nodeType = null;
     String documentTypeLabel;
     String currentVersion = null;
-    TemplateService templateService = CommonsUtils.getService(TemplateService.class);
     try {
-      nodeType = contentNode.getPrimaryNodeType().getName();
-      documentTypeLabel = templateService.getTemplateLabel(nodeType);
+      documentTypeLabel = "";
     }catch (Exception e) {
       documentTypeLabel = "";
     }

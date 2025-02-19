@@ -62,7 +62,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -483,59 +482,6 @@ public class Utils {
 
     }
     return buffer.toString();
-  }
-
-  public static List<String> getListAllowedFileType(Node currentNode, TemplateService templateService) throws Exception {
-    List<String> nodeTypes = new ArrayList<String>();
-    NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
-    NodeType currentNodeType = currentNode.getPrimaryNodeType();
-    NodeDefinition[] childDefs = currentNodeType.getChildNodeDefinitions();
-    List<String> templates = templateService.getDocumentTemplates();
-    try {
-      for (int i = 0; i < templates.size(); i++) {
-        String nodeTypeName = templates.get(i).toString();
-        NodeType nodeType = ntManager.getNodeType(nodeTypeName);
-        NodeType[] superTypes = nodeType.getSupertypes();
-        boolean isCanCreateDocument = false;
-        for (NodeDefinition childDef : childDefs) {
-          NodeType[] requiredChilds = childDef.getRequiredPrimaryTypes();
-          for (NodeType requiredChild : requiredChilds) {
-            if (nodeTypeName.equals(requiredChild.getName())) {
-              isCanCreateDocument = true;
-              break;
-            }
-          }
-          if (nodeTypeName.equals(childDef.getName()) || isCanCreateDocument) {
-            if (!nodeTypes.contains(nodeTypeName))
-              nodeTypes.add(nodeTypeName);
-            isCanCreateDocument = true;
-          }
-        }
-        if (!isCanCreateDocument) {
-          for (NodeType superType : superTypes) {
-            for (NodeDefinition childDef : childDefs) {
-              for (NodeType requiredType : childDef.getRequiredPrimaryTypes()) {
-                if (superType.getName().equals(requiredType.getName())) {
-                  if (!nodeTypes.contains(nodeTypeName))
-                    nodeTypes.add(nodeTypeName);
-                  isCanCreateDocument = true;
-                  break;
-                }
-              }
-              if (isCanCreateDocument)
-                break;
-            }
-            if (isCanCreateDocument)
-              break;
-          }
-        }
-      }
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Unexpected error", e);
-      }
-    }
-    return nodeTypes;
   }
 
   public static String getNodeTypeIcon(Node node, String appended, String mode) throws RepositoryException {

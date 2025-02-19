@@ -18,7 +18,6 @@ package org.exoplatform.wcm.connector.fckeditor;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.connector.fckeditor.FCKFileHandler;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
@@ -44,13 +43,6 @@ public class DocumentLinkHandler extends FCKFileHandler {
 
   /** The current portal. */
   private String currentPortal;
-
-  /**
-   * Instantiates a new document link handler.
-   */
-  public DocumentLinkHandler() {
-    super(ExoContainerContext.getCurrentContainer());
-  }
 
   /**
    * Sets the base uri.

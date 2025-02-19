@@ -49,8 +49,6 @@ import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.metadata.MetadataService;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -294,35 +292,6 @@ public class WCMCoreUtils {
     }
   }
 
-  public static Hashtable<String, String> getMetadataTemplates(Node node) throws Exception {
-    MetadataService metadataService = WCMCoreUtils.getService(MetadataService.class);
-    Hashtable<String, String> templates = new Hashtable<String, String>();
-    List<String> metaDataList = metadataService.getMetadataList();
-
-    NodeType[] nodeTypes = node.getMixinNodeTypes();
-    for(NodeType nt : nodeTypes) {
-      if(metaDataList.contains(nt.getName())) {
-        templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
-      }
-    }
-    Item primaryItem;
-    try {
-      primaryItem = node.getPrimaryItem();
-    } catch (ItemNotFoundException e) {
-      primaryItem = null;
-    }
-    if (primaryItem != null && primaryItem.isNode()) {
-      Node primaryNode = (Node) node.getPrimaryItem();
-      NodeType[] primaryTypes = primaryNode.getMixinNodeTypes();
-      for(NodeType nt : primaryTypes) {
-        if(metaDataList.contains(nt.getName())) {
-          templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
-        }
-      }
-    }
-    return templates;
-  }
-
   public static String getRestContextName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
@@ -429,10 +398,7 @@ public class WCMCoreUtils {
   }
 
   public static boolean isDocumentNodeType(Node node) throws Exception {
-    boolean isDocument = true;
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
-    return isDocument;
+    return node.isNodeType(NodetypeConstant.NT_FILE);
   }
   
   /**

@@ -36,32 +36,6 @@ public interface NodePresentation {
   public static final String MEDIA_STATE_NONE = "NONE";
 
   /**
-   * Sets enable vote
-   *
-   * @param value value to set
-   */
-  public void setEnableVote(boolean value);
-
-  /**
-   * checks if enable vote
-   *
-   */
-  public boolean isEnableVote();
-
-  /**
-   * Sets enable comment
-   *
-   * @param value value to set
-   */
-  public void setEnableComment(boolean value);
-
-  /**
-   * checks if enable comment
-   *
-   */
-  public boolean isEnableComment();
-
-  /**
    * Sets the node.
    *
    * @param node the new node
@@ -108,14 +82,6 @@ public interface NodePresentation {
    */
   public List<Node> getRelations() throws Exception;
 
-  /**
-   * Gets the attachments.
-   *
-   * @return the attachments
-   * @throws Exception the exception
-   */
-  public List<Node> getAttachments() throws Exception;
-  
   /**
    * Gets the viewable link.
    *
@@ -193,25 +159,6 @@ public interface NodePresentation {
    * @throws Exception the exception
    */
   public String getWorkspaceName() throws Exception;
-
-  /**
-   * Gets the view template.
-   *
-   * @param nodeTypeName the node type name
-   * @param templateName the template name
-   * @return the view template
-   * @throws Exception the exception
-   */
-  public String getViewTemplate(String nodeTypeName, String templateName) throws Exception;
-
-  /**
-   * Get the skin of template if it's existing
-   * @param nodeTypeName The node type name
-   * @param skinName  Skin name
-   * @return The skin template
-   * @throws Exception
-   */
-  public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception;
 
   /**
    * Gets the download link.

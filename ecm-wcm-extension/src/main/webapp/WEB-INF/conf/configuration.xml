@@ -32,11 +32,9 @@
   <import>war:/conf/dms-extension/dms/dms-system-configuration.xml</import>  
   <import>war:/conf/dms-extension/dms/cms-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/jcr-configuration.xml</import>
-  <import>war:/conf/dms-extension/dms/dms-templates-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-scripts-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-actions-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-ext-configuration.xml</import>
-  <import>war:/conf/dms-extension/dms/dms-metadata-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/organization-component-plugins-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-thumbnail-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-common-configuration.xml</import>
@@ -47,8 +45,6 @@
   <import>war:/conf/dms-extension/dms/jcr-clouddrives-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/ecms-portal-configuration.xml</import>
-  <import>war:/conf/wcm-extension/dms/nodetype-templates-configuration.xml</import>
-  <import>war:/conf/wcm-extension/dms/application-templates-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/ext-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/system-configuration.xml</import>
   <import>war:/conf/content-extended/authoring/configuration.xml</import>

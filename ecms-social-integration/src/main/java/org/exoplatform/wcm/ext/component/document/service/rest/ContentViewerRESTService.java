@@ -21,25 +21,21 @@ import java.io.Writer;
 import java.util.Locale;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
-import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.groovyscript.text.BindingContext;
 import org.exoplatform.portal.application.PortalApplication;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -48,7 +44,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.plugin.doc.UIDocViewer;
@@ -140,34 +135,12 @@ public class ContentViewerRESTService implements ResourceContainer {
     return service.getSystemSessionProvider(null);
   }
 
-  public String getTemplate(Node contentNode) {
-    if(contentNode == null) {
-      return null;
-    }
-    TemplateService templateService = CommonsUtils.getService(TemplateService.class);
-    String userName = ConversationState.getCurrent().getIdentity().getUserId();
-    try {
-      String nodeType = contentNode.getPrimaryNodeType().getName();
-      if(templateService.isManagedNodeType(nodeType)) {
-        return templateService.getTemplatePathByUser(false, nodeType, userName);
-      }
-    }catch (RepositoryException re){
-      if (LOG.isDebugEnabled() || LOG.isWarnEnabled())
-        LOG.error("Get template catch RepositoryException: ", re);
-    }
-    catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
-    }
-
-    return null;
-  }
-
   public void processRender(String template, UIComponent uiComponent,  Writer writer) throws Exception {
     if(template == null) {
       throw new IllegalStateException();
     } else {
       ExoContainer container = ExoContainerContext.getCurrentContainer();
-      ResourceResolver resolver = new JCRResourceResolver("dms-system");
+      ResourceResolver resolver = new ApplicationResourceResolver();
       BindingContext bcontext = new BindingContext(resolver, writer);
       bcontext.put("_ctx", bcontext);
       bcontext.put("uicomponent", uiComponent);

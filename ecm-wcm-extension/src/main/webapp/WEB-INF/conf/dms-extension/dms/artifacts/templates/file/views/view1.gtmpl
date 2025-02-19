@@ -167,7 +167,6 @@
 		  </div>
 		</div>
     </div>
-    <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
   </div>
 </div>
 
@@ -207,7 +206,6 @@
           </div>
         <%}%>
     </div>
-  <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
 </div>
 </div>
 

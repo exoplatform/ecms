@@ -18,9 +18,7 @@ package org.exoplatform.wcm.connector;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -30,8 +28,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.transform.dom.DOMSource;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import org.exoplatform.ecm.connector.fckeditor.FCKFileHandler;
 import org.exoplatform.ecm.connector.fckeditor.FCKFolderHandler;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
@@ -42,8 +41,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -98,13 +95,12 @@ public abstract class BaseConnector {
   /**
    * Instantiates a new base connector.
    */
-  public BaseConnector() {
+  protected BaseConnector() {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     linkManager = WCMCoreUtils.getService(LinkManager.class);
 
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    folderHandler = new FCKFolderHandler(container);
-    fileHandler = new FCKFileHandler(container);
+    folderHandler = new FCKFolderHandler();
+    fileHandler = new FCKFileHandler();
     fileUploadHandler = new FileUploadHandler();
   }
 
