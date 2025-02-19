@@ -34,7 +34,6 @@ import org.exoplatform.services.ecm.dms.configuration.TestDMSConfigurationServic
 import org.exoplatform.services.ecm.dms.documents.TestFavoriteService;
 import org.exoplatform.services.ecm.dms.documents.TestTrashService;
 import org.exoplatform.services.ecm.dms.drive.TestDriveService;
-import org.exoplatform.services.ecm.dms.i18n.TestMultiLanguageService;
 import org.exoplatform.services.ecm.dms.link.TestLinkManager;
 import org.exoplatform.services.ecm.dms.relation.TestRelationsService;
 import org.exoplatform.services.ecm.dms.scripts.TestScriptService;
@@ -64,7 +63,6 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   TestFavoriteService.class,
   TestRelationsService.class,
   TestDriveService.class,
-  TestMultiLanguageService.class,
   TestScriptService.class,
   TestCmsService.class,
   TestLinkManager.class,

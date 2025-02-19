@@ -270,7 +270,6 @@
   <import>classpath:/conf/standalone/wcm/test-dms-actions-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-templates-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-drives-configuration.xml</import>
-  <import>classpath:/conf/standalone/wcm/test-metadata-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/cms-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-scripts-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/jcr-component-plugins-configuration.xml</import>

@@ -33,7 +33,6 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.container.UIContainer;
-import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -185,14 +184,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @return true, if need to render fast publish link
    */
   public boolean isFastPublishLink() { return false ; }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getSupportedLocalise()
-   */
-  public List getSupportedLocalise() throws Exception {
-    MultiLanguageService multiLanguageService = getApplicationComponent(MultiLanguageService.class) ;
-    return multiLanguageService.getSupportedLanguages(getNode()) ;
-  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getWebDAVServerPrefix()

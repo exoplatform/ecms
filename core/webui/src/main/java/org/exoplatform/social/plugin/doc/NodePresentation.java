@@ -91,14 +91,6 @@ public interface NodePresentation {
   public String getViewableLink(Node attNode, Parameter[] params) throws Exception;
 
   /**
-   * Gets the supported localise.
-   *
-   * @return the supported localise
-   * @throws Exception the exception
-   */
-  public List getSupportedLocalise() throws Exception;
-
-  /**
    * Sets the language.
    *
    * @param language the new language
