@@ -1,5 +1,4 @@
-<%
-  import java.util.ArrayList;
+<%import java.util.ArrayList;
   import java.util.GregorianCalendar;
   import java.util.List;
   import javax.jcr.Node;
@@ -7,10 +6,10 @@
   import javax.jcr.NodeIterator;
   import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;
-  import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;
   import java.util.Calendar;
-  import org.exoplatform.wcm.webui.Utils;
+  import org.org.exoplatform.services.wcm.utils.UtilsUtils;
   import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
   import org.exoplatform.services.security.ConversationState;
   import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -79,8 +78,7 @@
   def size = links.size();
 
   Calendar lCDateCalendar = Calendar.getInstance();
-  def timeCreated = lCDateCalendar.getTimeInMillis();
-%>
+  def timeCreated = lCDateCalendar.getTimeInMillis();%>
 <script type="text/javascript">
   var finFpl = false;
 </script>

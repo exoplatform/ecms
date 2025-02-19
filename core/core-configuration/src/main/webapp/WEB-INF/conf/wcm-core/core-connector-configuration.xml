@@ -6,18 +6,6 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
-    <type>org.exoplatform.ecm.connector.MigrationConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.ecm.connector.LocalizationConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.ResourceBundleConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.fckeditor.PortalLinkConnector</type>
-  </component>
-  <component>
     <type>org.exoplatform.wcm.connector.collaboration.RenameConnector</type>
   </component>
   <component>

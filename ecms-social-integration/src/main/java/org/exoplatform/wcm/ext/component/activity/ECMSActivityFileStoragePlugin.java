@@ -181,7 +181,7 @@ public class ECMSActivityFileStoragePlugin extends ActivityFileStoragePlugin {
     }
     String nodeTitle;
     try {
-      nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(attachmentNode);
+      nodeTitle = org.exoplatform.services.wcm.utils.Utils.getTitle(attachmentNode);
     } catch (Exception e1) {
       nodeTitle = attachmentNode.getName();
     }

@@ -30,7 +30,4 @@ import org.exoplatform.webui.core.UIComponent;
     template = "classpath:resources/templates/MpegVideoViewer.gtmpl"
 )
 public class MpegVideoViewer extends UIComponent {
-
-  public MpegVideoViewer() throws Exception {
-  }
 }

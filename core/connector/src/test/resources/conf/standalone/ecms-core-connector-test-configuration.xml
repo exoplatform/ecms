@@ -21,11 +21,7 @@
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>
-  
-  <component>
-    <type>org.exoplatform.wcm.connector.fckeditor.PortalLinkConnector</type>
-  </component>
-   
+
   <component>
     <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
     <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>

@@ -1,5 +1,5 @@
 <% 
-  import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   
   String[] hiddenField1 = ["jcrPath=/node/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
   String[] hiddenField2 = ["jcrPath=/node/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;

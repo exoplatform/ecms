@@ -30,7 +30,4 @@ import org.exoplatform.webui.core.UIComponent;
     template = "classpath:resources/templates/FlashViewer.gtmpl"
 )
 public class FlashViewer extends UIComponent {
-
-  public FlashViewer() throws Exception {
-  }
 }

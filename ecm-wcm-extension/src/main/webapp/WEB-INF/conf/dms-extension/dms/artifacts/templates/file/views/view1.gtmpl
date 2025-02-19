@@ -5,7 +5,7 @@
   import javax.jcr.NodeIterator;
   import org.exoplatform.webui.core.UIPopupWindow;
   import org.exoplatform.web.application.Parameter;
-  import org.exoplatform.ecm.webui.utils.Utils; 
+  import org.exoplatform.services.wcm.utils.Utils; 
   import org.exoplatform.services.wcm.core.NodeLocation;
   import org.exoplatform.services.jcr.RepositoryService;
   import org.exoplatform.wcm.webui.reader.ContentReader;
@@ -49,15 +49,15 @@
   
   def originNode = uicomponent.getNode();
   def currentNode = getFileLangNode(originNode) ;
-  currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
-  def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
+  currentNode = org.exoplatform.services.wcm.utils.Utils.getRealNode(currentNode);
+  def currentNodePath = org.exoplatform.services.wcm.utils.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
-  def title = org.exoplatform.ecm.webui.utils.Utils.getTitle(currentNode);
+  def title = org.exoplatform.services.wcm.utils.Utils.getTitle(currentNode);
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
   unsupportMimeTypeText.add("text/rtf");
   String portalName = uicomponent.getPortalName() ;
-  String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+  String restContextName = org.exoplatform.services.wcm.utils.Utils.getRestContextName(portalName);
   
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
@@ -107,7 +107,7 @@
   }
   if(fileComponent == null || canViewPDF == false) {
     noPreviewStyle = "noPreview";
-    org.exoplatform.ecm.webui.utils.Utils.logUnavaiblePreview(encodedPath);
+    org.exoplatform.services.wcm.utils.Utils.logUnavaiblePreview(encodedPath);
   }
   if(!(fileComponent instanceof PDFViewer) || canViewPDF == false) {
 %>
@@ -123,7 +123,7 @@
           if (!(fileComponent == null || canViewPDF == false)) {
           %>
           <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
-          <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
+          <% if(org.exoplatform.services.wcm.utils.Utils.isDownloadDocumentActivated()) { %>
           <a class="pull-right btn dowload-link" href="$downloadLink"><i class="uiIconDownload uiIconLightGray"></i> <%=_ctx.appRes("File.view.label.download")%></a>
           <%}%>
         <%}%>
@@ -180,7 +180,7 @@
 <div class="fileContent document-preview-content-file">
     <div class="title clearfix">
       <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
-       <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
+       <% if(org.exoplatform.services.wcm.utils.Utils.isDownloadDocumentActivated()) { %>
         <div class="pull-right"><a class="btn" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a> </div>
        <%}%>
     </div>

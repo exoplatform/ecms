@@ -4,7 +4,7 @@
   import javax.jcr.Node;
   import javax.jcr.NodeIterator;
   import org.exoplatform.webui.core.UIComponent;
-  import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;   
   import org.exoplatform.wcm.webui.reader.ContentReader;
   import org.exoplatform.portal.webui.util.Util;
@@ -29,7 +29,7 @@ if (uiParent != null) {
   def contentNode = currentNode.getNode("jcr:content");
   def fileSize = contentNode.getProperty("jcr:data").getStream().available();
   def mimeType = contentNode.getProperty("jcr:mimeType").getString();
-  def title = org.exoplatform.ecm.webui.utils.Utils.getTitle(currentNode);
+  def title = org.exoplatform.services.wcm.utils.Utils.getTitle(currentNode);
   def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
   def viewLink = Utils.getPDFViewerLink(originalNode);
 
@@ -153,7 +153,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
                             </input>
                             <span id="numPages" class="toolbarLabel"></span>
                         </div>
-                        <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
+                        <% if(org.exoplatform.services.wcm.utils.Utils.isDownloadDocumentActivated()) { %>
                         <div id="toolbarViewerRight" class="pull-right">
                             <a id="secondaryDownload" class="actionIcon hidden" data-placement="bottom" rel="tooltip" title="Download" href="<%=downloadLink%>" tabindex="12" data-l10n-id="download">
                                 <i class="uiIconDownload uiIconLightGray"></i>
@@ -289,7 +289,7 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
       <div class="detailContainer">
         <h4>$errorMessage</h4>
         <div class="editors-placeholder" data-fileId="$fileId" data-workspace="$workspace"></div>
-        <% if(org.exoplatform.ecm.webui.utils.Utils.isDownloadDocumentActivated()) { %>
+        <% if(org.exoplatform.services.wcm.utils.Utils.isDownloadDocumentActivated()) { %>
         <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
         <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">

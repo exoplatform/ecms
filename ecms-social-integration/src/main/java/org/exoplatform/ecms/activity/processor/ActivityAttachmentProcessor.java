@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecms.activity.processor;
 
-import static org.exoplatform.social.plugin.doc.UIDocActivity.*;
 import static org.exoplatform.wcm.ext.component.activity.FileUIActivity.NODE_PATH;
 import static org.exoplatform.wcm.ext.component.activity.FileUIActivity.SEPARATOR_REGEX;
 
@@ -40,9 +39,19 @@ import org.exoplatform.social.core.BaseActivityProcessorPlugin;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 
 public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
-  private static final Log LOG = ExoLogger.getLogger(ActivityAttachmentProcessor.class);
+  private static final Log    LOG        = ExoLogger.getLogger(ActivityAttachmentProcessor.class);
 
-  private TrashService     trashService;
+  private static final String REPOSITORY = "REPOSITORY";
+
+  private static final String WORKSPACE  = "WORKSPACE";
+
+  private static final String ID         = "id";
+
+  private static final String DOCPATH    = "DOCPATH";
+
+  private static final String MIME_TYPE  = "mimeType";
+
+  private TrashService        trashService;
 
   public ActivityAttachmentProcessor(TrashService trashService, InitParams initParams) {
     super(initParams);
@@ -52,8 +61,9 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
   @Override
   public void processActivity(ExoSocialActivity activity) {
     Map<String, String> activityParams = activity.getTemplateParams();
-    if (activityParams == null || activityParams.isEmpty() ||
-            (!activityParams.containsKey(WORKSPACE) && !activityParams.containsKey(WORKSPACE.toLowerCase()))) {
+    if (activityParams == null || activityParams.isEmpty()
+        ||
+        (!activityParams.containsKey(WORKSPACE) && !activityParams.containsKey(WORKSPACE.toLowerCase()))) {
       return;
     }
 
@@ -61,8 +71,8 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
     String[] workspaces = getParameterValues(activityParams, WORKSPACE);
     String[] mimeTypes = getParameterValues(activityParams, MIME_TYPE);
     String[] nodeUUIDs = getParameterValues(activityParams, ID);
-    String[] docPaths = activityParams.containsKey(DOCPATH) ? getParameterValues(activityParams, DOCPATH)
-                                                            : getParameterValues(activityParams, NODE_PATH);
+    String[] docPaths = activityParams.containsKey(DOCPATH) ? getParameterValues(activityParams, DOCPATH) :
+                                                            getParameterValues(activityParams, NODE_PATH);
     if (docPaths == null) {
       return;
     }
@@ -116,7 +126,7 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
   private String getTitle(Node contentNode) throws RepositoryException {
     String nodeTitle;
     try {
-      nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(contentNode);
+      nodeTitle = org.exoplatform.services.wcm.utils.Utils.getTitle(contentNode);
     } catch (Exception e) {
       nodeTitle = contentNode.getName();
     }

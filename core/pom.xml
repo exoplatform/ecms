@@ -14,9 +14,7 @@
     <module>services</module>
     <module>viewer</module>
     <module>connector</module>
-    <module>webui</module>
     <module>search</module>
-    <module>webui-clouddrives</module>
     <module>core-configuration</module>
   </modules>
 </project>

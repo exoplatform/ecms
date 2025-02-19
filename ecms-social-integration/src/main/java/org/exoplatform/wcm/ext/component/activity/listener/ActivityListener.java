@@ -1,7 +1,7 @@
 package org.exoplatform.wcm.ext.component.activity.listener;
 
 import org.apache.commons.lang3.StringUtils;
-import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;

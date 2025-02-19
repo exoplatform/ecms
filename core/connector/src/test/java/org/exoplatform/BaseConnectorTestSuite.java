@@ -27,7 +27,6 @@ import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.ecm.connector.platform.ManageDocumentServiceTest;
 import org.exoplatform.wcm.connector.collaboration.TestFavoriteRESTService;
 import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
-import org.exoplatform.wcm.connector.fckeditor.TestPortalLinkConnector;
 
 /**
  * Created by The eXo Platform SAS
@@ -36,7 +35,6 @@ import org.exoplatform.wcm.connector.fckeditor.TestPortalLinkConnector;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-  TestPortalLinkConnector.class,
   TestOpenInOfficeConnector.class,
   TestFavoriteRESTService.class,
   ManageDocumentServiceTest.class

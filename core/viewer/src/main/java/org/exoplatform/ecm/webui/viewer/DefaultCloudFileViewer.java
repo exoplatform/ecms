@@ -55,7 +55,6 @@ public class DefaultCloudFileViewer extends AbstractCloudFileViewer {
    * Instantiates a new default file viewer.
    */
   public DefaultCloudFileViewer() {
-    super();
   }
 
   /**

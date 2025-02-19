@@ -206,7 +206,7 @@ public class Utils {
     activityParams.put(ContentUIActivity.NODE_PATH, node.getPath());
     String nodeTitle = node.getName();
     try {
-      nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(node);
+      nodeTitle = org.exoplatform.services.wcm.utils.Utils.getTitle(node);
     } catch (Exception e) {
       // Nothing to do
     }
@@ -233,7 +233,7 @@ public class Utils {
       PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
       String portalName = containerInfo.getContainerName();
 
-      String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+      String restContextName = org.exoplatform.services.wcm.utils.Utils.getRestContextName(portalName);
       String preferenceWS = node.getSession().getWorkspace().getName();
       String encodedPath = URLEncoder.encode(node.getPath(), "utf-8");
       encodedPath = encodedPath.replaceAll ("%2F", "/");
@@ -614,7 +614,7 @@ public class Utils {
       documentTypeLabel = "";
     }
     try {
-      nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(contentNode);
+      nodeTitle = org.exoplatform.services.wcm.utils.Utils.getTitle(contentNode);
     } catch (Exception e1) {
       nodeTitle ="";
     }

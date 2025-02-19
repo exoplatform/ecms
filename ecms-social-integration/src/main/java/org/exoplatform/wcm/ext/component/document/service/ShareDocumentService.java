@@ -18,9 +18,15 @@ package org.exoplatform.wcm.ext.component.document.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.jcr.*;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +38,9 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.*;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -44,41 +52,39 @@ import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
-import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
-import org.exoplatform.social.plugin.doc.UIDocActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Nov 19, 2014  
+ * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Nov
+ * 19, 2014
  */
-public class ShareDocumentService implements IShareDocumentService, Startable{
-  private static final String SHARED_TEMPLATE_PARAMS_PREFIX = "Shared_";
+public class ShareDocumentService implements IShareDocumentService, Startable {
+  public static final String     SHARED_TEMPLATE_PARAMS_PREFIX = "Shared_";
 
-  private static final Log       LOG               = ExoLogger.getLogger(ShareDocumentService.class);
+  public static final Log        LOG                           = ExoLogger.getLogger(ShareDocumentService.class);
 
-  public static final String     MIX_PRIVILEGEABLE = "exo:privilegeable";
+  public static final String     MIX_PRIVILEGEABLE             = "exo:privilegeable";
 
-  private static final boolean   POST_ACTIVITY     = true;
+  public static final boolean    POST_ACTIVITY                 = true;
 
-  public static final String     ID                        = "id";
+  public static final String     ID                            = "id";
 
-  public static final String     REPOSITORY                = "REPOSITORY";
+  public static final String     REPOSITORY                    = "REPOSITORY";
 
-  public static final String     WORKSPACE                 = "WORKSPACE";
+  public static final String     WORKSPACE                     = "WORKSPACE";
 
-  public static final String     DOCPATH                   = "DOCPATH";
+  public static final String     DOCPATH                       = "DOCPATH";
 
-  public static final String     NODEPATH_NAME             = "nodePath";
+  public static final String     WORKSPACE_NAME                = "collaboration";
 
-  public static final String     REPOSITORY_NAME           = "repository";
+  public static final String     LINK_PARAM                    = "link";
 
-  public static final String     WORKSPACE_NAME            = "collaboration";
+  public static final String     IS_SYMLINK                    = "isSymlink";
+
+  public static final String     TEMPLATE_PARAMS_SEPARATOR     = "|@|";
 
   private SessionProviderService sessionProviderService;
 
@@ -92,14 +98,12 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
 
   private IdentityManager        identityManager;
 
-  private static final String   TEMPLATE_PARAMS_SEPARATOR = "|@|";
-
   public ShareDocumentService(RepositoryService repositoryService,
                               LinkManager linkManager,
                               IdentityManager identityManager,
                               ActivityManager activityManager,
                               SpaceService spaceService,
-                              SessionProviderService sessionProviderService){
+                              SessionProviderService sessionProviderService) {
     this.repoService = repositoryService;
     this.sessionProviderService = sessionProviderService;
     this.linkManager = linkManager;
@@ -141,10 +145,11 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK))
         currentNode = linkManager.getTarget(currentNode);
       // Update permission
-      String tempPerms = perm.toString();// Avoid ref back to UIFormSelectBox options
+      String tempPerms = perm.toString();// Avoid ref back to UIFormSelectBox
+                                         // options
       if (!tempPerms.equals(PermissionType.READ))
-        tempPerms = PermissionType.READ + "," + PermissionType.ADD_NODE + "," + PermissionType.SET_PROPERTY + ","
-            + PermissionType.REMOVE;
+        tempPerms = PermissionType.READ + "," + PermissionType.ADD_NODE + "," + PermissionType.SET_PROPERTY + "," +
+            PermissionType.REMOVE;
       if (PermissionUtil.canChangePermission(currentNode)) {
         setSpacePermission(currentNode, space, tempPerms.split(","));
       } else if (PermissionUtil.canRead(currentNode)) {
@@ -175,7 +180,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
             LOG.error(e1.getMessage(), e1);
         }
       }
-      if(link.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)){
+      if (link.canAddMixin(NodetypeConstant.MIX_REFERENCEABLE)) {
         link.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
         link.save();
         return link.getUUID();
@@ -190,35 +195,42 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
     return "";
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.component.explorer.popup.service.IShareDocumentService#publishDocumentToUser(java.lang.String, javax.jcr.Node, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @see org.exoplatform.ecm.webui.component.explorer.popup.service.
+   * IShareDocumentService#publishDocumentToUser(java.lang.String,
+   * javax.jcr.Node, java.lang.String, java.lang.String)
    */
   @Override
-  public void publishDocumentToUser(String user, Node currentNode, String comment,String perm) {
+  public void publishDocumentToUser(String user, Node currentNode, String comment, String perm) {
     Node userPrivateNode = null;
     Node shared = null;
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
-      //add symlink to destination user
+      // add symlink to destination user
       userPrivateNode = getPrivateUserNode(sessionProvider, user);
       userPrivateNode = userPrivateNode.getNode("Documents");
-      if(!userPrivateNode.hasNode("Shared")){
+      if (!userPrivateNode.hasNode("Shared")) {
         shared = userPrivateNode.addNode("Shared");
-      }else{
+      } else {
         shared = userPrivateNode.getNode("Shared");
       }
-      if(currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) currentNode = linkManager.getTarget(currentNode);
-      //Update permission
-      String tempPerms = perm.toString();//Avoid ref back to UIFormSelectBox options
-      if(!tempPerms.equals(PermissionType.READ)) tempPerms = PermissionType.READ+","+PermissionType.ADD_NODE+","+PermissionType.SET_PROPERTY+","+PermissionType.REMOVE;
-      if(PermissionUtil.canChangePermission(currentNode)){
+      if (currentNode.isNodeType(NodetypeConstant.EXO_SYMLINK))
+        currentNode = linkManager.getTarget(currentNode);
+      // Update permission
+      String tempPerms = perm.toString();// Avoid ref back to UIFormSelectBox
+                                         // options
+      if (!tempPerms.equals(PermissionType.READ))
+        tempPerms = PermissionType.READ + "," + PermissionType.ADD_NODE + "," + PermissionType.SET_PROPERTY + "," +
+            PermissionType.REMOVE;
+      if (PermissionUtil.canChangePermission(currentNode)) {
         setUserPermission(currentNode, user, tempPerms.split(","));
-      }else if(PermissionUtil.canRead(currentNode)){
+      } else if (PermissionUtil.canRead(currentNode)) {
         SessionProvider systemSessionProvider = SessionProvider.createSystemProvider();
         Session systemSession = systemSessionProvider.getSession(session.getWorkspace().getName(), repository);
-        Node _node= (Node)systemSession.getItem(currentNode.getPath());
+        Node _node = (Node) systemSession.getItem(currentNode.getPath());
         setUserPermission(_node, user, tempPerms.split(","));
       }
       currentNode.getSession().save();
@@ -228,10 +240,10 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       link.setProperty(NodetypeConstant.EXO_FILE_TYPE, nodeMimeType);
       userPrivateNode.save();
     } catch (RepositoryException e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     } catch (Exception e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     }
   }
@@ -245,8 +257,11 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
     return userNode.getNode(privateRelativePath);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.component.explorer.popup.service.IShareDocumentService#unpublishDocumentToUser(java.lang.String, javax.jcr.ExtendedNode)
+  /*
+   * (non-Javadoc)
+   * @see org.exoplatform.ecm.webui.component.explorer.popup.service.
+   * IShareDocumentService#unpublishDocumentToUser(java.lang.String,
+   * javax.jcr.ExtendedNode)
    */
   @Override
   public void unpublishDocumentToUser(String user, ExtendedNode node) {
@@ -254,7 +269,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
     Node sharedNode = null;
     try {
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-      //remove symlink from destination user
+      // remove symlink from destination user
       userPrivateNode = getPrivateUserNode(sessionProvider, user);
       userPrivateNode = userPrivateNode.getNode("Documents");
       sharedNode = userPrivateNode.getNode("Shared");
@@ -265,17 +280,20 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       node.getSession().save();
       userPrivateNode.save();
 
-      }  catch (RepositoryException e) {
+    } catch (RepositoryException e) {
       if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     } catch (Exception e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.component.explorer.popup.service.IShareDocumentService#unpublishDocumentToSpace(java.lang.String, javax.jcr.ExtendedNode)
+  /*
+   * (non-Javadoc)
+   * @see org.exoplatform.ecm.webui.component.explorer.popup.service.
+   * IShareDocumentService#unpublishDocumentToSpace(java.lang.String,
+   * javax.jcr.ExtendedNode)
    */
   @Override
   public void unpublishDocumentToSpace(String space, ExtendedNode node) {
@@ -285,7 +303,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
-      //remove symlink to destination space
+      // remove symlink to destination space
       NodeHierarchyCreator nodeCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
 
       rootSpace = (Node) session.getItem(nodeCreator.getJcrPath(BasePath.CMS_GROUPS_PATH) + space);
@@ -299,10 +317,10 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       removeSpacePermission(node, space);
       node.getSession().save();
     } catch (RepositoryException e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     } catch (Exception e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     }
   }
@@ -328,12 +346,18 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
         originalActivityFilesWorkspaces = getParameterValues(originalActivityTemplateParams, WORKSPACE_NAME);
       }
       if (originalActivityFilesWorkspaces == null || originalActivityFilesWorkspaces.length == 0) {
-        LOG.warn("Can't share document of activity {} to space of activity {}, because param {} is empty", originalActivityId, sharedActivityId, WORKSPACE);
+        LOG.warn("Can't share document of activity {} to space of activity {}, because param {} is empty",
+                 originalActivityId,
+                 sharedActivityId,
+                 WORKSPACE);
         return;
       }
       String[] originalActivityFilesIds = getParameterValues(originalActivityTemplateParams, ID);
       if (originalActivityFilesIds == null || originalActivityFilesIds.length == 0) {
-        LOG.warn("Can't share document of activity {} to space of activity {}, because param {} is empty", originalActivityId, sharedActivityId, ID);
+        LOG.warn("Can't share document of activity {} to space of activity {}, because param {} is empty",
+                 originalActivityId,
+                 sharedActivityId,
+                 ID);
         return;
       }
       Map<String, String> templateParams = new HashMap<>();
@@ -348,30 +372,34 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
           }
 
           ExtendedSession originalActivityFileNodeSession = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
-                                                                  .getSession(originalActivityFileWorkspace,
-                                                                              repoService.getCurrentRepository());
+                                                                                          .getSession(originalActivityFileWorkspace,
+                                                                                                      repoService.getCurrentRepository());
           Node originalActivityFileNode = originalActivityFileNodeSession.getNodeByIdentifier(originalActivityFilesIds[i]);
 
           String targetSpaceFileNodeUUID = publishDocumentToSpace(targetSpace.getGroupId(),
-                                                                                       originalActivityFileNode,
-                                                                                       "",
-                                                                                       PermissionType.READ,
-                                                                                       false);
+                                                                  originalActivityFileNode,
+                                                                  "",
+                                                                  PermissionType.READ,
+                                                                  false);
           Node targetSpaceFileNode = originalActivityFileNode.getSession().getNodeByUUID(targetSpaceFileNodeUUID);
           concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.ID, targetSpaceFileNodeUUID);
           String repository = ((ManageableRepository) targetSpaceFileNode.getSession().getRepository()).getConfiguration()
                                                                                                        .getName();
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.REPOSITORY, repository);
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + REPOSITORY, repository);
           String workspace = targetSpaceFileNode.getSession().getWorkspace().getName();
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.WORKSPACE, workspace);
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + WORKSPACE, workspace);
 
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.CONTENT_LINK, Utils.getContentLink(targetSpaceFileNode));
+          concatenateParam(templateParams,
+                           SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.CONTENT_LINK,
+                           Utils.getContentLink(targetSpaceFileNode));
           String state;
           try {
-            state = targetSpaceFileNode.hasProperty(Utils.CURRENT_STATE_PROP) ? targetSpaceFileNode.getProperty(Utils.CURRENT_STATE_PROP)
-                                                                                                   .getValue()
-                                                                                                   .getString()
-                                                                             : "";
+            state =
+                  targetSpaceFileNode.hasProperty(Utils.CURRENT_STATE_PROP) ?
+                                                                            targetSpaceFileNode.getProperty(Utils.CURRENT_STATE_PROP)
+                                                                                               .getValue()
+                                                                                               .getString() :
+                                                                            "";
           } catch (Exception e) {
             state = "";
           }
@@ -397,11 +425,15 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
             }
           }
 
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.MIME_TYPE, Utils.getMimeType(originalActivityFileNode));
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.IMAGE_PATH, Utils.getIllustrativeImage(targetSpaceFileNode));
+          concatenateParam(templateParams,
+                           SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.MIME_TYPE,
+                           Utils.getMimeType(originalActivityFileNode));
+          concatenateParam(templateParams,
+                           SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.IMAGE_PATH,
+                           Utils.getIllustrativeImage(targetSpaceFileNode));
           String nodeTitle;
           try {
-            nodeTitle = org.exoplatform.ecm.webui.utils.Utils.getTitle(targetSpaceFileNode);
+            nodeTitle = org.exoplatform.services.wcm.utils.Utils.getTitle(targetSpaceFileNode);
           } catch (Exception e1) {
             nodeTitle = "";
           }
@@ -410,14 +442,16 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
           concatenateParam(templateParams,
                            SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.DOCUMENT_SUMMARY,
                            Utils.getFirstSummaryLines(Utils.getSummary(targetSpaceFileNode), Utils.MAX_SUMMARY_CHAR_COUNT));
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.DOCPATH, targetSpaceFileNode.getPath());
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.LINK_PARAM, "");// to
-                                                                          // check
-                                                                          // if
-                                                                          // necessary
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + UIDocActivity.IS_SYMLINK, "true");
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + DOCPATH, targetSpaceFileNode.getPath());
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + LINK_PARAM, "");// to
+          // check
+          // if
+          // necessary
+          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + IS_SYMLINK, "true");
           concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + "originalFileSize", getSize(originalActivityFileNode));
-          concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + "originalFileDownloadUrl", org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(originalActivityFileNode));
+          concatenateParam(templateParams,
+                           SHARED_TEMPLATE_PARAMS_PREFIX + "originalFileDownloadUrl",
+                           org.exoplatform.services.wcm.utils.Utils.getDownloadRestServiceLink(originalActivityFileNode));
         }
       }
 
@@ -444,7 +478,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       node.removePermission("*:" + space);
       node.save();
     } catch (RepositoryException e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     }
   }
@@ -454,7 +488,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       node.removePermission(user);
       node.save();
     } catch (RepositoryException e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     }
   }
@@ -464,48 +498,52 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
       if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
         if (node.hasNode(NodetypeConstant.JCR_CONTENT))
           return node.getNode(NodetypeConstant.JCR_CONTENT)
-              .getProperty(NodetypeConstant.JCR_MIME_TYPE)
-              .getString();
+                     .getProperty(NodetypeConstant.JCR_MIME_TYPE)
+                     .getString();
       }
     } catch (RepositoryException e) {
-      if(LOG.isErrorEnabled())
+      if (LOG.isErrorEnabled())
         LOG.error(e.getMessage(), e);
     }
     return "";
   }
 
   /**
-   * Grant view for parent folder when share a document
-   * We need grant assess right for parent in case editing the shared documents
+   * Grant view for parent folder when share a document We need grant assess
+   * right for parent in case editing the shared documents
+   * 
    * @param currentNode
    * @param memberShip
    * @param permissions
    * @throws Exception
    */
-  private void setSpacePermission(Node currentNode, String memberShip, String[] permissions) throws Exception{
+  private void setSpacePermission(Node currentNode, String memberShip, String[] permissions) throws Exception {
     ExtendedNode node = (ExtendedNode) currentNode;
     if (node.getACL().getPermissions("*:" + memberShip) == null || node.getACL().getPermissions("*:" + memberShip).size() == 0) {
-      if(node.canAddMixin(MIX_PRIVILEGEABLE))node.addMixin(MIX_PRIVILEGEABLE);
+      if (node.canAddMixin(MIX_PRIVILEGEABLE))
+        node.addMixin(MIX_PRIVILEGEABLE);
       node.setPermission("*:" + memberShip, permissions);
       node.save();
     }
   }
 
   /**
-   * Grant view for parent folder when share a document
-   * We need grant assess right for parent in case editing the shared documents
+   * Grant view for parent folder when share a document We need grant assess
+   * right for parent in case editing the shared documents
+   * 
    * @param currentNode
    * @param username
    * @param permissions
    * @throws Exception
    */
-  private void setUserPermission(Node currentNode, String username, String[] permissions) throws Exception{
+  private void setUserPermission(Node currentNode, String username, String[] permissions) throws Exception {
     ExtendedNode node = (ExtendedNode) currentNode;
-    if(node.canAddMixin(MIX_PRIVILEGEABLE))node.addMixin(MIX_PRIVILEGEABLE);
+    if (node.canAddMixin(MIX_PRIVILEGEABLE))
+      node.addMixin(MIX_PRIVILEGEABLE);
     node.setPermission(username, permissions);
     node.save();
   }
-  
+
   private String[] getParameterValues(Map<String, String> activityParams, String paramName) {
     String[] values = null;
     String value = activityParams.get(paramName);
@@ -530,10 +568,10 @@ public class ShareDocumentService implements IShareDocumentService, Startable{
   private String getSize(Node node) {
     double size = 0;
     try {
-      if (node.hasNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT)) {
-        Node contentNode = node.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT);
-        if (contentNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA)) {
-          size = contentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA).getLength();
+      if (node.hasNode(org.exoplatform.services.wcm.utils.Utils.JCR_CONTENT)) {
+        Node contentNode = node.getNode(org.exoplatform.services.wcm.utils.Utils.JCR_CONTENT);
+        if (contentNode.hasProperty(org.exoplatform.services.wcm.utils.Utils.JCR_DATA)) {
+          size = contentNode.getProperty(org.exoplatform.services.wcm.utils.Utils.JCR_DATA).getLength();
         }
 
         return FileUtils.byteCountToDisplaySize((long) size);

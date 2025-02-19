@@ -159,16 +159,6 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-core-webui-clouddrives</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecm-wcm-extension</artifactId>
         <version>${project.version}</version>
         <type>war</type>
