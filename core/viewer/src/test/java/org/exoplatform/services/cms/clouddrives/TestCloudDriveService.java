@@ -286,6 +286,7 @@ public class TestCloudDriveService extends BaseCloudDriveTest {
 
       // synchronize the whole drive, only cloud files should be on the drive
       drive.synchronize().await();
+      Thread.sleep(1000); // NOSONAR wait files until written and flushed in Disk
 
       // check if both files are in the drive storage
       assertFilesExist(exoDrives.listFiles(cloudUser.getUsername()), "test_to_sync1", "test_to_sync2");
