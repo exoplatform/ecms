@@ -268,7 +268,6 @@
   </external-component-plugins>
    
   <import>classpath:/conf/standalone/wcm/test-dms-actions-configuration.xml</import>
-  <import>classpath:/conf/standalone/wcm/test-templates-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-drives-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/cms-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-scripts-configuration.xml</import>
@@ -276,4 +275,5 @@
   <import>classpath:/conf/standalone/wcm/dms-document-type-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/document-autoversioning.xml</import>
   <import>classpath:/conf/standalone/wcm/test-configuration.xml</import>
+
 </configuration>

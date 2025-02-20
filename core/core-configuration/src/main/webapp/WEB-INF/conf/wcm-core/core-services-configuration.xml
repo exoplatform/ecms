@@ -114,7 +114,7 @@
       <value-param>
         <name>ecms.documents.versioning.drives</name>
         <description>List Drive applied Document Auto Versioning feature</description>
-        <value>${jcr.documents.versioning.drives:Managed Sites,Groups,Personal Documents}</value>
+        <value>${jcr.documents.versioning.drives:Groups,Personal Documents}</value>
       </value-param>
       <value-param>
         <name>ecms.documents.versions.max</name>
