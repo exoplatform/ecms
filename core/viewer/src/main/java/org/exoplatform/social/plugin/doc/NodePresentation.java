@@ -23,7 +23,6 @@ import javax.jcr.Node;
 import org.exoplatform.web.application.Parameter;
 
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh

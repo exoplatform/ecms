@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+  Copyright (C) 2003-2025 eXo Platform SAS.
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Affero General Public License
+  as published by the Free Software Foundation; either version 3
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, see<http://www.gnu.org/licenses/>.
+
+-->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.upgrade.UpgradeProductService</target-component>
+    <component-plugin profiles="layout">
+      <name>ECMSPortletInstanceRemovalUpgrade</name>
+      <set-method>addUpgradePlugin</set-method>
+      <type>io.meeds.layout.plugin.upgrade.LayoutApplicationReferenceUpgradePlugin</type>
+      <init-params>
+        <value-param>
+          <name>product.group.id</name>
+          <description>The groupId of the product</description>
+          <value>org.exoplatform.social</value>
+        </value-param>
+        <value-param>
+          <name>plugin.execution.order</name>
+          <description>The plugin execution order</description>
+          <value>5</value>
+        </value-param>
+        <value-param>
+          <name>plugin.upgrade.execute.once</name>
+          <description>Execute only once, not each version change</description>
+          <value>true</value>
+        </value-param>
+        <object-param>
+          <name>ECMAdminPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>ecmadmin/ECMAdminPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>FileExplorerPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>ecmexplorer/FileExplorerPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>SingleContentViewer</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>presentation/SingleContentViewer</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>EditingPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>presentation/EditingPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>ContentListViewerPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>presentation/ContentListViewerPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>ContentListViewerByQueryPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>presentation/ContentListViewerByQueryPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>WCMAdminToolbarPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>presentation/WCMAdminToolbarPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>WCMAdvanceSearchPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>searches/WCMAdvanceSearchPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>SEOToolbarPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>seo/SEOToolbarPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>
