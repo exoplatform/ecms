@@ -29,7 +29,7 @@ import javax.portlet.RenderResponse;
 import org.exoplatform.ecm.webui.clouddrives.CloudDriveContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.web.application.RequestContext;
 
 /**
  * Created by The eXo Platform SAS
@@ -51,7 +51,7 @@ public class CloudDrivePortlet extends GenericPortlet {
     try {
       // We init core script w/o context workspace and path, this will init
       // global UI enhancements (for Search etc.)
-      CloudDriveContext.init(WebuiRequestContext.getCurrentInstance());
+      CloudDriveContext.init(RequestContext.getCurrentInstance());
     } catch (Exception e) {
       LOG.error("Error processing Cloud Drive portlet for user " + remoteUser, e);
     }

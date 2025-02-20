@@ -16,7 +16,10 @@
  */
 package org.exoplatform.wcm.ext.component.activity.listener;
 
-import javax.jcr.*;
+import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.jcr.PropertyType;
+import javax.jcr.Value;
 
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
@@ -26,7 +29,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.manager.ActivityManager;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
 /**
@@ -111,7 +113,7 @@ public class FileAddPropertyActivityListener extends Listener<Node, String> {
 	      }
 	    }
 	    if(!hit && propertyName.startsWith("dc:") && !propertyName.equals("dc:date")) {
-	    	PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+	    	PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance();
 	    	String dcProperty = propertyName;
 	    	try {
 	    		dcProperty = portletRequestContext.getApplicationResourceBundle().getString("ElementSet.dialog.label." + 

@@ -7,7 +7,6 @@
   import org.exoplatform.services.wcm.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;   
   import org.exoplatform.wcm.webui.reader.ContentReader;
-  import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.application.PortalRequestContext;
   import org.exoplatform.webui.application.portlet.PortletRequestContext;
   import javax.portlet.PortletRequest;
@@ -36,7 +35,7 @@ if (uiParent != null) {
   def rqcontext = _ctx.getRequestContext();
   def maximumPage = uicomponent.getMaximumOfPage();
   
-  PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+  PortalRequestContext portalRequestContext = PortalRequestContext.getCurrentInstance();
   def lang = portalRequestContext.getLocale().getLanguage();
   def jsManager = rqcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "utils")

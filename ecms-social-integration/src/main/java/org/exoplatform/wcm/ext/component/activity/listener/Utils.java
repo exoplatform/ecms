@@ -76,7 +76,7 @@ import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.activity.ContentUIActivity;
 import org.exoplatform.wcm.ext.component.activity.FileUIActivity;
-import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.web.application.RequestContext;
 
 
 
@@ -1005,7 +1005,7 @@ public class Utils {
 
   public static String getBundleValue(String key) {
     try {
-      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+      RequestContext context = RequestContext.getCurrentInstance();
       ResourceBundle res = context.getApplicationResourceBundle();
       String value = res.getString(key);
       return value;

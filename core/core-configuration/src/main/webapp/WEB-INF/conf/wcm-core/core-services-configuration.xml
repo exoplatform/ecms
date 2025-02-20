@@ -5,12 +5,6 @@
         xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd http://www.exoplatform.org/xml/ns/kernel_1_3.xsd"
         xmlns="http://www.exoplatform.org/xml/ns/kernel_1_3.xsd">
 
-
-    <component>
-        <key>org.exoplatform.webui.ext.UIExtensionManager</key>
-        <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
-    </component>
-
     <component>
         <key>org.exoplatform.services.cms.CmsService</key>
         <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>

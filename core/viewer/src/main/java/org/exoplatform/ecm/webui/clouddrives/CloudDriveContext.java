@@ -42,7 +42,6 @@ import org.exoplatform.social.plugin.doc.UIBaseNodePresentation;
 import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIComponent;
 
 /**
@@ -97,8 +96,7 @@ public class CloudDriveContext {
   public static void init(RequestContext requestContext, String workspace, String nodePath) throws CloudDriveException {
     Object obj = requestContext.getAttribute(JAVASCRIPT);
     if (obj == null) {
-      CloudDriveContext context = new CloudDriveContext(requestContext);
-
+      CloudDriveContext context = new CloudDriveContext();
       CloudDriveService service = WCMCoreUtils.getService(CloudDriveService.class);
       // add all providers to let related UI works for already connected and
       // linked files
@@ -210,8 +208,8 @@ public class CloudDriveContext {
    * 
    * @param requestContext {@link RequestContext}
    */
-  private CloudDriveContext(RequestContext requestContext) {
-    JavascriptManager js = ((WebuiRequestContext) requestContext).getJavascriptManager();
+  private CloudDriveContext() {
+    JavascriptManager js = PortalRequestContext.getCurrentInstance().getJavascriptManager();
     this.require = js.require("SHARED/cloudDriveDocuments", "cloudDriveDocuments");
     this.hasContextNode = false;
   }

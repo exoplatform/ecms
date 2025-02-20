@@ -24,9 +24,7 @@ import java.security.AccessControlException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipInputStream;
 
@@ -76,10 +74,6 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.ext.UIExtension;
-import org.exoplatform.webui.ext.UIExtensionManager;
 
 import lombok.SneakyThrows;
 
@@ -719,27 +713,6 @@ public class Utils {
     }
 
     return URLDecoder.decode(name, "UTF-8");
-  }
-
-  /**
-   * Get UIComponent to process render a node which has specified mimeType
-   *
-   * @param mimeType
-   * @param container
-   * @return
-   * @throws Exception
-   */
-  public static UIComponent getUIComponent(String mimeType, UIContainer container) throws Exception {
-    UIExtensionManager manager = WCMCoreUtils.getService(UIExtensionManager.class);
-    List<UIExtension> extensions = manager.getUIExtensions(FILE_VIEWER_EXTENSION_TYPE);
-    Map<String, Object> context = new HashMap<String, Object>();
-    context.put(MIME_TYPE, mimeType.toLowerCase());
-    for (UIExtension extension : extensions) {
-      UIComponent uiComponent = manager.addUIExtension(extension, context, container);
-      if (uiComponent != null)
-        return uiComponent;
-    }
-    return null;
   }
 
   /*
