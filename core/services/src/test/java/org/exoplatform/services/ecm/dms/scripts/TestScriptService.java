@@ -146,11 +146,7 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   public void testGetScript() throws Exception {
     assertNotNull(scriptService.getScript("ecm-explorer/action/AddTaxonomyActionScript.groovy"));
-    try {
-      scriptService.getScript("ecm-explorer/AddTaxonomyActionScript1.groovy");
-      fail();
-    } catch (Exception ex) {
-    }
+    assertNull(scriptService.getScript("ecm-explorer/AddTaxonomyActionScript1.groovy"));
   }
 
   /**

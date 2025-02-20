@@ -105,9 +105,11 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
         }
       }
     }
-    variables.put("actionNode", actionNode);
-    variables.put("repository",WCMCoreUtils.getRepository().getConfiguration().getName()) ;
-    executeAction(userId, script, variables);
+    if (StringUtils.isNotBlank(script)) {
+      variables.put("actionNode", actionNode);
+      variables.put("repository",WCMCoreUtils.getRepository().getConfiguration().getName()) ;
+      executeAction(userId, script, variables);
+    }
   }
 
   private String getDefaultValue(PropertyDefinition proDef) throws Exception {
@@ -141,8 +143,10 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     }
     ScriptService scriptService =  WCMCoreUtils.getService(ScriptService.class);
     CmsScript cmsScript = scriptService.getScript(executable);
-    cmsScript.execute(variables);
-  }  
+    if (cmsScript != null) {
+      cmsScript.execute(variables);
+    }
+  }
 
   public class ScriptActionLauncherListener extends BaseActionLauncherListener {
 

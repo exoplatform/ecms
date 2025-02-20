@@ -169,7 +169,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    * {@inheritDoc}
    */
   public void initRepo() throws Exception {
-    configuredScripts_ = new HashSet<String>();
+    configuredScripts_ = new HashSet<>();
     ManageableRepository mRepository = repositoryService_.getCurrentRepository();
     String scriptsPath = getBasePath();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
@@ -246,9 +246,12 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    * {@inheritDoc}
    */
   @Override
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public synchronized CmsScript getScript(String scriptName) throws Exception {
     CmsScript scriptObject = resourceCache_.get(scriptName);
-    if (scriptObject != null) return scriptObject;
+    if (scriptObject != null) {
+      return scriptObject;
+    }
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     try {
       scriptObject = (CmsScript) container.getComponentInstance(scriptName);
@@ -256,18 +259,19 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
         resourceCache_.put(scriptName, scriptObject) ;
         return scriptObject;
       }
-    } catch (NoClassDefFoundError e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+    } catch (Exception e) {
+      LOG.debug("Script with name {} doesn't exist", scriptName);
     }
 
     groovyClassLoader_ = createGroovyClassLoader();
-    Class scriptClass = groovyClassLoader_.loadClass(scriptName) ;
-    container.registerComponentImplementation(scriptName, scriptClass);
-    scriptObject = (CmsScript) container.getComponentInstance(scriptName);
-    resourceCache_.put(scriptName, scriptObject) ;
-
+    try {
+      Class scriptClass = groovyClassLoader_.loadClass(scriptName);
+      container.registerComponentImplementation(scriptName, scriptClass);
+      scriptObject = (CmsScript) container.getComponentInstance(scriptName);
+      resourceCache_.put(scriptName, scriptObject) ;
+    } catch (Exception e) {
+      LOG.debug("Script with name {} doesn't exist", scriptName);
+    }
     return scriptObject;
   }
 

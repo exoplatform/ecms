@@ -27,22 +27,10 @@
                     <string>eXoWCMResources</string>
                  </value>
                  <value>
-                    <string>ecmexplorer</string>
-                 </value>
-                 <value>
-                    <string>ecmadmin</string>
-                 </value>
-                 <value>
                     <string>ecm-wcm-core</string>
                  </value>
                  <value>
                     <string>ecm-wcm-extension</string>
-                 </value>
-                 <value>
-                    <string>presentation</string>
-                 </value>
-                 <value>
-                    <string>searches</string>
                  </value>
                  <value>
                     <string>editors</string>
@@ -52,12 +40,6 @@
                  </value>
                  <value>
                     <string>transfer-rules</string>
-                 </value>
-                 <value>
-                    <string>authoring-apps</string>
-                 </value>
-                 <value>
-                    <string>seo</string>
                  </value>
                  <value>
                    <string>clouddrives</string>

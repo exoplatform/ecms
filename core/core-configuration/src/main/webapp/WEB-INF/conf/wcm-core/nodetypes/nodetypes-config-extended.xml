@@ -52,12 +52,9 @@
       <supertype>exo:scriptAction</supertype>
     </supertypes>
     <propertyDefinitions>
-      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="false" mandatory="false"
         onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
-        <defaultValues>
-          <defaultValue>ecm-explorer/action/AddToFavorites.groovy</defaultValue>
-        </defaultValues>
       </propertyDefinition>
 	     <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
         onParentVersion="COPY" protected="false" multiple="false">
@@ -155,25 +152,6 @@
       </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
-
-  <!-- >nodeType name="exo:template" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>nt:base</supertype>
-    </supertypes>
-    <propertyDefinitions>
-      <propertyDefinition name="exo:templateFile" requiredType="String" autoCreated="false" mandatory="true"
-        onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints/>
-      </propertyDefinition>
-      <propertyDefinition name="exo:roles" requiredType="String" autoCreated="true" mandatory="true" onParentVersion="COPY"
-        protected="false" multiple="true">
-        <valueConstraints/>
-        <defaultValues>
-          <defaultValue>*</defaultValue>
-        </defaultValues>
-      </propertyDefinition>
-    </propertyDefinitions>
-  </nodeType-->
 
   <nodeType name="exo:resources" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
