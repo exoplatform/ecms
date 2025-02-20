@@ -66,6 +66,10 @@ public class UIDocViewer extends UIBaseNodePresentation {
 
   public String               workspace;
 
+  public UIDocViewer() {
+    setTemplate("war:/groovy/social/plugin/doc/UIDocViewer.gtmpl");
+  }
+
   /**
    * Sets the original node.
    *
@@ -98,19 +102,6 @@ public class UIDocViewer extends UIBaseNodePresentation {
    */
   public void setNode(Node node) {
     originalNode = node;
-  }
-
-  public String getTemplate() {
-    return null;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#
-   * getTemplatePath()
-   */
-  public String getTemplatePath() throws Exception {
-    return getRepository();
   }
 
   public String getNodeType() {

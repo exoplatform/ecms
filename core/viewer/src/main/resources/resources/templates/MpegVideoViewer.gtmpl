@@ -6,8 +6,7 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.services.jcr.RepositoryService;
-  import orgorg.exoplatform.services.wcm.utils.Utils.Utils;
-
+  import org.exoplatform.services.wcm.utils.Utils;
 
 	UIComponent uiParent = uicomponent.getParent();
 

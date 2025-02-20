@@ -6,7 +6,7 @@
 	import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
-  import orgorg.exoplatform.services.wcm.utils.Utils.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   import javax.imageio.ImageIO;
   import javax.imageio.stream.ImageInputStream;
   import javax.imageio.ImageReader;

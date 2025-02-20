@@ -16,7 +16,6 @@
   import org.exoplatform.services.resources.ResourceBundleService;
   import org.exoplatform.commons.utils.CommonsUtils;
 
-  
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
       if(currentNode.getNodes().getSize() > 0) {
@@ -32,14 +31,14 @@
     }
     return currentNode ;
   }
-  
+
   def rcontext = _ctx.getRequestContext();
   rcontext.getJavascriptManager().loadScriptResource("ecm-utils");
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   PDFViewerService pdfViewerService = uicomponent.getApplicationComponent(PDFViewerService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();
   def resizeBlock = "class=\"UIResizableBlock\"";
-  
+
   def originNode = uicomponent.getNode();
   def currentNode = getFileLangNode(originNode) ;
   currentNode = org.exoplatform.services.wcm.utils.Utils.getRealNode(currentNode);
@@ -51,11 +50,11 @@
   unsupportMimeTypeText.add("text/rtf");
   String portalName = uicomponent.getPortalName() ;
   String restContextName = org.exoplatform.services.wcm.utils.Utils.getRestContextName(portalName);
-  
+
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
-  
+
   def openInOfficeConnector = WCMCoreUtils.getService(OpenInOfficeConnector.class);
   def _documentInfos = openInOfficeConnector.getDocumentInfos(currentNode.getName());
   def remoteEditClass=_documentInfos[1];
@@ -106,9 +105,6 @@
 %>
 
 <div $resizeBlock>
-  <style>
-    <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
-  </style>
   <div class="fileContent ">
     <div class="navigationContainer $noPreviewStyle">
       <div class="title clearfix">
@@ -165,41 +161,39 @@
 
 
 <%} else {%>
-
 <div $resizeBlock>
-<style>
-  <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
-</style>
 <div class="fileContent document-preview-content-file">
-    <div class="title clearfix">
-      <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
-       <% if(org.exoplatform.services.wcm.utils.Utils.isDownloadDocumentActivated()) { %>
-        <div class="pull-right"><a class="btn" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a> </div>
-       <%}%>
-    </div>
-    <div class="content uiContentBox">
-        <%
-          if(fileComponent != null) {
-          uicomponent.renderUIComponent(fileComponent);
-          } else {
-        %>
-          <div class="uiUnEditable clearfix">
-            <div class="iconContainer">
-              <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+  <div class="title clearfix">
+    <a href="javascript:eXo.ecm.ECMUtils.closeASPopup();" class="exit-document-preview"><i class="uiIconClose uiIconLightGray"></i></a>
+<% if(org.exoplatform.services.wcm.utils.Utils.isDownloadDocumentActivated()) { %>
+      <div class="pull-right"><a class="btn" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a> </div>
+<% } %>
+  </div>
+  <div class="content uiContentBox">
+<%
+  if(fileComponent != null) {
+    uicomponent.renderUIComponent(fileComponent);
+  } else {
+%>
+    <div class="uiUnEditable clearfix">
+      <div class="iconContainer">
+        <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
         <span class="nameDoc">$title</span>
-            </div>
-            <div class="detailContainer">
-              <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
-                <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>&nbsp;&nbsp;
-                <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
-                    <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
-                    $remoteEditTitle
-                </a>
-            </div>
-          </div>
-        <%}%>
+      </div>
+      <div class="detailContainer">
+        <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+        <a class="btn btn-primary" href="$downloadLink">
+          <i class="uiIconDownload uiIconWhite"></i>
+          <%=_ctx.appRes("File.view.label.download")%>
+        </a>&nbsp;&nbsp;
+        <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
+          <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
+          $remoteEditTitle
+        </a>
+      </div>
     </div>
+<% } %>
+  </div>
 </div>
 </div>
-
 <%}%>

@@ -63,7 +63,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class TrashServiceImpl implements TrashService {
 
   private static final String FILE_EXPLORER_PORTLET = "FileExplorerPortlet";
-  private final static String CACHE_NAME = "ecms.seo";
   final static public String EXO_TOTAL = "exo:total";
   final static public String MIX_REFERENCEABLE = "mix:referenceable";
   final static public String UUID         = "exo:uuid";
@@ -88,7 +87,6 @@ public class TrashServiceImpl implements TrashService {
     this.linkManager = linkManager;
     this.trashWorkspace_ = initParams.getValueParam("trashWorkspace").getValue();
     this.trashHome_ = initParams.getValueParam("trashHomeNodePath").getValue();
-    cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance(CACHE_NAME);
     ExoContainer manager = ExoContainerContext.getCurrentContainer();
     PortletInvoker portletInvoker = (PortletInvoker)manager.getComponentInstance(PortletInvoker.class);
     if (portletInvoker != null) {

@@ -6,7 +6,7 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.services.jcr.RepositoryService;
-  import ororg.exoplatform.services.wcm.utils.Utilss.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.cms.link.LinkManager;
 

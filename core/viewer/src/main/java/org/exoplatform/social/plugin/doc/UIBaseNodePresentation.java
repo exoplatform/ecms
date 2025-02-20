@@ -66,11 +66,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public abstract Node getNode() throws Exception ;
 
   /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getTemplatePath()
-   */
-  public abstract String getTemplatePath() throws Exception ;
-
-  /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getOriginalNode()
    */
   public abstract Node getOriginalNode() throws Exception ;

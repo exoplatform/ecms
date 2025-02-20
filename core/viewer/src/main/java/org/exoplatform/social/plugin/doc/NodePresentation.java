@@ -67,14 +67,6 @@ public interface NodePresentation {
   public String getNodeType() throws Exception;
 
   /**
-   * Gets the template path.
-   *
-   * @return the template path
-   * @throws Exception the exception
-   */
-  public String getTemplatePath() throws Exception;
-
-  /**
    * Gets the relations.
    *
    * @return the relations
