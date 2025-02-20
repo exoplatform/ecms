@@ -31,6 +31,8 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.services.cms.clouddrives.CloudDrive.Command;
 import org.exoplatform.services.cms.clouddrives.exodrive.ExoDriveUser;
 import org.exoplatform.services.cms.clouddrives.exodrive.service.ExoDriveException;
@@ -156,17 +158,14 @@ public class TestCloudDriveService extends BaseCloudDriveTest {
     }
   }
 
+  @Override
   protected void assertFilesExist(List<FileStore> files, String... expectedNames) {
     List<String> names = Arrays.asList(expectedNames);
-    List<String> expected = new ArrayList<String>();
-    for (FileStore f : files) {
-      if (names.contains(f.getName())) {
-        expected.add(f.getName());
-      }
-    }
-
-    if (expected.size() != expectedNames.length) {
-      fail("Expected files not exist: " + expectedNames);
+    List<String> foundFile = files.stream().map(FileStore::getName).filter(names::contains).toList();
+    if (foundFile.size() != names.size()) {
+      fail(String.format("Should fin files %s but found only files %s",
+                         StringUtils.join(names, ", "),
+                         StringUtils.join(foundFile, ", ")));
     }
   }
 
