@@ -60,9 +60,6 @@
     <depends>
       <module>jquery</module>
     </depends>
-    <depends>
-      <module>vueEllipsis</module>
-    </depends>
   </module>
 
   <module>
@@ -76,9 +73,6 @@
     </depends>
     <depends>
       <module>vuetify</module>
-    </depends>
-    <depends>
-      <module>vueEllipsis</module>
     </depends>
     <depends>
       <module>commonVueComponents</module>
@@ -101,6 +95,7 @@
   <portlet>
     <name>AttachmentApp</name>
     <module>
+      <load-group>AttachmentIntegrationGRP</load-group>
       <script>
         <minify>false</minify>
         <path>/js/attachmentApp.bundle.js</path>
@@ -122,9 +117,6 @@
         <module>extensionRegistry</module>
       </depends>
       <depends>
-        <module>documentPreview</module>
-      </depends>
-      <depends>
         <module>commonVueComponents</module>
       </depends>
       <depends>
@@ -138,6 +130,7 @@
 
   <module>
     <name>AttachmentIntegration</name>
+    <load-group>AttachmentIntegrationGRP</load-group>
     <script>
       <minify>false</minify>
       <path>/js/attachmentIntegration.bundle.js</path>
@@ -165,6 +158,7 @@
 
   <module>
     <name>LegacyComposerAttachments</name>
+    <load-group>AttachmentIntegrationGRP</load-group>
     <script>
       <minify>false</minify>
       <path>/js/legacyComposerAttachments.bundle.js</path>

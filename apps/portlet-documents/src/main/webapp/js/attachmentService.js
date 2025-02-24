@@ -487,6 +487,10 @@ export function checkExistence(driveName, workspaceName, currentFolder, fileName
       .then(text => new DOMParser().parseFromString(text, "text/xml"));
 }
 
+export function loadDocumentPreviewModule() {
+  return new Promise(resolve => window.require(['SHARED/documentPreview'], resolve));
+}
+
 export function markAttachmentAsViewed(nodeId, viewer) {
   const formData = new FormData();
   formData.append('viewer', viewer);

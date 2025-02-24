@@ -11,4 +11,3 @@ if (extensionRegistry) {
 }
 
 Vue.use(Vuetify);
-Vue.use(VueEllipsis);
