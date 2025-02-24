@@ -120,7 +120,8 @@ export default {
     fileInfo() {
       return `${this.$t('documents.preview.updatedOn')} ${this.absoluteDateModified()} ${this.$t('documents.preview.updatedBy')} ${this.document.lastEditor} ${this.document.size}`;
     },
-    openPreview() {
+    async openPreview() {
+      await this.$attachmentService.loadDocumentPreviewModule();
       documentPreview.init({
         doc: {
           id: this.document.id,
