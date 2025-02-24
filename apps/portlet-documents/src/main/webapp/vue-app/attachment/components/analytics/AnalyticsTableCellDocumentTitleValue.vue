@@ -80,7 +80,8 @@ export default {
     }
   },
   methods: {
-    openPreview() {
+    async openPreview() {
+      await this.$attachmentService.loadDocumentPreviewModule();
       documentPreview.init({
         doc: {
           id: this.attachment.id,

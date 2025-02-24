@@ -184,11 +184,12 @@ export default {
       }
       this.loading = true;
       this.$attachmentService.getAttachmentById(this.attachment.id)
-        .then(attachment => {
+        .then(async attachment => {
           const updaterFullName = attachment && attachment.updater && attachment.updater.profile && attachment.updater.profile.fullname || '';
           const updateDate = new Date(attachment.updated);
           const updateDateInfo = this.$dateUtil.formatDateObjectToDisplay(updateDate, this.dateFormat);
           const fileInfo = `${this.$t('documents.preview.updatedOn')} ${updateDateInfo} ${this.$t('documents.preview.updatedBy')} ${updaterFullName} ${attachment.size}`;
+          await this.$attachmentService.loadDocumentPreviewModule();
           documentPreview.init({
             doc: {
               id: this.attachment.id,
