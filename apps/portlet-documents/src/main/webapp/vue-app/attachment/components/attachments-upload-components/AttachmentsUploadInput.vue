@@ -282,8 +282,12 @@ export default {
       } else {
         if (file.uploadId) {
           window.setTimeout(() => {
+            if (!file.countFirstProgressError) {
+              file.countFirstProgressError=0;
+            }
             this.$uploadService.getUploadProgress(file.uploadId)
               .then(percent => {
+                delete file.countFirstProgressError;
                 if (this.abortUploading) {
                   return;
                 } else {
@@ -302,9 +306,16 @@ export default {
                   }
                 }
               })
-              .catch(() => {
-                this.removeAttachedFile(file);
-                this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
+              .catch((err) => {
+                if (err.message==='Uploaded resource not found' && file.countFirstProgressError != null && file.countFirstProgressError < 5) {
+                  //if the upload request take more than 200ms to initialize, then the progress request arrives too early.
+                  //In this case, redo the progress, until 5 errors to be sure
+                  file.countFirstProgressError++;
+                  this.controlUpload(file, continueAction);
+                } else {
+                  this.removeAttachedFile(file);
+                  this.$root.$emit('alert-message', this.$t('attachments.link.failed'), 'error');
+                }
               });
           }, 200);
         }
