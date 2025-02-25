@@ -1,6 +1,8 @@
 package org.exoplatform.wcm.addons.rdbms.listener;
 
-import javax.jcr.*;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 import org.exoplatform.services.jcr.ext.ActivityTypeUtils;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -9,15 +11,17 @@ import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
-import org.exoplatform.social.plugin.doc.UIDocActivity;
 import org.exoplatform.wcm.ext.component.activity.listener.Utils;
 
 public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, String> {
-  private static final Log LOG = ExoLogger.getLogger(WCMActivityUpdaterListener.class);
-  public static final String LINK_ACTIVITY_TYPE     = "LINK_ACTIVITY";
 
-  public WCMActivityUpdaterListener() {
-  }
+  private static final Log    LOG                = ExoLogger.getLogger(WCMActivityUpdaterListener.class);
+
+  public static final String  LINK_ACTIVITY_TYPE = "LINK_ACTIVITY";
+
+  private static final String WORKSPACE          = "WORKSPACE";
+
+  private static final String ID                 = "id";
 
   @Override
   public void onEvent(Event<ExoSocialActivity, String> event) throws Exception {
@@ -47,7 +51,8 @@ public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, Stri
   private void migrationFileSpaceActivity(ExoSocialActivity activity, String newId) throws RepositoryException {
     if (activity.isComment()) {
       // TODO: Needs to confirm with ECMS team about the comment type
-      // Utils.CONTENT_SPACES = "contents:spaces" Asks ECMS team to update the comment
+      // Utils.CONTENT_SPACES = "contents:spaces" Asks ECMS team to update the
+      // comment
       // There is new mixin type define to keep the CommentId
       // private static String MIX_COMMENT = "exo:activityComment";
       // private static String MIX_COMMENT_ID = "exo:activityCommentID";
@@ -62,11 +67,11 @@ public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, Stri
   }
 
   private void migrationDoc(ExoSocialActivity activity, String newId) throws RepositoryException {
-    String workspace = activity.getTemplateParams().get(UIDocActivity.WORKSPACE);
-    if(workspace == null) {
-      workspace = activity.getTemplateParams().get(UIDocActivity.WORKSPACE.toLowerCase());
+    String workspace = activity.getTemplateParams().get(WORKSPACE);
+    if (workspace == null) {
+      workspace = activity.getTemplateParams().get(WORKSPACE.toLowerCase());
     }
-    String docId = activity.getTemplateParams().get(UIDocActivity.ID);
+    String docId = activity.getTemplateParams().get(ID);
     Node docNode = getDocNode(workspace, activity.getUrl(), docId);
     if (docNode != null && docNode.isNodeType(ActivityTypeUtils.EXO_ACTIVITY_INFO)) {
       LOG.info("Migration doc: " + docNode.getPath());
@@ -78,7 +83,9 @@ public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, Stri
         LOG.debug("Updates the file-spaces activity is unsuccessful!", e);
       }
     } else {
-      LOG.info(String.format("Missing document's path/Id on template-parameters. Do not migrate this file-spaces activity width old id %s - new id %s" , activity.getId(), newId));
+      LOG.info(String.format("Missing document's path/Id on template-parameters. Do not migrate this file-spaces activity width old id %s - new id %s",
+                             activity.getId(),
+                             newId));
     }
   }
 
@@ -95,7 +102,8 @@ public class WCMActivityUpdaterListener extends Listener<ExoSocialActivity, Stri
       return null;
     }
     try {
-      Session session = SessionProviderService.getSystemSessionProvider().getSession(workspace, SessionProviderService.getRepository());
+      Session session = SessionProviderService.getSystemSessionProvider()
+                                              .getSession(workspace, SessionProviderService.getRepository());
       try {
         return session.getNodeByUUID(nodeId);
       } catch (Exception e) {

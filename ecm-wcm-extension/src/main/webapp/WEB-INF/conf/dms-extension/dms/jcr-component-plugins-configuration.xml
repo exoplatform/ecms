@@ -46,16 +46,6 @@
 	        <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
 	          <field  name="actions">
 	            <collection type="java.util.ArrayList">
-                  <!-- Uncomment this tag if you wish to enable audit in the entire workspace by default.
-                  <value>
-                    <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                      <field  name="eventTypes"><string>addNode</string></field>
-                      <field name="path"><string>/</string></field>
-                      <field  name="isDeep"><boolean>true</boolean></field>
-                      <field name="actionClassName"><string>org.exoplatform.services.jcr.ext.audit.AddAuditableAction</string></field>
-                   </object>
-                  </value>
-                  -->
                 <value>
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field name="eventTypes">

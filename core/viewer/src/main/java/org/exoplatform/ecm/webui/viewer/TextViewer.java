@@ -41,9 +41,6 @@ public class TextViewer extends UIComponent {
   private String sharedResourcesBundleNames[];
   private ResourceBundle sharedResourceBundle=null;
 
-  public TextViewer() throws Exception {
-  }
-
   public String getResource(String key) {
     try {
       Locale locale = Util.getPortalRequestContext().getLocale();

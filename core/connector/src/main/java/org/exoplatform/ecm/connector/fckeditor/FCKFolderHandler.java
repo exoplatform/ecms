@@ -26,11 +26,10 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 /**
  * Created by The eXo Platform SAS
@@ -38,12 +37,10 @@ import org.w3c.dom.Element;
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class FCKFolderHandler {
-  private TemplateService templateService;
 
   private FCKMessage      fckMessage;
 
-  public FCKFolderHandler(ExoContainer container) {
-    templateService = WCMCoreUtils.getService(TemplateService.class);
+  public FCKFolderHandler() {
     fckMessage = new FCKMessage();
   }
 
@@ -51,7 +48,7 @@ public class FCKFolderHandler {
     // need use a service to get extended folder type for the node
     NodeType nodeType = node.getPrimaryNodeType();
     String primaryType = nodeType.getName();
-    if (templateService.getDocumentTemplates().contains(primaryType))
+    if (NodetypeConstant.NT_FILE.equals(primaryType))
       return null;
     if (FCKUtils.NT_UNSTRUCTURED.equals(primaryType) || FCKUtils.NT_FOLDER.equals(primaryType))
       return primaryType;

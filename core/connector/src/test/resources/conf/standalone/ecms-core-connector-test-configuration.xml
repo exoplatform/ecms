@@ -21,11 +21,7 @@
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>
-  
-  <component>
-    <type>org.exoplatform.wcm.connector.fckeditor.PortalLinkConnector</type>
-  </component>
-   
+
   <component>
     <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
     <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
@@ -53,11 +49,7 @@
   <component>
      <type>org.exoplatform.wcm.connector.viewer.PDFViewerRESTService</type>
   </component>
-  
-  <component>
-    <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
-  </component>
-  
+
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService</type>
   </component>
@@ -345,11 +337,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.cms.templates.TemplateService</key>
-    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>
-  </component>
-
-  <component>
     <type>org.exoplatform.groovyscript.text.TemplateService</type>
   </component>
 
@@ -466,109 +453,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
-    <component-plugin>
-      <name>Content Initializer Service</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
-      <description>XML Deployment Plugin</description>
-      <init-params>
-        <value-param>
-          <name>siteName</name>
-          <description>name of site in which artifact is deployed</description>
-          <value>classic</value>
-        </value-param>      
-        <value-param>
-          <name>override</name>
-          <description>indicates if this plugin will override data over legacy data, default value:false</description>
-          <value>false</value>
-        </value-param>      
-        
-        <object-param>
-          <name>Pdf Document content</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>classpath:/conf/wcm/deployment/DocPdf.xml</string>
-            </field>
-          </object>
-        </object-param>
-        
-        <object-param>
-          <name>Jpg Document content</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>classpath:/conf/wcm/deployment/DocJpg.xml</string>
-            </field>
-          </object>
-        </object-param>
-        
-        <object-param>
-          <name>Jpg Document content with special chars in name</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>classpath:/conf/wcm/deployment/DocJpgSpeciaChar.xml</string>
-            </field>
-          </object>
-        </object-param>
 
-        <object-param>
-          <name>Word document content</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>classpath:/conf/wcm/deployment/DocWord.xml</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>
     <component-plugin>

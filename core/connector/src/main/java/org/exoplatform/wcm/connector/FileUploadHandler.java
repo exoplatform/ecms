@@ -60,7 +60,6 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -71,7 +70,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
@@ -597,8 +595,6 @@ public class FileUploadHandler {
       //parent.save();
       uploadService.removeUploadResource(uploadId);
       uploadIdTimeMap.remove(uploadId);
-      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-      wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
      
       if (activityService.isBroadcastNTFileEvents(file) && !CREATE_VERSION.equals(existenceAction)) {
         listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
@@ -724,12 +720,11 @@ public class FileUploadHandler {
       return "repository";
     }
   }
-  
+
   public boolean isDocumentNodeType(Node node) throws Exception {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
+    return NodetypeConstant.NT_FILE.equals(node.getPrimaryNodeType().getName());
   }
-  
+
   /**
    * increase the file name (not extension).
    * @param origin the original name

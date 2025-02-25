@@ -1,5 +1,4 @@
-<%
-	import java.util.List;
+<%import java.util.List;
 	import java.util.ArrayList;
 	import javax.jcr.Node;
 	import javax.jcr.NodeIterator;
@@ -7,7 +6,7 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.services.jcr.RepositoryService;
-  import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   import org.apache.commons.lang3.StringUtils;
   import javax.jcr.PathNotFoundException;
 
@@ -53,9 +52,7 @@
   }
   
   if(StringUtils.isEmpty(width)) width = "640";
-  if(StringUtils.isEmpty(height)) height = "400";
-
-%>
+  if(StringUtils.isEmpty(height)) height = "400";%>
 
 <!-- ############################ FLASH ########################################## -->
 <div class="FlashViewer"><embed width="$width" height="$height" allowscriptaccess="always" wmode="opaque" quality="high" bgcolor="#ffffff" name="$originalNode.name" id="$originalNode.name" src="$binarySrc" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"/></div>

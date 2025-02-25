@@ -11,10 +11,10 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.JavascriptManager;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 public class EditorsAdminPortlet extends GenericPortlet {
 
@@ -48,7 +48,7 @@ public class EditorsAdminPortlet extends GenericPortlet {
                                                .append("\"}}")
                                                .toString();
 
-      JavascriptManager js = ((WebuiRequestContext) WebuiRequestContext.getCurrentInstance()).getJavascriptManager();
+      JavascriptManager js = PortalRequestContext.getCurrentInstance().getJavascriptManager();
       js.require("SHARED/editorsadmin", "editorsadmin").addScripts("editorsadmin.init(" + settingsJson + ");");
     } catch (Exception e) {
       LOG.error("Error processing editors admin portlet for user " + request.getRemoteUser(), e);

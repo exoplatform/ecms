@@ -1,5 +1,4 @@
-<%
-	import java.util.List;
+<%import java.util.List;
 	import java.util.ArrayList;
 	import javax.jcr.Node;
 	import javax.jcr.NodeIterator;
@@ -7,7 +6,7 @@
 	import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
-  import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   import javax.imageio.ImageIO;
   import javax.imageio.stream.ImageInputStream;
   import javax.imageio.ImageReader;
@@ -91,8 +90,7 @@
   	  imageWidth = 450;
   	}
     	
-  } catch (Exception e) {}
-%>
+  } catch (Exception e) {}%>
 
   <div style="text-align:center; overflow:auto;">
     <a rel="tooltip" data-placement="bottom" data-original-title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><img src="$binarySrc" height="$imageHeight" width="$imageWidth"/></a>

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupportedException;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * The Interface DocumentMetadataPlugin is used to add metadata to the documents.

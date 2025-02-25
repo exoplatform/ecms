@@ -1344,20 +1344,6 @@
 		}
 	};
 
-	ECMUtils.prototype.loadTab = function() {
-		gj('.uiECMAdminPortlet a[data-toggle="tab"]').on('show', function (e) {
-		  var target = e.target;
-		  var parent = gj(target).parent();
-		  var tabClass = "collapsed";
-		  if(gj(parent).hasClass("collapsed")) tabClass = "expaned";
-		  
-		  gj('.uiECMAdminPortlet div[data-toggle="collapse"]').each(function(i,el) {
-		    gj(el).attr("class","accordion-toggle collapsed");      
-		  });
-		  gj(parent).addClass(tabClass);
-		})  
-	};
-
 	ECMUtils.prototype.setSelecteddItem = function(el) {
 		gj('.accordion a[class="functionItem selected"]').each(function(i,e) {
 		    gj(e).removeClass('selected');      

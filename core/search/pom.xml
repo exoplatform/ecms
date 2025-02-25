@@ -9,7 +9,7 @@
   <artifactId>ecms-core-search</artifactId>
   <name>eXo PLF:: WCM Search Service</name>
   <properties>
-    <exo.test.coverage.ratio>0.37</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0.31</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>
@@ -33,10 +33,6 @@
     <dependency>
       <groupId>io.meeds.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-publication</artifactId>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>

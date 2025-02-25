@@ -23,7 +23,7 @@
 */
 %>
 <%
-import org.exoplatform.ecm.webui.utils.Utils; 
+import org.exoplatform.services.wcm.utils.Utils; 
 import org.exoplatform.services.cms.clouddrives.CloudDrive
 import org.exoplatform.wcm.webui.reader.ContentReader
 

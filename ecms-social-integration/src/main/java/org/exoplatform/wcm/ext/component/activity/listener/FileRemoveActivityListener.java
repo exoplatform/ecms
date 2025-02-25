@@ -27,9 +27,6 @@ import org.exoplatform.services.listener.Listener;
  */
 public class FileRemoveActivityListener extends Listener<Object, Node> {
 
-  public FileRemoveActivityListener() {
-  }
-
   @Override
   public void onEvent(Event<Object, Node> event) throws Exception {
     Node currentNode = event.getData();

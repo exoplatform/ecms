@@ -31,6 +31,4 @@ import org.exoplatform.webui.core.UIComponent;
 )
 public class ImageViewer extends UIComponent {
 
-  public ImageViewer() throws Exception {
-  }
 }

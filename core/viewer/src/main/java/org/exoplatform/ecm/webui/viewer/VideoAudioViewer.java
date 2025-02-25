@@ -48,11 +48,8 @@ public class VideoAudioViewer extends UIComponent {
 
   private String repository;
 
-  public VideoAudioViewer() throws Exception {
-  }
-
   public List<Node> getPresentNodes() {
-    List<Node> result = new ArrayList<Node>();
+    List<Node> result = new ArrayList<>();
     result.addAll(NodeLocation.getNodeListByLocationList(presentNodes));
     return result;
   }

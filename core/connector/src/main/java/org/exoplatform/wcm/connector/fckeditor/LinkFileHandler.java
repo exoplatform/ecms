@@ -18,7 +18,6 @@ package org.exoplatform.wcm.connector.fckeditor;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.connector.fckeditor.FCKFileHandler;
 
 /*
@@ -28,13 +27,6 @@ import org.exoplatform.ecm.connector.fckeditor.FCKFileHandler;
  * Sep 12, 2008
  */
 public class LinkFileHandler extends FCKFileHandler {
-
-  /**
-   * Instantiates a new link file handler.
-   */
-  public LinkFileHandler() {
-    super(ExoContainerContext.getCurrentContainer());
-  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.connector.fckeditor.FCKFileHandler#getFileURL(javax.jcr.Node)

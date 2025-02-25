@@ -25,48 +25,27 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
-import org.exoplatform.services.cms.clipboard.TestClipboardService;
-import org.exoplatform.services.cms.documents.TestCustomizeViewService;
 import org.exoplatform.services.cms.documents.TestDocumentService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
-import org.exoplatform.services.deployment.TestWCMContentInitializerService;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
-import org.exoplatform.services.ecm.dms.comment.TestCommentService;
 import org.exoplatform.services.ecm.dms.configuration.TestDMSConfigurationService;
 import org.exoplatform.services.ecm.dms.documents.TestFavoriteService;
 import org.exoplatform.services.ecm.dms.documents.TestTrashService;
 import org.exoplatform.services.ecm.dms.drive.TestDriveService;
-import org.exoplatform.services.ecm.dms.folksonomy.TestNewFolksonomyService;
-import org.exoplatform.services.ecm.dms.i18n.TestMultiLanguageService;
 import org.exoplatform.services.ecm.dms.link.TestLinkManager;
-import org.exoplatform.services.ecm.dms.metadata.TestMetadataService;
-import org.exoplatform.services.ecm.dms.queries.TestQueryService;
 import org.exoplatform.services.ecm.dms.relation.TestRelationsService;
 import org.exoplatform.services.ecm.dms.scripts.TestScriptService;
-import org.exoplatform.services.ecm.dms.taxonomy.TestTaxonomyService;
-import org.exoplatform.services.ecm.dms.template.TestTemplateService;
 import org.exoplatform.services.ecm.dms.test.LinkUtilsTest;
 import org.exoplatform.services.ecm.dms.test.TestSymLink;
 import org.exoplatform.services.ecm.dms.thumbnail.TestThumbnailService;
-import org.exoplatform.services.ecm.dms.timeline.TestTimelineService;
-import org.exoplatform.services.ecm.dms.view.TestApplicationTemplateManagerService;
-import org.exoplatform.services.ecm.dms.view.TestManageViewService;
-import org.exoplatform.services.ecm.dms.voting.TestVotingService;
-import org.exoplatform.services.ecm.dms.watchdocument.TestWatchDocumentService;
 import org.exoplatform.services.pdfviewer.TestPDFViewerService;
-import org.exoplatform.services.portletcache.TestFragmentCacheService;
-import org.exoplatform.services.portletcache.TestPortletFutureCache;
 import org.exoplatform.services.rest.AttachmentsRestServiceTest;
 import org.exoplatform.services.rest.TestDocumentsAppRedirectService;
-import org.exoplatform.services.seo.TestSEOService;
 import org.exoplatform.services.wcm.core.TestWCMConfigurationService;
 import org.exoplatform.services.wcm.core.TestWCMService;
-import org.exoplatform.services.wcm.core.TestWebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.TestFriendlyService;
-import org.exoplatform.services.wcm.javascript.TestXJavaScriptService;
-import org.exoplatform.services.wcm.portal.artifacts.TestCreatePortalArtifactsService;
 
 /**
  * Created by The eXo Platform SAS
@@ -75,50 +54,26 @@ import org.exoplatform.services.wcm.portal.artifacts.TestCreatePortalArtifactsSe
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-  TestWCMContentInitializerService.class,
-  TestXJavaScriptService.class,
   TestWCMService.class,
-  TestWebSchemaConfigService.class,
-        /**  To be activated later
-  TestLiveLinkManagerService.class,
-         /** END**/
   TestWCMConfigurationService.class,
   TestFriendlyService.class,
-  TestCreatePortalArtifactsService.class,
-  TestFragmentCacheService.class,
-  TestPortletFutureCache.class,
   TestDocumentTypeService.class,
   TestLockService.class,
   TestTrashService.class,
   TestFavoriteService.class,
-  TestNewFolksonomyService.class,
   TestRelationsService.class,
   TestDriveService.class,
-  TestTimelineService.class,
-  TestMultiLanguageService.class,
-  TestWatchDocumentService.class,
-  TestTemplateService.class,
   TestScriptService.class,
-  TestVotingService.class,
   TestCmsService.class,
-  TestManageViewService.class,
-  TestApplicationTemplateManagerService.class,
-  TestCommentService.class,
-  TestMetadataService.class,
-  TestQueryService.class,
   TestLinkManager.class,
-  TestTaxonomyService.class,
   LinkUtilsTest.class,
   TestSymLink.class,
   TestDMSConfigurationService.class,
   TestThumbnailService.class,
-  TestSEOService.class,
-  TestClipboardService.class,
   TestPDFViewerService.class,
   AttachmentsRestServiceTest.class,
   TestDocumentsAppRedirectService.class,
   TestDocumentService.class,
-  TestCustomizeViewService.class,
   AttachmentServiceTest.class,
   DocumentServiceImplTest.class
 })

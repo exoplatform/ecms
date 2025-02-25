@@ -5,22 +5,6 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-  
-  <component>
-    <key>org.exoplatform.services.ecm.publication.PublicationService</key>
-    <type>org.exoplatform.services.ecm.publication.impl.PublicationServiceImpl</type>    
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.ecm.publication.PublicationPresentationService</key>
-    <type>org.exoplatform.services.ecm.publication.impl.PublicationPresentationServiceImpl</type>
-  </component> 
-	
- <component>
-    <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
-    <type>org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl</type>
-  </component>
-	
    <external-component-plugins>
   	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
 		<component-plugin>

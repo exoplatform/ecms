@@ -32,69 +32,6 @@
     <css-priority>10</css-priority>
   </portal-skin>
 
-  <!-- ECMAdminPortlet skin -->
-  <portlet-skin>
-    <application-name>ecmadmin</application-name>
-    <portlet-name>ECMAdminPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/administration/ecms-administration.css</css-path>
-  </portlet-skin>
-
-  <!-- FileExplorerPortlet skin -->
-  <portlet-skin>
-    <application-name>ecmexplorer</application-name>
-    <portlet-name>FileExplorerPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/explorer/ecms-explorer.css</css-path>
-  </portlet-skin>
-
-  <!-- SingleContentViewer skins -->
-  <portlet-skin>
-    <application-name>searches</application-name>
-    <portlet-name>WCMAdvanceSearchPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/search/ecms-search.css</css-path>
-  </portlet-skin>
-
-  <!-- FastContentCreatorPortlet skins -->
-  <portlet-skin>
-    <application-name>fastcontentcreator</application-name>
-    <portlet-name>FastContentCreatorPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/fastcontentcreator/fast-content-creator.css</css-path>
-  </portlet-skin>
-
-  <!-- FastContentCreatorBasicPortlet skins -->
-  <portlet-skin>
-    <application-name>fastcontentcreator</application-name>
-    <portlet-name>FastContentCreatorBasicPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/fastcontentcreator/fast-content-creator.css</css-path>
-  </portlet-skin>
-
-  <!-- FastContentCreatorPortletStandard skins -->
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>SingleContentViewer</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/presentation/ecms-presentation-singlecontentviewer.css</css-path>
-  </portlet-skin>
-
-  <!-- ContentListViewerPortlet skins -->
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>ContentListViewerPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/presentation/ecms-presentation-contentlistviewerportlet.css</css-path>
-  </portlet-skin>
-
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/presentation/ecms-presentation-contentlistviewerportlet.css</css-path>
-  </portlet-skin>
-
   <!-- EditorsAdminPortlet skins -->
   <portlet-skin>
     <application-name>editors</application-name>
@@ -184,22 +121,7 @@
       <module>wcm_bts_typeahead</module>
     </depends>
   </module>
-  
-  <module>
-    <name>content-selector</name>
-    <as>content_selector</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/private/ContentSelector.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>wcm-utils</module>
-    </depends>
-  </module>
-  
+
   <module>
     <name>wcm-utils</name>
     <as>wcm_utils</as>
@@ -217,78 +139,7 @@
       <module>bts_popover</module>
     </depends>
   </module>
-  
-  <module>
-    <name>wcm-webui-extension</name>
-    <as>wcm_webui_ext</as>
-    <script>
-      <path>/javascript/eXo/wcm/backoffice/private/CloseEvents.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>uiForm</module>
-    </depends>
-  </module>
-  
-  <module>
-    <name>clv</name>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/private/CLV.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-  </module>
-  
-  <module>
-    <name>quick-edit</name>
-    <as>quick_edit</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/private/InlineEditing.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-  </module>
-  
-  <module>
-    <name>ui-vertical-slide-tabs</name>
-    <as>ui_vertical_slide_tabs</as>
-    <script>
-      <path>/javascript/eXo/wcm/backoffice/private/UIVerticalSlideTabs.js</path>
-    </script>
-    <depends>
-      <module>base</module>
-    </depends>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-  </module>
 
-  <module>
-    <name>wcm-search</name>
-    <as>wcm_search</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/public/Search.js</path>
-    </script>
-    <depends>
-      <module>ecm-bootstrap</module>
-    </depends>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>uiForm</module>
-    </depends>
-  </module>
-  
   <module>
     <name>flowplayer</name>
     <script>
@@ -309,28 +160,6 @@
     <depends>
       <module>jquery</module>
       <as>gj</as>
-    </depends>
-  </module>
-
-  <module>
-    <name>share-content</name>
-    <as>share_c</as>
-    <script>
-      <path>/javascript/eXo/wcm/frontoffice/public/ShareContent.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>socialUtil</module>
-    </depends>
-    <depends>
-      <module>mentionsPlugin</module>
-    </depends>
-    <depends>
-      <module>mentionsLib</module>
-      <as>mentions</as>
     </depends>
   </module>
 
@@ -424,17 +253,6 @@
     </depends>
     <depends>
       <module>webui-ext</module>
-    </depends>
-  </module>
-
-  <module>
-    <name>ecm-browser</name>
-    <as>ecm_browser</as>
-    <script>
-      <path>/javascript/eXo/ecm/ECMBrowser.js</path>
-    </script>
-    <depends>
-      <module>ecm-bootstrap</module>
     </depends>
   </module>
 
@@ -571,6 +389,5 @@
       <module>portalRequest</module>
     </depends> 
   </module>
-
 
 </gatein-resources>

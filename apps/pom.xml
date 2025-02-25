@@ -11,12 +11,7 @@
   <name>eXo PLF:: ECM Suite :: Apps</name>
   <description>eXo Entreprise Content Management Suite :: Applications</description>
   <modules>
-    <module>portlet-administration</module>
-    <module>portlet-explorer</module>
-    <module>portlet-presentation</module>
-    <module>portlet-search</module>
     <module>resources-wcm</module>
-    <module>portlet-seo</module>
     <module>portlet-editors</module>
     <module>portlet-documents</module>
     <module>portlet-clouddrives</module>

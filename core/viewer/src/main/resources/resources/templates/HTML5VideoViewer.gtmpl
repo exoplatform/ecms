@@ -1,5 +1,4 @@
-<%
-	import java.util.List;
+<%import java.util.List;
 	import java.util.ArrayList;
 	import javax.jcr.Node;
 	import javax.jcr.NodeIterator;
@@ -7,7 +6,7 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.services.jcr.RepositoryService;
-  import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.wcm.utils.Utils;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.cms.link.LinkManager;
 
@@ -42,8 +41,7 @@
   String repository = rService.getCurrentRepository().getConfiguration().getName();
   def binarySrc = Utils.getWebdavURL(currentNode);
   // force retrieving an image for video thumbnail
-  binarySrc += "#t=0.001";
-%>
+  binarySrc += "#t=0.001";%>
 
   <video src="$binarySrc" controls="controls" class="videoContent">
   your browser does not support the video tag

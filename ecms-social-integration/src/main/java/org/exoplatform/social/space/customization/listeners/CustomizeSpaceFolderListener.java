@@ -10,7 +10,7 @@ public class CustomizeSpaceFolderListener extends SpaceListenerPlugin {
 
   private SpaceCustomizationService spaceCustomizationService;
 
-  private static final Log          LOG                         = ExoLogger.getExoLogger(CustomizeSpaceDriveListener.class);
+  private static final Log          LOG = ExoLogger.getExoLogger(CustomizeSpaceFolderListener.class);
 
   public CustomizeSpaceFolderListener(SpaceCustomizationService spaceCustomizationService) {
     this.spaceCustomizationService = spaceCustomizationService;

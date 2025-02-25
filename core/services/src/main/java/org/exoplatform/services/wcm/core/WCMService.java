@@ -47,35 +47,4 @@ public interface WCMService {
                                    String workspace,
                                    String nodeIdentifier) throws Exception;  
 
-  /**
-   * This method checks if the given portal is the default shared portal.
-   *
-   * @param portalName the portal name
-   * @param sessionProvider the session provider
-   *
-   * @return true if portal is shared portal
-   *
-   * @throws Exception the exception
-   */
-  public boolean isSharedPortal(SessionProvider sessionProvider, String portalName) throws Exception ;
-
-
-  /**
-   * Sets the expiration time in seconds for WCM portlets.
-   * <P>
-   * If the expiration value is set to <code>0</code>, caching is disabled for these
-   * portlet; if the value is set to <code>-1</code>, the cache does not expire.
-   * <p>
-   */
-  public void setPortletExpirationCache(int expirationCache) throws Exception ;
-
-  /**
-   * Gets the expiration time in seconds for WCM portlets.
-   * <P>
-   * If the expiration value is set to <code>0</code>, caching is disabled for these
-   * portlet; if the value is set to <code>-1</code>, the cache does not expire.
-   * <p>
-   */
-  public int getPortletExpirationCache() throws Exception ;
-
 }

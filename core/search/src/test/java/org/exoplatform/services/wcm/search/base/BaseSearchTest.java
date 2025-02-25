@@ -23,8 +23,6 @@ import org.exoplatform.component.test.*;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.search.*;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -43,10 +41,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 })
 public class BaseSearchTest extends BaseECMSTestCase {
   
-  protected QueryCriteria queryCriteria = new QueryCriteria();
-  protected SiteSearchService siteSearchService;
-  protected WCMPublicationService wcmPublicationService;
-  protected WebpagePublicationPlugin publicationPlugin ;
   protected UserPortalConfigService userPortalConfigService;
   protected final String searchKeyword = "This is";
   protected final String duplicationSearchKeyword = "duplication searchKey";
@@ -56,14 +50,9 @@ public class BaseSearchTest extends BaseECMSTestCase {
 
   public void setUp() throws Exception {
     super.setUp();
-    siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
     userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
 
-    publicationPlugin = new DumpPublicationPlugin();
-    publicationPlugin.setName(DumpPublicationPlugin.LIFECYCLE_NAME);
-    wcmPublicationService.addPublicationPlugin(publicationPlugin);
     applySystemSession();
     addDocuments();
     numberOfRunTests++;

@@ -29,13 +29,13 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+
 import org.picocontainer.Startable;
 
 /**
@@ -73,8 +73,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
 
   private RepositoryService   repositoryService_;
 
-  private TemplateService     templateService_;
-
   private InitParams          params_;
 
   private static final String OPEN_DESKTOP_PROVIDER_REGEX="^exo.remote-edit\\.([a-z]+)$";
@@ -104,10 +102,8 @@ public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
   }
 
   public DocumentTypeServiceImpl(RepositoryService repoService,
-                                 InitParams initParams,
-                                 TemplateService templateService) {
+                                 InitParams initParams) {
     repositoryService_ = repoService;
-    templateService_ = templateService;
     params_ = initParams;
   }
 
@@ -274,7 +270,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService, Startable {
   }
 
   private String buildQueryByContentsType(String userName) throws PathNotFoundException, RepositoryException {
-    List<String> contentsType = templateService_.getAllDocumentNodeTypes();
+    List<String> contentsType = Collections.singletonList(NodetypeConstant.NT_FILE);
     StringBuilder constraint = new StringBuilder();
     if (userName == null) {
       for (String contentType : contentsType) {

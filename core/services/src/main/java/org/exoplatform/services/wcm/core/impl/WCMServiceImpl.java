@@ -20,11 +20,8 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.management.annotations.Managed;
 import org.exoplatform.management.annotations.ManagedDescription;
-import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.management.jmx.annotations.NameTemplate;
 import org.exoplatform.management.jmx.annotations.Property;
 import org.exoplatform.management.rest.annotations.RESTEndpoint;
@@ -32,7 +29,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.WCMService;
-import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -48,13 +44,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 @ManagedDescription("WCM Service")
 @RESTEndpoint(path = "wcmservice")
 public class WCMServiceImpl implements WCMService {
-  int expirationCache;
-
-  public WCMServiceImpl(InitParams initParams) throws Exception {
-    PropertiesParam propertiesParam = initParams.getPropertiesParam("server.config");
-    String expirationCache = propertiesParam.getProperty("expirationCache");
-    this.setPortletExpirationCache(new Integer(expirationCache));
-  }
 
   /*
    * (non-Javadoc)
@@ -81,33 +70,6 @@ public class WCMServiceImpl implements WCMService {
       }
     }
     return content;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.core.WCMService#isSharedPortal(java.lang.String
-   * , org.exoplatform.services.jcr.ext.common.SessionProvider)
-   */
-  public boolean isSharedPortal(SessionProvider sessionProvider, String portalName) throws Exception {
-    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-    boolean isShared = false;
-    Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-    isShared = sharedPortal.getName().equals(portalName);
-    return isShared;
-  }
-
-  @Managed
-  @ManagedDescription("Sets the WCM Portlet Expiration cache (in seconds) ?")
-  public void setPortletExpirationCache(@ManagedDescription("Change the WCM Portlet Expiration cache")
-                                        @ManagedName("expirationCache") int expirationCache) throws Exception {
-    this.expirationCache = expirationCache;
-  }
-
-  @Managed
-  @ManagedDescription("What is the WCM Portlet Expiration cache (in seconds) ?")
-  public int getPortletExpirationCache() throws Exception {
-    return this.expirationCache;
   }
 
 }

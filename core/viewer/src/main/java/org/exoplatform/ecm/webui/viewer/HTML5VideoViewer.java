@@ -30,7 +30,4 @@ import org.exoplatform.webui.core.UIComponent;
     template = "classpath:resources/templates/HTML5VideoViewer.gtmpl"
 )
 public class HTML5VideoViewer extends UIComponent {
-
-  public HTML5VideoViewer() throws Exception {
-  }
 }

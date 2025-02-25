@@ -21,8 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import org.exoplatform.webui.application.WebuiRequestContext;
-
 /**
  * The Interface DocumentEditor.
  */
@@ -73,22 +71,6 @@ public interface DocumentEditor {
    * @return the editor setting
    */
   <T> T initPreview(String fileId, String workspace, URI requestURI, Locale locale);
-  
-  
-  /**
-   * This handler is invoked when the file in the Explorer is rendered.
-   * It allows to run custom server-side initialization while the explorer is being rendered.
-   * Returns object with editor settings, that will be converted to JSON and passed to initExplorer
-   * method in provider's JS module.
-   *
-   * @param <T> the generic type
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @param context the context
-   * @return the t
-   */
-  <T> T initExplorer(String fileId, String workspace, WebuiRequestContext context);
-  
   
   /**
    * Checks if is document supported.

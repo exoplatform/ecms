@@ -23,7 +23,6 @@ import org.exoplatform.services.cms.documents.exception.DocumentExtensionNotSupp
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * The Class DocumentMetadataPlugin is an implementation of DocumentMetadataPlugin

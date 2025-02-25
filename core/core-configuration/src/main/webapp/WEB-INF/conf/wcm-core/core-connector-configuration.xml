@@ -5,52 +5,11 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-
-  <component>
-    <type>org.exoplatform.ecm.webui.core.fckconfig.FCKConfigService</type>
-  </component>
-
-  <component>
-    <type>org.exoplatform.ecm.connector.MigrationConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.ecm.connector.LocalizationConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.VoteConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.TagConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.CommentConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.RssConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.ResourceBundleConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.fckeditor.LinkConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.fckeditor.PortalLinkConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.InlineEditingService</type>
-  </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.RenameConnector</type>
   </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.DownloadConnector</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.GetEditedDocumentRESTService</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.PublicationGetDocumentRESTService</type>
   </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.FavoriteRESTService</type>
@@ -68,11 +27,7 @@
     <type>org.exoplatform.wcm.connector.collaboration.RESTImagesRendererService</type>
   </component>
   <component>
-    <key>org.exoplatform.wcm.connector.viewer.PDFViewerRESTService</key>
     <type>org.exoplatform.wcm.connector.viewer.PDFViewerRESTService</type>
-  </component>
-  <component>
-    <type>org.exoplatform.wcm.connector.collaboration.NavigationConnector</type>
   </component>
   <component>
     <type>org.exoplatform.wcm.connector.collaboration.OpenInOfficeConnector</type>

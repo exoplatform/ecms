@@ -16,15 +16,15 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
-import org.exoplatform.commons.testing.ConfigTestCase;
-import org.exoplatform.services.wcm.search.base.BaseSearchTest;
-import org.exoplatform.services.wcm.search.connector.TestDocumentSearchServiceConnector;
-import org.exoplatform.services.wcm.search.connector.TestFileSearchServiceConnector;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+
+import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
+import org.exoplatform.commons.testing.ConfigTestCase;
+import org.exoplatform.services.wcm.search.base.BaseSearchTest;
+import org.exoplatform.services.wcm.search.connector.TestFileSearchServiceConnector;
 
 /**
  * Created by The eXo Platform SEA
@@ -35,8 +35,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TestSearchService.class,
-        TestDocumentSearchServiceConnector.class,
         TestFileSearchServiceConnector.class
 })
 @ConfigTestCase(BaseSearchTest.class)

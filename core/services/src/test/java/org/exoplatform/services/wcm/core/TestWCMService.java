@@ -81,26 +81,6 @@ public class TestWCMService extends BaseWCMTestCase {
     assertNull(resultNode);
   }
 
-  /**
-   * Test a portal is shared portal.
-   *
-   * @throws Exception the exception
-   */
-  public void testIsSharedPortal1() throws Exception {
-    boolean isSharedPortal = wcmService.isSharedPortal(WCMCoreUtils.getSystemSessionProvider(), "shared");
-    assertTrue(isSharedPortal);
-  }
-
-  /**
-   * Test a portal is not shared portal.
-   *
-   * @throws Exception the exception
-   */
-  public void testIsSharedPortal2() throws Exception {
-    boolean isSharedPortal = wcmService.isSharedPortal(WCMCoreUtils.getSystemSessionProvider(), "classic");
-    assertFalse(isSharedPortal);
-  }
-
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */
