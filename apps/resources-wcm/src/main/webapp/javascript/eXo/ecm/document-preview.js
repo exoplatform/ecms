@@ -1113,7 +1113,8 @@
       $inputContainer.removeClass("subCommentBlock");
       $inputContainer.find("#documentPreviewContainer .commentBox .commentTextInput").html($('<div>').append($inputContainer.find('textarea').clone()).html());
     },
-    initCKEditor: function() {
+    initCKEditor: async function() {
+        await new Promise(resolve => window.require(["SHARED/commons-editor"], resolve));
         var commentInput = $('#documentPreviewContainer #commentInput');
         var extraPlugins = 'simpleLink,selectImage,suggester';
 

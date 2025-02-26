@@ -197,10 +197,6 @@
       <module>jquery</module>
     </depends>
     <depends>
-      <module>commons-editor</module>
-      <as>editor</as>
-    </depends>
-    <depends>
       <module>socialUtil</module>
     </depends>
     <depends>
