@@ -191,20 +191,6 @@
         <version>${project.version}</version>
         <type>zip</type>
       </dependency>
-
-      <!-- Cloud Drive extension -->
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-clouddrives</artifactId>
-        <version>${project.version}</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ecms</groupId>
-        <artifactId>ecms-apps-portlet-clouddrives</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-documents</artifactId>

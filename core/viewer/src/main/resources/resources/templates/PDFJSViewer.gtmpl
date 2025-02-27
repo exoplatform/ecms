@@ -291,10 +291,12 @@ if (maximumPage > 0 && maximumPage <= pdfViewerService.getMaxPages() && fileSize
         <% if(org.exoplatform.services.wcm.utils.Utils.isDownloadDocumentActivated()) { %>
         <a class="btn btn-primary"  href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
+        <% if(uicomponent.getActionOpenDocInDesktop() != null) { %>
         <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
             <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument">
             </i>$remoteEditTitle
         </a>
+        <%}%>
       </div>
     </div>
     <script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/editors.js"></script>

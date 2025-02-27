@@ -22,7 +22,7 @@
   <external-component-plugins>
     <target-component>org.exoplatform.commons.upgrade.UpgradeProductService</target-component>
     <component-plugin profiles="layout">
-      <name>ECMSPortletInstanceRemovalUpgrade</name>
+      <name>ECMSPortletInstancesRemovalUpgrade</name>
       <set-method>addUpgradePlugin</set-method>
       <type>io.meeds.layout.plugin.upgrade.LayoutApplicationReferenceUpgradePlugin</type>
       <init-params>
@@ -191,6 +191,152 @@
             </field>
             <field name="upgradePortletInstance">
               <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>AuthoringDashboard</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>authoring-apps/AuthoringDashboard</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin profiles="layout">
+      <name>ECMSPortletInstanceRemovalUpgrade</name>
+      <set-method>addUpgradePlugin</set-method>
+      <type>io.meeds.layout.plugin.upgrade.LayoutApplicationReferenceUpgradePlugin</type>
+      <init-params>
+        <value-param>
+          <name>product.group.id</name>
+          <description>The groupId of the product</description>
+          <value>org.exoplatform.social</value>
+        </value-param>
+        <value-param>
+          <name>plugin.execution.order</name>
+          <description>The plugin execution order</description>
+          <value>5</value>
+        </value-param>
+        <value-param>
+          <name>plugin.upgrade.execute.once</name>
+          <description>Execute only once, not each version change</description>
+          <value>true</value>
+        </value-param>
+        <object-param>
+          <name>EditorsAdminPortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>editors/EditorsAdminPortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>cloudStoragePortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>clouddrives/cloudStoragePortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>CloudDrivePortlet</name>
+          <object type="io.meeds.layout.model.ApplicationReferenceUpgrade">
+            <field name="modificationType">
+              <string>remove</string>
+            </field>
+            <field name="oldContentId">
+              <string>clouddrives/CloudDrivePortlet</string>
+            </field>
+            <field name="upgradePages">
+              <boolean>true</boolean>
+            </field>
+            <field name="upgradePortletInstance">
+              <boolean>true</boolean>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>ECMSLegacyPagesRemovalUpgradePlugin</name>
+      <set-method>addUpgradePlugin</set-method>
+      <type>io.meeds.social.upgrade.LayoutUpgradePlugin</type>
+      <init-params>
+        <value-param>
+          <name>product.group.id</name>
+          <value>org.exoplatform.social</value>
+        </value-param>
+        <value-param>
+          <name>plugin.execution.order</name>
+          <value>120</value>
+        </value-param>
+        <value-param>
+          <name>plugin.upgrade.execute.once</name>
+          <value>true</value>
+        </value-param>
+        <value-param>
+          <name>enabled</name>
+          <value>true</value>
+        </value-param>
+        <object-param>
+          <name>global.upgrade</name>
+          <object type="io.meeds.social.upgrade.model.LayoutUpgrade">
+            <field name="updatePortalConfig">
+              <boolean>true</boolean>
+            </field>
+            <field name="updateNavigation">
+              <boolean>true</boolean>
+            </field>
+            <field name="configPath">
+              <string>war:/conf/sites/</string>
+            </field>
+            <field name="portalType">
+              <string>portal</string>
+            </field>
+            <field name="portalName">
+              <string>administration</string>
+            </field>
+            <field name="deleteNavigations">
+              <collection type="java.util.ArrayList" item-type="java.lang.String">
+                <value>
+                  <string>home/applications/documents-settings/cloud-storage</string>
+                </value>
+                <value>
+                  <string>home/applications/documents-settings/documents-editors</string>
+                </value>
+                <value>
+                  <string>home/legacy</string>
+                </value>
+              </collection>
             </field>
           </object>
         </object-param>
