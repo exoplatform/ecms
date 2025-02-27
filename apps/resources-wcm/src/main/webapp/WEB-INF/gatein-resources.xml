@@ -197,9 +197,6 @@
       <module>jquery</module>
     </depends>
     <depends>
-      <module>socialUtil</module>
-    </depends>
-    <depends>
       <module>wcm-utils</module>
     </depends>
     <depends>
@@ -213,9 +210,6 @@
       <module>suggester</module>
     </depends>
     <depends>
-      <module>es6promise</module>
-    </depends>
-    <depends>
       <module>xss-utils</module>
     </depends>
     <depends>
@@ -225,6 +219,7 @@
       <module>editorbuttons</module>
     </depends>
   </module>
+
   <module>
     <name>ecm-utils</name>
     <as>ecm_utils</as>
