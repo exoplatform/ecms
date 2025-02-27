@@ -219,9 +219,6 @@
       <module>suggester</module>
     </depends>
     <depends>
-      <module>es6promise</module>
-    </depends>
-    <depends>
       <module>xss-utils</module>
     </depends>
     <depends>
@@ -230,13 +227,6 @@
     <depends>
       <module>editorbuttons</module>
     </depends>
-  </module>
-
-  <module>
-    <name>es6promise</name>
-    <script>
-      <path>/javascript/eXo/es6-promise.js</path>
-    </script>
   </module>
 
   <module>

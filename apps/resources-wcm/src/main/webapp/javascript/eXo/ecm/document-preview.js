@@ -84,9 +84,6 @@
         }
       }
 
-      if(ES6Promise && !window.Promise ) {
-        ES6Promise.polyfill();
-      }
       var self = this;
       promises.push(this.checkDownloadDocumentStatus());
 
