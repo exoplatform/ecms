@@ -32,15 +32,6 @@
     <css-priority>10</css-priority>
   </portal-skin>
 
-  <!-- EditorsAdminPortlet skins -->
-  <portlet-skin>
-    <application-name>editors</application-name>
-    <portlet-name>EditorsAdminPortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/editors/editors-admin.css</css-path>
-    <overwrite>true</overwrite>
-  </portlet-skin>
-  
   <!-- DocumentsPortlet skins -->
   <portlet-skin>
     <application-name>documents</application-name>
@@ -65,15 +56,6 @@
     <portlet-name>transferRulesPortlet</portlet-name>
     <skin-name>Enterprise</skin-name>
     <css-path>/skin/css/ecms/portlets/transferRules/transfer-rules.css</css-path>
-    <overwrite>true</overwrite>
-  </portlet-skin>
-
-  <!-- CloudStoragePortlet skins -->
-  <portlet-skin>
-    <application-name>clouddrives</application-name>
-    <portlet-name>cloudStoragePortlet</portlet-name>
-    <skin-name>Enterprise</skin-name>
-    <css-path>/skin/css/ecms/portlets/cloudStorage/cloud-storage.css</css-path>
     <overwrite>true</overwrite>
   </portlet-skin>
 

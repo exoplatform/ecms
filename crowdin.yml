@@ -96,16 +96,6 @@ files: [
     "escape_quotes" : 0,
   },
   {
-    "source" : "/apps/portlet-editors/src/main/resources/locale/portlet/EditorsAdmin_en.properties",
-
-    "translation" : "%original_path%/%file_name%!_%locale_with_underscore%.%file_extension%",
-    "translation_replace" : {YML_CROWDIN_LANGUAGES_ARG},
-    "dest" : "platform/ecms/portlet-editors/portlets.properties",
-    "update_option" : "update_as_unapproved",
-    "escape_special_characters": 0,
-    "escape_quotes" : 0,
-  },
-  {
     "source" : "/apps/portlet-transferrules/src/main/resources/locale/portlet/transferRules_en.properties",
 
     "translation" : "%original_path%/%file_name%!_%locale_with_underscore%.%file_extension%",
