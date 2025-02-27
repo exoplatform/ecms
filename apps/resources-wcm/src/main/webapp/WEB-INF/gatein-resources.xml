@@ -206,9 +206,6 @@
       <module>jquery</module>
     </depends>
     <depends>
-      <module>socialUtil</module>
-    </depends>
-    <depends>
       <module>wcm-utils</module>
     </depends>
     <depends>
@@ -234,6 +231,14 @@
       <module>editorbuttons</module>
     </depends>
   </module>
+
+  <module>
+    <name>es6promise</name>
+    <script>
+      <path>/javascript/eXo/es6-promise.js</path>
+    </script>
+  </module>
+
   <module>
     <name>ecm-utils</name>
     <as>ecm_utils</as>

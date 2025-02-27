@@ -102,6 +102,23 @@
       });
     },
 
+    checkDevice : function() {
+      var body = $('body:first').removeClass('phoneDisplay').removeClass('tabletDisplay').removeClass('tabletLDisplay');
+      var isMobile = body.find('.visible-phone:first').css('display') !== 'none';
+      var isTablet = body.find('.visible-tablet:first').css('display') !== 'none';
+      var isTabletL = body.find('.visible-tabletL:first').css('display') !== 'none';
+      if (isMobile) {
+        body.addClass('phoneDisplay');
+      }
+      if (isTablet) {
+        body.addClass('tabletDisplay');
+      }
+      if (isTabletL) {
+        body.addClass('tabletLDisplay');
+      }
+      return {'isMobile' : isMobile, 'isTablet' : isTablet, 'isTabletL' : isTabletL};
+    },
+
     fetchUserInformation: function(callback) {
       var self = this;
       return $.ajax({
@@ -812,7 +829,7 @@
 
         var ele = $("#documentPreviewContainer .commentInputBox");
         var elementToScroll = "#documentPreviewContainer .comments .commentList";
-        if (eXo.social.SocialUtil.checkDevice().isMobile === true) {
+        if (this.checkDevice().isMobile === true) {
           ele = $("#documentPreviewContainer [data-comment=" + commentId + "]");
           elementToScroll = "#documentPreviewContainer .commentArea";
         }
@@ -828,7 +845,7 @@
         self.showCommentLink(true, true, false);
       });
 
-      if(scrollToCommentId && eXo.social.SocialUtil.checkDevice().isMobile === true) {
+      if(scrollToCommentId && this.checkDevice().isMobile === true) {
         var ele = $("#documentPreviewContainer [data-comment=" + scrollToCommentId + "]");
 
         if(ele.length > 0 && ele.offset() && ele.parent().offset()) {
@@ -838,7 +855,7 @@
           },1000);
         }
       }
-      self.showCommentLink(eXo.social.SocialUtil.checkDevice().isMobile, false, true);
+      self.showCommentLink(this.checkDevice().isMobile, false, true);
     },
 
     showCommentBlockForActivity: function(comments, parentCommentId) {
@@ -1019,7 +1036,7 @@
           if($('#CommentButton [data-action-initialized]').length == 0) {
             $('#CommentButton').on('click', function(event) {
               self.postComment();
-              self.showCommentLink(eXo.social.SocialUtil.checkDevice().isMobile, false, true);
+              self.showCommentLink(this.checkDevice().isMobile, false, true);
             });
             $('#CommentButton').attr("data-action-initialized", "true");
           }
@@ -1056,7 +1073,7 @@
                 self.moveCKEditorInOriginalLocation();
                 self.initCKEditor();
                 self.clearErrorMessage();
-                self.showCommentLink(eXo.social.SocialUtil.checkDevice().isMobile, false, false);
+                self.showCommentLink(this.checkDevice().isMobile, false, false);
               }
             });
             $('.showComments').attr("data-action-initialized", "true");
@@ -1079,7 +1096,7 @@
         $('#documentPreviewContainer .parentCommentBlock').addClass("hidden");
       }
 
-      if (eXo.social.SocialUtil.checkDevice().isMobile === true) {
+      if (this.checkDevice().isMobile === true) {
         var commentLinkRelative = showComment && showCKEditor;
         if(commentLinkRelative) {
           $('#documentPreviewContainer .parentCommentBlock').removeClass("FixedBlock");
