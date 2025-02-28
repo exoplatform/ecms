@@ -60,9 +60,6 @@
     <depends>
       <module>jquery</module>
     </depends>
-    <depends>
-      <module>vueEllipsis</module>
-    </depends>
   </module>
 
   <module>
@@ -76,9 +73,6 @@
     </depends>
     <depends>
       <module>vuetify</module>
-    </depends>
-    <depends>
-      <module>vueEllipsis</module>
     </depends>
     <depends>
       <module>commonVueComponents</module>
