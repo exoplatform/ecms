@@ -439,7 +439,7 @@
       } else {
         var authorFullName = XSSUtils.sanitizeString(this.settings.author?.fullname != null ? this.settings.author.fullname : '');
         let html = '<div class="uiDocumentPreview' + (this.settings.showComments ? '' : ' collapsed') + '" id="uiDocumentPreview">' +
-          '<div class="exitWindow">' +
+          '<div class="exitWindow' + (this.settings.showComments ? ' hidden' : '') + '">' +
             '<a class="uiIconClose uiIconWhite" title="${UIActivity.comment.close}" onclick="documentPreview.hide()"></a>' +
           '</div>' +
           '<div class="uiDocumentPreviewMainWindow clearfix">';
