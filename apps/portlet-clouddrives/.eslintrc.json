@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "eslint-config-meedsio"
-  ],
-  "globals": {
-    "cloudDrives": true,
-    "cloudDriveUtils": true
-  }
-}

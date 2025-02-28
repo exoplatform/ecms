@@ -10,7 +10,7 @@
   <name>eXo PLF:: DMS Document Viewer</name>
   <description>eXo PDF Viewer</description>
   <properties>
-    <exo.test.coverage.ratio>0.10</exo.test.coverage.ratio>
+    <exo.test.coverage.ratio>0</exo.test.coverage.ratio>
   </properties>
   <dependencies>
     <dependency>

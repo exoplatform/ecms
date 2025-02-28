@@ -14,7 +14,6 @@
     <module>resources-wcm</module>
     <module>portlet-editors</module>
     <module>portlet-documents</module>
-    <module>portlet-clouddrives</module>
     <module>portlet-transferrules</module>
   </modules>
 </project>

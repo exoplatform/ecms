@@ -298,7 +298,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   
   @Override
   public String getActionOpenDocInDesktop() throws Exception {
-    return this.event("OpenDocInDesktop");
+    return null;
   }
 
   public String getRelativeTimeLabel(WebuiBindingContext webuiBindingContext, Date postedTime) {

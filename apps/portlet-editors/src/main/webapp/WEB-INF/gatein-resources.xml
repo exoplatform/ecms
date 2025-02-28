@@ -2,6 +2,12 @@
   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
+  <portal-skin>
+    <skin-name>Enterprise</skin-name>
+    <skin-module>editors</skin-module>
+    <css-path>/css/editors.css</css-path>
+  </portal-skin>
+
   <module>
     <name>editorbuttons</name>
     <script>
@@ -15,7 +21,7 @@
       <module>editorsupport</module>
     </depends>
   </module>
-  
+
   <module>
     <name>editorsupport</name>
     <script>
@@ -29,28 +35,5 @@
       <module>commons-cometd3</module>
     </depends>
   </module>
-
-  <module>
-    <name>editorsadmin</name>
-    <script>
-      <minify>false</minify>
-      <path>/javascript/editorsAdmin.bundle.js</path>
-    </script>
-    <depends>
-      <module>vue</module>
-    </depends>
-    <depends>
-      <module>vuetify</module>
-    </depends>
-    <depends>
-      <module>eXoVueI18n</module>
-    </depends>
-  </module>
-
-  <portal-skin>
-    <skin-name>Enterprise</skin-name>
-    <skin-module>editors</skin-module>
-    <css-path>/css/editors.css</css-path>
-  </portal-skin>
 
 </gatein-resources>

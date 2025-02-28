@@ -50,18 +50,5 @@
   </dependencies>
   <build>
     <finalName>editors</finalName>
-    <plugins>
-      <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <packagingExcludes>**/*.less,**/*.vue,css/lib/*,vue-apps/**,js/mock/**/*,**-dev.*</packagingExcludes>
-        </configuration>
-      </plugin>
-    </plugins>
   </build>
 </project>

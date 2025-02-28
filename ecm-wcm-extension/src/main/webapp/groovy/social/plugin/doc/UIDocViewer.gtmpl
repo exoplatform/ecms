@@ -99,7 +99,6 @@
   }
   if(fileComponent == null || canViewPDF == false) {
     noPreviewStyle = "noPreview";
-    org.exoplatform.services.wcm.utils.Utils.logUnavaiblePreview(encodedPath);
   }
   if(!(fileComponent instanceof PDFViewer) || canViewPDF == false) {
 %>
@@ -136,10 +135,12 @@
               <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
               <a class="btn btn-primary" href="$downloadLink"><i class="uiIconDownload uiIconWhite"></i><%=_ctx.appRes("File.view.label.download")%>
               </a>&nbsp;&nbsp;
+              <% if (uicomponent.getActionOpenDocInDesktop() != null) { %>
               <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
                 <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
                 $remoteEditTitle
               </a>
+              <% } %>
 <%
             } else {
               ResourceBundleService resourceBundleService = CommonsUtils.getService(ResourceBundleService.class);
@@ -186,10 +187,12 @@
           <i class="uiIconDownload uiIconWhite"></i>
           <%=_ctx.appRes("File.view.label.download")%>
         </a>&nbsp;&nbsp;
+        <% if (uicomponent.getActionOpenDocInDesktop() != null) { %>
         <a class="btn" href="#" onclick="<%=uicomponent.getActionOpenDocInDesktop()%>">
           <i class="uiIcon16x16FileDefault uiIcon16x16nt_file $remoteEditClass uiIconEcmsOpenDocument"></i>
           $remoteEditTitle
         </a>
+        <% } %>
       </div>
     </div>
 <% } %>
