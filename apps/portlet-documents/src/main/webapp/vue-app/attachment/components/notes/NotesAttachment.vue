@@ -4,11 +4,11 @@
       :aria-label="$t('notes.open.attachments.list')"
       icon
       @click="openAttachmentsList">
-       <v-icon
-         size="20"
-         class="noteAttachmentsIcon">
-         fa-solid fa-paperclip
-       </v-icon>
+      <v-icon
+        size="20"
+        class="noteAttachmentsIcon">
+        fa-solid fa-paperclip
+      </v-icon>
     </v-btn>
     <attachments-list-drawer
       ref="attachmentsListDrawer"
@@ -83,7 +83,6 @@ export default {
         'displayUploadedFiles': this.displayUploadedFiles,
         'createEntityTypeFolder': this.createEntityTypeFolder,
         'sourceApp': 'note',
-        'showCustomDrawerOverlay': true,
         'attachToEntity': this.attachToEntity,
         'displayCreateDocumentInput': this.displayCreateDocumentInput
       };
