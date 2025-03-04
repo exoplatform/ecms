@@ -1,10 +1,5 @@
 <template>
   <div class="attachments-drawer">
-    <v-overlay
-      v-if="showCustomDrawerOverlay"
-      z-index="1200"
-      :value="drawer"
-      @click.native="closeDrawersByOverlay" />
     <exo-drawer
       ref="attachmentsAppDrawer"
       v-model="drawer"
@@ -147,10 +142,6 @@ export default {
     createEntityTypeFolder: {
       type: Boolean,
       default: true
-    },
-    showCustomDrawerOverlay: {
-      type: Boolean,
-      default: false
     },
     displayCreateDocumentInput: {
       type: Boolean,
@@ -655,13 +646,6 @@ export default {
         };
         document.dispatchEvent(new CustomEvent('exo-statistic-message', {detail: fileAnalytics}));
       }
-    },
-    closeDrawersByOverlay() {
-      if (!this.isDriveExplorerDrawerClosed()) {
-        this.closeAttachmentsDriveExplorerDrawer();
-        return;
-      }
-      this.closeAttachmentsAppDrawer();
     },
     isDriveExplorerDrawerClosed() {
       return this.$refs.attachmentsDriveExplorerDrawer.isClosed();
