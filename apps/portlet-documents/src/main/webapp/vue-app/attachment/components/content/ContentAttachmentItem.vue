@@ -19,7 +19,7 @@
 <template>
   <exo-attachment-item
     :file="attachment"
-    class="newsAttachment text-truncate"/>
+    class="newsAttachment text-truncate" />
 </template>
 
 <script>

@@ -64,7 +64,8 @@ export default {
       if (this.preventPreview) {
         return;
       }
-      Vue.prototype.$attachmentService.getAttachmentById(this.file.id).then(attachment => {
+      this.$attachmentService.getAttachmentById(this.file.id).then(async attachment => {
+        await this.$attachmentService.loadDocumentPreviewModule();
         documentPreview.init({
           doc: {
             id: attachment.id,

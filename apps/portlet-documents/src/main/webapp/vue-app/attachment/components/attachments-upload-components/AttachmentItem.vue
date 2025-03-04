@@ -347,9 +347,10 @@ export default {
         this.openPreview();
       }
     },
-    openPreview() {
+    async openPreview() {
       if (this.allowToPreview && this.attachment.id) {
         const self = this;
+        await this.$attachmentService.loadDocumentPreviewModule();
         documentPreview.init({
           doc: {
             id: self.attachment.id,
