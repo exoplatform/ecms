@@ -100,21 +100,14 @@ export default {
     }
     document.addEventListener('open-notes-attachments', this.openAttachmentDrawer);
     document.addEventListener('attachments-app-drawer-closed', this.handleDrawerClosedEvent);
-    document.addEventListener('note-draft-auto-save-done', (event) => {
-      if (this.attachmentListUpdated && event.detail.draftId) {
-        this.updateLinkedAttachmentsToEntity(event.detail.draftId);
-      }
-    });
-    document.addEventListener('article-draft-auto-save-done', (event) => {
-      if (this.attachmentListUpdated && event.detail.draftId) {
-        this.updateLinkedAttachmentsToEntity(event.detail.draftId);
-      }
-    });
+    document.addEventListener('note-draft-auto-save-done', this.handleDraftAutoSave);
+    document.addEventListener('article-draft-auto-save-done', this.handleDraftAutoSave);
   },
   beforeDestroy() {
     document.removeEventListener('open-notes-attachments', this.openAttachmentDrawer);
     document.removeEventListener('attachments-app-drawer-closed', this.handleDrawerClosedEvent);
-    document.removeEventListener('article-draft-auto-save-done');
+    document.removeEventListener('article-draft-auto-save-done', this.handleDraftAutoSave);
+    document.removeEventListener('note-draft-auto-save-done', this.handleDraftAutoSave);
   },
   methods: {
     openAttachmentDrawer() {
@@ -202,6 +195,11 @@ export default {
           });
       }
     },
+    handleDraftAutoSave(event) {
+      if (this.attachmentListUpdated && event.detail.draftId) {
+        this.updateLinkedAttachmentsToEntity(event.detail.draftId);
+      }
+    }
   }
 };
 </script>
