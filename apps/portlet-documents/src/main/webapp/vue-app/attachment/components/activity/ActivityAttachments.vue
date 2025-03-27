@@ -7,6 +7,7 @@
       :index="index"
       :count="attachmentsCount"
       :attachment="attachment"
+      :attachments="attachments"
       :preview-width="previewWidth"
       :preview-height="previewHeight"
       class="activity-file-item" />
@@ -64,19 +65,6 @@ export default {
     },
     attachmentsCount() {
       return this.attachments.length;
-    },
-  },
-  created(){
-    this.$root.$on('documents-preview', this.previewDocument);
-  },
-  methods: {
-
-    previewDocument(file) {
-      const files = [];
-      this.attachments.forEach((item) => {
-        files.push({'id': item.id,'filename': item.name,'mimetype': item.mimeType,'downloadUrl': `/rest/jcr/repository/collaboration${item.path}`});}
-      );
-      document.dispatchEvent(new CustomEvent('open-attachments-preview', {detail: {'attachments': files,'id': file.id }}));
     },
   },
 };

@@ -66,6 +66,10 @@ export default {
       type: Object,
       default: null,
     },
+    attachments: {
+      type: Array,
+      default: () => []
+    },
     activity: {
       type: Object,
       default: null,
@@ -183,7 +187,11 @@ export default {
         return;
       }
       this.loading = true;
-      this.$root.$emit('documents-preview', this.attachment);
+      const files = [];
+      this.attachments.forEach((item) => {
+        files.push({'id': item.id,'filename': item.name,'mimetype': item.mimeType,'downloadUrl': `/rest/jcr/repository/collaboration${item.path}`});}
+      );
+      document.dispatchEvent(new CustomEvent('open-attachments-preview', {detail: {'attachments': files,'id': this.attachment.id }}));
       this.markDocumentAsViewed();
       this.loading = false;
     },
