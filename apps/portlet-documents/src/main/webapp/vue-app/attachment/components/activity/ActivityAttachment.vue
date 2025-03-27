@@ -183,52 +183,9 @@ export default {
         return;
       }
       this.loading = true;
-      this.$attachmentService.getAttachmentById(this.attachment.id)
-        .then(async attachment => {
-          const updaterFullName = attachment && attachment.updater && attachment.updater.profile && attachment.updater.profile.fullname || '';
-          const updateDate = new Date(attachment.updated);
-          const updateDateInfo = this.$dateUtil.formatDateObjectToDisplay(updateDate, this.dateFormat);
-          const fileInfo = `${this.$t('documents.preview.updatedOn')} ${updateDateInfo} ${this.$t('documents.preview.updatedBy')} ${updaterFullName} ${attachment.size}`;
-          await this.$attachmentService.loadDocumentPreviewModule();
-          documentPreview.init({
-            doc: {
-              id: this.attachment.id,
-              repository: this.attachment.repository,
-              workspace: this.attachment.workspace,
-              path: this.attachment.path,
-              title: this.attachment.name,
-              icon: this.icon,
-              size: attachment.size,
-              openUrl: attachment.openUrl,
-              downloadUrl: attachment.downloadUrl,
-              breadCrumb: attachment.previewBreadcrumb,
-              fileInfo,
-              isCloudDrive: attachment.cloudDrive
-            },
-            author: this.author,
-            activity: {
-              id: this.previewActivity.id,
-              //Has liked property value is a string
-              liked: this.previewActivity.hasLiked === 'true',
-              likes: this.previewActivity.likes.length,
-              status: this.previewActivity.title,
-              postTime: this.relativePostTime,
-              spaceURL: this.spaceURL,
-              next: this.nextId,
-              previous: this.previousId,
-            },
-            version: {
-              number: attachment.version && Number(attachment.version) || 0,
-            },
-            showComments: !this.isCommentActivity
-          });
-        })
-        .catch(e => {
-          console.error(e);
-          this.invalid = true;
-        })
-        .finally(() => this.loading = false);
+      this.$root.$emit('documents-preview', this.attachment);
       this.markDocumentAsViewed();
+      this.loading = false;
     },
   },
 };
