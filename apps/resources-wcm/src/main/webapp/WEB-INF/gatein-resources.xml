@@ -218,6 +218,9 @@
     <depends>
       <module>editorbuttons</module>
     </depends>
+    <depends>
+      <module>bts_dropdown</module>
+    </depends>
   </module>
 
   <module>
