@@ -61,6 +61,10 @@
                   <name>documents.content.indexing.mimetypes</name>
                   <value>${exo.unified-search.indexing.supportedMimeTypes: text/.*, application/ms.* , application/vnd.* , application/xml , application/excel , application/powerpoint , application/xls, application/ppt , application/pdf , application/xhtml+xml , application/javascript , application/x-javascript , application/x-jaxrs+groovy , script/groovy}</value>
                 </value-param>
+                <value-param>
+                    <name>documents.content.compute.version.size</name>
+                    <value>${documents.content.compute.version.size:true}</value>
+                </value-param>
                 <properties-param>
                     <name>constructor.params</name>
                     <property name="index_alias" value="file_alias"/>
