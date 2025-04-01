@@ -58,6 +58,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
   private List<String>         supportedContentIndexingMimetypes;
 
   private long                 contentMaxSizeToIndexInBytes;
+  private boolean              indexVersionSize;
 
   public FileindexingConnector(InitParams initParams) {
     super(initParams);
@@ -78,6 +79,11 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       this.contentMaxSizeToIndexInBytes = Long.parseLong(contentMaxSizeToIndex) * 1024 * 1024;
     } else {
       this.contentMaxSizeToIndexInBytes = DEFAULT_MAX_FILE_SIZE_TO_INDEX * 1024l * 1024l;
+    }
+    if (initParams.containsKey("documents.content.compute.version.size")) {
+      this.indexVersionSize = Boolean.parseBoolean(initParams.getValueParam("documents.content.compute.version.size").getValue());
+    } else {
+      this.indexVersionSize = true;
     }
   }
 
@@ -221,7 +227,11 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
         Property dataProperty = contentNode.getProperty(NodetypeConstant.JCR_DATA);
         long fileSize = dataProperty.getLength();
-        long fileSizeWithVersion = VersionHistoryUtils.computeVersionsSize(node);
+        long fileSizeWithVersion = fileSize;
+        if (this.indexVersionSize) {
+          fileSizeWithVersion = VersionHistoryUtils.computeVersionsSize(node);
+        }
+
         canIndexContent = canIndexContent && fileSize < this.contentMaxSizeToIndexInBytes;
 
         if (canIndexContent) {
