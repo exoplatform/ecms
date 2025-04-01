@@ -243,7 +243,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
 
         Property dataProperty = contentNode.getProperty(NodetypeConstant.JCR_DATA);
         long fileSize = dataProperty.getLength();
-        long fileSizeWithVersion = fileSize;
+        long fileSizeWithVersion = 0;
         if (this.indexVersionSize) {
           fileSizeWithVersion = VersionHistoryUtils.computeVersionsSize(node);
         }
