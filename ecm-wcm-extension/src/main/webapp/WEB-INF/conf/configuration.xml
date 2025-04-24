@@ -56,6 +56,7 @@
   <import>war:/conf/social/activity-listeners-configuration.xml</import>
   <import>war:/conf/social/integration-configuration.xml</import>
   <import>war:/conf/social/css-class-configuration.xml</import>
+  <import>war:/conf/wcm-extension/dynamic-container-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/portal-upgrade-configuration.xml</import>
 
 </configuration>
