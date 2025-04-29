@@ -20,6 +20,7 @@ import static org.exoplatform.wcm.ext.component.activity.FileUIActivity.NODE_PAT
 import static org.exoplatform.wcm.ext.component.activity.FileUIActivity.SEPARATOR_REGEX;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import javax.jcr.Node;
@@ -50,6 +51,8 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
   private static final String DOCPATH    = "DOCPATH";
 
   private static final String MIME_TYPE  = "mimeType";
+
+  public static final String EXO_DATE_MODIFIED         = "exo:dateModified";
 
   private TrashService        trashService;
 
@@ -115,6 +118,7 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
           fileAttachment.setId(contentNode.getUUID());
         }
         fileAttachment.setName(getTitle(contentNode));
+        fileAttachment.setLastModified(getLastModified(contentNode));
         fileAttachment.setDeleted(trashService.isInTrash(contentNode) || isQuarantinedItem(contentNode));
       } catch (Exception e) {
         fileAttachment.setDeleted(true);
@@ -131,6 +135,10 @@ public class ActivityAttachmentProcessor extends BaseActivityProcessorPlugin {
       nodeTitle = contentNode.getName();
     }
     return nodeTitle;
+  }
+  private long getLastModified(Node contentNode) throws RepositoryException {
+    Date lastModified = contentNode.getProperty(EXO_DATE_MODIFIED).getDate().getTime();
+    return lastModified.getTime();
   }
 
   private boolean isQuarantinedItem(Node node) throws RepositoryException {
