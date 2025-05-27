@@ -11,6 +11,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.space.spi.SpaceService;
 
 public class SpaceCustomizationService {
@@ -55,7 +56,8 @@ public class SpaceCustomizationService {
     parentNode = (Node) session.getItem(spaceParentPath);
 
     if (!parentNode.hasNode(ACTIVITY_FOLDER_UPLOAD_NAME)) {
-      parentNode.addNode(ACTIVITY_FOLDER_UPLOAD_NAME);
+      Node activityFolder = parentNode.addNode(ACTIVITY_FOLDER_UPLOAD_NAME);
+      activityFolder.addMixin(NodetypeConstant.EXO_HIDDENABLE);
       session.save();
     }
   }
