@@ -22,17 +22,6 @@
       <artifactId>icu4j</artifactId>
     </dependency>
     <dependency>
-      <groupId>commons-httpclient</groupId>
-      <artifactId>commons-httpclient</artifactId>
-      <exclusions>
-        <exclusion>
-          <!-- commons-logging is forbidden and must be replaced by org.slf4j:jcl-over-slf4j -->
-          <artifactId>commons-logging</artifactId>
-          <groupId>commons-logging</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>javax.jcr</groupId>
       <artifactId>jcr</artifactId>
     </dependency>
