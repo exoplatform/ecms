@@ -548,6 +548,9 @@ public class FileUploadHandler {
         if(!file.isNodeType(NodetypeConstant.MIX_I18N))
           file.addMixin(NodetypeConstant.MIX_I18N);
 
+        if (parent.isNodeType(NodetypeConstant.EXO_HIDDENABLE))
+          file.addMixin(NodetypeConstant.EXO_HIDDENABLE);
+
         if (!file.hasProperty(NodetypeConstant.EXO_TITLE) && doIndexName) {
           String name = file.getName();
           String path = file.getPath();

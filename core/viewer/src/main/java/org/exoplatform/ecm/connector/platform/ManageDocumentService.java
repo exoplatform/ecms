@@ -343,7 +343,11 @@ public class ManageDocumentService implements ResourceContainer {
       if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE) && newNode.canAddMixin(NodetypeConstant.EXO_RSS_ENABLE)) {
         newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
       }
+
       newNode.setProperty(NodetypeConstant.EXO_TITLE, folderName);
+      if (node.isNodeType(NodetypeConstant.EXO_HIDDENABLE) || isSystem) {
+        newNode.addMixin(NodetypeConstant.EXO_HIDDENABLE);
+      }
       node.save();
       Document document = createNewDocument();
       String childFolder = StringUtils.isEmpty(currentFolder) ? newNode.getName() : currentFolder.concat("/")
