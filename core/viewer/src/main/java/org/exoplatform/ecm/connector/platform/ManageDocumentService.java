@@ -599,7 +599,7 @@ public class ManageDocumentService implements ResourceContainer {
     AutoVersionService autoVersionService=WCMCoreUtils.getService(AutoVersionService.class);
     boolean canRemove = true;
     String sourcePath = sourceNode.getPath();
-    file.setAttribute("name", Utils.getTitle(displayNode));
+    file.setAttribute("name", displayNode.getName());
     file.setAttribute("title", Utils.getTitle(displayNode));
     file.setAttribute("workspaceName", workspaceName);
     file.setAttribute("id", sourceNode.getUUID()); 
