@@ -1,32 +1,97 @@
 <template>
-  <v-card 
-    class="searchFileCard d-flex flex-column border-radius box-shadow" 
-    flat
-    min-height="227">
-    <exo-docs-favorite-action
-      :document="result"
-      absolute
-      top="0"
-      right="0"
-      @removed="$emit('refresh-favorite')" />
-    <div class="mx-auto flex-grow-1 px-3 pt-3">
-      <div
-        ref="excerptNode"
-        :title="excerptText"
-        class="text-wrap text-break caption">
-      </div>
-    </div>
-    <div>
-      <exo-document
-        ref="documentDetail"
-        :document="result"
-        hide-time
-        class="light-grey-background flex-grow-0 border-top-color py-0 px-1" />
-    </div>
-  </v-card>
+  <v-hover v-slot="{ hover }">
+    <v-card
+      flat
+      class="pa-0"
+      :aria-label="$t('search.access.to.result', {0 : excerptText})"
+      :href="fileUrl"
+      @click.stop.prevent="openFilePreview">
+      <v-list class="pa-0" :class="hover && 'light-grey-background-color no-border-radius' || ''">
+        <v-list-item>
+          <v-list-item-icon class="me-2">
+            <span class="d-flex align-center justify-center">
+              <v-icon
+                size="32"
+                :color="fileIconColor"
+                class="mt-2">{{ fileIconClass }}</v-icon>
+            </span>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="d-flex flex-row full-width align-center">
+              <h1
+                class="flex-grow-1 title pt-1 mb-0 ps-0 my-auto align-center text-start text-truncate"
+                :aria-label="fileTitleText"
+                v-sanitized-html="fileTitle"></h1>
+            </v-list-item-title>
+            <v-list-item-subtitle class="d-flex flex-column">
+              <span class="d-flex flex-row align-center mx-auto full-width">
+                <span class="d-flex flex-row align-center" v-if="space">
+                  <a
+                    v-bind="attrs"
+                    v-on="on"
+                    :href="spaceUrl"
+                    class="flex-nowrap flex-shrink-0 d-flex spaceAvatar">
+                    <v-avatar
+                      :size="18"
+                      tile
+                      class="my-auto">
+                      <img
+                        :src="space.avatarUrl"
+                        alt=""
+                        class="object-fit-cover ma-auto"
+                        loading="lazy">
+                    </v-avatar>
+                    <p class="ms-2 my-auto text-subtitle">{{ space.displayName }}</p>
+                  </a>
+                </span>
+                <exo-user-avatar
+                  v-if="fileAuthor"
+                  :profile-id="fileAuthor"
+                  :size="18"
+                  small-font-size
+                  :avatar="isMobile"
+                  :popover="false" />
+                <span v-if="fileUpdateDate" class="d-flex flex-row align-center">
+                  <v-icon
+                    size="3"
+                    class="icon-default-color mx-3">fas fa-circle</v-icon>
+                  <v-icon
+                    size="12"
+                    class="icon-default-color">fas fa-calendar-alt</v-icon>
+                </span>
+                <date-format class="ms-1 my-auto" :value="fileUpdateDate" />
+                <span v-if="fileLastEditor" class="d-flex flex-row align-center">
+                  <v-icon
+                    size="3"
+                    class="icon-default-color mx-3">fas fa-circle</v-icon>
+                  <exo-user-avatar
+                    :profile-id="fileLastEditor"
+                    :size="18"
+                    small-font-size
+                    :avatar="isMobile"
+                    :popover="false" />
+                </span>
+              </span>
+              <div
+                v-if="excerptHtml"
+                class="pt-2 text-wrap text-body text-break"
+                :class="{
+                  'text-truncate-2': isMobile,
+                  'text-truncate-3': !isMobile,
+                }"
+                v-sanitized-html="excerptHtml">
+              </div>
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </v-hover>
 </template>
 
 <script>
+
 export default {
   props: {
     term: {
@@ -38,82 +103,85 @@ export default {
       default: null,
     },
   },
-  data: () => ({
-    lineHeight: 22,
-    maxEllipsisHeight: 154,
-  }),
+  data() {
+    return {
+      defaultFileIcon: {
+        class: 'fas fa-file',
+        color: '#707070'
+      },
+    };
+  },
   computed: {
-    excerpts() {
-      return [this.result && this.result.excerpt] || [];
+    fileTitle() {
+      return window.decodeURIComponent(this.result?.title);
     },
-    excerptTitle() {
-      return this.excerpts && this.excerpts['title'] && window.decodeURIComponent(this.excerpts['title'][0]);
-    },
-    excerptName() {
-      return this.excerpts && this.excerpts['name'] && window.decodeURIComponent(this.excerpts['name'][0]);
+    fileTitleText() {
+      return this.$utils.htmlToText(this.fileTitle);
     },
     excerptHtml() {
-      return this.excerpts  && this.excerpts.join('<br />...');
+      return this.result.excerpts['attachment.content'] && this.result?.excerpt || '';
     },
     excerptText() {
-      return $('<div />').html(this.excerptHtml).text();
+      return this.$utils.htmlToText(this.excerptHtml);
     },
-  },
-  mounted() {
-    if (this.result && this.excerptTitle) {
-      // eslint-disable-next-line vue/no-mutating-props
-      this.$set(this.result,'excerptTitle', this.excerptTitle);
+    fileIcon() {
+      return this.$documentsIconsExtension[0]?.get(this.result?.fileType) || this.defaultFileIcon;
+    },
+    fileId() {
+      return this.result?.id;
+    },
+    downloadUrl() {
+      return this.$documentsUtils.getDownloadUrl(this.fileId, this.fileUpdateDate);
+    },
+    fileIconClass() {
+      return this.fileIcon?.class;
+    },
+    fileIconColor() {
+      return this.fileIcon?.color;
+    },
+    isMobile() {
+      return this.$vuetify?.breakpoint?.smAndDown;
+    },
+    fileUrl() {
+      return this.result?.url;
+    },
+    isFileEditable() {
+      const type = this.result?.fileType || '';
+      return this.$supportedDocuments && this.$supportedDocuments.filter(doc => doc.edit && doc.mimeType === type && !this.result.cloudDrive).length > 0;
+    },
+    fileLastEditor() {
+      return this.result?.lastEditor;
+    },
+    fileAuthor() {
+      return this.result?.author;
+    },
+    fileUpdateDate() {
+      console.log(this.result);
+      return this.result?.date;
+    },
+    space() {
+      return this.result?.space;
+    },
+    spaceUrl() {
+      if (!this.space?.id) {
+        return '#';
+      }
+      return `${eXo.env.portal.context}/s/${this.space?.id}`;
     }
-    this.computeEllipsis();
   },
   methods: {
-    computeEllipsis() {
-      if (!this.excerptHtml || this.excerptHtml.length === 0) {
-        return;
-      }
-      const stNode = this.$refs.excerptNode;
-      if (!stNode) {
-        return;
-      }
-      stNode.innerHTML = this.excerptHtml;
-
-      let stNodeHeight = stNode.getBoundingClientRect().height || this.lineHeight;
-      if (stNodeHeight > this.maxEllipsisHeight) {
-        while (stNodeHeight > this.maxEllipsisHeight) {
-          const newHtml = this.deleteLastChars(stNode.innerHTML.replace(/&[a-z]*;/, ''), 10);
-          if (newHtml.length === stNode.innerHTML.length) {
-            break;
-          }
-          stNode.innerHTML = newHtml;
-          stNodeHeight = stNode.getBoundingClientRect().height || this.lineHeight;
-        }
-
-        stNode.innerHTML = this.deleteLastChars(stNode.innerHTML, 4);
-        stNode.innerHTML = `${stNode.innerHTML}...`;
-      }
-    },
-    deleteLastChars(html, charsToDelete) {
-      if (html.slice(-1) === '>') {
-        // Replace empty tags
-        html = html.replace(/<[a-zA-Z 0-9 "'=]*><\/[a-zA-Z 0-9]*>$/g, '');
-      }
-      html = html.replace(/<br>(\.*)$/g, '');
-
-      charsToDelete = charsToDelete || 1;
-
-      let newHtml = '';
-      if (html.slice(-1) === '>') {
-        // Delete last inner html char
-        html = html.replace(/(<br>)*$/g, '');
-        newHtml = html.replace(new RegExp(`([^>]{${charsToDelete}})(</)([a-zA-Z 0-9]*)(>)$`), '$2$3');
-        newHtml = $('<div />').html(newHtml).html().replace(/&[a-z]*;/, '');
-        if (newHtml.length === html.length) {
-          newHtml = html.replace(new RegExp('([^>]*)(</)([a-zA-Z 0-9]*)(>)$'), '$2$3');
-        }
+    openFilePreview() {
+      if (this.isFileEditable) {
+        window.open(`${eXo.env.portal.context}/${eXo.env.portal.metaPortalName}/oeditor?docId=${this.result.id}&backTo=${window.location.pathname}`, '_blank');
       } else {
-        newHtml = html.substring(0, html.trimRight().length - charsToDelete);
+        const file = {
+          'id': this.fileId,
+          'mimetype': this.result?.fileType,
+          'downloadUrl': this.downloadUrl,
+          'filename': this.result?.filename
+        };
+        document.dispatchEvent(new CustomEvent('open-attachments-preview', {detail: {'attachments': [file],'id': this.fileId }}));
       }
-      return newHtml;
     },
   }
 };
