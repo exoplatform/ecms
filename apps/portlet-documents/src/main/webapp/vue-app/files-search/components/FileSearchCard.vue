@@ -8,13 +8,13 @@
       @click.stop.prevent="openFilePreview">
       <v-list class="pa-0" :class="hover && 'light-grey-background-color no-border-radius' || ''">
         <v-list-item>
-          <v-list-item-icon class="me-2">
-            <span class="d-flex align-center justify-center">
-              <v-icon
-                size="32"
-                :color="fileIconColor"
-                class="mt-2">{{ fileIconClass }}</v-icon>
-            </span>
+          <v-list-item-icon class="ms-1 me-3">
+            <v-icon
+              size="32"
+              :color="fileIconColor"
+              class="mt-2">
+              {{ fileIconClass }}
+            </v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -23,7 +23,25 @@
                 class="flex-grow-1 title pt-1 mb-0 ps-0 my-auto align-center text-start text-truncate"
                 :aria-label="fileTitleText"
                 v-sanitized-html="fileTitle"></h1>
+              <span>
+                <span v-show="hover || isMobile" class="flex-row align-center justify-center">
+                  <v-btn
+                    icon
+                    small
+                    class="me-2"
+                    @click.prevent.stop="showInfo">
+                    <v-icon class="icon-default-color" size="16">
+                      as fa-info-circle
+                    </v-icon>
+                  </v-btn>
+                  <file-favorite-action
+                    :file="result"
+                    @removed="$emit('refresh-favorite')" />
+
+                </span>
+              </span>
             </v-list-item-title>
+
             <v-list-item-subtitle class="d-flex flex-column">
               <span class="d-flex flex-row align-center mx-auto full-width">
                 <span class="d-flex flex-row align-center" v-if="space">
@@ -156,7 +174,6 @@ export default {
       return this.result?.author;
     },
     fileUpdateDate() {
-      console.log(this.result);
       return this.result?.date;
     },
     space() {
@@ -178,10 +195,14 @@ export default {
           'id': this.fileId,
           'mimetype': this.result?.fileType,
           'downloadUrl': this.downloadUrl,
-          'filename': this.result?.filename
+          'filename': this.result?.filename,
+          'source': 'documents'
         };
         document.dispatchEvent(new CustomEvent('open-attachments-preview', {detail: {'attachments': [file],'id': this.fileId }}));
       }
+    },
+    showInfo() {
+      document.dispatchEvent(new CustomEvent('open-document-info-drawer', {detail: this.fileId}));
     },
   }
 };

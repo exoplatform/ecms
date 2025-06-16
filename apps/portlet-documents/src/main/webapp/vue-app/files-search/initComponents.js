@@ -1,6 +1,13 @@
-import FileSearchCard  from './components/FileSearchCard.vue';
-import ExoDocsFavoriteAction from './components/ExoDocsFavoriteAction.vue';
+import fileSearchCard from './components/FileSearchCard.vue';
+import fileFavoriteAction from './components/FileFavoriteAction.vue';
 
 
-Vue.component('FileSearchCard', FileSearchCard);
-Vue.component('ExoDocsFavoriteAction', ExoDocsFavoriteAction);
+const components = {
+  'file-search-card': fileSearchCard,
+  'file-favorite-action': fileFavoriteAction
+};
+
+for (const key in components) {
+  Vue.component(key, components[key]);
+}
+
