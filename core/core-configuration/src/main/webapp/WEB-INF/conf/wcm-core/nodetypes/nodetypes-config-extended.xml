@@ -753,5 +753,14 @@
       </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
+
+  <nodeType name="mix:documentsCategory" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:categoryIds" requiredType="String" autoCreated="false" mandatory="false"
+                          onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
   
 </nodeTypes>
