@@ -756,8 +756,8 @@
 
   <nodeType name="mix:documentsCategory" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
     <propertyDefinitions>
-      <propertyDefinition name="exo:categoryIds" requiredType="String" autoCreated="false" mandatory="false"
-                          onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="exo:categoryIds" requiredType="Long" autoCreated="false" mandatory="false"
+                          onParentVersion="COPY" protected="false" multiple="true">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
