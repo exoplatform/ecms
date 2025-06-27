@@ -19,7 +19,7 @@
 <script>
 export default {
   props: {
-    document: {
+    file: {
       type: Object,
       default: null,
     },
@@ -37,21 +37,23 @@ export default {
     },
   },
   data: () => ({
-    spaceId: null,
     templateParams: {},
   }),
   computed: {
     isFavorite() {
-      return this.document && this.document.metadatas && this.document.metadatas.favorites && this.document.metadatas.favorites.length;
+      return this.file && this.file.metadatas && this.file.metadatas.favorites && this.file.metadatas.favorites.length;
     },
     favoriteId() {
-      return  this.document && this.document.id;
+      return  this.file && this.file.id;
+    },
+    spaceId() {
+      return this.file?.space?.id;
     }
   },
   watch: {
-    document() {
-      if (this.document) {
-        this.templateParams.page_id = this.document.id;
+    file() {
+      if (this.file) {
+        this.templateParams.page_id = this.file.id;
       }
     }
   },

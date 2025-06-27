@@ -343,7 +343,11 @@ public class ManageDocumentService implements ResourceContainer {
       if (!newNode.hasProperty(NodetypeConstant.EXO_TITLE) && newNode.canAddMixin(NodetypeConstant.EXO_RSS_ENABLE)) {
         newNode.addMixin(NodetypeConstant.EXO_RSS_ENABLE);
       }
+
       newNode.setProperty(NodetypeConstant.EXO_TITLE, folderName);
+      if (node.isNodeType(NodetypeConstant.EXO_HIDDENABLE) || isSystem) {
+        newNode.addMixin(NodetypeConstant.EXO_HIDDENABLE);
+      }
       node.save();
       Document document = createNewDocument();
       String childFolder = StringUtils.isEmpty(currentFolder) ? newNode.getName() : currentFolder.concat("/")
@@ -595,7 +599,7 @@ public class ManageDocumentService implements ResourceContainer {
     AutoVersionService autoVersionService=WCMCoreUtils.getService(AutoVersionService.class);
     boolean canRemove = true;
     String sourcePath = sourceNode.getPath();
-    file.setAttribute("name", Utils.getTitle(displayNode));
+    file.setAttribute("name", displayNode.getName());
     file.setAttribute("title", Utils.getTitle(displayNode));
     file.setAttribute("workspaceName", workspaceName);
     file.setAttribute("id", sourceNode.getUUID()); 

@@ -60,6 +60,9 @@
             <field name="uiComponent">
               <string>file-search-card</string>
             </field>
+            <field name="icon">
+              <string>fas fa-file-alt</string>
+            </field>
           </object>
         </object-param>
       </init-params>
