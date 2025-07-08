@@ -158,6 +158,9 @@
                         <value>
                           <string>exo:videoFolder</string>
                         </value>
+                        <value>
+                          <string>exo:hiddenable</string>
+                        </value>
                       </collection>
                     </field>
                     <field name="alias">
@@ -178,6 +181,9 @@
                         <value>
                           <string>exo:musicFolder</string>
                         </value>
+                        <value>
+                          <string>exo:hiddenable</string>
+                        </value>
                       </collection>
                     </field>
                     <field name="alias">
@@ -197,6 +203,9 @@
                       <collection type="java.util.ArrayList">
                         <value>
                           <string>exo:pictureFolder</string>
+                        </value>
+                        <value>
+                          <string>exo:hiddenable</string>
                         </value>
                       </collection>
                     </field>
@@ -240,6 +249,9 @@
                       <collection type="java.util.ArrayList">
                         <value>
                           <string>exo:favoriteFolder</string>
+                        </value>
+                        <value>
+                          <string>exo:hiddenable</string>
                         </value>
                       </collection>
                     </field>
