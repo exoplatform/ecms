@@ -51,6 +51,9 @@
             <field name="tagsEnabled">
               <boolean>true</boolean>
             </field>
+            <field name="spaceFilterEnabled">
+              <boolean>true</boolean>
+            </field>
             <field name="jsModule">
               <string>SHARED/FileSearch</string>
             </field>

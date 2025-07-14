@@ -30,7 +30,8 @@ public enum  ElasticSearchFilterType {
   FILTER_NOT_EXIST("notExist"),
   FILTER_CUSTOM("custom"),
   FILTER_MY_WORK_DOCS("myWork"),
-  FILTER_MATADATAS("metaDatas");
+  FILTER_MATADATAS("metaDatas"),
+  FILTER_BY_SPACE("spaceFilter");
 
   private final String filterType;
 
