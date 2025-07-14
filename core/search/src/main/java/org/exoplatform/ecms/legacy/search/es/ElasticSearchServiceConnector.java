@@ -21,7 +21,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -361,6 +365,15 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
     if (filters != null && filters.size() > 1 && WIKI_TYPE.equals(filters.get(0).getField()) && GROUP.equals(filters.get(0).getValue())
         && StringUtils.isNotBlank(filters.get(1).getValue())) {
       esQuery.append("                      " + getPermissionFilterWiki(filters.get(1).getValue()) + "\n");
+    } else if (CollectionUtils.isNotEmpty(filters) && filters.stream().anyMatch(f -> ElasticSearchFilterType.FILTER_BY_SPACE.equals(f.getType()))) {
+      ElasticSearchFilter spaceFilter = filters.stream()
+                                               .filter(f -> ElasticSearchFilterType.FILTER_BY_SPACE.equals(f.getType()))
+                                               .findFirst()
+                                               .orElse(null);
+      if (spaceFilter != null && StringUtils.isNotBlank(spaceFilter.getValue())) {
+        List<String> spaceIds = Arrays.asList(spaceFilter.getValue().split(","));
+        esQuery.append("                      ").append(buildPermissionsQuery(spaceIds)).append("\n");
+      }
     } else {
       esQuery.append("                      " + getPermissionFilter() + "\n");
     }
@@ -837,6 +850,26 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
 
   public ElasticSearchingClient getClient() {
     return client;
+  }
+
+  private String buildPermissionsQuery(List<String> spaceIds) {
+    StringBuilder permission = new StringBuilder();
+    SpaceService spaceService = CommonsUtils.getService(SpaceService.class);
+    List<String> spacePermissions = spaceIds.stream().map(id -> {
+      Space space = spaceService.getSpaceById(id);
+      if (space != null && spaceService.canViewSpace(space, getCurrentUser())) {
+        return "*:".concat(space.getGroupId());
+      }
+      return null;
+    }).filter(Objects::nonNull).toList();
+    permission.append("{\n")
+            .append("  \"terms\" : {\n")
+            .append("    \"permissions\" : [ \"")
+            .append(String.join("\", \"", spacePermissions))
+            .append("\" ]\n")
+            .append("  }\n")
+            .append("}");
+    return permission.toString();
   }
 }
 
