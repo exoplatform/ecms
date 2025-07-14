@@ -12,7 +12,7 @@ if (extensionRegistry) {
 
 Vue.use(Vuetify);
 
-export async function formatSearchResult(results, term) {
+export async function formatSearchResult(results) {
   if (results?.length) {
     return await Promise.all(results.map(async (file) => {
       const nodePath = file?.nodePath || '';
@@ -32,8 +32,6 @@ export async function formatSearchResult(results, term) {
         const authorPath = nodePath.substring(0, privateIndex);
         file.author = authorPath.substring(authorPath.lastIndexOf('/') + 1);
       }
-
-      file.title = file.title.replace(new RegExp(`(${term})`, 'ig'), '<span class="searchMatchExcerpt">$1</span>');
       file.filename = nodePath.substring(nodePath.lastIndexOf('/') + 1);
       return file;
     }));
