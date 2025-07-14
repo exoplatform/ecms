@@ -20,7 +20,7 @@
           <v-list-item-content>
             <v-list-item-title class="d-flex flex-row full-width align-center">
               <h1
-                class="flex-grow-1 title pt-1 mb-0 ps-0 my-auto align-center text-start text-truncate"
+                class="flex-grow-1 title font-weight-bold primary--text pt-1 mb-0 ps-0 my-auto align-center text-start text-truncate"
                 :aria-label="fileTitleText"
                 v-sanitized-html="fileTitle"></h1>
               <span>
@@ -93,7 +93,7 @@
               </span>
               <div
                 v-if="excerptHtml"
-                class="pt-2 text-wrap text-body text-break"
+                class="pt-2 text-wrap text-body-2 text-color text-break"
                 :class="{
                   'text-truncate-2': isMobile,
                   'text-truncate-3': !isMobile,
