@@ -80,7 +80,8 @@ public class FileSearchRestService implements ResourceContainer {
                                         @Parameter(description = "Sort direction") @Schema(defaultValue = "desc") @QueryParam("direction") String sortDirection,
                                         @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit,
                                         @Parameter(description = "favorites") @Schema(defaultValue = "false") @QueryParam("favorites") boolean favorites,
-                                        @Parameter(description = "Tag names list") @Schema(defaultValue = "false") @QueryParam("tags") List<String> tagNames
+                                        @Parameter(description = "Tag names list") @Schema(defaultValue = "false") @QueryParam("tags") List<String> tagNames,
+                                        @Parameter(description = "Space id") @QueryParam("spaceId") String spaceId
                                         ) throws Exception {
 
     if (limit <= 0) {
@@ -104,6 +105,9 @@ public class FileSearchRestService implements ResourceContainer {
       String favoriteQuery = buildFavoriteQueryStatement(metadataFilters.get(FavoriteService.METADATA_TYPE.getName()));
       recentFilter.append(favoriteQuery);
       recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MATADATAS, "", recentFilter.toString()));
+    }
+    if (StringUtils.isNotBlank(spaceId)) {
+     recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_BY_SPACE, "",spaceId));
     }
     if (!CollectionUtils.isEmpty(tagNames)) {
       StringBuilder recentFilter = new StringBuilder();

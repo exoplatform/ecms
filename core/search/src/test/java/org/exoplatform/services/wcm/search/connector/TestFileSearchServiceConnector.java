@@ -22,6 +22,8 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.ecms.legacy.search.data.SearchContext;
 import org.exoplatform.ecms.legacy.search.data.SearchResult;
+import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilter;
+import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilterType;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -30,6 +32,8 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.space.model.Space;
+import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.social.metadata.MetadataService;
 import org.exoplatform.social.metadata.model.MetadataItem;
 import org.exoplatform.social.metadata.model.MetadataObject;
@@ -50,6 +54,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import javax.jcr.RepositoryException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -317,6 +322,42 @@ public class TestFileSearchServiceConnector extends TestCase {
     assertEquals("exo-tag-doc-john", ((EcmsSearchResult) searchResult).getTags().get(0));
     assertEquals(1505312333066L, searchResult.getDate());
     assertEquals("/rest/thumbnailImage/medium/repository/collaboration/sites/intranet/documents/exo-documentation.pdf", searchResult.getImageUrl());
+  }
+
+  @Test
+  public void searchBySpaceShouldReturnResult() {
+    // Given
+    startSessionAs("john");
+    InitParams initParams = buildInitParams();
+    when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_ONE_DOC);
+    Space space = mock(Space.class);
+    SpaceService spaceService = mock(SpaceService.class);
+    when(CommonsUtils.getService(SpaceService.class)).thenAnswer(invocationOnMock -> spaceService);
+    when(spaceService.getSpaceById(anyString())).thenReturn(space);
+    when(spaceService.canViewSpace(any(Space.class), anyString())).thenReturn(true);
+    when(space.getGroupId()).thenReturn("groupId");
+
+    FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams,
+                                                                                           elasticSearchingClient,
+                                                                                           repositoryService,
+                                                                                           documentService);
+
+    // When
+    Collection<SearchResult> searchResults =
+                                           fileSearchServiceConnector.filteredSearch(null,
+                                                                                     "test",
+                                                                                     Arrays.asList(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_BY_SPACE,
+                                                                                                                           "",
+                                                                                                                           "1")),
+                                                                                     null,
+                                                                                     0,
+                                                                                     10,
+                                                                                     null,
+                                                                                     null);
+
+    // Then
+    assertNotNull(searchResults);
+    assertEquals(1, searchResults.size());
   }
   
   @Test
