@@ -154,7 +154,8 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
                                                .append("    \"dc:language\" : {\"type\" : \"text\"},\n")
                                                .append("    \"dc:relation\" : {\"type\" : \"text\"},\n")
                                                .append("    \"dc:coverage\" : {\"type\" : \"text\"},\n")
-                                               .append("    \"dc:rights\" : {\"type\" : \"text\"}\n")
+                                               .append("    \"dc:rights\" : {\"type\" : \"text\"},\n")
+                                               .append("    \"categoryId\" : {\"type\" : \"keyword\"}\n")
                                                .append("  }\n")
                                                .append("}");
 
@@ -276,6 +277,10 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       document.setLastUpdatedDate(new Date());
       document.setPermissions(computePermissions(node));
       document.setFields(fields);
+      if (node.hasProperty("exo:categoryIds")) {
+        Value[] values = node.getProperty("exo:categoryIds").getValues();
+        document.addListField("categoryId", new HashSet<>(Arrays.stream(values).map(Value::toString).toList()));
+      }
       addDocumentMetadata(document, node.getUUID());
 
       return document;
