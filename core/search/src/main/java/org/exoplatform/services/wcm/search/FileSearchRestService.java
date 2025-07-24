@@ -81,7 +81,7 @@ public class FileSearchRestService implements ResourceContainer {
                                         @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit,
                                         @Parameter(description = "favorites") @Schema(defaultValue = "false") @QueryParam("favorites") boolean favorites,
                                         @Parameter(description = "Tag names list") @Schema(defaultValue = "false") @QueryParam("tags") List<String> tagNames,
-                                        @Parameter(description = "Space id") @QueryParam("spaceId") String spaceId
+                                        @Parameter(description = "Space id") @QueryParam("spaceId") List<Long> spaceIds
                                         ) throws Exception {
 
     if (limit <= 0) {
@@ -106,8 +106,9 @@ public class FileSearchRestService implements ResourceContainer {
       recentFilter.append(favoriteQuery);
       recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MATADATAS, "", recentFilter.toString()));
     }
-    if (StringUtils.isNotBlank(spaceId)) {
-     recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_BY_SPACE, "",spaceId));
+    if (CollectionUtils.isNotEmpty(spaceIds)) {
+     List<String> spaceIdsString = spaceIds.stream().map(String::valueOf).toList();
+     recentFilters.add(new ElasticSearchFilter(ElasticSearchFilterType.FILTER_BY_SPACE, "",StringUtils.join(spaceIdsString, ",")));
     }
     if (!CollectionUtils.isEmpty(tagNames)) {
       StringBuilder recentFilter = new StringBuilder();
