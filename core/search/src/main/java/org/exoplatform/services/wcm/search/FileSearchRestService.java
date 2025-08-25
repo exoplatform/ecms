@@ -76,8 +76,8 @@ public class FileSearchRestService implements ResourceContainer {
       @ApiResponse(responseCode = "200", description = "Request fulfilled") })
   public Response searchRecentDocuments(@Parameter(description = "Query string") @QueryParam("q") String query,
                                         @Parameter(description = "My work") @Schema(defaultValue = "false") @QueryParam("myWork") boolean myWork,
-                                        @Parameter(description = "Sort field") @Schema(defaultValue = "date") @QueryParam("sort") String sortField,
-                                        @Parameter(description = "Sort direction") @Schema(defaultValue = "desc") @QueryParam("direction") String sortDirection,
+                                        @Parameter(description = "Sort field") @QueryParam("sortField") String sortField,
+                                        @Parameter(description = "Sort direction") @QueryParam("sortDirection") String sortDirection,
                                         @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit,
                                         @Parameter(description = "favorites") @Schema(defaultValue = "false") @QueryParam("favorites") boolean favorites,
                                         @Parameter(description = "Tag names list") @Schema(defaultValue = "false") @QueryParam("tags") List<String> tagNames,
@@ -86,12 +86,6 @@ public class FileSearchRestService implements ResourceContainer {
 
     if (limit <= 0) {
       limit = DEFAULT_LIMIT;
-    }
-    if (StringUtils.isBlank(sortField)) {
-      sortField = "date";
-    }
-    if (StringUtils.isBlank(sortDirection)) {
-      sortDirection = "desc";
     }
     List<ElasticSearchFilter> recentFilters = new ArrayList<>();
     String userid = String.valueOf(RestUtils.getCurrentUserIdentityId());
