@@ -108,11 +108,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.webui.ext.UIExtensionManager</key>
-    <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
-  </component>
-
-  <component>
     <key>org.gatein.api.Portal</key>
     <type>org.exoplatform.services.cms.documents.mock.PortalMock</type>
   </component>
