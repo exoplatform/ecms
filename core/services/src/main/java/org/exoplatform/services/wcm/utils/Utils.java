@@ -321,8 +321,6 @@ public class Utils {
 
   final static public String    UPLOAD_SIZE_LIMIT_MB       = "uploadFileSizeLimitMB";
 
-  final static public String    FILE_VIEWER_EXTENSION_TYPE = "org.exoplatform.ecm.dms.FileViewer";
-
   final static public String    MIME_TYPE                  = "mimeType";
 
   final static public String    REQUESTCONTEXT             = "requestcontext";
