@@ -25,54 +25,6 @@
   </component>
 
   <external-component-plugins>
-    <target-component>org.exoplatform.social.core.search.SearchService</target-component>
-    <component-plugin>
-      <name>FileSearchConnector</name>
-      <set-method>addConnector</set-method>
-      <type>org.exoplatform.social.core.search.SearchConnectorPlugin</type>
-      <description>Files Search connector</description>
-      <init-params>
-        <object-param>
-          <name>FileSearchConnector</name>
-          <description>Files Search connector</description>
-          <object type="org.exoplatform.social.core.search.SearchConnector">
-            <field name="name">
-              <string>files</string>
-            </field>
-            <field name="uri">
-              <string><![CDATA[/portal/rest/search/documents/recent?limit={limit}&q={keyword}&sort=relevancy]]></string>
-            </field>
-            <field name="enabled">
-              <boolean>${exo.search.file.enabled:true}</boolean>
-            </field>
-            <field name="favoritesEnabled">
-              <boolean>true</boolean>
-            </field>
-            <field name="tagsEnabled">
-              <boolean>true</boolean>
-            </field>
-            <field name="spaceFilterEnabled">
-              <boolean>true</boolean>
-            </field>
-            <field name="jsModule">
-              <string>SHARED/FileSearch</string>
-            </field>
-            <field name="i18nBundle">
-              <string>locale.portlet.documents</string>
-            </field>
-            <field name="uiComponent">
-              <string>file-search-card</string>
-            </field>
-            <field name="icon">
-              <string>fas fa-file-alt</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>
     <component-plugin>
       <name>social.metadataItem.created</name>
