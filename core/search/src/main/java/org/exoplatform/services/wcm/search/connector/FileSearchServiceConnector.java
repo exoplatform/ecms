@@ -170,7 +170,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
     ecmsSearchResult.setTags(tags);
     ecmsSearchResult.setImageUrl(getImageUrl(workspace, nodePath));
-    ecmsSearchResult.setPreviewUrl(getPreviewUrl(jsonHit, searchContext, downloadUrl));
     ecmsSearchResult.setExcerpt(searchResult.getExcerpt());
     ecmsSearchResult.setExcerpts(searchResult.getExcerpts());
     String formattedDate = getFormattedDate(searchResult.getDate(), lang);
@@ -252,45 +251,6 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
       LOG.error("Cannot format file size " + fileSize, e);
       return "";
     }
-  }
-
-  protected String getPreviewUrl(JSONObject jsonHit, SearchContext context, String downloadUrl) {
-    JSONObject hitSource = (JSONObject) jsonHit.get("_source");
-
-    String id = (String) jsonHit.get("_id");
-    String author = (String) hitSource.get("author");
-    String title = (String) hitSource.get("title");
-    String workspace = (String) hitSource.get("workspace");
-    String nodePath = (String) hitSource.get("path");
-    String fileType = (String) hitSource.get("fileType");
-    String activityId = (String) hitSource.get("activityId");
-
-    StringBuilder url = new StringBuilder("javascript:require(['SHARED/documentPreview'], function(documentPreview) {documentPreview.init({doc:{");
-    url.append("id:'").append(id).append("',");
-    url.append("fileType:'").append(fileType).append("',");
-    url.append("title:'").append(title).append("',");
-    String linkInDocumentsApp = "";
-    try {
-      linkInDocumentsApp = documentService.getLinkInDocumentsApp(nodePath);
-    } catch (Exception e) {
-      LOG.error("Cannot get link in document app for node " + nodePath, e);
-    }
-    url.append("path:'").append(nodePath)
-            .append("', repository:'").append(getRepositoryName())
-            .append("', workspace:'").append(workspace)
-            .append("', downloadUrl:'").append(downloadUrl.toString())
-            .append("', openUrl:'").append(linkInDocumentsApp)
-            .append("'}");
-    if(author != null) {
-      url.append(",author:{username:'").append(author).append("'}");
-    }
-    if(activityId != null) {
-      url.append(",activity:{id:'").append(activityId).append("'}");
-    }
-    //add void(0) to make firefox execute js
-    url.append("})});void(0);");
-
-    return url.toString();
   }
 
   protected String getImageUrl(String workspace, String nodePath) {
