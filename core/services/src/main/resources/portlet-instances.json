@@ -66,22 +66,6 @@
         "*:/platform/administrators"
       ],
       "system":true
-    },
-    {
-      "nameId":"DocumentsPortlet",
-      "categoryNameId":"tools",
-      "portletName":"DocumentsPortlet",
-      "names":{
-        "en":"layout.portletInstance.DocumentsPortlet.name"
-      },
-      "descriptions":{
-        "en":"layout.portletInstance.DocumentsPortlet.description"
-      },
-      "illustrationPath":"war:/../skin/DefaultSkin/portletIcons/DocumentsPortlet.png",
-      "permissions":[
-        "*:/platform/administrators"
-      ],
-      "system":true
     }
   ]
 }
