@@ -18,8 +18,7 @@
  */
 package org.exoplatform.services.cms.documents;
 
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -28,7 +27,10 @@ import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 import javax.jcr.version.VersionIterator;
 
-import java.util.*;
+import org.apache.commons.lang3.StringUtils;
+
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 public class VersionHistoryUtils {
 
@@ -205,32 +207,78 @@ public class VersionHistoryUtils {
      * @param nodeVersioning
      * @throws Exception
      */
-  private static void removeRedundant(Node nodeVersioning) throws Exception{
-    VersionHistory versionHistory = nodeVersioning.getVersionHistory();
-    String baseVersion = nodeVersioning.getBaseVersion().getName();
-    String rootVersion = nodeVersioning.getVersionHistory().getRootVersion().getName();
-    VersionIterator versions = versionHistory.getAllVersions();
-    Date currentDate = new Date();
-    Map<String, String> lstVersions = new HashMap<String, String>();
-    List<String> lstVersionTime = new ArrayList<String>();
-    while (versions.hasNext()) {
-      Version version = versions.nextVersion();
-      if(rootVersion.equals(version.getName()) || baseVersion.equals(version.getName())) continue;
+    private static void removeRedundant(Node nodeVersioning) throws Exception {
+      VersionHistory versionHistory = nodeVersioning.getVersionHistory();
+      String baseVersion = nodeVersioning.getBaseVersion().getName();
+      String rootVersion = versionHistory.getRootVersion().getName();
+      Date now = new Date();
+      Map<Long, String> versionTimestampToName = new HashMap<>();
+      List<Long> timestamps = new ArrayList<>();
+      VersionIterator versions = versionHistory.getAllVersions();
+      while (versions.hasNext()) {
+        Version version = versions.nextVersion();
+        String versionName = version.getName();
+        if (rootVersion.equals(versionName) || baseVersion.equals(versionName)) {
+          continue;
+        }
+        long created = version.getCreated().getTimeInMillis();
+        if (maxLiveTime != DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED &&
+                now.getTime() - created > maxLiveTime) {
 
-      if (maxLiveTime!= DOCUMENT_AUTO_DEFAULT_VERSION_EXPIRED &&
-              currentDate.getTime() - version.getCreated().getTime().getTime() > maxLiveTime) {
-        versionHistory.removeVersion(version.getName());
-      } else {
-        lstVersions.put(String.valueOf(version.getCreated().getTimeInMillis()), version.getName());
-        lstVersionTime.add(String.valueOf(version.getCreated().getTimeInMillis()));
+          versionHistory.removeVersion(versionName);
+          continue;
+        }
+        versionTimestampToName.put(created, versionName);
+        timestamps.add(created);
+      }
+      if (maxAllowVersion != DOCUMENT_AUTO_DEFAULT_VERSION_MAX &&
+              timestamps.size() >= maxAllowVersion) {
+        Collections.sort(timestamps);
+        removeExpiredVersions(versionHistory, timestamps, versionTimestampToName, rootVersion, baseVersion, true);
+        if (timestamps.size() >= maxAllowVersion) {
+          removeExpiredVersions(versionHistory, timestamps, versionTimestampToName, rootVersion, baseVersion, false);
+        }
       }
     }
-    if (maxAllowVersion <= lstVersionTime.size() && maxAllowVersion!= DOCUMENT_AUTO_DEFAULT_VERSION_MAX) {
-      Collections.sort(lstVersionTime);
-      String[] lsts = lstVersionTime.toArray(new String[lstVersionTime.size()]);
-      for (int j = 0; j <= lsts.length - maxAllowVersion; j++) {
-        versionHistory.removeVersion(lstVersions.get(lsts[j]));
+
+  /**
+   * Remove expired version
+   * Remove exceeded versions and skip base and root version depending on labeled or not
+   *
+   * @param versionHistory
+   * @param timestamps
+   * @param map
+   * @param rootVersion
+   * @param baseVersion
+   * @param skipLabeled
+   */
+  private static void removeExpiredVersions(
+          VersionHistory versionHistory,
+          List<Long> timestamps,
+          Map<Long, String> map,
+          String rootVersion,
+          String baseVersion,
+          boolean skipLabeled) throws Exception {
+
+    int i = 1;
+    while (timestamps.size() >= maxAllowVersion && i < timestamps.size()) {
+      long ts = timestamps.get(i);
+      String name = map.get(ts);
+      Version version = versionHistory.getVersion(name);
+      if (rootVersion.equals(name) || baseVersion.equals(name)) {
+        i++;
+        continue;
       }
+      if (skipLabeled) {
+        String[] labels = versionHistory.getVersionLabels(version);
+        boolean hasLabel = Arrays.stream(labels).anyMatch(StringUtils::isNotEmpty);
+        if (hasLabel) {
+          i++;
+          continue;
+        }
+      }
+      versionHistory.removeVersion(name);
+      timestamps.remove(i);
     }
   }
 
