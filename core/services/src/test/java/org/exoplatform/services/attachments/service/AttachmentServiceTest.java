@@ -367,7 +367,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     Session session = mock(Session.class);
     MockedStatic<Utils> UTILS = mockStatic(Utils.class);
     Node node = mock(Node.class);
-    UTILS.when(() -> Utils.getSession(sessionProviderService, repositoryService)).thenReturn(session);
+    UTILS.when(() -> Utils.getSystemSession(sessionProviderService, repositoryService)).thenReturn(session);
     UTILS.when(() -> Utils.getNodeByIdentifier(session, "123")).thenReturn(node);
     UTILS.when(() -> Utils.markDocumentAsViewed(session, "123", "user")).thenCallRealMethod();
     lenient().when(node.canAddMixin(DOCUMENTS_VIEW_MIXIN)).thenReturn(true);
