@@ -553,7 +553,7 @@ public class AttachmentServiceImpl implements AttachmentService {
   public long markAttachmentAsViewed(String nodeId, String viewer) {
     long views = 0L;
     try {
-      Session session = Utils.getSession(sessionProviderService, repositoryService);
+      Session session = Utils.getSystemSession(sessionProviderService, repositoryService);
       views = Utils.markDocumentAsViewed(session, nodeId, viewer);
     } catch (Exception e) {
       LOG.error("Error while marking document as viewed {}", nodeId, e);
