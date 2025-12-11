@@ -560,9 +560,9 @@ public class FileUploadHandler {
             String suffix = "(" + (indexSuffix - 1) + ")";
             exoTitle = getNewName(exoTitle, suffix);
           }
-          file.setProperty(NodetypeConstant.EXO_TITLE, Utils.cleanDocumentTitle(exoTitle));
+          file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
         } else if (!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
-          file.setProperty(NodetypeConstant.EXO_TITLE, Utils.cleanDocumentTitle(exoTitle));
+          file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
         }
         jcrContent = file.addNode("jcr:content","nt:resource");
       }else if(parent.hasNode(nodeName)){
