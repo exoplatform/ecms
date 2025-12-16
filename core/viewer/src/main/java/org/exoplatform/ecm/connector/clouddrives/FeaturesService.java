@@ -124,9 +124,8 @@ public class FeaturesService implements ResourceContainer {
       if (path != null) {
         CloudProvider provider;
         if (providerId != null && providerId.length() > 0) {
-          try {
-            provider = cloudDrives.getProvider(providerId);
-          } catch (ProviderNotAvailableException e) {
+          provider = cloudDrives.getProvider(providerId);
+          if (provider == null) {
             LOG.warn("Unknown provider: " + providerId);
             return Response.status(Status.BAD_REQUEST).entity("Unknown provider.").build();
           }
