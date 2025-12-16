@@ -267,13 +267,13 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    * {@inheritDoc}
    */
   @Override
-  public CloudProvider getProvider(String id) throws ProviderNotAvailableException {
+  public CloudProvider getProvider(String id) {
     for (CloudProvider p : connectors.keySet()) {
       if (p.getId().equals(id)) {
         return p;
       }
     }
-    throw new ProviderNotAvailableException("No such provider '" + id + "'");
+    return null;
   }
 
   /**
@@ -453,13 +453,17 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    */
   @Override
   public void start() {
-    try {
-      loadConnected(jcrService.getCurrentRepository());
-    } catch (RepositoryException e) {
-      LOG.error("Error reading current repository: " + e.getMessage());
-      throw new RuntimeException("Error loading connected drives: cannot read current repository", e);
+    if (!getProviders().isEmpty()) {
+      try {
+        loadConnected(jcrService.getCurrentRepository());
+      } catch (RepositoryException e) {
+        LOG.error("Error reading current repository: " + e.getMessage());
+        throw new RuntimeException("Error loading connected drives: cannot read current repository", e);
+      }
+      LOG.info("Cloud Drive service successfuly started");
+    } else {
+      LOG.info("No Cloud Drive providers configured.");
     }
-    LOG.info("Cloud Drive service successfuly started");
   }
 
   /**
@@ -539,17 +543,14 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
               // performance a bit. So, to avoid reading of the same we do it here once.
               if (drive.getProperty("ecd:connected").getBoolean()) {
                 String providerId = drive.getProperty("ecd:provider").getString();
-                try {
-                  CloudProvider provider = getProvider(providerId);
+                CloudProvider provider = getProvider(providerId);
+                if (provider != null) {
                   Set<Node> driveNodes = repoDrives.get(provider);
                   if (driveNodes == null) {
                     driveNodes = new HashSet<Node>();
                     repoDrives.put(provider, driveNodes);
                   }
                   driveNodes.add(drive);
-                } catch (CloudDriveException e) {
-                  LOG.error("Error loading provider (" + providerId + ") of stored drive " + drive.getPath() + ": "
-                      + e.getMessage(), e);
                 }
               }
             }

@@ -981,25 +981,27 @@ public class ConnectService implements ResourceContainer {
     ConnectResponse resp = new ConnectResponse();
     try {
       CloudProvider provider = cloudDrives.getProvider(providerId);
-      ConversationState convo = ConversationState.getCurrent();
-      if (convo != null) {
-        String localUser = convo.getIdentity().getUserId();
-        String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
+      if (provider != null) {
+        ConversationState convo = ConversationState.getCurrent();
+        if (convo != null) {
+          String localUser = convo.getIdentity().getUserId();
+          String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
 
-        UUID initId = generateId(localUser);
-        initiated.put(initId, new ConnectInit(localUser, provider, host));
-        timeline.put(initId, System.currentTimeMillis() + (INIT_COOKIE_EXPIRE * 1000) + 5000);
+          UUID initId = generateId(localUser);
+          initiated.put(initId, new ConnectInit(localUser, provider, host));
+          timeline.put(initId, System.currentTimeMillis() + (INIT_COOKIE_EXPIRE * 1000) + 5000);
 
-        resp.cookie(INIT_COOKIE, initId.toString(), INIT_COOKIE_PATH, host, "Cloud Drive init ID", INIT_COOKIE_EXPIRE, false);
-        return resp.entity(provider).ok().build();
+          resp.cookie(INIT_COOKIE, initId.toString(), INIT_COOKIE_PATH, host, "Cloud Drive init ID", INIT_COOKIE_EXPIRE, false);
+          return resp.entity(provider).ok().build();
+        } else {
+          LOG.warn("ConversationState not set to initialize connect to " + provider.getName());
+          return resp.error("User not authenticated to connect " + provider.getName()).status(Status.UNAUTHORIZED).build();
+        }
       } else {
-        LOG.warn("ConversationState not set to initialize connect to " + provider.getName());
-        return resp.error("User not authenticated to connect " + provider.getName()).status(Status.UNAUTHORIZED).build();
+        LOG.warn("Provider not found for id '" + providerId + "'");
+        return resp.error("Provider not found.").status(Status.BAD_REQUEST).build();
       }
-    } catch (ProviderNotAvailableException e) {
-      LOG.warn("Provider not found for id '" + providerId + "'", e);
-      return resp.error("Provider not found.").status(Status.BAD_REQUEST).build();
-    } catch (Throwable e) {
+    } catch(Throwable e){
       LOG.error("Error initializing user request for drive provider " + providerId, e);
       return resp.error("Error initializing user request.").status(Status.INTERNAL_SERVER_ERROR).build();
     }
