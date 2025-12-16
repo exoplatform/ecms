@@ -110,9 +110,8 @@ public interface CloudDriveService {
    *
    * @param id the id
    * @return CloudProvider
-   * @throws ProviderNotAvailableException if no such provider with given id
    */
-  CloudProvider getProvider(String id) throws ProviderNotAvailableException;
+  CloudProvider getProvider(String id);
 
   /**
    * Set of available providers.

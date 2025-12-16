@@ -84,12 +84,12 @@ public class ProviderService implements ResourceContainer {
   @RolesAllowed("users")
   @Path("/{providerid}")
   public Response getById(@PathParam("providerid") String providerId) {
-
-    try {
+    CloudProvider provider = cloudDrives.getProvider(providerId);
+    if (provider == null) {
+      LOG.warn("Cannot return provider by id " + providerId);
+      return Response.status(Status.BAD_REQUEST).entity("Cannot return provider by id " + providerId).build();
+    } else {
       return Response.ok().entity(cloudDrives.getProvider(providerId)).build();
-    } catch (CloudDriveException e) {
-      LOG.warn("Cannot return prvider by id " + providerId + ": " + e.getMessage());
-      return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
     }
   }
 
