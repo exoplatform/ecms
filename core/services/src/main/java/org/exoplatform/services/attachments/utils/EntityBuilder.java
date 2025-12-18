@@ -17,6 +17,7 @@
 package org.exoplatform.services.attachments.utils;
 
 import org.exoplatform.commons.exception.ObjectNotFoundException;
+import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.rest.model.AttachmentEntity;
@@ -139,6 +140,7 @@ public class EntityBuilder {
     attachment.setPreviewBreadcrumb(previewBreadcrumb);
 
     acl.setCanAccess(true);
+    acl.setCanEdit(PermissionUtil.canSetProperty(attachmentNode));
     attachment.setAcl(acl);
 
     return attachment;
