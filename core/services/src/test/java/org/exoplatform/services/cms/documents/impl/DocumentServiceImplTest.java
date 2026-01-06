@@ -8,6 +8,7 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
@@ -40,10 +41,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Repository;
-import javax.jcr.Session;
+import javax.jcr.*;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -104,6 +102,9 @@ public class DocumentServiceImplTest {
   @Mock
   UserPortalConfig userPortalConfig;
 
+  @Mock
+  TrashService trashService;
+
   MockedStatic<Utils> UTILS = mockStatic(Utils.class);
   MockedStatic<WCMCoreUtils> WCM_CORE_UTILS = mockStatic(WCMCoreUtils.class);
 
@@ -132,7 +133,8 @@ public class DocumentServiceImplTest {
                                               idGenerator,
                                               favoriteService,
                                               identityRegistry,
-                                              authenticator);
+                                              authenticator,
+                                              trashService);
     when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
     when(repositoryEntry.getDefaultWorkspaceName()).thenReturn("collaboration");
@@ -287,5 +289,14 @@ public class DocumentServiceImplTest {
     when((folderB.getIdentifier())).thenReturn(identifier);
     link = documentService.getLinkInDocumentsApp(nodePath, generalDrive);
     assertTrue(link.contains(identifier));
+  }
+
+  @Test
+  public void isDocumentTrashed_shouldReturnTrue_whenNodeIsInTrash() throws RepositoryException {
+    Node node = mock(Node.class);
+    when(trashService.isInTrash(node)).thenReturn(true, false);
+
+    assertTrue(documentService.isDocumentTrashed(node));
+    assertFalse(documentService.isDocumentTrashed(node));
   }
 }
