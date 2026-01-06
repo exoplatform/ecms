@@ -80,6 +80,9 @@ public class EntityBuilder {
     ExtendedSession extendedSession = (ExtendedSession) session;
     try {
       attachmentNode = extendedSession.getNodeByIdentifier(attachmentId);
+      if (documentService.isDocumentTrashed(attachmentNode)) {
+        return null;
+      }
     } catch (AccessDeniedException e) {
       Attachment privateAttachment = new Attachment();
       acl.setCanAccess(false);
