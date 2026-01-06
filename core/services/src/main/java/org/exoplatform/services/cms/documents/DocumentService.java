@@ -396,4 +396,23 @@ public interface DocumentService {
     }
   }
 
+  /**
+   * Determines whether the given JCR node represents a document that is currently
+   * in a "trash" (soft-deleted) state.
+   *
+   * <p>The exact detection strategy depends on the repository implementation and/or
+   * business rules. Typical approaches include checking whether the node resides
+   * under a dedicated trash path (for example, <code>/Trash</code>) or verifying a
+   * specific metadata flag or mixin that marks the document as trashed.</p>
+   *
+   * <p>This default implementation is not provided and must be overridden by
+   * implementations that support the concept of trash.</p>
+   *
+   * @param node the JCR node representing the document (must not be {@code null})
+   * @return {@code true} if the document is considered trashed; {@code false} otherwise
+   * @throws UnsupportedOperationException if the method is not implemented
+   */
+  default Boolean isDocumentTrashed(Node node) throws RepositoryException {
+    throw new UnsupportedOperationException();
+  }
 }

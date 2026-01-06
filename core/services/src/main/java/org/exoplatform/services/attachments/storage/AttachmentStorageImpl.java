@@ -97,7 +97,9 @@ public class AttachmentStorageImpl implements AttachmentStorage {
                                                                    workspace,
                                                                    userSession,
                                                                    attachmentId);
-          attachments.add(attachment);
+          if (attachment != null) {
+            attachments.add(attachment);
+          }
         }
         attachments = Utils.removeDuplicatedAttachments(userSession, attachments);
       }
