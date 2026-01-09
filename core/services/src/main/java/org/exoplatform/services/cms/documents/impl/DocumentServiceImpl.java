@@ -141,6 +141,7 @@ public class DocumentServiceImpl implements DocumentService {
   private FavoriteService favoriteService;
   private Authenticator       authenticator;
   private final IdentityRegistry identityRegistry;
+  private final TrashService trashService;
   
   /**
    * Instantiates a new {@link DocumentService} implementation.
@@ -168,7 +169,7 @@ public class DocumentServiceImpl implements DocumentService {
                              OrganizationService organizationService,
                              SettingService settingService,
                              IdentityManager identityManager,
-                             IDGeneratorService idGenerator, FavoriteService favoriteService, IdentityRegistry identityRegistry, Authenticator authenticator) {
+                             IDGeneratorService idGenerator, FavoriteService favoriteService, IdentityRegistry identityRegistry, Authenticator authenticator, TrashService trashService) {
     this.configurationManager = configurationManager;
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
@@ -186,6 +187,7 @@ public class DocumentServiceImpl implements DocumentService {
     
     // Online editors support
     this.editorsRuntimeId = idGenerator.generateStringID(this);
+    this.trashService = trashService;
     EditorProvidersHelper.init(this);
   }
 
@@ -1401,8 +1403,10 @@ public class DocumentServiceImpl implements DocumentService {
     } catch (RepositoryException e) {
       throw new IllegalStateException("Can't build a SessionProvider", e);
     }
-
-
   }
-  
+
+  @Override
+  public Boolean isDocumentTrashed(Node node) throws RepositoryException {
+    return trashService.isInTrash(node);
+  }
 }
