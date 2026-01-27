@@ -31,8 +31,11 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.commons.lang3.StringUtils;
 import org.picocontainer.Startable;
 
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.BasePath;
@@ -50,6 +53,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -716,15 +720,15 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   }
 
   protected List<String> getUserMemberships(String userId) throws Exception {
-    List<String> memberships = null;
-    String currentUser = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
-    if(currentUser != null && currentUser.equals(userId)) {
-      memberships = Utils.getMemberships();
+    if(StringUtils.isBlank(userId)) {
+      return Collections.emptyList();
     } else {
-      Collection<Membership> colMemberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-      memberships = colMemberships.stream().map(m -> m.getMembershipType() + ":" + m.getGroupId()).collect(Collectors.toList());
+      Identity userAclIdentity = ExoContainerContext.getService(UserACL.class).getUserIdentity(userId);
+      return userAclIdentity.getMemberships()
+                            .stream()
+                            .map(m -> "%s:%s".formatted(m.getMembershipType(), m.getGroup()))
+                            .collect(Collectors.toList());
     }
-    return memberships;
   }
 
   /**
