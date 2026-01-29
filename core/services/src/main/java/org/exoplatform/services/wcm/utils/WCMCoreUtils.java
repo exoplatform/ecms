@@ -190,31 +190,14 @@ public class WCMCoreUtils {
     try {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       startRequest(organizationService);
-      Identity identity = ConversationState.getCurrent().getIdentity();
-      Collection<?> memberships = null;
-      if (userId.equals(identity.getUserId())){
-        Collection<MembershipEntry> membershipsEntries = identity.getMemberships();
-        HashSet<MembershipImpl> membershipsHash = new HashSet<MembershipImpl>();
-        for (MembershipEntry membershipEntry : membershipsEntries) {
-          MembershipImpl m = new MembershipImpl();
-          m.setGroupId(membershipEntry.getGroup());
-          m.setMembershipType(membershipEntry.getMembershipType());
-          m.setUserName(userId);
-          membershipsHash.add(m);
-        }
-        memberships =  new LinkedList<>(membershipsHash);
-      } else {
-        memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-      }
+      Identity identity = ExoContainerContext.getService(UserACL.class).getUserIdentity(userId);
       String userMembershipTmp;
-      Membership userMembership;
       int count = 0;
       String permissionTmp = "";
       for (String permission : permissions) {
         if (!permissionTmp.equals(permission)) count = 0;
-        for (Object userMembershipObj : memberships) {
-          userMembership = (Membership) userMembershipObj;
-          if (permission.equals(userMembership.getUserName())) {
+        for (MembershipEntry userMembership : identity.getMemberships()) {
+          if (permission.equals(userId)) {
             return true;
           } else if ("any".equals(permission)) {
             if (isNeedFullAccess) {
@@ -222,14 +205,14 @@ public class WCMCoreUtils {
               if (count == 4) return true;
             }
             else return true;
-          } else if (permission.startsWith("*") && permission.contains(userMembership.getGroupId())) {
+          } else if (permission.startsWith("*") && permission.contains(userMembership.getGroup())) {
             if (isNeedFullAccess) {
               count++;
               if (count == 4) return true;
             }
             else return true;
           } else {
-            userMembershipTmp = userMembership.getMembershipType() + ":" + userMembership.getGroupId();
+            userMembershipTmp = userMembership.getMembershipType() + ":" + userMembership.getGroup();
             if (permission.equals(userMembershipTmp)) {
               if (isNeedFullAccess) {
                 count++;
