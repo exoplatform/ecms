@@ -21,6 +21,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.impl.MembershipUpdateListener;
 import org.exoplatform.services.security.ConversationRegistry;
+import org.exoplatform.services.security.IdentityRegistry;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -31,8 +32,9 @@ public class WCMMembershipUpdateListener extends MembershipUpdateListener {
   private ManageDriveService driveService_;
 
   public WCMMembershipUpdateListener(ConversationRegistry conversationRegistry,
-      ManageDriveService driveService) {
-    super(conversationRegistry);
+                                     IdentityRegistry identityRegistry,
+                                     ManageDriveService driveService) {
+    super(conversationRegistry, identityRegistry);
     driveService_ = driveService;
   }
 
