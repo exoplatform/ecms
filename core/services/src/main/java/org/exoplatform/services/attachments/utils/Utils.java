@@ -2,6 +2,9 @@ package org.exoplatform.services.attachments.utils;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
 import org.exoplatform.services.cms.BasePath;
@@ -12,12 +15,15 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 import javax.jcr.Node;
@@ -126,10 +132,25 @@ public class Utils {
     return (Node) nodeFinder.getItem(session, path, true);
   }
 
+  // FIXME refactor usage of this method to make the session provider explicitly
+  // provided by providing explicitely the username rather than attempting to
+  // guess it from ThreadLocals
   public static Session getSession(SessionProviderService sessionProviderService,
                                    RepositoryService repositoryService) throws RepositoryException {
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
-    return sessionProvider.getSession(getCurrentWorkspace(repositoryService), repositoryService.getCurrentRepository());
+    if (sessionProvider == null && ConversationState.getCurrent() != null) {
+      String userId = ConversationState.getCurrent().getIdentity().getUserId();
+      Identity userAclIdentity = ExoContainerContext.getService(UserACL.class).getUserIdentity(userId);
+      if (userAclIdentity == null) {
+        userAclIdentity = new Identity(IdentityConstants.ANONIM);
+      }
+      sessionProvider = getUserSessionProvider(repositoryService, userAclIdentity);
+    }
+    if (sessionProvider == null) {
+      throw new IllegalStateException("Missing SessionProvier and Cusrrent user in ThreadLocal(s)");
+    } else {
+      return sessionProvider.getSession(getCurrentWorkspace(repositoryService), repositoryService.getCurrentRepository());
+    }
   }
 
   public static Session getSystemSession(SessionProviderService sessionProviderService,
@@ -140,6 +161,20 @@ public class Utils {
 
   public static String getCurrentWorkspace(RepositoryService repositoryService) throws RepositoryException {
     return repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+  }
+
+  public static SessionProvider getUserSessionProvider(RepositoryService repositoryService, Identity aclIdentity) {
+    SessionProvider sessionProvider = new SessionProvider(new ConversationState(aclIdentity));
+    try {
+      ManageableRepository repository = repositoryService.getCurrentRepository();
+      String workspace = repository.getConfiguration().getDefaultWorkspaceName();
+
+      sessionProvider.setCurrentRepository(repository);
+      sessionProvider.setCurrentWorkspace(workspace);
+      return sessionProvider;
+    } catch (RepositoryException e) {
+      throw new IllegalStateException("Can't build a SessionProvider", e);
+    }
   }
 
   public static boolean isQuarantinedItem(Session systemSession, String attachmentId) throws RepositoryException {
