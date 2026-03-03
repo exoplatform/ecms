@@ -139,6 +139,7 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
                                                .append("    \"version\" : {\"type\" : \"long\"},\n")
                                                .append("    \"name\" : {\"type\" : \"text\", \"analyzer\": \"letter_lowercase_asciifolding\"},\n")
                                                .append("    \"title\":  { \"type\": \"text\", \"fields\": { \"raw\": { \"type\": \"keyword\" }, \"whitespace\": { \"type\": \"text\", \"analyzer\": \"whitespace_lowercase_asciifolding\" } }, \"index_options\": \"offsets\" },\n")
+                                               .append("    \"transcription\":  { \"type\": \"text\", \"fields\": { \"raw\": { \"type\": \"keyword\" }, \"whitespace\": { \"type\": \"text\", \"analyzer\": \"whitespace_lowercase_asciifolding\" } }, \"index_options\": \"offsets\" },\n")
                                                .append("    \"tags\" : {\"type\" : \"keyword\"},\n")
                                                .append("    \"dc:title\" : {\"type\" : \"text\"},\n")
                                                .append("    \"dc:creator\" : {\"type\" : \"text\"},\n")
@@ -218,6 +219,9 @@ public class FileindexingConnector extends ElasticIndexingServiceConnector {
       }
       if (node.hasProperty(NodetypeConstant.EXO_OWNER)) {
         fields.put("author", node.getProperty(NodetypeConstant.EXO_OWNER).getString());
+      }
+      if (node.hasProperty(NodetypeConstant.EXO_TRANSCRIPTION)) {
+        fields.put("transcription", node.getProperty(NodetypeConstant.EXO_TRANSCRIPTION).getString());
       }
       if (node.hasProperty("jcr:created")) {
         fields.put("createdDate", String.valueOf(node.getProperty("jcr:created").getDate().getTimeInMillis()));
