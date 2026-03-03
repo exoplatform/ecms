@@ -161,9 +161,21 @@ public class FileSearchRestService implements ResourceContainer {
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\" }\n }");
     fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"application/vnd.openxmlformats-officedocument.wordprocessingml.document.form\" }\n }");
     if (!myWork) {
+      // Images
       fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/jpeg\" }\n }");
       fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/png\" }\n }");
       fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"image/gif\" }\n }");
+      // Videos
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"video/mpeg\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"video/mp4\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"video/webm\" }\n }");
+      // Audio
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"audio/mpeg\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"audio/mp4\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"audio/webm\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"audio/flac\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"audio/ogg\" }\n }");
+      fileTypesFilter.append(",{\n \"term\" : { \"fileType\" : \"audio/wav\" }\n }");
     }
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM, "fileType", fileTypesFilter.toString());
   }
