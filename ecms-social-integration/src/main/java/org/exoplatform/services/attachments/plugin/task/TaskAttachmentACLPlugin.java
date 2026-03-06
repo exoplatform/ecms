@@ -17,9 +17,12 @@
 package org.exoplatform.services.attachments.plugin.task;
 
 import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.task.dto.TaskDto;
 import org.exoplatform.task.exception.EntityNotFoundException;
 import org.exoplatform.task.service.TaskService;
@@ -33,8 +36,12 @@ public class TaskAttachmentACLPlugin extends AttachmentACLPlugin {
 
   private TaskService         taskService;
 
-  public TaskAttachmentACLPlugin(TaskService taskService) {
-    this.taskService = taskService;  }
+  private IdentityManager     identityManager;
+
+  public TaskAttachmentACLPlugin(TaskService taskService, IdentityManager identityManager) {
+    this.taskService = taskService;
+    this.identityManager = identityManager;
+  }
 
   @Override
   public String getEntityType() {
@@ -72,7 +79,9 @@ public class TaskAttachmentACLPlugin extends AttachmentACLPlugin {
     boolean isParticipant = false;
     try {
       TaskDto task = taskService.getTask(Long.parseLong(entityId));
-      isParticipant = TaskUtil.hasEditPermission(taskService, task);
+      Identity identity = identityManager.getIdentity(String.valueOf(userIdentityId));
+      isParticipant = TaskUtil.hasEditPermission(taskService, task)
+          || (task.getCreatedBy() != null && task.getCreatedBy().equals(identity.getRemoteId()));
     } catch (EntityNotFoundException e) {
       LOG.error("Can not find task with ID: " + entityId);
     }
