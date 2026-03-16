@@ -743,12 +743,8 @@ public class ManageDocumentService implements ResourceContainer {
         newNode.setProperty(NodetypeConstant.EXO_TITLE, org.exoplatform.services.cms.impl.Utils.cleanDocumentTitle(folder));
 
         // Update permissions
-        if (newNode.canAddMixin("exo:privilegeable")) {
-          newNode.addMixin("exo:privilegeable");
-        }
-        String groupId = driveData.getParameters().get(ManageDriveServiceImpl.DRIVE_PARAMATER_GROUP_ID);
-        if(StringUtils.isNotBlank(groupId) && groupId.startsWith("/spaces/")) {
-          ((ExtendedNode) newNode).setPermission("*:" + groupId, new String[]{PermissionType.READ, PermissionType.ADD_NODE, PermissionType.SET_PROPERTY});
+        if (newNode.canAddMixin("mix:referenceable")) {
+          newNode.addMixin("mix:referenceable");
         }
 
         node.save();
