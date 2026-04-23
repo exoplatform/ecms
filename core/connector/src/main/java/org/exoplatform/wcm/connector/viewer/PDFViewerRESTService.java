@@ -18,38 +18,30 @@ package org.exoplatform.wcm.connector.viewer;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.util.List;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import javax.jcr.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
+import org.icepdf.core.exceptions.PDFException;
+import org.icepdf.core.exceptions.PDFSecurityException;
+import org.icepdf.core.pobjects.Document;
+import org.icepdf.core.pobjects.Page;
+import org.icepdf.core.pobjects.Stream;
+import org.icepdf.core.util.GraphicsRenderingHints;
+
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.AccessControlEntry;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -60,16 +52,8 @@ import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.rest.api.RestUtils;
-import org.icepdf.core.exceptions.PDFException;
-import org.icepdf.core.exceptions.PDFSecurityException;
-import org.icepdf.core.pobjects.Document;
-import org.icepdf.core.pobjects.Page;
-import org.icepdf.core.pobjects.Stream;
-import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
  * Returns a PDF content to be displayed on the web page.
@@ -146,32 +130,16 @@ public class PDFViewerRESTService implements ResourceContainer {
     try {
       ManageableRepository repository = repositoryService_.getCurrentRepository();
       Session userSession = getUserSessionProvider(repositoryService_, ConversationState.getCurrent().getIdentity()).getSession(wsName, repository);
-      try {
-        currentNode = userSession.getNodeByUUID(uuid);
-      } catch (AccessDeniedException e) {
-        try {
-          Session systemSession = getSystemProvider().getSession(wsName, repository);
-          currentNode = systemSession.getNodeByUUID(uuid);
-        } catch (Exception ex) {
-          LOG.warn("Requested document not found",  e);
-          return Response.status(Response.Status.NOT_FOUND).entity("Requested document not found").build();
-        }
-        ExtendedNode extendedNode = (ExtendedNode) currentNode;
-        List<AccessControlEntry> permsList = extendedNode.getACL().getPermissionEntries();
-        boolean isPublic = false;
-        for (AccessControlEntry accessControlEntry : permsList) {
-          if (StringUtils.equals(IdentityConstants.ANY, accessControlEntry.getIdentity())) {
-            isPublic = true;
-            break;
-          }
-        } if (!isPublic){
-          LOG.warn("User '{}' attempts to access not authorized document", RestUtils.getCurrentUser(), e);
-          return Response.status(Response.Status.UNAUTHORIZED).entity("You are attempting to access not authorized document").build();
-        }
-      }
+      currentNode = userSession.getNodeByUUID(uuid);
       fileName = Utils.getTitle(currentNode);
       File pdfFile = getPDFDocumentFile(currentNode, repoName);
-      is = new FileInputStream(pdfFile);      
+      is = new FileInputStream(pdfFile);
+    } catch (AccessDeniedException e) {
+      LOG.warn("User '{}' attempts to access not authorized document", RestUtils.getCurrentUser(), e);
+      return Response.status(Response.Status.UNAUTHORIZED).entity("You are attempting to access not authorized document").build();
+    } catch (ItemNotFoundException e) {
+      LOG.warn("Requested document not found", e);
+      return Response.status(Response.Status.NOT_FOUND).entity("Requested document not found").build();
     } catch (Exception e) {
       LOG.warn("Error retrieving the documents", e);
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
