@@ -28,11 +28,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -45,6 +48,8 @@ import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -53,7 +58,12 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.pdfviewer.ObjectKey;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.rest.api.RestUtils;
 import org.icepdf.core.exceptions.PDFException;
 import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
@@ -130,20 +140,41 @@ public class PDFViewerRESTService implements ResourceContainer {
   public Response getPDFFile(@PathParam("repoName") String repoName,
       @PathParam("workspaceName") String wsName,
       @PathParam("uuid") String uuid) throws Exception {
-    Session session = null;
     InputStream is = null;
     String fileName = null;
+    Node currentNode = null;
     try {
       ManageableRepository repository = repositoryService_.getCurrentRepository();
-      session = getSystemProvider().getSession(wsName, repository);
-      Node currentNode = session.getNodeByUUID(uuid);  
+      Session userSession = getUserSessionProvider(repositoryService_, ConversationState.getCurrent().getIdentity()).getSession(wsName, repository);
+      try {
+        currentNode = userSession.getNodeByUUID(uuid);
+      } catch (AccessDeniedException e) {
+        try {
+          Session systemSession = getSystemProvider().getSession(wsName, repository);
+          currentNode = systemSession.getNodeByUUID(uuid);
+        } catch (Exception ex) {
+          LOG.warn("Requested document not found",  e);
+          return Response.status(Response.Status.NOT_FOUND).entity("Requested document not found").build();
+        }
+        ExtendedNode extendedNode = (ExtendedNode) currentNode;
+        List<AccessControlEntry> permsList = extendedNode.getACL().getPermissionEntries();
+        boolean isPublic = false;
+        for (AccessControlEntry accessControlEntry : permsList) {
+          if (StringUtils.equals(IdentityConstants.ANY, accessControlEntry.getIdentity())) {
+            isPublic = true;
+            break;
+          }
+        } if (!isPublic){
+          LOG.warn("User '{}' attempts to access not authorized document", RestUtils.getCurrentUser(), e);
+          return Response.status(Response.Status.UNAUTHORIZED).entity("You are attempting to access not authorized document").build();
+        }
+      }
       fileName = Utils.getTitle(currentNode);
       File pdfFile = getPDFDocumentFile(currentNode, repoName);
       is = new FileInputStream(pdfFile);      
     } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e);
-      }
+      LOG.warn("Error retrieving the documents", e);
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
     }
     return Response.ok(is).header("Content-Disposition","attachment; filename=\"" + fileName+"\"").build();
   }
@@ -188,6 +219,20 @@ public class PDFViewerRESTService implements ResourceContainer {
   private SessionProvider getSystemProvider() {
     SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
     return service.getSystemSessionProvider(null) ;
+  }
+
+  private SessionProvider getUserSessionProvider(RepositoryService repositoryService, Identity aclIdentity) {
+    SessionProvider sessionProvider = new SessionProvider(new ConversationState(aclIdentity));
+    try {
+      ManageableRepository repository = repositoryService.getCurrentRepository();
+      String workspace = repository.getConfiguration().getDefaultWorkspaceName();
+
+      sessionProvider.setCurrentRepository(repository);
+      sessionProvider.setCurrentWorkspace(workspace);
+      return sessionProvider;
+    } catch (RepositoryException e) {
+      throw new IllegalStateException("Can't build a SessionProvider", e);
+    }
   }
 
   private InputStream pushToCache(File content, String repoName, String wsName, String uuid,
