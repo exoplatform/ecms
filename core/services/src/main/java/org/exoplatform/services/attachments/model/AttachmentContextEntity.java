@@ -16,27 +16,28 @@
  */
 package org.exoplatform.services.attachments.model;
 
-import org.exoplatform.commons.api.persistence.ExoEntity;
-
-import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+
+import io.meeds.common.persistence.PortableSequence;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 
 @Entity(name = "AttachmentsContext")
-@ExoEntity
 @Table(name = "EXO_ATTACHMENTS_CONTEXT")
-@NamedQueries({
-    @NamedQuery(name = "AttachmentsContext.getAttachmentContextByEntity", query = "SELECT ac FROM AttachmentsContext ac "
-        + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType"),
-    @NamedQuery(name = "AttachmentsContext.getAttachmentItemByEntity", query = "SELECT ac FROM AttachmentsContext ac "
-        + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType AND ac.attachmentId = :attachmentId") })
+@NamedQuery(name = "AttachmentsContext.getAttachmentContextByEntity", query = "SELECT ac FROM AttachmentsContext ac "
+    + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType")
+@NamedQuery(name = "AttachmentsContext.getAttachmentItemByEntity", query = "SELECT ac FROM AttachmentsContext ac "
+    + "WHERE ac.entityId = :entityId AND ac.entityType = :entityType AND ac.attachmentId = :attachmentId")
 public class AttachmentContextEntity implements Serializable {
 
   private static final long serialVersionUID = -6445215481619188461L;
 
   @Id
-  @SequenceGenerator(name = "SEQ_ATTACHMENTS_CONTEXT_ID", sequenceName = "SEQ_ATTACHMENTS_CONTEXT_ID", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_ATTACHMENTS_CONTEXT_ID")
+  @PortableSequence(name = "SEQ_ATTACHMENTS_CONTEXT_ID")
   @Column(name = "ATTACHMENTS_CONTEXT_ID")
   private Long              id;
 

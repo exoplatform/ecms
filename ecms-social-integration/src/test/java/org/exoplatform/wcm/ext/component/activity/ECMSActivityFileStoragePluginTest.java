@@ -31,7 +31,7 @@ import javax.jcr.nodetype.NodeDefinition;
 
 import java.io.File;
 
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

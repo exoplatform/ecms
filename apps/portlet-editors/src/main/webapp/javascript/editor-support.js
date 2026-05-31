@@ -192,7 +192,45 @@
           'workspace': workspace
         };
         cometd = cCometD;
-        initLoader.resolve();
+
+        // configure() only sets up parameters: it never performs the actual
+        // Bayeux handshake, and cometd.subscribe() throws "Illegal state:
+        // disconnected" if called before a handshake completes. Make sure a
+        // handshake actually happens instead of assuming some other module
+        // sharing this CometD client will have triggered one already (that
+        // assumption was a pure, unenforced race).
+        cometd.addListener('/meta/handshake', function(handshakeReply) {
+          if (handshakeReply.successful) {
+            // This callback runs synchronously, nested inside CometD's own
+            // internal handshake-success processing (status still reports
+            // "handshaking" here, not yet "connecting"/"connected", and
+            // messages sent from within this callback risk sitting in an
+            // internal batch that isn't flushed yet). Defer to let that
+            // processing fully unwind before we act on it.
+            window.setTimeout(function() {
+              initLoader.resolve();
+            }, 0);
+          } else {
+            log(`CometD handshake failed: ${  JSON.stringify(handshakeReply)}`);
+          }
+        });
+        const status = cometd.getStatus();
+        if (status === 'disconnected') {
+          // Nobody else has started a handshake yet: do it ourselves.
+          cometd.handshake();
+        } else if (status === 'connecting' || status === 'connected') {
+          // A handshake was already fully completed (by this module on a
+          // previous call, or by another module sharing this client): the
+          // listener above won't fire again for it, so we're already good
+          // to go.
+          initLoader.resolve();
+        }
+        // Otherwise (status === 'handshaking'): someone else's handshake is
+        // in flight but not yet complete - do NOT resolve yet and do NOT
+        // call handshake() ourselves (it would throw). Wait for the
+        // /meta/handshake listener above to fire once it actually
+        // completes. (status === 'disconnecting' also falls here, as a
+        // rare edge case with nothing else useful to do.)
       });
     };
 
@@ -253,9 +291,25 @@
     this.init = init;
 
     /**
+     * Resolves once the CometD client is configured and ready to use.
+     * Lets other modules (e.g. onlyoffice) reuse this module's CometD
+     * client instead of independently calling cCometD.configure() on the
+     * same shared client.
+     */
+    this.whenReady = function() {
+      if (!initLoader) {
+        init();
+      }
+      return initLoader.promise();
+    };
+
+    /**
      * Inits configuration
      */
     this.initConfig = function(user, conf, i18n, idleTimeout) {
+      if (!initLoader) {
+        init();
+      }
       configLoader.resolve(user, conf, i18n, idleTimeout);
     };
 
@@ -327,8 +381,24 @@
         init(provider, workspace);
       }
       const $loader = $.Deferred();
+      // Fail loud instead of hanging forever if the server never confirms
+      // (e.g. a dropped CometD push), so the caller can show an error
+      // rather than leaving the editor stuck on its loading state.
+      const openTimeout = window.setTimeout(function() {
+        log(`Timed out waiting for provider confirmation. Provider: ${  provider  }, fileId: ${  fileId}`);
+        $loader.reject();
+      }, 15000);
+      $loader.always(function() {
+        window.clearTimeout(openTimeout);
+      });
 
       initLoader.done(function() {
+        // init() may have run earlier through whenReady()/initConfig() with no
+        // provider: the server registers the opened editor from these two
+        // subscribe props (CometdDocumentsService), so set them here regardless
+        // of who initialised the client
+        cometdContext.provider = provider;
+        cometdContext.workspace = workspace;
         subscribeDocument(fileId, function(result) {
           if (result.type === CURRENT_PROVIDER_INFO) {
             if (result.allProviders.length > 1) {

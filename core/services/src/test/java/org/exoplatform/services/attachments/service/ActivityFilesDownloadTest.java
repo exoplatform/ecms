@@ -1,6 +1,7 @@
 package org.exoplatform.services.attachments.service;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -14,18 +15,14 @@ import javax.jcr.Property;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Matchers;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
 
 import org.exoplatform.services.attachments.model.ActivityFilesDownloadResource;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(NodeLocation.class)
+import static org.mockito.Mockito.mockStatic;
+
 public class ActivityFilesDownloadTest {
 
   @Test
@@ -50,29 +47,31 @@ public class ActivityFilesDownloadTest {
     when(dataProperty1.getStream()).thenReturn(new ByteArrayInputStream("This is simple text".getBytes()));
     when(dataProperty3.getStream()).thenReturn(new ByteArrayInputStream("This is simple text".getBytes()));
 
-    PowerMockito.mockStatic(NodeLocation.class);
-    PowerMockito.when(NodeLocation.getNodeByLocation(Matchers.refEq(nodeLocation1))).thenReturn(node1);
-    PowerMockito.when(NodeLocation.getNodeByLocation(Matchers.refEq(nodeLocation2))).thenReturn(node2);
-    PowerMockito.when(NodeLocation.getNodeByLocation(Matchers.refEq(nodeLocation3))).thenReturn(node3);
+    InputStream zis;
+    try (MockedStatic<NodeLocation> nodeLocationMockedStatic = mockStatic(NodeLocation.class)) {
+      when(NodeLocation.getNodeByLocation(refEq(nodeLocation1))).thenReturn(node1);
+      when(NodeLocation.getNodeByLocation(refEq(nodeLocation2))).thenReturn(node2);
+      when(NodeLocation.getNodeByLocation(refEq(nodeLocation3))).thenReturn(node3);
 
-    when(node1.isNodeType(NodetypeConstant.NT_FILE)).thenReturn(true);
-    when(node2.isNodeType(NodetypeConstant.NT_FILE)).thenReturn(false);
-    when(node3.isNodeType(NodetypeConstant.NT_FILE)).thenReturn(true);
+      when(node1.isNodeType(NodetypeConstant.NT_FILE)).thenReturn(true);
+      when(node2.isNodeType(NodetypeConstant.NT_FILE)).thenReturn(false);
+      when(node3.isNodeType(NodetypeConstant.NT_FILE)).thenReturn(true);
 
-    when(node1.hasNode(NodetypeConstant.JCR_CONTENT)).thenReturn(true);
-    when(node2.hasNode(NodetypeConstant.JCR_CONTENT)).thenReturn(false);
-    when(node3.hasNode(NodetypeConstant.JCR_CONTENT)).thenReturn(true);
+      when(node1.hasNode(NodetypeConstant.JCR_CONTENT)).thenReturn(true);
+      when(node2.hasNode(NodetypeConstant.JCR_CONTENT)).thenReturn(false);
+      when(node3.hasNode(NodetypeConstant.JCR_CONTENT)).thenReturn(true);
 
-    when(contentNode1.hasProperty(NodetypeConstant.JCR_DATA)).thenReturn(true);
-    when(contentNode3.hasProperty(NodetypeConstant.JCR_DATA)).thenReturn(true);
+      when(contentNode1.hasProperty(NodetypeConstant.JCR_DATA)).thenReturn(true);
+      when(contentNode3.hasProperty(NodetypeConstant.JCR_DATA)).thenReturn(true);
 
-    when(node1.hasProperty(NodetypeConstant.EXO_NAME)).thenReturn(false);
-    when(node3.hasProperty(NodetypeConstant.EXO_NAME)).thenReturn(false);
+      when(node1.hasProperty(NodetypeConstant.EXO_NAME)).thenReturn(false);
+      when(node3.hasProperty(NodetypeConstant.EXO_NAME)).thenReturn(false);
 
-    when(node1.getName()).thenReturn("test1.txt");
-    when(node3.getName()).thenReturn("test3.txt");
+      when(node1.getName()).thenReturn("test1.txt");
+      when(node3.getName()).thenReturn("test3.txt");
 
-    InputStream zis = new ActivityFilesDownloadResource(new NodeLocation[]{nodeLocation1, nodeLocation2, nodeLocation3}).getInputStream();
+      zis = new ActivityFilesDownloadResource(new NodeLocation[]{nodeLocation1, nodeLocation2, nodeLocation3}).getInputStream();
+    }
     assertNotNull("Returned input stream is null", zis);
     assertTrue("Empty input stream", zis.available() > 0);
 

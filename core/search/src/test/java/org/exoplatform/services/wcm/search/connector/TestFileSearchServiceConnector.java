@@ -47,10 +47,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.jcr.RepositoryException;
 import java.util.ArrayList;
@@ -61,9 +59,7 @@ import java.util.Iterator;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({WCMCoreUtils.class, CommonsUtils.class})
-@PowerMockIgnore({ "javax.management.*", "jdk.internal.reflect.*", "javax.xml.*", "org.apache.xerces.*", "org.xml.*" })
+@RunWith(MockitoJUnitRunner.class)
 public class TestFileSearchServiceConnector extends TestCase {
 
   public static final String ES_RESPONSE_EMPTY = "{ \"hits\": { \"hits\": [] } }";
@@ -204,10 +200,14 @@ public class TestFileSearchServiceConnector extends TestCase {
   @Mock
   MetadataService metadataService;
 
+  private MockedStatic<WCMCoreUtils> wcmCoreUtilsMockedStatic;
+
+  private MockedStatic<CommonsUtils> commonsUtilsMockedStatic;
+
   @Before
   public void setUp() throws RepositoryException {
-    PowerMockito.mockStatic(WCMCoreUtils.class);
-    PowerMockito.mockStatic(CommonsUtils.class);
+    wcmCoreUtilsMockedStatic = mockStatic(WCMCoreUtils.class);
+    commonsUtilsMockedStatic = mockStatic(CommonsUtils.class);
     when(WCMCoreUtils.getRestContextName()).thenAnswer(invocation -> "rest");
 
     RepositoryEntry repositoryEntry = new RepositoryEntry();
@@ -219,6 +219,8 @@ public class TestFileSearchServiceConnector extends TestCase {
 
   @After
   public void tearDown() {
+    wcmCoreUtilsMockedStatic.close();
+    commonsUtilsMockedStatic.close();
   }
 
   @Test
@@ -229,7 +231,7 @@ public class TestFileSearchServiceConnector extends TestCase {
     when(elasticSearchingClient.sendRequest(nullable(String.class), nullable(String.class))).thenReturn(ES_RESPONSE_EMPTY);
 
     MetadataObject metadataObject = new MetadataObject("file", "7b9b54017f00010102ba5027fa2c5944");
-    when(metadataService.getMetadataItemsByObject(metadataObject)).thenReturn(new ArrayList<MetadataItem>());
+    lenient().when(metadataService.getMetadataItemsByObject(metadataObject)).thenReturn(new ArrayList<MetadataItem>());
 
     FileSearchServiceConnector fileSearchServiceConnector = new FileSearchServiceConnector(initParams, elasticSearchingClient, repositoryService, documentService);
 

@@ -62,8 +62,8 @@ public class EditorSupportPortlet extends GenericPortlet {
           .getComponentInstanceOfType(DocumentService.class);
       long idleTimeout = documentService.getEditorsIdleTimeout();
       js.require("SHARED/editorsupport", "editorsupport")
-        .addScripts("editorsupport.initConfig('" + request.getRemoteUser() + "' ," + cometdConf.toJSON() + ", "
-            + getI18n(request.getLocale()) + ", " + idleTimeout + ");");
+        .addScripts("eXo.env.portal.addOnLoadCallback(() => editorsupport.initConfig('" + request.getRemoteUser() + "' ," + cometdConf.toJSON() + ", "
+            + getI18n(request.getLocale()) + ", " + idleTimeout + "));");
     } catch (Exception e) {
       LOG.error("Error processing editor support portlet for user " + request.getRemoteUser(), e);
     }

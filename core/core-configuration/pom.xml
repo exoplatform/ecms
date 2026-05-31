@@ -74,5 +74,13 @@
   </dependencies>
   <build>
     <finalName>ecm-wcm-core</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <packagingExcludes>WEB-INF/lib/**</packagingExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
