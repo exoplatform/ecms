@@ -741,7 +741,7 @@ public class Utils {
     if (StringUtils.isEmpty(oldName)) {
       return oldName;
     }
-    return replaceSpecialChars(oldName, "&#*?!@.'\"\t\r\n$\\><:;[]/|’", nodeType);
+    return replaceSpecialChars(oldName, "&#*.'\"\t\r\n$\\><:;[]/|’", nodeType);
   }
 
   /** Return name after cleaning
