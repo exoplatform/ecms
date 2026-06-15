@@ -7,7 +7,6 @@ import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -81,8 +80,6 @@ public class DocumentServiceImplTest {
   @Mock
   IDGeneratorService idGenerator;
   @Mock
-  FavoriteService favoriteService;
-  @Mock
   IdentityRegistry identityRegistry;
 
   @Mock
@@ -131,7 +128,6 @@ public class DocumentServiceImplTest {
                                               settingService,
                                               identityManager,
                                               idGenerator,
-                                              favoriteService,
                                               identityRegistry,
                                               authenticator,
                                               trashService);
