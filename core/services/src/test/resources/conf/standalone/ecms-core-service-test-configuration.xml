@@ -194,11 +194,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.cms.documents.FavoriteService</key>
-    <type>org.exoplatform.services.cms.documents.impl.FavoriteServiceImpl</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.services.cms.documents.TrashService</key>
     <type>org.exoplatform.services.cms.documents.impl.TrashServiceImpl</type>
     <init-params>
@@ -378,62 +373,6 @@
                     </field>
                     <field name="path">
                       <string>Private/Documents</string>
-                    </field>
-                    <field name="mixinTypes">
-                      <collection type="java.util.ArrayList">
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
-                    <field name="alias">
-                      <string>userPrivateVideo</string>
-                    </field>
-                    <field name="path">
-                      <string>Private/Videos</string>
-                    </field>
-                    <field name="mixinTypes">
-                      <collection type="java.util.ArrayList">
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
-                    <field name="alias">
-                      <string>userPrivateAudio</string>
-                    </field>
-                    <field name="path">
-                      <string>Private/Music</string>
-                    </field>
-                    <field name="mixinTypes">
-                      <collection type="java.util.ArrayList">
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
-                    <field name="alias">
-                      <string>userPrivatePicture</string>
-                    </field>
-                    <field name="path">
-                      <string>Private/Pictures</string>
-                    </field>
-                    <field name="mixinTypes">
-                      <collection type="java.util.ArrayList">
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-                <value>
-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
-                    <field name="alias">
-                      <string>userPrivateSearches</string>
-                    </field>
-                    <field name="path">
-                      <string>Private/Searches</string>
                     </field>
                     <field name="mixinTypes">
                       <collection type="java.util.ArrayList">

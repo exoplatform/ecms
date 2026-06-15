@@ -12,9 +12,6 @@
     <type>org.exoplatform.wcm.connector.collaboration.DownloadConnector</type>
   </component>
   <component>
-    <type>org.exoplatform.wcm.connector.collaboration.FavoriteRESTService</type>
-  </component>
-  <component>
     <type>org.exoplatform.wcm.connector.collaboration.IdentitySearchRESTService</type>
   </component>
   <component>
