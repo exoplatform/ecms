@@ -138,7 +138,6 @@ public class DocumentServiceImpl implements DocumentService {
   private final ConfigurationManager configurationManager;
   private final String editorsRuntimeId;
   private CommonEditorPlugin commonEditorPlugin;
-  private FavoriteService favoriteService;
   private Authenticator       authenticator;
   private final IdentityRegistry identityRegistry;
   private final TrashService trashService;
@@ -169,7 +168,7 @@ public class DocumentServiceImpl implements DocumentService {
                              OrganizationService organizationService,
                              SettingService settingService,
                              IdentityManager identityManager,
-                             IDGeneratorService idGenerator, FavoriteService favoriteService, IdentityRegistry identityRegistry, Authenticator authenticator, TrashService trashService) {
+                             IDGeneratorService idGenerator, IdentityRegistry identityRegistry, Authenticator authenticator, TrashService trashService) {
     this.configurationManager = configurationManager;
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
@@ -181,7 +180,6 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
-    this.favoriteService = favoriteService;
     this.identityRegistry = identityRegistry;
     this.authenticator = authenticator;
     
@@ -1031,32 +1029,6 @@ public class DocumentServiceImpl implements DocumentService {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public List<Document> getFavoriteDocuments(String userId, int limit) throws Exception {
-    SessionProvider sessionProvider = getUserSessionProvider(userId);
-    try {
-      List<Document> documents = new ArrayList<>();
-            List<Node> nodes = favoriteService.getAllFavoriteNodesByUser(userId, limit);
-            for (Node node : nodes) {
-              Document document = new Document(node.getUUID(),
-                      Utils.getTitle(node),
-                      node.getPath(),
-                      Utils.getSearchDocumentDrive(node),
-                      Utils.getFileType(node),
-                      Utils.getDate(node).getTime().getTime(),
-                      getFilePreviewBreadCrumb(node),
-                      getLinkInDocumentsApp(node.getPath()),
-                      getDownloadUri(node),
-                      VersionHistoryUtils.getVersion(node),
-                      Utils.fileSize(node),
-                      getDocLastModifier(node));
-              documents.add(document);
-            }
-      return documents;
-    } finally {
-      sessionProvider.close();
-    }
-  }
 
   /**
    * {@inheritDoc}
