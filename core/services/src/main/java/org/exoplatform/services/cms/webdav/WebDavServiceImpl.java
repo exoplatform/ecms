@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,11 +48,14 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.commons.fileupload2.core.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
+
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.common.util.HierarchicalProperty;
 import org.exoplatform.commons.api.settings.ExoFeatureService;
 import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
@@ -91,6 +95,7 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.upload.UploadFileValidator;
 
 /**
  * This class is used to override the default WebDavServiceImpl in order to support symlinks
@@ -106,36 +111,42 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   /**
    * Logger.
    */
-  private static final Log LOG = ExoLogger.getLogger(WebDavServiceImpl.class.getName());
+  private static final Log          LOG                             =
+                                        ExoLogger.getLogger(WebDavServiceImpl.class.getName());
 
-  private final String POST_UPLOAD_CONTENT_EVENT = "WebDavService.event.postUpload";
+  private final String              POST_UPLOAD_CONTENT_EVENT       = "WebDavService.event.postUpload";
 
-  private final String PERSONAL_DRIVE_PREFIX = "/Users/${userId}/Private";
+  private final String              PERSONAL_DRIVE_PREFIX           = "/Users/${userId}/Private";
 
-  private final String GROUP_DRIVE_PREFIX = "/Groups${groupId}/Documents";
+  private final String              GROUP_DRIVE_PREFIX              = "/Groups${groupId}/Documents";
 
-  private static final String ANONYMOUS_LEGACY_WEBDAV_FEATURE = "anonymousLegacyWebdav";
+  private static final String       ANONYMOUS_LEGACY_WEBDAV_FEATURE = "anonymousLegacyWebdav";
 
-  private final String PERSONAL_GROUP_DRIVE_WORKSPACE = "collaboration";
+  private final String              PERSONAL_GROUP_DRIVE_WORKSPACE  = "collaboration";
 
+  private final NodeFinder          nodeFinder;
 
-   private final NodeFinder nodeFinder;
+  private final RepositoryService   repositoryService;
 
-  private final RepositoryService repositoryService;
+  private ListenerService           listenerService;
 
-  private ListenerService listenerService;
+  private final MimeTypeResolver    mimeTypeResolver;
 
-  private final MimeTypeResolver mimeTypeResolver;
+  private final ExoFeatureService   exoFeatureService;
 
-  private final ExoFeatureService exoFeatureService;
+  private final PortalContainer     portalContainer;
+
+  private List<UploadFileValidator> uploadFileValidators;
 
    public WebDavServiceImpl(InitParams params,
                             RepositoryService repositoryService,
                             ExoFeatureService exoFeatureService,
                             ThreadLocalSessionProviderService sessionProviderService,
+                            PortalContainer portalContainer,
                             NodeFinder nodeFinder, AutoVersionService autoVersionService, ManageDriveService manageDriveService) throws Exception
    {
       super(params, repositoryService, sessionProviderService);
+      this.portalContainer = portalContainer;
       this.repositoryService = repositoryService;
       this.nodeFinder = nodeFinder;
       this.exoFeatureService = exoFeatureService;
@@ -549,20 +560,22 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     boolean isCreating = false;
     ActivityCommonService activityService = null;
     try {
+      String fileName = LinkUtils.getItemName(path(repoPath));
+      validateUploadedFile(inputStream, fileName, mediaType.toString());
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       try {
         item = nodeFinder.getItem(workspaceName(repoPath),
                                   LinkUtils.getParentPath(path(normalizePath(repoPath))),
                                   true);
         repoPath = item.getSession().getWorkspace().getName()
-            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(Utils.cleanName(LinkUtils.getItemName(path(repoPath)))));
+            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(Utils.cleanName(fileName)));
         session = item.getSession();
       } catch (PathNotFoundException e) {
         item = nodeFinder.getItem(workspaceName(repoPath),
                                   LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))),
                                   true);
         repoPath = item.getSession().getWorkspace().getName()
-            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(Utils.cleanName(LinkUtils.getItemName(path(repoPath)))));
+            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(Utils.cleanName(fileName)));
         session = item.getSession();
       }
       activityService = WCMCoreUtils.getService(ActivityCommonService.class);
@@ -1052,6 +1065,28 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
     }
     return true;
+  }
+
+  private void validateUploadedFile(InputStream inputStream,
+                                    String fileName,
+                                    String mimeType) throws FileUploadException {
+    for (UploadFileValidator uploadFileValidator : getUploadFileValidators()) {
+      if (uploadFileValidator.supports(fileName, mimeType)) {
+        uploadFileValidator.validate(fileName, mimeType, inputStream);
+      }
+    }
+  }
+
+  private List<UploadFileValidator> getUploadFileValidators() {
+    if (uploadFileValidators == null) {
+      List<UploadFileValidator> services = portalContainer.getComponentInstancesOfType(UploadFileValidator.class);
+      if (services == null) {
+        uploadFileValidators = new ArrayList<>();
+      } else {
+        uploadFileValidators = new ArrayList<>(services);
+      }
+    }
+    return uploadFileValidators;
   }
 
 }
