@@ -122,6 +122,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
   private static final String       ANONYMOUS_LEGACY_WEBDAV_FEATURE = "anonymousLegacyWebdav";
 
+  private static final String       ALL_FOLDERS_ACCESS_LEGACY_WEBDAV_FEATURE = "allFoldersAccessLegacyWebdav";
+
+  private static final String       USERS_FOLDER_PATH                = "/Users";
+
+  private static final String       GROUPS_FOLDER_PATH               = "/Groups";
+
   private final String              PERSONAL_GROUP_DRIVE_WORKSPACE  = "collaboration";
 
   private final NodeFinder          nodeFinder;
@@ -220,6 +226,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
 
     try {
@@ -247,6 +257,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
     try {
@@ -279,6 +293,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
+
+    Response restrictedDestinationAccessResponse = denyRestrictedDestinationAccessIfNeeded(repoName, destinationHeader);
+    if (restrictedDestinationAccessResponse != null) {
+      return restrictedDestinationAccessResponse;
     }
 
 
@@ -322,6 +345,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
 
     try {
@@ -361,6 +388,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
 
     try {
@@ -391,6 +422,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
 
     try {
@@ -419,6 +454,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
 
     try {
@@ -444,6 +483,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(path);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
     return super.options(path);
   }
@@ -459,6 +502,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
 
@@ -488,6 +535,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
 
@@ -519,6 +570,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
 
@@ -553,6 +608,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
     Session session = null;
@@ -651,6 +710,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
 
     try {
@@ -678,6 +741,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
 
@@ -707,6 +774,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
 
     try {
@@ -734,6 +805,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
 
@@ -763,6 +838,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
     try {
@@ -795,6 +874,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
+
+    Response restrictedDestinationAccessResponse = denyRestrictedDestinationAccessIfNeeded(repoName, destinationHeader);
+    if (restrictedDestinationAccessResponse != null) {
+      return restrictedDestinationAccessResponse;
     }
 
     String destHeader;
@@ -894,6 +982,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
     }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
+    }
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -929,6 +1021,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
     if (anonymousAccessResponse != null) {
       return anonymousAccessResponse;
+    }
+    Response restrictedFolderAccessResponse = denyRestrictedFolderAccessIfNeeded(repoPath);
+    if (restrictedFolderAccessResponse != null) {
+      return restrictedFolderAccessResponse;
     }
 
     Item item = null;
@@ -1014,6 +1110,46 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     return conversationState == null
         || conversationState.getIdentity() == null
         || IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId());
+  }
+
+  private Response denyRestrictedFolderAccessIfNeeded(String repoPath) {
+    if (exoFeatureService.isActiveFeature(ALL_FOLDERS_ACCESS_LEGACY_WEBDAV_FEATURE)) {
+      return null;
+    }
+    return isRestrictedLegacyWebdavPath(repoPath) ? Response.status(Response.Status.FORBIDDEN).build() : null;
+  }
+
+  private Response denyRestrictedDestinationAccessIfNeeded(String repoName, String destinationHeader) {
+    String destinationRepoPath = getDestinationRepoPath(repoName, destinationHeader);
+    return destinationRepoPath == null ? null : denyRestrictedFolderAccessIfNeeded(destinationRepoPath);
+  }
+
+  private boolean isRestrictedLegacyWebdavPath(String repoPath) {
+    if (StringUtils.isBlank(repoPath)) {
+      return true;
+    }
+    String jcrPath = path(normalizePath(repoPath));
+    return !StringUtils.equals(jcrPath, USERS_FOLDER_PATH)
+        && !StringUtils.startsWith(jcrPath, USERS_FOLDER_PATH + "/")
+        && !StringUtils.equals(jcrPath, GROUPS_FOLDER_PATH)
+        && !StringUtils.startsWith(jcrPath, GROUPS_FOLDER_PATH + "/");
+  }
+
+  private String getDestinationRepoPath(String repoName, String destinationHeader) {
+    if (StringUtils.isBlank(destinationHeader)) {
+      return null;
+    }
+    try {
+      URI destinationUri = buildURI(destinationHeader);
+      String destinationPath = destinationUri.getPath();
+      int repoIndex = destinationPath.indexOf(repoName);
+      return normalizePath(repoIndex == -1 ? destinationPath : destinationPath.substring(repoIndex + repoName.length() + 1));
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot check legacy WebDAV destination path " + destinationHeader, e);
+      }
+      return null;
+    }
   }
 
   private String convertRepoPath(String repoPath, boolean giveTarget) throws Exception{
