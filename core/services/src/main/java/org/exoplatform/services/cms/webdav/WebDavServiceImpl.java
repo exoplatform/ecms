@@ -50,6 +50,7 @@ import javax.ws.rs.core.UriInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.common.util.HierarchicalProperty;
+import org.exoplatform.commons.api.settings.ExoFeatureService;
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.text.Text;
@@ -86,6 +87,8 @@ import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
 import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
 import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
 import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -111,6 +114,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
   private final String GROUP_DRIVE_PREFIX = "/Groups${groupId}/Documents";
 
+  private static final String ANONYMOUS_LEGACY_WEBDAV_FEATURE = "anonymousLegacyWebdav";
+
   private final String PERSONAL_GROUP_DRIVE_WORKSPACE = "collaboration";
 
 
@@ -122,14 +127,18 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
   private final MimeTypeResolver mimeTypeResolver;
 
+  private final ExoFeatureService exoFeatureService;
+
    public WebDavServiceImpl(InitParams params,
                             RepositoryService repositoryService,
+                            ExoFeatureService exoFeatureService,
                             ThreadLocalSessionProviderService sessionProviderService,
                             NodeFinder nodeFinder, AutoVersionService autoVersionService, ManageDriveService manageDriveService) throws Exception
    {
       super(params, repositoryService, sessionProviderService);
       this.repositoryService = repositoryService;
       this.nodeFinder = nodeFinder;
+      this.exoFeatureService = exoFeatureService;
       this.listenerService = WCMCoreUtils.getService(ListenerService.class);
       this.mimeTypeResolver = new MimeTypeResolver();
       this.mimeTypeResolver.setDefaultMimeType(InitParamsDefaults.FILE_MIME_TYPE);
@@ -196,6 +205,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                           @PathParam("repoPath") String repoPath,
                           @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                           @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -219,6 +233,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            @PathParam("repoPath") String repoPath,
                            @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                            @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       repoPath = convertRepoPath(repoPath, true);
@@ -246,6 +265,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @HeaderParam(ExtHttpHeaders.OVERWRITE) String overwriteHeader,
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoPath = convertRepoPath(repoPath, false);
@@ -283,6 +307,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.IF_NONE_MATCH) String ifNoneMatch,
                       @QueryParam("version") String version,
                       @Context UriInfo uriInfo) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoPath = convertRepoPath(repoPath, true);
@@ -317,6 +346,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   public Response head(@PathParam("repoName") String repoName,
                        @PathParam("repoPath") String repoPath,
                        @Context UriInfo uriInfo) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -342,6 +376,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
                        @HeaderParam(ExtHttpHeaders.DEPTH) String depthHeader,
                        HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -365,6 +404,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          @PathParam("repoPath") String repoPath,
                          @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                          @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -385,6 +429,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   @OPTIONS
   @Path("/{repoName}/{path:.*}/")
   public Response options(@PathParam("path") String path) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
     return super.options(path);
   }
 
@@ -396,6 +445,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                         @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
                         @Context UriInfo uriInfo,
                         HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -420,6 +474,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            @HeaderParam(ExtHttpHeaders.DEPTH) String depthHeader,
                            @Context UriInfo uriInfo,
                            HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       int fileNameIndex = repoPath.lastIndexOf("/") + 1;
@@ -446,6 +505,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                             @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
                             @Context UriInfo uriInfo,
                             HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoPath = convertRepoPath(repoPath, true);
@@ -475,6 +539,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.USER_AGENT) String userAgent,
                       InputStream inputStream,
                       @Context UriInfo uriInfo) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
     Session session = null;
     Item item = null;
     boolean isCreating = false;
@@ -565,6 +634,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          @HeaderParam(ExtHttpHeaders.DEPTH) String depthHeader,
                          @Context UriInfo uriInfo,
                          HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -588,6 +662,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          @PathParam("repoPath") String repoPath,
                          @Context UriInfo uriInfo,
                          HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -611,6 +690,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                              @PathParam("repoPath") String repoPath,
                              @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                              @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -634,6 +718,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                                  @PathParam("repoPath") String repoPath,
                                  @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                                  @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -658,6 +747,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                       @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
                       HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       repoPath = convertRepoPath(repoPath, true);
@@ -685,6 +779,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @HeaderParam(ExtHttpHeaders.OVERWRITE) String overwriteHeader,
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
     String destHeader;
     try {
       repoPath = convertRepoPath(repoPath, true);
@@ -778,6 +877,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                         @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
                         @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypesHeader,
                         @Context UriInfo uriInfo) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       Item item = nodeFinder.getItem(workspaceName(repoPath), LinkUtils.getParentPath(path(normalizePath(repoPath))), true);
@@ -809,6 +913,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          @PathParam("repoPath") String repoPath,
                          @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                          @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
+    Response anonymousAccessResponse = denyAnonymousAccessIfNeeded();
+    if (anonymousAccessResponse != null) {
+      return anonymousAccessResponse;
+    }
+
     Item item = null;
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -880,6 +989,18 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
     }    
     return super.delete(repoName, repoPath, lockTokenHeader, ifHeader);
+  }
+
+  private Response denyAnonymousAccessIfNeeded() {
+    boolean isAllowed = !exoFeatureService.isActiveFeature(ANONYMOUS_LEGACY_WEBDAV_FEATURE) && isAnonymousUser();
+    return isAllowed ? Response.status(Response.Status.FORBIDDEN).build() : null;
+  }
+
+  private boolean isAnonymousUser() {
+    ConversationState conversationState = ConversationState.getCurrent();
+    return conversationState == null
+        || conversationState.getIdentity() == null
+        || IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId());
   }
 
   private String convertRepoPath(String repoPath, boolean giveTarget) throws Exception{

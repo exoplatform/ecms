@@ -5,6 +5,17 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
+    <key>LegacyWebDavProperties</key>
+    <type>org.exoplatform.container.ExtendedPropertyConfigurator</type>
+    <init-params>
+      <properties-param>
+        <name>LegacyWebDavProperties</name>
+        <property name="exo.feature.anonymousLegacyWebdav.enabled" value="false" />
+      </properties-param>
+    </init-params>
+  </component>
+
+  <component>
     <key>org.exoplatform.services.jcr.webdav.WebDavServiceImpl</key>
     <type>org.exoplatform.services.cms.webdav.WebDavServiceImpl</type>
     <init-params>
