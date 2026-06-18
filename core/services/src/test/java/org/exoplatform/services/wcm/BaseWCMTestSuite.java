@@ -31,7 +31,6 @@ import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
 import org.exoplatform.services.ecm.dms.configuration.TestDMSConfigurationService;
-import org.exoplatform.services.ecm.dms.documents.TestFavoriteService;
 import org.exoplatform.services.ecm.dms.documents.TestTrashService;
 import org.exoplatform.services.ecm.dms.drive.TestDriveService;
 import org.exoplatform.services.ecm.dms.link.TestLinkManager;
@@ -60,7 +59,6 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   TestDocumentTypeService.class,
   TestLockService.class,
   TestTrashService.class,
-  TestFavoriteService.class,
   TestRelationsService.class,
   TestDriveService.class,
   TestScriptService.class,

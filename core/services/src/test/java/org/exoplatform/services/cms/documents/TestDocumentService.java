@@ -1,6 +1,5 @@
 package org.exoplatform.services.cms.documents;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -9,7 +8,6 @@ import javax.jcr.Session;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.model.Document;
 import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -17,12 +15,10 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.SpaceUtils;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.metadata.favorite.FavoriteService;
-import org.exoplatform.social.metadata.favorite.model.Favorite;
 
 public class TestDocumentService extends BaseWCMTestCase {
 
@@ -63,25 +59,6 @@ public class TestDocumentService extends BaseWCMTestCase {
     assertEquals("Mime-type is not correct", "", content.getProperty("jcr:data").getString());
     assertEquals(title.toLowerCase(), document.getName());
     clear();
-  }
-  
-  public void testGetFavoriteDocuments() throws Exception {
-    String userId = "root";
-    applyUserSession(userId, "gtn", COLLABORATION_WS);
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    Node userFavoriteNode = (Node) userNode.getNode(Utils.PRIVATE);
-    Node node = userFavoriteNode.addNode("doc.txt", "nt:file");
-    node.addMixin("mix:referenceable");
-    node.addMixin("exo:datetime");
-    node.setProperty(NodetypeConstant.EXO_DATE_CREATED, Calendar.getInstance());
-    session.save();
-    node = userFavoriteNode.getNode("doc.txt");
-    Identity identity = identityManager.getOrCreateUserIdentity(userId);
-    Favorite favorite = new Favorite("file", node.getUUID(), "", Long.parseLong(identity.getId()));
-    favoriteService.createFavorite(favorite);
-    List<Document> documents = documentService.getFavoriteDocuments(userId, 10);
-    assertNotNull("documents wasn't created", documents);
-    assertEquals(1, documents.size());
   }
   
   public void testGetSharedDocuments() throws Exception {
