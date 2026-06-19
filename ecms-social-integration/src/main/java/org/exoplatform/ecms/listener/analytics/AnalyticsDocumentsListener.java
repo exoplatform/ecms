@@ -44,9 +44,9 @@ public class AnalyticsDocumentsListener extends Listener<String, Node> {
     statisticData.setSubModule("event");
     statisticData.setOperation(operation);
     statisticData.setUserId(userId);
-    statisticData.addParameter("documentsName", data.getName());
-    statisticData.addParameter("documentsPath", data.getPath());
-    statisticData.addParameter("documentsOwner", ((NodeImpl) data).getACL().getOwner());
+    statisticData.addKeyword("documentsName", data.getName());
+    statisticData.addKeyword("documentsPath", data.getPath());
+    statisticData.addKeyword("documentsOwner", ((NodeImpl) data).getACL().getOwner());
     String nodePath = data.getPath();
     addSpaceStatistic(statisticData, nodePath);
     addStatisticData(statisticData);
