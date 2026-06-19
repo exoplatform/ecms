@@ -161,7 +161,7 @@ public class JCRNodeListener implements Action {
             addFileProperties(statisticData, changedNode);
           }
           statisticData.setUserId(AnalyticsUtils.getUserIdentityId(username));
-          statisticData.addParameter(DOCUMENT_TYPE_PARAM, changedNode.getPrimaryNodeType().getName());
+          statisticData.addKeyword(DOCUMENT_TYPE_PARAM, changedNode.getPrimaryNodeType().getName());
           addDocumentTitle(changedNode, statisticData);
           addSpaceStatistic(statisticData, nodePath);
 
@@ -189,27 +189,27 @@ public class JCRNodeListener implements Action {
     if (changedNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
       Node fileMetadataNode = changedNode.getNode(NodetypeConstant.JCR_CONTENT);
       if (fileMetadataNode.hasProperty(NodetypeConstant.JCR_MIME_TYPE)) {
-        statisticData.addParameter(FILE_MIME_TYPE_PARAM,
-                                   fileMetadataNode.getProperty(NodetypeConstant.JCR_MIME_TYPE).getString());
+        statisticData.addKeyword(FILE_MIME_TYPE_PARAM,
+                                 fileMetadataNode.getProperty(NodetypeConstant.JCR_MIME_TYPE).getString());
       }
       if (fileMetadataNode.hasProperty(NodetypeConstant.JCR_DATA)) {
-        statisticData.addParameter(FILE_SIZE_PARAM,
-                                   fileMetadataNode.getProperty(NodetypeConstant.JCR_DATA).getLength());
+        statisticData.addLong(FILE_SIZE_PARAM,
+                              fileMetadataNode.getProperty(NodetypeConstant.JCR_DATA).getLength());
       }
     }
 
     String nodeName = changedNode.getName();
     int index = nodeName.lastIndexOf('.');
     if (index != -1) {
-      statisticData.addParameter(FILE_EXTENSION_PARAM, nodeName.substring(index + 1));
+      statisticData.addKeyword(FILE_EXTENSION_PARAM, nodeName.substring(index + 1));
     }
   }
 
   private void addUUID(Node changedNode,
                        StatisticData statisticData) throws RepositoryException {
     if (changedNode.hasProperty(NodetypeConstant.JCR_UUID)) {
-      statisticData.addParameter(UUID_PARAM,
-                                 changedNode.getProperty(NodetypeConstant.JCR_UUID).getString());
+      statisticData.addKeyword(UUID_PARAM,
+                               changedNode.getProperty(NodetypeConstant.JCR_UUID).getString());
     }
   }
 
@@ -266,7 +266,7 @@ public class JCRNodeListener implements Action {
     } catch (Exception e) {
       // Nothing to do the title contains a % character
     }
-    statisticData.addParameter(DOCUMENT_NAME_PARAM, title);
+    statisticData.addKeyword(DOCUMENT_NAME_PARAM, title);
   }
 
   private Node getManagedNodeFromParents(Node changedNode) throws RepositoryException {
