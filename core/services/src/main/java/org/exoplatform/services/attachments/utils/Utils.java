@@ -244,7 +244,6 @@ public class Utils {
   }
 
   public static long markDocumentAsViewed(Session session, String nodeId, String viewer) throws RepositoryException {
-    long views = 1L;
     Node node = getNodeByIdentifier(session, nodeId);
     if (node == null) {
       return 0L;
@@ -252,20 +251,27 @@ public class Utils {
     if (node.canAddMixin(DOCUMENTS_VIEW_MIXIN)) {
       node.addMixin(DOCUMENTS_VIEW_MIXIN);
     }
-    if (node.hasProperty(DOCUMENT_VIEWS_PROPERTY)) {
-      views = node.getProperty(DOCUMENT_VIEWS_PROPERTY).getLong() + 1L;
-      node.setProperty(DOCUMENT_VIEWS_PROPERTY, views);
-    } else {
-      node.setProperty(DOCUMENT_VIEWS_PROPERTY, 1L);
-    }
+    boolean alreadyViewed = false;
     if (node.hasProperty(DOCUMENT_VIEWERS_PROPERTY)) {
       String viewers = node.getProperty(DOCUMENT_VIEWERS_PROPERTY).getString();
-      boolean exist = Arrays.asList(viewers.split(",")).contains(viewer);
-      if (!exist) {
-        node.setProperty(DOCUMENT_VIEWERS_PROPERTY, viewers + "," + viewer);
+      alreadyViewed = Arrays.asList(viewers.split(",")).contains(viewer);
+    }
+    long views;
+    if (!alreadyViewed) {
+      if (node.hasProperty(DOCUMENT_VIEWS_PROPERTY)) {
+        views = node.getProperty(DOCUMENT_VIEWS_PROPERTY).getLong() + 1L;
+      } else {
+        views = 1L;
       }
+      node.setProperty(DOCUMENT_VIEWS_PROPERTY, views);
+      String viewers = node.hasProperty(DOCUMENT_VIEWERS_PROPERTY)
+                           ? node.getProperty(DOCUMENT_VIEWERS_PROPERTY).getString() + "," + viewer
+                           : viewer;
+      node.setProperty(DOCUMENT_VIEWERS_PROPERTY, viewers);
     } else {
-      node.setProperty(DOCUMENT_VIEWERS_PROPERTY, viewer);
+      views = node.hasProperty(DOCUMENT_VIEWS_PROPERTY)
+                  ? node.getProperty(DOCUMENT_VIEWS_PROPERTY).getLong()
+                  : 0L;
     }
     session.save();
     return views;
