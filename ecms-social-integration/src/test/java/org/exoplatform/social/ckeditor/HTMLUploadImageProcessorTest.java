@@ -1,7 +1,7 @@
 package org.exoplatform.social.ckeditor;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import javax.jcr.Node;
@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -240,7 +240,7 @@ public class HTMLUploadImageProcessorTest {
     when(repositoryService.getCurrentRepository()).thenReturn(repository);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
     when(repositoryEntry.getName()).thenReturn("repository");
-    when(wcmService.getReferencedContent(anyObject(), anyString(),anyString() )).thenReturn(node);
+    when(wcmService.getReferencedContent(any(), anyString(),anyString() )).thenReturn(node);
     when(node.getNode(anyString())).thenReturn(node);
     when(node.getName()).thenReturn("image.png");
     when(node.getProperty(anyString())).thenReturn(property);

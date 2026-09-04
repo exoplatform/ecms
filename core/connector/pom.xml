@@ -171,11 +171,6 @@
       <artifactId>imgscalr-lib</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-inline</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
   <build>
     <pluginManagement>
