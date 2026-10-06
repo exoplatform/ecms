@@ -162,12 +162,14 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     }
     List<String> existingAttachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
-    // delete removed attachments
+    // delete removed attachments, except the ones the user can't see: the list
+    // sent back holds only what the user was shown
     if (attachmentIds.isEmpty()) {
       deleteAllEntityAttachments(userIdentityId, entityId, entityType);
     } else {
-      for (String attachmentId : existingAttachmentsIds) {
-        if (!attachmentIds.contains(attachmentId) && attachmentId != null) {
+      for (Attachment existingAttachment : existingEntityAttachments) {
+        String attachmentId = existingAttachment.getId();
+        if (!attachmentIds.contains(attachmentId) && attachmentId != null && !isHiddenToUser(existingAttachment)) {
           deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
         }
       }
@@ -210,15 +212,26 @@ public class AttachmentServiceImpl implements AttachmentService {
     } catch (Exception e) {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     }
-    List<String> attachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
-
-    if (attachmentsIds.isEmpty()) {
+    if (existingEntityAttachments.isEmpty()) {
       throw new ObjectNotFoundException("Entity with id " + entityId + " and type" + entityType + " has no attachment linked");
     }
 
-    for (String attachmentId : attachmentsIds) {
-      deleteAttachmentItemById(userIdentityId, entityId, entityType, attachmentId);
+    // The attachments the user can't see stay linked: they were never shown to them
+    for (Attachment existingAttachment : existingEntityAttachments) {
+      if (!isHiddenToUser(existingAttachment)) {
+        deleteAttachmentItemById(userIdentityId, entityId, entityType, existingAttachment.getId());
+      }
     }
+  }
+
+  /**
+   * @param attachment an attachment of an entity, as the storage builds it for
+   *          the current user
+   * @return true when the current user can't read the attachment's node, so
+   *         that it was not shown to them
+   */
+  private static boolean isHiddenToUser(Attachment attachment) {
+    return attachment.getAcl() != null && !attachment.getAcl().isCanAccess();
   }
 
   @Override

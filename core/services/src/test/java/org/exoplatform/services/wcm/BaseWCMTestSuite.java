@@ -25,6 +25,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
+import org.exoplatform.services.attachments.service.AttachmentServiceImplTest;
+import org.exoplatform.services.attachments.utils.EntityBuilderTest;
 import org.exoplatform.services.cms.documents.TestDocumentService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
@@ -73,6 +75,8 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   TestDocumentsAppRedirectService.class,
   TestDocumentService.class,
   AttachmentServiceTest.class,
+  AttachmentServiceImplTest.class,
+  EntityBuilderTest.class,
   DocumentServiceImplTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
