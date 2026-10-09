@@ -84,17 +84,19 @@ public class EntityBuilder {
         return null;
       }
     } catch (AccessDeniedException e) {
-      Attachment privateAttachment = new Attachment();
-      acl.setCanAccess(false);
-      privateAttachment.setId(attachmentId);
-      privateAttachment.setAcl(acl);
-      return privateAttachment;
+      return privateAttachment(attachmentId);
     } catch (ItemNotFoundException e) {
       throw new ObjectNotFoundException("Node with id " + attachmentId + " wasn't found");
     }
     Node originalAttachmentNode = attachmentNode;
     if (linkManager.isLink(attachmentNode)) {
-      originalAttachmentNode = linkManager.getTarget(attachmentNode);
+      try {
+        originalAttachmentNode = linkManager.getTarget(attachmentNode);
+      } catch (AccessDeniedException e) {
+        // The symlink is readable but its target is not: the attachment is private to
+        // this user, like a node they can't read
+        return privateAttachment(attachmentId);
+      }
       if (originalAttachmentNode == null) {
         throw new ObjectNotFoundException("Target Node with of symlink " + attachmentId + " wasn't found");
       }
@@ -147,6 +149,20 @@ public class EntityBuilder {
     attachment.setAcl(acl);
 
     return attachment;
+  }
+
+  /**
+   * @param attachmentId identifier of a node the current user can't read
+   * @return an {@link Attachment} carrying only the identifier, with an ACL
+   *         denying access
+   */
+  private static Attachment privateAttachment(String attachmentId) {
+    Permission acl = new Permission();
+    acl.setCanAccess(false);
+    Attachment privateAttachment = new Attachment();
+    privateAttachment.setId(attachmentId);
+    privateAttachment.setAcl(acl);
+    return privateAttachment;
   }
 
   private static IdentityEntity getIdentityEntity(IdentityManager identityManager, String ownerId) {
