@@ -30,6 +30,10 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.Authenticator;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.task.dto.TaskDto;
 import org.exoplatform.task.service.ProjectService;
 import org.exoplatform.task.service.TaskService;
@@ -57,6 +61,10 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
 
   private final RepositoryService repositoryService;
 
+  private final IdentityRegistry     identityRegistry;
+
+  private final Authenticator        authenticator;
+
   public static final String         DOCUMENTS_NODE           = "Documents";
 
   private static final String        DEFAULT_GROUPS_HOME_PATH = "/Groups"; //NOSONAR
@@ -67,12 +75,16 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
                                         ProjectService projectService,
                                         NodeHierarchyCreator nodeHierarchyCreator,
                                         SessionProviderService sessionProviderService,
-                                        RepositoryService repositoryService) {
+                                        RepositoryService repositoryService,
+                                        IdentityRegistry identityRegistry,
+                                        Authenticator authenticator) {
     this.taskService = taskService;
     this.projectService = projectService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.repositoryService = repositoryService;
     this.sessionProviderService = sessionProviderService;
+    this.identityRegistry = identityRegistry;
+    this.authenticator = authenticator;
   }
 
   @Override
@@ -81,7 +93,21 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
     try {
       TaskDto task = taskService.getTask(entityId);
-      Set<String> taskPermittedIdentities = projectService.getParticipator(task.getStatus().getProject().getId());
+      // The task creator views the task's attachments (TaskAttachmentACLPlugin) even
+      // outside the project's space, so the file is made readable for them as for the
+      // project participants, when no participant identity already covers them: a
+      // creator who reads through a participant group keeps reading through it, and
+      // no personal entry outlives that membership. The assignee and the coworkers,
+      // admitted by the same rule, are not granted here: they change over the task's
+      // life, and a grant taken when the file is linked would have to be revoked with
+      // them.
+      Set<String> taskPermittedIdentities = new HashSet<>(projectService.getParticipator(task.getStatus().getProject().getId()));
+      String taskCreator = task.getCreatedBy();
+      if (StringUtils.isBlank(taskCreator) || isCoveredBy(taskCreator, taskPermittedIdentities)) {
+        taskCreator = null;
+      } else {
+        taskPermittedIdentities.add(taskCreator);
+      }
 
       ManageableRepository repository = repositoryService.getCurrentRepository();
       Session userSession = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
@@ -118,20 +144,17 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
                 Node linkNode = Utils.createSymlink(attachmentNode, parentNode, permittedIdentity);
                 if (linkNode != null) {
                   linkNodes.add(((ExtendedNode) linkNode).getIdentifier());
+                  // The symlink is readable by the space only: a creator outside it reads it too
+                  if (taskCreator != null) {
+                    grantReadPermission(linkNode, taskCreator);
+                  }
                 }
               }
             }
           }
         }
         // set read permission for users or groups different from spaces
-        if (attachmentNode.canAddMixin(EXO_PRIVILEGEABLE)) {
-          attachmentNode.addMixin(EXO_PRIVILEGEABLE);
-        }
-        AccessControlList permsList = ((ExtendedNode) attachmentNode).getACL();
-        if (permsList == null || (permsList != null && permsList.getPermissions(permittedIdentity).isEmpty())) {
-          ((ExtendedNode) attachmentNode).setPermission(permittedIdentity, new String[] { PermissionType.READ });
-        }
-        attachmentNode.save();
+        grantReadPermission(attachmentNode, permittedIdentity);
       }
       if(linkNodes.isEmpty()) {
         return Collections.singletonList(attachmentId);
@@ -146,6 +169,58 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
   @Override
   public String getEntityType() {
     return "task";
+  }
+
+  /**
+   * Checks whether a user already reads what a set of identities reads: the
+   * user is one of them, or holds one of the memberships among them
+   *
+   * @param user a user name
+   * @param identities user names, 'type:/group' memberships or '/group' ids
+   * @return true when one of the identities covers the user; false when none
+   *         does, or when the user's identity can't be resolved
+   */
+  private boolean isCoveredBy(String user, Set<String> identities) {
+    if (identities.contains(user)) {
+      return true;
+    }
+    Identity identity = identityRegistry.getIdentity(user);
+    if (identity == null) {
+      try {
+        identity = authenticator.createIdentity(user);
+      } catch (Exception e) {
+        LOG.warn("Can't resolve the memberships of user {}", user, e);
+      }
+    }
+    if (identity == null) {
+      return false;
+    }
+    for (String permittedIdentity : identities) {
+      MembershipEntry entry = permittedIdentity.startsWith("/") ? new MembershipEntry(permittedIdentity)
+                                                                : MembershipEntry.parse(permittedIdentity);
+      if (entry != null && identity.isMemberOf(entry)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Grants the read permission on a node to an identity that has none yet
+   *
+   * @param node the attachment node, or the symlink pointing at it
+   * @param identity a user name or a membership expression
+   * @throws RepositoryException when the node's ACL can't be read or saved
+   */
+  private static void grantReadPermission(Node node, String identity) throws RepositoryException {
+    if (node.canAddMixin(EXO_PRIVILEGEABLE)) {
+      node.addMixin(EXO_PRIVILEGEABLE);
+    }
+    AccessControlList permsList = ((ExtendedNode) node).getACL();
+    if (permsList == null || permsList.getPermissions(identity).isEmpty()) {
+      ((ExtendedNode) node).setPermission(identity, new String[] { PermissionType.READ });
+    }
+    node.save();
   }
 
   private Node getDestinationFolder(Node rootNode, Long entityId) {
