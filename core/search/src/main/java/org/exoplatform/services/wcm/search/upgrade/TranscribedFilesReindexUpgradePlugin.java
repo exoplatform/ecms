@@ -77,8 +77,11 @@ public class TranscribedFilesReindexUpgradePlugin extends UpgradeProductPlugin {
   }
 
   /**
-   * Opens a request life cycle and a system session, then queues the reindex
-   * of every transcribed file.
+   * Opens a request life cycle, then queues the reindex of every transcribed
+   * file through a system session. A failure is thrown, so that the upgrade
+   * service does not record the plugin as executed: the next startup runs it
+   * again when the failed one was an upgrade to a new product version, and
+   * not when the product version was unchanged.
    *
    * @param oldVersion the previous product version
    * @param newVersion the new product version
@@ -86,19 +89,34 @@ public class TranscribedFilesReindexUpgradePlugin extends UpgradeProductPlugin {
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
     RequestLifeCycle.begin(PortalContainer.getInstance());
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    try {
+      reindexTranscribedFiles(WCMCoreUtils.getSystemSessionProvider());
+    } finally {
+      RequestLifeCycle.end();
+    }
+  }
+
+  /**
+   * Opens a session of the files workspace, queues the reindex of every
+   * transcribed file and logs the session out.
+   *
+   * @param sessionProvider the provider the session is opened with
+   * @return the number of queued reindex operations
+   * @throws IllegalStateException when the repository cannot be read
+   */
+  int reindexTranscribedFiles(SessionProvider sessionProvider) {
     Session session = null;
     try {
       session = sessionProvider.getSession(WORKSPACE, repositoryService.getCurrentRepository());
       int count = reindexTranscribedFiles(session);
       LOG.info("Queued the reindex of {} transcribed files", count);
+      return count;
     } catch (RepositoryException e) {
       throw new IllegalStateException("Error while queuing the reindex of transcribed files", e);
     } finally {
       if (session != null) {
         session.logout();
       }
-      RequestLifeCycle.end();
     }
   }
 

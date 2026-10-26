@@ -17,7 +17,11 @@
 package org.exoplatform.services.wcm.search.upgrade;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -25,6 +29,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
@@ -40,6 +45,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import org.exoplatform.commons.search.index.IndexingService;
+import org.exoplatform.commons.upgrade.UpgradePluginExecutionContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.jcr.datamodel.InternalQName;
@@ -53,14 +59,27 @@ import org.exoplatform.services.jcr.impl.core.query.QueryNode;
 import org.exoplatform.services.jcr.impl.core.query.QueryRootNode;
 import org.exoplatform.services.jcr.impl.core.query.sql.JCRSQLQueryBuilder;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.connector.FileindexingConnector;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TranscribedFilesReindexUpgradePluginTest {
 
+  /** Version the rig ran the plugin at, unchanged between restarts. */
+  private static final String                  VERSION          = "7.3.x-ai-contribution-SNAPSHOT-rev20261026";
+
+  /** Product version before an upgrade. */
+  private static final String                  PREVIOUS_VERSION = "7.2.0";
+
+  /** Product version an upgrade brings. */
+  private static final String                  NEW_VERSION      = "7.3.0";
+
   @Mock
   private IndexingService                      indexingService;
+
+  @Mock
+  private RepositoryService                    repositoryService;
 
   @Mock
   private Session                              session;
@@ -74,21 +93,61 @@ public class TranscribedFilesReindexUpgradePluginTest {
   private TranscribedFilesReindexUpgradePlugin plugin;
 
   /**
-   * Builds the plugin on a mocked session whose workspace exposes a node type
-   * manager.
+   * Builds the plugin with the parameters core-search-configuration.xml gives
+   * it, on a mocked session whose workspace exposes a node type manager.
    *
    * @throws Exception when a mock setup fails
    */
   @Before
   public void setUp() throws Exception {
     InitParams initParams = new InitParams();
-    ValueParam groupId = new ValueParam();
-    groupId.setName("product.group.id");
-    groupId.setValue("org.exoplatform.platform");
-    initParams.addParameter(groupId);
-    plugin = new TranscribedFilesReindexUpgradePlugin(initParams, mock(RepositoryService.class), indexingService);
+    initParams.addParameter(valueParam("product.group.id", "org.exoplatform.platform"));
+    initParams.addParameter(valueParam("plugin.upgrade.execute.once", "true"));
+    plugin = new TranscribedFilesReindexUpgradePlugin(initParams, repositoryService, indexingService);
     when(session.getWorkspace()).thenReturn(workspace);
     when(workspace.getNodeTypeManager()).thenReturn(nodeTypeManager);
+  }
+
+  /**
+   * The plugin runs on an instance that never ran it, even when the product
+   * version did not change, and never again once one run succeeded.
+   */
+  @Test
+  public void testRunsOnceWhateverTheProductVersion() {
+    assertTrue(plugin.shouldProceedToUpgrade(VERSION, VERSION, null));
+    assertFalse(plugin.shouldProceedToUpgrade(VERSION, VERSION, new UpgradePluginExecutionContext(VERSION, 1)));
+  }
+
+  /**
+   * Before running a plugin, the upgrade service stores the previous product
+   * version with no execution, and keeps it when the run throws. A run that
+   * failed during an upgrade to a new version is therefore run again at the
+   * next startup; one that failed at an unchanged version is not.
+   */
+  @Test
+  public void testFailedRunIsRetriedOnlyAfterAVersionChange() {
+    assertTrue(plugin.shouldProceedToUpgrade(NEW_VERSION,
+                                             NEW_VERSION,
+                                             new UpgradePluginExecutionContext(PREVIOUS_VERSION, 0)));
+    assertFalse(plugin.shouldProceedToUpgrade(VERSION, VERSION, new UpgradePluginExecutionContext(VERSION, 0)));
+  }
+
+  /**
+   * A repository failure is thrown, so that the upgrade service does not
+   * record the plugin as executed, and the session is logged out.
+   *
+   * @throws Exception when a mock setup fails
+   */
+  @Test
+  public void testFailureIsThrownAndSessionLoggedOut() throws Exception {
+    SessionProvider sessionProvider = mock(SessionProvider.class);
+    when(sessionProvider.getSession(eq("collaboration"), any())).thenReturn(session);
+    when(workspace.getQueryManager()).thenThrow(new RepositoryException("query failed"));
+
+    assertThrows(IllegalStateException.class, () -> plugin.reindexTranscribedFiles(sessionProvider));
+
+    verify(session).logout();
+    verifyNoInteractions(indexingService);
   }
 
   /**
@@ -158,5 +217,19 @@ public class TranscribedFilesReindexUpgradePluginTest {
     InternalQName nodeType = ((NodeTypeQueryNode) predicates[0]).getValue();
     assertEquals("transcription", nodeType.getName());
     assertEquals("http://www.exoplatform.com/jcr/exo/1.0", nodeType.getNamespace());
+  }
+
+  /**
+   * Builds a value parameter.
+   *
+   * @param name the parameter name
+   * @param value the parameter value
+   * @return the parameter
+   */
+  private static ValueParam valueParam(String name, String value) {
+    ValueParam param = new ValueParam();
+    param.setName(name);
+    param.setValue(value);
+    return param;
   }
 }
