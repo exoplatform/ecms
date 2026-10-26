@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>7.3.x-ai-contribution-SNAPSHOT</version>
+    <version>7.3.x-rtd-SNAPSHOT</version>
   </parent>
   <artifactId>ecm-wcm-extension</artifactId>
   <packaging>war</packaging>
