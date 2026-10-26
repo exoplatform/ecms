@@ -24,7 +24,9 @@ import org.junit.runners.Suite;
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
+import org.exoplatform.services.wcm.search.connector.FileindexingConnectorMappingTest;
 import org.exoplatform.services.wcm.search.connector.TestFileSearchServiceConnector;
+import org.exoplatform.services.wcm.search.upgrade.TranscribedFilesReindexUpgradePluginTest;
 
 /**
  * Created by The eXo Platform SEA
@@ -35,7 +37,9 @@ import org.exoplatform.services.wcm.search.connector.TestFileSearchServiceConnec
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TestFileSearchServiceConnector.class
+        TestFileSearchServiceConnector.class,
+        FileindexingConnectorMappingTest.class,
+        TranscribedFilesReindexUpgradePluginTest.class
 })
 @ConfigTestCase(BaseSearchTest.class)
 public class BaseSearchTestSuite extends BaseExoContainerTestSuite {
