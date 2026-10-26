@@ -17,13 +17,11 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.junit.Test;
 import org.mockito.MockedStatic;
 
@@ -31,41 +29,44 @@ import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
+
 public class FileindexingConnectorMappingTest {
 
   /**
    * The transcript is indexed as text only: a keyword copy of a whole
    * transcript exceeds the Lucene term limit once it passes 32766 bytes, and
    * Elasticsearch then refuses the file's whole document. The title keeps its
-   * keyword copy, which the Documents app sorts on.
-   *
-   * @throws Exception when the mapping is not valid JSON
+   * keyword copy, which the Documents app sorts on. This test reads the mapping
+   * the connector sends; it does not run Elasticsearch, so it does not show
+   * that the engine accepts the mapping or a long transcript.
    */
   @Test
-  public void testTranscriptionIsMappedAsTextWithoutKeywordCopy() throws Exception {
-    JSONObject properties = (JSONObject) mapping().get("properties");
+  public void testTranscriptionIsMappedAsTextWithoutKeywordCopy() {
+    JsonNode properties = mapping().get("properties");
 
-    JSONObject transcription = (JSONObject) properties.get("transcription");
-    assertEquals("text", transcription.get("type"));
-    assertEquals("offsets", transcription.get("index_options"));
-    JSONObject transcriptionFields = (JSONObject) transcription.get("fields");
-    assertNull(transcriptionFields.get("raw"));
-    assertNotNull(transcriptionFields.get("whitespace"));
-    for (Object field : transcriptionFields.values()) {
-      assertEquals("text", ((JSONObject) field).get("type"));
+    JsonNode transcription = properties.get("transcription");
+    assertEquals("text", transcription.get("type").asString());
+    assertEquals("offsets", transcription.get("index_options").asString());
+    JsonNode transcriptionFields = transcription.get("fields");
+    assertFalse(transcriptionFields.has("raw"));
+    assertTrue(transcriptionFields.has("whitespace"));
+    for (JsonNode field : transcriptionFields.values()) {
+      assertEquals("text", field.get("type").asString());
     }
 
-    JSONObject titleRaw = (JSONObject) ((JSONObject) ((JSONObject) properties.get("title")).get("fields")).get("raw");
-    assertEquals("keyword", titleRaw.get("type"));
+    assertEquals("keyword", properties.get("title").get("fields").get("raw").get("type").asString());
   }
 
   /**
-   * Builds a connector with the minimal parameters and parses its mapping.
+   * Builds a connector with the minimal parameters and parses its mapping with
+   * a strict JSON parser, which refuses what Elasticsearch refuses, such as a
+   * trailing comma.
    *
-   * @return the mapping as a JSON object
-   * @throws Exception when the mapping is not valid JSON
+   * @return the mapping as a JSON tree
    */
-  private JSONObject mapping() throws Exception {
+  private JsonNode mapping() {
     InitParams initParams = new InitParams();
     PropertiesParam constructorParams = new PropertiesParam();
     constructorParams.setName("constructor.params");
@@ -75,7 +76,7 @@ public class FileindexingConnectorMappingTest {
     try (MockedStatic<CommonsUtils> commonsUtils = mockStatic(CommonsUtils.class)) {
       commonsUtils.when(() -> CommonsUtils.getService(any())).thenReturn(null);
       FileindexingConnector connector = new FileindexingConnector(initParams);
-      return (JSONObject) new JSONParser().parse(connector.getMapping());
+      return JsonMapper.builder().build().readTree(connector.getMapping());
     }
   }
 }
