@@ -68,8 +68,8 @@
                 <properties-param>
                     <name>constructor.params</name>
                     <property name="index_alias" value="file_alias"/>
-                    <property name="index_current" value="file_v5"/>
-                    <property name="index_previous" value="file_v4,file_v3,file_v2,file_v1" />
+                    <property name="index_current" value="file_v6"/>
+                    <property name="index_previous" value="file_v5,file_v4,file_v3,file_v2,file_v1" />
                     <property name="reindexOnUpgrade" value="false" />
                 </properties-param>
             </init-params>
@@ -105,6 +105,28 @@
             </init-params>
         </component-plugin>
 
+    </external-component-plugins>
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.commons.upgrade.UpgradeProductService</target-component>
+        <component-plugin>
+            <name>TranscribedFilesReindexUpgradePlugin</name>
+            <set-method>addUpgradePlugin</set-method>
+            <type>org.exoplatform.services.wcm.search.upgrade.TranscribedFilesReindexUpgradePlugin</type>
+            <description>Reindexes the files that carry a transcript, once the file index mapping no longer has a keyword copy of the transcript</description>
+            <init-params>
+                <value-param>
+                    <name>product.group.id</name>
+                    <description>The groupId of the product</description>
+                    <value>org.exoplatform.platform</value>
+                </value-param>
+                <value-param>
+                    <name>plugin.upgrade.execute.once</name>
+                    <description>Execute only once, not each version change</description>
+                    <value>true</value>
+                </value-param>
+            </init-params>
+        </component-plugin>
     </external-component-plugins>
 
 </configuration>
