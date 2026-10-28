@@ -23,6 +23,10 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.Authenticator;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.cms.documents.NewDocumentTemplate;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.mockito.InOrder;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
@@ -294,5 +298,33 @@ public class DocumentServiceImplTest {
 
     assertTrue(documentService.isDocumentTrashed(node));
     assertFalse(documentService.isDocumentTrashed(node));
+  }
+  /**
+   * A document created from a template is recorded once it is saved: the
+   * creation event is broadcast after the save, with the creator as source,
+   * because its analytics listener runs asynchronously and reads the node.
+   */
+  @Test
+  public void testCreateDocumentFromTemplateBroadcastsTheCreationAfterTheSave() throws Exception {
+    ConversationState.setCurrent(new ConversationState(new Identity("john")));
+    ListenerService listenerService = mock(ListenerService.class);
+    WCM_CORE_UTILS.when(() -> WCMCoreUtils.getService(ListenerService.class)).thenReturn(listenerService);
+    UTILS.when(() -> Utils.cleanNameWithAccents(anyString())).thenReturn("report");
+    UTILS.when(() -> Utils.cleanName(anyString())).thenReturn("report");
+    Node currentNode = mock(Node.class);
+    Node addedNode = mock(Node.class);
+    Node content = mock(Node.class);
+    when(currentNode.addNode("report", "nt:file")).thenReturn(addedNode);
+    when(addedNode.addNode("jcr:content", "nt:resource")).thenReturn(content);
+    NewDocumentTemplate template = mock(NewDocumentTemplate.class);
+    when(template.getMimeType()).thenReturn("text/plain");
+
+    documentService.createDocumentFromTemplate(currentNode, "Report", template);
+
+    InOrder order = inOrder(listenerService, currentNode);
+    order.verify(listenerService).broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
+    order.verify(currentNode).save();
+    order.verify(listenerService).broadcast(DocumentServiceImpl.CREATE_DOC_NEW_APP, "john", addedNode);
+    assertEquals("exo.create.doc.newApp", DocumentServiceImpl.CREATE_DOC_NEW_APP);
   }
 }

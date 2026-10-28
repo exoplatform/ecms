@@ -6,6 +6,7 @@ import javax.jcr.Node;
 
 import io.meeds.analytics.model.StatisticData;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.services.cms.documents.impl.DocumentServiceImpl;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.Asynchronous;
 import org.exoplatform.services.listener.Event;
@@ -19,9 +20,13 @@ import org.exoplatform.social.core.space.spi.SpaceService;
 @Asynchronous
 public class AnalyticsDocumentsListener extends Listener<String, Node> {
 
-  private static final String UPLOAD_DOCUMENT_NEW_APP_OPERATION_NAME  = "documentUploadedNewApp";
+  public static final String UPLOAD_DOCUMENT_NEW_APP_OPERATION_NAME  = "documentUploadedNewApp";
 
-  private static final String UPLOAD_DOCUMENT_OLD_APP_OPERATION_NAME  = "documentUploadedOldApp";
+  public static final String UPLOAD_DOCUMENT_OLD_APP_OPERATION_NAME  = "documentUploadedOldApp";
+
+  public static final String CREATE_DOCUMENT_OPERATION_NAME          = "documentCreated";
+
+  private static final String UPLOAD_DOCUMENT_NEW_APP_EVENT_NAME     = "exo.upload.doc.newApp";
 
   private static final String                   GROUPS_SPACES_PARENT_FOLDER          = "/Groups/spaces/";
 
@@ -32,7 +37,7 @@ public class AnalyticsDocumentsListener extends Listener<String, Node> {
   @Override
   public void onEvent(Event<String, Node> event) throws Exception {
     Node data = event.getData();
-    String operation = event.getEventName().equals("exo.upload.doc.newApp") ? UPLOAD_DOCUMENT_NEW_APP_OPERATION_NAME : UPLOAD_DOCUMENT_OLD_APP_OPERATION_NAME;
+    String operation = operationOf(event.getEventName());
     long userId = 0;
     Identity identity = getIdentityManager().getOrCreateIdentity(OrganizationIdentityProvider.NAME, event.getSource());
     if (identity != null) {
@@ -50,6 +55,24 @@ public class AnalyticsDocumentsListener extends Listener<String, Node> {
     String nodePath = data.getPath();
     addSpaceStatistic(statisticData, nodePath);
     addStatisticData(statisticData);
+  }
+
+  /**
+   * The operation recorded for each event this listener is registered on: a
+   * document created from a template, uploaded in the Documents app, or
+   * uploaded in the old explorer.
+   *
+   * @param eventName the name of the broadcast event
+   * @return the operation name
+   */
+  static String operationOf(String eventName) {
+    if (DocumentServiceImpl.CREATE_DOC_NEW_APP.equals(eventName)) {
+      return CREATE_DOCUMENT_OPERATION_NAME;
+    } else if (UPLOAD_DOCUMENT_NEW_APP_EVENT_NAME.equals(eventName)) {
+      return UPLOAD_DOCUMENT_NEW_APP_OPERATION_NAME;
+    } else {
+      return UPLOAD_DOCUMENT_OLD_APP_OPERATION_NAME;
+    }
   }
 
   public IdentityManager getIdentityManager() {

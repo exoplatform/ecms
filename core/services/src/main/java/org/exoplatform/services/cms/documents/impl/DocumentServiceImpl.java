@@ -90,6 +90,9 @@ import static org.exoplatform.services.cms.impl.Utils.cleanNameWithAccents;
  */
 public class DocumentServiceImpl implements DocumentService {
 
+  /** Broadcast once a document created from a template is saved, with the creator as source and the node as data. */
+  public static final String CREATE_DOC_NEW_APP = "exo.create.doc.newApp";
+
   public static final String MIX_REFERENCEABLE = "mix:referenceable";
   public static final String EXO_LAST_MODIFIER_PROP = "exo:lastModifier";
   public static final String EXO_DATE_CREATED_PROP = "exo:dateCreated";
@@ -697,6 +700,14 @@ public class DocumentServiceImpl implements DocumentService {
     ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
     listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     currentNode.save();
+    String creator = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
+    if (creator != null) {
+      try {
+        listenerService.broadcast(CREATE_DOC_NEW_APP, creator, addedNode);
+      } catch (Exception e) {
+        LOG.error("Error broadcast create document event", e);
+      }
+    }
     data.close();
     AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
     if(autoVersionService != null) {
