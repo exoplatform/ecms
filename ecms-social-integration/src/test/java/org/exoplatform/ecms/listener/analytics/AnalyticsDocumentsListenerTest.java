@@ -17,8 +17,10 @@
 package org.exoplatform.ecms.listener.analytics;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
@@ -78,7 +80,7 @@ public class AnalyticsDocumentsListenerTest {
     Session systemSession = mock(Session.class);
     NodeImpl systemNode = mock(NodeImpl.class);
     AccessControlList acl = mock(AccessControlList.class);
-    when(systemProvider.getSession(any(), any())).thenReturn(systemSession);
+    when(systemProvider.getSession(eq("collaboration"), any())).thenReturn(systemSession);
     when(systemSession.itemExists(path)).thenReturn(true);
     when(systemSession.getItem(path)).thenReturn(systemNode);
     when(systemNode.getACL()).thenReturn(acl);
@@ -110,6 +112,44 @@ public class AnalyticsDocumentsListenerTest {
     assertEquals(AnalyticsDocumentsListener.CREATE_DOCUMENT_OPERATION_NAME, data.getOperation());
     assertEquals("john", data.getParameters().get("documentsOwner"));
     assertEquals(path, data.getParameters().get("documentsPath"));
+    verify(systemProvider).close();
+  }
+
+  @Test
+  public void aNodeGoneBeforeTheListenerRunsIsRecordedWithoutOwner() throws Exception {
+    String path = "/Groups/platform/users/Documents/gone.docx";
+    Node broadcastNode = mock(Node.class, RETURNS_DEEP_STUBS);
+    when(broadcastNode.getPath()).thenReturn(path);
+    when(broadcastNode.getName()).thenReturn("gone.docx");
+    when(broadcastNode.getSession().getWorkspace().getName()).thenReturn("collaboration");
+    SessionProvider systemProvider = mock(SessionProvider.class);
+    Session systemSession = mock(Session.class);
+    when(systemProvider.getSession(eq("collaboration"), any())).thenReturn(systemSession);
+    when(systemSession.itemExists(path)).thenReturn(false);
+    IdentityManager identityManager = mock(IdentityManager.class);
+    when(identityManager.getOrCreateIdentity(anyString(), anyString())).thenReturn(new Identity("3"));
+    AnalyticsDocumentsListener listener = new AnalyticsDocumentsListener() {
+      @Override
+      public IdentityManager getIdentityManager() {
+        return identityManager;
+      }
+
+      @Override
+      SessionProvider createSystemProvider() {
+        return systemProvider;
+      }
+    };
+    ArgumentCaptor<StatisticData> stored = ArgumentCaptor.forClass(StatisticData.class);
+
+    try (MockedStatic<SessionProviderService> sessionProviderService = mockStatic(SessionProviderService.class);
+         MockedStatic<AnalyticsUtils> analytics = mockStatic(AnalyticsUtils.class)) {
+      sessionProviderService.when(SessionProviderService::getRepository).thenReturn(mock(ManageableRepository.class));
+      listener.onEvent(new Event<>("exo.upload.doc.newApp", "john", broadcastNode));
+      analytics.verify(() -> AnalyticsUtils.addStatisticData(stored.capture()));
+    }
+
+    assertEquals(AnalyticsDocumentsListener.UPLOAD_DOCUMENT_NEW_APP_OPERATION_NAME, stored.getValue().getOperation());
+    assertFalse("no owner is read from a node that no longer exists", stored.getValue().getParameters().containsKey("documentsOwner"));
     verify(systemProvider).close();
   }
 

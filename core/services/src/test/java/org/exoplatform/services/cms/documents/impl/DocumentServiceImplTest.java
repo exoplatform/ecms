@@ -329,6 +329,7 @@ public class DocumentServiceImplTest {
     order.verify(listenerService).broadcast(DocumentServiceImpl.CREATE_DOC_NEW_APP, "john", addedNode);
     assertEquals("exo.create.doc.newApp", DocumentServiceImpl.CREATE_DOC_NEW_APP);
   }
+
   /**
    * Without a known user, a document created from a template is still saved
    * and posted, and no creation event is recorded: an event with no creator

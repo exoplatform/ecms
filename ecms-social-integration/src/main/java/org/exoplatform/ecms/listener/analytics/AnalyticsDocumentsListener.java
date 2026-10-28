@@ -3,8 +3,8 @@ package org.exoplatform.ecms.listener.analytics;
 import static io.meeds.analytics.utils.AnalyticsUtils.*;
 
 import javax.jcr.Node;
-import javax.jcr.Session;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 import io.meeds.analytics.model.StatisticData;
 import org.exoplatform.container.ExoContainerContext;
