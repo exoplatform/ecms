@@ -700,18 +700,19 @@ public class DocumentServiceImpl implements DocumentService {
     ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
     listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     currentNode.save();
-    String creator = ConversationState.getCurrent() != null ? ConversationState.getCurrent().getIdentity().getUserId() : null;
+    data.close();
+    AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
+    if(autoVersionService != null) {
+      autoVersionService.autoVersion(addedNode);
+    }
+    ConversationState conversationState = ConversationState.getCurrent();
+    String creator = conversationState == null ? null : conversationState.getIdentity().getUserId();
     if (creator != null) {
       try {
         listenerService.broadcast(CREATE_DOC_NEW_APP, creator, addedNode);
       } catch (Exception e) {
         LOG.error("Error broadcast create document event", e);
       }
-    }
-    data.close();
-    AutoVersionService autoVersionService = WCMCoreUtils.getService(AutoVersionService.class);
-    if(autoVersionService != null) {
-      autoVersionService.autoVersion(addedNode);
     }
     return addedNode;
   }

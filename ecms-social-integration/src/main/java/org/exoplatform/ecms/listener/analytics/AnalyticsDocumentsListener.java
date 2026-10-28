@@ -3,10 +3,14 @@ package org.exoplatform.ecms.listener.analytics;
 import static io.meeds.analytics.utils.AnalyticsUtils.*;
 
 import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.jcr.RepositoryException;
 
 import io.meeds.analytics.model.StatisticData;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImpl;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.Asynchronous;
 import org.exoplatform.services.listener.Event;
@@ -49,10 +53,10 @@ public class AnalyticsDocumentsListener extends Listener<String, Node> {
     statisticData.setSubModule("event");
     statisticData.setOperation(operation);
     statisticData.setUserId(userId);
-    statisticData.addKeyword("documentsName", data.getName());
-    statisticData.addKeyword("documentsPath", data.getPath());
-    statisticData.addKeyword("documentsOwner", ((NodeImpl) data).getACL().getOwner());
     String nodePath = data.getPath();
+    statisticData.addKeyword("documentsName", data.getName());
+    statisticData.addKeyword("documentsPath", nodePath);
+    statisticData.addKeyword("documentsOwner", readOwner(data.getSession().getWorkspace().getName(), nodePath));
     addSpaceStatistic(statisticData, nodePath);
     addStatisticData(statisticData);
   }
@@ -73,6 +77,33 @@ public class AnalyticsDocumentsListener extends Listener<String, Node> {
     } else {
       return UPLOAD_DOCUMENT_OLD_APP_OPERATION_NAME;
     }
+  }
+
+  /**
+   * The owner of the node, read through a system session: this listener runs
+   * after the request that broadcast the event, whose session may already be
+   * closed.
+   *
+   * @param workspace the workspace of the node
+   * @param nodePath the path of the node
+   * @return the owner, or null when the node no longer exists
+   * @throws RepositoryException when the node cannot be read
+   */
+  String readOwner(String workspace, String nodePath) throws RepositoryException {
+    SessionProvider systemProvider = createSystemProvider();
+    try {
+      Session session = systemProvider.getSession(workspace, SessionProviderService.getRepository());
+      if (!session.itemExists(nodePath)) {
+        return null;
+      }
+      return ((NodeImpl) session.getItem(nodePath)).getACL().getOwner();
+    } finally {
+      systemProvider.close();
+    }
+  }
+
+  SessionProvider createSystemProvider() {
+    return SessionProvider.createSystemProvider();
   }
 
   public IdentityManager getIdentityManager() {
