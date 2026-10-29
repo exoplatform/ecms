@@ -1,0 +1,8 @@
+{
+  "modules": ["Drive", "documents"],
+  "operations": ["fileUpdated", "documentUploadedNewApp", "documentCreated"],
+  "labels": {
+    "title": "ecms.collaborativeActivity.help.title",
+    "counted": ["ecms.collaborativeActivity.help.counted"]
+  }
+}
