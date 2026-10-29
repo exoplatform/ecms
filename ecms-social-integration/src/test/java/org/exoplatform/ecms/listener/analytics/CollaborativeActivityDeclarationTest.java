@@ -62,11 +62,8 @@ public class CollaborativeActivityDeclarationTest {
     assertFalse(declaration.containsKey("browserOperations"));
 
     Map<String, Object> labels = (Map<String, Object>) declaration.get("labels");
-    assertEquals(List.of("ecms.collaborativeActivity.help.counted.createDocument",
-                         "ecms.collaborativeActivity.help.counted.uploadDocument",
-                         "ecms.collaborativeActivity.help.counted.editDocument",
-                         "ecms.collaborativeActivity.help.counted.newVersion"),
-                 labels.get("counted"));
+    assertEquals("ecms.collaborativeActivity.help.title", labels.get("title"));
+    assertEquals(List.of("ecms.collaborativeActivity.help.counted"), labels.get("counted"));
   }
 
 }
