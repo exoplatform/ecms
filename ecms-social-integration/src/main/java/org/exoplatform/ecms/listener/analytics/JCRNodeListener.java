@@ -45,6 +45,8 @@ import io.meeds.analytics.utils.AnalyticsUtils;
 
 public class JCRNodeListener implements Action {
 
+  public static final String                    FILE_UPDATED_OPERATION               = "fileUpdated";
+
   private static final String                   GROUPS_SPACES_PARENT_FOLDER          = "/Groups/spaces/";
 
   private static final String                   DOCUMENT_NAME_PARAM                  = "documentName";
@@ -68,8 +70,6 @@ public class JCRNodeListener implements Action {
   private static final String                   FILE_MIME_TYPE_PARAM                 = "fileMimeType";
 
   private static final String                   DOCUMENT_UPDATED_OPERATION           = "documentUpdated";
-
-  private static final String                   FILE_UPDATED_OPERATION               = "fileUpdated";
 
   private static final String                   DOCUMENT_CREATED_OPERATION           = "documentCreated";
 

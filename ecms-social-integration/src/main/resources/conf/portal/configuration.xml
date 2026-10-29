@@ -28,6 +28,17 @@
         </value-param>
       </init-params>
     </component-plugin>
+    <component-plugin>
+      <name>exo.create.doc.newApp</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.ecms.listener.analytics.AnalyticsDocumentsListener</type>
+      <init-params>
+        <value-param>
+          <name>operation</name>
+          <value>documentCreated</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
   <external-component-plugins profiles="analytics">
