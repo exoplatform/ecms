@@ -7,10 +7,6 @@
       "ecms.collaborativeActivity.help.counted.uploadDocument",
       "ecms.collaborativeActivity.help.counted.editDocument",
       "ecms.collaborativeActivity.help.counted.newVersion"
-    ],
-    "notCounted": [
-      "ecms.collaborativeActivity.help.notCounted.shortcut",
-      "ecms.collaborativeActivity.help.notCounted.share"
     ]
   }
 }

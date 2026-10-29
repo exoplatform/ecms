@@ -67,9 +67,6 @@ public class CollaborativeActivityDeclarationTest {
                          "ecms.collaborativeActivity.help.counted.editDocument",
                          "ecms.collaborativeActivity.help.counted.newVersion"),
                  labels.get("counted"));
-    assertEquals(List.of("ecms.collaborativeActivity.help.notCounted.shortcut",
-                         "ecms.collaborativeActivity.help.notCounted.share"),
-                 labels.get("notCounted"));
   }
 
 }
