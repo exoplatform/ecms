@@ -75,6 +75,8 @@ import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.upload.UploadService.UploadLimit;
 
+import org.apache.commons.fileupload2.core.FileUploadException;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -184,12 +186,21 @@ public class FileUploadHandler {
    * @throws Exception
    */
   public Response upload(HttpServletRequest servletRequest, String uploadId, Integer limit) throws Exception{
-    uploadService.addUploadLimit(uploadId, limit);
-    uploadService.createUploadResource(servletRequest);
-    uploadIdTimeMap.put(uploadId, System.currentTimeMillis());
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
+    uploadService.addUploadLimit(uploadId, limit);
+    try {
+      uploadService.createUploadResource(servletRequest);
+    } catch (FileUploadException e) {
+      return Response.status(HTTPStatus.BAD_REQUEST)
+                     .entity(e.getMessage())
+                     .type(MediaType.TEXT_PLAIN)
+                     .cacheControl(cacheControl)
+                     .header(LAST_MODIFIED_PROPERTY, new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT).format(new Date()))
+                     .build();
+    }
+    uploadIdTimeMap.put(uploadId, System.currentTimeMillis());
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     
     //create ret
@@ -255,12 +266,14 @@ public class FileUploadHandler {
    *
    * @param uploadId the upload id
    * @param action the action
+   * @param request the request, whose user an abort or a delete acts as: an
+   *          upload id held by another user is refused with 400
    *
    * @return the response
    *
    * @throws Exception the exception
    */
-  public Response control(String uploadId, String action) throws Exception {
+  public Response control(String uploadId, String action, HttpServletRequest request) throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
@@ -272,15 +285,17 @@ public class FileUploadHandler {
                      .cacheControl(cacheControl)
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                      .build();
-    } else if (FileUploadHandler.ABORT_ACTION.equals(action)) {
-      uploadService.removeUploadResource(uploadId);
-      uploadIdTimeMap.remove(uploadId);
-      return Response.ok(null, MediaType.TEXT_XML)
-                     .cacheControl(cacheControl)
-                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-                     .build();
-    } else if (FileUploadHandler.DELETE_ACTION.equals(action)) {
-      uploadService.removeUploadResource(uploadId);
+    } else if (FileUploadHandler.ABORT_ACTION.equals(action) || FileUploadHandler.DELETE_ACTION.equals(action)) {
+      try {
+        uploadService.removeUploadResource(uploadId, request);
+      } catch (FileUploadException e) {
+        return Response.status(HTTPStatus.BAD_REQUEST)
+                       .entity(e.getMessage())
+                       .type(MediaType.TEXT_PLAIN)
+                       .cacheControl(cacheControl)
+                       .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                       .build();
+      }
       uploadIdTimeMap.remove(uploadId);
       return Response.ok(null, MediaType.TEXT_XML)
                      .cacheControl(cacheControl)
@@ -792,7 +807,7 @@ public class FileUploadHandler {
     rootElement.setAttribute("uploadedSize", resource == null ? "0" : resource.getUploadedSize() + "");
     rootElement.setAttribute("totalSize", resource == null ? "0" : resource.getEstimatedSize() + "");
     rootElement.setAttribute("fileType", resource == null ? "null" : resource.getMimeType() + "");
-    UploadLimit limit = uploadService.getUploadLimits().get(uploadId);
+    UploadLimit limit = uploadId == null ? null : uploadService.getUploadLimits().get(uploadId);
     if (limit != null) {
       rootElement.setAttribute("limit", limit.getLimit() + "");
       rootElement.setAttribute("unit", limit.getUnit() + "");

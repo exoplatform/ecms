@@ -424,6 +424,7 @@ public class ManageDocumentService implements ResourceContainer {
   @Path("/uploadFile/control/")
   @RolesAllowed("users")
   public Response processUpload(
+      @Context HttpServletRequest servletRequest,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driveName") String driveName,
       @QueryParam("currentFolder") String currentFolder,
@@ -449,7 +450,8 @@ public class ManageDocumentService implements ResourceContainer {
                                            action,
                                            language,
                                            fileName,
-                                           uploadId, existenceAction);
+                                           uploadId, existenceAction,
+                                           servletRequest);
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -891,14 +893,15 @@ public class ManageDocumentService implements ResourceContainer {
                                                  String language,
                                                  String fileName,
                                                  String uploadId,
-                                                 String existenceAction) throws Exception {
+                                                 String existenceAction,
+                                                 HttpServletRequest servletRequest) throws Exception {
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
       DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
       return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language,NEW_APP , siteName, userId, existenceAction);
     }
-    return fileUploadHandler.control(uploadId, action);
+    return fileUploadHandler.control(uploadId, action, servletRequest);
   }
   private String createTitlePath(String driveName, String workspaceName, String currentFolder) throws Exception {
     String[] folders = currentFolder.split("/");
