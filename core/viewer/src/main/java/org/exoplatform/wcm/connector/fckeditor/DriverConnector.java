@@ -439,6 +439,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   @Path("/uploadFile/control/")
   @RolesAllowed("users")
   public Response processUpload(
+      @Context HttpServletRequest servletRequest,
       @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
@@ -478,7 +479,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                            language,
                                            fileName,
                                            uploadId,
-                                           existenceAction);
+                                           existenceAction,
+                                           servletRequest);
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -968,7 +970,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                  String language,
                                                  String fileName,
                                                  String uploadId,
-                                                 String existenceAction) throws Exception {
+                                                 String existenceAction,
+                                                 HttpServletRequest servletRequest) throws Exception {
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
@@ -978,7 +981,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       cacheControl.setNoCache(true);
       return fileUploadHandler.saveAsNTFile(workspaceName, currentFolderNode, uploadId, fileName, language,OLD_APP , siteName, userId, existenceAction,true);
     }
-    return fileUploadHandler.control(uploadId, action);
+    return fileUploadHandler.control(uploadId, action, servletRequest);
   }
 
   /**
