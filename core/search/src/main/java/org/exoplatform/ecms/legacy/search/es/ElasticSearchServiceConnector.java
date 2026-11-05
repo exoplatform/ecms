@@ -400,8 +400,8 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
     esQuery.append("     \"_source\": [" + getSourceFields() + "],");
     esQuery.append("     \"query\": {\n");
     esQuery.append("        \"bool\" : {\n");
-    if (StringUtils.isNotBlank(query)) {
-      List<String> queryParts = Arrays.asList(query.split("[\\+\\-=\\&\\|><\\!\\(\\)\\{\\}\\[\\]\\^\"\\*\\?:\\/ @]+"));
+    List<String> queryParts = filteredQueryParts(query);
+    if (!queryParts.isEmpty()) {
       queryParts = queryParts.stream().map(queryPart -> {
         queryPart = this.escapeReservedCharacters(queryPart);
         if (queryPart.length() > 5) {
@@ -409,8 +409,8 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
         }
         return queryPart;
       }).collect(Collectors.toList());
-      String escapedQueryWithAndOperator = StringUtils.join(queryParts, " AND ");
-      String escapedQueryWithoutOperator = StringUtils.join(queryParts, " ");
+      String escapedQueryWithAndOperator = JSONValue.escape(StringUtils.join(queryParts, " AND "));
+      String escapedQueryWithoutOperator = JSONValue.escape(StringUtils.join(queryParts, " "));
       String queryStringClause = "{\n"
           + "                \"query_string\" : {\n"
           + "                    \"fields\" : [" + getFields() + "],\n"
@@ -514,6 +514,24 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
     return esQuery.toString();
   }
   
+  /**
+   * Splits the keyword of a filtered search into its words: every character
+   * the engine's query grammar reserves, the backslash included, and every
+   * white space separate words, and empty words are dropped. A keyword made
+   * of separators only has no words, and is searched as no keyword.
+   *
+   * @param query the keyword
+   * @return its words, none for a blank keyword
+   */
+  private static List<String> filteredQueryParts(String query) {
+    if (StringUtils.isBlank(query)) {
+      return List.of();
+    }
+    return Arrays.stream(query.split("[\\+\\-=\\&\\|><\\!\\(\\)\\{\\}\\[\\]\\^\"\\*\\?:\\/\\\\\\s@]+"))
+                 .filter(StringUtils::isNotEmpty)
+                 .toList();
+  }
+
   /**
    * Escaped reserved characters by ES when using query_string.
    * Only ~ is not escaped since it is used for fuzzy search parameter.
