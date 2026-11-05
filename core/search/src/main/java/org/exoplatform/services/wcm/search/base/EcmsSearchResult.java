@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.exoplatform.ecms.legacy.search.data.SearchResult;
+import org.exoplatform.services.wcm.search.model.SearchFieldMatches;
 import org.exoplatform.social.metadata.model.MetadataItem;
 
 /**
@@ -44,6 +45,12 @@ public class EcmsSearchResult extends SearchResult {
   private String lastEditor;
   private Map<String, List<MetadataItem>> metadatas;
   private boolean isCloudDrive;
+
+  /**
+   * What matched in other add-ons' data (form values) when the keyword search
+   * found the file by them, null otherwise.
+   */
+  private SearchFieldMatches fieldMatches;
 
   public EcmsSearchResult(String url,
                           String urlOnImage,
@@ -278,4 +285,19 @@ public class EcmsSearchResult extends SearchResult {
   public void setCloudDrive(boolean cloudDrive) {
     isCloudDrive = cloudDrive;
   }
+
+  /**
+   * @return what matched in other add-ons' data, null when nothing did
+   */
+  public SearchFieldMatches getFieldMatches() {
+    return fieldMatches;
+  }
+
+  /**
+   * @param fieldMatches what matched in other add-ons' data
+   */
+  public void setFieldMatches(SearchFieldMatches fieldMatches) {
+    this.fieldMatches = fieldMatches;
+  }
+
 }

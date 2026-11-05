@@ -24,6 +24,7 @@ import org.junit.runners.Suite;
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
+import org.exoplatform.services.wcm.search.connector.FileSearchContributionsTest;
 import org.exoplatform.services.wcm.search.connector.FileindexingConnectorMappingTest;
 import org.exoplatform.services.wcm.search.connector.TestFileSearchServiceConnector;
 import org.exoplatform.services.wcm.search.upgrade.TranscribedFilesReindexUpgradePluginTest;
@@ -39,6 +40,7 @@ import org.exoplatform.services.wcm.search.upgrade.TranscribedFilesReindexUpgrad
 @Suite.SuiteClasses({
         TestFileSearchServiceConnector.class,
         FileindexingConnectorMappingTest.class,
+        FileSearchContributionsTest.class,
         TranscribedFilesReindexUpgradePluginTest.class
 })
 @ConfigTestCase(BaseSearchTest.class)
