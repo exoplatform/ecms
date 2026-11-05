@@ -18,12 +18,16 @@ package org.exoplatform.services.wcm.search.connector;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.clearInvocations;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -39,6 +43,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+
+import org.exoplatform.ecms.legacy.search.data.SearchResult;
+import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 
 import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
 import org.exoplatform.container.xml.InitParams;
@@ -236,6 +243,49 @@ public class FileSearchContributionsTest {
   }
 
   /**
+   * The contributors are asked only for a search with a keyword that asks
+   * for field matches, with the keyword as typed, the user's spaces and
+   * English when the language is unknown. Mutants: the fieldMatches flag
+   * ignored, the blank-keyword guard removed, the keyword changed.
+   */
+  @Test
+  public void testContributorsAskedOnlyForAKeywordWithFieldMatches() {
+    FileSearchMatchPlugin plugin = mock(FileSearchMatchPlugin.class);
+    when(plugin.search(any())).thenReturn(FileSearchMatches.EMPTY);
+    FileSearchServiceConnector searching = spy(connector);
+    doReturn(List.of(plugin)).when(searching).getSearchMatchPlugins();
+    Identity viewer = new Identity("user1");
+
+    assertSame(FileSearchMatches.EMPTY, searching.collectContributions(false, viewer, "Northwind", List.of(), 10, Locale.FRENCH));
+    assertSame(FileSearchMatches.EMPTY, searching.collectContributions(true, viewer, "  ", List.of(), 10, Locale.FRENCH));
+    assertSame(FileSearchMatches.EMPTY, searching.collectContributions(true, viewer, null, List.of(), 10, Locale.FRENCH));
+    verify(plugin, never()).search(any());
+
+    searching.collectContributions(true, viewer, "north_wind.#1", null, 10, null);
+    ArgumentCaptor<FileSearchMatchRequest> asked = ArgumentCaptor.forClass(FileSearchMatchRequest.class);
+    verify(plugin).search(asked.capture());
+    assertEquals(new FileSearchMatchRequest(viewer, "north_wind.#1", List.of(), 10, Locale.ENGLISH), asked.getValue());
+  }
+
+  /**
+   * Each result gets the line its contributor gave for it, and a result no
+   * contributor found gets none. Mutants: the line set on every result, the
+   * line looked up by another key.
+   */
+  @Test
+  public void testFieldMatchesAttachedToTheirFileOnly() {
+    SearchFieldMatches line = new SearchFieldMatches("icon", "tooltip", List.of(), 0, "");
+    EcmsSearchResult found = result("abc-1");
+    EcmsSearchResult other = result("def-2");
+    List<SearchResult> results = List.of(found, other);
+
+    FileSearchServiceConnector.attachFieldMatches(results, new FileSearchMatches(List.of("abc-1"), Map.of("abc-1", line)));
+
+    assertSame(line, found.getFieldMatches());
+    assertNull(other.getFieldMatches());
+  }
+
+  /**
    * The contributed files' boost is read from the configuration, from 0.1 to
    * 100; anything else keeps the default. Mutant: the range check removed.
    */
@@ -276,6 +326,14 @@ public class FileSearchContributionsTest {
     List<String> result = new ArrayList<>();
     array.forEach(value -> result.add(value.asString()));
     return result;
+  }
+
+  /**
+   * @param id the node id
+   * @return a file result with that id
+   */
+  private static EcmsSearchResult result(String id) {
+    return new EcmsSearchResult("/url", "title", 0, 0, "file", "/path", null, id, null, null, null, null, null);
   }
 
   /**
