@@ -50,12 +50,14 @@ public class JCRNodeListenerTest {
 
   private MockedStatic<PortalContainer> portalContainer;
 
+  private TrashService                  trashService;
+
   @Before
   public void setUp() {
     JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.clear();
     ConversationState.setCurrent(new ConversationState(new Identity("john")));
     PortalContainer container = mock(PortalContainer.class);
-    TrashService trashService = mock(TrashService.class);
+    trashService = mock(TrashService.class);
     when(container.getComponentInstanceOfType(TrashService.class)).thenReturn(trashService);
     portalContainer = mockStatic(PortalContainer.class);
     portalContainer.when(PortalContainer::getInstance).thenReturn(container);
@@ -83,19 +85,47 @@ public class JCRNodeListenerTest {
   }
 
   @Test
-  public void permissionsChangeOnExistingFileIsNotScheduled() throws Exception {
-    Node file = file();
-    Context context = context(property("exo:permissions", file), Event.PROPERTY_CHANGED);
+  public void editorPropertyRemovalOnExistingFileIsNotQueued() throws Exception {
+    Context context = context(property("exo:currentProvider", file(false)), Event.PROPERTY_REMOVED);
 
     assertTrue(new JCRNodeListener().execute(context));
 
     assertFalse(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
   }
 
+  @Test
+  public void modificationDateChangeOnExistingFileIsNotQueued() throws Exception {
+    Context context = context(property("exo:lastModifiedDate", file(false)), Event.PROPERTY_CHANGED);
+
+    assertTrue(new JCRNodeListener().execute(context));
+
+    assertFalse(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
+  @Test
+  public void propertyWrittenOnFileInTrashIsQueued() throws Exception {
+    Node file = file(false);
+    when(trashService.isInTrash(file)).thenReturn(true);
+    Context context = context(property("exo:restorePath", file), Event.PROPERTY_ADDED);
+
+    assertTrue(new JCRNodeListener().execute(context));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
+  @Test
+  public void propertyWrittenOnNewNodeIsQueued() throws Exception {
+    Context context = context(property("exo:title", file(true)), Event.PROPERTY_ADDED);
+
+    assertTrue(new JCRNodeListener().execute(context));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
   /** Stops at the queue, before the delayed executor: the repository lookup is not mocked. */
   @Test
   public void contentChangeOnExistingFileIsQueued() throws Exception {
-    Node file = file();
+    Node file = file(false);
     Node content = mock(Node.class);
     when(content.isNew()).thenReturn(false);
     when(content.isNodeType("nt:resource")).thenReturn(true);
@@ -108,9 +138,9 @@ public class JCRNodeListenerTest {
     assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
   }
 
-  private Node file() throws Exception {
+  private Node file(boolean isNew) throws Exception {
     Node file = mock(Node.class);
-    when(file.isNew()).thenReturn(false);
+    when(file.isNew()).thenReturn(isNew);
     when(file.isNodeType("nt:file")).thenReturn(true);
     when(file.isNodeType("nt:resource")).thenReturn(false);
     when(file.getPath()).thenReturn(FILE_PATH);
