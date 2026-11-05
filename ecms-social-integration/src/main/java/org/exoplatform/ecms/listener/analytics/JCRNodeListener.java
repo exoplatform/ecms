@@ -119,15 +119,7 @@ public class JCRNodeListener implements Action {
       if (node == null) {
         return true;
       }
-      Node managedNode = getManagedNodeFromParents(node);
-      if (managedNode == null) {
-        return true;
-      }
-
       int eventType = (Integer) context.get(InvocationContext.EVENT);
-      if (eventType == Event.NODE_ADDED && node.isNodeType(EXO_USER_PREFERENCES)) {
-        return true;
-      }
       if (item instanceof Property
           && isPropertyEvent(eventType)
           && !node.isNew()
@@ -135,6 +127,15 @@ public class JCRNodeListener implements Action {
           && !getTrashService().isInTrash(node)) {
         // Only a change of the document content or description is a
         // collaborative update
+        return true;
+      }
+
+      Node managedNode = getManagedNodeFromParents(node);
+      if (managedNode == null) {
+        return true;
+      }
+
+      if (eventType == Event.NODE_ADDED && node.isNodeType(EXO_USER_PREFERENCES)) {
         return true;
       }
       String nodePath = managedNode.getPath();
