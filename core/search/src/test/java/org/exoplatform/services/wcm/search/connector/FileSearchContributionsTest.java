@@ -201,12 +201,12 @@ public class FileSearchContributionsTest {
   @Test
   public void testContributedBoostIsReadWithinItsRange() {
     Map<String, Double> expected = new LinkedHashMap<>();
-    expected.put(null, 2.0d);
+    expected.put(null, 5.0d);
     expected.put("5", 5.0d);
-    expected.put("0", 2.0d);
-    expected.put("100.5", 2.0d);
-    expected.put("NaN", 2.0d);
-    expected.put("abc", 2.0d);
+    expected.put("0", 5.0d);
+    expected.put("100.5", 5.0d);
+    expected.put("NaN", 5.0d);
+    expected.put("abc", 5.0d);
     expected.forEach((value, boost) -> assertEquals(value,
                                                      boost,
                                                      FileSearchServiceConnector.parseContributedBoost(value),
