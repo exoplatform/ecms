@@ -109,6 +109,8 @@ public class FileSearchContributionsIT {
     index("b2", "Order form", "user1", "");
     index("c3", "Secret Northwind", "user2", "");
     index("d4", "Sales plan", "*:/spaces/sales", "roadmap");
+    index("e5", "Quarterly report", "user1", "", ",\"path\":\"/Groups/spaces/sales/Documents/e5\",\"metadatas\":{\"favorites\":[{\"metadataName\":\"1\"}]}");
+    index("f6", "Draft notes", "user1", "", ",\"path\":\"/Users/u___/us___/user1/Private/f6\"");
     send("POST", "/" + INDEX + "/_refresh", "");
 
     InitParams initParams = new InitParams();
@@ -165,6 +167,26 @@ public class FileSearchContributionsIT {
   }
 
   /**
+   * A contributed file passes the paths filter, which keeps a user who is
+   * not an administrator to the spaces and their own drive, and the
+   * favorites filter, written as the Files search writes them: outside them,
+   * a contributed file is not found. Mutants: the ids clause outside the
+   * must, per filter.
+   */
+  @Test
+  public void testContributedIdsUnderThePathsAndFavoritesFilters() throws Exception {
+    assertEquals(Set.of("e5", "f6"), search("Zzyzx", List.of(), List.of("e5", "f6")));
+    ElasticSearchFilter paths = new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM,
+                                                        "path",
+                                                        "{\n \"regexp\" : { \"path\" : \"/Groups/spaces.*\" }\n }");
+    assertEquals(Set.of("e5"), search("Zzyzx", List.of(paths), List.of("e5", "f6")));
+    ElasticSearchFilter favorites = new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MATADATAS,
+                                                            "",
+                                                            "{\"terms\":{\"metadatas.favorites.metadataName.keyword\": [\"1\"]}},");
+    assertEquals(Set.of("e5"), search("Zzyzx", List.of(favorites), List.of("e5", "f6")));
+  }
+
+  /**
    * Odd ids are dropped before the request is written, odd sort orders are
    * rewritten, and a keyword with a backslash, a tab or a leading separator
    * is split into words: the engine accepts every such request. A keyword of
@@ -179,7 +201,7 @@ public class FileSearchContributionsIT {
     send("POST", "/" + INDEX + "/_search", request);
     assertEquals(Set.of("a1"), search("Northwind\\", List.of(), List.of()));
     assertEquals(Set.of("a1", "b2"), search("+Northwind\tcontract\\", List.of(), List.of("b2")));
-    assertEquals(Set.of("a1", "b2", "d4"), search("\\ +", List.of(), List.of("b2")));
+    assertEquals(Set.of("a1", "b2", "d4", "e5", "f6"), search("\\ +", List.of(), List.of("b2")));
   }
 
   /**
@@ -208,10 +230,23 @@ public class FileSearchContributionsIT {
    * @param tag the one tag, none when empty
    */
   private static void index(String id, String title, String permission, String tag) throws Exception {
+    index(id, title, permission, tag, "");
+  }
+
+  /**
+   * Indexes one file document with more fields.
+   *
+   * @param id the node id
+   * @param title the title
+   * @param permission the one permission
+   * @param tag the one tag, none when empty
+   * @param more more JSON fields, each led by a comma, none when empty
+   */
+  private static void index(String id, String title, String permission, String tag, String more) throws Exception {
     send("PUT",
          "/" + INDEX + "/_doc/" + id,
          "{\"title\":\"" + title + "\",\"name\":\"" + title + "\",\"permissions\":[\"" + permission + "\"]"
-             + (tag.isEmpty() ? "" : ",\"tags\":[\"" + tag + "\"]") + ",\"lastUpdatedDate\":1700000000000}");
+             + (tag.isEmpty() ? "" : ",\"tags\":[\"" + tag + "\"]") + more + ",\"lastUpdatedDate\":1700000000000}");
   }
 
   /**
