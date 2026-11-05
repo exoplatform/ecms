@@ -26,6 +26,7 @@ import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
 import org.exoplatform.services.attachments.service.AttachmentServiceImplTest;
+import org.exoplatform.services.attachments.storage.AttachmentStorageImplTest;
 import org.exoplatform.services.attachments.utils.EntityBuilderTest;
 import org.exoplatform.services.cms.documents.TestDocumentService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
@@ -77,6 +78,7 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   AttachmentServiceTest.class,
   AttachmentServiceImplTest.class,
   EntityBuilderTest.class,
+  AttachmentStorageImplTest.class,
   DocumentServiceImplTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)

@@ -101,6 +101,8 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   @Mock(extraInterfaces = {ExtendedSession.class})
   Session session;
 
+  private final List<MockedStatic<?>> staticMocks = new ArrayList<>();
+
   @Before
   public void setUp() throws Exception {
     begin();
@@ -119,6 +121,8 @@ public class AttachmentServiceTest extends BaseExoTestCase {
 
   @After
   public void teardown() throws Exception {
+    // A static mock left open stays active for the next tests run in this thread
+    staticMocks.forEach(MockedStatic::close);
     super.tearDown();
     end();
   }
@@ -334,7 +338,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
     lenient().when(node1.getUUID()).thenReturn(createdDocUUID);
     lenient().when(((ExtendedSession) session).getNodeByIdentifier(createdDocUUID)).thenReturn(node1);
     lenient().when(Utils.getParentFolderNode(session, manageDriveService,nodeHierarchyCreator, nodeFinder, pathDrive, docPath)).thenReturn(parentNode);
-    mockStatic(PermissionUtil.class);
+    staticMocks.add(mockStatic(PermissionUtil.class));
     //can add node permission
     lenient().when(PermissionUtil.canAddNode(parentNode)).thenReturn(true);
     lenient().when(documentService.createDocumentFromTemplate(parentNode, docTitle, documentTemplate)).thenReturn(node1);
@@ -366,6 +370,7 @@ public class AttachmentServiceTest extends BaseExoTestCase {
   public void markAttachmentAsViewed() throws RepositoryException {
     Session session = mock(Session.class);
     MockedStatic<Utils> UTILS = mockStatic(Utils.class);
+    staticMocks.add(UTILS);
     Node node = mock(Node.class);
     UTILS.when(() -> Utils.getSystemSession(sessionProviderService, repositoryService)).thenReturn(session);
     UTILS.when(() -> Utils.getNodeByIdentifier(session, "123")).thenReturn(node);
