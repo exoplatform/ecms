@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.attachments.storage;
 
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.dao.AttachmentDAO;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.AttachmentContextEntity;
@@ -26,9 +27,12 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.util.ArrayList;
@@ -37,6 +41,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AttachmentStorageImpl implements AttachmentStorage {
+
+  private static final Log       LOG = ExoLogger.getLogger(AttachmentStorageImpl.class);
 
   AttachmentDAO                  attachmentDAO;
 
@@ -91,12 +97,25 @@ public class AttachmentStorageImpl implements AttachmentStorage {
           if (Utils.isQuarantinedItem(systemSession, attachmentId)) {
             continue;
           }
-          Attachment attachment = EntityBuilder.fromAttachmentNode(repositoryService,
-                                                                   documentService,
-                                                                   linkManager,
-                                                                   workspace,
-                                                                   userSession,
-                                                                   attachmentId);
+          Attachment attachment;
+          try {
+            attachment = EntityBuilder.fromAttachmentNode(repositoryService,
+                                                          documentService,
+                                                          linkManager,
+                                                          workspace,
+                                                          userSession,
+                                                          attachmentId);
+          } catch (ObjectNotFoundException | ItemNotFoundException | PathNotFoundException e) {
+            // An attachment that can't be built, such as a shortcut whose
+            // target is gone or a node without content, doesn't hide the
+            // entity's other attachments; any other error still fails the list
+            LOG.warn("Attachment {} of {} {} can't be built and is left out: {}",
+                     attachmentId,
+                     entityType,
+                     entityId,
+                     e.getClass().getSimpleName());
+            continue;
+          }
           if (attachment != null) {
             attachments.add(attachment);
           }
