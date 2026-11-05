@@ -92,8 +92,9 @@ public class JCRNodeListenerTest {
     assertFalse(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
   }
 
+  /** Stops at the queue, before the delayed executor: the repository lookup is not mocked. */
   @Test
-  public void contentChangeOnExistingFileIsScheduled() throws Exception {
+  public void contentChangeOnExistingFileIsQueued() throws Exception {
     Node file = file();
     Node content = mock(Node.class);
     when(content.isNew()).thenReturn(false);
