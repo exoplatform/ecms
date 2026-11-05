@@ -200,10 +200,12 @@ public class JCRNodeListener implements Action {
   }
 
   /**
-   * Only a change to the content of a file ({@code jcr:data}) or to its
-   * description ({@code dc:description}) counts as an update of the file;
-   * any other property written on it (permissions, dates, visibility,
-   * editor session properties...) is not an update of the document.
+   * A property write on an existing file records a file update only for
+   * its content ({@code jcr:data}) or its description
+   * ({@code dc:description}). The writes that come with an administrative or
+   * passive action (the modification dates and modifier written beside an
+   * access-rights change or a hide, the editor's properties cleared on
+   * close, a user's editor preferences) record nothing.
    *
    * @param propertyName JCR name of the written property
    * @return true when the property is the file content or its description
