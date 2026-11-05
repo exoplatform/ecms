@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,13 +29,18 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilter;
 import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilterType;
+import org.exoplatform.portal.application.localization.LocalizationFilter;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
+import org.exoplatform.services.wcm.search.model.FileSearchMatchRequest;
+import org.exoplatform.services.wcm.search.model.FileSearchMatches;
+import org.exoplatform.services.wcm.search.model.SearchFieldMatches;
 import org.exoplatform.social.metadata.favorite.FavoriteService;
 import org.exoplatform.social.metadata.tag.TagService;
 import org.exoplatform.social.rest.api.RestUtils;
@@ -81,7 +87,8 @@ public class FileSearchRestService implements ResourceContainer {
                                         @Parameter(description = "Limit") @Schema(defaultValue = "20") @QueryParam("limit") int limit,
                                         @Parameter(description = "favorites") @Schema(defaultValue = "false") @QueryParam("favorites") boolean favorites,
                                         @Parameter(description = "Tag names list") @Schema(defaultValue = "false") @QueryParam("tags") List<String> tagNames,
-                                        @Parameter(description = "Space id") @QueryParam("spaceId") List<Long> spaceIds
+                                        @Parameter(description = "Space id") @QueryParam("spaceId") List<Long> spaceIds,
+                                        @Parameter(description = "With a query, whether other add-ons' matches (form values) are searched too and described per file, as unified search asks") @Schema(defaultValue = "false") @QueryParam("fieldMatches") boolean fieldMatches
                                         ) throws Exception {
 
     if (limit <= 0) {
@@ -116,13 +123,42 @@ public class FileSearchRestService implements ResourceContainer {
     if (!userACL.isSuperUser(ConversationState.getCurrent().getIdentity()) && !userACL.isUserInGroup(ConversationState.getCurrent().getIdentity(), userACL.getAdminGroups())) {
       recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
     }
+    FileSearchMatches contributions = FileSearchMatches.EMPTY;
+    if (fieldMatches && StringUtils.isNotBlank(query)) {
+      Locale locale = LocalizationFilter.getCurrentLocale();
+      contributions = fileSearchServiceConnector.collectContributions(new FileSearchMatchRequest(ConversationState.getCurrent()
+                                                                                                                  .getIdentity(),
+                                                                                                 query,
+                                                                                                 spaceIds == null ? List.of()
+                                                                                                                  : List.copyOf(spaceIds),
+                                                                                                 limit,
+                                                                                                 locale == null ? Locale.ENGLISH
+                                                                                                                : locale));
+    }
     if (StringUtils.isNotBlank(query)) {
       query = query.replace("#", " ")
                    .replace("$", " ")
                    .replace("_", " ")
                    .replace(".", " ");
     }
-    Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null, query, recentFilters, null, 0, limit, sortField, sortDirection);
+    Collection<SearchResult> recentDocuments = fileSearchServiceConnector.filteredSearch(null,
+                                                                                         query,
+                                                                                         recentFilters,
+                                                                                         null,
+                                                                                         0,
+                                                                                         limit,
+                                                                                         sortField,
+                                                                                         sortDirection,
+                                                                                         contributions.fileIds(),
+                                                                                         fileSearchServiceConnector.getContributedBoost());
+    Map<String, SearchFieldMatches> matches = contributions.matches();
+    if (!matches.isEmpty()) {
+      recentDocuments.forEach(result -> {
+        if (result instanceof EcmsSearchResult ecmsResult && ecmsResult.getId() != null) {
+          ecmsResult.setFieldMatches(matches.get(ecmsResult.getId()));
+        }
+      });
+    }
     return Response.ok(recentDocuments).build();
   }
 
