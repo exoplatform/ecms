@@ -22,6 +22,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -192,6 +193,46 @@ public class FileSearchContributionsTest {
                                                               Map.of()));
     assertEquals(FileSearchServiceConnector.MAX_CONTRIBUTED_FILES,
                  connector.collectContributions(List.of(many), request()).fileIds().size());
+  }
+
+  /**
+   * A keyword holding a backslash, a white space other than a space, or a
+   * leading separator still writes a request the engine can read: the
+   * backslash separates words like the other reserved characters, empty
+   * words are dropped and the keyword is JSON-escaped. A keyword of
+   * separators only is no keyword, so no id is written either. Mutants: the
+   * backslash kept in the words, the JSON escape removed, the empty words
+   * kept, the ids written for a keyword without words.
+   */
+  @Test
+  public void testKeywordWithReservedCharactersWritesAReadableRequest() {
+    Map<String, String> expected = new LinkedHashMap<>();
+    expected.put("foo\\", "foo");
+    expected.put("a\\b", "a AND b");
+    expected.put("a\tb", "a AND b");
+    expected.put("+foo", "foo");
+    expected.put("a\u0001b", "a\u0001b");
+    expected.put("say \"x\"", "say AND x");
+    expected.forEach((keyword, query) -> {
+      JsonNode must = request(keyword, List.of("abc-1")).path("query").path("bool").path("must");
+      assertEquals(keyword, query, must.path("bool").path("should").get(0).path("query_string").path("query").asString());
+      clearInvocations(client);
+    });
+    JsonNode separatorsOnly = request("\\ +", List.of("abc-1"));
+    assertFalse(separatorsOnly.toString().contains("query_string"));
+    assertFalse(separatorsOnly.toString().contains("\"ids\""));
+  }
+
+  /**
+   * The connector reads its contributed boost from its configuration. Mutant:
+   * the property ignored.
+   */
+  @Test
+  public void testConnectorReadsItsContributedBoost() {
+    when(params.getProperty(FileSearchServiceConnector.CONTRIBUTED_BOOST_PROPERTY)).thenReturn("3.5");
+    InitParams initParams = mock(InitParams.class);
+    when(initParams.getPropertiesParam("constructor.params")).thenReturn(params);
+    assertEquals(3.5d, new FileSearchServiceConnector(initParams, client, null, null).getContributedBoost(), 0d);
   }
 
   /**
