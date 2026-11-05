@@ -165,15 +165,21 @@ public class FileSearchContributionsIT {
   }
 
   /**
-   * Odd ids are dropped before the request is written and odd sort orders are
-   * rewritten: the engine accepts every such request. Mutants: the id shape
-   * check removed, the order written as sent.
+   * Odd ids are dropped before the request is written, odd sort orders are
+   * rewritten, and a keyword with a backslash, a tab or a leading separator
+   * is split into words: the engine accepts every such request. A keyword of
+   * separators only searches as no keyword, every readable file. Mutants: the
+   * id shape check removed, the order written as sent, the backslash kept in
+   * the words, the JSON escape removed, the empty words kept.
    */
   @Test
   public void testRequestsTheEngineMustAccept() throws Exception {
     assertEquals(Set.of("a1", "b2"), search("Northwind", List.of(), List.of("b2", "bad\"id", "x\\y")));
     String request = builder.query("Northwind", new ArrayList<>(), 0, 10, "date", "asc\"}},{\"x\":\"", List.of("b2"));
     send("POST", "/" + INDEX + "/_search", request);
+    assertEquals(Set.of("a1"), search("Northwind\\", List.of(), List.of()));
+    assertEquals(Set.of("a1", "b2"), search("+Northwind\tcontract\\", List.of(), List.of("b2")));
+    assertEquals(Set.of("a1", "b2", "d4"), search("\\ +", List.of(), List.of("b2")));
   }
 
   /**
