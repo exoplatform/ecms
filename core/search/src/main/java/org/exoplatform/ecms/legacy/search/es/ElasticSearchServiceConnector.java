@@ -403,7 +403,6 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
     List<String> queryParts = filteredQueryParts(query);
     if (!queryParts.isEmpty()) {
       queryParts = queryParts.stream().map(queryPart -> {
-        queryPart = this.escapeReservedCharacters(queryPart);
         if (queryPart.length() > 5) {
           queryPart = queryPart + "~1"; // fuzzy search on big words
         }
@@ -517,8 +516,9 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
   /**
    * Splits the keyword of a filtered search into its words: every character
    * the engine's query grammar reserves, the backslash included, and every
-   * white space separate words, and empty words are dropped. A keyword made
-   * of separators only has no words, and is searched as no keyword.
+   * white space separate words, and empty words are dropped, so a word holds
+   * no character the grammar would read. A keyword made of separators only
+   * has no words, and is searched as no keyword.
    *
    * @param query the keyword
    * @return its words, none for a blank keyword
