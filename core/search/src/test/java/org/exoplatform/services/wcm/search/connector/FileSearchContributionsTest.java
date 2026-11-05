@@ -110,7 +110,7 @@ public class FileSearchContributionsTest {
     assertEquals(2, should.size());
     assertTrue(should.get(0).has("query_string"));
     assertEquals(List.of("abc-1", "def2"), values(should.get(1).path("ids").path("values")));
-    assertEquals(FileSearchServiceConnector.DEFAULT_CONTRIBUTED_BOOST, should.get(1).path("ids").path("boost").asDouble(), 0d);
+    assertEquals(2d, should.get(1).path("ids").path("boost").asDouble(), 0d);
     assertTrue(bool.path("filter").toString().contains("permissions"));
   }
 
@@ -202,7 +202,9 @@ public class FileSearchContributionsTest {
   public void testContributedBoostIsReadWithinItsRange() {
     Map<String, Double> expected = new LinkedHashMap<>();
     expected.put(null, 5.0d);
-    expected.put("5", 5.0d);
+    expected.put("3.5", 3.5d);
+    expected.put("0.1", 0.1d);
+    expected.put("100", 100d);
     expected.put("0", 5.0d);
     expected.put("100.5", 5.0d);
     expected.put("NaN", 5.0d);
