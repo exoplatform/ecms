@@ -47,6 +47,8 @@ public class JCRNodeListener implements Action {
 
   public static final String                    FILE_UPDATED_OPERATION               = "fileUpdated";
 
+  static final Set<String>                      CURRENTLY_PROCESSING_NODE_PATH_QUEUE = new HashSet<>();
+
   private static final String                   GROUPS_SPACES_PARENT_FOLDER          = "/Groups/spaces/";
 
   private static final String                   DOCUMENT_NAME_PARAM                  = "documentName";
@@ -86,8 +88,6 @@ public class JCRNodeListener implements Action {
   private static final String                   MODULE_DRIVE                         = "Drive";
 
   private static final String                   SEPARATOR                            = "@@";
-
-  static final Set<String>                      CURRENTLY_PROCESSING_NODE_PATH_QUEUE = new HashSet<>();
 
   private static final String                   CONTENT_PROPERTY_NAME                = NodetypeConstant.JCR_DATA;
 
