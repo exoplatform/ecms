@@ -36,11 +36,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector;
-import org.exoplatform.services.wcm.search.model.FileSearchMatchRequest;
 import org.exoplatform.services.wcm.search.model.FileSearchMatches;
-import org.exoplatform.services.wcm.search.model.SearchFieldMatches;
 import org.exoplatform.social.metadata.favorite.FavoriteService;
 import org.exoplatform.social.metadata.tag.TagService;
 import org.exoplatform.social.rest.api.RestUtils;
@@ -123,18 +120,13 @@ public class FileSearchRestService implements ResourceContainer {
     if (!userACL.isSuperUser(ConversationState.getCurrent().getIdentity()) && !userACL.isUserInGroup(ConversationState.getCurrent().getIdentity(), userACL.getAdminGroups())) {
       recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
     }
-    FileSearchMatches contributions = FileSearchMatches.EMPTY;
-    if (fieldMatches && StringUtils.isNotBlank(query)) {
-      Locale locale = LocalizationFilter.getCurrentLocale();
-      contributions = fileSearchServiceConnector.collectContributions(new FileSearchMatchRequest(ConversationState.getCurrent()
-                                                                                                                  .getIdentity(),
-                                                                                                 query,
-                                                                                                 spaceIds == null ? List.of()
-                                                                                                                  : List.copyOf(spaceIds),
-                                                                                                 limit,
-                                                                                                 locale == null ? Locale.ENGLISH
-                                                                                                                : locale));
-    }
+    Locale locale = LocalizationFilter.getCurrentLocale();
+    FileSearchMatches contributions = fileSearchServiceConnector.collectContributions(fieldMatches,
+                                                                                      ConversationState.getCurrent().getIdentity(),
+                                                                                      query,
+                                                                                      spaceIds,
+                                                                                      limit,
+                                                                                      locale);
     if (StringUtils.isNotBlank(query)) {
       query = query.replace("#", " ")
                    .replace("$", " ")
@@ -151,14 +143,7 @@ public class FileSearchRestService implements ResourceContainer {
                                                                                          sortDirection,
                                                                                          contributions.fileIds(),
                                                                                          fileSearchServiceConnector.getContributedBoost());
-    Map<String, SearchFieldMatches> matches = contributions.matches();
-    if (!matches.isEmpty()) {
-      recentDocuments.forEach(result -> {
-        if (result instanceof EcmsSearchResult ecmsResult && ecmsResult.getId() != null) {
-          ecmsResult.setFieldMatches(matches.get(ecmsResult.getId()));
-        }
-      });
-    }
+    FileSearchServiceConnector.attachFieldMatches(recentDocuments, contributions);
     return Response.ok(recentDocuments).build();
   }
 
