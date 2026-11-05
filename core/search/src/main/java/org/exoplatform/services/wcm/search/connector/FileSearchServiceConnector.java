@@ -25,6 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedHashMap;
@@ -58,6 +59,7 @@ import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
@@ -135,6 +137,55 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
    */
   public FileSearchMatches collectContributions(FileSearchMatchRequest request) {
     return collectContributions(getSearchMatchPlugins(), request);
+  }
+
+  /**
+   * Asks the file search contributors for a keyword search when unified
+   * search asks for field matches: never for a search without a keyword (a
+   * favorites-only or tags-only one), and never when field matches are not
+   * asked. The contributors get the keyword as typed.
+   *
+   * @param fieldMatches whether the search asks for field matches
+   * @param viewer the user searching
+   * @param keyword the keyword as typed
+   * @param spaceIds the spaces the search is limited to, none for all
+   * @param limit the most results the search shows
+   * @param locale the user's language, English when unknown
+   * @return the merged answer, empty when the contributors are not asked
+   */
+  public FileSearchMatches collectContributions(boolean fieldMatches,
+                                                Identity viewer,
+                                                String keyword,
+                                                List<Long> spaceIds,
+                                                int limit,
+                                                Locale locale) {
+    if (!fieldMatches || StringUtils.isBlank(keyword)) {
+      return FileSearchMatches.EMPTY;
+    }
+    return collectContributions(new FileSearchMatchRequest(viewer,
+                                                           keyword,
+                                                           spaceIds == null ? List.of() : List.copyOf(spaceIds),
+                                                           limit,
+                                                           locale == null ? Locale.ENGLISH : locale));
+  }
+
+  /**
+   * Sets on each result the line its contributor gave for it, and none on a
+   * result no contributor found.
+   *
+   * @param results the search results
+   * @param contributions the contributors' merged answer
+   */
+  public static void attachFieldMatches(Collection<SearchResult> results, FileSearchMatches contributions) {
+    Map<String, SearchFieldMatches> matches = contributions == null ? null : contributions.matches();
+    if (results == null || matches == null || matches.isEmpty()) {
+      return;
+    }
+    results.forEach(result -> {
+      if (result instanceof EcmsSearchResult ecmsResult && ecmsResult.getId() != null) {
+        ecmsResult.setFieldMatches(matches.get(ecmsResult.getId()));
+      }
+    });
   }
 
   /**
