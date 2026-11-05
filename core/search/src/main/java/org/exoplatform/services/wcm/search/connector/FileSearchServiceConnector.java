@@ -78,7 +78,7 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
   public static final String  CONTRIBUTED_BOOST_PROPERTY = "contributedBoost";
 
   /** The score a contributed file gets when the property is unset or invalid. */
-  public static final double  DEFAULT_CONTRIBUTED_BOOST  = 2.0d;
+  public static final double  DEFAULT_CONTRIBUTED_BOOST  = 5.0d;
 
   /** The smallest boost accepted for contributed files. */
   public static final double  MIN_CONTRIBUTED_BOOST      = 0.1d;
