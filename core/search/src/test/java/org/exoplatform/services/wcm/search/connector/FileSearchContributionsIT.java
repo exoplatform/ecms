@@ -180,7 +180,7 @@ public class FileSearchContributionsIT {
     ElasticSearchFilter paths = new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM,
                                                         "path",
                                                         "{\n \"regexp\" : { \"path\" : \"/Groups/spaces.*\" }\n },"
-                                                            + "{\n \"regexp\" : { \"path\" : \"/Users/u___/us___/user1.*\" }\n }");
+                                                            + "{\n \"regexp\" : { \"path\" : \"/Users/u___/us___/user1/Private.*\" }\n }");
     assertEquals(Set.of("e5", "g7"), search("Zzyzx", List.of(paths), List.of("e5", "f6", "g7")));
     ElasticSearchFilter favorites = new ElasticSearchFilter(ElasticSearchFilterType.FILTER_MATADATAS,
                                                             "",
