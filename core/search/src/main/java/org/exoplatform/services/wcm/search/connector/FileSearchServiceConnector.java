@@ -26,6 +26,7 @@ import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +43,10 @@ import org.json.simple.JSONObject;
 
 import org.exoplatform.commons.search.es.client.ElasticSearchingClient;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.ecms.legacy.search.data.SearchContext;
 import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.ecms.legacy.search.es.ElasticSearchServiceConnector;
@@ -57,6 +61,9 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
+import org.exoplatform.services.wcm.search.model.FileSearchMatchRequest;
+import org.exoplatform.services.wcm.search.model.FileSearchMatches;
+import org.exoplatform.services.wcm.search.model.SearchFieldMatches;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.metadata.MetadataService;
 import org.exoplatform.social.metadata.model.MetadataItem;
@@ -66,6 +73,24 @@ import org.exoplatform.social.metadata.model.MetadataObject;
  * Search connector for files
  */
 public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
+
+  /** The property of {@code constructor.params} holding the contributed ids' boost. */
+  public static final String  CONTRIBUTED_BOOST_PROPERTY = "contributedBoost";
+
+  /** The score a contributed file gets when the property is unset or invalid. */
+  public static final double  DEFAULT_CONTRIBUTED_BOOST  = 2.0d;
+
+  /** The smallest boost accepted for contributed files. */
+  public static final double  MIN_CONTRIBUTED_BOOST      = 0.1d;
+
+  /** The largest boost accepted for contributed files. */
+  public static final double  MAX_CONTRIBUTED_BOOST      = 100d;
+
+  /**
+   * The most files all contributors together add to one keyword search: the
+   * ids are written into the search request.
+   */
+  public static final int     MAX_CONTRIBUTED_FILES      = 1000;
 
   private static final String CHARSET_UTF_8 = "UTF-8";
   private static final String DECODE_REGEX = "%(?![0-9a-fA-F]{2})";
@@ -77,11 +102,118 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
 
   private DocumentService documentService;
 
+  private double          contributedBoost;
+
   public FileSearchServiceConnector(InitParams initParams, ElasticSearchingClient client, RepositoryService repositoryService, DocumentService documentService) {
     super(initParams, client);
     this.repositoryService = repositoryService;
     this.documentService = documentService;
     this.setEnabledForAnonymous(true);
+    PropertiesParam params = initParams == null ? null : initParams.getPropertiesParam("constructor.params");
+    this.contributedBoost = parseContributedBoost(params == null ? null : params.getProperty(CONTRIBUTED_BOOST_PROPERTY));
+  }
+
+  /**
+   * The score a contributed file gets in a keyword search.
+   *
+   * @return the boost in use
+   */
+  public double getContributedBoost() {
+    return contributedBoost;
+  }
+
+  /**
+   * Asks every file search contributor once for the files matching a
+   * keyword, and merges their answers in the contributors' order: each id
+   * once, only ids a search request may carry
+   * ({@value ElasticSearchServiceConnector#CONTRIBUTED_ID_PATTERN}), at most
+   * {@value #MAX_CONTRIBUTED_FILES} in all, its first contributor's match line
+   * kept. A contributor that throws is logged and skipped.
+   *
+   * @param request what the contributors are asked
+   * @return the merged answer, empty when no contributor found anything
+   */
+  public FileSearchMatches collectContributions(FileSearchMatchRequest request) {
+    return collectContributions(getSearchMatchPlugins(), request);
+  }
+
+  /**
+   * Merges the answers of the given contributors, as
+   * {@link #collectContributions(FileSearchMatchRequest)} does.
+   *
+   * @param plugins the contributors
+   * @param request what they are asked
+   * @return the merged answer
+   */
+  FileSearchMatches collectContributions(List<FileSearchMatchPlugin> plugins, FileSearchMatchRequest request) {
+    if (plugins == null || plugins.isEmpty()) {
+      return FileSearchMatches.EMPTY;
+    }
+    LinkedHashSet<String> fileIds = new LinkedHashSet<>();
+    Map<String, SearchFieldMatches> matches = new HashMap<>();
+    for (FileSearchMatchPlugin plugin : plugins) {
+      FileSearchMatches answer;
+      try {
+        answer = plugin.search(request);
+      } catch (RuntimeException e) {
+        LOG.warn("File search contributor {} failed, the search goes on without it: {}",
+                 plugin.getClass().getName(),
+                 e.getMessage());
+        continue;
+      }
+      if (answer == null || answer.fileIds() == null) {
+        continue;
+      }
+      for (String fileId : answer.fileIds()) {
+        if (fileId != null && fileId.matches(CONTRIBUTED_ID_PATTERN) && fileIds.size() < MAX_CONTRIBUTED_FILES
+            && fileIds.add(fileId) && answer.matches() != null && answer.matches().get(fileId) != null) {
+          matches.putIfAbsent(fileId, answer.matches().get(fileId));
+        }
+      }
+    }
+    return new FileSearchMatches(List.copyOf(fileIds), matches);
+  }
+
+  /**
+   * The file search contributors, looked up by type at each search: an
+   * add-on's Spring {@code @Service} is registered in the portal container by
+   * the Kernel-Spring bridge, whatever its add-on's boot order.
+   *
+   * @return the contributors, empty when none
+   */
+  List<FileSearchMatchPlugin> getSearchMatchPlugins() {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    List<FileSearchMatchPlugin> plugins = container == null ? null
+                                                            : container.getComponentInstancesOfType(FileSearchMatchPlugin.class);
+    return plugins == null ? List.of() : plugins;
+  }
+
+  /**
+   * Reads the contributed files' boost: a number from
+   * {@link #MIN_CONTRIBUTED_BOOST} to {@link #MAX_CONTRIBUTED_BOOST}; an unset
+   * value gives the default, and an invalid one the default and a warning.
+   *
+   * @param value the property's value
+   * @return the boost
+   */
+  static double parseContributedBoost(String value) {
+    if (StringUtils.isBlank(value)) {
+      return DEFAULT_CONTRIBUTED_BOOST;
+    }
+    try {
+      double boost = Double.parseDouble(value.trim());
+      if (boost >= MIN_CONTRIBUTED_BOOST && boost <= MAX_CONTRIBUTED_BOOST) {
+        return boost;
+      }
+    } catch (NumberFormatException e) {
+      // falls through to the warning
+    }
+    LOG.warn("Property exo.unified-search.connector.file.contributed.boost '{}' is not a number from {} to {}, the default {} is used",
+             value,
+             MIN_CONTRIBUTED_BOOST,
+             MAX_CONTRIBUTED_BOOST,
+             DEFAULT_CONTRIBUTED_BOOST);
+    return DEFAULT_CONTRIBUTED_BOOST;
   }
 
   @Override

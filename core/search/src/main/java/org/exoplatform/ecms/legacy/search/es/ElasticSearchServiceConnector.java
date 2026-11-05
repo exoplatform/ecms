@@ -28,6 +28,7 @@ import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -54,6 +55,12 @@ import org.exoplatform.services.security.MembershipEntry;
  */
 @Deprecated(forRemoval = true, since = "6.0.0")
 public class ElasticSearchServiceConnector extends SearchServiceConnector {
+  /**
+   * The shape a contributed document id must have to be written into a
+   * search request: a node identifier fits it.
+   */
+  public static final String CONTRIBUTED_ID_PATTERN = "[A-Za-z0-9-]{1,64}";
+
   private static final Log LOG = ExoLogger.getLogger(ElasticSearchServiceConnector.class);
 
   public static final String HIGHLIGHT_FRAGMENT_SIZE_PARAM_NAME = "highlightFragmentSize";
@@ -189,7 +196,40 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
    */
   public Collection<SearchResult> filteredSearch(SearchContext context, String query, List<ElasticSearchFilter> filters, Collection<String> sites,
                                          int offset, int limit, String sort, String order) {
-    String esQuery = buildFilteredQuery(query, sites, filters, offset, limit, sort, order);
+    return filteredSearch(context, query, filters, sites, offset, limit, sort, order, List.of(), 0d);
+  }
+
+  /**
+   * Searches as {@link #filteredSearch(SearchContext, String, List, Collection, int, int, String, String)},
+   * the keyword matching either the searched fields or one of the contributed
+   * document ids (documents another add-on found for the keyword in its own
+   * data), inside the same filters, the permissions included: a contributed
+   * document the user may not read is never returned.
+   *
+   * @param context the search context
+   * @param query the keyword
+   * @param filters the filters
+   * @param sites the sites
+   * @param offset the first result
+   * @param limit the most results
+   * @param sort the sort field
+   * @param order the sort order, asc or desc
+   * @param contributedIds the contributed document ids, none when empty;
+   *          an id outside {@value #CONTRIBUTED_ID_PATTERN} is dropped
+   * @param contributedBoost the score a contributed id adds
+   * @return the results
+   */
+  public Collection<SearchResult> filteredSearch(SearchContext context,
+                                                 String query,
+                                                 List<ElasticSearchFilter> filters,
+                                                 Collection<String> sites,
+                                                 int offset,
+                                                 int limit,
+                                                 String sort,
+                                                 String order,
+                                                 List<String> contributedIds,
+                                                 double contributedBoost) {
+    String esQuery = buildFilteredQuery(query, sites, filters, offset, limit, sort, order, contributedIds, contributedBoost);
     String jsonResponse = this.client.sendRequest(esQuery, this.index);
     return buildResult(jsonResponse, context);
   }
@@ -309,6 +349,41 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
   }
   
   protected String buildFilteredQuery(String query, Collection<String> sites, List<ElasticSearchFilter> filters, int offset, int limit, String sort, String order) {
+    return buildFilteredQuery(query, sites, filters, offset, limit, sort, order, List.of(), 0d);
+  }
+
+  /**
+   * Builds the filtered search, the keyword matching either the searched
+   * fields or a contributed document id; the contributed ids are an
+   * alternative inside the {@code must}, so every filter still applies to
+   * them. The sort order is asc or desc only.
+   *
+   * @param query the keyword
+   * @param sites the sites
+   * @param filters the filters
+   * @param offset the first result
+   * @param limit the most results
+   * @param sort the sort field
+   * @param order the sort order
+   * @param contributedIds the contributed ids, none when empty
+   * @param contributedBoost the score a contributed id adds
+   * @return the request
+   */
+  protected String buildFilteredQuery(String query,
+                                      Collection<String> sites,
+                                      List<ElasticSearchFilter> filters,
+                                      int offset,
+                                      int limit,
+                                      String sort,
+                                      String order,
+                                      List<String> contributedIds,
+                                      double contributedBoost) {
+    String safeOrder = "asc".equalsIgnoreCase(order) ? "asc" : "desc";
+    List<String> ids = contributedIds == null ? List.of()
+                                              : contributedIds.stream()
+                                                              .filter(id -> id != null && id.matches(CONTRIBUTED_ID_PATTERN))
+                                                              .distinct()
+                                                              .toList();
     StringBuilder esQuery = new StringBuilder();
     esQuery.append("{\n");
     esQuery.append("     \"from\" : " + offset + ",\n");
@@ -320,7 +395,7 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
     esQuery.append("     \"track_scores\": true,\n");
     esQuery.append("     \"sort\" : [\n");
     esQuery.append("       { \"" + (StringUtils.isNotBlank(sortMapping.get(sort)) ? sortMapping.get(sort) : "_score") + "\" : ");
-    esQuery.append(             "{\"order\" : \"" + (StringUtils.isNotBlank(order)?order:"desc") + "\"}}\n");
+    esQuery.append(             "{\"order\" : \"" + safeOrder + "\"}}\n");
     esQuery.append("     ],\n");
     esQuery.append("     \"_source\": [" + getSourceFields() + "],");
     esQuery.append("     \"query\": {\n");
@@ -336,12 +411,27 @@ public class ElasticSearchServiceConnector extends SearchServiceConnector {
       }).collect(Collectors.toList());
       String escapedQueryWithAndOperator = StringUtils.join(queryParts, " AND ");
       String escapedQueryWithoutOperator = StringUtils.join(queryParts, " ");
-      esQuery.append("            \"must\" : {\n");
-      esQuery.append("                \"query_string\" : {\n");
-      esQuery.append("                    \"fields\" : [" + getFields() + "],\n");
-      esQuery.append("                    \"query\" : \"" + escapedQueryWithAndOperator + "\"\n");
-      esQuery.append("                }\n");
-      esQuery.append("            },\n");
+      String queryStringClause = "{\n"
+          + "                \"query_string\" : {\n"
+          + "                    \"fields\" : [" + getFields() + "],\n"
+          + "                    \"query\" : \"" + escapedQueryWithAndOperator + "\"\n"
+          + "                }\n"
+          + "            }";
+      if (ids.isEmpty()) {
+        esQuery.append("            \"must\" : ").append(queryStringClause).append(",\n");
+      } else {
+        esQuery.append("            \"must\" : {\n");
+        esQuery.append("              \"bool\" : {\n");
+        esQuery.append("                \"should\" : [\n");
+        esQuery.append("                  ").append(queryStringClause).append(",\n");
+        esQuery.append("                  { \"ids\" : { \"values\" : [")
+               .append(ids.stream().map(id -> "\"" + JSONValue.escape(id) + "\"").collect(Collectors.joining(",")))
+               .append("], \"boost\" : ").append(contributedBoost).append(" } }\n");
+        esQuery.append("                ],\n");
+        esQuery.append("                \"minimum_should_match\" : 1\n");
+        esQuery.append("              }\n");
+        esQuery.append("            },\n");
+      }
       esQuery.append("            \"should\" : {\n");
       esQuery.append("                \"multi_match\" : {\n");
       esQuery.append("                    \"type\" : \"phrase\",\n");
