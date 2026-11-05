@@ -87,7 +87,11 @@ public class JCRNodeListener implements Action {
 
   private static final String                   SEPARATOR                            = "@@";
 
-  private static final Set<String>              CURRENTLY_PROCESSING_NODE_PATH_QUEUE = new HashSet<>();
+  static final Set<String>                      CURRENTLY_PROCESSING_NODE_PATH_QUEUE = new HashSet<>();
+
+  private static final String                   CONTENT_PROPERTY_NAME                = NodetypeConstant.JCR_DATA;
+
+  private static final String                   DESCRIPTION_PROPERTY_NAME            = NodetypeConstant.DC_DESCRIPTION;
 
   private static final String                   EXO_USER_PREFERENCES                 = "exo:userPrefferences";
 
@@ -122,6 +126,15 @@ public class JCRNodeListener implements Action {
 
       int eventType = (Integer) context.get(InvocationContext.EVENT);
       if (eventType == Event.NODE_ADDED && node.isNodeType(EXO_USER_PREFERENCES)) {
+        return true;
+      }
+      if (item instanceof Property
+          && isPropertyEvent(eventType)
+          && !node.isNew()
+          && !isContentOrDescription(((Property) item).getName())
+          && !getTrashService().isInTrash(node)) {
+        // Only a change of the document content or description is a
+        // collaborative update
         return true;
       }
       String nodePath = managedNode.getPath();
@@ -183,6 +196,26 @@ public class JCRNodeListener implements Action {
       }
     }
     return true;
+  }
+
+  /**
+   * Only a change to the content of a file ({@code jcr:data}) or to its
+   * description ({@code dc:description}) counts as an update of the file;
+   * any other property written on it (permissions, dates, visibility,
+   * editor session properties...) is not an update of the document.
+   *
+   * @param propertyName JCR name of the written property
+   * @return true when the property is the file content or its description
+   */
+  static boolean isContentOrDescription(String propertyName) {
+    return StringUtils.equals(CONTENT_PROPERTY_NAME, propertyName)
+        || StringUtils.equals(DESCRIPTION_PROPERTY_NAME, propertyName);
+  }
+
+  private static boolean isPropertyEvent(int eventType) {
+    return eventType == Event.PROPERTY_ADDED
+        || eventType == Event.PROPERTY_CHANGED
+        || eventType == Event.PROPERTY_REMOVED;
   }
 
   private void addFileProperties(StatisticData statisticData, Node changedNode) throws RepositoryException {
