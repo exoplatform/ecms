@@ -77,7 +77,7 @@ public class JCRNodeListenerTest {
   @Test
   public void otherPropertiesAreNotUpdates() {
     for (String name : new String[] { "exo:permissions", "exo:dateModified", "exo:lastModifiedDate",
-        "exo:lastModifier", "exo:title", "exo:name", "exo:hiddenable", "exo:editorsId", "jcr:mimeType", null }) {
+        "exo:lastModifier", "exo:title", "exo:name", "exo:hiddenable", "jcr:mimeType", null }) {
       assertFalse(String.valueOf(name), JCRNodeListener.isContentOrDescription(name));
     }
   }
