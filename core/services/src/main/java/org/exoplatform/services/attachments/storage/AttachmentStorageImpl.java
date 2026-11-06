@@ -109,11 +109,11 @@ public class AttachmentStorageImpl implements AttachmentStorage {
             // An attachment that can't be built, such as a shortcut whose
             // target is gone or a node without content, doesn't hide the
             // entity's other attachments; any other error still fails the list
-            LOG.warn("Attachment {} of {} {} can't be built and is left out: {}",
-                     attachmentId,
-                     entityType,
-                     entityId,
-                     e.getClass().getSimpleName());
+            LOG.debug("Attachment {} of {} {} can't be built and is left out: {}",
+                      attachmentId,
+                      entityType,
+                      entityId,
+                      e.getClass().getSimpleName());
             continue;
           }
           if (attachment != null) {
