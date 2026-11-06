@@ -33,12 +33,14 @@ import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.observation.ExtendedEvent;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.wcm.ext.component.activity.listener.FileUpdateActivityListener;
 
 import io.meeds.analytics.model.StatisticData;
 import io.meeds.analytics.utils.AnalyticsUtils;
@@ -46,6 +48,8 @@ import io.meeds.analytics.utils.AnalyticsUtils;
 public class JCRNodeListener implements Action {
 
   public static final String                    FILE_UPDATED_OPERATION               = "fileUpdated";
+
+  static final Set<String>                      CURRENTLY_PROCESSING_NODE_PATH_QUEUE = new HashSet<>();
 
   private static final String                   GROUPS_SPACES_PARENT_FOLDER          = "/Groups/spaces/";
 
@@ -87,8 +91,6 @@ public class JCRNodeListener implements Action {
 
   private static final String                   SEPARATOR                            = "@@";
 
-  private static final Set<String>              CURRENTLY_PROCESSING_NODE_PATH_QUEUE = new HashSet<>();
-
   private static final String                   EXO_USER_PREFERENCES                 = "exo:userPrefferences";
 
   private PortalContainer                       container;
@@ -115,12 +117,27 @@ public class JCRNodeListener implements Action {
       if (node == null) {
         return true;
       }
+      int eventType = (Integer) context.get(InvocationContext.EVENT);
+      if (eventType == ExtendedEvent.CHECKIN
+          && (getManagedNode(node) == null || getTrashService().isInTrash(node))) {
+        // A new version only counts as an update of a file out of the trash
+        return true;
+      }
+      if (item instanceof Property
+          && isPropertyEvent(eventType)
+          && !node.isNew()
+          && !isEditedFileProperty(((Property) item).getName())
+          && !getTrashService().isInTrash(node)) {
+        // Only a change of the content or of an edited property of the
+        // document is a collaborative update
+        return true;
+      }
+
       Node managedNode = getManagedNodeFromParents(node);
       if (managedNode == null) {
         return true;
       }
 
-      int eventType = (Integer) context.get(InvocationContext.EVENT);
       if (eventType == Event.NODE_ADDED && node.isNodeType(EXO_USER_PREFERENCES)) {
         return true;
       }
@@ -183,6 +200,33 @@ public class JCRNodeListener implements Action {
       }
     }
     return true;
+  }
+
+  /**
+   * A property write on an existing file records a file update only when the
+   * user changes the content of the file or one of its edited properties: the
+   * title, the description, the summary, the language, the creator or the
+   * source, the ones the activity stream shows as an edit of the file. The
+   * writes that come with an administrative or passive action (an
+   * access-rights change, a hide or a show, the modification dates and
+   * modifier, the editor's properties cleared on close, a user's editor
+   * preferences) record nothing. A check-in of a file, which creates a new
+   * version (restoring an older version, a new version uploaded), records a
+   * file update; when the content was written just before in the same
+   * session, the queue of this listener folds both into one update.
+   *
+   * @param propertyName JCR name of the written property
+   * @return true when the property is the file content or one of its edited
+   *         properties
+   */
+  static boolean isEditedFileProperty(String propertyName) {
+    return FileUpdateActivityListener.EDITED_FILE_PROPERTIES.contains(propertyName);
+  }
+
+  private static boolean isPropertyEvent(int eventType) {
+    return eventType == Event.PROPERTY_ADDED
+        || eventType == Event.PROPERTY_CHANGED
+        || eventType == Event.PROPERTY_REMOVED;
   }
 
   private void addFileProperties(StatisticData statisticData, Node changedNode) throws RepositoryException {
