@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.ext.component.activity.listener;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.jcr.*;
@@ -44,10 +45,23 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
  */
 public class FileUpdateActivityListener extends Listener<Context, String> {
 
+  /**
+   * Properties of a file whose change is shown in the activity stream as an edit
+   * of the file, and counted as a file update by the analytics.
+   */
+  public static final List<String> EDITED_FILE_PROPERTIES = Collections.unmodifiableList(Arrays.asList("exo:title",
+                                                                                                     "exo:summary",
+                                                                                                     "exo:language",
+                                                                                                     "dc:title",
+                                                                                                     "dc:description",
+                                                                                                     "dc:creator",
+                                                                                                     "dc:source",
+                                                                                                     "jcr:data"));
+
   private static final Log LOG = ExoLogger.getLogger(FileUpdateActivityListener.class);
   private static final String UPDATE_COMMENT = "files:spaces.UPDATE_COMMENT";
 
-  private String[]  editedField     = {"exo:title", "exo:summary", "exo:language", "dc:title", "dc:description", "dc:creator", "dc:source", "jcr:data"};
+  private String[]  editedField     = EDITED_FILE_PROPERTIES.toArray(new String[0]);
   private String[]  bundleMessage   = {"SocialIntegration.messages.rename",
                                        "SocialIntegration.messages.editSummary",
                                        "SocialIntegration.messages.editLanguage",

@@ -60,7 +60,7 @@
                       <string>collaboration</string>
                     </field>
                     <field name="eventTypes">
-                      <string>addNode,addProperty,changeProperty,removeProperty</string>
+                      <string>addNode,addProperty,changeProperty,removeProperty,checkin</string>
                     </field>
                     <field name="ignoredProperties">
                       <string>${exo.analytics.documents.ignored-properties:exo:editorsId,exo:currentProvider,exo:prefferedEditor}</string>
