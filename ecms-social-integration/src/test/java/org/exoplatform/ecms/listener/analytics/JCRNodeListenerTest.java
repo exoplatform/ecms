@@ -16,11 +16,15 @@
  */
 package org.exoplatform.ecms.listener.analytics;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
 import javax.jcr.Node;
 import javax.jcr.Property;
@@ -37,10 +41,11 @@ import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.wcm.ext.component.activity.listener.FileUpdateActivityListener;
 
 /**
- * Only a change to the content or the description of an existing file is
- * recorded as an update of the file.
+ * Only a change to the content or to an edited property of an existing file
+ * is recorded as an update of the file.
  */
 public class JCRNodeListenerTest {
 
@@ -71,16 +76,27 @@ public class JCRNodeListenerTest {
   }
 
   @Test
-  public void contentAndDescriptionAreUpdates() {
-    assertTrue(JCRNodeListener.isContentOrDescription("jcr:data"));
-    assertTrue(JCRNodeListener.isContentOrDescription("dc:description"));
+  public void contentAndEditedPropertiesAreUpdates() {
+    for (String name : new String[] { "jcr:data", "dc:description", "exo:title", "exo:summary",
+        "exo:language", "dc:title", "dc:creator", "dc:source" }) {
+      assertTrue(name, JCRNodeListener.isEditedFileProperty(name));
+    }
+  }
+
+  @Test
+  public void listenerListMatchesTheActivityStreamList() throws Exception {
+    Field field = FileUpdateActivityListener.class.getDeclaredField("editedField");
+    field.setAccessible(true);
+    String[] streamList = (String[]) field.get(new FileUpdateActivityListener());
+
+    assertEquals(Arrays.asList(streamList), FileUpdateActivityListener.EDITED_FILE_PROPERTIES);
   }
 
   @Test
   public void otherPropertiesAreNotUpdates() {
     for (String name : new String[] { "exo:permissions", "exo:dateModified", "exo:lastModifiedDate",
-        "exo:lastModifier", "exo:title", "exo:name", "exo:hiddenable", "jcr:mimeType", null }) {
-      assertFalse(String.valueOf(name), JCRNodeListener.isContentOrDescription(name));
+        "exo:lastModifier", "exo:name", "exo:hiddenable", "jcr:mimeType", null }) {
+      assertFalse(String.valueOf(name), JCRNodeListener.isEditedFileProperty(name));
     }
   }
 
@@ -100,6 +116,24 @@ public class JCRNodeListenerTest {
     assertTrue(new JCRNodeListener().execute(context));
 
     assertFalse(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
+  @Test
+  public void titleChangeOnExistingFileIsQueued() throws Exception {
+    Context context = context(property("exo:title", file(false)), Event.PROPERTY_CHANGED);
+
+    assertTrue(new JCRNodeListener().execute(context));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
+  @Test
+  public void sourceAddedOnExistingFileIsQueued() throws Exception {
+    Context context = context(property("dc:source", file(false)), Event.PROPERTY_ADDED);
+
+    assertTrue(new JCRNodeListener().execute(context));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
   }
 
   @Test

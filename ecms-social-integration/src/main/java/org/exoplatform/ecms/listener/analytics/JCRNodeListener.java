@@ -39,6 +39,7 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.wcm.ext.component.activity.listener.FileUpdateActivityListener;
 
 import io.meeds.analytics.model.StatisticData;
 import io.meeds.analytics.utils.AnalyticsUtils;
@@ -89,10 +90,6 @@ public class JCRNodeListener implements Action {
 
   private static final String                   SEPARATOR                            = "@@";
 
-  private static final String                   CONTENT_PROPERTY_NAME                = NodetypeConstant.JCR_DATA;
-
-  private static final String                   DESCRIPTION_PROPERTY_NAME            = NodetypeConstant.DC_DESCRIPTION;
-
   private static final String                   EXO_USER_PREFERENCES                 = "exo:userPrefferences";
 
   private PortalContainer                       container;
@@ -123,10 +120,10 @@ public class JCRNodeListener implements Action {
       if (item instanceof Property
           && isPropertyEvent(eventType)
           && !node.isNew()
-          && !isContentOrDescription(((Property) item).getName())
+          && !isEditedFileProperty(((Property) item).getName())
           && !getTrashService().isInTrash(node)) {
-        // Only a change of the document content or description is a
-        // collaborative update
+        // Only a change of the content or of an edited property of the
+        // document is a collaborative update
         return true;
       }
 
@@ -200,19 +197,21 @@ public class JCRNodeListener implements Action {
   }
 
   /**
-   * A property write on an existing file records a file update only for
-   * its content ({@code jcr:data}) or its description
-   * ({@code dc:description}). The writes that come with an administrative or
-   * passive action (the modification dates and modifier written beside an
-   * access-rights change or a hide, the editor's properties cleared on
-   * close, a user's editor preferences) record nothing.
+   * A property write on an existing file records a file update only when the
+   * user changes the content of the file or one of its edited properties: the
+   * title, the description, the summary, the language, the creator or the
+   * source, the ones the activity stream shows as an edit of the file. The
+   * writes that come with an administrative or passive action (an
+   * access-rights change, a hide or a show, the modification dates and
+   * modifier, the editor's properties cleared on close, a user's editor
+   * preferences) record nothing.
    *
    * @param propertyName JCR name of the written property
-   * @return true when the property is the file content or its description
+   * @return true when the property is the file content or one of its edited
+   *         properties
    */
-  static boolean isContentOrDescription(String propertyName) {
-    return StringUtils.equals(CONTENT_PROPERTY_NAME, propertyName)
-        || StringUtils.equals(DESCRIPTION_PROPERTY_NAME, propertyName);
+  static boolean isEditedFileProperty(String propertyName) {
+    return FileUpdateActivityListener.EDITED_FILE_PROPERTIES.contains(propertyName);
   }
 
   private static boolean isPropertyEvent(int eventType) {
