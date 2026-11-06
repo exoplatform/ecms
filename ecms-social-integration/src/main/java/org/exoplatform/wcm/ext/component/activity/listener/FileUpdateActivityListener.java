@@ -45,9 +45,6 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
  */
 public class FileUpdateActivityListener extends Listener<Context, String> {
 
-  private static final Log LOG = ExoLogger.getLogger(FileUpdateActivityListener.class);
-  private static final String UPDATE_COMMENT = "files:spaces.UPDATE_COMMENT";
-
   /**
    * Properties of a file whose change is shown in the activity stream as an edit
    * of the file, and counted as a file update by the analytics.
@@ -60,6 +57,9 @@ public class FileUpdateActivityListener extends Listener<Context, String> {
                                                                                                      "dc:creator",
                                                                                                      "dc:source",
                                                                                                      "jcr:data"));
+
+  private static final Log LOG = ExoLogger.getLogger(FileUpdateActivityListener.class);
+  private static final String UPDATE_COMMENT = "files:spaces.UPDATE_COMMENT";
 
   private String[]  editedField     = EDITED_FILE_PROPERTIES.toArray(new String[0]);
   private String[]  bundleMessage   = {"SocialIntegration.messages.rename",
