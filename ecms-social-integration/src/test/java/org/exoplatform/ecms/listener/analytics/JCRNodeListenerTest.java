@@ -179,10 +179,17 @@ public class JCRNodeListenerTest {
 
   @Test
   public void checkinOnNodeThatIsNotAFileIsNotQueued() throws Exception {
-    Node folder = file(false);
-    when(folder.isNodeType("nt:file")).thenReturn(false);
+    // The parent climb would find the file above and queue it: only the guard
+    // on the checked-in node stops the record
+    Node parentFile = file(false);
+    Node child = mock(Node.class);
+    when(child.isNew()).thenReturn(false);
+    when(child.isNodeType("nt:file")).thenReturn(false);
+    when(child.isNodeType("nt:resource")).thenReturn(false);
+    when(child.getPath()).thenReturn(FILE_PATH + "/child");
+    when(child.getParent()).thenReturn(parentFile);
 
-    assertTrue(new JCRNodeListener().execute(context(folder, ExtendedEvent.CHECKIN)));
+    assertTrue(new JCRNodeListener().execute(context(child, ExtendedEvent.CHECKIN)));
 
     assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.isEmpty());
   }
