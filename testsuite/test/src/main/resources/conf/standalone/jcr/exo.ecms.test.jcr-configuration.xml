@@ -40,7 +40,7 @@ xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
     <type>org.exoplatform.services.jdbc.impl.DataSourceProviderImpl</type>
   </component>
   <component>
-      <key>org.infinispan.transaction.lookup.TransactionManagerLookup</key>
+      <key>org.infinispan.commons.tx.lookup.TransactionManagerLookup</key>
       <type>org.exoplatform.services.transaction.infinispan.JBossStandaloneJTAManagerLookup</type>
   </component>
   <component>

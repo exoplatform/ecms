@@ -208,7 +208,7 @@
                   <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.TemplateService.strategy:LIRS}</string></field>
                   <field name="maxSize"><int>${exo.cache.ecms.templateservice.MaxNodes:100}</int></field>
                   <field name="liveTime"><long>${exo.cache.ecms.templateservice.TimeToLive:-1}</long></field>
-                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.templateservice.cacheMode:replication}</string></field>
+                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.templateservice.cacheMode:asyncInvalidation}</string></field>
               </object>
           </object-param>
           <object-param>
@@ -228,9 +228,10 @@
                   <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.drive.strategy:LIRS}</string></field>
                   <field name="maxSize"><int>${exo.cache.ecms.drive.MaxNodes:20000}</int></field>
                   <field name="liveTime"><long>${exo.cache.ecms.drive.TimeToLive:86400}</long></field>
-                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.drive.cacheMode:replication}</string></field>
+                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.drive.cacheMode:asyncInvalidation}</string></field>
               </object>
           </object-param>
+          <!-- The groups and users granted the lock settings at runtime are state no store holds, which the other nodes could not load: replicated -->
           <object-param>
               <name>ecms.LockService</name>
               <description>The Cache configuration for Lock service</description>
@@ -250,7 +251,7 @@
                   <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.PDFViewerService.strategy:LIRS}</string></field>
                   <field name="maxSize"><int>${exo.cache.ecms.PDFViewerService.MaxNodes:10000}</int></field>
                   <field name="liveTime"><long>${exo.cache.ecms.PDFViewerService.TimeToLive:86400}</long></field>
-                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.PDFViewerService.cacheMode:replication}</string></field>
+                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.PDFViewerService.cacheMode:local}</string></field>
               </object>
           </object-param>
       </init-params>
