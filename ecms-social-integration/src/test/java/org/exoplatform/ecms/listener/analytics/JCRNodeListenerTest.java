@@ -23,9 +23,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
+import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.Property;
 import javax.jcr.observation.Event;
@@ -39,6 +42,7 @@ import org.mockito.MockedStatic;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.ext.action.InvocationContext;
+import org.exoplatform.services.jcr.observation.ExtendedEvent;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.wcm.ext.component.activity.listener.FileUpdateActivityListener;
@@ -137,6 +141,65 @@ public class JCRNodeListenerTest {
   }
 
   @Test
+  public void checkinOnExistingFileIsQueued() throws Exception {
+    Context context = context(file(false), ExtendedEvent.CHECKIN);
+
+    assertTrue(new JCRNodeListener().execute(context));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
+  @Test
+  public void checkinAfterContentWriteIsQueuedOnce() throws Exception {
+    Node file = file(false);
+    Node content = mock(Node.class);
+    when(content.isNew()).thenReturn(false);
+    when(content.isNodeType("nt:resource")).thenReturn(true);
+    when(content.getPath()).thenReturn(FILE_PATH + "/jcr:content");
+    when(content.getParent()).thenReturn(file);
+    JCRNodeListener listener = new JCRNodeListener();
+
+    assertTrue(listener.execute(context(property("jcr:data", content), Event.PROPERTY_CHANGED)));
+    assertEquals(1, JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.size());
+    assertTrue(listener.execute(context(file, ExtendedEvent.CHECKIN)));
+
+    assertEquals(1, JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.size());
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
+  @Test
+  public void checkinOnFileInTrashIsNotQueued() throws Exception {
+    Node file = file(false);
+    when(trashService.isInTrash(file)).thenReturn(true);
+
+    assertTrue(new JCRNodeListener().execute(context(file, ExtendedEvent.CHECKIN)));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.isEmpty());
+  }
+
+  @Test
+  public void checkinOnNodeThatIsNotAFileIsNotQueued() throws Exception {
+    Node folder = file(false);
+    when(folder.isNodeType("nt:file")).thenReturn(false);
+
+    assertTrue(new JCRNodeListener().execute(context(folder, ExtendedEvent.CHECKIN)));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.isEmpty());
+  }
+
+  @Test
+  public void actionIsRegisteredForCheckin() throws Exception {
+    try (InputStream stream = getClass().getClassLoader().getResourceAsStream("conf/portal/configuration.xml")) {
+      String configuration = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+      int action = configuration.indexOf(JCRNodeListener.class.getName());
+      int eventTypes = configuration.lastIndexOf("eventTypes", action);
+      String registered = configuration.substring(eventTypes, action);
+
+      assertTrue(registered, registered.contains("checkin"));
+    }
+  }
+
+  @Test
   public void propertyWrittenOnFileInTrashIsQueued() throws Exception {
     Node file = file(false);
     when(trashService.isInTrash(file)).thenReturn(true);
@@ -191,9 +254,9 @@ public class JCRNodeListenerTest {
     return property;
   }
 
-  private Context context(Property property, int eventType) {
+  private Context context(Item item, int eventType) {
     Context context = mock(Context.class);
-    when(context.get(InvocationContext.CURRENT_ITEM)).thenReturn(property);
+    when(context.get(InvocationContext.CURRENT_ITEM)).thenReturn(item);
     when(context.get(InvocationContext.EVENT)).thenReturn(eventType);
     return context;
   }

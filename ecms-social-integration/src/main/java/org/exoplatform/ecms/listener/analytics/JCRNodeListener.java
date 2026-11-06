@@ -33,6 +33,7 @@ import org.exoplatform.services.ext.action.InvocationContext;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.observation.ExtendedEvent;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -117,6 +118,11 @@ public class JCRNodeListener implements Action {
         return true;
       }
       int eventType = (Integer) context.get(InvocationContext.EVENT);
+      if (eventType == ExtendedEvent.CHECKIN
+          && (getManagedNode(node) == null || getTrashService().isInTrash(node))) {
+        // A new version only counts as an update of a file out of the trash
+        return true;
+      }
       if (item instanceof Property
           && isPropertyEvent(eventType)
           && !node.isNew()
@@ -204,7 +210,10 @@ public class JCRNodeListener implements Action {
    * writes that come with an administrative or passive action (an
    * access-rights change, a hide or a show, the modification dates and
    * modifier, the editor's properties cleared on close, a user's editor
-   * preferences) record nothing.
+   * preferences) record nothing. A check-in of a file, which creates a new
+   * version (restoring an older version, a new version uploaded), records a
+   * file update; when the content was written just before in the same
+   * session, the queue of this listener folds both into one update.
    *
    * @param propertyName JCR name of the written property
    * @return true when the property is the file content or one of its edited
