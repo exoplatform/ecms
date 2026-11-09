@@ -24,8 +24,6 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
@@ -114,11 +112,11 @@ public class NoteAttachmentUpdateListenerTest {
 
   @Test
   public void testMoveAttachmentsUsesSystemRights() throws Exception {
-    sessionProviderService.setSessionProvider(null, SessionProvider.createAnonimProvider());
+    SessionProvider callerProvider = mock(SessionProvider.class);
+    when(callerProvider.getSession(WORKSPACE, repository)).thenReturn(mock(ExtendedSession.class));
+    sessionProviderService.setSessionProvider(null, callerProvider);
     ExtendedSession systemSession = mock(ExtendedSession.class);
     when(repository.getSystemSession(WORKSPACE)).thenReturn(systemSession);
-    ExtendedSession callerSession = mock(ExtendedSession.class);
-    when(repository.getDynamicSession(eq(WORKSPACE), any())).thenReturn(callerSession);
     List<Object> sessionsDuringMove = new ArrayList<>();
     when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_DRAFT_PAGES")).thenAnswer(invocation -> {
       sessionsDuringMove.add(sessionProviderService.getSessionProvider(null).getSession(WORKSPACE, repository));
