@@ -226,6 +226,16 @@ public class JCRNodeListenerTest {
     assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
   }
 
+  /** A new node is queued whatever property is written: the edited-property filter applies to existing files only. */
+  @Test
+  public void nonEditedPropertyWrittenOnNewNodeIsQueued() throws Exception {
+    Context context = context(property("exo:dateModified", file(true)), Event.PROPERTY_ADDED);
+
+    assertTrue(new JCRNodeListener().execute(context));
+
+    assertTrue(JCRNodeListener.CURRENTLY_PROCESSING_NODE_PATH_QUEUE.contains(QUEUE_KEY));
+  }
+
   /** Stops at the queue, before the delayed executor: the repository lookup is not mocked. */
   @Test
   public void contentChangeOnExistingFileIsQueued() throws Exception {
