@@ -139,7 +139,7 @@ public class FileUploadHandlerControlTest {
     Response response = handler.control("id1", "unknown", request);
 
     assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
-    verify(uploadService, never()).removeUploadResource(any(), any());
+    verify(uploadService, never()).removeUploadResource(any(), any(HttpServletRequest.class));
   }
 
 }
