@@ -43,11 +43,12 @@ public class NoteAttachmentUpdateListener extends Listener<String, Map<String, O
   @Override
   public void onEvent(Event event) throws Exception {
     if (event.getData() != null) {
+      SessionProviderService sessionProviderService = ExoContainerContext.getService(SessionProviderService.class);
+      SessionProvider currentSessionProvider = sessionProviderService.getSessionProvider(null);
       SessionProvider sessionProvider = null;
       try {
 
         sessionProvider = SessionProvider.createSystemProvider();
-        SessionProviderService sessionProviderService = ExoContainerContext.getService(SessionProviderService.class);
         sessionProviderService.setSessionProvider(null, sessionProvider);
 
         Map<String, Object> data = (Map<String, Object>) event.getData();
@@ -75,6 +76,8 @@ public class NoteAttachmentUpdateListener extends Listener<String, Map<String, O
       } catch (Exception e) {
         LOG.error("error when updating note attachments", e);
       } finally {
+        // Give the rest of the caller's thread back the session provider it had
+        sessionProviderService.setSessionProvider(null, currentSessionProvider);
         if (sessionProvider != null) {
           sessionProvider.close();
         }
