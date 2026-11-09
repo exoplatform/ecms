@@ -51,19 +51,19 @@ import org.exoplatform.services.listener.Event;
 
 public class NoteAttachmentUpdateListenerTest {
 
-  private static final String          WORKSPACE = "collaboration";
+  private static final String               WORKSPACE = "collaboration";
 
   private SessionProvider                   threadSessionProvider;
 
-  private SessionProviderService       sessionProviderService;
+  private SessionProviderService            sessionProviderService;
 
-  private AttachmentStorage            attachmentStorage;
+  private AttachmentStorage                 attachmentStorage;
 
-  private ManageableRepository         repository;
+  private ManageableRepository              repository;
 
   private MockedStatic<ExoContainerContext> exoContainerContext;
 
-  private NoteAttachmentUpdateListener listener;
+  private NoteAttachmentUpdateListener      listener;
 
   @Before
   public void setUp() {
