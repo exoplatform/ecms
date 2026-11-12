@@ -25,6 +25,17 @@ import java.util.List;
 public interface AttachmentStorage {
   void linkAttachmentToEntity(long entityId, String entityType, String attachmentsId);
 
+  /**
+   * @param entityId entity id
+   * @param entityType entity type
+   * @return the attachments linked to the entity, as the current user sees
+   *         them: one the user can't read carries only its identifier; a
+   *         missing, trashed or quarantined node, one the user's session no
+   *         longer finds, or one whose shortcut target or content is gone, is
+   *         left out; a shortcut listed with its original, or two shortcuts to
+   *         the same target, are listed once
+   * @throws Exception when any other error prevents building an attachment
+   */
   List<Attachment> getAttachmentsByEntity(long entityId, String entityType) throws Exception;
 
   Attachment getAttachmentItemByEntity(long entityId, String entityType, String attachmentId) throws Exception;
