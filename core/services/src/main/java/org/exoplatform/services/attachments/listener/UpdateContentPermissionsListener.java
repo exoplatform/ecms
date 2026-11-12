@@ -71,25 +71,31 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
   @Override
   public void onEvent(Event event) throws Exception {
 
+    SessionProviderService sessionProviderService = ExoContainerContext.getService(SessionProviderService.class);
+    SessionProvider currentSessionProvider = sessionProviderService.getSessionProvider(null);
     // set system session provider to avoid SessionProviderService NullPointerException with spring context
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    SessionProviderService sessionProviderService = ExoContainerContext.getService(SessionProviderService.class);
     sessionProviderService.setSessionProvider(null, sessionProvider);
-
-    Map<String, Object> data = (Map<String, Object>) event.getData();
-    List<String> attachmentsIds = new ArrayList<>();
-    String entityType = data.containsKey("entityType") ? (String) data.get("entityType") : null;
-    String entityId = data.containsKey("entityId") ? (String) data.get("entityId") : null;
-    if (StringUtils.isNotEmpty(entityId) && StringUtils.isNotEmpty(entityType)) {
-      attachmentsIds.addAll(attachmentStorage.getAttachmentsByEntity(Long.valueOf(entityId), entityType).stream().map(Attachment::getId).toList());
+    try {
+      Map<String, Object> data = (Map<String, Object>) event.getData();
+      List<String> attachmentsIds = new ArrayList<>();
+      String entityType = data.containsKey("entityType") ? (String) data.get("entityType") : null;
+      String entityId = data.containsKey("entityId") ? (String) data.get("entityId") : null;
+      if (StringUtils.isNotEmpty(entityId) && StringUtils.isNotEmpty(entityType)) {
+        attachmentsIds.addAll(attachmentStorage.getAttachmentsByEntity(Long.valueOf(entityId), entityType).stream().map(Attachment::getId).toList());
+      }
+      String audience = (String) data.get(AUDIENCE);
+      List<Space> spaces = (List<Space>) data.get(SPACES);
+      String content = (String) data.get(CONTENT);
+      if (content != null) {
+        attachmentsIds.addAll(extractImageAttachmentUuidOrPath(content));
+      }
+      updateNodePermissions(attachmentsIds, audience, spaces, sessionProviderService);
+    } finally {
+      // Give the rest of the caller's thread back the session provider it had
+      sessionProviderService.setSessionProvider(null, currentSessionProvider);
+      sessionProvider.close();
     }
-    String audience = (String) data.get(AUDIENCE);
-    List<Space> spaces = (List<Space>) data.get(SPACES);
-    String content = (String) data.get(CONTENT);
-    if (content != null) {
-      attachmentsIds.addAll(extractImageAttachmentUuidOrPath(content));
-    }
-    updateNodePermissions(attachmentsIds, audience, spaces, sessionProviderService);
   }
 
   private List<String> extractImageAttachmentUuidOrPath(String content) {
