@@ -22,8 +22,17 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
+
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.scripts.ScriptService;
+import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 
@@ -84,6 +93,42 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   public void testGetBaseScriptPath() throws Exception {
     assertEquals(expectedBaseScriptPath, scriptService.getBaseScriptPath());
+  }
+
+  /**
+   * Test ScriptServiceImpl.getScript() on a script that does not compile, then
+   * on a script that does not exist
+   * Expect: the first is logged at WARN with its name and the compiler's
+   * message, the second at DEBUG only
+   */
+  public void testGetScriptLogsACompilationFailure() throws Exception {
+    Logger logger = (Logger) LoggerFactory.getLogger(ScriptServiceImpl.class.getName());
+    Level level = logger.getLevel();
+    ListAppender<ILoggingEvent> appender = new ListAppender<>();
+    appender.start();
+    logger.addAppender(appender);
+    logger.setLevel(Level.DEBUG);
+    SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
+    try {
+      scriptService.addScript("BrokenScript", "class BrokenScript {", sessionProvider);
+      assertNull(scriptService.getScript("BrokenScript"));
+      List<ILoggingEvent> warnings = appender.list.stream().filter(event -> event.getLevel() == Level.WARN).toList();
+      assertEquals(appender.list.toString(), 1, warnings.size());
+      assertTrue(warnings.get(0).getFormattedMessage(), warnings.get(0).getFormattedMessage().startsWith("Script BrokenScript doesn't compile: "));
+      assertTrue(warnings.get(0).getFormattedMessage(), warnings.get(0).getFormattedMessage().contains("BrokenScript.groovy"));
+
+      appender.list.clear();
+      assertNull(scriptService.getScript("MissingScript"));
+      assertTrue(appender.list.toString(), appender.list.stream().noneMatch(event -> event.getLevel() == Level.WARN));
+      assertTrue(appender.list.toString(),
+                 appender.list.stream()
+                              .anyMatch(event -> event.getLevel() == Level.DEBUG
+                                  && event.getFormattedMessage().equals("Script with name MissingScript doesn't exist")));
+    } finally {
+      logger.detachAppender(appender);
+      logger.setLevel(level);
+      scriptService.removeScript("BrokenScript", sessionProvider);
+    }
   }
 
   /**
