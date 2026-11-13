@@ -17,13 +17,17 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import org.cometd.bayeux.MarkedReference;
 import org.cometd.bayeux.server.BayeuxServer;
@@ -31,6 +35,8 @@ import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
 import org.cometd.oort.Oort;
+import org.cometd.server.BayeuxServerImpl;
+import org.cometd.server.http.JSONHttpTransport;
 import org.junit.Before;
 import org.mockito.ArgumentCaptor;
 import org.junit.Test;
@@ -237,6 +243,44 @@ public class CometdDocumentsServiceTest {
     service.service.sendLastEditorClosedEvent(FILE_ID, PROVIDER);
 
     verify(channel).publish(any(), any(Object.class), any());
+  }
+
+  @Test
+  public void testADocumentChannelNoSessionSubscribesToIsSwept() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    EXoContinuationBayeux bayeux = new EXoContinuationBayeux();
+    bayeux.setOption(BayeuxServerImpl.TRANSPORTS_OPTION, JSONHttpTransport.class.getName());
+    bayeux.start();
+    try {
+      bayeux.addListener(service.channelListener);
+      // Created to publish an event, or by a message Oort relayed
+      ServerChannel channel = bayeux.createChannelIfAbsent(CometdDocumentsService.CHANNEL_NAME + FILE_ID).getReference();
+      assertTrue(channel.getListeners().contains(service.subscriptionListener));
+
+      for (int i = 0; i < 5; i++) {
+        bayeux.sweep();
+      }
+
+      assertNull(bayeux.getChannel(CometdDocumentsService.CHANNEL_NAME + FILE_ID));
+    } finally {
+      bayeux.stop();
+    }
+  }
+
+  @Test
+  public void testTheProvidersAvailableToAnOpenerAreSentToThatOpenerOnly() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    BayeuxServer bayeux = mock(BayeuxServer.class);
+    Field bayeuxField = CometdDocumentsService.CometdService.class.getDeclaredField("bayeux");
+    bayeuxField.setAccessible(true);
+    bayeuxField.set(service.service, bayeux);
+    ServerSession opener = mock(ServerSession.class);
+
+    service.service.sendCurrentProviderInfo(opener, FILE_ID, true, List.of(PROVIDER));
+
+    verify(opener).deliver(any(), eq(CometdDocumentsService.CHANNEL_NAME + FILE_ID), any(Object.class), any());
+    verify(bayeux, never()).createChannelIfAbsent(any());
+    verify(bayeux, never()).getChannel(any());
   }
 
   private CometdDocumentsService service(DocumentService documentService) {

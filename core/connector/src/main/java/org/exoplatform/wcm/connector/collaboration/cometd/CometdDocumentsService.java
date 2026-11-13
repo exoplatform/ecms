@@ -464,7 +464,7 @@ public class CometdDocumentsService implements Startable {
    *
    * @see ChannelSubscriptionEvent
    */
-  class ChannelSubscriptionListener implements SubscriptionListener {
+  class ChannelSubscriptionListener implements SubscriptionListener, ConfigurableServerChannel.ServerChannelListener.Weak {
 
     /**
      * {@inheritDoc}
@@ -820,7 +820,7 @@ public class CometdDocumentsService implements Startable {
               List<String> availableProviders = service.getAllAvailableProviders(identity);
               String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
               boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
-              service.sendCurrentProviderInfo(fileId, available, availableProviders);
+              service.sendCurrentProviderInfo(sender, fileId, available, availableProviders);
               if (currentProvider == null) {
                 setCurrentDocumentProvider(fileId, workspace, provider);
               }
@@ -916,38 +916,41 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Send last editor closed event.
+     * Sends the current provider information to the user who opened the
+     * document: it says which providers are available to that user.
      *
+     * @param opener the session of the user who opened the document
      * @param fileId the file id
-     * @param available the available
+     * @param available whether the opener can open the document with the
+     *          provider
+     * @param availableProviders the providers available to the opener
      */
-    protected void sendCurrentProviderInfo(String fileId, boolean available, List<String> availableProviders) {
-      ServerChannel channel = bayeux.createChannelIfAbsent(CHANNEL_NAME + fileId).getReference();
-      if (channel != null) {
-        String allProviders = null;
-        try {
-          allProviders = new JsonGeneratorImpl().createJsonArray(availableProviders).toString();
-        } catch (JsonException e) {
-          LOG.warn("Cannot serialize all available providers to JSON", e);
-        }
-
-        StringBuilder data = new StringBuilder();
-        data.append('{');
-        data.append("\"type\": \"");
-        data.append(CURRENT_PROVIDER_INFO);
-        data.append("\", ");
-        data.append("\"fileId\": \"");
-        data.append(fileId);
-        data.append("\", ");
-        data.append("\"available\": \"");
-        data.append(available);
-        data.append("\", ");
-        data.append("\"allProviders\":");
-        data.append(allProviders);
-        data.append("}");
-        channel.publish(localSession, data.toString(), Promise.noop());
-
+    protected void sendCurrentProviderInfo(ServerSession opener,
+                                           String fileId,
+                                           boolean available,
+                                           List<String> availableProviders) {
+      String allProviders = null;
+      try {
+        allProviders = new JsonGeneratorImpl().createJsonArray(availableProviders).toString();
+      } catch (JsonException e) {
+        LOG.warn("Cannot serialize all available providers to JSON", e);
       }
+
+      StringBuilder data = new StringBuilder();
+      data.append('{');
+      data.append("\"type\": \"");
+      data.append(CURRENT_PROVIDER_INFO);
+      data.append("\", ");
+      data.append("\"fileId\": \"");
+      data.append(fileId);
+      data.append("\", ");
+      data.append("\"available\": \"");
+      data.append(available);
+      data.append("\", ");
+      data.append("\"allProviders\":");
+      data.append(allProviders);
+      data.append("}");
+      opener.deliver(localSession, CHANNEL_NAME + fileId, data.toString(), Promise.noop());
     }
 
   }
