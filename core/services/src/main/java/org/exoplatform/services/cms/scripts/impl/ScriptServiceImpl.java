@@ -270,7 +270,11 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
       scriptObject = (CmsScript) container.getComponentInstance(scriptName);
       resourceCache_.put(scriptName, scriptObject) ;
     } catch (Exception e) {
-      LOG.debug("Script with name {} doesn't exist", scriptName);
+      if (e.getCause() instanceof CompilationFailedException compilationFailure) {
+        LOG.warn("Script {} doesn't compile: {}", scriptName, compilationFailure.getMessage());
+      } else {
+        LOG.debug("Script with name {} doesn't exist", scriptName);
+      }
     }
     return scriptObject;
   }
@@ -426,7 +430,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
           return parseClass(scriptContent, filename);
         } catch (CompilationFailedException e2) {
           throw new ClassNotFoundException("Syntax error in " + filename
-              + ": " + e2);
+              + ": " + e2, e2);
         }
       }
     };
