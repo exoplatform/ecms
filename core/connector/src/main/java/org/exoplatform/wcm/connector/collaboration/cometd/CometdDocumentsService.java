@@ -1,5 +1,7 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,6 +37,7 @@ import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerChannel.SubscriptionListener;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
+import org.cometd.oort.Oort;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
 import org.picocontainer.Startable;
@@ -186,9 +189,16 @@ public class CometdDocumentsService implements Startable {
 
     /**
      * The editors open on every node. The key is session id, the value - the
-     * file id and the provider, as {@link #editorKey(String, String)} joins them.
+     * node, the session id, the file id and the provider, as
+     * {@link #editorValue(String, String, String)} joins them.
      */
     private final ExoCache<String, String>                  editors;
+
+    /** The separator of the parts of an open editor's value. */
+    private static final String                             SEPARATOR          = "\n";
+
+    /** The URL that names this node in the cluster, once known. */
+    private volatile String                                 node               = "";
 
     /** The closed editors. The key is client info, value - timer with task (setCurrentProvider to null) */
     private ConcurrentHashMap<ClientInfo, Timer>            closedEditorTimers = new ConcurrentHashMap<>();
@@ -210,7 +220,7 @@ public class CometdDocumentsService implements Startable {
      */
     public void addClient(String sessionId, String fileId, String provider, String workspace) {
       clients.put(sessionId, new ClientInfo(fileId, workspace, provider));
-      editors.put(sessionId, editorKey(fileId, provider));
+      editors.put(sessionId, editorValue(sessionId, fileId, provider));
     }
 
     /**
@@ -238,6 +248,43 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
+     * Names this node, and removes the editors a previous run of it left: a
+     * node that stopped without removing its editors, as a crash does, left
+     * them to the nodes that stayed up
+     *
+     * @param node the URL that names this node in the cluster
+     */
+    public void joinCluster(String node) {
+      this.node = node;
+      removeNode(node);
+      putClients();
+    }
+
+    /**
+     * Puts the editors open on this node again, which a node that saw it leave
+     * removed
+     */
+    public void putClients() {
+      clients.forEach((sessionId, client) -> editors.put(sessionId,
+                                                         editorValue(sessionId, client.getFileId(), client.getProvider())));
+    }
+
+    /**
+     * Removes the editors open on a node that left the cluster, or that a
+     * previous run of a node left
+     *
+     * @param leftNode the URL that names the node
+     */
+    public void removeNode(String leftNode) {
+      for (String value : cachedValues()) {
+        String[] parts = value.split(SEPARATOR, 3);
+        if (parts.length == 3 && parts[0].equals(leftNode) && !clients.containsKey(parts[1])) {
+          editors.remove(parts[1]);
+        }
+      }
+    }
+
+    /**
      * Gets the opened editors count.
      *
      * @param fileId the file id
@@ -246,20 +293,30 @@ public class CometdDocumentsService implements Startable {
      *         every node
      */
     public int getOpenedEditorsCount(String fileId, String provider) {
-      String key = editorKey(fileId, provider);
+      String editor = fileId + "/" + provider;
       try {
-        return (int) editors.getCachedObjects().stream().filter(key::equals).count();
+        return (int) editors.getCachedObjects().stream().filter(value -> {
+          String[] parts = value.split(SEPARATOR, 3);
+          return parts.length == 3 && parts[2].equals(editor);
+        }).count();
       } catch (Exception e) {
-        LOG.warn("Cannot count the editors open on every node, counting the editors open on this node", e);
-        return (int) clients.values()
-                            .stream()
-                            .filter(client -> fileId.equals(client.getFileId()) && provider.equals(client.getProvider()))
-                            .count();
+        // Counted as open: the current editor stays, and the next close resets it
+        LOG.warn("Cannot count the editors open on every node, counting the document as still open", e);
+        return 1;
       }
     }
 
-    private static String editorKey(String fileId, String provider) {
-      return fileId + "/" + provider;
+    private List<String> cachedValues() {
+      try {
+        return new ArrayList<>(editors.getCachedObjects());
+      } catch (Exception e) {
+        LOG.warn("Cannot read the editors open on every node", e);
+        return Collections.emptyList();
+      }
+    }
+
+    private String editorValue(String sessionId, String fileId, String provider) {
+      return node + SEPARATOR + sessionId + SEPARATOR + fileId + "/" + provider;
     }
 
     /**
@@ -623,6 +680,8 @@ public class CometdDocumentsService implements Startable {
   public void start() {
     // A document's channel reaches its editors on every node
     exoBayeux.observeChannel(CHANNEL_NAME + "**");
+    // The editors open on a node that leaves are no longer counted
+    exoBayeux.onOort(this::joinCluster);
     // instantiate processor after the eXo container start, to let
     // start-dependent logic worked before us
     final AtomicReference<ServerAnnotationProcessor> processor = new AtomicReference<>();
@@ -909,6 +968,28 @@ public class CometdDocumentsService implements Startable {
   @Override
   public void stop() {
     editorsContext.removeClients();
+  }
+
+  /**
+   * Names this node in the counts of open editors, and follows the nodes that
+   * leave the cluster and join it
+   *
+   * @param oort this node's Oort
+   */
+  void joinCluster(Oort oort) {
+    editorsContext.joinCluster(oort.getURL());
+    oort.addCometListener(new Oort.CometListener() {
+      @Override
+      public void cometJoined(Event event) {
+        // A node that saw this one leave removed its editors
+        editorsContext.putClients();
+      }
+
+      @Override
+      public void cometLeft(Event event) {
+        editorsContext.removeNode(event.getCometURL());
+      }
+    });
   }
 
   /**

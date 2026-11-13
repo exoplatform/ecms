@@ -30,7 +30,9 @@ import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
+import org.cometd.oort.Oort;
 import org.junit.Before;
+import org.mockito.ArgumentCaptor;
 import org.junit.Test;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
 
@@ -52,6 +54,10 @@ public class CometdDocumentsServiceTest {
   private static final String      PROVIDER  = "onlyoffice";
 
   private static final String      WORKSPACE = "collaboration";
+
+  private static final String      NODE1     = "http://node1:8080/cometd/cometd";
+
+  private static final String      NODE2     = "http://node2:8080/cometd/cometd";
 
   /** The cache every node shares, as the cluster replicates it */
   private ExoCache<String, String> editors;
@@ -88,6 +94,84 @@ public class CometdDocumentsServiceTest {
     assertEquals(1, otherNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
     otherNode.removeClients();
     assertEquals(0, otherNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testTheEditorsOfANodeThatLeftAreNoLongerCounted() {
+    thisNode.joinCluster(NODE1);
+    otherNode.joinCluster(NODE2);
+    thisNode.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+    otherNode.addClient("session2", FILE_ID, PROVIDER, WORKSPACE);
+
+    thisNode.removeNode(NODE2);
+
+    assertEquals(1, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testTheEditorsAPreviousRunLeftAreRemovedWhenTheNodeJoins() {
+    EditorsContext crashedRun = new EditorsContext(editors);
+    crashedRun.joinCluster(NODE2);
+    crashedRun.addClient("session2", FILE_ID, PROVIDER, WORKSPACE);
+
+    otherNode.joinCluster(NODE2);
+
+    assertEquals(0, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testANodeSeenLeavingPutsItsEditorsAgainWhenSeenJoining() {
+    otherNode.joinCluster(NODE2);
+    otherNode.addClient("session2", FILE_ID, PROVIDER, WORKSPACE);
+    thisNode.removeNode(NODE2);
+    assertEquals(0, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+
+    otherNode.putClients();
+
+    assertEquals(1, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  @SuppressWarnings("unchecked")
+  public void testADocumentCountsAsOpenWhenTheEditorsCannotBeRead() throws Exception {
+    ExoCache<String, String> unreadable = mock(ExoCache.class);
+    when(unreadable.getCachedObjects()).thenThrow(new IllegalStateException("unreadable"));
+
+    assertEquals(1, new EditorsContext(unreadable).getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testANodeLeavingTheClusterHasItsEditorsRemoved() {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    Oort oort = mock(Oort.class);
+    when(oort.getURL()).thenReturn(NODE1);
+    ArgumentCaptor<Oort.CometListener> listener = ArgumentCaptor.forClass(Oort.CometListener.class);
+    otherNode.joinCluster(NODE2);
+    otherNode.addClient("session2", FILE_ID, PROVIDER, WORKSPACE);
+
+    service.joinCluster(oort);
+    verify(oort).addCometListener(listener.capture());
+    listener.getValue().cometLeft(new Oort.CometListener.Event(oort, "comet2", NODE2));
+
+    assertEquals(0, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testThisNodePutsItsEditorsAgainWhenAnotherNodeJoins() {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    Oort oort = mock(Oort.class);
+    when(oort.getURL()).thenReturn(NODE1);
+    ArgumentCaptor<Oort.CometListener> listener = ArgumentCaptor.forClass(Oort.CometListener.class);
+    service.joinCluster(oort);
+    verify(oort).addCometListener(listener.capture());
+    service.editorsContext.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+    // The other node saw this one leave, for a while
+    otherNode.removeNode(NODE1);
+    assertEquals(0, otherNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+
+    listener.getValue().cometJoined(new Oort.CometListener.Event(oort, "comet2", NODE2));
+
+    assertEquals(1, otherNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
   }
 
   @Test

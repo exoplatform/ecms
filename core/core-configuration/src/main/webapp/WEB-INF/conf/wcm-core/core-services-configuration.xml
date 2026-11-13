@@ -243,7 +243,10 @@
                   <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.lockservice.cacheMode:replication}</string></field>
               </object>
           </object-param>
-          <!-- The editors open on each node, which every node counts before it resets a document's current editor: replicated -->
+          <!-- The editors open on each node, which every node counts before it resets a document's current editor: replicated.
+               An editor open longer than the live time, or beyond the maximum size, is no longer counted: a close elsewhere
+               can then reset the document's current editor while it is open. A node that leaves the cluster has its
+               editors removed by the others; the live time only bounds what nothing removed. -->
           <object-param>
               <name>ecms.DocumentEditors</name>
               <description>The Cache configuration for the document editors open on every node</description>
@@ -251,7 +254,7 @@
                   <field name="name"><string>ecms.DocumentEditors</string></field>
                   <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.DocumentEditors.strategy:LIRS}</string></field>
                   <field name="maxSize"><int>${exo.cache.ecms.DocumentEditors.MaxNodes:10000}</int></field>
-                  <field name="liveTime"><long>${exo.cache.ecms.DocumentEditors.TimeToLive:86400}</long></field>
+                  <field name="liveTime"><long>${exo.cache.ecms.DocumentEditors.TimeToLive:604800}</long></field>
                   <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.DocumentEditors.cacheMode:replication}</string></field>
               </object>
           </object-param>
