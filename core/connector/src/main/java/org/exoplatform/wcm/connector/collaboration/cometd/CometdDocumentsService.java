@@ -270,8 +270,7 @@ public class CometdDocumentsService implements Startable {
      * starts with no editor, or removed them when it saw this node leave
      */
     public void putClients() {
-      clients.forEach((sessionId, client) -> editors.put(sessionId,
-                                                         editorValue(sessionId, client.getFileId(), client.getProvider())));
+      clients.forEach(this::putEditor);
     }
 
     /**
@@ -282,9 +281,25 @@ public class CometdDocumentsService implements Startable {
     public void restoreClients() {
       clients.forEach((sessionId, client) -> {
         if (editors.get(sessionId) == null) {
-          editors.put(sessionId, editorValue(sessionId, client.getFileId(), client.getProvider()));
+          putEditor(sessionId, client);
         }
       });
+    }
+
+    /**
+     * Puts an editor open on this node, then removes it when its session
+     * closed meanwhile: a close removes the session from this node's editors
+     * before it removes the session's entry, so either the close removes the
+     * entry put here or this check does
+     *
+     * @param sessionId the session id
+     * @param client the client info
+     */
+    private void putEditor(String sessionId, ClientInfo client) {
+      editors.put(sessionId, editorValue(sessionId, client.getFileId(), client.getProvider()));
+      if (!clients.containsKey(sessionId)) {
+        editors.remove(sessionId);
+      }
     }
 
     /**
@@ -605,6 +620,12 @@ public class CometdDocumentsService implements Startable {
    * another node removed.
    */
   public static final long                    RESTORE_PERIOD           = 60;
+
+  /**
+   * Time, in seconds, a stopping node waits for a restore in progress before
+   * it removes its editors.
+   */
+  static final long                           STOP_TIMEOUT             = 5;
 
   /** The channel name. */
   public static final String                  CHANNEL_NAME_PARAMS      = CHANNEL_NAME + "{fileId}";
@@ -1004,7 +1025,15 @@ public class CometdDocumentsService implements Startable {
   @Override
   public void stop() {
     if (restoreExecutor != null) {
-      restoreExecutor.shutdownNow();
+      restoreExecutor.shutdown();
+      try {
+        if (!restoreExecutor.awaitTermination(STOP_TIMEOUT, TimeUnit.SECONDS)) {
+          restoreExecutor.shutdownNow();
+        }
+      } catch (InterruptedException e) {
+        restoreExecutor.shutdownNow();
+        Thread.currentThread().interrupt();
+      }
     }
     editorsContext.removeClients();
   }

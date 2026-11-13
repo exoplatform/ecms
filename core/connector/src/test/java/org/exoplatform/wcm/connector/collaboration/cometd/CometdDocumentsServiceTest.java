@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.clearInvocations;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,6 +31,8 @@ import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.concurrent.RunnableScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.cometd.bayeux.MarkedReference;
 import org.cometd.bayeux.server.BayeuxServer;
@@ -207,6 +210,64 @@ public class CometdDocumentsServiceTest {
     node.restoreClients();
 
     verify(spiedEditors, never()).put(any(), any());
+  }
+
+  @Test
+  public void testAnEditorClosedAsItIsRestoredIsNotLeftInTheCache() {
+    ExoCache<String, String> spiedEditors = spy(new SimpleExoCache<String, String>());
+    EditorsContext node = new EditorsContext(spiedEditors);
+    node.joinCluster(NODE1);
+    node.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+    spiedEditors.clearCache();
+    // The session closes between the restore's check and its put
+    doAnswer(invocation -> {
+      node.removeClient("session1");
+      return null;
+    }).when(spiedEditors).get("session1");
+
+    node.restoreClients();
+
+    assertEquals(0, node.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testAnEditorClosedAsItIsPutForAJoiningNodeIsNotLeftInTheCache() {
+    ExoCache<String, String> spiedEditors = spy(new SimpleExoCache<String, String>());
+    EditorsContext node = new EditorsContext(spiedEditors);
+    node.joinCluster(NODE1);
+    node.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+    // The session closes before the put of its entry lands
+    doAnswer(invocation -> {
+      node.removeClient("session1");
+      return invocation.callRealMethod();
+    }).when(spiedEditors).put(eq("session1"), any());
+
+    node.putClients();
+
+    assertEquals(0, node.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testTheEditorsOfThisNodeAreRestoredEveryPeriod() {
+    CometdDocumentsService service = service(mock(EXoContinuationBayeux.class), mock(DocumentService.class));
+    service.start();
+    try {
+      service.editorsContext.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+      editors.clearCache();
+      RunnableScheduledFuture<?> restore = (RunnableScheduledFuture<?>) service.restoreExecutor.getQueue().peek();
+      assertTrue(restore.isPeriodic());
+      assertTrue(restore.getDelay(TimeUnit.SECONDS) > CometdDocumentsService.RESTORE_PERIOD - 10);
+
+      // Run once here: off the queue, where the run schedules it again
+      assertTrue(service.restoreExecutor.remove(restore));
+      restore.run();
+
+      assertEquals(1, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    } finally {
+      service.stop();
+    }
+    assertTrue(service.restoreExecutor.isTerminated());
+    assertEquals(0, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
   }
 
   @Test
