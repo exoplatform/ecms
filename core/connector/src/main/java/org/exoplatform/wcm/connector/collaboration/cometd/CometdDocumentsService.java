@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -248,9 +249,13 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Names this node, and removes the editors a previous run of it left: a
-     * node that stopped without removing its editors, as a crash does, left
-     * them to the nodes that stayed up
+     * Names this node, and removes the editors a previous run of it left. The
+     * cluster's cache template does not transfer a cache's state to a node
+     * that joins: the node starts with no editor, and learns those of the
+     * other nodes as each of them puts its editors again when it sees the
+     * node join. A previous run's editors are removed by the other nodes as
+     * they see that run leave; the removal here covers a cache configured to
+     * transfer its state.
      *
      * @param node the URL that names this node in the cluster
      */
@@ -261,12 +266,25 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Puts the editors open on this node again, which a node that saw it leave
-     * removed
+     * Puts the editors open on this node again, for a node that joins: it
+     * starts with no editor, or removed them when it saw this node leave
      */
     public void putClients() {
       clients.forEach((sessionId, client) -> editors.put(sessionId,
                                                          editorValue(sessionId, client.getFileId(), client.getProvider())));
+    }
+
+    /**
+     * Puts again the editors open on this node that the cache no longer
+     * holds: another node removed them, seeing this node leave while it was
+     * up, or seeing a previous run of it leave once this run had put them
+     */
+    public void restoreClients() {
+      clients.forEach((sessionId, client) -> {
+        if (editors.get(sessionId) == null) {
+          editors.put(sessionId, editorValue(sessionId, client.getFileId(), client.getProvider()));
+        }
+      });
     }
 
     /**
@@ -582,6 +600,12 @@ public class CometdDocumentsService implements Startable {
   /** The cache of the editors open on every node. */
   public static final String                  EDITORS_CACHE_NAME       = "ecms.DocumentEditors";
 
+  /**
+   * Period, in seconds, at which a node puts again those of its editors
+   * another node removed.
+   */
+  public static final long                    RESTORE_PERIOD           = 60;
+
   /** The channel name. */
   public static final String                  CHANNEL_NAME_PARAMS      = CHANNEL_NAME + "{fileId}";
 
@@ -650,6 +674,9 @@ public class CometdDocumentsService implements Startable {
   /** The editors context. */
   protected final EditorsContext              editorsContext;
 
+  /** Puts again the editors of this node another node removed. */
+  ScheduledThreadPoolExecutor                 restoreExecutor;
+
   /**
    * Instantiates the CometdDocumentsService.
    *
@@ -682,6 +709,12 @@ public class CometdDocumentsService implements Startable {
     exoBayeux.observeChannel(CHANNEL_NAME + "**");
     // The editors open on a node that leaves are no longer counted
     exoBayeux.onOort(this::joinCluster);
+    restoreExecutor = new ScheduledThreadPoolExecutor(1, runnable -> {
+      Thread thread = new Thread(runnable, "documents-editors-restore");
+      thread.setDaemon(true);
+      return thread;
+    });
+    restoreExecutor.scheduleWithFixedDelay(this::restoreEditors, RESTORE_PERIOD, RESTORE_PERIOD, TimeUnit.SECONDS);
     // instantiate processor after the eXo container start, to let
     // start-dependent logic worked before us
     final AtomicReference<ServerAnnotationProcessor> processor = new AtomicReference<>();
@@ -970,7 +1003,21 @@ public class CometdDocumentsService implements Startable {
    */
   @Override
   public void stop() {
+    if (restoreExecutor != null) {
+      restoreExecutor.shutdownNow();
+    }
     editorsContext.removeClients();
+  }
+
+  /**
+   * Puts again the editors of this node that another node removed
+   */
+  void restoreEditors() {
+    try {
+      editorsContext.restoreClients();
+    } catch (RuntimeException e) {
+      LOG.warn("Error while restoring the editors open on this node", e);
+    }
   }
 
   /**

@@ -22,7 +22,9 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -181,6 +183,44 @@ public class CometdDocumentsServiceTest {
   }
 
   @Test
+  public void testAnEditorAnotherNodeRemovedIsPutAgain() {
+    thisNode.joinCluster(NODE1);
+    thisNode.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+    // The other node saw this one leave while it was up, or saw a previous run
+    // of it leave once this run had put its editors
+    otherNode.removeNode(NODE1);
+    assertEquals(0, otherNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+
+    thisNode.restoreClients();
+
+    assertEquals(1, otherNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
+  public void testAnEditorTheCacheHoldsIsNotPutAgain() {
+    ExoCache<String, String> spiedEditors = spy(new SimpleExoCache<String, String>());
+    EditorsContext node = new EditorsContext(spiedEditors);
+    node.joinCluster(NODE1);
+    node.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+    clearInvocations(spiedEditors);
+
+    node.restoreClients();
+
+    verify(spiedEditors, never()).put(any(), any());
+  }
+
+  @Test
+  public void testTheEditorsAreRestoredPeriodically() {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    service.editorsContext.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
+    editors.clearCache();
+
+    service.restoreEditors();
+
+    assertEquals(1, thisNode.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  @Test
   public void testTheCurrentEditorStaysWhileAnEditorIsOpenOnAnotherNode() throws Exception {
     DocumentService documentService = mock(DocumentService.class);
     CometdDocumentsService service = service(documentService);
@@ -207,8 +247,13 @@ public class CometdDocumentsServiceTest {
     CometdDocumentsService service = service(exoBayeux, mock(DocumentService.class));
 
     service.start();
-
-    verify(exoBayeux).observeChannel(CometdDocumentsService.CHANNEL_NAME + "**");
+    try {
+      verify(exoBayeux).observeChannel(CometdDocumentsService.CHANNEL_NAME + "**");
+      // The periodic restore of this node's editors
+      assertEquals(1, service.restoreExecutor.getQueue().size());
+    } finally {
+      service.stop();
+    }
   }
 
   @Test
