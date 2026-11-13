@@ -25,8 +25,7 @@ import org.cometd.annotation.Param;
 import org.cometd.annotation.server.ServerAnnotationProcessor;
 import org.cometd.annotation.Service;
 import org.cometd.annotation.Session;
-import org.cometd.annotation.Subscription;
-import org.cometd.bayeux.Message;
+import org.cometd.annotation.Listener;
 import org.cometd.bayeux.Promise;
 import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.BayeuxServer.ChannelListener;
@@ -622,6 +621,8 @@ public class CometdDocumentsService implements Startable {
    */
   @Override
   public void start() {
+    // A document's channel reaches its editors on every node
+    exoBayeux.observeChannel(CHANNEL_NAME + "**");
     // instantiate processor after the eXo container start, to let
     // start-dependent logic worked before us
     final AtomicReference<ServerAnnotationProcessor> processor = new AtomicReference<>();
@@ -717,12 +718,19 @@ public class CometdDocumentsService implements Startable {
     /**
      * Subscribe documents.
      *
+     * @param sender the session that published the message
      * @param message the message
      * @param fileId the file id
      * @throws RepositoryException the repository exception
      */
-    @Subscription(CHANNEL_NAME_PARAMS)
-    public void subscribeDocuments(Message message, @Param("fileId") String fileId) throws RepositoryException {
+    @Listener(CHANNEL_NAME_PARAMS)
+    public void subscribeDocuments(ServerSession sender,
+                                   ServerMessage.Mutable message,
+                                   @Param("fileId") String fileId) throws RepositoryException {
+      if (exoBayeux.isRelayed(sender)) {
+        // Handled on the node the client published it to
+        return;
+      }
       Object objData = message.getData();
       if (!Map.class.isInstance(objData)) {
         if (LOG.isDebugEnabled()) {
@@ -829,7 +837,9 @@ public class CometdDocumentsService implements Startable {
      * @param provider the provider
      */
     protected void sendLastEditorClosedEvent(String fileId, String provider) {
-      ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
+      // Created when no session of this node subscribes to it: Oort relays it to
+      // the editors of the other nodes
+      ServerChannel channel = bayeux.createChannelIfAbsent(CHANNEL_NAME + fileId).getReference();
       if (channel != null) {
         StringBuilder data = new StringBuilder();
         data.append('{');
@@ -853,7 +863,7 @@ public class CometdDocumentsService implements Startable {
      * @param available the available
      */
     protected void sendCurrentProviderInfo(String fileId, boolean available, List<String> availableProviders) {
-      ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
+      ServerChannel channel = bayeux.createChannelIfAbsent(CHANNEL_NAME + fileId).getReference();
       if (channel != null) {
         String allProviders = null;
         try {

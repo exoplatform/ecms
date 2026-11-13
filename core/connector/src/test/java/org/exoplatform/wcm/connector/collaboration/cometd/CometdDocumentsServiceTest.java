@@ -23,6 +23,13 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.lang.reflect.Field;
+
+import org.cometd.bayeux.MarkedReference;
+import org.cometd.bayeux.server.BayeuxServer;
+import org.cometd.bayeux.server.ServerChannel;
+import org.cometd.bayeux.server.ServerMessage;
+import org.cometd.bayeux.server.ServerSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
@@ -104,9 +111,57 @@ public class CometdDocumentsServiceTest {
     verify(documentService).getCurrentDocumentProvider(FILE_ID, WORKSPACE);
   }
 
+  @Test
+  public void testTheDocumentChannelsAreRelayedToTheOtherNodes() {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    CometdDocumentsService service = service(exoBayeux, mock(DocumentService.class));
+
+    service.start();
+
+    verify(exoBayeux).observeChannel(CometdDocumentsService.CHANNEL_NAME + "**");
+  }
+
+  @Test
+  public void testAMessageRelayedFromAnotherNodeIsHandledThereOnly() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    CometdDocumentsService service = service(exoBayeux, mock(DocumentService.class));
+    ServerSession oortSession = mock(ServerSession.class);
+    when(exoBayeux.isRelayed(oortSession)).thenReturn(true);
+    ServerMessage.Mutable relayed = mock(ServerMessage.Mutable.class);
+    ServerMessage.Mutable published = mock(ServerMessage.Mutable.class);
+
+    service.service.subscribeDocuments(oortSession, relayed, FILE_ID);
+    service.service.subscribeDocuments(mock(ServerSession.class), published, FILE_ID);
+
+    verify(relayed, never()).getData();
+    verify(published).getData();
+  }
+
+  @Test
+  public void testTheLastEditorClosedIsPublishedWithNoSubscriberOnThisNode() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    BayeuxServer bayeux = mock(BayeuxServer.class);
+    ServerChannel channel = mock(ServerChannel.class);
+    // No session of this node subscribes to the document's channel
+    when(bayeux.getChannel(any())).thenReturn(null);
+    when(bayeux.createChannelIfAbsent(CometdDocumentsService.CHANNEL_NAME + FILE_ID)).thenReturn(new MarkedReference<>(channel,
+                                                                                                                         true));
+    Field bayeuxField = CometdDocumentsService.CometdService.class.getDeclaredField("bayeux");
+    bayeuxField.setAccessible(true);
+    bayeuxField.set(service.service, bayeux);
+
+    service.service.sendLastEditorClosedEvent(FILE_ID, PROVIDER);
+
+    verify(channel).publish(any(), any(Object.class), any());
+  }
+
   private CometdDocumentsService service(DocumentService documentService) {
+    return service(mock(EXoContinuationBayeux.class), documentService);
+  }
+
+  private CometdDocumentsService service(EXoContinuationBayeux exoBayeux, DocumentService documentService) {
     CacheService cacheService = mock(CacheService.class);
     when(cacheService.<String, String> getCacheInstance(CometdDocumentsService.EDITORS_CACHE_NAME)).thenReturn(editors);
-    return new CometdDocumentsService(mock(EXoContinuationBayeux.class), documentService, null, null, cacheService);
+    return new CometdDocumentsService(exoBayeux, documentService, null, null, cacheService);
   }
 }
