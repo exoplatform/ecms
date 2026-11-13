@@ -1,6 +1,5 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,6 +45,8 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
@@ -181,14 +182,24 @@ public class CometdDocumentsService implements Startable {
    */
   static class EditorsContext {
 
-    /** The clients map. The key is session id, the value - client info. */
+    /** The editors open on this node. The key is session id, the value - client info. */
     private ConcurrentHashMap<String, ClientInfo>           clients            = new ConcurrentHashMap<>();
 
-    /** The providers map. The key is fileId, value - Map<Strig provider, Integer count opened editors> */
-    private ConcurrentHashMap<String, Map<String, Integer>> providers          = new ConcurrentHashMap<>();
+    /**
+     * The editors open on every node. The key is session id, the value - the
+     * file id and the provider, as {@link #editorKey(String, String)} joins them.
+     */
+    private final ExoCache<String, String>                  editors;
 
     /** The closed editors. The key is client info, value - timer with task (setCurrentProvider to null) */
     private ConcurrentHashMap<ClientInfo, Timer>            closedEditorTimers = new ConcurrentHashMap<>();
+
+    /**
+     * @param editors the cache of the editors open on every node
+     */
+    EditorsContext(ExoCache<String, String> editors) {
+      this.editors = editors;
+    }
 
     /**
      * Adds the client.
@@ -200,16 +211,7 @@ public class CometdDocumentsService implements Startable {
      */
     public void addClient(String sessionId, String fileId, String provider, String workspace) {
       clients.put(sessionId, new ClientInfo(fileId, workspace, provider));
-      providers.compute(fileId, (key, providers) -> {
-        if (providers == null) {
-          Map<String, Integer> providersMap = new HashMap<>();
-          providersMap.put(provider, 1);
-          return providersMap;
-        } else {
-          providers.compute(provider, (providerName, count) -> (count == null) ? 1 : count + 1);
-          return providers;
-        }
-      });
+      editors.put(sessionId, editorKey(fileId, provider));
     }
 
     /**
@@ -221,10 +223,19 @@ public class CometdDocumentsService implements Startable {
     public ClientInfo removeClient(String sessionId) {
       ClientInfo clientInfo = clients.remove(sessionId);
       if (clientInfo != null) {
-        Map<String, Integer> editors = providers.get(clientInfo.getFileId());
-        editors.compute(clientInfo.getProvider(), (provider, count) -> (count == null || count < 1) ? 0 : count - 1);
+        editors.remove(sessionId);
       }
       return clientInfo;
+    }
+
+    /**
+     * Removes the editors open on this node from the editors of every node, as
+     * the node stops
+     */
+    public void removeClients() {
+      for (String sessionId : clients.keySet()) {
+        removeClient(sessionId);
+      }
     }
 
     /**
@@ -232,13 +243,24 @@ public class CometdDocumentsService implements Startable {
      *
      * @param fileId the file id
      * @param provider the provider
-     * @return the opened editors count
+     * @return the number of editors of the file with the provider open on
+     *         every node
      */
     public int getOpenedEditorsCount(String fileId, String provider) {
-      if (providers.containsKey(fileId)) {
-        return providers.get(fileId).get(provider);
+      String key = editorKey(fileId, provider);
+      try {
+        return (int) editors.getCachedObjects().stream().filter(key::equals).count();
+      } catch (Exception e) {
+        LOG.warn("Cannot count the editors open on every node, counting the editors open on this node", e);
+        return (int) clients.values()
+                            .stream()
+                            .filter(client -> fileId.equals(client.getFileId()) && provider.equals(client.getProvider()))
+                            .count();
       }
-      return 0;
+    }
+
+    private static String editorKey(String fileId, String provider) {
+      return fileId + "/" + provider;
     }
 
     /**
@@ -437,19 +459,7 @@ public class CometdDocumentsService implements Startable {
               timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                  try {
-                    String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-                    if (currentProvider != null) {
-                      service.setCurrentDocumentProvider(fileId, workspace, null);
-                      service.sendLastEditorClosedEvent(fileId, provider);
-                      if (LOG.isDebugEnabled()) {
-                        LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + removedClient.getWorkspace()
-                            + ", fileId:" + fileId);
-                      }
-                    }
-                  } catch (RepositoryException e) {
-                    LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
-                  }
+                  resetCurrentProviderIfClosed(fileId, workspace, provider);
                 }
               }, editorProvider.getEditingFinishedDelay());
               editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
@@ -512,6 +522,9 @@ public class CometdDocumentsService implements Startable {
 
   /** The channel name. */
   public static final String                  CHANNEL_NAME             = "/eXo/Application/documents/editor/";
+
+  /** The cache of the editors open on every node. */
+  public static final String                  EDITORS_CACHE_NAME       = "ecms.DocumentEditors";
 
   /** The channel name. */
   public static final String                  CHANNEL_NAME_PARAMS      = CHANNEL_NAME + "{fileId}";
@@ -579,7 +592,7 @@ public class CometdDocumentsService implements Startable {
   protected final ClientChannelListener       channelListener          = new ClientChannelListener();
 
   /** The editors context. */
-  protected final EditorsContext              editorsContext           = new EditorsContext();
+  protected final EditorsContext              editorsContext;
 
   /**
    * Instantiates the CometdDocumentsService.
@@ -588,12 +601,15 @@ public class CometdDocumentsService implements Startable {
    * @param documentService the document service
    * @param identityRegistry the identity registry
    * @param authenticator the authenticator
+   * @param cacheService the cache service
    */
   public CometdDocumentsService(EXoContinuationBayeux exoBayeux,
                                 DocumentService documentService,
                                 IdentityRegistry identityRegistry,
-                                Authenticator authenticator) {
+                                Authenticator authenticator,
+                                CacheService cacheService) {
     this.exoBayeux = exoBayeux;
+    this.editorsContext = new EditorsContext(cacheService.getCacheInstance(EDITORS_CACHE_NAME));
     this.documentService = documentService;
     this.service = new CometdService();
     this.eventsHandlers = createThreadExecutor(THREAD_PREFIX, MAX_FACTOR, QUEUE_FACTOR);
@@ -882,7 +898,33 @@ public class CometdDocumentsService implements Startable {
    */
   @Override
   public void stop() {
-    // Nothing
+    editorsContext.removeClients();
+  }
+
+  /**
+   * Resets the current provider of a document whose last editor of the
+   * provider closed, unless an editor of it opened since, on any node
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @param provider the provider
+   */
+  void resetCurrentProviderIfClosed(String fileId, String workspace, String provider) {
+    if (editorsContext.getOpenedEditorsCount(fileId, provider) > 0) {
+      return;
+    }
+    try {
+      String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+      if (currentProvider != null) {
+        service.setCurrentDocumentProvider(fileId, workspace, null);
+        service.sendLastEditorClosedEvent(fileId, provider);
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + workspace + ", fileId:" + fileId);
+        }
+      }
+    } catch (RepositoryException e) {
+      LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
+    }
   }
 
   /**

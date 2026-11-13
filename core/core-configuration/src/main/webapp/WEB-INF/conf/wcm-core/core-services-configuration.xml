@@ -243,6 +243,18 @@
                   <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.lockservice.cacheMode:replication}</string></field>
               </object>
           </object-param>
+          <!-- The editors open on each node, which every node counts before it resets a document's current editor: replicated -->
+          <object-param>
+              <name>ecms.DocumentEditors</name>
+              <description>The Cache configuration for the document editors open on every node</description>
+              <object type="org.exoplatform.services.cache.impl.infinispan.generic.GenericExoCacheConfig">
+                  <field name="name"><string>ecms.DocumentEditors</string></field>
+                  <field name="strategy"  profiles="cluster"><string>${exo.cache.ecms.DocumentEditors.strategy:LIRS}</string></field>
+                  <field name="maxSize"><int>${exo.cache.ecms.DocumentEditors.MaxNodes:10000}</int></field>
+                  <field name="liveTime"><long>${exo.cache.ecms.DocumentEditors.TimeToLive:86400}</long></field>
+                  <field name="cacheMode"  profiles="cluster"><string>${exo.cache.ecms.DocumentEditors.cacheMode:replication}</string></field>
+              </object>
+          </object-param>
           <object-param>
               <name>ecms.PDFViewerService</name>
               <description></description>

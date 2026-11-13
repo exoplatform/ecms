@@ -43,6 +43,8 @@ class EcmsCacheModesTest
 
    private static final String LOCK_CACHE = "ecms.LockService";
 
+   private static final String EDITORS_CACHE = "ecms.DocumentEditors";
+
    @Test
    void testTheLockServiceCacheIsReplicated() throws Exception
    {
@@ -52,13 +54,21 @@ class EcmsCacheModesTest
    }
 
    @Test
+   void testTheOpenEditorsCacheIsReplicated() throws Exception
+   {
+      Map<String, String> modes = getClusterModes();
+
+      assertEquals("replication", modes.get(EDITORS_CACHE));
+   }
+
+   @Test
    void testNoOtherCacheIsReplicated() throws Exception
    {
       Map<String, String> modes = getClusterModes();
 
       assertTrue(modes.size() > 1, modes.toString());
       modes.forEach((name, mode) -> {
-         if (!LOCK_CACHE.equals(name))
+         if (!LOCK_CACHE.equals(name) && !EDITORS_CACHE.equals(name))
          {
             String lower = mode.toLowerCase();
             assertFalse(lower.endsWith("replication") || "distributed".equals(lower), name + " is " + mode);
