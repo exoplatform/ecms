@@ -21,8 +21,8 @@
 -->
 <infinispan
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="urn:infinispan:config:8.0 http://www.infinispan.org/schemas/infinispan-config-8.2.xsd"
-        xmlns="urn:infinispan:config:8.0">
+        xsi:schemaLocation="urn:infinispan:config:16.0 https://infinispan.org/schemas/infinispan-config-16.0.xsd"
+        xmlns="urn:infinispan:config:16.0">
     <threads>
         <thread-factory name="infinispan-factory" group-name="infinispan" thread-name-pattern="%G %i" priority="5"/>
 
@@ -37,21 +37,21 @@
 
     <cache-container  default-cache="default" expiration-executor="infinispan-expiration"  listener-executor="infinispan-listener"
                       statistics="true"  shutdown-hook="DEFAULT">
-        <jmx duplicate-domains="true" domain="exo" mbean-server-lookup="org.infinispan.jmx.PlatformMBeanServerLookup"/>
-        <local-cache-configuration name="default" statistics="true">
-            <locking isolation="READ_COMMITTED" concurrency-level="500" striping="false" write-skew="false" acquire-timeout="20000"/>
+        <jmx enabled="true" domain="exo"/>
+        <local-cache name="default" statistics="true">
+            <locking isolation="READ_COMMITTED" concurrency-level="500" striping="false" acquire-timeout="20000"/>
             <transaction mode="NON_XA" transaction-manager-lookup="org.exoplatform.services.transaction.infinispan.JBossStandaloneJTAManagerLookup" />
-            <eviction strategy="NONE"/>
             <persistence passivation="false">
-                <string-keyed-jdbc-store xmlns="urn:infinispan:config:store:jdbc:8.0" shared="true" fetch-state="true" read-only="false" purge="false" preload="true">
+                <string-keyed-jdbc-store xmlns="urn:infinispan:config:store:jdbc:16.0" shared="false" read-only="false" purge="false" preload="true">
                     <string-keyed-table drop-on-exit="${infinispan-cl-cache.jdbc.table.drop}" create-on-start="${infinispan-cl-cache.jdbc.table.create}"
                                         prefix="${infinispan-cl-cache.jdbc.table.name:lk}">
                         <id-column name="${infinispan-cl-cache.jdbc.id.column}" type="${infinispan-cl-cache.jdbc.id.type}" />
                         <data-column name="${infinispan-cl-cache.jdbc.data.column}" type="${infinispan-cl-cache.jdbc.data.type}" />
                         <timestamp-column name="${infinispan-cl-cache.jdbc.timestamp.column}" type="${infinispan-cl-cache.jdbc.timestamp.type}" />
+                        <segment-column name="segment_id" type="INTEGER" />
                     </string-keyed-table>
                 </string-keyed-jdbc-store>
             </persistence>
-        </local-cache-configuration>
+        </local-cache>
     </cache-container>
 </infinispan>
