@@ -71,6 +71,12 @@
       <artifactId>portal.component.web.controller</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <!--test-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ecm-wcm-core</finalName>
