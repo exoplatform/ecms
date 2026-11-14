@@ -21,8 +21,8 @@
 -->
 <infinispan
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="urn:infinispan:config:8.0 http://www.infinispan.org/schemas/infinispan-config-8.2.xsd"
-        xmlns="urn:infinispan:config:8.0">
+        xsi:schemaLocation="urn:infinispan:config:16.0 https://infinispan.org/schemas/infinispan-config-16.0.xsd"
+        xmlns="urn:infinispan:config:16.0">
     <threads>
         <thread-factory name="infinispan-factory" group-name="infinispan" thread-name-pattern="%G %i" priority="5"/>
 
@@ -37,11 +37,11 @@
 
     <cache-container  default-cache="default" expiration-executor="infinispan-expiration"  listener-executor="infinispan-listener"
                       statistics="true"  shutdown-hook="REGISTER">
-        <jmx duplicate-domains="true" domain="exo" mbean-server-lookup="org.infinispan.jmx.PlatformMBeanServerLookup"/>
-        <local-cache-configuration name="default" statistics="true">
-            <locking isolation="READ_COMMITTED" concurrency-level="500" striping="false" write-skew="false" acquire-timeout="20000"/>
+        <jmx enabled="true" domain="exo"/>
+        <local-cache name="default" statistics="true">
+            <locking isolation="READ_COMMITTED" concurrency-level="500" striping="false" acquire-timeout="20000"/>
             <transaction mode="NON_XA" transaction-manager-lookup="org.exoplatform.services.transaction.infinispan.JBossStandaloneJTAManagerLookup" />
-            <eviction size="1000000" strategy="LRU" thread-policy="DEFAULT"/>
-        </local-cache-configuration>
+            <memory max-count="1000000" when-full="REMOVE"/>
+        </local-cache>
     </cache-container>
 </infinispan>
