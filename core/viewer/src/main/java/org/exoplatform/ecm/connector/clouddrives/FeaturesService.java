@@ -221,7 +221,9 @@ public class FeaturesService implements ResourceContainer {
   @RolesAllowed("administrators")
   public Response setCloudDriveStatus(@Context UriInfo uriInfo) {
     SettingValue<?> isCloudDriveEnabled = settingService.get(CLOUD_DRIVE_CONTEXT, CLOUD_DRIVE_SCOPE, IS_CLOUD_DRIVE_ENABLED);
-    settingService.set(CLOUD_DRIVE_CONTEXT, CLOUD_DRIVE_SCOPE, IS_CLOUD_DRIVE_ENABLED, SettingValue.create(isCloudDriveEnabled != null ? !Boolean.valueOf(isCloudDriveEnabled.getValue().toString()) : false));
-    return Response.ok().entity("{\"result\":\"" + !(Boolean) isCloudDriveEnabled.getValue() + "\"}").build();
+    // The store returns the value as text, and no value means enabled
+    boolean enabled = isCloudDriveEnabled == null || Boolean.parseBoolean(isCloudDriveEnabled.getValue().toString());
+    settingService.set(CLOUD_DRIVE_CONTEXT, CLOUD_DRIVE_SCOPE, IS_CLOUD_DRIVE_ENABLED, SettingValue.create(!enabled));
+    return Response.ok().entity("{\"result\":\"" + !enabled + "\"}").build();
   }
 }

@@ -1,6 +1,7 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -26,8 +28,7 @@ import org.cometd.annotation.Param;
 import org.cometd.annotation.server.ServerAnnotationProcessor;
 import org.cometd.annotation.Service;
 import org.cometd.annotation.Session;
-import org.cometd.annotation.Subscription;
-import org.cometd.bayeux.Message;
+import org.cometd.annotation.Listener;
 import org.cometd.bayeux.Promise;
 import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.BayeuxServer.ChannelListener;
@@ -37,6 +38,7 @@ import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerChannel.SubscriptionListener;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
+import org.cometd.oort.Oort;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
 import org.picocontainer.Startable;
@@ -46,6 +48,8 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
@@ -181,14 +185,31 @@ public class CometdDocumentsService implements Startable {
    */
   static class EditorsContext {
 
-    /** The clients map. The key is session id, the value - client info. */
+    /** The editors open on this node. The key is session id, the value - client info. */
     private ConcurrentHashMap<String, ClientInfo>           clients            = new ConcurrentHashMap<>();
 
-    /** The providers map. The key is fileId, value - Map<Strig provider, Integer count opened editors> */
-    private ConcurrentHashMap<String, Map<String, Integer>> providers          = new ConcurrentHashMap<>();
+    /**
+     * The editors open on every node. The key is session id, the value - the
+     * node, the session id, the file id and the provider, as
+     * {@link #editorValue(String, String, String)} joins them.
+     */
+    private final ExoCache<String, String>                  editors;
+
+    /** The separator of the parts of an open editor's value. */
+    private static final String                             SEPARATOR          = "\n";
+
+    /** The URL that names this node in the cluster, once known. */
+    private volatile String                                 node               = "";
 
     /** The closed editors. The key is client info, value - timer with task (setCurrentProvider to null) */
     private ConcurrentHashMap<ClientInfo, Timer>            closedEditorTimers = new ConcurrentHashMap<>();
+
+    /**
+     * @param editors the cache of the editors open on every node
+     */
+    EditorsContext(ExoCache<String, String> editors) {
+      this.editors = editors;
+    }
 
     /**
      * Adds the client.
@@ -200,16 +221,7 @@ public class CometdDocumentsService implements Startable {
      */
     public void addClient(String sessionId, String fileId, String provider, String workspace) {
       clients.put(sessionId, new ClientInfo(fileId, workspace, provider));
-      providers.compute(fileId, (key, providers) -> {
-        if (providers == null) {
-          Map<String, Integer> providersMap = new HashMap<>();
-          providersMap.put(provider, 1);
-          return providersMap;
-        } else {
-          providers.compute(provider, (providerName, count) -> (count == null) ? 1 : count + 1);
-          return providers;
-        }
-      });
+      editors.put(sessionId, editorValue(sessionId, fileId, provider));
     }
 
     /**
@@ -221,10 +233,88 @@ public class CometdDocumentsService implements Startable {
     public ClientInfo removeClient(String sessionId) {
       ClientInfo clientInfo = clients.remove(sessionId);
       if (clientInfo != null) {
-        Map<String, Integer> editors = providers.get(clientInfo.getFileId());
-        editors.compute(clientInfo.getProvider(), (provider, count) -> (count == null || count < 1) ? 0 : count - 1);
+        editors.remove(sessionId);
       }
       return clientInfo;
+    }
+
+    /**
+     * Removes the editors open on this node from the editors of every node, as
+     * the node stops
+     */
+    public void removeClients() {
+      for (String sessionId : clients.keySet()) {
+        removeClient(sessionId);
+      }
+    }
+
+    /**
+     * Names this node, and removes the editors a previous run of it left. The
+     * cluster's cache template does not transfer a cache's state to a node
+     * that joins: the node starts with no editor, and learns those of the
+     * other nodes as each of them puts its editors again when it sees the
+     * node join. A previous run's editors are removed by the other nodes as
+     * they see that run leave; the removal here covers a cache configured to
+     * transfer its state.
+     *
+     * @param node the URL that names this node in the cluster
+     */
+    public void joinCluster(String node) {
+      this.node = node;
+      removeNode(node);
+      putClients();
+    }
+
+    /**
+     * Puts the editors open on this node again, for a node that joins: it
+     * starts with no editor, or removed them when it saw this node leave
+     */
+    public void putClients() {
+      clients.forEach(this::putEditor);
+    }
+
+    /**
+     * Puts again the editors open on this node that the cache no longer
+     * holds: another node removed them, seeing this node leave while it was
+     * up, or seeing a previous run of it leave once this run had put them
+     */
+    public void restoreClients() {
+      clients.forEach((sessionId, client) -> {
+        if (editors.get(sessionId) == null) {
+          putEditor(sessionId, client);
+        }
+      });
+    }
+
+    /**
+     * Puts an editor open on this node, then removes it when its session
+     * closed meanwhile: a close removes the session from this node's editors
+     * before it removes the session's entry, so either the close removes the
+     * entry put here or this check does
+     *
+     * @param sessionId the session id
+     * @param client the client info
+     */
+    private void putEditor(String sessionId, ClientInfo client) {
+      editors.put(sessionId, editorValue(sessionId, client.getFileId(), client.getProvider()));
+      if (!clients.containsKey(sessionId)) {
+        editors.remove(sessionId);
+      }
+    }
+
+    /**
+     * Removes the editors open on a node that left the cluster, or that a
+     * previous run of a node left
+     *
+     * @param leftNode the URL that names the node
+     */
+    public void removeNode(String leftNode) {
+      for (String value : cachedValues()) {
+        String[] parts = value.split(SEPARATOR, 3);
+        if (parts.length == 3 && parts[0].equals(leftNode) && !clients.containsKey(parts[1])) {
+          editors.remove(parts[1]);
+        }
+      }
     }
 
     /**
@@ -232,13 +322,34 @@ public class CometdDocumentsService implements Startable {
      *
      * @param fileId the file id
      * @param provider the provider
-     * @return the opened editors count
+     * @return the number of editors of the file with the provider open on
+     *         every node
      */
     public int getOpenedEditorsCount(String fileId, String provider) {
-      if (providers.containsKey(fileId)) {
-        return providers.get(fileId).get(provider);
+      String editor = fileId + "/" + provider;
+      try {
+        return (int) editors.getCachedObjects().stream().filter(value -> {
+          String[] parts = value.split(SEPARATOR, 3);
+          return parts.length == 3 && parts[2].equals(editor);
+        }).count();
+      } catch (Exception e) {
+        // Counted as open: the current editor stays, and the next close resets it
+        LOG.warn("Cannot count the editors open on every node, counting the document as still open", e);
+        return 1;
       }
-      return 0;
+    }
+
+    private List<String> cachedValues() {
+      try {
+        return new ArrayList<>(editors.getCachedObjects());
+      } catch (Exception e) {
+        LOG.warn("Cannot read the editors open on every node", e);
+        return Collections.emptyList();
+      }
+    }
+
+    private String editorValue(String sessionId, String fileId, String provider) {
+      return node + SEPARATOR + sessionId + SEPARATOR + fileId + "/" + provider;
     }
 
     /**
@@ -386,7 +497,7 @@ public class CometdDocumentsService implements Startable {
    *
    * @see ChannelSubscriptionEvent
    */
-  class ChannelSubscriptionListener implements SubscriptionListener {
+  class ChannelSubscriptionListener implements SubscriptionListener, ConfigurableServerChannel.ServerChannelListener.Weak {
 
     /**
      * {@inheritDoc}
@@ -437,19 +548,7 @@ public class CometdDocumentsService implements Startable {
               timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                  try {
-                    String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-                    if (currentProvider != null) {
-                      service.setCurrentDocumentProvider(fileId, workspace, null);
-                      service.sendLastEditorClosedEvent(fileId, provider);
-                      if (LOG.isDebugEnabled()) {
-                        LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + removedClient.getWorkspace()
-                            + ", fileId:" + fileId);
-                      }
-                    }
-                  } catch (RepositoryException e) {
-                    LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
-                  }
+                  resetCurrentProviderIfClosed(fileId, workspace, provider);
                 }
               }, editorProvider.getEditingFinishedDelay());
               editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
@@ -512,6 +611,21 @@ public class CometdDocumentsService implements Startable {
 
   /** The channel name. */
   public static final String                  CHANNEL_NAME             = "/eXo/Application/documents/editor/";
+
+  /** The cache of the editors open on every node. */
+  public static final String                  EDITORS_CACHE_NAME       = "ecms.DocumentEditors";
+
+  /**
+   * Period, in seconds, at which a node puts again those of its editors
+   * another node removed.
+   */
+  public static final long                    RESTORE_PERIOD           = 60;
+
+  /**
+   * Time, in seconds, a stopping node waits for a restore in progress before
+   * it removes its editors.
+   */
+  static final long                           STOP_TIMEOUT             = 5;
 
   /** The channel name. */
   public static final String                  CHANNEL_NAME_PARAMS      = CHANNEL_NAME + "{fileId}";
@@ -579,7 +693,10 @@ public class CometdDocumentsService implements Startable {
   protected final ClientChannelListener       channelListener          = new ClientChannelListener();
 
   /** The editors context. */
-  protected final EditorsContext              editorsContext           = new EditorsContext();
+  protected final EditorsContext              editorsContext;
+
+  /** Puts again the editors of this node another node removed. */
+  ScheduledThreadPoolExecutor                 restoreExecutor;
 
   /**
    * Instantiates the CometdDocumentsService.
@@ -588,12 +705,15 @@ public class CometdDocumentsService implements Startable {
    * @param documentService the document service
    * @param identityRegistry the identity registry
    * @param authenticator the authenticator
+   * @param cacheService the cache service
    */
   public CometdDocumentsService(EXoContinuationBayeux exoBayeux,
                                 DocumentService documentService,
                                 IdentityRegistry identityRegistry,
-                                Authenticator authenticator) {
+                                Authenticator authenticator,
+                                CacheService cacheService) {
     this.exoBayeux = exoBayeux;
+    this.editorsContext = new EditorsContext(cacheService.getCacheInstance(EDITORS_CACHE_NAME));
     this.documentService = documentService;
     this.service = new CometdService();
     this.eventsHandlers = createThreadExecutor(THREAD_PREFIX, MAX_FACTOR, QUEUE_FACTOR);
@@ -606,6 +726,16 @@ public class CometdDocumentsService implements Startable {
    */
   @Override
   public void start() {
+    // A document's channel reaches its editors on every node
+    exoBayeux.observeChannel(CHANNEL_NAME + "**");
+    // The editors open on a node that leaves are no longer counted
+    exoBayeux.onOort(this::joinCluster);
+    restoreExecutor = new ScheduledThreadPoolExecutor(1, runnable -> {
+      Thread thread = new Thread(runnable, "documents-editors-restore");
+      thread.setDaemon(true);
+      return thread;
+    });
+    restoreExecutor.scheduleWithFixedDelay(this::restoreEditors, RESTORE_PERIOD, RESTORE_PERIOD, TimeUnit.SECONDS);
     // instantiate processor after the eXo container start, to let
     // start-dependent logic worked before us
     final AtomicReference<ServerAnnotationProcessor> processor = new AtomicReference<>();
@@ -701,12 +831,19 @@ public class CometdDocumentsService implements Startable {
     /**
      * Subscribe documents.
      *
+     * @param sender the session that published the message
      * @param message the message
      * @param fileId the file id
      * @throws RepositoryException the repository exception
      */
-    @Subscription(CHANNEL_NAME_PARAMS)
-    public void subscribeDocuments(Message message, @Param("fileId") String fileId) throws RepositoryException {
+    @Listener(CHANNEL_NAME_PARAMS)
+    public void subscribeDocuments(ServerSession sender,
+                                   ServerMessage.Mutable message,
+                                   @Param("fileId") String fileId) throws RepositoryException {
+      if (exoBayeux.isRelayed(sender)) {
+        // Handled on the node the client published it to
+        return;
+      }
       Object objData = message.getData();
       if (!Map.class.isInstance(objData)) {
         if (LOG.isDebugEnabled()) {
@@ -737,7 +874,7 @@ public class CometdDocumentsService implements Startable {
               List<String> availableProviders = service.getAllAvailableProviders(identity);
               String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
               boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
-              service.sendCurrentProviderInfo(fileId, available, availableProviders);
+              service.sendCurrentProviderInfo(sender, fileId, available, availableProviders);
               if (currentProvider == null) {
                 setCurrentDocumentProvider(fileId, workspace, provider);
               }
@@ -813,7 +950,9 @@ public class CometdDocumentsService implements Startable {
      * @param provider the provider
      */
     protected void sendLastEditorClosedEvent(String fileId, String provider) {
-      ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
+      // Created when no session of this node subscribes to it: Oort relays it to
+      // the editors of the other nodes
+      ServerChannel channel = bayeux.createChannelIfAbsent(CHANNEL_NAME + fileId).getReference();
       if (channel != null) {
         StringBuilder data = new StringBuilder();
         data.append('{');
@@ -831,38 +970,41 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Send last editor closed event.
+     * Sends the current provider information to the user who opened the
+     * document: it says which providers are available to that user.
      *
+     * @param opener the session of the user who opened the document
      * @param fileId the file id
-     * @param available the available
+     * @param available whether the opener can open the document with the
+     *          provider
+     * @param availableProviders the providers available to the opener
      */
-    protected void sendCurrentProviderInfo(String fileId, boolean available, List<String> availableProviders) {
-      ServerChannel channel = bayeux.getChannel(CHANNEL_NAME + fileId);
-      if (channel != null) {
-        String allProviders = null;
-        try {
-          allProviders = new JsonGeneratorImpl().createJsonArray(availableProviders).toString();
-        } catch (JsonException e) {
-          LOG.warn("Cannot serialize all available providers to JSON", e);
-        }
-
-        StringBuilder data = new StringBuilder();
-        data.append('{');
-        data.append("\"type\": \"");
-        data.append(CURRENT_PROVIDER_INFO);
-        data.append("\", ");
-        data.append("\"fileId\": \"");
-        data.append(fileId);
-        data.append("\", ");
-        data.append("\"available\": \"");
-        data.append(available);
-        data.append("\", ");
-        data.append("\"allProviders\":");
-        data.append(allProviders);
-        data.append("}");
-        channel.publish(localSession, data.toString(), Promise.noop());
-
+    protected void sendCurrentProviderInfo(ServerSession opener,
+                                           String fileId,
+                                           boolean available,
+                                           List<String> availableProviders) {
+      String allProviders = null;
+      try {
+        allProviders = new JsonGeneratorImpl().createJsonArray(availableProviders).toString();
+      } catch (JsonException e) {
+        LOG.warn("Cannot serialize all available providers to JSON", e);
       }
+
+      StringBuilder data = new StringBuilder();
+      data.append('{');
+      data.append("\"type\": \"");
+      data.append(CURRENT_PROVIDER_INFO);
+      data.append("\", ");
+      data.append("\"fileId\": \"");
+      data.append(fileId);
+      data.append("\", ");
+      data.append("\"available\": \"");
+      data.append(available);
+      data.append("\", ");
+      data.append("\"allProviders\":");
+      data.append(allProviders);
+      data.append("}");
+      opener.deliver(localSession, CHANNEL_NAME + fileId, data.toString(), Promise.noop());
     }
 
   }
@@ -882,7 +1024,77 @@ public class CometdDocumentsService implements Startable {
    */
   @Override
   public void stop() {
-    // Nothing
+    if (restoreExecutor != null) {
+      restoreExecutor.shutdown();
+      try {
+        if (!restoreExecutor.awaitTermination(STOP_TIMEOUT, TimeUnit.SECONDS)) {
+          restoreExecutor.shutdownNow();
+        }
+      } catch (InterruptedException e) {
+        restoreExecutor.shutdownNow();
+        Thread.currentThread().interrupt();
+      }
+    }
+    editorsContext.removeClients();
+  }
+
+  /**
+   * Puts again the editors of this node that another node removed
+   */
+  void restoreEditors() {
+    try {
+      editorsContext.restoreClients();
+    } catch (RuntimeException e) {
+      LOG.warn("Error while restoring the editors open on this node", e);
+    }
+  }
+
+  /**
+   * Names this node in the counts of open editors, and follows the nodes that
+   * leave the cluster and join it
+   *
+   * @param oort this node's Oort
+   */
+  void joinCluster(Oort oort) {
+    editorsContext.joinCluster(oort.getURL());
+    oort.addCometListener(new Oort.CometListener() {
+      @Override
+      public void cometJoined(Event event) {
+        // A node that saw this one leave removed its editors
+        editorsContext.putClients();
+      }
+
+      @Override
+      public void cometLeft(Event event) {
+        editorsContext.removeNode(event.getCometURL());
+      }
+    });
+  }
+
+  /**
+   * Resets the current provider of a document whose last editor of the
+   * provider closed, unless an editor of it opened since, on any node
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @param provider the provider
+   */
+  void resetCurrentProviderIfClosed(String fileId, String workspace, String provider) {
+    if (editorsContext.getOpenedEditorsCount(fileId, provider) > 0) {
+      return;
+    }
+    try {
+      String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+      if (currentProvider != null) {
+        service.setCurrentDocumentProvider(fileId, workspace, null);
+        service.sendLastEditorClosedEvent(fileId, provider);
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + workspace + ", fileId:" + fileId);
+        }
+      }
+    } catch (RepositoryException e) {
+      LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
+    }
   }
 
   /**
