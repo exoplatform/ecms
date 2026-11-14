@@ -41,7 +41,7 @@ import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
 import org.cometd.oort.Oort;
 import org.cometd.server.BayeuxServerImpl;
-import org.cometd.server.http.JSONHttpTransport;
+import org.cometd.server.http.JSONTransport;
 import org.junit.Before;
 import org.mockito.ArgumentCaptor;
 import org.junit.Test;
@@ -355,7 +355,7 @@ public class CometdDocumentsServiceTest {
   public void testADocumentChannelNoSessionSubscribesToIsSwept() throws Exception {
     CometdDocumentsService service = service(mock(DocumentService.class));
     EXoContinuationBayeux bayeux = new EXoContinuationBayeux();
-    bayeux.setOption(BayeuxServerImpl.TRANSPORTS_OPTION, JSONHttpTransport.class.getName());
+    bayeux.setOption(BayeuxServerImpl.TRANSPORTS_OPTION, JSONTransport.class.getName());
     bayeux.start();
     try {
       bayeux.addListener(service.channelListener);
