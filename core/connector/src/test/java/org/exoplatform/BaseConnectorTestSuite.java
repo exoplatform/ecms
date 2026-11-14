@@ -25,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
+import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsServiceTest;
 
 /**
  * Created by The eXo Platform SAS
@@ -34,6 +35,7 @@ import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
 @RunWith(Suite.class)
 @SuiteClasses({ 
   TestOpenInOfficeConnector.class,
+  CometdDocumentsServiceTest.class,
 })
 @ConfigTestCase(BaseConnectorTestCase.class)
 public class BaseConnectorTestSuite extends BaseExoContainerTestSuite {
