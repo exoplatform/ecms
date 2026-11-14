@@ -28,6 +28,14 @@
     <url>https://fisheye.exoplatform.com/browse/ecms</url>
   </scm>
   <properties>
+    <!-- Java 25: compile for and against Java 25, with the tools that read its class files -->
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
+    <maven.compiler.release>25</maven.compiler.release>
+    <version.jacoco.plugin>0.8.14</version.jacoco.plugin>
+    <plugin.aspectj.version>1.16.1</plugin.aspectj.version>
+    <org.aspectj.version>1.9.25.1</org.aspectj.version>
+    <org.lombok.version>1.18.46</org.lombok.version>
     <!-- **************************************** -->
     <!-- Jira Settings                            -->
     <!-- **************************************** -->
