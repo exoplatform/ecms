@@ -19,9 +19,11 @@ package org.exoplatform.services.cms.lock.impl;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +31,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
@@ -79,6 +82,23 @@ public class LockServiceImplStartTest {
     lockService.start();
 
     verify(lockService, never()).removeLocks();
+  }
+
+  @Test
+  public void aStartAfterAStopRegistersTheProbeAgainBeforeCountingTheMembers() throws Exception {
+    when(rpcService.executeCommandOnAllNodes(any(RemoteCommand.class), anyLong())).thenReturn(List.of(Boolean.TRUE));
+
+    lockService.start();
+    lockService.stop();
+    lockService.start();
+
+    InOrder inOrder = inOrder(rpcService);
+    inOrder.verify(rpcService).registerCommand(any(RemoteCommand.class));
+    inOrder.verify(rpcService).executeCommandOnAllNodes(any(RemoteCommand.class), anyLong());
+    inOrder.verify(rpcService).unregisterCommand(any(RemoteCommand.class));
+    inOrder.verify(rpcService).registerCommand(any(RemoteCommand.class));
+    inOrder.verify(rpcService).executeCommandOnAllNodes(any(RemoteCommand.class), anyLong());
+    verify(lockService, times(2)).removeLocks();
   }
 
   @Test

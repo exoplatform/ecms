@@ -95,7 +95,6 @@ public class LockServiceImpl implements LockService, Startable {
     this.rpcService = rpcService;
     if (rpcService != null) {
       this.clusterProbe = new LockServiceClusterProbe();
-      rpcService.registerCommand(clusterProbe);
     }
   }
 
@@ -151,6 +150,10 @@ public class LockServiceImpl implements LockService, Startable {
   public void start() {
     lockHolding.clear();
     settingLockList.clearCache();
+    if (rpcService != null) {
+      // Registered at each start, as stop() unregisters it
+      rpcService.registerCommand(clusterProbe);
+    }
 
     if (isAloneInCluster()) {
       removeLocks();
