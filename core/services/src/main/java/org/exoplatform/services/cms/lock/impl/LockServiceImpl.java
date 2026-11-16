@@ -40,6 +40,8 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rpc.RPCException;
+import org.exoplatform.services.rpc.RPCService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
@@ -64,6 +66,9 @@ public class LockServiceImpl implements LockService, Startable {
   private ExoCache<String, List<String>> settingLockList;
   private List<LockGroupsOrUsersPlugin> lockGroupsOrUsersPlugin_ = new ArrayList<LockGroupsOrUsersPlugin>();
   private static final Log LOG = ExoLogger.getLogger(LockServiceImpl.class.getName());
+  private static final long CLUSTER_PROBE_TIMEOUT_MS = 30000L;
+  private RPCService rpcService;
+  private LockServiceClusterProbe clusterProbe;
   private HashMap<String, Map<String, String>> lockHolding = new HashMap<String, Map<String, String>>();
 
   /**
@@ -72,8 +77,25 @@ public class LockServiceImpl implements LockService, Startable {
    * @throws Exception
    */
   public LockServiceImpl(InitParams params, CacheService cacheService) throws Exception {
+    this(params, cacheService, null);
+  }
+
+  /**
+   * Constructor method used when the node is part of a cluster: the
+   * {@link RPCService} is started, so connected to the cluster, before this
+   * service starts.
+   * @param params
+   * @param cacheService
+   * @param rpcService
+   * @throws Exception
+   */
+  public LockServiceImpl(InitParams params, CacheService cacheService, RPCService rpcService) throws Exception {
     //group_ = params.getValueParam("group").getValue();
     settingLockList = cacheService.getCacheInstance(CACHE_NAME);
+    this.rpcService = rpcService;
+    if (rpcService != null) {
+      this.clusterProbe = new LockServiceClusterProbe();
+    }
   }
 
   /**
@@ -128,8 +150,16 @@ public class LockServiceImpl implements LockService, Startable {
   public void start() {
     lockHolding.clear();
     settingLockList.clearCache();
+    if (rpcService != null) {
+      // Registered at each start, as stop() unregisters it
+      rpcService.registerCommand(clusterProbe);
+    }
 
-    removeLocks();
+    if (isAloneInCluster()) {
+      removeLocks();
+    } else if (LOG.isInfoEnabled()) {
+      LOG.info("Other cluster members are running, the locks taken through them are kept: locked nodes are not cleaned at startup");
+    }
     List<String> _settingLockList = new ArrayList<String>();
     List<String> _preSettingLockList = new ArrayList<String>();
     for(LockGroupsOrUsersPlugin plugin : lockGroupsOrUsersPlugin_) {
@@ -146,6 +176,9 @@ public class LockServiceImpl implements LockService, Startable {
   public void stop() {
     lockHolding.clear();
     settingLockList.clearCache();
+    if (rpcService != null) {
+      rpcService.unregisterCommand(clusterProbe);
+    }
   }
 
   /**
@@ -409,4 +442,27 @@ public class LockServiceImpl implements LockService, Startable {
           .append(srcPath);
     return buffer.toString();
   }
+
+  /**
+   * Tells whether this node is the only member of the cluster. A node that is
+   * not clustered is alone. In a cluster, the members are counted by the
+   * answers to a command cast to all of them, this node's included; when
+   * they cannot be counted, the node is considered not alone, since cleaning
+   * the locks would release those of a running node. The command is sent
+   * synchronously from the thread that starts the container, which waits up
+   * to 30 seconds for the answers.
+   * @return true when no other node is running
+   */
+  private boolean isAloneInCluster() {
+    if (rpcService == null) {
+      return true;
+    }
+    try {
+      return rpcService.executeCommandOnAllNodes(clusterProbe, CLUSTER_PROBE_TIMEOUT_MS).size() <= 1;
+    } catch (RPCException e) {
+      LOG.warn("Unable to count the cluster members, the locks of the documents are not cleaned at startup", e);
+      return false;
+    }
+  }
+
 }
