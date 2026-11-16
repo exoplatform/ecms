@@ -448,7 +448,9 @@ public class LockServiceImpl implements LockService, Startable {
    * not clustered is alone. In a cluster, the members are counted by the
    * answers to a command cast to all of them, this node's included; when
    * they cannot be counted, the node is considered not alone, since cleaning
-   * the locks would release those of a running node.
+   * the locks would release those of a running node. The command is sent
+   * synchronously from the thread that starts the container, which waits up
+   * to 30 seconds for the answers.
    * @return true when no other node is running
    */
   private boolean isAloneInCluster() {
