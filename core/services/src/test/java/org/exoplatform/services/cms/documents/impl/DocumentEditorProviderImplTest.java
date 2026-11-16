@@ -28,12 +28,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
 import org.exoplatform.commons.api.settings.data.Context;
 import org.exoplatform.commons.api.settings.data.Scope;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.documents.DocumentEditor;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.GroupHandler;
@@ -53,6 +59,27 @@ public class DocumentEditorProviderImplTest {
       return null;
     }).when(settingService).set(any(Context.class), any(Scope.class), anyString(), any(SettingValue.class));
     return settingService;
+  }
+
+  private MockedStatic<ExoContainerContext> containerContext;
+
+  @After
+  public void restoreContainer() {
+    if (containerContext != null) {
+      containerContext.close();
+      containerContext = null;
+    }
+  }
+
+  private void withUserACL() {
+    ExoContainer container = mock(ExoContainer.class);
+    when(container.getComponentInstanceOfType(UserACL.class)).thenReturn(mock(UserACL.class));
+    containerContext = Mockito.mockStatic(ExoContainerContext.class);
+    containerContext.when(ExoContainerContext::getCurrentContainer).thenReturn(container);
+  }
+
+  private static org.exoplatform.services.security.Identity user(String userId) {
+    return new org.exoplatform.services.security.Identity(userId);
   }
 
   private DocumentEditor editor() {
@@ -107,5 +134,43 @@ public class DocumentEditorProviderImplTest {
     nodeA.updatePermissions(Arrays.asList("john", "/platform/users"));
 
     assertEquals(Arrays.asList("john", "*:/platform/users"), nodeB.getPermissions());
+  }
+
+  @Test
+  public void permissionsChangedOnOneNodeDecideAvailabilityOnTheOther() throws Exception {
+    withUserACL();
+    SettingService settingService = sharedSettingService();
+    DocumentEditorProviderImpl nodeA = provider(settingService);
+    DocumentEditorProviderImpl nodeB = provider(settingService);
+    assertTrue(nodeB.isAvailableForUser(user("mary")));
+
+    nodeA.updatePermissions(Arrays.asList("john"));
+
+    assertTrue(nodeB.isAvailableForUser(user("john")));
+    assertFalse(nodeB.isAvailableForUser(user("mary")));
+  }
+
+  @Test
+  public void deactivationOnOneNodeMakesTheEditorUnavailableOnTheOther() {
+    withUserACL();
+    SettingService settingService = sharedSettingService();
+    DocumentEditorProviderImpl nodeA = provider(settingService);
+    DocumentEditorProviderImpl nodeB = provider(settingService);
+    assertTrue(nodeB.isAvailableForUser(user("john")));
+
+    nodeA.updateActive(false);
+
+    assertFalse(nodeB.isAvailableForUser(user("john")));
+  }
+
+  @Test
+  public void editorDefaultsAreUsedWhenTheStoreKeepsNothing() {
+    withUserACL();
+    SettingService settingService = mock(SettingService.class);
+    DocumentEditorProviderImpl provider = provider(settingService);
+
+    assertTrue(provider.isActive());
+    assertEquals(Arrays.asList("*"), provider.getPermissions());
+    assertTrue(provider.isAvailableForUser(user("john")));
   }
 }
