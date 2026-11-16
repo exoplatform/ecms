@@ -249,13 +249,13 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Names this node, and removes the editors a previous run of it left. The
-     * cluster's cache template does not transfer a cache's state to a node
-     * that joins: the node starts with no editor, and learns those of the
-     * other nodes as each of them puts its editors again when it sees the
-     * node join. A previous run's editors are removed by the other nodes as
-     * they see that run leave; the removal here covers a cache configured to
-     * transfer its state.
+     * Names this node, and removes the editors a previous run of it left. A
+     * node that joins receives the editors of the other nodes with the
+     * cache's state, which the cache factory transfers to a joining node for
+     * a replicated cache, and each node also puts its editors again when it
+     * sees the node join. A previous run's editors, which that transfer can
+     * bring back, are removed here, and by the other nodes as they see that
+     * run leave.
      *
      * @param node the URL that names this node in the cluster
      */
