@@ -54,12 +54,6 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   /** The Constant EDITOR_PERMISSIONS_PATTERN. */
   private static final String   EDITOR_PERMISSIONS_PATTERN = "documents.editors.%s.permissions".intern();
 
-  /** The active. */
-  protected boolean             active;
-
-  /** The permissions. */
-  protected List<String>        permissions;
-
   /** The editor ops. */
   protected DocumentEditor      editor;
 
@@ -91,14 +85,9 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
     this.organizationService = organizationService;
     Boolean storedActive = getStoredActive();
     List<String> storedPermissions = getStoredPermissions();
-    if (storedActive != null && storedPermissions != null) {
-      this.active = storedActive;
-      this.permissions = storedPermissions;
-    } else {
-      this.active = editor.isActive();
-      this.permissions = editor.getPermissions();
-      storeActive();
-      storePermissions();
+    if (storedActive == null || storedPermissions == null) {
+      storeActive(editor.isActive());
+      storePermissions(editor.getPermissions());
     }
   }
 
@@ -109,7 +98,8 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   @Override
   public boolean isActive() {
-    return active;
+    Boolean storedActive = getStoredActive();
+    return storedActive != null ? storedActive : editor.isActive();
   }
 
   /**
@@ -119,8 +109,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   @Override
   public void updateActive(boolean active) {
-    this.active = active;
-    storeActive();
+    storeActive(active);
   }
 
   /**
@@ -130,7 +119,8 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
    */
   @Override
   public List<String> getPermissions() {
-    return Collections.unmodifiableList(permissions);
+    List<String> storedPermissions = getStoredPermissions();
+    return Collections.unmodifiableList(storedPermissions != null ? storedPermissions : editor.getPermissions());
   }
 
   /**
@@ -149,8 +139,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
       validatePermission(permission);
       updatedPermissions.add(permission);
     }
-    this.permissions = updatedPermissions;
-    storePermissions();
+    storePermissions(updatedPermissions);
   }
 
   /**
@@ -287,8 +276,10 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
 
   /**
    * Store active.
+   *
+   * @param active the active
    */
-  protected void storeActive() {
+  protected void storeActive(boolean active) {
     settingService.set(Context.GLOBAL,
                        Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
                        String.format(EDITOR_ACTIVE_PATTERN, editor.getProviderName()),
@@ -297,8 +288,10 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
 
   /**
    * Store permissions.
+   *
+   * @param permissions the permissions
    */
-  protected void storePermissions() {
+  protected void storePermissions(List<String> permissions) {
     settingService.set(Context.GLOBAL,
                        Scope.GLOBAL.id(DOCUMENTS_SCOPE_NAME),
                        String.format(EDITOR_PERMISSIONS_PATTERN, editor.getProviderName()),
@@ -347,7 +340,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   public boolean isAvailableForUser(Identity identity) {
     if (isActive()) {
       UserACL userACL = (UserACL) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(UserACL.class);
-      for (String permission : permissions) {
+      for (String permission : getPermissions()) {
         if (permission.equals("*") || permission.equals(identity.getUserId()) || userACL.hasPermission(identity, permission)) {
           return true;
         }

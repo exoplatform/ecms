@@ -27,6 +27,7 @@ import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
 import org.exoplatform.services.cms.documents.TestDocumentService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
+import org.exoplatform.services.cms.documents.impl.DocumentEditorProviderImplTest;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
@@ -72,6 +73,7 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   AttachmentsRestServiceTest.class,
   TestDocumentsAppRedirectService.class,
   TestDocumentService.class,
+  DocumentEditorProviderImplTest.class,
   AttachmentServiceTest.class,
   DocumentServiceImplTest.class
 })
