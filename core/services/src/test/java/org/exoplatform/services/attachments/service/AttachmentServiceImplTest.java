@@ -19,6 +19,7 @@ package org.exoplatform.services.attachments.service;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -64,7 +65,9 @@ public class AttachmentServiceImplTest {
   @Before
   public void setUp() throws Exception {
     IdentityManager identityManager = mock(IdentityManager.class);
-    when(identityManager.getIdentity(String.valueOf(USER_IDENTITY_ID))).thenReturn(mock(Identity.class));
+    Identity userIdentity = mock(Identity.class);
+    lenient().when(userIdentity.getRemoteId()).thenReturn("mary");
+    when(identityManager.getIdentity(String.valueOf(USER_IDENTITY_ID))).thenReturn(userIdentity);
     when(attachmentStorage.getAttachmentItemByEntity(anyLong(), anyString(), anyString())).thenReturn(new Attachment());
 
     attachmentService = spy(new AttachmentServiceImpl(attachmentStorage,
@@ -124,6 +127,23 @@ public class AttachmentServiceImplTest {
     attachmentService.deleteAllEntityAttachments(USER_IDENTITY_ID, ENTITY_ID, ENTITY_TYPE);
 
     verify(attachmentStorage, never()).deleteAttachmentItemByIdByEntity(anyLong(), anyString(), anyString());
+  }
+
+  /**
+   * The entity type's plugin links the attachment on behalf of the user
+   * linking it, named by the service. Mutant: the user-less form leaves the
+   * plugin to guess the user from the thread.
+   */
+  @Test
+  public void linkNamesTheUserToTheEntityTypePlugin() throws Exception {
+    AttachmentEntityTypePlugin plugin = mock(AttachmentEntityTypePlugin.class);
+    when(plugin.getlinkedAttachments(ENTITY_TYPE, ENTITY_ID, "file-id", "mary")).thenReturn(List.of("link-id"));
+    doReturn(plugin).when(attachmentService).getAttachmentEntityTypePlugin(ENTITY_TYPE);
+    doReturn(new Attachment()).when(attachmentService).getAttachmentByIdByEntity(ENTITY_TYPE, ENTITY_ID, "file-id", USER_IDENTITY_ID);
+
+    attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, ENTITY_TYPE, "file-id");
+
+    verify(attachmentStorage).linkAttachmentToEntity(ENTITY_ID, ENTITY_TYPE, "link-id");
   }
 
   private static Attachment visible(String attachmentId) {
