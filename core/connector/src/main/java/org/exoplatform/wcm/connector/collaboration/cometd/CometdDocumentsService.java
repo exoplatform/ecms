@@ -110,8 +110,9 @@ public class CometdDocumentsService implements Startable {
         }
 
       };
-      if (t.isDaemon()) {
-        t.setDaemon(false);
+      // A command left running or queued when the server stops does not keep its JVM alive
+      if (!t.isDaemon()) {
+        t.setDaemon(true);
       }
       if (t.getPriority() != Thread.NORM_PRIORITY) {
         t.setPriority(Thread.NORM_PRIORITY);
@@ -544,13 +545,7 @@ public class CometdDocumentsService implements Startable {
             try {
               DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
               // Postpone reseting current editor provider for specified delay
-              Timer timer = new Timer();
-              timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                  resetCurrentProviderIfClosed(fileId, workspace, provider);
-                }
-              }, editorProvider.getEditingFinishedDelay());
+              Timer timer = scheduleProviderReset(fileId, workspace, provider, editorProvider.getEditingFinishedDelay());
               editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
             } catch (DocumentEditorProviderNotFoundException e) {
               LOG.error("Cannot find {} editor provider. {}", provider, e.getMessage());
@@ -667,6 +662,9 @@ public class CometdDocumentsService implements Startable {
    * Thread name used for the executor.
    */
   public static final String                  THREAD_PREFIX            = "documents-comet-thread-";
+
+  /** The name of the thread of a closed editor's timer. */
+  static final String                         CLOSED_EDITOR_TIMER_NAME = "documents-closed-editor-timer";
 
   /** The exo bayeux. */
   protected final EXoContinuationBayeux       exoBayeux;
@@ -1035,6 +1033,15 @@ public class CometdDocumentsService implements Startable {
         Thread.currentThread().interrupt();
       }
     }
+    // No new command starts; the ones already submitted, a close of an editor among them, get a bounded time to end
+    eventsHandlers.shutdown();
+    try {
+      if (!eventsHandlers.awaitTermination(STOP_TIMEOUT, TimeUnit.SECONDS)) {
+        LOG.warn("A documents command did not end within {} seconds of the stop", STOP_TIMEOUT);
+      }
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
     editorsContext.removeClients();
   }
 
@@ -1069,6 +1076,33 @@ public class CometdDocumentsService implements Startable {
         editorsContext.removeNode(event.getCometURL());
       }
     });
+  }
+
+  /**
+   * Resets the current editor provider of a document once the delay has
+   * passed, unless an editor opened it again in the meantime. The timer's
+   * thread is a daemon and ends after its run, so that it neither keeps a
+   * stopped server running nor stays behind once the reset is done.
+   *
+   * @param fileId the document id
+   * @param workspace the document's workspace
+   * @param provider the editor provider
+   * @param delay the delay in milliseconds
+   * @return the timer, which a reopened editor cancels
+   */
+  Timer scheduleProviderReset(String fileId, String workspace, String provider, long delay) {
+    Timer timer = new Timer(CLOSED_EDITOR_TIMER_NAME, true);
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        try {
+          resetCurrentProviderIfClosed(fileId, workspace, provider);
+        } finally {
+          timer.cancel();
+        }
+      }
+    }, delay);
+    return timer;
   }
 
   /**
