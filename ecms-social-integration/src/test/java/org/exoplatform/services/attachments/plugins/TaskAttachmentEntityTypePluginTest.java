@@ -16,6 +16,10 @@
  */
 package org.exoplatform.services.attachments.plugins;
 
+import static org.mockito.Mockito.lenient;
+import org.exoplatform.services.cms.documents.security.DocumentGrantOperation;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuard;
+import org.exoplatform.social.core.space.model.Space;
 import junit.framework.TestCase;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -37,17 +41,25 @@ import org.exoplatform.task.dto.TaskDto;
 import org.exoplatform.task.service.ProjectService;
 import org.exoplatform.task.service.TaskService;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
 
+import static org.exoplatform.services.wcm.core.NodetypeConstant.EXO_PRIVILEGEABLE;
 import static org.exoplatform.services.wcm.core.NodetypeConstant.NT_FOLDER;
 import static org.mockito.AdditionalMatchers.aryEq;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -91,13 +103,15 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
             "/platform/users", "member:/spaces/space1")));
 
     // Instantiate the TaskAttachmentEntityTypePlugin
-    TaskAttachmentEntityTypePlugin taskAttachmentEntityTypePlugin = new TaskAttachmentEntityTypePlugin(taskService,
-                                                                                                       projectService,
-                                                                                                       nodeHierarchyCreator,
-                                                                                                       sessionProviderService,
-                                                                                                       repositoryService,
-                                                                                                       mock(IdentityRegistry.class),
-                                                                                                       mock(Authenticator.class));
+    TaskAttachmentEntityTypePlugin taskAttachmentEntityTypePlugin = newPlugin(taskService,
+                                                                              projectService,
+                                                                              nodeHierarchyCreator,
+                                                                              sessionProviderService,
+                                                                              repositoryService,
+                                                                              mock(IdentityRegistry.class),
+                                                                              mock(Authenticator.class),
+                                                                              true,
+                                                                              mock(DocumentSpaceGuard.class));
 
     // Node does not exist, we return the same attachmentId
     String attachmentId = "123456789Azerty";
@@ -152,6 +166,172 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
     assertTrue(taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).contains(attachmentId));
     assertTrue(taskAttachmentEntityTypePlugin.getlinkedAttachments("task", 1, attachmentId).contains(linkNodeIdentifier));
 
+  }
+
+  /**
+   * "Limit Access Management" of the attachment's space refuses the user
+   * attaching it: the task's audience gets no access to it, neither a grant on
+   * the file nor a symlink in its space. Mutant: dropping the decision lets
+   * the grant and the symlink through.
+   */
+  public void testNoGrantNorSymlinkForAMemberTheDocumentSpaceRefuses() throws Exception {
+    Fixture fixture = new Fixture("requester", false);
+    when(fixture.projectService.getParticipator(3L)).thenReturn(new HashSet<>(List.of("member:/spaces/alpha")));
+
+    List<String> linked = fixture.plugin.getlinkedAttachments("task", 7, "file-id");
+
+    assertEquals(List.of("file-id"), linked);
+    verify(fixture.node, never()).setPermission(anyString(), any(String[].class));
+    verify(fixture.linkNode, never()).setPermission(anyString(), any(String[].class));
+  }
+
+  /**
+   * A grant to the document's own space is decided too: on a document its
+   * space restricted, a read grant to the whole space is a new access.
+   * Mutant: exempting the own space writes the grant.
+   */
+  public void testAGrantToTheDocumentsOwnSpaceIsDecidedToo() throws Exception {
+    Fixture fixture = new Fixture("requester", false);
+    when(fixture.node.getPath()).thenReturn("/Groups/spaces/alpha/Documents/manager-file.docx");
+    when(fixture.projectService.getParticipator(3L)).thenReturn(new HashSet<>(List.of("member:/spaces/alpha")));
+
+    List<String> linked = fixture.plugin.getlinkedAttachments("task", 7, "file-id");
+
+    assertEquals(List.of("file-id"), linked);
+    verify(fixture.node, never()).setPermission(anyString(), any(String[].class));
+  }
+
+  /**
+   * A document of the task's own space is linked itself, with no symlink, and
+   * read by the space when its decision allows it. Mutant: deciding the own
+   * space on anything but the document's space creates a symlink.
+   */
+  public void testADocumentOfTheTaskSpaceIsLinkedItself() throws Exception {
+    Fixture fixture = new Fixture("requester", true);
+    when(fixture.node.getPath()).thenReturn("/Groups/spaces/alpha/Documents/manager-file.docx");
+    when(fixture.projectService.getParticipator(3L)).thenReturn(new HashSet<>(List.of("member:/spaces/alpha")));
+
+    List<String> linked = fixture.plugin.getlinkedAttachments("task", 7, "file-id");
+
+    assertEquals(List.of("file-id"), linked);
+    verify(fixture.node).setPermission(eq("member:/spaces/alpha"), any(String[].class));
+    verify(fixture.linkNode, never()).setPermission(anyString(), any(String[].class));
+  }
+
+  /**
+   * The grants are decided on behalf of the user the attachment service names,
+   * never one read from the thread. Mutant: deciding for the thread's user, or
+   * for none, fails the verify.
+   */
+  public void testTheGrantsAreDecidedForTheUserLinkingTheAttachment() throws Exception {
+    Fixture fixture = new Fixture("requester", true);
+    when(fixture.projectService.getParticipator(3L)).thenReturn(new HashSet<>(List.of("member:/spaces/alpha")));
+
+    fixture.plugin.getlinkedAttachments("task", 7, "file-id", "mary");
+
+    verify(fixture.guard).newGrantOperation("mary", DocumentGrantOperation.SOURCE_TASK);
+  }
+
+  /**
+   * A document of another space is not of the task's space because a folder
+   * of its drive is named after that space: the task's space gets a symlink
+   * to it. Mutant: deciding the own space on the path's text links the
+   * document itself.
+   */
+  public void testADocumentUnderAFolderNamedAfterTheTaskSpaceIsNotOfThatSpace() throws Exception {
+    Fixture fixture = new Fixture("requester", true);
+    when(fixture.node.getPath()).thenReturn("/Groups/spaces/alpha/Documents/spaces/beta/manager-file.docx");
+    when(fixture.projectService.getParticipator(3L)).thenReturn(new HashSet<>(List.of("member:/spaces/beta")));
+
+    List<String> linked = fixture.plugin.getlinkedAttachments("task", 7, "file-id");
+
+    assertEquals(List.of("link-id"), linked);
+  }
+
+  /**
+   * An identity the document's access list already holds needs no grant:
+   * nothing is decided for it, so no skipped grant is logged, and its space
+   * gets its link. Mutant: deciding before checking the access list asks the
+   * space, which refuses, and links nothing.
+   */
+  public void testAnIdentityThatAlreadyReadsTheDocumentNeedsNoDecision() throws Exception {
+    Fixture fixture = new Fixture("requester", false);
+    when(fixture.node.isNodeType(EXO_PRIVILEGEABLE)).thenReturn(true);
+    when(fixture.node.getACL()).thenReturn(new AccessControlList("manager",
+                                                                 List.of(new AccessControlEntry("member:/spaces/alpha",
+                                                                                                PermissionType.READ))));
+    when(fixture.projectService.getParticipator(3L)).thenReturn(new HashSet<>(List.of("member:/spaces/alpha")));
+
+    List<String> linked = fixture.plugin.getlinkedAttachments("task", 7, "file-id");
+
+    assertEquals(List.of("link-id"), linked);
+    DocumentGrantOperation grantOperation = fixture.guard.newGrantOperation("requester", DocumentGrantOperation.SOURCE_TASK);
+    verify(grantOperation, never()).canGrant(any(), eq("member:/spaces/alpha"));
+    verify(fixture.node, never()).setPermission(anyString(), any(String[].class));
+  }
+
+  /**
+   * A document without an access list of its own reads its folder's: an
+   * identity the folder's list holds is not exempt from the decision, and a
+   * refusal writes and saves nothing, the folder's entries included. Mutant:
+   * counting the entries of a document without its own list links the
+   * document and makes them its own.
+   */
+  public void testAnEntryReadFromTheFolderDoesNotExemptAnIdentityFromTheDecision() throws Exception {
+    Fixture fixture = new Fixture(null, false);
+    inheritsItsFolderList(fixture.node, "member:/spaces/alpha");
+    when(fixture.projectService.getParticipator(3L)).thenReturn(new HashSet<>(List.of("member:/spaces/alpha")));
+
+    List<String> linked = fixture.plugin.getlinkedAttachments("task", 7, "file-id");
+
+    assertEquals(List.of("file-id"), linked);
+    DocumentGrantOperation grantOperation = fixture.guard.newGrantOperation(null, DocumentGrantOperation.SOURCE_TASK);
+    verify(grantOperation).canGrant(fixture.node, "member:/spaces/alpha");
+    verify(fixture.node, never()).addMixin(EXO_PRIVILEGEABLE);
+    verify(fixture.node, never()).setPermission(anyString(), any(String[].class));
+    verify(fixture.node, never()).save();
+  }
+
+  /**
+   * The first grant gives the document an access list of its own, which
+   * copies its folder's entries: which identities the document holds is read
+   * before it, so the next identity is still decided. Mutant: reading it in
+   * the loop, after the first grant, lets the refused identity through.
+   */
+  public void testTheIdentitiesHeldAreReadBeforeTheFirstGrant() throws Exception {
+    Fixture fixture = new Fixture(null, false);
+    Set<String> participants = new HashSet<>(List.of("member:/spaces/alpha", "member:/spaces/beta"));
+    Iterator<String> order = participants.iterator();
+    String allowed = order.next();
+    String refused = order.next();
+    inheritsItsFolderList(fixture.node, allowed, refused);
+    DocumentGrantOperation grantOperation = fixture.guard.newGrantOperation(null, DocumentGrantOperation.SOURCE_TASK);
+    when(grantOperation.canGrant(fixture.node, allowed)).thenReturn(true);
+    when(fixture.projectService.getParticipator(3L)).thenReturn(participants);
+
+    List<String> linked = fixture.plugin.getlinkedAttachments("task", 7, "file-id");
+
+    assertEquals(List.of("link-id"), linked);
+    verify(grantOperation).canGrant(fixture.node, refused);
+  }
+
+  /**
+   * The node has no access list of its own and reads one holding each
+   * identity's READ entry; adding its own makes it privilegeable.
+   */
+  private static void inheritsItsFolderList(NodeImpl node, String... identities) throws Exception {
+    AtomicBoolean privilegeable = new AtomicBoolean(false);
+    when(node.isNodeType(EXO_PRIVILEGEABLE)).thenAnswer(invocation -> privilegeable.get());
+    when(node.canAddMixin(EXO_PRIVILEGEABLE)).thenAnswer(invocation -> !privilegeable.get());
+    doAnswer(invocation -> {
+      privilegeable.set(true);
+      return null;
+    }).when(node).addMixin(EXO_PRIVILEGEABLE);
+    when(node.getACL()).thenReturn(new AccessControlList("manager",
+                                                         Arrays.stream(identities)
+                                                               .map(identity -> new AccessControlEntry(identity,
+                                                                                                       PermissionType.READ))
+                                                               .toList()));
   }
 
   /**
@@ -253,8 +433,16 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
 
     final IdentityRegistry               identityRegistry = mock(IdentityRegistry.class);
 
+    final boolean grantAllowed;
+
+    final DocumentSpaceGuard             guard            = mock(DocumentSpaceGuard.class);
+
     Fixture(String taskCreator) throws Exception {
       this(taskCreator, taskCreator == null ? null : new Identity(taskCreator));
+    }
+
+    Fixture(String taskCreator, boolean grantAllowed) throws Exception {
+      this(taskCreator, taskCreator == null ? null : new Identity(taskCreator), grantAllowed);
     }
 
     /**
@@ -263,6 +451,11 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
      *          returns it (null for a user it does not hold)
      */
     Fixture(String taskCreator, Identity creatorIdentity) throws Exception {
+      this(taskCreator, creatorIdentity, true);
+    }
+
+    Fixture(String taskCreator, Identity creatorIdentity, boolean grantAllowed) throws Exception {
+      this.grantAllowed = grantAllowed;
       TaskService taskService = mock(TaskService.class);
       NodeHierarchyCreator nodeHierarchyCreator = mock(NodeHierarchyCreator.class);
       RepositoryService repositoryService = mock(RepositoryService.class);
@@ -313,13 +506,56 @@ public class TaskAttachmentEntityTypePluginTest extends TestCase {
       if (taskCreator != null) {
         when(identityRegistry.getIdentity(taskCreator)).thenReturn(creatorIdentity);
       }
-      plugin = new TaskAttachmentEntityTypePlugin(taskService,
-                                                  projectService,
-                                                  nodeHierarchyCreator,
-                                                  sessionProviderService,
-                                                  repositoryService,
-                                                  identityRegistry,
-                                                  authenticator);
+      plugin = newPlugin(taskService,
+                         projectService,
+                         nodeHierarchyCreator,
+                         sessionProviderService,
+                         repositoryService,
+                         identityRegistry,
+                         authenticator,
+                         grantAllowed,
+                         guard);
     }
   }
+
+  private static TaskAttachmentEntityTypePlugin newPlugin(TaskService taskService, // NOSONAR
+                                                          ProjectService projectService,
+                                                          NodeHierarchyCreator nodeHierarchyCreator,
+                                                          SessionProviderService sessionProviderService,
+                                                          RepositoryService repositoryService,
+                                                          IdentityRegistry identityRegistry,
+                                                          Authenticator authenticator,
+                                                          boolean grantAllowed,
+                                                          DocumentSpaceGuard guard) {
+    DocumentGrantOperation grantOperation = mock(DocumentGrantOperation.class);
+    lenient().when(guard.newGrantOperation(any(), anyString())).thenReturn(grantOperation);
+    lenient().when(grantOperation.canGrant(any(), anyString())).thenReturn(grantAllowed);
+    try {
+      // the space of the drive, from the stored path's first spaces segment, as DocumentSpaceGuardTest pins it
+      lenient().when(guard.getDocumentSpace(any())).thenAnswer(invocation -> {
+        String path = ((Node) invocation.getArgument(0)).getPath();
+        if (!path.startsWith("/Groups/spaces/")) {
+          return null;
+        }
+        Space space = new Space();
+        space.setGroupId("/spaces/" + path.substring("/Groups/spaces/".length()).split("/")[0]);
+        return space;
+      });
+    } catch (RepositoryException e) {
+      throw new IllegalStateException(e);
+    }
+    return new TaskAttachmentEntityTypePlugin(taskService,
+                                              projectService,
+                                              nodeHierarchyCreator,
+                                              sessionProviderService,
+                                              repositoryService,
+                                              identityRegistry,
+                                              authenticator) {
+      @Override
+      protected DocumentSpaceGuard getDocumentSpaceGuard() {
+        return guard;
+      }
+    };
+  }
+
 }

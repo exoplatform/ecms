@@ -25,11 +25,13 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import javax.jcr.Item;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
+import javax.xml.namespace.QName;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
@@ -92,6 +94,8 @@ import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
 import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
 import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuard;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -107,6 +111,14 @@ import org.exoplatform.upload.UploadFileValidator;
  */
 @Path("/jcr/")
 public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDavServiceImpl {
+
+  private static final String       LEGACY_WEBDAV_CHANNEL           = "legacyWebDAV";
+
+  private static final String       EXO_PERMISSIONS_LOCAL_NAME      = "permissions";
+
+  private static final String       EXO_PREFIX                      = "exo";
+
+  private static final String       EXO_NAMESPACE_HOST              = "exoplatform.com";
 
   /**
    * Logger.
@@ -589,6 +601,22 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
+    if (changesAccessList(body)) {
+      // The access list is changed through the permission API, never as a property
+      return Response.status(HTTPStatus.FORBIDDEN).build();
+    }
+    return proppatchProperties(repoName, repoPath, lockTokenHeader, ifHeader, uriInfo, body);
+  }
+
+  /**
+   * Applies a property update that changes no access list
+   */
+  protected Response proppatchProperties(String repoName,
+                                         String repoPath,
+                                         String lockTokenHeader,
+                                         String ifHeader,
+                                         UriInfo uriInfo,
+                                         HierarchicalProperty body) {
     return super.proppatch(repoName, repoPath, lockTokenHeader, ifHeader, uriInfo, body);
   }
 
@@ -793,7 +821,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
-    return super.uncheckout(repoName, repoPath, lockTokenHeader, ifHeader);
+    return uncheckoutKeepingAccessList(repoName, repoPath, lockTokenHeader, ifHeader);
   }
 
   @VERSIONCONTROL
@@ -857,6 +885,21 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
+    Response accessManagementResponse = denyAccessManagementIfNeeded(repoPath);
+    if (accessManagementResponse != null) {
+      return accessManagementResponse;
+    }
+    return changeAccessList(repoName, repoPath, lockTokenHeader, ifHeader, body);
+  }
+
+  /**
+   * Applies an ACL request its document's space allows
+   */
+  protected Response changeAccessList(String repoName,
+                                      String repoPath,
+                                      String lockTokenHeader,
+                                      String ifHeader,
+                                      HierarchicalProperty body) {
     return super.acl(repoName, repoPath, lockTokenHeader, ifHeader, body);
   }
 
@@ -1103,6 +1146,100 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   private Response denyAnonymousAccessIfNeeded() {
     boolean isAllowed = !exoFeatureService.isActiveFeature(ANONYMOUS_LEGACY_WEBDAV_FEATURE) && isAnonymousUser();
     return isAllowed ? Response.status(Response.Status.FORBIDDEN).build() : null;
+  }
+
+  /**
+   * Refuses an access list change of a document of a space whose "Limit
+   * Access Management" setting refuses the current user.
+   */
+  private Response denyAccessManagementIfNeeded(String repoPath) {
+    try {
+      Node node = (Node) nodeFinder.getItem(workspaceName(repoPath), path(repoPath), true);
+      if (getDocumentSpaceGuard().canManageAccess(node, getCurrentUser(), LEGACY_WEBDAV_CHANNEL)) {
+        return null;
+      }
+      return Response.status(HTTPStatus.FORBIDDEN).entity(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED).build();
+    } catch (PathNotFoundException e) {
+      return null;
+    } catch (Exception e) {
+      LOG.warn("Access list change refused on {}: the document could not be read", repoPath, e);
+      return Response.status(HTTPStatus.FORBIDDEN).build();
+    }
+  }
+
+  /**
+   * Restores the checked-out version, keeping the document's current access
+   * list when its space's "Limit Access Management" setting refuses the
+   * current user: the restored version must not give back an access the user
+   * may not set.
+   */
+  private Response uncheckoutKeepingAccessList(String repoName, String repoPath, String lockTokenHeader, String ifHeader) {
+    SessionProvider systemSessionProvider = SessionProvider.createSystemProvider();
+    try {
+      Node storedNode;
+      Map<String, List<String>> accessList;
+      try {
+        Node node = (Node) nodeFinder.getItem(workspaceName(repoPath), path(repoPath), true);
+        if (getDocumentSpaceGuard().canManageAccess(node, getCurrentUser(), null)) {
+          return restoreCheckedOutVersion(repoName, repoPath, lockTokenHeader, ifHeader);
+        }
+        Session systemSession = systemSessionProvider.getSession(workspaceName(repoPath), repositoryService.getCurrentRepository());
+        storedNode = (Node) systemSession.getItem(path(repoPath));
+        accessList = getDocumentSpaceGuard().getAccessList(storedNode);
+      } catch (PathNotFoundException e) {
+        return restoreCheckedOutVersion(repoName, repoPath, lockTokenHeader, ifHeader);
+      } catch (Exception e) {
+        LOG.warn("Version restore refused on {}: the document's access list could not be read", repoPath, e);
+        return Response.status(HTTPStatus.FORBIDDEN).build();
+      }
+      Response response = restoreCheckedOutVersion(repoName, repoPath, lockTokenHeader, ifHeader);
+      try {
+        storedNode.refresh(false);
+        getDocumentSpaceGuard().restoreAccessList(storedNode, accessList);
+      } catch (Exception e) {
+        // the version is restored: its access list is not the one the user may set
+        LOG.error("Version of {} restored, but its access list could not be put back", repoPath, e);
+        return Response.serverError().build();
+      }
+      return response;
+    } finally {
+      systemSessionProvider.close();
+    }
+  }
+
+  /**
+   * Restores the checked-out version of a document
+   */
+  protected Response restoreCheckedOutVersion(String repoName, String repoPath, String lockTokenHeader, String ifHeader) {
+    return super.uncheckout(repoName, repoPath, lockTokenHeader, ifHeader);
+  }
+
+  private boolean changesAccessList(HierarchicalProperty property) {
+    if (property == null) {
+      return false;
+    }
+    for (HierarchicalProperty child : property.getChildren()) {
+      QName name = child.getName();
+      if (name != null
+          && EXO_PERMISSIONS_LOCAL_NAME.equals(name.getLocalPart())
+          && (EXO_PREFIX.equals(name.getPrefix()) || StringUtils.contains(name.getNamespaceURI(), EXO_NAMESPACE_HOST))) {
+        return true;
+      }
+      if (changesAccessList(child)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private String getCurrentUser() {
+    ConversationState conversationState = ConversationState.getCurrent();
+    return conversationState == null || conversationState.getIdentity() == null ? null
+                                                                                : conversationState.getIdentity().getUserId();
+  }
+
+  protected DocumentSpaceGuard getDocumentSpaceGuard() {
+    return DocumentSpaceGuard.getInstance();
   }
 
   private boolean isAnonymousUser() {

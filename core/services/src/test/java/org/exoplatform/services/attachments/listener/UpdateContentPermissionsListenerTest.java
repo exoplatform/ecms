@@ -25,6 +25,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
@@ -49,6 +51,8 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.Utils;
+import org.exoplatform.services.cms.documents.security.DocumentGrantOperation;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuard;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -110,7 +114,18 @@ public class UpdateContentPermissionsListenerTest {
     commonsUtils.when(CommonsUtils::getCurrentDomain).thenReturn("https://exoplatform.com");
     portalContainer.when(PortalContainer::getCurrentPortalContainerName).thenReturn("portal");
     utils.when(() -> Utils.getSystemSession(sessionProviderService, repositoryService)).thenReturn(systemSession);
-    listener = new UpdateContentPermissionsListener(repositoryService, attachmentStorage);
+    // The space decisions are UpdateContentPermissionsListenerGrantTest's: here
+    // every grant is allowed
+    DocumentGrantOperation grantOperation = mock(DocumentGrantOperation.class);
+    when(grantOperation.canGrant(any(), anyString())).thenReturn(true);
+    DocumentSpaceGuard documentSpaceGuard = mock(DocumentSpaceGuard.class);
+    when(documentSpaceGuard.newGrantOperation(any(), anyString())).thenReturn(grantOperation);
+    listener = new UpdateContentPermissionsListener(repositoryService, attachmentStorage) {
+      @Override
+      protected DocumentSpaceGuard getDocumentSpaceGuard() {
+        return documentSpaceGuard;
+      }
+    };
   }
 
   @After
@@ -134,7 +149,8 @@ public class UpdateContentPermissionsListenerTest {
     when(systemSession.getNodeByUUID("123456")).thenReturn(uuidImageNode);
     ExtendedNode pathImageNode = mock(ExtendedNode.class);
     when(pathImageNode.getPath()).thenReturn("/Groups/spaces/test/testimage");
-    when(pathImageNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)).thenReturn(true);
+    // once the node has the mixin, the engine does not offer it again
+    when(pathImageNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)).thenReturn(true, false);
     when(systemSession.getItem("/Groups/spaces/test/testimage")).thenReturn(pathImageNode);
     when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_PAGE_VERSIONS")).thenReturn(List.of(attachment("123")));
 

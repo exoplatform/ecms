@@ -37,9 +37,27 @@ public class AttachmentEntityTypePlugin extends BaseComponentPlugin {
    * @param entityId ID of the entity
    * @param attachmentId the original attachment ID that may be changed after calling this function
    * @return the ID of the attachment to link with provided entity
+   * @deprecated override {@link #getlinkedAttachments(String, long, String, String)},
+   *             which names the user linking the attachment; not for removal
    */
+  @Deprecated(since = "7.3.0")
   public List<String> getlinkedAttachments(String entityType, long entityId, String attachmentId) {
     return Collections.singletonList(attachmentId);
+  }
+
+  /**
+   * Returns the ID of the attachment to link with the entity, on behalf of the
+   * user linking it
+   *
+   * @param entityType type of the entity
+   * @param entityId ID of the entity
+   * @param attachmentId the original attachment ID that may be changed after calling this function
+   * @param username the user linking the attachment
+   * @return the ID of the attachment to link with provided entity
+   */
+  @SuppressWarnings("deprecation")
+  public List<String> getlinkedAttachments(String entityType, long entityId, String attachmentId, String username) {
+    return getlinkedAttachments(entityType, entityId, attachmentId);
   }
 
   /**
