@@ -35,6 +35,8 @@ import org.picocontainer.Startable;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.security.DocumentGrantOperation;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuard;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -363,6 +365,9 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
       }
       Map<String, String> templateParams = new HashMap<>();
       concatenateParam(templateParams, "originalActivityId", originalActivityId);
+      DocumentGrantOperation grantOperation =
+                                            getDocumentSpaceGuard().newGrantOperation(posterUsername,
+                                                                                      DocumentGrantOperation.SOURCE_ACTIVITY_SHARE);
       if (originalActivityFilesIds != null && originalActivityFilesIds.length > 0) {
         for (int i = 0; i < originalActivityFilesIds.length; i++) {
           String originalActivityFileWorkspace = "collaboration";
@@ -376,6 +381,14 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
                                                                                           .getSession(originalActivityFileWorkspace,
                                                                                                       repoService.getCurrentRepository());
           Node originalActivityFileNode = originalActivityFileNodeSession.getNodeByIdentifier(originalActivityFilesIds[i]);
+          String target = "*:" + targetSpace.getGroupId();
+          if (!DocumentGrantOperation.holdsRead(originalActivityFileNode, target)
+              && !grantOperation.canGrant(originalActivityFileNode, target)) {
+            // The activity is shared without giving the target space access to
+            // this document; a space whose own READ entry the document holds
+            // needs no decision
+            continue;
+          }
 
           String targetSpaceFileNodeUUID = publishDocumentToSpace(targetSpace.getGroupId(),
                                                                   originalActivityFileNode,
@@ -588,4 +601,9 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
     }
     return StringUtils.EMPTY;
   }
+
+  protected DocumentSpaceGuard getDocumentSpaceGuard() {
+    return DocumentSpaceGuard.getInstance();
+  }
+
 }

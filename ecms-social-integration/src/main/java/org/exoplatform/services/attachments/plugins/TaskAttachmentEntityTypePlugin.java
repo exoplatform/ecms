@@ -16,6 +16,10 @@
  */
 package org.exoplatform.services.attachments.plugins;
 
+import org.exoplatform.services.cms.documents.security.DocumentGrantOperation;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuard;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.space.model.Space;
 import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.services.attachments.service.AttachmentEntityTypePlugin;
 import org.exoplatform.services.attachments.utils.Utils;
@@ -88,7 +92,13 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
   public List<String> getlinkedAttachments(String entityType, long entityId, String attachmentId) {
+    return getlinkedAttachments(entityType, entityId, attachmentId, getCurrentUser());
+  }
+
+  @Override
+  public List<String> getlinkedAttachments(String entityType, long entityId, String attachmentId, String username) {
 
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
     try {
@@ -128,10 +138,23 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
       }
 
       List<String> linkNodes = new ArrayList<>();
+      DocumentGrantOperation grantOperation = getDocumentSpaceGuard().newGrantOperation(username,
+                                                                                        DocumentGrantOperation.SOURCE_TASK);
+      // The space whose drive holds the document: its own space links the
+      // document itself, any other space a symlink
+      Space documentSpace = getDocumentSpace(attachmentNode);
+      Set<String> heldIdentities = getHeldIdentities(attachmentNode, taskPermittedIdentities);
       for (String permittedIdentity : taskPermittedIdentities) {
+        if (!heldIdentities.contains(permittedIdentity) && !grantOperation.canGrant(attachmentNode, permittedIdentity)) {
+          // A grant is due, and the document's space keeps the task's audience
+          // out of its access list
+          continue;
+        }
+        boolean ownSpace = documentSpace != null && permittedIdentity.contains(":/spaces/")
+                           && documentSpace.getGroupId().equals(permittedIdentity.split(":")[1]);
         if (permittedIdentity.contains(":/spaces/")) {
           String groupId = permittedIdentity.split(":")[1];
-          if (attachmentNode.getPath().contains(groupId + "/") && !linkNodes.contains(attachmentId)) {
+          if (ownSpace && !linkNodes.contains(attachmentId)) {
             linkNodes.add(attachmentId);
           } else {
             // Create a symlink in Document app of the space if the task belongs to a
@@ -164,6 +187,25 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
       LOG.error("Error getting linked documents {}", attachmentId, e);
     }
     return Collections.singletonList(attachmentId);
+  }
+
+  protected DocumentSpaceGuard getDocumentSpaceGuard() {
+    return DocumentSpaceGuard.getInstance();
+  }
+
+  private Space getDocumentSpace(Node document) {
+    try {
+      return getDocumentSpaceGuard().getDocumentSpace(document);
+    } catch (RepositoryException e) {
+      LOG.warn("Can't read the space of a task attachment: it is linked through a symlink", e);
+      return null;
+    }
+  }
+
+  private String getCurrentUser() {
+    ConversationState conversationState = ConversationState.getCurrent();
+    return conversationState == null || conversationState.getIdentity() == null ? null
+                                                                                : conversationState.getIdentity().getUserId();
   }
 
   @Override
@@ -216,11 +258,37 @@ public class TaskAttachmentEntityTypePlugin extends AttachmentEntityTypePlugin {
     if (node.canAddMixin(EXO_PRIVILEGEABLE)) {
       node.addMixin(EXO_PRIVILEGEABLE);
     }
-    AccessControlList permsList = ((ExtendedNode) node).getACL();
-    if (permsList == null || permsList.getPermissions(identity).isEmpty()) {
+    if (!isPermitted(node, identity)) {
       ((ExtendedNode) node).setPermission(identity, new String[] { PermissionType.READ });
     }
     node.save();
+  }
+
+  /**
+   * @return the identities whose entry the node's own access list holds: no
+   *         grant is due to them. Read before the first grant gives the node
+   *         a list of its own, which copies its folder's entries as its own; an
+   *         entry the node only reads from its folder does not count
+   */
+  private static Set<String> getHeldIdentities(Node node, Set<String> identities) throws RepositoryException {
+    Set<String> heldIdentities = new HashSet<>();
+    if (node.isNodeType(EXO_PRIVILEGEABLE)) {
+      for (String identity : identities) {
+        if (isPermitted(node, identity)) {
+          heldIdentities.add(identity);
+        }
+      }
+    }
+    return heldIdentities;
+  }
+
+  /**
+   * @return true when the node's access list already holds an entry for the
+   *         identity: no grant is then due to it
+   */
+  private static boolean isPermitted(Node node, String identity) throws RepositoryException {
+    AccessControlList permsList = ((ExtendedNode) node).getACL();
+    return permsList != null && !permsList.getPermissions(identity).isEmpty();
   }
 
   private Node getDestinationFolder(Node rootNode, Long entityId) {

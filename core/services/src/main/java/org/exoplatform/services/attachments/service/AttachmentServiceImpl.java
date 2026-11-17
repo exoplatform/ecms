@@ -124,7 +124,10 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
 
-    List<String> attachmentIds = getAttachmentEntityTypePlugin(entityType).getlinkedAttachments(entityType, entityId, attachmentId);
+    List<String> attachmentIds = getAttachmentEntityTypePlugin(entityType).getlinkedAttachments(entityType,
+                                                                                               entityId,
+                                                                                               attachmentId,
+                                                                                               userIdentity.getRemoteId());
 
     for (String attachment : attachmentIds) {
       attachmentStorage.linkAttachmentToEntity(entityId, entityType, attachment);
