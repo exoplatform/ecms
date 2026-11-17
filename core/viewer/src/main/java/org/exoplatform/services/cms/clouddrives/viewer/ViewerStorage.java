@@ -59,6 +59,7 @@ import org.exoplatform.services.cms.clouddrives.jcr.JCRLocalCloudDrive;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
+import org.picocontainer.Startable;
 
 /**
  * Store cloud file previews in temporary local file on the file system. This
@@ -76,7 +77,7 @@ import org.exoplatform.services.pdfviewer.PDFViewerService;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: ViewerStorage.java 00000 Jul 23, 2015 pnedonosko $
  */
-public class ViewerStorage {
+public class ViewerStorage implements Startable {
 
   /** The Constant LOG. */
   private static final Log   LOG                 = ExoLogger.getLogger(ViewerStorage.class);
@@ -755,6 +756,9 @@ public class ViewerStorage {
 
   }
 
+  /** The scheduler of the evicter, ended with the container. */
+  protected final ScheduledExecutorService                evicter;
+
   /** The spool. */
   protected final ConcurrentHashMap<FileKey, ContentFile> spool    = new ConcurrentHashMap<FileKey, ContentFile>();
 
@@ -792,9 +796,31 @@ public class ViewerStorage {
       }
     }
 
-    // start evicter finally
-    ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    executor.schedule(new Evicter(), 30, TimeUnit.MINUTES);
+    // start evicter finally, on a daemon thread: it never keeps the process
+    // alive once the server stops
+    evicter = Executors.newSingleThreadScheduledExecutor(task -> {
+      Thread thread = new Thread(task, "CloudDrive-viewer-evicter");
+      thread.setDaemon(true);
+      return thread;
+    });
+    evicter.schedule(new Evicter(), 30, TimeUnit.MINUTES);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void start() {
+    // The evicter is scheduled from the construction
+  }
+
+  /**
+   * Ends the evicter with the container: the storage is cleaned when the node
+   * starts again.
+   */
+  @Override
+  public void stop() {
+    evicter.shutdownNow();
   }
 
   /**
