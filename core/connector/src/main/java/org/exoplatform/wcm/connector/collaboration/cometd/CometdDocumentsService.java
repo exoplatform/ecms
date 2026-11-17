@@ -1079,14 +1079,6 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
-   * Resets the current provider of a document whose last editor of the
-   * provider closed, unless an editor of it opened since, on any node
-   *
-   * @param fileId the file id
-   * @param workspace the workspace
-   * @param provider the provider
-   */
-  /**
    * Resets the current editor provider of a document once the delay has
    * passed, unless an editor opened it again in the meantime. The timer's
    * thread is a daemon and ends after its run, so that it neither keeps a
@@ -1113,6 +1105,14 @@ public class CometdDocumentsService implements Startable {
     return timer;
   }
 
+  /**
+   * Resets the current provider of a document whose last editor of the
+   * provider closed, unless an editor of it opened since, on any node
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @param provider the provider
+   */
   void resetCurrentProviderIfClosed(String fileId, String workspace, String provider) {
     if (editorsContext.getOpenedEditorsCount(fileId, provider) > 0) {
       return;
