@@ -41,7 +41,7 @@
   <style>
 
 .UIPDFViewerContainer {
-	border: 1px solid #d1d1d1;
+	border: 1px solid var(--skinGreyLighten2, #d1d1d1);
 } 
 
 .UIPDFViewerContainer .PDFViewerBar {
@@ -112,7 +112,7 @@
 	cursor: pointer;
 	float: right;
 	margin-right: 8px;
-	color: #4f4f4f;
+	color: var(--allPagesBaseColorDark, #4f4f4f);
 	padding-left: 22px;
 }
 
@@ -135,19 +135,19 @@
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .PageNumber input{
 	width: 28px;
-	border: 1px solid #c7c7c7;
+	border: 1px solid var(--skinGreyLighten2, #c7c7c7);
 	text-align: center;
 }
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .SeparatorLine{
 	height: 28px;
-	border-left: 1px solid #c7c7c7;
+	border-left: 1px solid var(--skinGreyLighten2, #c7c7c7);
 }
 
 .UIPDFViewerContainer .InfoPopup{
 	padding: 5px;
-	background: #fafafa;
-	border: 1px solid #c7c7c7;
+	background: var(--skinGreyLighten4, #fafafa);
+	border: 1px solid var(--skinGreyLighten2, #c7c7c7);
 }
 
 .UIPDFViewerContainer .InfoPopup .metaKey{

@@ -178,7 +178,7 @@
   padding-bottom: 5px;
   color: #0e396c;
   background: url('/eXoWCMResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
-  border: 1px solid #cbcbcb;
+  border: 1px solid var(--skinGreyLighten2, #cbcbcb);
   margin: auto;
 }
 
