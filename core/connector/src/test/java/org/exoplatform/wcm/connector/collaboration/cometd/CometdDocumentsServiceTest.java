@@ -311,6 +311,35 @@ public class CometdDocumentsServiceTest {
   }
 
   @Test
+  public void testAStopInterruptedWhileWaitingKeepsTheInterruptOfItsThread() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    CountDownLatch started = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
+    service.eventsHandlers.submit(() -> {
+      started.countDown();
+      try {
+        release.await(5, TimeUnit.SECONDS);
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+      }
+    });
+    assertTrue(started.await(5, TimeUnit.SECONDS));
+    long start = System.nanoTime();
+    Thread.currentThread().interrupt();
+    try {
+      service.stop();
+      assertTrue("A stop interrupted while waiting for the commands must keep the interrupt of its thread",
+                 Thread.interrupted());
+      long waited = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - start);
+      assertTrue("An interrupted stop must not wait for the commands", waited < CometdDocumentsService.STOP_TIMEOUT);
+    } finally {
+      Thread.interrupted();
+      release.countDown();
+    }
+    assertTrue(service.eventsHandlers.awaitTermination(5, TimeUnit.SECONDS));
+  }
+
+  @Test
   public void testTheTimerOfAClosedEditorRunsOnADaemonThread() {
     CometdDocumentsService service = service(mock(DocumentService.class));
     Timer timer = service.scheduleProviderReset(FILE_ID, WORKSPACE, PROVIDER, TimeUnit.MINUTES.toMillis(10));
