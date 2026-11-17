@@ -266,8 +266,8 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Puts the editors open on this node again, for a node that joins: it
-     * starts with no editor, or removed them when it saw this node leave
+     * Puts the editors open on this node again, for a node that joins, or one
+     * that removed them when it saw this node leave
      */
     public void putClients() {
       clients.forEach(this::putEditor);
