@@ -59,7 +59,12 @@ public class JCRNodeListener implements Action {
 
   private static final String                   DEFAULT_CHARSET                      = Charset.defaultCharset().name();
 
-  private static final ScheduledExecutorService SCHEDULER                            = new ScheduledThreadPoolExecutor(0);        // NOSONAR
+  private static final ScheduledExecutorService SCHEDULER                            = new ScheduledThreadPoolExecutor(0, runnable -> { // NOSONAR
+    // A delayed event left pending when the server stops does not keep its JVM alive
+    Thread thread = new Thread(runnable, "ecms-analytics-node-listener");
+    thread.setDaemon(true);
+    return thread;
+  });
 
   private static final Executor                 DEFAULT_DELAYED_EXECUTOR             = delayedExecutor(3, TimeUnit.SECONDS);
 
