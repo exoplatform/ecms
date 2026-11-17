@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.exoplatform.commons.api.settings.SettingService;
 import org.exoplatform.commons.api.settings.SettingValue;
@@ -66,6 +67,23 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   /** The organization service. */
   protected OrganizationService organizationService;
 
+  /**
+   * The last activation this node read from the settings store or wrote to
+   * it. The store answers null both for an absent key and for a failed read,
+   * so the two cannot be told apart: once a value is known, a null answer keeps
+   * it (an administrator's restriction stays enforced during a store failure)
+   * and the editor's defaults apply only while nothing is known. Nothing is
+   * written on such a null either, so a failed read never replaces a stored
+   * value.
+   */
+  private volatile Boolean      lastActive;
+
+  /**
+   * The last permissions this node read from the settings store or wrote to
+   * it, see {@link #lastActive}, as an unmodifiable copy.
+   */
+  private final AtomicReference<List<String>> lastPermissions = new AtomicReference<>();
+
 
   /**
    * Instantiates a new document editor provider impl.
@@ -83,11 +101,17 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
     this.settingService = settingService;
     this.identityManager = identityManager;
     this.organizationService = organizationService;
+    // An absent key and a failed read both answer null: storing the editor's
+    // defaults on a null would replace an administrator's choice whenever the
+    // read fails. Nothing is stored, and the reads fall back to the defaults
+    // while nothing is known
     Boolean storedActive = getStoredActive();
+    if (storedActive != null) {
+      lastActive = storedActive;
+    }
     List<String> storedPermissions = getStoredPermissions();
-    if (storedActive == null || storedPermissions == null) {
-      storeActive(editor.isActive());
-      storePermissions(editor.getPermissions());
+    if (storedPermissions != null) {
+      lastPermissions.set(Collections.unmodifiableList(new ArrayList<>(storedPermissions)));
     }
   }
 
@@ -99,7 +123,12 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   @Override
   public boolean isActive() {
     Boolean storedActive = getStoredActive();
-    return storedActive != null ? storedActive : editor.isActive();
+    if (storedActive != null) {
+      lastActive = storedActive;
+      return storedActive;
+    }
+    Boolean lastKnownActive = lastActive;
+    return lastKnownActive != null ? lastKnownActive : editor.isActive();
   }
 
   /**
@@ -110,6 +139,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   @Override
   public void updateActive(boolean active) {
     storeActive(active);
+    lastActive = active;
   }
 
   /**
@@ -120,7 +150,13 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
   @Override
   public List<String> getPermissions() {
     List<String> storedPermissions = getStoredPermissions();
-    return Collections.unmodifiableList(storedPermissions != null ? storedPermissions : editor.getPermissions());
+    if (storedPermissions != null) {
+      List<String> permissions = Collections.unmodifiableList(new ArrayList<>(storedPermissions));
+      lastPermissions.set(permissions);
+      return permissions;
+    }
+    List<String> lastKnownPermissions = lastPermissions.get();
+    return lastKnownPermissions != null ? lastKnownPermissions : Collections.unmodifiableList(editor.getPermissions());
   }
 
   /**
@@ -140,6 +176,7 @@ public class DocumentEditorProviderImpl implements DocumentEditorProvider {
       updatedPermissions.add(permission);
     }
     storePermissions(updatedPermissions);
+    lastPermissions.set(Collections.unmodifiableList(new ArrayList<>(updatedPermissions)));
   }
 
   /**

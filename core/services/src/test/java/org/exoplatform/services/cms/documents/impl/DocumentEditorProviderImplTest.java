@@ -22,6 +22,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -172,5 +174,87 @@ public class DocumentEditorProviderImplTest {
     assertTrue(provider.isActive());
     assertEquals(Arrays.asList("*"), provider.getPermissions());
     assertTrue(provider.isAvailableForUser(user("john")));
+  }
+
+  @Test
+  public void lastReadRestrictionIsKeptWhenTheStoreFailsAfterwards() throws Exception {
+    withUserACL();
+    SettingService settingService = sharedSettingService();
+    DocumentEditorProviderImpl nodeA = provider(settingService);
+    DocumentEditorProviderImpl nodeB = provider(settingService);
+    nodeA.updatePermissions(Arrays.asList("john"));
+    assertTrue(nodeB.isAvailableForUser(user("john")));
+    assertFalse(nodeB.isAvailableForUser(user("mary")));
+
+    store.clear(); // the store now answers null, as it does on a failed read
+
+    assertTrue(nodeB.isActive());
+    assertEquals(Arrays.asList("john"), nodeB.getPermissions());
+    assertTrue(nodeB.isAvailableForUser(user("john")));
+    assertFalse(nodeB.isAvailableForUser(user("mary")));
+  }
+
+  @Test
+  public void lastReadDeactivationIsKeptWhenTheStoreFailsAfterwards() {
+    withUserACL();
+    SettingService settingService = sharedSettingService();
+    DocumentEditorProviderImpl nodeA = provider(settingService);
+    DocumentEditorProviderImpl nodeB = provider(settingService);
+    nodeA.updateActive(false);
+    assertFalse(nodeB.isActive());
+
+    store.clear();
+
+    assertFalse(nodeB.isActive());
+    assertFalse(nodeB.isAvailableForUser(user("john")));
+  }
+
+  @Test
+  public void providerKeepsWhatItReadWhenItStartedWhenTheStoreFailsAfterwards() throws Exception {
+    withUserACL();
+    SettingService settingService = sharedSettingService();
+    DocumentEditorProviderImpl nodeA = provider(settingService);
+    nodeA.updatePermissions(Arrays.asList("john"));
+    nodeA.updateActive(false);
+    DocumentEditorProviderImpl nodeB = provider(settingService);
+    store.clear();
+
+    assertFalse(nodeB.isActive());
+    assertEquals(Arrays.asList("john"), nodeB.getPermissions());
+    assertFalse(nodeB.isAvailableForUser(user("mary")));
+  }
+
+  @Test
+  public void providerThatStartsDuringAStoreFailureStoresNothingAndUsesTheDefaults() throws Exception {
+    withUserACL();
+    SettingService settingService = sharedSettingService();
+    provider(settingService).updatePermissions(Arrays.asList("john"));
+    SettingValue<?> restriction = store.get("documents.editors.onlyoffice.permissions");
+    // A store whose reads fail, as null answers, while its writes would go through
+    SettingService failingReads = mock(SettingService.class);
+
+    DocumentEditorProviderImpl nodeB = provider(failingReads);
+
+    verify(failingReads, never()).set(any(Context.class), any(Scope.class), anyString(), any(SettingValue.class));
+    assertEquals(restriction, store.get("documents.editors.onlyoffice.permissions"));
+    assertTrue(nodeB.isActive());
+    assertEquals(Arrays.asList("*"), nodeB.getPermissions());
+  }
+
+  @Test
+  public void ownUpdateIsKeptWhenTheStoreFailsAfterwards() throws Exception {
+    withUserACL();
+    SettingService settingService = sharedSettingService();
+    DocumentEditorProviderImpl nodeB = provider(settingService);
+    assertEquals(Arrays.asList("*"), nodeB.getPermissions());
+    assertTrue(nodeB.isActive());
+
+    nodeB.updatePermissions(Arrays.asList("john"));
+    nodeB.updateActive(false);
+    store.clear();
+
+    assertEquals(Arrays.asList("john"), nodeB.getPermissions());
+    assertFalse(nodeB.isActive());
+    assertFalse(nodeB.isAvailableForUser(user("john")));
   }
 }
