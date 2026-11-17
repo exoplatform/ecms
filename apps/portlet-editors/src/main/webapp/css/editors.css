@@ -39,7 +39,7 @@
 }
 
 .editorButtonContainer .dropdown-container .dropdown-toggle:focus { 
-  background-color: #e7e7e7; 
+  background-color: var(--skinGreyLighten3, #e7e7e7); 
   border: none !important;
   outline:none;
 }
@@ -83,7 +83,7 @@
   display: inline;
   border: 1px solid gray;
   padding: 12px 20px;
-  border: 1px solid #e1e8ee;
+  border: 1px solid var(--skinGreyLighten2, #e1e8ee);
   border-radius: 2px;
   position: relative;
   top: 1px;
@@ -91,7 +91,7 @@
 }
 
 .detailContainer .editorButtonContainer a {
- color: #4d5466;
+ color: var(--allPagesBaseColorDark, #4d5466);
 }
    
 .detailContainer .editorButtonContainer button,
@@ -104,7 +104,7 @@
 }
 
 .previewBtn .editorButtonContainer .dropdown-menu a{
-  color: #3a3a3a;
+  color: var(--allPagesBaseColorDark, #3a3a3a);
 }
 
 .detailContainer .editors-placeholder {
@@ -119,7 +119,7 @@
 .editorButtonContainer .disabledProvider a,
 .editorButtonContainer .disabledProvider a > [class^="uiIcon"]:before {
   cursor: not-allowed;
-  color: #ADADAD !important;
+  color: var(--allPagesBaseColorMedium, #ADADAD) !important;
   background-image: none;
 }
 
@@ -128,7 +128,7 @@
 .editorButtonContainer .dropdown-container .dropdown-menu li.disabledProvider a:hover > [class^="uiIcon"]:before,
 .editorButtonContainer .dropdown-container .dropdown-menu li.disabledProvider a:focus > [class^="uiIcon"]:before {
   background-image: none;
-  color: #ADADAD;
+  color: var(--allPagesBaseColorMedium, #ADADAD);
 }
 
 #UIActionBar .editorButtonContainer {
@@ -160,7 +160,7 @@
 }
 
 .editors-placeholder .editorButtonContainer {
-  background: #ffffff;
+  background: var(--allPagesBaseBackground, #ffffff);
 }
 
 .editors-placeholder .editorButtonContainer .dropdown-toggle:focus,
@@ -183,15 +183,15 @@
 }
 
 #editorIdleModalContent {
-  background-color: #fefefe;
+  background-color: var(--allPagesBaseBackground, #fefefe);
   margin: 15% auto; 
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid var(--allPagesBorderColorLight, #888);
   width: 45%; 
 }
 
 #editorIdleModalClose {
-  color: #aaa;
+  color: var(--allPagesBaseColorMedium, #aaa);
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -199,7 +199,7 @@
 
 #editorIdleModalClose:hover,
 #editorIdleModalClose:focus {
-  color: black;
+  color: var(--allPagesBaseColor, black);
   text-decoration: none;
   cursor: pointer;
 }
