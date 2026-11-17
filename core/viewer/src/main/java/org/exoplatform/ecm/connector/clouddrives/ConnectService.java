@@ -64,6 +64,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.picocontainer.Startable;
 
 /**
  * REST service responsible for connection of cloud drives to local JCR nodes.
@@ -83,7 +84,7 @@ import org.exoplatform.services.security.ConversationState;
  */
 @Path("/clouddrive/connect")
 @Produces(MediaType.APPLICATION_JSON)
-public class ConnectService implements ResourceContainer {
+public class ConnectService implements ResourceContainer, Startable {
 
   /** The Constant CONNECT_COOKIE. */
   public static final String    CONNECT_COOKIE         = "cloud-drive-connect-id";
@@ -498,8 +499,30 @@ public class ConnectService implements ResourceContainer {
     this.sessionProviders = sessionProviders;
     this.finder = finder;
 
-    this.connectsCleaner = Executors.newScheduledThreadPool(1);
+    // A daemon thread: the cleaner never keeps the process alive once the server stops
+    this.connectsCleaner = Executors.newSingleThreadScheduledExecutor(task -> {
+      Thread thread = new Thread(task, "CloudDrive-connects-cleaner");
+      thread.setDaemon(true);
+      return thread;
+    });
     this.connectsCleaner.schedule(new Cleaner(), CONNECT_COOKIE_EXPIRE, TimeUnit.SECONDS);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void start() {
+    // The cleaner is scheduled from the construction
+  }
+
+  /**
+   * Ends the cleaner with the container: the connects it would remove live in
+   * this node's memory, which the stop drops.
+   */
+  @Override
+  public void stop() {
+    connectsCleaner.shutdownNow();
   }
 
   /**
