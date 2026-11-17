@@ -24,15 +24,21 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Timer;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
 import java.util.concurrent.RunnableScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.cometd.bayeux.MarkedReference;
 import org.cometd.bayeux.server.BayeuxServer;
@@ -271,6 +277,68 @@ public class CometdDocumentsServiceTest {
   }
 
   @Test
+  public void testTheCommandsRunOnDaemonThreadsThatEndWithTheService() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    Future<Boolean> daemon = service.eventsHandlers.submit(() -> Thread.currentThread().isDaemon());
+    assertTrue(daemon.get(5, TimeUnit.SECONDS));
+
+    service.stop();
+
+    assertTrue(service.eventsHandlers.isTerminated());
+  }
+
+  @Test
+  public void testTheStopWaitsForACommandAlreadySubmitted() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    CountDownLatch started = new CountDownLatch(1);
+    AtomicBoolean ended = new AtomicBoolean();
+    service.eventsHandlers.submit(() -> {
+      started.countDown();
+      try {
+        Thread.sleep(300);
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+        return;
+      }
+      ended.set(true);
+    });
+    assertTrue(started.await(5, TimeUnit.SECONDS));
+
+    service.stop();
+
+    assertTrue(ended.get());
+    assertTrue(service.eventsHandlers.isTerminated());
+  }
+
+  @Test
+  public void testTheTimerOfAClosedEditorRunsOnADaemonThread() {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    Timer timer = service.scheduleProviderReset(FILE_ID, WORKSPACE, PROVIDER, TimeUnit.MINUTES.toMillis(10));
+    try {
+      List<Thread> threads = timerThreads();
+      assertEquals(1, threads.size());
+      assertTrue(threads.get(0).isDaemon());
+    } finally {
+      timer.cancel();
+    }
+  }
+
+  @Test
+  public void testTheTimerOfAClosedEditorEndsAfterItsReset() throws Exception {
+    CometdDocumentsService service = spy(service(mock(DocumentService.class)));
+    doNothing().when(service).resetCurrentProviderIfClosed(FILE_ID, WORKSPACE, PROVIDER);
+
+    service.scheduleProviderReset(FILE_ID, WORKSPACE, PROVIDER, 0);
+
+    verify(service, timeout(5000)).resetCurrentProviderIfClosed(FILE_ID, WORKSPACE, PROVIDER);
+    long deadline = System.currentTimeMillis() + 5000;
+    while (!timerThreads().isEmpty() && System.currentTimeMillis() < deadline) {
+      Thread.sleep(20);
+    }
+    assertTrue(timerThreads().isEmpty());
+  }
+
+  @Test
   public void testTheEditorsAreRestoredPeriodically() {
     CometdDocumentsService service = service(mock(DocumentService.class));
     service.editorsContext.addClient("session1", FILE_ID, PROVIDER, WORKSPACE);
@@ -387,6 +455,15 @@ public class CometdDocumentsServiceTest {
     verify(opener).deliver(any(), eq(CometdDocumentsService.CHANNEL_NAME + FILE_ID), any(Object.class), any());
     verify(bayeux, never()).createChannelIfAbsent(any());
     verify(bayeux, never()).getChannel(any());
+  }
+
+  private static List<Thread> timerThreads() {
+    return Thread.getAllStackTraces()
+                 .keySet()
+                 .stream()
+                 .filter(thread -> thread.isAlive()
+                     && CometdDocumentsService.CLOSED_EDITOR_TIMER_NAME.equals(thread.getName()))
+                 .toList();
   }
 
   private CometdDocumentsService service(DocumentService documentService) {
