@@ -25,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.services.attachments.listener.NoteAttachmentUpdateListenerTest;
+import org.exoplatform.services.attachments.listener.UpdateContentPermissionsListenerGrantTest;
 import org.exoplatform.services.attachments.listener.UpdateContentPermissionsListenerTest;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
 import org.exoplatform.services.attachments.service.AttachmentServiceImplTest;
@@ -33,7 +34,10 @@ import org.exoplatform.services.attachments.utils.EntityBuilderTest;
 import org.exoplatform.services.cms.documents.TestDocumentService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuardRepositoryTest;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuardTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
+import org.exoplatform.services.cms.webdav.WebDavServiceImplAccessListTest;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
 import org.exoplatform.services.ecm.dms.configuration.TestDMSConfigurationService;
 import org.exoplatform.services.ecm.dms.documents.TestTrashService;
@@ -83,7 +87,11 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   AttachmentStorageImplTest.class,
   NoteAttachmentUpdateListenerTest.class,
   UpdateContentPermissionsListenerTest.class,
-  DocumentServiceImplTest.class
+  DocumentServiceImplTest.class,
+  DocumentSpaceGuardTest.class,
+  DocumentSpaceGuardRepositoryTest.class,
+  UpdateContentPermissionsListenerGrantTest.class,
+  WebDavServiceImplAccessListTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
