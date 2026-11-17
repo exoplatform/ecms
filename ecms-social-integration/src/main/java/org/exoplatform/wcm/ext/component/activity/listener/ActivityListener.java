@@ -2,6 +2,8 @@ package org.exoplatform.wcm.ext.component.activity.listener;
 
 import org.apache.commons.lang3.StringUtils;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
+import org.exoplatform.services.cms.documents.security.DocumentGrantOperation;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuard;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -104,14 +106,20 @@ public class ActivityListener extends ActivityListenerPlugin {
           LOG.warn("Error getting memberships by user (" + currentUserId + ") and group (" + targetSpace.getGroupId() + ")", e);
         }
         if (memberships != null) {
+          DocumentGrantOperation grantOperation =
+                                                getDocumentSpaceGuard().newGrantOperation(currentUserId,
+                                                                                          DocumentGrantOperation.SOURCE_ACTIVITY_POST);
           for (String nodeUuid : uuidNodes) {
             try {
               node = session.getNodeByUUID(nodeUuid);
-
               for (Membership membership : memberships) {
                 organizationalIdentity = new MembershipEntry(membership.getGroupId(), membership.getMembershipType()).toString();
 
                 if (!PermissionUtil.hasPermissions(node, organizationalIdentity, permissions)) {
+                  // a grant is due: the document's space decides it
+                  if (!grantOperation.canGrant(node, "*:" + targetSpace.getGroupId())) {
+                    break;
+                  }
                   // publish to shared folder
                   shareDocumentService.publishDocumentToSpace(targetSpace.getGroupId(),
                                                               node,
@@ -152,4 +160,9 @@ public class ActivityListener extends ActivityListenerPlugin {
   @Override
   public void likeComment(ActivityLifeCycleEvent activityLifeCycleEvent) {
   }
+
+  protected DocumentSpaceGuard getDocumentSpaceGuard() {
+    return DocumentSpaceGuard.getInstance();
+  }
+
 }

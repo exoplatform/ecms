@@ -25,11 +25,15 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.Utils;
+import org.exoplatform.services.cms.documents.security.DocumentGrantOperation;
+import org.exoplatform.services.cms.documents.security.DocumentSpaceGuard;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.space.model.Space;
@@ -41,8 +45,10 @@ import javax.jcr.Session;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,7 +67,11 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
 
   public static final String           AUDIENCE             = "audience";
 
+  /** The user acting on the content, added to the event data by its broadcaster. */
+  public static final String           USERNAME             = "username";
+
   private static final String          IMAGE_SRC_REGEX      = "src=\"/portal/rest/images/?(.+)?\"";
+
 
   public UpdateContentPermissionsListener(RepositoryService repositoryService, AttachmentStorage attachmentStorage) {
     this.repositoryService = repositoryService;
@@ -90,12 +100,21 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
       if (content != null) {
         attachmentsIds.addAll(extractImageAttachmentUuidOrPath(content));
       }
-      updateNodePermissions(attachmentsIds, audience, spaces, sessionProviderService);
+      String username = (String) data.get(USERNAME);
+      updateNodePermissions(attachmentsIds,
+                            audience,
+                            spaces,
+                            sessionProviderService,
+                            getDocumentSpaceGuard().newGrantOperation(username, DocumentGrantOperation.SOURCE_NEWS));
     } finally {
       // Give the rest of the caller's thread back the session provider it had
       sessionProviderService.setSessionProvider(null, currentSessionProvider);
       sessionProvider.close();
     }
+  }
+
+  protected DocumentSpaceGuard getDocumentSpaceGuard() {
+    return DocumentSpaceGuard.getInstance();
   }
 
   private List<String> extractImageAttachmentUuidOrPath(String content) {
@@ -136,7 +155,11 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
     return imageNodeIds;
   }
 
-  private void updateNodePermissions(List<String> identifiers, String audience, List<Space> spaces, SessionProviderService sessionProviderService) throws RepositoryException {
+  private void updateNodePermissions(List<String> identifiers,
+                                     String audience,
+                                     List<Space> spaces,
+                                     SessionProviderService sessionProviderService,
+                                     DocumentGrantOperation grantOperation) throws RepositoryException {
 
     Session session = Utils.getSystemSession(sessionProviderService, repositoryService);
     if (!CollectionUtils.isEmpty(identifiers)) {
@@ -149,24 +172,76 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
           attachmentNode = (Node) session.getItem(URLDecoder.decode(attachmentId, StandardCharsets.UTF_8));
         }
         if (!attachmentNode.getPath().startsWith(QUARANTINE)) {
-          if (attachmentNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
-            attachmentNode.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
-          }
+          // A target whose own READ entry the node holds is due no grant:
+          // nothing is decided for it. The node gets an access list of its
+          // own only for a write: adding one copies its folder's entries as
+          // its own, which a refused grant must not leave behind
+          Set<String> heldTargets = getHeldTargets(attachmentNode, spaces, audience);
           if (spaces != null) {
             for (Space space : spaces) {
-              ((ExtendedNode) attachmentNode).setPermission("*:" + space.getGroupId(), new String[] { PermissionType.READ });
-              attachmentNode.save();
+              String target = "*:" + space.getGroupId();
+              if (heldTargets.contains(target) || grantOperation.canGrant(attachmentNode, target)) {
+                grantRead(attachmentNode, target);
+              }
             }
           }
-          if (audience.equals("all")) {
-            ((ExtendedNode) attachmentNode).setPermission("any", new String[] { PermissionType.READ });
-            attachmentNode.save();
-          } else {
-            ((ExtendedNode) attachmentNode).removePermission("any", PermissionType.READ);
+          // An event without an audience, a new article's draft for one,
+          // leaves the attachment's "any" entry as it is
+          if ("all".equals(audience)) {
+            if (heldTargets.contains(IdentityConstants.ANY) || grantOperation.canGrant(attachmentNode, IdentityConstants.ANY)) {
+              grantRead(attachmentNode, IdentityConstants.ANY);
+            }
+          } else if (audience != null && readsAny(attachmentNode)) {
+            // Removing an entry the node reads from its folder gives it an
+            // access list of its own, without that entry
+            addAccessList(attachmentNode);
+            ((ExtendedNode) attachmentNode).removePermission(IdentityConstants.ANY, PermissionType.READ);
             attachmentNode.save();
           }
         }
       }
     }
+  }
+
+  private static void grantRead(Node node, String target) throws RepositoryException {
+    addAccessList(node);
+    ((ExtendedNode) node).setPermission(target, new String[] { PermissionType.READ });
+    node.save();
+  }
+
+  /**
+   * Gives the node an access list of its own, a copy of its folder's, when it
+   * has none
+   */
+  private static void addAccessList(Node node) throws RepositoryException {
+    if (node.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      node.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+    }
+  }
+
+  /**
+   * @return true when the node's access list, its own or its folder's, lets
+   *         "any" read it
+   */
+  private static boolean readsAny(Node node) throws RepositoryException {
+    AccessControlList accessList = ((ExtendedNode) node).getACL();
+    return accessList != null && accessList.getPermissions(IdentityConstants.ANY).contains(PermissionType.READ);
+  }
+
+  /**
+   * @return the targets of the grants whose own READ entry the node holds,
+   *         read before the node gets an access list of its own: adding one
+   *         copies its folder's entries as the node's own
+   */
+  private static Set<String> getHeldTargets(Node node, List<Space> spaces, String audience) {
+    Set<String> targets = new HashSet<>();
+    if (spaces != null) {
+      spaces.forEach(space -> targets.add("*:" + space.getGroupId()));
+    }
+    if ("all".equals(audience)) {
+      targets.add(IdentityConstants.ANY);
+    }
+    targets.removeIf(target -> !DocumentGrantOperation.holdsRead(node, target));
+    return targets;
   }
 }
