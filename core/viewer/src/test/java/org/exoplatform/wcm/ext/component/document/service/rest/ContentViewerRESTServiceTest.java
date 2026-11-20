@@ -139,7 +139,10 @@ public class ContentViewerRESTServiceTest {
     when(session.getNodeByIdentifier("uuid")).thenThrow(new ItemNotFoundException());
     ConversationState.setCurrent(new ConversationState(new Identity("mary")));
 
-    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), getContent().getStatus());
+    Response response = getContent();
+
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    assertNoStore(response);
   }
 
   @Test
