@@ -17,6 +17,8 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,21 +27,36 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
+import java.security.AccessControlException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
+import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.RunnableScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.jcr.Session;
+
+import org.cometd.annotation.Service;
 import org.cometd.bayeux.MarkedReference;
 import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.ServerChannel;
@@ -50,13 +67,23 @@ import org.cometd.server.BayeuxServerImpl;
 import org.cometd.server.http.JSONHttpTransport;
 import org.junit.Before;
 import org.mockito.ArgumentCaptor;
+import org.mockito.MockedStatic;
 import org.junit.Test;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
 
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cache.SimpleExoCache;
+import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.wcm.utils.RepositoryConsumer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsService.EditorsContext;
 
 /**
@@ -484,6 +511,174 @@ public class CometdDocumentsServiceTest {
     verify(opener).deliver(any(), eq(CometdDocumentsService.CHANNEL_NAME + FILE_ID), any(Object.class), any());
     verify(bayeux, never()).createChannelIfAbsent(any());
     verify(bayeux, never()).getChannel(any());
+  }
+
+  @Test
+  public void testADocumentOpenedEventIsHandledOnlyForTheUserOfTheSendingSession() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    CometdDocumentsService service = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), true);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+
+    service.service.subscribeDocuments(johnSession, openedEvent("mary"), FILE_ID);
+    assertEquals("an event naming another user than the sender's is ignored", 0, recorded(service).size());
+
+    service.service.subscribeDocuments(johnSession, openedEvent(null), FILE_ID);
+    assertEquals("an event naming no user is ignored", 0, recorded(service).size());
+
+    service.service.subscribeDocuments(johnSession, openedEvent("john"), FILE_ID);
+    assertEquals("the sender's own event is handled", 1, recorded(service).size());
+  }
+
+  @Test
+  public void testTheEditorIsRecordedOnlyForAUserWhoMayEditTheDocument() throws Exception {
+    DocumentService documentService = mock(DocumentService.class);
+    DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
+    when(editorProvider.isAvailableForUser(any())).thenReturn(true);
+    when(editorProvider.getProviderName()).thenReturn(PROVIDER);
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+    when(documentService.getDocumentEditorProviders()).thenReturn(List.of(editorProvider));
+    // No editor is recorded for the document yet
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenReturn(null);
+    IdentityRegistry identityRegistry = mock(IdentityRegistry.class);
+    when(identityRegistry.getIdentity("john")).thenReturn(new Identity("john"));
+    ServerSession opener = mock(ServerSession.class);
+
+    CometdDocumentsService readerService = recordingService(mock(EXoContinuationBayeux.class), documentService, identityRegistry, false);
+    readerService.service.onDocumentOpened(opener, "john", FILE_ID, WORKSPACE, PROVIDER);
+    assertEquals("a user who may not edit the document records no editor", 0, recorded(readerService).size());
+    verify(opener).deliver(any(), eq(CometdDocumentsService.CHANNEL_NAME + FILE_ID), any(Object.class), any());
+
+    CometdDocumentsService editorService = recordingService(mock(EXoContinuationBayeux.class), documentService, identityRegistry, true);
+    editorService.service.onDocumentOpened(opener, "john", FILE_ID, WORKSPACE, PROVIDER);
+    assertEquals("a user who may edit the document records the editor", 1, recorded(editorService).size());
+  }
+
+  @Test
+  public void testTheEditRightIsReadWithASessionOfTheUserOnTheShortcutTarget() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    ManageableRepository repository = mock(ManageableRepository.class);
+    SessionProvider sessionProvider = mock(SessionProvider.class);
+    Session session = mock(Session.class);
+    Session targetSession = mock(Session.class);
+    when(sessionProvider.getSession(WORKSPACE, repository)).thenReturn(session);
+    when(sessionProvider.getSession("knowledge", repository)).thenReturn(targetSession);
+    Node shortcut = mock(Node.class);
+    when(shortcut.isNodeType("exo:symlink")).thenReturn(true);
+    Property workspaceProperty = mock(Property.class);
+    when(workspaceProperty.getString()).thenReturn("knowledge");
+    when(shortcut.getProperty("exo:workspace")).thenReturn(workspaceProperty);
+    Property uuidProperty = mock(Property.class);
+    when(uuidProperty.getString()).thenReturn("target");
+    when(shortcut.getProperty("exo:uuid")).thenReturn(uuidProperty);
+    when(session.getNodeByUUID(FILE_ID)).thenReturn(shortcut);
+    ExtendedNode target = mock(ExtendedNode.class);
+    when(targetSession.getNodeByUUID("target")).thenReturn(target);
+
+    try (MockedStatic<WCMCoreUtils> wcmCoreUtils = mockStatic(WCMCoreUtils.class)) {
+      wcmCoreUtils.when(WCMCoreUtils::getRepository).thenReturn(repository);
+      wcmCoreUtils.when(() -> WCMCoreUtils.invokeUserSession(eq("john"), any())).thenAnswer(invocation -> {
+        RepositoryConsumer<SessionProvider> handler = invocation.getArgument(1);
+        handler.accept(sessionProvider);
+        return null;
+      });
+
+      assertTrue("a user who may set the target's properties may edit it",
+                 service.canEditDocument("john", FILE_ID, WORKSPACE));
+      verify(target).checkPermission(PermissionType.SET_PROPERTY);
+
+      doThrow(new AccessControlException("read only")).when(target).checkPermission(PermissionType.SET_PROPERTY);
+      assertFalse("a user who may only read the target may not edit it", service.canEditDocument("john", FILE_ID, WORKSPACE));
+
+      when(targetSession.getNodeByUUID("target")).thenThrow(new AccessDeniedException());
+      assertFalse("a user who may not read the target may not edit it", service.canEditDocument("john", FILE_ID, WORKSPACE));
+    }
+    verify(sessionProvider, times(3)).close();
+  }
+
+  @Test
+  public void testTheDocumentsServiceIsDeclaredToCometD() {
+    // The annotation processor registers the listeners of a class annotated with @Service only
+    Service service = CometdDocumentsService.CometdService.class.getAnnotation(Service.class);
+    assertNotNull(service);
+    assertEquals("documents", service.value());
+  }
+
+  private static ServerMessage.Mutable openedEvent(String userId) {
+    ServerMessage.Mutable message = mock(ServerMessage.Mutable.class);
+    Map<String, Object> data = new HashMap<>();
+    data.put("type", CometdDocumentsService.DOCUMENT_OPENED_EVENT);
+    data.put("userId", userId);
+    data.put("workspace", WORKSPACE);
+    data.put("provider", PROVIDER);
+    when(message.getData()).thenReturn(data);
+    when(message.getDataAsMap()).thenReturn(data);
+    return message;
+  }
+
+  private static List<Runnable> recorded(CometdDocumentsService service) {
+    return ((RecordingExecutor) service.eventsHandlers).commands;
+  }
+
+  /**
+   * A service whose commands are recorded instead of run, and whose edit check
+   * answers as given.
+   */
+  private CometdDocumentsService recordingService(EXoContinuationBayeux exoBayeux,
+                                                  DocumentService documentService,
+                                                  IdentityRegistry identityRegistry,
+                                                  boolean canEdit) {
+    CacheService cacheService = mock(CacheService.class);
+    when(cacheService.<String, String> getCacheInstance(CometdDocumentsService.EDITORS_CACHE_NAME)).thenReturn(editors);
+    return new CometdDocumentsService(exoBayeux, documentService, identityRegistry, null, cacheService) {
+      @Override
+      protected ExecutorService createThreadExecutor(String threadNamePrefix, int maxFactor, int queueFactor) {
+        return new RecordingExecutor();
+      }
+
+      @Override
+      protected boolean canEditDocument(String userId, String fileId, String workspace) {
+        assertEquals("john", userId);
+        assertEquals(FILE_ID, fileId);
+        assertEquals(WORKSPACE, workspace);
+        return canEdit;
+      }
+    };
+  }
+
+  private static class RecordingExecutor extends AbstractExecutorService {
+    final List<Runnable> commands = new ArrayList<>();
+
+    @Override
+    public void execute(Runnable command) {
+      commands.add(command);
+    }
+
+    @Override
+    public void shutdown() {
+      // Nothing runs
+    }
+
+    @Override
+    public List<Runnable> shutdownNow() {
+      return commands;
+    }
+
+    @Override
+    public boolean isShutdown() {
+      return false;
+    }
+
+    @Override
+    public boolean isTerminated() {
+      return false;
+    }
+
+    @Override
+    public boolean awaitTermination(long timeout, TimeUnit unit) {
+      return true;
+    }
   }
 
   private static List<Thread> timerThreads() {
