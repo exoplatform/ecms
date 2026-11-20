@@ -17,6 +17,8 @@ import org.exoplatform.social.core.activity.ActivityLifeCycleEvent;
 import org.exoplatform.social.core.activity.ActivityListenerPlugin;
 import org.exoplatform.social.core.activity.model.ActivityFile;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
+import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 import org.exoplatform.wcm.ext.component.document.service.IShareDocumentService;
@@ -51,16 +53,20 @@ public class ActivityListener extends ActivityListenerPlugin {
 
   private final OrganizationService    organizationService;
 
+  private final IdentityManager        identityManager;
+
   public ActivityListener(SpaceService spaceService,
                           SessionProviderService sessionProviderService,
                           RepositoryService repositoryService,
                           IShareDocumentService shareDocumentService,
-                          OrganizationService organizationService) {
+                          OrganizationService organizationService,
+                          IdentityManager identityManager) {
     this.spaceService = spaceService;
     this.sessionProviderService = sessionProviderService;
     this.repositoryService = repositoryService;
     this.shareDocumentService = shareDocumentService;
     this.organizationService = organizationService;
+    this.identityManager = identityManager;
   }
 
   @Override
@@ -104,7 +110,16 @@ public class ActivityListener extends ActivityListenerPlugin {
           LOG.warn("Error getting memberships by user (" + currentUserId + ") and group (" + targetSpace.getGroupId() + ")", e);
         }
         if (memberships != null) {
+          String posterUsername = getPosterUsername(activity);
           for (String nodeUuid : uuidNodes) {
+            if (posterUsername == null || !shareDocumentService.canRead(posterUsername, workspaceName, nodeUuid)) {
+              LOG.warn("Document {} named by activity {} not given to space {}: its poster {} can't read it",
+                       nodeUuid,
+                       activity.getId(),
+                       targetSpace.getGroupId(),
+                       posterUsername);
+              continue;
+            }
             try {
               node = session.getNodeByUUID(nodeUuid);
 
@@ -131,6 +146,11 @@ public class ActivityListener extends ActivityListenerPlugin {
         LOG.warn("Error while getting session for sharing files to the space: " + targetSpace.getGroupId(), e);
       }
     }
+  }
+
+  private String getPosterUsername(ExoSocialActivity activity) {
+    Identity poster = StringUtils.isBlank(activity.getPosterId()) ? null : identityManager.getIdentity(activity.getPosterId());
+    return poster == null ? null : poster.getRemoteId();
   }
 
   @Override
