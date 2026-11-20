@@ -27,6 +27,7 @@ import javax.jcr.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
@@ -155,7 +156,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
     ConversationState conversationState = ConversationState.getCurrent();
     if (conversationState == null || conversationState.getIdentity() == null) {
-      return Response.status(Response.Status.UNAUTHORIZED).build();
+      return Response.status(Response.Status.UNAUTHORIZED).cacheControl(noStore()).build();
     }
     // The node is read as the caller, so a document they cannot read is never rendered
     SessionProvider sessionProvider = getUserSessionProvider(repositoryService_, conversationState.getIdentity());
@@ -180,11 +181,12 @@ public class PDFViewerRESTService implements ResourceContainer {
         File file = getPDFDocumentFile(currentNode, repoName);
         is = pushToCache(file, repoName, wsName, uuid, pageNumber, strRotation, strScale, lastModified, baseVersion);
       }
-      return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
+      return Response.ok(is, "image").header(LASTMODIFIED, lastModified).cacheControl(privateOnly()).build();
     } catch (AccessDeniedException | ItemNotFoundException e) {
       LOG.debug("Document {} not found or not readable by the current user", uuid, e);
       return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
                                                                                                          : Response.Status.NOT_FOUND)
+                     .cacheControl(noStore())
                      .build();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -193,7 +195,19 @@ public class PDFViewerRESTService implements ResourceContainer {
     } finally {
       sessionProvider.close();
     }
-    return Response.ok().build();
+    return Response.ok().cacheControl(noStore()).build();
+  }
+
+  private static CacheControl privateOnly() {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setPrivate(true);
+    return cacheControl;
+  }
+
+  private static CacheControl noStore() {
+    CacheControl cacheControl = privateOnly();
+    cacheControl.setNoStore(true);
+    return cacheControl;
   }
 
   private SessionProvider getUserSessionProvider(RepositoryService repositoryService, Identity aclIdentity) {
