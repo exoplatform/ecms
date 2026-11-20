@@ -391,6 +391,7 @@ public class AttachmentServiceImpl implements AttachmentService {
                                                 newPath);
       String destPath = destNode.getPath().concat("/").concat(attachmentNode.getName());
       session.move(attachmentNode.getPath(), destPath);
+      Utils.applyFolderVisibility(attachmentNode, destNode);
       session.save();
       return EntityBuilder.fromAttachmentNode(repositoryService,
                                               documentService,
