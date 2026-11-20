@@ -49,6 +49,7 @@ import org.exoplatform.services.ecm.dms.relation.TestRelationsService;
 import org.exoplatform.services.ecm.dms.scripts.TestScriptService;
 import org.exoplatform.services.ecm.dms.test.LinkUtilsTest;
 import org.exoplatform.services.ecm.dms.test.TestSymLink;
+import org.exoplatform.services.wcm.utils.TestCanUserRead;
 import org.exoplatform.services.ecm.dms.thumbnail.TestThumbnailService;
 import org.exoplatform.services.pdfviewer.TestPDFViewerService;
 import org.exoplatform.services.rest.AttachmentsRestServiceTest;
@@ -80,6 +81,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   LinkUtilsTest.class,
   TestSymLink.class,
   TestWebDavUncheckoutAccessList.class,
+  TestCanUserRead.class,
   TestDMSConfigurationService.class,
   TestThumbnailService.class,
   TestPDFViewerService.class,
