@@ -26,6 +26,7 @@ import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
 import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsServiceTest;
+import org.exoplatform.wcm.connector.viewer.PDFViewerRESTServiceTest;
 
 /**
  * Created by The eXo Platform SAS
@@ -36,6 +37,7 @@ import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsService
 @SuiteClasses({ 
   TestOpenInOfficeConnector.class,
   CometdDocumentsServiceTest.class,
+  PDFViewerRESTServiceTest.class,
 })
 @ConfigTestCase(BaseConnectorTestCase.class)
 public class BaseConnectorTestSuite extends BaseExoContainerTestSuite {

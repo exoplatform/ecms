@@ -43,7 +43,6 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -51,6 +50,7 @@ import org.exoplatform.services.pdfviewer.ObjectKey;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.rest.api.RestUtils;
@@ -153,12 +153,17 @@ public class PDFViewerRESTService implements ResourceContainer {
     StringBuilder bd1 = new StringBuilder();
     StringBuilder bd2 = new StringBuilder();
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
-    Session session = null;
+    ConversationState conversationState = ConversationState.getCurrent();
+    if (conversationState == null || conversationState.getIdentity() == null) {
+      return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+    // The node is read as the caller, so a document they cannot read is never rendered
+    SessionProvider sessionProvider = getUserSessionProvider(repositoryService_, conversationState.getIdentity());
     try {
       Object objCache = pdfCache.get(new ObjectKey(bd.toString()));
       InputStream is = null;
       ManageableRepository repository = repositoryService_.getCurrentRepository();
-      session = getSystemProvider().getSession(wsName, repository);
+      Session session = sessionProvider.getSession(wsName, repository);
       Node currentNode = session.getNodeByUUID(uuid);
       String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())
                                                                 .append("/jcr:lastModified").toString()));
@@ -176,17 +181,19 @@ public class PDFViewerRESTService implements ResourceContainer {
         is = pushToCache(file, repoName, wsName, uuid, pageNumber, strRotation, strScale, lastModified, baseVersion);
       }
       return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
+    } catch (AccessDeniedException | ItemNotFoundException e) {
+      LOG.debug("Document {} not found or not readable by the current user", uuid, e);
+      return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
+                                                                                                         : Response.Status.NOT_FOUND)
+                     .build();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);
       }
+    } finally {
+      sessionProvider.close();
     }
     return Response.ok().build();
-  }
-
-  private SessionProvider getSystemProvider() {
-    SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
-    return service.getSystemSessionProvider(null) ;
   }
 
   private SessionProvider getUserSessionProvider(RepositoryService repositoryService, Identity aclIdentity) {

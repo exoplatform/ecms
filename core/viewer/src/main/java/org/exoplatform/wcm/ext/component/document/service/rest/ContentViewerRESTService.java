@@ -20,6 +20,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Locale;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,13 +41,13 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.plugin.doc.UIDocViewer;
 import org.exoplatform.web.ControllerContext;
 import org.exoplatform.web.WebAppController;
@@ -93,9 +95,15 @@ public class ContentViewerRESTService implements ResourceContainer {
                              @PathParam("workspaceName") String workspaceName,
                              @PathParam("uuid") String uuid) throws Exception {
     String content = null;
+    ConversationState conversationState = ConversationState.getCurrent();
+    if (conversationState == null || conversationState.getIdentity() == null) {
+      return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+    // The node is read as the caller, so a document they cannot read is never rendered
+    SessionProvider sessionProvider = new SessionProvider(new ConversationState(conversationState.getIdentity()));
     try {
       ManageableRepository repository = repositoryService.getCurrentRepository();
-      ExtendedSession session = (ExtendedSession) getSystemProvider().getSession(workspaceName, repository);
+      ExtendedSession session = (ExtendedSession) sessionProvider.getSession(workspaceName, repository);
       Node contentNode = session.getNodeByIdentifier(uuid);
 
       if(contentNode != null && contentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
@@ -123,16 +131,18 @@ public class ContentViewerRESTService implements ResourceContainer {
 
       content = writer.toString();
 
+    } catch (AccessDeniedException | ItemNotFoundException e) {
+      LOG.debug("Document {} not found or not readable by the current user", uuid, e);
+      return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
+                                                                                                         : Response.Status.NOT_FOUND)
+                     .build();
     } catch (Exception e) {
       LOG.error("Cannot render content of document " + repoName + "/" + workspaceName + "/" + uuid, e);
+    } finally {
+      sessionProvider.close();
     }
 
     return Response.ok(content).build();
-  }
-
-  private SessionProvider getSystemProvider() {
-    SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
-    return service.getSystemSessionProvider(null);
   }
 
   public void processRender(String template, UIComponent uiComponent,  Writer writer) throws Exception {
