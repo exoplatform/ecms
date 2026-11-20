@@ -54,7 +54,6 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.social.rest.api.RestUtils;
 
 /**
  * Returns a PDF content to be displayed on the web page.
@@ -128,24 +127,31 @@ public class PDFViewerRESTService implements ResourceContainer {
     InputStream is = null;
     String fileName = null;
     Node currentNode = null;
+    ConversationState conversationState = ConversationState.getCurrent();
+    if (conversationState == null || conversationState.getIdentity() == null) {
+      return Response.status(Response.Status.UNAUTHORIZED).cacheControl(noStore()).build();
+    }
+    SessionProvider sessionProvider = getUserSessionProvider(repositoryService_, conversationState.getIdentity());
     try {
       ManageableRepository repository = repositoryService_.getCurrentRepository();
-      Session userSession = getUserSessionProvider(repositoryService_, ConversationState.getCurrent().getIdentity()).getSession(wsName, repository);
+      Session userSession = sessionProvider.getSession(wsName, repository);
       currentNode = userSession.getNodeByUUID(uuid);
       fileName = Utils.getTitle(currentNode);
       File pdfFile = getPDFDocumentFile(currentNode, repoName);
       is = new FileInputStream(pdfFile);
-    } catch (AccessDeniedException e) {
-      LOG.warn("User '{}' attempts to access not authorized document", RestUtils.getCurrentUser(), e);
-      return Response.status(Response.Status.UNAUTHORIZED).entity("You are attempting to access not authorized document").build();
-    } catch (ItemNotFoundException e) {
-      LOG.warn("Requested document not found", e);
-      return Response.status(Response.Status.NOT_FOUND).entity("Requested document not found").build();
+    } catch (AccessDeniedException | ItemNotFoundException e) {
+      LOG.debug("Document {} not found or not readable by user {}", uuid, conversationState.getIdentity().getUserId(), e);
+      return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
+                                                                                                         : Response.Status.NOT_FOUND)
+                     .cacheControl(noStore())
+                     .build();
     } catch (Exception e) {
       LOG.warn("Error retrieving the documents", e);
-      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).cacheControl(noStore()).build();
+    } finally {
+      sessionProvider.close();
     }
-    return Response.ok(is).header("Content-Disposition","attachment; filename=\"" + fileName+"\"").build();
+    return Response.ok(is).header("Content-Disposition","attachment; filename=\"" + fileName+"\"").cacheControl(privateOnly()).build();
   }
 
   private Response getImageByPageNumber(String repoName, String wsName, String uuid,
