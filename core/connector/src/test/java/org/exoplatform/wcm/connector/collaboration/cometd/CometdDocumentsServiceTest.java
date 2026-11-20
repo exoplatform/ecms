@@ -472,7 +472,8 @@ public class CometdDocumentsServiceTest {
     ServerMessage.Mutable relayed = mock(ServerMessage.Mutable.class);
     ServerMessage.Mutable published = mock(ServerMessage.Mutable.class);
 
-    service.service.subscribeDocuments(oortSession, relayed, FILE_ID);
+    assertTrue("a relayed message is delivered to this node's subscribers",
+               service.service.subscribeDocuments(oortSession, relayed, FILE_ID));
     service.service.subscribeDocuments(mock(ServerSession.class), published, FILE_ID);
 
     verify(relayed, never()).getData();
