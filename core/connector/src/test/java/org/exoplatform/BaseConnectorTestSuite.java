@@ -25,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.wcm.connector.FileUploadHandlerTest;
+import org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTServiceTest;
 import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
 import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsServiceTest;
 
@@ -35,6 +36,7 @@ import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsService
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
+  DocumentEditorsRESTServiceTest.class,
   TestOpenInOfficeConnector.class,
   CometdDocumentsServiceTest.class,
   FileUploadHandlerTest.class,
