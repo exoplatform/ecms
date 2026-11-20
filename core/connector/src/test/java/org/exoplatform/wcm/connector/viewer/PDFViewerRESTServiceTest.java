@@ -182,6 +182,19 @@ public class PDFViewerRESTServiceTest {
   }
 
   @Test
+  public void testThePdfFileOfAMissingDocumentIsNotFound() throws Exception {
+    when(session.getNodeByUUID("uuid")).thenThrow(new ItemNotFoundException());
+    ConversationState.setCurrent(new ConversationState(new Identity("mary")));
+
+    Response response = pdfViewerRESTService.getPDFFile("repository", WORKSPACE, "uuid");
+
+    assertNoStore(response);
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    assertEquals("Document not found", response.getEntity());
+    verify(session).logout();
+  }
+
+  @Test
   public void testAReadablePdfFileIsPrivateButNotNoStore() throws Exception {
     File pdf = File.createTempFile("pdfviewer-file", ".pdf");
     pdf.deleteOnExit();
