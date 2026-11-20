@@ -123,6 +123,18 @@ public class ContentViewerRESTServiceTest {
   }
 
   @Test
+  public void testTheContentOfAReadableDocumentIsKeptOutOfCaches() throws Exception {
+    when(session.getNodeByIdentifier("uuid")).thenReturn(mock(Node.class));
+    ConversationState.setCurrent(new ConversationState(new Identity("mary")));
+
+    Response response = getContent();
+
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    assertNoStore(response);
+    verify(session).logout();
+  }
+
+  @Test
   public void testTheContentOfAMissingDocumentIsNotFound() throws Exception {
     when(session.getNodeByIdentifier("uuid")).thenThrow(new ItemNotFoundException());
     ConversationState.setCurrent(new ConversationState(new Identity("mary")));

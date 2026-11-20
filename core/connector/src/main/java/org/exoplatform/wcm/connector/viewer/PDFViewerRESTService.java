@@ -143,11 +143,15 @@ public class PDFViewerRESTService implements ResourceContainer {
       LOG.debug("Document {} not found or not readable by user {}", uuid, conversationState.getIdentity().getUserId(), e);
       return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
                                                                                                          : Response.Status.NOT_FOUND)
+                     .entity("Document not found")
                      .cacheControl(noStore())
                      .build();
     } catch (Exception e) {
       LOG.warn("Error retrieving the documents", e);
-      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).cacheControl(noStore()).build();
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                     .entity("Cannot read the document")
+                     .cacheControl(noStore())
+                     .build();
     } finally {
       sessionProvider.close();
     }
