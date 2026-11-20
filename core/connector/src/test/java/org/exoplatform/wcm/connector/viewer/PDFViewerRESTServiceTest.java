@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
@@ -201,6 +202,31 @@ public class PDFViewerRESTServiceTest {
       verify(session).logout();
       ((InputStream) response.getEntity()).close();
     }
+  }
+
+  @Test
+  public void testThePdfFileAnswersAFixedTextWhenItCannotBeRead() throws Exception {
+    Node node = mock(Node.class);
+    when(session.getNodeByUUID("uuid")).thenReturn(node);
+    PDFViewerRESTService service = spy(pdfViewerRESTService);
+    doThrow(new IllegalStateException("/internal/path")).when(service).getPDFDocumentFile(node, "repository");
+    ConversationState.setCurrent(new ConversationState(new Identity("mary")));
+
+    Response response = service.getPDFFile("repository", WORKSPACE, "uuid");
+
+    assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+    assertEquals("Cannot read the document", response.getEntity());
+    assertNoStore(response);
+    verify(session).logout();
+  }
+
+  @Test
+  public void testThePdfFileIsRefusedWithoutIdentity() throws Exception {
+    Response response = pdfViewerRESTService.getPDFFile("repository", WORKSPACE, "uuid");
+
+    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    assertNoStore(response);
+    verify(repository, never()).login(any(String.class));
   }
 
   @Test
