@@ -877,49 +877,55 @@ public class CometdDocumentsService implements Startable {
      * @param sender the session that published the message
      * @param message the message
      * @param fileId the file id
+     * @return false to drop a message a client may not publish (another event
+     *         than an opened one, or an opened event whose user is not the
+     *         sender's), true to deliver it to the channel's subscribers
      * @throws RepositoryException the repository exception
      */
     @Listener(CHANNEL_NAME_PARAMS)
-    public void subscribeDocuments(ServerSession sender,
+    public boolean subscribeDocuments(ServerSession sender,
                                    ServerMessage.Mutable message,
                                    @Param("fileId") String fileId) throws RepositoryException {
       if (exoBayeux.isRelayed(sender)) {
         // Handled on the node the client published it to
-        return;
+        return true;
       }
       Object objData = message.getData();
       if (!Map.class.isInstance(objData)) {
         if (LOG.isDebugEnabled()) {
           LOG.debug("Couldn't get data as a map from event");
         }
-        return;
+        return false;
       }
 
       Map<String, Object> data = message.getDataAsMap();
       String type = (String) data.get("type");
-
-      if (type.equals(DOCUMENT_OPENED_EVENT)) {
-        String userId = (String) data.get("userId");
-        String workspace = (String) data.get("workspace");
-        String provider = (String) data.get("provider");
-        // The user named in the event must be the one who opened the sending
-        // live connection: its identity decides the editor and its record
-        if (userId == null || !exoBayeux.isSubscribed(userId, sender.getId())) {
-          LOG.debug("Document opened event on file {} ignored: its user is not the sender's", fileId);
-          return;
-        }
-        eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
-          @Override
-          void onContainerError(String error) {
-            LOG.error("An error has occured in container: {}", containerName);
-          }
-
-          @Override
-          void execute(ExoContainer exoContainer) {
-            onDocumentOpened(sender, userId, fileId, workspace, provider);
-          }
-        });
+      if (!DOCUMENT_OPENED_EVENT.equals(type)) {
+        // The server publishes the other events itself: a client never does
+        LOG.debug("Event {} published by a client on file {} dropped", type, fileId);
+        return false;
       }
+      String userId = (String) data.get("userId");
+      String workspace = (String) data.get("workspace");
+      String provider = (String) data.get("provider");
+      // The user named in the event must be the one who opened the sending
+      // live connection: its identity decides the editor and its record
+      if (userId == null || !exoBayeux.isSubscribed(userId, sender.getId())) {
+        LOG.debug("Document opened event on file {} ignored: its user is not the sender's", fileId);
+        return false;
+      }
+      eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+        @Override
+        void onContainerError(String error) {
+          LOG.error("An error has occured in container: {}", containerName);
+        }
+
+        @Override
+        void execute(ExoContainer exoContainer) {
+          onDocumentOpened(sender, userId, fileId, workspace, provider);
+        }
+      });
+      return true;
     }
 
     /**
