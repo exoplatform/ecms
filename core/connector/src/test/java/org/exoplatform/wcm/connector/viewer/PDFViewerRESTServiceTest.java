@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.connector.viewer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -27,6 +28,8 @@ import static org.mockito.Mockito.when;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
 import org.junit.After;
@@ -96,6 +99,7 @@ public class PDFViewerRESTServiceTest {
 
     Response response = pdfViewerRESTService.getCoverImage("repository", WORKSPACE, "uuid", "1", "0", "1.0");
 
+    assertNoStore(response);
     assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
     verify(repository, never()).getSystemSession(any());
     verify(session).logout();
@@ -108,6 +112,7 @@ public class PDFViewerRESTServiceTest {
 
     Response response = pdfViewerRESTService.getCoverImage("repository", WORKSPACE, "uuid", "1", "0", "1.0");
 
+    assertNoStore(response);
     assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
   }
 
@@ -118,6 +123,7 @@ public class PDFViewerRESTServiceTest {
 
     Response response = pdfViewerRESTService.getCoverImage("repository", WORKSPACE, "uuid", "1", "0", "1.0");
 
+    assertNoStore(response);
     assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
     verify(repository, never()).getSystemSession(any());
   }
@@ -126,8 +132,15 @@ public class PDFViewerRESTServiceTest {
   public void testACallWithoutIdentityIsRefused() throws Exception {
     Response response = pdfViewerRESTService.getCoverImage("repository", WORKSPACE, "uuid", "1", "0", "1.0");
 
+    assertNoStore(response);
     assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
     verify(repository, never()).getSystemSession(any());
     verify(repository, never()).login(any(String.class));
+  }
+
+  private static void assertNoStore(Response response) {
+    CacheControl cacheControl = (CacheControl) response.getMetadata().getFirst(HttpHeaders.CACHE_CONTROL);
+    assertTrue(cacheControl.isPrivate());
+    assertTrue(cacheControl.isNoStore());
   }
 }

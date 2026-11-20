@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.ext.component.document.service.rest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -25,6 +26,10 @@ import static org.mockito.Mockito.when;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
 import org.junit.After;
@@ -34,7 +39,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedSession;
@@ -42,6 +46,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.WebAppController;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,7 +55,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class ContentViewerRESTServiceTest {
 
-  private static final String      WORKSPACE = "collaboration";
+  private static final String      WORKSPACE        = "collaboration";
+
+  private static final String      TARGET_WORKSPACE = "dms-system";
 
   @Mock
   private RepositoryService        repositoryService;
@@ -70,9 +77,7 @@ public class ContentViewerRESTServiceTest {
     when(repositoryEntry.getName()).thenReturn("repository");
     when(repository.getConfiguration()).thenReturn(repositoryEntry);
     when(repository.login(WORKSPACE)).thenReturn(session);
-    contentViewerRESTService = new ContentViewerRESTService(mock(WebAppController.class),
-                                                            repositoryService,
-                                                            mock(LinkManager.class));
+    contentViewerRESTService = new ContentViewerRESTService(mock(WebAppController.class), repositoryService);
   }
 
   @After
@@ -88,8 +93,33 @@ public class ContentViewerRESTServiceTest {
     Response response = getContent();
 
     assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    assertNoStore(response);
     verify(repository, never()).getSystemSession(any());
     verify(session).logout();
+  }
+
+  @Test
+  public void testTheTargetOfALinkIsReadAsTheCaller() throws Exception {
+    Node link = mock(Node.class);
+    when(link.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(true);
+    Property workspace = mock(Property.class);
+    when(workspace.getString()).thenReturn(TARGET_WORKSPACE);
+    when(link.getProperty(NodetypeConstant.EXO_WORKSPACE)).thenReturn(workspace);
+    Property targetUuid = mock(Property.class);
+    when(targetUuid.getString()).thenReturn("target");
+    when(link.getProperty(NodetypeConstant.EXO_UUID)).thenReturn(targetUuid);
+    when(session.getNodeByIdentifier("uuid")).thenReturn(link);
+    ExtendedSession targetSession = mock(ExtendedSession.class);
+    when(repository.login(TARGET_WORKSPACE)).thenReturn(targetSession);
+    when(targetSession.getNodeByUUID("target")).thenThrow(new AccessDeniedException());
+    ConversationState.setCurrent(new ConversationState(new Identity("mary")));
+
+    Response response = getContent();
+
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    assertNoStore(response);
+    verify(targetSession).getNodeByUUID("target");
+    verify(repository, never()).getSystemSession(any());
   }
 
   @Test
@@ -105,14 +135,26 @@ public class ContentViewerRESTServiceTest {
     when(session.getNodeByIdentifier("uuid")).thenThrow(new AccessDeniedException());
     ConversationState.setCurrent(new ConversationState(new Identity(IdentityConstants.ANONIM)));
 
-    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), getContent().getStatus());
+    Response response = getContent();
+
+    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    assertNoStore(response);
     verify(repository, never()).getSystemSession(any());
   }
 
   @Test
   public void testACallWithoutIdentityIsRefused() throws Exception {
-    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), getContent().getStatus());
+    Response response = getContent();
+
+    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    assertNoStore(response);
     verify(repository, never()).getSystemSession(any());
+  }
+
+  private static void assertNoStore(Response response) {
+    CacheControl cacheControl = (CacheControl) response.getMetadata().getFirst(HttpHeaders.CACHE_CONTROL);
+    assertTrue(cacheControl.isPrivate());
+    assertTrue(cacheControl.isNoStore());
   }
 
   private Response getContent() throws Exception {

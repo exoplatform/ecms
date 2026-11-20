@@ -26,6 +26,7 @@ import javax.jcr.Node;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -37,7 +38,6 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.resolver.ApplicationResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -69,12 +69,9 @@ public class ContentViewerRESTService implements ResourceContainer {
 
   private RepositoryService repositoryService;
 
-  private LinkManager linkManager;
-
-  public ContentViewerRESTService(WebAppController webAppController, RepositoryService repositoryService, LinkManager linkManager) throws Exception {
+  public ContentViewerRESTService(WebAppController webAppController, RepositoryService repositoryService) throws Exception {
     this.webAppController = webAppController;
     this.repositoryService = repositoryService;
-    this.linkManager = linkManager;
   }
 
   /**
@@ -97,7 +94,7 @@ public class ContentViewerRESTService implements ResourceContainer {
     String content = null;
     ConversationState conversationState = ConversationState.getCurrent();
     if (conversationState == null || conversationState.getIdentity() == null) {
-      return Response.status(Response.Status.UNAUTHORIZED).build();
+      return Response.status(Response.Status.UNAUTHORIZED).cacheControl(noStore()).build();
     }
     // The node is read as the caller, so a document they cannot read is never rendered
     SessionProvider sessionProvider = new SessionProvider(new ConversationState(conversationState.getIdentity()));
@@ -107,7 +104,10 @@ public class ContentViewerRESTService implements ResourceContainer {
       Node contentNode = session.getNodeByIdentifier(uuid);
 
       if(contentNode != null && contentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-        contentNode = linkManager.getTarget(contentNode);
+        // The target is read through the same session provider, as the caller
+        String targetWorkspace = contentNode.getProperty(NodetypeConstant.EXO_WORKSPACE).getString();
+        String targetUuid = contentNode.getProperty(NodetypeConstant.EXO_UUID).getString();
+        contentNode = sessionProvider.getSession(targetWorkspace, repository).getNodeByUUID(targetUuid);
       }
 
       StringWriter writer = new StringWriter();
@@ -135,6 +135,7 @@ public class ContentViewerRESTService implements ResourceContainer {
       LOG.debug("Document {} not found or not readable by the current user", uuid, e);
       return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
                                                                                                          : Response.Status.NOT_FOUND)
+                     .cacheControl(noStore())
                      .build();
     } catch (Exception e) {
       LOG.error("Cannot render content of document " + repoName + "/" + workspaceName + "/" + uuid, e);
@@ -142,7 +143,14 @@ public class ContentViewerRESTService implements ResourceContainer {
       sessionProvider.close();
     }
 
-    return Response.ok(content).build();
+    return Response.ok(content).cacheControl(noStore()).build();
+  }
+
+  private static CacheControl noStore() {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setPrivate(true);
+    cacheControl.setNoStore(true);
+    return cacheControl;
   }
 
   public void processRender(String template, UIComponent uiComponent,  Writer writer) throws Exception {
