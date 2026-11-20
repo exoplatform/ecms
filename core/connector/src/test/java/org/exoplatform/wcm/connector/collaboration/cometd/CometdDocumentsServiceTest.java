@@ -441,6 +441,28 @@ public class CometdDocumentsServiceTest {
     }
   }
 
+  /**
+   * A client publishes the opened event only: the other events are the
+   * server's. Mutation: deliver a client's other event, and this test fails.
+   */
+  @Test
+  public void testAClientPublishesTheOpenedEventOnly() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    CometdDocumentsService service = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), true);
+    ServerSession johnSession = mock(ServerSession.class);
+    ServerMessage.Mutable closed = mock(ServerMessage.Mutable.class);
+    Map<String, Object> data = new HashMap<>();
+    data.put("type", CometdDocumentsService.LAST_EDITOR_CLOSED_EVENT);
+    when(closed.getData()).thenReturn(data);
+    when(closed.getDataAsMap()).thenReturn(data);
+    ServerMessage.Mutable text = mock(ServerMessage.Mutable.class);
+    when(text.getData()).thenReturn("text");
+
+    assertFalse("a client's last editor closed event is not delivered", service.service.subscribeDocuments(johnSession, closed, FILE_ID));
+    assertFalse("a client's message that isn't an event is not delivered", service.service.subscribeDocuments(johnSession, text, FILE_ID));
+    assertEquals(0, recorded(service).size());
+  }
+
   @Test
   public void testAMessageRelayedFromAnotherNodeIsHandledThereOnly() throws Exception {
     EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
@@ -521,13 +543,14 @@ public class CometdDocumentsServiceTest {
     when(johnSession.getId()).thenReturn("john-session");
     when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
 
-    service.service.subscribeDocuments(johnSession, openedEvent("mary"), FILE_ID);
+    assertFalse("an event naming another user than the sender's is not delivered",
+                service.service.subscribeDocuments(johnSession, openedEvent("mary"), FILE_ID));
     assertEquals("an event naming another user than the sender's is ignored", 0, recorded(service).size());
 
-    service.service.subscribeDocuments(johnSession, openedEvent(null), FILE_ID);
+    assertFalse("an event naming no user is not delivered", service.service.subscribeDocuments(johnSession, openedEvent(null), FILE_ID));
     assertEquals("an event naming no user is ignored", 0, recorded(service).size());
 
-    service.service.subscribeDocuments(johnSession, openedEvent("john"), FILE_ID);
+    assertTrue("the sender's own event is delivered", service.service.subscribeDocuments(johnSession, openedEvent("john"), FILE_ID));
     assertEquals("the sender's own event is handled", 1, recorded(service).size());
   }
 
@@ -597,9 +620,13 @@ public class CometdDocumentsServiceTest {
     verify(sessionProvider, times(3)).close();
   }
 
+  /**
+   * Kills the mutant that removes {@code @Service("documents")} from
+   * {@link CometdDocumentsService.CometdService}: the annotation processor
+   * registers the listeners of a class annotated with {@code @Service} only.
+   */
   @Test
   public void testTheDocumentsServiceIsDeclaredToCometD() {
-    // The annotation processor registers the listeners of a class annotated with @Service only
     Service service = CometdDocumentsService.CometdService.class.getAnnotation(Service.class);
     assertNotNull(service);
     assertEquals("documents", service.value());
