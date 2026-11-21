@@ -1010,10 +1010,11 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Tells the opener of a document whether its editor is available, records
-     * that editor for the document when none is recorded and the user may edit
-     * the document, and publishes the opened event for the channel's
-     * subscribers when the user may edit the document.
+     * Tells the opener of a document whether its editor is available. When the
+     * provider is known, its open is accepted (available to the user, and no
+     * other provider is recorded for the document) and the user may edit the
+     * document, it records that editor for the document when none is recorded
+     * and publishes the opened event for the channel's subscribers.
      *
      * @param opener the session of the user who opened the document
      * @param userId the id of that user, who owns the opener session
@@ -1030,7 +1031,7 @@ public class CometdDocumentsService implements Startable {
         String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
         boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
         service.sendCurrentProviderInfo(opener, fileId, available, availableProviders);
-        if (canEditDocument(userId, fileId, workspace)) {
+        if (available && canEditDocument(userId, fileId, workspace)) {
           if (currentProvider == null) {
             setCurrentDocumentProvider(fileId, workspace, provider);
           }

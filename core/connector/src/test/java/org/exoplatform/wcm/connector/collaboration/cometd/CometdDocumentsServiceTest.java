@@ -594,6 +594,36 @@ public class CometdDocumentsServiceTest {
   }
 
   @Test
+  public void testAnOpenedEventWhoseOpenIsRefusedIsNeitherRecordedNorPublished() throws Exception {
+    DocumentService documentService = mock(DocumentService.class);
+    DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
+    when(editorProvider.isAvailableForUser(any())).thenReturn(true);
+    when(editorProvider.getProviderName()).thenReturn(PROVIDER);
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+    when(documentService.getDocumentEditorProviders()).thenReturn(List.of(editorProvider));
+    IdentityRegistry identityRegistry = mock(IdentityRegistry.class);
+    when(identityRegistry.getIdentity("john")).thenReturn(new Identity("john"));
+    ServerSession opener = mock(ServerSession.class);
+
+    // Another editor is recorded for the document
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenReturn("another");
+    CometdDocumentsService other = recordingService(mock(EXoContinuationBayeux.class), documentService, identityRegistry, true);
+    ServerChannel otherChannel = bayeuxChannel(other);
+    other.service.onDocumentOpened(opener, "john", FILE_ID, WORKSPACE, PROVIDER);
+    verify(otherChannel, never()).publish(any(), any(Object.class), any());
+    assertEquals(0, recorded(other).size());
+
+    // The provider is not available to the user
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenReturn(null);
+    when(editorProvider.isAvailableForUser(any())).thenReturn(false);
+    CometdDocumentsService unavailable = recordingService(mock(EXoContinuationBayeux.class), documentService, identityRegistry, true);
+    ServerChannel unavailableChannel = bayeuxChannel(unavailable);
+    unavailable.service.onDocumentOpened(opener, "john", FILE_ID, WORKSPACE, PROVIDER);
+    verify(unavailableChannel, never()).publish(any(), any(Object.class), any());
+    assertEquals(0, recorded(unavailable).size());
+  }
+
+  @Test
   public void testAnOpenedEventOfAnUnknownProviderIsNotRepublished() throws Exception {
     DocumentService documentService = mock(DocumentService.class);
     when(documentService.getEditorProvider("unknown")).thenThrow(new DocumentEditorProviderNotFoundException("unknown"));
