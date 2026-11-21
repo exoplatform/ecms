@@ -144,7 +144,7 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
     assertEquals(409, response.getStatus());
   }
 
-  public void testAShareAddedAfterTheBaseVersionIsKept() throws Exception {
+  public void testAnAddedShareIsKept() throws Exception {
     Node document = addVersionedFile("share-added.txt");
     document.checkin();
     document.checkout();
@@ -164,7 +164,7 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
                  entriesOf(cancelled));
   }
 
-  public void testAShareRevokedAfterTheBaseVersionStaysRevoked() throws Exception {
+  public void testARevokedShareStaysRevoked() throws Exception {
     Node document = addVersionedFile("share-revoked.txt");
     document.addMixin("exo:privilegeable");
     ((ExtendedNode) document).setPermissions(Map.of(CANCELLER, EDIT, MEMBER, READ));
@@ -185,7 +185,7 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
     assertFalse(entries.contains(MEMBER + " read"));
   }
 
-  public void testAPrivateListRemovedAfterTheBaseVersionStaysRemoved() throws Exception {
+  public void testARemovedPrivateListStaysRemoved() throws Exception {
     Node document = addVersionedFile("list-removed.txt");
     document.addMixin("exo:privilegeable");
     ((ExtendedNode) document).setPermissions(Map.of(CANCELLER, EDIT, MEMBER, READ));
@@ -220,6 +220,27 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
     Node cancelled = reload(uuid);
     assertTrue(cancelled.isNodeType("exo:privilegeable"));
     assertTrue(entriesOf(cancelled).containsAll(Set.of(CANCELLER + " add_node", CANCELLER + " set_property", EDITOR + " read")));
+  }
+
+  public void testADocumentLockedByAnotherUserAnswersLockedAndKeepsItsList() throws Exception {
+    Node document = addVersionedFile("locked.txt");
+    document.addMixin("exo:privilegeable");
+    ((ExtendedNode) document).setPermissions(Map.of(CANCELLER, EDIT, MEMBER, READ));
+    session.save();
+    document.checkin();
+    document.checkout();
+    document.addMixin("mix:lockable");
+    session.save();
+    document.lock(true, false);
+    Set<String> before = entriesOf(document);
+
+    String uuid = document.getUUID();
+    Response response = cancel("locked.txt");
+
+    assertEquals(423, response.getStatus());
+    Node locked = reload(uuid);
+    assertTrue(locked.isCheckedOut());
+    assertEquals(before, entriesOf(locked));
   }
 
   public void testAFailureWhilePuttingTheListBackIsLoggedAndRethrown() throws Exception {
