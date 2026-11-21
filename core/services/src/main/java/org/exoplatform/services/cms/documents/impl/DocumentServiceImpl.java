@@ -74,6 +74,7 @@ import org.exoplatform.services.resources.LocaleContextInfo;
 import org.exoplatform.services.resources.LocalePolicy;
 import org.exoplatform.services.security.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.IdentitySessionProvider;
 import org.exoplatform.services.wcm.utils.RepositoryConsumer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -1372,7 +1373,7 @@ public class DocumentServiceImpl implements DocumentService {
       }
     }
 
-    SessionProvider sessionProvider = new SessionProvider(new ConversationState(aclIdentity));
+    SessionProvider sessionProvider = new IdentitySessionProvider(repoService, aclIdentity);
     try {
       ManageableRepository repository = repoService.getCurrentRepository();
       String workspace = repository.getConfiguration().getDefaultWorkspaceName();

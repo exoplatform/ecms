@@ -38,6 +38,7 @@ import org.exoplatform.services.cms.documents.TestDocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentEditorProviderImplTest;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
 import org.exoplatform.services.cms.lock.impl.LockServiceImplStartTest;
+import org.exoplatform.services.wcm.utils.IdentitySessionProviderTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
 import org.exoplatform.services.cms.webdav.TestWebDavUncheckoutAccessList;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
@@ -97,7 +98,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   WCMCoreUtilsTest.class,
   AttachmentViewListenerTest.class,
   ActivityFilesDownloadTest.class,
-  TestUtils.class
+  TestUtils.class,
+  IdentitySessionProviderTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
