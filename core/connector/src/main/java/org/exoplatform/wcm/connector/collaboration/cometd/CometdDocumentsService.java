@@ -556,40 +556,6 @@ public class CometdDocumentsService implements Startable {
     }
 
     /**
-     * Registers the editor of a session for a document when the user may edit
-     * the document and, read under the lock the unsubscription of the same
-     * connection holds too, the session is still subscribed to the document's
-     * channel for that user: the registration and the unsubscription of one
-     * connection exclude each other, so a session that left leaves no editor.
-     *
-     * @param session the session that subscribed
-     * @param channel the document's channel
-     * @param userId the id of the user who owns the session
-     * @param fileId the file id
-     * @param provider the editor provider
-     * @param workspace the workspace
-     */
-    void registerEditor(ServerSession session, ServerChannel channel, String userId, String fileId, String provider, String workspace) {
-      String sessionId = session.getId();
-      if (!canEditDocument(userId, fileId, workspace)) {
-        LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
-        return;
-      }
-      synchronized (editorsLock(sessionId)) {
-        if (isStillSubscribed(session, channel, userId)) {
-          editorsContext.addClient(sessionId, fileId, provider, workspace);
-          editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
-        } else {
-          LOG.debug("Editor subscription of session {} on file {} ignored: the session is gone", sessionId, fileId);
-        }
-      }
-    }
-
-    private boolean isStillSubscribed(ServerSession session, ServerChannel channel, String userId) {
-      return exoBayeux.isSubscribed(userId, session.getId()) && channel.getSubscribers().contains(session);
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -623,6 +589,40 @@ public class CometdDocumentsService implements Startable {
               + channelId);
         }
       }
+    }
+
+    /**
+     * Registers the editor of a session for a document when the user may edit
+     * the document and, read under the lock the unsubscription of the same
+     * connection holds too, the session is still subscribed to the document's
+     * channel for that user: the registration and the unsubscription of one
+     * connection exclude each other, so a session that left leaves no editor.
+     *
+     * @param session the session that subscribed
+     * @param channel the document's channel
+     * @param userId the id of the user who owns the session
+     * @param fileId the file id
+     * @param provider the editor provider
+     * @param workspace the workspace
+     */
+    void registerEditor(ServerSession session, ServerChannel channel, String userId, String fileId, String provider, String workspace) {
+      String sessionId = session.getId();
+      if (!canEditDocument(userId, fileId, workspace)) {
+        LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
+        return;
+      }
+      synchronized (editorsLock(sessionId)) {
+        if (isStillSubscribed(session, channel, userId)) {
+          editorsContext.addClient(sessionId, fileId, provider, workspace);
+          editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+        } else {
+          LOG.debug("Editor subscription of session {} on file {} ignored: the session is gone", sessionId, fileId);
+        }
+      }
+    }
+
+    private boolean isStillSubscribed(ServerSession session, ServerChannel channel, String userId) {
+      return exoBayeux.isSubscribed(userId, session.getId()) && channel.getSubscribers().contains(session);
     }
 
   }
@@ -711,9 +711,6 @@ public class CometdDocumentsService implements Startable {
    */
   public static final int                     MIN_MAX_THREADS          = 4;
 
-  /** The number of locks the registrations and unsubscriptions of editors are striped on */
-  private static final int                    EDITORS_LOCKS_COUNT      = 64;
-
   /** Thread idle time for thread executors (in seconds). */
   public static final int                     THREAD_IDLE_TIME         = 120;
 
@@ -734,6 +731,9 @@ public class CometdDocumentsService implements Startable {
 
   /** The name of the thread of a closed editor's timer. */
   static final String                         CLOSED_EDITOR_TIMER_NAME = "documents-closed-editor-timer";
+
+  /** The number of locks the registrations and unsubscriptions of editors are striped on */
+  private static final int                    EDITORS_LOCKS_COUNT      = 64;
 
   /** The exo bayeux. */
   protected final EXoContinuationBayeux       exoBayeux;
@@ -762,6 +762,9 @@ public class CometdDocumentsService implements Startable {
   /** The editors context. */
   protected final EditorsContext              editorsContext;
 
+  /** Puts again the editors of this node another node removed. */
+  ScheduledThreadPoolExecutor                 restoreExecutor;
+
   /**
    * One lock of this array per connection, by the hash of its session id: the
    * registration and the unsubscription of one connection exclude each other.
@@ -770,9 +773,6 @@ public class CometdDocumentsService implements Startable {
    * on the sections of a connection hashing to the same lock (one in 64).
    */
   private final Object[]                      editorsLocks             = newEditorsLocks();
-
-  /** Puts again the editors of this node another node removed. */
-  ScheduledThreadPoolExecutor                 restoreExecutor;
 
   /**
    * Instantiates the CometdDocumentsService.
@@ -795,18 +795,6 @@ public class CometdDocumentsService implements Startable {
     this.eventsHandlers = createThreadExecutor(THREAD_PREFIX, MAX_FACTOR, QUEUE_FACTOR);
     this.identityRegistry = identityRegistry;
     this.authenticator = authenticator;
-  }
-
-  private static Object[] newEditorsLocks() {
-    Object[] locks = new Object[EDITORS_LOCKS_COUNT];
-    for (int i = 0; i < locks.length; i++) {
-      locks[i] = new Object();
-    }
-    return locks;
-  }
-
-  Object editorsLock(String sessionId) {
-    return editorsLocks[Math.floorMod(sessionId.hashCode(), EDITORS_LOCKS_COUNT)];
   }
 
   /**
@@ -1331,6 +1319,18 @@ public class CometdDocumentsService implements Startable {
    */
   public String getUserToken(String userId) {
     return exoBayeux.getUserToken(userId);
+  }
+
+  Object editorsLock(String sessionId) {
+    return editorsLocks[Math.floorMod(sessionId.hashCode(), EDITORS_LOCKS_COUNT)];
+  }
+
+  private static Object[] newEditorsLocks() {
+    Object[] locks = new Object[EDITORS_LOCKS_COUNT];
+    for (int i = 0; i < locks.length; i++) {
+      locks[i] = new Object();
+    }
+    return locks;
   }
 
   /**
