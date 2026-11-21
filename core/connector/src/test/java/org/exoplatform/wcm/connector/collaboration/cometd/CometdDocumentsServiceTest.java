@@ -580,6 +580,48 @@ public class CometdDocumentsServiceTest {
   }
 
   @Test
+  public void testAMalformedDocumentOpenedEventIsDropped() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    DocumentService documentService = mock(DocumentService.class);
+    CometdDocumentsService service = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+
+    for (Object malformed : new Object[] { 42L, Map.of("name", "john") }) {
+      ServerMessage.Mutable userEvent = openedEvent("john");
+      userEvent.getDataAsMap().put("userId", malformed);
+      assertFalse("an event whose user is not a string is not delivered", service.service.subscribeDocuments(johnSession, userEvent, FILE_ID));
+      assertEquals("an event whose user is not a string is ignored", 0, recorded(service).size());
+
+      ServerMessage.Mutable workspaceEvent = openedEvent("john");
+      workspaceEvent.getDataAsMap().put("workspace", malformed);
+      assertFalse("an event whose workspace is not a string is not delivered",
+                  service.service.subscribeDocuments(johnSession, workspaceEvent, FILE_ID));
+      assertEquals("an event whose workspace is not a string is handled as one without it", 1, recorded(service).size());
+      recorded(service).clear();
+
+      ServerMessage.Mutable providerEvent = openedEvent("john");
+      providerEvent.getDataAsMap().put("provider", malformed);
+      assertFalse("an event whose provider is not a string is not delivered",
+                  service.service.subscribeDocuments(johnSession, providerEvent, FILE_ID));
+      assertEquals("an event whose provider is not a string is handled as one without it", 1, recorded(service).size());
+      recorded(service).clear();
+
+      ServerMessage.Mutable typeEvent = openedEvent("john");
+      typeEvent.getDataAsMap().put("type", malformed);
+      assertFalse("an event whose type is not a string is not delivered", service.service.subscribeDocuments(johnSession, typeEvent, FILE_ID));
+      assertEquals("an event whose type is not a string is ignored", 0, recorded(service).size());
+    }
+
+    ServerMessage.Mutable unreadable = mock(ServerMessage.Mutable.class);
+    when(unreadable.getData()).thenReturn(new HashMap<String, Object>());
+    when(unreadable.getDataAsMap()).thenThrow(new IllegalStateException("unreadable"));
+    assertFalse("an event the listener cannot read is not delivered", service.service.subscribeDocuments(johnSession, unreadable, FILE_ID));
+    assertEquals(0, recorded(service).size());
+  }
+
+  @Test
   public void testTheEditorIsRecordedOnlyForAUserWhoMayEditTheDocument() throws Exception {
     DocumentService documentService = mock(DocumentService.class);
     DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
