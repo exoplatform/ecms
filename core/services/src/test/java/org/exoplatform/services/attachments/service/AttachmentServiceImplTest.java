@@ -19,28 +19,38 @@ package org.exoplatform.services.attachments.service;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.security.AccessControlException;
 import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
+
+import javax.jcr.ItemNotFoundException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 
+import org.exoplatform.commons.exception.ObjectNotFoundException;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.model.Permission;
+import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.attachments.utils.Utils;
@@ -50,7 +60,12 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.config.RepositoryEntry;
+import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -82,17 +97,39 @@ public class AttachmentServiceImplTest {
 
   private final AttachmentStorage attachmentStorage = mock(AttachmentStorage.class);
 
+  private static final String     DOCUMENT_ID       = "doc1";
+
+  private static final String     DOCUMENT_PATH     = "/Users/doc1";
+
+  private final ExtendedSession   session           = mock(ExtendedSession.class);
+
+  private final AttachmentACLPlugin aclPlugin       = mock(AttachmentACLPlugin.class);
+
   private AttachmentServiceImpl   attachmentService;
 
   @Before
   public void setUp() throws Exception {
+    SessionProviderService sessionProviderService = mock(SessionProviderService.class);
+    RepositoryService repositoryService = mock(RepositoryService.class);
+    SessionProvider sessionProvider = mock(SessionProvider.class);
+    ManageableRepository repository = mock(ManageableRepository.class);
+    RepositoryEntry repositoryEntry = mock(RepositoryEntry.class);
+    Node documentNode = mock(Node.class);
+    when(sessionProviderService.getSessionProvider(null)).thenReturn(sessionProvider);
+    when(repositoryService.getCurrentRepository()).thenReturn(repository);
+    when(repository.getConfiguration()).thenReturn(repositoryEntry);
+    when(repositoryEntry.getDefaultWorkspaceName()).thenReturn("collaboration");
+    when(sessionProvider.getSession("collaboration", repository)).thenReturn(session);
+    when(session.getNodeByIdentifier(DOCUMENT_ID)).thenReturn(documentNode);
+    when(documentNode.getPath()).thenReturn(DOCUMENT_PATH);
+    when(aclPlugin.getEntityType()).thenReturn(ENTITY_TYPE);
     IdentityManager identityManager = mock(IdentityManager.class);
     when(identityManager.getIdentity(String.valueOf(USER_IDENTITY_ID))).thenReturn(mock(Identity.class));
     when(attachmentStorage.getAttachmentItemByEntity(anyLong(), anyString(), anyString())).thenReturn(new Attachment());
 
     attachmentService = spy(new AttachmentServiceImpl(attachmentStorage,
-                                                      mock(RepositoryService.class),
-                                                      mock(SessionProviderService.class),
+                                                      repositoryService,
+                                                      sessionProviderService,
                                                       mock(DocumentService.class),
                                                       identityManager,
                                                       mock(ManageDriveService.class),
@@ -255,6 +292,119 @@ public class AttachmentServiceImplTest {
     when(folder.getPath()).thenReturn(DESTINATION_PATH);
     when(folder.isNodeType(NodetypeConstant.EXO_HIDDENABLE)).thenReturn(hidden);
     return folder;
+  }
+
+  /**
+   * Mutant: without the entity edit check the link is stored for a user who
+   * can't edit the entity.
+   */
+  @Test
+  public void linkIsRefusedWithoutTheRightToEditTheEntity() {
+    attachmentService.addACLPlugin(aclPlugin);
+    when(aclPlugin.canEdit(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(false);
+
+    assertThrows(IllegalAccessException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, ENTITY_TYPE, DOCUMENT_ID));
+
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+  }
+
+  /**
+   * Mutant: without the document read check the link is stored for a user who
+   * can't read the document.
+   */
+  @Test
+  public void linkIsRefusedWithoutTheRightToReadTheDocument() throws Exception {
+    attachmentService.addACLPlugin(aclPlugin);
+    when(aclPlugin.canEdit(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(true);
+    doThrow(new AccessControlException("read")).when(session).checkPermission(DOCUMENT_PATH, PermissionType.READ);
+
+    assertThrows(ObjectNotFoundException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, ENTITY_TYPE, DOCUMENT_ID));
+
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+  }
+
+  @Test
+  public void linkIsStoredWithTheRightsToEditTheEntityAndReadTheDocument() throws Exception {
+    attachmentService.addACLPlugin(aclPlugin);
+    when(aclPlugin.canEdit(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(true);
+    Attachment linked = new Attachment();
+    doReturn(linked).when(attachmentService).getAttachmentByIdByEntity(ENTITY_TYPE, ENTITY_ID, DOCUMENT_ID, USER_IDENTITY_ID);
+
+    Attachment result = attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, ENTITY_TYPE, DOCUMENT_ID);
+
+    assertSame(linked, result);
+    verify(session).checkPermission(eq(DOCUMENT_PATH), eq(PermissionType.READ));
+    verify(attachmentStorage, times(1)).linkAttachmentToEntity(ENTITY_ID, ENTITY_TYPE, DOCUMENT_ID);
+  }
+
+  /**
+   * Mutant: without the checks before the removals, the unsent link is removed
+   * before the refused id is met.
+   */
+  @Test
+  public void updateChangesNothingWhenOneNewAttachmentIsRefused() throws Exception {
+    attachmentService.addACLPlugin(aclPlugin);
+    when(aclPlugin.canEdit(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(true);
+    Node refusedNode = mock(Node.class);
+    when(refusedNode.getPath()).thenReturn("/Users/refused");
+    when(session.getNodeByIdentifier("refused")).thenReturn(refusedNode);
+    doThrow(new AccessControlException("read")).when(session).checkPermission("/Users/refused", PermissionType.READ);
+    when(attachmentStorage.getAttachmentsByEntity(ENTITY_ID, ENTITY_TYPE)).thenReturn(List.of(visible("removed")));
+
+    assertThrows(ObjectNotFoundException.class,
+                 () -> attachmentService.updateEntityAttachments(USER_IDENTITY_ID,
+                                                                 ENTITY_ID,
+                                                                 ENTITY_TYPE,
+                                                                 List.of(DOCUMENT_ID, "refused")));
+
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+    verify(attachmentStorage, never()).deleteAttachmentItemByIdByEntity(anyLong(), anyString(), anyString());
+  }
+
+  @Test
+  public void linkIsRefusedWhenTheDocumentDoesNotExist() throws Exception {
+    when(session.getNodeByIdentifier("missing")).thenThrow(new ItemNotFoundException("missing"));
+
+    assertThrows(ObjectNotFoundException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, ENTITY_TYPE, "missing"));
+
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+  }
+
+  /**
+   * Mutant: with an exact lookup of the type, the rule registered under the
+   * lower-case type is not found for the upper-case one.
+   */
+  @Test
+  public void linkIsRefusedWithoutTheRightToEditTheEntityWhateverTheCaseOfItsType() {
+    attachmentService.addACLPlugin(aclPlugin);
+    when(aclPlugin.canEdit(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(false);
+
+    assertThrows(IllegalAccessException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID,
+                                                                ENTITY_ID,
+                                                                ENTITY_TYPE.toUpperCase(),
+                                                                DOCUMENT_ID));
+
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+  }
+
+  @Test
+  public void updateIsRefusedWithoutTheRightToEditTheEntityWhateverTheCaseOfItsType() throws Exception {
+    attachmentService.addACLPlugin(aclPlugin);
+    when(aclPlugin.canEdit(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(false);
+    when(attachmentStorage.getAttachmentsByEntity(ENTITY_ID, ENTITY_TYPE.toUpperCase())).thenReturn(List.of(visible("removed")));
+
+    assertThrows(IllegalAccessException.class,
+                 () -> attachmentService.updateEntityAttachments(USER_IDENTITY_ID,
+                                                                 ENTITY_ID,
+                                                                 ENTITY_TYPE.toUpperCase(),
+                                                                 List.of(DOCUMENT_ID)));
+
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+    verify(attachmentStorage, never()).deleteAttachmentItemByIdByEntity(anyLong(), anyString(), anyString());
   }
 
   private static Attachment visible(String attachmentId) {

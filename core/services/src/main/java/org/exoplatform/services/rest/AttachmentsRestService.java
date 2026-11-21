@@ -82,7 +82,8 @@ public class AttachmentsRestService implements ResourceContainer {
   @ApiResponses(value = { 
           @ApiResponse(responseCode = "204", description = "Request fulfilled"),
           @ApiResponse(responseCode = "400", description = "Invalid query input"),
-          @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "403", description = "Forbidden operation"),
+          @ApiResponse(responseCode = "404", description = "Attachment not found"),
           @ApiResponse(responseCode = "500", description = "Internal server error") })
   public Response linkAttachmentToEntity(@Parameter(description = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                          @Parameter(description = "entity type", required = true) @PathParam("entityType") String entityType,
@@ -104,6 +105,10 @@ public class AttachmentsRestService implements ResourceContainer {
     Attachment attachment = new Attachment();
     try {
       attachment = attachmentService.linkAttachmentToEntity(userIdentityId, entityId, entityType, attachmentId);
+    } catch (IllegalAccessException e) {
+      return Response.status(Response.Status.FORBIDDEN).entity(e.getMessage()).build();
+    } catch (ObjectNotFoundException e) {
+      return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
     } catch (Exception e) {
       LOG.error("Error when trying to link attachments to entity with type {} and id {}: ", entityType, entityId, e);
       return Response.serverError().entity(e.getMessage()).build();
@@ -120,6 +125,7 @@ public class AttachmentsRestService implements ResourceContainer {
           @ApiResponse(responseCode = "204", description = "Request fulfilled"),
           @ApiResponse(responseCode = "400", description = "Invalid query input"),
           @ApiResponse(responseCode = "401", description = "Unauthorized operation"),
+          @ApiResponse(responseCode = "404", description = "Attachment not found"),
           @ApiResponse(responseCode = "500", description = "Internal server error") })
   public Response updateAttachmentsLinkedToContext(@Parameter(description = "entity technical identifier", required = true) @PathParam("entityId") long entityId,
                                                    @Parameter(description = "entity type", required = true) @PathParam("entityType") String entityType,
@@ -137,6 +143,8 @@ public class AttachmentsRestService implements ResourceContainer {
       attachmentService.updateEntityAttachments(userIdentityId, entityId, entityType, attachmentIds);
     } catch (IllegalAccessException e) {
       return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+    } catch (ObjectNotFoundException e) {
+      return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
     } catch (Exception e) {
       LOG.error("Error when trying to update attachments of entity type {} with id {}: ", entityType, entityId, e);
       return Response.serverError().entity(e.getMessage()).build();

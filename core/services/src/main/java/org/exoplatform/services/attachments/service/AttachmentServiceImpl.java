@@ -102,7 +102,8 @@ public class AttachmentServiceImpl implements AttachmentService {
   public Attachment linkAttachmentToEntity(long userIdentityId,
                                            long entityId,
                                            String entityType,
-                                           String attachmentId) throws IllegalAccessException {
+                                           String attachmentId) throws IllegalAccessException,
+                                                                                          ObjectNotFoundException {
     if (entityId <= 0) {
       throw new IllegalArgumentException("Entity Id must be positive");
     }
@@ -123,6 +124,10 @@ public class AttachmentServiceImpl implements AttachmentService {
     if (userIdentity == null) {
       throw new IllegalAccessException("User with name " + userIdentityId + " doesn't exist");
     }
+
+    // Both rights are checked before the entity type plugin prepares the link
+    checkCanEditEntity(userIdentityId, entityType, entityId);
+    checkCanReadAttachment(attachmentId);
 
     List<String> attachmentIds = getAttachmentEntityTypePlugin(entityType).getlinkedAttachments(entityType, entityId, attachmentId);
 
@@ -162,6 +167,17 @@ public class AttachmentServiceImpl implements AttachmentService {
       throw new IllegalStateException("Can't get attachments of entity with type " + entityType + " and id " + entityId, e);
     }
     List<String> existingAttachmentsIds = existingEntityAttachments.stream().map(Attachment::getId).collect(Collectors.toList());
+    // Every right is checked before the first removal or link, so a refused id
+    // leaves the entity untouched
+    List<String> newAttachmentIds = attachmentIds.stream()
+                                                 .filter(id -> !existingAttachmentsIds.contains(id) && StringUtils.isNotEmpty(id))
+                                                 .toList();
+    if (!newAttachmentIds.isEmpty()) {
+      checkCanEditEntity(userIdentityId, entityType, entityId);
+      for (String newAttachmentId : newAttachmentIds) {
+        checkCanReadAttachment(newAttachmentId);
+      }
+    }
     // delete removed attachments, except the ones the user can't see: the list
     // sent back holds only what the user was shown
     if (attachmentIds.isEmpty()) {
@@ -182,6 +198,47 @@ public class AttachmentServiceImpl implements AttachmentService {
           linkAttachmentToEntity(userIdentityId, entityId, entityType, attachmentId);
         }
       }
+    }
+  }
+
+  private void checkCanEditEntity(long userIdentityId, String entityType, long entityId) throws IllegalAccessException {
+    AttachmentACLPlugin attachmentACLPlugin = findAclPlugin(entityType);
+    if (attachmentACLPlugin != null
+        && !attachmentACLPlugin.canEdit(userIdentityId, attachmentACLPlugin.getEntityType(), String.valueOf(entityId))) {
+      throw new IllegalAccessException("User with identity id " + userIdentityId + " is not allowed to edit the entity with type "
+          + entityType + " and id " + entityId);
+    }
+  }
+
+  /**
+   * The storage keeps the entity type in upper case, so the rule of an entity
+   * type is found whatever the case of the type it is asked for
+   */
+  private AttachmentACLPlugin findAclPlugin(String entityType) {
+    AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
+    if (attachmentACLPlugin == null) {
+      attachmentACLPlugin = this.aclPlugins.entrySet()
+                                           .stream()
+                                           .filter(entry -> StringUtils.equalsIgnoreCase(entry.getKey(), entityType))
+                                           .map(Map.Entry::getValue)
+                                           .findFirst()
+                                           .orElse(null);
+    }
+    return attachmentACLPlugin;
+  }
+
+  private void checkCanReadAttachment(String attachmentId) throws ObjectNotFoundException {
+    boolean canRead;
+    try {
+      canRead = checkAttachmentJCRPermission(attachmentId, PermissionType.READ);
+    } catch (IllegalStateException e) {
+      if (e.getCause() instanceof ItemNotFoundException) {
+        throw new ObjectNotFoundException("Attachment with id " + attachmentId + " not found");
+      }
+      throw e;
+    }
+    if (!canRead) {
+      throw new ObjectNotFoundException("Attachment with id " + attachmentId + " not found");
     }
   }
 
