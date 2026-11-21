@@ -313,6 +313,8 @@ public class ManageDocumentService implements ResourceContainer {
    * @param workspaceName The workspace name.
    * @param currentFolder The path to the folder where a child folder is added.
    * @param folderName The folder name.
+   * @param folderNodeType The node type of the created folder.
+   * @param isSystem Whether the created folder is hidden.
    * @return {@link Document} which contains the created folder.
    * @anchor ManageDocumentService.createFolder
    */
@@ -326,7 +328,7 @@ public class ManageDocumentService implements ResourceContainer {
                                @QueryParam("folderNodeType") @DefaultValue("nt:folder") String folderNodeType,
                                @QueryParam("isSystem") @DefaultValue("false") boolean isSystem) {
     try {
-      Node node = getNode(driveName, workspaceName, currentFolder, isSystem);
+      Node node = getNode(driveName, workspaceName, currentFolder);
       // The name automatically determined from the title according to the current algorithm.
       String name = Text.escapeIllegalJcrChars(Utils.cleanName(folderName));
       // Set default name if new title contain no valid character
@@ -683,27 +685,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @throws Exception
    */
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
-    return getNode(driveName, workspaceName, currentFolder, false);
-  }
-
-  /**
-   * This function gets or creates the folder where the files will be stored
-   * @param driveName the name of the selected JCR drive
-   * @param workspaceName The name of the JCR workspace
-   * @param currentFolder The folder where the files will be stored
-   *                      for spaces, the currentFolder will be created directly under the Documents folder of the space.
-   *                      If the currentFolder param is preceded with 'DRIVE_ROOT_NODE' then currentFolder will be created under the root folder of the space
-   * @param isSystem use system session if true
-   * @return Node object representing the parent folder where the files will be uploaded
-   * @throws Exception
-   */
-  private Node getNode(String driveName, String workspaceName, String currentFolder, boolean isSystem) throws Exception {
-    Session session;
-    if (isSystem) {
-      session = getSystemSession(workspaceName);
-    } else {
-      session = getSession(workspaceName);
-    }
+    Session session = getSession(workspaceName);
     DriveData driveData = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName));
     String driveHomePath = driveData.getHomePath();
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
@@ -713,8 +695,9 @@ public class ManageDocumentService implements ResourceContainer {
       return node;
     }
     // Check if we store the file under Documents folder or under the root folder of the space
+    String driveRootPath = null;
     if(driveName.startsWith(".spaces.") && currentFolder.startsWith("DRIVE_ROOT_NODE")) {
-      String driveRootPath = driveHomePath;
+      driveRootPath = driveHomePath;
       if(driveHomePath.contains("/Documents")) {
         driveRootPath = driveHomePath.substring(0, driveHomePath.indexOf("/Documents"));
       }
@@ -727,11 +710,18 @@ public class ManageDocumentService implements ResourceContainer {
 
     List<String> foldersNames = Arrays.stream(currentFolder.split("/")).filter(item -> !item.isEmpty()).toList().stream().toList();
     for (String folder : foldersNames) {
+      // refuse any segment the repository resolves to the current or the parent node
+      String segment = StringUtils.substringAfterLast(":" + folder.strip().replaceFirst("\\[[^\\]]*\\]$", ""), ":");
+      if (".".equals(segment) || "..".equals(segment)) {
+        throw new PathNotFoundException("Folder " + currentFolder + " is not a folder of drive " + driveName);
+      }
+    }
+    for (String folder : foldersNames) {
       String cleanFolderName = org.exoplatform.services.jcr.util.Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
       if (node.hasNode(folder)) {
-        node = node.getNode(folder);
+        node = checkUnder(node.getNode(folder), driveRootPath, currentFolder, driveName);
       } else if (node.hasNode(cleanFolderName)) {
-        node = node.getNode(cleanFolderName);
+        node = checkUnder(node.getNode(cleanFolderName), driveRootPath, currentFolder, driveName);
       } else {
         // create new folder
         String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(folder));
@@ -751,20 +741,25 @@ public class ManageDocumentService implements ResourceContainer {
         node = newNode;
       }
       if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-        node = linkManager.getTarget(node);
+        node = checkUnder(linkManager.getTarget(node), driveRootPath, currentFolder, driveName);
       }
+    }
+    return node;
+  }
+
+  /**
+   * @return the node, when no root path is given or it is that root or below it
+   * @throws PathNotFoundException otherwise
+   */
+  private Node checkUnder(Node node, String rootPath, String currentFolder, String driveName) throws RepositoryException {
+    if (rootPath != null && !node.getPath().equals(rootPath) && !node.getPath().startsWith(rootPath + "/")) {
+      throw new PathNotFoundException("Folder " + currentFolder + " is not a folder of drive " + driveName);
     }
     return node;
   }
 
   private Session getSession(String workspaceName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-    ManageableRepository manageableRepository = getCurrentRepository();
-    return sessionProvider.getSession(workspaceName, manageableRepository);
-  }
-
-  private Session getSystemSession(String workspaceName) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     ManageableRepository manageableRepository = getCurrentRepository();
     return sessionProvider.getSession(workspaceName, manageableRepository);
   }
