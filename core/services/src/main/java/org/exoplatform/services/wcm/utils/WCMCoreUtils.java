@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
@@ -31,6 +32,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 
+import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobExecutionContext;
 import org.quartz.impl.JobDetailImpl;
 
@@ -50,6 +52,7 @@ import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -412,6 +415,45 @@ public class WCMCoreUtils {
     return documentService.getLinkInDocumentsApp(nodePath);
   }
   
+  /**
+   * Whether a user can read a document, and the target of a document that is
+   * a link, through a session of that user, closed once read
+   *
+   * @param userId the user
+   * @param workspace the document's workspace, the default one when blank
+   * @param nodeIdentifier the document's identifier
+   * @return false when the user is blank, the document or its target is
+   *         missing, or the user can't read it
+   */
+  public static boolean canUserRead(String userId, String workspace, String nodeIdentifier) {
+    if (StringUtils.isBlank(userId) || StringUtils.isBlank(nodeIdentifier)) {
+      return false;
+    }
+    AtomicBoolean readable = new AtomicBoolean();
+    try {
+      invokeUserSession(userId, userSessionProvider -> {
+        try {
+          ManageableRepository repository = getRepository();
+          String workspaceName = StringUtils.isBlank(workspace) ? repository.getConfiguration().getDefaultWorkspaceName()
+                                                                : workspace;
+          ExtendedSession session = (ExtendedSession) userSessionProvider.getSession(workspaceName, repository);
+          Node node = session.getNodeByIdentifier(nodeIdentifier);
+          if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+            // The target is read through a session of the same user: one the user can't read throws
+            userSessionProvider.getSession(node.getProperty(NodetypeConstant.EXO_WORKSPACE).getString(), repository)
+                               .getNodeByUUID(node.getProperty(NodetypeConstant.EXO_UUID).getString());
+          }
+          readable.set(true);
+        } finally {
+          userSessionProvider.close();
+        }
+      });
+    } catch (RepositoryException | RuntimeException e) { // NOSONAR fails closed: any error reads as unreadable
+      LOG.debug("User {} can't read the document {} of workspace {}", userId, nodeIdentifier, workspace, e);
+    }
+    return readable.get();
+  }
+
   /**
    * Allows to perform actions using user session provider.
    * Invokes the handler with obtained session provider using the conversation state based on userId.

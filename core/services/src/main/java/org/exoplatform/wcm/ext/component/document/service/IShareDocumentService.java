@@ -19,6 +19,7 @@ package org.exoplatform.wcm.ext.component.document.service;
 import javax.jcr.Node;
 
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 
 /**
@@ -101,4 +102,18 @@ public interface IShareDocumentService {
    * @throws Exception when an error occurred while sharing document to space
    */
   void shareDocumentActivityToSpace(ExoSocialActivity sharedActivity) throws Exception;
+
+  /**
+   * Whether a user can read a document, and the target of a document that is
+   * a link, through a session of that user
+   *
+   * @param userId the user who shares or posts the document
+   * @param workspace the document's workspace, the default one when blank
+   * @param nodeIdentifier the document's identifier
+   * @return false when the user is blank, the document or its target is
+   *         missing, or the user can't read it
+   */
+  default boolean canRead(String userId, String workspace, String nodeIdentifier) {
+    return WCMCoreUtils.canUserRead(userId, workspace, nodeIdentifier);
+  }
 }
