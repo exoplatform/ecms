@@ -29,8 +29,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import javax.activation.MimeType;
-import javax.activation.MimeTypeParseException;
+import jakarta.activation.MimeType;
+import jakarta.activation.MimeTypeParseException;
 
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.component.BaseComponentPlugin;
