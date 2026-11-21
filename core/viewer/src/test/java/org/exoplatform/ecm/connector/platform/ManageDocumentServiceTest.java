@@ -186,7 +186,10 @@ public class ManageDocumentServiceTest {
 
   /**
    * The walk checks each node it reaches, so a node outside the space, whatever
-   * leads to it, ends the request before anything is created.
+   * leads to it, ends the request before anything is created. No path segment
+   * reaches such a node today, since the segments that lead to the parent are
+   * refused first: the stubbed outside child keeps the check in place should
+   * the repository resolve another one.
    */
   @Test
   public void aSpaceRootPathCreatesNothingOutsideTheSpace() throws Exception {
