@@ -54,8 +54,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.Property;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.cometd.annotation.Service;
@@ -78,6 +80,7 @@ import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cache.SimpleExoCache;
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
+import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -553,7 +556,8 @@ public class CometdDocumentsServiceTest {
     assertFalse("an event naming no user is not delivered", service.service.subscribeDocuments(johnSession, openedEvent(null), FILE_ID));
     assertEquals("an event naming no user is ignored", 0, recorded(service).size());
 
-    assertTrue("the sender's own event is delivered", service.service.subscribeDocuments(johnSession, openedEvent("john"), FILE_ID));
+    assertFalse("the sender's own event is not delivered as published",
+                service.service.subscribeDocuments(johnSession, openedEvent("john"), FILE_ID));
     assertEquals("the sender's own event is handled", 1, recorded(service).size());
   }
 
@@ -572,13 +576,77 @@ public class CometdDocumentsServiceTest {
     ServerSession opener = mock(ServerSession.class);
 
     CometdDocumentsService readerService = recordingService(mock(EXoContinuationBayeux.class), documentService, identityRegistry, false);
+    ServerChannel readerChannel = bayeuxChannel(readerService);
     readerService.service.onDocumentOpened(opener, "john", FILE_ID, WORKSPACE, PROVIDER);
     assertEquals("a user who may not edit the document records no editor", 0, recorded(readerService).size());
     verify(opener).deliver(any(), eq(CometdDocumentsService.CHANNEL_NAME + FILE_ID), any(Object.class), any());
+    verify(readerChannel, never()).publish(any(), any(Object.class), any());
 
     CometdDocumentsService editorService = recordingService(mock(EXoContinuationBayeux.class), documentService, identityRegistry, true);
+    ServerChannel editorChannel = bayeuxChannel(editorService);
     editorService.service.onDocumentOpened(opener, "john", FILE_ID, WORKSPACE, PROVIDER);
     assertEquals("a user who may edit the document records the editor", 1, recorded(editorService).size());
+    ArgumentCaptor<Object> published = ArgumentCaptor.forClass(Object.class);
+    verify(editorChannel).publish(any(), published.capture(), any());
+    assertEquals("the opened event is republished with the checked provider and the document only",
+                 "{\"type\": \"DOCUMENT_OPENED\", \"fileId\": \"" + FILE_ID + "\", \"provider\": \"" + PROVIDER + "\"}",
+                 published.getValue());
+  }
+
+  @Test
+  public void testAnOpenedEventOfAnUnknownProviderIsNotRepublished() throws Exception {
+    DocumentService documentService = mock(DocumentService.class);
+    when(documentService.getEditorProvider("unknown")).thenThrow(new DocumentEditorProviderNotFoundException("unknown"));
+    ServerSession opener = mock(ServerSession.class);
+    CometdDocumentsService service = recordingService(mock(EXoContinuationBayeux.class), documentService, mock(IdentityRegistry.class), true);
+    ServerChannel channel = bayeuxChannel(service);
+
+    service.service.onDocumentOpened(opener, "john", FILE_ID, WORKSPACE, "unknown");
+
+    verify(channel, never()).publish(any(), any(Object.class), any());
+    assertEquals(0, recorded(service).size());
+  }
+
+  @Test
+  public void testTheEditRightIsReadOnAPlainDocumentAndFailsClosed() throws Exception {
+    CometdDocumentsService service = service(mock(DocumentService.class));
+    ManageableRepository repository = mock(ManageableRepository.class);
+    SessionProvider sessionProvider = mock(SessionProvider.class);
+    Session session = mock(Session.class);
+    when(sessionProvider.getSession(WORKSPACE, repository)).thenReturn(session);
+    ExtendedNode plain = mock(ExtendedNode.class);
+    when(plain.isNodeType("exo:symlink")).thenReturn(false);
+    when(session.getNodeByUUID(FILE_ID)).thenReturn(plain);
+
+    try (MockedStatic<WCMCoreUtils> wcmCoreUtils = mockStatic(WCMCoreUtils.class)) {
+      wcmCoreUtils.when(WCMCoreUtils::getRepository).thenReturn(repository);
+      wcmCoreUtils.when(() -> WCMCoreUtils.invokeUserSession(eq("john"), any())).thenAnswer(invocation -> {
+        RepositoryConsumer<SessionProvider> handler = invocation.getArgument(1);
+        handler.accept(sessionProvider);
+        return null;
+      });
+
+      assertTrue("a user who may set the properties of a plain document may edit it",
+                 service.canEditDocument("john", FILE_ID, WORKSPACE));
+      verify(plain).checkPermission(PermissionType.SET_PROPERTY);
+      verify(plain, never()).getProperty(any());
+
+      when(session.getNodeByUUID(FILE_ID)).thenThrow(new ItemNotFoundException());
+      assertFalse("an unknown document may not be edited", service.canEditDocument("john", FILE_ID, WORKSPACE));
+
+      doThrow(new RepositoryException("unreadable")).when(session).getNodeByUUID(FILE_ID);
+      assertFalse("a document that cannot be read may not be edited", service.canEditDocument("john", FILE_ID, WORKSPACE));
+    }
+  }
+
+  private static ServerChannel bayeuxChannel(CometdDocumentsService service) throws Exception {
+    BayeuxServer bayeux = mock(BayeuxServer.class);
+    ServerChannel channel = mock(ServerChannel.class);
+    when(bayeux.createChannelIfAbsent(CometdDocumentsService.CHANNEL_NAME + FILE_ID)).thenReturn(new MarkedReference<>(channel, false));
+    Field bayeuxField = CometdDocumentsService.CometdService.class.getDeclaredField("bayeux");
+    bayeuxField.setAccessible(true);
+    bayeuxField.set(service.service, bayeux);
+    return channel;
   }
 
   @Test

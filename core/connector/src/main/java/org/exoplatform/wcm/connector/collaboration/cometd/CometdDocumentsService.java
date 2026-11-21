@@ -771,18 +771,6 @@ public class CometdDocumentsService implements Startable {
    */
   private final Object[]                      editorsLocks             = newEditorsLocks();
 
-  private static Object[] newEditorsLocks() {
-    Object[] locks = new Object[EDITORS_LOCKS_COUNT];
-    for (int i = 0; i < locks.length; i++) {
-      locks[i] = new Object();
-    }
-    return locks;
-  }
-
-  Object editorsLock(String sessionId) {
-    return editorsLocks[Math.floorMod(sessionId.hashCode(), EDITORS_LOCKS_COUNT)];
-  }
-
   /** Puts again the editors of this node another node removed. */
   ScheduledThreadPoolExecutor                 restoreExecutor;
 
@@ -807,6 +795,18 @@ public class CometdDocumentsService implements Startable {
     this.eventsHandlers = createThreadExecutor(THREAD_PREFIX, MAX_FACTOR, QUEUE_FACTOR);
     this.identityRegistry = identityRegistry;
     this.authenticator = authenticator;
+  }
+
+  private static Object[] newEditorsLocks() {
+    Object[] locks = new Object[EDITORS_LOCKS_COUNT];
+    for (int i = 0; i < locks.length; i++) {
+      locks[i] = new Object();
+    }
+    return locks;
+  }
+
+  Object editorsLock(String sessionId) {
+    return editorsLocks[Math.floorMod(sessionId.hashCode(), EDITORS_LOCKS_COUNT)];
   }
 
   /**
@@ -957,9 +957,9 @@ public class CometdDocumentsService implements Startable {
      * @param sender the session that published the message
      * @param message the message
      * @param fileId the file id
-     * @return false to drop a message a client may not publish (another event
-     *         than an opened one, or an opened event whose user is not the
-     *         sender's), true to deliver it to the channel's subscribers
+     * @return false for every message a client publishes: the server publishes
+     *         the opened event itself once the sender's right is checked;
+     *         true for a message relayed from another node
      * @throws RepositoryException the repository exception
      */
     @Listener(CHANNEL_NAME_PARAMS)
@@ -1005,13 +1005,15 @@ public class CometdDocumentsService implements Startable {
           onDocumentOpened(sender, userId, fileId, workspace, provider);
         }
       });
-      return true;
+      // Never delivered as published: the server republishes a checked event
+      return false;
     }
 
     /**
-     * Tells the opener of a document whether its editor is available, and
-     * records that editor for the document when none is recorded and the user
-     * may edit the document.
+     * Tells the opener of a document whether its editor is available, records
+     * that editor for the document when none is recorded and the user may edit
+     * the document, and publishes the opened event for the channel's
+     * subscribers when the user may edit the document.
      *
      * @param opener the session of the user who opened the document
      * @param userId the id of that user, who owns the opener session
@@ -1028,8 +1030,11 @@ public class CometdDocumentsService implements Startable {
         String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
         boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
         service.sendCurrentProviderInfo(opener, fileId, available, availableProviders);
-        if (currentProvider == null && canEditDocument(userId, fileId, workspace)) {
-          setCurrentDocumentProvider(fileId, workspace, provider);
+        if (canEditDocument(userId, fileId, workspace)) {
+          if (currentProvider == null) {
+            setCurrentDocumentProvider(fileId, workspace, provider);
+          }
+          service.sendDocumentOpenedEvent(fileId, editorProvider.getProviderName());
         }
       } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
         LOG.error("Cannot send current provider info for fileId: " + fileId + ", workspace: " + workspace, e);
@@ -1091,6 +1096,31 @@ public class CometdDocumentsService implements Startable {
         }
       }
       return userIdentity;
+    }
+
+    /**
+     * Sends the opened event of a document, with the editor provider the
+     * server checked, to the channel's subscribers.
+     *
+     * @param fileId the file id
+     * @param provider the provider
+     */
+    protected void sendDocumentOpenedEvent(String fileId, String provider) {
+      ServerChannel channel = bayeux.createChannelIfAbsent(CHANNEL_NAME + fileId).getReference();
+      if (channel != null) {
+        StringBuilder data = new StringBuilder();
+        data.append('{');
+        data.append("\"type\": \"");
+        data.append(DOCUMENT_OPENED_EVENT);
+        data.append("\", ");
+        data.append("\"fileId\": \"");
+        data.append(fileId);
+        data.append("\", ");
+        data.append("\"provider\": \"");
+        data.append(provider);
+        data.append("\"}");
+        channel.publish(localSession, data.toString(), Promise.noop());
+      }
     }
 
     /**
