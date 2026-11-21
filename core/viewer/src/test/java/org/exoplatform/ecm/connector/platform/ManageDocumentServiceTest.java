@@ -16,6 +16,9 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.FileUploadHandler;
 
+import org.exoplatform.services.jcr.core.NamespaceAccessor;
+import org.exoplatform.services.jcr.impl.core.JCRPath;
+import org.exoplatform.services.jcr.impl.core.LocationFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,11 +29,15 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.NamespaceException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -129,6 +136,7 @@ public class ManageDocumentServiceTest {
     lenient().when(node.hasNode("Documents")).thenReturn(true);
     Node targetNode = mock(Node.class);
     lenient().when(node.getNode("Documents")).thenReturn(targetNode);
+    lenient().when(targetNode.getPath()).thenReturn("path/Documents");
     lenient().when(node.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(false);
     Node folderNode1 = mock(Node.class);
     when(node.addNode(anyString(), eq(NodetypeConstant.NT_FOLDER))).thenReturn(folderNode1);
@@ -140,5 +148,164 @@ public class ManageDocumentServiceTest {
 
     response = this.manageDocumentService.checkFileExistence("collaboration", ".spaces.space_one", "DRIVE_ROOT_NODE/Documents", "test.docx");
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+  }
+
+  @Test
+  public void createFolderRunsAsTheCallerWhateverTheSystemFlag() throws Exception {
+    Session systemSession = mock(Session.class);
+    SessionProvider systemSessionProvider = mock(SessionProvider.class);
+    lenient().when(systemSessionProvider.getSession(anyString(), any())).thenReturn(systemSession);
+    WCM_CORE_UTILS.when(WCMCoreUtils::getSystemSessionProvider).thenReturn(systemSessionProvider);
+    SESSION_PROVIDER.when(SessionProvider::createSystemProvider).thenReturn(systemSessionProvider);
+    Node driveNode = mock(Node.class);
+    when(session.getItem("personalDrivePath")).thenReturn(driveNode);
+    when(driveNode.addNode("folder", NodetypeConstant.NT_FOLDER)).thenThrow(new AccessDeniedException("user cannot add"));
+
+    Response response = manageDocumentService.createFolder(".spaces.space_one", "collaboration", "", "folder", NodetypeConstant.NT_FOLDER, true);
+
+    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    verifyNoInteractions(systemSession);
+  }
+
+  @Test
+  public void aSpaceRootPathCannotClimbOutOfTheSpace() throws Exception {
+    Node spaceRoot = mock(Node.class);
+    lenient().when(session.getItem("path")).thenReturn(spaceRoot);
+    lenient().when(session.getItem("personalDrivePath")).thenReturn(mock(Node.class));
+
+    for (String path : new String[] { "DRIVE_ROOT_NODE/../..", "DRIVE_ROOT_NODE/..[1]/other", "DRIVE_ROOT_NODE/:../other",
+        "DRIVE_ROOT_NODE/:..[2]/other", "DRIVE_ROOT_NODE/..[+1]/other", "DRIVE_ROOT_NODE/:..[\u0661]/other",
+        "DRIVE_ROOT_NODE/a/./b" }) {
+      Response response = manageDocumentService.deleteFolderOrFile(".spaces.space_one", "collaboration", path);
+
+      assertEquals(path, Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    }
+    verify(spaceRoot, never()).getNode(anyString());
+    verify(spaceRoot, never()).addNode(anyString(), anyString());
+  }
+
+  /**
+   * The walk checks each node it reaches, so a node outside the space, whatever
+   * leads to it, ends the request before anything is created.
+   */
+  @Test
+  public void aSpaceRootPathCreatesNothingOutsideTheSpace() throws Exception {
+    Node spaceRoot = mock(Node.class);
+    lenient().when(session.getItem("path")).thenReturn(spaceRoot);
+    lenient().when(session.getItem("personalDrivePath")).thenReturn(mock(Node.class));
+    Node outside = mock(Node.class);
+    when(outside.getPath()).thenReturn("/elsewhere");
+    when(spaceRoot.hasNode("x")).thenReturn(true);
+    when(spaceRoot.getNode("x")).thenReturn(outside);
+
+    Response response = manageDocumentService.createFolder(".spaces.space_one",
+                                                           "collaboration",
+                                                           "DRIVE_ROOT_NODE/x/new",
+                                                           "folder",
+                                                           NodetypeConstant.NT_FOLDER,
+                                                           false);
+
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    verify(outside, never()).addNode(anyString(), anyString());
+    verify(outside, never()).hasNode(anyString());
+  }
+
+  @Test
+  public void aSpaceRootPathCannotLeadOutOfTheSpaceThroughAShortcut() throws Exception {
+    Node spaceRoot = mock(Node.class);
+    lenient().when(session.getItem("path")).thenReturn(spaceRoot);
+    lenient().when(session.getItem("personalDrivePath")).thenReturn(mock(Node.class));
+    Node shortcut = mock(Node.class);
+    when(spaceRoot.hasNode("link")).thenReturn(true);
+    when(spaceRoot.getNode("link")).thenReturn(shortcut);
+    when(shortcut.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(true);
+    when(shortcut.getPath()).thenReturn("path/link");
+    Node target = mock(Node.class);
+    when(target.getPath()).thenReturn("/elsewhere/folder");
+    when(linkManager.getTarget(shortcut)).thenReturn(target);
+
+    Response response = manageDocumentService.deleteFolderOrFile(".spaces.space_one", "collaboration", "DRIVE_ROOT_NODE/link");
+
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    verify(target, never()).remove();
+  }
+
+  @Test
+  public void aSpaceRootPathLeadsToItsFolder() throws Exception {
+    Node spaceRoot = mock(Node.class);
+    lenient().when(session.getItem("path")).thenReturn(spaceRoot);
+    lenient().when(session.getItem("personalDrivePath")).thenReturn(mock(Node.class));
+    Node images = mock(Node.class);
+    when(spaceRoot.hasNode("images")).thenReturn(true);
+    when(spaceRoot.getNode("images")).thenReturn(images);
+    when(images.getPath()).thenReturn("path/images");
+    Node parent = mock(Node.class);
+    when(images.getParent()).thenReturn(parent);
+
+    Response response = manageDocumentService.deleteFolderOrFile(".spaces.space_one", "collaboration", "DRIVE_ROOT_NODE/images");
+
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    verify(images).remove();
+  }
+
+  /**
+   * Each segment the repository resolves to the space root itself or above it
+   * is refused before the space root is walked; a segment it resolves to a
+   * child is walked.
+   */
+  @Test
+  public void aSegmentIsRefusedWhenTheRepositoryResolvesItToTheRootOrAbove() throws Exception {
+    LocationFactory locationFactory = new LocationFactory(new NamespaceAccessor() {
+      @Override
+      public String getNamespaceURIByPrefix(String prefix) throws NamespaceException {
+        if ("".equals(prefix)) {
+          return "";
+        } else if ("jcr".equals(prefix)) {
+          return "http://www.jcp.org/jcr/1.0";
+        }
+        throw new NamespaceException(prefix);
+      }
+
+      @Override
+      public String getNamespacePrefixByURI(String uri) throws NamespaceException {
+        if ("".equals(uri)) {
+          return "";
+        } else if ("http://www.jcp.org/jcr/1.0".equals(uri)) {
+          return "jcr";
+        }
+        throw new NamespaceException(uri);
+      }
+
+      @Override
+      public String[] getAllNamespacePrefixes() {
+        return new String[] { "", "jcr" };
+      }
+    });
+    JCRPath spaceRootPath = locationFactory.parseAbsPath("/spaces/space_one");
+    String[] segments = { "..", ".", "..[1]", "..[+1]", "..[+0001]", ":..", ":..[2]", "..[\u0661]", "..[\uff11]", "x", "x[1]",
+        "jcr:x", "{}..", "_x002e__x002e_" };
+    int refused = 0;
+    for (String segment : segments) {
+      JCRPath resolved;
+      try {
+        resolved = locationFactory.createJCRPath(spaceRootPath, segment);
+      } catch (RepositoryException e) {
+        continue;
+      }
+      Node spaceRoot = mock(Node.class);
+      when(session.getItem("path")).thenReturn(spaceRoot);
+      lenient().when(session.getItem("personalDrivePath")).thenReturn(mock(Node.class));
+
+      Response response = manageDocumentService.deleteFolderOrFile(".spaces.space_one", "collaboration", "DRIVE_ROOT_NODE/" + segment);
+
+      if (resolved.getDepth() <= spaceRootPath.getDepth()) {
+        refused++;
+        assertEquals(segment, Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+        verifyNoInteractions(spaceRoot);
+      } else {
+        verify(spaceRoot, atLeastOnce()).hasNode(anyString());
+      }
+    }
+    assertEquals(9, refused);
   }
 }
