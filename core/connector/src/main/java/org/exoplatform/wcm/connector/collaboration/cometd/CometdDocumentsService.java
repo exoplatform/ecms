@@ -1,5 +1,6 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -22,6 +24,9 @@ import java.util.stream.Collectors;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.inject.Inject;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.cometd.annotation.Param;
@@ -55,9 +60,14 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.Authenticator;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
@@ -792,6 +802,41 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
+   * Whether a user may edit a document, read with a session of that user: the
+   * editor recorded for a document is chosen by a user who may edit it only.
+   *
+   * @param userId the user id
+   * @param fileId the document's id, or the id of a shortcut to it
+   * @param workspace the document's workspace
+   * @return true when the user may edit the document
+   */
+  protected boolean canEditDocument(String userId, String fileId, String workspace) {
+    AtomicBoolean canEdit = new AtomicBoolean();
+    try {
+      WCMCoreUtils.invokeUserSession(userId, sessionProvider -> {
+        try {
+          ManageableRepository repository = WCMCoreUtils.getRepository();
+          Node node = sessionProvider.getSession(workspace, repository).getNodeByUUID(fileId);
+          if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+            String targetWorkspace = node.getProperty(NodetypeConstant.EXO_WORKSPACE).getString();
+            String targetUuid = node.getProperty(NodetypeConstant.EXO_UUID).getString();
+            node = sessionProvider.getSession(targetWorkspace, repository).getNodeByUUID(targetUuid);
+          }
+          ((ExtendedNode) node).checkPermission(PermissionType.SET_PROPERTY);
+          canEdit.set(true);
+        } finally {
+          sessionProvider.close();
+        }
+      });
+    } catch (AccessControlException | AccessDeniedException | ItemNotFoundException e) {
+      LOG.debug("User {} may not edit document {}", userId, fileId, e);
+    } catch (RepositoryException | IllegalArgumentException e) {
+      LOG.warn("Cannot check whether user {} may edit document {}", userId, fileId, e);
+    }
+    return canEdit.get();
+  }
+
+  /**
    * The CometService is responsible for sending messages to Cometd channels
    * when a document is saved.
    */
@@ -832,55 +877,82 @@ public class CometdDocumentsService implements Startable {
      * @param sender the session that published the message
      * @param message the message
      * @param fileId the file id
+     * @return false to drop a message a client may not publish (another event
+     *         than an opened one, or an opened event whose user is not the
+     *         sender's), true to deliver it to the channel's subscribers
      * @throws RepositoryException the repository exception
      */
     @Listener(CHANNEL_NAME_PARAMS)
-    public void subscribeDocuments(ServerSession sender,
+    public boolean subscribeDocuments(ServerSession sender,
                                    ServerMessage.Mutable message,
                                    @Param("fileId") String fileId) throws RepositoryException {
       if (exoBayeux.isRelayed(sender)) {
         // Handled on the node the client published it to
-        return;
+        return true;
       }
       Object objData = message.getData();
       if (!Map.class.isInstance(objData)) {
         if (LOG.isDebugEnabled()) {
           LOG.debug("Couldn't get data as a map from event");
         }
-        return;
+        return false;
       }
 
       Map<String, Object> data = message.getDataAsMap();
       String type = (String) data.get("type");
+      if (!DOCUMENT_OPENED_EVENT.equals(type)) {
+        // The server publishes the other events itself: a client never does
+        LOG.debug("Event {} published by a client on file {} dropped", type, fileId);
+        return false;
+      }
+      String userId = (String) data.get("userId");
+      String workspace = (String) data.get("workspace");
+      String provider = (String) data.get("provider");
+      // The user named in the event must be the one who opened the sending
+      // live connection: its identity decides the editor and its record
+      if (userId == null || !exoBayeux.isSubscribed(userId, sender.getId())) {
+        LOG.debug("Document opened event on file {} ignored: its user is not the sender's", fileId);
+        return false;
+      }
+      eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+        @Override
+        void onContainerError(String error) {
+          LOG.error("An error has occured in container: {}", containerName);
+        }
 
-      if (type.equals(DOCUMENT_OPENED_EVENT)) {
-        String userId = (String) data.get("userId");
-        String workspace = (String) data.get("workspace");
-        String provider = (String) data.get("provider");
-        eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
-          @Override
-          void onContainerError(String error) {
-            LOG.error("An error has occured in container: {}", containerName);
-          }
+        @Override
+        void execute(ExoContainer exoContainer) {
+          onDocumentOpened(sender, userId, fileId, workspace, provider);
+        }
+      });
+      return true;
+    }
 
-          @Override
-          void execute(ExoContainer exoContainer) {
-            try {
-              DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-              Identity identity = userIdentity(userId);
-              boolean allowed = editorProvider.isAvailableForUser(identity);
-              List<String> availableProviders = service.getAllAvailableProviders(identity);
-              String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-              boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
-              service.sendCurrentProviderInfo(sender, fileId, available, availableProviders);
-              if (currentProvider == null) {
-                setCurrentDocumentProvider(fileId, workspace, provider);
-              }
-            } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
-              LOG.error("Cannot send current provider info for fileId: " + fileId + ", workspace: " + workspace, e);
-            }
-          }
-        });
+    /**
+     * Tells the opener of a document whether its editor is available, and
+     * records that editor for the document when none is recorded and the user
+     * may edit the document.
+     *
+     * @param opener the session of the user who opened the document
+     * @param userId the id of that user, who owns the opener session
+     * @param fileId the file id
+     * @param workspace the workspace
+     * @param provider the editor provider
+     */
+    void onDocumentOpened(ServerSession opener, String userId, String fileId, String workspace, String provider) {
+      try {
+        DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+        Identity identity = userIdentity(userId);
+        boolean allowed = editorProvider.isAvailableForUser(identity);
+        List<String> availableProviders = service.getAllAvailableProviders(identity);
+        String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+        boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
+        service.sendCurrentProviderInfo(opener, fileId, available, availableProviders);
+        if (currentProvider == null && canEditDocument(userId, fileId, workspace)) {
+          setCurrentDocumentProvider(fileId, workspace, provider);
+        }
+      } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
+        LOG.error("Cannot send current provider info for fileId: " + fileId + ", workspace: " + workspace, e);
       }
     }
 
