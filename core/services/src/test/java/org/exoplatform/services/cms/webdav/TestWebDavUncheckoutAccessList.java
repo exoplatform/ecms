@@ -112,6 +112,25 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
     super.tearDown();
   }
 
+  public void testADocumentWithoutAListOfItsOwnStillReadsItsFoldersList() throws Exception {
+    // The canceller edits the document through its folder's list
+    folder.addMixin("exo:privilegeable");
+    ((ExtendedNode) folder).setPermissions(Map.of(CANCELLER, EDIT, MEMBER, READ));
+    session.save();
+    Node document = addVersionedFile("no-own-list.txt");
+    document.checkin();
+    document.checkout();
+    String uuid = document.getUUID();
+
+    Response response = cancel("no-own-list.txt");
+
+    assertEquals(200, response.getStatus());
+    Node cancelled = reload(uuid);
+    assertFalse(cancelled.isCheckedOut());
+    assertFalse(cancelled.isNodeType("exo:privilegeable"));
+    assertEquals(entriesOf(session.getRootNode().getNode("Users/uncheckoutFolder")), entriesOf(cancelled));
+  }
+
   public void testANonVersionableDocumentStillAnswersConflict() throws Exception {
     Node file = folder.addNode("not-versionable.txt", "nt:file");
     Node resource = file.addNode("jcr:content", "nt:resource");
