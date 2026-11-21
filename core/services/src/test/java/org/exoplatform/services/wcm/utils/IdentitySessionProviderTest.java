@@ -18,18 +18,13 @@ package org.exoplatform.services.wcm.utils;
 
 import static org.mockito.Mockito.mock;
 
-import java.lang.reflect.Method;
-
 import javax.jcr.Session;
 
 import org.exoplatform.services.attachments.utils.Utils;
-import org.exoplatform.services.cms.documents.DocumentService;
-import org.exoplatform.services.cms.documents.impl.DocumentServiceImpl;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 
 public class IdentitySessionProviderTest extends BaseWCMTestCase {
@@ -80,24 +75,6 @@ public class IdentitySessionProviderTest extends BaseWCMTestCase {
       assertEquals(NAMED_USER, provider.getSession(COLLABORATION_WS, repository).getUserID());
     } finally {
       provider.close();
-    }
-  }
-
-  public void testDocumentServiceHelperOpensAsNamedUser() throws Exception {
-    IdentityRegistry identityRegistry = getService(IdentityRegistry.class);
-    identityRegistry.register(new Identity(NAMED_USER));
-    try {
-      ConversationState.setCurrent(new ConversationState(new Identity(THREAD_USER)));
-      Method helper = DocumentServiceImpl.class.getDeclaredMethod("getUserSessionProvider", String.class);
-      helper.setAccessible(true);
-      SessionProvider provider = (SessionProvider) helper.invoke(getService(DocumentService.class), NAMED_USER);
-      try {
-        assertEquals(NAMED_USER, provider.getSession(COLLABORATION_WS, repository).getUserID());
-      } finally {
-        provider.close();
-      }
-    } finally {
-      identityRegistry.unregister(NAMED_USER);
     }
   }
 

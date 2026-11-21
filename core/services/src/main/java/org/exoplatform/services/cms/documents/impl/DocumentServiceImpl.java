@@ -74,7 +74,6 @@ import org.exoplatform.services.resources.LocaleContextInfo;
 import org.exoplatform.services.resources.LocalePolicy;
 import org.exoplatform.services.security.*;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.IdentitySessionProvider;
 import org.exoplatform.services.wcm.utils.RepositoryConsumer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -1360,29 +1359,6 @@ public class DocumentServiceImpl implements DocumentService {
     handler.accept(node);
     if (lockToken != null) {
       node.getSession().removeLockToken(lockToken);
-    }
-  }
-
-  private SessionProvider getUserSessionProvider(String username) {
-    org.exoplatform.services.security.Identity aclIdentity = identityRegistry.getIdentity(username);
-    if (aclIdentity == null) {
-      try {
-        aclIdentity = authenticator.createIdentity(username);
-      } catch (Exception e) {
-        throw new IllegalStateException("Error retrieving user ACL identity with name : "+  username, e);
-      }
-    }
-
-    SessionProvider sessionProvider = new IdentitySessionProvider(repoService, aclIdentity);
-    try {
-      ManageableRepository repository = repoService.getCurrentRepository();
-      String workspace = repository.getConfiguration().getDefaultWorkspaceName();
-
-      sessionProvider.setCurrentRepository(repository);
-      sessionProvider.setCurrentWorkspace(workspace);
-      return sessionProvider;
-    } catch (RepositoryException e) {
-      throw new IllegalStateException("Can't build a SessionProvider", e);
     }
   }
 
