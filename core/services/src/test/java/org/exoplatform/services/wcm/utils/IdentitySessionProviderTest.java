@@ -16,7 +16,9 @@
  */
 package org.exoplatform.services.wcm.utils;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
@@ -136,6 +139,20 @@ public class IdentitySessionProviderTest extends BaseWCMTestCase {
       // expected
     } catch (Exception e) {
       fail("Expected NoSuchWorkspaceException but got " + e);
+    } finally {
+      provider.close();
+    }
+  }
+
+  public void testRefusesUninitializedWorkspace() throws Exception {
+    ManageableRepository uninitializedRepository = spy(repository);
+    doReturn(false).when(uninitializedRepository).isWorkspaceInitialized(COLLABORATION_WS);
+    SessionProvider provider = new IdentitySessionProvider(repositoryService, new Identity(NAMED_USER));
+    try {
+      provider.getSession(COLLABORATION_WS, uninitializedRepository);
+      fail("An uninitialized workspace must be refused");
+    } catch (NoSuchWorkspaceException e) {
+      // expected
     } finally {
       provider.close();
     }
