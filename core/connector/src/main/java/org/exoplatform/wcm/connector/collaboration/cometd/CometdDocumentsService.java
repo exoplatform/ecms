@@ -372,15 +372,15 @@ public class CometdDocumentsService implements Startable {
      */
     public void cancelClosedEditorTimer(String fileId, String workspace, String provider) {
       ClientInfo clientInfo = new ClientInfo(fileId, workspace, provider);
-      Timer timer = closedEditorTimers.get(clientInfo);
+      Timer timer = closedEditorTimers.remove(clientInfo);
       if (timer != null) {
         timer.cancel();
-        closedEditorTimers.remove(clientInfo);
       }
     }
 
     /**
-     * Sets the closed editor timer.
+     * Sets the closed editor timer, cancelling the one it replaces: the swap
+     * is atomic, so a document has one live timer, the one saved last.
      *
      * @param fileId the file id
      * @param workspace the workspace
@@ -389,7 +389,10 @@ public class CometdDocumentsService implements Startable {
      */
     public void saveClosedEditorTimer(String fileId, String workspace, String provider, Timer timer) {
       ClientInfo clientInfo = new ClientInfo(fileId, workspace, provider);
-      closedEditorTimers.put(clientInfo, timer);
+      Timer replaced = closedEditorTimers.put(clientInfo, timer);
+      if (replaced != null && replaced != timer) {
+        replaced.cancel();
+      }
     }
   }
 
@@ -760,17 +763,11 @@ public class CometdDocumentsService implements Startable {
   protected final EditorsContext              editorsContext;
 
   /**
-   * Held by the registration of a connection's editor and by the
-   * unsubscription of the same connection (one lock of this array per
-   * connection, by the hash of its session id), so that a registration and the
-   * unsubscription that follows it are never interleaved: the reset of a
-   * document's editor is scheduled when no editor is left, and a session that
-   * left leaves no editor. Every race found was between one connection's
-   * registration and its own unsubscription; across connections of one
-   * document the reset timer task re-checks the opened editors count before it
-   * resets, so those orders are safe. A section waits only on the sections of
-   * a connection hashing to the same lock (one in 64), bounded by one
-   * editors-cache write and the count read.
+   * One lock of this array per connection, by the hash of its session id: the
+   * registration and the unsubscription of one connection exclude each other.
+   * Across connections the reset timer re-checks the opened editors before it
+   * resets, and a timer replaced by another is cancelled. A section also waits
+   * on the sections of a connection hashing to the same lock (one in 64).
    */
   private final Object[]                      editorsLocks             = newEditorsLocks();
 

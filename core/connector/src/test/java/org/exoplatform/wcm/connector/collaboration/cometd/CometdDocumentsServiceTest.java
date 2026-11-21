@@ -753,6 +753,41 @@ public class CometdDocumentsServiceTest {
   }
 
   /**
+   * Two connections of one document: the timer one saved is cancelled when the
+   * other saves its own, and no reset is scheduled while an editor is open.
+   */
+  @Test
+  public void testAReplacedClosedEditorTimerIsCancelled() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    ServerChannel channel = mock(ServerChannel.class);
+    when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+    DocumentService documentService = mock(DocumentService.class);
+    DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
+    when(editorProvider.getEditingFinishedDelay()).thenReturn(600000L);
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+    CometdDocumentsService service = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    ServerSession marySession = mock(ServerSession.class);
+    when(marySession.getId()).thenReturn("mary-session");
+
+    service.editorsContext.addClient("john-session", FILE_ID, PROVIDER, WORKSPACE);
+    service.editorsContext.addClient("mary-session", FILE_ID, PROVIDER, WORKSPACE);
+    service.new ChannelSubscriptionListener().unsubscribed(marySession, channel, null);
+    assertEquals("no reset is scheduled while an editor is open", 0, closedEditorTimers(service).size());
+
+    // The timer another connection saved is still there when this one closes
+    Timer first = mock(Timer.class);
+    service.editorsContext.saveClosedEditorTimer(FILE_ID, WORKSPACE, PROVIDER, first);
+    service.new ChannelSubscriptionListener().unsubscribed(johnSession, channel, null);
+    verify(first).cancel();
+    assertEquals(1, closedEditorTimers(service).size());
+    Timer last = closedEditorTimers(service).values().iterator().next();
+    assertNotSame("the timer saved last is the live one", first, last);
+    last.cancel();
+  }
+
+  /**
    * The lock is per connection: a registration of one connection does not
    * delay the unsubscription of another, whose lock differs.
    */
