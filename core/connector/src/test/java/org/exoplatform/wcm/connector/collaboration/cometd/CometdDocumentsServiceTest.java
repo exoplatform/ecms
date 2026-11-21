@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -544,10 +545,20 @@ public class CometdDocumentsServiceTest {
   @Test
   public void testADocumentOpenedEventIsHandledOnlyForTheUserOfTheSendingSession() throws Exception {
     EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
-    CometdDocumentsService service = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), true);
     ServerSession johnSession = mock(ServerSession.class);
     when(johnSession.getId()).thenReturn("john-session");
     when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    DocumentService documentService = mock(DocumentService.class);
+    DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
+    when(editorProvider.isAvailableForUser(any())).thenReturn(true);
+    when(editorProvider.getProviderName()).thenReturn(PROVIDER);
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+    when(documentService.getDocumentEditorProviders()).thenReturn(List.of(editorProvider));
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenReturn(null);
+    IdentityRegistry identityRegistry = mock(IdentityRegistry.class);
+    when(identityRegistry.getIdentity("john")).thenReturn(new Identity("john"));
+    CometdDocumentsService service = recordingService(exoBayeux, documentService, identityRegistry, true);
+    ServerChannel channel = bayeuxChannel(service);
 
     assertFalse("an event naming another user than the sender's is not delivered",
                 service.service.subscribeDocuments(johnSession, openedEvent("mary"), FILE_ID));
@@ -559,6 +570,13 @@ public class CometdDocumentsServiceTest {
     assertFalse("the sender's own event is not delivered as published",
                 service.service.subscribeDocuments(johnSession, openedEvent("john"), FILE_ID));
     assertEquals("the sender's own event is handled", 1, recorded(service).size());
+    ((CometdDocumentsService.ContainerCommand) recorded(service).get(0)).execute(null);
+    verify(johnSession).deliver(any(), eq(CometdDocumentsService.CHANNEL_NAME + FILE_ID), any(Object.class), any());
+    ArgumentCaptor<Object> published = ArgumentCaptor.forClass(Object.class);
+    verify(channel).publish(any(), published.capture(), any());
+    assertEquals("the handled event answers the sender's session and publishes the document's opened event",
+                 "{\"type\": \"DOCUMENT_OPENED\", \"fileId\": \"" + FILE_ID + "\", \"provider\": \"" + PROVIDER + "\"}",
+                 published.getValue());
   }
 
   @Test
@@ -735,7 +753,7 @@ public class CometdDocumentsServiceTest {
     reader.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
     assertEquals("the check is handed to the documents executor", 1, recorded(reader).size());
     assertEquals(0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
-    reader.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    ((CometdDocumentsService.ContainerCommand) recorded(reader).get(0)).execute(null);
     assertEquals("a user who may not edit the document registers no editor",
                  0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
 
@@ -748,7 +766,7 @@ public class CometdDocumentsServiceTest {
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
     assertEquals(1, recorded(editor).size());
     assertEquals(0, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
-    editor.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    ((CometdDocumentsService.ContainerCommand) recorded(editor).get(0)).execute(null);
     assertEquals("a user who may edit the document registers the editor",
                  1, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
 
@@ -758,11 +776,11 @@ public class CometdDocumentsServiceTest {
     late.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
     assertEquals(1, recorded(late).size());
     when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(false);
-    late.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    ((CometdDocumentsService.ContainerCommand) recorded(late).get(0)).execute(null);
     assertEquals("a session that disconnected registers no editor", 0, late.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
     when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
     when(channel.getSubscribers()).thenReturn(Set.of());
-    late.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    ((CometdDocumentsService.ContainerCommand) recorded(late).get(0)).execute(null);
     assertEquals("a session that unsubscribed registers no editor", 0, late.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
   }
 
@@ -1001,6 +1019,13 @@ public class CometdDocumentsServiceTest {
     @Override
     public void execute(Runnable command) {
       commands.add(command);
+    }
+
+    @Override
+    public Future<?> submit(Runnable command) {
+      // The command itself is recorded, not a wrapper of it
+      commands.add(command);
+      return CompletableFuture.completedFuture(null);
     }
 
     @Override
