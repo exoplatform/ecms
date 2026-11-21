@@ -25,10 +25,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.security.Authenticator;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.social.core.manager.IdentityManager;
@@ -84,12 +82,6 @@ public class DocumentServiceImplTest {
   IdentityManager identityManager;
   @Mock
   IDGeneratorService idGenerator;
-  @Mock
-  IdentityRegistry identityRegistry;
-
-  @Mock
-  Authenticator authenticator;
-
   DocumentService documentService;
   @Mock
   ManageableRepository repository;
@@ -133,8 +125,6 @@ public class DocumentServiceImplTest {
                                               settingService,
                                               identityManager,
                                               idGenerator,
-                                              identityRegistry,
-                                              authenticator,
                                               trashService);
     when(sessionProviderService.getSystemSessionProvider(any())).thenReturn(sessionProvider);
     when(repository.getConfiguration()).thenReturn(repositoryEntry);

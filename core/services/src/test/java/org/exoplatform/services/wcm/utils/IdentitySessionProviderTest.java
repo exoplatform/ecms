@@ -18,13 +18,18 @@ package org.exoplatform.services.wcm.utils;
 
 import static org.mockito.Mockito.mock;
 
+import java.util.List;
+
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 
 public class IdentitySessionProviderTest extends BaseWCMTestCase {
@@ -73,6 +78,33 @@ public class IdentitySessionProviderTest extends BaseWCMTestCase {
     SessionProvider provider = Utils.getUserSessionProvider(repositoryService, new Identity(NAMED_USER));
     try {
       assertEquals(NAMED_USER, provider.getSession(COLLABORATION_WS, repository).getUserID());
+    } finally {
+      provider.close();
+    }
+  }
+
+  public void testAttachmentsHelperKeepsThreadStateForTheRequestsOwnUser() throws Exception {
+    MembershipEntry threadMembership = new MembershipEntry("/platform/thread-only-group", "member");
+    ConversationState.setCurrent(new ConversationState(new Identity(NAMED_USER, List.of(threadMembership))));
+    SessionProvider provider = Utils.getUserSessionProvider(repositoryService, new Identity(NAMED_USER));
+    try {
+      SessionImpl userSession = (SessionImpl) provider.getSession(COLLABORATION_WS, repository);
+      assertEquals(NAMED_USER, userSession.getUserID());
+      assertTrue(userSession.getUserState().getIdentity().getMemberships().contains(threadMembership));
+    } finally {
+      provider.close();
+    }
+  }
+
+  public void testRefusesUnknownWorkspace() {
+    SessionProvider provider = new IdentitySessionProvider(repositoryService, new Identity(NAMED_USER));
+    try {
+      provider.getSession("no-such-workspace", repository);
+      fail("An unknown workspace must be refused");
+    } catch (NoSuchWorkspaceException e) {
+      // expected
+    } catch (Exception e) {
+      fail("Expected NoSuchWorkspaceException but got " + e);
     } finally {
       provider.close();
     }

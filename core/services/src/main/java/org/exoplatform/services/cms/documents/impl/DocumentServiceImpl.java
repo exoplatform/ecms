@@ -141,8 +141,6 @@ public class DocumentServiceImpl implements DocumentService {
   private final ConfigurationManager configurationManager;
   private final String editorsRuntimeId;
   private CommonEditorPlugin commonEditorPlugin;
-  private Authenticator       authenticator;
-  private final IdentityRegistry identityRegistry;
   private final TrashService trashService;
   
   /**
@@ -171,7 +169,7 @@ public class DocumentServiceImpl implements DocumentService {
                              OrganizationService organizationService,
                              SettingService settingService,
                              IdentityManager identityManager,
-                             IDGeneratorService idGenerator, IdentityRegistry identityRegistry, Authenticator authenticator, TrashService trashService) {
+                             IDGeneratorService idGenerator, TrashService trashService) {
     this.configurationManager = configurationManager;
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
@@ -183,8 +181,6 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
-    this.identityRegistry = identityRegistry;
-    this.authenticator = authenticator;
     
     // Online editors support
     this.editorsRuntimeId = idGenerator.generateStringID(this);

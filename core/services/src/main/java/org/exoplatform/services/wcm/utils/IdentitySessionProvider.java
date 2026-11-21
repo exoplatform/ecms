@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
@@ -26,6 +27,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.RepositoryContainer;
 import org.exoplatform.services.jcr.impl.RepositoryServiceImpl;
 import org.exoplatform.services.jcr.impl.WorkspaceContainer;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
@@ -39,6 +41,10 @@ import org.exoplatform.services.security.Identity;
  * {@code ConversationState.getCurrent()}, whoever that is. This provider opens
  * each session with the identity's own state, whatever the thread's state is,
  * null included. The caller closes it as any {@link SessionProvider}.
+ * <p>
+ * The sessions are built directly: {@code SessionFactory#createSession}, which
+ * tracks them under {@code exo.jcr.session.tracking.active}, is package-private
+ * in the jcr module, so these sessions are not tracked.
  */
 public class IdentitySessionProvider extends SessionProvider {
 
@@ -90,8 +96,12 @@ public class IdentitySessionProvider extends SessionProvider {
     String key = repositoryName + workspaceName;
     ExtendedSession session = sessions.get(key);
     if (session == null) {
-      WorkspaceContainer workspaceContainer = repositoryService.getRepositoryContainer(repositoryName)
-                                                               .getWorkspaceContainer(workspaceName);
+      RepositoryContainer repositoryContainer = repositoryService.getRepositoryContainer(repositoryName);
+      WorkspaceContainer workspaceContainer = repositoryContainer == null ? null
+                                                                          : repositoryContainer.getWorkspaceContainer(workspaceName);
+      if (workspaceContainer == null) {
+        throw new NoSuchWorkspaceException("Workspace '" + workspaceName + "' not found");
+      }
       session = new SessionImpl(workspaceName, state, workspaceContainer);
       session.registerLifecycleListener(this);
       sessions.put(key, session);
