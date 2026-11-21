@@ -806,88 +806,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     return response;
   }
 
-  /**
-   * The access list of a document: its own permissions by identity, or null
-   * when it reads its folder's list
-   */
-  private record DocumentAccess(String workspace, String uuid, Map<String, String[]> ownPermissions) {
-  }
-
-  private DocumentAccess readAccess(String workspace, String jcrPath) {
-    Session systemSession = null;
-    try {
-      systemSession = repositoryService.getCurrentRepository().getSystemSession(workspace);
-      Node node = systemSession.getRootNode().getNode(TextUtil.relativizePath(jcrPath));
-      if (!node.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
-        return null; // the cancel answers it
-      }
-      return new DocumentAccess(workspace, node.getUUID(), node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE) ? toPermissions(node) : null);
-    } catch (PathNotFoundException e) {
-      return null; // the cancel answers it
-    } catch (RepositoryException e) {
-      throw new IllegalStateException("Cannot read the access list of " + workspace + jcrPath, e);
-    } finally {
-      if (systemSession != null) {
-        systemSession.logout();
-      }
-    }
-  }
-
-  private Map<String, String[]> toPermissions(Node node) throws RepositoryException {
-    Map<String, List<String>> permissions = new LinkedHashMap<>();
-    for (AccessControlEntry entry : ((ExtendedNode) node).getACL().getPermissionEntries()) {
-      permissions.computeIfAbsent(entry.getIdentity(), identity -> new ArrayList<>()).add(entry.getPermission());
-    }
-    Map<String, String[]> permissionsByIdentity = new LinkedHashMap<>();
-    permissions.forEach((identity, types) -> permissionsByIdentity.put(identity, types.toArray(new String[0])));
-    return permissionsByIdentity;
-  }
-
-  /**
-   * Gives the document back its access list after the cancel, through a system
-   * session. The document stays checked in, and a new version is created only
-   * when the private-access mixin has to be added or removed, which a
-   * checked-in node refuses.
-   */
-  private void keepAccess(DocumentAccess access) {
-    Session systemSession = null;
-    try {
-      systemSession = repositoryService.getCurrentRepository().getSystemSession(access.workspace());
-      Node node = systemSession.getNodeByUUID(access.uuid());
-      // The private-access mixin may differ from the one read before
-      boolean hasOwnPermissions = node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
-      boolean mixinChange = hasOwnPermissions != (access.ownPermissions() != null);
-      if (!mixinChange && !hasOwnPermissions) {
-        return;
-      }
-      if (mixinChange) {
-        node.checkout();
-      }
-      if (access.ownPermissions() != null) {
-        if (!hasOwnPermissions) {
-          node.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
-        }
-        ((ExtendedNode) node).setPermissions(access.ownPermissions());
-      } else {
-        // Removing the mixin keeps the list in effect: its folder's is set first
-        ((ExtendedNode) node).setPermissions(toPermissions(node.getParent()));
-        systemSession.save();
-        node.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
-      }
-      systemSession.save();
-      if (mixinChange) {
-        node.checkin();
-      }
-    } catch (RepositoryException | RuntimeException e) {
-      LOG.error("Checkout of document {} cancelled, but its access list could not be kept: check its access", access.uuid(), e);
-      throw e instanceof RuntimeException re ? re : new IllegalStateException(e);
-    } finally {
-      if (systemSession != null) {
-        systemSession.logout();
-      }
-    }
-  }
-
   @VERSIONCONTROL
   @Path("/{repoName}/{repoPath:.*}/")
   public Response versionControl(@PathParam("repoName") String repoName,
@@ -1190,6 +1108,81 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
     }    
     return super.delete(repoName, repoPath, lockTokenHeader, ifHeader);
+  }
+
+  private DocumentAccess readAccess(String workspace, String jcrPath) {
+    Session systemSession = null;
+    try {
+      systemSession = repositoryService.getCurrentRepository().getSystemSession(workspace);
+      Node node = systemSession.getRootNode().getNode(TextUtil.relativizePath(jcrPath));
+      if (!node.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+        return null; // the cancel answers it
+      }
+      return new DocumentAccess(workspace, node.getUUID(), node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE) ? toPermissions(node) : null);
+    } catch (PathNotFoundException e) {
+      return null; // the cancel answers it
+    } catch (RepositoryException e) {
+      throw new IllegalStateException("Cannot read the access list of " + workspace + jcrPath, e);
+    } finally {
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+    }
+  }
+
+  private Map<String, String[]> toPermissions(Node node) throws RepositoryException {
+    Map<String, List<String>> permissions = new LinkedHashMap<>();
+    for (AccessControlEntry entry : ((ExtendedNode) node).getACL().getPermissionEntries()) {
+      permissions.computeIfAbsent(entry.getIdentity(), identity -> new ArrayList<>()).add(entry.getPermission());
+    }
+    Map<String, String[]> permissionsByIdentity = new LinkedHashMap<>();
+    permissions.forEach((identity, types) -> permissionsByIdentity.put(identity, types.toArray(new String[0])));
+    return permissionsByIdentity;
+  }
+
+  /**
+   * Gives the document back its access list after the cancel, through a system
+   * session. The document stays checked in, and a new version is created only
+   * when the private-access mixin has to be added or removed, which a
+   * checked-in node refuses.
+   */
+  private void keepAccess(DocumentAccess access) {
+    Session systemSession = null;
+    try {
+      systemSession = repositoryService.getCurrentRepository().getSystemSession(access.workspace());
+      Node node = systemSession.getNodeByUUID(access.uuid());
+      // The private-access mixin may differ from the one read before
+      boolean hasOwnPermissions = node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
+      boolean mixinChange = hasOwnPermissions != (access.ownPermissions() != null);
+      if (!mixinChange && !hasOwnPermissions) {
+        return;
+      }
+      if (mixinChange) {
+        node.checkout();
+      }
+      if (access.ownPermissions() != null) {
+        if (!hasOwnPermissions) {
+          node.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+        }
+        ((ExtendedNode) node).setPermissions(access.ownPermissions());
+      } else {
+        // Removing the mixin keeps the list in effect: its folder's is set first
+        ((ExtendedNode) node).setPermissions(toPermissions(node.getParent()));
+        systemSession.save();
+        node.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+      }
+      systemSession.save();
+      if (mixinChange) {
+        node.checkin();
+      }
+    } catch (RepositoryException | RuntimeException e) {
+      LOG.error("Checkout of document {} cancelled, but its access list could not be kept: check its access", access.uuid(), e);
+      throw e instanceof RuntimeException re ? re : new IllegalStateException(e);
+    } finally {
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+    }
   }
 
   private Response denyAnonymousAccessIfNeeded() {
