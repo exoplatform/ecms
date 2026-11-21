@@ -19,6 +19,7 @@ package org.exoplatform.wcm.connector.collaboration.cometd;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -42,6 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.CountDownLatch;
@@ -629,21 +631,173 @@ public class CometdDocumentsServiceTest {
     when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
     ServerChannel channel = mock(ServerChannel.class);
     when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+    when(channel.getSubscribers()).thenReturn(Set.of(johnSession));
 
     CometdDocumentsService reader = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), false);
     reader.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
-    assertEquals("a user who may not edit the document registers no editor", 0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("the check is handed to the documents executor", 1, recorded(reader).size());
+    assertEquals(0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    reader.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    assertEquals("a user who may not edit the document registers no editor",
+                 0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
 
     CometdDocumentsService editor = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), true);
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("mary"));
-    assertEquals("a user who does not own the sending connection registers no editor",
-                 0, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("a user who does not own the sending connection is not checked", 0, recorded(editor).size());
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription(null));
-    assertEquals("a subscription naming no user registers no editor", 0, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("a subscription naming no user is not checked", 0, recorded(editor).size());
 
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
+    assertEquals(1, recorded(editor).size());
+    assertEquals(0, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    editor.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
     assertEquals("a user who may edit the document registers the editor",
                  1, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+
+    editor.editorsContext.removeClient("john-session");
+    // The session leaves between the subscription and the queued check
+    CometdDocumentsService late = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), true);
+    late.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
+    assertEquals(1, recorded(late).size());
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(false);
+    late.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    assertEquals("a session that disconnected registers no editor", 0, late.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    when(channel.getSubscribers()).thenReturn(Set.of());
+    late.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    assertEquals("a session that unsubscribed registers no editor", 0, late.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  /**
+   * The registration and the unsubscription of one connection exclude each
+   * other: whichever comes second sees the other's result.
+   */
+  @Test
+  public void testTheRegistrationAndTheUnsubscriptionOfOneConnectionExcludeEachOther() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    ServerChannel channel = mock(ServerChannel.class);
+    when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+    DocumentService documentService = mock(DocumentService.class);
+    DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
+    when(editorProvider.getEditingFinishedDelay()).thenReturn(600000L);
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+
+    // A registration holding the lock delays the unsubscription of its own session
+    CometdDocumentsService first = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    CountDownLatch inCheck = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
+    when(channel.getSubscribers()).thenAnswer(invocation -> {
+      inCheck.countDown();
+      release.await(10, TimeUnit.SECONDS);
+      return Set.of(johnSession);
+    });
+    Thread registration = new Thread(() -> first.new ChannelSubscriptionListener()
+                                                .registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE));
+    registration.start();
+    assertTrue(inCheck.await(10, TimeUnit.SECONDS));
+    Thread unsubscription = new Thread(() -> first.new ChannelSubscriptionListener().unsubscribed(johnSession, channel, null));
+    unsubscription.start();
+    unsubscription.join(500);
+    assertTrue("the unsubscription waits for the registration", unsubscription.isAlive());
+    release.countDown();
+    registration.join(10000);
+    unsubscription.join(10000);
+    assertEquals("the unsubscription removes the editor registered first", 0, first.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("the reset is scheduled as no editor is left", 1, closedEditorTimers(first).size());
+    closedEditorTimers(first).values().forEach(Timer::cancel);
+
+    // An unsubscription holding the lock delays the registration of its own session
+    editors.clearCache();
+    clearInvocations(channel);
+    when(channel.getSubscribers()).thenReturn(Set.of(johnSession));
+    CometdDocumentsService second = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    CountDownLatch inUnsubscription = new CountDownLatch(1);
+    CountDownLatch resume = new CountDownLatch(1);
+    when(documentService.getEditorProvider(PROVIDER)).thenAnswer(invocation -> {
+      inUnsubscription.countDown();
+      resume.await(10, TimeUnit.SECONDS);
+      return editorProvider;
+    });
+    second.editorsContext.addClient("john-session", FILE_ID, PROVIDER, WORKSPACE);
+    Thread leaving = new Thread(() -> second.new ChannelSubscriptionListener().unsubscribed(johnSession, channel, null));
+    leaving.start();
+    assertTrue(inUnsubscription.await(10, TimeUnit.SECONDS));
+    Thread joining = new Thread(() -> second.new ChannelSubscriptionListener()
+                                            .registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE));
+    joining.start();
+    joining.join(500);
+    assertTrue("the registration waits for the unsubscription", joining.isAlive());
+    assertEquals(0, second.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    resume.countDown();
+    leaving.join(10000);
+    joining.join(10000);
+    assertEquals("the registration comes after the unsubscription", 1, second.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("the registration cancels the reset the unsubscription scheduled", 0, closedEditorTimers(second).size());
+    closedEditorTimers(second).values().forEach(Timer::cancel);
+
+    // The session left before the registration's check: no editor, and the reset stays scheduled
+    editors.clearCache();
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+    when(channel.getSubscribers()).thenReturn(Set.of());
+    CometdDocumentsService third = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    third.editorsContext.addClient("john-session", FILE_ID, PROVIDER, WORKSPACE);
+    third.new ChannelSubscriptionListener().unsubscribed(johnSession, channel, null);
+    assertEquals("the reset is scheduled when no editor is left", 1, closedEditorTimers(third).size());
+    third.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    assertEquals(0, third.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("a session that left leaves the reset scheduled", 1, closedEditorTimers(third).size());
+    closedEditorTimers(third).values().forEach(Timer::cancel);
+  }
+
+  /**
+   * The lock is per connection: a registration of one connection does not
+   * delay the unsubscription of another, whose lock differs.
+   */
+  @Test
+  public void testTheUnsubscriptionOfAnotherConnectionDoesNotWaitForARegistration() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    ServerSession marySession = mock(ServerSession.class);
+    when(marySession.getId()).thenReturn("mary-session");
+    ServerChannel channel = mock(ServerChannel.class);
+    when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+    DocumentService documentService = mock(DocumentService.class);
+    DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
+    when(editorProvider.getEditingFinishedDelay()).thenReturn(600000L);
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+    CometdDocumentsService service = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    assertNotSame(service.editorsLock("john-session"), service.editorsLock("mary-session"));
+    CountDownLatch inCheck = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
+    when(channel.getSubscribers()).thenAnswer(invocation -> {
+      inCheck.countDown();
+      release.await(10, TimeUnit.SECONDS);
+      return Set.of(johnSession);
+    });
+    service.editorsContext.addClient("mary-session", FILE_ID, PROVIDER, WORKSPACE);
+    Thread registration = new Thread(() -> service.new ChannelSubscriptionListener()
+                                                  .registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE));
+    registration.start();
+    assertTrue(inCheck.await(10, TimeUnit.SECONDS));
+    Thread unsubscription = new Thread(() -> service.new ChannelSubscriptionListener().unsubscribed(marySession, channel, null));
+    unsubscription.start();
+    unsubscription.join(5000);
+    assertFalse("the unsubscription of another connection does not wait", unsubscription.isAlive());
+    release.countDown();
+    registration.join(10000);
+    closedEditorTimers(service).values().forEach(Timer::cancel);
+  }
+
+  @SuppressWarnings("unchecked")
+  private static Map<Object, Timer> closedEditorTimers(CometdDocumentsService service) throws Exception {
+    Field field = EditorsContext.class.getDeclaredField("closedEditorTimers");
+    field.setAccessible(true);
+    return (Map<Object, Timer>) field.get(service.editorsContext);
   }
 
   private static ServerMessage subscription(String userId) {

@@ -526,11 +526,21 @@ public class CometdDocumentsService implements Startable {
         if (provider != null) {
           String fileId = channelId.substring(channelId.lastIndexOf("/") + 1);
           // Only a user who owns the sending connection and may edit the
-          // document registers an editor for it
+          // document registers an editor for it; the edit right is read in
+          // the documents executor, as for the opened event
           String userId = asString(message.get("exoId"));
-          if (userId != null && exoBayeux.isSubscribed(userId, sessionId) && canEditDocument(userId, fileId, workspace)) {
-            editorsContext.addClient(sessionId, fileId, provider, workspace);
-            editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+          if (userId != null && exoBayeux.isSubscribed(userId, sessionId)) {
+            eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+              @Override
+              void onContainerError(String error) {
+                LOG.error("An error has occured in container: {}", containerName);
+              }
+
+              @Override
+              void execute(ExoContainer exoContainer) {
+                registerEditor(remote, channel, userId, fileId, provider, workspace);
+              }
+            });
           } else {
             LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
           }
@@ -540,6 +550,40 @@ public class CometdDocumentsService implements Startable {
               + exoClientId + "), channel:" + channelId);
         }
       }
+    }
+
+    /**
+     * Registers the editor of a session for a document when the user may edit
+     * the document and, read under the lock the unsubscription of the same
+     * connection holds too, the session is still subscribed to the document's
+     * channel for that user: the registration and the unsubscription of one
+     * connection exclude each other, so a session that left leaves no editor.
+     *
+     * @param session the session that subscribed
+     * @param channel the document's channel
+     * @param userId the id of the user who owns the session
+     * @param fileId the file id
+     * @param provider the editor provider
+     * @param workspace the workspace
+     */
+    void registerEditor(ServerSession session, ServerChannel channel, String userId, String fileId, String provider, String workspace) {
+      String sessionId = session.getId();
+      if (!canEditDocument(userId, fileId, workspace)) {
+        LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
+        return;
+      }
+      synchronized (editorsLock(sessionId)) {
+        if (isStillSubscribed(session, channel, userId)) {
+          editorsContext.addClient(sessionId, fileId, provider, workspace);
+          editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+        } else {
+          LOG.debug("Editor subscription of session {} on file {} ignored: the session is gone", sessionId, fileId);
+        }
+      }
+    }
+
+    private boolean isStillSubscribed(ServerSession session, ServerChannel channel, String userId) {
+      return exoBayeux.isSubscribed(userId, session.getId()) && channel.getSubscribers().contains(session);
     }
 
     /**
@@ -553,19 +597,21 @@ public class CometdDocumentsService implements Startable {
         String exoClientId = null;
         String exoContainerName = null;
 
-        ClientInfo removedClient = editorsContext.removeClient(sessionId);
-        if (removedClient != null) {
-          String fileId = removedClient.getFileId();
-          String provider = removedClient.getProvider();
-          String workspace = removedClient.getWorkspace();
-          if (editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
-            try {
-              DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-              // Postpone reseting current editor provider for specified delay
-              Timer timer = scheduleProviderReset(fileId, workspace, provider, editorProvider.getEditingFinishedDelay());
-              editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
-            } catch (DocumentEditorProviderNotFoundException e) {
-              LOG.error("Cannot find {} editor provider. {}", provider, e.getMessage());
+        synchronized (editorsLock(sessionId)) {
+          ClientInfo removedClient = editorsContext.removeClient(sessionId);
+          if (removedClient != null) {
+            String fileId = removedClient.getFileId();
+            String provider = removedClient.getProvider();
+            String workspace = removedClient.getWorkspace();
+            if (editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
+              try {
+                DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+                // Postpone reseting current editor provider for specified delay
+                Timer timer = scheduleProviderReset(fileId, workspace, provider, editorProvider.getEditingFinishedDelay());
+                editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
+              } catch (DocumentEditorProviderNotFoundException e) {
+                LOG.error("Cannot find {} editor provider. {}", provider, e.getMessage());
+              }
             }
           }
         }
@@ -662,6 +708,9 @@ public class CometdDocumentsService implements Startable {
    */
   public static final int                     MIN_MAX_THREADS          = 4;
 
+  /** The number of locks the registrations and unsubscriptions of editors are striped on */
+  private static final int                    EDITORS_LOCKS_COUNT      = 64;
+
   /** Thread idle time for thread executors (in seconds). */
   public static final int                     THREAD_IDLE_TIME         = 120;
 
@@ -709,6 +758,33 @@ public class CometdDocumentsService implements Startable {
 
   /** The editors context. */
   protected final EditorsContext              editorsContext;
+
+  /**
+   * Held by the registration of a connection's editor and by the
+   * unsubscription of the same connection (one lock of this array per
+   * connection, by the hash of its session id), so that a registration and the
+   * unsubscription that follows it are never interleaved: the reset of a
+   * document's editor is scheduled when no editor is left, and a session that
+   * left leaves no editor. Every race found was between one connection's
+   * registration and its own unsubscription; across connections of one
+   * document the reset timer task re-checks the opened editors count before it
+   * resets, so those orders are safe. A section waits only on the sections of
+   * a connection hashing to the same lock (one in 64), bounded by one
+   * editors-cache write and the count read.
+   */
+  private final Object[]                      editorsLocks             = newEditorsLocks();
+
+  private static Object[] newEditorsLocks() {
+    Object[] locks = new Object[EDITORS_LOCKS_COUNT];
+    for (int i = 0; i < locks.length; i++) {
+      locks[i] = new Object();
+    }
+    return locks;
+  }
+
+  Object editorsLock(String sessionId) {
+    return editorsLocks[Math.floorMod(sessionId.hashCode(), EDITORS_LOCKS_COUNT)];
+  }
 
   /** Puts again the editors of this node another node removed. */
   ScheduledThreadPoolExecutor                 restoreExecutor;
