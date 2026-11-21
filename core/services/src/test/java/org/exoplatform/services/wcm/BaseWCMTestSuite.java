@@ -36,6 +36,7 @@ import org.exoplatform.services.cms.documents.impl.DocumentEditorProviderImplTes
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
 import org.exoplatform.services.cms.lock.impl.LockServiceImplStartTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
+import org.exoplatform.services.cms.webdav.TestWebDavUncheckoutAccessList;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
 import org.exoplatform.services.ecm.dms.configuration.TestDMSConfigurationService;
 import org.exoplatform.services.ecm.dms.documents.TestTrashService;
@@ -75,6 +76,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   TestLinkManager.class,
   LinkUtilsTest.class,
   TestSymLink.class,
+  TestWebDavUncheckoutAccessList.class,
   TestDMSConfigurationService.class,
   TestThumbnailService.class,
   TestPDFViewerService.class,
