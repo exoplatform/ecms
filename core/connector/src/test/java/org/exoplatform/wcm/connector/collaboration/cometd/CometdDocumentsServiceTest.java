@@ -621,6 +621,39 @@ public class CometdDocumentsServiceTest {
     verify(sessionProvider, times(3)).close();
   }
 
+  @Test
+  public void testAnEditorSubscriptionIsRegisteredOnlyForAUserWhoMayEditTheDocument() {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    ServerChannel channel = mock(ServerChannel.class);
+    when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+
+    CometdDocumentsService reader = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), false);
+    reader.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
+    assertEquals("a user who may not edit the document registers no editor", 0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+
+    CometdDocumentsService editor = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), true);
+    editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("mary"));
+    assertEquals("a user who does not own the sending connection registers no editor",
+                 0, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription(null));
+    assertEquals("a subscription naming no user registers no editor", 0, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+
+    editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("john"));
+    assertEquals("a user who may edit the document registers the editor",
+                 1, editor.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  private static ServerMessage subscription(String userId) {
+    ServerMessage message = mock(ServerMessage.class);
+    when(message.get("exoId")).thenReturn(userId);
+    when(message.get("provider")).thenReturn(PROVIDER);
+    when(message.get("workspace")).thenReturn(WORKSPACE);
+    return message;
+  }
+
   /**
    * Kills the mutant that removes {@code @Service("documents")} from
    * {@link CometdDocumentsService.CometdService}: the annotation processor

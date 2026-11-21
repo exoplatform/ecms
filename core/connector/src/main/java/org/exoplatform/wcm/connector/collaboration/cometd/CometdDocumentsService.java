@@ -525,8 +525,15 @@ public class CometdDocumentsService implements Startable {
 
         if (provider != null) {
           String fileId = channelId.substring(channelId.lastIndexOf("/") + 1);
-          editorsContext.addClient(sessionId, fileId, provider, workspace);
-          editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+          // Only a user who owns the sending connection and may edit the
+          // document registers an editor for it
+          String userId = asString(message.get("exoId"));
+          if (userId != null && exoBayeux.isSubscribed(userId, sessionId) && canEditDocument(userId, fileId, workspace)) {
+            editorsContext.addClient(sessionId, fileId, provider, workspace);
+            editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+          } else {
+            LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
+          }
         }
         if (LOG.isDebugEnabled()) {
           LOG.debug(">> Subscribed: provider: " + provider + ", session:" + sessionId + " (" + exoContainerName + "@"
