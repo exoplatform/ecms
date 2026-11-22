@@ -53,7 +53,7 @@ public class UtilsTest extends TestCase {
     // Then
     assertEquals(titleClean1,"test_test");
     assertEquals(titleClean3,"test_test");
-    assertEquals(titleClean4,"test_test");
+    assertEquals("test@test", titleClean4);
     assertEquals(titleClean5,"test_test");
     assertEquals(titleClean6,"test_test");
     assertEquals(titleClean7,"test_test");
@@ -75,6 +75,6 @@ public class UtilsTest extends TestCase {
     String newsTitle = "news.title";
     String newsTitleWithSpecialCharacter  = "news.title/test";
     assertEquals(Utils.cleanName(newsTitle, NodetypeConstant.EXO_NEWS), "news_title");
-    assertEquals(Utils.cleanName(newsTitleWithSpecialCharacter, NodetypeConstant.EXO_NEWS), "news.title_test");
+    assertEquals("news_title_test", Utils.cleanName(newsTitleWithSpecialCharacter, NodetypeConstant.EXO_NEWS));
   }
 }

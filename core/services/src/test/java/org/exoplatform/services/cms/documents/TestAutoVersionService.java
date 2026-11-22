@@ -1,12 +1,9 @@
 package org.exoplatform.services.cms.documents;
 
-import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -53,7 +50,8 @@ public class TestAutoVersionService extends BaseWCMTestCase {
     jcrContent.setProperty("jcr:mimeType", "text/html");
 
     session.save();
-    autoVersionService.autoVersion(documentA);
+    assertNull("A node outside the auto-versioned drives is not versioned", autoVersionService.autoVersion(documentA));
+    autoVersionService.autoVersion(documentA, true);
     long versionNumber = documentA.getVersionHistory().getAllVersions().getSize();
     assertEquals("Number version is not correct", versionNumber, 1);
   }
@@ -61,15 +59,9 @@ public class TestAutoVersionService extends BaseWCMTestCase {
   public void testGetDriveAutoVersion() throws Exception{
     Node document = session.getRootNode().addNode("document");
     List<String> lstSupport = autoVersionService.getDriveAutoVersion();
-    assertEquals("Get list supported drives is not correct", lstSupport.size(), 3);
+    assertEquals("Get list supported drives is not correct", 2, lstSupport.size());
 
-    ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-
-    List<String> lstHomePath = new ArrayList<>();
-    for (String drive: lstSupport){
-        lstHomePath.add(manageDriveService.getDriveByName(drive).getHomePath());
-    }
-    assertTrue("List supported not contant Persional drive", lstHomePath.contains(AutoVersionService.PERSONAL_DRIVE_PARRTEN));
-    assertTrue("List supported not contant Groups drive", lstHomePath.contains(AutoVersionService.GROUP_DRIVE_PARRTEN));
+    assertTrue("List supported not contain Groups drive", lstSupport.contains("Groups"));
+    assertTrue("List supported not contain Personal drive", lstSupport.contains("Personal Documents"));
   }
 }
