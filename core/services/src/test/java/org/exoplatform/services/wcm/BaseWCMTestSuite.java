@@ -24,8 +24,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
+import org.exoplatform.ecm.webui.TestUtils;
+import org.exoplatform.services.attachments.listener.AttachmentViewListenerTest;
 import org.exoplatform.services.attachments.listener.NoteAttachmentUpdateListenerTest;
 import org.exoplatform.services.attachments.listener.UpdateContentPermissionsListenerTest;
+import org.exoplatform.services.attachments.service.ActivityFilesDownloadTest;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
 import org.exoplatform.services.attachments.service.AttachmentServiceImplTest;
 import org.exoplatform.services.attachments.storage.AttachmentStorageImplTest;
@@ -91,7 +94,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   NoteAttachmentUpdateListenerTest.class,
   UpdateContentPermissionsListenerTest.class,
   DocumentServiceImplTest.class,
-  WCMCoreUtilsTest.class
+  WCMCoreUtilsTest.class,
+  AttachmentViewListenerTest.class,
+  ActivityFilesDownloadTest.class,
+  TestUtils.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
