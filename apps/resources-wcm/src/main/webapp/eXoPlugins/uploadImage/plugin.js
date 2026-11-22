@@ -167,9 +167,10 @@
           })
             .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
             .then(xml => {
-              if (xml) {
-                return xml.childNodes[0].attributes[0].value;
+              if (xml && xml.documentElement && xml.documentElement.nodeName === 'file') {
+                return xml.documentElement.attributes[0].value;
               }
+              uploadError = true;
             }).then(uuid => {
               if (uploadFinished && !uploadError) {
                 self.replaceWith('<img src="' + eXo.env.server.context + "/" + eXo.env.portal.rest + "/images/repository/collaboration/" + (uuid || "") + '" />');

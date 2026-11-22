@@ -464,7 +464,11 @@ public class FileUploadHandler {
       cacheControl.setNoCache(true);
       UploadResource resource = uploadService.getUploadResource(uploadId);
       DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-      if (parent == null) {
+      if (resource == null) {
+        // already saved (the save removes it), refused by a validator, aborted or unknown upload id
+        LOG.debug("Upload resource not found for upload id " + uploadId + ", nothing to save");
+      }
+      if (parent == null || resource == null) {
         Document fileNotUploaded = fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED,
                                                             FCKMessage.ERROR,
                                                             language,

@@ -593,9 +593,11 @@
           })
               .then(xmlStr => (new window.DOMParser()).parseFromString(xmlStr, 'text/xml'))
               .then(xml => {
-                if (xml) {
-                  return xml.childNodes[0].attributes[0].value;
+                if (xml && xml.documentElement && xml.documentElement.nodeName === 'file') {
+                  return xml.documentElement.attributes[0].value;
                 }
+                log('Error uploading image: the server did not answer a file');
+                uploadError = true;
               }).then(uuid => {
             if (uploadFinished && !uploadError) {
               self.displayImage(self.getImageURL(uuid));
