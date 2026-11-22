@@ -1138,9 +1138,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   }
 
   /**
-   * Collects, by UUID, the own access list of every node below the document
-   * that the cancel brings back with it: the walk goes down through the
-   * non-versionable nodes only, since a versionable one keeps its own history.
+   * Collects, by node id, the own access list of every node below the document
+   * that the cancel brings back with it, null for a node that has none, parents
+   * before their children: the walk goes down through the non-versionable
+   * nodes only, since a versionable one keeps its own history.
    */
   private void collectDescendantPermissions(Node node, Map<String, Map<String, String[]>> descendants) throws RepositoryException {
     NodeIterator children = node.getNodes();
@@ -1149,9 +1150,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       if (child.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
         continue;
       }
-      if (child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
-        descendants.put(((ExtendedNode) child).getIdentifier(), toPermissions(child));
-      }
+      descendants.put(((ExtendedNode) child).getIdentifier(),
+                      child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE) ? toPermissions(child) : null);
       collectDescendantPermissions(child, descendants);
     }
   }
@@ -1185,7 +1185,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       if (mixinChange) {
         node.checkout();
       }
-      keepDescendantsAccess(systemSession, access);
       if (access.ownPermissions() != null) {
         if (!hasOwnPermissions) {
           node.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
@@ -1198,6 +1197,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         node.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
       }
       systemSession.save();
+      // After the document's own list: a node that reads its folder's list reads the one just put back
+      keepDescendantsAccess(systemSession, access);
       if (mixinChange) {
         node.checkin();
       }
@@ -1214,7 +1215,9 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   private boolean descendantsNeedMixinChange(Session systemSession, DocumentAccess access) throws RepositoryException {
     for (String descendantId : access.descendantsPermissions().keySet()) {
       try {
-        if (!((ExtendedSession) systemSession).getNodeByIdentifier(descendantId).isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+        boolean hasOwnList = ((ExtendedSession) systemSession).getNodeByIdentifier(descendantId)
+                                                              .isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
+        if (hasOwnList != (access.descendantsPermissions().get(descendantId) != null)) {
           return true;
         }
       } catch (ItemNotFoundException e) {
@@ -1232,6 +1235,16 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         child = ((ExtendedSession) systemSession).getNodeByIdentifier(descendant.getKey());
       } catch (ItemNotFoundException e) {
         continue; // the cancel did not bring this node back
+      }
+      if (descendant.getValue() == null) {
+        if (child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+          // Removing the mixin keeps the list in effect: its folder's is set first
+          ((ExtendedNode) child).setPermissions(toPermissions(child.getParent()));
+          systemSession.save();
+          child.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+          changed = true;
+        }
+        continue;
       }
       if (!child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
         child.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);

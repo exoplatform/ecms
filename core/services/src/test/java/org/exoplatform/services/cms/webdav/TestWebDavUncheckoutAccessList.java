@@ -335,6 +335,25 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
     assertFalse(cancelled.isCheckedOut());
   }
 
+  public void testAListOfItsOwnRemovedFromAFileOfAFolderAfterTheCheckoutStaysRemovedWhenItIsCancelled() throws Exception {
+    Node versionableFolder = addVersionedFolder("removed-below-folder");
+    Node child = addFileWithList(versionableFolder, "child.txt", Map.of(CANCELLER, PermissionType.ALL, MEMBER, READ));
+    String folderUuid = versionableFolder.getUUID();
+    versionableFolder.checkin();
+    versionableFolder.checkout();
+    child.removeMixin("exo:privilegeable");
+    session.save();
+
+    Response response = cancel("removed-below-folder");
+
+    assertEquals(200, response.getStatus());
+    Node cancelled = reload(folderUuid);
+    Node cancelledChild = cancelled.getNode("child.txt");
+    assertFalse(cancelledChild.isNodeType("exo:privilegeable"));
+    assertEquals(entriesOf(cancelled), entriesOf(cancelledChild));
+    assertFalse(cancelled.isCheckedOut());
+  }
+
   public void testAFileOfAFolderKeepsItsListWhenTheCheckoutOfTheFolderIsCancelled() throws Exception {
     Node versionableFolder = addVersionedFolder("untouched-folder");
     Node child = addFileWithList(versionableFolder, "child.txt", Map.of(CANCELLER, PermissionType.ALL, MEMBER, READ));
