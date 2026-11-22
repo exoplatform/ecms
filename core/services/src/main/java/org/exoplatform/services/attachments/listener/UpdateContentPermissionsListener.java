@@ -61,6 +61,8 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
 
   public static final String           AUDIENCE             = "audience";
 
+  public static final String           ALL_AUDIENCE         = "all";
+
   private static final String          IMAGE_SRC_REGEX      = "src=\"/portal/rest/images/?(.+)?\"";
 
   public UpdateContentPermissionsListener(RepositoryService repositoryService, AttachmentStorage attachmentStorage) {
@@ -158,10 +160,11 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
               attachmentNode.save();
             }
           }
-          if (audience.equals("all")) {
+          // No audience (a draft, or an article posted without publication): the all-users entry is left as it is
+          if (ALL_AUDIENCE.equals(audience)) {
             ((ExtendedNode) attachmentNode).setPermission("any", new String[] { PermissionType.READ });
             attachmentNode.save();
-          } else {
+          } else if (StringUtils.isNotEmpty(audience)) {
             ((ExtendedNode) attachmentNode).removePermission("any", PermissionType.READ);
             attachmentNode.save();
           }

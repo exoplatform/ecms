@@ -27,6 +27,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -158,6 +159,46 @@ public class UpdateContentPermissionsListenerTest {
       verify(node, times(2)).save();
     }
     verify(pathImageNode).addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+  }
+
+  @Test
+  public void testKeepAllUsersPermissionWhenAudienceIsMissing() throws Exception {
+    Space space = new Space();
+    space.setGroupId("/spaces/test");
+    ExtendedNode firstNode = mock(ExtendedNode.class);
+    when(firstNode.getPath()).thenReturn("/Groups/spaces/test/Documents/first");
+    when(systemSession.getNodeByUUID("123")).thenReturn(firstNode);
+    ExtendedNode secondNode = mock(ExtendedNode.class);
+    when(secondNode.getPath()).thenReturn("/Groups/spaces/test/Documents/second");
+    when(systemSession.getNodeByUUID("456")).thenReturn(secondNode);
+    when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_DRAFT_PAGES")).thenReturn(List.of(attachment("123"),
+                                                                                                attachment("456")));
+
+    listener.onEvent(new Event<>("content.update.permissions",
+                                 null,
+                                 Map.of("entityId", "1", "entityType", "WIKI_DRAFT_PAGES", "spaces", List.of(space))));
+
+    for (ExtendedNode node : List.of(firstNode, secondNode)) {
+      verify(node).setPermission("*:/spaces/test", new String[] { PermissionType.READ });
+      verify(node, never()).setPermission("any", new String[] { PermissionType.READ });
+      verify(node, never()).removePermission("any", PermissionType.READ);
+      verify(node).save();
+    }
+  }
+
+  @Test
+  public void testRemoveAnyPermissionWhenAudienceIsSpace() throws Exception {
+    ExtendedNode node = mock(ExtendedNode.class);
+    when(node.getPath()).thenReturn("/Groups/spaces/test/Documents/first");
+    when(systemSession.getNodeByUUID("123")).thenReturn(node);
+    when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_PAGE_VERSIONS")).thenReturn(List.of(attachment("123")));
+
+    listener.onEvent(new Event<>("content.update.permissions",
+                                 null,
+                                 Map.of("entityId", "1", "entityType", "WIKI_PAGE_VERSIONS", "audience", "space")));
+
+    verify(node).removePermission("any", PermissionType.READ);
+    verify(node, never()).setPermission("any", new String[] { PermissionType.READ });
   }
 
   @Test
