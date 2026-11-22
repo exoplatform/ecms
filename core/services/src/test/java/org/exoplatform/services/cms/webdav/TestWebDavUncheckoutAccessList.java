@@ -312,6 +312,29 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
     assertTrue(deeperEntries.contains(EDITOR + " read"));
   }
 
+  public void testAListOfItsOwnGainedByAFileOfAFolderAfterTheCheckoutIsKeptWhenItIsCancelled() throws Exception {
+    Node versionableFolder = addVersionedFolder("gained-folder");
+    Node child = versionableFolder.addNode("child.txt", "nt:file");
+    Node resource = child.addNode("jcr:content", "nt:resource");
+    resource.setProperty("jcr:mimeType", "text/plain");
+    resource.setProperty("jcr:lastModified", Calendar.getInstance());
+    resource.setProperty("jcr:data", new ByteArrayInputStream("c".getBytes(StandardCharsets.UTF_8)));
+    session.save();
+    String folderUuid = versionableFolder.getUUID();
+    versionableFolder.checkin();
+    versionableFolder.checkout();
+    child.addMixin("exo:privilegeable");
+    ((ExtendedNode) child).setPermissions(Map.of(CANCELLER, PermissionType.ALL, EDITOR, READ));
+    session.save();
+
+    Response response = cancel("gained-folder");
+
+    assertEquals(200, response.getStatus());
+    Node cancelled = reload(folderUuid);
+    assertTrue(entriesOf(cancelled.getNode("child.txt")).contains(EDITOR + " read"));
+    assertFalse(cancelled.isCheckedOut());
+  }
+
   public void testAFileOfAFolderKeepsItsListWhenTheCheckoutOfTheFolderIsCancelled() throws Exception {
     Node versionableFolder = addVersionedFolder("untouched-folder");
     Node child = addFileWithList(versionableFolder, "child.txt", Map.of(CANCELLER, PermissionType.ALL, MEMBER, READ));

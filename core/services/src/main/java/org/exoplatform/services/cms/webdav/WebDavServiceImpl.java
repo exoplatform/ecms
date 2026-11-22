@@ -1169,8 +1169,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   /**
    * Gives the document back its access list after the cancel, through a system
    * session. The document stays checked in, and a new version is created only
-   * when the private-access mixin has to be added or removed, which a
-   * checked-in node refuses.
+   * when the private-access mixin has to be added or removed on the document
+   * or on a node below it, which a checked-in node refuses.
    */
   private void keepAccess(DocumentAccess access) {
     Session systemSession = null;
@@ -1179,20 +1179,19 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       Node node = systemSession.getNodeByUUID(access.uuid());
       // The private-access mixin may differ from the one read before
       boolean hasOwnPermissions = node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
-      boolean mixinChange = hasOwnPermissions != (access.ownPermissions() != null);
-      keepDescendantsAccess(systemSession, access);
-      if (!mixinChange && !hasOwnPermissions) {
-        return;
-      }
+      // A checked-in document refuses a mixin change on itself or below it
+      boolean mixinChange = hasOwnPermissions != (access.ownPermissions() != null)
+                            || descendantsNeedMixinChange(systemSession, access);
       if (mixinChange) {
         node.checkout();
       }
+      keepDescendantsAccess(systemSession, access);
       if (access.ownPermissions() != null) {
         if (!hasOwnPermissions) {
           node.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
         }
         ((ExtendedNode) node).setPermissions(access.ownPermissions());
-      } else {
+      } else if (hasOwnPermissions) {
         // Removing the mixin keeps the list in effect: its folder's is set first
         ((ExtendedNode) node).setPermissions(toPermissions(node.getParent()));
         systemSession.save();
@@ -1210,6 +1209,19 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         systemSession.logout();
       }
     }
+  }
+
+  private boolean descendantsNeedMixinChange(Session systemSession, DocumentAccess access) throws RepositoryException {
+    for (String descendantId : access.descendantsPermissions().keySet()) {
+      try {
+        if (!((ExtendedSession) systemSession).getNodeByIdentifier(descendantId).isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+          return true;
+        }
+      } catch (ItemNotFoundException e) {
+        // the cancel did not bring this node back
+      }
+    }
+    return false;
   }
 
   private void keepDescendantsAccess(Session systemSession, DocumentAccess access) throws RepositoryException {
