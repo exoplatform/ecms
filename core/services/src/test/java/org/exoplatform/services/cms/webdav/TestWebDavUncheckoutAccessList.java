@@ -287,6 +287,73 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
                                 && event.getFormattedMessage().contains("access list could not be kept")));
   }
 
+  public void testAShareRevokedOnAFileOfAFolderStaysRevokedWhenItsCheckoutIsCancelled() throws Exception {
+    Node versionableFolder = addVersionedFolder("revoked-folder");
+    Node child = addFileWithList(versionableFolder, "child.txt", Map.of(CANCELLER, PermissionType.ALL, MEMBER, READ));
+    Node deeper = addFileWithList(versionableFolder.addNode("sub", "nt:folder"),
+                                  "deeper.txt",
+                                  Map.of(CANCELLER, PermissionType.ALL, MEMBER, READ));
+    String folderUuid = versionableFolder.getUUID();
+    versionableFolder.checkin();
+    versionableFolder.checkout();
+    ((ExtendedNode) child).setPermissions(Map.of(CANCELLER, PermissionType.ALL, EDITOR, READ));
+    ((ExtendedNode) deeper).setPermissions(Map.of(CANCELLER, PermissionType.ALL, EDITOR, READ));
+    session.save();
+
+    Response response = cancel("revoked-folder");
+
+    assertEquals(200, response.getStatus());
+    reload(folderUuid);
+    Set<String> entries = entriesOf(session.getRootNode().getNode("Users/uncheckoutFolder/revoked-folder/child.txt"));
+    assertFalse("the revoked share came back: " + entries, entries.contains(MEMBER + " read"));
+    assertTrue(entries.contains(EDITOR + " read"));
+    Set<String> deeperEntries = entriesOf(session.getRootNode().getNode("Users/uncheckoutFolder/revoked-folder/sub/deeper.txt"));
+    assertFalse("the revoked share came back below: " + deeperEntries, deeperEntries.contains(MEMBER + " read"));
+    assertTrue(deeperEntries.contains(EDITOR + " read"));
+  }
+
+  public void testAFileOfAFolderKeepsItsListWhenTheCheckoutOfTheFolderIsCancelled() throws Exception {
+    Node versionableFolder = addVersionedFolder("untouched-folder");
+    Node child = addFileWithList(versionableFolder, "child.txt", Map.of(CANCELLER, PermissionType.ALL, MEMBER, READ));
+    Node sub = versionableFolder.addNode("sub", "nt:folder");
+    Node deeper = addFileWithList(sub, "deeper.txt", Map.of(CANCELLER, PermissionType.ALL, EDITOR, READ));
+    session.save();
+    String folderUuid = versionableFolder.getUUID();
+    Set<String> childBefore = entriesOf(child);
+    Set<String> deeperBefore = entriesOf(deeper);
+    versionableFolder.checkin();
+    versionableFolder.checkout();
+
+    Response response = cancel("untouched-folder");
+
+    assertEquals(200, response.getStatus());
+    reload(folderUuid);
+    assertEquals(childBefore, entriesOf(session.getRootNode().getNode("Users/uncheckoutFolder/untouched-folder/child.txt")));
+    assertEquals(deeperBefore,
+                 entriesOf(session.getRootNode().getNode("Users/uncheckoutFolder/untouched-folder/sub/deeper.txt")));
+  }
+
+  private Node addVersionedFolder(String name) throws Exception {
+    Node versionableFolder = folder.addNode(name, "nt:folder");
+    versionableFolder.addMixin("mix:versionable");
+    versionableFolder.addMixin("exo:privilegeable");
+    ((ExtendedNode) versionableFolder).setPermissions(Map.of(CANCELLER, PermissionType.ALL));
+    session.save();
+    return versionableFolder;
+  }
+
+  private Node addFileWithList(Node parent, String name, Map<String, String[]> permissions) throws Exception {
+    Node file = parent.addNode(name, "nt:file");
+    Node resource = file.addNode("jcr:content", "nt:resource");
+    resource.setProperty("jcr:mimeType", "text/plain");
+    resource.setProperty("jcr:lastModified", Calendar.getInstance());
+    resource.setProperty("jcr:data", new ByteArrayInputStream(name.getBytes(StandardCharsets.UTF_8)));
+    file.addMixin("exo:privilegeable");
+    ((ExtendedNode) file).setPermissions(permissions);
+    session.save();
+    return file;
+  }
+
   private WebDavServiceImpl newService(org.exoplatform.services.jcr.RepositoryService jcrRepositoryService) throws Exception {
     AutoVersionService autoVersionService = mock(AutoVersionService.class);
     when(autoVersionService.getDriveAutoVersion()).thenReturn(java.util.List.of());

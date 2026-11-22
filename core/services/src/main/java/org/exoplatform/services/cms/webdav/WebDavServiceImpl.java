@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -71,6 +72,7 @@ import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
 import org.exoplatform.services.jcr.webdav.util.InitParamsDefaults;
 import org.exoplatform.services.jcr.webdav.util.TextUtil;
@@ -1118,7 +1120,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       if (!node.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
         return null; // the cancel answers it
       }
-      return new DocumentAccess(workspace, node.getUUID(), node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE) ? toPermissions(node) : null);
+      Map<String, Map<String, String[]>> descendants = new LinkedHashMap<>();
+      collectDescendantPermissions(node, descendants);
+      return new DocumentAccess(workspace,
+                                node.getUUID(),
+                                node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE) ? toPermissions(node) : null,
+                                descendants);
     } catch (PathNotFoundException e) {
       return null; // the cancel answers it
     } catch (RepositoryException e) {
@@ -1127,6 +1134,25 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       if (systemSession != null) {
         systemSession.logout();
       }
+    }
+  }
+
+  /**
+   * Collects, by UUID, the own access list of every node below the document
+   * that the cancel brings back with it: the walk goes down through the
+   * non-versionable nodes only, since a versionable one keeps its own history.
+   */
+  private void collectDescendantPermissions(Node node, Map<String, Map<String, String[]>> descendants) throws RepositoryException {
+    NodeIterator children = node.getNodes();
+    while (children.hasNext()) {
+      Node child = children.nextNode();
+      if (child.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+        continue;
+      }
+      if (child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+        descendants.put(((ExtendedNode) child).getIdentifier(), toPermissions(child));
+      }
+      collectDescendantPermissions(child, descendants);
     }
   }
 
@@ -1154,6 +1180,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       // The private-access mixin may differ from the one read before
       boolean hasOwnPermissions = node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
       boolean mixinChange = hasOwnPermissions != (access.ownPermissions() != null);
+      keepDescendantsAccess(systemSession, access);
       if (!mixinChange && !hasOwnPermissions) {
         return;
       }
@@ -1182,6 +1209,26 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       if (systemSession != null) {
         systemSession.logout();
       }
+    }
+  }
+
+  private void keepDescendantsAccess(Session systemSession, DocumentAccess access) throws RepositoryException {
+    boolean changed = false;
+    for (Map.Entry<String, Map<String, String[]>> descendant : access.descendantsPermissions().entrySet()) {
+      Node child;
+      try {
+        child = ((ExtendedSession) systemSession).getNodeByIdentifier(descendant.getKey());
+      } catch (ItemNotFoundException e) {
+        continue; // the cancel did not bring this node back
+      }
+      if (!child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+        child.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+      }
+      ((ExtendedNode) child).setPermissions(descendant.getValue());
+      changed = true;
+    }
+    if (changed) {
+      systemSession.save();
     }
   }
 

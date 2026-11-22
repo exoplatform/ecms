@@ -20,7 +20,11 @@ import java.util.Map;
 
 /**
  * The access list of a document: its own permissions by identity, or null
- * when it reads its folder's list
+ * when it reads its folder's list, and the own lists of the nodes below it
+ * by node id
  */
-record DocumentAccess(String workspace, String uuid, Map<String, String[]> ownPermissions) {
+record DocumentAccess(String workspace,
+                      String uuid,
+                      Map<String, String[]> ownPermissions,
+                      Map<String, Map<String, String[]>> descendantsPermissions) {
 }
