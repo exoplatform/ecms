@@ -32,6 +32,8 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.annotation.security.RolesAllowed;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -718,7 +720,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
           continue;
 
         if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
-          sourceNode = linkManager.getTarget(child);
+          try {
+            sourceNode = linkManager.getTarget(child);
+          } catch (ItemNotFoundException | AccessDeniedException e) {
+            // a shortcut whose target is gone or unreadable is skipped, the other nodes are still listed
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Skip the shortcut {} whose target is missing or unreadable", child.getPath());
+            }
+            continue;
+          }
         } else {
           sourceNode = child;
         }

@@ -1006,7 +1006,15 @@ public class DocumentServiceImpl implements DocumentService {
         Node documentNode = documentsIterator.nextNode();
         Node originalDocumentNode = documentNode;
         if (documentNode.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-          originalDocumentNode = linkManager.getTarget(documentNode);
+          try {
+            originalDocumentNode = linkManager.getTarget(documentNode);
+          } catch (ItemNotFoundException | AccessDeniedException e) {
+            // a shortcut whose target is gone or unreadable is skipped, the other documents are still returned
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("Skip the shortcut {} whose target is missing or unreadable", documentNode.getPath());
+            }
+            continue;
+          }
         }
         String documentNodePath = originalDocumentNode.getPath();
         Document document = new Document(originalDocumentNode.getUUID(),
