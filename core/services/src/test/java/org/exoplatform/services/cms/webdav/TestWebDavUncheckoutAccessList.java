@@ -354,6 +354,32 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
     assertFalse(cancelled.isCheckedOut());
   }
 
+  public void testAListRemovedBelowAFolderThatReadsAChangedListStaysRemovedWhenItIsCancelled() throws Exception {
+    Node versionableFolder = addVersionedFolder("stale-parent-folder");
+    Node changed = versionableFolder.addNode("changed", "nt:folder");
+    changed.addMixin("exo:privilegeable");
+    ((ExtendedNode) changed).setPermissions(Map.of(CANCELLER, PermissionType.ALL, "bob", READ));
+    session.save();
+    Node inheriting = changed.addNode("inheriting", "nt:folder");
+    Node removed = addFileWithList(inheriting, "removed.txt", Map.of(CANCELLER, PermissionType.ALL, "bob", READ));
+    String folderUuid = versionableFolder.getUUID();
+    versionableFolder.checkin();
+    versionableFolder.checkout();
+    ((ExtendedNode) changed).setPermissions(Map.of(CANCELLER, PermissionType.ALL));
+    removed.removeMixin("exo:privilegeable");
+    session.save();
+
+    Response response = cancel("stale-parent-folder");
+
+    assertEquals(200, response.getStatus());
+    Node cancelled = reload(folderUuid);
+    Node cancelledRemoved = cancelled.getNode("changed/inheriting/removed.txt");
+    assertFalse(cancelledRemoved.isNodeType("exo:privilegeable"));
+    assertFalse("the revoked share came back: " + entriesOf(cancelledRemoved), entriesOf(cancelledRemoved).contains("bob read"));
+    assertEquals(entriesOf(cancelled.getNode("changed")), entriesOf(cancelledRemoved));
+    assertFalse(cancelled.isCheckedOut());
+  }
+
   public void testAFileOfAFolderKeepsItsListWhenTheCheckoutOfTheFolderIsCancelled() throws Exception {
     Node versionableFolder = addVersionedFolder("untouched-folder");
     Node child = addFileWithList(versionableFolder, "child.txt", Map.of(CANCELLER, PermissionType.ALL, MEMBER, READ));

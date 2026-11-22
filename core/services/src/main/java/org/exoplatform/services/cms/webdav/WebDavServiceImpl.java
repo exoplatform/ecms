@@ -1228,32 +1228,37 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   }
 
   private void keepDescendantsAccess(Session systemSession, DocumentAccess access) throws RepositoryException {
-    boolean changed = false;
+    // The lists are put back first and saved once: a node that reads its
+    // folder's list only sees a list changed in this session after a save
     for (Map.Entry<String, Map<String, String[]>> descendant : access.descendantsPermissions().entrySet()) {
-      Node child;
-      try {
-        child = ((ExtendedSession) systemSession).getNodeByIdentifier(descendant.getKey());
-      } catch (ItemNotFoundException e) {
-        continue; // the cancel did not bring this node back
-      }
-      if (descendant.getValue() == null) {
-        if (child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
-          // Removing the mixin keeps the list in effect: its folder's is set first
-          ((ExtendedNode) child).setPermissions(toPermissions(child.getParent()));
-          systemSession.save();
-          child.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
-          changed = true;
-        }
-        continue;
+      Node child = findNode(systemSession, descendant.getKey());
+      if (child == null || descendant.getValue() == null) {
+        continue; // the cancel did not bring this node back, or it has no list to put back
       }
       if (!child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
         child.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
       }
       ((ExtendedNode) child).setPermissions(descendant.getValue());
-      changed = true;
     }
-    if (changed) {
-      systemSession.save();
+    systemSession.save();
+    // Then the lists that are gone are removed, parents first, each removal saved
+    for (Map.Entry<String, Map<String, String[]>> descendant : access.descendantsPermissions().entrySet()) {
+      Node child = findNode(systemSession, descendant.getKey());
+      if (child != null && descendant.getValue() == null && child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+        // Removing the mixin keeps the list in effect: its folder's is set first
+        ((ExtendedNode) child).setPermissions(toPermissions(child.getParent()));
+        systemSession.save();
+        child.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+        systemSession.save();
+      }
+    }
+  }
+
+  private Node findNode(Session systemSession, String nodeId) throws RepositoryException {
+    try {
+      return ((ExtendedSession) systemSession).getNodeByIdentifier(nodeId);
+    } catch (ItemNotFoundException e) {
+      return null;
     }
   }
 
