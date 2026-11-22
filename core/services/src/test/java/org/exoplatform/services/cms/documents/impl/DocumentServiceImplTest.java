@@ -18,6 +18,7 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -359,5 +360,36 @@ public class DocumentServiceImplTest {
     verify(currentNode).save();
     verify(listenerService).broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     verify(listenerService, never()).broadcast(eq(DocumentServiceImpl.CREATE_DOC_NEW_APP), any(), any());
+  }
+
+  /**
+   * A node the caller cannot read is reported as not found, so that its
+   * existence is not disclosed, and nothing is written.
+   */
+  @Test
+  public void testSavePreferredEditorOfUnreadableNodeIsNotFound() throws Exception {
+    ExtendedSession extendedSession = mock(ExtendedSession.class);
+    when(sessionProviderService.getSessionProvider(null)).thenReturn(sessionProvider);
+    when(sessionProvider.getSession(any(), any())).thenReturn(extendedSession);
+    when(extendedSession.getNodeByIdentifier("uuid1")).thenThrow(new AccessDeniedException("internal repository detail"));
+
+    assertThrows(ItemNotFoundException.class,
+                 () -> documentService.savePreferredEditor("john", "onlyoffice", "uuid1", "collaboration"));
+  }
+
+  /**
+   * A refused write on a node the caller can read stays an access denial.
+   */
+  @Test
+  public void testSavePreferredEditorRefusedWriteStaysAccessDenied() throws Exception {
+    ExtendedSession extendedSession = mock(ExtendedSession.class);
+    Node node = mock(Node.class);
+    when(sessionProviderService.getSessionProvider(null)).thenReturn(sessionProvider);
+    when(sessionProvider.getSession(any(), any())).thenReturn(extendedSession);
+    when(extendedSession.getNodeByIdentifier("uuid1")).thenReturn(node);
+    when(node.canAddMixin(anyString())).thenThrow(new AccessDeniedException("write refused"));
+
+    assertThrows(AccessDeniedException.class,
+                 () -> documentService.savePreferredEditor("john", "onlyoffice", "uuid1", "collaboration"));
   }
 }

@@ -17,8 +17,17 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import java.lang.reflect.Field;
 import java.net.URI;
@@ -27,6 +36,7 @@ import java.util.Locale;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
@@ -34,6 +44,7 @@ import javax.jcr.RepositoryException;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.junit.After;
@@ -53,6 +64,7 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.wcm.connector.collaboration.editors.ErrorMessage;
 import org.exoplatform.wcm.connector.collaboration.editors.PreviewInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -72,6 +84,8 @@ public class DocumentEditorsRESTServiceTest {
   private ExtendedSession            session;
 
   private ExtendedSession            targetSession;
+
+  private DocumentService            documentService;
 
   private EditorProvidersHelper      editorProvidersHelper;
 
@@ -97,7 +111,7 @@ public class DocumentEditorsRESTServiceTest {
     Mockito.when(repository.login(WORKSPACE)).thenReturn(session);
     Mockito.when(repository.login(TARGET_WORKSPACE)).thenReturn(targetSession);
 
-    DocumentService documentService = Mockito.mock(DocumentService.class);
+    documentService = Mockito.mock(DocumentService.class);
     Mockito.when(documentService.getDocumentEditorProviders()).thenReturn(Collections.emptyList());
     editorProvidersHelper = Mockito.mock(EditorProvidersHelper.class);
     Mockito.when(editorProvidersHelper.initPreview(Mockito.anyList(),
@@ -273,6 +287,77 @@ public class DocumentEditorsRESTServiceTest {
     assertNoStore(response);
     assertNoProviderInitialized();
     Mockito.verify(session).logout();
+  }
+
+  @Test
+  public void testPreferredEditorSavedForSignedInUserOnly() throws Exception {
+    Response response = documentEditorsRESTService.preferredEditor("file1", "john", "onlyoffice", "collaboration");
+    assertEquals(Status.OK.getStatusCode(), response.getStatus());
+    verify(documentService).savePreferredEditor("mary", "onlyoffice", "file1", "collaboration");
+    verify(documentService, never()).savePreferredEditor(eq("john"), any(), any(), any());
+  }
+
+  @Test
+  public void testPreferredEditorSavedForSignedInUserWithoutUserParameter() throws Exception {
+    Response response = documentEditorsRESTService.preferredEditor("file1", null, "onlyoffice", "collaboration");
+    assertEquals(Status.OK.getStatusCode(), response.getStatus());
+    verify(documentService).savePreferredEditor("mary", "onlyoffice", "file1", "collaboration");
+  }
+
+  @Test
+  public void testPreferredEditorAccessDeniedAnswersFixedText() throws Exception {
+    doThrow(new AccessDeniedException("internal repository detail")).when(documentService)
+                                                                    .savePreferredEditor(anyString(), any(), any(), any());
+    Response response = documentEditorsRESTService.preferredEditor("file1", "john", "onlyoffice", "collaboration");
+    assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
+    ErrorMessage message = (ErrorMessage) response.getEntity();
+    assertEquals("Access denied error.", message.getErrorMessage());
+    assertFalse(message.getErrorMessage().contains("internal repository detail"));
+  }
+
+  @Test
+  public void testPreferredEditorFailureAnswersFixedText() throws Exception {
+    doThrow(new RepositoryException("internal repository detail")).when(documentService)
+                                                                  .savePreferredEditor(anyString(), any(), any(), any());
+    Response response = documentEditorsRESTService.preferredEditor("file1", "john", "onlyoffice", "collaboration");
+    assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+    ErrorMessage message = (ErrorMessage) response.getEntity();
+    assertEquals("Cannot save the preferred editor.", message.getErrorMessage());
+    assertFalse(message.getErrorMessage().contains("internal repository detail"));
+  }
+
+  @Test
+  public void testPreferredEditorOfMissingFileAnswersNotFound() throws Exception {
+    doThrow(new ItemNotFoundException("internal repository detail")).when(documentService)
+                                                                    .savePreferredEditor(anyString(), any(), any(), any());
+    Response response = documentEditorsRESTService.preferredEditor("file1", "john", "onlyoffice", "collaboration");
+    assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    ErrorMessage message = (ErrorMessage) response.getEntity();
+    assertEquals("Document not found.", message.getErrorMessage());
+  }
+
+  @Test
+  public void testPreferredEditorOfUnknownWorkspaceAnswersNotFound() throws Exception {
+    doThrow(new NoSuchWorkspaceException("internal repository detail")).when(documentService)
+                                                                       .savePreferredEditor(anyString(), any(), any(), any());
+    Response response = documentEditorsRESTService.preferredEditor("file1", "john", "onlyoffice", "unknown");
+    assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus());
+    ErrorMessage message = (ErrorMessage) response.getEntity();
+    assertEquals("Document not found.", message.getErrorMessage());
+  }
+
+  /**
+   * Covers a bypass of the role check only: the method is restricted to the
+   * {@code users} role, so an anonymous HTTP request is refused with 403 by the
+   * REST role filter before it reaches the method.
+   */
+  @Test
+  public void testPreferredEditorWithoutSignedInUser() throws Exception {
+    ConversationState.setCurrent(null);
+    Response response = documentEditorsRESTService.preferredEditor("file1", "john", "onlyoffice", "collaboration");
+    assertEquals(Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    assertNull(response.getEntity());
+    verifyNoInteractions(documentService);
   }
 
   private void mockShortcut() throws Exception {
