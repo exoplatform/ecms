@@ -152,7 +152,7 @@ public class WebDavServiceImplAccessListTest {
 
   @Test
   public void testAclIsAppliedForAMemberTheSpaceAllows() {
-    when(guard.canManageAccess(document, "mary", "legacyWebDAV")).thenReturn(true);
+    when(guard.getAccessListChangeRefusal(document, "mary", "legacyWebDAV")).thenReturn(null);
     Response applied = Response.ok().build();
     doReturn(applied).when(webDavService).changeAccessList(any(), any(), any(), any(), any());
 
@@ -161,12 +161,24 @@ public class WebDavServiceImplAccessListTest {
 
   @Test
   public void testAclIsRefusedToAMemberTheSpaceRefuses() {
-    when(guard.canManageAccess(document, "mary", "legacyWebDAV")).thenReturn(false);
+    when(guard.getAccessListChangeRefusal(document, "mary", "legacyWebDAV")).thenReturn(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED);
 
     Response response = webDavService.acl("repository", REPO_PATH, null, null, null);
 
     assertEquals(HTTPStatus.FORBIDDEN, response.getStatus());
     assertEquals(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED, response.getEntity());
+    verify(webDavService, never()).changeAccessList(any(), any(), any(), any(), any());
+  }
+
+  @Test
+  public void testAclIsRefusedWhenTheSpaceKeepsItsDocumentsInside() {
+    when(guard.getAccessListChangeRefusal(document, "mary", "legacyWebDAV")).thenReturn(DocumentSpaceGuard.KEPT_INSIDE_SHARE);
+
+    Response response = webDavService.acl("repository", REPO_PATH, null, null, null);
+
+    assertEquals(HTTPStatus.FORBIDDEN, response.getStatus());
+    assertEquals(DocumentSpaceGuard.KEPT_INSIDE_SHARE, response.getEntity());
+    verify(webDavService, never()).changeAccessList(any(), any(), any(), any(), any());
   }
 
   @Test
