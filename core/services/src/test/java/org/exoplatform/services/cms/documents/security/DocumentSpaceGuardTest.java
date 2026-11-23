@@ -276,6 +276,77 @@ public class DocumentSpaceGuardTest {
     verify(spaceSecurityService, never()).getSettings(anyLong());
   }
 
+  /**
+   * Nobody is exempt: the platform administrator who manages the space's
+   * documents' access is refused an access list change while the space keeps
+   * its documents inside, and the refusal is reported once, on the settings
+   * read once.
+   */
+  @Test
+  public void testAccessListChangeRefusedWhenTheSpaceKeepsItsDocumentsInside() throws Exception {
+    SpaceSecuritySettings settings = new SpaceSecuritySettings(false, true, true);
+    when(spaceSecurityService.getSettings(5L)).thenReturn(settings);
+    when(spaceSecurityService.canManageDocumentsAccess(space, settings, "root")).thenReturn(true);
+    when(spaceSecurityService.isDocumentsKeptInside(settings)).thenReturn(true);
+
+    assertEquals(DocumentSpaceGuard.KEPT_INSIDE_SHARE, guard.getAccessListChangeRefusal(node(DOCUMENT_PATH), "root", "legacyWebDAV"));
+
+    audit.verify(() -> SpaceSecurityAudit.actionRefused(5L, "id", "changePermissions", "root", "legacyWebDAV"));
+    verify(spaceSecurityService, times(1)).getSettings(5L);
+  }
+
+  @Test
+  public void testAccessListChangeRefusedOnLimitedAccessManagementFirst() throws Exception {
+    SpaceSecuritySettings settings = new SpaceSecuritySettings(true, true, true);
+    when(spaceSecurityService.getSettings(5L)).thenReturn(settings);
+    when(spaceSecurityService.canManageDocumentsAccess(space, settings, "mary")).thenReturn(false);
+    // read only by a decision asking "Keep documents inside the space" first
+    lenient().when(spaceSecurityService.isDocumentsKeptInside(settings)).thenReturn(true);
+
+    assertEquals(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED,
+                 guard.getAccessListChangeRefusal(node(DOCUMENT_PATH), "mary", "legacyWebDAV"));
+  }
+
+  @Test
+  public void testAccessListChangeAllowedWhenNeitherSettingRefuses() throws Exception {
+    SpaceSecuritySettings settings = new SpaceSecuritySettings(false, false, true);
+    when(spaceSecurityService.getSettings(5L)).thenReturn(settings);
+    when(spaceSecurityService.canManageDocumentsAccess(space, settings, "mary")).thenReturn(true);
+    when(spaceSecurityService.isDocumentsKeptInside(settings)).thenReturn(false);
+
+    assertNull(guard.getAccessListChangeRefusal(node(DOCUMENT_PATH), "mary", "legacyWebDAV"));
+    audit.verify(() -> SpaceSecurityAudit.actionRefused(anyLong(), any(), any(), any(), any()), never());
+  }
+
+  @Test
+  public void testAccessListChangeOfADocumentOfNoSpaceIsAllowed() throws Exception {
+    assertNull(guard.getAccessListChangeRefusal(node("/Users/m___/ma___/mar___/mary/Private/a.docx"), "mary", "legacyWebDAV"));
+    verify(spaceSecurityService, never()).getSettings(anyLong());
+  }
+
+  @Test
+  public void testAccessListChangeRefusedWhenTheSettingsCannotBeRead() throws Exception {
+    when(spaceSecurityService.getSettings(5L)).thenThrow(new ObjectNotFoundException("gone"));
+
+    assertEquals(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED,
+                 guard.getAccessListChangeRefusal(node(DOCUMENT_PATH), "root", "legacyWebDAV"));
+  }
+
+  /**
+   * "Limit Access Management" alone decides whether a user manages access: a
+   * version restore keeps deciding on it while the space keeps its documents
+   * inside.
+   */
+  @Test
+  public void testManagingAccessIgnoresKeepingDocumentsInside() throws Exception {
+    SpaceSecuritySettings settings = new SpaceSecuritySettings(false, true, true);
+    when(spaceSecurityService.getSettings(5L)).thenReturn(settings);
+    when(spaceSecurityService.canManageDocumentsAccess(space, settings, "mary")).thenReturn(true);
+
+    assertTrue(guard.canManageAccess(node(DOCUMENT_PATH), "mary", "legacyWebDAV"));
+    verify(spaceSecurityService, never()).isDocumentsKeptInside(any());
+  }
+
   @Test
   public void testAccessManagementIsRefusedWhenTheSettingsCannotBeRead() throws Exception {
     when(spaceSecurityService.getSettings(5L)).thenThrow(new ObjectNotFoundException("gone"));

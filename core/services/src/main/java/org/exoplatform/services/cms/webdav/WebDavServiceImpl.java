@@ -1150,15 +1150,18 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
   /**
    * Refuses an access list change of a document of a space whose "Limit
-   * Access Management" setting refuses the current user.
+   * Access Management" setting refuses the current user, or whose "Keep
+   * documents inside the space" setting is on: the ACL request's entries are
+   * not told apart.
    */
   private Response denyAccessManagementIfNeeded(String repoPath) {
     try {
       Node node = (Node) nodeFinder.getItem(workspaceName(repoPath), path(repoPath), true);
-      if (getDocumentSpaceGuard().canManageAccess(node, getCurrentUser(), LEGACY_WEBDAV_CHANNEL)) {
+      String refusal = getDocumentSpaceGuard().getAccessListChangeRefusal(node, getCurrentUser(), LEGACY_WEBDAV_CHANNEL);
+      if (refusal == null) {
         return null;
       }
-      return Response.status(HTTPStatus.FORBIDDEN).entity(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED).build();
+      return Response.status(HTTPStatus.FORBIDDEN).entity(refusal).build();
     } catch (PathNotFoundException e) {
       return null;
     } catch (Exception e) {

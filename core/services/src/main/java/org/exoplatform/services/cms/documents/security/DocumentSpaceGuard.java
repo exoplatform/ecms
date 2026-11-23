@@ -59,6 +59,8 @@ public class DocumentSpaceGuard {
 
   public static final String   ACCESS_MANAGEMENT_LIMITED = "documents.space.accessManagementLimited";
 
+  public static final String   KEPT_INSIDE_SHARE         = "documents.space.keptInside.share";
+
   public static final String   CHANGE_PERMISSIONS_ACTION = "changePermissions";
 
   private static final String  EXO_PRIVILEGEABLE         = "exo:privilegeable";
@@ -163,27 +165,53 @@ public class DocumentSpaceGuard {
    * @return true when the change may be made
    */
   public boolean canManageAccess(Node document, String username, String channel) {
+    return getAccessChangeRefusal(document, username, channel, false) == null;
+  }
+
+  /**
+   * Decides, on the committed settings and roles read once, a change of the
+   * document's access list made by a request whose entries are not told apart,
+   * such as the WebDAV ACL method: "Limit Access Management" as
+   * {@link #canManageAccess}, then "Keep documents inside the space", which
+   * refuses every such change. A refusal is logged with its channel; a document
+   * whose space or settings cannot be read is refused.
+   *
+   * @param document a document, a version, a symlink or a folder
+   * @param username the user changing the access list
+   * @param channel the channel of the change, reported on a refusal
+   * @return null when the change may be made, else the code of the rule
+   *         refusing it
+   */
+  public String getAccessListChangeRefusal(Node document, String username, String channel) {
+    return getAccessChangeRefusal(document, username, channel, true);
+  }
+
+  private String getAccessChangeRefusal(Node document, String username, String channel, boolean keptInsideRefuses) {
     try {
       Space space = getDocumentSpace(document);
       if (space == null) {
-        return true;
+        return null;
       }
       SpaceSecuritySettings settings = spaceSecurityService.getSettings(space.getSpaceId());
-      if (spaceSecurityService.canManageDocumentsAccess(space, settings, username)) {
-        return true;
+      String refusal;
+      if (!spaceSecurityService.canManageDocumentsAccess(space, settings, username)) {
+        refusal = ACCESS_MANAGEMENT_LIMITED;
+      } else if (keptInsideRefuses && spaceSecurityService.isDocumentsKeptInside(settings)) {
+        refusal = KEPT_INSIDE_SHARE;
+      } else {
+        return null;
       }
-      if (channel == null) {
-        return false;
+      if (channel != null) {
+        SpaceSecurityAudit.actionRefused(space.getSpaceId(),
+                                         ((ExtendedNode) document).getIdentifier(),
+                                         CHANGE_PERMISSIONS_ACTION,
+                                         username,
+                                         channel);
       }
-      SpaceSecurityAudit.actionRefused(space.getSpaceId(),
-                                       ((ExtendedNode) document).getIdentifier(),
-                                       CHANGE_PERMISSIONS_ACTION,
-                                       username,
-                                       channel);
-      return false;
+      return refusal;
     } catch (Exception e) {
       LOG.warn("Access list change refused: the document's space settings could not be read", e);
-      return false;
+      return ACCESS_MANAGEMENT_LIMITED;
     }
   }
 
