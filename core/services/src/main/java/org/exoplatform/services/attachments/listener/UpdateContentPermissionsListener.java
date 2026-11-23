@@ -25,6 +25,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.Utils;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -52,6 +53,8 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
 
   private final AttachmentStorage attachmentStorage;
 
+  private final TrashService           trashService;
+
 
   public static final String           QUARANTINE           = "/Quarantine/";
 
@@ -61,11 +64,16 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
 
   public static final String           AUDIENCE             = "audience";
 
+  public static final String           ALL_AUDIENCE         = "all";
+
   private static final String          IMAGE_SRC_REGEX      = "src=\"/portal/rest/images/?(.+)?\"";
 
-  public UpdateContentPermissionsListener(RepositoryService repositoryService, AttachmentStorage attachmentStorage) {
+  public UpdateContentPermissionsListener(RepositoryService repositoryService,
+                                          AttachmentStorage attachmentStorage,
+                                          TrashService trashService) {
     this.repositoryService = repositoryService;
     this.attachmentStorage = attachmentStorage;
+    this.trashService = trashService;
   }
 
   @Override
@@ -148,7 +156,9 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
         } else {
           attachmentNode = (Node) session.getItem(URLDecoder.decode(attachmentId, StandardCharsets.UTF_8));
         }
-        if (!attachmentNode.getPath().startsWith(QUARANTINE)) {
+        if (trashService.isInTrash(attachmentNode)) {
+          withdrawAllUsersAccess(attachmentNode, audience);
+        } else if (!attachmentNode.getPath().startsWith(QUARANTINE)) {
           if (attachmentNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
             attachmentNode.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
           }
@@ -167,6 +177,21 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
           }
         }
       }
+    }
+  }
+
+  /**
+   * A document in the trash is given no access: it keeps the permissions it was
+   * deleted with, which its restore relies on. Adding the
+   * {@code exo:privilegeable} mixin would copy the trash folder's permissions
+   * onto it. Only the all-users access that the content no longer gives is
+   * withdrawn, from a document that has permissions of its own.
+   */
+  private void withdrawAllUsersAccess(Node attachmentNode, String audience) throws RepositoryException {
+    if (StringUtils.isNotEmpty(audience) && !ALL_AUDIENCE.equals(audience)
+        && attachmentNode.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      ((ExtendedNode) attachmentNode).removePermission("any", PermissionType.READ);
+      attachmentNode.save();
     }
   }
 }
