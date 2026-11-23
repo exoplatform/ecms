@@ -48,7 +48,6 @@ import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNo
 import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper.ProviderInfo;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -123,9 +122,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   /** The repository service. */
   protected final RepositoryService   repositoryService;
 
-  /** The link manager. */
-  protected final LinkManager         linkManager;
-
   /**
    * Instantiates a new document editors REST service.
    *
@@ -134,20 +130,17 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @param organizationService the organization service
    * @param identityManager the identity manager
    * @param repositoryService the repository service
-   * @param linkManager the link manager
    */
   public DocumentEditorsRESTService(DocumentService documentService,
                                     SpaceService spaceService,
                                     OrganizationService organizationService,
                                     IdentityManager identityManager,
-                                    RepositoryService repositoryService,
-                                    LinkManager linkManager) {
+                                    RepositoryService repositoryService) {
     this.documentService = documentService;
     this.identityManager = identityManager;
     this.organization = organizationService;
     this.spaceService = spaceService;
     this.repositoryService = repositoryService;
-    this.linkManager = linkManager;
   }
 
   /**
@@ -291,7 +284,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       return Response.status(Status.BAD_REQUEST).cacheControl(noStore()).build();
     }
 
-    String targetFileId = fileId;
+    String targetFileId;
     try {
       targetFileId = getTargetFileId(fileId, workspace);
     } catch (AccessDeniedException | ItemNotFoundException | NoSuchWorkspaceException e) {
@@ -300,7 +293,9 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       Status status = IdentityConstants.ANONIM.equals(identity.getUserId()) ? Status.UNAUTHORIZED : Status.NOT_FOUND;
       return Response.status(status).cacheControl(noStore()).build();
     } catch (RepositoryException e) {
+      // The caller's read of the file failed for an unexplained reason: no provider reads it through a system session
       LOG.warn("Cannot get the target of file {}", fileId, e);
+      return Response.status(Status.INTERNAL_SERVER_ERROR).cacheControl(noStore()).build();
     }
     List<DocumentEditorProvider> providers = documentService.getDocumentEditorProviders();
     List<ProviderInfo> providersInfo = EditorProvidersHelper.getInstance()

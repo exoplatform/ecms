@@ -28,6 +28,7 @@ import java.util.Locale;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.ws.rs.core.CacheControl;
@@ -42,7 +43,6 @@ import org.mockito.Mockito;
 
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedSession;
@@ -118,8 +118,7 @@ public class DocumentEditorsRESTServiceTest {
                                                                 Mockito.mock(SpaceService.class),
                                                                 Mockito.mock(OrganizationService.class),
                                                                 Mockito.mock(IdentityManager.class),
-                                                                repositoryService,
-                                                                Mockito.mock(LinkManager.class));
+                                                                repositoryService);
     ConversationState.setCurrent(new ConversationState(new Identity("mary")));
   }
 
@@ -248,14 +247,28 @@ public class DocumentEditorsRESTServiceTest {
   }
 
   @Test
-  public void shouldKeepTheGivenIdWhenTheRepositoryFails() throws Exception {
+  public void shouldAnswerAnErrorWhenTheRepositoryFails() throws Exception {
     Mockito.when(session.getNodeByIdentifier(FILE_ID)).thenThrow(new RepositoryException("repository down"));
 
     Response response = documentEditorsRESTService.initPreview(uriInfo, request, FILE_ID, WORKSPACE);
 
-    assertEquals(200, response.getStatus());
+    assertEquals(500, response.getStatus());
     assertNoStore(response);
-    assertEquals(FILE_ID, ((PreviewInfo) response.getEntity()).getFileId());
+    assertNoProviderInitialized();
+    Mockito.verify(session).logout();
+  }
+
+  @Test
+  public void shouldAnswerAnErrorForAShortcutWithoutTarget() throws Exception {
+    mockShortcut();
+    Node shortcut = session.getNodeByIdentifier(FILE_ID);
+    Mockito.when(shortcut.getProperty("exo:workspace")).thenThrow(new PathNotFoundException("exo:workspace"));
+
+    Response response = documentEditorsRESTService.initPreview(uriInfo, request, FILE_ID, WORKSPACE);
+
+    assertEquals(500, response.getStatus());
+    assertNoStore(response);
+    assertNoProviderInitialized();
     Mockito.verify(session).logout();
   }
 
@@ -273,7 +286,12 @@ public class DocumentEditorsRESTServiceTest {
 
   private void assertNoProviderInitialized() {
     Mockito.verify(editorProvidersHelper, Mockito.never())
-           .initPreview(Mockito.anyList(), Mockito.any(), Mockito.anyString(), Mockito.anyString(), Mockito.any(), Mockito.any());
+           .initPreview(Mockito.anyList(),
+                         Mockito.any(),
+                         Mockito.nullable(String.class),
+                         Mockito.nullable(String.class),
+                         Mockito.any(),
+                         Mockito.any());
   }
 
   private static Object setHelper(Object helper) throws Exception {
