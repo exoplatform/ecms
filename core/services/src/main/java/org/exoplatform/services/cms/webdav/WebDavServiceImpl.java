@@ -1173,8 +1173,9 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   /**
    * Restores the checked-out version, keeping the document's current access
    * list when its space's "Limit Access Management" setting refuses the
-   * current user: the restored version must not give back an access the user
-   * may not set.
+   * current user, or when its space keeps its documents inside: the restored
+   * version must not give back an access the user may not set, or an entry
+   * outside the space.
    */
   private Response uncheckoutKeepingAccessList(String repoName, String repoPath, String lockTokenHeader, String ifHeader) {
     SessionProvider systemSessionProvider = SessionProvider.createSystemProvider();
@@ -1183,7 +1184,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       Map<String, List<String>> accessList;
       try {
         Node node = (Node) nodeFinder.getItem(workspaceName(repoPath), path(repoPath), true);
-        if (getDocumentSpaceGuard().canManageAccess(node, getCurrentUser(), null)) {
+        if (getDocumentSpaceGuard().getAccessListChangeRefusal(node, getCurrentUser(), null) == null) {
           return restoreCheckedOutVersion(repoName, repoPath, lockTokenHeader, ifHeader);
         }
         Session systemSession = systemSessionProvider.getSession(workspaceName(repoPath), repositoryService.getCurrentRepository());

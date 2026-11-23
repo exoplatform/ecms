@@ -333,9 +333,9 @@ public class DocumentSpaceGuardTest {
   }
 
   /**
-   * "Limit Access Management" alone decides whether a user manages access: a
-   * version restore keeps deciding on it while the space keeps its documents
-   * inside.
+   * "Limit Access Management" alone decides whether a user manages access:
+   * "Keep documents inside the space" refuses only the changes of
+   * {@link DocumentSpaceGuard#getAccessListChangeRefusal}.
    */
   @Test
   public void testManagingAccessIgnoresKeepingDocumentsInside() throws Exception {
