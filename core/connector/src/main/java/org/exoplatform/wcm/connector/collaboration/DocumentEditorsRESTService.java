@@ -262,7 +262,7 @@ public class DocumentEditorsRESTService implements ResourceContainer {
       return Response.status(Status.FORBIDDEN)
                      .entity(new ErrorMessage("Access denied error.", CANNOT_SAVE_PREFERRED_EDITOR))
                      .build();
-    } catch (RepositoryException e) {
+    } catch (RepositoryException | IllegalStateException e) {
       LOG.warn("Cannot set preferred editor for user {} and node {}", currentUserId, fileId, e);
       return Response.status(Status.INTERNAL_SERVER_ERROR)
                      .entity(new ErrorMessage("Cannot save the preferred editor.", CANNOT_SAVE_PREFERRED_EDITOR))

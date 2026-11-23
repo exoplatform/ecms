@@ -326,6 +326,21 @@ public class DocumentEditorsRESTServiceTest {
     assertFalse(message.getErrorMessage().contains("internal repository detail"));
   }
 
+  /**
+   * A locked file whose lock token cannot be found makes the write fail with an
+   * unchecked exception, which answers the same fixed text.
+   */
+  @Test
+  public void testPreferredEditorOfLockedFileFailureAnswersFixedText() throws Exception {
+    doThrow(new IllegalStateException("internal lock detail")).when(documentService)
+                                                              .savePreferredEditor(anyString(), any(), any(), any());
+    Response response = documentEditorsRESTService.preferredEditor("file1", "john", "onlyoffice", "collaboration");
+    assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+    ErrorMessage message = (ErrorMessage) response.getEntity();
+    assertEquals("Cannot save the preferred editor.", message.getErrorMessage());
+    assertFalse(message.getErrorMessage().contains("internal lock detail"));
+  }
+
   @Test
   public void testPreferredEditorOfMissingFileAnswersNotFound() throws Exception {
     doThrow(new ItemNotFoundException("internal repository detail")).when(documentService)
