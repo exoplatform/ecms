@@ -59,6 +59,8 @@ public class AttachmentServiceImpl implements AttachmentService {
 
   private static final Log                 LOG        = ExoLogger.getExoLogger(AttachmentServiceImpl.class);
 
+  private static final int                 MAX_WARNED_ENTITY_TYPES = 100;
+
   private RepositoryService                repositoryService;
 
   private SessionProviderService           sessionProviderService;
@@ -80,8 +82,6 @@ public class AttachmentServiceImpl implements AttachmentService {
   private Map<String, AttachmentEntityTypePlugin> attachmentPlugins;
 
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
-
-  private static final int                 MAX_WARNED_ENTITY_TYPES = 100;
 
   private final Set<String>                warnedEntityTypes = ConcurrentHashMap.newKeySet();
 
@@ -251,7 +251,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     UserACL acl = getUserAcl();
     String objectType = acl == null ? null : findAclObjectType(acl, entityType);
     if (objectType != null) {
-      return new ObjectEntityAcl(acl, objectType);
+      return new ObjectEntityAcl(acl, identityManager, objectType);
     }
     warnNoAclPlugin(entityType);
     return null;
@@ -291,103 +291,6 @@ public class AttachmentServiceImpl implements AttachmentService {
       userAcl = ExoContainerContext.getService(UserACL.class);
     }
     return userAcl;
-  }
-
-  /**
-   * The object rights of an entity type, whatever the component that holds them
-   */
-  private interface EntityAcl {
-    boolean canView(long userIdentityId, long entityId);
-
-    boolean canEdit(long userIdentityId, long entityId);
-
-    boolean canDetach(long userIdentityId, long entityId);
-
-    /**
-     * @return true when the document's own right to remove is also required to
-     *         detach
-     */
-    boolean requiresJcrToDetach();
-  }
-
-  /**
-   * An {@link AttachmentACLPlugin}, which always receives its own entity type
-   */
-  private static final class PluginEntityAcl implements EntityAcl {
-    private final AttachmentACLPlugin plugin;
-
-    private PluginEntityAcl(AttachmentACLPlugin plugin) {
-      this.plugin = plugin;
-    }
-
-    @Override
-    public boolean canView(long userIdentityId, long entityId) {
-      return plugin.canView(userIdentityId, plugin.getEntityType(), String.valueOf(entityId));
-    }
-
-    @Override
-    public boolean canEdit(long userIdentityId, long entityId) {
-      return plugin.canEdit(userIdentityId, plugin.getEntityType(), String.valueOf(entityId));
-    }
-
-    @Override
-    public boolean canDetach(long userIdentityId, long entityId) {
-      return plugin.canDetach(userIdentityId, plugin.getEntityType(), String.valueOf(entityId));
-    }
-
-    @Override
-    public boolean requiresJcrToDetach() {
-      return false;
-    }
-  }
-
-  /**
-   * The portal {@link AclPlugin} of an object type: view is VIEW, edit is EDIT
-   * and detach is EDIT as well, since DELETE is the right to delete the object
-   * itself. An entity that is not created yet (no positive id) has no object to
-   * check.
-   */
-  private final class ObjectEntityAcl implements EntityAcl {
-    private final UserACL acl;
-
-    private final String  objectType;
-
-    private ObjectEntityAcl(UserACL acl, String objectType) {
-      this.acl = acl;
-      this.objectType = objectType;
-    }
-
-    @Override
-    public boolean canView(long userIdentityId, long entityId) {
-      return hasPermission(userIdentityId, entityId, AclPlugin.VIEW_PERMISSION_TYPE);
-    }
-
-    @Override
-    public boolean canEdit(long userIdentityId, long entityId) {
-      return hasPermission(userIdentityId, entityId, AclPlugin.EDIT_PERMISSION_TYPE);
-    }
-
-    @Override
-    public boolean canDetach(long userIdentityId, long entityId) {
-      return hasPermission(userIdentityId, entityId, AclPlugin.EDIT_PERMISSION_TYPE);
-    }
-
-    @Override
-    public boolean requiresJcrToDetach() {
-      return true;
-    }
-
-    private boolean hasPermission(long userIdentityId, long entityId, String permissionType) {
-      if (entityId <= 0) {
-        return true;
-      }
-      Identity socialIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
-      if (socialIdentity == null) {
-        return false;
-      }
-      org.exoplatform.services.security.Identity identity = acl.getUserIdentity(socialIdentity.getRemoteId());
-      return identity != null && acl.hasPermission(objectType, String.valueOf(entityId), permissionType, identity);
-    }
   }
 
   private void checkCanReadAttachment(String attachmentId) throws ObjectNotFoundException {
