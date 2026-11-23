@@ -141,6 +141,9 @@ public class DocumentEditorsRESTServiceTest {
 
   @Test
   public void shouldRefuseAPreviewWithoutFileOrWorkspace() throws Exception {
+    // Without the guard the request would read a file and initialize the providers: the pin fails on that, not on an error
+    Mockito.when(repository.login(Mockito.nullable(String.class))).thenReturn(session);
+    Mockito.when(session.getNodeByIdentifier(Mockito.nullable(String.class))).thenReturn(Mockito.mock(Node.class));
     assertEquals(400, documentEditorsRESTService.initPreview(uriInfo, request, null, WORKSPACE).getStatus());
     Response response = documentEditorsRESTService.initPreview(uriInfo, request, FILE_ID, " ");
 
