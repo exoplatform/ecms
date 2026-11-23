@@ -543,7 +543,7 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
    * @return whether the document to share, the shortcut's target for a
    *         shortcut, is in the trash
    */
-  private boolean isInTrash(Node node) throws RepositoryException {
+  protected boolean isInTrash(Node node) throws RepositoryException {
     Node document = node.isNodeType(NodetypeConstant.EXO_SYMLINK) ? linkManager.getTarget(node) : node;
     return WCMCoreUtils.getService(TrashService.class).isInTrash(document);
   }

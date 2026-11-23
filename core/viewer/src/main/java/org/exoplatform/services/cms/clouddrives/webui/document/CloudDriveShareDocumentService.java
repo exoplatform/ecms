@@ -146,6 +146,12 @@ public class CloudDriveShareDocumentService extends ShareDocumentService {
       return applyInDrive(localDrive, new Change<String>() {
         @Override
         public String apply() throws RepositoryException {
+          if (isInTrash(node)) {
+            // A cloud file in the trash is shared to no space: it is given no
+            // access, in the drive or in its cloud, no link and no activity
+            LOG.debug("Cloud File {} is in the trash: it is not shared to the space {}", node.getPath(), groupId);
+            return "";
+          }
           if (LOG.isDebugEnabled()) {
             LOG.debug("Sharing Cloud File " + node.getPath() + " of " + localDrive + " to " + " " + groupId + " " + perm);
           }
