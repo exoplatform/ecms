@@ -18,14 +18,19 @@ package org.exoplatform.services.attachments.service;
 
 import java.security.AccessControlException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import javax.jcr.*;
 
 import org.apache.commons.lang3.StringUtils;
 
+import io.meeds.portal.plugin.AclPlugin;
+
 import org.exoplatform.commons.exception.ObjectNotFoundException;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.attachments.model.Permission;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
@@ -75,6 +80,12 @@ public class AttachmentServiceImpl implements AttachmentService {
   private Map<String, AttachmentEntityTypePlugin> attachmentPlugins;
 
   private Map<String, AttachmentACLPlugin> aclPlugins = new HashMap<>();
+
+  private static final int                 MAX_WARNED_ENTITY_TYPES = 100;
+
+  private final Set<String>                warnedEntityTypes = ConcurrentHashMap.newKeySet();
+
+  private UserACL                          userAcl;
 
   public AttachmentServiceImpl(AttachmentStorage attachmentStorage,
                                RepositoryService repositoryService,
@@ -202,9 +213,8 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   private void checkCanEditEntity(long userIdentityId, String entityType, long entityId) throws IllegalAccessException {
-    AttachmentACLPlugin attachmentACLPlugin = findAclPlugin(entityType);
-    if (attachmentACLPlugin != null
-        && !attachmentACLPlugin.canEdit(userIdentityId, attachmentACLPlugin.getEntityType(), String.valueOf(entityId))) {
+    EntityAcl entityAcl = resolveEntityAcl(entityType);
+    if (entityAcl != null && !entityAcl.canEdit(userIdentityId, entityId)) {
       throw new IllegalAccessException("User with identity id " + userIdentityId + " is not allowed to edit the entity with type "
           + entityType + " and id " + entityId);
     }
@@ -225,6 +235,159 @@ public class AttachmentServiceImpl implements AttachmentService {
                                            .orElse(null);
     }
     return attachmentACLPlugin;
+  }
+
+  /**
+   * Resolves the access control of an entity type: the
+   * {@link AttachmentACLPlugin} registered for it, else the portal
+   * {@link AclPlugin} of the same object type, else none, in which case only the
+   * document permissions apply (logged once per type).
+   */
+  private EntityAcl resolveEntityAcl(String entityType) {
+    AttachmentACLPlugin attachmentACLPlugin = findAclPlugin(entityType);
+    if (attachmentACLPlugin != null) {
+      return new PluginEntityAcl(attachmentACLPlugin);
+    }
+    UserACL acl = getUserAcl();
+    String objectType = acl == null ? null : findAclObjectType(acl, entityType);
+    if (objectType != null) {
+      return new ObjectEntityAcl(acl, objectType);
+    }
+    warnNoAclPlugin(entityType);
+    return null;
+  }
+
+  /**
+   * UserACL doesn't list its plugins: the object type is looked up as asked,
+   * then in lower case, upper case and capitalized
+   */
+  private static String findAclObjectType(UserACL acl, String entityType) {
+    if (StringUtils.isBlank(entityType)) {
+      return null;
+    }
+    Set<String> candidates = new LinkedHashSet<>(List.of(entityType,
+                                                         entityType.toLowerCase(),
+                                                         entityType.toUpperCase(),
+                                                         StringUtils.capitalize(entityType.toLowerCase())));
+    return candidates.stream().filter(acl::hasAclPlugin).findFirst().orElse(null);
+  }
+
+  private void warnNoAclPlugin(String entityType) {
+    if (StringUtils.isBlank(entityType) || warnedEntityTypes.size() >= MAX_WARNED_ENTITY_TYPES) {
+      return;
+    }
+    String type = StringUtils.left(entityType.replaceAll("[\\p{Cntrl}]", "_"), 64);
+    if (warnedEntityTypes.add(type.toLowerCase())) {
+      logNoAclPlugin(type);
+    }
+  }
+
+  protected void logNoAclPlugin(String entityType) {
+    LOG.warn("No access control plugin covers attachment entity type '{}': only the document permissions apply", entityType);
+  }
+
+  protected UserACL getUserAcl() {
+    if (userAcl == null) {
+      userAcl = ExoContainerContext.getService(UserACL.class);
+    }
+    return userAcl;
+  }
+
+  /**
+   * The object rights of an entity type, whatever the component that holds them
+   */
+  private interface EntityAcl {
+    boolean canView(long userIdentityId, long entityId);
+
+    boolean canEdit(long userIdentityId, long entityId);
+
+    boolean canDetach(long userIdentityId, long entityId);
+
+    /**
+     * @return true when the document's own right to remove is also required to
+     *         detach
+     */
+    boolean requiresJcrToDetach();
+  }
+
+  /**
+   * An {@link AttachmentACLPlugin}, which always receives its own entity type
+   */
+  private static final class PluginEntityAcl implements EntityAcl {
+    private final AttachmentACLPlugin plugin;
+
+    private PluginEntityAcl(AttachmentACLPlugin plugin) {
+      this.plugin = plugin;
+    }
+
+    @Override
+    public boolean canView(long userIdentityId, long entityId) {
+      return plugin.canView(userIdentityId, plugin.getEntityType(), String.valueOf(entityId));
+    }
+
+    @Override
+    public boolean canEdit(long userIdentityId, long entityId) {
+      return plugin.canEdit(userIdentityId, plugin.getEntityType(), String.valueOf(entityId));
+    }
+
+    @Override
+    public boolean canDetach(long userIdentityId, long entityId) {
+      return plugin.canDetach(userIdentityId, plugin.getEntityType(), String.valueOf(entityId));
+    }
+
+    @Override
+    public boolean requiresJcrToDetach() {
+      return false;
+    }
+  }
+
+  /**
+   * The portal {@link AclPlugin} of an object type: view is VIEW, edit is EDIT
+   * and detach is EDIT as well, since DELETE is the right to delete the object
+   * itself. An entity that is not created yet (no positive id) has no object to
+   * check.
+   */
+  private final class ObjectEntityAcl implements EntityAcl {
+    private final UserACL acl;
+
+    private final String  objectType;
+
+    private ObjectEntityAcl(UserACL acl, String objectType) {
+      this.acl = acl;
+      this.objectType = objectType;
+    }
+
+    @Override
+    public boolean canView(long userIdentityId, long entityId) {
+      return hasPermission(userIdentityId, entityId, AclPlugin.VIEW_PERMISSION_TYPE);
+    }
+
+    @Override
+    public boolean canEdit(long userIdentityId, long entityId) {
+      return hasPermission(userIdentityId, entityId, AclPlugin.EDIT_PERMISSION_TYPE);
+    }
+
+    @Override
+    public boolean canDetach(long userIdentityId, long entityId) {
+      return hasPermission(userIdentityId, entityId, AclPlugin.EDIT_PERMISSION_TYPE);
+    }
+
+    @Override
+    public boolean requiresJcrToDetach() {
+      return true;
+    }
+
+    private boolean hasPermission(long userIdentityId, long entityId, String permissionType) {
+      if (entityId <= 0) {
+        return true;
+      }
+      Identity socialIdentity = identityManager.getIdentity(String.valueOf(userIdentityId));
+      if (socialIdentity == null) {
+        return false;
+      }
+      org.exoplatform.services.security.Identity identity = acl.getUserIdentity(socialIdentity.getRemoteId());
+      return identity != null && acl.hasPermission(objectType, String.valueOf(entityId), permissionType, identity);
+    }
   }
 
   private void checkCanReadAttachment(String attachmentId) throws ObjectNotFoundException {
@@ -556,41 +719,42 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   public boolean canView(long userIdentityId, String entityType, long entityId, String attachmentId) {
-    AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
+    EntityAcl entityAcl = resolveEntityAcl(entityType);
     boolean jcrViewPermission = true;
     if (!StringUtils.isBlank(attachmentId)) {
       jcrViewPermission = checkAttachmentJCRPermission(attachmentId, PermissionType.READ);
     }
-    if (attachmentACLPlugin == null) {
+    if (entityAcl == null) {
       return jcrViewPermission;
     }
-    return jcrViewPermission && attachmentACLPlugin.canView(userIdentityId, entityType, String.valueOf(entityId));
+    return jcrViewPermission && entityAcl.canView(userIdentityId, entityId);
   }
 
   public boolean canDetach(long userIdentityId, String entityType, long entityId, String attachmentId) {
-    AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
+    EntityAcl entityAcl = resolveEntityAcl(entityType);
     boolean jcrDeletePermission = true;
     if (!StringUtils.isBlank(attachmentId)) {
       jcrDeletePermission = checkAttachmentJCRPermission(attachmentId, PermissionType.REMOVE);
     }
 
-    if (attachmentACLPlugin == null) {
+    if (entityAcl == null) {
       return jcrDeletePermission;
     }
 
-    return attachmentACLPlugin.canDetach(userIdentityId, entityType, String.valueOf(entityId));
+    boolean entityDetach = entityAcl.canDetach(userIdentityId, entityId);
+    return entityAcl.requiresJcrToDetach() ? jcrDeletePermission && entityDetach : entityDetach;
   }
 
   public boolean canEdit(long userIdentityId, String entityType, long entityId, String attachmentId) {
-    AttachmentACLPlugin attachmentACLPlugin = this.aclPlugins.get(entityType);
+    EntityAcl entityAcl = resolveEntityAcl(entityType);
     boolean jcrEditPermission = true;
     if (!StringUtils.isBlank(attachmentId)) {
       jcrEditPermission = checkAttachmentJCRPermission(attachmentId, PermissionType.SET_PROPERTY);
     }
-    if (attachmentACLPlugin == null) {
+    if (entityAcl == null) {
       return jcrEditPermission;
     }
-    return jcrEditPermission && attachmentACLPlugin.canEdit(userIdentityId, entityType, String.valueOf(entityId));
+    return jcrEditPermission && entityAcl.canEdit(userIdentityId, entityId);
   }
 
   private boolean checkAttachmentJCRPermission(String attachmentId, String permissionType) {
@@ -614,10 +778,16 @@ public class AttachmentServiceImpl implements AttachmentService {
   }
 
   public AttachmentEntityTypePlugin getAttachmentEntityTypePlugin (String entityType) {
-    if(attachmentPlugins.isEmpty() || attachmentPlugins.get(entityType) == null) {
-      return new AttachmentEntityTypePlugin();
+    AttachmentEntityTypePlugin plugin = attachmentPlugins.get(entityType);
+    if (plugin == null) {
+      plugin = attachmentPlugins.entrySet()
+                                .stream()
+                                .filter(entry -> StringUtils.equalsIgnoreCase(entry.getKey(), entityType))
+                                .map(Map.Entry::getValue)
+                                .findFirst()
+                                .orElse(null);
     }
-    return attachmentPlugins.get(entityType);
+    return plugin == null ? new AttachmentEntityTypePlugin() : plugin;
   }
 
   @Override

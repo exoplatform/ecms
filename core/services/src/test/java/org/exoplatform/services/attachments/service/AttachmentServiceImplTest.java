@@ -23,6 +23,8 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
@@ -32,6 +34,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.security.AccessControlException;
@@ -54,6 +58,7 @@ import org.exoplatform.services.attachments.plugin.AttachmentACLPlugin;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.EntityBuilder;
 import org.exoplatform.services.attachments.utils.Utils;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -67,6 +72,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import io.meeds.portal.plugin.AclPlugin;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
 
@@ -105,6 +111,11 @@ public class AttachmentServiceImplTest {
 
   private final AttachmentACLPlugin aclPlugin       = mock(AttachmentACLPlugin.class);
 
+  private final UserACL         userAcl           = mock(UserACL.class);
+
+  private final org.exoplatform.services.security.Identity securityIdentity =
+                                                                              mock(org.exoplatform.services.security.Identity.class);
+
   private AttachmentServiceImpl   attachmentService;
 
   @Before
@@ -124,7 +135,10 @@ public class AttachmentServiceImplTest {
     when(documentNode.getPath()).thenReturn(DOCUMENT_PATH);
     when(aclPlugin.getEntityType()).thenReturn(ENTITY_TYPE);
     IdentityManager identityManager = mock(IdentityManager.class);
-    when(identityManager.getIdentity(String.valueOf(USER_IDENTITY_ID))).thenReturn(mock(Identity.class));
+    Identity socialIdentity = mock(Identity.class);
+    when(socialIdentity.getRemoteId()).thenReturn("john");
+    when(identityManager.getIdentity(String.valueOf(USER_IDENTITY_ID))).thenReturn(socialIdentity);
+    when(userAcl.getUserIdentity("john")).thenReturn(securityIdentity);
     when(attachmentStorage.getAttachmentItemByEntity(anyLong(), anyString(), anyString())).thenReturn(new Attachment());
 
     attachmentService = spy(new AttachmentServiceImpl(attachmentStorage,
@@ -139,6 +153,8 @@ public class AttachmentServiceImplTest {
     // The user may detach every attachment of the entity: the JCR and ACL-plugin
     // checks are not under test, the service's decision on what it detaches is
     doReturn(true).when(attachmentService).canDetach(anyLong(), anyString(), anyLong(), anyString());
+    doReturn(userAcl).when(attachmentService).getUserAcl();
+    doNothing().when(attachmentService).logNoAclPlugin(anyString());
   }
 
   /**
@@ -361,6 +377,132 @@ public class AttachmentServiceImplTest {
 
     verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
     verify(attachmentStorage, never()).deleteAttachmentItemByIdByEntity(anyLong(), anyString(), anyString());
+  }
+
+  /**
+   * Mutant: with an exact lookup the plugin is not found for another case of
+   * the type, and with the caller's string the plugin receives it as typed.
+   */
+  @Test
+  public void taskPluginIsFoundWhateverTheCaseAndReceivesItsOwnType() throws Exception {
+    attachmentService.addACLPlugin(aclPlugin);
+    when(aclPlugin.canEdit(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(false);
+    when(aclPlugin.canView(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(false);
+    when(aclPlugin.canDetach(USER_IDENTITY_ID, ENTITY_TYPE, String.valueOf(ENTITY_ID))).thenReturn(false);
+
+    for (String type : List.of("TASK", "Task")) {
+      assertFalse(attachmentService.canEdit(USER_IDENTITY_ID, type, ENTITY_ID, null));
+      assertFalse(attachmentService.canView(USER_IDENTITY_ID, type, ENTITY_ID, null));
+      assertFalse(attachmentService.canDetach(USER_IDENTITY_ID, type, ENTITY_ID, null));
+      assertThrows(IllegalAccessException.class,
+                   () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, type, DOCUMENT_ID));
+    }
+
+    verify(aclPlugin, never()).canEdit(anyLong(), eq("TASK"), anyString());
+    verify(aclPlugin, never()).canEdit(anyLong(), eq("Task"), anyString());
+    verify(aclPlugin, never()).canView(anyLong(), eq("TASK"), anyString());
+    verify(aclPlugin, never()).canDetach(anyLong(), eq("Task"), anyString());
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+  }
+
+  /**
+   * Mutant: without the portal ACL fallback an activity is linked for a user
+   * who can't edit it.
+   */
+  @Test
+  public void activityLinkIsRefusedWithoutTheRightToEditIt() {
+    when(userAcl.hasAclPlugin("activity")).thenReturn(true);
+    when(userAcl.hasPermission("activity", "1", AclPlugin.EDIT_PERMISSION_TYPE, securityIdentity)).thenReturn(false);
+
+    assertThrows(IllegalAccessException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, "activity", DOCUMENT_ID));
+    assertThrows(IllegalAccessException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, "ACTIVITY", DOCUMENT_ID));
+
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+  }
+
+  @Test
+  public void activityLinkIsStoredWithTheRightToEditIt() throws Exception {
+    when(userAcl.hasAclPlugin("activity")).thenReturn(true);
+    when(userAcl.hasPermission("activity", "1", AclPlugin.EDIT_PERMISSION_TYPE, securityIdentity)).thenReturn(true);
+    doReturn(new Attachment()).when(attachmentService).getAttachmentByIdByEntity("ACTIVITY", ENTITY_ID, DOCUMENT_ID, USER_IDENTITY_ID);
+
+    attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, "ACTIVITY", DOCUMENT_ID);
+
+    verify(attachmentStorage).linkAttachmentToEntity(ENTITY_ID, "ACTIVITY", DOCUMENT_ID);
+  }
+
+  /**
+   * Mutant: with another permission type than the object's own, or without the
+   * object check, the answer is the document's alone.
+   */
+  @Test
+  public void activityViewEditAndDetachFollowTheObjectRights() {
+    when(userAcl.hasAclPlugin("activity")).thenReturn(true);
+    when(userAcl.hasPermission("activity", "1", AclPlugin.VIEW_PERMISSION_TYPE, securityIdentity)).thenReturn(false);
+    when(userAcl.hasPermission("activity", "1", AclPlugin.EDIT_PERMISSION_TYPE, securityIdentity)).thenReturn(true);
+    doCallRealMethod().when(attachmentService).canDetach(anyLong(), anyString(), anyLong(), anyString());
+
+    assertFalse(attachmentService.canView(USER_IDENTITY_ID, "ACTIVITY", ENTITY_ID, DOCUMENT_ID));
+    assertTrue(attachmentService.canEdit(USER_IDENTITY_ID, "ACTIVITY", ENTITY_ID, DOCUMENT_ID));
+    assertTrue(attachmentService.canDetach(USER_IDENTITY_ID, "ACTIVITY", ENTITY_ID, DOCUMENT_ID));
+
+    when(userAcl.hasPermission("activity", "1", AclPlugin.EDIT_PERMISSION_TYPE, securityIdentity)).thenReturn(false);
+    assertFalse(attachmentService.canEdit(USER_IDENTITY_ID, "ACTIVITY", ENTITY_ID, DOCUMENT_ID));
+    assertFalse(attachmentService.canDetach(USER_IDENTITY_ID, "ACTIVITY", ENTITY_ID, DOCUMENT_ID));
+    verify(userAcl, never()).hasPermission(anyString(), anyString(), eq(AclPlugin.DELETE_PERMISSION_TYPE), any(org.exoplatform.services.security.Identity.class));
+  }
+
+  /**
+   * An attachment moved while its activity is not created yet has no object to
+   * check.
+   */
+  @Test
+  public void activityNotCreatedYetHasNoObjectToCheck() {
+    when(userAcl.hasAclPlugin("activity")).thenReturn(true);
+
+    assertTrue(attachmentService.canEdit(USER_IDENTITY_ID, "activity", 0, DOCUMENT_ID));
+    verify(userAcl, never()).hasPermission(anyString(), anyString(), anyString(), any(org.exoplatform.services.security.Identity.class));
+  }
+
+  /**
+   * Mutant: without the once-per-type memory the warning is logged on each
+   * call; without the fallthrough, the uncovered type is refused or checked
+   * against an object.
+   */
+  @Test
+  public void uncoveredTypeKeepsTheDocumentPermissionsAndWarnsOnce() throws Exception {
+    Attachment linked = new Attachment();
+    doReturn(linked).when(attachmentService).getAttachmentByIdByEntity("workflow", ENTITY_ID, DOCUMENT_ID, USER_IDENTITY_ID);
+
+    assertSame(linked, attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, "workflow", DOCUMENT_ID));
+    assertTrue(attachmentService.canView(USER_IDENTITY_ID, "workflow", ENTITY_ID, DOCUMENT_ID));
+    assertTrue(attachmentService.canEdit(USER_IDENTITY_ID, "Workflow", ENTITY_ID, DOCUMENT_ID));
+    verify(attachmentStorage).linkAttachmentToEntity(ENTITY_ID, "workflow", DOCUMENT_ID);
+
+    doThrow(new AccessControlException("read")).when(session).checkPermission(DOCUMENT_PATH, PermissionType.READ);
+    assertFalse(attachmentService.canView(USER_IDENTITY_ID, "workflow", ENTITY_ID, DOCUMENT_ID));
+    assertThrows(ObjectNotFoundException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, "workflow", DOCUMENT_ID));
+
+    verify(attachmentService, times(1)).logNoAclPlugin("workflow");
+    verify(attachmentService, times(1)).logNoAclPlugin(anyString());
+  }
+
+  /**
+   * Mutant: with an exact lookup the entity type plugin of another case of the
+   * type is not found.
+   */
+  @Test
+  public void entityTypePluginIsFoundWhateverTheCaseOfTheType() {
+    AttachmentEntityTypePlugin typePlugin = mock(AttachmentEntityTypePlugin.class);
+    when(typePlugin.getEntityType()).thenReturn("task");
+    attachmentService.addAttachmentEntityTypePlugin(typePlugin);
+
+    assertSame(typePlugin, attachmentService.getAttachmentEntityTypePlugin("TASK"));
+    assertSame(typePlugin, attachmentService.getAttachmentEntityTypePlugin("task"));
+    assertFalse(typePlugin == attachmentService.getAttachmentEntityTypePlugin("other"));
   }
 
   @Test

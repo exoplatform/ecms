@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.*;
@@ -59,6 +61,20 @@ public class AttachmentsRestServiceTest {
     when(attachmentService.getAttachmentById(anyString())).thenThrow(new ObjectNotFoundException("attachment is missing"));
     response = attachmentsRestService.getAttachmentById(attachmentId);
     assertEquals(404, response.getStatus());
+  }
+
+  @Test
+  public void updateAttachmentsLinkedToContextRefusals() throws Exception {
+    AttachmentsRestService service = spy(attachmentsRestService);
+    doReturn(5L).when(service).getCurrentUserIdentityId();
+
+    doThrow(new IllegalAccessException("refused")).when(attachmentService)
+                                                  .updateEntityAttachments(5L, 1L, "task", List.of("1"));
+    assertEquals(403, service.updateAttachmentsLinkedToContext(1L, "task", List.of("1")).getStatus());
+
+    doThrow(new ObjectNotFoundException("missing")).when(attachmentService)
+                                                   .updateEntityAttachments(5L, 1L, "task", List.of("1"));
+    assertEquals(404, service.updateAttachmentsLinkedToContext(1L, "task", List.of("1")).getStatus());
   }
 
   @Test
