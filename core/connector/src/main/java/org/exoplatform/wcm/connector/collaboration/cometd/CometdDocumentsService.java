@@ -615,9 +615,27 @@ public class CometdDocumentsService implements Startable {
         if (isStillSubscribed(session, channel, userId)) {
           editorsContext.addClient(sessionId, fileId, provider, workspace);
           editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+          recordProviderWhenNoneIsRecorded(userId, fileId, provider, workspace);
         } else {
           LOG.debug("Editor subscription of session {} on file {} ignored: the session is gone", sessionId, fileId);
         }
+      }
+    }
+
+    /**
+     * Records the provider of a registered editor for its document when none
+     * is recorded and the provider is available to the user: a closing delay
+     * that ended between the open being accepted and this registration reset
+     * the recorded provider while this editor is open.
+     */
+    private void recordProviderWhenNoneIsRecorded(String userId, String fileId, String provider, String workspace) {
+      try {
+        if (documentService.getCurrentDocumentProvider(fileId, workspace) == null
+            && documentService.getEditorProvider(provider).isAvailableForUser(service.userIdentity(userId))) {
+          service.setCurrentDocumentProvider(fileId, workspace, provider);
+        }
+      } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
+        LOG.error("Cannot record the provider of file {} in workspace {}", fileId, workspace, e);
       }
     }
 

@@ -138,9 +138,10 @@
       const deferred = $.Deferred();
       cometd.publish(`/eXo/Application/documents/editor/${  fileId}`, data, cometdContext, function(publishReply) {
         // Publication status callback
+        // A server not yet upgraded, during a rolling update, still delivers a client's publish: this reply is kept for it.
+        // An upgraded server answers 404::message_deleted below, the reply it gives a publish it does not deliver.
         if (publishReply.successful) {
           deferred.resolve();
-          // The server successfully subscribed this client to the channel.
           log(`Event published successfully: ${  JSON.stringify(publishReply)}`);
         } else if (data.type === DOCUMENT_OPENED && publishReply.error && publishReply.error.indexOf('404::message_deleted') === 0) {
           // The server publishes the opened event itself, once it has checked it

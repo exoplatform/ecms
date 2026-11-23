@@ -782,7 +782,7 @@ public class CometdDocumentsServiceTest {
   }
 
   @Test
-  public void testAnEditorSubscriptionIsRegisteredOnlyForAUserWhoMayEditTheDocument() {
+  public void testAnEditorSubscriptionIsRegisteredOnlyForAUserWhoMayEditTheDocument() throws Exception {
     EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
     ServerSession johnSession = mock(ServerSession.class);
     when(johnSession.getId()).thenReturn("john-session");
@@ -799,7 +799,7 @@ public class CometdDocumentsServiceTest {
     assertEquals("a user who may not edit the document registers no editor",
                  0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
 
-    CometdDocumentsService editor = recordingService(exoBayeux, mock(DocumentService.class), mock(IdentityRegistry.class), true);
+    CometdDocumentsService editor = recordingService(exoBayeux, documentServiceOf(null, true), mock(IdentityRegistry.class), true);
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("mary"));
     assertEquals("a user who does not own the sending connection is not checked", 0, recorded(editor).size());
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription(null));
@@ -824,6 +824,57 @@ public class CometdDocumentsServiceTest {
     when(channel.getSubscribers()).thenReturn(Set.of());
     ((CometdDocumentsService.ContainerCommand) recorded(late).get(0)).execute(null);
     assertEquals("a session that unsubscribed registers no editor", 0, late.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  /**
+   * An editor registered after the closing delay of the previous editor ended
+   * is recorded for the document again, when no provider is recorded and the
+   * provider is available to the user: the delay reset the recorded provider
+   * between the accepted open and the registration.
+   */
+  @Test
+  public void testAnEditorRegisteredAfterTheClosingDelayRecordsItsProviderAgain() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    ServerChannel channel = mock(ServerChannel.class);
+    when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+    when(channel.getSubscribers()).thenReturn(Set.of(johnSession));
+
+    // The reset left no provider recorded
+    DocumentService reset = documentServiceOf(null, true);
+    CometdDocumentsService service = recordingService(exoBayeux, reset, mock(IdentityRegistry.class), true);
+    service.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    assertEquals(1, service.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("the provider is recorded again", 1, recorded(service).size());
+    ((CometdDocumentsService.ContainerCommand) recorded(service).get(0)).execute(null);
+    verify(reset).saveCurrentDocumentProvider(FILE_ID, WORKSPACE, PROVIDER);
+
+    // The provider is still recorded: nothing is recorded again
+    editors.clearCache();
+    DocumentService recordedProvider = documentServiceOf(PROVIDER, true);
+    CometdDocumentsService kept = recordingService(exoBayeux, recordedProvider, mock(IdentityRegistry.class), true);
+    kept.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    assertEquals(1, kept.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    assertEquals("a recorded provider is left as it is", 0, recorded(kept).size());
+
+    // The provider is not available to the user: nothing is recorded
+    editors.clearCache();
+    DocumentService unavailable = documentServiceOf(null, false);
+    CometdDocumentsService refused = recordingService(exoBayeux, unavailable, mock(IdentityRegistry.class), true);
+    refused.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+    assertEquals("a provider unavailable to the user is not recorded", 0, recorded(refused).size());
+  }
+
+  private static DocumentService documentServiceOf(String currentProvider, boolean availableToUser) throws Exception {
+    DocumentService documentService = mock(DocumentService.class);
+    DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
+    when(editorProvider.isAvailableForUser(any())).thenReturn(availableToUser);
+    when(editorProvider.getProviderName()).thenReturn(PROVIDER);
+    when(documentService.getEditorProvider(PROVIDER)).thenReturn(editorProvider);
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenReturn(currentProvider);
+    return documentService;
   }
 
   /**
