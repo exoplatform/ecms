@@ -42,6 +42,7 @@ import org.exoplatform.services.ecm.dms.drive.TestDriveService;
 import org.exoplatform.services.ecm.dms.link.TestLinkManager;
 import org.exoplatform.services.ecm.dms.relation.TestRelationsService;
 import org.exoplatform.services.ecm.dms.scripts.TestScriptService;
+import org.exoplatform.services.ecm.dms.scripts.TrashFolderScriptTest;
 import org.exoplatform.services.ecm.dms.test.LinkUtilsTest;
 import org.exoplatform.services.ecm.dms.test.TestSymLink;
 import org.exoplatform.services.ecm.dms.thumbnail.TestThumbnailService;
@@ -68,6 +69,7 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   TestRelationsService.class,
   TestDriveService.class,
   TestScriptService.class,
+  TrashFolderScriptTest.class,
   TestCmsService.class,
   TestLinkManager.class,
   LinkUtilsTest.class,
