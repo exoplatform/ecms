@@ -92,8 +92,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   LockServiceImplStartTest.class,
   TestTrashService.class,
   TestRelationsService.class,
-  // before TestDriveService, whose tearDown deletes the drives this one reads
+  // TestAutoVersionService goes before TestDriveService, whose tearDown deletes the drives it reads
   TestAutoVersionService.class,
+  // TestNodeFinder reads no drive: it must follow TestAutoVersionService, it fails in setUp otherwise
+  // (state left by an earlier class, not isolated yet)
   TestNodeFinder.class,
   TestDriveService.class,
   TestScriptService.class,
