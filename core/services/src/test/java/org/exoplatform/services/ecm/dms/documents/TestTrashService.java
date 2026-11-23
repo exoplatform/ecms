@@ -7,11 +7,20 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.container.configuration.ConfigurationManager;
+import org.exoplatform.container.xml.ComponentPlugin;
+import org.exoplatform.container.xml.ExternalComponentPlugins;
+import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.relations.RelationsService;
+import org.exoplatform.services.scheduler.JobSchedulerService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 
 public class TestTrashService extends BaseWCMTestCase {
+
+  public static final String TRASH_CLEANER           = "TrashCleaner";
+
+  public static final String TRASH_CLEANER_JOB_CLASS = "org.exoplatform.services.cms.documents.job.TrashCleanerJob";
 
   public static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
 
@@ -460,6 +469,25 @@ public class TestTrashService extends BaseWCMTestCase {
     trashNode.remove();
     testNode.remove();
     session.save();
+  }
+
+  /**
+   * The Recycle Bin of the documents add-on purges the trash: no trash cleaner
+   * job of ecms is scheduled
+   */
+  public void testNoTrashCleanerJobIsScheduled() throws Exception {
+    // The test container's scheduler is a mock that keeps nothing: the jobs
+    // it is given are read from the configuration
+    ExternalComponentPlugins schedulerPlugins = container.getComponentInstanceOfType(ConfigurationManager.class)
+                                                         .getConfiguration()
+                                                         .getExternalComponentPlugins(JobSchedulerService.class.getName());
+    List<ComponentPlugin> plugins = schedulerPlugins == null ? List.of() : schedulerPlugins.getComponentPlugins();
+    assertTrue(plugins.stream().noneMatch(plugin -> TRASH_CLEANER.equals(plugin.getName()) || isTrashCleanerJob(plugin)));
+  }
+
+  private boolean isTrashCleanerJob(ComponentPlugin plugin) {
+    PropertiesParam jobInfo = plugin.getInitParams() == null ? null : plugin.getInitParams().getPropertiesParam("cronjob.info");
+    return jobInfo != null && TRASH_CLEANER_JOB_CLASS.equals(jobInfo.getProperty("job"));
   }
 
   private Node getOrAdd(Node rootNode, String ...paths) throws RepositoryException {
