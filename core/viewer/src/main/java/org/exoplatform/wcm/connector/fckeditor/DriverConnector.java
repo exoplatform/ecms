@@ -682,14 +682,14 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return currentUserIdentity.getMemberships();
   }
 
-  private Response buildXMLResponseForChildren(Node node,
-                                               String command,
-                                               String filterBy,
-                                               Session session,
-                                               String currentPortal,
-                                               String currentParentFolder,
-                                               String nodeDriveName,
-                                               String type) throws Exception {
+  Response buildXMLResponseForChildren(Node node,
+                                       String command,
+                                       String filterBy,
+                                       Session session,
+                                       String currentPortal,
+                                       String currentParentFolder,
+                                       String nodeDriveName,
+                                       String type) throws Exception {
       Element rootElement = FCKUtils.createRootElement(command, node, folderHandler.getFolderType(node));
       NodeList nodeList = rootElement.getElementsByTagName("CurrentFolder");
       Element currentFolder = (Element) nodeList.item(0);

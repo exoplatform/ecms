@@ -41,8 +41,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.ws.rs.core.Response;
 import javax.xml.transform.dom.DOMSource;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -382,16 +380,6 @@ public class ManageDocumentServiceTest {
   }
 
   private Response invokeBuildXMLResponseForChildren(Node node) throws Exception {
-    Method method = ManageDocumentService.class.getDeclaredMethod("buildXMLResponseForChildren",
-                                                                  Node.class,
-                                                                  String.class,
-                                                                  String.class,
-                                                                  boolean.class);
-    method.setAccessible(true);
-    try {
-      return (Response) method.invoke(manageDocumentService, node, "drive", "", false);
-    } catch (InvocationTargetException e) {
-      throw (Exception) e.getCause();
-    }
+    return manageDocumentService.buildXMLResponseForChildren(node, "drive", "", false);
   }
 }

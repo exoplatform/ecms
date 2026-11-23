@@ -24,8 +24,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -166,20 +164,6 @@ public class DriverConnectorTest {
   }
 
   private Response invokeBuildXMLResponseForChildren(Node node) throws Exception {
-    Method method = DriverConnector.class.getDeclaredMethod("buildXMLResponseForChildren",
-                                                            Node.class,
-                                                            String.class,
-                                                            String.class,
-                                                            Session.class,
-                                                            String.class,
-                                                            String.class,
-                                                            String.class,
-                                                            String.class);
-    method.setAccessible(true);
-    try {
-      return (Response) method.invoke(driverConnector, node, "getFoldersAndFiles", "All", session, "portal", "", "drive", "folder");
-    } catch (InvocationTargetException e) {
-      throw (Exception) e.getCause();
-    }
+    return driverConnector.buildXMLResponseForChildren(node, "getFoldersAndFiles", "All", session, "portal", "", "drive", "folder");
   }
 }

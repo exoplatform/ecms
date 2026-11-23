@@ -466,10 +466,10 @@ public class ManageDocumentService implements ResourceContainer {
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
-  private Response buildXMLResponseForChildren(Node node,
-                                               String driveName,
-                                               String currentFolder,
-                                               boolean showHidden) throws Exception {
+  Response buildXMLResponseForChildren(Node node,
+                                       String driveName,
+                                       String currentFolder,
+                                       boolean showHidden) throws Exception {
     Document document = createNewDocument();
     Element rootElement = createFolderElement(document, node, node.getSession().getWorkspace().getName(), 
                                               driveName, currentFolder);
