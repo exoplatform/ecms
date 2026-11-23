@@ -61,6 +61,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.nodetype.NodeDefinition;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.observation.Event;
@@ -129,6 +130,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
 
   /** The Constant EXO_TRASHFOLDER. */
   public static final String     EXO_TRASHFOLDER       = "exo:trashFolder";
+
+  /** The mixin of a folder the documents' Recycle Bin keeps deleted items in. */
+  public static final String     EXO_RECYCLE_BIN_FOLDER = "exo:recycleBinFolder";
 
   /** The Constant EXO_THUMBNAILS. */
   public static final String     EXO_THUMBNAILS        = "exo:thumbnails";
@@ -820,7 +824,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     synchronized void checkTrashed(Node driveRoot) throws RepositoryException {
       if (trashed && added) {
         try {
-          if (driveRoot.getParent().isNodeType(EXO_TRASHFOLDER)) {
+          if (isTrashFolder(driveRoot.getParent())) {
             // drive in the Trash
             finishTrashed(driveRoot.getSession(), driveRoot.getPath());
 
@@ -5921,7 +5925,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
                                  null,
                                  false,
                                  null,
-                                 new String[] { EXO_TRASHFOLDER },
+                                 trashFolderTypes(driveNode.getSession()),
                                  false);
     // listen to supported NTs only
     Set<String> supported = new LinkedHashSet<String>();
@@ -6337,7 +6341,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
     try {
       String nodePath = node.getPath();
       Node nodeParent = systemSession().getItem(nodePath).getParent();
-      if (nodeParent.isNodeType(EXO_TRASHFOLDER)) {
+      if (isTrashFolder(nodeParent)) {
         // file already in eXo Trash - skip it
         if (LOG.isDebugEnabled()) {
           LOG.debug("File in Trash " + nodePath);
@@ -6463,8 +6467,39 @@ public abstract class JCRLocalCloudDrive extends CloudDrive implements CloudDriv
    * @throws DriveRemovedException if given node in the eXo Trash.
    */
   public static void checkNotTrashed(Node node) throws RepositoryException, DriveRemovedException {
-    if (node.getParent().isNodeType(EXO_TRASHFOLDER)) {
+    if (isTrashFolder(node.getParent())) {
       throw new DriveTrashedException("Drive " + node.getPath() + " was moved to Trash.");
+    }
+  }
+
+  /**
+   * Checks if a folder is one the items deleted from a drive are moved to: the
+   * Trash, or a folder of the documents' Recycle Bin.
+   *
+   * @param folder {@link Node}
+   * @return true, if deleted items are moved to the folder
+   * @throws RepositoryException the repository exception
+   */
+  public static boolean isTrashFolder(Node folder) throws RepositoryException {
+    return folder.isNodeType(EXO_TRASHFOLDER) || folder.isNodeType(EXO_RECYCLE_BIN_FOLDER);
+  }
+
+  /**
+   * The types of the folders the items deleted from a drive are moved to, as an
+   * observation filter. The documents' Recycle Bin folder type is left out
+   * when the repository does not know it: the observation logs a warning on
+   * every event for a filter type it does not know.
+   *
+   * @param session {@link Session}
+   * @return the node type names
+   * @throws RepositoryException the repository exception
+   */
+  public static String[] trashFolderTypes(Session session) throws RepositoryException {
+    try {
+      session.getWorkspace().getNodeTypeManager().getNodeType(EXO_RECYCLE_BIN_FOLDER);
+      return new String[] { EXO_TRASHFOLDER, EXO_RECYCLE_BIN_FOLDER };
+    } catch (NoSuchNodeTypeException e) {
+      return new String[] { EXO_TRASHFOLDER };
     }
   }
 
