@@ -170,15 +170,17 @@ public class DocumentSpaceGuard {
 
   /**
    * Decides, on the committed settings and roles read once, a change of the
-   * document's access list made by a request whose entries are not told apart,
-   * such as the WebDAV ACL method: "Limit Access Management" as
-   * {@link #canManageAccess}, then "Keep documents inside the space", which
-   * refuses every such change. A refusal is logged with its channel; a document
-   * whose space or settings cannot be read is refused.
+   * document's access list made by a request whose entries are not told apart:
+   * the WebDAV ACL method, or a version restore writing back the version's
+   * list. "Limit Access Management" decides as {@link #canManageAccess}, then
+   * "Keep documents inside the space" refuses every such change, since the
+   * list may hold an entry outside the space. A refusal is logged with its
+   * channel; a document whose space or settings cannot be read is refused.
    *
    * @param document a document, a version, a symlink or a folder
    * @param username the user changing the access list
-   * @param channel the channel of the change, reported on a refusal
+   * @param channel the channel of the change, reported on a refusal; null to
+   *          decide without reporting
    * @return null when the change may be made, else the code of the rule
    *         refusing it
    */

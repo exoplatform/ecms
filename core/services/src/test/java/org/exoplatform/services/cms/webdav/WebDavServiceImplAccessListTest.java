@@ -183,7 +183,7 @@ public class WebDavServiceImplAccessListTest {
 
   @Test
   public void testUncheckoutKeepsTheAccessListOfAMemberTheSpaceRefuses() throws Exception {
-    when(guard.canManageAccess(document, "mary", null)).thenReturn(false);
+    when(guard.getAccessListChangeRefusal(document, "mary", null)).thenReturn(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED);
     Map<String, List<String>> accessList = Map.of("*:/spaces/team", List.of("read"));
     when(guard.getAccessList(storedDocument)).thenReturn(accessList);
     Response restored = Response.ok().build();
@@ -199,8 +199,24 @@ public class WebDavServiceImplAccessListTest {
   }
 
   @Test
+  public void testUncheckoutKeepsTheAccessListWhileTheSpaceKeepsItsDocumentsInside() throws Exception {
+    when(guard.getAccessListChangeRefusal(document, "mary", null)).thenReturn(DocumentSpaceGuard.KEPT_INSIDE_SHARE);
+    Map<String, List<String>> accessList = Map.of("*:/spaces/team", List.of("read"));
+    when(guard.getAccessList(storedDocument)).thenReturn(accessList);
+    Response restored = Response.ok().build();
+    doReturn(restored).when(webDavService).restoreCheckedOutVersion(any(), any(), any(), any());
+
+    assertSame(restored, webDavService.uncheckout("repository", REPO_PATH, null, null));
+
+    InOrder inOrder = inOrder(guard, webDavService, storedDocument);
+    inOrder.verify(guard).getAccessList(storedDocument);
+    inOrder.verify(webDavService).restoreCheckedOutVersion(any(), any(), any(), any());
+    inOrder.verify(guard).restoreAccessList(storedDocument, accessList);
+  }
+
+  @Test
   public void testUncheckoutWhoseAccessListCannotBePutBackIsAnError() throws Exception {
-    when(guard.canManageAccess(document, "mary", null)).thenReturn(false);
+    when(guard.getAccessListChangeRefusal(document, "mary", null)).thenReturn(DocumentSpaceGuard.ACCESS_MANAGEMENT_LIMITED);
     doReturn(Response.ok().build()).when(webDavService).restoreCheckedOutVersion(any(), any(), any(), any());
     doThrow(new RepositoryException("refused")).when(guard).restoreAccessList(any(), any());
 
@@ -209,7 +225,7 @@ public class WebDavServiceImplAccessListTest {
 
   @Test
   public void testUncheckoutLeavesTheAccessListToAMemberTheSpaceAllows() throws Exception {
-    when(guard.canManageAccess(document, "mary", null)).thenReturn(true);
+    when(guard.getAccessListChangeRefusal(document, "mary", null)).thenReturn(null);
     Response restored = Response.ok().build();
     doReturn(restored).when(webDavService).restoreCheckedOutVersion(any(), any(), any(), any());
 
