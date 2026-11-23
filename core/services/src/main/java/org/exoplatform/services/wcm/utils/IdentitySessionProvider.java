@@ -31,6 +31,8 @@ import org.exoplatform.services.jcr.impl.RepositoryContainer;
 import org.exoplatform.services.jcr.impl.RepositoryServiceImpl;
 import org.exoplatform.services.jcr.impl.WorkspaceContainer;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
+import org.exoplatform.services.jcr.impl.core.SessionReference;
+import org.exoplatform.services.jcr.impl.core.TrackedSession;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
@@ -43,9 +45,9 @@ import org.exoplatform.services.security.IdentityConstants;
  * each session with the identity's own state, whatever the thread's state is,
  * null included. The caller closes it as any {@link SessionProvider}.
  * <p>
- * The sessions are built directly: {@code SessionFactory#createSession}, which
- * tracks them under {@code exo.jcr.session.tracking.active}, is package-private
- * in the jcr module, so these sessions are not tracked.
+ * The sessions are built directly, as {@code SessionFactory#createSession}
+ * does: a {@link TrackedSession} when {@code exo.jcr.session.tracking.active}
+ * is on, so a session left open is reported, a {@link SessionImpl} otherwise.
  */
 public class IdentitySessionProvider extends SessionProvider {
 
@@ -98,7 +100,8 @@ public class IdentitySessionProvider extends SessionProvider {
       if (workspaceContainer == null || !repository.isWorkspaceInitialized(workspaceName)) {
         throw new NoSuchWorkspaceException("Workspace '" + workspaceName + "' not found");
       }
-      session = new SessionImpl(workspaceName, state, workspaceContainer);
+      session = SessionReference.isStarted() ? new TrackedSession(workspaceName, state, workspaceContainer)
+                                             : new SessionImpl(workspaceName, state, workspaceContainer);
       session.registerLifecycleListener(this);
       sessions.put(key, session);
     }

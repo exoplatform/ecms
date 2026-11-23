@@ -18,9 +18,14 @@ package org.exoplatform.services.wcm.utils;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.mockito.MockedStatic;
 
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Session;
@@ -31,6 +36,8 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
+import org.exoplatform.services.jcr.impl.core.SessionReference;
+import org.exoplatform.services.jcr.impl.core.TrackedSession;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.MembershipEntry;
@@ -128,6 +135,38 @@ public class IdentitySessionProviderTest extends BaseWCMTestCase {
     ConversationState.setCurrent(new ConversationState(system));
     SessionProvider provider = Utils.getUserSessionProvider(repositoryService, system);
     assertFalse(provider instanceof IdentitySessionProvider);
+  }
+
+  /**
+   * The jcr module has no way to stop its tracking once started, so the test
+   * switches it on for its own duration: the started flag is stubbed and the
+   * registry the tracked sessions register in is set, then cleared.
+   */
+  public void testSessionIsTrackedWhenSessionTrackingIsActive() throws Exception {
+    Field objects = SessionReference.class.getDeclaredField("objects");
+    objects.setAccessible(true);
+    SessionProvider provider = new IdentitySessionProvider(repositoryService, new Identity(NAMED_USER));
+    try (MockedStatic<SessionReference> tracking = mockStatic(SessionReference.class)) {
+      tracking.when(SessionReference::isStarted).thenReturn(true);
+      objects.set(null, new ConcurrentHashMap<>());
+      Session userSession = provider.getSession(COLLABORATION_WS, repository);
+      assertTrue(userSession instanceof TrackedSession);
+      assertEquals(NAMED_USER, userSession.getUserID());
+    } finally {
+      provider.close();
+      objects.set(null, null);
+    }
+  }
+
+  public void testSessionIsNotTrackedWhenSessionTrackingIsInactive() throws Exception {
+    SessionProvider provider = new IdentitySessionProvider(repositoryService, new Identity(NAMED_USER));
+    try (MockedStatic<SessionReference> tracking = mockStatic(SessionReference.class)) {
+      tracking.when(SessionReference::isStarted).thenReturn(false);
+      Session userSession = provider.getSession(COLLABORATION_WS, repository);
+      assertFalse(userSession instanceof TrackedSession);
+    } finally {
+      provider.close();
+    }
   }
 
   public void testRefusesUnknownWorkspace() {
