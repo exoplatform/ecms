@@ -25,13 +25,17 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +53,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.Utils;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -73,6 +78,8 @@ public class UpdateContentPermissionsListenerTest {
   private RepositoryService                 repositoryService;
 
   private AttachmentStorage                 attachmentStorage;
+
+  private TrashService                      trashService;
 
   private ManageableRepository              repository;
 
@@ -110,7 +117,8 @@ public class UpdateContentPermissionsListenerTest {
     commonsUtils.when(CommonsUtils::getCurrentDomain).thenReturn("https://exoplatform.com");
     portalContainer.when(PortalContainer::getCurrentPortalContainerName).thenReturn("portal");
     utils.when(() -> Utils.getSystemSession(sessionProviderService, repositoryService)).thenReturn(systemSession);
-    listener = new UpdateContentPermissionsListener(repositoryService, attachmentStorage);
+    trashService = mock(TrashService.class);
+    listener = new UpdateContentPermissionsListener(repositoryService, attachmentStorage, trashService);
   }
 
   @After
@@ -158,6 +166,51 @@ public class UpdateContentPermissionsListenerTest {
       verify(node, times(2)).save();
     }
     verify(pathImageNode).addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+  }
+
+  @Test
+  public void testATrashedDocumentIsGivenNoAccess() throws Exception {
+    ExtendedNode trashedNode = trashedNode("123", true);
+    when(trashedNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)).thenReturn(true);
+
+    listener.onEvent(new Event<>("content.update.permissions", null, spaceAndAudienceData("all")));
+
+    verify(trashedNode, never()).addMixin(anyString());
+    verify(trashedNode, never()).setPermission(anyString(), any(String[].class));
+    verify(trashedNode, never()).removePermission(anyString(), anyString());
+    verify(trashedNode, never()).save();
+  }
+
+  @Test
+  public void testATrashedDocumentWithPermissionsOfItsOwnLosesTheAllUsersAccess() throws Exception {
+    ExtendedNode trashedNode = trashedNode("123", true);
+
+    listener.onEvent(new Event<>("content.update.permissions", null, spaceAndAudienceData("space")));
+
+    verify(trashedNode).removePermission("any", PermissionType.READ);
+    verify(trashedNode).save();
+    verify(trashedNode, never()).setPermission(anyString(), any(String[].class));
+  }
+
+  @Test
+  public void testATrashedDocumentWithoutPermissionsOfItsOwnIsLeftAsItIs() throws Exception {
+    ExtendedNode trashedNode = trashedNode("123", false);
+
+    listener.onEvent(new Event<>("content.update.permissions", null, spaceAndAudienceData("space")));
+
+    verify(trashedNode, never()).removePermission(anyString(), anyString());
+    verify(trashedNode, never()).setPermission(anyString(), any(String[].class));
+    verify(trashedNode, never()).save();
+  }
+
+  @Test
+  public void testATrashedDocumentKeepsItsAllUsersAccessWhenNoAudienceIsGiven() throws Exception {
+    ExtendedNode trashedNode = trashedNode("123", true);
+
+    listener.onEvent(new Event<>("content.update.permissions", null, spaceAndAudienceData(null)));
+
+    verify(trashedNode, never()).removePermission(anyString(), anyString());
+    verify(trashedNode, never()).save();
   }
 
   @Test
@@ -234,6 +287,31 @@ public class UpdateContentPermissionsListenerTest {
 
   private Map<String, Object> eventData() {
     return Map.of("entityId", "1", "entityType", "WIKI_DRAFT_PAGES", "audience", "space", "spaces", List.of());
+  }
+
+  /**
+   * An article of the space /spaces/test, published to the given audience,
+   * whose attachment is the node 123
+   */
+  private Map<String, Object> spaceAndAudienceData(String audience) throws Exception {
+    when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_PAGE_VERSIONS")).thenReturn(List.of(attachment("123")));
+    Space space = new Space();
+    space.setGroupId("/spaces/test");
+    Map<String, Object> data = new HashMap<>();
+    data.put("entityId", "1");
+    data.put("entityType", "WIKI_PAGE_VERSIONS");
+    data.put("spaces", List.of(space));
+    data.put("audience", audience);
+    return data;
+  }
+
+  private ExtendedNode trashedNode(String uuid, boolean hasPermissionsOfItsOwn) throws Exception {
+    ExtendedNode node = mock(ExtendedNode.class);
+    when(node.getPath()).thenReturn("/Trash/Groups/spaces/test/attachment");
+    when(node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)).thenReturn(hasPermissionsOfItsOwn);
+    when(systemSession.getNodeByUUID(uuid)).thenReturn(node);
+    when(trashService.isInTrash(node)).thenReturn(true);
+    return node;
   }
 
   /**
