@@ -32,6 +32,8 @@ public class TrashFolderScript implements CmsScript {
   final static public String EXO_RESTOREPATH = "exo:restorePath";
   final static public String EXO_RESTORELOCATION = "exo:restoreLocation";
   final static public String EXO_RESTORE_WORKSPACE = "exo:restoreWorkspace";
+  /** A folder the documents' Recycle Bin keeps deleted items in, never a deleted item itself */
+  final static public String EXO_RECYCLE_BIN_FOLDER = "exo:recycleBinFolder";
   private RepositoryService repositoryService_;
   private SessionProviderService seProviderService_;
   
@@ -60,7 +62,7 @@ public class TrashFolderScript implements CmsScript {
       return;
     }
     if ((eventType & Event.NODE_ADDED) > 0) {
-    	if (!node.isNodeType(EXO_RESTORELOCATION)) {
+    	if (!node.isNodeType(EXO_RESTORELOCATION) && !node.isNodeType(EXO_RECYCLE_BIN_FOLDER)) {
     		node.addMixin(EXO_RESTORELOCATION);    		
   			node.setProperty(EXO_RESTOREPATH, fixRestorePath(srcPath));
   			node.setProperty(EXO_RESTORE_WORKSPACE, workspace);
