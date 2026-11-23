@@ -18,6 +18,8 @@ package org.exoplatform.wcm.connector.viewer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -253,8 +255,48 @@ public class PDFViewerRESTServiceTest {
     assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
   }
 
+  @Test
+  public void testAPageAnswersAnEmptyNoStoreAnswerWhenItCannotBeRendered() throws Exception {
+    Node node = mock(Node.class);
+    when(session.getNodeByUUID("uuid")).thenReturn(node);
+    when(pdfCache.get(any())).thenReturn(null);
+    PDFViewerRESTService service = spy(pdfViewerRESTService);
+    doThrow(new IllegalStateException("/internal/path")).when(service).getPDFDocumentFile(node, "repository");
+    ConversationState.setCurrent(new ConversationState(new Identity("mary")));
+
+    Response response = service.getCoverImage("repository", WORKSPACE, "uuid", "1", "0", "1.0");
+
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    assertNull(response.getEntity());
+    assertNoStore(response);
+    verify(session).logout();
+  }
+
+  @Test
+  public void testAPageIsRefusedWhenTheConversationStateHasNoIdentity() throws Exception {
+    ConversationState.setCurrent(new ConversationState((Identity) null));
+
+    Response response = pdfViewerRESTService.getCoverImage("repository", WORKSPACE, "uuid", "1", "0", "1.0");
+
+    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    assertNoStore(response);
+    verify(repository, never()).login(any(String.class));
+  }
+
+  @Test
+  public void testThePdfFileIsRefusedWhenTheConversationStateHasNoIdentity() throws Exception {
+    ConversationState.setCurrent(new ConversationState((Identity) null));
+
+    Response response = pdfViewerRESTService.getPDFFile("repository", WORKSPACE, "uuid");
+
+    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    assertNoStore(response);
+    verify(repository, never()).login(any(String.class));
+  }
+
   private static void assertNoStore(Response response) {
     CacheControl cacheControl = (CacheControl) response.getMetadata().getFirst(HttpHeaders.CACHE_CONTROL);
+    assertNotNull("the answer carries a Cache-Control header", cacheControl);
     assertTrue(cacheControl.isPrivate());
     assertTrue(cacheControl.isNoStore());
   }

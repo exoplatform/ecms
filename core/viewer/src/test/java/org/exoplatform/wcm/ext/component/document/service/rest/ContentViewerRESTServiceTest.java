@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.ext.component.document.service.rest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -123,7 +124,7 @@ public class ContentViewerRESTServiceTest {
   }
 
   @Test
-  public void testTheContentOfAReadableDocumentIsKeptOutOfCaches() throws Exception {
+  public void testTheAnswerForADocumentTheCallerCanReadIsKeptOutOfCachesAndTheSessionIsClosed() throws Exception {
     when(session.getNodeByIdentifier("uuid")).thenReturn(mock(Node.class));
     ConversationState.setCurrent(new ConversationState(new Identity("mary")));
 
@@ -166,8 +167,45 @@ public class ContentViewerRESTServiceTest {
     verify(repository, never()).getSystemSession(any());
   }
 
+  @Test
+  public void testTheTargetOfALinkTheCallerCanReadIsReadAsTheCaller() throws Exception {
+    Node link = mock(Node.class);
+    when(link.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(true);
+    Property workspace = mock(Property.class);
+    when(workspace.getString()).thenReturn(TARGET_WORKSPACE);
+    when(link.getProperty(NodetypeConstant.EXO_WORKSPACE)).thenReturn(workspace);
+    Property targetUuid = mock(Property.class);
+    when(targetUuid.getString()).thenReturn("target");
+    when(link.getProperty(NodetypeConstant.EXO_UUID)).thenReturn(targetUuid);
+    when(session.getNodeByIdentifier("uuid")).thenReturn(link);
+    ExtendedSession targetSession = mock(ExtendedSession.class);
+    when(repository.login(TARGET_WORKSPACE)).thenReturn(targetSession);
+    when(targetSession.getNodeByUUID("target")).thenReturn(mock(Node.class));
+    ConversationState.setCurrent(new ConversationState(new Identity("mary")));
+
+    Response response = getContent();
+
+    assertEquals("the target the caller can read is not refused", Response.Status.OK.getStatusCode(), response.getStatus());
+    assertNoStore(response);
+    verify(targetSession).getNodeByUUID("target");
+    verify(repository, never()).getSystemSession(any());
+    verify(targetSession).logout();
+  }
+
+  @Test
+  public void testTheContentIsRefusedWhenTheConversationStateHasNoIdentity() throws Exception {
+    ConversationState.setCurrent(new ConversationState((Identity) null));
+
+    Response response = getContent();
+
+    assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+    assertNoStore(response);
+    verify(repository, never()).login(any(String.class));
+  }
+
   private static void assertNoStore(Response response) {
     CacheControl cacheControl = (CacheControl) response.getMetadata().getFirst(HttpHeaders.CACHE_CONTROL);
+    assertNotNull("the answer carries a Cache-Control header", cacheControl);
     assertTrue(cacheControl.isPrivate());
     assertTrue(cacheControl.isNoStore());
   }
