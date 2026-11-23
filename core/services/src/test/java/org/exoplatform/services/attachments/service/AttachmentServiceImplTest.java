@@ -455,6 +455,28 @@ public class AttachmentServiceImplTest {
   }
 
   /**
+   * The portal object type is looked up as sent, in lower case, in upper case
+   * and capitalized: a mixed-case object type is covered only when sent with its
+   * own case, and is otherwise left to the document permissions. Mutant: a
+   * case-insensitive lookup of the object type makes the second link refused.
+   */
+  @Test
+  public void aMixedCaseObjectTypeIsCoveredOnlyWhenSentWithItsOwnCase() throws Exception {
+    when(userAcl.hasAclPlugin("agendaEvent")).thenReturn(true);
+    when(userAcl.hasPermission("agendaEvent", "1", AclPlugin.EDIT_PERMISSION_TYPE, securityIdentity)).thenReturn(false);
+    doReturn(new Attachment()).when(attachmentService).getAttachmentByIdByEntity("agendaevent", ENTITY_ID, DOCUMENT_ID, USER_IDENTITY_ID);
+
+    assertThrows(IllegalAccessException.class,
+                 () -> attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, "agendaEvent", DOCUMENT_ID));
+    verify(attachmentStorage, never()).linkAttachmentToEntity(anyLong(), anyString(), anyString());
+
+    attachmentService.linkAttachmentToEntity(USER_IDENTITY_ID, ENTITY_ID, "agendaevent", DOCUMENT_ID);
+
+    verify(attachmentStorage).linkAttachmentToEntity(ENTITY_ID, "agendaevent", DOCUMENT_ID);
+    verify(userAcl, never()).hasPermission(eq("agendaevent"), anyString(), anyString(), any(org.exoplatform.services.security.Identity.class));
+  }
+
+  /**
    * An attachment moved while its activity is not created yet has no object to
    * check.
    */
