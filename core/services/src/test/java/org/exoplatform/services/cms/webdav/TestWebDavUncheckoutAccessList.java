@@ -293,14 +293,26 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
    * out; the write that fails comes after the document's own list is saved.
    */
   public void testAFailureAfterTheDocumentsOwnListIsSavedChecksTheDocumentInAgain() throws Exception {
-    Node document = addVersionedFile("checked-in-again.txt");
+    assertACancelFailingOnSaveChecksTheDocumentInAgain("checked-in-again.txt", 2);
+  }
+
+  /**
+   * The document's own save is the one refused: its mixin and list are still
+   * pending, which the check-in refuses until they are dropped.
+   */
+  public void testAFailureOnTheDocumentsOwnSaveChecksTheDocumentInAgain() throws Exception {
+    assertACancelFailingOnSaveChecksTheDocumentInAgain("checked-in-again-own-save.txt", 1);
+  }
+
+  private void assertACancelFailingOnSaveChecksTheDocumentInAgain(String fileName, int refusedSave) throws Exception {
+    Node document = addVersionedFile(fileName);
     String uuid = document.getUUID();
     document.checkin();
     document.checkout();
     document.addMixin("exo:privilegeable");
     ((ExtendedNode) document).setPermissions(Map.of(CANCELLER, EDIT, MEMBER, READ));
     session.save();
-    // The first system session reads the lists; in the second one, the save after the document's own is refused
+    // The first system session reads the lists; in the second one, the refusedSave-th save is refused
     ManageableRepository failingRepository = spy(currentRepository);
     AtomicInteger systemSessions = new AtomicInteger();
     AtomicInteger depth = new AtomicInteger();
@@ -319,7 +331,7 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
       SessionImpl failingSession = spy(systemSession);
       AtomicInteger saves = new AtomicInteger();
       doAnswer(save -> {
-        if (saves.incrementAndGet() == 2) {
+        if (saves.incrementAndGet() == refusedSave) {
           throw new RepositoryException("refused");
         }
         return save.callRealMethod();
@@ -338,7 +350,7 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
 
     applyUserSession(CANCELLER, "gtn", COLLABORATION_WS);
     try {
-      failingWebDav.uncheckout(REPO_NAME, "collaboration/Users/uncheckoutFolder/checked-in-again.txt", null, null);
+      failingWebDav.uncheckout(REPO_NAME, "collaboration/Users/uncheckoutFolder/" + fileName, null, null);
       fail("The failure must reach the caller");
     } catch (IllegalStateException e) {
       assertEquals("refused", e.getCause().getMessage());
