@@ -92,6 +92,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   LockServiceImplStartTest.class,
   TestTrashService.class,
   TestRelationsService.class,
+  // before TestDriveService, whose tearDown deletes the drives this one reads
+  TestAutoVersionService.class,
+  TestNodeFinder.class,
   TestDriveService.class,
   TestScriptService.class,
   TestCmsService.class,
@@ -118,8 +121,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   ActivityFilesDownloadTest.class,
   TestUtils.class,
   IdentitySessionProviderTest.class,
-  TestAutoVersionService.class,
-  TestNodeFinder.class,
   TestSimpleDiff.class,
   TestDocumentReadersIncomVals.class,
   TestHtmlDocumentReader.class,

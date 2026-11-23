@@ -1,5 +1,6 @@
 package org.exoplatform.services.cms.documents;
 
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
@@ -50,6 +51,12 @@ public class TestAutoVersionService extends BaseWCMTestCase {
     jcrContent.setProperty("jcr:mimeType", "text/html");
 
     session.save();
+    ManageDriveService manageDriveService = container.getComponentInstanceOfType(ManageDriveService.class);
+    // The null answer below means "outside the drives" only while the drives exist
+    for (String driveName : autoVersionService.getDriveAutoVersion()) {
+      assertNotNull("The drive " + driveName + " must exist for the check below to mean anything",
+                    manageDriveService.getDriveByName(driveName.trim()));
+    }
     assertNull("A node outside the auto-versioned drives is not versioned", autoVersionService.autoVersion(documentA));
     autoVersionService.autoVersion(documentA, true);
     long versionNumber = documentA.getVersionHistory().getAllVersions().getSize();
