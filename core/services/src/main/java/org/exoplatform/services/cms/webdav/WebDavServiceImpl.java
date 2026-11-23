@@ -1171,12 +1171,23 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
    * session. The document stays checked in, and a new version is created only
    * when the private-access mixin has to be added or removed on the document
    * or on a node below it, which a checked-in node refuses.
+   * <p>
+   * The lists are read before the cancel and written back after it, so a
+   * share changed on the document or below it while the cancel runs is
+   * overwritten by the list read earlier: the put-back is not atomic, and the
+   * window grows with the size of the folder. It is accepted because the cancel
+   * of a checkout is a rare, short action, and the lists are always put back
+   * as they were just before it, never as the version holds them. When a write
+   * fails, the document is checked in again, and the lists below it that were
+   * not put back yet keep the ones the cancel restored.
    */
   private void keepAccess(DocumentAccess access) {
     Session systemSession = null;
+    Node node = null;
+    boolean checkedOutHere = false;
     try {
       systemSession = repositoryService.getCurrentRepository().getSystemSession(access.workspace());
-      Node node = systemSession.getNodeByUUID(access.uuid());
+      node = systemSession.getNodeByUUID(access.uuid());
       // The private-access mixin may differ from the one read before
       boolean hasOwnPermissions = node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
       // A checked-in document refuses a mixin change on itself or below it
@@ -1184,6 +1195,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                             || descendantsNeedMixinChange(systemSession, access);
       if (mixinChange) {
         node.checkout();
+        checkedOutHere = true;
       }
       if (access.ownPermissions() != null) {
         if (!hasOwnPermissions) {
@@ -1203,12 +1215,29 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         node.checkin();
       }
     } catch (RepositoryException | RuntimeException e) {
+      if (checkedOutHere) {
+        checkInAgain(systemSession, node, e);
+      }
       LOG.error("Checkout of document {} cancelled, but its access list could not be kept: check its access", access.uuid(), e);
       throw e instanceof RuntimeException re ? re : new IllegalStateException(e);
     } finally {
       if (systemSession != null) {
         systemSession.logout();
       }
+    }
+  }
+
+  /**
+   * Checks the document in again after a failed put-back, dropping what was
+   * not saved. A failure to do so is attached to the original one, which stays
+   * the one rethrown.
+   */
+  private void checkInAgain(Session systemSession, Node node, Exception failure) {
+    try {
+      systemSession.refresh(false);
+      node.checkin();
+    } catch (RepositoryException | RuntimeException checkInFailure) {
+      failure.addSuppressed(checkInFailure);
     }
   }
 

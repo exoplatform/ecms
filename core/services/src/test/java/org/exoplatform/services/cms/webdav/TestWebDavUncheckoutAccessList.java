@@ -51,6 +51,7 @@ import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
@@ -281,6 +282,72 @@ public class TestWebDavUncheckoutAccessList extends BaseWCMTestCase {
       logger.detachAppender(appender);
       logger.setLevel(level);
     }
+    assertTrue(appender.list.stream()
+                            .anyMatch(event -> event.getLevel() == Level.ERROR
+                                && event.getFormattedMessage().contains(uuid)
+                                && event.getFormattedMessage().contains("access list could not be kept")));
+  }
+
+  /**
+   * The cancel has to add the private-access mixin, so it checks the document
+   * out; the write that fails comes after the document's own list is saved.
+   */
+  public void testAFailureAfterTheDocumentsOwnListIsSavedChecksTheDocumentInAgain() throws Exception {
+    Node document = addVersionedFile("checked-in-again.txt");
+    String uuid = document.getUUID();
+    document.checkin();
+    document.checkout();
+    document.addMixin("exo:privilegeable");
+    ((ExtendedNode) document).setPermissions(Map.of(CANCELLER, EDIT, MEMBER, READ));
+    session.save();
+    // The first system session reads the lists; in the second one, the save after the document's own is refused
+    ManageableRepository failingRepository = spy(currentRepository);
+    AtomicInteger systemSessions = new AtomicInteger();
+    AtomicInteger depth = new AtomicInteger();
+    doAnswer(invocation -> {
+      SessionImpl systemSession;
+      depth.incrementAndGet();
+      try {
+        systemSession = (SessionImpl) invocation.callRealMethod();
+      } finally {
+        depth.decrementAndGet();
+      }
+      // the repository's own calls to its overload are not requests for a session
+      if (depth.get() > 0 || systemSessions.incrementAndGet() == 1) {
+        return systemSession;
+      }
+      SessionImpl failingSession = spy(systemSession);
+      AtomicInteger saves = new AtomicInteger();
+      doAnswer(save -> {
+        if (saves.incrementAndGet() == 2) {
+          throw new RepositoryException("refused");
+        }
+        return save.callRealMethod();
+      }).when(failingSession).save();
+      return failingSession;
+    }).when(failingRepository).getSystemSession(anyString());
+    org.exoplatform.services.jcr.RepositoryService failingService = spy(repositoryService);
+    doAnswer(invocation -> failingRepository).when(failingService).getCurrentRepository();
+    WebDavServiceImpl failingWebDav = newService(failingService);
+    Logger logger = (Logger) LoggerFactory.getLogger(WebDavServiceImpl.class.getName());
+    ListAppender<ILoggingEvent> appender = new ListAppender<>();
+    appender.start();
+    logger.addAppender(appender);
+    Level level = logger.getLevel();
+    logger.setLevel(Level.ERROR);
+
+    applyUserSession(CANCELLER, "gtn", COLLABORATION_WS);
+    try {
+      failingWebDav.uncheckout(REPO_NAME, "collaboration/Users/uncheckoutFolder/checked-in-again.txt", null, null);
+      fail("The failure must reach the caller");
+    } catch (IllegalStateException e) {
+      assertEquals("refused", e.getCause().getMessage());
+    } finally {
+      applySystemSession();
+      logger.detachAppender(appender);
+      logger.setLevel(level);
+    }
+    assertFalse("the document was left checked out", reload(uuid).isCheckedOut());
     assertTrue(appender.list.stream()
                             .anyMatch(event -> event.getLevel() == Level.ERROR
                                 && event.getFormattedMessage().contains(uuid)
