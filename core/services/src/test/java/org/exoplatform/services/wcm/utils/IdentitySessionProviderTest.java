@@ -140,11 +140,12 @@ public class IdentitySessionProviderTest extends BaseWCMTestCase {
   /**
    * The jcr module has no way to stop its tracking once started, so the test
    * switches it on for its own duration: the started flag is stubbed and the
-   * registry the tracked sessions register in is set, then cleared.
+   * registry the tracked sessions register in is set, then restored.
    */
   public void testSessionIsTrackedWhenSessionTrackingIsActive() throws Exception {
     Field objects = SessionReference.class.getDeclaredField("objects");
     objects.setAccessible(true);
+    Object registryBefore = objects.get(null);
     SessionProvider provider = new IdentitySessionProvider(repositoryService, new Identity(NAMED_USER));
     try (MockedStatic<SessionReference> tracking = mockStatic(SessionReference.class)) {
       tracking.when(SessionReference::isStarted).thenReturn(true);
@@ -154,7 +155,7 @@ public class IdentitySessionProviderTest extends BaseWCMTestCase {
       assertEquals(NAMED_USER, userSession.getUserID());
     } finally {
       provider.close();
-      objects.set(null, null);
+      objects.set(null, registryBefore);
     }
   }
 
