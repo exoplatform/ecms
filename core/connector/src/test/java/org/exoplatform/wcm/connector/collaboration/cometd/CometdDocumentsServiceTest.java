@@ -29,6 +29,7 @@ import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -53,6 +54,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.RunnableScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
@@ -72,6 +74,7 @@ import org.cometd.server.BayeuxServerImpl;
 import org.cometd.server.http.JSONHttpTransport;
 import org.junit.Before;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 import org.junit.Test;
 import org.mortbay.cometd.continuation.EXoContinuationBayeux;
@@ -388,11 +391,11 @@ public class CometdDocumentsServiceTest {
   @Test
   public void testTheTimerOfAClosedEditorEndsAfterItsReset() throws Exception {
     CometdDocumentsService service = spy(service(mock(DocumentService.class)));
-    doNothing().when(service).resetCurrentProviderIfClosed(FILE_ID, WORKSPACE, PROVIDER);
+    doNothing().when(service).queueProviderReset(FILE_ID, WORKSPACE, PROVIDER);
 
     service.scheduleProviderReset(FILE_ID, WORKSPACE, PROVIDER, 0);
 
-    verify(service, timeout(5000)).resetCurrentProviderIfClosed(FILE_ID, WORKSPACE, PROVIDER);
+    verify(service, timeout(5000)).queueProviderReset(FILE_ID, WORKSPACE, PROVIDER);
     long deadline = System.currentTimeMillis() + 5000;
     while (!timerThreads().isEmpty() && System.currentTimeMillis() < deadline) {
       Thread.sleep(20);
@@ -422,13 +425,46 @@ public class CometdDocumentsServiceTest {
     verify(documentService, never()).getCurrentDocumentProvider(any(), any());
   }
 
+  /**
+   * The reset writes the provider in place, before it publishes the last
+   * editor closed event, instead of queuing the write.
+   */
   @Test
   public void testTheCurrentEditorIsResetOnceNoEditorIsOpen() throws Exception {
     DocumentService documentService = mock(DocumentService.class);
-    CometdDocumentsService service = service(documentService);
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenReturn(PROVIDER);
+    CometdDocumentsService service = recordingService(mock(EXoContinuationBayeux.class),
+                                                      documentService,
+                                                      mock(IdentityRegistry.class),
+                                                      true);
+    ServerChannel channel = bayeuxChannel(service);
 
     service.resetCurrentProviderIfClosed(FILE_ID, WORKSPACE, PROVIDER);
 
+    InOrder order = inOrder(documentService, channel);
+    order.verify(documentService).getCurrentDocumentProvider(FILE_ID, WORKSPACE);
+    order.verify(documentService).saveCurrentDocumentProvider(FILE_ID, WORKSPACE, null);
+    order.verify(channel).publish(any(), eq(lastEditorClosedEvent()), any());
+    assertEquals("the reset queues no write", 0, recorded(service).size());
+  }
+
+  /**
+   * The closing delay's timer hands the reset to the documents executor,
+   * where it runs in the container.
+   */
+  @Test
+  public void testTheResetIsQueuedInTheDocumentsExecutor() throws Exception {
+    DocumentService documentService = mock(DocumentService.class);
+    CometdDocumentsService service = recordingService(mock(EXoContinuationBayeux.class),
+                                                      documentService,
+                                                      mock(IdentityRegistry.class),
+                                                      true);
+
+    service.queueProviderReset(FILE_ID, WORKSPACE, PROVIDER);
+
+    assertEquals(1, recorded(service).size());
+    verify(documentService, never()).getCurrentDocumentProvider(any(), any());
+    ((CometdDocumentsService.ContainerCommand) recorded(service).get(0)).execute(null);
     verify(documentService).getCurrentDocumentProvider(FILE_ID, WORKSPACE);
   }
 
@@ -850,9 +886,8 @@ public class CometdDocumentsServiceTest {
     ServerChannel documentChannel = bayeuxChannel(service);
     service.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
     assertEquals(1, service.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
-    assertEquals("the provider is recorded again", 1, recorded(service).size());
-    ((CometdDocumentsService.ContainerCommand) recorded(service).get(0)).execute(null);
     verify(reset).saveCurrentDocumentProvider(FILE_ID, WORKSPACE, PROVIDER);
+    assertEquals("the provider is recorded again in place", 0, recorded(service).size());
     ArgumentCaptor<Object> published = ArgumentCaptor.forClass(Object.class);
     verify(documentChannel).publish(any(), published.capture(), any());
     assertEquals("the opened event is published with the provider recorded again",
@@ -867,6 +902,7 @@ public class CometdDocumentsServiceTest {
     kept.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
     assertEquals(1, kept.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
     assertEquals("a recorded provider is left as it is", 0, recorded(kept).size());
+    verify(recordedProvider, never()).saveCurrentDocumentProvider(any(), any(), any());
     verify(keptChannel, never()).publish(any(), any(Object.class), any());
 
     // The provider is not available to the user: nothing is recorded
@@ -876,6 +912,7 @@ public class CometdDocumentsServiceTest {
     ServerChannel refusedChannel = bayeuxChannel(refused);
     refused.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
     assertEquals("a provider unavailable to the user is not recorded", 0, recorded(refused).size());
+    verify(unavailable, never()).saveCurrentDocumentProvider(any(), any(), any());
     verify(refusedChannel, never()).publish(any(), any(Object.class), any());
   }
 
@@ -907,6 +944,76 @@ public class CometdDocumentsServiceTest {
     verify(documentService).getCurrentDocumentProvider(FILE_ID, WORKSPACE);
     assertFalse("the recorded provider is read outside the lock of the connection", readUnderTheLock.get());
     assertEquals(1, service.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
+  /**
+   * The reset and a registered editor's recording of its provider again
+   * exclude each other: a registration whose editor is counted after the
+   * reset counted none, and whose read comes before the reset's write, waits
+   * for that write, then records its provider, so the document is not left
+   * with an open editor and no recorded provider. The events are published in
+   * the same order.
+   */
+  @Test
+  public void testTheResetAndTheRecordingAgainOfAProviderExcludeEachOther() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    ServerChannel channel = mock(ServerChannel.class);
+    when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+    when(channel.getSubscribers()).thenReturn(Set.of(johnSession));
+    DocumentService documentService = documentServiceOf(PROVIDER, true);
+    // The provider the document records, as its node holds it
+    AtomicReference<String> stored = new AtomicReference<>(PROVIDER);
+    doAnswer(invocation -> {
+      stored.set(invocation.getArgument(2));
+      return null;
+    }).when(documentService).saveCurrentDocumentProvider(eq(FILE_ID), eq(WORKSPACE), any());
+    // The reset's read waits until the registration has counted its editor
+    CountDownLatch inReset = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
+    AtomicBoolean resetRead = new AtomicBoolean(true);
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenAnswer(invocation -> {
+      if (resetRead.getAndSet(false)) {
+        inReset.countDown();
+        release.await(10, TimeUnit.SECONDS);
+      }
+      return stored.get();
+    });
+    CometdDocumentsService service = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    ServerChannel documentChannel = bayeuxChannel(service);
+
+    Thread reset = new Thread(() -> service.resetCurrentProviderIfClosed(FILE_ID, WORKSPACE, PROVIDER));
+    reset.start();
+    assertTrue(inReset.await(10, TimeUnit.SECONDS));
+    Thread registration = new Thread(() -> service.new ChannelSubscriptionListener()
+                                                  .registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE));
+    registration.start();
+    registration.join(500);
+    assertTrue("the registration's read waits for the reset's write", registration.isAlive());
+    assertEquals("the editor is counted before", 1, service.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+    release.countDown();
+    reset.join(10000);
+    registration.join(10000);
+
+    assertEquals("the open editor's provider is recorded", PROVIDER, stored.get());
+    InOrder order = inOrder(documentService, documentChannel);
+    order.verify(documentService).saveCurrentDocumentProvider(FILE_ID, WORKSPACE, null);
+    order.verify(documentChannel).publish(any(), eq(lastEditorClosedEvent()), any());
+    order.verify(documentService).saveCurrentDocumentProvider(FILE_ID, WORKSPACE, PROVIDER);
+    order.verify(documentChannel).publish(any(), eq(documentOpenedEvent()), any());
+    assertEquals("the writes are made in place", 0, recorded(service).size());
+  }
+
+  private static String documentOpenedEvent() {
+    return "{\"type\": \"" + CometdDocumentsService.DOCUMENT_OPENED_EVENT + "\", \"fileId\": \"" + FILE_ID + "\", \"provider\": \""
+        + PROVIDER + "\"}";
+  }
+
+  private static String lastEditorClosedEvent() {
+    return "{\"type\": \"" + CometdDocumentsService.LAST_EDITOR_CLOSED_EVENT + "\", \"fileId\": \"" + FILE_ID
+        + "\", \"provider\": \"" + PROVIDER + "\"}";
   }
 
   private static DocumentService documentServiceOf(String currentProvider, boolean availableToUser) throws Exception {

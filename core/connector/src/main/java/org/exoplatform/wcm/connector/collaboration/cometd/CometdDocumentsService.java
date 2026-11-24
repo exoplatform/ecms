@@ -636,14 +636,20 @@ public class CometdDocumentsService implements Startable {
      * the recorded provider while this editor is open. The opened event is
      * published with the provider, as for an accepted open, so the pages that
      * received the reset's last editor closed event disable the other
-     * providers' buttons again.
+     * providers' buttons again. The read, the write and the event run under
+     * the document's lock, as the reset does, and the write is made in place:
+     * this editor being counted before, whichever of the two comes second sees
+     * the other's result.
      */
     private void recordProviderWhenNoneIsRecorded(String userId, String fileId, String provider, String workspace) {
       try {
-        if (documentService.getCurrentDocumentProvider(fileId, workspace) == null) {
-          DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-          if (editorProvider.isAvailableForUser(service.userIdentity(userId))) {
-            service.setCurrentDocumentProvider(fileId, workspace, provider);
+        DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+        if (!editorProvider.isAvailableForUser(service.userIdentity(userId))) {
+          return;
+        }
+        synchronized (documentLock(fileId)) {
+          if (documentService.getCurrentDocumentProvider(fileId, workspace) == null) {
+            documentService.saveCurrentDocumentProvider(fileId, workspace, provider);
             service.sendDocumentOpenedEvent(fileId, editorProvider.getProviderName());
           }
         }
@@ -799,11 +805,20 @@ public class CometdDocumentsService implements Startable {
   /**
    * One lock of this array per connection, by the hash of its session id: the
    * registration and the unsubscription of one connection exclude each other.
-   * Across connections the reset timer re-checks the opened editors before it
+   * Across connections the reset re-checks the opened editors before it
    * resets, and a timer replaced by another is cancelled. A section also waits
    * on the sections of a connection hashing to the same lock (one in 64).
    */
   private final Object[]                      editorsLocks             = newEditorsLocks();
+
+  /**
+   * One lock of this array per document, by the hash of its id: the reset of
+   * a document's provider (the count of its open editors, the read and the
+   * write) and a registered editor's recording of its provider again (the
+   * read and the write) exclude each other on this server. A section also
+   * waits on the sections of a document hashing to the same lock (one in 64).
+   */
+  private final Object[]                      documentsLocks           = newEditorsLocks();
 
   /**
    * Instantiates the CometdDocumentsService.
@@ -1287,10 +1302,10 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
-   * Resets the current editor provider of a document once the delay has
-   * passed, unless an editor opened it again in the meantime. The timer's
-   * thread is a daemon and ends after its run, so that it neither keeps a
-   * stopped server running nor stays behind once the reset is done.
+   * Queues the reset of the current editor provider of a document once the
+   * delay has passed, unless an editor opened it again in the meantime. The
+   * timer's thread is a daemon and ends after its run, so that it neither
+   * keeps a stopped server running nor stays behind once the reset is queued.
    *
    * @param fileId the document id
    * @param workspace the document's workspace
@@ -1304,7 +1319,7 @@ public class CometdDocumentsService implements Startable {
       @Override
       public void run() {
         try {
-          resetCurrentProviderIfClosed(fileId, workspace, provider);
+          queueProviderReset(fileId, workspace, provider);
         } finally {
           timer.cancel();
         }
@@ -1314,28 +1329,56 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
+   * Queues the reset of a document's current provider in the documents
+   * executor, where it runs in the container, as the registrations do.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @param provider the provider
+   */
+  void queueProviderReset(String fileId, String workspace, String provider) {
+    eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+      @Override
+      void onContainerError(String error) {
+        LOG.error("An error has occured in container: {}", containerName);
+      }
+
+      @Override
+      void execute(ExoContainer exoContainer) {
+        resetCurrentProviderIfClosed(fileId, workspace, provider);
+      }
+    });
+  }
+
+  /**
    * Resets the current provider of a document whose last editor of the
-   * provider closed, unless an editor of it opened since, on any node
+   * provider closed, unless an editor of it opened since, on any node. The
+   * count, the read, the write and the event run under the document's lock,
+   * as a registered editor's recording of its provider again does, and the
+   * write is made in place: on this server, whichever of the two comes second
+   * sees the other's result.
    *
    * @param fileId the file id
    * @param workspace the workspace
    * @param provider the provider
    */
   void resetCurrentProviderIfClosed(String fileId, String workspace, String provider) {
-    if (editorsContext.getOpenedEditorsCount(fileId, provider) > 0) {
-      return;
-    }
-    try {
-      String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-      if (currentProvider != null) {
-        service.setCurrentDocumentProvider(fileId, workspace, null);
-        service.sendLastEditorClosedEvent(fileId, provider);
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + workspace + ", fileId:" + fileId);
-        }
+    synchronized (documentLock(fileId)) {
+      if (editorsContext.getOpenedEditorsCount(fileId, provider) > 0) {
+        return;
       }
-    } catch (RepositoryException e) {
-      LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
+      try {
+        String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+        if (currentProvider != null) {
+          documentService.saveCurrentDocumentProvider(fileId, workspace, null);
+          service.sendLastEditorClosedEvent(fileId, provider);
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + workspace + ", fileId:" + fileId);
+          }
+        }
+      } catch (RepositoryException e) {
+        LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
+      }
     }
   }
 
@@ -1360,6 +1403,10 @@ public class CometdDocumentsService implements Startable {
 
   Object editorsLock(String sessionId) {
     return editorsLocks[Math.floorMod(sessionId.hashCode(), EDITORS_LOCKS_COUNT)];
+  }
+
+  Object documentLock(String fileId) {
+    return documentsLocks[Math.floorMod(fileId.hashCode(), EDITORS_LOCKS_COUNT)];
   }
 
   private static Object[] newEditorsLocks() {
