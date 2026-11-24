@@ -597,6 +597,9 @@ public class CometdDocumentsService implements Startable {
      * connection holds too, the session is still subscribed to the document's
      * channel for that user: the registration and the unsubscription of one
      * connection exclude each other, so a session that left leaves no editor.
+     * The provider of a registered editor is recorded again, when none is,
+     * once that lock is released: the read and the write it takes are no part
+     * of what the lock excludes.
      *
      * @param session the session that subscribed
      * @param channel the document's channel
@@ -611,14 +614,18 @@ public class CometdDocumentsService implements Startable {
         LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
         return;
       }
+      boolean registered;
       synchronized (editorsLock(sessionId)) {
-        if (isStillSubscribed(session, channel, userId)) {
+        registered = isStillSubscribed(session, channel, userId);
+        if (registered) {
           editorsContext.addClient(sessionId, fileId, provider, workspace);
           editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
-          recordProviderWhenNoneIsRecorded(userId, fileId, provider, workspace);
-        } else {
-          LOG.debug("Editor subscription of session {} on file {} ignored: the session is gone", sessionId, fileId);
         }
+      }
+      if (registered) {
+        recordProviderWhenNoneIsRecorded(userId, fileId, provider, workspace);
+      } else {
+        LOG.debug("Editor subscription of session {} on file {} ignored: the session is gone", sessionId, fileId);
       }
     }
 

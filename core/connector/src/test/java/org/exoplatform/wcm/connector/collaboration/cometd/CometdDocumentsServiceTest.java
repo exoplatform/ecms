@@ -867,6 +867,35 @@ public class CometdDocumentsServiceTest {
     assertEquals("a provider unavailable to the user is not recorded", 0, recorded(refused).size());
   }
 
+  /**
+   * The recorded provider is read once the lock of the connection is
+   * released: an unsubscription of a connection sharing that lock does not
+   * wait for the read.
+   */
+  @Test
+  public void testTheProviderIsRecordedAgainOutsideTheLockOfTheConnection() throws Exception {
+    EXoContinuationBayeux exoBayeux = mock(EXoContinuationBayeux.class);
+    when(exoBayeux.isSubscribed("john", "john-session")).thenReturn(true);
+    ServerSession johnSession = mock(ServerSession.class);
+    when(johnSession.getId()).thenReturn("john-session");
+    ServerChannel channel = mock(ServerChannel.class);
+    when(channel.getId()).thenReturn(CometdDocumentsService.CHANNEL_NAME + FILE_ID);
+    when(channel.getSubscribers()).thenReturn(Set.of(johnSession));
+    DocumentService documentService = documentServiceOf(null, true);
+    CometdDocumentsService service = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    AtomicBoolean readUnderTheLock = new AtomicBoolean(true);
+    when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenAnswer(invocation -> {
+      readUnderTheLock.set(Thread.holdsLock(service.editorsLock("john-session")));
+      return null;
+    });
+
+    service.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
+
+    verify(documentService).getCurrentDocumentProvider(FILE_ID, WORKSPACE);
+    assertFalse("the recorded provider is read outside the lock of the connection", readUnderTheLock.get());
+    assertEquals(1, service.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
+  }
+
   private static DocumentService documentServiceOf(String currentProvider, boolean availableToUser) throws Exception {
     DocumentService documentService = mock(DocumentService.class);
     DocumentEditorProvider editorProvider = mock(DocumentEditorProvider.class);
