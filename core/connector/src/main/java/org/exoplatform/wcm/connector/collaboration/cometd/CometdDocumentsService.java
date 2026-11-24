@@ -633,13 +633,19 @@ public class CometdDocumentsService implements Startable {
      * Records the provider of a registered editor for its document when none
      * is recorded and the provider is available to the user: a closing delay
      * that ended between the open being accepted and this registration reset
-     * the recorded provider while this editor is open.
+     * the recorded provider while this editor is open. The opened event is
+     * published with the provider, as for an accepted open, so the pages that
+     * received the reset's last editor closed event disable the other
+     * providers' buttons again.
      */
     private void recordProviderWhenNoneIsRecorded(String userId, String fileId, String provider, String workspace) {
       try {
-        if (documentService.getCurrentDocumentProvider(fileId, workspace) == null
-            && documentService.getEditorProvider(provider).isAvailableForUser(service.userIdentity(userId))) {
-          service.setCurrentDocumentProvider(fileId, workspace, provider);
+        if (documentService.getCurrentDocumentProvider(fileId, workspace) == null) {
+          DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+          if (editorProvider.isAvailableForUser(service.userIdentity(userId))) {
+            service.setCurrentDocumentProvider(fileId, workspace, provider);
+            service.sendDocumentOpenedEvent(fileId, editorProvider.getProviderName());
+          }
         }
       } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
         LOG.error("Cannot record the provider of file {} in workspace {}", fileId, workspace, e);

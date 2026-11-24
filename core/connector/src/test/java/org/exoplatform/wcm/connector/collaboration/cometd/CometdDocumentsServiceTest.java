@@ -800,6 +800,7 @@ public class CometdDocumentsServiceTest {
                  0, reader.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
 
     CometdDocumentsService editor = recordingService(exoBayeux, documentServiceOf(null, true), mock(IdentityRegistry.class), true);
+    bayeuxChannel(editor);
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription("mary"));
     assertEquals("a user who does not own the sending connection is not checked", 0, recorded(editor).size());
     editor.new ChannelSubscriptionListener().subscribed(johnSession, channel, subscription(null));
@@ -829,8 +830,9 @@ public class CometdDocumentsServiceTest {
   /**
    * An editor registered after the closing delay of the previous editor ended
    * is recorded for the document again, when no provider is recorded and the
-   * provider is available to the user: the delay reset the recorded provider
-   * between the accepted open and the registration.
+   * provider is available to the user, and its opened event is published: the
+   * delay reset the recorded provider, and published the last editor closed
+   * event, between the accepted open and the registration.
    */
   @Test
   public void testAnEditorRegisteredAfterTheClosingDelayRecordsItsProviderAgain() throws Exception {
@@ -845,26 +847,36 @@ public class CometdDocumentsServiceTest {
     // The reset left no provider recorded
     DocumentService reset = documentServiceOf(null, true);
     CometdDocumentsService service = recordingService(exoBayeux, reset, mock(IdentityRegistry.class), true);
+    ServerChannel documentChannel = bayeuxChannel(service);
     service.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
     assertEquals(1, service.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
     assertEquals("the provider is recorded again", 1, recorded(service).size());
     ((CometdDocumentsService.ContainerCommand) recorded(service).get(0)).execute(null);
     verify(reset).saveCurrentDocumentProvider(FILE_ID, WORKSPACE, PROVIDER);
+    ArgumentCaptor<Object> published = ArgumentCaptor.forClass(Object.class);
+    verify(documentChannel).publish(any(), published.capture(), any());
+    assertEquals("the opened event is published with the provider recorded again",
+                 "{\"type\": \"DOCUMENT_OPENED\", \"fileId\": \"" + FILE_ID + "\", \"provider\": \"" + PROVIDER + "\"}",
+                 published.getValue());
 
     // The provider is still recorded: nothing is recorded again
     editors.clearCache();
     DocumentService recordedProvider = documentServiceOf(PROVIDER, true);
     CometdDocumentsService kept = recordingService(exoBayeux, recordedProvider, mock(IdentityRegistry.class), true);
+    ServerChannel keptChannel = bayeuxChannel(kept);
     kept.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
     assertEquals(1, kept.editorsContext.getOpenedEditorsCount(FILE_ID, PROVIDER));
     assertEquals("a recorded provider is left as it is", 0, recorded(kept).size());
+    verify(keptChannel, never()).publish(any(), any(Object.class), any());
 
     // The provider is not available to the user: nothing is recorded
     editors.clearCache();
     DocumentService unavailable = documentServiceOf(null, false);
     CometdDocumentsService refused = recordingService(exoBayeux, unavailable, mock(IdentityRegistry.class), true);
+    ServerChannel refusedChannel = bayeuxChannel(refused);
     refused.new ChannelSubscriptionListener().registerEditor(johnSession, channel, "john", FILE_ID, PROVIDER, WORKSPACE);
     assertEquals("a provider unavailable to the user is not recorded", 0, recorded(refused).size());
+    verify(refusedChannel, never()).publish(any(), any(Object.class), any());
   }
 
   /**
@@ -883,6 +895,7 @@ public class CometdDocumentsServiceTest {
     when(channel.getSubscribers()).thenReturn(Set.of(johnSession));
     DocumentService documentService = documentServiceOf(null, true);
     CometdDocumentsService service = recordingService(exoBayeux, documentService, mock(IdentityRegistry.class), true);
+    bayeuxChannel(service);
     AtomicBoolean readUnderTheLock = new AtomicBoolean(true);
     when(documentService.getCurrentDocumentProvider(FILE_ID, WORKSPACE)).thenAnswer(invocation -> {
       readUnderTheLock.set(Thread.holdsLock(service.editorsLock("john-session")));
