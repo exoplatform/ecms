@@ -67,7 +67,10 @@ import tools.jackson.databind.json.JsonMapper;
 /**
  * Runs the unified search of files with the real query builder and reads the
  * query sent to the search engine: what a non-admin may find outside the space
- * drives and their own drive.
+ * drives and their own drive. The query's shape is checked with a strict
+ * parser; no search engine runs here, as no test harness of this module starts
+ * one, so how the clauses match on a real index is checked on a running
+ * platform.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TestFileSearchRestService {

@@ -86,10 +86,12 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
   }
 
   /**
-   * Builds the clauses matching a file whose permissions name the current user
-   * or one of their memberships: what an explicit share grants. Unlike the
-   * permission filter of every search, it has no clause for "any", which a
-   * file visible to any user carries without being shared with anyone.
+   * Builds the clauses matching a file whose indexed permissions, its ACL
+   * owner and every identity of its access entries, name the current user or
+   * one of their memberships: a file shared with the user or with one of their
+   * groups is one. Unlike the permission filter of every search, it has no
+   * clause for "any", which a file visible to any user carries without
+   * naming anyone.
    *
    * @return the clauses, separated by commas, for a bool should
    */

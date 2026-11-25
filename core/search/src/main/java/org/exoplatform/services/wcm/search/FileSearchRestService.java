@@ -187,11 +187,12 @@ public class FileSearchRestService implements ResourceContainer {
   }
   
   /**
-   * A non-admin searches the space drives and their own drive, plus the
-   * documents shared with them by name or with one of their groups, wherever
-   * these documents live: a shared document stays in its owner's drive. A
-   * document that "any" alone lets them read, in another user's drive, stays
-   * out of their search.
+   * A non-admin searches the space drives and their own drive, plus, wherever
+   * they live, the documents whose indexed permissions (the ACL owner and every
+   * identity of the access entries) name them or one of their memberships: a
+   * document shared with them or with one of their groups stays in its owner's
+   * drive. A document that "any" alone lets them read, in another user's
+   * drive, stays out of their search.
    */
   private ElasticSearchFilter getNonAdminScopeFilter() throws Exception {
     String drivesFilter = getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())).getValue();
