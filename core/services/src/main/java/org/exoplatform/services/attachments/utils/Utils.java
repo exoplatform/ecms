@@ -132,6 +132,27 @@ public class Utils {
     return (Node) nodeFinder.getItem(session, path, true);
   }
 
+  /**
+   * Gives a node the visibility of the folder it sits in: hidden in a hidden
+   * folder, visible in a visible one. An attachment uploaded to a hidden folder
+   * takes its hidden mixin (FileUploadHandler#saveAsNTFile), and a JCR move
+   * keeps it, so a node moved out of that folder is aligned with its new one.
+   * The caller saves the session.
+   *
+   * @param node the node to align
+   * @param folder the folder the node sits in
+   * @throws RepositoryException when the node's mixins can't be read or changed
+   */
+  public static void applyFolderVisibility(Node node, Node folder) throws RepositoryException {
+    boolean folderHidden = folder.isNodeType(EXO_HIDDENABLE);
+    boolean nodeHidden = node.isNodeType(EXO_HIDDENABLE);
+    if (folderHidden && !nodeHidden && node.canAddMixin(EXO_HIDDENABLE)) {
+      node.addMixin(EXO_HIDDENABLE);
+    } else if (!folderHidden && nodeHidden) {
+      node.removeMixin(EXO_HIDDENABLE);
+    }
+  }
+
   // FIXME refactor usage of this method to make the session provider explicitly
   // provided by providing explicitely the username rather than attempting to
   // guess it from ThreadLocals
