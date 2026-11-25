@@ -228,10 +228,12 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   }
 
   /**
-   * Sets the preferred editor for specific user/document.
+   * Sets the preferred editor of the signed-in user for the document. The
+   * {@code userId} form parameter is accepted for backward compatibility but
+   * ignored: the preference is always saved for the signed-in user.
    *
    * @param fileId the file id
-   * @param userId the user id
+   * @param userId ignored, kept for backward compatibility
    * @param provider the provider
    * @param workspace the workspace
    * @return the response
@@ -243,17 +245,27 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                   @FormParam("userId") String userId,
                                   @FormParam("provider") String provider,
                                   @FormParam("workspace") String workspace) {
+    ConversationState state = ConversationState.getCurrent();
+    String currentUserId = state == null || state.getIdentity() == null ? null : state.getIdentity().getUserId();
+    if (currentUserId == null || currentUserId.isEmpty()) {
+      return Response.status(Status.UNAUTHORIZED).build();
+    }
     try {
-      documentService.savePreferredEditor(userId, provider, fileId, workspace);
+      documentService.savePreferredEditor(currentUserId, provider, fileId, workspace);
+    } catch (ItemNotFoundException | NoSuchWorkspaceException e) {
+      LOG.debug("Document {} not found to set preferred editor for user {}", fileId, currentUserId, e);
+      return Response.status(Status.NOT_FOUND)
+                     .entity(new ErrorMessage("Document not found.", CANNOT_SAVE_PREFERRED_EDITOR))
+                     .build();
     } catch (AccessDeniedException e) {
-      LOG.error("Access denied to set preferred editor for user {} and node {}: {}", userId, fileId, e.getMessage());
-      return Response.status(Status.INTERNAL_SERVER_ERROR)
+      LOG.debug("Access denied to set preferred editor for user {} and node {}", currentUserId, fileId);
+      return Response.status(Status.FORBIDDEN)
                      .entity(new ErrorMessage("Access denied error.", CANNOT_SAVE_PREFERRED_EDITOR))
                      .build();
-    } catch (RepositoryException e) {
-      LOG.error("Cannot set preferred editor for user {} and node {}: {}", userId, fileId, e.getMessage());
+    } catch (RepositoryException | IllegalStateException e) {
+      LOG.warn("Cannot set preferred editor for user {} and node {}", currentUserId, fileId, e);
       return Response.status(Status.INTERNAL_SERVER_ERROR)
-                     .entity(new ErrorMessage(e.getMessage(), CANNOT_SAVE_PREFERRED_EDITOR))
+                     .entity(new ErrorMessage("Cannot save the preferred editor.", CANNOT_SAVE_PREFERRED_EDITOR))
                      .build();
     }
     return Response.ok().build();

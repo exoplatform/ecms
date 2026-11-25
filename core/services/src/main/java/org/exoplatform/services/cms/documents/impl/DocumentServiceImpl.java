@@ -767,7 +767,13 @@ public class DocumentServiceImpl implements DocumentService {
    */
   @Override
   public void savePreferredEditor(String userId, String provider, String uuid, String workspace) throws RepositoryException {
-    Node targetNode = nodeByUUID(uuid, workspace);
+    Node targetNode;
+    try {
+      targetNode = nodeByUUID(uuid, workspace);
+    } catch (AccessDeniedException e) {
+      // A node the caller cannot read is reported as missing, so its existence is not disclosed
+      throw new ItemNotFoundException("Node " + uuid + " not found", e);
+    }
     invokeWithLockToken(targetNode, (node) -> {
       if (node.canAddMixin(EXO_DOCUMENT)) {
         node.addMixin(EXO_DOCUMENT);
