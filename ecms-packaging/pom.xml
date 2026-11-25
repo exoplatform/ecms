@@ -29,6 +29,10 @@
   <artifactId>ecms-packaging</artifactId>
   <packaging>pom</packaging>
   <name>eXo PLF:: ECMS - Addon Packaging</name>
+  <properties>
+    <!-- Generate and publish the CycloneDX SBOM of the deliverable zip -->
+    <sbom.skip>false</sbom.skip>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
