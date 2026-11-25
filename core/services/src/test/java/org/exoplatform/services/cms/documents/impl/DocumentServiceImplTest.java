@@ -360,4 +360,50 @@ public class DocumentServiceImplTest {
     verify(listenerService).broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, addedNode);
     verify(listenerService, never()).broadcast(eq(DocumentServiceImpl.CREATE_DOC_NEW_APP), any(), any());
   }
+
+  @Test
+  public void getDocumentsByQuerySkipsShortcutWithMissingTarget() throws Exception {
+    assertQuerySkipsDeadShortcut(new ItemNotFoundException("target is gone"));
+  }
+
+  @Test
+  public void getDocumentsByQuerySkipsShortcutWithUnreadableTarget() throws Exception {
+    assertQuerySkipsDeadShortcut(new AccessDeniedException("target is not readable"));
+  }
+
+  private void assertQuerySkipsDeadShortcut(Exception targetFailure) throws Exception {
+    WCM_CORE_UTILS.when(WCMCoreUtils::getUserSessionProvider).thenReturn(sessionProvider);
+    WCM_CORE_UTILS.when(WCMCoreUtils::getRepository).thenReturn(repository);
+    org.exoplatform.services.jcr.impl.core.query.QueryImpl query = mock(org.exoplatform.services.jcr.impl.core.query.QueryImpl.class);
+    javax.jcr.query.QueryManager queryManager = mock(javax.jcr.query.QueryManager.class);
+    Workspace workspace = mock(Workspace.class);
+    lenient().when(workspace.getName()).thenReturn("collaboration");
+    when(session.getWorkspace()).thenReturn(workspace);
+    when(workspace.getQueryManager()).thenReturn(queryManager);
+    when(queryManager.createQuery("select * from nt:base", javax.jcr.query.Query.SQL)).thenReturn(query);
+    javax.jcr.query.QueryResult queryResult = mock(javax.jcr.query.QueryResult.class);
+    when(query.execute()).thenReturn(queryResult);
+    when(repositoryEntry.getName()).thenReturn("repository");
+
+    Node deadShortcut = mock(Node.class);
+    when(deadShortcut.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(true);
+    when(linkManager.getTarget(deadShortcut)).thenThrow(targetFailure);
+    Node document = mock(Node.class);
+    lenient().when(document.getSession()).thenReturn(session);
+    lenient().when(document.getPath()).thenReturn("/Documents/doc.txt");
+    lenient().when(document.getName()).thenReturn("doc.txt");
+    when(document.getUUID()).thenReturn("docUuid");
+    UTILS.when(() -> Utils.getDate(any(Node.class))).thenReturn(java.util.Calendar.getInstance());
+    NodeIterator nodes = mock(NodeIterator.class);
+    when(nodes.hasNext()).thenReturn(true, true, false);
+    when(nodes.nextNode()).thenReturn(deadShortcut, document);
+    when(queryResult.getNodes()).thenReturn(nodes);
+
+    List<org.exoplatform.services.cms.documents.model.Document> documents =
+                                                                            documentService.getDocumentsByQuery("select * from nt:base",
+                                                                                                                10);
+
+    assertEquals(1, documents.size());
+    assertEquals("docUuid", documents.get(0).getId());
+  }
 }

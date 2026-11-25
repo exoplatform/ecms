@@ -30,11 +30,18 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.NamespaceException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.Workspace;
+import javax.jcr.nodetype.NodeType;
 import javax.ws.rs.core.Response;
+import javax.xml.transform.dom.DOMSource;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -310,5 +317,69 @@ public class ManageDocumentServiceTest {
       }
     }
     assertEquals(9, refused);
+  }
+
+  @Test
+  public void buildXMLResponseForChildrenSkipsShortcutWithMissingTarget() throws Exception {
+    assertDeadShortcutIsSkipped(new ItemNotFoundException("target is gone"));
+  }
+
+  @Test
+  public void buildXMLResponseForChildrenSkipsShortcutWithUnreadableTarget() throws Exception {
+    assertDeadShortcutIsSkipped(new AccessDeniedException("target is not readable"));
+  }
+
+  private void assertDeadShortcutIsSkipped(Exception targetFailure) throws Exception {
+    Workspace workspace = mock(Workspace.class);
+    lenient().when(workspace.getName()).thenReturn("collaboration");
+    lenient().when(session.getWorkspace()).thenReturn(workspace);
+    Node root = mockFolder("/root", "root");
+    Node deadShortcut = mockFolder("/root/dead", "dead");
+    when(deadShortcut.isNodeType(NodetypeConstant.EXO_SYMLINK)).thenReturn(true);
+    when(deadShortcut.hasProperty("exo:uuid")).thenReturn(true);
+    when(deadShortcut.hasProperty("exo:workspace")).thenReturn(true);
+    when(linkManager.getTarget(deadShortcut)).thenThrow(targetFailure);
+    Node folder = mockFolder("/root/folder", "folder");
+    // the root's createFolderElement reads the children too: each call gets its own iterator
+    when(root.getNodes()).thenAnswer(invocation -> iteratorOf(deadShortcut, folder));
+    lenient().when(root.hasNode("folder")).thenReturn(true);
+    lenient().when(root.getNode("folder")).thenReturn(folder);
+    when(session.getItem(anyString())).thenReturn(root);
+    UTILS.when(() -> Utils.getTitle(any(Node.class))).thenReturn("title");
+
+    Response response = invokeBuildXMLResponseForChildren(root);
+
+    assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    org.w3c.dom.Document xml = (org.w3c.dom.Document) ((DOMSource) response.getEntity()).getNode();
+    org.w3c.dom.NodeList folders = xml.getElementsByTagName("Folders").item(0).getChildNodes();
+    assertEquals(1, folders.getLength());
+    assertEquals("folder", ((org.w3c.dom.Element) folders.item(0)).getAttribute("name"));
+  }
+
+  private NodeIterator iteratorOf(Node... nodes) {
+    java.util.Iterator<Node> it = Arrays.asList(nodes).iterator();
+    NodeIterator nodeIterator = mock(NodeIterator.class);
+    lenient().when(nodeIterator.hasNext()).thenAnswer(invocation -> it.hasNext());
+    lenient().when(nodeIterator.nextNode()).thenAnswer(invocation -> it.next());
+    return nodeIterator;
+  }
+
+  private Node mockFolder(String path, String name) throws Exception {
+    Node node = mock(Node.class);
+    NodeType nodeType = mock(NodeType.class);
+    lenient().when(nodeType.getName()).thenReturn(NodetypeConstant.NT_UNSTRUCTURED);
+    lenient().when(node.getPrimaryNodeType()).thenReturn(nodeType);
+    lenient().when(node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)).thenReturn(true);
+    lenient().when(node.getPath()).thenReturn(path);
+    lenient().when(node.getName()).thenReturn(name);
+    lenient().when(node.getSession()).thenReturn(session);
+    NodeIterator noChildren = mock(NodeIterator.class);
+    lenient().when(noChildren.hasNext()).thenReturn(false);
+    lenient().when(node.getNodes()).thenReturn(noChildren);
+    return node;
+  }
+
+  private Response invokeBuildXMLResponseForChildren(Node node) throws Exception {
+    return manageDocumentService.buildXMLResponseForChildren(node, "drive", "", false);
   }
 }
