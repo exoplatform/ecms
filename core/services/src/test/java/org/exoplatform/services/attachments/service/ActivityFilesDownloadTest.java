@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -76,19 +77,23 @@ public class ActivityFilesDownloadTest {
     assertTrue("Empty input stream", zis.available() > 0);
 
     File tempfile = File.createTempFile("test", "zip");
-    try (FileOutputStream fileOutputStream = new FileOutputStream(tempfile)) {
-      IOUtils.copy(zis, fileOutputStream);
-    }
-    IOUtils.closeQuietly(zis);
-
-    try (ZipFile zipFile = new ZipFile(tempfile)) {
-      assertEquals(2, zipFile.size());
-
-      Enumeration<? extends ZipEntry> entries = zipFile.entries();
-      while (entries.hasMoreElements()) {
-        ZipEntry zipEntry = (ZipEntry) entries.nextElement();
-        assertTrue(zipEntry.getName().equals("test1.txt") || zipEntry.getName().equals("test3.txt"));
+    try {
+      try (FileOutputStream fileOutputStream = new FileOutputStream(tempfile)) {
+        IOUtils.copy(zis, fileOutputStream);
       }
+      IOUtils.closeQuietly(zis);
+
+      try (ZipFile zipFile = new ZipFile(tempfile)) {
+        assertEquals(2, zipFile.size());
+
+        Enumeration<? extends ZipEntry> entries = zipFile.entries();
+        while (entries.hasMoreElements()) {
+          ZipEntry zipEntry = (ZipEntry) entries.nextElement();
+          assertTrue(zipEntry.getName().equals("test1.txt") || zipEntry.getName().equals("test3.txt"));
+        }
+      }
+    } finally {
+      Files.deleteIfExists(tempfile.toPath());
     }
   }
 }
