@@ -35,7 +35,8 @@ import org.exoplatform.services.wcm.search.connector.TestFileSearchServiceConnec
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TestFileSearchServiceConnector.class
+        TestFileSearchServiceConnector.class,
+        TestFileSearchRestService.class
 })
 @ConfigTestCase(BaseSearchTest.class)
 public class BaseSearchTestSuite extends BaseExoContainerTestSuite {

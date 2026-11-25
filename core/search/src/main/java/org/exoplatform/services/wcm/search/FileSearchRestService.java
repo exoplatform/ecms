@@ -114,7 +114,7 @@ public class FileSearchRestService implements ResourceContainer {
     recentFilters.add(getFileTypesFilter(myWork));
     UserACL userACL = PortalContainer.getInstance().getComponentInstanceOfType(UserACL.class);
     if (!userACL.isSuperUser(ConversationState.getCurrent().getIdentity()) && !userACL.isUserInGroup(ConversationState.getCurrent().getIdentity(), userACL.getAdminGroups())) {
-      recentFilters.add(getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())));
+      recentFilters.add(getNonAdminScopeFilter());
     }
     if (StringUtils.isNotBlank(query)) {
       query = query.replace("#", " ")
@@ -186,6 +186,20 @@ public class FileSearchRestService implements ResourceContainer {
     return getFileTypesFilter(false);
   }
   
+  /**
+   * A non-admin searches the space drives and their own drive, plus the
+   * documents shared with them by name or with one of their groups, wherever
+   * these documents live: a shared document stays in its owner's drive. A
+   * document that "any" alone lets them read, in another user's drive, stays
+   * out of their search.
+   */
+  private ElasticSearchFilter getNonAdminScopeFilter() throws Exception {
+    String drivesFilter = getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())).getValue();
+    return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM,
+                                   "path",
+                                   drivesFilter + "," + fileSearchServiceConnector.getExplicitPermissionFilter());
+  }
+
   private ElasticSearchFilter getPathsFilter(List<String> paths) {
     StringBuilder pathsFilter = new StringBuilder();
     int count = 0;
