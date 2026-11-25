@@ -10,6 +10,15 @@
   <name>eXo PLF:: WCM Search Service</name>
   <properties>
     <exo.test.coverage.ratio>0.31</exo.test.coverage.ratio>
+    <!--
+      The integration tests (*IT) hand the file index mapping to a real
+      Elasticsearch and run only under the run-its profile below:
+      mvn verify -Prun-its (add -Des.url=... to use a running engine instead
+      of a container). A plain or CI build does not run them.
+    -->
+    <org.testcontainers.version>1.21.4</org.testcontainers.version>
+    <es.testcontainer.image>docker.elastic.co/elasticsearch/elasticsearch:9.3.4</es.testcontainer.image>
+    <es.url />
   </properties>
   <dependencies>
     <dependency>
@@ -123,6 +132,12 @@
       <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>elasticsearch</artifactId>
+      <version>${org.testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement>
@@ -139,4 +154,34 @@
       </plugins>
     </pluginManagement>
   </build>
+  <profiles>
+    <profile>
+      <id>run-its</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/*IT.java</include>
+              </includes>
+              <systemPropertyVariables>
+                <es.testcontainer.image>${es.testcontainer.image}</es.testcontainer.image>
+                <es.url>${es.url}</es.url>
+              </systemPropertyVariables>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
