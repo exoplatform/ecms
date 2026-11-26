@@ -72,12 +72,13 @@ public interface AttachmentService {
    * @param entityType entity type
    * @param attachmentId attachment jcr uuid to be linked
    * @return the linked {@link Attachment}
-   * @throws IllegalAccessException when user is not allowed to access the entity
+   * @throws IllegalAccessException when user is not allowed to edit the entity
+   * @throws ObjectNotFoundException when the attachment does not exist or the user can't read it
    */
   Attachment linkAttachmentToEntity(long userIdentityId,
                                     long entityId,
                                     String entityType,
-                                    String attachmentId) throws IllegalAccessException;
+                                    String attachmentId) throws IllegalAccessException, ObjectNotFoundException;
 
   /**
    * update an existing list of attachment ids linked to a given entity.
