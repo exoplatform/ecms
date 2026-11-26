@@ -871,22 +871,18 @@ public class DocumentServiceImpl implements DocumentService {
       } else {
         String userId = node.getProperty(EXO_LAST_MODIFIER_PROP).getString();
         WCMCoreUtils.invokeUserSession(userId, (sessionProvider) -> {
-          try {
-            Node tagetNode = extendedSessionSession.getNodeByIdentifier(uuid);
-            if (tagetNode.isNodeType(EXO_SYMLINK)) {
-              tagetNode = linkManager.getTarget(tagetNode);
-            }
-            invokeWithLockToken(tagetNode, (document) -> {
-              if (document.canAddMixin(EXO_DOCUMENT)) {
-                document.addMixin(EXO_DOCUMENT);
-              }
-              document.setProperty(EXO_CURRENT_PROVIDER, (String) null);
-              document.setProperty(EXO_EDITORS_RUNTIME_ID, editorsRuntimeId);
-              document.save();
-            });
-          } finally {
-            sessionProvider.close();
+          Node tagetNode = extendedSessionSession.getNodeByIdentifier(uuid);
+          if (tagetNode.isNodeType(EXO_SYMLINK)) {
+            tagetNode = linkManager.getTarget(tagetNode);
           }
+          invokeWithLockToken(tagetNode, (document) -> {
+            if (document.canAddMixin(EXO_DOCUMENT)) {
+              document.addMixin(EXO_DOCUMENT);
+            }
+            document.setProperty(EXO_CURRENT_PROVIDER, (String) null);
+            document.setProperty(EXO_EDITORS_RUNTIME_ID, editorsRuntimeId);
+            document.save();
+          });
         });
         return null;
       }

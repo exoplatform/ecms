@@ -52,6 +52,7 @@ import org.exoplatform.services.rest.TestDocumentsAppRedirectService;
 import org.exoplatform.services.wcm.core.TestWCMConfigurationService;
 import org.exoplatform.services.wcm.core.TestWCMService;
 import org.exoplatform.services.wcm.friendly.TestFriendlyService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
 
 /**
  * Created by The eXo Platform SAS
@@ -87,7 +88,8 @@ import org.exoplatform.services.wcm.friendly.TestFriendlyService;
   AttachmentStorageImplTest.class,
   NoteAttachmentUpdateListenerTest.class,
   UpdateContentPermissionsListenerTest.class,
-  DocumentServiceImplTest.class
+  DocumentServiceImplTest.class,
+  WCMCoreUtilsTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {

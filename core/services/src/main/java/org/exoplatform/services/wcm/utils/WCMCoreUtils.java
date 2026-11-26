@@ -444,18 +444,22 @@ public class WCMCoreUtils {
     // Remember current conversation state
     ConversationState currentConvoState = ConversationState.getCurrent();
     SessionProvider currentContextProvider = sessionProviderService.getSessionProvider(null);
+    SessionProvider userProvider = null;
     try {
       ConversationState state = new ConversationState(userIdentity);
       // Keep subject as attribute in ConversationState.
       state.setAttribute(ConversationState.SUBJECT, userIdentity.getSubject());
       ConversationState.setCurrent(state);
-      SessionProvider userProvider = new SessionProvider(state);
+      userProvider = new SessionProvider(state);
       sessionProviderService.setSessionProvider(null, userProvider);
       handler.accept(userProvider);
     } finally {
       // Restore previous conversation state
       ConversationState.setCurrent(currentConvoState);
       sessionProviderService.setSessionProvider(null, currentContextProvider);
+      if (userProvider != null) {
+        userProvider.close();
+      }
     }
   } 
 }
