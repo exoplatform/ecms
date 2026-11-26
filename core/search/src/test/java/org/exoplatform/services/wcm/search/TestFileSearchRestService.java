@@ -50,6 +50,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -77,7 +78,9 @@ public class TestFileSearchRestService {
 
   private static final String           ES_RESPONSE_EMPTY = "{ \"hits\": { \"hits\": [] } }";
 
-  private static final String           PRIVATE_PATH      = "/Users/b___/bo___/bob/Private";
+  private static final String           USERS_PATH        = "/Users";
+
+  private static final String           PRIVATE_PATH      = USERS_PATH + "/b___/bo___/bob/Private";
 
   @Mock
   private ElasticSearchingClient        client;
@@ -130,7 +133,7 @@ public class TestFileSearchRestService {
   }
 
   @Test
-  public void aNonAdminSearchesTheirDrivesAndWhatIsSharedWithThemByNameOrGroupButNotWhatAnyUserMayRead() throws Exception {
+  public void aNonAdminSearchesTheirDrivesAndWhatOtherUsersShareWithThemFromTheirPersonalDrivesButNotWhatAnyUserMayRead() throws Exception {
     when(userACL.isSuperUser(bob)).thenReturn(false);
     when(userACL.getAdminGroups()).thenReturn("/platform/administrators");
     when(userACL.isUserInGroup(bob, "/platform/administrators")).thenReturn(false);
@@ -139,15 +142,20 @@ public class TestFileSearchRestService {
     fileSearchRestService.searchRecentDocuments("hello", false, null, null, 10, false, null, null);
 
     JsonNode scope = getScopeClauses(getSentQuery());
-    assertEquals(4, scope.size());
+    assertEquals(3, scope.size());
     assertEquals("/Groups/spaces.*", getValue(scope, 0, "regexp", "path"));
     assertEquals(PRIVATE_PATH + ".*", getValue(scope, 1, "regexp", "path"));
-    assertEquals("bob", getValue(scope, 2, "term", "permissions"));
+    JsonNode sharedFromPersonalDrives = scope.get(2).path("bool").path("must");
+    assertEquals(2, sharedFromPersonalDrives.size());
+    assertEquals("A group drive outside the spaces stays out: the shares are those of the personal drives",
+                 USERS_PATH + "/.*",
+                 getValue(sharedFromPersonalDrives, 0, "regexp", "path"));
+    JsonNode namingBob = sharedFromPersonalDrives.get(1).path("bool").path("should");
+    assertEquals(2, namingBob.size());
+    assertEquals("bob", getValue(namingBob, 0, "term", "permissions"));
     assertEquals(Set.of("member:/spaces/marketing", "*:/spaces/marketing"),
-                 new HashSet<>(Arrays.asList(getValue(scope, 3, "regexp", "permissions").split("\\|"))));
-    for (JsonNode clause : scope) {
-      assertFalse("The scope never lets 'any' in: " + clause, clause.toString().contains("\"any\""));
-    }
+                 new HashSet<>(Arrays.asList(getValue(namingBob, 1, "regexp", "permissions").split("\\|"))));
+    assertFalse("The scope never lets 'any' in: " + scope, scope.toString().contains("\"any\""));
   }
 
   @Test
@@ -178,6 +186,7 @@ public class TestFileSearchRestService {
     when(nodeHierarchyCreator.getUserNode(any(SessionProvider.class), eq("bob"))).thenReturn(userNode);
     when(userNode.getNode("Private")).thenReturn(privateNode);
     when(privateNode.getPath()).thenReturn(PRIVATE_PATH);
+    when(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH)).thenReturn(USERS_PATH);
   }
 
   /**
@@ -190,6 +199,7 @@ public class TestFileSearchRestService {
     lenient().when(nodeHierarchyCreator.getUserNode(any(SessionProvider.class), eq("bob"))).thenReturn(userNode);
     lenient().when(userNode.getNode("Private")).thenReturn(privateNode);
     lenient().when(privateNode.getPath()).thenReturn(PRIVATE_PATH);
+    lenient().when(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH)).thenReturn(USERS_PATH);
     lenient().when(userACL.getAdminGroups()).thenReturn("/platform/administrators");
   }
 

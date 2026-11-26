@@ -29,6 +29,7 @@ import org.exoplatform.ecms.legacy.search.data.SearchResult;
 import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilter;
 import org.exoplatform.ecms.legacy.search.es.ElasticSearchFilterType;
 import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -187,18 +188,24 @@ public class FileSearchRestService implements ResourceContainer {
   }
   
   /**
-   * A non-admin searches the space drives and their own drive, plus, wherever
-   * they live, the documents whose indexed permissions (the ACL owner and every
-   * identity of the access entries) name them or one of their memberships: a
-   * document shared with them or with one of their groups stays in its owner's
-   * drive. A document that "any" alone lets them read, in another user's
-   * drive, stays out of their search.
+   * A non-admin searches the space drives and their own drive, plus the
+   * documents of the other users' personal drives whose indexed permissions
+   * (the ACL owner and every identity of the access entries) name them or one
+   * of their memberships: a document shared with them, or with one of their
+   * spaces, stays in its owner's drive. A document that "any" alone lets them
+   * read, in another user's drive, stays out of their search, and so do the
+   * documents of a group drive outside the spaces.
    */
   private ElasticSearchFilter getNonAdminScopeFilter() throws Exception {
     String drivesFilter = getPathsFilter(Arrays.asList(Utils.SPACES_NODE_PATH, getUserPrivateNode().getPath())).getValue();
+    String personalDrivesPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/.*";
+    String sharedFromPersonalDrivesFilter = "{\n \"bool\" : { \"must\" : [\n" +
+        "{\n \"regexp\" : { \"path\" : \"" + personalDrivesPath + "\" }\n },\n" +
+        "{\n \"bool\" : { \"should\" : [\n" + fileSearchServiceConnector.getExplicitPermissionFilter() + "\n] }\n }\n" +
+        "] }\n }";
     return new ElasticSearchFilter(ElasticSearchFilterType.FILTER_CUSTOM,
                                    "path",
-                                   drivesFilter + "," + fileSearchServiceConnector.getExplicitPermissionFilter());
+                                   drivesFilter + "," + sharedFromPersonalDrivesFilter);
   }
 
   private ElasticSearchFilter getPathsFilter(List<String> paths) {
