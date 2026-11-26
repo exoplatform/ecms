@@ -23,11 +23,14 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -67,6 +70,9 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
 import org.exoplatform.services.jcr.webdav.util.InitParamsDefaults;
 import org.exoplatform.services.jcr.webdav.util.TextUtil;
@@ -793,7 +799,13 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
-    return super.uncheckout(repoName, repoPath, lockTokenHeader, ifHeader);
+    // The document keeps its access list
+    DocumentAccess access = readAccess(workspaceName(repoPath), path(repoPath));
+    Response response = super.uncheckout(repoName, repoPath, lockTokenHeader, ifHeader);
+    if (access != null && response.getStatus() == HTTPStatus.OK) {
+      keepAccess(access);
+    }
+    return response;
   }
 
   @VERSIONCONTROL
@@ -1098,6 +1110,185 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
     }    
     return super.delete(repoName, repoPath, lockTokenHeader, ifHeader);
+  }
+
+  private DocumentAccess readAccess(String workspace, String jcrPath) {
+    Session systemSession = null;
+    try {
+      systemSession = repositoryService.getCurrentRepository().getSystemSession(workspace);
+      Node node = systemSession.getRootNode().getNode(TextUtil.relativizePath(jcrPath));
+      if (!node.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+        return null; // the cancel answers it
+      }
+      Map<String, Map<String, String[]>> descendants = new LinkedHashMap<>();
+      collectDescendantPermissions(node, descendants);
+      return new DocumentAccess(workspace,
+                                node.getUUID(),
+                                node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE) ? toPermissions(node) : null,
+                                descendants);
+    } catch (PathNotFoundException e) {
+      return null; // the cancel answers it
+    } catch (RepositoryException e) {
+      throw new IllegalStateException("Cannot read the access list of " + workspace + jcrPath, e);
+    } finally {
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+    }
+  }
+
+  /**
+   * Collects, by node id, the own access list of every node below the document
+   * that the cancel brings back with it, null for a node that has none, parents
+   * before their children: the walk goes down through the non-versionable
+   * nodes only, since a versionable one keeps its own history.
+   */
+  private void collectDescendantPermissions(Node node, Map<String, Map<String, String[]>> descendants) throws RepositoryException {
+    NodeIterator children = node.getNodes();
+    while (children.hasNext()) {
+      Node child = children.nextNode();
+      if (child.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+        continue;
+      }
+      descendants.put(((ExtendedNode) child).getIdentifier(),
+                      child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE) ? toPermissions(child) : null);
+      collectDescendantPermissions(child, descendants);
+    }
+  }
+
+  private Map<String, String[]> toPermissions(Node node) throws RepositoryException {
+    Map<String, List<String>> permissions = new LinkedHashMap<>();
+    for (AccessControlEntry entry : ((ExtendedNode) node).getACL().getPermissionEntries()) {
+      permissions.computeIfAbsent(entry.getIdentity(), identity -> new ArrayList<>()).add(entry.getPermission());
+    }
+    Map<String, String[]> permissionsByIdentity = new LinkedHashMap<>();
+    permissions.forEach((identity, types) -> permissionsByIdentity.put(identity, types.toArray(new String[0])));
+    return permissionsByIdentity;
+  }
+
+  /**
+   * Gives the document back its access list after the cancel, through a system
+   * session. The document stays checked in, and a new version is created only
+   * when the private-access mixin has to be added or removed on the document
+   * or on a node below it, which a checked-in node refuses.
+   * <p>
+   * The lists are read before the cancel and written back after it, so a
+   * share changed on the document or below it while the cancel runs is
+   * overwritten by the list read earlier: the put-back is not atomic, and the
+   * window grows with the size of the folder. It is accepted because the cancel
+   * of a checkout is a rare, short action, and the lists are always put back
+   * as they were just before it, never as the version holds them. When a write
+   * fails, the document is checked in again, and the lists below it that were
+   * not put back yet keep the ones the cancel restored.
+   */
+  private void keepAccess(DocumentAccess access) {
+    Session systemSession = null;
+    Node node = null;
+    boolean checkedOutHere = false;
+    try {
+      systemSession = repositoryService.getCurrentRepository().getSystemSession(access.workspace());
+      node = systemSession.getNodeByUUID(access.uuid());
+      // The private-access mixin may differ from the one read before
+      boolean hasOwnPermissions = node.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
+      // A checked-in document refuses a mixin change on itself or below it
+      boolean mixinChange = hasOwnPermissions != (access.ownPermissions() != null)
+                            || descendantsNeedMixinChange(systemSession, access);
+      if (mixinChange) {
+        node.checkout();
+        checkedOutHere = true;
+      }
+      if (access.ownPermissions() != null) {
+        if (!hasOwnPermissions) {
+          node.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+        }
+        ((ExtendedNode) node).setPermissions(access.ownPermissions());
+      } else if (hasOwnPermissions) {
+        // Removing the mixin keeps the list in effect: its folder's is set first
+        ((ExtendedNode) node).setPermissions(toPermissions(node.getParent()));
+        systemSession.save();
+        node.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+      }
+      systemSession.save();
+      // After the document's own list: a node that reads its folder's list reads the one just put back
+      keepDescendantsAccess(systemSession, access);
+      if (mixinChange) {
+        node.checkin();
+      }
+    } catch (RepositoryException | RuntimeException e) {
+      if (checkedOutHere) {
+        checkInAgain(systemSession, node, e);
+      }
+      LOG.error("Checkout of document {} cancelled, but its access list could not be kept: check its access", access.uuid(), e);
+      throw e instanceof RuntimeException re ? re : new IllegalStateException(e);
+    } finally {
+      if (systemSession != null) {
+        systemSession.logout();
+      }
+    }
+  }
+
+  /**
+   * Checks the document in again after a failed put-back, dropping what was
+   * not saved. A failure to do so is attached to the original one, which stays
+   * the one rethrown.
+   */
+  private void checkInAgain(Session systemSession, Node node, Exception failure) {
+    try {
+      systemSession.refresh(false);
+      node.checkin();
+    } catch (RepositoryException | RuntimeException checkInFailure) {
+      failure.addSuppressed(checkInFailure);
+    }
+  }
+
+  private boolean descendantsNeedMixinChange(Session systemSession, DocumentAccess access) throws RepositoryException {
+    for (String descendantId : access.descendantsPermissions().keySet()) {
+      try {
+        boolean hasOwnList = ((ExtendedSession) systemSession).getNodeByIdentifier(descendantId)
+                                                              .isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE);
+        if (hasOwnList != (access.descendantsPermissions().get(descendantId) != null)) {
+          return true;
+        }
+      } catch (ItemNotFoundException e) {
+        // the cancel did not bring this node back
+      }
+    }
+    return false;
+  }
+
+  private void keepDescendantsAccess(Session systemSession, DocumentAccess access) throws RepositoryException {
+    // The lists are put back first and saved once: a node that reads its
+    // folder's list only sees a list changed in this session after a save
+    for (Map.Entry<String, Map<String, String[]>> descendant : access.descendantsPermissions().entrySet()) {
+      Node child = findNode(systemSession, descendant.getKey());
+      if (child == null || descendant.getValue() == null) {
+        continue; // the cancel did not bring this node back, or it has no list to put back
+      }
+      if (!child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+        child.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+      }
+      ((ExtendedNode) child).setPermissions(descendant.getValue());
+    }
+    systemSession.save();
+    // Then the lists that are gone are removed, parents first, each removal saved
+    for (Map.Entry<String, Map<String, String[]>> descendant : access.descendantsPermissions().entrySet()) {
+      Node child = findNode(systemSession, descendant.getKey());
+      if (child != null && descendant.getValue() == null && child.isNodeType(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+        // Removing the mixin keeps the list in effect: its folder's is set first
+        ((ExtendedNode) child).setPermissions(toPermissions(child.getParent()));
+        systemSession.save();
+        child.removeMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+        systemSession.save();
+      }
+    }
+  }
+
+  private Node findNode(Session systemSession, String nodeId) throws RepositoryException {
+    try {
+      return ((ExtendedSession) systemSession).getNodeByIdentifier(nodeId);
+    } catch (ItemNotFoundException e) {
+      return null;
+    }
   }
 
   private Response denyAnonymousAccessIfNeeded() {
