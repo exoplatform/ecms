@@ -928,19 +928,15 @@ public class CometdDocumentsService implements Startable {
     AtomicBoolean canEdit = new AtomicBoolean();
     try {
       WCMCoreUtils.invokeUserSession(userId, sessionProvider -> {
-        try {
-          ManageableRepository repository = WCMCoreUtils.getRepository();
-          Node node = sessionProvider.getSession(workspace, repository).getNodeByUUID(fileId);
-          if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
-            String targetWorkspace = node.getProperty(NodetypeConstant.EXO_WORKSPACE).getString();
-            String targetUuid = node.getProperty(NodetypeConstant.EXO_UUID).getString();
-            node = sessionProvider.getSession(targetWorkspace, repository).getNodeByUUID(targetUuid);
-          }
-          ((ExtendedNode) node).checkPermission(PermissionType.SET_PROPERTY);
-          canEdit.set(true);
-        } finally {
-          sessionProvider.close();
+        ManageableRepository repository = WCMCoreUtils.getRepository();
+        Node node = sessionProvider.getSession(workspace, repository).getNodeByUUID(fileId);
+        if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+          String targetWorkspace = node.getProperty(NodetypeConstant.EXO_WORKSPACE).getString();
+          String targetUuid = node.getProperty(NodetypeConstant.EXO_UUID).getString();
+          node = sessionProvider.getSession(targetWorkspace, repository).getNodeByUUID(targetUuid);
         }
+        ((ExtendedNode) node).checkPermission(PermissionType.SET_PROPERTY);
+        canEdit.set(true);
       });
     } catch (AccessControlException | AccessDeniedException | ItemNotFoundException e) {
       LOG.debug("User {} may not edit document {}", userId, fileId, e);

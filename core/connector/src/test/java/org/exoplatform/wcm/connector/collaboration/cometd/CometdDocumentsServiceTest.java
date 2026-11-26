@@ -34,7 +34,6 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.timeout;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -814,7 +813,8 @@ public class CometdDocumentsServiceTest {
       when(targetSession.getNodeByUUID("target")).thenThrow(new AccessDeniedException());
       assertFalse("a user who may not read the target may not edit it", service.canEditDocument("john", FILE_ID, WORKSPACE));
     }
-    verify(sessionProvider, times(3)).close();
+    // invokeUserSession closes the provider it creates
+    verify(sessionProvider, never()).close();
   }
 
   @Test
