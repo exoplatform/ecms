@@ -27,6 +27,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -50,6 +51,8 @@ import org.exoplatform.services.attachments.model.Attachment;
 import org.exoplatform.services.attachments.storage.AttachmentStorage;
 import org.exoplatform.services.attachments.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -126,15 +129,16 @@ public class UpdateContentPermissionsListenerTest {
   public void testUpdateAttachmentsAndContentImagesPermissions() throws Exception {
     Space space = new Space();
     space.setGroupId("/spaces/test");
-    ExtendedNode attachmentNode = mock(ExtendedNode.class);
+    ExtendedNode attachmentNode = nodeWithAccessList();
     when(attachmentNode.getPath()).thenReturn("/Groups/spaces/test/Documents/attachment");
     when(systemSession.getNodeByUUID("123")).thenReturn(attachmentNode);
-    ExtendedNode uuidImageNode = mock(ExtendedNode.class);
+    ExtendedNode uuidImageNode = nodeWithAccessList();
     when(uuidImageNode.getPath()).thenReturn("/Groups/spaces/test/Documents/uuidImage");
     when(systemSession.getNodeByUUID("123456")).thenReturn(uuidImageNode);
-    ExtendedNode pathImageNode = mock(ExtendedNode.class);
+    ExtendedNode pathImageNode = nodeWithAccessList();
     when(pathImageNode.getPath()).thenReturn("/Groups/spaces/test/testimage");
-    when(pathImageNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)).thenReturn(true);
+    // a node accepts the mixin once, as a real one does
+    when(pathImageNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)).thenReturn(true, false);
     when(systemSession.getItem("/Groups/spaces/test/testimage")).thenReturn(pathImageNode);
     when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_PAGE_VERSIONS")).thenReturn(List.of(attachment("123")));
 
@@ -158,6 +162,46 @@ public class UpdateContentPermissionsListenerTest {
       verify(node, times(2)).save();
     }
     verify(pathImageNode).addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
+  }
+
+  @Test
+  public void testKeepAllUsersPermissionWhenAudienceIsMissing() throws Exception {
+    Space space = new Space();
+    space.setGroupId("/spaces/test");
+    ExtendedNode firstNode = nodeWithAccessList();
+    when(firstNode.getPath()).thenReturn("/Groups/spaces/test/Documents/first");
+    when(systemSession.getNodeByUUID("123")).thenReturn(firstNode);
+    ExtendedNode secondNode = nodeWithAccessList();
+    when(secondNode.getPath()).thenReturn("/Groups/spaces/test/Documents/second");
+    when(systemSession.getNodeByUUID("456")).thenReturn(secondNode);
+    when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_DRAFT_PAGES")).thenReturn(List.of(attachment("123"),
+                                                                                                attachment("456")));
+
+    listener.onEvent(new Event<>("content.update.permissions",
+                                 null,
+                                 Map.of("entityId", "1", "entityType", "WIKI_DRAFT_PAGES", "spaces", List.of(space))));
+
+    for (ExtendedNode node : List.of(firstNode, secondNode)) {
+      verify(node).setPermission("*:/spaces/test", new String[] { PermissionType.READ });
+      verify(node, never()).setPermission("any", new String[] { PermissionType.READ });
+      verify(node, never()).removePermission("any", PermissionType.READ);
+      verify(node).save();
+    }
+  }
+
+  @Test
+  public void testRemoveAnyPermissionWhenAudienceIsSpace() throws Exception {
+    ExtendedNode node = nodeWithAccessList(new AccessControlEntry("any", PermissionType.READ));
+    when(node.getPath()).thenReturn("/Groups/spaces/test/Documents/first");
+    when(systemSession.getNodeByUUID("123")).thenReturn(node);
+    when(attachmentStorage.getAttachmentsByEntity(1L, "WIKI_PAGE_VERSIONS")).thenReturn(List.of(attachment("123")));
+
+    listener.onEvent(new Event<>("content.update.permissions",
+                                 null,
+                                 Map.of("entityId", "1", "entityType", "WIKI_PAGE_VERSIONS", "audience", "space")));
+
+    verify(node).removePermission("any", PermissionType.READ);
+    verify(node, never()).setPermission("any", new String[] { PermissionType.READ });
   }
 
   @Test
@@ -255,5 +299,11 @@ public class UpdateContentPermissionsListenerTest {
     Attachment attachment = new Attachment();
     attachment.setId(id);
     return attachment;
+  }
+
+  private ExtendedNode nodeWithAccessList(AccessControlEntry... entries) throws Exception {
+    ExtendedNode node = mock(ExtendedNode.class);
+    when(node.getACL()).thenReturn(new AccessControlList("root", new ArrayList<>(List.of(entries))));
+    return node;
   }
 }
