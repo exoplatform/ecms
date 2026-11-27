@@ -1,5 +1,6 @@
 package org.exoplatform.wcm.connector.collaboration.cometd;
 
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -22,6 +24,9 @@ import java.util.stream.Collectors;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.inject.Inject;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.cometd.annotation.Param;
@@ -55,9 +60,14 @@ import org.exoplatform.services.cms.documents.DocumentService;
 import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNotFoundException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.Authenticator;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.ws.frameworks.json.impl.JsonException;
 import org.exoplatform.ws.frameworks.json.impl.JsonGeneratorImpl;
 
@@ -362,15 +372,15 @@ public class CometdDocumentsService implements Startable {
      */
     public void cancelClosedEditorTimer(String fileId, String workspace, String provider) {
       ClientInfo clientInfo = new ClientInfo(fileId, workspace, provider);
-      Timer timer = closedEditorTimers.get(clientInfo);
+      Timer timer = closedEditorTimers.remove(clientInfo);
       if (timer != null) {
         timer.cancel();
-        closedEditorTimers.remove(clientInfo);
       }
     }
 
     /**
-     * Sets the closed editor timer.
+     * Sets the closed editor timer, cancelling the one it replaces: the swap
+     * is atomic, so a document has one live timer, the one saved last.
      *
      * @param fileId the file id
      * @param workspace the workspace
@@ -379,7 +389,10 @@ public class CometdDocumentsService implements Startable {
      */
     public void saveClosedEditorTimer(String fileId, String workspace, String provider, Timer timer) {
       ClientInfo clientInfo = new ClientInfo(fileId, workspace, provider);
-      closedEditorTimers.put(clientInfo, timer);
+      Timer replaced = closedEditorTimers.put(clientInfo, timer);
+      if (replaced != null && replaced != timer) {
+        replaced.cancel();
+      }
     }
   }
 
@@ -515,8 +528,25 @@ public class CometdDocumentsService implements Startable {
 
         if (provider != null) {
           String fileId = channelId.substring(channelId.lastIndexOf("/") + 1);
-          editorsContext.addClient(sessionId, fileId, provider, workspace);
-          editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+          // Only a user who owns the sending connection and may edit the
+          // document registers an editor for it; the edit right is read in
+          // the documents executor, as for the opened event
+          String userId = asString(message.get("exoId"));
+          if (userId != null && exoBayeux.isSubscribed(userId, sessionId)) {
+            eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+              @Override
+              void onContainerError(String error) {
+                LOG.error("An error has occured in container: {}", containerName);
+              }
+
+              @Override
+              void execute(ExoContainer exoContainer) {
+                registerEditor(remote, channel, userId, fileId, provider, workspace);
+              }
+            });
+          } else {
+            LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
+          }
         }
         if (LOG.isDebugEnabled()) {
           LOG.debug(">> Subscribed: provider: " + provider + ", session:" + sessionId + " (" + exoContainerName + "@"
@@ -536,19 +566,21 @@ public class CometdDocumentsService implements Startable {
         String exoClientId = null;
         String exoContainerName = null;
 
-        ClientInfo removedClient = editorsContext.removeClient(sessionId);
-        if (removedClient != null) {
-          String fileId = removedClient.getFileId();
-          String provider = removedClient.getProvider();
-          String workspace = removedClient.getWorkspace();
-          if (editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
-            try {
-              DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-              // Postpone reseting current editor provider for specified delay
-              Timer timer = scheduleProviderReset(fileId, workspace, provider, editorProvider.getEditingFinishedDelay());
-              editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
-            } catch (DocumentEditorProviderNotFoundException e) {
-              LOG.error("Cannot find {} editor provider. {}", provider, e.getMessage());
+        synchronized (editorsLock(sessionId)) {
+          ClientInfo removedClient = editorsContext.removeClient(sessionId);
+          if (removedClient != null) {
+            String fileId = removedClient.getFileId();
+            String provider = removedClient.getProvider();
+            String workspace = removedClient.getWorkspace();
+            if (editorsContext.getOpenedEditorsCount(fileId, provider) == 0) {
+              try {
+                DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+                // Postpone reseting current editor provider for specified delay
+                Timer timer = scheduleProviderReset(fileId, workspace, provider, editorProvider.getEditingFinishedDelay());
+                editorsContext.saveClosedEditorTimer(fileId, workspace, provider, timer);
+              } catch (DocumentEditorProviderNotFoundException e) {
+                LOG.error("Cannot find {} editor provider. {}", provider, e.getMessage());
+              }
             }
           }
         }
@@ -557,6 +589,77 @@ public class CometdDocumentsService implements Startable {
               + channelId);
         }
       }
+    }
+
+    /**
+     * Registers the editor of a session for a document when the user may edit
+     * the document and, read under the lock the unsubscription of the same
+     * connection holds too, the session is still subscribed to the document's
+     * channel for that user: the registration and the unsubscription of one
+     * connection exclude each other, so a session that left leaves no editor.
+     * The provider of a registered editor is recorded again, when none is,
+     * once that lock is released: the read and the write it takes are no part
+     * of what the lock excludes.
+     *
+     * @param session the session that subscribed
+     * @param channel the document's channel
+     * @param userId the id of the user who owns the session
+     * @param fileId the file id
+     * @param provider the editor provider
+     * @param workspace the workspace
+     */
+    void registerEditor(ServerSession session, ServerChannel channel, String userId, String fileId, String provider, String workspace) {
+      String sessionId = session.getId();
+      if (!canEditDocument(userId, fileId, workspace)) {
+        LOG.debug("Editor subscription of session {} on file {} ignored", sessionId, fileId);
+        return;
+      }
+      boolean registered;
+      synchronized (editorsLock(sessionId)) {
+        registered = isStillSubscribed(session, channel, userId);
+        if (registered) {
+          editorsContext.addClient(sessionId, fileId, provider, workspace);
+          editorsContext.cancelClosedEditorTimer(fileId, workspace, provider);
+        }
+      }
+      if (registered) {
+        recordProviderWhenNoneIsRecorded(userId, fileId, provider, workspace);
+      } else {
+        LOG.debug("Editor subscription of session {} on file {} ignored: the session is gone", sessionId, fileId);
+      }
+    }
+
+    /**
+     * Records the provider of a registered editor for its document when none
+     * is recorded and the provider is available to the user: a closing delay
+     * that ended between the open being accepted and this registration reset
+     * the recorded provider while this editor is open. The opened event is
+     * published with the provider, as for an accepted open, so the pages that
+     * received the reset's last editor closed event disable the other
+     * providers' buttons again. The read, the write and the event run under
+     * the document's lock, as the reset does, and the write is made in place:
+     * this editor being counted before, whichever of the two comes second sees
+     * the other's result.
+     */
+    private void recordProviderWhenNoneIsRecorded(String userId, String fileId, String provider, String workspace) {
+      try {
+        DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+        if (!editorProvider.isAvailableForUser(service.userIdentity(userId))) {
+          return;
+        }
+        synchronized (documentLock(fileId)) {
+          if (documentService.getCurrentDocumentProvider(fileId, workspace) == null) {
+            documentService.saveCurrentDocumentProvider(fileId, workspace, provider);
+            service.sendDocumentOpenedEvent(fileId, editorProvider.getProviderName());
+          }
+        }
+      } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
+        LOG.error("Cannot record the provider of file {} in workspace {}", fileId, workspace, e);
+      }
+    }
+
+    private boolean isStillSubscribed(ServerSession session, ServerChannel channel, String userId) {
+      return exoBayeux.isSubscribed(userId, session.getId()) && channel.getSubscribers().contains(session);
     }
 
   }
@@ -666,6 +769,9 @@ public class CometdDocumentsService implements Startable {
   /** The name of the thread of a closed editor's timer. */
   static final String                         CLOSED_EDITOR_TIMER_NAME = "documents-closed-editor-timer";
 
+  /** The number of locks the registrations and unsubscriptions of editors are striped on */
+  private static final int                    EDITORS_LOCKS_COUNT      = 64;
+
   /** The exo bayeux. */
   protected final EXoContinuationBayeux       exoBayeux;
 
@@ -695,6 +801,24 @@ public class CometdDocumentsService implements Startable {
 
   /** Puts again the editors of this node another node removed. */
   ScheduledThreadPoolExecutor                 restoreExecutor;
+
+  /**
+   * One lock of this array per connection, by the hash of its session id: the
+   * registration and the unsubscription of one connection exclude each other.
+   * Across connections the reset re-checks the opened editors before it
+   * resets, and a timer replaced by another is cancelled. A section also waits
+   * on the sections of a connection hashing to the same lock (one in 64).
+   */
+  private final Object[]                      editorsLocks             = newEditorsLocks();
+
+  /**
+   * One lock of this array per document, by the hash of its id: the reset of
+   * a document's provider (the count of its open editors, the read and the
+   * write) and a registered editor's recording of its provider again (the
+   * read and the write) exclude each other on this server. A section also
+   * waits on the sections of a document hashing to the same lock (one in 64).
+   */
+  private final Object[]                      documentsLocks           = newEditorsLocks();
 
   /**
    * Instantiates the CometdDocumentsService.
@@ -792,6 +916,37 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
+   * Whether a user may edit a document, read with a session of that user: the
+   * editor recorded for a document is chosen by a user who may edit it only.
+   *
+   * @param userId the user id
+   * @param fileId the document's id, or the id of a shortcut to it
+   * @param workspace the document's workspace
+   * @return true when the user may edit the document
+   */
+  protected boolean canEditDocument(String userId, String fileId, String workspace) {
+    AtomicBoolean canEdit = new AtomicBoolean();
+    try {
+      WCMCoreUtils.invokeUserSession(userId, sessionProvider -> {
+        ManageableRepository repository = WCMCoreUtils.getRepository();
+        Node node = sessionProvider.getSession(workspace, repository).getNodeByUUID(fileId);
+        if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+          String targetWorkspace = node.getProperty(NodetypeConstant.EXO_WORKSPACE).getString();
+          String targetUuid = node.getProperty(NodetypeConstant.EXO_UUID).getString();
+          node = sessionProvider.getSession(targetWorkspace, repository).getNodeByUUID(targetUuid);
+        }
+        ((ExtendedNode) node).checkPermission(PermissionType.SET_PROPERTY);
+        canEdit.set(true);
+      });
+    } catch (AccessControlException | AccessDeniedException | ItemNotFoundException e) {
+      LOG.debug("User {} may not edit document {}", userId, fileId, e);
+    } catch (RepositoryException | IllegalArgumentException e) {
+      LOG.warn("Cannot check whether user {} may edit document {}", userId, fileId, e);
+    }
+    return canEdit.get();
+  }
+
+  /**
    * The CometService is responsible for sending messages to Cometd channels
    * when a document is saved.
    */
@@ -832,31 +987,44 @@ public class CometdDocumentsService implements Startable {
      * @param sender the session that published the message
      * @param message the message
      * @param fileId the file id
+     * @return false for every message a client publishes: the server publishes
+     *         the opened event itself once the sender's right is checked;
+     *         true for a message relayed from another node
      * @throws RepositoryException the repository exception
      */
     @Listener(CHANNEL_NAME_PARAMS)
-    public void subscribeDocuments(ServerSession sender,
+    public boolean subscribeDocuments(ServerSession sender,
                                    ServerMessage.Mutable message,
                                    @Param("fileId") String fileId) throws RepositoryException {
       if (exoBayeux.isRelayed(sender)) {
         // Handled on the node the client published it to
-        return;
+        return true;
       }
-      Object objData = message.getData();
-      if (!Map.class.isInstance(objData)) {
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Couldn't get data as a map from event");
+      try {
+        Object objData = message.getData();
+        if (!Map.class.isInstance(objData)) {
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("Couldn't get data as a map from event");
+          }
+          return false;
         }
-        return;
-      }
 
-      Map<String, Object> data = message.getDataAsMap();
-      String type = (String) data.get("type");
-
-      if (type.equals(DOCUMENT_OPENED_EVENT)) {
-        String userId = (String) data.get("userId");
-        String workspace = (String) data.get("workspace");
-        String provider = (String) data.get("provider");
+        Map<String, Object> data = message.getDataAsMap();
+        String type = asString(data.get("type"));
+        if (!DOCUMENT_OPENED_EVENT.equals(type)) {
+          // The server publishes the other events itself: a client never does
+          LOG.debug("Event {} published by a client on file {} dropped", type, fileId);
+          return false;
+        }
+        String userId = asString(data.get("userId"));
+        String workspace = asString(data.get("workspace"));
+        String provider = asString(data.get("provider"));
+        // The user named in the event must be the one who opened the sending
+        // live connection: its identity decides the editor and its record
+        if (userId == null || !exoBayeux.isSubscribed(userId, sender.getId())) {
+          LOG.debug("Document opened event on file {} ignored: its user is not the sender's", fileId);
+          return false;
+        }
         eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
           @Override
           void onContainerError(String error) {
@@ -865,22 +1033,48 @@ public class CometdDocumentsService implements Startable {
 
           @Override
           void execute(ExoContainer exoContainer) {
-            try {
-              DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
-              Identity identity = userIdentity(userId);
-              boolean allowed = editorProvider.isAvailableForUser(identity);
-              List<String> availableProviders = service.getAllAvailableProviders(identity);
-              String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-              boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
-              service.sendCurrentProviderInfo(sender, fileId, available, availableProviders);
-              if (currentProvider == null) {
-                setCurrentDocumentProvider(fileId, workspace, provider);
-              }
-            } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
-              LOG.error("Cannot send current provider info for fileId: " + fileId + ", workspace: " + workspace, e);
-            }
+            onDocumentOpened(sender, userId, fileId, workspace, provider);
           }
         });
+        // Never delivered as published: the server republishes a checked event
+        return false;
+      } catch (RuntimeException e) {
+        // A message the listener cannot handle is never delivered as published
+        LOG.warn("Document opened event on file {} dropped: {}", fileId, e.getClass().getSimpleName());
+        return false;
+      }
+    }
+
+    /**
+     * Tells the opener of a document whether its editor is available. When the
+     * provider is known, its open is accepted (available to the user, and no
+     * other provider is recorded for the document) and the user may edit the
+     * document, it records that editor for the document when none is recorded
+     * and publishes the opened event for the channel's subscribers.
+     *
+     * @param opener the session of the user who opened the document
+     * @param userId the id of that user, who owns the opener session
+     * @param fileId the file id
+     * @param workspace the workspace
+     * @param provider the editor provider
+     */
+    void onDocumentOpened(ServerSession opener, String userId, String fileId, String workspace, String provider) {
+      try {
+        DocumentEditorProvider editorProvider = documentService.getEditorProvider(provider);
+        Identity identity = userIdentity(userId);
+        boolean allowed = editorProvider.isAvailableForUser(identity);
+        List<String> availableProviders = service.getAllAvailableProviders(identity);
+        String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+        boolean available = allowed && (currentProvider == null || provider.equals(currentProvider));
+        service.sendCurrentProviderInfo(opener, fileId, available, availableProviders);
+        if (available && canEditDocument(userId, fileId, workspace)) {
+          if (currentProvider == null) {
+            setCurrentDocumentProvider(fileId, workspace, provider);
+          }
+          service.sendDocumentOpenedEvent(fileId, editorProvider.getProviderName());
+        }
+      } catch (DocumentEditorProviderNotFoundException | RepositoryException e) {
+        LOG.error("Cannot send current provider info for fileId: " + fileId + ", workspace: " + workspace, e);
       }
     }
 
@@ -939,6 +1133,31 @@ public class CometdDocumentsService implements Startable {
         }
       }
       return userIdentity;
+    }
+
+    /**
+     * Sends the opened event of a document, with the editor provider the
+     * server checked, to the channel's subscribers.
+     *
+     * @param fileId the file id
+     * @param provider the provider
+     */
+    protected void sendDocumentOpenedEvent(String fileId, String provider) {
+      ServerChannel channel = bayeux.createChannelIfAbsent(CHANNEL_NAME + fileId).getReference();
+      if (channel != null) {
+        StringBuilder data = new StringBuilder();
+        data.append('{');
+        data.append("\"type\": \"");
+        data.append(DOCUMENT_OPENED_EVENT);
+        data.append("\", ");
+        data.append("\"fileId\": \"");
+        data.append(fileId);
+        data.append("\", ");
+        data.append("\"provider\": \"");
+        data.append(provider);
+        data.append("\"}");
+        channel.publish(localSession, data.toString(), Promise.noop());
+      }
     }
 
     /**
@@ -1079,10 +1298,10 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
-   * Resets the current editor provider of a document once the delay has
-   * passed, unless an editor opened it again in the meantime. The timer's
-   * thread is a daemon and ends after its run, so that it neither keeps a
-   * stopped server running nor stays behind once the reset is done.
+   * Queues the reset of the current editor provider of a document once the
+   * delay has passed, unless an editor opened it again in the meantime. The
+   * timer's thread is a daemon and ends after its run, so that it neither
+   * keeps a stopped server running nor stays behind once the reset is queued.
    *
    * @param fileId the document id
    * @param workspace the document's workspace
@@ -1096,7 +1315,7 @@ public class CometdDocumentsService implements Startable {
       @Override
       public void run() {
         try {
-          resetCurrentProviderIfClosed(fileId, workspace, provider);
+          queueProviderReset(fileId, workspace, provider);
         } finally {
           timer.cancel();
         }
@@ -1106,28 +1325,56 @@ public class CometdDocumentsService implements Startable {
   }
 
   /**
+   * Queues the reset of a document's current provider in the documents
+   * executor, where it runs in the container, as the registrations do.
+   *
+   * @param fileId the file id
+   * @param workspace the workspace
+   * @param provider the provider
+   */
+  void queueProviderReset(String fileId, String workspace, String provider) {
+    eventsHandlers.submit(new ContainerCommand(PortalContainer.getCurrentPortalContainerName()) {
+      @Override
+      void onContainerError(String error) {
+        LOG.error("An error has occured in container: {}", containerName);
+      }
+
+      @Override
+      void execute(ExoContainer exoContainer) {
+        resetCurrentProviderIfClosed(fileId, workspace, provider);
+      }
+    });
+  }
+
+  /**
    * Resets the current provider of a document whose last editor of the
-   * provider closed, unless an editor of it opened since, on any node
+   * provider closed, unless an editor of it opened since, on any node. The
+   * count, the read, the write and the event run under the document's lock,
+   * as a registered editor's recording of its provider again does, and the
+   * write is made in place: on this server, whichever of the two comes second
+   * sees the other's result.
    *
    * @param fileId the file id
    * @param workspace the workspace
    * @param provider the provider
    */
   void resetCurrentProviderIfClosed(String fileId, String workspace, String provider) {
-    if (editorsContext.getOpenedEditorsCount(fileId, provider) > 0) {
-      return;
-    }
-    try {
-      String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
-      if (currentProvider != null) {
-        service.setCurrentDocumentProvider(fileId, workspace, null);
-        service.sendLastEditorClosedEvent(fileId, provider);
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + workspace + ", fileId:" + fileId);
-        }
+    synchronized (documentLock(fileId)) {
+      if (editorsContext.getOpenedEditorsCount(fileId, provider) > 0) {
+        return;
       }
-    } catch (RepositoryException e) {
-      LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
+      try {
+        String currentProvider = documentService.getCurrentDocumentProvider(fileId, workspace);
+        if (currentProvider != null) {
+          documentService.saveCurrentDocumentProvider(fileId, workspace, null);
+          service.sendLastEditorClosedEvent(fileId, provider);
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("Last editor closed. Provider" + provider + ", workspace: " + workspace + ", fileId:" + fileId);
+          }
+        }
+      } catch (RepositoryException e) {
+        LOG.error("Cannot reset current editor provider for fileId: " + fileId + ", workspace: " + workspace, e);
+      }
     }
   }
 
@@ -1148,6 +1395,22 @@ public class CometdDocumentsService implements Startable {
    */
   public String getUserToken(String userId) {
     return exoBayeux.getUserToken(userId);
+  }
+
+  Object editorsLock(String sessionId) {
+    return editorsLocks[Math.floorMod(sessionId.hashCode(), EDITORS_LOCKS_COUNT)];
+  }
+
+  Object documentLock(String fileId) {
+    return documentsLocks[Math.floorMod(fileId.hashCode(), EDITORS_LOCKS_COUNT)];
+  }
+
+  private static Object[] newEditorsLocks() {
+    Object[] locks = new Object[EDITORS_LOCKS_COUNT];
+    for (int i = 0; i < locks.length; i++) {
+      locks[i] = new Object();
+    }
+    return locks;
   }
 
   /**
