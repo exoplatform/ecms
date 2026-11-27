@@ -50,7 +50,7 @@ public class TestUpdateContentPermissionsListenerAccessList extends BaseWCMTestC
 
   private static final String   ENTITY_TYPE = "WIKI_DRAFT_PAGES";
 
-  private static final String[] EDIT        = new String[] { PermissionType.READ, PermissionType.ADD_NODE,
+  private static final String[] EDIT        = { PermissionType.READ, PermissionType.ADD_NODE,
       PermissionType.SET_PROPERTY, PermissionType.REMOVE };
 
   private static final Set<String> EDIT_SET = Set.of(EDIT);
@@ -126,6 +126,29 @@ public class TestUpdateContentPermissionsListenerAccessList extends BaseWCMTestC
       assertEquals(name, EDIT_SET, permissionsOf(node, SPACE_ENTRY));
       assertEquals(name, Set.of(PermissionType.READ), permissionsOf(node, "any"));
     }
+  }
+
+  public void testASpaceAudienceTakesAwayTheAllUsersReadRightAndKeepsTheSpaceMembersEditRight() throws Exception {
+    // a file that reads its folder's list, which gives all users the read right
+    Node publicFolder = folder.addNode("public", "nt:unstructured");
+    publicFolder.addMixin("exo:privilegeable");
+    ((ExtendedNode) publicFolder).setPermissions(Map.of(SPACE_ENTRY, EDIT, "any", new String[] { PermissionType.READ }));
+    Node publicFile = addFile(publicFolder, "public.txt");
+    session.save();
+    when(attachmentStorage.getAttachmentsByEntity(1L, ENTITY_TYPE)).thenReturn(List.of(attachment(publicFile.getPath()),
+                                                                                       attachment(inherited.getPath())));
+
+    listener.onEvent(event("space"));
+
+    session.refresh(false);
+    Node publicNode = session.getRootNode().getNode("permissionsListenerFolder/public/public.txt");
+    assertTrue(publicNode.isNodeType("exo:privilegeable"));
+    assertTrue(permissionsOf(publicNode, "any").isEmpty());
+    assertEquals(EDIT_SET, permissionsOf(publicNode, SPACE_ENTRY));
+    // a file that gives all users nothing is left reading its folder's list
+    Node inheritedNode = session.getRootNode().getNode("permissionsListenerFolder/inherited.txt");
+    assertFalse(inheritedNode.isNodeType("exo:privilegeable"));
+    assertEquals(EDIT_SET, permissionsOf(inheritedNode, SPACE_ENTRY));
   }
 
   private Event<Object, Map<String, Object>> event(String audience) {
