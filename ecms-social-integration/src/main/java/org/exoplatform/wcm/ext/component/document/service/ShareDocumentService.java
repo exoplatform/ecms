@@ -372,6 +372,15 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
             originalActivityFileWorkspace = originalActivityFilesWorkspaces[i];
           }
 
+          if (!canRead(posterUsername, originalActivityFileWorkspace, originalActivityFilesIds[i])) {
+            LOG.warn("Document {} of activity {} not shared to space {} by activity {}: its sharer {} can't read it",
+                     originalActivityFilesIds[i],
+                     originalActivityId,
+                     targetSpace.getGroupId(),
+                     sharedActivityId,
+                     posterUsername);
+            continue;
+          }
           ExtendedSession originalActivityFileNodeSession = (ExtendedSession) WCMCoreUtils.getSystemSessionProvider()
                                                                                           .getSession(originalActivityFileWorkspace,
                                                                                                       repoService.getCurrentRepository());
