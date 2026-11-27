@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.ws.rs.Consumes;
@@ -31,11 +33,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
+
+import org.apache.commons.lang3.StringUtils;
 
 import org.exoplatform.services.cms.documents.DocumentEditorProvider;
 import org.exoplatform.services.cms.documents.DocumentService;
@@ -43,15 +48,18 @@ import org.exoplatform.services.cms.documents.exception.DocumentEditorProviderNo
 import org.exoplatform.services.cms.documents.exception.PermissionValidationException;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper;
 import org.exoplatform.services.cms.documents.impl.EditorProvidersHelper.ProviderInfo;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
@@ -114,9 +122,6 @@ public class DocumentEditorsRESTService implements ResourceContainer {
   /** The repository service. */
   protected final RepositoryService   repositoryService;
 
-  /** The link manager. */
-  protected final LinkManager         linkManager;
-
   /**
    * Instantiates a new document editors REST service.
    *
@@ -125,20 +130,17 @@ public class DocumentEditorsRESTService implements ResourceContainer {
    * @param organizationService the organization service
    * @param identityManager the identity manager
    * @param repositoryService the repository service
-   * @param linkManager the link manager
    */
   public DocumentEditorsRESTService(DocumentService documentService,
                                     SpaceService spaceService,
                                     OrganizationService organizationService,
                                     IdentityManager identityManager,
-                                    RepositoryService repositoryService,
-                                    LinkManager linkManager) {
+                                    RepositoryService repositoryService) {
     this.documentService = documentService;
     this.identityManager = identityManager;
     this.organization = organizationService;
     this.spaceService = spaceService;
     this.repositoryService = repositoryService;
-    this.linkManager = linkManager;
   }
 
   /**
@@ -273,7 +275,28 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                               @Context HttpServletRequest request,
                               @FormParam("fileId") String fileId,
                               @FormParam("workspace") String workspace) {
-    org.exoplatform.services.security.Identity identity = ConversationState.getCurrent().getIdentity();
+    ConversationState conversationState = ConversationState.getCurrent();
+    if (conversationState == null || conversationState.getIdentity() == null) {
+      return Response.status(Status.UNAUTHORIZED).cacheControl(noStore()).build();
+    }
+    org.exoplatform.services.security.Identity identity = conversationState.getIdentity();
+    if (StringUtils.isBlank(fileId) || StringUtils.isBlank(workspace)) {
+      return Response.status(Status.BAD_REQUEST).cacheControl(noStore()).build();
+    }
+
+    String targetFileId;
+    try {
+      targetFileId = getTargetFileId(fileId, workspace);
+    } catch (AccessDeniedException | ItemNotFoundException | NoSuchWorkspaceException e) {
+      LOG.debug("File {} or its target not found or not readable by the current user", fileId, e);
+      // An anonymous visitor is asked to sign in, a signed-in user is told the file is not found
+      Status status = IdentityConstants.ANONIM.equals(identity.getUserId()) ? Status.UNAUTHORIZED : Status.NOT_FOUND;
+      return Response.status(status).cacheControl(noStore()).build();
+    } catch (RepositoryException e) {
+      // The caller's read of the file failed for an unexplained reason: no provider reads it through a system session
+      LOG.warn("Cannot get the target of file {}", fileId, e);
+      return Response.status(Status.INTERNAL_SERVER_ERROR).cacheControl(noStore()).build();
+    }
     List<DocumentEditorProvider> providers = documentService.getDocumentEditorProviders();
     List<ProviderInfo> providersInfo = EditorProvidersHelper.getInstance()
                                                             .initPreview(providers,
@@ -282,35 +305,40 @@ public class DocumentEditorsRESTService implements ResourceContainer {
                                                                          workspace,
                                                                          uriInfo.getRequestUri(),
                                                                          request.getLocale());
-
-    String targetFileId = fileId;
-    try {
-      targetFileId = getTargetFileId(fileId, workspace);
-    } catch (RepositoryException e) {
-      LOG.warn("Cannot get fileId from symlink taget.", e.getMessage());
-    }
     PreviewInfo previewInfo = new PreviewInfo(targetFileId, providersInfo);
-    return Response.ok().entity(previewInfo).build();
+    return Response.ok().entity(previewInfo).cacheControl(noStore()).build();
   }
 
   /**
-   * Gets the symlink target file id.
+   * Gets the symlink target file id. The file and its target are read as the
+   * current user, so a file or a target the user cannot read is not resolved.
    *
    * @param fileId the file id
    * @param workspace the workspace
    * @return the target file id
+   * @throws AccessDeniedException when the current user cannot read the file
+   *           or its target
+   * @throws ItemNotFoundException when the file or its target does not exist
+   * @throws NoSuchWorkspaceException when the file's or the target's workspace
+   *           does not exist
    * @throws RepositoryException the repository exception
    */
   protected String getTargetFileId(String fileId, String workspace) throws RepositoryException {
-    ExtendedSession systemSession = (ExtendedSession) repositoryService.getCurrentRepository().getSystemSession(workspace);
-    Node node = systemSession.getNodeByIdentifier(fileId);
-    if (node.isNodeType(EXO_SYMLINK)) {
-      node = linkManager.getTarget(node, true);
-      if (node != null) {
-        return node.getUUID();
+    SessionProvider sessionProvider = new SessionProvider(new ConversationState(ConversationState.getCurrent().getIdentity()));
+    try {
+      ManageableRepository repository = repositoryService.getCurrentRepository();
+      ExtendedSession session = (ExtendedSession) sessionProvider.getSession(workspace, repository);
+      Node node = session.getNodeByIdentifier(fileId);
+      if (node.isNodeType(EXO_SYMLINK)) {
+        // The target is read through the same session provider, as the caller
+        String targetWorkspace = node.getProperty(NodetypeConstant.EXO_WORKSPACE).getString();
+        String targetUuid = node.getProperty(NodetypeConstant.EXO_UUID).getString();
+        return sessionProvider.getSession(targetWorkspace, repository).getNodeByUUID(targetUuid).getUUID();
       }
+      return fileId;
+    } finally {
+      sessionProvider.close();
     }
-    return fileId;
   }
 
   /**
@@ -380,4 +408,10 @@ public class DocumentEditorsRESTService implements ResourceContainer {
     return new DocumentEditorData(provider.getProviderName(), provider.isActive(), permissions);
   }
 
+  private static CacheControl noStore() {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setPrivate(true);
+    cacheControl.setNoStore(true);
+    return cacheControl;
+  }
 }
