@@ -30,6 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.jcr.Node;
@@ -82,6 +83,33 @@ public class FileSearchServiceConnector extends ElasticSearchServiceConnector {
     this.repositoryService = repositoryService;
     this.documentService = documentService;
     this.setEnabledForAnonymous(true);
+  }
+
+  /**
+   * Builds the clauses matching a file whose indexed permissions, its ACL
+   * owner and every identity of its access entries, name the current user or
+   * one of their memberships: a file shared with the user or with one of their
+   * groups is one. Unlike the permission filter of every search, it has no
+   * clause for "any", which a file visible to any user carries without
+   * naming anyone.
+   *
+   * @return the clauses, separated by commas, for a bool should
+   */
+  public String getExplicitPermissionFilter() {
+    Set<String> memberships = getUserMemberships();
+    StringBuilder permissionSB = new StringBuilder().append("{\n")
+                                                    .append("  \"term\" : { \"permissions\" : \"")
+                                                    .append(ConversationState.getCurrent().getIdentity().getUserId())
+                                                    .append("\" }\n")
+                                                    .append("}");
+    if (!memberships.isEmpty()) {
+      permissionSB.append(",\n{\n")
+                  .append("  \"regexp\" : { \"permissions\" : \"")
+                  .append(StringUtils.join(memberships, "|"))
+                  .append("\" }\n")
+                  .append("}");
+    }
+    return permissionSB.toString();
   }
 
   @Override
