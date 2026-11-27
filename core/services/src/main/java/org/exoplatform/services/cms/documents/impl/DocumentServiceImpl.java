@@ -141,8 +141,6 @@ public class DocumentServiceImpl implements DocumentService {
   private final ConfigurationManager configurationManager;
   private final String editorsRuntimeId;
   private CommonEditorPlugin commonEditorPlugin;
-  private Authenticator       authenticator;
-  private final IdentityRegistry identityRegistry;
   private final TrashService trashService;
   
   /**
@@ -171,7 +169,7 @@ public class DocumentServiceImpl implements DocumentService {
                              OrganizationService organizationService,
                              SettingService settingService,
                              IdentityManager identityManager,
-                             IDGeneratorService idGenerator, IdentityRegistry identityRegistry, Authenticator authenticator, TrashService trashService) {
+                             IDGeneratorService idGenerator, TrashService trashService) {
     this.configurationManager = configurationManager;
     this.manageDriveService = manageDriveService;
     this.sessionProviderService = sessionProviderService;
@@ -183,8 +181,6 @@ public class DocumentServiceImpl implements DocumentService {
     this.organizationService = organizationService;
     this.settingService = settingService;
     this.identityManager = identityManager;
-    this.identityRegistry = identityRegistry;
-    this.authenticator = authenticator;
     
     // Online editors support
     this.editorsRuntimeId = idGenerator.generateStringID(this);
@@ -1359,29 +1355,6 @@ public class DocumentServiceImpl implements DocumentService {
     handler.accept(node);
     if (lockToken != null) {
       node.getSession().removeLockToken(lockToken);
-    }
-  }
-
-  private SessionProvider getUserSessionProvider(String username) {
-    org.exoplatform.services.security.Identity aclIdentity = identityRegistry.getIdentity(username);
-    if (aclIdentity == null) {
-      try {
-        aclIdentity = authenticator.createIdentity(username);
-      } catch (Exception e) {
-        throw new IllegalStateException("Error retrieving user ACL identity with name : "+  username, e);
-      }
-    }
-
-    SessionProvider sessionProvider = new SessionProvider(new ConversationState(aclIdentity));
-    try {
-      ManageableRepository repository = repoService.getCurrentRepository();
-      String workspace = repository.getConfiguration().getDefaultWorkspaceName();
-
-      sessionProvider.setCurrentRepository(repository);
-      sessionProvider.setCurrentWorkspace(workspace);
-      return sessionProvider;
-    } catch (RepositoryException e) {
-      throw new IllegalStateException("Can't build a SessionProvider", e);
     }
   }
 

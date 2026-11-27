@@ -25,6 +25,7 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.IdentitySessionProvider;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -185,7 +186,13 @@ public class Utils {
   }
 
   public static SessionProvider getUserSessionProvider(RepositoryService repositoryService, Identity aclIdentity) {
-    SessionProvider sessionProvider = new SessionProvider(new ConversationState(aclIdentity));
+    ConversationState currentState = ConversationState.getCurrent();
+    // The request's own user keeps the sessions of the thread's state, with its memberships;
+    // any other identity, or none on the thread, gets sessions opened as that identity.
+    SessionProvider sessionProvider = currentState != null && aclIdentity != null
+        && StringUtils.equals(currentState.getIdentity().getUserId(), aclIdentity.getUserId())
+            ? new SessionProvider(new ConversationState(aclIdentity))
+            : new IdentitySessionProvider(repositoryService, aclIdentity);
     try {
       ManageableRepository repository = repositoryService.getCurrentRepository();
       String workspace = repository.getConfiguration().getDefaultWorkspaceName();

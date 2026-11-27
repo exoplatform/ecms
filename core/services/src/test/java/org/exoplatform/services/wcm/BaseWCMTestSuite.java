@@ -56,6 +56,7 @@ import org.exoplatform.services.rest.TestDocumentsAppRedirectService;
 import org.exoplatform.services.wcm.core.TestWCMConfigurationService;
 import org.exoplatform.services.wcm.core.TestWCMService;
 import org.exoplatform.services.wcm.friendly.TestFriendlyService;
+import org.exoplatform.services.wcm.utils.IdentitySessionProviderTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
 
 /**
@@ -97,7 +98,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   WCMCoreUtilsTest.class,
   AttachmentViewListenerTest.class,
   ActivityFilesDownloadTest.class,
-  TestUtils.class
+  TestUtils.class,
+  IdentitySessionProviderTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
