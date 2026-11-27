@@ -27,6 +27,7 @@ import javax.jcr.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +44,6 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -51,9 +51,9 @@ import org.exoplatform.services.pdfviewer.ObjectKey;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.social.rest.api.RestUtils;
 
 /**
  * Returns a PDF content to be displayed on the web page.
@@ -127,24 +127,35 @@ public class PDFViewerRESTService implements ResourceContainer {
     InputStream is = null;
     String fileName = null;
     Node currentNode = null;
+    ConversationState conversationState = ConversationState.getCurrent();
+    if (conversationState == null || conversationState.getIdentity() == null) {
+      return Response.status(Response.Status.UNAUTHORIZED).cacheControl(noStore()).build();
+    }
+    SessionProvider sessionProvider = getUserSessionProvider(repositoryService_, conversationState.getIdentity());
     try {
       ManageableRepository repository = repositoryService_.getCurrentRepository();
-      Session userSession = getUserSessionProvider(repositoryService_, ConversationState.getCurrent().getIdentity()).getSession(wsName, repository);
+      Session userSession = sessionProvider.getSession(wsName, repository);
       currentNode = userSession.getNodeByUUID(uuid);
       fileName = Utils.getTitle(currentNode);
       File pdfFile = getPDFDocumentFile(currentNode, repoName);
       is = new FileInputStream(pdfFile);
-    } catch (AccessDeniedException e) {
-      LOG.warn("User '{}' attempts to access not authorized document", RestUtils.getCurrentUser(), e);
-      return Response.status(Response.Status.UNAUTHORIZED).entity("You are attempting to access not authorized document").build();
-    } catch (ItemNotFoundException e) {
-      LOG.warn("Requested document not found", e);
-      return Response.status(Response.Status.NOT_FOUND).entity("Requested document not found").build();
+    } catch (AccessDeniedException | ItemNotFoundException e) {
+      LOG.debug("Document {} not found or not readable by user {}", uuid, conversationState.getIdentity().getUserId(), e);
+      return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
+                                                                                                         : Response.Status.NOT_FOUND)
+                     .entity("Document not found")
+                     .cacheControl(noStore())
+                     .build();
     } catch (Exception e) {
       LOG.warn("Error retrieving the documents", e);
-      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                     .entity("Cannot read the document")
+                     .cacheControl(noStore())
+                     .build();
+    } finally {
+      sessionProvider.close();
     }
-    return Response.ok(is).header("Content-Disposition","attachment; filename=\"" + fileName+"\"").build();
+    return Response.ok(is).header("Content-Disposition","attachment; filename=\"" + fileName+"\"").cacheControl(privateOnly()).build();
   }
 
   private Response getImageByPageNumber(String repoName, String wsName, String uuid,
@@ -153,12 +164,17 @@ public class PDFViewerRESTService implements ResourceContainer {
     StringBuilder bd1 = new StringBuilder();
     StringBuilder bd2 = new StringBuilder();
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
-    Session session = null;
+    ConversationState conversationState = ConversationState.getCurrent();
+    if (conversationState == null || conversationState.getIdentity() == null) {
+      return Response.status(Response.Status.UNAUTHORIZED).cacheControl(noStore()).build();
+    }
+    // The node is read as the caller, so a document they cannot read is never rendered
+    SessionProvider sessionProvider = getUserSessionProvider(repositoryService_, conversationState.getIdentity());
     try {
       Object objCache = pdfCache.get(new ObjectKey(bd.toString()));
       InputStream is = null;
       ManageableRepository repository = repositoryService_.getCurrentRepository();
-      session = getSystemProvider().getSession(wsName, repository);
+      Session session = sessionProvider.getSession(wsName, repository);
       Node currentNode = session.getNodeByUUID(uuid);
       String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())
                                                                 .append("/jcr:lastModified").toString()));
@@ -175,18 +191,33 @@ public class PDFViewerRESTService implements ResourceContainer {
         File file = getPDFDocumentFile(currentNode, repoName);
         is = pushToCache(file, repoName, wsName, uuid, pageNumber, strRotation, strScale, lastModified, baseVersion);
       }
-      return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
+      return Response.ok(is, "image").header(LASTMODIFIED, lastModified).cacheControl(privateOnly()).build();
+    } catch (AccessDeniedException | ItemNotFoundException e) {
+      LOG.debug("Document {} not found or not readable by the current user", uuid, e);
+      return Response.status(IdentityConstants.ANONIM.equals(conversationState.getIdentity().getUserId()) ? Response.Status.UNAUTHORIZED
+                                                                                                         : Response.Status.NOT_FOUND)
+                     .cacheControl(noStore())
+                     .build();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);
       }
+    } finally {
+      sessionProvider.close();
     }
-    return Response.ok().build();
+    return Response.ok().cacheControl(noStore()).build();
   }
 
-  private SessionProvider getSystemProvider() {
-    SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
-    return service.getSystemSessionProvider(null) ;
+  private static CacheControl privateOnly() {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setPrivate(true);
+    return cacheControl;
+  }
+
+  private static CacheControl noStore() {
+    CacheControl cacheControl = privateOnly();
+    cacheControl.setNoStore(true);
+    return cacheControl;
   }
 
   private SessionProvider getUserSessionProvider(RepositoryService repositoryService, Identity aclIdentity) {

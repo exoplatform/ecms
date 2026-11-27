@@ -28,6 +28,7 @@ import org.exoplatform.wcm.connector.FileUploadHandlerTest;
 import org.exoplatform.wcm.connector.collaboration.DocumentEditorsRESTServiceTest;
 import org.exoplatform.wcm.connector.collaboration.TestOpenInOfficeConnector;
 import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsServiceTest;
+import org.exoplatform.wcm.connector.viewer.PDFViewerRESTServiceTest;
 
 /**
  * Created by The eXo Platform SAS
@@ -40,6 +41,7 @@ import org.exoplatform.wcm.connector.collaboration.cometd.CometdDocumentsService
   TestOpenInOfficeConnector.class,
   CometdDocumentsServiceTest.class,
   FileUploadHandlerTest.class,
+  PDFViewerRESTServiceTest.class,
 })
 @ConfigTestCase(BaseConnectorTestCase.class)
 public class BaseConnectorTestSuite extends BaseExoContainerTestSuite {
