@@ -33,13 +33,31 @@ import org.exoplatform.services.attachments.service.AttachmentServiceTest;
 import org.exoplatform.services.attachments.service.AttachmentServiceImplTest;
 import org.exoplatform.services.attachments.storage.AttachmentStorageImplTest;
 import org.exoplatform.services.attachments.utils.EntityBuilderTest;
+import org.exoplatform.services.cms.documents.TestAutoVersionService;
 import org.exoplatform.services.cms.documents.TestDocumentService;
 import org.exoplatform.services.cms.documents.TestDocumentTypeService;
 import org.exoplatform.services.cms.documents.impl.DocumentEditorProviderImplTest;
 import org.exoplatform.services.cms.documents.impl.DocumentServiceImplTest;
+import org.exoplatform.services.cms.impl.UtilsTest;
+import org.exoplatform.services.cms.link.TestNodeFinder;
 import org.exoplatform.services.cms.lock.impl.LockServiceImplStartTest;
 import org.exoplatform.services.cms.lock.impl.TestLockService;
 import org.exoplatform.services.cms.webdav.TestWebDavUncheckoutAccessList;
+import org.exoplatform.services.document.diff.test.TestSimpleDiff;
+import org.exoplatform.services.document.test.TestDocumentReadersIncomVals;
+import org.exoplatform.services.document.test.TestHtmlDocumentReader;
+import org.exoplatform.services.document.test.TestMSExcelDocumentReader;
+import org.exoplatform.services.document.test.TestMSOutlookDocumentReader;
+import org.exoplatform.services.document.test.TestMSWordDocumentReader;
+import org.exoplatform.services.document.test.TestMSXExcelDocumentReader;
+import org.exoplatform.services.document.test.TestMSXPPTDocumentReader;
+import org.exoplatform.services.document.test.TestMSXWordDocumentReader;
+import org.exoplatform.services.document.test.TestOpenOfficeDocumentReader;
+import org.exoplatform.services.document.test.TestPDFDocumentReader;
+import org.exoplatform.services.document.test.TestPPTDocumentReader;
+import org.exoplatform.services.document.test.TestPropertiesExtracting;
+import org.exoplatform.services.document.test.TestTextPlainDocumentReader;
+import org.exoplatform.services.document.test.TestXMLDocumentReader;
 import org.exoplatform.services.ecm.dms.cms.TestCmsService;
 import org.exoplatform.services.ecm.dms.configuration.TestDMSConfigurationService;
 import org.exoplatform.services.ecm.dms.documents.TestTrashService;
@@ -74,6 +92,11 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   LockServiceImplStartTest.class,
   TestTrashService.class,
   TestRelationsService.class,
+  // TestAutoVersionService goes before TestDriveService, whose tearDown deletes the drives it reads
+  TestAutoVersionService.class,
+  // TestNodeFinder reads no drive: it must follow TestAutoVersionService, it fails in setUp otherwise
+  // (state left by an earlier class, not isolated yet)
+  TestNodeFinder.class,
   TestDriveService.class,
   TestScriptService.class,
   TestCmsService.class,
@@ -99,7 +122,23 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   AttachmentViewListenerTest.class,
   ActivityFilesDownloadTest.class,
   TestUtils.class,
-  IdentitySessionProviderTest.class
+  IdentitySessionProviderTest.class,
+  TestSimpleDiff.class,
+  TestDocumentReadersIncomVals.class,
+  TestHtmlDocumentReader.class,
+  TestMSExcelDocumentReader.class,
+  TestMSOutlookDocumentReader.class,
+  TestMSWordDocumentReader.class,
+  TestMSXExcelDocumentReader.class,
+  TestMSXPPTDocumentReader.class,
+  TestMSXWordDocumentReader.class,
+  TestOpenOfficeDocumentReader.class,
+  TestPDFDocumentReader.class,
+  TestPPTDocumentReader.class,
+  TestPropertiesExtracting.class,
+  TestTextPlainDocumentReader.class,
+  TestXMLDocumentReader.class,
+  UtilsTest.class
 })
 @ConfigTestCase(BaseWCMTestCase.class)
 public class BaseWCMTestSuite extends BaseExoContainerTestSuite {
