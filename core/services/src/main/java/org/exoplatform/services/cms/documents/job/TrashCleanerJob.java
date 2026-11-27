@@ -52,7 +52,15 @@ import org.exoplatform.services.log.Log;
 
 /**
  * Created by Romain Dénarié (romain.denarie@exoplatform.com) on 22/01/16.
+ *
+ * @deprecated no longer scheduled: the Recycle Bin of the documents add-on
+ *             removes each deleted item for good once it has stayed the
+ *             retention period set by the platform administrators (its daily
+ *             purge, which also reads {@code exo.trashcleaner.lifetime} as
+ *             that period's default); {@code exo.trashcleaner.cron.expression}
+ *             is no longer read. Since 7.3.0, for removal.
  */
+@Deprecated(since = "7.3.0", forRemoval = true)
 @DisallowConcurrentExecution
 public class TrashCleanerJob implements Job {
 

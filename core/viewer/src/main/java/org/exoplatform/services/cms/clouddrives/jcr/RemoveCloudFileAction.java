@@ -71,7 +71,7 @@ public class RemoveCloudFileAction extends AbstractJCRAction {
           } else {
             try {
               Node driveParent = fileNode.getSession().getItem(localDrive.getPath()).getParent();
-              if (driveParent.isNodeType(JCRLocalCloudDrive.EXO_TRASHFOLDER)) {
+              if (JCRLocalCloudDrive.isTrashFolder(driveParent)) {
                 // we ignore files of trashed drives
                 return true;
               }

@@ -35,6 +35,7 @@ import org.picocontainer.Startable;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.utils.permission.PermissionUtil;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -129,6 +130,11 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
     Node rootSpace = null;
     Node shared = null;
     try {
+      if (isInTrash(currentNode)) {
+        // A document in the trash is shared to no space: it is given no access, no link and no activity
+        LOG.debug("Document {} is in the trash: it is not shared to the space {}", currentNode.getPath(), space);
+        return "";
+      }
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       ManageableRepository repository = repoService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
@@ -382,6 +388,10 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
                                                                   "",
                                                                   PermissionType.READ,
                                                                   false);
+          if (StringUtils.isEmpty(targetSpaceFileNodeUUID)) {
+            // Nothing was shared, such as a document in the trash: the activity names the other files only
+            continue;
+          }
           Node targetSpaceFileNode = originalActivityFileNode.getSession().getNodeByUUID(targetSpaceFileNodeUUID);
           concatenateParam(templateParams, SHARED_TEMPLATE_PARAMS_PREFIX + FileUIActivity.ID, targetSpaceFileNodeUUID);
           String repository = ((ManageableRepository) targetSpaceFileNode.getSession().getRepository()).getConfiguration()
@@ -526,6 +536,16 @@ public class ShareDocumentService implements IShareDocumentService, Startable {
       node.setPermission("*:" + memberShip, permissions);
       node.save();
     }
+  }
+
+  /**
+   * @param node the node to share, or a shortcut to it
+   * @return whether the document to share, the shortcut's target for a
+   *         shortcut, is in the trash
+   */
+  protected boolean isInTrash(Node node) throws RepositoryException {
+    Node document = node.isNodeType(NodetypeConstant.EXO_SYMLINK) ? linkManager.getTarget(node) : node;
+    return WCMCoreUtils.getService(TrashService.class).isInTrash(document);
   }
 
   /**
