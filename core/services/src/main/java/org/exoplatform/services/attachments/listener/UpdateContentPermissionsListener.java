@@ -41,8 +41,10 @@ import javax.jcr.Session;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,6 +64,8 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
   public static final String           AUDIENCE             = "audience";
 
   public static final String           ALL_AUDIENCE         = "all";
+
+  private static final String          ANY                  = "any";
 
   private static final String          IMAGE_SRC_REGEX      = "src=\"/portal/rest/images/?(.+)?\"";
 
@@ -151,25 +155,45 @@ public class UpdateContentPermissionsListener extends Listener<Map<String, Objec
           attachmentNode = (Node) session.getItem(URLDecoder.decode(attachmentId, StandardCharsets.UTF_8));
         }
         if (!attachmentNode.getPath().startsWith(QUARANTINE)) {
-          if (attachmentNode.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
-            attachmentNode.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
-          }
           if (spaces != null) {
             for (Space space : spaces) {
-              ((ExtendedNode) attachmentNode).setPermission("*:" + space.getGroupId(), new String[] { PermissionType.READ });
-              attachmentNode.save();
+              grantRead(attachmentNode, "*:" + space.getGroupId());
             }
           }
           // No audience (a draft, or an article posted without publication): the all-users entry is left as it is
           if (ALL_AUDIENCE.equals(audience)) {
-            ((ExtendedNode) attachmentNode).setPermission("any", new String[] { PermissionType.READ });
-            attachmentNode.save();
-          } else if (StringUtils.isNotEmpty(audience)) {
-            ((ExtendedNode) attachmentNode).removePermission("any", PermissionType.READ);
+            grantRead(attachmentNode, ANY);
+          } else if (StringUtils.isNotEmpty(audience)
+                     && ((ExtendedNode) attachmentNode).getACL().getPermissions(ANY).contains(PermissionType.READ)) {
+            addOwnAccessList(attachmentNode);
+            ((ExtendedNode) attachmentNode).removePermission(ANY, PermissionType.READ);
             attachmentNode.save();
           }
         }
       }
+    }
+  }
+
+  /**
+   * Gives an identity the read right on a node, keeping every other right it
+   * holds there. A node that already gives it the read right, through its own
+   * access list or its folder's, is left untouched.
+   */
+  private void grantRead(Node node, String identity) throws RepositoryException {
+    ExtendedNode extendedNode = (ExtendedNode) node;
+    if (extendedNode.getACL().getPermissions(identity).contains(PermissionType.READ)) {
+      return;
+    }
+    addOwnAccessList(node);
+    Set<String> permissions = new LinkedHashSet<>(extendedNode.getACL().getPermissions(identity));
+    permissions.add(PermissionType.READ);
+    extendedNode.setPermission(identity, permissions.toArray(new String[0]));
+    node.save();
+  }
+
+  private void addOwnAccessList(Node node) throws RepositoryException {
+    if (node.canAddMixin(NodetypeConstant.EXO_PRIVILEGEABLE)) {
+      node.addMixin(NodetypeConstant.EXO_PRIVILEGEABLE);
     }
   }
 }

@@ -27,6 +27,7 @@ import org.exoplatform.commons.testing.ConfigTestCase;
 import org.exoplatform.ecm.webui.TestUtils;
 import org.exoplatform.services.attachments.listener.AttachmentViewListenerTest;
 import org.exoplatform.services.attachments.listener.NoteAttachmentUpdateListenerTest;
+import org.exoplatform.services.attachments.listener.TestUpdateContentPermissionsListenerAccessList;
 import org.exoplatform.services.attachments.listener.UpdateContentPermissionsListenerTest;
 import org.exoplatform.services.attachments.service.ActivityFilesDownloadTest;
 import org.exoplatform.services.attachments.service.AttachmentServiceTest;
@@ -94,6 +95,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtilsTest;
   AttachmentStorageImplTest.class,
   NoteAttachmentUpdateListenerTest.class,
   UpdateContentPermissionsListenerTest.class,
+  TestUpdateContentPermissionsListenerAccessList.class,
   DocumentServiceImplTest.class,
   WCMCoreUtilsTest.class,
   AttachmentViewListenerTest.class,
